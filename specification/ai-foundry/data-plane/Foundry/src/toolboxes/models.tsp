@@ -68,7 +68,7 @@ model ToolboxVersionObject {
   created_at: utcDateTime;
 
   @doc("The list of tools contained in this toolbox version.")
-  tools: OpenAI.Tool[];
+  tools: ToolboxTool[];
 
   @doc("The list of skill sources included in this toolbox version.")
   skills?: ToolboxSkill[];
@@ -91,7 +91,7 @@ alias CreateToolboxVersionRequest = {
   metadata?: Record<string>;
 
   @doc("The list of tools to include in this version.")
-  tools: OpenAI.Tool[];
+  tools: ToolboxTool[];
 
   @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
   skills?: ToolboxSkill[];

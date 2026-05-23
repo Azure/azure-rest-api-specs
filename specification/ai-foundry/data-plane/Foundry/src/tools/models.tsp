@@ -62,79 +62,6 @@ namespace Azure.AI.Projects {
     additional_search_text?: string;
   }
 
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.MCPTool,
-    {
-      /**
-       * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-       */
-      project_connection_id?: string,
-
-      ...ToolConfigExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.WebSearchTool,
-    {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
-
-      /**
-       * The project connections attached to this tool. There can be a maximum of 1 connection
-       * resource attached to the tool.
-       */
-      custom_search_configuration?: WebSearchConfiguration,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.CodeInterpreterTool,
-    {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.ImageGenTool,
-    {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.LocalShellToolParam,
-    {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.FunctionShellToolParam,
-    {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.FileSearchTool,
-    {
-      ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
-    }
-  );
-
   /**
    * A web search configuration for bing custom search
    */
@@ -178,6 +105,169 @@ namespace Azure.AI.Projects {
   };
 
   /**
+   * Supported tool types for tools stored in a toolbox.
+   */
+  union ToolboxToolType {
+    code_interpreter: "code_interpreter",
+    file_search: "file_search",
+    web_search: "web_search",
+    mcp: "mcp",
+    azure_ai_search: "azure_ai_search",
+    openapi: "openapi",
+    a2a_preview: "a2a_preview",
+    work_iq_preview: "work_iq_preview",
+    fabric_iq_preview: "fabric_iq_preview",
+    toolbox_search_preview: "toolbox_search_preview",
+  }
+
+  /**
+   * An abstract representation of a tool stored in a toolbox.
+   */
+  @discriminator("type")
+  model ToolboxTool {
+    /**
+     * The type of tool.
+     */
+    type: ToolboxToolType;
+
+    ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
+  }
+
+  /**
+   * A code interpreter tool stored in a toolbox.
+   */
+  model CodeInterpreterToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `code_interpreter`.
+     */
+    type: "code_interpreter";
+  }
+
+  /**
+   * A file search tool stored in a toolbox.
+   */
+  model FileSearchToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `file_search`.
+     */
+    type: "file_search" = "file_search";
+  }
+
+  /**
+   * A web search tool stored in a toolbox.
+   */
+  model WebSearchToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `web_search`.
+     */
+    type: "web_search" = "web_search";
+  }
+
+  /**
+   * An MCP tool stored in a toolbox.
+   */
+  model MCPToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `mcp`.
+     */
+    type: "mcp";
+  }
+
+  /**
+   * An Azure AI Search tool stored in a toolbox.
+   */
+  model AzureAISearchToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `azure_ai_search`.
+     */
+    type: "azure_ai_search";
+  }
+
+  /**
+   * An OpenAPI tool stored in a toolbox.
+   */
+  model OpenApiToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `openapi`.
+     */
+    type: "openapi";
+  }
+
+  /**
+   * An A2A tool stored in a toolbox.
+   */
+  model A2APreviewToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `a2a_preview`.
+     */
+    type: "a2a_preview";
+  }
+
+  /**
+   * A WorkIQ tool stored in a toolbox.
+   */
+  model WorkIQPreviewToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `work_iq_preview`.
+     */
+    type: "work_iq_preview";
+  }
+
+  /**
+   * A FabricIQ tool stored in a toolbox.
+   */
+  model FabricIQPreviewToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `fabric_iq_preview`.
+     */
+    type: "fabric_iq_preview";
+  }
+
+  /**
+   * A toolbox search tool stored in a toolbox.
+   */
+  model ToolboxSearchPreviewToolbox extends ToolboxTool {
+    /**
+     * The type of the tool. Always `toolbox_search_preview`.
+     */
+    type: "toolbox_search_preview";
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(CodeInterpreterToolbox, OpenAI.CodeInterpreterTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(FileSearchToolbox, OpenAI.FileSearchTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(WebSearchToolbox, OpenAI.WebSearchTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(WebSearchToolbox,
+    {
+      /**
+       * The project connections attached to this tool. There can be a maximum of 1 connection
+       * resource attached to the tool.
+       */
+      custom_search_configuration?: WebSearchConfiguration,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(MCPToolbox, OpenAI.MCPTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(MCPToolbox,
+    {
+      /**
+       * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+       */
+      project_connection_id?: string,
+    }
+  );
+
+  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -187,7 +277,6 @@ namespace Azure.AI.Projects {
     type: "bing_grounding";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -217,7 +306,6 @@ namespace Azure.AI.Projects {
     type: "fabric_dataagent_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The fabric data agent tool parameters.
@@ -247,7 +335,6 @@ namespace Azure.AI.Projects {
     type: "sharepoint_grounding_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The sharepoint grounding tool parameters.
@@ -265,7 +352,6 @@ namespace Azure.AI.Projects {
     type: "azure_ai_search";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The azure ai search index resource.
@@ -360,8 +446,6 @@ namespace Azure.AI.Projects {
      * The openapi function definition.
      */
     openapi: OpenApiFunctionDefinition;
-
-    ...ToolConfigExtension;
   }
 
   /**
@@ -374,7 +458,6 @@ namespace Azure.AI.Projects {
     type: "bing_custom_search_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The bing custom search tool parameters.
@@ -392,7 +475,6 @@ namespace Azure.AI.Projects {
     type: "browser_automation_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -433,8 +515,6 @@ namespace Azure.AI.Projects {
      * The Azure Function Tool definition.
      */
     azure_function: AzureFunctionDefinition;
-
-    ...ToolConfigExtension;
   }
 
   /**
@@ -785,7 +865,6 @@ namespace Azure.AI.Projects {
     type: "capture_structured_outputs";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The structured outputs to capture from the model.
@@ -803,7 +882,6 @@ namespace Azure.AI.Projects {
     type: "a2a_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * Base URL of the agent.
@@ -838,7 +916,6 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   /**
@@ -873,7 +950,6 @@ namespace Azure.AI.Projects {
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   /**
@@ -886,7 +962,6 @@ namespace Azure.AI.Projects {
     type: "memory_search_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -922,7 +997,6 @@ namespace Azure.AI.Projects {
     type: "memory_search";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -959,8 +1033,25 @@ namespace Azure.AI.Projects {
     type: "toolbox_search_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(AzureAISearchToolbox, AzureAISearchTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenApiToolbox, OpenApiTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(A2APreviewToolbox, A2APreviewTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(WorkIQPreviewToolbox, WorkIQPreviewTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(FabricIQPreviewToolbox, FabricIQPreviewTool);
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(ToolboxSearchPreviewToolbox, ToolboxSearchPreviewTool);
 
   // ==============================================================================
   // Grounding Tool Call Status and Document Models
