@@ -257,8 +257,10 @@ model OptimizationJob {
   @visibility(Lifecycle.Read)
   result?: OptimizationJobResult;
 
-  // --- Inputs (flat, not nested under 'inputs') ---
-  ...OptimizationJobInputs;
+  // --- Inputs (nested in response, echoing caller-supplied config) ---
+  @doc("Caller-supplied inputs echoed back in the response.")
+  @visibility(Lifecycle.Read)
+  inputs?: OptimizationJobInputs;
 
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
