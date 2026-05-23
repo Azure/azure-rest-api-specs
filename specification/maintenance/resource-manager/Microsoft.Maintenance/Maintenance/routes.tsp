@@ -75,7 +75,9 @@ interface ScheduledEventOperationGroup {
     @body
     @doc("List of ScheduledEvents Id.")
     scheduledEventsIdList: ScheduledEventsIdList,
-  ): ArmResponse<ScheduledEventsApproveResponse> | ScheduledEventsListAcknowledgeError;
+  ):
+    | ArmResponse<ScheduledEventsApproveResponse>
+    | ScheduledEventsListAcknowledgeError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Suppress expected decorator error"

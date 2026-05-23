@@ -131,7 +131,8 @@ using Microsoft.Maintenance;
   "ConfigurationAssignmentsWithinSubscription"
 );
 @@clientLocation(ScheduledEventOperationGroup.acknowledge, "ScheduledEvents");
-@@clientLocation(ScheduledEventOperationGroup.acknowledgeList,
+@@clientLocation(
+  ScheduledEventOperationGroup.acknowledgeList,
   "ScheduledEvents"
 );
 @@clientLocation(ApplyUpdatesOperationGroup.createOrUpdateParent, ApplyUpdates);
