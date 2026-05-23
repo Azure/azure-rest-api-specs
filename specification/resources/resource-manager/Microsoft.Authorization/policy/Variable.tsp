@@ -25,7 +25,7 @@ model Variable
     Resource = Variable,
     KeyName = "variableName",
     SegmentName = "variables",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -46,7 +46,7 @@ alias VariableOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   }
 >;
@@ -77,7 +77,7 @@ alias VariableManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   }
 >;

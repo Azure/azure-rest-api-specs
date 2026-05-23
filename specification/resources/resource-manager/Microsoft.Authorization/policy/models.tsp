@@ -1203,29 +1203,14 @@ model PolicyLogInfo {
   policySetDefinitionName?: string;
 
   /**
-   * The policy set definition display name.
-   */
-  policySetDefinitionDisplayName?: string;
-
-  /**
    * The policy set definition version.
    */
   policySetDefinitionVersion?: string;
 
   /**
-   * The policy set definition category.
-   */
-  policySetDefinitionCategory?: string;
-
-  /**
    * The policy definition name.
    */
   policyDefinitionName?: string;
-
-  /**
-   * The policy definition display name.
-   */
-  policyDefinitionDisplayName?: string;
 
   /**
    * The policy definition version.
@@ -1238,11 +1223,6 @@ model PolicyLogInfo {
   policyDefinitionEffect?: string;
 
   /**
-   * An array of policy definition group names.
-   */
-  policyDefinitionGroupNames?: string[];
-
-  /**
    * The policy assignment Id.
    */
   policyAssignmentId?: string;
@@ -1253,11 +1233,6 @@ model PolicyLogInfo {
   policyAssignmentName?: string;
 
   /**
-   * The policy assignment display name.
-   */
-  policyAssignmentDisplayName?: string;
-
-  /**
    * The policy assignment version.
    */
   policyAssignmentVersion?: string;
@@ -1266,26 +1241,6 @@ model PolicyLogInfo {
    * The policy assignment scope.
    */
   policyAssignmentScope?: string;
-
-  /**
-   * The resource location.
-   */
-  resourceLocation?: string;
-
-  /**
-   * The management group ancestors.
-   */
-  ancestors?: string;
-
-  /**
-   * The policy compliance reason code.
-   */
-  complianceReasonCode?: string;
-
-  /**
-   * An array of policy exemption Ids.
-   */
-  policyExemptionIds?: string[];
 }
 
 /**

@@ -24,7 +24,7 @@ model PolicyExemption
     Resource = PolicyExemption,
     KeyName = "policyExemptionName",
     SegmentName = "policyExemptions",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 

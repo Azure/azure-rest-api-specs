@@ -24,7 +24,7 @@ model PolicyEnrollment
     Resource = PolicyEnrollment,
     KeyName = "policyEnrollmentName",
     SegmentName = "policyEnrollments",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 
   /**
