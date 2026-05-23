@@ -3371,6 +3371,22 @@
         ]
       }
     },
+    "ReservationKind": {
+      "type": "string",
+      "enum": [
+        "Microsoft.Compute"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Microsoft_Compute",
+            "value": "Microsoft.Compute"
+          }
+        ]
+      }
+    },
     "ReservationList": {
       "type": "object",
       "description": "List of `Reservation`s",
@@ -3569,14 +3585,8 @@
           "description": "The sku information associated to this reservation"
         },
         "kind": {
-          "type": "string",
-          "description": "Resource Provider type to be reserved.",
-          "enum": [
-            "Microsoft.Compute"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ReservationKind",
+          "description": "Resource Provider type to be reserved."
         }
       },
       "allOf": [
