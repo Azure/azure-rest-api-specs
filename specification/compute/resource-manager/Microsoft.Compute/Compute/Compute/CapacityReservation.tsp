@@ -34,11 +34,12 @@ model CapacityReservation
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CapacityReservations {
   /**
    * The operation that retrieves information about the capacity reservation.
    */
+  @tag("CapacityReservations")
   get is ComputeResourceRead<
     CapacityReservation,
     Parameters = {
@@ -53,15 +54,22 @@ interface CapacityReservations {
   /**
    * The operation to create or update a capacity reservation. Please note some properties can be set only during capacity reservation creation. Please refer to https://aka.ms/CapacityReservation for more details.
    */
+  @tag("CapacityReservations")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     CapacityReservation,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response =
+      | ArmResponse<CapacityReservation>
+      | ArmResourceCreatedResponse<
+          CapacityReservation,
+          LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
    * The operation to update a capacity reservation.
    */
+  @tag("CapacityReservations")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     CapacityReservation,
@@ -75,6 +83,7 @@ interface CapacityReservations {
    */
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("CapacityReservations")
   delete is ComputeResourceDeleteAsync<
     CapacityReservation,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -83,6 +92,7 @@ interface CapacityReservations {
   /**
    * Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.
    */
+  @tag("CapacityReservation")
   listByCapacityReservationGroup is ComputeResourceListByParent<
     CapacityReservation,
     Parameters = {
@@ -97,12 +107,15 @@ interface CapacityReservations {
 }
 
 @@doc(CapacityReservation.name, "The name of the capacity reservation.");
-@@doc(CapacityReservation.properties,
+@@doc(
+  CapacityReservation.properties,
   "Properties of the Capacity reservation."
 );
-@@doc(CapacityReservations.createOrUpdate::parameters.resource,
+@@doc(
+  CapacityReservations.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create capacity reservation."
 );
-@@doc(CapacityReservations.update::parameters.properties,
+@@doc(
+  CapacityReservations.update::parameters.properties,
   "Parameters supplied to the Update capacity reservation operation."
 );

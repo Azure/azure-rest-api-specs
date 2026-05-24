@@ -10,16 +10,19 @@ using Microsoft.StorageSync;
 @@scope(Operations.list, "!csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp"
 );
 
 @@clientName(RestoreFileSpec.isdir, "IsDirectory", "csharp");
-@@clientName(CloudEndpointProperties.backupEnabled,
+@@clientName(
+  CloudEndpointProperties.backupEnabled,
   "IsBackupEnabled",
   "csharp"
 );
-@@alternateType(CloudEndpointProperties.storageAccountResourceId,
+@@alternateType(
+  CloudEndpointProperties.storageAccountResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -28,119 +31,146 @@ using Microsoft.StorageSync;
 @@clientName(BackupRequest, "CloudEndpointBackupContent", "csharp");
 @@clientName(SyncGroup, "StorageSyncGroup", "csharp");
 @@alternateType(SyncGroupProperties.uniqueId, uuid, "csharp");
-@@clientName(CheckNameAvailabilityParameters,
+@@clientName(
+  CheckNameAvailabilityParameters,
   "StorageSyncNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "StorageSyncNameAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(NameAvailabilityReason,
+@@clientName(
+  NameAvailabilityReason,
   "StorageSyncNameUnavailableReason",
   "csharp"
 );
 @@clientName(Type, "StorageSyncResourceType", "csharp");
-@@clientName(CloudEndpointChangeEnumerationActivity.totalSizeBytes,
+@@clientName(
+  CloudEndpointChangeEnumerationActivity.totalSizeBytes,
   "TotalSizeInBytes",
   "csharp"
 );
-@@clientName(CloudEndpointChangeEnumerationStatus.lastUpdatedTimestamp,
+@@clientName(
+  CloudEndpointChangeEnumerationStatus.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CloudEndpointChangeEnumerationActivity.startedTimestamp,
+@@clientName(
+  CloudEndpointChangeEnumerationActivity.startedTimestamp,
   "StartedOn",
   "csharp"
 );
-@@clientName(CloudEndpointChangeEnumerationActivity.lastUpdatedTimestamp,
+@@clientName(
+  CloudEndpointChangeEnumerationActivity.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ServerEndpointBackgroundDataDownloadActivity.startedTimestamp,
+@@clientName(
+  ServerEndpointBackgroundDataDownloadActivity.startedTimestamp,
   "StartedOn",
   "csharp"
 );
-@@clientName(CloudEndpointLastChangeEnumerationStatus.namespaceSizeBytes,
+@@clientName(
+  CloudEndpointLastChangeEnumerationStatus.namespaceSizeBytes,
   "NamespaceSizeInBytes",
   "csharp"
 );
-@@clientName(CloudEndpointLastChangeEnumerationStatus.startedTimestamp,
+@@clientName(
+  CloudEndpointLastChangeEnumerationStatus.startedTimestamp,
   "StartedOn",
   "csharp"
 );
-@@clientName(CloudEndpointLastChangeEnumerationStatus.completedTimestamp,
+@@clientName(
+  CloudEndpointLastChangeEnumerationStatus.completedTimestamp,
   "CompletedOn",
   "csharp"
 );
-@@clientName(CloudTieringSpaceSavings.volumeSizeBytes,
+@@clientName(
+  CloudTieringSpaceSavings.volumeSizeBytes,
   "VolumeSizeInBytes",
   "csharp"
 );
-@@clientName(CloudTieringSpaceSavings.cachedSizeBytes,
+@@clientName(
+  CloudTieringSpaceSavings.cachedSizeBytes,
   "CachedSizeInBytes",
   "csharp"
 );
-@@clientName(CloudTieringSpaceSavings.spaceSavingsBytes,
+@@clientName(
+  CloudTieringSpaceSavings.spaceSavingsBytes,
   "SpaceSavingsInBytes",
   "csharp"
 );
-@@clientName(CloudTieringSpaceSavings.totalSizeCloudBytes,
+@@clientName(
+  CloudTieringSpaceSavings.totalSizeCloudBytes,
   "CloudTotalSizeInBytes",
   "csharp"
 );
-@@clientName(ServerEndpointCloudTieringStatus.healthLastUpdatedTimestamp,
+@@clientName(
+  ServerEndpointCloudTieringStatus.healthLastUpdatedTimestamp,
   "HealthLastUpdatedOn",
   "csharp"
 );
 @@clientName(ServerAuthType, "StorageSyncServerAuthType", "csharp");
-@@clientName(ServerProvisioningStatus,
+@@clientName(
+  ServerProvisioningStatus,
   "StorageSyncServerProvisioningStatus",
   "csharp"
 );
-@@clientName(ServerEndpointProvisioningStatus,
+@@clientName(
+  ServerEndpointProvisioningStatus,
   "StorageSyncServerEndpointProvisioningStatus",
   "csharp"
 );
-@@clientName(RegisteredServerProperties.agentVersionExpirationDate,
+@@clientName(
+  RegisteredServerProperties.agentVersionExpirationDate,
   "AgentVersionExpireOn",
   "csharp"
 );
 @@clientName(WorkflowProperties.createdTimestamp, "CreatedOn", "csharp");
-@@clientName(WorkflowProperties.lastStatusTimestamp,
+@@clientName(
+  WorkflowProperties.lastStatusTimestamp,
   "LastStatusUpdatedOn",
   "csharp"
 );
-@@clientName(ServerEndpointCloudTieringStatus.healthLastUpdatedTimestamp,
+@@clientName(
+  ServerEndpointCloudTieringStatus.healthLastUpdatedTimestamp,
   "HealthLastUpdatedOn",
   "csharp"
 );
 @@clientName(RegisteredServerProperties.identity, "UseIdentity", "csharp");
 @@alternateType(RegisteredServerProperties.applicationId, uuid, "csharp");
 @@alternateType(RegisteredServerProperties.latestApplicationId, uuid, "csharp");
-@@clientName(RegisteredServerCreateParametersProperties.identity,
+@@clientName(
+  RegisteredServerCreateParametersProperties.identity,
   "UseIdentity",
   "csharp"
 );
-@@alternateType(RegisteredServerCreateParametersProperties.applicationId,
+@@alternateType(
+  RegisteredServerCreateParametersProperties.applicationId,
   uuid,
   "csharp"
 );
-@@clientName(RegisteredServerUpdateProperties.identity,
+@@clientName(
+  RegisteredServerUpdateProperties.identity,
   "UseIdentity",
   "csharp"
 );
 @@alternateType(RegisteredServerUpdateProperties.applicationId, uuid, "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "StorageSyncPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -151,91 +181,112 @@ using Microsoft.StorageSync;
 @@clientName(FeatureStatus, "StorageSyncFeatureStatus", "csharp");
 @@clientName(OperationDirection, "StorageSyncOperationDirection", "csharp");
 @@clientName(RegisteredServer, "StorageSyncRegisteredServer", "csharp");
-@@clientName(RegisteredServerProperties.lastHeartBeat,
+@@clientName(
+  RegisteredServerProperties.lastHeartBeat,
   "LastHeartbeat",
   "csharp"
 );
 @@alternateType(RegisteredServerProperties.clusterId, uuid, "csharp");
 @@alternateType(RegisteredServerProperties.serverId, uuid, "csharp");
-@@alternateType(RegisteredServerProperties.storageSyncServiceUid,
+@@alternateType(
+  RegisteredServerProperties.storageSyncServiceUid,
   uuid,
   "csharp"
 );
 @@alternateType(RegisteredServerProperties.discoveryEndpointUri, url, "csharp");
-@@alternateType(RegisteredServerProperties.managementEndpointUri,
+@@alternateType(
+  RegisteredServerProperties.managementEndpointUri,
   url,
   "csharp"
 );
-@@alternateType(RegisteredServerProperties.monitoringEndpointUri,
+@@alternateType(
+  RegisteredServerProperties.monitoringEndpointUri,
   url,
   "csharp"
 );
-@@alternateType(RegisteredServerProperties.serverCertificate,
+@@alternateType(
+  RegisteredServerProperties.serverCertificate,
   unknown,
   "csharp"
 );
-@@alternateType(RegisteredServerProperties.resourceLocation,
+@@alternateType(
+  RegisteredServerProperties.resourceLocation,
   azureLocation,
   "csharp"
 );
-@@alternateType(RegisteredServerProperties.serviceLocation,
+@@alternateType(
+  RegisteredServerProperties.serviceLocation,
   azureLocation,
   "csharp"
 );
 @@clientName(ServerEndpoint, "StorageSyncServerEndpoint", "csharp");
-@@alternateType(ServerEndpointProperties.offlineDataTransferStorageAccountResourceId,
+@@alternateType(
+  ServerEndpointProperties.offlineDataTransferStorageAccountResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ServerEndpointProperties.offlineDataTransferStorageAccountTenantId,
+@@alternateType(
+  ServerEndpointProperties.offlineDataTransferStorageAccountTenantId,
   uuid,
   "csharp"
 );
-@@alternateType(ServerEndpointProperties.serverResourceId,
+@@alternateType(
+  ServerEndpointProperties.serverResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(StorageSyncServiceProperties.storageSyncServiceUid,
+@@alternateType(
+  StorageSyncServiceProperties.storageSyncServiceUid,
   uuid,
   "csharp"
 );
-@@clientName(RegisteredServerCreateParameters,
+@@clientName(
+  RegisteredServerCreateParameters,
   "StorageSyncRegisteredServerCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(RegisteredServerCreateParametersProperties.lastHeartBeat,
+@@clientName(
+  RegisteredServerCreateParametersProperties.lastHeartBeat,
   "LastHeartbeat",
   "csharp"
 );
-@@alternateType(RegisteredServerCreateParametersProperties.clusterId,
+@@alternateType(
+  RegisteredServerCreateParametersProperties.clusterId,
   uuid,
   "csharp"
 );
-@@alternateType(RegisteredServerCreateParametersProperties.serverCertificate,
+@@alternateType(
+  RegisteredServerCreateParametersProperties.serverCertificate,
   unknown,
   "csharp"
 );
-@@alternateType(RegisteredServerCreateParametersProperties.serverId,
+@@alternateType(
+  RegisteredServerCreateParametersProperties.serverId,
   uuid,
   "csharp"
 );
-@@clientName(ServerEndpointCreateParameters,
+@@clientName(
+  ServerEndpointCreateParameters,
   "StorageSyncServerEndpointCreateOrUpdateContent",
   "csharp"
 );
-@@alternateType(ServerEndpointCreateParametersProperties.serverResourceId,
+@@alternateType(
+  ServerEndpointCreateParametersProperties.serverResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(CloudEndpointCreateParameters,
+@@clientName(
+  CloudEndpointCreateParameters,
   "CloudEndpointCreateOrUpdateContent",
   "csharp"
 );
-@@alternateType(CloudEndpointCreateParametersProperties.storageAccountResourceId,
+@@alternateType(
+  CloudEndpointCreateParametersProperties.storageAccountResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(CloudEndpointCreateParametersProperties.storageAccountTenantId,
+@@alternateType(
+  CloudEndpointCreateParametersProperties.storageAccountTenantId,
   uuid,
   "csharp"
 );
@@ -245,55 +296,67 @@ using Microsoft.StorageSync;
 @@clientName(PreRestoreRequest, "PreRestoreContent", "csharp");
 @@alternateType(PreRestoreRequest.azureFileShareUri, url, "csharp");
 @@alternateType(PreRestoreRequest.sourceAzureFileShareUri, url, "csharp");
-@@clientName(TriggerChangeDetectionParameters,
+@@clientName(
+  TriggerChangeDetectionParameters,
   "TriggerChangeDetectionContent",
   "csharp"
 );
 @@clientName(RecallActionParameters, "RecallActionContent", "csharp");
-@@clientName(StorageSyncServiceCreateParameters,
+@@clientName(
+  StorageSyncServiceCreateParameters,
   "StorageSyncServiceCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(TriggerRolloverRequest, "TriggerRolloverContent", "csharp");
 @@alternateType(TriggerRolloverRequest.serverCertificate, unknown, "csharp");
-@@clientName(SyncGroupCreateParameters,
+@@clientName(
+  SyncGroupCreateParameters,
   "StorageSyncGroupCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(CloudEndpoints.restoreheartbeat, "RestoreHeartbeat", "csharp");
-@@clientName(CloudTieringCachePerformance.lastUpdatedTimestamp,
+@@clientName(
+  CloudTieringCachePerformance.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CloudTieringDatePolicyStatus.lastUpdatedTimestamp,
+@@clientName(
+  CloudTieringDatePolicyStatus.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CloudTieringFilesNotTiering.lastUpdatedTimestamp,
+@@clientName(
+  CloudTieringFilesNotTiering.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CloudTieringLowDiskMode.lastUpdatedTimestamp,
+@@clientName(
+  CloudTieringLowDiskMode.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CloudTieringSpaceSavings.lastUpdatedTimestamp,
+@@clientName(
+  CloudTieringSpaceSavings.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CloudTieringVolumeFreeSpacePolicyStatus.lastUpdatedTimestamp,
+@@clientName(
+  CloudTieringVolumeFreeSpacePolicyStatus.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ServerEndpointCloudTieringStatus.lastUpdatedTimestamp,
+@@clientName(
+  ServerEndpointCloudTieringStatus.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ServerEndpointRecallStatus.lastUpdatedTimestamp,
+@@clientName(
+  ServerEndpointRecallStatus.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ServerEndpointSyncStatus.lastUpdatedTimestamp,
+@@clientName(
+  ServerEndpointSyncStatus.lastUpdatedTimestamp,
   "LastUpdatedOn",
   "csharp"
 );
@@ -302,47 +365,57 @@ using Microsoft.StorageSync;
 @@clientName(CloudEndpoints.postRestore::parameters.body, "content", "csharp");
 @@clientName(CloudEndpoints.preBackup::parameters.body, "content", "csharp");
 @@clientName(CloudEndpoints.preRestore::parameters.body, "content", "csharp");
-@@clientName(CloudEndpoints.triggerChangeDetection::parameters.body,
+@@clientName(
+  CloudEndpoints.triggerChangeDetection::parameters.body,
   "content",
   "csharp"
 );
 @@clientName(CloudEndpoints.create::parameters.resource, "content", "csharp");
-@@clientName(StorageSyncServices.create::parameters.resource,
+@@clientName(
+  StorageSyncServices.create::parameters.resource,
   "content",
   "csharp"
 );
 @@clientName(SyncGroups.create::parameters.resource, "content", "csharp");
-@@clientName(StorageSyncServicesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  StorageSyncServicesOperationGroup.checkNameAvailability::parameters.body,
   "content",
   "csharp"
 );
-@@clientName(RegisteredServers.create::parameters.resource,
+@@clientName(
+  RegisteredServers.create::parameters.resource,
   "content",
   "csharp"
 );
-@@clientName(RegisteredServers.update::parameters.properties,
+@@clientName(
+  RegisteredServers.update::parameters.properties,
   "content",
   "csharp"
 );
-@@clientName(RegisteredServers.triggerRollover::parameters.body,
+@@clientName(
+  RegisteredServers.triggerRollover::parameters.body,
   "content",
   "csharp"
 );
 @@clientName(ServerEndpoints.create::parameters.resource, "content", "csharp");
-@@clientName(ServerEndpoints.recallAction::parameters.body,
+@@clientName(
+  ServerEndpoints.recallAction::parameters.body,
   "content",
   "csharp"
 );
-@@clientName(ServerEndpoints.update::parameters.properties,
+@@clientName(
+  ServerEndpoints.update::parameters.properties,
   "content",
   "csharp"
 );
-@@clientName(StorageSyncServices.update::parameters.properties,
+@@clientName(
+  StorageSyncServices.update::parameters.properties,
   "content",
   "csharp"
 );
 
-@@clientName(StorageSyncServicesOperationGroup.checkNameAvailability,
+@@clientName(
+  StorageSyncServicesOperationGroup.checkNameAvailability,
   "CheckStorageSyncNameAvailability",
   "csharp"
 );

@@ -3,13 +3,15 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientNamespace(Informatica.DataManagement,
+@@clientNamespace(
+  Informatica.DataManagement,
   "com.azure.resourcemanager.informaticadatamanagement",
   "java"
 );
 
 @@clientName(Informatica.DataManagement, "InformaticaDataMgmtClient", "python");
-@@clientName(Informatica.DataManagement,
+@@clientName(
+  Informatica.DataManagement,
   "InformaticaDataManagementClient",
   "java"
 );
@@ -17,55 +19,66 @@ using Azure.ClientGenerator.Core;
 namespace Informatica.DataManagement {
   @@access(Operations.list, Access.internal);
 
-  @@clientName(InformaticaOrganizationResource,
+  @@clientName(
+    InformaticaOrganizationResource,
     "InformaticaOrganization",
     "csharp"
   );
-  @@clientName(OrganizationProperties,
+  @@clientName(
+    OrganizationProperties,
     "InformaticaOrganizationProperties",
     "csharp"
   );
-  @@clientName(InformaticaServerlessRuntimeResource,
+  @@clientName(
+    InformaticaServerlessRuntimeResource,
     "InformaticaServerlessRuntime",
     "csharp"
   );
   @@clientName(ApplicationConfigs, "InformaticaApplicationConfigs", "csharp");
   @@clientName(ApplicationType, "InformaticaApplicationType", "csharp");
-  @@clientName(ApplicationTypeMetadata,
+  @@clientName(
+    ApplicationTypeMetadata,
     "InformaticaApplicationTypeMetadata",
     "csharp"
   );
   @@clientName(CdiConfigProps, "CdiConfigProperties", "csharp");
   @@clientName(CheckDependenciesResponse, "CheckDependenciesResult", "csharp");
   @@clientName(CompanyDetails, "InformaticaCompanyDetails", "csharp");
-  @@clientName(CompanyDetailsUpdate,
+  @@clientName(
+    CompanyDetailsUpdate,
     "InformaticaCompanyDetailsUpdate",
     "csharp"
   );
-  @@clientName(InfaRuntimeResourceFetchMetaData,
+  @@clientName(
+    InfaRuntimeResourceFetchMetaData,
     "InformaticaRuntimeResourceFetchMetadata",
     "csharp"
   );
-  @@clientName(InfaServerlessFetchConfigProperties,
+  @@clientName(
+    InfaServerlessFetchConfigProperties,
     "InformaticaServerlessFetchConfigProperties",
     "csharp"
   );
   @@clientName(MarketplaceDetails, "InformaticaMarketplaceDetails", "csharp");
-  @@clientName(MarketplaceDetailsUpdate,
+  @@clientName(
+    MarketplaceDetailsUpdate,
     "InformaticaMarketplaceDetailsUpdate",
     "csharp"
   );
-  @@clientName(NetworkInterfaceConfiguration,
+  @@clientName(
+    NetworkInterfaceConfiguration,
     "InformaticaNetworkInterfaceConfiguration",
     "csharp"
   );
-  @@clientName(NetworkInterfaceConfigurationUpdate,
+  @@clientName(
+    NetworkInterfaceConfigurationUpdate,
     "InformaticaNetworkInterfaceConfigurationUpdate",
     "csharp"
   );
   @@clientName(OfferDetails, "InformaticaOfferDetails", "csharp");
   @@clientName(OfferDetailsUpdate, "InformaticaOfferDetailsUpdate", "csharp");
-  @@clientName(OrganizationPropertiesCustomUpdate,
+  @@clientName(
+    OrganizationPropertiesCustomUpdate,
     "InformaticaOrganizationPropertiesUpdate",
     "csharp"
   );
@@ -73,7 +86,8 @@ namespace Informatica.DataManagement {
   @@clientName(ProvisioningState, "InformaticaProvisioningState", "csharp");
   @@clientName(RegionsMetadata, "InformaticaRegionsMetadata", "csharp");
   @@clientName(RuntimeType, "InformaticaRuntimeType", "csharp");
-  @@clientName(ServerlessRuntimePropertiesCustomUpdate,
+  @@clientName(
+    ServerlessRuntimePropertiesCustomUpdate,
     "ServerlessRuntimePropertiesUpdate",
     "csharp"
   );
@@ -84,7 +98,8 @@ namespace Informatica.DataManagement {
   @@clientName(ApplicationType.CDI, "Cdi", "csharp");
   @@clientName(ApplicationType.CDIE, "Cdie", "csharp");
   @@clientName(InfaRuntimeResourceFetchMetaData.type, "RuntimeType", "csharp");
-  @@clientName(InformaticaProperties.singleSignOnUrl,
+  @@clientName(
+    InformaticaProperties.singleSignOnUrl,
     "SingleSignOnUri",
     "csharp"
   );
@@ -92,14 +107,16 @@ namespace Informatica.DataManagement {
   @@clientName(RuntimeType.SERVERLESS, "Serverless", "csharp");
   @@clientName(ServerlessMetadataResponse.type, "RuntimeType", "csharp");
 
-  @@clientName(ServerlessRuntimes.serverlessResourceById,
+  @@clientName(
+    ServerlessRuntimes.serverlessResourceById,
     "GetServerlessResourceById",
     "csharp"
   );
 
   @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
 
-  @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  @@alternateType(
+    Azure.ResourceManager.CommonTypes.Resource.id,
     Azure.Core.armResourceIdentifier,
     "csharp"
   );

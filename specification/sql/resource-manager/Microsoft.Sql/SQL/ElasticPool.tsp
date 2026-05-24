@@ -61,10 +61,13 @@ interface ElasticPools {
   @tag("ElasticPools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ElasticPool,
-    Response = ArmResourceUpdatedResponse<ElasticPool> | ArmResourceCreatedResponse<
-      ElasticPool,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ElasticPool>
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ElasticPool>
+      | ArmResourceCreatedResponse<
+          ElasticPool,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ElasticPool>
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -81,7 +84,10 @@ interface ElasticPools {
   @tag("ElasticPools")
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticPool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -158,9 +164,11 @@ interface ElasticPools {
 
 @@doc(ElasticPool.name, "The name of the elastic pool.");
 @@doc(ElasticPool.properties, "Resource properties.");
-@@doc(ElasticPools.createOrUpdate::parameters.resource,
+@@doc(
+  ElasticPools.createOrUpdate::parameters.resource,
   "The elastic pool parameters."
 );
-@@doc(ElasticPools.update::parameters.properties,
+@@doc(
+  ElasticPools.update::parameters.properties,
   "The elastic pool update parameters."
 );

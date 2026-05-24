@@ -106,19 +106,21 @@ interface OperationContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmResourceCreatedSyncResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -285,19 +287,21 @@ interface WorkspaceApiOperation {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmCreatedResponse<OperationContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<OperationContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -377,19 +381,24 @@ interface WorkspaceApiOperation {
 
 @@maxLength(OperationContract.name, 80);
 @@minLength(OperationContract.name, 1);
-@@doc(OperationContract.name,
+@@doc(
+  OperationContract.name,
   "Operation identifier within an API. Must be unique in the current API Management service instance."
 );
 @@doc(OperationContract.properties, "Properties of the Operation Contract.");
-@@doc(OperationContracts.createOrUpdate::parameters.resource,
+@@doc(
+  OperationContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(OperationContracts.update::parameters.properties,
+@@doc(
+  OperationContracts.update::parameters.properties,
   "API Operation Update parameters."
 );
-@@doc(WorkspaceApiOperation.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiOperation.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(WorkspaceApiOperation.update::parameters.properties,
+@@doc(
+  WorkspaceApiOperation.update::parameters.properties,
   "API Operation Update parameters."
 );

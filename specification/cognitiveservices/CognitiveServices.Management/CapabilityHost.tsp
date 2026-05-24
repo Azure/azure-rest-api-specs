@@ -72,18 +72,20 @@ interface CapabilityHosts {
   createOrUpdate is CapabilityHostOps.CreateOrUpdateAsync<
     CapabilityHost,
     Request = CapabilityHost,
-    Response = ArmResponse<CapabilityHost> | ArmResourceCreatedResponse<
-      CapabilityHost,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CapabilityHost> & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
-        @header("x-ms-async-operation-timeout")
-        @format("duration")
-        asyncOperationTimeout: string;
-      }
-    >
+    Response =
+      | ArmResponse<CapabilityHost>
+      | ArmResourceCreatedResponse<
+          CapabilityHost,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CapabilityHost> & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+            @header("x-ms-async-operation-timeout")
+            @format("duration")
+            asyncOperationTimeout: string;
+          }
+        >
   >;
 
   /**
@@ -92,15 +94,17 @@ interface CapabilityHosts {
   @tag("AccountCapabilityHost")
   delete is CapabilityHostOps.DeleteWithoutOkAsync<
     CapabilityHost,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
-      @header("x-ms-async-operation-timeout")
-      @format("duration")
-      asyncOperationTimeout: string;
-    }> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+          @header("x-ms-async-operation-timeout")
+          @format("duration")
+          asyncOperationTimeout: string;
+        }>
+      | NoContentResponse
   >;
 
   /**
@@ -116,24 +120,30 @@ interface CapabilityHosts {
   >;
 }
 
-@@doc(CapabilityHost.name,
+@@doc(
+  CapabilityHost.name,
   "The name of the capability host associated with the Cognitive Services Resource"
 );
-@@doc(CapabilityHost.properties,
+@@doc(
+  CapabilityHost.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CapabilityHosts.createOrUpdate::parameters.resource,
+@@doc(
+  CapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );
-@@doc(ProjectCapabilityHosts.createOrUpdate::parameters.resource,
+@@doc(
+  ProjectCapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );
 @@summary(ProjectCapabilityHosts.get, "Get project capabilityHost.");
-@@summary(CapabilityHosts.createOrUpdate,
+@@summary(
+  CapabilityHosts.createOrUpdate,
   "Create or update account capabilityHost."
 );
 @@summary(CapabilityHosts.delete, "Delete account capabilityHost.");
-@@summary(ProjectCapabilityHosts.createOrUpdate,
+@@summary(
+  ProjectCapabilityHosts.createOrUpdate,
   "Create or update project capabilityHost."
 );
 @@summary(ProjectCapabilityHosts.delete, "Delete project capabilityHost.");
