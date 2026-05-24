@@ -50,14 +50,3 @@ union DeletionSource {
   /** Azure subscription deletion */
   AzureSubscriptionDeletion: "AzureSubscriptionDeletion",
 }
-
-/** The status of a preflight validation. */
-union PreflightStatus {
-  string,
-
-  /** Preflight validation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** Preflight validation failed. */
-  Failed: "Failed",
-}

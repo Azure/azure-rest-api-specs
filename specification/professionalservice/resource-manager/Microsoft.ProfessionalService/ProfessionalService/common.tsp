@@ -1,7 +1,7 @@
 namespace Microsoft.ProfessionalService;
 
-/** Delete options for a Professional Service resource. */
-model DeleteOptions {
+/** Unsubscribe options for a Professional Service resource. */
+model UnsubscribeOptions {
   /** Whether it is unsubscribe only. */
   unsubscribeOnly?: boolean;
 
@@ -13,10 +13,4 @@ model DeleteOptions {
 
   /** The deletion source. Defaults to CustomerCancellation if not specified. */
   deletionSource?: DeletionSource;
-}
-
-/** Preflight validation result. */
-model PreflightResult {
-  /** The status of the preflight validation. */
-  status: PreflightStatus;
 }

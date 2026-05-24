@@ -128,7 +128,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/operationStatuses/{operationId}": {
       "get": {
         "operationId": "ProfessionalServiceOperationStatuses_GetSubscriptionOperationStatus",
-        "description": "Gets the status of a long-running Professional Service operation at the subscription scope.",
+        "description": "Gets the status of a long-running Professional Service operation at the subscription scope. All async operations, including resource-group-scoped ones, poll through this endpoint.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -198,57 +198,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/deployments/{resourceName}/preflight": {
-      "post": {
-        "operationId": "ProfessionalServiceSubscriptionLevelPreflight_Preflight",
-        "description": "Pre-validates Professional Service subscription operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The preflight request body.",
-            "required": true,
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PreflightResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Pre-validate a Professional Service subscription operation": {
-            "$ref": "./examples/ProfessionalServicePreflight.json"
-          }
         }
       }
     },
@@ -579,7 +528,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeleteOptions"
+              "$ref": "#/definitions/UnsubscribeOptions"
             }
           }
         ],
@@ -624,29 +573,6 @@
     }
   },
   "definitions": {
-    "DeleteOptions": {
-      "type": "object",
-      "description": "Delete options for a Professional Service resource.",
-      "properties": {
-        "unsubscribeOnly": {
-          "type": "boolean",
-          "description": "Whether it is unsubscribe only."
-        },
-        "reasonCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The reason code."
-        },
-        "feedback": {
-          "type": "string",
-          "description": "The feedback."
-        },
-        "deletionSource": {
-          "$ref": "#/definitions/DeletionSource",
-          "description": "The deletion source. Defaults to CustomerCancellation if not specified."
-        }
-      }
-    },
     "DeletionSource": {
       "type": "string",
       "description": "The deletion source.",
@@ -670,44 +596,6 @@
           }
         ]
       }
-    },
-    "PreflightResult": {
-      "type": "object",
-      "description": "Preflight validation result.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PreflightStatus",
-          "description": "The status of the preflight validation."
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "PreflightStatus": {
-      "type": "string",
-      "description": "The status of a preflight validation.",
-      "enum": [
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PreflightStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Preflight validation succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Preflight validation failed."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "ProfessionalServiceProvisioningState": {
       "type": "string",
@@ -973,6 +861,29 @@
             "description": "Azure subscription deleted"
           }
         ]
+      }
+    },
+    "UnsubscribeOptions": {
+      "type": "object",
+      "description": "Unsubscribe options for a Professional Service resource.",
+      "properties": {
+        "unsubscribeOnly": {
+          "type": "boolean",
+          "description": "Whether it is unsubscribe only."
+        },
+        "reasonCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The reason code."
+        },
+        "feedback": {
+          "type": "string",
+          "description": "The feedback."
+        },
+        "deletionSource": {
+          "$ref": "#/definitions/DeletionSource",
+          "description": "The deletion source. Defaults to CustomerCancellation if not specified."
+        }
       }
     }
   },
