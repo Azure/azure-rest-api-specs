@@ -80,10 +80,7 @@ model ProfessionalServiceResourceProperties {
   privateOfferId?: string;
 
   /** The product code. Primary purchase identifier for GA — used to resolve term details server-side. */
-  productCode?: string;
-
-  /** The quote id (mandatory for Professional Service purchases). */
-  quoteId?: string;
+  productCode: string;
 }
 
 /** Professional Service ARM tracked resource for GA API version 2026-05-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData). */

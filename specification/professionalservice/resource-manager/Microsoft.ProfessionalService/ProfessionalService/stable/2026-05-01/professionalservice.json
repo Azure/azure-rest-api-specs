@@ -365,7 +365,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "ProfessionalServiceSubscriptionLevel_UpdateTags",
+        "operationId": "ProfessionalServiceSubscriptionLevel_Update",
         "tags": [
           "ProfessionalServiceSubscriptionLevel"
         ],
@@ -394,7 +394,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProfessionalServiceResourceTagsUpdate"
+              "$ref": "#/definitions/ProfessionalServiceResourceUpdate"
             }
           }
         ],
@@ -424,11 +424,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update tags on a Professional Service subscription level resource": {
-            "$ref": "./examples/ProfessionalServiceUpdateTags.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -771,12 +766,11 @@
         "productCode": {
           "type": "string",
           "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
-        },
-        "quoteId": {
-          "type": "string",
-          "description": "The quote id (mandatory for Professional Service purchases)."
         }
-      }
+      },
+      "required": [
+        "productCode"
+      ]
     },
     "ProfessionalServiceResourceStatus": {
       "type": "string",
@@ -820,9 +814,9 @@
         ]
       }
     },
-    "ProfessionalServiceResourceTagsUpdate": {
+    "ProfessionalServiceResourceUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in ProfessionalServiceResource resources.",
+      "description": "The type used for update operations of the ProfessionalServiceResource.",
       "properties": {
         "tags": {
           "type": "object",
@@ -830,6 +824,51 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ProfessionalServiceResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ProfessionalServiceResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ProfessionalServiceResource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "format": "password",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the Professional Service subscription will auto renew upon term end."
+        },
+        "storeFront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer id."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
         }
       }
     },
