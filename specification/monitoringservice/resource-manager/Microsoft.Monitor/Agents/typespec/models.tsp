@@ -27,7 +27,21 @@ namespace Microsoft.Monitor {
     enabled?: boolean;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    operations?: AgentOperations;
+    @Azure.ResourceManager.identifiers(#["type"])
+    operations?: OperationEntry[];
+  }
+
+  /**
+   * Type of agent operation.
+   */
+  union OperationType {
+    /** Issue creation operation. */
+    issueCreation: "IssueCreation",
+
+    /** Investigation operation. */
+    investigate: "Investigate",
+
+    string,
   }
 
   /**
@@ -44,20 +58,12 @@ namespace Microsoft.Monitor {
   }
 
   /**
-   * Configuration for agent operations.
+   * Configuration for a specific agent operation.
    */
-  model AgentOperations {
-    /** Settings for the issue creation operation. */
-    issueCreation?: OperationSettings;
+  model OperationEntry {
+    /** Type of operation. */
+    type: OperationType;
 
-    /** Settings for the investigation operation. */
-    investigation?: OperationSettings;
-  }
-
-  /**
-   * Settings for a specific agent operation.
-   */
-  model OperationSettings {
     /** Execution mode for this operation. Defaults to Auto when not specified. */
     mode?: OperationMode;
 

@@ -372,20 +372,6 @@
     }
   },
   "definitions": {
-    "AgentOperations": {
-      "type": "object",
-      "description": "Configuration for agent operations.",
-      "properties": {
-        "issueCreation": {
-          "$ref": "#/definitions/OperationSettings",
-          "description": "Settings for the issue creation operation."
-        },
-        "investigation": {
-          "$ref": "#/definitions/OperationSettings",
-          "description": "Settings for the investigation operation."
-        }
-      }
-    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -480,8 +466,14 @@
           "description": "Whether the observability agent is enabled. Defaults to true when not specified."
         },
         "operations": {
-          "$ref": "#/definitions/AgentOperations",
-          "description": "Configuration overrides for agent operations. When omitted, default behavior applies for all operations."
+          "type": "array",
+          "description": "Configuration overrides for agent operations. When omitted, default behavior applies for all operations.",
+          "items": {
+            "$ref": "#/definitions/OperationEntry"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       },
       "required": [
@@ -509,8 +501,14 @@
           "description": "Whether the observability agent is enabled. Defaults to true when not specified."
         },
         "operations": {
-          "$ref": "#/definitions/AgentOperations",
-          "description": "Configuration overrides for agent operations. When omitted, default behavior applies for all operations."
+          "type": "array",
+          "description": "Configuration overrides for agent operations. When omitted, default behavior applies for all operations.",
+          "items": {
+            "$ref": "#/definitions/OperationEntry"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     },
@@ -573,6 +571,28 @@
         }
       ]
     },
+    "OperationEntry": {
+      "type": "object",
+      "description": "Configuration for a specific agent operation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Type of operation."
+        },
+        "mode": {
+          "$ref": "#/definitions/OperationMode",
+          "description": "Execution mode for this operation. Defaults to Auto when not specified."
+        },
+        "customInstructions": {
+          "type": "string",
+          "description": "Custom instructions that guide the agent's behavior for this operation.",
+          "maxLength": 8192
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "OperationMode": {
       "type": "string",
       "description": "Execution mode for a specific agent operation.",
@@ -597,19 +617,28 @@
         ]
       }
     },
-    "OperationSettings": {
-      "type": "object",
-      "description": "Settings for a specific agent operation.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/OperationMode",
-          "description": "Execution mode for this operation. Defaults to Auto when not specified."
-        },
-        "customInstructions": {
-          "type": "string",
-          "description": "Custom instructions that guide the agent's behavior for this operation.",
-          "maxLength": 8192
-        }
+    "OperationType": {
+      "type": "string",
+      "description": "Type of agent operation.",
+      "enum": [
+        "IssueCreation",
+        "Investigate"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "issueCreation",
+            "value": "IssueCreation",
+            "description": "Issue creation operation."
+          },
+          {
+            "name": "investigate",
+            "value": "Investigate",
+            "description": "Investigation operation."
+          }
+        ]
       }
     }
   },
