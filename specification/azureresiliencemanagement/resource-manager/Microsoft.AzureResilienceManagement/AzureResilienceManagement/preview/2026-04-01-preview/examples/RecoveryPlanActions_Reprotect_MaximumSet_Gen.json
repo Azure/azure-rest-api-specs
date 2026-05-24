@@ -1,0 +1,28 @@
+{
+  "title": "RecoveryPlanActions_Reprotect_MaximumSet",
+  "operationId": "RecoveryPlanActions_Reprotect",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-04-01-preview",
+    "recoveryPlanName": "samplePlanName",
+    "body": {
+      "reprotectRequestProperties": {
+        "selectedResourceIds": [
+          "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryResources/12345678-9012-3456-7890-123456789012"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "11111111-1111-1111-1111-000000000012"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
