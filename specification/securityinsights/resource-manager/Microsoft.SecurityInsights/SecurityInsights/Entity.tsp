@@ -141,3 +141,6 @@ interface Entities {
   Entities.entitiesGetTimelineList::parameters.body,
   "The parameters required to execute an timeline operation on the given entity."
 );
+
+@@added(Entity, Versions.v2025_10_01_preview);
+@@added(Entities, Versions.v2025_10_01_preview);

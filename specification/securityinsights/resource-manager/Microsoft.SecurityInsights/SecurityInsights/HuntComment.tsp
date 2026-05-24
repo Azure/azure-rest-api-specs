@@ -99,3 +99,6 @@ interface HuntComments {
 @@doc(HuntComment.name, "The hunt comment id (GUID)");
 @@doc(HuntComment.properties, "Hunt Comment properties");
 @@doc(HuntComments.createOrUpdate::parameters.resource, "The hunt  comment");
+
+@@added(HuntComment, Versions.v2025_10_01_preview);
+@@added(HuntComments, Versions.v2025_10_01_preview);

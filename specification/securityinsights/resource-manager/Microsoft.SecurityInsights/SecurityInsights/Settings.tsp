@@ -81,3 +81,6 @@ interface ProductSettings {
   "The setting name. Supports - Anomalies, EyesOn, EntityAnalytics, Ueba"
 );
 @@doc(ProductSettings.update::parameters.resource, "The setting");
+
+@@added(Settings, Versions.v2025_10_01_preview);
+@@added(ProductSettings, Versions.v2025_10_01_preview);

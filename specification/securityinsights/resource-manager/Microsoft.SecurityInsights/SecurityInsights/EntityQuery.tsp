@@ -122,3 +122,7 @@ interface EntityQueries {
   EntityQueries.createOrUpdate::parameters.resource,
   "The entity query we want to create or update"
 );
+
+@@added(EntityQuery, Versions.v2025_10_01_preview);
+@@added(EntityQueriesOps, Versions.v2025_10_01_preview);
+@@added(EntityQueries, Versions.v2025_10_01_preview);

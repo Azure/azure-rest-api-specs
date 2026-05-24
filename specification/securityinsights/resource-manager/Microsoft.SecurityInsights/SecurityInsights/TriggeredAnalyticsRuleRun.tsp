@@ -66,3 +66,6 @@ interface triggeredAnalyticsRuleRun {
   TriggeredAnalyticsRuleRun.properties,
   "The triggered analytics rule run Properties"
 );
+
+@@added(TriggeredAnalyticsRuleRun, Versions.v2025_10_01_preview);
+@@added(triggeredAnalyticsRuleRun, Versions.v2025_10_01_preview);

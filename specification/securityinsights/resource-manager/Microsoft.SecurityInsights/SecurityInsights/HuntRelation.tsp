@@ -93,3 +93,6 @@ interface HuntRelations {
 @@doc(HuntRelation.name, "The hunt relation id (GUID)");
 @@doc(HuntRelation.properties, "Hunt Relation properties");
 @@doc(HuntRelations.createOrUpdate::parameters.resource, "The hunt relation");
+
+@@added(HuntRelation, Versions.v2025_10_01_preview);
+@@added(HuntRelations, Versions.v2025_10_01_preview);

@@ -92,3 +92,6 @@ interface WorkspaceManagerMembers {
   WorkspaceManagerMembers.createOrUpdate::parameters.resource,
   "The workspace manager member object"
 );
+
+@@added(WorkspaceManagerMember, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerMembers, Versions.v2025_10_01_preview);

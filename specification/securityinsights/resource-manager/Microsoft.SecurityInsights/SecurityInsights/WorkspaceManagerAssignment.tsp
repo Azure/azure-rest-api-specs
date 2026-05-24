@@ -110,3 +110,6 @@ interface WorkspaceManagerAssignments {
   WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
   "The workspace manager assignment"
 );
+
+@@added(WorkspaceManagerAssignment, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerAssignments, Versions.v2025_10_01_preview);

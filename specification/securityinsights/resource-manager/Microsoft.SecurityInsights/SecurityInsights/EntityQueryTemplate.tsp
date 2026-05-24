@@ -58,3 +58,6 @@ interface EntityQueryTemplates {
 }
 
 @@doc(EntityQueryTemplate.name, "entity query template ID");
+
+@@added(EntityQueryTemplate, Versions.v2025_10_01_preview);
+@@added(EntityQueryTemplates, Versions.v2025_10_01_preview);

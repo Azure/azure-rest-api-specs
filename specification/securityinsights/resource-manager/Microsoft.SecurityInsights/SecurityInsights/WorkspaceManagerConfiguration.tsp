@@ -101,3 +101,6 @@ interface WorkspaceManagerConfigurations {
   WorkspaceManagerConfigurations.createOrUpdate::parameters.resource,
   "The workspace manager configuration"
 );
+
+@@added(WorkspaceManagerConfiguration, Versions.v2025_10_01_preview);
+@@added(WorkspaceManagerConfigurations, Versions.v2025_10_01_preview);

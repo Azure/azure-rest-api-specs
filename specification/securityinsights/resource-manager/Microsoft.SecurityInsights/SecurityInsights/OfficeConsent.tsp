@@ -59,3 +59,6 @@ interface OfficeConsents {
 
 @@doc(OfficeConsent.name, "consent ID");
 @@doc(OfficeConsent.properties, "Office consent properties");
+
+@@added(OfficeConsent, Versions.v2025_10_01_preview);
+@@added(OfficeConsents, Versions.v2025_10_01_preview);
