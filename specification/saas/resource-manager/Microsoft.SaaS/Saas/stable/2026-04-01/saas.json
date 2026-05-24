@@ -50,51 +50,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.SaaS/deployments/{resourceName}/preflight": {
-      "post": {
-        "operationId": "SaasTenantLevelPreflight_Preflight",
-        "description": "Pre-validates SaaS subscription operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The preflight request body.",
-            "required": true,
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PreflightResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Pre-validate a tenant-level SaaS operation": {
-            "$ref": "./examples/SaasTenantPreflight.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.SaaS/operationStatuses/{operationId}": {
       "get": {
         "operationId": "SaasOperationStatuses_GetTenantOperationStatus",
@@ -593,57 +548,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/deployments/{resourceName}/preflight": {
-      "post": {
-        "operationId": "SaasSubscriptionLevelPreflight_Preflight",
-        "description": "Pre-validates SaaS subscription operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The resource name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The preflight request body.",
-            "required": true,
-            "schema": {}
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PreflightResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Pre-validate a subscription-level SaaS operation": {
-            "$ref": "./examples/SaasSubscriptionPreflight.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources": {
       "get": {
         "operationId": "SaasSubscriptionLevel_ListByResourceGroup",
@@ -1021,7 +925,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeleteOptions"
+              "$ref": "#/definitions/UnsubscribeOptions"
             }
           }
         ],
@@ -1093,29 +997,6 @@
         }
       }
     },
-    "DeleteOptions": {
-      "type": "object",
-      "description": "Delete options for a SaaS resource.",
-      "properties": {
-        "unsubscribeOnly": {
-          "type": "boolean",
-          "description": "Whether it is unsubscribe only."
-        },
-        "reasonCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The reason code."
-        },
-        "feedback": {
-          "type": "string",
-          "description": "The feedback."
-        },
-        "deletionSource": {
-          "$ref": "#/definitions/DeletionSource",
-          "description": "The deletion source. Defaults to CustomerCancellation if not specified."
-        }
-      }
-    },
     "DeletionSource": {
       "type": "string",
       "description": "The deletion source.",
@@ -1169,44 +1050,6 @@
           }
         ]
       }
-    },
-    "PreflightResult": {
-      "type": "object",
-      "description": "Preflight validation result.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PreflightStatus",
-          "description": "The status of the preflight validation."
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "PreflightStatus": {
-      "type": "string",
-      "description": "The status of a preflight validation.",
-      "enum": [
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PreflightStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Preflight validation succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Preflight validation failed."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "SaasProvisioningState": {
       "type": "string",
@@ -1638,6 +1481,29 @@
             "description": "Azure subscription deleted"
           }
         ]
+      }
+    },
+    "UnsubscribeOptions": {
+      "type": "object",
+      "description": "Unsubscribe options for a SaaS resource.",
+      "properties": {
+        "unsubscribeOnly": {
+          "type": "boolean",
+          "description": "Whether it is unsubscribe only."
+        },
+        "reasonCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The reason code."
+        },
+        "feedback": {
+          "type": "string",
+          "description": "The feedback."
+        },
+        "deletionSource": {
+          "$ref": "#/definitions/DeletionSource",
+          "description": "The deletion source. Defaults to CustomerCancellation if not specified."
+        }
       }
     }
   },

@@ -5,8 +5,8 @@ namespace Microsoft.SaaS;
 // NOTE: SaasResourceCspProperties, BeneficiaryOrganization, Participant, CspBeneficiary removed —
 //       0 non-null usage in 18-month production data. Input-only pass-through to ACS, never stored.
 
-/** Delete options for a SaaS resource. */
-model DeleteOptions {
+/** Unsubscribe options for a SaaS resource. */
+model UnsubscribeOptions {
   /** Whether it is unsubscribe only. */
   unsubscribeOnly?: boolean;
 
@@ -35,10 +35,4 @@ model AccessTokenResult {
 
   /** The token expiry time. */
   expiryTime?: utcDateTime;
-}
-
-/** Preflight validation result. */
-model PreflightResult {
-  /** The status of the preflight validation. */
-  status: PreflightStatus;
 }

@@ -41,27 +41,6 @@ interface SaasTenantLevel {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom preflight route not tied to SaasTenantResource"
-interface SaasTenantLevelPreflight {
-  /** Pre-validates SaaS subscription operations. */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Preflight accepts dynamic payload"
-  @post
-  @route("/providers/Microsoft.SaaS/deployments/{resourceName}/preflight")
-  preflight(
-    ...ApiVersionParameter,
-
-    /** The resource name. */
-    @pattern("^[a-zA-Z0-9-]{3,50}$")
-    @path
-    resourceName: string,
-
-    /** The preflight request body. */
-    @body body: unknown,
-  ):
-    | ArmResponse<PreflightResult>
-    | ErrorResponse;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation status routes"
 interface SaasOperationStatuses {
   /** Gets the status of a long-running SaaS operation at the tenant scope. */
