@@ -23,12 +23,25 @@ namespace Microsoft.Monitor {
       }
     ]>;
 
-    /** Whether the observability agent is enabled. Defaults to true when not specified. */
-    enabled?: boolean;
+    /** Whether the observability agent is enabled. Defaults to Enabled when not specified. */
+    enabled?: EnabledState;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
     @Azure.ResourceManager.identifiers(#["type"])
     operations?: OperationEntry[];
+  }
+
+  /**
+   * Enabled state for an observability agent.
+   */
+  union EnabledState {
+    /** The agent is enabled. */
+    enabled: "Enabled",
+
+    /** The agent is disabled. */
+    disabled: "Disabled",
+
+    string,
   }
 
   /**
@@ -70,6 +83,25 @@ namespace Microsoft.Monitor {
     /** Custom instructions that guide the agent's behavior for this operation. */
     @maxLength(8192)
     customInstructions?: string;
+  }
+
+  /**
+   * Updatable properties of an observability agent.
+   */
+  model ObservabilityAgentPropertiesUpdate {
+    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
+    monitoringAccountId?: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.Monitor/accounts";
+      }
+    ]>;
+
+    /** Whether the observability agent is enabled. */
+    enabled?: EnabledState;
+
+    /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
+    @Azure.ResourceManager.identifiers(#["type"])
+    operations?: OperationEntry[];
   }
 
   /**
