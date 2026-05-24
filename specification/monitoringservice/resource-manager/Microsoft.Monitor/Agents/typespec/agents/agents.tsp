@@ -25,9 +25,9 @@ namespace Microsoft.Monitor {
     /**
      * Updates part of an observability agent.
      */
-    update is ArmResourcePatchSync<
+    update is ArmCustomPatchSync<
       ObservabilityAgentResource,
-      ObservabilityAgentProperties
+      PatchModel = ObservabilityAgentResource
     >;
 
     /**
