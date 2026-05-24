@@ -164,7 +164,7 @@ interface Agents {
       /** The name of the agent to delete. */
       @path agent_name: string;
 
-      /** For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false. */
+      /** For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types. */
       @query force?: boolean = false;
     },
     DeleteAgentResponse
@@ -260,7 +260,7 @@ interface Agents {
       /** The version of the agent to delete */
       @path agent_version: string;
 
-      /** For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. This value is not relevant for other Agent types. Defaults to false. */
+      /** For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types. */
       @query force?: boolean = false;
     },
     DeleteAgentVersionResponse
@@ -455,6 +455,30 @@ interface Agents {
   >;
 
   /**
+   * Stops a session.
+   * Returns 204 No Content when the stop succeeds.
+   */
+  @post
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  stopSession is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The session identifier. */
+      @path session_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
    * Returns a list of sessions for the specified agent.
    */
   @get
@@ -525,5 +549,5 @@ interface Agents {
       @path session_id: string;
     },
     SseResponseOf<SessionLogEvent>
-  >;  
+  >;
 }

@@ -257,5 +257,5 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Skills sub‐client
   // --------------------------------------------------------------------------------
-  @@clientName(SkillObject, "AgentsSkill");
+  @@clientName(Skill, "AgentsSkill");
 }
