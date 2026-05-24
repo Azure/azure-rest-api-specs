@@ -175,11 +175,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OptimizationJob"
+                "$ref": "#/components/schemas/OptimizationJobInputs"
               }
             }
           },
-          "description": "The job to create."
+          "description": "The optimization job inputs."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -190,7 +190,7 @@
       "get": {
         "operationId": "AgentOptimizationJobs_list",
         "summary": "Returns a list of agent optimization jobs.",
-        "description": "List optimization jobs. Supports cursor pagination and optional `status` / `agent_name` filters.",
+        "description": "List optimization jobs. Supports cursor pagination and optional status / agentName filters.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -257,7 +257,7 @@
             "explode": false
           },
           {
-            "name": "agent_name",
+            "name": "agentName",
             "in": "query",
             "required": false,
             "description": "Filter to jobs targeting this agent name.",
@@ -339,7 +339,7 @@
       "get": {
         "operationId": "AgentOptimizationJobs_get",
         "summary": "Get info about an agent optimization job.",
-        "description": "Get an optimization job by id. Emits `Retry-After` while the job is non-terminal.",
+        "description": "Get an optimization job by id. Returns 202 while in progress, 200 when terminal.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -379,7 +379,25 @@
             "headers": {
               "Retry-After": {
                 "required": false,
-                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptimizationJob"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -439,6 +457,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "description": "When true, force-delete even if the job is in a non-terminal state.",
+            "schema": {
+              "type": "boolean"
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -618,7 +646,7 @@
       "get": {
         "operationId": "AgentOptimizationJobs_getCandidate",
         "summary": "Get a candidate by id.",
-        "description": "Get a single candidate manifest and aggregated evaluation summary.",
+        "description": "Get a single candidate's metadata, manifest, and promotion info.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -667,7 +695,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OptimizationCandidate"
+                  "$ref": "#/components/schemas/CandidateMetadata"
                 }
               }
             }
@@ -772,6 +800,96 @@
         }
       }
     },
+    "/agent_optimization_jobs/{jobId}/candidates/{candidateId}/files": {
+      "get": {
+        "operationId": "AgentOptimizationJobs_getCandidateFile",
+        "summary": "Get a candidate file.",
+        "description": "Stream a specific file from the candidate's blob directory.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentsOptimization=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The optimization job id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "candidateId",
+            "in": "path",
+            "required": true,
+            "description": "The candidate id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "Relative path of the file to download (e.g. 'files/examples.jsonl').",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AgentOptimizationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V1Preview"
+          ]
+        }
+      }
+    },
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}/results": {
       "get": {
         "operationId": "AgentOptimizationJobs_getCandidateResults",
@@ -844,6 +962,96 @@
         "tags": [
           "AgentOptimizationJobs"
         ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "AgentsOptimization=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote": {
+      "post": {
+        "operationId": "AgentOptimizationJobs_promoteCandidate",
+        "summary": "Promote a candidate.",
+        "description": "Promotes a candidate, recording the deployment timestamp and target agent version.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentsOptimization=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The optimization job id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "candidateId",
+            "in": "path",
+            "required": true,
+            "description": "The candidate id to promote.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromoteCandidateResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "AgentOptimizationJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromoteCandidateRequest"
+              }
+            }
+          },
+          "description": "Promotion details."
+        },
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "AgentsOptimization=V1Preview"
@@ -2808,7 +3016,7 @@
     "/agents/{agent_name}/endpoint/sessions/{session_id}:stop": {
       "post": {
         "operationId": "Agents_stopSession",
-        "description": "Stops a session.\nReturns 204 No Content when the stop succeeds.\nReturns a failed session resource when the stop attempt fails.",
+        "description": "Stops a session.\nReturns 204 No Content when the stop succeeds.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -18463,6 +18671,23 @@
           }
         }
       },
+      "AgentIdentifier": {
+        "type": "object",
+        "required": [
+          "agentName"
+        ],
+        "properties": {
+          "agentName": {
+            "type": "string",
+            "description": "Registered Foundry agent name (required)."
+          },
+          "agentVersion": {
+            "type": "string",
+            "description": "Pinned agent version. Defaults to latest if omitted."
+          }
+        },
+        "description": "Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and systemPrompt are specified in options.optimizationConfig."
+      },
       "AgentIdentity": {
         "type": "object",
         "required": [
@@ -18619,7 +18844,8 @@
               "activity_protocol",
               "responses",
               "mcp",
-              "invocations"
+              "invocations",
+              "invocations_ws"
             ]
           }
         ]
@@ -21009,21 +21235,126 @@
           "skills": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OptimizationAgentSkill"
+              "type": "object",
+              "additionalProperties": {}
             },
             "description": "Optional skill overrides."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Optional tool overrides."
           }
         },
         "description": "Deploy-config blob for a candidate. Suitable for setting OPTIMIZATION_CONFIG on a hosted-agent version."
       },
+      "CandidateFileInfo": {
+        "type": "object",
+        "required": [
+          "path",
+          "type",
+          "sizeBytes"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative path of the file."
+          },
+          "type": {
+            "type": "string",
+            "description": "File type category (e.g. 'config', 'results')."
+          },
+          "sizeBytes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "File size in bytes."
+          }
+        },
+        "description": "File entry in a candidate's blob directory."
+      },
+      "CandidateMetadata": {
+        "type": "object",
+        "required": [
+          "candidateId",
+          "jobId",
+          "candidateName",
+          "status",
+          "hasResults",
+          "createdAt",
+          "updatedAt",
+          "files"
+        ],
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "description": "Server-assigned candidate identifier."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Owning optimization job id."
+          },
+          "candidateName": {
+            "type": "string",
+            "description": "Display name of the candidate."
+          },
+          "status": {
+            "type": "string",
+            "description": "Candidate lifecycle status."
+          },
+          "score": {
+            "type": "number",
+            "format": "double",
+            "description": "Candidate's aggregate score."
+          },
+          "hasResults": {
+            "type": "boolean",
+            "description": "Whether detailed results are available for this candidate."
+          },
+          "createdAt": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Timestamp when the candidate was created, represented in Unix time."
+          },
+          "updatedAt": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Timestamp when the candidate was last updated, represented in Unix time."
+          },
+          "promotion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromotionInfo"
+              }
+            ],
+            "description": "Promotion metadata. Null if not promoted."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CandidateFileInfo"
+            },
+            "description": "Files in the candidate's blob directory."
+          }
+        },
+        "description": "Candidate metadata returned by GET /candidates/{id}."
+      },
       "CandidateResults": {
         "type": "object",
         "required": [
-          "candidate_id",
+          "candidateId",
           "results"
         ],
         "properties": {
-          "candidate_id": {
+          "candidateId": {
             "type": "string",
             "description": "Owning candidate id."
           },
@@ -22925,48 +23256,32 @@
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
       },
-      "DatasetItem": {
+      "DatasetInfo": {
         "type": "object",
         "required": [
-          "name",
-          "query"
+          "taskCount",
+          "isInline"
         ],
         "properties": {
           "name": {
             "type": "string",
-            "description": "Unique-within-the-dataset identifier for this task."
+            "description": "Dataset name when using a registered dataset reference. Null for inline datasets."
           },
-          "query": {
+          "version": {
             "type": "string",
-            "description": "The user query / input for the task."
+            "description": "Dataset version when using a registered dataset reference. Null for inline datasets."
           },
-          "ground_truth": {
-            "type": "string",
-            "description": "Optional ground truth used by reference-based evaluators."
+          "taskCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of tasks/rows in the dataset."
           },
-          "criteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationCriterion"
-            },
-            "description": "Per-task evaluation criteria. Defaults to the job-level evaluators if unset."
-          },
-          "eval_results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvalRunOutputItemResult"
-            },
-            "description": "Pre-computed evaluation results in AOAI-compatible format. When provided together with `response_items`, the baseline run-and-evaluate phase is skipped."
-          },
-          "response_items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.OutputItem"
-            },
-            "description": "Pre-computed agent response output items. Captures the full trajectory (function calls, tool outputs, messages) from a prior agent run."
+          "isInline": {
+            "type": "boolean",
+            "description": "True when the dataset was provided inline in the request body."
           }
         },
-        "description": "A single evaluation task with input query, expected output, and evaluation criteria."
+        "description": "Metadata about the dataset used for optimization, surfaced in the response."
       },
       "DatasetRef": {
         "type": "object",
@@ -24438,24 +24753,6 @@
           }
         ],
         "description": "Insights from the evaluation comparison."
-      },
-      "EvaluationCriterion": {
-        "type": "object",
-        "required": [
-          "name",
-          "instruction"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Criterion name (referenced in evaluation result rows)."
-          },
-          "instruction": {
-            "type": "string",
-            "description": "Natural-language instruction passed to the judge LLM."
-          }
-        },
-        "description": "LLM-as-judge evaluation criterion applied to a single task."
       },
       "EvaluationDataGenerationType": {
         "anyOf": [
@@ -49009,52 +49306,41 @@
       },
       "OptimizationAgentDefinition": {
         "type": "object",
-        "required": [
-          "agent_name"
-        ],
         "properties": {
-          "agent_name": {
+          "agentName": {
             "type": "string",
-            "description": "Registered Foundry agent name. Required — bare-model mode is not supported."
+            "description": "Agent name."
           },
-          "agent_version": {
+          "agentVersion": {
             "type": "string",
-            "description": "Pinned agent version. Defaults to latest if omitted."
+            "description": "Agent version."
           },
           "model": {
             "type": "string",
-            "description": "Model deployment name (e.g., 'gpt-4o'). Optional when agent_name is set — the agent definition provides the model."
+            "description": "Model deployment name."
           },
-          "system_prompt": {
+          "systemPrompt": {
             "type": "string",
-            "description": "System prompt / instructions override. When set, used as the baseline instructions for the agent."
+            "description": "System prompt / instructions."
           },
           "skills": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OptimizationAgentSkill"
+              "type": "object",
+              "additionalProperties": {}
             },
-            "description": "Optional named skills the optimizer may tune. Tool descriptions and parameters."
-          }
-        },
-        "description": "The agent definition being optimized. Identifies the Foundry agent and optional configuration overrides."
-      },
-      "OptimizationAgentSkill": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Skill name (matches the tool name on the agent)."
+            "description": "Agent skills."
           },
-          "description": {
-            "type": "string",
-            "description": "Free-form description used as the seed when tuning skill descriptions."
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Agent tools."
           }
         },
-        "description": "A named skill on the agent that the optimizer may tune."
+        "description": "Agent definition returned in response payloads (includes resolved config)."
       },
       "OptimizationCandidate": {
         "type": "object",
@@ -49062,17 +49348,16 @@
           "name",
           "config",
           "mutations",
-          "rationale",
-          "avg_score",
-          "avg_tokens",
-          "pass_rate",
-          "task_scores",
-          "is_pareto_optimal"
+          "avgScore",
+          "avgTokens",
+          "passRate",
+          "taskScores",
+          "isParetoOptimal"
         ],
         "properties": {
-          "candidate_id": {
+          "candidateId": {
             "type": "string",
-            "description": "Server-assigned candidate identifier. Use with `GET /candidates/{id}` sub-endpoints."
+            "description": "Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints."
           },
           "name": {
             "type": "string",
@@ -49089,67 +49374,49 @@
           "mutations": {
             "type": "object",
             "additionalProperties": {},
-            "description": "What was mutated from the baseline (e.g., {instructions: 'new prompt'})."
+            "description": "What was mutated from the baseline (e.g., {systemPrompt: 'new prompt'})."
           },
-          "rationale": {
-            "type": "string",
-            "description": "Strategy rationale — why this candidate was generated."
-          },
-          "avg_score": {
+          "avgScore": {
             "type": "number",
             "format": "double",
             "description": "Average composite score across all tasks."
           },
-          "avg_tokens": {
+          "avgTokens": {
             "type": "number",
             "format": "double",
             "description": "Average token usage across all tasks."
           },
-          "pass_rate": {
+          "passRate": {
             "type": "number",
             "format": "double",
             "description": "Fraction of tasks that met the pass threshold."
           },
-          "task_scores": {
+          "taskScores": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OptimizationTaskResult"
             },
             "description": "Individual task-level scores."
           },
-          "is_pareto_optimal": {
+          "isParetoOptimal": {
             "type": "boolean",
             "description": "Whether this candidate is on the Pareto frontier (score vs cost)."
           },
-          "sample_avg_score": {
-            "type": "number",
-            "format": "double",
-            "description": "Average score from sampled evaluation (null if full dataset was used)."
-          },
-          "sample_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of tasks in the sample (null if full dataset was used)."
-          },
-          "evaluation_type": {
-            "type": "string",
-            "description": "'sample' if scored on a subset, 'full' if re-evaluated on the full dataset."
-          },
-          "strategy": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OptimizationStrategy"
-              }
-            ],
-            "description": "Identifies the strategy that produced this candidate."
-          },
-          "eval_id": {
+          "evalId": {
             "type": "string",
             "description": "Foundry evaluation identifier used to score this candidate."
           },
-          "eval_run_id": {
+          "evalRunId": {
             "type": "string",
             "description": "Foundry evaluation run identifier for this candidate's scoring run."
+          },
+          "promotion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PromotionInfo"
+              }
+            ],
+            "description": "Promotion metadata. Null if the candidate has not been promoted."
           }
         },
         "description": "Aggregated evaluation result for a single candidate agent configuration across all tasks."
@@ -49159,29 +49426,12 @@
         "required": [
           "id",
           "status",
-          "created_at"
+          "createdAt"
         ],
         "properties": {
           "id": {
             "type": "string",
             "description": "Server-assigned unique identifier.",
-            "readOnly": true
-          },
-          "inputs": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OptimizationJobInputs"
-              }
-            ],
-            "description": "Caller-supplied inputs."
-          },
-          "result": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OptimizationJobResult"
-              }
-            ],
-            "description": "Result produced on success.",
             "readOnly": true
           },
           "status": {
@@ -49202,7 +49452,24 @@
             "description": "Error details — populated only on failure.",
             "readOnly": true
           },
-          "created_at": {
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimizationJobResult"
+              }
+            ],
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimizationJobInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "createdAt": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/FoundryTimestamp"
@@ -49211,7 +49478,7 @@
             "description": "The timestamp when the job was created, represented in Unix time.",
             "readOnly": true
           },
-          "updated_at": {
+          "updatedAt": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/FoundryTimestamp"
@@ -49228,40 +49495,43 @@
             ],
             "description": "Progress while in flight. Absent in terminal states.",
             "readOnly": true
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetInfo"
+              }
+            ],
+            "description": "Metadata about the dataset used for this optimization job.",
+            "readOnly": true
           }
         },
-        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills) to maximize evaluation scores. On success, the result contains scored candidates."
+        "description": "Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates."
       },
       "OptimizationJobInputs": {
         "type": "object",
         "required": [
-          "agent"
+          "agent",
+          "trainDatasetReference"
         ],
         "properties": {
           "agent": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/OptimizationAgentDefinition"
+                "$ref": "#/components/schemas/AgentIdentifier"
               }
             ],
             "description": "The agent (and pinned version) being optimized."
           },
-          "dataset": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DatasetItem"
-            },
-            "description": "Inline evaluation dataset. Mutually exclusive with `train_dataset_reference`."
-          },
-          "train_dataset_reference": {
+          "trainDatasetReference": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/DatasetRef"
               }
             ],
-            "description": "Reference to a registered training dataset. Mutually exclusive with `dataset`."
+            "description": "Reference to a registered training dataset (required)."
           },
-          "validation_dataset_reference": {
+          "validationDatasetReference": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/DatasetRef"
@@ -49274,14 +49544,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Job-level evaluators (referenced by `name`). Per-task `criteria` may override. Default: ['task_adherence']."
-          },
-          "criteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationCriterion"
-            },
-            "description": "Job-level evaluation criteria. Applied to all tasks unless overridden by per-task `criteria`."
+            "description": "Job-level evaluators (referenced by name). Per-task criteria may override. Default: ['task_adherence']."
           },
           "options": {
             "allOf": [
@@ -49297,49 +49560,28 @@
       "OptimizationJobProgress": {
         "type": "object",
         "required": [
-          "current_strategy",
-          "current_iteration",
-          "tasks_completed",
-          "tasks_total",
-          "best_score",
-          "elapsed_seconds"
+          "currentIteration",
+          "bestScore",
+          "elapsedSeconds"
         ],
         "properties": {
-          "current_strategy": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OptimizationStrategy"
-              }
-            ],
-            "description": "Strategy currently being explored."
-          },
-          "current_iteration": {
+          "currentIteration": {
             "type": "integer",
             "format": "int32",
             "description": "1-based current iteration index."
           },
-          "tasks_completed": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Tasks evaluated so far this iteration."
-          },
-          "tasks_total": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Total tasks scheduled this iteration."
-          },
-          "best_score": {
+          "bestScore": {
             "type": "number",
             "format": "double",
             "description": "Best score observed so far across all candidates."
           },
-          "elapsed_seconds": {
+          "elapsedSeconds": {
             "type": "number",
             "format": "double",
-            "description": "Wall-clock time elapsed since the job began executing."
+            "description": "Wall-clock time elapsed in seconds since the job began executing."
           }
         },
-        "description": "In-flight progress; only populated while status is `queued` or `in_progress`."
+        "description": "In-flight progress; only populated while status is queued or in_progress."
       },
       "OptimizationJobResult": {
         "type": "object",
@@ -49367,21 +49609,6 @@
             },
             "description": "All evaluated candidates including baseline."
           },
-          "pareto_frontier": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OptimizationCandidate"
-            },
-            "description": "Candidates on the Pareto frontier (maximize score, minimize cost)."
-          },
-          "validation_score": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OptimizationCandidate"
-              }
-            ],
-            "description": "Score of the best candidate on the held-out validation dataset. Null when no validation dataset was provided."
-          },
           "options": {
             "allOf": [
               {
@@ -49390,151 +49617,65 @@
             ],
             "description": "The options used for this optimization run."
           },
-          "sample_size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of tasks sampled during optimization iterations (null if sampling was not used)."
-          },
           "warnings": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "Non-fatal warnings from the optimization run (e.g., strategy failures that were skipped)."
+            "description": "Non-fatal warnings from the optimization run (e.g., target attribute failures that were skipped)."
           },
-          "all_strategies_failed": {
+          "allTargetAttributesFailed": {
             "type": "boolean",
-            "description": "True when all optimization strategies failed — only the baseline was evaluated."
+            "description": "True when all target attributes failed — only the baseline was evaluated."
           }
         },
-        "description": "Terminal-state result body. Populated when `status` is `succeeded` or `failed`."
-      },
-      "OptimizationMode": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "optimize"
-            ]
-          }
-        ],
-        "description": "Run mode for an optimization job."
+        "description": "Terminal-state result body. Populated when status is succeeded or failed."
       },
       "OptimizationOptions": {
         "type": "object",
         "properties": {
-          "strategies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OptimizationStrategy"
-            },
-            "description": "Strategies to apply this run. Default: ['instruction'].",
-            "default": [
-              "instruction"
-            ]
-          },
-          "budget": {
+          "maxIterations": {
             "type": "integer",
             "format": "int32",
-            "description": "Total candidate generation budget (number of candidates explored). Default: 10.",
-            "default": 10
-          },
-          "max_iterations": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum optimization iterations per strategy. Default: 5.",
+            "description": "Maximum optimization iterations per strategy. Must be >= 1. Default: 5.",
             "default": 5
           },
-          "tasks_per_iteration": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Tasks sampled per iteration (mutation step input). Default: service-decided (auto-computed)."
+          "optimizationConfig": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Per-target-attribute configuration overrides. Contains skills, tools, systemPrompt for the agent, plus model space for model optimization."
           },
-          "max_reflection_tasks": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum tasks fed into the reflective-mutation LLM per iteration. Default: 5.",
-            "default": 5
+          "evalModel": {
+            "type": "string",
+            "description": "Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o')."
           },
-          "min_improvement": {
-            "type": "number",
-            "format": "double",
-            "description": "Minimum score improvement between iterations to continue (plateau detection). Default: 0.005.",
-            "default": 0.005
+          "optimizationModel": {
+            "type": "string",
+            "description": "Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set."
           },
-          "pass_threshold": {
-            "type": "number",
-            "format": "double",
-            "description": "Composite score threshold for a task to be considered passing. Default: 0.5.",
-            "default": 0.5
-          },
-          "improvement_threshold": {
-            "type": "number",
-            "format": "double",
-            "description": "Target average score at which optimization stops early (quality ceiling). Default: 0.95.",
-            "default": 0.95
-          },
-          "mode": {
+          "evaluationLevel": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/OptimizationMode"
+                "$ref": "#/components/schemas/EvaluationLevel"
               }
             ],
-            "description": "Run mode."
-          },
-          "eval_model": {
-            "type": "string",
-            "description": "Foundry deployment name to use as the LLM-as-judge evaluation model. Required."
-          },
-          "reflection_model": {
-            "type": "string",
-            "description": "Optional model deployment for strategy reflection (instruction rewriting, skill generation). Falls back to `eval_model` if unset."
-          },
-          "task_timeout_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Per-task timeout for agent execution. Default: 300 seconds (5 minutes).",
-            "default": 300
-          },
-          "keep_versions": {
-            "type": "boolean",
-            "description": "If true, retain temporary candidate-evaluation agent versions for inspection. Default: false.",
-            "default": false
+            "description": "Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring."
           }
         },
         "description": "Tuning knobs and run-mode for an optimization job."
       },
-      "OptimizationStrategy": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "instruction",
-              "model",
-              "skill"
-            ]
-          }
-        ],
-        "description": "Optimization strategy dimension."
-      },
       "OptimizationTaskResult": {
         "type": "object",
         "required": [
-          "task_name",
+          "taskName",
           "scores",
-          "composite_score",
+          "compositeScore",
           "tokens",
-          "duration_seconds",
+          "durationSeconds",
           "passed"
         ],
         "properties": {
-          "task_name": {
+          "taskName": {
             "type": "string",
             "description": "Task name (from the dataset)."
           },
@@ -49550,7 +49691,7 @@
             },
             "description": "Per-evaluator scores keyed by evaluator name."
           },
-          "composite_score": {
+          "compositeScore": {
             "type": "number",
             "format": "double",
             "description": "Composite score combining all evaluator scores."
@@ -49560,7 +49701,7 @@
             "format": "int32",
             "description": "Total tokens consumed during the agent run for this task."
           },
-          "duration_seconds": {
+          "durationSeconds": {
             "type": "number",
             "format": "double",
             "description": "Wall-clock seconds for this task's agent execution."
@@ -49569,7 +49710,7 @@
             "type": "boolean",
             "description": "Whether the task met the pass threshold."
           },
-          "error_message": {
+          "errorMessage": {
             "type": "string",
             "description": "Error message if the task failed during execution."
           },
@@ -49584,7 +49725,7 @@
             "type": "string",
             "description": "Raw agent response text."
           },
-          "run_id": {
+          "runId": {
             "type": "string",
             "description": "Identifier of the agent run that produced this result."
           }
@@ -50064,6 +50205,88 @@
             "MemoryStores=V1Preview"
           ]
         }
+      },
+      "PromoteCandidateRequest": {
+        "type": "object",
+        "required": [
+          "agentName",
+          "agentVersion"
+        ],
+        "properties": {
+          "agentName": {
+            "type": "string",
+            "description": "Name of the Foundry agent to promote to."
+          },
+          "agentVersion": {
+            "type": "string",
+            "description": "Version of the Foundry agent to promote to."
+          }
+        },
+        "description": "Request body for promoting a candidate to a Foundry agent version."
+      },
+      "PromoteCandidateResponse": {
+        "type": "object",
+        "required": [
+          "candidateId",
+          "status",
+          "promotedAt",
+          "agentName",
+          "agentVersion"
+        ],
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "description": "The promoted candidate id."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status after promotion."
+          },
+          "promotedAt": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Timestamp when promotion occurred, represented in Unix time."
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Name of the Foundry agent promoted to."
+          },
+          "agentVersion": {
+            "type": "string",
+            "description": "Version of the Foundry agent promoted to."
+          }
+        },
+        "description": "Response after successfully promoting a candidate."
+      },
+      "PromotionInfo": {
+        "type": "object",
+        "required": [
+          "promotedAt",
+          "agentName",
+          "agentVersion"
+        ],
+        "properties": {
+          "promotedAt": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "Timestamp when promotion occurred, represented in Unix time."
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Name of the Foundry agent this candidate was promoted to."
+          },
+          "agentVersion": {
+            "type": "string",
+            "description": "Version of the Foundry agent this candidate was promoted to."
+          }
+        },
+        "description": "Promotion metadata recorded when a candidate is deployed to a Foundry agent."
       },
       "PromptAgentDefinition": {
         "type": "object",
