@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/auth-required" "No routes defined, so no auth to define."
-@versioned(VoiceLive.Versions)
 @service(#{ title: "VoiceLive" })
 @versioned(Versions)
 namespace VoiceLive;
@@ -22,4 +21,7 @@ enum Versions {
 
   /** Version 2026-04-10. */
   v2026_04_10: "2026-04-10",
+
+  /** Version 2026-06-01-preview. */
+  v2026_06_01_preview: "2026-06-01-preview",
 }
