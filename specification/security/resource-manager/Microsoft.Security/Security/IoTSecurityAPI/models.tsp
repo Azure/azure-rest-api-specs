@@ -331,15 +331,15 @@ model CustomAlertRule {
   description?: string;
 
   /**
-   * Status of the custom alert.
-   */
-  isEnabled: boolean;
-
-  /**
    * The type of the custom alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleType: string;
+
+  /**
+   * Status of the custom alert.
+   */
+  isEnabled: boolean;
 }
 
 /**
