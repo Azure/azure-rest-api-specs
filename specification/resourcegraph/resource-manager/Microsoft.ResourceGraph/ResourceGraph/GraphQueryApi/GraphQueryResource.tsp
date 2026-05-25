@@ -83,12 +83,15 @@ interface GraphQueryResources {
 }
 
 @@doc(GraphQueryResource.name, "The name of the Graph Query resource.");
-@@doc(GraphQueryResource.properties,
+@@doc(
+  GraphQueryResource.properties,
   "Metadata describing a graph query for an Azure resource."
 );
-@@doc(GraphQueryResources.createOrUpdate::parameters.resource,
+@@doc(
+  GraphQueryResources.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new graph query."
 );
-@@doc(GraphQueryResources.update::parameters.properties,
+@@doc(
+  GraphQueryResources.update::parameters.properties,
   "Properties that need to be specified to create a new graph query."
 );

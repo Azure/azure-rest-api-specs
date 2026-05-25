@@ -41,11 +41,14 @@ op ArmResourceActionAsyncWithLocation<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   @bodyRoot body?: Request,
-): ArmResponse<Response> | ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmLroLocationHeader<FinalResult = Response> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ErrorResponse;
+):
+  | ArmResponse<Response>
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = Response> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ErrorResponse;
 
 /**
  * A long-running resource action that returns 202 No Content on the initial POST,
@@ -81,11 +84,13 @@ op ArmResourceActionNoContentAsyncWithLocationResult<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   @bodyRoot body?: Request,
-): ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmLroLocationHeader<FinalResult = FinalResult> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ErrorResponse;
+):
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = FinalResult> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ErrorResponse;
 
 /**
  * A long-running resource action that returns no body on completion (204 No Content).
@@ -118,11 +123,14 @@ op ArmResourceActionNoBodyAsyncWithLocation<
 >(
   ...ResourceInstanceParameters<Resource, BaseParameters>,
   @bodyRoot body?: Request,
-): ArmAcceptedLroResponse<
-  "Resource operation accepted.",
-  ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-> | {
-  @doc("The operation completed successfully with no content.")
-  @statusCode
-  _: 204;
-} | ErrorResponse;
+):
+  | ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  | {
+      @doc("The operation completed successfully with no content.")
+      @statusCode
+      _: 204;
+    }
+  | ErrorResponse;

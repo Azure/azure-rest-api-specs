@@ -68,6 +68,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<ArmResponse<OperationsListResult>> {}
 @@summary(Operations.list, "List available operations.");
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List the available operations supported by the Microsoft.EventGrid resource provider."
 );

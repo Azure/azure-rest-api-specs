@@ -39,6 +39,7 @@ interface VmwareHosts {
 }
 
 @@doc(VmwareHost.name, " Hosts name");
-@@doc(VmwareHost.properties,
+@@doc(
+  VmwareHost.properties,
   "The resource-specific properties for this resource."
 );

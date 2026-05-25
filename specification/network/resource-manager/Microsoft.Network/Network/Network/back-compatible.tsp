@@ -9,7 +9,8 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(ApplicationGatewayIPConfiguration.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ApplicationGatewayAuthenticationCertificate.properties
+@@Legacy.flattenProperty(
+  ApplicationGatewayAuthenticationCertificate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -100,7 +101,8 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(ApplicationGatewayPrivateLinkConfiguration.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ApplicationGatewayPrivateLinkIpConfiguration.properties
+@@Legacy.flattenProperty(
+  ApplicationGatewayPrivateLinkIpConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -122,10 +124,12 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(ApplicationGatewaySslPredefinedPolicy.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ApplicationGatewayWafDynamicManifestPropertiesResult.defaultRuleSet
+@@Legacy.flattenProperty(
+  ApplicationGatewayWafDynamicManifestPropertiesResult.defaultRuleSet
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ApplicationGatewayWafDynamicManifestPropertiesResult.availableRuleSets
+@@Legacy.flattenProperty(
+  ApplicationGatewayWafDynamicManifestPropertiesResult.availableRuleSets
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -162,7 +166,8 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(InboundNatPool.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(LoadBalancerVipSwapRequestFrontendIPConfiguration.properties
+@@Legacy.flattenProperty(
+  LoadBalancerVipSwapRequestFrontendIPConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -282,19 +287,24 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PatchRouteFilter.properties);
 
-@@clientName(ApplicationGateways.createOrUpdate::parameters.resource,
+@@clientName(
+  ApplicationGateways.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ApplicationGateways.updateTags::parameters.properties,
+@@clientName(
+  ApplicationGateways.updateTags::parameters.properties,
   "parameters"
 );
-@@clientName(ApplicationGateways.backendHealthOnDemand::parameters.body,
+@@clientName(
+  ApplicationGateways.backendHealthOnDemand::parameters.body,
   "probeRequest"
 );
-@@clientLocation(ApplicationGateways.applicationGatewayPrivateLinkResourcesList,
+@@clientLocation(
+  ApplicationGateways.applicationGatewayPrivateLinkResourcesList,
   "ApplicationGatewayPrivateLinkResources"
 );
-@@clientName(ApplicationGateways.applicationGatewayPrivateLinkResourcesList,
+@@clientName(
+  ApplicationGateways.applicationGatewayPrivateLinkResourcesList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -303,147 +313,181 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkInterfaceIPConfiguration.properties);
 
-@@clientName(VirtualNetworkTaps.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkTaps.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(VirtualNetworkTaps.updateTags::parameters.properties,
+@@clientName(
+  VirtualNetworkTaps.updateTags::parameters.properties,
   "tapParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkTap.properties);
 
-@@clientName(NetworkInterfaceTapConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkInterfaceTapConfigurations.createOrUpdate::parameters.resource,
   "tapConfigurationParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkInterfaceTapConfiguration.properties);
 
-@@clientLocation(FrontendIPConfigurations.get,
+@@clientLocation(
+  FrontendIPConfigurations.get,
   "LoadBalancerFrontendIPConfigurations"
 );
-@@clientLocation(FrontendIPConfigurations.list,
+@@clientLocation(
+  FrontendIPConfigurations.list,
   "LoadBalancerFrontendIPConfigurations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FrontendIPConfiguration.properties);
 
 @@clientName(Subnets.createOrUpdate::parameters.resource, "subnetParameters");
-@@clientName(Subnets.prepareNetworkPolicies::parameters.body,
+@@clientName(
+  Subnets.prepareNetworkPolicies::parameters.body,
   "prepareNetworkPoliciesRequestParameters"
 );
-@@clientName(Subnets.unprepareNetworkPolicies::parameters.body,
+@@clientName(
+  Subnets.unprepareNetworkPolicies::parameters.body,
   "unprepareNetworkPoliciesRequestParameters"
 );
-@@clientLocation(Subnets.resourceNavigationLinksList,
+@@clientLocation(
+  Subnets.resourceNavigationLinksList,
   "ResourceNavigationLinks"
 );
 @@clientName(Subnets.resourceNavigationLinksList, "List");
-@@clientLocation(Subnets.serviceAssociationLinksList,
+@@clientLocation(
+  Subnets.serviceAssociationLinksList,
   "ServiceAssociationLinks"
 );
 @@clientName(Subnets.serviceAssociationLinksList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Subnet.properties);
 
-@@clientName(NetworkSecurityGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkSecurityGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkSecurityGroups.updateTags::parameters.properties,
+@@clientName(
+  NetworkSecurityGroups.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkSecurityGroup.properties);
 
-@@clientName(SecurityRules.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityRules.createOrUpdate::parameters.resource,
   "securityRuleParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SecurityRule.properties);
 
-@@clientName(ApplicationSecurityGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  ApplicationSecurityGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ApplicationSecurityGroups.updateTags::parameters.properties,
+@@clientName(
+  ApplicationSecurityGroups.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationSecurityGroup.properties);
 
 @@clientLocation(NetworkInterfaceOperationGroup.get, NetworkInterfaces);
-@@clientLocation(NetworkInterfaceOperationGroup.createOrUpdate,
+@@clientLocation(
+  NetworkInterfaceOperationGroup.createOrUpdate,
   NetworkInterfaces
 );
-@@clientName(NetworkInterfaceOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkInterfaceOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(NetworkInterfaceOperationGroup.updateTags, NetworkInterfaces);
-@@clientName(NetworkInterfaceOperationGroup.updateTags::parameters.properties,
+@@clientName(
+  NetworkInterfaceOperationGroup.updateTags::parameters.properties,
   "parameters"
 );
 @@clientLocation(NetworkInterfaceOperationGroup.delete, NetworkInterfaces);
 @@clientLocation(NetworkInterfaceOperationGroup.list, NetworkInterfaces);
 @@clientLocation(NetworkInterfaceOperationGroup.listAll, NetworkInterfaces);
-@@clientLocation(NetworkInterfaceOperationGroup.getEffectiveRouteTable,
+@@clientLocation(
+  NetworkInterfaceOperationGroup.getEffectiveRouteTable,
   NetworkInterfaces
 );
-@@clientLocation(NetworkInterfaceOperationGroup.listEffectiveNetworkSecurityGroups,
+@@clientLocation(
+  NetworkInterfaceOperationGroup.listEffectiveNetworkSecurityGroups,
   NetworkInterfaces
 );
-@@clientLocation(NetworkInterfaceOperationGroup.networkInterfaceLoadBalancersList,
+@@clientLocation(
+  NetworkInterfaceOperationGroup.networkInterfaceLoadBalancersList,
   "NetworkInterfaceLoadBalancers"
 );
-@@clientName(NetworkInterfaceOperationGroup.networkInterfaceLoadBalancersList,
+@@clientName(
+  NetworkInterfaceOperationGroup.networkInterfaceLoadBalancersList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkInterface.properties);
 
-@@clientName(PrivateEndpoints.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpoints.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(PrivateEndpoints.privateDnsZoneGroupsDelete,
+@@clientLocation(
+  PrivateEndpoints.privateDnsZoneGroupsDelete,
   "PrivateDnsZoneGroups"
 );
 @@clientName(PrivateEndpoints.privateDnsZoneGroupsDelete, "Delete");
-@@clientLocation(PrivateEndpoints.privateDnsZoneGroupsGet,
+@@clientLocation(
+  PrivateEndpoints.privateDnsZoneGroupsGet,
   "PrivateDnsZoneGroups"
 );
 @@clientName(PrivateEndpoints.privateDnsZoneGroupsGet, "Get");
-@@clientLocation(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
+@@clientLocation(
+  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
   "PrivateDnsZoneGroups"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
+@@clientName(
+  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+@@clientName(
+  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
   "parameters"
 );
-@@clientLocation(PrivateEndpoints.privateDnsZoneGroupsList,
+@@clientLocation(
+  PrivateEndpoints.privateDnsZoneGroupsList,
   "PrivateDnsZoneGroups"
 );
 @@clientName(PrivateEndpoints.privateDnsZoneGroupsList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpoint.properties);
 
-@@clientName(PrivateLinkServices.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateLinkServices.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkService.properties);
 
-@@clientLocation(PrivateEndpointConnections.getPrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.getPrivateEndpointConnection,
   PrivateLinkServices
 );
-@@clientLocation(PrivateEndpointConnections.updatePrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.updatePrivateEndpointConnection,
   PrivateLinkServices
 );
-@@clientName(PrivateEndpointConnections.updatePrivateEndpointConnection::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.updatePrivateEndpointConnection::parameters.resource,
   "parameters"
 );
-@@clientLocation(PrivateEndpointConnections.deletePrivateEndpointConnection,
+@@clientLocation(
+  PrivateEndpointConnections.deletePrivateEndpointConnection,
   PrivateLinkServices
 );
-@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+@@clientLocation(
+  PrivateEndpointConnections.listPrivateEndpointConnections,
   PrivateLinkServices
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -463,48 +507,59 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Route.properties);
 
-@@clientName(ServiceEndpointPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceEndpointPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ServiceEndpointPolicies.updateTags::parameters.properties,
+@@clientName(
+  ServiceEndpointPolicies.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServiceEndpointPolicy.properties);
 
-@@clientName(ServiceEndpointPolicyDefinitions.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceEndpointPolicyDefinitions.createOrUpdate::parameters.resource,
   "ServiceEndpointPolicyDefinitions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServiceEndpointPolicyDefinition.properties);
 
 @@clientLocation(PublicIPAddressOperationGroup.get, PublicIPAddresses);
-@@clientLocation(PublicIPAddressOperationGroup.createOrUpdate,
+@@clientLocation(
+  PublicIPAddressOperationGroup.createOrUpdate,
   PublicIPAddresses
 );
-@@clientName(PublicIPAddressOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  PublicIPAddressOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PublicIPAddressOperationGroup.updateTags, PublicIPAddresses);
-@@clientName(PublicIPAddressOperationGroup.updateTags::parameters.properties,
+@@clientName(
+  PublicIPAddressOperationGroup.updateTags::parameters.properties,
   "parameters"
 );
 @@clientLocation(PublicIPAddressOperationGroup.delete, PublicIPAddresses);
 @@clientLocation(PublicIPAddressOperationGroup.list, PublicIPAddresses);
 @@clientLocation(PublicIPAddressOperationGroup.listAll, PublicIPAddresses);
-@@clientLocation(PublicIPAddressOperationGroup.ddosProtectionStatus,
+@@clientLocation(
+  PublicIPAddressOperationGroup.ddosProtectionStatus,
   PublicIPAddresses
 );
-@@clientLocation(PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress,
+@@clientLocation(
+  PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress,
   PublicIPAddresses
 );
-@@clientName(PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress::parameters.body,
+@@clientName(
+  PublicIPAddressOperationGroup.reserveCloudServicePublicIpAddress::parameters.body,
   "parameters"
 );
-@@clientLocation(PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp,
+@@clientLocation(
+  PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp,
   PublicIPAddresses
 );
-@@clientName(PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
+@@clientName(
+  PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -516,55 +571,68 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(NatGateway.properties);
 
 @@clientLocation(BackendAddressPools.get, "LoadBalancerBackendAddressPools");
-@@clientLocation(BackendAddressPools.createOrUpdate,
+@@clientLocation(
+  BackendAddressPools.createOrUpdate,
   "LoadBalancerBackendAddressPools"
 );
-@@clientName(BackendAddressPools.createOrUpdate::parameters.resource,
+@@clientName(
+  BackendAddressPools.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(BackendAddressPools.delete, "LoadBalancerBackendAddressPools");
 @@clientLocation(BackendAddressPools.list, "LoadBalancerBackendAddressPools");
-@@clientLocation(BackendAddressPools.listInboundNatRulePortMappings,
+@@clientLocation(
+  BackendAddressPools.listInboundNatRulePortMappings,
   LoadBalancers
 );
-@@clientName(BackendAddressPools.listInboundNatRulePortMappings::parameters.body,
+@@clientName(
+  BackendAddressPools.listInboundNatRulePortMappings::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BackendAddressPool.properties);
 
-@@clientName(InboundNatRules.createOrUpdate::parameters.resource,
+@@clientName(
+  InboundNatRules.createOrUpdate::parameters.resource,
   "inboundNatRuleParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(InboundNatRule.properties);
 
-@@clientName(ApplicationGatewayPrivateEndpointConnections.update::parameters.resource,
+@@clientName(
+  ApplicationGatewayPrivateEndpointConnections.update::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ApplicationGatewayPrivateEndpointConnection.properties
+@@Legacy.flattenProperty(
+  ApplicationGatewayPrivateEndpointConnection.properties
 );
 
-@@clientLocation(ApplicationGatewayAvailableSslOptionsOperationGroup.listAvailableSslOptions,
+@@clientLocation(
+  ApplicationGatewayAvailableSslOptionsOperationGroup.listAvailableSslOptions,
   ApplicationGateways
 );
-@@clientLocation(ApplicationGatewayAvailableSslOptionsOperationGroup.listAvailableSslPredefinedPolicies,
+@@clientLocation(
+  ApplicationGatewayAvailableSslOptionsOperationGroup.listAvailableSslPredefinedPolicies,
   ApplicationGateways
 );
-@@clientLocation(ApplicationGatewayAvailableSslOptionsOperationGroup.getSslPredefinedPolicy,
+@@clientLocation(
+  ApplicationGatewayAvailableSslOptionsOperationGroup.getSslPredefinedPolicy,
   ApplicationGateways
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationGatewayAvailableSslOptions.properties);
 
-@@clientLocation(ApplicationGatewayWafDynamicManifestResults.get,
+@@clientLocation(
+  ApplicationGatewayWafDynamicManifestResults.get,
   "ApplicationGatewayWafDynamicManifestsDefault"
 );
-@@clientLocation(ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
+@@clientLocation(
+  ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
   "ApplicationGatewayWafDynamicManifests"
 );
-@@clientName(ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
+@@clientName(
+  ApplicationGatewayWafDynamicManifestResults.applicationGatewayWafDynamicManifestsGet,
   "Get"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -573,7 +641,8 @@ using Microsoft.Network;
 @@clientName(AzureFirewalls.createOrUpdate::parameters.resource, "parameters");
 @@clientName(AzureFirewalls.updateTags::parameters.properties, "parameters");
 @@clientName(AzureFirewalls.packetCapture::parameters.body, "parameters");
-@@clientName(AzureFirewalls.packetCaptureOperation::parameters.body,
+@@clientName(
+  AzureFirewalls.packetCaptureOperation::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -586,40 +655,50 @@ using Microsoft.Network;
 
 @@clientName(BastionHosts.createOrUpdate::parameters.resource, "parameters");
 @@clientName(BastionHosts.updateTags::parameters.properties, "parameters");
-@@clientLocation(BastionHosts.putBastionShareableLink,
+@@clientLocation(
+  BastionHosts.putBastionShareableLink,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(BastionHosts.putBastionShareableLink::parameters.body,
+@@clientName(
+  BastionHosts.putBastionShareableLink::parameters.body,
   "bslRequest"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLink,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLink,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(BastionHosts.deleteBastionShareableLink::parameters.body,
+@@clientName(
+  BastionHosts.deleteBastionShareableLink::parameters.body,
   "bslRequest"
 );
-@@clientLocation(BastionHosts.deleteBastionShareableLinkByToken,
+@@clientLocation(
+  BastionHosts.deleteBastionShareableLinkByToken,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
+@@clientName(
+  BastionHosts.deleteBastionShareableLinkByToken::parameters.body,
   "bslTokenRequest"
 );
-@@clientLocation(BastionHosts.getBastionShareableLink,
+@@clientLocation(
+  BastionHosts.getBastionShareableLink,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(BastionHosts.getBastionShareableLink::parameters.body,
+@@clientName(
+  BastionHosts.getBastionShareableLink::parameters.body,
   "bslRequest"
 );
 @@clientLocation(BastionHosts.getActiveSessions, Microsoft.Network, "autorest");
-@@clientLocation(BastionHosts.disconnectActiveSessions,
+@@clientLocation(
+  BastionHosts.disconnectActiveSessions,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(BastionHosts.disconnectActiveSessions::parameters.body,
+@@clientName(
+  BastionHosts.disconnectActiveSessions::parameters.body,
   "sessionIds"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -632,7 +711,8 @@ using Microsoft.Network;
 
 @@clientLocation(CustomIpPrefixes.get, "CustomIPPrefixes", "!java");
 @@clientLocation(CustomIpPrefixes.createOrUpdate, "CustomIPPrefixes", "!java");
-@@clientName(CustomIpPrefixes.createOrUpdate::parameters.resource,
+@@clientName(
+  CustomIpPrefixes.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(CustomIpPrefixes.updateTags, "CustomIPPrefixes", "!java");
@@ -643,19 +723,23 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CustomIpPrefix.properties);
 
-@@clientName(DdosCustomPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  DdosCustomPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(DdosCustomPolicies.updateTags::parameters.properties,
+@@clientName(
+  DdosCustomPolicies.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DdosCustomPolicy.properties);
 
-@@clientName(DdosProtectionPlans.createOrUpdate::parameters.resource,
+@@clientName(
+  DdosProtectionPlans.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(DdosProtectionPlans.updateTags::parameters.properties,
+@@clientName(
+  DdosProtectionPlans.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -663,7 +747,8 @@ using Microsoft.Network;
 
 @@clientLocation(DscpConfigurations.get, "DscpConfiguration");
 @@clientLocation(DscpConfigurations.createOrUpdate, "DscpConfiguration");
-@@clientName(DscpConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  DscpConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DscpConfigurations.delete, "DscpConfiguration");
@@ -672,31 +757,38 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DscpConfiguration.properties);
 
-@@clientName(ExpressRouteCircuitAuthorizations.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRouteCircuitAuthorizations.createOrUpdate::parameters.resource,
   "authorizationParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteCircuitAuthorization.properties);
 
-@@clientName(ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
   "peeringParameters"
 );
-@@clientLocation(ExpressRouteCircuitPeerings.listArpTable,
+@@clientLocation(
+  ExpressRouteCircuitPeerings.listArpTable,
   ExpressRouteCircuits
 );
-@@clientLocation(ExpressRouteCircuitPeerings.listRoutesTable,
+@@clientLocation(
+  ExpressRouteCircuitPeerings.listRoutesTable,
   ExpressRouteCircuits
 );
-@@clientLocation(ExpressRouteCircuitPeerings.listRoutesTableSummary,
+@@clientLocation(
+  ExpressRouteCircuitPeerings.listRoutesTableSummary,
   ExpressRouteCircuits
 );
-@@clientLocation(ExpressRouteCircuitPeerings.getPeeringStats,
+@@clientLocation(
+  ExpressRouteCircuitPeerings.getPeeringStats,
   ExpressRouteCircuits
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteCircuitPeering.properties);
 
-@@clientName(ExpressRouteCircuitConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRouteCircuitConnections.createOrUpdate::parameters.resource,
   "expressRouteCircuitConnectionParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -705,43 +797,55 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PeerExpressRouteCircuitConnection.properties);
 
-@@clientName(ExpressRouteCircuits.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRouteCircuits.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ExpressRouteCircuits.updateTags::parameters.properties,
+@@clientName(
+  ExpressRouteCircuits.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteCircuit.properties);
 
-@@clientName(ExpressRouteCrossConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRouteCrossConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ExpressRouteCrossConnections.updateTags::parameters.properties,
+@@clientName(
+  ExpressRouteCrossConnections.updateTags::parameters.properties,
   "crossConnectionParameters"
 );
-@@clientLocation(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsList,
+@@clientLocation(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsList,
   "ExpressRouteCrossConnectionPeerings"
 );
-@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsList,
+@@clientName(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsList,
   "List"
 );
-@@clientLocation(ExpressRouteCrossConnections.delete,
+@@clientLocation(
+  ExpressRouteCrossConnections.delete,
   "ExpressRouteCrossConnectionPeerings"
 );
-@@clientLocation(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsGet,
+@@clientLocation(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsGet,
   "ExpressRouteCrossConnectionPeerings"
 );
-@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsGet,
+@@clientName(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsGet,
   "Get"
 );
-@@clientLocation(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate,
+@@clientLocation(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate,
   "ExpressRouteCrossConnectionPeerings"
 );
-@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate,
+@@clientName(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+@@clientName(
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "peeringParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -750,7 +854,8 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRoutePortsLocation.properties);
 
-@@clientName(ExpressRoutePorts.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRoutePorts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ExpressRoutePorts.updateTags::parameters.properties, "parameters");
@@ -762,66 +867,80 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRoutePort.properties);
 
-@@clientName(ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
   "authorizationParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRoutePortAuthorization.properties);
 
-@@clientLocation(ExpressRouteProviderPorts.expressRouteProviderPort,
+@@clientLocation(
+  ExpressRouteProviderPorts.expressRouteProviderPort,
   Microsoft.Network,
   "autorest"
 );
-@@clientLocation(ExpressRouteProviderPorts.list,
+@@clientLocation(
+  ExpressRouteProviderPorts.list,
   "ExpressRouteProviderPortsLocation"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteProviderPort.properties);
 
-@@clientName(FirewallPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  FirewallPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(FirewallPolicies.updateTags::parameters.properties, "parameters");
-@@clientLocation(FirewallPolicies.firewallPolicyIdpsSignaturesList,
+@@clientLocation(
+  FirewallPolicies.firewallPolicyIdpsSignaturesList,
   "FirewallPolicyIdpsSignatures"
 );
 @@clientName(FirewallPolicies.firewallPolicyIdpsSignaturesList, "List");
-@@clientName(FirewallPolicies.firewallPolicyIdpsSignaturesList::parameters.body,
+@@clientName(
+  FirewallPolicies.firewallPolicyIdpsSignaturesList::parameters.body,
   "parameters"
 );
-@@clientLocation(FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList,
+@@clientLocation(
+  FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList,
   "FirewallPolicyIdpsSignaturesFilterValues"
 );
-@@clientName(FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList,
+@@clientName(
+  FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList,
   "List"
 );
-@@clientName(FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList::parameters.body,
+@@clientName(
+  FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList::parameters.body,
   "parameters"
 );
 @@clientLocation(FirewallPolicies.deploy, "FirewallPolicyDeployments");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FirewallPolicy.properties);
 
-@@clientName(FirewallPolicyRuleCollectionGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  FirewallPolicyRuleCollectionGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FirewallPolicyRuleCollectionGroup.properties);
 
-@@clientName(FirewallPolicyIdpsSignaturesOverrides.put::parameters.resource,
+@@clientName(
+  FirewallPolicyIdpsSignaturesOverrides.put::parameters.resource,
   "parameters"
 );
-@@clientName(FirewallPolicyIdpsSignaturesOverrides.patch::parameters.properties,
+@@clientName(
+  FirewallPolicyIdpsSignaturesOverrides.patch::parameters.properties,
   "parameters"
 );
 
-@@clientName(FirewallPolicyDrafts.createOrUpdate::parameters.resource,
+@@clientName(
+  FirewallPolicyDrafts.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FirewallPolicyDraft.properties);
 
-@@clientName(FirewallPolicyRuleCollectionGroupDrafts.createOrUpdate::parameters.resource,
+@@clientName(
+  FirewallPolicyRuleCollectionGroupDrafts.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -845,7 +964,8 @@ using Microsoft.Network;
 @@clientName(LoadBalancers.createOrUpdate::parameters.resource, "parameters");
 @@clientName(LoadBalancers.updateTags::parameters.properties, "parameters");
 @@clientName(LoadBalancers.migrateToIpBased::parameters.body, "parameters");
-@@clientLocation(LoadBalancers.loadBalancerNetworkInterfacesList,
+@@clientLocation(
+  LoadBalancers.loadBalancerNetworkInterfacesList,
   "LoadBalancerNetworkInterfaces"
 );
 @@clientName(LoadBalancers.loadBalancerNetworkInterfacesList, "List");
@@ -870,54 +990,67 @@ using Microsoft.Network;
 
 @@clientName(NetworkManagers.createOrUpdate::parameters.resource, "parameters");
 @@clientName(NetworkManagers.patch::parameters.properties, "parameters");
-@@clientLocation(NetworkManagers.listActiveConnectivityConfigurations,
+@@clientLocation(
+  NetworkManagers.listActiveConnectivityConfigurations,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
+@@clientName(
+  NetworkManagers.listActiveConnectivityConfigurations::parameters.body,
   "parameters"
 );
-@@clientLocation(NetworkManagers.listActiveSecurityAdminRules,
+@@clientLocation(
+  NetworkManagers.listActiveSecurityAdminRules,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(NetworkManagers.listActiveSecurityAdminRules::parameters.body,
+@@clientName(
+  NetworkManagers.listActiveSecurityAdminRules::parameters.body,
   "parameters"
 );
 @@clientLocation(NetworkManagers.post, "NetworkManagerCommits");
 @@clientName(NetworkManagers.post::parameters.body, "parameters");
-@@clientLocation(NetworkManagers.networkManagerDeploymentStatusList,
+@@clientLocation(
+  NetworkManagers.networkManagerDeploymentStatusList,
   "NetworkManagerDeploymentStatus"
 );
 @@clientName(NetworkManagers.networkManagerDeploymentStatusList, "List");
-@@clientName(NetworkManagers.networkManagerDeploymentStatusList::parameters.body,
+@@clientName(
+  NetworkManagers.networkManagerDeploymentStatusList::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkManager.properties);
 
-@@clientLocation(NetworkManagerConnections.get,
+@@clientLocation(
+  NetworkManagerConnections.get,
   "SubscriptionNetworkManagerConnections"
 );
-@@clientLocation(NetworkManagerConnections.createOrUpdate,
+@@clientLocation(
+  NetworkManagerConnections.createOrUpdate,
   "SubscriptionNetworkManagerConnections"
 );
-@@clientName(NetworkManagerConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkManagerConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(NetworkManagerConnections.delete,
+@@clientLocation(
+  NetworkManagerConnections.delete,
   "SubscriptionNetworkManagerConnections"
 );
-@@clientLocation(NetworkManagerConnections.list,
+@@clientLocation(
+  NetworkManagerConnections.list,
   "SubscriptionNetworkManagerConnections"
 );
-@@clientName(ManagementGroupNetworkManagerConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagementGroupNetworkManagerConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkManagerConnection.properties);
 
-@@clientName(ConnectivityConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  ConnectivityConfigurations.createOrUpdate::parameters.resource,
   "connectivityConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -931,13 +1064,15 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StaticMember.properties);
 
-@@clientName(NetworkManagerRoutingConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkManagerRoutingConfigurations.createOrUpdate::parameters.resource,
   "routingConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkManagerRoutingConfiguration.properties);
 
-@@clientName(RoutingRuleCollections.createOrUpdate::parameters.resource,
+@@clientName(
+  RoutingRuleCollections.createOrUpdate::parameters.resource,
   "ruleCollection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -947,19 +1082,22 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RoutingRule.properties);
 
-@@clientName(ScopeConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  ScopeConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ScopeConnection.properties);
 
-@@clientName(SecurityAdminConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityAdminConfigurations.createOrUpdate::parameters.resource,
   "securityAdminConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SecurityAdminConfiguration.properties);
 
-@@clientName(AdminRuleCollections.createOrUpdate::parameters.resource,
+@@clientName(
+  AdminRuleCollections.createOrUpdate::parameters.resource,
   "ruleCollection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -971,19 +1109,22 @@ using Microsoft.Network;
 @@clientLocation(BaseAdminRules.delete, "AdminRules");
 @@clientLocation(BaseAdminRules.list, "AdminRules");
 
-@@clientName(SecurityUserConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityUserConfigurations.createOrUpdate::parameters.resource,
   "securityUserConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SecurityUserConfiguration.properties);
 
-@@clientName(SecurityUserRuleCollections.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityUserRuleCollections.createOrUpdate::parameters.resource,
   "securityUserRuleCollection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SecurityUserRuleCollection.properties);
 
-@@clientName(SecurityUserRules.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityUserRules.createOrUpdate::parameters.resource,
   "securityUserRule"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -994,17 +1135,20 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkProfile.properties);
 
-@@clientName(NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkSecurityPerimeters.patch::parameters.properties,
+@@clientName(
+  NetworkSecurityPerimeters.patch::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkSecurityPerimeter.properties);
 
 @@clientLocation(NspProfiles.get, "NetworkSecurityPerimeterProfiles");
-@@clientLocation(NspProfiles.createOrUpdate,
+@@clientLocation(
+  NspProfiles.createOrUpdate,
   "NetworkSecurityPerimeterProfiles"
 );
 @@clientName(NspProfiles.createOrUpdate::parameters.resource, "parameters");
@@ -1014,13 +1158,15 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(NspProfile.properties);
 
 @@clientLocation(NspAccessRules.get, "NetworkSecurityPerimeterAccessRules");
-@@clientLocation(NspAccessRules.createOrUpdate,
+@@clientLocation(
+  NspAccessRules.createOrUpdate,
   "NetworkSecurityPerimeterAccessRules"
 );
 @@clientName(NspAccessRules.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(NspAccessRules.delete, "NetworkSecurityPerimeterAccessRules");
 @@clientLocation(NspAccessRules.list, "NetworkSecurityPerimeterAccessRules");
-@@clientLocation(NspAccessRules.reconcile,
+@@clientLocation(
+  NspAccessRules.reconcile,
   "NetworkSecurityPerimeterAccessRules"
 );
 @@clientName(NspAccessRules.reconcile::parameters.body, "parameters");
@@ -1028,15 +1174,18 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(NspAccessRule.properties);
 
 @@clientLocation(NspAssociations.get, "NetworkSecurityPerimeterAssociations");
-@@clientLocation(NspAssociations.createOrUpdate,
+@@clientLocation(
+  NspAssociations.createOrUpdate,
   "NetworkSecurityPerimeterAssociations"
 );
 @@clientName(NspAssociations.createOrUpdate::parameters.resource, "parameters");
-@@clientLocation(NspAssociations.delete,
+@@clientLocation(
+  NspAssociations.delete,
   "NetworkSecurityPerimeterAssociations"
 );
 @@clientLocation(NspAssociations.list, "NetworkSecurityPerimeterAssociations");
-@@clientLocation(NspAssociations.reconcile,
+@@clientLocation(
+  NspAssociations.reconcile,
   "NetworkSecurityPerimeterAssociations"
 );
 @@clientName(NspAssociations.reconcile::parameters.body, "parameters");
@@ -1051,31 +1200,39 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NspLink.properties);
 
-@@clientLocation(NspLinkReferences.get,
+@@clientLocation(
+  NspLinkReferences.get,
   "NetworkSecurityPerimeterLinkReferences"
 );
-@@clientLocation(NspLinkReferences.delete,
+@@clientLocation(
+  NspLinkReferences.delete,
   "NetworkSecurityPerimeterLinkReferences"
 );
-@@clientLocation(NspLinkReferences.list,
+@@clientLocation(
+  NspLinkReferences.list,
   "NetworkSecurityPerimeterLinkReferences"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NspLinkReference.properties);
 
-@@clientLocation(NspLoggingConfigurations.get,
+@@clientLocation(
+  NspLoggingConfigurations.get,
   "NetworkSecurityPerimeterLoggingConfigurations"
 );
-@@clientLocation(NspLoggingConfigurations.createOrUpdate,
+@@clientLocation(
+  NspLoggingConfigurations.createOrUpdate,
   "NetworkSecurityPerimeterLoggingConfigurations"
 );
-@@clientName(NspLoggingConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  NspLoggingConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(NspLoggingConfigurations.delete,
+@@clientLocation(
+  NspLoggingConfigurations.delete,
   "NetworkSecurityPerimeterLoggingConfigurations"
 );
-@@clientLocation(NspLoggingConfigurations.list,
+@@clientLocation(
+  NspLoggingConfigurations.list,
   "NetworkSecurityPerimeterLoggingConfigurations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1088,52 +1245,67 @@ using Microsoft.Network;
 @@clientName(VerifierWorkspaces.create::parameters.resource, "body");
 @@clientName(VerifierWorkspaces.update::parameters.properties, "body");
 
-@@clientName(NetworkVirtualAppliances.createOrUpdate::parameters.resource,
+@@clientName(
+  NetworkVirtualAppliances.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(NetworkVirtualAppliances.updateTags::parameters.properties,
+@@clientName(
+  NetworkVirtualAppliances.updateTags::parameters.properties,
   "parameters"
 );
-@@clientName(NetworkVirtualAppliances.restart::parameters.body,
+@@clientName(
+  NetworkVirtualAppliances.restart::parameters.body,
   "NetworkVirtualApplianceInstanceIds"
 );
-@@clientName(NetworkVirtualAppliances.reimage::parameters.body,
+@@clientName(
+  NetworkVirtualAppliances.reimage::parameters.body,
   "NetworkVirtualApplianceInstanceIds"
 );
-@@clientName(NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
+@@clientName(
+  NetworkVirtualAppliances.getBootDiagnosticLogs::parameters.body,
   "request"
 );
-@@clientLocation(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
+@@clientLocation(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
   NetworkVirtualApplianceConnections
 );
-@@clientName(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "NetworkVirtualApplianceConnectionParameters"
 );
-@@clientLocation(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
+@@clientLocation(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
   NetworkVirtualApplianceConnections
 );
-@@clientName(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
   "Get"
 );
-@@clientLocation(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsDelete,
+@@clientLocation(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsDelete,
   NetworkVirtualApplianceConnections
 );
-@@clientName(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsDelete,
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsDelete,
   "Delete"
 );
-@@clientLocation(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
+@@clientLocation(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
   NetworkVirtualApplianceConnections
 );
-@@clientName(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkVirtualAppliance.properties);
 
-@@clientName(VirtualApplianceSites.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualApplianceSites.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1145,10 +1317,12 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(NetworkVirtualApplianceSku.properties);
 
 @@clientLocation(InboundSecurityRuleOperationGroup.get, "InboundSecurityRule");
-@@clientLocation(InboundSecurityRuleOperationGroup.createOrUpdate,
+@@clientLocation(
+  InboundSecurityRuleOperationGroup.createOrUpdate,
   "InboundSecurityRule"
 );
-@@clientName(InboundSecurityRuleOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  InboundSecurityRuleOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1161,21 +1335,26 @@ using Microsoft.Network;
 @@clientName(NetworkWatchers.getNextHop::parameters.body, "parameters");
 @@clientName(NetworkWatchers.getVMSecurityRules::parameters.body, "parameters");
 @@clientName(NetworkWatchers.getTroubleshooting::parameters.body, "parameters");
-@@clientName(NetworkWatchers.getTroubleshootingResult::parameters.body,
+@@clientName(
+  NetworkWatchers.getTroubleshootingResult::parameters.body,
   "parameters"
 );
-@@clientName(NetworkWatchers.setFlowLogConfiguration::parameters.body,
+@@clientName(
+  NetworkWatchers.setFlowLogConfiguration::parameters.body,
   "parameters"
 );
 @@clientName(NetworkWatchers.getFlowLogStatus::parameters.body, "parameters");
 @@clientName(NetworkWatchers.checkConnectivity::parameters.body, "parameters");
-@@clientName(NetworkWatchers.getAzureReachabilityReport::parameters.body,
+@@clientName(
+  NetworkWatchers.getAzureReachabilityReport::parameters.body,
   "parameters"
 );
-@@clientName(NetworkWatchers.listAvailableProviders::parameters.body,
+@@clientName(
+  NetworkWatchers.listAvailableProviders::parameters.body,
   "parameters"
 );
-@@clientName(NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
+@@clientName(
+  NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
   "parameters"
 );
 @@clientLocation(NetworkWatchers.create, "PacketCaptures");
@@ -1193,11 +1372,13 @@ using Microsoft.Network;
 
 @@clientLocation(ConnectionMonitorResults.get, "ConnectionMonitors");
 @@clientLocation(ConnectionMonitorResults.createOrUpdate, "ConnectionMonitors");
-@@clientName(ConnectionMonitorResults.createOrUpdate::parameters.resource,
+@@clientName(
+  ConnectionMonitorResults.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ConnectionMonitorResults.updateTags, "ConnectionMonitors");
-@@clientName(ConnectionMonitorResults.updateTags::parameters.properties,
+@@clientName(
+  ConnectionMonitorResults.updateTags::parameters.properties,
   "parameters"
 );
 @@clientLocation(ConnectionMonitorResults.delete, "ConnectionMonitors");
@@ -1206,14 +1387,16 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ConnectionMonitorResult.properties);
 
-@@clientName(PublicIPPrefixes.createOrUpdate::parameters.resource,
+@@clientName(
+  PublicIPPrefixes.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(PublicIPPrefixes.updateTags::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PublicIPPrefix.properties);
 
-@@clientName(RouteFilters.createOrUpdate::parameters.resource,
+@@clientName(
+  RouteFilters.createOrUpdate::parameters.resource,
   "routeFilterParameters"
 );
 @@clientName(RouteFilters.updateTags::parameters.properties, "parameters");
@@ -1221,21 +1404,25 @@ using Microsoft.Network;
 @@clientName(RouteFilters.routeFilterRulesDelete, "Delete");
 @@clientLocation(RouteFilters.routeFilterRulesGet, "RouteFilterRules");
 @@clientName(RouteFilters.routeFilterRulesGet, "Get");
-@@clientLocation(RouteFilters.routeFilterRulesCreateOrUpdate,
+@@clientLocation(
+  RouteFilters.routeFilterRulesCreateOrUpdate,
   "RouteFilterRules"
 );
 @@clientName(RouteFilters.routeFilterRulesCreateOrUpdate, "CreateOrUpdate");
-@@clientName(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
+@@clientName(
+  RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
   "routeFilterRuleParameters"
 );
 @@clientLocation(RouteFilters.listByRouteFilter, "RouteFilterRules");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RouteFilter.properties);
 
-@@clientName(SecurityPartnerProviders.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityPartnerProviders.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(SecurityPartnerProviders.updateTags::parameters.properties,
+@@clientName(
+  SecurityPartnerProviders.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1243,99 +1430,125 @@ using Microsoft.Network;
 
 @@clientName(VirtualNetworks.createOrUpdate::parameters.resource, "parameters");
 @@clientName(VirtualNetworks.updateTags::parameters.properties, "parameters");
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
+@@clientName(
+  EffectiveConfigurations.listNetworkManagerEffectiveConnectivityConfigurations::parameters.body,
   "parameters"
 );
-@@clientLocation(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
+@@clientLocation(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules,
   Microsoft.Network,
   "autorest"
 );
-@@clientName(EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
+@@clientName(
+  EffectiveConfigurations.listNetworkManagerEffectiveSecurityAdminRules::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetwork.properties);
 
-@@clientName(VirtualNetworkPeerings.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkPeerings.createOrUpdate::parameters.resource,
   "VirtualNetworkPeeringParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkPeering.properties);
 
-@@clientName(VirtualNetworkGateways.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkGateways.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(VirtualNetworkGateways.updateTags::parameters.properties,
+@@clientName(
+  VirtualNetworkGateways.updateTags::parameters.properties,
   "parameters"
 );
-@@clientName(VirtualNetworkGateways.generatevpnclientpackage::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.generatevpnclientpackage::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGateways.generateVpnProfile::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.generateVpnProfile::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGateways.setVpnclientIpsecParameters::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.setVpnclientIpsecParameters::parameters.body,
   "vpnclientIpsecParams"
 );
-@@clientName(VirtualNetworkGateways.startPacketCapture::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.startPacketCapture::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGateways.stopPacketCapture::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.stopPacketCapture::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.stopExpressRouteSiteFailoverSimulation::parameters.body,
   "stopParameters"
 );
-@@clientName(VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.disconnectVirtualNetworkGatewayVpnConnections::parameters.body,
   "request"
 );
-@@clientName(VirtualNetworkGateways.invokePrepareMigration::parameters.body,
+@@clientName(
+  VirtualNetworkGateways.invokePrepareMigration::parameters.body,
   "migrationParams"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkGateway.properties);
 
-@@clientName(VirtualNetworkGatewayNatRules.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkGatewayNatRules.createOrUpdate::parameters.resource,
   "NatRuleParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkGatewayNatRule.properties);
 
-@@clientName(VirtualNetworkGatewayConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkGatewayConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(VirtualNetworkGatewayConnections.updateTags::parameters.properties,
+@@clientName(
+  VirtualNetworkGatewayConnections.updateTags::parameters.properties,
   "parameters"
 );
-@@clientLocation(VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript,
+@@clientLocation(
+  VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript,
   VirtualNetworkGateways
 );
-@@clientName(VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript::parameters.body,
+@@clientName(
+  VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGatewayConnections.setSharedKey::parameters.body,
+@@clientName(
+  VirtualNetworkGatewayConnections.setSharedKey::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGatewayConnections.resetSharedKey::parameters.body,
+@@clientName(
+  VirtualNetworkGatewayConnections.resetSharedKey::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGatewayConnections.startPacketCapture::parameters.body,
+@@clientName(
+  VirtualNetworkGatewayConnections.startPacketCapture::parameters.body,
   "parameters"
 );
-@@clientName(VirtualNetworkGatewayConnections.stopPacketCapture::parameters.body,
+@@clientName(
+  VirtualNetworkGatewayConnections.stopPacketCapture::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkGatewayConnection.properties);
 
-@@clientName(LocalNetworkGateways.createOrUpdate::parameters.resource,
+@@clientName(
+  LocalNetworkGateways.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(LocalNetworkGateways.updateTags::parameters.properties,
+@@clientName(
+  LocalNetworkGateways.updateTags::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1345,7 +1558,8 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualRouter.properties);
 
-@@clientName(VirtualRouterPeerings.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualRouterPeerings.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1354,18 +1568,22 @@ using Microsoft.Network;
 @@clientName(VirtualWans.createOrUpdate::parameters.resource, "WANParameters");
 @@clientName(VirtualWans.updateTags::parameters.properties, "WANParameters");
 
-@@clientName(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+@@clientName(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
   "generatevirtualwanvpnserverconfigurationvpnprofile"
 );
-@@clientName(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
+@@clientName(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
   "vpnClientParams"
 );
 @@clientLocation(VirtualWans.download, "VpnSitesConfiguration");
 @@clientName(VirtualWans.download::parameters.body, "request");
-@@clientLocation(VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList,
+@@clientLocation(
+  VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList,
   "VpnServerConfigurationsAssociatedWithVirtualWan"
 );
-@@clientName(VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList,
+@@clientName(
+  VirtualWans.vpnServerConfigurationsAssociatedWithVirtualWanList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1379,148 +1597,185 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnSiteLink.properties);
 
-@@clientName(VpnServerConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  VpnServerConfigurations.createOrUpdate::parameters.resource,
   "VpnServerConfigurationParameters"
 );
-@@clientName(VpnServerConfigurations.updateTags::parameters.properties,
+@@clientName(
+  VpnServerConfigurations.updateTags::parameters.properties,
   "VpnServerConfigurationParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnServerConfiguration.properties);
 
 @@clientLocation(P2SVpnGateways.get, "P2sVpnGateways", "!java,!python");
-@@clientLocation(P2SVpnGateways.createOrUpdate,
+@@clientLocation(
+  P2SVpnGateways.createOrUpdate,
   "P2sVpnGateways",
   "!java,!python"
 );
-@@clientName(P2SVpnGateways.createOrUpdate::parameters.resource,
+@@clientName(
+  P2SVpnGateways.createOrUpdate::parameters.resource,
   "p2SVpnGatewayParameters"
 );
 @@clientLocation(P2SVpnGateways.updateTags, "P2sVpnGateways", "!java,!python");
-@@clientName(P2SVpnGateways.updateTags::parameters.properties,
+@@clientName(
+  P2SVpnGateways.updateTags::parameters.properties,
   "p2SVpnGatewayParameters"
 );
 @@clientLocation(P2SVpnGateways.reset, "P2sVpnGateways", "javascript, go");
 @@clientLocation(P2SVpnGateways.delete, "P2sVpnGateways", "!java,!python");
-@@clientLocation(P2SVpnGateways.listByResourceGroup,
+@@clientLocation(
+  P2SVpnGateways.listByResourceGroup,
   "P2sVpnGateways",
   "!java,!python"
 );
 @@clientLocation(P2SVpnGateways.list, "P2sVpnGateways", "!java,!python");
-@@clientLocation(P2SVpnGateways.generateVpnProfile,
+@@clientLocation(
+  P2SVpnGateways.generateVpnProfile,
   "P2sVpnGateways",
   "!java,!python"
 );
 @@clientName(P2SVpnGateways.generateVpnProfile::parameters.body, "parameters");
-@@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealth,
+@@clientLocation(
+  P2SVpnGateways.getP2sVpnConnectionHealth,
   "P2sVpnGateways",
   "!java,!python"
 );
-@@clientLocation(P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
+@@clientLocation(
+  P2SVpnGateways.getP2sVpnConnectionHealthDetailed,
   "P2sVpnGateways",
   "!java,!python"
 );
-@@clientName(P2SVpnGateways.getP2sVpnConnectionHealthDetailed::parameters.body,
+@@clientName(
+  P2SVpnGateways.getP2sVpnConnectionHealthDetailed::parameters.body,
   "request"
 );
-@@clientLocation(P2SVpnGateways.disconnectP2sVpnConnections,
+@@clientLocation(
+  P2SVpnGateways.disconnectP2sVpnConnections,
   "P2sVpnGateways",
   "!java,!python"
 );
-@@clientName(P2SVpnGateways.disconnectP2sVpnConnections::parameters.body,
+@@clientName(
+  P2SVpnGateways.disconnectP2sVpnConnections::parameters.body,
   "request"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(P2SVpnGateway.properties);
 
-@@clientLocation(VpnServerConfigurationPolicyGroups.get,
+@@clientLocation(
+  VpnServerConfigurationPolicyGroups.get,
   "ConfigurationPolicyGroups"
 );
-@@clientLocation(VpnServerConfigurationPolicyGroups.createOrUpdate,
+@@clientLocation(
+  VpnServerConfigurationPolicyGroups.createOrUpdate,
   "ConfigurationPolicyGroups"
 );
-@@clientName(VpnServerConfigurationPolicyGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  VpnServerConfigurationPolicyGroups.createOrUpdate::parameters.resource,
   "VpnServerConfigurationPolicyGroupParameters"
 );
-@@clientLocation(VpnServerConfigurationPolicyGroups.delete,
+@@clientLocation(
+  VpnServerConfigurationPolicyGroups.delete,
   "ConfigurationPolicyGroups"
 );
-@@clientLocation(VpnServerConfigurationPolicyGroups.listByVpnServerConfiguration,
+@@clientLocation(
+  VpnServerConfigurationPolicyGroups.listByVpnServerConfiguration,
   "ConfigurationPolicyGroups"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnServerConfigurationPolicyGroup.properties);
 
-@@clientName(VirtualHubs.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualHubs.createOrUpdate::parameters.resource,
   "virtualHubParameters"
 );
-@@clientName(VirtualHubs.updateTags::parameters.properties,
+@@clientName(
+  VirtualHubs.updateTags::parameters.properties,
   "virtualHubParameters"
 );
-@@clientName(VirtualHubs.getEffectiveVirtualHubRoutes::parameters.body,
+@@clientName(
+  VirtualHubs.getEffectiveVirtualHubRoutes::parameters.body,
   "effectiveRoutesParameters"
 );
-@@clientName(VirtualHubs.getInboundRoutes::parameters.body,
+@@clientName(
+  VirtualHubs.getInboundRoutes::parameters.body,
   "getInboundRoutesParameters"
 );
-@@clientName(VirtualHubs.getOutboundRoutes::parameters.body,
+@@clientName(
+  VirtualHubs.getOutboundRoutes::parameters.body,
   "getOutboundRoutesParameters"
 );
-@@clientLocation(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
+@@clientLocation(
+  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
   "HubVirtualNetworkConnections"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
+@@clientName(
+  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
+@@clientName(
+  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
   "hubVirtualNetworkConnectionParameters"
 );
-@@clientLocation(VirtualHubs.hubVirtualNetworkConnectionsDelete,
+@@clientLocation(
+  VirtualHubs.hubVirtualNetworkConnectionsDelete,
   "HubVirtualNetworkConnections"
 );
 @@clientName(VirtualHubs.hubVirtualNetworkConnectionsDelete, "Delete");
-@@clientLocation(VirtualHubs.hubVirtualNetworkConnectionsGet,
+@@clientLocation(
+  VirtualHubs.hubVirtualNetworkConnectionsGet,
   "HubVirtualNetworkConnections"
 );
 @@clientName(VirtualHubs.hubVirtualNetworkConnectionsGet, "Get");
-@@clientLocation(VirtualHubs.hubVirtualNetworkConnectionsList,
+@@clientLocation(
+  VirtualHubs.hubVirtualNetworkConnectionsList,
   "HubVirtualNetworkConnections"
 );
 @@clientName(VirtualHubs.hubVirtualNetworkConnectionsList, "List");
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sGet,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sGet,
   "VirtualHubRouteTableV2s"
 );
 @@clientName(VirtualHubs.virtualHubRouteTableV2sGet, "Get");
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "VirtualHubRouteTableV2s"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+@@clientName(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
+@@clientName(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
   "virtualHubRouteTableV2Parameters"
 );
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2s"
 );
 @@clientName(VirtualHubs.virtualHubRouteTableV2sDelete, "Delete");
-@@clientLocation(VirtualHubs.virtualHubRouteTableV2sList,
+@@clientLocation(
+  VirtualHubs.virtualHubRouteTableV2sList,
   "VirtualHubRouteTableV2s"
 );
 @@clientName(VirtualHubs.virtualHubRouteTableV2sList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualHub.properties);
 
-@@clientName(RouteMaps.createOrUpdate::parameters.resource,
+@@clientName(
+  RouteMaps.createOrUpdate::parameters.resource,
   "routeMapParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RouteMap.properties);
 
-@@clientName(VpnGateways.createOrUpdate::parameters.resource,
+@@clientName(
+  VpnGateways.createOrUpdate::parameters.resource,
   "vpnGatewayParameters"
 );
-@@clientName(VpnGateways.updateTags::parameters.properties,
+@@clientName(
+  VpnGateways.updateTags::parameters.properties,
   "vpnGatewayParameters"
 );
 @@clientName(VpnGateways.startPacketCapture::parameters.body, "parameters");
@@ -1529,30 +1784,36 @@ using Microsoft.Network;
 @@clientName(VpnGateways.vpnConnectionsGet, "Get");
 @@clientLocation(VpnGateways.vpnConnectionsCreateOrUpdate, "VpnConnections");
 @@clientName(VpnGateways.vpnConnectionsCreateOrUpdate, "CreateOrUpdate");
-@@clientName(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
+@@clientName(
+  VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
   "VpnConnectionParameters"
 );
 @@clientLocation(VpnGateways.vpnConnectionsDelete, "VpnConnections");
 @@clientName(VpnGateways.vpnConnectionsDelete, "Delete");
-@@clientLocation(VpnGateways.vpnConnectionsStartPacketCapture,
+@@clientLocation(
+  VpnGateways.vpnConnectionsStartPacketCapture,
   "VpnConnections"
 );
-@@clientName(VpnGateways.vpnConnectionsStartPacketCapture,
+@@clientName(
+  VpnGateways.vpnConnectionsStartPacketCapture,
   "StartPacketCapture"
 );
-@@clientName(VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,
+@@clientName(
+  VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,
   "parameters"
 );
 @@clientLocation(VpnGateways.vpnConnectionsStopPacketCapture, "VpnConnections");
 @@clientName(VpnGateways.vpnConnectionsStopPacketCapture, "StopPacketCapture");
-@@clientName(VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
+@@clientName(
+  VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
   "parameters"
 );
 @@clientLocation(VpnGateways.listByVpnGateway, "VpnConnections");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnGateway.properties);
 
-@@clientLocation(VpnSiteLinkConnections.listByVpnConnection,
+@@clientLocation(
+  VpnSiteLinkConnections.listByVpnConnection,
   "VpnLinkConnections"
 );
 @@clientLocation(VpnSiteLinkConnections.resetConnection, "VpnLinkConnections");
@@ -1562,7 +1823,8 @@ using Microsoft.Network;
 
 @@clientLocation(VpnGatewayNatRules.get, "NatRules");
 @@clientLocation(VpnGatewayNatRules.createOrUpdate, "NatRules");
-@@clientName(VpnGatewayNatRules.createOrUpdate::parameters.resource,
+@@clientName(
+  VpnGatewayNatRules.createOrUpdate::parameters.resource,
   "NatRuleParameters"
 );
 @@clientLocation(VpnGatewayNatRules.delete, "NatRules");
@@ -1570,42 +1832,54 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnGatewayNatRule.properties);
 
-@@clientLocation(ConnectionSharedKeyResults.getDefaultSharedKey,
+@@clientLocation(
+  ConnectionSharedKeyResults.getDefaultSharedKey,
   "VpnLinkConnections"
 );
-@@clientLocation(ConnectionSharedKeyResults.setOrInitDefaultSharedKey,
+@@clientLocation(
+  ConnectionSharedKeyResults.setOrInitDefaultSharedKey,
   "VpnLinkConnections"
 );
-@@clientName(ConnectionSharedKeyResults.setOrInitDefaultSharedKey::parameters.resource,
+@@clientName(
+  ConnectionSharedKeyResults.setOrInitDefaultSharedKey::parameters.resource,
   "ConnectionSharedKeyParameters"
 );
-@@clientLocation(ConnectionSharedKeyResults.getAllSharedKeys,
+@@clientLocation(
+  ConnectionSharedKeyResults.getAllSharedKeys,
   "VpnLinkConnections"
 );
-@@clientLocation(ConnectionSharedKeyResults.listDefaultSharedKey,
+@@clientLocation(
+  ConnectionSharedKeyResults.listDefaultSharedKey,
   "VpnLinkConnections"
 );
 
-@@clientName(ExpressRouteGateways.createOrUpdate::parameters.resource,
+@@clientName(
+  ExpressRouteGateways.createOrUpdate::parameters.resource,
   "putExpressRouteGatewayParameters"
 );
-@@clientName(ExpressRouteGateways.updateTags::parameters.properties,
+@@clientName(
+  ExpressRouteGateways.updateTags::parameters.properties,
   "expressRouteGatewayParameters"
 );
-@@clientLocation(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
+@@clientLocation(
+  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
   "ExpressRouteConnections"
 );
-@@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
+@@clientName(
+  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
+@@clientName(
+  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "putExpressRouteConnectionParameters"
 );
-@@clientLocation(ExpressRouteGateways.expressRouteConnectionsGet,
+@@clientLocation(
+  ExpressRouteGateways.expressRouteConnectionsGet,
   "ExpressRouteConnections"
 );
 @@clientName(ExpressRouteGateways.expressRouteConnectionsGet, "Get");
-@@clientLocation(ExpressRouteGateways.expressRouteConnectionsDelete,
+@@clientLocation(
+  ExpressRouteGateways.expressRouteConnectionsDelete,
   "ExpressRouteConnections"
 );
 @@clientName(ExpressRouteGateways.expressRouteConnectionsDelete, "Delete");
@@ -1619,17 +1893,20 @@ using Microsoft.Network;
 @@clientLocation(BgpConnections.delete, "VirtualHubBgpConnection");
 @@clientLocation(BgpConnections.list, "VirtualHubBgpConnections");
 @@clientLocation(BgpConnections.listLearnedRoutes, "VirtualHubBgpConnections");
-@@clientLocation(BgpConnections.listAdvertisedRoutes,
+@@clientLocation(
+  BgpConnections.listAdvertisedRoutes,
   "VirtualHubBgpConnections"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BgpConnection.properties);
 
 @@clientLocation(HubIpConfigurations.get, "VirtualHubIpConfiguration");
-@@clientLocation(HubIpConfigurations.createOrUpdate,
+@@clientLocation(
+  HubIpConfigurations.createOrUpdate,
   "VirtualHubIpConfiguration"
 );
-@@clientName(HubIpConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  HubIpConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(HubIpConfigurations.delete, "VirtualHubIpConfiguration");
@@ -1637,7 +1914,8 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HubIpConfiguration.properties);
 
-@@clientName(HubRouteTables.createOrUpdate::parameters.resource,
+@@clientName(
+  HubRouteTables.createOrUpdate::parameters.resource,
   "routeTableParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1645,7 +1923,8 @@ using Microsoft.Network;
 
 @@clientLocation(RoutingIntents.get, "RoutingIntent");
 @@clientLocation(RoutingIntents.createOrUpdate, "RoutingIntent");
-@@clientName(RoutingIntents.createOrUpdate::parameters.resource,
+@@clientName(
+  RoutingIntents.createOrUpdate::parameters.resource,
   "routingIntentParameters"
 );
 @@clientLocation(RoutingIntents.delete, "RoutingIntent");
@@ -1653,108 +1932,135 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RoutingIntent.properties);
 
-@@clientName(WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  WebApplicationFirewallPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WebApplicationFirewallPolicy.properties);
 
-@@clientLocation(ApplicationGatewaysOperationGroup.listAvailableServerVariables,
+@@clientLocation(
+  ApplicationGatewaysOperationGroup.listAvailableServerVariables,
   ApplicationGateways
 );
-@@clientLocation(ApplicationGatewaysOperationGroup.listAvailableRequestHeaders,
+@@clientLocation(
+  ApplicationGatewaysOperationGroup.listAvailableRequestHeaders,
   ApplicationGateways
 );
-@@clientLocation(ApplicationGatewaysOperationGroup.listAvailableResponseHeaders,
+@@clientLocation(
+  ApplicationGatewaysOperationGroup.listAvailableResponseHeaders,
   ApplicationGateways
 );
-@@clientLocation(ApplicationGatewaysOperationGroup.listAvailableWafRuleSets,
+@@clientLocation(
+  ApplicationGatewaysOperationGroup.listAvailableWafRuleSets,
   ApplicationGateways
 );
 
-@@clientLocation(AvailableDelegationsOperationGroup.list,
+@@clientLocation(
+  AvailableDelegationsOperationGroup.list,
   "AvailableDelegations"
 );
 
-@@clientLocation(AvailableResourceGroupDelegationsOperationGroup.list,
+@@clientLocation(
+  AvailableResourceGroupDelegationsOperationGroup.list,
   "AvailableResourceGroupDelegations"
 );
 
-@@clientLocation(AvailableServiceAliasesOperationGroup.list,
+@@clientLocation(
+  AvailableServiceAliasesOperationGroup.list,
   "AvailableServiceAliases"
 );
-@@clientLocation(AvailableServiceAliasesOperationGroup.listByResourceGroup,
+@@clientLocation(
+  AvailableServiceAliasesOperationGroup.listByResourceGroup,
   "AvailableServiceAliases"
 );
 
-@@clientLocation(AzureFirewallFqdnTagsOperationGroup.listAll,
+@@clientLocation(
+  AzureFirewallFqdnTagsOperationGroup.listAll,
   "AzureFirewallFqdnTags"
 );
 
-@@clientLocation(NetworkInterfacesOperationGroup.listCloudServiceNetworkInterfaces,
+@@clientLocation(
+  NetworkInterfacesOperationGroup.listCloudServiceNetworkInterfaces,
   NetworkInterfaces
 );
 
-@@clientLocation(PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
+@@clientLocation(
+  PublicIPAddressesOperationGroup.listCloudServicePublicIPAddresses,
   PublicIPAddresses
 );
 
-@@clientLocation(AvailableEndpointServicesOperationGroup.list,
+@@clientLocation(
+  AvailableEndpointServicesOperationGroup.list,
   "AvailableEndpointServices"
 );
 
-@@clientLocation(ExpressRouteServiceProvidersOperationGroup.list,
+@@clientLocation(
+  ExpressRouteServiceProvidersOperationGroup.list,
   "ExpressRouteServiceProviders"
 );
 
-@@clientLocation(LoadBalancersOperationGroup.swapPublicIpAddresses,
+@@clientLocation(
+  LoadBalancersOperationGroup.swapPublicIpAddresses,
   LoadBalancers
 );
 
-@@clientLocation(NetworkSecurityPerimeterAssociableResourceTypesOperationGroup.list,
+@@clientLocation(
+  NetworkSecurityPerimeterAssociableResourceTypesOperationGroup.list,
   "NetworkSecurityPerimeterAssociableResourceTypes"
 );
 
-@@clientLocation(NetworkSecurityPerimeterOperationStatusesOperationGroup.get,
+@@clientLocation(
+  NetworkSecurityPerimeterOperationStatusesOperationGroup.get,
   "NetworkSecurityPerimeterOperationStatuses"
 );
 
-@@clientLocation(NetworkSecurityPerimeterServiceTagsOperationGroup.list,
+@@clientLocation(
+  NetworkSecurityPerimeterServiceTagsOperationGroup.list,
   "NetworkSecurityPerimeterServiceTags"
 );
 
-@@clientLocation(AvailablePrivateEndpointTypesOperationGroup.list,
+@@clientLocation(
+  AvailablePrivateEndpointTypesOperationGroup.list,
   "AvailablePrivateEndpointTypes"
 );
-@@clientLocation(AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
+@@clientLocation(
+  AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
   "AvailablePrivateEndpointTypes"
 );
 
-@@clientLocation(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility,
+@@clientLocation(
+  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility,
   PrivateLinkServices
 );
-@@clientLocation(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
+@@clientLocation(
+  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
   PrivateLinkServices
 );
-@@clientLocation(PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServices,
+@@clientLocation(
+  PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServices,
   PrivateLinkServices
 );
-@@clientLocation(PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
+@@clientLocation(
+  PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
   PrivateLinkServices
 );
 
-@@clientLocation(BgpServiceCommunitiesOperationGroup.list,
+@@clientLocation(
+  BgpServiceCommunitiesOperationGroup.list,
   "BgpServiceCommunities"
 );
 
 @@clientLocation(ServiceTagsOperationGroup.list, "ServiceTags");
 
-@@clientLocation(ServiceTagInformationOperationGroup.list,
+@@clientLocation(
+  ServiceTagInformationOperationGroup.list,
   "ServiceTagInformation"
 );
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
-@@clientName(LoadBalancersOperationGroup.swapPublicIpAddresses::parameters.body,
+@@clientName(
+  LoadBalancersOperationGroup.swapPublicIpAddresses::parameters.body,
   "parameters"
 );
 @@clientName(IdpsQueryObject, "IDPSQueryObject");
@@ -1772,11 +2078,13 @@ using Microsoft.Network;
 @@Legacy.flattenProperty(VirtualNetworkApplianceIpConfiguration.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Legacy.clientDefaultValue(SingletonResourceAlias.singletonResource,
+@@Legacy.clientDefaultValue(
+  SingletonResourceAlias.singletonResource,
   "swap",
   "python"
 );
 
-@@Azure.ClientGenerator.Core.alternateType(SingletonResourceAlias.singletonResource,
+@@Azure.ClientGenerator.Core.alternateType(
+  SingletonResourceAlias.singletonResource,
   "swap"
 );

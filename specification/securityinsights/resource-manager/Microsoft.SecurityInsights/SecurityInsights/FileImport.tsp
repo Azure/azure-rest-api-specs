@@ -45,10 +45,12 @@ interface FileImports {
   delete is Extension.DeleteWithoutOkAsync<
     workspaceExternalResource,
     FileImport,
-    Response = (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FileImport>> & {
-      @bodyRoot
-      _: FileImport;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FileImport>> & {
+          @bodyRoot
+          _: FileImport;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
