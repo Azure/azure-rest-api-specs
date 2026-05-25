@@ -783,7 +783,6 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(SecurityConnectorsDevOpsAPI.IssueCreationRequest, "IssueCreationContent", "csharp");
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPolicyInitiateRequest, "JitNetworkAccessPolicyInitiateContent", "csharp");
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessRequest, "JitNetworkAccessContent", "csharp");
-@@clientName(PrivateLinksAPI.PrivateLinkParameters, "SecurityPrivateLinkInfo", "csharp");
 @@clientName(TasksAPI.SecurityTaskParameters, "SecurityTaskInfo", "csharp");
 @@clientName(SensitivitySettingsAPI.UpdateSensitivitySettingsRequest, "UpdateSensitivitySettingsContent", "csharp");
 @@clientName(SecurityConnectorsAPI.EnvironmentData, "SecurityConnectorEnvironmentInfo", "csharp");
