@@ -4,6 +4,23 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
+// ---- Operation renames (csharp) to restore baseline SDK method names.
+@@clientName(
+  SupportedOperatingSystemsOperationGroup.get,
+  "GetSupportedOperatingSystem",
+  "csharp"
+);
+@@clientName(
+  ReplicationVaultHealthOperationGroup.get,
+  "GetReplicationVaultHealth",
+  "csharp"
+);
+@@clientName(
+  ReplicationVaultHealthOperationGroup.refresh,
+  "RefreshReplicationVaultHealth",
+  "csharp"
+);
+
 @@clientName(
   Microsoft.RecoveryServices,
   "SiteRecoveryManagementClient",
@@ -1089,8 +1106,16 @@ using Microsoft.RecoveryServices;
 @@clientName(RunAsAccount, "SiteRecoveryRunAsAccount", "csharp");
 @@clientName(ServiceError, "SiteRecoveryServiceError", "csharp");
 @@clientName(Severity, "SiteRecoveryErrorSeverity", "csharp");
-@@clientName(HealthError.innerHealthErrors, "SiteRecoveryInnerHealthErrorsList", "csharp");
-@@clientName(ReplicationJobsOperationGroup.export, "exportSiteRecoveryJob", "csharp");
+@@clientName(
+  HealthError.innerHealthErrors,
+  "SiteRecoveryInnerHealthErrorsList",
+  "csharp"
+);
+@@clientName(
+  ReplicationJobsOperationGroup.export,
+  "exportSiteRecoveryJob",
+  "csharp"
+);
 @@clientName(
   SqlServerLicenseType,
   "SiteRecoverySqlServerLicenseType",

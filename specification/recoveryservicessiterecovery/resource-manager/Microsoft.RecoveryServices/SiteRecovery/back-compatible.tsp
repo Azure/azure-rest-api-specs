@@ -460,29 +460,14 @@ using Microsoft.RecoveryServices;
   SupportedOperatingSystemsOperationGroup.get,
   "SupportedOperatingSystems"
 );
-@@clientName(
-  SupportedOperatingSystemsOperationGroup.get,
-  "GetSupportedOperatingSystem",
-  "csharp"
-);
 
 @@clientLocation(
   ReplicationVaultHealthOperationGroup.get,
   "ReplicationVaultHealth"
 );
-@@clientName(
-  ReplicationVaultHealthOperationGroup.get,
-  "GetReplicationVaultHealth",
-  "csharp"
-);
 @@clientLocation(
   ReplicationVaultHealthOperationGroup.refresh,
   "ReplicationVaultHealth"
-);
-@@clientName(
-  ReplicationVaultHealthOperationGroup.refresh,
-  "RefreshReplicationVaultHealth",
-  "csharp"
 );
 @@clientName(
   ReplicationJobsOperationGroup.export::parameters.body,
