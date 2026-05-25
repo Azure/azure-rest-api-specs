@@ -663,6 +663,7 @@ op privateLinkResourcesGetCustomization(
   "GetOperationStatus",
   "csharp"
 );
+@@scope(OperationsAPI.OperationStatusesOperationGroup.get, "!csharp");
 @@clientName(SecurityConnectorsDevOpsAPI.DevOpsConfigurations.listAvailable,
   "GetAvailableAzureDevOpsOrganizations",
   "csharp"
