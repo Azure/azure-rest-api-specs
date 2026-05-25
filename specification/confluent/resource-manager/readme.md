@@ -28,7 +28,16 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-08-18-preview
+tag: package-2026-05-01-preview
+```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - Microsoft.Confluent/preview/2026-05-01-preview/confluent.json
 ```
 
 ### Tag: package-2025-08-18-preview
@@ -180,6 +189,4 @@ suppressions:
     reason: We don't want the the organization name values to be restricted by the regular expressions and we have few more specific logic for validation in the backend code that involves replacing some of the chars and passing the check instead of failing at the ARM level. So the "pattern" property is not defined.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The property fields are in camel case to match the request and response payload of the confluent APIs.
-     
-
-```
+  ```
