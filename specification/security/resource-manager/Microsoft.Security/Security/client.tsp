@@ -464,8 +464,6 @@ op privateLinkResourcesGetCustomization(
   "IotSecurityAggregatedRecommendation",
   "csharp"
 );
-@@clientName(AlertsAPI.Alert, "ResourceGroupSecurityAlert", "csharp");
-@@clientName(TasksAPI.SecurityTask, "ResourceGroupSecurityTask", "csharp");
 @@clientName(SecureScoreAPI.SecureScoreItem, "SecureScore", "csharp");
 @@clientName(AlertsSuppressionRulesAPI.AlertsSuppressionRule,
   "SecurityAlertsSuppressionRule",
@@ -494,10 +492,6 @@ op privateLinkResourcesGetCustomization(
 @@clientName(SettingsAPI.Setting, "SecuritySetting", "csharp");
 @@clientName(LegacySettingsAPI.WorkspaceSetting,
   "SecurityWorkspaceSetting",
-  "csharp"
-);
-@@clientName(AssessmentAPI.SecurityAssessmentMetadataResponse,
-  "SubscriptionAssessmentMetadata",
   "csharp"
 );
 @@clientName(SqlVulnerabilityAssessmentsAPI.RuleResults,
@@ -664,6 +658,42 @@ op privateLinkResourcesGetCustomization(
   "csharp"
 );
 @@scope(OperationsAPI.OperationStatusesOperationGroup.get, "!csharp");
+@@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToActivate,
+  "Activate",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToActivate,
+  "Activate",
+  "csharp"
+);
+@@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToDismiss,
+  "Dismiss",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToDismiss,
+  "Dismiss",
+  "csharp"
+);
+@@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToResolve,
+  "Resolve",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToResolve,
+  "Resolve",
+  "csharp"
+);
+@@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToInProgress,
+  "UpdateSatateToInProgress",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToInProgress,
+  "UpdateSatateToInProgress",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertSimulatorRequestBody,
+  "SecurityAlertSimulatorContent",
+  "csharp"
+);
 @@clientName(SecurityConnectorsDevOpsAPI.DevOpsConfigurations.listAvailable,
   "GetAvailableAzureDevOpsOrganizations",
   "csharp"
@@ -676,9 +706,6 @@ op privateLinkResourcesGetCustomization(
   "GetAvailableGitLabGroups",
   "csharp"
 );
-@@access(AlertsAPI.AlertOperationGroup.getResourceGroupLevel, Access.internal, "csharp");
-@@access(AssessmentAPI.SecurityAssessmentMetadataResponses.get, Access.internal, "csharp");
-@@access(TasksAPI.Tasks.getResourceGroupLevelTask, Access.internal, "csharp");
 @@access(PricingsAPI.Pricings.list, Access.internal, "csharp");
 @@access(TasksAPI.SecurityTaskProperties, Access.public, "csharp");
 @@access(ExternalSecuritySolutionKind, Access.public, "csharp");
