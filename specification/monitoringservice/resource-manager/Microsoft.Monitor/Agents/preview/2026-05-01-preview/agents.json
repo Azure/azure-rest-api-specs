@@ -300,7 +300,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ObservabilityAgentResourceUpdate"
+              "$ref": "#/definitions/ObservabilityAgentPatch"
             }
           }
         ],
@@ -372,42 +372,9 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -464,6 +431,31 @@
         ]
       }
     },
+    "ObservabilityAgentPatch": {
+      "type": "object",
+      "description": "The request body used to update an observability agent resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ObservabilityAgentPropertiesUpdate",
+          "description": "Updatable resource properties."
+        }
+      }
+    },
     "ObservabilityAgentProperties": {
       "type": "object",
       "description": "Properties for an observability agent resource.",
@@ -506,7 +498,7 @@
     },
     "ObservabilityAgentPropertiesUpdate": {
       "type": "object",
-      "description": "Properties for an observability agent resource.",
+      "description": "Updatable properties of an observability agent.",
       "properties": {
         "monitoringAccountId": {
           "type": "string",
@@ -522,7 +514,7 @@
         },
         "enabled": {
           "$ref": "#/definitions/EnabledState",
-          "description": "Whether the observability agent is enabled. Defaults to Enabled when not specified."
+          "description": "Whether the observability agent is enabled."
         },
         "operations": {
           "type": "array",
@@ -574,25 +566,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ObservabilityAgentResourceUpdate": {
-      "type": "object",
-      "description": "An observability agent resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ObservabilityAgentPropertiesUpdate",
-          "description": "Resource properties"
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
       ]
     },
     "OperationEntry": {

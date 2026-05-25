@@ -105,6 +105,22 @@ namespace Microsoft.Monitor {
   }
 
   /**
+   * The request body used to update an observability agent resource.
+   */
+  model ObservabilityAgentPatch {
+    ...Azure.ResourceManager.Foundations.TagsUpdateModel<ObservabilityAgentResource>;
+
+    /** The geo-location where the resource lives. */
+    location?: Azure.Core.azureLocation;
+
+    /** The managed service identities assigned to this resource. */
+    ...ManagedServiceIdentityProperty;
+
+    /** Updatable resource properties. */
+    properties?: ObservabilityAgentPropertiesUpdate;
+  }
+
+  /**
    * An observability agent resource.
    */
   model ObservabilityAgentResource
