@@ -1,0 +1,1375 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LocationCapabilities"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/capabilities": {
+      "get": {
+        "operationId": "Capabilities_ListByLocation",
+        "tags": [
+          "LocationCapabilities"
+        ],
+        "description": "Gets the subscription capabilities available for the specified location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location name whose capabilities are retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "If specified, restricts the response to only include the selected item.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "supportedEditions",
+              "supportedElasticPoolEditions",
+              "supportedManagedInstanceVersions",
+              "supportedInstancePoolEditions",
+              "supportedManagedInstanceEditions",
+              "supportedJobAgentVersions"
+            ],
+            "x-ms-enum": {
+              "name": "CapabilityGroup",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "supportedEditions",
+                  "value": "supportedEditions",
+                  "description": "supportedEditions"
+                },
+                {
+                  "name": "supportedElasticPoolEditions",
+                  "value": "supportedElasticPoolEditions",
+                  "description": "supportedElasticPoolEditions"
+                },
+                {
+                  "name": "supportedManagedInstanceVersions",
+                  "value": "supportedManagedInstanceVersions",
+                  "description": "supportedManagedInstanceVersions"
+                },
+                {
+                  "name": "supportedInstancePoolEditions",
+                  "value": "supportedInstancePoolEditions",
+                  "description": "supportedInstancePoolEditions"
+                },
+                {
+                  "name": "supportedManagedInstanceEditions",
+                  "value": "supportedManagedInstanceEditions",
+                  "description": "supportedManagedInstanceEditions"
+                },
+                {
+                  "name": "supportedJobAgentVersions",
+                  "value": "supportedJobAgentVersions",
+                  "description": "supportedJobAgentVersions"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LocationCapabilities"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List subscription capabilities in the given location.": {
+            "$ref": "./examples/LocationCapabilityListByLocation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoPauseDelayTimeRange": {
+      "type": "object",
+      "description": "Supported auto pause delay time range",
+      "properties": {
+        "minValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum value",
+          "readOnly": true
+        },
+        "maxValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum value",
+          "readOnly": true
+        },
+        "stepSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Step value for discrete values between the minimum value and the maximum value.",
+          "readOnly": true
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default value is no value is provided",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/PauseDelayTimeUnit",
+          "description": "Unit of time that delay is expressed in",
+          "readOnly": true
+        },
+        "doNotPauseValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Value that is used to not pause (infinite delay before pause)",
+          "readOnly": true
+        }
+      }
+    },
+    "EditionCapability": {
+      "type": "object",
+      "description": "The edition capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The database edition name.",
+          "readOnly": true
+        },
+        "supportedServiceLevelObjectives": {
+          "type": "array",
+          "description": "The list of supported service objectives for the edition.",
+          "items": {
+            "$ref": "#/definitions/ServiceObjectiveCapability"
+          },
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "readOnly": true
+        },
+        "readScale": {
+          "$ref": "#/definitions/ReadScaleCapability",
+          "description": "The read scale capability for the edition.",
+          "readOnly": true
+        },
+        "supportedStorageCapabilities": {
+          "type": "array",
+          "description": "The list of supported storage capabilities for this edition",
+          "items": {
+            "$ref": "#/definitions/StorageCapability"
+          },
+          "readOnly": true
+        },
+        "zonePinning": {
+          "type": "boolean",
+          "description": "Whether or not zone pinning is supported for the edition.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ElasticPoolEditionCapability": {
+      "type": "object",
+      "description": "The elastic pool edition capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The elastic pool edition name.",
+          "readOnly": true
+        },
+        "supportedElasticPoolPerformanceLevels": {
+          "type": "array",
+          "description": "The list of supported elastic pool DTU levels for the edition.",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerformanceLevelCapability"
+          },
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not zone redundancy is supported for the edition.",
+          "readOnly": true
+        },
+        "zonePinning": {
+          "type": "boolean",
+          "description": "Whether or not zone pinning is supported for the edition.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ElasticPoolPerDatabaseMaxPerformanceLevelCapability": {
+      "type": "object",
+      "description": "The max per-database performance level capability.",
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum performance level per database.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/PerformanceLevelUnit",
+          "description": "Unit type used to measure performance level.",
+          "readOnly": true
+        },
+        "supportedPerDatabaseMinPerformanceLevels": {
+          "type": "array",
+          "description": "The list of supported min database performance levels.",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerDatabaseMinPerformanceLevelCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ElasticPoolPerDatabaseMinPerformanceLevelCapability": {
+      "type": "object",
+      "description": "The minimum per-database performance level capability.",
+      "properties": {
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "The minimum performance level per database.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/PerformanceLevelUnit",
+          "description": "Unit type used to measure performance level.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ElasticPoolPerformanceLevelCapability": {
+      "type": "object",
+      "description": "The Elastic Pool performance level capability.",
+      "properties": {
+        "performanceLevel": {
+          "$ref": "#/definitions/PerformanceLevelCapability",
+          "description": "The performance level for the pool.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "type": "array",
+          "description": "List of supported license types.",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "maxDatabaseCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of databases supported.",
+          "readOnly": true
+        },
+        "includedMaxSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "The included (free) max size for this performance level.",
+          "readOnly": true
+        },
+        "supportedMaxSizes": {
+          "type": "array",
+          "description": "The list of supported max sizes.",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedPerDatabaseMaxSizes": {
+          "type": "array",
+          "description": "The list of supported per database max sizes.",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedPerDatabaseMaxPerformanceLevels": {
+          "type": "array",
+          "description": "The list of supported per database max performance levels.",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolPerDatabaseMaxPerformanceLevelCapability"
+          },
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not zone redundancy is supported for the performance level.",
+          "readOnly": true
+        },
+        "supportedMaintenanceConfigurations": {
+          "type": "array",
+          "description": "List of supported maintenance configurations",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfigurationCapability"
+          },
+          "readOnly": true
+        },
+        "supportedMinCapacities": {
+          "type": "array",
+          "description": "List of supported min capacities",
+          "items": {
+            "$ref": "#/definitions/MinCapacityCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "supportedAutoPauseDelay": {
+          "$ref": "#/definitions/AutoPauseDelayTimeRange",
+          "description": "Supported time range for auto pause delay",
+          "readOnly": true
+        },
+        "supportedPerDatabaseAutoPauseDelay": {
+          "$ref": "#/definitions/PerDatabaseAutoPauseDelayTimeRange",
+          "description": "Supported time range for per database auto pause delay",
+          "readOnly": true
+        },
+        "supportedZones": {
+          "type": "array",
+          "description": "List of supported availability zones",
+          "items": {
+            "$ref": "#/definitions/ZonePinningCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "FreeLimitExhaustionBehaviorCapability": {
+      "type": "object",
+      "description": "Supported free limit exhaustion behavior options",
+      "properties": {
+        "exhaustionBehaviorType": {
+          "$ref": "./common.json#/definitions/FreeLimitExhaustionBehavior",
+          "description": "Free limit exhaustion behavior type",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "Free limit exhaustion behavior status",
+          "readOnly": true
+        }
+      }
+    },
+    "InstancePoolEditionCapability": {
+      "type": "object",
+      "description": "The instance pool capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The instance pool version name.",
+          "readOnly": true
+        },
+        "supportedFamilies": {
+          "type": "array",
+          "description": "The supported families.",
+          "items": {
+            "$ref": "#/definitions/InstancePoolFamilyCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "InstancePoolFamilyCapability": {
+      "type": "object",
+      "description": "The instance pool family capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Family name.",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "type": "array",
+          "description": "List of supported license types.",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedVcoresValues": {
+          "type": "array",
+          "description": "List of supported virtual cores values.",
+          "items": {
+            "$ref": "#/definitions/InstancePoolVcoresCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "InstancePoolVcoresCapability": {
+      "type": "object",
+      "description": "The managed instance virtual cores capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The virtual cores identifier.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The virtual cores value.",
+          "readOnly": true
+        },
+        "storageLimit": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Storage limit.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "JobAgentEditionCapability": {
+      "type": "object",
+      "description": "The job agent edition capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The job agent edition name.",
+          "readOnly": true
+        },
+        "supportedServiceLevelObjectives": {
+          "type": "array",
+          "description": "The list of supported service level objectives for the edition.",
+          "items": {
+            "$ref": "#/definitions/JobAgentServiceLevelObjectiveCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "JobAgentServiceLevelObjectiveCapability": {
+      "type": "object",
+      "description": "The job agent service level objective capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The service objective name.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "JobAgentVersionCapability": {
+      "type": "object",
+      "description": "The job agent version capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The job agent version name.",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "type": "array",
+          "description": "The list of supported editions.",
+          "items": {
+            "$ref": "#/definitions/JobAgentEditionCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "LicenseTypeCapability": {
+      "type": "object",
+      "description": "The license type capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "License type identifier.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "LocationCapabilities": {
+      "type": "object",
+      "description": "The location capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The location name.",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "description": "The list of supported server versions.",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedManagedInstanceVersions": {
+          "type": "array",
+          "description": "The list of supported managed instance versions.",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceVersionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedJobAgentVersions": {
+          "type": "array",
+          "description": "The list of supported job agent versions.",
+          "items": {
+            "$ref": "#/definitions/JobAgentVersionCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "isZoneResilientProvisioningAllowed": {
+          "type": "boolean",
+          "description": "Whether or not the subscription is allowed to provision zone resilient resources.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "LogSizeCapability": {
+      "type": "object",
+      "description": "The log size capability.",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The log size limit (see 'unit' for the units).",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/LogSizeUnit",
+          "description": "The units that the limit is expressed in.",
+          "readOnly": true
+        }
+      }
+    },
+    "MaintenanceConfigurationCapability": {
+      "type": "object",
+      "description": "The maintenance configuration capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Maintenance configuration name",
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not zone redundancy is supported for the maintenance configuration.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ManagedInstanceEditionCapability": {
+      "type": "object",
+      "description": "The managed server capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The managed server version name.",
+          "readOnly": true
+        },
+        "isGeneralPurposeV2": {
+          "type": "boolean",
+          "description": "Whether or not this is a GPv2 variant of General Purpose edition.",
+          "readOnly": true
+        },
+        "supportedFamilies": {
+          "type": "array",
+          "description": "The supported families.",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceFamilyCapability"
+          },
+          "readOnly": true
+        },
+        "supportedStorageCapabilities": {
+          "type": "array",
+          "description": "The list of supported storage capabilities for this edition",
+          "items": {
+            "$ref": "#/definitions/StorageCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ManagedInstanceFamilyCapability": {
+      "type": "object",
+      "description": "The managed server family capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Family name.",
+          "readOnly": true
+        },
+        "sku": {
+          "type": "string",
+          "description": "SKU name.",
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not zone redundancy is supported for the family.",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "type": "array",
+          "description": "List of supported license types.",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "supportedVcoresValues": {
+          "type": "array",
+          "description": "List of supported virtual cores values.",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceVcoresCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ManagedInstanceMaintenanceConfigurationCapability": {
+      "type": "object",
+      "description": "The maintenance configuration capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Maintenance configuration name",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ManagedInstanceVcoresCapability": {
+      "type": "object",
+      "description": "The managed instance virtual cores capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The virtual cores identifier.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The virtual cores value.",
+          "readOnly": true
+        },
+        "supportedMemorySizesInGB": {
+          "$ref": "#/definitions/MaxLimitRangeCapability",
+          "description": "Supported memory sizes in GB.",
+          "readOnly": true
+        },
+        "supportedMemoryLimitsMB": {
+          "$ref": "#/definitions/MaxLimitRangeCapability",
+          "description": "Memory limit MB ranges.",
+          "readOnly": true
+        },
+        "includedMaxSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Included size.",
+          "readOnly": true
+        },
+        "supportedStorageSizes": {
+          "type": "array",
+          "description": "Storage size ranges.",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "includedStorageIOps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Included storage IOps.",
+          "readOnly": true
+        },
+        "supportedStorageIOps": {
+          "$ref": "#/definitions/MaxLimitRangeCapability",
+          "description": "Storage IOps ranges.",
+          "readOnly": true
+        },
+        "iopsMinValueOverrideFactorPerSelectedStorageGB": {
+          "type": "number",
+          "format": "double",
+          "description": "Min IOps override factor per selected storage GB.",
+          "readOnly": true
+        },
+        "iopsIncludedValueOverrideFactorPerSelectedStorageGB": {
+          "type": "number",
+          "format": "double",
+          "description": "Included IOps override factor per selected storage GB.",
+          "readOnly": true
+        },
+        "includedStorageThroughputMBps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Included storage throughput MBps.",
+          "readOnly": true
+        },
+        "supportedStorageThroughputMBps": {
+          "$ref": "#/definitions/MaxLimitRangeCapability",
+          "description": "Storage throughput MBps ranges.",
+          "readOnly": true
+        },
+        "throughputMBpsMinValueOverrideFactorPerSelectedStorageGB": {
+          "type": "number",
+          "format": "double",
+          "description": "Min throughput MBps override factor per selected storage GB.",
+          "readOnly": true
+        },
+        "throughputMBpsIncludedValueOverrideFactorPerSelectedStorageGB": {
+          "type": "number",
+          "format": "double",
+          "description": "Included throughput MBps override factor per selected storage GB.",
+          "readOnly": true
+        },
+        "instancePoolSupported": {
+          "type": "boolean",
+          "description": "True if this service objective is supported for managed instances in an instance pool.",
+          "readOnly": true
+        },
+        "standaloneSupported": {
+          "type": "boolean",
+          "description": "True if this service objective is supported for standalone managed instances.",
+          "readOnly": true
+        },
+        "supportedMaintenanceConfigurations": {
+          "type": "array",
+          "description": "List of supported maintenance configurations",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceMaintenanceConfigurationCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ManagedInstanceVersionCapability": {
+      "type": "object",
+      "description": "The managed instance capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The server version name.",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "type": "array",
+          "description": "The list of supported managed instance editions.",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceEditionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedInstancePoolEditions": {
+          "type": "array",
+          "description": "The list of supported instance pool editions.",
+          "items": {
+            "$ref": "#/definitions/InstancePoolEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "MaxLimitRangeCapability": {
+      "type": "object",
+      "description": "The maximum limit range capability.",
+      "properties": {
+        "minValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum value.",
+          "readOnly": true
+        },
+        "maxValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum value.",
+          "readOnly": true
+        },
+        "scaleSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Scale/step size for discrete values between the minimum value and the maximum value.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "MaxSizeCapability": {
+      "type": "object",
+      "description": "The maximum size capability.",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum size limit (see 'unit' for the units).",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/MaxSizeUnit",
+          "description": "The units that the limit is expressed in.",
+          "readOnly": true
+        }
+      }
+    },
+    "MaxSizeRangeCapability": {
+      "type": "object",
+      "description": "The maximum size range capability.",
+      "properties": {
+        "minValue": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Minimum value.",
+          "readOnly": true
+        },
+        "maxValue": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Maximum value.",
+          "readOnly": true
+        },
+        "scaleSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "Scale/step size for discrete values between the minimum value and the maximum value.",
+          "readOnly": true
+        },
+        "logSize": {
+          "$ref": "#/definitions/LogSizeCapability",
+          "description": "Size of transaction log.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "MinCapacityCapability": {
+      "type": "object",
+      "description": "The min capacity capability",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Min capacity value",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "PerDatabaseAutoPauseDelayTimeRange": {
+      "type": "object",
+      "description": "Supported auto pause delay time range",
+      "properties": {
+        "minValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum value",
+          "readOnly": true
+        },
+        "maxValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum value",
+          "readOnly": true
+        },
+        "stepSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Step value for discrete values between the minimum value and the maximum value.",
+          "readOnly": true
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default value if no value is provided",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/PauseDelayTimeUnit",
+          "description": "Unit of time that delay is expressed in",
+          "readOnly": true
+        },
+        "doNotPauseValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Value that is used to not pause (infinite delay before pause)",
+          "readOnly": true
+        }
+      }
+    },
+    "PerformanceLevelCapability": {
+      "type": "object",
+      "description": "The performance level capability.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Performance level value.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "./common.json#/definitions/PerformanceLevelUnit",
+          "description": "Unit type used to measure performance level.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReadScaleCapability": {
+      "type": "object",
+      "description": "The read scale capability.",
+      "properties": {
+        "maxNumberOfReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of read scale replicas.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "description": "The server capability",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The server version name.",
+          "readOnly": true
+        },
+        "supportedEditions": {
+          "type": "array",
+          "description": "The list of supported database editions.",
+          "items": {
+            "$ref": "#/definitions/EditionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedElasticPoolEditions": {
+          "type": "array",
+          "description": "The list of supported elastic pool editions.",
+          "items": {
+            "$ref": "#/definitions/ElasticPoolEditionCapability"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ServiceObjectiveCapability": {
+      "type": "object",
+      "description": "The service objectives capability.",
+      "properties": {
+        "id": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "The unique ID of the service objective.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The service objective name.",
+          "readOnly": true
+        },
+        "supportedMaxSizes": {
+          "type": "array",
+          "description": "The list of supported maximum database sizes.",
+          "items": {
+            "$ref": "#/definitions/MaxSizeRangeCapability"
+          },
+          "readOnly": true
+        },
+        "performanceLevel": {
+          "$ref": "#/definitions/PerformanceLevelCapability",
+          "description": "The performance level.",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "The sku.",
+          "readOnly": true
+        },
+        "supportedLicenseTypes": {
+          "type": "array",
+          "description": "List of supported license types.",
+          "items": {
+            "$ref": "#/definitions/LicenseTypeCapability"
+          },
+          "readOnly": true
+        },
+        "includedMaxSize": {
+          "$ref": "#/definitions/MaxSizeCapability",
+          "description": "The included (free) max size.",
+          "readOnly": true
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not zone redundancy is supported for the service objective.",
+          "readOnly": true
+        },
+        "supportedAutoPauseDelay": {
+          "$ref": "#/definitions/AutoPauseDelayTimeRange",
+          "description": "Supported time range for auto pause delay",
+          "readOnly": true
+        },
+        "supportedMinCapacities": {
+          "type": "array",
+          "description": "List of supported min capacities",
+          "items": {
+            "$ref": "#/definitions/MinCapacityCapability"
+          },
+          "readOnly": true
+        },
+        "computeModel": {
+          "type": "string",
+          "description": "The compute model",
+          "readOnly": true
+        },
+        "supportedMaintenanceConfigurations": {
+          "type": "array",
+          "description": "List of supported maintenance configurations",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfigurationCapability"
+          },
+          "readOnly": true
+        },
+        "zonePinning": {
+          "type": "boolean",
+          "description": "Whether or not zone pinning is supported.",
+          "readOnly": true
+        },
+        "supportedZones": {
+          "type": "array",
+          "description": "List of supported availability zones",
+          "items": {
+            "$ref": "#/definitions/ZonePinningCapability"
+          },
+          "readOnly": true
+        },
+        "supportedFreeLimitExhaustionBehaviors": {
+          "type": "array",
+          "description": "List of supported free limit exhaustion behaviors",
+          "items": {
+            "$ref": "#/definitions/FreeLimitExhaustionBehaviorCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "StorageCapability": {
+      "type": "object",
+      "description": "The storage account type capability.",
+      "properties": {
+        "storageAccountType": {
+          "$ref": "./common.json#/definitions/StorageCapabilityStorageAccountType",
+          "description": "The storage account type for the database's backups.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    },
+    "ZonePinningCapability": {
+      "type": "object",
+      "description": "The zone pinning capability",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "Name of the availability zone",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/CapabilityStatus",
+          "description": "The status of the capability.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the capability not being available."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
