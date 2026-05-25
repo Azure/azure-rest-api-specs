@@ -3070,6 +3070,11 @@
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
+        },
         "temperature": {
           "type": "number",
           "format": "float",
@@ -3891,6 +3896,11 @@
         "tool_choice": {
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
         },
         "temperature": {
           "type": "number",

@@ -70,6 +70,10 @@ model RequestSession {
   /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
 
+  /** Whether the model is allowed to call tools in parallel. */
+  @added(Versions.v2026_06_01_preview)
+  parallel_tool_calls?: boolean = true;
+
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
 
