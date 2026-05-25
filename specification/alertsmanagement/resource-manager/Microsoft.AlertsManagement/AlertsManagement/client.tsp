@@ -115,7 +115,22 @@ model AlertsClientOptions {
   "csharp"
 );
 @@clientName(AlertsSummaryGroup, "ServiceAlertSummaryGroup", "csharp");
-@@clientName(Comments, "ServiceAlertComments", "csharp");
+@@clientName(Comments, "ServiceAlertChangeStateContent", "csharp");
+@@clientName(
+  ActionSuppressedDetails,
+  "ServiceAlertActionSuppressedDetails",
+  "csharp"
+);
+@@clientName(
+  ActionTriggeredDetails,
+  "ServiceAlertActionTriggeredDetails",
+  "csharp"
+);
+@@clientName(
+  PropertyChangeDetails,
+  "ServiceAlertPropertyChangeDetails",
+  "csharp"
+);
 @@clientName(AlertEnrichmentResponse, "AlertEnrichmentResult", "csharp");
 @@clientName(AlertsMetaData, "ServiceAlertMetadata", "csharp");
 @@clientName(
@@ -153,6 +168,11 @@ model AlertsClientOptions {
 @@clientName(
   AlertsOperationGroup.metaData,
   "GetServiceAlertMetadata",
+  "csharp"
+);
+@@clientName(
+  AlertsOperationGroup.getSummary,
+  "GetServiceAlertSummary",
   "csharp"
 );
 @@clientName(PrometheusRangeQuery.start, "StartOn", "csharp");
