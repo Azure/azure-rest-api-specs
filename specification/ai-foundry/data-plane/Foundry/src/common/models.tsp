@@ -12,25 +12,6 @@ model ApiErrorResponse {
   error: ApiError;
 }
 
-/** Error response for Azure range errors. */
-alias AzureRangeErrorResponse =
-  | {
-      ...Azure.Core.Foundations.ErrorResponse;
-
-      @maxValue(499)
-      @minValue(400)
-      @statusCode
-      statusCode: int32;
-    }
-  | {
-      ...Azure.Core.Foundations.ErrorResponse;
-
-      @maxValue(599)
-      @minValue(500)
-      @statusCode
-      statusCode: int32;
-    };
-
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(
   OpenAI.Error,

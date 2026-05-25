@@ -16,13 +16,34 @@ alias FoundryDataPlaneApiVersionParameter = {
   apiVersion: string;
 };
 
+/** Error response for Azure range errors. */
+alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(499)
+      @minValue(400)
+      @statusCode
+      statusCode: int32;
+    }
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(599)
+      @minValue(500)
+      @statusCode
+      statusCode: int32;
+    };
+
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
   Azure.Core.Traits.NoConditionalRequests &
   FoundryDataPlaneApiVersionParameter;
 
-alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
-  FoundryDataPlaneAzureTraits>;
+alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<
+  ExtraTraits & FoundryDataPlaneAzureTraits,
+  AzureRangeErrorResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -30,24 +51,9 @@ op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params, ...FoundryDataPlaneApiVersionParameter): Response | {
-  // so error responses are mapped to 4XX and 5XX and not default
-  @maxValue(499)
-  @minValue(400)
-  @statusCode
-  statusCode: int32;
-
-  @body
-  body: ErrorResponse;
-} | {
-  @maxValue(599)
-  @minValue(500)
-  @statusCode
-  statusCode: int32;
-
-  @body
-  body: ErrorResponse;
-};
+>(...Params, ...FoundryDataPlaneApiVersionParameter):
+  | Response
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 // ---- Feature opt-in keys & preview headers ----
 
@@ -76,7 +82,9 @@ union FoundryFeaturesOptInKeys {
   agents_optimization_v1_preview: "AgentsOptimization=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -84,7 +92,9 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -493,7 +503,9 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJobPreview<AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
+op deleteJobPreview<AreaPreviewLabel extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
