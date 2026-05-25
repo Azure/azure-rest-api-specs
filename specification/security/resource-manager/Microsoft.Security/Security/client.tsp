@@ -786,6 +786,7 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(SensitivitySettingsAPI.UpdateSensitivitySettingsRequest, "UpdateSensitivitySettingsContent", "csharp");
 @@clientName(SecurityConnectorsAPI.EnvironmentData, "SecurityConnectorEnvironmentInfo", "csharp");
 @@clientName(SecurityConnectorsAPI.AwsEnvironmentData, "AwsEnvironmentInfo", "csharp");
+@@clientName(SecurityConnectorsAPI.GcpOrganizationalData, "GcpOrganizationalInfo", "csharp");
 @@clientName(SecurityConnectorsAPI.GcpProjectEnvironmentData, "GcpProjectEnvironmentInfo", "csharp");
 @@clientName(SecurityConnectorsAPI.GithubScopeEnvironmentData, "GithubScopeEnvironmentInfo", "csharp");
 @@clientName(SecurityConnectorsAPI.AzureDevOpsScopeEnvironmentData, "AzureDevOpsScopeEnvironmentInfo", "csharp");
