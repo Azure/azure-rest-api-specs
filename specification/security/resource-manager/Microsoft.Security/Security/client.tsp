@@ -809,7 +809,7 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(AssessmentAPI.AssessmentStatusCode, "SecurityAssessmentStatusCode", "csharp");
 @@clientName(AssessmentAPI.AssessmentStatusResponse, "SecurityAssessmentStatusResult", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponse, "SecurityAssessmentMetadataPropertiesResult", "csharp");
-@@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates, "SecurityAssessmentMetadataPropertiesResultPublishOn", "csharp");
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates, "SecurityAssessmentPublishDates", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentPartnerData, "SecurityAssessmentPartnerInfo", "csharp");
 @@clientName(SecurityConnectorsDevOpsAPI.AzureDevOpsOrgListResponse, "AzureDevOpsOrgListResult", "csharp");
 @@clientName(SecurityConnectorsDevOpsAPI.GitHubOwnerListResponse, "GitHubOwnerListResult", "csharp");
@@ -817,7 +817,8 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(SecurityConnectorsDevOpsAPI.IssueCreationRequest, "IssueCreationContent", "csharp");
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPolicyInitiateRequest, "JitNetworkAccessPolicyInitiateContent", "csharp");
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessRequest, "JitNetworkAccessContent", "csharp");
-@@clientName(TasksAPI.SecurityTaskParameters, "SecurityTaskInfo", "csharp");
+@@clientName(TasksAPI.SecurityTaskProperties, "SecurityTaskPropertiesGenerated", "csharp");
+@@clientName(TasksAPI.SecurityTaskParameters, "SecurityTaskProperties", "csharp");
 @@clientName(SensitivitySettingsAPI.UpdateSensitivitySettingsRequest, "UpdateSensitivitySettingsContent", "csharp");
 @@clientName(SecurityConnectorsAPI.EnvironmentData, "SecurityConnectorEnvironmentInfo", "csharp");
 @@clientName(SecurityConnectorsAPI.AwsEnvironmentData, "AwsEnvironmentInfo", "csharp");
@@ -832,11 +833,34 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(SecurityStandardsAPI.StandardAssignmentPropertiesExemptionData, "StandardAssignmentExemptionInfo", "csharp");
 @@clientName(SecurityStandardsAPI.StandardAssignmentPropertiesAttestationData, "StandardAssignmentAttestationInfo", "csharp");
 @@clientName(TasksAPI.SecurityTaskParameters.name, "TaskName", "csharp");
+@@clientName(TasksAPI.SecurityTaskProperties.creationTimeUtc, "CreatedOn", "csharp");
+@@clientName(TasksAPI.SecurityTaskProperties.lastStateChangeTimeUtc, "LastStateChangedOn", "csharp");
 @@clientName(SecuritySolutionsAPI.ExternalSecuritySolution, "ExternalSecuritySolution", "csharp");
 @@clientName(SecurityConnectorsAPI.cloudOffering, "SecurityCenterCloudOffering", "csharp");
 @@clientName(SecurityConnectorsAPI.AwsOrganizationalData, "AwsOrganizationalInfo", "csharp");
 @@clientName(Common.ResourceDetails, "SecurityCenterResourceDetails", "csharp");
 @@clientName(AlertsAPI.ResourceIdentifier, "SecurityAlertResourceIdentifier", "csharp");
+@@clientName(AlertsAPI.AlertSeverity, "SecurityAlertSeverity", "csharp");
+@@clientName(AlertsAPI.Intent, "KillChainIntent", "csharp");
+@@clientName(AlertsAPI.AlertStatus, "SecurityAlertStatus", "csharp");
+@@clientName(AlertsAPI.AlertEntity, "SecurityAlertEntity", "csharp");
+@@clientName(AlertsAPI.AlertPropertiesSupportingEvidence, "SecurityAlertSupportingEvidence", "csharp");
+@@clientName(AlertsAPI.AlertEntity.type, "AlertEntityType", "csharp");
+@@clientName(AlertsAPI.AlertPropertiesSupportingEvidence.type, "SecurityAlertSupportingEvidenceType", "csharp");
+@@clientName(AlertsAPI.AlertSimulatorRequestProperties, "SecurityAlertSimulatorRequestProperties", "csharp");
+@@usage(
+  AlertsAPI.AlertPropertiesSupportingEvidence,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertProperties.startTimeUtc, "StartOn", "csharp");
+@@clientName(AlertsAPI.AlertProperties.endTimeUtc, "EndOn", "csharp");
+@@clientName(AlertsAPI.AlertProperties.timeGeneratedUtc, "GeneratedOn", "csharp");
+@@clientName(AlertsAPI.AlertProperties.processingEndTimeUtc, "ProcessingEndOn", "csharp");
+@@alternateType(AlertsAPI.AlertProperties.alertUri, url, "csharp");
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataProperties.preview, "IsPreview", "csharp");
+@@clientName(AssessmentAPI.Tactics, "SecurityAssessmentTactic", "csharp");
+@@clientName(AssessmentAPI.Techniques, "SecurityAssessmentTechnique", "csharp");
 @@clientName(SubAssessmentsAPI.AdditionalData, "SecuritySubAssessmentAdditionalInfo", "csharp");
 @@clientName(IoTSecurityAPI.TagsResource, "SecurityCenterTagsResourceInfo", "csharp");
 @@markAsPageable(PricingsAPI.Pricings.list, "csharp");
@@ -987,7 +1011,7 @@ op alertsListResourceGroupLevelByRegionCustomized(
   /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
   @path
   @segment("locations")
-  ascLocation: string,
+  ascLocation: Azure.Core.azureLocation,
 
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,

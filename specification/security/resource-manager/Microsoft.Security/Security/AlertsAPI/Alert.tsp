@@ -40,7 +40,7 @@ alias AlertOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
   },
   {
     /** Name of the alert object */
@@ -129,7 +129,7 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
   },
   {
     /** Name of the alert object */
