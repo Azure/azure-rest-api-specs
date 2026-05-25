@@ -95,7 +95,8 @@ export async function main() {
     ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
   });
 
-  // this is a request to get the list of RPaaS folders from azure-rest-api-specs -> main branch -> dump specification folder names
+  // this requests a public proxy list for RPaaS onboarding checks from
+  // azure-rest-api-specs -> main branch -> .github/arm-leases top-level folders
   const mainSpecFolders = await getRPaaSFolderList(github, owner, repo);
 
   const labelContext: LabelContext = {

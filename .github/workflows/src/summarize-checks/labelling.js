@@ -937,9 +937,9 @@ const rulesPri0ArmRpaas = [
     troubleshootingGuide:
       "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
       "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +
-      "without first merging the new RP to the <code>RPSaaSMaster</code> branch. " +
-      "To resolve, first submit and merge a PR with the new RP namespace to the <code>RPSaaSMaster</code>branch." +
-      "This PR will remain blocked until then.",
+      "that is not currently found in the public <code>.github/arm-leases</code> onboarding metadata used by this check. " +
+      "If the RP is already onboarded privately, an ARM reviewer can manually verify and apply <code>RPaaSException</code> to unblock this PR. " +
+      "Otherwise, complete RPaaS onboarding first.",
   },
 ];
 
