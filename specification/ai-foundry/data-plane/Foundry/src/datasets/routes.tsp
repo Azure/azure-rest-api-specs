@@ -20,7 +20,7 @@ interface Datasets
     > {
   @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
   @Rest.action("startPendingUpload")
-  startPendingUploadVersion is Azure.Core.Foundations.ResourceOperation<
+  startPendingUploadVersion is FoundryResourceOperation<
     DatasetVersion,
     {
       @doc("The pending upload request parameters")
@@ -33,8 +33,7 @@ interface Datasets
       @Http.path
       version: string;
     },
-    PendingUploadResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    PendingUploadResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
@@ -43,7 +42,7 @@ interface Datasets
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
-  getCredentials is Azure.Core.Foundations.ResourceOperation<
+  getCredentials is FoundryResourceOperation<
     DatasetVersion,
     {
       @doc("The specific version id of the DatasetVersion to operate on.")
@@ -51,7 +50,6 @@ interface Datasets
       @Http.path
       version: string;
     },
-    AssetCredentialResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    AssetCredentialResponse
   >;
 }

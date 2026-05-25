@@ -27,27 +27,25 @@ alias EvaluationRulesFilterQueryParams = {
 interface EvaluationRules {
   // GET /evaluationrules/{id}
   @doc("Get an evaluation rule.")
-  get is Azure.Core.Foundations.ResourceOperation<
+  get is FoundryResourceOperation<
     EvaluationRule,
     {},
-    Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>
   >;
 
   // DELETE /evaluationrules/{id}
   @doc("Delete an evaluation rule.")
   @Http.delete
-  delete is Azure.Core.Foundations.ResourceOperation<
+  delete is FoundryResourceOperation<
     EvaluationRule,
     {},
-    Http.NoContentResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    Http.NoContentResponse
   >;
 
   // PUT /evaluationrules/{id}
   @doc("Create or update an evaluation rule.")
   @Http.put
-  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdate is FoundryResourceOperation<
     EvaluationRule,
     {
       ...EvaluationRulesPreviewHeader;
@@ -56,17 +54,15 @@ interface EvaluationRules {
       @Http.bodyRoot
       evaluationRule: EvaluationRule;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationRule>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationRule>
   >;
 
   // GET /evaluationrules
   @doc("List all evaluation rules.")
   @Rest.listsResource(EvaluationRule)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     EvaluationRule,
     EvaluationRulesFilterQueryParams,
-    Azure.Core.Page<EvaluationRule>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Page<EvaluationRule>
   >;
 }

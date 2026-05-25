@@ -38,11 +38,10 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List the latest version of each evaluator")
   @Rest.listsResource(EvaluatorVersion)
-  listLatestVersions is Azure.Core.Foundations.ResourceList<
+  listLatestVersions is FoundryResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
-    Azure.Core.Page<EvaluatorVersion>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Page<EvaluatorVersion>
   >;
 
   // GET /evaluators/{name}/versions/{version}
@@ -51,7 +50,7 @@ interface Evaluators {
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     EvaluatorVersion
   )
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -64,8 +63,7 @@ interface Evaluators {
       @Http.path
       version: string;
     },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
   // DELETE /evaluators/{name}/versions/{version}
@@ -75,7 +73,7 @@ interface Evaluators {
     EvaluatorVersion
   )
   @Http.delete
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -85,8 +83,7 @@ interface Evaluators {
       @Http.path
       version: string;
     },
-    Http.NoContentResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    Http.NoContentResponse
   >;
 
   // POST /evaluators/{evaluatorName}/versions
@@ -94,7 +91,7 @@ interface Evaluators {
   @doc("Create a new {name} with auto incremented version id", EvaluatorVersion)
   @Rest.segment("versions")
   @Http.post
-  createVersion is Azure.Core.Foundations.ResourceOperation<
+  createVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -102,8 +99,7 @@ interface Evaluators {
       @Http.bodyRoot
       evaluator_version: EvaluatorVersion;
     },
-    Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
   >;
 
   // PATCH /evaluators/{evaluatorName}/versions/{version}
@@ -111,7 +107,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update an existing {name} with the given version id", EvaluatorVersion)
   @Http.patch(#{ implicitOptionality: true })
-  updateVersion is Azure.Core.Foundations.ResourceOperation<
+  updateVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -125,8 +121,7 @@ interface Evaluators {
       @Http.bodyRoot
       evaluator_version: EvaluatorVersion;
     },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

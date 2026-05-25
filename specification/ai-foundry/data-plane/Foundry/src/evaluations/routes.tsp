@@ -20,28 +20,26 @@ interface Evaluations {
   @doc("Creates an evaluation run.")
   @route("runs:run")
   @post
-  create is Azure.Core.Foundations.Operation<
+  create is FoundryOperation<
     {
       @doc("Evaluation to be run")
       @body
       evaluation: Evaluation;
     },
-    ResourceCreatedResponse<Evaluation>,
-    ErrorResponse = AzureRangeErrorResponse
+    ResourceCreatedResponse<Evaluation>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an agent evaluation run.")
   @route("runs:runAgent")
   @post
-  createAgentEvaluation is Azure.Core.Foundations.Operation<
+  createAgentEvaluation is FoundryOperation<
     {
       @doc("Agent evaluation to be run")
       @body
       evaluation: AgentEvaluationRequest;
     },
-    ResourceCreatedResponse<AgentEvaluation>,
-    ErrorResponse = AzureRangeErrorResponse
+    ResourceCreatedResponse<AgentEvaluation>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

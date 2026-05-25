@@ -11,23 +11,21 @@ alias RedTeamsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOp
 interface RedTeams {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Get a redteam by name.")
-  get is Azure.Core.Foundations.ResourceOperation<
+  get is FoundryResourceOperation<
     RedTeam,
     {
       ...RedTeamsPreviewHeader;
     },
-    Azure.Core.Foundations.ResourceOkResponse<RedTeam>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<RedTeam>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List a redteam by name.")
   @Rest.listsResource(RedTeam)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     RedTeam,
     RedTeamsPreviewHeader,
-    Azure.Core.Page<RedTeam>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Page<RedTeam>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

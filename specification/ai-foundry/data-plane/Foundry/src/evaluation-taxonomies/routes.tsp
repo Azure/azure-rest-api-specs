@@ -21,40 +21,37 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 @tag("Evaluation Taxonomies")
 interface EvaluationTaxonomies {
   @doc("Get an evaluation run by name.")
-  get is Azure.Core.Foundations.ResourceOperation<
+  get is FoundryResourceOperation<
     EvaluationTaxonomy,
     {
       ...EvaluationTaxonomiesPreviewHeader;
     },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
   >;
 
   @doc("List evaluation taxonomies")
   @Rest.listsResource(EvaluationTaxonomy)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     EvaluationTaxonomy,
     EvaluationTaxonomiesFilterQueryParamsTraits &
       EvaluationTaxonomiesPreviewHeader,
-    Azure.Core.Page<EvaluationTaxonomy>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Page<EvaluationTaxonomy>
   >;
 
   @doc("Delete an evaluation taxonomy by name.")
   @Http.delete
-  delete is Azure.Core.Foundations.ResourceOperation<
+  delete is FoundryResourceOperation<
     EvaluationTaxonomy,
     {
       ...EvaluationTaxonomiesPreviewHeader;
     },
-    Http.NoContentResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    Http.NoContentResponse
   >;
 
   @doc("Create an evaluation taxonomy.")
   @put
   @route("/evaluationtaxonomies/{name}")
-  create is Azure.Core.Foundations.Operation<
+  create is FoundryOperation<
     {
       ...EvaluationTaxonomiesPreviewHeader;
 
@@ -66,14 +63,13 @@ interface EvaluationTaxonomies {
       @body
       taxonomy: EvaluationTaxonomy;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
 
   @doc("Update an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
-  update is Azure.Core.Foundations.Operation<
+  update is FoundryOperation<
     {
       ...EvaluationTaxonomiesPreviewHeader;
 
@@ -85,7 +81,6 @@ interface EvaluationTaxonomies {
       @body
       taxonomy: EvaluationTaxonomy;
     },
-    OkResponse & EvaluationTaxonomy,
-    ErrorResponse = AzureRangeErrorResponse
+    OkResponse & EvaluationTaxonomy
   >;
 }

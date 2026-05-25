@@ -52,6 +52,44 @@ alias FoundryStandardResourceOperations = Azure.Core.ResourceOperations<
   AzureRangeErrorResponse
 >;
 
+op FoundryOperation<
+  Params extends Reflection.Model,
+  Response,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.Operation<
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryResourceOperation<
+  Resource extends Reflection.Model,
+  Params extends Reflection.Model,
+  Response,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.ResourceOperation<
+  Resource,
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
+op FoundryResourceList<
+  Resource extends Reflection.Model,
+  Params extends Reflection.Model,
+  Response extends Reflection.Model,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.ResourceList<
+  Resource,
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlaneOperation<
@@ -257,11 +295,10 @@ interface VersionedOperations<
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc("List the latest version of each {name}", TEntityType)
   @Rest.listsResource(TEntityType)
-  listLatest is Azure.Core.Foundations.ResourceList<
+  listLatest is FoundryResourceList<
     TEntityType,
     TListLatestParameters,
-    Azure.Core.Page<TEntityType>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Page<TEntityType>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -269,7 +306,7 @@ interface VersionedOperations<
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     TEntityType
   )
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     TEntityType,
     {
       @doc("The specific version id of the {name} to retrieve.", TEntityType)
@@ -277,8 +314,7 @@ interface VersionedOperations<
       @path
       version: string;
     },
-    Azure.Core.Foundations.ResourceOkResponse<TEntityType>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<TEntityType>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -287,7 +323,7 @@ interface VersionedOperations<
     TEntityType
   )
   @delete
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     TEntityType,
     {
       @doc("The version of the {name} to delete.", TEntityType)
@@ -295,8 +331,7 @@ interface VersionedOperations<
       @path
       version: string;
     },
-    NoContentResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    NoContentResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -305,11 +340,10 @@ interface VersionedOperations<
     TEntityType
   )
   @patch
-  createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdateVersion is FoundryResourceOperation<
     TEntityType,
     TInputParameters,
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
   >;
 }
 

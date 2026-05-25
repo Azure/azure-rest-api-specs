@@ -33,7 +33,7 @@ interface Models
     ModelVersion
   )
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     ModelVersion,
     {
       ...ModelsPreviewHeader;
@@ -43,8 +43,7 @@ interface Models
       @path
       version: string;
     },
-    Azure.Core.Foundations.ResourceOkResponse<ModelVersion>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceOkResponse<ModelVersion>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -54,7 +53,7 @@ interface Models
   )
   @delete
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     ModelVersion,
     {
       ...ModelsPreviewHeader;
@@ -64,8 +63,7 @@ interface Models
       @path
       version: string;
     },
-    OkResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    OkResponse
   >;
 
   // The method name `createOrUpdateVersion` is required by the `VersionedOperations` interface
@@ -77,11 +75,10 @@ interface Models
   @operationId("Models_updateVersion")
   @patch
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdateVersion is FoundryResourceOperation<
     ModelVersion,
     InputParameters<UpdateModelVersionRequest> & ModelsPreviewHeader,
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>,
-    ErrorResponse = AzureRangeErrorResponse
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom async creation action"
@@ -89,7 +86,7 @@ interface Models
   @route("/models/{name}/versions/{version}/createAsync")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  createAsync is Azure.Core.Foundations.Operation<
+  createAsync is FoundryOperation<
     {
       ...ModelsPreviewHeader;
 
@@ -105,8 +102,7 @@ interface Models
       @bodyRoot
       model_version: ModelVersion;
     },
-    CreateModelVersionAsyncResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    CreateModelVersionAsyncResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom pending upload action"
@@ -114,7 +110,7 @@ interface Models
   @route("/models/{name}/versions/{version}/startPendingUpload")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  startPendingUpload is Azure.Core.Foundations.Operation<
+  startPendingUpload is FoundryOperation<
     {
       ...ModelsPreviewHeader;
 
@@ -129,8 +125,7 @@ interface Models
       @bodyRoot
       pending_upload_request: ModelPendingUploadRequest;
     },
-    ModelPendingUploadResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    ModelPendingUploadResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential action"
@@ -138,7 +133,7 @@ interface Models
   @route("/models/{name}/versions/{version}/credentials")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  getCredentials is Azure.Core.Foundations.Operation<
+  getCredentials is FoundryOperation<
     {
       ...ModelsPreviewHeader;
 
@@ -153,7 +148,6 @@ interface Models
       @bodyRoot
       credential_request: ModelCredentialRequest;
     },
-    AssetCredentialResponse,
-    ErrorResponse = AzureRangeErrorResponse
+    AssetCredentialResponse
   >;
 }
