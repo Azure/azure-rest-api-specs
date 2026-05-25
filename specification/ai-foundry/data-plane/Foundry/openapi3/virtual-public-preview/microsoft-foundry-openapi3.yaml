@@ -77,8 +77,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OptimizationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -195,8 +201,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -258,8 +270,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OptimizationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -305,8 +323,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -409,8 +433,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -460,8 +490,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CandidateMetadata'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -511,8 +547,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CandidateDeployConfig'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -570,8 +612,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -621,8 +669,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CandidateResults'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -672,8 +726,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PromoteCandidateResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -724,8 +784,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OptimizationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -778,12 +844,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
@@ -885,8 +961,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -969,8 +1051,14 @@ paths:
           content:
             application/json:
               schema: {}
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1005,8 +1093,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1054,12 +1148,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
@@ -1112,8 +1216,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteAgentResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1152,8 +1262,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1230,8 +1346,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1297,8 +1419,14 @@ paths:
           content:
             '*/*':
               schema: {}
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1350,8 +1478,14 @@ paths:
               schema:
                 type: object
                 additionalProperties: {}
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1413,8 +1547,14 @@ paths:
           content:
             '*/*':
               schema: {}
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1476,8 +1616,14 @@ paths:
           content:
             '*/*':
               schema: {}
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1535,8 +1681,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSessionResource'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1649,8 +1801,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1714,8 +1872,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionDirectoryListResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1782,8 +1946,14 @@ paths:
       responses:
         '204':
           description: 'There is no content to send for this request, but the headers may be useful. '
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1847,8 +2017,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SessionFileWriteResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1917,8 +2093,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -1973,8 +2155,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSessionResource'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2026,8 +2214,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2074,8 +2268,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2112,8 +2312,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2218,8 +2424,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2268,8 +2480,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2321,12 +2539,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentVersionObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
@@ -2427,8 +2655,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2466,8 +2700,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentVersionObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2515,8 +2755,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteAgentVersionResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2562,8 +2808,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentContainerObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2671,8 +2923,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2730,8 +2988,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2814,8 +3078,14 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2873,8 +3143,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -2949,8 +3225,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3008,8 +3290,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentContainerOperationObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3105,8 +3393,14 @@ paths:
             text/event-stream:
               schema:
                 $ref: '#/components/schemas/SessionLogEvent'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3146,8 +3440,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentVersionObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3179,8 +3479,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3408,8 +3714,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3463,8 +3775,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3522,8 +3840,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3562,8 +3886,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -3607,8 +3937,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4027,8 +4363,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4131,8 +4473,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4183,8 +4531,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4223,8 +4577,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4268,8 +4628,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4374,8 +4740,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -4541,8 +4913,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteRunResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5193,8 +5571,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5297,8 +5681,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5349,8 +5739,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5390,8 +5786,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5435,8 +5837,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorGenerationJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5788,8 +6196,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetCredentialResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -5844,8 +6258,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingUploadResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6086,8 +6506,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Insight'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6162,8 +6588,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedInsight'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6210,8 +6642,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Insight'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6264,8 +6702,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedManagedAgentIdentityBlueprint'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6305,8 +6749,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ManagedAgentIdentityBlueprint'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6352,8 +6802,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ManagedAgentIdentityBlueprint'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6389,8 +6845,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6425,8 +6887,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6548,8 +7016,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6592,8 +7066,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6651,8 +7131,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6694,8 +7180,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteMemoryStoreResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6738,8 +7230,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryItem'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6809,8 +7307,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryItem'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6870,8 +7374,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryItem'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -6919,8 +7429,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteMemoryResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -7029,8 +7545,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -7091,8 +7613,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreUpdateResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -7135,8 +7663,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreDeleteScopeResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -7191,8 +7725,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreSearchResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -7266,8 +7806,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MemoryStoreUpdateResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8744,8 +9290,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.FineTuningJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8792,8 +9344,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ListPaginatedFineTuningJobsResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8828,8 +9386,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.FineTuningJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8861,8 +9425,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.FineTuningJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8910,8 +9480,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ListFineTuningJobCheckpointsResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8959,8 +9535,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ListFineTuningJobEventsResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -8992,8 +9574,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.FineTuningJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -9025,8 +9613,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.FineTuningJob'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -9836,8 +10430,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedTeam'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -9937,8 +10537,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -9976,8 +10582,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Routine'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10020,8 +10632,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Routine'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10054,8 +10672,14 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10153,8 +10777,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10192,8 +10822,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Routine'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10231,8 +10867,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DispatchRoutineResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10276,8 +10918,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Routine'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10560,8 +11208,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScheduleRun'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10654,8 +11308,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10698,8 +11358,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Skill'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10741,8 +11407,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Skill'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10796,8 +11468,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteSkillResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10841,8 +11519,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -10885,12 +11569,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SkillVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/ApiErrorResponse'
+                  - $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview
@@ -11009,8 +11703,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11059,8 +11759,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SkillVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11108,8 +11814,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteSkillVersionResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11159,8 +11871,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11248,8 +11966,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11281,8 +12005,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToolboxObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11308,8 +12038,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToolboxObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11342,8 +12078,14 @@ paths:
       responses:
         '204':
           description: 'There is no content to send for this request, but the headers may be useful. '
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11376,8 +12118,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToolboxVersionObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11499,8 +12247,14 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11538,8 +12292,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ToolboxVersionObject'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:
@@ -11572,8 +12332,14 @@ paths:
       responses:
         '204':
           description: 'There is no content to send for this request, but the headers may be useful. '
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
           content:
             application/json:
               schema:

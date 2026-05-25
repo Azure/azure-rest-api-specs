@@ -30,7 +30,24 @@ op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
+>(...Params, ...FoundryDataPlaneApiVersionParameter): Response | {
+  // so error responses are mapped to 4XX and 5XX and not default
+  @maxValue(499)
+  @minValue(400)
+  @statusCode
+  statusCode: int32;
+
+  @body
+  body: ErrorResponse;
+} | {
+  @maxValue(599)
+  @minValue(500)
+  @statusCode
+  statusCode: int32;
+
+  @body
+  body: ErrorResponse;
+};
 
 // ---- Feature opt-in keys & preview headers ----
 
