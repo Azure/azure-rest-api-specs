@@ -232,6 +232,16 @@ model CertificateAkvDetails {
   @minLength(1)
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   certificateName?: string;
+
+  /**
+   * Optional resource ID of the managed identity that has access to the Azure Key Vault (AKV) secret. If a value is provided, it is used to find a matching entry in the account's collection of user-assigned managed identities. If no match is found, an exception is thrown. If no value is provided, the system-assigned managed identity is used.
+   */
+  @added(Versions.v2026_03_15_preview)
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
@@ -258,6 +268,16 @@ model CredentialsAkvDetails {
   @minLength(1)
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   secretName?: string;
+
+  /**
+   * Optional resource ID of the managed identity that has access to the Azure Key Vault (AKV) secret. If a value is provided, it is used to find a matching entry in the account's collection of user-assigned managed identities. If no match is found, an exception is thrown. If no value is provided, the system-assigned managed identity is used.
+   */
+  @added(Versions.v2026_03_15_preview)
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
