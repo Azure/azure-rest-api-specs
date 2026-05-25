@@ -956,7 +956,7 @@ using Microsoft.DesktopVirtualization;
 @@clientName(SSOSecretType, "SsoSecretType", "java");
 @@clientName(
   AppAttachPackagePatchProperties.keyVaultURL,
-  "keyVaultUri",
+  "keyVaultUrl",
   "java"
 );
-@@clientName(AppAttachPackageProperties.keyVaultURL, "keyVaultUri", "java");
+@@clientName(AppAttachPackageProperties.keyVaultURL, "keyVaultUrl", "java");

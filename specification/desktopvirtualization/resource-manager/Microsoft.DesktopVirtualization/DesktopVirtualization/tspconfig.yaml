@@ -19,9 +19,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-desktopvirtualization"
     namespace: "com.azure.resourcemanager.desktopvirtualization"
     service-name: "DesktopVirtualization"
-    payload-flattening-threshold: 1
     use-object-for-unknown: true
+    generate-async-methods: true
     flavor: azure
+    add-inner: RegistrationTokenMinimal,RegistrationTokenList
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
