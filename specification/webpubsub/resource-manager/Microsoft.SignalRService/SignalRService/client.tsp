@@ -35,9 +35,7 @@ using Http;
 @@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
 @@clientName(
   Microsoft.SignalRService.WebPubSubResourceList,
-  "ResourceInfoList",
-  "go"
-);
+  "ResourceInfoList", "go");
 @@clientName(EventHandler, "WebPubSubEventHandler", "csharp");
 @@clientName(WebPubSubRequestType.RESTAPI, "RestApi", "csharp");
 @@clientName(ProvisioningState, "WebPubSubProvisioningState", "csharp");
@@ -275,7 +273,7 @@ op WebPubSubHubsGetCustomized(
   resourceName: string,
 ): WebPubSubHub;
 
-@@override(WebPubSubHubs.get, WebPubSubHubsGetCustomized, "go");
+@@override(WebPubSubHubs.get, WebPubSubHubsGetCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -301,9 +299,7 @@ op WebPubSubHubsCreateOrUpdateCustomized(
 
 @@override(
   WebPubSubHubs.createOrUpdate,
-  WebPubSubHubsCreateOrUpdateCustomized,
-  "go"
-);
+  WebPubSubHubsCreateOrUpdateCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -324,7 +320,7 @@ op WebPubSubHubsDeleteCustomized(
   resourceName: string,
 ): void;
 
-@@override(WebPubSubHubs.delete, WebPubSubHubsDeleteCustomized, "go");
+@@override(WebPubSubHubs.delete, WebPubSubHubsDeleteCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -347,9 +343,7 @@ op PrivateEndpointConnectionsGetCustomized(
 
 @@override(
   PrivateEndpointConnections.get,
-  PrivateEndpointConnectionsGetCustomized,
-  "go"
-);
+  PrivateEndpointConnectionsGetCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -375,9 +369,7 @@ op PrivateEndpointConnectionsUpdateCustomized(
 
 @@override(
   PrivateEndpointConnections.update,
-  PrivateEndpointConnectionsUpdateCustomized,
-  "go"
-);
+  PrivateEndpointConnectionsUpdateCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -400,9 +392,7 @@ op PrivateEndpointConnectionsDeleteCustomized(
 
 @@override(
   PrivateEndpointConnections.delete,
-  PrivateEndpointConnectionsDeleteCustomized,
-  "go"
-);
+  PrivateEndpointConnectionsDeleteCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -425,9 +415,7 @@ op WebPubSubSharedPrivateLinkResourcesGetCustomized(
 
 @@override(
   WebPubSubSharedPrivateLinkResources.get,
-  WebPubSubSharedPrivateLinkResourcesGetCustomized,
-  "go"
-);
+  WebPubSubSharedPrivateLinkResourcesGetCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -453,9 +441,7 @@ op WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized(
 
 @@override(
   WebPubSubSharedPrivateLinkResources.createOrUpdate,
-  WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized,
-  "go"
-);
+  WebPubSubSharedPrivateLinkResourcesCreateOrUpdateCustomized, "go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -478,6 +464,4 @@ op WebPubSubSharedPrivateLinkResourcesDeleteCustomized(
 
 @@override(
   WebPubSubSharedPrivateLinkResources.delete,
-  WebPubSubSharedPrivateLinkResourcesDeleteCustomized,
-  "go"
-);
+  WebPubSubSharedPrivateLinkResourcesDeleteCustomized, "go,python,javascript");
