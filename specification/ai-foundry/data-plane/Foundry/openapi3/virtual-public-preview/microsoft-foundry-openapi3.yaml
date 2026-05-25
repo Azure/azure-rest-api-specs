@@ -3991,8 +3991,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedDatasetVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4075,8 +4087,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatasetVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4109,8 +4133,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4153,8 +4189,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DatasetVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4199,8 +4247,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetCredentialResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4737,8 +4797,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedEvaluationSuiteVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4871,8 +4943,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4903,8 +4987,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -4945,8 +5041,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationSuiteVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5053,8 +5161,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedEvaluationRule'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5086,8 +5206,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationRule'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5114,8 +5246,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5160,8 +5304,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationRule'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5379,8 +5535,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Evaluation'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5411,8 +5579,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentEvaluation'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5465,8 +5645,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedEvaluationTaxonomy'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5506,8 +5698,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationTaxonomy'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5542,8 +5746,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5588,8 +5804,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationTaxonomy'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -5635,8 +5863,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationTaxonomy'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6027,8 +6267,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedEvaluatorVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6140,8 +6392,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6193,8 +6457,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6235,8 +6511,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6281,8 +6569,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6439,8 +6739,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedIndex'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6523,8 +6835,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Index'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6557,8 +6881,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -6601,8 +6937,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Index'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8029,8 +8377,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedModelVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8129,8 +8489,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8174,8 +8546,20 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8229,8 +8613,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelVersion'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8303,8 +8699,20 @@ paths:
                     format: uri
                     nullable: true
                     description: URL to the operation result, or null if the operation is still in progress.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8360,8 +8768,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssetCredentialResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -8416,8 +8836,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ModelPendingUploadResponse'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -10516,8 +10948,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedRedTeam'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -10557,8 +11001,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RedTeam'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -11138,8 +11594,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedSchedule'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -11175,8 +11643,20 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -11215,8 +11695,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Schedule'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -11261,8 +11753,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Schedule'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -11323,8 +11827,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedScheduleRun'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
