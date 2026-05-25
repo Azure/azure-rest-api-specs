@@ -140,6 +140,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  ConfigurationStoresOperationGroup.listDeleted,
+  "GetDeletedAppConfigurationStores",
+  "csharp"
+);
+@@clientName(
   OperationsOperationGroup.regionalCheckNameAvailability,
   "CheckAppConfigurationRegionalNameAvailability",
   "csharp"
