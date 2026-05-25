@@ -495,6 +495,10 @@ op privateLinkResourcesGetCustomization(
   "SecurityWorkspaceSetting",
   "csharp"
 );
+@@clientName(AssessmentAPI.SecurityAssessmentMetadata,
+  "SecurityAssessmentMetadataGenerated",
+  "csharp"
+);
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataResponse,
   "SecurityAssessmentMetadata",
   "csharp"
@@ -693,10 +697,6 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToInProgress,
   "UpdateSatateToInProgress",
-  "csharp"
-);
-@@clientName(AlertsAPI.AlertSimulatorRequestBody,
-  "SecurityAlertSimulatorContent",
   "csharp"
 );
 @@clientName(SecurityConnectorsDevOpsAPI.DevOpsConfigurations.listAvailable,
