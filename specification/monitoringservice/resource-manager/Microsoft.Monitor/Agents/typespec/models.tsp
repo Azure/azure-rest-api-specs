@@ -82,7 +82,7 @@ namespace Microsoft.Monitor {
 
     /** Custom instructions that guide the agent's behavior for this operation. */
     @maxLength(8192)
-    customInstructions?: string;
+    instructions?: string;
   }
 
   /**
