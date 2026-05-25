@@ -34,8 +34,7 @@ model ManagedClusterUpgradeProfile
 }
 
 @@doc(ManagedClusterUpgradeProfile.name, "");
-@@doc(
-  ManagedClusterUpgradeProfile.properties,
+@@doc(ManagedClusterUpgradeProfile.properties,
   "The properties of the upgrade profile."
 );
 

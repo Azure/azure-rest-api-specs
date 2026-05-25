@@ -88,7 +88,6 @@ interface AIManagerNamespaces {
 
 @@maxLength(AIManagerNamespace.name, 63);
 @@minLength(AIManagerNamespace.name, 1);
-@@doc(
-  AIManagerNamespace.name,
+@@doc(AIManagerNamespace.name,
   "The name of the AI Manager namespace resource."
 );

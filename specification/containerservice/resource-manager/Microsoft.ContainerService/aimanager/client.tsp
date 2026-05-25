@@ -7,26 +7,22 @@ using Azure.Core;
 using TypeSpec.Http;
 
 // Client name customizations
-@@clientName(
-  Microsoft.ContainerService,
+@@clientName(Microsoft.ContainerService,
   "ContainerServiceAIManagerClient",
   "java"
 );
 
-@@clientName(
-  Microsoft.ContainerService,
+@@clientName(Microsoft.ContainerService,
   "ContainerServiceAIManagerClient",
   "python"
 );
 
-@@clientName(
-  Microsoft.ContainerService,
+@@clientName(Microsoft.ContainerService,
   "ContainerServiceAIManagerClient",
   "csharp"
 );
 
-@@clientName(
-  Microsoft.ContainerService,
+@@clientName(Microsoft.ContainerService,
   "ContainerServiceAIManagerClient",
   "go"
 );
@@ -36,7 +32,6 @@ using TypeSpec.Http;
 
 // Legacy type handling
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-@@clientName(
-  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity"
 );

@@ -34,8 +34,7 @@ model AgentPoolUpgradeProfile
 }
 
 @@doc(AgentPoolUpgradeProfile.name, "");
-@@doc(
-  AgentPoolUpgradeProfile.properties,
+@@doc(AgentPoolUpgradeProfile.properties,
   "The properties of the agent pool upgrade profile."
 );
 
