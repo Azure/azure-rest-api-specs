@@ -3833,29 +3833,6 @@
             "explode": false
           },
           {
-            "name": "scenario",
-            "in": "query",
-            "required": false,
-            "description": "Filter data generation jobs by their scenario.",
-            "schema": {
-              "$ref": "#/components/schemas/DataGenerationJobScenario"
-            },
-            "explode": false
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "description": "Filter data generation jobs by their type.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/DataGenerationJobType"
-              }
-            },
-            "explode": false
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -19785,7 +19762,6 @@
             "prompt": "#/components/schemas/PromptDataGenerationJobSource",
             "agent": "#/components/schemas/AgentDataGenerationJobSource",
             "traces": "#/components/schemas/TracesDataGenerationJobSource",
-            "dataset": "#/components/schemas/DatasetDataGenerationJobSource",
             "file": "#/components/schemas/FileDataGenerationJobSource"
           }
         },
@@ -19802,7 +19778,6 @@
               "prompt",
               "agent",
               "traces",
-              "dataset",
               "file"
             ]
           }
@@ -19938,40 +19913,6 @@
           }
         ],
         "description": "Dataset output for a data generation job."
-      },
-      "DatasetDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "The source type for this source, which is Dataset."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the dataset."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the dataset. If not specified, the latest version is used."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "Dataset source for data generation jobs — reference to a dataset."
       },
       "DatasetEvaluatorGenerationJobSource": {
         "type": "object",
