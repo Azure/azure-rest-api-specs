@@ -45,6 +45,13 @@ alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<
   AzureRangeErrorResponse
 >;
 
+alias FoundryStandardResourceOperations = Azure.Core.ResourceOperations<
+  Azure.Core.Traits.NoConditionalRequests &
+    Azure.Core.Traits.NoRepeatableRequests &
+    Azure.Core.Traits.NoClientRequestId,
+  AzureRangeErrorResponse
+>;
+
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlaneOperation<
@@ -241,7 +248,7 @@ interface VersionedOperations<
   @Rest.actionSeparator("/")
   @get
   @list
-  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listVersions is FoundryStandardResourceOperations.ResourceAction<
     TEntityType,
     TListVersionsParameters,
     Azure.Core.Page<TEntityType>

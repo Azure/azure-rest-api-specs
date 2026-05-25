@@ -28,7 +28,7 @@ interface Evaluators {
   @Rest.actionSeparator("/")
   @Http.get
   @list
-  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listVersions is FoundryStandardResourceOperations.ResourceAction<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
     Azure.Core.Page<EvaluatorVersion>
