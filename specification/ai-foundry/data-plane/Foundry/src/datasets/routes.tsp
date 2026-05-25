@@ -33,7 +33,8 @@ interface Datasets
       @Http.path
       version: string;
     },
-    PendingUploadResponse
+    PendingUploadResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
