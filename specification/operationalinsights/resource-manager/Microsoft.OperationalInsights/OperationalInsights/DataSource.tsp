@@ -92,9 +92,11 @@ interface DataSources {
 }
 
 @@doc(DataSource.name, "Name of the datasource");
-@@doc(DataSource.properties,
+@@doc(
+  DataSource.properties,
   "The data source properties in raw json format, each kind of data source have it's own schema."
 );
-@@doc(DataSources.createOrUpdate::parameters.resource,
+@@doc(
+  DataSources.createOrUpdate::parameters.resource,
   "The parameters required to create or update a datasource."
 );

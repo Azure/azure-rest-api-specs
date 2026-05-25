@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A server connection policy
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerConnectionPolicies)
 model ServerConnectionPolicy
   is Azure.ResourceManager.ProxyResource<ServerConnectionPolicyProperties> {
   ...ResourceNameParameter<
@@ -41,7 +43,9 @@ model ServerConnectionPolicy
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerConnectionPolicies)
 interface ServerConnectionPolicies {
   /**
    * Gets a server connection policy
@@ -54,8 +58,10 @@ interface ServerConnectionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerConnectionPolicy,
-    Response = ArmResourceUpdatedResponse<ServerConnectionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerConnectionPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ServerConnectionPolicy>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerConnectionPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -66,6 +72,7 @@ interface ServerConnectionPolicies {
 
 @@doc(ServerConnectionPolicy.name, "The name of the connection policy.");
 @@doc(ServerConnectionPolicy.properties, "Resource properties.");
-@@doc(ServerConnectionPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ServerConnectionPolicies.createOrUpdate::parameters.resource,
   "The required parameters for updating a server connection policy."
 );

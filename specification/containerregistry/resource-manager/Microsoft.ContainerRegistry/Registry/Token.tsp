@@ -42,11 +42,13 @@ interface Tokens {
   update is ArmCustomPatchAsync<
     Token,
     PatchModel = TokenUpdateParameters,
-    Response = ArmResponse<Token> | ArmResourceCreatedResponse<
-      Token,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Token> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Token>
+      | ArmResourceCreatedResponse<
+          Token,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Token> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -55,7 +57,10 @@ interface Tokens {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Token,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -72,9 +77,11 @@ interface Tokens {
 @@minLength(Token.name, 5);
 @@doc(Token.name, "The name of the token.");
 @@doc(Token.properties, "The properties of the token.");
-@@doc(Tokens.create::parameters.resource,
+@@doc(
+  Tokens.create::parameters.resource,
   "The parameters for creating a token."
 );
-@@doc(Tokens.update::parameters.properties,
+@@doc(
+  Tokens.update::parameters.properties,
   "The parameters for updating a token."
 );

@@ -1318,12 +1318,16 @@ interface PolicyStatesOperationGroup {
     @segment("subscriptions")
     @minLength(1)
     subscriptionId: Azure.Core.uuid,
-  ): {
-    @statusCode statusCode: 200;
-  } | ArmAcceptedLroResponse<
-    "The scan was successfully triggered.",
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  > | QueryFailure;
+  ):
+    | {
+        @statusCode statusCode: 200;
+      }
+    | ArmAcceptedLroResponse<
+        "The scan was successfully triggered.",
+        LroHeaders = ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | QueryFailure;
 
   /**
    * Triggers a policy evaluation scan for all the resources under the resource group.
@@ -1344,12 +1348,16 @@ interface PolicyStatesOperationGroup {
      */
     @path
     resourceGroupName: string,
-  ): {
-    @statusCode statusCode: 200;
-  } | ArmAcceptedLroResponse<
-    "The scan was successfully triggered.",
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  > | QueryFailure;
+  ):
+    | {
+        @statusCode statusCode: 200;
+      }
+    | ArmAcceptedLroResponse<
+        "The scan was successfully triggered.",
+        LroHeaders = ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | QueryFailure;
 
   /**
    * Queries policy states for the subscription level policy set definition.
