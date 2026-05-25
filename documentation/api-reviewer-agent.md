@@ -64,9 +64,24 @@ either repository, the agent reports the error and stops.
 The agent will:
 
 1. Fetch the PR metadata and changed files from GitHub.
-2. Load the applicable rule sets (OpenAPI, ARM, TypeSpec).
-3. Compare against the previous API version to detect breaking changes.
-4. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+2. **Choose a review track** based on the changed files (see [Review Tracks](#review-tracks) below).
+3. Load the applicable rule sets (OpenAPI, ARM, TypeSpec).
+4. Compare against the previous API version to detect breaking changes (full-review track only).
+5. **Run an independent critic pass** that re-verifies every finding's rule citation, line number, and
+   classification before anything is shown to you. This happens silently on the happy path; you only see
+   critic activity when a finding was downgraded, reclassified, dropped, or the critic could not run.
+6. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+
+## Review Tracks
+
+The agent classifies each PR into one of two tracks to avoid spending full-review effort on trivial changes:
+
+| Track           | When it applies                                                                                                                                                                                                                                | What's skipped                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Fast path**   | The PR modifies _only_ example files, description-only edits inside specs, or non-AutoRest sections of `readme.md`, AND is under 200 lines total.                                                                                              | Breaking-change comparison and cross-file consistency checks. The critic still runs. |
+| **Full review** | Any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, or any PR with 200 or more lines changed. | Nothing. Every step runs.                                                            |
+
+When the agent is uncertain whether a PR qualifies for the fast path, it defaults to the full review.
 
 ## Understanding the Report
 
@@ -197,15 +212,21 @@ before modifying any labels.
 ## Suppression Continuity Analysis
 
 When a PR adds or modifies a `readme.md` containing `directive` / `suppress`
-entries, the agent performs a **suppression continuity analysis** by comparing
-the new version's suppressions against the previous API version's `readme.md`:
+entries, or modifies a service-scoped `suppressions.yaml`, the agent performs
+a **suppression continuity analysis** by comparing the new version's
+suppressions against the base-branch version (the previous API version's
+`readme.md`, or the prior `suppressions.yaml` on the base branch):
 
 | Scenario                                                                 | What the agent does                                                                                                                                                                                                                                |
 | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Carried-over suppression** -- same rule ID exists in both versions     | Acceptable. No action needed.                                                                                                                                                                                                                      |
 | **Dropped suppression** -- exists in previous version but missing in new | Investigates whether the PR's spec changes fix the underlying violation. If yes, notes it as a positive finding. If not, flags a **warning** that the author may have accidentally dropped a required suppression (which would cause CI failures). |
 | **New suppression** -- exists in new version but not previous            | Checks for a clear, specific `reason`. Flags suppressions with missing/vague reasons, security-related rule suppressions (`secret-prop`, `security-definition-missing`), or suppressions that mask issues the spec should fix.                     |
-| **First version** -- no previous `readme.md` exists                      | All suppressions are treated as new and validated per the rules above.                                                                                                                                                                             |
+| **First version** -- no previous `readme.md` or `suppressions.yaml`      | All suppressions are treated as new and validated per the rules above.                                                                                                                                                                             |
+
+For `suppressions.yaml`, the inventory key is the `tool` + `path` + `rule` (or
+`code`) tuple rather than the rule ID alone, since the same rule can be
+suppressed independently for different paths.
 
 This analysis helps catch accidentally dropped suppressions that would break CI,
 as well as unjustified new suppressions that mask real compliance issues.
@@ -221,6 +242,7 @@ as well as unjustified new suppressions that mask real compliance issues.
 | `specification/**/examples/*.json`            | Validated against the spec they reference                                     |
 | `specification/**/*.json`                     | Any other OpenAPI JSON -- generic rules                                       |
 | `specification/**/readme.md`                  | AutoRest config -- tag configurations, input file lists, and **suppressions** |
+| `specification/**/suppressions.yaml`          | Service-scoped suppression entries; continuity analysis vs. the base branch   |
 
 ### Key Rule Areas
 
@@ -230,7 +252,8 @@ as well as unjustified new suppressions that mask real compliance issues.
 - **TypeSpec** -- project structure, decorators, doc comments, ARM resource patterns, `union` vs `enum`
 - **Security** -- no secrets in GET responses, `x-ms-secret` annotations, proper auth definitions
 - **LRO** -- correct `x-ms-long-running-operation` usage, response schemas, polling headers
-- **Suppressions** -- `readme.md` suppression continuity across API versions (carried-over, dropped, and new suppressions)
+- **Suppressions** -- `readme.md` and `suppressions.yaml` continuity across API versions
+  (carried-over, dropped, and new suppressions)
 
 ## Tips
 
@@ -290,11 +313,12 @@ The agent **does not**:
 
 ### Evaluation Suite
 
-The agent is validated by an automated evaluation suite of 28 test stimuli
-covering ARM resource structure, property design, operations, breaking
-changes, suppressions, example files, TypeSpec review, and more. The tests
-run against fixture files with seeded violations and verify the agent
-detects each issue.
+The agent is validated by an automated evaluation suite of 41 test stimuli
+across 15 eval files covering ARM resource structure, property design,
+operations, breaking changes, suppressions (both `readme.md` and
+`suppressions.yaml`), example files, TypeSpec review, fast-path triage,
+report format, and more. The tests run against fixture files with seeded
+violations and verify the agent detects each issue.
 
 To run the eval suite after making changes to the agent, instruction files,
 or skills:

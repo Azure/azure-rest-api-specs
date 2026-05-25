@@ -9,49 +9,55 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 arm-api-reviewer/
 ├── run-evals.ps1          # One-click script: clone, build, run, report
 ├── .vally.yaml            # Vally project config (skill discovery, eval paths, suites)
-├── evaluate/              # Evaluate (vally) eval definitions (12 files)
+├── evaluate/              # Evaluate (vally) eval definitions (15 files)
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
 │   ├── eval-operations.yaml
 │   ├── eval-breaking-changes.yaml
 │   ├── eval-suppressions.yaml
+│   ├── eval-suppressions-yaml.yaml
 │   ├── eval-examples.yaml
 │   ├── eval-typespec.yaml
 │   ├── eval-check-name-availability.yaml
 │   ├── eval-true-negatives.yaml
 │   ├── eval-classification.yaml
 │   ├── eval-report-format.yaml
-│   └── eval-citation-and-parity.yaml
-├── fixtures/              # Test fixtures (34 files)
+│   ├── eval-citation-and-parity.yaml
+│   ├── eval-typespec-required.yaml
+│   └── eval-fast-path-triage.yaml
+├── fixtures/              # Test fixtures (36 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
+│   ├── suppressions-yaml/ # suppressions.yaml fixtures
 │   ├── typespec/          # TypeSpec files with seeded violations
 │   └── version-pairs/     # Version pairs for breaking change detection
 └── README.md              # This file
 ```
 
-## Test Categories (35 test cases across 13 eval files)
+## Test Categories (41 test cases across 15 eval files)
 
-| ID     | Category                 | Count | Description                                                          |
-| ------ | ------------------------ | ----- | -------------------------------------------------------------------- |
-| 01xxxx | ARM resource structure   | 3     | Missing CRUD ops, missing provisioningState, inline types            |
-| 02xxxx | Property design          | 4     | Secrets, naming, descriptions, enums                                 |
-| 03xxxx | Operations               | 4     | PATCH, PUT, DELETE, LRO violations                                   |
-| 04xxxx | Breaking changes         | 4     | Removed property, type change, enum narrowing, added required        |
-| 05xxxx | Suppression analysis     | 2     | Missing reason, security rule suppressions                           |
-| 06xxxx | Example file validation  | 2     | Bad resource ID, realistic secrets                                   |
-| 07xxxx | TypeSpec review          | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers             |
-| 08xxxx | Check Name Availability  | 1     | Custom CNA models, missing input validation                          |
-| 09xxxx | True negatives           | 3     | Clean spec, clean example, clean proxy resource                      |
-| 10xxxx | Classification           | 1     | NEW vs EXISTING issue tagging                                        |
-| 11xxxx | Report format            | 1     | Line numbers, rule IDs, structured output                            |
-| 12xxxx | TypeSpec required        | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK          |
-| 13xxxx | Citation & posted parity | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten |
+| ID     | Category                      | Count | Description                                                          |
+| ------ | ----------------------------- | ----- | -------------------------------------------------------------------- |
+| 01xxxx | ARM resource structure        | 3     | Missing CRUD ops, missing provisioningState, inline types            |
+| 02xxxx | Property design               | 4     | Secrets, naming, descriptions, enums                                 |
+| 03xxxx | Operations                    | 4     | PATCH, PUT, DELETE, LRO violations                                   |
+| 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required        |
+| 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                           |
+| 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                   |
+| 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers             |
+| 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                          |
+| 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                      |
+| 10xxxx | Classification                | 1     | NEW vs EXISTING issue tagging                                        |
+| 11xxxx | Report format                 | 2     | Line numbers, rule IDs, structured output; critic invisible on clean |
+| 12xxxx | TypeSpec required             | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK          |
+| 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten |
+| 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression               |
+| 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full   |
 
 ## Fixtures
 
-All 34 fixture files live in `fixtures/`. See
+All 36 fixture files live in `fixtures/`. See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
@@ -59,6 +65,7 @@ eval suites.
 - **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
+- **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
 - **4 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
 - **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
 
@@ -74,7 +81,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (35 stimuli, sequential -- safest)
+# Run the full suite (41 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing evaluate clone instead of re-cloning
@@ -124,7 +131,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (evaluate is a monorepo; the vally binary lives under packages/cli)
 export VALLY_CLI="/path/to/evaluate/packages/cli/dist/index.js"
 
-# Run the full suite (all 35 stimuli, 5 concurrent workers)
+# Run the full suite (all 41 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
