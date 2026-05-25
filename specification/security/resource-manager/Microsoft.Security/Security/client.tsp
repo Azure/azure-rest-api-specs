@@ -598,30 +598,27 @@ op privateLinkResourcesGetCustomization(
   "GetDiscoveredSecuritySolutions",
   "csharp"
 );
+@@scope(SecuritySolutionsAPI.DiscoveredSecuritySolutionsOperationGroup.list, "!csharp");
 @@clientName(SecuritySolutionsAPI.ExternalSecuritySolutionsOperationGroup.list,
   "GetExternalSecuritySolutions",
   "csharp"
 );
+@@scope(SecuritySolutionsAPI.ExternalSecuritySolutionsOperationGroup.list, "!csharp");
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list,
   "GetJitNetworkAccessPolicies",
   "csharp"
 );
-@@access(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list,
-  Access.internal,
-  "csharp"
-);
+@@scope(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list, "!csharp");
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
   "GetJitNetworkAccessPolicies",
   "csharp"
 );
-@@access(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
-  Access.internal,
-  "csharp"
-);
+@@scope(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup, "!csharp");
 @@clientName(SecuritySolutionsAPI.SecuritySolutionsOperationGroup.list,
   "GetSecuritySolutions",
   "csharp"
 );
+@@scope(SecuritySolutionsAPI.SecuritySolutionsOperationGroup.list, "!csharp");
 @@clientName(SecuritySolutionsAPI.SecuritySolutionsReferenceDataOperationGroup.list,
   "GetSecuritySolutionsReferenceData",
   "csharp"
@@ -630,10 +627,12 @@ op privateLinkResourcesGetCustomization(
   "GetAllowedConnections",
   "csharp"
 );
+@@scope(SecuritySolutionsAPI.AllowedConnectionsOperationGroup.list, "!csharp");
 @@clientName(MdeOnboardingAPI.MdeOnboardings.list,
   "GetMdeOnboardings",
   "csharp"
 );
+@@scope(MdeOnboardingAPI.MdeOnboardings.list, "!csharp");
 @@clientName(SecureScoreAPI.SecureScoreControlDefinitionsOperationGroup.list,
   "GetSecureScoreControlDefinitions",
   "csharp"
@@ -654,6 +653,7 @@ op privateLinkResourcesGetCustomization(
   "GetTopologies",
   "csharp"
 );
+@@scope(SecuritySolutionsAPI.TopologyOperationGroup.list, "!csharp");
 @@clientName(ApiCollectionsAPI.ApiCollectionsOperationGroup.listByResourceGroup,
   "GetApiCollections",
   "csharp"
