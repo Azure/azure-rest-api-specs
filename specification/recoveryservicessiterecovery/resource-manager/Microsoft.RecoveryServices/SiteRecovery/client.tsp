@@ -303,7 +303,7 @@ using Microsoft.RecoveryServices;
 );
 @@clientName(
   Microsoft.RecoveryServices.ReplicationProtectionCluster,
-  "SiteRecoveryReplicationProtectionCluster",
+  "SiteRecoveryReplicationProtectionClusterResource",
   "csharp"
 );
 @@clientName(
