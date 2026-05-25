@@ -75,9 +75,11 @@ interface JobSchedules {
 #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(JobSchedule.name, "uuid");
 @@doc(JobSchedule.name, "The job schedule name.");
-@@doc(JobSchedule.properties,
+@@doc(
+  JobSchedule.properties,
   "Gets or sets the properties of the job schedule."
 );
-@@doc(JobSchedules.create::parameters.resource,
+@@doc(
+  JobSchedules.create::parameters.resource,
   "The parameters supplied to the create job schedule operation."
 );

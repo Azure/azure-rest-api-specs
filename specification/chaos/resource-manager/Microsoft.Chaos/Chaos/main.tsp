@@ -14,10 +14,17 @@ import "./experiment.tsp";
 import "./experimentExecution.tsp";
 import "./privateAccess.tsp";
 import "./privateEndpointConnection.tsp";
+import "./action.tsp";
 import "./target.tsp";
 import "./targetType.tsp";
 import "./operationStatus.tsp";
+import "./workspace.tsp";
+import "./discoveredResource.tsp";
+import "./scenario.tsp";
+import "./scenarioConfiguration.tsp";
+import "./scenarioRun.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,12 +46,13 @@ namespace Microsoft.Chaos;
  */
 enum Versions {
   /**
-   * The 2024-11-01-preview API version.
-   */
-  v2024_11_01_preview: "2024-11-01-preview",
-
-  /**
    * The 2025-01-01 API version.
    */
   v2025_01_01: "2025-01-01",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_05_01_preview: "2026-05-01-preview",
 }
