@@ -111,7 +111,7 @@ namespace Microsoft.Monitor {
     ...Azure.ResourceManager.Foundations.TagsUpdateModel<ObservabilityAgentResource>;
 
     /** The geo-location where the resource lives. */
-    @visibility(Lifecycle.Read, Lifecycle.Create)
+    @visibility(Lifecycle.Read)
     location?: Azure.Core.azureLocation;
 
     /** The managed service identities assigned to this resource. */
