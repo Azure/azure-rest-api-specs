@@ -1,16 +1,11 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-alias ServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
-
-alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias EvaluationsOperations = FoundryAzureOperations<{}>;
 
 @route("evaluations")
 @removed(Versions.v1)
