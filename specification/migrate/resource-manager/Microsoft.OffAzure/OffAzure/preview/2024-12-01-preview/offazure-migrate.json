@@ -1491,32 +1491,15 @@
         "description": "List HypervHost resources by HypervSite",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "filter query",
-            "required": false,
-            "type": "string"
-          },
-          {
-========
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -1927,29 +1910,21 @@
         "description": "List HypervMachine resources by HypervSite",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -3524,29 +3499,21 @@
         "description": "List ImportMachine resources by ImportSite",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -5147,73 +5114,6 @@
         }
       }
     },
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportUri": {
-      "post": {
-        "operationId": "SqlSitesController_ExportUri",
-        "tags": [
-          "SqlSitesController"
-        ],
-        "description": "Method to generate export/read SAS uri for import.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "sqlSiteName",
-            "in": "path",
-            "description": "SQL site name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SQLInventoryImportBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SQLInventoryImportBody"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExportUri": {
-            "$ref": "./examples/SqlSitesController_ExportUri_Example.json"
-          }
-        }
-      }
-    },
-========
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/exportSqlServerErrors": {
       "post": {
         "operationId": "SqlSitesController_ExportSqlServerErrors",
@@ -5383,13 +5283,13 @@
         "description": "Method to generate export/read SAS uri for import.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
@@ -5427,7 +5327,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -5568,13 +5468,13 @@
         "description": "Initiates SQL inventory import process. This is an asynchronous operation that returns a 202 Accepted response and requires polling for completion status.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
@@ -5620,7 +5520,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -6029,22 +5929,15 @@
         "description": "Gets the sql availability groups.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -6059,7 +5952,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -6187,22 +6079,15 @@
         "description": "Gets the sql Databases.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -6217,7 +6102,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -6345,22 +6229,15 @@
         "description": "Gets the sql servers.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -6375,7 +6252,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -6619,85 +6495,6 @@
         }
       }
     },
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/importUri": {
-      "post": {
-        "operationId": "SqlSitesController_ImportUri",
-        "tags": [
-          "SqlSitesController"
-        ],
-        "description": "Initiates SQL inventory import process. This is an asynchronous operation that returns a 202 Accepted response and requires polling for completion status.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "Site name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "sqlSiteName",
-            "in": "path",
-            "description": "SQL site name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Import parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SQLInventoryImportBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted. The operation has been accepted and is being processed asynchronously. Use the URL in the Location header to monitor the status of the operation.",
-            "headers": {
-              "Location": {
-                "description": "The URL to retrieve the status of the asynchronous operation. This must be a full absolute URI and a public-facing endpoint.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The recommended number of seconds to wait before polling the operation status. Value must be between 10 and 600 seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "ImportUriExample": {
-            "$ref": "./examples/SqlSitesController_ImportUri_Example.json"
-          }
-        }
-      }
-    },
-========
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/sqlSites/{sqlSiteName}/validateAndImportUri": {
       "post": {
         "operationId": "SqlSitesController_ValidateAndImportUri",
@@ -7533,22 +7330,15 @@
         "description": "Method to get all extended machines.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -7563,7 +7353,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -7691,22 +7480,15 @@
         "description": "Method to get all IIS web application.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -7721,7 +7503,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -7919,22 +7700,15 @@
         "description": "Method to get all IIS web servers.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -7949,7 +7723,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -8334,22 +8107,15 @@
         "description": "Method to get all Tomcat web application.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -8364,7 +8130,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -8563,22 +8328,15 @@
         "description": "Method to get all Tomcat web servers.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -8593,7 +8351,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -8802,22 +8559,15 @@
         "description": "Method to get all IIS web applications.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -8832,7 +8582,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -8897,22 +8646,15 @@
         "description": "Method to get all web servers.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -8927,7 +8669,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -9952,29 +9693,21 @@
         "description": "Get all machines in a site.",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -11954,29 +11687,21 @@
         "description": "List MachineResource resources by VmwareSite",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-========
             "name": "siteName",
             "in": "path",
             "description": "Site name",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
           },
           {
             "name": "filter",
@@ -13007,32 +12732,15 @@
         "description": "List Vcenter resources by VmwareSite",
         "parameters": [
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-========
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "filter query",
-            "required": false,
-            "type": "string"
-          },
-          {
-========
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
             "name": "siteName",
             "in": "path",
             "description": "Site name",
@@ -15741,29 +15449,6 @@
         }
       }
     },
-<<<<<<<< HEAD:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/migrate.json
-    "HypervOperationsStatusResource": {
-      "type": "object",
-      "description": "A cluster resource belonging to a site resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HypervClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-========
->>>>>>>> origin/main:specification/migrate/resource-manager/Microsoft.OffAzure/OffAzure/preview/2024-12-01-preview/offazure-migrate.json
     "HypervRunAsAccountResource": {
       "type": "object",
       "description": "A machine resource belonging to a site resource.",
@@ -16825,7 +16510,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
