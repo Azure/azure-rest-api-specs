@@ -776,7 +776,6 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponse, "SecurityAssessmentMetadataPropertiesResult", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates, "SecurityAssessmentMetadataPropertiesResultPublishOn", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentPartnerData, "SecurityAssessmentPartnerInfo", "csharp");
-@@clientName(AssessmentAPI.SecurityAssessmentMetadataPartnerData, "SecurityAssessmentMetadataPartnerInfo", "csharp");
 @@clientName(SecurityConnectorsDevOpsAPI.AzureDevOpsOrgListResponse, "AzureDevOpsOrgListResult", "csharp");
 @@clientName(SecurityConnectorsDevOpsAPI.GitHubOwnerListResponse, "GitHubOwnerListResult", "csharp");
 @@clientName(SecurityConnectorsDevOpsAPI.GitLabGroupListResponse, "GitLabGroupListResult", "csharp");
