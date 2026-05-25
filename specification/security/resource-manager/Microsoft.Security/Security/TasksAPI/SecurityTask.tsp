@@ -50,7 +50,8 @@ alias SecurityTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     taskName: string;
   },
-  {}
+  {},
+  ResourceName = "SubscriptionSecurityTask"
 >;
 
 alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -142,7 +143,8 @@ alias TaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("tasks")
     @key
     taskName: string;
-  }
+  },
+  ResourceName = "ResourceGroupSecurityTask"
 >;
 
 alias TaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<

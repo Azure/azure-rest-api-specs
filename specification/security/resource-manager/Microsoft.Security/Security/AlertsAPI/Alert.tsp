@@ -48,7 +48,8 @@ alias AlertOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("alerts")
     @key
     alertName: string;
-  }
+  },
+  ResourceName = "SubscriptionSecurityAlert"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -136,7 +137,8 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("alerts")
     @key
     alertName: string;
-  }
+  },
+  ResourceName = "ResourceGroupSecurityAlert"
 >;
 
 @armResourceOperations(#{ omitTags: true })
