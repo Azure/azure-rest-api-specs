@@ -7249,6 +7249,67 @@ model EdgeMachineReportedProperties {
    */
   @visibility(Lifecycle.Read)
   extensionProfile?: ExtensionProfile;
+
+  /**
+   * Read-only Hyper-V VM inventory reported by the device management extension for VMs visible on this node.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["workloadId"])
+  workloadInventory?: EdgeMachineWorkloadInventoryItem[];
+
+  /**
+   * Last time the device management extension refreshed the local Hyper-V workload inventory.
+   */
+  @visibility(Lifecycle.Read)
+  workloadInventoryLastUpdated?: utcDateTime;
+}
+
+/**
+ * Represents a single workload (Hyper-V VM) inventory entry reported by the device management extension running on the edge machine.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineWorkloadInventoryItem {
+  /**
+   * Stable device-reported workload identifier, such as the Hyper-V VM ID when available.
+   */
+  @visibility(Lifecycle.Read)
+  workloadId?: string;
+
+  /**
+   * Hyper-V VM name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Optional ARM resource ID when the service can map the local VM to an ARM resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Workload type. For v1 this should be VirtualMachine.
+   */
+  @visibility(Lifecycle.Read)
+  workloadType?: string;
+
+  /**
+   * Hyper-V VM state reported by the node.
+   */
+  @visibility(Lifecycle.Read)
+  state?: string;
+
+  /**
+   * Configured virtual processor count from Hyper-V.
+   */
+  @visibility(Lifecycle.Read)
+  virtualProcessorCount?: int32;
+
+  /**
+   * Maximum memory the VM can consume, in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  memoryInBytes?: int64;
 }
 
 /**
