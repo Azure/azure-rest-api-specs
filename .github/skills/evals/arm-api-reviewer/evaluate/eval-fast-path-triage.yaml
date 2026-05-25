@@ -52,7 +52,7 @@ stimuli:
           # examples-only PR. Either it explicitly says it skipped Step 3, or
           # the words "breaking change analysis" appear in a "skipped"
           # / "not applicable" context.
-          pattern: "(?is)(skip|not applicable|n/?a|not required|omitted).{0,80}(step\\s*3|breaking[- ]change|version comparison)|(step\\s*3|breaking[- ]change|version comparison).{0,80}(skip|not applicable|n/?a|not required|omitted)"
+          pattern: "(?is)(skip|not applicable|n/?a|not required|omitted).{0,80}(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison)|(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison).{0,80}(skip|not applicable|n/?a|not required|omitted)"
       - type: prompt
     rubric:
       - The agent explicitly elects the fast-path track in its output (e.g., "fast path", "trivial review track")
