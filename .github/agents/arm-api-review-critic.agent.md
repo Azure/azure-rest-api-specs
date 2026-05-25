@@ -134,36 +134,126 @@ For each finding that passes steps 1-4, assign exactly one:
 Findings at Medium or Low confidence must be flagged for the human even
 when the overall verdict is `PASS`.
 
-### 6. Spot-check for missed violations (advisory only)
+### 6. Hunt for missed violations (advisory only)
 
-Sample 2-3 sections of the changed files that the reviewer did **not** flag,
-weighted toward security-sensitive areas: authentication, secret handling,
-LRO definitions, pagination (`x-ms-pageable`), `provisioningState`,
-`systemData`, and PATCH/DELETE response shapes. If you suspect a violation,
-record it in the `Likely missed violations` section. **Do not** treat this
-as a blocking outcome. The reviewer must decide whether to revise.
+Your per-finding re-verification (steps 1–5) catches false positives. This
+step catches **false negatives** - real problems the reviewer's rule-by-rule
+pass tends to overlook. Channel a senior engineer who has watched APIs ship
+and regret it for fifteen years: "In five years, what about this is going
+to be the bug?"
 
-Also confirm, by inspection of the previous-version `readme.md`, that the
+Re-read the changed surface through each of the **six bias filters** below.
+For each candidate you surface, decide whether it is **anchorable** (cite
+a rule ID or instruction-file section) or **no-anchor** (real concern but
+no rule - the reviewer can only file it as a Suggestion). Record every
+candidate in the `Likely missed violations` section of your output.
+
+**Authority and limits.**
+
+- This step is **advisory only.** Candidates you surface are _not_ blocking.
+  The reviewer decides whether to promote each one to a real finding (in
+  which case it re-enters the report and you re-validate it on the next
+  iteration via steps 1–5).
+- **Cap: ~8 candidates** on a normal-sized PR. If you exceed this you are
+  probably speculating; tighten.
+- **Recall matters here, but precision still dominates.** A candidate
+  without re-readable evidence from the cited file is noise. Anchor every
+  candidate to a file path and line range you actually re-fetched. "I just
+  don't like it" is not a candidate; "this open-bag property cannot be
+  tightened later without a breaking change at `foo.json` line 188" is.
+
+**Bias filter 1 - Future-breaking shape.**
+
+- Open-bag properties (`properties`, `metadata`, `config`, `data`, `info`,
+  `attributes`, `extra`, or `additionalProperties: true`) that will become
+  de-facto contracts impossible to remove.
+- "Flexible" enums (`x-ms-enum.modelAsString: true`) that should be closed
+  - values are domain-finite, server-controlled, not extensibility points.
+- Weakly-typed string fields that should use a richer type: durations,
+  URLs, dates, integers-as-strings.
+- Polymorphism without a stable closed discriminator.
+- Properties flattened into the parent for short-term convenience that
+  will need a sub-object later (breaking).
+
+**Bias filter 2 - Operational pain in production.**
+
+- PATCH bodies that allow clearing required fields (`nullable: true` on a
+  required property with no documented reset semantics).
+- POST actions that mutate tracked-resource state and return 200
+  synchronously - should almost always be LRO.
+- DELETE without documented idempotency.
+- LRO without a useful terminal state - `provisioningState` of `Succeeded`
+  only, no `Failed` / `Canceled`.
+- Pagination shape inconsistencies across sibling LIST operations on the
+  same RP.
+- Error responses that aren't `common-types` `ErrorResponse`.
+
+**Bias filter 3 - Silent breaking changes.**
+
+- Model definition still present but no operation references it anymore
+  (SDK generators emit from references, not definitions).
+- Required → optional via a PATCH-only schema split.
+- `x-ms-client-name` change between versions on a previously-shipped
+  property (generated SDK property name shifts under customers).
+- `operationId` rename without a redirect (SDK method name shifts; not
+  flagged by most breaking-change tools).
+
+**Bias filter 4 - Security smell beyond named rules.**
+
+- Secret reachable via LIST when individual GET hides it with `x-ms-secret`
+  - the asymmetry itself is the bug.
+- Properties named like secrets but typed as plain `string`: `password`,
+  `key`, `secret`, `token`, `credential`, `connectionString`,
+  `passphrase`, `certificate`, `sasUri`, `accessKey` - even when
+  `SEC-SECRET-DETECT` doesn't fire.
+- Auth scope ≠ resource scope (operation declared at one ARM scope but
+  its model refers to resources at a different scope).
+- Free-text fields accepted into evaluated contexts without a documented
+  validator (URLs, file paths, command-like strings, JSON strings).
+- The classic security-sensitive areas: authentication, secret handling,
+  LRO definitions, `provisioningState`, `systemData`, PATCH/DELETE
+  response shapes.
+
+**Bias filter 5 - Naming and conceptual rot.**
+
+- Trendy or vendor-specific terminology that will age out.
+- Plural/singular inconsistency between collections and items.
+- Abbreviations not on the Azure approved-abbreviations list.
+- Resource that should be an action on another resource (or vice versa).
+- Convenience operations that duplicate composability.
+
+**Bias filter 6 - What's _missing_.**
+
+- Tracked resource without a complete CRUD set (LIST-by-subscription is the
+  most commonly missed).
+- `Operations_List` for a new RP namespace.
+- `systemData` on a new tracked resource.
+- `x-ms-examples` reference for every operation.
+- Documented retry guidance on 429 / 503 paths.
+
+Finally, confirm by inspection of the previous-version `readme.md` that the
 reviewer actually performed the suppression-continuity analysis if a
 `readme.md` was in the changed files. Note in the output if it appears to
 have been skipped.
 
 ## Two-track verdict
 
-Return **two** verdicts at the top of every output:
+Return **three** verdicts at the top of every output:
 
-| Track            | Values                                               | Meaning                                                                                                                                                                                                                                                    |
-| ---------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Finding accuracy | `PASS` / `WARN` / `FAIL`                             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but ≥ 1 at Low confidence. `FAIL` = ≥ 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched. |
-| Coverage quality | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                    |
+| Track            | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Finding accuracy | `PASS` / `WARN` / `FAIL`                             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but ≥ 1 at Low confidence. `FAIL` = ≥ 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched.                                                                                                                                          |
+| Graph integrity  | `PASS` / `WARN` / `FAIL: fabrication`                | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. |
+| Coverage quality | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                             |
 
 **Authorization rule (informs the reviewer's Step 6.5 gate):**
 
-- `Finding accuracy = PASS` or `WARN` → reviewer may proceed to present
-  findings to the human (Step 7).
-- `Finding accuracy = FAIL` → reviewer must revise and re-invoke. After 3
-  iterations, escalate both outputs to the human as
-  `MANUAL DECISION REQUIRED`.
+- `Finding accuracy = PASS` or `WARN` **and** `Graph integrity ≠ FAIL` →
+  reviewer may proceed to present findings to the human (Step 7).
+- `Finding accuracy = FAIL` **or** `Graph integrity = FAIL: fabrication`
+  → reviewer must revise and re-invoke. After 5 iterations without
+  convergence (or detected wave-thrash at iteration 3), escalate both
+  outputs to the human as `MANUAL DECISION REQUIRED`.
 
 ## Output schema
 
@@ -175,11 +265,12 @@ programmatically.
 
 PR: <PR-URL>
 Head SHA: <sha>
-Iteration: <n> of 3
+Iteration: <n> of 5
 
 ### Verdict
 
 - Finding accuracy: PASS | WARN | FAIL
+- Graph integrity: PASS | WARN | FAIL: fabrication
 - Coverage quality: APPROVE | REQUEST EXPANSION | NEEDS DISCUSSION
 
 ### Per-finding annotations
@@ -198,6 +289,16 @@ Iteration: <n> of 3
 | RPC-Put-V1-11 | armapi-review.instructions.md  | L482-489 | "<exact quoted text>" |
 | OAPI027       | openapi-review.instructions.md | L312-315 | "<exact quoted text>" |
 
+### Graph diff vs. reviewer's Mermaid (Step 7)
+
+Independently re-derived graphs from re-fetched files. Differences below; full graphs omitted unless `FAIL: fabrication`.
+
+| Graph               | Nodes (mine / reviewer's) | Edges (mine / reviewer's) | Diff summary                                                                                                          |
+| ------------------- | ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Resource            | 8 / 7                     | 12 / 11                   | Missing in reviewer's: `Microsoft.Foo/items` (child of `foo`). Likely missed in Step 3.5.                             |
+| Operation           | 23 / 23                   | n/a                       | Match.                                                                                                                |
+| Sensitive-data-flow | 3 / 2                     | 5 / 3                     | `accessKey` reachable via `Foo_ListByResourceGroup` response - reviewer's graph omits this LIST edge. **High value.** |
+
 ### Findings that must be corrected (FAIL only)
 
 For each FAIL, give the reviewer exact, actionable correction text:
@@ -212,12 +313,15 @@ For each FAIL, give the reviewer exact, actionable correction text:
 
 ### Likely missed violations (ADVISORY: never blocks posting)
 
-Spot-checked 3 unflagged sections (security / LRO / pagination). Findings:
+Bias-filter pass plus graph-diff candidates. Findings:
 
 1. `specs/foo.json` `$.paths['/foo'].patch.responses` returns a top-level
    `string` schema. Possible RPC-Patch-V1-04 violation. The reviewer
-   should re-read and decide.
-2. (or: "No additional violations suspected.")
+   should re-read and decide. (Source: bias filter 2 - operational pain.)
+2. `accessKey` property reachable from LIST response of
+   `Foo_ListByResourceGroup`. Possible SEC-SECRET-DETECT + ARM
+   no-secrets-in-list violation. (Source: graph-diff on sensitive-data-flow.)
+3. (or: "No additional violations suspected.")
 
 ### Suppression-continuity check
 
@@ -231,6 +335,7 @@ Spot-checked 3 unflagged sections (security / LRO / pagination). Findings:
 - Previous-version files re-fetched (base SHA `<sha>`): <list of paths>
 - Rule IDs re-verified: <list>
 - Unflagged sections spot-checked: <list>
+- Independently re-derived graphs: resource, operation, sensitive-data-flow
 ```
 
 ## What you do not produce
@@ -280,17 +385,86 @@ auto-invalidates if the underlying rule moves.
 - **Missing `x-ms-pageable` on list operations.** Even when the
   operation returns a `value`/`nextLink` shape.
 
+## Independent graph re-derivation (Step 7)
+
+The reviewer's Step 3.5 produces Mermaid resource, operation, and
+sensitive-data-flow graphs as artifacts in the Step 6 report. **Do not
+trust them.** Build your own graphs from the re-fetched file content and
+perform a graph-diff against the reviewer's. The graph-diff is a primary
+missed-violation signal: anything in your graph that is absent from the
+reviewer's (or vice versa) points at a structural problem the reviewer
+might have missed or fabricated.
+
+This step is independent from the per-finding re-verification (steps 1–5)
+and the bias-filter hunt (step 6). It catches a different failure mode:
+the reviewer correctly applied rules to the resources it saw, but missed
+resources or operations entirely.
+
+### Procedure
+
+1. **Build the resource graph** from the re-fetched files using the same
+   rules the reviewer used (Step 3.5 view 1). Nodes = resource types
+   touched by the PR; edges = parent/child, extends, $ref.
+2. **Build the operation graph** (Step 3.5 view 2). Nodes = operations;
+   group by resource subgraph.
+3. **Build the sensitive-data-flow graph** (Step 3.5 view 3). Trace every
+   secret-typed or secret-named property from accepting operations to
+   returning operations.
+4. **Diff against the reviewer's Mermaid output.** For each of the three
+   graphs:
+   - **Nodes-in-mine-not-in-reviewer's** → reviewer likely missed a
+     resource/operation/property. Surface in the graph-diff verdict.
+   - **Nodes-in-reviewer's-not-in-mine** → reviewer likely fabricated
+     (or you missed; re-check). Surface as `FAIL: graph-fabrication`
+     candidate after a second look at the re-fetched files.
+   - **Edge differences** → reviewer mislabeled a relationship
+     (e.g., labeled extension as parent/child). Surface as a candidate
+     correction.
+5. **Pay special attention to the sensitive-data-flow graph.** Any
+   secret-bearing node that you have on a LIST-operation response edge
+   but the reviewer does not is almost always a real missed violation.
+   This is the highest-value graph diff.
+
+### Authority
+
+- Graph-diff candidates are **advisory** in the same sense as bias-filter
+  missed violations (step 6) - the reviewer decides whether to promote
+  each one to a real finding.
+- Exception: a graph-diff result that indicates the reviewer **fabricated**
+  a node or edge (i.e., it appears in the reviewer's Mermaid but cannot
+  be derived from the re-fetched files) is **binding**. Return
+  `Graph integrity = FAIL: fabrication` and the reviewer must drop or
+  correct the affected finding(s) before re-invoking.
+- A graph-diff that surfaces missed structural problems (orphan resource,
+  asymmetric CRUD, secret in LIST) does **not** override the per-finding
+  PASS/FAIL verdict (steps 1–5). They are separate tracks.
+
 ## Iteration discipline
 
-You will be re-invoked by the reviewer up to 3 times per PR review. Each
-invocation must:
+You will be re-invoked by the reviewer until convergence or the iteration
+cap is hit. Each invocation must:
 
 - Re-fetch all cited files at the **current** head SHA (not the SHA from a
   previous iteration).
 - Reset all verdicts; do not carry forward `PASS` from a prior iteration if
   the cited finding has changed.
-- Increment the `Iteration: <n> of 3` counter in the output header.
+- Increment the `Iteration: <n> of 5` counter in the output header.
+- Rebuild your independent graphs (Step 7) every iteration. A correction
+  in iteration N may have introduced or removed nodes you didn't see in
+  iteration N−1.
 
-If you reach iteration 3 with any `FAIL` outstanding, return verdict
-`FAIL` with the unresolved findings clearly labeled. The reviewer will
-escalate to the human.
+**Stop conditions** (the reviewer enforces these; you simply report
+faithfully):
+
+- **Convergence**: zero `FAIL` and an empty `Likely missed violations`
+  section (or every item already considered in the prior iteration).
+  When this state is reached, the report is stable and the reviewer
+  advances to Step 7.
+- **Hard cap**: iteration 5. If you reach iteration 5 with any `FAIL`
+  outstanding, return verdict `FAIL` with the unresolved findings
+  clearly labeled. The reviewer will escalate to the human.
+- **Wave thrash**: if the `FAIL` set in iterations 3, 4, and 5 share no
+  common members (the reviewer keeps fixing one thing and breaking
+  another), note this explicitly in your iteration-5 output. The
+  reviewer will escalate at iteration 3 if it detects oscillation
+  earlier.
