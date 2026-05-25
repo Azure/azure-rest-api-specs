@@ -464,6 +464,7 @@ op privateLinkResourcesGetCustomization(
   "IotSecurityAggregatedRecommendation",
   "csharp"
 );
+@@clientName(AlertsAPI.Alert, "SecurityAlert", "csharp");
 @@clientName(SecureScoreAPI.SecureScoreItem, "SecureScore", "csharp");
 @@clientName(AlertsSuppressionRulesAPI.AlertsSuppressionRule,
   "SecurityAlertsSuppressionRule",
@@ -492,6 +493,10 @@ op privateLinkResourcesGetCustomization(
 @@clientName(SettingsAPI.Setting, "SecuritySetting", "csharp");
 @@clientName(LegacySettingsAPI.WorkspaceSetting,
   "SecurityWorkspaceSetting",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataResponse,
+  "SecurityAssessmentMetadata",
   "csharp"
 );
 @@clientName(SqlVulnerabilityAssessmentsAPI.RuleResults,
