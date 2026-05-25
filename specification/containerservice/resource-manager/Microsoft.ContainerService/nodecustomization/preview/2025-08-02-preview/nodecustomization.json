@@ -314,7 +314,7 @@
         "tags": [
           "NodeCustomizations"
         ],
-        "description": "Deprecated: Update the tags of a node customization. Use Prepared Image Specification APIs instead.",
+        "description": "Deprecated: Update a node customization. Use Prepared Image Specification APIs instead.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -349,7 +349,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NodeCustomizationPatch"
+              "$ref": "#/definitions/NodeCustomizationUpdate"
             }
           }
         ],
@@ -707,19 +707,6 @@
         "value"
       ]
     },
-    "NodeCustomizationPatch": {
-      "type": "object",
-      "description": "Node customization patch resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "NodeCustomizationProperties": {
       "type": "object",
       "description": "The properties of the Node Customization resource.",
@@ -737,9 +724,8 @@
         },
         "version": {
           "type": "string",
-          "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
-          "pattern": "^[\\w\\-\\.]+$",
-          "readOnly": true
+          "description": "The client-provided version of the node customization.",
+          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -794,6 +780,19 @@
         "executionPoint",
         "scriptType"
       ]
+    },
+    "NodeCustomizationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the NodeCustomization.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "NodeCustomizationVersion": {
       "type": "object",

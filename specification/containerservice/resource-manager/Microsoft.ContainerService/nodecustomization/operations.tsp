@@ -22,10 +22,10 @@ interface NodeCustomizations {
   >;
 
   #deprecated "Node Customization APIs are deprecated. Use Prepared Image Specification APIs instead."
-  @doc("Deprecated: Update the tags of a node customization. Use Prepared Image Specification APIs instead.")
+  @doc("Deprecated: Update a node customization. Use Prepared Image Specification APIs instead.")
   update is ArmCustomPatchSync<
     NodeCustomization,
-    PatchModel = NodeCustomizationPatch,
+    PatchModel = NodeCustomizationUpdate,
     Parameters = IfMatchParameters<NodeCustomization>
   >;
 
