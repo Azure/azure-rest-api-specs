@@ -26,7 +26,7 @@ model VariableValue
     Resource = VariableValue,
     KeyName = "variableValueName",
     SegmentName = "values",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -45,7 +45,7 @@ alias VariableValueOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   },
   {},
@@ -54,7 +54,7 @@ alias VariableValueOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("values")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableValueName: string;
   }
 >;
@@ -82,7 +82,7 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
   },
   {
@@ -92,14 +92,14 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("variables")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableName: string;
 
     /** The name of the variable value to operate on. */
     @path
     @segment("values")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     variableValueName: string;
   }
 >;
@@ -158,9 +158,11 @@ interface VariableValues {
 
 @@doc(VariableValue.name, "The name of the variable value to operate on.");
 @@doc(VariableValue.properties, "Properties for the variable value.");
-@@doc(VariableValues.createOrUpdate::parameters.resource,
+@@doc(
+  VariableValues.createOrUpdate::parameters.resource,
   "Parameters for the variable value."
 );
-@@doc(VariableValues.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  VariableValues.createOrUpdateAtManagementGroup::parameters.resource,
   "Parameters for the variable value."
 );

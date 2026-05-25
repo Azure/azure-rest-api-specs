@@ -27,7 +27,7 @@ interface AvailableWorkloadProfilesOperationGroup {
   get is ArmProviderActionSync<
     Response = AvailableWorkloadProfilesCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -44,7 +44,7 @@ interface BillingMetersOperationGroup {
   get is ArmProviderActionSync<
     Response = BillingMeterCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }
@@ -77,7 +77,7 @@ interface UsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = DefaultErrorResponse
   >;
 }

@@ -90,9 +90,11 @@ interface JavaComponents {
 
 @@doc(JavaComponent.name, "Name of the Java Component.");
 @@doc(JavaComponent.properties, "Java Component resource specific properties");
-@@doc(JavaComponents.createOrUpdate::parameters.resource,
+@@doc(
+  JavaComponents.createOrUpdate::parameters.resource,
   "Configuration details of the Java Component."
 );
-@@doc(JavaComponents.update::parameters.properties,
+@@doc(
+  JavaComponents.update::parameters.properties,
   "Configuration details of the Java Component."
 );

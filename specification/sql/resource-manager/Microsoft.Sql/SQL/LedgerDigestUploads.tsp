@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * Azure SQL Database ledger digest upload settings.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.LedgerDigestUploads)
 model LedgerDigestUploads
   is Azure.ResourceManager.ProxyResource<LedgerDigestUploadsProperties> {
   ...ResourceNameParameter<
@@ -27,7 +29,9 @@ model LedgerDigestUploads
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.LedgerDigestUploads)
 interface LedgerDigestUploadsOperationGroup {
   /**
    * Gets the current ledger digest upload configuration for a database.
@@ -42,8 +46,10 @@ interface LedgerDigestUploadsOperationGroup {
   @tag("LedgerDigestUploads")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LedgerDigestUploads,
-    Response = ArmResourceUpdatedResponse<LedgerDigestUploads> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LedgerDigestUploads> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<LedgerDigestUploads>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LedgerDigestUploads> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -65,6 +71,7 @@ interface LedgerDigestUploadsOperationGroup {
 
 @@doc(LedgerDigestUploads.name, "");
 @@doc(LedgerDigestUploads.properties, "Resource properties.");
-@@doc(LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   ""
 );

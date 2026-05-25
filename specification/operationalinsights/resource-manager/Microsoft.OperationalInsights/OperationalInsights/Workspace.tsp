@@ -169,11 +169,14 @@ interface Workspaces {
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
-    Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
-      Workspace,
-      ArmLroLocationHeader<FinalResult = Workspace> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Workspace>
+      | ArmResourceCreatedResponse<
+          Workspace,
+          ArmLroLocationHeader<FinalResult = Workspace> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -199,7 +202,10 @@ interface Workspaces {
       @query("force")
       force?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -397,12 +403,15 @@ interface Workspaces {
 @@minLength(Workspace.name, 4);
 @@doc(Workspace.name, "The name of the workspace.");
 @@doc(Workspace.properties, "Workspace properties.");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "The parameters required to create or update a workspace."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "The parameters required to patch a workspace."
 );
-@@doc(Workspaces.purge::parameters.body,
+@@doc(
+  Workspaces.purge::parameters.body,
   "Describes the body of a request to purge data in a single table of an Log Analytics Workspace"
 );
