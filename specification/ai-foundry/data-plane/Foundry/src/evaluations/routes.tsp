@@ -26,7 +26,8 @@ interface Evaluations {
       @body
       evaluation: Evaluation;
     },
-    ResourceCreatedResponse<Evaluation>
+    ResourceCreatedResponse<Evaluation>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -39,7 +40,8 @@ interface Evaluations {
       @body
       evaluation: AgentEvaluationRequest;
     },
-    ResourceCreatedResponse<AgentEvaluation>
+    ResourceCreatedResponse<AgentEvaluation>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

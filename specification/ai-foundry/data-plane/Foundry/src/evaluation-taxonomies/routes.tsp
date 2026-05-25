@@ -26,7 +26,8 @@ interface EvaluationTaxonomies {
     {
       ...EvaluationTaxonomiesPreviewHeader;
     },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
+    Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   @doc("List evaluation taxonomies")
@@ -35,7 +36,8 @@ interface EvaluationTaxonomies {
     EvaluationTaxonomy,
     EvaluationTaxonomiesFilterQueryParamsTraits &
       EvaluationTaxonomiesPreviewHeader,
-    Azure.Core.Page<EvaluationTaxonomy>
+    Azure.Core.Page<EvaluationTaxonomy>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   @doc("Delete an evaluation taxonomy by name.")
@@ -45,7 +47,8 @@ interface EvaluationTaxonomies {
     {
       ...EvaluationTaxonomiesPreviewHeader;
     },
-    Http.NoContentResponse
+    Http.NoContentResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   @doc("Create an evaluation taxonomy.")
@@ -63,7 +66,8 @@ interface EvaluationTaxonomies {
       @body
       taxonomy: EvaluationTaxonomy;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   @doc("Update an evaluation taxonomy.")
@@ -81,6 +85,7 @@ interface EvaluationTaxonomies {
       @body
       taxonomy: EvaluationTaxonomy;
     },
-    OkResponse & EvaluationTaxonomy
+    OkResponse & EvaluationTaxonomy,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 }

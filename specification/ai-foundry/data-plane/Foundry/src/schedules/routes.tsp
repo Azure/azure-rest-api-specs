@@ -35,7 +35,8 @@ interface Schedules {
     {
       ...SchedulesPreviewHeader;
     },
-    Http.NoContentResponse
+    Http.NoContentResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -45,7 +46,8 @@ interface Schedules {
     {
       ...SchedulesPreviewHeader;
     },
-    Azure.Core.Foundations.ResourceOkResponse<Schedule>
+    Azure.Core.Foundations.ResourceOkResponse<Schedule>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -54,7 +56,8 @@ interface Schedules {
   list is Azure.Core.Foundations.ResourceList<
     Schedule,
     SchedulesFilterQueryParams & SchedulesPreviewHeader,
-    Azure.Core.Page<Schedule>
+    Azure.Core.Page<Schedule>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -63,7 +66,8 @@ interface Schedules {
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     Schedule,
     SchedulesCreateOrUpdateParams,
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Schedule>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Schedule>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -91,6 +95,7 @@ interface Schedules {
   listRuns is Azure.Core.Foundations.ResourceList<
     ScheduleRun,
     SchedulesFilterQueryParams & SchedulesPreviewHeader,
-    Azure.Core.Page<ScheduleRun>
+    Azure.Core.Page<ScheduleRun>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 }

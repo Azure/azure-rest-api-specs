@@ -30,7 +30,8 @@ interface EvaluationRules {
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {},
-    Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>
+    Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // DELETE /evaluationrules/{id}
@@ -39,7 +40,8 @@ interface EvaluationRules {
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {},
-    Http.NoContentResponse
+    Http.NoContentResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // PUT /evaluationrules/{id}
@@ -54,7 +56,8 @@ interface EvaluationRules {
       @Http.bodyRoot
       evaluationRule: EvaluationRule;
     },
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationRule>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationRule>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // GET /evaluationrules
@@ -63,6 +66,7 @@ interface EvaluationRules {
   list is Azure.Core.Foundations.ResourceList<
     EvaluationRule,
     EvaluationRulesFilterQueryParams,
-    Azure.Core.Page<EvaluationRule>
+    Azure.Core.Page<EvaluationRule>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 }

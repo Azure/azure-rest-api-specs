@@ -260,7 +260,8 @@ interface VersionedOperations<
   listLatest is Azure.Core.Foundations.ResourceList<
     TEntityType,
     TListLatestParameters,
-    Azure.Core.Page<TEntityType>
+    Azure.Core.Page<TEntityType>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -276,7 +277,8 @@ interface VersionedOperations<
       @path
       version: string;
     },
-    Azure.Core.Foundations.ResourceOkResponse<TEntityType>
+    Azure.Core.Foundations.ResourceOkResponse<TEntityType>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -293,7 +295,8 @@ interface VersionedOperations<
       @path
       version: string;
     },
-    NoContentResponse
+    NoContentResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -305,7 +308,8 @@ interface VersionedOperations<
   createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
     TEntityType,
     TInputParameters,
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 }
 

@@ -41,7 +41,8 @@ interface Evaluators {
   listLatestVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
-    Azure.Core.Page<EvaluatorVersion>
+    Azure.Core.Page<EvaluatorVersion>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // GET /evaluators/{name}/versions/{version}
@@ -63,7 +64,8 @@ interface Evaluators {
       @Http.path
       version: string;
     },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // DELETE /evaluators/{name}/versions/{version}
@@ -83,7 +85,8 @@ interface Evaluators {
       @Http.path
       version: string;
     },
-    Http.NoContentResponse
+    Http.NoContentResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // POST /evaluators/{evaluatorName}/versions
@@ -99,7 +102,8 @@ interface Evaluators {
       @Http.bodyRoot
       evaluator_version: EvaluatorVersion;
     },
-    Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
+    Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // PATCH /evaluators/{evaluatorName}/versions/{version}
@@ -121,7 +125,8 @@ interface Evaluators {
       @Http.bodyRoot
       evaluator_version: EvaluatorVersion;
     },
-    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

@@ -16,7 +16,8 @@ interface RedTeams {
     {
       ...RedTeamsPreviewHeader;
     },
-    Azure.Core.Foundations.ResourceOkResponse<RedTeam>
+    Azure.Core.Foundations.ResourceOkResponse<RedTeam>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
@@ -25,7 +26,8 @@ interface RedTeams {
   list is Azure.Core.Foundations.ResourceList<
     RedTeam,
     RedTeamsPreviewHeader,
-    Azure.Core.Page<RedTeam>
+    Azure.Core.Page<RedTeam>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

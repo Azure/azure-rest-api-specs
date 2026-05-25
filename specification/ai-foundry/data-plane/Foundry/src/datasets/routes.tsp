@@ -51,6 +51,7 @@ interface Datasets
       @Http.path
       version: string;
     },
-    AssetCredentialResponse
+    AssetCredentialResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 }

@@ -43,7 +43,8 @@ interface Models
       @path
       version: string;
     },
-    Azure.Core.Foundations.ResourceOkResponse<ModelVersion>
+    Azure.Core.Foundations.ResourceOkResponse<ModelVersion>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
@@ -63,7 +64,8 @@ interface Models
       @path
       version: string;
     },
-    OkResponse
+    OkResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   // The method name `createOrUpdateVersion` is required by the `VersionedOperations` interface
@@ -78,7 +80,8 @@ interface Models
   createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
     ModelVersion,
     InputParameters<UpdateModelVersionRequest> & ModelsPreviewHeader,
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom async creation action"
@@ -102,7 +105,8 @@ interface Models
       @bodyRoot
       model_version: ModelVersion;
     },
-    CreateModelVersionAsyncResponse
+    CreateModelVersionAsyncResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom pending upload action"
@@ -125,7 +129,8 @@ interface Models
       @bodyRoot
       pending_upload_request: ModelPendingUploadRequest;
     },
-    ModelPendingUploadResponse
+    ModelPendingUploadResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential action"
@@ -148,6 +153,7 @@ interface Models
       @bodyRoot
       credential_request: ModelCredentialRequest;
     },
-    AssetCredentialResponse
+    AssetCredentialResponse,
+    ErrorResponse = AzureRangeErrorResponse
   >;
 }
