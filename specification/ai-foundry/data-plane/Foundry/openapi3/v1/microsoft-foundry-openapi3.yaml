@@ -846,17 +846,13 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
@@ -1057,17 +1053,13 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
@@ -2283,17 +2275,13 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - CodeAgents=V1Preview
@@ -2719,8 +2707,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedConnection'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -2759,8 +2759,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Connection'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -2799,8 +2811,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Connection'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -3462,8 +3486,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedDeployment'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -3502,8 +3538,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
-        default:
-          description: An unexpected error response.
+        4XX:
+          description: Client error
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+        5XX:
+          description: Server error
           headers:
             x-ms-error-code:
               required: false
@@ -9726,17 +9774,13 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/ApiErrorResponse'
-                  - $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-foundry-meta:
         required_previews:
           - Skills=V1Preview

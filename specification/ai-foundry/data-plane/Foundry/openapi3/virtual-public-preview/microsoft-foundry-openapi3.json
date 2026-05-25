@@ -1299,14 +1299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -1316,14 +1309,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -1739,14 +1725,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -1756,14 +1735,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -3799,14 +3771,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -3816,14 +3781,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -5213,8 +5171,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -5279,8 +5256,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -5345,8 +5341,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -6371,8 +6386,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -6437,8 +6471,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -7703,8 +7756,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -7766,8 +7838,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -7820,8 +7911,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -7876,8 +7986,27 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
             "headers": {
               "x-ms-error-code": {
                 "required": false,
@@ -17560,14 +17689,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -17577,14 +17699,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
