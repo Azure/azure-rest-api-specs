@@ -696,6 +696,81 @@ op privateLinkResourcesGetCustomization(
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+
+// C# compatibility replacement: @@hierarchyBuilding currently crashes the
+// management generator for these legacy custom-resource shapes, so use
+// @@alternateType against replacement models that carry the desired hierarchy.
+model CSharpExternalSecuritySolutionReplacement extends Azure.ResourceManager.Foundations.Resource {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Matches the original legacy custom resource shape."
+  properties?: unknown;
+
+  kind?: SecuritySolutionsAPI.ExternalSecuritySolutionKind;
+
+  @visibility(Lifecycle.Read)
+  location?: azureLocation;
+}
+
+// C# compatibility replacement: @@hierarchyBuilding currently crashes the
+// management generator for these derived models, so use @@alternateType to keep
+// the GA inheritance chain through ExternalSecuritySolution.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
+model CSharpCefExternalSecuritySolutionReplacement extends CSharpExternalSecuritySolutionReplacement {
+  properties?: SecuritySolutionsAPI.CefSolutionProperties;
+  kind: "CEF";
+}
+
+// C# compatibility replacement: @@hierarchyBuilding currently crashes the
+// management generator for these derived models, so use @@alternateType to keep
+// the GA inheritance chain through ExternalSecuritySolution.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
+model CSharpAtaExternalSecuritySolutionReplacement extends CSharpExternalSecuritySolutionReplacement {
+  properties?: SecuritySolutionsAPI.AtaSolutionProperties;
+  kind: "ATA";
+}
+
+// C# compatibility replacement: @@hierarchyBuilding currently crashes the
+// management generator for these derived models, so use @@alternateType to keep
+// the GA inheritance chain through ExternalSecuritySolution.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
+model CSharpAadExternalSecuritySolutionReplacement extends CSharpExternalSecuritySolutionReplacement {
+  properties?: SecuritySolutionsAPI.AadSolutionProperties;
+  kind: "AAD";
+}
+
+// C# compatibility replacement: @@hierarchyBuilding currently crashes the
+// management generator for this flattened resource-like model, so use
+// @@alternateType against a replacement model with a TrackedResource base.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the original service-defined shape."
+model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceManager.Foundations.Resource {
+  ...SecuritySolutionsAPI.Location;
+  properties: SecuritySolutionsAPI.securitySolutionsReferenceDataProperties;
+}
+
+@@clientName(CSharpExternalSecuritySolutionReplacement, "ExternalSecuritySolution", "csharp");
+@@clientName(CSharpCefExternalSecuritySolutionReplacement, "CefExternalSecuritySolution", "csharp");
+@@clientName(CSharpAtaExternalSecuritySolutionReplacement, "AtaExternalSecuritySolution", "csharp");
+@@clientName(CSharpAadExternalSecuritySolutionReplacement, "AadExternalSecuritySolution", "csharp");
+@@clientName(CSharpSecuritySolutionsReferenceDataReplacement, "SecuritySolutionsReferenceData", "csharp");
+@@clientName(SecuritySolutionsAPI.ConnectableResource, "ConnectableResourceInfo", "csharp");
+@@clientName(SecuritySolutionsAPI.ConnectedResource, "ConnectedResourceInfo", "csharp");
+@@alternateType(SecuritySolutionsAPI.ConnectableResource.id, armResourceIdentifier, "csharp");
+@@alternateType(SecuritySolutionsAPI.ConnectedResource.connectedResourceId, armResourceIdentifier, "csharp");
+@@alternateType(SecuritySolutionsAPI.ExternalSecuritySolution, CSharpExternalSecuritySolutionReplacement, "csharp");
+@@alternateType(SecuritySolutionsAPI.CefExternalSecuritySolution, CSharpCefExternalSecuritySolutionReplacement, "csharp");
+@@alternateType(SecuritySolutionsAPI.AtaExternalSecuritySolution, CSharpAtaExternalSecuritySolutionReplacement, "csharp");
+@@alternateType(SecuritySolutionsAPI.AadExternalSecuritySolution, CSharpAadExternalSecuritySolutionReplacement, "csharp");
+@@alternateType(SecuritySolutionsAPI.securitySolutionsReferenceData, CSharpSecuritySolutionsReferenceDataReplacement, "csharp");
+@@clientName(SecuritySolutionsAPI.ExternalSecuritySolutions.listByHomeRegion,
+  "GetExternalSecuritySolutionsByHomeRegion",
+  "csharp"
+);
+
+@@clientName(AutomationsAPI.AutomationValidationStatus, "SecurityAutomationValidationStatus", "csharp");
+@@clientName(TasksAPI.SecurityTaskParameters.name, "TaskName", "csharp");
 @@clientName(SecuritySolutionsAPI.ExternalSecuritySolution, "ExternalSecuritySolution", "csharp");
 @@clientName(SecurityConnectorsAPI.cloudOffering, "SecurityCenterCloudOffering", "csharp");
 @@clientName(SecurityConnectorsAPI.AwsOrganizationalData, "AwsOrganizationalInfo", "csharp");
