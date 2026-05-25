@@ -75,3 +75,9 @@ namespace ClientCustomizations;
   "no-cache",
   "python"
 );
+@@clientName(ManagementGroups.getDescendants, "listDescendants", "javascript");
+@@clientName(
+  SubscriptionUnderManagementGroups.getSubscriptionsUnderManagementGroup,
+  "listSubscriptionsUnderManagementGroup",
+  "javascript"
+);
