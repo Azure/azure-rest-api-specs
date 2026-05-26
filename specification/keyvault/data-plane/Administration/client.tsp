@@ -136,6 +136,8 @@ interface KeyVaultEkmRestClient {
 @@access(KeyVault, Access.internal, "csharp");
 
 @@usage(KeyVault.RoleDefinition, Usage.input | Usage.output, "csharp");
+@@usage(KeyVault.EkmProxyInfo, Usage.output, "csharp");
+@@usage(KeyVault.EkmProxyClientCertificateInfo, Usage.output, "csharp");
 
 // JavaScript customizations
 @@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
