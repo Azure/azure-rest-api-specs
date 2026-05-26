@@ -40,8 +40,8 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration"
     namespace: com.azure.data.appconfiguration
-    generation-subdir: "implementation"
-    partial-update: true
+    models-subpackage: "implementation.models"
+    customization-class: "customization/src/main/java/AppConfigurationCustomizations.java"
     flavor: azure
     generate-tests: false
     generate-samples: false

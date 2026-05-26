@@ -8,10 +8,8 @@ using AzureAppConfiguration;
 namespace SdkCustomizations;
 
 // Java specific customizations
+@@clientName(AzureAppConfiguration, "AzureAppConfiguration", "java");
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "java");
-@@clientName(AzureAppConfiguration, "ConfigurationClient", "java");
-@@access(AzureAppConfiguration, Access.internal, "java");
-@@clientName(getKeyValue, "getConfigurationSetting", "java");
 @@clientName(getKeyValues, "listConfigurationSettings", "java");
 @@clientName(putKeyValue, "setConfigurationSetting", "java");
 @@clientName(deleteKeyValue, "deleteConfigurationSetting", "java");
