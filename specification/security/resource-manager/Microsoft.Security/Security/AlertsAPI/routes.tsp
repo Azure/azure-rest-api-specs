@@ -50,6 +50,7 @@ interface AlertsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-operation-at-original-uri" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Alerts")
   @post
+  @armResourceCollectionAction
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate")
   @Azure.Core.useFinalStateVia("original-uri")
   simulate(

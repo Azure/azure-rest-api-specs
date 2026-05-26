@@ -784,15 +784,42 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
   properties: SecuritySolutionsAPI.securitySolutionsReferenceDataProperties;
 }
 
+// C# compatibility replacement: keep the GA property name FirstEvaluatedOn while
+// preserving the service wire name firstEvaluationDate.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model preserves the legacy .NET model hierarchy and property names."
+model CSharpSecurityAssessmentStatusResult extends AssessmentAPI.AssessmentStatus {
+  /**
+   * The time that the assessment was created and first evaluated. Returned as UTC time in ISO 8601 format
+   */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "firstEvaluationDate")
+  firstEvaluatedOn?: utcDateTime;
+
+  /**
+   * The time that the status of the assessment last changed. Returned as UTC time in ISO 8601 format
+   */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "statusChangeDate")
+  statusChangeOn?: utcDateTime;
+}
+
 @@clientName(CSharpExternalSecuritySolutionReplacement, "ExternalSecuritySolution", "csharp");
 @@clientName(CSharpCefExternalSecuritySolutionReplacement, "CefExternalSecuritySolution", "csharp");
 @@clientName(CSharpAtaExternalSecuritySolutionReplacement, "AtaExternalSecuritySolution", "csharp");
 @@clientName(CSharpAadExternalSecuritySolutionReplacement, "AadExternalSecuritySolution", "csharp");
 @@clientName(CSharpSecuritySolutionsReferenceDataReplacement, "SecuritySolutionsReferenceData", "csharp");
+@@clientName(CSharpSecurityAssessmentStatusResult, "SecurityAssessmentStatusResult", "csharp");
 @@clientName(SecuritySolutionsAPI.ConnectableResource, "ConnectableResourceInfo", "csharp");
 @@clientName(SecuritySolutionsAPI.ConnectedResource, "ConnectedResourceInfo", "csharp");
+@@usage(
+  CSharpSecurityAssessmentStatusResult,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@alternateType(SecuritySolutionsAPI.ConnectableResource.id, armResourceIdentifier, "csharp");
 @@alternateType(SecuritySolutionsAPI.ConnectedResource.connectedResourceId, armResourceIdentifier, "csharp");
+@@alternateType(AssessmentAPI.OnPremiseResourceDetailsProperties.vmuuid, uuid, "csharp");
+@@alternateType(AssessmentAPI.AssessmentStatusResponse, CSharpSecurityAssessmentStatusResult, "csharp");
 @@alternateType(SecuritySolutionsAPI.ExternalSecuritySolution, CSharpExternalSecuritySolutionReplacement, "csharp");
 @@alternateType(SecuritySolutionsAPI.CefExternalSecuritySolution, CSharpCefExternalSecuritySolutionReplacement, "csharp");
 @@alternateType(SecuritySolutionsAPI.AtaExternalSecuritySolution, CSharpAtaExternalSecuritySolutionReplacement, "csharp");
@@ -808,7 +835,6 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 @@clientName(Common.Tags, "SecurityCenterPatchTags", "csharp");
 @@clientName(AssessmentAPI.AssessmentStatus, "SecurityAssessmentStatus", "csharp");
 @@clientName(AssessmentAPI.AssessmentStatusCode, "SecurityAssessmentStatusCode", "csharp");
-@@clientName(AssessmentAPI.AssessmentStatusResponse, "SecurityAssessmentStatusResult", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponse, "SecurityAssessmentMetadataPropertiesResult", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates, "SecurityAssessmentPublishDates", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentPartnerData, "SecurityAssessmentPartnerInfo", "csharp");
@@ -891,9 +917,16 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
   "current",
   "python"
 );
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
+@clientName("AdvancedThreatProtectionSettingName", "csharp")
+union CSharpAdvancedThreatProtectionSettingName {
+  /** Current. */
+  Current: "current",
+}
+
 @@Azure.ClientGenerator.Core.alternateType(
-  AdvancedThreatProtectionSettingNameAlias.settingName,
-  "current",
+  AdvancedThreatProtectionSettingName,
+  CSharpAdvancedThreatProtectionSettingName,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
