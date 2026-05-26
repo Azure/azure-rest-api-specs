@@ -60,13 +60,13 @@ model ScoreRecord {
   ...Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible connectivity result properties."
 @doc("Result of a storage configuration connectivity test.")
 model StorageConfigConnectivityResult {
   @doc("Whether the connectivity test was successful.")
-  isConnected?: boolean;
+  succeeded: boolean;
 
-  ...Record<unknown>;
+  @doc("Diagnostic message describing the connectivity test outcome. Empty string when the test succeeded.")
+  message: string;
 }
 
 // ============================================================================
@@ -264,6 +264,12 @@ model SystemData {
 
   @doc("The timestamp when the resource was created.")
   createdAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who last modified the resource.")
+  lastModifiedBy?: uuid;
+
+  @doc("The timestamp when the resource was last modified.")
+  lastModifiedAt?: utcDateTime;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
@@ -456,10 +462,79 @@ model DHScoreAggregatedByControlGroup {
 // Settings Models
 // ============================================================================
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible storage config properties."
-@doc("A storage configuration resource.")
+@doc("Type of storage backing a Purview Data Estate Health storage configuration.")
+union StorageType {
+  @doc("Microsoft Fabric storage.")
+  Fabric: "Fabric",
+
+  @doc("Azure Data Lake Storage Gen2 storage.")
+  ADLSGen2: "ADLSGen2",
+
+  string,
+}
+
+@doc("Status of a Purview Data Estate Health storage configuration.")
+union StorageStatus {
+  @doc("The storage configuration is disabled.")
+  Disabled: "Disabled",
+
+  @doc("The storage configuration is enabled.")
+  Enabled: "Enabled",
+
+  string,
+}
+
+@doc("""
+  Type-specific properties for the storage configuration. The actual fields
+  populated depend on the parent StorageConfig.type: `locationURL` is set when
+  type is `Fabric`; `endpoint` is set when type is `ADLSGen2`.
+  """)
+model StorageConfigTypeProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches existing service wire format `locationURL` defined by DGCatalogStorageConfigFabricTypeProperties."
+  @doc("Fabric workspace location URL. Required when StorageConfig.type is `Fabric`.")
+  locationURL?: string;
+
+  @doc("Azure Data Lake Storage Gen2 endpoint URL. Required when StorageConfig.type is `ADLSGen2`.")
+  endpoint?: string;
+}
+
+@doc("Network properties associated with a storage configuration, including managed virtual network and managed private endpoint information.")
+model StorageConfigNetworkProperties {
+  @doc("Whether managed virtual network is enabled for this storage configuration.")
+  isManagedVnetEnabled?: boolean;
+
+  @doc("The Azure resource ID of the target storage resource.")
+  targetResourceId?: string;
+
+  @doc("The managed private endpoint identifier.")
+  mpeId?: string;
+
+  @doc("The status of the managed private endpoint. Possible values include `Approved`, `Rejected`, `Pending`, `Provisioning`, or an empty string when no endpoint exists.")
+  mpeStatus?: string;
+
+  @doc("Whether the managed private endpoint is marked for deletion.")
+  markedForDeletion?: boolean;
+}
+
+@doc("Storage configuration for Purview Data Estate Health.")
 model StorageConfig {
-  ...Record<unknown>;
+  @doc("Unique identifier of the storage configuration.")
+  id: string;
+
+  @doc("Type of storage backing this configuration.")
+  type: StorageType;
+
+  @doc("Status of the storage configuration.")
+  status: StorageStatus;
+
+  @doc("System data envelope for the storage configuration.")
+  systemData: SystemData;
+
+  @doc("Type-specific properties whose shape depends on the storage `type`.")
+  typeProperties: StorageConfigTypeProperties;
+
+  @doc("Network properties associated with the storage configuration.")
+  networkProperties?: StorageConfigNetworkProperties;
 }
 
 @doc("Supported data source types for managed private endpoints.")

@@ -1469,7 +1469,34 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageConfig"
+              "type": "object",
+              "description": "The template for adding optional properties.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier of the storage configuration."
+                },
+                "type": {
+                  "$ref": "#/definitions/StorageType",
+                  "description": "Type of storage backing this configuration."
+                },
+                "status": {
+                  "$ref": "#/definitions/StorageStatus",
+                  "description": "Status of the storage configuration."
+                },
+                "systemData": {
+                  "$ref": "#/definitions/SystemData",
+                  "description": "System data envelope for the storage configuration."
+                },
+                "typeProperties": {
+                  "$ref": "#/definitions/StorageConfigTypeProperties",
+                  "description": "Type-specific properties whose shape depends on the storage `type`."
+                },
+                "networkProperties": {
+                  "$ref": "#/definitions/StorageConfigNetworkProperties",
+                  "description": "Network properties associated with the storage configuration."
+                }
+              }
             }
           }
         ],
@@ -1513,7 +1540,34 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StorageConfig"
+              "type": "object",
+              "description": "The template for adding optional properties.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier of the storage configuration."
+                },
+                "type": {
+                  "$ref": "#/definitions/StorageType",
+                  "description": "Type of storage backing this configuration."
+                },
+                "status": {
+                  "$ref": "#/definitions/StorageStatus",
+                  "description": "Status of the storage configuration."
+                },
+                "systemData": {
+                  "$ref": "#/definitions/SystemData",
+                  "description": "System data envelope for the storage configuration."
+                },
+                "typeProperties": {
+                  "$ref": "#/definitions/StorageConfigTypeProperties",
+                  "description": "Type-specific properties whose shape depends on the storage `type`."
+                },
+                "networkProperties": {
+                  "$ref": "#/definitions/StorageConfigNetworkProperties",
+                  "description": "Network properties associated with the storage configuration."
+                }
+              }
             }
           }
         ],
@@ -2291,19 +2345,146 @@
     },
     "StorageConfig": {
       "type": "object",
-      "description": "A storage configuration resource.",
-      "additionalProperties": {}
+      "description": "Storage configuration for Purview Data Estate Health.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the storage configuration."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType",
+          "description": "Type of storage backing this configuration."
+        },
+        "status": {
+          "$ref": "#/definitions/StorageStatus",
+          "description": "Status of the storage configuration."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System data envelope for the storage configuration."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/StorageConfigTypeProperties",
+          "description": "Type-specific properties whose shape depends on the storage `type`."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/StorageConfigNetworkProperties",
+          "description": "Network properties associated with the storage configuration."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "status",
+        "systemData",
+        "typeProperties"
+      ]
     },
     "StorageConfigConnectivityResult": {
       "type": "object",
       "description": "Result of a storage configuration connectivity test.",
       "properties": {
-        "isConnected": {
+        "succeeded": {
           "type": "boolean",
           "description": "Whether the connectivity test was successful."
+        },
+        "message": {
+          "type": "string",
+          "description": "Diagnostic message describing the connectivity test outcome. Empty string when the test succeeded."
         }
       },
-      "additionalProperties": {}
+      "required": [
+        "succeeded",
+        "message"
+      ]
+    },
+    "StorageConfigNetworkProperties": {
+      "type": "object",
+      "description": "Network properties associated with a storage configuration, including managed virtual network and managed private endpoint information.",
+      "properties": {
+        "isManagedVnetEnabled": {
+          "type": "boolean",
+          "description": "Whether managed virtual network is enabled for this storage configuration."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target storage resource."
+        },
+        "mpeId": {
+          "type": "string",
+          "description": "The managed private endpoint identifier."
+        },
+        "mpeStatus": {
+          "type": "string",
+          "description": "The status of the managed private endpoint. Possible values include `Approved`, `Rejected`, `Pending`, `Provisioning`, or an empty string when no endpoint exists."
+        },
+        "markedForDeletion": {
+          "type": "boolean",
+          "description": "Whether the managed private endpoint is marked for deletion."
+        }
+      }
+    },
+    "StorageConfigTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for the storage configuration. The actual fields\npopulated depend on the parent StorageConfig.type: `locationURL` is set when\ntype is `Fabric`; `endpoint` is set when type is `ADLSGen2`.",
+      "properties": {
+        "locationURL": {
+          "type": "string",
+          "description": "Fabric workspace location URL. Required when StorageConfig.type is `Fabric`."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Azure Data Lake Storage Gen2 endpoint URL. Required when StorageConfig.type is `ADLSGen2`."
+        }
+      }
+    },
+    "StorageStatus": {
+      "type": "string",
+      "description": "Status of a Purview Data Estate Health storage configuration.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "StorageStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The storage configuration is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The storage configuration is enabled."
+          }
+        ]
+      }
+    },
+    "StorageType": {
+      "type": "string",
+      "description": "Type of storage backing a Purview Data Estate Health storage configuration.",
+      "enum": [
+        "Fabric",
+        "ADLSGen2"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Microsoft Fabric storage."
+          },
+          {
+            "name": "ADLSGen2",
+            "value": "ADLSGen2",
+            "description": "Azure Data Lake Storage Gen2 storage."
+          }
+        ]
+      }
     },
     "SystemData": {
       "type": "object",
@@ -2317,6 +2498,15 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp when the resource was created."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was last modified."
         }
       }
     },
