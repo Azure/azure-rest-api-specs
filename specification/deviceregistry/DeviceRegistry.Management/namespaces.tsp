@@ -25,7 +25,13 @@ model Namespace is TrackedResource<NamespaceProperties> {
   @maxLength(64)
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Explicit identity property required for @typeChangedFrom versioning"
+  @doc("The managed service identities assigned to this resource.")
+  @typeChangedFrom(
+    Versions.v2026_11_01_preview,
+    Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+  )
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 @added(Versions.v2024_10_01_preview)
@@ -69,6 +75,10 @@ model NamespaceProperties {
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning endpoints associated with this namespace.")
   provisioning?: NamespaceProvisioning;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The identity used for outbound calls from the ADR namespace. If not specified and the namespace has a system-assigned identity enabled, the system-assigned identity is used by default.")
+  outboundIdentity?: OutboundIdentity;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -204,6 +214,28 @@ model InboundCallerIdentity {
 @added(Versions.v2026_11_01_preview)
 @doc("The type of identity used for inbound calls to the ADR namespace.")
 union InboundCallerIdentityType {
+  string,
+
+  @doc("System-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("User-assigned managed identity.")
+  UserAssigned: "UserAssigned",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The identity the ADR namespace uses for outbound calls. If this property is null and the namespace has a system-assigned identity enabled, the namespace defaults to using the system-assigned identity for outbound calls.")
+model OutboundIdentity {
+  @doc("The identity type.")
+  type: OutboundIdentityType;
+
+  @doc("The resource ID of the user-assigned managed identity. Required when type is UserAssigned.")
+  userAssignedIdentity?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The type of identity used for outbound calls from the ADR namespace.")
+union OutboundIdentityType {
   string,
 
   @doc("System-assigned managed identity.")

@@ -64,11 +64,11 @@ enum Versions {
   v2026_02_01_preview: "2026-02-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_11_01_preview: "2026-11-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-02-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_11_02_preview: "2026-11-02-preview",
 }
 
