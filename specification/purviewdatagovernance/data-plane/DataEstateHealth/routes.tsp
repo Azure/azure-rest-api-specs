@@ -283,20 +283,6 @@ union ScoreQueryType {
   string,
 }
 
-@doc("Kind of health score requested for data product or data asset score endpoints.")
-union HealthScoreKind {
-  @doc("Data governance health score.")
-  DataGovernance: "DataGovernance",
-
-  @doc("Data quality health score.")
-  DataQuality: "DataQuality",
-
-  @doc("Data curation health score.")
-  DataCuration: "DataCuration",
-
-  string,
-}
-
 @doc("Operations for querying governance scores.")
 interface Scores {
   @doc("Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.")
@@ -311,64 +297,6 @@ interface Scores {
 
     @body body: QueryScoresRequest,
   ): ScoreQueryResponse | ErrorResponse;
-
-  @doc("List health scores for all data products in a business domain.")
-  @route("/scores/businessDomains/{domainId}/dataProducts/bulk")
-  @get
-  listAllDataProducts(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the business domain.")
-    @path
-    @maxLength(256)
-    domainId: string,
-
-    @doc("Kind of health score to retrieve.")
-    @query("kind")
-    kind: HealthScoreKind,
-  ): DataProductHealthScoreListResponse | ErrorResponse;
-
-  @doc("Get the health score for a specific data product within a business domain.")
-  @route("/scores/businessDomains/{domainId}/dataProducts/{dataProductId}")
-  @get
-  getDataProduct(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the business domain.")
-    @path
-    @maxLength(256)
-    domainId: string,
-
-    @doc("The unique identifier of the data product.")
-    @path
-    @maxLength(256)
-    dataProductId: string,
-
-    @doc("Kind of health score to retrieve.")
-    @query("kind")
-    kind: HealthScoreKind,
-  ): DataProductHealthScoreResponse | ErrorResponse;
-
-  @doc("List health scores for all data assets within a data product in a business domain.")
-  @route("/scores/businessDomains/{domainId}/dataProducts/{dataProductId}/dataAssets/bulk")
-  @get
-  listAllDataAssets(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the business domain.")
-    @path
-    @maxLength(256)
-    domainId: string,
-
-    @doc("The unique identifier of the data product.")
-    @path
-    @maxLength(256)
-    dataProductId: string,
-
-    @doc("Kind of health score to retrieve.")
-    @query("kind")
-    kind: HealthScoreKind,
-  ): DataAssetHealthScoreListResponse | ErrorResponse;
 }
 
 // ============================================================================
@@ -457,20 +385,6 @@ alias ScheduleResponse = Schedule;
 alias ScheduleTriggerResponse = TriggerScheduleResponse;
 
 alias ScoreQueryResponse = ScoreRecord[];
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for data product health scores."
-@doc("Paged collection of data product health scores.")
-model DataProductHealthScoreListResponse {
-  ...PagedResults<ScoreRecord>;
-}
-
-alias DataProductHealthScoreResponse = ScoreRecord;
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for data asset health scores."
-@doc("Paged collection of data asset health scores.")
-model DataAssetHealthScoreListResponse {
-  ...PagedResults<ScoreRecord>;
-}
 
 alias StorageConfigResponse = StorageConfig;
 alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
