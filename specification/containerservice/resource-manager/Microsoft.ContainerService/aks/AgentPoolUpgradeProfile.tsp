@@ -83,7 +83,7 @@ model AgentPoolUpgradeProfileProperties {
   /**
    * List of historical good versions for rollback operations.
    */
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   recentlyUsedVersions?: AgentPoolRecentlyUsedVersion[];
@@ -116,7 +116,7 @@ model AgentPoolUpgradeProfilePropertiesUpgradesItem {
 /**
  * A historical version that can be used for rollback operations.
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_04_01)
 model AgentPoolRecentlyUsedVersion {
   /**
    * The Kubernetes version (major.minor.patch) available for rollback.
