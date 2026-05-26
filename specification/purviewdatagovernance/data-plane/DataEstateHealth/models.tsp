@@ -537,6 +537,9 @@ model StorageConfig {
   networkProperties?: StorageConfigNetworkProperties;
 }
 
+@doc("Partial storage configuration payload used when updating the configuration or testing its connectivity. All properties are optional so callers can supply only the fields they want to change or validate.")
+model StorageConfigUpdate is OptionalProperties<StorageConfig>;
+
 @doc("Supported data source types for managed private endpoints.")
 union DataSourceType {
   @doc("Microsoft Fabric data source.")

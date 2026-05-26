@@ -1469,34 +1469,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The template for adding optional properties.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Unique identifier of the storage configuration."
-                },
-                "type": {
-                  "$ref": "#/definitions/StorageType",
-                  "description": "Type of storage backing this configuration."
-                },
-                "status": {
-                  "$ref": "#/definitions/StorageStatus",
-                  "description": "Status of the storage configuration."
-                },
-                "systemData": {
-                  "$ref": "#/definitions/SystemData",
-                  "description": "System data envelope for the storage configuration."
-                },
-                "typeProperties": {
-                  "$ref": "#/definitions/StorageConfigTypeProperties",
-                  "description": "Type-specific properties whose shape depends on the storage `type`."
-                },
-                "networkProperties": {
-                  "$ref": "#/definitions/StorageConfigNetworkProperties",
-                  "description": "Network properties associated with the storage configuration."
-                }
-              }
+              "$ref": "#/definitions/StorageConfigUpdate"
             }
           }
         ],
@@ -1540,34 +1513,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "description": "The template for adding optional properties.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Unique identifier of the storage configuration."
-                },
-                "type": {
-                  "$ref": "#/definitions/StorageType",
-                  "description": "Type of storage backing this configuration."
-                },
-                "status": {
-                  "$ref": "#/definitions/StorageStatus",
-                  "description": "Status of the storage configuration."
-                },
-                "systemData": {
-                  "$ref": "#/definitions/SystemData",
-                  "description": "System data envelope for the storage configuration."
-                },
-                "typeProperties": {
-                  "$ref": "#/definitions/StorageConfigTypeProperties",
-                  "description": "Type-specific properties whose shape depends on the storage `type`."
-                },
-                "networkProperties": {
-                  "$ref": "#/definitions/StorageConfigNetworkProperties",
-                  "description": "Network properties associated with the storage configuration."
-                }
-              }
+              "$ref": "#/definitions/StorageConfigUpdate"
             }
           }
         ],
@@ -2435,6 +2381,36 @@
         "endpoint": {
           "type": "string",
           "description": "Azure Data Lake Storage Gen2 endpoint URL. Required when StorageConfig.type is `ADLSGen2`."
+        }
+      }
+    },
+    "StorageConfigUpdate": {
+      "type": "object",
+      "description": "Partial storage configuration payload used when updating the configuration or testing its connectivity. All properties are optional so callers can supply only the fields they want to change or validate.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the storage configuration."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType",
+          "description": "Type of storage backing this configuration."
+        },
+        "status": {
+          "$ref": "#/definitions/StorageStatus",
+          "description": "Status of the storage configuration."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System data envelope for the storage configuration."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/StorageConfigTypeProperties",
+          "description": "Type-specific properties whose shape depends on the storage `type`."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/StorageConfigNetworkProperties",
+          "description": "Network properties associated with the storage configuration."
         }
       }
     },

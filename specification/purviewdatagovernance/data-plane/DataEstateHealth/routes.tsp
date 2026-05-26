@@ -389,7 +389,7 @@ interface Settings {
   @post
   updateStorageConfig(
     ...ApiVersionParameter,
-    @body body: OptionalProperties<StorageConfig>,
+    @body body: StorageConfigUpdate,
   ): Created201Response<StorageConfig> | ErrorResponse;
 
   @doc("Test storage configuration connectivity.")
@@ -397,7 +397,7 @@ interface Settings {
   @post
   testStorageConfigConnectivity(
     ...ApiVersionParameter,
-    @body body: OptionalProperties<StorageConfig>,
+    @body body: StorageConfigUpdate,
   ): StorageConfigConnectivityResponse | ErrorResponse;
 
   @doc("Check if a managed private endpoint exists.")
