@@ -40,7 +40,11 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration"
     namespace: com.azure.data.appconfiguration
+    generation-subdir: "implementation"
+    partial-update: true
     flavor: azure
+    generate-tests: false
+    generate-samples: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

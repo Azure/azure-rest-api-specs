@@ -9,6 +9,12 @@ namespace SdkCustomizations;
 
 // Java specific customizations
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "java");
+@@clientName(AzureAppConfiguration, "ConfigurationClient", "java");
+@@access(AzureAppConfiguration, Access.internal, "java");
+@@clientName(getKeyValue, "getConfigurationSetting", "java");
+@@clientName(getKeyValues, "listConfigurationSettings", "java");
+@@clientName(putKeyValue, "setConfigurationSetting", "java");
+@@clientName(deleteKeyValue, "deleteConfigurationSetting", "java");
 
 // Python specific customizations
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
