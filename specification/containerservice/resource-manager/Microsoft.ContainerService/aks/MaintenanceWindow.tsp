@@ -44,10 +44,12 @@ model MaintenanceWindowResource
 @@maxLength(MaintenanceWindowResource.name, 63);
 @@minLength(MaintenanceWindowResource.name, 1);
 @@doc(MaintenanceWindowResource.name, "The name of the maintenance window.");
-@@doc(MaintenanceWindowResource.properties,
+@@doc(
+  MaintenanceWindowResource.properties,
   "Properties of a maintenance window."
 );
-@@doc(MaintenanceWindows.createOrUpdate::parameters.resource,
+@@doc(
+  MaintenanceWindows.createOrUpdate::parameters.resource,
   "The maintenance window to create or update."
 );
 
