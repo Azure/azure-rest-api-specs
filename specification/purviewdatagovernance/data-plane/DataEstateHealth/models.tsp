@@ -173,13 +173,314 @@ union DHControlStatus {
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible control properties."
-@doc("A governance control resource.")
+@doc("Discriminator for governance control variants.")
+union DHControlType {
+  @doc("A control group that aggregates child controls.")
+  ControlGroup: "ControlGroup",
+
+  @doc("A leaf control that performs evaluations.")
+  ControlNode: "ControlNode",
+
+  string,
+}
+
+@doc("Discriminator for governance rule variants.")
+union DHRuleType {
+  @doc("A logical group combining nested rules.")
+  RuleGroup: "RuleGroup",
+
+  @doc("A simple checkPoint/operator/operand rule.")
+  SimpleRule: "SimpleRule",
+
+  @doc("An expression-based rule.")
+  ExpressionRule: "ExpressionRule",
+
+  string,
+}
+
+@doc("Logical combinator for a rule group.")
+union DHRuleGroupOperator {
+  And: "And",
+  Or: "Or",
+  Not: "Not",
+  string,
+}
+
+@doc("Comparison operator for a simple rule.")
+union DHRuleOperator {
+  Equal: "Equal",
+  NotEqual: "NotEqual",
+  GreaterThan: "GreaterThan",
+  GreaterThanOrEqual: "GreaterThanOrEqual",
+  LessThan: "LessThan",
+  LessThanOrEqual: "LessThanOrEqual",
+  Contains: "Contains",
+  StartsWith: "StartsWith",
+  EndsWith: "EndsWith",
+  InRange: "InRange",
+  IsNull: "IsNull",
+  IsEmpty: "IsEmpty",
+  IsTrue: "IsTrue",
+  IsNullOrEmpty: "IsNullOrEmpty",
+  IsNotNullOrEmpty: "IsNotNullOrEmpty",
+  Normalize: "Normalize",
+  RegexMatch: "RegexMatch",
+  string,
+}
+
+@doc("Identifier of a checkable property within a rule.")
+union DHRuleCheckPoint {
+  Score: "Score",
+  DataProductDescriptionContent: "DataProductDescriptionContent",
+  DataProductDescriptionLength: "DataProductDescriptionLength",
+  string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Type-specific properties for a simple rule.")
+model DHRuleSimpleTypeProperties {
+  @doc("The data point to evaluate.")
+  checkPoint?: DHRuleCheckPoint;
+
+  @doc("The comparison operator.")
+  operator?: DHRuleOperator;
+
+  @doc("The operand to compare against. Optional for operators that take no operand (e.g. IsNull).")
+  operand?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Type-specific properties for a rule group.")
+model DHRuleGroupTypeProperties {
+  @doc("How nested rules are combined.")
+  groupOperator?: DHRuleGroupOperator;
+
+  @doc("The nested rules combined by groupOperator.")
+  rules?: DHRule[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Type-specific properties for an expression rule.")
+model DHRuleExpressionTypeProperties {
+  @doc("The data point evaluated by the expression.")
+  checkPoint: DHRuleCheckPoint;
+
+  @doc("The expression to evaluate.")
+  expression: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.")
+@discriminator("type")
+model DHRule {
+  @doc("Discriminates the rule variant.")
+  type: DHRuleType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A leaf rule that compares a checkPoint against an operand using an operator.")
+model DHRuleSimple extends DHRule {
+  @doc("The rule type discriminator value for simple rules.")
+  type: DHRuleType.SimpleRule;
+
+  @doc("The simple rule's type-specific properties.")
+  typeProperties?: DHRuleSimpleTypeProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A rule that combines nested rules with a logical operator.")
+model DHRuleGroup extends DHRule {
+  @doc("The rule type discriminator value for rule groups.")
+  type: DHRuleType.RuleGroup;
+
+  @doc("The group's type-specific properties (groupOperator + nested rules).")
+  typeProperties?: DHRuleGroupTypeProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A rule whose evaluation is driven by an expression string.")
+model DHRuleExpression extends DHRule {
+  @doc("The rule type discriminator value for expression rules.")
+  type: DHRuleType.ExpressionRule;
+
+  @doc("The expression rule's type-specific properties.")
+  typeProperties?: DHRuleExpressionTypeProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A single status palette assignment based on a rule. When the rule evaluates true the referenced palette is applied.")
+model DHControlStatusPaletteRule {
+  @doc("The palette to apply when the rule matches.")
+  statusPaletteId?: string;
+
+  @doc("The rule that drives the palette assignment.")
+  rule: DHRule;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Configuration for selecting a status palette for a control.")
+model DHControlStatusPaletteConfig {
+  @doc("The palette to apply when no rule matches.")
+  fallbackStatusPaletteId?: string;
+
+  @doc("The target score used by certain palette rules.")
+  targetScore?: float64;
+
+  @doc("Rules evaluated in order to select a palette.")
+  statusPaletteRules?: DHControlStatusPaletteRule[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A single contact reference on a governance entity.")
+model DHContactItem {
+  @doc("The contact principal id.")
+  id: string;
+
+  @doc("Free-form description of the contact's relationship to the entity.")
+  description?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Contacts grouped by role for a governance entity.")
+model DHContacts {
+  @doc("Principals identified as owners of the entity.")
+  owner?: DHContactItem[];
+
+  @doc("Principals identified as subject-matter experts on the entity.")
+  expert?: DHContactItem[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A status palette definition (color label).")
+model DHPalette {
+  @doc("The unique identifier of the palette.")
+  id: string;
+
+  @doc("System metadata for the palette.")
+  systemData?: SystemData;
+
+  @doc("The palette name.")
+  name: string;
+
+  @doc("The palette color (typically a hex code).")
+  color: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Snapshot is an arbitrary JSON payload captured at scoring time."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("An individual score record returned with control responses.")
+model DHScore {
+  @doc("The time the score was recorded.")
+  time: utcDateTime;
+
+  @doc("The numeric score value.")
+  score: float64;
+
+  @doc("The owning control group id, when scored at group level.")
+  controlGroupId?: string;
+
+  @doc("The owning control id, when scored at node level.")
+  controlId?: string;
+
+  @doc("System metadata for the score record.")
+  systemData?: SystemData;
+
+  @doc("Identifier of the computing job that produced this score.")
+  computingJobId?: string;
+
+  @doc("Snapshot of the scored entity at scoring time. Open-ended payload.")
+  entitySnapshot?: Record<unknown>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Type-specific properties present on ControlNode variants.")
+model DHControlNodeTypeProperties {
+  @doc("The parent control group id.")
+  groupId?: string;
+
+  @doc("Business domain ids this control applies to.")
+  domains?: string[];
+
+  @doc("The assessment id evaluated by this control, when applicable.")
+  assessmentId?: string;
+}
+
+@doc("A governance control resource. Use the `type` discriminator to determine whether this is a ControlGroup or ControlNode.")
+@discriminator("type")
 model Control {
   @doc("The unique identifier of the control.")
-  id?: string;
+  @visibility(Lifecycle.Read)
+  id: string;
 
-  ...Record<unknown>;
+  @doc("System metadata for the control.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  @doc("The control's display name.")
+  name: string;
+
+  @doc("Free-form description of the control.")
+  description?: string;
+
+  @doc("Contacts associated with the control, grouped by role.")
+  contacts?: DHContacts;
+
+  @doc("True when the control is reserved (system-managed).")
+  reserved?: boolean;
+
+  @doc("Configuration for selecting a status palette for the control.")
+  statusPaletteConfig?: DHControlStatusPaletteConfig;
+
+  @doc("Discriminates between control group and control node variants.")
+  type: DHControlType;
+
+  @doc("The control's lifecycle status.")
+  status?: DHControlStatus;
+
+  @doc("The system template name used to seed this control.")
+  systemTemplate?: string;
+
+  @doc("The system template entity id used to seed this control.")
+  systemTemplateEntityId?: string;
+
+  @doc("Current score for the control (server-computed).")
+  @visibility(Lifecycle.Read)
+  score?: float64;
+
+  @doc("Recent score history for the control (server-computed).")
+  @visibility(Lifecycle.Read)
+  scores?: DHScore[];
+
+  @doc("Target score for the control (server-computed).")
+  @visibility(Lifecycle.Read)
+  targetScore?: float64;
+
+  @doc("Timestamp of the last server-side refresh of computed fields.")
+  @visibility(Lifecycle.Read)
+  lastRefreshed?: utcDateTime;
+
+  @doc("Resolved status palette currently applied to the control (server-computed).")
+  @visibility(Lifecycle.Read)
+  statusPalette?: DHPalette;
+
+  @doc("Resolved parent group name (server-computed from typeProperties.groupId).")
+  @visibility(Lifecycle.Read)
+  group?: string;
+}
+
+@doc("A control group aggregating child controls.")
+model ControlGroup extends Control {
+  @doc("The control type discriminator value for control groups.")
+  type: DHControlType.ControlGroup;
+}
+
+@doc("A leaf control that performs evaluations.")
+model ControlNode extends Control {
+  @doc("The control type discriminator value for control nodes.")
+  type: DHControlType.ControlNode;
+
+  @doc("Type-specific properties for this control node.")
+  typeProperties?: DHControlNodeTypeProperties;
 }
 
 // ============================================================================

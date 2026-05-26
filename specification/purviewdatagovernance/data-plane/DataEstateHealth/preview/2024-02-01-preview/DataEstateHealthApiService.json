@@ -1035,14 +1035,107 @@
     },
     "Control": {
       "type": "object",
-      "description": "A governance control resource.",
+      "description": "A governance control resource. Use the `type` discriminator to determine whether this is a ControlGroup or ControlNode.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique identifier of the control."
+          "description": "The unique identifier of the control.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the control.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The control's display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the control."
+        },
+        "contacts": {
+          "$ref": "#/definitions/DHContacts",
+          "description": "Contacts associated with the control, grouped by role."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "True when the control is reserved (system-managed)."
+        },
+        "statusPaletteConfig": {
+          "$ref": "#/definitions/DHControlStatusPaletteConfig",
+          "description": "Configuration for selecting a status palette for the control."
+        },
+        "type": {
+          "$ref": "#/definitions/DHControlType",
+          "description": "Discriminates between control group and control node variants."
+        },
+        "status": {
+          "$ref": "#/definitions/DHControlStatus",
+          "description": "The control's lifecycle status."
+        },
+        "systemTemplate": {
+          "type": "string",
+          "description": "The system template name used to seed this control."
+        },
+        "systemTemplateEntityId": {
+          "type": "string",
+          "description": "The system template entity id used to seed this control."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Current score for the control (server-computed).",
+          "readOnly": true
+        },
+        "scores": {
+          "type": "array",
+          "description": "Recent score history for the control (server-computed).",
+          "items": {
+            "$ref": "#/definitions/DHScore"
+          },
+          "readOnly": true
+        },
+        "targetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Target score for the control (server-computed).",
+          "readOnly": true
+        },
+        "lastRefreshed": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last server-side refresh of computed fields.",
+          "readOnly": true
+        },
+        "statusPalette": {
+          "$ref": "#/definitions/DHPalette",
+          "description": "Resolved status palette currently applied to the control (server-computed).",
+          "readOnly": true
+        },
+        "group": {
+          "type": "string",
+          "description": "Resolved parent group name (server-computed from typeProperties.groupId).",
+          "readOnly": true
         }
       },
-      "additionalProperties": {}
+      "discriminator": "type",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "ControlGroup": {
+      "type": "object",
+      "description": "A control group aggregating child controls.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Control"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlGroup"
     },
     "ControlListResponse": {
       "type": "object",
@@ -1069,6 +1162,22 @@
         "value",
         "count"
       ]
+    },
+    "ControlNode": {
+      "type": "object",
+      "description": "A leaf control that performs evaluations.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DHControlNodeTypeProperties",
+          "description": "Type-specific properties for this control node."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Control"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlNode"
     },
     "DEHAnalyticsJobLogs": {
       "type": "object",
@@ -1169,6 +1278,480 @@
         "interval",
         "startTime"
       ]
+    },
+    "DHContactItem": {
+      "type": "object",
+      "description": "A single contact reference on a governance entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The contact principal id."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the contact's relationship to the entity."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "DHContacts": {
+      "type": "object",
+      "description": "Contacts grouped by role for a governance entity.",
+      "properties": {
+        "owner": {
+          "type": "array",
+          "description": "Principals identified as owners of the entity.",
+          "items": {
+            "$ref": "#/definitions/DHContactItem"
+          }
+        },
+        "expert": {
+          "type": "array",
+          "description": "Principals identified as subject-matter experts on the entity.",
+          "items": {
+            "$ref": "#/definitions/DHContactItem"
+          }
+        }
+      }
+    },
+    "DHControlNodeTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties present on ControlNode variants.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The parent control group id."
+        },
+        "domains": {
+          "type": "array",
+          "description": "Business domain ids this control applies to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessmentId": {
+          "type": "string",
+          "description": "The assessment id evaluated by this control, when applicable."
+        }
+      }
+    },
+    "DHControlStatus": {
+      "type": "string",
+      "description": "Status of a governance control.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "InDevelopment"
+      ],
+      "x-ms-enum": {
+        "name": "DHControlStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The control is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The control is disabled."
+          },
+          {
+            "name": "InDevelopment",
+            "value": "InDevelopment",
+            "description": "The control is in development."
+          }
+        ]
+      }
+    },
+    "DHControlStatusPaletteConfig": {
+      "type": "object",
+      "description": "Configuration for selecting a status palette for a control.",
+      "properties": {
+        "fallbackStatusPaletteId": {
+          "type": "string",
+          "description": "The palette to apply when no rule matches."
+        },
+        "targetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The target score used by certain palette rules."
+        },
+        "statusPaletteRules": {
+          "type": "array",
+          "description": "Rules evaluated in order to select a palette.",
+          "items": {
+            "$ref": "#/definitions/DHControlStatusPaletteRule"
+          }
+        }
+      }
+    },
+    "DHControlStatusPaletteRule": {
+      "type": "object",
+      "description": "A single status palette assignment based on a rule. When the rule evaluates true the referenced palette is applied.",
+      "properties": {
+        "statusPaletteId": {
+          "type": "string",
+          "description": "The palette to apply when the rule matches."
+        },
+        "rule": {
+          "$ref": "#/definitions/DHRule",
+          "description": "The rule that drives the palette assignment."
+        }
+      },
+      "required": [
+        "rule"
+      ]
+    },
+    "DHControlType": {
+      "type": "string",
+      "description": "Discriminator for governance control variants.",
+      "enum": [
+        "ControlGroup",
+        "ControlNode"
+      ],
+      "x-ms-enum": {
+        "name": "DHControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ControlGroup",
+            "value": "ControlGroup",
+            "description": "A control group that aggregates child controls."
+          },
+          {
+            "name": "ControlNode",
+            "value": "ControlNode",
+            "description": "A leaf control that performs evaluations."
+          }
+        ]
+      }
+    },
+    "DHPalette": {
+      "type": "object",
+      "description": "A status palette definition (color label).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the palette."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the palette."
+        },
+        "name": {
+          "type": "string",
+          "description": "The palette name."
+        },
+        "color": {
+          "type": "string",
+          "description": "The palette color (typically a hex code)."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color"
+      ]
+    },
+    "DHRule": {
+      "type": "object",
+      "description": "Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DHRuleType",
+          "description": "Discriminates the rule variant."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "DHRuleCheckPoint": {
+      "type": "string",
+      "description": "Identifier of a checkable property within a rule.",
+      "enum": [
+        "Score",
+        "DataProductDescriptionContent",
+        "DataProductDescriptionLength"
+      ],
+      "x-ms-enum": {
+        "name": "DHRuleCheckPoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Score",
+            "value": "Score"
+          },
+          {
+            "name": "DataProductDescriptionContent",
+            "value": "DataProductDescriptionContent"
+          },
+          {
+            "name": "DataProductDescriptionLength",
+            "value": "DataProductDescriptionLength"
+          }
+        ]
+      }
+    },
+    "DHRuleExpression": {
+      "type": "object",
+      "description": "A rule whose evaluation is driven by an expression string.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DHRuleExpressionTypeProperties",
+          "description": "The expression rule's type-specific properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DHRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ExpressionRule"
+    },
+    "DHRuleExpressionTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for an expression rule.",
+      "properties": {
+        "checkPoint": {
+          "$ref": "#/definitions/DHRuleCheckPoint",
+          "description": "The data point evaluated by the expression."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The expression to evaluate."
+        }
+      },
+      "required": [
+        "checkPoint",
+        "expression"
+      ]
+    },
+    "DHRuleGroup": {
+      "type": "object",
+      "description": "A rule that combines nested rules with a logical operator.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DHRuleGroupTypeProperties",
+          "description": "The group's type-specific properties (groupOperator + nested rules)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DHRule"
+        }
+      ],
+      "x-ms-discriminator-value": "RuleGroup"
+    },
+    "DHRuleGroupOperator": {
+      "type": "string",
+      "description": "Logical combinator for a rule group.",
+      "enum": [
+        "And",
+        "Or",
+        "Not"
+      ],
+      "x-ms-enum": {
+        "name": "DHRuleGroupOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "And",
+            "value": "And"
+          },
+          {
+            "name": "Or",
+            "value": "Or"
+          },
+          {
+            "name": "Not",
+            "value": "Not"
+          }
+        ]
+      }
+    },
+    "DHRuleGroupTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a rule group.",
+      "properties": {
+        "groupOperator": {
+          "$ref": "#/definitions/DHRuleGroupOperator",
+          "description": "How nested rules are combined."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The nested rules combined by groupOperator.",
+          "items": {
+            "$ref": "#/definitions/DHRule"
+          }
+        }
+      }
+    },
+    "DHRuleOperator": {
+      "type": "string",
+      "description": "Comparison operator for a simple rule.",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "GreaterThan",
+        "GreaterThanOrEqual",
+        "LessThan",
+        "LessThanOrEqual",
+        "Contains",
+        "StartsWith",
+        "EndsWith",
+        "InRange",
+        "IsNull",
+        "IsEmpty",
+        "IsTrue",
+        "IsNullOrEmpty",
+        "IsNotNullOrEmpty",
+        "Normalize",
+        "RegexMatch"
+      ],
+      "x-ms-enum": {
+        "name": "DHRuleOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "Equal"
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual"
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan"
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual"
+          },
+          {
+            "name": "LessThan",
+            "value": "LessThan"
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual"
+          },
+          {
+            "name": "Contains",
+            "value": "Contains"
+          },
+          {
+            "name": "StartsWith",
+            "value": "StartsWith"
+          },
+          {
+            "name": "EndsWith",
+            "value": "EndsWith"
+          },
+          {
+            "name": "InRange",
+            "value": "InRange"
+          },
+          {
+            "name": "IsNull",
+            "value": "IsNull"
+          },
+          {
+            "name": "IsEmpty",
+            "value": "IsEmpty"
+          },
+          {
+            "name": "IsTrue",
+            "value": "IsTrue"
+          },
+          {
+            "name": "IsNullOrEmpty",
+            "value": "IsNullOrEmpty"
+          },
+          {
+            "name": "IsNotNullOrEmpty",
+            "value": "IsNotNullOrEmpty"
+          },
+          {
+            "name": "Normalize",
+            "value": "Normalize"
+          },
+          {
+            "name": "RegexMatch",
+            "value": "RegexMatch"
+          }
+        ]
+      }
+    },
+    "DHRuleSimple": {
+      "type": "object",
+      "description": "A leaf rule that compares a checkPoint against an operand using an operator.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/DHRuleSimpleTypeProperties",
+          "description": "The simple rule's type-specific properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DHRule"
+        }
+      ],
+      "x-ms-discriminator-value": "SimpleRule"
+    },
+    "DHRuleSimpleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a simple rule.",
+      "properties": {
+        "checkPoint": {
+          "$ref": "#/definitions/DHRuleCheckPoint",
+          "description": "The data point to evaluate."
+        },
+        "operator": {
+          "$ref": "#/definitions/DHRuleOperator",
+          "description": "The comparison operator."
+        },
+        "operand": {
+          "type": "string",
+          "description": "The operand to compare against. Optional for operators that take no operand (e.g. IsNull)."
+        }
+      }
+    },
+    "DHRuleType": {
+      "type": "string",
+      "description": "Discriminator for governance rule variants.",
+      "enum": [
+        "RuleGroup",
+        "SimpleRule",
+        "ExpressionRule"
+      ],
+      "x-ms-enum": {
+        "name": "DHRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RuleGroup",
+            "value": "RuleGroup",
+            "description": "A logical group combining nested rules."
+          },
+          {
+            "name": "SimpleRule",
+            "value": "SimpleRule",
+            "description": "A simple checkPoint/operator/operand rule."
+          },
+          {
+            "name": "ExpressionRule",
+            "value": "ExpressionRule",
+            "description": "An expression-based rule."
+          }
+        ]
+      }
     },
     "DHScheduleFrequency": {
       "type": "string",
@@ -1340,6 +1923,47 @@
           }
         ]
       }
+    },
+    "DHScore": {
+      "type": "object",
+      "description": "An individual score record returned with control responses.",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the score was recorded."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric score value."
+        },
+        "controlGroupId": {
+          "type": "string",
+          "description": "The owning control group id, when scored at group level."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The owning control id, when scored at node level."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the score record."
+        },
+        "computingJobId": {
+          "type": "string",
+          "description": "Identifier of the computing job that produced this score."
+        },
+        "entitySnapshot": {
+          "type": "object",
+          "description": "Snapshot of the scored entity at scoring time. Open-ended payload.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "time",
+        "score"
+      ]
     },
     "DHScoreAggregated": {
       "type": "object",
