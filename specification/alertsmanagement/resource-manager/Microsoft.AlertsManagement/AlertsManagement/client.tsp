@@ -11,9 +11,7 @@ model AlertsClientOptions {
   scope: string;
 }
 
-// Note: csharp is excluded because the C# mgmt emitter does not consume
-// client-level initialization parameters; scope is carried per-operation via
-// Azure.ResourceManager.Legacy.ExtensionOperations, and BC is handled in C# custom code.
+// csharp excluded: scope is carried per-operation via Legacy.ExtensionOperations.
 @@Azure.ClientGenerator.Core.clientInitialization(
   Microsoft.AlertsManagement,
   {
@@ -70,17 +68,14 @@ model AlertsClientOptions {
 @@clientName(TimeRange.`7d`, "SevenD", "go,javascript");
 @@clientName(TimeRange.`30d`, "ThirtyD", "go,javascript");
 
-// C# renames for migration backward compatibility
+// Rename Alert -> ServiceAlert (GA 1.1.2 name). Tenant-scope ops use a
+// separate "ServiceAlertTenant" template arg in Alert.tsp to avoid collision.
 @@clientName(Alert, "ServiceAlert", "csharp");
-@@clientName(Alerts, "ServiceAlert", "csharp");
 
-// Drop the "Tenant" suffix on tenant-scope operations so the generated C# method
-// names match the v1.1.1 / previous-emitter API surface (ChangeState / GetHistory).
-// The extension-scope counterparts on AlertOperationGroup land on
-// ScopedServiceAlertResource (see Alert.tsp OverrideResourceName), so there is no clash.
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// Drop redundant "Tenant" suffix on tenant-scope methods (class name already conveys it).
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant resource methods drop the redundant Tenant suffix in C#"
 @@clientName(Alerts.changeStateTenant, "changeState", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant resource methods drop the redundant Tenant suffix in C#"
 @@clientName(Alerts.getHistoryTenant, "getHistory", "csharp");
 
 @@clientName(TimeRange, "TimeRangeFilter", "csharp");
