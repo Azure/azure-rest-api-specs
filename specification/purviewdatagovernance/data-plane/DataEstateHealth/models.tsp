@@ -197,10 +197,92 @@ union DHScheduleCallbackTriggerType {
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible schedule properties."
-@doc("A schedule resource.")
+@doc("Frequency for a control schedule.")
+union DHScheduleFrequency {
+  @doc("Monthly frequency.")
+  Month: "Month",
+
+  @doc("Weekly frequency.")
+  Week: "Week",
+
+  @doc("Daily frequency.")
+  Day: "Day",
+
+  string,
+}
+
+@doc("Day of the week used by control schedule recurrence.")
+union DHScheduleWeekDay {
+  Sunday: "Sunday",
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
+  string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A monthly occurrence specification for a control schedule (e.g. the 2nd Tuesday of each month).")
+model DHScheduleMonthlyOccurrence {
+  @doc("The day of the week.")
+  day: DHScheduleWeekDay;
+
+  @doc("The ordinal occurrence within the month (e.g. 1 for first, 2 for second).")
+  occurrence: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Fine-grained recurrence pattern for a control schedule.")
+model DHScheduleRecurrence {
+  @doc("Hours of the day at which to run (0 through 23).")
+  hours: int32[];
+
+  @doc("Minutes of the hour at which to run (0 through 59).")
+  minutes: int32[];
+
+  @doc("Days of the month on which to run (1 through 31).")
+  monthDays: int32[];
+
+  @doc("Days of the week on which to run.")
+  weekDays: DHScheduleWeekDay[];
+
+  @doc("Monthly occurrence specifications (e.g. 2nd Tuesday).")
+  monthlyOccurrences: DHScheduleMonthlyOccurrence[];
+}
+
+@doc("A control schedule resource.")
 model Schedule {
-  ...Record<unknown>;
+  @doc("The unique identifier of the schedule.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("System metadata for the schedule.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  @doc("The frequency of the schedule.")
+  frequency?: DHScheduleFrequency;
+
+  @doc("The status of the schedule.")
+  status?: DHScheduleState;
+
+  @doc("The interval between schedule runs, expressed in the unit defined by frequency.")
+  interval?: int32;
+
+  @doc("The start time of the schedule.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the schedule.")
+  endTime?: utcDateTime;
+
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Wire name 'schedule' matches UX clients; C# is renamed via @clientName in client.tsp."
+  @doc("Fine-grained recurrence pattern within the chosen frequency.")
+  schedule?: DHScheduleRecurrence;
+
+  @doc("The time zone (IANA name) used to interpret startTime, endTime, and recurrence.")
+  timeZone?: string;
 }
 
 // ============================================================================

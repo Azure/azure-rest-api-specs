@@ -1170,6 +1170,106 @@
         "startTime"
       ]
     },
+    "DHScheduleFrequency": {
+      "type": "string",
+      "description": "Frequency for a control schedule.",
+      "enum": [
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "DHScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly frequency."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly frequency."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily frequency."
+          }
+        ]
+      }
+    },
+    "DHScheduleMonthlyOccurrence": {
+      "type": "object",
+      "description": "A monthly occurrence specification for a control schedule (e.g. the 2nd Tuesday of each month).",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/DHScheduleWeekDay",
+          "description": "The day of the week."
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordinal occurrence within the month (e.g. 1 for first, 2 for second)."
+        }
+      },
+      "required": [
+        "day",
+        "occurrence"
+      ]
+    },
+    "DHScheduleRecurrence": {
+      "type": "object",
+      "description": "Fine-grained recurrence pattern for a control schedule.",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "Hours of the day at which to run (0 through 23).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "Minutes of the hour at which to run (0 through 59).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "description": "Days of the month on which to run (1 through 31).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "Days of the week on which to run.",
+          "items": {
+            "$ref": "#/definitions/DHScheduleWeekDay"
+          }
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "description": "Monthly occurrence specifications (e.g. 2nd Tuesday).",
+          "items": {
+            "$ref": "#/definitions/DHScheduleMonthlyOccurrence"
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes",
+        "monthDays",
+        "weekDays",
+        "monthlyOccurrences"
+      ]
+    },
     "DHScheduleState": {
       "type": "string",
       "description": "State of a schedule.",
@@ -1190,6 +1290,53 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "The schedule is disabled."
+          }
+        ]
+      }
+    },
+    "DHScheduleWeekDay": {
+      "type": "string",
+      "description": "Day of the week used by control schedule recurrence.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DHScheduleWeekDay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          },
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
           }
         ]
       }
@@ -1388,8 +1535,50 @@
     },
     "Schedule": {
       "type": "object",
-      "description": "A schedule resource.",
-      "additionalProperties": {}
+      "description": "A control schedule resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the schedule.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the schedule.",
+          "readOnly": true
+        },
+        "frequency": {
+          "$ref": "#/definitions/DHScheduleFrequency",
+          "description": "The frequency of the schedule."
+        },
+        "status": {
+          "$ref": "#/definitions/DHScheduleState",
+          "description": "The status of the schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval between schedule runs, expressed in the unit defined by frequency."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the schedule."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the schedule."
+        },
+        "schedule": {
+          "$ref": "#/definitions/DHScheduleRecurrence",
+          "description": "Fine-grained recurrence pattern within the chosen frequency."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone (IANA name) used to interpret startTime, endTime, and recurrence."
+        }
+      }
     },
     "StorageConfig": {
       "type": "object",
