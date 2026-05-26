@@ -591,6 +591,34 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.MCPServer, "VoiceLiveMcpServerDefinition", "csharp");
 @@clientName(VoiceLive.MCPTool, "VoiceLiveMcpTool", "csharp");
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
+@@alternateType(
+  VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
+  url,
+  "csharp"
+);
+@@alternateType(
+  VoiceLive.AzureAvatarVoiceSyncVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(VoiceLive.AzureCustomVoice.custom_lexicon_url, url, "csharp");
+@@alternateType(
+  VoiceLive.AzureCustomVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(VoiceLive.AzurePersonalVoice.custom_lexicon_url, url, "csharp");
+@@alternateType(
+  VoiceLive.AzurePersonalVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(
+  VoiceLive.AzureStandardVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(VoiceLive.RequestImageContentPart.url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
