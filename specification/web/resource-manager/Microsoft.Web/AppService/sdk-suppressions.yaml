@@ -2,18 +2,165 @@ suppressions:
   azure-sdk-for-js:
     - package: "@azure/arm-appservice"
       breaking-changes:
-        - Operation AppServiceEnvironments.beginApproveOrRejectPrivateEndpointConnection has a new signature
-        - Operation AppServiceEnvironments.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
-        - Operation StaticSites.beginApproveOrRejectPrivateEndpointConnection has a new signature
-        - Operation StaticSites.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
-        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnection has a new signature
-        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionAndWait has a new signature
-        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionSlot has a new signature
-        - Operation WebApps.beginApproveOrRejectPrivateEndpointConnectionSlotAndWait has a new signature
-        - Interface Site no longer has parameter vnetBackupRestoreEnabled
-        - Interface Site no longer has parameter vnetContentShareEnabled
-        - Interface Site no longer has parameter vnetImagePullEnabled
-        - Interface Site no longer has parameter vnetRouteAllEnabled
+        - Removed Interface ApiKVReferenceCollection
+        - Removed Interface ApplicationStackCollection
+        - Removed Interface AppServiceEnvironmentCollection
+        - Removed Interface AppServiceEnvironmentsChangeVnetOptionalParams
+        - Removed Interface AppServiceEnvironmentsGetInboundNetworkDependenciesEndpointsOptionalParams
+        - Removed Interface AppServiceEnvironmentsGetOutboundNetworkDependenciesEndpointsOptionalParams
+        - Removed Interface AppServiceEnvironmentsGetPrivateEndpointConnectionListOptionalParams
+        - Removed Interface AppServiceEnvironmentsResumeOptionalParams
+        - Removed Interface AppServiceEnvironmentsSuspendOptionalParams
+        - Removed Interface AppserviceGithubToken
+        - Removed Interface AppserviceGithubTokenRequest
+        - Removed Interface AppServicePlanCollection
+        - Removed Interface AseRegionCollection
+        - Removed Interface BackupItemCollection
+        - Removed Interface BillingMeterCollection
+        - Removed Interface CertificateCollection
+        - Removed Interface CipherSuites
+        - Removed Interface Container
+        - Removed Interface ContainerResources
+        - Removed Interface ContinuousWebJobCollection
+        - Removed Interface CsmDeploymentStatusCollection
+        - Removed Interface CsmOperationCollection
+        - Removed Interface CsmUsageQuotaCollection
+        - Removed Interface CustomHostnameSitesCollection
+        - Removed Interface CustomScaleRule
+        - Removed Interface Dapr
+        - Removed Interface DaprComponent
+        - Removed Interface DaprMetadata
+        - Removed Interface DatabaseConnectionCollection
+        - Removed Interface DeletedWebAppCollection
+        - Removed Interface DeploymentCollection
+        - Removed Interface DetectorResponseCollection
+        - Removed Interface DiagnosticAnalysisCollection
+        - Removed Interface DiagnosticCategoryCollection
+        - Removed Interface DiagnosticDetectorCollection
+        - Removed Interface EnvironmentVar
+        - Removed Interface ErrorPage
+        - Removed Interface ExpressionTraces
+        - Removed Interface FunctionAppStackCollection
+        - Removed Interface FunctionEnvelopeCollection
+        - Removed Interface GeoRegionCollection
+        - Removed Interface Global_2
+        - Removed Interface HostNameBindingCollection
+        - Removed Interface HttpScaleRule
+        - Removed Interface HybridConnectionCollection
+        - Removed Interface IdentifierCollection
+        - Removed Interface InboundEnvironmentEndpointCollection
+        - Removed Interface KubeEnvironmentCollection
+        - Removed Interface OutboundEnvironmentEndpointCollection
+        - Removed Interface PerfMonCounterCollection
+        - Removed Interface PremierAddOnOfferCollection
+        - Removed Interface PrivateEndpointConnectionCollection
+        - Removed Interface PrivateLinkConnectionApprovalRequestResource
+        - Removed Interface ProcessInfoCollection
+        - Removed Interface ProcessModuleInfoCollection
+        - Removed Interface ProcessThreadInfoCollection
+        - Removed Interface ProviderGetAvailableStacksOnPremOptionalParams
+        - Removed Interface ProviderGetAvailableStacksOptionalParams
+        - Removed Interface ProviderGetFunctionAppStacksForLocationOptionalParams
+        - Removed Interface ProviderGetFunctionAppStacksOptionalParams
+        - Removed Interface ProviderGetWebAppStacksForLocationOptionalParams
+        - Removed Interface ProviderGetWebAppStacksOptionalParams
+        - Removed Interface PublicCertificateCollection
+        - Removed Interface PublishingCredentialsPoliciesCollection
+        - Removed Interface QueueScaleRule
+        - Removed Interface RecommendationCollection
+        - Removed Interface ResourceCollection
+        - Removed Interface ResourceHealthMetadataCollection
+        - Removed Interface ResourceMetricDefinitionCollection
+        - Removed Interface Scale
+        - Removed Interface ScaleRule
+        - Removed Interface ScaleRuleAuth
+        - Removed Interface SiteConfigResourceCollection
+        - Removed Interface SiteConfigurationSnapshotInfoCollection
+        - Removed Interface SiteContainerCollection
+        - Removed Interface SiteExtensionInfoCollection
+        - Removed Interface SkuInfoCollection
+        - Removed Interface SlotDifferenceCollection
+        - Removed Interface SnapshotCollection
+        - Removed Interface SourceControlCollection
+        - Removed Interface StampCapacityCollection
+        - Removed Interface StaticSiteBasicAuthPropertiesCollection
+        - Removed Interface StaticSiteBuildCollection
+        - Removed Interface StaticSiteCollection
+        - Removed Interface StaticSiteCustomDomainOverviewCollection
+        - Removed Interface StaticSiteFunctionOverviewCollection
+        - Removed Interface StaticSiteLinkedBackendsCollection
+        - Removed Interface StaticSitesGetBuildDatabaseConnectionsOptionalParams
+        - Removed Interface StaticSitesGetBuildDatabaseConnectionsWithDetailsOptionalParams
+        - Removed Interface StaticSitesGetDatabaseConnectionsOptionalParams
+        - Removed Interface StaticSitesGetDatabaseConnectionsWithDetailsOptionalParams
+        - Removed Interface StaticSitesGetLinkedBackendsForBuildOptionalParams
+        - Removed Interface StaticSitesGetLinkedBackendsOptionalParams
+        - Removed Interface StaticSitesGetPrivateEndpointConnectionListOptionalParams
+        - Removed Interface StaticSitesGetStaticSiteBuildsOptionalParams
+        - Removed Interface StaticSitesGetStaticSitesByResourceGroupOptionalParams
+        - Removed Interface StaticSitesGetUserProvidedFunctionAppsForStaticSiteBuildOptionalParams
+        - Removed Interface StaticSitesGetUserProvidedFunctionAppsForStaticSiteOptionalParams
+        - Removed Interface StaticSiteUserCollection
+        - Removed Interface StaticSiteUserProvidedFunctionAppsCollection
+        - Removed Interface SubResource
+        - Removed Interface Template
+        - Removed Interface TriggeredJobHistoryCollection
+        - Removed Interface TriggeredWebJobCollection
+        - Removed Interface UsageCollection
+        - Removed Interface WebAppCollection
+        - Removed Interface WebAppInstanceStatusCollection
+        - Removed Interface WebAppsGetAppSettingsKeyVaultReferencesOptionalParams
+        - Removed Interface WebAppsGetAppSettingsKeyVaultReferencesSlotOptionalParams
+        - Removed Interface WebAppsGetPrivateEndpointConnectionListOptionalParams
+        - Removed Interface WebAppsGetPrivateEndpointConnectionListSlotOptionalParams
+        - Removed Interface WebAppsGetSiteConnectionStringKeyVaultReferencesOptionalParams
+        - Removed Interface WebAppsGetSiteConnectionStringKeyVaultReferencesSlotOptionalParams
+        - Removed Interface WebAppStackCollection
+        - Removed Interface WebJobCollection
+        - Removed Interface WorkerPoolCollection
+        - Removed Interface WorkflowEnvelopeCollection
+        - Removed Interface WorkflowFilter
+        - Removed Interface WorkflowRunActionFilter
+        - Removed Interface WorkflowRunActionRepetitionDefinitionCollection
+        - Removed Interface WorkflowRunFilter
+        - Removed Interface WorkflowTriggerFilter
+        - Removed Interface WorkflowTriggerHistoryFilter
+        - Operation AppServiceEnvironments.beginDeletePrivateEndpointConnectionAndWait has a new signature
+        - Operation StaticSites.beginDeletePrivateEndpointConnectionAndWait has a new signature
+        - Operation WebApps.beginDeletePrivateEndpointConnectionAndWait has a new signature
+        - Operation WebApps.beginDeletePrivateEndpointConnectionSlotAndWait has a new signature
+        - Operation WebApps.beginStartNetworkTraceAndWait has a new signature
+        - Operation WebApps.beginStartNetworkTraceSlotAndWait has a new signature
+        - Operation WebApps.beginStartWebSiteNetworkTraceOperationAndWait has a new signature
+        - Operation WebApps.beginStartWebSiteNetworkTraceOperationSlotAndWait has a new signature
+        - Operation WebApps.getInstanceProcessDump has a new signature
+        - Operation WebApps.getInstanceProcessDumpSlot has a new signature
+        - Operation WebApps.getProcessDump has a new signature
+        - Operation WebApps.getProcessDumpSlot has a new signature
+        - Operation WebApps.getTriggeredWebJob has a new signature
+        - Operation WebApps.getTriggeredWebJobHistory has a new signature
+        - Operation WebApps.getTriggeredWebJobHistorySlot has a new signature
+        - Operation WebApps.getTriggeredWebJobSlot has a new signature
+        - Operation WebApps.listPublishingProfileXmlWithSecrets has a new signature
+        - Operation WebApps.listPublishingProfileXmlWithSecretsSlot has a new signature
+        - Parameter location of interface RequestHistory is now required
+        - Parameter location of interface WorkflowRunActionRepetitionDefinition is now required
+        - Parameter location of interface WorkflowVersion is now required
+        - Interface Resource no longer has parameter kind
+        - Interface Resource no longer has parameter location
+        - Interface Resource no longer has parameter tags
+        - Type alias "AppServiceEnvironmentsDeleteAseCustomDnsSuffixConfigurationResponse" has been changed
+        - Type alias "AppServicePlansGetServerFarmSkusResponse" has been changed
+        - Type alias "TriggeredWebJobStatus" has been changed
+        - Type alias "WebAppsCreateOneDeployOperationResponse" has been changed
+        - Type alias "WebAppsGetInstanceProcessDumpResponse" has been changed
+        - Type alias "WebAppsGetInstanceProcessDumpSlotResponse" has been changed
+        - Type alias "WebAppsGetOneDeployStatusResponse" has been changed
+        - Type alias "WebAppsGetProcessDumpResponse" has been changed
+        - Type alias "WebAppsGetProcessDumpSlotResponse" has been changed
+        - Type alias "WebAppsListPublishingProfileXmlWithSecretsResponse" has been changed
+        - Type alias "WebAppsListPublishingProfileXmlWithSecretsSlotResponse" has been changed
+        - Type alias "WebAppsUpdateMachineKeyResponse" has been changed
   azure-sdk-for-go:
     - package: sdk/resourcemanager/appservice/armappservice
       breaking-changes:

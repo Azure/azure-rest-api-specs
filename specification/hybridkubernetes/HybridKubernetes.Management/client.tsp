@@ -25,3 +25,4 @@ namespace Microsoft.Kubernetes;
   "csharp"
 );
 @@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "javascript");
+@@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "python");

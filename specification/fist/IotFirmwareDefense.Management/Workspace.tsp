@@ -44,6 +44,7 @@ interface Workspaces {
   /**
    * The operation to update a firmware analysis workspaces.
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Workspace,
