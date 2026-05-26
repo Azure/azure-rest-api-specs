@@ -12,9 +12,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$releaseVersion = 'v0.0.5'
+$releaseVersion = 'v0.0.6-linux'
 $repository     = 'chunyu3/typespec-authoring-doc'
-$exeName        = 'azsdk.exe'
+$exeName        = 'azsdk'
 $downloadUrl    = "https://github.com/$repository/releases/download/$releaseVersion/$exeName"
 
 # Resolve install directory (default: ~/bin)
