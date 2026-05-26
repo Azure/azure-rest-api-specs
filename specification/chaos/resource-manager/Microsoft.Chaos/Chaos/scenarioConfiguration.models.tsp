@@ -311,7 +311,7 @@ model PermissionError {
    * The resource id for the affected resource.
    */
   @visibility(Lifecycle.Read)
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The missing permissions.
@@ -363,7 +363,7 @@ model ResourceStateError {
    * The resource id for the affected resource.
    */
   @visibility(Lifecycle.Read)
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The error code.
@@ -506,7 +506,7 @@ model RoleAssignmentResult {
    * The target Azure resource ID.
    */
   @visibility(Lifecycle.Read)
-  targetResourceId: string;
+  targetResourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The managed identity principal ID.
@@ -542,7 +542,7 @@ model RoleAssignmentResult {
    * The created role assignment resource ID (null if failed or what-if mode).
    */
   @visibility(Lifecycle.Read)
-  roleAssignmentId?: string;
+  roleAssignmentId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Error details if the assignment failed.
