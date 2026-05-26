@@ -186,14 +186,16 @@ op deleteKeyValue is AppConfigOperation<
     ...SyncTokenHeader;
     ...IfMatchHeader;
   },
-  (Body<KeyValue> &
-    AppConfigResponseHeaders &
-    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
-    @statusCode
-    statusCode: 204;
 
-    ...SyncTokenHeader;
-  }
+    | (Body<KeyValue> &
+        AppConfigResponseHeaders &
+        ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">)
+    | {
+        @statusCode
+        statusCode: 204;
+
+        ...SyncTokenHeader;
+      }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -485,7 +487,9 @@ op createSnapshot is Foundations.LongRunningOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
+    contentType:
+      | "application/vnd.microsoft.appconfig.snapshot+json"
+      | "application/json";
 
     ...NamePathParam<"The name of the key-value snapshot to create.">;
     ...SyncTokenHeader;

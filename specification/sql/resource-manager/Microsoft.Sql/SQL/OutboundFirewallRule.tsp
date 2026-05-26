@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL DB Server Outbound Firewall Rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
 model OutboundFirewallRule
   is Azure.ResourceManager.ProxyResource<OutboundFirewallRuleProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model OutboundFirewallRule
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
 interface OutboundFirewallRules {
   /**
    * Gets an outbound firewall rule.
@@ -39,11 +43,14 @@ interface OutboundFirewallRules {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     OutboundFirewallRule,
     Request = void,
-    Response = ArmResourceUpdatedResponse<OutboundFirewallRule> | ArmResourceCreatedResponse<
-      OutboundFirewallRule,
-      ArmLroLocationHeader<FinalResult = OutboundFirewallRule> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<OutboundFirewallRule>
+      | ArmResourceCreatedResponse<
+          OutboundFirewallRule,
+          ArmLroLocationHeader<FinalResult = OutboundFirewallRule> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -52,7 +59,10 @@ interface OutboundFirewallRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     OutboundFirewallRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -134,7 +134,9 @@ interface BMSPrepareDataMoveOperationResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is BackupResourceConfigOperationResultOps.Read<
     BackupResourceConfigResource,
-    Response = ArmResponse<VaultStorageConfigOperationResultResponse> | AcceptedResponse
+    Response =
+      | ArmResponse<VaultStorageConfigOperationResultResponse>
+      | AcceptedResponse
   >;
 }
 
@@ -177,18 +179,23 @@ interface BackupResourceConfigOperationStatuses {
 }
 
 @@doc(BackupResourceConfigResource.name, "");
-@@doc(BackupResourceConfigResource.properties,
+@@doc(
+  BackupResourceConfigResource.properties,
   "BackupResourceConfigResource properties"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "Vault storage config request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "Vault storage config request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
   "Prepare data move request"
 );
-@@doc(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
+@@doc(
+  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
   "Trigger data move request"
 );

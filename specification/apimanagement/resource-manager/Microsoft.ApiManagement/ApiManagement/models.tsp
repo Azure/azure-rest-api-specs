@@ -183,6 +183,11 @@ union ApiType {
   odata: "odata",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   grpc: "grpc",
+
+  /**
+   * Model Context Protocol API.
+   */
+  mcp: "mcp",
 }
 
 /**
@@ -307,6 +312,62 @@ union SoapApiType {
    * Imports the API having a gRPC front end.
    */
   gRPC: "grpc",
+
+  /**
+   * Imports the API having a Model Context Protocol (MCP) front end.
+   */
+  MCP: "mcp",
+}
+
+/**
+ * Transport type for Model Context Protocol API.
+ */
+union McpTransportType {
+  string,
+
+  /**
+   * This API uses HTTP+SSE transport type.
+   */
+  sse: "sse",
+
+  /**
+   * This API uses the Streamable HTTP transport type.
+   */
+  streamable: "streamable",
+}
+
+/**
+ * Endpoint definition for MCP API type.
+ */
+model McpEndpoint {
+  /**
+   * MCP endpoint name, e.g. 'sse' or 'messages'.
+   */
+  @maxLength(300)
+  @minLength(1)
+  name: string;
+
+  /**
+   * Relative URL path that must start with '/'.
+   */
+  @pattern("^/.*$")
+  uriTemplate?: string;
+}
+
+/**
+ * Properties specific to MCP API type.
+ */
+model McpProperties {
+  /**
+   * Transport type for Model Context Protocol API.
+   */
+  transportType?: McpTransportType;
+
+  /**
+   * Collection of MCP endpoint definitions with relative URLs.
+   */
+  @identifiers(#["name"])
+  endpoints?: McpEndpoint[];
 }
 
 /**
@@ -2194,6 +2255,11 @@ model ApiEntityBaseContract {
    * License information for the API.
    */
   license?: ApiLicenseInformation;
+
+  /**
+   * Properties specific to MCP API type.
+   */
+  mcpProperties?: McpProperties;
 }
 
 /**
@@ -4105,6 +4171,12 @@ model AuthorizationProviderOAuth2Settings {
    * Key Vault reference for client secret storage
    */
   keyVault?: AuthorizationProviderKeyVaultContract;
+
+  /**
+   * Federated identity credentials properties.
+   */
+  @visibility(Lifecycle.Read)
+  federatedIdentityCredentialsProperties?: AuthorizationProviderFederatedIdentityCredentialsProperties;
 }
 
 /**
@@ -4123,6 +4195,61 @@ model AuthorizationProviderOAuth2GrantTypes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientCredentials?: Record<string>;
+
+  /**
+   * OAuth2 authorization code grant with federated identity credentials parameters
+   */
+  authorizationCodeWithFederatedIdentityCredentials?: AuthorizationProviderOAuth2FederatedIdentityCredentialsGrantType;
+}
+
+/**
+ * OAuth2 authorization code with federated identity credentials grant type parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AuthorizationProviderOAuth2FederatedIdentityCredentialsGrantType {
+  /**
+   * Client ID of the application in the identity provider.
+   */
+  clientId?: string;
+
+  /**
+   * The type of client assertion used for federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  clientAssertionType?: string;
+
+  /**
+   * The resource URI for the target service.
+   */
+  resourceUri?: string;
+
+  /**
+   * Tenant ID of the identity provider.
+   */
+  tenantId?: string;
+}
+
+/**
+ * Federated identity credentials properties returned by the authorization provider.
+ */
+model AuthorizationProviderFederatedIdentityCredentialsProperties {
+  /**
+   * The issuer URL of the federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  issuer?: string;
+
+  /**
+   * The subject identifier of the federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  subject?: string;
+
+  /**
+   * The audience of the federated identity credentials.
+   */
+  @visibility(Lifecycle.Read)
+  audience?: string;
 }
 
 /**

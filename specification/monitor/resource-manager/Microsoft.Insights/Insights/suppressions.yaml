@@ -166,3 +166,48 @@
 - tool: TypeSpecRequirement
   path: ./stable/2026-03-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - ActionGroupsApi
+    - ActivityLogAlertsApi
+    - ActivityLogsApi
+    - AlertRulesIncidentsApi
+    - AutoScaleApi
+    - DataCollectionApi
+    - LogProfilesApi
+    - MetricAlertApi
+    - MetricBaselinesApi
+    - MetricsApi
+    - NetworkSecurityPerimeterApi
+    - PrivateLinkScopesApi
+    - ScheduledQueryRuleApi
+    - ServiceDiagnosticsSettingsApi
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - ActionGroupsApi/tspconfig.yaml
+    - ActivityLogAlertsApi/tspconfig.yaml
+    - ActivityLogsApi/tspconfig.yaml
+    - AlertRulesIncidentsApi/tspconfig.yaml
+    - AutoScaleApi/tspconfig.yaml
+    - DataCollectionApi/tspconfig.yaml
+    - LogProfilesApi/tspconfig.yaml
+    - MetricAlertApi/tspconfig.yaml
+    - MetricBaselinesApi/tspconfig.yaml
+    - MetricsApi/tspconfig.yaml
+    - NetworkSecurityPerimeterApi/tspconfig.yaml
+    - PrivateLinkScopesApi/tspconfig.yaml
+    - ScheduledQueryRuleApi/tspconfig.yaml
+    - ServiceDiagnosticsSettingsApi/tspconfig.yaml

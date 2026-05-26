@@ -9,7 +9,8 @@ using Microsoft.EdgeOrder;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ChildConfiguration.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ChildConfiguration.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -26,49 +27,59 @@ using Microsoft.EdgeOrder;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductFamiliesMetadataDetails.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProductFamiliesMetadataDetails.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AddressUpdateParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AddressUpdateParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrderItemUpdateParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OrderItemUpdateParameter.properties
 );
 
 @@clientName(AddressResources.create::parameters.resource, "addressResource");
-@@clientName(AddressResources.update::parameters.properties,
+@@clientName(
+  AddressResources.update::parameters.properties,
   "addressUpdateParameter"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AddressResource.properties);
 
-@@clientName(OrderItemResources.create::parameters.resource,
+@@clientName(
+  OrderItemResources.create::parameters.resource,
   "orderItemResource"
 );
-@@clientName(OrderItemResources.update::parameters.properties,
+@@clientName(
+  OrderItemResources.update::parameters.properties,
   "orderItemUpdateParameter"
 );
 @@clientName(OrderItemResources.cancel::parameters.body, "cancellationReason");
-@@clientName(OrderItemResources.returnOrderItem::parameters.body,
+@@clientName(
+  OrderItemResources.returnOrderItem::parameters.body,
   "returnOrderItemDetails"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrderItemResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OrderItemResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrderResource.properties);
-@@clientName(ProductsAndConfigurationsOperationGroup.listConfigurations::parameters.body,
+@@clientName(
+  ProductsAndConfigurationsOperationGroup.listConfigurations::parameters.body,
   "configurationsRequest"
 );
-@@clientName(ProductsAndConfigurationsOperationGroup.listProductFamilies::parameters.body,
+@@clientName(
+  ProductsAndConfigurationsOperationGroup.listProductFamilies::parameters.body,
   "productFamiliesRequest"
 );
 // @@clientLocation decorators for operations with custom @operationId
@@ -87,11 +98,13 @@ using Microsoft.EdgeOrder;
 @@clientLocation(OrderItemResources.create, "OrderItems", "!csharp");
 @@clientLocation(OrderItemResources.update, "OrderItems", "!csharp");
 @@clientLocation(OrderItemResources.delete, "OrderItems", "!csharp");
-@@clientLocation(OrderItemResources.listByResourceGroup,
+@@clientLocation(
+  OrderItemResources.listByResourceGroup,
   "OrderItems",
   "!csharp"
 );
-@@clientLocation(OrderItemResources.listBySubscription,
+@@clientLocation(
+  OrderItemResources.listBySubscription,
   "OrderItems",
   "!csharp"
 );
@@ -103,15 +116,18 @@ using Microsoft.EdgeOrder;
 @@clientLocation(OrderResources.get, "Orders", "!csharp");
 
 // ProductsAndConfigurationsOperationGroup interface operations
-@@clientLocation(ProductsAndConfigurationsOperationGroup.listConfigurations,
+@@clientLocation(
+  ProductsAndConfigurationsOperationGroup.listConfigurations,
   "ProductsAndConfigurations",
   "!csharp"
 );
-@@clientLocation(ProductsAndConfigurationsOperationGroup.listProductFamilies,
+@@clientLocation(
+  ProductsAndConfigurationsOperationGroup.listProductFamilies,
   "ProductsAndConfigurations",
   "!csharp"
 );
-@@clientLocation(ProductsAndConfigurationsOperationGroup.listProductFamiliesMetadata,
+@@clientLocation(
+  ProductsAndConfigurationsOperationGroup.listProductFamiliesMetadata,
   "ProductsAndConfigurations",
   "!csharp"
 );

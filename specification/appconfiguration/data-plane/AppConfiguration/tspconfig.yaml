@@ -12,12 +12,13 @@ options:
     output-file: "{version-status}/{version}/appconfiguration.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-appconfiguration"
-    namespace: "azure.appconfiguration._generated"
+    generation-subdir: "_generated"
+    namespace: "azure.appconfiguration"
     package-pprint-name: "App Configuration Data"
     package-mode: dataplane
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Data.AppConfiguration"

@@ -8,6 +8,7 @@ import "./BackupVaultResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataProtection;
@@ -79,11 +80,14 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmResourceUpdatedResponse<BackupInstanceResource> | ArmResourceCreatedResponse<
-      BackupInstanceResource,
-      ArmLroLocationHeader<FinalResult = BackupInstanceResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | ArmResourceUpdatedResponse<BackupInstanceResource>
+      | ArmResourceCreatedResponse<
+          BackupInstanceResource,
+          ArmLroLocationHeader<FinalResult = BackupInstanceResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
@@ -99,7 +103,10 @@ interface BackupInstanceResources {
       @header
       `x-ms-authorization-auxiliary`?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -111,7 +118,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     TriggerBackupRequest,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     OverrideErrorType = CloudError
   >;
 
@@ -122,7 +131,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ValidateForModifyBackupRequest,
     OperationJobExtendedInfo,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ErrorResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ErrorResponse
   >;
 
   /**
@@ -134,7 +145,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     AzureBackupRehydrationRequest,
     NoContentResponse,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -146,7 +159,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     AzureBackupRestoreRequest,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -163,19 +178,40 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     void,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
   /**
    * This operation will resume protection for a stopped backup instance
    */
-  resumeProtection is BackupInstanceResourceOps.ActionAsync<
+  @removed(Versions.v2026_04_01_preview)
+  @renamedFrom(Versions.v2026_04_01_preview, "resumeProtection")
+  resumeProtectionLegacy is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
     void,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
+  >;
+
+  /**
+   * This operation will resume protection for a stopped backup instance
+   */
+  @added(Versions.v2026_04_01_preview)
+  resumeProtection is BackupInstanceResourceOps.ActionAsync<
+    BackupInstanceResource,
+    ResumeProtectionRequest,
+    OkResponse,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    OverrideErrorType = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -185,7 +221,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     StopProtectionRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -203,7 +241,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     SuspendBackupRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -223,7 +263,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     SyncBackupInstanceRequest,
     OkResponse,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
   >;
 
@@ -235,7 +277,9 @@ interface BackupInstanceResources {
     BackupInstanceResource,
     ValidateRestoreRequestObject,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     OverrideErrorType = CloudError
   >;
 
@@ -302,27 +346,35 @@ interface BackupInstances {
 
 @@doc(BackupInstanceResource.name, "The name of the backup instance.");
 @@doc(BackupInstanceResource.properties, "BackupInstanceResource properties");
-@@doc(BackupInstanceResources.createOrUpdate::parameters.resource,
+@@doc(
+  BackupInstanceResources.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.adhocBackup::parameters.body,
+@@doc(
+  BackupInstanceResources.adhocBackup::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.validateForModifyBackup::parameters.body,
+@@doc(
+  BackupInstanceResources.validateForModifyBackup::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.triggerRehydrate::parameters.body,
+@@doc(
+  BackupInstanceResources.triggerRehydrate::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.triggerRestore::parameters.body,
+@@doc(
+  BackupInstanceResources.triggerRestore::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.syncBackupInstance::parameters.body,
+@@doc(
+  BackupInstanceResources.syncBackupInstance::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.validateForRestore::parameters.body,
+@@doc(
+  BackupInstanceResources.validateForRestore::parameters.body,
   "Request body for operation"
 );
-@@doc(BackupInstanceResources.find::parameters.body,
+@@doc(
+  BackupInstanceResources.find::parameters.body,
   "Request body for operation"
 );
