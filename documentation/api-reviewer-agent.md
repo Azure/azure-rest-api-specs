@@ -137,13 +137,30 @@ explicit approval before posting anything to the PR.
 ## Comment Tracking Marker
 
 Every comment posted by the agent includes a hidden HTML marker at the end
-of the comment body:
+of the comment body. The marker carries per-finding metadata:
+
+<!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| override-reason: <required-when-critic=override>] -->
 ```
 
-This marker is invisible in the rendered PR view but is present in the raw
+<!-- markdownlint-enable MD013 -->
+
+**Fields:**
+
+- `rule` -- the rule ID of the finding (e.g., `RPC-Put-V1-11`, `SEC-SECRET-DETECT`).
+  Use `summary` for comments that don't flag a single rule.
+- `severity` -- one of `blocking`, `warning`, or `suggestion`.
+- `classification` -- `new` (introduced in this PR) or `existing` (pre-existing technical debt).
+- `critic` -- the Critic's per-finding verdict (`pass`, `warn`, or `override`).
+  `override` means a Critic `FAIL` was overridden by a human reviewer.
+- `head-sha` -- the PR head commit SHA the Critic re-fetched against;
+  an auditable anchor for later debugging.
+- `override-reason` -- required only when `critic: override`;
+  must be a non-empty, specific justification of at least 20 characters.
+
+The marker is invisible in the rendered PR view but is present in the raw
 comment body returned by the GitHub API. It serves two purposes:
 
 1. **Reconciliation** -- on repeat reviews, the agent uses the marker to
@@ -151,6 +168,9 @@ comment body returned by the GitHub API. It serves two purposes:
    This determines whether the agent can resolve an outdated comment
    (Scenario B) or must reply instead (Scenario C). See
    [Comment Reconciliation](#comment-reconciliation-on-repeat-reviews) below.
+   The reconciliation check uses a **substring match on
+   `posted-by: arm-api-reviewer-agent`**, so the queries below work
+   regardless of which marker fields are present.
 
 2. **Telemetry and querying** -- the marker enables querying all
    agent-posted comments across PRs via the GitHub API. This is useful for
@@ -319,16 +339,16 @@ The agent **does not**:
 
 ### Agent Files (under `.github/`)
 
-| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                   |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                              |
-| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                          |
-| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                              |
-| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                     |
-| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                 |
-| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                     |
-| `skills/azure-api-review/references/*.md`       | 15 cross-cutting rule references (secret detection, property mutability, provisioning state, naming conventions, enum best practices, tracked resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight compliance, LRO final-state-via, suppression review criteria, linter rule coverage, design decisions) |
-| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                            |
+| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                                               |
+| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                                           |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                                               |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                                      |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                                  |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                                      |
+| `skills/azure-api-review/references/*.md`       | 16 cross-cutting rule references (secret detection, property mutability, provisioning state, naming conventions, enum best practices, example quality, tracked resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight compliance, LRO final-state-via, suppression review criteria, linter rule coverage, design decisions) |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                                             |
 
 ### Evaluation Suite
 
