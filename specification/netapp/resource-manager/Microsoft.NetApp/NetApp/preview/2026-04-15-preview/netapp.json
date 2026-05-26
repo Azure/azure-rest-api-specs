@@ -13236,6 +13236,10 @@
         "entraIdConfig": {
           "$ref": "#/definitions/EntraIdConfigPatch",
           "description": "Entra ID configuration for the account."
+        },
+        "ldapConfigurationPatch": {
+          "$ref": "#/definitions/LdapConfigurationPatch",
+          "description": "LDAP Configuration for the account."
         }
       }
     },
@@ -14216,6 +14220,30 @@
         "backupVaultId"
       ]
     },
+    "BindAuthenticationLevel": {
+      "type": "string",
+      "description": "The authentication level to use when binding to the LDAP server.",
+      "enum": [
+        "Anonymous",
+        "Simple"
+      ],
+      "x-ms-enum": {
+        "name": "BindAuthenticationLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Anonymous",
+            "value": "Anonymous",
+            "description": "Anonymous bind i.e. no credentials provided"
+          },
+          {
+            "name": "Simple",
+            "value": "Simple",
+            "description": "Simple bind i.e. plain text credentials provided"
+          }
+        ]
+      }
+    },
     "BindPasswordAkvConfig": {
       "type": "object",
       "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.",
@@ -14249,6 +14277,36 @@
         "azureKeyVaultUri",
         "secretName"
       ]
+    },
+    "BindPasswordAkvConfigPatch": {
+      "type": "object",
+      "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Bind DN user password is stored."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "The name of the secret in Azure Key Vault that contains the Bind DN user password.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[a-zA-Z0-9-]+$"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
     },
     "BreakFileLocksRequest": {
       "type": "object",
@@ -17781,6 +17839,10 @@
               }
             ]
           }
+        },
+        "bindPasswordAkvConfig": {
+          "$ref": "#/definitions/BindPasswordAkvConfigPatch",
+          "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored."
         }
       }
     },
@@ -18426,6 +18488,57 @@
               }
             ]
           }
+        },
+        "bindDN": {
+          "type": "string",
+          "description": "The distinguished name (DN) to bind as when performing LDAP operations.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "bindPasswordAkvConfig": {
+          "$ref": "#/definitions/BindPasswordAkvConfig",
+          "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored."
+        }
+      }
+    },
+    "LdapConfigurationPatch": {
+      "type": "object",
+      "description": "LDAP configuration for PATCH operations (no default values)",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Name of the LDAP configuration domain",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
+        },
+        "ldapServers": {
+          "type": "array",
+          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ldapOverTLS": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
+        },
+        "serverCACertificate": {
+          "type": "string",
+          "format": "password",
+          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
+          "minLength": 1,
+          "maxLength": 10240,
+          "x-ms-secret": true
+        },
+        "certificateCNHost": {
+          "type": "string",
+          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
+          "x-nullable": true
+        },
+        "bindAuthenticationLevel": {
+          "$ref": "#/definitions/BindAuthenticationLevel",
+          "description": "The authentication level to use when binding to the LDAP server, defaults to Anonymous."
         },
         "bindDN": {
           "type": "string",

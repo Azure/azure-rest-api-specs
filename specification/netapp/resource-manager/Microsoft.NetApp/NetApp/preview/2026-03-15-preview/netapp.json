@@ -14152,6 +14152,36 @@
         "backupVaultId"
       ]
     },
+    "BindPasswordAkvConfigPatch": {
+      "type": "object",
+      "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Bind DN user password is stored."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "The name of the secret in Azure Key Vault that contains the Bind DN user password.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[a-zA-Z0-9-]+$"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    },
     "BreakFileLocksRequest": {
       "type": "object",
       "description": "Break file locks request",
@@ -17683,6 +17713,10 @@
               }
             ]
           }
+        },
+        "bindPasswordAkvConfig": {
+          "$ref": "#/definitions/BindPasswordAkvConfigPatch",
+          "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored."
         }
       }
     },

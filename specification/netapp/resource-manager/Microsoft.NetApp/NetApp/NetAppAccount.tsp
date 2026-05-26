@@ -185,7 +185,8 @@ model NetAppAccountPatch is PatchModel<NetAppAccount> {
 /**
  * NetApp account patch properties
  */
-model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
+model AccountPropertiesPatch
+  is PatchModel<AccountProperties, "entraIdConfig" | "LdapConfiguration"> {
   /**
    * Entra ID configuration for the account.
    */
@@ -197,6 +198,12 @@ model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
   entraIdConfig?: EntraIdConfigPatch;
+
+  /**
+   * LDAP Configuration for the account.
+   */
+  @added(Versions.v2026_04_15_preview)
+  ldapConfigurationPatch?: LdapConfigurationPatch;
 }
 
 /**
@@ -226,8 +233,22 @@ model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
-model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
+model EntraIdAkvConfigPatch
+  is PatchModel<EntraIdAkvConfig, "bindPasswordAkvConfig"> {
+  /**
+   * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+   */
+  bindPasswordAkvConfig?: BindPasswordAkvConfigPatch;
+}
 
+/**
+ * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+ */
+model BindPasswordAkvConfigPatch is PatchModel<BindPasswordAkvConfig>;
+/**
+ * LDAP configuration for PATCH operations (no default values)
+ */
+model LdapConfigurationPatch is PatchModel<LdapConfiguration>;
 /**
  * Entra ID configuration for the account.
  */
@@ -413,53 +434,6 @@ model BindPasswordAkvConfig {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
-}
-
-/**
- * LDAP configuration for PATCH operations (no default values)
- */
-@added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
-@added(Versions.v2026_03_15_preview)
-@removed(Versions.v2026_04_01)
-@added(Versions.v2026_04_15_preview)
-model LdapConfigurationPatch {
-  /**
-   * Name of the LDAP configuration domain
-   */
-  @maxLength(255)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
-  domain?: string;
-
-  /**
-   * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
-   */
-  ldapServers?: ipV4Address[];
-
-  /**
-   * Specifies whether or not the LDAP traffic needs to be secured via TLS.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  ldapOverTLS?: boolean;
-
-  /**
-   * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  @maxLength(10240)
-  @minLength(1)
-  @secret
-  serverCACertificate?: string;
-
-  /**
-   * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  @maxLength(255)
-  certificateCNHost?: string | null;
 }
 
 @maxLength(255)
