@@ -1,0 +1,307 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DatabaseColumns"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/columns": {
+      "get": {
+        "operationId": "DatabaseColumns_ListByDatabase",
+        "tags": [
+          "DatabaseColumns"
+        ],
+        "description": "List database columns",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schema",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "table",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "column",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "An opaque token that identifies a starting point in the collection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/DatabaseColumnListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Filter database columns": {
+            "$ref": "./examples/ColumnsListByDatabaseMax.json"
+          },
+          "List database columns": {
+            "$ref": "./examples/ColumnsListByDatabaseMin.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns": {
+      "get": {
+        "operationId": "DatabaseColumns_ListByTable",
+        "tags": [
+          "DatabaseColumns"
+        ],
+        "description": "List database columns",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/DatabaseColumnListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List database columns": {
+            "$ref": "./examples/DatabaseColumnListByTable.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}": {
+      "get": {
+        "operationId": "DatabaseColumns_Get",
+        "tags": [
+          "DatabaseColumns"
+        ],
+        "description": "Get database column",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/DatabaseColumn"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get database column": {
+            "$ref": "./examples/DatabaseColumnGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}
