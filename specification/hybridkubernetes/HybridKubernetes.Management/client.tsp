@@ -65,6 +65,16 @@ namespace Microsoft.Kubernetes;
 );
 @@clientName(SystemComponent, "ConnectedClusterSystemComponent", "csharp");
 @@clientName(
+  ListClusterUserCredentialProperties,
+  "GetClusterUserCredentialContent",
+  "csharp"
+);
+@@clientName(
+  ConnectedClusters.listClusterUserCredential::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
   ListClusterUserCredentialProperties.clientProxy,
   "UseClientProxy",
   "csharp"
