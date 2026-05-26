@@ -208,6 +208,8 @@ Do **not** flag updates to files inside pre-existing API version directories, ev
 
 **Why this step exists.** Linear, file-by-file, rule-by-rule scanning is good at catching local violations (a missing description, a wrong enum) but bad at catching _systemic_ problems that only show up when you look at the API as a graph: orphaned resources, unreachable operations, asymmetric CRUD, cycles in `$ref` chains, secret-bearing properties that flow into list responses, identity/trust boundaries that don't line up with auth scopes, paging shapes that disagree across sibling collections. Forcing yourself to build the graph _before_ the rule scan changes what you notice during the rule scan.
 
+<!-- cspell:ignore amplihack -->
+
 **Produce the graphs as artifacts.** Multi-agent review-pattern guidance (see the [Crusty Old Engineer skill](https://raw.githubusercontent.com/rysweet/amplihack/refs/heads/main/.claude/skills/crusty-old-engineer/SKILL.md) and related amplihack patterns) is explicit: ask the model to make data-flow diagrams for the APIs - that forces it to think in graphs instead of lists. Mental scaffolding alone is too easy to skip or fake. You **must** render the graphs as Mermaid diagrams inside the Step 6 report, wrapped in collapsible `<details>` blocks so they don't dominate the chat. The Critic (Step 6.5) re-derives them independently and a graph-diff is the primary missed-violation signal.
 
 **For every PR touching `.tsp` or resource-manager `.json`, construct the following four views and render the first three as Mermaid diagrams in the report. The fourth (version-delta) is rendered only when a previous version exists.**
