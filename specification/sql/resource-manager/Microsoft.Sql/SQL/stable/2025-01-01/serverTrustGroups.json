@@ -1,0 +1,441 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ServerTrustGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups": {
+      "get": {
+        "operationId": "ServerTrustGroups_ListByLocation",
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Lists a server trust group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List server trust groups": {
+            "$ref": "./examples/ServerTrustGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}": {
+      "get": {
+        "operationId": "ServerTrustGroups_Get",
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Gets a server trust group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverTrustGroupName",
+            "in": "path",
+            "description": "The name of the server trust group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get server trust group": {
+            "$ref": "./examples/ServerTrustGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServerTrustGroups_CreateOrUpdate",
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Creates or updates a server trust group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverTrustGroupName",
+            "in": "path",
+            "description": "The name of the server trust group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The server trust group parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServerTrustGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServerTrustGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create server trust group": {
+            "$ref": "./examples/ServerTrustGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServerTrustGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ServerTrustGroups_Delete",
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Deletes a server trust group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverTrustGroupName",
+            "in": "path",
+            "description": "The name of the server trust group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Drop server trust group": {
+            "$ref": "./examples/ServerTrustGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustGroups": {
+      "get": {
+        "operationId": "ServerTrustGroups_ListByInstance",
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Gets a server trust groups by instance name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List server trust groups by managed instance": {
+            "$ref": "./examples/ServerTrustGroupListByManagedInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerInfo": {
+      "type": "object",
+      "description": "Server info for the server trust group.",
+      "properties": {
+        "serverId": {
+          "type": "string",
+          "description": "Server Id."
+        }
+      },
+      "required": [
+        "serverId"
+      ]
+    },
+    "ServerTrustGroup": {
+      "type": "object",
+      "description": "A server trust group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerTrustGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerTrustGroupListResult": {
+      "type": "object",
+      "description": "The response of a ServerTrustGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerTrustGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerTrustGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerTrustGroupProperties": {
+      "type": "object",
+      "description": "Properties of a server trust group.",
+      "properties": {
+        "groupMembers": {
+          "type": "array",
+          "description": "Group members information for the server trust group.",
+          "items": {
+            "$ref": "#/definitions/ServerInfo"
+          }
+        },
+        "trustScopes": {
+          "type": "array",
+          "description": "Trust scope of the server trust group.",
+          "items": {
+            "$ref": "./common.json#/definitions/ServerTrustGroupPropertiesTrustScopesItem"
+          }
+        }
+      },
+      "required": [
+        "groupMembers",
+        "trustScopes"
+      ]
+    }
+  },
+  "parameters": {}
+}

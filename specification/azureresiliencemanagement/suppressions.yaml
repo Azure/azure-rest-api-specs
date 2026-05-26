@@ -1,0 +1,25 @@
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths: [resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/tspconfig.yaml]
+
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2026-03-01-preview/openapi.json
+  reason: >
+    The default tag (package-2026-04-01-preview) intentionally does not include all paths
+    from previous preview versions. The 2026-04-01-preview API version (current latest)
+    deprecated and removed several operations (chaosjobs/*, drillrunchildjobs, drill testfailover,
+    drill testfailovercleanup, drill refreshreadinessstate, recoverychildjobs) that existed
+    in 2026-03-01-preview. This is an intentional API evolution in private preview; consumers
+    needing the removed operations should use the per-version tag package-2026-03-01-preview.
+- tool: Swagger Avocado
+  path: resource-manager/Microsoft.AzureResilienceManagement/AzureResilienceManagement/preview/2025-02-01-preview/openapi.json
+  reason: >
+    Older preview API version retained for compatibility. The default tag points to
+    2026-04-01-preview; consumers needing 2025-02-01-preview should use the per-version
+    tag package-2025-02-01-preview.
