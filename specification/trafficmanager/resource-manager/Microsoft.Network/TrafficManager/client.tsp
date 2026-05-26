@@ -165,6 +165,9 @@ op getReplace(
   "csharp"
 );
 @@clientName(ProfileStatus, "TrafficManagerProfileStatus", "csharp");
+@@clientName(RecordType, "TrafficManagerRecordType", "csharp");
+@@clientName(RecordType.AAAA, "Aaaa", "csharp");
+@@clientName(RecordType.CNAME, "Cname", "csharp");
 @@clientName(MonitorProtocol.HTTP, "Http", "csharp");
 @@clientName(MonitorProtocol.HTTPS, "Https", "csharp");
 @@clientName(MonitorProtocol.TCP, "Tcp", "csharp");
