@@ -465,6 +465,10 @@ op privateLinkResourcesGetCustomization(
   "csharp"
 );
 @@clientName(AlertsAPI.Alert, "SecurityAlert", "csharp");
+@@clientName(AlertsAPI.AlertSimulatorRequestBody,
+  "SecurityAlertSimulatorContent",
+  "csharp"
+);
 @@clientName(SecureScoreAPI.SecureScoreItem, "SecureScore", "csharp");
 @@clientName(AlertsSuppressionRulesAPI.AlertsSuppressionRule,
   "SecurityAlertsSuppressionRule",
@@ -711,9 +715,6 @@ op privateLinkResourcesGetCustomization(
   "GetAvailableGitLabGroups",
   "csharp"
 );
-@@access(PricingsAPI.Pricings.list, Access.internal, "csharp");
-@@access(TasksAPI.SecurityTaskProperties, Access.public, "csharp");
-@@access(ExternalSecuritySolutionKind, Access.public, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResourceData for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IoTSecurityAPI.IoTSecuritySolutionModel,
   Azure.ResourceManager.Foundations.TrackedResource,
@@ -911,9 +912,17 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
   "default",
   "python"
 );
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
+@clientName("ServerVulnerabilityAssessmentName", "csharp")
+union CSharpServerVulnerabilityAssessmentName {
+  /** Default. */
+  Default: "default",
+}
+
 @@Azure.ClientGenerator.Core.alternateType(
-  ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
-  "default"
+  ServerVulnerabilityAssessmentName,
+  CSharpServerVulnerabilityAssessmentName,
+  "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
