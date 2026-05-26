@@ -110,6 +110,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    */
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -125,6 +127,8 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    */
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get
@@ -139,16 +143,20 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   >;
 }
 
-@@doc(WorkspaceConnectionPropertiesV2BasicResource.name,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResource.name,
   "Friendly name of the workspace connection"
 );
 @@doc(WorkspaceConnectionPropertiesV2BasicResource.properties, "");
-@@doc(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
   "The object for creating or updating a new workspace connection"
 );
-@@doc(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
   "Parameters for workspace connection update."
 );
-@@doc(WorkspaceConnectionPropertiesV2BasicResources.testConnection::parameters.body,
+@@doc(
+  WorkspaceConnectionPropertiesV2BasicResources.testConnection::parameters.body,
   "Workspace Connection object"
 );

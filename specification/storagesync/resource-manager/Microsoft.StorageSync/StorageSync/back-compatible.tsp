@@ -5,67 +5,80 @@ using Microsoft.StorageSync;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageSyncServiceCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StorageSyncServiceCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageSyncServiceUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StorageSyncServiceUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SyncGroupCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SyncGroupCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudEndpointCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CloudEndpointCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PostBackupResponse.backupMetadata
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PostBackupResponse.backupMetadata
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerEndpointCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ServerEndpointCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerEndpointUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ServerEndpointUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegisteredServerCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RegisteredServerCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegisteredServerUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RegisteredServerUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionState.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SubscriptionState.properties
 );
 
 @@clientName(StorageSyncServices.create::parameters.resource, "parameters");
 @@clientName(StorageSyncServices.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageSyncService.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StorageSyncService.properties
 );
 
-@@clientName(PrivateEndpointConnections.create::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
 @@clientName(SyncGroups.create::parameters.resource, "parameters");
@@ -78,7 +91,8 @@ using Microsoft.StorageSync;
 @@clientName(CloudEndpoints.postBackup::parameters.body, "parameters");
 @@clientName(CloudEndpoints.preRestore::parameters.body, "parameters");
 @@clientName(CloudEndpoints.postRestore::parameters.body, "parameters");
-@@clientName(CloudEndpoints.triggerChangeDetection::parameters.body,
+@@clientName(
+  CloudEndpoints.triggerChangeDetection::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -95,27 +109,32 @@ using Microsoft.StorageSync;
 @@clientName(RegisteredServers.create::parameters.resource, "parameters");
 @@clientName(RegisteredServers.update::parameters.properties, "parameters");
 @@clientName(RegisteredServers.triggerRollover::parameters.body, "parameters");
-@@clientName(StorageSyncServicesOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  StorageSyncServicesOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegisteredServer.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RegisteredServer.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workflow.properties);
 
-@@clientLocation(OperationStatusOperationGroup.get,
+@@clientLocation(
+  OperationStatusOperationGroup.get,
   "OperationStatus",
   "!csharp"
 );
-@@clientLocation(StorageSyncServices.listByStorageSyncService,
+@@clientLocation(
+  StorageSyncServices.listByStorageSyncService,
   "PrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(StorageSyncServicesOperationGroup.checkNameAvailability,
+@@clientLocation(
+  StorageSyncServicesOperationGroup.checkNameAvailability,
   StorageSyncServices,
   "!csharp"
 );

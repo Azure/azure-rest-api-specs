@@ -44,7 +44,9 @@ alias CertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("certificates")
     @key
     certificateName: string;
-  }
+  },
+  ErrorType = CommonTypes.ErrorResponse,
+  ResourceName = "ContainerAppConnectedEnvironmentCertificate"
 >;
 
 @armResourceOperations
@@ -94,7 +96,6 @@ interface Certificates {
     Certificate,
     Response = ArmResponse<CertificateCollection>
   >;
-
   /**
    * Get the specified Certificate.
    */
@@ -162,20 +163,26 @@ alias CertificateOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperatio
     @segment("certificates")
     @key
     certificateName: string;
-  }
+  },
+  ErrorType = CommonTypes.ErrorResponse,
+  ResourceName = "ContainerAppManagedEnvironmentCertificate"
 >;
 
 @@doc(Certificate.name, "Name of the Certificate.");
 @@doc(Certificate.properties, "Certificate resource specific properties");
-@@doc(Certificates.createOrUpdate::parameters.resource,
+@@doc(
+  Certificates.createOrUpdate::parameters.resource,
   "Certificate to be created or updated"
 );
-@@doc(Certificates.update::parameters.properties,
+@@doc(
+  Certificates.update::parameters.properties,
   "Properties of a certificate that need to be updated"
 );
-@@doc(Certificates.createOrUpdateCertificates::parameters.resource,
+@@doc(
+  Certificates.createOrUpdateCertificates::parameters.resource,
   "Certificate to be created or updated"
 );
-@@doc(Certificates.updateCertificates::parameters.properties,
+@@doc(
+  Certificates.updateCertificates::parameters.properties,
   "Properties of a certificate that need to be updated"
 );

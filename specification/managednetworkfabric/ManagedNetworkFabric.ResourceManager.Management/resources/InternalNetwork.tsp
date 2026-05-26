@@ -148,33 +148,43 @@ interface InternalNetworks {
 }
 
 @@doc(InternalNetworks.create::parameters.resource, "Request payload.");
-@@doc(InternalNetworks.update::parameters.properties,
+@@doc(
+  InternalNetworks.update::parameters.properties,
   "InternalNetwork properties to update. Only annotations are supported."
 );
-@@doc(InternalNetworks.updateAdministrativeState::parameters.body,
+@@doc(
+  InternalNetworks.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  InternalNetworks.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateBgpAdministrativeStateDeprecatedV2::parameters.body,
+@@doc(
+  InternalNetworks.updateBgpAdministrativeStateDeprecatedV2::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateBgpAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  InternalNetworks.updateBgpAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateBgpAdministrativeState::parameters.body,
+@@doc(
+  InternalNetworks.updateBgpAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  InternalNetworks.updateStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateStaticRouteBfdAdministrativeState::parameters.body,
+@@doc(
+  InternalNetworks.updateStaticRouteBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateBfdAdministrativeState::parameters.body,
+@@doc(
+  InternalNetworks.updateBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(InternalNetworks.updateBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  InternalNetworks.updateBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );

@@ -271,6 +271,7 @@ interface ManagedOps {
   @doc("List all ManagedOps instances in the subscription.")
   list is ArmListBySubscription<ManagedOp>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Updates the ManagedOps instance with the supplied fields.")
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<ManagedOp, ManagedOpUpdate>;

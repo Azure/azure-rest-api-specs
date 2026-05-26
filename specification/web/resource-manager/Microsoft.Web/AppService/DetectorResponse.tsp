@@ -236,6 +236,7 @@ interface DetectorResponseOperationGroup {
 }
 
 @@doc(DetectorResponse.name, "Detector Resource Name");
-@@doc(DetectorResponse.properties,
+@@doc(
+  DetectorResponse.properties,
   "DetectorResponse resource specific properties"
 );

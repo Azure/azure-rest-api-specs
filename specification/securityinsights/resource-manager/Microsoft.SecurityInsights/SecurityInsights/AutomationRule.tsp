@@ -99,10 +99,12 @@ interface AutomationRules {
   delete is Extension.DeleteSync<
     OperationalInsights,
     AutomationRule,
-    Response = ArmResponse<unknown> | (NoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body body: unknown;
-    }),
+    Response =
+      | ArmResponse<unknown>
+      | (NoContentResponse & {
+          #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+          @body body: unknown;
+        }),
     Error = CloudError
   >;
 
@@ -120,6 +122,7 @@ interface AutomationRules {
 
 @@doc(AutomationRule.name, "Automation rule ID");
 @@doc(AutomationRule.properties, "Automation rule properties");
-@@doc(AutomationRules.createOrUpdate::parameters.resource,
+@@doc(
+  AutomationRules.createOrUpdate::parameters.resource,
   "The automation rule"
 );

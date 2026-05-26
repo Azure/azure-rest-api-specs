@@ -1,0 +1,32 @@
+{
+  "title": "RecoveryPlanActions_Finalize_MaximumSet",
+  "operationId": "RecoveryPlanActions_Finalize",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-04-01-preview",
+    "recoveryPlanName": "samplePlanName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "ResourceInNotProtectedState",
+          "message": "Resource in not protected with any recovery solution.",
+          "target": "Please make sure resource is protected with any recovery solution.",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "Unable to detect resource protections with any recovery solution.",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
