@@ -214,7 +214,7 @@ stages:
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
         parameters:
           SourceRootPath: $(SpecRepoDirectory)
-          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+          Condition: succeeded()
 
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
@@ -268,8 +268,11 @@ stages:
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
           
+          echo "check generator"
+          which generator
+
           echo "call azsdk detect tool"
-          azsdk package detect-breaking-change --package-path $(SdkRepoDirectory)\sdk\resourcemanager\webpubsub\armwebpubsub --tsp-config-path $(SpecRepoDirectory)\specification\webpubsub\resource-manager\Microsoft.SignalRService\SignalRService\tspconfig.yaml
+          $(AZSDK) package detect-breaking-change --package-path $(SdkRepoDirectory)/sdk/resourcemanager/webpubsub/armwebpubsub --tsp-config-path $(SpecRepoDirectory)/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
         displayName: 'Generate SDK'
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
