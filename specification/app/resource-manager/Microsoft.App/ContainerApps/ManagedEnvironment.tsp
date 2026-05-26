@@ -19,7 +19,7 @@ model ManagedEnvironment
     Resource = ManagedEnvironment,
     KeyName = "environmentName",
     SegmentName = "managedEnvironments",
-    NamePattern = ""
+    NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
   /**
@@ -149,7 +149,7 @@ interface ManagedEnvironments {
   list is ManagedEnvironmentOps.ActionSync<
     ManagedEnvironment,
     void,
-    ArmResponse<ResourceListResult<PrivateLinkResource>>
+    ArmResponse<PrivateLinkResourceListResult>
   >;
 }
 
