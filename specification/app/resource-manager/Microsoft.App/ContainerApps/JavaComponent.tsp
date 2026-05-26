@@ -75,7 +75,7 @@ interface JavaComponents {
   /**
    * Delete a Java Component.
    */
-  @summary("Delete a Java Component.")
+  @summary("Delete.")
   delete is JavaComponentOps.DeleteWithoutOkAsync<JavaComponent>;
 
   /**
