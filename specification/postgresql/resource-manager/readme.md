@@ -56,10 +56,6 @@ suppressions:
     reason: This is a binary status indicator.
   - code: EnumInsteadOfBoolean
     from: openapi.json
-    where: $.definitions.MaintenanceEventActionResponse.properties.deferrable
-    reason: This is a binary status indicator.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
     where: $.definitions.MaintenanceEventActionResponse.properties.appliedNow
     reason: This is a binary status indicator.
 ```
