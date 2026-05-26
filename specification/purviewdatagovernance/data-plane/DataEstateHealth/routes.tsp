@@ -208,22 +208,6 @@ interface Controls {
     @body body: Control,
   ): ControlResponse | ErrorResponse;
 
-  @doc("Delete a governance control by its unique identifier.")
-  @route("/controls/{id}")
-  @delete
-  delete(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the control.")
-    @path
-    @maxLength(256)
-    id: string,
-
-    @doc("Whether to also delete the associated assessment.")
-    @query
-    deleteAssessment?: boolean,
-  ): void | ErrorResponse;
-
   @doc("Reset a governance control by its unique identifier.")
   @route("/controls/{id}/reset")
   @post

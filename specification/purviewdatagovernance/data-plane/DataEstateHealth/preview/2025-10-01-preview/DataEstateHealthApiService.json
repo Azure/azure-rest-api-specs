@@ -580,52 +580,6 @@
             "$ref": "./examples/Controls_Update_Gen.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "Controls_Delete",
-        "description": "Delete a governance control by its unique identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the control.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "deleteAssessment",
-            "in": "query",
-            "description": "Whether to also delete the associated assessment.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Controls_Delete": {
-            "$ref": "./examples/Controls_Delete_Gen.json"
-          }
-        }
       }
     },
     "/controls/{id}/reset": {
