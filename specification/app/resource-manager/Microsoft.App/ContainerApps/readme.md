@@ -83,18 +83,6 @@ directive:
     from: openapi.json
     reason: |
       Pre-existing. Do not introduce breaking changes in GA services.
-  - suppress: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    reason: |
-      Pre-existing. PrivateEndpointConnectionProperties.provisioningState was not readOnly in the original swagger.
-  - suppress: ResourceNameRestriction
-    from: openapi.json
-    reason: |
-      Pre-existing. connectedEnvironmentName lacks pattern restriction in the original swagger.
-  - suppress: XmsPageableForListCalls
-    from: openapi.json
-    reason: |
-      Pre-existing. BillingMeters list operation lacks x-ms-pageable in the original swagger.
   - suppress: LroErrorContent
     from: openapi.json
     reason: |
