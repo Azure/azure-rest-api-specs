@@ -441,9 +441,17 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "csharp");
 @@clientName(VoiceLive.AvatarConfig.type, "AvatarKind", "csharp");
 @@clientName(VoiceLive.AvatarConfig.`model`, "BaseMode", "csharp");
-@@clientName(VoiceLive.AvatarConfig.output_audit_audio, "AuditOutputAudio", "csharp");
+@@clientName(
+  VoiceLive.AvatarConfig.output_audit_audio,
+  "AuditOutputAudio",
+  "csharp"
+);
 @@clientName(VoiceLive.PhotoAvatarBaseModes, "PhotoAvatarBaseMode", "csharp");
-@@clientName(VoiceLive.AzureAvatarVoiceSyncVoice, "AzureAvatarSyncVoice", "csharp");
+@@clientName(
+  VoiceLive.AzureAvatarVoiceSyncVoice,
+  "AzureAvatarSyncVoice",
+  "csharp"
+);
 @@clientName(
   VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
   "CustomLexiconUri",
