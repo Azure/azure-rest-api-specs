@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.SecurityInsights;
 using Azure.ClientGenerator.Core;
 
+@@clientName(Microsoft.SecurityInsights, "SecurityInsights", "python");
+
 @@clientName(
   Azure.ResourceManager.CommonTypes.ActionType,
   "OperationActionType",
