@@ -23,17 +23,6 @@ using Microsoft.HybridCompute;
   "csharp"
 );
 
-@@alternateType(
-  ExtensionValues.get::parameters.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-@@alternateType(
-  ExtensionValues.list::parameters.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-
 @@clientName(FirmwareProfile.type, "FirmwareProfileType", "csharp");
 
 /**
