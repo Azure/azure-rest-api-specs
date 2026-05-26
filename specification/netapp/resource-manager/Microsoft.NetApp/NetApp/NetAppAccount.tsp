@@ -63,6 +63,8 @@ model AccountProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   entraIdConfig?: EntraIdConfig;
 
   /**
@@ -98,6 +100,8 @@ model AccountProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   ldapConfiguration?: LdapConfiguration;
 }
 
@@ -117,6 +121,9 @@ alias PatchModel<
 @added(Versions.v2026_03_01)
 @removed(Versions.v2026_03_15_preview)
 @renamedFrom(Versions.v2026_03_15_preview, "NetAppAccountPatch")
+@added(Versions.v2026_04_01)
+@removed(Versions.v2026_04_15_preview)
+@renamedFrom(Versions.v2026_04_15_preview, "NetAppAccountPatch")
 model NetAppAccountPatchStable {
   /**
    * Resource location
@@ -166,6 +173,8 @@ model NetAppAccountPatchStable {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model NetAppAccountPatch is PatchModel<NetAppAccount> {
   /**
    * NetApp Account properties
@@ -185,6 +194,8 @@ model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   entraIdConfig?: EntraIdConfigPatch;
 }
 
@@ -196,6 +207,8 @@ model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
   /**
    * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
@@ -211,6 +224,8 @@ model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
 
 /**
@@ -221,6 +236,8 @@ model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdConfig {
   /**
    * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
@@ -259,6 +276,8 @@ model EntraIdConfig {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdAkvConfig {
   /**
    * The Azure Key Vault URI where the Entra ID credentials are stored.
@@ -290,6 +309,8 @@ model EntraIdAkvConfig {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain
@@ -335,6 +356,8 @@ model LdapConfiguration {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model LdapConfigurationPatch {
   /**
    * Name of the LDAP configuration domain
@@ -724,6 +747,9 @@ interface NetAppAccounts {
   @added(Versions.v2026_03_01)
   @removed(Versions.v2026_03_15_preview)
   @renamedFrom(Versions.v2026_03_15_preview, "update")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "update")
   @sharedRoute
   updatePrevious is ArmCustomPatchAsync<
     NetAppAccount,
@@ -747,6 +773,8 @@ interface NetAppAccounts {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   @sharedRoute
   update is ArmCustomPatchAsync<
     NetAppAccount,
