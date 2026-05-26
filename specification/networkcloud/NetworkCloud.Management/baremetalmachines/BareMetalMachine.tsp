@@ -77,7 +77,9 @@ interface BareMetalMachines {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -209,7 +211,8 @@ interface BareMetalMachines {
 
 @@doc(BareMetalMachine.name, "The name of the bare metal machine.");
 @@doc(BareMetalMachine.properties, "The list of the resource properties.");
-@@doc(BareMetalMachines.createOrUpdate::parameters.resource,
+@@doc(
+  BareMetalMachines.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(BareMetalMachines.update::parameters.properties, "The request body.");
@@ -218,7 +221,8 @@ interface BareMetalMachines {
 @@doc(BareMetalMachines.replace::parameters.body, "The request body.");
 @@doc(BareMetalMachines.runCommand::parameters.body, "The request body.");
 @@doc(BareMetalMachines.runDataExtracts::parameters.body, "The request body.");
-@@doc(BareMetalMachines.runDataExtractsRestricted::parameters.body,
+@@doc(
+  BareMetalMachines.runDataExtractsRestricted::parameters.body,
   "The request body."
 );
 @@doc(BareMetalMachines.runReadCommands::parameters.body, "The request body.");

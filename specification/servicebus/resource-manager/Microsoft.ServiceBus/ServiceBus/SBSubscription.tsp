@@ -94,6 +94,7 @@ interface SBSubscriptions {
 @@minLength(SBSubscription.name, 1);
 @@doc(SBSubscription.name, "The subscription name.");
 @@doc(SBSubscription.properties, "Properties of subscriptions resource.");
-@@doc(SBSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  SBSubscriptions.createOrUpdate::parameters.resource,
   "Parameters supplied to create a subscription resource."
 );

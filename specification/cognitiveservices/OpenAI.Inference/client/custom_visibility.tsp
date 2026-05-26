@@ -33,63 +33,75 @@ using Azure.ClientGenerator.Core;
 @@usage(Azure.OpenAI.AzureSearchChatExtensionConfiguration, Usage.input);
 
 // Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
-@@clientName(Azure.OpenAI.ImageGenerationOptions.`model`,
+@@clientName(
+  Azure.OpenAI.ImageGenerationOptions.`model`,
   "DeploymentName",
   "csharp"
 );
 
-@@clientName(Azure.OpenAI.ChatResponseMessage.context,
+@@clientName(
+  Azure.OpenAI.ChatResponseMessage.context,
   "AzureExtensionsContext",
   "csharp"
 );
 
 @@clientName(Azure.OpenAI.AudioTranscriptionFormat.json, "Simple", "csharp");
 
-@@clientName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
+@@clientName(
+  Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
   "Verbose",
   "csharp"
 );
 
-@@clientName(Azure.OpenAI.AudioTranscriptionFormat.text,
+@@clientName(
+  Azure.OpenAI.AudioTranscriptionFormat.text,
   "InternalPlainText",
   "csharp"
 );
 
 @@clientName(Azure.OpenAI.AudioTranslationFormat.json, "Simple", "csharp");
 
-@@clientName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
+@@clientName(
+  Azure.OpenAI.AudioTranslationFormat.verbose_json,
   "Verbose",
   "csharp"
 );
 
-@@clientName(Azure.OpenAI.AudioTranslationFormat.text,
+@@clientName(
+  Azure.OpenAI.AudioTranslationFormat.text,
   "InternalPlainText",
   "csharp"
 );
 
-@@clientName(Azure.OpenAI.ChatCompletionsOptions.logprobs,
+@@clientName(
+  Azure.OpenAI.ChatCompletionsOptions.logprobs,
   "EnableLogProbabilities",
   "csharp"
 );
-@@clientName(Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
+@@clientName(
+  Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
   "LogProbabilitiesPerToken",
   "csharp"
 );
 
 @@clientName(Azure.OpenAI.ChatChoice.logprobs, "LogProbabilityInfo", "csharp");
-@@clientName(Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
+@@clientName(
+  Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
   "TokenLogProbabilityResults",
   "csharp"
 );
-@@clientName(Azure.OpenAI.ChatTokenLogProbabilityResult.top_logprobs,
+@@clientName(
+  Azure.OpenAI.ChatTokenLogProbabilityResult.top_logprobs,
   "TopLogProbabilityEntries",
   "csharp"
 );
-@@clientName(Azure.OpenAI.ChatTokenLogProbabilityInfo.logprob,
+@@clientName(
+  Azure.OpenAI.ChatTokenLogProbabilityInfo.logprob,
   "LogProbability",
   "csharp"
 );
-@@clientName(Azure.OpenAI.ChatTokenLogProbabilityInfo.bytes,
+@@clientName(
+  Azure.OpenAI.ChatTokenLogProbabilityInfo.bytes,
   "Utf8ByteValues",
   "csharp"
 );

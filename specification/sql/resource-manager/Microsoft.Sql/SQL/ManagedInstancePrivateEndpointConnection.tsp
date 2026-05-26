@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * A private endpoint connection
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstancePrivateEndpointConnections
+)
 model ManagedInstancePrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<ManagedInstancePrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
@@ -25,7 +29,11 @@ model ManagedInstancePrivateEndpointConnection
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.ManagedInstancePrivateEndpointConnections
+)
 interface ManagedInstancePrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
@@ -38,8 +46,10 @@ interface ManagedInstancePrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstancePrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<ManagedInstancePrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstancePrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ManagedInstancePrivateEndpointConnection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstancePrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -48,7 +58,10 @@ interface ManagedInstancePrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstancePrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -57,12 +70,15 @@ interface ManagedInstancePrivateEndpointConnections {
   listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateEndpointConnection>;
 }
 
-@@doc(ManagedInstancePrivateEndpointConnection.name,
+@@doc(
+  ManagedInstancePrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
-@@doc(ManagedInstancePrivateEndpointConnection.properties,
+@@doc(
+  ManagedInstancePrivateEndpointConnection.properties,
   "Resource properties."
 );
-@@doc(ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
   ""
 );

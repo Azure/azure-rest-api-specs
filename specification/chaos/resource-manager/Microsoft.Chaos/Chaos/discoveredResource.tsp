@@ -28,6 +28,7 @@ interface DiscoveredResources {
 
 @@minLength(DiscoveredResource.name, 1);
 @@doc(DiscoveredResource.name, "Name of the discovered resource.");
-@@doc(DiscoveredResource.properties,
+@@doc(
+  DiscoveredResource.properties,
   "The properties of the discovered resource."
 );
