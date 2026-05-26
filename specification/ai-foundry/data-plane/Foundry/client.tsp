@@ -110,6 +110,215 @@ using Azure.AI.Projects;
 @@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
 
 // --------------------------------------------------------------------------------
+// Memories sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(MemoryStores.createMemoryStore, "create");
+@@clientName(MemoryStores.updateMemoryStore, "update");
+@@clientName(MemoryStores.getMemoryStore, "get");
+@@clientName(MemoryStores.listMemoryStores, "list");
+@@clientName(MemoryStores.deleteMemoryStore, "delete");
+@@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
+@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
+@@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
+@@clientName(MemoryStoreDeleteScopeResponse,
+  "MemoryStoreDeleteScopeResult",
+  "python"
+);
+
+// For Python and JS, Memory Stores update and search operations are the only Foundry operations that
+// define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
+// Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
+@@alternateType(OpenAI.InputItem, Record<unknown>);
+@@clientDoc(MemoryStoreUpdateRequest.items,
+  "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+@@clientDoc(MemoryStoreSearchRequest.items,
+  "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
+  DocumentationMode.replace,
+  "javascript"
+);
+
+// The Python SDK will have custom code to handle LRO memory updates, and
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@scope(MemoryStores.getUpdateResult, "!(python)");
+@@usage(MemoryStoreUpdateCompletedResult, Usage.output);
+@@access(MemoryStoreUpdateCompletedResult, Access.public);
+@@usage(MemoryStoreUpdateResponse, Usage.output);
+@@access(MemoryStoreUpdateResponse, Access.public);
+
+// The Python SDK will have custom code to handle memory search, with
+// new input "items" specified via OpenAI classes.
+@@access(MemoryStores.searchMemories, Access.internal, "python");
+@@access(MemoryStoreSearchResponse, Access.public, "python");
+
+// Rename models ending with 'Object' to end with 'Details' for Python
+@@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
+
+@@clientName(PendingUploadResponse, "PendingUploadResult", "python");
+
+// Remove 'Object' suffix for JS client
+@@clientName(MemoryStoreObject, "MemoryStore", "javascript");
+
+// --------------------------------------------------------------------------------
+// Routines sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Routines.createOrUpdateRoutine, "create_or_update", "python");
+@@clientName(Routines.createOrUpdateRoutine, "createOrUpdate", "javascript");
+@@clientName(Routines.getRoutine, "get");
+@@clientName(Routines.enableRoutine, "enable");
+@@clientName(Routines.disableRoutine, "disable");
+@@clientName(Routines.listRoutines, "list");
+@@clientName(Routines.deleteRoutine, "delete");
+@@clientName(Routines.listRoutineRuns, "list_runs", "python");
+@@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
+@@clientName(Routines.dispatchRoutineAsync, "dispatch_async", "python");
+@@clientName(Routines.dispatchRoutineAsync, "dispatchAsync", "javascript");
+
+// --------------------------------------------------------------------------------
+// Responses sub‐client
+// --------------------------------------------------------------------------------
+
+// Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
+
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
+);
+
+// --------------------------------------------------------------------------------
+// Evaluators sub‐client
+// --------------------------------------------------------------------------------
+
+// Need to explicitly mention both languages to avoid compile error
+@@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+// Evaluator pending upload
+@@clientName(Evaluators.startPendingUpload, "pendingUpload");
+
+// Evaluator generation jobs — unscoped names (fixes AllScopes conflict)
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job");
+
+// Evaluator generation jobs — renamed for JavaScript SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create,
+  "createGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
+@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
+@@clientName(EvaluatorGenerationJobs.cancel,
+  "cancelGenerationJob",
+  "javascript"
+);
+@@clientName(EvaluatorGenerationJobs.delete,
+  "deleteGenerationJob",
+  "javascript"
+);
+
+// Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "create_generation_suite_job"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancel_generation_suite_job"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "delete_generation_suite_job"
+);
+
+// Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "createGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "getGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "listGenerationSuiteJobs",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancelGenerationSuiteJob",
+  "javascript"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "deleteGenerationSuiteJob",
+  "javascript"
+);
+
+// EvaluationSuites versioned operations
+@@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+@@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+@@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+@@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+@@clientName(EvaluationSuites.createOrUpdateVersion,
+  "create_or_update_evaluation_suite"
+);
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "create_evaluation_suite"
+);
+@@clientName(EvaluationSuites.run, "run_evaluation_suite");
+
+@@clientName(EvaluationSuites.listVersions,
+  "listEvaluationSuiteVersions",
+  "javascript"
+);
+@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.deleteVersion,
+  "deleteEvaluationSuite",
+  "javascript"
+);
+@@clientName(EvaluationSuites.createOrUpdateVersion,
+  "createOrUpdateEvaluationSuite",
+  "javascript"
+);
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion,
+  "createEvaluationSuite",
+  "javascript"
+);
+@@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
+@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
+
+// --------------------------------------------------------------------------------
+// Insights sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(InsightsGetParams.id, "insight_id");
+
+// --------------------------------------------------------------------------------
+// Models sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK models operations
+@@clientName(Models.listLatest, "list");
+@@clientName(Models.listVersions, "listVersions");
+@@clientName(Models.getVersion, "get");
+@@clientName(Models.deleteVersion, "delete");
+@@clientName(Models.createOrUpdateVersion, "update");
+@@clientName(Models.startPendingUpload, "pendingUpload");
+@@clientName(Models.getCredentials, "getCredentials");
+
+// --------------------------------------------------------------------------------
 // Datasets sub‐client
 // --------------------------------------------------------------------------------
 
@@ -509,3 +718,85 @@ model AIProjectClientOptions {
 
 
 
+// Evaluator generation jobs — renamed for Python SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
+@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
+// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
+@@clientName(EvaluationSuiteGenerationJobs.create,
+  "create_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.get,
+  "get_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.list,
+  "list_generation_suite_jobs",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.cancel,
+  "cancel_generation_suite_job",
+  "python"
+);
+@@clientName(EvaluationSuiteGenerationJobs.delete,
+  "delete_generation_suite_job",
+  "python"
+);
+
+// Agent optimization jobs — renamed for Python SDK discoverability
+@@clientName(AgentOptimizationJobs.create, "create_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.get, "get_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
+@@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "list_optimization_candidates",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "get_optimization_candidate",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "get_optimization_candidate_config",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "get_optimization_candidate_results",
+  "python"
+);
+
+// Agent optimization jobs — renamed for JavaScript SDK discoverability
+@@clientName(AgentOptimizationJobs.create,
+  "createOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
+@@clientName(AgentOptimizationJobs.cancel,
+  "cancelOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.delete,
+  "deleteOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "listOptimizationCandidates",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "getOptimizationCandidate",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "getOptimizationCandidateConfig",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "getOptimizationCandidateResults",
+  "javascript"
+);

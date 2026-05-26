@@ -15,14 +15,29 @@ const RoutineRequiredPreviews = #{
 union RoutineTriggerType {
   string,
 
-  @doc("A GitHub issue-opened trigger.")
-  github_issue_opened: "github_issue_opened",
+  @doc("A custom routine trigger.")
+  custom: "custom",
+
+  @doc("A GitHub issue trigger.")
+  github_issue: "github_issue",
 
   @doc("A recurring cron-based trigger.")
   schedule: "schedule",
 
   @doc("A one-shot timer trigger.")
   timer: "timer",
+}
+
+@doc("The GitHub issue events supported for routine triggers.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+union GitHubIssueEvent {
+  string,
+
+  @doc("Fires when an issue is opened.")
+  opened: "opened",
+
+  @doc("Fires when an issue is closed.")
+  closed: "closed",
 }
 
 @doc("The discriminator values supported for routine actions.")
@@ -118,29 +133,50 @@ model TimerRoutineTrigger extends RoutineTrigger {
   type: RoutineTriggerType.timer;
 
   @doc("A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.")
-  at: string;
+  in: string;
 
   @doc("An optional IANA or Windows time zone identifier when the timer uses a local timestamp.")
   time_zone?: string;
 }
 
-@doc("A GitHub issue-opened routine trigger.")
+@doc("A GitHub issue routine trigger.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model GitHubIssueOpenedRoutineTrigger extends RoutineTrigger {
+model GitHubIssueRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
-  type: RoutineTriggerType.github_issue_opened;
+  type: RoutineTriggerType.github_issue;
 
   @doc("The workspace connection identifier that resolves the GitHub configuration for the trigger.")
   @maxLength(256)
   connection_id: string;
 
-  @doc("The GitHub assignee or organization filter that scopes which issues can fire the trigger.")
+  @doc("The GitHub repository owner or organization that scopes which issues can fire the trigger.")
   @maxLength(128)
-  assignee: string;
+  owner: string;
 
   @doc("The GitHub repository filter that scopes which issues can fire the trigger.")
   @maxLength(128)
   repository: string;
+
+  @doc("The GitHub issue event that can fire the trigger.")
+  issue_event: GitHubIssueEvent;
+}
+
+@doc("A custom routine trigger.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+model CustomRoutineTrigger extends RoutineTrigger {
+  @doc("The trigger type.")
+  type: RoutineTriggerType.custom;
+
+  @doc("The provider or source identifier for the custom trigger.")
+  @maxLength(128)
+  provider: string;
+
+  @doc("An optional provider-specific event name for the custom trigger.")
+  @maxLength(128)
+  event_name?: string;
+
+  @doc("Provider-specific parameters for the custom trigger.")
+  parameters: Record<unknown>;
 }
 
 @doc("Base model for a routine action.")
@@ -167,7 +203,7 @@ model InvokeAgentResponsesApiRoutineAction extends RoutineAction {
 
   @doc("An optional existing conversation identifier to continue during the downstream dispatch.")
   @maxLength(256)
-  conversation_id?: string;
+  conversation?: string;
 }
 
 @doc("Dispatches a routine through the raw invocations API.")
@@ -279,6 +315,30 @@ model DispatchRoutineResponse {
   task_id?: string;
 }
 
+@doc("Paged response for listing routines.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+model RoutineListResponse {
+  @doc("The current page of routines.")
+  @pageItems
+  value: Routine[];
+
+  @doc("A continuation token for fetching the next page, when available.")
+  @continuationToken
+  continuationToken?: string;
+}
+
+@doc("Paged response for listing routine runs.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+model RoutineRunsResponse {
+  @doc("The current page of routine runs.")
+  @pageItems
+  value: RoutineRun[];
+
+  @doc("A continuation token for fetching the next page of run history, when available.")
+  @continuationToken
+  nextPageToken?: string;
+}
+
 @doc("Generic diagnostics captured on a routine run.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineRunDiagnostics {
@@ -307,14 +367,35 @@ model RoutineRun {
   @doc("The trigger type that produced the routine attempt.")
   trigger_type: RoutineTriggerType;
 
+  @doc("The trigger name that produced the routine attempt.")
+  trigger_name?: string;
+
   @doc("The source path that created the routine attempt.")
   attempt_source?: RoutineAttemptSource;
 
   @doc("The action type dispatched for the routine attempt.")
   action_type?: RoutineActionType;
 
+  @doc("The project agent identifier targeted by the routine action, when applicable.")
+  agent_id?: string;
+
+  @doc("The agent endpoint identifier targeted by the routine action, when applicable.")
+  agent_endpoint_id?: string;
+
+  @doc("The responses conversation identifier supplied to the routine action, when applicable.")
+  conversation_id?: string;
+
+  @doc("The invocations session identifier supplied to the routine action, when applicable.")
+  session_id?: string;
+
   @doc("The logical trigger time recorded for the routine attempt.")
   triggered_at?: FoundryTimestamp;
+
+  @doc("The scheduled fire time for scheduler-backed attempts, when available.")
+  scheduled_fire_at?: FoundryTimestamp;
+
+  @doc("The trigger time zone from the routine definition, when available.")
+  trigger_time_zone?: string;
 
   @doc("The time when the underlying run started.")
   started_at: FoundryTimestamp;
@@ -336,6 +417,9 @@ model RoutineRun {
 
   @doc("The fully qualified error type captured for a failed attempt, when available.")
   error_type?: string;
+
+  @doc("The downstream HTTP status code captured for a failed attempt, when available.")
+  error_status_code?: int32;
 
   @doc("The truncated failure message captured for a failed attempt, when available.")
   error_message?: string;
@@ -380,7 +464,9 @@ model DisableRoutineParameters {
 
 @doc("Parameters for listing routines.")
 model ListRoutinesParameters {
-  ...CommonPageQueryParameters;
+  @doc("An optional continuation token from a previous routines list response.")
+  @query
+  continuationToken?: string;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -402,7 +488,17 @@ model ListRoutineRunsParameters {
   @query
   filter?: string;
 
-  ...CommonPageQueryParameters;
+  @doc("Optional MLflow ordering expressions.")
+  @query
+  orderBy?: string[];
+
+  @doc("An optional maximum number of runs to return in this page.")
+  @query
+  maxResults?: int32;
+
+  @doc("An optional continuation token from a previous routine runs response.")
+  @query
+  pageToken?: string;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")
