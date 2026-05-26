@@ -4,8 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Fabric {
-  @@access(Operations.list, Access.internal, "csharp");
-
   @@clientName(
     FabricCapacities.checkNameAvailability,
     "CheckFabricCapacityNameAvailability",
