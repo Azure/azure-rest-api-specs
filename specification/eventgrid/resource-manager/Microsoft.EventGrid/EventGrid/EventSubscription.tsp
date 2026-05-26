@@ -467,7 +467,6 @@ alias EventSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.Extensio
 
     /** undefined */
     @path(#{ allowReserved: true })
-    @segment("")
     @key
     scope: string;
 
