@@ -217,9 +217,3 @@ namespace Azure.AI.Projects;
 @@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
 @@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
 @@clientName(Models.getCredentials, "getModelCredentials", "csharp");
-
-// --------------------------------------------------------------------------------
-// Routines sub‐client
-// --------------------------------------------------------------------------------
-@@clientName(Routines, "AIProjectRoutines");
-@@clientName(Routine, "ProjectsRoutine");

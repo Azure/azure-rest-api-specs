@@ -622,5 +622,3 @@ union WebSearchToolSearchContextSizeExpandable {
 @@clientLocation(AgentOptimizationJobs.getCandidate, Agents);
 @@clientLocation(AgentOptimizationJobs.getCandidateConfig, Agents);
 @@clientLocation(AgentOptimizationJobs.getCandidateResults, Agents);
-@@clientLocation(AgentOptimizationJobs.promoteCandidate, Agents);
-@@clientLocation(AgentOptimizationJobs.getCandidateFile, Agents);
