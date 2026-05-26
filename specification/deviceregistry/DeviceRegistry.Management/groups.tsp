@@ -15,7 +15,7 @@ namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2026_11_02_preview)
 @parentResource(Namespace)
-@doc("A flexible grouping mechanism that allows devices or assets to be grouped by their property values.")
+@doc("A flexible grouping mechanism that allows devices to be grouped by their property values.")
 model Group is TrackedResource<GroupProperties> {
   @doc("The name of the group.")
   @key("groupName")
