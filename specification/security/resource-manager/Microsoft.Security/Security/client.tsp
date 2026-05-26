@@ -901,6 +901,8 @@ op privateLinkResourcesGetCustomization(
 );
 
 // C# operations intentionally excluded from generation.
+// These provider action list operations would add extra methods beyond the
+// legacy-compatible C# surface.
 @@scope(SecuritySolutionsAPI.DiscoveredSecuritySolutionsOperationGroup.list,
   "!csharp"
 );
@@ -915,8 +917,12 @@ op privateLinkResourcesGetCustomization(
 );
 @@scope(SecuritySolutionsAPI.SecuritySolutionsOperationGroup.list, "!csharp");
 @@scope(SecuritySolutionsAPI.AllowedConnectionsOperationGroup.list, "!csharp");
-@@scope(MdeOnboardingAPI.MdeOnboardings.list, "!csharp");
 @@scope(SecuritySolutionsAPI.TopologyOperationGroup.list, "!csharp");
+
+// MDE onboarding is modeled as a singleton resource in the C# SDK, so avoid generating a list API.
+@@scope(MdeOnboardingAPI.MdeOnboardings.list, "!csharp");
+
+// Operation status was not exposed by the previous C# generator and is excluded for compatibility.
 @@scope(OperationsAPI.OperationStatusesOperationGroup.get, "!csharp");
 
 // C# legacy resource hierarchy customizations.
