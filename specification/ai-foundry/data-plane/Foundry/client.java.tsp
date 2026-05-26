@@ -204,6 +204,34 @@ namespace Azure.AI.Projects;
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
 
+// OpenAI de-dup: suppress ComparisonFilter & CompoundFilter (and their anonymous
+// enum types FileSearchToolFiltersType / FileSearchToolFiltersType1) in favour of
+// the equivalent openai-java models.
+@@alternateType(OpenAI.ComparisonFilter,
+  {
+    identity: "com.openai.models.ComparisonFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.CompoundFilter,
+  {
+    identity: "com.openai.models.CompoundFilter",
+  },
+  "java"
+);
+
+// GrammarSyntax1 → expandable GrammarSyntax enum
+// The OpenAI TypeSpec names this enum "GrammarSyntax1"; replace with an open union
+// so it generates as the extensible "GrammarSyntax" string enum in Java.
+union GrammarSyntaxExpandable {
+  string,
+  lark: "lark",
+  regex: "regex",
+}
+
+@@clientName(GrammarSyntaxExpandable, "GrammarSyntax", "java");
+@@alternateType(OpenAI.GrammarSyntax1, GrammarSyntaxExpandable, "java");
+
 @@alternateType(DayOfWeek,
   {
     identity: "java.time.DayOfWeek",
