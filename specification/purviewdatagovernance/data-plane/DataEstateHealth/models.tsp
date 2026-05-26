@@ -517,16 +517,3 @@ model NetworkProperties {
   @doc("Whether the endpoint is marked for deletion.")
   markedForDeletion?: boolean;
 }
-
-// ============================================================================
-// Status Palette Models
-// ============================================================================
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible status palette properties."
-@doc("A status palette resource for controls.")
-model StatusPalette {
-  @doc("The unique identifier of the status palette.")
-  id?: string;
-
-  ...Record<unknown>;
-}

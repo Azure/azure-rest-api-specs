@@ -423,63 +423,6 @@ interface Settings {
 }
 
 // ============================================================================
-// Status Palettes
-// ============================================================================
-
-@doc("Operations for managing control status palettes.")
-interface StatusPalettes {
-  @doc("List all status palettes.")
-  @route("/controls/statusPalette")
-  @get
-  list(...ApiVersionParameter): StatusPaletteListResponse | ErrorResponse;
-
-  @doc("Create a new status palette.")
-  @route("/controls/statusPalette")
-  @post
-  create(...ApiVersionParameter, @body body: StatusPalette):
-    | Created201Response<StatusPalette>
-    | ErrorResponse;
-
-  @doc("Get a status palette by its unique identifier.")
-  @route("/controls/statusPalette/{id}")
-  @get
-  get(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the status palette.")
-    @path
-    @maxLength(256)
-    id: string,
-  ): StatusPaletteResponse | ErrorResponse;
-
-  @doc("Update a status palette by its unique identifier.")
-  @route("/controls/statusPalette/{id}")
-  @put
-  update(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the status palette.")
-    @path
-    @maxLength(256)
-    id: string,
-
-    @body body: StatusPalette,
-  ): StatusPaletteResponse | ErrorResponse;
-
-  @doc("Delete a status palette by its unique identifier.")
-  @route("/controls/statusPalette/{id}")
-  @delete
-  delete(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the status palette.")
-    @path
-    @maxLength(256)
-    id: string,
-  ): void | ErrorResponse;
-}
-
-// ============================================================================
 // Response Type Models (named to avoid anonymous types in swagger)
 // ============================================================================
 
@@ -531,11 +474,3 @@ model DataAssetHealthScoreListResponse {
 
 alias StorageConfigResponse = StorageConfig;
 alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for status palettes."
-@doc("Paged collection of status palette results.")
-model StatusPaletteListResponse {
-  ...PagedResults<StatusPalette>;
-}
-
-alias StatusPaletteResponse = StatusPalette;
