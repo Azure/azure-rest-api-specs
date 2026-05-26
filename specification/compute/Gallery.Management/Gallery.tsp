@@ -167,3 +167,59 @@ interface Galleries {
 @@doc(Galleries.gallerySharingProfileUpdate::parameters.body,
   "Parameters supplied to the update gallery sharing profile."
 );
+
+/**
+ * Permanently delete a soft-deleted artifact version in the gallery.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+@added(Versions.v2026_03_03)
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/softdeletedartifacttypes/{artifactType}/artifacts/{artifactName}/versions/{artifactVersionName}")
+@delete
+@operationId("SoftDeletedResource_Delete")
+@tag("Galleries")
+op deleteSoftDeletedArtifactVersion(
+  /**
+   * The ID of the target subscription.
+   */
+  @path subscriptionId: string,
+
+  /**
+   * The name of the resource group.
+   */
+  @path resourceGroupName: string,
+
+  /**
+   * The name of the Shared Image Gallery.
+   */
+  @path
+  @pattern("^[^_\\W][\\w-._]{0,79}(?<![-.])$")
+  galleryName: string,
+
+  /**
+   * The type of the soft-deleted artifact, such as Images.
+   */
+  @path
+  @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
+  artifactType: string,
+
+  /**
+   * The name of the soft-deleted artifact. If artifact type is Images, then this should be the gallery image name.
+   */
+  @path
+  @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
+  artifactName: string,
+
+  /**
+   * The version name of the soft-deleted artifact to be permanently deleted.
+   */
+  @path
+  @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
+  artifactVersionName: string,
+
+  /**
+   * The API version to use for this operation.
+   */
+  @query("api-version") apiVersion: string,
+): ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse;

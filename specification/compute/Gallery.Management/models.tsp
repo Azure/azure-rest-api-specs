@@ -530,6 +530,12 @@ model SoftDeletePolicy {
    * Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time.
    */
   isSoftDeleteEnabled?: boolean;
+
+  /**
+   * The number of days soft-deleted resources are retained before being permanently deleted.
+   */
+  @added(Versions.v2026_03_03)
+  retentionPeriodInDays?: int32;
 }
 
 /**
