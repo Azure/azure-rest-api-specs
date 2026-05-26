@@ -30,60 +30,6 @@ model Accepted202Response<T> {
 }
 
 // ============================================================================
-// Actions
-// ============================================================================
-
-@doc("Operations for managing data health actions.")
-interface Actions {
-  @doc("Query actions with filters and pagination.")
-  @route("/actions/query")
-  @post
-  query(...ApiVersionParameter, @body body: ActionQueryRequest):
-    | ActionQueryResponse
-    | ErrorResponse;
-
-  @doc("Query actions grouped by a specified field.")
-  @route("/actions/grouped")
-  @post
-  queryGrouped(...ApiVersionParameter, @body body: ActionGroupedRequest):
-    | GroupedActionsResponse
-    | ErrorResponse;
-
-  @doc("Get an action by its unique identifier.")
-  @route("/actions/{actionId}")
-  @get
-  get(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the action.")
-    @path
-    @maxLength(256)
-    actionId: string,
-  ): ActionResponse | ErrorResponse;
-
-  @doc("Update an action by its unique identifier.")
-  @route("/actions/{actionId}")
-  @put
-  update(
-    ...ApiVersionParameter,
-
-    @doc("The unique identifier of the action.")
-    @path
-    @maxLength(256)
-    actionId: string,
-
-    @body body: Action,
-  ): ActionResponse | ErrorResponse;
-
-  @doc("Get faceted aggregations for actions based on filters.")
-  @route("/actions/facets")
-  @post
-  getFacets(...ApiVersionParameter, @body body: ActionFacetRequest):
-    | FacetResponse
-    | ErrorResponse;
-}
-
-// ============================================================================
 // Analytics Schedule
 // ============================================================================
 
@@ -330,14 +276,6 @@ interface Settings {
 // Response Type Models (named to avoid anonymous types in swagger)
 // ============================================================================
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for actions."
-@doc("Paged collection of action results.")
-model ActionQueryResponse {
-  ...PagedResults<Action>;
-}
-
-alias GroupedActionsResponse = GroupedActions[];
-alias ActionResponse = Action;
 alias AnalyticsScheduleResponse = DHAnalyticsScheduleRequest;
 alias AnalyticsJobLogsResponse = DEHAnalyticsJobLogs[];
 

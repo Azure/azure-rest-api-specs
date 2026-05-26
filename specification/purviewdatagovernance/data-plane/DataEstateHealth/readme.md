@@ -23,9 +23,9 @@ UX consumers actually call against the Data Estate Health service today.
 
 | UX repository | api-version used for current spec endpoints |
 | --- | --- |
-| UX-Extension-DataEstateHealth | `2024-02-01-preview` (all DEH spec calls) |
-| UX-Extension-Catalog | `2024-02-01-preview` (for `/actions/query`, `/settings/storageConfig`, `/settings/storageConfig/connectivity`, `/settings/mpe*`, `/analytics/schedule*`) |
-| UX-Extension-DataQuality | `2024-02-01-preview` (for `/actions/query`, `GET /settings/storageConfig`) |
+| UX-Extension-DataEstateHealth | `2024-02-01-preview` (all DEH spec calls; `/reporting/*` streaming endpoints, which are not in this spec, use `2025-10-01-preview`) |
+| UX-Extension-Catalog | `2024-02-01-preview` (for `/settings/storageConfig`, `/settings/storageConfig/connectivity`, `/settings/mpe*`, `/analytics/schedule*`) |
+| UX-Extension-DataQuality | `2024-02-01-preview` (for `GET /settings/storageConfig`) |
 
 Service code (`ServiceVersion.cs` in the DataEstateHealth ADO repo) defines the following
 preview labels: V1 = `2023-10-01-preview`, V2 = `2024-02-01-preview`, V3 = `2025-10-01-preview`.
