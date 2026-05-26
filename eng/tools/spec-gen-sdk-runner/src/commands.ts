@@ -322,7 +322,21 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
 
-    if (tool === "azsdk-cli" && changedSpec.typespecProject) {
+    // Rust only supports TypeSpec; skip generation for OpenAPI (readme.md) specs
+    if (
+      commandInput.sdkLanguage === "azure-sdk-for-rust" &&
+      !changedSpec.typespecProject &&
+      changedSpec.readmeMd
+    ) {
+      logMessage(
+        `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
+        LogLevel.Warn,
+      );
+      executionReport = {
+        packages: [],
+        executionResult: "succeeded",
+      };
+    } else if (tool === "azsdk-cli" && changedSpec.typespecProject) {
       // azsdk-cli path for TypeSpec specs
       try {
         await resetGitRepo(commandInput.localSdkRepoPath);
