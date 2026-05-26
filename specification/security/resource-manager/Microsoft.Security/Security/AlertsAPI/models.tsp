@@ -446,6 +446,7 @@ model AlertEntity {
   /**
    * Type of entity
    */
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
@@ -458,6 +459,7 @@ model AlertPropertiesSupportingEvidence {
   /**
    * Type of the supportingEvidence
    */
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 

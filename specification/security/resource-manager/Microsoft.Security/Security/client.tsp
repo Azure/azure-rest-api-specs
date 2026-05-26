@@ -119,8 +119,7 @@ op privateLinksGetCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.get,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.get,
   privateLinksGetCustomization,
   "!python,!java,!javascript"
 );
@@ -138,21 +137,16 @@ op privateLinksCreateCustomization(
   privateLinkName: `private-link-parameters`,
 
   resource: PrivateLinksAPI.PrivateLinkResource,
-):
-  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
-  | ArmResourceCreatedResponse<
-      PrivateLinksAPI.PrivateLinkResource,
-      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ErrorResponse;
+): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
+  PrivateLinksAPI.PrivateLinkResource,
+  ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
+    Azure.Core.Foundations.RetryAfterHeader
+> | ErrorResponse;
 
-@@clientName(
-  privateLinksCreateCustomization::parameters.resource,
+@@clientName(privateLinksCreateCustomization::parameters.resource,
   "privateLink"
 );
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.create,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.create,
   privateLinksCreateCustomization,
   "!python,!java,!javascript"
 );
@@ -172,12 +166,10 @@ op privateLinksUpdateCustomization(
   properties: PrivateLinksAPI.PrivateLinkUpdate,
 ): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
 
-@@clientName(
-  privateLinksUpdateCustomization::parameters.properties,
+@@clientName(privateLinksUpdateCustomization::parameters.properties,
   "privateLink"
 );
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.update,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.update,
   privateLinksUpdateCustomization,
   "!python,!java,!javascript"
 );
@@ -194,14 +186,10 @@ op privateLinksDeleteCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   privateLinkName: `private-link-parameters`,
-):
-  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | ArmDeletedNoContentResponse
-  | ErrorResponse;
+): ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+  Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.delete,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.delete,
   privateLinksDeleteCustomization,
   "!python,!java,!javascript"
 );
@@ -220,8 +208,7 @@ op privateLinksHeadCustomization(
   privateLinkName: `private-link-parameters`,
 ): OkResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.head,
+@@Azure.ClientGenerator.Core.override(PrivateLinkResources.head,
   privateLinksHeadCustomization,
   "!python,!java,!javascript"
 );
@@ -237,12 +224,9 @@ op privateEndpointConnectionsListCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   privateLinkName: `private-link-parameters`,
-):
-  | ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>>
-  | ErrorResponse;
+): ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.list,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.list,
   privateEndpointConnectionsListCustomization,
   "!python,!java,!javascript"
 );
@@ -262,8 +246,7 @@ op privateEndpointConnectionsGetCustomization(
   privateEndpointConnectionName: string,
 ): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.get,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
   "!python,!java,!javascript"
 );
@@ -284,22 +267,17 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
   privateEndpointConnectionName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: PrivateLinksAPI.PrivateEndpointConnection,
-):
-  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
-  | ArmResourceCreatedResponse<
-      PrivateLinksAPI.PrivateLinkResource,
-      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ErrorResponse;
+): ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource> | ArmResourceCreatedResponse<
+  PrivateLinksAPI.PrivateLinkResource,
+  ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
+    Azure.Core.Foundations.RetryAfterHeader
+> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.createOrUpdate,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.createOrUpdate,
   privateEndpointConnectionsCreateOrUpdateCustomization,
   "!python,!java,!javascript"
 );
-@@clientName(
-  privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
+@@clientName(privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
   "privateEndpointConnection"
 );
 
@@ -318,14 +296,10 @@ op privateEndpointConnectionsDeleteCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointConnectionName: string,
-):
-  | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | ArmDeletedNoContentResponse
-  | ErrorResponse;
+): ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+  Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.delete,
+@@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
   "!python,!java,!javascript"
 );
@@ -343,8 +317,7 @@ op privateLinkResourcesListCustomization(
   privateLinkName: `private-link-parameters`,
 ): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkGroupResources.list,
+@@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.list,
   privateLinkResourcesListCustomization,
   "!python,!java,!javascript"
 );
@@ -365,93 +338,93 @@ op privateLinkResourcesGetCustomization(
   groupId: string,
 ): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
 
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkGroupResources.get,
+@@Azure.ClientGenerator.Core.override(PrivateLinkGroupResources.get,
   privateLinkResourcesGetCustomization,
   "!python,!java,!javascript"
 );
-@@clientName(
-  SecurityStandardsAPI.SecurityStandard,
+@@clientName(SecurityStandardsAPI.SecurityStandard,
   "ArmSecurityStandard",
   "go"
 );
 @@clientName(SecurityOperatorsAPI.SecurityOperator, "OperatorResource", "go");
-@@clientLocation(
-  SecurityStandards.createOrUpdate,
+@@clientLocation(SecurityStandards.createOrUpdate,
   "ArmSecurityStandards",
   "go"
 );
 @@clientLocation(SecurityStandards.get, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.delete, "ArmSecurityStandards", "go");
 @@clientLocation(SecurityStandards.list, "ArmSecurityStandards", "go");
-@@clientName(
-  SecurityStandardsAPI.SecurityStandardProperties,
+@@clientName(SecurityStandardsAPI.SecurityStandardProperties,
   "ArmSecurityStandardProperties",
   "go"
 );
-@@usage(
-  IoTSecurityAPI.CustomAlertRule,
+@@usage(IoTSecurityAPI.CustomAlertRule,
   Usage.input | Usage.output,
   "go,javascript"
 );
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "java"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
-  "java,javascript,go,csharp"
+  "java,javascript,go"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
-  "java,go,csharp"
+  "java,go"
 );
 @@clientName(StandardsAPI.StandardList, "ArmSecurityStandardList", "go");
 
-@@clientName(
-  IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_ACRAuthentication,
   "IoTAcrauthentication",
   "javascript,go"
 );
-@@clientName(
-  IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_DenyAll,
   "IoTIpfilterDenyAll",
   "javascript,go"
 );
-@@clientName(
-  IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
+@@clientName(IoTSecurityAPI.RecommendationType.IoT_IPFilter_PermissiveRule,
   "IoTIpfilterPermissiveRule",
   "javascript,go"
 );
 @@clientName(SubAssessmentsAPI.CVE, "Cve", "javascript,java");
 
-@@clientName(
-  SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
+@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemDiscovery,
   "DefenderCspmAwsOfferingCiemDiscovery",
   "go,javascript,python,java"
 );
 
-@@clientName(
-  SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
+@@clientName(SecurityConnectorsAPI.DefenderCspmAwsOfferingCiemCiemOidc,
   "DefenderCspmAwsOfferingCiemOidc",
   "go,javascript,python,java"
 );
 
-@@clientName(Common.ResourceDetails, "CommonResourceDetails", "python,go");
-@@clientName(HealthReportsAPI.status, "HealthReportStatus", "csharp");
+@@clientName(Common.ResourceDetails, "CommonResourceDetails", "python");
 @@clientName(HealthReportsAPI.status, "StatusAutoGenerated", "python");
+
+// C# MPG migration compatibility customizations are grouped by purpose to make
+// migration review easier.
+
+// C# common/shared model names.
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+  "ArmActionType",
+  "csharp"
+);
+@@clientName(HealthReportsAPI.status, "HealthReportStatus", "csharp");
 @@clientName(AutomationsAPI.Operator.Equals, "EqualsValue", "csharp");
 @@clientName(SubAssessmentsAPI.SecuritySubAssessmentProperties.id,
   "VulnerabilityId",
   "csharp"
 );
 
-// C# MPG migration compatibility: preserve previous GA resource type names so
-// generated ARM resource, collection, extension, and mocking surfaces line up.
+// C# resource type names: preserve previous GA resource, collection, extension,
+// and mocking surfaces.
 @@clientName(IoTSecurityAPI.IoTSecuritySolutionModel,
   "IotSecuritySolution",
   "csharp"
@@ -525,10 +498,7 @@ op privateLinkResourcesGetCustomization(
   "csharp"
 );
 @@clientName(AssessmentAPI.Threats, "SecurityThreat", "csharp");
-@@clientName(AssessmentAPI.AssessmentType,
-  "SecurityAssessmentType",
-  "csharp"
-);
+@@clientName(AssessmentAPI.AssessmentType, "SecurityAssessmentType", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPartnerData,
   "SecurityAssessmentMetadataPartner",
   "csharp"
@@ -547,11 +517,14 @@ op privateLinkResourcesGetCustomization(
   "JitNetworkAccessPortStatusReason",
   "csharp"
 );
-@@alternateType(
-  SecuritySolutionsAPI.JitNetworkAccessPortRule.maxRequestAccessDuration,
+
+// C# scalar type mappings.
+@@alternateType(SecuritySolutionsAPI.JitNetworkAccessPortRule.maxRequestAccessDuration,
   duration,
   "csharp"
 );
+
+// C# model and enum names.
 @@clientName(SubAssessmentsAPI.CVSS, "SecurityCvss", "csharp");
 @@clientName(SubAssessmentsAPI.CVE, "SecurityCve", "csharp");
 @@clientName(SqlVulnerabilityAssessmentsAPI.Baseline,
@@ -566,10 +539,7 @@ op privateLinkResourcesGetCustomization(
   "SqlVulnerabilityAssessmentScanProperties",
   "csharp"
 );
-@@clientName(Common.State,
-  "SecurityAlertNotificationByRoleState",
-  "csharp"
-);
+@@clientName(Common.State, "SecurityAlertNotificationByRoleState", "csharp");
 @@clientName(AutomationsAPI.SecurityContactRole,
   "SecurityAlertReceivingRole",
   "csharp"
@@ -598,26 +568,40 @@ op privateLinkResourcesGetCustomization(
   "SqlVulnerabilityAssessmentScanState",
   "csharp"
 );
+@@clientName(AlertsSuppressionRulesAPI.ScopeElement,
+  "SuppressionAlertsScopeElement",
+  "csharp"
+);
+
+// C# operation names and operations intentionally excluded from generation.
 @@clientName(SecuritySolutionsAPI.DiscoveredSecuritySolutionsOperationGroup.list,
   "GetDiscoveredSecuritySolutions",
   "csharp"
 );
-@@scope(SecuritySolutionsAPI.DiscoveredSecuritySolutionsOperationGroup.list, "!csharp");
+@@scope(SecuritySolutionsAPI.DiscoveredSecuritySolutionsOperationGroup.list,
+  "!csharp"
+);
 @@clientName(SecuritySolutionsAPI.ExternalSecuritySolutionsOperationGroup.list,
   "GetExternalSecuritySolutions",
   "csharp"
 );
-@@scope(SecuritySolutionsAPI.ExternalSecuritySolutionsOperationGroup.list, "!csharp");
+@@scope(SecuritySolutionsAPI.ExternalSecuritySolutionsOperationGroup.list,
+  "!csharp"
+);
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list,
   "GetJitNetworkAccessPolicies",
   "csharp"
 );
-@@scope(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list, "!csharp");
+@@scope(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list,
+  "!csharp"
+);
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
   "GetJitNetworkAccessPolicies",
   "csharp"
 );
-@@scope(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup, "!csharp");
+@@scope(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
+  "!csharp"
+);
 @@clientName(SecuritySolutionsAPI.SecuritySolutionsOperationGroup.list,
   "GetSecuritySolutions",
   "csharp"
@@ -715,6 +699,8 @@ op privateLinkResourcesGetCustomization(
   "GetAvailableGitLabGroups",
   "csharp"
 );
+
+// C# legacy resource hierarchy customizations.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResourceData for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IoTSecurityAPI.IoTSecuritySolutionModel,
   Azure.ResourceManager.Foundations.TrackedResource,
@@ -734,10 +720,10 @@ op privateLinkResourcesGetCustomization(
 // C# compatibility replacement: @@hierarchyBuilding currently crashes the
 // management generator for these legacy custom-resource shapes, so use
 // @@alternateType against replacement models that carry the desired hierarchy.
-model CSharpExternalSecuritySolutionReplacement extends Azure.ResourceManager.Foundations.Resource {
+model CSharpExternalSecuritySolutionReplacement
+  extends Azure.ResourceManager.Foundations.Resource {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Matches the original legacy custom resource shape."
   properties?: unknown;
-
   kind?: SecuritySolutionsAPI.ExternalSecuritySolutionKind;
 
   @visibility(Lifecycle.Read)
@@ -749,7 +735,8 @@ model CSharpExternalSecuritySolutionReplacement extends Azure.ResourceManager.Fo
 // the GA inheritance chain through ExternalSecuritySolution.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
-model CSharpCefExternalSecuritySolutionReplacement extends CSharpExternalSecuritySolutionReplacement {
+model CSharpCefExternalSecuritySolutionReplacement
+  extends CSharpExternalSecuritySolutionReplacement {
   properties?: SecuritySolutionsAPI.CefSolutionProperties;
   kind: "CEF";
 }
@@ -759,7 +746,8 @@ model CSharpCefExternalSecuritySolutionReplacement extends CSharpExternalSecurit
 // the GA inheritance chain through ExternalSecuritySolution.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
-model CSharpAtaExternalSecuritySolutionReplacement extends CSharpExternalSecuritySolutionReplacement {
+model CSharpAtaExternalSecuritySolutionReplacement
+  extends CSharpExternalSecuritySolutionReplacement {
   properties?: SecuritySolutionsAPI.AtaSolutionProperties;
   kind: "ATA";
 }
@@ -769,7 +757,8 @@ model CSharpAtaExternalSecuritySolutionReplacement extends CSharpExternalSecurit
 // the GA inheritance chain through ExternalSecuritySolution.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
-model CSharpAadExternalSecuritySolutionReplacement extends CSharpExternalSecuritySolutionReplacement {
+model CSharpAadExternalSecuritySolutionReplacement
+  extends CSharpExternalSecuritySolutionReplacement {
   properties?: SecuritySolutionsAPI.AadSolutionProperties;
   kind: "AAD";
 }
@@ -779,7 +768,8 @@ model CSharpAadExternalSecuritySolutionReplacement extends CSharpExternalSecurit
 // @@alternateType against a replacement model with a TrackedResource base.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the original service-defined shape."
-model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceManager.Foundations.Resource {
+model CSharpSecuritySolutionsReferenceDataReplacement
+  extends Azure.ResourceManager.Foundations.Resource {
   ...SecuritySolutionsAPI.Location;
   properties: SecuritySolutionsAPI.securitySolutionsReferenceDataProperties;
 }
@@ -787,7 +777,8 @@ model CSharpSecuritySolutionsReferenceDataReplacement extends Azure.ResourceMana
 // C# compatibility replacement: keep the GA property name FirstEvaluatedOn while
 // preserving the service wire name firstEvaluationDate.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model preserves the legacy .NET model hierarchy and property names."
-model CSharpSecurityAssessmentStatusResult extends AssessmentAPI.AssessmentStatus {
+model CSharpSecurityAssessmentStatusResult
+  extends AssessmentAPI.AssessmentStatus {
   /**
    * The time that the assessment was created and first evaluated. Returned as UTC time in ISO 8601 format
    */
@@ -803,110 +794,295 @@ model CSharpSecurityAssessmentStatusResult extends AssessmentAPI.AssessmentStatu
   statusChangeOn?: utcDateTime;
 }
 
-@@clientName(CSharpExternalSecuritySolutionReplacement, "ExternalSecuritySolution", "csharp");
-@@clientName(CSharpCefExternalSecuritySolutionReplacement, "CefExternalSecuritySolution", "csharp");
-@@clientName(CSharpAtaExternalSecuritySolutionReplacement, "AtaExternalSecuritySolution", "csharp");
-@@clientName(CSharpAadExternalSecuritySolutionReplacement, "AadExternalSecuritySolution", "csharp");
-@@clientName(CSharpSecuritySolutionsReferenceDataReplacement, "SecuritySolutionsReferenceData", "csharp");
-@@clientName(CSharpSecurityAssessmentStatusResult, "SecurityAssessmentStatusResult", "csharp");
-@@clientName(SecuritySolutionsAPI.ConnectableResource, "ConnectableResourceInfo", "csharp");
-@@clientName(SecuritySolutionsAPI.ConnectedResource, "ConnectedResourceInfo", "csharp");
-@@usage(
-  CSharpSecurityAssessmentStatusResult,
+@@clientName(CSharpExternalSecuritySolutionReplacement,
+  "ExternalSecuritySolution",
+  "csharp"
+);
+@@clientName(CSharpCefExternalSecuritySolutionReplacement,
+  "CefExternalSecuritySolution",
+  "csharp"
+);
+@@clientName(CSharpAtaExternalSecuritySolutionReplacement,
+  "AtaExternalSecuritySolution",
+  "csharp"
+);
+@@clientName(CSharpAadExternalSecuritySolutionReplacement,
+  "AadExternalSecuritySolution",
+  "csharp"
+);
+@@clientName(CSharpSecuritySolutionsReferenceDataReplacement,
+  "SecuritySolutionsReferenceData",
+  "csharp"
+);
+@@clientName(CSharpSecurityAssessmentStatusResult,
+  "SecurityAssessmentStatusResult",
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.ConnectableResource,
+  "ConnectableResourceInfo",
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.ConnectedResource,
+  "ConnectedResourceInfo",
+  "csharp"
+);
+@@usage(CSharpSecurityAssessmentStatusResult,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@alternateType(SecuritySolutionsAPI.ConnectableResource.id, armResourceIdentifier, "csharp");
-@@alternateType(SecuritySolutionsAPI.ConnectedResource.connectedResourceId, armResourceIdentifier, "csharp");
-@@alternateType(AssessmentAPI.OnPremiseResourceDetailsProperties.vmuuid, uuid, "csharp");
-@@alternateType(AssessmentAPI.AssessmentStatusResponse, CSharpSecurityAssessmentStatusResult, "csharp");
-@@alternateType(SecuritySolutionsAPI.ExternalSecuritySolution, CSharpExternalSecuritySolutionReplacement, "csharp");
-@@alternateType(SecuritySolutionsAPI.CefExternalSecuritySolution, CSharpCefExternalSecuritySolutionReplacement, "csharp");
-@@alternateType(SecuritySolutionsAPI.AtaExternalSecuritySolution, CSharpAtaExternalSecuritySolutionReplacement, "csharp");
-@@alternateType(SecuritySolutionsAPI.AadExternalSecuritySolution, CSharpAadExternalSecuritySolutionReplacement, "csharp");
-@@alternateType(SecuritySolutionsAPI.securitySolutionsReferenceData, CSharpSecuritySolutionsReferenceDataReplacement, "csharp");
+@@alternateType(SecuritySolutionsAPI.ConnectableResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SecuritySolutionsAPI.ConnectedResource.connectedResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AssessmentAPI.OnPremiseResourceDetailsProperties.vmuuid,
+  uuid,
+  "csharp"
+);
+@@alternateType(AssessmentAPI.AssessmentStatusResponse,
+  CSharpSecurityAssessmentStatusResult,
+  "csharp"
+);
+@@alternateType(SecuritySolutionsAPI.ExternalSecuritySolution,
+  CSharpExternalSecuritySolutionReplacement,
+  "csharp"
+);
+@@alternateType(SecuritySolutionsAPI.CefExternalSecuritySolution,
+  CSharpCefExternalSecuritySolutionReplacement,
+  "csharp"
+);
+@@alternateType(SecuritySolutionsAPI.AtaExternalSecuritySolution,
+  CSharpAtaExternalSecuritySolutionReplacement,
+  "csharp"
+);
+@@alternateType(SecuritySolutionsAPI.AadExternalSecuritySolution,
+  CSharpAadExternalSecuritySolutionReplacement,
+  "csharp"
+);
+@@alternateType(SecuritySolutionsAPI.securitySolutionsReferenceData,
+  CSharpSecuritySolutionsReferenceDataReplacement,
+  "csharp"
+);
 @@clientName(SecuritySolutionsAPI.ExternalSecuritySolutions.listByHomeRegion,
   "GetExternalSecuritySolutionsByHomeRegion",
   "csharp"
 );
 
-@@clientName(AutomationsAPI.AutomationValidationStatus, "SecurityAutomationValidationStatus", "csharp");
-@@clientName(AutomationsAPI.AutomationUpdateModel, "SecurityAutomationPatch", "csharp");
+// C# model and enum names.
+@@clientName(AutomationsAPI.AutomationValidationStatus,
+  "SecurityAutomationValidationStatus",
+  "csharp"
+);
+@@clientName(AutomationsAPI.AutomationUpdateModel,
+  "SecurityAutomationPatch",
+  "csharp"
+);
 @@clientName(Common.Tags, "SecurityCenterPatchTags", "csharp");
-@@clientName(AssessmentAPI.AssessmentStatus, "SecurityAssessmentStatus", "csharp");
-@@clientName(AssessmentAPI.AssessmentStatusCode, "SecurityAssessmentStatusCode", "csharp");
-@@clientName(ComplianceResultsAPI.ResourceStatus, "SecurityAssessmentResourceStatus", "csharp");
-@@clientName(SecurityStandardsAPI.SeverityEnum, "CustomRecommendationSeverity", "csharp");
-@@clientName(SecurityStandardsAPI.SecurityIssue, "CustomRecommendationSecurityIssue", "csharp");
-@@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponse, "SecurityAssessmentMetadataPropertiesResult", "csharp");
-@@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates, "SecurityAssessmentPublishDates", "csharp");
-@@clientName(AssessmentAPI.SecurityAssessmentPartnerData, "SecurityAssessmentPartnerInfo", "csharp");
-@@clientName(SecurityConnectorsDevOpsAPI.AzureDevOpsOrgListResponse, "AzureDevOpsOrgListResult", "csharp");
-@@clientName(SecurityConnectorsDevOpsAPI.GitHubOwnerListResponse, "GitHubOwnerListResult", "csharp");
-@@clientName(SecurityConnectorsDevOpsAPI.GitLabGroupListResponse, "GitLabGroupListResult", "csharp");
-@@clientName(SecurityConnectorsDevOpsAPI.IssueCreationRequest, "IssueCreationContent", "csharp");
-@@clientName(SecuritySolutionsAPI.JitNetworkAccessPolicyInitiateRequest, "JitNetworkAccessPolicyInitiateContent", "csharp");
-@@clientName(SecuritySolutionsAPI.JitNetworkAccessRequest, "JitNetworkAccessContent", "csharp");
-@@clientName(TasksAPI.SecurityTaskProperties, "SecurityTaskPropertiesGenerated", "csharp");
-@@clientName(TasksAPI.SecurityTaskParameters, "SecurityTaskProperties", "csharp");
-@@clientName(SensitivitySettingsAPI.UpdateSensitivitySettingsRequest, "UpdateSensitivitySettingsContent", "csharp");
-@@clientName(SecurityConnectorsAPI.EnvironmentData, "SecurityConnectorEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.AwsEnvironmentData, "AwsEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.GcpOrganizationalData, "GcpOrganizationalInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.GcpProjectEnvironmentData, "GcpProjectEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.GithubScopeEnvironmentData, "GithubScopeEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.AzureDevOpsScopeEnvironmentData, "AzureDevOpsScopeEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.GitlabScopeEnvironmentData, "GitlabScopeEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.DockerHubEnvironmentData, "DockerHubEnvironmentInfo", "csharp");
-@@clientName(SecurityConnectorsAPI.JFrogEnvironmentData, "JFrogEnvironmentInfo", "csharp");
-@@clientName(GovernanceAPI.GovernanceAssignmentAdditionalData, "GovernanceAssignmentAdditionalInfo", "csharp");
-@@clientName(SecurityStandardsAPI.StandardAssignmentPropertiesExemptionData, "StandardAssignmentExemptionInfo", "csharp");
-@@clientName(SecurityStandardsAPI.StandardAssignmentPropertiesAttestationData, "StandardAssignmentAttestationInfo", "csharp");
+@@clientName(AssessmentAPI.AssessmentStatus,
+  "SecurityAssessmentStatus",
+  "csharp"
+);
+@@clientName(AssessmentAPI.AssessmentStatusCode,
+  "SecurityAssessmentStatusCode",
+  "csharp"
+);
+@@clientName(ComplianceResultsAPI.ResourceStatus,
+  "SecurityAssessmentResourceStatus",
+  "csharp"
+);
+@@clientName(SecurityStandardsAPI.SeverityEnum,
+  "CustomRecommendationSeverity",
+  "csharp"
+);
+@@clientName(SecurityStandardsAPI.SecurityIssue,
+  "CustomRecommendationSecurityIssue",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponse,
+  "SecurityAssessmentMetadataPropertiesResult",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates,
+  "SecurityAssessmentPublishDates",
+  "csharp"
+);
+@@clientName(AssessmentAPI.SecurityAssessmentPartnerData,
+  "SecurityAssessmentPartnerInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsDevOpsAPI.AzureDevOpsOrgListResponse,
+  "AzureDevOpsOrgListResult",
+  "csharp"
+);
+@@clientName(SecurityConnectorsDevOpsAPI.GitHubOwnerListResponse,
+  "GitHubOwnerListResult",
+  "csharp"
+);
+@@clientName(SecurityConnectorsDevOpsAPI.GitLabGroupListResponse,
+  "GitLabGroupListResult",
+  "csharp"
+);
+@@clientName(SecurityConnectorsDevOpsAPI.IssueCreationRequest,
+  "IssueCreationContent",
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.JitNetworkAccessPolicyInitiateRequest,
+  "JitNetworkAccessPolicyInitiateContent",
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.JitNetworkAccessRequest,
+  "JitNetworkAccessContent",
+  "csharp"
+);
+@@clientName(TasksAPI.SecurityTaskProperties,
+  "SecurityTaskPropertiesGenerated",
+  "csharp"
+);
+@@clientName(TasksAPI.SecurityTaskParameters,
+  "SecurityTaskProperties",
+  "csharp"
+);
+@@clientName(SensitivitySettingsAPI.UpdateSensitivitySettingsRequest,
+  "UpdateSensitivitySettingsContent",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.EnvironmentData,
+  "SecurityConnectorEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.AwsEnvironmentData,
+  "AwsEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.GcpOrganizationalData,
+  "GcpOrganizationalInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.GcpProjectEnvironmentData,
+  "GcpProjectEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.GithubScopeEnvironmentData,
+  "GithubScopeEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.AzureDevOpsScopeEnvironmentData,
+  "AzureDevOpsScopeEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.GitlabScopeEnvironmentData,
+  "GitlabScopeEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.DockerHubEnvironmentData,
+  "DockerHubEnvironmentInfo",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.JFrogEnvironmentData,
+  "JFrogEnvironmentInfo",
+  "csharp"
+);
+@@clientName(GovernanceAPI.GovernanceAssignmentAdditionalData,
+  "GovernanceAssignmentAdditionalInfo",
+  "csharp"
+);
+@@clientName(SecurityStandardsAPI.StandardAssignmentPropertiesExemptionData,
+  "StandardAssignmentExemptionInfo",
+  "csharp"
+);
+@@clientName(SecurityStandardsAPI.StandardAssignmentPropertiesAttestationData,
+  "StandardAssignmentAttestationInfo",
+  "csharp"
+);
+
+// C# property and parameter names.
 @@clientName(TasksAPI.SecurityTaskParameters.name, "TaskName", "csharp");
-@@clientName(TasksAPI.SecurityTaskProperties.creationTimeUtc, "CreatedOn", "csharp");
-@@clientName(TasksAPI.SecurityTaskProperties.lastStateChangeTimeUtc, "LastStateChangedOn", "csharp");
-@@clientName(SecuritySolutionsAPI.ExternalSecuritySolution, "ExternalSecuritySolution", "csharp");
-@@clientName(SecurityConnectorsAPI.cloudOffering, "SecurityCenterCloudOffering", "csharp");
-@@clientName(SecurityConnectorsAPI.AwsOrganizationalData, "AwsOrganizationalInfo", "csharp");
+@@clientName(TasksAPI.SecurityTaskProperties.creationTimeUtc,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(TasksAPI.SecurityTaskProperties.lastStateChangeTimeUtc,
+  "LastStateChangedOn",
+  "csharp"
+);
+@@clientName(SecuritySolutionsAPI.ExternalSecuritySolution,
+  "ExternalSecuritySolution",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.cloudOffering,
+  "SecurityCenterCloudOffering",
+  "csharp"
+);
+@@clientName(SecurityConnectorsAPI.AwsOrganizationalData,
+  "AwsOrganizationalInfo",
+  "csharp"
+);
 @@clientName(Common.ResourceDetails, "SecurityCenterResourceDetails", "csharp");
-@@clientName(AlertsAPI.ResourceIdentifier, "SecurityAlertResourceIdentifier", "csharp");
+@@clientName(AlertsAPI.ResourceIdentifier,
+  "SecurityAlertResourceIdentifier",
+  "csharp"
+);
 @@clientName(AlertsAPI.AlertSeverity, "SecurityAlertSeverity", "csharp");
 @@clientName(AlertsAPI.Intent, "KillChainIntent", "csharp");
 @@clientName(AlertsAPI.AlertStatus, "SecurityAlertStatus", "csharp");
 @@clientName(AlertsAPI.AlertEntity, "SecurityAlertEntity", "csharp");
-@@clientName(AlertsAPI.AlertPropertiesSupportingEvidence, "SecurityAlertSupportingEvidence", "csharp");
-@@clientName(AlertsAPI.AlertEntity.type, "AlertEntityType", "csharp");
-@@clientName(AlertsAPI.AlertPropertiesSupportingEvidence.type, "SecurityAlertSupportingEvidenceType", "csharp");
-@@clientName(AlertsAPI.AlertSimulatorRequestProperties, "SecurityAlertSimulatorRequestProperties", "csharp");
-@@usage(
-  AlertsAPI.AlertPropertiesSupportingEvidence,
-  Usage.input | Usage.output,
+@@clientName(AlertsAPI.AlertPropertiesSupportingEvidence,
+  "SecurityAlertSupportingEvidence",
   "csharp"
 );
+@@clientName(AlertsAPI.AlertEntity.type, "AlertEntityType", "csharp");
+@@clientName(AlertsAPI.AlertPropertiesSupportingEvidence.type,
+  "SecurityAlertSupportingEvidenceType",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertSimulatorRequestProperties,
+  "SecurityAlertSimulatorRequestProperties",
+  "csharp"
+);
+@@usage(AlertsAPI.AlertPropertiesSupportingEvidence, Usage.input, "csharp");
 @@clientName(AlertsAPI.AlertProperties.startTimeUtc, "StartOn", "csharp");
 @@clientName(AlertsAPI.AlertProperties.endTimeUtc, "EndOn", "csharp");
-@@clientName(AlertsAPI.AlertProperties.timeGeneratedUtc, "GeneratedOn", "csharp");
-@@clientName(AlertsAPI.AlertProperties.processingEndTimeUtc, "ProcessingEndOn", "csharp");
+@@clientName(AlertsAPI.AlertProperties.timeGeneratedUtc,
+  "GeneratedOn",
+  "csharp"
+);
+@@clientName(AlertsAPI.AlertProperties.processingEndTimeUtc,
+  "ProcessingEndOn",
+  "csharp"
+);
 @@alternateType(AlertsAPI.AlertProperties.alertUri, url, "csharp");
-@@clientName(AssessmentAPI.SecurityAssessmentMetadataProperties.preview, "IsPreview", "csharp");
+@@clientName(AssessmentAPI.SecurityAssessmentMetadataProperties.preview,
+  "IsPreview",
+  "csharp"
+);
 @@clientName(AssessmentAPI.Tactics, "SecurityAssessmentTactic", "csharp");
 @@clientName(AssessmentAPI.Techniques, "SecurityAssessmentTechnique", "csharp");
-@@clientName(SubAssessmentsAPI.AdditionalData, "SecuritySubAssessmentAdditionalInfo", "csharp");
-@@clientName(IoTSecurityAPI.TagsResource, "SecurityCenterTagsResourceInfo", "csharp");
+@@clientName(SubAssessmentsAPI.AdditionalData,
+  "SecuritySubAssessmentAdditionalInfo",
+  "csharp"
+);
+@@clientName(IoTSecurityAPI.TagsResource,
+  "SecurityCenterTagsResourceInfo",
+  "csharp"
+);
+
+// C# pageable operation customizations.
 @@markAsPageable(PricingsAPI.Pricings.list, "csharp");
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+
+// Other language customizations.
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
   "ArmActionType",
   "python,javascript"
 );
 @@clientName(AadConnectivityState, "AadConnectivityStateEnum", "python");
-@@clientName(
-  ExternalSecuritySolutionKind,
+@@clientName(ExternalSecuritySolutionKind,
   "ExternalSecuritySolutionKindEnum",
   "python"
 );
@@ -915,36 +1091,23 @@ model CSharpSecurityAssessmentStatusResult extends AssessmentAPI.AssessmentStatu
 @@clientName(OperationResultStatus, "OperationResult", "python");
 @@clientName(OperationResult, "OperationResultAutoGenerated", "python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  AdvancedThreatProtectionSettingNameAlias.settingName,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AdvancedThreatProtectionSettingNameAlias.settingName,
   "current",
   "python"
 );
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
-@clientName("AdvancedThreatProtectionSettingName", "csharp")
-union CSharpAdvancedThreatProtectionSettingName {
-  /** Current. */
-  Current: "current",
-}
-
-@@Azure.ClientGenerator.Core.alternateType(
-  AdvancedThreatProtectionSettingName,
-  CSharpAdvancedThreatProtectionSettingName,
-  "csharp"
+@@Azure.ClientGenerator.Core.alternateType(AdvancedThreatProtectionSettingNameAlias.settingName,
+  "current"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate",
   "python"
 );
-@@Azure.ClientGenerator.Core.alternateType(
-  JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
+@@Azure.ClientGenerator.Core.alternateType(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
   "default",
   "python"
 );
@@ -955,8 +1118,7 @@ union CSharpServerVulnerabilityAssessmentName {
   Default: "default",
 }
 
-@@Azure.ClientGenerator.Core.alternateType(
-  ServerVulnerabilityAssessmentName,
+@@Azure.ClientGenerator.Core.alternateType(ServerVulnerabilityAssessmentName,
   CSharpServerVulnerabilityAssessmentName,
   "csharp"
 );
@@ -1009,8 +1171,7 @@ op sqlVulnerabilityAssessmentScanResultsList(
   resourceId: string,
 ): ArmResponse<ScanResults> | Common.CloudError;
 
-@@override(
-  SqlVulnerabilityAssessmentScanResults.list,
+@@override(SqlVulnerabilityAssessmentScanResults.list,
   sqlVulnerabilityAssessmentScanResultsList
 );
 
@@ -1041,8 +1202,7 @@ op sqlVulnerabilityAssessmentScanResultsGet(
   resourceId: string,
 ): ArmResponse<ScanResult> | Common.CloudError;
 
-@@override(
-  SqlVulnerabilityAssessmentScanResults.get,
+@@override(SqlVulnerabilityAssessmentScanResults.get,
   sqlVulnerabilityAssessmentScanResultsGet
 );
 
@@ -1056,85 +1216,71 @@ op alertsListResourceGroupLevelByRegionCustomized(
   /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
   @path
   @segment("locations")
-  ascLocation: Azure.Core.azureLocation,
+  ascLocation: string,
 
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 ): ArmResponse<AlertList> | ErrorResponse;
 
-@@override(
-  AlertOperationGroup.listResourceGroupLevelByRegion,
+@@override(AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
   "python,go,java"
 );
 
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.Identity.type,
+@@alternateType(Azure.ResourceManager.CommonTypes.Identity.type,
   "SystemAssigned",
   "go"
 );
 
-@@clientName(
-  HealthReportsAPI.resourceDetails,
+@@clientName(HealthReportsAPI.resourceDetails,
   "HealthReportResourceDetails",
   "java,go"
 );
-@@clientLocation(
-  ApiCollections.getByAzureApiManagementService,
+@@clientLocation(ApiCollections.getByAzureApiManagementService,
   "ApiCollections",
   "java"
 );
-@@clientLocation(
-  ApiCollections.onboardAzureApiManagementApi,
+@@clientLocation(ApiCollections.onboardAzureApiManagementApi,
   "ApiCollections",
   "java"
 );
-@@clientLocation(
-  ApiCollections.offboardAzureApiManagementApi,
+@@clientLocation(ApiCollections.offboardAzureApiManagementApi,
   "ApiCollections",
   "java"
 );
-@@clientLocation(
-  ApiCollections.listByAzureApiManagementService,
+@@clientLocation(ApiCollections.listByAzureApiManagementService,
   "ApiCollections",
   "java"
 );
 @@clientLocation(ApiCollections.listBySubscription, "ApiCollections", "java");
-@@clientLocation(
-  ApiCollectionsOperationGroup.listByResourceGroup,
+@@clientLocation(ApiCollectionsOperationGroup.listByResourceGroup,
   "ApiCollections",
   "java"
 );
 
 @@clientName(SecurityManagementClient, "SecurityCenter", "java");
 @@clientName(SubAssessmentsAPI.CVSS, "Cvss", "java");
-@@clientName(
-  SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem,
+@@clientName(SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem,
   "SecurityAssessmentPropertiesBaseRiskPathsItemEdge",
   "java"
 );
-@@clientName(
-  SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem,
+@@clientName(SecurityAssessmentPropertiesBaseRiskPathsItemNodesItem,
   "SecurityAssessmentPropertiesBaseRiskPathsPropertiesItemsItem",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.get,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.get,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.createOrUpdate,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.delete,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.delete,
   "SecurityConnectorApplications",
   "java"
 );
-@@clientLocation(
-  ApplicationsAPI.SecurityConnectorApplication.list,
+@@clientLocation(ApplicationsAPI.SecurityConnectorApplication.list,
   "SecurityConnectorApplications",
   "java"
 );
@@ -1178,8 +1324,7 @@ model JitNetworkAccessPolicyCreate {
   properties: JitNetworkAccessPolicyPropertiesCreate;
 }
 
-@@alternateType(
-  JitNetworkAccessPolicies.createOrUpdate::parameters.resource,
+@@alternateType(JitNetworkAccessPolicies.createOrUpdate::parameters.resource,
   JitNetworkAccessPolicyCreate,
   "javascript"
 );

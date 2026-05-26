@@ -16,7 +16,7 @@ namespace ATPSettingsAPI;
  * The Advanced Threat Protection resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@singleton("current")
+@singleton("default")
 @extensionResource
 model AdvancedThreatProtectionSetting
   is Azure.ResourceManager.ExtensionResource<AdvancedThreatProtectionProperties> {
@@ -85,11 +85,9 @@ alias AdvancedThreatProtectionSettingNameAlias = {
 };
 
 @@doc(AdvancedThreatProtectionSetting.name, "");
-@@doc(
-  AdvancedThreatProtectionSetting.properties,
+@@doc(AdvancedThreatProtectionSetting.properties,
   "The Advanced Threat Protection settings."
 );
-@@doc(
-  AdvancedThreatProtectionSettings.create::parameters.resource,
+@@doc(AdvancedThreatProtectionSettings.create::parameters.resource,
   "Advanced Threat Protection Settings"
 );

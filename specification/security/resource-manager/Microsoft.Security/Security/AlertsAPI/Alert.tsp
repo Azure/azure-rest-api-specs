@@ -40,7 +40,7 @@ alias AlertOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: Azure.Core.azureLocation;
+    ascLocation: string;
   },
   {
     /** Name of the alert object */
@@ -48,8 +48,7 @@ alias AlertOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("alerts")
     @key
     alertName: string;
-  },
-  ResourceName = "SubscriptionSecurityAlert"
+  }
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -129,7 +128,7 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    ascLocation: Azure.Core.azureLocation;
+    ascLocation: string;
   },
   {
     /** Name of the alert object */
@@ -137,8 +136,7 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("alerts")
     @key
     alertName: string;
-  },
-  ResourceName = "ResourceGroupSecurityAlert"
+  }
 >;
 
 @armResourceOperations(#{ omitTags: true })
