@@ -89,7 +89,7 @@ namespace Microsoft.Monitor {
    * Updatable properties of an observability agent.
    */
   model ObservabilityAgentPropertiesUpdate {
-    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
+    /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. If changed, existing issues remain in the previously configured workspace and are not migrated; only newly created issues are written to the new workspace. */
     monitoringAccountId?: Azure.Core.armResourceIdentifier<[
       {
         type: "Microsoft.Monitor/accounts";
