@@ -47,6 +47,7 @@ interface PrivateEndpointConnectionOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PrivateEndpointConnections {
   /**
    * Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.

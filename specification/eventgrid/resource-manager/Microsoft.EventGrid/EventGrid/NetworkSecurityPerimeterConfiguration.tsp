@@ -54,6 +54,7 @@ interface NetworkSecurityPerimeterConfigurationOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Get a specific network security perimeter configuration with a topic or domain.

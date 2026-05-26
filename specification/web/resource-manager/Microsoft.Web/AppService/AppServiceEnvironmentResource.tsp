@@ -47,6 +47,7 @@ alias DiagnosticsOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 @tag("AppServiceEnvironments")
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.

@@ -84,6 +84,7 @@ interface PolicyExemptionGenericOps
 
 @added(Versions.v2025_12_01_preview)
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicyExemptions {
   /**
    * This operation retrieves a single policy exemption, given its name and the scope it was created at.

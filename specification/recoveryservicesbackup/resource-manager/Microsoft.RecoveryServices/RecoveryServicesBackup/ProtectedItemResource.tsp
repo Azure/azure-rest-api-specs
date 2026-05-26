@@ -37,6 +37,7 @@ model ProtectedItemResource is ProxyResource<ProtectedItem> {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProtectedItems {
   /**
    * Provides the details of the backed up item. This is an asynchronous operation. To know the status of the operation,

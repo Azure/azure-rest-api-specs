@@ -61,6 +61,7 @@ alias NetworkRuleSetsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "This resource does not support a DELETE operation as defined in the original OpenAPI specification."
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface NetworkRuleSets {
   /**
    * Gets NetworkRuleSet for a Namespace.

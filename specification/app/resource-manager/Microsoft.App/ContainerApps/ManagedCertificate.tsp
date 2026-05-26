@@ -50,6 +50,7 @@ alias ManagedCertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
 @armResourceOperations
 @tag("ManagedEnvironments")
 @tag("ManagedCertificates")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ManagedCertificates {
   /**
    * Get the specified Managed Certificate.

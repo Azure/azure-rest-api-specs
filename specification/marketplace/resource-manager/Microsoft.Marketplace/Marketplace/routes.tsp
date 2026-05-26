@@ -15,6 +15,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PrivateStoreCollectionOperationGroup {
   /**
    * Delete Private store collection. This is a workaround.
@@ -45,6 +46,7 @@ interface PrivateStoreCollectionOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PrivateStoreCollectionOfferOperationGroup {
   /**
    * Delete Private store offer. This is a workaround.

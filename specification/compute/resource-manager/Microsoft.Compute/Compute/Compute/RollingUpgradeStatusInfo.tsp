@@ -29,6 +29,7 @@ model RollingUpgradeStatusInfo
 
 @armResourceOperations(#{ omitTags: true })
 @tag("VirtualMachineScaleSetRollingUpgrades")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface RollingUpgradeStatusInfos {
   /**
    * Gets the status of the latest virtual machine scale set rolling upgrade.

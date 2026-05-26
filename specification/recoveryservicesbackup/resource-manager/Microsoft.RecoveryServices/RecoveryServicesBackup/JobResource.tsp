@@ -144,6 +144,7 @@ interface ExportJobsOperationResultsOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ExportJobsOperationResults {
   /**
    * Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also

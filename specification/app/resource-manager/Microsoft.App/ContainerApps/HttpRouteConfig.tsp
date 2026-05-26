@@ -57,6 +57,7 @@ alias HttpRouteConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 @tag("HttpRouteConfig")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface HttpRouteConfigs {
   /**
    * Get the specified Managed Http Route Config.

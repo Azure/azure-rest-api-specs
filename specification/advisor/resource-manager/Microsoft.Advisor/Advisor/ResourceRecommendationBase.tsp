@@ -24,6 +24,7 @@ model ResourceRecommendationBase
 
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ResourceRecommendationBases {
   /**
    * Obtains details of a cached recommendation.

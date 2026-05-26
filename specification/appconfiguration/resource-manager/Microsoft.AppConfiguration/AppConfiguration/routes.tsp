@@ -27,6 +27,7 @@ op ListBySubscription<ProviderResource extends Azure.ResourceManager.Foundations
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ConfigurationStoresOperationGroup {
   /**
    * Gets information about the deleted configuration stores in a subscription.

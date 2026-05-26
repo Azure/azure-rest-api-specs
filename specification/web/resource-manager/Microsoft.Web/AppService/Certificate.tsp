@@ -46,6 +46,7 @@ interface CertificateOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Certificates {
   /**
    * Description for Get a certificate.

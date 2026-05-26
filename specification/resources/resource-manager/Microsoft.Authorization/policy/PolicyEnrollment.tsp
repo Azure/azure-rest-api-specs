@@ -90,6 +90,7 @@ interface PolicyEnrollmentGenericOps
 
 @added(Versions.v2026_01_01_preview)
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicyEnrollments {
   /**
    * This operation retrieves a single policy enrollment, given its name and the scope it was created at.

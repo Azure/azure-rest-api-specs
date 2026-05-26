@@ -64,6 +64,7 @@ interface SchemaContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface SchemaContracts {
   /**
    * Get the schema configuration at the API level.
@@ -223,6 +224,7 @@ interface WorkspaceApiSchemaOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiSchema {
   /**
    * Get the schema configuration at the API level.

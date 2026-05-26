@@ -42,6 +42,7 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 }
 
 @armResourceOperations(PrivateLinkResource)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PrivateLinks {
   /** list private links on the given resource */
   listByMongoCluster is ArmResourceListByParent<PrivateLinkResource>;

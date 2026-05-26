@@ -32,6 +32,7 @@ model GalleryImage
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface GalleryImages {
   /**
    * List gallery images in a given lab.

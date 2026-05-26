@@ -62,6 +62,7 @@ interface WikiContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WikiContracts {
   /**
    * Gets the details of the Wiki for an API specified by its identifier.
@@ -226,6 +227,7 @@ interface ProductWikiOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProductWiki {
   /**
    * Gets the details of the Wiki for a Product specified by its identifier.

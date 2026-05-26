@@ -98,6 +98,7 @@ alias BillingProfileLabOps = Azure.ResourceManager.Legacy.ExtensionOperations<
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Labs {
   /**
    * Get the details for a specific lab associated with the provided billing account name, billing profile name, and invoice section name.

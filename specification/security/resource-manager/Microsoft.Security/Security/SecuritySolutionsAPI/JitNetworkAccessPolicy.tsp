@@ -79,6 +79,7 @@ alias JitNetworkAccessPolicyInitiateTypeAlias = {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ allowStaticRoutes: true })
 @tag("JitNetworkAccessPolicies")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface JitNetworkAccessPolicies {
   /**
    * Policies for protecting resources using Just-in-Time access control for the subscription, location

@@ -72,6 +72,7 @@ interface ProductTemplateModelsOps
     > {}
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProductTemplateModels {
   /**
    * Gets a template by its identifier.

@@ -64,6 +64,7 @@ interface DiagnosticContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DiagnosticContracts {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.
@@ -222,6 +223,7 @@ interface DiagnosticOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Diagnostic {
   /**
    * Gets the details of the Diagnostic specified by its identifier.
@@ -388,6 +390,7 @@ interface WorkspaceDiagnosticOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceDiagnostic {
   /**
    * Gets the details of the Diagnostic specified by its identifier.
@@ -562,6 +565,7 @@ interface WorkspaceApiDiagnosticOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiDiagnostic {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.

@@ -33,6 +33,7 @@ model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Costs {
   /**
    * Get cost.

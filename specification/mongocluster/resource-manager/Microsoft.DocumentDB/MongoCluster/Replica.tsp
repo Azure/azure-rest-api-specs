@@ -22,6 +22,7 @@ model Replica is ProxyResource<MongoClusterProperties> {
 
 @armResourceOperations
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Replicas {
   /** List all the replicas for the mongo cluster. */
   listByParent is ArmResourceListByParent<Replica>;

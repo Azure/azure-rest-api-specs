@@ -55,6 +55,7 @@ interface LoggerContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface LoggerContracts {
   /**
    * Gets the details of the logger specified by its identifier.
@@ -223,6 +224,7 @@ interface WorkspaceLoggerOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceLogger {
   /**
    * Gets the details of the logger specified by its identifier.

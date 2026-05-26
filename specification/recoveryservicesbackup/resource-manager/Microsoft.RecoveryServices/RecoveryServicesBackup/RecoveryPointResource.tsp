@@ -38,6 +38,7 @@ model RecoveryPointResource is ProxyResource<RecoveryPoint> {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface RecoveryPoints {
   /**
    * Provides the information of the backed up data identified using RecoveryPointID. This is an asynchronous operation.

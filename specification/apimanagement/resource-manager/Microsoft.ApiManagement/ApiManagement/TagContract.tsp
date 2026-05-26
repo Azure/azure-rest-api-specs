@@ -73,6 +73,7 @@ interface TagContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface TagContracts {
   /**
    * Get tag associated with the Operation.
@@ -185,6 +186,7 @@ interface TagOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Tag {
   /**
    * Get tag associated with the API.
@@ -311,6 +313,7 @@ interface TagContractOperationOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface TagContractOperation {
   /**
    * Get tag associated with the Product.
@@ -414,6 +417,7 @@ interface TagContractOperationGroupOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface TagContractOperationGroup {
   /**
    * Gets the details of the tag specified by its identifier.
@@ -588,6 +592,7 @@ interface WorkspaceTagOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceTag {
   /**
    * Gets the details of the tag specified by its identifier.

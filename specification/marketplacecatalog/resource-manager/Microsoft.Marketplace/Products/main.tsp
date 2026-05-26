@@ -36,6 +36,7 @@ model ProductSingle is ProxyResource<ProductDetails> {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations(Products)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProductList {
   /** Lists products for tenant. */
   @route("/providers/Microsoft.Marketplace/products")
