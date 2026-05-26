@@ -12236,6 +12236,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/refreshLdapBindPassword": {
+      "post": {
+        "operationId": "Accounts_RefreshLdapBindPassword",
+        "tags": [
+          "NetAppAccounts"
+        ],
+        "description": "Refresh LDAP Bind DN password by fetching the latest password from Azure Key Vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the NetApp account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_RefreshLdapBindPassword": {
+            "$ref": "./examples/Accounts_RefreshLdapBindPassword.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/renewCredentials": {
       "post": {
         "operationId": "Accounts_RenewCredentials",
@@ -14150,6 +14214,40 @@
       },
       "required": [
         "backupVaultId"
+      ]
+    },
+    "BindPasswordAkvConfig": {
+      "type": "object",
+      "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.",
+      "properties": {
+        "azureKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Key Vault URI where the Bind DN user password is stored."
+        },
+        "secretName": {
+          "type": "string",
+          "description": "The name of the secret in Azure Key Vault that contains the Bind DN user password.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[a-zA-Z0-9-]+$"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "azureKeyVaultUri",
+        "secretName"
       ]
     },
     "BreakFileLocksRequest": {
@@ -18303,6 +18401,41 @@
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
           "maxLength": 255,
           "x-nullable": true
+        },
+        "bindAuthenticationLevel": {
+          "type": "string",
+          "description": "The authentication level to use when binding to the LDAP server, defaults to Anonymous.",
+          "default": "Anonymous",
+          "enum": [
+            "Anonymous",
+            "Simple"
+          ],
+          "x-ms-enum": {
+            "name": "BindAuthenticationLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Anonymous",
+                "value": "Anonymous",
+                "description": "Anonymous bind i.e. no credentials provided"
+              },
+              {
+                "name": "Simple",
+                "value": "Simple",
+                "description": "Simple bind i.e. plain text credentials provided"
+              }
+            ]
+          }
+        },
+        "bindDN": {
+          "type": "string",
+          "description": "The distinguished name (DN) to bind as when performing LDAP operations.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "bindPasswordAkvConfig": {
+          "$ref": "#/definitions/BindPasswordAkvConfig",
+          "description": "The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored."
         }
       }
     },

@@ -346,6 +346,73 @@ model LdapConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
   certificateCNHost?: string | null;
+
+  /**
+   * The authentication level to use when binding to the LDAP server, defaults to Anonymous.
+   */
+  @added(Versions.v2026_04_15_preview)
+  bindAuthenticationLevel?: BindAuthenticationLevel = BindAuthenticationLevel.Anonymous;
+
+  /**
+   * The distinguished name (DN) to bind as when performing LDAP operations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "dominant mode of expression in the domain."
+  @added(Versions.v2026_04_15_preview)
+  @minLength(1)
+  @maxLength(255)
+  bindDN?: string;
+
+  /**
+   * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+   */
+  @added(Versions.v2026_04_15_preview)
+  bindPasswordAkvConfig?: BindPasswordAkvConfig;
+}
+
+/**
+ * The authentication level to use when binding to the LDAP server.
+ */
+@added(Versions.v2026_04_15_preview)
+union BindAuthenticationLevel {
+  string,
+
+  /**
+   * Anonymous bind i.e. no credentials provided
+   */
+  Anonymous: "Anonymous",
+
+  /**
+   * Simple bind i.e. plain text credentials provided
+   */
+  Simple: "Simple",
+}
+
+/**
+ * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+ */
+@added(Versions.v2026_04_15_preview)
+model BindPasswordAkvConfig {
+  /**
+   * The Azure Key Vault URI where the Bind DN user password is stored.
+   */
+  azureKeyVaultUri: url;
+
+  /**
+   * The name of the secret in Azure Key Vault that contains the Bind DN user password.
+   */
+  @minLength(1)
+  @maxLength(127)
+  @pattern("^[a-zA-Z0-9-]+$")
+  secretName: string;
+
+  /**
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 /**
@@ -881,6 +948,18 @@ interface NetAppAccounts {
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetAppAccount>
   >;
+
+  /**
+   * Refresh LDAP Bind DN password by fetching the latest password from Azure Key Vault.
+   */
+  @added(Versions.v2026_04_15_preview)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  refreshLdapBindPassword is ArmResourceActionNoResponseContentAsync<
+    NetAppAccount,
+    void,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(NetAppAccount.name, "The name of the NetApp account");
@@ -909,3 +988,5 @@ interface NetAppAccounts {
   NetAppAccounts.migrateBackups::parameters.body,
   "Migrate backups under an account payload supplied in the body of the operation."
 );
+
+@@clientLocation(NetAppAccounts.refreshLdapBindPassword, "Accounts");
