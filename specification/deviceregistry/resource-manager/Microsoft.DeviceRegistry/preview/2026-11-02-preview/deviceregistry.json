@@ -4494,13 +4494,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/getSampleOfMembers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/previewMembers": {
       "post": {
-        "operationId": "Groups_GetSampleOfMembers",
+        "operationId": "Groups_PreviewMembers",
         "tags": [
           "Groups"
         ],
-        "description": "Gets a stored sample of members that was determined during the last refresh.",
+        "description": "Gets a stored preview of members that was determined during the last refresh.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4536,7 +4536,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GroupSampleOfMembersResponse"
+              "$ref": "#/definitions/GroupPreviewMembersResponse"
             }
           },
           "default": {
@@ -4547,8 +4547,8 @@
           }
         },
         "x-ms-examples": {
-          "Group GetSampleOfMembers": {
-            "$ref": "./examples/GetSampleOfMembers_Group.json"
+          "Group PreviewMembers": {
+            "$ref": "./examples/PreviewMembers_Group.json"
           }
         }
       }
@@ -8001,6 +8001,19 @@
         ]
       }
     },
+    "GroupPreviewMembersResponse": {
+      "type": "object",
+      "description": "Response for the preview members operation.",
+      "properties": {
+        "members": {
+          "type": "array",
+          "description": "A preview of member resource IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "GroupProperties": {
       "type": "object",
       "description": "The group properties.",
@@ -8117,19 +8130,6 @@
         "displayName": {
           "type": "string",
           "description": "Human-readable display name for the group."
-        }
-      }
-    },
-    "GroupSampleOfMembersResponse": {
-      "type": "object",
-      "description": "Response for the get sample of members operation.",
-      "properties": {
-        "members": {
-          "type": "array",
-          "description": "A sample list of member resource IDs.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
