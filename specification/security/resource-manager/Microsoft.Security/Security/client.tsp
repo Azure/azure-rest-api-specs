@@ -835,6 +835,9 @@ model CSharpSecurityAssessmentStatusResult extends AssessmentAPI.AssessmentStatu
 @@clientName(Common.Tags, "SecurityCenterPatchTags", "csharp");
 @@clientName(AssessmentAPI.AssessmentStatus, "SecurityAssessmentStatus", "csharp");
 @@clientName(AssessmentAPI.AssessmentStatusCode, "SecurityAssessmentStatusCode", "csharp");
+@@clientName(ComplianceResultsAPI.ResourceStatus, "SecurityAssessmentResourceStatus", "csharp");
+@@clientName(SecurityStandardsAPI.SeverityEnum, "CustomRecommendationSeverity", "csharp");
+@@clientName(SecurityStandardsAPI.SecurityIssue, "CustomRecommendationSecurityIssue", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponse, "SecurityAssessmentMetadataPropertiesResult", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentMetadataPropertiesResponsePublishDates, "SecurityAssessmentPublishDates", "csharp");
 @@clientName(AssessmentAPI.SecurityAssessmentPartnerData, "SecurityAssessmentPartnerInfo", "csharp");
