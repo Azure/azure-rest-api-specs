@@ -5,6 +5,8 @@ import "./models.tsp";
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
+using Rest;
+using TypeSpec.Versioning;
 
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
@@ -97,7 +99,7 @@ interface Evaluators {
       ...EvaluatorsPreviewHeader;
 
       @Http.bodyRoot
-      evaluator_version: EvaluatorVersion;
+      evaluatorVersion: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
   >;
@@ -119,7 +121,7 @@ interface Evaluators {
 
       @doc("Evaluator resource")
       @Http.bodyRoot
-      evaluator_version: EvaluatorVersion;
+      evaluatorVersion: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
@@ -145,7 +147,7 @@ interface Evaluators {
 
       @doc("The pending upload request parameters")
       @Http.bodyRoot
-      pending_upload_request: PendingUploadRequest;
+      pendingUploadRequest: PendingUploadRequest;
     },
     PendingUploadResponse
   >;
@@ -167,7 +169,7 @@ interface Evaluators {
 
       @doc("The credential request parameters")
       @Http.bodyRoot
-      credential_request: EvaluatorCredentialRequest;
+      credentialRequest: EvaluatorCredentialRequest;
 
       @doc("The specific version id of the EvaluatorVersion to operate on.")
       @Rest.segment("versions")

@@ -36,7 +36,16 @@ interface DataGenerationJobs {
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+    DataGenerationJob,
+    {
+      @doc("Filter data generation jobs by their scenario.")
+      @query
+      scenario?: DataGenerationJobScenario;
+
+      @doc("Filter data generation jobs by their type.")
+      @query(#{ explode: false })
+      type?: DataGenerationJobType[];
+    }
   >;
 
   /**

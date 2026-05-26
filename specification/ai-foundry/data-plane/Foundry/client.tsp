@@ -26,7 +26,7 @@ import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
-//import "./src/evaluation-suites/routes.tsp";
+import "./src/evaluation-suites/routes.tsp";
 import "./src/agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -222,26 +222,13 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
 @@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
 
-// DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
-// to define Agent optimization request. If emitted as-is, it pulls in a lot of
-// OpenAI responses classes. We want Foundry SDK to be free of those, therefore for the
-// time being we define output item as a generic dictionary.
-@@alternateType(OpenAI.OutputItem, Record<unknown>);
-
 // Make this method internal, since it's patched with a new one that supports either binary or file-path input
 @@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
 
-// Exclude these operations entirely from emitted SDK. These are convenience REST APIs that we don't think bring
-// real value on SDK surface. We can do everything using createAgentVersionFromCode.
-@@scope(Agents.createAgentFromCode, "!(python, javascript)");
-@@scope(Agents.updateAgentFromCode, "!(python, javascript)");
-
-@@clientName(Agents.downloadAgentCode, "download_code", "python");
-
-@@clientName(Agents.createAgentVersionFromCode, "create_version_from_code", "python");
-@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode", "javascript");
+// Exclude these operations entirely from emitted Python SDK
+@@scope(Agents.createAgentFromCode, "!(python)");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
 @@clientName(SessionDirectoryListResponse,
@@ -277,7 +264,6 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.deleteMemoryStore, "delete");
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
-@@clientName(DeleteMemoryResponse, "DeleteMemoryResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
 @@clientName(MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
@@ -288,9 +274,6 @@ using Azure.AI.Projects;
 // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
 // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
 @@alternateType(OpenAI.InputItem, Record<unknown>);
-
-// Note the doc string replacement below is for JavaScript only, because for Python we hand-write the
-// relevant methods with proper doc strings (see `begin_update_memories` and `search_memories` methods)
 @@clientDoc(MemoryStoreUpdateRequest.items,
   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
@@ -319,6 +302,8 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
+@@clientName(PendingUploadResponse, "PendingUploadResult", "python");
+
 // Remove 'Object' suffix for JS client
 @@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
@@ -335,8 +320,8 @@ using Azure.AI.Projects;
 @@clientName(Routines.deleteRoutine, "delete");
 @@clientName(Routines.listRoutineRuns, "list_runs", "python");
 @@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
-@@clientName(Routines.dispatchRoutineAsync, "dispatch");
-@@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
+@@clientName(Routines.dispatchRoutineAsync, "dispatch_async", "python");
+@@clientName(Routines.dispatchRoutineAsync, "dispatchAsync", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Evaluators sub‐client
@@ -371,6 +356,36 @@ using Azure.AI.Projects;
   "javascript"
 );
 
+// Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
+
+// Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
+@@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+
+// EvaluationSuites versioned operations
+@@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
+@@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
+@@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
+@@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
+@@clientName(EvaluationSuites.run, "run_evaluation_suite");
+
+@@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
+@@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
+@@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
+@@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
@@ -381,37 +396,12 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
 @@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
-
-// // EvaluationSuites versioned operations
-// @@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
-// @@clientName(EvaluationSuites.listLatest, "list_evaluation_suites");
-// @@clientName(EvaluationSuites.getVersion, "get_evaluation_suite");
-// @@clientName(EvaluationSuites.deleteVersion, "delete_evaluation_suite");
-// @@clientName(EvaluationSuites.createOrUpdateVersion, "create_or_update_evaluation_suite");
-// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "create_evaluation_suite");
-// @@clientName(EvaluationSuites.run, "run_evaluation_suite");
-
-// @@clientName(EvaluationSuites.listVersions, "listEvaluationSuiteVersions", "javascript");
-// @@clientName(EvaluationSuites.listLatest, "listEvaluationSuites", "javascript");
-// @@clientName(EvaluationSuites.getVersion, "getEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.deleteVersion, "deleteEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.createOrUpdateVersion, "createOrUpdateEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.createEvaluationSuiteVersion, "createEvaluationSuite", "javascript");
-// @@clientName(EvaluationSuites.run, "runEvaluationSuite", "javascript");
-
-// // Evaluation Suite Generation Jobs — unscoped names (fixes AllScopes conflict)
-// @@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job");
-// @@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job");
-// @@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs");
-// @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job");
-// @@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job");
-
-// // Evaluation Suite Generation Jobs — renamed for JavaScript SDK discoverability
-// @@clientName(EvaluationSuiteGenerationJobs.create, "createGenerationSuiteJob", "javascript");
-// @@clientName(EvaluationSuiteGenerationJobs.get, "getGenerationSuiteJob", "javascript");
-// @@clientName(EvaluationSuiteGenerationJobs.list, "listGenerationSuiteJobs", "javascript");
-// @@clientName(EvaluationSuiteGenerationJobs.cancel, "cancelGenerationSuiteJob", "javascript");
-// @@clientName(EvaluationSuiteGenerationJobs.delete, "deleteGenerationSuiteJob", "javascript");
+// Evaluation Suite Generation Jobs — unique names to avoid collision with evaluator gen methods
+@@clientName(EvaluationSuiteGenerationJobs.create, "create_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.get, "get_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.list, "list_generation_suite_jobs", "python");
+@@clientName(EvaluationSuiteGenerationJobs.cancel, "cancel_generation_suite_job", "python");
+@@clientName(EvaluationSuiteGenerationJobs.delete, "delete_generation_suite_job", "python");
 
 // --------------------------------------------------------------------------------
 // Beta Insights sub‐client
@@ -431,10 +421,6 @@ using Azure.AI.Projects;
 @@clientName(Models.createOrUpdateVersion, "update");
 @@clientName(Models.startPendingUpload, "pendingUpload");
 @@clientName(Models.getCredentials, "getCredentials");
-@@clientName(Models.createAsync, "pendingCreateVersion");
-
-@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResult", "python");
-@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResponse", "javascript");
 
 // --------------------------------------------------------------------------------
 // Beta Schedules sub‐client

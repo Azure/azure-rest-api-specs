@@ -53,7 +53,7 @@ model CronTrigger extends Trigger {
   @doc("Cron expression that defines the schedule frequency.")
   expression: string;
 
-  @doc("Time zone for the cron schedule. Defaults to `UTC`.")
+  @doc("Time zone for the cron schedule.")
   timeZone?: string = "UTC";
 
   @doc("Start time for the cron schedule in ISO 8601 format.")
@@ -156,7 +156,7 @@ model RecurrenceTrigger extends Trigger {
   @doc("End time for the recurrence schedule in ISO 8601 format.")
   endTime?: string;
 
-  @doc("Time zone for the recurrence schedule. Defaults to `UTC`.")
+  @doc("Time zone for the recurrence schedule.")
   timeZone?: string = "UTC";
 
   @doc("Interval for the recurrence schedule.")
@@ -173,7 +173,7 @@ model OneTimeTrigger extends Trigger {
   @doc("Date and time for the one-time trigger in ISO 8601 format.")
   triggerAt: string;
 
-  @doc("Time zone for the one-time trigger. Defaults to `UTC`.")
+  @doc("Time zone for the one-time trigger.")
   timeZone?: string = "UTC";
 }
 
