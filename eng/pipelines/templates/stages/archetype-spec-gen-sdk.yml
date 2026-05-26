@@ -267,6 +267,9 @@ stages:
             --commit $updatedSpecRepoCommit \
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
+          
+          echo "call azsdk detect tool"
+          azsdk package detect-breaking-change --package-path $(SdkRepoDirectory)\sdk\resourcemanager\webpubsub\armwebpubsub --tsp-config-path $(SpecRepoDirectory)\specification\webpubsub\resource-manager\Microsoft.SignalRService\SignalRService\tspconfig.yaml
         displayName: 'Generate SDK'
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
