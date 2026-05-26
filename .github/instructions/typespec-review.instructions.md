@@ -290,6 +290,7 @@ Flag these issues when found:
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
 - **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
 - **Empty model literal `{}` as POST action body** -- when an `ArmResourceActionAsync` or `ArmResourceActionSync` POST action does not need a request body, use `void` instead of `{}`. An empty model literal triggers the `no-empty-model` lint rule, and suppressing it is the wrong fix. Use `void` and remove the suppression.
+- **`@extension(...)` in TypeSpec source** -- never add `@extension(...)` decorators to TypeSpec source for any reason. This includes `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, and any other OpenAPI extension. `@extension` bypasses TypeSpec's type system and emitter conventions. Use the appropriate built-in decorator instead: `@identifiers` / `@key` for `x-ms-identifiers`, `@visibility` for mutability, `@secret` for secret data, etc. (see TSP-ARRAY-IDENTIFIERS for the `x-ms-identifiers` case).
 
 ---
 
@@ -319,6 +320,47 @@ Flag these issues when found:
 
 - Properties whose names or doc comments clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`) **SHOULD** use `int32`, `int64`, or `float64` — not `string`.
 - If backward compatibility forces a string type for a numeric value, the doc comment **MUST** document the expected format and units.
+
+### 6.5 Array Identifiers — `x-ms-identifiers` (TSP-ARRAY-IDENTIFIERS)
+
+The `missing-x-ms-identifiers` linter rule fires on array-typed properties whose item models do not declare which property uniquely identifies an item. **Do not silence this rule with `@extension("x-ms-identifiers", [])`.** `@extension` is forbidden in TypeSpec source for any reason (see Section 5 anti-patterns).
+
+Use one of the following built-in TypeSpec decorators instead:
+
+- **Preferred — `@key` on the identity property of the item type.** The emitter automatically derives `x-ms-identifiers` from `@key`. Use this when the item model has a single, natural identity property:
+
+  ```tsp
+  model MoveRequest {
+    @key moveId: string;
+    from: string;
+    to: string;
+  }
+
+  model MoveCollection {
+    moves?: MoveRequest[];
+  }
+  ```
+
+- **Alternative — `@identifiers(#["<propertyName>", ...])` on the array property.** Use this when the identity property cannot be marked with `@key` on the item type (e.g., the item type is shared and `@key` would conflict, or identity is composed of multiple properties):
+
+  ```tsp
+  @identifiers(#["moveId"])
+  moves?: MoveRequest[];
+  ```
+
+- **Items genuinely have no identifier — `@identifiers(#[])` on the array property.** For arrays whose items are ordered result records, primitive values, or otherwise have no stable identity field, declare the empty identifier list explicitly. This satisfies the linter without a suppression and documents the design intent:
+
+  ```tsp
+  @identifiers(#[])
+  testResults?: TestResultRecord[];
+  ```
+
+**Forbidden patterns:**
+
+- `@extension("x-ms-identifiers", [])` — never add `@extension` in TypeSpec source for any reason. Replace with `@identifiers(#[])` (or `@key` on the item type).
+- `#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "..."` — suppression is **only** acceptable as a last resort when neither `@key` nor `@identifiers` is technically feasible (extremely rare). The suppression reason must still meet Section 4.1 rules (real technical justification, no `FIXME`/`TODO`/`TBD`, no "matching another resource"). For brand-new operations and models, suppression is never the right fix — use `@identifiers` or `@key`.
+
+When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifiers` or `@key` as the fix. **Never** suggest `@extension("x-ms-identifiers", ...)`.
 
 ---
 
@@ -396,6 +438,8 @@ When reviewing TypeSpec files, verify:
 - ✅ ARM resource ID properties use `armResourceIdentifier` not `string` (TSP-ARM-RESOURCE-ID)
 - ✅ No `@operationId` overrides — restructure interfaces instead
 - ✅ URI properties use `url` scalar type, not plain `string`
+- ✅ Array-typed properties declare item identity via `@key` (on item type) or `@identifiers` (on array property); use `@identifiers(#[])` when items have no identifier (TSP-ARRAY-IDENTIFIERS)
+- ✅ No `@extension(...)` decorators in TypeSpec source — never `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, etc.
 - ✅ Standard ARM base types used (no custom/private resource decorators)
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset

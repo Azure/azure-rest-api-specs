@@ -1,0 +1,1769 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedInstances"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/managedInstances": {
+      "get": {
+        "operationId": "ManagedInstances_List",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed instances": {
+            "$ref": "./examples/ManagedInstanceList.json"
+          },
+          "List managed instances with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceListWithExpandEqualsAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/managedInstances": {
+      "get": {
+        "operationId": "ManagedInstances_ListByInstancePool",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in an instance pool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The name of the instance pool to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed instances by instance pool": {
+            "$ref": "./examples/ManagedInstanceListByInstancePool.json"
+          },
+          "List managed instances by instance pool with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceListByInstancePoolWithExpandEqualsAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances": {
+      "get": {
+        "operationId": "ManagedInstances_ListByResourceGroup",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of managed instances in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed instances by resource group": {
+            "$ref": "./examples/ManagedInstanceListByResourceGroup.json"
+          },
+          "List managed instances by resource group with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceListByResourceGroupWithExpandEqualsAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}": {
+      "get": {
+        "operationId": "ManagedInstances_Get",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get managed instance": {
+            "$ref": "./examples/ManagedInstanceGet.json"
+          },
+          "Get managed instance while resource is updating": {
+            "$ref": "./examples/ManagedInstanceGetWhileUpdating.json"
+          },
+          "Get managed instance with $expand=administrators/activedirectory": {
+            "$ref": "./examples/ManagedInstanceGetWithExpandEqualsAdministrators.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedInstances_CreateOrUpdate",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Creates or updates a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceCreateMax.json"
+          },
+          "Create managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceCreateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstance"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedInstances_Update",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Updates a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove maintenance policy from managed instance (select default maintenance policy)": {
+            "$ref": "./examples/ManagedInstanceRemoveMaintenanceConfiguration.json"
+          },
+          "Update managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMax.json"
+          },
+          "Update managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstance"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedInstances_Delete",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Deletes a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete managed instance": {
+            "$ref": "./examples/ManagedInstanceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/failover": {
+      "post": {
+        "operationId": "ManagedInstances_Failover",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Failovers a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "replicaType",
+            "in": "query",
+            "description": "The type of replica to be failed over.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Primary",
+              "ReadableSecondary"
+            ],
+            "x-ms-enum": {
+              "name": "ReplicaType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Primary",
+                  "value": "Primary",
+                  "description": "Primary"
+                },
+                {
+                  "name": "ReadableSecondary",
+                  "value": "ReadableSecondary",
+                  "description": "ReadableSecondary"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Failover a managed instance.": {
+            "$ref": "./examples/FailoverManagedInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "operationId": "ManagedInstances_ListOutboundNetworkDependenciesByManagedInstance",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets the collection of outbound network dependencies for the given managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the collection of outbound network dependencies for the given managed instance.": {
+            "$ref": "./examples/ListOutboundNetworkDependenciesByManagedInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/reevaluateInaccessibleDatabaseState": {
+      "post": {
+        "operationId": "ManagedInstances_ReevaluateInaccessibleDatabaseState",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Reevaluates the inaccessibility state of all managed databases.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reevaluate inaccessibility states of all managed databases.": {
+            "$ref": "./examples/ManagedInstanceReevaluateInaccessibleDatabaseState.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/refreshExternalGovernanceStatus": {
+      "post": {
+        "operationId": "ManagedInstances_RefreshStatus",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Refresh external governance enablement status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultMI"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Refresh external governance enablement status.": {
+            "$ref": "./examples/ManagedInstanceRefreshExternalGovernanceStatus.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RefreshExternalGovernanceStatusOperationResultMI"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/start": {
+      "post": {
+        "operationId": "ManagedInstances_Start",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Starts the managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts the managed instance.": {
+            "$ref": "./examples/StartManagedInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstance"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/stop": {
+      "post": {
+        "operationId": "ManagedInstances_Stop",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Stops the managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stops the managed instance.": {
+            "$ref": "./examples/StopManagedInstance.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstance"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries": {
+      "get": {
+        "operationId": "ManagedInstances_ListByManagedInstance",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Get top resource consuming queries of a managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberOfQueries",
+            "in": "query",
+            "description": "How many 'top queries' to return. Default is 5.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "databases",
+            "in": "query",
+            "description": "Comma separated list of databases to be included into search. All DB's are included if this parameter is not specified.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values. Default value is PT1H",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "PT1H",
+                  "value": "PT1H",
+                  "description": "PT1H"
+                },
+                {
+                  "name": "P1D",
+                  "value": "P1D",
+                  "description": "P1D"
+                }
+              ]
+            }
+          },
+          {
+            "name": "aggregationFunction",
+            "in": "query",
+            "description": "Aggregation function to be used, default value is 'sum'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "sum"
+            ],
+            "x-ms-enum": {
+              "name": "AggregationFunctionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "avg",
+                  "value": "avg",
+                  "description": "avg"
+                },
+                {
+                  "name": "min",
+                  "value": "min",
+                  "description": "min"
+                },
+                {
+                  "name": "max",
+                  "value": "max",
+                  "description": "max"
+                },
+                {
+                  "name": "stdev",
+                  "value": "stdev",
+                  "description": "stdev"
+                },
+                {
+                  "name": "sum",
+                  "value": "sum",
+                  "description": "sum"
+                }
+              ]
+            }
+          },
+          {
+            "name": "observationMetric",
+            "in": "query",
+            "description": "Metric to be used for ranking top queries. Default is 'cpu'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "cpu",
+              "io",
+              "logIo",
+              "duration",
+              "dtu"
+            ],
+            "x-ms-enum": {
+              "name": "MetricType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "cpu",
+                  "value": "cpu",
+                  "description": "cpu"
+                },
+                {
+                  "name": "io",
+                  "value": "io",
+                  "description": "io"
+                },
+                {
+                  "name": "logIo",
+                  "value": "logIo",
+                  "description": "logIo"
+                },
+                {
+                  "name": "duration",
+                  "value": "duration",
+                  "description": "duration"
+                },
+                {
+                  "name": "dtu",
+                  "value": "dtu",
+                  "description": "dtu"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopQueriesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Obtain list of instance's top resource consuming queries.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesList.json"
+          },
+          "Obtain list of instance's top resource consuming queries. Full-blown request and response.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesListMax.json"
+          },
+          "Obtain list of instance's top resource consuming queries. Minimal request and response.": {
+            "$ref": "./examples/ManagedInstanceTopQueriesListMin.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/validateAzureKeyVaultEncryptionKey": {
+      "post": {
+        "operationId": "ManagedInstances_ValidateAzureKeyVaultEncryptionKey",
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Validates customer managed key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The validate azure key vault encryption key parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate the customer managed key.": {
+            "$ref": "./examples/ManagedInstancValidateAzureKeyVaultEncryptionKey.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "EndpointDependency": {
+      "type": "object",
+      "description": "A domain name that the managed instance service needs to communicate with, along with additional details.",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of the dependency.",
+          "readOnly": true
+        },
+        "endpointDetails": {
+          "type": "array",
+          "description": "The IP Addresses and Ports used when connecting to DomainName.",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EndpointDetail": {
+      "type": "object",
+      "description": "A domain name that the managed instance service needs to communicate with, along with additional details.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstance": {
+      "type": "object",
+      "description": "An Azure SQL managed instance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the managed instance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "Managed instance SKU. Allowed values for sku.name: GP_Gen5 (General Purpose, Standard-series); GP_G8IM (General Purpose, Premium-series); GP_G8IH (General Purpose, Premium-series memory optimized); BC_Gen5 (Business Critical, Standard-Series); BC_G8IM (Business Critical, Premium-series); BC_G8IH (Business Critical, Premium-series memory optimized)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedInstanceExternalAdministrator": {
+      "type": "object",
+      "description": "Properties of a active directory administrator.",
+      "properties": {
+        "administratorType": {
+          "$ref": "./common.json#/definitions/AdministratorType",
+          "description": "Type of the sever administrator."
+        },
+        "principalType": {
+          "$ref": "./common.json#/definitions/PrincipalType",
+          "description": "Principal Type of the sever administrator."
+        },
+        "login": {
+          "type": "string",
+          "description": "Login name of the server administrator."
+        },
+        "sid": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "SID (object ID) of the server administrator."
+        },
+        "tenantId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Tenant ID of the administrator."
+        },
+        "azureADOnlyAuthentication": {
+          "type": "boolean",
+          "description": "Azure Active Directory only Authentication enabled."
+        }
+      }
+    },
+    "ManagedInstanceListResult": {
+      "type": "object",
+      "description": "The response of a ManagedInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedInstancePecProperty": {
+      "type": "object",
+      "description": "A private endpoint connection under a managed instance",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "./common.json#/definitions/ManagedInstancePrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceProperties": {
+      "type": "object",
+      "description": "The properties of a managed instance.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "Provisioning state of managed instance.",
+          "readOnly": true
+        },
+        "managedInstanceCreateMode": {
+          "$ref": "./common.json#/definitions/ManagedServerCreateMode",
+          "description": "Specifies the mode of database creation.\n\nDefault: Regular instance creation.\n\nRestore: Creates an instance by restoring a set of backups to specific point in time. RestorePointInTime and SourceManagedInstanceId must be specified.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of the managed instance.",
+          "readOnly": true
+        },
+        "isGeneralPurposeV2": {
+          "type": "boolean",
+          "description": "Whether or not this is a GPv2 variant of General Purpose edition."
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "Administrator username for the managed instance. Can only be specified when the managed instance is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The administrator login password (required for managed instance creation).",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Subnet resource ID for the managed instance.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the managed instance.",
+          "readOnly": true
+        },
+        "licenseType": {
+          "$ref": "./common.json#/definitions/ManagedInstanceLicenseType",
+          "description": "The license type. Possible values are 'LicenseIncluded' (regular price inclusive of a new SQL license) and 'BasePrice' (discounted AHB price for bringing your own SQL licenses)."
+        },
+        "hybridSecondaryUsage": {
+          "$ref": "./common.json#/definitions/HybridSecondaryUsage",
+          "description": "Hybrid secondary usage. Possible values are 'Active' (default value) and 'Passive' (customer uses the secondary as Passive DR)."
+        },
+        "hybridSecondaryUsageDetected": {
+          "$ref": "./common.json#/definitions/HybridSecondaryUsageDetected",
+          "description": "Hybrid secondary usage detected. Possible values are 'Active' (customer does not meet the requirements to use the secondary as Passive DR) and 'Passive' (customer meets the requirements to use the secondary as Passive DR).",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of vCores. Allowed values: 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96, 128. Supported vCores depends on the selected hardware family and service tier."
+        },
+        "storageSizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage size in GB. Minimum value: 32. Maximum value: 32768. Increments of 32 GB allowed only. Maximum value depends on the selected hardware family and number of vCores."
+        },
+        "storageIOps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage IOps. Minimum value: 300. Maximum value: 80000. Increments of 1 IOps allowed only. Maximum value depends on the selected hardware family and number of vCores."
+        },
+        "storageThroughputMBps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Storage throughput MBps parameter is not supported in the instance create/update operation."
+        },
+        "memorySizeInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Memory size in GB. Minimum value: 28. Maximum value: 870. Minimum and maximum value depend on the number of vCores and service tier. Read more about resource limits: https://aka.ms/mi-resource-limits-api."
+        },
+        "collation": {
+          "type": "string",
+          "description": "Collation of the managed instance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dnsZone": {
+          "type": "string",
+          "description": "The Dns Zone that the managed instance is in.",
+          "readOnly": true
+        },
+        "dnsZonePartner": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of another managed instance whose DNS zone this managed instance will share after creation.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "publicDataEndpointEnabled": {
+          "type": "boolean",
+          "description": "Whether or not the public data endpoint is enabled."
+        },
+        "sourceManagedInstanceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the source managed instance associated with create operation of this instance.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "proxyOverride": {
+          "$ref": "./common.json#/definitions/ManagedInstanceProxyOverride",
+          "description": "Connection type used for connecting to the instance."
+        },
+        "timezoneId": {
+          "type": "string",
+          "description": "Id of the timezone. Allowed values are timezones supported by Windows.\nWindows keeps details on supported timezones, including the id, in registry under\nKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones.\nYou can get those registry values via SQL Server by querying SELECT name AS timezone_id FROM sys.time_zone_info.\nList of Ids can also be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.\nAn example of valid timezone id is \"Pacific Standard Time\" or \"W. Europe Standard Time\".",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "instancePoolId": {
+          "type": "string",
+          "description": "The Id of the instance pool this managed server belongs to."
+        },
+        "maintenanceConfigurationId": {
+          "type": "string",
+          "description": "Specifies maintenance configuration id to apply to this managed instance."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections on a managed instance.",
+          "items": {
+            "$ref": "#/definitions/ManagedInstancePecProperty"
+          },
+          "readOnly": true
+        },
+        "minimalTlsVersion": {
+          "type": "string",
+          "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'"
+        },
+        "currentBackupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage account type used to store backups for this instance. The options are Local (LocallyRedundantStorage), Zone (ZoneRedundantStorage), Geo (GeoRedundantStorage) and GeoZone(GeoZoneRedundantStorage)",
+          "readOnly": true
+        },
+        "requestedBackupStorageRedundancy": {
+          "$ref": "./common.json#/definitions/BackupStorageRedundancy",
+          "description": "The storage account type to be used to store backups for this instance. The options are Local (LocallyRedundantStorage), Zone (ZoneRedundantStorage), Geo (GeoRedundantStorage) and GeoZone(GeoZoneRedundantStorage)"
+        },
+        "zoneRedundant": {
+          "type": "boolean",
+          "description": "Whether or not the zone-redundancy is enabled."
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource id of a user assigned identity to be used by default.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "keyId": {
+          "type": "string",
+          "description": "A CMK URI of the key to use for encryption.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administrators": {
+          "$ref": "#/definitions/ManagedInstanceExternalAdministrator",
+          "description": "The Azure Active Directory administrator can be utilized during instance creation and for instance updates, except for the azureADOnlyAuthentication property. To update the azureADOnlyAuthentication property, individual API must be used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "servicePrincipal": {
+          "$ref": "#/definitions/ServicePrincipal",
+          "description": "The managed instance's service principal."
+        },
+        "virtualClusterId": {
+          "type": "string",
+          "description": "Virtual cluster resource id for the Managed Instance.",
+          "readOnly": true
+        },
+        "externalGovernanceStatus": {
+          "$ref": "./common.json#/definitions/ExternalGovernanceStatus",
+          "description": "Status of external governance.",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "$ref": "./common.json#/definitions/PricingModel",
+          "description": "Pricing model of Managed Instance."
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the point in time (ISO8601 format) of the Managed Instance creation.",
+          "readOnly": true
+        },
+        "authenticationMetadata": {
+          "$ref": "./common.json#/definitions/AuthMetadataLookupModes",
+          "description": "The managed instance's authentication metadata lookup mode."
+        },
+        "databaseFormat": {
+          "$ref": "./common.json#/definitions/ManagedInstanceDatabaseFormat",
+          "description": "Specifies the internal format of instance databases specific to the SQL engine version."
+        },
+        "requestedLogicalAvailabilityZone": {
+          "$ref": "./common.json#/definitions/AvailabilityZoneType",
+          "description": "Specifies the logical availability zone Managed Instance is pinned to."
+        }
+      }
+    },
+    "ManagedInstanceUpdate": {
+      "type": "object",
+      "description": "An update request for an Azure SQL Database managed instance.",
+      "properties": {
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "description": "Managed instance sku"
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ResourceIdentity",
+          "description": "Managed instance identity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest": {
+      "type": "object",
+      "description": "Validate azure key vault encryption key.",
+      "properties": {
+        "tdeKeyUri": {
+          "type": "string",
+          "description": "The URI of the key.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "tdeKeyUri"
+      ]
+    },
+    "OutboundEnvironmentEndpoint": {
+      "type": "object",
+      "description": "An endpoint that the managed instance service requires outbound network access to.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The type of service accessed by the managed instance service, e.g., Azure Storage, Azure Active Directory, etc.",
+          "readOnly": true
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "The endpoints that the managed instance service communicates with in order to function correctly.",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "type": "object",
+      "description": "A collection of endpoints that the managed instance service requires outbound network access to.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OutboundEnvironmentEndpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RefreshExternalGovernanceStatusOperationResultMI": {
+      "type": "object",
+      "description": "An RefreshExternalGovernanceStatus operation result resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RefreshExternalGovernanceStatusOperationResultPropertiesMI",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RefreshExternalGovernanceStatusOperationResultPropertiesMI": {
+      "type": "object",
+      "description": "Contains the operation result properties for refresh external governance status operation.",
+      "properties": {
+        "requestId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "Request Id.",
+          "readOnly": true
+        },
+        "requestType": {
+          "type": "string",
+          "description": "Request type.",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "type": "string",
+          "description": "Queued time.",
+          "readOnly": true
+        },
+        "managedInstanceName": {
+          "type": "string",
+          "description": "Managed instance name.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServicePrincipal": {
+      "type": "object",
+      "description": "The managed instance's service principal configuration for a resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The Azure Active Directory application object id.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The Azure Active Directory application client id.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Azure Active Directory tenant id.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "./common.json#/definitions/ServicePrincipalType",
+          "description": "Service principal type."
+        }
+      }
+    },
+    "TopQueries": {
+      "type": "object",
+      "properties": {
+        "numberOfQueries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Requested number of top queries.",
+          "readOnly": true
+        },
+        "aggregationFunction": {
+          "type": "string",
+          "description": "Aggregation function used to calculate query metrics.",
+          "readOnly": true
+        },
+        "observationMetric": {
+          "type": "string",
+          "description": "Metric used to rank queries.",
+          "readOnly": true
+        },
+        "intervalType": {
+          "$ref": "./common.json#/definitions/QueryTimeGrainType",
+          "description": "Interval type (length).",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time for the metric (ISO-8601 format).",
+          "readOnly": true
+        },
+        "queries": {
+          "type": "array",
+          "description": "List of top resource consuming queries with appropriate metric data",
+          "items": {
+            "$ref": "./common.json#/definitions/QueryStatisticsProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TopQueriesListResult": {
+      "type": "object",
+      "description": "A list of top resource consuming queries on managed instance",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TopQueries items on this page",
+          "items": {
+            "$ref": "#/definitions/TopQueries"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}
