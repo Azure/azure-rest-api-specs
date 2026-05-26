@@ -178,7 +178,7 @@ model ScalingProfile {
 @doc("Manual scaling configuration: fixed replica count.")
 model ManualScalingProfile {
   @doc("Fixed number of replicas.")
-  @minValue(1)
+  @minValue(0)
   replicas: int32;
 }
 
