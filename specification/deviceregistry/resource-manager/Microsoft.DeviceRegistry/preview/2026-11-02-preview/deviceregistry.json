@@ -7904,7 +7904,7 @@
     },
     "Group": {
       "type": "object",
-      "description": "A flexible grouping mechanism that allows devices or assets to be grouped by their property values.",
+      "description": "A flexible grouping mechanism that allows devices to be grouped by their property values.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GroupProperties",
@@ -8119,8 +8119,7 @@
       "type": "string",
       "description": "The type of group.",
       "enum": [
-        "Device",
-        "Asset"
+        "Device"
       ],
       "x-ms-enum": {
         "name": "GroupType",
@@ -8130,18 +8129,13 @@
             "name": "Device",
             "value": "Device",
             "description": "A group of devices."
-          },
-          {
-            "name": "Asset",
-            "value": "Asset",
-            "description": "A group of assets."
           }
         ]
       }
     },
     "GroupUpdate": {
       "type": "object",
-      "description": "A flexible grouping mechanism that allows devices or assets to be grouped by their property values.",
+      "description": "A flexible grouping mechanism that allows devices to be grouped by their property values.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GroupPropertiesUpdate",
