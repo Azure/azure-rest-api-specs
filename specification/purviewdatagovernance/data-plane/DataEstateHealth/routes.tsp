@@ -387,10 +387,9 @@ interface Settings {
   @doc("Update the storage configuration.")
   @route("/settings/storageConfig")
   @post
-  updateStorageConfig(
-    ...ApiVersionParameter,
-    @body body: StorageConfigUpdate,
-  ): Created201Response<StorageConfig> | ErrorResponse;
+  updateStorageConfig(...ApiVersionParameter, @body body: StorageConfigUpdate):
+    | Created201Response<StorageConfig>
+    | ErrorResponse;
 
   @doc("Test storage configuration connectivity.")
   @route("/settings/storageConfig/connectivity")
