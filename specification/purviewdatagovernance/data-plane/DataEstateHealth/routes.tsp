@@ -115,19 +115,6 @@ interface Controls {
   @get
   list(...ApiVersionParameter): ControlListResponse | ErrorResponse;
 
-  @doc("Create a new governance control.")
-  @route("/controls")
-  @post
-  create(
-    ...ApiVersionParameter,
-
-    @doc("Whether to create a new assessment along with the control.")
-    @query
-    withNewAssessment?: boolean,
-
-    @body body: Control,
-  ): Created201Response<Control> | ErrorResponse;
-
   @doc("Get a governance control by its unique identifier.")
   @route("/controls/{id}")
   @get

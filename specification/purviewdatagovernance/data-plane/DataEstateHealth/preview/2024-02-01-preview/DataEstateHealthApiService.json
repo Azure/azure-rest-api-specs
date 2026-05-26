@@ -208,55 +208,6 @@
             "$ref": "./examples/Controls_List_Gen.json"
           }
         }
-      },
-      "post": {
-        "operationId": "Controls_Create",
-        "description": "Create a new governance control.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "withNewAssessment",
-            "in": "query",
-            "description": "Whether to create a new assessment along with the control.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Control"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Control"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Controls_Create": {
-            "$ref": "./examples/Controls_Create_Gen.json"
-          }
-        }
       }
     },
     "/controls/{id}": {
