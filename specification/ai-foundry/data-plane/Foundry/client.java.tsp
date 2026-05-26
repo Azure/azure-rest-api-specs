@@ -138,9 +138,6 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
-@@clientName(SkillObject, "SkillDetails");
-@@clientName(SkillObject.has_blob, "blobPresent");
-
 @@clientName(Index, "AIProjectIndex", "java");
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
@@ -271,15 +268,6 @@ union GrammarSyntaxExpandable {
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
-
-// --------------------------------------------------------------------------------
-// Javadoc / Documentation overrides
-// --------------------------------------------------------------------------------
-
-@@clientDoc(Skills.downloadSkill,
-  "Downloads a skill package as a ZIP archive containing {@code SKILL.md}. Returns the original uploaded archive for skills created via {@code createSkillFromPackage}; materializes a ZIP from stored instructions for skills created via {@code createSkill}.",
-  DocumentationMode.replace
-);
 
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and
