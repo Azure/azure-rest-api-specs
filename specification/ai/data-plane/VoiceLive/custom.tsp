@@ -459,7 +459,6 @@ union PersonalVoiceModels {
 
   /** Use the MAI-Voice-1 model. */
   @added(Versions.v2026_04_10)
-  @clientName("MaiVoice1", "csharp")
   "MAI-Voice-1",
 }
 
