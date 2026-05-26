@@ -138,9 +138,6 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
-@@clientName(SkillObject, "SkillDetails");
-@@clientName(SkillObject.has_blob, "blobPresent");
-
 @@clientName(Index, "AIProjectIndex", "java");
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
