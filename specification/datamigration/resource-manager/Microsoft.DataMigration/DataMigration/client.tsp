@@ -1347,8 +1347,5 @@ using Microsoft.DataMigration;
   "input",
   "csharp"
 );
-@@clientName(DatabaseMigrationSqlDb.name, "targetDBName", "csharp");
-@@clientName(DatabaseMigrationSqlMi.name, "targetDBName", "csharp");
-@@clientName(DatabaseMigrationSqlVm.name, "targetDBName", "csharp");
 @@clientName(MigrateMISyncCompleteCommandProperties.input, "Input", "csharp");
 @@clientName(MigrateMISyncCompleteCommandProperties.output, "Output", "csharp");
