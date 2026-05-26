@@ -132,10 +132,10 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
   type: RoutineTriggerType.timer;
 
-  @doc("A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.")
+  @doc("A relative timer expression from now, such as `2h` or `15m`. Callers can specify either `in` for relative timing or `at` for absolute timing; stored routines are normalized to an absolute fire time.")
   in?: string;
 
-  @doc("Legacy timer expression alias accepted for backward compatibility. New callers should use `in`.")
+  @doc("An absolute timer expression. Supported values include an ISO-8601 timestamp with an explicit offset or a local timestamp paired with `time_zone`. Callers can specify either `at` for absolute timing or `in` for relative timing; stored routines are normalized to an absolute fire time.")
   at?: string;
 
   @doc("An optional IANA or Windows time zone identifier when the timer uses a local timestamp.")
@@ -199,7 +199,7 @@ alias InvokeAgentRoutineActionFields = {
   @maxLength(256)
   agent_endpoint_id?: string;
 
-  @doc("Static action input sent to the downstream target when the routine fires.")
+  @doc("Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.")
   input?: unknown;
 };
 
@@ -302,7 +302,7 @@ model InvokeAgentResponsesApiDispatchPayload extends RoutineDispatchPayload {
   @doc("The manual dispatch payload type.")
   type: RoutineDispatchPayloadType.invoke_agent_responses_api;
 
-  @doc("The user input sent to the downstream responses target.")
+  @doc("The JSON value sent as the complete downstream responses input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.")
   input: unknown;
 }
 
@@ -312,7 +312,7 @@ model InvokeAgentInvocationsApiDispatchPayload extends RoutineDispatchPayload {
   @doc("The manual dispatch payload type.")
   type: RoutineDispatchPayloadType.invoke_agent_invocations_api;
 
-  @doc("The raw input sent to the downstream invocations target.")
+  @doc("The JSON value sent as the complete downstream invocations input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.")
   input: unknown;
 }
 
@@ -340,6 +340,7 @@ model DispatchRoutineResponse {
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineRun {
   @doc("The MLflow run identifier for the routine attempt.")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("The underlying MLflow run status.")
@@ -352,7 +353,7 @@ model RoutineRun {
   trigger_type?: RoutineTriggerType;
 
   @doc("The configured trigger name that produced the routine attempt.")
-  triggerName?: string;
+  trigger_name?: string;
 
   @doc("The source path that created the routine attempt.")
   attempt_source?: RoutineAttemptSource;
@@ -361,25 +362,25 @@ model RoutineRun {
   action_type?: RoutineActionType;
 
   @doc("The project-scoped agent identifier recorded for the routine attempt.")
-  agentId?: string;
+  agent_id?: string;
 
   @doc("The legacy endpoint-scoped agent identifier recorded for the routine attempt.")
-  agentEndpointId?: string;
+  agent_endpoint_id?: string;
 
   @doc("The conversation identifier used by a responses API dispatch.")
-  conversationId?: string;
+  conversation_id?: string;
 
   @doc("The hosted-agent session identifier used by an invocations API dispatch.")
-  sessionId?: string;
+  session_id?: string;
 
   @doc("The logical trigger time recorded for the routine attempt.")
   triggered_at?: FoundryTimestamp;
 
   @doc("The scheduled fire time recorded for timer and schedule deliveries.")
-  scheduledFireAt?: FoundryTimestamp;
+  scheduled_fire_at?: FoundryTimestamp;
 
   @doc("The trigger time zone recorded for timer and schedule deliveries.")
-  triggerTimeZone?: string;
+  trigger_time_zone?: string;
 
   @doc("The time when the underlying run started.")
   started_at?: FoundryTimestamp;
