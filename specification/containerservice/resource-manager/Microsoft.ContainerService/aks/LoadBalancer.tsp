@@ -34,7 +34,8 @@ model LoadBalancer
 @@minLength(LoadBalancer.name, 1);
 @@doc(LoadBalancer.name, "The name of the load balancer.");
 @@doc(LoadBalancer.properties, "The properties of the load balancer.");
-@@doc(LoadBalancers.createOrUpdate::parameters.resource,
+@@doc(
+  LoadBalancers.createOrUpdate::parameters.resource,
   "The load balancer to create or update."
 );
 

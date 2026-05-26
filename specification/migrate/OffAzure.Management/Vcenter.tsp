@@ -64,6 +64,7 @@ interface Vcenters {
 }
 
 @@doc(Vcenter.name, " VCenters name");
-@@doc(Vcenter.properties,
+@@doc(
+  Vcenter.properties,
   "The resource-specific properties for this resource."
 );

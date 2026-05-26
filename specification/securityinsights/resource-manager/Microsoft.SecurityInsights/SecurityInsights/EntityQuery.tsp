@@ -118,6 +118,7 @@ interface EntityQueries {
 }
 
 @@doc(EntityQuery.name, "entity query ID");
-@@doc(EntityQueries.createOrUpdate::parameters.resource,
+@@doc(
+  EntityQueries.createOrUpdate::parameters.resource,
   "The entity query we want to create or update"
 );

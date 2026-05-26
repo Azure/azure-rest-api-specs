@@ -4,7 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.SecurityInsights;
 using Azure.ClientGenerator.Core;
 
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ActionType,
   "OperationActionType",
   "java"
 );
@@ -14,27 +15,33 @@ using Azure.ClientGenerator.Core;
 @@clientName(AADDataConnector, "AadDataConnector", "java");
 @@clientName(AATPDataConnector, "AatpDataConnector", "java");
 @@clientName(MCASDataConnectorDataTypes, "McasDataConnectorDataTypes", "java");
-@@clientName(ScheduledAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  ScheduledAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
   "java"
 );
-@@clientName(ScheduledAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  ScheduledAlertRuleTemplateProperties.createdDateUTC,
   "createdDateUtc",
   "java"
 );
-@@clientName(FusionAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  FusionAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
   "java"
 );
-@@clientName(FusionAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  FusionAlertRuleTemplateProperties.createdDateUTC,
   "createdDateUtc",
   "java"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
   "java"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
   "createdDateUtc",
   "java"
 );
@@ -45,16 +52,19 @@ using Azure.ClientGenerator.Core;
 @@clientName(IncidentEntitiesResponse.metaData, "metadata", "java");
 
 @@clientLocation(AlertRules.triggerRuleRun, "AlertRule", "python");
-@@clientLocation(triggeredAnalyticsRuleRun.get,
+@@clientLocation(
+  triggeredAnalyticsRuleRun.get,
   "TriggeredAnalyticsRuleRun",
   "python"
 );
-@@clientLocation(triggeredAnalyticsRuleRun.list,
+@@clientLocation(
+  triggeredAnalyticsRuleRun.list,
   "GetTriggeredAnalyticsRuleRuns",
   "python"
 );
 @@clientName(FileHashAlgorithm.SHA256AC, "SHA256_AC", "python");
-@@clientName(MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
+@@clientName(
+  MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
   "go"
 );

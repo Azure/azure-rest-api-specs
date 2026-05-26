@@ -1,0 +1,169 @@
+# cspell:ignore citesvc paritysvc shortsvc paraphras truncat
+name: arm-api-reviewer-eval-citation-and-parity
+description: |
+  Rule-ID citation hyperlinks and reviewer-posted parity test (13xxxx).
+  Validates two recent instruction-file rules:
+
+    1. "Rule Citation Format (REQUIRED for posted PR comments)" --
+       every rule ID cited in a finding MUST be a markdown hyperlink to
+       the rule's authoritative location in this repository (under
+       `.github/instructions/` or `.github/skills/azure-api-review/references/`).
+
+    2. "Reviewer-Posted Parity (REQUIRED -- no divergence)" -- the set
+       of findings shown to the reviewer in chat MUST be byte-for-byte
+       identical to what would be posted to the PR as inline comments
+       (same content, count, severity, rule IDs, links, code blocks,
+       fix snippets, and posted-by marker).
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 130001 -- Rule IDs cited as markdown hyperlinks
+  - name: rule-ids-cited-as-markdown-hyperlinks
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/citesvc/resource-manager/Microsoft.CiteService/stable/2025-01-01/citesvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file.
+      This is a new service with no previous API version. Report all findings
+      using the standard review report format.
+
+      For every rule ID you cite (e.g., `SEC-SECRET-DETECT`, `RPC-Put-V1-22`,
+      `OAPI034`, `WHATIF-001`), the rule ID MUST be rendered as a markdown
+      hyperlink whose target is a permanent GitHub URL on the `main` branch
+      pointing to the section of `.github/instructions/*.instructions.md` or
+      `.github/skills/azure-api-review/references/*.md` that defines the rule,
+      per the "Rule Citation Format" guidance in
+      `.github/instructions/armapi-review.instructions.md`. A bare rule ID
+      without a link is not acceptable.
+
+      File: specification/citesvc/resource-manager/Microsoft.CiteService/stable/2025-01-01/citesvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "rule ID rendered as markdown link to repo"
+        config:
+          # Matches: [SOME-RULE-ID](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/...)
+          pattern: "\\[[A-Za-z][A-Za-z0-9-]+(?:-V\\d+-\\d+)?\\]\\(https://github\\.com/Azure/azure-rest-api-specs/blob/main/\\.github/(?:instructions|skills/azure-api-review/references)/[^)]+\\)"
+      - type: output-not-matches
+        name: "no bare rule IDs without links"
+        config:
+          # Disallows the common bare-ID forms when not preceded by a markdown '[':
+          #   "SEC-SECRET-DETECT" alone, "RPC-Put-V1-22" alone, "[RPC-Put-V1-22]" without (...) link
+          # We accept both backticked IDs inside link text and IDs that ARE inside markdown links.
+          # This pattern flags **OAPI034** or **RPC-Put-V1-22** style emphasis-only citations
+          # (no surrounding link).
+          pattern: "\\*\\*(?:RPC-[A-Za-z]+-V\\d+-\\d+|OAPI\\d{3}|WHATIF-\\d{3}|PLCY\\d{3}|SEC-SECRET-DETECT|TSP-REQUIRED-V\\d+|ARG\\d{3})\\*\\*"
+      - type: prompt
+    rubric:
+      - Every cited rule ID is rendered as a markdown hyperlink, not a bare token
+      - Each hyperlink target is a github.com/Azure/azure-rest-api-specs URL on the main branch
+      - Each hyperlink target points to a file under .github/instructions/ or .github/skills/azure-api-review/references/
+      - The link text is the rule ID itself (e.g., link text "SEC-SECRET-DETECT", not "see here")
+      - When a finding cites multiple rule IDs (e.g., "OAPI034 / Section 12.1"), each ID is its own separate hyperlink
+
+  # 130002 -- Reviewer-posted parity: chat output contains complete canonical bodies
+  - name: reviewer-posted-parity-canonical-bodies
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/paritysvc/resource-manager/Microsoft.ParityService/stable/2025-01-01/paritysvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification and
+      prepare the findings as if you were about to post them as inline comments
+      on a GitHub pull request. Per the "Reviewer-Posted Parity" guidance in
+      `.github/instructions/armapi-review.instructions.md`, the text you show
+      me here MUST be byte-for-byte identical to what you would write into the
+      `body` field of each `comments[]` entry of a `POST /repos/.../reviews`
+      request -- no shortened, paraphrased, or consolidated variants.
+
+      For each finding, render the **canonical comment body** that would be
+      posted, including:
+        - severity tag (Blocking / Warning / Suggestion) and `[NEW]`/`[EXISTING]` classification,
+        - rule ID(s) as markdown hyperlinks,
+        - file path, exact line number(s), and JSON path,
+        - a concrete Fix section (with code-block examples when applicable),
+        - the trailing HTML comment marker `<!-- posted-by: arm-api-reviewer-agent -->`.
+
+      Then explicitly confirm in plain text that the canonical bodies above are
+      what you would POST verbatim, with no further edits, summarisation, or
+      drops.
+
+      File: specification/paritysvc/resource-manager/Microsoft.ParityService/stable/2025-01-01/paritysvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "posted-by marker present in canonical bodies"
+        config:
+          substring: "<!-- posted-by: arm-api-reviewer-agent -->"
+      - type: output-matches
+        name: "rule ID rendered as markdown link"
+        config:
+          pattern: "\\[[A-Za-z][A-Za-z0-9-]+(?:-V\\d+-\\d+)?\\]\\(https://github\\.com/Azure/azure-rest-api-specs/blob/main/\\.github/[^)]+\\)"
+      - type: output-matches
+        name: "explicit verbatim-post confirmation"
+        config:
+          # Matches phrases like "post verbatim", "byte-for-byte", "no further edits",
+          # "identical to ... POST", etc.
+          pattern: "(?i)(verbatim|byte[- ]for[- ]byte|identical|no (further |further-)?(edit|change|drop|paraphras))"
+      - type: prompt
+    rubric:
+      - The agent renders each finding as a complete canonical body, not a high-level summary
+      - Each canonical body contains the trailing `<!-- posted-by: arm-api-reviewer-agent -->` marker
+      - Each canonical body cites rule IDs as markdown hyperlinks to the repo
+      - Each canonical body includes severity, [NEW]/[EXISTING] tag, file path, line number, JSON path, and a Fix section
+      - When a Fix involves a JSON or TypeSpec snippet, the snippet is included inline as a fenced code block (```json or ```tsp) -- not omitted or summarized
+      - The agent explicitly confirms that the bodies shown are what would be posted verbatim, with no rewrites or drops at payload-assembly time
+      - The number of canonical bodies shown matches the number of findings the agent reports
+
+  # 130003 -- Negative case: shortened/consolidated post is forbidden
+  - name: reviewer-posted-parity-rejects-shortening
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/shortsvc/resource-manager/Microsoft.ShortService/stable/2025-01-01/shortsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification. After
+      producing the findings, suppose I asked you to "consolidate the findings
+      into a shorter combined comment to keep the PR thread tidy" or "drop the
+      JSON example from the Fix section to make the body shorter before
+      posting." Per the "Reviewer-Posted Parity" guidance in
+      `.github/instructions/armapi-review.instructions.md`, how should you
+      respond?
+
+      Then list each finding's canonical comment body that you would actually
+      post (with rule-ID hyperlinks, code-block Fix examples, and the
+      `<!-- posted-by: arm-api-reviewer-agent -->` marker).
+
+      File: specification/shortsvc/resource-manager/Microsoft.ShortService/stable/2025-01-01/shortsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "posted-by marker still present"
+        config:
+          substring: "<!-- posted-by: arm-api-reviewer-agent -->"
+      - type: output-matches
+        name: "agent refuses to shorten / consolidate"
+        config:
+          # Matches phrases that signal refusal to drop content or consolidate.
+          pattern: "(?i)(must not|cannot|won't|will not|do not|forbidden|not (acceptable|allowed|permitted))[^.\\n]{0,80}(consolidat|shorten|drop|paraphras|omit|combine|summari[sz]|truncat)"
+      - type: prompt
+    rubric:
+      - The agent explicitly states that shortening, consolidating, paraphrasing, or dropping content (e.g., the JSON example) is not allowed by the Reviewer-Posted Parity rule
+      - The agent references the parity rule (or the equivalent "single source of truth" / "verbatim reproduction" wording) when refusing
+      - Despite the user's request to shorten, the agent still shows full canonical comment bodies with rule-ID hyperlinks, fix code-blocks, and the posted-by marker
+      - The agent does not silently produce a shortened variant

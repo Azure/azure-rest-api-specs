@@ -39,6 +39,7 @@ interface VmwareJobs {
 }
 
 @@doc(VmwareJob.name, " Jobs name");
-@@doc(VmwareJob.properties,
+@@doc(
+  VmwareJob.properties,
   "The resource-specific properties for this resource."
 );

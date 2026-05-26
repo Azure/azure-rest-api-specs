@@ -18,7 +18,8 @@ using Dynatrace.Observability;
 @@clientName(MonitorResource, "DynatraceMonitor", "csharp");
 @@clientName(MonitorProperties, "DynatraceMonitorProperties", "csharp");
 @@clientName(MonitorResourceUpdate, "DynatraceMonitorPatch", "csharp");
-@@clientName(AppServiceInfo,
+@@clientName(
+  AppServiceInfo,
   "DynatraceOneAgentEnabledAppServiceInfo",
   "csharp"
 );
@@ -29,20 +30,23 @@ using Dynatrace.Observability;
 @@alternateType(SSODetailsResponse.metadataUrl, url, "csharp");
 @@alternateType(SSODetailsResponse.singleSignOnUrl, url, "csharp");
 @@clientName(SSODetailsRequest, "DynatraceSsoDetailsContent", "csharp");
-@@clientName(LinkableEnvironmentResponse,
+@@clientName(
+  LinkableEnvironmentResponse,
   "LinkableEnvironmentResult",
   "csharp"
 );
 @@alternateType(LinkableEnvironmentRequest.region, azureLocation, "csharp");
 @@clientName(MonitoredResource, "DynatraceMonitoredResourceDetails", "csharp");
 @@alternateType(MonitoredResource.id, armResourceIdentifier, "csharp");
-@@clientName(MonitoredResource.sendingMetrics,
+@@clientName(
+  MonitoredResource.sendingMetrics,
   "SendingMetricsStatus",
   "csharp"
 );
 @@clientName(MonitoredResource.sendingLogs, "SendingLogsStatus", "csharp");
 @@clientName(VMExtensionPayload, "DynatraceVmExtensionPayload", "csharp");
-@@clientName(MarketplaceSubscriptionStatus,
+@@clientName(
+  MarketplaceSubscriptionStatus,
   "DynatraceMonitorMarketplaceSubscriptionStatus",
   "csharp"
 );
@@ -50,7 +54,8 @@ using Dynatrace.Observability;
 @@clientName(PlanData, "DynatraceBillingPlanInfo", "csharp");
 @@clientName(UserInfo, "DynatraceMonitorUserInfo", "csharp");
 @@clientName(TagRule, "DynatraceTagRule", "csharp");
-@@clientName(MonitoringTagRulesProperties,
+@@clientName(
+  MonitoringTagRulesProperties,
   "DynatraceTagRuleProperties",
   "csharp"
 );
@@ -68,7 +73,8 @@ using Dynatrace.Observability;
 @@clientName(AvailabilityState.MONITORED, "Monitored", "csharp");
 @@clientName(AvailabilityState.PRE_MONITORED, "PreMonitored", "csharp");
 @@clientName(AvailabilityState.SHUTDOWN, "Shutdown", "csharp");
-@@clientName(AvailabilityState.UNEXPECTED_SHUTDOWN,
+@@clientName(
+  AvailabilityState.UNEXPECTED_SHUTDOWN,
   "UnexpectedShutdown",
   "csharp"
 );
@@ -78,7 +84,8 @@ using Dynatrace.Observability;
 @@clientName(LogModule.ENABLED, "Enabled", "csharp");
 @@clientName(LogModule.DISABLED, "Disabled", "csharp");
 @@clientName(MonitoringType, "DynatraceOneAgentMonitoringType", "csharp");
-@@clientName(MonitoringType.CLOUD_INFRASTRUCTURE,
+@@clientName(
+  MonitoringType.CLOUD_INFRASTRUCTURE,
   "CloudInfrastructure",
   "csharp"
 );
@@ -100,7 +107,8 @@ using Dynatrace.Observability;
 @@alternateType(EnvironmentInfo.logsIngestionEndpoint, url, "csharp");
 @@clientName(SSOStatus, "DynatraceSsoStatus", "csharp");
 @@clientName(SendAadLogsStatus, "AadLogsSendingStatus", "csharp");
-@@clientName(SendSubscriptionLogsStatus,
+@@clientName(
+  SendSubscriptionLogsStatus,
   "SubscriptionLogsSendingStatus",
   "csharp"
 );
@@ -108,86 +116,104 @@ using Dynatrace.Observability;
 @@clientName(SendingLogsStatus, "LogsSendingStatus", "csharp");
 @@clientName(SendingMetricsStatus, "MetricsSendingStatus", "csharp");
 @@clientName(MetricsStatusResponse, "DynatraceMetricsStatusResult", "csharp");
-@@alternateType(MetricsStatusResponse.azureResourceIds,
+@@alternateType(
+  MetricsStatusResponse.azureResourceIds,
   armResourceIdentifier[],
   "csharp"
 );
 @@clientName(LogStatusRequest, "DynatraceMonitoredResourceContent", "csharp");
-@@clientName(MarketplaceSaaSResourceDetailsResponse,
+@@clientName(
+  MarketplaceSaaSResourceDetailsResponse,
   "MarketplaceSaaSResourceDetailsResult",
   "csharp"
 );
-@@alternateType(MarketplaceSaaSResourceDetailsResponse.marketplaceSaaSResourceId,
+@@alternateType(
+  MarketplaceSaaSResourceDetailsResponse.marketplaceSaaSResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ConnectedResourcesCountResponse,
+@@clientName(
+  ConnectedResourcesCountResponse,
   "ConnectedResourcesCountResult",
   "csharp"
 );
 @@clientName(Action, "DynatraceAgentAction", "csharp");
-@@clientName(CreateResourceSupportedProperties.creationSupported,
+@@clientName(
+  CreateResourceSupportedProperties.creationSupported,
   "IsCreationSupported",
   "csharp"
 );
-@@clientName(MonitoredSubscription,
+@@clientName(
+  MonitoredSubscription,
   "DynatraceMonitoredSubscriptionStatus",
   "csharp"
 );
 @@clientName(Status, "DynatraceMonitoringState", "csharp");
-@@clientName(SubscriptionList,
+@@clientName(
+  SubscriptionList,
   "DynatraceMonitoredSubscriptionProperties",
   "csharp"
 );
-@@clientName(SubscriptionListOperation,
+@@clientName(
+  SubscriptionListOperation,
   "DynatraceMonitoredSubscriptionOperation",
   "csharp"
 );
-@@clientName(MonitoredSubscriptionProperties,
+@@clientName(
+  MonitoredSubscriptionProperties,
   "DynatraceMonitoredSubscription",
   "csharp"
 );
 @@clientName(UpgradePlanRequest, "DynatraceUpgradePlanContent", "csharp");
-@@alternateType(DynatraceSingleSignOnProperties.enterpriseAppId,
+@@alternateType(
+  DynatraceSingleSignOnProperties.enterpriseAppId,
   uuid,
   "csharp"
 );
 @@alternateType(DynatraceSingleSignOnProperties.singleSignOnUrl, url, "csharp");
-@@alternateType(MarketplaceSubscriptionIdRequest.marketplaceSubscriptionId,
+@@alternateType(
+  MarketplaceSubscriptionIdRequest.marketplaceSubscriptionId,
   uuid,
   "csharp"
 );
 @@alternateType(MonitoredSubscription.subscriptionId, uuid, "csharp");
-@@clientName(MonitorsOperationGroup.getMarketplaceSaaSResourceDetails,
+@@clientName(
+  MonitorsOperationGroup.getMarketplaceSaaSResourceDetails,
   "GetMarketplaceSaaSResourceDetailsResult",
   "csharp"
 );
-@@clientName(LinkableEnvironmentRequest,
+@@clientName(
+  LinkableEnvironmentRequest,
   "LinkableEnvironmentContent",
   "csharp"
 );
 @@alternateType(LinkableEnvironmentRequest.tenantId, uuid, "csharp");
-@@clientName(ManageAgentInstallationRequest,
+@@clientName(
+  ManageAgentInstallationRequest,
   "ManageAgentInstallationContent",
   "csharp"
 );
 @@clientName(MetricStatusRequest, "DynatraceMetricStatusContent", "csharp");
-@@clientName(MarketplaceSaaSResourceDetailsRequest,
+@@clientName(
+  MarketplaceSaaSResourceDetailsRequest,
   "MarketplaceSaaSResourceDetailsContent",
   "csharp"
 );
 @@alternateType(MarketplaceSaaSResourceDetailsRequest.tenantId, uuid, "csharp");
-@@clientName(MonitorResources.getMetricStatus::parameters.body,
+@@clientName(
+  MonitorResources.getMetricStatus::parameters.body,
   "content",
   "csharp"
 );
-@@clientName(MonitorResources.listMonitoredResources::parameters.body,
+@@clientName(
+  MonitorResources.listMonitoredResources::parameters.body,
   "content",
   "csharp"
 );
 @@clientName(MonitorResources.getVMHostPayload, "getVmHostPayload", "csharp");
 @@clientName(MonitorResources.getSSODetails, "getSsoDetails", "csharp");
-@@clientName(MonitorResources.getSSODetails::parameters.body,
+@@clientName(
+  MonitorResources.getSSODetails::parameters.body,
   "content",
   "csharp"
 );
