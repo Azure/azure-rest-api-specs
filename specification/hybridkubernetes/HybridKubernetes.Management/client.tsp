@@ -41,18 +41,34 @@ namespace Microsoft.Kubernetes;
   "ConnectedClusterArcAgentryConfiguration",
   "csharp"
 );
-@@clientName(AuthenticationMethod, "ClusterUserCredentialAuthenticationMethod", "csharp");
+@@clientName(
+  AuthenticationMethod,
+  "ClusterUserCredentialAuthenticationMethod",
+  "csharp"
+);
 @@clientName(AuthenticationMethod.AAD, "Aad", "csharp");
 @@clientName(AutoUpgradeOptions, "ConnectedClusterAutoUpgradeMode", "csharp");
-@@clientName(AzureHybridBenefit, "ConnectedClusterAzureHybridBenefit", "csharp");
-@@clientName(ConnectivityStatus, "ConnectedClusterConnectivityStatus", "csharp");
+@@clientName(
+  AzureHybridBenefit,
+  "ConnectedClusterAzureHybridBenefit",
+  "csharp"
+);
+@@clientName(
+  ConnectivityStatus,
+  "ConnectedClusterConnectivityStatus",
+  "csharp"
+);
 @@clientName(ConnectedClusterKind.AWS, "Aws", "csharp");
 @@clientName(ConnectedClusterKind.GCP, "Gcp", "csharp");
 @@clientName(ConnectedClusterProperties.gateway, "IsGateway", "csharp");
 @@clientName(ConnectedClusterPatchProperties.gateway, "IsGateway", "csharp");
 @@clientName(CredentialResult, "ClusterUserCredentialResult", "csharp");
 @@clientName(CredentialResults, "ClusterUserCredentialsResult", "csharp");
-@@clientName(HybridConnectionConfig, "ClusterUserCredentialHybridConnectionConfig", "csharp");
+@@clientName(
+  HybridConnectionConfig,
+  "ClusterUserCredentialHybridConnectionConfig",
+  "csharp"
+);
 @@clientName(OidcIssuerProfile, "ConnectedClusterOidcIssuerProfile", "csharp");
 @@clientName(PrivateLinkState, "ConnectedClusterPrivateLinkState", "csharp");
 @@clientName(ProvisioningState, "ConnectedClusterProvisioningState", "csharp");
