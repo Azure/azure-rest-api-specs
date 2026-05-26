@@ -1,0 +1,42 @@
+{
+  "title": "Settings_UpdateStorageConfig",
+  "operationId": "Settings_UpdateStorageConfig",
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "body": {
+      "type": "ADLSGen2",
+      "status": "Enabled",
+      "typeProperties": {
+        "endpoint": "https://contosostorage.dfs.core.windows.net/datahealth"
+      },
+      "networkProperties": {
+        "isManagedVnetEnabled": true,
+        "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosostorage"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "type": "ADLSGen2",
+        "status": "Enabled",
+        "systemData": {
+          "createdAt": "2025-10-01T08:30:00Z",
+          "createdBy": "00000000-0000-0000-0000-000000000001",
+          "lastModifiedAt": "2025-11-26T10:42:00Z",
+          "lastModifiedBy": "00000000-0000-0000-0000-000000000001"
+        },
+        "typeProperties": {
+          "endpoint": "https://contosostorage.dfs.core.windows.net/datahealth"
+        },
+        "networkProperties": {
+          "isManagedVnetEnabled": true,
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosostorage",
+          "mpeStatus": "Pending",
+          "markedForDeletion": false
+        }
+      }
+    }
+  }
+}

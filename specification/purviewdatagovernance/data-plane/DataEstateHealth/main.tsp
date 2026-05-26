@@ -30,8 +30,8 @@ namespace PurviewDataEstateHealth;
 
 @doc("Service API versions")
 enum ApiVersions {
-  @doc("2025-10-01-preview service API version")
-  v2025_10_01_preview: "2025-10-01-preview",
+  @doc("2024-02-01-preview service API version")
+  v2024_02_01_preview: "2024-02-01-preview",
 }
 
 alias AuthToken = OAuth2Auth<[
