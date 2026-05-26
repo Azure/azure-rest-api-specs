@@ -33,9 +33,11 @@ interface ScenarioRuns {
   ): ArmResponse<ScenarioRun> | (AcceptedResponse & {
     @doc("The Location header contains the URL where the status of the long running operation can be checked.")
     @header("Location")
-    location: string;
+    location: url;
 
     @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.")
+    @minValue(0)
+    @maxValue(2147483647)
     @header("Retry-After")
     retryAfter?: int32;
 
