@@ -61,6 +61,25 @@ If the PR is not found in the resolved repository, the agent will ask you to
 clarify or confirm before trying the other repo. If the PR is not found in
 either repository, the agent reports the error and stops.
 
+## Agent Topology
+
+The ARM API review workflow uses two agents, but **users only ever invoke
+the `ARM API Reviewer`.** The second agent (`ARM API Review Critic`) is an
+internal subagent invoked automatically by the Reviewer at Step 6.5 as a
+safety gate before findings are presented for posting. On the happy path the
+Critic is invisible in chat; it becomes visible only when it materially
+changed a finding (downgrade, reclassification, drop) or could not run.
+
+| Agent                 | Who invokes it                           | Why it exists                                                                                                                                                                                                                                                                  |
+| --------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ARM API Reviewer      | You                                      | Optimized for **recall**: find every spec violation that should be flagged.                                                                                                                                                                                                    |
+| ARM API Review Critic | The Reviewer (automatically at Step 6.5) | Optimized for **precision**: independently re-fetch files, re-quote rule text verbatim, and re-classify `[NEW]`/`[EXISTING]` for every finding before it is posted. A separate agent with a narrower tool surface (read-only) is what makes the verification non-rubber-stamp. |
+
+In VS Code the Critic is hidden from the agents picker via `user-invocable: false`.
+In IDEs that don't honor that flag (Claude Code, github.com Copilot), the
+Critic may appear in pickers but is still not intended for direct invocation;
+if you do invoke it directly, it will tell you to switch to the Reviewer.
+
 The agent will:
 
 1. Fetch the PR metadata and changed files from GitHub.
