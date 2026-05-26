@@ -101,9 +101,9 @@ using Microsoft.DataMigration;
 @@clientName(Project, "DataMigrationProject", "csharp");
 @@clientName(ProjectFiles, "DataMigrationProjectFiles", "csharp");
 @@clientName(ProjectFile, "DataMigrationProjectFile", "csharp");
-@@clientName(ProjectTasks, "DataMigrationProjectTasks", "csharp");
+@@clientName(ProjectTasks, "DataMigrationServiceTasks", "csharp");
 @@clientName(ProjectTask, "DataMigrationProjectTask", "csharp");
-@@clientName(ServiceTasks, "DataMigrationServiceTasks", "csharp");
+@@clientName(ServiceTasks, "ServiceServiceTasks", "csharp");
 
 // --- Operation name overrides ---
 @@clientName(
