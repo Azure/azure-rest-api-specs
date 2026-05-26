@@ -239,7 +239,7 @@ interface Controls {
   @doc("Reset all governance controls.")
   @route("/controls/reset")
   @post
-  resetAll(...ApiVersionParameter): void | ErrorResponse;
+  resetAll(...ApiVersionParameter): OkResponse | ErrorResponse;
 }
 
 // ============================================================================
