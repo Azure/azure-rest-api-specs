@@ -390,9 +390,7 @@ interface Settings {
   updateStorageConfig(
     ...ApiVersionParameter,
     @body body: OptionalProperties<StorageConfig>,
-  ):
-    | Created201Response<StorageConfig>
-    | ErrorResponse;
+  ): Created201Response<StorageConfig> | ErrorResponse;
 
   @doc("Test storage configuration connectivity.")
   @route("/settings/storageConfig/connectivity")
