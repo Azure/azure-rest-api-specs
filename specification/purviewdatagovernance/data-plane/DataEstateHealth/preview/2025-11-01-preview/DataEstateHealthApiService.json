@@ -1021,7 +1021,7 @@
             ],
             "x-ms-enum": {
               "name": "ScoreQueryType",
-              "modelAsString": true,
+              "modelAsString": false,
               "values": [
                 {
                   "name": "ControlNode",
@@ -1051,7 +1051,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ScoreRecord"
+                "$ref": "#/definitions/DHScoreAggregated"
               }
             }
           },
@@ -1747,6 +1747,44 @@
         ]
       }
     },
+    "DHScoreAggregated": {
+      "type": "object",
+      "description": "Score data aggregated by control or control group. The shape of items depends on the `type` query parameter used in the request: when `type=ControlNode`, `controlId` and `computingJobId` are populated; when `type=ControlGroup`, those fields are omitted.",
+      "properties": {
+        "controlGroupId": {
+          "type": "string",
+          "description": "The control group ID."
+        },
+        "scheduleRunId": {
+          "type": "string",
+          "description": "The schedule run ID."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the score."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The score value."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The control ID. Present only when the query was issued with `type=ControlNode`."
+        },
+        "computingJobId": {
+          "type": "string",
+          "description": "The computing job ID. Present only when the query was issued with `type=ControlNode`."
+        }
+      },
+      "required": [
+        "controlGroupId",
+        "scheduleRunId",
+        "time",
+        "score"
+      ]
+    },
     "DataSourceType": {
       "type": "string",
       "description": "Supported data source types for managed private endpoints.",
@@ -1983,11 +2021,6 @@
     "Schedule": {
       "type": "object",
       "description": "A schedule resource.",
-      "additionalProperties": {}
-    },
-    "ScoreRecord": {
-      "type": "object",
-      "description": "A score record.",
       "additionalProperties": {}
     },
     "StorageConfig": {

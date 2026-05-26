@@ -54,12 +54,6 @@ model Action {
   ...Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible score record properties."
-@doc("A score record.")
-model ScoreRecord {
-  ...Record<unknown>;
-}
-
 @doc("Result of a storage configuration connectivity test.")
 model StorageConfigConnectivityResult {
   @doc("Whether the connectivity test was successful.")
@@ -421,30 +415,8 @@ model QueryScoresRequest {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
-@doc("Score data aggregated by individual control.")
-model DHScoreAggregatedByControl {
-  @doc("The control group ID.")
-  controlGroupId: string;
-
-  @doc("The control ID.")
-  controlId: string;
-
-  @doc("The schedule run ID.")
-  scheduleRunId: string;
-
-  @doc("The computing job ID.")
-  computingJobId: string;
-
-  @doc("The timestamp of the score.")
-  time: utcDateTime;
-
-  @doc("The score value.")
-  score: float64;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
-@doc("Score data aggregated by control group.")
-model DHScoreAggregatedByControlGroup {
+@doc("Score data aggregated by control or control group. The shape of items depends on the `type` query parameter used in the request: when `type=ControlNode`, `controlId` and `computingJobId` are populated; when `type=ControlGroup`, those fields are omitted.")
+model DHScoreAggregated {
   @doc("The control group ID.")
   controlGroupId: string;
 
@@ -456,6 +428,12 @@ model DHScoreAggregatedByControlGroup {
 
   @doc("The score value.")
   score: float64;
+
+  @doc("The control ID. Present only when the query was issued with `type=ControlNode`.")
+  controlId?: string;
+
+  @doc("The computing job ID. Present only when the query was issued with `type=ControlNode`.")
+  computingJobId?: string;
 }
 
 // ============================================================================

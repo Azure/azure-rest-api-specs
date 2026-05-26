@@ -272,6 +272,7 @@ interface Schedules {
 // Scores
 // ============================================================================
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Service controller dispatches strictly on these two values via QueryStringConstraintAttribute; closed set is the wire truth."
 @doc("Score query aggregation type.")
 union ScoreQueryType {
   @doc("Aggregate by individual control.")
@@ -279,8 +280,6 @@ union ScoreQueryType {
 
   @doc("Aggregate by control group.")
   ControlGroup: "ControlGroup",
-
-  string,
 }
 
 @doc("Operations for querying governance scores.")
@@ -296,7 +295,7 @@ interface Scores {
     type: ScoreQueryType,
 
     @body body: QueryScoresRequest,
-  ): ScoreQueryResponse | ErrorResponse;
+  ): DHScoreAggregated[] | ErrorResponse;
 }
 
 // ============================================================================
@@ -383,8 +382,6 @@ alias ControlResponse = Control;
 
 alias ScheduleResponse = Schedule;
 alias ScheduleTriggerResponse = TriggerScheduleResponse;
-
-alias ScoreQueryResponse = ScoreRecord[];
 
 alias StorageConfigResponse = StorageConfig;
 alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
