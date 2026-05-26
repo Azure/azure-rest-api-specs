@@ -2,7 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Resources;
 
 @@clientName(
   Microsoft.Resources,
@@ -50,33 +49,3 @@ using Microsoft.Resources;
   "ErrorResponse",
   "go"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorDetail,
-  "ErrorResponse",
-  "go"
-);
-@@clientLocation(TagsResources.getAtScope, "TagsOperations", "javascript");
-@@clientLocation(
-  TagsResources.createOrUpdateAtScope,
-  "TagsOperations",
-  "javascript"
-);
-@@clientLocation(TagsResources.updateAtScope, "TagsOperations", "javascript");
-@@clientLocation(TagsResources.deleteAtScope, "TagsOperations", "javascript");
-@@clientLocation(
-  TagsOperationGroup.deleteValue,
-  "TagsOperations",
-  "javascript"
-);
-@@clientLocation(
-  TagsOperationGroup.createOrUpdateValue,
-  "TagsOperations",
-  "javascript"
-);
-@@clientLocation(
-  TagsOperationGroup.createOrUpdate,
-  "TagsOperations",
-  "javascript"
-);
-@@clientLocation(TagsOperationGroup.delete, "TagsOperations", "javascript");
-@@clientLocation(TagsOperationGroup.list, "TagsOperations", "javascript");

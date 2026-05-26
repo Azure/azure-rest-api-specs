@@ -63,3 +63,28 @@ using Microsoft.Resources;
 @@clientLocation(TagsOperationGroup.createOrUpdate, "Tags", "!javascript");
 @@clientLocation(TagsOperationGroup.delete, "Tags", "!javascript");
 @@clientLocation(TagsOperationGroup.list, "Tags", "!javascript");
+@@clientLocation(TagsResources.getAtScope, "TagsOperations", "javascript");
+@@clientLocation(
+  TagsResources.createOrUpdateAtScope,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(TagsResources.updateAtScope, "TagsOperations", "javascript");
+@@clientLocation(TagsResources.deleteAtScope, "TagsOperations", "javascript");
+@@clientLocation(
+  TagsOperationGroup.deleteValue,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdateValue,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdate,
+  "TagsOperations",
+  "javascript"
+);
+@@clientLocation(TagsOperationGroup.delete, "TagsOperations", "javascript");
+@@clientLocation(TagsOperationGroup.list, "TagsOperations", "javascript");
