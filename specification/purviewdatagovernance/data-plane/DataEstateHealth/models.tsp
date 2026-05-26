@@ -146,13 +146,84 @@ model DEHAnalyticsJobLogs {
 // Assessment Models
 // ============================================================================
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible assessment properties."
+@doc("Target entity kind evaluated by an assessment.")
+union DHAssessmentTargetEntityType {
+  DataAsset: "DataAsset",
+  DataProduct: "DataProduct",
+  BusinessDomain: "BusinessDomain",
+  CriticalDataElement: "CriticalDataElement",
+  string,
+}
+
+@doc("Quality dimension evaluated by an assessment.")
+union DHAssessmentTargetQualityType {
+  @doc("Metadata quality assessment.")
+  MetadataQuality: "MetadataQuality",
+
+  @doc("Data quality assessment.")
+  DataQuality: "DataQuality",
+
+  string,
+}
+
+@doc("Severity classification for an assessment rule's action.")
+union DHAssessmentRuleSeverity {
+  Low: "Low",
+  Medium: "Medium",
+  High: "High",
+  string,
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("Action metadata applied when an assessment rule fires (e.g. for health alerts).")
+model DHAssessmentRuleActionProperties {
+  @doc("Human-readable name for the resulting action.")
+  name: string;
+
+  @doc("Severity of the resulting action.")
+  severity: DHAssessmentRuleSeverity;
+
+  @doc("Why the rule fired, surfaced to end users.")
+  reason: string;
+
+  @doc("Recommended remediation surfaced to end users.")
+  recommendation: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
+@doc("A rule attached to an assessment. The `rule` payload uses the shared DHRule discriminated union.")
+model DHAssessmentRule {
+  @doc("The unique identifier of the rule within the assessment.")
+  id: string;
+
+  @doc("The rule definition (simple, group, or expression).")
+  rule: DHRule;
+
+  @doc("Optional metadata describing what to do when the rule fires.")
+  actionProperties?: DHAssessmentRuleActionProperties;
+}
+
 @doc("An assessment resource.")
 model Assessment {
   @doc("The unique identifier of the assessment.")
-  id?: string;
+  @visibility(Lifecycle.Read)
+  id: string;
 
-  ...Record<unknown>;
+  @doc("System metadata for the assessment.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  @doc("The assessment's display name.")
+  name: string;
+
+  @doc("The kind of entity this assessment evaluates.")
+  targetEntityType?: DHAssessmentTargetEntityType;
+
+  @doc("The quality dimension this assessment evaluates.")
+  targetQualityType?: DHAssessmentTargetQualityType;
+
+  @doc("The rules that constitute this assessment.")
+  rules?: DHAssessmentRule[];
 }
 
 // ============================================================================

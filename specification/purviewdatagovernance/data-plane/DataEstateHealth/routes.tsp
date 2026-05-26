@@ -266,7 +266,6 @@ interface Settings {
 alias AnalyticsScheduleResponse = DHAnalyticsScheduleRequest;
 alias AnalyticsJobLogsResponse = DEHAnalyticsJobLogs[];
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for assessments."
 @doc("Paged collection of assessment results.")
 model AssessmentListResponse {
   ...PagedResults<Assessment>;
@@ -274,7 +273,6 @@ model AssessmentListResponse {
 
 alias AssessmentResponse = Assessment;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for controls."
 @doc("Paged collection of control results.")
 model ControlListResponse {
   ...PagedResults<Control>;

@@ -937,10 +937,38 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique identifier of the assessment."
+          "description": "The unique identifier of the assessment.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the assessment.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The assessment's display name."
+        },
+        "targetEntityType": {
+          "$ref": "#/definitions/DHAssessmentTargetEntityType",
+          "description": "The kind of entity this assessment evaluates."
+        },
+        "targetQualityType": {
+          "$ref": "#/definitions/DHAssessmentTargetQualityType",
+          "description": "The quality dimension this assessment evaluates."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The rules that constitute this assessment.",
+          "items": {
+            "$ref": "#/definitions/DHAssessmentRule"
+          }
         }
       },
-      "additionalProperties": {}
+      "required": [
+        "id",
+        "name"
+      ]
     },
     "AssessmentListResponse": {
       "type": "object",
@@ -1278,6 +1306,139 @@
         "interval",
         "startTime"
       ]
+    },
+    "DHAssessmentRule": {
+      "type": "object",
+      "description": "A rule attached to an assessment. The `rule` payload uses the shared DHRule discriminated union.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the rule within the assessment."
+        },
+        "rule": {
+          "$ref": "#/definitions/DHRule",
+          "description": "The rule definition (simple, group, or expression)."
+        },
+        "actionProperties": {
+          "$ref": "#/definitions/DHAssessmentRuleActionProperties",
+          "description": "Optional metadata describing what to do when the rule fires."
+        }
+      },
+      "required": [
+        "id",
+        "rule"
+      ]
+    },
+    "DHAssessmentRuleActionProperties": {
+      "type": "object",
+      "description": "Action metadata applied when an assessment rule fires (e.g. for health alerts).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the resulting action."
+        },
+        "severity": {
+          "$ref": "#/definitions/DHAssessmentRuleSeverity",
+          "description": "Severity of the resulting action."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why the rule fired, surfaced to end users."
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Recommended remediation surfaced to end users."
+        }
+      },
+      "required": [
+        "name",
+        "severity",
+        "reason",
+        "recommendation"
+      ]
+    },
+    "DHAssessmentRuleSeverity": {
+      "type": "string",
+      "description": "Severity classification for an assessment rule's action.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "DHAssessmentRuleSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High"
+          }
+        ]
+      }
+    },
+    "DHAssessmentTargetEntityType": {
+      "type": "string",
+      "description": "Target entity kind evaluated by an assessment.",
+      "enum": [
+        "DataAsset",
+        "DataProduct",
+        "BusinessDomain",
+        "CriticalDataElement"
+      ],
+      "x-ms-enum": {
+        "name": "DHAssessmentTargetEntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataAsset",
+            "value": "DataAsset"
+          },
+          {
+            "name": "DataProduct",
+            "value": "DataProduct"
+          },
+          {
+            "name": "BusinessDomain",
+            "value": "BusinessDomain"
+          },
+          {
+            "name": "CriticalDataElement",
+            "value": "CriticalDataElement"
+          }
+        ]
+      }
+    },
+    "DHAssessmentTargetQualityType": {
+      "type": "string",
+      "description": "Quality dimension evaluated by an assessment.",
+      "enum": [
+        "MetadataQuality",
+        "DataQuality"
+      ],
+      "x-ms-enum": {
+        "name": "DHAssessmentTargetQualityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MetadataQuality",
+            "value": "MetadataQuality",
+            "description": "Metadata quality assessment."
+          },
+          {
+            "name": "DataQuality",
+            "value": "DataQuality",
+            "description": "Data quality assessment."
+          }
+        ]
+      }
     },
     "DHContactItem": {
       "type": "object",
