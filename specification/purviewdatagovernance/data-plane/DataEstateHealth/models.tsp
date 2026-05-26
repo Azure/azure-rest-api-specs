@@ -362,18 +362,6 @@ union DHScheduleCallbackTriggerType {
   string,
 }
 
-@doc("Request to trigger a schedule run.")
-model TriggerScheduleRequest {
-  @doc("The control ID to trigger the schedule for.")
-  controlId: string;
-}
-
-@doc("Response from triggering a schedule run.")
-model TriggerScheduleResponse {
-  @doc("The schedule run ID that was triggered.")
-  scheduleRunId: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible schedule properties."
 @doc("A schedule resource.")
 model Schedule {

@@ -957,50 +957,6 @@
         }
       }
     },
-    "/controls/schedule/trigger": {
-      "post": {
-        "operationId": "Schedules_Trigger",
-        "description": "Trigger a control schedule run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TriggerScheduleRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TriggerScheduleResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Schedules_Trigger": {
-            "$ref": "./examples/Schedules_Trigger_Gen.json"
-          }
-        }
-      }
-    },
     "/scores/query": {
       "post": {
         "operationId": "Scores_Query",
@@ -2219,32 +2175,6 @@
           "description": "The timestamp when the resource was last modified."
         }
       }
-    },
-    "TriggerScheduleRequest": {
-      "type": "object",
-      "description": "Request to trigger a schedule run.",
-      "properties": {
-        "controlId": {
-          "type": "string",
-          "description": "The control ID to trigger the schedule for."
-        }
-      },
-      "required": [
-        "controlId"
-      ]
-    },
-    "TriggerScheduleResponse": {
-      "type": "object",
-      "description": "Response from triggering a schedule run.",
-      "properties": {
-        "scheduleRunId": {
-          "type": "string",
-          "description": "The schedule run ID that was triggered."
-        }
-      },
-      "required": [
-        "scheduleRunId"
-      ]
     }
   },
   "parameters": {

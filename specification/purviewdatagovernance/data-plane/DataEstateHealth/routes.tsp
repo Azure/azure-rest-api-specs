@@ -253,13 +253,6 @@ interface Schedules {
   @get
   get(...ApiVersionParameter): ScheduleResponse | ErrorResponse;
 
-  @doc("Trigger a control schedule run.")
-  @route("/controls/schedule/trigger")
-  @post
-  trigger(...ApiVersionParameter, @body body: TriggerScheduleRequest):
-    | ScheduleTriggerResponse
-    | ErrorResponse;
-
   @doc("Create or update the global control schedule.")
   @route("/controls/schedule")
   @put
@@ -381,7 +374,6 @@ model ControlListResponse {
 alias ControlResponse = Control;
 
 alias ScheduleResponse = Schedule;
-alias ScheduleTriggerResponse = TriggerScheduleResponse;
 
 alias StorageConfigResponse = StorageConfig;
 alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
