@@ -15,7 +15,7 @@ namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2026_11_02_preview)
 @parentResource(Namespace)
-@doc("A flexible grouping mechanism that allows devices or assets to be grouped by their property values.")
+@doc("A flexible grouping mechanism that allows devices to be grouped by their property values.")
 model Group is TrackedResource<GroupProperties> {
   @doc("The name of the group.")
   @key("groupName")
@@ -44,9 +44,9 @@ model GroupProperties {
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("Response for the get sample of members operation.")
-model GroupSampleOfMembersResponse {
-  @doc("A sample list of member resource IDs.")
+@doc("Response for the preview members operation.")
+model GroupPreviewMembersResponse {
+  @doc("A preview of member resource IDs.")
   members?: string[];
 }
 
@@ -66,11 +66,11 @@ interface Groups {
   delete is ArmResourceDeleteWithoutOkAsync<Group>;
   listByNamespace is ArmResourceListByParent<Group>;
 
-  @doc("Gets a stored sample of members that was determined during the last refresh.")
-  getSampleOfMembers is ArmResourceActionSync<
+  @doc("Gets a stored preview of members that was determined during the last refresh.")
+  previewMembers is ArmResourceActionSync<
     Group,
     void,
-    GroupSampleOfMembersResponse
+    GroupPreviewMembersResponse
   >;
 
   @doc("Refreshes the members of this group.")

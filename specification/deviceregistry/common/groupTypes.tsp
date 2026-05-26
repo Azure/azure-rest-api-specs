@@ -6,9 +6,6 @@ union GroupType {
 
   /** A group of devices. */
   Device: "Device",
-
-  /** A group of assets. */
-  Asset: "Asset",
 }
 
 /** The membership state of a group. */

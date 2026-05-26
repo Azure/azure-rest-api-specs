@@ -101,7 +101,7 @@ suppressions:
     reason: Groups is the resource type name
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/getcurrentmembercount"].post.operationId
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/getsampleofmembers"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/previewmembers"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/refreshmembers"].post.operationId
   - code: PostResponseCodes
     from:
