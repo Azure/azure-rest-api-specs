@@ -102,9 +102,11 @@ interface TriggeredWebJobs {
   runTriggeredWebJobSlot is TriggeredWebJobOps.ActionSync<
     TriggeredWebJob,
     void,
-    {
-      @body body: void;
-    } | ArmNotFoundResponse,
+
+      | {
+          @body body: void;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
@@ -173,14 +175,17 @@ interface TriggeredWebJobOperationGroup {
   runTriggeredWebJob is TriggeredWebJobOperationGroupOps.ActionSync<
     TriggeredWebJob,
     void,
-    {
-      @body body: void;
-    } | ArmNotFoundResponse,
+
+      | {
+          @body body: void;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
 
 @@doc(TriggeredWebJob.name, "Name of Web Job.");
-@@doc(TriggeredWebJob.properties,
+@@doc(
+  TriggeredWebJob.properties,
   "TriggeredWebJob resource specific properties"
 );

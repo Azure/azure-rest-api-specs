@@ -48,10 +48,12 @@ interface Services {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ServiceResource,
-    Response = ArmResourceUpdatedResponse<ServiceResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServiceResource>> & {
-      @bodyRoot
-      _: ServiceResource;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ServiceResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServiceResource>> & {
+          @bodyRoot
+          _: ServiceResource;
+        })
   >;
 
   /**
@@ -88,15 +90,18 @@ interface Services {
   >;
 }
 
-@@doc(ServiceResource.name,
+@@doc(
+  ServiceResource.name,
   "The name of the service resource in the format of {applicationName}~{serviceName}."
 );
 @@doc(ServiceResource.properties, "The service resource properties.");
 @@doc(Services.createOrUpdate::parameters.resource, "The service resource.");
-@@doc(Services.update::parameters.properties,
+@@doc(
+  Services.update::parameters.properties,
   "The service resource updated tags."
 );
-@@doc(Services.restartReplica::parameters.body,
+@@doc(
+  Services.restartReplica::parameters.body,
   "The parameters for restarting replicas."
 );
 

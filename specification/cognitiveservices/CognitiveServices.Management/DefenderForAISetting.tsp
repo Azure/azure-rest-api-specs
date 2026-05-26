@@ -73,12 +73,15 @@ interface DefenderForAISettings {
 
 @@doc(DefenderForAISetting.name, "The name of the defender for AI setting.");
 @@encodedName(DefenderForAISetting.etag, "application/json", "etag");
-@@doc(DefenderForAISetting.properties,
+@@doc(
+  DefenderForAISetting.properties,
   "The Defender for AI resource properties."
 );
-@@doc(DefenderForAISettings.createOrUpdate::parameters.resource,
+@@doc(
+  DefenderForAISettings.createOrUpdate::parameters.resource,
   "Properties describing the Defender for AI setting."
 );
-@@doc(DefenderForAISettings.update::parameters.properties,
+@@doc(
+  DefenderForAISettings.update::parameters.properties,
   "Properties describing the Defender for AI setting."
 );

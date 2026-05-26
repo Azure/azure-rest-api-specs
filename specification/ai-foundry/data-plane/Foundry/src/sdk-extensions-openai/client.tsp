@@ -57,10 +57,12 @@ namespace Azure.AI.Projects {
   @@clientName(CreatedBy, "AgentResponseItemSource");
   @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
 
-  @@clientName(MemorySearchToolCallItemResource,
+  @@clientName(
+    MemorySearchToolCallItemResource,
     "MemorySearchToolCallResponseItem"
   );
-  @@clientName(OAuthConsentRequestOutputItem,
+  @@clientName(
+    OAuthConsentRequestOutputItem,
     "OAuthConsentRequestResponseItem"
   );
   @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
@@ -81,12 +83,14 @@ namespace Azure.AI.Projects {
   }
 
   // Use alternateType to replace the inline union with our named union for SDK generation
-  @@alternateType(OpenAI.LocalShellToolCallOutput.status,
+  @@alternateType(
+    OpenAI.LocalShellToolCallOutput.status,
     LocalShellToolCallOutputStatus
   );
 
   // Rename and include in typegraph
-  @@clientName(LocalShellToolCallOutputStatus,
+  @@clientName(
+    LocalShellToolCallOutputStatus,
     "ItemLocalShellToolCallOutputStatus"
   );
 
@@ -96,7 +100,8 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.ItemLocalShellToolCall, Access.internal);
   @@clientName(OpenAI.ItemLocalShellToolCall, "InternalLocalShellToolCallItem");
   @@access(OpenAI.ItemLocalShellToolCallOutput, Access.internal);
-  @@clientName(OpenAI.ItemLocalShellToolCallOutput,
+  @@clientName(
+    OpenAI.ItemLocalShellToolCallOutput,
     "InternalLocalShellToolCallOutputItem"
   );
 
@@ -104,7 +109,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.ApplyPatchToolParam, "InternalApplyPatchToolParam");
 
   @@access(OpenAI.ApplyPatchToolCallItemParam, Access.internal);
-  @@clientName(OpenAI.ApplyPatchToolCallItemParam,
+  @@clientName(
+    OpenAI.ApplyPatchToolCallItemParam,
     "InternalApplyPatchToolCallItemParam"
   );
 
@@ -112,32 +118,38 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.ApplyPatchToolCall, "InternalApplyPatchToolCall");
 
   @@access(OpenAI.OutputItemApplyPatchToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemApplyPatchToolCall,
+  @@clientName(
+    OpenAI.OutputItemApplyPatchToolCall,
     "InternalOutputItemApplyPatchToolCall"
   );
 
   @@access(OpenAI.OutputItemApplyPatchToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemApplyPatchToolCall,
+  @@clientName(
+    OpenAI.OutputItemApplyPatchToolCall,
     "InternalOutputItemApplyPatchToolCall"
   );
 
   @@access(OpenAI.OutputItemApplyPatchToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemApplyPatchToolCall,
+  @@clientName(
+    OpenAI.OutputItemApplyPatchToolCall,
     "InternalOutputItemApplyPatchToolCall"
   );
 
   @@access(OpenAI.OutputItemApplyPatchToolCallOutput, Access.internal);
-  @@clientName(OpenAI.OutputItemApplyPatchToolCallOutput,
+  @@clientName(
+    OpenAI.OutputItemApplyPatchToolCallOutput,
     "InternalOutputItemApplyPatchToolCallOutput"
   );
 
   @@access(OpenAI.ApplyPatchFileOperation, Access.internal);
-  @@clientName(OpenAI.ApplyPatchFileOperation,
+  @@clientName(
+    OpenAI.ApplyPatchFileOperation,
     "InternalApplyPatchFileOperation"
   );
 
   @@access(OpenAI.ApplyPatchCreateFileOperationParam, Access.internal);
-  @@clientName(OpenAI.ApplyPatchCreateFileOperationParam,
+  @@clientName(
+    OpenAI.ApplyPatchCreateFileOperationParam,
     "InternalApplyPatchCreateFileOperationParam"
   );
 
@@ -151,7 +163,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.FileSearchToolCall, "InternalFileSearchToolCall");
 
   @@access(OpenAI.OutputItemFileSearchToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemFileSearchToolCall,
+  @@clientName(
+    OpenAI.OutputItemFileSearchToolCall,
     "InternalOutputItemFileSearchToolCall"
   );
 
@@ -159,7 +172,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.ItemMcpListTools, "InternalItemMcpListTools");
 
   @@access(OpenAI.OutputItemOutputMessage, Access.internal);
-  @@clientName(OpenAI.OutputItemOutputMessage,
+  @@clientName(
+    OpenAI.OutputItemOutputMessage,
     "InternalOutputItemOutputMessage"
   );
 
@@ -179,7 +193,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.InputFileContentParam, "InternalInputFileContentParam");
 
   @@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
-  @@clientName(OpenAI.InputImageContentParamAutoParam,
+  @@clientName(
+    OpenAI.InputImageContentParamAutoParam,
     "InternalInputImageContentParamAutoParam"
   );
   @@access(OpenAI.InputTextContent, Access.internal);
@@ -192,24 +207,28 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.OutputItemMcpListTools, "InternalOutputItemMcpListTools");
 
   @@access(OpenAI.OutputMessageContentOutputTextContent, Access.internal);
-  @@clientName(OpenAI.OutputMessageContentOutputTextContent,
+  @@clientName(
+    OpenAI.OutputMessageContentOutputTextContent,
     "InternalOutputMessageContentOutputTextContent"
   );
 
   @@access(OpenAI.OutputContentOutputTextContent, Access.internal);
-  @@clientName(OpenAI.OutputContentOutputTextContent,
+  @@clientName(
+    OpenAI.OutputContentOutputTextContent,
     "InternalOutputContentOutputTextContent"
   );
 
   @@access(OpenAI.ItemComputerToolCall, Access.internal);
   @@clientName(OpenAI.ItemComputerToolCall, "InternalItemComputerToolCall");
   @@access(OpenAI.OutputItemComputerToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemComputerToolCall,
+  @@clientName(
+    OpenAI.OutputItemComputerToolCall,
     "InternalOutputItemComputerToolCall"
   );
 
   @@access(OpenAI.OutputItemCodeInterpreterToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemCodeInterpreterToolCall,
+  @@clientName(
+    OpenAI.OutputItemCodeInterpreterToolCall,
     "InternalOutputItemCodeInterpreterToolCall"
   );
 
@@ -217,7 +236,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.ItemOutputMessage, "InternalItemMessage");
 
   @@access(OpenAI.FunctionAndCustomToolCallOutput, Access.internal);
-  @@clientName(OpenAI.FunctionAndCustomToolCallOutput,
+  @@clientName(
+    OpenAI.FunctionAndCustomToolCallOutput,
     "InternalFunctionAndCustomToolCallOutput"
   );
 
@@ -225,67 +245,80 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.OutputItemMcpToolCall, "InternalOutputItemMcpToolCall");
 
   @@access(OpenAI.ItemResourceMcpApprovalResponseResource, Access.internal);
-  @@clientName(OpenAI.ItemResourceMcpApprovalResponseResource,
+  @@clientName(
+    OpenAI.ItemResourceMcpApprovalResponseResource,
     "InternalOutputItemMcpApprovalResponseResource"
   );
 
   @@access(OpenAI.OutputItemMcpApprovalRequest, Access.internal);
-  @@clientName(OpenAI.OutputItemMcpApprovalRequest,
+  @@clientName(
+    OpenAI.OutputItemMcpApprovalRequest,
     "InternalOutputItemMcpApprovalRequest"
   );
 
   @@access(OpenAI.OutputItemFunctionShellCallOutput, Access.internal);
-  @@clientName(OpenAI.OutputItemFunctionShellCallOutput,
+  @@clientName(
+    OpenAI.OutputItemFunctionShellCallOutput,
     "InternalOutputItemFunctionShellCallOutput"
   );
 
   @@access(OpenAI.OutputItemFunctionShellCall, Access.internal);
-  @@clientName(OpenAI.OutputItemFunctionShellCall,
+  @@clientName(
+    OpenAI.OutputItemFunctionShellCall,
     "InternalOutputItemFunctionShellCall"
   );
 
   @@access(OpenAI.ItemLocalShellToolCallOutput, Access.internal);
-  @@clientName(OpenAI.ItemLocalShellToolCallOutput,
+  @@clientName(
+    OpenAI.ItemLocalShellToolCallOutput,
     "InternalOutputItemLocalShellToolCallOutput"
   );
 
   @@access(OpenAI.OutputItemLocalShellToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemLocalShellToolCall,
+  @@clientName(
+    OpenAI.OutputItemLocalShellToolCall,
     "InternalOutputItemLocalShellToolCall"
   );
 
   @@access(OpenAI.OutputItemImageGenToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemImageGenToolCall,
+  @@clientName(
+    OpenAI.OutputItemImageGenToolCall,
     "InternalOutputItemImageGenToolCall"
   );
 
   @@access(OpenAI.FunctionToolCallOutputResource, Access.internal);
-  @@clientName(OpenAI.FunctionToolCallOutputResource,
+  @@clientName(
+    OpenAI.FunctionToolCallOutputResource,
     "InternalOutputItemFunctionToolCallOutputResource"
   );
 
   @@access(OpenAI.OutputItemFunctionToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemFunctionToolCall,
+  @@clientName(
+    OpenAI.OutputItemFunctionToolCall,
     "InternalOutputItemFunctionToolCall"
   );
 
   @@access(OpenAI.OutputItemWebSearchToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemWebSearchToolCall,
+  @@clientName(
+    OpenAI.OutputItemWebSearchToolCall,
     "InternalOutputItemWebSearchToolCall"
   );
 
   @@access(OpenAI.ItemResourceComputerToolCallOutputResource, Access.internal);
-  @@clientName(OpenAI.ItemResourceComputerToolCallOutputResource,
+  @@clientName(
+    OpenAI.ItemResourceComputerToolCallOutputResource,
     "InternalOutputItemComputerToolCallOutputResource"
   );
 
   @@access(OpenAI.ItemCustomToolCallOutput, Access.internal);
-  @@clientName(OpenAI.ItemCustomToolCallOutput,
+  @@clientName(
+    OpenAI.ItemCustomToolCallOutput,
     "InternalOutputItemCustomToolCallOutput"
   );
 
   @@access(OpenAI.OutputItemReasoningItem, Access.internal);
-  @@clientName(OpenAI.OutputItemReasoningItem,
+  @@clientName(
+    OpenAI.OutputItemReasoningItem,
     "InternalOutputItemReasoningItem"
   );
 
@@ -295,12 +328,14 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.SummaryTextContent, "InternalSummaryTextObject");
 
   @@access(OpenAI.OutputItemCompactionBody, Access.internal);
-  @@clientName(OpenAI.OutputItemCompactionBody,
+  @@clientName(
+    OpenAI.OutputItemCompactionBody,
     "InternalOutputItemCompactionBody"
   );
 
   @@access(OpenAI.OutputItemCustomToolCall, Access.internal);
-  @@clientName(OpenAI.OutputItemCustomToolCall,
+  @@clientName(
+    OpenAI.OutputItemCustomToolCall,
     "InternalOutputItemCustomToolCall"
   );
 
@@ -311,7 +346,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
 
   @@access(OpenAI.WebSearchActionOpenPage, Access.internal);
-  @@clientName(OpenAI.WebSearchActionOpenPage,
+  @@clientName(
+    OpenAI.WebSearchActionOpenPage,
     "InternalWebSearchActionOpenPage"
   );
 
@@ -319,12 +355,14 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.WebSearchActionSearch, "InternalWebSearchActionSearch");
 
   @@access(OpenAI.CodeInterpreterOutputImage, Access.internal);
-  @@clientName(OpenAI.CodeInterpreterOutputImage,
+  @@clientName(
+    OpenAI.CodeInterpreterOutputImage,
     "InternalCodeInterpreterOutputImage"
   );
 
   @@access(OpenAI.CodeInterpreterOutputLogs, Access.internal);
-  @@clientName(OpenAI.CodeInterpreterOutputLogs,
+  @@clientName(
+    OpenAI.CodeInterpreterOutputLogs,
     "InternalCodeInterpreterOutputLogs"
   );
 
@@ -352,7 +390,8 @@ namespace Azure.AI.Projects {
 
   // @@changePropertyType(OpenAI.InputMessage.role, OpenAI.MessageRole);
 
-  @@copyProperties(OpenAI.OutputItem,
+  @@copyProperties(
+    OpenAI.OutputItem,
     {
       id?: string,
     }

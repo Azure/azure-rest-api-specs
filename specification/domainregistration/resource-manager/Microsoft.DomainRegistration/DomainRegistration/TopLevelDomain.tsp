@@ -69,6 +69,7 @@ interface TopLevelDomains {
 
 @@doc(TopLevelDomain.name, "Name of the top-level domain.");
 @@doc(TopLevelDomain.properties, "TopLevelDomain resource specific properties");
-@@doc(TopLevelDomains.listAgreements::parameters.body,
+@@doc(
+  TopLevelDomains.listAgreements::parameters.body,
   "Domain agreement options."
 );
