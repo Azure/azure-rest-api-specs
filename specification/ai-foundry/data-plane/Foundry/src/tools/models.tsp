@@ -800,13 +800,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Shared fields for WorkIQ tool definitions.
-   */
-  model WorkIQPreviewToolFields {
-    ...RequiredToolProjectConnectionIdField;
-  }
-
-  /**
    * A WorkIQ server-side tool.
    */
   model WorkIQPreviewTool extends OpenAI.Tool {
@@ -815,7 +808,7 @@ namespace Azure.AI.Projects {
      */
     type: "work_iq_preview";
 
-    ...WorkIQPreviewToolFields;
+    ...RequiredToolProjectConnectionIdField;
     ...ToolNameAndDescriptionExtension;
   }
 
