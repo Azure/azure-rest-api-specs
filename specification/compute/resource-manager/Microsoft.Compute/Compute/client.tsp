@@ -183,93 +183,92 @@ namespace ComputeCombine;
 @@clientName(Compute.VirtualMachineScaleSetExtensionProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
 
 // ── VMSS extension base type (csharp only) ──
-// Backward compatibility: the previous .NET SDK exposed VirtualMachineScaleSetExtensionData as a direct ResourceData-derived model.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type and VMSS extension request serialization shape."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetExtension,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+// Backward compatibility: VMSS extension data/patch models previously inherited ResourceData directly.
+// Use alternateType to swap the spec model with a C#-only model that extends ProxyResource, since
+// hierarchyBuilding drops properties that were inherited from the original base and are not on the new
+// base (e.g. tags). Tracked in: https://github.com/Azure/typespec-azure/issues/4505
+@clientName("VirtualMachineScaleSetExtensionData", "csharp")
+model CSharpVirtualMachineScaleSetExtension extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<Compute.VirtualMachineScaleSetExtension, "id" | "name" | "type">;
+}
+@@alternateType(Compute.VirtualMachineScaleSetExtension, CSharpVirtualMachineScaleSetExtension, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type and VM extension request serialization shape."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetVMExtension,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("VirtualMachineScaleSetVmExtensionData", "csharp")
+model CSharpVirtualMachineScaleSetVMExtension extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<Compute.VirtualMachineScaleSetVMExtension, "id" | "name" | "type">;
+}
+@@alternateType(Compute.VirtualMachineScaleSetVMExtension, CSharpVirtualMachineScaleSetVMExtension, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for VMSS extension patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetExtensionUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("VirtualMachineScaleSetExtensionPatch", "csharp")
+model CSharpVirtualMachineScaleSetExtensionUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<Compute.VirtualMachineScaleSetExtensionUpdate, "id" | "name" | "type">;
+}
+@@alternateType(Compute.VirtualMachineScaleSetExtensionUpdate, CSharpVirtualMachineScaleSetExtensionUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for VM extension patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetVMExtensionUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("VirtualMachineScaleSetVmExtensionPatch", "csharp")
+model CSharpVirtualMachineScaleSetVMExtensionUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<Compute.VirtualMachineScaleSetVMExtensionUpdate, "id" | "name" | "type">;
+}
+@@alternateType(Compute.VirtualMachineScaleSetVMExtensionUpdate, CSharpVirtualMachineScaleSetVMExtensionUpdate, "csharp");
 
 // ── Gallery patch models base type (csharp only) ──
 // Backward compatibility: gallery patch models previously inherited ResourceData in the old SDK.
-// Without this override, they inherit UpdateResourceDefinition which doesn't derive from ResourceData,
-// breaking the API contract.
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-// @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryUpdate,
-//   Azure.ResourceManager.Foundations.ProxyResource,
-//   "csharp"
-// );
+// Use alternateType to swap each spec model with a C#-only model that extends ProxyResource and keeps
+// all properties (including tags). hierarchyBuilding alone drops the tags property because it was on
+// the original UpdateResourceDefinition base. Tracked in: https://github.com/Azure/typespec-azure/issues/4505
 @clientName("GalleryPatch", "csharp")
 model CSharpGalleryUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
   ...OmitProperties<GalleryUpdate, "id" | "name" | "type">;
 }
 @@alternateType(ComputeGallery.GalleryUpdate, CSharpGalleryUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryImageUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryImagePatch", "csharp")
+model CSharpGalleryImageUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryImageUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryImageUpdate, CSharpGalleryImageUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryImageVersionUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryImageVersionPatch", "csharp")
+model CSharpGalleryImageVersionUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryImageVersionUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryImageVersionUpdate, CSharpGalleryImageVersionUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryApplicationUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryApplicationPatch", "csharp")
+model CSharpGalleryApplicationUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryApplicationUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryApplicationUpdate, CSharpGalleryApplicationUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryApplicationVersionUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryApplicationVersionPatch", "csharp")
+model CSharpGalleryApplicationVersionUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryApplicationVersionUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryApplicationVersionUpdate, CSharpGalleryApplicationVersionUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryScriptUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryScriptPatch", "csharp")
+model CSharpGalleryScriptUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryScriptUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryScriptUpdate, CSharpGalleryScriptUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryScriptVersionUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryScriptVersionPatch", "csharp")
+model CSharpGalleryScriptVersionUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryScriptVersionUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryScriptVersionUpdate, CSharpGalleryScriptVersionUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryInVMAccessControlProfileUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryInVmAccessControlProfilePatch", "csharp")
+model CSharpGalleryInVMAccessControlProfileUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryInVMAccessControlProfileUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryInVMAccessControlProfileUpdate, CSharpGalleryInVMAccessControlProfileUpdate, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryInVMAccessControlProfileVersionUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+@clientName("GalleryInVmAccessControlProfileVersionPatch", "csharp")
+model CSharpGalleryInVMAccessControlProfileVersionUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryInVMAccessControlProfileVersionUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryInVMAccessControlProfileVersionUpdate, CSharpGalleryInVMAccessControlProfileVersionUpdate, "csharp");
 
 // ── G7: rename `source` → `gallerySource` (csharp only) on GalleryDiskImage and GalleryImageVersionStorageProfile
 //        so the generated property matches the previously-shipped name `GallerySource` of the discriminator-typed
