@@ -1702,36 +1702,42 @@
     },
     "AdrLinkingState": {
       "type": "string",
-      "description": "The state of Azure Device Registry (ADR) linking for a provisioning service.",
+      "description": "The state of ADR linking for a provisioning service.",
       "enum": [
-        "Linking",
-        "Linked",
-        "LinkingFailed",
-        "NamespaceDeleted"
+        "NotLinked",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Orphaned"
       ],
       "x-ms-enum": {
         "name": "AdrLinkingState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Linking",
-            "value": "Linking",
+            "name": "NotLinked",
+            "value": "NotLinked",
+            "description": "The provisioning service is not linked to a Device Registry namespace."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
             "description": "The linking process is in progress."
           },
           {
-            "name": "Linked",
-            "value": "Linked",
-            "description": "The provisioning service is linked to a Device Registry namespace."
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The linking process succeeded."
           },
           {
-            "name": "LinkingFailed",
-            "value": "LinkingFailed",
-            "description": "The linking process has failed."
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The linking process failed."
           },
           {
-            "name": "NamespaceDeleted",
-            "value": "NamespaceDeleted",
-            "description": "The linked Device Registry namespace has been deleted."
+            "name": "Orphaned",
+            "value": "Orphaned",
+            "description": "The linked Device Registry namespace no longer exists."
           }
         ]
       }
@@ -1917,25 +1923,22 @@
           "type": "string",
           "description": "Unique identifier of the linked Device Registry namespace."
         },
-        "dataEndpoint": {
+        "dataAddress": {
           "type": "string",
-          "description": "The data plane endpoint of the linked Azure Device Registry namespace."
+          "description": "The data plane address of the linked Azure Device Registry namespace."
         },
-        "region": {
+        "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "Azure region of the linked Device Registry namespace."
+          "description": "Azure location of the linked Device Registry namespace."
         },
-        "adrLinkState": {
+        "linkingState": {
           "$ref": "#/definitions/AdrLinkingState",
-          "description": "The Azure Device Registry (ADR) link state of this namespace."
+          "description": "The linking state of this namespace."
         }
       },
       "required": [
         "resourceId",
-        "authenticationType",
-        "namespaceUuid",
-        "dataEndpoint",
-        "adrLinkState"
+        "authenticationType"
       ]
     },
     "ErrorDetails": {
@@ -2064,7 +2067,7 @@
         },
         "deviceRegistryNamespaces": {
           "type": "array",
-          "description": "The Azure Device Registry (ADR) namespaces linked to the provisioning service. Linking is established via the Azure Device Registry control plane; this property is read-only on this resource.",
+          "description": "The Device Registry namespaces linked to the provisioning service.",
           "maxItems": 1,
           "items": {
             "$ref": "#/definitions/DeviceRegistryNamespaceDescription"

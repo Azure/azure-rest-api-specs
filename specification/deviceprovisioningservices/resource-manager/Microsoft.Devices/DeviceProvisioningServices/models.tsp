@@ -360,7 +360,7 @@ model IotDpsPropertiesDescription {
   deviceRegistryNamespace?: DeviceRegistryNamespaceDescription;
 
   /**
-   * The Azure Device Registry (ADR) namespaces linked to the provisioning service. Linking is established via the Azure Device Registry control plane; this property is read-only on this resource.
+   * The Device Registry namespaces linked to the provisioning service.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
@@ -549,25 +549,25 @@ model DeviceRegistryNamespaceDescription {
    * Unique identifier of the linked Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
-  namespaceUuid: string;
+  namespaceUuid?: string;
 
   /**
-   * The data plane endpoint of the linked Azure Device Registry namespace.
+   * The data plane address of the linked Azure Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
-  dataEndpoint: string;
+  dataAddress?: string;
 
   /**
-   * Azure region of the linked Device Registry namespace.
+   * Azure location of the linked Device Registry namespace.
    */
   @added(Versions.v2026_06_01_preview)
-  region?: Azure.Core.azureLocation;
+  location?: Azure.Core.azureLocation;
 
   /**
-   * The Azure Device Registry (ADR) link state of this namespace.
+   * The linking state of this namespace.
    */
   @added(Versions.v2026_06_01_preview)
-  adrLinkState: AdrLinkingState;
+  linkingState?: AdrLinkingState;
 }
 
 /**
@@ -937,29 +937,34 @@ model CertificateBodyDescription {
 }
 
 /**
- * The state of Azure Device Registry (ADR) linking for a provisioning service.
+ * The state of ADR linking for a provisioning service.
  */
 @added(Versions.v2026_06_01_preview)
 union AdrLinkingState {
   string,
 
   /**
+   * The provisioning service is not linked to a Device Registry namespace.
+   */
+  NotLinked: "NotLinked",
+
+  /**
    * The linking process is in progress.
    */
-  Linking: "Linking",
+  InProgress: "InProgress",
 
   /**
-   * The provisioning service is linked to a Device Registry namespace.
+   * The linking process succeeded.
    */
-  Linked: "Linked",
+  Succeeded: "Succeeded",
 
   /**
-   * The linking process has failed.
+   * The linking process failed.
    */
-  LinkingFailed: "LinkingFailed",
+  Failed: "Failed",
 
   /**
-   * The linked Device Registry namespace has been deleted.
+   * The linked Device Registry namespace no longer exists.
    */
-  NamespaceDeleted: "NamespaceDeleted",
+  Orphaned: "Orphaned",
 }
