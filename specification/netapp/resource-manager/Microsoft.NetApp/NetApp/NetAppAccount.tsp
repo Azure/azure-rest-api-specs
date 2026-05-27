@@ -250,7 +250,14 @@ model BindPasswordAkvConfigPatch is PatchModel<BindPasswordAkvConfig>;
 /**
  * LDAP configuration for PATCH operations (no default values)
  */
-model LdapConfigurationPatch is PatchModel<LdapConfiguration>;
+model LdapConfigurationPatch
+  is PatchModel<LdapConfiguration, "bindPasswordAkvConfig"> {
+  /**
+   * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+   */
+  @added(Versions.v2026_04_15_preview)
+  bindPasswordAkvConfig?: BindPasswordAkvConfigPatch;
+}
 /**
  * Entra ID configuration for the account.
  */
