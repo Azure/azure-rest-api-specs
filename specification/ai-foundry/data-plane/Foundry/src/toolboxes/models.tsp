@@ -47,6 +47,13 @@ model WithFieldsOptional<Source, Keys extends string> {
 }
 
 /**
+ * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
+ */
+model ToolFields<Source> {
+  ...OmitProperties<Source, "type" | "name" | "description">;
+}
+
+/**
  * Supported tool types for tools stored in a toolbox.
  */
 union ToolboxToolType {
@@ -85,7 +92,7 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
    */
   type: "code_interpreter";
 
-  ...OmitProperties<OpenAI.CodeInterpreterTool, "type">;
+  ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
 
 /**
@@ -97,10 +104,7 @@ model FileSearchToolboxTool extends ToolboxTool {
    */
   type: "file_search";
 
-  ...WithFieldsOptional<
-    OmitProperties<OpenAI.FileSearchTool, "type">,
-    "vector_store_ids"
-  >;
+  ...WithFieldsOptional<ToolFields<OpenAI.FileSearchTool>, "vector_store_ids">;
 }
 
 /**
@@ -112,7 +116,7 @@ model WebSearchToolboxTool extends ToolboxTool {
    */
   type: "web_search";
 
-  ...OmitProperties<OpenAI.WebSearchTool, "type">;
+  ...ToolFields<OpenAI.WebSearchTool>;
 }
 
 /**
@@ -124,12 +128,7 @@ model MCPToolboxTool extends ToolboxTool {
    */
   type: "mcp";
 
-  ...OmitProperties<OpenAI.MCPTool, "type">;
-
-  /**
-   * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-   */
-  project_connection_id?: string;
+  ...ToolFields<OpenAI.MCPTool>;
 }
 
 /**
@@ -141,7 +140,7 @@ model AzureAISearchToolboxTool extends ToolboxTool {
    */
   type: "azure_ai_search";
 
-  ...OmitProperties<AzureAISearchTool, "type" | "name" | "description">;
+  ...AzureAISearchToolFields;
 }
 
 /**
@@ -153,7 +152,7 @@ model OpenApiToolboxTool extends ToolboxTool {
    */
   type: "openapi";
 
-  ...OmitProperties<OpenApiTool, "type">;
+  ...OpenApiToolFields;
 }
 
 /**
@@ -165,7 +164,7 @@ model A2APreviewToolboxTool extends ToolboxTool {
    */
   type: "a2a_preview";
 
-  ...OmitProperties<A2APreviewTool, "type" | "name" | "description">;
+  ...A2APreviewToolFields;
 }
 
 /**
@@ -177,7 +176,7 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
    */
   type: "work_iq_preview";
 
-  ...OmitProperties<WorkIQPreviewTool, "type" | "name" | "description">;
+  ...WorkIQPreviewToolFields;
 }
 
 /**
@@ -189,7 +188,7 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
    */
   type: "fabric_iq_preview";
 
-  ...OmitProperties<FabricIQPreviewTool, "type" | "name" | "description">;
+  ...FabricIQPreviewToolFields;
 }
 
 /**
