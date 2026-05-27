@@ -170,12 +170,12 @@ model IssueCertResult {
 }
 
 /**
- * 202 Accepted response for the `:issueCert` action. The issued certificate
- * chain is delivered by the GET on the corresponding `issueCertResults`
- * sub-resource (see `IssueCertResults_Get`); it is intentionally not
- * returned on this 202.
+ * 202 Accepted response shape for long-running operations on device authentication
+ * profiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any
+ * operation payload (e.g. the issued certificate chain) is delivered by the
+ * dedicated polling GET on the corresponding `*Results` sub-resource.
  */
-model IssueCertAcceptedResponse {
+model OperationAcceptedResponse {
   /** The unique ID of the operation. */
   id: string;
 
@@ -267,7 +267,7 @@ interface DeviceAuthenticationProfiles {
     /** The location for monitoring the operation state. */
     @header("Operation-Location") operationLocation: url;
 
-    ...IssueCertAcceptedResponse;
+    ...OperationAcceptedResponse;
   } | Azure.Core.Foundations.ErrorResponse;
 
   /**
@@ -293,15 +293,15 @@ interface DeviceAuthenticationProfiles {
     /** The name of the authentication profile. */
     @path authenticationProfileName: string,
 
-    /** Revoke certificates request body. */
-    @body body: RevokeCertsRequest,
+    /** Revoke certificates request body. Currently has no required fields; reserved for future. */
+    @body body?: RevokeCertsRequest,
   ): {
     @statusCode statusCode: 202;
 
     /** The location for monitoring the operation state. */
     @header("Operation-Location") operationLocation: url;
 
-    ...RevokeCertsResult;
+    ...OperationAcceptedResponse;
   } | Azure.Core.Foundations.ErrorResponse;
 }
 

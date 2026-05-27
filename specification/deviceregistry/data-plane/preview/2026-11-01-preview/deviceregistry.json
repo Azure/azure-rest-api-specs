@@ -844,7 +844,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/IssueCertAcceptedResponse"
+              "$ref": "#/definitions/OperationAcceptedResponse"
             },
             "headers": {
               "Operation-Location": {
@@ -913,8 +913,8 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Revoke certificates request body.",
-            "required": true,
+            "description": "Revoke certificates request body. Currently has no required fields; reserved for future.",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/RevokeCertsRequest"
             }
@@ -924,7 +924,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/RevokeCertsResult"
+              "$ref": "#/definitions/OperationAcceptedResponse"
             },
             "headers": {
               "Operation-Location": {
@@ -4032,28 +4032,6 @@
         }
       }
     },
-    "IssueCertAcceptedResponse": {
-      "type": "object",
-      "description": "202 Accepted response for the `:issueCert` action. The issued certificate\nchain is delivered by the GET on the corresponding `issueCertResults`\nsub-resource (see `IssueCertResults_Get`); it is intentionally not\nreturned on this 202.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error object that describes the error when status is \"Failed\"."
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
     "IssueCertResult": {
       "type": "object",
       "description": "Status monitor for the long-running `:issueCert` action on a device authentication profile.",
@@ -4201,6 +4179,28 @@
       "required": [
         "id",
         "kind",
+        "status"
+      ]
+    },
+    "OperationAcceptedResponse": {
+      "type": "object",
+      "description": "202 Accepted response shape for long-running operations on device authentication\nprofiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any\noperation payload (e.g. the issued certificate chain) is delivered by the\ndedicated polling GET on the corresponding `*Results` sub-resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\"."
+        }
+      },
+      "required": [
+        "id",
         "status"
       ]
     },
