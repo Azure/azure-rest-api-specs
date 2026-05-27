@@ -1130,6 +1130,17 @@ model CSharpSecurityAssessmentStatusResult
   "current",
   "python"
 );
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
+@clientName("AdvancedThreatProtectionSettingName", "csharp")
+union CSharpAdvancedThreatProtectionSettingName {
+  /** Current. */
+  Current: "current",
+}
+
+@@Azure.ClientGenerator.Core.alternateType(AdvancedThreatProtectionSettingName,
+  CSharpAdvancedThreatProtectionSettingName,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
   "initiate",
