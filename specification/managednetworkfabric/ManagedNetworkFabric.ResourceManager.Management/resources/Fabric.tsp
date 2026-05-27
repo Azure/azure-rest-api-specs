@@ -14,8 +14,8 @@ namespace Microsoft.ManagedNetworkFabric;
 @added(Versions.v2026_01_15_preview)
 model Fabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Fabric.")
-  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
-  @minLength(3)
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @minLength(1)
   @maxLength(128)
   @path
   @key("fabricName")
