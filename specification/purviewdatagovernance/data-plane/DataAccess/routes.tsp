@@ -132,44 +132,6 @@ interface DataSubscriptions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
-  @doc("Approves a data subscription request.")
-  @route("/dataSubscriptions/{dataSubscriptionId}:approve")
-  @post
-  Approve is RpcOperation<
-    {
-      @doc("The data subscription identifier.")
-      @path
-      dataSubscriptionId: uuid;
-
-      @doc("The approver's decision.")
-      @body
-      decision: ApproverDecision;
-    },
-    DataSubscription
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("DataSubscriptions")
-  @doc("Declines a data subscription request.")
-  @route("/dataSubscriptions/{dataSubscriptionId}:decline")
-  @post
-  Decline is RpcOperation<
-    {
-      @doc("The data subscription identifier.")
-      @path
-      dataSubscriptionId: uuid;
-
-      @doc("The approver's decision.")
-      @body
-      decision: ApproverDecision;
-    },
-    DataSubscription
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("DataSubscriptions")
   @doc("Completes a data subscription after access has been granted.")
   @route("/dataSubscriptions/{dataSubscriptionId}:complete")
   @post
@@ -470,20 +432,6 @@ interface Workflows {
     {}
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("Workflows")
-  @doc("Triggers a workflow.")
-  @route("/workflows/{workflowId}/trigger")
-  @put
-  Trigger is RpcOperation<
-    {
-      @doc("The workflow identifier.")
-      @path
-      workflowId: uuid;
-    },
-    {}
-  >;
 }
 
 // ============================================================
@@ -600,20 +548,6 @@ interface DataProductPolicySets {
     DataProductWorkflowSettingsResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("PolicySets")
-  @doc("Gets the count of active subscribers for a data product.")
-  @route("/dataProducts/{dataProductId}/activeSubscribers")
-  @get
-  GetActiveSubscribers is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    ActiveSubscribersResponse
-  >;
 }
 
 // ============================================================

@@ -483,12 +483,6 @@ model DataProductWorkflowSettingsResponse {
   usePowerAutomate: boolean;
 }
 
-@doc("Response with active subscriber count.")
-model ActiveSubscribersResponse {
-  @doc("The number of active subscribers.")
-  activeSubscribers: int32;
-}
-
 @doc("Response for delete operations.")
 model DeleteResponse {
   @doc("Whether the delete operation was successful.")

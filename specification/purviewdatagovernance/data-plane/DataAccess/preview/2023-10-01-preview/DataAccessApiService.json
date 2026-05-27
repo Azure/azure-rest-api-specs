@@ -392,53 +392,6 @@
         }
       }
     },
-    "/dataProducts/{dataProductId}/activeSubscribers": {
-      "get": {
-        "operationId": "DataProductPolicySets_GetActiveSubscribers",
-        "tags": [
-          "PolicySets"
-        ],
-        "description": "Gets the count of active subscribers for a data product.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "The data product identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ActiveSubscribersResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataProductPolicySets_GetActiveSubscribers": {
-            "$ref": "./examples/DataProductPolicySets_GetActiveSubscribers_Gen.json"
-          }
-        }
-      }
-    },
     "/dataProducts/{dataProductId}/policySet": {
       "get": {
         "operationId": "DataProductPolicySets_GetWorkflowSettings",
@@ -1092,118 +1045,6 @@
         "x-ms-examples": {
           "DataSubscriptions_Save": {
             "$ref": "./examples/DataSubscriptions_Save_Gen.json"
-          }
-        }
-      }
-    },
-    "/dataSubscriptions/{dataSubscriptionId}:approve": {
-      "post": {
-        "operationId": "DataSubscriptions_Approve",
-        "tags": [
-          "DataSubscriptions"
-        ],
-        "description": "Approves a data subscription request.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "dataSubscriptionId",
-            "in": "path",
-            "description": "The data subscription identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "decision",
-            "in": "body",
-            "description": "The approver's decision.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApproverDecision"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DataSubscription"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataSubscriptions_Approve": {
-            "$ref": "./examples/DataSubscriptions_Approve_Gen.json"
-          }
-        }
-      }
-    },
-    "/dataSubscriptions/{dataSubscriptionId}:decline": {
-      "post": {
-        "operationId": "DataSubscriptions_Decline",
-        "tags": [
-          "DataSubscriptions"
-        ],
-        "description": "Declines a data subscription request.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "dataSubscriptionId",
-            "in": "path",
-            "description": "The data subscription identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "decision",
-            "in": "body",
-            "description": "The approver's decision.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApproverDecision"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DataSubscription"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataSubscriptions_Decline": {
-            "$ref": "./examples/DataSubscriptions_Decline_Gen.json"
           }
         }
       }
@@ -1917,50 +1758,6 @@
         }
       }
     },
-    "/workflows/{workflowId}/trigger": {
-      "put": {
-        "operationId": "Workflows_Trigger",
-        "tags": [
-          "Workflows"
-        ],
-        "description": "Triggers a workflow.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowId",
-            "in": "path",
-            "description": "The workflow identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Workflows_Trigger": {
-            "$ref": "./examples/Workflows_Trigger_Gen.json"
-          }
-        }
-      }
-    },
     "/workflows/{workflowId}/workflowRunId/{workflowRunId}:approve": {
       "post": {
         "operationId": "Workflows_ApproveRun",
@@ -2205,20 +2002,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ActiveSubscribersResponse": {
-      "type": "object",
-      "description": "Response with active subscriber count.",
-      "properties": {
-        "activeSubscribers": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of active subscribers."
-        }
-      },
-      "required": [
-        "activeSubscribers"
       ]
     },
     "ApprovalWorkflow": {
