@@ -18,7 +18,6 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
-    api-version: "2025-08-01"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storage"
     namespace: "com.azure.resourcemanager.storage"
@@ -35,15 +34,14 @@ options:
     rename-model:
       FailoverRequestFailoverType: FailoverType
       ListKeysRequestExpand: ListKeyExpand
-    api-version: "2025-08-01"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-storage"
     service-dir: sdk/storage
     flavor: "azure"
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-storage"
-    api-version: "2025-08-01"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storage"
     emitter-output-dir: "{output-dir}/{service-dir}/armstorage"
@@ -54,7 +52,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    api-version: "2025-08-01"
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Storage"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

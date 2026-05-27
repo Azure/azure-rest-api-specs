@@ -21310,16 +21310,9 @@
           "description": "The properties associated to this reservation",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "The location of the reservation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -21329,6 +21322,13 @@
           "type": "integer",
           "format": "int32"
         },
+        "tags": {
+          "type": "object",
+          "description": "Tags for this reservation",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "sku": {
           "$ref": "#/definitions/ReservationSkuProperty",
           "description": "The sku information associated to this reservation"
@@ -21336,7 +21336,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
