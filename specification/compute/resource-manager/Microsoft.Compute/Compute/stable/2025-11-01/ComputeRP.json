@@ -20840,26 +20840,27 @@
       "type": "object",
       "description": "Describes a Virtual Machine Scale Set Extension.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-          "x-ms-client-flatten": true
+        "name": {
+          "type": "string",
+          "description": "Resource name"
         },
         "type": {
           "type": "string",
           "description": "Resource type",
           "readOnly": true
         },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "VirtualMachineScaleSetExtensionListResult": {
       "type": "object",
@@ -22412,7 +22413,8 @@
         {
           "$ref": "../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "VirtualMachineScaleSetVMExtensionUpdate": {
       "type": "object",
