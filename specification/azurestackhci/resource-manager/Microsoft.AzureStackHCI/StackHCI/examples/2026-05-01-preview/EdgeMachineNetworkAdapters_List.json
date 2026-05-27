@@ -1,0 +1,56 @@
+{
+  "title": "EdgeMachineNetworkAdapters_List",
+  "operationId": "EdgeMachineNetworkAdapters_List",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "api-version": "2026-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "networkConfiguration": {
+                "adapterName": "ethernet0",
+                "ip4Address": "192.168.1.100",
+                "subnetMask": "255.255.255.0",
+                "defaultGateway": "192.168.1.1",
+                "dnsServers": [
+                  "8.8.8.8",
+                  "8.8.4.4"
+                ],
+                "ipInterfaceType": "Static",
+                "vlanId": 100,
+                "interfaceState": "up"
+              },
+              "reportedProperties": {
+                "adapterName": "ethernet0",
+                "ip4Address": "192.168.1.100",
+                "subnetMask": "255.255.255.0",
+                "defaultGateway": "192.168.1.1",
+                "dnsServers": [
+                  "8.8.8.8",
+                  "8.8.4.4"
+                ],
+                "interfaceDescription": "Intel(R) Ethernet Controller X710",
+                "componentId": "PCI\\VEN_8086&DEV_1572",
+                "macAddress": "00:1A:2B:3C:4D:5E",
+                "interfaceSpeed": 10000,
+                "ipInterfaceType": "Static",
+                "vlanId": 100,
+                "interfaceState": "up"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/networkAdapters/ethernet0",
+            "name": "ethernet0",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/networkAdapters"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -9202,3 +9202,1127 @@ model VmConnectRemoveJobProperties extends ClusterJobProperties {
   @Azure.ResourceManager.identifiers(#[])
   vmConnectRemoveJobDetails: VmConnectJobDetails[];
 }
+
+/**
+ * Properties of the Network Adapter resource.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineNetworkAdapterProperties {
+  /** The authoritative desired configuration for this specific interface. */
+  networkConfiguration?: NetworkAdapterConfiguration;
+
+  /** The actual applied configuration reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: NetworkAdapterReportedProperties;
+
+  /** Provisioning state of the network adapter resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Network adapter configuration.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterConfiguration {
+  /** Adapter name. */
+  adapterName?: string;
+
+  /** IP address. */
+  ip4Address?: string;
+
+  /** Subnet mask. */
+  subnetMask?: string;
+
+  /** Default gateway. */
+  defaultGateway?: string;
+
+  /** List of DNS servers. */
+  dnsServers?: string[];
+
+  /** IP configuration type (Dhcp or Static). */
+  ipInterfaceType?: IpInterfaceType;
+
+  /** VLAN identifier for network segmentation. */
+  vlanId?: int32;
+
+  /** Administrative state of the interface (up or down). */
+  interfaceState?: InterfaceState;
+
+  /** WiFi configuration desired properties. */
+  wifiConfiguration?: WifiConfigurationDesiredProperties;
+}
+
+/**
+ * Reported properties of a network adapter.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterReportedProperties {
+  /** Adapter name. */
+  adapterName?: string;
+
+  /** IP address. */
+  ip4Address?: string;
+
+  /** Subnet mask. */
+  subnetMask?: string;
+
+  /** Default gateway. */
+  defaultGateway?: string;
+
+  /** List of DNS servers. */
+  dnsServers?: string[];
+
+  /** Interface description of NIC. */
+  @visibility(Lifecycle.Read)
+  interfaceDescription?: string;
+
+  /** Component ID of NIC. */
+  @visibility(Lifecycle.Read)
+  componentId?: string;
+
+  /** Driver version of NIC. */
+  @visibility(Lifecycle.Read)
+  driverVersion?: string;
+
+  /** Default isolation of management NIC. */
+  @visibility(Lifecycle.Read)
+  defaultIsolationId?: string;
+
+  /** MAC address. */
+  @visibility(Lifecycle.Read)
+  macAddress?: string;
+
+  /** The slot attached to the NIC. */
+  @visibility(Lifecycle.Read)
+  slot?: string;
+
+  /** The switch attached to the NIC, if any. */
+  @visibility(Lifecycle.Read)
+  switchName?: string;
+
+  /** Type of network interface. */
+  @visibility(Lifecycle.Read)
+  interfaceType?: NetworkInterfaceType;
+
+  /** Interface speed in Mbps. */
+  @visibility(Lifecycle.Read)
+  interfaceSpeed?: int32;
+
+  /** Current state of the interface. */
+  @visibility(Lifecycle.Read)
+  interfaceState?: InterfaceState;
+
+  /** The type of NIC (physical, virtual, management). */
+  @visibility(Lifecycle.Read)
+  nicType?: string;
+
+  /** The status of NIC (up, disconnected). */
+  @visibility(Lifecycle.Read)
+  nicStatus?: string;
+
+  /** IP configuration type. */
+  @visibility(Lifecycle.Read)
+  ipInterfaceType?: IpInterfaceType;
+
+  /** VLAN identifier (0-4096). */
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  @maxValue(4096)
+  vlanId?: int32;
+
+  /** Indicates if this is a management interface. */
+  @visibility(Lifecycle.Read)
+  managementInterface?: boolean;
+
+  /** RDMA capability of the network adapter. */
+  @visibility(Lifecycle.Read)
+  rdmaCapability?: RdmaCapability;
+
+  /** The observed state of network adapter. */
+  @visibility(Lifecycle.Read)
+  networkAdapterStatus?: NetworkAdapterStatus;
+
+  /** WiFi configuration reported properties. */
+  @visibility(Lifecycle.Read)
+  wifiConfiguration?: WifiConfigurationReportedProperties;
+}
+
+/**
+ * Type of network interface.
+ */
+@added(Versions.v2026_05_01_preview)
+union NetworkInterfaceType {
+  string,
+
+  /** Ethernet interface. */
+  Eth: "Eth",
+
+  /** Wi-Fi interface. */
+  wifi: "wifi",
+}
+
+/**
+ * Current state of the interface.
+ */
+@added(Versions.v2026_05_01_preview)
+union InterfaceState {
+  string,
+
+  /** Interface is up. */
+  up: "up",
+
+  /** Interface is down. */
+  down: "down",
+}
+
+/**
+ * IP configuration type.
+ */
+@added(Versions.v2026_05_01_preview)
+union IpInterfaceType {
+  string,
+
+  /** DHCP configuration. */
+  Dhcp: "Dhcp",
+
+  /** Static configuration. */
+  Static: "Static",
+}
+
+/**
+ * The observed state of network adapters.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterStatus {
+  /** Network adapter provisioning error code. */
+  @visibility(Lifecycle.Read)
+  errorCode?: string;
+
+  /** Descriptive error message. */
+  @visibility(Lifecycle.Read)
+  errorMessage?: string;
+
+  /** Network adapter provisioning status. */
+  @visibility(Lifecycle.Read)
+  provisioningStatus?: NetworkAdapterProvisioningStatus;
+}
+
+/**
+ * Network adapter provisioning status.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterProvisioningStatus {
+  /** The ID of the operation performed on the network adapter. */
+  @visibility(Lifecycle.Read)
+  operationId?: string;
+
+  /** The status of the operation performed on the network adapter. */
+  @visibility(Lifecycle.Read)
+  status?: NetworkAdapterOperationStatus;
+}
+
+// ==================== WiFi Types ====================
+
+/**
+ * WiFi configuration desired properties.
+ */
+@added(Versions.v2026_05_01_preview)
+model WifiConfigurationDesiredProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+
+  /** WiFi secret reference. */
+  wifiSecret?: WifiSecret;
+}
+
+/**
+ * WiFi secret reference for storing credentials.
+ */
+@added(Versions.v2026_05_01_preview)
+model WifiSecret {
+  /** Name of the secret. */
+  secretName?: string;
+
+  /** Location of the secret. */
+  secretLocation?: string;
+
+  /** Type of the WiFi secret. */
+  secretType?: WifiSecretType;
+}
+
+/**
+ * Type of WiFi secret.
+ */
+@added(Versions.v2026_05_01_preview)
+union WifiSecretType {
+  string,
+
+  /** WiFi password. */
+  WiFiPassword: "WiFiPassword",
+
+  /** WiFi certificate. */
+  WiFiCertificate: "WiFiCertificate",
+
+  /** WiFi CA certificate. */
+  WiFiCACertificate: "WiFiCACertificate",
+}
+
+/**
+ * WiFi configuration reported properties.
+ */
+@added(Versions.v2026_05_01_preview)
+model WifiConfigurationReportedProperties {
+  /** WiFi SSID. */
+  ssid?: string;
+
+  /** WiFi authentication type. */
+  authenticationType?: AuthenticationType;
+
+  /** EAP method used for authentication. */
+  eapMethod?: EAPMethod;
+
+  /** WiFi signal strength. */
+  @visibility(Lifecycle.Read)
+  signalStrength?: int32;
+
+  /** Last successful WiFi connection timestamp. */
+  @visibility(Lifecycle.Read)
+  lastSuccessfulConnectionTimestamp?: string;
+
+  /** Current WiFi connection state. */
+  @visibility(Lifecycle.Read)
+  connectionState?: ConnectionState;
+
+  /** Username for enterprise WiFi authentication. */
+  username?: string;
+}
+
+/**
+ * WiFi connection state.
+ */
+@added(Versions.v2026_05_01_preview)
+union ConnectionState {
+  string,
+
+  /** WiFi is not configured. */
+  NotConfigured: "NotConfigured",
+
+  /** WiFi is connected. */
+  Connected: "Connected",
+
+  /** WiFi is disconnected. */
+  Disconnected: "Disconnected",
+
+  /** WiFi is connecting. */
+  Connecting: "Connecting",
+
+  /** WiFi is disconnecting. */
+  Disconnecting: "Disconnecting",
+
+  /** WiFi authentication failed. */
+  AuthenticationFailed: "AuthenticationFailed",
+}
+
+/**
+ * WiFi authentication type.
+ */
+@added(Versions.v2026_05_01_preview)
+union AuthenticationType {
+  string,
+
+  /** WPA2 Personal. */
+  `WPA2-Personal`: "WPA2-Personal",
+
+  /** WPA2 Enterprise. */
+  `WPA2-Enterprise`: "WPA2-Enterprise",
+
+  /** WPA3 Personal. */
+  `WPA3-Personal`: "WPA3-Personal",
+
+  /** WPA3 Enterprise. */
+  `WPA3-Enterprise`: "WPA3-Enterprise",
+
+  /** Open network. */
+  Open: "Open",
+}
+
+/**
+ * EAP authentication method.
+ */
+@added(Versions.v2026_05_01_preview)
+union EAPMethod {
+  string,
+
+  /** PEAP authentication. */
+  PEAP: "PEAP",
+
+  /** EAP-TLS authentication. */
+  `EAP-TLS`: "EAP-TLS",
+
+  /** EAP-TTLS authentication. */
+  `EAP-TTLS`: "EAP-TTLS",
+
+  /** EAP-FAST authentication. */
+  `EAP-FAST`: "EAP-FAST",
+}
+
+/**
+ * Status of network adapter operation.
+ */
+@added(Versions.v2026_05_01_preview)
+union NetworkAdapterOperationStatus {
+  string,
+
+  /** Operation succeeded. */
+  Succeeded: "Succeeded",
+
+  /** Operation failed. */
+  Failed: "Failed",
+
+  /** Operation in progress. */
+  InProgress: "InProgress",
+}
+
+/**
+ * Properties of the Network Adapter Job.
+ */
+@added(Versions.v2026_05_01_preview)
+@discriminator("jobType")
+model EdgeMachineNetworkAdapterJobProperties {
+  /** Type of operation. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: NetworkAdapterJobType;
+
+  /** Deployment mode to trigger job. */
+  deploymentMode?: DeploymentMode;
+
+  /** Provisioning state of the job. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Unique, immutable job id. */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /** The UTC date and time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of Edge device job. */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /** Error details if job failed. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /** Reported properties for Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: NetworkAdapterJobReportedProperties;
+}
+
+/**
+ * Type of network adapter job operation.
+ */
+@added(Versions.v2026_05_01_preview)
+union NetworkAdapterJobType {
+  string,
+
+  /** Apply configuration to the network adapter. */
+  ApplyConfiguration: "ApplyConfiguration",
+
+  /** Force push configuration to the network adapter. */
+  ForcePush: "ForcePush",
+
+  /** Job to resolve configuration drift between desired and reported state. */
+  SyncConfiguration: "SyncConfiguration",
+}
+
+/**
+ * Properties for applying network adapter configuration.
+ */
+@added(Versions.v2026_05_01_preview)
+model ApplyConfigurationNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.ApplyConfiguration;
+
+  /** The desired network configuration to apply. */
+  targetConfiguration: NetworkAdapterConfiguration;
+}
+
+/**
+ * Properties for force push of network adapter configuration.
+ */
+@added(Versions.v2026_05_01_preview)
+model ForcePushNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.ForcePush;
+}
+
+/**
+ * Properties for resolving network adapter configuration drift.
+ */
+@added(Versions.v2026_05_01_preview)
+model SyncConfigurationNetworkAdapterJobProperties
+  extends EdgeMachineNetworkAdapterJobProperties {
+  /** Job type. */
+  jobType: NetworkAdapterJobType.SyncConfiguration;
+
+  /** The strategy to use for resolving the configuration drift. */
+  @visibility(Lifecycle.Create)
+  resolutionStrategy: ResolutionStrategy;
+}
+
+/**
+ * Reported properties for Network Adapter Job.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterJobReportedProperties {
+  /**
+   * The percentage of the job that is complete.
+   */
+  @visibility(Lifecycle.Read)
+  percentComplete?: int32;
+
+  /** Validation status of Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  validationStatus?: NetworkAdapterActionStatus;
+
+  /** Deployment status of Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  deploymentStatus?: NetworkAdapterActionStatus;
+}
+
+/**
+ * The action plan deployment status for Network Adapter Job.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterActionStatus {
+  /** Status of ECE action Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of steps of Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: NetworkAdapterDeploymentStep[];
+}
+
+/**
+ * The Step of Network Adapter Job.
+ */
+@added(Versions.v2026_05_01_preview)
+model NetworkAdapterDeploymentStep {
+  /** Name of step. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Description of step. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /** FullStepIndex of step. */
+  @visibility(Lifecycle.Read)
+  fullStepIndex?: string;
+
+  /** Start time of step. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: string;
+
+  /** End time of step. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: string;
+
+  /** Status of step (Error, Success, InProgress). */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of nested steps. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: NetworkAdapterDeploymentStep[];
+
+  /** List of exceptions. */
+  @visibility(Lifecycle.Read)
+  exception?: string[];
+}
+
+////////////////////////////////////////////////////////////////
+//////// Edge Machine Storage Models /////////
+////////////////////////////////////////////////////////////////
+
+
+/**
+ * Properties of a disk.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineDiskProperties {
+  /** The authoritative desired configuration for this disk. */
+  diskConfiguration?: DiskConfiguration;
+
+  /** The actual state of the disk as reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: DiskReportedProperties;
+
+  /** Provisioning state of the disk resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Desired configuration for a disk.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskConfiguration {
+  /** List of desired volumes on this disk. */
+  @identifiers(#["path"])
+  volumes?: DiskVolumeConfiguration[];
+}
+
+/**
+ * Configuration for a volume on a disk.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskVolumeConfiguration {
+  /** Size of the volume in bytes. */
+  sizeInBytes: string;
+
+  /** Mount path for the volume (e.g., /data or D:\data). */
+  path: string;
+
+  /** File system type to format the volume with. */
+  fileSystem?: DiskFileSystemType;
+}
+
+/**
+ * File system types supported for volumes.
+ */
+@added(Versions.v2026_05_01_preview)
+union DiskFileSystemType {
+  string,
+
+  /** ext4 file system (Linux). */
+  ext4: "ext4",
+
+  /** xfs file system (Linux). */
+  xfs: "xfs",
+
+  /** NTFS file system (Windows). */
+  NTFS: "NTFS",
+
+  /** ReFS file system (Windows). */
+  ReFS: "ReFS",
+}
+
+/**
+ * The actual state of the disk as reported by the device.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskReportedProperties {
+  /** The actual disk name as reported by the OS. */
+  @visibility(Lifecycle.Read)
+  diskName?: string;
+
+  /** Model number of the hardware. */
+  @visibility(Lifecycle.Read)
+  `model`?: string;
+
+  /** The manufacturer of the disk. */
+  @visibility(Lifecycle.Read)
+  manufacturer?: string;
+
+  /** Serial number. */
+  @visibility(Lifecycle.Read)
+  serialNumber?: string;
+
+  /** Firmware version. */
+  @visibility(Lifecycle.Read)
+  firmwareVersion?: string;
+
+  /** Size in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /** Type of the disk. */
+  @visibility(Lifecycle.Read)
+  diskType?: DiskType;
+
+  /** Bus location of the disk. */
+  @visibility(Lifecycle.Read)
+  busLocation?: string;
+
+  /** Unallocated space on the disk in bytes. */
+  @visibility(Lifecycle.Read)
+  unallocatedSizeInBytes?: string;
+
+  /** Current state of the disk. */
+  @visibility(Lifecycle.Read)
+  state?: DiskState;
+
+  /** List of volumes on this disk. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["volumeId"])
+  volumes?: DiskVolumeReportedProperties[];
+}
+
+/**
+ * Type of disk.
+ */
+@added(Versions.v2026_05_01_preview)
+union DiskType {
+  string,
+
+  /** Unknown disk type. */
+  Unknown: "Unknown",
+
+  /** Storage Class Memory disk. */
+  SCM: "SCM",
+
+  /** NVMe disk. */
+  NVMe: "NVMe",
+
+  /** SATA disk. */
+  SATA: "SATA",
+
+  /** Solid State Drive. */
+  SSD: "SSD",
+
+  /** Hard Disk Drive. */
+  HDD: "HDD",
+
+  /** Virtual disk. */
+  Virtual: "Virtual",
+
+  /** Other disk type. */
+  Other: "Other",
+}
+
+/**
+ * State of the disk.
+ */
+@added(Versions.v2026_05_01_preview)
+union DiskState {
+  string,
+
+  /** Disk is online and available. */
+  Online: "Online",
+
+  /** Disk is offline. */
+  Offline: "Offline",
+
+  /** Disk has failed. */
+  Failed: "Failed",
+
+  /** Disk is missing. */
+  Missing: "Missing",
+
+  /** Disk state is unknown. */
+  Unknown: "Unknown",
+}
+
+/**
+ * Reported properties of a volume on the disk.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskVolumeReportedProperties {
+  /** Size of the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /** Mount path for the volume. */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /** File system type. */
+  @visibility(Lifecycle.Read)
+  fileSystem?: string;
+
+  /** Unique identifier for the partition. */
+  @visibility(Lifecycle.Read)
+  partitionId?: string;
+
+  /** Partition number. */
+  @visibility(Lifecycle.Read)
+  partitionNumber?: int32;
+
+  /** Byte offset of the partition start. */
+  @visibility(Lifecycle.Read)
+  offsetInBytes?: int64;
+
+  /** Name of the volume. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Indicates if this volume is a boot volume. */
+  @visibility(Lifecycle.Read)
+  isBoot?: boolean;
+
+  /** Available space on the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeRemainingInBytes?: string;
+
+  /** Resource name of the volume. */
+  @visibility(Lifecycle.Read)
+  resourceName?: string;
+}
+
+/**
+ * Properties of a volume.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineVolumeProperties {
+  /** Desired configuration for this volume. */
+  volumeConfiguration?: VolumeConfiguration;
+
+  /** The actual state of the volume as reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: VolumeReportedProperties;
+
+  /** Provisioning state of the volume resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Desired configuration for a volume. Reserved for future use.
+ */
+@added(Versions.v2026_05_01_preview)
+model VolumeConfiguration {
+  /** Reserved for future volume configuration options. */
+  reserved?: string;
+}
+
+/**
+ * The actual state of the volume as reported by the device.
+ */
+@added(Versions.v2026_05_01_preview)
+model VolumeReportedProperties {
+  /** Unique identifier for the partition. */
+  @visibility(Lifecycle.Read)
+  partitionId?: string;
+
+  /** Byte offset of the partition start. */
+  @visibility(Lifecycle.Read)
+  offsetInBytes?: int64;
+
+  /** Label of the volume. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Access path for the volume. */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /** ARM resource ID of the parent disk. */
+  @visibility(Lifecycle.Read)
+  parentDiskId?: string;
+
+  /** Indicates if this volume is a boot volume. */
+  @visibility(Lifecycle.Read)
+  isBoot?: boolean;
+
+  /** Total size of the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: string;
+
+  /** Available space on the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeRemainingInBytes?: string;
+
+  /** File system on the volume. */
+  @visibility(Lifecycle.Read)
+  fileSystem?: string;
+}
+
+/**
+ * Base properties shared by all disk job types.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineDiskJobBaseProperties {
+  /** Deployment mode to trigger job. */
+  deploymentMode?: DeploymentMode;
+
+  /** Job provisioning state. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Unique, immutable job id. */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /** The UTC date and time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of disk job. */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /** Error details if job failed. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /** Properties reported by the job execution. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: DiskJobReportedProperties;
+}
+
+/**
+ * Disk Job properties.
+ */
+@added(Versions.v2026_05_01_preview)
+@discriminator("jobType")
+model EdgeMachineDiskJobProperties {
+  /** Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: DiskJobType;
+
+  ...EdgeMachineDiskJobBaseProperties;
+}
+
+/**
+ * Job Type supported for disk operations.
+ */
+@added(Versions.v2026_05_01_preview)
+union DiskJobType {
+  string,
+
+  /** Job to create a volume on the disk. */
+  CreateVolume: "CreateVolume",
+
+  /** Job to resolve configuration drift between desired and reported state. */
+  SyncConfiguration: "SyncConfiguration",
+}
+
+/**
+ * Reported properties of a disk job.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskJobReportedProperties {
+  /** Percentage of job completion. */
+  @visibility(Lifecycle.Read)
+  percentComplete?: int32;
+
+  /** Validation status of Disk Job. */
+  @visibility(Lifecycle.Read)
+  validationStatus?: DiskActionStatus;
+
+  /** Deployment status of Disk Job. */
+  @visibility(Lifecycle.Read)
+  deploymentStatus?: DiskActionStatus;
+}
+
+/**
+ * The action plan deployment status for Disk Job.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskActionStatus {
+  /** Status of ECE action Disk Job. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of steps of Disk Job. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: DiskDeploymentStep[];
+}
+
+/**
+ * The Step of Disk Job.
+ */
+@added(Versions.v2026_05_01_preview)
+model DiskDeploymentStep {
+  /** Name of step. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Description of step. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /** FullStepIndex of step. */
+  @visibility(Lifecycle.Read)
+  fullStepIndex?: string;
+
+  /** Start time of step. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: string;
+
+  /** End time of step. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: string;
+
+  /** Status of step (Error, Success, InProgress). */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of nested steps. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: DiskDeploymentStep[];
+
+  /** List of exceptions. */
+  @visibility(Lifecycle.Read)
+  exception?: string[];
+}
+
+/**
+ * Properties for creating a volume on a disk.
+ */
+@added(Versions.v2026_05_01_preview)
+model CreateVolumeJobProperties extends EdgeMachineDiskJobProperties {
+  /** Job type. */
+  jobType: DiskJobType.CreateVolume;
+
+  /** Size of the volume to create in bytes. */
+  sizeInBytes: string;
+
+  /** Absolute path where the volume should be mounted. */
+  path: string;
+
+  /** File system type to format the volume with. */
+  @visibility(Lifecycle.Create)
+  fileSystem?: DiskFileSystemType;
+
+  /** ARM resource ID of the created volume. */
+  @visibility(Lifecycle.Read)
+  createdVolumeId?: string;
+}
+
+/**
+ * Properties for deleting a volume from a disk.
+ */
+@added(Versions.v2026_05_01_preview)
+model DeleteVolumeJobProperties extends EdgeMachineDiskPrivilegedJobProperties {
+  /** Job type. */
+  jobType: PrivilegedJobType.DeleteVolume;
+
+  /** The mount path of the volume to delete. */
+  volumePath: string;
+
+  /** Confirmation flag that must be set to true to proceed with deletion. */
+  confirmDeletion?: boolean = false;
+}
+
+/**
+ * Properties for resolving configuration drift.
+ */
+@added(Versions.v2026_05_01_preview)
+model SyncConfigurationJobProperties extends EdgeMachineDiskJobProperties {
+  /** Job type. */
+  jobType: DiskJobType.SyncConfiguration;
+
+  /** The strategy to use for resolving the configuration drift. */
+  @visibility(Lifecycle.Create)
+  resolutionStrategy: ResolutionStrategy;
+}
+
+/**
+ * Strategy for resolving configuration drift.
+ */
+@added(Versions.v2026_05_01_preview)
+union ResolutionStrategy {
+  string,
+
+  /** Trust Cloud. Push the desiredConfiguration down to the device. */
+  ApplyDesired: "ApplyDesired",
+
+  /** Trust Device. Update the desiredConfiguration in ARM to match the reported state. */
+  AcceptReported: "AcceptReported",
+}
+
+/**
+ * Describes a single drift discrepancy between desired and reported state.
+ */
+@added(Versions.v2026_05_01_preview)
+model DriftDetail {
+  /** The type of drift detected. */
+  @visibility(Lifecycle.Read)
+  driftType?: DriftType;
+
+  /** Property name that has drifted (for PropertyMismatch). */
+  @visibility(Lifecycle.Read)
+  propertyName?: string;
+
+  /** Desired value (for PropertyMismatch). */
+  @visibility(Lifecycle.Read)
+  desiredValue?: string;
+
+  /** Reported value (for PropertyMismatch). */
+  @visibility(Lifecycle.Read)
+  reportedValue?: string;
+}
+
+/**
+ * Type of drift detected.
+ */
+@added(Versions.v2026_05_01_preview)
+union DriftType {
+  string,
+
+  /** A volume exists in desiredConfiguration but is not present on the device. */
+  MissingOnDevice: "MissingOnDevice",
+
+  /** A volume exists on the device but is not present in desiredConfiguration. */
+  ExtraOnDevice: "ExtraOnDevice",
+
+  /** A property value differs between desired and reported state. */
+  PropertyMismatch: "PropertyMismatch",
+}
+
+////////////////////////////////////////////////////////////////
+////////// Disk Privileged Job Models //////////////////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Disk Privileged Job properties.
+ */
+@added(Versions.v2026_05_01_preview)
+@discriminator("jobType")
+model EdgeMachineDiskPrivilegedJobProperties {
+  /** Privileged Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: PrivilegedJobType;
+
+  ...EdgeMachineDiskJobBaseProperties;
+}
+
+/**
+ * Job Type supported for disk privileged operations.
+ */
+@added(Versions.v2026_05_01_preview)
+union PrivilegedJobType {
+  string,
+
+  /** Job to delete a volume from the disk. */
+  DeleteVolume: "DeleteVolume",
+}
+
+/**
+ * List of Disk Privileged Job resources.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineDiskPrivilegedJobListResult
+  is Azure.Core.Page<EdgeMachineDiskPrivilegedJob>;
+
+
