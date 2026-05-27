@@ -23,7 +23,8 @@ alias ListEvaluatorVersionsParameters = {
 interface Evaluators {
   // GET /evaluators/{name}/versions
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
-  @doc("List all versions of the given evaluator")
+  @summary("List evaluator versions")
+  @doc("Lists all versions of the given evaluator")
   @Rest.action("versions")
   @Rest.actionSeparator("/")
   @Http.get
@@ -36,7 +37,8 @@ interface Evaluators {
 
   // GET /evaluators
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List the latest version of each evaluator")
+  @summary("List latest evaluator versions")
+  @doc("Lists the latest version of each evaluator")
   @Rest.listsResource(EvaluatorVersion)
   listLatestVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
@@ -46,6 +48,7 @@ interface Evaluators {
 
   // GET /evaluators/{name}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Get an evaluator version")
   @doc(
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     EvaluatorVersion
@@ -68,6 +71,7 @@ interface Evaluators {
 
   // DELETE /evaluators/{name}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Delete an evaluator version")
   @doc(
     "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
     EvaluatorVersion
@@ -88,6 +92,7 @@ interface Evaluators {
 
   // POST /evaluators/{evaluatorName}/versions
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create an evaluator version")
   @doc("Create a new {name} with auto incremented version id", EvaluatorVersion)
   @Rest.segment("versions")
   @Http.post
@@ -105,6 +110,7 @@ interface Evaluators {
   // PATCH /evaluators/{evaluatorName}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Update an evaluator version")
   @doc("Update an existing {name} with the given version id", EvaluatorVersion)
   @Http.patch(#{ implicitOptionality: true })
   updateVersion is Azure.Core.Foundations.ResourceOperation<
@@ -125,7 +131,8 @@ interface Evaluators {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
+  @summary("Start a pending upload")
+  @doc("Starts a new or get an existing pending upload of an evaluator for a specific version.")
   @post
   @route("/evaluators/{name}/versions/{version}/startPendingUpload")
   @extension(
@@ -152,7 +159,8 @@ interface Evaluators {
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
+  @summary("Get evaluator credentials")
+  @doc("Gets the SAS credential to access the storage account associated with an Evaluator version.")
   @post
   @route("/evaluators/{name}/versions/{version}/credentials")
   @extension(
@@ -183,9 +191,7 @@ interface Evaluators {
 // ============================================================================
 
 const EvaluatorGenerationJobsRequiredPreviews = #{
-  required_previews: #[
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  ],
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
@@ -197,7 +203,7 @@ interface EvaluatorGenerationJobs {
    * Creates an evaluator generation job. The service generates rubric-based evaluator
    * definitions from the provided source materials asynchronously.
    */
-  @summary("Creates an evaluator generation job.")
+  @summary("Create an evaluator generation job.")
   @route("evaluator_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   create is postJobPreview<
@@ -219,7 +225,7 @@ interface EvaluatorGenerationJobs {
   /**
    * Returns a list of evaluator generation jobs.
    */
-  @summary("Returns a list of evaluator generation jobs.")
+  @summary("List evaluator generation jobs.")
   @route("evaluator_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   list is listJobsPreview<
@@ -230,7 +236,7 @@ interface EvaluatorGenerationJobs {
   /**
    * Cancels an evaluator generation job by its ID.
    */
-  @summary("Cancels an evaluator generation job.")
+  @summary("Cancel an evaluator generation job.")
   @route("evaluator_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
@@ -244,7 +250,5 @@ interface EvaluatorGenerationJobs {
    */
   @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  >;
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 }

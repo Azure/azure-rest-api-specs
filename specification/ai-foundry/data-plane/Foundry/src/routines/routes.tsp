@@ -10,7 +10,7 @@ namespace Azure.AI.Projects;
 @tag("Routines")
 interface Routines {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create or update a routine.")
+  @doc("Creates or update a routine.")
   @operationId("createOrUpdateRoutine")
   @put
   @route("/routines/{routine_name}")
@@ -22,7 +22,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Retrieve a routine.")
+  @doc("Retrieves a routine.")
   @operationId("getRoutine")
   @get
   @route("/routines/{routine_name}")
@@ -34,7 +34,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Enable a routine.")
+  @doc("Enables a routine.")
   @operationId("enableRoutine")
   @post
   @route("/routines/{routine_name}:enable")
@@ -46,7 +46,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Disable a routine.")
+  @doc("Disables a routine.")
   @operationId("disableRoutine")
   @post
   @route("/routines/{routine_name}:disable")
@@ -58,7 +58,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List routines.")
+  @doc("Lists routines.")
   @operationId("listRoutines")
   @get
   @list
@@ -71,7 +71,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a routine.")
+  @doc("Deletes a routine.")
   @operationId("deleteRoutine")
   @delete
   @route("/routines/{routine_name}")
@@ -83,7 +83,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List prior runs for a routine.")
+  @doc("Lists prior runs for a routine.")
   @operationId("listRoutineRuns")
   @get
   @list
@@ -96,7 +96,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Queue an asynchronous routine dispatch.")
+  @doc("Queues an asynchronous routine dispatch.")
   @operationId("dispatchRoutineAsync")
   @post
   @route("/routines/{routine_name}:dispatch_async")

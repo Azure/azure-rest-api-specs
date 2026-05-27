@@ -15,10 +15,11 @@ namespace Azure.AI.Projects;
 @removed(Versions.v1)
 interface AgentContainers {
   /**
-   * Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
+   * Starts a container for a specific version of an agent. If the container is already running, the operation will be no-op.
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
+  @summary("Start an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:start")
@@ -49,10 +50,11 @@ interface AgentContainers {
   >;
 
   /**
-   * Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.
+   * Updates a container for a specific version of an agent. If the container is not running, the operation will be no-op.
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
+  @summary("Update an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:update")
@@ -83,10 +85,11 @@ interface AgentContainers {
   >;
 
   /**
-   * Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.
+   * Stops a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
+  @summary("Stop an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:stop")
@@ -111,10 +114,11 @@ interface AgentContainers {
   >;
 
   /**
-   * Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.
+   * Deletes a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
+  @summary("Delete an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:delete")
@@ -139,8 +143,9 @@ interface AgentContainers {
   >;
 
   /**
-   * Get a container for a specific version of an agent.
+   * Gets a container for a specific version of an agent.
    */
+  @summary("Get an agent container")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default")
   @extension(
@@ -164,9 +169,10 @@ interface AgentContainers {
   >;
 
   /**
-   * Stream logs from a container for a specific version of an agent.
+   * Streams logs from a container for a specific version of an agent.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+  @summary("Stream agent container logs")
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:logstream")
   @doc("""
@@ -227,8 +233,9 @@ interface AgentContainers {
   >;
 
   /**
-   * Get the status of a container operation for an agent.
+   * Gets the status of a container operation for an agent.
    */
+  @summary("Get an agent container operation")
   @get
   @route("/agents/{agent_name}/operations/{operation_id}")
   @extension(
@@ -252,8 +259,9 @@ interface AgentContainers {
   >;
 
   /**
-   * List container operations for an agent.
+   * Lists container operations for an agent.
    */
+  @summary("List agent container operations")
   @get
   @route("/agents/{agent_name}/operations")
   @list
@@ -277,8 +285,9 @@ interface AgentContainers {
   >;
 
   /**
-   * List container operations for a specific version of an agent.
+   * Lists container operations for a specific version of an agent.
    */
+  @summary("List agent version container operations")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default/operations")
   @list

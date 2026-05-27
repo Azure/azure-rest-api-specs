@@ -35,7 +35,7 @@ interface Skills {
   >;
 
   /**
-   * Update a skill.
+   * Updates a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @operationId("updateSkill")
@@ -98,7 +98,7 @@ interface Skills {
   >;
 
   /**
-   * List all versions of a skill.
+   * Lists all versions of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @operationId("listSkillVersions")
@@ -112,7 +112,7 @@ interface Skills {
   >;
 
   /**
-   * Retrieve a specific version of a skill.
+   * Retrieves a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @operationId("getSkillVersion")
@@ -125,7 +125,7 @@ interface Skills {
   >;
 
   /**
-   * Download the zip content for the default version of a skill.
+   * Downloads the zip content for the default version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @operationId("getSkillContent")
@@ -138,7 +138,7 @@ interface Skills {
   >;
 
   /**
-   * Download the zip content for a specific version of a skill.
+   * Downloads the zip content for a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @operationId("getSkillVersionContent")
@@ -151,7 +151,7 @@ interface Skills {
   >;
 
   /**
-   * Delete a specific version of a skill.
+   * Deletes a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @operationId("deleteSkillVersion")

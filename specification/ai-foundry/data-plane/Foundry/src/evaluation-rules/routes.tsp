@@ -26,7 +26,8 @@ alias EvaluationRulesFilterQueryParams = {
 @tag("Evaluation Rules")
 interface EvaluationRules {
   // GET /evaluationrules/{id}
-  @doc("Get an evaluation rule.")
+  @summary("Get an evaluation rule")
+  @doc("Gets an evaluation rule.")
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {},
@@ -34,7 +35,8 @@ interface EvaluationRules {
   >;
 
   // DELETE /evaluationrules/{id}
-  @doc("Delete an evaluation rule.")
+  @summary("Delete an evaluation rule")
+  @doc("Deletes an evaluation rule.")
   @Http.delete
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
@@ -43,7 +45,8 @@ interface EvaluationRules {
   >;
 
   // PUT /evaluationrules/{id}
-  @doc("Create or update an evaluation rule.")
+  @summary("Create or update an evaluation rule")
+  @doc("Creates or update an evaluation rule.")
   @Http.put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
@@ -58,7 +61,8 @@ interface EvaluationRules {
   >;
 
   // GET /evaluationrules
-  @doc("List all evaluation rules.")
+  @summary("List evaluation rules")
+  @doc("Lists all evaluation rules.")
   @Rest.listsResource(EvaluationRule)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationRule,

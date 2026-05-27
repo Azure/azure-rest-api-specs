@@ -204,26 +204,22 @@ model EvaluatorGenerationJobSource {
 // the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
-model PromptEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
-model AgentEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
-model TracesEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
-model DatasetEvaluatorGenerationJobSource
-  extends EvaluatorGenerationJobSource {
+model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
 

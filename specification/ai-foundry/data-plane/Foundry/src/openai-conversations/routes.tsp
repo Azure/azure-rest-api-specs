@@ -13,7 +13,7 @@ namespace Azure.AI.Projects;
 @tag("Conversations")
 interface Conversations {
   /**
-   * Create a conversation.
+   * Creates a conversation.
    */
   @post
   @operationId("createConversation")
@@ -23,7 +23,7 @@ interface Conversations {
   >;
 
   /**
-   * Update a conversation.
+   * Updates a conversation.
    */
   @route("{conversation_id}")
   @post
@@ -91,7 +91,7 @@ interface Conversations {
   >;
 
   /**
-   * Create items in a conversation with the given ID.
+   * Creates items in a conversation with the given ID.
    */
   @route("{conversation_id}/items")
   @post
@@ -118,7 +118,7 @@ interface Conversations {
   >;
 
   /**
-   * Get a single item from a conversation with the given IDs.
+   * Gets a single item from a conversation with the given IDs.
    */
   @route("{conversation_id}/items/{item_id}")
   @get
@@ -137,7 +137,7 @@ interface Conversations {
   >;
 
   /**
-   * Delete an item from a conversation with the given IDs.
+   * Deletes an item from a conversation with the given IDs.
    */
   @route("{conversation_id}/items/{item_id}")
   @delete
@@ -156,7 +156,7 @@ interface Conversations {
   >;
 
   /**
-   * List all items for a conversation with the given ID.
+   * Lists all items for a conversation with the given ID.
    */
   @route("{conversation_id}/items")
   @get

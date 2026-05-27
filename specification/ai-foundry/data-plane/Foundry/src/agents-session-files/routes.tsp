@@ -21,10 +21,11 @@ namespace Azure.AI.Projects;
 @tag("Agent Session Files")
 interface AgentSessionFiles {
   /**
-   * Upload a file to the session sandbox via binary stream.
+   * Uploads a file to the session sandbox via binary stream.
    * Maximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
+  @summary("Upload a session file")
   @put
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
   @extension(
@@ -47,15 +48,15 @@ interface AgentSessionFiles {
       @header("Content-Type") contentType: "application/octet-stream";
 
       @body content: bytes;
-
       ...UserIsolationKeyHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
   >;
 
   /**
-   * Download a file from the session sandbox as a binary stream.
+   * Downloads a file from the session sandbox as a binary stream.
    */
+  @summary("Download a session file")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
   @extension(
@@ -80,9 +81,10 @@ interface AgentSessionFiles {
   >;
 
   /**
-   * List files and directories at a given path in the session sandbox.
+   * Lists files and directories at a given path in the session sandbox.
    * Returns only the immediate children of the specified directory (non-recursive).
    */
+  @summary("List session files")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
   @extension(
@@ -107,9 +109,10 @@ interface AgentSessionFiles {
   >;
 
   /**
-   * Delete a file or directory from the session sandbox.
+   * Deletes a file or directory from the session sandbox.
    * If `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.
    */
+  @summary("Delete a session file")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
   @extension(

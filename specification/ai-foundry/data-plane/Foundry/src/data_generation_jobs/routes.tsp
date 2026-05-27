@@ -31,7 +31,7 @@ interface DataGenerationJobs {
   /**
    * Returns a list of data generation jobs.
    */
-  @summary("Returns a list of data generation jobs")
+  @summary("List data generation jobs")
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   list is listJobsPreview<
@@ -42,7 +42,7 @@ interface DataGenerationJobs {
   /**
    * Creates a data generation job.
    */
-  @summary("Creates a data generation job.")
+  @summary("Create a data generation job.")
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   create is postJobPreview<
@@ -53,7 +53,7 @@ interface DataGenerationJobs {
   /**
    * Cancels a data generation job by its ID.
    */
-  @summary("Cancels a data generation job.")
+  @summary("Cancel a data generation job.")
   @route("data_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
@@ -64,7 +64,7 @@ interface DataGenerationJobs {
   /**
    * Deletes a data generation job by its ID.
    */
-  @summary("Deletes a data generation job.")
+  @summary("Delete a data generation job.")
   @route("data_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;

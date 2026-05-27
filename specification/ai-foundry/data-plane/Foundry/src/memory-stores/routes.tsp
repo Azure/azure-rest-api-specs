@@ -11,7 +11,8 @@ namespace Azure.AI.Projects;
 @tag("Memory Stores")
 interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a memory store.")
+  @summary("Create a memory store")
+  @doc("Creates a memory store.")
   @operationId("createMemoryStore")
   @post
   @route("/memory_stores")
@@ -23,7 +24,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update a memory store.")
+  @summary("Update a memory store")
+  @doc("Updates a memory store.")
   @operationId("updateMemoryStore")
   @post
   @route("/memory_stores/{name}")
@@ -35,7 +37,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Retrieve a memory store.")
+  @summary("Get a memory store")
+  @doc("Retrieves a memory store.")
   @operationId("getMemoryStore")
   @get
   @route("/memory_stores/{name}")
@@ -47,7 +50,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List all memory stores.")
+  @summary("List all memory stores")
+  @doc("Lists all memory stores.")
   @operationId("listMemoryStores")
   @get
   @list
@@ -60,7 +64,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a memory store.")
+  @summary("Delete a memory store")
+  @doc("Deletes a memory store.")
   @operationId("deleteMemoryStore")
   @delete
   @route("/memory_stores/{name}")
@@ -72,7 +77,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Search for relevant memories from a memory store based on conversation context.")
+  @summary("Search memories")
+  @doc("Searches for relevant memories from a memory store based on conversation context.")
   @operationId("searchMemories")
   @post
   @route("/memory_stores/{name}:search_memories")
@@ -84,7 +90,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update memory store with conversation memories.")
+  @summary("Update memories")
+  @doc("Updates memory store with conversation memories.")
   @operationId("updateMemories")
   @post
   @route("/memory_stores/{name}:update_memories")
@@ -99,7 +106,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Get memory store update result.")
+  @summary("Get an update result")
+  @doc("Gets memory store update result.")
   @operationId("getUpdateResult")
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
@@ -111,7 +119,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete all memories associated with a specific scope from a memory store.")
+  @summary("Delete memories by scope")
+  @doc("Deletes all memories associated with a specific scope from a memory store.")
   @operationId("deleteScopeMemories")
   @post
   @route("/memory_stores/{name}:delete_scope")
@@ -123,7 +132,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a memory item in a memory store.")
+  @summary("Create a memory item")
+  @doc("Creates a memory item in a memory store.")
   @operationId("createMemory")
   @post
   @route("/memory_stores/{name}/items")
@@ -135,7 +145,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update a memory item in a memory store.")
+  @summary("Update a memory item")
+  @doc("Updates a memory item in a memory store.")
   @operationId("updateMemory")
   @post
   @route("/memory_stores/{name}/items/{memory_id}")
@@ -147,7 +158,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Retrieve a memory item from a memory store.")
+  @summary("Get a memory item")
+  @doc("Retrieves a memory item from a memory store.")
   @operationId("getMemory")
   @get
   @route("/memory_stores/{name}/items/{memory_id}")
@@ -159,7 +171,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List all memory items in a memory store.")
+  @summary("List all memory items")
+  @doc("Lists all memory items in a memory store.")
   @operationId("listMemories")
   @post
   @list
@@ -172,7 +185,8 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a memory item from a memory store.")
+  @summary("Delete a memory item")
+  @doc("Deletes a memory item from a memory store.")
   @operationId("deleteMemory")
   @delete
   @route("/memory_stores/{name}/items/{memory_id}")

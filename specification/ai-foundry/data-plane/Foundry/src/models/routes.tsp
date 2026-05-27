@@ -13,9 +13,7 @@ alias ModelsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptI
 alias ListModelVersionsParameters = {};
 
 const ModelsRequiredPreviews = #{
-  required_previews: #[
-    FoundryFeaturesOptInKeys.models_v1_preview
-  ],
+  required_previews: #[FoundryFeaturesOptInKeys.models_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
@@ -28,6 +26,7 @@ interface Models
       ListModelVersionsParameters & ModelsPreviewHeader
     > {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Get a model version")
   @doc(
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     ModelVersion
@@ -48,9 +47,8 @@ interface Models
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 200 with no body by service design"
-  @doc(
-    "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist."
-  )
+  @summary("Delete a model version")
+  @doc("Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.")
   @delete
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
   deleteVersion is Azure.Core.Foundations.ResourceOperation<
@@ -71,7 +69,11 @@ interface Models
   // new model versions are created via the `createAsync` endpoint (which handles blob content
   // validation). The `@operationId` override to "Models_updateVersion" reflects the true semantics.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
-  @doc("Update an existing ModelVersion with the given version id", ModelVersion)
+  @summary("Update a model version")
+  @doc(
+    "Update an existing ModelVersion with the given version id",
+    ModelVersion
+  )
   @operationId("Models_updateVersion")
   @patch
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
@@ -82,6 +84,7 @@ interface Models
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom async creation action"
+  @summary("Create a model version async")
   @doc("Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.")
   @route("/models/{name}/versions/{version}/createAsync")
   @post
@@ -106,7 +109,8 @@ interface Models
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom pending upload action"
-  @doc("Start or retrieve a pending upload for a model version.")
+  @summary("Start a pending upload")
+  @doc("Starts or retrieve a pending upload for a model version.")
   @route("/models/{name}/versions/{version}/startPendingUpload")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
@@ -129,7 +133,8 @@ interface Models
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential action"
-  @doc("Get credentials for a model version asset.")
+  @summary("Get model asset credentials")
+  @doc("Gets credentials for a model version asset.")
   @route("/models/{name}/versions/{version}/credentials")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)

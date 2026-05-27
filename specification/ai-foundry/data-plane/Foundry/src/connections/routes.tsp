@@ -1,6 +1,7 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
@@ -9,10 +10,12 @@ alias ConnectionOperations = FoundryAzureOperations<{}>;
 
 @tag("Connections")
 interface Connections {
-  @doc("Get a connection by name, without populating connection credentials")
+  @summary("Get a connection")
+  @doc("Gets a connection by name, without populating connection credentials")
   get is ConnectionOperations.ResourceRead<Connection>;
 
-  @doc("Get a connection by name, with its connection credentials")
+  @summary("Get a connection with credentials")
+  @doc("Gets a connection by name, with its connection credentials")
   @TypeSpec.Http.post
   @Rest.actionSeparator("/")
   @Rest.action("getConnectionWithCredentials")
@@ -22,15 +25,16 @@ interface Connections {
     Connection
   >;
 
-  @doc("List all connections in the project, without populating connection credentials")
+  @summary("List all connections")
+  @doc("Lists all connections in the project, without populating connection credentials")
   list is ConnectionOperations.ResourceList<
     Connection,
     ListQueryParametersTrait<{
-      @doc("List connections of this specific type")
+      @doc("Lists connections of this specific type")
       @query("connectionType")
       connectionType?: ConnectionType;
 
-      @doc("List connections that are default connections")
+      @doc("Lists connections that are default connections")
       @query("defaultConnection")
       defaultConnection?: boolean;
     }>

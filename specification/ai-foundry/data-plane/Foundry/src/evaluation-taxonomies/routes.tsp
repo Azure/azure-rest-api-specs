@@ -20,7 +20,8 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Evaluation Taxonomies")
 interface EvaluationTaxonomies {
-  @doc("Get an evaluation run by name.")
+  @summary("Get an evaluation taxonomy")
+  @doc("Gets an evaluation run by name.")
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationTaxonomy,
     {
@@ -29,7 +30,8 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
   >;
 
-  @doc("List evaluation taxonomies")
+  @summary("List evaluation taxonomies")
+  @doc("Lists evaluation taxonomies")
   @Rest.listsResource(EvaluationTaxonomy)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationTaxonomy,
@@ -38,7 +40,8 @@ interface EvaluationTaxonomies {
     Azure.Core.Page<EvaluationTaxonomy>
   >;
 
-  @doc("Delete an evaluation taxonomy by name.")
+  @summary("Delete an evaluation taxonomy")
+  @doc("Deletes an evaluation taxonomy by name.")
   @Http.delete
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationTaxonomy,
@@ -48,7 +51,8 @@ interface EvaluationTaxonomies {
     Http.NoContentResponse
   >;
 
-  @doc("Create an evaluation taxonomy.")
+  @summary("Create an evaluation taxonomy")
+  @doc("Creates an evaluation taxonomy.")
   @put
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
@@ -66,7 +70,8 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
 
-  @doc("Update an evaluation taxonomy.")
+  @summary("Update an evaluation taxonomy")
+  @doc("Updates an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<

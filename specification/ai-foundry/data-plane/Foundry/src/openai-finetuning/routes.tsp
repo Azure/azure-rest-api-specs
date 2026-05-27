@@ -27,7 +27,7 @@ interface FineTuning {
   >;
 
   /**
-   * List your organization's fine-tuning jobs
+   * Lists your organization's fine-tuning jobs
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -46,7 +46,7 @@ interface FineTuning {
   >;
 
   /**
-   * Get info about a fine-tuning job.
+   * Gets info about a fine-tuning job.
    *
    * [Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
    */
@@ -64,7 +64,7 @@ interface FineTuning {
   >;
 
   /**
-   * Immediately cancel a fine-tune job.
+   * Immediately cancels a fine-tune job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -80,7 +80,7 @@ interface FineTuning {
   >;
 
   /**
-   * Pause a running fine-tune job.
+   * Pauses a running fine-tune job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -96,7 +96,7 @@ interface FineTuning {
   >;
 
   /**
-   * Resume a paused fine-tune job.
+   * Resumes a paused fine-tune job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -112,7 +112,7 @@ interface FineTuning {
   >;
 
   /**
-   * List checkpoints for a fine-tuning job.
+   * Lists checkpoints for a fine-tuning job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
@@ -134,7 +134,7 @@ interface FineTuning {
   >;
 
   /**
-   * Get fine-grained status updates for a fine-tuning job.
+   * Gets fine-grained status updates for a fine-tuning job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"

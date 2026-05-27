@@ -183,8 +183,9 @@ interface Agents {
   >;
 
   /**
-   * Create a new agent version.
+   * Creates a new agent version.
    */
+  @summary("Create an agent version")
   @post
   @route("/agents/{agent_name}/versions")
   @sharedRoute
@@ -208,8 +209,9 @@ interface Agents {
   >;
 
   /**
-   * Create a new agent version from a manifest.
+   * Creates a new agent version from a manifest.
    */
+  @summary("Create an agent version from manifest")
   @post
   @route("/agents/{agent_name}/versions:import")
   createAgentVersionFromManifest is FoundryDataPlaneOperation<
@@ -346,7 +348,7 @@ interface Agents {
   >;
 
   /**
-   * Download the code zip for a code-based hosted agent.
+   * Downloads the code zip for a code-based hosted agent.
    * Returns the previously-uploaded zip (`application/zip`).
    *
    * If `agent_version` is supplied, returns that version's code zip; otherwise
