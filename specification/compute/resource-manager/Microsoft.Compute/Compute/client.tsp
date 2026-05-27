@@ -212,11 +212,16 @@ namespace ComputeCombine;
 // Backward compatibility: gallery patch models previously inherited ResourceData in the old SDK.
 // Without this override, they inherit UpdateResourceDefinition which doesn't derive from ResourceData,
 // breaking the API contract.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryUpdate,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+// @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryUpdate,
+//   Azure.ResourceManager.Foundations.ProxyResource,
+//   "csharp"
+// );
+@clientName("GalleryPatch", "csharp")
+model CSharpGalleryUpdate extends Azure.ResourceManager.Foundations.ProxyResource {
+  ...OmitProperties<GalleryUpdate, "id" | "name" | "type">;
+}
+@@alternateType(ComputeGallery.GalleryUpdate, CSharpGalleryUpdate, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryImageUpdate,
