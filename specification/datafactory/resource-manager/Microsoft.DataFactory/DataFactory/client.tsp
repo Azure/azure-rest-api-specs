@@ -1303,17 +1303,27 @@ using Microsoft.DataFactory;
   "csharp"
 );
 
-@@usage(OutputColumn, Usage.input | Usage.output, "csharp");
+// MPG migration: restore public parameterless ctor + settable properties on models
+// that the generator otherwise marks output-only (loss of public ctor, read-only props).
+// Using `Usage.input` alone is the canonical, proven pattern; the `Usage.input | Usage.output`
+// form did not produce a public ctor in DataFactory's regen (ApiCompat MembersMustExist for `..ctor()`).
+@@usage(OutputColumn, Usage.input, "csharp");
 @@usage(ScriptType, Usage.input | Usage.output, "csharp");
-@@usage(DatasetDataElement, Usage.input | Usage.output, "csharp");
+@@usage(DatasetDataElement, Usage.input, "csharp");
 @@usage(
   PrivateEndpointConnectionResource,
   Usage.input | Usage.output,
   "csharp"
 );
 @@usage(RemotePrivateEndpointConnection, Usage.input | Usage.output, "csharp");
-@@usage(DatasetSchemaDataElement, Usage.input | Usage.output, "csharp");
+@@usage(DatasetSchemaDataElement, Usage.input, "csharp");
 @@access(DatasetSchemaDataElement, Access.public, "csharp");
+
+// MPG migration: GA shipped DataFactoryPrivateLinkResource + DataFactoryPrivateLinkResourceProperties
+// with public parameterless ctor and settable Properties; spec marks all props @visibility(Read)
+// so generator emits internal ctor + readonly props. Force input usage to restore the GA surface.
+@@usage(PrivateLinkResource, Usage.input, "csharp");
+@@usage(PrivateLinkResourceProperties, Usage.input, "csharp");
 
 // MPG migration: enum value casing renames (back-compat with previously published SDK).
 @@clientName(AzureSqlDWAuthenticationType.SQL, "Sql", "csharp");
