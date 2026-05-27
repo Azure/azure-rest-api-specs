@@ -142,6 +142,8 @@ using Azure.AI.Projects;
 @@clientName(ToolboxVersionObject, "ToolboxVersionDetails", "java");
 @@clientName(ToolboxObject, "ToolboxDetails", "java");
 
+@@clientName(SkillObject, "SkillDetails", "java");
+
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 
 // Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
@@ -166,6 +168,14 @@ using Azure.AI.Projects;
 );
 @@clientName(AgentOptimizationJobs.getCandidateResults,
   "getOptimizationCandidateResults",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.promoteCandidate,
+  "promoteOptimizationCandidate",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidateFile,
+  "getOptimizationCandidateFile",
   "java"
 );
 
