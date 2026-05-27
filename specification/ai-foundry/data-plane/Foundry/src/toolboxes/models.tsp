@@ -176,7 +176,7 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
    */
   type: "work_iq_preview";
 
-  ...WorkIQPreviewToolFields;
+  ...RequiredToolProjectConnectionIdField;
 }
 
 /**
