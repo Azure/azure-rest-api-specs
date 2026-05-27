@@ -149,6 +149,9 @@ namespace Azure.AI.Projects;
 @@clientName(DatasetVersion.dataUri, "dataUrl");
 @@clientName(FolderDatasetVersion.dataUri, "dataUrl");
 @@clientName(CodeBasedEvaluatorDefinition.blob_uri, "blobUrl");
+@@clientName(ModelVersion.blobUri, "blobUrl");
+@@clientName(ModelCredentialRequest.blobUri, "blobUrl");
+@@clientName(EvaluatorCredentialRequest.blob_uri, "blobUrl");
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
@@ -165,7 +168,10 @@ namespace Azure.AI.Projects;
 @@access(FoundryFeaturesOptInKeys, Access.public);
 
 // Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
-@@usage(GraderAzureAIEvaluator, Usage.input | Usage.output | Usage.json, "java");
+@@usage(GraderAzureAIEvaluator,
+  Usage.input | Usage.output | Usage.json,
+  "java"
+);
 @@access(GraderAzureAIEvaluator, Access.public, "java");
 @@usage(TestingCriterionAzureAIEvaluator,
   Usage.input | Usage.output | Usage.json,
