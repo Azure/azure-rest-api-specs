@@ -196,7 +196,8 @@ model OptimizationTaskResult {
   tokens: int32;
 
   @doc("Wall-clock seconds for this task's agent execution.")
-  duration_seconds: float64;
+  @encode(DurationKnownEncoding.seconds, float64)
+  duration_seconds: duration;
 
   @doc("Whether the task met the pass threshold.")
   passed: boolean;
