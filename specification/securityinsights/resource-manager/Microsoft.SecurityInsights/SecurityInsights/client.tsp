@@ -76,3 +76,15 @@ using Azure.ClientGenerator.Core;
 );
 @@clientLocation(listGeodataByIp, "SecurityInsightsClient", "go");
 @@clientLocation(listWhoisByDomain, "SecurityInsightsClient", "go");
+
+@@clientName(EntityKindEnum, "EntityKind", "python");
+@@clientName(
+  ThreatIntelligenceResourceInnerKind,
+  "ThreatIntelligenceResourceKindEnum",
+  "python"
+);
+@@clientName(
+  ThreatIntelligenceSortingOrder,
+  "ThreatIntelligenceSortingCriteriaEnum",
+  "python"
+);
