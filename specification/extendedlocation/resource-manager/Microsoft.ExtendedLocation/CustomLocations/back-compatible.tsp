@@ -7,7 +7,7 @@ using Microsoft.ExtendedLocation;
 @@Legacy.flattenProperty(customLocationOperation.display);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(patchableCustomLocations.properties);
+@@Legacy.flattenProperty(patchableCustomLocations.properties,"!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EnabledResourceType.properties);
