@@ -13,6 +13,39 @@ model ToolboxPolicies {
   rai_config?: RaiConfig;
 }
 
+@doc("An example scenario that a toolbox skill can perform.")
+@maxLength(1024)
+scalar ToolboxSkillExample extends string;
+
+@doc("A keyword describing a class of capabilities for a toolbox skill.")
+@maxLength(32)
+scalar ToolboxSkillTag extends string;
+
+@doc("A skill contained in a toolbox version.")
+model ToolboxSkill {
+  @doc("A unique identifier for the skill.")
+  @maxLength(64)
+  @minLength(1)
+  id: string;
+
+  @doc("The name of the skill.")
+  @maxLength(128)
+  @minLength(1)
+  name: string;
+
+  @doc("A description of the skill.")
+  @maxLength(2048)
+  description?: string;
+
+  @doc("The keywords describing classes of capabilities for the skill.")
+  @maxItems(5)
+  tags?: ToolboxSkillTag[];
+
+  @doc("A list of example scenarios that the skill can perform.")
+  @maxItems(5)
+  examples?: ToolboxSkillExample[];
+}
+
 @doc("A toolbox that stores reusable tool definitions for agents.")
 model ToolboxObject {
   @doc("The unique identifier of the toolbox.")
@@ -48,8 +81,14 @@ model ToolboxVersionObject {
   @encode("unixTimestamp", int32)
   created_at: utcDateTime;
 
-  @doc("The list of tools contained in this toolbox version.")
-  tools: OpenAI.Tool[];
+  @doc("The list of tools contained in this toolbox version. At least one of tools or skills is present.")
+  @minItems(1)
+  tools?: OpenAI.Tool[];
+
+  @doc("The list of skills contained in this toolbox version. At least one of tools or skills is present.")
+  @maxItems(16)
+  @minItems(1)
+  skills?: ToolboxSkill[];
 
   @doc("Policy configuration for the toolbox version.")
   policies?: ToolboxPolicies;
@@ -68,8 +107,14 @@ alias CreateToolboxVersionRequest = {
   @doc("Arbitrary key-value metadata to associate with the toolbox.")
   metadata?: Record<string>;
 
-  @doc("The list of tools to include in this version.")
-  tools: OpenAI.Tool[];
+  @doc("The list of tools to include in this version. Provide at least one tool or one skill.")
+  @minItems(1)
+  tools?: OpenAI.Tool[];
+
+  @doc("The list of skills to include in this version. Provide at least one tool or one skill.")
+  @maxItems(16)
+  @minItems(1)
+  skills?: ToolboxSkill[];
 
   @doc("Policy configuration for this toolbox version.")
   policies?: ToolboxPolicies;

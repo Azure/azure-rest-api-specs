@@ -16584,7 +16584,17 @@
                     "items": {
                       "$ref": "#/components/schemas/OpenAI.Tool"
                     },
-                    "description": "The list of tools to include in this version."
+                    "minItems": 1,
+                    "description": "The list of tools to include in this version. Provide at least one tool or one skill."
+                  },
+                  "skills": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ToolboxSkill"
+                    },
+                    "minItems": 1,
+                    "maxItems": 16,
+                    "description": "The list of skills to include in this version. Provide at least one tool or one skill."
                   },
                   "policies": {
                     "allOf": [
@@ -16594,10 +16604,7 @@
                     ],
                     "description": "Policy configuration for this toolbox version."
                   }
-                },
-                "required": [
-                  "tools"
-                ]
+                }
               }
             }
           }
@@ -52293,6 +52300,59 @@
         ],
         "description": "A tool for searching over the agent's toolbox.\nWhen present, deferred tools are hidden from `tools/list` and only\ndiscoverable via `search_tools` queries at runtime."
       },
+      "ToolboxSkill": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "A unique identifier for the skill."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The name of the skill."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "A description of the skill."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolboxSkillTag"
+            },
+            "maxItems": 5,
+            "description": "The keywords describing classes of capabilities for the skill."
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolboxSkillExample"
+            },
+            "maxItems": 5,
+            "description": "A list of example scenarios that the skill can perform."
+          }
+        },
+        "description": "A skill contained in a toolbox version."
+      },
+      "ToolboxSkillExample": {
+        "type": "string",
+        "maxLength": 1024,
+        "description": "An example scenario that a toolbox skill can perform."
+      },
+      "ToolboxSkillTag": {
+        "type": "string",
+        "maxLength": 32,
+        "description": "A keyword describing a class of capabilities for a toolbox skill."
+      },
       "ToolboxVersionObject": {
         "type": "object",
         "required": [
@@ -52300,8 +52360,7 @@
           "id",
           "name",
           "version",
-          "created_at",
-          "tools"
+          "created_at"
         ],
         "properties": {
           "metadata": {
@@ -52341,7 +52400,17 @@
             "items": {
               "$ref": "#/components/schemas/OpenAI.Tool"
             },
-            "description": "The list of tools contained in this toolbox version."
+            "minItems": 1,
+            "description": "The list of tools contained in this toolbox version. At least one of tools or skills is present."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ToolboxSkill"
+            },
+            "minItems": 1,
+            "maxItems": 16,
+            "description": "The list of skills contained in this toolbox version. At least one of tools or skills is present."
           },
           "policies": {
             "allOf": [
