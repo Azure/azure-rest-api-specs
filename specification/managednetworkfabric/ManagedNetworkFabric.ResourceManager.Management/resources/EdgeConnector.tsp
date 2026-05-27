@@ -31,7 +31,7 @@ interface EdgeConnectors {
   @doc("Gets the specified EdgeConnector.")
   get is ArmResourceRead<EdgeConnector>;
 
-  @doc("Creates an EdgeConnector.")
+  @doc("Creates or updates an EdgeConnector.")
   create is ArmResourceCreateOrReplaceAsync<EdgeConnector>;
 
   @doc("Updates an EdgeConnector.")

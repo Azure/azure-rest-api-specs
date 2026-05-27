@@ -31,7 +31,7 @@ interface Fabrics {
   @doc("Gets the specified Fabric.")
   get is ArmResourceRead<Fabric>;
 
-  @doc("Creates a Fabric.")
+  @doc("Creates or updates a Fabric.")
   create is ArmResourceCreateOrReplaceAsync<Fabric>;
 
   @doc("Updates a Fabric.")
