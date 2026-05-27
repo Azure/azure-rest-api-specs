@@ -72,7 +72,7 @@ model SaasResourceProperties {
   // (systemData.createdAt / systemData.lastModifiedAt) in the ARM resource envelope.
 
   /** The storefront. */
-  storeFront?: string;
+  storefront?: string;
 
   // NOTE: market removed from GA API — ProductCode resolves the catalog entry,
   // and the catalog auto-detects market from the Azure subscription's billing account.
