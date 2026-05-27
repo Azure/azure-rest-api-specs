@@ -107,11 +107,11 @@ model CertificateAuthorityCredentials {
 }
 
 // ──────────────────────────────────────────────
-// Revoke action models
+// Revoke cert action models
 // ──────────────────────────────────────────────
 
-/** Request payload for revoking device credentials. */
-model DeviceCredentialRevokeRequest {}
+/** Request payload for the `:revokeCert` action. */
+model RevokeCertRequest {}
 
 // ──────────────────────────────────────────────
 // Certificate issuance action models
@@ -121,8 +121,8 @@ model DeviceCredentialRevokeRequest {}
 model CertificateIssuanceRequest {
   /**
    * Base64-encoded DER certificate signing request (CSR) without PEM
-   * headers and footers. Format of the CSR is in PKCS 10. The CN field
-   * of the CSR must be set to the device registrationId.
+   * headers and footers. Format of the CSR is in PKCS 10. The CN field of
+   * the CSR must be set to the device name.
    */
   csr: bytes;
 }
@@ -188,17 +188,17 @@ model IssueCertAcceptedResponse {
 }
 
 // ──────────────────────────────────────────────
-// Revoke polling sub-resource
+// Revoke-cert polling sub-resource
 // ──────────────────────────────────────────────
 
 /**
- * Status monitor for the long-running `:revoke` action on a device authentication
+ * Status monitor for the long-running `:revokeCert` action on a device authentication
  * profile. The operation has no payload to return on success; `status` carries the
  * outcome and `error` carries failure details.
  */
 @parentResource(DeviceAuthenticationProfile)
-@resource("revokeResults")
-model RevokeResult {
+@resource("revokeCertResults")
+model RevokeCertResult {
   /** The unique ID of the operation. */
   @key("operationId")
   @visibility(Lifecycle.Read)
@@ -271,17 +271,17 @@ interface DeviceAuthenticationProfiles {
   } | Azure.Core.Foundations.ErrorResponse;
 
   /**
-   * Revoke credentials issued for the device authentication profile. Applies to
+   * Revoke certificates issued for the device authentication profile. Applies to
    * Microsoft-managed X.509 certificates: invalidates outstanding certificates
    * via the PKI revocation list. The authentication profile itself is preserved.
    * The 202 carries only operation state; status is polled via the dedicated GET
-   * on the corresponding `revokeResults` sub-resource.
+   * on the corresponding `revokeCertResults` sub-resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeResults sub-resource."
-  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revoke")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeCertResults sub-resource."
+  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCert")
   @post
-  @pollingOperation(RevokeResults.get)
-  revoke(
+  @pollingOperation(RevokeCertResults.get)
+  revokeCert(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     /** The unique identifier of the namespace. */
@@ -293,15 +293,15 @@ interface DeviceAuthenticationProfiles {
     /** The name of the authentication profile. */
     @path authenticationProfileName: string,
 
-    /** Revoke request body. */
-    @body body: DeviceCredentialRevokeRequest,
+    /** Revoke certificate request body. */
+    @body body: RevokeCertRequest,
   ): {
     @statusCode statusCode: 202;
 
     /** The location for monitoring the operation state. */
     @header("Operation-Location") operationLocation: url;
 
-    ...RevokeResult;
+    ...RevokeCertResult;
   } | Azure.Core.Foundations.ErrorResponse;
 }
 
@@ -312,9 +312,9 @@ interface IssueCertResults {
   get is ResourceOperations.ResourceRead<IssueCertResult>;
 }
 
-/** Polling operations for the long-running `:revoke` action. */
+/** Polling operations for the long-running `:revokeCert` action. */
 @tag("Device Authentication Profiles")
-interface RevokeResults {
-  /** Get the status of a long-running `:revoke` operation. */
-  get is ResourceOperations.ResourceRead<RevokeResult>;
+interface RevokeCertResults {
+  /** Get the status of a long-running `:revokeCert` operation. */
+  get is ResourceOperations.ResourceRead<RevokeCertResult>;
 }

@@ -878,13 +878,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revoke": {
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCert": {
       "post": {
-        "operationId": "DeviceAuthenticationProfiles_Revoke",
+        "operationId": "DeviceAuthenticationProfiles_RevokeCert",
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Revoke credentials issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeResults` sub-resource.",
+        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeCertResults` sub-resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -913,10 +913,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Revoke request body.",
+            "description": "Revoke certificate request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeviceCredentialRevokeRequest"
+              "$ref": "#/definitions/RevokeCertRequest"
             }
           }
         ],
@@ -924,7 +924,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/RevokeResult"
+              "$ref": "#/definitions/RevokeCertResult"
             },
             "headers": {
               "Operation-Location": {
@@ -948,8 +948,8 @@
           }
         },
         "x-ms-examples": {
-          "Revoke credentials for a device authentication profile": {
-            "$ref": "./examples/DeviceAuthenticationProfiles_Revoke.json"
+          "Revoke certificates for a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCert.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1025,13 +1025,13 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeResults/{operationId}": {
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeCertResults/{operationId}": {
       "get": {
-        "operationId": "RevokeResults_Get",
+        "operationId": "RevokeCertResults_Get",
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Get the status of a long-running `:revoke` operation.",
+        "description": "Get the status of a long-running `:revokeCert` operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1069,7 +1069,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RevokeResult"
+              "$ref": "#/definitions/RevokeCertResult"
             }
           },
           "default": {
@@ -1086,8 +1086,8 @@
           }
         },
         "x-ms-examples": {
-          "Get the result of a long-running :revoke operation": {
-            "$ref": "./examples/RevokeResults_Get.json"
+          "Get the result of a long-running :revokeCert operation": {
+            "$ref": "./examples/RevokeCertResults_Get.json"
           }
         }
       }
@@ -3065,10 +3065,6 @@
         "capabilityType"
       ]
     },
-    "DeviceCredentialRevokeRequest": {
-      "type": "object",
-      "description": "Request payload for revoking device credentials."
-    },
     "DeviceProperties": {
       "type": "object",
       "description": "Properties of a device resource.",
@@ -4501,9 +4497,13 @@
         ]
       }
     },
-    "RevokeResult": {
+    "RevokeCertRequest": {
       "type": "object",
-      "description": "Status monitor for the long-running `:revoke` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
+      "description": "Request payload for the `:revokeCert` action."
+    },
+    "RevokeCertResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:revokeCert` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
       "properties": {
         "id": {
           "type": "string",
