@@ -17556,7 +17556,7 @@
         ],
         "description": "An agent implementing the A2A protocol."
       },
-      "A2APreviewToolbox": {
+      "A2APreviewToolboxTool": {
         "type": "object",
         "required": [
           "type"
@@ -17568,14 +17568,6 @@
               "a2a_preview"
             ],
             "description": "The type of the tool. Always `a2a_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "base_url": {
             "type": "string",
@@ -19943,7 +19935,7 @@
         },
         "description": "A set of index resources used by the `azure_ai_search` tool."
       },
-      "AzureAISearchToolbox": {
+      "AzureAISearchToolboxTool": {
         "type": "object",
         "required": [
           "type",
@@ -19956,14 +19948,6 @@
               "azure_ai_search"
             ],
             "description": "The type of the tool. Always `azure_ai_search`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "azure_ai_search": {
             "allOf": [
@@ -21639,7 +21623,7 @@
         ],
         "description": "How package dependencies are resolved at deployment time for a code-based hosted agent."
       },
-      "CodeInterpreterToolbox": {
+      "CodeInterpreterToolboxTool": {
         "type": "object",
         "required": [
           "type"
@@ -26752,7 +26736,7 @@
         ],
         "description": "A FabricIQ server-side tool."
       },
-      "FabricIQPreviewToolbox": {
+      "FabricIQPreviewToolboxTool": {
         "type": "object",
         "required": [
           "type",
@@ -26797,14 +26781,6 @@
             ],
             "description": "(Optional) Whether the agent requires approval before executing actions. Default is always.",
             "default": "always"
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -26915,7 +26891,7 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
-      "FileSearchToolbox": {
+      "FileSearchToolboxTool": {
         "type": "object",
         "required": [
           "type"
@@ -26927,13 +26903,6 @@
               "file_search"
             ],
             "description": "The type of the tool. Always `file_search`."
-          },
-          "vector_store_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The IDs of the vector stores to search."
           },
           "max_num_results": {
             "allOf": [
@@ -26958,6 +26927,13 @@
               }
             ],
             "nullable": true
+          },
+          "vector_store_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The IDs of the vector stores to search."
           }
         },
         "allOf": [
@@ -28205,7 +28181,7 @@
         },
         "description": "Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time."
       },
-      "MCPToolbox": {
+      "MCPToolboxTool": {
         "type": "object",
         "required": [
           "type",
@@ -49390,7 +49366,7 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
-      "OpenApiToolbox": {
+      "OpenApiToolboxTool": {
         "type": "object",
         "required": [
           "type",
@@ -53103,7 +53079,7 @@
         },
         "description": "Policy configuration for a toolbox, including content safety and other governance settings."
       },
-      "ToolboxSearchPreviewToolbox": {
+      "ToolboxSearchPreviewToolboxTool": {
         "type": "object",
         "required": [
           "type"
@@ -53210,16 +53186,16 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "code_interpreter": "#/components/schemas/CodeInterpreterToolbox",
-            "file_search": "#/components/schemas/FileSearchToolbox",
-            "web_search": "#/components/schemas/WebSearchToolbox",
-            "mcp": "#/components/schemas/MCPToolbox",
-            "azure_ai_search": "#/components/schemas/AzureAISearchToolbox",
-            "openapi": "#/components/schemas/OpenApiToolbox",
-            "a2a_preview": "#/components/schemas/A2APreviewToolbox",
-            "work_iq_preview": "#/components/schemas/WorkIQPreviewToolbox",
-            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolbox",
-            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolbox"
+            "code_interpreter": "#/components/schemas/CodeInterpreterToolboxTool",
+            "file_search": "#/components/schemas/FileSearchToolboxTool",
+            "web_search": "#/components/schemas/WebSearchToolboxTool",
+            "mcp": "#/components/schemas/MCPToolboxTool",
+            "azure_ai_search": "#/components/schemas/AzureAISearchToolboxTool",
+            "openapi": "#/components/schemas/OpenApiToolboxTool",
+            "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
+            "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
+            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewToolboxTool",
+            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewToolboxTool"
           }
         },
         "description": "An abstract representation of a tool stored in a toolbox."
@@ -54051,7 +54027,7 @@
         },
         "description": "A web search configuration for Bing custom search."
       },
-      "WebSearchToolbox": {
+      "WebSearchToolboxTool": {
         "type": "object",
         "required": [
           "type"
@@ -54171,7 +54147,7 @@
         ],
         "description": "A WorkIQ server-side tool."
       },
-      "WorkIQPreviewToolbox": {
+      "WorkIQPreviewToolboxTool": {
         "type": "object",
         "required": [
           "type",
@@ -54188,14 +54164,6 @@
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the WorkIQ project connection."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [

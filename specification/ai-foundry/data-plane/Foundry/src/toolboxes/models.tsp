@@ -5,7 +5,6 @@ import "../skills/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Azure.Core.Experimental;
 
 namespace Azure.AI.Projects;
 
@@ -40,6 +39,14 @@ alias ToolConfigExtension = {
 };
 
 /**
+ * Spreads `Source`, changing the selected properties to optional.
+ */
+model WithFieldsOptional<Source, Keys extends string> {
+  ...OmitProperties<Source, Keys>;
+  ...PickProperties<OptionalProperties<Source>, Keys>;
+}
+
+/**
  * Supported tool types for tools stored in a toolbox.
  */
 union ToolboxToolType {
@@ -72,155 +79,128 @@ model ToolboxTool {
 /**
  * A code interpreter tool stored in a toolbox.
  */
-model CodeInterpreterToolbox extends ToolboxTool {
+model CodeInterpreterToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `code_interpreter`.
    */
   type: "code_interpreter";
+
+  ...OmitProperties<OpenAI.CodeInterpreterTool, "type">;
 }
 
 /**
  * A file search tool stored in a toolbox.
  */
-model FileSearchToolbox extends ToolboxTool {
+model FileSearchToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `file_search`.
    */
   type: "file_search";
 
-  /**
-   * The IDs of the vector stores to search.
-   */
-  vector_store_ids?: string[];
+  ...WithFieldsOptional<
+    OmitProperties<OpenAI.FileSearchTool, "type">,
+    "vector_store_ids"
+  >;
 }
 
 /**
  * A web search tool stored in a toolbox.
  */
-model WebSearchToolbox extends ToolboxTool {
+model WebSearchToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `web_search`.
    */
   type: "web_search";
+
+  ...OmitProperties<OpenAI.WebSearchTool, "type">;
 }
 
 /**
  * An MCP tool stored in a toolbox.
  */
-model MCPToolbox extends ToolboxTool {
+model MCPToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `mcp`.
    */
   type: "mcp";
+
+  ...OmitProperties<OpenAI.MCPTool, "type">;
+
+  /**
+   * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+   */
+  project_connection_id?: string;
 }
 
 /**
  * An Azure AI Search tool stored in a toolbox.
  */
-model AzureAISearchToolbox extends ToolboxTool {
+model AzureAISearchToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `azure_ai_search`.
    */
   type: "azure_ai_search";
+
+  ...OmitProperties<AzureAISearchTool, "type" | "name" | "description">;
 }
 
 /**
  * An OpenAPI tool stored in a toolbox.
  */
-model OpenApiToolbox extends ToolboxTool {
+model OpenApiToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `openapi`.
    */
   type: "openapi";
+
+  ...OmitProperties<OpenApiTool, "type">;
 }
 
 /**
  * An A2A tool stored in a toolbox.
  */
-model A2APreviewToolbox extends ToolboxTool {
+model A2APreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `a2a_preview`.
    */
   type: "a2a_preview";
+
+  ...OmitProperties<A2APreviewTool, "type" | "name" | "description">;
 }
 
 /**
  * A WorkIQ tool stored in a toolbox.
  */
-model WorkIQPreviewToolbox extends ToolboxTool {
+model WorkIQPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `work_iq_preview`.
    */
   type: "work_iq_preview";
+
+  ...OmitProperties<WorkIQPreviewTool, "type" | "name" | "description">;
 }
 
 /**
  * A FabricIQ tool stored in a toolbox.
  */
-model FabricIQPreviewToolbox extends ToolboxTool {
+model FabricIQPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `fabric_iq_preview`.
    */
   type: "fabric_iq_preview";
+
+  ...OmitProperties<FabricIQPreviewTool, "type" | "name" | "description">;
 }
 
 /**
  * A toolbox search tool stored in a toolbox.
  */
-model ToolboxSearchPreviewToolbox extends ToolboxTool {
+model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search_preview`.
    */
   type: "toolbox_search_preview";
 }
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(CodeInterpreterToolbox, OpenAI.CodeInterpreterTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(FileSearchToolbox, OpenAI.FileSearchTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(WebSearchToolbox, OpenAI.WebSearchTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(WebSearchToolbox,
-  {
-    /**
-     * The project connections attached to this tool. There can be a maximum of 1 connection
-     * resource attached to the tool.
-     */
-    custom_search_configuration?: WebSearchConfiguration,
-  }
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(MCPToolbox, OpenAI.MCPTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(MCPToolbox,
-  {
-    /**
-     * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-     */
-    project_connection_id?: string,
-  }
-);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(AzureAISearchToolbox, AzureAISearchTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenApiToolbox, OpenApiTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(A2APreviewToolbox, A2APreviewTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(WorkIQPreviewToolbox, WorkIQPreviewTool);
-
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(FabricIQPreviewToolbox, FabricIQPreviewTool);
 
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
