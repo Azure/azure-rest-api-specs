@@ -19,20 +19,16 @@ alias DataAccessOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 // ============================================================
 
 interface DataSubscriptions {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
   @doc("Gets a data subscription by its identifier.")
   @get
-  Get is DataAccessOperations.ResourceRead<DataSubscription>;
+  get is DataAccessOperations.ResourceRead<DataSubscription>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
   @doc("Creates or updates a data subscription.")
   @route("/dataSubscriptions/{dataSubscriptionId}")
   @put
-  CreateOrUpdate is RpcOperation<
+  createOrReplace is RpcOperation<
     DataSubscriptionIdParameter & {
       @doc("The data subscription payload.")
       @body
@@ -41,19 +37,15 @@ interface DataSubscriptions {
     DataSubscription
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
   @doc("Deletes a data subscription.")
   @delete
-  Delete is DataAccessOperations.ResourceDelete<DataSubscription>;
+  delete is DataAccessOperations.ResourceDelete<DataSubscription>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
   @doc("Lists data subscriptions with optional filtering.")
   @get
-  List is DataAccessOperations.ResourceList<
+  list is DataAccessOperations.ResourceList<
     DataSubscription,
     ListQueryParametersTrait<{
       @doc("Continuation token for pagination.")
@@ -106,13 +98,11 @@ interface DataSubscriptions {
     }>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
   @doc("Saves a data subscription as a draft.")
   @route("/dataSubscriptions/{dataSubscriptionId}:save")
   @put
-  Save is RpcOperation<
+  replaceDraft is RpcOperation<
     DataSubscriptionIdParameter & {
       @doc("The data subscription payload.")
       @body
@@ -121,13 +111,11 @@ interface DataSubscriptions {
     DataSubscription
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataSubscriptions")
   @doc("Completes a data subscription after access has been granted.")
   @route("/dataSubscriptions/{dataSubscriptionId}:complete")
   @post
-  Complete is RpcOperation<DataSubscriptionIdParameter, DataSubscription>;
+  complete is RpcOperation<DataSubscriptionIdParameter, DataSubscription>;
 }
 
 // ============================================================
@@ -135,20 +123,16 @@ interface DataSubscriptions {
 // ============================================================
 
 interface Workflows {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Gets a workflow by its identifier.")
   @get
-  Get is DataAccessOperations.ResourceRead<Workflow>;
+  get is DataAccessOperations.ResourceRead<Workflow>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Creates or updates a workflow.")
   @route("/workflows/{workflowId}")
   @put
-  CreateOrUpdate is RpcOperation<
+  createOrReplace is RpcOperation<
     WorkflowIdParameter & {
       @doc("The workflow payload.")
       @body
@@ -157,19 +141,15 @@ interface Workflows {
     Workflow
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Deletes a workflow.")
   @delete
-  Delete is DataAccessOperations.ResourceDelete<Workflow>;
+  delete is DataAccessOperations.ResourceDelete<Workflow>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Lists workflows with optional filtering.")
   @get
-  List is DataAccessOperations.ResourceList<
+  list is DataAccessOperations.ResourceList<
     Workflow,
     ListQueryParametersTrait<{
       @doc("Continuation token for pagination.")
@@ -198,24 +178,20 @@ interface Workflows {
     }>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Gets the data access request template for a specific trigger type.")
   @route("/workflows/templates/dataAccessRequestTemplate/{triggerType}")
   @get
-  GetTemplateByTriggerType is RpcOperation<
+  getTemplateByTriggerType is RpcOperation<
     TriggerTypeParameter,
     ActionListResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Approves a workflow run.")
   @route("/workflows/{workflowId}/workflowRunId/{workflowRunId}:approve")
   @post
-  ApproveRun is RpcOperation<
+  approveRun is RpcOperation<
     WorkflowIdAndRunIdParameters & {
       @doc("The approver's decision.")
       @body
@@ -224,13 +200,11 @@ interface Workflows {
     {}
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Rejects a workflow run.")
   @route("/workflows/{workflowId}/workflowRunId/{workflowRunId}:reject")
   @post
-  RejectRun is RpcOperation<
+  rejectRun is RpcOperation<
     WorkflowIdAndRunIdParameters & {
       @doc("The approver's decision.")
       @body
@@ -239,13 +213,11 @@ interface Workflows {
     {}
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Gets pending approvals for the current user.")
   @route("/approvals")
   @get
-  GetApprovals is RpcOperation<
+  getApprovals is RpcOperation<
     {
       @doc("Continuation token for pagination.")
       @query
@@ -274,13 +246,11 @@ interface Workflows {
     ApprovalWorkflowListResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Lists workflow runs with optional filtering.")
   @route("/workflowRuns")
   @get
-  ListRuns is RpcOperation<
+  getRuns is RpcOperation<
     {
       @doc("Continuation token for pagination.")
       @query
@@ -321,32 +291,26 @@ interface Workflows {
     WorkflowRunListResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Gets a specific workflow run by identifier.")
   @route("/workflowRuns/{workflowRunId}")
   @get
-  GetRun is RpcOperation<WorkflowRunIdParameter, WorkflowRun>;
+  getRun is RpcOperation<WorkflowRunIdParameter, WorkflowRun>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Gets approvals for a specific workflow run.")
   @route("/workflowRuns/{workflowRunId}/approvals")
   @get
-  GetRunApprovals is RpcOperation<
+  getRunApprovals is RpcOperation<
     WorkflowRunIdParameter,
     WorkflowRunApprovalListResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Updates a workflow run.")
   @route("/workflowRuns/{workflowRunId}")
   @put
-  UpdateRun is RpcOperation<
+  replaceRun is RpcOperation<
     WorkflowRunIdParameter & {
       @doc("The workflow run payload.")
       @body
@@ -355,13 +319,11 @@ interface Workflows {
     WorkflowRun
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
   @doc("Deletes a workflow run.")
   @route("/workflowRuns/{workflowRunId}")
   @delete
-  DeleteRun is RpcOperation<WorkflowRunIdParameter, {}>;
+  deleteRun is RpcOperation<WorkflowRunIdParameter, {}>;
 }
 
 // ============================================================
@@ -369,21 +331,17 @@ interface Workflows {
 // ============================================================
 
 interface DataProductPolicySets {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<DataProductIdParameter, PolicySet>;
+  getApplied is RpcOperation<DataProductIdParameter, PolicySet>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @put
-  CreateOrUpdateApplied is RpcOperation<
+  createOrReplaceApplied is RpcOperation<
     DataProductIdParameter & {
       @doc("The policy set payload.")
       @body
@@ -392,51 +350,41 @@ interface DataProductPolicySets {
     PolicySet
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Deletes the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @delete
-  DeleteApplied is RpcOperation<DataProductIdParameter, {}>;
+  deleteApplied is RpcOperation<DataProductIdParameter, {}>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets the effective policy set for a data product, combining applied and inherited policies.")
   @route("/dataProducts/{dataProductId}/policySets/effective")
   @get
-  GetEffective is RpcOperation<DataProductIdParameter, PolicySet>;
+  getEffective is RpcOperation<DataProductIdParameter, PolicySet>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets term policy sets associated with a data product.")
   @route("/dataProducts/{dataProductId}/policySets/terms")
   @get
-  GetTermPolicies is RpcOperation<
+  getTermPolicies is RpcOperation<
     DataProductIdParameter,
     PolicySetListResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets critical data element policy sets associated with a data product.")
   @route("/dataProducts/{dataProductId}/policySets/criticalDataElements")
   @get
-  GetCriticalDataElementPolicies is RpcOperation<
+  getCriticalDataElementPolicies is RpcOperation<
     DataProductIdParameter,
     PolicySetListResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets workflow settings for a data product policy set.")
   @route("/dataProducts/{dataProductId}/policySet")
   @get
-  GetWorkflowSettings is RpcOperation<
+  getWorkflowSettings is RpcOperation<
     DataProductIdParameter,
     DataProductWorkflowSettingsResponse
   >;
@@ -447,21 +395,17 @@ interface DataProductPolicySets {
 // ============================================================
 
 interface DomainPolicySets {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<DomainIdParameter, PolicySet>;
+  getApplied is RpcOperation<DomainIdParameter, PolicySet>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @put
-  CreateOrUpdateApplied is RpcOperation<
+  createOrReplaceApplied is RpcOperation<
     DomainIdParameter & {
       @doc("The policy set payload.")
       @body
@@ -470,13 +414,11 @@ interface DomainPolicySets {
     PolicySet
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Deletes the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @delete
-  DeleteApplied is RpcOperation<DomainIdParameter, {}>;
+  deleteApplied is RpcOperation<DomainIdParameter, {}>;
 }
 
 // ============================================================
@@ -484,21 +426,17 @@ interface DomainPolicySets {
 // ============================================================
 
 interface TermPolicySets {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<TermIdParameter, PolicySet>;
+  getApplied is RpcOperation<TermIdParameter, PolicySet>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @put
-  CreateOrUpdateApplied is RpcOperation<
+  createOrReplaceApplied is RpcOperation<
     TermIdParameter & {
       @doc("The policy set payload.")
       @body
@@ -507,13 +445,11 @@ interface TermPolicySets {
     PolicySet
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Deletes the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @delete
-  DeleteApplied is RpcOperation<TermIdParameter, {}>;
+  deleteApplied is RpcOperation<TermIdParameter, {}>;
 }
 
 // ============================================================
@@ -521,21 +457,17 @@ interface TermPolicySets {
 // ============================================================
 
 interface CriticalDataElementPolicySets {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Gets the applied policy set for a critical data element.")
   @route("/criticalDataElements/{criticalDataElementId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<CriticalDataElementIdParameter, PolicySet>;
+  getApplied is RpcOperation<CriticalDataElementIdParameter, PolicySet>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a critical data element.")
   @route("/criticalDataElements/{criticalDataElementId}/policySets/applied")
   @put
-  CreateOrUpdateApplied is RpcOperation<
+  createOrReplaceApplied is RpcOperation<
     CriticalDataElementIdParameter & {
       @doc("The policy set payload.")
       @body
