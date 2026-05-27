@@ -47,7 +47,7 @@ suppressions:
     from: openapi.json
     where: $.definitions.DataEncryption.properties.primaryFederatedIdentityClientId
     reason: Client ID of multi-tenant Microsoft Entra application, defined as GUID per ARM guidelines.
-   - code: GuidUsage
+  - code: GuidUsage
     from: openapi.json
     where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
     reason: Client ID of multi-tenant Microsoft Entra application for geo-redundant backups, defined as GUID per ARM guidelines.
