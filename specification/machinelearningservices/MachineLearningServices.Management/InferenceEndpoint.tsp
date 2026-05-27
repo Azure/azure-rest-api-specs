@@ -125,7 +125,7 @@ interface InferenceEndpoints {
   @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
-    PatchModel = void,
+    PatchModel = Record<unknown>,
     Response =
       | ArmResourceUpdatedResponse<InferenceEndpoint>
       | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
