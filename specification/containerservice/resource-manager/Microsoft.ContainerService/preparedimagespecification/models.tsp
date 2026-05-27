@@ -100,7 +100,6 @@ model PreparedImageSpecificationScript {
   postScriptAction?: PostScriptAction;
 }
 
-
 @doc("Prepared image specification patch resource")
 model PreparedImageSpecificationPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
