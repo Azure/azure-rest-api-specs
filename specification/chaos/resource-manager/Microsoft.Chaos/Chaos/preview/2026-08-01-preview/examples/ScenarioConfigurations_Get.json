@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-08-01-preview",
     "workspaceName": "exampleWorkspace",
     "scenarioName": "12345678-1234-1234-1234-123456789012",
     "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
@@ -15,20 +15,6 @@
         "type": "Microsoft.Chaos/workspaces/scenarios/configurations",
         "properties": {
           "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
-          "exclusions": {
-            "resources": [
-              "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
-            ],
-            "tags": [
-              {
-                "key": "environment",
-                "value": "production"
-              }
-            ],
-            "types": [
-              "Microsoft.Compute/virtualMachineScaleSets"
-            ]
-          },
           "parameters": [
             {
               "key": "duration",
@@ -40,13 +26,26 @@
             }
           ],
           "provisioningState": "Succeeded",
-          "filters": {
-            "locations": [
-              "westus2"
-            ],
-            "physicalZones": [
-              "westus2-az1"
-            ]
+          "resourceTargeting": {
+            "include": {
+              "physicalZones": [
+                "westus2-az1"
+              ]
+            },
+            "exclude": {
+              "resources": [
+                "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "value": "production"
+                }
+              ],
+              "types": [
+                "Microsoft.Compute/virtualMachineScaleSets"
+              ]
+            }
           }
         },
         "systemData": {

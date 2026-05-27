@@ -16,8 +16,7 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Workspace)
 @singleton("latest")
-model WorkspaceEvaluation
-  is Azure.ResourceManager.ProxyResource<WorkspaceEvaluationProperties> {
+model WorkspaceEvaluation is ProxyResource<WorkspaceEvaluationProperties> {
   ...ResourceNameParameter<
     Resource = WorkspaceEvaluation,
     KeyName = "evaluationName",
@@ -60,7 +59,7 @@ model WorkspaceEvaluationProperties {
    * The workspace ID this evaluation belongs to.
    */
   @visibility(Lifecycle.Read)
-  workspaceId: string;
+  workspaceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The number of scenarios to evaluate.

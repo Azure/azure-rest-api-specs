@@ -1565,7 +1565,7 @@
         "tags": [
           "Experiments"
         ],
-        "description": "The operation to update an experiment.",
+        "description": "Update an experiment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2695,7 +2695,7 @@
         "tags": [
           "Workspaces"
         ],
-        "description": "The operation to update a Workspace.",
+        "description": "Update a Workspace.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3836,8 +3836,7 @@
         "tags": [
           "ScenarioRuns"
         ],
-        "summary": "Get a scenario run.",
-        "description": "Get a scenario run.",
+        "description": "Get a scenario run.\n\nThis endpoint is also the polling target for ScenarioConfigurations.execute\nand ScenarioRuns.cancel (final-state-via: location). While the run is in\nprogress the service returns 202 with a Location header pointing back to\nthis URL; clients must keep polling until they receive 200, which carries\nthe final ScenarioRun body.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3883,19 +3882,22 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Indicates the scenario run is still in progress. Clients polling via the\nLocation header should continue polling until a 200 response is returned.\nThe body reflects the current run state at the time of the poll.",
             "schema": {
               "$ref": "#/definitions/ScenarioRun"
             },
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "format": "uri",
+                "description": "The URL where the status of the long-running operation can be polled."
               },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The number of seconds the client should wait before polling again.",
+                "minimum": 0,
+                "maximum": 2147483647
               }
             }
           },
@@ -4731,65 +4733,6 @@
         }
       }
     },
-    "ConfigurationExclusions": {
-      "type": "object",
-      "description": "Model that represents exclusion criteria for protecting resources from fault injection.\nUses union (OR) logic - a resource is excluded if it matches ANY criteria.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "Array of specific resource IDs to exclude from fault injection.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "tags": {
-          "type": "array",
-          "description": "Array of tag key-value pairs. Resources with matching tags are excluded.",
-          "items": {
-            "$ref": "#/definitions/KeyValuePair"
-          },
-          "x-ms-identifiers": [
-            "key"
-          ]
-        },
-        "types": {
-          "type": "array",
-          "description": "Array of resource types. All resources of these types are excluded.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ConfigurationFilters": {
-      "type": "object",
-      "description": "Model that represents filter criteria for constraining which discovered\nresources participate in fault injection.\n\nUses intersection (AND) logic — a resource is included only if it matches all criteria.",
-      "properties": {
-        "locations": {
-          "type": "array",
-          "description": "Array of Azure location strings. Only resources in these locations are included.\n\nNull or omitted means all locations (no filter). Empty array means include nothing.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "zones": {
-          "type": "array",
-          "description": "Array of availability zone identifiers (\"1\", \"2\", \"3\", \"zone-redundant\").\nOnly resources whose zones intersect this list are included.\n\nNull or omitted means all zones (including non-zonal). Empty array means include nothing.\n\nMutually exclusive with `physicalZones` — set one or the other, not both.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "physicalZones": {
-          "type": "array",
-          "description": "Array of physical availability zone identifiers in `{region}-az{N}` format\n(e.g., `\"westus2-az1\"`). Only resources in the corresponding logical zone\nfor each subscription are included.\n\nAt execution time, each physical zone is resolved to per-subscription\nlogical zones via the Azure locations API. The resolved mapping is surfaced\non the scenario run response (`zoneResolution`).\n\nNull or omitted means physical zone targeting is not used.\nOnly one physical zone is supported in preview.\n\nMutually exclusive with `zones` — set one or the other, not both.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ContinuousAction": {
       "type": "object",
       "description": "Model that represents a continuous action.",
@@ -5456,6 +5399,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource id for the affected resource.",
           "readOnly": true
         },
@@ -6091,6 +6035,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource id for the affected resource.",
           "readOnly": true
         },
@@ -6118,6 +6063,73 @@
         "remediationUri"
       ]
     },
+    "ResourceTargeting": {
+      "type": "object",
+      "description": "Model that represents unified resource targeting with symmetric include/exclude criteria.\nBoth sides support the same set of dimensions.",
+      "properties": {
+        "include": {
+          "$ref": "#/definitions/ResourceTargetingCriteria",
+          "description": "Inclusion criteria. Resources must match ALL active dimensions to be candidates.\nNull or omitted means no inclusion filtering (all resources are candidates)."
+        },
+        "exclude": {
+          "$ref": "#/definitions/ResourceTargetingCriteria",
+          "description": "Exclusion criteria. Resources matching ANY active dimension are removed.\nNull or omitted means no exclusions applied."
+        }
+      }
+    },
+    "ResourceTargetingCriteria": {
+      "type": "object",
+      "description": "Model that represents a set of targeting criteria for resource selection.\nUsed on both the include and exclude sides of ResourceTargeting.\n\nAll dimensions use unified null/empty semantics:\n- Null or omitted means \"no constraint\" (this dimension is inactive).\n- Empty array is treated the same as null (no constraint).\n- Non-empty array means the dimension is active.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "Array of Azure location strings (e.g., \"eastus\", \"westeurope\", \"global\").\nCase-insensitive, normalized form only (e.g., \"eastus\" not \"East US\").",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "type": "array",
+          "description": "Array of logical availability zone identifiers (e.g., \"1\", \"2\", \"3\", \"zone-redundant\").\n\nMutually exclusive with `physicalZones` — set one or the other, not both.\nWhen set, `locations` must also be set on the same side (zone IDs are only meaningful within a region).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "physicalZones": {
+          "type": "array",
+          "description": "Array of physical datacenter zone identifiers in `{region}-az{N}` format\n(e.g., \"westus2-az1\"). Resolved to logical zones per-subscription at execution time.\n\nMutually exclusive with `zones` — set one or the other, not both.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "types": {
+          "type": "array",
+          "description": "Array of Azure resource type strings (e.g., \"Microsoft.Compute/virtualMachines\").\nCase-insensitive equality. Supports trailing wildcard (e.g., \"Microsoft.Compute/*\").",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Array of tag key-value pairs for filtering by Azure resource tags.\nKey and value are matched case-insensitively. Use \"*\" as value to match any value for a key.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "description": "Array of fully qualified Azure resource IDs. Case-insensitive equality.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
     "RoleAssignmentError": {
       "type": "object",
       "description": "Error details for a failed role assignment.",
@@ -6144,6 +6156,7 @@
       "properties": {
         "targetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The target Azure resource ID.",
           "readOnly": true
         },
@@ -6174,6 +6187,7 @@
         },
         "roleAssignmentId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The created role assignment resource ID (null if failed or what-if mode).",
           "readOnly": true
         },
@@ -6404,18 +6418,14 @@
             "key"
           ]
         },
-        "exclusions": {
-          "$ref": "#/definitions/ConfigurationExclusions",
-          "description": "Exclusion criteria for protecting resources from fault injection."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Most recent provisioning state for the given scenario resource.",
           "readOnly": true
         },
-        "filters": {
-          "$ref": "#/definitions/ConfigurationFilters",
-          "description": "Filter criteria used to constrain which discovered resources participate in fault injection."
+        "resourceTargeting": {
+          "$ref": "#/definitions/ResourceTargeting",
+          "description": "Unified resource targeting policy that controls which discovered resources participate\nin fault injection. Replaces the separate `exclusions` and `filters` properties with\nsymmetric include/exclude criteria.\n\nInclude uses AND logic — a resource must match ALL active include dimensions.\nExclude uses OR logic — a resource is removed if it matches ANY exclude dimension.\nWhen include and exclude conflict on the same resource, exclude wins.\n\nNull or omitted means all discovered resources participate (no targeting constraints)."
         }
       },
       "required": [
@@ -7345,6 +7355,7 @@
         },
         "workspaceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The workspace ID this evaluation belongs to.",
           "readOnly": true
         },

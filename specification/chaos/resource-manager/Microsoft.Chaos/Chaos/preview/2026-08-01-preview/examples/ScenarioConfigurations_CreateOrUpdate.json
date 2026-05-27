@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-08-01-preview",
     "workspaceName": "exampleWorkspace",
     "scenarioName": "12345678-1234-1234-1234-123456789012",
     "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
@@ -9,20 +9,6 @@
     "resource": {
       "properties": {
         "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
-        "exclusions": {
-          "resources": [
-            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
-          ],
-          "tags": [
-            {
-              "key": "environment",
-              "value": "production"
-            }
-          ],
-          "types": [
-            "Microsoft.Compute/virtualMachineScaleSets"
-          ]
-        },
         "parameters": [
           {
             "key": "duration",
@@ -33,26 +19,16 @@
             "value": "[\"/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/vm1\",\"/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/vm2\"]"
           }
         ],
-        "filters": {
-          "locations": [
-            "eastus"
-          ],
-          "zones": [
-            "1"
-          ]
-        }
-      }
-    }
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/configurations/config-5678-9012-3456-789012345678",
-        "name": "config-5678-9012-3456-789012345678",
-        "type": "Microsoft.Chaos/workspaces/scenarios/configurations",
-        "properties": {
-          "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
-          "exclusions": {
+        "resourceTargeting": {
+          "include": {
+            "locations": [
+              "eastus"
+            ],
+            "zones": [
+              "1"
+            ]
+          },
+          "exclude": {
             "resources": [
               "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
             ],
@@ -65,7 +41,19 @@
             "types": [
               "Microsoft.Compute/virtualMachineScaleSets"
             ]
-          },
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/configurations/config-5678-9012-3456-789012345678",
+        "name": "config-5678-9012-3456-789012345678",
+        "type": "Microsoft.Chaos/workspaces/scenarios/configurations",
+        "properties": {
+          "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
           "parameters": [
             {
               "key": "duration",
@@ -76,15 +64,31 @@
               "value": "[\"/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/vm1\",\"/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/vm2\"]"
             }
           ],
-          "filters": {
-            "locations": [
-              "eastus"
-            ],
-            "zones": [
-              "1"
-            ]
-          },
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "resourceTargeting": {
+            "include": {
+              "locations": [
+                "eastus"
+              ],
+              "zones": [
+                "1"
+              ]
+            },
+            "exclude": {
+              "resources": [
+                "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "value": "production"
+                }
+              ],
+              "types": [
+                "Microsoft.Compute/virtualMachineScaleSets"
+              ]
+            }
+          }
         },
         "systemData": {
           "createdAt": "2025-01-15T10:30:00.000Z",
@@ -104,20 +108,6 @@
         "type": "Microsoft.Chaos/workspaces/scenarios/configurations",
         "properties": {
           "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
-          "exclusions": {
-            "resources": [
-              "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
-            ],
-            "tags": [
-              {
-                "key": "environment",
-                "value": "production"
-              }
-            ],
-            "types": [
-              "Microsoft.Compute/virtualMachineScaleSets"
-            ]
-          },
           "parameters": [
             {
               "key": "duration",
@@ -128,15 +118,31 @@
               "value": "[\"/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/vm1\",\"/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/vm2\"]"
             }
           ],
-          "filters": {
-            "locations": [
-              "eastus"
-            ],
-            "zones": [
-              "1"
-            ]
-          },
-          "provisioningState": "Creating"
+          "provisioningState": "Creating",
+          "resourceTargeting": {
+            "include": {
+              "locations": [
+                "eastus"
+              ],
+              "zones": [
+                "1"
+              ]
+            },
+            "exclude": {
+              "resources": [
+                "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "value": "production"
+                }
+              ],
+              "types": [
+                "Microsoft.Compute/virtualMachineScaleSets"
+              ]
+            }
+          }
         },
         "systemData": {
           "createdAt": "2025-01-15T10:30:00.000Z",

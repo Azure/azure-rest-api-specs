@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./scenario.models.tsp";
 import "./common.models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -16,8 +18,7 @@ namespace Microsoft.Chaos;
  * Model that represents the scenario.
  */
 @parentResource(Scenario)
-model ScenarioConfiguration
-  is Azure.ResourceManager.ProxyResource<ScenarioConfigurationProperties> {
+model ScenarioConfiguration is ProxyResource<ScenarioConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = ScenarioConfiguration,
     KeyName = "scenarioConfigurationName",
@@ -44,6 +45,7 @@ model ScenarioConfigurationProperties {
   /**
    * Exclusion criteria for protecting resources from fault injection.
    */
+  @removed(Versions.v2026_08_01_preview)
   exclusions?: ConfigurationExclusions;
 
   /**
@@ -55,7 +57,22 @@ model ScenarioConfigurationProperties {
   /**
    * Filter criteria used to constrain which discovered resources participate in fault injection.
    */
+  @removed(Versions.v2026_08_01_preview)
   filters?: ConfigurationFilters;
+
+  /**
+   * Unified resource targeting policy that controls which discovered resources participate
+   * in fault injection. Replaces the separate `exclusions` and `filters` properties with
+   * symmetric include/exclude criteria.
+   *
+   * Include uses AND logic — a resource must match ALL active include dimensions.
+   * Exclude uses OR logic — a resource is removed if it matches ANY exclude dimension.
+   * When include and exclude conflict on the same resource, exclude wins.
+   *
+   * Null or omitted means all discovered resources participate (no targeting constraints).
+   */
+  @added(Versions.v2026_08_01_preview)
+  resourceTargeting?: ResourceTargeting;
 }
 
 /**
@@ -119,6 +136,77 @@ model ConfigurationFilters {
    * Mutually exclusive with `zones` — set one or the other, not both.
    */
   physicalZones?: string[];
+}
+
+/**
+ * Model that represents unified resource targeting with symmetric include/exclude criteria.
+ * Both sides support the same set of dimensions.
+ */
+@added(Versions.v2026_08_01_preview)
+model ResourceTargeting {
+  /**
+   * Inclusion criteria. Resources must match ALL active dimensions to be candidates.
+   * Null or omitted means no inclusion filtering (all resources are candidates).
+   */
+  include?: ResourceTargetingCriteria;
+
+  /**
+   * Exclusion criteria. Resources matching ANY active dimension are removed.
+   * Null or omitted means no exclusions applied.
+   */
+  exclude?: ResourceTargetingCriteria;
+}
+
+/**
+ * Model that represents a set of targeting criteria for resource selection.
+ * Used on both the include and exclude sides of ResourceTargeting.
+ *
+ * All dimensions use unified null/empty semantics:
+ *   - Null or omitted means "no constraint" (this dimension is inactive).
+ *   - Empty array is treated the same as null (no constraint).
+ *   - Non-empty array means the dimension is active.
+ */
+@added(Versions.v2026_08_01_preview)
+model ResourceTargetingCriteria {
+  /**
+   * Array of Azure location strings (e.g., "eastus", "westeurope", "global").
+   * Case-insensitive, normalized form only (e.g., "eastus" not "East US").
+   */
+  locations?: string[];
+
+  /**
+   * Array of logical availability zone identifiers (e.g., "1", "2", "3", "zone-redundant").
+   *
+   * Mutually exclusive with `physicalZones` — set one or the other, not both.
+   * When set, `locations` must also be set on the same side (zone IDs are only meaningful within a region).
+   */
+  zones?: string[];
+
+  /**
+   * Array of physical datacenter zone identifiers in `{region}-az{N}` format
+   * (e.g., "westus2-az1"). Resolved to logical zones per-subscription at execution time.
+   *
+   * Mutually exclusive with `zones` — set one or the other, not both.
+   */
+  physicalZones?: string[];
+
+  /**
+   * Array of Azure resource type strings (e.g., "Microsoft.Compute/virtualMachines").
+   * Case-insensitive equality. Supports trailing wildcard (e.g., "Microsoft.Compute/*").
+   */
+  types?: string[];
+
+  /**
+   * Array of tag key-value pairs for filtering by Azure resource tags.
+   * Key and value are matched case-insensitively. Use "*" as value to match any value for a key.
+   */
+  @identifiers(#["key"])
+  tags?: KeyValuePair[];
+
+  /**
+   * Array of fully qualified Azure resource IDs. Case-insensitive equality.
+   */
+  resources?: Azure.Core.armResourceIdentifier[];
 }
 
 @parentResource(ScenarioConfiguration)
@@ -223,7 +311,7 @@ model PermissionError {
    * The resource id for the affected resource.
    */
   @visibility(Lifecycle.Read)
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The missing permissions.
@@ -275,7 +363,7 @@ model ResourceStateError {
    * The resource id for the affected resource.
    */
   @visibility(Lifecycle.Read)
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The error code.
@@ -418,7 +506,7 @@ model RoleAssignmentResult {
    * The target Azure resource ID.
    */
   @visibility(Lifecycle.Read)
-  targetResourceId: string;
+  targetResourceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The managed identity principal ID.
@@ -454,7 +542,7 @@ model RoleAssignmentResult {
    * The created role assignment resource ID (null if failed or what-if mode).
    */
   @visibility(Lifecycle.Read)
-  roleAssignmentId?: string;
+  roleAssignmentId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Error details if the assignment failed.

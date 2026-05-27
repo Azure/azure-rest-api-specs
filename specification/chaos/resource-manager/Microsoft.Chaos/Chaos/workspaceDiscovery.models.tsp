@@ -16,8 +16,7 @@ namespace Microsoft.Chaos;
  */
 @parentResource(Workspace)
 @singleton("latest")
-model WorkspaceDiscovery
-  is Azure.ResourceManager.ProxyResource<WorkspaceDiscoveryProperties> {
+model WorkspaceDiscovery is ProxyResource<WorkspaceDiscoveryProperties> {
   ...ResourceNameParameter<
     Resource = WorkspaceDiscovery,
     KeyName = "discoveryName",
