@@ -38,6 +38,35 @@ Your success metric is **catching the reviewer's mistakes**, not generating
 new findings. A critic that rubber-stamps a flawed report is a failed
 critic.
 
+## Supported Repositories
+
+This agent verifies findings on PRs in **both** repositories the ARM API
+Reviewer supports - they share the same structure, conventions, and review
+rules:
+
+| Repository                      | Description                                                           |
+| ------------------------------- | --------------------------------------------------------------------- |
+| `Azure/azure-rest-api-specs`    | Public Azure REST API specifications                                  |
+| `Azure/azure-rest-api-specs-pr` | Private Azure REST API specifications (pre-release / internal review) |
+
+Repository scope follows whichever repo the Reviewer used to fetch the PR
+files. Use the same `owner/repo` and `ref` (head SHA for changed files; base
+branch for previous-version files) as the Reviewer recorded in its inputs.
+Do **not** silently fall back to a different repo.
+
+**Tooling prerequisite for private-repo PRs.** `Azure/azure-rest-api-specs-pr`
+is private. Re-fetching files from it requires the GitHub MCP server
+(`github/get_file_contents`, `github/get_pull_request`,
+`github/list_pull_request_files`, `github/get_review_comments`) to be bound
+and authorized **in the session running this subagent**. The deferred
+`web/githubRepo` tool resolves public refs only and is **not** a substitute
+for `azure-rest-api-specs-pr`. If those GitHub MCP tools are not available
+in this session when the PR is in the private repo, every finding's re-fetch
+will fail - return `Finding accuracy = FAIL` with reason `file-fetch-failed`
+on every finding and surface this as a tooling problem so the Reviewer
+escalates via the session-handoff fallback. Do not attempt to validate
+against file content quoted in the Reviewer's report.
+
 ## Why this agent exists
 
 The ARM API Reviewer operates on a public repository
