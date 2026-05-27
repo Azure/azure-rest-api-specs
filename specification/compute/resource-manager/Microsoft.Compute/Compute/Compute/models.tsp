@@ -7480,7 +7480,7 @@ model VirtualMachineExtensionImageProperties {
   runProfile?: RunProfile;
 
   /**
-   * A nested object that holds additional metadata in a flexible property bag.
+   * Additional metadata about extension features, including compliance and capability tags.
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -7572,7 +7572,20 @@ union RunProfile {
 }
 
 /**
- * Holds additional metadata in a flexible property bag.
+ * Defines the allowed values for the $expand query parameter on the ListVersions operation.
+ */
+@added(Versions.v2026_04_01)
+union ListVersionsExpandOptions {
+  string,
+
+  /**
+   * Expand to include all properties in the response.
+   */
+  Properties: "properties",
+}
+
+/**
+ * Additional metadata about extension features, including compliance and capability tags.
  */
 @added(Versions.v2026_04_01)
 model ExtensionFeatureMetadata {

@@ -91,11 +91,11 @@ interface VirtualMachineExtensionImages {
       $orderby?: string;
 
       /**
-       * The expand expression to apply on the operation. Allowed values are 'properties' and 'properties/deprecationStatus'.
+       * The expand expression to apply on the operation.
        */
       @added(Versions.v2026_04_01)
       @query("$expand")
-      $expand?: string;
+      $expand?: ListVersionsExpandOptions;
     }
   >;
 }
