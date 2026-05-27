@@ -208,9 +208,60 @@ namespace ComputeCombine;
   "csharp"
 );
 
-// ── Test: Gallery patch model base type (csharp only) ──
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Test preserving previous base type for GalleryUpdate."
+// ── Gallery patch models base type (csharp only) ──
+// Backward compatibility: gallery patch models previously inherited ResourceData in the old SDK.
+// Without this override, they inherit UpdateResourceDefinition which doesn't derive from ResourceData,
+// breaking the API contract.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryImageUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryImageVersionUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryApplicationUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryApplicationVersionUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryScriptUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryScriptVersionUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryInVMAccessControlProfileUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for Gallery patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryInVMAccessControlProfileVersionUpdate,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
