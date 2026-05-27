@@ -215,9 +215,19 @@ stages:
         parameters:
           SourceRootPath: $(SpecRepoDirectory)
           Condition: succeeded()
-
+      - script: |
+          set -euo pipefail
+          bash "$(SdkRepoDirectory)/eng/scripts/automation_init.sh"
+        displayName: 'Run automation init script'
+        condition: and(succeeded(), contains(variables['SdkRepoDirectory'], 'azure-sdk-for-go'))
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
+          export PATH="$PATH"
+          
+          bash "$(SdkRepoDirectory)/eng/scripts/automation_init.sh"
+
+          export PATH="/mnt/vss/_work/1/s/gofolder/bin:$PATH"
+          
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -254,6 +264,10 @@ stages:
           fi
           echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
           echo "$sdk_gen_info"
+
+          env | sort
+
+          which generator
 
           cd $(SpecRepoDirectory)
           echo "##[group]Run npm ci"
