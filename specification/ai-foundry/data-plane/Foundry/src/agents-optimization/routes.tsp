@@ -38,7 +38,7 @@ interface AgentOptimizationJobs {
       ...WithOperationId;
 
       @doc("The optimization job inputs.")
-      @body body: OptimizationJobInputs;
+      @body inputs: OptimizationJobInputs;
     },
     JobCreatedResponse<OptimizationJob>
   >;
@@ -60,7 +60,7 @@ interface AgentOptimizationJobs {
   >;
 
   @summary("Returns a list of agent optimization jobs.")
-  @doc("List optimization jobs. Supports cursor pagination and optional status / agentName filters.")
+  @doc("List optimization jobs. Supports cursor pagination and optional status / agent_name filters.")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
@@ -73,7 +73,7 @@ interface AgentOptimizationJobs {
 
       @doc("Filter to jobs targeting this agent name.")
       @query
-      agentName?: string;
+      agent_name?: string;
     }
   >;
 
@@ -211,7 +211,7 @@ interface AgentOptimizationJobs {
       @path candidateId: string;
 
       @doc("Promotion details.")
-      @body body: PromoteCandidateRequest;
+      @body candidate_request: PromoteCandidateRequest;
     },
     PromoteCandidateResponse
   >;
