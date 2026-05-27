@@ -27,11 +27,38 @@ model IdentityProviderContract
 }
 
 @armResourceOperations
+interface IdentityProviderContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Identity Provider Type identifier. */
+        @path
+        @segment("identityProviders")
+        @key
+        identityProviderName: IdentityProviderType,
+      },
+      ResourceName = "ApiManagementIdentityProvider"
+    > {}
+@armResourceOperations
 interface IdentityProviderContracts {
   /**
    * Gets the configuration details of the identity Provider configured in specified service instance.
    */
-  get is ArmResourceRead<
+  get is IdentityProviderContractsOps.Read<
     IdentityProviderContract,
     Response = ArmResponse<IdentityProviderContract> & {
       /**
@@ -45,7 +72,7 @@ interface IdentityProviderContracts {
   /**
    * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is IdentityProviderContractsOps.CheckExistence<
     IdentityProviderContract,
     Response = OkResponse & {
       /**
@@ -91,7 +118,7 @@ interface IdentityProviderContracts {
    * Updates an existing IdentityProvider configuration.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is IdentityProviderContractsOps.CustomPatchSync<
     IdentityProviderContract,
     PatchModel = IdentityProviderUpdateParameters,
     Parameters = {
@@ -114,7 +141,7 @@ interface IdentityProviderContracts {
   /**
    * Deletes the specified identity provider configuration.
    */
-  delete is ArmResourceDeleteSync<
+  delete is IdentityProviderContractsOps.DeleteSync<
     IdentityProviderContract,
     Parameters = {
       /**
@@ -131,7 +158,7 @@ interface IdentityProviderContracts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory")
-  listByService is ArmResourceListByParent<
+  listByService is IdentityProviderContractsOps.List<
     IdentityProviderContract,
     Response = ArmResponse<IdentityProviderList>
   >;
@@ -139,7 +166,7 @@ interface IdentityProviderContracts {
   /**
    * Gets the client secret details of the Identity Provider.
    */
-  listSecrets is ArmResourceActionSync<
+  listSecrets is IdentityProviderContractsOps.ActionSync<
     IdentityProviderContract,
     void,
     Response = ArmResponse<ClientSecretContract> & {

@@ -26,11 +26,42 @@ model CacheContract
 }
 
 @armResourceOperations
+interface CacheContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Identifier of the Cache entity. Cache identifier (should be either 'default' or valid Azure region identifier). */
+        @path
+        @segment("caches")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
+        cacheId: string,
+      },
+      ResourceName = "ApiManagementCache"
+    > {}
+
+@armResourceOperations
 interface CacheContracts {
   /**
    * Gets the details of the Cache specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is CacheContractsOps.Read<
     CacheContract,
     Response = ArmResponse<CacheContract> & {
       /**
@@ -44,7 +75,7 @@ interface CacheContracts {
   /**
    * Gets the entity state (Etag) version of the Cache specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is CacheContractsOps.CheckExistence<
     CacheContract,
     Response = OkResponse & {
       /**
@@ -63,7 +94,7 @@ interface CacheContracts {
     "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-cache-external",
     "Use an external cache in Azure API Management"
   )
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is CacheContractsOps.CreateOrUpdateSync<
     CacheContract,
     Parameters = {
       /**
@@ -94,7 +125,7 @@ interface CacheContracts {
    * Updates the details of the cache specified by its identifier.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is CacheContractsOps.CustomPatchSync<
     CacheContract,
     PatchModel = CacheUpdateParameters,
     Parameters = {
@@ -117,7 +148,7 @@ interface CacheContracts {
   /**
    * Deletes specific Cache.
    */
-  delete is ArmResourceDeleteSync<
+  delete is CacheContractsOps.DeleteSync<
     CacheContract,
     Parameters = {
       /**
@@ -132,7 +163,7 @@ interface CacheContracts {
   /**
    * Lists a collection of all external Caches in the specified service instance.
    */
-  listByService is ArmResourceListByParent<
+  listByService is CacheContractsOps.List<
     CacheContract,
     Parameters = {
       /**

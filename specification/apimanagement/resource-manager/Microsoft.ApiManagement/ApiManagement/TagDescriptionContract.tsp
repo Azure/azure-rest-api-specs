@@ -72,7 +72,7 @@ interface TagDescriptionContracts {
   /**
    * Get Tag description in scope of API
    */
-  get is ArmResourceRead<
+  get is TagDescriptionContractsOps.Read<
     TagDescriptionContract,
     Response = ArmResponse<TagDescriptionContract> & {
       /**
@@ -86,7 +86,7 @@ interface TagDescriptionContracts {
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is TagDescriptionContractsOps.CheckExistence<
     TagDescriptionContract,
     Response = OkResponse & {
       /**
@@ -131,7 +131,7 @@ interface TagDescriptionContracts {
   /**
    * Delete tag description for the Api.
    */
-  delete is ArmResourceDeleteSync<
+  delete is TagDescriptionContractsOps.DeleteSync<
     TagDescriptionContract,
     Parameters = {
       /**
@@ -146,7 +146,7 @@ interface TagDescriptionContracts {
   /**
    * Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations
    */
-  listByService is ArmResourceListByParent<
+  listByService is TagDescriptionContractsOps.List<
     TagDescriptionContract,
     Parameters = {
       /**

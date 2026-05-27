@@ -26,11 +26,41 @@ model AuthorizationServerContract
 }
 
 @armResourceOperations
+interface AuthorizationServerContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Identifier of the authorization server. */
+        @path
+        @segment("authorizationServers")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
+        authsid: string,
+      },
+      ResourceName = "ApiManagementAuthorizationServer"
+    > {}
+@armResourceOperations
 interface AuthorizationServerContracts {
   /**
    * Gets the details of the authorization server specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is AuthorizationServerContractsOps.Read<
     AuthorizationServerContract,
     Response = ArmResponse<AuthorizationServerContract> & {
       /**
@@ -44,7 +74,7 @@ interface AuthorizationServerContracts {
   /**
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is AuthorizationServerContractsOps.CheckExistence<
     AuthorizationServerContract,
     Response = OkResponse & {
       /**
@@ -58,7 +88,7 @@ interface AuthorizationServerContracts {
   /**
    * Creates new authorization server or updates an existing authorization server.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is AuthorizationServerContractsOps.CreateOrUpdateSync<
     AuthorizationServerContract,
     Parameters = {
       /**
@@ -89,7 +119,7 @@ interface AuthorizationServerContracts {
    * Updates the details of the authorization server specified by its identifier.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is AuthorizationServerContractsOps.CustomPatchSync<
     AuthorizationServerContract,
     PatchModel = AuthorizationServerUpdateContract,
     Parameters = {
@@ -112,7 +142,7 @@ interface AuthorizationServerContracts {
   /**
    * Deletes specific authorization server instance.
    */
-  delete is ArmResourceDeleteSync<
+  delete is AuthorizationServerContractsOps.DeleteSync<
     AuthorizationServerContract,
     Parameters = {
       /**
@@ -127,7 +157,7 @@ interface AuthorizationServerContracts {
   /**
    * Lists a collection of authorization servers defined within a service instance.
    */
-  listByService is ArmResourceListByParent<
+  listByService is AuthorizationServerContractsOps.List<
     AuthorizationServerContract,
     Parameters = {
       /**
@@ -156,7 +186,7 @@ interface AuthorizationServerContracts {
   /**
    * Gets the client secret details of the authorization server.
    */
-  listSecrets is ArmResourceActionSync<
+  listSecrets is AuthorizationServerContractsOps.ActionSync<
     AuthorizationServerContract,
     void,
     Response = ArmResponse<AuthorizationServerSecretsContract> & {

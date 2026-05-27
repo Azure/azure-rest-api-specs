@@ -27,12 +27,39 @@ model TenantSettingsContract
 }
 
 @armResourceOperations
+interface TenantSettingsContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** The identifier of the settings. */
+        @path
+        @segment("settings")
+        @key
+        settingsType: SettingsTypeName,
+      },
+      ResourceName = "ApiManagementTenantSetting"
+    > {}
+@armResourceOperations
 interface TenantSettingsContracts {
   /**
    * Get tenant settings.
    */
   #deprecated "deprecated"
-  get is ArmResourceRead<
+  get is TenantSettingsContractsOps.Read<
     TenantSettingsContract,
     Response = ArmResponse<TenantSettingsContract> & {
       /**
@@ -47,7 +74,7 @@ interface TenantSettingsContracts {
    * Public settings.
    */
   #deprecated "deprecated"
-  listByService is ArmResourceListByParent<
+  listByService is TenantSettingsContractsOps.List<
     TenantSettingsContract,
     Parameters = {
       /**
