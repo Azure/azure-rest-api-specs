@@ -645,9 +645,8 @@ model Schedule {
   @doc("The end time of the schedule.")
   endTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Wire name 'schedule' matches UX clients; C# is renamed via @clientName in client.tsp."
   @doc("Fine-grained recurrence pattern within the chosen frequency.")
-  schedule?: DHScheduleRecurrence;
+  recurrence?: DHScheduleRecurrence;
 
   @doc("The time zone (IANA name) used to interpret startTime, endTime, and recurrence.")
   timeZone?: string;
