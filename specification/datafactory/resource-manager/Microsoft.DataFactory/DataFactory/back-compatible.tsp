@@ -878,19 +878,23 @@ using Microsoft.DataFactory;
 @@Legacy.flattenProperty(ManagedIdentityCredential.typeProperties);
 
 @@clientName(Factories.createOrUpdate::parameters.resource, "factory");
-@@clientName(Factories.update::parameters.properties,
+@@clientName(
+  Factories.update::parameters.properties,
   "factoryUpdateParameters"
 );
-@@clientName(Factories.getGitHubAccessToken::parameters.body,
+@@clientName(
+  Factories.getGitHubAccessToken::parameters.body,
   "gitHubAccessTokenRequest"
 );
 @@clientName(Factories.getDataPlaneAccess::parameters.body, "policy");
 @@clientLocation(Factories.getFeatureValueByFactory, "ExposureControl");
-@@clientName(Factories.getFeatureValueByFactory::parameters.body,
+@@clientName(
+  Factories.getFeatureValueByFactory::parameters.body,
   "exposureControlRequest"
 );
 @@clientLocation(Factories.queryFeatureValuesByFactory, "ExposureControl");
-@@clientName(Factories.queryFeatureValuesByFactory::parameters.body,
+@@clientName(
+  Factories.queryFeatureValuesByFactory::parameters.body,
   "exposureControlBatchRequest"
 );
 @@clientLocation(Factories.queryByFactory, "PipelineRuns");
@@ -902,17 +906,20 @@ using Microsoft.DataFactory;
 @@clientName(Factories.queryByPipelineRun::parameters.body, "filterParameters");
 @@clientLocation(Factories.triggersQueryByFactory, "Triggers");
 @@clientName(Factories.triggersQueryByFactory, "QueryByFactory");
-@@clientName(Factories.triggersQueryByFactory::parameters.body,
+@@clientName(
+  Factories.triggersQueryByFactory::parameters.body,
   "filterParameters"
 );
 @@clientLocation(Factories.triggerRunsQueryByFactory, "TriggerRuns");
 @@clientName(Factories.triggerRunsQueryByFactory, "QueryByFactory");
-@@clientName(Factories.triggerRunsQueryByFactory::parameters.body,
+@@clientName(
+  Factories.triggerRunsQueryByFactory::parameters.body,
   "filterParameters"
 );
 @@clientLocation(Factories.create, "DataFlowDebugSession");
 @@clientName(Factories.create::parameters.body, "request");
-@@clientLocation(Factories.dataFlowDebugSessionQueryByFactory,
+@@clientLocation(
+  Factories.dataFlowDebugSessionQueryByFactory,
   "DataFlowDebugSession"
 );
 @@clientName(Factories.dataFlowDebugSessionQueryByFactory, "QueryByFactory");
@@ -929,104 +936,134 @@ using Microsoft.DataFactory;
 @@Legacy.flattenProperty(Factory.properties);
 
 @@clientLocation(IntegrationRuntimeResources.get, "IntegrationRuntimes");
-@@clientLocation(IntegrationRuntimeResources.createOrUpdate,
+@@clientLocation(
+  IntegrationRuntimeResources.createOrUpdate,
   "IntegrationRuntimes"
 );
-@@clientName(IntegrationRuntimeResources.createOrUpdate::parameters.resource,
+@@clientName(
+  IntegrationRuntimeResources.createOrUpdate::parameters.resource,
   "integrationRuntime"
 );
 @@clientLocation(IntegrationRuntimeResources.update, "IntegrationRuntimes");
-@@clientName(IntegrationRuntimeResources.update::parameters.properties,
+@@clientName(
+  IntegrationRuntimeResources.update::parameters.properties,
   "updateIntegrationRuntimeRequest"
 );
 @@clientLocation(IntegrationRuntimeResources.delete, "IntegrationRuntimes");
-@@clientLocation(IntegrationRuntimeResources.listByFactory,
+@@clientLocation(
+  IntegrationRuntimeResources.listByFactory,
   "IntegrationRuntimes"
 );
 @@clientLocation(IntegrationRuntimeResources.getStatus, "IntegrationRuntimes");
-@@clientLocation(IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
+@@clientLocation(
+  IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
   "IntegrationRuntimes"
 );
-@@clientLocation(IntegrationRuntimeResources.getConnectionInfo,
+@@clientLocation(
+  IntegrationRuntimeResources.getConnectionInfo,
   "IntegrationRuntimes"
 );
-@@clientLocation(IntegrationRuntimeResources.regenerateAuthKey,
+@@clientLocation(
+  IntegrationRuntimeResources.regenerateAuthKey,
   "IntegrationRuntimes"
 );
-@@clientName(IntegrationRuntimeResources.regenerateAuthKey::parameters.body,
+@@clientName(
+  IntegrationRuntimeResources.regenerateAuthKey::parameters.body,
   "regenerateKeyParameters"
 );
-@@clientLocation(IntegrationRuntimeResources.listAuthKeys,
+@@clientLocation(
+  IntegrationRuntimeResources.listAuthKeys,
   "IntegrationRuntimes"
 );
 @@clientLocation(IntegrationRuntimeResources.start, "IntegrationRuntimes");
 @@clientLocation(IntegrationRuntimeResources.stop, "IntegrationRuntimes");
-@@clientLocation(IntegrationRuntimeResources.syncCredentials,
+@@clientLocation(
+  IntegrationRuntimeResources.syncCredentials,
   "IntegrationRuntimes"
 );
-@@clientLocation(IntegrationRuntimeResources.getMonitoringData,
+@@clientLocation(
+  IntegrationRuntimeResources.getMonitoringData,
   "IntegrationRuntimes"
 );
 @@clientLocation(IntegrationRuntimeResources.upgrade, "IntegrationRuntimes");
-@@clientLocation(IntegrationRuntimeResources.removeLinks,
+@@clientLocation(
+  IntegrationRuntimeResources.removeLinks,
   "IntegrationRuntimes"
 );
-@@clientName(IntegrationRuntimeResources.removeLinks::parameters.body,
+@@clientName(
+  IntegrationRuntimeResources.removeLinks::parameters.body,
   "linkedIntegrationRuntimeRequest"
 );
-@@clientLocation(IntegrationRuntimeResources.createLinkedIntegrationRuntime,
+@@clientLocation(
+  IntegrationRuntimeResources.createLinkedIntegrationRuntime,
   "IntegrationRuntimes"
 );
-@@clientName(IntegrationRuntimeResources.createLinkedIntegrationRuntime::parameters.body,
+@@clientName(
+  IntegrationRuntimeResources.createLinkedIntegrationRuntime::parameters.body,
   "createLinkedIntegrationRuntimeRequest"
 );
-@@clientLocation(IntegrationRuntimeResources.refresh,
+@@clientLocation(
+  IntegrationRuntimeResources.refresh,
   "IntegrationRuntimeObjectMetadata"
 );
-@@clientLocation(IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
+@@clientLocation(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
   "IntegrationRuntimeObjectMetadata"
 );
-@@clientName(IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
   "Get"
 );
-@@clientName(IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
   "getMetadataRequest"
 );
-@@clientLocation(IntegrationRuntimeResources.integrationRuntimeNodesGet,
+@@clientLocation(
+  IntegrationRuntimeResources.integrationRuntimeNodesGet,
   "IntegrationRuntimeNodes"
 );
 @@clientName(IntegrationRuntimeResources.integrationRuntimeNodesGet, "Get");
-@@clientLocation(IntegrationRuntimeResources.integrationRuntimeNodesDelete,
+@@clientLocation(
+  IntegrationRuntimeResources.integrationRuntimeNodesDelete,
   "IntegrationRuntimeNodes"
 );
-@@clientName(IntegrationRuntimeResources.integrationRuntimeNodesDelete,
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesDelete,
   "Delete"
 );
-@@clientLocation(IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
+@@clientLocation(
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
   "IntegrationRuntimeNodes"
 );
-@@clientName(IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate,
   "Update"
 );
-@@clientName(IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeNodesUpdate::parameters.body,
   "updateIntegrationRuntimeNodeRequest"
 );
-@@clientLocation(IntegrationRuntimeResources.getIpAddress,
+@@clientLocation(
+  IntegrationRuntimeResources.getIpAddress,
   "IntegrationRuntimeNodes"
 );
-@@clientLocation(IntegrationRuntimeResources.enableInteractiveQuery,
+@@clientLocation(
+  IntegrationRuntimeResources.enableInteractiveQuery,
   "IntegrationRuntime"
 );
-@@clientName(IntegrationRuntimeResources.enableInteractiveQuery::parameters.body,
+@@clientName(
+  IntegrationRuntimeResources.enableInteractiveQuery::parameters.body,
   "enableInteractiveQueryRequest"
 );
-@@clientLocation(IntegrationRuntimeResources.disableInteractiveQuery,
+@@clientLocation(
+  IntegrationRuntimeResources.disableInteractiveQuery,
   "IntegrationRuntime"
 );
 
 @@clientLocation(LinkedServiceResources.get, "LinkedServices");
 @@clientLocation(LinkedServiceResources.createOrUpdate, "LinkedServices");
-@@clientName(LinkedServiceResources.createOrUpdate::parameters.resource,
+@@clientName(
+  LinkedServiceResources.createOrUpdate::parameters.resource,
   "linkedService"
 );
 @@clientLocation(LinkedServiceResources.delete, "LinkedServices");
@@ -1068,74 +1105,91 @@ using Microsoft.DataFactory;
 @@clientLocation(DataFlowResources.listByFactory, "DataFlows");
 
 @@clientLocation(ManagedVirtualNetworkResources.get, "ManagedVirtualNetworks");
-@@clientLocation(ManagedVirtualNetworkResources.createOrUpdate,
+@@clientLocation(
+  ManagedVirtualNetworkResources.createOrUpdate,
   "ManagedVirtualNetworks"
 );
-@@clientName(ManagedVirtualNetworkResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedVirtualNetworkResources.createOrUpdate::parameters.resource,
   "managedVirtualNetwork"
 );
-@@clientLocation(ManagedVirtualNetworkResources.listByFactory,
+@@clientLocation(
+  ManagedVirtualNetworkResources.listByFactory,
   "ManagedVirtualNetworks"
 );
 
-@@clientLocation(ManagedPrivateEndpointResources.get,
+@@clientLocation(
+  ManagedPrivateEndpointResources.get,
   "ManagedPrivateEndpoints"
 );
-@@clientLocation(ManagedPrivateEndpointResources.createOrUpdate,
+@@clientLocation(
+  ManagedPrivateEndpointResources.createOrUpdate,
   "ManagedPrivateEndpoints"
 );
-@@clientName(ManagedPrivateEndpointResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedPrivateEndpointResources.createOrUpdate::parameters.resource,
   "managedPrivateEndpoint"
 );
-@@clientLocation(ManagedPrivateEndpointResources.delete,
+@@clientLocation(
+  ManagedPrivateEndpointResources.delete,
   "ManagedPrivateEndpoints"
 );
-@@clientLocation(ManagedPrivateEndpointResources.listByFactory,
+@@clientLocation(
+  ManagedPrivateEndpointResources.listByFactory,
   "ManagedPrivateEndpoints"
 );
 
 @@clientLocation(CredentialResources.get, "CredentialOperations");
 @@clientLocation(CredentialResources.createOrUpdate, "CredentialOperations");
-@@clientName(CredentialResources.createOrUpdate::parameters.resource,
+@@clientName(
+  CredentialResources.createOrUpdate::parameters.resource,
   "credential"
 );
 @@clientLocation(CredentialResources.delete, "CredentialOperations");
 @@clientLocation(CredentialResources.listByFactory, "CredentialOperations");
 
-@@clientLocation(PrivateEndpointConnectionResources.get,
+@@clientLocation(
+  PrivateEndpointConnectionResources.get,
   "PrivateEndpointConnection",
   "!java"
 );
-@@clientLocation(PrivateEndpointConnectionResources.createOrUpdate,
+@@clientLocation(
+  PrivateEndpointConnectionResources.createOrUpdate,
   "PrivateEndpointConnection",
   "!java"
 );
-@@clientName(PrivateEndpointConnectionResources.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnectionResources.createOrUpdate::parameters.resource,
   "privateEndpointWrapper",
   "!java"
 );
-@@clientLocation(PrivateEndpointConnectionResources.delete,
+@@clientLocation(
+  PrivateEndpointConnectionResources.delete,
   "PrivateEndpointConnection",
   "!java"
 );
-@@clientLocation(PrivateEndpointConnectionResources.listByFactory,
+@@clientLocation(
+  PrivateEndpointConnectionResources.listByFactory,
   "privateEndPointConnections",
   "!java"
 );
 
 @@clientLocation(GlobalParameterResources.get, "GlobalParameters");
 @@clientLocation(GlobalParameterResources.createOrUpdate, "GlobalParameters");
-@@clientName(GlobalParameterResources.createOrUpdate::parameters.resource,
+@@clientName(
+  GlobalParameterResources.createOrUpdate::parameters.resource,
   "default"
 );
 @@clientLocation(GlobalParameterResources.delete, "GlobalParameters");
 @@clientLocation(GlobalParameterResources.listByFactory, "GlobalParameters");
 
 @@clientLocation(ChangeDataCaptureResources.get, "ChangeDataCapture");
-@@clientLocation(ChangeDataCaptureResources.createOrUpdate,
+@@clientLocation(
+  ChangeDataCaptureResources.createOrUpdate,
   "ChangeDataCapture"
 );
-@@clientName(ChangeDataCaptureResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ChangeDataCaptureResources.createOrUpdate::parameters.resource,
   "changeDataCapture"
 );
 @@clientLocation(ChangeDataCaptureResources.delete, "ChangeDataCapture");
@@ -1148,13 +1202,16 @@ using Microsoft.DataFactory;
 
 @@clientLocation(FactoriesOperationGroup.configureFactoryRepo, Factories);
 
-@@clientLocation(ExposureControlOperationGroup.getFeatureValue,
+@@clientLocation(
+  ExposureControlOperationGroup.getFeatureValue,
   "ExposureControl"
 );
 
-@@clientName(FactoriesOperationGroup.configureFactoryRepo::parameters.body,
+@@clientName(
+  FactoriesOperationGroup.configureFactoryRepo::parameters.body,
   "factoryRepoUpdate"
 );
-@@clientName(ExposureControlOperationGroup.getFeatureValue::parameters.body,
+@@clientName(
+  ExposureControlOperationGroup.getFeatureValue::parameters.body,
   "exposureControlRequest"
 );

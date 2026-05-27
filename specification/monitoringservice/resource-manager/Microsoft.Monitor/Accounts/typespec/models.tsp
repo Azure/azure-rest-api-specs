@@ -141,10 +141,13 @@ namespace Microsoft.Monitor {
       NamePattern = "^(?!-)[a-zA-Z0-9-]+[^-]$"
     >;
     ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserving lowercase 'etag' from original swagger to avoid breaking change"
+    ...Azure.ResourceManager.Legacy.EntityTagProperty;
   }
 }
 
-@@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
+@@TypeSpec.Versioning.added(
+  Microsoft.Monitor.AzureMonitorWorkspaceResource.identity,
   Microsoft.Monitor.Versions.v2025_10_03_stable
 );
 
@@ -171,6 +174,7 @@ namespace Microsoft.Monitor {
   }
 }
 
-@@TypeSpec.Versioning.added(Microsoft.Monitor.AzureMonitorWorkspaceResourceUpdate.identity,
+@@TypeSpec.Versioning.added(
+  Microsoft.Monitor.AzureMonitorWorkspaceResourceUpdate.identity,
   Microsoft.Monitor.Versions.v2025_10_03_stable
 );

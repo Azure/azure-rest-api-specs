@@ -4,11 +4,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DevOpsInfrastructure;
 
-@@clientName(Microsoft.DevOpsInfrastructure,
+@@clientName(
+  Microsoft.DevOpsInfrastructure,
   "DevOpsInfrastructureMgmt",
   "python"
 );
-@@clientName(Microsoft.DevOpsInfrastructure,
+@@clientName(
+  Microsoft.DevOpsInfrastructure,
   "DevOpsInfrastructureManagementClient",
   "java"
 );
@@ -33,12 +35,14 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(AgentProfile, "DevOpsPoolAgentProfile", "csharp");
 
-@@clientName(AzureDevOpsOrganizationProfile,
+@@clientName(
+  AzureDevOpsOrganizationProfile,
   "DevOpsAzureOrganizationProfile",
   "csharp"
 );
 
-@@clientName(AzureDevOpsPermissionProfile,
+@@clientName(
+  AzureDevOpsPermissionProfile,
   "DevOpsAzurePermissionProfile",
   "csharp"
 );
@@ -53,7 +57,8 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(GitHubOrganization, "DevOpsGitHubOrganization", "csharp");
 
-@@clientName(GitHubOrganizationProfile,
+@@clientName(
+  GitHubOrganizationProfile,
   "DevOpsGitHubOrganizationProfile",
   "csharp"
 );
@@ -70,7 +75,8 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(PoolImage, "DevOpsPoolVmImage", "csharp");
 
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "DevOpsInfrastructureProvisioningState",
   "csharp"
 );
@@ -81,7 +87,8 @@ using Microsoft.DevOpsInfrastructure;
 
 @@clientName(ResourceDetailsObject, "DevOpsResourceDetails", "csharp");
 
-@@clientName(ResourceDetailsObjectProperties,
+@@clientName(
+  ResourceDetailsObjectProperties,
   "DevOpsResourceDetailsProperties",
   "csharp"
 );
@@ -101,11 +108,13 @@ using Microsoft.DevOpsInfrastructure;
 @@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
 
 @@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "DevOpsCheckNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Pools.checkNameAvailability,
+@@clientName(
+  Pools.checkNameAvailability,
   "CheckDevOpsPoolNameAvailability",
   "csharp"
 );
@@ -117,11 +126,13 @@ using Microsoft.DevOpsInfrastructure;
 @@clientName(Sku.listByLocation, "GetSkusByLocation", "csharp");
 @@clientName(ImageVersions.listByImage, "GetImageVersionsByImage", "csharp");
 @@clientName(NetworkProfile.ipAddresses, "IPAddresses", "csharp");
-@@clientName(NetworkProfile.staticIpAddressCount,
+@@clientName(
+  NetworkProfile.staticIpAddressCount,
   "StaticIPAddressCount",
   "csharp"
 );
-@@clientName(StorageProfile.osDiskStorageAccountType,
+@@clientName(
+  StorageProfile.osDiskStorageAccountType,
   "OSDiskStorageAccountType",
   "csharp"
 );

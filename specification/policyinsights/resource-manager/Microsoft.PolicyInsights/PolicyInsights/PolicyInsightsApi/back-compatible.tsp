@@ -34,61 +34,79 @@ using PolicyInsightsApi;
 // @@clientName(ComponentPolicyState.`@odata.id`, "OdataId");
 // @@clientName(ComponentPolicyState.`@odata.context`, "OdataContext");
 
-@@clientName(Remediations.createOrUpdateAtManagementGroup::parameters.resource,
+@@clientName(
+  Remediations.createOrUpdateAtManagementGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(RemediationSubscriptionOperations.getAtSubscription,
+@@clientLocation(
+  RemediationSubscriptionOperations.getAtSubscription,
   Remediations
 );
-@@clientLocation(RemediationSubscriptionOperations.createOrUpdateAtSubscription,
+@@clientLocation(
+  RemediationSubscriptionOperations.createOrUpdateAtSubscription,
   Remediations
 );
-@@clientName(RemediationSubscriptionOperations.createOrUpdateAtSubscription::parameters.resource,
+@@clientName(
+  RemediationSubscriptionOperations.createOrUpdateAtSubscription::parameters.resource,
   "parameters"
 );
-@@clientLocation(RemediationSubscriptionOperations.deleteAtSubscription,
+@@clientLocation(
+  RemediationSubscriptionOperations.deleteAtSubscription,
   Remediations
 );
-@@clientLocation(RemediationSubscriptionOperations.listForSubscription,
+@@clientLocation(
+  RemediationSubscriptionOperations.listForSubscription,
   Remediations
 );
-@@clientLocation(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
+@@clientLocation(
+  RemediationSubscriptionOperations.listDeploymentsAtSubscription,
   Remediations
 );
-@@clientLocation(RemediationSubscriptionOperations.cancelAtSubscription,
+@@clientLocation(
+  RemediationSubscriptionOperations.cancelAtSubscription,
   Remediations
 );
-@@clientLocation(RemediationResourceGroupOperations.getAtResourceGroup,
+@@clientLocation(
+  RemediationResourceGroupOperations.getAtResourceGroup,
   Remediations
 );
-@@clientLocation(RemediationResourceGroupOperations.createOrUpdateAtResourceGroup,
+@@clientLocation(
+  RemediationResourceGroupOperations.createOrUpdateAtResourceGroup,
   Remediations
 );
-@@clientName(RemediationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+@@clientName(
+  RemediationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(RemediationResourceGroupOperations.deleteAtResourceGroup,
+@@clientLocation(
+  RemediationResourceGroupOperations.deleteAtResourceGroup,
   Remediations
 );
-@@clientLocation(RemediationResourceGroupOperations.listForResourceGroup,
+@@clientLocation(
+  RemediationResourceGroupOperations.listForResourceGroup,
   Remediations
 );
-@@clientLocation(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
+@@clientLocation(
+  RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
   Remediations
 );
-@@clientLocation(RemediationResourceGroupOperations.cancelAtResourceGroup,
+@@clientLocation(
+  RemediationResourceGroupOperations.cancelAtResourceGroup,
   Remediations
 );
 @@clientLocation(RemediationResourceOperations.getAtResource, Remediations);
-@@clientLocation(RemediationResourceOperations.createOrUpdateAtResource,
+@@clientLocation(
+  RemediationResourceOperations.createOrUpdateAtResource,
   Remediations
 );
-@@clientName(RemediationResourceOperations.createOrUpdateAtResource::parameters.resource,
+@@clientName(
+  RemediationResourceOperations.createOrUpdateAtResource::parameters.resource,
   "parameters"
 );
 @@clientLocation(RemediationResourceOperations.deleteAtResource, Remediations);
 @@clientLocation(RemediationResourceOperations.listForResource, Remediations);
-@@clientLocation(RemediationResourceOperations.listDeploymentsAtResource,
+@@clientLocation(
+  RemediationResourceOperations.listDeploymentsAtResource,
   Remediations
 );
 @@clientLocation(RemediationResourceOperations.cancelAtResource, Remediations);
@@ -99,29 +117,37 @@ using PolicyInsightsApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PolicyMetadata.properties);
 
-@@clientName(Attestations.createOrUpdateAtSubscription::parameters.resource,
+@@clientName(
+  Attestations.createOrUpdateAtSubscription::parameters.resource,
   "parameters"
 );
-@@clientLocation(AttestationResourceGroupOperations.getAtResourceGroup,
+@@clientLocation(
+  AttestationResourceGroupOperations.getAtResourceGroup,
   Attestations
 );
-@@clientLocation(AttestationResourceGroupOperations.createOrUpdateAtResourceGroup,
+@@clientLocation(
+  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup,
   Attestations
 );
-@@clientName(AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+@@clientName(
+  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(AttestationResourceGroupOperations.deleteAtResourceGroup,
+@@clientLocation(
+  AttestationResourceGroupOperations.deleteAtResourceGroup,
   Attestations
 );
-@@clientLocation(AttestationResourceGroupOperations.listForResourceGroup,
+@@clientLocation(
+  AttestationResourceGroupOperations.listForResourceGroup,
   Attestations
 );
 @@clientLocation(AttestationOperationGroup.getAtResource, Attestations);
-@@clientLocation(AttestationOperationGroup.createOrUpdateAtResource,
+@@clientLocation(
+  AttestationOperationGroup.createOrUpdateAtResource,
   Attestations
 );
-@@clientName(AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
+@@clientName(
+  AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
   "parameters"
 );
 @@clientLocation(AttestationOperationGroup.deleteAtResource, Attestations);
@@ -129,156 +155,203 @@ using PolicyInsightsApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Attestation.properties);
 
-@@clientLocation(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
+@@clientLocation(
+  RemediationsOperationGroup.listDeploymentsAtManagementGroup,
   Remediations
 );
-@@clientLocation(RemediationsOperationGroup.cancelAtManagementGroup,
+@@clientLocation(
+  RemediationsOperationGroup.cancelAtManagementGroup,
   Remediations
 );
 
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscription,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForSubscription,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResource,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForResource,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   "PolicyEvents"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   "PolicyEvents"
 );
 
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForManagementGroup,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForManagementGroup,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscription,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForSubscription,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscription,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForSubscription,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroup,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResource,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForResource,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResource,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForResource,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+@@clientLocation(
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+@@clientLocation(
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   "PolicyStates"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
   "PolicyStates"
 );
 
-@@clientLocation(PolicyMetadataNonResourceOperationGroup.list,
+@@clientLocation(
+  PolicyMetadataNonResourceOperationGroup.list,
   "PolicyMetadata"
 );
 
-@@clientLocation(PolicyRestrictionsOperationGroup.checkAtSubscriptionScope,
+@@clientLocation(
+  PolicyRestrictionsOperationGroup.checkAtSubscriptionScope,
   "PolicyRestrictions"
 );
-@@clientLocation(PolicyRestrictionsOperationGroup.checkAtResourceGroupScope,
+@@clientLocation(
+  PolicyRestrictionsOperationGroup.checkAtResourceGroupScope,
   "PolicyRestrictions"
 );
-@@clientLocation(PolicyRestrictionsOperationGroup.checkAtManagementGroupScope,
+@@clientLocation(
+  PolicyRestrictionsOperationGroup.checkAtManagementGroupScope,
   "PolicyRestrictions"
 );
 
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   "ComponentPolicyStates"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   "ComponentPolicyStates"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
   "ComponentPolicyStates"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   "ComponentPolicyStates"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   "ComponentPolicyStates"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   "ComponentPolicyStates"
 );
 
-@@clientName(PolicyRestrictionsOperationGroup.checkAtManagementGroupScope::parameters.body,
+@@clientName(
+  PolicyRestrictionsOperationGroup.checkAtManagementGroupScope::parameters.body,
   "parameters"
 );
-@@clientName(PolicyRestrictionsOperationGroup.checkAtSubscriptionScope::parameters.body,
+@@clientName(
+  PolicyRestrictionsOperationGroup.checkAtSubscriptionScope::parameters.body,
   "parameters"
 );
-@@clientName(PolicyRestrictionsOperationGroup.checkAtResourceGroupScope::parameters.body,
+@@clientName(
+  PolicyRestrictionsOperationGroup.checkAtResourceGroupScope::parameters.body,
   "parameters"
 );
 
 @@visibility(AttestationListResult.value, Lifecycle.Read);
 @@visibility(PolicyMetadataCollection.value, Lifecycle.Read);
 @@visibility(RemediationDeploymentsListResult.value, Lifecycle.Read);
-@@Azure.ResourceManager.identifiers(RemediationDeploymentsListResult.value,
+@@Azure.ResourceManager.identifiers(
+  RemediationDeploymentsListResult.value,
   #["remediatedResourceId"]
 );
 @@visibility(RemediationListResult.value, Lifecycle.Read);
 
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
 );

@@ -13,7 +13,9 @@ namespace Microsoft.Sql;
 /**
  * A server trust group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGroupLocationResource)
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 model ServerTrustGroup
   is Azure.ResourceManager.ProxyResource<ServerTrustGroupProperties> {
   ...ResourceNameParameter<
@@ -46,7 +48,9 @@ alias ServerTrustGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
 interface ServerTrustGroups {
   /**
    * Gets a server trust group.
@@ -59,11 +63,14 @@ interface ServerTrustGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ServerTrustGroupsOps.CreateOrUpdateAsync<
     ServerTrustGroup,
-    Response = ArmResourceUpdatedResponse<ServerTrustGroup> | ArmResourceCreatedResponse<
-      ServerTrustGroup,
-      ArmLroLocationHeader<FinalResult = ServerTrustGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerTrustGroup>
+      | ArmResourceCreatedResponse<
+          ServerTrustGroup,
+          ArmLroLocationHeader<FinalResult = ServerTrustGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -72,7 +79,10 @@ interface ServerTrustGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ServerTrustGroupsOps.DeleteWithoutOkAsync<
     ServerTrustGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -83,6 +93,7 @@ interface ServerTrustGroups {
 
 @@doc(ServerTrustGroup.name, "The name of the server trust group.");
 @@doc(ServerTrustGroup.properties, "Resource properties.");
-@@doc(ServerTrustGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ServerTrustGroups.createOrUpdate::parameters.resource,
   "The server trust group parameters."
 );

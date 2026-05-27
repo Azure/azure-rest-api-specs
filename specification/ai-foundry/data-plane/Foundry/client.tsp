@@ -69,7 +69,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
 @@clientName(Agents.listAgentVersions, "list_versions", "python");
-@@clientName(Agents.createAgentVersionFromManifest,
+@@clientName(
+  Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
@@ -203,50 +204,61 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
 @@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
 @@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.listCandidates,
+@@clientName(
+  AgentOptimizationJobs.listCandidates,
   "list_optimization_candidates",
   "python"
 );
-@@clientName(AgentOptimizationJobs.getCandidate,
+@@clientName(
+  AgentOptimizationJobs.getCandidate,
   "get_optimization_candidate",
   "python"
 );
-@@clientName(AgentOptimizationJobs.getCandidateConfig,
+@@clientName(
+  AgentOptimizationJobs.getCandidateConfig,
   "get_optimization_candidate_config",
   "python"
 );
-@@clientName(AgentOptimizationJobs.getCandidateResults,
+@@clientName(
+  AgentOptimizationJobs.getCandidateResults,
   "get_optimization_candidate_results",
   "python"
 );
 
-@@clientName(AgentOptimizationJobs.create,
+@@clientName(
+  AgentOptimizationJobs.create,
   "createOptimizationJob",
   "javascript"
 );
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
-@@clientName(AgentOptimizationJobs.cancel,
+@@clientName(
+  AgentOptimizationJobs.cancel,
   "cancelOptimizationJob",
   "javascript"
 );
-@@clientName(AgentOptimizationJobs.delete,
+@@clientName(
+  AgentOptimizationJobs.delete,
   "deleteOptimizationJob",
   "javascript"
 );
-@@clientName(AgentOptimizationJobs.listCandidates,
+@@clientName(
+  AgentOptimizationJobs.listCandidates,
   "listOptimizationCandidates",
   "javascript"
 );
-@@clientName(AgentOptimizationJobs.getCandidate,
+@@clientName(
+  AgentOptimizationJobs.getCandidate,
   "getOptimizationCandidate",
   "javascript"
 );
-@@clientName(AgentOptimizationJobs.getCandidateConfig,
+@@clientName(
+  AgentOptimizationJobs.getCandidateConfig,
   "getOptimizationCandidateConfig",
   "javascript"
 );
-@@clientName(AgentOptimizationJobs.getCandidateResults,
+@@clientName(
+  AgentOptimizationJobs.getCandidateResults,
   "getOptimizationCandidateResults",
   "javascript"
 );
@@ -269,17 +281,20 @@ using Azure.AI.Projects;
 
 @@clientName(Agents.downloadAgentCode, "download_code", "python");
 
-@@clientName(Agents.createAgentVersionFromCode,
+@@clientName(
+  Agents.createAgentVersionFromCode,
   "create_version_from_code",
   "python"
 );
-@@clientName(Agents.createAgentVersionFromCode,
+@@clientName(
+  Agents.createAgentVersionFromCode,
   "createVersionFromCode",
   "javascript"
 );
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse,
+@@clientName(
+  SessionDirectoryListResponse,
   "SessionDirectoryListResult",
   "python"
 );
@@ -294,10 +309,12 @@ using Azure.AI.Projects;
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatText,
   "TextResponseFormatText"
 );
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
   "TextResponseFormatJsonObject"
 );
 
@@ -314,7 +331,8 @@ using Azure.AI.Projects;
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
 @@clientName(DeleteMemoryResponse, "DeleteMemoryResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
-@@clientName(MemoryStoreDeleteScopeResponse,
+@@clientName(
+  MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
   "python"
 );
@@ -323,15 +341,16 @@ using Azure.AI.Projects;
 // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
 // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
 @@alternateType(OpenAI.InputItem, Record<unknown>);
-
 // Note the doc string replacement below is for JavaScript only, because for Python we hand-write the
 // relevant methods with proper doc strings (see `begin_update_memories` and `search_memories` methods)
-@@clientDoc(MemoryStoreUpdateRequest.items,
+@@clientDoc(
+  MemoryStoreUpdateRequest.items,
   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
 );
-@@clientDoc(MemoryStoreSearchRequest.items,
+@@clientDoc(
+  MemoryStoreSearchRequest.items,
   "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
@@ -391,19 +410,32 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job");
 
 // Evaluator generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create,
+@@clientName(
+  EvaluatorGenerationJobs.create,
   "createGenerationJob",
   "javascript"
 );
 @@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
 @@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(EvaluatorGenerationJobs.cancel,
+@@clientName(
+  EvaluatorGenerationJobs.cancel,
   "cancelGenerationJob",
   "javascript"
 );
-@@clientName(EvaluatorGenerationJobs.delete,
+@@clientName(
+  EvaluatorGenerationJobs.delete,
   "deleteGenerationJob",
   "javascript"
+);
+// Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
+@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText"
+);
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject"
 );
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
@@ -468,11 +500,13 @@ using Azure.AI.Projects;
 @@clientName(Models.getCredentials, "getCredentials");
 @@clientName(Models.createAsync, "pendingCreateVersion");
 
-@@clientName(CreateModelVersionAsyncResponse,
+@@clientName(
+  CreateModelVersionAsyncResponse,
   "ModelPendingCreateVersionResult",
   "python"
 );
-@@clientName(CreateModelVersionAsyncResponse,
+@@clientName(
+  CreateModelVersionAsyncResponse,
   "ModelPendingCreateVersionResponse",
   "javascript"
 );
@@ -541,7 +575,8 @@ model AIProjectClientOptions {
   allow_preview?: boolean;
 }
 
-@@clientInitialization(Azure.AI.Projects,
+@@clientInitialization(
+  Azure.AI.Projects,
   {
     parameters: AIProjectClientOptions,
   },

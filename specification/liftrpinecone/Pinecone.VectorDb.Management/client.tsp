@@ -9,33 +9,40 @@ using Pinecone.VectorDb;
 
 // csharp
 @@clientName(OrganizationResource, "PineconeVectorDBOrganization", "csharp");
-@@clientName(OrganizationProperties,
+@@clientName(
+  OrganizationProperties,
   "PineconeVectorDBOrganizationProperties",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceDetails,
+@@clientName(
+  LiftrBase.MarketplaceDetails,
   "PineconeVectorDBMarketplaceDetails",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceSubscriptionStatus,
+@@clientName(
+  LiftrBase.MarketplaceSubscriptionStatus,
   "PineconeVectorDBMarketplaceSubscriptionStatus",
   "csharp"
 );
 @@clientName(LiftrBase.OfferDetails, "PineconeVectorDBOfferDetails", "csharp");
 @@clientName(PartnerProperties, "PineconeVectorDBPartnerProperties", "csharp");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "PineconeVectorDBProvisioningState",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnPropertiesV2,
+@@clientName(
+  LiftrBase.SingleSignOnPropertiesV2,
   "PineconeVectorDBSingleSignOnPropertiesV2",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnStates,
+@@clientName(
+  LiftrBase.SingleSignOnStates,
   "PineconeVectorDBSingleSignOnState",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnType,
+@@clientName(
+  LiftrBase.SingleSignOnType,
   "PineconeVectorDBSingleSignOnType",
   "csharp"
 );

@@ -79,6 +79,7 @@ op CreateOperation<
   BatchError
 >;
 
+#suppress "@typespec/http/deprecated-implicit-optionality" "Legacy - DO NOT COPY"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch(#{ implicitOptionality: true })
 op UpdateOperation<

@@ -39,6 +39,7 @@ interface HypervJobs {
 }
 
 @@doc(HypervJob.name, " Job name");
-@@doc(HypervJob.properties,
+@@doc(
+  HypervJob.properties,
   "The resource-specific properties for this resource."
 );

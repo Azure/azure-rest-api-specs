@@ -14,7 +14,11 @@ namespace Microsoft.Sql;
 /**
  * Managed instance's Start/Stop schedule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(
+  Features.StartStopManagedInstanceSchedules
+)
 model StartStopManagedInstanceSchedule
   is Azure.ResourceManager.ProxyResource<StartStopManagedInstanceScheduleProperties> {
   ...ResourceNameParameter<
@@ -26,7 +30,11 @@ model StartStopManagedInstanceSchedule
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.StartStopManagedInstanceSchedules
+)
 interface StartStopManagedInstanceSchedules {
   /**
    * Gets the managed instance's Start/Stop schedule.
@@ -49,10 +57,12 @@ interface StartStopManagedInstanceSchedules {
   listByInstance is ArmResourceListByParent<StartStopManagedInstanceSchedule>;
 }
 
-@@doc(StartStopManagedInstanceSchedule.name,
+@@doc(
+  StartStopManagedInstanceSchedule.name,
   "Name of the managed instance Start/Stop schedule."
 );
 @@doc(StartStopManagedInstanceSchedule.properties, "Resource properties.");
-@@doc(StartStopManagedInstanceSchedules.createOrUpdate::parameters.resource,
+@@doc(
+  StartStopManagedInstanceSchedules.createOrUpdate::parameters.resource,
   "The requested managed instance Start/Stop schedule."
 );
