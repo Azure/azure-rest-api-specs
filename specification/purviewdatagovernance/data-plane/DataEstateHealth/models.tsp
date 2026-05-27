@@ -437,7 +437,6 @@ model DHPalette {
   color: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Snapshot is an arbitrary JSON payload captured at scoring time."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("An individual score record returned with control responses.")
 model DHScore {
@@ -458,9 +457,6 @@ model DHScore {
 
   @doc("Identifier of the computing job that produced this score.")
   computingJobId?: string;
-
-  @doc("Snapshot of the scored entity at scoring time. Open-ended payload.")
-  entitySnapshot?: Record<unknown>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
