@@ -14859,7 +14859,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoutineListResponse"
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Routine"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -15125,7 +15151,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoutineRunsResponse"
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RoutineRun"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
                 }
               }
             }
@@ -51163,40 +51215,6 @@
           ]
         }
       },
-      "RoutineListResponse": {
-        "type": "object",
-        "required": [
-          "data",
-          "has_more"
-        ],
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Routine"
-            },
-            "description": "The requested list of routines."
-          },
-          "first_id": {
-            "type": "string",
-            "description": "The identifier of the first routine in this page, or null when the page is empty."
-          },
-          "last_id": {
-            "type": "string",
-            "description": "An opaque cursor to pass as the next after query parameter when has_more is true."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "True when more routines are available after this page."
-          }
-        },
-        "description": "The paginated response returned when listing routines.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Routines=V1Preview"
-          ]
-        }
-      },
       "RoutineRun": {
         "type": "object",
         "required": [
@@ -51205,12 +51223,12 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The MLflow run identifier for the routine attempt.",
+            "description": "The unique run identifier for the routine attempt.",
             "readOnly": true
           },
           "status": {
             "type": "string",
-            "description": "The underlying MLflow run status."
+            "description": "The run status."
           },
           "phase": {
             "allOf": [
@@ -51279,10 +51297,6 @@
               }
             ],
             "description": "The scheduled fire time recorded for timer and schedule deliveries."
-          },
-          "trigger_time_zone": {
-            "type": "string",
-            "description": "The trigger time zone recorded for timer and schedule deliveries."
           },
           "started_at": {
             "allOf": [
@@ -51353,40 +51367,6 @@
           }
         ],
         "description": "Known lifecycle phases recorded for a routine run.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Routines=V1Preview"
-          ]
-        }
-      },
-      "RoutineRunsResponse": {
-        "type": "object",
-        "required": [
-          "data",
-          "has_more"
-        ],
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RoutineRun"
-            },
-            "description": "The requested list of routine runs."
-          },
-          "first_id": {
-            "type": "string",
-            "description": "The identifier of the first run in this page, or null when the page is empty."
-          },
-          "last_id": {
-            "type": "string",
-            "description": "An opaque cursor to pass as the next after query parameter when has_more is true."
-          },
-          "has_more": {
-            "type": "boolean",
-            "description": "True when more routine runs are available after this page."
-          }
-        },
-        "description": "The paginated response returned when listing routine runs.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Routines=V1Preview"
@@ -52888,13 +52868,10 @@
             ],
             "description": "The trigger type."
           },
-          "in": {
+          "at": {
             "type": "string",
-            "description": "A relative timer expression from now, such as `2h` or `15m`. Stored routines are normalized to an absolute fire time."
-          },
-          "time_zone": {
-            "type": "string",
-            "description": "An optional IANA or Windows time zone identifier when the timer uses a local timestamp."
+            "format": "date-time",
+            "description": "The UTC date and time at which the timer fires."
           }
         },
         "allOf": [

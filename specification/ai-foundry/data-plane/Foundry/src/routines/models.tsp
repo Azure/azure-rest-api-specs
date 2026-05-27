@@ -132,11 +132,8 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
   type: RoutineTriggerType.timer;
 
-  @doc("A relative timer expression from now, such as `2h` or `15m`. Stored routines are normalized to an absolute fire time.")
-  in?: string;
-
-  @doc("An optional IANA or Windows time zone identifier when the timer uses a local timestamp.")
-  time_zone?: string;
+  @doc("The UTC date and time at which the timer fires.")
+  at?: utcDateTime;
 }
 
 @doc("A GitHub issue routine trigger.")
@@ -270,24 +267,6 @@ model RoutineCreateOrUpdateRequest {
   action?: RoutineAction;
 }
 
-@doc("The paginated response returned when listing routines.")
-@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model RoutineListResponse {
-  @doc("The requested list of routines.")
-  @pageItems
-  data: Routine[];
-
-  @doc("The identifier of the first routine in this page, or null when the page is empty.")
-  first_id?: string;
-
-  @doc("An opaque cursor to pass as the next after query parameter when has_more is true.")
-  @continuationToken
-  last_id?: string;
-
-  @doc("True when more routines are available after this page.")
-  has_more: boolean;
-}
-
 @doc("Base model for a manual dispatch payload.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
@@ -339,11 +318,11 @@ model DispatchRoutineResponse {
 @doc("A single routine run returned from the run history API.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 model RoutineRun {
-  @doc("The MLflow run identifier for the routine attempt.")
+  @doc("The unique run identifier for the routine attempt.")
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("The underlying MLflow run status.")
+  @doc("The run status.")
   status?: string;
 
   @doc("The AgentExtensions lifecycle phase for the routine attempt.")
@@ -379,9 +358,6 @@ model RoutineRun {
   @doc("The scheduled fire time recorded for timer and schedule deliveries.")
   scheduled_fire_at?: FoundryTimestamp;
 
-  @doc("The trigger time zone recorded for timer and schedule deliveries.")
-  trigger_time_zone?: string;
-
   @doc("The time when the underlying run started.")
   started_at?: FoundryTimestamp;
 
@@ -408,24 +384,6 @@ model RoutineRun {
 
   @doc("The truncated failure message captured for a failed attempt, when available.")
   error_message?: string;
-}
-
-@doc("The paginated response returned when listing routine runs.")
-@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model RoutineRunsResponse {
-  @doc("The requested list of routine runs.")
-  @pageItems
-  data: RoutineRun[];
-
-  @doc("The identifier of the first run in this page, or null when the page is empty.")
-  first_id?: string;
-
-  @doc("An opaque cursor to pass as the next after query parameter when has_more is true.")
-  @continuationToken
-  last_id?: string;
-
-  @doc("True when more routine runs are available after this page.")
-  has_more: boolean;
 }
 
 @doc("Parameters for creating or updating a routine.")
