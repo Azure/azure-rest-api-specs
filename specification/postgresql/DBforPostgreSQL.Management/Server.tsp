@@ -231,7 +231,7 @@ interface Servers {
       | (StartMajorVersionUpgradePrecheckResponse & RequestIdResponseHeader)
       | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StartMajorVersionUpgradePrecheckResponse> &
           Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StartMajorVersionUpgradePrecheckResponse>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
 }
 

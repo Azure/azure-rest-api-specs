@@ -128,25 +128,23 @@ interface MaintenanceEvents {
   >;
 
   @doc("Reschedules a maintenance event to a new date and time.")
-  @added(Versions.v2026_04_01)
   reschedule is ArmResourceActionAsyncBase<
     MaintenanceEventResource,
     MaintenanceEventRescheduleRequest,
 
-      | ArmResponse<MaintenanceEventActionResponse>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventActionResponse> &
+      | ArmResponse<MaintenanceEventResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventResource> &
           Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
 
   @doc("Applies the maintenance event immediately.")
-  @added(Versions.v2026_04_01)
   applyNow is ArmResourceActionAsyncBase<
     MaintenanceEventResource,
     void,
 
-      | ArmResponse<MaintenanceEventActionResponse>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventActionResponse> &
+      | ArmResponse<MaintenanceEventResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventResource> &
           Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
