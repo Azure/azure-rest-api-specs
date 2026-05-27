@@ -1,0 +1,39 @@
+{
+  "operationId": "ManagedComputeDeployments_List",
+  "title": "ListVmManagedComputeDeployments",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "api-version": "2026-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-byoc",
+            "name": "gpt-oss-120b-byoc",
+            "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+            "properties": {
+              "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
+              "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+              "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+              "priority": "High",
+              "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+              "provisioningState": "Succeeded",
+              "routes": {
+                "chatCompletionsScoringPath": "/managed-deployments/gpt-oss-120b-byoc/v1/chat/completions"
+              }
+            },
+            "sku": {
+              "name": "VmManagedCompute",
+              "capacity": 2
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

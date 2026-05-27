@@ -24,6 +24,81 @@ namespace Microsoft.Kubernetes;
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+@@alternateType(
+  ConnectedClusterProperties.privateLinkScopeResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(AadProfile, "ConnectedClusterAadProfile", "csharp");
+@@clientName(AadProfile.enableAzureRBAC, "EnableAzureRbac", "csharp");
+@@clientName(AadProfile.adminGroupObjectIDs, "AdminGroupObjectIds", "csharp");
+@@clientName(AadProfile.tenantID, "TenantId", "csharp");
+@@clientName(AgentError, "ConnectedClusterAgentError", "csharp");
+@@clientName(AgentError.time, "OccurredOn", "csharp");
+@@clientName(ArcAgentProfile, "ConnectedClusterArcAgentProfile", "csharp");
+@@clientName(
+  ArcAgentryConfigurations,
+  "ConnectedClusterArcAgentryConfiguration",
+  "csharp"
+);
+@@clientName(
+  AuthenticationMethod,
+  "ClusterUserCredentialAuthenticationMethod",
+  "csharp"
+);
+@@clientName(AuthenticationMethod.AAD, "Aad", "csharp");
+@@clientName(AutoUpgradeOptions, "ConnectedClusterAutoUpgradeMode", "csharp");
+@@clientName(
+  AzureHybridBenefit,
+  "ConnectedClusterAzureHybridBenefit",
+  "csharp"
+);
+@@clientName(
+  ConnectivityStatus,
+  "ConnectedClusterConnectivityStatus",
+  "csharp"
+);
+@@clientName(ConnectedClusterKind.AWS, "Aws", "csharp");
+@@clientName(ConnectedClusterKind.GCP, "Gcp", "csharp");
+@@clientName(Gateway.enabled, "IsGatewayEnabled", "csharp");
+@@clientName(CredentialResult, "ClusterUserCredentialResult", "csharp");
+@@clientName(CredentialResults, "ClusterUserCredentialsResult", "csharp");
+@@clientName(
+  HybridConnectionConfig,
+  "ClusterUserCredentialHybridConnectionConfig",
+  "csharp"
+);
+@@clientName(OidcIssuerProfile, "ConnectedClusterOidcIssuerProfile", "csharp");
+@@clientName(PrivateLinkState, "ConnectedClusterPrivateLinkState", "csharp");
+@@clientName(ProvisioningState, "ConnectedClusterProvisioningState", "csharp");
+@@clientName(SecurityProfile, "ConnectedClusterSecurityProfile", "csharp");
+@@clientName(SecurityProfile.workloadIdentity, "IsWorkloadIdentity", "csharp");
+@@clientName(
+  SecurityProfileWorkloadIdentity,
+  "ConnectedClusterWorkloadIdentityProfile",
+  "csharp"
+);
+@@clientName(SystemComponent, "ConnectedClusterSystemComponent", "csharp");
+@@clientName(
+  ListClusterUserCredentialProperties,
+  "GetClusterUserCredentialContent",
+  "csharp"
+);
+@@clientName(
+  ConnectedClusters.listClusterUserCredential::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
+  ListClusterUserCredentialProperties.clientProxy,
+  "UseClientProxy",
+  "csharp"
+);
+@@clientName(
+  HybridConnectionConfig.expirationTime,
+  "ExpirationTimeInSeconds",
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(

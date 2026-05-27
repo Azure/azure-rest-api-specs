@@ -1,0 +1,75 @@
+{
+  "title": "GoalTemplates_CreateOrUpdate_MaximumSet",
+  "operationId": "GoalTemplates_CreateOrUpdate",
+  "parameters": {
+    "serviceGroupName": "zumt",
+    "api-version": "2025-02-01-preview",
+    "goalTemplateName": "gt1",
+    "resource": {
+      "properties": {
+        "description": "Goal template for high resiliency requirements",
+        "requireHighAvailability": "Required",
+        "requireDisasterRecovery": "NotRequired",
+        "regionalRecoveryPointObjective": "PT15M",
+        "regionalRecoveryTimeObjective": "PT30M",
+        "goalType": "Resiliency"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "Goal template for high resiliency requirements",
+          "requireHighAvailability": "Required",
+          "requireDisasterRecovery": "NotRequired",
+          "regionalRecoveryPointObjective": "PT15M",
+          "regionalRecoveryTimeObjective": "PT30M",
+          "goalType": "Resiliency",
+          "provisioningState": "Succeeded",
+          "errorDetails": null
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
+        "name": "gt1",
+        "type": "Microsoft.AzureResilienceManagement/goaltemplates",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "description": "Goal template for high resiliency requirements",
+          "requireHighAvailability": "Required",
+          "requireDisasterRecovery": "NotRequired",
+          "regionalRecoveryPointObjective": "PT15M",
+          "regionalRecoveryTimeObjective": "PT30M",
+          "goalType": "Resiliency",
+          "provisioningState": "Creating",
+          "errorDetails": null
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
+        "name": "gt1",
+        "type": "Microsoft.AzureResilienceManagement/goaltemplates",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.796Z"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/zumt/providers/Microsoft.AzureResilienceManagement/operationStatuses/12345678-1234-1234-1234-123456789012*abcdef01-2345-6789-abcd-ef0123456789",
+        "Retry-After": "30"
+      }
+    }
+  }
+}
