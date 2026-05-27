@@ -317,87 +317,80 @@ model WorkflowRun {
   version?: string;
 }
 
-@doc("Represents a workflow approval.")
+@doc("Represents a workflow approval request that links a workflow run to its approvers.")
 model ApprovalWorkflow {
-  @doc("The workflow run identifier.")
-  workflowRunId?: uuid;
+  @doc("The unique identifier of the approval request.")
+  approvalRequestId: uuid;
 
-  @doc("The workflow identifier.")
-  workflowId?: uuid;
+  @doc("The identifier of the workflow run this approval is associated with.")
+  workflowRunId: uuid;
 
-  @doc("The subscriber identity.")
-  subscriber?: Identity;
+  @doc("The identifier of the workflow definition this approval is associated with.")
+  workflowId: string;
 
-  @doc("The requestor identity.")
-  requestor?: Identity;
+  @doc("The callback URL the workflow uses to report the approval outcome.")
+  callbackUrl: string;
 
-  @doc("The approval status.")
-  approvalStatus?: string;
+  @doc("Indicates whether the approval requires action from every approver in the list.")
+  isPendingOnAll: boolean;
 
-  @doc("The workflow type.")
+  @doc("The list of approver object identifiers.")
+  approvers: uuid[];
+
+  @doc("The title of the approval request.")
+  title: string;
+
+  @doc("The current status of the approval (e.g., 'InProgress', 'Completed', 'Rejected').")
+  status: string;
+
+  @doc("The requestor identity - the person requesting data access.")
+  requestorIdentity?: Identity;
+
+  @doc("The subscriber identity - the person who will receive data access.")
+  subscriberIdentity?: Identity;
+
+  @visibility(Lifecycle.Read)
+  @doc("The workflow type (e.g., 'DataAccessRequestSubmitted', 'DataProductPublish', 'TermPublish').")
   workflowType?: string;
 
+  @visibility(Lifecycle.Read)
   @doc("The workflow name.")
   workflowName?: string;
 
-  @doc("The data product name.")
-  dataProductName?: string;
+  @visibility(Lifecycle.Read)
+  @doc("The business concept name.")
+  businessConcept?: string;
 
-  @doc("The governance domain.")
+  @visibility(Lifecycle.Read)
+  @doc("The governance domain name.")
   governanceDomain?: string;
 }
 
-@doc("Approver decision on a workflow run.")
-model ApproverDecision {
-  @doc("The approver identity.")
-  approver?: Identity;
-
-  @doc("The decision made.")
-  decision?: ApproverDecisionStatus;
-
-  @doc("The type of approver decision.")
-  approverDecisionType?: string;
-
-  @doc("Comments from the approver.")
-  comments?: string;
-
-  @doc("Data assets included in the decision.")
-  dataAssets?: DataAssetValues[];
-}
-
-@doc("The status of an approver's decision.")
-union ApproverDecisionStatus {
-  string,
-
-  @doc("Approved the request.")
-  Approved: "Approved",
-
-  @doc("Rejected the request.")
-  Rejected: "Rejected",
-
-  @doc("Decision is pending.")
-  Pending: "Pending",
-}
-
-@doc("Represents an approval record for a workflow run.")
+@doc("Represents an approval action within a workflow run, including the status of each approver.")
 model WorkflowRunApproval {
-  @doc("The unique identifier of the approval.")
-  approvalId?: uuid;
+  @doc("The title of the approval action.")
+  title?: string;
 
-  @doc("The workflow run identifier.")
-  workflowRunId?: uuid;
+  @doc("The list of approval statuses for this approval action.")
+  approvalStatuses?: WorkflowRunApprovalStatus[];
+}
 
-  @doc("The approver identity.")
-  approver?: Identity;
+@doc("Represents the status of an individual approver within an approval action.")
+model WorkflowRunApprovalStatus {
+  @doc("The approver's object identifier.")
+  approver?: uuid;
 
-  @doc("The decision made on this approval.")
-  decision?: ApproverDecisionStatus;
+  @doc("The status of the approval (e.g., 'Pending', 'Approved', 'Declined').")
+  status?: string;
 
-  @doc("Comments from the approver.")
-  comments?: string;
+  @doc("The comment provided by the approver.")
+  comment?: string;
+}
 
-  @doc("The date the approval decision was made.")
-  decisionDate?: utcDateTime;
+@doc("Request body for a workflow approve or reject action.")
+model WorkflowActionRequest {
+  @doc("Optional comment from the approver explaining the decision.")
+  comment?: string;
 }
 
 // ============================================================

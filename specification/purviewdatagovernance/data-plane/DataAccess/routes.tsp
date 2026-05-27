@@ -193,9 +193,9 @@ interface Workflows {
   @post
   approveRun is RpcOperation<
     WorkflowIdAndRunIdParameters & {
-      @doc("The approver's decision.")
+      @doc("Optional comment from the approver explaining the decision.")
       @body
-      decision: ApproverDecision;
+      action?: WorkflowActionRequest;
     },
     {}
   >;
@@ -206,9 +206,9 @@ interface Workflows {
   @post
   rejectRun is RpcOperation<
     WorkflowIdAndRunIdParameters & {
-      @doc("The approver's decision.")
+      @doc("Optional comment from the approver explaining the decision.")
       @body
-      decision: ApproverDecision;
+      action?: WorkflowActionRequest;
     },
     {}
   >;

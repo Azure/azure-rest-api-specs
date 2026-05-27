@@ -1786,12 +1786,12 @@
             "format": "uuid"
           },
           {
-            "name": "decision",
+            "name": "action",
             "in": "body",
-            "description": "The approver's decision.",
-            "required": true,
+            "description": "Optional comment from the approver explaining the decision.",
+            "required": false,
             "schema": {
-              "$ref": "#/definitions/ApproverDecision"
+              "$ref": "#/definitions/WorkflowActionRequest"
             }
           }
         ],
@@ -1847,12 +1847,12 @@
             "format": "uuid"
           },
           {
-            "name": "decision",
+            "name": "action",
             "in": "body",
-            "description": "The approver's decision.",
-            "required": true,
+            "description": "Optional comment from the approver explaining the decision.",
+            "required": false,
             "schema": {
-              "$ref": "#/definitions/ApproverDecision"
+              "$ref": "#/definitions/WorkflowActionRequest"
             }
           }
         ],
@@ -1967,45 +1967,82 @@
     },
     "ApprovalWorkflow": {
       "type": "object",
-      "description": "Represents a workflow approval.",
+      "description": "Represents a workflow approval request that links a workflow run to its approvers.",
       "properties": {
+        "approvalRequestId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the approval request."
+        },
         "workflowRunId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The workflow run identifier."
+          "description": "The identifier of the workflow run this approval is associated with."
         },
         "workflowId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The workflow identifier."
-        },
-        "subscriber": {
-          "$ref": "#/definitions/Identity",
-          "description": "The subscriber identity."
-        },
-        "requestor": {
-          "$ref": "#/definitions/Identity",
-          "description": "The requestor identity."
-        },
-        "approvalStatus": {
           "type": "string",
-          "description": "The approval status."
+          "description": "The identifier of the workflow definition this approval is associated with."
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "The callback URL the workflow uses to report the approval outcome."
+        },
+        "isPendingOnAll": {
+          "type": "boolean",
+          "description": "Indicates whether the approval requires action from every approver in the list."
+        },
+        "approvers": {
+          "type": "array",
+          "description": "The list of approver object identifiers.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the approval request."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the approval (e.g., 'InProgress', 'Completed', 'Rejected')."
+        },
+        "requestorIdentity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The requestor identity - the person requesting data access."
+        },
+        "subscriberIdentity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The subscriber identity - the person who will receive data access."
         },
         "workflowType": {
           "type": "string",
-          "description": "The workflow type."
+          "description": "The workflow type (e.g., 'DataAccessRequestSubmitted', 'DataProductPublish', 'TermPublish').",
+          "readOnly": true
         },
         "workflowName": {
           "type": "string",
-          "description": "The workflow name."
+          "description": "The workflow name.",
+          "readOnly": true
         },
-        "dataProductName": {
+        "businessConcept": {
           "type": "string",
-          "description": "The data product name."
+          "description": "The business concept name.",
+          "readOnly": true
         },
         "governanceDomain": {
           "type": "string",
-          "description": "The governance domain."
+          "description": "The governance domain name.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "approvalRequestId",
+        "workflowRunId",
+        "workflowId",
+        "callbackUrl",
+        "isPendingOnAll",
+        "approvers",
+        "title",
+        "status"
+      ]
     },
     "ApprovalWorkflowListResponse": {
       "type": "object",
@@ -2022,65 +2059,6 @@
       "required": [
         "value"
       ]
-    },
-    "ApproverDecision": {
-      "type": "object",
-      "description": "Approver decision on a workflow run.",
-      "properties": {
-        "approver": {
-          "$ref": "#/definitions/Identity",
-          "description": "The approver identity."
-        },
-        "decision": {
-          "$ref": "#/definitions/ApproverDecisionStatus",
-          "description": "The decision made."
-        },
-        "approverDecisionType": {
-          "type": "string",
-          "description": "The type of approver decision."
-        },
-        "comments": {
-          "type": "string",
-          "description": "Comments from the approver."
-        },
-        "dataAssets": {
-          "type": "array",
-          "description": "Data assets included in the decision.",
-          "items": {
-            "$ref": "#/definitions/DataAssetValues"
-          }
-        }
-      }
-    },
-    "ApproverDecisionStatus": {
-      "type": "string",
-      "description": "The status of an approver's decision.",
-      "enum": [
-        "Approved",
-        "Rejected",
-        "Pending"
-      ],
-      "x-ms-enum": {
-        "name": "ApproverDecisionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "Approved the request."
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Rejected the request."
-          },
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Decision is pending."
-          }
-        ]
-      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -3037,6 +3015,16 @@
         "workflowId"
       ]
     },
+    "WorkflowActionRequest": {
+      "type": "object",
+      "description": "Request body for a workflow approve or reject action.",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "Optional comment from the approver explaining the decision."
+        }
+      }
+    },
     "WorkflowRun": {
       "type": "object",
       "description": "Represents a workflow run instance.",
@@ -3137,32 +3125,18 @@
     },
     "WorkflowRunApproval": {
       "type": "object",
-      "description": "Represents an approval record for a workflow run.",
+      "description": "Represents an approval action within a workflow run, including the status of each approver.",
       "properties": {
-        "approvalId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the approval."
-        },
-        "workflowRunId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The workflow run identifier."
-        },
-        "approver": {
-          "$ref": "#/definitions/Identity",
-          "description": "The approver identity."
-        },
-        "decision": {
-          "$ref": "#/definitions/ApproverDecisionStatus",
-          "description": "The decision made on this approval."
-        },
-        "comments": {
+        "title": {
           "type": "string",
-          "description": "Comments from the approver."
+          "description": "The title of the approval action."
         },
-        "decisionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date the approval decision was made."
+        "approvalStatuses": {
+          "type": "array",
+          "description": "The list of approval statuses for this approval action.",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunApprovalStatus"
+          }
         }
       }
     },
@@ -3181,6 +3155,24 @@
       "required": [
         "value"
       ]
+    },
+    "WorkflowRunApprovalStatus": {
+      "type": "object",
+      "description": "Represents the status of an individual approver within an approval action.",
+      "properties": {
+        "approver": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The approver's object identifier."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the approval (e.g., 'Pending', 'Approved', 'Declined')."
+        },
+        "comment": {
+          "type": "string",
+          "description": "The comment provided by the approver."
+        }
+      }
     },
     "WorkflowRunListResponse": {
       "type": "object",
