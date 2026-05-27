@@ -2160,7 +2160,6 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key Secret
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @secret
   apiSecret?: string;
 
