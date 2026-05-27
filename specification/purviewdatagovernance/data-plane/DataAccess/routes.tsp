@@ -220,14 +220,6 @@ interface Workflows {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("Workflows")
-  @doc("Gets the data access request template.")
-  @route("/workflows/templates/dataAccessRequestTemplate")
-  @get
-  GetTemplate is RpcOperation<{}, ActionListResponse>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("Workflows")
   @doc("Gets the data access request template for a specific trigger type.")
   @route("/workflows/templates/dataAccessRequestTemplate/{triggerType}")
   @get

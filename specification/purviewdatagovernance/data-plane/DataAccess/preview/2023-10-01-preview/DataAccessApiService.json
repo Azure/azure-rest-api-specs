@@ -1880,45 +1880,6 @@
         }
       }
     },
-    "/workflows/templates/dataAccessRequestTemplate": {
-      "get": {
-        "operationId": "Workflows_GetTemplate",
-        "tags": [
-          "Workflows"
-        ],
-        "description": "Gets the data access request template.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ActionListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Workflows_GetTemplate": {
-            "$ref": "./examples/Workflows_GetTemplate_Gen.json"
-          }
-        }
-      }
-    },
     "/workflows/templates/dataAccessRequestTemplate/{triggerType}": {
       "get": {
         "operationId": "Workflows_GetTemplateByTriggerType",
