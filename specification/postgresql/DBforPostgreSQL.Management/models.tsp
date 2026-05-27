@@ -4187,7 +4187,7 @@ model MajorVersionUpgradePrecheckResource
     MajorVersionUpgradePrecheckResource,
     KeyName = "precheckValidationId",
     SegmentName = "majorVersionUpgradePrecheck",
-    NamePattern = "^[a-zA-Z0-9-]{3,32}$"
+    NamePattern = "^[a-zA-Z0-9-]{3,36}$"
   >;
 }
 
