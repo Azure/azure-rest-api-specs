@@ -46,19 +46,7 @@ model ReservationResponse
    * Resource Provider type to be reserved.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind?: ReservationKind;
-}
-
-/**
- * Resource Provider type to be reserved.
- */
-union ReservationKind {
-  string,
-
-  /**
-   * Microsoft.Compute.
-   */
-  MicrosoftCompute: "Microsoft.Compute",
+  kind?: "Microsoft.Compute";
 }
 
 @armResourceOperations(#{ omitTags: true })
