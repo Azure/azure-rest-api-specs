@@ -4051,6 +4051,31 @@ model PrecheckErrorInfo {
   errorMessage?: string;
 }
 
+@doc("Response model for maintenance event reschedule and apply-now actions.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventActionResponse {
+  @doc("The maintenance event name (maintenance ID).")
+  maintenanceEventId?: string;
+
+  @doc("The full Azure resource ID of the server.")
+  serverId?: armResourceIdentifier;
+
+  @doc("The status (e.g. 'Accepted', 'Succeeded').")
+  status?: string;
+
+  @doc("The planned start time of the maintenance event (UTC).")
+  plannedStartTime?: utcDateTime;
+
+  @doc("The planned end time of the maintenance event (UTC).")
+  plannedEndTime?: utcDateTime;
+
+  @doc("A value indicating whether this was an apply-now (immediate) action. True for ApplyNow; false for Reschedule.")
+  appliedNow?: boolean;
+
+  @doc("The time this maintenance event record was last updated (UTC).")
+  lastUpdatedTime?: utcDateTime;
+}
+
 @doc("Upgrade sequence information.")
 @added(Versions.v2026_04_01)
 model UpgradeSequence {
