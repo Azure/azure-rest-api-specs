@@ -186,7 +186,7 @@ model NetAppAccountPatch is PatchModel<NetAppAccount> {
  * NetApp account patch properties
  */
 model AccountPropertiesPatch
-  is PatchModel<AccountProperties, "entraIdConfig" | "LdapConfiguration"> {
+  is PatchModel<AccountProperties, "entraIdConfig" | "ldapConfiguration"> {
   /**
    * Entra ID configuration for the account.
    */
@@ -203,7 +203,7 @@ model AccountPropertiesPatch
    * LDAP Configuration for the account.
    */
   @added(Versions.v2026_04_15_preview)
-  ldapConfigurationPatch?: LdapConfigurationPatch;
+  ldapConfiguration?: LdapConfigurationPatch;
 }
 
 /**
