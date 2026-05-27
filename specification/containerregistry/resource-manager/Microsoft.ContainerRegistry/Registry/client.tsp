@@ -47,7 +47,6 @@ namespace Microsoft.ContainerRegistry {
   }
 }
 // Hide the original enum from the public surface; clients should use ContainerRegistryResourceTypeExtensible instead.
-@@access(ContainerRegistryResourceType, Access.internal, "csharp");
 
 @@alternateType(ArchivePackageSourceProperties.url, url, "csharp");
 @@alternateType(

@@ -2505,7 +2505,6 @@ alias DatabaseMigrationPropertiesProperties = {
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("kind")
 model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
   kind: "DatabaseMigrationProperties";
   ...DatabaseMigrationPropertiesProperties;

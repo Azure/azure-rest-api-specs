@@ -13,7 +13,11 @@ namespace Microsoft.Sql;
 /**
  * A long term retention backup for a managed database.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(
+  Features.LongTermRetentionManagedInstanceBackups
+)
 model ManagedInstanceLongTermRetentionBackup
   is Azure.ResourceManager.ProxyResource<ManagedInstanceLongTermRetentionBackupProperties> {
   ...ResourceNameParameter<
@@ -62,7 +66,11 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(
+  Features.LongTermRetentionManagedInstanceBackups
+)
 interface ManagedInstanceLongTermRetentionBackups {
   /**
    * Gets a long term retention backup for a managed database.
@@ -135,7 +143,11 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(
+  Features.LongTermRetentionManagedInstanceBackups
+)
 interface LongTermRetentionManagedInstanceBackups {
   /**
    * Gets a long term retention backup for a managed database.
