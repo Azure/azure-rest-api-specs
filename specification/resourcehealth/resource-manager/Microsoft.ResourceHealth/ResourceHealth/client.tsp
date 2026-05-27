@@ -159,30 +159,6 @@ using Microsoft.ResourceHealth;
   "csharp"
 );
 
-// Restore GA SDK method names for listBySubscriptionIdAndEventId
-@@clientName(
-  EventImpactedResources.listBySubscriptionIdAndEventId,
-  "GetSecurityAdvisoryImpactedResourcesBySubscriptionIdAndEventId",
-  "csharp"
-);
-@@clientName(
-  EventOperationGroup.listBySubscriptionIdAndEventId,
-  "GetSecurityAdvisoryImpactedResourcesBySubscriptionIdAndEventId",
-  "csharp"
-);
-
-// Restore GA SDK method names for listByTenantIdAndEventId
-@@clientName(
-  ImpactedResources.listByTenantIdAndEventId,
-  "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
-  "csharp"
-);
-@@clientName(
-  TenantEventOperationGroup.listByTenantIdAndEventId,
-  "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
-  "csharp"
-);
-
 // Override subscription-level Event resource class names for csharp to match GA SDK names
 @@clientLocation(
   EventOperationGroup.getBySubscriptionIdAndTrackingId,
