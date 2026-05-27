@@ -335,7 +335,7 @@ interface DataProductPolicySets {
   @doc("Gets the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @get
-  getApplied is RpcOperation<DataProductIdParameter, PolicySet>;
+  getApplied is RpcOperation<DataProductIdParameter, DataProductPolicySet>;
 
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a data product.")
@@ -345,9 +345,9 @@ interface DataProductPolicySets {
     DataProductIdParameter & {
       @doc("The policy set payload.")
       @body
-      policySet: PolicySet;
+      policySet: DataProductPolicySet;
     },
-    PolicySet
+    DataProductPolicySet
   >;
 
   @tag("PolicySets")
@@ -360,7 +360,7 @@ interface DataProductPolicySets {
   @doc("Gets the effective policy set for a data product, combining applied and inherited policies.")
   @route("/dataProducts/{dataProductId}/policySets/effective")
   @get
-  getEffective is RpcOperation<DataProductIdParameter, PolicySet>;
+  getEffective is RpcOperation<DataProductIdParameter, DataProductPolicySet>;
 
   @tag("PolicySets")
   @doc("Gets term policy sets associated with a data product.")
@@ -368,7 +368,7 @@ interface DataProductPolicySets {
   @get
   getTermPolicies is RpcOperation<
     DataProductIdParameter,
-    PolicySetListResponse
+    TermPolicySetListResponse
   >;
 
   @tag("PolicySets")
@@ -377,7 +377,7 @@ interface DataProductPolicySets {
   @get
   getCriticalDataElementPolicies is RpcOperation<
     DataProductIdParameter,
-    PolicySetListResponse
+    CriticalDataElementPolicySetListResponse
   >;
 
   @tag("PolicySets")
@@ -399,7 +399,7 @@ interface DomainPolicySets {
   @doc("Gets the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @get
-  getApplied is RpcOperation<DomainIdParameter, PolicySet>;
+  getApplied is RpcOperation<DomainIdParameter, DomainPolicySet>;
 
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a business domain.")
@@ -409,9 +409,9 @@ interface DomainPolicySets {
     DomainIdParameter & {
       @doc("The policy set payload.")
       @body
-      policySet: PolicySet;
+      policySet: DomainPolicySet;
     },
-    PolicySet
+    DomainPolicySet
   >;
 
   @tag("PolicySets")
@@ -430,7 +430,7 @@ interface TermPolicySets {
   @doc("Gets the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @get
-  getApplied is RpcOperation<TermIdParameter, PolicySet>;
+  getApplied is RpcOperation<TermIdParameter, TermPolicySet>;
 
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a term.")
@@ -440,9 +440,9 @@ interface TermPolicySets {
     TermIdParameter & {
       @doc("The policy set payload.")
       @body
-      policySet: PolicySet;
+      policySet: TermPolicySet;
     },
-    PolicySet
+    TermPolicySet
   >;
 
   @tag("PolicySets")
@@ -461,7 +461,10 @@ interface CriticalDataElementPolicySets {
   @doc("Gets the applied policy set for a critical data element.")
   @route("/criticalDataElements/{criticalDataElementId}/policySets/applied")
   @get
-  getApplied is RpcOperation<CriticalDataElementIdParameter, PolicySet>;
+  getApplied is RpcOperation<
+    CriticalDataElementIdParameter,
+    CriticalDataElementPolicySet
+  >;
 
   @tag("PolicySets")
   @doc("Creates or updates the applied policy set for a critical data element.")
@@ -471,8 +474,8 @@ interface CriticalDataElementPolicySets {
     CriticalDataElementIdParameter & {
       @doc("The policy set payload.")
       @body
-      policySet: PolicySet;
+      policySet: CriticalDataElementPolicySet;
     },
-    PolicySet
+    CriticalDataElementPolicySet
   >;
 }

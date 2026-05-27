@@ -10,15 +10,29 @@
       "body": {
         "policySetId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
         "targetResource": {
-          "resourceId": "22222222-3333-4444-5555-666666666666",
-          "resourceType": "DataProduct"
+          "targetId": "22222222-3333-4444-5555-666666666666",
+          "targetType": "DataProduct"
         },
-        "policySetKind": "Applied",
-        "dataProductPolicies": {
+        "policySetKind": "DataProduct",
+        "policies": {
           "approvalTimeline": "P7D",
           "permittedUseCases": [
-            "Analytics",
-            "Reporting"
+            {
+              "title": "Analytics",
+              "description": "Use the data for analytical reporting."
+            },
+            {
+              "title": "Reporting",
+              "description": "Use the data for operational reporting."
+            }
+          ],
+          "approvers": [
+            {
+              "objectId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+              "identityType": "User",
+              "displayName": "Jane Doe",
+              "email": "jane.doe@contoso.com"
+            }
           ],
           "termsOfUseRequired": true,
           "skipWorkflow": false

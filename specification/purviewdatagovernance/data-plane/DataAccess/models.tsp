@@ -37,11 +37,11 @@ union IdentityType {
   @doc("A user identity.")
   User: "User",
 
-  @doc("A group identity.")
-  Group: "Group",
-
   @doc("A service principal identity.")
   ServicePrincipal: "ServicePrincipal",
+
+  @doc("A security group identity.")
+  SecurityGroup: "SecurityGroup",
 }
 
 // ============================================================
@@ -78,7 +78,7 @@ model DataSubscription {
   subscriptionStatus?: DataSubscriptionStatus;
 
   @doc("The identity of the subscriber.")
-  subscriberIdentity?: Identity;
+  subscriberIdentity: Identity;
 
   @doc("The identity of the requestor.")
   requestorIdentity?: Identity;
@@ -87,7 +87,7 @@ model DataSubscription {
   domainId?: uuid;
 
   @doc("The data product identifier.")
-  dataProductId?: uuid;
+  dataProductId: uuid;
 
   @doc("The name of the data product.")
   dataProductName?: string;
@@ -99,7 +99,7 @@ model DataSubscription {
   globalComment?: string;
 
   @doc("Policy set values for the subscription.")
-  policySetValues?: DataSubscriptionPolicySetValues;
+  policySetValues: DataSubscriptionPolicySetValues;
 
   @doc("The creation timestamp.")
   @visibility(Lifecycle.Read)
@@ -253,6 +253,9 @@ model Action {
 @doc("Represents a workflow run instance.")
 @resource("workflowRuns")
 model WorkflowRun {
+  @doc("The unique identifier of the workflow run record.")
+  id?: uuid;
+
   @key("workflowRunId")
   @doc("The unique identifier of the workflow run.")
   @visibility(Lifecycle.Read)
@@ -288,6 +291,12 @@ model WorkflowRun {
   @doc("The action DAG for this run.")
   actionDag?: Action[];
 
+  @doc("The account identifier.")
+  accountId?: uuid;
+
+  @doc("The tenant identifier.")
+  tenantId?: uuid;
+
   @doc("The creation timestamp.")
   @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
@@ -303,6 +312,9 @@ model WorkflowRun {
   @doc("The user who last modified the run.")
   @visibility(Lifecycle.Read)
   modifiedBy?: string;
+
+  @doc("The version of the model.")
+  version?: string;
 }
 
 @doc("Represents a workflow approval.")
@@ -393,6 +405,7 @@ model WorkflowRunApproval {
 // ============================================================
 
 @doc("Represents an access policy set applied to a resource.")
+@discriminator("policySetKind")
 model PolicySet {
   @doc("The unique identifier of the policy set.")
   @visibility(Lifecycle.Read)
@@ -402,51 +415,136 @@ model PolicySet {
   targetResource?: TargetResource;
 
   @doc("The kind of policy set.")
-  policySetKind?: PolicySetKind;
+  policySetKind: PolicySetKind;
+}
+
+@doc("Policy set applied to a term.")
+model TermPolicySet extends PolicySet {
+  @doc("The kind of policy set.")
+  policySetKind: PolicySetKind.Term;
+
+  @doc("The term-level policies.")
+  policies?: TermPolicies;
+}
+
+@doc("Policy set applied to a business domain.")
+model DomainPolicySet extends PolicySet {
+  @doc("The kind of policy set.")
+  policySetKind: PolicySetKind.Domain;
+
+  @doc("The domain-level policies.")
+  policies?: DomainPolicies;
+}
+
+@doc("Policy set applied to a data product.")
+model DataProductPolicySet extends PolicySet {
+  @doc("The kind of policy set.")
+  policySetKind: PolicySetKind.DataProduct;
 
   @doc("The data product policies.")
-  dataProductPolicies?: DataProductPolicies;
+  policies?: DataProductPolicies;
+}
+
+@doc("Policy set applied to a critical data element.")
+model CriticalDataElementPolicySet extends PolicySet {
+  @doc("The kind of policy set.")
+  policySetKind: PolicySetKind.CriticalDataElement;
+
+  @doc("The critical data element policies.")
+  policies?: CriticalDataElementPolicies;
 }
 
 @doc("The target resource for a policy set.")
 model TargetResource {
-  @doc("The resource identifier.")
-  resourceId?: uuid;
+  @doc("The target resource identifier.")
+  targetId: uuid;
 
-  @doc("The resource type.")
-  resourceType?: string;
+  @doc("The target resource type.")
+  targetType: TargetType;
 }
 
-@doc("The kind of policy set.")
+@doc("The type of governance entity that a policy set targets.")
+union TargetType {
+  string,
+
+  @doc("Targets a business domain.")
+  Domain: "Domain",
+
+  @doc("Targets a data product.")
+  DataProduct: "DataProduct",
+
+  @doc("Targets a term.")
+  Term: "Term",
+
+  @doc("Targets a critical data element.")
+  CriticalDataElement: "CriticalDataElement",
+}
+
+@doc("The kind of policy set, identifying the governance entity it applies to.")
 union PolicySetKind {
   string,
 
-  @doc("Applied policy set.")
-  Applied: "Applied",
+  @doc("Policy set for a term.")
+  Term: "Term",
 
-  @doc("Effective policy set.")
-  Effective: "Effective",
+  @doc("Policy set for a business domain.")
+  Domain: "Domain",
+
+  @doc("Policy set for a data product.")
+  DataProduct: "DataProduct",
+
+  @doc("Policy set for a critical data element.")
+  CriticalDataElement: "CriticalDataElement",
+}
+
+@doc("Base properties shared by every policy variant.")
+model BasePolicies {
+  @doc("Attestations that policy approvers must acknowledge.")
+  attestations?: PolicyAttestation[];
+
+  @doc("Whether manager approval is required for access requests.")
+  managerApprovalRequired?: boolean;
+
+  @doc("Whether data may be copied by subscribers after access is granted.")
+  dataCopyPermitted?: boolean;
+}
+
+@doc("Term-level access policies.")
+model TermPolicies {
+  ...BasePolicies;
+}
+
+@doc("Domain-level access policies.")
+model DomainPolicies {
+  ...BasePolicies;
+}
+
+@doc("Critical data element-level access policies.")
+model CriticalDataElementPolicies {
+  ...BasePolicies;
 }
 
 @doc("Data product access policies.")
 model DataProductPolicies {
-  @doc("The approval timeline duration.")
-  approvalTimeline?: string;
+  ...BasePolicies;
 
-  @doc("Permitted use cases.")
-  permittedUseCases?: string[];
+  @doc("The approval timeline duration (ISO 8601).")
+  approvalTimeline?: duration;
+
+  @doc("Permitted use cases for the data product.")
+  permittedUseCases: UseCase[];
 
   @doc("Permitted subscriber identity types.")
   permittedSubscribers?: IdentityType[];
 
   @doc("The list of approvers.")
-  approvers?: Identity[];
+  approvers: Identity[];
 
   @doc("The list of data access grantors.")
   dataAccessGrantors?: Identity[];
 
   @doc("Sensitive markers applied to the data product.")
-  sensitiveMarkers?: string[];
+  sensitiveMarkers?: SensitiveMarker[];
 
   @doc("Whether terms of use acceptance is required.")
   termsOfUseRequired?: boolean;
@@ -457,8 +555,8 @@ model DataProductPolicies {
   @doc("Whether sharing with customers is permitted.")
   customerSharingPermitted?: boolean;
 
-  @doc("The maximum access duration.")
-  maximumAccessDuration?: string;
+  @doc("The maximum access duration (ISO 8601).")
+  maximumAccessDuration?: duration;
 
   @doc("Whether privacy compliance approval is required.")
   privacyComplianceApprovalRequired?: boolean;
@@ -468,6 +566,62 @@ model DataProductPolicies {
 
   @doc("Whether Power Automate is used.")
   usePowerAutomate?: boolean;
+}
+
+@doc("An attestation that a policy approver must acknowledge.")
+model PolicyAttestation {
+  @doc("The display name of the attestation.")
+  displayName?: string;
+
+  @doc("A reference to the supporting document.")
+  documentReference?: string;
+
+  @doc("Whether the attestation is required.")
+  required?: boolean;
+}
+
+@doc("A use case describing how a data product may be used.")
+model UseCase {
+  @doc("The title of the use case.")
+  title?: string;
+
+  @doc("The description of the use case.")
+  description?: string;
+}
+
+@doc("A sensitive marker that restricts which subscribers may access a data product.")
+model SensitiveMarker {
+  @doc("The security group that the marker applies to.")
+  securityGroup?: Identity;
+
+  @doc("The classification tags carried by the marker.")
+  tags?: Tag[];
+}
+
+@doc("A classification tag.")
+model Tag {
+  @doc("The type of the tag.")
+  type?: TagType;
+
+  @doc("The value of the tag.")
+  value?: string;
+}
+
+@doc("The classification of a sensitive marker tag value.")
+union TagType {
+  string,
+
+  @doc("A glossary term reference.")
+  Term: "Term",
+
+  @doc("A classification (e.g., sensitivity classification).")
+  Classification: "Classification",
+
+  @doc("A free-form label.")
+  Label: "Label",
+
+  @doc("A governance-related tag.")
+  Governance: "Governance",
 }
 
 // ============================================================
@@ -513,10 +667,16 @@ model WorkflowRunApprovalListResponse {
   value: WorkflowRunApproval[];
 }
 
-@doc("List of policy sets.")
-model PolicySetListResponse {
-  @doc("The list of policy sets.")
-  value: PolicySet[];
+@doc("List of term policy sets.")
+model TermPolicySetListResponse {
+  @doc("The list of term policy sets.")
+  value: TermPolicySet[];
+}
+
+@doc("List of critical data element policy sets.")
+model CriticalDataElementPolicySetListResponse {
+  @doc("The list of critical data element policy sets.")
+  value: CriticalDataElementPolicySet[];
 }
 
 // ============================================================

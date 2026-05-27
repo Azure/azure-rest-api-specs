@@ -172,7 +172,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DomainPolicySet"
             }
           },
           "default": {
@@ -218,7 +218,7 @@
             "description": "The policy set payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DomainPolicySet"
             }
           }
         ],
@@ -226,7 +226,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DomainPolicySet"
             }
           },
           "default": {
@@ -315,7 +315,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/CriticalDataElementPolicySet"
             }
           },
           "default": {
@@ -361,7 +361,7 @@
             "description": "The policy set payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/CriticalDataElementPolicySet"
             }
           }
         ],
@@ -369,7 +369,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/CriticalDataElementPolicySet"
             }
           },
           "default": {
@@ -463,7 +463,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DataProductPolicySet"
             }
           },
           "default": {
@@ -509,7 +509,7 @@
             "description": "The policy set payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DataProductPolicySet"
             }
           }
         ],
@@ -517,7 +517,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DataProductPolicySet"
             }
           },
           "default": {
@@ -606,7 +606,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySetListResponse"
+              "$ref": "#/definitions/CriticalDataElementPolicySetListResponse"
             }
           },
           "default": {
@@ -653,7 +653,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/DataProductPolicySet"
             }
           },
           "default": {
@@ -700,7 +700,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySetListResponse"
+              "$ref": "#/definitions/TermPolicySetListResponse"
             }
           },
           "default": {
@@ -1120,7 +1120,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/TermPolicySet"
             }
           },
           "default": {
@@ -1166,7 +1166,7 @@
             "description": "The policy set payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/TermPolicySet"
             }
           }
         ],
@@ -1174,7 +1174,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PolicySet"
+              "$ref": "#/definitions/TermPolicySet"
             }
           },
           "default": {
@@ -2147,6 +2147,59 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "CriticalDataElementPolicies": {
+      "type": "object",
+      "description": "Critical data element-level access policies.",
+      "properties": {
+        "attestations": {
+          "type": "array",
+          "description": "Attestations that policy approvers must acknowledge.",
+          "items": {
+            "$ref": "#/definitions/PolicyAttestation"
+          }
+        },
+        "managerApprovalRequired": {
+          "type": "boolean",
+          "description": "Whether manager approval is required for access requests."
+        },
+        "dataCopyPermitted": {
+          "type": "boolean",
+          "description": "Whether data may be copied by subscribers after access is granted."
+        }
+      }
+    },
+    "CriticalDataElementPolicySet": {
+      "type": "object",
+      "description": "Policy set applied to a critical data element.",
+      "properties": {
+        "policies": {
+          "$ref": "#/definitions/CriticalDataElementPolicies",
+          "description": "The critical data element policies."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicySet"
+        }
+      ],
+      "x-ms-discriminator-value": "CriticalDataElement"
+    },
+    "CriticalDataElementPolicySetListResponse": {
+      "type": "object",
+      "description": "List of critical data element policy sets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of critical data element policy sets.",
+          "items": {
+            "$ref": "#/definitions/CriticalDataElementPolicySet"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DataAssetValues": {
       "type": "object",
       "description": "Data asset values included in a subscription.",
@@ -2169,15 +2222,31 @@
       "type": "object",
       "description": "Data product access policies.",
       "properties": {
+        "attestations": {
+          "type": "array",
+          "description": "Attestations that policy approvers must acknowledge.",
+          "items": {
+            "$ref": "#/definitions/PolicyAttestation"
+          }
+        },
+        "managerApprovalRequired": {
+          "type": "boolean",
+          "description": "Whether manager approval is required for access requests."
+        },
+        "dataCopyPermitted": {
+          "type": "boolean",
+          "description": "Whether data may be copied by subscribers after access is granted."
+        },
         "approvalTimeline": {
           "type": "string",
-          "description": "The approval timeline duration."
+          "format": "duration",
+          "description": "The approval timeline duration (ISO 8601)."
         },
         "permittedUseCases": {
           "type": "array",
-          "description": "Permitted use cases.",
+          "description": "Permitted use cases for the data product.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/UseCase"
           }
         },
         "permittedSubscribers": {
@@ -2205,7 +2274,7 @@
           "type": "array",
           "description": "Sensitive markers applied to the data product.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SensitiveMarker"
           }
         },
         "termsOfUseRequired": {
@@ -2222,7 +2291,8 @@
         },
         "maximumAccessDuration": {
           "type": "string",
-          "description": "The maximum access duration."
+          "format": "duration",
+          "description": "The maximum access duration (ISO 8601)."
         },
         "privacyComplianceApprovalRequired": {
           "type": "boolean",
@@ -2236,7 +2306,27 @@
           "type": "boolean",
           "description": "Whether Power Automate is used."
         }
-      }
+      },
+      "required": [
+        "permittedUseCases",
+        "approvers"
+      ]
+    },
+    "DataProductPolicySet": {
+      "type": "object",
+      "description": "Policy set applied to a data product.",
+      "properties": {
+        "policies": {
+          "$ref": "#/definitions/DataProductPolicies",
+          "description": "The data product policies."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicySet"
+        }
+      ],
+      "x-ms-discriminator-value": "DataProduct"
     },
     "DataProductWorkflowSettingsResponse": {
       "type": "object",
@@ -2367,7 +2457,10 @@
         }
       },
       "required": [
-        "dataSubscriptionId"
+        "dataSubscriptionId",
+        "subscriberIdentity",
+        "dataProductId",
+        "policySetValues"
       ]
     },
     "DataSubscriptionPolicySetValues": {
@@ -2439,6 +2532,43 @@
         ]
       }
     },
+    "DomainPolicies": {
+      "type": "object",
+      "description": "Domain-level access policies.",
+      "properties": {
+        "attestations": {
+          "type": "array",
+          "description": "Attestations that policy approvers must acknowledge.",
+          "items": {
+            "$ref": "#/definitions/PolicyAttestation"
+          }
+        },
+        "managerApprovalRequired": {
+          "type": "boolean",
+          "description": "Whether manager approval is required for access requests."
+        },
+        "dataCopyPermitted": {
+          "type": "boolean",
+          "description": "Whether data may be copied by subscribers after access is granted."
+        }
+      }
+    },
+    "DomainPolicySet": {
+      "type": "object",
+      "description": "Policy set applied to a business domain.",
+      "properties": {
+        "policies": {
+          "$ref": "#/definitions/DomainPolicies",
+          "description": "The domain-level policies."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicySet"
+        }
+      ],
+      "x-ms-discriminator-value": "Domain"
+    },
     "Identity": {
       "type": "object",
       "description": "Identity information for a user or group.",
@@ -2470,8 +2600,8 @@
       "description": "The type of identity.",
       "enum": [
         "User",
-        "Group",
-        "ServicePrincipal"
+        "ServicePrincipal",
+        "SecurityGroup"
       ],
       "x-ms-enum": {
         "name": "IdentityType",
@@ -2483,14 +2613,14 @@
             "description": "A user identity."
           },
           {
-            "name": "Group",
-            "value": "Group",
-            "description": "A group identity."
-          },
-          {
             "name": "ServicePrincipal",
             "value": "ServicePrincipal",
             "description": "A service principal identity."
+          },
+          {
+            "name": "SecurityGroup",
+            "value": "SecurityGroup",
+            "description": "A security group identity."
           }
         ]
       }
@@ -2537,6 +2667,24 @@
         "value"
       ]
     },
+    "PolicyAttestation": {
+      "type": "object",
+      "description": "An attestation that a policy approver must acknowledge.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the attestation."
+        },
+        "documentReference": {
+          "type": "string",
+          "description": "A reference to the supporting document."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether the attestation is required."
+        }
+      }
+    },
     "PolicySet": {
       "type": "object",
       "description": "Represents an access policy set applied to a resource.",
@@ -2553,66 +2701,222 @@
         "policySetKind": {
           "$ref": "#/definitions/PolicySetKind",
           "description": "The kind of policy set."
-        },
-        "dataProductPolicies": {
-          "$ref": "#/definitions/DataProductPolicies",
-          "description": "The data product policies."
         }
-      }
+      },
+      "discriminator": "policySetKind",
+      "required": [
+        "policySetKind"
+      ]
     },
     "PolicySetKind": {
       "type": "string",
-      "description": "The kind of policy set.",
+      "description": "The kind of policy set, identifying the governance entity it applies to.",
       "enum": [
-        "Applied",
-        "Effective"
+        "Term",
+        "Domain",
+        "DataProduct",
+        "CriticalDataElement"
       ],
       "x-ms-enum": {
         "name": "PolicySetKind",
         "modelAsString": true,
         "values": [
           {
-            "name": "Applied",
-            "value": "Applied",
-            "description": "Applied policy set."
+            "name": "Term",
+            "value": "Term",
+            "description": "Policy set for a term."
           },
           {
-            "name": "Effective",
-            "value": "Effective",
-            "description": "Effective policy set."
+            "name": "Domain",
+            "value": "Domain",
+            "description": "Policy set for a business domain."
+          },
+          {
+            "name": "DataProduct",
+            "value": "DataProduct",
+            "description": "Policy set for a data product."
+          },
+          {
+            "name": "CriticalDataElement",
+            "value": "CriticalDataElement",
+            "description": "Policy set for a critical data element."
           }
         ]
       }
     },
-    "PolicySetListResponse": {
+    "SensitiveMarker": {
       "type": "object",
-      "description": "List of policy sets.",
+      "description": "A sensitive marker that restricts which subscribers may access a data product.",
+      "properties": {
+        "securityGroup": {
+          "$ref": "#/definitions/Identity",
+          "description": "The security group that the marker applies to."
+        },
+        "tags": {
+          "type": "array",
+          "description": "The classification tags carried by the marker.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A classification tag.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TagType",
+          "description": "The type of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the tag."
+        }
+      }
+    },
+    "TagType": {
+      "type": "string",
+      "description": "The classification of a sensitive marker tag value.",
+      "enum": [
+        "Term",
+        "Classification",
+        "Label",
+        "Governance"
+      ],
+      "x-ms-enum": {
+        "name": "TagType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Term",
+            "value": "Term",
+            "description": "A glossary term reference."
+          },
+          {
+            "name": "Classification",
+            "value": "Classification",
+            "description": "A classification (e.g., sensitivity classification)."
+          },
+          {
+            "name": "Label",
+            "value": "Label",
+            "description": "A free-form label."
+          },
+          {
+            "name": "Governance",
+            "value": "Governance",
+            "description": "A governance-related tag."
+          }
+        ]
+      }
+    },
+    "TargetResource": {
+      "type": "object",
+      "description": "The target resource for a policy set.",
+      "properties": {
+        "targetId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The target resource identifier."
+        },
+        "targetType": {
+          "$ref": "#/definitions/TargetType",
+          "description": "The target resource type."
+        }
+      },
+      "required": [
+        "targetId",
+        "targetType"
+      ]
+    },
+    "TargetType": {
+      "type": "string",
+      "description": "The type of governance entity that a policy set targets.",
+      "enum": [
+        "Domain",
+        "DataProduct",
+        "Term",
+        "CriticalDataElement"
+      ],
+      "x-ms-enum": {
+        "name": "TargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Domain",
+            "value": "Domain",
+            "description": "Targets a business domain."
+          },
+          {
+            "name": "DataProduct",
+            "value": "DataProduct",
+            "description": "Targets a data product."
+          },
+          {
+            "name": "Term",
+            "value": "Term",
+            "description": "Targets a term."
+          },
+          {
+            "name": "CriticalDataElement",
+            "value": "CriticalDataElement",
+            "description": "Targets a critical data element."
+          }
+        ]
+      }
+    },
+    "TermPolicies": {
+      "type": "object",
+      "description": "Term-level access policies.",
+      "properties": {
+        "attestations": {
+          "type": "array",
+          "description": "Attestations that policy approvers must acknowledge.",
+          "items": {
+            "$ref": "#/definitions/PolicyAttestation"
+          }
+        },
+        "managerApprovalRequired": {
+          "type": "boolean",
+          "description": "Whether manager approval is required for access requests."
+        },
+        "dataCopyPermitted": {
+          "type": "boolean",
+          "description": "Whether data may be copied by subscribers after access is granted."
+        }
+      }
+    },
+    "TermPolicySet": {
+      "type": "object",
+      "description": "Policy set applied to a term.",
+      "properties": {
+        "policies": {
+          "$ref": "#/definitions/TermPolicies",
+          "description": "The term-level policies."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicySet"
+        }
+      ],
+      "x-ms-discriminator-value": "Term"
+    },
+    "TermPolicySetListResponse": {
+      "type": "object",
+      "description": "List of term policy sets.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of policy sets.",
+          "description": "The list of term policy sets.",
           "items": {
-            "$ref": "#/definitions/PolicySet"
+            "$ref": "#/definitions/TermPolicySet"
           }
         }
       },
       "required": [
         "value"
       ]
-    },
-    "TargetResource": {
-      "type": "object",
-      "description": "The target resource for a policy set.",
-      "properties": {
-        "resourceId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The resource identifier."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "The resource type."
-        }
-      }
     },
     "Trigger": {
       "type": "object",
@@ -2656,6 +2960,20 @@
             "description": "Triggered when a term is published."
           }
         ]
+      }
+    },
+    "UseCase": {
+      "type": "object",
+      "description": "A use case describing how a data product may be used.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the use case."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the use case."
+        }
       }
     },
     "Workflow": {
@@ -2723,6 +3041,10 @@
       "type": "object",
       "description": "Represents a workflow run instance.",
       "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the workflow run record."
+        },
         "workflowRunId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The unique identifier of the workflow run.",
@@ -2774,6 +3096,14 @@
             "$ref": "#/definitions/Action"
           }
         },
+        "accountId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The account identifier."
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The tenant identifier."
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -2795,6 +3125,10 @@
           "type": "string",
           "description": "The user who last modified the run.",
           "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the model."
         }
       },
       "required": [
