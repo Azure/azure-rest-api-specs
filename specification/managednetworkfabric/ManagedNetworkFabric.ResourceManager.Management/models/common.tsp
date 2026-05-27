@@ -1312,9 +1312,11 @@ model UpdateAdministrativeStateResponse {
 @added(Versions.v2025_07_15)
 model UpdateAdministrativeStateResponseProperties {
   @doc("List of ARM Resource IDs for which the given action applied successfully.")
+  @visibility(Lifecycle.Read)
   successfulResources?: Azure.Core.armResourceIdentifier<[]>[];
 
   @doc("List of ARM Resource IDs for which the given action failed to apply.")
+  @visibility(Lifecycle.Read)
   failedResources?: Azure.Core.armResourceIdentifier<[]>[];
 }
 
