@@ -60,7 +60,8 @@ alias ReplicationProtectionClusterOps = Azure.ResourceManager.Legacy.LegacyOpera
     @key
     @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
     replicationProtectionClusterName: string;
-  }
+  },
+  ResourceName = "SiteRecoveryReplicationProtectionClusterResource"
 >;
 
 @armResourceOperations
@@ -69,10 +70,7 @@ interface ReplicationProtectionClusters {
    * Gets the details of an ASR replication protection cluster.
    */
   @summary("Gets the details of a Replication protection cluster.")
-  get is ReplicationProtectionClusterOps.Read<
-    ReplicationProtectionCluster,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
-  >;
+  get is ReplicationProtectionClusterOps.Read<ReplicationProtectionCluster>;
 
   /**
    * The operation to create an ASR replication protection cluster item.
@@ -85,8 +83,7 @@ interface ReplicationProtectionClusters {
       | ArmResourceUpdatedResponse<ReplicationProtectionCluster>
       | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
           ArmAsyncOperationHeader<FinalResult = ReplicationProtectionCluster> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -99,8 +96,7 @@ interface ReplicationProtectionClusters {
       | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
           ArmAsyncOperationHeader &
           Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -113,8 +109,7 @@ interface ReplicationProtectionClusters {
     ArmResponse<ReplicationProtectionCluster>,
     LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -127,8 +122,7 @@ interface ReplicationProtectionClusters {
     ArmResponse<ReplicationProtectionCluster>,
     LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -141,8 +135,7 @@ interface ReplicationProtectionClusters {
     ArmResponse<ReplicationProtectionCluster>,
     LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -155,8 +148,7 @@ interface ReplicationProtectionClusters {
     ArmResponse<ReplicationProtectionCluster>,
     LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -169,8 +161,7 @@ interface ReplicationProtectionClusters {
     ArmResponse<ReplicationProtectionCluster>,
     LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -183,8 +174,7 @@ interface ReplicationProtectionClusters {
     ArmResponse<ReplicationProtectionCluster>,
     LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationProtectionCluster> &
       ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 alias ReplicationProtectionClusterOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -229,7 +219,8 @@ alias ReplicationProtectionClusterOperationGroupOps = Azure.ResourceManager.Lega
     @key
     @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
     jobId: string;
-  }
+  },
+  ResourceName = "SiteRecoveryReplicationProtectionClusterResource"
 >;
 
 @armResourceOperations
@@ -239,10 +230,7 @@ interface ReplicationProtectionClusterOperationGroup {
    * Track the results of an asynchronous operation on the replication protection cluster.
    */
   @summary("Tracks the Replication protection cluster async operation.")
-  getOperationResults is ReplicationProtectionClusterOperationGroupOps.Read<
-    ReplicationProtectionCluster,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
-  >;
+  getOperationResults is ReplicationProtectionClusterOperationGroupOps.Read<ReplicationProtectionCluster>;
 
   /**
    * Gets the list of ASR replication protected clusters in the protection container.
@@ -250,8 +238,7 @@ interface ReplicationProtectionClusterOperationGroup {
   @summary("Gets the list of Replication protection clusters in fabric, container.")
   listByReplicationProtectionContainers is ReplicationProtectionClusterOps.List<
     ReplicationProtectionCluster,
-    Response = ArmResponse<ReplicationProtectionClusterCollection>,
-    OverrideResourceName = "SiteRecoveryReplicationProtectionClusterResource"
+    Response = ArmResponse<ReplicationProtectionClusterCollection>
   >;
 }
 
