@@ -45,7 +45,12 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
-    reason: To have primaryFederatedIdentityClientId and geoBackupFederatedIdentityClientId be defined as GUID following recommendation by Azure Resource Manager guidelines.
+    where: $.definitions.DataEncryption.properties.primaryFederatedIdentityClientId
+    reason: Client ID of multi-tenant Microsoft Entra application, defined as GUID per ARM guidelines.
+   - code: GuidUsage
+    from: openapi.json
+    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
+    reason: Client ID of multi-tenant Microsoft Entra application for geo-redundant backups, defined as GUID per ARM guidelines.
   - code: EnumInsteadOfBoolean
     from: openapi.json
     where: $.definitions.PolicyDetail.properties.passed

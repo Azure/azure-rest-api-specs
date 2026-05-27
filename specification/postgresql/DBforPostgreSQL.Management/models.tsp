@@ -4001,7 +4001,7 @@ model MaintenanceEventResourceProperties {
   originalStartTime: utcDateTime;
 }
 
-@doc("Filter for maintenance event status.")
+@doc("Type of a maintenance event resource.")
 @added(Versions.v2026_04_01)
 union MaintenanceType {
   string,
@@ -4039,31 +4039,6 @@ union MaintenanceEventStatusFilter {
 model MaintenanceEventRescheduleRequest {
   @doc("New start time in RFC3339 format.")
   postponeToDateTime: utcDateTime;
-}
-
-@doc("Response model for maintenance event reschedule and apply-now actions.")
-@added(Versions.v2026_04_01)
-model MaintenanceEventActionResponse {
-  @doc("The maintenance event name (maintenance ID).")
-  maintenanceEventId?: string;
-
-  @doc("The full Azure resource ID of the server.")
-  serverId?: armResourceIdentifier;
-
-  @doc("The status (e.g. 'Accepted', 'Succeeded').")
-  status?: string;
-
-  @doc("The planned start time of the maintenance event (UTC).")
-  plannedStartTime?: utcDateTime;
-
-  @doc("The planned end time of the maintenance event (UTC).")
-  plannedEndTime?: utcDateTime;
-
-  @doc("A value indicating whether this was an apply-now (immediate) action. True for ApplyNow; false for Reschedule.")
-  appliedNow?: boolean;
-
-  @doc("The time this maintenance event record was last updated (UTC).")
-  lastUpdatedTime?: utcDateTime;
 }
 
 @doc("Error information from precheck validation.")
@@ -4186,7 +4161,8 @@ model MajorVersionUpgradePrecheckResource
   ...ResourceNameParameter<
     MajorVersionUpgradePrecheckResource,
     KeyName = "precheckValidationId",
-    SegmentName = "majorVersionUpgradePrecheck"
+    SegmentName = "majorVersionUpgradePrecheck",
+    NamePattern = "^[a-zA-Z0-9-]{3,32}$"
   >;
 }
 

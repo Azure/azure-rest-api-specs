@@ -2890,7 +2890,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MaintenanceEventActionResponse"
+              "$ref": "#/definitions/MaintenanceEventResource"
             }
           },
           "202": {
@@ -2926,7 +2926,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
+          "final-state-schema": "#/definitions/MaintenanceEventResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -2980,7 +2980,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MaintenanceEventActionResponse"
+              "$ref": "#/definitions/MaintenanceEventResource"
             }
           },
           "202": {
@@ -3016,7 +3016,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
+          "final-state-schema": "#/definitions/MaintenanceEventResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -3106,7 +3106,7 @@
             "description": "The name of the MajorVersionUpgradePrecheckResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,32}$"
           }
         ],
         "responses": {
@@ -7077,44 +7077,6 @@
         "value"
       ]
     },
-    "MaintenanceEventActionResponse": {
-      "type": "object",
-      "description": "Response model for maintenance event reschedule and apply-now actions.",
-      "properties": {
-        "maintenanceEventId": {
-          "type": "string",
-          "description": "The maintenance event name (maintenance ID)."
-        },
-        "serverId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The full Azure resource ID of the server."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status (e.g. 'Accepted', 'Succeeded')."
-        },
-        "plannedStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The planned start time of the maintenance event (UTC)."
-        },
-        "plannedEndTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The planned end time of the maintenance event (UTC)."
-        },
-        "appliedNow": {
-          "type": "boolean",
-          "description": "A value indicating whether this was an apply-now (immediate) action. True for ApplyNow; false for Reschedule."
-        },
-        "lastUpdatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time this maintenance event record was last updated (UTC)."
-        }
-      }
-    },
     "MaintenanceEventRescheduleRequest": {
       "type": "object",
       "description": "Parameters to reschedule a maintenance event.",
@@ -7289,7 +7251,7 @@
     },
     "MaintenanceType": {
       "type": "string",
-      "description": "Filter for maintenance event status.",
+      "description": "Type of a maintenance event resource.",
       "enum": [
         "PlannedMaintenance"
       ],
