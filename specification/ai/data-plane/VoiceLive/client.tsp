@@ -869,6 +869,23 @@ using Azure.ClientGenerator.Core;
   "SessionUpdateErrorDetails",
   "java"
 );
+@@clientName(VoiceLive.CachedTokenDetails.text_tokens, "textTokenCount", "java");
+@@clientName(VoiceLive.CachedTokenDetails.audio_tokens, "audioTokenCount", "java");
+@@clientName(VoiceLive.CachedTokenDetails.image_tokens, "imageTokenCount", "java");
+@@clientName(VoiceLive.InputTokenDetails.cached_tokens, "cachedTokenCount", "java");
+@@clientName(VoiceLive.InputTokenDetails.text_tokens, "textTokenCount", "java");
+@@clientName(VoiceLive.InputTokenDetails.audio_tokens, "audioTokenCount", "java");
+@@clientName(VoiceLive.InputTokenDetails.image_tokens, "imageTokenCount", "java");
+@@clientName(VoiceLive.OutputTokenDetails.text_tokens, "textTokenCount", "java");
+@@clientName(VoiceLive.OutputTokenDetails.audio_tokens, "audioTokenCount", "java");
+@@clientName(
+  VoiceLive.OutputTokenDetails.reasoning_tokens,
+  "reasoningTokenCount",
+  "java"
+);
+@@clientName(VoiceLive.TokenUsage.total_tokens, "totalTokenCount", "java");
+@@clientName(VoiceLive.TokenUsage.input_tokens, "inputTokenCount", "java");
+@@clientName(VoiceLive.TokenUsage.output_tokens, "outputTokenCount", "java");
 @@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "java");
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "java");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "java");
