@@ -11706,7 +11706,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
-    A2APreviewToolbox:
+    A2APreviewToolboxTool:
       type: object
       required:
         - type
@@ -11716,12 +11716,6 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `a2a_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         base_url:
           type: string
           format: uri
@@ -13300,7 +13294,7 @@ components:
             The indices attached to this agent. There can be a maximum of 1 index
             resource attached to the agent.
       description: A set of index resources used by the `azure_ai_search` tool.
-    AzureAISearchToolbox:
+    AzureAISearchToolboxTool:
       type: object
       required:
         - type
@@ -13311,12 +13305,6 @@ components:
           enum:
             - azure_ai_search
           description: The type of the tool. Always `azure_ai_search`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -14433,7 +14421,7 @@ components:
             - bundled
             - remote_build
       description: How package dependencies are resolved at deployment time for a code-based hosted agent.
-    CodeInterpreterToolbox:
+    CodeInterpreterToolboxTool:
       type: object
       required:
         - type
@@ -18171,7 +18159,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A FabricIQ server-side tool.
-    FabricIQPreviewToolbox:
+    FabricIQPreviewToolboxTool:
       type: object
       required:
         - type
@@ -18202,12 +18190,6 @@ components:
               nullable: true
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A FabricIQ tool stored in a toolbox.
@@ -18277,7 +18259,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
-    FileSearchToolbox:
+    FileSearchToolboxTool:
       type: object
       required:
         - type
@@ -18287,11 +18269,6 @@ components:
           enum:
             - file_search
           description: The type of the tool. Always `file_search`.
-        vector_store_ids:
-          type: array
-          items:
-            type: string
-          description: The IDs of the vector stores to search.
         max_num_results:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -18304,6 +18281,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
           nullable: true
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          description: The IDs of the vector stores to search.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A file search tool stored in a toolbox.
@@ -19112,7 +19094,7 @@ components:
           format: float
           description: Dropout rate used during training. Informational — not used at serving time.
       description: Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.
-    MCPToolbox:
+    MCPToolboxTool:
       type: object
       required:
         - type
@@ -34835,7 +34817,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an OpenAPI tool call.
-    OpenApiToolbox:
+    OpenApiToolboxTool:
       type: object
       required:
         - type
@@ -37335,7 +37317,7 @@ components:
             - $ref: '#/components/schemas/RaiConfig'
           description: Responsible AI content filtering configuration.
       description: Policy configuration for a toolbox, including content safety and other governance settings.
-    ToolboxSearchPreviewToolbox:
+    ToolboxSearchPreviewToolboxTool:
       type: object
       required:
         - type
@@ -37408,16 +37390,16 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          code_interpreter: '#/components/schemas/CodeInterpreterToolbox'
-          file_search: '#/components/schemas/FileSearchToolbox'
-          web_search: '#/components/schemas/WebSearchToolbox'
-          mcp: '#/components/schemas/MCPToolbox'
-          azure_ai_search: '#/components/schemas/AzureAISearchToolbox'
-          openapi: '#/components/schemas/OpenApiToolbox'
-          a2a_preview: '#/components/schemas/A2APreviewToolbox'
-          work_iq_preview: '#/components/schemas/WorkIQPreviewToolbox'
-          fabric_iq_preview: '#/components/schemas/FabricIQPreviewToolbox'
-          toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewToolbox'
+          code_interpreter: '#/components/schemas/CodeInterpreterToolboxTool'
+          file_search: '#/components/schemas/FileSearchToolboxTool'
+          web_search: '#/components/schemas/WebSearchToolboxTool'
+          mcp: '#/components/schemas/MCPToolboxTool'
+          azure_ai_search: '#/components/schemas/AzureAISearchToolboxTool'
+          openapi: '#/components/schemas/OpenApiToolboxTool'
+          a2a_preview: '#/components/schemas/A2APreviewToolboxTool'
+          work_iq_preview: '#/components/schemas/WorkIQPreviewToolboxTool'
+          fabric_iq_preview: '#/components/schemas/FabricIQPreviewToolboxTool'
+          toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewToolboxTool'
       description: An abstract representation of a tool stored in a toolbox.
     ToolboxToolType:
       type: string
@@ -37980,7 +37962,7 @@ components:
           type: string
           description: Name of the custom configuration instance given to config.
       description: A web search configuration for Bing custom search.
-    WebSearchToolbox:
+    WebSearchToolboxTool:
       type: object
       required:
         - type
@@ -38057,7 +38039,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
-    WorkIQPreviewToolbox:
+    WorkIQPreviewToolboxTool:
       type: object
       required:
         - type
@@ -38071,12 +38053,6 @@ components:
         project_connection_id:
           type: string
           description: The ID of the WorkIQ project connection.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A WorkIQ tool stored in a toolbox.
