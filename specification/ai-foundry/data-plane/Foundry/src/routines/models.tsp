@@ -341,7 +341,7 @@ model DispatchRoutineResponse {
 model RoutineRun {
   @doc("The MLflow run identifier for the routine attempt.")
   @visibility(Lifecycle.Read)
-  id?: string;
+  id: string;
 
   @doc("The underlying MLflow run status.")
   status?: string;
