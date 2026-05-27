@@ -228,7 +228,7 @@ model FabricPatchableProperties {
   operationPolicy?: OperationPolicy;
 
   @doc("URL of the SDN controller API endpoint.")
-  controllerEndpoint?: url;
+  controllerEndpoint?: string;
 
   @doc("ARM resource ID of the Key Vault secret for controller credentials.")
   controllerCredentialRef?: Azure.Core.armResourceIdentifier<[
@@ -260,7 +260,7 @@ model FabricProperties {
   operationPolicy?: OperationPolicy;
 
   @doc("URL of the SDN controller API endpoint.")
-  controllerEndpoint?: url;
+  controllerEndpoint?: string;
 
   @doc("ARM resource ID of the Key Vault secret for controller credentials.")
   controllerCredentialRef?: Azure.Core.armResourceIdentifier<[
