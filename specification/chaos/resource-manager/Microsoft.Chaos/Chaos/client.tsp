@@ -9,6 +9,10 @@ using Microsoft.Chaos;
 @@clientName(Scenario, "ChaosScenario", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
 @@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
+@@clientName(DiscoveredResource, "ChaosDiscovered", "csharp");
+@@clientName(PrivateAccess, "ChaosPrivateAccess", "csharp");
+@@clientName(PrivateAccessPatch, "ChaosPrivateAccessPatch", "csharp");
+@@clientName(PrivateAccessProperties, "ChaosPrivateAccessProperties", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
 @@clientName(Experiment, "ChaosExperiment", "csharp");
 @@clientName(ExperimentExecution, "ChaosExperimentExecution", "csharp");
@@ -52,6 +56,25 @@ using Microsoft.Chaos;
 @@clientName(Action, "ChaosAction", "csharp");
 @@clientName(ActionVersion, "ChaosActionVersion", "csharp");
 @@clientName(ActionKind, "ChaosActionKind", "csharp");
+@@clientName(
+  ConfigurationExclusions,
+  "ChaosScenarioConfigurationExclusions",
+  "csharp"
+);
+@@clientName(
+  ConfigurationFilters,
+  "ChaosScenarioConfigurationFilters",
+  "csharp"
+);
+@@clientName(OperationError, "ChaosOperationError", "csharp");
+@@clientName(ScenarioParameter.required, "IsRequired", "csharp");
+@@clientName(ParameterType, "ChaosScenarioParameterType", "csharp");
+@@clientName(FixResourcePermissionsRequest.whatIf, "IsWhatIf", "csharp");
+@@clientName(PermissionsFix, "ChaosPermissionsFixData", "csharp");
+@@clientName(PermissionsFixProperties.whatIfMode, "IsWhatIfMode", "csharp");
+@@clientName(Recommendation, "ChaosScenarioRecommendation", "csharp");
+@@clientName(Validation, "ChaosScenarioValidationData", "csharp");
+@@clientName(WorkspaceEvaluation, "ChaosWorkspaceEvaluationData", "csharp");
 @@clientName(
   ActionSupportedTargetType,
   "ChaosActionSupportedTargetType",
