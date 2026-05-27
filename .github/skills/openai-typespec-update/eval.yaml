@@ -1,0 +1,29 @@
+name: openai-typespec-update-eval
+description: Evaluation suite for the OpenAI TypeSpec update skill.
+skill: openai-typespec-update
+version: "1.0"
+config:
+  model: gpt-4o
+  executor: mock
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+metrics:
+  - name: task_completion
+    weight: 0.7
+    threshold: 0.8
+    description: Did the skill follow the exact install rule and warning behavior?
+  - name: efficiency
+    weight: 0.3
+    threshold: 0.7
+    description: Did the skill stay focused on the package update task?
+graders:
+  - type: text
+    name: no_fatal_errors
+    config:
+      regex_not_match:
+        - (?i)fatal error
+        - (?i)unhandled exception
+        - "(?i)panic:"
+tasks:
+  - "tasks/*.yaml"
