@@ -13,7 +13,10 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ApiManagement;
 
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
-alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+alias PrivateEndpointOperations = PrivateEndpoints<
+  PrivateEndpointConnection,
+  "ApiManagementPrivateEndpointConnection"
+>;
 
 @armResourceOperations
 interface PrivateEndpointConnections {

@@ -75,7 +75,8 @@ interface PolicyContractOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiOperationPolicy"
     > {}
 
 @armResourceOperations
