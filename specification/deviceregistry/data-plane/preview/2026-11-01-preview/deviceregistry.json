@@ -878,13 +878,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCert": {
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCerts": {
       "post": {
-        "operationId": "DeviceAuthenticationProfiles_RevokeCert",
+        "operationId": "DeviceAuthenticationProfiles_RevokeCerts",
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeCertResults` sub-resource.",
+        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeCertsResults` sub-resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -913,10 +913,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Revoke certificate request body.",
+            "description": "Revoke certificates request body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RevokeCertRequest"
+              "$ref": "#/definitions/RevokeCertsRequest"
             }
           }
         ],
@@ -924,7 +924,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/RevokeCertResult"
+              "$ref": "#/definitions/RevokeCertsResult"
             },
             "headers": {
               "Operation-Location": {
@@ -949,7 +949,7 @@
         },
         "x-ms-examples": {
           "Revoke certificates for a device authentication profile": {
-            "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCert.json"
+            "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCerts.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1025,13 +1025,13 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeCertResults/{operationId}": {
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeCertsResults/{operationId}": {
       "get": {
-        "operationId": "RevokeCertResults_Get",
+        "operationId": "RevokeCertsResults_Get",
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Get the status of a long-running `:revokeCert` operation.",
+        "description": "Get the status of a long-running `:revokeCerts` operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1069,7 +1069,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RevokeCertResult"
+              "$ref": "#/definitions/RevokeCertsResult"
             }
           },
           "default": {
@@ -1086,8 +1086,8 @@
           }
         },
         "x-ms-examples": {
-          "Get the result of a long-running :revokeCert operation": {
-            "$ref": "./examples/RevokeCertResults_Get.json"
+          "Get the result of a long-running :revokeCerts operation": {
+            "$ref": "./examples/RevokeCertsResults_Get.json"
           }
         }
       }
@@ -2620,7 +2620,7 @@
         "csr": {
           "type": "string",
           "format": "byte",
-          "description": "Base64-encoded DER certificate signing request (CSR) without PEM\nheaders and footers. Format of the CSR is in PKCS 10. The CN field\nof the CSR must be set to the device registrationId."
+          "description": "Base64-encoded DER certificate signing request (CSR) without PEM\nheaders and footers. Format of the CSR is in PKCS 10. The CN field of\nthe CSR must be set to the device name."
         }
       },
       "required": [
@@ -4497,13 +4497,13 @@
         ]
       }
     },
-    "RevokeCertRequest": {
+    "RevokeCertsRequest": {
       "type": "object",
-      "description": "Request payload for the `:revokeCert` action."
+      "description": "Request payload for the `:revokeCerts` action."
     },
-    "RevokeCertResult": {
+    "RevokeCertsResult": {
       "type": "object",
-      "description": "Status monitor for the long-running `:revokeCert` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
+      "description": "Status monitor for the long-running `:revokeCerts` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
       "properties": {
         "id": {
           "type": "string",

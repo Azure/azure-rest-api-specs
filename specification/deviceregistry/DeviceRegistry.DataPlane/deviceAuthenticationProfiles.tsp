@@ -110,8 +110,8 @@ model CertificateAuthorityCredentials {
 // Revoke cert action models
 // ──────────────────────────────────────────────
 
-/** Request payload for the `:revokeCert` action. */
-model RevokeCertRequest {}
+/** Request payload for the `:revokeCerts` action. */
+model RevokeCertsRequest {}
 
 // ──────────────────────────────────────────────
 // Certificate issuance action models
@@ -192,13 +192,13 @@ model IssueCertAcceptedResponse {
 // ──────────────────────────────────────────────
 
 /**
- * Status monitor for the long-running `:revokeCert` action on a device authentication
+ * Status monitor for the long-running `:revokeCerts` action on a device authentication
  * profile. The operation has no payload to return on success; `status` carries the
  * outcome and `error` carries failure details.
  */
 @parentResource(DeviceAuthenticationProfile)
-@resource("revokeCertResults")
-model RevokeCertResult {
+@resource("revokeCertsResults")
+model RevokeCertsResult {
   /** The unique ID of the operation. */
   @key("operationId")
   @visibility(Lifecycle.Read)
@@ -275,13 +275,13 @@ interface DeviceAuthenticationProfiles {
    * Microsoft-managed X.509 certificates: invalidates outstanding certificates
    * via the PKI revocation list. The authentication profile itself is preserved.
    * The 202 carries only operation state; status is polled via the dedicated GET
-   * on the corresponding `revokeCertResults` sub-resource.
+   * on the corresponding `revokeCertsResults` sub-resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeCertResults sub-resource."
-  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCert")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeCertsResults sub-resource."
+  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCerts")
   @post
-  @pollingOperation(RevokeCertResults.get)
-  revokeCert(
+  @pollingOperation(RevokeCertsResults.get)
+  revokeCerts(
     ...Azure.Core.Foundations.ApiVersionParameter,
 
     /** The unique identifier of the namespace. */
@@ -293,15 +293,15 @@ interface DeviceAuthenticationProfiles {
     /** The name of the authentication profile. */
     @path authenticationProfileName: string,
 
-    /** Revoke certificate request body. */
-    @body body: RevokeCertRequest,
+    /** Revoke certificates request body. */
+    @body body: RevokeCertsRequest,
   ): {
     @statusCode statusCode: 202;
 
     /** The location for monitoring the operation state. */
     @header("Operation-Location") operationLocation: url;
 
-    ...RevokeCertResult;
+    ...RevokeCertsResult;
   } | Azure.Core.Foundations.ErrorResponse;
 }
 
@@ -312,9 +312,9 @@ interface IssueCertResults {
   get is ResourceOperations.ResourceRead<IssueCertResult>;
 }
 
-/** Polling operations for the long-running `:revokeCert` action. */
+/** Polling operations for the long-running `:revokeCerts` action. */
 @tag("Device Authentication Profiles")
-interface RevokeCertResults {
-  /** Get the status of a long-running `:revokeCert` operation. */
-  get is ResourceOperations.ResourceRead<RevokeCertResult>;
+interface RevokeCertsResults {
+  /** Get the status of a long-running `:revokeCerts` operation. */
+  get is ResourceOperations.ResourceRead<RevokeCertsResult>;
 }
