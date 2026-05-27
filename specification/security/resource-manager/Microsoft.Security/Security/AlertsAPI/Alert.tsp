@@ -36,11 +36,7 @@ alias AlertOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     providerNamespace: "Microsoft.Security";
 
-    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-    @path
-    @segment("locations")
-    @key
-    ascLocation: string;
+    ...LocationResourceParameter;
   },
   {
     /** Name of the alert object */
@@ -124,11 +120,7 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider;
 
-    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-    @path
-    @segment("locations")
-    @key
-    ascLocation: string;
+    ...LocationResourceParameter;
   },
   {
     /** Name of the alert object */

@@ -37,11 +37,7 @@ alias SecurityTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     providerNamespace: "Microsoft.Security";
 
-    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-    @path
-    @segment("locations")
-    @key
-    ascLocation: string;
+    ...LocationResourceParameter;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -58,11 +54,7 @@ alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
 
-    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-    @path
-    @segment("locations")
-    @key
-    ascLocation: string;
+    ...LocationResourceParameter;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -72,7 +64,7 @@ alias SecurityTaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     taskName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
+    route: "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/tasks/{taskName}/{taskUpdateActionType}",
   }
 >;
 
@@ -108,7 +100,7 @@ interface SecurityTasks {
    * Recommended tasks that will help improve the security of the subscription proactively
    */
   @tag("Tasks")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/tasks/{taskName}/{taskUpdateActionType}")
   updateSubscriptionLevelTaskState is SecurityTaskBuildingOps.ActionSync<
     SecurityTask,
     void,
@@ -130,11 +122,7 @@ alias TaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider;
 
-    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-    @path
-    @segment("locations")
-    @key
-    ascLocation: string;
+    ...LocationResourceParameter;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -151,11 +139,7 @@ alias TaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
-    /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-    @path
-    @segment("locations")
-    @key
-    ascLocation: string;
+    ...LocationResourceParameter;
   },
   {
     /** Name of the task object, will be a GUID */
@@ -165,7 +149,7 @@ alias TaskBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
     taskName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{location}/tasks/{taskName}/{taskUpdateActionType}",
   }
 >;
 
@@ -198,7 +182,7 @@ interface Tasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/tasks/{taskName}/{taskUpdateActionType}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{location}/tasks/{taskName}/{taskUpdateActionType}")
   updateResourceGroupLevelTaskState is TaskBuildingOps.ActionSync<
     SecurityTask,
     void,

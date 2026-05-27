@@ -900,6 +900,39 @@ op privateLinkResourcesGetCustomization(
   "csharp"
 );
 
+// C# resource metadata customizations.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the existing C# subscription-level alert resource name"
+@@clientOption(AlertsAPI.Alerts.getSubscriptionLevel,
+  "resource-name",
+  "SubscriptionSecurityAlert",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the existing C# resource-group-level alert resource name"
+@@clientOption(AlertsAPI.AlertOperationGroup.getResourceGroupLevel,
+  "resource-name",
+  "ResourceGroupSecurityAlert",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the existing C# subscription-level task resource name"
+@@clientOption(TasksAPI.SecurityTasks.getSubscriptionLevelTask,
+  "resource-name",
+  "SubscriptionSecurityTask",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the existing C# resource-group-level task resource name"
+@@clientOption(TasksAPI.Tasks.getResourceGroupLevelTask,
+  "resource-name",
+  "ResourceGroupSecurityTask",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Place simulate on the security alert collection for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Place simulate on the security alert collection for backward compatibility"
+@@clientOption(AlertsAPI.AlertsOperationGroup.simulate,
+  "resource-operation-kind",
+  "CollectionAction",
+  "csharp"
+);
+
 // C# operations intentionally excluded from generation.
 // These provider action list operations would add extra methods beyond the
 // legacy-compatible C# surface.
@@ -1094,7 +1127,8 @@ model CSharpSecurityAssessmentStatusResult
   "python"
 );
 @@Azure.ClientGenerator.Core.alternateType(AdvancedThreatProtectionSettingNameAlias.settingName,
-  "current"
+  "current",
+  "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(JitNetworkAccessPolicyInitiateTypeAlias.jitNetworkAccessPolicyInitiateType,
@@ -1211,10 +1245,7 @@ op alertsListResourceGroupLevelByRegionCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
 
-  /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-  @path
-  @segment("locations")
-  ascLocation: string,
+  ...LocationResourceParameter,
 
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
