@@ -144,9 +144,6 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 
-// Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
-@@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
-
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
