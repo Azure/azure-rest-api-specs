@@ -12,6 +12,26 @@ using OpenAPI;
   #{ name: "Scheduler", parent: "Platform APIs" },
   #{ name: "Fine-tuning", parent: "Platform APIs" },
   #{ name: "Evaluations" },
-  #{ name: "Evalsuite", parent: "Evaluations" }
+  #{ name: "Evalsuite", parent: "Evaluations" },
+  #{ name: "Agent Session Files" },
+  #{ name: "Agent Invocations" },
+  #{ name: "Deployments" },
+  #{ name: "Evaluation Taxonomies" },
+  #{ name: "Evaluation Rules" },
+  #{ name: "Evaluators" },
+  #{ name: "EvaluatorGenerationJobs" },
+  #{ name: "Insights" },
+  #{ name: "Models" },
+  #{ name: "Memory Stores" },
+  #{ name: "Chat" },
+  #{ name: "Evals" },
+  #{ name: "Fine-Tuning" },
+  #{ name: "Redteams" },
+  #{ name: "Routines" },
+  #{ name: "Schedules" },
+  #{ name: "Skills" },
+  #{ name: "Toolboxes" },
+  #{ name: "DataGenerationJobs" },
+  #{ name: "AgentOptimizationJobs" }
 ])
 namespace Azure.AI.Projects;
