@@ -211,7 +211,7 @@ namespace ComputeCombine;
 // ── Test: Gallery patch model base type (csharp only) ──
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Test preserving previous base type for GalleryUpdate."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryUpdate,
-  Azure.ResourceManager.Foundations.Resource,
+  Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 
