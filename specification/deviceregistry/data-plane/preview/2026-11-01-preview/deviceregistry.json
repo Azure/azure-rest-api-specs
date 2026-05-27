@@ -74,15 +74,6 @@
     },
     {
       "name": "Namespaces"
-    },
-    {
-      "name": "RuntimeCertIssuance"
-    },
-    {
-      "name": "POST"
-    },
-    {
-      "name": "GET"
     }
   ],
   "paths": {
@@ -809,14 +800,15 @@
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert": {
       "post": {
-        "operationId": "RuntimeCertIssuance_IssueCertificate",
+        "operationId": "DeviceAuthenticationProfiles_IssueCert",
         "tags": [
-          "RuntimeCertIssuance",
-          "POST"
+          "Device Authentication Profiles"
         ],
-        "summary": "Issue operational certificates for IoT devices.",
-        "description": "Issue operational certificates for IoT devices.",
+        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "namespaceUuid",
             "in": "path",
@@ -827,29 +819,20 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "authenticationProfileName",
             "in": "path",
-            "description": "The name of the device authentication profile.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "name": "certificateIssuance",
+            "name": "body",
             "in": "body",
-            "description": "Certificate issuance request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CertificateIssuanceRequest"
@@ -860,23 +843,36 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/CertificateIssuanceResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location for monitoring the operation state. It contains the\nabsolute URL of the status monitor resource, including an api-version\nquery parameter. EX \"/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}?api-version=2026-11-01-preview\"."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait\nbefore polling the operation status."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -895,7 +891,7 @@
         },
         "x-ms-examples": {
           "Issue an operational certificate for an IoT device": {
-            "$ref": "./examples/RuntimeCertIssuance_IssueCertificate.json"
+            "$ref": "./examples/DeviceAuthenticationProfiles_IssueCert.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -904,16 +900,17 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}": {
-      "get": {
-        "operationId": "RuntimeCertIssuance_OperationStatusLookup",
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revoke": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_Revoke",
         "tags": [
-          "RuntimeCertIssuance",
-          "GET"
+          "Device Authentication Profiles"
         ],
-        "summary": "Gets the cert issuance operation status.",
-        "description": "Gets the cert issuance operation status.",
+        "description": "Revoke credentials issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "namespaceUuid",
             "in": "path",
@@ -924,49 +921,52 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "authenticationProfileName",
             "in": "path",
-            "description": "The name of the device authentication profile.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "Operation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/CertificateIssuanceOperationStatus"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/DeviceCredentialRevokeResponse",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait\nbefore polling the operation status."
-              },
-              "x-ms-client-request-id": {
+              "Operation-Location": {
                 "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
@@ -984,10 +984,14 @@
           }
         },
         "x-ms-examples": {
-          "Get the status of a certificate issuance operation": {
-            "$ref": "./examples/RuntimeCertIssuance_OperationStatusLookup.json"
+          "Revoke credentials for a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Revoke.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
@@ -2511,35 +2515,9 @@
         }
       }
     },
-    "CertificateIssuanceOperationStatus": {
-      "type": "object",
-      "description": "Status monitor for the certificate issuance long-running operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error object that describes the error when status is \"Failed\"."
-        },
-        "result": {
-          "$ref": "#/definitions/CertificateIssuanceResult",
-          "description": "The result of the operation."
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
     "CertificateIssuanceRequest": {
       "type": "object",
-      "description": "Certificate Issusance request.",
+      "description": "Certificate issuance request.",
       "properties": {
         "csr": {
           "type": "string",
@@ -2981,6 +2959,27 @@
       "discriminator": "capabilityType",
       "required": [
         "capabilityType"
+      ]
+    },
+    "DeviceCredentialRevokeRequest": {
+      "type": "object",
+      "description": "Request payload for revoking device credentials."
+    },
+    "DeviceCredentialRevokeResponse": {
+      "type": "object",
+      "description": "Response payload for revoking device credentials.",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Indicates whether revocation succeeded or failed."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details when revocation failed."
+        }
+      },
+      "required": [
+        "result"
       ]
     },
     "DeviceProperties": {

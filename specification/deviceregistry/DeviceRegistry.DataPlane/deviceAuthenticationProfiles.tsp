@@ -107,6 +107,51 @@ model CertificateAuthorityCredentials {
 }
 
 // ──────────────────────────────────────────────
+// Revoke action models
+// ──────────────────────────────────────────────
+
+/** Request payload for revoking device credentials. */
+model DeviceCredentialRevokeRequest {}
+
+/** Response payload for revoking device credentials. */
+model DeviceCredentialRevokeResponse {
+  /** Indicates whether revocation succeeded or failed. */
+  result: string;
+
+  /** Error details when revocation failed. */
+  error?: Azure.Core.Foundations.Error;
+}
+
+// ──────────────────────────────────────────────
+// Certificate issuance action models
+// ──────────────────────────────────────────────
+
+/** Certificate issuance request. */
+model CertificateIssuanceRequest {
+  /**
+   * Base64-encoded DER certificate signing request (CSR) without PEM
+   * headers and footers. Format of the CSR is in PKCS 10. The CN field
+   * of the CSR must be set to the device registrationId.
+   */
+  csr?: bytes;
+}
+
+/**
+ * The full chain of the issued certificate, including any intermediate
+ * certification authorities (ICAs) and the root certification authority
+ * (CA). The first certificate in the list is the issued leaf certificate.
+ * Each subsequent certificate is the issuer of the previous.
+ */
+model IssuedCertificateChain is bytes[];
+
+/** Certificate issuance result. */
+model CertificateIssuanceResult {
+  /** The full chain of the issued certificate. */
+  @visibility(Lifecycle.Read)
+  issuedCertificateChain?: IssuedCertificateChain;
+}
+
+// ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles interface
 // ──────────────────────────────────────────────
 
@@ -127,4 +172,29 @@ interface DeviceAuthenticationProfiles {
 
   /** List authentication profiles for a device. */
   list is ResourceOperations.ResourceList<DeviceAuthenticationProfile>;
+
+  /**
+   * Issue an operational X.509 certificate for the device. The certificate is
+   * signed using the certificate authority policy bound to this authentication
+   * profile. Applies to Microsoft-managed X.509 authentication profiles.
+   */
+  @action("issueCert")
+  @pollingOperation(Operations.get)
+  issueCert is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    CertificateIssuanceRequest,
+    CertificateIssuanceResult
+  >;
+
+  /**
+   * Revoke credentials issued for the device authentication profile. Applies to
+   * Microsoft-managed X.509 certificates: invalidates outstanding certificates
+   * via the PKI revocation list. The authentication profile itself is preserved.
+   */
+  @pollingOperation(Operations.get)
+  revoke is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    DeviceCredentialRevokeRequest,
+    DeviceCredentialRevokeResponse
+  >;
 }

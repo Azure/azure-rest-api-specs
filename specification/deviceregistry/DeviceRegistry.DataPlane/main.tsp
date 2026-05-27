@@ -11,7 +11,6 @@ import "./deviceAttributes.tsp";
 import "./groups.tsp";
 import "./namespaces.tsp";
 import "./operations.tsp";
-import "./certificateIssuance.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
