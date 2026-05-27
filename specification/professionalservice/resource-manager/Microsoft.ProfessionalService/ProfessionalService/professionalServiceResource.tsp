@@ -69,7 +69,7 @@ model ProfessionalServiceResourceProperties {
   isFreeTrial?: boolean;
 
   /** The storefront. */
-  storeFront?: string;
+  storefront?: string;
 
   /** The purchaser email. Server-derived from authenticated identity. */
   @visibility(Lifecycle.Read)
