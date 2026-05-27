@@ -43,10 +43,9 @@ interface AnalyticsSchedules {
   @doc("Create or update the analytics global schedule.")
   @route("/analytics/schedule")
   @put
-  createOrUpdate(
-    ...ApiVersionParameter,
-    @body body: DHAnalyticsScheduleRequest,
-  ): AnalyticsScheduleResponse | ErrorResponse;
+  createOrUpdate(...ApiVersionParameter, @body body: AnalyticsScheduleRequest):
+    | AnalyticsScheduleResponse
+    | ErrorResponse;
 
   @doc("Get analytics job logs for the global schedule.")
   @route("/analytics/schedule/getjoblogs")
@@ -205,7 +204,7 @@ interface Scores {
     type: ScoreQueryType,
 
     @body body: QueryScoresRequest,
-  ): DHScoreAggregated[] | ErrorResponse;
+  ): AggregatedScore[] | ErrorResponse;
 }
 
 // ============================================================================
@@ -263,8 +262,8 @@ interface Settings {
 // Response Type Models (named to avoid anonymous types in swagger)
 // ============================================================================
 
-alias AnalyticsScheduleResponse = DHAnalyticsScheduleRequest;
-alias AnalyticsJobLogsResponse = DEHAnalyticsJobLogs[];
+alias AnalyticsScheduleResponse = AnalyticsScheduleRequest;
+alias AnalyticsJobLogsResponse = AnalyticsJobLogs[];
 
 @doc("Paged collection of assessment results.")
 model AssessmentListResponse {

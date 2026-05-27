@@ -59,7 +59,7 @@ model StorageConfigConnectivityResult {
 // ============================================================================
 
 @doc("Frequency for analytics schedule.")
-union DHAnalyticsScheduleFrequency {
+union AnalyticsScheduleFrequency {
   @doc("Hourly frequency.")
   Hour: "Hour",
 
@@ -76,7 +76,7 @@ union DHAnalyticsScheduleFrequency {
 }
 
 @doc("State of a schedule.")
-union DHScheduleState {
+union ScheduleState {
   @doc("The schedule is enabled.")
   Enabled: "Enabled",
 
@@ -101,17 +101,16 @@ model SystemData {
   lastModifiedAt?: utcDateTime;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Request to create or update an analytics schedule.")
-model DHAnalyticsScheduleRequest {
+model AnalyticsScheduleRequest {
   @doc("The frequency of the analytics schedule.")
-  frequency: DHAnalyticsScheduleFrequency;
+  frequency: AnalyticsScheduleFrequency;
 
   @doc("The interval between schedule runs.")
   interval: int32;
 
   @doc("The status of the schedule.")
-  status?: DHScheduleState;
+  status?: ScheduleState;
 
   @doc("The start time of the schedule.")
   startTime: utcDateTime;
@@ -126,9 +125,8 @@ model DHAnalyticsScheduleRequest {
   timeZone?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DEH prefix matches existing service convention."
 @doc("Analytics job log entry.")
-model DEHAnalyticsJobLogs {
+model AnalyticsJobLogs {
   @doc("The unique identifier of the job.")
   jobId?: string;
 
@@ -147,7 +145,7 @@ model DEHAnalyticsJobLogs {
 // ============================================================================
 
 @doc("Target entity kind evaluated by an assessment.")
-union DHAssessmentTargetEntityType {
+union AssessmentTargetEntityType {
   DataAsset: "DataAsset",
   DataProduct: "DataProduct",
   BusinessDomain: "BusinessDomain",
@@ -156,7 +154,7 @@ union DHAssessmentTargetEntityType {
 }
 
 @doc("Quality dimension evaluated by an assessment.")
-union DHAssessmentTargetQualityType {
+union AssessmentTargetQualityType {
   @doc("Metadata quality assessment.")
   MetadataQuality: "MetadataQuality",
 
@@ -167,21 +165,20 @@ union DHAssessmentTargetQualityType {
 }
 
 @doc("Severity classification for an assessment rule's action.")
-union DHAssessmentRuleSeverity {
+union AssessmentRuleSeverity {
   Low: "Low",
   Medium: "Medium",
   High: "High",
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Action metadata applied when an assessment rule fires (e.g. for health alerts).")
-model DHAssessmentRuleActionProperties {
+model AssessmentRuleActionProperties {
   @doc("Human-readable name for the resulting action.")
   name: string;
 
   @doc("Severity of the resulting action.")
-  severity: DHAssessmentRuleSeverity;
+  severity: AssessmentRuleSeverity;
 
   @doc("Why the rule fired, surfaced to end users.")
   reason: string;
@@ -190,17 +187,16 @@ model DHAssessmentRuleActionProperties {
   recommendation: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
-@doc("A rule attached to an assessment. The `rule` payload uses the shared DHRule discriminated union.")
-model DHAssessmentRule {
+@doc("A rule attached to an assessment. The `rule` payload uses the shared Rule discriminated union.")
+model AssessmentRule {
   @doc("The unique identifier of the rule within the assessment.")
   id: string;
 
   @doc("The rule definition (simple, group, or expression).")
-  rule: DHRule;
+  rule: Rule;
 
   @doc("Optional metadata describing what to do when the rule fires.")
-  actionProperties?: DHAssessmentRuleActionProperties;
+  actionProperties?: AssessmentRuleActionProperties;
 }
 
 @doc("An assessment resource.")
@@ -217,13 +213,13 @@ model Assessment {
   name: string;
 
   @doc("The kind of entity this assessment evaluates.")
-  targetEntityType?: DHAssessmentTargetEntityType;
+  targetEntityType?: AssessmentTargetEntityType;
 
   @doc("The quality dimension this assessment evaluates.")
-  targetQualityType?: DHAssessmentTargetQualityType;
+  targetQualityType?: AssessmentTargetQualityType;
 
   @doc("The rules that constitute this assessment.")
-  rules?: DHAssessmentRule[];
+  rules?: AssessmentRule[];
 }
 
 // ============================================================================
@@ -231,7 +227,7 @@ model Assessment {
 // ============================================================================
 
 @doc("Status of a governance control.")
-union DHControlStatus {
+union ControlStatus {
   @doc("The control is enabled.")
   Enabled: "Enabled",
 
@@ -245,7 +241,7 @@ union DHControlStatus {
 }
 
 @doc("Discriminator for governance control variants.")
-union DHControlType {
+union ControlType {
   @doc("A control group that aggregates child controls.")
   ControlGroup: "ControlGroup",
 
@@ -256,7 +252,7 @@ union DHControlType {
 }
 
 @doc("Discriminator for governance rule variants.")
-union DHRuleType {
+union RuleType {
   @doc("A logical group combining nested rules.")
   RuleGroup: "RuleGroup",
 
@@ -270,7 +266,7 @@ union DHRuleType {
 }
 
 @doc("Logical combinator for a rule group.")
-union DHRuleGroupOperator {
+union RuleGroupOperator {
   And: "And",
   Or: "Or",
   Not: "Not",
@@ -278,7 +274,7 @@ union DHRuleGroupOperator {
 }
 
 @doc("Comparison operator for a simple rule.")
-union DHRuleOperator {
+union RuleOperator {
   Equal: "Equal",
   NotEqual: "NotEqual",
   GreaterThan: "GreaterThan",
@@ -300,97 +296,88 @@ union DHRuleOperator {
 }
 
 @doc("Identifier of a checkable property within a rule.")
-union DHRuleCheckPoint {
+union RuleCheckPoint {
   Score: "Score",
   DataProductDescriptionContent: "DataProductDescriptionContent",
   DataProductDescriptionLength: "DataProductDescriptionLength",
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Type-specific properties for a simple rule.")
-model DHRuleSimpleTypeProperties {
+model SimpleRuleTypeProperties {
   @doc("The data point to evaluate.")
-  checkPoint?: DHRuleCheckPoint;
+  checkPoint?: RuleCheckPoint;
 
   @doc("The comparison operator.")
-  operator?: DHRuleOperator;
+  operator?: RuleOperator;
 
   @doc("The operand to compare against. Optional for operators that take no operand (e.g. IsNull).")
   operand?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Type-specific properties for a rule group.")
-model DHRuleGroupTypeProperties {
+model RuleGroupTypeProperties {
   @doc("How nested rules are combined.")
-  groupOperator?: DHRuleGroupOperator;
+  groupOperator?: RuleGroupOperator;
 
   @doc("The nested rules combined by groupOperator.")
-  rules?: DHRule[];
+  rules?: Rule[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Type-specific properties for an expression rule.")
-model DHRuleExpressionTypeProperties {
+model ExpressionRuleTypeProperties {
   @doc("The data point evaluated by the expression.")
-  checkPoint: DHRuleCheckPoint;
+  checkPoint: RuleCheckPoint;
 
   @doc("The expression to evaluate.")
   expression: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.")
 @discriminator("type")
-model DHRule {
+model Rule {
   @doc("Discriminates the rule variant.")
-  type: DHRuleType;
+  type: RuleType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A leaf rule that compares a checkPoint against an operand using an operator.")
-model DHRuleSimple extends DHRule {
+model SimpleRule extends Rule {
   @doc("The rule type discriminator value for simple rules.")
-  type: DHRuleType.SimpleRule;
+  type: RuleType.SimpleRule;
 
   @doc("The simple rule's type-specific properties.")
-  typeProperties?: DHRuleSimpleTypeProperties;
+  typeProperties?: SimpleRuleTypeProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A rule that combines nested rules with a logical operator.")
-model DHRuleGroup extends DHRule {
+model RuleGroup extends Rule {
   @doc("The rule type discriminator value for rule groups.")
-  type: DHRuleType.RuleGroup;
+  type: RuleType.RuleGroup;
 
   @doc("The group's type-specific properties (groupOperator + nested rules).")
-  typeProperties?: DHRuleGroupTypeProperties;
+  typeProperties?: RuleGroupTypeProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A rule whose evaluation is driven by an expression string.")
-model DHRuleExpression extends DHRule {
+model ExpressionRule extends Rule {
   @doc("The rule type discriminator value for expression rules.")
-  type: DHRuleType.ExpressionRule;
+  type: RuleType.ExpressionRule;
 
   @doc("The expression rule's type-specific properties.")
-  typeProperties?: DHRuleExpressionTypeProperties;
+  typeProperties?: ExpressionRuleTypeProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A single status palette assignment based on a rule. When the rule evaluates true the referenced palette is applied.")
-model DHControlStatusPaletteRule {
+model ControlStatusPaletteRule {
   @doc("The palette to apply when the rule matches.")
   statusPaletteId?: string;
 
   @doc("The rule that drives the palette assignment.")
-  rule: DHRule;
+  rule: Rule;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Configuration for selecting a status palette for a control.")
-model DHControlStatusPaletteConfig {
+model ControlStatusPaletteConfig {
   @doc("The palette to apply when no rule matches.")
   fallbackStatusPaletteId?: string;
 
@@ -398,12 +385,11 @@ model DHControlStatusPaletteConfig {
   targetScore?: float64;
 
   @doc("Rules evaluated in order to select a palette.")
-  statusPaletteRules?: DHControlStatusPaletteRule[];
+  statusPaletteRules?: ControlStatusPaletteRule[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A single contact reference on a governance entity.")
-model DHContactItem {
+model ContactItem {
   @doc("The contact principal id.")
   id: string;
 
@@ -411,19 +397,17 @@ model DHContactItem {
   description?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Contacts grouped by role for a governance entity.")
-model DHContacts {
+model Contacts {
   @doc("Principals identified as owners of the entity.")
-  owner?: DHContactItem[];
+  owner?: ContactItem[];
 
   @doc("Principals identified as subject-matter experts on the entity.")
-  expert?: DHContactItem[];
+  expert?: ContactItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A status palette definition (color label).")
-model DHPalette {
+model StatusPalette {
   @doc("The unique identifier of the palette.")
   id: string;
 
@@ -437,9 +421,8 @@ model DHPalette {
   color: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("An individual score record returned with control responses.")
-model DHScore {
+model ControlScore {
   @doc("The time the score was recorded.")
   time: utcDateTime;
 
@@ -459,9 +442,8 @@ model DHScore {
   computingJobId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Type-specific properties present on ControlNode variants.")
-model DHControlNodeTypeProperties {
+model ControlNodeTypeProperties {
   @doc("The parent control group id.")
   groupId?: string;
 
@@ -490,19 +472,19 @@ model Control {
   description?: string;
 
   @doc("Contacts associated with the control, grouped by role.")
-  contacts?: DHContacts;
+  contacts?: Contacts;
 
   @doc("True when the control is reserved (system-managed).")
   reserved?: boolean;
 
   @doc("Configuration for selecting a status palette for the control.")
-  statusPaletteConfig?: DHControlStatusPaletteConfig;
+  statusPaletteConfig?: ControlStatusPaletteConfig;
 
   @doc("Discriminates between control group and control node variants.")
-  type: DHControlType;
+  type: ControlType;
 
   @doc("The control's lifecycle status.")
-  status?: DHControlStatus;
+  status?: ControlStatus;
 
   @doc("The system template name used to seed this control.")
   systemTemplate?: string;
@@ -516,7 +498,7 @@ model Control {
 
   @doc("Recent score history for the control (server-computed).")
   @visibility(Lifecycle.Read)
-  scores?: DHScore[];
+  scores?: ControlScore[];
 
   @doc("Target score for the control (server-computed).")
   @visibility(Lifecycle.Read)
@@ -528,7 +510,7 @@ model Control {
 
   @doc("Resolved status palette currently applied to the control (server-computed).")
   @visibility(Lifecycle.Read)
-  statusPalette?: DHPalette;
+  statusPalette?: StatusPalette;
 
   @doc("Resolved parent group name (server-computed from typeProperties.groupId).")
   @visibility(Lifecycle.Read)
@@ -538,16 +520,16 @@ model Control {
 @doc("A control group aggregating child controls.")
 model ControlGroup extends Control {
   @doc("The control type discriminator value for control groups.")
-  type: DHControlType.ControlGroup;
+  type: ControlType.ControlGroup;
 }
 
 @doc("A leaf control that performs evaluations.")
 model ControlNode extends Control {
   @doc("The control type discriminator value for control nodes.")
-  type: DHControlType.ControlNode;
+  type: ControlType.ControlNode;
 
   @doc("Type-specific properties for this control node.")
-  typeProperties?: DHControlNodeTypeProperties;
+  typeProperties?: ControlNodeTypeProperties;
 }
 
 // ============================================================================
@@ -555,7 +537,7 @@ model ControlNode extends Control {
 // ============================================================================
 
 @doc("Trigger type for a schedule callback.")
-union DHScheduleCallbackTriggerType {
+union ScheduleCallbackTriggerType {
   @doc("Manual trigger.")
   Manually: "Manually",
 
@@ -566,7 +548,7 @@ union DHScheduleCallbackTriggerType {
 }
 
 @doc("Frequency for a control schedule.")
-union DHScheduleFrequency {
+union ScheduleFrequency {
   @doc("Monthly frequency.")
   Month: "Month",
 
@@ -580,7 +562,7 @@ union DHScheduleFrequency {
 }
 
 @doc("Day of the week used by control schedule recurrence.")
-union DHScheduleWeekDay {
+union ScheduleWeekDay {
   Sunday: "Sunday",
   Monday: "Monday",
   Tuesday: "Tuesday",
@@ -591,19 +573,17 @@ union DHScheduleWeekDay {
   string,
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("A monthly occurrence specification for a control schedule (e.g. the 2nd Tuesday of each month).")
-model DHScheduleMonthlyOccurrence {
+model ScheduleMonthlyOccurrence {
   @doc("The day of the week.")
-  day: DHScheduleWeekDay;
+  day: ScheduleWeekDay;
 
   @doc("The ordinal occurrence within the month (e.g. 1 for first, 2 for second).")
   occurrence: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Fine-grained recurrence pattern for a control schedule.")
-model DHScheduleRecurrence {
+model ScheduleRecurrence {
   @doc("Hours of the day at which to run (0 through 23).")
   hours: int32[];
 
@@ -614,10 +594,10 @@ model DHScheduleRecurrence {
   monthDays: int32[];
 
   @doc("Days of the week on which to run.")
-  weekDays: DHScheduleWeekDay[];
+  weekDays: ScheduleWeekDay[];
 
   @doc("Monthly occurrence specifications (e.g. 2nd Tuesday).")
-  monthlyOccurrences: DHScheduleMonthlyOccurrence[];
+  monthlyOccurrences: ScheduleMonthlyOccurrence[];
 }
 
 @doc("A control schedule resource.")
@@ -631,10 +611,10 @@ model Schedule {
   systemData?: SystemData;
 
   @doc("The frequency of the schedule.")
-  frequency?: DHScheduleFrequency;
+  frequency?: ScheduleFrequency;
 
   @doc("The status of the schedule.")
-  status?: DHScheduleState;
+  status?: ScheduleState;
 
   @doc("The interval between schedule runs, expressed in the unit defined by frequency.")
   interval?: int32;
@@ -646,7 +626,7 @@ model Schedule {
   endTime?: utcDateTime;
 
   @doc("Fine-grained recurrence pattern within the chosen frequency.")
-  recurrence?: DHScheduleRecurrence;
+  recurrence?: ScheduleRecurrence;
 
   @doc("The time zone (IANA name) used to interpret startTime, endTime, and recurrence.")
   timeZone?: string;
@@ -686,9 +666,8 @@ model QueryScoresRequest {
   controlGroupIds?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "DH prefix matches existing service convention."
 @doc("Score data aggregated by control or control group. The shape of items depends on the `type` query parameter used in the request: when `type=ControlNode`, `controlId` and `computingJobId` are populated; when `type=ControlGroup`, those fields are omitted.")
-model DHScoreAggregated {
+model AggregatedScore {
   @doc("The control group ID.")
   controlGroupId: string;
 

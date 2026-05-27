@@ -70,7 +70,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DHAnalyticsScheduleRequest"
+              "$ref": "#/definitions/AnalyticsScheduleRequest"
             }
           },
           "default": {
@@ -104,7 +104,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DHAnalyticsScheduleRequest"
+              "$ref": "#/definitions/AnalyticsScheduleRequest"
             }
           }
         ],
@@ -112,7 +112,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DHAnalyticsScheduleRequest"
+              "$ref": "#/definitions/AnalyticsScheduleRequest"
             }
           },
           "default": {
@@ -150,7 +150,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/DEHAnalyticsJobLogs"
+                "$ref": "#/definitions/AnalyticsJobLogs"
               }
             }
           },
@@ -683,7 +683,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/DHScoreAggregated"
+                "$ref": "#/definitions/AggregatedScore"
               }
             }
           },
@@ -931,6 +931,144 @@
     }
   },
   "definitions": {
+    "AggregatedScore": {
+      "type": "object",
+      "description": "Score data aggregated by control or control group. The shape of items depends on the `type` query parameter used in the request: when `type=ControlNode`, `controlId` and `computingJobId` are populated; when `type=ControlGroup`, those fields are omitted.",
+      "properties": {
+        "controlGroupId": {
+          "type": "string",
+          "description": "The control group ID."
+        },
+        "scheduleRunId": {
+          "type": "string",
+          "description": "The schedule run ID."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the score."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The score value."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The control ID. Present only when the query was issued with `type=ControlNode`."
+        },
+        "computingJobId": {
+          "type": "string",
+          "description": "The computing job ID. Present only when the query was issued with `type=ControlNode`."
+        }
+      },
+      "required": [
+        "controlGroupId",
+        "scheduleRunId",
+        "time",
+        "score"
+      ]
+    },
+    "AnalyticsJobLogs": {
+      "type": "object",
+      "description": "Analytics job log entry.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the job failed."
+        },
+        "timeStamp": {
+          "type": "string",
+          "description": "The timestamp of the log entry."
+        }
+      }
+    },
+    "AnalyticsScheduleFrequency": {
+      "type": "string",
+      "description": "Frequency for analytics schedule.",
+      "enum": [
+        "Hour",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyticsScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hour",
+            "value": "Hour",
+            "description": "Hourly frequency."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily frequency."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly frequency."
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly frequency."
+          }
+        ]
+      }
+    },
+    "AnalyticsScheduleRequest": {
+      "type": "object",
+      "description": "Request to create or update an analytics schedule.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/AnalyticsScheduleFrequency",
+          "description": "The frequency of the analytics schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval between schedule runs."
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleState",
+          "description": "The status of the schedule."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the schedule."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the schedule."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone for the schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval",
+        "startTime"
+      ]
+    },
     "Assessment": {
       "type": "object",
       "description": "An assessment resource.",
@@ -950,18 +1088,18 @@
           "description": "The assessment's display name."
         },
         "targetEntityType": {
-          "$ref": "#/definitions/DHAssessmentTargetEntityType",
+          "$ref": "#/definitions/AssessmentTargetEntityType",
           "description": "The kind of entity this assessment evaluates."
         },
         "targetQualityType": {
-          "$ref": "#/definitions/DHAssessmentTargetQualityType",
+          "$ref": "#/definitions/AssessmentTargetQualityType",
           "description": "The quality dimension this assessment evaluates."
         },
         "rules": {
           "type": "array",
           "description": "The rules that constitute this assessment.",
           "items": {
-            "$ref": "#/definitions/DHAssessmentRule"
+            "$ref": "#/definitions/AssessmentRule"
           }
         }
       },
@@ -995,6 +1133,139 @@
         "value",
         "count"
       ]
+    },
+    "AssessmentRule": {
+      "type": "object",
+      "description": "A rule attached to an assessment. The `rule` payload uses the shared Rule discriminated union.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the rule within the assessment."
+        },
+        "rule": {
+          "$ref": "#/definitions/Rule",
+          "description": "The rule definition (simple, group, or expression)."
+        },
+        "actionProperties": {
+          "$ref": "#/definitions/AssessmentRuleActionProperties",
+          "description": "Optional metadata describing what to do when the rule fires."
+        }
+      },
+      "required": [
+        "id",
+        "rule"
+      ]
+    },
+    "AssessmentRuleActionProperties": {
+      "type": "object",
+      "description": "Action metadata applied when an assessment rule fires (e.g. for health alerts).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the resulting action."
+        },
+        "severity": {
+          "$ref": "#/definitions/AssessmentRuleSeverity",
+          "description": "Severity of the resulting action."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why the rule fired, surfaced to end users."
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Recommended remediation surfaced to end users."
+        }
+      },
+      "required": [
+        "name",
+        "severity",
+        "reason",
+        "recommendation"
+      ]
+    },
+    "AssessmentRuleSeverity": {
+      "type": "string",
+      "description": "Severity classification for an assessment rule's action.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentRuleSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High"
+          }
+        ]
+      }
+    },
+    "AssessmentTargetEntityType": {
+      "type": "string",
+      "description": "Target entity kind evaluated by an assessment.",
+      "enum": [
+        "DataAsset",
+        "DataProduct",
+        "BusinessDomain",
+        "CriticalDataElement"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentTargetEntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataAsset",
+            "value": "DataAsset"
+          },
+          {
+            "name": "DataProduct",
+            "value": "DataProduct"
+          },
+          {
+            "name": "BusinessDomain",
+            "value": "BusinessDomain"
+          },
+          {
+            "name": "CriticalDataElement",
+            "value": "CriticalDataElement"
+          }
+        ]
+      }
+    },
+    "AssessmentTargetQualityType": {
+      "type": "string",
+      "description": "Quality dimension evaluated by an assessment.",
+      "enum": [
+        "MetadataQuality",
+        "DataQuality"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentTargetQualityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MetadataQuality",
+            "value": "MetadataQuality",
+            "description": "Metadata quality assessment."
+          },
+          {
+            "name": "DataQuality",
+            "value": "DataQuality",
+            "description": "Data quality assessment."
+          }
+        ]
+      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1061,6 +1332,43 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "ContactItem": {
+      "type": "object",
+      "description": "A single contact reference on a governance entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The contact principal id."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the contact's relationship to the entity."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Contacts": {
+      "type": "object",
+      "description": "Contacts grouped by role for a governance entity.",
+      "properties": {
+        "owner": {
+          "type": "array",
+          "description": "Principals identified as owners of the entity.",
+          "items": {
+            "$ref": "#/definitions/ContactItem"
+          }
+        },
+        "expert": {
+          "type": "array",
+          "description": "Principals identified as subject-matter experts on the entity.",
+          "items": {
+            "$ref": "#/definitions/ContactItem"
+          }
+        }
+      }
+    },
     "Control": {
       "type": "object",
       "description": "A governance control resource. Use the `type` discriminator to determine whether this is a ControlGroup or ControlNode.",
@@ -1084,7 +1392,7 @@
           "description": "Free-form description of the control."
         },
         "contacts": {
-          "$ref": "#/definitions/DHContacts",
+          "$ref": "#/definitions/Contacts",
           "description": "Contacts associated with the control, grouped by role."
         },
         "reserved": {
@@ -1092,15 +1400,15 @@
           "description": "True when the control is reserved (system-managed)."
         },
         "statusPaletteConfig": {
-          "$ref": "#/definitions/DHControlStatusPaletteConfig",
+          "$ref": "#/definitions/ControlStatusPaletteConfig",
           "description": "Configuration for selecting a status palette for the control."
         },
         "type": {
-          "$ref": "#/definitions/DHControlType",
+          "$ref": "#/definitions/ControlType",
           "description": "Discriminates between control group and control node variants."
         },
         "status": {
-          "$ref": "#/definitions/DHControlStatus",
+          "$ref": "#/definitions/ControlStatus",
           "description": "The control's lifecycle status."
         },
         "systemTemplate": {
@@ -1121,7 +1429,7 @@
           "type": "array",
           "description": "Recent score history for the control (server-computed).",
           "items": {
-            "$ref": "#/definitions/DHScore"
+            "$ref": "#/definitions/ControlScore"
           },
           "readOnly": true
         },
@@ -1138,7 +1446,7 @@
           "readOnly": true
         },
         "statusPalette": {
-          "$ref": "#/definitions/DHPalette",
+          "$ref": "#/definitions/StatusPalette",
           "description": "Resolved status palette currently applied to the control (server-computed).",
           "readOnly": true
         },
@@ -1196,7 +1504,7 @@
       "description": "A leaf control that performs evaluations.",
       "properties": {
         "typeProperties": {
-          "$ref": "#/definitions/DHControlNodeTypeProperties",
+          "$ref": "#/definitions/ControlNodeTypeProperties",
           "description": "Type-specific properties for this control node."
         }
       },
@@ -1207,277 +1515,7 @@
       ],
       "x-ms-discriminator-value": "ControlNode"
     },
-    "DEHAnalyticsJobLogs": {
-      "type": "object",
-      "description": "Analytics job log entry.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The unique identifier of the job."
-        },
-        "jobStatus": {
-          "type": "string",
-          "description": "The status of the job."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message if the job failed."
-        },
-        "timeStamp": {
-          "type": "string",
-          "description": "The timestamp of the log entry."
-        }
-      }
-    },
-    "DHAnalyticsScheduleFrequency": {
-      "type": "string",
-      "description": "Frequency for analytics schedule.",
-      "enum": [
-        "Hour",
-        "Day",
-        "Week",
-        "Month"
-      ],
-      "x-ms-enum": {
-        "name": "DHAnalyticsScheduleFrequency",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Hour",
-            "value": "Hour",
-            "description": "Hourly frequency."
-          },
-          {
-            "name": "Day",
-            "value": "Day",
-            "description": "Daily frequency."
-          },
-          {
-            "name": "Week",
-            "value": "Week",
-            "description": "Weekly frequency."
-          },
-          {
-            "name": "Month",
-            "value": "Month",
-            "description": "Monthly frequency."
-          }
-        ]
-      }
-    },
-    "DHAnalyticsScheduleRequest": {
-      "type": "object",
-      "description": "Request to create or update an analytics schedule.",
-      "properties": {
-        "frequency": {
-          "$ref": "#/definitions/DHAnalyticsScheduleFrequency",
-          "description": "The frequency of the analytics schedule."
-        },
-        "interval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The interval between schedule runs."
-        },
-        "status": {
-          "$ref": "#/definitions/DHScheduleState",
-          "description": "The status of the schedule."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the schedule."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the schedule."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System metadata."
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "The time zone for the schedule."
-        }
-      },
-      "required": [
-        "frequency",
-        "interval",
-        "startTime"
-      ]
-    },
-    "DHAssessmentRule": {
-      "type": "object",
-      "description": "A rule attached to an assessment. The `rule` payload uses the shared DHRule discriminated union.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the rule within the assessment."
-        },
-        "rule": {
-          "$ref": "#/definitions/DHRule",
-          "description": "The rule definition (simple, group, or expression)."
-        },
-        "actionProperties": {
-          "$ref": "#/definitions/DHAssessmentRuleActionProperties",
-          "description": "Optional metadata describing what to do when the rule fires."
-        }
-      },
-      "required": [
-        "id",
-        "rule"
-      ]
-    },
-    "DHAssessmentRuleActionProperties": {
-      "type": "object",
-      "description": "Action metadata applied when an assessment rule fires (e.g. for health alerts).",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Human-readable name for the resulting action."
-        },
-        "severity": {
-          "$ref": "#/definitions/DHAssessmentRuleSeverity",
-          "description": "Severity of the resulting action."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Why the rule fired, surfaced to end users."
-        },
-        "recommendation": {
-          "type": "string",
-          "description": "Recommended remediation surfaced to end users."
-        }
-      },
-      "required": [
-        "name",
-        "severity",
-        "reason",
-        "recommendation"
-      ]
-    },
-    "DHAssessmentRuleSeverity": {
-      "type": "string",
-      "description": "Severity classification for an assessment rule's action.",
-      "enum": [
-        "Low",
-        "Medium",
-        "High"
-      ],
-      "x-ms-enum": {
-        "name": "DHAssessmentRuleSeverity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Low",
-            "value": "Low"
-          },
-          {
-            "name": "Medium",
-            "value": "Medium"
-          },
-          {
-            "name": "High",
-            "value": "High"
-          }
-        ]
-      }
-    },
-    "DHAssessmentTargetEntityType": {
-      "type": "string",
-      "description": "Target entity kind evaluated by an assessment.",
-      "enum": [
-        "DataAsset",
-        "DataProduct",
-        "BusinessDomain",
-        "CriticalDataElement"
-      ],
-      "x-ms-enum": {
-        "name": "DHAssessmentTargetEntityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DataAsset",
-            "value": "DataAsset"
-          },
-          {
-            "name": "DataProduct",
-            "value": "DataProduct"
-          },
-          {
-            "name": "BusinessDomain",
-            "value": "BusinessDomain"
-          },
-          {
-            "name": "CriticalDataElement",
-            "value": "CriticalDataElement"
-          }
-        ]
-      }
-    },
-    "DHAssessmentTargetQualityType": {
-      "type": "string",
-      "description": "Quality dimension evaluated by an assessment.",
-      "enum": [
-        "MetadataQuality",
-        "DataQuality"
-      ],
-      "x-ms-enum": {
-        "name": "DHAssessmentTargetQualityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "MetadataQuality",
-            "value": "MetadataQuality",
-            "description": "Metadata quality assessment."
-          },
-          {
-            "name": "DataQuality",
-            "value": "DataQuality",
-            "description": "Data quality assessment."
-          }
-        ]
-      }
-    },
-    "DHContactItem": {
-      "type": "object",
-      "description": "A single contact reference on a governance entity.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The contact principal id."
-        },
-        "description": {
-          "type": "string",
-          "description": "Free-form description of the contact's relationship to the entity."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "DHContacts": {
-      "type": "object",
-      "description": "Contacts grouped by role for a governance entity.",
-      "properties": {
-        "owner": {
-          "type": "array",
-          "description": "Principals identified as owners of the entity.",
-          "items": {
-            "$ref": "#/definitions/DHContactItem"
-          }
-        },
-        "expert": {
-          "type": "array",
-          "description": "Principals identified as subject-matter experts on the entity.",
-          "items": {
-            "$ref": "#/definitions/DHContactItem"
-          }
-        }
-      }
-    },
-    "DHControlNodeTypeProperties": {
+    "ControlNodeTypeProperties": {
       "type": "object",
       "description": "Type-specific properties present on ControlNode variants.",
       "properties": {
@@ -1498,594 +1536,7 @@
         }
       }
     },
-    "DHControlStatus": {
-      "type": "string",
-      "description": "Status of a governance control.",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "InDevelopment"
-      ],
-      "x-ms-enum": {
-        "name": "DHControlStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The control is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The control is disabled."
-          },
-          {
-            "name": "InDevelopment",
-            "value": "InDevelopment",
-            "description": "The control is in development."
-          }
-        ]
-      }
-    },
-    "DHControlStatusPaletteConfig": {
-      "type": "object",
-      "description": "Configuration for selecting a status palette for a control.",
-      "properties": {
-        "fallbackStatusPaletteId": {
-          "type": "string",
-          "description": "The palette to apply when no rule matches."
-        },
-        "targetScore": {
-          "type": "number",
-          "format": "double",
-          "description": "The target score used by certain palette rules."
-        },
-        "statusPaletteRules": {
-          "type": "array",
-          "description": "Rules evaluated in order to select a palette.",
-          "items": {
-            "$ref": "#/definitions/DHControlStatusPaletteRule"
-          }
-        }
-      }
-    },
-    "DHControlStatusPaletteRule": {
-      "type": "object",
-      "description": "A single status palette assignment based on a rule. When the rule evaluates true the referenced palette is applied.",
-      "properties": {
-        "statusPaletteId": {
-          "type": "string",
-          "description": "The palette to apply when the rule matches."
-        },
-        "rule": {
-          "$ref": "#/definitions/DHRule",
-          "description": "The rule that drives the palette assignment."
-        }
-      },
-      "required": [
-        "rule"
-      ]
-    },
-    "DHControlType": {
-      "type": "string",
-      "description": "Discriminator for governance control variants.",
-      "enum": [
-        "ControlGroup",
-        "ControlNode"
-      ],
-      "x-ms-enum": {
-        "name": "DHControlType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ControlGroup",
-            "value": "ControlGroup",
-            "description": "A control group that aggregates child controls."
-          },
-          {
-            "name": "ControlNode",
-            "value": "ControlNode",
-            "description": "A leaf control that performs evaluations."
-          }
-        ]
-      }
-    },
-    "DHPalette": {
-      "type": "object",
-      "description": "A status palette definition (color label).",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the palette."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System metadata for the palette."
-        },
-        "name": {
-          "type": "string",
-          "description": "The palette name."
-        },
-        "color": {
-          "type": "string",
-          "description": "The palette color (typically a hex code)."
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "color"
-      ]
-    },
-    "DHRule": {
-      "type": "object",
-      "description": "Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/DHRuleType",
-          "description": "Discriminates the rule variant."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "DHRuleCheckPoint": {
-      "type": "string",
-      "description": "Identifier of a checkable property within a rule.",
-      "enum": [
-        "Score",
-        "DataProductDescriptionContent",
-        "DataProductDescriptionLength"
-      ],
-      "x-ms-enum": {
-        "name": "DHRuleCheckPoint",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Score",
-            "value": "Score"
-          },
-          {
-            "name": "DataProductDescriptionContent",
-            "value": "DataProductDescriptionContent"
-          },
-          {
-            "name": "DataProductDescriptionLength",
-            "value": "DataProductDescriptionLength"
-          }
-        ]
-      }
-    },
-    "DHRuleExpression": {
-      "type": "object",
-      "description": "A rule whose evaluation is driven by an expression string.",
-      "properties": {
-        "typeProperties": {
-          "$ref": "#/definitions/DHRuleExpressionTypeProperties",
-          "description": "The expression rule's type-specific properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DHRule"
-        }
-      ],
-      "x-ms-discriminator-value": "ExpressionRule"
-    },
-    "DHRuleExpressionTypeProperties": {
-      "type": "object",
-      "description": "Type-specific properties for an expression rule.",
-      "properties": {
-        "checkPoint": {
-          "$ref": "#/definitions/DHRuleCheckPoint",
-          "description": "The data point evaluated by the expression."
-        },
-        "expression": {
-          "type": "string",
-          "description": "The expression to evaluate."
-        }
-      },
-      "required": [
-        "checkPoint",
-        "expression"
-      ]
-    },
-    "DHRuleGroup": {
-      "type": "object",
-      "description": "A rule that combines nested rules with a logical operator.",
-      "properties": {
-        "typeProperties": {
-          "$ref": "#/definitions/DHRuleGroupTypeProperties",
-          "description": "The group's type-specific properties (groupOperator + nested rules)."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DHRule"
-        }
-      ],
-      "x-ms-discriminator-value": "RuleGroup"
-    },
-    "DHRuleGroupOperator": {
-      "type": "string",
-      "description": "Logical combinator for a rule group.",
-      "enum": [
-        "And",
-        "Or",
-        "Not"
-      ],
-      "x-ms-enum": {
-        "name": "DHRuleGroupOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "And",
-            "value": "And"
-          },
-          {
-            "name": "Or",
-            "value": "Or"
-          },
-          {
-            "name": "Not",
-            "value": "Not"
-          }
-        ]
-      }
-    },
-    "DHRuleGroupTypeProperties": {
-      "type": "object",
-      "description": "Type-specific properties for a rule group.",
-      "properties": {
-        "groupOperator": {
-          "$ref": "#/definitions/DHRuleGroupOperator",
-          "description": "How nested rules are combined."
-        },
-        "rules": {
-          "type": "array",
-          "description": "The nested rules combined by groupOperator.",
-          "items": {
-            "$ref": "#/definitions/DHRule"
-          }
-        }
-      }
-    },
-    "DHRuleOperator": {
-      "type": "string",
-      "description": "Comparison operator for a simple rule.",
-      "enum": [
-        "Equal",
-        "NotEqual",
-        "GreaterThan",
-        "GreaterThanOrEqual",
-        "LessThan",
-        "LessThanOrEqual",
-        "Contains",
-        "StartsWith",
-        "EndsWith",
-        "InRange",
-        "IsNull",
-        "IsEmpty",
-        "IsTrue",
-        "IsNullOrEmpty",
-        "IsNotNullOrEmpty",
-        "Normalize",
-        "RegexMatch"
-      ],
-      "x-ms-enum": {
-        "name": "DHRuleOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Equal",
-            "value": "Equal"
-          },
-          {
-            "name": "NotEqual",
-            "value": "NotEqual"
-          },
-          {
-            "name": "GreaterThan",
-            "value": "GreaterThan"
-          },
-          {
-            "name": "GreaterThanOrEqual",
-            "value": "GreaterThanOrEqual"
-          },
-          {
-            "name": "LessThan",
-            "value": "LessThan"
-          },
-          {
-            "name": "LessThanOrEqual",
-            "value": "LessThanOrEqual"
-          },
-          {
-            "name": "Contains",
-            "value": "Contains"
-          },
-          {
-            "name": "StartsWith",
-            "value": "StartsWith"
-          },
-          {
-            "name": "EndsWith",
-            "value": "EndsWith"
-          },
-          {
-            "name": "InRange",
-            "value": "InRange"
-          },
-          {
-            "name": "IsNull",
-            "value": "IsNull"
-          },
-          {
-            "name": "IsEmpty",
-            "value": "IsEmpty"
-          },
-          {
-            "name": "IsTrue",
-            "value": "IsTrue"
-          },
-          {
-            "name": "IsNullOrEmpty",
-            "value": "IsNullOrEmpty"
-          },
-          {
-            "name": "IsNotNullOrEmpty",
-            "value": "IsNotNullOrEmpty"
-          },
-          {
-            "name": "Normalize",
-            "value": "Normalize"
-          },
-          {
-            "name": "RegexMatch",
-            "value": "RegexMatch"
-          }
-        ]
-      }
-    },
-    "DHRuleSimple": {
-      "type": "object",
-      "description": "A leaf rule that compares a checkPoint against an operand using an operator.",
-      "properties": {
-        "typeProperties": {
-          "$ref": "#/definitions/DHRuleSimpleTypeProperties",
-          "description": "The simple rule's type-specific properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DHRule"
-        }
-      ],
-      "x-ms-discriminator-value": "SimpleRule"
-    },
-    "DHRuleSimpleTypeProperties": {
-      "type": "object",
-      "description": "Type-specific properties for a simple rule.",
-      "properties": {
-        "checkPoint": {
-          "$ref": "#/definitions/DHRuleCheckPoint",
-          "description": "The data point to evaluate."
-        },
-        "operator": {
-          "$ref": "#/definitions/DHRuleOperator",
-          "description": "The comparison operator."
-        },
-        "operand": {
-          "type": "string",
-          "description": "The operand to compare against. Optional for operators that take no operand (e.g. IsNull)."
-        }
-      }
-    },
-    "DHRuleType": {
-      "type": "string",
-      "description": "Discriminator for governance rule variants.",
-      "enum": [
-        "RuleGroup",
-        "SimpleRule",
-        "ExpressionRule"
-      ],
-      "x-ms-enum": {
-        "name": "DHRuleType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RuleGroup",
-            "value": "RuleGroup",
-            "description": "A logical group combining nested rules."
-          },
-          {
-            "name": "SimpleRule",
-            "value": "SimpleRule",
-            "description": "A simple checkPoint/operator/operand rule."
-          },
-          {
-            "name": "ExpressionRule",
-            "value": "ExpressionRule",
-            "description": "An expression-based rule."
-          }
-        ]
-      }
-    },
-    "DHScheduleFrequency": {
-      "type": "string",
-      "description": "Frequency for a control schedule.",
-      "enum": [
-        "Month",
-        "Week",
-        "Day"
-      ],
-      "x-ms-enum": {
-        "name": "DHScheduleFrequency",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Month",
-            "value": "Month",
-            "description": "Monthly frequency."
-          },
-          {
-            "name": "Week",
-            "value": "Week",
-            "description": "Weekly frequency."
-          },
-          {
-            "name": "Day",
-            "value": "Day",
-            "description": "Daily frequency."
-          }
-        ]
-      }
-    },
-    "DHScheduleMonthlyOccurrence": {
-      "type": "object",
-      "description": "A monthly occurrence specification for a control schedule (e.g. the 2nd Tuesday of each month).",
-      "properties": {
-        "day": {
-          "$ref": "#/definitions/DHScheduleWeekDay",
-          "description": "The day of the week."
-        },
-        "occurrence": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The ordinal occurrence within the month (e.g. 1 for first, 2 for second)."
-        }
-      },
-      "required": [
-        "day",
-        "occurrence"
-      ]
-    },
-    "DHScheduleRecurrence": {
-      "type": "object",
-      "description": "Fine-grained recurrence pattern for a control schedule.",
-      "properties": {
-        "hours": {
-          "type": "array",
-          "description": "Hours of the day at which to run (0 through 23).",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "minutes": {
-          "type": "array",
-          "description": "Minutes of the hour at which to run (0 through 59).",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "monthDays": {
-          "type": "array",
-          "description": "Days of the month on which to run (1 through 31).",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "weekDays": {
-          "type": "array",
-          "description": "Days of the week on which to run.",
-          "items": {
-            "$ref": "#/definitions/DHScheduleWeekDay"
-          }
-        },
-        "monthlyOccurrences": {
-          "type": "array",
-          "description": "Monthly occurrence specifications (e.g. 2nd Tuesday).",
-          "items": {
-            "$ref": "#/definitions/DHScheduleMonthlyOccurrence"
-          }
-        }
-      },
-      "required": [
-        "hours",
-        "minutes",
-        "monthDays",
-        "weekDays",
-        "monthlyOccurrences"
-      ]
-    },
-    "DHScheduleState": {
-      "type": "string",
-      "description": "State of a schedule.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DHScheduleState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The schedule is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The schedule is disabled."
-          }
-        ]
-      }
-    },
-    "DHScheduleWeekDay": {
-      "type": "string",
-      "description": "Day of the week used by control schedule recurrence.",
-      "enum": [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "x-ms-enum": {
-        "name": "DHScheduleWeekDay",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Sunday",
-            "value": "Sunday"
-          },
-          {
-            "name": "Monday",
-            "value": "Monday"
-          },
-          {
-            "name": "Tuesday",
-            "value": "Tuesday"
-          },
-          {
-            "name": "Wednesday",
-            "value": "Wednesday"
-          },
-          {
-            "name": "Thursday",
-            "value": "Thursday"
-          },
-          {
-            "name": "Friday",
-            "value": "Friday"
-          },
-          {
-            "name": "Saturday",
-            "value": "Saturday"
-          }
-        ]
-      }
-    },
-    "DHScore": {
+    "ControlScore": {
       "type": "object",
       "description": "An individual score record returned with control responses.",
       "properties": {
@@ -2121,43 +1572,98 @@
         "score"
       ]
     },
-    "DHScoreAggregated": {
+    "ControlStatus": {
+      "type": "string",
+      "description": "Status of a governance control.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "InDevelopment"
+      ],
+      "x-ms-enum": {
+        "name": "ControlStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The control is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The control is disabled."
+          },
+          {
+            "name": "InDevelopment",
+            "value": "InDevelopment",
+            "description": "The control is in development."
+          }
+        ]
+      }
+    },
+    "ControlStatusPaletteConfig": {
       "type": "object",
-      "description": "Score data aggregated by control or control group. The shape of items depends on the `type` query parameter used in the request: when `type=ControlNode`, `controlId` and `computingJobId` are populated; when `type=ControlGroup`, those fields are omitted.",
+      "description": "Configuration for selecting a status palette for a control.",
       "properties": {
-        "controlGroupId": {
+        "fallbackStatusPaletteId": {
           "type": "string",
-          "description": "The control group ID."
+          "description": "The palette to apply when no rule matches."
         },
-        "scheduleRunId": {
-          "type": "string",
-          "description": "The schedule run ID."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the score."
-        },
-        "score": {
+        "targetScore": {
           "type": "number",
           "format": "double",
-          "description": "The score value."
+          "description": "The target score used by certain palette rules."
         },
-        "controlId": {
+        "statusPaletteRules": {
+          "type": "array",
+          "description": "Rules evaluated in order to select a palette.",
+          "items": {
+            "$ref": "#/definitions/ControlStatusPaletteRule"
+          }
+        }
+      }
+    },
+    "ControlStatusPaletteRule": {
+      "type": "object",
+      "description": "A single status palette assignment based on a rule. When the rule evaluates true the referenced palette is applied.",
+      "properties": {
+        "statusPaletteId": {
           "type": "string",
-          "description": "The control ID. Present only when the query was issued with `type=ControlNode`."
+          "description": "The palette to apply when the rule matches."
         },
-        "computingJobId": {
-          "type": "string",
-          "description": "The computing job ID. Present only when the query was issued with `type=ControlNode`."
+        "rule": {
+          "$ref": "#/definitions/Rule",
+          "description": "The rule that drives the palette assignment."
         }
       },
       "required": [
-        "controlGroupId",
-        "scheduleRunId",
-        "time",
-        "score"
+        "rule"
       ]
+    },
+    "ControlType": {
+      "type": "string",
+      "description": "Discriminator for governance control variants.",
+      "enum": [
+        "ControlGroup",
+        "ControlNode"
+      ],
+      "x-ms-enum": {
+        "name": "ControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ControlGroup",
+            "value": "ControlGroup",
+            "description": "A control group that aggregates child controls."
+          },
+          {
+            "name": "ControlNode",
+            "value": "ControlNode",
+            "description": "A leaf control that performs evaluations."
+          }
+        ]
+      }
     },
     "DataSourceType": {
       "type": "string",
@@ -2182,6 +1688,40 @@
           }
         ]
       }
+    },
+    "ExpressionRule": {
+      "type": "object",
+      "description": "A rule whose evaluation is driven by an expression string.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/ExpressionRuleTypeProperties",
+          "description": "The expression rule's type-specific properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rule"
+        }
+      ],
+      "x-ms-discriminator-value": "ExpressionRule"
+    },
+    "ExpressionRuleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for an expression rule.",
+      "properties": {
+        "checkPoint": {
+          "$ref": "#/definitions/RuleCheckPoint",
+          "description": "The data point evaluated by the expression."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The expression to evaluate."
+        }
+      },
+      "required": [
+        "checkPoint",
+        "expression"
+      ]
     },
     "ManagedPrivateEndpointExistsResponse": {
       "type": "object",
@@ -2313,6 +1853,234 @@
         "end"
       ]
     },
+    "Rule": {
+      "type": "object",
+      "description": "Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RuleType",
+          "description": "Discriminates the rule variant."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "RuleCheckPoint": {
+      "type": "string",
+      "description": "Identifier of a checkable property within a rule.",
+      "enum": [
+        "Score",
+        "DataProductDescriptionContent",
+        "DataProductDescriptionLength"
+      ],
+      "x-ms-enum": {
+        "name": "RuleCheckPoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Score",
+            "value": "Score"
+          },
+          {
+            "name": "DataProductDescriptionContent",
+            "value": "DataProductDescriptionContent"
+          },
+          {
+            "name": "DataProductDescriptionLength",
+            "value": "DataProductDescriptionLength"
+          }
+        ]
+      }
+    },
+    "RuleGroup": {
+      "type": "object",
+      "description": "A rule that combines nested rules with a logical operator.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/RuleGroupTypeProperties",
+          "description": "The group's type-specific properties (groupOperator + nested rules)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rule"
+        }
+      ],
+      "x-ms-discriminator-value": "RuleGroup"
+    },
+    "RuleGroupOperator": {
+      "type": "string",
+      "description": "Logical combinator for a rule group.",
+      "enum": [
+        "And",
+        "Or",
+        "Not"
+      ],
+      "x-ms-enum": {
+        "name": "RuleGroupOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "And",
+            "value": "And"
+          },
+          {
+            "name": "Or",
+            "value": "Or"
+          },
+          {
+            "name": "Not",
+            "value": "Not"
+          }
+        ]
+      }
+    },
+    "RuleGroupTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a rule group.",
+      "properties": {
+        "groupOperator": {
+          "$ref": "#/definitions/RuleGroupOperator",
+          "description": "How nested rules are combined."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The nested rules combined by groupOperator.",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        }
+      }
+    },
+    "RuleOperator": {
+      "type": "string",
+      "description": "Comparison operator for a simple rule.",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "GreaterThan",
+        "GreaterThanOrEqual",
+        "LessThan",
+        "LessThanOrEqual",
+        "Contains",
+        "StartsWith",
+        "EndsWith",
+        "InRange",
+        "IsNull",
+        "IsEmpty",
+        "IsTrue",
+        "IsNullOrEmpty",
+        "IsNotNullOrEmpty",
+        "Normalize",
+        "RegexMatch"
+      ],
+      "x-ms-enum": {
+        "name": "RuleOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "Equal"
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual"
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan"
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual"
+          },
+          {
+            "name": "LessThan",
+            "value": "LessThan"
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual"
+          },
+          {
+            "name": "Contains",
+            "value": "Contains"
+          },
+          {
+            "name": "StartsWith",
+            "value": "StartsWith"
+          },
+          {
+            "name": "EndsWith",
+            "value": "EndsWith"
+          },
+          {
+            "name": "InRange",
+            "value": "InRange"
+          },
+          {
+            "name": "IsNull",
+            "value": "IsNull"
+          },
+          {
+            "name": "IsEmpty",
+            "value": "IsEmpty"
+          },
+          {
+            "name": "IsTrue",
+            "value": "IsTrue"
+          },
+          {
+            "name": "IsNullOrEmpty",
+            "value": "IsNullOrEmpty"
+          },
+          {
+            "name": "IsNotNullOrEmpty",
+            "value": "IsNotNullOrEmpty"
+          },
+          {
+            "name": "Normalize",
+            "value": "Normalize"
+          },
+          {
+            "name": "RegexMatch",
+            "value": "RegexMatch"
+          }
+        ]
+      }
+    },
+    "RuleType": {
+      "type": "string",
+      "description": "Discriminator for governance rule variants.",
+      "enum": [
+        "RuleGroup",
+        "SimpleRule",
+        "ExpressionRule"
+      ],
+      "x-ms-enum": {
+        "name": "RuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RuleGroup",
+            "value": "RuleGroup",
+            "description": "A logical group combining nested rules."
+          },
+          {
+            "name": "SimpleRule",
+            "value": "SimpleRule",
+            "description": "A simple checkPoint/operator/operand rule."
+          },
+          {
+            "name": "ExpressionRule",
+            "value": "ExpressionRule",
+            "description": "An expression-based rule."
+          }
+        ]
+      }
+    },
     "Schedule": {
       "type": "object",
       "description": "A control schedule resource.",
@@ -2328,11 +2096,11 @@
           "readOnly": true
         },
         "frequency": {
-          "$ref": "#/definitions/DHScheduleFrequency",
+          "$ref": "#/definitions/ScheduleFrequency",
           "description": "The frequency of the schedule."
         },
         "status": {
-          "$ref": "#/definitions/DHScheduleState",
+          "$ref": "#/definitions/ScheduleState",
           "description": "The status of the schedule."
         },
         "interval": {
@@ -2351,7 +2119,7 @@
           "description": "The end time of the schedule."
         },
         "recurrence": {
-          "$ref": "#/definitions/DHScheduleRecurrence",
+          "$ref": "#/definitions/ScheduleRecurrence",
           "description": "Fine-grained recurrence pattern within the chosen frequency."
         },
         "timeZone": {
@@ -2359,6 +2127,238 @@
           "description": "The time zone (IANA name) used to interpret startTime, endTime, and recurrence."
         }
       }
+    },
+    "ScheduleFrequency": {
+      "type": "string",
+      "description": "Frequency for a control schedule.",
+      "enum": [
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly frequency."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly frequency."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily frequency."
+          }
+        ]
+      }
+    },
+    "ScheduleMonthlyOccurrence": {
+      "type": "object",
+      "description": "A monthly occurrence specification for a control schedule (e.g. the 2nd Tuesday of each month).",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/ScheduleWeekDay",
+          "description": "The day of the week."
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordinal occurrence within the month (e.g. 1 for first, 2 for second)."
+        }
+      },
+      "required": [
+        "day",
+        "occurrence"
+      ]
+    },
+    "ScheduleRecurrence": {
+      "type": "object",
+      "description": "Fine-grained recurrence pattern for a control schedule.",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "Hours of the day at which to run (0 through 23).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "Minutes of the hour at which to run (0 through 59).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "description": "Days of the month on which to run (1 through 31).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "Days of the week on which to run.",
+          "items": {
+            "$ref": "#/definitions/ScheduleWeekDay"
+          }
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "description": "Monthly occurrence specifications (e.g. 2nd Tuesday).",
+          "items": {
+            "$ref": "#/definitions/ScheduleMonthlyOccurrence"
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes",
+        "monthDays",
+        "weekDays",
+        "monthlyOccurrences"
+      ]
+    },
+    "ScheduleState": {
+      "type": "string",
+      "description": "State of a schedule.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The schedule is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The schedule is disabled."
+          }
+        ]
+      }
+    },
+    "ScheduleWeekDay": {
+      "type": "string",
+      "description": "Day of the week used by control schedule recurrence.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleWeekDay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          },
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          }
+        ]
+      }
+    },
+    "SimpleRule": {
+      "type": "object",
+      "description": "A leaf rule that compares a checkPoint against an operand using an operator.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/SimpleRuleTypeProperties",
+          "description": "The simple rule's type-specific properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rule"
+        }
+      ],
+      "x-ms-discriminator-value": "SimpleRule"
+    },
+    "SimpleRuleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a simple rule.",
+      "properties": {
+        "checkPoint": {
+          "$ref": "#/definitions/RuleCheckPoint",
+          "description": "The data point to evaluate."
+        },
+        "operator": {
+          "$ref": "#/definitions/RuleOperator",
+          "description": "The comparison operator."
+        },
+        "operand": {
+          "type": "string",
+          "description": "The operand to compare against. Optional for operators that take no operand (e.g. IsNull)."
+        }
+      }
+    },
+    "StatusPalette": {
+      "type": "object",
+      "description": "A status palette definition (color label).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the palette."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the palette."
+        },
+        "name": {
+          "type": "string",
+          "description": "The palette name."
+        },
+        "color": {
+          "type": "string",
+          "description": "The palette color (typically a hex code)."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color"
+      ]
     },
     "StorageConfig": {
       "type": "object",
