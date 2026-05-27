@@ -36,28 +36,28 @@ op FoundryDataPlaneOperation<
 
 /** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
 union AgentDefinitionOptInKeys {
-  hosted_agents_v1_preview: "HostedAgents=V1Preview",
-  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
   code_agents_v1_preview: "CodeAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
+  hosted_agents_v1_preview: "HostedAgents=V1Preview",
+  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
 
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
+  agents_optimization_v1_preview: "AgentsOptimization=V1Preview",
+  data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   evaluations_v1_preview: "Evaluations=V1Preview",
-  schedules_v1_preview: "Schedules=V1Preview",
-  red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
-  routines_v1_preview: "Routines=V1Preview",
-  toolboxes_v1_preview: "Toolboxes=V1Preview",
-  skills_v1_preview: "Skills=V1Preview",
-  data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
-  agents_optimization_v1_preview: "AgentsOptimization=V1Preview",
+  red_teams_v1_preview: "RedTeams=V1Preview",
+  routines_v1_preview: "Routines=V1Preview",
+  schedules_v1_preview: "Schedules=V1Preview",
+  skills_v1_preview: "Skills=V1Preview",
+  toolboxes_v1_preview: "Toolboxes=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
