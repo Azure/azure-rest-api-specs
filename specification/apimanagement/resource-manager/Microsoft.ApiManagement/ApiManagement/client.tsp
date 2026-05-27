@@ -1198,3 +1198,329 @@ op replacePurge(
   Azure.Core.ipV4Address,
   "csharp"
 );
+
+// =========================================================================
+// C#-specific: Backward-compat interface renames to restore previously
+// shipped Resource/Collection/Patch wrapper class names. These rename the
+// `@armResourceOperations` INTERFACE (not the model), because the MPG
+// generator derives wrapper-class names from the interface name (with
+// the trailing "Contracts" or plural "s" stripped). The corresponding
+// Data class names come from the model-level @@clientName decorators
+// above and are unchanged by these.
+// =========================================================================
+@@clientName(
+  Microsoft.ApiManagement.BackendContracts,
+  "ApiManagementBackend",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.CertificateContracts,
+  "ApiManagementCertificate",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.DiagnosticContracts,
+  "ApiManagementDiagnostic",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GlobalSchemaContracts,
+  "ApiManagementGlobalSchema",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GroupContracts,
+  "ApiManagementGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.IssueContracts,
+  "ApiManagementIssue",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.LoggerContracts,
+  "ApiManagementLogger",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.NamedValueContracts,
+  "ApiManagementNamedValue",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.NotificationContracts,
+  "ApiManagementNotification",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.OpenidConnectProviderContracts,
+  "ApiManagementOpenIdConnectProvider",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PolicyContracts,
+  "ApiManagementPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PolicyFragmentContracts,
+  "PolicyFragmentContract",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductContracts,
+  "ApiManagementProduct",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SubscriptionContracts,
+  "ApiManagementSubscription",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.UserSubscription,
+  "ApiManagementUserSubscription",
+  "csharp"
+);
+
+// Workspace-scoped interfaces: rename to ServiceWorkspace* prefix.
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApi,
+  "ServiceWorkspaceApi",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiDiagnostic,
+  "ServiceWorkspaceApiDiagnostic",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiOperation,
+  "ServiceWorkspaceApiOperation",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiOperationPolicy,
+  "ServiceWorkspaceApiOperationPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiPolicy,
+  "ServiceWorkspaceApiPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiRelease,
+  "ServiceWorkspaceApiRelease",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiSchema,
+  "ServiceWorkspaceApiSchema",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceApiVersionSet,
+  "ServiceWorkspaceApiVersionSet",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceBackend,
+  "ServiceWorkspaceBackend",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceCertificate,
+  "ServiceWorkspaceCertificate",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceDiagnostic,
+  "ServiceWorkspaceDiagnostic",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceGlobalSchema,
+  "ServiceWorkspaceSchema",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceGroup,
+  "ServiceWorkspaceGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceLogger,
+  "ServiceWorkspaceLogger",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceNamedValue,
+  "ServiceWorkspaceNamedValue",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceNotification,
+  "ServiceWorkspaceNotification",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspacePolicy,
+  "ServiceWorkspacePolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspacePolicyFragment,
+  "ServiceWorkspacePolicyFragment",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceProduct,
+  "ServiceWorkspaceProduct",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceProductApiLink,
+  "ServiceWorkspaceProductApiLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceProductGroupLink,
+  "ServiceWorkspaceProductGroupLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceProductPolicy,
+  "ServiceWorkspaceProductPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceSubscription,
+  "ServiceWorkspaceSubscription",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceTag,
+  "ServiceWorkspaceTag",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceTagApiLink,
+  "ServiceWorkspaceTagApiLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceTagOperationLink,
+  "ServiceWorkspaceTagOperationLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.WorkspaceTagProductLink,
+  "ServiceWorkspaceTagProductLink",
+  "csharp"
+);
+
+// Service-prefix non-workspace interfaces (product/tag link tables, sub-resources).
+@@clientName(
+  Microsoft.ApiManagement.ProductApiLinkContracts,
+  "ServiceProductApiLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductGroupLinkContracts,
+  "ServiceProductGroupLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagApiLinkContracts,
+  "ServiceTagApiLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagOperationLinkContracts,
+  "ServiceTagOperationLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagProductLinkContracts,
+  "ServiceTagProductLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductWiki,
+  "ServiceProductWiki",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GraphQLApiResolverPolicy,
+  "ServiceApiResolverPolicy",
+  "csharp"
+);
+
+// Resource-suffix removal for `@armResourceOperations` interfaces whose
+// MPG-derived wrapper name needlessly duplicates the word "Resource".
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementServiceResources,
+  "ApiManagementService",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementGatewayResources,
+  "ApiManagementGateway",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementGatewayConfigConnectionResources,
+  "ApiGatewayConfigConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources,
+  "ApiManagementWorkspaceLinks",
+  "csharp"
+);
+
+// Policy / settings / portal: rename interfaces that emit oddly-named wrappers.
+@@clientName(
+  Microsoft.ApiManagement.ProductPolicy,
+  "ApiManagementProductPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.DelegationSettings,
+  "ApiManagementPortalDelegationSetting",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SignInSettings,
+  "ApiManagementPortalSignInSetting",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SignUpSettings,
+  "ApiManagementPortalSignUpSetting",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ContentItemContracts,
+  "ApiManagementContentItem",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ContentTypeContracts,
+  "ApiManagementContentType",
+  "csharp"
+);
+
+// Tag-on-Api / Tag-on-Product wrappers (renamed for parity with previously shipped names).
+@@clientName(
+  Microsoft.ApiManagement.TagContractOperation,
+  "ApiOperationTag",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagContractOperationGroup,
+  "ApiManagementProductTag",
+  "csharp"
+);
