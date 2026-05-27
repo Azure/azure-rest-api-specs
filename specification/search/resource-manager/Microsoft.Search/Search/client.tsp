@@ -997,7 +997,6 @@ model AccessRulePropertiesSubscriptionsItem {
   "SearchServicePublicInternetAccess",
   "csharp"
 );
-@@access(PublicNetworkAccess, Access.public, "csharp");
 @@clientName(SkuName, "SearchServiceSkuName", "csharp");
 @@clientName(AdminKeyKind, "SearchServiceAdminKeyKind", "csharp");
 @@clientName(AdminKeyResult, "SearchServiceAdminKeyResult", "csharp");
