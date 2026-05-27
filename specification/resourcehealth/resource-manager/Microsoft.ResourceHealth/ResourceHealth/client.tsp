@@ -148,8 +148,16 @@ using Microsoft.ResourceHealth;
 );
 
 // Restore GA SDK types for EventImpactedResourceProperties: string -> ResourceIdentifier/ResourceType
-@@alternateType(EventImpactedResourceProperties.targetResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(EventImpactedResourceProperties.targetResourceType, Azure.Core.armResourceType, "csharp");
+@@alternateType(
+  EventImpactedResourceProperties.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventImpactedResourceProperties.targetResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
 
 // Override subscription-level Event resource class names for csharp to match GA SDK names
 @@clientLocation(
