@@ -123,12 +123,7 @@ model WebSearchToolboxTool extends ToolboxTool {
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `mcp`.
-   */
-  type: "mcp";
-
-  ...ToolFields<OpenAI.MCPTool>;
+  ...OpenAI.MCPTool;
 }
 
 /**

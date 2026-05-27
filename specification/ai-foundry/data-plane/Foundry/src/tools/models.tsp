@@ -46,7 +46,10 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
-      ...OptionalToolProjectConnectionIdField,
+      /**
+       * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+       */
+      project_connection_id?: string,
     }
   );
 
