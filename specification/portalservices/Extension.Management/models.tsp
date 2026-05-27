@@ -1,8 +1,14 @@
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PortalServices;
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(
+  Azure.ResourceManager.Operations.list,
+  "List the operations for the Microsoft.PortalServices provider."
+);
 
 /**
  * The extension source kind
@@ -656,6 +662,7 @@ model PortalTenantCompileFileProperties {
   /**
    * The current registration or provisioning state which only appears in the response.
    */
+  @removed(Versions.v2025_11_01)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
