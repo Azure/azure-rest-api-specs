@@ -7,7 +7,9 @@ import "./src/models/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/evaluation-rules/routes.tsp";
-// Don't import openai-evaluations, we'll use Stainless SDK like in AgentsV2
+// Don't import openai-evaluations routes, we'll use Stainless SDK like in AgentsV2.
+// Import only the models so Java codegen can expose Azure-specific eval extensions.
+import "./src/openai-evaluations/models.tsp";
 // import "./openai-evaluations/routes.tsp";
 import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
@@ -161,6 +163,15 @@ namespace Azure.AI.Projects;
 
 // Needs forceful exposition
 @@access(FoundryFeaturesOptInKeys, Access.public);
+
+// Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
+@@usage(GraderAzureAIEvaluator, Usage.input | Usage.output | Usage.json, "java");
+@@access(GraderAzureAIEvaluator, Access.public, "java");
+@@usage(TestingCriterionAzureAIEvaluator,
+  Usage.input | Usage.output | Usage.json,
+  "java"
+);
+@@access(TestingCriterionAzureAIEvaluator, Access.public, "java");
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredential", "java");
