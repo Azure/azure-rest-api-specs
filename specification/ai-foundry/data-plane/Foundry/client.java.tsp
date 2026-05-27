@@ -243,6 +243,9 @@ union GrammarSyntaxExpandable {
   "java"
 );
 
+//Suppress the OpenAI.Tool type to prevent from emitting entire tool model tree
+@@alternateType(OpenAI.Tool, unknown, "java");
+
 // SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
 @@alternateType(SasCredential.type, CredentialType, "java");
 
