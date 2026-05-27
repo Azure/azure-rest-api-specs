@@ -505,6 +505,12 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 - Properties that are arrays **MUST** have plural names (e.g., `scopes`, `rules`, `addresses`) -- not singular (e.g., `scope`, `rule`, `address`). Singular names suggest a single value, not a collection.
 
+### 8.3b Array Item Identifiers (`x-ms-identifiers`)
+
+- Arrays of objects in ARM responses **SHOULD** declare which item property uniquely identifies an item via the `x-ms-identifiers` extension. This is what enables ARM tooling (Resource Graph, Change Analysis, What-If) to track individual items across PUT/PATCH/GET responses without treating the array as opaque.
+- **In TypeSpec source, do NOT use `@extension("x-ms-identifiers", ...)`** to control this. `@extension` is forbidden in TypeSpec source for any reason. Use the `@key` decorator on the identity property of the item type, or the `@identifiers(#["<propertyName>"])` decorator on the array property. For arrays whose items have no logical identifier, use `@identifiers(#[])`. See `typespec-review.instructions.md` Section 6.5 (TSP-ARRAY-IDENTIFIERS) for the full rule with examples.
+- A `#suppress` on `missing-x-ms-identifiers` is acceptable **only** as a last resort and must include a real technical justification (no `FIXME`/`TODO`/`TBD`, no "matching another resource" — see `typespec-review.instructions.md` Section 4.1 Warning Suppression Policy).
+
 ### 8.4 Use Specific Types Instead of Generic Strings (ACTIVELY REVIEW)
 
 > **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for common property names (e.g., `createdAt`, `lastModifiedAt`, `deletedAt`) and resource identifier naming rules (use `Id` suffix, not `Uri` or `Name`).
@@ -1138,6 +1144,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Immutable properties: unchanged values accepted, changed values rejected with 400 (OAPI030, OAPI031)
 - ✅ Fields have clear ownership — server-owned (readOnly) or client-owned (preserved exactly); no server auto-updates of client fields (OAPI034)
 - ✅ Array ordering preserved in PUT/PATCH responses (OAPI024)
+- ✅ Arrays of objects declare `x-ms-identifiers` via TypeSpec `@key` or `@identifiers` (not `@extension`) — see TSP-ARRAY-IDENTIFIERS
 - ✅ Property value casing and formatting preserved — no normalization (OAPI026)
 
 ### List APIs
