@@ -71,15 +71,14 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
     Response =
       | ArmResponse<SBNamespace>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+      | (CreatedResponse & SBNamespace)
+      | AcceptedResponse,
     Error = ErrorResponse
   >;
 
