@@ -196,6 +196,7 @@ namespace Azure.AI.Projects;
 
 // Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
 @@convenientAPI(Skills.deleteSkill, false, "java");
+@@convenientAPI(Skills.deleteSkillVersion, false, "java");
 
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
