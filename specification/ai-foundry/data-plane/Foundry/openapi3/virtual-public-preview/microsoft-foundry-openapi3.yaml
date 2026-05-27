@@ -20556,6 +20556,12 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         container:
           anyOf:
             - type: string
@@ -23622,6 +23628,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -24607,6 +24619,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -25224,6 +25242,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -29402,6 +29426,12 @@ components:
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
           default: local_shell
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -29552,6 +29582,9 @@ components:
                 - never
               nullable: true
           default: always
+        project_connection_id:
+          type: string
+          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -34574,10 +34607,18 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
-          description: Custom search configuration for domain-restricted web search.
+          description: |-
+            The project connections attached to this tool. There can be a maximum of 1 connection
+            resource attached to the tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -37957,11 +37998,11 @@ components:
       properties:
         project_connection_id:
           type: string
-          description: Project connection ID for grounding with Bing custom search.
+          description: Project connection id for grounding with bing custom search
         instance_name:
           type: string
           description: Name of the custom configuration instance given to config.
-      description: A web search configuration for Bing custom search.
+      description: A web search configuration for bing custom search
     WebSearchToolboxTool:
       type: object
       required:
@@ -37993,7 +38034,9 @@ components:
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
-          description: Custom search configuration for domain-restricted web search.
+          description: |-
+            The project connections attached to this tool. There can be a maximum of 1 connection
+            resource attached to the tool.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A web search tool stored in a toolbox.

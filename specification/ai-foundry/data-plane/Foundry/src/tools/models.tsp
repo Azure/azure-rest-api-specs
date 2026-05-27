@@ -45,6 +45,76 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.MCPTool,
+    {
+      ...ToolProjectConnectionIdExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.WebSearchTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+
+      /**
+       * The project connections attached to this tool. There can be a maximum of 1 connection
+       * resource attached to the tool.
+       */
+      custom_search_configuration?: WebSearchConfiguration,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.CodeInterpreterTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.ImageGenTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.LocalShellToolParam,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.FunctionShellToolParam,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.FileSearchTool,
+    {
+      ...ToolNameAndDescriptionExtension,
+    }
+  );
+
+  /**
+   * A web search configuration for bing custom search
+   */
+  model WebSearchConfiguration {
+    /**
+     * Project connection id for grounding with bing custom search
+     */
+    project_connection_id: string;
+
+    /**
+     * Name of the custom configuration instance given to config.
+     */
+    instance_name: string;
+  }
+
   /**
    * Optional name and description fields for tool definitions and nested tool configurations.
    */
@@ -61,29 +131,14 @@ namespace Azure.AI.Projects {
   };
 
   /**
-   * A web search configuration for Bing custom search.
+   * Optional project connection ID for tools that can use project-scoped connections.
    */
-  model WebSearchConfiguration {
+  alias ToolProjectConnectionIdExtension = {
     /**
-     * Project connection ID for grounding with Bing custom search.
+     * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
      */
-    project_connection_id: string;
-
-    /**
-     * Name of the custom configuration instance given to config.
-     */
-    instance_name: string;
-  }
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.WebSearchTool,
-    {
-      /**
-       * Custom search configuration for domain-restricted web search.
-       */
-      custom_search_configuration?: WebSearchConfiguration,
-    }
-  );
+    project_connection_id?: string;
+  };
 
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
@@ -161,6 +216,16 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * Shared fields for Azure AI Search tool definitions.
+   */
+  model AzureAISearchToolFields {
+    /**
+     * The azure ai search index resource.
+     */
+    azure_ai_search: AzureAISearchToolResource;
+  }
+
+  /**
    * The input definition information for an Azure AI search tool as used to configure an agent.
    */
   model AzureAISearchTool extends OpenAI.Tool {
@@ -170,11 +235,7 @@ namespace Azure.AI.Projects {
     type: "azure_ai_search";
 
     ...ToolNameAndDescriptionExtension;
-
-    /**
-     * The azure ai search index resource.
-     */
-    azure_ai_search: AzureAISearchToolResource;
+    ...AzureAISearchToolFields;
   }
 
   /**
@@ -252,6 +313,16 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * Shared fields for OpenAPI tool definitions.
+   */
+  model OpenApiToolFields {
+    /**
+     * The openapi function definition.
+     */
+    openapi: OpenApiFunctionDefinition;
+  }
+
+  /**
    * The input definition information for an OpenAPI tool as used to configure an agent.
    */
   model OpenApiTool extends OpenAI.Tool {
@@ -260,10 +331,7 @@ namespace Azure.AI.Projects {
      */
     type: "openapi";
 
-    /**
-     * The openapi function definition.
-     */
-    openapi: OpenApiFunctionDefinition;
+    ...OpenApiToolFields;
   }
 
   /**
@@ -691,16 +759,9 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * An agent implementing the A2A protocol.
+   * Shared fields for A2A tool definitions.
    */
-  model A2APreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `"a2a_preview`.
-     */
-    type: "a2a_preview";
-
-    ...ToolNameAndDescriptionExtension;
-
+  model A2APreviewToolFields {
     /**
      * Base URL of the agent.
      */
@@ -720,6 +781,29 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * An agent implementing the A2A protocol.
+   */
+  model A2APreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a_preview`.
+     */
+    type: "a2a_preview";
+
+    ...ToolNameAndDescriptionExtension;
+    ...A2APreviewToolFields;
+  }
+
+  /**
+   * Shared fields for WorkIQ tool definitions.
+   */
+  model WorkIQPreviewToolFields {
+    /**
+     * The ID of the WorkIQ project connection.
+     */
+    project_connection_id: string;
+  }
+
+  /**
    * A WorkIQ server-side tool.
    */
   model WorkIQPreviewTool extends OpenAI.Tool {
@@ -728,23 +812,14 @@ namespace Azure.AI.Projects {
      */
     type: "work_iq_preview";
 
-    /**
-     * The ID of the WorkIQ project connection.
-     */
-    project_connection_id: string;
-
+    ...WorkIQPreviewToolFields;
     ...ToolNameAndDescriptionExtension;
   }
 
   /**
-   * A FabricIQ server-side tool.
+   * Shared fields for FabricIQ tool definitions.
    */
-  model FabricIQPreviewTool extends OpenAI.Tool {
-    /**
-     * The object type, which is always 'fabric_iq_preview'.
-     */
-    type: "fabric_iq_preview";
-
+  model FabricIQPreviewToolFields {
     /**
      * The ID of the FabricIQ project connection.
      */
@@ -766,7 +841,18 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
+  }
 
+  /**
+   * A FabricIQ server-side tool.
+   */
+  model FabricIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'fabric_iq_preview'.
+     */
+    type: "fabric_iq_preview";
+
+    ...FabricIQPreviewToolFields;
     ...ToolNameAndDescriptionExtension;
   }
 
