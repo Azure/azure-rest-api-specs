@@ -60,7 +60,8 @@ interface OperationContractOps
         @minLength(1)
         @maxLength(80)
         operationId: string,
-      }
+      },
+      ResourceName = "ApiOperation"
     > {}
 
 @armResourceOperations
@@ -241,7 +242,8 @@ interface WorkspaceApiOperationOps
         @minLength(1)
         @maxLength(80)
         operationId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiOperation"
     > {}
 
 @armResourceOperations

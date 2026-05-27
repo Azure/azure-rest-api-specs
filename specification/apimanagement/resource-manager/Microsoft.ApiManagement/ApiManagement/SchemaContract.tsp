@@ -60,7 +60,8 @@ interface SchemaContractOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ApiSchema"
     > {}
 
 @armResourceOperations
@@ -219,7 +220,8 @@ interface WorkspaceApiSchemaOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiSchema"
     > {}
 
 @armResourceOperations

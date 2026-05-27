@@ -60,7 +60,8 @@ interface ApiReleaseContractOps
         @minLength(1)
         @maxLength(80)
         releaseId: string,
-      }
+      },
+      ResourceName = "ApiRelease"
     > {}
 
 @armResourceOperations
@@ -235,7 +236,8 @@ interface WorkspaceApiReleaseOps
         @minLength(1)
         @maxLength(80)
         releaseId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiRelease"
     > {}
 
 @armResourceOperations

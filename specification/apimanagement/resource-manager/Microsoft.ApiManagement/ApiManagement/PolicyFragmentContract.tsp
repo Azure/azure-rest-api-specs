@@ -52,7 +52,8 @@ interface PolicyFragmentContractOps
         @minLength(1)
         @maxLength(80)
         id: string,
-      }
+      },
+      ResourceName = "PolicyFragmentContract"
     > {}
 
 @armResourceOperations
@@ -236,7 +237,8 @@ interface WorkspacePolicyFragmentOps
         @minLength(1)
         @maxLength(80)
         id: string,
-      }
+      },
+      ResourceName = "ServiceWorkspacePolicyFragment"
     > {}
 
 @armResourceOperations

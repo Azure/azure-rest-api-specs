@@ -350,6 +350,11 @@ op replacePurge(
   "csharp"
 );
 @@clientName(
+  Microsoft.ApiManagement.OpenidConnectProviderContract,
+  "ApiManagementOpenIdConnectProvider",
+  "csharp"
+);
+@@clientName(
   Microsoft.ApiManagement.OperationContract,
   "ApiOperation",
   "csharp"
@@ -1029,10 +1034,12 @@ op replacePurge(
   "csharp"
 );
 
-@@clientName(TagContracts, "OperationTag", "csharp");
-@@clientName(Tag, "ApiTag", "csharp");
-@@clientName(TagContractOperation, "ProductTag", "csharp");
-@@clientName(TagContractOperationGroup, "ApiManagementTag", "csharp");
+// Tag 4-scope and Service-link renames are now handled by §4.18 ResourceName
+// friendly names in the corresponding LegacyOperations aliases inside
+// TagContract.tsp, ProductApiLinkContract.tsp, etc. The previous interface-level
+// @@clientName decorators here were ineffective because the generator derives
+// Resource/Collection/RestOperations class names during resource detection,
+// before @@clientName takes effect.
 
 @@clientName(
   GatewayContracts.gatewayApiGetEntityTag,
@@ -1200,263 +1207,21 @@ op replacePurge(
 );
 
 // =========================================================================
-// C#-specific: Backward-compat interface renames to restore previously
-// shipped Resource/Collection/Patch wrapper class names. These rename the
-// `@armResourceOperations` INTERFACE (not the model), because the MPG
-// generator derives wrapper-class names from the interface name (with
-// the trailing "Contracts" or plural "s" stripped). The corresponding
-// Data class names come from the model-level @@clientName decorators
-// above and are unchanged by these.
+// C#-specific: All wrapper class name renames (parent-scope, workspace-scope,
+// extension-scope, multi-scope shared models) are applied via the §4.18
+// ResourceName positional template parameter on the LegacyOperations alias
+// in the resource .tsp files. The previous interface-level @@clientName
+// approach had no effect because the generator derives Resource/Collection/
+// RestOperations class names during resource detection, before @@clientName
+// is applied. Friendly name is the proper fix.
 // =========================================================================
-@@clientName(
-  Microsoft.ApiManagement.BackendContracts,
-  "ApiManagementBackend",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.CertificateContracts,
-  "ApiManagementCertificate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.DiagnosticContracts,
-  "ApiManagementDiagnostic",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GlobalSchemaContracts,
-  "ApiManagementGlobalSchema",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GroupContracts,
-  "ApiManagementGroup",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.IssueContracts,
-  "ApiManagementIssue",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.LoggerContracts,
-  "ApiManagementLogger",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NamedValueContracts,
-  "ApiManagementNamedValue",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NotificationContracts,
-  "ApiManagementNotification",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.OpenidConnectProviderContracts,
-  "ApiManagementOpenIdConnectProvider",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.PolicyContracts,
-  "ApiManagementPolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.PolicyFragmentContracts,
-  "PolicyFragmentContract",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductContracts,
-  "ApiManagementProduct",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.SubscriptionContracts,
-  "ApiManagementSubscription",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.UserSubscription,
-  "ApiManagementUserSubscription",
-  "csharp"
-);
 
-// Workspace-scoped interfaces: rename to ServiceWorkspace* prefix.
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApi,
-  "ServiceWorkspaceApi",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiDiagnostic,
-  "ServiceWorkspaceApiDiagnostic",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiOperation,
-  "ServiceWorkspaceApiOperation",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiOperationPolicy,
-  "ServiceWorkspaceApiOperationPolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiPolicy,
-  "ServiceWorkspaceApiPolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiRelease,
-  "ServiceWorkspaceApiRelease",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiSchema,
-  "ServiceWorkspaceApiSchema",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceApiVersionSet,
-  "ServiceWorkspaceApiVersionSet",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceBackend,
-  "ServiceWorkspaceBackend",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceCertificate,
-  "ServiceWorkspaceCertificate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceDiagnostic,
-  "ServiceWorkspaceDiagnostic",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceGlobalSchema,
-  "ServiceWorkspaceSchema",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceGroup,
-  "ServiceWorkspaceGroup",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceLogger,
-  "ServiceWorkspaceLogger",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceNamedValue,
-  "ServiceWorkspaceNamedValue",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceNotification,
-  "ServiceWorkspaceNotification",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspacePolicy,
-  "ServiceWorkspacePolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspacePolicyFragment,
-  "ServiceWorkspacePolicyFragment",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceProduct,
-  "ServiceWorkspaceProduct",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceProductApiLink,
-  "ServiceWorkspaceProductApiLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceProductGroupLink,
-  "ServiceWorkspaceProductGroupLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceProductPolicy,
-  "ServiceWorkspaceProductPolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceSubscription,
-  "ServiceWorkspaceSubscription",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceTag,
-  "ServiceWorkspaceTag",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceTagApiLink,
-  "ServiceWorkspaceTagApiLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceTagOperationLink,
-  "ServiceWorkspaceTagOperationLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.WorkspaceTagProductLink,
-  "ServiceWorkspaceTagProductLink",
-  "csharp"
-);
-
-// Service-prefix non-workspace interfaces (product/tag link tables, sub-resources).
-@@clientName(
-  Microsoft.ApiManagement.ProductApiLinkContracts,
-  "ServiceProductApiLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductGroupLinkContracts,
-  "ServiceProductGroupLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagApiLinkContracts,
-  "ServiceTagApiLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagOperationLinkContracts,
-  "ServiceTagOperationLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagProductLinkContracts,
-  "ServiceTagProductLink",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductWiki,
-  "ServiceProductWiki",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GraphQLApiResolverPolicy,
-  "ServiceApiResolverPolicy",
-  "csharp"
-);
+// Service-prefix non-workspace interfaces (product/tag link tables, sub-resources)
+// and ProductWiki / GraphQLApiResolverPolicy are now handled by §4.18
+// ResourceName friendly names in their respective LegacyOperations aliases
+// (ProductApiLinkContract.tsp, ProductGroupLinkContract.tsp, TagApiLinkContract.tsp,
+// TagOperationLinkContract.tsp, TagProductLinkContract.tsp, WikiContract.tsp,
+// PolicyContract.tsp).
 
 // Resource-suffix removal for `@armResourceOperations` interfaces whose
 // MPG-derived wrapper name needlessly duplicates the word "Resource".

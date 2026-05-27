@@ -60,7 +60,8 @@ interface IssueContractOps
         @minLength(1)
         @maxLength(256)
         issueId: string,
-      }
+      },
+      ResourceName = "ApiIssue"
     > {}
 
 @armResourceOperations
@@ -231,7 +232,8 @@ interface IssueOps
         @minLength(1)
         @maxLength(256)
         issueId: string,
-      }
+      },
+      ResourceName = "ApiManagementIssue"
     > {}
 
 @armResourceOperations

@@ -51,7 +51,8 @@ interface GroupContractOps
         @minLength(1)
         @maxLength(256)
         groupId: string,
-      }
+      },
+      ResourceName = "ApiManagementGroup"
     > {}
 
 alias GroupUserParentParameters = {
@@ -395,7 +396,8 @@ interface WorkspaceGroupOps
         @minLength(1)
         @maxLength(256)
         groupId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceGroup"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })

@@ -52,7 +52,8 @@ interface ApiVersionSetContractOps
         @minLength(1)
         @maxLength(80)
         versionSetId: string,
-      }
+      },
+      ResourceName = "ApiVersionSet"
     > {}
 
 @armResourceOperations
@@ -219,7 +220,8 @@ interface WorkspaceApiVersionSetOps
         @minLength(1)
         @maxLength(80)
         versionSetId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiVersionSet"
     > {}
 
 @armResourceOperations

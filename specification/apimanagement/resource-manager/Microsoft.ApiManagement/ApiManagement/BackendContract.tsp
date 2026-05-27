@@ -51,7 +51,8 @@ interface BackendContractOps
         @minLength(1)
         @maxLength(80)
         backendId: string,
-      }
+      },
+      ResourceName = "ApiManagementBackend"
     > {}
 
 @armResourceOperations
@@ -229,7 +230,8 @@ interface WorkspaceBackendOps
         @minLength(1)
         @maxLength(80)
         backendId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceBackend"
     > {}
 
 @armResourceOperations

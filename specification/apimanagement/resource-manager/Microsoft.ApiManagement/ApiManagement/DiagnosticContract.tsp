@@ -60,7 +60,8 @@ interface DiagnosticContractOps
         @minLength(1)
         @maxLength(80)
         diagnosticId: string,
-      }
+      },
+      ResourceName = "ApiDiagnostic"
     > {}
 
 @armResourceOperations
@@ -218,7 +219,8 @@ interface DiagnosticOps
         @minLength(1)
         @maxLength(80)
         diagnosticId: string,
-      }
+      },
+      ResourceName = "ApiManagementDiagnostic"
     > {}
 
 @armResourceOperations
@@ -384,7 +386,8 @@ interface WorkspaceDiagnosticOps
         @minLength(1)
         @maxLength(80)
         diagnosticId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceDiagnostic"
     > {}
 
 @armResourceOperations
@@ -558,7 +561,8 @@ interface WorkspaceApiDiagnosticOps
         @minLength(1)
         @maxLength(80)
         diagnosticId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiDiagnostic"
     > {}
 
 @armResourceOperations

@@ -63,7 +63,8 @@ interface TagDescriptionContractsOps
         @minLength(1)
         @maxLength(80)
         tagDescriptionId: string,
-      }
+      },
+      ResourceName = "ApiTagDescription"
     > {}
 
 @armResourceOperations
