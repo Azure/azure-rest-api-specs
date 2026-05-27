@@ -15,7 +15,8 @@ using Azure.ClientGenerator.Core;
 //
 // TODO: Remove once the upstream emitter bug is fixed and rolled into the
 // spec-gen-sdk pipeline. Tracking issue: https://github.com/Azure/autorest.typescript/issues/3990
-@@alternateType(Microsoft.CodeTransparency.SignedStatement.body,
+@@alternateType(
+  Microsoft.CodeTransparency.SignedStatement.body,
   string,
   "javascript"
 );
