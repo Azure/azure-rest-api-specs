@@ -14,7 +14,9 @@ namespace Microsoft.ManagedNetworkFabric;
 @added(Versions.v2026_01_15_preview)
 model EdgeConnector extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the EdgeConnector.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @minLength(1)
+  @maxLength(128)
   @path
   @key("edgeConnectorName")
   @segment("edgeConnectors")
