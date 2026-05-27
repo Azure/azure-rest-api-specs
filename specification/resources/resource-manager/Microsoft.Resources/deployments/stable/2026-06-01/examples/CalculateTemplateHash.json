@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "template": {
+      "$schema": "http://schemas.management.azure.com/deploymentTemplate?api-version=2014-04-01-preview",
+      "contentVersion": "1.0.0.0",
+      "outputs": {
+        "string": {
+          "type": "string",
+          "value": "myvalue"
+        }
+      },
+      "parameters": {
+        "string": {
+          "type": "string"
+        }
+      },
+      "resources": [],
+      "variables": {
+        "array": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "bool": true,
+        "int": 42,
+        "object": {
+          "object": {
+            "location": "West US",
+            "vmSize": "Large"
+          }
+        },
+        "string": "string"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "minifiedTemplate": "{\"$SCHEMA\":\"HTTP://SCHEMAS.MANAGEMENT.AZURE.COM/DEPLOYMENTTEMPLATE?API-VERSION=2014-04-01-PREVIEW\",\"CONTENTVERSION\":\"1.0.0.0\",\"PARAMETERS\":{\"STRING\":{\"TYPE\":\"STRING\"}},\"VARIABLES\":{\"STRING\":\"STRING\",\"INT\":42,\"BOOL\":TRUE,\"ARRAY\":[1,2,3,4],\"OBJECT\":{\"OBJECT\":{\"VMSIZE\":\"LARGE\",\"LOCATION\":\"WEST US\"}}},\"RESOURCES\":[],\"OUTPUTS\":{\"STRING\":{\"TYPE\":\"STRING\",\"VALUE\":\"MYVALUE\"}}}",
+        "templateHash": "695440707931307747"
+      }
+    }
+  },
+  "operationId": "Deployments_CalculateTemplateHash",
+  "title": "Calculate template hash"
+}
