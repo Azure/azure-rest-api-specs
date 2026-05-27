@@ -27,28 +27,13 @@ interface ScenarioRuns {
    * this URL; clients must keep polling until they receive 200, which carries
    * the final ScenarioRun body.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LRO polling endpoint that returns body in both 200 and 202"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO polling endpoint returns body in 202 to reflect current status"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LRO polling endpoint that returns body in both 200 and 202 responses."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO polling endpoint returns body in 202 to reflect the current run state."
   #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "LRO uses final-state-via:location pattern, not status monitor"
-  @summary("Get a scenario run.")
-  @autoRoute
-  @armResourceRead(ScenarioRun)
-  @get
-  get(
-    ...ResourceInstanceParameters<ScenarioRun>,
-  ): ArmResponse<ScenarioRun> | (AcceptedResponse & {
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    @header("Location")
-    location: url;
-
-    @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.")
-    @minValue(0)
-    @maxValue(2147483647)
-    @header("Retry-After")
-    retryAfter?: int32;
-
-    @bodyRoot body: ScenarioRun;
-  }) | ErrorResponse;
+  get is ArmResourceRead<
+    ScenarioRun,
+    Response = ArmResponse<ScenarioRun> | ScenarioRunInProgressResponse
+  >;
 
   /**
    * Get a list of scenario runs.

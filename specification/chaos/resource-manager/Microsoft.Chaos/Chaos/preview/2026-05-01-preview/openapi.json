@@ -3836,7 +3836,6 @@
         "tags": [
           "ScenarioRuns"
         ],
-        "summary": "Get a scenario run.",
         "description": "Get a scenario run.\n\nThis endpoint is also the polling target for ScenarioConfigurations.execute\nand ScenarioRuns.cancel (final-state-via: location). While the run is in\nprogress the service returns 202 with a Location header pointing back to\nthis URL; clients must keep polling until they receive 200, which carries\nthe final ScenarioRun body.",
         "parameters": [
           {
@@ -3883,7 +3882,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Indicates the scenario run is still in progress. Clients polling via the\nLocation header should continue polling until a 200 response is returned.\nThe body reflects the current run state at the time of the poll.",
             "schema": {
               "$ref": "#/definitions/ScenarioRun"
             },
@@ -3891,12 +3890,12 @@
               "Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "The URL where the status of the long-running operation can be polled."
               },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "description": "The number of seconds the client should wait before polling again.",
                 "minimum": 0,
                 "maximum": 2147483647
               }
