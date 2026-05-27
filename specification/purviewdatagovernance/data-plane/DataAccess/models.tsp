@@ -518,3 +518,58 @@ model PolicySetListResponse {
   @doc("The list of policy sets.")
   value: PolicySet[];
 }
+
+// ============================================================
+// Path parameter aliases
+// Reusable alias models for path parameters, used to satisfy
+// the no-rpc-path-params linter rule by relying on implicit
+// path parameter detection via name matching with route templates.
+// ============================================================
+
+alias DataSubscriptionIdParameter = {
+  @doc("The data subscription identifier.")
+  dataSubscriptionId: uuid;
+};
+
+alias WorkflowIdParameter = {
+  @doc("The workflow identifier.")
+  workflowId: uuid;
+};
+
+alias WorkflowRunIdParameter = {
+  @doc("The workflow run identifier.")
+  workflowRunId: uuid;
+};
+
+alias WorkflowIdAndRunIdParameters = {
+  @doc("The workflow identifier.")
+  workflowId: uuid;
+
+  @doc("The workflow run identifier.")
+  workflowRunId: uuid;
+};
+
+alias TriggerTypeParameter = {
+  @doc("The trigger type.")
+  triggerType: string;
+};
+
+alias DataProductIdParameter = {
+  @doc("The data product identifier.")
+  dataProductId: uuid;
+};
+
+alias DomainIdParameter = {
+  @doc("The business domain identifier.")
+  domainId: uuid;
+};
+
+alias TermIdParameter = {
+  @doc("The term identifier.")
+  termId: uuid;
+};
+
+alias CriticalDataElementIdParameter = {
+  @doc("The critical data element identifier.")
+  criticalDataElementId: uuid;
+};

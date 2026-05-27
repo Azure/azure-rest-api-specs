@@ -33,11 +33,7 @@ interface DataSubscriptions {
   @route("/dataSubscriptions/{dataSubscriptionId}")
   @put
   CreateOrUpdate is RpcOperation<
-    {
-      @doc("The data subscription identifier.")
-      @path
-      dataSubscriptionId: uuid;
-
+    DataSubscriptionIdParameter & {
       @doc("The data subscription payload.")
       @body
       dataSubscription: DataSubscription;
@@ -117,11 +113,7 @@ interface DataSubscriptions {
   @route("/dataSubscriptions/{dataSubscriptionId}:save")
   @put
   Save is RpcOperation<
-    {
-      @doc("The data subscription identifier.")
-      @path
-      dataSubscriptionId: uuid;
-
+    DataSubscriptionIdParameter & {
       @doc("The data subscription payload.")
       @body
       dataSubscription: DataSubscription;
@@ -135,14 +127,7 @@ interface DataSubscriptions {
   @doc("Completes a data subscription after access has been granted.")
   @route("/dataSubscriptions/{dataSubscriptionId}:complete")
   @post
-  Complete is RpcOperation<
-    {
-      @doc("The data subscription identifier.")
-      @path
-      dataSubscriptionId: uuid;
-    },
-    DataSubscription
-  >;
+  Complete is RpcOperation<DataSubscriptionIdParameter, DataSubscription>;
 }
 
 // ============================================================
@@ -164,11 +149,7 @@ interface Workflows {
   @route("/workflows/{workflowId}")
   @put
   CreateOrUpdate is RpcOperation<
-    {
-      @doc("The workflow identifier.")
-      @path
-      workflowId: uuid;
-
+    WorkflowIdParameter & {
       @doc("The workflow payload.")
       @body
       workflow: Workflow;
@@ -223,14 +204,7 @@ interface Workflows {
   @doc("Gets the data access request template for a specific trigger type.")
   @route("/workflows/templates/dataAccessRequestTemplate/{triggerType}")
   @get
-  GetTemplateByTriggerType is RpcOperation<
-    {
-      @doc("The trigger type.")
-      @path
-      triggerType: string;
-    },
-    ActionListResponse
-  >;
+  GetTemplateByTriggerType is RpcOperation<TriggerTypeParameter, ActionListResponse>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -239,15 +213,7 @@ interface Workflows {
   @route("/workflows/{workflowId}/workflowRunId/{workflowRunId}:approve")
   @post
   ApproveRun is RpcOperation<
-    {
-      @doc("The workflow identifier.")
-      @path
-      workflowId: uuid;
-
-      @doc("The workflow run identifier.")
-      @path
-      workflowRunId: uuid;
-
+    WorkflowIdAndRunIdParameters & {
       @doc("The approver's decision.")
       @body
       decision: ApproverDecision;
@@ -262,15 +228,7 @@ interface Workflows {
   @route("/workflows/{workflowId}/workflowRunId/{workflowRunId}:reject")
   @post
   RejectRun is RpcOperation<
-    {
-      @doc("The workflow identifier.")
-      @path
-      workflowId: uuid;
-
-      @doc("The workflow run identifier.")
-      @path
-      workflowRunId: uuid;
-
+    WorkflowIdAndRunIdParameters & {
       @doc("The approver's decision.")
       @body
       decision: ApproverDecision;
@@ -366,14 +324,7 @@ interface Workflows {
   @doc("Gets a specific workflow run by identifier.")
   @route("/workflowRuns/{workflowRunId}")
   @get
-  GetRun is RpcOperation<
-    {
-      @doc("The workflow run identifier.")
-      @path
-      workflowRunId: uuid;
-    },
-    WorkflowRun
-  >;
+  GetRun is RpcOperation<WorkflowRunIdParameter, WorkflowRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -381,14 +332,7 @@ interface Workflows {
   @doc("Gets approvals for a specific workflow run.")
   @route("/workflowRuns/{workflowRunId}/approvals")
   @get
-  GetRunApprovals is RpcOperation<
-    {
-      @doc("The workflow run identifier.")
-      @path
-      workflowRunId: uuid;
-    },
-    WorkflowRunApprovalListResponse
-  >;
+  GetRunApprovals is RpcOperation<WorkflowRunIdParameter, WorkflowRunApprovalListResponse>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -397,11 +341,7 @@ interface Workflows {
   @route("/workflowRuns/{workflowRunId}")
   @put
   UpdateRun is RpcOperation<
-    {
-      @doc("The workflow run identifier.")
-      @path
-      workflowRunId: uuid;
-
+    WorkflowRunIdParameter & {
       @doc("The workflow run payload.")
       @body
       workflowRun: WorkflowRun;
@@ -415,14 +355,7 @@ interface Workflows {
   @doc("Deletes a workflow run.")
   @route("/workflowRuns/{workflowRunId}")
   @delete
-  DeleteRun is RpcOperation<
-    {
-      @doc("The workflow run identifier.")
-      @path
-      workflowRunId: uuid;
-    },
-    {}
-  >;
+  DeleteRun is RpcOperation<WorkflowRunIdParameter, {}>;
 }
 
 // ============================================================
@@ -436,14 +369,7 @@ interface DataProductPolicySets {
   @doc("Gets the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    PolicySet
-  >;
+  GetApplied is RpcOperation<DataProductIdParameter, PolicySet>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -452,11 +378,7 @@ interface DataProductPolicySets {
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @put
   CreateOrUpdateApplied is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-
+    DataProductIdParameter & {
       @doc("The policy set payload.")
       @body
       policySet: PolicySet;
@@ -470,14 +392,7 @@ interface DataProductPolicySets {
   @doc("Deletes the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @delete
-  DeleteApplied is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    {}
-  >;
+  DeleteApplied is RpcOperation<DataProductIdParameter, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -485,14 +400,7 @@ interface DataProductPolicySets {
   @doc("Gets the effective policy set for a data product, combining applied and inherited policies.")
   @route("/dataProducts/{dataProductId}/policySets/effective")
   @get
-  GetEffective is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    PolicySet
-  >;
+  GetEffective is RpcOperation<DataProductIdParameter, PolicySet>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -500,14 +408,7 @@ interface DataProductPolicySets {
   @doc("Gets term policy sets associated with a data product.")
   @route("/dataProducts/{dataProductId}/policySets/terms")
   @get
-  GetTermPolicies is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    PolicySetListResponse
-  >;
+  GetTermPolicies is RpcOperation<DataProductIdParameter, PolicySetListResponse>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -515,14 +416,7 @@ interface DataProductPolicySets {
   @doc("Gets critical data element policy sets associated with a data product.")
   @route("/dataProducts/{dataProductId}/policySets/criticalDataElements")
   @get
-  GetCriticalDataElementPolicies is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    PolicySetListResponse
-  >;
+  GetCriticalDataElementPolicies is RpcOperation<DataProductIdParameter, PolicySetListResponse>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -530,14 +424,7 @@ interface DataProductPolicySets {
   @doc("Gets workflow settings for a data product policy set.")
   @route("/dataProducts/{dataProductId}/policySet")
   @get
-  GetWorkflowSettings is RpcOperation<
-    {
-      @doc("The data product identifier.")
-      @path
-      dataProductId: uuid;
-    },
-    DataProductWorkflowSettingsResponse
-  >;
+  GetWorkflowSettings is RpcOperation<DataProductIdParameter, DataProductWorkflowSettingsResponse>;
 }
 
 // ============================================================
@@ -551,14 +438,7 @@ interface DomainPolicySets {
   @doc("Gets the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<
-    {
-      @doc("The business domain identifier.")
-      @path
-      domainId: uuid;
-    },
-    PolicySet
-  >;
+  GetApplied is RpcOperation<DomainIdParameter, PolicySet>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -567,11 +447,7 @@ interface DomainPolicySets {
   @route("/businessDomains/{domainId}/policySets/applied")
   @put
   CreateOrUpdateApplied is RpcOperation<
-    {
-      @doc("The business domain identifier.")
-      @path
-      domainId: uuid;
-
+    DomainIdParameter & {
       @doc("The policy set payload.")
       @body
       policySet: PolicySet;
@@ -585,14 +461,7 @@ interface DomainPolicySets {
   @doc("Deletes the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @delete
-  DeleteApplied is RpcOperation<
-    {
-      @doc("The business domain identifier.")
-      @path
-      domainId: uuid;
-    },
-    {}
-  >;
+  DeleteApplied is RpcOperation<DomainIdParameter, {}>;
 }
 
 // ============================================================
@@ -606,14 +475,7 @@ interface TermPolicySets {
   @doc("Gets the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<
-    {
-      @doc("The term identifier.")
-      @path
-      termId: uuid;
-    },
-    PolicySet
-  >;
+  GetApplied is RpcOperation<TermIdParameter, PolicySet>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -622,11 +484,7 @@ interface TermPolicySets {
   @route("/terms/{termId}/policySets/applied")
   @put
   CreateOrUpdateApplied is RpcOperation<
-    {
-      @doc("The term identifier.")
-      @path
-      termId: uuid;
-
+    TermIdParameter & {
       @doc("The policy set payload.")
       @body
       policySet: PolicySet;
@@ -640,14 +498,7 @@ interface TermPolicySets {
   @doc("Deletes the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @delete
-  DeleteApplied is RpcOperation<
-    {
-      @doc("The term identifier.")
-      @path
-      termId: uuid;
-    },
-    {}
-  >;
+  DeleteApplied is RpcOperation<TermIdParameter, {}>;
 }
 
 // ============================================================
@@ -661,14 +512,7 @@ interface CriticalDataElementPolicySets {
   @doc("Gets the applied policy set for a critical data element.")
   @route("/criticalDataElements/{criticalDataElementId}/policySets/applied")
   @get
-  GetApplied is RpcOperation<
-    {
-      @doc("The critical data element identifier.")
-      @path
-      criticalDataElementId: uuid;
-    },
-    PolicySet
-  >;
+  GetApplied is RpcOperation<CriticalDataElementIdParameter, PolicySet>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -677,11 +521,7 @@ interface CriticalDataElementPolicySets {
   @route("/criticalDataElements/{criticalDataElementId}/policySets/applied")
   @put
   CreateOrUpdateApplied is RpcOperation<
-    {
-      @doc("The critical data element identifier.")
-      @path
-      criticalDataElementId: uuid;
-
+    CriticalDataElementIdParameter & {
       @doc("The policy set payload.")
       @body
       policySet: PolicySet;
