@@ -143,6 +143,7 @@ using Azure.AI.Projects;
 @@clientName(ToolboxObject, "ToolboxDetails", "java");
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
+@@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
