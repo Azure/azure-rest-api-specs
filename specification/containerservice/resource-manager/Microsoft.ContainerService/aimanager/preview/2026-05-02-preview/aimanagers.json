@@ -2133,7 +2133,7 @@
         "totalHourlyPrice": {
           "type": "number",
           "format": "double",
-          "description": "Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`. Omitted when `feasible` is `false`.",
+          "description": "Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`.",
           "readOnly": true
         },
         "priceAsOf": {
@@ -2144,12 +2144,12 @@
         },
         "feasible": {
           "type": "boolean",
-          "description": "Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.).",
+          "description": "Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.). This field gates the mutually exclusive properties on this model:\n- When `feasible` is `true`: `totalHourlyPrice` is set and `infeasibilityReason` is omitted.\n- When `feasible` is `false`: `infeasibilityReason` is set and `totalHourlyPrice` is omitted.",
           "readOnly": true
         },
-        "infeasibleError": {
-          "$ref": "#/definitions/InfeasibleError",
-          "description": "Error detail explaining why the plan is not deployable. Omitted when `feasible` is `true`.",
+        "infeasibilityReason": {
+          "$ref": "#/definitions/InfeasibilityReason",
+          "description": "Reason explaining why the plan is not deployable. This is a per-plan annotation, not an ARM error envelope.",
           "readOnly": true
         }
       },
@@ -2222,7 +2222,7 @@
     },
     "CredentialValue": {
       "type": "object",
-      "description": "A credential value. Exactly one variant must be set.",
+      "description": "A credential value. Exactly one variant must be set.\n\nIn the current API version, only the `inline` variant is supported. Future\nAPI versions are expected to add additional credential kinds (for example,\nmanaged identity and Key Vault secret references) as sibling variants on\nthis model.",
       "properties": {
         "inline": {
           "$ref": "#/definitions/InlineCredential",
@@ -2254,6 +2254,26 @@
         ]
       }
     },
+    "InfeasibilityReason": {
+      "type": "object",
+      "description": "Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an ARM error envelope.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InfeasibleCode",
+          "description": "Machine-readable reason code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable message accompanying `code`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "InfeasibleCode": {
       "type": "string",
       "description": "The reason a `CalculateCostPlan` is not deployable.",
@@ -2283,26 +2303,6 @@
           }
         ]
       }
-    },
-    "InfeasibleError": {
-      "type": "object",
-      "description": "Error detail explaining why a `CalculateCostPlan` is not deployable.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/InfeasibleCode",
-          "description": "Machine-readable reason code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable message accompanying `code`.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "InlineCredential": {
       "type": "object",
@@ -2340,7 +2340,7 @@
     },
     "ModelDeployment": {
       "type": "object",
-      "description": "A running deployment of a model in an AI Manager namespace.",
+      "description": "A running deployment of a model in an AI Manager namespace.\n\nPUT (create or update) on this resource is a full replace: the request body\nrepresents the complete desired state, and any optional property omitted\nfrom the body is reset to its default value (or cleared, if it has no\ndefault). Callers must always send the full desired state on every PUT.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ModelDeploymentProperties",
@@ -2385,7 +2385,7 @@
       "properties": {
         "values": {
           "type": "object",
-          "description": "Free-form override key/value pairs. Recognized keys are documented per release.",
+          "description": "Experimental free-form override key/value pairs. Subject to change without notice; not part of the stable contract. Recognized keys are documented per release and may be added, renamed, or removed at any time.",
           "additionalProperties": {
             "type": "string"
           }
@@ -2750,7 +2750,7 @@
     },
     "ScalingProfile": {
       "type": "object",
-      "description": "Scaling configuration for a model deployment. Exactly one of `manual` or `autoscale` must be set.",
+      "description": "Scaling configuration for a model deployment. Exactly one of `manual` or\n`autoscale` must be set.\n\nThis mutual-exclusion constraint is enforced by the service at request\nvalidation time, not by the schema. A PUT request that sets both `manual`\nand `autoscale`, or sets neither, is rejected with HTTP 400 (Bad Request)\nand an `InvalidScalingProfile` error code;",
       "properties": {
         "manual": {
           "$ref": "#/definitions/ManualScalingProfile",
@@ -2766,26 +2766,26 @@
       "type": "object",
       "description": "Estimated relative inference performance of a single model replica on a given GPU SKU. Each metric is a scaling coefficient in the range `[0, 1]` relative to the best-performing SKU for this model, which scores `1`.",
       "properties": {
-        "relativeLatency": {
+        "relativeLatencyScore": {
           "type": "number",
           "format": "float",
-          "description": "Relative inference latency coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model).",
+          "description": "Relative inference latency score in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model). Note: this is a normalized score, not a raw latency ratio -- a larger value indicates lower latency.",
           "minimum": 0,
           "maximum": 1,
           "readOnly": true
         },
-        "relativeThroughput": {
+        "relativeThroughputScore": {
           "type": "number",
           "format": "float",
-          "description": "Relative inference throughput coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).",
+          "description": "Relative inference throughput score in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).",
           "minimum": 0,
           "maximum": 1,
           "readOnly": true
         }
       },
       "required": [
-        "relativeLatency",
-        "relativeThroughput"
+        "relativeLatencyScore",
+        "relativeThroughputScore"
       ]
     }
   },

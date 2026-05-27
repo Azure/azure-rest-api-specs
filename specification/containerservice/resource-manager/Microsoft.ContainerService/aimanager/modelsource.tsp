@@ -53,7 +53,14 @@ union ModelSourceType {
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("A credential value. Exactly one variant must be set.")
+@doc("""
+  A credential value. Exactly one variant must be set.
+  
+  In the current API version, only the `inline` variant is supported. Future
+  API versions are expected to add additional credential kinds (for example,
+  managed identity and Key Vault secret references) as sibling variants on
+  this model.
+  """)
 model CredentialValue {
   @doc("An inline credential containing a secret value supplied in the request payload.")
   inline?: InlineCredential;

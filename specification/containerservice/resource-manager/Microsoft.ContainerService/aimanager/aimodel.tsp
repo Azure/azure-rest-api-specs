@@ -100,7 +100,7 @@ model CalculateCostPlan {
   vmHourlyPrice: float64;
 
   @visibility(Lifecycle.Read)
-  @doc("Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`. Omitted when `feasible` is `false`.")
+  @doc("Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`.")
   totalHourlyPrice?: float64;
 
   @visibility(Lifecycle.Read)
@@ -108,12 +108,16 @@ model CalculateCostPlan {
   priceAsOf?: utcDateTime;
 
   @visibility(Lifecycle.Read)
-  @doc("Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.).")
+  @doc("""
+    Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.). This field gates the mutually exclusive properties on this model:
+    - When `feasible` is `true`: `totalHourlyPrice` is set and `infeasibilityReason` is omitted.
+    - When `feasible` is `false`: `infeasibilityReason` is set and `totalHourlyPrice` is omitted.
+    """)
   feasible: boolean;
 
   @visibility(Lifecycle.Read)
-  @doc("Error detail explaining why the plan is not deployable. Omitted when `feasible` is `true`.")
-  infeasibleError?: InfeasibleError;
+  @doc("Reason explaining why the plan is not deployable. This is a per-plan annotation, not an ARM error envelope.")
+  infeasibilityReason?: InfeasibilityReason;
 }
 
 @added(Versions.v2026_05_02_preview)
@@ -122,19 +126,19 @@ model ServingPerformanceEstimation {
   @visibility(Lifecycle.Read)
   @minValue(0)
   @maxValue(1)
-  @doc("Relative inference latency coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model).")
-  relativeLatency: float32;
+  @doc("Relative inference latency score in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model). Note: this is a normalized score, not a raw latency ratio -- a larger value indicates lower latency.")
+  relativeLatencyScore: float32;
 
   @visibility(Lifecycle.Read)
   @minValue(0)
   @maxValue(1)
-  @doc("Relative inference throughput coefficient in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).")
-  relativeThroughput: float32;
+  @doc("Relative inference throughput score in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).")
+  relativeThroughputScore: float32;
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("Error detail explaining why a `CalculateCostPlan` is not deployable.")
-model InfeasibleError {
+@doc("Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an ARM error envelope.")
+model InfeasibilityReason {
   @visibility(Lifecycle.Read)
   @doc("Machine-readable reason code.")
   code: InfeasibleCode;

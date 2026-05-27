@@ -34,12 +34,15 @@ scalar ModelSourceResourceId
     }
   ]>;
 
-// The model reference type. Phase 1 accepts an `AIModel` resource id only.
-// Future model resource types (e.g. a user-registered BYO model) can be
-// added by widening the underlying ARM type without a breaking change.
-
 @added(Versions.v2026_05_02_preview)
-@doc("A running deployment of a model in an AI Manager namespace.")
+@doc("""
+  A running deployment of a model in an AI Manager namespace.
+  
+  PUT (create or update) on this resource is a full replace: the request body
+  represents the complete desired state, and any optional property omitted
+  from the body is reset to its default value (or cleared, if it has no
+  default). Callers must always send the full desired state on every PUT.
+  """)
 @resource("modelDeployments")
 @parentResource(AIManagerNamespace)
 model ModelDeployment is ProxyResource<ModelDeploymentProperties> {
@@ -160,12 +163,20 @@ model ModelDeploymentStatus {
 @doc("User overrides for a model deployment.")
 model ModelDeploymentOverrides {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form override key/value pairs."
-  @doc("Free-form override key/value pairs. Recognized keys are documented per release.")
+  @doc("Experimental free-form override key/value pairs. Subject to change without notice; not part of the stable contract. Recognized keys are documented per release and may be added, renamed, or removed at any time.")
   values?: Record<string>;
 }
 
 @added(Versions.v2026_05_02_preview)
-@doc("Scaling configuration for a model deployment. Exactly one of `manual` or `autoscale` must be set.")
+@doc("""
+  Scaling configuration for a model deployment. Exactly one of `manual` or
+  `autoscale` must be set.
+  
+  This mutual-exclusion constraint is enforced by the service at request
+  validation time, not by the schema. A PUT request that sets both `manual`
+  and `autoscale`, or sets neither, is rejected with HTTP 400 (Bad Request)
+  and an `InvalidScalingProfile` error code;
+  """)
 model ScalingProfile {
   @doc("Manual scaling configuration with a fixed replica count. Mutually exclusive with `autoscale`.")
   manual?: ManualScalingProfile;
