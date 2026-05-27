@@ -11700,9 +11700,7 @@ components:
             If not provided, defaults to  `/.well-known/agent-card.json`
         project_connection_id:
           type: string
-          description: |-
-            The connection ID in the project for the A2A server.
-            The connection stores authentication and other connection details needed to connect to the A2A server.
+          description: The project connection ID used by this tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
@@ -11727,9 +11725,7 @@ components:
             If not provided, defaults to  `/.well-known/agent-card.json`
         project_connection_id:
           type: string
-          description: |-
-            The connection ID in the project for the A2A server.
-            The connection stores authentication and other connection details needed to connect to the A2A server.
+          description: The project connection ID used by this tool.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
@@ -18132,7 +18128,7 @@ components:
           description: The object type, which is always 'fabric_iq_preview'.
         project_connection_id:
           type: string
-          description: The ID of the FabricIQ project connection.
+          description: The project connection ID used by this tool.
         server_label:
           type: string
           description: (Optional) The label of the FabricIQ MCP server to connect to.
@@ -18172,7 +18168,7 @@ components:
           description: The type of the tool. Always `fabric_iq_preview`.
         project_connection_id:
           type: string
-          description: The ID of the FabricIQ project connection.
+          description: The project connection ID used by this tool.
         server_label:
           type: string
           description: (Optional) The label of the FabricIQ MCP server to connect to.
@@ -19176,7 +19172,7 @@ components:
           default: always
         project_connection_id:
           type: string
-          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+          description: The project connection ID used by this tool.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An MCP tool stored in a toolbox.
@@ -29584,7 +29580,7 @@ components:
           default: always
         project_connection_id:
           type: string
-          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+          description: The project connection ID used by this tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -38072,7 +38068,7 @@ components:
           description: The object type, which is always 'work_iq_preview'.
         project_connection_id:
           type: string
-          description: The ID of the WorkIQ project connection.
+          description: The project connection ID used by this tool.
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
@@ -38095,7 +38091,7 @@ components:
           description: The type of the tool. Always `work_iq_preview`.
         project_connection_id:
           type: string
-          description: The ID of the WorkIQ project connection.
+          description: The project connection ID used by this tool.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A WorkIQ tool stored in a toolbox.
