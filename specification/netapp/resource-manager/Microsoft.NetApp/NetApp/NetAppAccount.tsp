@@ -238,6 +238,7 @@ model EntraIdAkvConfigPatch
   /**
    * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
    */
+  @added(Versions.v2026_04_15_preview)
   bindPasswordAkvConfig?: BindPasswordAkvConfigPatch;
 }
 
@@ -245,6 +246,7 @@ model EntraIdAkvConfigPatch
  * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
  */
 model BindPasswordAkvConfigPatch is PatchModel<BindPasswordAkvConfig>;
+
 /**
  * LDAP configuration for PATCH operations (no default values)
  */
