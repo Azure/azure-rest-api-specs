@@ -418,6 +418,11 @@ op replacePurge(
   "TokenGenerationUsedKeyType",
   "csharp"
 );
+@@clientName(
+  Microsoft.ApiManagement.AccessType,
+  "StorageAccountAccessType",
+  "csharp"
+);
 
 // C#-specific: Backward-compat list-result / request / response model renames to match previously shipped SDK conventions
 @@clientName(Microsoft.ApiManagement.ApiCollection, "ApiListResult", "csharp");
