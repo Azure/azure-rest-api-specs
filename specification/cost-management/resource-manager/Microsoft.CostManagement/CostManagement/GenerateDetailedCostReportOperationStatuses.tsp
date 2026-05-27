@@ -59,9 +59,11 @@ interface GenerateDetailedCostReportOperationStatus {
   >;
 }
 
-@@doc(GenerateDetailedCostReportOperationStatuses.name,
+@@doc(
+  GenerateDetailedCostReportOperationStatuses.name,
   "The target operation Id."
 );
-@@doc(GenerateDetailedCostReportOperationStatuses.properties,
+@@doc(
+  GenerateDetailedCostReportOperationStatuses.properties,
   "The properties of the usage file generated."
 );

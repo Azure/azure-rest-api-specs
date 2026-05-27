@@ -4,23 +4,27 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.MachineLearningServices;
 
-@@apiVersion(ProxyApiVersion.`proxy-api-version`,
+@@apiVersion(
+  ProxyApiVersion.`proxy-api-version`,
   false,
   "python,javascript,go"
 );
 
 // Java casing fixes for SAS-related types and operations
-@@clientName(GetBlobReferenceSASRequestDto,
+@@clientName(
+  GetBlobReferenceSASRequestDto,
   "GetBlobReferenceSasRequestDto",
   "java"
 );
-@@clientName(GetBlobReferenceSASResponseDto,
+@@clientName(
+  GetBlobReferenceSASResponseDto,
   "GetBlobReferenceSasResponseDto",
   "java"
 );
 @@clientName(SASCredential, "SasCredential", "java");
 @@clientName(SASCredentialDto, "SasCredentialDto", "java");
-@@clientName(SASAuthTypeWorkspaceConnectionProperties,
+@@clientName(
+  SASAuthTypeWorkspaceConnectionProperties,
   "SasAuthTypeWorkspaceConnectionProperties",
   "java"
 );
@@ -37,13 +41,15 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpointDetail, "FqdnEndpointDetail", "java");
 
 // Java casing fixes for AAD-related types
-@@clientName(AADAuthTypeWorkspaceConnectionProperties,
+@@clientName(
+  AADAuthTypeWorkspaceConnectionProperties,
   "AadAuthTypeWorkspaceConnectionProperties",
   "java"
 );
 
 // Java casing fixes for CMK-related members
-@@clientName(WorkspaceProperties.enableServiceSideCMKEncryption,
+@@clientName(
+  WorkspaceProperties.enableServiceSideCMKEncryption,
   "enableServiceSideCmkEncryption",
   "java"
 );
@@ -51,125 +57,147 @@ using Microsoft.MachineLearningServices;
 // Java casing fixes for AKS-related types
 @@clientName(AksNetworkingConfiguration, "AKSNetworkingConfiguration", "java");
 @@clientName(AksComputeSecrets, "AKSComputeSecrets", "java");
-@@clientName(AksComputeSecretsProperties,
+@@clientName(
+  AksComputeSecretsProperties,
   "AKSComputeSecretsProperties",
   "java"
 );
 
 @@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java");
-@@clientName(EndpointServiceConnectionStatus,
+@@clientName(
+  EndpointServiceConnectionStatus,
   "PrivateEndpointServiceConnectionStatus",
   "java"
 );
-@@clientName(ListWorkspaceKeysResult.userStorageArmId,
+@@clientName(
+  ListWorkspaceKeysResult.userStorageArmId,
   "userStorageResourceId",
   "java"
 );
-@@clientName(ServerlessComputeSettings.serverlessComputeNoPublicIP,
+@@clientName(
+  ServerlessComputeSettings.serverlessComputeNoPublicIP,
   "serverlessComputeNoPublicIp",
   "java"
 );
 @@alternateType(PipelineJob.settings, unknown, "java");
 @@alternateType(SweepJob.searchSpace, unknown, "java");
-@@alternateType(EndpointScheduleAction.endpointInvocationDefinition,
+@@alternateType(
+  EndpointScheduleAction.endpointInvocationDefinition,
   unknown,
   "java"
 );
 
-@@clientName(Microsoft.MachineLearningServices,
+@@clientName(
+  Microsoft.MachineLearningServices,
   "MachineLearningServicesMgmtClient",
   "python"
 );
-@@clientName(ComputeInstanceAuthorizationType,
+@@clientName(
+  ComputeInstanceAuthorizationType,
   "ComputeInstancePropertiesComputeInstanceAuthorizationType",
   "python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(DatastoresCreateOrUpdateParameters.skipValidation,
+@@Legacy.clientDefaultValue(
+  DatastoresCreateOrUpdateParameters.skipValidation,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(DatastoresListParameters.count,
+@@Legacy.clientDefaultValue(
+  DatastoresListParameters.count,
   30,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(DatastoresListParameters.orderByAsc,
+@@Legacy.clientDefaultValue(
+  DatastoresListParameters.orderByAsc,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(EndpointResourceListParameters.includeOnlineEndpoints,
+@@Legacy.clientDefaultValue(
+  EndpointResourceListParameters.includeOnlineEndpoints,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(EndpointResourceListParameters.includeServerlessEndpoints,
+@@Legacy.clientDefaultValue(
+  EndpointResourceListParameters.includeServerlessEndpoints,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(EndpointResourceListParameters.includeConnections,
+@@Legacy.clientDefaultValue(
+  EndpointResourceListParameters.includeConnections,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(FeaturesListParameters.pageSize,
+@@Legacy.clientDefaultValue(
+  FeaturesListParameters.pageSize,
   1000,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(FeaturesetContainersListParameters.pageSize,
+@@Legacy.clientDefaultValue(
+  FeaturesetContainersListParameters.pageSize,
   20,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(FeaturesetVersionsListParameters.pageSize,
+@@Legacy.clientDefaultValue(
+  FeaturesetVersionsListParameters.pageSize,
   20,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(FeaturestoreEntityContainersListParameters.pageSize,
+@@Legacy.clientDefaultValue(
+  FeaturestoreEntityContainersListParameters.pageSize,
   20,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(FeaturestoreEntityVersionsListParameters.pageSize,
+@@Legacy.clientDefaultValue(
+  FeaturestoreEntityVersionsListParameters.pageSize,
   20,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspaceConnectionListParameters.includeAll,
+@@Legacy.clientDefaultValue(
+  WorkspaceConnectionListParameters.includeAll,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspacesDeleteParameters.forceToPurge,
+@@Legacy.clientDefaultValue(
+  WorkspacesDeleteParameters.forceToPurge,
   false,
   "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(SchedulesListParameters.listViewType,
+@@Legacy.clientDefaultValue(
+  SchedulesListParameters.listViewType,
   "EnabledOnly",
   "python,javascript"
 );
 
-@@clientName(Microsoft.MachineLearningServices,
+@@clientName(
+  Microsoft.MachineLearningServices,
   "AzureMachineLearningServicesManagementClient",
   "javascript"
 );

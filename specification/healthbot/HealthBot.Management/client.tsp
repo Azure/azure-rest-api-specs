@@ -8,32 +8,38 @@ using Microsoft.HealthBot;
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
 
 // rename for duplicate model from Azure.ResourceManager.Foundations
-@@clientName(ErrorAdditionalInfo,
+@@clientName(
+  ErrorAdditionalInfo,
   "HealthBotErrorAdditionalInfo",
   "java,csharp,js"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
   "python,go"
 );
 
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");
 @@clientName(HealthBots.update::parameters.properties, "patch", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(HealthBotProperties.botManagementPortalLink, url, "csharp");
 @@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
-@@alternateType(HealthBot.identity,
+@@alternateType(
+  HealthBot.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(HealthBotUpdateParameters.identity,
+@@alternateType(
+  HealthBotUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(HealthBotUpdateParameters.location,
+@@alternateType(
+  HealthBotUpdateParameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );

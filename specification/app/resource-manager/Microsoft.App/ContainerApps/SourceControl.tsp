@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -44,6 +45,7 @@ interface ContainerAppsSourceControls {
        * Github personal access token used for SourceControl.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @removed(Versions.v2026_01_01)
       @header
       `x-ms-github-auxiliary`?: string;
     },
@@ -64,22 +66,28 @@ interface ContainerAppsSourceControls {
        * Github personal access token used for SourceControl.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @removed(Versions.v2026_01_01)
       @header
       `x-ms-github-auxiliary`?: string;
 
       /**
        * Ignore Workflow Deletion Failure.
        */
+      @removed(Versions.v2026_01_01)
       @query("ignoreWorkflowDeletionFailure")
       ignoreWorkflowDeletionFailure?: boolean;
 
       /**
        * Delete workflow.
        */
+      @removed(Versions.v2026_01_01)
       @query("deleteWorkflow")
       deleteWorkflow?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -96,6 +104,7 @@ interface ContainerAppsSourceControls {
 
 @@doc(SourceControl.name, "Name of the Container App SourceControl.");
 @@doc(SourceControl.properties, "SourceControl resource specific properties");
-@@doc(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerAppsSourceControls.createOrUpdate::parameters.resource,
   "Properties used to create a Container App SourceControl"
 );
