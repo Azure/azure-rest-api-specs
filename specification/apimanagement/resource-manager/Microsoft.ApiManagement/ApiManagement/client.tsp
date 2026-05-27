@@ -419,6 +419,260 @@ op replacePurge(
   "csharp"
 );
 
+// C#-specific: Backward-compat list-result / request / response model renames to match previously shipped SDK conventions
+@@clientName(Microsoft.ApiManagement.ApiCollection, "ApiListResult", "csharp");
+@@clientName(
+  Microsoft.ApiManagement.ApiReleaseCollection,
+  "ApiReleaseListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiVersionSetCollection,
+  "ApiVersionSetListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.BackendCollection,
+  "BackendListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.CertificateCollection,
+  "CertificateListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.DiagnosticCollection,
+  "DiagnosticListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GlobalSchemaCollection,
+  "GlobalSchemaListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GroupCollection,
+  "GroupListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.IssueCollection,
+  "IssueListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.LoggerCollection,
+  "LoggerListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.NamedValueCollection,
+  "NamedValueListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.NotificationCollection,
+  "NotificationListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PolicyCollection,
+  "PolicyListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PolicyDescriptionCollection,
+  "PolicyDescriptionListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PolicyFragmentCollection,
+  "PolicyFragmentListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PortalSettingsCollection,
+  "PortalSettingsListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductApiLinkCollection,
+  "ProductApiLinkListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductCollection,
+  "ProductListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductGroupLinkCollection,
+  "ProductGroupLinkListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.QuotaCounterCollection,
+  "QuotaCounterListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.RecipientEmailCollection,
+  "RecipientEmailListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.RecipientUserCollection,
+  "RecipientUserListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ResourceCollection,
+  "ResourceListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SubscriptionCollection,
+  "SubscriptionListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagApiLinkCollection,
+  "TagApiLinkListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagOperationLinkCollection,
+  "TagOperationLinkListResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagProductLinkCollection,
+  "TagProductLinkListResult",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.ApiManagement.ApiCreateOrUpdateParameter,
+  "ApiCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AccessInformationCreateParameters,
+  "TenantAccessInfoCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementServiceApplyNetworkConfigurationParameters,
+  "ApiManagementServiceApplyNetworkConfigurationContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementServiceBackupRestoreParameters,
+  "ApiManagementServiceBackupRestoreContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiManagementServiceCheckNameAvailabilityParameters,
+  "ApiManagementServiceNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiVersionSetUpdateParameters,
+  "ApiVersionSetPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.BackendUpdateParameters,
+  "BackendPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.CertificateCreateOrUpdateParameters,
+  "CertificateCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.DeployConfigurationParameters,
+  "ConfigurationDeployContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GroupCreateParameters,
+  "GroupCreateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GroupUpdateParameters,
+  "GroupPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.NamedValueUpdateParameters,
+  "NamedValuePatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductEntityBaseParameters,
+  "ProductEntityBaseProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductUpdateParameters,
+  "ProductPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SaveConfigurationParameter,
+  "ConfigurationSaveContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SubscriptionCreateParameters,
+  "SubscriptionCreateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.SubscriptionUpdateParameters,
+  "SubscriptionPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagCreateUpdateParameters,
+  "TagCreateUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagDescriptionCreateParameters,
+  "TagDescriptionCreateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.UserCreateParameters,
+  "UserCreateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.UserTokenParameters,
+  "UserTokenContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ConnectivityCheckRequest,
+  "ConnectivityCheckContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ConnectivityCheckResponse,
+  "ConnectivityCheckResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PrivateEndpointConnectionRequest,
+  "PrivateEndpointConnectionContent",
+  "csharp"
+);
+
 // C#-specific: Backward-compat operation/resource renames to avoid duplicate generated members.
 @@clientName(
   AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
