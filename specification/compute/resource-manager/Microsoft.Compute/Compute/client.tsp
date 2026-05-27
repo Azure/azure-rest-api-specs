@@ -182,6 +182,39 @@ namespace ComputeCombine;
 @@clientName(Compute.VirtualMachineExtensionUpdateProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
 @@clientName(Compute.VirtualMachineScaleSetExtensionProperties.protectedSettingsFromKeyVault, "keyVaultProtectedSettings", "csharp");
 
+// ── VMSS extension base type (csharp only) ──
+// Backward compatibility: the previous .NET SDK exposed VirtualMachineScaleSetExtensionData as a direct ResourceData-derived model.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type and VMSS extension request serialization shape."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetExtension,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type and VM extension request serialization shape."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetVMExtension,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for VMSS extension patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetExtensionUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous .NET base type for VM extension patch models."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Compute.VirtualMachineScaleSetVMExtensionUpdate,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+// ── Test: Gallery patch model base type (csharp only) ──
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Test preserving previous base type for GalleryUpdate."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ComputeGallery.GalleryUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+
 // ── G7: rename `source` → `gallerySource` (csharp only) on GalleryDiskImage and GalleryImageVersionStorageProfile
 //        so the generated property matches the previously-shipped name `GallerySource` of the discriminator-typed
 //        property. A separate partial-class shim restores the deprecated base-typed `Source` member that backed
