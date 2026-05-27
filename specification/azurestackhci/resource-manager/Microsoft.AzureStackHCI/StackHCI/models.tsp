@@ -37,7 +37,7 @@ union HciJobType {
    * Job to configure SDN (Software Defined Networking) integration for the cluster.
    */
   ConfigureSdnIntegration: "ConfigureSdnIntegration",
- 
+
   /** Job to open port to enable RDP Connection */
   VmConnectProvision: "VmConnectProvision",
 
@@ -9767,7 +9767,6 @@ model NetworkAdapterDeploymentStep {
 //////// Edge Machine Storage Models /////////
 ////////////////////////////////////////////////////////////////
 
-
 /**
  * Properties of a disk.
  */
@@ -10324,5 +10323,3 @@ union PrivilegedJobType {
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineDiskPrivilegedJobListResult
   is Azure.Core.Page<EdgeMachineDiskPrivilegedJob>;
-
-

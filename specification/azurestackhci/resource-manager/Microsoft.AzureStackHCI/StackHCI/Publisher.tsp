@@ -43,8 +43,7 @@ interface Publishers {
   >;
 }
 
-@@doc(
-  Publisher.name,
+@@doc(Publisher.name,
   "The name of the publisher available within HCI cluster."
 );
 @@doc(Publisher.properties, "Publisher properties.");

@@ -31,8 +31,7 @@ using Microsoft.AzureStackHCI;
 
 @@clientName(ArcSettings.create::parameters.resource, "arcSetting");
 @@clientName(ArcSettings.update::parameters.properties, "arcSetting");
-@@clientName(
-  ArcSettings.reconcile::parameters.body,
+@@clientName(ArcSettings.reconcile::parameters.body,
   "reconcileArcSettingsRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -40,21 +39,17 @@ using Microsoft.AzureStackHCI;
 
 @@clientName(Clusters.create::parameters.resource, "cluster");
 @@clientName(Clusters.update::parameters.properties, "cluster");
-@@clientName(
-  Clusters.uploadCertificate::parameters.body,
+@@clientName(Clusters.uploadCertificate::parameters.body,
   "uploadCertificateRequest"
 );
-@@clientName(
-  Clusters.extendSoftwareAssuranceBenefit::parameters.body,
+@@clientName(Clusters.extendSoftwareAssuranceBenefit::parameters.body,
   "softwareAssuranceChangeRequest"
 );
 @@clientName(Clusters.changeRing::parameters.body, "changeRingRequest");
-@@clientName(
-  Clusters.triggerLogCollection::parameters.body,
+@@clientName(Clusters.triggerLogCollection::parameters.body,
   "logCollectionRequest"
 );
-@@clientName(
-  Clusters.configureRemoteSupport::parameters.body,
+@@clientName(Clusters.configureRemoteSupport::parameters.body,
   "remoteSupportRequest"
 );
 @@clientLocation(Clusters.listByCluster, Offers);
@@ -94,8 +89,7 @@ using Microsoft.AzureStackHCI;
 
 @@clientLocation(UpdateSummariesOperationGroup.get, "UpdateSummaries");
 @@clientLocation(UpdateSummariesOperationGroup.put, "UpdateSummaries");
-@@clientName(
-  UpdateSummariesOperationGroup.put::parameters.resource,
+@@clientName(UpdateSummariesOperationGroup.put::parameters.resource,
   "updateLocationProperties"
 );
 @@clientLocation(UpdateSummariesOperationGroup.delete, "UpdateSummaries");
