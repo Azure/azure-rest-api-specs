@@ -233,14 +233,7 @@ model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
-model EntraIdAkvConfigPatch
-  is PatchModel<EntraIdAkvConfig, "bindPasswordAkvConfig"> {
-  /**
-   * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
-   */
-  @added(Versions.v2026_04_15_preview)
-  bindPasswordAkvConfig?: BindPasswordAkvConfigPatch;
-}
+model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
 
 /**
  * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
