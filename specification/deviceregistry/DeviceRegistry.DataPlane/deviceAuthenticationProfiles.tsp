@@ -143,7 +143,7 @@ model CertificateIssuanceResult {
 }
 
 // ──────────────────────────────────────────────
-// Issue-cert polling sub-resource
+// Issue-cert status monitor endpoint
 // ──────────────────────────────────────────────
 
 /** Status monitor for the long-running `:issueCert` action on a device authentication profile. */
@@ -173,7 +173,7 @@ model IssueCertResult {
  * 202 Accepted response shape for long-running operations on device authentication
  * profiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any
  * operation payload (e.g. the issued certificate chain) is delivered by the
- * dedicated polling GET on the corresponding `*Results` sub-resource.
+ * dedicated polling GET on the corresponding `*Results` status monitor endpoint.
  */
 model OperationAcceptedResponse {
   /** The unique ID of the operation. */
@@ -188,7 +188,7 @@ model OperationAcceptedResponse {
 }
 
 // ──────────────────────────────────────────────
-// Revoke-cert polling sub-resource
+// Revoke-cert status monitor endpoint
 // ──────────────────────────────────────────────
 
 /**
@@ -241,7 +241,7 @@ interface DeviceAuthenticationProfiles {
    * signed using the certificate authority policy bound to this authentication
    * profile. Applies to Microsoft-managed X.509 authentication profiles. The
    * issued certificate chain is delivered by the GET on the corresponding
-   * `issueCertResults` sub-resource, not on this 202 response.
+   * `issueCertResults` status monitor endpoint, not on this 202 response.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response intentionally omits 'result'. The issued certificate chain is delivered by the dedicated GET issueCertResults polling endpoint."
   @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert")
@@ -275,9 +275,9 @@ interface DeviceAuthenticationProfiles {
    * Microsoft-managed X.509 certificates: invalidates outstanding certificates
    * via the PKI revocation list. The authentication profile itself is preserved.
    * The 202 carries only operation state; status is polled via the dedicated GET
-   * on the corresponding `revokeCertsResults` sub-resource.
+   * on the corresponding `revokeCertsResults` status monitor endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeCertsResults sub-resource."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeCertsResults status monitor endpoint."
   @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCerts")
   @post
   @pollingOperation(RevokeCertsResults.get)

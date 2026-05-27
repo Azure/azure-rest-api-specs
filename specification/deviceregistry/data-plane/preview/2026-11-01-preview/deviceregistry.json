@@ -804,7 +804,7 @@
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles. The\nissued certificate chain is delivered by the GET on the corresponding\n`issueCertResults` sub-resource, not on this 202 response.",
+        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles. The\nissued certificate chain is delivered by the GET on the corresponding\n`issueCertResults` status monitor endpoint, not on this 202 response.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -884,7 +884,7 @@
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeCertsResults` sub-resource.",
+        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeCertsResults` status monitor endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4184,7 +4184,7 @@
     },
     "OperationAcceptedResponse": {
       "type": "object",
-      "description": "202 Accepted response shape for long-running operations on device authentication\nprofiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any\noperation payload (e.g. the issued certificate chain) is delivered by the\ndedicated polling GET on the corresponding `*Results` sub-resource.",
+      "description": "202 Accepted response shape for long-running operations on device authentication\nprofiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any\noperation payload (e.g. the issued certificate chain) is delivered by the\ndedicated polling GET on the corresponding `*Results` status monitor endpoint.",
       "properties": {
         "id": {
           "type": "string",
