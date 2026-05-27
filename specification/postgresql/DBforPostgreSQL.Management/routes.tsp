@@ -132,8 +132,8 @@ interface MaintenanceEvents {
     MaintenanceEventResource,
     MaintenanceEventRescheduleRequest,
 
-      | ArmResponse<MaintenanceEventResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventResource> &
+      | ArmResponse<MaintenanceEventActionResponse>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventActionResponse> &
           Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
@@ -143,8 +143,8 @@ interface MaintenanceEvents {
     MaintenanceEventResource,
     void,
 
-      | ArmResponse<MaintenanceEventResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventResource> &
+      | ArmResponse<MaintenanceEventActionResponse>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventActionResponse> &
           Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
