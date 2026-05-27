@@ -11414,8 +11414,6 @@ paths:
                   allOf:
                     - $ref: '#/components/schemas/ToolboxPolicies'
                   description: Policy configuration for this toolbox version.
-              required:
-                - tools
     get:
       operationId: listToolboxVersions
       description: List all versions of a toolbox.
@@ -37357,7 +37355,6 @@ components:
         - name
         - version
         - created_at
-        - tools
       properties:
         metadata:
           type: object
