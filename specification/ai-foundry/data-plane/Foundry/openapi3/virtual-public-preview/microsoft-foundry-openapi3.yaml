@@ -9864,46 +9864,10 @@ paths:
             type: string
             enum:
               - Routines=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
+        - $ref: '#/components/parameters/ListRoutinesParameters.limit'
+        - $ref: '#/components/parameters/ListRoutinesParameters.after'
+        - $ref: '#/components/parameters/ListRoutinesParameters.before'
+        - $ref: '#/components/parameters/ListRoutinesParameters.order'
         - name: api-version
           in: query
           required: true
@@ -9917,26 +9881,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Routine'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/RoutineListResponse'
         default:
           description: An unexpected error response.
           content:
@@ -10080,46 +10025,10 @@ paths:
               - Routines=V1Preview
         - $ref: '#/components/parameters/ListRoutineRunsParameters.routine_name'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.limit'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.after'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.before'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.order'
         - name: api-version
           in: query
           required: true
@@ -10133,26 +10042,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/RoutineRun'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/RoutineRunsResponse'
         default:
           description: An unexpected error response.
           content:
@@ -11737,11 +11627,44 @@ components:
       schema:
         type: string
         maxLength: 128
+    ListRoutineRunsParameters.after:
+      name: after
+      in: query
+      required: false
+      description: An opaque cursor returned as last_id by the previous list-runs response.
+      schema:
+        type: string
+      explode: false
+    ListRoutineRunsParameters.before:
+      name: before
+      in: query
+      required: false
+      description: Unsupported. Reserved for future backward pagination support.
+      schema:
+        type: string
+      explode: false
     ListRoutineRunsParameters.filter:
       name: filter
       in: query
       required: false
       description: An optional MLflow search-runs filter expression applied within the routine's experiment.
+      schema:
+        type: string
+      explode: false
+    ListRoutineRunsParameters.limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of runs to return.
+      schema:
+        type: integer
+        format: int32
+      explode: false
+    ListRoutineRunsParameters.order:
+      name: order
+      in: query
+      required: false
+      description: The ordering direction. Supported values are asc and desc.
       schema:
         type: string
       explode: false
@@ -11753,6 +11676,39 @@ components:
       schema:
         type: string
         maxLength: 128
+    ListRoutinesParameters.after:
+      name: after
+      in: query
+      required: false
+      description: An opaque cursor returned as last_id by the previous list response.
+      schema:
+        type: string
+      explode: false
+    ListRoutinesParameters.before:
+      name: before
+      in: query
+      required: false
+      description: Unsupported. Reserved for future backward pagination support.
+      schema:
+        type: string
+      explode: false
+    ListRoutinesParameters.limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of routines to return.
+      schema:
+        type: integer
+        format: int32
+      explode: false
+    ListRoutinesParameters.order:
+      name: order
+      in: query
+      required: false
+      description: The ordering direction. Supported values are asc and desc.
+      schema:
+        type: string
+      explode: false
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -15255,6 +15211,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Custom credential definition
+    CustomRoutineTrigger:
+      type: object
+      required:
+        - type
+        - provider
+        - parameters
+      properties:
+        type:
+          type: string
+          enum:
+            - custom
+          description: The trigger type.
+        provider:
+          type: string
+          maxLength: 128
+          description: The external provider that emits the custom event.
+        event_name:
+          type: string
+          maxLength: 256
+          description: The provider-specific event name that fires the routine.
+        parameters:
+          type: object
+          additionalProperties: {}
+          description: Provider-specific trigger parameters.
+      allOf:
+        - $ref: '#/components/schemas/RoutineTrigger'
+      description: A custom event routine trigger.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     DailyRecurrenceSchedule:
       type: object
       required:
@@ -18436,34 +18422,50 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
-    GitHubIssueOpenedRoutineTrigger:
+    GitHubIssueEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - opened
+            - closed
+      description: Known GitHub issue events that can fire a routine.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    GitHubIssueRoutineTrigger:
       type: object
       required:
         - type
         - connection_id
-        - assignee
+        - owner
         - repository
+        - issue_event
       properties:
         type:
           type: string
           enum:
-            - github_issue_opened
+            - github_issue
           description: The trigger type.
         connection_id:
           type: string
           maxLength: 256
           description: The workspace connection identifier that resolves the GitHub configuration for the trigger.
-        assignee:
+        owner:
           type: string
           maxLength: 128
-          description: The GitHub assignee or organization filter that scopes which issues can fire the trigger.
+          description: The GitHub owner or organization that scopes which issues can fire the trigger.
         repository:
           type: string
           maxLength: 128
           description: The GitHub repository filter that scopes which issues can fire the trigger.
+        issue_event:
+          allOf:
+            - $ref: '#/components/schemas/GitHubIssueEvent'
+          description: The GitHub issue event that fires the routine.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
-      description: A GitHub issue-opened routine trigger.
+      description: A GitHub issue routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -18938,6 +18940,7 @@ components:
       type: object
       required:
         - type
+        - input
       properties:
         type:
           type: string
@@ -18945,9 +18948,7 @@ components:
             - invoke_agent_invocations_api
           description: The manual dispatch payload type.
         input:
-          type: string
-          maxLength: 32768
-          description: The raw input sent to the downstream invocations target.
+          description: The JSON value sent as the complete downstream invocations input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.
       allOf:
         - $ref: '#/components/schemas/RoutineDispatchPayload'
       description: A manual payload used to test an invocations API routine dispatch.
@@ -18958,24 +18959,29 @@ components:
       type: object
       required:
         - type
-        - agent_endpoint_id
       properties:
         type:
           type: string
           enum:
             - invoke_agent_invocations_api
           description: The action type.
+        agent_name:
+          type: string
+          maxLength: 256
+          description: The project-scoped agent name for routine dispatch.
         agent_endpoint_id:
           type: string
           maxLength: 256
-          description: The endpoint-scoped agent identifier for invocations API dispatch.
+          description: Legacy endpoint-scoped agent identifier for routine dispatch.
+        input:
+          description: Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.
         session_id:
           type: string
           maxLength: 256
           description: An optional existing hosted-agent session identifier to continue during the downstream dispatch.
       allOf:
         - $ref: '#/components/schemas/RoutineAction'
-      description: Dispatches a routine through the raw invocations API.
+      description: Dispatches a routine through the raw invocations API. Exactly one of agent_name or agent_endpoint_id must be provided.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -18983,6 +18989,7 @@ components:
       type: object
       required:
         - type
+        - input
       properties:
         type:
           type: string
@@ -18990,9 +18997,7 @@ components:
             - invoke_agent_responses_api
           description: The manual dispatch payload type.
         input:
-          type: string
-          maxLength: 32768
-          description: The user input sent to the downstream responses target.
+          description: The JSON value sent as the complete downstream responses input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.
       allOf:
         - $ref: '#/components/schemas/RoutineDispatchPayload'
       description: A manual payload used to test a responses API routine dispatch.
@@ -19012,12 +19017,14 @@ components:
         agent_name:
           type: string
           maxLength: 256
-          description: The project-scoped agent name for responses API dispatch.
+          description: The project-scoped agent name for routine dispatch.
         agent_endpoint_id:
           type: string
           maxLength: 256
-          description: The endpoint-scoped agent identifier for responses API dispatch.
-        conversation_id:
+          description: Legacy endpoint-scoped agent identifier for routine dispatch.
+        input:
+          description: Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.
+        conversation:
           type: string
           maxLength: 256
           description: An optional existing conversation identifier to continue during the downstream dispatch.
@@ -36013,10 +36020,7 @@ components:
     Routine:
       type: object
       required:
-        - name
         - enabled
-        - triggers
-        - action
       properties:
         name:
           type: string
@@ -36095,9 +36099,6 @@ components:
           - Routines=V1Preview
     RoutineCreateOrUpdateRequest:
       type: object
-      required:
-        - triggers
-        - action
       properties:
         description:
           type: string
@@ -36148,17 +36149,39 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    RoutineListResponse:
+      type: object
+      required:
+        - data
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Routine'
+          description: The requested list of routines.
+        first_id:
+          type: string
+          description: The identifier of the first routine in this page, or null when the page is empty.
+        last_id:
+          type: string
+          description: An opaque cursor to pass as the next after query parameter when has_more is true.
+        has_more:
+          type: boolean
+          description: True when more routines are available after this page.
+      description: The paginated response returned when listing routines.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     RoutineRun:
       type: object
       required:
         - id
-        - status
-        - trigger_type
-        - started_at
       properties:
         id:
           type: string
           description: The MLflow run identifier for the routine attempt.
+          readOnly: true
         status:
           type: string
           description: The underlying MLflow run status.
@@ -36170,6 +36193,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutineTriggerType'
           description: The trigger type that produced the routine attempt.
+        trigger_name:
+          type: string
+          description: The configured trigger name that produced the routine attempt.
         attempt_source:
           allOf:
             - $ref: '#/components/schemas/RoutineAttemptSource'
@@ -36178,10 +36204,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutineActionType'
           description: The action type dispatched for the routine attempt.
+        agent_id:
+          type: string
+          description: The project-scoped agent identifier recorded for the routine attempt.
+        agent_endpoint_id:
+          type: string
+          description: The legacy endpoint-scoped agent identifier recorded for the routine attempt.
+        conversation_id:
+          type: string
+          description: The conversation identifier used by a responses API dispatch.
+        session_id:
+          type: string
+          description: The hosted-agent session identifier used by an invocations API dispatch.
         triggered_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The logical trigger time recorded for the routine attempt.
+        scheduled_fire_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The scheduled fire time recorded for timer and schedule deliveries.
+        trigger_time_zone:
+          type: string
+          description: The trigger time zone recorded for timer and schedule deliveries.
         started_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
@@ -36202,44 +36247,17 @@ components:
         task_id:
           type: string
           description: The workspace task identifier linked to the routine attempt, when available.
+        error_status_code:
+          type: integer
+          format: int32
+          description: The downstream error status code captured for a failed attempt, when available.
         error_type:
           type: string
           description: The fully qualified error type captured for a failed attempt, when available.
         error_message:
           type: string
           description: The truncated failure message captured for a failed attempt, when available.
-        diagnostics:
-          allOf:
-            - $ref: '#/components/schemas/RoutineRunDiagnostics'
-          description: Diagnostic data captured for the routine attempt.
       description: A single routine run returned from the run history API.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Routines=V1Preview
-    RoutineRunDiagnostics:
-      type: object
-      required:
-        - parameters
-        - tags
-        - metrics
-      properties:
-        parameters:
-          type: object
-          additionalProperties:
-            type: string
-          description: MLflow parameters recorded on the run, keyed by parameter name.
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: MLflow tags recorded on the run, keyed by tag name.
-        metrics:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-          description: Latest MLflow metric values recorded on the run, keyed by metric name.
-      description: Generic diagnostics captured on a routine run.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -36253,6 +36271,30 @@ components:
             - completed
             - failed
       description: Known lifecycle phases recorded for a routine run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRunsResponse:
+      type: object
+      required:
+        - data
+        - has_more
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutineRun'
+          description: The requested list of routine runs.
+        first_id:
+          type: string
+          description: The identifier of the first run in this page, or null when the page is empty.
+        last_id:
+          type: string
+          description: An opaque cursor to pass as the next after query parameter when has_more is true.
+        has_more:
+          type: boolean
+          description: True when more routine runs are available after this page.
+      description: The paginated response returned when listing routine runs.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -36270,7 +36312,8 @@ components:
         mapping:
           schedule: '#/components/schemas/ScheduleRoutineTrigger'
           timer: '#/components/schemas/TimerRoutineTrigger'
-          github_issue_opened: '#/components/schemas/GitHubIssueOpenedRoutineTrigger'
+          github_issue: '#/components/schemas/GitHubIssueRoutineTrigger'
+          custom: '#/components/schemas/CustomRoutineTrigger'
       description: Base model for a routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
@@ -36280,7 +36323,8 @@ components:
         - type: string
         - type: string
           enum:
-            - github_issue_opened
+            - custom
+            - github_issue
             - schedule
             - timer
       description: The discriminator values supported for routine triggers.
@@ -37264,16 +37308,15 @@ components:
       type: object
       required:
         - type
-        - at
       properties:
         type:
           type: string
           enum:
             - timer
           description: The trigger type.
-        at:
+        in:
           type: string
-          description: A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.
+          description: A relative timer expression from now, such as `2h` or `15m`. Stored routines are normalized to an absolute fire time.
         time_zone:
           type: string
           description: An optional IANA or Windows time zone identifier when the timer uses a local timestamp.
