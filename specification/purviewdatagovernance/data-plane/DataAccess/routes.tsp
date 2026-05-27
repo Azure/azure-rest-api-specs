@@ -423,7 +423,6 @@ interface Workflows {
     },
     {}
   >;
-
 }
 
 // ============================================================
@@ -539,7 +538,6 @@ interface DataProductPolicySets {
     },
     DataProductWorkflowSettingsResponse
   >;
-
 }
 
 // ============================================================
