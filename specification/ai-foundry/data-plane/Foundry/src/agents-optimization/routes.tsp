@@ -60,7 +60,7 @@ interface AgentOptimizationJobs {
   >;
 
   @summary("Returns a list of agent optimization jobs.")
-  @doc("List optimization jobs. Supports cursor pagination and optional status / agentName filters.")
+  @doc("List optimization jobs. Supports cursor pagination and optional status / agent_name filters.")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
@@ -73,7 +73,7 @@ interface AgentOptimizationJobs {
 
       @doc("Filter to jobs targeting this agent name.")
       @query
-      agentName?: string;
+      agent_name?: string;
     }
   >;
 
