@@ -48,7 +48,7 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
-      ...ToolProjectConnectionIdExtension,
+      ...OptionalToolProjectConnectionIdField,
     }
   );
 
@@ -133,11 +133,21 @@ namespace Azure.AI.Projects {
   /**
    * Optional project connection ID for tools that can use project-scoped connections.
    */
-  alias ToolProjectConnectionIdExtension = {
+  alias OptionalToolProjectConnectionIdField = {
     /**
-     * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+     * The project connection ID used by this tool.
      */
     project_connection_id?: string;
+  };
+
+  /**
+   * Required project connection ID for tools that use project-scoped connections.
+   */
+  alias RequiredToolProjectConnectionIdField = {
+    /**
+     * The project connection ID used by this tool.
+     */
+    project_connection_id: string;
   };
 
   /**
@@ -773,11 +783,7 @@ namespace Azure.AI.Projects {
      */
     agent_card_path?: string;
 
-    /**
-     * The connection ID in the project for the A2A server.
-     * The connection stores authentication and other connection details needed to connect to the A2A server.
-     */
-    project_connection_id?: string;
+    ...OptionalToolProjectConnectionIdField;
   }
 
   /**
@@ -797,10 +803,7 @@ namespace Azure.AI.Projects {
    * Shared fields for WorkIQ tool definitions.
    */
   model WorkIQPreviewToolFields {
-    /**
-     * The ID of the WorkIQ project connection.
-     */
-    project_connection_id: string;
+    ...RequiredToolProjectConnectionIdField;
   }
 
   /**
@@ -820,10 +823,7 @@ namespace Azure.AI.Projects {
    * Shared fields for FabricIQ tool definitions.
    */
   model FabricIQPreviewToolFields {
-    /**
-     * The ID of the FabricIQ project connection.
-     */
-    project_connection_id: string;
+    ...RequiredToolProjectConnectionIdField;
 
     /**
      * (Optional) The label of the FabricIQ MCP server to connect to.
