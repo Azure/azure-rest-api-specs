@@ -38,7 +38,7 @@ interface AgentOptimizationJobs {
       ...WithOperationId;
 
       @doc("The optimization job inputs.")
-      @body body: OptimizationJobInputs;
+      @body inputs: OptimizationJobInputs;
     },
     JobCreatedResponse<OptimizationJob>
   >;
@@ -211,7 +211,7 @@ interface AgentOptimizationJobs {
       @path candidateId: string;
 
       @doc("Promotion details.")
-      @body body: PromoteCandidateRequest;
+      @body candidate_request: PromoteCandidateRequest;
     },
     PromoteCandidateResponse
   >;
