@@ -47,7 +47,6 @@ using Azure.AI.Projects;
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
-
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
@@ -57,7 +56,6 @@ using Azure.AI.Projects;
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
-
 
 // --------------------------------------------------------------------------------
 // Agents sub‐client
@@ -186,7 +184,6 @@ using Azure.AI.Projects;
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
 
-
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
@@ -197,7 +194,6 @@ using Azure.AI.Projects;
 // ********************************************************************************
 // ********************************************************************************
 
-
 // --------------------------------------------------------------------------------
 // Beta Agents sub-client
 // --------------------------------------------------------------------------------
@@ -207,20 +203,53 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
 @@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
 @@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.listCandidates, "list_optimization_candidates", "python");
-@@clientName(AgentOptimizationJobs.getCandidate, "get_optimization_candidate", "python");
-@@clientName(AgentOptimizationJobs.getCandidateConfig, "get_optimization_candidate_config", "python");
-@@clientName(AgentOptimizationJobs.getCandidateResults, "get_optimization_candidate_results", "python");
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "list_optimization_candidates",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "get_optimization_candidate",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "get_optimization_candidate_config",
+  "python"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "get_optimization_candidate_results",
+  "python"
+);
 
-@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "javascript");
+@@clientName(AgentOptimizationJobs.create,
+  "createOptimizationJob",
+  "javascript"
+);
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
-@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.listCandidates, "listOptimizationCandidates", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig", "javascript");
-@@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults", "javascript");
+@@clientName(AgentOptimizationJobs.cancel,
+  "cancelOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.delete,
+  "deleteOptimizationJob",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "listOptimizationCandidates",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "getOptimizationCandidate",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "getOptimizationCandidateConfig",
+  "javascript"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "getOptimizationCandidateResults",
+  "javascript"
+);
 
 // DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
 // to define Agent optimization request. If emitted as-is, it pulls in a lot of
@@ -240,8 +269,14 @@ using Azure.AI.Projects;
 
 @@clientName(Agents.downloadAgentCode, "download_code", "python");
 
-@@clientName(Agents.createAgentVersionFromCode, "create_version_from_code", "python");
-@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode", "javascript");
+@@clientName(Agents.createAgentVersionFromCode,
+  "create_version_from_code",
+  "python"
+);
+@@clientName(Agents.createAgentVersionFromCode,
+  "createVersionFromCode",
+  "javascript"
+);
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
 @@clientName(SessionDirectoryListResponse,
@@ -433,8 +468,14 @@ using Azure.AI.Projects;
 @@clientName(Models.getCredentials, "getCredentials");
 @@clientName(Models.createAsync, "pendingCreateVersion");
 
-@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResult", "python");
-@@clientName(CreateModelVersionAsyncResponse, "ModelPendingCreateVersionResponse", "javascript");
+@@clientName(CreateModelVersionAsyncResponse,
+  "ModelPendingCreateVersionResult",
+  "python"
+);
+@@clientName(CreateModelVersionAsyncResponse,
+  "ModelPendingCreateVersionResponse",
+  "javascript"
+);
 
 // --------------------------------------------------------------------------------
 // Beta Schedules sub‐client
@@ -455,15 +496,15 @@ using Azure.AI.Projects;
 // Beta Skills sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Skills.createSkill, "create");
-@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.createSkillVersion, "create");
+@@clientName(Skills.createSkillVersionFromFiles, "create_from_package");
 @@clientName(Skills.getSkill, "get");
-@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.getSkillContent, "download");
 @@clientName(Skills.listSkills, "list");
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
 
-@@clientName(SkillObject, "SkillDetails", "python");
+@@clientName(Skill, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
 @@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
@@ -506,6 +547,3 @@ model AIProjectClientOptions {
   },
   "python"
 );
-
-
-

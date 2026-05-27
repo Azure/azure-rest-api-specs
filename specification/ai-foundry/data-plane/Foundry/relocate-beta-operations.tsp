@@ -116,10 +116,10 @@ interface Toolboxes {}
 @@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolboxVersion, Toolboxes);
 
 interface Skills {}
-@@clientLocation(Azure.AI.Projects.Skills.createSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.createSkillFromPackage, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.createSkillVersion, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.createSkillVersionFromFiles, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.getSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.downloadSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.getSkillContent, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.listSkills, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
@@ -148,10 +148,16 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates,
+  Agents
+);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, Agents);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, Agents);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, Agents);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig,
+  Agents
+);
+@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults,
+  Agents
+);
 
 interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);
