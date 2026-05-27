@@ -44,10 +44,16 @@ interface EdgeConnectors {
   delete is ArmResourceDeleteWithoutOkAsync<EdgeConnector>;
 
   @doc("Lists EdgeConnectors by resource group.")
-  listByResourceGroup is ArmResourceListByParent<EdgeConnector>;
+  listByResourceGroup is ArmResourceListByParent<
+    EdgeConnector,
+    Response = EdgeConnectorsListResult
+  >;
 
   @doc("Lists EdgeConnectors by subscription.")
-  listBySubscription is ArmListBySubscription<EdgeConnector>;
+  listBySubscription is ArmListBySubscription<
+    EdgeConnector,
+    Response = EdgeConnectorsListResult
+  >;
 }
 
 @@doc(EdgeConnectors.create::parameters.resource, "Request payload.");

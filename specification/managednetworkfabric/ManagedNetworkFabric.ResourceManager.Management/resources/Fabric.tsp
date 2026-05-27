@@ -44,10 +44,16 @@ interface Fabrics {
   delete is ArmResourceDeleteWithoutOkAsync<Fabric>;
 
   @doc("Lists Fabrics by resource group.")
-  listByResourceGroup is ArmResourceListByParent<Fabric>;
+  listByResourceGroup is ArmResourceListByParent<
+    Fabric,
+    Response = FabricsListResult
+  >;
 
   @doc("Lists Fabrics by subscription.")
-  listBySubscription is ArmListBySubscription<Fabric>;
+  listBySubscription is ArmListBySubscription<
+    Fabric,
+    Response = FabricsListResult
+  >;
 }
 
 @@doc(Fabrics.create::parameters.resource, "Request payload.");
