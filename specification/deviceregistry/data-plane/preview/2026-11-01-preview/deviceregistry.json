@@ -1048,6 +1048,84 @@
         }
       }
     },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:getKeys": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_GetKeys",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Retrieve the plaintext symmetric keys of a device authentication\nprofile. Only valid when the profile's authentication type is\nSymmetricKey; profiles of any other type return 400 with the\nInvalidAuthenticationType error code.\n\nSupports the standard conditional request headers\n(`If-Match`, `If-None-Match`, `If-Modified-Since`,\n`If-Unmodified-Since`). Clients can pass `If-None-Match` with the\npreviously-observed profile ETag to receive 304 Not Modified when\nthe underlying profile has not changed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetDeviceAuthenticationProfileKeysResponse"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve the symmetric keys of a SymmetricKey device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetKeys.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
       "get": {
         "operationId": "DeviceCapabilities_List",
@@ -3379,6 +3457,19 @@
         "reportType"
       ]
     },
+    "GetDeviceAuthenticationProfileKeysResponse": {
+      "type": "object",
+      "description": "Response body for the getKeys action. Includes the standard `ETag`\nresponse header so clients can issue conditional follow-up requests\nvia `If-None-Match` and avoid unnecessary key materialization on the\nserver when the underlying device authentication profile has not\nchanged.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Plaintext symmetric keys for the device authentication profile."
+        }
+      },
+      "required": [
+        "symmetricKey"
+      ]
+    },
     "GetGroupsForDeviceResult": {
       "type": "object",
       "description": "Result of querying group memberships for a device.",
@@ -4919,6 +5010,44 @@
     }
   },
   "parameters": {
+    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
+      "name": "If-Modified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifModifiedSince"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
+    },
+    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
+      "name": "If-Unmodified-Since",
+      "in": "header",
+      "description": "The request should only proceed if the entity was not modified after this time.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifUnmodifiedSince"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
