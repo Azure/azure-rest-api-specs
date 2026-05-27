@@ -9,11 +9,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * Dapr PubSub Event Subscription.
  */
+@removed(Versions.v2026_01_01)
 @parentResource(ManagedEnvironment)
 model DaprSubscription
   is Azure.ResourceManager.ProxyResource<DaprSubscriptionProperties> {
@@ -49,6 +51,7 @@ alias DaprSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = DefaultErrorResponse
 >;
 
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface DaprSubscriptions {
   /**
