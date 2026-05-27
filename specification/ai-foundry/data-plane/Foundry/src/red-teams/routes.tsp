@@ -10,6 +10,7 @@ alias RedTeamsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOp
 @tag("Redteams")
 interface RedTeams {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+  @summary("Get a redteam by name")
   @doc("Gets a redteam by name.")
   get is Azure.Core.Foundations.ResourceOperation<
     RedTeam,
@@ -20,6 +21,7 @@ interface RedTeams {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+  @summary("List a redteam by name")
   @doc("Lists a redteam by name.")
   @Rest.listsResource(RedTeam)
   list is Azure.Core.Foundations.ResourceList<
@@ -29,6 +31,7 @@ interface RedTeams {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create a redteam run")
   @doc("Creates a redteam run.")
   @route("runs:run")
   @post

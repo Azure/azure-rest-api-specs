@@ -20,6 +20,7 @@ interface Responses {
   /**
    * Creates a model response.
    */
+  @summary("Create a model response")
   @operationId("createResponse")
   @post
   @sharedRoute
@@ -33,6 +34,7 @@ interface Responses {
   /**
    * Creates a model response (streaming response).
    */
+  @summary("Create a model response (streaming response)")
   @operationId("createResponseStream")
   @post
   @sharedRoute
@@ -50,6 +52,7 @@ interface Responses {
    * @param stream If set to true, model response data will be streamed to the client as it is generated using server-sent events.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
+  @summary("Retrieve a model response with the given ID")
   @operationId("getResponse")
   @get
   @route("{response_id}")
@@ -79,6 +82,7 @@ interface Responses {
    * @param include Specifies additional output data to include in the model response.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
+  @summary("Retrieve a model response with the given ID (streaming response)")
   @operationId("getResponseStream")
   @get
   @route("{response_id}")
@@ -103,6 +107,7 @@ interface Responses {
   /**
    * Deletes a model response.
    */
+  @summary("Delete a model response")
   @delete
   @route("{response_id}")
   @operationId("deleteResponse")
@@ -125,6 +130,7 @@ interface Responses {
   /**
    * Cancels a model response.
    */
+  @summary("Cancel a model response")
   @post
   @route("{response_id}/cancel")
   @operationId("cancelResponse")
@@ -147,6 +153,7 @@ interface Responses {
   /**
    * Returns a list of input items for a given response.
    */
+  @summary("List Returns a list of input items for a given response")
   @operationId("listInputItems")
   @get
   @route("{response_id}/input_items")
@@ -168,6 +175,7 @@ interface Responses {
   /**
    * Returns the list of all responses.
    */
+  @summary("List all responses")
   @get
   @operationId("listResponses")
   @list
@@ -185,6 +193,7 @@ interface Responses {
   /**
    * Produces a compaction of a responses conversation.
    */
+  @summary("Produces a compaction of a responses conversation")
   @post
   @operationId("compactResponseConversation")
   @route("compact")

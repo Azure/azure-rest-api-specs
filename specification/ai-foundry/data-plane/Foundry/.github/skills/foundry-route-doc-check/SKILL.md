@@ -52,8 +52,8 @@ for the full rule definitions, examples, and remediation guidance.
 
 | Rule ID          | Requirement                                                                                    |
 | ---------------- | ---------------------------------------------------------------------------------------------- |
-| `FDOC-001`       | Operation must have a TSDoc comment (`/** ... */`) or `@doc()`                                 |
-| `FDOC-002`       | Operation must have a `@summary()` decorator                                                   |
+| `FDOC-001`       | **Every** operation must have a TSDoc comment (`/** ... */`) or `@doc()` — note `/* */` is NOT valid TSDoc |
+| `FDOC-002`       | **Every** operation must have a `@summary()` decorator — no exceptions                         |
 | `FDOC-003`       | Doc comment / `@doc()` must be non-empty and use **third-person indicative** voice ("Creates an agent") |
 | `FDOC-004`       | `@summary()` must be concise, single-line, and use **imperative** voice ("Create an agent")    |
 | `FDOC-005`       | Each `@path`, `@query`, `@header`, and `@body` parameter must have a doc comment or `@doc()`   |

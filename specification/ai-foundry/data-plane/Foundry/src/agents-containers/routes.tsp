@@ -193,6 +193,7 @@ interface AgentContainers {
     2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
     2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
     """)
+  @summary("Stream agent container logs")
   @extension(
     "x-ms-foundry-meta",
     #{

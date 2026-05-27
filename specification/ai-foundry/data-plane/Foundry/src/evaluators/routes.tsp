@@ -248,6 +248,7 @@ interface EvaluatorGenerationJobs {
    * Deletes an evaluator generation job by its ID. Deletes the job record only;
    * the generated evaluator (if any) is preserved.
    */
+  @summary("Delete an evaluator generation job by its ID")
   @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;

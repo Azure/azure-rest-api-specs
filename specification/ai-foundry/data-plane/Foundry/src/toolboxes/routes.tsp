@@ -14,6 +14,7 @@ namespace Azure.AI.Projects;
 @tag("Toolboxes")
 interface Toolboxes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Create a new version of a toolbox")
   @doc("Creates a new version of a toolbox. If the toolbox does not exist, it will be created.")
   @operationId("createToolboxVersion")
   @post
@@ -24,6 +25,7 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Retrieve a toolbox")
   @doc("Retrieves a toolbox.")
   @operationId("getToolbox")
   @get
@@ -31,6 +33,7 @@ interface Toolboxes {
   getToolbox is FoundryDataPlaneOperation<GetToolboxRequest, ToolboxObject>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("List all toolboxes")
   @doc("Lists all toolboxes.")
   @operationId("listToolboxes")
   @get
@@ -42,6 +45,7 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("List all versions of a toolbox")
   @doc("Lists all versions of a toolbox.")
   @operationId("listToolboxVersions")
   @get
@@ -53,6 +57,7 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Retrieve a specific version of a toolbox")
   @doc("Retrieves a specific version of a toolbox.")
   @operationId("getToolboxVersion")
   @get
@@ -63,6 +68,7 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Update a toolbox to point to a specific version")
   @doc("Updates a toolbox to point to a specific version.")
   @operationId("updateToolbox")
   @patch
@@ -73,6 +79,7 @@ interface Toolboxes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Delete a toolbox and all its versions")
   @doc("Deletes a toolbox and all its versions.")
   @operationId("deleteToolbox")
   @delete
@@ -80,6 +87,7 @@ interface Toolboxes {
   deleteToolbox is FoundryDataPlaneOperation<DeleteToolboxRequest, void>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Delete a specific version of a toolbox")
   @doc("Deletes a specific version of a toolbox.")
   @operationId("deleteToolboxVersion")
   @delete

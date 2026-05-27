@@ -10,6 +10,7 @@ namespace Azure.AI.Projects;
 @tag("Routines")
 interface Routines {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Create or update a routine")
   @doc("Creates or update a routine.")
   @operationId("createOrUpdateRoutine")
   @put
@@ -22,6 +23,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Retrieve a routine")
   @doc("Retrieves a routine.")
   @operationId("getRoutine")
   @get
@@ -34,6 +36,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Enable a routine")
   @doc("Enables a routine.")
   @operationId("enableRoutine")
   @post
@@ -46,6 +49,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Disable a routine")
   @doc("Disables a routine.")
   @operationId("disableRoutine")
   @post
@@ -58,6 +62,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("List routines")
   @doc("Lists routines.")
   @operationId("listRoutines")
   @get
@@ -71,6 +76,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Delete a routine")
   @doc("Deletes a routine.")
   @operationId("deleteRoutine")
   @delete
@@ -83,6 +89,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("List prior runs for a routine")
   @doc("Lists prior runs for a routine.")
   @operationId("listRoutineRuns")
   @get
@@ -96,6 +103,7 @@ interface Routines {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @summary("Queue an asynchronous routine dispatch")
   @doc("Queues an asynchronous routine dispatch.")
   @operationId("dispatchRoutineAsync")
   @post

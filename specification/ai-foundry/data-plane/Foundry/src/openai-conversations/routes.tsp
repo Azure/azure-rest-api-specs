@@ -15,6 +15,7 @@ interface Conversations {
   /**
    * Creates a conversation.
    */
+  @summary("Create a conversation")
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
@@ -25,6 +26,7 @@ interface Conversations {
   /**
    * Updates a conversation.
    */
+  @summary("Update a conversation")
   @route("{conversation_id}")
   @post
   @operationId("updateConversation")
@@ -42,6 +44,7 @@ interface Conversations {
   /**
    * Retrieves a conversation.
    */
+  @summary("Retrieve a conversation")
   @route("{conversation_id}")
   @get
   @operationId("getConversation")
@@ -58,6 +61,7 @@ interface Conversations {
   /**
    * Deletes a conversation.
    */
+  @summary("Delete a conversation")
   @route("{conversation_id}")
   @delete
   @operationId("deleteConversation")
@@ -77,6 +81,7 @@ interface Conversations {
   /**
    * Returns the list of all conversations.
    */
+  @summary("List all conversations")
   @get
   @operationId("listConversations")
   @list
@@ -93,6 +98,7 @@ interface Conversations {
   /**
    * Creates items in a conversation with the given ID.
    */
+  @summary("Create items in a conversation with the given ID")
   @route("{conversation_id}/items")
   @post
   @operationId("createConversationItems")
@@ -120,6 +126,7 @@ interface Conversations {
   /**
    * Gets a single item from a conversation with the given IDs.
    */
+  @summary("Get a single item from a conversation with the given IDs")
   @route("{conversation_id}/items/{item_id}")
   @get
   @operationId("getConversationItem")
@@ -139,6 +146,7 @@ interface Conversations {
   /**
    * Deletes an item from a conversation with the given IDs.
    */
+  @summary("Delete an item from a conversation with the given IDs")
   @route("{conversation_id}/items/{item_id}")
   @delete
   @operationId("deleteConversationItem")
@@ -158,6 +166,7 @@ interface Conversations {
   /**
    * Lists all items for a conversation with the given ID.
    */
+  @summary("List all items for a conversation with the given ID")
   @route("{conversation_id}/items")
   @get
   @operationId("listConversationItems")

@@ -15,6 +15,7 @@ interface Skills {
   /**
    * Retrieves a skill.
    */
+  @summary("Retrieve a skill")
   @get
   @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -26,6 +27,7 @@ interface Skills {
   /**
    * Returns the list of all skills.
    */
+  @summary("List all skills")
   @route("/skills")
   @list
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -38,6 +40,7 @@ interface Skills {
    * Updates a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("Update a skill")
   @operationId("updateSkill")
   @post
   @route("/skills/{name}")
@@ -51,6 +54,7 @@ interface Skills {
    * Deletes a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @summary("Delete a skill")
   @delete
   @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -65,6 +69,7 @@ interface Skills {
    * Creates a new version of a skill. If the skill does not exist, it will be created.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("Create a new version of a skill")
   @operationId("createSkillVersion")
   @post
   @route("/skills/{name}/versions")
@@ -80,6 +85,7 @@ interface Skills {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   #suppress "@azure-tools/typespec-azure-core/byos" "Skill file upload uses multipart form data"
+  @summary("Create a new version of a skill from uploaded files via multipart f")
   @operationId("createSkillVersionFromFiles")
   @post
   @route("/skills/{name}/versions")
@@ -101,6 +107,7 @@ interface Skills {
    * Lists all versions of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("List all versions of a skill")
   @operationId("listSkillVersions")
   @get
   @list
@@ -115,6 +122,7 @@ interface Skills {
    * Retrieves a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("Retrieve a specific version of a skill")
   @operationId("getSkillVersion")
   @get
   @route("/skills/{name}/versions/{version}")
@@ -128,6 +136,7 @@ interface Skills {
    * Downloads the zip content for the default version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("Download the zip content for the default version of a skill")
   @operationId("getSkillContent")
   @get
   @route("/skills/{name}/content")
@@ -141,6 +150,7 @@ interface Skills {
    * Downloads the zip content for a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("Download the zip content for a specific version of a skill")
   @operationId("getSkillVersionContent")
   @get
   @route("/skills/{name}/versions/{version}/content")
@@ -154,6 +164,7 @@ interface Skills {
    * Deletes a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @summary("Delete a specific version of a skill")
   @operationId("deleteSkillVersion")
   @delete
   @route("/skills/{name}/versions/{version}")
