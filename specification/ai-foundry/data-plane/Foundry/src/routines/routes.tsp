@@ -67,7 +67,7 @@ interface Routines {
   listRoutines is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
     ListRoutinesParameters,
-    AgentsPagedResult<Routine>
+    RoutineListResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -92,7 +92,7 @@ interface Routines {
   listRoutineRuns is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.routines_v1_preview,
     ListRoutineRunsParameters,
-    AgentsPagedResult<RoutineRun>
+    RoutineRunsResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
