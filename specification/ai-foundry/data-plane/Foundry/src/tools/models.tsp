@@ -1,4 +1,4 @@
-import "../memory-stores/models.tsp";
+ import "../memory-stores/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
@@ -121,8 +121,13 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@withoutOmittedProperties(OpenAI.FileSearchTool, "vector_store_ids");
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.FileSearchTool,
     {
+      /** The IDs of the vector stores to search. */
+      vector_store_ids?: string[],
+
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,
     }

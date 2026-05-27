@@ -34563,8 +34563,7 @@
       "OpenAI.FileSearchTool": {
         "type": "object",
         "required": [
-          "type",
-          "vector_store_ids"
+          "type"
         ],
         "properties": {
           "type": {
@@ -34575,13 +34574,6 @@
             "description": "The type of the file search tool. Always `file_search`.",
             "x-stainless-const": true,
             "default": "file_search"
-          },
-          "vector_store_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The IDs of the vector stores to search."
           },
           "max_num_results": {
             "allOf": [
@@ -34621,6 +34613,13 @@
               "$ref": "#/components/schemas/ToolConfig"
             },
             "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
+          },
+          "vector_store_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The IDs of the vector stores to search."
           }
         },
         "allOf": [
