@@ -1013,9 +1013,23 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "The expand expression to apply on the operation. Allowed values are 'properties' and 'properties/deprecationStatus'.",
+            "description": "The expand expression to apply on the operation.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "properties"
+            ],
+            "x-ms-enum": {
+              "name": "ListVersionsExpandOptions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Properties",
+                  "value": "properties",
+                  "description": "Expand to include all properties in the response."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -1041,6 +1055,9 @@
           },
           "VirtualMachineExtensionImage_ListVersions_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImage_ListVersions_MinimumSet_Gen.json"
+          },
+          "VirtualMachineExtensionImage_ListVersions_WithExpandProperties_Gen": {
+            "$ref": "./examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImage_ListVersions_WithExpandProperties_Gen.json"
           }
         }
       }
@@ -14532,7 +14549,7 @@
     },
     "ExtensionFeatureMetadata": {
       "type": "object",
-      "description": "Holds additional metadata in a flexible property bag.",
+      "description": "Additional metadata about extension features, including compliance and capability tags.",
       "properties": {
         "extensionFeatureTags": {
           "type": "array",
@@ -15417,6 +15434,24 @@
       "required": [
         "value"
       ]
+    },
+    "ListVersionsExpandOptions": {
+      "type": "string",
+      "description": "Defines the allowed values for the $expand query parameter on the ListVersions operation.",
+      "enum": [
+        "properties"
+      ],
+      "x-ms-enum": {
+        "name": "ListVersionsExpandOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Properties",
+            "value": "properties",
+            "description": "Expand to include all properties in the response."
+          }
+        ]
+      }
     },
     "LogAnalyticsInputBase": {
       "type": "object",
@@ -19558,7 +19593,7 @@
         },
         "extensionFeatureMetadata": {
           "$ref": "#/definitions/ExtensionFeatureMetadata",
-          "description": "A nested object that holds additional metadata in a flexible property bag.",
+          "description": "Additional metadata about extension features, including compliance and capability tags.",
           "readOnly": true
         }
       },
