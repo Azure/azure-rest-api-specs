@@ -1,4 +1,5 @@
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { AzsdkSdkBreakingChange } from "./azsdk-adapter.js";
 
 /**
  * SDK automation execution state.
@@ -27,6 +28,7 @@ export interface ExecutionReportPackage {
   installationInstructions?: string;
   apiViewArtifact?: string;
   shouldLabelBreakingChange?: boolean;
+  breakingchanges?: AzsdkSdkBreakingChange[];
 }
 
 /**

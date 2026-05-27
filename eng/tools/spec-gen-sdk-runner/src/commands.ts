@@ -1,9 +1,10 @@
-import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
+import { APIViewRequestData, SdkBreakingChangeData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
 import {
   AzsdkBuildResponse,
+  AzsdkDetectBreakingchangeResponse,
   AzsdkGenerateResponse,
   AzsdkPackResponse,
   buildExecutionReport,
@@ -18,6 +19,7 @@ import {
   installLanguageToolchain,
   logIssuesToPipeline,
   parseArguments,
+  prepareAzsdkBreakingChangeDetectCommand,
   prepareAzsdkBuildCommand,
   prepareAzsdkGenerateCommand,
   prepareAzsdkPackCommand,
@@ -73,7 +75,7 @@ async function runAzsdkGeneration(
       LogLevel.Info,
     );
     return {
-      executionReport: buildExecutionReport(undefined, undefined, emitterCheck),
+      executionReport: buildExecutionReport(undefined, undefined, undefined, emitterCheck),
       statusCode: 0,
     };
   }
@@ -100,7 +102,31 @@ async function runAzsdkGeneration(
     statusCode = 1;
   }
 
-  // Step 4 & 5: On success, build (if not Python) then pack
+  // Step 3: Run azsdk pkg changelog
+
+  // Step 4: Run azsdk pkg detect-breaking-change
+  let breakingchangeResponse: AzsdkDetectBreakingchangeResponse | undefined;
+  if (generateResponse?.result === "succeeded" &&
+    emitterCheck.metadata &&
+    emitterCheck.languageKey
+  ) {
+    try {
+      const langMeta = emitterCheck.metadata.languages[emitterCheck.languageKey]?.[0];
+      if (langMeta?.outputDir) {
+        const packagePath = resolvePackagePath(langMeta.outputDir, commandInput.localSdkRepoPath);
+        const breakingchangeDetectArgs = prepareAzsdkBreakingChangeDetectCommand(commandInput, packagePath, tspConfigRelativePath);
+        logMessage(`Running: ${azsdkExe} ${breakingchangeDetectArgs.join(" ")}`, LogLevel.Info);
+        const breakingchangeDetectOutput = await runCommandWithOutput(azsdkExe, breakingchangeDetectArgs);
+        breakingchangeResponse = parseAzsdkResponse<AzsdkDetectBreakingchangeResponse>(breakingchangeDetectOutput);
+      }
+      
+    } catch(error) {
+      logMessage(`Error running azsdk pkg detect-breaking-change: ${inspect(error)}`, LogLevel.Error);
+      statusCode = 1;
+    }
+  }
+
+  // Step 5 & 6: On success, build (if not Python) then pack
   let packResponse: AzsdkPackResponse | undefined;
   if (
     generateResponse?.result === "succeeded" &&
@@ -113,7 +139,7 @@ async function runAzsdkGeneration(
       const isPython = commandInput.sdkRepoName.replace("-pr", "") === "azure-sdk-for-python";
       let buildSucceeded = true;
 
-      // Step 4: Build (skip for Python — interpreted language, no compilation needed)
+      // Step 5: Build (skip for Python — interpreted language, no compilation needed)
       if (!isPython) {
         try {
           const buildArgs = prepareAzsdkBuildCommand(packagePath);
@@ -134,7 +160,7 @@ async function runAzsdkGeneration(
         }
       }
 
-      // Step 5: Pack (only if build succeeded or was skipped)
+      // Step 6: Pack (only if build succeeded or was skipped)
       if (buildSucceeded) {
         try {
           const packArgs = prepareAzsdkPackCommand(packagePath);
@@ -154,6 +180,7 @@ async function runAzsdkGeneration(
   // Step 6: Build ExecutionReport via adapter
   const executionReport = buildExecutionReport(
     generateResponse,
+    breakingchangeResponse,
     packResponse,
     emitterCheck,
     buildResponse,
@@ -273,6 +300,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let currentExecutionResult: string;
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
+  const breakingchangeData: SdkBreakingChangeData[] = [];
 
   if (changedSpecs.length === 0) {
     sdkGenerationExecuted = false;
@@ -393,6 +421,13 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
           }
         }
 
+        for (const pkg of executionReport.packages) {
+          breakingchangeData.push({
+            packageName: pkg.packageName ?? "",
+            breakingchanges: pkg.breakingchanges ?? [],
+          });
+        }
+
         if (overallExecutionResult !== "failed") {
           overallExecutionResult = currentExecutionResult;
         }
@@ -422,6 +457,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       hasTypeSpecProjects,
       stagedArtifactsFolder,
       apiViewRequestData,
+      breakingchangeData,
       sdkGenerationExecuted,
     ) || statusCode;
   return {

@@ -1,4 +1,4 @@
-import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { APIViewRequestData, SdkName, SdkBreakingChangeData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -436,6 +436,7 @@ describe("commands.ts", () => {
       const mockhasTypeSpecProjects = false;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
       const mockApiViewRequestData: APIViewRequestData[] = [];
+      const mockSdkBreakingchangeData: SdkBreakingChangeData[] = [];
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
@@ -444,6 +445,7 @@ describe("commands.ts", () => {
         mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
+        mockSdkBreakingchangeData
       );
 
       const breakingChangeLabelArtifactPath = path.normalize(
@@ -517,6 +519,7 @@ describe("commands.ts", () => {
       const mockhasTypeSpecProjects = false;
       const mockStagedArtifactsFolder = "";
       const mockApiViewRequestData: APIViewRequestData[] = [];
+      const mockSdkBreakingchangeData: SdkBreakingChangeData[] = [];
       const result = generateArtifact(
         mockCommandInput,
         mockResult,
@@ -525,6 +528,7 @@ describe("commands.ts", () => {
         mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
+        mockSdkBreakingchangeData,
       );
 
       expect(result).toBe(1);
@@ -565,6 +569,7 @@ describe("commands.ts", () => {
       const mockhasTypeSpecProjects = true;
       const mockStagedArtifactsFolder = "mockStagedArtifactsFolder";
       const mockApiViewRequestData: APIViewRequestData[] = [];
+      const mockSdkBreakingchangeData: SdkBreakingChangeData[] = [];
 
       // Explicitly passing false for sdkGenerationExecuted
       const result = generateArtifact(
@@ -575,6 +580,7 @@ describe("commands.ts", () => {
         mockhasTypeSpecProjects,
         mockStagedArtifactsFolder,
         mockApiViewRequestData,
+        mockSdkBreakingchangeData,
         false, // sdkGenerationExecuted = false
       );
 

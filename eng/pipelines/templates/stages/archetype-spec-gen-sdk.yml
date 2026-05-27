@@ -272,7 +272,8 @@ stages:
           which generator
 
           echo "call azsdk detect tool"
-          $(AZSDK) package detect-breaking-change --package-path $(SdkRepoDirectory)/sdk/resourcemanager/webpubsub/armwebpubsub --tsp-config-path $(SpecRepoDirectory)/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
+
+          # $(AZSDK) package detect-breaking-change --package-path $(SdkRepoDirectory)/sdk/resourcemanager/webpubsub/armwebpubsub --tsp-config-path $(SpecRepoDirectory)/specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService/tspconfig.yaml
         displayName: 'Generate SDK'
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
