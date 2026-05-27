@@ -912,3 +912,5 @@ using Microsoft.NetApp;
 @@usage(VolumeBackupRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeReplicationRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeRestoreRelationshipStatus, Usage.input, "csharp");
+
+@@clientLocation(NetAppAccounts.refreshLdapBindPassword, "Accounts");

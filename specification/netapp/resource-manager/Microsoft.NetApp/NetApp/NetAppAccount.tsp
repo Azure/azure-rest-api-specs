@@ -202,6 +202,7 @@ model AccountPropertiesPatch
   /**
    * LDAP Configuration for the account.
    */
+  @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -248,6 +249,13 @@ model BindPasswordAkvConfigPatch is PatchModel<BindPasswordAkvConfig>;
 /**
  * LDAP configuration for PATCH operations (no default values)
  */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model LdapConfigurationPatch
   is PatchModel<LdapConfiguration, "bindPasswordAkvConfig"> {
   /**
@@ -969,5 +977,3 @@ interface NetAppAccounts {
   NetAppAccounts.migrateBackups::parameters.body,
   "Migrate backups under an account payload supplied in the body of the operation."
 );
-
-@@clientLocation(NetAppAccounts.refreshLdapBindPassword, "Accounts");
