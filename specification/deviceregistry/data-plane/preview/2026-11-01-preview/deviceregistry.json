@@ -804,7 +804,7 @@
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles.",
+        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles. The\nissued certificate chain is delivered by the GET on the corresponding\n`issueCertResults` sub-resource, not on this 202 response.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -819,20 +819,21 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "authenticationProfileName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the authentication profile.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Certificate issuance request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CertificateIssuanceRequest"
@@ -843,30 +844,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/CertificateIssuanceResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/IssueCertAcceptedResponse"
             },
             "headers": {
               "Operation-Location": {
@@ -906,7 +884,7 @@
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Revoke credentials issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.",
+        "description": "Revoke credentials issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeResults` sub-resource.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -921,46 +899,32 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the device.",
             "required": true,
             "type": "string"
           },
           {
             "name": "authenticationProfileName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the authentication profile.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Revoke request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCredentialRevokeRequest"
+            }
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/DeviceCredentialRevokeResponse",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/RevokeResult"
             },
             "headers": {
               "Operation-Location": {
@@ -992,6 +956,140 @@
           "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}": {
+      "get": {
+        "operationId": "IssueCertResults_Get",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Get the status of a long-running `:issueCert` operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IssueCertResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a long-running :issueCert operation": {
+            "$ref": "./examples/IssueCertResults_Get.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeResults/{operationId}": {
+      "get": {
+        "operationId": "RevokeResults_Get",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Get the status of a long-running `:revoke` operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RevokeResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a long-running :revoke operation": {
+            "$ref": "./examples/RevokeResults_Get.json"
+          }
+        }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
@@ -2524,7 +2622,10 @@
           "format": "byte",
           "description": "Base64-encoded DER certificate signing request (CSR) without PEM\nheaders and footers. Format of the CSR is in PKCS 10. The CN field\nof the CSR must be set to the device registrationId."
         }
-      }
+      },
+      "required": [
+        "csr"
+      ]
     },
     "CertificateIssuanceResult": {
       "type": "object",
@@ -2535,7 +2636,10 @@
           "description": "The full chain of the issued certificate.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "issuedCertificateChain"
+      ]
     },
     "DataPlaneResourceBase": {
       "type": "object",
@@ -2964,23 +3068,6 @@
     "DeviceCredentialRevokeRequest": {
       "type": "object",
       "description": "Request payload for revoking device credentials."
-    },
-    "DeviceCredentialRevokeResponse": {
-      "type": "object",
-      "description": "Response payload for revoking device credentials.",
-      "properties": {
-        "result": {
-          "type": "string",
-          "description": "Indicates whether revocation succeeded or failed."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error details when revocation failed."
-        }
-      },
-      "required": [
-        "result"
-      ]
     },
     "DeviceProperties": {
       "type": "object",
@@ -3949,6 +4036,58 @@
         }
       }
     },
+    "IssueCertAcceptedResponse": {
+      "type": "object",
+      "description": "202 Accepted response for the `:issueCert` action. The issued certificate\nchain is delivered by the GET on the corresponding `issueCertResults`\nsub-resource (see `IssueCertResults_Get`); it is intentionally not\nreturned on this 202.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\"."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "IssueCertResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:issueCert` action on a device authentication profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/CertificateIssuanceResult",
+          "description": "The result of the certificate issuance, available once `status` is `Succeeded`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
     "IssuedCertificateChain": {
       "type": "array",
       "description": "The full chain of the issued certificate, including any intermediate\ncertification authorities (ICAs) and the root certification authority\n(CA). The first certificate in the list is the issued leaf certificate.\nEach subsequent certificate is the issuer of the previous.",
@@ -4361,6 +4500,31 @@
           }
         ]
       }
+    },
+    "RevokeResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:revoke` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
     },
     "SelfSignedThumbprints": {
       "type": "object",

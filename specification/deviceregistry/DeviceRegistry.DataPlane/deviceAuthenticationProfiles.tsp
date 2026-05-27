@@ -113,15 +113,6 @@ model CertificateAuthorityCredentials {
 /** Request payload for revoking device credentials. */
 model DeviceCredentialRevokeRequest {}
 
-/** Response payload for revoking device credentials. */
-model DeviceCredentialRevokeResponse {
-  /** Indicates whether revocation succeeded or failed. */
-  result: string;
-
-  /** Error details when revocation failed. */
-  error?: Azure.Core.Foundations.Error;
-}
-
 // ──────────────────────────────────────────────
 // Certificate issuance action models
 // ──────────────────────────────────────────────
@@ -133,7 +124,7 @@ model CertificateIssuanceRequest {
    * headers and footers. Format of the CSR is in PKCS 10. The CN field
    * of the CSR must be set to the device registrationId.
    */
-  csr?: bytes;
+  csr: bytes;
 }
 
 /**
@@ -148,7 +139,79 @@ model IssuedCertificateChain is bytes[];
 model CertificateIssuanceResult {
   /** The full chain of the issued certificate. */
   @visibility(Lifecycle.Read)
-  issuedCertificateChain?: IssuedCertificateChain;
+  issuedCertificateChain: IssuedCertificateChain;
+}
+
+// ──────────────────────────────────────────────
+// Issue-cert polling sub-resource
+// ──────────────────────────────────────────────
+
+/** Status monitor for the long-running `:issueCert` action on a device authentication profile. */
+@parentResource(DeviceAuthenticationProfile)
+@resource("issueCertResults")
+model IssueCertResult {
+  /** The unique ID of the operation. */
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The status of the operation. */
+  @Azure.Core.lroStatus
+  @visibility(Lifecycle.Read)
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error object that describes the error when status is "Failed". */
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+
+  /** The result of the certificate issuance, available once `status` is `Succeeded`. */
+  @visibility(Lifecycle.Read)
+  result?: CertificateIssuanceResult;
+}
+
+/**
+ * 202 Accepted response for the `:issueCert` action. The issued certificate
+ * chain is delivered by the GET on the corresponding `issueCertResults`
+ * sub-resource (see `IssueCertResults_Get`); it is intentionally not
+ * returned on this 202.
+ */
+model IssueCertAcceptedResponse {
+  /** The unique ID of the operation. */
+  id: string;
+
+  /** The status of the operation. */
+  @Azure.Core.lroStatus
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error object that describes the error when status is "Failed". */
+  error?: Azure.Core.Foundations.Error;
+}
+
+// ──────────────────────────────────────────────
+// Revoke polling sub-resource
+// ──────────────────────────────────────────────
+
+/**
+ * Status monitor for the long-running `:revoke` action on a device authentication
+ * profile. The operation has no payload to return on success; `status` carries the
+ * outcome and `error` carries failure details.
+ */
+@parentResource(DeviceAuthenticationProfile)
+@resource("revokeResults")
+model RevokeResult {
+  /** The unique ID of the operation. */
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The status of the operation. */
+  @Azure.Core.lroStatus
+  @visibility(Lifecycle.Read)
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error object that describes the error when status is "Failed". */
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
 }
 
 // ──────────────────────────────────────────────
@@ -176,25 +239,82 @@ interface DeviceAuthenticationProfiles {
   /**
    * Issue an operational X.509 certificate for the device. The certificate is
    * signed using the certificate authority policy bound to this authentication
-   * profile. Applies to Microsoft-managed X.509 authentication profiles.
+   * profile. Applies to Microsoft-managed X.509 authentication profiles. The
+   * issued certificate chain is delivered by the GET on the corresponding
+   * `issueCertResults` sub-resource, not on this 202 response.
    */
-  @action("issueCert")
-  @pollingOperation(Operations.get)
-  issueCert is ResourceOperations.LongRunningResourceAction<
-    DeviceAuthenticationProfile,
-    CertificateIssuanceRequest,
-    CertificateIssuanceResult
-  >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response intentionally omits 'result'. The issued certificate chain is delivered by the dedicated GET issueCertResults polling endpoint."
+  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert")
+  @post
+  @pollingOperation(IssueCertResults.get)
+  issueCert(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    /** The unique identifier of the namespace. */
+    @path namespaceUuid: string,
+
+    /** The name of the device. */
+    @path deviceName: string,
+
+    /** The name of the authentication profile. */
+    @path authenticationProfileName: string,
+
+    /** Certificate issuance request. */
+    @body body: CertificateIssuanceRequest,
+  ): {
+    @statusCode statusCode: 202;
+
+    /** The location for monitoring the operation state. */
+    @header("Operation-Location") operationLocation: url;
+
+    ...IssueCertAcceptedResponse;
+  } | Azure.Core.Foundations.ErrorResponse;
 
   /**
    * Revoke credentials issued for the device authentication profile. Applies to
    * Microsoft-managed X.509 certificates: invalidates outstanding certificates
    * via the PKI revocation list. The authentication profile itself is preserved.
+   * The 202 carries only operation state; status is polled via the dedicated GET
+   * on the corresponding `revokeResults` sub-resource.
    */
-  @pollingOperation(Operations.get)
-  revoke is ResourceOperations.LongRunningResourceAction<
-    DeviceAuthenticationProfile,
-    DeviceCredentialRevokeRequest,
-    DeviceCredentialRevokeResponse
-  >;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeResults sub-resource."
+  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revoke")
+  @post
+  @pollingOperation(RevokeResults.get)
+  revoke(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    /** The unique identifier of the namespace. */
+    @path namespaceUuid: string,
+
+    /** The name of the device. */
+    @path deviceName: string,
+
+    /** The name of the authentication profile. */
+    @path authenticationProfileName: string,
+
+    /** Revoke request body. */
+    @body body: DeviceCredentialRevokeRequest,
+  ): {
+    @statusCode statusCode: 202;
+
+    /** The location for monitoring the operation state. */
+    @header("Operation-Location") operationLocation: url;
+
+    ...RevokeResult;
+  } | Azure.Core.Foundations.ErrorResponse;
+}
+
+/** Polling operations for the long-running `:issueCert` action. */
+@tag("Device Authentication Profiles")
+interface IssueCertResults {
+  /** Get the status of a long-running `:issueCert` operation. */
+  get is ResourceOperations.ResourceRead<IssueCertResult>;
+}
+
+/** Polling operations for the long-running `:revoke` action. */
+@tag("Device Authentication Profiles")
+interface RevokeResults {
+  /** Get the status of a long-running `:revoke` operation. */
+  get is ResourceOperations.ResourceRead<RevokeResult>;
 }
