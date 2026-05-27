@@ -20,6 +20,12 @@ namespace Microsoft.Chaos;
 interface ScenarioRuns {
   /**
    * Get a scenario run.
+   *
+   * This endpoint is also the polling target for ScenarioConfigurations.execute
+   * and ScenarioRuns.cancel (final-state-via: location). While the run is in
+   * progress the service returns 202 with a Location header pointing back to
+   * this URL; clients must keep polling until they receive 200, which carries
+   * the final ScenarioRun body.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LRO polling endpoint that returns body in both 200 and 202"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "LRO polling endpoint returns body in 202 to reflect current status"
