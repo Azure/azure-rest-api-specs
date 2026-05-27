@@ -1327,6 +1327,7 @@ using Microsoft.DataMigration;
   "input",
   "csharp"
 );
+@@clientName(DatabaseMigrationSqlDbs.retry::parameters.body, "input", "csharp");
 @@clientName(
   DatabaseMigrationSqlMis.cancel::parameters.body,
   "input",
