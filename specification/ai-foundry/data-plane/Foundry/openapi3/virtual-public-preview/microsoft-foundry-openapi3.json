@@ -14831,7 +14831,16 @@
             }
           },
           {
-            "$ref": "#/components/parameters/ListRoutinesParameters"
+            "$ref": "#/components/parameters/ListRoutinesParameters.limit"
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutinesParameters.after"
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutinesParameters.before"
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutinesParameters.order"
           },
           {
             "name": "api-version",
@@ -14850,7 +14859,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoutinesListResponse"
+                  "$ref": "#/components/schemas/RoutineListResponse"
                 }
               }
             }
@@ -15088,13 +15097,16 @@
             "$ref": "#/components/parameters/ListRoutineRunsParameters.filter"
           },
           {
-            "$ref": "#/components/parameters/ListRoutineRunsParameters.orderBy"
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.limit"
           },
           {
-            "$ref": "#/components/parameters/ListRoutineRunsParameters.maxResults"
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.after"
           },
           {
-            "$ref": "#/components/parameters/ListRoutineRunsParameters.pageToken"
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.before"
+          },
+          {
+            "$ref": "#/components/parameters/ListRoutineRunsParameters.order"
           },
           {
             "name": "api-version",
@@ -17359,6 +17371,26 @@
           "maxLength": 128
         }
       },
+      "ListRoutineRunsParameters.after": {
+        "name": "after",
+        "in": "query",
+        "required": false,
+        "description": "An opaque cursor returned as last_id by the previous list-runs response.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "ListRoutineRunsParameters.before": {
+        "name": "before",
+        "in": "query",
+        "required": false,
+        "description": "Unsupported. Reserved for future backward pagination support.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
       "ListRoutineRunsParameters.filter": {
         "name": "filter",
         "in": "query",
@@ -17369,8 +17401,8 @@
         },
         "explode": false
       },
-      "ListRoutineRunsParameters.maxResults": {
-        "name": "maxResults",
+      "ListRoutineRunsParameters.limit": {
+        "name": "limit",
         "in": "query",
         "required": false,
         "description": "The maximum number of runs to return.",
@@ -17380,24 +17412,11 @@
         },
         "explode": false
       },
-      "ListRoutineRunsParameters.orderBy": {
-        "name": "orderBy",
+      "ListRoutineRunsParameters.order": {
+        "name": "order",
         "in": "query",
         "required": false,
-        "description": "Ordering expressions applied by the run-history backend.",
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "explode": false
-      },
-      "ListRoutineRunsParameters.pageToken": {
-        "name": "pageToken",
-        "in": "query",
-        "required": false,
-        "description": "A page token returned by the previous list-runs response.",
+        "description": "The ordering direction. Supported values are asc and desc.",
         "schema": {
           "type": "string"
         },
@@ -17413,11 +17432,42 @@
           "maxLength": 128
         }
       },
-      "ListRoutinesParameters": {
-        "name": "continuationToken",
+      "ListRoutinesParameters.after": {
+        "name": "after",
         "in": "query",
         "required": false,
-        "description": "A continuation token returned by the previous list response.",
+        "description": "An opaque cursor returned as last_id by the previous list response.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "ListRoutinesParameters.before": {
+        "name": "before",
+        "in": "query",
+        "required": false,
+        "description": "Unsupported. Reserved for future backward pagination support.",
+        "schema": {
+          "type": "string"
+        },
+        "explode": false
+      },
+      "ListRoutinesParameters.limit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "description": "The maximum number of routines to return.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "explode": false
+      },
+      "ListRoutinesParameters.order": {
+        "name": "order",
+        "in": "query",
+        "required": false,
+        "description": "The ordering direction. Supported values are asc and desc.",
         "schema": {
           "type": "string"
         },
@@ -50901,7 +50951,6 @@
       "Routine": {
         "type": "object",
         "required": [
-          "name",
           "enabled"
         ],
         "properties": {
@@ -51114,6 +51163,40 @@
           ]
         }
       },
+      "RoutineListResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "has_more"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Routine"
+            },
+            "description": "The requested list of routines."
+          },
+          "first_id": {
+            "type": "string",
+            "description": "The identifier of the first routine in this page, or null when the page is empty."
+          },
+          "last_id": {
+            "type": "string",
+            "description": "An opaque cursor to pass as the next after query parameter when has_more is true."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "True when more routines are available after this page."
+          }
+        },
+        "description": "The paginated response returned when listing routines.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Routines=V1Preview"
+          ]
+        }
+      },
       "RoutineRun": {
         "type": "object",
         "properties": {
@@ -51276,19 +51359,28 @@
       "RoutineRunsResponse": {
         "type": "object",
         "required": [
-          "value"
+          "data",
+          "has_more"
         ],
         "properties": {
-          "value": {
+          "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutineRun"
             },
             "description": "The requested list of routine runs."
           },
-          "nextPageToken": {
+          "first_id": {
             "type": "string",
-            "description": "A page token to pass as pageToken on the next list-runs request, when more runs are available."
+            "description": "The identifier of the first run in this page, or null when the page is empty."
+          },
+          "last_id": {
+            "type": "string",
+            "description": "An opaque cursor to pass as the next after query parameter when has_more is true."
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "True when more routine runs are available after this page."
           }
         },
         "description": "The paginated response returned when listing routine runs.",
@@ -51345,35 +51437,6 @@
           }
         ],
         "description": "The discriminator values supported for routine triggers.",
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Routines=V1Preview"
-          ]
-        }
-      },
-      "RoutinesListResponse": {
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Routine"
-            },
-            "description": "The requested list of routines."
-          },
-          "continuationToken": {
-            "type": "string",
-            "description": "A continuation token to pass on the next list request, when more routines are available."
-          },
-          "nextLink": {
-            "type": "string",
-            "description": "A service-generated link to the next page, when available."
-          }
-        },
-        "description": "The paginated response returned when listing routines.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Routines=V1Preview"
@@ -52824,11 +52887,7 @@
           },
           "in": {
             "type": "string",
-            "description": "A relative timer expression from now, such as `2h` or `15m`. Callers can specify either `in` for relative timing or `at` for absolute timing; stored routines are normalized to an absolute fire time."
-          },
-          "at": {
-            "type": "string",
-            "description": "An absolute timer expression. Supported values include an ISO-8601 timestamp with an explicit offset or a local timestamp paired with `time_zone`. Callers can specify either `at` for absolute timing or `in` for relative timing; stored routines are normalized to an absolute fire time."
+            "description": "A relative timer expression from now, such as `2h` or `15m`. Stored routines are normalized to an absolute fire time."
           },
           "time_zone": {
             "type": "string",

@@ -132,11 +132,8 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
   type: RoutineTriggerType.timer;
 
-  @doc("A relative timer expression from now, such as `2h` or `15m`. Callers can specify either `in` for relative timing or `at` for absolute timing; stored routines are normalized to an absolute fire time.")
+  @doc("A relative timer expression from now, such as `2h` or `15m`. Stored routines are normalized to an absolute fire time.")
   in?: string;
-
-  @doc("An absolute timer expression. Supported values include an ISO-8601 timestamp with an explicit offset or a local timestamp paired with `time_zone`. Callers can specify either `at` for absolute timing or `in` for relative timing; stored routines are normalized to an absolute fire time.")
-  at?: string;
 
   @doc("An optional IANA or Windows time zone identifier when the timer uses a local timestamp.")
   time_zone?: string;
@@ -234,7 +231,7 @@ model InvokeAgentInvocationsApiRoutineAction extends RoutineAction {
 model Routine {
   @doc("The routine name.")
   @maxLength(128)
-  name: string;
+  name?: string;
 
   @doc("A human-readable description of the routine.")
   @maxLength(1024)
@@ -275,17 +272,20 @@ model RoutineCreateOrUpdateRequest {
 
 @doc("The paginated response returned when listing routines.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
-model RoutinesListResponse {
+model RoutineListResponse {
   @doc("The requested list of routines.")
   @pageItems
-  value: Routine[];
+  data: Routine[];
 
-  @doc("A continuation token to pass on the next list request, when more routines are available.")
+  @doc("The identifier of the first routine in this page, or null when the page is empty.")
+  first_id?: string;
+
+  @doc("An opaque cursor to pass as the next after query parameter when has_more is true.")
   @continuationToken
-  continuationToken?: string;
+  last_id?: string;
 
-  @doc("A service-generated link to the next page, when available.")
-  nextLink?: string;
+  @doc("True when more routines are available after this page.")
+  has_more: boolean;
 }
 
 @doc("Base model for a manual dispatch payload.")
@@ -415,11 +415,17 @@ model RoutineRun {
 model RoutineRunsResponse {
   @doc("The requested list of routine runs.")
   @pageItems
-  value: RoutineRun[];
+  data: RoutineRun[];
 
-  @doc("A page token to pass as pageToken on the next list-runs request, when more runs are available.")
+  @doc("The identifier of the first run in this page, or null when the page is empty.")
+  first_id?: string;
+
+  @doc("An opaque cursor to pass as the next after query parameter when has_more is true.")
   @continuationToken
-  nextPageToken?: string;
+  last_id?: string;
+
+  @doc("True when more routine runs are available after this page.")
+  has_more: boolean;
 }
 
 @doc("Parameters for creating or updating a routine.")
@@ -458,10 +464,22 @@ model DisableRoutineParameters {
 
 @doc("Parameters for listing routines.")
 model ListRoutinesParameters {
-  @doc("A continuation token returned by the previous list response.")
+  @doc("The maximum number of routines to return.")
+  @query
+  limit?: int32;
+
+  @doc("An opaque cursor returned as last_id by the previous list response.")
   @query
   @continuationToken
-  continuationToken?: string;
+  after?: string;
+
+  @doc("Unsupported. Reserved for future backward pagination support.")
+  @query
+  before?: string;
+
+  @doc("The ordering direction. Supported values are asc and desc.")
+  @query
+  order?: string;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -483,18 +501,22 @@ model ListRoutineRunsParameters {
   @query
   filter?: string;
 
-  @doc("Ordering expressions applied by the run-history backend.")
-  @query
-  orderBy?: string[];
-
   @doc("The maximum number of runs to return.")
   @query
-  maxResults?: int32;
+  limit?: int32;
 
-  @doc("A page token returned by the previous list-runs response.")
+  @doc("An opaque cursor returned as last_id by the previous list-runs response.")
   @query
   @continuationToken
-  pageToken?: string;
+  after?: string;
+
+  @doc("Unsupported. Reserved for future backward pagination support.")
+  @query
+  before?: string;
+
+  @doc("The ordering direction. Supported values are asc and desc.")
+  @query
+  order?: string;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")
