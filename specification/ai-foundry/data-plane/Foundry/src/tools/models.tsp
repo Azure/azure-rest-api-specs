@@ -767,9 +767,14 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Shared fields for A2A tool definitions.
+   * An agent implementing the A2A protocol.
    */
-  model A2APreviewToolFields {
+  model A2APreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a_preview`.
+     */
+    type: "a2a_preview";
+
     /**
      * Base URL of the agent.
      */
@@ -781,20 +786,13 @@ namespace Azure.AI.Projects {
      */
     agent_card_path?: string;
 
-    ...OptionalToolProjectConnectionIdField;
-  }
-
-  /**
-   * An agent implementing the A2A protocol.
-   */
-  model A2APreviewTool extends OpenAI.Tool {
     /**
-     * The type of the tool. Always `"a2a_preview`.
+     * The connection ID in the project for the A2A server.
+     * The connection stores authentication and other connection details needed to connect to the A2A server.
      */
-    type: "a2a_preview";
+    project_connection_id?: string;
 
     ...ToolNameAndDescriptionExtension;
-    ...A2APreviewToolFields;
   }
 
   /**

@@ -14950,14 +14950,6 @@
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "base_url": {
             "type": "string",
             "format": "uri",
@@ -14969,7 +14961,15 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -14990,7 +14990,7 @@
             "enum": [
               "a2a_preview"
             ],
-            "description": "The type of the tool. Always `a2a_preview`."
+            "description": "The type of the tool. Always `\"a2a_preview`."
           },
           "base_url": {
             "type": "string",
@@ -15003,7 +15003,7 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
           }
         },
         "allOf": [

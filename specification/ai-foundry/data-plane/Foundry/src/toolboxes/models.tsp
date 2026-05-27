@@ -159,12 +159,10 @@ model OpenApiToolboxTool extends ToolboxTool {
  * An A2A tool stored in a toolbox.
  */
 model A2APreviewToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `a2a_preview`.
-   */
-  type: "a2a_preview";
-
-  ...A2APreviewToolFields;
+  ...PickProperties<
+    A2APreviewTool,
+    "type" | "base_url" | "agent_card_path" | "project_connection_id"
+  >;
 }
 
 /**
