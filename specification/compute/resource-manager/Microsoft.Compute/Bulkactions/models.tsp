@@ -173,6 +173,13 @@ model PriorityProfile {
   @doc("The priority type for VM allocation")
   type?: PriorityType;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
+  @doc("Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview.")
+  maxPricePerVM?: float32;
+
+  @doc("Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview.")
+  evictionPolicy?: EvictionPolicy;
+
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: AllocationStrategy;
 }
