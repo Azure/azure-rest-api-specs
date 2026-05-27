@@ -72,7 +72,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
-  "go"
+  "go,python"
 );
 @@clientLocation(listGeodataByIp, "SecurityInsightsClient", "go");
 @@clientLocation(listWhoisByDomain, "SecurityInsightsClient", "go");
