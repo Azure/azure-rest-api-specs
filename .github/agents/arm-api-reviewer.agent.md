@@ -351,9 +351,12 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 **PR:** `<PR-URL>`
 **Previous version:** `<previous-version>` (or "None - new service")
 
-<!-- Critic status line - INCLUDE ONLY when not the clean default. Omit entirely on READY TO POST with a passing critic. -->
-<!-- > ⚠️ **Manual decision required** - critic and reviewer disagree on <N> finding(s) after iteration cap or wave-thrash detection. See per-finding notes. -->
-<!-- > ⚠️ **Independent critic verification was not performed** - the reviewer ran a self-check only, which cannot catch this agent's own off-by-one errors or paraphrase drift. Treat all findings as low confidence and re-verify against the cited file at head SHA `<sha>` before posting. -->
+<!-- Critic status banner - INCLUDE ONLY when not the clean default. Omit entirely on READY TO POST with a passing critic. -->
+<!-- > [!WARNING]
+> **Manual decision required** - critic and reviewer disagree on <N> finding(s) after iteration cap or wave-thrash detection. See per-finding notes. -->
+<!-- When the critic is UNAVAILABLE, use a GitHub `[!CAUTION]` alert so the banner renders in RED. This is the user-visible signal that independent verification did not run; do NOT downgrade it to a plain blockquote or `[!NOTE]`. -->
+<!-- > [!CAUTION]
+> **Independent critic verification was NOT performed** - the reviewer ran a self-check only, which cannot catch this agent's own off-by-one errors or paraphrase drift. Treat all findings as low confidence and re-verify against the cited file at head SHA `<sha>` before posting. -->
 
 ### Blocking Issues - New (must fix before merge)
 
@@ -420,6 +423,9 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
   <!-- Include the next two lines ONLY if non-zero: -->
   <!-- - Findings dropped after critic review: <count> -->
   <!-- - Critic iterations: <count> of 5 (or "converged at <N>") -->
+  <!-- Include the next line ONLY when Critic mode is UNAVAILABLE. Use a `[!CAUTION]` alert so it renders in RED in the Summary - this is a hard requirement so the human is alerted that no independent verification ran. -->
+  <!-- > [!CAUTION]
+  > **Critic: UNAVAILABLE** - independent verification did not run for this review. All findings are reviewer self-check only. -->
 ```
 
 **Internal tracking (not rendered to the reviewer).** You must still track the critic's verdict, mode (`subagent | session-handoff | UNAVAILABLE`), iteration count, and the `Next-step recommendation` (`READY TO POST | REVISE RECOMMENDED | MANUAL DECISION REQUIRED`) - these gate Step 7 and feed the hidden HTML telemetry markers on posted comments. They are simply not part of the chat-rendered report unless the exception conditions above are met.
@@ -525,12 +531,14 @@ After the human chooses:
    **Scenario D - No new findings beyond what existing comments already cover:**
    If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "_All findings from this review are already covered by existing comments on the PR. No new comments are needed - the existing threads already highlight the required changes._" List the existing comment threads that match, **including the comment URL** for each so the reviewer can click through and verify.
 
-   **Scenario E - Existing comment's violation has been fixed:**
-   An existing unresolved comment flags a violation, but the current review finds that the violation **no longer exists** in the latest code (the PR author fixed it). Report this to the human reviewer:
-   - List each addressed comment with its **clickable comment URL**, the rule it flagged, and confirmation that the code now complies. The URL lets the reviewer navigate directly to the original thread to verify the fix.
-   - **Propose resolving** each addressed comment. Do **not** resolve without the engineer's explicit consent - the engineer may want to verify the fix themselves or leave the thread open for follow-up discussion.
-   - If the engineer approves, resolve the comment and add a reply: "_This issue has been addressed in the latest changes. Resolving._"
-   - If the comment was from a different human reviewer, do **not** resolve it - instead, **add a reply** noting the fix: "_The violation flagged in this comment appears to have been addressed in the latest code changes at `<file>` - line <N>. The original reviewer may want to verify and resolve._"
+   **Scenario E - Existing agent-posted comment's violation has been fixed:**
+   An existing unresolved **agent-posted** comment (body contains `posted-by: arm-api-reviewer-agent`) flags a violation, but the current review finds that the violation **no longer exists** in the latest code (the PR author fixed it). Because the comment was posted by this agent, the agent owns the thread and may resolve it directly - no human approval required:
+   - **Thank the author** by posting a reply to the thread: "_Thanks for addressing this! The violation flagged here is no longer present in the latest changes. Resolving this thread._"
+   - **Resolve the conversation** immediately after posting the thank-you reply.
+   - List each resolved thread in the reconciliation summary (step 10) with its **clickable comment URL**, the rule it flagged, and the line where the agent verified the fix, so the human reviewer can spot-check.
+
+   **Scenario F - Existing human-posted comment's violation has been fixed:**
+   An existing unresolved comment posted by a human reviewer (body does **not** contain `posted-by: arm-api-reviewer-agent`) flags a violation that the current review finds is no longer present. Do **not** resolve and do **not** thank on the human's behalf - the thread belongs to that reviewer. Instead, list the comment in the reconciliation summary with its URL, rule, and verified fix line, and propose to the human reviewer that they may want to resolve it themselves. If they approve, add a reply: "_The violation flagged in this comment appears to have been addressed at `<file>` - line <N>._" and resolve only with their explicit consent.
 
 4. Once approved and de-duplicated, post review comments on the PR using the GitHub tools - one comment per finding, attached to the specific file and **exact line number** where the violation occurs.
 5. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR - this property did not exist in the previous version").
@@ -563,7 +571,8 @@ After the human chooses:
     - Existing comments to **resolve and re-post** (Scenario B - line shifted, same author)
     - Existing comments to **reply to** (Scenario C - line shifted, different author)
     - Findings **already covered** by existing comments (skipped)
-    - Existing comments whose violations have been **fixed** - propose resolving (Scenario E)
+    - Agent-posted comments whose violations have been **fixed** - will be thanked + auto-resolved (Scenario E); list URL, rule, and verified fix line for each.
+    - Human-posted comments whose violations have been **fixed** (Scenario F) - listed for the human reviewer to optionally resolve themselves.
     - Wait for the reviewer to approve the plan before executing.
 11. Do NOT post comments without the human reviewer's approval.
 
