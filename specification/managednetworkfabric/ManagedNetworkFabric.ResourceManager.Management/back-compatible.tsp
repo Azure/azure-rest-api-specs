@@ -245,13 +245,6 @@ model NetworkTapRulesListResult is Azure.Core.Page<NetworkTapRule>;
 model NetworkTapsListResult is Azure.Core.Page<NetworkTap>;
 model RoutePoliciesListResult is Azure.Core.Page<RoutePolicy>;
 model AccessControlListsListResult is Azure.Core.Page<AccessControlList>;
-
-@added(Versions.v2026_01_15_preview)
-model EdgeConnectorsListResult is Azure.Core.Page<EdgeConnector>;
-
-@added(Versions.v2026_01_15_preview)
-model FabricsListResult is Azure.Core.Page<Fabric>;
-
 model ExternalNetworksList is Azure.Core.Page<ExternalNetwork>;
 model InternalNetworksList is Azure.Core.Page<InternalNetwork>;
 model NetworkInterfacesList is Azure.Core.Page<NetworkInterface>;
