@@ -71,7 +71,7 @@ interface L2IsolationDomains {
   updateAdministrativeState is ArmResourceActionAsync<
     L2IsolationDomain,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Validates the configuration of the resources.")

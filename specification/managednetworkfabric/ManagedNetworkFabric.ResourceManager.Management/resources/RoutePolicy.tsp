@@ -65,7 +65,7 @@ interface RoutePolicies {
   updateAdministrativeState is ArmResourceActionAsync<
     RoutePolicy,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Validates the configuration of the resources.")

@@ -153,7 +153,7 @@ interface NetworkFabrics {
   provision is ArmResourceActionAsync<
     NetworkFabric,
     void,
-    Foundations.OperationStatusResult
+    CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Deprovisions the underlying resources in the given Network Fabric instance.")
@@ -174,7 +174,7 @@ interface NetworkFabrics {
   deprovision is ArmResourceActionAsync<
     NetworkFabric,
     void,
-    Foundations.OperationStatusResult
+    CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Upgrades the version of the underlying resources in the given Network Fabric instance.")
@@ -194,8 +194,8 @@ interface NetworkFabrics {
   @sharedRoute
   upgrade is ArmResourceActionAsync<
     NetworkFabric,
-    UpgradeNetworkFabricProperties,
-    Foundations.OperationStatusResult
+    UpdateVersion,
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Refreshes the configuration of the underlying resources in the given Network Fabric instance.")
@@ -216,7 +216,7 @@ interface NetworkFabrics {
   refreshConfiguration is ArmResourceActionAsync<
     NetworkFabric,
     void,
-    Foundations.OperationStatusResult
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Updates the Workload Management BFD Configuration of the underlying resources in the given Network Fabric instance.")
@@ -237,7 +237,7 @@ interface NetworkFabrics {
   updateWorkloadManagementBfdConfiguration is ArmResourceActionAsync<
     NetworkFabric,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Updates the Infra Management BFD Configuration of the underlying resources in the given Network Fabric instance.")
@@ -258,7 +258,7 @@ interface NetworkFabrics {
   updateInfraManagementBfdConfiguration is ArmResourceActionAsync<
     NetworkFabric,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
   @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
   @added(Versions.v2025_07_15)
@@ -297,7 +297,7 @@ interface NetworkFabrics {
   getTopology is ArmResourceActionAsync<
     NetworkFabric,
     void,
-    GetTopologyResponse
+    ValidateConfigurationResponse
   >;
 
   @doc("Atomic update of the given Network Fabric instance. Sync update of NFA resources at Fabric level.")
@@ -317,8 +317,8 @@ interface NetworkFabrics {
   @sharedRoute
   commitConfiguration is ArmResourceActionAsync<
     NetworkFabric,
-    CommitConfigurationRequest,
-    CommitConfigurationResponse,
+    void,
+    CommonPostActionResponseForStateUpdate,
     OptionalRequestBody = true
   >;
 

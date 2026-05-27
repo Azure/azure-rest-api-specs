@@ -75,7 +75,7 @@ interface NetworkTapRules {
   resync is ArmResourceActionAsync<
     NetworkTapRule,
     void,
-    NetworkTapRuleResyncResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Implements the operation to the underlying resources.")

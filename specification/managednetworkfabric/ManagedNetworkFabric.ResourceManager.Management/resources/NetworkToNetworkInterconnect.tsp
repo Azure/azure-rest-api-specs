@@ -74,7 +74,7 @@ interface NetworkToNetworkInterconnects {
   updateNpbStaticRouteBfdAdministrativeState is ArmResourceActionAsync<
     NetworkToNetworkInterconnect,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Updates the Admin State.")
@@ -95,7 +95,7 @@ interface NetworkToNetworkInterconnects {
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkToNetworkInterconnect,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Updates the Admin State.")

@@ -62,7 +62,7 @@ interface InternalNetworks {
   updateAdministrativeState is ArmResourceActionAsync<
     InternalNetwork,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Update BGP state for internalNetwork. Allowed only on edge devices.")
@@ -71,8 +71,8 @@ interface InternalNetworks {
   @action("updateBgpAdministrativeState")
   updateBgpAdministrativeState is ArmResourceActionAsync<
     InternalNetwork,
-    InternalNetworkUpdateBgpAdministrativeStateRequest,
-    InternalNetworkUpdateBgpAdministrativeStateResponse
+    UpdateAdministrativeState,
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Update BGP state for internalNetwork. Allowed only on edge devices.")
@@ -116,7 +116,7 @@ interface InternalNetworks {
   updateStaticRouteBfdAdministrativeState is ArmResourceActionAsync<
     InternalNetwork,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("BFD administrative state for either static or bgp for internalNetwork.")

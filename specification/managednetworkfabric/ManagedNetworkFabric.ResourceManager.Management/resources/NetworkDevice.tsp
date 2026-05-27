@@ -70,7 +70,7 @@ interface NetworkDevices {
   reboot is ArmResourceActionAsync<
     NetworkDevice,
     RebootProperties,
-    Foundations.OperationStatusResult
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Refreshes the configuration the Network Device.")
@@ -91,7 +91,7 @@ interface NetworkDevices {
   refreshConfiguration is ArmResourceActionAsync<
     NetworkDevice,
     void,
-    NetworkDeviceRefreshConfigurationResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Updates the Administrative state of the Network Device.")
@@ -112,7 +112,7 @@ interface NetworkDevices {
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkDevice,
     UpdateDeviceAdministrativeState,
-    NetworkDeviceUpdateAdministrativeStateResponse
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Upgrades the version of the Network Device.")
@@ -132,8 +132,8 @@ interface NetworkDevices {
   @action("upgrade")
   upgrade is ArmResourceActionAsync<
     NetworkDevice,
-    NetworkDeviceUpgradeRequest,
-    NetworkDeviceUpgradeResponse
+    UpdateVersion,
+    CommonPostActionResponseForStateUpdate
   >;
 
   @doc("Run the RO Command on the Network Device.")

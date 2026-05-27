@@ -71,7 +71,7 @@ interface L3IsolationDomains {
   updateAdministrativeState is ArmResourceActionAsync<
     L3IsolationDomain,
     UpdateAdministrativeState,
-    UpdateAdministrativeStateResponse
+    CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Validates the configuration of the resources.")

@@ -8,7 +8,7 @@ model AccessControlListProperties {
   ...AnnotationResource;
 
   @doc("Input method to configure Access Control List.")
-  configurationType: ConfigurationType;
+  configurationType?: ConfigurationType;
 
   @doc("Access Control List file URL.")
   aclsUrl?: url;
