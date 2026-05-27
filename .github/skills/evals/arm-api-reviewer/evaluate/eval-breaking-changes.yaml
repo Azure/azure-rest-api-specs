@@ -1,0 +1,135 @@
+name: arm-api-reviewer-eval-breaking-changes
+description: |
+  Breaking change detection tests (04xxxx).
+  Validates detection of removed properties, property type changes,
+  and enum value narrowing between API versions.
+
+config:
+  runs: 1
+  timeout: 120
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 040001 — Removed property between versions
+  - name: detect-breaking-removed-property
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/removed-property/stable-2024-01-01.json"
+          dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json"
+        - src: "../fixtures/version-pairs/removed-property/stable-2025-01-01.json"
+          dest: "specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings with rule IDs, line numbers, and fix suggestions.
+
+      Previous version: specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2024-01-01/widgetsvc.json
+      New version: specification/widgetsvc/resource-manager/Microsoft.WidgetService/stable/2025-01-01/widgetsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "category"
+      - type: output-matches
+        config:
+          pattern: "(?i)removed|missing|deleted"
+      - type: prompt
+    rubric:
+      - Identified the category property as removed from WidgetProperties between versions — a breaking change per ARG003
+      - Identified the priority property as removed from WidgetProperties between versions — a breaking change per ARG003
+
+  # 040002 — Property type change between versions
+  - name: detect-breaking-type-change
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/type-change/stable-2024-01-01.json"
+          dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json"
+        - src: "../fixtures/version-pairs/type-change/stable-2025-01-01.json"
+          dest: "specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings with rule IDs, line numbers, and fix suggestions.
+
+      Previous version: specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2024-01-01/typechgsvc.json
+      New version: specification/typechgsvc/resource-manager/Microsoft.TypeChgService/stable/2025-01-01/typechgsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "maxRetries"
+      - type: output-matches
+        config:
+          pattern: "(?i)type|string|integer"
+      - type: prompt
+    rubric:
+      - Identified that maxRetries changed from type string to type integer between versions — this is a breaking change
+
+  # 040003 — Enum value narrowing between versions
+  - name: detect-breaking-enum-narrowing
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/enum-narrowing/stable-2024-01-01.json"
+          dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json"
+        - src: "../fixtures/version-pairs/enum-narrowing/stable-2025-01-01.json"
+          dest: "specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings.
+
+      Previous version: specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2024-01-01/enumnarrow.json
+      New version: specification/enumnarrow/resource-manager/Microsoft.EnumNarrow/stable/2025-01-01/enumnarrow.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)enum"
+      - type: prompt
+    rubric:
+      - Identified that the status enum had values removed (Suspended and Archived were dropped from 5 values to 3)
+      - Flagged the removal of enum values as a breaking change
+
+  # 040004 — Optional property becomes required between versions
+  - name: detect-breaking-added-required-property
+    environment:
+      files:
+        - src: "../fixtures/version-pairs/added-required-property/stable-2024-01-01.json"
+          dest: "specification/reqpropsvc/resource-manager/Microsoft.RequiredProp/stable/2024-01-01/reqpropsvc.json"
+        - src: "../fixtures/version-pairs/added-required-property/stable-2025-01-01.json"
+          dest: "specification/reqpropsvc/resource-manager/Microsoft.RequiredProp/stable/2025-01-01/reqpropsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification files. The
+      new version is stable/2025-01-01 and the previous version is
+      stable/2024-01-01. Compare the two versions for breaking changes and report
+      all findings.
+
+      Previous version: specification/reqpropsvc/resource-manager/Microsoft.RequiredProp/stable/2024-01-01/reqpropsvc.json
+      New version: specification/reqpropsvc/resource-manager/Microsoft.RequiredProp/stable/2025-01-01/reqpropsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "sku"
+      - type: output-matches
+        config:
+          pattern: "(?i)required|breaking"
+      - type: prompt
+    rubric:
+      - Identified that the sku property changed from optional to required in WidgetProperties between versions — this is a breaking change
+      - Existing clients that do not send sku in the request body will receive validation errors after upgrading to the new API version

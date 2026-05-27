@@ -75,7 +75,7 @@ interface DiagnosticContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -89,7 +89,7 @@ interface DiagnosticContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -106,19 +106,21 @@ interface DiagnosticContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -141,7 +143,7 @@ interface DiagnosticContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -231,7 +233,7 @@ interface Diagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -245,7 +247,7 @@ interface Diagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -262,19 +264,21 @@ interface Diagnostic {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -297,7 +301,7 @@ interface Diagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -395,7 +399,7 @@ interface WorkspaceDiagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -409,7 +413,7 @@ interface WorkspaceDiagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -426,19 +430,21 @@ interface WorkspaceDiagnostic {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -461,7 +467,7 @@ interface WorkspaceDiagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -567,7 +573,7 @@ interface WorkspaceApiDiagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -581,7 +587,7 @@ interface WorkspaceApiDiagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -598,19 +604,21 @@ interface WorkspaceApiDiagnostic {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<DiagnosticContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -633,7 +641,7 @@ interface WorkspaceApiDiagnostic {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -683,29 +691,37 @@ interface WorkspaceApiDiagnostic {
 
 @@maxLength(DiagnosticContract.name, 80);
 @@minLength(DiagnosticContract.name, 1);
-@@doc(DiagnosticContract.name,
+@@doc(
+  DiagnosticContract.name,
   "Diagnostic identifier. Must be unique in the current API Management service instance."
 );
 @@doc(DiagnosticContract.properties, "Diagnostic entity contract properties.");
-@@doc(DiagnosticContracts.createOrUpdate::parameters.resource,
+@@doc(
+  DiagnosticContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(DiagnosticContracts.update::parameters.properties,
+@@doc(
+  DiagnosticContracts.update::parameters.properties,
   "Diagnostic Update parameters."
 );
 @@doc(Diagnostic.createOrUpdate::parameters.resource, "Create parameters.");
-@@doc(Diagnostic.update::parameters.properties,
+@@doc(
+  Diagnostic.update::parameters.properties,
   "Diagnostic Update parameters."
 );
-@@doc(WorkspaceDiagnostic.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceDiagnostic.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(WorkspaceDiagnostic.update::parameters.properties,
+@@doc(
+  WorkspaceDiagnostic.update::parameters.properties,
   "Diagnostic Update parameters."
 );
-@@doc(WorkspaceApiDiagnostic.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiDiagnostic.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(WorkspaceApiDiagnostic.update::parameters.properties,
+@@doc(
+  WorkspaceApiDiagnostic.update::parameters.properties,
   "Diagnostic Update parameters."
 );

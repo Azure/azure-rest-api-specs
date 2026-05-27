@@ -28,13 +28,16 @@ model PrivateEndpointConnection
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The properties of a private endpoint connection."
 );
-@@doc(PrivateEndpointConnections.update::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.update::parameters.resource,
   "The updated private endpoint connection."
 );
 

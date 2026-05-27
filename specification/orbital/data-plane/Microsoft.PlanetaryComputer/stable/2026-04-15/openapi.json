@@ -246,7 +246,7 @@
           "Map Legends"
         ],
         "summary": "Get Interval Legend",
-        "description": "Generate values and color swatches mapping for a given interval classmap.\n\nReturns a color map for intervals, where each interval is defined by:\n- A numeric range `[min, max]` representing the interval boundaries.\n- An RGBA color `[red, green, blue, alpha]` associated with the interval.\n\nThe response is a 2D array of interval definitions, where each element is a pair:\n- The first element is an array of two numbers `[min, max]` defining the interval.\n- The second element is an array of four numbers `[red, green, blue, alpha]` defining the RGBA color.\n\nExample:\n```json\n[\n  [\n    [-2, 0], [0, 0, 0, 0]\n  ],\n  [\n    [1, 32], [255, 255, 178, 255]\n  ]\n]\n```\nThis example defines two intervals:\n- The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).\n- The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).",
+        "description": "Generate values and color swatches mapping for a given interval classmap.\n\nReturns a color map for intervals, where each interval is defined by\na numeric range [min, max] representing the interval boundaries and\nan RGBA color [red, green, blue, alpha] associated with the interval.\n\nThe response is a 2D array of interval definitions, where each element is a pair:\nthe first element is an array of two numbers [min, max] defining the interval,\nand the second element is an array of four numbers [red, green, blue, alpha] defining the RGBA color.\n\nExample: [[ [-2, 0], [0, 0, 0, 0] ], [ [1, 32], [255, 255, 178, 255] ]].\nThis defines two intervals: [-2, 0] mapped to transparent black and [1, 32] mapped to opaque yellow.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -445,6 +445,30 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.bidx"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.reproject"
           }
         ],
         "responses": {
@@ -920,6 +944,30 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.bidx"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.reproject"
           }
         ],
         "responses": {
@@ -1099,7 +1147,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -1326,7 +1375,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -1446,9 +1496,6 @@
           },
           {
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/BoundingBoxPathParameters.minx"
@@ -1620,7 +1667,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -1902,7 +1950,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -2099,7 +2148,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -2416,9 +2466,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -2638,9 +2685,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -2939,9 +2983,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3190,9 +3231,6 @@
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
-            "$ref": "#/parameters/CollectionQueryParameter"
-          },
-          {
             "name": "asset_expression",
             "in": "query",
             "description": "Per asset band expression.",
@@ -3295,9 +3333,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3522,7 +3557,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -3560,9 +3596,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3800,7 +3833,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -3832,9 +3866,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -3911,9 +3942,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -4106,7 +4134,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -4147,9 +4176,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "format",
@@ -4439,7 +4465,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -4474,9 +4501,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "body",
@@ -4687,7 +4711,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -4728,9 +4753,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "body",
@@ -4818,9 +4840,6 @@
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
-            "$ref": "#/parameters/CollectionQueryParameter"
-          },
-          {
             "name": "assets",
             "in": "query",
             "description": "Asset's names.",
@@ -4906,9 +4925,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "assets",
@@ -5036,9 +5052,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "coord_crs",
@@ -5373,6 +5386,7 @@
             "type": "integer",
             "format": "int32",
             "default": 1024,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -5410,9 +5424,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -5615,6 +5626,7 @@
             "type": "integer",
             "format": "int32",
             "default": 1024,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -5652,9 +5664,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -5776,9 +5785,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "algorithm",
@@ -5940,9 +5946,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "algorithm",
@@ -6276,9 +6279,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -6355,9 +6355,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -6434,9 +6431,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "tileMatrixSetId",
@@ -6749,9 +6743,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7001,9 +6992,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7253,9 +7241,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7559,9 +7544,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7791,9 +7773,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -7969,9 +7948,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -8147,9 +8123,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -8379,9 +8352,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           }
         ],
         "responses": {
@@ -8467,9 +8437,6 @@
           },
           {
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -8682,9 +8649,6 @@
           },
           {
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -9110,9 +9074,6 @@
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
-            "$ref": "#/parameters/CollectionQueryParameter"
-          },
-          {
             "name": "collectionId",
             "in": "path",
             "description": "STAC Collection Identifier",
@@ -9190,9 +9151,6 @@
           },
           {
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "collectionId",
@@ -11411,9 +11369,6 @@
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
           },
           {
-            "$ref": "#/parameters/CollectionQueryParameter"
-          },
-          {
             "name": "tileMatrixSetId",
             "in": "path",
             "description": "Identifier selecting one of the TileMatrixSetId supported",
@@ -11527,9 +11482,6 @@
           },
           {
             "$ref": "#/parameters/CollectionSubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/ZxyPathParameters.z"
@@ -11814,6 +11766,30 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.bidx"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.reproject"
           }
         ],
         "responses": {
@@ -12261,6 +12237,30 @@
           },
           {
             "$ref": "#/parameters/ZoomQueryParameters.maxZoom"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.bidx"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assets"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.expression"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetBandIndices"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.assetAsBand"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.noData"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.unscale"
+          },
+          {
+            "$ref": "#/parameters/AssetQueryParameters.reproject"
           }
         ],
         "responses": {
@@ -12428,7 +12428,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -12643,7 +12644,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -12751,9 +12753,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/BoundingBoxPathParameters.minx"
@@ -12913,7 +12912,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -13183,7 +13183,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -13368,7 +13369,8 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "default": 1024,
+            "default": 2048,
+            "maximum": 2048,
             "x-ms-client-name": "maxSize"
           },
           {
@@ -13534,9 +13536,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "searchId",
@@ -13737,9 +13736,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "searchId",
@@ -15993,9 +15989,6 @@
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
           },
           {
-            "$ref": "#/parameters/CollectionQueryParameter"
-          },
-          {
             "name": "searchId",
             "in": "path",
             "description": "Search Id (pgSTAC Search Hash)",
@@ -16061,9 +16054,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "name": "searchId",
@@ -18285,9 +18275,6 @@
           },
           {
             "$ref": "#/parameters/SubDatasetQueryParameters.selMethod"
-          },
-          {
-            "$ref": "#/parameters/CollectionQueryParameter"
           },
           {
             "$ref": "#/parameters/ZxyPathParameters.z"
@@ -29247,14 +29234,6 @@
       "type": "string",
       "maxLength": 500,
       "pattern": ".*",
-      "x-ms-parameter-location": "method"
-    },
-    "CollectionQueryParameter": {
-      "name": "collection",
-      "in": "query",
-      "description": "STAC Collection Identifier",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "CollectionSubDatasetQueryParameters.crs": {

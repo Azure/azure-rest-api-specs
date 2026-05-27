@@ -13,10 +13,9 @@ namespace Microsoft.EventHub;
 /**
  * Single Namespace item in List or Get Operation
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 model EHNamespace
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<EHNamespaceProperties> {
+  is Azure.ResourceManager.ProxyResource<EHNamespaceProperties> {
   ...ResourceNameParameter<
     Resource = EHNamespace,
     KeyName = "namespaceName",
@@ -27,17 +26,27 @@ model EHNamespace
   /**
    * Properties of sku resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   sku?: Sku;
 
   /**
    * Properties of BYOK Identity description
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   identity?: Identity;
+
+  /** Resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 @armResourceOperations
 interface EHNamespaces {
   /**
@@ -48,40 +57,47 @@ interface EHNamespaces {
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing PUT operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EHNamespace,
-    Response = ArmResourceUpdatedResponse<EHNamespace> | ArmResourceCreatedResponse<
-      EHNamespace,
-      ArmAsyncOperationHeader<FinalResult = EHNamespace>
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<EHNamespace>
+      | ArmResourceCreatedResponse<
+          EHNamespace,
+          ArmAsyncOperationHeader<FinalResult = EHNamespace>
+        >
+      | ArmAcceptedLroResponse,
     Error = ErrorResponse
   >;
 
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     EHNamespace,
     PatchModel = EHNamespace,
-    Response = ArmResponse<EHNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<EHNamespace>
+      | (CreatedResponse & EHNamespace)
+      | AcceptedResponse,
     Error = ErrorResponse
   >;
 
   /**
    * Deletes an existing namespace. This operation also removes all associated resources under the namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing DELETE operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   delete is ArmResourceDeleteWithoutOkAsync<
     EHNamespace,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -114,7 +130,7 @@ interface EHNamespaces {
   /**
    * Gets lists of resources that supports Privatelinks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "OpenAPI decorator is required to preserve the original API behavior defined in the OpenAPI specification."
   @get
   @action("privateLinkResources")
   @OpenAPI.externalDocs("https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx")
@@ -140,18 +156,23 @@ interface EHNamespaces {
 @@maxLength(EHNamespace.name, 50);
 @@minLength(EHNamespace.name, 6);
 @@doc(EHNamespace.name, "The Namespace name");
-@@doc(EHNamespace.properties,
+@@doc(
+  EHNamespace.properties,
   "Namespace properties supplied for create namespace operation."
 );
-@@doc(EHNamespaces.createOrUpdate::parameters.resource,
+@@doc(
+  EHNamespaces.createOrUpdate::parameters.resource,
   "Parameters for creating a namespace resource."
 );
-@@doc(EHNamespaces.update::parameters.properties,
+@@doc(
+  EHNamespaces.update::parameters.properties,
   "Parameters for updating a namespace resource."
 );
-@@doc(EHNamespaces.failover::parameters.body,
+@@doc(
+  EHNamespaces.failover::parameters.body,
   "Parameters for updating a namespace resource."
 );
-@@doc(EHNamespaces.checkNameAvailability::parameters.body,
+@@doc(
+  EHNamespaces.checkNameAvailability::parameters.body,
   "Parameters to check availability of the given Alias name"
 );

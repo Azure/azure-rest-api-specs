@@ -130,7 +130,8 @@ op analyzeBinaryCustomSignature(
   apiVersion: string,
 ): AnalysisResult;
 
-@@override(ContentUnderstandingClient.analyzeBinary,
+@@override(
+  ContentUnderstandingClient.analyzeBinary,
   analyzeBinaryCustomSignature
 );
 
@@ -185,20 +186,23 @@ op analyzeCustomSignature(
 @@clientName(LabeledDataKnowledgeSource.containerUrl, "ContainerUri", "csharp");
 
 // .NET: boolean property "HasDynamicFieldSchema" (indicates whether result may contain additional fields).
-@@clientName(ContentAnalyzer.dynamicFieldSchema,
+@@clientName(
+  ContentAnalyzer.dynamicFieldSchema,
   "HasDynamicFieldSchema",
   "csharp"
 );
 
 // .NET: boolean properties on ContentAnalyzerConfig use "Should" prefix for clarity.
 @@clientName(ContentAnalyzerConfig.omitContent, "ShouldOmitContent", "csharp");
-@@clientName(ContentAnalyzerConfig.returnDetails,
+@@clientName(
+  ContentAnalyzerConfig.returnDetails,
   "ShouldReturnDetails",
   "csharp"
 );
 
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
-@@clientName(ContentUnderstandingClient.listAnalyzers,
+@@clientName(
+  ContentUnderstandingClient.listAnalyzers,
   "getAnalyzers",
   "csharp"
 );
@@ -226,17 +230,20 @@ op analyzeCustomSignature(
 // Java: boolean properties on ContentAnalyzerConfig follow set*Enabled / is*Enabled convention.
 @@clientName(ContentAnalyzerConfig.enableOcr, "ocrEnabled", "java");
 @@clientName(ContentAnalyzerConfig.enableLayout, "layoutEnabled", "java");
-@@clientName(ContentAnalyzerConfig.enableFigureDescription,
+@@clientName(
+  ContentAnalyzerConfig.enableFigureDescription,
   "figureDescriptionEnabled",
   "java"
 );
-@@clientName(ContentAnalyzerConfig.enableFigureAnalysis,
+@@clientName(
+  ContentAnalyzerConfig.enableFigureAnalysis,
   "figureAnalysisEnabled",
   "java"
 );
 @@clientName(ContentAnalyzerConfig.enableFormula, "formulaEnabled", "java");
 @@clientName(ContentAnalyzerConfig.enableSegment, "segmentEnabled", "java");
-@@clientName(ContentAnalyzerConfig.disableFaceBlurring,
+@@clientName(
+  ContentAnalyzerConfig.disableFaceBlurring,
   "faceBlurringDisabled",
   "java"
 );
@@ -246,7 +253,8 @@ op analyzeCustomSignature(
 // ============================================================================
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
-@@clientDoc(AnalysisInput.data,
+@@clientDoc(
+  AnalysisInput.data,
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
 );
