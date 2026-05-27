@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./GroupIdInformation.tsp";
+import "./IotHubDescription.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,6 +15,7 @@ namespace Microsoft.Devices;
 /**
  * The private endpoint connection of an IotHub
  */
+@parentResource(IotHubDescription)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<
     PrivateEndpointConnectionProperties,
@@ -37,7 +39,7 @@ alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperatio
     /** The name of the IoT Hub */
     @path
     @key
-    @segment("iotHubs")
+    @segment("IotHubs")
     resourceName: string;
   },
   {
