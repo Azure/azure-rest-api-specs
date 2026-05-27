@@ -16,6 +16,7 @@ namespace SdkCustomizations;
 @@access(putKeyValue, Access.internal, "python");
 @@access(updateSnapshot, Access.internal, "python");
 @@access(SnapshotUpdateParameters, Access.public, "python");
+@@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
 
 // .NET specific customizations
 @@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
@@ -53,5 +54,4 @@ namespace SdkCustomizations;
 @@clientName(KeyValueFilter.tags, "tagsFilter", "javascript");
 @@clientName(KeyValueFilter, "ConfigurationSettingsFilter", "javascript");
 @@clientName(Snapshot, "ConfigurationSnapshot", "javascript");
-
-@@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
+@@clientName(AzureAppConfiguration, "AppConfigurationClient", "javascript");
