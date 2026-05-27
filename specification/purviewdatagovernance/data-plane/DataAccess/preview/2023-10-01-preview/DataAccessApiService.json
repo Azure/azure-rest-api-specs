@@ -63,9 +63,6 @@
       "name": "Workflows"
     },
     {
-      "name": "WorkflowRunStatus"
-    },
-    {
       "name": "PolicySets"
     }
   ],
@@ -773,100 +770,6 @@
         }
       }
     },
-    "/dataProducts/{dataProductId}/publishWorkflowEnabled": {
-      "get": {
-        "operationId": "WorkflowRunStatus_HasEnabledPublishWorkflowForDataProduct",
-        "tags": [
-          "WorkflowRunStatus"
-        ],
-        "description": "Checks if an enabled publish workflow exists for the specified data product's domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "The data product identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PublishWorkflowEnabledResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkflowRunStatus_HasEnabledPublishWorkflowForDataProduct": {
-            "$ref": "./examples/WorkflowRunStatus_HasEnabledPublishWorkflowForDataProduct_Gen.json"
-          }
-        }
-      }
-    },
-    "/dataProducts/{dataProductId}/workflowRunInProgress": {
-      "get": {
-        "operationId": "WorkflowRunStatus_GetDataProductWorkflowRunInProgress",
-        "tags": [
-          "WorkflowRunStatus"
-        ],
-        "description": "Checks if a DataProductPublish workflow run is in progress for the specified data product.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "dataProductId",
-            "in": "path",
-            "description": "The data product identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/WorkflowRunInProgressResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkflowRunStatus_GetDataProductWorkflowRunInProgress": {
-            "$ref": "./examples/WorkflowRunStatus_GetDataProductWorkflowRunInProgress_Gen.json"
-          }
-        }
-      }
-    },
     "/dataSubscriptions": {
       "get": {
         "operationId": "DataSubscriptions_List",
@@ -1491,100 +1394,6 @@
         "x-ms-examples": {
           "TermPolicySets_DeleteApplied": {
             "$ref": "./examples/TermPolicySets_DeleteApplied_Gen.json"
-          }
-        }
-      }
-    },
-    "/terms/{termId}/publishWorkflowEnabled": {
-      "get": {
-        "operationId": "WorkflowRunStatus_HasEnabledPublishWorkflowForTerm",
-        "tags": [
-          "WorkflowRunStatus"
-        ],
-        "description": "Checks if an enabled publish workflow exists for the specified term's domain.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "termId",
-            "in": "path",
-            "description": "The term identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PublishWorkflowEnabledResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkflowRunStatus_HasEnabledPublishWorkflowForTerm": {
-            "$ref": "./examples/WorkflowRunStatus_HasEnabledPublishWorkflowForTerm_Gen.json"
-          }
-        }
-      }
-    },
-    "/terms/{termId}/workflowRunInProgress": {
-      "get": {
-        "operationId": "WorkflowRunStatus_GetTermWorkflowRunInProgress",
-        "tags": [
-          "WorkflowRunStatus"
-        ],
-        "description": "Checks if a TermPublish workflow run is in progress for the specified term.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "termId",
-            "in": "path",
-            "description": "The term identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/WorkflowRunInProgressResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkflowRunStatus_GetTermWorkflowRunInProgress": {
-            "$ref": "./examples/WorkflowRunStatus_GetTermWorkflowRunInProgress_Gen.json"
           }
         }
       }
@@ -3047,19 +2856,6 @@
         "value"
       ]
     },
-    "PublishWorkflowEnabledResponse": {
-      "type": "object",
-      "description": "Response indicating whether a publish workflow is enabled.",
-      "properties": {
-        "exists": {
-          "type": "boolean",
-          "description": "Whether an enabled publish workflow exists."
-        }
-      },
-      "required": [
-        "exists"
-      ]
-    },
     "TargetResource": {
       "type": "object",
       "description": "The target resource for a policy set.",
@@ -3306,19 +3102,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "WorkflowRunInProgressResponse": {
-      "type": "object",
-      "description": "Response indicating whether a workflow run is in progress.",
-      "properties": {
-        "inProgress": {
-          "type": "boolean",
-          "description": "Whether a workflow run is currently in progress."
-        }
-      },
-      "required": [
-        "inProgress"
       ]
     },
     "WorkflowRunListResponse": {

@@ -474,18 +474,6 @@ model DataProductPolicies {
 // Response Models
 // ============================================================
 
-@doc("Response indicating whether a workflow run is in progress.")
-model WorkflowRunInProgressResponse {
-  @doc("Whether a workflow run is currently in progress.")
-  inProgress: boolean;
-}
-
-@doc("Response indicating whether a publish workflow is enabled.")
-model PublishWorkflowEnabledResponse {
-  @doc("Whether an enabled publish workflow exists.")
-  exists: boolean;
-}
-
 @doc("Response with workflow settings for a data product.")
 model DataProductWorkflowSettingsResponse {
   @doc("Whether the skip workflow option is enabled.")
