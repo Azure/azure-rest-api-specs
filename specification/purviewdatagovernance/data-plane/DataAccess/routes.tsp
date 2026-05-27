@@ -204,7 +204,10 @@ interface Workflows {
   @doc("Gets the data access request template for a specific trigger type.")
   @route("/workflows/templates/dataAccessRequestTemplate/{triggerType}")
   @get
-  GetTemplateByTriggerType is RpcOperation<TriggerTypeParameter, ActionListResponse>;
+  GetTemplateByTriggerType is RpcOperation<
+    TriggerTypeParameter,
+    ActionListResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -332,7 +335,10 @@ interface Workflows {
   @doc("Gets approvals for a specific workflow run.")
   @route("/workflowRuns/{workflowRunId}/approvals")
   @get
-  GetRunApprovals is RpcOperation<WorkflowRunIdParameter, WorkflowRunApprovalListResponse>;
+  GetRunApprovals is RpcOperation<
+    WorkflowRunIdParameter,
+    WorkflowRunApprovalListResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -408,7 +414,10 @@ interface DataProductPolicySets {
   @doc("Gets term policy sets associated with a data product.")
   @route("/dataProducts/{dataProductId}/policySets/terms")
   @get
-  GetTermPolicies is RpcOperation<DataProductIdParameter, PolicySetListResponse>;
+  GetTermPolicies is RpcOperation<
+    DataProductIdParameter,
+    PolicySetListResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -416,7 +425,10 @@ interface DataProductPolicySets {
   @doc("Gets critical data element policy sets associated with a data product.")
   @route("/dataProducts/{dataProductId}/policySets/criticalDataElements")
   @get
-  GetCriticalDataElementPolicies is RpcOperation<DataProductIdParameter, PolicySetListResponse>;
+  GetCriticalDataElementPolicies is RpcOperation<
+    DataProductIdParameter,
+    PolicySetListResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -424,7 +436,10 @@ interface DataProductPolicySets {
   @doc("Gets workflow settings for a data product policy set.")
   @route("/dataProducts/{dataProductId}/policySet")
   @get
-  GetWorkflowSettings is RpcOperation<DataProductIdParameter, DataProductWorkflowSettingsResponse>;
+  GetWorkflowSettings is RpcOperation<
+    DataProductIdParameter,
+    DataProductWorkflowSettingsResponse
+  >;
 }
 
 // ============================================================
