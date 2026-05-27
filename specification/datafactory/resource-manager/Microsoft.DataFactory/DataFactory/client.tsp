@@ -248,6 +248,13 @@ using Microsoft.DataFactory;
 @@usage(DatasetSchemaDataElement, Usage.input | Usage.output, "java");
 @@access(DatasetSchemaDataElement, Access.public, "java");
 
+@@usage(DatasetSchemaDataElement, Usage.input | Usage.output, "python");
+@@access(DatasetSchemaDataElement, Access.public, "python");
+@@usage(DatasetDataElement, Usage.input | Usage.output, "python");
+@@access(DatasetDataElement, Access.public, "python");
+@@usage(OutputColumn, Usage.input | Usage.output, "python");
+@@access(OutputColumn, Access.public, "python");
+
 @@clientLocation(
   PrivateEndpointConnectionResources.listByFactory,
   "PrivateEndPointConnections",
