@@ -148,7 +148,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(LicenseProfile, "HybridComputeLicenseProfile", "csharp");
 @@clientName(
   LicenseProfileUpdate,
-  "HybridComputeLicenseProfileUpdate",
+  "HybridComputeLicenseProfilePatch",
   "csharp"
 );
 @@clientName(
