@@ -38,6 +38,8 @@ import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
 import "./DevicePool.tsp";
 import "./EdgeMachineGpu.tsp";
+import "./EdgeMachineNetworkAdapters.tsp";
+import "./EdgeMachineStorage.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
