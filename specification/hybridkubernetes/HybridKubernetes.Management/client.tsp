@@ -60,8 +60,7 @@ namespace Microsoft.Kubernetes;
 );
 @@clientName(ConnectedClusterKind.AWS, "Aws", "csharp");
 @@clientName(ConnectedClusterKind.GCP, "Gcp", "csharp");
-@@clientName(ConnectedClusterProperties.gateway, "IsGateway", "csharp");
-@@clientName(ConnectedClusterPatchProperties.gateway, "IsGateway", "csharp");
+@@clientName(Gateway.enabled, "IsGatewayEnabled", "csharp");
 @@clientName(CredentialResult, "ClusterUserCredentialResult", "csharp");
 @@clientName(CredentialResults, "ClusterUserCredentialsResult", "csharp");
 @@clientName(
