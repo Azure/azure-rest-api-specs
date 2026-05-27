@@ -148,9 +148,11 @@ interface AdvancedPlatformMetrics {
   list is ArmResourceListByParent<AdvancedPlatformMetricsRule>;
 }
 
-@@doc(AdvancedPlatformMetricsRule.name,
+@@doc(
+  AdvancedPlatformMetricsRule.name,
   "The type of the advanced platform metrics rule."
 );
-@@doc(AdvancedPlatformMetricsRule.properties,
+@@doc(
+  AdvancedPlatformMetricsRule.properties,
   "Returns the advanced platform metrics rule."
 );

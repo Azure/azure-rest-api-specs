@@ -62,7 +62,8 @@ model DeploymentScript
 }
 
 @@clientName(DeploymentScripts.create::parameters.resource, "deploymentScript");
-@@clientName(DeploymentScripts.update::parameters.properties,
+@@clientName(
+  DeploymentScripts.update::parameters.properties,
   "deploymentScript"
 );
 
@@ -153,9 +154,11 @@ interface DeploymentScripts {
 @@maxLength(DeploymentScript.name, 90);
 @@minLength(DeploymentScript.name, 1);
 @@doc(DeploymentScript.name, "Name of the deployment script.");
-@@doc(DeploymentScripts.create::parameters.resource,
+@@doc(
+  DeploymentScripts.create::parameters.resource,
   "Deployment script supplied to the operation."
 );
-@@doc(DeploymentScripts.update::parameters.properties,
+@@doc(
+  DeploymentScripts.update::parameters.properties,
   "Deployment script resource with the tags to be updated."
 );

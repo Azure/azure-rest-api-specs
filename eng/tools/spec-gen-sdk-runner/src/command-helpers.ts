@@ -4,6 +4,7 @@ import {
   SdkNameSchema,
   SpecGenSdkArtifactInfo,
 } from "@azure-tools/specs-shared/sdk-types";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,6 +18,7 @@ import {
   VsoLogs,
 } from "./types.js";
 import {
+  execAsync,
   findReadmeFiles,
   getAllTypeSpecPaths,
   getArgumentValue,
@@ -389,5 +391,125 @@ export function getRequiredSettingValue(
     return SpecGenSdkRequiredSettings[sdkName].managementPlane;
   } else {
     return SpecGenSdkRequiredSettings[sdkName].dataPlane;
+  }
+}
+
+/**
+ * Indicates which generation tool should be used for a given spec.
+ * - "azsdk-cli": Use azsdk-cli for generation (Rust TypeSpec specs)
+ * - "spec-gen-sdk": Use existing spec-gen-sdk tool
+ * - "unsupported": The required tool is not available (e.g., Rust without azsdk-cli)
+ */
+export type GenerationTool = "azsdk-cli" | "spec-gen-sdk" | "unsupported";
+
+/**
+ * Determines whether to use azsdk-cli or spec-gen-sdk for a given spec.
+ * Currently only uses azsdk-cli for Rust TypeSpec specs when the CLI is
+ * available. All other languages and OpenAPI specs use spec-gen-sdk.
+ * Returns "unsupported" if Rust is requested but azsdk-cli is not installed.
+ */
+export function selectGenerationTool(
+  tspConfigPath?: string,
+  _readmePath?: string,
+  sdkLanguage?: SdkName,
+): GenerationTool {
+  if (tspConfigPath && sdkLanguage === "azure-sdk-for-rust") {
+    return isAzsdkCliAvailable() ? "azsdk-cli" : "unsupported";
+  }
+  return "spec-gen-sdk";
+}
+
+/**
+ * Checks whether the azsdk CLI tool is available on the system.
+ * Returns true if the tool can be found via the AZSDK env variable or on PATH.
+ */
+function isAzsdkCliAvailable(): boolean {
+  try {
+    // Pipeline sets AZSDK variable to the installed path
+    const azsdkPath = process.env.AZSDK;
+    const executable = azsdkPath || "azsdk";
+    const result = spawnSync(executable, ["--version"], {
+      shell: false,
+      stdio: "ignore",
+      timeout: 5000,
+    });
+    return result.status === 0;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Prepare the azsdk pkg generate command arguments.
+ *
+ * @param commandInput - The spec-gen-sdk command input.
+ * @param tspConfigRelativePath - Relative path to tspconfig.yaml within the spec repo.
+ * @returns Array of arguments for the azsdk command.
+ */
+export function prepareAzsdkGenerateCommand(
+  commandInput: SpecGenSdkCmdInput,
+  tspConfigRelativePath: string,
+): string[] {
+  const tspConfigFullPath = path.join(commandInput.localSpecRepoPath, tspConfigRelativePath);
+  return [
+    "pkg",
+    "generate",
+    "-r",
+    commandInput.localSdkRepoPath,
+    "-t",
+    tspConfigFullPath,
+    "--output",
+    "json",
+  ];
+}
+
+/**
+ * Prepare the azsdk pkg build command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @returns Array of arguments for the azsdk build command.
+ */
+export function prepareAzsdkBuildCommand(packagePath: string): string[] {
+  return ["pkg", "build", "--package-path", packagePath, "--output", "json"];
+}
+
+/**
+ * Prepare the azsdk pkg pack command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @param outputPath - Optional output directory for artifacts.
+ * @returns Array of arguments for the azsdk pack command.
+ */
+export function prepareAzsdkPackCommand(packagePath: string, outputPath?: string): string[] {
+  const args = ["pkg", "pack", "--package-path", packagePath, "--output", "json"];
+  if (outputPath) {
+    args.push("--output-path", outputPath);
+  }
+  return args;
+}
+
+/**
+ * Resolves the generated package directory path from typespec-metadata output.
+ * The outputDir in metadata uses `{output-dir}` placeholder which resolves to the SDK repo root.
+ *
+ * @param outputDir - The outputDir from typespec-metadata (e.g., "{output-dir}/sdk/keyvault/azure-keyvault-keys")
+ * @param sdkRepoPath - Absolute path to the SDK repository root.
+ * @returns Absolute path to the generated package directory.
+ */
+export function resolvePackagePath(outputDir: string, sdkRepoPath: string): string {
+  // Replace {output-dir} placeholder with the SDK repo path
+  const resolved = outputDir.replace("{output-dir}", sdkRepoPath);
+  return path.resolve(resolved);
+}
+
+/**
+ * Installs language-specific toolchains required before SDK generation.
+ * Currently only Rust needs this — runs `rustup install` in the SDK repo root
+ * to pick up the version from rust-toolchain.toml.
+ */
+export async function installLanguageToolchain(commandInput: SpecGenSdkCmdInput): Promise<void> {
+  if (commandInput.sdkLanguage === "azure-sdk-for-rust") {
+    logMessage(`Installing Rust toolchain from SDK repo`, LogLevel.Info);
+    await execAsync("rustup install", { cwd: commandInput.localSdkRepoPath });
   }
 }

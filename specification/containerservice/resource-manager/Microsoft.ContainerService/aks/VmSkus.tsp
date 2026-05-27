@@ -12,7 +12,7 @@ namespace Microsoft.ContainerService;
 /**
  * Describes an available Compute SKU.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSku {
   /**
    * The type of resource the SKU applies to.
@@ -100,7 +100,7 @@ model ResourceSku {
 /**
  * Describes The SKU capabilities object.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuCapabilities {
   /**
    * An invariant to describe the feature.
@@ -118,7 +118,7 @@ model ResourceSkuCapabilities {
 /**
  * Describes scaling information of a SKU.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuCapacity {
   /**
    * The minimum capacity.
@@ -148,7 +148,7 @@ model ResourceSkuCapacity {
 /**
  * The scale type applicable to the sku.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 union ResourceSkuCapacityScaleType {
   /** Automatic scaling */
   Automatic: "Automatic",
@@ -165,7 +165,7 @@ union ResourceSkuCapacityScaleType {
 /**
  * Describes metadata for retrieving price info.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuCosts {
   /**
    * Used for querying price from commerce.
@@ -191,7 +191,7 @@ model ResourceSkuCosts {
 /**
  * Describes an available Compute SKU Location Information.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuLocationInfo {
   /**
    * Location of the SKU
@@ -228,7 +228,7 @@ model ResourceSkuLocationInfo {
 /**
  * Describes an available Compute SKU Restriction Information.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuRestrictionInfo {
   /**
    * Locations where the SKU is restricted
@@ -246,7 +246,7 @@ model ResourceSkuRestrictionInfo {
 /**
  * Describes scaling information of a SKU.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuRestrictions {
   /**
    * The type of restrictions.
@@ -276,7 +276,7 @@ model ResourceSkuRestrictions {
 /**
  * The reason for restriction.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 union ResourceSkuRestrictionsReasonCode {
   /** Quota ID restriction */
   QuotaId: "QuotaId",
@@ -290,7 +290,7 @@ union ResourceSkuRestrictionsReasonCode {
 /**
  * The type of restrictions.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 union ResourceSkuRestrictionsType {
   /** Location restriction */
   Location: "Location",
@@ -304,7 +304,7 @@ union ResourceSkuRestrictionsType {
 /**
  * Describes The zonal capabilities of a SKU.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model ResourceSkuZoneDetails {
   /**
    * The set of zones that the SKU is available in with the specified capabilities.
@@ -322,5 +322,5 @@ model ResourceSkuZoneDetails {
 /**
  * The List Resource Skus operation response.
  */
-@added(Versions.v2026_02_02_preview)
+@added(Versions.v2026_03_02_preview)
 model VmSkusListResult is Azure.Core.Page<ResourceSku>;

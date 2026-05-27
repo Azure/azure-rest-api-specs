@@ -86,12 +86,15 @@ interface ScalingPlanPooledSchedules {
 @@maxLength(ScalingPlanPooledSchedule.name, 64);
 @@minLength(ScalingPlanPooledSchedule.name, 1);
 @@doc(ScalingPlanPooledSchedule.name, "The name of the ScalingPlanSchedule");
-@@doc(ScalingPlanPooledSchedule.properties,
+@@doc(
+  ScalingPlanPooledSchedule.properties,
   "Detailed properties for ScalingPlanPooledSchedule"
 );
-@@doc(ScalingPlanPooledSchedules.create::parameters.resource,
+@@doc(
+  ScalingPlanPooledSchedules.create::parameters.resource,
   "Object containing ScalingPlanPooledSchedule definitions."
 );
-@@clientName(ScalingPlanPooledSchedules.update::parameters.body,
+@@clientName(
+  ScalingPlanPooledSchedules.update::parameters.body,
   "scalingPlanSchedule"
 );
