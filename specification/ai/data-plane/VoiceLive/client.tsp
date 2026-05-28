@@ -410,6 +410,57 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "csharp");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "csharp");
 @@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "csharp");
+@@clientName(VoiceLive.AvatarConfig.type, "AvatarKind", "csharp");
+@@clientName(VoiceLive.AvatarConfig.`model`, "BaseMode", "csharp");
+@@clientName(
+  VoiceLive.AvatarConfig.output_audit_audio,
+  "AuditOutputAudio",
+  "csharp"
+);
+@@clientName(VoiceLive.PhotoAvatarBaseModes, "PhotoAvatarBaseMode", "csharp");
+@@clientName(
+  VoiceLive.AzureAvatarVoiceSyncVoice,
+  "AzureAvatarSyncVoice",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
+  "CustomLexiconUri",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.AzureAvatarVoiceSyncVoice.custom_text_normalization_url,
+  "CustomTextNormalizationUri",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.AzureCustomVoice.custom_text_normalization_url,
+  "CustomTextNormalizationUri",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.AzurePersonalVoice.custom_lexicon_url,
+  "CustomLexiconUri",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.AzurePersonalVoice.custom_text_normalization_url,
+  "CustomTextNormalizationUri",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.AzureStandardVoice.custom_text_normalization_url,
+  "CustomTextNormalizationUri",
+  "csharp"
+);
+@@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
+@@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
+@@clientName(VoiceLive.RequestImageContentPart.url, "Uri", "csharp");
+@@clientName(
+  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  "LogProbs",
+  "csharp"
+);
 @@clientName(
   VoiceLive.AzureSemanticDetection.timeout_ms,
   "TimeoutMs",
@@ -519,6 +570,34 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.MCPServer, "VoiceLiveMcpServerDefinition", "csharp");
 @@clientName(VoiceLive.MCPTool, "VoiceLiveMcpTool", "csharp");
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
+@@alternateType(
+  VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
+  url,
+  "csharp"
+);
+@@alternateType(
+  VoiceLive.AzureAvatarVoiceSyncVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(VoiceLive.AzureCustomVoice.custom_lexicon_url, url, "csharp");
+@@alternateType(
+  VoiceLive.AzureCustomVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(VoiceLive.AzurePersonalVoice.custom_lexicon_url, url, "csharp");
+@@alternateType(
+  VoiceLive.AzurePersonalVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(
+  VoiceLive.AzureStandardVoice.custom_text_normalization_url,
+  url,
+  "csharp"
+);
+@@alternateType(VoiceLive.RequestImageContentPart.url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
