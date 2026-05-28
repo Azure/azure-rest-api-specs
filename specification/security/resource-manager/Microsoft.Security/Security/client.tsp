@@ -571,10 +571,12 @@ op privateLinkResourcesGetCustomization(
   "GetExternalSecuritySolutions",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group operations intentionally share the legacy C# convenience method name."
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.list,
   "GetJitNetworkAccessPolicies",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group operations intentionally share the legacy C# convenience method name."
 @@clientName(SecuritySolutionsAPI.JitNetworkAccessPoliciesOperationGroup.listByResourceGroup,
   "GetJitNetworkAccessPolicies",
   "csharp"
@@ -627,34 +629,42 @@ op privateLinkResourcesGetCustomization(
   "GetOperationStatus",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToActivate,
   "Activate",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToActivate,
   "Activate",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToDismiss,
   "Dismiss",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToDismiss,
   "Dismiss",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToResolve,
   "Resolve",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToResolve,
   "Resolve",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.Alerts.updateSubscriptionLevelStateToInProgress,
   "UpdateSatateToInProgress",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Subscription and resource-group alert operations intentionally share the legacy C# action name."
 @@clientName(AlertsAPI.AlertOperationGroup.updateResourceGroupLevelStateToInProgress,
   "UpdateSatateToInProgress",
   "csharp"
@@ -977,12 +987,21 @@ op privateLinkResourcesGetCustomization(
 // C# compatibility replacement: @@hierarchyBuilding currently crashes the
 // management generator for these legacy custom-resource shapes, so use
 // @@alternateType against replacement models that carry the desired hierarchy.
+/**
+ * C# compatibility replacement for the external security solution resource shape.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility replacement type uses the CSharp prefix to avoid changing service model names."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 model CSharpExternalSecuritySolutionReplacement
   extends Azure.ResourceManager.Foundations.Resource {
+  /** The external security solution properties. */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Matches the original legacy custom resource shape."
   properties?: unknown;
+
+  /** The external security solution kind. */
   kind?: SecuritySolutionsAPI.ExternalSecuritySolutionKind;
 
+  /** The resource location. */
   @visibility(Lifecycle.Read)
   location?: azureLocation;
 }
@@ -990,50 +1009,81 @@ model CSharpExternalSecuritySolutionReplacement
 // C# compatibility replacement: @@hierarchyBuilding currently crashes the
 // management generator for these derived models, so use @@alternateType to keep
 // the GA inheritance chain through ExternalSecuritySolution.
+/**
+ * C# compatibility replacement for the CEF external security solution resource shape.
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility replacement type uses the CSharp prefix to avoid changing service model names."
 model CSharpCefExternalSecuritySolutionReplacement
   extends CSharpExternalSecuritySolutionReplacement {
+  /** The CEF solution properties. */
   properties?: SecuritySolutionsAPI.CefSolutionProperties;
+
+  /** The external security solution kind. */
   kind: "CEF";
 }
 
 // C# compatibility replacement: @@hierarchyBuilding currently crashes the
 // management generator for these derived models, so use @@alternateType to keep
 // the GA inheritance chain through ExternalSecuritySolution.
+/**
+ * C# compatibility replacement for the ATA external security solution resource shape.
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility replacement type uses the CSharp prefix to avoid changing service model names."
 model CSharpAtaExternalSecuritySolutionReplacement
   extends CSharpExternalSecuritySolutionReplacement {
+  /** The ATA solution properties. */
   properties?: SecuritySolutionsAPI.AtaSolutionProperties;
+
+  /** The external security solution kind. */
   kind: "ATA";
 }
 
 // C# compatibility replacement: @@hierarchyBuilding currently crashes the
 // management generator for these derived models, so use @@alternateType to keep
 // the GA inheritance chain through ExternalSecuritySolution.
+/**
+ * C# compatibility replacement for the AAD external security solution resource shape.
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Matches the original legacy custom resource shape."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility replacement type uses the CSharp prefix to avoid changing service model names."
 model CSharpAadExternalSecuritySolutionReplacement
   extends CSharpExternalSecuritySolutionReplacement {
+  /** The AAD solution properties. */
   properties?: SecuritySolutionsAPI.AadSolutionProperties;
+
+  /** The external security solution kind. */
   kind: "AAD";
 }
 
 // C# compatibility replacement: @@hierarchyBuilding currently crashes the
 // management generator for this flattened resource-like model, so use
 // @@alternateType against a replacement model with a TrackedResource base.
+/**
+ * C# compatibility replacement for the security solutions reference data shape.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the original service-defined shape."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model for C# compatibility because @@hierarchyBuilding currently crashes the management generator for this shape."
 model CSharpSecuritySolutionsReferenceDataReplacement
   extends Azure.ResourceManager.Foundations.Resource {
   ...SecuritySolutionsAPI.Location;
+
+  /** The security solutions reference data properties. */
   properties: SecuritySolutionsAPI.securitySolutionsReferenceDataProperties;
 }
 
 // C# compatibility replacement: keep the GA property name FirstEvaluatedOn while
 // preserving the service wire name firstEvaluationDate.
+/**
+ * C# compatibility replacement for the security assessment status result shape.
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Replacement model preserves the legacy .NET model hierarchy and property names."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility replacement type uses the CSharp prefix to avoid changing service model names."
 model CSharpSecurityAssessmentStatusResult
   extends AssessmentAPI.AssessmentStatus {
   /**
@@ -1100,6 +1150,7 @@ model CSharpSecurityAssessmentStatusResult
 @@alternateType(AlertsAPI.AlertProperties.alertUri, url, "csharp");
 
 // C# pageable operation customizations.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required to preserve the legacy C# pageable operation shape."
 @@markAsPageable(PricingsAPI.Pricings.list, "csharp");
 
 // Other language customizations.
@@ -1133,6 +1184,9 @@ model CSharpSecurityAssessmentStatusResult
 // when the final name parameter is modeled as a closed literal union. Keep the
 // service TypeSpec enum unchanged for other languages and apply the fixed name
 // only to C# to preserve the singleton-shaped SDK API.
+/**
+ * C# fixed name for the advanced threat protection singleton resource.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 @clientName("AdvancedThreatProtectionSettingName")
 union CSharpAdvancedThreatProtectionSettingName {
@@ -1161,6 +1215,9 @@ union CSharpAdvancedThreatProtectionSettingName {
 // when the final name parameter is modeled as a closed literal union. Keep the
 // service TypeSpec enum unchanged for other languages and apply the fixed name
 // only to C# to preserve the singleton-shaped SDK API.
+/**
+ * C# fixed name for the server vulnerability assessment singleton resource.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 @clientName("ServerVulnerabilityAssessmentName", "csharp")
 union CSharpServerVulnerabilityAssessmentName {

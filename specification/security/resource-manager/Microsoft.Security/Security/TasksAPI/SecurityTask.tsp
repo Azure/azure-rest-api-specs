@@ -81,6 +81,7 @@ interface SecurityTasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "C# uses @clientOption in client.tsp to preserve the legacy subscription-level task resource name."
   @tag("Tasks")
   getSubscriptionLevelTask is SecurityTaskOps.Read<
     SecurityTask,
@@ -174,6 +175,7 @@ interface Tasks {
   /**
    * Recommended tasks that will help improve the security of the subscription proactively
    */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "C# uses @clientOption in client.tsp to preserve the legacy resource-group-level task resource name."
   getResourceGroupLevelTask is TaskOps.Read<
     SecurityTask,
     OverrideErrorType = CloudError

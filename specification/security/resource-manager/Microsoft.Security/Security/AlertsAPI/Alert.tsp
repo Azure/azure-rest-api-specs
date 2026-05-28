@@ -52,6 +52,7 @@ interface Alerts {
   /**
    * Get an alert that is associated with a subscription
    */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "C# uses @clientOption in client.tsp to preserve the legacy subscription-level alert resource name."
   @tag("Alerts")
   getSubscriptionLevel is AlertOps.Read<Alert, OverrideErrorType = CloudError>;
 
@@ -135,6 +136,7 @@ interface AlertOperationGroup {
   /**
    * Get an alert that is associated a resource group or a resource in a resource group
    */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "C# uses @clientOption in client.tsp to preserve the legacy resource-group-level alert resource name."
   @tag("Alerts")
   getResourceGroupLevel is AlertOperationGroupOps.Read<
     Alert,

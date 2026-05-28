@@ -48,6 +48,7 @@ interface AlertsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-operation-at-original-uri" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "C# uses @clientOption in client.tsp to keep simulate as a collection action for compatibility."
   @tag("Alerts")
   @post
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate")
