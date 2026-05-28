@@ -42,5 +42,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.DeviceRegistry.DeviceAttributes.update, Access.internal);
 @@access(Microsoft.DeviceRegistry.DeviceAttributes.list, Access.internal);
 
+@@access(Microsoft.DeviceRegistry.DeviceAuthenticationProfiles.getKeys,
+  Access.internal
+);
+
 @@access(Microsoft.DeviceRegistry.Operations.get, Access.internal);
 @@access(Microsoft.DeviceRegistry.Operations.list, Access.internal);

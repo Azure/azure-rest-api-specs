@@ -1048,6 +1048,66 @@
         }
       }
     },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:getKeys": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_GetKeys",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Retrieve the plaintext symmetric keys of a device authentication\nprofile. Only valid when the profile's authentication type is\nSymmetricKey; profiles of any other type return 400 with the\nInvalidAuthenticationType error code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetDeviceAuthenticationProfileKeysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve the symmetric keys of a SymmetricKey device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetKeys.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
       "get": {
         "operationId": "DeviceCapabilities_List",
@@ -3377,6 +3437,19 @@
       "discriminator": "reportType",
       "required": [
         "reportType"
+      ]
+    },
+    "GetDeviceAuthenticationProfileKeysResponse": {
+      "type": "object",
+      "description": "Response body for the getKeys action.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Plaintext symmetric keys for the device authentication profile."
+        }
+      },
+      "required": [
+        "symmetricKey"
       ]
     },
     "GetGroupsForDeviceResult": {
