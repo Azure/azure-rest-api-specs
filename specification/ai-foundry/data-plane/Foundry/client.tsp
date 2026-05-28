@@ -494,15 +494,20 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(Skills.createSkillVersion, "create");
-@@clientName(Skills.createSkillVersionFromFiles, "create_from_package");
+@@clientName(Skills.createSkillVersionFromFiles, "create_from_files");
+@@clientName(Skills.deleteSkill, "delete");
+@@clientName(Skills.deleteSkillVersion, "delete_version");
 @@clientName(Skills.getSkill, "get");
 @@clientName(Skills.getSkillContent, "download");
+@@clientName(Skills.getSkillVersion, "get_version");
+@@clientName(Skills.getSkillVersionContent, "download_version");
 @@clientName(Skills.listSkills, "list");
+@@clientName(Skills.listSkillVersions, "list_versions");
 @@clientName(Skills.updateSkill, "update");
-@@clientName(Skills.deleteSkill, "delete");
 
 @@clientName(Skill, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+@@clientName(DeleteSkillVersionResponse, "DeleteSkillVersionResult", "python");
 @@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------

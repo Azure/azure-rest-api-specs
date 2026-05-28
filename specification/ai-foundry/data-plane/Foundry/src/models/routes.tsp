@@ -77,7 +77,7 @@ interface Models
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
   createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
     ModelVersion,
-    InputParameters<UpdateModelVersionRequest> & ModelsPreviewHeader,
+    InputParameters<UpdateModelVersionRequest, "model_version_update"> & ModelsPreviewHeader,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>
   >;
 

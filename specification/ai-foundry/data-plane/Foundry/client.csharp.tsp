@@ -223,3 +223,10 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Routines, "AIProjectRoutines");
 @@clientName(Routine, "ProjectsRoutine");
+@@access(Routines.createOrUpdateRoutine, Access.internal);
+@@access(Routines.getRoutine, Access.internal);
+@@access(Routines.enableRoutine, Access.internal);
+@@access(Routines.disableRoutine, Access.internal);
+@@access(Routines.deleteRoutine, Access.internal);
+@@clientName(Routines.dispatchRoutineAsync, "dispatchAsyncRoutine", "csharp");
+@@access(Routines.dispatchRoutineAsync, Access.internal);
