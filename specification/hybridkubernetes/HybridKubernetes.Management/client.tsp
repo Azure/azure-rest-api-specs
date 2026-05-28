@@ -99,5 +99,14 @@ namespace Microsoft.Kubernetes;
   "ExpirationTimeInSeconds",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+@@clientOption(
+  ConnectedCluster,
+  "resource-rbac-roles",
+  #{
+    KubernetesClusterAzureArcOnboarding: "34e09817-6cbe-4d01-b1a2-e0eac5743d41",
+  },
+  "csharp"
+);
 @@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "javascript");
 @@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "python");
