@@ -15160,7 +15160,7 @@ model SecurityPerimeterSystemData {
   /**
    * The type of identity that created the resource.
    */
-  createdByType?: CreatedByType;
+  createdByType?: CommonTypes.createdByType;
 
   /**
    * The timestamp of resource creation (UTC).
@@ -15176,7 +15176,7 @@ model SecurityPerimeterSystemData {
   /**
    * The type of identity that last modified the resource.
    */
-  lastModifiedByType?: CreatedByType;
+  lastModifiedByType?: CommonTypes.createdByType;
 
   /**
    * The timestamp of resource last modification (UTC)
