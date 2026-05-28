@@ -15,10 +15,6 @@ on:
         "ARM Auto SignOff - Analyze Code",
         "Swagger Avocado - Set Status",
         "Swagger LintDiff - Set Status",
-        # Trigger after Summarize Checks to re-evaluate when NotReadyForARMReview is removed
-        # (label changes by workflows don't trigger pull_request_target events).
-        # See: https://github.com/Azure/azure-rest-api-specs/pull/42239
-        "Summarize Checks",
       ]
     types: [completed]
 
@@ -52,7 +48,6 @@ jobs:
         github.event.label.name == 'ARMAutoSignedOff-Trivial' ||
         github.event.label.name == 'ARMReview' ||
         github.event.label.name == 'ARMSignedOff' ||
-        github.event.label.name == 'NotReadyForARMReview' ||
         github.event.label.name == 'SuppressionReviewRequired'))
 
     runs-on: ubuntu-slim
