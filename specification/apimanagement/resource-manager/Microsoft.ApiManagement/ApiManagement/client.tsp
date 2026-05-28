@@ -1358,3 +1358,113 @@ op replacePurge(
   "ApiManagementProductTag",
   "csharp"
 );
+
+// Force input usage on Data/Resource contract models that have a separate
+// "CreateOrUpdate" request type in spec. Without this, the C# emitter treats
+// these as response-only models, producing internal-only constructors and
+// read-only public properties on the Data classes — breaking GA back-compat.
+@@usage(AccessInformationContract, Usage.input, "csharp");
+@@usage(ApiContract, Usage.input, "csharp");
+@@usage(CertificateContract, Usage.input, "csharp");
+@@usage(EmailTemplateContract, Usage.input, "csharp");
+@@usage(GroupContract, Usage.input, "csharp");
+@@usage(IdentityProviderContract, Usage.input, "csharp");
+@@usage(NamedValueContract, Usage.input, "csharp");
+@@usage(UserContract, Usage.input, "csharp");
+@@usage(TagDescriptionContract, Usage.input, "csharp");
+@@usage(TagContract, Usage.input, "csharp");
+@@usage(SubscriptionContract, Usage.input, "csharp");
+
+// Model renames identified from GA contract diff.
+@@clientName(
+  Microsoft.ApiManagement.TagResourceContract,
+  "TagResourceContractDetails",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.TagTagResourceContractProperties,
+  "AssociatedTagProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiTagResourceContractProperties,
+  "AssociatedApiProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.OperationTagResourceContractProperties,
+  "AssociatedOperationProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ProductTagResourceContractProperties,
+  "AssociatedProductProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AccessInformationSecretsContract,
+  "TenantAccessInfoSecretsDetails",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.OperationResultContract,
+  "GitOperationResultContractData",
+  "csharp"
+);
+@@clientName(Microsoft.ApiManagement.State, "IssueState", "csharp");
+@@clientName(
+  Microsoft.ApiManagement.Method,
+  "HttpMethodConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.ApiManagement.HttpHeader, "HttpHeaderConfiguration", "csharp");
+@@clientName(
+  Microsoft.ApiManagement.NetworkStatusContractByLocation,
+  "NetworkStatusContractWithLocation",
+  "csharp"
+);
+@@clientName(Microsoft.ApiManagement.PolicyIdName, "PolicyName", "csharp");
+@@clientName(
+  Microsoft.ApiManagement.SettingsTypeName,
+  "SettingsType",
+  "csharp"
+);
+@@clientName(Microsoft.ApiManagement.AccessIdName, "AccessName", "csharp");
+@@clientName(
+  Microsoft.ApiManagement.ConfigurationIdName,
+  "ConfigurationName",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.Confirmation,
+  "ConfirmationEmailType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
+  "ConnectivityCheckRequestHttpConfiguration",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ResourceSkuCapacity,
+  "ApiManagementResourceSkuCapacity",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ResourceSkuCapacityScaleType,
+  "ApiManagementResourceSkuCapacityScaleType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ResourceSkuResult,
+  "AvailableApiManagementServiceSkuResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PrivateEndpointConnectionRequest,
+  "ApiManagementPrivateEndpointConnectionCreateOrUpdateContent",
+  "csharp"
+);
+// AssociationContractPropertiesProvisioningState rename intentionally omitted -
+// the type is emitted from an inline anonymous enum on the `provisioningState`
+// property, so it cannot be targeted by @@clientName.
