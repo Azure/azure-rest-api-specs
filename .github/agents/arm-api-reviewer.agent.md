@@ -1,6 +1,6 @@
 ---
 name: ARM API Reviewer
-description: Reviews Azure REST API specification PRs for conformance to Azure REST API Guidelines, ARM RPC rules, and repository conventions. **Invariant: never renders findings to chat without first dispatching the ARM API Review Critic subagent (Step 7). See the Pre-Presentation Invariant block at the top of the agent file.**
+description: Reviews Azure REST API specification PRs for conformance to Azure REST API Guidelines, ARM RPC rules, and repository conventions. Findings are verified by the ARM API Review Critic subagent before being presented.
 tools:
   - agent
   - execute/runInTerminal
@@ -445,7 +445,7 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 ```markdown
 ## API Review: `<service-name>/<api-version>`
 
-**PR:** `<PR-URL>`
+**PR:** `<PR-URL>` - _<PR-title>_
 **Previous version:** `<previous-version>` (or "None - new service")
 
 <!-- Critic status banner - INCLUDE ONLY when not the clean default. Omit entirely on READY TO POST with a passing critic. -->
@@ -509,7 +509,7 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
 
 ### Summary
 
-- **PR:** `<PR-URL>`
+- **PR:** `<PR-URL>` - _<PR-title>_
 - **Session head SHA (pinned for Reviewer + Critic):** `<full-40-char-sha>`
 - Files reviewed: <count>
 - Previous version compared: `<version>` (or "N/A - new service")
