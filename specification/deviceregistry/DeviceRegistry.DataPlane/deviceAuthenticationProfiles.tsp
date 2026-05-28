@@ -134,7 +134,7 @@ model CertificateIssuanceRequest {
   /**
    * Base64-encoded DER certificate signing request (CSR) without PEM
    * headers and footers. Format of the CSR is in PKCS 10. The CN field of
-   * the CSR must be set to the device name.
+   * the CSR must be set to the device's external device id (registrationId).
    */
   csr: bytes;
 }
