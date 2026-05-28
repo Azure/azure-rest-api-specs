@@ -1443,11 +1443,11 @@ op replacePurge(
   "ConfirmationEmailType",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
-  "ConnectivityCheckRequestHttpConfiguration",
-  "csharp"
-);
+// NOTE: ConnectivityCheckRequestProtocolConfigurationHttpConfiguration rename
+// intentionally omitted - renaming the parent makes the emitter compute a
+// context-derived name `HttpHeaderConfiguration` for the nested `headers:
+// HttpHeader[]` element. The HttpHeader type is then emitted as `HTTPHeader.cs`
+// while references use `HttpHeaderConfiguration`, causing CS0234.
 @@clientName(
   Microsoft.ApiManagement.ResourceSkuCapacity,
   "ApiManagementResourceSkuCapacity",
