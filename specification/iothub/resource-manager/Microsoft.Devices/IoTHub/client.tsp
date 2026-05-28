@@ -9,54 +9,45 @@ using Azure.Core;
 using Http;
 
 @@clientName(Microsoft.Devices, "IotHubClient", "javascript,java,python");
-@@clientName(
-  IotHubDescriptions.getEndpointHealth,
+@@clientName(IotHubDescriptions.getEndpointHealth,
   "listEndpointHealth",
   "javascript"
 );
-@@clientName(
-  IotHubDescriptions.getQuotaMetrics,
+@@clientName(IotHubDescriptions.getQuotaMetrics,
   "listQuotaMetrics",
   "javascript"
 );
 @@clientName(IotHubDescriptions.getValidSkus, "listValidSkus", "javascript");
 
 @@clientName(Microsoft.Devices.IotHubProperties.hostName, "hostname", "java");
-@@clientName(
-  Microsoft.Devices.NetworkRuleIPAction,
+@@clientName(Microsoft.Devices.NetworkRuleIPAction,
   "NetworkRuleIpAction",
   "java"
 );
-@@clientName(
-  Microsoft.Devices.IotHubProperties.disableModuleSAS,
+@@clientName(Microsoft.Devices.IotHubProperties.disableModuleSAS,
   "disableModuleSas",
   "java"
 );
-@@clientName(
-  Microsoft.Devices.IotHubProperties.disableDeviceSAS,
+@@clientName(Microsoft.Devices.IotHubProperties.disableDeviceSAS,
   "disableDeviceSas",
   "java"
 );
 
 // Keep legacy Go struct field names with "Iso8601" casing.
-@@clientName(
-  StorageEndpointProperties.sasTtlAsIso8601,
+@@clientName(StorageEndpointProperties.sasTtlAsIso8601,
   "SasTTLAsIso8601",
   "go"
 );
-@@clientName(
-  FeedbackProperties.lockDurationAsIso8601,
+@@clientName(FeedbackProperties.lockDurationAsIso8601,
   "LockDurationAsIso8601",
   "go"
 );
 @@clientName(FeedbackProperties.ttlAsIso8601, "TTLAsIso8601", "go");
-@@clientName(
-  CloudToDeviceProperties.defaultTtlAsIso8601,
+@@clientName(CloudToDeviceProperties.defaultTtlAsIso8601,
   "DefaultTTLAsIso8601",
   "go"
 );
-@@clientName(
-  MessagingEndpointProperties.lockDurationAsIso8601,
+@@clientName(MessagingEndpointProperties.lockDurationAsIso8601,
   "LockDurationAsIso8601",
   "go"
 );
@@ -190,8 +181,7 @@ using Http;
   "EventHubConsumerGroupInfoCreateOrUpdateContent",
   "csharp"
 );
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  EventHubConsumerGroupBodyDescription.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubConsumerGroupBodyDescription.properties,
   "csharp"
 );
 @@clientName(EventHubConsumerGroupName.name, "Name", "csharp");
@@ -233,7 +223,10 @@ using Http;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Devices.PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.Devices.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(Microsoft.Devices.PrivateEndpointConnection,
   "IotHubPrivateEndpointConnection",
   "csharp"
@@ -275,6 +268,8 @@ using Http;
   "GetIotHubPrivateEndpointConnections",
   "csharp"
 );
+@@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");
+@@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource", "csharp");
 
 /**
  * override for IotHubDescriptions.manualFailover
@@ -288,14 +283,11 @@ op replaceManualFailover(
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.FailoverInput,
-):
-  | (ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader)
-  | Microsoft.Devices.ErrorDetails
-  | Azure.ResourceManager.ArmResponse<void>;
+): (ArmCombinedLroHeaders &
+  Azure.Core.Foundations.RetryAfterHeader) | Microsoft.Devices.ErrorDetails | Azure.ResourceManager.ArmResponse<void>;
 
 @@override(IotHubDescriptions.manualFailover, replaceManualFailover);
-@@clientName(
-  replaceManualFailover::parameters.body,
+@@clientName(replaceManualFailover::parameters.body,
   "failoverInput",
   "go,javascript"
 );
@@ -312,9 +304,7 @@ op replaceTestAllRoutes(
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.TestAllRoutesInput,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestAllRoutesResult>
-  | Microsoft.Devices.ErrorDetails;
+): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestAllRoutesResult> | Microsoft.Devices.ErrorDetails;
 
 @@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes);
 @@clientName(replaceTestAllRoutes::parameters.body, "input", "go,javascript");
@@ -331,9 +321,7 @@ op replaceTestRoute(
   ...Azure.ResourceManager.ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   @body body: Microsoft.Devices.TestRouteInput,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestRouteResult>
-  | Microsoft.Devices.ErrorDetails;
+): Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestRouteResult> | Microsoft.Devices.ErrorDetails;
 
 @@override(IotHubDescriptions.testRoute, replaceTestRoute);
 @@clientName(replaceTestRoute::parameters.body, "input", "go,javascript");

@@ -33,7 +33,7 @@ using Microsoft.Devices;
 @@clientName(IotHubDescriptions.importDevices::parameters.body,
   "importDevicesParameters"
 );
-@@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource");
+@@clientLocation(IotHubDescriptions.manualFailover, "IotHub");
 @@clientName(IotHubDescriptions.manualFailover::parameters.body,
   "failoverInput"
 );
@@ -73,6 +73,9 @@ using Microsoft.Devices;
   "certificateVerificationBody"
 );
 
+@@clientLocation(GroupIdInformations.get, "PrivateLinkResources");
+@@clientLocation(GroupIdInformations.list, "PrivateLinkResources");
+
 @@clientLocation(IotHubResourceOperationGroup.checkNameAvailability,
   "IotHubResource"
 );
@@ -83,5 +86,3 @@ using Microsoft.Devices;
 @@clientName(IotHubResourceOperationGroup.checkNameAvailability::parameters.body,
   "operationInputs"
 );
-
-@@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");

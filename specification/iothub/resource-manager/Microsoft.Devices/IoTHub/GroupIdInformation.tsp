@@ -68,7 +68,6 @@ interface GroupIdInformations {
   >;
 }
 
-@@doc(
-  GroupIdInformation.properties,
+@@doc(GroupIdInformation.properties,
   "The properties for a group information object"
 );
