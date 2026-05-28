@@ -487,3 +487,51 @@ using Microsoft.Billing;
 // client.tsp do not propagate either. Suppress the operation for C# and re-expose the
 // equivalent GA back-compat method via a Custom partial on `BillingAccountResource`.
 @@scope(BillingAccounts.savingsPlansListByBillingAccount, "!csharp");
+
+// Restore public setters / parameterless ctors on input models that the new spec marks output-only.
+// MPG generator drops setters and ctors when usage is read-only; @@usage(Usage.input, "csharp") restores both.
+@@usage(BillingAccount, Usage.input, "csharp");
+@@usage(Agreement, Usage.input, "csharp");
+@@usage(AgreementProperties, Usage.input, "csharp");
+@@usage(AvailableBalanceProperties, Usage.input, "csharp");
+@@usage(Customer, Usage.input, "csharp");
+@@usage(CustomerProperties, Usage.input, "csharp");
+@@usage(Department, Usage.input, "csharp");
+@@usage(DepartmentProperties, Usage.input, "csharp");
+@@usage(EnrollmentAccount, Usage.input, "csharp");
+@@usage(EnrollmentAccountProperties, Usage.input, "csharp");
+@@usage(Invoice, Usage.input, "csharp");
+@@usage(InvoiceProperties, Usage.input, "csharp");
+@@usage(PaymentMethod, Usage.input, "csharp");
+@@usage(PaymentMethodLink, Usage.input, "csharp");
+@@usage(BillingPlanInformation, Usage.input, "csharp");
+@@usage(PaymentDetail, Usage.input, "csharp");
+@@usage(Product, Usage.input, "csharp");
+@@usage(BillingRequestProperties, Usage.input, "csharp");
+@@usage(Reservation, Usage.input, "csharp");
+@@usage(ReservationOrder, Usage.input, "csharp");
+@@usage(BillingRoleDefinition, Usage.input, "csharp");
+@@usage(BillingRoleDefinitionProperties, Usage.input, "csharp");
+@@usage(SavingsPlanModel, Usage.input, "csharp");
+@@usage(BillingSubscriptionAlias, Usage.input, "csharp");
+@@usage(BillingSubscription, Usage.input, "csharp");
+@@usage(BillingSubscriptionPatch, Usage.input, "csharp");
+@@usage(TaxIdentifier, Usage.input, "csharp");
+@@usage(Transaction, Usage.input, "csharp");
+@@usage(TransactionProperties, Usage.input, "csharp");
+@@usage(PaymentMethodLogo, Usage.input, "csharp");
+@@usage(PaymentMethodProperties, Usage.input, "csharp");
+@@usage(RefundDetailsSummary, Usage.input, "csharp");
+@@usage(RefundTransactionDetails, Usage.input, "csharp");
+@@usage(ReservationExtendedStatusInfo, Usage.input, "csharp");
+@@usage(ReservationMergeProperties, Usage.input, "csharp");
+@@usage(ReservationOrderBillingPlanInformation, Usage.input, "csharp");
+@@usage(ReservationPaymentDetail, Usage.input, "csharp");
+@@usage(ReservationPurchaseRequest, Usage.input, "csharp");
+@@usage(RenewPropertiesResponse, Usage.input, "csharp");
+@@usage(ReservationSplitProperties, Usage.input, "csharp");
+@@usage(ReservationSwapProperties, Usage.input, "csharp");
+@@usage(ReservationUtilizationAggregates, Usage.input, "csharp");
+@@usage(SavingsPlanOrderModel, Usage.input, "csharp");
+@@usage(SubscriptionPolicy, Usage.input, "csharp");
+@@usage(SubscriptionPolicyProperties, Usage.input, "csharp");
