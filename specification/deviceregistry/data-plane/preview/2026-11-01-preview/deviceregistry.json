@@ -804,7 +804,7 @@
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles. The\nissued certificate chain is delivered by the GET on the corresponding\n`issueCertResults` status monitor endpoint, not on this 202 response.",
+        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles. The\nissued certificate chain is delivered by the GET on the corresponding\n`issueCertResults` status monitor endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -819,29 +819,23 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "authenticationProfileName",
             "in": "path",
-            "description": "The name of the authentication profile.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "operationId"
+            "$ref": "#/parameters/OperationIdHeaderParameter"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Certificate issuance request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CertificateIssuanceRequest"
@@ -852,7 +846,30 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationAcceptedResponse"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "type": "object",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
@@ -892,7 +909,7 @@
         "tags": [
           "Device Authentication Profiles"
         ],
-        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nThe 202 carries only operation state; status is polled via the dedicated GET\non the corresponding `revokeCertsResults` status monitor endpoint.",
+        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nStatus is polled via the dedicated GET on the corresponding\n`revokeCertsResults` status monitor endpoint.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -907,40 +924,49 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "authenticationProfileName",
             "in": "path",
-            "description": "The name of the authentication profile.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "Operation-Id",
-            "in": "header",
-            "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "operationId"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Revoke certificates request body. Currently has no required fields; reserved for future.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RevokeCertsRequest"
-            }
+            "$ref": "#/parameters/OperationIdHeaderParameter"
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationAcceptedResponse"
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "type": "object",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
             },
             "headers": {
               "Operation-Location": {
@@ -4198,28 +4224,6 @@
         "status"
       ]
     },
-    "OperationAcceptedResponse": {
-      "type": "object",
-      "description": "202 Accepted response shape for long-running operations on device authentication\nprofiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any\noperation payload (e.g. the issued certificate chain) is delivered by the\ndedicated polling GET on the corresponding `*Results` status monitor endpoint.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error object that describes the error when status is \"Failed\"."
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
     "OperationKind": {
       "type": "string",
       "description": "The kind of long-running operation tracked by an `Operation` resource.",
@@ -4512,10 +4516,6 @@
           }
         ]
       }
-    },
-    "RevokeCertsRequest": {
-      "type": "object",
-      "description": "Request payload for the `:revokeCerts` action."
     },
     "RevokeCertsResult": {
       "type": "object",
@@ -5105,6 +5105,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "OperationIdHeaderParameter": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
     }
   }
 }

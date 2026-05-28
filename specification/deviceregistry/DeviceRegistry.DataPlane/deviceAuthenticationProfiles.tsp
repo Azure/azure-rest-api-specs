@@ -107,11 +107,23 @@ model CertificateAuthorityCredentials {
 }
 
 // ──────────────────────────────────────────────
-// Revoke cert action models
+// Shared action parameters
 // ──────────────────────────────────────────────
 
-/** Request payload for the `:revokeCerts` action. */
-model RevokeCertsRequest {}
+/**
+ * Shared parameter model carrying the optional client-supplied
+ * `Operation-Id` request header used by the `:issueCert` and
+ * `:revokeCerts` long-running actions. If omitted, the service
+ * generates a GUID.
+ */
+model OperationIdHeaderParameter {
+  /**
+   * Optional client-supplied identifier for the operation's status monitor.
+   * If omitted, the service generates a GUID.
+   */
+  @header("Operation-Id")
+  operationId?: string;
+}
 
 // ──────────────────────────────────────────────
 // Certificate issuance action models
@@ -169,24 +181,6 @@ model IssueCertResult {
   result?: CertificateIssuanceResult;
 }
 
-/**
- * 202 Accepted response shape for long-running operations on device authentication
- * profiles (`:issueCert`, `:revokeCerts`). Carries only operation state; any
- * operation payload (e.g. the issued certificate chain) is delivered by the
- * dedicated polling GET on the corresponding `*Results` status monitor endpoint.
- */
-model OperationAcceptedResponse {
-  /** The unique ID of the operation. */
-  id: string;
-
-  /** The status of the operation. */
-  @Azure.Core.lroStatus
-  status: Azure.Core.Foundations.OperationState;
-
-  /** Error object that describes the error when status is "Failed". */
-  error?: Azure.Core.Foundations.Error;
-}
-
 // ──────────────────────────────────────────────
 // Revoke-cert status monitor endpoint
 // ──────────────────────────────────────────────
@@ -241,80 +235,28 @@ interface DeviceAuthenticationProfiles {
    * signed using the certificate authority policy bound to this authentication
    * profile. Applies to Microsoft-managed X.509 authentication profiles. The
    * issued certificate chain is delivered by the GET on the corresponding
-   * `issueCertResults` status monitor endpoint, not on this 202 response.
+   * `issueCertResults` status monitor endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response intentionally omits 'result'. The issued certificate chain is delivered by the dedicated GET issueCertResults polling endpoint."
-  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert")
-  @post
   @pollingOperation(IssueCertResults.get)
-  issueCert(
-    ...Azure.Core.Foundations.ApiVersionParameter,
-
-    /** The unique identifier of the namespace. */
-    @path namespaceUuid: string,
-
-    /** The name of the device. */
-    @path deviceName: string,
-
-    /** The name of the authentication profile. */
-    @path authenticationProfileName: string,
-
-    /**
-     * Optional client-supplied identifier for the operation's status monitor.
-     * If omitted, the service generates a GUID.
-     */
-    @header("Operation-Id") operationId?: string,
-
-    /** Certificate issuance request. */
-    @body body: CertificateIssuanceRequest,
-  ): {
-    @statusCode statusCode: 202;
-
-    /** The location for monitoring the operation state. */
-    @header("Operation-Location") operationLocation: url;
-
-    ...OperationAcceptedResponse;
-  } | Azure.Core.Foundations.ErrorResponse;
+  issueCert is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    CertificateIssuanceRequest & OperationIdHeaderParameter,
+    {}
+  >;
 
   /**
    * Revoke certificates issued for the device authentication profile. Applies to
    * Microsoft-managed X.509 certificates: invalidates outstanding certificates
    * via the PKI revocation list. The authentication profile itself is preserved.
-   * The 202 carries only operation state; status is polled via the dedicated GET
-   * on the corresponding `revokeCertsResults` status monitor endpoint.
+   * Status is polled via the dedicated GET on the corresponding
+   * `revokeCertsResults` status monitor endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom LRO: 202 Accepted response carries no payload. Operation state is polled via the dedicated GET revokeCertsResults status monitor endpoint."
-  @route("/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCerts")
-  @post
   @pollingOperation(RevokeCertsResults.get)
-  revokeCerts(
-    ...Azure.Core.Foundations.ApiVersionParameter,
-
-    /** The unique identifier of the namespace. */
-    @path namespaceUuid: string,
-
-    /** The name of the device. */
-    @path deviceName: string,
-
-    /** The name of the authentication profile. */
-    @path authenticationProfileName: string,
-
-    /**
-     * Optional client-supplied identifier for the operation's status monitor.
-     * If omitted, the service generates a GUID.
-     */
-    @header("Operation-Id") operationId?: string,
-
-    /** Revoke certificates request body. Currently has no required fields; reserved for future. */
-    @body body?: RevokeCertsRequest,
-  ): {
-    @statusCode statusCode: 202;
-
-    /** The location for monitoring the operation state. */
-    @header("Operation-Location") operationLocation: url;
-
-    ...OperationAcceptedResponse;
-  } | Azure.Core.Foundations.ErrorResponse;
+  revokeCerts is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    OperationIdHeaderParameter,
+    {}
+  >;
 }
 
 /** Polling operations for the long-running `:issueCert` action. */
