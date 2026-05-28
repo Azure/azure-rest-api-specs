@@ -170,10 +170,11 @@ interface Snapshots {
   Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
 );
-@@doc(Snapshots.updateImmutabilityPolicy::parameters.body,
+@@doc(
+  Snapshots.updateImmutabilityPolicy::parameters.body,
   "Immutability policy data supplied in the body of the update immutability policy operation."
 );
-@@doc(Snapshots.updateImmutabilityPolicyLock::parameters.body,
+@@doc(
+  Snapshots.updateImmutabilityPolicyLock::parameters.body,
   "Immutability policy data supplied in the body of the update immutability policy lock operation."
 );
-
