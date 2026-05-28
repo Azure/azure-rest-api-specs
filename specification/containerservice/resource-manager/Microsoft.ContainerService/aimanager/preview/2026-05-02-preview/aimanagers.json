@@ -251,6 +251,15 @@
             "minLength": 16,
             "maxLength": 16,
             "pattern": "^[0-9a-f]{16}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalculateCostRequest"
+            }
           }
         ],
         "responses": {
@@ -756,7 +765,7 @@
         "tags": [
           "ModelSources"
         ],
-        "description": "Create a ModelSource",
+        "description": "Create or update a `ModelSource`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1487,7 +1496,7 @@
         "tags": [
           "ModelDeployments"
         ],
-        "description": "Create a ModelDeployment",
+        "description": "Create or update a `ModelDeployment`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2000,7 +2009,7 @@
     },
     "AIModel": {
       "type": "object",
-      "description": "An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider; identical across regions and subscriptions. Can be referenced by `ModelDeployment` resources.",
+      "description": "An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider. Can be referenced by `ModelDeployment` resources.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AIModelProperties",
@@ -2194,6 +2203,10 @@
         "vmHourlyPrice",
         "feasible"
       ]
+    },
+    "CalculateCostRequest": {
+      "type": "object",
+      "description": "Request body for the AI model `calculateCost` action."
     },
     "CalculateCostResponse": {
       "type": "object",

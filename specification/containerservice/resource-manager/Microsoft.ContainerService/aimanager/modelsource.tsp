@@ -81,6 +81,7 @@ model InlineCredential {
 interface ModelSources {
   get is ArmResourceRead<ModelSource>;
 
+  @doc("Create or update a `ModelSource`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ModelSource,
     Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &

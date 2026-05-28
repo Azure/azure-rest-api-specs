@@ -13,7 +13,7 @@ namespace Microsoft.ContainerService;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIModel is a valid name"
 @added(Versions.v2026_05_02_preview)
-@doc("An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider; identical across regions and subscriptions. Can be referenced by `ModelDeployment` resources.")
+@doc("An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider. Can be referenced by `ModelDeployment` resources.")
 @parentResource(SubscriptionLocationResource)
 @resource("aiModels")
 model AIModel is ProxyResource<AIModelProperties> {
@@ -57,6 +57,13 @@ model ModelSpec {
   @visibility(Lifecycle.Read)
   @doc("The maximum context length supported by the model, in tokens.")
   maxContextLength: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Reserved as an extensibility envelope so future versions can add optional filters without changing the SDK method signature."
+@added(Versions.v2026_05_02_preview)
+@doc("Request body for the AI model `calculateCost` action.")
+model CalculateCostRequest {
+  // intentionally empty for v1; future versions may add filters
 }
 
 @added(Versions.v2026_05_02_preview)
@@ -180,7 +187,7 @@ interface AIModels {
   @action("calculateCost")
   calculateCost is ArmResourceActionSync<
     AIModel,
-    void,
+    CalculateCostRequest,
     ArmResponse<CalculateCostResponse>
   >;
 }

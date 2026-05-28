@@ -226,6 +226,7 @@ model AutoscaleProfile {
 interface ModelDeployments {
   get is ArmResourceRead<ModelDeployment>;
 
+  @doc("Create or update a `ModelDeployment`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ModelDeployment,
     Azure.ResourceManager.Foundations.BaseParameters<ModelDeployment> &
