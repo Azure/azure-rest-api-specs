@@ -21,7 +21,7 @@ model AIModel is ProxyResource<AIModelProperties> {
     Resource = AIModel,
     KeyName = "aiModelName",
     SegmentName = "aiModels",
-    NamePattern = "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    NamePattern = "^[0-9a-f]{16}$"
   >;
 }
 
@@ -181,9 +181,9 @@ interface AIModels {
   >;
 }
 
-@@maxLength(AIModel.name, 128);
-@@minLength(AIModel.name, 1);
+@@maxLength(AIModel.name, 16);
+@@minLength(AIModel.name, 16);
 @@doc(
   AIModel.name,
-  "The name of the AI model resource. Derived from the upstream model id by replacing the publisher separator `/` with `--` (e.g. upstream `microsoft/Phi-4-mini-instruct` becomes `microsoft--Phi-4-mini-instruct`). Because Hugging Face repo ids forbid `--`, this mapping is unambiguously reversible. Allowed characters: letters, digits, `.`, `-`, `_`."
+  "The name of the AI model resource. A stable, format-defined identifier derived from `modelId` as the lowercase hex of the first 8 bytes (16 characters) of `SHA-256(modelId)` (e.g. upstream `microsoft/Phi-4-mini-instruct` produces `9806f0c862fdd920`). Callers should treat the name as opaque and use the `modelId` property as the human-readable reference. The encoding is a permanent contract of this resource provider and does not depend on any upstream naming policy."
 );

@@ -176,6 +176,22 @@ model ModelDeploymentOverrides {
   validation time, not by the schema. A PUT request that sets both `manual`
   and `autoscale`, or sets neither, is rejected with HTTP 400 (Bad Request)
   and an `InvalidScalingProfile` error code;
+  
+  Scale-to-zero semantics differ between the two modes:
+  - `manual` permits `replicas: 0`. This is an explicit operator action to
+    stop serving traffic while keeping the `ModelDeployment` resource (and
+    its configuration) in place. While at zero replicas the endpoint
+    returns errors for inference requests, and the deployment releases its
+    GPU capacity.
+  - `autoscale` does not permit `minReplicas: 0`. Autoscaling decisions are
+    driven by serving-server runtime metrics (request rate, queue depth,
+    GPU utilization); at zero replicas there is no signal for the
+    autoscaler to scale back up from. Combined with GPU cold-start time
+    (on the order of minutes) and constrained regional GPU capacity, a
+    scale-from-zero event would produce unacceptable first-request latency
+    and a high risk of capacity unavailability. Callers that want
+    autoscaling with an idle state should delete the `ModelDeployment`
+    instead.
   """)
 model ScalingProfile {
   @doc("Manual scaling configuration with a fixed replica count. Mutually exclusive with `autoscale`.")
@@ -188,7 +204,7 @@ model ScalingProfile {
 @added(Versions.v2026_05_02_preview)
 @doc("Manual scaling configuration: fixed replica count.")
 model ManualScalingProfile {
-  @doc("Fixed number of replicas.")
+  @doc("Fixed number of replicas. May be `0` to stop serving traffic while keeping the deployment configuration (see `ScalingProfile`).")
   @minValue(0)
   replicas: int32;
 }
@@ -196,7 +212,7 @@ model ManualScalingProfile {
 @added(Versions.v2026_05_02_preview)
 @doc("Autoscaling configuration: scale replica count between a minimum and maximum.")
 model AutoscaleProfile {
-  @doc("The minimum number of replicas.")
+  @doc("The minimum number of replicas. Must be at least `1`; scale-to-zero is not supported in autoscale mode (see `ScalingProfile`).")
   @minValue(1)
   minReplicas: int32;
 

@@ -196,12 +196,12 @@
           {
             "name": "aiModelName",
             "in": "path",
-            "description": "The name of the AI model resource. Derived from the upstream model id by replacing the publisher separator `/` with `--` (e.g. upstream `microsoft/Phi-4-mini-instruct` becomes `microsoft--Phi-4-mini-instruct`). Because Hugging Face repo ids forbid `--`, this mapping is unambiguously reversible. Allowed characters: letters, digits, `.`, `-`, `_`.",
+            "description": "The name of the AI model resource. A stable, format-defined identifier derived from `modelId` as the lowercase hex of the first 8 bytes (16 characters) of `SHA-256(modelId)` (e.g. upstream `microsoft/Phi-4-mini-instruct` produces `9806f0c862fdd920`). Callers should treat the name as opaque and use the `modelId` property as the human-readable reference. The encoding is a permanent contract of this resource provider and does not depend on any upstream naming policy.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+            "minLength": 16,
+            "maxLength": 16,
+            "pattern": "^[0-9a-f]{16}$"
           }
         ],
         "responses": {
@@ -245,12 +245,12 @@
           {
             "name": "aiModelName",
             "in": "path",
-            "description": "The name of the AI model resource. Derived from the upstream model id by replacing the publisher separator `/` with `--` (e.g. upstream `microsoft/Phi-4-mini-instruct` becomes `microsoft--Phi-4-mini-instruct`). Because Hugging Face repo ids forbid `--`, this mapping is unambiguously reversible. Allowed characters: letters, digits, `.`, `-`, `_`.",
+            "description": "The name of the AI model resource. A stable, format-defined identifier derived from `modelId` as the lowercase hex of the first 8 bytes (16 characters) of `SHA-256(modelId)` (e.g. upstream `microsoft/Phi-4-mini-instruct` produces `9806f0c862fdd920`). Callers should treat the name as opaque and use the `modelId` property as the human-readable reference. The encoding is a permanent contract of this resource provider and does not depend on any upstream naming policy.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+            "minLength": 16,
+            "maxLength": 16,
+            "pattern": "^[0-9a-f]{16}$"
           }
         ],
         "responses": {
@@ -824,6 +824,17 @@
             "description": "Resource 'ModelSource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ModelSource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -837,7 +848,11 @@
           "ModelSources_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/ModelSources_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ModelSources_Delete",
@@ -2048,7 +2063,7 @@
         "minReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of replicas.",
+          "description": "The minimum number of replicas. Must be at least `1`; scale-to-zero is not supported in autoscale mode (see `ScalingProfile`).",
           "minimum": 1
         },
         "maxReplicas": {
@@ -2330,7 +2345,7 @@
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Fixed number of replicas.",
+          "description": "Fixed number of replicas. May be `0` to stop serving traffic while keeping the deployment configuration (see `ScalingProfile`).",
           "minimum": 0
         }
       },
@@ -2648,7 +2663,11 @@
         },
         "credential": {
           "$ref": "#/definitions/CredentialValue",
-          "description": "Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models)."
+          "description": "Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models).",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2750,7 +2769,7 @@
     },
     "ScalingProfile": {
       "type": "object",
-      "description": "Scaling configuration for a model deployment. Exactly one of `manual` or\n`autoscale` must be set.\n\nThis mutual-exclusion constraint is enforced by the service at request\nvalidation time, not by the schema. A PUT request that sets both `manual`\nand `autoscale`, or sets neither, is rejected with HTTP 400 (Bad Request)\nand an `InvalidScalingProfile` error code;",
+      "description": "Scaling configuration for a model deployment. Exactly one of `manual` or\n`autoscale` must be set.\n\nThis mutual-exclusion constraint is enforced by the service at request\nvalidation time, not by the schema. A PUT request that sets both `manual`\nand `autoscale`, or sets neither, is rejected with HTTP 400 (Bad Request)\nand an `InvalidScalingProfile` error code;\n\nScale-to-zero semantics differ between the two modes:\n- `manual` permits `replicas: 0`. This is an explicit operator action to\n  stop serving traffic while keeping the `ModelDeployment` resource (and\n  its configuration) in place. While at zero replicas the endpoint\n  returns errors for inference requests, and the deployment releases its\n  GPU capacity.\n- `autoscale` does not permit `minReplicas: 0`. Autoscaling decisions are\n  driven by serving-server runtime metrics (request rate, queue depth,\n  GPU utilization); at zero replicas there is no signal for the\n  autoscaler to scale back up from. Combined with GPU cold-start time\n  (on the order of minutes) and constrained regional GPU capacity, a\n  scale-from-zero event would produce unacceptable first-request latency\n  and a high risk of capacity unavailability. Callers that want\n  autoscaling with an idle state should delete the `ModelDeployment`\n  instead.",
       "properties": {
         "manual": {
           "$ref": "#/definitions/ManualScalingProfile",
