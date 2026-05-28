@@ -132,7 +132,7 @@ interface AgentSessionFiles {
       /** The file or directory path to delete, relative to the session home directory. */
       @query path: string;
 
-      /** Whether to recursively delete directory contents. Defaults to false. */
+      /** Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller. */
       @query recursive?: boolean = false;
 
       ...UserIsolationKeyHeader;
