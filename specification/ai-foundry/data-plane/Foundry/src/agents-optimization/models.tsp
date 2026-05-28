@@ -193,7 +193,7 @@ model OptimizationTaskResult {
   composite_score: float64;
 
   @doc("Total tokens consumed during the agent run for this task.")
-  tokens: int32;
+  tokens: int64;
 
   @doc("Wall-clock seconds for this task's agent execution.")
   @encode(DurationKnownEncoding.seconds, float64)
