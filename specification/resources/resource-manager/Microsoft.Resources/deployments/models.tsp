@@ -785,7 +785,7 @@ model DeploymentExtensionConfigItem {
    * The value type of the extension config property.
    */
   @visibility(Lifecycle.Read)
-  @removed(Versions.V2026_06_01)
+  @removed(Versions.v2026_06_01)
   type?: ExtensionConfigPropertyType;
 
   /**
@@ -1494,7 +1494,7 @@ model DeploymentWhatIfProperties extends DeploymentProperties {
    * Resource predictions that can be utilized by what-if to produce potential modification changes.
    */
   @added(Versions.v2026_06_01)
-  @identifiers(#[])
+  @identifiers(#["symbolicNamePath"])
   resourcePredictions?: DeploymentResourceWhatIfPrediction[];
 }
 
@@ -1594,7 +1594,7 @@ model WhatIfOperationProperties {
  */
 model WhatIfChange {
   /**
-   * Resource ID
+   * The fully-qualified ARM resource ID for this change.
    */
   resourceId?: string;
 
@@ -1607,6 +1607,12 @@ model WhatIfChange {
    * The symbolic name of the resource responsible for this change.
    */
   symbolicName?: string;
+
+  /**
+   * The resource type of the resource.
+   */
+  @added(Versions.v2026_06_01)
+  resourceType?: string;
 
   /**
    * A subset of properties that uniquely identify a Bicep extensible resource because it lacks a resource id like an Azure resource has.
