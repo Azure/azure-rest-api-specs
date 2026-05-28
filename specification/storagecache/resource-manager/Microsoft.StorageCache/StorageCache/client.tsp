@@ -105,7 +105,7 @@ using Microsoft.StorageCache;
 @@clientName(AmlFilesystemRootSquashSettings, "AmlFileSystemRootSquashSettings", "csharp");
 @@clientName(AmlFilesystemSquashMode, "AmlFileSystemSquashMode", "csharp");
 @@clientName(AmlFilesystemUpdate, "AmlFileSystemPatch", "csharp");
-@@clientName(AmlFilesystemUpdatePropertiesMaintenanceWindow, "AmlFileSystemPatchPropertiesMaintenanceWindow", "csharp");
+@@clientName(AmlFilesystemUpdatePropertiesMaintenanceWindow, "AmlFileSystemUpdatePropertiesMaintenanceWindow", "csharp");
 @@clientName(AmlFilesystemHsmSettings, "AmlFileSystemHsmSettings", "csharp");
 @@clientName(AmlFilesystemArchive, "AmlFileSystemArchive", "csharp");
 @@clientName(AmlFilesystemArchiveInfo, "AmlFileSystemArchiveContent", "csharp");
@@ -138,6 +138,7 @@ using Microsoft.StorageCache;
 @@clientName(UsageModelDisplay, "StorageCacheUsageModelDisplay", "csharp");
 @@clientName(UsageModelsResult, "StorageCacheUsageModelsResult", "csharp");
 @@clientName(UsernameSource, "StorageCacheUsernameSourceType", "csharp");
+@@clientName(UsernameSource.LDAP, "Ldap", "csharp");
 @@clientName(UsernameDownloadedType, "StorageCacheUsernameDownloadedType", "csharp");
 @@clientName(ExpansionJobPropertiesProvisioningState, "ExpansionJobProvisioningState", "csharp");
 
@@ -153,6 +154,7 @@ using Microsoft.StorageCache;
 @@clientName(CacheUsernameDownloadSettings.extendedGroups, "EnableExtendedGroups", "csharp");
 @@clientName(CacheUsernameDownloadSettingsCredentials.bindDn, "BindDistinguishedName", "csharp");
 @@clientName(CacheEncryptionSettings.rotationToLatestKeyVersionEnabled, "EnableRotationToLatestKeyVersion", "csharp");
+@@clientName(Restriction.type, "RestrictionType", "csharp");
 @@clientName(NfsAccessRule.suid, "AllowSuid", "csharp");
 @@clientName(NfsAccessRule.submountAccess, "AllowSubmountAccess", "csharp");
 @@clientName(NfsAccessRule.rootSquash, "EnableRootSquash", "csharp");
@@ -163,7 +165,7 @@ using Microsoft.StorageCache;
 @@clientName(BlobNfsTarget.verificationTimer, "VerificationDelayInSeconds", "csharp");
 @@clientName(BlobNfsTarget.writeBackTimer, "WriteBackDelayInSeconds", "csharp");
 
-@@alternateType(CacheProperties.mountAddresses, ipV4Address, "csharp");
+@@alternateType(CacheProperties.mountAddresses, ipV4Address[], "csharp");
 @@alternateType(CacheProperties.subnet, armResourceIdentifier, "csharp");
 @@alternateType(CacheActiveDirectorySettings.primaryDnsIpAddress, ipV4Address, "csharp");
 @@alternateType(CacheActiveDirectorySettings.secondaryDnsIpAddress, ipV4Address, "csharp");
@@ -175,6 +177,10 @@ using Microsoft.StorageCache;
 @@alternateType(KeyVaultKeyReferenceSourceVault.id, armResourceIdentifier, "csharp");
 @@alternateType(BlobNfsTarget.target, armResourceIdentifier, "csharp");
 @@alternateType(ClfsTarget.target, armResourceIdentifier, "csharp");
+@@alternateType(AscUsagesOperationGroup.list::parameters.location, Azure.Core.azureLocation, "csharp");
+
+@@visibility(CacheProperties.primingJobs, Lifecycle.Read);
+@@visibility(AutoExportJobProperties.status, Lifecycle.Read, Lifecycle.Create);
 
 @@clientName(Caches.spaceAllocation, "UpdateSpaceAllocation", "csharp");
 @@clientName(Caches.debugInfo, "EnableDebugInfo", "csharp");
