@@ -13,7 +13,9 @@ namespace Microsoft.Sql;
 /**
  * A long term retention backup.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 model LongTermRetentionBackup
   is Azure.ResourceManager.ProxyResource<LongTermRetentionBackupProperties> {
   ...ResourceNameParameter<
@@ -62,7 +64,9 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackups {
   /**
    * Gets a long term retention backup.
@@ -106,7 +110,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     ChangeLongTermRetentionBackupAccessTierParameters,
     Result = void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -116,7 +122,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     CopyLongTermRetentionBackupParameters,
     void,
-    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
+    Response =
+      | ArmResponse<LongTermRetentionBackupOperationResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 
   /**
@@ -126,7 +134,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -136,7 +146,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -146,7 +158,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -156,7 +170,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -166,7 +182,9 @@ interface LongTermRetentionBackups {
     LongTermRetentionBackup,
     UpdateLongTermRetentionBackupParameters,
     void,
-    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
+    Response =
+      | ArmResponse<LongTermRetentionBackupOperationResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 }
 alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -203,7 +221,9 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackupOperationGroup {
   /**
    * Gets a long term retention backup.
@@ -252,7 +272,9 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     ChangeLongTermRetentionBackupAccessTierParameters,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -264,7 +286,9 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     CopyLongTermRetentionBackupParameters,
     void,
-    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
+    Response =
+      | ArmResponse<LongTermRetentionBackupOperationResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 
   /**
@@ -276,7 +300,9 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -288,7 +314,9 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -300,7 +328,9 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -312,7 +342,9 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     void,
     void,
-    Response = ArmResponse<LongTermRetentionBackup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
+    Response =
+      | ArmResponse<LongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackup>>
   >;
 
   /**
@@ -324,25 +356,32 @@ interface LongTermRetentionBackupOperationGroup {
     LongTermRetentionBackup,
     UpdateLongTermRetentionBackupParameters,
     void,
-    Response = ArmResponse<LongTermRetentionBackupOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
+    Response =
+      | ArmResponse<LongTermRetentionBackupOperationResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = LongTermRetentionBackupOperationResult>>
   >;
 }
 
 @@doc(LongTermRetentionBackup.name, "The backup name.");
 @@doc(LongTermRetentionBackup.properties, "Resource properties.");
 @@doc(LongTermRetentionBackups.changeAccessTier::parameters.body, "");
-@@doc(LongTermRetentionBackups.copy::parameters.body,
+@@doc(
+  LongTermRetentionBackups.copy::parameters.body,
   "The parameters needed for long term retention copy request"
 );
-@@doc(LongTermRetentionBackups.update::parameters.body,
+@@doc(
+  LongTermRetentionBackups.update::parameters.body,
   "The requested backup resource state"
 );
-@@doc(LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
+@@doc(
+  LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
   ""
 );
-@@doc(LongTermRetentionBackupOperationGroup.copyByResourceGroup::parameters.body,
+@@doc(
+  LongTermRetentionBackupOperationGroup.copyByResourceGroup::parameters.body,
   "The parameters needed for long term retention copy request"
 );
-@@doc(LongTermRetentionBackupOperationGroup.updateByResourceGroup::parameters.body,
+@@doc(
+  LongTermRetentionBackupOperationGroup.updateByResourceGroup::parameters.body,
   "The requested backup resource state"
 );

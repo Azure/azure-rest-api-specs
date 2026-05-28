@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A server DNS alias.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 model ServerDnsAlias
   is Azure.ResourceManager.ProxyResource<ServerDnsAliasProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model ServerDnsAlias
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerDnsAliases)
 interface ServerDnsAliases {
   /**
    * Gets a server DNS alias.
@@ -39,11 +43,14 @@ interface ServerDnsAliases {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServerDnsAlias,
     Request = void,
-    Response = ArmResourceUpdatedResponse<ServerDnsAlias> | ArmResourceCreatedResponse<
-      ServerDnsAlias,
-      ArmLroLocationHeader<FinalResult = ServerDnsAlias> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ServerDnsAlias>
+      | ArmResourceCreatedResponse<
+          ServerDnsAlias,
+          ArmLroLocationHeader<FinalResult = ServerDnsAlias> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -52,7 +59,10 @@ interface ServerDnsAliases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerDnsAlias,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

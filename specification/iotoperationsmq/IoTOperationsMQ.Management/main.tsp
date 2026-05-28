@@ -43,6 +43,7 @@ interface Mq {
     MqResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqResource,
@@ -66,6 +67,7 @@ interface Broker {
     BrokerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerResource,
@@ -88,6 +90,7 @@ interface BrokerListener {
     BrokerListenerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerListenerResource,
@@ -110,6 +113,7 @@ interface BrokerAuthentication {
     BrokerAuthenticationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerAuthenticationResource,
@@ -132,6 +136,7 @@ interface BrokerAuthorization {
     BrokerAuthorizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerAuthorizationResource,
@@ -154,6 +159,7 @@ interface MqttBridgeConnector {
     MqttBridgeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqttBridgeConnectorResource,
@@ -176,6 +182,7 @@ interface MqttBridgeTopicMap {
     MqttBridgeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqttBridgeTopicMapResource,
@@ -198,6 +205,7 @@ interface DiagnosticService {
     DiagnosticServiceResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DiagnosticServiceResource,
@@ -220,6 +228,7 @@ interface DataLakeConnector {
     DataLakeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DataLakeConnectorResource,
@@ -242,6 +251,7 @@ interface DataLakeConnectorTopicMap {
     DataLakeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DataLakeTopicMapResource,
@@ -264,6 +274,7 @@ interface KafkaConnector {
     KafkaConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     KafkaConnectorResource,
@@ -286,6 +297,7 @@ interface KafkaConnectorTopicMap {
     KafkaTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     KafkaTopicMapResource,

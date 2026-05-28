@@ -80,9 +80,11 @@ interface ManagedVirtualNetworkResources {
 @@maxLength(ManagedVirtualNetworkResource.name, 127);
 @@minLength(ManagedVirtualNetworkResource.name, 1);
 @@doc(ManagedVirtualNetworkResource.name, "Managed virtual network name");
-@@doc(ManagedVirtualNetworkResource.properties,
+@@doc(
+  ManagedVirtualNetworkResource.properties,
   "Managed Virtual Network properties."
 );
-@@doc(ManagedVirtualNetworkResources.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedVirtualNetworkResources.createOrUpdate::parameters.resource,
   "Managed Virtual Network resource definition."
 );

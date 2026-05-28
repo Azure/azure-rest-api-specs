@@ -50,7 +50,10 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -59,12 +62,15 @@ interface PrivateEndpointConnections {
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the Private Endpoint connection."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Private Endpoint Connection Properties."
 );
-@@doc(PrivateEndpointConnections.create::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.create::parameters.resource,
   "Private Endpoint Connection Approval object."
 );

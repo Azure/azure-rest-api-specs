@@ -42,9 +42,11 @@ interface ConditionalCreditContributors {
   >;
 }
 
-@@doc(ConditionalCreditContributor.name,
+@@doc(
+  ConditionalCreditContributor.name,
   "Unique name of contributor in the format {contributorCloudSubId}_{resourceGroupName}_{nameInContributorTenant}."
 );
-@@doc(ConditionalCreditContributor.properties,
+@@doc(
+  ConditionalCreditContributor.properties,
   "Conditional credit contributor properties"
 );

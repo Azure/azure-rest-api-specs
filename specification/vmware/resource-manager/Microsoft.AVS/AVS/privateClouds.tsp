@@ -32,11 +32,13 @@ interface PrivateClouds {
   update is ArmCustomPatchAsync<
     PrivateCloud,
     PrivateCloudUpdate,
-    Response = PrivateCloud | ArmResourceCreatedResponse<
-      PrivateCloud,
-      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateCloud> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | PrivateCloud
+      | ArmResourceCreatedResponse<
+          PrivateCloud,
+          LroHeaders = ArmLroLocationHeader<FinalResult = PrivateCloud> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   #suppress "deprecated"
