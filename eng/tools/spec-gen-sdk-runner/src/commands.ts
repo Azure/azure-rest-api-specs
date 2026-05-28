@@ -192,7 +192,7 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   if (tool === "skipped") {
     logMessage(
       `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
-      LogLevel.Warn,
+      LogLevel.Info,
     );
     executionReport = {
       packages: [],
@@ -332,7 +332,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     if (tool === "skipped") {
       logMessage(
         `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
-        LogLevel.Warn,
+        LogLevel.Info,
       );
       executionReport = {
         packages: [],
@@ -519,7 +519,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       specConfigPath = specConfigs.readmePath ?? "";
       logMessage(
         `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
-        LogLevel.Warn,
+        LogLevel.Info,
       );
       executionReport = {
         packages: [],
