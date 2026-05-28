@@ -484,7 +484,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
 @@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
-@@clientName(VoiceLive.RequestImageContentPart.url, "Uri", "csharp");
+@@clientName(VoiceLive.RequestImageContentPart.image_url, "Uri", "csharp");
 @@clientName(
   VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
   "LogProbs",
@@ -626,7 +626,7 @@ using Azure.ClientGenerator.Core;
   url,
   "csharp"
 );
-@@alternateType(VoiceLive.RequestImageContentPart.url, url, "csharp");
+@@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
