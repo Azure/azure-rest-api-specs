@@ -4,43 +4,22 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.BillingBenefits;
 
-// go
-@@clientLocation(BenefitOperationGroup.validate, "RP", "go");
 @@clientName(
   Microsoft.BillingBenefits.ManagedServiceIdentity,
   "ServiceManagedIdentity",
-  "go"
+  "go,java,python,javascript"
 );
 @@clientName(
   Microsoft.BillingBenefits.ManagedServiceIdentityType,
   "ServiceManagedIdentityType",
-  "go"
+  "go,java,python,javascript"
 );
+
+// go
+@@clientLocation(BenefitOperationGroup.validate, "RP", "go");
 
 // java
 @@clientLocation(BenefitOperationGroup.validate, "ResourceProviders", "java");
-@@clientName(
-  Microsoft.BillingBenefits.ManagedServiceIdentity,
-  "ServiceManagedIdentity",
-  "java"
-);
-@@clientName(
-  Microsoft.BillingBenefits.ManagedServiceIdentityType,
-  "ServiceManagedIdentityType",
-  "java"
-);
-
-// python
-@@clientName(
-  Microsoft.BillingBenefits.ManagedServiceIdentity,
-  "ServiceManagedIdentity",
-  "python"
-);
-@@clientName(
-  Microsoft.BillingBenefits.ManagedServiceIdentityType,
-  "ServiceManagedIdentityType",
-  "python"
-);
 
 // csharp
 @@clientName(

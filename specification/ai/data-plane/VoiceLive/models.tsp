@@ -161,6 +161,39 @@ model ClientEventInputAudioClear extends ClientEvent {
   type: ClientEventType.input_audio_clear;
 }
 
+/** Streams a delta of input text content into the specified item. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(RequestUsage)
+model ClientEventInputTextDelta extends ClientEvent {
+  /** The event type, must be `input_text.delta`. */
+  type: ClientEventType.input_text_delta;
+
+  /** The ID of the item the text delta is being appended to. */
+  id: string;
+
+  /** The text delta to append. */
+  delta: string;
+
+  /** The index of the content part within the item the delta applies to. */
+  content_index?: int32 = 0;
+}
+
+/** Signals that the streamed input text content for the specified item is complete. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(RequestUsage)
+model ClientEventInputTextDone extends ClientEvent {
+  /** The event type, must be `input_text.done`. */
+  type: ClientEventType.input_text_done;
+
+  /** The ID of the item whose text content has finished streaming. */
+  id: string;
+
+  /** The index of the content part within the item. */
+  content_index?: int32 = 0;
+}
+
 // Tool customization: establish custom, enriched discriminated type hierarchy
 /** The item to add to the conversation. */
 @usage(RequestUsage)
