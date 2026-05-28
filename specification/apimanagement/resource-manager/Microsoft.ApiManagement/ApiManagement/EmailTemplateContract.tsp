@@ -45,7 +45,7 @@ interface EmailTemplateContractsOps
         serviceName: string,
       },
       {
-        /** Email Template Name Identifier. */
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
         @path
         @segment("templates")
         @key

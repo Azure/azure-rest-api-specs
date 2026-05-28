@@ -49,7 +49,6 @@ interface OpenidConnectProviderContractsOps
         @segment("openidConnectProviders")
         @key
         @pattern("^[^*#&+:<>?]+$")
-        @minLength(1)
         @maxLength(256)
         opid: string,
       },
