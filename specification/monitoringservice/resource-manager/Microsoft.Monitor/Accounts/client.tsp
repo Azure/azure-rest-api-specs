@@ -15,6 +15,8 @@ using Microsoft.Monitor;
   "python,go,javascript"
 );
 
+@@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
+
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties,
 // provide write-specific models that omit those fields so SDK users see a clean API.
