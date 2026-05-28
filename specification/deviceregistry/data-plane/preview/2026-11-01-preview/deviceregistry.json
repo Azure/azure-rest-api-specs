@@ -831,6 +831,14 @@
             "type": "string"
           },
           {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID. A retry passing the same\n`Operation-Id` with the same request body returns the same operation;\na conflicting reuse returns 409-Conflict.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "operationId"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Certificate issuance request.",
@@ -909,6 +917,14 @@
             "description": "The name of the authentication profile.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID. A retry passing the same\n`Operation-Id` with the same request body returns the same operation;\na conflicting reuse returns 409-Conflict.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "operationId"
           },
           {
             "name": "body",

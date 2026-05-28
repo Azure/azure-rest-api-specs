@@ -259,6 +259,12 @@ interface DeviceAuthenticationProfiles {
     /** The name of the authentication profile. */
     @path authenticationProfileName: string,
 
+    /**
+     * Optional client-supplied identifier for the operation's status monitor.
+     * If omitted, the service generates a GUID.
+     */
+    @header("Operation-Id") operationId?: string,
+
     /** Certificate issuance request. */
     @body body: CertificateIssuanceRequest,
   ): {
@@ -292,6 +298,12 @@ interface DeviceAuthenticationProfiles {
 
     /** The name of the authentication profile. */
     @path authenticationProfileName: string,
+
+    /**
+     * Optional client-supplied identifier for the operation's status monitor.
+     * If omitted, the service generates a GUID.
+     */
+    @header("Operation-Id") operationId?: string,
 
     /** Revoke certificates request body. Currently has no required fields; reserved for future. */
     @body body?: RevokeCertsRequest,
