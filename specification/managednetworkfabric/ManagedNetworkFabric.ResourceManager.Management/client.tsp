@@ -458,6 +458,12 @@ union NetworkFabricManagedServiceIdentityTypeReplacement {
   "csharp"
 );
 @@clientName(UpdateVersion, "NetworkFabricUpdateVersionContent", "csharp");
+@@usage(UpgradeNetworkFabricProperties, Usage.input, "csharp");
+@@alternateType(
+  NetworkFabrics.upgrade::parameters.body,
+  UpgradeNetworkFabricProperties,
+  "csharp"
+);
 @@clientName(ValidateAction, "NetworkFabricValidateAction", "csharp");
 @@clientName(
   ValidateConfigurationProperties,
@@ -758,9 +764,9 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   CommonDynamicMatchConfiguration[],
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkTapRuleProperties.pollingIntervalInSeconds,
-  PollingIntervalInSeconds,
+  "PollingIntervalInSecond",
   "csharp"
 );
 @@alternateType(
@@ -2193,14 +2199,14 @@ model IPExtendedCommunityAddOperationProperties {}
   "CommitConfiguration",
   "csharp"
 );
-@@clientName(NetworkFabrics.deprovision, "StartDeprovision", "csharp");
-@@clientName(NetworkFabrics.provision, "StartProvision", "csharp");
+@@clientName(NetworkFabrics.deprovision, "Deactivate", "csharp");
+@@clientName(NetworkFabrics.provision, "Activate", "csharp");
 @@clientName(
   NetworkFabrics.refreshConfiguration,
-  "StartRefreshConfiguration",
+  "ReloadConfiguration",
   "csharp"
 );
-@@clientName(NetworkFabrics.upgrade, "StartUpgrade", "csharp");
+@@clientName(NetworkFabrics.upgrade, "Upgrade", "csharp");
 @@clientName(
   NetworkFabrics.updateInfraManagementBfdConfiguration,
   "SetInfraManagementBfdConfiguration",
@@ -2211,7 +2217,7 @@ model IPExtendedCommunityAddOperationProperties {}
   "SetWorkloadManagementBfdConfiguration",
   "csharp"
 );
-@@clientName(NetworkFabrics.getTopology, "GetTopologyDetails", "csharp");
+@@clientName(NetworkFabrics.getTopology, "RetrieveTopology", "csharp");
 @@clientName(GetTopologyResponse, "NetworkFabricTopologyResult", "csharp");
 @@clientName(
   RoutePolicies.updateAdministrativeState,
