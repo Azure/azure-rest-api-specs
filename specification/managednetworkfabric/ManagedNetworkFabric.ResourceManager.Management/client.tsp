@@ -1587,7 +1587,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 @@clientName(NetworkInterfaceProperties.ipv4Address, "IPv4Address", "csharp");
 @@clientName(NetworkInterfaceProperties.ipv6Address, "IPv6Address", "csharp");
 @@clientName(InternetGatewayProperties.ipv4Address, "IPv4Address", "csharp");
-@@clientName(InternetGatewayProperties.type, "TypePropertiesType", "csharp");
 @@clientName(NeighborGroupDestination.ipv4Addresses, "IPv4Addresses", "csharp");
 @@clientName(NeighborGroupDestination.ipv6Addresses, "IPv6Addresses", "csharp");
 @@clientName(BmpConfigurationProperties.stationIp, "StationIP", "csharp");
@@ -2140,10 +2139,10 @@ model IPExtendedCommunityAddOperationProperties {}
 @@clientName(NetworkDevices.reboot, "Restart", "csharp");
 @@clientName(
   NetworkDevices.refreshConfiguration,
-  "StartRefreshConfiguration",
+  "ReloadConfiguration",
   "csharp"
 );
-@@clientName(NetworkDevices.upgrade, "StartUpgrade", "csharp");
+@@clientName(NetworkDevices.upgrade, "Upgrade", "csharp");
 @@clientName(
   AccessControlLists.updateAdministrativeState,
   "SetAdministrativeState",
