@@ -655,7 +655,7 @@ op guestConfigurationHCRPAssignmentsGetCustomized(
   "javascript"
 );
 @@clientName(
-  GuestConfigurationAssignments.subscriptionList,
+  GuestConfigurationAssignments.SubscriptionList,
   "listSubscriptionList",
   "javascript"
 );
