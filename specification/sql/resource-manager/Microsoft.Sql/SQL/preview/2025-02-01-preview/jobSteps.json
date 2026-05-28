@@ -1,0 +1,693 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "JobSteps"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps": {
+      "get": {
+        "operationId": "JobSteps_ListByJob",
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets all job steps for a job's current version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobStepListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List job steps for the latest version of a job.": {
+            "$ref": "./examples/ListJobStepsByJob.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/steps/{stepName}": {
+      "get": {
+        "operationId": "JobSteps_Get",
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets a job step in a job's current version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest version of a job step.": {
+            "$ref": "./examples/GetJobStepByJob.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JobSteps_CreateOrUpdate",
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Creates or updates a job step. This will implicitly create a new job version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested state of the job step.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'JobStep' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "201": {
+            "description": "Resource 'JobStep' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a job step with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateJobStepMax.json"
+          },
+          "Create or update a job step with minimal properties specified.": {
+            "$ref": "./examples/CreateOrUpdateJobStepMin.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobSteps_Delete",
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Deletes a job step. This will implicitly create a new job version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a job step.": {
+            "$ref": "./examples/DeleteJobStep.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps": {
+      "get": {
+        "operationId": "JobSteps_ListByVersion",
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets all job steps in the specified job version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobVersion",
+            "in": "path",
+            "description": "The version of the job to get.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobStepListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List job steps for the specified version of a job.": {
+            "$ref": "./examples/ListJobStepsByVersion.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}/versions/{jobVersion}/steps/{stepName}": {
+      "get": {
+        "operationId": "JobSteps_GetByVersion",
+        "tags": [
+          "JobSteps"
+        ],
+        "description": "Gets the specified version of a job step.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobVersion",
+            "in": "path",
+            "description": "The version of the job to get.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "stepName",
+            "in": "path",
+            "description": "The name of the job step.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobStep"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified version of a job step.": {
+            "$ref": "./examples/GetJobStepByVersion.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobStep": {
+      "type": "object",
+      "description": "A job step.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobStepProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobStepAction": {
+      "type": "object",
+      "description": "The action to be executed by a job step.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of action being executed by the job step.",
+          "default": "TSql",
+          "enum": [
+            "TSql"
+          ],
+          "x-ms-enum": {
+            "name": "JobStepActionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TSql",
+                "value": "TSql",
+                "description": "TSql"
+              }
+            ]
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "The source of the action to execute.",
+          "default": "Inline",
+          "enum": [
+            "Inline"
+          ],
+          "x-ms-enum": {
+            "name": "JobStepActionSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Inline",
+                "value": "Inline",
+                "description": "Inline"
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The action value, for example the text of the T-SQL script to execute."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobStepExecutionOptions": {
+      "type": "object",
+      "description": "The execution options of a job step.",
+      "properties": {
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Execution timeout for the job step.",
+          "default": 43200
+        },
+        "retryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of times the job step will be reattempted if the first attempt fails.",
+          "default": 10
+        },
+        "initialRetryIntervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Initial delay between retries for job step execution.",
+          "default": 1
+        },
+        "maximumRetryIntervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum amount of time to wait between retries for job step execution.",
+          "default": 120
+        },
+        "retryIntervalBackoffMultiplier": {
+          "type": "number",
+          "format": "float",
+          "description": "The backoff multiplier for the time between retries.",
+          "default": 2
+        }
+      }
+    },
+    "JobStepListResult": {
+      "type": "object",
+      "description": "The response of a JobStep list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobStep items on this page",
+          "items": {
+            "$ref": "#/definitions/JobStep"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobStepOutput": {
+      "type": "object",
+      "description": "The output configuration of a job step.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The output destination type.",
+          "default": "SqlDatabase",
+          "enum": [
+            "SqlDatabase"
+          ],
+          "x-ms-enum": {
+            "name": "JobStepOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SqlDatabase",
+                "value": "SqlDatabase",
+                "description": "SqlDatabase"
+              }
+            ]
+          }
+        },
+        "subscriptionId": {
+          "$ref": "./common.json#/definitions/Azure.Core.uuid",
+          "description": "The output destination subscription id."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The output destination resource group."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The output destination server name."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The output destination database."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The output destination schema.",
+          "default": "dbo"
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The output destination table."
+        },
+        "credential": {
+          "type": "string",
+          "description": "The resource ID of the credential to use to connect to the output destination."
+        }
+      },
+      "required": [
+        "serverName",
+        "databaseName",
+        "tableName"
+      ]
+    },
+    "JobStepProperties": {
+      "type": "object",
+      "description": "Properties of a job step.",
+      "properties": {
+        "stepId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The job step's index within the job. If not specified when creating the job step, it will be created as the last step. If not specified when updating the job step, the step id is not modified."
+        },
+        "targetGroup": {
+          "type": "string",
+          "description": "The resource ID of the target group that the job step will be executed on."
+        },
+        "credential": {
+          "type": "string",
+          "description": "The resource ID of the job credential that will be used to connect to the targets."
+        },
+        "action": {
+          "$ref": "#/definitions/JobStepAction",
+          "description": "The action payload of the job step."
+        },
+        "output": {
+          "$ref": "#/definitions/JobStepOutput",
+          "description": "Output destination properties of the job step."
+        },
+        "executionOptions": {
+          "$ref": "#/definitions/JobStepExecutionOptions",
+          "description": "Execution options for the job step."
+        }
+      },
+      "required": [
+        "targetGroup",
+        "action"
+      ]
+    }
+  },
+  "parameters": {}
+}

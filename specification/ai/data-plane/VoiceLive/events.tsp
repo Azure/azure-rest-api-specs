@@ -28,6 +28,18 @@ union ClientEventType {
   /** Client request to clear the avatar output buffer. */
   @added(Versions.v2026_04_10)
   output_audio_buffer_clear: "output_audio_buffer.clear",
+
+  /** Sent by the client to initiate a WebRTC session with an SDP offer. */
+  @added(Versions.v2026_06_01_preview)
+  rtc_call_sdp_create: "rtc.call.sdp.create",
+
+  /** Streamed delta of input text content being appended to an item. */
+  @added(Versions.v2026_06_01_preview)
+  input_text_delta: "input_text.delta",
+
+  /** Signals that the streamed input text content for an item is complete. */
+  @added(Versions.v2026_06_01_preview)
+  input_text_done: "input_text.done",
 }
 
 /** Server event types used in VoiceLive protocol. */
@@ -140,4 +152,24 @@ union ServerEventType {
   /** Audio transcript annotation added. */
   @added(Versions.v2026_04_10)
   response_audio_transcript_annotation_added: "response.audio_transcript.annotation.added",
+
+  /** Invocation passthrough delta from hosted agent. */
+  @added(Versions.v2026_06_01_preview)
+  response_invocation_delta: "response.invocation.delta",
+
+  /** Returned when the WebRTC SDP negotiation completes successfully. */
+  @added(Versions.v2026_06_01_preview)
+  rtc_call_sdp_created: "rtc.call.sdp.created",
+
+  /** Returned when a WebRTC call operation fails. */
+  @added(Versions.v2026_06_01_preview)
+  rtc_call_error: "rtc.call.error",
+
+  /** Output audio buffer playback started. */
+  @added(Versions.v2026_06_01_preview)
+  output_audio_buffer_started: "output_audio_buffer.started",
+
+  /** Output audio buffer playback stopped. */
+  @added(Versions.v2026_06_01_preview)
+  output_audio_buffer_stopped: "output_audio_buffer.stopped",
 }

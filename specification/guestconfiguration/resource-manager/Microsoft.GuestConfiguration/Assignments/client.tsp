@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.GuestConfiguration;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 
 // ============================================================================
 // Type alternate types - fix property types for backward compatibility
@@ -295,4 +297,365 @@ using Microsoft.GuestConfiguration;
 @@markAsPageable(
   GuestConfigurationConnectedVMwarevSphereAssignments.guestConfigurationConnectedVMwarevSphereAssignmentsReportsList,
   "csharp"
+);
+
+/** Get a report for the guest configuration assignment, by reportId. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+op guestConfigurationAssignmentReportsGetCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The guest configuration assignment name. */
+  @path
+  guestConfigurationAssignmentName: string,
+
+  /** The GUID for the guest configuration assignment report. */
+  @path
+  reportId: string,
+
+  /** The name of the virtual machine. */
+  @path
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+  vmName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
+  @body
+  body: void,
+):
+  | Azure.ResourceManager.ArmResponse<GuestConfigurationAssignmentReport>
+  | ErrorResponse;
+
+/** List all reports for the guest configuration assignment, latest report first. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+op guestConfigurationAssignmentReportsListCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The provider namespace. */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.Compute",
+
+  /** The guest configuration assignment name. */
+  @path
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the virtual machine. */
+  @path
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+  vmName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
+  @body
+  body: void,
+):
+  | Azure.ResourceManager.ArmResponse<GuestConfigurationAssignmentReportList>
+  | ErrorResponse;
+
+/** Creates an association between a VM and guest configuration */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+op guestConfigurationAssignmentsCreateOrUpdateCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+
+  /** The guest configuration assignment name. */
+  @path
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The provider namespace. */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.Compute",
+
+  /** The name of the virtual machine. */
+  @path
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+  vmName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** Parameters supplied to the create or update guest configuration assignment. */
+  @body
+  parameters: GuestConfigurationAssignment,
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** Delete a guest configuration assignment */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Matches source delete operation response shape."
+op guestConfigurationAssignmentsDeleteCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The provider namespace. */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.Compute",
+
+  /** The guest configuration assignment name. */
+  @path
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the virtual machine. */
+  @path
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+  vmName: string,
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** Get information about a guest configuration assignment */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+op guestConfigurationAssignmentsGetCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The provider namespace. */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.Compute",
+
+  /** The guest configuration assignment name. */
+  @path
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the virtual machine. */
+  @path
+  @pattern("^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$")
+  vmName: string,
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** Get a report for the guest configuration assignment, by reportId. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+op guestConfigurationHCRPAssignmentReportsGetCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The guest configuration assignment name. */
+  @path
+  @segment("guestConfigurationAssignments")
+  guestConfigurationAssignmentName: string,
+
+  /** The GUID for the guest configuration assignment report. */
+  @path
+  reportId: string,
+
+  /** The name of the ARC machine. */
+  @path
+  @segment("machines")
+  machineName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
+  @body
+  body: void,
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignmentReport>
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** List all reports for the guest configuration assignment, latest report first. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+op guestConfigurationHCRPAssignmentReportsListCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** The provider namespace. */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.HybridCompute",
+
+  /** The guest configuration assignment name. */
+  @path
+  @key
+  @segment("guestConfigurationAssignments")
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the ARC machine. */
+  @segment("machines")
+  @key
+  @path
+  machineName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Void request body inherited from source operation."
+  @body
+  body: void,
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignmentReportList>
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** Creates an association between a ARC machine and guest configuration */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+op guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+
+  /** The guest configuration assignment name. */
+  @path
+  @key
+  @segment("guestConfigurationAssignments")
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** the provider namespace */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.HybridCompute",
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the ARC machine. */
+  @segment("machines")
+  @key
+  @path
+  machineName: string,
+
+  /** Parameters supplied to the create or update guest configuration assignment. */
+  @body
+  parameters: GuestConfigurationAssignment,
+):
+  | Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** Delete a guest configuration assignment */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Matches source delete operation response shape."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+op guestConfigurationHCRPAssignmentsDeleteCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** the provider namespace */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.HybridCompute",
+
+  /** The guest configuration assignment name. */
+  @path
+  @key
+  @segment("guestConfigurationAssignments")
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the ARC machine. */
+  @segment("machines")
+  @key
+  @path
+  machineName: string,
+):
+  | Azure.ResourceManager.ArmDeletedResponse
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+/** Get information about a guest configuration assignment */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SDK customization override keeps HCRP acronym."
+op guestConfigurationHCRPAssignmentsGetCustomized(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...Azure.ResourceManager.SubscriptionIdParameter,
+  ...Azure.ResourceManager.ResourceGroupParameter,
+
+  /** the provider namespace */
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.HybridCompute",
+
+  /** The guest configuration assignment name. */
+  @path
+  @key
+  @segment("guestConfigurationAssignments")
+  guestConfigurationAssignmentName: string,
+
+  ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<GuestConfigurationAssignment>,
+
+  /** The name of the ARC machine. */
+  @segment("machines")
+  @key
+  @path
+  machineName: string,
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.GuestConfiguration.GuestConfigurationAssignment>
+  | Microsoft.GuestConfiguration.ErrorResponse;
+
+@@override(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsGet,
+  guestConfigurationAssignmentReportsGetCustomized
+);
+@@override(
+  GuestConfigurationAssignments.guestConfigurationAssignmentReportsList,
+  guestConfigurationAssignmentReportsListCustomized
+);
+@@override(
+  GuestConfigurationAssignments.createOrUpdate,
+  guestConfigurationAssignmentsCreateOrUpdateCustomized
+);
+@@override(
+  GuestConfigurationAssignments.delete,
+  guestConfigurationAssignmentsDeleteCustomized
+);
+@@override(
+  GuestConfigurationAssignments.get,
+  guestConfigurationAssignmentsGetCustomized
+);
+@@override(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsGet,
+  guestConfigurationHCRPAssignmentReportsGetCustomized
+);
+@@override(
+  GuestConfigurationHCRPAssignments.guestConfigurationHCRPAssignmentReportsList,
+  guestConfigurationHCRPAssignmentReportsListCustomized
+);
+@@override(
+  GuestConfigurationHCRPAssignments.createOrUpdate,
+  guestConfigurationHCRPAssignmentsCreateOrUpdateCustomized
+);
+@@override(
+  GuestConfigurationHCRPAssignments.delete,
+  guestConfigurationHCRPAssignmentsDeleteCustomized
+);
+@@override(
+  GuestConfigurationHCRPAssignments.get,
+  guestConfigurationHCRPAssignmentsGetCustomized
+);
+@@clientName(
+  GuestConfigurationAssignmentsOperationGroup.rGList,
+  "listRGList",
+  "javascript"
+);
+@@clientName(
+  GuestConfigurationAssignments.SubscriptionList,
+  "listSubscriptionList",
+  "javascript"
 );
