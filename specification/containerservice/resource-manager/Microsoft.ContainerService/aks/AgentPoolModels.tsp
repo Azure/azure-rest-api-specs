@@ -171,15 +171,16 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * The version of node image
    */
-  @renamedFrom(Versions.v2026_04_02_preview, "nodeImageVersion")
-  @removed(Versions.v2026_04_02_preview)
+  @renamedFrom(Versions.v2026_04_01, "nodeImageVersion")
+  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   readOnlyNodeImageVersion?: string;
 
   /**
-   * The version of node image
+   * The version of the node image. Setting this value triggers an agentPool rollback.
+   * Only values from `recentlyUsedVersions` are allowed.
    */
-  @added(Versions.v2026_04_02_preview)
+  @added(Versions.v2026_04_01)
   nodeImageVersion?: string;
 
   /**
