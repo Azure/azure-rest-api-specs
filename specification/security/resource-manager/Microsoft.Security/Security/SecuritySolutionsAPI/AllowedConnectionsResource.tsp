@@ -69,11 +69,9 @@ interface AllowedConnectionsResources {
   >;
 }
 
-@@doc(
-  AllowedConnectionsResource.name,
+@@doc(AllowedConnectionsResource.name,
   "The type of allowed connections (Internal, External)"
 );
-@@doc(
-  AllowedConnectionsResource.properties,
+@@doc(AllowedConnectionsResource.properties,
   "Describes the allowed traffic between Azure resources"
 );

@@ -74,7 +74,6 @@ interface IoTSecurityAggregatedAlerts {
 }
 
 @@doc(IoTSecurityAggregatedAlert.name, "Identifier of the aggregated alert.");
-@@doc(
-  IoTSecurityAggregatedAlert.properties,
+@@doc(IoTSecurityAggregatedAlert.properties,
   "IoT Security solution aggregated alert details."
 );

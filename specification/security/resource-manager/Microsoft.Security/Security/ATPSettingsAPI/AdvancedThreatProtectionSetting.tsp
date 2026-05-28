@@ -85,11 +85,9 @@ alias AdvancedThreatProtectionSettingNameAlias = {
 };
 
 @@doc(AdvancedThreatProtectionSetting.name, "");
-@@doc(
-  AdvancedThreatProtectionSetting.properties,
+@@doc(AdvancedThreatProtectionSetting.properties,
   "The Advanced Threat Protection settings."
 );
-@@doc(
-  AdvancedThreatProtectionSettings.create::parameters.resource,
+@@doc(AdvancedThreatProtectionSettings.create::parameters.resource,
   "Advanced Threat Protection Settings"
 );

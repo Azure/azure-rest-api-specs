@@ -10,20 +10,16 @@ using Common;
 
 @@clientLocation(DefenderForStorageSettings.get, "DefenderForStorage");
 @@clientLocation(DefenderForStorageSettings.create, "DefenderForStorage");
-@@clientName(
-  DefenderForStorageSettings.create::parameters.resource,
+@@clientName(DefenderForStorageSettings.create::parameters.resource,
   "defenderForStorageSetting"
 );
 @@clientLocation(DefenderForStorageSettings.list, "DefenderForStorage");
-@@clientLocation(
-  DefenderForStorageSettings.startMalwareScan,
+@@clientLocation(DefenderForStorageSettings.startMalwareScan,
   "DefenderForStorage"
 );
-@@clientLocation(
-  DefenderForStorageSettings.cancelMalwareScan,
+@@clientLocation(DefenderForStorageSettings.cancelMalwareScan,
   "DefenderForStorage"
 );
-@@clientLocation(
-  DefenderForStorageSettings.getMalwareScan,
+@@clientLocation(DefenderForStorageSettings.getMalwareScan,
   "DefenderForStorage"
 );

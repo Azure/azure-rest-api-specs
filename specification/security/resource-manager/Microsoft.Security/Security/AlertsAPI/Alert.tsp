@@ -119,7 +119,6 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider;
-
     ...LocationResourceParameter;
   },
   {

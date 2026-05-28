@@ -50,7 +50,6 @@ interface IoTSecuritySolutionAnalyticsModels {
 }
 
 @@doc(IoTSecuritySolutionAnalyticsModel.name, "");
-@@doc(
-  IoTSecuritySolutionAnalyticsModel.properties,
+@@doc(IoTSecuritySolutionAnalyticsModel.properties,
   "Security Solution  Aggregated Alert data"
 );

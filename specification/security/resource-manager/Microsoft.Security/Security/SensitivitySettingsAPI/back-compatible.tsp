@@ -9,12 +9,10 @@ using Common;
 @@Legacy.flattenProperty(CloudError.error);
 
 @@clientLocation(GetSensitivitySettingsResponses.get, "SensitivitySettings");
-@@clientLocation(
-  GetSensitivitySettingsResponses.createOrUpdate,
+@@clientLocation(GetSensitivitySettingsResponses.createOrUpdate,
   "SensitivitySettings"
 );
-@@clientName(
-  GetSensitivitySettingsResponses.createOrUpdate::parameters.resource,
+@@clientName(GetSensitivitySettingsResponses.createOrUpdate::parameters.resource,
   "sensitivitySettings"
 );
 @@clientLocation(GetSensitivitySettingsResponses.list, "SensitivitySettings");

@@ -103,11 +103,9 @@ interface ApiCollections {
 
 @@maxLength(ApiCollection.name, 256);
 @@minLength(ApiCollection.name, 1);
-@@doc(
-  ApiCollection.name,
+@@doc(ApiCollection.name,
   "API revision identifier. Must be unique in the API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number."
 );
-@@doc(
-  ApiCollection.properties,
+@@doc(ApiCollection.properties,
   "Describes the properties of an API collection."
 );

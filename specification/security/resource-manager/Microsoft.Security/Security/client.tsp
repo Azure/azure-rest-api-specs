@@ -1262,9 +1262,7 @@ op sqlVulnerabilityAssessmentScanResultsGet(
 op alertsListResourceGroupLevelByRegionCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-
   ...LocationResourceParameter,
-
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 ): ArmResponse<AlertList> | ErrorResponse;

@@ -28,12 +28,10 @@ using Common;
 
 @@clientLocation(SecureScoreControlsOperationGroup.list, "SecureScoreControls");
 
-@@clientLocation(
-  SecureScoreControlDefinitionsOperationGroup.list,
+@@clientLocation(SecureScoreControlDefinitionsOperationGroup.list,
   "SecureScoreControlDefinitions"
 );
-@@clientLocation(
-  SecureScoreControlDefinitionsOperationGroup.listBySubscription,
+@@clientLocation(SecureScoreControlDefinitionsOperationGroup.listBySubscription,
   "SecureScoreControlDefinitions"
 );
 @@visibility(SecureScoreItem.properties, Lifecycle.Read);

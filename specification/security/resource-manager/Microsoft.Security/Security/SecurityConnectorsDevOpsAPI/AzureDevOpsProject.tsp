@@ -91,13 +91,11 @@ interface AzureDevOpsProjects {
   update is AzureDevOpsProjectOps.CustomPatchAsync<
     AzureDevOpsProject,
     PatchModel = AzureDevOpsProject,
-    Response =
-      | ArmResponse<AzureDevOpsProject>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: AzureDevOpsProject;
-        })
+    Response = ArmResponse<AzureDevOpsProject> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AzureDevOpsProject> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: AzureDevOpsProject;
+    })
   >;
 
   /**
@@ -113,11 +111,9 @@ interface AzureDevOpsProjects {
 
 @@doc(AzureDevOpsProject.name, "The project name.");
 @@doc(AzureDevOpsProject.properties, "Azure DevOps Project properties.");
-@@doc(
-  AzureDevOpsProjects.createOrUpdate::parameters.resource,
+@@doc(AzureDevOpsProjects.createOrUpdate::parameters.resource,
   "The Azure DevOps project resource payload."
 );
-@@doc(
-  AzureDevOpsProjects.update::parameters.properties,
+@@doc(AzureDevOpsProjects.update::parameters.properties,
   "The Azure DevOps project resource payload."
 );

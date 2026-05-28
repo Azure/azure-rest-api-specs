@@ -52,7 +52,6 @@ interface MdeOnboardings {
 }
 
 @@doc(MdeOnboardingData.name, "");
-@@doc(
-  MdeOnboardingData.properties,
+@@doc(MdeOnboardingData.properties,
   "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE"
 );
