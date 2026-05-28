@@ -34,34 +34,6 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.KubernetesVersionProperties.properties.patchVersions
     reason: "patchVersions is a map of patch version info, following AKS behavior."
-
-  - suppress: PathForTrackedResourceTypes
-    from: provisionedClusterInstances.json
-    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
-    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
-
-  - suppress: TrackedExtensionResourcesAreNotAllowed
-    from: provisionedClusterInstances.json
-    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
-
-  - suppress: PatchResponseCodes
-    from: provisionedClusterInstances.json
-    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"].patch
-    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
-
-  - suppress: XmsPageableForListCalls
-    from: provisionedClusterInstances.json
-    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools"].get
-    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
-
-  - suppress: AvoidAdditionalProperties
-    from: provisionedClusterInstances.json
-    where: $.definitions.AgentPoolProfile.properties.nodeLabels
-    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
-
-  - suppress: LroLocationHeader
-    from: virtualNetworks.json
-    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 ```
 
 ### Basic Information
@@ -92,6 +64,29 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 input-file:
   - stable/2024-01-01/provisionedClusterInstances.json
   - stable/2024-01-01/virtualNetworks.json
+directive:
+  - suppress: PathForTrackedResourceTypes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: provisionedClusterInstances.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: PatchResponseCodes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"].patch
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: XmsPageableForListCalls
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools"].get
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: AvoidAdditionalProperties
+    from: provisionedClusterInstances.json
+    where: $.definitions.AgentPoolProfile.properties.nodeLabels
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: LroLocationHeader
+    from: virtualNetworks.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 ```
 ### Tag: package-preview-2023-11
 
@@ -101,6 +96,29 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 input-file:
   - preview/2023-11-15-preview/provisionedClusterInstances.json
   - preview/2023-11-15-preview/virtualNetworks.json
+directive:
+  - suppress: PathForTrackedResourceTypes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: provisionedClusterInstances.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: PatchResponseCodes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"].patch
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: XmsPageableForListCalls
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools"].get
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: AvoidAdditionalProperties
+    from: provisionedClusterInstances.json
+    where: $.definitions.AgentPoolProfile.properties.nodeLabels
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: LroLocationHeader
+    from: virtualNetworks.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
 suppressions:
   - code: TopLevelResourcesListBySubscription
     where: $.definitions.KubernetesVersionProfile
