@@ -71,7 +71,7 @@ interface InternalNetworks {
   @action("updateBgpAdministrativeState")
   updateBgpAdministrativeState is ArmResourceActionAsync<
     InternalNetwork,
-    UpdateAdministrativeState,
+    InternalNetworkUpdateBgpAdministrativeStateRequest,
     InternalNetworkUpdateBgpAdministrativeStateResponse
   >;
 

@@ -132,7 +132,7 @@ interface NetworkDevices {
   @action("upgrade")
   upgrade is ArmResourceActionAsync<
     NetworkDevice,
-    UpdateVersion,
+    NetworkDeviceUpgradeRequest,
     NetworkDeviceUpgradeResponse
   >;
 
