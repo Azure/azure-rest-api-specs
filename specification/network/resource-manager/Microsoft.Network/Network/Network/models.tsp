@@ -15145,7 +15145,44 @@ model SecurityPerimeterResource {
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
   @visibility(Lifecycle.Read)
-  systemData?: CommonTypes.SystemData;
+  systemData?: SecurityPerimeterSystemData;
+}
+
+/**
+ * Metadata pertaining to creation and last modification of the resource.
+ */
+model SecurityPerimeterSystemData {
+  /**
+   * The identity that created the resource.
+   */
+  createdBy?: string;
+
+  /**
+   * The type of identity that created the resource.
+   */
+  createdByType?: CreatedByType;
+
+  /**
+   * The timestamp of resource creation (UTC).
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdAt?: utcDateTime;
+
+  /**
+   * The identity that last modified the resource.
+   */
+  lastModifiedBy?: string;
+
+  /**
+   * The type of identity that last modified the resource.
+   */
+  lastModifiedByType?: CreatedByType;
+
+  /**
+   * The timestamp of resource last modification (UTC)
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedAt?: utcDateTime;
 }
 
 /**
