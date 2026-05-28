@@ -9,6 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -26,10 +27,37 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
    * The complex type of the extended location.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_01_01)
   extendedLocation?: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
+
+alias JobDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Job Name */
+    @path
+    @segment("jobs")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    jobName: string;
+  },
+  {
+    /** Proxy API Name for Container App Job. */
+    @path
+    @segment("detectorProperties")
+    @key
+    @pattern("^[-\\w\\._]+$")
+    apiName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetectorProperty"
+>;
 
 @armResourceOperations(#{ omitTags: true })
 interface Jobs {
@@ -151,6 +179,7 @@ interface Jobs {
   @tag("Jobs")
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @removed(Versions.v2026_01_01)
   resume is ArmResourceActionAsyncBase<
     Job,
     void,
@@ -168,6 +197,7 @@ interface Jobs {
   @tag("Jobs")
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @removed(Versions.v2026_01_01)
   suspend is ArmResourceActionAsyncBase<
     Job,
     void,
@@ -224,11 +254,11 @@ interface Jobs {
   >;
 
   /**
-   * Get the properties of a Container App Job.
+   * Get the properties for a given Container App Job.
    */
   @tag("Jobs")
   @tag("Diagnostics")
-  @summary("Get the properties for a given Container App Job.")
+  @summary("Get the properties of a Container App Job.")
   proxyGet is ArmResourceRead<
     Job,
     Parameters = {

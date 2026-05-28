@@ -24,7 +24,7 @@ alias LocationParameter = {
   @minLength(1)
   @segment("locations")
   @key
-  locationparameter: Azure.Core.azureLocation;
+  location: Azure.Core.azureLocation;
 };
 
 @@clientName(
