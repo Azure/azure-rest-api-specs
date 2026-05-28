@@ -1247,6 +1247,12 @@ model MachineProperties {
   licenseProfile?: LicenseProfileMachineInstanceView;
 
   /**
+   * Indicates whether the service has detected that this Arc machine is a clone of another onboarded machine. Service-computed; not settable by the user.
+   */
+  @visibility(Lifecycle.Read)
+  isCloned?: boolean;
+
+  /**
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

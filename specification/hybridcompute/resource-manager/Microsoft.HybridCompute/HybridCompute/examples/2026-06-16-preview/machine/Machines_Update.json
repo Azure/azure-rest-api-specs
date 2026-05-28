@@ -1,33 +1,40 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
+    "api-version": "2026-06-16-preview",
+    "kind": null,
+    "location": "eastus2euap",
     "machineName": "myMachine",
     "parameters": {
       "identity": {
         "type": "SystemAssigned"
       },
-      "location": "eastus2euap",
       "properties": {
-        "clientPublicKey": "string",
         "identityKeyStore": "TPM",
         "locationData": {
           "name": "Redmond"
         },
         "osProfile": {
+          "linuxConfiguration": {
+            "patchSettings": {
+              "assessmentMode": "ImageDefault",
+              "patchMode": "Manual"
+            }
+          },
           "windowsConfiguration": {
             "patchSettings": {
-              "enableHotpatching": true
+              "assessmentMode": "ImageDefault",
+              "enableHotpatching": true,
+              "patchMode": "AutomaticByPlatform"
             }
           }
         },
         "parentClusterResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.AzureStackHCI/clusters/myAzureStackHCICluster",
         "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
-        "tpmEkCertificate": "string",
-        "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f"
+        "tpmEkCertificate": "string"
       }
     },
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
@@ -46,11 +53,7 @@
           "adFqdn": null,
           "agentVersion": null,
           "clientPublicKey": "string",
-          "detectedProperties": {
-            "cloudprovider": "N/A",
-            "manufacturer": "Microsoft Corporation",
-            "model": "Virtual Machine"
-          },
+          "detectedProperties": null,
           "displayName": null,
           "dnsFqdn": null,
           "domainName": null,
@@ -100,27 +103,23 @@
             }
           },
           "locationData": {
-            "name": "Redmond",
-            "city": "redmond",
-            "countryOrRegion": "usa",
-            "district": null
+            "name": "Redmond"
           },
           "machineFqdn": null,
-          "mssqlDiscovered": "false",
           "osEdition": "Standard",
           "osProfile": {
             "computerName": null,
             "linuxConfiguration": {
               "patchSettings": {
-                "assessmentMode": null,
-                "patchMode": null
+                "assessmentMode": "ImageDefault",
+                "patchMode": "Manual"
               }
             },
             "windowsConfiguration": {
               "patchSettings": {
-                "assessmentMode": null,
+                "assessmentMode": "ImageDefault",
                 "enableHotpatching": true,
-                "patchMode": null,
+                "patchMode": "AutomaticByPlatform",
                 "status": {
                   "error": null,
                   "hotpatchEnablementStatus": "PendingEvaluation"
@@ -143,6 +142,6 @@
       }
     }
   },
-  "operationId": "Machines_CreateOrUpdate",
-  "title": "Create or Update a Machine"
+  "operationId": "Machines_Update",
+  "title": "Update a Machine"
 }

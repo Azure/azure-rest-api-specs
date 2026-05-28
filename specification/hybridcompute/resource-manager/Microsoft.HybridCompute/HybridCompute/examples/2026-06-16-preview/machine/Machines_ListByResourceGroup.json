@@ -1,12 +1,13 @@
 {
   "parameters": {
-    "api-version": "2025-09-16-preview",
+    "api-version": "2026-06-16-preview",
+    "resourceGroupName": "myResourceGroup",
     "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.HybridCompute/machines?api-version=2025-09-16-preview&$skiptoken=nextPageToken",
+        "nextLink": null,
         "value": [
           {
             "name": "myMachine",
@@ -14,8 +15,8 @@
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine",
             "identity": {
               "type": "SystemAssigned",
-              "principalId": "string",
-              "tenantId": "string"
+              "principalId": "f7a068cc-b0b8-46e8-a203-22f301a62a8f",
+              "tenantId": "c4098cc-91b8-46c2-a205-d82ab1a62a8f"
             },
             "kind": null,
             "location": "eastus2euap",
@@ -132,7 +133,7 @@
           {
             "name": "myMachine2",
             "type": "Microsoft.HybridCompute/machines",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup2/providers/Microsoft.HybridCompute/machines/myMachine2",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/machines/myMachine2",
             "identity": {
               "type": "SystemAssigned",
               "principalId": "e7a068cc-b0b8-46e8-a203-22f301a62a8f",
@@ -238,6 +239,7 @@
               "osType": null,
               "osVersion": null,
               "parentClusterResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.AzureStackHCI/clusters/myAzureStackHCICluster",
+              "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName",
               "provisioningState": "Succeeded",
               "status": null,
               "vmId": "a4a098cc-b0b8-46e8-a205-62f301a62a8f"
@@ -248,6 +250,6 @@
       }
     }
   },
-  "operationId": "Machines_ListBySubscription",
+  "operationId": "Machines_ListByResourceGroup",
   "title": "List Machines by resource group"
 }

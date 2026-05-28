@@ -1,7 +1,6 @@
 {
   "parameters": {
-    "$expand": "instanceView",
-    "api-version": "2025-09-16-preview",
+    "api-version": "2026-06-16-preview",
     "machineName": "myMachine",
     "resourceGroupName": "myResourceGroup",
     "subscriptionId": "{subscriptionId}"
@@ -63,29 +62,10 @@
             "totalPhysicalMemoryInBytes": 34359738368
           },
           "hardwareResourceId": null,
+          "identityKeyStore": "TPM",
           "lastStatusChange": null,
           "licenseProfile": {
             "esuProfile": {
-              "assignedLicense": {
-                "name": "{licenseName}",
-                "type": "Microsoft.HybridCompute/licenses",
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Licenses/{licenseName}",
-                "location": "eastus2euap",
-                "properties": {
-                  "licenseDetails": {
-                    "type": "pCore",
-                    "assignedLicenses": 8,
-                    "edition": "Datacenter",
-                    "immutableId": "<generated Guid>",
-                    "processors": 6,
-                    "state": "Activated",
-                    "target": "Windows Server 2012"
-                  },
-                  "licenseType": "ESU",
-                  "tenantId": "{tenandId}"
-                },
-                "tags": null
-              },
               "esuEligibility": "Ineligible",
               "esuKeyState": "Inactive",
               "esuKeys": [
@@ -216,6 +196,7 @@
               }
             ]
           },
+          "tpmEkCertificate": "string",
           "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
           "vmUuid": null
         },
@@ -225,5 +206,5 @@
     }
   },
   "operationId": "Machines_Get",
-  "title": "Get Machine with License Profile Instance View"
+  "title": "Get Machine"
 }

@@ -40,7 +40,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "HybridComputeManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HybridCompute;
 
 /**
@@ -48,9 +48,9 @@ namespace Microsoft.HybridCompute;
  */
 enum Versions {
   /**
-   * The 2025-09-16-preview API version.
+   * The 2026-06-16-preview API version.
    */
-  v2025_09_16_preview: "2025-09-16-preview",
+  v2026-06-16-preview: "2026-06-16-preview",
 }
 
 interface Operations {
