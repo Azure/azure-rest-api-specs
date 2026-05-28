@@ -76,14 +76,7 @@ interface AuthorizationProviderContracts {
    */
   delete is ArmResourceDeleteSync<
     AuthorizationProviderContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

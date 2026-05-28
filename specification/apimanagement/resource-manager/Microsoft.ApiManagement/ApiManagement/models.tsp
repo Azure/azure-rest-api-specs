@@ -11053,3 +11053,16 @@ model GatewayHostnameBindingListResult {
   @nextLink
   nextLink?: string;
 }
+
+/**
+ * Shared If-Match header parameter for entity-state precondition checks across the
+ * ApiManagement API surface. Mapped to .NET ETag via @alternateType in client.tsp.
+ */
+alias IfMatchHeaderParameter = {
+  /**
+   * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @header("If-Match")
+  `If-Match`: string;
+};

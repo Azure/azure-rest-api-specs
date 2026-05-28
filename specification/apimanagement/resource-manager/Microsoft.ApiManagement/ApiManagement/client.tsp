@@ -7,80 +7,64 @@ using Http;
 using Azure.ResourceManager;
 
 // Java-specific compatibility customizations generated per TypeSpec migration guidance.
+@@clientName(PreferredIPVersion, "PreferredIpVersion", "java");
 @@clientName(
-  Microsoft.ApiManagement.PreferredIPVersion,
-  "PreferredIpVersion",
-  "java"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagTagResourceContractProperties,
+  TagTagResourceContractProperties,
   "TagResourceContractProperties",
   "java,python"
 );
 @@clientName(
-  Microsoft.ApiManagement.ConnectivityCheckRequest.preferredIPVersion,
+  ConnectivityCheckRequest.preferredIPVersion,
   "preferredIpVersion",
   "java"
 );
 
+@@clientName(ApiManagementSkuCosts.meterID, "meterId", "java");
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementSkuCosts.meterID,
-  "meterId",
-  "java"
-);
-@@clientName(
-  Microsoft.ApiManagement.KeyVaultLastAccessStatusContractProperties.timeStampUtc,
+  KeyVaultLastAccessStatusContractProperties.timeStampUtc,
   "timestampUtc",
   "java"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBaseProperties.publicIPAddresses,
+  ApiManagementServiceBaseProperties.publicIPAddresses,
   "publicIpAddresses",
   "java"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBaseProperties.privateIPAddresses,
+  ApiManagementServiceBaseProperties.privateIPAddresses,
   "privateIpAddresses",
   "java"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBaseProperties.outboundPublicIPAddresses,
+  ApiManagementServiceBaseProperties.outboundPublicIPAddresses,
   "outboundPublicIpAddresses",
   "java"
 );
+@@clientName(AdditionalLocation.publicIPAddresses, "publicIpAddresses", "java");
 @@clientName(
-  Microsoft.ApiManagement.AdditionalLocation.publicIPAddresses,
-  "publicIpAddresses",
-  "java"
-);
-@@clientName(
-  Microsoft.ApiManagement.AdditionalLocation.privateIPAddresses,
+  AdditionalLocation.privateIPAddresses,
   "privateIpAddresses",
   "java"
 );
 @@clientName(
-  Microsoft.ApiManagement.AdditionalLocation.outboundPublicIPAddresses,
+  AdditionalLocation.outboundPublicIPAddresses,
   "outboundPublicIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.HostnameConfiguration.hostName,
-  "hostname",
-  "java"
-);
+@@clientName(HostnameConfiguration.hostName, "hostname", "java");
 
 @@clientLocation(
-  Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.get,
+  ApiManagementWorkspaceLinksResources.get,
   "ApiManagementWorkspaceLinkOperations",
   "java"
 );
 @@clientLocation(
-  Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.listByService,
+  ApiManagementWorkspaceLinksResources.listByService,
   "ApiManagementWorkspaceLinks",
   "java"
 );
 @@clientLocation(
-  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
+  ApiManagementServiceResources.performConnectivityCheckAsync,
   "ResourceProviders",
   "java"
 );
@@ -131,7 +115,7 @@ op replaceGetByName(
   serviceName: string,
   location: Azure.Core.azureLocation,
 ):
-  | Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract>
+  | Azure.ResourceManager.ArmResponse<DeletedServiceContract>
   | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
 @@override(
@@ -177,7 +161,7 @@ op replacePurge(
   "go"
 );
 @@clientLocation(
-  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
+  ApiManagementServiceResources.performConnectivityCheckAsync,
   "Client",
   "go"
 );
@@ -195,12 +179,12 @@ op replacePurge(
 
 // C#-specific: Rename LLMDiagnosticSettings model to avoid case-insensitive filename collision with LlmDiagnosticSettings enum
 @@clientName(
-  Microsoft.ApiManagement.LLMDiagnosticSettings,
+  LLMDiagnosticSettings,
   "LargeLanguageModelDiagnosticSettings",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.LLMMessageDiagnosticSettings,
+  LLMMessageDiagnosticSettings,
   "LargeLanguageModelMessageDiagnosticSettings",
   "csharp"
 );
@@ -213,485 +197,229 @@ op replacePurge(
 );
 
 // C#-specific: Backward-compat type renames matching previous SDK API surface
+@@clientName(Verbosity, "TraceVerbosityLevel", "csharp");
+@@clientName(Origin, "IssueOrigin", "csharp");
+@@clientName(Severity, "IssueSeverity", "csharp");
+@@clientName(NatGatewayState, "ApiManagementNatGatewayState", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.Verbosity,
-  "TraceVerbosityLevel",
-  "csharp"
-);
-@@clientName(Microsoft.ApiManagement.Origin, "IssueOrigin", "csharp");
-@@clientName(Microsoft.ApiManagement.Severity, "IssueSeverity", "csharp");
-@@clientName(
-  Microsoft.ApiManagement.NatGatewayState,
-  "ApiManagementNatGatewayState",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NameAvailabilityReason,
+  NameAvailabilityReason,
   "ApiManagementServiceNameUnavailableReason",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.GroupType,
-  "ApiManagementGroupType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.UserState,
-  "ApiManagementUserState",
-  "csharp"
-);
+@@clientName(GroupType, "ApiManagementGroupType", "csharp");
+@@clientName(UserState, "ApiManagementUserState", "csharp");
 
 // C#-specific: Backward-compat resource type renames to restore previously shipped Data/Resource/Collection type names.
+@@clientName(AccessInformationContract, "TenantAccessInfo", "csharp");
+@@clientName(ApiContract, "Api", "csharp");
+@@clientName(ApiReleaseContract, "ApiRelease", "csharp");
+@@clientName(ApiVersionSetContract, "ApiVersionSet", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.AccessInformationContract,
-  "TenantAccessInfo",
-  "csharp"
-);
-@@clientName(Microsoft.ApiManagement.ApiContract, "Api", "csharp");
-@@clientName(
-  Microsoft.ApiManagement.ApiReleaseContract,
-  "ApiRelease",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ApiVersionSetContract,
-  "ApiVersionSet",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AuthorizationServerContract,
+  AuthorizationServerContract,
   "ApiManagementAuthorizationServer",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.BackendContract,
-  "ApiManagementBackend",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.CacheContract,
-  "ApiManagementCache",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.CertificateContract,
-  "ApiManagementCertificate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.DeletedServiceContract,
-  "ApiManagementDeletedService",
-  "csharp"
-);
+@@clientName(BackendContract, "ApiManagementBackend", "csharp");
+@@clientName(CacheContract, "ApiManagementCache", "csharp");
+@@clientName(CertificateContract, "ApiManagementCertificate", "csharp");
+@@clientName(DeletedServiceContract, "ApiManagementDeletedService", "csharp");
 // C#-specific: DiagnosticContract intentionally NOT renamed so the data class
 // keeps its GA name `DiagnosticContractData`. The Resource/Collection still
 // get `ApiManagementDiagnostic*` via ResourceName overrides in DiagnosticContract.tsp.
+@@clientName(EmailTemplateContract, "ApiManagementEmailTemplate", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.EmailTemplateContract,
-  "ApiManagementEmailTemplate",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GatewayCertificateAuthorityContract,
+  GatewayCertificateAuthorityContract,
   "ApiManagementGatewayCertificateAuthority",
   "csharp"
 );
-@@clientName(Microsoft.ApiManagement.GatewayContract, "ApiGateway", "csharp");
+@@clientName(GatewayContract, "ApiGateway", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.GatewayHostnameConfigurationContract,
+  GatewayHostnameConfigurationContract,
   "ApiManagementGatewayHostnameConfiguration",
   "csharp"
 );
+@@clientName(GlobalSchemaContract, "ApiManagementGlobalSchema", "csharp");
+@@clientName(GroupContract, "ApiManagementGroup", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.GlobalSchemaContract,
-  "ApiManagementGlobalSchema",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GroupContract,
-  "ApiManagementGroup",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.IdentityProviderContract,
+  IdentityProviderContract,
   "ApiManagementIdentityProvider",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.IssueAttachmentContract,
-  "ApiIssueAttachment",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.IssueCommentContract,
-  "ApiIssueComment",
-  "csharp"
-);
+@@clientName(IssueAttachmentContract, "ApiIssueAttachment", "csharp");
+@@clientName(IssueCommentContract, "ApiIssueComment", "csharp");
 // C#-specific: IssueContract intentionally NOT renamed so the data class
 // keeps its GA name `IssueContractData`. The Resource/Collection still
 // get `ApiManagementIssue*` via ResourceName overrides in IssueContract.tsp.
+@@clientName(LoggerContract, "ApiManagementLogger", "csharp");
+@@clientName(NamedValueContract, "ApiManagementNamedValue", "csharp");
+@@clientName(NotificationContract, "ApiManagementNotification", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.LoggerContract,
-  "ApiManagementLogger",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NamedValueContract,
-  "ApiManagementNamedValue",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NotificationContract,
-  "ApiManagementNotification",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.OpenidConnectProviderContract,
+  OpenidConnectProviderContract,
   "ApiManagementOpenIdConnectProvider",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.OperationContract,
-  "ApiOperation",
-  "csharp"
-);
+@@clientName(OperationContract, "ApiOperation", "csharp");
 // C#-specific: PolicyContract intentionally NOT renamed so the data class
 // keeps its GA name `PolicyContractData`. The Resource/Collection still
 // get `ApiManagementPolicy*` via ResourceName overrides in PolicyContract.tsp.
-@@clientName(
-  Microsoft.ApiManagement.PortalRevisionContract,
-  "ApiManagementPortalRevision",
-  "csharp"
-);
+@@clientName(PortalRevisionContract, "ApiManagementPortalRevision", "csharp");
 @@clientName(
   Microsoft.ApiManagement.PrivateLinkResource,
   "ApiManagementPrivateLinkResource",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.ProductContract,
-  "ApiManagementProduct",
-  "csharp"
-);
-@@clientName(Microsoft.ApiManagement.SchemaContract, "ApiSchema", "csharp");
+@@clientName(ProductContract, "ApiManagementProduct", "csharp");
+@@clientName(SchemaContract, "ApiSchema", "csharp");
 // C#-specific: SubscriptionContract intentionally NOT renamed so the data class
 // keeps its GA name `SubscriptionContractData`. The Resource/Collection still
 // get `ApiManagementSubscription*` via ResourceName overrides in SubscriptionContract.tsp.
-@@clientName(
-  Microsoft.ApiManagement.TagDescriptionContract,
-  "ApiTagDescription",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TenantSettingsContract,
-  "ApiManagementTenantSetting",
-  "csharp"
-);
+@@clientName(TagDescriptionContract, "ApiTagDescription", "csharp");
+@@clientName(TenantSettingsContract, "ApiManagementTenantSetting", "csharp");
 // C#-specific: UserContract intentionally NOT renamed so the data class
 // keeps its GA name `UserContractData`. The Resource/Collection still
 // get `ApiManagementUser*` via ResourceName overrides in UserContract.tsp.
-@@clientName(Microsoft.ApiManagement.SchemaType, "ApiSchemaType", "csharp");
+@@clientName(SchemaType, "ApiSchemaType", "csharp");
 
 // C#-specific: Backward-compat enum/union renames for properties scoped under parent resources
-@@clientName(
-  Microsoft.ApiManagement.SkuType,
-  "ApiManagementServiceSkuType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductState,
-  "ApiManagementProductState",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.Protocol,
-  "ApiOperationInvokableProtocol",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.KeyType,
-  "TokenGenerationUsedKeyType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AccessType,
-  "StorageAccountAccessType",
-  "csharp"
-);
+@@clientName(SkuType, "ApiManagementServiceSkuType", "csharp");
+@@clientName(ProductState, "ApiManagementProductState", "csharp");
+@@clientName(Protocol, "ApiOperationInvokableProtocol", "csharp");
+@@clientName(KeyType, "TokenGenerationUsedKeyType", "csharp");
+@@clientName(AccessType, "StorageAccountAccessType", "csharp");
 
 // C#-specific: Backward-compat list-result / request / response model renames to match previously shipped SDK conventions
-@@clientName(Microsoft.ApiManagement.ApiCollection, "ApiListResult", "csharp");
+@@clientName(ApiCollection, "ApiListResult", "csharp");
+@@clientName(ApiReleaseCollection, "ApiReleaseListResult", "csharp");
+@@clientName(ApiVersionSetCollection, "ApiVersionSetListResult", "csharp");
+@@clientName(BackendCollection, "BackendListResult", "csharp");
+@@clientName(CertificateCollection, "CertificateListResult", "csharp");
+@@clientName(DiagnosticCollection, "DiagnosticListResult", "csharp");
+@@clientName(GlobalSchemaCollection, "GlobalSchemaListResult", "csharp");
+@@clientName(GroupCollection, "GroupListResult", "csharp");
+@@clientName(IssueCollection, "IssueListResult", "csharp");
+@@clientName(LoggerCollection, "LoggerListResult", "csharp");
+@@clientName(NamedValueCollection, "NamedValueListResult", "csharp");
+@@clientName(NotificationCollection, "NotificationListResult", "csharp");
+@@clientName(PolicyCollection, "PolicyListResult", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ApiReleaseCollection,
-  "ApiReleaseListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ApiVersionSetCollection,
-  "ApiVersionSetListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.BackendCollection,
-  "BackendListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.CertificateCollection,
-  "CertificateListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.DiagnosticCollection,
-  "DiagnosticListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GlobalSchemaCollection,
-  "GlobalSchemaListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.GroupCollection,
-  "GroupListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.IssueCollection,
-  "IssueListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.LoggerCollection,
-  "LoggerListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NamedValueCollection,
-  "NamedValueListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NotificationCollection,
-  "NotificationListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.PolicyCollection,
-  "PolicyListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.PolicyDescriptionCollection,
+  PolicyDescriptionCollection,
   "PolicyDescriptionListResult",
   "csharp"
 );
+@@clientName(PolicyFragmentCollection, "PolicyFragmentListResult", "csharp");
+@@clientName(PortalSettingsCollection, "PortalSettingsListResult", "csharp");
+@@clientName(ProductApiLinkCollection, "ProductApiLinkListResult", "csharp");
+@@clientName(ProductCollection, "ProductListResult", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.PolicyFragmentCollection,
-  "PolicyFragmentListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.PortalSettingsCollection,
-  "PortalSettingsListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductApiLinkCollection,
-  "ProductApiLinkListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductCollection,
-  "ProductListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ProductGroupLinkCollection,
+  ProductGroupLinkCollection,
   "ProductGroupLinkListResult",
   "csharp"
 );
+@@clientName(QuotaCounterCollection, "QuotaCounterListResult", "csharp");
+@@clientName(RecipientEmailCollection, "RecipientEmailListResult", "csharp");
+@@clientName(RecipientUserCollection, "RecipientUserListResult", "csharp");
+@@clientName(ResourceCollection, "ResourceListResult", "csharp");
+@@clientName(SubscriptionCollection, "SubscriptionListResult", "csharp");
+@@clientName(TagApiLinkCollection, "TagApiLinkListResult", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.QuotaCounterCollection,
-  "QuotaCounterListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.RecipientEmailCollection,
-  "RecipientEmailListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.RecipientUserCollection,
-  "RecipientUserListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ResourceCollection,
-  "ResourceListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.SubscriptionCollection,
-  "SubscriptionListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagApiLinkCollection,
-  "TagApiLinkListResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagOperationLinkCollection,
+  TagOperationLinkCollection,
   "TagOperationLinkListResult",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.TagProductLinkCollection,
-  "TagProductLinkListResult",
-  "csharp"
-);
+@@clientName(TagProductLinkCollection, "TagProductLinkListResult", "csharp");
 
+@@clientName(ApiCreateOrUpdateParameter, "ApiCreateOrUpdateContent", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ApiCreateOrUpdateParameter,
-  "ApiCreateOrUpdateContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AccessInformationCreateParameters,
+  AccessInformationCreateParameters,
   "TenantAccessInfoCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceApplyNetworkConfigurationParameters,
+  ApiManagementServiceApplyNetworkConfigurationParameters,
   "ApiManagementServiceApplyNetworkConfigurationContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBackupRestoreParameters,
+  ApiManagementServiceBackupRestoreParameters,
   "ApiManagementServiceBackupRestoreContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceCheckNameAvailabilityParameters,
+  ApiManagementServiceCheckNameAvailabilityParameters,
   "ApiManagementServiceNameAvailabilityContent",
   "csharp"
 );
+@@clientName(ApiVersionSetUpdateParameters, "ApiVersionSetPatch", "csharp");
+@@clientName(BackendUpdateParameters, "ApiManagementBackendPatch", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ApiVersionSetUpdateParameters,
-  "ApiVersionSetPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.BackendUpdateParameters,
-  "ApiManagementBackendPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.CertificateCreateOrUpdateParameters,
+  CertificateCreateOrUpdateParameters,
   "ApiManagementCertificateCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.DeployConfigurationParameters,
+  DeployConfigurationParameters,
   "ConfigurationDeployContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.GroupCreateParameters,
+  GroupCreateParameters,
   "ApiManagementGroupCreateOrUpdateContent",
   "csharp"
 );
+@@clientName(GroupUpdateParameters, "ApiManagementGroupPatch", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.GroupUpdateParameters,
-  "ApiManagementGroupPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.NamedValueUpdateParameters,
+  NamedValueUpdateParameters,
   "ApiManagementNamedValuePatch",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ProductEntityBaseParameters,
+  ProductEntityBaseParameters,
   "ProductEntityBaseProperties",
   "csharp"
 );
+@@clientName(ProductUpdateParameters, "ApiManagementProductPatch", "csharp");
+@@clientName(SaveConfigurationParameter, "ConfigurationSaveContent", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ProductUpdateParameters,
-  "ApiManagementProductPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.SaveConfigurationParameter,
-  "ConfigurationSaveContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.SubscriptionCreateParameters,
+  SubscriptionCreateParameters,
   "ApiManagementSubscriptionCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.SubscriptionUpdateParameters,
+  SubscriptionUpdateParameters,
   "ApiManagementSubscriptionPatch",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.TagCreateUpdateParameters,
+  TagCreateUpdateParameters,
   "ApiManagementTagCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.TagDescriptionCreateParameters,
+  TagDescriptionCreateParameters,
   "ApiTagDescriptionCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.UserCreateParameters,
+  UserCreateParameters,
   "ApiManagementUserCreateOrUpdateContent",
   "csharp"
 );
+@@clientName(UserTokenParameters, "UserTokenContent", "csharp");
+@@clientName(ConnectivityCheckRequest, "ConnectivityCheckContent", "csharp");
+@@clientName(ConnectivityCheckResponse, "ConnectivityCheckResult", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.UserTokenParameters,
-  "UserTokenContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ConnectivityCheckRequest,
-  "ConnectivityCheckContent",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ConnectivityCheckResponse,
-  "ConnectivityCheckResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.PrivateEndpointConnectionRequest,
+  PrivateEndpointConnectionRequest,
   "PrivateEndpointConnectionContent",
   "csharp"
 );
 
 // C#-specific: Additional backward-compat renames to restore GA model names.
-@@clientName(Microsoft.ApiManagement.ApiUpdateContract, "ApiPatch", "csharp");
+@@clientName(ApiUpdateContract, "ApiPatch", "csharp");
+@@clientName(LoggerUpdateContract, "ApiManagementLoggerPatch", "csharp");
+@@clientName(OperationUpdateContract, "ApiOperationPatch", "csharp");
+@@clientName(IssueUpdateContract, "ApiIssuePatch", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.LoggerUpdateContract,
-  "ApiManagementLoggerPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.OperationUpdateContract,
-  "ApiOperationPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.IssueUpdateContract,
-  "ApiIssuePatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.QuotaCounterValueUpdateContract,
+  QuotaCounterValueUpdateContract,
   "QuotaCounterValueUpdateContent",
   "csharp"
 );
@@ -701,56 +429,40 @@ op replacePurge(
 // the new model name), but the underlying KeyType union is already renamed
 // to `TokenGenerationUsedKeyType` so no `GatewayRegenerateKeyType.cs` file
 // is emitted — leading to CS0234.
+@@clientName(GenerateSsoUrlResult, "GenerateSsoUriResult", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.GenerateSsoUrlResult,
-  "GenerateSsoUriResult",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AuthorizationConfirmConsentCodeRequestContract,
+  AuthorizationConfirmConsentCodeRequestContract,
   "AuthorizationConfirmConsentCodeContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.AuthorizationLoginRequestContract,
+  AuthorizationLoginRequestContract,
   "AuthorizationLoginContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.AuthorizationLoginResponseContract,
+  AuthorizationLoginResponseContract,
   "AuthorizationLoginResult",
   "csharp"
 );
+@@clientName(AuthorizationType, "ApiManagementAuthorizationType", "csharp");
+@@clientName(AuthorizationError, "ApiManagementAuthorizationError", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.AuthorizationType,
-  "ApiManagementAuthorizationType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AuthorizationError,
-  "ApiManagementAuthorizationError",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.IdentityProviderCreateContract,
+  IdentityProviderCreateContract,
   "ApiManagementIdentityProviderCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.NamedValueCreateContract,
+  NamedValueCreateContract,
   "ApiManagementNamedValueCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.PolicyDescriptionContract,
+  PolicyDescriptionContract,
   "PolicyDescriptionContractData",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.PortalSettingsContract,
-  "PortalSettingsContractData",
-  "csharp"
-);
+@@clientName(PortalSettingsContract, "PortalSettingsContractData", "csharp");
 
 // C#-specific: Backward-compat operation/resource renames to avoid duplicate generated members.
 @@clientName(
@@ -1277,6 +989,82 @@ op replacePurge(
   "csharp"
 );
 
+// D3 fixes from MPG API diff: restore GA property types
+// (string -> ResourceIdentifier / Uri / Guid) without changing names.
+@@alternateType(
+  IssueCommentContractProperties.userId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(BackendContractProperties.url, url, "csharp");
+@@alternateType(
+  DeletedServiceContractProperties.serviceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LoggerContractProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ApiReleaseContractProperties.apiId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TagDescriptionBaseProperties.externalDocsUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  AuthorizationAccessPolicyContractProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  IssueContractProperties.userId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IssueContractBaseProperties.apiId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IssueUpdateContractProperties.userId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  AllPoliciesContractProperties.referencePolicyId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(BackendUpdateParameterProperties.url, url, "csharp");
+@@alternateType(ApiContractUpdateProperties.serviceUrl, url, "csharp");
+@@alternateType(PortalSettingsContractProperties.url, url, "csharp");
+@@alternateType(
+  ArmIdWrapper.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  AdditionalLocation.publicIpAddressId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(VirtualNetworkConfiguration.vnetid, Azure.Core.uuid, "csharp");
+
+// D3 case fixes: GA used Azure casing PublicIPAddressId / VnetId.
+@@clientName(
+  AdditionalLocation.publicIpAddressId,
+  "PublicIPAddressId",
+  "csharp"
+);
+@@clientName(VirtualNetworkConfiguration.vnetid, "VnetId", "csharp");
+
 // =========================================================================
 // C#-specific: All wrapper class name renames (parent-scope, workspace-scope,
 // extension-scope, multi-scope shared models) are applied via the §4.18
@@ -1296,70 +1084,34 @@ op replacePurge(
 
 // Resource-suffix removal for `@armResourceOperations` interfaces whose
 // MPG-derived wrapper name needlessly duplicates the word "Resource".
+@@clientName(ApiManagementServiceResources, "ApiManagementService", "csharp");
+@@clientName(ApiManagementGatewayResources, "ApiManagementGateway", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceResources,
-  "ApiManagementService",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ApiManagementGatewayResources,
-  "ApiManagementGateway",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ApiManagementGatewayConfigConnectionResources,
+  ApiManagementGatewayConfigConnectionResources,
   "ApiGatewayConfigConnection",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources,
+  ApiManagementWorkspaceLinksResources,
   "ApiManagementWorkspaceLinks",
   "csharp"
 );
 
 // Policy / settings / portal: rename interfaces that emit oddly-named wrappers.
+@@clientName(ProductPolicy, "ApiManagementProductPolicy", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ProductPolicy,
-  "ApiManagementProductPolicy",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.DelegationSettings,
+  DelegationSettings,
   "ApiManagementPortalDelegationSetting",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.SignInSettings,
-  "ApiManagementPortalSignInSetting",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.SignUpSettings,
-  "ApiManagementPortalSignUpSetting",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ContentItemContracts,
-  "ApiManagementContentItem",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ContentTypeContracts,
-  "ApiManagementContentType",
-  "csharp"
-);
+@@clientName(SignInSettings, "ApiManagementPortalSignInSetting", "csharp");
+@@clientName(SignUpSettings, "ApiManagementPortalSignUpSetting", "csharp");
+@@clientName(ContentItemContracts, "ApiManagementContentItem", "csharp");
+@@clientName(ContentTypeContracts, "ApiManagementContentType", "csharp");
 
 // Tag-on-Api / Tag-on-Product wrappers (renamed for parity with previously shipped names).
-@@clientName(
-  Microsoft.ApiManagement.TagContractOperation,
-  "ApiOperationTag",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagContractOperationGroup,
-  "ApiManagementProductTag",
-  "csharp"
-);
+@@clientName(TagContractOperation, "ApiOperationTag", "csharp");
+@@clientName(TagContractOperationGroup, "ApiManagementProductTag", "csharp");
 
 // Force input usage on Data/Resource contract models that have a separate
 // "CreateOrUpdate" request type in spec. Without this, the C# emitter treats
@@ -1376,97 +1128,91 @@ op replacePurge(
 @@usage(TagDescriptionContract, Usage.input, "csharp");
 @@usage(TagContract, Usage.input, "csharp");
 @@usage(SubscriptionContract, Usage.input, "csharp");
+// Restore public ctors for output-only Data/model classes that GA 1.3.0 shipped
+// with constructors (D7 fixes from MPG API diff).
+@@usage(DeletedServiceContract, Usage.input, "csharp");
+@@usage(NotificationContract, Usage.input, "csharp");
+@@usage(Microsoft.ApiManagement.PrivateEndpointConnection, Usage.input, "csharp");
+@@usage(Microsoft.ApiManagement.PrivateLinkResource, Usage.input, "csharp");
+@@usage(TenantSettingsContract, Usage.input, "csharp");
+@@usage(AllPoliciesContract, Usage.input, "csharp");
+@@usage(ErrorFieldContract, Usage.input, "csharp");
+@@usage(ErrorResponseBody, Usage.input, "csharp");
+@@usage(OperationResultContract, Usage.input, "csharp");
+@@usage(PolicyDescriptionContract, Usage.input, "csharp");
+@@usage(PortalSettingsContract, Usage.input, "csharp");
+@@usage(RecipientEmailContract, Usage.input, "csharp");
+@@usage(RecipientsContractProperties, Usage.input, "csharp");
+@@usage(RecipientUserContract, Usage.input, "csharp");
+@@usage(ResourceCollectionValueItem, Usage.input, "csharp");
+@@usage(TenantConfigurationSyncStateContract, Usage.input, "csharp");
 
 // Model renames identified from GA contract diff.
+@@clientName(TagResourceContract, "TagResourceContractDetails", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.TagResourceContract,
-  "TagResourceContractDetails",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.TagTagResourceContractProperties,
+  TagTagResourceContractProperties,
   "AssociatedTagProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiTagResourceContractProperties,
+  ApiTagResourceContractProperties,
   "AssociatedApiProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.OperationTagResourceContractProperties,
+  OperationTagResourceContractProperties,
   "AssociatedOperationProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ProductTagResourceContractProperties,
+  ProductTagResourceContractProperties,
   "AssociatedProductProperties",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.AccessInformationSecretsContract,
+  AccessInformationSecretsContract,
   "TenantAccessInfoSecretsDetails",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.OperationResultContract,
+  OperationResultContract,
   "GitOperationResultContractData",
   "csharp"
 );
-@@clientName(Microsoft.ApiManagement.State, "IssueState", "csharp");
-@@clientName(
-  Microsoft.ApiManagement.Method,
-  "HttpMethodConfiguration",
-  "csharp"
-);
+@@clientName(State, "IssueState", "csharp");
+@@clientName(Method, "HttpMethodConfiguration", "csharp");
 // NOTE: HttpHeader rename intentionally omitted - the C# emitter emits the
 // type as `HTTPHeader` (uppercase) by default; setting @@clientName here to
 // the GA name `HttpHeaderConfiguration` causes the type definition file to
 // not be emitted at all, leading to CS0234.
 @@clientName(
-  Microsoft.ApiManagement.NetworkStatusContractByLocation,
+  NetworkStatusContractByLocation,
   "NetworkStatusContractWithLocation",
   "csharp"
 );
-@@clientName(Microsoft.ApiManagement.PolicyIdName, "PolicyName", "csharp");
-@@clientName(
-  Microsoft.ApiManagement.SettingsTypeName,
-  "SettingsType",
-  "csharp"
-);
-@@clientName(Microsoft.ApiManagement.AccessIdName, "AccessName", "csharp");
-@@clientName(
-  Microsoft.ApiManagement.ConfigurationIdName,
-  "ConfigurationName",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.Confirmation,
-  "ConfirmationEmailType",
-  "csharp"
-);
+@@clientName(PolicyIdName, "PolicyName", "csharp");
+@@clientName(SettingsTypeName, "SettingsType", "csharp");
+@@clientName(AccessIdName, "AccessName", "csharp");
+@@clientName(ConfigurationIdName, "ConfigurationName", "csharp");
+@@clientName(Confirmation, "ConfirmationEmailType", "csharp");
 // NOTE: ConnectivityCheckRequestProtocolConfigurationHttpConfiguration rename
 // intentionally omitted - renaming the parent makes the emitter compute a
 // context-derived name `HttpHeaderConfiguration` for the nested `headers:
 // HttpHeader[]` element. The HttpHeader type is then emitted as `HTTPHeader.cs`
 // while references use `HttpHeaderConfiguration`, causing CS0234.
+@@clientName(ResourceSkuCapacity, "ApiManagementResourceSkuCapacity", "csharp");
 @@clientName(
-  Microsoft.ApiManagement.ResourceSkuCapacity,
-  "ApiManagementResourceSkuCapacity",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.ResourceSkuCapacityScaleType,
+  ResourceSkuCapacityScaleType,
   "ApiManagementResourceSkuCapacityScaleType",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ResourceSkuResult,
+  ResourceSkuResult,
   "AvailableApiManagementServiceSkuResult",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.PrivateEndpointConnectionRequest,
+  PrivateEndpointConnectionRequest,
   "ApiManagementPrivateEndpointConnectionCreateOrUpdateContent",
   "csharp"
 );
@@ -1477,22 +1223,68 @@ op replacePurge(
 // Back-compat property renames for GA 1.3.0 - new spec field names differ from
 // the names shipped in the last GA. Re-map each new field to its GA C# name.
 @@clientName(
-  Microsoft.ApiManagement.ApiEntityBaseContract.subscriptionRequired,
+  ApiEntityBaseContract.subscriptionRequired,
   "isSubscriptionRequired",
   "csharp"
 );
 @@clientName(
-  Microsoft.ApiManagement.ApiEntityBaseContract.termsOfServiceUrl,
+  ApiEntityBaseContract.termsOfServiceUrl,
   "termsOfServiceLink",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.ApiContractProperties.serviceUrl,
-  "serviceLink",
-  "csharp"
-);
+@@clientName(ApiContractProperties.serviceUrl, "serviceLink", "csharp");
 @@alternateType(
-  Microsoft.ApiManagement.ApiContractProperties.sourceApiId,
+  ApiContractProperties.sourceApiId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// D2: Restore ApiGatewayData base class from TrackedResourceData to
+// ResourceData (GA 1.3.0 shipped this as a proxy resource).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ApiManagementGatewayResource,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+// D1: Restore GA names for "Patch" / "Update" DTOs that lost their friendly
+// names when the TSP model gained a "Resource" suffix.
+@@clientName(
+  ApiManagementGatewayUpdateParameters,
+  "ApiGatewayPatch",
+  "csharp"
+);
+@@clientName(
+  ApiManagementServiceUpdateParameters,
+  "ApiManagementServicePatch",
+  "csharp"
+);
+@@clientName(UserUpdateParameters, "ApiManagementUserPatch", "csharp");
+
+// D1: Restore GA names for resources whose TSP model name has a "Resource"
+// suffix (so Data/Collection no longer carry the extra "Resource" prefix).
+// NOTE: empirical — @@clientName on the resource model may or may not be
+// honored for derived Resource/Collection/Data class names depending on the
+// generator version. If a regen shows these unchanged, the fix moves to a
+// LegacyOperations / ResourceName template-arg refactor on each resource .tsp.
+@@clientName(
+  ApiManagementGatewayResource,
+  "ApiManagementGateway",
+  "csharp"
+);
+@@clientName(ApiManagementServiceResource, "ApiManagementService", "csharp");
+@@clientName(
+  ApiManagementWorkspaceLinksResource,
+  "ApiManagementWorkspaceLinks",
+  "csharp"
+);
+@@clientName(
+  ApiManagementGatewayConfigConnectionResource,
+  "ApiGatewayConfigConnection",
+  "csharp"
+);
+
+// Map TypeSpec `If-Match` header (declared as string in spec for casing-style reasons)
+// to .NET ETag for back-compat with GA Azure.ResourceManager.ApiManagement.
+@@alternateType(IfMatchHeaderParameter.`If-Match`, Azure.Core.eTag, "csharp");

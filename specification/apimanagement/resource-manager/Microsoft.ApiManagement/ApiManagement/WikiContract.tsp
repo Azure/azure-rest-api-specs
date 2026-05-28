@@ -129,14 +129,7 @@ interface WikiContracts {
   update is WikiContractOps.CustomPatchSync<
     WikiContract,
     PatchModel = WikiUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<WikiContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -151,14 +144,7 @@ interface WikiContracts {
    */
   delete is WikiContractOps.DeleteSync<
     WikiContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = OkResponse | NoContentResponse
   >;
 
@@ -294,14 +280,7 @@ interface ProductWiki {
   update is ProductWikiOps.CustomPatchSync<
     WikiContract,
     PatchModel = WikiUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<WikiContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -316,14 +295,7 @@ interface ProductWiki {
    */
   delete is ProductWikiOps.DeleteSync<
     WikiContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

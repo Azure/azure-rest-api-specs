@@ -220,14 +220,7 @@ interface GroupContracts {
   update is GroupContractOps.CustomPatchSync<
     GroupContract,
     PatchModel = GroupUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<GroupContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -242,14 +235,7 @@ interface GroupContracts {
    */
   delete is GroupContractOps.DeleteSync<
     GroupContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -468,14 +454,7 @@ interface WorkspaceGroup {
   update is WorkspaceGroupOps.CustomPatchSync<
     GroupContract,
     PatchModel = GroupUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<GroupContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -490,14 +469,7 @@ interface WorkspaceGroup {
    */
   delete is WorkspaceGroupOps.DeleteSync<
     GroupContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

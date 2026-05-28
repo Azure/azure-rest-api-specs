@@ -128,14 +128,7 @@ interface UserContracts {
   update is UserContractsOps.CustomPatchSync<
     UserContract,
     PatchModel = UserUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<UserContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -150,7 +143,7 @@ interface UserContracts {
    */
   delete is UserContractsOps.DeleteWithoutOkAsync<
     UserContract,
-    Parameters = {
+    Parameters = IfMatchHeaderParameter & {
       /**
        * Whether to delete user's subscription or not.
        */
@@ -162,13 +155,6 @@ interface UserContracts {
        */
       @query("notify")
       notify?: boolean;
-
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
 
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.

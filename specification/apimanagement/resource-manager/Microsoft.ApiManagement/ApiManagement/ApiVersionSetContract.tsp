@@ -123,14 +123,7 @@ interface ApiVersionSetContracts {
   update is ApiVersionSetContractOps.CustomPatchSync<
     ApiVersionSetContract,
     PatchModel = ApiVersionSetUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<ApiVersionSetContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -145,14 +138,7 @@ interface ApiVersionSetContracts {
    */
   delete is ApiVersionSetContractOps.DeleteSync<
     ApiVersionSetContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -291,14 +277,7 @@ interface WorkspaceApiVersionSet {
   update is WorkspaceApiVersionSetOps.CustomPatchSync<
     ApiVersionSetContract,
     PatchModel = ApiVersionSetUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<ApiVersionSetContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -313,14 +292,7 @@ interface WorkspaceApiVersionSet {
    */
   delete is WorkspaceApiVersionSetOps.DeleteSync<
     ApiVersionSetContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

@@ -131,19 +131,12 @@ interface SchemaContracts {
    */
   delete is SchemaContractOps.DeleteSync<
     SchemaContract,
-    Parameters = {
+    Parameters = IfMatchHeaderParameter & {
       /**
        * If true removes all references to the schema before deleting it.
        */
       @query("force")
       force?: boolean;
-
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
     }
   >;
 
@@ -291,19 +284,12 @@ interface WorkspaceApiSchema {
    */
   delete is WorkspaceApiSchemaOps.DeleteSync<
     SchemaContract,
-    Parameters = {
+    Parameters = IfMatchHeaderParameter & {
       /**
        * If true removes all references to the schema before deleting it.
        */
       @query("force")
       force?: boolean;
-
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
     }
   >;
 
