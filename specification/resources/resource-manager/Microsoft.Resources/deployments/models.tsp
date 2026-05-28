@@ -40,7 +40,10 @@ model ErrorResponse {
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Type of an extension config property value.
+ */
+@removed(Versions.v2026_06_01)
 union ExtensionConfigPropertyType {
   string,
 
@@ -774,12 +777,15 @@ model ParametersLink {
   contentVersion?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Represents the value for an extension config property.
+ */
 model DeploymentExtensionConfigItem {
   /**
    * The value type of the extension config property.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.V2026_06_01)
   type?: ExtensionConfigPropertyType;
 
   /**
@@ -1485,7 +1491,7 @@ model DeploymentWhatIfProperties extends DeploymentProperties {
   whatIfSettings?: DeploymentWhatIfSettings;
 
   /**
-   * Resource predictions can be utilized by what-if to produce potential modification changes.
+   * Resource predictions that can be utilized by what-if to produce potential modification changes.
    */
   @added(Versions.v2026_06_01)
   @identifiers(#[])
