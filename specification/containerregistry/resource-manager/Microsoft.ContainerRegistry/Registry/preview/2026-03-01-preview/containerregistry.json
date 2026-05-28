@@ -5700,14 +5700,14 @@
       "type": "object",
       "description": "Authentication configuration used by a cache rule to access an upstream registry.",
       "properties": {
-        "type": {
+        "authenticationType": {
           "$ref": "#/definitions/AdditionalAuthenticationType",
           "description": "Authentication type discriminator."
         }
       },
-      "discriminator": "type",
+      "discriminator": "authenticationType",
       "required": [
-        "type"
+        "authenticationType"
       ]
     },
     "AdditionalAuthenticationType": {

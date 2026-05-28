@@ -61,13 +61,13 @@ union AdditionalAuthenticationType {
 /**
  * Authentication configuration used by a cache rule to access an upstream registry.
  */
-@discriminator("type")
+@discriminator("authenticationType")
 @added(Versions.vLatestPreview)
 model AdditionalAuthenticationProperties {
   /**
    * Authentication type discriminator.
    */
-  type: AdditionalAuthenticationType;
+  authenticationType: AdditionalAuthenticationType;
 }
 
 /**
@@ -75,7 +75,7 @@ model AdditionalAuthenticationProperties {
  */
 @added(Versions.vLatestPreview)
 model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
-  type: "GoogleArtifactRegistry";
+  authenticationType: "GoogleArtifactRegistry";
 
   // The following 3 properties are necessary to build the audience for the GAR token.
   // They are specific to the customer.  The final value will be of the form:
