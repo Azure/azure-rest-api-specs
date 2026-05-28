@@ -1417,7 +1417,10 @@ op replacePurge(
   "HttpMethodConfiguration",
   "csharp"
 );
-@@clientName(Microsoft.ApiManagement.HttpHeader, "HttpHeaderConfiguration", "csharp");
+// NOTE: HttpHeader rename intentionally omitted - the C# emitter emits the
+// type as `HTTPHeader` (uppercase) by default; setting @@clientName here to
+// the GA name `HttpHeaderConfiguration` causes the type definition file to
+// not be emitted at all, leading to CS0234.
 @@clientName(
   Microsoft.ApiManagement.NetworkStatusContractByLocation,
   "NetworkStatusContractWithLocation",
