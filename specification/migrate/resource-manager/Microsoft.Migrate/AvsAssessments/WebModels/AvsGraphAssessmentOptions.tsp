@@ -1,5 +1,5 @@
-import "../Normalized Contract/StandardizedContracts/CommonModels.tsp";
-import "../Normalized Contract/StandardizedContracts/SummaryProperties.tsp";
+import "../NormalizedContract/StandardizedContracts/CommonModels.tsp";
+import "../NormalizedContract/StandardizedContracts/SummaryProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

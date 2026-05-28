@@ -1,11 +1,11 @@
-import "../Normalized Contract/StandardizedContracts/AssessmentProperties.tsp";
-import "../Normalized Contract/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
+import "../NormalizedContract/StandardizedContracts/AssessmentProperties.tsp";
+import "../NormalizedContract/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
 import "../Common/AvsEnums.tsp";
-import "../Normalized Contract/StandardizedContracts/CostComponent.tsp";
-import "../Normalized Contract/StandardizedContracts/Scope.tsp";
-import "../Normalized Contract/ArmModels/AzureResourceProperties.tsp";
-import "../Normalized Contract/StandardizedContracts/CommonEnums.tsp";
-import "../Normalized Contract/ArmModels/AssessmentProjectV2.tsp";
+import "../NormalizedContract/StandardizedContracts/CostComponent.tsp";
+import "../NormalizedContract/StandardizedContracts/Scope.tsp";
+import "../NormalizedContract/ArmModels/AzureResourceProperties.tsp";
+import "../NormalizedContract/StandardizedContracts/CommonEnums.tsp";
+import "../NormalizedContract/ArmModels/AssessmentProjectV2.tsp";
 import "../Common/CommonModels.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;

@@ -1,5 +1,5 @@
 import "../Common/AvsEnums.tsp";
-import "../Normalized Contract/StandardizedContracts/AssessedWorkloadProperties.tsp";
+import "../NormalizedContract/StandardizedContracts/AssessedWorkloadProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
