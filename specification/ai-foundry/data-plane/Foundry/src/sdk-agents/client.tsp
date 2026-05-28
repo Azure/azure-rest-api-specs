@@ -72,6 +72,8 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
+@@clientName(CodeConfiguration.content_hash, ContentSha256);
+
 @@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"
 );
