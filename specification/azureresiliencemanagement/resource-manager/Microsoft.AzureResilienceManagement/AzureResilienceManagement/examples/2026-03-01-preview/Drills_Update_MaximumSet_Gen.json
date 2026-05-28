@@ -1,0 +1,262 @@
+{
+  "title": "Drills_Update_MaximumSet",
+  "operationId": "Drills_Update",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-03-01-preview",
+    "drillName": "drill1",
+    "properties": {
+      "properties": {
+        "metricsProperties": {
+          "identity": {
+            "type": "None",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          },
+          "metricsToTrack": [
+            {
+              "metricName": "heocgcwbx",
+              "metricId": "/providers/Microsoft.Monitor/slos/slo1",
+              "destinationAmwAccountUrl": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/defaultresourcegroup-cid/providers/microsoft.monitor/accounts/defaultazuremonitorworkspace-cid"
+            }
+          ]
+        },
+        "chaosExperimentProperties": {
+          "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+          "region": "westus",
+          "identity": {
+            "type": "None",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          },
+          "chaosExperimentIdentityForFaults": {
+            "type": "None",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
+        "rbacSetupMode": "AutomatedCustomRole",
+        "recoveryPlanProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
+        "healthModelProperties": {
+          "identity": {
+            "type": "None",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          },
+          "healthModelId": "/subscriptions/ef4ab5a7-c2c0-4304-af80-af49f48af3d1/resourceGroups/DeleteDemoRG/providers/Microsoft.CloudHealth/healthmodels/ahm-demo"
+        },
+        "monitoringProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
+        "chaosResourceProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          },
+          "chaosResourceIdentityForFaults": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
+        "drillAssetProperties": {
+          "subscription": "pxlmwjuhcif",
+          "region": "zuvwzxnbqyzdkthrewruw"
+        }
+      },
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "metricsProperties": {
+            "identity": {
+              "type": "None",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "metricsToTrack": [
+              {
+                "metricName": "heocgcwbx",
+                "metricId": "/providers/Microsoft.Monitor/slos/slo1",
+                "destinationAmwAccountUrl": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/defaultresourcegroup-cid/providers/microsoft.monitor/accounts/defaultazuremonitorworkspace-cid"
+              }
+            ]
+          },
+          "chaosExperimentProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "westus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosExperimentIdentityForFaults": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosExperimentId": "/subscriptions/62b829ee-7936-40c9-a1c9-47a93f9f3965/resourceGroups/009278f9-04c0-4e1e-88a1-1b6323e2f209/providers/Microsoft.Chaos/experiments/asdas",
+            "faultDurationInMin": 0
+          },
+          "executionState": "NotRunning",
+          "rbacSetupMode": "AutomatedCustomRole",
+          "attentionReason": {
+            "drillRbacOnExperiment": "Set",
+            "rbacNeededForDrillOnExperiment": [
+              "lcjjnucz"
+            ],
+            "drillRbacOnSlo": "Set",
+            "rbacNeededForDrillOnSlo": [
+              "lmnjpqcour"
+            ],
+            "roReadiness": "UnderEdit",
+            "faultRbacOnTargets": "Set",
+            "targets": "Exists",
+            "drillUserMsi": "Exists",
+            "chaosExperimentUserMsi": "Exists",
+            "drillRbacOnRecoveryPlan": "Set",
+            "rbacNeededForDrillOnRecoveryPlan": [
+              "ayfyepziwdyxuwuexlamaadey"
+            ],
+            "drillRbacOnAzureMonitoringWorkspace": "Set",
+            "rbacNeededForDrillOnAzureMonitoringWorkspace": [
+              "fgvnjvmagxv"
+            ],
+            "recoveryPlanAndDrillResourcesState": "InSync",
+            "serviceGroupAndDrillResourcesState": "InSync",
+            "drillRbacOnAzureHealthModel": "Set",
+            "rbacNeededForDrillOnAzureHealthModel": [
+              "yvtpfipqppawimvylrqq"
+            ],
+            "runbookFaultRbacOnTargets": "Set",
+            "includedResourceInDrill": "Exists",
+            "drillRbacOnMonitoringResources": "NotSet",
+            "drillMonitoringErrors": [
+              {
+                "code": "14123903",
+                "message": "Unable to assign Monitoring RBAC on target resource."
+              }
+            ],
+            "drillMonitoringResources": "Exists",
+            "monitoringRbacOnDrillResources": "Set",
+            "rbacNeededForDrillOnDrillMonitoringResources": [
+              "lyffvljvuhwvxcuzyzlyo"
+            ],
+            "rbacNeededForDrillOnDrillResources": [
+              "sajsgcweakvzfunxfzzxe"
+            ],
+            "missingRequiredResourceProviders": [
+              "Microsoft.Chaos",
+              "Microsoft.Automation"
+            ],
+            "drillRbacOnChaosResource": "Set",
+            "rbacNeededForDrillOnChaosResource": [
+              "zabszxqjflfjgifyrtttvdpipw"
+            ],
+            "chaosResource": "Exists",
+            "chaosResourceUserMsi": "Exists",
+            "rbacOnTargetResources": "Set",
+            "chaosResourceCreationFailureReasons": [
+              "cjqkzeqcktfqcpmdwoloqb"
+            ]
+          },
+          "systemMetadata": {
+            "initialConfig": "Pending",
+            "resourceTypeCategories": [
+              "AzureSiteRecoveryVMsPresent"
+            ]
+          },
+          "drillType": "Zonal",
+          "lastRunProperties": {
+            "lastRunState": "NotStarted",
+            "lastRunAttestation": "Success",
+            "lastRunTime": "2025-05-05T05:36:37.151Z",
+            "lastRunDuration": "PT6M"
+          },
+          "healthModelProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "healthModelId": "/subscriptions/ef4ab5a7-c2c0-4304-af80-af49f48af3d1/resourceGroups/DeleteDemoRG/providers/Microsoft.CloudHealth/healthmodels/ahm-demo"
+          },
+          "executionReadinessState": "Ready",
+          "managedOnBehalfOfConfiguration": {
+            "moboBrokerResources": [
+              {
+                "id": "lvukttgzvssiupnypauorkyzvzf"
+              }
+            ]
+          },
+          "recoveryPlanProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "recoveryPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
+            "recoveryPlanResourceExcludedCount": 29
+          },
+          "monitoringProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "logAnalyticsWorkspaceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/AzureResilienceManagementDrills/providers/microsoft.operationalinsights/workspaces/default-law-cid",
+            "rawMetricsDataCollectionRuleId": "/subscriptions/2427679b-6638-48e5-8774-6096cd849451/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionRules/DataCollectionRuleHealthName",
+            "serviceGroupMetricsDataCollectionRuleId": "/subscriptions/2427679b-6638-48e5-8774-6096cd849451/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionRules/DataCollectionRawRuleHealthName",
+            "dataCollectionEndpointId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionEndpoints/DrillDataCollectionEndpoint"
+          },
+          "drillAssetProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "westus",
+            "resourceGroup": "customDrillResourceGroup"
+          },
+          "chaosResourceProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceIdentityForFaults": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceId": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourceGroups/resourceGroup1/providers/Microsoft.Chaos/workspaces/asdas",
+            "faultDurationInMin": 0
+          },
+          "provisioningState": "Succeeded",
+          "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
+          "lastSyncTime": "2026-02-02T10:45:16.573Z",
+          "lastResyncReadinessCheckTime": "2026-02-02T10:29:02.037Z"
+        },
+        "identity": {
+          "type": "None",
+          "userAssignedIdentities": {},
+          "principalId": "b958c8d6-705d-4581-8cee-5120b43b0b16",
+          "tenantId": "0ddf1a8d-cd80-412e-b414-cdc9de46c7bf"
+        },
+        "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1",
+        "name": "drill1",
+        "type": "Microsoft.AzureResilienceManagement/drills",
+        "systemData": {
+          "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "lndhhaimomorael",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

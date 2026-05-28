@@ -1,0 +1,324 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "IPv6FirewallRules"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules": {
+      "get": {
+        "operationId": "IPv6FirewallRules_ListByServer",
+        "tags": [
+          "IPv6FirewallRules"
+        ],
+        "description": "Gets a list of IPv6 firewall rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IPv6FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List IPv6 Firewall Rules": {
+            "$ref": "./examples/IPv6FirewallRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/ipv6FirewallRules/{firewallRuleName}": {
+      "get": {
+        "operationId": "IPv6FirewallRules_Get",
+        "tags": [
+          "IPv6FirewallRules"
+        ],
+        "description": "Gets an IPv6 firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the firewall rule.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IPv6FirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get IPv6 Firewall Rule": {
+            "$ref": "./examples/IPv6FirewallRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IPv6FirewallRules_CreateOrUpdate",
+        "tags": [
+          "IPv6FirewallRules"
+        ],
+        "description": "Creates or updates an IPv6 firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the firewall rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating an IPv6 firewall rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IPv6FirewallRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IPv6FirewallRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IPv6FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'IPv6FirewallRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IPv6FirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IPv6 firewall rule max/min": {
+            "$ref": "./examples/IPv6FirewallRuleCreate.json"
+          },
+          "Update an IPv6 firewall rule max/min": {
+            "$ref": "./examples/IPv6FirewallRuleUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "IPv6FirewallRules_Delete",
+        "tags": [
+          "IPv6FirewallRules"
+        ],
+        "description": "Deletes an IPv6 firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the firewall rule.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IPv6 firewall rule": {
+            "$ref": "./examples/IPv6FirewallRuleDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IPv6FirewallRule": {
+      "type": "object",
+      "description": "An IPv6 server firewall rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IPv6ServerFirewallRuleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ProxyResourceWithWritableName"
+        }
+      ]
+    },
+    "IPv6FirewallRuleListResult": {
+      "type": "object",
+      "description": "The response of a IPv6FirewallRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IPv6FirewallRule items on this page",
+          "items": {
+            "$ref": "#/definitions/IPv6FirewallRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IPv6ServerFirewallRuleProperties": {
+      "type": "object",
+      "description": "The properties of an IPv6 server firewall rule.",
+      "properties": {
+        "startIPv6Address": {
+          "type": "string",
+          "description": "The start IP address of the firewall rule. Must be IPv6 format."
+        },
+        "endIPv6Address": {
+          "type": "string",
+          "description": "The end IP address of the firewall rule. Must be IPv6 format. Must be greater than or equal to startIpv6Address."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
