@@ -103,6 +103,7 @@ using Microsoft.StorageCache;
 @@clientName(AmlFilesystemPropertiesMaintenanceWindow, "AmlFileSystemPropertiesMaintenanceWindow", "csharp");
 @@clientName(AmlFilesystemProvisioningStateType, "AmlFileSystemProvisioningStateType", "csharp");
 @@clientName(AmlFilesystemRootSquashSettings, "AmlFileSystemRootSquashSettings", "csharp");
+@@clientName(AmlFilesystemSquashMode, "AmlFileSystemSquashMode", "csharp");
 @@clientName(AmlFilesystemUpdate, "AmlFileSystemPatch", "csharp");
 @@clientName(AmlFilesystemUpdatePropertiesMaintenanceWindow, "AmlFileSystemPatchPropertiesMaintenanceWindow", "csharp");
 @@clientName(AmlFilesystemHsmSettings, "AmlFileSystemHsmSettings", "csharp");
