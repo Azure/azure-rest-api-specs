@@ -151,6 +151,7 @@ model ExtensionEnumProperty {
   extension?: Extension = Extension.NoExtension;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("BGP configuration properties")
 model BgpConfiguration extends AnnotationResource {
   @doc("BFD configuration properties")
@@ -207,6 +208,7 @@ model BgpConfiguration extends AnnotationResource {
   v6OverV4BgpSession?: V6OverV4BgpSessionState = V6OverV4BgpSessionState.Disabled;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("BGP configuration properties.")
 model BgpPatchConfiguration extends AnnotationResource {
   @doc("BFD configuration properties")
@@ -287,6 +289,7 @@ model NeighborAddress {
 @doc("Neighbor Address properties.")
 model NeighborAddressPatch is NeighborAddress;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("Connected Subnet properties.")
 model ConnectedSubnet extends AnnotationResource {
   @doc("Prefix of the Connected Subnet.")
@@ -479,6 +482,7 @@ model InternalNetworkUpdateBgpAdministrativeStateRequest {
   administrativeState?: BgpAdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for InternalNetwork BGP Administrative State response"
 @doc("Internal Network Administrative State Response")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBgpAdministrativeStateResponse
@@ -551,6 +555,7 @@ model InternalNetworkUpdateBfdAdministrativeStateResponseProperties {
   neighborAddressAdministrativeStatus?: NeighborAddressBfdAdministrativeStatus[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for InternalNetwork BFD Administrative State response"
 @doc("Internal Network BFD Administrative State response")
 @added(Versions.v2024_06_15_preview)
 model InternalNetworkBfdAdministrativeStateResponse

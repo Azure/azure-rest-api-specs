@@ -126,8 +126,9 @@ model L3OptionBProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("option A properties object")
-model ExternalNetworkPropertiesOptionAProperties
-  extends Layer3IpPrefixProperties {
+model ExternalNetworkPropertiesOptionAProperties {
+  ...Layer3IpPrefixProperties;
+
   @doc("MTU to use for option A peering.")
   @maxValue(9200)
   @minValue(64)
@@ -278,8 +279,8 @@ model ExternalNetworkPatchProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
 @doc("option A properties object")
-model ExternalNetworkPatchPropertiesOptionAProperties
-  extends Layer3IpPrefixProperties {
+model ExternalNetworkPatchPropertiesOptionAProperties {
+  ...Layer3IpPrefixPatchProperties;
   ...L3OptionAProperties;
 
   @doc("Ingress Acl. ARM resource ID of Access Control Lists.")
