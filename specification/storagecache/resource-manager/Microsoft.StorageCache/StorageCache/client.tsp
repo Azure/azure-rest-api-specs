@@ -111,7 +111,7 @@ using Microsoft.StorageCache;
 @@clientName(CacheNetworkSettings.dnsServers, "DnsServersIPAddresses", "csharp");
 @@clientName(CacheUpgradeSettings.upgradeScheduleEnabled, "EnableUpgradeSchedule", "csharp");
 @@clientName(CacheUsernameDownloadSettings.extendedGroups, "EnableExtendedGroups", "csharp");
-@@clientName(CacheActiveDirectorySettingsCredentials.bindDn, "BindDistinguishedName", "csharp");
+@@clientName(CacheUsernameDownloadSettingsCredentials.bindDn, "BindDistinguishedName", "csharp");
 @@clientName(CacheEncryptionSettings.rotationToLatestKeyVersionEnabled, "EnableRotationToLatestKeyVersion", "csharp");
 @@clientName(NfsAccessRule.suid, "AllowSuid", "csharp");
 @@clientName(NfsAccessRule.submountAccess, "AllowSubmountAccess", "csharp");
