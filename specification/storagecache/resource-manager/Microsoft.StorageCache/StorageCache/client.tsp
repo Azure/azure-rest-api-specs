@@ -81,6 +81,8 @@ using Microsoft.StorageCache;
 @@clientName(CacheUpgradeStatus, "StorageCacheUpgradeStatus", "csharp");
 @@clientName(CacheUsernameDownloadSettings, "StorageCacheUsernameDownloadSettings", "csharp");
 @@clientName(CacheUsernameDownloadSettingsCredentials, "StorageCacheUsernameDownloadCredential", "csharp");
+@@clientName(AscOperation, "StorageCacheAscOperationInfo", "csharp");
+@@clientName(AscOperationErrorResponse, "StorageCacheAscOperationErrorResponseResult", "csharp");
 @@clientName(Condition, "OutstandingCondition", "csharp");
 @@clientName(FirmwareStatusType, "StorageCacheFirmwareStatusType", "csharp");
 @@clientName(HealthStateType, "StorageCacheHealthStateType", "csharp");
