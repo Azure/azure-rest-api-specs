@@ -129,9 +129,9 @@ model NodeCustomizationUpdate {
 @parentResource(NodeCustomization)
 @doc("A version of the Node Customization resource.")
 model NodeCustomizationVersion is ProxyResource<NodeCustomizationProperties> {
-  @pattern("^[\\w\\-\\.]+$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
   @minLength(1)
-  @maxLength(64)
+  @maxLength(63)
   @doc("The version of the Node Customization.")
   @key("version")
   @path
