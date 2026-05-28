@@ -494,7 +494,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(Skills.createSkillVersion, "create");
-@@clientName(Skills.createSkillVersionFromFiles, "create_from_package");
+@@clientName(Skills.createSkillVersionFromFiles, "create_from_files");
 @@clientName(Skills.deleteSkill, "delete");
 @@clientName(Skills.deleteSkillVersion, "delete_version");
 @@clientName(Skills.getSkill, "get");
