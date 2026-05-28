@@ -283,11 +283,9 @@ op replacePurge(
   "ApiManagementDeletedService",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.DiagnosticContract,
-  "ApiManagementDiagnostic",
-  "csharp"
-);
+// C#-specific: DiagnosticContract intentionally NOT renamed so the data class
+// keeps its GA name `DiagnosticContractData`. The Resource/Collection still
+// get `ApiManagementDiagnostic*` via ResourceName overrides in DiagnosticContract.tsp.
 @@clientName(
   Microsoft.ApiManagement.EmailTemplateContract,
   "ApiManagementEmailTemplate",
@@ -329,11 +327,9 @@ op replacePurge(
   "ApiIssueComment",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.IssueContract,
-  "ApiManagementIssue",
-  "csharp"
-);
+// C#-specific: IssueContract intentionally NOT renamed so the data class
+// keeps its GA name `IssueContractData`. The Resource/Collection still
+// get `ApiManagementIssue*` via ResourceName overrides in IssueContract.tsp.
 @@clientName(
   Microsoft.ApiManagement.LoggerContract,
   "ApiManagementLogger",
@@ -359,11 +355,9 @@ op replacePurge(
   "ApiOperation",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.PolicyContract,
-  "ApiManagementPolicy",
-  "csharp"
-);
+// C#-specific: PolicyContract intentionally NOT renamed so the data class
+// keeps its GA name `PolicyContractData`. The Resource/Collection still
+// get `ApiManagementPolicy*` via ResourceName overrides in PolicyContract.tsp.
 @@clientName(
   Microsoft.ApiManagement.PortalRevisionContract,
   "ApiManagementPortalRevision",
@@ -380,11 +374,9 @@ op replacePurge(
   "csharp"
 );
 @@clientName(Microsoft.ApiManagement.SchemaContract, "ApiSchema", "csharp");
-@@clientName(
-  Microsoft.ApiManagement.SubscriptionContract,
-  "ApiManagementSubscription",
-  "csharp"
-);
+// C#-specific: SubscriptionContract intentionally NOT renamed so the data class
+// keeps its GA name `SubscriptionContractData`. The Resource/Collection still
+// get `ApiManagementSubscription*` via ResourceName overrides in SubscriptionContract.tsp.
 @@clientName(
   Microsoft.ApiManagement.TagDescriptionContract,
   "ApiTagDescription",
@@ -395,11 +387,9 @@ op replacePurge(
   "ApiManagementTenantSetting",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.UserContract,
-  "ApiManagementUser",
-  "csharp"
-);
+// C#-specific: UserContract intentionally NOT renamed so the data class
+// keeps its GA name `UserContractData`. The Resource/Collection still
+// get `ApiManagementUser*` via ResourceName overrides in UserContract.tsp.
 @@clientName(Microsoft.ApiManagement.SchemaType, "ApiSchemaType", "csharp");
 
 // C#-specific: Backward-compat enum/union renames for properties scoped under parent resources
@@ -594,12 +584,12 @@ op replacePurge(
 );
 @@clientName(
   Microsoft.ApiManagement.BackendUpdateParameters,
-  "BackendPatch",
+  "ApiManagementBackendPatch",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.CertificateCreateOrUpdateParameters,
-  "CertificateCreateOrUpdateContent",
+  "ApiManagementCertificateCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
@@ -609,17 +599,17 @@ op replacePurge(
 );
 @@clientName(
   Microsoft.ApiManagement.GroupCreateParameters,
-  "GroupCreateContent",
+  "ApiManagementGroupCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.GroupUpdateParameters,
-  "GroupPatch",
+  "ApiManagementGroupPatch",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.NamedValueUpdateParameters,
-  "NamedValuePatch",
+  "ApiManagementNamedValuePatch",
   "csharp"
 );
 @@clientName(
@@ -629,7 +619,7 @@ op replacePurge(
 );
 @@clientName(
   Microsoft.ApiManagement.ProductUpdateParameters,
-  "ProductPatch",
+  "ApiManagementProductPatch",
   "csharp"
 );
 @@clientName(
@@ -639,27 +629,27 @@ op replacePurge(
 );
 @@clientName(
   Microsoft.ApiManagement.SubscriptionCreateParameters,
-  "SubscriptionCreateContent",
+  "ApiManagementSubscriptionCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.SubscriptionUpdateParameters,
-  "SubscriptionPatch",
+  "ApiManagementSubscriptionPatch",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.TagCreateUpdateParameters,
-  "TagCreateUpdateContent",
+  "ApiManagementTagCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.TagDescriptionCreateParameters,
-  "TagDescriptionCreateContent",
+  "ApiTagDescriptionCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
   Microsoft.ApiManagement.UserCreateParameters,
-  "UserCreateContent",
+  "ApiManagementUserCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
@@ -680,6 +670,84 @@ op replacePurge(
 @@clientName(
   Microsoft.ApiManagement.PrivateEndpointConnectionRequest,
   "PrivateEndpointConnectionContent",
+  "csharp"
+);
+
+// C#-specific: Additional backward-compat renames to restore GA model names.
+@@clientName(Microsoft.ApiManagement.ApiUpdateContract, "ApiPatch", "csharp");
+@@clientName(
+  Microsoft.ApiManagement.LoggerUpdateContract,
+  "ApiManagementLoggerPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.OperationUpdateContract,
+  "ApiOperationPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.IssueUpdateContract,
+  "ApiIssuePatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.QuotaCounterValueUpdateContract,
+  "QuotaCounterValueUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GatewayKeyRegenerationRequestContract,
+  "GatewayKeyRegenerateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.GenerateSsoUrlResult,
+  "GenerateSsoUriResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AuthorizationConfirmConsentCodeRequestContract,
+  "AuthorizationConfirmConsentCodeContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AuthorizationLoginRequestContract,
+  "AuthorizationLoginContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AuthorizationLoginResponseContract,
+  "AuthorizationLoginResult",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AuthorizationType,
+  "ApiManagementAuthorizationType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.AuthorizationError,
+  "ApiManagementAuthorizationError",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.IdentityProviderCreateContract,
+  "ApiManagementIdentityProviderCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.NamedValueCreateContract,
+  "ApiManagementNamedValueCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PolicyDescriptionContract,
+  "PolicyDescriptionContractData",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.PortalSettingsContract,
+  "PortalSettingsContractData",
   "csharp"
 );
 
