@@ -72,7 +72,10 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
 
-@@clientName(CodeConfiguration.content_hash, "ContentSha256");
+@@clientName(CodeConfiguration.content_hash, "contentSha256");
+
+@@clientName(OptimizationCandidate.avg_score, "averageScore");
+@@clientName(OptimizationCandidate.avg_tokens, "averageTokens");
 
 @@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"
