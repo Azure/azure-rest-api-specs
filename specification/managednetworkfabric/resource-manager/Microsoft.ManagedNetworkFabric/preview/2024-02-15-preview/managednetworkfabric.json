@@ -10478,7 +10478,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -12196,6 +12196,22 @@
       "type": "object",
       "description": "option A properties object",
       "properties": {
+        "primaryIpv4Prefix": {
+          "type": "string",
+          "description": "IPv4 Address Prefix."
+        },
+        "primaryIpv6Prefix": {
+          "type": "string",
+          "description": "IPv6 Address Prefix."
+        },
+        "secondaryIpv4Prefix": {
+          "type": "string",
+          "description": "Secondary IPv4 Address Prefix."
+        },
+        "secondaryIpv6Prefix": {
+          "type": "string",
+          "description": "Secondary IPv6 Address Prefix."
+        },
         "mtu": {
           "type": "integer",
           "format": "int32",
@@ -12253,12 +12269,7 @@
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Layer3IpPrefixProperties"
-        }
-      ]
+      }
     },
     "ExternalNetworkProperties": {
       "type": "object",
@@ -12348,6 +12359,22 @@
       "type": "object",
       "description": "option A properties object",
       "properties": {
+        "primaryIpv4Prefix": {
+          "type": "string",
+          "description": "IPv4 Address Prefix."
+        },
+        "primaryIpv6Prefix": {
+          "type": "string",
+          "description": "IPv6 Address Prefix."
+        },
+        "secondaryIpv4Prefix": {
+          "type": "string",
+          "description": "Secondary IPv4 Address Prefix."
+        },
+        "secondaryIpv6Prefix": {
+          "type": "string",
+          "description": "Secondary IPv6 Address Prefix."
+        },
         "mtu": {
           "type": "integer",
           "format": "int32",
@@ -12410,11 +12437,6 @@
       "required": [
         "vlanId",
         "peerASN"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Layer3IpPrefixProperties"
-        }
       ]
     },
     "ExternalNetworksList": {
@@ -13022,7 +13044,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -13124,11 +13146,15 @@
     "InternetGatewayRulePatch": {
       "type": "object",
       "description": "The Internet Gateway Rules patch resource definition.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NetworkRackPatch"
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      ]
+      }
     },
     "InternetGatewayRuleProperties": {
       "type": "object",
@@ -13268,7 +13294,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -13424,7 +13450,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -13647,7 +13673,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -13867,7 +13893,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -14028,7 +14054,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -14515,7 +14541,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -14726,7 +14752,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -15064,7 +15090,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -15284,7 +15310,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -15727,7 +15753,7 @@
       "description": "The NetworkPacketBroker patch resource definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -16016,7 +16042,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -16379,7 +16405,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -17385,7 +17411,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/NetworkRackPatch"
+          "$ref": "#/definitions/TagsUpdate"
         }
       ]
     },
@@ -17981,6 +18007,19 @@
         "isDefault": {
           "$ref": "#/definitions/BooleanEnumProperty",
           "description": "If true newly provisioned Fabric will use this device version by default to bootstrap the network devices for the first time."
+        }
+      }
+    },
+    "TagsUpdate": {
+      "type": "object",
+      "description": "Base tracked resource type for PATCH updates.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
