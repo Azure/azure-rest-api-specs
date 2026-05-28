@@ -32,7 +32,7 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
    * Identity for the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.

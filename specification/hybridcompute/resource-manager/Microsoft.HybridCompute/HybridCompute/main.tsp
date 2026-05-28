@@ -50,7 +50,7 @@ enum Versions {
   /**
    * The 2026-06-16-preview API version.
    */
-  v2026-06-16-preview: "2026-06-16-preview",
+  v2026_06_16_preview: "2026-06-16-preview",
 }
 
 interface Operations {

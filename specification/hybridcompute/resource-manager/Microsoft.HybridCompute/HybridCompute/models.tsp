@@ -2181,7 +2181,7 @@ model MachineUpdate extends ResourceUpdate {
   /**
    * Identity for the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
@@ -3757,7 +3757,7 @@ model HybridIdentityMetadataProperties {
    * Identity for the resource.
    */
   @visibility(Lifecycle.Read)
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 /**
