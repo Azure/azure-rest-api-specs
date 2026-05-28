@@ -37,7 +37,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
 @added(Versions.v2024_10_01_preview)
 @doc("The namespace messaging endpoints model.")
 model Messaging {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
   @doc("Dictionary of messaging endpoints.")
   endpoints?: Record<MessagingEndpoint>;
 }
@@ -62,7 +62,7 @@ model NamespaceProperties {
   @visibility(Lifecycle.Read)
   dataEndpoint?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the messaging endpoints dictionary."
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
 
@@ -71,7 +71,7 @@ model NamespaceProperties {
   @added(Versions.v2026_02_01_preview)
   management?: Management;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the provisioning endpoints dictionary."
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning endpoints associated with this namespace.")
   provisioning?: NamespaceProvisioning;
@@ -79,6 +79,11 @@ model NamespaceProperties {
   @added(Versions.v2026_11_01_preview)
   @doc("The identity used for outbound calls from the ADR namespace. If not specified and the namespace has a system-assigned identity enabled, the system-assigned identity is used by default.")
   outboundIdentity?: OutboundIdentity;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the device update endpoints dictionary."
+  @added(Versions.v2026_11_01_preview)
+  @doc("The device update endpoints associated with this namespace.")
+  updating?: NamespaceUpdating;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -96,6 +101,8 @@ model MessagingEndpoint {
   @added(Versions.v2025_07_01_preview)
   endpointType?: string;
 
+  // Intentionally typed as string, not url. Values are bare hostnames
+  // without scheme (e.g., "myhub.azure-devices.net").
   @added(Versions.v2025_07_01_preview)
   @madeOptional(Versions.v2026_11_01_preview)
   @doc("The endpoint address used by services.")
@@ -164,19 +171,31 @@ union MessagingEndpointAvailability {
 @added(Versions.v2026_11_01_preview)
 @doc("The provisioning endpoints associated with this namespace.")
 model NamespaceProvisioning {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
   @doc("Dictionary of provisioning endpoints.")
   endpoints?: Record<ProvisioningEndpoint>;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The device update endpoints associated with this namespace.")
+model NamespaceUpdating {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
+  @doc("Dictionary of device update endpoints.")
+  endpoints?: Record<UpdatingEndpoint>;
 }
 
 @added(Versions.v2026_11_01_preview)
 @doc("A provisioning service endpoint linked to this namespace.")
 model ProvisioningEndpoint {
   @doc("Type of provisioning resource.")
-  endpointType: string;
+  endpointType: ProvisioningEndpointType;
 
   @doc("The provisioning endpoint Azure resource Id.")
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Devices/provisioningServices";
+    }
+  ]>;
 
   @doc("The identity the linked resource uses to call the ADR namespace.")
   inboundCallerIdentity: InboundCallerIdentity;
@@ -184,6 +203,59 @@ model ProvisioningEndpoint {
   @doc("The linking state of this provisioning endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("A device update endpoint linked to this namespace.")
+model UpdatingEndpoint {
+  @doc("Type of device update resource.")
+  endpointType: UpdatingEndpointType;
+
+  @doc("The device update endpoint Azure resource Id.")
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceUpdate/linkedAccounts";
+    }
+  ]>;
+
+  @doc("The identity the linked resource uses to call the ADR namespace.")
+  inboundCallerIdentity: InboundCallerIdentity;
+
+  @doc("The linking state of this device update endpoint.")
+  @visibility(Lifecycle.Read)
+  linkingState?: NamespaceLinkingStateValue;
+
+  // Intentionally typed as string, not url. Values are bare hostnames
+  // without scheme (e.g., "account.api.adu.microsoft.com").
+  @doc("The service-facing endpoint address.")
+  @visibility(Lifecycle.Read)
+  serviceAddress?: string;
+
+  @doc("The device-facing endpoint address.")
+  @visibility(Lifecycle.Read)
+  deviceAddress?: string;
+
+  @doc("The legacy device-facing endpoint address for older client SDKs.")
+  @visibility(Lifecycle.Read)
+  legacyDeviceAddress?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The type of provisioning resource that can be linked to a namespace.")
+union ProvisioningEndpointType {
+  string,
+
+  @doc("Azure Device Provisioning Service.")
+  DPS: "Microsoft.Devices/provisioningServices",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The type of device update resource that can be linked to a namespace.")
+union UpdatingEndpointType {
+  string,
+
+  @doc("Azure Device Update linked account.")
+  ADU: "Microsoft.DeviceUpdate/linkedAccounts",
 }
 
 @added(Versions.v2026_11_01_preview)
