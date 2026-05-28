@@ -413,7 +413,7 @@ union NetworkFabricManagedServiceIdentityTypeReplacement {
   "csharp"
 );
 @@clientName(
-  OperationStatusResult,
+  Azure.ResourceManager.Foundations.OperationStatusResult,
   "NetworkFabricOperationStatusResult",
   "csharp"
 );
@@ -2061,7 +2061,7 @@ model IPExtendedCommunityAddOperationProperties {}
 // Preserve shipped C# operation method names and compatibility return types.
 @@clientName(NetworkInterfaces.updateAdministrativeState, "SetAdministrativeState", "csharp");
 @@clientName(NetworkDevices.updateAdministrativeState, "SetAdministrativeState", "csharp");
-@@clientName(NetworkDevices.reboot, "StartReboot", "csharp");
+@@clientName(NetworkDevices.reboot, "Restart", "csharp");
 @@clientName(NetworkDevices.refreshConfiguration, "StartRefreshConfiguration", "csharp");
 @@clientName(NetworkDevices.upgrade, "StartUpgrade", "csharp");
 @@clientName(
