@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DatabaseUsages"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/usages": {
+      "get": {
+        "operationId": "DatabaseUsages_ListByDatabase",
+        "tags": [
+          "DatabaseUsages"
+        ],
+        "description": "Gets database usages.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseUsageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets database usages.": {
+            "$ref": "./examples/GetDatabaseUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseUsage": {
+      "type": "object",
+      "description": "Usage metric of a database.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseUsageProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DatabaseUsageListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseUsage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseUsage items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseUsage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseUsageProperties": {
+      "type": "object",
+      "description": "Properties of a database usage.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User-readable name of the metric.",
+          "readOnly": true
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current value of the metric.",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Boundary value of the metric.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the metric.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
