@@ -14871,6 +14871,7 @@ components:
           description: Identifier of the evaluation group.
         evalRun:
           type: object
+          additionalProperties: {}
           description: The evaluation run payload.
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
@@ -32301,7 +32302,7 @@ components:
           description: Composite score combining all evaluator scores.
         tokens:
           type: integer
-          format: int32
+          format: int64
           description: Total tokens consumed during the agent run for this task.
         duration_seconds:
           type: number
@@ -34320,6 +34321,7 @@ components:
           description: The version of the evaluator. Latest version if not specified.
         initialization_parameters:
           type: object
+          additionalProperties: {}
           description: The initialization parameters for the evaluation. Must support structured outputs.
         data_mapping:
           type: object
