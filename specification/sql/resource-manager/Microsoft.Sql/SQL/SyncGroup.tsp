@@ -15,7 +15,9 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
   ...ResourceNameParameter<
     Resource = SyncGroup,
@@ -38,7 +40,9 @@ model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
   identity?: DataSyncParticipantIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 interface SyncGroups {
   /**
    * Gets a sync group.
@@ -51,11 +55,14 @@ interface SyncGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SyncGroup,
-    Response = ArmResourceUpdatedResponse<SyncGroup> | ArmResourceCreatedResponse<
-      SyncGroup,
-      ArmLroLocationHeader<FinalResult = SyncGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<SyncGroup>
+      | ArmResourceCreatedResponse<
+          SyncGroup,
+          ArmLroLocationHeader<FinalResult = SyncGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -70,7 +77,10 @@ interface SyncGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SyncGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -150,9 +160,11 @@ interface SyncGroups {
 
 @@doc(SyncGroup.name, "The name of the sync group.");
 @@doc(SyncGroup.properties, "Resource properties.");
-@@doc(SyncGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SyncGroups.createOrUpdate::parameters.resource,
   "The requested sync group resource state."
 );
-@@doc(SyncGroups.update::parameters.properties,
+@@doc(
+  SyncGroups.update::parameters.properties,
   "The requested sync group resource state."
 );

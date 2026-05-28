@@ -30,7 +30,7 @@ jobs:
     if: |
       (github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
       github.event.label.name == 'ARMModelingSignedOff'
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6

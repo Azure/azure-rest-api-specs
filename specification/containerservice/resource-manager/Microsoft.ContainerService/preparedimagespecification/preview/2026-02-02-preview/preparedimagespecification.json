@@ -217,7 +217,7 @@
         "tags": [
           "PreparedImageSpecifications"
         ],
-        "description": "Create or update a prepared image specification resource. A new version is created only when the resource content changes.",
+        "description": "Create or update a prepared image specification resource with a client-provided version. Created versions are immutable; provide a different properties.version value to create a new version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -310,7 +310,7 @@
         "tags": [
           "PreparedImageSpecifications"
         ],
-        "description": "Update a prepared image specification. A new version is created only when the resource content changes.",
+        "description": "Update the tags of a prepared image specification.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -526,8 +526,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+            "maxLength": 63,
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
           }
         ],
         "responses": {
@@ -591,8 +591,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"
+            "maxLength": 63,
+            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
           }
         ],
         "responses": {
@@ -758,24 +758,6 @@
         "resourceId"
       ]
     },
-    "PreparedImageSpecificationManagedIdentityProfileUpdate": {
-      "type": "object",
-      "description": "The managed identity profile used by the prepared image specification for update operations.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the user-assigned managed identity.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      }
-    },
     "PreparedImageSpecificationPatch": {
       "type": "object",
       "description": "Prepared image specification patch resource",
@@ -786,35 +768,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/PreparedImageSpecificationPatchProperties",
-          "description": "Patchable prepared image specification properties."
-        }
-      }
-    },
-    "PreparedImageSpecificationPatchProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Prepared Image Specification resource.",
-      "properties": {
-        "containerImages": {
-          "type": "array",
-          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identityProfile": {
-          "$ref": "#/definitions/PreparedImageSpecificationManagedIdentityProfileUpdate",
-          "description": "The identity used to execute prepared image specification tasks during image build time and provisioning time."
-        },
-        "customizationScripts": {
-          "type": "array",
-          "description": "The scripts to customize the node before or after image capture.",
-          "items": {
-            "$ref": "#/definitions/PreparedImageSpecificationScriptUpdate"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -835,9 +788,8 @@
         },
         "version": {
           "type": "string",
-          "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
-          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$",
-          "readOnly": true
+          "description": "The client-provided version of the prepared image specification.",
+          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -874,11 +826,13 @@
         },
         "scriptType": {
           "$ref": "#/definitions/ScriptType",
-          "description": "The runtime environment for the script (e.g. Bash)."
+          "description": "The runtime environment for the script (e.g. Bash).",
+          "example": "Bash"
         },
         "script": {
           "type": "string",
-          "description": "The script content to be executed in plain text. Do not include secrets."
+          "description": "The script content to be executed in plain text. Do not include secrets.",
+          "example": "echo 'initializing node'"
         },
         "postScriptAction": {
           "$ref": "#/definitions/PostScriptAction",
@@ -890,34 +844,6 @@
         "executionPoint",
         "scriptType"
       ]
-    },
-    "PreparedImageSpecificationScriptUpdate": {
-      "type": "object",
-      "description": "Prepared image specification script for update operations",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name for the customization script.",
-          "maxLength": 263,
-          "pattern": "^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$"
-        },
-        "executionPoint": {
-          "$ref": "#/definitions/ExecutionPoint",
-          "description": "The stage at which the script is executed."
-        },
-        "scriptType": {
-          "$ref": "#/definitions/ScriptType",
-          "description": "The runtime environment for the script (e.g. Bash)."
-        },
-        "script": {
-          "type": "string",
-          "description": "The script content to be executed in plain text. Do not include secrets."
-        },
-        "postScriptAction": {
-          "$ref": "#/definitions/PostScriptAction",
-          "description": "The action to take after successful script execution."
-        }
-      }
     },
     "PreparedImageSpecificationVersion": {
       "type": "object",

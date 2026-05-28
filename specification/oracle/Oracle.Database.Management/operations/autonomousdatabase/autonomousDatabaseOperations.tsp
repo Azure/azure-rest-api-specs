@@ -106,37 +106,44 @@ interface AutonomousDatabases
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.listBySubscription,
+@@Autorest.example(
+  AutonomousDatabases.listBySubscription,
   "./examples/autonomousDatabase_listBySubscription.json",
   "List Autonomous Database by subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.listByResourceGroup,
+@@Autorest.example(
+  AutonomousDatabases.listByResourceGroup,
   "./examples/autonomousDatabase_listByResourceGroup.json",
   "List Autonomous Database by resource group"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.createOrUpdate,
+@@Autorest.example(
+  AutonomousDatabases.createOrUpdate,
   "./examples/autonomousDatabase_create.json",
   "Create Autonomous Database"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.createOrUpdate,
+@@Autorest.example(
+  AutonomousDatabases.createOrUpdate,
   "./examples/autonomousDatabaseClone_create.json",
   "Create clone Autonomous Database"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.get,
+@@Autorest.example(
+  AutonomousDatabases.get,
   "./examples/autonomousDatabase_get.json",
   "Get Autonomous Database"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.update,
+@@Autorest.example(
+  AutonomousDatabases.update,
   "./examples/autonomousDatabase_patch.json",
   "Patch Autonomous Database"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(AutonomousDatabases.delete,
+@@Autorest.example(
+  AutonomousDatabases.delete,
   "./examples/autonomousDatabase_delete.json",
   "Delete Autonomous Database"
 );

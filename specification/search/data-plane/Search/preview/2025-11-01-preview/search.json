@@ -3238,6 +3238,9 @@
           }
         },
         "x-ms-examples": {
+          "SearchServiceCreateKnowledgeSource": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSource.json"
+          },
           "SearchServiceCreateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceAzureBlob.json"
           },
@@ -3412,6 +3415,9 @@
           }
         },
         "x-ms-examples": {
+          "SearchServiceCreateOrUpdateKnowledgeSource": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSource.json"
+          },
           "SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob.json"
           },
@@ -9522,6 +9528,20 @@
       "type": "object",
       "description": "Represents a azure blob retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
         "azureBlobArguments": {
           "$ref": "#/definitions/KnowledgeBaseAzureBlobActivityArguments",
           "description": "The azure blob arguments for the retrieval activity."
@@ -9529,7 +9549,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "azureBlob"
@@ -9653,6 +9673,20 @@
       "type": "object",
       "description": "Represents a indexed OneLake retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
         "indexedOneLakeArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedOneLakeActivityArguments",
           "description": "The indexed OneLake arguments for the retrieval activity."
@@ -9660,7 +9694,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "indexedOneLake"
@@ -9695,6 +9729,20 @@
       "type": "object",
       "description": "Represents a indexed SharePoint retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
         "indexedSharePointArguments": {
           "$ref": "#/definitions/KnowledgeBaseIndexedSharePointActivityArguments",
           "description": "The indexed SharePoint arguments for the retrieval activity."
@@ -9702,7 +9750,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "indexedSharePoint"
@@ -9996,6 +10044,20 @@
       "type": "object",
       "description": "Represents a remote SharePoint retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
         "remoteSharePointArguments": {
           "$ref": "#/definitions/KnowledgeBaseRemoteSharePointActivityArguments",
           "description": "The remote SharePoint arguments for the retrieval activity."
@@ -10003,7 +10065,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "remoteSharePoint"
@@ -10031,12 +10093,8 @@
     },
     "KnowledgeBaseRetrievalActivityRecord": {
       "type": "object",
-      "description": "Represents a retrieval activity record.",
+      "description": "Common fields for retrieval activity records. Used via spread in concrete retrieval models.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Discriminator property for KnowledgeBaseRetrievalActivityRecord."
-        },
         "knowledgeSourceName": {
           "type": "string",
           "description": "The knowledge source for the retrieval activity."
@@ -10051,16 +10109,7 @@
           "format": "int32",
           "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
         }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
-        }
-      ]
+      }
     },
     "KnowledgeBaseRetrievalPartialResponse": {
       "type": "object",
@@ -10200,6 +10249,20 @@
       "type": "object",
       "description": "Represents a search index retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
         "searchIndexArguments": {
           "$ref": "#/definitions/KnowledgeBaseSearchIndexActivityArguments",
           "description": "The search index arguments for the retrieval activity."
@@ -10207,7 +10270,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "searchIndex"
@@ -10259,6 +10322,20 @@
       "type": "object",
       "description": "Represents a web retrieval activity record.",
       "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
         "webArguments": {
           "$ref": "#/definitions/KnowledgeBaseWebActivityArguments",
           "description": "The web arguments for the retrieval activity."
@@ -10266,7 +10343,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "x-ms-discriminator-value": "web"
