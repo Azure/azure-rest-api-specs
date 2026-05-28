@@ -100,7 +100,6 @@ namespace Microsoft.Kubernetes;
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
   ConnectedCluster,
   "resource-rbac-roles",
