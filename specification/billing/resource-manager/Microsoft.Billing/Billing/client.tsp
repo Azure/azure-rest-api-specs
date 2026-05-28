@@ -442,14 +442,34 @@ using Microsoft.Billing;
 );
 
 // Disambiguate identical-valued unions (workaround for MPG generator dedup bug)
-@@clientName(EnrollmentAccountOwnerViewCharges, "EnrollmentAccountOwnerViewCharge", "csharp");
-@@clientName(EnrollmentDepartmentAdminViewCharges, "EnrollmentDepartmentAdminViewCharge", "csharp");
+@@clientName(
+  EnrollmentAccountOwnerViewCharges,
+  "EnrollmentAccountOwnerViewCharge",
+  "csharp"
+);
+@@clientName(
+  EnrollmentDepartmentAdminViewCharges,
+  "EnrollmentDepartmentAdminViewCharge",
+  "csharp"
+);
 
 // Resource-level method disambiguation: multiple @get @action ops on same parent resource share name "GetBy<Parent>" causing CS0111.
-@@clientName(BillingProfiles.productsListByBillingProfile, "GetProducts", "csharp");
-@@clientName(InvoiceSections.productsListByInvoiceSection, "GetProducts", "csharp");
+@@clientName(
+  BillingProfiles.productsListByBillingProfile,
+  "GetProducts",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.productsListByInvoiceSection,
+  "GetProducts",
+  "csharp"
+);
 // Resolve CS0102: ReservationPurchaseRequestProperties has direct .instanceFlexibility AND .reservedResourceProperties.instanceFlexibility (flattened by back-compatible.tsp). Rename the flatten source.
-@@clientName(ReservationPurchaseRequestPropertiesReservedResourceProperties.instanceFlexibility, "ReservedInstanceFlexibility", "csharp");
+@@clientName(
+  ReservationPurchaseRequestPropertiesReservedResourceProperties.instanceFlexibility,
+  "ReservedInstanceFlexibility",
+  "csharp"
+);
 
 // Resolve CS1503/CS7036: TermDuration generates as TimeSpan? but spec is string. Force string in C# so WriteStringValue/GetString work.
 @@alternateType(RenewalTermDetails.termDuration, string, "csharp");

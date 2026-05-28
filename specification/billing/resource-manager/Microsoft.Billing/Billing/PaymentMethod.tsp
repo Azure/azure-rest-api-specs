@@ -97,8 +97,7 @@ alias PaymentMethodOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpe
     @segment("paymentMethods")
     @key
     paymentMethodName: string;
-  },
-  "BillingUserPaymentMethod"
+  }
 >;
 
 @armResourceOperations(#{ omitTags: true })
