@@ -478,3 +478,12 @@ using Microsoft.Billing;
 @@clientName(Operation, "BillingOperationInfo", "csharp");
 @@clientName(OperationDisplay, "BillingOperationDisplay", "csharp");
 @@clientName(OperationListResult, "BillingOperationInfoListResult", "csharp");
+
+// Workaround for MPG emitter no-matching-items-property error:
+// `BillingAccounts.savingsPlansListByBillingAccount` returns `SavingsPlanModelListResult`,
+// which `extends SavingsPlanModelList` (which `is Azure.Core.Page<SavingsPlanModel>`).
+// The C# emitter cannot resolve the inherited `value`/`nextLink` properties as pagination
+// metadata through `extends`, and `@@pageItems` / `Legacy.markAsPageable` workarounds in
+// client.tsp do not propagate either. Suppress the operation for C# and re-expose the
+// equivalent GA back-compat method via a Custom partial on `BillingAccountResource`.
+@@scope(BillingAccounts.savingsPlansListByBillingAccount, "!csharp");
