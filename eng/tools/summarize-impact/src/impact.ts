@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "fs";
 import { glob } from "glob";
 import { dirname, join, resolve } from "path";
 
@@ -25,7 +25,6 @@ import { PRContext } from "./PRContext.js";
 
 import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 // TODO: move to .github/shared
@@ -658,40 +657,29 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   return ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent;
 }
 
-export const getRPaaSFolderList = async (
-  client: Octokit,
-  owner: string,
-  repoName: string,
-): Promise<string[]> => {
-  const branch = "main";
-  const armLeasesFolder = ".github/arm-leases";
+export const getRPaaSFolderList = (targetDirectory: string): string[] => {
+  const armLeasesFolder = join(targetDirectory, ".github", "arm-leases");
 
   const folderNames: Set<string> = new Set();
 
-  // Fetch folders from arm-leases directory to include RPs that have active leases
+  // Read folders from arm-leases directory to include RPs that have active leases
   // (indicating they are already registered in RPSaaSMaster)
   try {
-    const armLeasesRes = await client.rest.repos.getContent({
-      owner,
-      repo: repoName,
-      path: armLeasesFolder,
-      ref: branch,
+    if (!existsSync(armLeasesFolder)) {
+      console.log(`arm-leases folder not found at ${armLeasesFolder}`);
+      return [];
+    }
+
+    const entries = readdirSync(armLeasesFolder);
+    const armLeasesFolders = entries.filter((name: string) => {
+      const fullPath = join(armLeasesFolder, name);
+      return statSync(fullPath).isDirectory() && name !== "scripts";
     });
 
+    armLeasesFolders.forEach((name: string) => folderNames.add(name));
     console.log(
-      `Get arm-leases folder list from ${owner}/${repoName}/${armLeasesFolder} successfully. status: ${armLeasesRes.status}`,
+      `Found ${armLeasesFolders.length} arm-lease folders: ${armLeasesFolders.join(", ")}`,
     );
-
-    if (Array.isArray(armLeasesRes.data)) {
-      const armLeasesFolders = armLeasesRes.data
-        .filter((item: any) => item.type === "dir" && item.name !== "scripts")
-        .map((item: any) => item.name);
-
-      armLeasesFolders.forEach((name: string) => folderNames.add(name));
-      console.log(
-        `Found ${armLeasesFolders.length} arm-lease folders: ${armLeasesFolders.join(", ")}`,
-      );
-    }
   } catch (error) {
     console.log(`Failed to get folder list from ${armLeasesFolder}: ${error}`);
   }
