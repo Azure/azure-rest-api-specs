@@ -242,6 +242,7 @@ using Microsoft.ContainerInstance;
   "csharp"
 );
 @@access(ContainerGroupProvisioningState, Access.public, "csharp");
+@@access(ContainerGroupProvisioningState, Access.public, "python");
 
 // Fix identity types to use ARM common ManagedServiceIdentity for backward compat
 @@alternateType(
