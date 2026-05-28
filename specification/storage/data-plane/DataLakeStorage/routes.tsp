@@ -540,6 +540,8 @@ interface Path {
       ...TimeoutParameter;
     },
     {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard typespec recommendation for status code definition"
+      @statusCode statusCode: 200 | 202;
       ...ContinuationResponseHeader;
       ...DeletionIdResponseHeader;
     }
