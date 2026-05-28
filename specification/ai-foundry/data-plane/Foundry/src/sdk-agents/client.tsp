@@ -70,6 +70,8 @@ using Azure.AI.Projects;
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
+@@clientName(AgentObject.blueprint, "blueprintIdentity");
+
 @@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"
 );
