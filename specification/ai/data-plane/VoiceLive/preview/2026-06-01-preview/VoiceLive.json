@@ -1447,6 +1447,61 @@
       ],
       "x-ms-discriminator-value": "input_audio.turn.start"
     },
+    "ClientEventInputTextDelta": {
+      "type": "object",
+      "description": "Streams a delta of input text content into the specified item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the item the text delta is being appended to."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The text delta to append."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part within the item the delta applies to.",
+          "default": 0
+        }
+      },
+      "required": [
+        "id",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text.delta"
+    },
+    "ClientEventInputTextDone": {
+      "type": "object",
+      "description": "Signals that the streamed input text content for the specified item is complete.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the item whose text content has finished streaming."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part within the item.",
+          "default": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text.done"
+    },
     "ClientEventOutputAudioBufferClear": {
       "type": "object",
       "description": "Client request to clear the avatar output buffer.",
@@ -1574,7 +1629,9 @@
         "session.avatar.connect",
         "mcp_approval_response",
         "output_audio_buffer.clear",
-        "rtc.call.sdp.create"
+        "rtc.call.sdp.create",
+        "input_text.delta",
+        "input_text.done"
       ],
       "x-ms-enum": {
         "name": "ClientEventType",
@@ -1657,6 +1714,16 @@
             "name": "rtc_call_sdp_create",
             "value": "rtc.call.sdp.create",
             "description": "Sent by the client to initiate a WebRTC session with an SDP offer."
+          },
+          {
+            "name": "input_text_delta",
+            "value": "input_text.delta",
+            "description": "Streamed delta of input text content being appended to an item."
+          },
+          {
+            "name": "input_text_done",
+            "value": "input_text.done",
+            "description": "Signals that the streamed input text content for an item is complete."
           }
         ]
       }
@@ -1763,7 +1830,8 @@
           "enum": [
             "semantic_detection_v1",
             "semantic_detection_v1_en",
-            "semantic_detection_v1_multilingual"
+            "semantic_detection_v1_multilingual",
+            "smart_end_of_turn_detection"
           ],
           "x-ms-enum": {
             "modelAsString": true
@@ -2812,8 +2880,9 @@
       "type": "object",
       "description": "Input image content part.",
       "properties": {
-        "url": {
-          "type": "string"
+        "image_url": {
+          "type": "string",
+          "format": "uri"
         },
         "detail": {
           "$ref": "#/definitions/RequestImageContentPartDetail"
@@ -3000,6 +3069,11 @@
         "tool_choice": {
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
         },
         "temperature": {
           "type": "number",
@@ -3822,6 +3896,11 @@
         "tool_choice": {
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
         },
         "temperature": {
           "type": "number",
@@ -6250,6 +6329,28 @@
           }
         ]
       }
+    },
+    "SmartEndOfTurnDetection": {
+      "type": "object",
+      "description": "Audio-based end-of-turn detection. Operates directly on the input audio\nstream rather than text. Use `threshold_level` and `timeout_ms` to tune\ndetection.",
+      "properties": {
+        "threshold_level": {
+          "$ref": "#/definitions/EouThresholdLevel",
+          "description": "Threshold level setting. One of `low`, `medium`, `high`, or `default`."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds.",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EouDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "smart_end_of_turn_detection"
     },
     "StaticInterimResponseConfig": {
       "type": "object",
