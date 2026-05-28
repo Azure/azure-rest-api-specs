@@ -695,11 +695,12 @@ op replacePurge(
   "QuotaCounterValueUpdateContent",
   "csharp"
 );
-@@clientName(
-  Microsoft.ApiManagement.GatewayKeyRegenerationRequestContract,
-  "GatewayKeyRegenerateContent",
-  "csharp"
-);
+// NOTE: GatewayKeyRegenerationRequestContract intentionally NOT renamed.
+// Renaming it to GatewayKeyRegenerateContent causes the C# emitter to compute
+// the per-property enum name as `GatewayRegenerateKeyType` (rearranged from
+// the new model name), but the underlying KeyType union is already renamed
+// to `TokenGenerationUsedKeyType` so no `GatewayRegenerateKeyType.cs` file
+// is emitted — leading to CS0234.
 @@clientName(
   Microsoft.ApiManagement.GenerateSsoUrlResult,
   "GenerateSsoUriResult",
