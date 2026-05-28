@@ -82,6 +82,13 @@ using Microsoft.StorageCache;
 @@clientName(CacheUpgradeStatus, "StorageCacheUpgradeStatus", "csharp");
 @@clientName(CacheUsernameDownloadSettings, "StorageCacheUsernameDownloadSettings", "csharp");
 @@clientName(CacheUsernameDownloadSettingsCredentials, "StorageCacheUsernameDownloadCredential", "csharp");
+// Preserve the shipped .NET data inheritance while keeping the service TypeSpec resource shape unchanged.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
+@@hierarchyBuilding(
+  Cache,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(AscOperation, "StorageCacheAscOperationInfo", "csharp");
 @@clientName(AscOperationErrorResponse, "StorageCacheAscOperationErrorResponseResult", "csharp");
 @@clientName(AmlFilesystem, "AmlFileSystem", "csharp");
