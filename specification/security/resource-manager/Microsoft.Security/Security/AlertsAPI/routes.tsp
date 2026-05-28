@@ -50,13 +50,17 @@ interface AlertsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-operation-at-original-uri" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Alerts")
   @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/alerts/default/simulate")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate")
   @Azure.Core.useFinalStateVia("original-uri")
   simulate(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
-    ...LocationResourceParameter,
+    /**
+     * The location where ASC stores the data of the subscription. can be retrieved from Get locations
+     */
+    @path
+    ascLocation: string,
 
     /**
      * The request body

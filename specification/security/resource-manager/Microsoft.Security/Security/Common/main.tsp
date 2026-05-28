@@ -10,7 +10,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 
 namespace Common;
-
 /**
  * The error detail.
  */
