@@ -2575,3 +2575,5 @@ op replaceprivateDnsZoneGroupsList(
   CommonTypes.ProxyResource,
   "java"
 );
+
+@@clientName(CreatedByType, "CreatedByTypeEnum", "go");
