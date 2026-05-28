@@ -3618,12 +3618,8 @@
     },
     "DeploymentExtensionConfigItem": {
       "type": "object",
+      "description": "Represents the value for an extension config property.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/ExtensionConfigPropertyType",
-          "description": "The value type of the extension config property.",
-          "readOnly": true
-        },
         "value": {
           "description": "The value of the extension config property."
         },
@@ -4195,11 +4191,13 @@
         },
         "resourcePredictions": {
           "type": "array",
-          "description": "Resource predictions can be utilized by what-if to produce potential modification changes.",
+          "description": "Resource predictions that can be utilized by what-if to produce potential modification changes.",
           "items": {
             "$ref": "#/definitions/DeploymentResourceWhatIfPrediction"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "symbolicNamePath"
+          ]
         }
       },
       "allOf": [
@@ -4296,59 +4294,6 @@
             "name": "Inner",
             "value": "Inner",
             "description": "Inner"
-          }
-        ]
-      }
-    },
-    "ExtensionConfigPropertyType": {
-      "type": "string",
-      "enum": [
-        "String",
-        "Int",
-        "Bool",
-        "Array",
-        "Object",
-        "SecureString",
-        "SecureObject"
-      ],
-      "x-ms-enum": {
-        "name": "ExtensionConfigPropertyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "String",
-            "value": "String",
-            "description": "Property type representing a string value."
-          },
-          {
-            "name": "Int",
-            "value": "Int",
-            "description": "Property type representing an integer value."
-          },
-          {
-            "name": "Bool",
-            "value": "Bool",
-            "description": "Property type representing a boolean value."
-          },
-          {
-            "name": "Array",
-            "value": "Array",
-            "description": "Property type representing an array value."
-          },
-          {
-            "name": "Object",
-            "value": "Object",
-            "description": "Property type representing an object value."
-          },
-          {
-            "name": "SecureString",
-            "value": "SecureString",
-            "description": "Property type representing a secure string value."
-          },
-          {
-            "name": "SecureObject",
-            "value": "SecureObject",
-            "description": "Property type representing a secure object value."
           }
         ]
       }
@@ -5088,7 +5033,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Resource ID"
+          "description": "The fully-qualified ARM resource ID for this change."
         },
         "deploymentId": {
           "type": "string",
@@ -5097,6 +5042,10 @@
         "symbolicName": {
           "type": "string",
           "description": "The symbolic name of the resource responsible for this change."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type of the resource."
         },
         "identifiers": {
           "description": "A subset of properties that uniquely identify a Bicep extensible resource because it lacks a resource id like an Azure resource has."
