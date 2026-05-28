@@ -39,9 +39,7 @@ model NetworkRackProperties extends AnnotationResource {
 }
 
 @doc("Network Rack patch resource definition.")
-model NetworkRackPatch {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-}
+model NetworkRackPatch is TagsUpdate;
 
 @doc("Network Rack SKU name.")
 union NetworkRackType {

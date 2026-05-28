@@ -66,7 +66,7 @@ interface AccessControlLists {
   updateAdministrativeState is ArmResourceActionAsync<
     AccessControlList,
     UpdateAdministrativeState,
-    CommonPostActionResponseForStateUpdate
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Implements the operation to the underlying resources.")

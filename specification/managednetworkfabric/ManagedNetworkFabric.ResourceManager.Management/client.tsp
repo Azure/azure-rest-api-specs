@@ -62,6 +62,7 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(RedistributeStaticRoutes, "RedistributeStaticRoute", "csharp");
 @@clientName(RuleProperties, "InternetGatewayRules", "csharp");
 @@clientName(StaticRouteConfiguration, "StaticRouteConfiguration", "csharp");
+@@clientName(TagsUpdate, "ManagedNetworkFabricResourcePatch", "csharp");
 @@clientName(VpnOptionBProperties, "OptionBProperties", "csharp");
 @@clientName(AdministrativeState.MAT, "Mat", "csharp");
 @@clientName(AdministrativeState.RMA, "Rma", "csharp");
@@ -296,6 +297,11 @@ union NetworkFabricManagedServiceIdentityTypeReplacement {
 @@clientName(IpMatchCondition.type, "SourceDestinationType", "csharp");
 @@clientName(PrefixType, "IPMatchConditionPrefixType", "csharp");
 @@clientName(AccessControlListAction.type, "AclActionType", "csharp");
+@@clientName(
+  AccessControlListPatch,
+  "NetworkFabricAccessControlListPatchContent",
+  "csharp"
+);
 @@clientName(Layer3IpPrefixProperties, "Layer3IPPrefixProperties", "csharp");
 @@clientName(
   Layer3IpPrefixProperties.primaryIpv4Prefix,
@@ -2056,7 +2062,7 @@ model IPExtendedCommunityAddOperationProperties {}
 );
 @@clientName(
   AccessControlLists.updateAdministrativeState,
-  "UpdateAdministrativeState",
+  "SetAdministrativeState",
   "csharp"
 );
 @@clientName(
