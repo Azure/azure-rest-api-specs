@@ -14,7 +14,7 @@ namespace Microsoft.Support;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ServiceClassifications")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2026_06_01)
 interface ClassifyServices {
   /**
    * Classify the list of right Azure services.
@@ -31,7 +31,7 @@ interface ClassifyServices {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ServiceClassifications")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2026_06_01)
 interface ClassifyServicesNoSubscription {
   /**
    * Classify the list of right Azure services.
@@ -46,7 +46,6 @@ interface ClassifyServicesNoSubscription {
 }
 
 @@doc(ClassifyServices.classifyServices::parameters.body, "Input to check.");
-@@doc(
-  ClassifyServicesNoSubscription.classifyServices::parameters.body,
+@@doc(ClassifyServicesNoSubscription.classifyServices::parameters.body,
   "Input to check."
 );

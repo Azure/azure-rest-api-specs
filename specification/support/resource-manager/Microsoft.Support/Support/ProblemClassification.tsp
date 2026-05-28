@@ -15,7 +15,7 @@ namespace Microsoft.Support;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ProblemClassifications")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2026_06_01)
 interface ClassifyProblems {
   /**
    * Classify the right problem classifications (categories) available for a specific Azure service.
@@ -42,7 +42,7 @@ interface ClassifyProblems {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ProblemClassifications")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2026_06_01)
 interface ClassifyProblemsNoSubscription {
   /**
    * Classify the right problem classifications (categories) available for a specific Azure service.
@@ -97,8 +97,7 @@ interface ProblemClassifications {
 }
 
 @@doc(ClassifyProblems.classifyProblems::parameters.body, "Input to check.");
-@@doc(
-  ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
+@@doc(ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
   "Input to check."
 );
 @@doc(ProblemClassification.name, "Name of problem classification.");
