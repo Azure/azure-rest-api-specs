@@ -69,7 +69,7 @@ interface NetworkTaps {
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkTap,
     UpdateAdministrativeState,
-    CommonPostActionResponseForDeviceUpdate
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Implements the operation to the underlying resources.")
@@ -87,7 +87,7 @@ interface NetworkTaps {
   @action("resync")
   @added(Versions.v2025_07_15)
   @sharedRoute
-  resync is ArmResourceActionAsync<NetworkTap, void, CommonPostActionResponseForStateUpdate>;
+  resync is ArmResourceActionAsync<NetworkTap, void, NetworkTapResyncResponse>;
 }
 
 @@doc(NetworkTaps.create::parameters.resource, "Request payload.");

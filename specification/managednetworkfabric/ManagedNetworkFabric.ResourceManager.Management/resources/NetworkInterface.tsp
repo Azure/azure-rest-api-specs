@@ -65,7 +65,7 @@ interface NetworkInterfaces {
   updateAdministrativeState is ArmResourceActionAsync<
     NetworkInterface,
     UpdateAdministrativeState,
-    CommonPostActionResponseForStateUpdate
+    UpdateAdministrativeStateResponse
   >;
 }
 
