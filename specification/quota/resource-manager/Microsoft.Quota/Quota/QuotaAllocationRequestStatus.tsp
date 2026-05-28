@@ -220,7 +220,6 @@ alias QuotaAllocationRequestsByGroupQuotaOps = Azure.ResourceManager.Legacy.Exte
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "New list operations for 2026-05-01-preview"
 @armResourceOperations
 @added(Versions.v2026_05_01_preview)
 interface QuotaAllocationRequests {
@@ -228,6 +227,7 @@ interface QuotaAllocationRequests {
    * Get all the quotaAllocationRequests for a resourceProvider/location scoped to a subscription.
    * The filter parameter for location is optional.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "listBySubscription is a subscription-context enumeration under a managementGroup parent rather than a true subscription-scope list, so the rule's heuristic does not apply."
   @added(Versions.v2026_05_01_preview)
   listBySubscription is QuotaAllocationRequestsBySubscriptionOps.List<
     QuotaAllocationRequestStatus,
