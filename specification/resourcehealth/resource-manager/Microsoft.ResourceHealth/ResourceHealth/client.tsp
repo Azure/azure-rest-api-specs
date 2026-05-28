@@ -146,6 +146,8 @@ using Microsoft.ResourceHealth;
   "UpdatedOn",
   "csharp"
 );
+@@clientName(EventSubTypeValues, "ResourceHealthEventSubTypeValue", "csharp");
+@@clientName(OperationDisplay, "ResourceHealthOperationDisplay", "csharp");
 
 // Restore GA SDK types for EventImpactedResourceProperties: string -> ResourceIdentifier/ResourceType
 @@alternateType(
