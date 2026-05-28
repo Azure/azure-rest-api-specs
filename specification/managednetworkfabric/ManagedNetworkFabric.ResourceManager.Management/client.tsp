@@ -302,6 +302,21 @@ union NetworkFabricManagedServiceIdentityTypeReplacement {
   "NetworkFabricAccessControlListPatchContent",
   "csharp"
 );
+@@clientName(InternetGatewayPatch, "NetworkFabricInternetGatewayPatchContent", "csharp");
+@@clientName(InternetGatewayRulePatch, "NetworkFabricInternetGatewayRulePatchContent", "csharp");
+@@clientName(IpCommunityPatch, "NetworkFabricIPCommunityPatchContent", "csharp");
+@@clientName(IpExtendedCommunityPatch, "NetworkFabricIPExtendedCommunityPatchContent", "csharp");
+@@clientName(IpPrefixPatch, "NetworkFabricIPPrefixPatchContent", "csharp");
+@@clientName(L2IsolationDomainPatch, "NetworkFabricL2IsolationDomainPatchContent", "csharp");
+@@clientName(L3IsolationDomainPatch, "NetworkFabricL3IsolationDomainPatchContent", "csharp");
+@@clientName(NeighborGroupPatch, "NetworkFabricNeighborGroupPatchContent", "csharp");
+@@clientName(NetworkDevicePatchParameters, "NetworkDevicePatchContent", "csharp");
+@@clientName(NetworkFabricPatch, "NetworkFabricPatchContent", "csharp");
+@@clientName(NetworkFabricControllerPatch, "NetworkFabricControllerPatchContent", "csharp");
+@@clientName(NetworkPacketBrokerPatch, "NetworkPacketBrokerPatchContent", "csharp");
+@@clientName(NetworkTapPatch, "NetworkTapPatchContent", "csharp");
+@@clientName(NetworkTapRulePatch, "NetworkTapRulePatchContent", "csharp");
+@@clientName(RoutePolicyPatch, "NetworkFabricRoutePolicyPatchContent", "csharp");
 @@clientName(Layer3IpPrefixProperties, "Layer3IPPrefixProperties", "csharp");
 @@clientName(
   Layer3IpPrefixProperties.primaryIpv4Prefix,

@@ -4,6 +4,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("Network Tap Properties defines the properties of the resource.")
 model NetworkTapProperties extends AnnotationResource {
   @doc("ARM resource ID of the Network Packet Broker.")
@@ -132,8 +133,9 @@ model IsolationDomainProperties {
 @doc("Isolation Domain Properties.")
 model IsolationDomainPatchProperties is IsolationDomainProperties;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkFabric resource definition.")
-model NetworkTapPatch extends NetworkRackPatch {
+model NetworkTapPatch extends TagsUpdate {
   @doc("NetworkTap resource patch properties.")
   properties?: NetworkTapPatchProperties;
 
@@ -142,6 +144,7 @@ model NetworkTapPatch extends NetworkRackPatch {
   identity?: ManagedServiceIdentityPatch;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The Network Tap resource patch definition.")
 model NetworkTapPatchProperties extends AnnotationResource {
   @doc("Polling type.")

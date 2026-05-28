@@ -5,6 +5,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("L2Isolation Domain Properties defines the properties of the resource.")
 model L2IsolationDomainProperties extends AnnotationResource {
   @doc("ARM Resource ID of the Network Fabric.")
@@ -54,8 +55,9 @@ model L2IsolationDomainProperties extends AnnotationResource {
   administrativeState?: AdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The L2 Isolation Domain patch resource definition.")
-model L2IsolationDomainPatch extends NetworkRackPatch {
+model L2IsolationDomainPatch extends TagsUpdate {
   @doc("L2 Isolation Domain resource patch properties.")
   properties?: L2IsolationDomainPatchProperties;
 
@@ -64,6 +66,7 @@ model L2IsolationDomainPatch extends NetworkRackPatch {
   identity?: ManagedServiceIdentityPatch;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("L2 Isolation Domain Patch Properties defines the patchable properties of the resource.")
 @withoutDefaultValues
 model L2IsolationDomainPatchProperties extends AnnotationResource {

@@ -99,8 +99,9 @@ model NetworkDevicePatchableProperties {
   serialNumber?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The Network Device Patch Parameters defines the patch parameters of the resource.")
-model NetworkDevicePatchParameters extends NetworkRackPatch {
+model NetworkDevicePatchParameters extends TagsUpdate {
   @doc("Network Device Patch properties.")
   properties?: NetworkDevicePatchParametersProperties;
 
@@ -125,6 +126,7 @@ model RebootProperties {
   rebootType?: RebootType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common object for updateAdministrativeState"
 @doc("Update the administrative state on list of resources.")
 model UpdateDeviceAdministrativeState extends EnableDisableOnResources {
   @doc("Administrative state.")

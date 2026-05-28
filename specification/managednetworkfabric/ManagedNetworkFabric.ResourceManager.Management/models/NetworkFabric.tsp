@@ -5,6 +5,7 @@ using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Network Fabric Properties defines the properties of the resource.")
 model NetworkFabricProperties extends AnnotationResource {
   @doc("Supported Network Fabric SKU.Example: Compute / Aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.")
@@ -287,8 +288,9 @@ model VpnConfigurationPatchableProperties {
   optionAProperties?: VpnOptionAPatchProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Network Fabric resource definition.")
-model NetworkFabricPatch extends NetworkRackPatch {
+model NetworkFabricPatch extends TagsUpdate {
   @doc("Network Fabric Patch properties.")
   properties?: NetworkFabricPatchProperties;
 
@@ -416,6 +418,7 @@ model ManagementNetworkPatchConfiguration {
   workloadVpnConfiguration?: VpnConfigurationPatchableProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Model used for Upgrade Network Fabric Properties")
 model UpgradeNetworkFabricProperties extends UpdateVersion {
   @doc("Action to be performed while upgrading the fabric.")
@@ -429,6 +432,7 @@ model ValidateConfigurationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("option A properties")
 model VpnOptionAProperties extends Layer3IpPrefixProperties {
   @doc("MTU to use for option A peering.")
@@ -452,6 +456,7 @@ model VpnOptionAProperties extends Layer3IpPrefixProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Peering optionA properties")
 model VpnOptionAPatchProperties extends Layer3IpPrefixPatchProperties {
   @doc("MTU to use for option A peering.")
@@ -619,6 +624,7 @@ model FeatureFlagProperties {
   featureFlagValue?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Arm Configuration Diff Response.")
 @added(Versions.v2024_06_15_preview)
 model ArmConfigurationDiffResponse extends CommonErrorResponse {
@@ -641,6 +647,7 @@ model ArmConfigurationDiffResponseProperties {
   configurationDiffUrl?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("View Device Configuration Response.")
 @added(Versions.v2024_06_15_preview)
 model ViewDeviceConfigurationResponse extends CommonErrorResponse {
@@ -699,6 +706,7 @@ model CommitBatchStatusRequest {
   commitBatchId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Commit Batch Status Response.")
 @added(Versions.v2024_06_15_preview)
 model CommitBatchStatusResponse extends CommonErrorResponse {
@@ -741,6 +749,7 @@ model DiscardCommitBatchRequest {
   commitBatchId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2024_06_15_preview)
 model DiscardCommitBatchResponse extends CommonErrorResponse {

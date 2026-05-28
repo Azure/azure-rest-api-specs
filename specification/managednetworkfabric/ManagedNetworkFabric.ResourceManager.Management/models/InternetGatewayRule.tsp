@@ -3,6 +3,7 @@ import "./common.tsp";
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Internet Gateway Rule Properties defines the resource properties.")
 model InternetGatewayRuleProperties extends AnnotationResource {
   @doc("Rules for the InternetGateways")
@@ -50,7 +51,7 @@ model RuleProperties {
 }
 
 @doc("The Internet Gateway Rules patch resource definition.")
-model InternetGatewayRulePatch extends NetworkRackPatch {}
+model InternetGatewayRulePatch is TagsUpdate;
 
 @doc("Specify action.")
 union Action {

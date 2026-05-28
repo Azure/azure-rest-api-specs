@@ -60,8 +60,9 @@ model NetworkPacketBrokerProperties {
   configurationState?: ConfigurationState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkPacketBroker patch resource definition.")
-model NetworkPacketBrokerPatch extends NetworkRackPatch {
+model NetworkPacketBrokerPatch extends TagsUpdate {
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: ManagedServiceIdentityPatch;
