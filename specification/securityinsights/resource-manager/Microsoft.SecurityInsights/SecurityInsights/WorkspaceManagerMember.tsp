@@ -88,6 +88,7 @@ interface WorkspaceManagerMembers {
 
 @@doc(WorkspaceManagerMember.name, "The name of the workspace manager member");
 @@doc(WorkspaceManagerMember.properties, "The workspace manager member object");
-@@doc(WorkspaceManagerMembers.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceManagerMembers.createOrUpdate::parameters.resource,
   "The workspace manager member object"
 );

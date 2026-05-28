@@ -1,0 +1,115 @@
+{
+  "title": "Drills_ValidateForExecution_MaximumSet",
+  "operationId": "Drills_ValidateForExecution",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-03-01-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "body": {
+      "validateForExecutionProperties": {
+        "sourceLocations": [
+          "eastus2-az1"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "drillResourceQualifications": [
+          {
+            "drillsQualifiedResource": {
+              "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
+              "activeLocations": [
+                "eastus-zone2"
+              ],
+              "recoveryLocations": [
+                "eastus-zone3"
+              ],
+              "activePhysicalZones": [
+                "eastus2-az2"
+              ],
+              "recoveryPhysicalZones": [
+                "eastus2-az1"
+              ],
+              "drillInclusionState": "Excluded",
+              "recoveryInclusionState": "Included",
+              "protectionStatus": "Unknown",
+              "selectedProtectionSolutionType": "AzureNative",
+              "resourceProtectionSolutions": [
+                {
+                  "protectionSolutionType": "AzureNative",
+                  "protectionStatus": "Unknown",
+                  "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
+                  "activeLocation": "eastus2",
+                  "recoveryLocations": [
+                    "eastus-zone3"
+                  ],
+                  "replicationRole": "Unknown",
+                  "primaryResource": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
+                  "replicaResources": [
+                    "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-2"
+                  ],
+                  "isAutoFailover": true,
+                  "failoverState": "None",
+                  "testFailoverState": "None",
+                  "activeLocations": [
+                    "eastus2-zone2"
+                  ],
+                  "activePhysicalZones": [
+                    "eastus2-az3"
+                  ]
+                }
+              ],
+              "selectedProtectionSolutionSetting": {
+                "protectionSolutionType": "AzureNative"
+              },
+              "faultState": "SystemNative",
+              "faultProperties": {
+                "customFault": {
+                  "faultName": "umofuzwgczqwyzcoakmrdrkjknykdonhypxibwrweggltsmjayvnlzroxdfalwkfsqvuqtfwhhzcnemndbgxdiciqs",
+                  "scriptResourceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/abhinkRG/providers/Microsoft.Automation/automationAccounts/abhinkAcc/runbooks/viveksi"
+                },
+                "defaultFault": {
+                  "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                  "faultName": "shutdown",
+                  "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+                },
+                "overriddenDefaultFault": {
+                  "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                  "faultName": "shutdown",
+                  "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+                },
+                "availableFaults": [
+                  {
+                    "faultUrn": "urn:csci:microsoft:virtualMachine:shutdown/1.0",
+                    "faultName": "shutdown",
+                    "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
+                  }
+                ]
+              },
+              "resourceProtectionSolutionDisplayName": "Azure Site Recovery",
+              "drillResourceId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1"
+            },
+            "resourceQualificationDetails": {
+              "drillQualificationState": "Qualified",
+              "recoveryQualificationState": "Qualified",
+              "recoveryNotQualifiedReasons": [
+                "axgjrfpjizvetwmtrtt"
+              ],
+              "drillsNotQualifiedReasons": [
+                "ResourceNotIncludedInRecoveryPlan"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

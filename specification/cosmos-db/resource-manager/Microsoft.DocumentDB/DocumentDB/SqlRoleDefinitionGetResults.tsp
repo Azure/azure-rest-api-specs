@@ -42,8 +42,10 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
   createUpdateSqlRoleDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlRoleDefinitionGetResults,
     Request = SqlRoleDefinitionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -53,7 +55,10 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteSqlRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     SqlRoleDefinitionGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -68,9 +73,11 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
 }
 
 @@doc(SqlRoleDefinitionGetResults.name, "The GUID for the Role Definition.");
-@@doc(SqlRoleDefinitionGetResults.properties,
+@@doc(
+  SqlRoleDefinitionGetResults.properties,
   "Properties related to the Role Definition."
 );
-@@doc(SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
+@@doc(
+  SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
   "The properties required to create or update a Role Definition."
 );

@@ -6,7 +6,7 @@ using Azure.Core;
 using Microsoft.Resources;
 
 @@clientName(Microsoft.Resources, "DeploymentsMgmtClient", "python");
-
+@@clientName(Microsoft.Resources, "DeploymentsClient", "javascript");
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,

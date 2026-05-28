@@ -26,7 +26,8 @@ interface OwnershipVouchers {
   >;
 }
 
-@@doc(OwnershipVouchers.validate::parameters.body,
+@@doc(
+  OwnershipVouchers.validate::parameters.body,
   "Ownership vouchers to be validated."
 );
 @@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
