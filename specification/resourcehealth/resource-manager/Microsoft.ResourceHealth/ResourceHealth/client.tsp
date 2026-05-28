@@ -147,6 +147,57 @@ using Microsoft.ResourceHealth;
   "csharp"
 );
 
+// Restore GA SDK types for EventImpactedResourceProperties: string -> ResourceIdentifier/ResourceType
+@@alternateType(
+  EventImpactedResourceProperties.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventImpactedResourceProperties.targetResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
+// Override subscription-level Event resource class names for csharp to match GA SDK names
+@@clientLocation(
+  EventOperationGroup.getBySubscriptionIdAndTrackingId,
+  "ResourceHealthEvent",
+  "csharp"
+);
+@@clientLocation(
+  EventOperationGroup.listBySubscriptionId,
+  "ResourceHealthEvent",
+  "csharp"
+);
+@@clientLocation(
+  EventOperationGroup.listBySubscriptionIdAndEventId,
+  "ResourceHealthEvent",
+  "csharp"
+);
+@@clientLocation(
+  EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
+  "ResourceHealthEvent",
+  "csharp"
+);
+@@clientLocation(
+  EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
+  "ResourceHealthEvent",
+  "csharp"
+);
+
+// Override subscription-level ImpactedResource class names for csharp to match GA SDK names
+@@clientLocation(
+  EventImpactedResources.get,
+  "ResourceHealthEventImpactedResources",
+  "csharp"
+);
+@@clientLocation(
+  EventImpactedResources.listBySubscriptionIdAndEventId,
+  "ResourceHealthEventImpactedResources",
+  "csharp"
+);
+
 // Separate subscription and tenant event resources for csharp to match GA SDK structure
 @@clientLocation(
   TenantEventOperationGroup.getByTenantIdAndTrackingId,
@@ -170,11 +221,11 @@ using Microsoft.ResourceHealth;
 );
 @@clientLocation(
   ImpactedResources.getByTenantId,
-  "TenantEventImpactedResources",
+  "TenantResourceHealthEventImpactedResources",
   "csharp"
 );
 @@clientLocation(
   ImpactedResources.listByTenantIdAndEventId,
-  "TenantEventImpactedResources",
+  "TenantResourceHealthEventImpactedResources",
   "csharp"
 );
