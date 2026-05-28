@@ -84,10 +84,12 @@ model CalculateCostPlan {
   quantization?: string;
 
   @visibility(Lifecycle.Read)
+  @minValue(1)
   @doc("Number of VMs required to host one replica on this SKU.")
   vmsPerReplica: int32;
 
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @doc("Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region.")
   maxAvailableReplicas: int32;
 
@@ -96,10 +98,12 @@ model CalculateCostPlan {
   servingPerformanceEstimation?: ServingPerformanceEstimation;
 
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @doc("On-demand hourly price for a single VM of this SKU, in `currency`.")
   vmHourlyPrice: float64;
 
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @doc("Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`.")
   totalHourlyPrice?: float64;
 

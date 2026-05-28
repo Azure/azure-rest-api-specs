@@ -900,8 +900,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -917,7 +928,11 @@
           "ModelSources_Delete_MaximumSet": {
             "$ref": "./examples/ModelSources_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces": {
@@ -2126,12 +2141,14 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of VMs required to host one replica on this SKU.",
+          "minimum": 1,
           "readOnly": true
         },
         "maxAvailableReplicas": {
           "type": "integer",
           "format": "int32",
           "description": "Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region.",
+          "minimum": 0,
           "readOnly": true
         },
         "servingPerformanceEstimation": {
@@ -2143,12 +2160,14 @@
           "type": "number",
           "format": "double",
           "description": "On-demand hourly price for a single VM of this SKU, in `currency`.",
+          "minimum": 0,
           "readOnly": true
         },
         "totalHourlyPrice": {
           "type": "number",
           "format": "double",
           "description": "Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`.",
+          "minimum": 0,
           "readOnly": true
         },
         "priceAsOf": {

@@ -18,31 +18,26 @@
               "modelResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiModels/9806f0c862fdd920",
               "modelSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
               "performanceMode": "Balanced",
-              "vmSize": "ecyhtyrhzenvimowshz",
+              "vmSize": "Standard_NC96ads_A100_v4",
               "scale": {
                 "autoscale": {
-                  "minReplicas": 22,
-                  "maxReplicas": 28
-                }
-              },
-              "overrides": {
-                "values": {
-                  "key8012": "m"
+                  "minReplicas": 2,
+                  "maxReplicas": 8
                 }
               },
               "status": {
-                "endpoint": "https://microsoft.com/azgfjed",
-                "engine": "nrbcdiajeeapxyujhiaodm",
-                "engineVersion": "rxgjiqmdqinmdekhwiwjttdfdvn",
-                "maxModelLen": 22,
-                "quantization": "kqycribwnygkbufdlduehdpxm",
-                "desiredReplicas": 18,
-                "currentReplicas": 16,
-                "peakTokensPerMinute": 30,
-                "estimatedProvisionTimeSeconds": 10
+                "endpoint": "https://team-alpha.aks-cluster.eastus.aksapp.io/v1",
+                "engine": "vllm",
+                "engineVersion": "0.20.0",
+                "maxModelLen": 32768,
+                "quantization": "fp16",
+                "desiredReplicas": 4,
+                "currentReplicas": 4,
+                "peakTokensPerMinute": 12000,
+                "estimatedProvisionTimeSeconds": 900
               }
             },
-            "eTag": "xw",
+            "eTag": "\"abc123def456\"",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace-1/modelDeployments/deployment-1",
             "name": "deployment-1",
             "type": "Microsoft.ContainerService/aiManagers/namespaces/modelDeployments",

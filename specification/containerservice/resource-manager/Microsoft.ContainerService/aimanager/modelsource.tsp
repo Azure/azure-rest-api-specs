@@ -88,7 +88,7 @@ interface ModelSources {
       IfNoneMatchParameters<ModelSource>
   >;
 
-  delete is ArmResourceDeleteSync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     ModelSource,
     Azure.ResourceManager.Foundations.BaseParameters<ModelSource> &
       IfMatchParameters<ModelSource>
