@@ -10,7 +10,7 @@ model NetworkTapRuleProperties {
   ...AnnotationResource;
 
   @doc("Input method to configure Network Tap Rule.")
-  configurationType?: ConfigurationType;
+  configurationType: ConfigurationType;
 
   @doc("Network Tap Rules file URL.")
   tapRulesUrl?: url;

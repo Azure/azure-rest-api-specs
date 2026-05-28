@@ -14,7 +14,7 @@ model NetworkDeviceProperties {
 
   @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
-  serialNumber?: string;
+  serialNumber: string;
 
   @doc("The selection of the managed identity to use with this storage account. The identity type must be either system assigned or user assigned.")
   @added(Versions.v2025_07_15)
