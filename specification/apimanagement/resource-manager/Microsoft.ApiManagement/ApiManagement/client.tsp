@@ -1235,7 +1235,9 @@ op replacePurge(
   utcDateTime,
   "csharp"
 );
-@@alternateType(ApiEntityBaseContract.termsOfServiceUrl, url, "csharp");
+// NOTE: @@alternateType for ApiEntityBaseContract.termsOfServiceUrl -> url
+// intentionally removed; GA 1.3.0 shipped this as `string TermsOfServiceLink`,
+// so we keep the spec string type and only @@clientName-rename it (see below).
 @@alternateType(ConnectivityHop.address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(
   ConnectivityHop.resourceId,
@@ -1471,3 +1473,26 @@ op replacePurge(
 // AssociationContractPropertiesProvisioningState rename intentionally omitted -
 // the type is emitted from an inline anonymous enum on the `provisioningState`
 // property, so it cannot be targeted by @@clientName.
+
+// Back-compat property renames for GA 1.3.0 - new spec field names differ from
+// the names shipped in the last GA. Re-map each new field to its GA C# name.
+@@clientName(
+  Microsoft.ApiManagement.ApiEntityBaseContract.subscriptionRequired,
+  "isSubscriptionRequired",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiEntityBaseContract.termsOfServiceUrl,
+  "termsOfServiceLink",
+  "csharp"
+);
+@@clientName(
+  Microsoft.ApiManagement.ApiContractProperties.serviceUrl,
+  "serviceLink",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.ApiManagement.ApiContractProperties.sourceApiId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
