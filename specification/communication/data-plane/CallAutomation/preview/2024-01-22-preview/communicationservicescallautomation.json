@@ -4031,21 +4031,28 @@
     "PlayCanceled": {
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4349,21 +4356,28 @@
     "RecognizeCanceled": {
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "serverCallId": {
           "description": "Server call ID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
-          "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5120,6 +5134,17 @@
     "TranscriptionFailed": {
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "transcriptionUpdateResult": {
+          "$ref": "#/definitions/TranscriptionUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -5132,23 +5157,23 @@
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation"
-        },
-        "transcriptionUpdateResult": {
-          "$ref": "#/definitions/TranscriptionUpdate"
         }
       }
     },
     "TranscriptionStarted": {
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "transcriptionUpdateResult": {
+          "$ref": "#/definitions/TranscriptionUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -5161,17 +5186,6 @@
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation"
-        },
-        "transcriptionUpdateResult": {
-          "$ref": "#/definitions/TranscriptionUpdate"
         }
       }
     },
@@ -5217,6 +5231,17 @@
     "TranscriptionStopped": {
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "transcriptionUpdateResult": {
+          "$ref": "#/definitions/TranscriptionUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -5229,17 +5254,6 @@
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation"
-        },
-        "transcriptionUpdateResult": {
-          "$ref": "#/definitions/TranscriptionUpdate"
         }
       }
     },
@@ -5268,6 +5282,17 @@
     "TranscriptionUpdated": {
       "type": "object",
       "properties": {
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        },
+        "transcriptionUpdateResult": {
+          "$ref": "#/definitions/TranscriptionUpdate"
+        },
         "callConnectionId": {
           "description": "Call connection ID.",
           "type": "string",
@@ -5280,17 +5305,6 @@
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling answerCall action to correlate the request to the response event.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resultInformation": {
-          "$ref": "#/definitions/ResultInformation"
-        },
-        "transcriptionUpdateResult": {
-          "$ref": "#/definitions/TranscriptionUpdate"
         }
       }
     },
