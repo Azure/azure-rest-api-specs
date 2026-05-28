@@ -63,7 +63,7 @@ alias AdminKeysOps = Azure.ResourceManager.Legacy.RoutedOperations<
   AdminKeysParentParameters,
   AdminKeysParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey",
   }
 >;
 
@@ -92,7 +92,7 @@ alias QueryKeysOps = Azure.ResourceManager.Legacy.RoutedOperations<
   QueryKeysParentParameters,
   QueryKeysParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/createQueryKey",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey",
   }
 >;
 

@@ -2013,6 +2013,9 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(ShareAccessProtocol.NFS, "Nfs", "csharp");
 @@clientName(RoleTypes.IOT, "IoT", "csharp");
 @@clientName(RoleTypes.ASA, "Asa", "csharp");
+
+@@clientName(MetricDimension_V1, "MetricDimensionV1", "python");
+@@clientName(MetricSpecification_V1, "MetricSpecificationV1", "python");
 @@clientName(RoleTypes.MEC, "Mec", "csharp");
 @@clientName(NetworkGroup.NonRDMA, "NonRdma", "csharp");
 @@clientName(NetworkGroup.RDMA, "Rdma", "csharp");
