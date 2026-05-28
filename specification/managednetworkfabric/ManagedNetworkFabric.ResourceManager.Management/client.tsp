@@ -105,7 +105,11 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(Layer4Protocol.TCP, "Tcp", "csharp");
 @@clientName(Layer4Protocol.UDP, "Udp", "csharp");
 @@clientName(Layer4Protocol.SCTP, "Sctp", "csharp");
-@@clientName(Microsoft.ManagedNetworkFabric.AclType, "NetworkFabricAclType", "csharp");
+@@clientName(
+  Microsoft.ManagedNetworkFabric.AclType,
+  "NetworkFabricAclType",
+  "csharp"
+);
 @@clientName(BitRate, "NetworkFabricBitRate", "csharp");
 @@clientName(BitRateUnit, "NetworkFabricBitRateUnit", "csharp");
 @@clientName(BurstSize, "NetworkFabricBurstSize", "csharp");
@@ -134,7 +138,11 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@clientName(CommitStage, "NetworkFabricCommitStage", "csharp");
-@@clientName(Microsoft.ManagedNetworkFabric.DeviceRole, "NetworkFabricDeviceRole", "csharp");
+@@clientName(
+  Microsoft.ManagedNetworkFabric.DeviceRole,
+  "NetworkFabricDeviceRole",
+  "csharp"
+);
 @@clientName(DeviceRoCommand, "NetworkFabricDeviceReadOnlyCommand", "csharp");
 @@clientName(DeviceRwCommand, "NetworkFabricDeviceReadWriteCommand", "csharp");
 @@clientName(ExtendedVlan, "NetworkFabricExtendedVlan", "csharp");
@@ -302,21 +310,65 @@ union NetworkFabricManagedServiceIdentityTypeReplacement {
   "NetworkFabricAccessControlListPatchContent",
   "csharp"
 );
-@@clientName(InternetGatewayPatch, "NetworkFabricInternetGatewayPatchContent", "csharp");
-@@clientName(InternetGatewayRulePatch, "NetworkFabricInternetGatewayRulePatchContent", "csharp");
-@@clientName(IpCommunityPatch, "NetworkFabricIPCommunityPatchContent", "csharp");
-@@clientName(IpExtendedCommunityPatch, "NetworkFabricIPExtendedCommunityPatchContent", "csharp");
+@@clientName(
+  InternetGatewayPatch,
+  "NetworkFabricInternetGatewayPatchContent",
+  "csharp"
+);
+@@clientName(
+  InternetGatewayRulePatch,
+  "NetworkFabricInternetGatewayRulePatchContent",
+  "csharp"
+);
+@@clientName(
+  IpCommunityPatch,
+  "NetworkFabricIPCommunityPatchContent",
+  "csharp"
+);
+@@clientName(
+  IpExtendedCommunityPatch,
+  "NetworkFabricIPExtendedCommunityPatchContent",
+  "csharp"
+);
 @@clientName(IpPrefixPatch, "NetworkFabricIPPrefixPatchContent", "csharp");
-@@clientName(L2IsolationDomainPatch, "NetworkFabricL2IsolationDomainPatchContent", "csharp");
-@@clientName(L3IsolationDomainPatch, "NetworkFabricL3IsolationDomainPatchContent", "csharp");
-@@clientName(NeighborGroupPatch, "NetworkFabricNeighborGroupPatchContent", "csharp");
-@@clientName(NetworkDevicePatchParameters, "NetworkDevicePatchContent", "csharp");
+@@clientName(
+  L2IsolationDomainPatch,
+  "NetworkFabricL2IsolationDomainPatchContent",
+  "csharp"
+);
+@@clientName(
+  L3IsolationDomainPatch,
+  "NetworkFabricL3IsolationDomainPatchContent",
+  "csharp"
+);
+@@clientName(
+  NeighborGroupPatch,
+  "NetworkFabricNeighborGroupPatchContent",
+  "csharp"
+);
+@@clientName(
+  NetworkDevicePatchParameters,
+  "NetworkDevicePatchContent",
+  "csharp"
+);
 @@clientName(NetworkFabricPatch, "NetworkFabricPatchContent", "csharp");
-@@clientName(NetworkFabricControllerPatch, "NetworkFabricControllerPatchContent", "csharp");
-@@clientName(NetworkPacketBrokerPatch, "NetworkPacketBrokerPatchContent", "csharp");
+@@clientName(
+  NetworkFabricControllerPatch,
+  "NetworkFabricControllerPatchContent",
+  "csharp"
+);
+@@clientName(
+  NetworkPacketBrokerPatch,
+  "NetworkPacketBrokerPatchContent",
+  "csharp"
+);
 @@clientName(NetworkTapPatch, "NetworkTapPatchContent", "csharp");
 @@clientName(NetworkTapRulePatch, "NetworkTapRulePatchContent", "csharp");
-@@clientName(RoutePolicyPatch, "NetworkFabricRoutePolicyPatchContent", "csharp");
+@@clientName(
+  RoutePolicyPatch,
+  "NetworkFabricRoutePolicyPatchContent",
+  "csharp"
+);
 @@clientName(Layer3IpPrefixProperties, "Layer3IPPrefixProperties", "csharp");
 @@clientName(
   Layer3IpPrefixProperties.primaryIpv4Prefix,
@@ -1670,10 +1722,26 @@ model IPCommunityAddOperationProperties {}
 model IPExtendedCommunityAddOperationProperties {}
 @@access(IPCommunityAddOperationProperties, Access.public, "csharp");
 @@access(IPExtendedCommunityAddOperationProperties, Access.public, "csharp");
-@@usage(IPCommunityAddOperationProperties, Usage.input | Usage.output | Usage.json, "csharp");
-@@usage(IPExtendedCommunityAddOperationProperties, Usage.input | Usage.output | Usage.json, "csharp");
-@@clientName(IPCommunityAddOperationProperties, "IPCommunityAddOperationProperties", "csharp");
-@@clientName(IPExtendedCommunityAddOperationProperties, "IPExtendedCommunityAddOperationProperties", "csharp");
+@@usage(
+  IPCommunityAddOperationProperties,
+  Usage.input | Usage.output | Usage.json,
+  "csharp"
+);
+@@usage(
+  IPExtendedCommunityAddOperationProperties,
+  Usage.input | Usage.output | Usage.json,
+  "csharp"
+);
+@@clientName(
+  IPCommunityAddOperationProperties,
+  "IPCommunityAddOperationProperties",
+  "csharp"
+);
+@@clientName(
+  IPExtendedCommunityAddOperationProperties,
+  "IPExtendedCommunityAddOperationProperties",
+  "csharp"
+);
 @@access(L2IsolationDomainPatchProperties, Access.internal, "csharp");
 @@access(L2IsolationDomainProperties, Access.internal, "csharp");
 @@access(NetworkBootstrapInterfacePatchProperties, Access.internal, "csharp");
@@ -2059,10 +2127,22 @@ model IPExtendedCommunityAddOperationProperties {}
 );
 
 // Preserve shipped C# operation method names and compatibility return types.
-@@clientName(NetworkInterfaces.updateAdministrativeState, "SetAdministrativeState", "csharp");
-@@clientName(NetworkDevices.updateAdministrativeState, "SetAdministrativeState", "csharp");
+@@clientName(
+  NetworkInterfaces.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  NetworkDevices.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
 @@clientName(NetworkDevices.reboot, "Restart", "csharp");
-@@clientName(NetworkDevices.refreshConfiguration, "StartRefreshConfiguration", "csharp");
+@@clientName(
+  NetworkDevices.refreshConfiguration,
+  "StartRefreshConfiguration",
+  "csharp"
+);
 @@clientName(NetworkDevices.upgrade, "StartUpgrade", "csharp");
 @@clientName(
   AccessControlLists.updateAdministrativeState,
@@ -2079,13 +2159,41 @@ model IPExtendedCommunityAddOperationProperties {}
   "SetStaticRouteBfdAdministrativeState",
   "csharp"
 );
-@@clientName(InternalNetworks.updateAdministrativeState, "SetAdministrativeState", "csharp");
-@@clientName(InternalNetworks.updateBgpAdministrativeState, "SetBgpAdministrativeState", "csharp");
-@@clientName(InternalNetworks.updateStaticRouteBfdAdministrativeState, "SetStaticRouteBfdAdministrativeState", "csharp");
-@@clientName(L2IsolationDomains.updateAdministrativeState, "SetAdministrativeState", "csharp");
-@@clientName(L3IsolationDomains.updateAdministrativeState, "SetAdministrativeState", "csharp");
-@@clientName(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState, "SetNpbStaticRouteBfdAdministrativeState", "csharp");
-@@clientName(NetworkToNetworkInterconnects.updateAdministrativeState, "SetAdministrativeState", "csharp");
+@@clientName(
+  InternalNetworks.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  InternalNetworks.updateBgpAdministrativeState,
+  "SetBgpAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  InternalNetworks.updateStaticRouteBfdAdministrativeState,
+  "SetStaticRouteBfdAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  L2IsolationDomains.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  L3IsolationDomains.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState,
+  "SetNpbStaticRouteBfdAdministrativeState",
+  "csharp"
+);
+@@clientName(
+  NetworkToNetworkInterconnects.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
 @@clientName(
   NetworkFabrics.commitConfiguration,
   "CommitConfiguration",
@@ -2093,16 +2201,36 @@ model IPExtendedCommunityAddOperationProperties {}
 );
 @@clientName(NetworkFabrics.deprovision, "StartDeprovision", "csharp");
 @@clientName(NetworkFabrics.provision, "StartProvision", "csharp");
-@@clientName(NetworkFabrics.refreshConfiguration, "StartRefreshConfiguration", "csharp");
+@@clientName(
+  NetworkFabrics.refreshConfiguration,
+  "StartRefreshConfiguration",
+  "csharp"
+);
 @@clientName(NetworkFabrics.upgrade, "StartUpgrade", "csharp");
-@@clientName(NetworkFabrics.updateInfraManagementBfdConfiguration, "SetInfraManagementBfdConfiguration", "csharp");
-@@clientName(NetworkFabrics.updateWorkloadManagementBfdConfiguration, "SetWorkloadManagementBfdConfiguration", "csharp");
+@@clientName(
+  NetworkFabrics.updateInfraManagementBfdConfiguration,
+  "SetInfraManagementBfdConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkFabrics.updateWorkloadManagementBfdConfiguration,
+  "SetWorkloadManagementBfdConfiguration",
+  "csharp"
+);
 @@clientName(NetworkFabrics.getTopology, "GetTopologyDetails", "csharp");
 @@clientName(GetTopologyResponse, "NetworkFabricTopologyResult", "csharp");
-@@clientName(RoutePolicies.updateAdministrativeState, "SetAdministrativeState", "csharp");
+@@clientName(
+  RoutePolicies.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
 @@clientName(NetworkTapRules.resync, "StartResync", "csharp");
 @@clientName(NetworkTaps.resync, "StartResync", "csharp");
-@@clientName(NetworkTaps.updateAdministrativeState, "SetAdministrativeState", "csharp");
+@@clientName(
+  NetworkTaps.updateAdministrativeState,
+  "SetAdministrativeState",
+  "csharp"
+);
 
 @@clientName(
   Microsoft.ManagedNetworkFabric.IPAddressType,
