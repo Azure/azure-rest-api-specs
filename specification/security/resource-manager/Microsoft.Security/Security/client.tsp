@@ -1129,6 +1129,10 @@ model CSharpSecurityAssessmentStatusResult
   "current",
   "python"
 );
+// The C# management generator recognizes these resources as singleton resources only
+// when the final name parameter is modeled as a closed literal union. Keep the
+// service TypeSpec enum unchanged for other languages and apply the fixed name
+// only to C# to preserve the singleton-shaped SDK API.
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 @clientName("AdvancedThreatProtectionSettingName")
 union CSharpAdvancedThreatProtectionSettingName {
@@ -1153,6 +1157,10 @@ union CSharpAdvancedThreatProtectionSettingName {
   "default",
   "python"
 );
+// The C# management generator recognizes these resources as singleton resources only
+// when the final name parameter is modeled as a closed literal union. Keep the
+// service TypeSpec enum unchanged for other languages and apply the fixed name
+// only to C# to preserve the singleton-shaped SDK API.
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
 @clientName("ServerVulnerabilityAssessmentName", "csharp")
 union CSharpServerVulnerabilityAssessmentName {
