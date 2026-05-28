@@ -44,15 +44,6 @@ input-file:
   - Microsoft.EdgeZones/stable/2026-10-01/edgezones.json
 ```
 
-### Tag: package-2024-04-01-preview
-
-These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-04-01-preview'
-input-file:
-  - Microsoft.EdgeZones/preview/2024-04-01-preview/edgezones.json
-```
-
 ---
 
 # Code Generation
