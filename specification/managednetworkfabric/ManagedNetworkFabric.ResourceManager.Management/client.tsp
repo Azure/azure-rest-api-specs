@@ -824,11 +824,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   "csharp"
 );
 @@alternateType(
-  InternetGatewayProperties.ipv4Address,
-  Azure.Core.ipV4Address,
-  "csharp"
-);
-@@alternateType(
   NeighborGroupDestination.ipv4Addresses,
   Azure.Core.ipV4Address[],
   "csharp"
@@ -1586,7 +1581,7 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 );
 @@clientName(NetworkInterfaceProperties.ipv4Address, "IPv4Address", "csharp");
 @@clientName(NetworkInterfaceProperties.ipv6Address, "IPv6Address", "csharp");
-@@clientName(InternetGatewayProperties.ipv4Address, "IPv4Address", "csharp");
+@@clientName(InternetGatewayProperties.ipv4Address, "IPV4Address", "csharp");
 @@clientName(NeighborGroupDestination.ipv4Addresses, "IPv4Addresses", "csharp");
 @@clientName(NeighborGroupDestination.ipv6Addresses, "IPv6Addresses", "csharp");
 @@clientName(BmpConfigurationProperties.stationIp, "StationIP", "csharp");
