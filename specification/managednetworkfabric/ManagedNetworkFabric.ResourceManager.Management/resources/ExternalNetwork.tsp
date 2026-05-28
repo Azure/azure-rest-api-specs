@@ -61,7 +61,7 @@ interface ExternalNetworks {
   updateAdministrativeState is ArmResourceActionAsync<
     ExternalNetwork,
     UpdateAdministrativeState,
-    CommonPostActionResponseForStateUpdate
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Update Static Route BFD for external Network.")
@@ -82,7 +82,7 @@ interface ExternalNetworks {
   updateStaticRouteBfdAdministrativeState is ArmResourceActionAsync<
     ExternalNetwork,
     UpdateAdministrativeState,
-    CommonPostActionResponseForStateUpdate
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("BFD administrative state for either static or bgp for internalNetwork.")

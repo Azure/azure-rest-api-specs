@@ -2082,12 +2082,12 @@ model IPExtendedCommunityAddOperationProperties {}
 );
 @@clientName(
   ExternalNetworks.updateAdministrativeState,
-  "UpdateAdministrativeState",
+  "SetAdministrativeState",
   "csharp"
 );
 @@clientName(
   ExternalNetworks.updateStaticRouteBfdAdministrativeState,
-  "UpdateStaticRouteBfdAdministrativeState",
+  "SetStaticRouteBfdAdministrativeState",
   "csharp"
 );
 @@clientName(
