@@ -507,6 +507,7 @@ using Azure.AI.Projects;
 
 @@clientName(Skill, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+@@clientName(DeleteSkillVersionResponse, "DeleteSkillVersionResult", "python");
 @@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------
