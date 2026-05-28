@@ -1700,48 +1700,6 @@
         ]
       }
     },
-    "AdrLinkingState": {
-      "type": "string",
-      "description": "The state of ADR linking for a provisioning service.",
-      "enum": [
-        "NotLinked",
-        "InProgress",
-        "Succeeded",
-        "Failed",
-        "Orphaned"
-      ],
-      "x-ms-enum": {
-        "name": "AdrLinkingState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotLinked",
-            "value": "NotLinked",
-            "description": "The provisioning service is not linked to a Device Registry namespace."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The linking process is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The linking process succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The linking process failed."
-          },
-          {
-            "name": "Orphaned",
-            "value": "Orphaned",
-            "description": "The linked Device Registry namespace no longer exists."
-          }
-        ]
-      }
-    },
     "AllocationPolicy": {
       "type": "string",
       "description": "Allocation policy to be used by this provisioning service.",
@@ -1932,7 +1890,7 @@
           "description": "Azure location of the linked Device Registry namespace."
         },
         "linkingState": {
-          "$ref": "#/definitions/AdrLinkingState",
+          "$ref": "#/definitions/LinkingState",
           "description": "The linking state of this namespace."
         }
       },
@@ -2268,6 +2226,48 @@
       "x-ms-enum": {
         "name": "IpFilterTargetType",
         "modelAsString": false
+      }
+    },
+    "LinkingState": {
+      "type": "string",
+      "description": "The state of ADR linking for a provisioning service.",
+      "enum": [
+        "NotLinked",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Orphaned"
+      ],
+      "x-ms-enum": {
+        "name": "LinkingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotLinked",
+            "value": "NotLinked",
+            "description": "The provisioning service is not linked to a Device Registry namespace."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The linking process is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The linking process succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The linking process failed."
+          },
+          {
+            "name": "Orphaned",
+            "value": "Orphaned",
+            "description": "The linked Device Registry namespace no longer exists."
+          }
+        ]
       }
     },
     "NameAvailabilityInfo": {

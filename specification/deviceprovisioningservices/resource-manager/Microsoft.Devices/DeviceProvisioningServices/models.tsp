@@ -619,7 +619,7 @@ model DeviceRegistryNamespaceDescription {
    * The linking state of this namespace.
    */
   @added(Versions.v2026_06_01_preview)
-  linkingState?: AdrLinkingState;
+  linkingState?: LinkingState;
 }
 
 /**
@@ -992,7 +992,7 @@ model CertificateBodyDescription {
  * The state of ADR linking for a provisioning service.
  */
 @added(Versions.v2026_06_01_preview)
-union AdrLinkingState {
+union LinkingState {
   string,
 
   /**
