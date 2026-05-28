@@ -5,11 +5,13 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Sql;
 
 // TODO: remove this when breaking change is allowed
-@@alternateType(SecurityAlertsPolicyProperties.state,
+@@alternateType(
+  SecurityAlertsPolicyProperties.state,
   SecurityAlertPolicyState,
   "java"
 );
-@@alternateType(ServerProperties.publicNetworkAccess,
+@@alternateType(
+  ServerProperties.publicNetworkAccess,
   ServerNetworkAccessFlag,
   "java"
 );
@@ -18,39 +20,46 @@ using Microsoft.Sql;
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
-@@clientName(SyncGroupProperties.hubDatabaseUserName,
+@@clientName(
+  SyncGroupProperties.hubDatabaseUserName,
   "hubDatabaseUsername",
   "java"
 );
 
 @@usage(ServerDnsAlias, Azure.ClientGenerator.Core.Usage.input, "java");
 
-@@alternateType(CheckNameAvailabilityResourceType,
+@@alternateType(
+  CheckNameAvailabilityResourceType,
   "Microsoft.Sql/servers",
   "java"
 );
 
 @@alternateType(ServerProperties.minimalTlsVersion, string, "java");
 
-@@clientName(DNSRefreshOperationStatus,
+@@clientName(
+  DNSRefreshOperationStatus,
   "DnsRefreshConfigurationPropertiesStatus",
   "java"
 );
 @@clientName(ReplicationModeType, "ReplicationMode", "java");
-@@clientName(UpsertManagedServerOperationStepWithEstimatesAndDurationStatus,
+@@clientName(
+  UpsertManagedServerOperationStepWithEstimatesAndDurationStatus,
   "Status",
   "java"
 );
 
-@@clientName(SqlVulnerabilityAssessmentScanRecord,
+@@clientName(
+  SqlVulnerabilityAssessmentScanRecord,
   "VulnerabilityAssessmentScanRecordForSql",
   "go"
 );
-@@clientName(SqlVulnerabilityAssessmentScanRecordProperties,
+@@clientName(
+  SqlVulnerabilityAssessmentScanRecordProperties,
   "VulnerabilityAssessmentScanRecordForSqlProperties",
   "go"
 );
-@@clientName(SqlVulnerabilityAssessmentScanError,
+@@clientName(
+  SqlVulnerabilityAssessmentScanError,
   "VulnerabilityAssessmentScanForSqlError",
   "go"
 );
@@ -82,23 +91,28 @@ using Microsoft.Sql;
 
 @@alternateType(BlobAuditingPolicyName, "default", "go,javascript,python");
 @@alternateType(DataMaskingPolicyName, "Default", "javascript,python");
-@@alternateType(CurrentSensitivityLabelSource,
+@@alternateType(
+  CurrentSensitivityLabelSource,
   "current",
   "go,javascript,python"
 );
-@@alternateType(RecommendedSensitivityLabelSource,
+@@alternateType(
+  RecommendedSensitivityLabelSource,
   "recommended",
   "go,javascript,python"
 );
-@@alternateType(VulnerabilityAssessmentSystemDatabaseName,
+@@alternateType(
+  VulnerabilityAssessmentSystemDatabaseName,
   "master",
   "go,javascript,python"
 );
-@@alternateType(CheckNameAvailabilityResourceType,
+@@alternateType(
+  CheckNameAvailabilityResourceType,
   "Microsoft.Sql/servers",
   "go"
 );
-@@clientName(SqlVulnerabilityAssessmentScanRecordListResult,
+@@clientName(
+  SqlVulnerabilityAssessmentScanRecordListResult,
   "VulnerabilityAssessmentScanRecordForSQLListResult ",
   "go"
 );
