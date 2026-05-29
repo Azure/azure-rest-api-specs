@@ -202,7 +202,7 @@ If **none** of these signals are present, the new API version is being authored 
 - Object definitions **MUST NOT** be free-form (i.e., `"type": "object"` with no `properties` defined and no `$ref`). Every object must have a defined schema. If the service truly needs to accept arbitrary key-value data, use `additionalProperties` with explicit justification.
 - Array properties **MUST** have an `items` schema defined.
 - Date/time properties **MUST** use `"format": "date-time"` (RFC 3339).
-- UUID properties **MUST** use `"format": "uuid"` (RFC 4122).
+- UUID properties: on **data-plane** specs use `"format": "uuid"` (RFC 4122). On **ARM control-plane** specs `"format": "uuid"` is conditional — the required `GuidUsage` LintDiff rule (`R3017`) forbids it without Azure API review board sign-off and a scoped per-property suppression. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) and [`armapi-review.instructions.md` §8.4](./armapi-review.instructions.md) for the decision tree.
 - ARM resource ID properties **SHOULD** use `"format": "arm-id"` to enable ARM-aware tooling and SDK generation.
 - URI/URL properties **MUST** use `"format": "uri"` to enable SDK validation and proper typing.
 - Duration properties **SHOULD** use fixed time intervals with the unit in the property name (e.g. `backupTimeInMinutes`, `ttlSeconds`). Use ISO 8601 durations only when variable calendar intervals are needed.

@@ -519,7 +519,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
   - Properties that represent a date, time, or timestamp **MUST** use `"type": "string", "format": "date-time"` (ISO 8601). Do not use a plain unformatted string for timestamps.
   - Properties that represent a duration **MUST** use `"type": "string", "format": "duration"` (ISO 8601 duration).
   - Properties that represent a URL or URI **MUST** use `"type": "string", "format": "uri"`.
-  - Properties that represent a UUID/GUID **MUST** use `"type": "string", "format": "uuid"`.
+  - Properties that represent a UUID/GUID: **conditional**. On ARM control-plane the required `GuidUsage` LintDiff rule (`R3017`) forbids `"format": "uuid"` without Azure API review board sign-off and a scoped per-property suppression. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree, the acceptable-property list (AAD/Entra `tenantId`, `clientId`, `principalId`, etc.), the unacceptable-property list (opaque platform-assigned IDs, resource-internal IDs), and the required suppression form. Do not blanket-recommend `"format": "uuid"` on ARM specs.
   - Properties that represent a Base64-encoded value **MUST** use `"type": "string", "format": "byte"`.
   - Properties that represent a binary value **MUST** use `"type": "string", "format": "binary"`.
   - Properties that represent a password or secret **MUST** use `"type": "string", "format": "password"` and `"x-ms-secret": true`.

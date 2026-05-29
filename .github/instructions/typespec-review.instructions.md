@@ -149,6 +149,7 @@ fix snippets, or the agent's posted-by marker.
 
 - String properties with well-known formats **SHOULD** use appropriate
   scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
+  - **ARM caveat for `uuid`:** the TypeSpec `uuid` scalar emits `"format": "uuid"` in the generated Swagger, which on ARM control-plane specs triggers the required `GuidUsage` LintDiff rule (`R3017`). Before recommending or applying `uuid` on an ARM spec, consult [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the decision tree, the acceptable/unacceptable property lists, and the required scoped-suppression form. Do not blanket-recommend `uuid` on ARM specs.
 - Datetime properties **MUST** use `utcDateTime` (not `string`).
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/no-string-datetime`)
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
@@ -162,7 +163,10 @@ fix snippets, or the agent's posted-by marker.
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
-  of ID they hold (uuid, armResourceIdentifier, or documented format).
+  of ID they hold (`armResourceIdentifier`, or a documented format). For
+  GUID-valued IDs, see the ARM caveat above and
+  [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md)
+  before choosing `uuid`.
 - Array properties **MUST** have their element type defined.
 - **AVOID** using `unknown` type.
 
