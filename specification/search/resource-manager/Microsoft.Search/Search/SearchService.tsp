@@ -63,7 +63,7 @@ alias AdminKeysOps = Azure.ResourceManager.Legacy.RoutedOperations<
   AdminKeysParentParameters,
   AdminKeysParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey",
   }
 >;
 
@@ -92,7 +92,7 @@ alias QueryKeysOps = Azure.ResourceManager.Legacy.RoutedOperations<
   QueryKeysParentParameters,
   QueryKeysParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/createQueryKey",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey",
   }
 >;
 
@@ -472,13 +472,16 @@ interface SearchServices {
   >;
 }
 
-@@doc(SearchService.name,
+@@doc(
+  SearchService.name,
   "The name of the Azure AI Search service associated with the specified resource group."
 );
 @@doc(SearchService.properties, "Properties of the search service.");
-@@doc(SearchServices.createOrUpdate::parameters.resource,
+@@doc(
+  SearchServices.createOrUpdate::parameters.resource,
   "The definition of the search service to create or update. Create applies to both serverless and dedicated search services; update applies only to dedicated search services."
 );
-@@doc(SearchServices.update::parameters.properties,
+@@doc(
+  SearchServices.update::parameters.properties,
   "The definition of the search service to update."
 );

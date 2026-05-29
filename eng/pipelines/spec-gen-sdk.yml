@@ -21,10 +21,11 @@ parameters:
   - name: SdkReleaseType
     type: string
     values:
+      - 'none'
       - 'beta'
       - 'stable'
-    default: 'beta'
-    displayName: 'SDK release type (ignored when API version is "none")'
+    default: 'none'
+    displayName: 'SDK release type'
   - name: CreatePullRequest
     type: boolean
     default: false
@@ -37,6 +38,10 @@ parameters:
     type: number
     default: 0
     displayName: 'Release plan work item id'
+  - name: TriggerSource
+    type: string
+    default: 'unspecified'
+    displayName: 'Trigger source'
 
 trigger: none
 
@@ -53,3 +58,4 @@ extends:
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
     ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
+    TriggerSource: ${{ parameters.TriggerSource }}

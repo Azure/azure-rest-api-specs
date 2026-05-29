@@ -56,6 +56,7 @@ interface Capabilities {
 
 @@doc(Capability.name, "String that represents a Capability resource name.");
 @@doc(Capability.properties, "The properties of a capability resource.");
-@@doc(Capabilities.createOrUpdate::parameters.resource,
+@@doc(
+  Capabilities.createOrUpdate::parameters.resource,
   "Capability resource to be created or updated."
 );

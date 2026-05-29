@@ -46,7 +46,10 @@ interface CaCertificates {
   @summary("Delete a CA certificate.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CaCertificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -76,6 +79,7 @@ interface CaCertificates {
 @@minLength(CaCertificate.name, 3);
 @@doc(CaCertificate.name, "Name of the CA certificate.");
 @@doc(CaCertificate.properties, "The properties of CA certificate.");
-@@doc(CaCertificates.createOrUpdate::parameters.resource,
+@@doc(
+  CaCertificates.createOrUpdate::parameters.resource,
   "CA certificate information."
 );
