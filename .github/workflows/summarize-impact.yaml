@@ -44,9 +44,9 @@ jobs:
           npm exec --no -- summarize-impact --sourceDirectory . --targetDirectory ../before \
             --number "${{ github.event.pull_request.number }}" \
             --sourceBranch "$HEAD_REF" \
-            --targetBranch "${{ github.event.pull_request.base.ref }}" \
+            --targetBranch "${GITHUB_EVENT_PULL_REQUEST_BASE_REF}" \
             --sha "${{ github.event.pull_request.head.sha }}" \
-            --repo "${{ github.event.repository.name }}" \
+            --repo "${GITHUB_EVENT_REPOSITORY_NAME}" \
             --owner "${{ github.repository_owner }}" \
             ${{ github.event.pull_request.draft && '--isDraft' || '' }}
         env:
@@ -54,6 +54,8 @@ jobs:
           NODE_OPTIONS: "--max-old-space-size=8192"
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PULL_REQUEST_BASE_REF: ${{ github.event.pull_request.base.ref }}
+          GITHUB_EVENT_REPOSITORY_NAME: ${{ github.event.repository.name }}
 
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-impact.outputs.summary }}

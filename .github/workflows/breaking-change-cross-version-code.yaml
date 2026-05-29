@@ -47,8 +47,10 @@ jobs:
             --pr-target-branch "$GITHUB_BASE_REF" \
             --head-commit "${{ github.event.pull_request.head.sha }}" \
             --pr-number "${{ github.event.pull_request.number }}" \
-            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --source-repo "${GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_FULL_NAME}" \
             --target-repo "$GITHUB_REPOSITORY"
+        env:
+          GITHUB_EVENT_PULL_REQUEST_HEAD_REPO_FULL_NAME: ${{ github.event.pull_request.head.repo.full_name }}
 
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
