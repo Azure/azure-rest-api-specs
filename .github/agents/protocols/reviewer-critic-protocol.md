@@ -47,6 +47,24 @@ with reason `missing-inputs`.
 | 9   | Graph production flag              | `graphs-produced: true\|false`. `false` on fast path or when graph derivation failed; the Critic records `Graph integrity = N/A`.                                                                                                         |
 | 10  | Current iteration number           | `1` through `5`. The Critic's output header echoes this verbatim; do not infer from input length.                                                                                                                                         |
 
+## Session-handoff verification (fallback path)
+
+When subagent dispatch is unavailable and the Reviewer accepts a
+human-pasted Critic output, the Reviewer MUST validate the pasted output
+before folding it into the report:
+
+- The Critic header field `PR:` exactly matches the current PR under review.
+- The Critic header field `Head SHA:` exactly matches the session SHA pinned
+  in Reviewer Step 1.
+- The Critic header field `Iteration:` is a valid `1` through `5` and is
+  consistent with the Reviewer's current iteration loop.
+- The pasted output includes, verbatim, both the `### Verdict` section and
+  the `### Per-finding annotations` section.
+
+If any check fails, the Reviewer MUST reject the pasted output as invalid
+handoff data and request a corrected verbatim paste. Free-form acknowledgments
+such as "looks fine" are never valid substitutes.
+
 ## Critic verdict tracks
 
 The Critic returns four verdicts in its output header. Three are binding,

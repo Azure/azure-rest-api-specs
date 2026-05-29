@@ -248,12 +248,19 @@ and adds Critic-specific behavioral notes that are not in the protocol.
     verbatim in your output header (`Iteration: <n> of 5`); do not infer
     it from the length of prior-FAIL-set inputs.
 
-If any of inputs 1-5 is missing, refuse to validate and return
-`Finding accuracy = FAIL` with reason `missing-inputs`. Input 6 missing
-entirely (neither a plan nor `reconciliation skipped`) is also `FAIL:
-missing-inputs` - the Reviewer must always say which. Input 7 missing on
-iteration >= 2 is `FAIL: missing-inputs` (wave-thrash detection requires
-it); on iteration 1 it may be omitted or passed as empty.
+Input validation is strict and fail-fast:
+
+- Inputs 1-10 are required on every invocation.
+- The only exception is Input 7 on iteration 1, which may be omitted or
+  passed as an empty list.
+- Input 6 must be either a real reconciliation plan or the literal
+  sentinel `reconciliation skipped`.
+- Input 9 must be explicitly `graphs-produced: true` or
+  `graphs-produced: false`.
+- Input 10 must be an integer `1` through `5`.
+
+If validation fails, return `Finding accuracy = FAIL` with reason
+`missing-inputs` and list exactly which inputs were missing or malformed.
 
 ## Hard constraints
 
@@ -289,7 +296,7 @@ it); on iteration 1 it may be omitted or passed as empty.
   violation from the cited rule text plus the cited file content in one
   read, return `FAIL` on that finding. Not `WARN`. The reviewer must
   either cite better, downgrade, or drop.
-- **Inputs only.** Validate strictly against Inputs #1-#6 plus files you
+- **Inputs only.** Validate strictly against Inputs #1-#10 plus files you
   re-fetch yourself. If the host passes thread context, prior chat
   history, or the Reviewer's narrative surrounding the Step 6 report,
   ignore it -- bias from the Reviewer's framing defeats independent
@@ -585,23 +592,22 @@ section of the output schema below.
 Return **four** verdicts at the top of every output. The shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)) is the canonical schema (see its "Critic verdict tracks" section); the table below restates it for in-file
 readability and adds the value definitions the Reviewer expects to parse.
 
-| Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ----------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Finding accuracy        | `PASS` / `WARN` / `FAIL`                             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but >= 1 at Low confidence. `FAIL` = >= 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched.                                                                                                                                                                  |
-| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication`                | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting.                           |
-| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but >= 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = >= 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, or `fix-anchor-unreachable`. `N/A` = Input #6 was the literal `reconciliation skipped`. |
-| Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                                                       |
+| Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Finding accuracy        | `PASS` / `WARN` / `FAIL` / `INVALIDATED`             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but >= 1 at Low confidence. `FAIL` = >= 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched. `INVALIDATED` = session SHA moved or became unreachable; this overrides every other track and kills the session.                                                                                      |
+| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. `N/A` is valid only when Input #9 is `graphs-produced: false`. |
+| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but >= 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = >= 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, or `fix-anchor-unreachable`. `N/A` = Input #6 was the literal `reconciliation skipped`.                                      |
+| Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                                                                                            |
 
 **Authorization rule (informs the reviewer's Step 7 gate):**
 
-- `Finding accuracy = PASS` or `WARN` **and** `Graph integrity != FAIL`
-  **and** `Reconciliation accuracy != FAIL` -> reviewer may proceed to
-  present findings to the human (Step 8).
-- `Finding accuracy = FAIL` **or** `Graph integrity = FAIL: fabrication`
-  **or** `Reconciliation accuracy = FAIL` -> reviewer must revise and
-  re-invoke. After 5 iterations without convergence (or detected
-  wave-thrash at iteration 3), escalate all outputs to the human as
-  `MANUAL DECISION REQUIRED`.
+- Proceed only when all three are true:
+  - `Finding accuracy` is exactly one of `PASS` or `WARN`
+  - `Graph integrity` is exactly one of `PASS`, `WARN`, or `N/A`
+  - `Reconciliation accuracy` is exactly one of `PASS`, `WARN`, or `N/A`
+- Treat any unknown or malformed track value as `FAIL`.
+- If `Finding accuracy = INVALIDATED`, stop immediately and return
+  `SESSION INVALIDATED` guidance (do not proceed to posting logic).
 
 ## Output schema
 
@@ -618,8 +624,8 @@ Wave-thrash: detected | n/a
 
 ### Verdict
 
-- Finding accuracy: PASS | WARN | FAIL
-- Graph integrity: PASS | WARN | FAIL: fabrication
+- Finding accuracy: PASS | WARN | FAIL | INVALIDATED
+- Graph integrity: PASS | WARN | FAIL: fabrication | N/A
 - Reconciliation accuracy: PASS | WARN | FAIL | N/A
 - Coverage quality: APPROVE | REQUEST EXPANSION | NEEDS DISCUSSION
 
