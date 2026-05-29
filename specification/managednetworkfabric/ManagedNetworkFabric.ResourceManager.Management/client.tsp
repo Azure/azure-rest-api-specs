@@ -508,14 +508,14 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 
-@@alternateType(
+@@clientName(
   InternalNetworkPatchProperties.bgpConfiguration,
-  BgpConfiguration,
+  "BgpSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   InternalNetworkPatchProperties.staticRouteConfiguration,
-  StaticRouteConfiguration,
+  "StaticRouteSettings",
   "csharp"
 );
 @@alternateType(
@@ -834,6 +834,8 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(NetworkTapRuleAction.type, "TapRuleActionType", "csharp");
 @@clientName(BgpConfiguration.fabricASN, "FabricAsn", "csharp");
 @@clientName(BgpConfiguration.peerASN, "PeerAsn", "csharp");
+@@clientName(BgpPatchConfiguration.fabricASN, "FabricAsn", "csharp");
+@@clientName(BgpPatchConfiguration.peerASN, "PeerAsn", "csharp");
 @@clientName(
   ConditionalDefaultRouteProperties.ipv4Routes,
   "IPv4Routes",
