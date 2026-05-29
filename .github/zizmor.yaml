@@ -1,9 +1,9 @@
 rules:
+  dangerous-triggers:
+    ignore:
+      - arm-auto-signoff-status.yaml
   unpinned-uses:
     config:
       policies:
         actions/*: ref-pin
         "*": hash-pin
-  dangerous-triggers:
-    ignore:
-      - arm-auto-signoff-status.yaml
