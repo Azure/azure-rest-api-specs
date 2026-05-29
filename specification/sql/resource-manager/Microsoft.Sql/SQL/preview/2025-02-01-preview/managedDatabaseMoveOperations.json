@@ -1,0 +1,298 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabaseMoveOperations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/managedDatabaseMoveOperationResults": {
+      "get": {
+        "operationId": "ManagedDatabaseMoveOperations_ListByLocation",
+        "tags": [
+          "ManagedDatabaseMoveOperations"
+        ],
+        "description": "Lists managed database move operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onlyLatestPerDatabase",
+            "in": "query",
+            "description": "Whether or not to only get the latest operation for each database. Has higher priority than $filter.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that filters elements in the collection.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseMoveOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all managed database move operations for specified subscription, resource group and location.": {
+            "$ref": "./examples/ManagedDatabaseMoveOperationResultList.json"
+          },
+          "Gets the latest managed database move operations for each database under specified subscription, resource group and location, filtered by operation type ": {
+            "$ref": "./examples/ManagedDatabaseMoveOperationResultListMax.json"
+          },
+          "Gets the latest managed database move operations for each database under specified subscription, resource group and location.": {
+            "$ref": "./examples/ManagedDatabaseMoveOperationResultListLastOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/managedDatabaseMoveOperationResults/{operationId}": {
+      "get": {
+        "operationId": "ManagedDatabaseMoveOperations_Get",
+        "tags": [
+          "ManagedDatabaseMoveOperations"
+        ],
+        "description": "Gets a managed database move operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The ID of the managed database move operation.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseMoveOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a managed database move operation.": {
+            "$ref": "./examples/ManagedDatabaseMoveOperationResultGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedDatabaseMoveOperationListResult": {
+      "type": "object",
+      "description": "List of managed database move operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of results.",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseMoveOperationResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDatabaseMoveOperationResult": {
+      "type": "object",
+      "description": "A managed database move operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseMoveOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedDatabaseMoveOperationResultProperties": {
+      "type": "object",
+      "description": "Contains the operation result properties for managed database move operation.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The name of operation.",
+          "readOnly": true
+        },
+        "operationFriendlyName": {
+          "type": "string",
+          "description": "The friendly name of operation.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The operation start time.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/ManagementOperationState",
+          "description": "The operation state.",
+          "readOnly": true
+        },
+        "operationMode": {
+          "$ref": "./common.json#/definitions/MoveOperationMode",
+          "description": "Operation mode.",
+          "readOnly": true
+        },
+        "sourceManagedInstanceName": {
+          "type": "string",
+          "description": "Source Managed Instance name.",
+          "readOnly": true
+        },
+        "targetManagedInstanceName": {
+          "type": "string",
+          "description": "Target Managed Instance name.",
+          "readOnly": true
+        },
+        "sourceManagedInstanceId": {
+          "type": "string",
+          "description": "Source Managed Instance resource id.",
+          "readOnly": true
+        },
+        "targetManagedInstanceId": {
+          "type": "string",
+          "description": "Target Managed instance resource id.",
+          "readOnly": true
+        },
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Source database name.",
+          "readOnly": true
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Target database name.",
+          "readOnly": true
+        },
+        "isCancellable": {
+          "type": "boolean",
+          "description": "Is move operation cancellable.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The operation error code.",
+          "readOnly": true
+        },
+        "errorDescription": {
+          "type": "string",
+          "description": "The operation error description.",
+          "readOnly": true
+        },
+        "errorSeverity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The operation error severity.",
+          "readOnly": true
+        },
+        "isUserError": {
+          "type": "boolean",
+          "description": "Whether or not the error is a user error.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
