@@ -151,10 +151,22 @@ Inputs you receive from the reviewer:
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
 5. The previous-version path used for `[NEW]`/`[EXISTING]` classification (or
-   "None - new service").
+"None - new service").
+<!-- cspell:ignore REPOST -->
+6. **The Step 5.5 reconciliation plan** (verbatim) - per-finding actions
+   (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and
+   per-existing-thread dispositions (THANK-AND-RESOLVE /
+   PROPOSE-HUMAN-RESOLVE), each with anchors (existing comment URL, and
+   for fix-verified dispositions: original line, re-read line at session
+   SHA, construct description). If the Reviewer passes the literal string
+   `reconciliation skipped`, validate findings only and record
+   `Reconciliation accuracy = N/A` in your verdict - do not attempt to
+   verify a plan that does not exist.
 
-If any of these inputs is missing, refuse to validate and return
-`Finding accuracy = FAIL` with reason `missing-inputs`.
+If any of inputs 1-5 is missing, refuse to validate and return
+`Finding accuracy = FAIL` with reason `missing-inputs`. Input 6 missing
+entirely (neither a plan nor `reconciliation skipped`) is also `FAIL:
+missing-inputs` - the Reviewer must always say which.
 
 ## Hard constraints
 
@@ -194,7 +206,8 @@ If any of these inputs is missing, refuse to validate and return
 ## Re-validation procedure
 
 For **every** finding in the reviewer's report (Blocking, Warning, Suggestion;
-New and Existing), perform all six steps:
+New and Existing), perform steps 1-6 below. Then perform step 7 once to
+re-verify the reconciliation plan (Input #6).
 
 ### 1. Re-fetch the cited file
 
@@ -352,24 +365,97 @@ reviewer actually performed the suppression-continuity analysis if a
 `readme.md` was in the changed files. Note in the output if it appears to
 have been skipped.
 
-## Two-track verdict
+### 7. Re-verify the reconciliation plan (Input #6)
 
-Return **three** verdicts at the top of every output:
+The Reviewer's Step 5.5 plan auto-resolves prior threads (THANK-AND-RESOLVE),
+drops findings (SKIP-COVERED), and reroutes posts (RESOLVE-AND-REPOST /
+REPLY-LINE-SHIFT) based on existing-comment inventory and
+**fix-verification claims**. A wrong "fixed" claim silently closes a thread
+that may still contain a real violation - the most expensive failure mode
+this gate guards against. Re-verify every plan entry **independently**; do
+not trust the Reviewer's anchors. Skip this step **only** if Input #6 is the
+literal string `reconciliation skipped` (record `Reconciliation accuracy =
+N/A` in your verdict).
 
-| Track            | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                             |
-| ---------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Finding accuracy | `PASS` / `WARN` / `FAIL`                             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but ≥ 1 at Low confidence. `FAIL` = ≥ 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched.                                                                                                                                          |
-| Graph integrity  | `PASS` / `WARN` / `FAIL: fabrication`                | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. |
-| Coverage quality | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                             |
+For each plan entry, fetch the cited existing comment via
+`get_review_comments` (or `gh api .../comments`) at the session SHA, then
+apply the verdict rules below:
+
+- **POST-NEW**: no action beyond steps 1-5 above (the finding itself is
+  already re-verified). Mark `PASS`.
+- **SKIP-COVERED (Scenario A)**: confirm the cited existing comment cites
+  the **same rule** at the **same file and line** as the finding. If the
+  existing comment is at a different location, about a different rule, or
+  the URL does not resolve to a real comment, mark `FAIL:
+skip-not-justified` and recommend demoting to POST-NEW.
+- **RESOLVE-AND-REPOST (Scenario B)**: confirm (a) the existing comment is
+  agent-origin (body contains `posted-by: arm-api-reviewer-agent`); (b)
+  the violation is still present at the new line (steps 1-2 above
+  re-verified at session SHA); and (c) the original line in the existing
+  comment is genuinely shifted (the violation is **not** at the original
+  line in the current file). If any of these is wrong, mark `FAIL:
+shift-misclassified` and recommend the correction (e.g., "existing
+  comment is human-origin - reclassify as REPLY-LINE-SHIFT" or "violation
+  is still at original line - reclassify as SKIP-COVERED").
+- **REPLY-LINE-SHIFT (Scenario C)**: confirm (a) the existing comment is
+  human-origin (body does **not** contain `posted-by:
+arm-api-reviewer-agent`); (b) the violation is still present at the new
+  line; and (c) the original line is genuinely shifted. Same `FAIL:
+shift-misclassified` reasons apply with symmetric corrections.
+- **THANK-AND-RESOLVE (Scenario E)**: confirm the existing comment is
+  agent-origin. Then **independently re-read** the file region the
+  existing comment originally cited, at the session SHA, and re-apply the
+  original rule. If the violation is genuinely absent at the re-read line
+  (and elsewhere within the same construct), mark `PASS`. If the
+  violation is still present, mark `FAIL: fix-not-verified` and recommend
+  dropping the entry from the plan (the thread must stay open). If the
+  proof-of-fix anchor in the plan is missing, vague, or does not match
+  what you re-read, mark `FAIL: fix-anchor-bad`.
+- **PROPOSE-HUMAN-RESOLVE (Scenario F)**: same independent re-read as
+  Scenario E, with the additional check that the existing comment is
+  **not** agent-origin. Same `FAIL` reasons apply. Although this
+  disposition does not mutate anything on its own (only the human can
+  resolve), a wrong proof anchor would mislead the human into resolving a
+  still-broken thread - so apply the same rigor.
+
+**Independence is the entire point.** Re-reading using the Reviewer's quoted
+anchor verbatim defeats the verification - re-fetch the file at the session
+SHA and re-derive the conclusion yourself.
+
+**Critic-side limits.**
+
+- Severity: this step is **binding** when it returns `FAIL`. A reconciliation
+  `FAIL` cannot be overridden by the Reviewer via the standard `critic:
+override` finding-marker path; see Reviewer Step 7 item 9.
+- Downgrade-only still applies: you may recommend dropping a disposition or
+  demoting SKIP-COVERED → POST-NEW, but you may **not** recommend upgrading a
+  POST-NEW to a SKIP/RESOLVE on your own initiative - that is a Reviewer
+  decision.
+
+Record a per-entry verdict in the `Per-reconciliation-entry annotations`
+section of the output schema below.
+
+## Verdict tracks
+
+Return **four** verdicts at the top of every output:
+
+| Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Finding accuracy        | `PASS` / `WARN` / `FAIL`                             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but ≥ 1 at Low confidence. `FAIL` = ≥ 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched.                                                                                                                                          |
+| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication`                | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. |
+| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but ≥ 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = ≥ 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, or `fix-anchor-bad`. `N/A` = Input #6 was the literal `reconciliation skipped`.     |
+| Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                             |
 
 **Authorization rule (informs the reviewer's Step 7 gate):**
 
-- `Finding accuracy = PASS` or `WARN` **and** `Graph integrity ≠ FAIL` →
-  reviewer may proceed to present findings to the human (Step 8).
+- `Finding accuracy = PASS` or `WARN` **and** `Graph integrity ≠ FAIL`
+  **and** `Reconciliation accuracy ≠ FAIL` → reviewer may proceed to
+  present findings to the human (Step 8).
 - `Finding accuracy = FAIL` **or** `Graph integrity = FAIL: fabrication`
-  → reviewer must revise and re-invoke. After 5 iterations without
-  convergence (or detected wave-thrash at iteration 3), escalate both
-  outputs to the human as `MANUAL DECISION REQUIRED`.
+  **or** `Reconciliation accuracy = FAIL` → reviewer must revise and
+  re-invoke. After 5 iterations without convergence (or detected
+  wave-thrash at iteration 3), escalate all outputs to the human as
+  `MANUAL DECISION REQUIRED`.
 
 ## Output schema
 
@@ -387,6 +473,7 @@ Iteration: <n> of 5
 
 - Finding accuracy: PASS | WARN | FAIL
 - Graph integrity: PASS | WARN | FAIL: fabrication
+- Reconciliation accuracy: PASS | WARN | FAIL | N/A
 - Coverage quality: APPROVE | REQUEST EXPANSION | NEEDS DISCUSSION
 
 ### Per-finding annotations
@@ -397,6 +484,18 @@ Iteration: <n> of 5
 | 2   | OAPI027       | `specs/foo.json` line 88  | PASS                 | High       | DOWNGRADE Blocking → Warning  |
 | 3   | OAPI099       | `specs/foo.json` line 210 | FAIL: rule-not-found | n/a        | DROP                          |
 | 4   | RPC-Get-V1-04 | `specs/foo.json` line 305 | FAIL: misclassified  | n/a        | RECLASSIFY [NEW] → [EXISTING] |
+
+### Per-reconciliation-entry annotations
+
+Omit this entire section if Input #6 was `reconciliation skipped` (note that fact under Verdict instead).
+
+| #   | Entry type            | Anchor (URL / file - line)                   | Verdict                  | Recommended action                                                    |
+| --- | --------------------- | -------------------------------------------- | ------------------------ | --------------------------------------------------------------------- |
+| 1   | SKIP-COVERED          | `<existing-comment-url>`                     | PASS                     | Keep as planned                                                       |
+| 2   | THANK-AND-RESOLVE     | `<existing-comment-url>`                     | FAIL: fix-not-verified   | DROP from plan - violation still present at `<file> line <N>`         |
+| 3   | RESOLVE-AND-REPOST    | `<existing-comment-url>` → `<file> line <N>` | PASS                     | Keep as planned                                                       |
+| 4   | PROPOSE-HUMAN-RESOLVE | `<existing-comment-url>`                     | WARN                     | Proof anchor required heavy interpretation; flag for human spot-check |
+| 5   | SKIP-COVERED          | `<existing-comment-url>`                     | FAIL: skip-not-justified | DEMOTE to POST-NEW - cited existing comment is about a different rule |
 
 ### Re-verified rule citations
 
