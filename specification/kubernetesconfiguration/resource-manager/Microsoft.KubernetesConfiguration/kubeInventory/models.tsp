@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -10,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.KubernetesConfiguration;
 
@@ -184,6 +186,7 @@ model ReadinessCheck {
 model KubernetesLabel {
   /** Label key (e.g., 'app.kubernetes.io/name'). */
   @key
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** Label value. */
@@ -194,6 +197,7 @@ model KubernetesLabel {
 model KubernetesAnnotation {
   /** Annotation key (e.g., 'kubectl.kubernetes.io/last-applied-configuration'). */
   @key
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** Annotation value. */
@@ -311,37 +315,12 @@ model KubernetesCondition {
  */
 model KubernetesGenericField {
   /** Field name. */
+  @key
+  @visibility(Lifecycle.Read)
   name: string;
 
-  /**
-   * Type of the field value: 'string', 'number', or 'boolean' for scalars;
-   * 'object' when fields[] is populated; 'array' when items[] is populated.
-   */
-  type: string;
-
-  /** Scalar value, populated when type is 'string', 'number', or 'boolean'. */
-  value?: string;
-
-  /**
-   * Child fields, populated when type is 'object'.
-   * Represents a nested key/value structure.
-   */
-  @identifiers(#["name"])
-  fields?: KubernetesGenericField[];
-
-  /**
-   * Array items, populated when type is 'array'.
-   * Each element represents one array entry as a set of named fields.
-   */
-  @identifiers(#[])
-  items?: KubernetesGenericFieldGroup[];
-}
-
-/** One element of a generic array field, represented as a set of named fields. */
-model KubernetesGenericFieldGroup {
-  /** The named fields comprising this array element. */
-  @identifiers(#["name"])
-  fields: KubernetesGenericField[];
+  /** Value */
+  value: string;
 }
 
 // ─── Container support models ─────────────────────────────────────────────────
@@ -510,8 +489,10 @@ model Volume {
 /** A toleration allows a pod to be scheduled on a node with a matching taint. */
 model Toleration {
   /** Taint key the toleration applies to. Empty matches all keys. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This 'key' property is a Kubernetes taint key name, not a secret or credential."
-  key?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Toleration key is a Kubernetes taint key identifier, not a secret"
+  @key
+  @visibility(Lifecycle.Read)
+  key: string;
 
   /**
    * Operator to use when matching: 'Equal' matches when key and value both match;
@@ -623,46 +604,6 @@ model ContainerStatus {
 
   /** Opaque container runtime identifier (e.g., 'containerd://sha256:...'). */
   containerId?: string;
-}
-
-// ─── Kubernetes resource kind ─────────────────────────────────────────────────
-
-/** Kind of a Kubernetes resource tracked in the cluster inventory. */
-union KubernetesResourceKind {
-  string,
-
-  /** Core workload: Pod. */
-  Pod: "Pod",
-
-  /** Core workload: Deployment (apps/v1). */
-  Deployment: "Deployment",
-
-  /** Core workload: StatefulSet (apps/v1). */
-  StatefulSet: "StatefulSet",
-
-  /** Core workload: DaemonSet (apps/v1). */
-  DaemonSet: "DaemonSet",
-
-  /** Core workload: ReplicaSet (apps/v1). */
-  ReplicaSet: "ReplicaSet",
-
-  /** Networking: Service. */
-  Service: "Service",
-
-  /** Storage: PersistentVolumeClaim. */
-  PersistentVolumeClaim: "PersistentVolumeClaim",
-
-  /** Cluster infrastructure: Node. */
-  Node: "Node",
-
-  /** Cluster administration: Namespace. */
-  Namespace: "Namespace",
-
-  /** Azure Kubernetes upgrade assessment custom resource. */
-  UpgradeAssessment: "UpgradeAssessment",
-
-  /** Any other custom resource definition instance not enumerated above. */
-  CustomResource: "CustomResource",
 }
 
 // ─── Generic flat spec and status ────────────────────────────────────────────
@@ -887,6 +828,32 @@ model KubernetesResourceStatus {
   additionalFields?: KubernetesGenericField[];
 }
 
+// ─── Kubernetes event ─────────────────────────────────────────────────────────
+
+/** A Kubernetes event recorded against a resource (equivalent to `kubectl describe` Events). */
+model KubernetesEvent {
+  /** Event type: 'Normal' or 'Warning'. */
+  type: string;
+
+  /** Short machine-readable reason for the event (e.g., 'Scheduled', 'Pulled', 'Failed'). */
+  reason: string;
+
+  /**
+   * Human-readable elapsed time since the event last occurred
+   * as reported by the Kubernetes API (e.g., '2m28s', '5h').
+   */
+  age: string;
+
+  /**
+   * Component that emitted the event
+   * (e.g., 'default-scheduler', 'kubelet').
+   */
+  from: string;
+
+  /** Human-readable description of the event. */
+  message: string;
+}
+
 // ─── ARM resource properties ──────────────────────────────────────────────────
 
 /**
@@ -906,8 +873,8 @@ model KubeInventoryProperties {
    */
   apiVersion?: string;
 
-  /** Kind of the Kubernetes resource. */
-  kind?: KubernetesResourceKind;
+  /** Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service', 'UpgradeAssessment'). */
+  kind?: string;
 
   /** Standard Kubernetes object metadata. */
   metadata?: KubernetesObjectMeta;
@@ -917,6 +884,10 @@ model KubeInventoryProperties {
 
   /** Observed state of the Kubernetes resource, written by the controller. */
   status?: KubernetesResourceStatus;
+
+  /** Kubernetes events recorded against this resource. */
+  @identifiers(#[])
+  events?: KubernetesEvent[];
 }
 
 

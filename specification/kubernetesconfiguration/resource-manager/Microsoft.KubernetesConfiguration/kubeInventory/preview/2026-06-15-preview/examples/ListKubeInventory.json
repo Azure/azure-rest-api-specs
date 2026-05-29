@@ -37,14 +37,8 @@
                 "generation": 1,
                 "creationTimestamp": "2026-04-01T08:05:00Z",
                 "labels": [
-                  {
-                    "name": "k8s-app",
-                    "value": "kube-dns"
-                  },
-                  {
-                    "name": "pod-template-hash",
-                    "value": "5d78c9869d"
-                  }
+                  { "name": "k8s-app", "value": "kube-dns" },
+                  { "name": "pod-template-hash", "value": "5d78c9869d" }
                 ],
                 "ownerReferences": [
                   {
@@ -67,80 +61,34 @@
                   "runAsNonRoot": true
                 },
                 "tolerations": [
-                  {
-                    "key": "CriticalAddonsOnly",
-                    "operator": "Exists"
-                  },
-                  {
-                    "key": "node-role.kubernetes.io/control-plane",
-                    "operator": "Exists",
-                    "effect": "NoSchedule"
-                  }
+                  { "key": "CriticalAddonsOnly", "operator": "Exists" },
+                  { "key": "node-role.kubernetes.io/control-plane", "operator": "Exists", "effect": "NoSchedule" }
                 ],
                 "volumes": [
-                  {
-                    "name": "config-volume",
-                    "sourceType": "configMap",
-                    "source": "coredns"
-                  },
-                  {
-                    "name": "kube-api-access",
-                    "sourceType": "projected"
-                  }
+                  { "name": "config-volume", "sourceType": "configMap", "source": "coredns" },
+                  { "name": "kube-api-access", "sourceType": "projected" }
                 ],
                 "containers": [
                   {
                     "name": "coredns",
                     "image": "registry.k8s.io/coredns/coredns:v1.11.1",
                     "ports": [
-                      {
-                        "name": "dns",
-                        "containerPort": 53,
-                        "protocol": "UDP"
-                      },
-                      {
-                        "name": "dns-tcp",
-                        "containerPort": 53,
-                        "protocol": "TCP"
-                      },
-                      {
-                        "name": "metrics",
-                        "containerPort": 9153,
-                        "protocol": "TCP"
-                      }
+                      { "name": "dns", "containerPort": 53, "protocol": "UDP" },
+                      { "name": "dns-tcp", "containerPort": 53, "protocol": "TCP" },
+                      { "name": "metrics", "containerPort": 9153, "protocol": "TCP" }
                     ],
                     "resources": {
-                      "requests": {
-                        "cpu": "100m",
-                        "memory": "70Mi"
-                      },
-                      "limits": {
-                        "memory": "170Mi"
-                      }
+                      "requests": { "cpu": "100m", "memory": "70Mi" },
+                      "limits": { "memory": "170Mi" }
                     },
                     "volumeMounts": [
-                      {
-                        "name": "config-volume",
-                        "mountPath": "/etc/coredns",
-                        "readOnly": true
-                      },
-                      {
-                        "name": "kube-api-access",
-                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                        "readOnly": true
-                      }
+                      { "name": "config-volume", "mountPath": "/etc/coredns", "readOnly": true },
+                      { "name": "kube-api-access", "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount", "readOnly": true }
                     ],
                     "securityContext": {
                       "allowPrivilegeEscalation": false,
                       "readOnlyRootFilesystem": true,
-                      "capabilities": {
-                        "add": [
-                          "NET_BIND_SERVICE"
-                        ],
-                        "drop": [
-                          "ALL"
-                        ]
-                      }
+                      "capabilities": { "add": ["NET_BIND_SERVICE"], "drop": ["ALL"] }
                     }
                   }
                 ]
@@ -152,26 +100,10 @@
                 "startTime": "2026-04-01T08:05:02Z",
                 "qosClass": "Burstable",
                 "conditions": [
-                  {
-                    "type": "Initialized",
-                    "status": "True",
-                    "lastTransitionTime": "2026-04-01T08:05:02Z"
-                  },
-                  {
-                    "type": "Ready",
-                    "status": "True",
-                    "lastTransitionTime": "2026-04-01T08:05:14Z"
-                  },
-                  {
-                    "type": "ContainersReady",
-                    "status": "True",
-                    "lastTransitionTime": "2026-04-01T08:05:14Z"
-                  },
-                  {
-                    "type": "PodScheduled",
-                    "status": "True",
-                    "lastTransitionTime": "2026-04-01T08:05:02Z"
-                  }
+                  { "type": "Initialized", "status": "True", "lastTransitionTime": "2026-04-01T08:05:02Z" },
+                  { "type": "Ready", "status": "True", "lastTransitionTime": "2026-04-01T08:05:14Z" },
+                  { "type": "ContainersReady", "status": "True", "lastTransitionTime": "2026-04-01T08:05:14Z" },
+                  { "type": "PodScheduled", "status": "True", "lastTransitionTime": "2026-04-01T08:05:02Z" }
                 ],
                 "containerStatuses": [
                   {
@@ -181,11 +113,7 @@
                     "started": true,
                     "image": "registry.k8s.io/coredns/coredns:v1.11.1",
                     "containerId": "containerd://b2c3d4e5f6a7b2c3d4e5f6a7b2c3d4e5f6a7b2c3d4e5f6a7b2c3d4e5f6a7b2c3",
-                    "state": {
-                      "running": {
-                        "startedAt": "2026-04-01T08:05:13Z"
-                      }
-                    }
+                    "state": { "running": { "startedAt": "2026-04-01T08:05:13Z" } }
                   }
                 ]
               }
@@ -231,10 +159,7 @@
                 "generation": 3,
                 "creationTimestamp": "2026-05-15T08:00:00Z",
                 "labels": [
-                  {
-                    "name": "managed-by",
-                    "value": "azure-kube-inventory-agent"
-                  }
+                  { "name": "managed-by", "value": "azure-kube-inventory-agent" }
                 ]
               },
               "spec": {
@@ -245,46 +170,18 @@
                 "assessmentTime": "2026-05-28T14:30:00Z",
                 "overallSeverity": "Pass",
                 "conditions": [
-                  {
-                    "type": "AssessmentComplete",
-                    "status": "True",
-                    "reason": "Succeeded",
-                    "message": "Upgrade assessment completed successfully.",
-                    "lastTransitionTime": "2026-05-28T14:30:00Z"
-                  }
+                  { "type": "AssessmentComplete", "status": "True", "reason": "Succeeded", "message": "Upgrade assessment completed successfully.", "lastTransitionTime": "2026-05-28T14:30:00Z" }
                 ],
                 "componentCompatibility": [
-                  {
-                    "name": "containerd",
-                    "version": "1.7.4",
-                    "compatibilityStatus": "Compatible",
-                    "severity": "Pass"
-                  },
-                  {
-                    "name": "azure-cni",
-                    "version": "1.5.29",
-                    "compatibilityStatus": "Compatible",
-                    "severity": "Pass"
-                  }
+                  { "name": "containerd", "version": "1.7.4", "compatibilityStatus": "Compatible", "severity": "Pass" },
+                  { "name": "azure-cni", "version": "1.5.29", "compatibilityStatus": "Compatible", "severity": "Pass" }
                 ],
                 "deprecatedApis": [],
                 "readinessChecks": [
-                  {
-                    "category": "NodeStatus",
-                    "severity": "Pass"
-                  },
-                  {
-                    "category": "APIServerHealth",
-                    "severity": "Pass"
-                  },
-                  {
-                    "category": "PodDisruptionBudget",
-                    "severity": "Pass"
-                  },
-                  {
-                    "category": "Addon",
-                    "severity": "Pass"
-                  }
+                  { "category": "NodeStatus", "severity": "Pass" },
+                  { "category": "APIServerHealth", "severity": "Pass" },
+                  { "category": "PodDisruptionBudget", "severity": "Pass" },
+                  { "category": "Addon", "severity": "Pass" }
                 ]
               }
             },
