@@ -1548,6 +1548,31 @@ namespace Azure.ResourceManager.Models {
   "enableCsiProxy",
   "java"
 );
+
+// .NET design guideline naming polish (azure-sdk-for-net PR #59192 review feedback)
+@@clientName(
+  ControlPlaneScalingSize,
+  "ManagedClusterControlPlaneScalingSize",
+  "csharp"
+);
+@@clientName(HardEvictionThreshold, "KubeletHardEvictionThreshold", "csharp");
+@@clientName(KubeReserved, "KubeletReservedResources", "csharp");
+@@clientName(
+  ManagedClusterHostedSystemProfile.systemNodeSubnetID,
+  "SystemNodeSubnetId",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterHostedSystemProfile.nodeSubnetID,
+  "NodeSubnetId",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterAzureMonitorProfileMetrics.controlPlane,
+  "IsControlPlane",
+  "csharp"
+);
+
 // TODO: drop the type replacement upon next major breaking change
 @@alternateType(
   ManagedClusterIdentity.type,
