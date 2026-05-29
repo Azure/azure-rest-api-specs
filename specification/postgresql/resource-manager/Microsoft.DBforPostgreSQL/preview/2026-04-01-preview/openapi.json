@@ -2755,12 +2755,12 @@
                 {
                   "name": "Upcoming",
                   "value": "Upcoming",
-                  "description": "Return events that are scheduled or in progress (Planned, InProgress, Suspended)."
+                  "description": "Return events that have a scheduled or in progress status."
                 },
                 {
                   "name": "Past",
                   "value": "Past",
-                  "description": "Return events that have completed (Succeeded, Failed, Canceled, TimedOut)."
+                  "description": "Return events that have a completed status."
                 }
               ]
             }
@@ -2826,7 +2826,7 @@
             "description": "The name of the MaintenanceEventResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
           }
         ],
         "responses": {
@@ -2883,7 +2883,7 @@
             "description": "The name of the MaintenanceEventResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
           }
         ],
         "responses": {
@@ -2964,7 +2964,7 @@
             "description": "The name of the MaintenanceEventResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
           },
           {
             "name": "body",
@@ -7091,8 +7091,8 @@
           "description": "The full Azure resource ID of the server."
         },
         "status": {
-          "type": "string",
-          "description": "The status (e.g. 'Accepted', 'Succeeded')."
+          "$ref": "#/definitions/MaintenanceEventStatus",
+          "description": "The status of the maintenance event."
         },
         "plannedStartTime": {
           "type": "string",
