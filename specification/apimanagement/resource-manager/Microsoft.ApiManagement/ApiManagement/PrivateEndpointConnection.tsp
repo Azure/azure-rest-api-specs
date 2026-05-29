@@ -18,6 +18,7 @@ alias PrivateEndpointOperations = PrivateEndpoints<
   "ApiManagementPrivateEndpointConnection"
 >;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "ApiManagementServiceResource delete lives in LegacyOperations alias (not visible to linter)."
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**

@@ -112,8 +112,8 @@ op replaceGetByName(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
   serviceName: string,
-  location: Azure.Core.azureLocation,
 ):
   | Azure.ResourceManager.ArmResponse<DeletedServiceContract>
   | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -133,8 +133,8 @@ op replacePurge(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
   serviceName: string,
-  location: Azure.Core.azureLocation,
 ):
   | ArmDeletedResponse
   | (ArmDeleteAcceptedLroResponse & {
@@ -269,6 +269,21 @@ op replacePurge(
 // keeps its GA name `PolicyContractData`. The Resource/Collection still
 // get `ApiManagementPolicy*` via ResourceName overrides in PolicyContract.tsp.
 @@clientName(PortalRevisionContract, "ApiManagementPortalRevision", "csharp");
+@@clientName(
+  PortalDelegationSettings,
+  "ApiManagementPortalDelegationSetting",
+  "csharp"
+);
+@@clientName(
+  PortalSigninSettings,
+  "ApiManagementPortalSignInSetting",
+  "csharp"
+);
+@@clientName(
+  PortalSignupSettings,
+  "ApiManagementPortalSignUpSetting",
+  "csharp"
+);
 @@clientName(
   Microsoft.ApiManagement.PrivateLinkResource,
   "ApiManagementPrivateLinkResource",

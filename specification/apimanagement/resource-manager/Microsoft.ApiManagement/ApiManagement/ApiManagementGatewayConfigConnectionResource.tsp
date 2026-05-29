@@ -50,22 +50,55 @@ alias ApiManagementGatewayConfigConnectionListPagingParameters = {
   $skipToken?: string;
 };
 
+// ResourceName = "ApiGatewayConfigConnection" makes the C# emitter produce
+// ApiGatewayConfigConnectionResource.cs / Collection.cs (matching GA contract).
+@armResourceOperations
+interface ApiManagementGatewayConfigConnectionResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management gateway. */
+        @path
+        @segment("gateways")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(45)
+        gatewayName: string,
+      },
+      {
+        /** The name of the API Management gateway config connection. */
+        @path
+        @segment("configConnections")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(30)
+        configConnectionName: string,
+      },
+      ResourceName = "ApiGatewayConfigConnection"
+    > {}
+
 @armResourceOperations
 interface ApiManagementGatewayConfigConnectionResources {
   /**
    * Gets an API Management gateway config connection resource description.
    */
-  get is ArmResourceRead<ApiManagementGatewayConfigConnectionResource>;
+  get is ApiManagementGatewayConfigConnectionResourceOps.Read<ApiManagementGatewayConfigConnectionResource>;
 
   /**
    * Creates or updates an API Management gateway config connection. This is long running operation and could take several minutes to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiManagementGatewayConfigConnectionResource>;
+  createOrUpdate is ApiManagementGatewayConfigConnectionResourceOps.CreateOrUpdateAsync<ApiManagementGatewayConfigConnectionResource>;
 
   /**
    * Deletes an existing API Management gateway config connection.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ApiManagementGatewayConfigConnectionResourceOps.DeleteWithoutOkAsync<
     ApiManagementGatewayConfigConnectionResource,
     Parameters = IfMatchHeaderParameter
   >;
@@ -73,7 +106,7 @@ interface ApiManagementGatewayConfigConnectionResources {
   /**
    * List all API Management gateway config connections within a gateway.
    */
-  listByGateway is ArmResourceListByParent<
+  listByGateway is ApiManagementGatewayConfigConnectionResourceOps.List<
     ApiManagementGatewayConfigConnectionResource,
     Parameters = ApiManagementGatewayConfigConnectionListPagingParameters,
     Response = ArmResponse<ApiManagementGatewayConfigConnectionListResult>

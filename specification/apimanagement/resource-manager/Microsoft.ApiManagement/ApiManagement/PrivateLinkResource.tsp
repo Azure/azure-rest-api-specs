@@ -17,7 +17,7 @@ namespace Microsoft.ApiManagement;
 model PrivateLinkResource is PrivateLink;
 alias PrivateLinkOperations = PrivateLinks<
   PrivateLinkResource,
-  "ApiManagementPrivateLink"
+  "ApiManagementPrivateLinkResource"
 >;
 
 @armResourceOperations

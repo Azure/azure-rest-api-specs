@@ -26,6 +26,37 @@ model PortalSigninSettings
   >;
 }
 
+// ResourceName = "ApiManagementPortalSignInSetting" makes the C# emitter
+// produce ApiManagementPortalSignInSettingResource.cs / Collection.cs
+// (matching the GA contract).
+@armResourceOperations
+interface PortalSigninSettingsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Portal setting singleton key. */
+        @path
+        @segment("portalsettings")
+        @key
+        portalsetting: "signin",
+      },
+      ResourceName = "ApiManagementPortalSignInSetting"
+    > {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SignInSettings {
@@ -33,7 +64,7 @@ interface SignInSettings {
    * Get Sign In Settings for the Portal
    */
   #deprecated "deprecated"
-  get is ArmResourceRead<
+  get is PortalSigninSettingsOps.Read<
     PortalSigninSettings,
     Response = ArmResponse<PortalSigninSettings> & {
       /**
@@ -48,7 +79,7 @@ interface SignInSettings {
    * Gets the entity state (Etag) version of the SignInSettings.
    */
   #deprecated "deprecated"
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is PortalSigninSettingsOps.CheckExistence<
     PortalSigninSettings,
     Response = OkResponse & {
       /**
@@ -64,7 +95,7 @@ interface SignInSettings {
    */
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is PortalSigninSettingsOps.CreateOrUpdateSync<
     PortalSigninSettings,
     Parameters = {
       /**
@@ -82,7 +113,7 @@ interface SignInSettings {
    */
   #deprecated "deprecated"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is PortalSigninSettingsOps.CustomPatchSync<
     PortalSigninSettings,
     PatchModel = PortalSigninSettings,
     Parameters = IfMatchHeaderParameter,

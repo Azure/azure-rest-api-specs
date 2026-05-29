@@ -50,17 +50,50 @@ alias ApiManagementWorkspaceLinksListPagingParameters = {
   $skipToken?: string;
 };
 
+// ResourceName = "ApiManagementWorkspaceLinks" makes the C# emitter produce
+// ApiManagementWorkspaceLinksResource.cs / Collection.cs (matching GA contract).
+@armResourceOperations
+interface ApiManagementWorkspaceLinksResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Workspace identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("workspaceLinks")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        @pattern("^[^*#&+:<>?]+$")
+        workspaceId: string,
+      },
+      ResourceName = "ApiManagementWorkspaceLinks"
+    > {}
+
 @armResourceOperations
 interface ApiManagementWorkspaceLinksResources {
   /**
    * Gets an API Management WorkspaceLink resource description.
    */
-  get is ArmResourceRead<ApiManagementWorkspaceLinksResource>;
+  get is ApiManagementWorkspaceLinksResourceOps.Read<ApiManagementWorkspaceLinksResource>;
 
   /**
    * List all API Management workspaceLinks for a service.
    */
-  listByService is ArmResourceListByParent<
+  listByService is ApiManagementWorkspaceLinksResourceOps.List<
     ApiManagementWorkspaceLinksResource,
     Parameters = ApiManagementWorkspaceLinksListPagingParameters,
     Response = ArmResponse<ApiManagementWorkspaceLinksListResult>

@@ -143,17 +143,42 @@ alias ApiManagementServiceListPagingParameters = {
   $skipToken?: string;
 };
 
+// ResourceName = "ApiManagementService" makes the C# emitter produce
+// ApiManagementServiceResource.cs / Collection.cs / ApiManagementServiceData.cs
+// (matching the GA contract) under modern arm-resource detection.
+@armResourceOperations
+interface ApiManagementServiceResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      ResourceName = "ApiManagementService"
+    > {}
+
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ApiManagementServiceResources {
   /**
    * Gets an API Management service resource description.
    */
-  get is ArmResourceRead<ApiManagementServiceResource>;
+  get is ApiManagementServiceResourceOps.Read<ApiManagementServiceResource>;
 
   /**
    * Creates or updates an API Management service. This is long running operation and could take several minutes to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ApiManagementServiceResourceOps.CreateOrUpdateAsync<
     ApiManagementServiceResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -163,7 +188,7 @@ interface ApiManagementServiceResources {
    * Updates an existing API Management service.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ApiManagementServiceResourceOps.CustomPatchAsync<
     ApiManagementServiceResource,
     PatchModel = ApiManagementServiceUpdateParameters
   >;
@@ -173,7 +198,7 @@ interface ApiManagementServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ApiManagementServiceResourceOps.DeleteWithoutOkAsync<
     ApiManagementServiceResource,
     Response =
       | ArmDeletedResponse
@@ -188,7 +213,7 @@ interface ApiManagementServiceResources {
   /**
    * List all API Management services within a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ApiManagementServiceResourceOps.List<
     ApiManagementServiceResource,
     Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
@@ -209,7 +234,7 @@ interface ApiManagementServiceResources {
   @get
   @action("allPolicies")
   @list
-  listByService is ArmResourceActionSync<
+  listByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<AllPoliciesCollection>
@@ -221,7 +246,7 @@ interface ApiManagementServiceResources {
   @get
   @action("apisByTags")
   @list
-  listByTags is ArmResourceActionSync<
+  listByTags is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<TagResourceCollection>,
@@ -260,10 +285,10 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("connectivityCheck")
   @operationId("PerformConnectivityCheckAsync")
-  performConnectivityCheckAsync is ArmResourceActionAsync<
+  performConnectivityCheckAsync is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,
-    Response = ConnectivityCheckResponse
+    Result = ConnectivityCheckResponse
   >;
 
   /**
@@ -272,7 +297,7 @@ interface ApiManagementServiceResources {
   @get
   @action("skus")
   @list
-  listAvailableServiceSkus is ArmResourceActionSync<
+  listAvailableServiceSkus is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ResourceSkuResults>
@@ -281,28 +306,28 @@ interface ApiManagementServiceResources {
   /**
    * Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.
    */
-  restore is ArmResourceActionAsync<
+  restore is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    Response = ApiManagementServiceResource
+    Result = ApiManagementServiceResource
   >;
 
   /**
    * Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.
    */
-  backup is ArmResourceActionAsync<
+  backup is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceBackupRestoreParameters,
-    Response = ApiManagementServiceResource
+    Result = ApiManagementServiceResource
   >;
 
   /**
    * Upgrades an API Management service to the Stv2 platform. For details refer to https://aka.ms/apim-migrate-stv2. This change is not reversible. This is long running operation and could take several minutes to complete.
    */
-  migrateToStv2 is ArmResourceActionAsync<
+  migrateToStv2 is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     MigrateToStv2Contract,
-    Response = ApiManagementServiceResource,
+    Result = ApiManagementServiceResource,
     OptionalRequestBody = true
   >;
 
@@ -310,7 +335,7 @@ interface ApiManagementServiceResources {
    * Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.
    */
   @action("getssotoken")
-  getSsoToken is ArmResourceActionSync<
+  getSsoToken is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ApiManagementServiceGetSsoTokenResult>
@@ -320,20 +345,20 @@ interface ApiManagementServiceResources {
    * Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated DNS changes.
    */
   @action("applynetworkconfigurationupdates")
-  applyNetworkConfigurationUpdates is ArmResourceActionAsync<
+  applyNetworkConfigurationUpdates is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     ApiManagementServiceApplyNetworkConfigurationParameters,
-    Response = ApiManagementServiceResource,
+    Result = ApiManagementServiceResource,
     OptionalRequestBody = true
   >;
 
   /**
    * Force Refresh the SSL certificate attached to the Custom Hostnames configured using secret from KeyVault on the Api Management service.
    */
-  refreshHostnames is ArmResourceActionAsync<
+  refreshHostnames is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     void,
-    ApiManagementServiceResource
+    Result = ApiManagementServiceResource
   >;
 
   /**
@@ -341,7 +366,7 @@ interface ApiManagementServiceResources {
    */
   @get
   @action("networkstatus")
-  networkStatusListByService is ArmResourceActionSync<
+  networkStatusListByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<NetworkStatusContractByLocation[]>
@@ -352,7 +377,7 @@ interface ApiManagementServiceResources {
    */
   @get
   @action("networkstatus")
-  listByLocation is ArmResourceActionSync<
+  listByLocation is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<NetworkStatusContract>,
@@ -372,7 +397,7 @@ interface ApiManagementServiceResources {
    */
   @get
   @action("outboundNetworkDependenciesEndpoints")
-  outboundNetworkDependenciesEndpointsListByService is ArmResourceActionSync<
+  outboundNetworkDependenciesEndpointsListByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<OutboundEnvironmentEndpointList>
@@ -383,7 +408,7 @@ interface ApiManagementServiceResources {
    */
   @get
   @action("policyDescriptions")
-  policyDescriptionListByService is ArmResourceActionSync<
+  policyDescriptionListByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<PolicyDescriptionCollection>,
@@ -400,10 +425,10 @@ interface ApiManagementServiceResources {
    * Validate all policies of API Management services.
    */
   @action("validatePolicies")
-  byService is ArmResourceActionAsync<
+  byService is ApiManagementServiceResourceOps.ActionAsync<
     ApiManagementServiceResource,
     void,
-    Response = OperationResultContract
+    Result = OperationResultContract
   >;
 
   /**
@@ -412,7 +437,7 @@ interface ApiManagementServiceResources {
   #deprecated "deprecated"
   @get
   @action("portalsettings")
-  portalSettingsListByService is ArmResourceActionSync<
+  portalSettingsListByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<PortalSettingsCollection>
@@ -424,7 +449,7 @@ interface ApiManagementServiceResources {
   @get
   @action("productsByTags")
   @list
-  productListByTags is ArmResourceActionSync<
+  productListByTags is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<TagResourceCollection>,
@@ -521,7 +546,7 @@ interface ApiManagementServiceResources {
   @get
   @action("regions")
   @list
-  regionListByService is ArmResourceActionSync<
+  regionListByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<RegionListResult>
@@ -533,7 +558,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byApi")
   @list
-  listByApi is ArmResourceActionSync<
+  listByApi is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -572,7 +597,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byUser")
   @list
-  listByUser is ArmResourceActionSync<
+  listByUser is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -611,7 +636,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byOperation")
   @list
-  listByOperation is ArmResourceActionSync<
+  listByOperation is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -650,7 +675,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byProduct")
   @list
-  listByProduct is ArmResourceActionSync<
+  listByProduct is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -689,7 +714,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byGeo")
   @list
-  listByGeo is ArmResourceActionSync<
+  listByGeo is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -722,7 +747,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/bySubscription")
   @list
-  listBySubscription is ArmResourceActionSync<
+  listBySubscription is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -761,7 +786,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byTime")
   @list
-  listByTime is ArmResourceActionSync<
+  listByTime is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<ReportCollection>,
@@ -806,7 +831,7 @@ interface ApiManagementServiceResources {
   @get
   @action("reports/byRequest")
   @list
-  listByRequest is ArmResourceActionSync<
+  listByRequest is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<RequestReportCollection>,
@@ -839,7 +864,7 @@ interface ApiManagementServiceResources {
   @get
   @action("tagResources")
   @list
-  tagResourceListByService is ArmResourceActionSync<
+  tagResourceListByService is ApiManagementServiceResourceOps.ActionSync<
     ApiManagementServiceResource,
     void,
     ArmResponse<TagResourceCollection>,
