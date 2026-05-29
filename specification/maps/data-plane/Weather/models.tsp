@@ -4,28 +4,34 @@ import "./common/common.tsp";
 
 namespace MapsWeather;
 
-/** Unit of measurement for weather data. */
+/**
+ * Specifies whether to return data in metric or imperial units, with metric as
+ * the default. For example\n\nMetric: millimeter (mm), meter (m), kilometer
+ * (km), Celsius (C)\n\nImperial: inch (in), foot (ft), mile (mi), Fahrenheit
+ * (F)
+ */
 union WeatherDataUnit {
   string,
 
   /**
-   * Return data using imperial units such as Fahrenheit (F) for temperature and
-   * mile (mi) for distance.
+   * Return data using imperial units such as fahrenheit (F) for temperature and
+   * miles (mi) for distance.
    */
   imperial: "imperial",
 
   /**
-   * Return data using metric units such as Celsius (C) for temperature and
+   * Return data using metric units such as celsius (C) for temperature and
    * kilometer (km) for distance.
    */
   metric: "metric",
 }
 
 /**
- * Numeric value representing an image that corresponds to the current weather
- * condition described by the `Phrase` property. For more information, see
- * [Weather services in Azure
- * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+ * A numeric value that corresponds to an image displaying the `iconPhrase`.
+ * These icons visually represent various weather conditions. For more
+ * information including a complete list of icons and phrases, see [Weather
+ * services in Azure
+ * Maps](/azure/azure-maps/weather-services-concepts#weather-icons).
  */
 union IconCode {
   integer,
@@ -185,9 +191,7 @@ union IconCode {
    */
   `Partly Cloudy`: 35,
 
-  /**
-   * Intermittent Clouds (Night)
-   */
+  /** Intermittent Clouds */
   IntermittentCloudsNight: 36,
 
   /**
@@ -195,9 +199,7 @@ union IconCode {
    */
   HazyMoonlight: 37,
 
-  /**
-   * Mostly Cloudy (Night)
-   */
+  /** Mostly Cloudy */
   MostlyCloudyNight: 38,
 
   /**
@@ -205,9 +207,7 @@ union IconCode {
    */
   PartlyCloudyWithShowers: 39,
 
-  /**
-   * Mostly Cloudy with Showers (Night)
-   */
+  /** Mostly Cloudy with Showers */
   MostlyCloudyWithShowersNight: 40,
 
   /**
@@ -215,27 +215,20 @@ union IconCode {
    */
   `Partly Cloudy with Thunderstorms`: 41,
 
-  /**
-   * Mostly Cloudy with Thunderstorms (Night)
-   */
+  /** Mostly Cloudy with Thunderstorms */
   MostlyCloudyWithThunderstormsNight: 42,
 
-  /**
-   * Mostly Cloudy with Flurries (Night)
-   */
+  /** Mostly Cloudy with Flurries */
   MostlyCloudyWithFlurriesNight: 43,
 
-  /**
-   * Mostly Cloudy with Snow (Night)
-   */
+  /** Mostly Cloudy with Snow */
   MostlyCloudyWithSnowNight: 44,
 }
 
 /**
- * An integer representing the unit type.  For example, 17 for Celsius, 18 for
- * Fahrenheit. Can be used for unit translation. For a complete list, see [Weather
- * services in Azure
- * Maps](/azure/azure-maps/weather-services-concepts#unit-types).
+ * An integer value associated with the type of unit being displayed. Can be
+ * used for unit translation. For more information, see [Weather services in
+ * Azure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).
  */
 union UnitType {
   integer,
@@ -368,31 +361,23 @@ union UnitType {
 union PrecipitationType {
   string,
 
-  /**
-   * Ice
-   */
+  /** <No change> */
   Ice: "Ice",
 
-  /**
-   * Mix
-   */
+  /** <No change> */
   Mix: "Mix",
 
-  /**
-   * Rain
-   */
+  /** <No change> */
   Rain: "Rain",
 
-  /**
-   * Snow
-   */
+  /** <No change> */
   Snow: "Snow",
 }
 
 /**
- * Divides the day into four 6-hour quarters. Valid values are 0-3:<ul><li>0:
- * Morning (7am - 1pm)</li><li>1: Afternoon (1pm - 7pm)</li><li>2: Evening (7pm -
- * 1am)</li><li>3: Overnight (1am - 7am)</li></ul>
+ * Divides the day into four 6-hour quarters. Valid values are 0-3: - 0: Morning
+ * (7am - 1pm) - 1: Afternoon (1pm - 7pm) - 2: Evening (7pm - 1am) - 3:
+ * Overnight (1am - 7am)
  */
 union DayQuarter {
   integer,
@@ -419,13 +404,10 @@ union DayQuarter {
 }
 
 /**
- * The aggregated severity/hazard index for each waypoint, which can be used to
- * color-code route segments to indicate driver safety.
- *   * `0` - No hazard.
- *   * `1` - Be informed, be aware.
- *   * `2` - Pay attention, be prepared.
- *   * `3` - Take action.
- *   * `4` - Life threatening, emergency.
+ * The aggregated severity/hazard index for each waypoint can be utilized to
+ * color-code segments of a route, indicating the safety level for drivers. 0 -
+ * No hazard. 1 - Be informed, be aware. 2 - Pay attention, be prepared. 3 -
+ * Take action. 4 - Life threatening, emergency.
  */
 union HazardIndex {
   integer,
@@ -463,15 +445,12 @@ union HazardIndex {
 union LatestStatusKeyword {
   string,
 
-  /**
-   * Indicates that the alert has been canceled before its originally scheduled
-   * expiration time.
-   */
+  /** Indicates that the alert has been canceled before its scheduled expiration time. */
   Cancel: "Cancel",
 
   /**
-   * Indicates that the alert has been updated since its initial issuance, but no
-   * changes were made to `alertDetails`, `startTime`, `endTime`, or `class`.
+   * Indicates that the alert has been updated since its initial issuance, but
+   * no changes were made to alertDetails, startTime, endTime, or class.
    */
   Continue: "Continue",
 
@@ -508,52 +487,56 @@ union LatestStatusKeyword {
   Upgrade: "Upgrade",
 }
 
-/** Basin identifier for tropical storms. */
+/**
+ * The "basinId" enum categorizes the different ocean basins where tropical
+ * storms can originate. Each basin is assigned a unique identifier to help
+ * specify the location of the storm's origin.
+ */
 union BasinId {
   string,
 
   /**
-   * **The Atlantic Ocean**. Crucial for tracking hurricanes that affect the
-   * Americas and the Caribbean. It is one of the most active regions for tropical
-   * storms.
+   * The Atlantic Ocean. Crucial for tracking hurricanes that affect the
+   * Americas and the Caribbean. It is one of the most active regions for
+   * tropical storms.
    */
   AL: "AL",
 
   /**
-   * **The Central Pacific Ocean**. This basin is used for storms affecting Hawaii
+   * The Central Pacific Ocean. This basin is used for storms affecting Hawaii
    * and surrounding areas.
    */
   CP: "CP",
 
   /**
-   * **The Eastern Pacific Ocean**. This basin tracks storms impacting the western
-   * coast of the Americas, including Mexico and Central America. It is adjacent to
-   * the Central Pacific basin.
+   * The Eastern Pacific Ocean. This basin tracks storms impacting the western
+   * coast of the Americas, including Mexico and Central America. It is adjacent
+   * to the Central Pacific basin.
    */
   EP: "EP",
 
   /**
-   * **The North Indian Ocean**. This basin covers storms impacting South Asia,
-   * including countries like India and Bangladesh, which are frequently affected by
-   * cyclones.
+   * The North Indian Ocean. This basin covers storms impacting South Asia,
+   * including countries like India and Bangladesh, which are frequently
+   * affected by cyclones.
    */
   NI: "NI",
 
   /**
-   * **The Northwest Pacific Ocean**. This basin is important for tracking typhoons
+   * The Northwest Pacific Ocean. This basin is important for tracking typhoons
    * that affect East Asia, including countries like China, Japan, and the
    * Philippines. It is the most active tropical storm regions globally.
    */
   NP: "NP",
 
   /**
-   * **The South Indian Ocean**. This basin, positioned south of the equator, covers
+   * The South Indian Ocean. This basin, positioned south of the equator, covers
    * cyclones impacting Madagascar, Africa, and surrounding regions.
    */
   SI: "SI",
 
   /**
-   * **The South Pacific Ocean**. This basin, positioned south of the equator, is
+   * The South Pacific Ocean. This basin, positioned south of the equator, is
    * relevant for cyclones affecting Australia and the South Pacific islands.
    */
   SP: "SP",
@@ -587,17 +570,18 @@ union DominantPollutant {
   Ozone: "Ozone",
 
   /**
-   * Particulate matter 2.5 (PM2.5) refers to fine particles with diameters that are
-   * generally 2.5 micrometers and smaller. These particles are more than 100 times
-   * thinner than a human hair and can remain suspended in the air for extended
-   * periods
+   * Particulate matter 2.5 (PM2.5) also known as aerosols, is a mix of fine
+   * dust and tiny liquid droplets suspended in the air. There are 4
+   * categories:\n - PM10 (Course)\n - PM2.5 (Fine)\nPM1 (very fine)\nPM0.1
+   * (ultrafine).
    */
   `Particulate Matter 2.5`: "Particulate Matter 2.5",
 
   /**
-   * Particulate matter 10 (PM10) refers to particles with diameters that are
-   * generally 10 micrometers and smaller. These particles can include dust, pollen,
-   * soot, smoke, and liquid droplets.
+   * Particulate matter 10 (PM10) also known as aerosols, is a mix of fine dust
+   * and tiny liquid droplets suspended in the air. There are 4 categories of
+   * particulate matter:\n - PM10 (Course)\n - PM2.5 (Fine)\nPM1 (very
+   * fine)\nPM0.1 (ultrafine).
    */
   `Particulate Matter 10`: "Particulate Matter 10",
 
@@ -610,44 +594,69 @@ union DominantPollutant {
   `Sulfur Dioxide`: "Sulfur Dioxide",
 }
 
-/**
- * Specifies the six types of pollutants tracked by the Azure Maps Weather service.
- */
+/** A description for each type of pollutant, such as CO, NO2, O3, PM10, PM2.5 and SO2. */
 union PollutantType {
   string,
 
   /**
-   * Carbon monoxide
+   * The average concentration of carbon monoxide (CO) in parts per million
+   * (ppm) over the past hour. CO is a colorless, odorless, and tasteless but
+   * highly toxic gas produced by the incomplete combustion of carbon-containing
+   * fuels. Common sources include vehicle exhaust, gas stoves, furnaces, and
+   * wood fires.
    */
   CO: "CO",
 
   /**
-   * Nitrogen dioxide
+   * The average concentration of nitrogen dioxide (NO2) in micrograms per cubic
+   * meter (µg/m³) over the past hour. NO2 is a significant atmospheric
+   * pollutant. It is regulated and subject to recommended limit guidelines set
+   * by the World Health Organization (WHO).
    */
   NO2: "NO2",
 
   /**
-   * Ozone
+   * The average concentration of Ozone (O3) in micrograms per cubic meter
+   * (µg/m³) over the past hour. O3 is a key component of photochemical smog,
+   * the brown, harmful haze that envelops many large cities, resulting from a
+   * photochemical reaction between sunlight and specific pollutants.
    */
   O3: "O3",
 
   /**
-   * Particulate matter 2.5
+   * The average concentration of particles smaller than 2.5 microns in
+   * diameter, measured in micrograms per cubic meter (µg/m³), over the past
+   * hour. PM2.5, also known as aerosols, consists of fine dust and tiny liquid
+   * droplets suspended in the air. There are four categories of particulate
+   * matter:\n - PM10 (Course)\n - PM2.5 (Fine)\nPM1 (very fine)\nPM0.1
+   * (ultrafine).
    */
   PM2_5: "PM2.5",
 
   /**
-   * Particulate matter 10
+   * The average concentration of particles with diameters between 2.5 and 10
+   * microns, measured in micrograms per cubic meter (µg/m³) over the past hour.
+   * Particulate matter 10 (PM10), also known as aerosols, consists of fine dust
+   * and tiny liquid droplets suspended in the air. There are four categories of
+   * particulate matter:\n - PM10 (Course)\n - PM2.5 (Fine)\nPM1 (very
+   * fine)\nPM0.1 (ultrafine).
    */
   PM10: "PM10",
 
   /**
-   * Sulfur dioxide
+   * The average concentration of Sulfur dioxide (SO2) in micrograms per cubic
+   * meter (µg/m³) over the past hour. SO2 is a dense, colorless inorganic gas
+   * with a pungent, irritating odor. It is primarily produced by the combustion
+   * of fossil fuels at power plants and industrial facilities, but it can also
+   * be emitted from natural sources such as volcanoes.
    */
   SO2: "SO2",
 }
 
-/** Duration in days for which the forecast is requested. */
+/**
+ * Defines the duration for the air quality forecast, with options ranging from
+ * 1 to 7 days. The default duration is 1 day.
+ */
 union DailyDuration {
   integer,
 
@@ -722,34 +731,43 @@ union HourlyDuration {
   NinetySixHours: 96,
 }
 
-/** Hourly weather forecast result. */
+/** An array of HourlyForecast objects, one for each of the requested hours. */
 model HourlyForecastResult {
-  /**
-   * Forecast data for each returned hour.
-   */
+  /** An array of HourlyForecast objects, one for each of the requested hours. */
   @visibility(Lifecycle.Read)
   forecasts?: HourlyForecast[];
 }
 
-/** Hourly weather forecast data. */
+/**
+ * The HourlyForecast object provides hourly weather details, including date and
+ * time, expected and perceived temperatures, and dew point. It covers wind
+ * speed and direction, wind gusts, relative humidity, visibility, and
+ * precipitation probability. It indicates if precipitation is expected and
+ * specifies its type. Additional properties include UV index, cloud cover
+ * percentage, and cloud ceiling height. It also features an icon code and
+ * phrase describing the weather condition.
+ */
 model HourlyForecast {
   /**
    * Date and time of the forecast in [ISO
-   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for
-   * example, 2019-10-27T19:39:57-08:00.
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
   date?: utcDateTime;
 
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * A numeric value that corresponds to an image displaying the `iconPhrase`.
+   * For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
   /**
-   * Phrase description of the weather icon.
+   * A descriptive term that corresponds to a specific weather condition, such
+   * as 'Sunny'. It is paired with an `iconCode`, which is a numeric value
+   * representing an image that visually depicts the weather condition described
+   * by the `iconPhrase`. For more information, see [Weather services in Azure
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconPhrase?: string;
 
@@ -761,174 +779,261 @@ model HourlyForecast {
   hasPrecipitation?: boolean;
 
   /**
-   * Specifies whether or not it is daylight. True indicates day light.
+   * A boolean value that indicates whether it is daylight during the specified
+   * hour. Returns true if it is daylight, otherwise false.
    */
   isDaylight?: boolean;
 
   /**
-   * Temperature being returned.
+   * The expected temperature for the specified hour, measured in degrees
+   * Celsius (C) or Fahrenheit (F), depending on the unit specified in the
+   * request.
    */
   temperature?: WeatherValue;
 
   /**
-   * RealFeel™ Temperature being returned. Describes what the temperature really
-   * feels like in the shade.
+   * Provides RealFeel™ Temperature values for the specified hour, measured in
+   * degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in
+   * the request. This metric, developed by AccuWeather, incorporates over a
+   * dozen factors, including humidity, wind speed, cloud cover, and sun
+   * intensity, to offer a comprehensive measure of how the weather actually
+   * feels. For more information, see [What is the AccuWeather RealFeel
+   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)
    */
   realFeelTemperature?: WeatherValue;
 
   /**
-   * The temperature to which air may be cooled by evaporating water into it at
-   * constant pressure until it reaches saturation.
+   * Returns the temperature a parcel of air would have if it were cooled to
+   * saturation (100% relative humidity) by the evaporation of water into it.
+   * This property is important for understanding heat stress and the cooling
+   * effect of evaporation.
    */
   wetBulbTemperature?: WeatherValue;
 
   /**
-   * The dewpoint temperature in specified unit. The dewpoint temperature is the
-   * temperature that the air must be cooled to in order to reach saturation.
+   * The temperature at which air becomes saturated with moisture and dew begins
+   * to form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending
+   * on the unit specified. Additional information: The temperature at which air
+   * becomes saturated with moisture and dew begins to form. It is measured in
+   * degrees Fahrenheit (F) or Celsius (C), depending on the unit specified.
+   * This value is crucial for understanding humidity levels, as a higher dew
+   * point indicates more moisture in the air, making it feel more humid.
    */
   dewPoint?: WeatherValue;
 
   /**
-   * Wind details being returned including speed and direction.
+   * Wind speed (km/h or mph) and direction (0° to 359° azimuth). More detailed
+   * alternative: Provides the expected wind speed and direction. Wind speed is
+   * measured in units such as kilometers per hour (km/h) or miles per hour
+   * (mph), based on the unit specified in the request. Wind direction is given
+   * in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.
+   * Longer more detailed alternative: Provides the expected wind speed and
+   * direction. Wind speed is measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the specified unit. Wind direction is measured in
+   * azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise
+   * (east is 90°, south is 180°, west is 270°).
    */
   wind?: WindDetails;
 
   /**
-   * Wind gust. Wind gust is a sudden, brief increase in speed of the wind.
+   * Minimal description: Maximum short-burst wind speed (km/h or mph) and
+   * direction (0° to 359° azimuth) expected during each hour of the forecast
+   * period. More detailed alternative: Expected maximum wind gust speed and
+   * direction during each hour of the forecast period, measured in kilometers
+   * per hour (km/h) or miles per hour (mph), based on the specified unit. Wind
+   * direction is given in azimuth degrees, ranging from 0° (true North) to
+   * 359°, moving clockwise. With additional info: Returns the expected maximum
+   * wind gust speed during each hour of the forecast period, measured in
+   * kilometers per hour (km/h) or miles per hour (mph), based on the specified
+   * unit. Wind direction is given in azimuth degrees, ranging from 0° (true
+   * North) to 359°, moving clockwise. Wind gusts are brief increases in wind
+   * speed, important for understanding short-term variations that can impact
+   * activities like aviation, sailing, and outdoor events.
    */
   windGust?: WindDetails;
 
   /**
-   * Relative humidity is the amount of water vapor present in air expressed as a
-   * percentage of the amount needed for saturation at the same temperature.
+   * The amount of water vapor present in the air, expressed as a percentage of
+   * the maximum amount the air can hold at the same temperature. This value
+   * indicates how close the air is to being saturated with moisture. Slightly
+   * more detailed version: The amount of water vapor present in the air,
+   * expressed as a percentage of the maximum amount the air can hold at the
+   * same temperature. This value indicates how close the air is to being
+   * saturated with moisture, affecting how comfortable or humid the environment
+   * feels.
    */
   relativeHumidity?: int32;
 
   /**
-   * Visibility in specified unit. A measure of the distance at which an object or
-   * light can be clearly discerned.
+   * Returns the distance at which an object or light can be clearly discerned
+   * for each hour of the forecast period, measured in kilometers (km) or miles
+   * (mi), depending on the unit specified in the request. Added explanation:
+   * Returns the distance at which an object or light can be clearly discerned
+   * for each hour of the forecast period, measured in kilometers (km) or miles
+   * (mi), depending on the unit specified in the request. This indicates how
+   * far one can clearly see, which is crucial for activities like driving and
+   * aviation.
    */
   visibility?: WeatherValue;
 
   /**
-   * Cloud ceiling in specified unit. The ceiling is a measurement of the height of
-   * the base of the lowest clouds.
+   * The height of the lowest layer of clouds above the ground, measured in feet
+   * or meters based on the unit specified in the request. This measurement is
+   * crucial for aviation and weather forecasting.
    */
   ceiling?: WeatherValue;
 
   /**
-   * Measure of the strength of the ultraviolet radiation from the sun. Supported
-   * values are:
-   *   * `0-2` - Low danger from the sun's UV rays or the average person.
-   *   * `3-5` - Moderate risk of harm from unprotected sun exposure.
-   *   * `6-7` - High risk of harm from unprotected sun exposure.
-   *   * `8-10` - Very high risk of harm from unprotected sun exposure.
-   *   * `11+` - Extreme risk of harm from unprotected sun exposure.
+   * Provides the ultraviolet (UV) index for each hour of the forecast period.
+   * This index indicates the level of ultraviolet radiation expected, helping
+   * users understand the potential risk of sun exposure during different times
+   * of the day. Supported values are: 0-2 - Low danger from the sun's UV rays
+   * or the average person. 3-5 - Moderate risk of harm from unprotected sun
+   * exposure. 6-7 - High risk of harm from unprotected sun exposure. 8-10 -
+   * Very high risk of harm from unprotected sun exposure. 11+ - Extreme risk of
+   * harm from unprotected sun exposure.
    */
   uvIndex?: int32;
 
   /**
-   * Phrase associated with the `uvIndex`.
+   * Provides a descriptive phrase that indicates the level of UV radiation,
+   * such as Low, Moderate, High, or Very High.
    */
   uvIndexPhrase?: string;
 
   /**
-   * Percent representing the probability of precipitation. For example, '20'.
+   * Percentage value (0-100) representing the probability of precipitation
+   * during the specified hour. Longer / detailed version: Shows the probability
+   * of precipitation during the specified hour, expressed as a percentage from
+   * 0 to 100. A value of 0 means no chance of precipitation, while 100 means
+   * precipitation is certain. This helps users assess the likelihood of rain,
+   * snow, or other forms of precipitation.
    */
   precipitationProbability?: int32;
 
   /**
-   * Percent representing the probability of rain. For example, '50'.
+   * Percentage value (0-100) representing the probability of a rain during the
+   * specified timeframe. Longer version: Shows the probability of rain during
+   * the specified timeframe, expressed as a percentage from 0 to 100. A value
+   * of 0 means no chance of rain, while 100 means rain is certain.
    */
   rainProbability?: int32;
 
   /**
-   * Percent representing the probability of snow. For example, '50'.
+   * Shows the probability of snow during the specified hour, expressed as a
+   * percentage from 0 to 100. A value of 0 means no chance of snow, while 100
+   * means snow is certain.
    */
   snowProbability?: int32;
 
   /**
-   * Percent representing the probability of snow. For example, '5'.
+   * Percentage value (0-100) representing the probability of ice formation
+   * during the specified hour. Longer version: Shows the probability of ice
+   * formation during the specified hour, expressed as a percentage from 0 to
+   * 100. A value of 0 means no chance of ice formation, while 100 means ice
+   * formation is certain. This information helps users evaluate the potential
+   * for icy conditions.
    */
   iceProbability?: int32;
 
   /**
-   * Total liquid equivalent of precipitation during the forecast period.
+   * Returns the total amount of liquid precipitation (such as rain) expected
+   * during each hour of the forecast period, measured in millimeters (mm) or
+   * inches (in), depending on the unit specified in the request.
    */
   totalLiquid?: WeatherValue;
 
   /**
-   * Rain
+   * Returns the amount of rainfall expected during each hour in the forecast,
+   * measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   rain?: WeatherValue;
 
   /**
-   * Snow
+   * Returns the amount of snow accumulation expected during the specified hour,
+   * measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   snow?: WeatherValue;
 
   /**
-   * Ice
+   * Returns estimated ice accumulation for each hour in the forecast, measured
+   * in millimeters (mm) or inches (in), depending on the unit specified in the
+   * request.
    */
   ice?: WeatherValue;
 
   /**
-   * Percent representing cloud cover.
+   * The percentage of the sky covered by clouds at the specified hour. This
+   * value ranges from 0% (clear skies) to 100% (completely overcast). May be
+   * NULL.
    */
   cloudCover?: int32;
 }
 
 /**
- * Specific value of a given unit related to weather.
+ * Values for weather-related metrics such as temperature, dew point, and wind
+ * speed, presented in either metric or imperial units, as specified in the unit
+ * URI parameter. For more information, see [Unit
+ * types](/azure/azure-maps/weather-services-concepts#unit-types) in the article
+ * Weather services in Azure Maps.
  */
 model WeatherValue {
-  /**
-   * Rounded value.
-   */
+  /** The measured value expressed in the specified unit. */
   value?: float32;
 
   /**
-   * Type of unit for the returned value.
+   * The unit of measurement used in the return value, such as "C" for Celsius,
+   * "F" for Fahrenheit.
    */
   unit?: string;
 
   /**
-   * An integer representing the unit type.  For example, 17 for Celsius, 18 for
-   * Fahrenheit. Can be used for unit translation. For a complete list, see [Weather
-   * services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#unit-types).
+   * An integer representing the type of unit. For example, 0 for feet, 1 for
+   * inches, 2 for miles. For a complete list, see [Unit
+   * types](/azure/azure-maps/weather-services-concepts#unit-types) in the
+   * article Weather services in Azure Maps.
    */
   unitType?: UnitType;
 }
 
-/**
- * Wind details being returned including speed and direction.
- */
+/** Returns the expected wind speed and direction. */
 model WindDetails {
   /**
-   * Wind direction
+   * Wind direction in azimuth degrees (0° to 359°). Detailed version: Wind
+   * direction is measured in azimuth degrees, starting at true North (0°) and
+   * moving clockwise. East corresponds to 90°, south to 180°, and west to 270°.
+   * Possible values range from 0° to 359°. This property returns an integer
+   * representing the wind direction.
    */
   direction?: WindDirection;
 
   /**
-   * Speed of the wind in specified unit.
+   * Wind speed (km/h or mph). More detailed: The expected wind speed, measured
+   * in kilometers per hour (km/h) or miles per hour (mph), depending on the
+   * unit specified in the request.
    */
   speed?: WeatherValue;
 }
 
 /**
- * Wind direction
+ * Provides details about wind direction, including the direction in azimuth
+ * degrees and a localized abbreviation of the wind direction.
  */
 model WindDirection {
   /**
-   * Wind direction in Azimuth degrees,  starting at true North and continuing in
-   * clockwise direction. North is 0 degrees, east is 90 degrees, south is 180
-   * degrees, west is 270 degrees. Possible values 0-359.
+   * Wind direction is measured in azimuth degrees, starting at true North and
+   * moving clockwise. North corresponds to 0 degrees, east to 90 degrees, south
+   * to 180 degrees, and west to 270 degrees. Possible values range from 0 to
+   * 359 degrees.
    */
   degrees?: int32;
 
   /**
-   * Direction abbreviation in the specified language.
+   * A localized abbreviation of the wind direction, returned in the language
+   * specified in the request. For example, 'N' for North, 'E' for East, 'S' for
+   * South, and 'W' for West.
    */
   localizedDescription?: string;
 }
@@ -999,280 +1104,344 @@ model ErrorAdditionalInfo {
   info?: Record<unknown>;
 }
 
-/** Minute-by-minute weather forecast result. */
+/**
+ * An array of minute-by-minute weather forecasts for a specified location,
+ * detailing precipitation type, intensity, cloud cover, and temperature for
+ * each interval.
+ */
 model MinuteForecastResult {
-  /**
-   * Phrase summaries for the entire forecast period.
-   */
+  /** <No change> */
   @visibility(Lifecycle.Read)
   summary?: MinuteForecastSummary;
 
   /**
-   * Summary information for each interval in the forecast. The Summaries breaks
-   * down each potential interval where precipitation starts and stops.
+   * Provides concise weather summaries for each forecast interval, detailing
+   * start and end times, duration, and a brief description, such as "Rain
+   * ending in 25 min."
    */
   @visibility(Lifecycle.Read)
   intervalSummaries?: IntervalSummary[];
 
   /**
-   * Forecast data for each interval in the forecast.
+   * Contains an array of ForecastInterval objects, each providing detailed
+   * forecast data for a specific time interval within the minute-by-minute
+   * forecast.
    */
   @visibility(Lifecycle.Read)
   intervals?: ForecastInterval[];
 }
 
-/**
- * Phrase summaries for the entire forecast period.
- */
+/** <No change> */
 model MinuteForecastSummary {
-  /**
-   * Summary phrase for the next 60 minutes. Phrase length is approximately 60
-   * characters.
-   */
+  /** <No change> */
   briefPhrase60?: string;
 
-  /**
-   * Short summary phrase for the next 120 minutes. Phrase length is approximately
-   * 25 characters.
-   */
+  /** <No change> */
   shortPhrase?: string;
 
-  /**
-   * Summary phrase for the next 120 minutes. Phrase length is approximately 60
-   * characters.
-   */
+  /** <No change> */
   briefPhrase?: string;
 
-  /**
-   * Long summary phrase for the next 120 minutes. Phrase length is 60+ characters.
-   */
+  /** <No change> */
   longPhrase?: string;
 
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * A numeric value that corresponds to an image displaying the `iconPhrase`.
+   * For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 }
 
-/** Summary information for a forecast interval. */
+/**
+ * The IntervalSummary provides a summary of weather conditions for a specified
+ * interval. This object includes aggregated data such as average precipitation
+ * intensity, predominant precipitation type, and overall cloud cover for the
+ * interval. It helps users quickly understand the general weather trends over
+ * the forecast period
+ */
 model IntervalSummary {
-  /**
-   * The first minute to which the summary applies.
-   */
+  /** Specifies the first minute of the forecast interval for which the summary applies. */
   startMinute?: int32;
 
-  /**
-   * The last minute to which the summary applies.
-   */
+  /** Specifies the last minute of the forecast interval for which the weather data is provided. */
   endMinute?: int32;
 
-  /**
-   * The number of minutes for which the summary applies.
-   */
+  /** <No change> */
   totalMinutes?: int32;
 
-  /**
-   * Short summary phrase. Phrase length is approximately 25 characters.
-   */
+  /** A short phrase describing precipitation condition for the interval. Up to 25 characters. */
   shortPhrase?: string;
 
-  /**
-   * Brief summary phrase. Phrase length is approximately 60 characters.
-   */
+  /** A brief phrase describing precipitation condition for the interval. Up to 60 characters. */
   briefPhrase?: string;
 
   /**
-   * Long summary phrase. Phrase length is 60+ characters.
+   * A long phrase describing precipitation condition for the interval. Supports
+   * more than 60 characters.
    */
   longPhrase?: string;
 
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * A numeric value that corresponds to an image displaying the `iconPhrase`.
+   * For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 }
 
-/** Forecast data for a specific interval. */
+/**
+ * Provides minute-by-minute weather forecasts for a specified location over the
+ * next 120 minutes. Forecasts can be requested in 1, 5, or 15 minutes
+ * intervals.
+ */
 model ForecastInterval {
   /**
-   * The date and time for the start of the interval in [ISO
-   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for
-   * example, 2019-10-27T19:39:57-08:00.
+   * Date and time of the start of the forecast interval, displayed in [ISO
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
   startTime?: utcDateTime;
 
-  /**
-   * The first minute for the interval.
-   */
+  /** Specifies the first minute of the forecast interval for which the weather data is provided. */
   minute?: int32;
 
   /**
-   * A unit that represents forecasted precipitation intensity.
+   * dBZ is a unit used to measure the intensity of precipitation. It indicates
+   * the strength of the radar signal when it bounces off raindrops, snowflakes,
+   * or hail. Higher dBZ values correspond to heavier precipitation.
    */
   dbz?: float64;
 
-  /**
-   * A short phrase describing precipitation condition for the interval.
-   */
+  /** A brief description of the expected weather conditions during the forecast interval. */
   shortPhrase?: string;
 
   /**
-   * Key that specifies the threshold value. Along with precipitationType, can be
-   * used to determine the simplifiedColor. If dBZ is zero, not present in the
-   * response.
+   * Specifies the threshold value for precipitation intensity. Along with
+   * precipitationType, it is used to determine the simplifiedColor. This
+   * property is included in the response when dBZ is greater than zero.
+   * Detailed version: Specifies the precipitation intensity level at which a
+   * certain type of precipitation (such as rain, snow, or ice) is considered
+   * significant. This helps categorize and visualize precipitation events based
+   * on their intensity. Along with precipitationType, it is used to determine
+   * the simplifiedColor. This property is included in the response when dBZ is
+   * greater than zero.
    */
   threshold?: string;
 
   /**
-   * The full spectrum color that maps to the dBZ (decibel relative to Z). If dBZ is
-   * zero, color is not present in the response.
+   * The full spectrum color that maps to the dBZ. This property is included in
+   * the response when dBZ is greater than zero.
    */
   color?: ColorValue;
 
   /**
-   * The band color that maps to the precipitation type and threshold. If dBZ is
-   * zero, not present in the response.
+   * The band color that maps to the precipitation type and threshold. This
+   * property is included in the response when dBZ is greater than zero.
+   * Detailed version: Used for visual representations based on precipitation
+   * type and threshold. It maps colors to specific precipitation types and
+   * their intensities, making it easier to quickly identify weather conditions
+   * without detailed color mappings. This is suitable for applications that
+   * require quick, easy-to-understand visual cues. This property is included in
+   * the response when dBZ is greater than zero.
    */
   simplifiedColor?: ColorValue;
 
   /**
-   * Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or Mix.
-   * This property is included in the response when dBZ is greater than zero.
+   * Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or
+   * Mix. This property is included in the response when `dBZ` is greater than
+   * zero.
    */
   precipitationType?: PrecipitationType;
 
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * A numeric value that corresponds to an image displaying the `iconPhrase`.
+   * For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
   /**
-   * Percent representing cloud cover.
+   * The percentage of the sky covered by clouds at the specified time. Valid
+   * values range from 0% (no clouds) to 100% (completely overcast). May be
+   * NULL.
    */
   cloudCover?: int32;
 }
 
-/** Color value represented as RGB and hexadecimal. */
+/**
+ * The full spectrum color that maps to the `dBZ`. A value is only returned if
+ * the `dBZ` value is greater than zero. Verify the following is accurate: Use
+ * to provide a visual representation of various weather conditions. For more
+ * information on color mappings, see [Weather service in Azure
+ * Maps](/azure/azure-maps/weather-services-concepts#radar-images).
+ */
 model ColorValue {
-  /**
-   * Red component of the RGB value.
-   */
+  /** Red component of the RGB value. Valid values range from 0-255. */
   red?: int32;
 
-  /**
-   * Green component of the RGB value.
-   */
+  /** Green component of the RGB value. Valid values range from 0-255. */
   green?: int32;
 
-  /**
-   * Blue component of the RGB value
-   */
+  /** Blue component of the RGB value. Valid values range from 0-255. */
   blue?: int32;
 
-  /**
-   * Hexadecimal color value.
-   */
+  /** Hexadecimal color value. For example, red is '#FF0000'. */
   hex?: string;
 }
 
-/** Quarter-day weather forecast result. */
+/**
+ * Returns an array of QuarterDayForecast objects, each providing detailed
+ * forecast data for the requested quarter-day periods.
+ */
 model QuarterDayForecastResult {
   /**
-   * Forecast data for each quarter in the response.
+   * An array of all requested quarter-day forcast results, each providing
+   * detailed forecast data for a specific quarter-day forecast.
    */
   @visibility(Lifecycle.Read)
   forecasts?: QuarterDayForecast[];
 }
 
-/** Quarter-day weather forecast data. */
+/**
+ * Provides detailed weather forecasts for the requested quarter-day period
+ * (morning, afternoon, evening, overnight) at the specified location. Each
+ * forecast includes comprehensive data such as temperature, dew point,
+ * humidity, wind speed and direction, visibility, cloud cover, and
+ * precipitation probability, type, and intensity.
+ */
 model QuarterDayForecast {
   /**
-   * Date of the forecast as example, 2019-10-27T00:00:00
+   * Date of the forecast in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+   * format (yyyy-mm-ddThh:mm:ss-hh:mm). For example,
+   * *2025-06-19T00:00:00+00:00*.
    */
   date?: utcDateTime;
 
   /**
-   * Date and time of the beginning of the forecast quarter displayed in [ISO
-   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for
-   * example, 2019-10-27T19:39:57-08:00.
+   * Date and time at the beginning of the quarter day forecast, displayed in
+   * [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
   effectiveDate?: utcDateTime;
 
   /**
-   * Divides the day into four 6-hour quarters. Valid values are 0-3:<ul><li>0:
-   * Morning (7am - 1pm)</li><li>1: Afternoon (1pm - 7pm)</li><li>2: Evening (7pm -
-   * 1am)</li><li>3: Overnight (1am - 7am)</li></ul>
+   * Specifies the quarter-day period: 0 = morning (7am - 1pm) 1 = afternoon
+   * (1pm - 7pm) 2 = evening (7pm - 1am) 3 = overnight (1am - 7am)
    */
   quarter?: DayQuarter;
 
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * A numeric value that corresponds to an image displaying the `iconPhrase`.
+   * For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
   /**
-   * Phrase description of the icon. Displayed in specified language. For example,
-   * 'Sunny'.
+   * A one or two word descriptive term that corresponds to a specific weather
+   * condition, such as 'Sunny'. It is paired with an `iconCode`, which is a
+   * numeric value representing an image that visually depicts the weather
+   * condition described by the `iconPhrase`. For more information, see [Weather
+   * services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconPhrase?: string;
 
   /**
-   * Short summary phrase summary for quarter.
+   * Provides a brief textual description of the weather conditions for each
+   * quarter of the day. It uses more descriptive terms than iconePhrase, which
+   * might return 'Thunderstorms' where phrase returns 'Cloudy with a couple of
+   * showers and a thunderstorm'. This makes it easy to understand and integrate
+   * into applications for clear and concise weather forecasts.
    */
   phrase?: string;
 
   /**
-   * Temperature values for the quarter.
+   * The expected temperature for the specified quarter-day period, measured in
+   * degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in
+   * the request.
    */
   temperature?: WeatherValueRange;
 
   /**
-   * RealFeel™ Temperature values for the quarter.
+   * Provides RealFeel™ Temperature values for the specified quarter-day period,
+   * measured in degrees Celsius (C) or Fahrenheit (F), depending on the unit
+   * specified in the request. This metric, developed by AccuWeather,
+   * incorporates over a dozen factors, including humidity, wind speed, cloud
+   * cover, and sun intensity, to offer a comprehensive measure of how the
+   * weather actually feels. For more information, see [What is the AccuWeather
+   * RealFeel
+   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)
    */
   realFeelTemperature?: WeatherValueRange;
 
   /**
-   * The dewpoint temperature in specified unit. The dewpoint temperature is the
-   * temperature that the air must be cooled to in order to reach saturation.
+   * The temperature at which air becomes saturated with moisture and dew begins
+   * to form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending
+   * on the unit specified. Additional information: The temperature at which air
+   * becomes saturated with moisture and dew begins to form. It is measured in
+   * degrees Fahrenheit (F) or Celsius (C), depending on the unit specified.
+   * This value is crucial for understanding humidity levels, as a higher dew
+   * point indicates more moisture in the air, making it feel more humid.
    */
   dewPoint?: WeatherValue;
 
   /**
-   * Relative humidity is the amount of water vapor present in air expressed as a
-   * percentage of the amount needed for saturation at the same temperature.
+   * The amount of water vapor present in the air, expressed as a percentage of
+   * the maximum amount the air can hold at the same temperature. This value
+   * indicates how close the air is to being saturated with moisture. Slightly
+   * more detailed version: The amount of water vapor present in the air,
+   * expressed as a percentage of the maximum amount the air can hold at the
+   * same temperature. This value indicates how close the air is to being
+   * saturated with moisture, affecting how comfortable or humid the environment
+   * feels.
    */
   relativeHumidity?: int32;
 
   /**
-   * Wind details being returned including speed and direction.
+   * Wind speed (km/h or mph) and direction (0° to 359° azimuth). More detailed
+   * alternative: Provides the expected wind speed and direction. Wind speed is
+   * measured in units such as kilometers per hour (km/h) or miles per hour
+   * (mph), based on the unit specified in the request. Wind direction is given
+   * in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.
+   * Longer more detailed alternative: Provides the expected wind speed and
+   * direction. Wind speed is measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the specified unit. Wind direction is measured in
+   * azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise
+   * (east is 90°, south is 180°, west is 270°).
    */
   wind?: WindDetails;
 
   /**
-   * Wind gust. Wind gust is a sudden, brief increase in speed of the wind.
+   * Minimal description: Maximum short-burst wind speed (km/h or mph) and
+   * direction (0° to 359° azimuth) expected during each quarter of the forecast
+   * period. More detailed alternative: Expected maximum wind gust speed and
+   * direction during each quarter of the forecast period, measured in
+   * kilometers per hour (km/h) or miles per hour (mph), based on the specified
+   * unit. Wind direction is given in azimuth degrees, ranging from 0° (true
+   * North) to 359°, moving clockwise. Additional info: This is important for
+   * understanding short-term variations in wind speed, which can impact
+   * activities such as aviation, sailing, and outdoor events
    */
   windGust?: WindDetails;
 
   /**
-   * Visibility in specified unit. A measure of the distance at which an object or
-   * light can be clearly discerned.
+   * Returns the distance at which an object or light can be clearly discerned
+   * for each quarter of the forecast period, measured in kilometers (km) or
+   * miles (mi), depending on the unit specified in the request. Added
+   * explanation: Returns the distance at which an object or light can be
+   * clearly discerned for each quarter of the forecast period, measured in
+   * kilometers (km) or miles (mi), depending on the unit specified in the
+   * request. This indicates how far one can clearly see, which is crucial for
+   * activities like driving and aviation.
    */
   visibility?: WeatherValue;
 
   /**
-   * Percent representing cloud cover.
+   * The percentage of the sky covered by clouds at a given location during the
+   * specified timeframe. This value ranges from 0% (clear skies) to 100%
+   * (completely overcast). May be NULL.
    */
   cloudCover?: int32;
 
@@ -1284,58 +1453,83 @@ model QuarterDayForecast {
   hasPrecipitation?: boolean;
 
   /**
-   * Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or Mix.
-   * This property is included in the response when dBZ is greater than zero.
+   * Indicates the type of precipitation, which can be *Rain*, *Snow*, *Ice*, or
+   * *Mix*. This property is included in the response when `hasPrecipitation` is
+   * true.
    */
   precipitationType?: PrecipitationType;
 
   /**
-   * Description of the intensity.
+   * Indicates the intensity of precipitation (light, moderate, heavy). Only
+   * returned if `hasPrecipitation` is true.
    */
   precipitationIntensity?: string;
 
   /**
-   * Percent representing the probability of precipitation. For example, '20'.
+   * Percentage value (0-100) representing the probability of precipitation
+   * during the specified quarter-day period. Longer / detailed version: Shows
+   * the probability of precipitation during the specified quarter-day period,
+   * expressed as a percentage from 0 to 100. A value of 0 means no chance of
+   * precipitation, while 100 means precipitation is certain. This helps users
+   * assess the likelihood of rain, snow, or other forms of precipitation.
    */
   precipitationProbability?: int32;
 
   /**
-   * Percent representing the probability of a thunderstorm. For example, '10'.
+   * Percentage value (0-100) representing the probability of a thunderstorm
+   * during the specified quarter-day period. Longer version: Shows the
+   * probability of a thunderstorm occurring during the specified quarter-day
+   * period, expressed as a percentage from 0 to 100. A value of 0 means no
+   * chance of a thunderstorm, while 100 means a thunderstorm is certain.
    */
   thunderstormProbability?: int32;
 
   /**
-   * Total liquid equivalent of precipitation during the forecast period.
+   * Indicates the total amount of liquid precipitation (such as rain) expected
+   * during each quarter of the forecast period, measured in millimeters (mm) or
+   * inches (in), depending on the unit specified in the request.
    */
   totalLiquid?: WeatherValue;
 
   /**
-   * Rain
+   * Returns the amount of rainfall expected during the specified quarter-day
+   * period, measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   rain?: WeatherValue;
 
   /**
-   * Snow
+   * Returns the amount of snow accumulation expected during the specified
+   * quarter-day period, measured in millimeters (mm) or inches (in), depending
+   * on the unit specified in the request.
    */
   snow?: WeatherValue;
 
   /**
-   * Ice
+   * Returns estimated ice accumulation for each quarter-day period in the
+   * forecast, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   ice?: WeatherValue;
 }
 
 /**
- * Returned temperature values.
+ * Provides the highest and lowest forecasted temperatures for the specified
+ * timeframe, measured in degrees Celsius (°C) or Fahrenheit (°F), based on the
+ * unit specified in the request.
  */
 model WeatherValueRange {
   /**
-   * Minimum temperature for the time period.
+   * Provides the minimum temperature for the specified timeframe, measured in
+   * degrees Celsius (C) or Fahrenheit (F), based on the unit specified in the
+   * request.
    */
   minimum?: WeatherValue;
 
   /**
-   * Maximum temperature for the time period
+   * Provides the maximum temperature for the specified timeframe, measured in
+   * degrees Celsius (C) or Fahrenheit (F), based on the unit specified in the
+   * request.
    */
   maximum?: WeatherValue;
 }
@@ -1343,286 +1537,357 @@ model WeatherValueRange {
 /** Current weather conditions result. */
 model CurrentConditionsResult {
   /**
-   * Detailed current weather conditions.
+   * An array of `CurrentConditions` objects. The number of objects corresponds
+   * to the `duration` parameter specified in the request (0, 6, or 24),
+   * representing the most current weather conditions, 6 hourly conditions, or
+   * 24 hourly conditions.
    */
   @visibility(Lifecycle.Read)
   results?: CurrentConditions[];
 }
 
-/** Current weather conditions data. */
+/**
+ * Returns current weather conditions for a specific location. By default, if
+ * the `details` URI parameter is not provided, a simplified version of the data
+ * is returned, including the observation date and time, weather description,
+ * icon code, precipitation indicator, and temperature. When the `details` URI
+ * parameter is set to *true*, all properties are included.
+ */
 model CurrentConditions {
   /**
-   * Date and time of the current observation displayed in [ISO
-   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for
-   * example, 2019-10-27T19:39:57-08:00.
+   * Date and time of the current observation, displayed in [ISO
+   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
   dateTime?: utcDateTime;
 
   /**
-   * Phrase description of the current weather condition.  Displayed in specified
-   * language.
+   * A descriptive term that corresponds to a specific weather condition, such
+   * as 'Sunny'. It is paired with an `iconCode`, which is a numeric value
+   * representing an image that visually depicts the weather condition described
+   * by the `iconPhrase`. For more information, see [Weather services in Azure
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   phrase?: string;
 
   /**
    * Numeric value representing an image that corresponds to the current weather
    * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
    */
   iconCode?: IconCode;
 
   /**
-   * A boolean value that indicates whether precipitation (rain, snow, sleet, or
-   * hail) is expected during the specified timeframe. Returns true if precipitation
-   * is expected, otherwise false.
+   * A boolean value that indicates the presence of precipitation (such as rain,
+   * snow, sleet, hail). Returns true if precipitation is expected, otherwise
+   * false.
    */
   hasPrecipitation?: boolean;
 
   /**
-   * Indicates the time of the day. True indicates 'day',', false indicates 'night.
+   * Indicates whether it is currently daytime at the specified location.
+   * Returns true for daytime and false for nighttime.
    */
   isDayTime?: boolean;
 
   /**
-   * Temperature being returned.
+   * The current temperature for the specified location, measured in degrees
+   * Celsius (C) or Fahrenheit (F), depending on the unit specified in the
+   * request.
    */
   temperature?: WeatherValue;
 
   /**
-   * RealFeel™ Temperature being returned.
+   * The current RealFeel™ Temperature values, measured in degrees Celsius (C)
+   * or Fahrenheit (F), depending on the unit specified in the request. This
+   * metric, developed by AccuWeather, incorporates over a dozen factors,
+   * including humidity, wind speed, cloud cover, and sun intensity, to offer a
+   * comprehensive measure of how the weather actually feels. For more
+   * information, see [What is the AccuWeather RealFeel
+   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655
    */
   realFeelTemperature?: WeatherValue;
 
   /**
-   * RealFeel™ Temperature being returned. Describes what the temperature really
-   * feels like in the shade.
+   * A temperature value that uses a variety of factors to determine how the
+   * temperature actually feels outside in the shade, measured in degrees
+   * Celsius (C) or Fahrenheit (F), depending on the unit specified in the
+   * request.
    */
   realFeelTemperatureShade?: WeatherValue;
 
   /**
-   * Relative humidity is the amount of water vapor present in air expressed as a
-   * percentage of the amount needed for saturation at the same temperature.
+   * The amount of water vapor present in the air, expressed as a percentage of
+   * the maximum amount the air can hold at the same temperature. This value
+   * indicates how close the air is to being saturated with moisture. Slightly
+   * more detailed version: The amount of water vapor present in the air,
+   * expressed as a percentage of the maximum amount the air can hold at the
+   * same temperature. This value indicates how close the air is to being
+   * saturated with moisture, affecting how comfortable or humid the environment
+   * feels.
    */
   relativeHumidity?: int32;
 
   /**
-   * The dewpoint temperature in specified unit. The dewpoint temperature is the
-   * temperature that the air must be cooled to in order to reach saturation.
+   * The temperature at which air becomes saturated with moisture and dew begins
+   * to form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending
+   * on the unit specified. Additional information: The temperature at which air
+   * becomes saturated with moisture and dew begins to form. It is measured in
+   * degrees Fahrenheit (F) or Celsius (C), depending on the unit specified.
+   * This value is crucial for understanding humidity levels, as a higher dew
+   * point indicates more moisture in the air, making it feel more humid.
    */
   dewPoint?: WeatherValue;
 
   /**
-   * Wind details being returned including speed and direction.
+   * Current wind speed (km/h or mph) and direction (0° to 359° azimuth). More
+   * detailed alternative: Current wind speed and direction. Wind speed is
+   * measured in units such as kilometers per hour (km/h) or miles per hour
+   * (mph), based on the unit specified in the request. Wind direction is given
+   * in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.
+   * Longer more detailed alternative: Provides the current wind speed and
+   * direction. Wind speed is measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the specified unit. Wind direction is measured in
+   * azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise
+   * (east is 90°, south is 180°, west is 270°).
    */
   wind?: WindDetails;
 
   /**
-   * Wind gust. Wind gust is a sudden, brief increase in speed of the wind.
+   * Minimal description: Maximum short-burst wind speed (km/h or mph) and
+   * direction (0° to 359° azimuth). (TBD: What exactly is the timeframe?) More
+   * detailed alternative: Returns the current expected maximum short-burst wind
+   * speed and direction, measured in kilometers per hour (km/h) or miles per
+   * hour (mph), depending on the unit specified in the request. Wind direction
+   * is given in azimuth degrees, ranging from 0° (true North) to 359°, moving
+   * clockwise. additional info: Wind gusts are a sudden, brief increase in wind
+   * speed, important for understanding short-term variations that can impact
+   * activities like aviation, sailing, kite flying and other outdoor events.
    */
   windGust?: WindDetails;
 
   /**
-   * Measure of the strength of the ultraviolet radiation from the sun. Supported
-   * values are:
-   *   * `0-2` - Low danger from the sun's UV rays or the average person.
-   *   * `3-5` - Moderate risk of harm from unprotected sun exposure.
-   *   * `6-7` - High risk of harm from unprotected sun exposure.
-   *   * `8-10` - Very high risk of harm from unprotected sun exposure.
-   *   * `11+` - Extreme risk of harm from unprotected sun exposure.
+   * Provides the current ultraviolet (UV) index, helping users understand the
+   * current risk of sun exposure. Supported values are: 0-2 - Low danger from
+   * the sun's UV rays or the average person. 3-5 - Moderate risk of harm from
+   * unprotected sun exposure. 6-7 - High risk of harm from unprotected sun
+   * exposure. 8-10 - Very high risk of harm from unprotected sun exposure. 11+
+   * - Extreme risk of harm from unprotected sun exposure.
    */
   uvIndex?: int32;
 
   /**
-   * Phrase associated with the `uvIndex`.
+   * Descriptive phrase indicating the current level of UV radiation, such as
+   * Low, Moderate, High, or Very High, to help users understand sun exposure
+   * risk.
    */
   uvIndexPhrase?: string;
 
   /**
-   * Visibility in specified unit. A measure of the distance at which an object or
-   * light can be clearly discerned.
+   * Returns the distance at which an object or light can be clearly discerned,
+   * measured in kilometers (km) or miles (mi), depending on the unit specified
+   * in the request. Added explanation: Returns the distance at which an object
+   * or light can be clearly discerned, measured in kilometers (km) or miles
+   * (mi), depending on the unit specified in the request. This indicates how
+   * far one can clearly see, which is crucial for activities like driving and
+   * aviation.
    */
   visibility?: WeatherValue;
 
   /**
-   * Cause of limited visibility.
-   *
-   * Possible values:
-   *
-   * - _A = heavy thunderstorm/hail_
-   * - _BD = blowing dust_
-   * - _BN = blowing sand_
-   * - _BS = blowing snow_
-   * - _D = dust_
-   * - _F = fog_
-   * - _GF = ground fog_
-   * - _HZ = haze_
-   * - _I = ice_
-   * - _IC = ice crystals_
-   * - _IF = ice fog_
-   * - _IP = ice pellets_
-   * - _IPW = ice pellets shower_
-   * - _K = smoke_
-   * - _L = drizzle_
-   * - _R = rain_
-   * - _RS = rain/snow_
-   * - _RW = rain shower_
-   * - _S = snow_
-   * - _SG = snow granules_
-   * - _SP = snow pellets_
-   * - _SW = snow shower_
-   * - _T = thunderstorm_
-   * - _UP = undefined precipitation_
-   * - _ZL = freezing drizzle_
-   * - _ZR = freezing rain_
-   * - _+ = heavy_
-   * - _- = light_
+   * Identifies any factors that may impair visibility. This can include
+   * elements such as fog, smoke, haze, or heavy precipitation, providing
+   * crucial information for activities that depend on clear visibility, like
+   * driving or aviation. Possible values: A = heavy thunderstorm/hail BD =
+   * blowing dust BN = blowing sand BS = blowing snow D = dust F = fog GF =
+   * ground fog HZ = haze I = ice IC = ice crystals IF = ice fog IP = ice
+   * pellets IPW = ice pellets shower K = smoke L = drizzle R = rain RS =
+   * rain/snow RW = rain shower S = snow SG = snow granules SP = snow pellets SW
+   * = snow shower T = thunderstorm UP = undefined precipitation ZL = freezing
+   * drizzle ZR = freezing rain + = heavy - = light
    */
   obstructionsToVisibility?: string;
 
   /**
-   * Percent representing cloud cover.
+   * The percentage of the sky covered by clouds, ranging from 0% (clear sky) to
+   * 100% (completely overcast). May be NULL.
    */
   cloudCover?: int32;
 
   /**
-   * Cloud ceiling in specified unit. The ceiling is a measurement of the height of
-   * the base of the lowest clouds.
+   * Cloud ceiling: The height of the lowest layer of clouds above the ground,
+   * measured in feet or meters based on the unit specified in the request.
+   * Slightly longer: Cloud ceiling: The height of the lowest layer of clouds
+   * above the ground, measured in feet or meters based on the unit specified in
+   * the request. This measurement is crucial for aviation and weather
+   * forecasting. Longer version: Cloud ceiling: The height of the lowest layer
+   * of clouds above the ground, measured in feet or meters, depending on the
+   * unit specified in the request. This value is crucial for aviation and
+   * weather forecasting, as it indicates the altitude at which clouds begin to
+   * form, affecting visibility and flight safety.
    */
   ceiling?: WeatherValue;
 
   /**
-   * Atmospheric pressure in specified unit.
+   * Atmospheric pressure (measured air pressure at ground level) in millibars
+   * (mb) or inches of mercury (inHg), depending on the unit specified in the
+   * request.
    */
   pressure?: WeatherValue;
 
   /**
-   * Atmospheric pressure change.
+   * Provides information about the trend of atmospheric pressure over a
+   * specified period. This property indicates whether the pressure is rising,
+   * falling, or steady, which can be useful for understanding short-term
+   * weather changes.
    */
   pressureTendency?: PressureTendency;
 
   /**
-   * Departure from the temperature observed 24 hours ago in specified unit.
+   * Indicates the difference between the current temperature and the
+   * temperature recorded 24 hours ago, measured in degrees Celsius (C) or
+   * Fahrenheit (F), depending on the unit specified in the request. Longer
+   * version: Indicates the difference between the current temperature and the
+   * temperature recorded 24 hours ago, measured in degrees Celsius (C) or
+   * Fahrenheit (F), depending on the unit specified in the request. This value
+   * helps to understand how much the temperature has changed over the past day,
+   * providing insights into short-term temperature trends.
    */
   pastTwentyFourHourTemperatureDeparture?: WeatherValue;
 
   /**
-   * Perceived outdoor temperature caused by the combination of air temperature,
-   * relative humidity, and wind speed in specified unit.
+   * Apparent temperature represents how the outdoor temperature feels to
+   * humans, considering air temperature, relative humidity, and wind speed. It
+   * is measured in degrees Celsius (C) or Fahrenheit (F), depending on the unit
+   * specified in the request. This value provides a more accurate
+   * representation of perceived temperature rather than the actual air
+   * temperature.
    */
   apparentTemperature?: WeatherValue;
 
   /**
-   * Perceived air temperature on exposed skin due to wind.
+   * Indicates the perceived temperature felt on exposed skin due to the
+   * combined effect of wind and cold air. This temperature is typically lower
+   * than the actual air temperature and is measured in degrees Celsius (°C) or
+   * Fahrenheit (°F), based on the unit specified in the request.
    */
   windChillTemperature?: WeatherValue;
 
   /**
-   * The temperature to which air may be cooled by evaporating water into it at
-   * constant pressure until it reaches saturation.
+   * Temperature air would reach if cooled to saturation (100% relative
+   * humidity) by evaporating water into it at constant pressure, crucial for
+   * assessing heat stress and evaporation cooling. Measured in degrees Celsius
+   * (C) or Fahrenheit (F), depending on the unit specified in the request.
    */
   wetBulbTemperature?: WeatherValue;
 
   /**
-   * Summary of precipitation amounts over the past 24 hours.
+   * The amount of precipitation (liquid equivalent) that has fallen in the past
+   * 1, 3, 6, 9, 12, 18 and 24 hours, measured in millimeters (mm) or inches
+   * (in), depending on the unit specified in the request. This property helps
+   * users understand recent precipitation trends and current conditions at a
+   * specific location.
    */
   precipitationSummary?: PrecipitationSummary;
 
   /**
-   * Summary of temperature fluctuations over the past 6, 12, and 24 hours.
+   * Provides the highest and lowest temperatures recorded over the past 6, 12
+   * and 24 hours, measured in degrees Celsius (C) or Fahrenheit (F), depending
+   * on the unit specified in the request.
    */
   temperatureSummary?: TemperatureSummary;
 }
 
-/** Atmospheric pressure tendency. */
+/**
+ * Indicates the trend of atmospheric pressure over a specified period, showing
+ * whether the pressure is rising, falling, or steady. This information is
+ * useful for understanding short-term weather changes.
+ */
 model PressureTendency {
-  /**
-   * Description of the pressure tendency in specified language
-   */
+  /** Description of the pressure tendency in the language specified in the request. */
   localizedDescription?: string;
 
   /**
-   * Pressure tendency code regardless of language. One of F=Falling, S=Steady,
-   * R=Rising.
+   * Pressure tendency codes universally understood: F for Falling, S for
+   * Steady, and R for Rising.
    */
   code?: string;
 }
 
-/** Summary of precipitation amounts. */
+/**
+ * Summary of precipitation amounts over the past 24 hours, with measurements at
+ * the following intervals: 1, 3, 6, 9, 12, 18, and 24 hours.
+ */
 model PrecipitationSummary {
   /**
    * The amount of precipitation (liquid equivalent) that has fallen in the past
-   * hour.
+   * hour, measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   pastHour?: WeatherValue;
 
   /**
    * The amount of precipitation (liquid equivalent) that has fallen in the past
-   * three hours.
+   * three hours, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   past3Hours?: WeatherValue;
 
   /**
-   * The amount of precipitation (liquid equivalent) that has fallen in the past six
-   * hours. Contains Metric and Imperial Values.
+   * The amount of precipitation (liquid equivalent) that has fallen in the past
+   * six hours, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   past6Hours?: WeatherValue;
 
   /**
    * The amount of precipitation (liquid equivalent) that has fallen in the past
-   * nine hours.
+   * nine hours, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   past9Hours?: WeatherValue;
 
   /**
-   * The amount of precipitation (liquid equivalent) that has fallen in the past 12
-   * hours.
+   * The amount of precipitation (liquid equivalent) that has fallen in the past
+   * 12 hours, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   past12Hours?: WeatherValue;
 
   /**
-   * The amount of precipitation (liquid equivalent) that has fallen in the past 18
-   * hours.
+   * The amount of precipitation (liquid equivalent) that has fallen in the past
+   * 18 hours, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   past18Hours?: WeatherValue;
 
   /**
-   * The amount of precipitation (liquid equivalent) that has fallen in the past 24
-   * hours.
+   * The amount of precipitation (liquid equivalent) that has fallen in the past
+   * 24 hours, measured in millimeters (mm) or inches (in), depending on the
+   * unit specified in the request.
    */
   past24Hours?: WeatherValue;
 }
 
-/** Summary of temperature fluctuations. */
+/** Provides the highest and lowest temperatures recorded over the past 6, 12 and 24 hours. */
 model TemperatureSummary {
-  /**
-   * Summary of temperature fluctuations over the past 6 hours.
-   */
+  /** Provides the highest and lowest temperatures recorded over the past 6 hours. */
   past6Hours?: PastHoursTemperature;
 
-  /**
-   * Summary of temperature fluctuations over the past 12 hours.
-   */
+  /** Provides the highest and lowest temperatures recorded over the past 12 hours. */
   past12Hours?: PastHoursTemperature;
 
-  /**
-   * Summary of temperature fluctuations over the past 24 hours.
-   */
+  /** Provides the highest and lowest temperatures recorded over the past 24 hours. */
   past24Hours?: PastHoursTemperature;
 }
 
-/**
- * Summary of temperature fluctuations over the number of past hours.
- */
+/** Provides the highest and lowest temperature recorded for the past 6, 12 and 24 hours. */
 model PastHoursTemperature {
-  /**
-   * minimum
-   */
+  /** The lowest temperature recorded during the specified timeframe. */
   minimum?: WeatherValue;
 
-  /**
-   * maximum
-   */
+  /** The highest temperature recorded during the specified timeframe. */
   maximum?: WeatherValue;
 }
 
@@ -1649,22 +1914,27 @@ model DailyForecastResult {
 model DailyForecastSummary {
   /**
    * The start date and time for the forecast summary, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format, such as
+   * *2019-10-27T19:39:57-08:00*.
    */
   startDate?: utcDateTime;
 
   /**
    * The end date and time for the forecast summary, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format, such as
+   * *2019-10-27T19:39:57-08:00*.
    */
   endDate?: utcDateTime;
 
   /**
-   * Indicates the severity of the forecasted weather as an integer. Lower numbers
-   * represent higher severity: 0 = Unknown, 1 = Significant, 2 = Major, 3 =
-   * Moderate, 4 = Minor, 5 = Minimal, 6 = Insignificant, 7 = Informational.
+   * Indicates the severity of the forecasted weather as an integer. Lower
+   * numbers represent higher severity: 0 = Unknown, 1 = Significant, 2 = Major,
+   * 3 = Moderate, 4 = Minor, 5 = Minimal, 6 = Insignificant, 7 = Informational.
+   * Longer alternative: Severity values indicate a level of danger assigned to
+   * the weather event. The following list shows all possible values along with
+   * a description for each level. Severity (Description) - 0 (Unknown) - 1
+   * (Significant) - 2 (Major) - 3 (Moderate) - 4 (Minor) - 5 (Minimal) - 6
+   * (Insignificant) - 7 (Informational)
    */
   severity?: int32;
 
@@ -1682,8 +1952,11 @@ model DailyForecastSummary {
 }
 
 /**
- * Provides detailed weather information for a specific day, such as temperature,
- * wind, precipitation, air quality, and UV index.
+ * Provides detailed weather information for a specific day, such as
+ * temperature, wind, precipitation, air quality, and UV index. Provides
+ * comprehensive weather information for a specific day. This object includes
+ * various properties that detail different aspects of the daily weather
+ * forecast.
  */
 model DailyForecast {
   /**
@@ -1702,33 +1975,45 @@ model DailyForecast {
 
   /**
    * Provides RealFeel™ Temperature values for the specified day, measured in
-   * degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in the
-   * request. This metric, developed by AccuWeather, incorporates over a dozen
-   * factors, including humidity, wind speed, cloud cover, and sun intensity, to
-   * offer a comprehensive measure of how the weather actually feels.
+   * degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in
+   * the request. This metric, developed by AccuWeather, incorporates over a
+   * dozen factors, including humidity, wind speed, cloud cover, and sun
+   * intensity, to offer a comprehensive measure of how the weather actually
+   * feels. For more information, see [What is the AccuWeather RealFeel
+   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)
    */
   realFeelTemperature?: WeatherValueRange;
 
   /**
-   * Provides RealFeel™ Temperature values for the specified day in shaded areas.
-   * This metric, developed by AccuWeather, incorporates over a dozen factors,
-   * including humidity, wind speed, cloud cover, and sun intensity, to offer a
-   * comprehensive measure of how the weather actually feels in the shade.
+   * Provides RealFeel™ Temperature values for the specified day in shaded
+   * areas. This metric, developed by AccuWeather, incorporates over a dozen
+   * factors, including humidity, wind speed, cloud cover, and sun intensity, to
+   * offer a comprehensive measure of how the weather actually feels in the
+   * shade. For more information, see [What is the AccuWeather RealFeel
+   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)
+   * Short: A temperature value that uses a variety of factors to determine how
+   * the temperature actually feels outside in the shade.
    */
   realFeelTemperatureShade?: WeatherValueRange;
 
   /**
    * Provides the expected number of hours of sunshine for the specified day.
+   * More explanation: This property helps users understand how much sunlight
+   * they can anticipate, which can be useful for planning outdoor activities
+   * and understanding the overall weather conditions.
    */
   hoursOfSun?: float32;
 
   /**
-   * Provides a summary of heating and cooling degree days. Heating Degree Days
-   * (HDD) measure the demand for energy to heat a building, calculated based on the
-   * degrees a day's average temperature is below 65°F/18°C. Cooling Degree Days
-   * (CDD) measure the demand for energy to cool a building, calculated based on the
-   * degrees a day's average temperature is above 65°F/18°C. This summary aids in
-   * energy management and planning.
+   * Provides a summary of heating and cooling degree days, which measure
+   * temperature deviations from a standard of 65°F / 18°C to indicate energy
+   * usage for heating or cooling. Provides a summary of heating and cooling
+   * degree days. Heating Degree Days (HDD) measure the demand for energy to
+   * heat a building, calculated based on the degrees a day's average
+   * temperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the
+   * demand for energy to cool a building, calculated based on the degrees a
+   * day's average temperature is above 65°F/18°C. This summary aids in energy
+   * management and planning.
    */
   degreeDaySummary?: DegreeDaySummary;
 
@@ -1742,12 +2027,16 @@ model DailyForecast {
   /**
    * Provides detailed weather information for the daytime weather forecast,
    * including temperature, precipitation, wind, and other key attributes.
+   * Provides comprehensive weather details that encompasses various attributes
+   * describing different facets of the daytime weather forecast.
    */
   day?: DailyForecastDetail;
 
   /**
    * Provides detailed weather information for the nighttime weather forecast,
    * including temperature, precipitation, wind, and other key attributes.
+   * Provides comprehensive weather details that encompasses various attributes
+   * describing different facets of the nighttime weather forecast.
    */
   night?: DailyForecastDetail;
 
@@ -1757,15 +2046,31 @@ model DailyForecast {
   sources?: string[];
 }
 
-/** Summary of heating and cooling degree days. */
+/**
+ * A summary of heating and cooling degree day information. Heating Degree Days
+ * (HDD) indicate the demand for energy needed to heat a building, calculated
+ * based on the number of degrees that a day's average temperature is below the
+ * baseline temperature of 65 degrees F/ 18 degree C. Cooling Degree Days (CDD)
+ * indicate the demand for energy needed to cool a building, calculated based on
+ * the number of degrees that a day's average temperature is above the baseline
+ * temperature of 65 degrees F/ 18 degree C. This summary helps in determining
+ * the energy requirements for heating and cooling which is useful for energy
+ * management and planning.
+ */
 model DegreeDaySummary {
   /**
-   * Number of degrees that the mean temperature is below 65 degrees F/ 18 degree C.
+   * Possible alternative: Heating Degree Days (HDD) indicate the demand for
+   * energy needed to heat a building, calculated based on the number of degrees
+   * that a day's average temperature is below the baseline temperature of 65
+   * degrees F/ 18 degree C.
    */
   heating?: WeatherValue;
 
   /**
-   * Number of degrees that the mean temperature is above 65 degrees F/ 18 degree C.
+   * Possible alternative: Cooling Degree Days (CDD) indicate the demand for
+   * energy needed to cool a building, calculated based on the number of degrees
+   * that a day's average temperature is above the baseline temperature of 65
+   * degrees F/ 18 degree C.
    */
   cooling?: WeatherValue;
 }
@@ -1781,21 +2086,14 @@ model DegreeDaySummary {
  */
 model AirAndPollen {
   /**
-   * **For pollen:**
-   * Returns the name of the pollen, such as tree, grass, ragweed, or mold.
-   *
-   * **For pollutants:**
-   * When the `name` property is `AirQuality`, the name of the pollutant is returned
-   * in the `type` property.
-   * Valid pollutants include: PM2.5, PM10, O3, NO2, SO2, and CO.
-   *
-   * **For UV Index:**
-   * When the `name` property is `UVIndex`, the UV index is returned in the `value`
-   * property. Valid UV Index values range from 0 to 11+ and represent the intensity
-   * of ultraviolet radiation.
-   * UV Index values are categorized as follows:
-   * <ul><li><B>0-2</B>: Low</li><li><B>3-5</B>: Moderate</li><li><B>6-7</B>:
-   * High</li><li><B>8-10</B>: Very High</li><li><B>11+</B>: Extreme</li></ul>
+   * For pollen: Returns the name of the pollen, such as tree, grass, ragweed,
+   * or mold. For pollutants: When the name property is 'AirQuality', the name
+   * of the pollutant is returned in the type property. Valid pollutants include
+   * PM2.5, PM10, O3, NO2, SO2, and CO. For UV Index: When the name property is
+   * 'UVIndex', the UV index is returned in the value property. Valid UV Index
+   * values range from 0 to 11+ and represent the intensity of ultraviolet
+   * radiation. UV Index values are categorized as follows: - 0-2: Low - 3-5:
+   * Moderate - 6-7: High - 8-10: Very High
    */
   name?: string;
 
@@ -1818,18 +2116,17 @@ model AirAndPollen {
   category?: string;
 
   /**
-   * Provides a numerical representation of the air quality or pollen level. This
-   * value corresponds to the qualitative `category` property, offering a precise
-   * way to quantify the air quality or pollen level. These values range from 1 to
-   * 6, with 1 implying good conditions and 6 implying hazardous conditions.
+   * Provides a numerical representation of the air quality or pollen level.
+   * This value corresponds to the qualitative `category` property, offering a
+   * precise way to quantify the air quality or pollen level.
    */
   categoryValue?: int32;
 
   /**
-   * Specifies the type of air pollutant being measured. Only used when the `name`
-   * property equals *AirQuality*. Examples of air pollutants include Particulate
-   * Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2),
-   * and Carbon Monoxide (CO).
+   * Specifies the type of air pollutant being measured. Only used when the
+   * *name* property equals *AirQuality*. Examples of air pollutants include
+   * Particulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2),
+   * Sulfur Dioxide (SO2), and Carbon Monoxide (CO).
    */
   type?: string;
 }
@@ -1993,230 +2290,275 @@ model LocalSource {
 }
 
 /**
- * This object is returned from a successful Weather Along Route.
+ * The WeatherAlongRouteResult object offers a comprehensive weather summary for
+ * a route, accompanied by an array of WeatherWaypoint objects. Each waypoint
+ * provides detailed weather information for its specific location along the
+ * route.
  */
 model WeatherAlongRouteResult {
   /**
-   * Short summary of the weather along the route.
+   * A summary of weather conditions for each waypoint along the route,
+   * including key details like a weather icon and phrase (Sunny, Partly Cloudy,
+   * Rain, Snow) and any expected weather hazards.
    */
   @visibility(Lifecycle.Read)
   summary?: WeatherAlongRouteSummary;
 
   /**
-   * Data for each waypoint returned in the same order as specified in the request.
+   * An array of `WeatherWaypoint` objects, each providing detailed weather
+   * information for specific points along a route, including cloud cover,
+   * weather hazards, lightning count, hazard notifications, precipitation
+   * forecasts, sun glare ratings, temperature, and wind details Alternative: An
+   * array of `WeatherWaypoint` objects, returned in the same order as specified
+   * in the request. Each WeatherWaypoint provides detailed weather information
+   * for a waypoint along the route.
    */
   @visibility(Lifecycle.Read)
   waypoints?: WaypointForecast[];
 }
 
 /**
- * Short summary of the weather along the route.
+ * Provides a short summary of weather conditions at specific waypoints along
+ * the route, including a weather icon, descriptive phrase (e.g., Sunny, Partly
+ * Cloudy, Rain, Snow), and any significant weather hazards. Detailed version:
+ * Each WeatherAlongRouteSummary object provides a concise overview of the
+ * weather conditions at a specific waypoint along the route. It includes key
+ * details such as a weather icon and descriptive phrase (such as Sunny, Partly
+ * Cloudy, Rain, Snow), as well as any significant weather hazards that are
+ * expected. This summary helps users quickly understand the weather they might
+ * encounter at each waypoint along the route.
  */
 model WeatherAlongRouteSummary {
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * A numeric value that corresponds to an image displaying the `iconPhrase`.
+   * For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
   /**
-   * Description of the weather hazard affecting the trip.
+   * A summary of significant weather hazards expected at specific waypoints
+   * along the route. This includes details about severe storms, heavy rain,
+   * snow, and other conditions that could impact travel safety.
    */
   hazards?: WeatherHazards;
 }
 
 /**
- * Description of the weather hazard affecting the trip.
+ * Provides detailed information about potential weather hazards along a route,
+ * including various intensities of rain, snow, ice, hail, sun glare, and wind.
+ * It also includes warnings for severe conditions like floods, tornadoes,
+ * tsunamis, and thunderstorms. A hazard index rates the severity from 0 (no
+ * hazard) to 4 (life-threatening).
  */
 model WeatherHazards {
   /**
-   * The aggregated severity/hazard index for each waypoint, which can be used to
-   * color-code route segments to indicate driver safety.
-   *   * `0` - No hazard.
-   *   * `1` - Be informed, be aware.
-   *   * `2` - Pay attention, be prepared.
-   *   * `3` - Take action.
-   *   * `4` - Life threatening, emergency.
+   * An aggregated severity/hazard index for each waypoint, useful for
+   * color-coding route segments to indicate safety levels. The index is rated
+   * as follows: 0: No hazard 1: Be informed, be aware 2: Pay attention, be
+   * prepared 3: Take action 4: Life-threatening, emergency
    */
   maxHazardIndex?: HazardIndex;
 
   /**
-   * Details of the weather hazards affecting the trip.
+   * Specifies the type of weather hazards that could impact each waypoint along
+   * a route. Possible hazards include various intensities of rain, snow, ice,
+   * hail, sun glare, lightning, wind, and severe weather warnings such as
+   * flood, tornado, tsunami, and severe thunderstorms.
    */
   hazardDetails?: HazardDetail[];
 }
 
-/** Details about a weather hazard. */
+/**
+ * Provides detailed information about specific weather hazards affecting the
+ * waypoint. This includes the type and severity of the hazard, helping users
+ * understand potential risks along their journey.
+ */
 model HazardDetail {
   /**
-   * The aggregated severity/hazard index for each waypoint, which can be used to
-   * color-code route segments to indicate driver safety.
-   *   * `0` - No hazard.
-   *   * `1` - Be informed, be aware.
-   *   * `2` - Pay attention, be prepared.
-   *   * `3` - Take action.
-   *   * `4` - Life threatening, emergency.
+   * An aggregated severity/hazard index for each waypoint, useful for
+   * color-coding route segments to indicate safety levels. The index is rated
+   * as follows: 0: No hazard 1: Be informed, be aware 2: Pay attention, be
+   * prepared 3: Take action 4: Life-threatening, emergency
    */
   hazardIndex?: HazardIndex;
 
   /**
-   * A unique identifier (non-displayable) for each type of hazard: LightRain,
-   * ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow,
-   * ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail,
-   * SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh,
-   * WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning,
-   * SevereThunderstormWarning.
+   * Consider a bulleted list, such as: A unique identifier for each type of
+   * hazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -
+   * HeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -
+   * HeavyIce - Hail - LargeHail - SunGlare - SunGlareHigh - Lightning -
+   * SevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -
+   * FlashFloodWarning - TornadoWarning - TsunamiWarning -
+   * SevereThunderstormWarning
    */
   hazardCode?: string;
 
   /**
-   * A displayable short phrase describing the forecasted conditions and
-   * precipitation intensity/type.
+   * A short, displayable phrase detailling the hazard at the specified
+   * waypoint. Up to 25 characters.
    */
   shortPhrase?: string;
 }
 
-/** Weather forecast data for a waypoint along a route. */
+/**
+ * Provides a detailed weather forecast and hazard warnings for specific
+ * waypoints along a route.
+ */
 model WaypointForecast {
   /**
-   * Numeric value representing an image that corresponds to the current weather
-   * condition described by the `Phrase` property. For more information, see
-   * [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.
+   * Returns a numeric value that corresponds to an image displaying the
+   * `iconPhrase`. For more information, see [Weather services in Azure Maps
+   * ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
   /**
-   * A displayable short phrase describing the forecasted conditions and
-   * precipitation intensity/type.
+   * A brief, displayable phrase describing the forecasted weather conditions
+   * and precipitation type/intensity at the specified waypoint.
    */
   shortPhrase?: string;
 
   /**
-   * Indicates the time of the day. True indicates 'day',', false indicates 'night.
+   * Indicates whether it is currently daytime at the specified waypoint.
+   * Returns true if it is daytime and false if it is nighttime
    */
   isDayTime?: boolean;
 
   /**
-   * Percent representing cloud cover.
+   * The percentage of the sky covered by clouds at the specified waypoint. This
+   * value ranges from 0% (clear skies) to 100% (completely overcast). May be
+   * NULL.
    */
   cloudCover?: int32;
 
   /**
-   * Specific value of a given unit related to weather.
+   * Returns the temperature at a specific waypoint along the route, measured in
+   * degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in
+   * the request.
    */
   temperature?: WeatherValue;
 
   /**
-   * Wind details being returned including speed and direction.
+   * Wind speed (km/h or mph) and direction (0° to 359° azimuth). More detailed
+   * alternative: Provides the expected wind speed and direction. Wind speed is
+   * measured in units such as kilometers per hour (km/h) or miles per hour
+   * (mph), based on the unit specified in the request. Wind direction is given
+   * in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.
+   * Longer more detailed alternative: Provides the expected wind speed and
+   * direction. Wind speed is measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the specified unit. Wind direction is measured in
+   * azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise
+   * (east is 90°, south is 180°, west is 270°).
    */
   wind?: WindDetails;
 
   /**
-   * Wind details being returned including speed and direction.
+   * Minimal description: Maximum short-burst wind speed (km/h or mph) and
+   * direction (0° to 359° azimuth) expected at a specific waypoint along the
+   * route. More detailed alternative: Returns the expected maximum short-burst
+   * wind speed and direction at a specific waypoint along the route, measured
+   * in kilometers per hour (km/h) or miles per hour (mph), depending on the
+   * unit specified in the request. Wind direction is given in azimuth degrees,
+   * ranging from 0° (true North) to 359°, moving clockwise.
    */
   windGust?: WindDetails;
 
-  /**
-   * Precipitation forecast of the weather along the route.
-   */
+  /** Returns the amount of precipitation expected at the specified waypoint. */
   precipitation?: WeatherAlongRoutePrecipitation;
 
-  /**
-   * Estimation of thunderstorm intensity on an open scale. A value of 0 means there
-   * is no thunderstorm; values of 1 and higher mean there is a thunderstorm in
-   * increasing intensity.
-   */
+  /** <Cannot confirm an accurate definition> */
   lightningCount?: int32;
 
   /**
-   * A rating that indicates how blinding the sun is for the driver.
+   * Indicates the level of sun glare as a driving hazard at the specified
+   * waypoint. Returns a glare index from 0 to 100, where values of 50 and above
+   * can be hazardous, and a value of 100 indicates driving directly into the
+   * sun under clear conditions.
    */
   sunGlare?: SunGlare;
 
   /**
-   * Description of the weather hazard affecting the trip.
+   * A list of weather hazards expected at specific waypoints along the route.
+   * This includes details about severe storms, heavy rain, snow, and other
+   * conditions that could impact travel safety.
    */
   hazards?: WeatherHazards;
 
-  /**
-   * List of weather hazard notifications.
-   */
+  /** Returns a list of weather hazard notifications relevant to the specified waypoint. */
   notifications?: WeatherNotification[];
 }
 
-/**
- * Precipitation forecast of the weather along the route.
- */
+/** Weather forecast for precipitation along the route. */
 model WeatherAlongRoutePrecipitation {
   /**
-   * The forecasted precipitation intensity in dBZ (decibels relative to Z) from 0.0
-   * to 100.0.
+   * Returns the forecasted radar reflectivity in decibels relative to Z (dBZ),
+   * which measures precipitation intensity. Values range from 0.0 to 100.0,
+   * with higher values indicating heavier precipitation.
    */
   dbz?: float64;
 
   /**
-   * Precipitation type. If precipitation should occur, the type that it will be:
-   * "RAIN," "HAIL," "SNOW," "ICE," or "MIX."
+   * Type of precipitation. If precipitation occurs, it will be classified as
+   * 'RAIN,' 'HAIL,' 'SNOW,' 'ICE,' or 'MIX.'
    */
   type?: string;
 }
 
 /**
- * A rating that indicates how blinding the sun is for the driver.
+ * Indicates the level of sun glare as a driving hazard at the specified
+ * waypoint. Returns a glare index from 0 to 100, where values of 50 and above
+ * can be hazardous, and a value of 100 indicates driving directly into the sun
+ * under clear conditions.
  */
 model SunGlare {
   /**
-   * If the vehicle heading value is not provided for a waypoint, then the service
-   * will calculate a heading based upon the location of neighboring waypoints if
-   * provided.
+   * If a vehicle heading value is not provided for a waypoint, the service will
+   * calculate the heading based on the locations of neighboring waypoints, if
+   * available.
    */
   calculatedVehicleHeading?: int32;
 
   /**
-   * An index from 0 to 100 indicating sun glare intensity for a driver. A value of
-   * 50 and above can be considered a hazard for some drivers and a value of 100
-   * signifies the driver is driving straight into the sun and atmospheric
-   * conditions are clear allowing for the full intensity of the sun to blind the
-   * driver.
+   * An index ranging from 0 to 100 that indicates the intensity of sun glare
+   * for a driver. Values of 50 and above may pose a hazard for some drivers,
+   * while a value of 100 signifies driving directly into the sun under clear
+   * conditions.
    */
   glareIndex?: int32;
 }
 
-/** Weather hazard notification. */
+/**
+ * Provides alerts for significant weather changes along a route, including
+ * hazard type, severity index, and descriptive message.
+ */
 model WeatherNotification {
-  /**
-   * A type of notification generated to warn drivers of the onset of a hazard, or
-   * increase in intensity of a hazard.
-   */
+  /** Need a list of possible types. */
   type?: string;
 
   /**
-   * The aggregated severity/hazard index for each waypoint, which can be used to
-   * color-code route segments to indicate driver safety.
-   *   * `0` - No hazard.
-   *   * `1` - Be informed, be aware.
-   *   * `2` - Pay attention, be prepared.
-   *   * `3` - Take action.
-   *   * `4` - Life threatening, emergency.
+   * An aggregated severity/hazard index for each waypoint, useful for
+   * color-coding route segments to indicate safety levels. The index is rated
+   * as follows: 0: No hazard 1: Be informed, be aware 2: Pay attention, be
+   * prepared 3: Take action 4: Life-threatening, emergency
    */
   hazardIndex?: HazardIndex;
 
   /**
-   * A unique identifier (non-displayable) for each type of hazard: LightRain,
-   * ModerateRain, HeavyRain, LightMix, ModerateMix, HeavyMix, LightSnow,
-   * ModerateSnow, HeavySnow, LightIce, ModerateIce, HeavyIce, Hail, LargeHail,
-   * SunGlare, SunGlareHigh, Lightning, SevereLightning, WindModerate, WindHigh,
-   * WindExtreme, FloodWarning, FlashFloodWarning, TornadoWarning, TsunamiWarning,
-   * SevereThunderstormWarning.
+   * Consider a bulleted list, such as: A unique identifier for each type of
+   * hazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -
+   * HeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -
+   * HeavyIce - Hail - LargeHail - SunGlare - SunGlareHigh - Lightning -
+   * SevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -
+   * FlashFloodWarning - TornadoWarning - TsunamiWarning -
+   * SevereThunderstormWarning
    */
   hazardCode?: string;
 
   /**
-   * A displayable short phrase describing the forecasted conditions and
-   * precipitation intensity/type.
+   * A short, displayable phrase that helps users quickly understand the
+   * forecasted weather conditions and precipitation intensity/type at the
+   * specified waypoint.
    */
   shortPhrase?: string;
 }
@@ -2225,25 +2567,30 @@ model WeatherNotification {
  * This object is returned from a successful Get Severe Weather Alerts call.
  */
 model SevereWeatherAlertsResult {
-  /**
-   * A list of all severe weather alerts for the queried location.
-   */
+  /** A list of all severe weather alerts for the specified location. */
   @visibility(Lifecycle.Read)
   results?: SevereWeatherAlert[];
 }
 
 /**
- * Information about a severe weather alert.
+ * A SevereWeatherAlert object provides detailed information about significant
+ * weather conditions that could pose risks to life and property. These alerts
+ * cover various severe weather phenomena, such as hurricanes, thunderstorms,
+ * flooding, lightning, heat waves, or forest fires, and include details about
+ * active alerts for a specified location. Sort version: Provides information
+ * about significant weather conditions that pose risks to life and property,
+ * including hurricanes, thunderstorms, flooding, lightning, heat waves, or
+ * forest fires.
  */
 model SevereWeatherAlert {
   /**
-   * 2-character ISO 3166-1 Alpha-2 country code, for example, "US".
+   * 2-character ISO 3166-1 Alpha-2 country code, for example, "US". For more
+   * information, see [ISO 3166 country
+   * codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).
    */
   countryCode?: string;
 
-  /**
-   * A unique numerical identifier for a weather alert.
-   */
+  /** A unique numerical identifier assigned to a weather alert. */
   alertId?: int32;
 
   /**
@@ -2251,53 +2598,54 @@ model SevereWeatherAlert {
    */
   description?: SevereWeatherAlertDescription;
 
-  /**
-   * Category of the alert.
-   */
+  /** A classification word or phrase that describes the alert type. */
   category?: string;
 
   /**
-   * Number signifying the importance or ranking order of the given alert within the
-   * country/region it has originated. A lower number signifies a higher priority.
-   * For example, 1 is the highest priority. The number varies by country/region and
-   * can change over time as each country/region evolves their alert systems.
+   * A numerical value indicating the importance or ranking order of the alert
+   * within its originating country or region. A lower number denotes higher
+   * priority, with 1 being the highest. This value can vary by country or
+   * region and may change over time as alert systems evolve.
    */
   priority?: int32;
 
   /**
-   * Classification of the alert. This field is not available for all countries and
-   * therefore not always returned.
+   * The classification of the alert. This field is not available in all
+   * countries and therefore may not be returned.
    */
   class?: string;
 
-  /**
-   * Severity level of the alert. This field is not available for all countries and
-   * therefore not always returned.
-   */
+  /** Severity level of the alert. Not available in all countries. */
   level?: string;
 
   /**
-   * The provider of the alert information. By default the source is returned in
-   * English (en-US). The alerts are from official Government Meteorological
-   * Agencies and leading global weather alert providers.
+   * The provider of the alert information, in the language specified in the
+   * request. If no language is specified, English (en-US) is used. Alerts are
+   * typically issued by official government meteorological agencies or leading
+   * global weather alert providers.
    */
   source?: string;
 
-  /**
-   * A numerical identifier associated with the source provider name of the alert
-   * data.
-   */
+  /** A numerical identifier linked to the name of the source provider for the alert data. */
   sourceId?: int32;
 
   /**
-   * A disclaimer regarding the source of the alert information. This field is not
-   * always available. For example, disclaimer may include details about the delays
-   * or potential issues related to the alarm.
+   * A disclaimer regarding the source of the alert information, which may
+   * include details about delays or potential issues. If present, it must be
+   * displayed with the alert.
    */
   disclaimer?: string;
 
   /**
-   * Information about the alert specific to the affected area(s).
+   * Array of AlertArea objects representing specific areas covered by the
+   * alert. Each object includes the name, description, and geographical
+   * coordinates of the affected area. Detailed (verbose) version: An array of
+   * AlertArea objects, each representing a specific area covered by the alert.
+   * These objects collectively define the regions affected by the severe
+   * weather alert. Each AlertArea includes the name of the affected area, a
+   * brief description of the alert, and the geographical coordinates that
+   * define it. This helps identify the locations under threat and provides
+   * essential information specific to those areas.
    */
   alertAreas?: AlertArea[];
 }
@@ -2307,41 +2655,40 @@ model SevereWeatherAlert {
  */
 model SevereWeatherAlertDescription {
   /**
-   * Description of the alert in the specified language. By default English (en-US)
-   * is returned if the language parameter is not specified in the request.
+   * A short phrase that summarizes the alert in the specified language. If not
+   * specified, English (en-US) is used.
    */
   localized?: string;
 
-  /**
-   * Description of the alert in English (en-US).
-   */
+  /** A short phrase that summarizes the alert in English (en-US). */
   english?: string;
 }
 
 /**
- * Information about a severe weather alert issued within an affected area(s). If
- * multiple alerts are active for the same location, the alerts will be returned
- * in order of `priority` within the API response, with the highest priority alert
- * being returned at the top of the response.
+ * Details of a severe weather alert issued for the affected area(s). If
+ * multiple alerts are active for the same location, they will be ordered by
+ * priority in the response, with the highest priority alert appearing first.
  */
 model AlertArea {
   /**
-   * The name of an area which is affected by the alert. The location that was
-   * requested falls under the alert area.
+   * Specifies the name of the geographical area affected by the alert. This
+   * parameter helps identify the specific region or locality that is under the
+   * severe weather alert.
    */
   name?: string;
 
   /**
-   * Text summarizing the alert in the returned area.
+   * A brief description of the alert. For example: 'Heat Advisory in effect
+   * until 10:00 PM PDT. Source: U.S. National Weather Service'
    */
   summary?: string;
 
   /**
-   * The start date and time of the alert in [ISO
-   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for
-   * example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones
-   * the returned time in the response is the local time to the requested coordinate
-   * location.
+   * The date and time at which the alert began in [ISO
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*. If
+   * the alert spans multiple time zones, the response will provide the local
+   * time corresponding to the requested coordinates.
    */
   startTime?: utcDateTime;
 
@@ -2354,42 +2701,42 @@ model AlertArea {
    */
   endTime?: utcDateTime;
 
-  /**
-   * The latest status of the alert in the current area.
-   */
+  /** The most recent status of the alert in the specified area. */
   latestStatus?: LatestStatus;
 
   /**
-   * Full details associated with the alert. Returned if `details=True`. This field
-   * is always returned in the language(s) of choice by the issuing provider and
-   * Azure Maps only returns what is created by the provider. Please note, some
-   * countries/regions may offer their native language and English. Language
-   * parameter won't apply to this field.
+   * Provides complete details related to the alert, returned when the `details`
+   * URI parameter is set to true. The `language` parameter does not apply to
+   * this field. This field is always returned in the language chosen by the
+   * issuing provider, and Azure Maps only returns the information created by
+   * the provider. Note that some countries/regions may offer both their native
+   * language and English.
    */
   alertDetails?: string;
 
   /**
-   * Language of the `alertDetails`. This field  helps to point out that the
-   * language of the `alertDetails` may differ from the requested language
-   * parameter. Returned if `details=True`. Language code has been derived from the
-   * ISO 639-1 Alpha-2 codes.
+   * Specifies the language of the severe weather alert details, which may
+   * differ from the requested language. The language code follows the [ISO
+   * 639-1 Alpha-2
+   * standard](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes).
+   * Only returned when details=True.
    */
   alertDetailsLanguageCode?: string;
 }
 
 /**
- * The latest status on the alert in the current area.
+ * Returns a keyword indicating the latest status of the alert in the specified
+ * location. For a list of all possible keywords, see the LatestStatusKeyword
+ * enum.
  */
 model LatestStatus {
   /**
-   * The latest status keyword for the alert, in the specified language. By default,
-   * returned in English (en-US).
+   * A keyword indicating the latest status of the alert, in the specified
+   * language. If not specified, English (en-US) is used.
    */
   localized?: string;
 
-  /**
-   * Latest status keyword for the alert, in English (en-US).
-   */
+  /** A keyword indicating the latest status of the alert, in English (en-US). */
   english?: LatestStatusKeyword;
 }
 
@@ -2439,22 +2786,21 @@ model DailyIndex {
   dateTime?: utcDateTime;
 
   /**
-   * A numerical index value ranging from 0.0 to 10.0 that quantifies the
-   * suitability of weather conditions for a specific activity or condition, such as
-   * running or golfing. Higher values typically indicate more favorable conditions,
-   * depending on the value of the `ascending` property. For example, a value of 8
-   * for the 'Running' index suggests very good weather for running, while a value
-   * of 6 for the 'Golfing' index indicates good but slightly less ideal conditions.
-   * For more information, see [Daily index range
-   * sets](/azure/azure-maps/daily-index-range-sets) in the *Weather service in
-   * Azure Maps* concepts article.
+   * A numerical value ranging from 0.0 to 10.0 that quantifies the suitability
+   * of weather conditions for a specific activity or condition, such as running
+   * or golfing. Higher values typically indicate more favorable conditions. For
+   * example, a value of 8 for the 'Running' index suggests very good weather
+   * for running, while a value of 6 for the 'Golfing' index indicates good but
+   * slightly less ideal conditions. For more information, see [Daily index
+   * range sets](/azure/azure-maps/daily-index-range-sets) in the *Weather
+   * service in Azure Maps* concepts article.
    */
   value?: float32;
 
   /**
-   * Provides a qualitative assessment of the index, describing the `categoryValue`
-   * property. Categories vary among indices and may include values such as
-   * Excellent, Very Good, Good, Fair, and Poor.
+   * Provides a qualitative assessment of the index, describing the
+   * `categoryValue` property. Categories vary among indices and may include
+   * values such as Excellent, Good, Fair, Poor, and Very Poor.
    */
   category?: string;
 
@@ -2468,8 +2814,10 @@ model DailyIndex {
 
   /**
    * Indicates the direction of the `value` and `categoryValue` properties. When
-   * true, the poorest index value is 0 and the best index value is 10. When false,
-   * the poorest index value is 10 and the best index value is 0.
+   * true, the poorest value is 0 and the best value is 10. When false, the
+   * poorest value is 10 and the best value is 0. OR Indicates the direction of
+   * the index value. When true, the poorest value is 0 and the best value is
+   * 10. When false, the poorest value is 10 and the best value is 0.
    */
   ascending?: boolean;
 
@@ -2485,16 +2833,16 @@ model DailyIndex {
 
 /**
  * The ActiveStormResult object provides comprehensive information about ongoing
- * tropical storms. It includes an array of [ActiveStorm](#ActiveStorm) objects,
- * each detailing specific attributes of individual storms. These attributes
- * encompass the storm's government ID, basin ID, year of origin, name, and
- * subtropical status.
+ * tropical storms. It includes an array of ActiveStorm objects, each detailing
+ * specific attributes of individual storms. These attributes encompass the
+ * storm's government ID, basin ID, year of origin, name, and subtropical
+ * status.
  */
 model ActiveStormResult {
   /**
-   * An array of [ActiveStorm](#ActiveStorm) objects, each providing essential
-   * details about an ongoing tropical storm, as reported by national weather
-   * forecasting agencies.
+   * An array of ActiveStorm objects, each providing essential details about an
+   * ongoing tropical storm, as reported by national weather forecasting
+   * agencies.
    */
   results?: ActiveStorm[];
 
@@ -2529,8 +2877,8 @@ model ActiveStorm {
   name?: string;
 
   /**
-   * Indicates whether the tropical storm is currently active. If true, the storm is
-   * active; if false, the storm is not active.
+   * Indicates whether the tropical storm is currently active. If true, the
+   * storm is active; if false, the storm is not active
    */
   isActive?: boolean;
 
@@ -2550,14 +2898,14 @@ model ActiveStorm {
 
 /**
  * Contains a list of government-issued storms that meet the specified search
- * criteria, including details such as the storm's basin ID, government-issued ID
- * and status.
+ * criteria. More details: Contains a list of government-issued storms that meet
+ * the specified search criteria, including details such as the storm's basin
+ * ID, government-issued ID and status.
  */
 model StormSearchResult {
   /**
-   * Array of [StormSearchResultItem](#stormsearchresultitem) objects, each
-   * representing a tropical storm matching the search criteria provided in the
-   * request.
+   * Array of StormSearchResultItem objects, each representing a tropical storm
+   * matching the search criteria provided in the request.
    */
   results?: StormSearchResultItem[];
 
@@ -2571,9 +2919,10 @@ model StormSearchResult {
 
 /**
  * A government-issued storm event, including the storm's basin identifier
+ * (basinId), government-issued identifier (govId) and status. More details: A
+ * government-issued storm event, including the storm's basin identifier
  * (basinId), government-issued identifier (govId) and status. This object is
- * returned as part of an array within the [StormSearchResult](#stormsearchresult)
- * object.
+ * returned as part of an array within the `StormSearchResult` object.
  */
 model StormSearchResultItem {
   /**
@@ -2582,9 +2931,10 @@ model StormSearchResultItem {
   year?: string;
 
   /**
-   * Categorizes the different ocean basins where tropical storms can originate.
-   * Each basin is assigned a unique identifier to help specify the location of the
-   * storm's origin. Valid Basin identifiers include AL, CP, EP, NI, NP, SI, and SP.
+   * The "basinId" enum categorizes the different ocean basins where tropical
+   * storms can originate. Each basin is assigned a unique identifier to help
+   * specify the location of the storm's origin. Valid Basin identifiers include
+   * AL, CP, EP, NI, NP, SI, and SP.
    */
   basinId?: BasinId;
 
@@ -2612,17 +2962,23 @@ model StormSearchResultItem {
   isSubtropical?: boolean;
 
   /**
-   * A unique identifier assigned to tropical storms by national weather forecasting
-   * agencies. This identifier helps track and reference specific storms accurately,
-   * including its status, location, and intensity. This will match the depression
-   * number.
+   * A unique identifier assigned to tropical storms by national weather
+   * forecasting agencies. more detail: A unique identifier assigned to tropical
+   * storms by national weather forecasting agencies. This identifier helps
+   * track and reference specific storms accurately, including its status,
+   * location, and intensity. More detailed alternative: A Government storm ID
+   * is a unique identifier assigned to tropical storms by national weather
+   * forecasting agencies. This ID is used to track and manage storm
+   * information, including its status, location, and intensity. It helps
+   * meteorologists, emergency services, and the public stay informed about
+   * active storm events.
    */
   govId?: int32;
 }
 
 /**
- * An array of [StormForecast](#stormforecast) objects, each detailing individual
- * storm forecasts issued by government authorities.
+ * An array of StormForecast objects, each detailing individual storm forecasts
+ * issued by government authorities.
  */
 model StormForecastResult {
   /**
@@ -2667,103 +3023,124 @@ model StormForecast {
   location?: LatLongPair;
 
   /**
-   * Specifies the expected maximum wind gust speed and direction expected during
-   * the storm, measured in kilometers per hour (km/h) or miles per hour (mph),
-   * based on the specified unit. Wind direction is given in azimuth degrees,
-   * ranging from 0° (true North) to 359°, moving clockwise. May be NULL.
+   * Minimal description: Maximum short-burst wind speed (km/h or mph) and
+   * direction (0° to 359° azimuth) expected during the storm. More detailed
+   * alternative: Specifies the expected maximum wind gust speed and direction
+   * expected during the storm, measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the specified unit. Wind direction is given in
+   * azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.
+   * May be NULL.
    */
   maxWindGust?: WeatherValue;
 
   /**
-   * Specifies the maximum sustained wind speed expected during the storm, measured
-   * in  kilometers per hour (km/h) or miles per hour (mph), based on the unit
-   * specified in the request. May be NULL.
+   * Specifies the maximum sustained wind speed (km/h or mph) expected during
+   * the storm. Longer version: Specifies the maximum sustained wind speed
+   * expected during the storm, measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the unit specified in the request.
    */
   sustainedWind?: WeatherValue;
 
   /**
-   * Indicates the current state or condition of the storm. This property provides
-   * information on whether the storm is active, dissipating, or has reached another
-   * significant status. Possible values:<ul><li>Cyclonic storm</li><li>Deep
-   * depression</li><li>Depression</li><li>Extremely severe cyclonic
-   * storm</li><li>Hurricane category (1-5)</li><li>Intense tropical
-   * cyclone</li><li>Moderate tropical storm</li><li>Post-tropical
-   * cyclone</li><li>Potential tropical cyclone</li><li>Severe cyclonic
-   * storm</li><li>Severe tropical storm</li><li>Subtropical</li><li>Super cyclonic
-   * storm</li><li>Tropical cyclone</li><li>Tropical cyclone category
-   * (1-5)</li><li>Tropical depression</li><li>Tropical disturbance</li><li>Tropical
-   * storm</li><li>Typhoon</li><li>Very intense tropical cyclone</li><li>Very severe
-   * cyclonic storm</li><li>Very strong typhoon</li><li>Violent typhoon</li></ul>
+   * Indicates the current state or condition of the storm. This property
+   * provides information on whether the storm is active, dissipating, or has
+   * reached another significant status. Possible values: Cyclonic storm Deep
+   * depression Depression Extremely severe cyclonic storm Hurricane category
+   * (1-5) Intense tropical cyclone Moderate tropical storm Post-tropical
+   * cyclone Potential tropical cyclone Severe cyclonic storm Severe tropical
+   * storm Subtropical Super cyclonic storm Tropical cyclone Tropical cyclone
+   * category (1-5) Tropical depression Tropical disturbance Tropical storm
+   * Typhoon Very intense tropical cyclone Very severe cyclonic storm Very
+   * strong typhoon Violent typhoon
    */
   status?: string;
 
   /**
-   * Provides forecast details for the storm within the specified time frame. If the
-   * `windowGeometry` parameter is set to true in the API request, this property
-   * will include GeoJSON details for the window geometry.
+   * Provides forecast details for the storm within the specified time frame. If
+   * the `windowGeometry` parameter is set to true in the API request, this
+   * property will include geoJSON details for the window geometry.
    */
   window?: WeatherWindow;
 
   /**
-   * Contains an array of [StormWindRadiiSummary](#stormwindradiisummary) objects,
-   * detailing wind radii in different quadrants around the storm's center.
-   * Displayed when `details=true` or `radiiGeometry=true` in the request.
+   * Contains an array of StormWindRadiiSummary objects, detailing wind radii in
+   * different quadrants around the storm's center. Displayed when details=true
+   * or radiiGeometry=true in the request.
    */
   windRadiiSummary?: StormWindRadiiSummary[];
 }
 
 /**
- * Forecast window for the storm
+ * Used to track the storm's movement and status over time, the WeatherWindow
+ * object provides the start and end times, storm status, movement coordinates,
+ * and locations of points on the left and right sides of the forecast window.
+ * Detailed description: Provides details about the forecast window for a
+ * tropical storm, including the start and end times (beginDateTime,
+ * endDateTime), storm status at the start and end (beginStatus, endStatus), the
+ * movement coordinates (geometry), and the locations of points on the left and
+ * right sides of the window (left, right). This object helps track the storm's
+ * movement and status over a specified timeframe.
  */
 model WeatherWindow {
   /**
-   * Location of the point on the left side of the window at the time of the
-   * timeframe.
+   * Specifies the western geographical boundary of the forecast window using
+   * latitude and longitude coordinates, valid at the specified time.
    */
   left?: LatLongPair;
 
   /**
-   * Location of the point on the right side of the window at the end of the
-   * timeframe.
+   * Specifies the eastern geographical boundary of the forecast window using
+   * latitude and longitude coordinates, valid at the specified time.
    */
   right?: LatLongPair;
 
   /**
-   * DateTime of the beginning of the window of movement, displayed in ISO8601
-   * format.
+   * The date and time when the forecast window begins. It is displayed in [ISO
+   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00.
    */
   beginDateTime?: utcDateTime;
 
   /**
-   * DateTime of the end of the window of movement, displayed in ISO8601 format.
+   * The date and time when the forecast window ends. It is displayed in [ISO
+   * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00.
    */
   endDateTime?: utcDateTime;
 
   /**
-   * Storm status at the beginning of the window.
+   * The status of the tropical storm at the start of the forecast window,
+   * including its classification, such as tropical depression, tropical storm,
+   * or hurricane.
    */
   beginStatus?: string;
 
   /**
-   * Storm status at the end of the window.
+   * The status of the tropical storm at the end of the forecast window,
+   * including its classification, such as tropical depression, tropical storm,
+   * or hurricane.
    */
   endStatus?: string;
 
   /**
-   * Displayed when windowGeometry=true in request. GeoJSON object containing
-   * coordinates describing the window of movement during the specified timeframe.
+   * GeoJSON data that maps out the area affected by the storm during the
+   * forecast window. Displayed when windowGeometry=true is specified in the
+   * request.
    */
   geometry?: GeoJsonGeometry;
 }
 
 /**
- * The StormWindRadiiSummary object provides a high-level overview of the wind
- * distribution around a tropical storm. It includes the geometric representation
- * of wind radii (radiiGeometry), detailed sector-based wind data
- * (radiusSectorData), and the wind speeds at various distances from the storm's
- * center (windSpeed). These properties collectively help in understanding the
- * spatial extent and intensity of winds associated with the storm. Displayed when
- * the request includes `details=true` or `radiiGeometry=true`.
+ * Provides a high-level overview of the wind distribution around a tropical
+ * storm. Displayed when the request includes details=true or
+ * radiiGeometry=true. More details: The StormWindRadiiSummary object provides a
+ * high-level overview of the wind distribution around a tropical storm. It
+ * includes the geometric representation of wind radii (radiiGeometry), detailed
+ * sector-based wind data (radiusSectorData), and the wind speeds at various
+ * distances from the storm's center (windSpeed). These properties collectively
+ * help in understanding the spatial extent and intensity of winds associated
+ * with the storm. Displayed when the request includes details=true or
+ * radiiGeometry=true.
  */
 model StormWindRadiiSummary {
   /**
@@ -2774,57 +3151,71 @@ model StormWindRadiiSummary {
   dateTime?: string;
 
   /**
-   * The overall wind speed associated with the storm's wind radii data. This single
-   * wind speed value applies collectively to all the sectors within the
-   * [radiusSectorData](#radiusSectorData) array, which provides detailed
-   * geographical information for the NE, SE, SW, and NW quadrants of the storm's
-   * wind radii.
+   * Wind speed (km/h or mph) associated with the radiusSectorData. More
+   * detailed: Wind speed associated with the radiusSectorData, measured in
+   * kilometers per hour (km/h) or miles per hour (mph), based on the unit
+   * specified in the request. Details: The overall wind speed associated with
+   * the storm's wind radii data. This single wind speed value applies
+   * collectively to all the sectors within the "radiusSectorData" array, which
+   * provides detailed geographical information for the NE, SE, SW, and NW
+   * quadrants of the storm's wind radii.
    */
   windSpeed?: WeatherValue;
 
   /**
-   * An array of [RadiusSector](#RadiusSector) objects. Each object contains
-   * detailed geographical information (in geoJSON format) needed to plot wind
-   * radius quadrants: 0-90° for NE, 90-180° for SE, 180-270° for SW, and 270-360°
-   * for NW.
+   * An array of RadiusSector objects. Each object contains detailed
+   * geographical information (in geoJSON format) needed to plot wind radius
+   * quadrants: 0–90° for NE, 90–180° for SE, 180–270° for SW, and 270–360° for
+   * NW.
    */
   radiusSectorData?: RadiusSector[];
 
   /**
-   * A GeoJSON object that is returned when the `radiiGeometry` parameter is set to
-   * true in the request. It provides detailed geographical information about the
-   * storm's wind radii, including the spatial representation of areas affected by
-   * different wind speeds.
+   * A geoJSON object that is returned when the radiiGeometry parameter is set
+   * to true in the API request. It provides detailed geographical information
+   * about the storm's wind radii, including the spatial representation of areas
+   * affected by different wind speeds.
    */
   radiiGeometry?: GeoJsonGeometry;
 }
 
 /**
- * Bearing 0-90 = NE quadrant; 90-180 = SE quadrant; 180-270 = SW quadrant;
- * 270-360 = NW quadrant.
+ * Provides the necessary information to plot wind radius quadrants.
+ * `beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90
+ * = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW
+ * quadrant). `range` specifies the radius in nautical miles. Terse version:
+ * Contains information to plot wind radius quadrants. beginBearing and
+ * endBearing indicate angles in degrees (0–90 for NE, 90–180 for SE, 180–270
+ * for SW, 270–360 for NW). range specifies the radius in nautical miles.
  */
 model RadiusSector {
   /**
-   * Bearing, in degrees, of the beginning of the quadrant.
+   * Starting angle of the quadrant, measured in degrees from true north. More
+   * detailed:Specifies the starting angle of the quadrant, measured in degrees
+   * from true north. This property defines the orientation of the sector within
+   * the radius.
    */
   beginBearing?: float64;
 
   /**
-   * Bearing, in degrees, of the end of the quadrant.
+   * Ending angle of the quadrant, measured in degrees from true north. More
+   * detailed: Specifies the ending angle of the quadrant, measured in degrees
+   * from true north. This property, along with beginBearing, defines the
+   * angular span of the sector within the radius.
    */
   endBearing?: float64;
 
-  /**
-   * The radius of the quadrant, in nautical miles.
-   */
+  /** The radius of the quadrant in nautical miles. */
   range?: float64;
 }
 
 /**
- * Contains an array of [StormLocation](#stormlocation) objects, representing
- * government-issued active storm events. Includes details such as latitude and
- * longitude coordinates, wind speed and direction, wind radii, basin identifier,
- * minimum pressure, movement, status, and other relevant attributes.
+ * Contains an array of StormLocation objects, representing government-issued
+ * active storm events. More details: Contains an array of StormLocation
+ * objects, representing government-issued active storm events. Includes details
+ * such as latitude and longitude coordinates, wind speed and direction, wind
+ * radii, basin identifier, minimum pressure, movement, status, and other
+ * relevant attributes.
  */
 model StormLocationsResult {
   /**
@@ -2850,7 +3241,7 @@ model StormLocationsResult {
  */
 model StormLocation {
   /**
-   * Date and time that the forecast is valid, displayed in [ISO
+   * The date and time when the forecast is valid, in [ISO
    * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
    * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
@@ -2862,17 +3253,20 @@ model StormLocation {
   location?: LatLongPair;
 
   /**
-   * Specifies the expected maximum wind gust speed and direction expected during
-   * the storm, measured in kilometers per hour (km/h) or miles per hour (mph),
-   * based on the specified unit. Wind direction is given in azimuth degrees,
-   * ranging from 0° (true North) to 359°, moving clockwise. May be NULL.
+   * Minimal description: Maximum short-burst wind speed (km/h or mph) and
+   * direction (0° to 359° azimuth) expected during the storm. More detailed
+   * alternative: Specifies the expected maximum wind gust speed and direction
+   * expected during the storm, measured in kilometers per hour (km/h) or miles
+   * per hour (mph), based on the specified unit. Wind direction is given in
+   * azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.
+   * May be NULL.
    */
   maxWindGust?: WeatherValue;
 
   /**
-   * Maximum sustained wind speed associated with the storm, measured in kilometers
-   * per hour (km/h) or miles per hour (mph), based on the specified unit. May be
-   * NULL.
+   * Maximum sustained wind speed associated with the storm, measured in
+   * kilometers per hour (km/h) or miles per hour (mph), based on the specified
+   * unit.
    */
   sustainedWind?: WeatherValue;
 
@@ -2903,7 +3297,8 @@ model StormLocation {
   isSubtropical?: boolean;
 
   /**
-   * True when storm may develop into a Tropical System.
+   * Returns true if the storm has the potential to develop into a tropical
+   * cyclone, aiding in the assessment of storm intensification.
    */
   hasTropicalPotential?: boolean;
 
@@ -2914,9 +3309,9 @@ model StormLocation {
   isPostTropical?: boolean;
 
   /**
-   * Contains an array of [StormWindRadiiSummary](#stormwindradiisummary) objects,
-   * detailing wind radii in different quadrants around the storm's center.
-   * Displayed when `details=true` or `radiiGeometry=true` in the request.
+   * Contains an array of StormWindRadiiSummary objects, detailing wind radii in
+   * different quadrants around the storm's center. Displayed when details=true
+   * or radiiGeometry=true in the request.
    */
   windRadiiSummary?: StormWindRadiiSummary[];
 }
@@ -2966,32 +3361,10 @@ model AirQuality {
   index?: float32;
 
   /**
-   * Represents a normalized global air quality index aligned with international
-   * scientific standards, including World Health Organization (WHO) guidelines and
-   * U.S. EPA AQI definitions.
-   *
-   * The value reflects overall air quality based on measured pollutant
-   * concentrations, where the pollutant posing the greatest potential health impact
-   * determines the final index value.
-   *
-   * The returned value uses an AQI-style range from 0 to 250+ and maps to defined
-   * air quality categories.
-   *
-   * The dominant pollutant is the pollutant with the highest individual index
-   * value.
-   *
-   * For example, if pollutant index values are:
-   * <ul><li><b>VOCs</b>: 10</li><li><b>PM2.5</b>: 25</li><li><b>PM10</b>:
-   * 30</li><li><b>NO&#8322;</b>: 50</li></ul>
-   *
-   * The resulting <B>globalIndex</B> value is <B>50</B>, and the dominant pollutant
-   * is <b>NO&#8322;</b>.
-   *
-   * Air quality categories associated with the index value are:
-   * <ul><li><b>0-20</b>: Excellent</li><li><b>21-50</b>:
-   * Fair</li><li><b>51-100</b>: Poor</li><li><b>101-150</b>:
-   * Unhealthy</li><li><b>151-250</b>: Very unhealthy</li><li><b>251+</b>:
-   * Dangerous</li></ul>
+   * Provides an internationally standardized way to understand the
+   * concentration of pollutants in the air. Ratings range from 0 to 300 and up,
+   * with higher numbers representing worse air quality. The pollutants measured
+   * includes PM2.5, PM10, NO2, SO2, CO, and O3.
    */
   globalIndex?: float32;
 
@@ -3032,63 +3405,40 @@ model AirQuality {
  */
 model Pollutant {
   /**
-   * Type of pollutant. Please note that more may be added at any time.
+   * The type of pollutant, such as PM2.5, PM10, O3, NO2, SO2, and CO. Note that
+   * additional types may be added.
    */
   type?: PollutantType;
 
-  /**
-   * The name of the pollutant in English.
-   */
+  /** The name of the pollutant in English, such as Ozone, Nitrogen Dioxide, and Carbon Monoxide. */
   name?: string;
 
   /**
-   * Air quality rating on a scale set by local regulating bodies. Scales can vary
-   * widely based on location. See
-   * [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more
-   * information.
+   * The air quality index (AQI) as defined by local regulatory bodies. The
+   * scale can vary significantly by location. For more information, see [Air
+   * quality index](https://en.wikipedia.org/wiki/Air_quality_index) in
+   * Wikipedia.
    */
   index?: float32;
 
   /**
-   * Represents a normalized global air quality index aligned with international
-   * scientific standards, including World Health Organization (WHO) guidelines and
-   * U.S. EPA AQI definitions.
-   *
-   * The value reflects overall air quality based on measured pollutant
-   * concentrations, where the pollutant posing the greatest potential health impact
-   * determines the final index value.
-   *
-   * The returned value uses an AQI-style range from 0 to 250+ and maps to defined
-   * air quality categories.
-   *
-   * The dominant pollutant is the pollutant with the highest individual index
-   * value.
-   *
-   * For example, if pollutant index values are:
-   * <ul><li><b>VOCs</b>: 10</li><li><b>PM2.5</b>: 25</li><li><b>PM10</b>:
-   * 30</li><li><b>NO&#8322;</b>: 50</li></ul>
-   *
-   * The resulting <B>globalIndex</B> value is <B>50</B>, and the dominant pollutant
-   * is <b>NO&#8322;</b>.
-   *
-   * Air quality categories associated with the index value are:
-   * <ul><li><b>0-20</b>: Excellent</li><li><b>21-50</b>:
-   * Fair</li><li><b>51-100</b>: Poor</li><li><b>101-150</b>:
-   * Unhealthy</li><li><b>151-250</b>: Very unhealthy</li><li><b>251+</b>:
-   * Dangerous</li></ul>
+   * An internationally normalized air quality rating on a scale from 0 to 300+,
+   * where higher values denote poorer air quality. This index measures
+   * concentrations of PM2.5, PM10, NO2, SO2, CO, and O3.
    */
   globalIndex?: float32;
 
   /**
-   * An object containing the number of pollutant particles per volume of air.
+   * Specifies the level of the pollutant in the air, measured in micrograms per
+   * cubic meter (µg/m³) or parts per million (ppm).
    */
   concentration?: WeatherValue;
 }
 
 /**
- * Returns an array of [DailyAirQuality](#dailyairquality) objects, each detailing
- * the forecasted air quality for a specific day. The number of days included is
- * determined by the `duration` URI parameter (1-7 days, default is 1).
+ * Returns an array of DailyAirQuality objects, each detailing the forecasted
+ * air quality for a specific day. The number of days included is determined by
+ * the `duration` URI parameter (1-7 days, default is 1).
  */
 model DailyAirQualityForecastResult {
   /**
@@ -3107,12 +3457,25 @@ model DailyAirQualityForecastResult {
 }
 
 /**
- * Provides a summary of the forecasted air quality conditions for a specific day
- * and location, in the requested language. This includes key metrics such as the
- * air quality index (AQI), the dominant pollutant expected for that day, and a
- * brief description of the overall air quality. The information helps users
- * understand what to expect regarding air quality and any potential health
- * implications for the forecasted day.
+ * Provides forecasted air quality conditions for a specific day and location,
+ * in the requested language. Includes an air quality level categorization with
+ * corresponding color, and description, along with both a global index for
+ * comparing air quality conditions globally and a local index based on regional
+ * air quality standards. First draft: Provides information about the forecasted
+ * air quality conditions for a specific day and location, in the requested
+ * language. Detailed description: Provides forecasted air quality conditions
+ * for a specific day and location, in the requested language. Includes
+ * properties such as category (air quality level), categoryColor (associated
+ * color), description (textual explanation), dominantPollutant (primary
+ * pollutant), globalIndex (standardized index), and index (specific air quality
+ * value). More detailed description: Provides a summary of the forecasted air
+ * quality conditions for a specific day and location, in the requested
+ * language. The returned properties include: category, which indicates the air
+ * quality level; categoryColor, representing the color associated with the air
+ * quality category; description, offering a textual explanation of the air
+ * quality; dominantPollutant, identifying the primary pollutant affecting air
+ * quality; globalIndex, providing a standardized air quality index; and index,
+ * detailing the specific air quality index value for the day.
  */
 model DailyAirQuality {
   /**
@@ -3130,38 +3493,13 @@ model DailyAirQuality {
   index?: float32;
 
   /**
-   * Represents a normalized global air quality index aligned with international
-   * scientific standards, including World Health Organization (WHO) guidelines and
-   * U.S. EPA AQI definitions.
-   *
-   * The value reflects overall air quality based on measured pollutant
-   * concentrations, where the pollutant posing the greatest potential health impact
-   * determines the final index value.
-   *
-   * The returned value uses an AQI-style range from 0 to 250+ and maps to defined
-   * air quality categories.
-   *
-   * The dominant pollutant is the pollutant with the highest individual index
-   * value.
-   *
-   * For example, if pollutant index values are:
-   * <ul><li><b>VOCs</b>: 10</li><li><b>PM2.5</b>: 25</li><li><b>PM10</b>:
-   * 30</li><li><b>NO&#8322;</b>: 50</li></ul>
-   *
-   * The resulting <B>globalIndex</B> value is <B>50</B>, and the dominant pollutant
-   * is <b>NO&#8322;</b>.
-   *
-   * Air quality categories associated with the index value are:
-   * <ul><li><b>0-20</b>: Excellent</li><li><b>21-50</b>:
-   * Fair</li><li><b>51-100</b>: Poor</li><li><b>101-150</b>:
-   * Unhealthy</li><li><b>151-250</b>: Very unhealthy</li><li><b>251+</b>:
-   * Dangerous</li></ul>
+   * Provides an internationally standardized air quality rating from 0 to 300
+   * and above, with higher numbers indicating worse air quality. The index
+   * measures pollutants such as PM2.5, PM10, NO2, SO2, CO, and O3.
    */
   globalIndex?: float32;
 
-  /**
-   * The pollutant with the highest concentration.
-   */
+  /** Identifies the pollutant with the highest concentration. */
   dominantPollutant?: DominantPollutant;
 
   /**
@@ -3185,10 +3523,10 @@ model DailyAirQuality {
 }
 
 /**
- * Returns an array of [DailyHistoricalActuals](#dailyhistoricalactuals) objects,
- * each detailing the observed historical weather data for the specified date and
- * location. The number of days included is determined by the `startDate` and
- * `endDate` URI parameters which can include up to 31 days.
+ * Returns an array of DailyHistoricalActuals objects, each detailing the
+ * observed historical weather data for the specified date and location. The
+ * number of days included is determined by the `startDate` and `endDate` URI
+ * parameters which can include up to 31 days.
  */
 model DailyHistoricalActualsResult {
   /**
@@ -3207,8 +3545,10 @@ model DailyHistoricalActualsResult {
 }
 
 /**
- * Provides climatology data for a specific day, including observed temperatures,
- * precipitation, snowfall, snow depth, and heating/cooling degree days.
+ * Provides observed historical weather data for specified date and location.
+ * Longer version: Provides climatology data for a specific day, including
+ * observed temperatures, precipitation, snowfall, snow depth, and
+ * heating/cooling degree days.
  */
 model DailyHistoricalActuals {
   /**
@@ -3225,18 +3565,21 @@ model DailyHistoricalActuals {
   temperature?: WeatherValueMaxMinAvg;
 
   /**
-   * Provides a summary of heating and cooling degree days. Heating Degree Days
-   * (HDD) measure the demand for energy to heat a building, calculated based on the
-   * degrees a day's average temperature is below 65°F/18°C. Cooling Degree Days
-   * (CDD) measure the demand for energy to cool a building, calculated based on the
-   * degrees a day's average temperature is above 65°F/18°C. This summary aids in
-   * energy management and planning.
+   * Provides a summary of heating and cooling degree days, which measure
+   * temperature deviations from a standard of 65°F / 18°C to indicate energy
+   * usage for heating or cooling. Provides a summary of heating and cooling
+   * degree days. Heating Degree Days (HDD) measure the demand for energy to
+   * heat a building, calculated based on the degrees a day's average
+   * temperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the
+   * demand for energy to cool a building, calculated based on the degrees a
+   * day's average temperature is above 65°F/18°C. This summary aids in energy
+   * management and planning.
    */
   degreeDaySummary?: DegreeDaySummary;
 
   /**
    * The amount of precipitation accumulated over the specified day, measured in
-   * millimeters (mm) or inches (in), depending on the unit specified in the
+   * centimeters (cm) or inches (in), depending on the unit specified in the
    * request.
    */
   precipitation?: WeatherValue;
@@ -3255,21 +3598,29 @@ model DailyHistoricalActuals {
 }
 
 /**
- * Returned temperature values.
+ * Provides the minimum, maximum, and average temperatures for the specified
+ * timeframe, measured in degrees Celsius (C) or Fahrenheit (F), based on the
+ * unit specified in the request.
  */
 model WeatherValueMaxMinAvg {
   /**
-   * Maximum temperature for the time period.
+   * Provides the maximum temperature for the specified timeframe, measured in
+   * degrees Celsius (C) or Fahrenheit (F), based on the unit specified in the
+   * request.
    */
   maximum?: WeatherValue;
 
   /**
-   * Minimum temperature for the time period.
+   * Provides the minimum temperature for the specified timeframe, measured in
+   * degrees Celsius (C) or Fahrenheit (F), based on the unit specified in the
+   * request.
    */
   minimum?: WeatherValue;
 
   /**
-   * Average temperature for the time period.
+   * Provides the average temperature for the specified timeframe, measured in
+   * degrees Celsius (C) or Fahrenheit (F), based on the unit specified in the
+   * request.
    */
   average?: WeatherValue;
 }
@@ -3281,8 +3632,13 @@ model WeatherValueMaxMinAvg {
  */
 model DailyHistoricalRecordsResult {
   /**
-   * Aggregates detailed climatology data for each requested day, including record
-   * temperatures, precipitation, snowfall, snow depth, and degree day summaries.
+   * Aggregates detailed climatology data for each requested day, including
+   * record temperatures, precipitation, snowfall, snow depth, and degree day
+   * summaries. previous draft: Each object in this array provides detailed
+   * historical weather data for specific dates and locations, including metrics
+   * such as temperature, precipitation, snowfall, snow depth, and degree day
+   * summaries. This property essentially aggregates the historical weather data
+   * for the requested date and location.
    */
   results?: DailyHistoricalRecords[];
 
@@ -3313,7 +3669,8 @@ model DailyHistoricalRecords {
 
   /**
    * The amount of precipitation accumulated over the specified day, measured in
-   * millimeters (mm) or inches (in), based on the specified unit in the request.
+   * centimeters (cm) or inches (in), based on the specified unit in the
+   * request.
    */
   precipitation?: WeatherValueYearMax;
 
@@ -3326,73 +3683,104 @@ model DailyHistoricalRecords {
 }
 
 /**
- * Returned temperature values.
+ * The WeatherUnitYearMaxMinAvg object returns the year in which both the
+ * minimum and the maximum temperatures occurred on a specified day, along with
+ * the recorded amounts. Also returns the average temperature for the given
+ * date. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the
+ * unit specified in the request.
  */
 model WeatherValueYearMaxMinAvg {
   /**
-   * Maximum temperature for the time period.
+   * Returns the year in which the maximum amount of precipitation and snowfall
+   * occurred on a specified day, along with the recorded amounts. These values
+   * are measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   maximum?: WeatherValueYear;
 
   /**
-   * Minimum temperature for the time period.
+   * Returns the year in which the minimum amount of precipitation and snowfall
+   * occurred on a specified day, along with the recorded amounts. These values
+   * are measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   minimum?: WeatherValueYear;
 
-  /**
-   * Average temperature for the time period.
-   */
+  /** The average air temperature for the requested time and location. */
   average?: WeatherValue;
 }
 
-/** Weather value with associated year of occurrence. */
+/**
+ * Record-setting values, by year, for daily weather-related metrics such as
+ * temperature, dew point, and wind speed, presented in either metric or
+ * imperial units as specified in the unit URI parameter. For more information,
+ * see [Unit types](/azure/azure-maps/weather-services-concepts#unit-types) in
+ * the article Weather services in Azure Maps.
+ */
 model WeatherValueYear {
   /**
-   * Rounded value.
+   * The value property represents the specific measurement for any given
+   * weather parameter. For example, if the weather parameter is maximum
+   * temperature, and the location is Dilworth Park in Philadelphia, PA the
+   * value is 21.1 °C.
    */
   value?: float32;
 
   /**
-   * Type of unit for the returned value.
+   * The unit of measurement used in the return value, such as "C" for Celsius,
+   * "F" for Fahrenheit.
    */
   unit?: string;
 
   /**
-   * Numeric ID value associated with the type of unit being displayed. Can be used
-   * for unit translation. Please refer to [Weather services in Azure
-   * Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for
-   * details.
+   * An integer representing the type of unit. For example, 17 for Celsius, 18
+   * for Fahrenheit. For a complete list, see [Unit
+   * types](/azure/azure-maps/weather-services-concepts#unit-types) in the
+   * article Weather services in Azure Maps.
    */
   unitType?: int32;
 
   /**
-   * Year the value occurred.
+   * Specifies the year for which the historical weather data is being returned.
+   * For example, if the weather parameter is maximum temperature and the
+   * location is Dilworth Park in Philadelphia, PA, the record-setting year is
+   * 1906.
    */
   year?: int32;
 }
 
 /**
- * Returned temperature values.
+ * The WeatherUnitYearMax object returns the year and the recorded amounts for
+ * the maximum temperature, precipitation, and snowfall that occurred on a
+ * specified day.
  */
 model WeatherValueYearMax {
   /**
-   * Maximum temperature for the time period.
+   * Returns the year in which the maximum amount of precipitation and snowfall
+   * occurred on a specified day, along with the recorded amounts. These values
+   * are measured in millimeters (mm) or inches (in), depending on the unit
+   * specified in the request.
    */
   maximum?: WeatherValueYear;
 }
 
 /**
- * Returns an array of [DailyHistoricalNormals](#dailyhistoricalnormals) objects,
- * each detailing climatology data such as past daily normal temperatures,
- * precipitation, and cooling/heating degree day information for the specified
- * date range, calculated as a 30-year average (1991-2020). The number of days
- * included is determined by the `startDate` and `endDate` URI parameters, which
- * can include up to 31 days.
+ * Returns an array of DailyHistoricalNormals objects, each detailing
+ * climatology data such as past daily normal temperatures, precipitation, and
+ * cooling/heating degree day information for the specified date range,
+ * calculated as a 30-year average (1991-2020). The number of days included is
+ * determined by the `startDate` and `endDate` URI parameters, which can include
+ * up to 31 days.
  */
 model DailyHistoricalNormalsResult {
   /**
-   * Aggregates detailed climatology data for each requested day, including normal
-   * temperatures, precipitation, snowfall, snow depth, and degree day summaries.
+   * Aggregates detailed climatology data for each requested day, including
+   * normal temperatures, precipitation, snowfall, snow depth, and degree day
+   * summaries. previous draft: Each object in this array provides detailed
+   * historical weather data for specific dates and locations, including metrics
+   * such as temperature, precipitation, snowfall, snow depth, and degree day
+   * summaries. This property essentially aggregates the historical weather data
+   * for the requested date and location.
    */
   results?: DailyHistoricalNormals[];
 
@@ -3420,19 +3808,22 @@ model DailyHistoricalNormals {
   temperature?: WeatherValueMaxMinAvg;
 
   /**
-   * Provides a summary of heating and cooling degree days. Heating Degree Days
-   * (HDD) measure the demand for energy to heat a building, calculated based on the
-   * degrees a day's average temperature is below 65°F/18°C. Cooling Degree Days
-   * (CDD) measure the demand for energy to cool a building, calculated based on the
-   * degrees a day's average temperature is above 65°F/18°C. This summary aids in
-   * energy management and planning.
+   * Provides a summary of heating and cooling degree days, which measure
+   * temperature deviations from a standard of 65°F / 18°C to indicate energy
+   * usage for heating or cooling. Provides a summary of heating and cooling
+   * degree days. Heating Degree Days (HDD) measure the demand for energy to
+   * heat a building, calculated based on the degrees a day's average
+   * temperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the
+   * demand for energy to cool a building, calculated based on the degrees a
+   * day's average temperature is above 65°F/18°C. This summary aids in energy
+   * management and planning.
    */
   degreeDaySummary?: DegreeDaySummary;
 
   /**
    * Provides the amount of precipitation accumulated over the specified day,
-   * measured in millimeters (mm) or inches (in), based on the specified unit in the
-   * request.
+   * measured in centimeters (cm) or inches (in), based on the specified unit in
+   * the request.
    */
   precipitation?: WeatherValue;
 }
