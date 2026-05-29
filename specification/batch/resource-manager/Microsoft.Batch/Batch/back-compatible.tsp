@@ -55,6 +55,8 @@ using Microsoft.Batch;
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ApplicationPackages.get, "ApplicationPackage");
+@@clientLocation(ApplicationPackages.createPrev, "ApplicationPackage");
+@@clientName(ApplicationPackages.createPrev::parameters.resource, "parameters");
 @@clientLocation(ApplicationPackages.create, "ApplicationPackage");
 @@clientName(ApplicationPackages.create::parameters.resource, "parameters");
 @@clientLocation(ApplicationPackages.delete, "ApplicationPackage");
@@ -63,6 +65,8 @@ using Microsoft.Batch;
 @@clientName(ApplicationPackages.activate::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(ApplicationPackage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
+@@flattenProperty(ApplicationPackageCreateResponse.properties);
 
 @@clientLocation(Applications.get, "Application");
 @@clientLocation(Applications.create, "Application");
