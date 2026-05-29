@@ -4,9 +4,19 @@ rules:
   dangerous-triggers:
     ignore:
       - arm-auto-signoff-status.yaml
+      - avocado-status.yaml
+      - breaking-change-add-label-artifacts.yaml
+      - breaking-change-cross-version-status.yaml
+      - breaking-change-status.yaml
+      - lintdiff-status.yaml
+      - summarize-checks.yaml
+      - swagger-modelvalidation-status.yaml
+      - swagger-semanticvalidation-status.yaml
+      - update-labels.yaml
   unpinned-uses:
     config:
       policies:
         actions/*: ref-pin
         azure/*: ref-pin
+        github/*: ref-pin
         "*": hash-pin
