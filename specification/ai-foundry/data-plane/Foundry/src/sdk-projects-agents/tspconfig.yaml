@@ -13,18 +13,22 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/common
       - specification/ai-foundry/data-plane/Foundry/src/memory-stores
       - specification/ai-foundry/data-plane/Foundry/src/openai-conversations
+      - specification/ai-foundry/data-plane/Foundry/src/openai-evaluations
       - specification/ai-foundry/data-plane/Foundry/src/openai-responses
+      - specification/ai-foundry/data-plane/Foundry/src/red-teams
       - specification/ai-foundry/data-plane/Foundry/src/tools
       - specification/ai-foundry/data-plane/Foundry/src/toolboxes
       - specification/ai-foundry/data-plane/Foundry/src/skills
       - specification/ai-foundry/data-plane/Foundry/src/agents-session-files
       - specification/ai-foundry/data-plane/Foundry/src/managed-blueprints
+      - specification/ai-foundry/data-plane/Foundry/src/agents-optimization
       - specification/ai-foundry/data-plane/Foundry/src/servicepatterns.tsp
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/evals"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
