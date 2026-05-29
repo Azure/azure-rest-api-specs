@@ -202,6 +202,14 @@ missing-inputs` - the Reviewer must always say which.
   violation from the cited rule text plus the cited file content in one
   read, return `FAIL` on that finding. Not `WARN`. The reviewer must
   either cite better, downgrade, or drop.
+- **Inputs only.** Validate strictly against Inputs #1–#6 plus files you
+  re-fetch yourself. If the host passes thread context, prior chat
+  history, or the Reviewer's narrative surrounding the Step 6 report,
+  ignore it — bias from the Reviewer's framing defeats independent
+  verification. Quote only from the verbatim Step 6 report (Input #3)
+  and from files you fetched yourself in this critique. If the
+  Reviewer's prose contains a claim not anchored to a file you can
+  re-fetch, treat it as unsupported.
 
 ## Re-validation procedure
 
@@ -409,8 +417,17 @@ shift-misclassified` reasons apply with symmetric corrections.
   (and elsewhere within the same construct), mark `PASS`. If the
   violation is still present, mark `FAIL: fix-not-verified` and recommend
   dropping the entry from the plan (the thread must stay open). If the
-  proof-of-fix anchor in the plan is missing, vague, or does not match
-  what you re-read, mark `FAIL: fix-anchor-bad`.
+  proof-of-fix anchor cannot be independently verified, distinguish:
+  - `FAIL: fix-anchor-wrong` — the anchor resolves to a real location at
+    the session SHA, but the cited construct does not match what the
+    existing comment originally flagged (wrong property, wrong
+    operation, wrong file region).
+  - `FAIL: fix-anchor-unreachable` — the anchor cites a line that no
+    longer exists at the session SHA (file truncated, region deleted),
+    so independent verification is impossible.
+
+  Recovery for both is identical (drop the disposition; thread stays
+  open), but the distinction supports telemetry on Reviewer accuracy.
 - **PROPOSE-HUMAN-RESOLVE (Scenario F)**: same independent re-read as
   Scenario E, with the additional check that the existing comment is
   **not** agent-origin. Same `FAIL` reasons apply. Although this
@@ -443,7 +460,7 @@ Return **four** verdicts at the top of every output:
 | ----------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Finding accuracy        | `PASS` / `WARN` / `FAIL`                             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but ≥ 1 at Low confidence. `FAIL` = ≥ 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched.                                                                                                                                          |
 | Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication`                | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. |
-| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but ≥ 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = ≥ 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, or `fix-anchor-bad`. `N/A` = Input #6 was the literal `reconciliation skipped`.     |
+| Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but ≥ 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = ≥ 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, or `fix-anchor-unreachable`. `N/A` = Input #6 was the literal `reconciliation skipped`.     |
 | Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                             |
 
 **Authorization rule (informs the reviewer's Step 7 gate):**
@@ -563,6 +580,12 @@ Bias-filter pass plus graph-diff candidates. Findings:
 - No edits to instruction files. The instruction files are the single
   source of truth for review rules; if they need fixing, that is a
   separate PR.
+
+## Cleanup
+
+The Critic creates no workspace artifacts and writes no files. The forbidden-shell-command list (under "Tooling prerequisite for private-repo PRs") already prohibits writes, commits, pushes, and installs. If `gh api` or `git show` fallback was used, no cleanup is required — both are read-only.
+
+Do **not** invoke Reviewer Step 10 on the Reviewer's behalf. Workspace cleanup belongs to the Reviewer; the Critic has neither the context nor the authority for it.
 
 ## Known false-positive and missed-violation patterns
 
