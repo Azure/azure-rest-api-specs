@@ -3796,6 +3796,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies the automatic sku migration policy
+   */
+  @added(Versions.v2026_03_01)
+  automaticSkuMigrationPolicy?: AutomaticSkuMigrationPolicy;
 }
 
 /**
@@ -3811,6 +3817,17 @@ model SkuProfileVMSize {
    * Specifies the rank (a.k.a priority) associated with the VM Size.
    */
   rank?: int32;
+}
+
+/**
+ * Specifies the automatic sku migration policy
+ */
+@added(Versions.v2026_03_01)
+model AutomaticSkuMigrationPolicy {
+  /**
+   * Specifies whether automatic sku migration should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
 }
 
 /**
