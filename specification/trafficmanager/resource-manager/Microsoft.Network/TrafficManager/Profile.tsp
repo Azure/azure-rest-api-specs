@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 /**
@@ -93,9 +95,11 @@ interface Profiles {
 }
 
 @@doc(Profile.properties, "The properties of the Traffic Manager profile.");
-@@doc(Profiles.createOrUpdate::parameters.resource,
+@@doc(
+  Profiles.createOrUpdate::parameters.resource,
   "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Profiles.update::parameters.properties,
+@@doc(
+  Profiles.update::parameters.properties,
   "The Traffic Manager profile parameters supplied to the Update operation."
 );

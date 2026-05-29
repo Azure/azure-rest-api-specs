@@ -127,6 +127,18 @@
       "name": "ComputeOperations"
     },
     {
+      "name": "ManagedComputeUsages"
+    },
+    {
+      "name": "Computes"
+    },
+    {
+      "name": "Workbenches"
+    },
+    {
+      "name": "ManagedComputeCapacities"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -522,6 +534,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/managedComputeUsages": {
+      "get": {
+        "operationId": "ManagedComputeUsagesOperationGroup_List",
+        "tags": [
+          "ManagedComputeUsages"
+        ],
+        "description": "List managed compute quota usages for a subscription and location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeUsageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Managed Compute Usages": {
+            "$ref": "./examples/ListManagedComputeUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/modelCapacities": {
       "get": {
         "operationId": "LocationBasedModelCapacities_List",
@@ -899,6 +953,66 @@
           },
           "Get Usages Global Scope": {
             "$ref": "./examples/ListUsagesGlobalScope.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/managedComputeCapacities": {
+      "get": {
+        "operationId": "ManagedComputeCapacities_List",
+        "tags": [
+          "ManagedComputeCapacities"
+        ],
+        "description": "Gets the managed compute capacities for a subscription. Returns available capacity\nper accelerator type, including deployment size information.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "offer",
+            "in": "query",
+            "description": "The offer name to query capacity for (required).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "acceleratorType",
+            "in": "query",
+            "description": "Optional accelerator type filter to narrow results to a specific accelerator type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "deploymentId",
+            "in": "query",
+            "description": "Optional deployment resource ID. When provided, returns capacity for the specific region\nwhere the deployment is hosted rather than the best available region.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeCapacityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Managed Compute Capacities": {
+            "$ref": "./examples/ListManagedComputeCapacities.json"
           }
         },
         "x-ms-pageable": {
@@ -1290,9 +1404,9 @@
             }
           },
           "201": {
-            "description": "Resource 'RaiExternalSafetyProvider' create operation succeeded",
+            "description": "Resource 'RaiExternalSafetyProviderSchema' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
             }
           },
           "default": {
@@ -2402,6 +2516,590 @@
         "x-ms-examples": {
           "DeleteCommitmentPlan": {
             "$ref": "./examples/DeleteCommitmentPlan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes": {
+      "get": {
+        "operationId": "Computes_List",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Gets the computes associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ComputeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListComputes": {
+            "$ref": "./examples/ListComputes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}": {
+      "get": {
+        "operationId": "Computes_Get",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Gets the specified compute associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCompute": {
+            "$ref": "./examples/GetCompute.json"
+          },
+          "GetContainerInstanceCompute": {
+            "$ref": "./examples/GetContainerInstanceCompute.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Computes_CreateOrUpdate",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Creates or updates a compute associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The compute properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Compute' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          },
+          "201": {
+            "description": "Resource 'Compute' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutCompute": {
+            "$ref": "./examples/PutCompute.json"
+          },
+          "PutContainerInstanceCompute": {
+            "$ref": "./examples/PutContainerInstanceCompute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Compute"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Computes_Update",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Updates a compute associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The compute properties to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Compute"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateCompute": {
+            "$ref": "./examples/UpdateCompute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Compute"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Computes_Delete",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Deletes the specified compute associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteCompute": {
+            "$ref": "./examples/DeleteCompute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}/restart": {
+      "post": {
+        "operationId": "Computes_Restart",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Restarts a running ContainerInstance compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is ContainerInstance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RestartContainerInstanceCompute": {
+            "$ref": "./examples/RestartContainerInstanceCompute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}/start": {
+      "post": {
+        "operationId": "Computes_Start",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Starts a stopped ContainerInstance compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is ContainerInstance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartContainerInstanceCompute": {
+            "$ref": "./examples/StartContainerInstanceCompute.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}/stop": {
+      "post": {
+        "operationId": "Computes_Stop",
+        "tags": [
+          "Computes"
+        ],
+        "description": "Stops a running ContainerInstance compute resource.\nThis is a long-running operation that returns 202 Accepted.\nOnly applicable when computeType is ContainerInstance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "computeName",
+            "in": "path",
+            "description": "The name of the compute associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopContainerInstanceCompute": {
+            "$ref": "./examples/StopContainerInstanceCompute.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3741,6 +4439,64 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/evaluateDeploymentPolicies": {
+      "post": {
+        "operationId": "Accounts_EvaluateDeploymentPolicies",
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "description": "Evaluate Azure Policy compliance for a set of hypothetical deployments without creating them.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluateDeploymentPoliciesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EvaluateDeploymentPoliciesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluateDeploymentPolicies": {
+            "$ref": "./examples/EvaluateDeploymentPolicies.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/listKeys": {
       "post": {
         "operationId": "Accounts_ListKeys",
@@ -3835,6 +4591,9 @@
         "x-ms-examples": {
           "ListManagedComputeDeployments": {
             "$ref": "./examples/ListManagedComputeDeployments.json"
+          },
+          "ListVmManagedComputeDeployments": {
+            "$ref": "./examples/ListVmManagedComputeDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -3895,6 +4654,9 @@
         "x-ms-examples": {
           "GetManagedComputeDeployment": {
             "$ref": "./examples/GetManagedComputeDeployment.json"
+          },
+          "GetVmManagedComputeDeployment": {
+            "$ref": "./examples/GetVmManagedComputeDeployment.json"
           }
         }
       },
@@ -3976,6 +4738,9 @@
         "x-ms-examples": {
           "CreateOrUpdateManagedComputeDeployment": {
             "$ref": "./examples/CreateOrUpdateManagedComputeDeployment.json"
+          },
+          "CreateOrUpdateVmManagedComputeDeployment": {
+            "$ref": "./examples/CreateOrUpdateVmManagedComputeDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4063,6 +4828,9 @@
         "x-ms-examples": {
           "UpdateManagedComputeDeployment": {
             "$ref": "./examples/UpdateManagedComputeDeployment.json"
+          },
+          "UpdateVmManagedComputeDeployment": {
+            "$ref": "./examples/UpdateVmManagedComputeDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4583,7 +5351,10 @@
           "final-state-via": "location",
           "final-state-schema": "#/definitions/OutboundRuleListResult"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules": {
@@ -5853,6 +6624,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -7654,6 +8428,664 @@
             "$ref": "./examples/ProjectConnection/delete.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches": {
+      "get": {
+        "operationId": "Workbenches_List",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Gets the workbenches associated with the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkbenchListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListWorkbenches": {
+            "$ref": "./examples/ListWorkbenches.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}": {
+      "get": {
+        "operationId": "Workbenches_Get",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Gets the specified workbench associated with the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workbench"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetWorkbench": {
+            "$ref": "./examples/GetWorkbench.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workbenches_CreateOrUpdate",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Creates or updates a workbench associated with the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The workbench properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workbench"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Workbench' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workbench"
+            }
+          },
+          "201": {
+            "description": "Resource 'Workbench' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Workbench"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutWorkbench": {
+            "$ref": "./examples/PutWorkbench.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Workbench"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Workbenches_Update",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Updates a workbench associated with the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The workbench properties to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workbench"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Workbench"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateWorkbench": {
+            "$ref": "./examples/UpdateWorkbench.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Workbench"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Workbenches_Delete",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Deletes the specified workbench associated with the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteWorkbench": {
+            "$ref": "./examples/DeleteWorkbench.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}/restart": {
+      "post": {
+        "operationId": "Workbenches_Restart",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Restarts a running workbench resource.\nThis is a long-running operation that returns 202 Accepted.\nReturns 204 if the workbench is already in the target state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RestartWorkbench": {
+            "$ref": "./examples/RestartWorkbench.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}/start": {
+      "post": {
+        "operationId": "Workbenches_Start",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Starts a stopped workbench resource.\nThis is a long-running operation that returns 202 Accepted.\nReturns 204 if the workbench is already in the target state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartWorkbench": {
+            "$ref": "./examples/StartWorkbench.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}/stop": {
+      "post": {
+        "operationId": "Workbenches_Stop",
+        "tags": [
+          "Workbenches"
+        ],
+        "description": "Stops a running workbench resource.\nThis is a long-running operation that returns 202 Accepted.\nReturns 204 if the workbench is already in the target state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "description": "The name of the workbench associated with the project.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_-]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopWorkbench": {
+            "$ref": "./examples/StopWorkbench.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists": {
@@ -9983,7 +11415,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11450,6 +12882,32 @@
         "type"
       ]
     },
+    "ClusterComputeProperties": {
+      "type": "object",
+      "description": "Properties for a Cluster (AKS-backed) compute resource.",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "description": "Pools attached to this compute cluster.",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        },
+        "subnetArmId": {
+          "type": "string",
+          "description": "ARM ID of the subnet used for compute."
+        }
+      },
+      "required": [
+        "pools"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Cluster"
+    },
     "CommitmentCost": {
       "type": "object",
       "description": "Cognitive Services account commitment cost.",
@@ -11538,7 +12996,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -11813,6 +13271,69 @@
         }
       }
     },
+    "Compute": {
+      "type": "object",
+      "description": "Cognitive Services compute resource. Supports polymorphic compute types\n(Cluster, ContainerInstance) via the computeType discriminator in properties.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ComputeProperties",
+          "description": "Polymorphic properties of the compute resource. Use computeType to select Cluster or ContainerInstance."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the compute resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind (type) of compute resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ComputeListResult": {
+      "type": "object",
+      "description": "The list of cognitive services computes operation response.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of compute list."
+        },
+        "value": {
+          "type": "array",
+          "description": "Gets the list of computes.",
+          "items": {
+            "$ref": "#/definitions/Compute"
+          }
+        }
+      }
+    },
     "ComputeOperationStatus": {
       "type": "object",
       "description": "The status of an async compute operation.",
@@ -11890,6 +13411,142 @@
         ]
       },
       "readOnly": true
+    },
+    "ComputeProperties": {
+      "type": "object",
+      "description": "Base properties for all compute resource types.\nThe computeType discriminator determines the concrete property shape.",
+      "properties": {
+        "computeType": {
+          "$ref": "#/definitions/ComputeType",
+          "description": "The type of compute resource."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ComputeProvisioningState",
+          "description": "Provisioning state of the compute resource.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error details for the compute resource.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the compute resource.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "computeType",
+      "required": [
+        "computeType"
+      ]
+    },
+    "ComputeProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a compute resource.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Scaling",
+        "Disabled",
+        "Starting",
+        "Stopping",
+        "Restarting",
+        "Stopped"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning request has been accepted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource has been fully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource provisioning has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource provisioning was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Scaling",
+            "value": "Scaling",
+            "description": "The resource is scaling."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The resource is disabled."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "The compute resource is starting."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The compute resource is stopping."
+          },
+          {
+            "name": "Restarting",
+            "value": "Restarting",
+            "description": "The compute resource is restarting."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The compute resource is stopped."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ComputeType": {
+      "type": "string",
+      "description": "The type of compute resource.",
+      "enum": [
+        "Cluster",
+        "ContainerInstance"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cluster",
+            "value": "Cluster",
+            "description": "Cluster (AKS-backed) compute type."
+          },
+          {
+            "name": "ContainerInstance",
+            "value": "ContainerInstance",
+            "description": "Container Instance compute type."
+          }
+        ]
+      }
     },
     "ConnectionAccessKey": {
       "type": "object",
@@ -12913,6 +14570,60 @@
         }
       }
     },
+    "ConnectivityEndpoints": {
+      "type": "object",
+      "description": "Network connectivity endpoints for a Container Instance compute.",
+      "properties": {
+        "publicIpAddress": {
+          "type": "string",
+          "description": "The public IP address of the compute instance.",
+          "readOnly": true
+        },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The SSH port for the compute instance.",
+          "readOnly": true
+        }
+      }
+    },
+    "ContainerInstanceComputeProperties": {
+      "type": "object",
+      "description": "Properties for a Container Instance compute resource.",
+      "properties": {
+        "targetClusterId": {
+          "type": "string",
+          "description": "ARM resource ID of the parent cluster that hosts this container instance."
+        },
+        "imageLink": {
+          "type": "string",
+          "description": "Container image URI (e.g., MCR or ACR image path) for the container instance."
+        },
+        "idleTimeBeforeShutdown": {
+          "type": "string",
+          "description": "ISO 8601 duration before the idle instance is automatically shut down (e.g., 'PT30M')."
+        },
+        "sshSettings": {
+          "$ref": "#/definitions/SshSettings",
+          "description": "SSH configuration for remote access to the container instance."
+        },
+        "connectivityEndpoints": {
+          "$ref": "#/definitions/ConnectivityEndpoints",
+          "description": "Network connectivity endpoints assigned to the container instance.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetClusterId",
+        "imageLink"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ContainerInstance"
+    },
     "ContentLevel": {
       "type": "string",
       "description": "Level at which content is filtered.",
@@ -13243,6 +14954,28 @@
         ]
       }
     },
+    "DeploymentPolicyEvaluationResult": {
+      "type": "object",
+      "description": "Policy evaluation result for a single deployment.",
+      "properties": {
+        "evaluationOutcome": {
+          "$ref": "#/definitions/PolicyEvaluationOutcome",
+          "description": "The evaluation outcome."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the evaluation outcome is Error."
+        },
+        "nonCompliantAssignments": {
+          "type": "array",
+          "description": "Details of non-compliant policy assignments.",
+          "items": {
+            "$ref": "#/definitions/PolicyAssignmentEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DeploymentProperties": {
       "type": "object",
       "description": "Properties of Cognitive Services account deployment.",
@@ -13325,7 +15058,7 @@
         },
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
-          "description": "Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset."
+          "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
         }
       }
     },
@@ -13384,16 +15117,16 @@
     },
     "DeploymentRouting": {
       "type": "object",
-      "description": "Routing configuration for the deployment. Specifies how requests are routed across multiple models.",
+      "description": "Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.",
       "properties": {
         "mode": {
           "type": "string",
-          "description": "The routing mode that determines how requests are distributed across models.",
+          "description": "The model-router routing mode that determines how requests are distributed across models.",
           "default": "balanced",
           "enum": [
             "cost",
             "balanced",
-            "accuracy"
+            "quality"
           ],
           "x-ms-enum": {
             "name": "RoutingMode",
@@ -13407,19 +15140,19 @@
               {
                 "name": "Balanced",
                 "value": "balanced",
-                "description": "Balance cost and accuracy when routing requests across models."
+                "description": "Balance cost and quality when routing requests across models."
               },
               {
-                "name": "Accuracy",
-                "value": "accuracy",
-                "description": "Route requests to maximize accuracy regardless of cost."
+                "name": "Quality",
+                "value": "quality",
+                "description": "Route requests to maximize quality regardless of cost."
               }
             ]
           }
         },
         "models": {
           "type": "array",
-          "description": "Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
+          "description": "Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
           "items": {
             "$ref": "#/definitions/DeploymentModel"
           },
@@ -13471,6 +15204,30 @@
             "value": "Manual"
           }
         ]
+      }
+    },
+    "DeploymentSizeCapacity": {
+      "type": "object",
+      "description": "Capacity information for a specific deployment size.",
+      "properties": {
+        "modelInstanceAcceleratorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of accelerators required per model instance.",
+          "readOnly": true
+        },
+        "totalAvailableCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total available capacity for this deployment size.",
+          "readOnly": true
+        },
+        "largestDeploymentCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The largest contiguous deployment capacity available for this deployment size.",
+          "readOnly": true
+        }
       }
     },
     "DeploymentSkuListResult": {
@@ -13739,6 +15496,70 @@
             "value": "Enabled"
           }
         ]
+      }
+    },
+    "EvaluateDeploymentPoliciesDeployment": {
+      "type": "object",
+      "description": "A hypothetical deployment definition used for policy dry-run evaluation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the hypothetical deployment."
+        },
+        "properties": {
+          "$ref": "#/definitions/EvaluateDeploymentPoliciesDeploymentProperties",
+          "description": "Properties of the hypothetical deployment."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "EvaluateDeploymentPoliciesDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of a hypothetical deployment for policy evaluation.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/DeploymentModel",
+          "description": "The model to evaluate."
+        },
+        "raiPolicyName": {
+          "type": "string",
+          "description": "The name of the RAI policy to evaluate."
+        }
+      },
+      "required": [
+        "model"
+      ]
+    },
+    "EvaluateDeploymentPoliciesRequest": {
+      "type": "object",
+      "description": "Request body for the evaluateDeploymentPolicies action.",
+      "properties": {
+        "deployments": {
+          "type": "array",
+          "description": "The list of hypothetical deployments to evaluate against Azure Policy.",
+          "items": {
+            "$ref": "#/definitions/EvaluateDeploymentPoliciesDeployment"
+          }
+        }
+      },
+      "required": [
+        "deployments"
+      ]
+    },
+    "EvaluateDeploymentPoliciesResponse": {
+      "type": "object",
+      "description": "Response body for the evaluateDeploymentPolicies action.",
+      "properties": {
+        "results": {
+          "type": "object",
+          "description": "Per-deployment policy evaluation results, keyed by deployment name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentPolicyEvaluationResult"
+          }
+        }
       }
     },
     "FirewallSku": {
@@ -14134,6 +15955,73 @@
       ],
       "x-ms-discriminator-value": "Managed"
     },
+    "ManagedComputeCapacity": {
+      "type": "object",
+      "description": "Managed compute capacity information for Cognitive Services managed compute deployments.\nProvides available accelerator capacity per type and region at the subscription level.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedComputeCapacityProperties",
+          "description": "Properties of the managed compute capacity resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedComputeCapacityListResult": {
+      "type": "object",
+      "description": "The list of managed compute capacities response.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of managed compute capacities."
+        },
+        "value": {
+          "type": "array",
+          "description": "Gets the list of managed compute capacities.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeCapacity"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "ManagedComputeCapacityProperties": {
+      "type": "object",
+      "description": "Properties of a managed compute capacity resource.",
+      "properties": {
+        "acceleratorType": {
+          "type": "string",
+          "description": "The type of accelerator (e.g., Azure.A100, Azure.H100).",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the capacity is available.",
+          "readOnly": true
+        },
+        "availableAccelerators": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of available accelerators in the region.",
+          "readOnly": true
+        },
+        "deploymentSizeCapacities": {
+          "type": "array",
+          "description": "Capacity information broken down by deployment size.",
+          "items": {
+            "$ref": "#/definitions/DeploymentSizeCapacity"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ManagedComputeDeployment": {
       "type": "object",
       "description": "Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.",
@@ -14157,6 +16045,34 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ManagedComputeDeploymentInfo": {
+      "type": "object",
+      "description": "Deployment detail within a managed compute usage entry.",
+      "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the deployment."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Full ARM resource ID of the account/project."
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Model name (e.g., 'azureml://registries//models//versions/gpt-4o')."
+        },
+        "acceleratorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of GPUs consumed by this deployment."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of instances for this deployment."
+        }
+      }
     },
     "ManagedComputeDeploymentListResult": {
       "type": "object",
@@ -14191,8 +16107,7 @@
         },
         "deploymentTemplate": {
           "type": "string",
-          "format": "uri",
-          "description": "AzureML Registry deployment template URI. Optional on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
+          "description": "Deployment template identifier. Optional on creation.\nAccepts an AzureML Registry deployment template URI or a project-scoped deployment template path for VmManagedCompute.\nExamples: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}, projects/{project}/deploymentTemplates/{template}/versions/{version}",
           "x-ms-mutability": [
             "read",
             "create"
@@ -14209,6 +16124,22 @@
         "versionUpgradeOption": {
           "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
           "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "computeId": {
+          "type": "string",
+          "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Scheduling priority for VM-backed managed compute deployments. Immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -14276,6 +16207,75 @@
         "messagesApiScoringPath": {
           "type": "string",
           "description": "Relative path to the messages API scoring endpoint."
+        }
+      }
+    },
+    "ManagedComputeUsage": {
+      "type": "object",
+      "description": "Managed compute quota usage for a specific SKU.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the managed compute usage.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "unit": {
+          "$ref": "#/definitions/UnitType",
+          "description": "The unit of the metric."
+        },
+        "limit": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value for this metric."
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Current value for this metric."
+        },
+        "offerScope": {
+          "type": "string",
+          "description": "Offer scope (e.g., 'Global', 'Datazone-US')."
+        },
+        "deployments": {
+          "type": "array",
+          "description": "Deployments consuming this managed compute quota.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeDeploymentInfo"
+          },
+          "x-ms-identifiers": [
+            "deploymentId"
+          ]
+        }
+      }
+    },
+    "ManagedComputeUsageListResult": {
+      "type": "object",
+      "description": "List of managed compute quota entries.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of managed compute usages."
+        },
+        "value": {
+          "type": "array",
+          "description": "Per-SKU managed compute quota usage entries.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeUsage"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -15338,6 +17338,133 @@
         }
       ]
     },
+    "PolicyAssignmentEvaluationDetails": {
+      "type": "object",
+      "description": "Details of a non-compliant policy assignment.",
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "description": "The policy assignment ID."
+        },
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition ID."
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition ID."
+        },
+        "evaluationOutcome": {
+          "$ref": "#/definitions/PolicyEvaluationOutcome",
+          "description": "The evaluation outcome for this assignment."
+        },
+        "nonComplianceReason": {
+          "type": "string",
+          "description": "The reason for non-compliance."
+        },
+        "effect": {
+          "type": "string",
+          "description": "The policy effect (e.g., Deny, Audit)."
+        },
+        "expressionEvaluations": {
+          "type": "array",
+          "description": "Expression-level evaluation details.",
+          "items": {
+            "$ref": "#/definitions/PolicyExpressionEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PolicyEvaluationOutcome": {
+      "type": "string",
+      "description": "The outcome of a policy evaluation.",
+      "enum": [
+        "Compliant",
+        "NonCompliant",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyEvaluationOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The deployment is compliant with all policies."
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The deployment violates one or more policies."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error occurred during evaluation."
+          }
+        ]
+      }
+    },
+    "PolicyExpressionEvaluationDetails": {
+      "type": "object",
+      "description": "Details of a policy expression evaluation.",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "The policy expression."
+        },
+        "expressionKind": {
+          "type": "string",
+          "description": "The kind of expression."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The operator used in evaluation."
+        },
+        "result": {
+          "type": "string",
+          "description": "The evaluation result."
+        },
+        "targetValue": {
+          "type": "string",
+          "description": "The target value of the expression."
+        },
+        "expressionValue": {
+          "type": "string",
+          "description": "The actual value of the expression."
+        }
+      }
+    },
+    "Pool": {
+      "type": "object",
+      "description": "A compute pool configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the pool."
+        },
+        "vmPriority": {
+          "$ref": "#/definitions/VmPriority",
+          "description": "The VM priority of the pool."
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "The instance type (VM SKU) used in the pool."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes in the pool."
+        }
+      },
+      "required": [
+        "name",
+        "vmPriority",
+        "instanceType",
+        "nodeCount"
+      ]
+    },
     "PrivateEndpointConnection": {
       "type": "object",
       "description": "The Private Endpoint Connection resource.",
@@ -15540,7 +17667,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -16241,67 +18368,6 @@
         "source": {
           "$ref": "#/definitions/RaiPolicyContentSource",
           "description": "Content source to apply the Content Filters."
-        }
-      }
-    },
-    "RaiExternalSafetyProvider": {
-      "type": "object",
-      "description": "Cognitive Services Rai External Safety provider.",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Resource Etag.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RaiExternalSafetyProviderProperties",
-          "description": "Properties of Cognitive Services Rai External Safety provider."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "RaiExternalSafetyProviderProperties": {
-      "type": "object",
-      "description": "RAI External SafetyProvider properties.",
-      "properties": {
-        "providerId": {
-          "type": "string",
-          "description": "The unique identifier of the safety provider."
-        },
-        "providerName": {
-          "type": "string",
-          "description": "Name of the safety provider."
-        },
-        "mode": {
-          "type": "string",
-          "description": "Safety provider mode sync/async."
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Webhook URL for the safety provider."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the safety provider."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last modified time of the safety provider."
         }
       }
     },
@@ -17131,11 +19197,11 @@
     },
     "RoutingMode": {
       "type": "string",
-      "description": "The routing mode that determines how requests are distributed across models.",
+      "description": "The model-router routing mode that determines how requests are distributed across models.",
       "enum": [
         "cost",
         "balanced",
-        "accuracy"
+        "quality"
       ],
       "x-ms-enum": {
         "name": "RoutingMode",
@@ -17149,12 +19215,12 @@
           {
             "name": "Balanced",
             "value": "balanced",
-            "description": "Balance cost and accuracy when routing requests across models."
+            "description": "Balance cost and quality when routing requests across models."
           },
           {
-            "name": "Accuracy",
-            "value": "accuracy",
-            "description": "Route requests to maximize accuracy regardless of cost."
+            "name": "Quality",
+            "value": "quality",
+            "description": "Route requests to maximize quality regardless of cost."
           }
         ]
       }
@@ -17631,6 +19697,20 @@
         ]
       }
     },
+    "SshSettings": {
+      "type": "object",
+      "description": "SSH configuration for a Container Instance compute.",
+      "properties": {
+        "sshPublicKey": {
+          "type": "string",
+          "description": "The SSH public key for authenticating to the compute instance."
+        },
+        "adminEnabled": {
+          "type": "boolean",
+          "description": "Whether SSH admin access is enabled."
+        }
+      }
+    },
     "ThrottlingRule": {
       "type": "object",
       "properties": {
@@ -17957,6 +20037,148 @@
       },
       "required": [
         "id"
+      ]
+    },
+    "VmPriority": {
+      "type": "string",
+      "description": "VM priority for a compute pool.",
+      "enum": [
+        "Regular",
+        "LowPriority"
+      ],
+      "x-ms-enum": {
+        "name": "VmPriority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "Regular VM priority."
+          },
+          {
+            "name": "LowPriority",
+            "value": "LowPriority",
+            "description": "Low-priority VM."
+          }
+        ]
+      }
+    },
+    "Workbench": {
+      "type": "object",
+      "description": "Workbench resource under a Cognitive Services project.\nProvides interactive compute with data access for AI development.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkbenchProperties",
+          "description": "Properties of the workbench resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the workbench resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkbenchListResult": {
+      "type": "object",
+      "description": "The list of workbenches operation response.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of workbench list."
+        },
+        "value": {
+          "type": "array",
+          "description": "Gets the list of workbenches.",
+          "items": {
+            "$ref": "#/definitions/Workbench"
+          }
+        }
+      }
+    },
+    "WorkbenchProperties": {
+      "type": "object",
+      "description": "Properties for a Workbench resource.",
+      "properties": {
+        "targetClusterId": {
+          "type": "string",
+          "description": "ARM resource ID of the parent cluster that hosts this workbench."
+        },
+        "imageLink": {
+          "type": "string",
+          "description": "Container image URI (e.g., MCR or ACR image path) for the workbench."
+        },
+        "idleTimeBeforeShutdown": {
+          "type": "string",
+          "description": "ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M')."
+        },
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset ID to mount for the workbench."
+        },
+        "sshSettings": {
+          "$ref": "#/definitions/SshSettings",
+          "description": "SSH configuration for remote access to the workbench."
+        },
+        "connectivityEndpoints": {
+          "$ref": "#/definitions/ConnectivityEndpoints",
+          "description": "Network connectivity endpoints assigned to the workbench.",
+          "readOnly": true
+        },
+        "webEndpoint": {
+          "type": "string",
+          "description": "The web endpoint URL for accessing the workbench.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ComputeProvisioningState",
+          "description": "Provisioning state of the workbench resource.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "Error details for the workbench resource.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the workbench resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetClusterId",
+        "imageLink"
       ]
     }
   },

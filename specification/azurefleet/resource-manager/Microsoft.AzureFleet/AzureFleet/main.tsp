@@ -34,9 +34,9 @@ enum Versions {
   @doc("Public Api version")
   v2024_11_01: "2024-11-01",
 
-  /** Private preview Api version. */
+  /** Launch mode preview Api version. */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_07_01_preview: "2025-07-01-preview",
+  v2026_04_01_preview: "2026-04-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

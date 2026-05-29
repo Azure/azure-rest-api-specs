@@ -17,13 +17,14 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 model PolicyExemption
   is Azure.ResourceManager.ExtensionResource<PolicyExemptionProperties> {
   ...ResourceNameParameter<
     Resource = PolicyExemption,
     KeyName = "policyExemptionName",
     SegmentName = "policyExemptions",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 }
 
@@ -39,6 +40,7 @@ alias PolicyExemptionListParameters = {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 interface PolicyExemptionGenericOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -83,6 +85,7 @@ interface PolicyExemptionGenericOps
     > {}
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface PolicyExemptions {
   /**
@@ -160,9 +163,11 @@ interface PolicyExemptions {
 
 @@doc(PolicyExemption.name, "The name of the policy exemption to get.");
 @@doc(PolicyExemption.properties, "Properties for the policy exemption.");
-@@doc(PolicyExemptions.createOrUpdate::parameters.resource,
+@@doc(
+  PolicyExemptions.createOrUpdate::parameters.resource,
   "Parameters for the policy exemption."
 );
-@@doc(PolicyExemptions.update::parameters.properties,
+@@doc(
+  PolicyExemptions.update::parameters.properties,
   "Parameters for policy exemption patch request."
 );

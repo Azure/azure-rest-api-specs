@@ -113,12 +113,15 @@ interface ConnectionMonitorResults {
 }
 
 @@doc(ConnectionMonitorResult.name, "The name of the connection monitor.");
-@@doc(ConnectionMonitorResult.properties,
+@@doc(
+  ConnectionMonitorResult.properties,
   "Properties of the connection monitor result."
 );
-@@doc(ConnectionMonitorResults.createOrUpdate::parameters.resource,
+@@doc(
+  ConnectionMonitorResults.createOrUpdate::parameters.resource,
   "Parameters that define the operation to create a connection monitor."
 );
-@@doc(ConnectionMonitorResults.updateTags::parameters.properties,
+@@doc(
+  ConnectionMonitorResults.updateTags::parameters.properties,
   "Parameters supplied to update connection monitor tags."
 );

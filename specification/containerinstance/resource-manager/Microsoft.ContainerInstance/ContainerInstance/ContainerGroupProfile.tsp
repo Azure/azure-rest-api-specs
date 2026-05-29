@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -14,14 +15,19 @@ namespace Microsoft.ContainerInstance;
  * A container group profile object
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model ContainerGroupProfile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ContainerGroupProfileProperties> {
+model ContainerGroupProfile is ProxyResource<ContainerGroupProfileProperties> {
   ...ResourceNameParameter<
     Resource = ContainerGroupProfile,
     KeyName = "containerGroupProfileName",
     SegmentName = "containerGroupProfiles",
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
@@ -41,7 +47,8 @@ alias ContainerGroupProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(1)
     @maxLength(63)
     containerGroupProfileName: string;
-  }
+  },
+  ResourceName = "ContainerGroupProfile"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -58,15 +65,17 @@ interface ContainerGroupProfiles {
   @summary("Create or Update a ContainerGroupProfile")
   createOrUpdate is ContainerGroupProfileOps.CreateOrUpdateSync<
     ContainerGroupProfile,
-    Response = (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("x-ms-correlation-request-id")
-      `x-ms-correlation-request-id`: string;
-    }) | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("x-ms-correlation-request-id")
-      `x-ms-correlation-request-id`: string;
-    })
+    Response =
+      | (ArmResourceUpdatedResponse<ContainerGroupProfile> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("x-ms-correlation-request-id")
+          `x-ms-correlation-request-id`: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ContainerGroupProfile> & {
+          #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+          @header("x-ms-correlation-request-id")
+          `x-ms-correlation-request-id`: string;
+        })
   >;
 
   /**
@@ -131,7 +140,8 @@ alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     revisionNumber: string;
   },
-  CloudError
+  CloudError,
+  ResourceName = "ContainerGroupProfileRevision"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
@@ -153,12 +163,15 @@ interface CGProfile {
 @@maxLength(ContainerGroupProfile.name, 63);
 @@minLength(ContainerGroupProfile.name, 1);
 @@doc(ContainerGroupProfile.name, "ContainerGroupProfile name.");
-@@doc(ContainerGroupProfile.properties,
+@@doc(
+  ContainerGroupProfile.properties,
   "The container group profile properties"
 );
-@@doc(ContainerGroupProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  ContainerGroupProfiles.createOrUpdate::parameters.resource,
   "The ContainerGroupProfile object."
 );
-@@doc(ContainerGroupProfiles.update::parameters.properties,
+@@doc(
+  ContainerGroupProfiles.update::parameters.properties,
   "The container group profile properties that need to be updated."
 );

@@ -66,6 +66,7 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
