@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MaintenanceConfigurationProperties.maintenanceWindow
@@ -21,7 +21,7 @@ using Microsoft.Maintenance;
   MaintenanceConfigurationOperationGroup.update::parameters.properties,
   "configuration"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MaintenanceConfiguration.properties
@@ -31,7 +31,7 @@ using Microsoft.Maintenance;
   ApplyUpdateOperationGroup.createOrUpdateOrCancel::parameters.resource,
   "applyUpdate"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplyUpdate.properties);
 
@@ -59,12 +59,12 @@ using Microsoft.Maintenance;
   ConfigurationAssignmentsForResourceGroup.update::parameters.properties,
   "configurationAssignment"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ConfigurationAssignment.properties
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Microsoft.Maintenance.Update.properties

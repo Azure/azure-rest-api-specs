@@ -25,7 +25,7 @@ model ConfigurationAssignment
   /**
    * Location of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppress expected error"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 }
 
@@ -77,7 +77,8 @@ interface ConfigurationAssignmentOps
           SegmentName = "configurationAssignments",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceConfigurationAssignment"
     > {}
 
 @armResourceOperations
@@ -157,7 +158,8 @@ interface ConfigurationAssignmentOperationGroupOps
           SegmentName = "configurationAssignments",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceGroupConfigurationAssignment"
     > {}
 
 @armResourceOperations
@@ -209,7 +211,8 @@ interface ConfigurationAssignmentsForSubscriptionOps
           SegmentName = "configurationAssignments",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceSubscriptionConfigurationAssignment"
     > {}
 
 @armResourceOperations
@@ -280,7 +283,8 @@ interface ConfigurationAssignmentsForResourceGroupOps
           SegmentName = "configurationAssignments",
           NamePattern = "^.+$"
         >>,
-      }
+      },
+      "MaintenanceResourceGroupConfigurationAssignment"
     > {}
 
 @armResourceOperations
