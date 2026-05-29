@@ -214,9 +214,13 @@ namespace Azure.AI.Projects;
 @@clientName(Models.listLatest, "getLatestModelVersions", "csharp");
 @@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
 @@clientName(Models.createOrUpdateVersion, "updateModelVersion", "csharp");
-@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
+@@clientName(Models.createAsync, "createModelVersionRequest", "csharp");
 @@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
 @@clientName(Models.getCredentials, "getModelCredentials", "csharp");
+
+@@usage(UpdateModelVersionRequest, Usage.input | Usage.output);
+@@access(UpdateModelVersionRequest, Access.public);
+@@clientName(UpdateModelVersionRequest, "UpdateModelVersionOptions");
 
 // --------------------------------------------------------------------------------
 // Routines sub‐client
