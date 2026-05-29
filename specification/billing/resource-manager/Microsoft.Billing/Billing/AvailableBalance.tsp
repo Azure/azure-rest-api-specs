@@ -59,6 +59,8 @@ alias AvailableBalanceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     default: "default";
   }
+  ,
+  "BillingAccountAvailableBalance"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -103,6 +105,8 @@ alias AvailableBalanceOperationGroupOps = Azure.ResourceManager.Legacy.Extension
     @key
     default: "default";
   }
+  ,
+  "AvailableBalance"
 >;
 
 @armResourceOperations(#{ omitTags: true })

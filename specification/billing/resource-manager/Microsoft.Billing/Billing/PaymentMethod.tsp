@@ -57,6 +57,8 @@ alias PaymentMethodOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     paymentMethodName: string;
   }
+  ,
+  "BillingAccountPaymentMethod"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -98,6 +100,8 @@ alias PaymentMethodOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpe
     @key
     paymentMethodName: string;
   }
+  ,
+  "BillingPaymentMethod"
 >;
 
 @armResourceOperations(#{ omitTags: true })

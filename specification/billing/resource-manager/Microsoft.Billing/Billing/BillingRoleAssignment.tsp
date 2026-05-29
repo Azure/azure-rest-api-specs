@@ -66,6 +66,8 @@ alias BillingRoleAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
   }
+  ,
+  "BillingProfileRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -156,6 +158,8 @@ alias BillingRoleAssignmentByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
   }
+  ,
+  "BillingCustomerRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -246,6 +250,8 @@ alias BillingRoleAssignmentByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
   }
+  ,
+  "BillingInvoiceSectionRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -322,6 +328,8 @@ alias BillingRoleAssignmentByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
   }
+  ,
+  "BillingRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -417,6 +425,8 @@ alias BillingRoleAssignmentByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
   }
+  ,
+  "BillingDepartmentRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -493,6 +503,8 @@ alias BillingRoleAssignmentByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
   }
+  ,
+  "BillingEnrollmentAccountRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })

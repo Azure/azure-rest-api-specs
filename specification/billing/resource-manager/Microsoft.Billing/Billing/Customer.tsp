@@ -65,6 +65,8 @@ alias CustomerOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     customerName: string;
   }
+  ,
+  "BillingProfileCustomer"
 >;
 
 alias CustomerNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -408,6 +410,8 @@ alias CustomerOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     customerName: string;
   }
+  ,
+  "BillingCustomer"
 >;
 
 alias CustomerOperationGroupNoPatternOps = Azure.ResourceManager.Legacy.ExtensionOperations<
