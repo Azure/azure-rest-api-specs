@@ -220,6 +220,19 @@ interface Servers {
           RequestIdResponseHeader),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
+
+  @doc("Start Major Version Upgrade Prechecks.")
+  @added(Versions.v2026_04_01)
+  @action("startMajorVersionUpgradePrecheck")
+  startMajorVersionUpgradePrecheck is ArmResourceActionAsyncBase<
+    Server,
+    StartMajorVersionUpgradePrecheckRequest,
+
+      | (StartMajorVersionUpgradePrecheckResponse & RequestIdResponseHeader)
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StartMajorVersionUpgradePrecheckResponse> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
+  >;
 }
 
 @@maxLength(Server.name, 63);
