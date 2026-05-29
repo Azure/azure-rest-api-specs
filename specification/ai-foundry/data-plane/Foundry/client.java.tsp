@@ -118,6 +118,9 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.cancel, "cancelEvaluatorGenerationJob");
 @@clientName(EvaluatorGenerationJobs.delete, "deleteEvaluatorGenerationJob");
 
+//Routines
+@@clientName(Routines.dispatchRoutineAsync, "dispatchRoutine");
+
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
