@@ -210,6 +210,12 @@ op replacePurge(
 @@clientName(UserState, "ApiManagementUserState", "csharp");
 
 // C#-specific: Backward-compat resource type renames to restore previously shipped Data/Resource/Collection type names.
+// For modern `@armResourceOperations interface XxxContracts { get is ArmResourceRead<...>; ... }`, the new
+// `resolveArmResources` path used by csharp-mgmt (when `use-legacy-resource-detection: false`) only reads
+// ResourceName from LegacyOperations/legacy-decorator template parameters; it does NOT read
+// `@@clientOption(..., "resource-name", ...)`. So per-resource renames are done by switching the CRUD ops
+// to `XxxContractOps.Read<>` / `.CreateOrUpdateAsync<>` / etc. and adding `ResourceName = "Foo"` on the
+// `XxxContractOps extends LegacyOperations<...>` alias. `@@clientName` below only renames the data model.
 @@clientName(AccessInformationContract, "TenantAccessInfo", "csharp");
 @@clientName(ApiContract, "Api", "csharp");
 @@clientName(ApiReleaseContract, "ApiRelease", "csharp");
@@ -971,6 +977,35 @@ op replacePurge(
   url,
   "csharp"
 );
+// Restore GA Uri-typed read-only endpoint URL properties on
+// ApiManagementServiceData / ApiManagementServicePatch (both back-resolved to
+// ApiManagementServiceBaseProperties). New spec models these as `string`,
+// causing C# property type to regress from `Uri` to `string`.
+@@alternateType(ApiManagementServiceBaseProperties.gatewayUrl, url, "csharp");
+@@alternateType(ApiManagementServiceBaseProperties.portalUrl, url, "csharp");
+@@alternateType(
+  ApiManagementServiceBaseProperties.managementApiUrl,
+  url,
+  "csharp"
+);
+@@alternateType(ApiManagementServiceBaseProperties.scmUrl, url, "csharp");
+@@alternateType(
+  ApiManagementServiceBaseProperties.developerPortalUrl,
+  url,
+  "csharp"
+);
+// Restore GA ResourceIdentifier type + uppercase-IP casing on
+// ApiManagementServiceData/Patch.PublicIPAddressId.
+@@alternateType(
+  ApiManagementServiceBaseProperties.publicIpAddressId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  ApiManagementServiceBaseProperties.publicIpAddressId,
+  "PublicIPAddressId",
+  "csharp"
+);
 @@alternateType(
   AdditionalLocation.publicIPAddresses,
   Azure.Core.ipV4Address[],
@@ -1032,11 +1067,9 @@ op replacePurge(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  IssueUpdateContractProperties.userId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+// NOTE: @@alternateType(IssueUpdateContractProperties.userId, armResourceIdentifier)
+// intentionally removed; GA 1.3.0 shipped ApiIssuePatch.UserId as `string` (not
+// ResourceIdentifier). Keep the spec `string` type to avoid a property-type regression.
 @@alternateType(
   AllPoliciesContractProperties.referencePolicyId,
   Azure.Core.armResourceIdentifier,

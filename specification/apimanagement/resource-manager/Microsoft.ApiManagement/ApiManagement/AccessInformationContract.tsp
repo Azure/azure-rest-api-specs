@@ -26,6 +26,41 @@ model AccessInformationContract
   >;
 }
 
+// Main CRUD/regenerate/listSecrets ops live under /tenant/{accessName}.
+// `ResourceName = "TenantAccessInfo"` here makes the C# emitter generate
+// TenantAccessInfoResource.cs / TenantAccessInfoCollection.cs (instead of
+// AccessInformationContractResource/Collection) under modern arm-resource detection.
+@armResourceOperations
+interface AccessInformationContractMainOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** The identifier of the Access configuration. */
+        @path
+        @segment("tenant")
+        @key
+        accessName: AccessIdName,
+      },
+      ResourceName = "TenantAccessInfo"
+    > {}
+
+// deploy/save/validate/getSyncState live under /tenant/{configurationName}/...
+// (note the different key shape — single enum value "configuration").
+// Shares ResourceName so both aliases contribute to the same TenantAccessInfo* class.
 @armResourceOperations
 interface AccessInformationContractOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -50,7 +85,8 @@ interface AccessInformationContractOps
         @segment("tenant")
         @key
         configurationName: ConfigurationIdName,
-      }
+      },
+      ResourceName = "TenantAccessInfo"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -59,7 +95,7 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details without secrets.
    */
-  get is ArmResourceRead<
+  get is AccessInformationContractMainOps.Read<
     AccessInformationContract,
     Response = ArmResponse<AccessInformationContract> & {
       /**
@@ -73,7 +109,7 @@ interface AccessInformationContracts {
   /**
    * Tenant access metadata
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is AccessInformationContractMainOps.CheckExistence<
     AccessInformationContract,
     Response = OkResponse & {
       /**
@@ -88,7 +124,7 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
+  create is AccessInformationContractMainOps.CreateOrUpdateSync<
     AccessInformationContract,
     Request = AccessInformationCreateParameters,
     Parameters = IfMatchHeaderParameter,
@@ -105,7 +141,7 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is AccessInformationContractMainOps.CustomPatchSync<
     AccessInformationContract,
     PatchModel = AccessInformationUpdateParameters,
     Parameters = IfMatchHeaderParameter,
@@ -121,7 +157,7 @@ interface AccessInformationContracts {
   /**
    * Returns list of access infos - for Git and Management endpoints.
    */
-  listByService is ArmResourceListByParent<
+  listByService is AccessInformationContractMainOps.List<
     AccessInformationContract,
     Parameters = {
       /**
@@ -136,7 +172,7 @@ interface AccessInformationContracts {
   /**
    * Regenerate primary access key
    */
-  regeneratePrimaryKey is ArmResourceActionSync<
+  regeneratePrimaryKey is AccessInformationContractMainOps.ActionSync<
     AccessInformationContract,
     void,
     NoContentResponse
@@ -145,7 +181,7 @@ interface AccessInformationContracts {
   /**
    * Regenerate secondary access key
    */
-  regenerateSecondaryKey is ArmResourceActionSync<
+  regenerateSecondaryKey is AccessInformationContractMainOps.ActionSync<
     AccessInformationContract,
     void,
     NoContentResponse
@@ -154,7 +190,7 @@ interface AccessInformationContracts {
   /**
    * Get tenant access information details.
    */
-  listSecrets is ArmResourceActionSync<
+  listSecrets is AccessInformationContractMainOps.ActionSync<
     AccessInformationContract,
     void,
     Response = ArmResponse<AccessInformationSecretsContract> & {
@@ -170,7 +206,7 @@ interface AccessInformationContracts {
    * Regenerate primary access key for GIT.
    */
   @action("git/regeneratePrimaryKey")
-  tenantAccessGitRegeneratePrimaryKey is ArmResourceActionSync<
+  tenantAccessGitRegeneratePrimaryKey is AccessInformationContractMainOps.ActionSync<
     AccessInformationContract,
     void,
     NoContentResponse
@@ -180,7 +216,7 @@ interface AccessInformationContracts {
    * Regenerate secondary access key for GIT.
    */
   @action("git/regenerateSecondaryKey")
-  tenantAccessGitRegenerateSecondaryKey is ArmResourceActionSync<
+  tenantAccessGitRegenerateSecondaryKey is AccessInformationContractMainOps.ActionSync<
     AccessInformationContract,
     void,
     NoContentResponse
