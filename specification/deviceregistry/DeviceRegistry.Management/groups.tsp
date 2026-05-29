@@ -58,6 +58,76 @@ model GroupMemberCountResponse {
 }
 
 @added(Versions.v2026_11_02_preview)
+@doc("The status of a refresh members operation.")
+model GroupRefreshMembersOperationStatus {
+  @doc("The unique ID of the operation.")
+  id: string;
+
+  @doc("The name of the operation.")
+  name: string;
+
+  @doc("The status of the operation.")
+  status: string;
+
+  @doc("The start time of the operation.")
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  endTime?: utcDateTime;
+
+  @doc("Error object that describes the error when status is Failed.")
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  @doc("The total count of members in the group after the refresh.")
+  totalMemberCount?: int64;
+
+  @doc("The count of members added during the refresh.")
+  membersAddedCount?: int64;
+
+  @doc("The count of members removed during the refresh.")
+  membersRemovedCount?: int64;
+
+  @doc("The count of members that failed to be processed during the refresh.")
+  membersFailedCount?: int64;
+
+  @doc("The timestamp of the last successful refresh.")
+  lastRefreshTimestamp?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "custom operation status endpoint"
+@added(Versions.v2026_11_02_preview)
+@armResourceOperations
+interface GroupRefreshMembersOperations {
+  @doc("Gets the status of a refresh members operation.")
+  @autoRoute
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.DeviceRegistry",
+
+    @path
+    @segment("namespaces")
+    @doc("The name of the namespace.")
+    namespaceName: string,
+
+    @path
+    @segment("groups")
+    @doc("The name of the group.")
+    groupName: string,
+
+    @path
+    @segment("refreshMembersOperations")
+    @doc("The operation ID.")
+    operationId: string,
+  ): ArmResponse<GroupRefreshMembersOperationStatus> | ErrorResponse;
+}
+
+@added(Versions.v2026_11_02_preview)
 @armResourceOperations
 interface Groups {
   get is ArmResourceRead<Group>;
