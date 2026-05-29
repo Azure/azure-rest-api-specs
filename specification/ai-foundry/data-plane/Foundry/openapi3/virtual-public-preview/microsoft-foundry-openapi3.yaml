@@ -1093,7 +1093,7 @@ paths:
         - name: force
           in: query
           required: false
-          description: For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types.
+          description: For Hosted Agents, if `true`, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. The service defaults to `false` if a value is not specified by the caller. This value is not relevant for other Agent types.
           schema:
             type: boolean
             default: false
@@ -1802,7 +1802,7 @@ paths:
         - name: recursive
           in: query
           required: false
-          description: Whether to recursively delete directory contents. Defaults to false.
+          description: Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller.
           schema:
             type: boolean
             default: false
@@ -2537,7 +2537,7 @@ paths:
         - name: force
           in: query
           required: false
-          description: For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types.
+          description: For Hosted Agents, if `true`, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. The service defaults to `false` if a value is not specified by the caller. This value is not relevant for other Agent types.
           schema:
             type: boolean
             default: false
@@ -16050,7 +16050,7 @@ components:
           description: Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
         always_applicable:
           type: boolean
-          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. Defaults to `false`.
+          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
     DispatchRoutineRequest:
@@ -17167,6 +17167,7 @@ components:
           description: Identifier of the evaluation group.
         evalRun:
           type: object
+          additionalProperties: {}
           description: The evaluation run payload.
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
@@ -19564,7 +19565,7 @@ components:
           default: true
         procedural_memory_enabled:
           type: boolean
-          description: Whether to enable procedural memory extraction and storage. Defaults to `true`.
+          description: Whether to enable procedural memory extraction and storage. The service defaults to `true` if a value is not specified by the caller.
           default: true
         default_ttl_seconds:
           type: integer
@@ -35232,7 +35233,7 @@ components:
           description: Composite score combining all evaluator scores.
         tokens:
           type: integer
-          format: int32
+          format: int64
           description: Total tokens consumed during the agent run for this task.
         duration_seconds:
           type: number
@@ -35900,7 +35901,7 @@ components:
           description: List of attack strategies or nested lists of attack strategies.
         simulationOnly:
           type: boolean
-          description: Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.
+          description: Simulation-only or Simulation + Evaluation. If `true` the scan outputs conversation not evaluation result. The service defaults to `false` if a value is not specified by the caller.
           default: false
         riskCategories:
           type: array
@@ -36946,7 +36947,7 @@ components:
           description: The JSON schema for the structured input (optional).
         required:
           type: boolean
-          description: Whether the input property is required when the agent is invoked. Defaults to `false`.
+          description: Whether the input property is required when the agent is invoked. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: An structured input that can participate in prompt template substitutions and tool argument binding.
     StructuredOutputDefinition:
@@ -37333,6 +37334,7 @@ components:
           description: The version of the evaluator. Latest version if not specified.
         initialization_parameters:
           type: object
+          additionalProperties: {}
           description: The initialization parameters for the evaluation. Must support structured outputs.
         data_mapping:
           type: object
