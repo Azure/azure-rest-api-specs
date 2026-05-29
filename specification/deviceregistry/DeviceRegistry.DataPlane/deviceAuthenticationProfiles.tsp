@@ -43,7 +43,8 @@ union AuthenticationType {
   /** Symmetric key authentication. */
   SymmetricKey: "SymmetricKey",
 
-  /** Certificate authority authentication. */
+  /** Certificate authority authentication.
+      TODO: Change to "X509Certificate" */
   CertificateAuthority: "CertificateAuthority",
 
   /** Self-signed X.509 certificate authentication. */

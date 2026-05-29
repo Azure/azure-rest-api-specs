@@ -292,6 +292,9 @@ interface DeviceAttributes {
   /** Update a device attribute. */
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceAttribute>;
 
+  /** Delete a device attribute. */
+  delete is ResourceOperations.ResourceDelete<DeviceAttribute>;
+
   /** List device attributes for a device. */
   list is ResourceOperations.ResourceList<DeviceAttribute>;
 }

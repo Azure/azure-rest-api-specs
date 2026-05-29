@@ -476,6 +476,75 @@
             "$ref": "./examples/DeviceAttributes_Update.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "DeviceAttributes_Delete",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Delete a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete device attribution.": {
+            "$ref": "./examples/DeviceAttributes_Delete.json"
+          }
+        }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles": {
@@ -2452,7 +2521,7 @@
           {
             "name": "CertificateAuthority",
             "value": "CertificateAuthority",
-            "description": "Certificate authority authentication."
+            "description": "Certificate authority authentication.\n      TODO: Change to \"X509Certificate\""
           },
           {
             "name": "SelfSignedX509Certificate",
