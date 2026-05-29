@@ -55,8 +55,11 @@ using Microsoft.Batch;
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ApplicationPackages.get, "ApplicationPackage");
-@@clientLocation(ApplicationPackages.createPrev, "ApplicationPackage");
-@@clientName(ApplicationPackages.createPrev::parameters.resource, "parameters");
+@@clientLocation(ApplicationPackages.createV20250601, "ApplicationPackage");
+@@clientName(
+  ApplicationPackages.createV20250601::parameters.resource,
+  "parameters"
+);
 @@clientLocation(ApplicationPackages.create, "ApplicationPackage");
 @@clientName(ApplicationPackages.create::parameters.resource, "parameters");
 @@clientLocation(ApplicationPackages.delete, "ApplicationPackage");

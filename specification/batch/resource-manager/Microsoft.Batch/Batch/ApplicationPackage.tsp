@@ -85,7 +85,7 @@ interface ApplicationPackages {
   @sharedRoute
   @removed(Versions.v2026_10_01)
   @renamedFrom(Versions.v2026_10_01, "create")
-  createPrev is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
+  createV20250601 is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     ApplicationPackage,
     Response = ArmResourceUpdatedResponse<ApplicationPackage>,
     OptionalRequestBody = true,
@@ -153,7 +153,7 @@ interface ApplicationPackages {
   "The properties associated with the Application Package."
 );
 @@doc(
-  ApplicationPackages.createPrev::parameters.resource,
+  ApplicationPackages.createV20250601::parameters.resource,
   "The parameters for the request."
 );
 @@doc(
@@ -168,7 +168,7 @@ interface ApplicationPackages {
 @@extension(Applications.create::parameters.resource, "required", false);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
 @@extension(
-  ApplicationPackages.createPrev::parameters.resource,
+  ApplicationPackages.createV20250601::parameters.resource,
   "required",
   false
 );
