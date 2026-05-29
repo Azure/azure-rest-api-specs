@@ -1482,10 +1482,6 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
-  - suppress: TrackedResourcePatchOperation
-    from: managedClusters.json
-    where: $.definitions.MaintenanceWindowResource
-    reason: Maintenance windows do not expose a separate PATCH operation; tags are updated via the createOrUpdate PUT operation.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
     where: $.definitions.ManagedClusterSecurityProfile.properties.customCATrustCertificates      

@@ -37,7 +37,7 @@ model MaintenanceWindowResource
     Resource = MaintenanceWindowResource,
     KeyName = "maintenanceWindowName",
     SegmentName = "maintenanceWindows",
-    NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+    NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
 }
 
@@ -52,6 +52,10 @@ model MaintenanceWindowResource
   MaintenanceWindows.createOrUpdate::parameters.resource,
   "The maintenance window to create or update."
 );
+@@doc(
+  MaintenanceWindows.updateTags::parameters.properties,
+  "Parameters supplied to the Update maintenance window Tags operation."
+);
 
 @armResourceOperations
 @added(Versions.v2026_04_02_preview)
@@ -65,6 +69,15 @@ interface MaintenanceWindows {
    * Creates or updates a maintenance window.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MaintenanceWindowResource>;
+
+  /**
+   * Updates tags on a maintenance window.
+   */
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<
+    MaintenanceWindowResource,
+    PatchModel = TagsObject
+  >;
 
   /**
    * Deletes a maintenance window.
@@ -134,7 +147,7 @@ model MaintenanceWindowResourceProperties {
    * preferred wall-clock time year-round; the maintenance window will shift by one
    * hour relative to local time when DST starts or ends.
    */
-  @pattern("^(-|\\+)[0-9]{2}:[0-9]{2}$")
+  @pattern("^[+-](0\\d|1[0-4]):(00|15|30|45)$")
   utcOffset?: string;
 
   /**
