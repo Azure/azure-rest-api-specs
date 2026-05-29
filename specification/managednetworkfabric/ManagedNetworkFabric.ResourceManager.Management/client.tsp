@@ -466,42 +466,21 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 
-model NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement
-  extends OptionBLayer3Configuration {}
-@@alternateType(
+@@clientName(
   NetworkToNetworkInterconnectProperties.optionBLayer3Configuration,
-  NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement,
-  "csharp"
-);
-@@clientName(
-  NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement,
-  "NetworkToNetworkInterconnectOptionBLayer3Configuration",
+  "OptionBLayer3Settings",
   "csharp"
 );
 
-model NetworkTapPropertiesDestinationsItemReplacement
-  extends DestinationProperties {}
-@@alternateType(
+@@clientName(
   NetworkTapProperties.destinations,
-  NetworkTapPropertiesDestinationsItemReplacement[],
-  "csharp"
-);
-@@clientName(
-  NetworkTapPropertiesDestinationsItemReplacement,
-  "NetworkTapPropertiesDestinationsItem",
+  "DestinationSettings",
   "csharp"
 );
 
-model NetworkTapPatchableParametersDestinationsItemReplacement
-  extends DestinationProperties {}
-@@alternateType(
-  NetworkTapPatchProperties.destinations,
-  NetworkTapPatchableParametersDestinationsItemReplacement[],
-  "csharp"
-);
 @@clientName(
-  NetworkTapPatchableParametersDestinationsItemReplacement,
-  "NetworkTapPatchableParametersDestinationsItem",
+  NetworkTapPatchProperties.destinations,
+  "DestinationSettings",
   "csharp"
 );
 
@@ -1599,21 +1578,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 );
 @@usage(IpCommunityIdList, Usage.input | Usage.output | Usage.json, "csharp");
 @@usage(
-  NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
-  NetworkTapPropertiesDestinationsItemReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
-  NetworkTapPatchableParametersDestinationsItemReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
   NetworkFabricPatchablePropertiesTerminalServerConfigurationReplacement,
   Usage.input | Usage.output | Usage.json,
   "csharp"
@@ -1670,24 +1634,6 @@ model IPExtendedCommunityAddOperationProperties {
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   StatementConditionProperties,
   IpCommunityIdList,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement,
-  OptionBLayer3Configuration,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  NetworkTapPropertiesDestinationsItemReplacement,
-  DestinationProperties,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  NetworkTapPatchableParametersDestinationsItemReplacement,
-  DestinationProperties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
