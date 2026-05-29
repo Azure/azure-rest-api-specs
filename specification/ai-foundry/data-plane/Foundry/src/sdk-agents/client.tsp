@@ -76,6 +76,12 @@ using Azure.AI.Projects;
 
 @@clientName(OptimizationCandidate.avg_score, "averageScore");
 @@clientName(OptimizationCandidate.avg_tokens, "averageTokens");
+@@clientName(OptimizationCandidate.eval_id, "evaluationId");
+@@clientName(OptimizationCandidate.eval_run_id, "evaluationRunId");
+
+@@clientName(PromoteCandidateRequest, "PromoteCandidateInput");
+@@clientName(PromoteCandidateResponse, "PromoteCandidateResult");
+@@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 
 @@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"

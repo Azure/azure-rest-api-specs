@@ -163,6 +163,16 @@ namespace Azure.AI.Projects;
 
 @@clientName(RedTeamTargetConfig, "TargetConfig");
 
+// *Request → *Input renames for public body models
+@@clientName(UpdateModelVersionRequest, "UpdateModelVersionInput");
+@@clientName(ModelPendingUploadRequest, "ModelPendingUploadInput");
+@@clientName(ModelCredentialRequest, "ModelCredentialInput");
+@@clientName(EvaluatorCredentialRequest, "EvaluatorCredentialInput");
+
+// *Response → *Result renames for public response models
+@@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
+@@clientName(DispatchRoutineResponse, "DispatchRoutineResult");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
