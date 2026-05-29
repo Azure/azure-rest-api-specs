@@ -1717,8 +1717,14 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 );
 @@access(InternetGatewayRuleProperties, Access.internal, "csharp");
 @@access(IpExtendedCommunityIdList, Access.public, "csharp");
-model IPCommunityAddOperationProperties {}
-model IPExtendedCommunityAddOperationProperties {}
+// These compatibility base models preserve the shipped C# hierarchy where the
+// action models derive from add-operation models exposing Add*CommunityIds.
+model IPCommunityAddOperationProperties {
+  add?: IpCommunityIdList;
+}
+model IPExtendedCommunityAddOperationProperties {
+  add?: IpExtendedCommunityIdList;
+}
 @@access(IPCommunityAddOperationProperties, Access.public, "csharp");
 @@access(IPExtendedCommunityAddOperationProperties, Access.public, "csharp");
 @@usage(
