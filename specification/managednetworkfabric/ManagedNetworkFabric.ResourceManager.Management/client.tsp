@@ -1719,10 +1719,14 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 @@access(IpExtendedCommunityIdList, Access.public, "csharp");
 // These compatibility base models preserve the shipped C# hierarchy where the
 // action models derive from add-operation models exposing Add*CommunityIds.
+@doc("IP community add operation properties.")
 model IPCommunityAddOperationProperties {
+  @doc("List of IP community resource IDs to add.")
   add?: IpCommunityIdList;
 }
+@doc("IP extended community add operation properties.")
 model IPExtendedCommunityAddOperationProperties {
+  @doc("List of IP extended community resource IDs to add.")
   add?: IpExtendedCommunityIdList;
 }
 @@access(IPCommunityAddOperationProperties, Access.public, "csharp");
