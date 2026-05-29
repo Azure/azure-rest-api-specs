@@ -460,16 +460,9 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 
-model InternalNetworkStaticRouteConfigurationReplacement
-  extends StaticRouteConfiguration {}
-@@alternateType(
-  InternalNetworkProperties.staticRouteConfiguration,
-  InternalNetworkStaticRouteConfigurationReplacement,
-  "csharp"
-);
 @@clientName(
-  InternalNetworkStaticRouteConfigurationReplacement,
-  "InternalNetworkStaticRouteConfiguration",
+  InternalNetworkProperties.staticRouteConfiguration,
+  "StaticRouteSettings",
   "csharp"
 );
 
@@ -1606,11 +1599,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 );
 @@usage(IpCommunityIdList, Usage.input | Usage.output | Usage.json, "csharp");
 @@usage(
-  InternalNetworkStaticRouteConfigurationReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
   NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement,
   Usage.input | Usage.output | Usage.json,
   "csharp"
@@ -1682,12 +1670,6 @@ model IPExtendedCommunityAddOperationProperties {
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   StatementConditionProperties,
   IpCommunityIdList,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  InternalNetworkStaticRouteConfigurationReplacement,
-  StaticRouteConfiguration,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
