@@ -11581,6 +11581,10 @@
           "$ref": "#/definitions/OutboundIdentity",
           "description": "The identity used for outbound calls from the ADR namespace. If not specified and the namespace has a system-assigned identity enabled, the system-assigned identity is used by default."
         },
+        "updating": {
+          "$ref": "#/definitions/NamespaceUpdating",
+          "description": "The device update endpoints associated with this namespace."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -11607,6 +11611,10 @@
         "outboundIdentity": {
           "$ref": "#/definitions/OutboundIdentityUpdate",
           "description": "The identity used for outbound calls from the ADR namespace. If not specified and the namespace has a system-assigned identity enabled, the system-assigned identity is used by default."
+        },
+        "updating": {
+          "$ref": "#/definitions/NamespaceUpdating",
+          "description": "The device update endpoints associated with this namespace."
         }
       }
     },
@@ -11670,6 +11678,19 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "NamespaceUpdating": {
+      "type": "object",
+      "description": "The device update endpoints associated with this namespace.",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of device update endpoints.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UpdatingEndpoint"
+          }
+        }
+      }
     },
     "OutboundEndpoints": {
       "type": "object",
@@ -11857,12 +11878,20 @@
       "description": "A provisioning service endpoint linked to this namespace.",
       "properties": {
         "endpointType": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningEndpointType",
           "description": "Type of provisioning resource."
         },
         "resourceId": {
           "type": "string",
-          "description": "The provisioning endpoint Azure resource Id."
+          "format": "arm-id",
+          "description": "The provisioning endpoint Azure resource Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Devices/provisioningServices"
+              }
+            ]
+          }
         },
         "inboundCallerIdentity": {
           "$ref": "#/definitions/InboundCallerIdentity",
@@ -11879,6 +11908,24 @@
         "resourceId",
         "inboundCallerIdentity"
       ]
+    },
+    "ProvisioningEndpointType": {
+      "type": "string",
+      "description": "The type of provisioning resource that can be linked to a namespace.",
+      "enum": [
+        "Microsoft.Devices/provisioningServices"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningEndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DPS",
+            "value": "Microsoft.Devices/provisioningServices",
+            "description": "Azure Device Provisioning Service."
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -12519,6 +12566,75 @@
             "name": "Continuous",
             "value": "continuous",
             "description": "The job runs continuously against the target group until superseded, canceled, or the parent job is deleted."
+          }
+        ]
+      }
+    },
+    "UpdatingEndpoint": {
+      "type": "object",
+      "description": "A device update endpoint linked to this namespace.",
+      "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/UpdatingEndpointType",
+          "description": "Type of device update resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The device update endpoint Azure resource Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DeviceUpdate/linkedAccounts"
+              }
+            ]
+          }
+        },
+        "inboundCallerIdentity": {
+          "$ref": "#/definitions/InboundCallerIdentity",
+          "description": "The identity the linked resource uses to call the ADR namespace."
+        },
+        "linkingState": {
+          "$ref": "#/definitions/NamespaceLinkingStateValue",
+          "description": "The linking state of this device update endpoint.",
+          "readOnly": true
+        },
+        "serviceAddress": {
+          "type": "string",
+          "description": "The service-facing endpoint address.",
+          "readOnly": true
+        },
+        "deviceAddress": {
+          "type": "string",
+          "description": "The device-facing endpoint address.",
+          "readOnly": true
+        },
+        "legacyDeviceAddress": {
+          "type": "string",
+          "description": "The legacy device-facing endpoint address for older client SDKs.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "endpointType",
+        "resourceId",
+        "inboundCallerIdentity"
+      ]
+    },
+    "UpdatingEndpointType": {
+      "type": "string",
+      "description": "The type of device update resource that can be linked to a namespace.",
+      "enum": [
+        "Microsoft.DeviceUpdate/linkedAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "UpdatingEndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADU",
+            "value": "Microsoft.DeviceUpdate/linkedAccounts",
+            "description": "Azure Device Update linked account."
           }
         ]
       }

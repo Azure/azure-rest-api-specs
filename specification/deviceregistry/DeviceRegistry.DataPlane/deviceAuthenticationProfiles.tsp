@@ -209,6 +209,18 @@ model RevokeCertsResult {
 }
 
 // ──────────────────────────────────────────────
+// DeviceAuthenticationProfiles operation models
+// ──────────────────────────────────────────────
+
+/**
+ * Response body for the getKeys action.
+ */
+model GetDeviceAuthenticationProfileKeysResponse {
+  /** Plaintext symmetric keys for the device authentication profile. */
+  symmetricKey: SymmetricKeyCredentials;
+}
+
+// ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles interface
 // ──────────────────────────────────────────────
 
@@ -256,6 +268,18 @@ interface DeviceAuthenticationProfiles {
     DeviceAuthenticationProfile,
     OperationIdHeaderParameter,
     {}
+  >;
+
+  /**
+   * Retrieve the plaintext symmetric keys of a device authentication
+   * profile. Only valid when the profile's authentication type is
+   * SymmetricKey; profiles of any other type return 400 with the
+   * InvalidAuthenticationType error code.
+   */
+  getKeys is ResourceOperations.ResourceAction<
+    DeviceAuthenticationProfile,
+    {},
+    GetDeviceAuthenticationProfileKeysResponse
   >;
 }
 
