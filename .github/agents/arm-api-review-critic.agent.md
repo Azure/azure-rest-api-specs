@@ -109,6 +109,11 @@ chat text only; it does not write to the workspace.
 - Any installer / package manager (`npm`, `pip`, `winget`, `choco`, etc.),
   `Invoke-WebRequest` to write a downloaded file into the workspace, or
   any command that mounts, modifies, or executes downloaded content.
+- Any command that materializes a new local clone or worktree of any
+  repo (`git clone`, `git worktree add`, `git fetch <new-remote>`). The
+  Critic re-fetches individual files via `get_file_contents` or `gh api
+.../contents/...` only; full clones are out of scope and risk pulling
+  in tooling, hooks, or scripts that could mutate state.
 
 If a finding's re-fetch fails via **both** MCP and the `gh` CLI fallback
 (e.g., the user is not authenticated to the private repo at all), mark
@@ -162,11 +167,18 @@ Inputs you receive from the reviewer:
    `reconciliation skipped`, validate findings only and record
    `Reconciliation accuracy = N/A` in your verdict - do not attempt to
    verify a plan that does not exist.
+7. **Prior iterations' FAIL set summary** (iteration N−1 and N−2) - rule
+   ID + file/line tuples that came back `FAIL` in each prior iteration.
+   Empty list on iteration 1. The Critic is stateless across invocations
+   and cannot reconstruct its own prior FAIL sets; this input is the
+   sole source of truth for wave-thrash detection at iteration ≥ 3.
 
 If any of inputs 1-5 is missing, refuse to validate and return
 `Finding accuracy = FAIL` with reason `missing-inputs`. Input 6 missing
 entirely (neither a plan nor `reconciliation skipped`) is also `FAIL:
-missing-inputs` - the Reviewer must always say which.
+missing-inputs` - the Reviewer must always say which. Input 7 missing on
+iteration ≥ 2 is `FAIL: missing-inputs` (wave-thrash detection requires
+it); on iteration 1 it may be omitted or passed as empty.
 
 ## Hard constraints
 
@@ -270,6 +282,23 @@ For each finding that passes steps 1-4, assign exactly one:
 
 Findings at Medium or Low confidence must be flagged for the human even
 when the overall verdict is `PASS`.
+
+**Override-reason validation (when the Reviewer folded a human override of a
+prior Critic `FAIL`).** Locate the override on the finding's `**Note:**
+Critic FAILed this finding (<reason>); reviewer overrode with justification:
+<reason>` line - the Reviewer records the override there at folding time per
+Reviewer Step 7 item 2 (the per-comment telemetry marker is not assembled
+until Reviewer Step 8 and is not available at Critic validation time).
+Extract the `justification:` clause and re-validate:
+
+- Present, non-empty, ≥ 20 characters after trimming.
+- Does not match (case-insensitive substring) any entry in the
+  boilerplate denylist: `existing pattern`, `reviewer says ok`, `will
+fix later`, `n/a`, `none`, `tbd`, `wontfix`, `ignore`.
+
+If either check fails, mark the finding `FAIL: override-reason-invalid`
+and recommend the Reviewer either supply a real justification or drop
+the override (which means dropping the finding).
 
 ### 6. Hunt for missed violations (advisory only)
 
@@ -486,6 +515,7 @@ programmatically.
 PR: <PR-URL>
 Head SHA: <sha>
 Iteration: <n> of 5
+Wave-thrash: detected | n/a
 
 ### Verdict
 
@@ -693,6 +723,12 @@ cap is hit. Each invocation must:
 - Reset all verdicts; do not carry forward `PASS` from a prior iteration if
   the cited finding has changed.
 - Increment the `Iteration: <n> of 5` counter in the output header.
+- On iteration ≥ 3, compare the current `FAIL` set against the
+  Reviewer-supplied prior FAIL sets (Input #7). If the current FAIL set
+  and the two prior FAIL sets share no common members (each iteration
+  fixes one finding while breaking a different one), note `wave-thrash:
+detected` in the output header so the Reviewer escalates to
+  `MANUAL DECISION REQUIRED`.
 - Rebuild your independent graphs (see "Independent graph re-derivation" above) every iteration. A correction
   in iteration N may have introduced or removed nodes you didn't see in
   iteration N−1.
