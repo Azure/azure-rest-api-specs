@@ -38,7 +38,7 @@ interface OpenShiftClusters {
   @summary("Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OpenShiftCluster,
-    LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = OpenShiftCluster> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
@@ -55,7 +55,7 @@ interface OpenShiftClusters {
       | ArmResponse<OpenShiftCluster>
       | ArmResourceCreatedResponse<
           OpenShiftCluster,
-          LroHeaders = ArmLroLocationHeader<FinalResult = OpenShiftCluster> &
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = OpenShiftCluster> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
     Error = CloudError
