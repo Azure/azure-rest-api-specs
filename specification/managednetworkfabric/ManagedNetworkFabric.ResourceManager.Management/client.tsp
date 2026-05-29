@@ -170,23 +170,6 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@clientName(ManagedServiceIdentity.type, "IdentityType", "csharp");
-union NetworkFabricManagedServiceIdentityTypeReplacement {
-  string,
-  "None",
-  "SystemAssigned",
-  "UserAssigned",
-  "SystemAssigned,UserAssigned",
-}
-@@clientName(
-  NetworkFabricManagedServiceIdentityTypeReplacement,
-  "NetworkFabricManagedServiceIdentityType",
-  "csharp"
-);
-@@alternateType(
-  ManagedServiceIdentity.type,
-  NetworkFabricManagedServiceIdentityTypeReplacement,
-  "csharp"
-);
 @@clientName(
   ManagedServiceIdentitySelectorType,
   "NetworkFabricManagedIdentitySelectorType",
