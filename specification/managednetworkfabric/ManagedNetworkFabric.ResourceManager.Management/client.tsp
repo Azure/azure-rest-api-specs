@@ -764,6 +764,11 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   CommonDynamicMatchConfiguration[],
   "csharp"
 );
+@@alternateType(
+  NetworkTapRuleProperties.networkTapId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   NetworkTapRuleProperties.pollingIntervalInSeconds,
   "PollingIntervalInSecond",
