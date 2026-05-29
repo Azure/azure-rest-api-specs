@@ -194,7 +194,7 @@ model KubernetesObjectMeta {
    * Namespace the object belongs to.
    * Empty for cluster-scoped resources such as Node and Namespace.
    */
-  namespace?: string;
+  namespaceName?: string;
 
   /** Immutable UID assigned by the Kubernetes API server. */
   uid?: string;

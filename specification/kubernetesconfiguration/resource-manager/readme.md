@@ -28,7 +28,16 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2024-04
+tag: package-preview-2026-06-15
+```
+
+### Tag: package-preview-2026-06-15
+
+These settings apply only when `--tag=package-preview-2026-06-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-06-15'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2026-06-15-preview/kubeInventory.json
 ```
 
 ### Tag: package-preview-2024-04
