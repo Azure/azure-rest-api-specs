@@ -649,3 +649,13 @@ op guestConfigurationHCRPAssignmentsGetCustomized(
   GuestConfigurationHCRPAssignments.get,
   guestConfigurationHCRPAssignmentsGetCustomized
 );
+@@clientName(
+  GuestConfigurationAssignmentsOperationGroup.rGList,
+  "listRGList",
+  "javascript"
+);
+@@clientName(
+  GuestConfigurationAssignments.SubscriptionList,
+  "listSubscriptionList",
+  "javascript"
+);
