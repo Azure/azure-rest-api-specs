@@ -183,6 +183,11 @@ model AutoUpgradeProfileStatus {
   @doc("The target Kubernetes version or node image versions of the last trigger.")
   @visibility(Lifecycle.Read)
   lastTriggerUpgradeVersions?: string[];
+
+  @doc("Additional information about the last trigger attempt.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_02_preview)
+  lastTriggerMessage?: string;
 }
 
 @doc("AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.")
@@ -200,14 +205,13 @@ union AutoUpgradeLastTriggerStatus {
 @added(Versions.v2025_03_01)
 @armResourceOperations
 interface AutoUpgradeProfileOperations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "This POST action is an intentional ARM long-running operation that polls via azure-async-operation instead of the default POST response-code pattern; the service can complete successfully with either a generated resource reference body or 204 No Content in newer API versions."
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "This long-running operation intentionally uses azure-async-operation as the polling mechanism; the service does not require Location-based polling for this API, and successful completion may return 204 No Content for some cases in newer API versions."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
   @useFinalStateVia("azure-async-operation")
   @doc("Generates an update run for a given auto upgrade profile.")
   generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
     AutoUpgradeProfile,
     void,
-    GenerateUpdateRunResponse,
+    GenerateResponse,
     BaseParameters<AutoUpgradeProfile>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
       ArmLroLocationHeader<FinalResult = GenerateResponse> &
@@ -221,13 +225,4 @@ model GenerateResponse {
   @visibility(Lifecycle.Read)
   @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
   id: string;
-}
-
-@added(Versions.v2025_03_01)
-@doc("Azure operation completed successfully.")
-union GenerateUpdateRunResponse {
-  GenerateResponse,
-
-  @added(Versions.v2026_06_02_preview)
-  ArmNoContentResponse,
 }
