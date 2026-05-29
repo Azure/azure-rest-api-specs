@@ -156,15 +156,6 @@ model ReadinessCheck {
   details?: string;
 }
 
-/** Optional request body for the UpgradeAssessment refresh action. */
-model RefreshRequest {
-  /**
-   * Optional override for the target Kubernetes version to assess.
-   * If omitted, the cluster's default upgrade target is used.
-   */
-  targetKubernetesVersion?: string;
-}
-
 // ─── Common Kubernetes types ──────────────────────────────────────────────────
 
 /** A reference from a Kubernetes object to its owner (e.g., a ReplicaSet owning a Pod). */
@@ -881,36 +872,4 @@ model KubeInventoryProperties {
   resources?: KubernetesResource[];
 }
 
-/**
- * Properties of the UpgradeAssessment ARM resource.
- * This is the ARM resource model for the standalone UpgradeAssessment endpoint.
- * The same assessment data also appears inside KubeInventory.properties.resources[]
- * as a KubernetesResource with kind 'UpgradeAssessment'.
- */
-model UpgradeAssessmentProperties {
-  /** Provisioning state of the UpgradeAssessment resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
 
-  /** UTC timestamp when the in-cluster agent last computed this assessment. */
-  @visibility(Lifecycle.Read)
-  assessmentTime?: utcDateTime;
-
-  /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
-  kubernetesVersion: string;
-
-  /** Target Kubernetes version evaluated for upgrade (e.g., '1.30'). */
-  targetKubernetesVersion: string;
-
-  /** Rolled-up severity across all checks. Highest severity wins. */
-  overallSeverity?: Severity;
-
-  /** Per-component compatibility results with the target Kubernetes version. */
-  componentCompatibility?: ComponentCompatibility[];
-
-  /** Deprecated Kubernetes APIs still in use in the cluster. */
-  deprecatedApis?: DeprecatedApiUsage[];
-
-  /** Cluster readiness check results. */
-  readinessChecks?: ReadinessCheck[];
-}
