@@ -114,6 +114,30 @@ model ComponentCompatibility {
   notes?: string;
 }
 
+/** Observed call counts per HTTP verb for a deprecated Kubernetes API. */
+model HttpVerbUsageMetrics {
+  /** Number of GET requests observed. */
+  get?: int64;
+
+  /** Number of LIST requests observed. */
+  list?: int64;
+
+  /** Number of POST (create) requests observed. */
+  post?: int64;
+
+  /** Number of PUT (replace) requests observed. */
+  put?: int64;
+
+  /** Number of PATCH requests observed. */
+  patch?: int64;
+
+  /** Number of DELETE requests observed. */
+  delete?: int64;
+
+  /** Number of WATCH requests observed. */
+  watch?: int64;
+}
+
 /** A deprecated Kubernetes API still in use in the cluster. */
 model DeprecatedApiUsage {
   /** API group (e.g., 'flowcontrol.apiserver.k8s.io'). */
@@ -128,8 +152,8 @@ model DeprecatedApiUsage {
   /** Kubernetes release in which this API is removed (e.g., '1.32'). */
   removedRelease?: string;
 
-  /** Lowercase HTTP verbs mapped to observed call counts. */
-  usageMetrics?: Record<int64>;
+  /** HTTP verb call counts observed for this deprecated API. */
+  usageMetrics?: HttpVerbUsageMetrics;
 
   /** UTC timestamp of the last observed usage. */
   lastUsageObservedAt?: utcDateTime;
@@ -154,6 +178,26 @@ model ReadinessCheck {
 
   /** Human-readable reason when severity is not 'pass'. */
   details?: string;
+}
+
+/** A single Kubernetes label (key/value pair used for selection and grouping). */
+model KubernetesLabel {
+  /** Label key (e.g., 'app.kubernetes.io/name'). */
+  @key
+  name: string;
+
+  /** Label value. */
+  value: string;
+}
+
+/** A single Kubernetes annotation (key/value pair for non-identifying auxiliary metadata). */
+model KubernetesAnnotation {
+  /** Annotation key (e.g., 'kubectl.kubernetes.io/last-applied-configuration'). */
+  @key
+  name: string;
+
+  /** Annotation value. */
+  value: string;
 }
 
 // ─── Common Kubernetes types ──────────────────────────────────────────────────
@@ -185,12 +229,6 @@ model KubernetesObjectMeta {
   name: string;
 
   /**
-   * Prefix used by the API server to generate a unique name when name is not provided.
-   * The generated name has the form '{generateName}{randomSuffix}'.
-   */
-  generateName?: string;
-
-  /**
    * Namespace the object belongs to.
    * Empty for cluster-scoped resources such as Node and Namespace.
    */
@@ -218,10 +256,12 @@ model KubernetesObjectMeta {
   deletionTimestamp?: utcDateTime;
 
   /** User-defined key/value pairs used for selection and grouping. */
-  labels?: Record<string>;
+  @identifiers(#["name"])
+  labels?: KubernetesLabel[];
 
   /** Key/value pairs for non-identifying auxiliary metadata. */
-  annotations?: Record<string>;
+  @identifiers(#["name"])
+  annotations?: KubernetesAnnotation[];
 
   /** References to the objects that own this object (e.g., the ReplicaSet that owns a Pod). */
   ownerReferences?: OwnerReference[];
@@ -293,6 +333,7 @@ model KubernetesGenericField {
    * Array items, populated when type is 'array'.
    * Each inner array represents one element, itself a set of named fields.
    */
+  @identifiers(#[])
   items?: KubernetesGenericField[][];
 }
 
@@ -360,6 +401,7 @@ union NetworkProtocol {
 /** A port exposed by a container. */
 model ContainerPort {
   /** Port number exposed inside the container. */
+  @clientName("portNumber", "csharp")
   containerPort: int32;
 
   /** Network protocol for this port. */
@@ -378,13 +420,27 @@ model EnvVar {
   value?: string;
 }
 
+/**
+ * CPU and memory resource quantities for a container.
+ * Values use Kubernetes resource notation: CPU as millicores (e.g., '500m', '2')
+ * and memory as byte-unit strings (e.g., '256Mi', '1Gi').
+ * See: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+ */
+model ContainerResourceQuantity {
+  /** CPU quantity (e.g., '500m' for 500 millicores, '2' for 2 cores). */
+  cpu?: string;
+
+  /** Memory quantity (e.g., '256Mi', '1Gi'). */
+  memory?: string;
+}
+
 /** CPU and memory resource declarations for a container. */
 model ContainerResourceRequirements {
-  /** Maximum resources the container may consume, in Kubernetes notation (e.g., '500m', '256Mi'). */
-  limits?: Record<string>;
+  /** Maximum resources the container may consume. */
+  limits?: ContainerResourceQuantity;
 
-  /** Minimum resources the container requires to be scheduled, in Kubernetes notation. */
-  requests?: Record<string>;
+  /** Minimum resources the container requires to be scheduled. */
+  requests?: ContainerResourceQuantity;
 }
 
 /** Specification of a single container within a pod. */
@@ -447,6 +503,7 @@ model Volume {
 /** A toleration allows a pod to be scheduled on a node with a matching taint. */
 model Toleration {
   /** Taint key the toleration applies to. Empty matches all keys. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This 'key' property is a Kubernetes taint key name, not a secret or credential."
   key?: string;
 
   /**
@@ -656,7 +713,7 @@ model KubernetesResourceSpec {
   serviceType?: string;
 
   /** Cluster-internal IP assigned to the service. Populated for Service resources. */
-  clusterIP?: string;
+  clusterIp?: string;
 
   // ── Pod security and scheduling ─────────────────────────────────────────────
 
@@ -670,6 +727,7 @@ model KubernetesResourceSpec {
    * Tolerations allowing the pod to be scheduled on nodes with matching taints.
    * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
    */
+  @identifiers(#[])
   tolerations?: Toleration[];
 
   /**
@@ -690,17 +748,6 @@ model KubernetesResourceSpec {
    * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
    */
   securityContext?: PodSecurityContext;
-
-  // ── Cross-kind ──────────────────────────────────────────────────────────────
-
-  /** Node label selector constraining which nodes workload pods can be scheduled on. */
-  nodeSelector?: Record<string>;
-
-  /**
-   * Pod label selector used by Deployment, StatefulSet, DaemonSet, and Service
-   * to identify the pods they manage or route to.
-   */
-  selector?: Record<string>;
 
   // ── UpgradeAssessment (kind = "UpgradeAssessment") ──────────────────────────
 
@@ -737,6 +784,7 @@ model KubernetesResourceStatus {
   // ── Universal ───────────────────────────────────────────────────────────────
 
   /** Conditions reported by the controller managing this resource. */
+  @identifiers(#["type"])
   conditions?: KubernetesCondition[];
 
   /**
@@ -761,10 +809,10 @@ model KubernetesResourceStatus {
   // ── Pod ─────────────────────────────────────────────────────────────────────
 
   /** IP address allocated to the pod within the cluster. Populated for Pod resources. */
-  podIP?: string;
+  podIp?: string;
 
   /** IP address of the node hosting the pod. Populated for Pod resources. */
-  hostIP?: string;
+  hostIp?: string;
 
   /** UTC timestamp when the pod was accepted by the scheduler. Populated for Pod resources. */
   startTime?: utcDateTime;
@@ -813,6 +861,7 @@ model KubernetesResourceStatus {
    * Deprecated Kubernetes APIs still in use in the cluster.
    * Populated for UpgradeAssessment resources.
    */
+  @identifiers(#[])
   deprecatedApis?: DeprecatedApiUsage[];
 
   /**
@@ -831,45 +880,36 @@ model KubernetesResourceStatus {
   additionalFields?: KubernetesGenericField[];
 }
 
-/**
- * A generic Kubernetes resource object as stored in the cluster inventory.
- * Follows the Kubernetes object model: apiVersion + kind + metadata + spec + status.
- */
-model KubernetesResource {
-  /**
-   * Kubernetes API version of this resource
-   * (e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1').
-   */
-  apiVersion: string;
-
-  /** Kind of the Kubernetes resource. */
-  kind: KubernetesResourceKind;
-
-  /** Standard Kubernetes object metadata. */
-  metadata: KubernetesObjectMeta;
-
-  /** Desired state of the resource. */
-  spec?: KubernetesResourceSpec;
-
-  /** Observed state of the resource, written by the controller. */
-  status?: KubernetesResourceStatus;
-}
-
 // ─── ARM resource properties ──────────────────────────────────────────────────
 
 /**
- * Properties of the KubeInventory resource.
- * Holds a full snapshot of Kubernetes resources from the cluster,
- * including native workloads (Pod, Deployment, Service, etc.)
- * and custom resources such as UpgradeAssessment.
+ * Properties of a single KubeInventory ARM resource.
+ * Each ARM resource represents one Kubernetes object from the cluster inventory.
+ * The ARM resource name encodes the kind, Kubernetes name, and namespace
+ * (e.g., 'pod-nginx-6d4cf56db6-x7q2p-default', 'upgrade-assessment-current-kube-system').
  */
 model KubeInventoryProperties {
+  /** Provisioning state of the KubeInventory resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
   /**
-   * Flat list of all Kubernetes resources in the cluster inventory.
-   * Each entry carries its own apiVersion, kind, metadata, spec, and status.
+   * Kubernetes API version of the represented resource
+   * (e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1').
    */
-  @identifiers(#["metadata"])
-  resources?: KubernetesResource[];
+  apiVersion?: string;
+
+  /** Kind of the Kubernetes resource. */
+  kind?: KubernetesResourceKind;
+
+  /** Standard Kubernetes object metadata. */
+  metadata?: KubernetesObjectMeta;
+
+  /** Desired state of the Kubernetes resource. */
+  spec?: KubernetesResourceSpec;
+
+  /** Observed state of the Kubernetes resource, written by the controller. */
+  status?: KubernetesResourceStatus;
 }
 
 
