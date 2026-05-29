@@ -1017,6 +1017,22 @@
           "description": "The id of the app associated with the identity. This is a random generated UUID by MSI.",
           "readOnly": true
         },
+        "assignmentBlocked": {
+          "type": "boolean",
+          "description": "Flag indicating whether to block assignment of the identity to Azure resources. Cannot be unset once set to true.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "federationBlocked": {
+          "type": "boolean",
+          "description": "Flag indicating whether to block Federated Identity Credential (FIC) configuration on the managed identity. Cannot be unset once set to true.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "isolationScope": {
           "$ref": "#/definitions/IsolationScope",
           "description": "Enum to configure regional restrictions on identity assignment, as necessary.",
