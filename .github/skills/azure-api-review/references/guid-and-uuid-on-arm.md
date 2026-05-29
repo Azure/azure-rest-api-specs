@@ -152,6 +152,11 @@ between three options, not a directive:
 >    [`guid-and-uuid-on-arm.md`](./guid-and-uuid-on-arm.md): Form A for
 >    TypeSpec-generated specs, Form B for handwritten OpenAPI). Verify the
 >    `where:` path against the actual LintDiff run output before posting.
+>    After committing the suppression, re-run LintDiff and confirm `GuidUsage`
+>    no longer fires before considering the fix settled. Delete any stale
+>    per-property suppression entries left over from earlier attempts; a
+>    wrong-path entry silently no-ops and misleads later readers into thinking
+>    it is load-bearing.
 > 2. **Keep `type: string`** and tighten the description (and optionally add a
 >    `@pattern` constraint).
 > 3. **ARM reviewer override** the `GuidUsage` check for this PR. The reviewer

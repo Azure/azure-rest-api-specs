@@ -238,7 +238,7 @@ if ($Suite -eq "all") {
 
 $cmd += @("--output-dir", $outputDir)
 $cmd += @("--workers", $Workers.ToString())
-$cmd += @("--timeout", $Timeout.ToString())
+$cmd += @("--timeout", "$($Timeout)ms")
 $cmd += @("--junit")
 
 if ($Model) { $cmd += @("--model", $Model) }
