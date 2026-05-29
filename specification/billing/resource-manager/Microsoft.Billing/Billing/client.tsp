@@ -679,3 +679,11 @@ using Microsoft.Billing;
 // Override to restore GA names.
 @@clientName(BillingSubscriptionAliasProperties.beneficiaryTenantId, "SubscriptionBeneficiaryTenantId", "csharp");
 @@clientName(BillingSubscriptionAliasProperties.customerId, "SubscriptionCustomerId", "csharp");
+
+// D19 fix: BillingRequestProperties.type was GA-named RequestType (the GA generator added
+// a disambiguating suffix). The @@clientName decorator below does not apply because
+// TypeSpec resolves `BillingRequestProperties.type` against the model's intrinsic `type`
+// metadata rather than the property; the RequestType alias is restored via SDK-side
+// Custom partial (sdk/billing/.../src/Custom/Models/BillingRequestProperties.cs).
+// Decorator kept commented for documentation purposes only.
+// @@clientName(BillingRequestProperties.type, "RequestType", "csharp");
