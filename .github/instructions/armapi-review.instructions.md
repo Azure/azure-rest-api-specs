@@ -61,7 +61,7 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 ### Reviewer-Posted Parity (REQUIRED -- no divergence)
 
-The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, JSON examples, fix snippets, or the `<!-- posted-by: arm-api-reviewer-agent -->` marker.
+The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, JSON examples, fix snippets, or the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent`.
 
 **Hard rules.**
 
@@ -71,14 +71,14 @@ The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identica
    - the JSON / TypeSpec / code blocks under **Fix:**,
    - inline examples,
    - file path / line number / JSON path citations,
-   - the trailing `<!-- posted-by: arm-api-reviewer-agent -->` marker.
+  - the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent` and the required marker fields.
 3. **No re-authoring during payload assembly.** Heredoc rebuilds, JSON-string escaping, multi-finding consolidation, or any step that involves "rewriting the body inline" is **forbidden**. Generate each comment body once, store it, and reference the stored value when building the payload.
-4. **Exact one-to-one mapping.** Every finding shown to the reviewer **MUST** map to exactly one inline comment in the posted review. The reviewer **MUST NOT** see N findings and the PR receive N-1 (something dropped) or N+1 (something added). Severity tags (`🔴 Blocking`, `🟡 Warning`, `🔵 Suggestion`) and `[NEW]`/`[EXISTING]` classifications **MUST** match.
+4. **Exact one-to-one mapping.** Every finding shown to the reviewer **MUST** map to exactly one inline comment in the posted review. The reviewer **MUST NOT** see N findings and the PR receive N-1 (something dropped) or N+1 (something added). Severity tags (`🔴 Blocking`, `🟠 Warning`, `🔵 Suggestion`) and `[NEW]`/`[EXISTING]` classifications **MUST** match.
 5. **Post-post verification (REQUIRED).** Immediately after posting the review, the agent **MUST** fetch the live comment bodies (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for each created comment) and verify, for every comment:
    - body length matches the canonical text length (within normalisation tolerance for line endings only),
    - the rule ID hyperlinks are present,
    - any code-fence (` ``` `) blocks present in the canonical text are present in the posted body,
-   - the `<!-- posted-by: arm-api-reviewer-agent -->` marker is present.
+  - the telemetry marker containing `posted-by: arm-api-reviewer-agent` and required fields is present.
      If any check fails, the agent **MUST** PATCH the affected comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the canonical text and re-verify -- before reporting completion to the user.
 6. **Failure handling.** If a finding cannot be posted as-is (e.g., GitHub API rejects the body, a line anchor cannot be resolved), the agent **MUST** report the discrepancy explicitly to the reviewer rather than silently posting a shortened or altered variant.
 
@@ -875,7 +875,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - `systemData` is a **required top-level property** on all tracked resources for new API versions. It contains `createdBy`, `createdByType`, `createdAt`, `lastModifiedBy`, `lastModifiedByType`, `lastModifiedAt`.
 - All `systemData` properties **MUST** be `readOnly`.
-- `systemData` **MUST** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). Do not define a custom `systemData` model.
+- `systemData` **SHOULD** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). A spec that defines the shape inline with the correct fields, `readOnly` annotations, and descriptions is functionally compliant; flag inline redefinition as a non-blocking suggestion, not a blocking violation.
 - `systemData` **MUST NOT** be placed inside the `properties` bag — it is a top-level ARM envelope property.
 - `*ByType` values (`User`, `Application`, `ManagedIdentity`, `Key`) **MUST** be stored as strings (not enums) to support future identity types without breaking changes.
 
@@ -1206,7 +1206,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Top-level tracked resources support resource move across RG/subscription (RPC003)
 - ✅ `managedBy` / `managedByExtended` are immutable top-level properties; not inside `properties` bag
 - ✅ `systemData` is readOnly, added only with new API versions; `*ByType` stored as string not enum
-- ✅ `systemData` referenced from common-types; no custom systemData model defined
+- ✅ `systemData` preferably referenced from common-types; inline definitions are only suggestions if the shape is otherwise compliant
 - ✅ `systemData` not updated for child resource changes, rejected requests, or internal admin operations
 
 ### Availability Zones & Extended Locations

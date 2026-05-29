@@ -106,7 +106,7 @@ field during reconciliation validation (step 7):
   PR comment's body identifies it as agent-origin. Used to validate the
   Reviewer's RESOLVE-AND-REPOST vs REPLY-LINE-SHIFT classification and to
   authorize THANK-AND-RESOLVE on agent-origin threads. The full marker
-  schema is in the shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)), under its "Per-posted-comment telemetry marker" section.
+  schema is in the shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)), under its "Per-comment telemetry marker" section.
 
 The Critic does **not** read or write the Reviewer's per-response
 `<!-- review-state: ... -->` marker.
@@ -123,8 +123,8 @@ rules:
 | `Azure/azure-rest-api-specs-pr` | Private Azure REST API specifications (pre-release / internal review) |
 
 Repository scope follows whichever repo the Reviewer used to fetch the PR
-files. Use the same `owner/repo` and `ref` (head SHA for changed files; base
-branch for previous-version files) as the Reviewer recorded in its inputs.
+files. Use the same `owner/repo` and refs (head SHA for changed files; base
+SHA/ref for previous-version files) as the Reviewer recorded in its inputs.
 Do **not** silently fall back to a different repo.
 
 **Tooling prerequisite for private-repo PRs.** `Azure/azure-rest-api-specs-pr`
@@ -213,8 +213,9 @@ and adds Critic-specific behavioral notes that are not in the protocol.
    and continue.
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
-5. The previous-version path used for `[NEW]`/`[EXISTING]` classification (or
-"None - new service").
+5. The previous-version path and base SHA/ref used for `[NEW]`/`[EXISTING]`
+classification (for example, `base-sha: <sha>; path: <path>`), or
+"None - new service".
 <!-- cspell:ignore REPOST -->
 6. **The Step 5.5 reconciliation plan** (verbatim) - per-finding actions
    (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and
@@ -354,9 +355,10 @@ or `FAIL: rule-not-found`.
 
 ### Step 4: Re-verify [NEW] vs [EXISTING] classification
 
-Fetch the corresponding file from the previous version path the reviewer
-recorded (via `get_file_contents` with the base-branch ref). Inspect the
-same JSON path / model / operation. Confirm the classification:
+Fetch the corresponding file from the previous-version source the reviewer
+recorded (via `get_file_contents` with the recorded base SHA/ref, not the PR
+head SHA). Inspect the same JSON path / model / operation. Confirm the
+classification:
 
 - `[NEW]` is correct if the violation is absent in the previous version,
   or the element did not exist there, or there is no previous version.
@@ -658,6 +660,7 @@ programmatically.
 
 PR: <PR-URL>
 Head SHA: <sha>
+Base SHA/Ref: <sha-or-ref or n/a>
 Iteration: <n> of 5
 Wave-thrash: detected | n/a
 
@@ -670,7 +673,7 @@ Wave-thrash: detected | n/a
 
 ### Per-finding annotations
 
-| #   | Rule ID       | File / line               | Verdict              | Confidence | Recommended action             |
+| No. | Rule ID       | File / line               | Verdict              | Confidence | Recommended action             |
 | --- | ------------- | ------------------------- | -------------------- | ---------- | ------------------------------ |
 | 1   | RPC-Put-V1-11 | `specs/foo.json` line 142 | PASS                 | High       | Post as-is                     |
 | 2   | OAPI027       | `specs/foo.json` line 88  | PASS                 | High       | DOWNGRADE Blocking -> Warning  |
@@ -681,7 +684,7 @@ Wave-thrash: detected | n/a
 
 Omit this entire section if Input #6 was `reconciliation skipped` (note that fact under Verdict instead).
 
-| #   | Entry type            | Anchor (URL / file - line)                    | Verdict                  | Recommended action                                                    |
+| No. | Entry type            | Anchor (URL / file - line)                    | Verdict                  | Recommended action                                                    |
 | --- | --------------------- | --------------------------------------------- | ------------------------ | --------------------------------------------------------------------- |
 | 1   | SKIP-COVERED          | `<existing-comment-url>`                      | PASS                     | Keep as planned                                                       |
 | 2   | THANK-AND-RESOLVE     | `<existing-comment-url>`                      | FAIL: fix-not-verified   | DROP from plan - violation still present at `<file> line <N>`         |
@@ -710,10 +713,10 @@ Independently re-derived graphs from re-fetched files. Differences below; full g
 
 For each FAIL, give the reviewer exact, actionable correction text:
 
-1. Finding #3 cites rule `OAPI099`. This rule ID does not exist in
+1. Finding 3 cites rule `OAPI099`. This rule ID does not exist in
    `openapi-review.instructions.md` (searched as of head SHA `<sha>`).
    **Action: DROP this finding** or cite the correct rule ID.
-2. Finding #4 classified `[NEW]`. Previous-version file
+2. Finding 4 classified `[NEW]`. Previous-version file
    `specs/foo/stable/2024-02-01/foo.json` line 298 contains the same
    violation. **Action: reclassify to `[EXISTING]`** and add the
    "Previous version" anchor required by the report template.

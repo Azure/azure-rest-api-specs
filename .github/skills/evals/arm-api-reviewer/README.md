@@ -24,7 +24,8 @@ arm-api-reviewer/
 │   ├── eval-report-format.yaml
 │   ├── eval-citation-and-parity.yaml
 │   ├── eval-typespec-required.yaml
-│   └── eval-fast-path-triage.yaml
+│   ├── eval-fast-path-triage.yaml
+│   └── eval-protocol-safety.yaml
 ├── fixtures/              # Test fixtures (36 files)
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
@@ -35,7 +36,7 @@ arm-api-reviewer/
 └── README.md              # This file
 ```
 
-## Test Categories (41 test cases across 15 eval files)
+## Test Categories
 
 | ID     | Category                      | Count | Description                                                          |
 | ------ | ----------------------------- | ----- | -------------------------------------------------------------------- |
@@ -54,6 +55,7 @@ arm-api-reviewer/
 | 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten |
 | 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression               |
 | 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full   |
+| 16xxxx | Protocol safety               | 3     | Critic handoff, session invalidation, downstream-rule telemetry      |
 
 ## Fixtures
 

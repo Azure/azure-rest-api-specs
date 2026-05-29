@@ -1,0 +1,123 @@
+name: arm-api-reviewer-eval-protocol-safety
+description: |
+  Protocol safety tests (16xxxx). Validates Reviewer/Critic gate behavior that
+  is not exercised by local spec fixtures: subagent fallback handoff,
+  session invalidation, and downstream-CI telemetry markers.
+
+config:
+  runs: 1
+  timeout: 240
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 160001 -- Subagent dispatch failure must produce handoff and no findings
+  - name: critic-subagent-failure-session-handoff
+    prompt: >
+      You are in an ARM API Reviewer session for PR
+      Azure/azure-rest-api-specs#12345. Step 1 has already pinned session head
+      SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` and base SHA
+      `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`. You assembled an internal
+      Step 6 draft, then attempted to invoke the ARM API Review Critic subagent
+      and the host returned `agent-not-found`. Follow the Reviewer Step 7
+      fallback ladder exactly. Do not render the API findings.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state pending marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=pending \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
+      - type: output-contains
+        name: "session handoff prompt emitted"
+        config:
+          substring: "Subagent invocation is not available in this session"
+      - type: output-contains
+        name: "skip critic option disclosed"
+        config:
+          substring: "skip critic"
+      - type: output-not-matches
+        name: "no findings rendered"
+        config:
+          pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
+      - type: prompt
+    rubric:
+      - The first line is the review-state marker with `critic-mode=pending`
+      - The response emits the session-handoff prompt and waits for pasted Critic output or explicit skip
+      - No API findings, posting prompt, or next-step recommendation are rendered
+
+  # 160002 -- Critic INVALIDATED kills the session and findings stay hidden
+  - name: critic-invalidated-stops-session
+    prompt: >
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
+      Session head SHA was `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`.
+      The ARM API Review Critic returned `Finding accuracy: INVALIDATED` with
+      reason `session-sha-moved`; it reports old SHA
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` and current PR head SHA
+      `cccccccccccccccccccccccccccccccccccccccc`. Produce the only legal
+      response. Do not render any API review findings.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state invalidated marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=invalidated \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
+      - type: output-contains
+        name: "session invalidated stated"
+        config:
+          substring: "SESSION INVALIDATED"
+      - type: output-contains
+        name: "old sha shown"
+        config:
+          substring: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      - type: output-contains
+        name: "new sha shown"
+        config:
+          substring: "cccccccccccccccccccccccccccccccccccccccc"
+      - type: output-not-matches
+        name: "no findings rendered"
+        config:
+          pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
+      - type: prompt
+    rubric:
+      - The response reports SHA drift and offers restart or abandon only
+      - No Critic corrections are folded into the report
+      - No findings, graphs, or posting prompts are rendered
+
+  # 160003 -- Conflict-aware recommendations carry downstream-rule telemetry
+  - name: downstream-ci-conflict-marker-required
+    prompt: >
+      In an ARM API review finding, you recommend changing a plain string
+      property named `tenantId` to UUID format. Per the downstream-CI impact
+      rule, this conflicts with required LintDiff rule R3017 GuidUsage unless
+      handled as a multi-option recommendation. Show the canonical comment body
+      that would be rendered in Step 6 and later posted. Include the telemetry
+      marker exactly as required by the Reviewer/Critic protocol. Use placeholder
+      SHA `<full-40-char-sha>` if needed.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "multi-option recommendation"
+        config:
+          pattern: '(?is)(three options|1\..*2\..*3\.|Switch to `uuid`.*Keep `type: string`.*override)'
+      - type: output-contains
+        name: "downstream-rule marker present"
+        config:
+          substring: "downstream-rule: R3017"
+      - type: output-matches
+        name: "not directive phrasing"
+        config:
+          pattern: "(?i)Suggestion"
+      - type: prompt
+    rubric:
+      - The recommendation is phrased as options, not a directive to use UUID
+      - The comment includes `downstream-rule: R3017` in the telemetry marker
+      - The severity is Suggestion unless the prompt supplies unambiguous acceptable criteria

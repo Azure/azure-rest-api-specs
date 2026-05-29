@@ -339,7 +339,7 @@ If **none** of these signals are present, the new API version is being authored 
 - Use `$ref` to common-types instead of redefining standard ARM structures inline. This is a **recommended practice**, not a blocking requirement -- a spec that correctly defines these shapes inline (with all required fields, readOnly annotations, and descriptions) is functionally compliant. Flag inline redefinition as a non-blocking suggestion, not a blocking violation.
 - Verify the `$ref` path is valid and points to the correct common-types version file.
 - Definition names **MUST** be unique across all swagger files included in the same package tag. Duplicate definitions (e.g., `ErrorResponse` defined in both `foo.json` and `bar.json`) cause SDK generation conflicts. Use `$ref` to a single shared definition or common-types instead.
-- All ARM resources **MUST** include `systemData` as a read-only property.
+- All tracked ARM resources **MUST** include `systemData` as a read-only top-level property. Proxy resources are not required to carry `systemData` unless the service contract explicitly includes it.
 
 ## 13. ARM Resource Model Requirements
 

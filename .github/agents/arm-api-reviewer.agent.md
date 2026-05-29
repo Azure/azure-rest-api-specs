@@ -92,9 +92,13 @@ decline message for an out-of-scope repo).
 The marker format is:
 
 ```html
-<!-- review-state: critic-mode={subagent|session-handoff|unavailable|invalidated} | iteration={N} | pr={owner/repo#number} -->
+<!-- review-state: critic-mode={pending|subagent|session-handoff|unavailable|invalidated} | iteration={N} | pr={owner/repo#number} -->
 ```
 
+- `critic-mode=pending` - Step 1 has pinned the session/base SHAs and the
+  review session is live, but the Critic has not returned yet. Use only for
+  progress, fetch-error, session-handoff, or SHA-drift messages; never render
+  findings with this value.
 - `critic-mode=subagent` - state A: subagent dispatched and verdict folded in.
 - `critic-mode=session-handoff` - state A via human-pasted verdict from the
   fallback prompt.
@@ -110,7 +114,7 @@ The marker format is:
 
 **Note:** This `critic-mode` field describes how (and whether) the critic
 ran for the whole response. It is distinct from the `critic` field in the
-per-posted-comment telemetry marker (Step 8), which records the
+per-comment telemetry marker (Step 6 canonical body / Step 8 posting), which records the
 per-finding verdict (`pass`/`warn`/`override`). Different fields, different
 value domains.
 
@@ -165,7 +169,8 @@ cross-agent terms (session SHA, dispatch, sentinel string, etc.).
 
 | Term                             | Meaning                                                                                                                                                                                                                      |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Session SHA**                  | The PR head commit SHA pinned at Step 1; binding for every file fetch across the entire session by both Reviewer and Critic.                                                                                                 |
+| **Session SHA**                  | The PR head commit SHA pinned at Step 1; binding for every PR-head file fetch across the entire session by both Reviewer and Critic.                                                                                         |
+| **Base source**                  | The PR base commit SHA or immutable base ref recorded at Step 1; binding for previous-version file fetches used by breaking-change and `[NEW]` / `[EXISTING]` checks.                                                        |
 | **Fast path / Full review**      | Two review-depth tracks selected at Step 1. Fast path skips Steps 3, 3.5, 4a, 5; Full review runs all. Neither skips Step 7.                                                                                                 |
 | **Next-step recommendation**     | An internal label (`READY TO POST` / `REVISE RECOMMENDED` / `MANUAL DECISION REQUIRED` / `SESSION INVALIDATED`) set at Step 7 based on the Critic's verdicts; gates Step 8.                                                  |
 | **Reconciliation Plan**          | The per-finding posting actions (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and per-existing-thread dispositions (THANK-AND-RESOLVE / PROPOSE-HUMAN-RESOLVE) built in Step 5.5 and executed in Step 8. |
@@ -199,7 +204,7 @@ This agent reviews PRs in **both** of these repositories - they share the same s
 
 ## Operating Mode
 
-This agent operates in **read-only PR review mode**. It fetches PRs from GitHub, flags issues with file path, line number, rule ID, and fix suggestion. It does **not** modify files.
+This agent operates in **read-only specification review mode** until the human explicitly approves PR actions. It fetches PRs from GitHub, flags issues with file path, line number, rule ID, and fix suggestion, and does **not** modify specification files. With human approval in Step 8/9, it may post PR review comments, replies, thread resolutions, and label changes.
 
 The user provides a PR URL, PR number, or shorthand (e.g., `specs-pr#123`), and the agent reviews the changed specification files against the Azure REST API Guidelines and ARM RPC rules.
 
@@ -293,7 +298,7 @@ For each PR review, you must fetch:
 
 1. **PR metadata** - title, description, changed file list (via GitHub MCP `get_pull_request` + `list_pull_request_files`, or the PR API).
 2. **Changed files from the PR branch** - the full content of each changed specification file (`.tsp`, `.json`, `.yaml`, `readme.md`) from the PR's head branch.
-3. **Previous version files from the base branch** - for new-vs-existing classification and breaking change comparison, fetch the corresponding files from the `main` branch (or the PR's base branch). For example, if the PR adds `stable/2025-07-15/`, fetch the prior version folder contents (e.g., `stable/2024-02-01/` or `preview/2024-06-15-preview/`) from `main`.
+3. **Previous version files from the base source** - for new-vs-existing classification and breaking change comparison, fetch the corresponding files from the base SHA/ref recorded in Step 1. For example, if the PR adds `stable/2025-07-15/`, fetch the prior version folder contents (e.g., `stable/2024-02-01/` or `preview/2024-06-15-preview/`) from the base source.
 4. **Rule set instruction files** - load from the local workspace (`.github/instructions/*.instructions.md`), as these are part of this repository.
 5. **Existing PR review comments** - all review comments on the PR in every state (active, resolved, outdated, collapsed) via GitHub MCP `get_review_comments`. Used in Step 5.5 to build the reconciliation plan (de-duplicate against prior comments and verify whether prior violations have been fixed).
 
@@ -303,7 +308,7 @@ For each PR review, you must fetch:
 
 Use GitHub tools to fetch the PR details and list all changed files. Classify each changed file by type (ARM OpenAPI, data-plane OpenAPI, TypeSpec, example, tspconfig, readme). Focus your review on new or modified files - do not review unchanged files unless context requires it.
 
-**How to fetch:** Use the GitHub MCP `get_pull_request` tool to get PR metadata, then `list_pull_request_files` to get the changed file list. Fetch the full content of each changed file using `get_file_contents` with the PR's head branch ref.
+**How to fetch:** Use the GitHub MCP `get_pull_request` tool to get PR metadata, then `list_pull_request_files` to get the changed file list. Fetch the full content of each changed file using `get_file_contents` with the pinned session SHA, not the PR's mutable head branch name.
 
 **PR state checks.** After `get_pull_request` succeeds, inspect `state`, `draft`, and `mergeable`:
 
@@ -311,20 +316,20 @@ Use GitHub tools to fetch the PR details and list all changed files. Classify ea
 - **`draft == true`**: proceed, but record `Draft PR: yes` in the Step 6 Summary. Findings on draft PRs are advisory; the author may still be iterating.
 - **`mergeable == 'CONFLICTING'`**: proceed, but record `Mergeable: CONFLICTING` in the Summary and warn that line numbers in conflict-marker regions may be unreliable -- re-verify any finding whose line falls inside `<<<<<<<` / `=======` / `>>>>>>>` blocks before posting.
 
-**Pin the session SHA (binding for the entire review).** As the very first action in Step 1, record the PR's current head commit SHA (`get_pull_request` -> `head.sha`). This is the **session SHA** and it is binding for every subsequent step performed by both the Reviewer and the Critic, across every iteration, in this review session:
+**Pin the session SHA and base source (binding for the entire review).** As the very first action in Step 1, record the PR's current head commit SHA (`get_pull_request` -> `head.sha`) and base commit SHA or immutable base ref (`base.sha`, `baseRefOid`, or equivalent). The head commit is the **session SHA** and is binding for every PR-head file fetch. The base SHA/ref is binding for every previous-version file fetch used in breaking-change comparison and `[NEW]`/`[EXISTING]` classification.
 
-- Every file fetch (PR head files in Step 1, previous-version files in Step 3 / 4a, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to this exact SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`.
+- Every PR-head file fetch (changed files in Step 1, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to the session SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`. Previous-version files MUST pin to the recorded base SHA/ref, not the session SHA.
 - Surface the session SHA in chat as soon as it is captured (e.g., "Reviewing PR #<n> at head SHA `<sha>`").
-- Pass the session SHA verbatim to the Critic in Step 7 and to every posted-comment telemetry marker (`head-sha:` field) in Step 8.
-- Record the session SHA in the final Step 6 Summary on its own line so the human reviewer can audit what was actually reviewed.
+- Pass the session SHA and previous-version base source verbatim to the Critic in Step 7, and pass the session SHA to every per-comment telemetry marker (`head-sha:` field) in Step 8.
+- Record the session SHA and base source in the final Step 6 Summary on their own lines so the human reviewer can audit what was actually reviewed.
 - **If the PR head moves mid-session** (a `gh pr view` or any tool call surfaces a `head.sha` different from the session SHA), the session is invalidated. Stop, report the SHA change verbatim to the human, and ask whether to restart against the new head or stop. Do **not** silently re-pin and continue - findings drafted at SHA `A` are not valid against SHA `B`.
 
 **Choose review depth.** Based on the changed-file inventory, classify the PR into one of two tracks:
 
-| Track           | When it applies                                                                                                                                                                                                                           | Workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Fast path**   | The PR modifies **only** files from the allowlist below, AND total additions + deletions across spec files is < 200 lines.                                                                                                                | Run Step 2 (load minimal rule set), Step 4 (systematic review of changed files only), Step 5.5 (existing-comment reconciliation plan), Step 6 (report), Step 7 (critic), Step 8-10. **Skip Steps 3, 3.5, 4a, and 5.** Because Step 3.5 is skipped, no Mermaid graphs are produced; the Reviewer MUST tell the Critic this in Step 7 Input #9 (`graphs-produced: false`) so the Critic records `Graph integrity = N/A` instead of attempting a diff against absent graphs. |
-| **Full review** | Anything else - any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, any PR >= 200 lines. | Run all steps 2-10 (Step 5.5 included).                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Track           | When it applies                                                                                                                                                                                                                           | Workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fast path**   | The PR modifies **only** files from the allowlist below, AND total additions + deletions across spec files is < 200 lines.                                                                                                                | Run Step 2 (load minimal rule set), Step 4 (systematic review of changed files only), Step 5.5 (existing-comment reconciliation plan), Step 6 (report), Step 7 (critic), Step 8-10. **Skip Steps 3, 3.5, 4a, and 5.** If any finding is produced, perform the minimal previous-version check needed to tag it `[NEW]` / `[EXISTING]`; if that check is not trivial, escalate to full review before rendering. Because Step 3.5 is skipped, no Mermaid graphs are produced; the Reviewer MUST tell the Critic this in Step 7 Input #9 (`graphs-produced: false`) so the Critic records `Graph integrity = N/A` instead of attempting a diff against absent graphs. |
+| **Full review** | Anything else - any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, any PR >= 200 lines. | Run all steps 2-10 (Step 5.5 included).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 **Fast-path allowlist** (a PR qualifies only if _every_ changed file matches one of these):
 
@@ -337,7 +342,8 @@ Use GitHub tools to fetch the PR details and list all changed files. Classify ea
 
 1. If you are uncertain whether a change qualifies, default to **full review**. False positives on track selection are far cheaper than skipped breaking-change analysis.
 2. The fast path **never** skips Step 7 (critic). Independent verification applies to every posted comment regardless of PR size.
-3. If the fast-path review surfaces any blocking finding that suggests broader risk (e.g., a description change that reveals the schema is wrong, an example that references a property not in the spec), **escalate to full review** before reporting.
+3. Fast-path findings still need `[NEW]` / `[EXISTING]` classification. If the classification requires non-trivial previous-version comparison, **escalate to full review** before reporting.
+4. If the fast-path review surfaces any blocking finding that suggests broader risk (e.g., a description change that reveals the schema is wrong, an example that references a property not in the spec), **escalate to full review** before reporting.
 
 **Size guardrail (full-review track only).** If the PR touches > 500 spec files **or** > 50000 added+deleted lines across spec files, stop before Step 2 and ask the human to choose:
 
@@ -378,9 +384,9 @@ Load the shared `azure-api-review` skill references only when a cross-cutting ru
 - For TypeSpec: Check the `Versions` enum for prior versions and review uses of `@added`, `@removed`, `@typeChangedFrom`.
 - Flag: removed properties, removed operations, type changes, narrowed enums, optional-to-required transitions, renamed paths.
 - If no previous version exists (new service), note this and skip the comparison.
-- **Record the previous version path** - it will be needed in Step 4a to classify issues as new vs. existing.
+- **Record the previous version path and base SHA/ref** - both will be needed in Step 4a and by the Critic to classify issues as new vs. existing.
 
-**How to fetch previous versions:** Use GitHub MCP `get_file_contents` with `ref: "main"` (or the PR's base branch) to fetch files from the previous API version folder.
+**How to fetch previous versions:** Use GitHub MCP `get_file_contents` with the base SHA/ref recorded in Step 1 (or the PR's immutable base branch ref when the API does not expose a SHA) to fetch files from the previous API version folder. Do not use the PR head SHA for previous-version files.
 
 To discover which prior version folders exist, prefer this order to minimize API calls:
 
@@ -459,8 +465,8 @@ For cross-cutting rules that appear in multiple instruction files, the shared sk
 When a PR adds or modifies a `readme.md` file that contains `directive` / `suppress` entries, perform a **suppression continuity analysis** by comparing against the previous API version's `readme.md`:
 
 1. **Inventory all suppressions** in the new version's `readme.md`. Record each suppressed rule ID, the reason (if provided), and the `where` scope.
-2. **Fetch the previous version's `readme.md`** from the base branch (e.g., prior `stable/` or `preview/` folder) and inventory its suppressions.
-3. **Carried-over suppressions (OK):** If a suppression exists in the previous version and is present in the new version with the same rule ID, this is acceptable - the PR is carrying forward a known exception. No action needed.
+2. **Fetch the previous version's `readme.md`** from the recorded base source (e.g., prior `stable/` or `preview` folder) and inventory its suppressions.
+3. **Carried-over suppressions (usually OK, but not automatic):** If a suppression exists in the previous version and is present in the new version with the same rule ID and scope, treat it as carried-over technical debt, then apply the shared criteria in [`.github/skills/azure-api-review/references/suppression-review-criteria.md`](../skills/azure-api-review/references/suppression-review-criteria.md). Stable/GA versions, security-related suppressions, and rules listed as never-valid in that reference still require scrutiny and may be blocking.
 4. **Dropped suppressions (investigate):** If a suppression exists in the previous version but is **not** present in the new version's `readme.md`:
    - Check whether the PR's spec changes **resolve the underlying violation** that the suppression was silencing (e.g., a missing description was added, a naming issue was fixed, a missing operation was introduced).
    - If the violation **has been fixed** in the new version, the suppression was correctly removed. Note this as a positive finding.
@@ -549,14 +555,14 @@ When a PR modifies multiple files or versions:
 
 Build the posting plan **before** writing the Step 6 report. Two reasons: (a) the human sees the actual posting/resolution actions the agent will take, not just abstract findings; (b) the Critic in Step 7 can independently verify the reconciliation decisions, especially fix-verification claims that auto-resolve prior threads. This step runs on **both** the fast path and the full review track - existing-comment fetch is cheap and the de-duplication value is independent of review depth. **No mutating actions happen in Step 5.5**; it only plans. All posting, replying, and resolving happens in Step 8 after the Critic validates the plan and the human approves it.
 
-**1. Fetch all existing PR review comments** via GitHub MCP `get_review_comments` (or `gh api repos/<owner>/<repo>/pulls/<n>/comments` fallback). Include **every** state - active, resolved, outdated, collapsed. Pin every read to the **session SHA** captured in Step 1.
+**1. Fetch all existing PR review threads** via the GitHub MCP review-thread API when available, or read-only GraphQL `reviewThreads` fallback. The REST `/pulls/<n>/comments` API is acceptable only as a partial fallback for comment bodies and line anchors; it does not reliably expose thread resolution state. Include **every** state - active, resolved, outdated, collapsed. Pin file re-reads to the **session SHA** captured in Step 1, and record the thread ID / comment ID needed to reply or resolve later.
 
 **2. Inventory each comment** by:
 
 - Author handle.
 - **Origin** - `agent` if the body contains the substring `posted-by: arm-api-reviewer-agent` (matches all marker versions); `human` otherwise.
 - File path, line number, rule ID or topic (parsed from the telemetry marker when present, otherwise inferred from the body).
-- Resolution state (active, resolved, outdated).
+- Thread ID, comment ID, resolution state, and outdated state.
 - Comment URL.
 
 **3. Per-finding action.** For each finding produced in Steps 4 / 4a (and amended in Step 5), apply the scenarios below. Each finding ends up labelled with **exactly one** action:
@@ -578,7 +584,7 @@ Build the posting plan **before** writing the Step 6 report. Two reasons: (a) th
 
 - **Proof-of-fix anchor (mandatory for THANK-AND-RESOLVE and PROPOSE-HUMAN-RESOLVE).** Record: file path, original line number (from the existing comment), line number you re-read at the session SHA, and a one-line description of the spec construct now present there. The Critic re-verifies these anchors **independently** in Step 7 - a missing, vague, or incorrect anchor is a `FAIL` and the entry will be dropped from the plan.
 
-**5. Scenario D detection.** If every finding from step 3 is labelled SKIP-COVERED, RESOLVE-AND-REPOST, or REPLY-LINE-SHIFT (i.e., no POST-NEW comments will be created), set an internal `Scenario-D` flag. The Step 6 Reconciliation Plan section renders the Scenario-D notice and Step 8 makes this explicit when asking for approval.
+**5. Scenario D detection.** If every finding from step 3 is labelled SKIP-COVERED or REPLY-LINE-SHIFT (i.e., no POST-NEW or RESOLVE-AND-REPOST replacement comments will be created), set an internal `Scenario-D` flag. The Step 6 Reconciliation Plan section renders the Scenario-D notice and Step 8 makes this explicit when asking for approval. RESOLVE-AND-REPOST is not Scenario D because it resolves an old agent thread and posts a replacement inline comment.
 
 **6. Record the reconciliation plan** as a structured table (per-finding actions, per-existing-thread dispositions, including proof-of-fix anchors). This plan is rendered verbatim in Step 6's `Reconciliation Plan` section and passed verbatim to the Critic in Step 7 as Input #6.
 
@@ -670,7 +676,7 @@ Per-finding posting action and per-existing-thread disposition built in Step 5.5
 
 **Per-finding actions** (every finding listed in the sections above maps to exactly one row):
 
-| #   | Finding (file - line) | Rule        | Action             | Anchor (existing thread URL, if any) |
+| No. | Finding (file - line) | Rule        | Action             | Anchor (existing thread URL, if any) |
 | --- | --------------------- | ----------- | ------------------ | ------------------------------------ |
 | 1   | `<file> - line <N>`   | `<rule-id>` | POST-NEW           | -                                    |
 | 2   | `<file> - line <N>`   | `<rule-id>` | SKIP-COVERED       | `<existing-comment-url>`             |
@@ -679,7 +685,7 @@ Per-finding posting action and per-existing-thread disposition built in Step 5.5
 
 **Existing-thread dispositions** (include rows only when the action is THANK-AND-RESOLVE or PROPOSE-HUMAN-RESOLVE; omit this entire table when empty):
 
-| #   | Existing thread | Origin              | Original rule | Verified-fixed at                            | Action                |
+| No. | Existing thread | Origin              | Original rule | Verified-fixed at                            | Action                |
 | --- | --------------- | ------------------- | ------------- | -------------------------------------------- | --------------------- |
 | 1   | `<url>`         | agent               | `<rule-id>`   | `<file> - line <N>` (re-read at session SHA) | THANK-AND-RESOLVE     |
 | 2   | `<url>`         | human (`@<handle>`) | `<rule-id>`   | `<file> - line <N>` (re-read at session SHA) | PROPOSE-HUMAN-RESOLVE |
@@ -690,7 +696,7 @@ Per-finding posting action and per-existing-thread disposition built in Step 5.5
 
 Findings the critic returned `FAIL` on that were dropped in revision. Listed for transparency -- these will NOT be posted.
 
-| #   | Classification | Rule        | File - line         | Drop reason                                                                                                                                 | Detail              |
+| No. | Classification | Rule        | File - line         | Drop reason                                                                                                                                 | Detail              |
 | --- | -------------- | ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | 1   | [NEW]          | `<Rule ID>` | `<file>` - line <N> | `rule-not-found` / `wrong-line` / `rule-misapplied` / `misclassified` / `file-fetch-failed` / `fix-anchor-wrong` / `fix-anchor-unreachable` | `<one-line detail>` |
 
@@ -704,6 +710,7 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
 
 - **PR:** `<PR-URL>` - _<PR-title>_
 - **Session head SHA (pinned for Reviewer + Critic; use the full 40-char SHA, not the abbreviated 7-char form):** `<full-40-char-sha>`
+- **Previous-version base source (pinned for comparison):** `<base-sha-or-ref>` (or "N/A - new service")
 - Files reviewed: <count>
 - Previous version compared: `<version>` (or "N/A - new service")
 - **New blocking issues: <count>**
@@ -787,7 +794,7 @@ for the canonical schema; the list below restates it for in-file readability):
 2. **The session SHA captured in Step 1.** This is the PR head commit SHA that the entire review session is pinned to. The Critic MUST use exactly this SHA for every file re-fetch across every iteration. The Critic MUST NOT re-resolve the PR head, follow the branch name, or otherwise pick up a newer commit between iterations - if it does, it is verifying a different tree than the one the Reviewer judged, and any disagreement is meaningless.
 3. The full Step 6 findings report (verbatim).
 4. The list of files you reviewed.
-5. The previous-version path you used in Step 4a (or "None - new service").
+5. The previous-version path and base SHA/ref you used in Step 4a (for example, `base-sha: <sha>; path: <path>`), or "None - new service".
 6. **The Step 5.5 reconciliation plan** (verbatim) - per-finding actions (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and per-existing-thread dispositions (THANK-AND-RESOLVE / PROPOSE-HUMAN-RESOLVE), each with anchors (existing comment URL, and for fix-verified dispositions: original line, re-read line at session SHA, construct description). If Step 5.5 ran in the failure-handling "skipped" mode, pass the literal string "reconciliation skipped" so the Critic records `Reconciliation accuracy = N/A`.
 7. **Prior iterations' FAIL set summary** (iteration N-1 and N-2 only) - the rule ID + file/line tuples that came back `FAIL` in each prior iteration. Pass an empty list on iteration 1; pass the iteration-1 FAIL set on iteration 2; pass iterations 1+2 on iteration 3; and so on (always the **two** most recent prior iterations). The Critic needs this to detect wave-thrash at iteration 3+ (it is stateless across invocations and cannot reconstruct its own prior FAIL sets).
 8. **Considered-and-declined list** - the rule-ID + file/line tuples of every `Likely missed violations` candidate the Critic surfaced in prior iterations that the Reviewer evaluated and chose **not** to promote to a finding, with a one-line rationale per entry (e.g., `proxy-resource-no-provisioningState: rule does not apply to proxy resources`). The Critic MUST suppress candidates already on this list unless a re-fetch surfaces new evidence the prior rationale did not address. Empty list on iteration 1. Without this list, advisory items re-surface every iteration and convergence becomes impossible except via the iteration cap.
@@ -859,7 +866,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 1. **Preferred: invoke the critic as a subagent.** Use the host's subagent dispatch (the `agent` tool with agent name `ARM API Review Critic`) to invoke [`.github/agents/arm-api-review-critic.agent.md`](./arm-api-review-critic.agent.md). Track `Critic mode: subagent` internally. If the call returns an error (tool-not-found, dispatch-failed, agent-not-found), go to step 2 immediately. Do **not** retry silently and do **not** fall through to step 3.
 2. **Mandatory if step 1 fails: session-handoff.** This step is **not optional** and cannot be skipped by your own judgement. You must stop and emit, verbatim:
 
-   > "Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version path. When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended)."
+   > "Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended)."
 
    Then **wait**. Do not produce findings, recommendations, posting prompts, or fix suggestions while waiting. The only legal way to leave this waiting state is one of:
    - The human pastes a critic verdict. Before folding it in, verify all of: `PR:` matches the current review PR, `Head SHA:` exactly matches the session SHA, and `Iteration:` is a valid `1` through `5` consistent with the current loop. If any check fails, reject the pasted verdict as invalid handoff data and request a corrected verbatim paste.
@@ -933,7 +940,7 @@ Substitution rules:
 - Every posted comment **MUST** end with a hidden HTML telemetry marker as the very last line of the comment body. The marker format is:
 
   ```html
-  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| override-reason: <required-when-critic=override>] -->
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
   ```
 
   - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`). The literal value `summary` is reserved for the (rare) case of a top-level PR review summary comment that aggregates multiple findings rather than flagging a single rule violation -- e.g., a closing "Review complete: N findings, M blocking" comment. Per the current workflow, the agent does **not** post summary comments by default (every finding becomes its own POST-NEW comment); use `rule: summary` only when explicitly approved by the human and accompanied by `severity: suggestion` and `classification: new`.
@@ -941,6 +948,7 @@ Substitution rules:
   - **`classification`**: One of `new` (introduced in this PR) or `existing` (pre-existing technical debt).
   - **`critic`**: The critic's per-finding verdict from Step 7 - `pass`, `warn`, or `override`. `override` means a critic `FAIL` on the finding itself was overridden by the human reviewer. **Note:** `override` is only valid for finding-level FAILs - reconciliation FAILs cannot be overridden via this marker (see Step 7 item 9).
   - **`head-sha`**: The PR head commit SHA (the session SHA from Step 1) the critic re-fetched against. Provides an auditable anchor for later debugging.
+  - **`downstream-rule`**: REQUIRED when Step 4.5 found a conflict-aware downstream CI rule for the recommendation (for example, `downstream-rule: R3017`). Omit it for findings that do not add or tighten output in a conflict-aware area.
   - **`override-reason`**: REQUIRED when `critic: override`. Must satisfy the structured-anchor validation defined in Step 7 item 13.3 (length >= 20 chars, no denylist substring, AND contains an instruction-file anchor `<file>:L<a>-L<b>` or a verbatim counter-quote from the cited rule). Length-only or paraphrase-only justifications are **not** acceptable. The Reviewer MUST validate `override-reason` **in Step 7** (when the override decision is first folded into the report), not at Step 8 posting time - a bad reason must block plan finalization, not posting. If the check fails, refuse to fold the override and surface the validation error to the human so they can supply a real justification before re-invoking the Critic.
 
   > **Marker default legend.** Default `critic: pass` (Critic returned PASS at High confidence). Use `warn` when Critic returned PASS at Medium/Low confidence and human accepted as-is. Use `override` only when human explicitly overrode a finding-level Critic `FAIL` per Step 7 item 13; `override` REQUIRES `override-reason`.
@@ -1010,15 +1018,15 @@ This keeps the user's workspace tidy and prevents accumulation of stale `pr-*` b
 This agent emits two distinct hidden HTML markers; they live in different
 places and serve different purposes.
 
-| Marker                                  | Where it appears                                                  | Defined in                                                                                                                                                                                                          | Purpose                                                                                                                                               |
-| --------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Review-state marker**                 | Literal first line of every Reviewer response after Step 1 begins | [Required review-state marker](#required-review-state-marker) + [shared protocol](./protocols/reviewer-critic-protocol.md#review-state-marker-per-response)                                                         | Records `critic-mode`, iteration, and PR identity for transcript auditability.                                                                        |
-| **Per-posted-comment telemetry marker** | Last line of every POST-NEW / RESOLVE-AND-REPOST PR comment       | [Step 8 -> Posted-comment formatting and telemetry](#step-8-execute-the-validated-reconciliation-plan) + [shared protocol](./protocols/reviewer-critic-protocol.md#per-posted-comment-telemetry-marker-step-8-only) | Records per-finding rule, severity, classification, Critic verdict, head SHA, and (when overridden) justification. Enables PR-wide telemetry queries. |
+| Marker                           | Where it appears                                                                                              | Defined in                                                                                                                                                                                                                                | Purpose                                                                                                                                                                                       |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Review-state marker**          | Literal first line of every Reviewer response after Step 1 begins                                             | [Required review-state marker](#required-review-state-marker) + [shared protocol](./protocols/reviewer-critic-protocol.md#review-state-marker-per-response)                                                                               | Records `critic-mode`, iteration, and PR identity for transcript auditability.                                                                                                                |
+| **Per-comment telemetry marker** | Last line of every POST-NEW / RESOLVE-AND-REPOST PR comment and any Step 6 canonical body rendered for parity | [Step 8 -> Posted-comment formatting and telemetry](#step-8-execute-the-validated-reconciliation-plan) + [shared protocol](./protocols/reviewer-critic-protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) | Records per-finding rule, severity, classification, Critic verdict, head SHA, downstream CI rule when applicable, and override justification when present. Enables PR-wide telemetry queries. |
 
 **Critical distinction.** `critic-mode` (review-state marker) is
 response-scope. `critic` (per-comment marker) is finding-scope. Different
 fields, different value domains. See the protocol file's
-["`critic-mode` vs `critic` field"](./protocols/reviewer-critic-protocol.md#per-posted-comment-telemetry-marker-step-8-only)
+["`critic-mode` vs `critic` field"](./protocols/reviewer-critic-protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting)
 note.
 
 The shared [Reviewer<->Critic protocol](./protocols/reviewer-critic-protocol.md) is
@@ -1031,7 +1039,7 @@ When a step in the workflow fails, recover deterministically using the table bel
 
 | Failure                                           | Detection                                                                                                             | Recovery                                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Previous-version file not found** (Step 3 / 4a) | `get_file_contents` returns 404 on the base-branch prior-version path, or the prior-version directory does not exist. | Note explicitly in the report: "Previous version not available - breaking-change comparison skipped." Classify **all** issues found in the new version as `[NEW]` (Step 4a rule for first-version services applies). Do **not** invent an `[EXISTING]` tag without an anchor.                                                               |
+| **Previous-version file not found** (Step 3 / 4a) | `get_file_contents` returns 404 on the base-source prior-version path, or the prior-version directory does not exist. | Note explicitly in the report: "Previous version not available - breaking-change comparison skipped." Classify **all** issues found in the new version as `[NEW]` (Step 4a rule for first-version services applies). Do **not** invent an `[EXISTING]` tag without an anchor.                                                               |
 | **Changed-file fetch fails**                      | `get_file_contents` errors on a file listed by `list_pull_request_files`.                                             | Retry once. If it still fails, report the specific file and error to the human, exclude that file from the review, and continue with the rest. Do **not** review a file you could not fetch.                                                                                                                                                |
 | **GitHub rate limit hit**                         | API responses include rate-limit headers or `403 rate limit exceeded`.                                                | Stop further fetches. Report the limit, the reset time from the response header, and the partial review state to the human. Ask whether to resume after reset or proceed with what was already fetched. Do not switch silently to raw-URL fallback for `azure-rest-api-specs-pr` (private repo - raw URLs will fail unauthenticated).       |
 | **Authentication lapses mid-review**              | A fetch that previously succeeded starts returning 401.                                                               | Stop, surface the auth failure verbatim to the human, and ask them to re-authorize the GitHub MCP connection. Do not paper over by switching tools or guessing file content.                                                                                                                                                                |
@@ -1055,7 +1063,7 @@ When a step in the workflow fails, recover deterministically using the table bel
 - **Clean specs get clean reports.** If after thorough review a specification has no blocking violations, explicitly state that no blocking issues were found. Do not downgrade compliant patterns into violations. For example: a spec that correctly uses common-types, has all required CRUD operations, includes `provisioningState` with the right terminal states, and follows naming conventions should receive a clean bill of health -- not a list of fabricated issues. The absence of findings is a valid review outcome.
 - **Scope boundaries.** Do not review SDK code, pipeline configs, or infrastructure files. Only review specification artifacts (OpenAPI JSON, TypeSpec `.tsp`, `tspconfig.yaml`, examples, readmes for AutoRest config).
 - **Always compare versions.** When a previous API version exists in the repository, load it and check for breaking changes. Do not skip this step.
-- **Pin the session SHA.** The PR head commit SHA captured in Step 1 is the **session SHA**. Every file fetched by the Reviewer and every file fetched by the Critic, across every iteration, MUST be at that exact SHA. Never re-resolve the PR head between iterations, never follow the branch name, never pick up a newer commit silently. If the PR head moves mid-session (author force-pushes or pushes a fixup), the session is invalidated - report the SHA change to the human and ask whether to restart at the new head. The session SHA appears in chat at the start of Step 1, in the Step 6 Summary, in every posted-comment telemetry marker (`head-sha:`), and as an explicit input to the Critic in Step 7. If the Critic returns `Finding accuracy = INVALIDATED` (reason `session-sha-moved` or `session-sha-unreachable`), the session is dead -- Step 7 item 11 governs.
+- **Pin the session SHA and base source.** The PR head commit SHA captured in Step 1 is the **session SHA** for every PR-head file fetch by the Reviewer and Critic. Previous-version files are fetched from the base SHA/ref captured in Step 1. Never re-resolve the PR head between iterations, never follow the head branch name, never pick up a newer commit silently. If the PR head moves mid-session (author force-pushes or pushes a fixup), the session is invalidated - report the SHA change to the human and ask whether to restart against the new head. The session SHA appears in chat at the start of Step 1, in the Step 6 Summary, in every per-comment telemetry marker (`head-sha:`), and as an explicit input to the Critic in Step 7. If the Critic returns `Finding accuracy = INVALIDATED` (reason `session-sha-moved` or `session-sha-unreachable`), the session is dead -- Step 7 item 11 governs.
 - **Clean up after yourself - always.** Step 10 is mandatory at the end of every review, including aborted reviews and reviews that appeared to create nothing. You **must** probe the workspace (`git worktree list`, `git branch --list "pr-*"`, scratch-file scan) every time, remove every agent-attributable leftover, verify cleanup succeeded, and report the outcome to the user. Stale `pr-<number>` branches or `specs-pr-<number>` worktrees discovered after the fact are a constraint violation.
 
 ## Example Prompts

@@ -142,7 +142,7 @@ of the comment body. The marker carries per-finding metadata:
 <!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| override-reason: <required-when-critic=override>] -->
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -157,8 +157,12 @@ of the comment body. The marker carries per-finding metadata:
   `override` means a Critic `FAIL` was overridden by a human reviewer.
 - `head-sha` -- the PR head commit SHA the Critic re-fetched against;
   an auditable anchor for later debugging.
+- `downstream-rule` -- present when the finding's suggested fix interacts
+  with a conflict-aware required CI rule (for example, `R3017 GuidUsage`).
 - `override-reason` -- required only when `critic: override`;
-  must be a non-empty, specific justification of at least 20 characters.
+  must be a non-empty, specific justification of at least 20 characters and
+  include either an instruction-file line anchor or a verbatim counter-quote
+  from the cited rule.
 
 The marker is invisible in the rendered PR view but is present in the raw
 comment body returned by the GitHub API. It serves two purposes:
@@ -215,13 +219,24 @@ The agent builds an inventory of **all** existing review comment threads --
 including resolved, outdated, and collapsed ones -- and handles each finding
 according to these scenarios:
 
-| Scenario                                   | Condition                                                                                                   | What happens                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A -- Already covered**                   | Same rule, same file, same line                                                                             | Finding is skipped. No new comment posted.                                                                                                                                                                                                                                                                                    |
-| **B -- Line shifted (same author)**        | Same rule, but the code moved to a different line. The old comment was from the agent or the same engineer. | The outdated comment is **resolved** and a new comment is posted at the correct line, with a link back to the old thread.                                                                                                                                                                                                     |
-| **C -- Line shifted (different reviewer)** | Same rule, code moved, but the old comment was from a different human reviewer.                             | The agent **does not** resolve the other reviewer's comment or post a duplicate. Instead, it **adds a reply** to the existing thread noting the new line number, so the author and reviewer can find the right code.                                                                                                          |
-| **D -- No new findings**                   | Every finding is already covered by existing comments.                                                      | No new comments are posted. The agent reports: _"All findings are already covered by existing comments on the PR."_ It lists each matching existing thread with its **clickable comment URL** so the reviewer can navigate directly to verify.                                                                                |
-| **E -- Violation fixed**                   | An existing unresolved comment flags a violation that no longer exists in the latest code.                  | The agent reports which comments have been addressed -- each with its **clickable comment URL** so the reviewer can navigate and verify the fix -- and **proposes resolving** them, but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
+- **A -- Already covered:** same rule, same file, same line. The finding is
+  skipped and no new comment is posted.
+- **B -- Line shifted (agent-origin):** same rule, code moved, and the old
+  comment contains `posted-by: arm-api-reviewer-agent`. The outdated agent
+  comment is resolved and a replacement comment is posted at the correct line,
+  with a link back to the old thread.
+- **C -- Line shifted (human-origin):** same rule, code moved, but the old
+  comment does not contain the agent marker. The agent does not resolve the
+  human reviewer's comment or post a duplicate; it plans a reply to the
+  existing thread noting the new line number.
+- **D -- No new or replacement comments:** all findings are SKIP-COVERED or
+  REPLY-LINE-SHIFT. No new top-level or replacement inline comments are posted.
+  The agent lists each matching existing thread with its clickable comment URL.
+- **E -- Agent-origin violation fixed:** an existing unresolved agent comment
+  flags a violation that no longer exists in the latest code. The agent plans
+  to thank the author and resolve its own thread after overall plan approval.
+  Human-origin fixed threads are surfaced separately for explicit per-thread
+  consent before any reply or resolution.
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 
@@ -318,7 +333,7 @@ The agent **does**:
 
 The agent **does not**:
 
-- Modify specification files -- it is read-only
+- Modify specification files -- its review of API specs is read-only
 - Review local files or uncommitted changes -- it operates on PRs only
 - Generate SDKs
 - Author new TypeSpec projects from scratch
@@ -352,8 +367,7 @@ The agent **does not**:
 
 ### Evaluation Suite
 
-The agent is validated by an automated evaluation suite of 41 test stimuli
-across 15 eval files covering ARM resource structure, property design,
+The agent is validated by an automated evaluation suite covering ARM resource structure, property design,
 operations, breaking changes, suppressions (both `readme.md` and
 `suppressions.yaml`), example files, TypeSpec review, fast-path triage,
 report format, and more. The tests run against fixture files with seeded
