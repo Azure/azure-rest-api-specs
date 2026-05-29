@@ -153,32 +153,27 @@ interface ExpressRoutePorts {
     ArmResponse<GenerateExpressRoutePortsLOAResult>,
     Error = CloudError
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface ExpressRouteLinks {
   /**
    * Retrieves the specified ExpressRouteLink resource.
    */
   @tag("ExpressRouteLinks")
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}")
-  expressRouteLinksGet is ExpressRouteLinkOps.ActionSync<
-    ExpressRoutePort,
-    void,
-    Response = ArmResponse<ExpressRouteLink>,
-    OverrideErrorType = CloudError
-  >;
+  @autoRoute
+  get is ArmResourceRead<ExpressRouteLink, Error = CloudError>;
 
   /**
    * Retrieve the ExpressRouteLink sub-resources of the specified ExpressRoutePort resource.
    */
   @tag("ExpressRouteLinks")
-  @list
-  @get
-  @action("links")
   @autoRoute
-  expressRouteLinksList is ArmResourceActionSync<
-    ExpressRoutePort,
-    void,
-    ArmResponse<ExpressRouteLinkListResult>,
+  list is ArmResourceListByParent<
+    ExpressRouteLink,
+    Response = ArmResponse<ExpressRouteLinkListResult>,
     Error = CloudError
   >;
 }

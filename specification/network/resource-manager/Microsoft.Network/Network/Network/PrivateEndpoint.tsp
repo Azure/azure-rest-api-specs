@@ -99,7 +99,12 @@ interface PrivateEndpoints {
     Common.PrivateEndpoint,
     Error = Error
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface PrivateDnsZoneGroups {
   /**
    * Deletes the specified private dns zone group.
    */
@@ -124,27 +129,18 @@ interface PrivateEndpoints {
    * Gets the private dns zone group resource by specified private dns zone group name.
    */
   @tag("PrivateDnsZoneGroups")
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
-  privateDnsZoneGroupsGet is PrivateDnsZoneGroupOps.ActionSync<
-    Common.PrivateEndpoint,
-    void,
-    Response = ArmResponse<PrivateDnsZoneGroup>,
-    OverrideErrorType = CloudError
-  >;
+  @autoRoute
+  get is ArmResourceRead<PrivateDnsZoneGroup, Error = CloudError>;
 
   /**
    * Creates or updates a private dns zone group in the specified private endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateDnsZoneGroups")
-  @put
+  @autoRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
-  privateDnsZoneGroupsCreateOrUpdate is PrivateDnsZoneGroupOps.ActionAsync<
-    Common.PrivateEndpoint,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateDnsZoneGroup,
-    void,
     Response =
       | ArmResponse<PrivateDnsZoneGroup>
       | ArmResourceCreatedResponse<
@@ -152,21 +148,17 @@ interface PrivateEndpoints {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
-    OverrideErrorType = CloudError
+    Error = CloudError
   >;
 
   /**
    * Gets all private dns zone groups in a private endpoint.
    */
   @tag("PrivateDnsZoneGroups")
-  @list
-  @get
-  @action("privateDnsZoneGroups")
   @autoRoute
-  privateDnsZoneGroupsList is ArmResourceActionSync<
-    Common.PrivateEndpoint,
-    void,
-    ArmResponse<PrivateDnsZoneGroupListResult>,
+  list is ArmResourceListByParent<
+    PrivateDnsZoneGroup,
+    Response = ArmResponse<PrivateDnsZoneGroupListResult>,
     Error = CloudError
   >;
 }
@@ -178,6 +170,6 @@ interface PrivateEndpoints {
   "Parameters supplied to the create or update private endpoint operation."
 );
 @@doc(
-  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+  PrivateDnsZoneGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private dns zone group operation."
 );

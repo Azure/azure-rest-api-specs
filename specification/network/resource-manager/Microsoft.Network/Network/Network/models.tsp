@@ -11593,7 +11593,9 @@ model ExpressRouteCircuitReference {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-model ExpressRouteCrossConnectionPeering extends SubResource {
+@parentResource(ExpressRouteCrossConnection)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCrossConnectionPeering extends SubResourceModel {
   /**
    * Properties of the express route cross connection peering.
    */
@@ -11602,7 +11604,11 @@ model ExpressRouteCrossConnectionPeering extends SubResource {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("peeringName")
+  @segment("peerings")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -11894,7 +11900,9 @@ model ExpressRoutePortPropertiesFormat {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRouteLink")
-model ExpressRouteLink extends SubResource {
+@parentResource(ExpressRoutePort)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteLink extends SubResourceModel {
   /**
    * ExpressRouteLink properties.
    */
@@ -11903,7 +11911,11 @@ model ExpressRouteLink extends SubResource {
   /**
    * Name of child port resource that is unique among child port resources of the parent.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("linkName")
+  @segment("links")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -16987,12 +16999,17 @@ model PacketCaptureSettings {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
-model PacketCaptureResult {
+@parentResource(NetworkWatcher)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PacketCaptureResult extends SubResourceModel {
   /**
    * Name of the packet capture session.
    */
   @visibility(Lifecycle.Read)
-  name?: string;
+  @path
+  @key("packetCaptureName")
+  @segment("packetCaptures")
+  name: string;
 
   /**
    * ID of the packet capture operation.
@@ -18836,11 +18853,17 @@ model AvailablePrivateEndpointType {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model PrivateDnsZoneGroup extends SubResource {
+@parentResource(Common.PrivateEndpoint)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateDnsZoneGroup extends SubResourceModel {
   /**
    * Name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("privateDnsZoneGroupName")
+  @segment("privateDnsZoneGroups")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -19185,7 +19208,9 @@ model RouteFilterPropertiesFormat {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-model RouteFilterRule extends SubResource {
+@parentResource(RouteFilter)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RouteFilterRule extends SubResourceModel {
   /**
    * Properties of the route filter rule.
    */
@@ -19194,7 +19219,11 @@ model RouteFilterRule extends SubResource {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleName")
+  @segment("routeFilterRules")
+  name: string;
 
   /**
    * Resource location.
@@ -23085,7 +23114,9 @@ model VirtualHubRoute {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model VirtualHubRouteTableV2 extends SubResource {
+@parentResource(VirtualHub)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualHubRouteTableV2 extends SubResourceModel {
   /**
    * Properties of the virtual hub route table v2.
    */
@@ -23094,7 +23125,11 @@ model VirtualHubRouteTableV2 extends SubResource {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routeTableName")
+  @segment("routeTables")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -23312,7 +23347,9 @@ model ListRouteMapsResult is Azure.Core.Page<RouteMap>;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model HubVirtualNetworkConnection extends SubResource {
+@parentResource(VirtualHub)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model HubVirtualNetworkConnection extends SubResourceModel {
   /**
    * Properties of the hub virtual network connection.
    */
@@ -23321,7 +23358,11 @@ model HubVirtualNetworkConnection extends SubResource {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("hubVirtualNetworkConnections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -23442,7 +23483,9 @@ model VpnGatewayProperties {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model VpnConnection extends SubResource {
+@parentResource(VpnGateway)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VpnConnection extends SubResourceModel {
   /**
    * Properties of the VPN connection.
    */
@@ -23451,7 +23494,11 @@ model VpnConnection extends SubResource {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("vpnConnections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -24057,7 +24104,9 @@ model ExpressRouteGatewayPropertiesAutoScaleConfigurationBounds {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model ExpressRouteConnection extends SubResource {
+@parentResource(ExpressRouteGateway)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteConnection extends SubResourceModel {
   /**
    * Properties of the express route connection.
    */
@@ -24066,6 +24115,10 @@ model ExpressRouteConnection extends SubResource {
   /**
    * The name of the resource.
    */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("expressRouteConnections")
   name: string;
 }
 
@@ -24161,7 +24214,9 @@ model ExpressRouteConnectionList {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-model NetworkVirtualApplianceConnection extends SubResource {
+@parentResource(NetworkVirtualAppliance)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkVirtualApplianceConnection extends SubResourceModel {
   /**
    * Properties of the express route connection.
    */
@@ -24170,7 +24225,11 @@ model NetworkVirtualApplianceConnection extends SubResource {
   /**
    * The name of the resource.
    */
-  name?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("networkVirtualApplianceConnections")
+  name: string;
 }
 
 /**

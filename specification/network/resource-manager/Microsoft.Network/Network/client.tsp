@@ -48,6 +48,83 @@ namespace CombineClient;
   "javascript,python"
 );
 
+// C# naming mitigations for brownfield Network acronyms and shared model names.
+@@clientName(Common.ProvisioningState, "NetworkProvisioningState", "csharp");
+@@clientName(Common.IPAllocationMethod, "NetworkIPAllocationMethod", "csharp");
+@@clientName(Common.IPVersion, "NetworkIPVersion", "csharp");
+@@clientName(Common.ServiceEndpointPropertiesFormat, "ServiceEndpointProperties", "csharp");
+@@clientName(Common.IPConfiguration, "NetworkIPConfiguration", "csharp");
+@@clientName(Common.IPConfigurationProfile, "NetworkIPConfigurationProfile", "csharp");
+@@clientName(Common.PrivateLinkServiceConnection, "NetworkPrivateLinkServiceConnection", "csharp");
+@@clientName(Common.CustomDnsConfigPropertiesFormat, "CustomDnsConfigProperties", "csharp");
+@@clientName(Common.PrivateLinkServiceIpConfiguration, "PrivateLinkServiceIPConfiguration", "csharp");
+@@clientName(Common.IpTag, "IPTag", "csharp");
+@@clientName(Common.LoadBalancingRulePropertiesFormat, "LoadBalancingRuleProperties", "csharp");
+@@clientName(Common.PublicIpAddressDnsSettingsDomainNameLabelScope, "PublicIPAddressDnsSettingsDomainNameLabelScope", "csharp");
+@@clientName(Common.AddressSpace, "VirtualNetworkAddressSpace", "csharp");
+@@clientName(Common.TransportProtocol, "LoadBalancingTransportProtocol", "csharp");
+@@clientName(Common.Delegation, "ServiceDelegation", "csharp");
+@@clientName(Common.VirtualNetworkPrivateEndpointNetworkPolicies, "VirtualNetworkPrivateEndpointNetworkPolicy", "csharp");
+@@clientName(Common.VirtualNetworkPrivateLinkServiceNetworkPolicies, "VirtualNetworkPrivateLinkServiceNetworkPolicy", "csharp");
+@@clientName(Common.AccessMode, "PrivateLinkServiceAccessMode", "csharp");
+@@clientName(Common.SyncMode, "BackendAddressSyncMode", "csharp");
+@@clientName(Common.InboundNatPool, "LoadBalancerInboundNatPool", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig, "ApplicationGatewayEntraJwtValidationConfig", "csharp");
+@@clientName(Microsoft.Network.VerifierWorkspaceProperties, "NetworkVerifierWorkspaceProperties", "csharp");
+@@clientName(Microsoft.Network.HttpConfigurationMethod, "NetworkHttpConfigurationMethod", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfiguration, "ApplicationGatewayPrivateLinkIPConfiguration", "csharp");
+@@clientName(Microsoft.Network.AzureFirewallIPGroups, "AzureFirewallIPGroups", "csharp");
+@@clientName(Microsoft.Network.Ipv6ExpressRouteCircuitPeeringConfig, "IPv6ExpressRouteCircuitPeeringConfig", "csharp");
+@@clientName(Microsoft.Network.Ipv6CircuitConnectionConfig, "IPv6CircuitConnectionConfig", "csharp");
+@@clientName(Microsoft.Network.FirewallPolicySnat, "FirewallPolicySnat", "csharp");
+@@clientName(Microsoft.Network.DhGroup, "DHGroup", "csharp");
+@@clientName(Microsoft.Network.GroupMemberType, "NetworkGroupMemberType", "csharp");
+@@clientName(Microsoft.Network.ContainerNetworkInterfaceIpConfiguration, "ContainerNetworkInterfaceIPConfiguration", "csharp");
+@@clientName(Microsoft.Network.Access, "NetworkAccess", "csharp");
+@@clientName(Microsoft.Network.ConnectionStatus, "NetworkConnectionStatus", "csharp");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress, "NetworkIPConfigurationBgpPeeringAddress", "csharp");
+@@clientName(Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration, "GatewayCustomBgpIPAddressIPConfiguration", "csharp");
+@@clientName(Microsoft.Network.IpsecPolicy, "IPsecPolicy", "csharp");
+@@clientName(Microsoft.Network.VpnGatewayIpConfiguration, "VpnGatewayIPConfiguration", "csharp");
+@@clientName(Microsoft.Network.VirtualNetworkApplianceIpConfiguration, "VirtualNetworkApplianceIPConfiguration", "csharp");
+@@clientName(Microsoft.Network.UsageUnit, "NetworkUsageUnit", "csharp");
+@@clientName(Microsoft.Network.UsageName, "NetworkUsageName", "csharp");
+@@clientName(Microsoft.Network.QosIpRange, "QosIPRange", "csharp");
+@@clientName(Microsoft.Network.BGPCommunity, "BgpCommunity", "csharp");
+@@clientName(Microsoft.Network.ConnectionSharedKeyResult, "VpnLinkConnectionSharedKey", "csharp");
+@@clientName(Microsoft.Network.SharedKeyProperties, "VpnLinkConnectionSharedKeyProperties", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayTierTypes, "ApplicationGatewayTierType", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayWafRuleStateTypes, "ApplicationGatewayWafRuleStateType", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayWafRuleActionTypes, "ApplicationGatewayWafRuleActionType", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayWafRuleSensitivityTypes, "ApplicationGatewayWafRuleSensitivityType", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayRuleSetStatusOptions, "ApplicationGatewayRuleSetStatusOption", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayClientRevocationOptions, "ApplicationGatewayClientRevocationOption", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayClientAuthVerificationModes, "ApplicationGatewayClientAuthVerificationMode", "csharp");
+@@clientName(Microsoft.Network.IPRule, "BastionHostIPRule", "csharp");
+@@clientName(Microsoft.Network.ExplicitProxy, "FirewallPolicyExplicitProxy", "csharp");
+@@clientName(Microsoft.Network.IntentContent, "AnalysisRunIntentContent", "csharp");
+@@clientName(Microsoft.Network.NspProvisioningState, "NetworkSecurityPerimeterProvisioningState", "csharp");
+@@clientName(Microsoft.Network.NspLinkProvisioningState, "NetworkSecurityPerimeterLinkProvisioningState", "csharp");
+@@clientName(Microsoft.Network.NspLinkStatus, "NetworkSecurityPerimeterLinkStatus", "csharp");
+@@clientName(Microsoft.Network.HttpHeader, "NetworkWatcherHttpHeader", "csharp");
+@@clientName(Microsoft.Network.PreferredIPVersion, "TestEvalPreferredIPVersion", "csharp");
+@@clientName(Microsoft.Network.AdminState, "ExpressRouteGatewayAdminState", "csharp");
+@@clientName(Microsoft.Network.ResiliencyModel, "ExpressRouteGatewayResiliencyModel", "csharp");
+@@clientName(Microsoft.Network.Direction, "NetworkTrafficDirection", "csharp");
+@@clientName(Microsoft.Network.ActionType, "RuleMatchActionType", "csharp");
+@@clientName(Microsoft.Network.SensitivityType, "ManagedRuleSensitivityType", "csharp");
+@@clientName(Microsoft.Network.Criterion, "RouteCriterion", "csharp");
+@@clientName(Microsoft.Network.RouteMapActionType, "RouteMapAction", "csharp");
+@@clientName(Microsoft.Network.NextStep, "RouteMapNextStepBehavior", "csharp");
+@@clientName(Microsoft.Network.SlotType, "SwapSlotType", "csharp");
+@@clientName(Microsoft.Network.QosDefinition, "DscpQosDefinition", "csharp");
+@@clientName(Microsoft.Network.AccessRuleDirection, "NetworkSecurityPerimeterAccessRuleDirection", "csharp");
+@@clientName(Microsoft.Network.PerimeterBasedAccessRule, "NetworkSecurityPerimeterBasedAccessRule", "csharp");
+@@clientName(Microsoft.Network.AssociationAccessMode, "NetworkSecurityPerimeterAssociationAccessMode", "csharp");
+@@clientName(Microsoft.Network.DelegationProperties, "VirtualApplianceDelegationProperties", "csharp");
+@@clientName(Microsoft.Network.ConnectivityHop, "ConnectivityHopInfo", "csharp");
+@@clientName(Microsoft.Network.ConfigurationGroup, "NetworkConfigurationGroup", "csharp");
+
 // Java naming mitigations
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.hostName,
@@ -1831,6 +1908,7 @@ op replaceprivateDnsZoneGroupsList(
    */
   @path
   @segment("privateEndpoints")
+  @key
   privateEndpointName: string,
 
   /**
@@ -1849,12 +1927,6 @@ op replaceprivateDnsZoneGroupsList(
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult>
   | Common.CloudError;
-
-@@override(
-  Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
-  replaceprivateDnsZoneGroupsList,
-  "go,python,java"
-);
 
 // Java: restore Ip casing for model names (TypeSpec uses uppercase IP)
 @@clientName(Microsoft.Network.HubIPAddresses, "HubIpAddresses", "java");
@@ -2285,22 +2357,22 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "THREE", "python");
 
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sGet,
+  VirtualHubRouteTableV2s.get,
   "VirtualHubRouteTableV2S",
   "python"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  VirtualHubRouteTableV2s.createOrUpdate,
   "VirtualHubRouteTableV2S",
   "python"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sDelete,
+  VirtualHubRouteTableV2s.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2S",
   "python"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sList,
+  VirtualHubRouteTableV2s.list,
   "VirtualHubRouteTableV2S",
   "python"
 );
@@ -2536,22 +2608,22 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sGet,
+  VirtualHubRouteTableV2s.get,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  VirtualHubRouteTableV2s.createOrUpdate,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sDelete,
+  VirtualHubRouteTableV2s.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sList,
+  VirtualHubRouteTableV2s.list,
   "VirtualHubRouteTableV2S",
   "java"
 );
@@ -2575,3 +2647,28 @@ op replaceprivateDnsZoneGroupsList(
   CommonTypes.ProxyResource,
   "java"
 );
+
+// C# naming mitigations for MPG migration hierarchy parity.
+@@clientName(Microsoft.Network.ConnectionMonitor, "ConnectionMonitorContent", "csharp");
+@@clientName(Microsoft.Network.ConnectionMonitorResult, "ConnectionMonitor", "csharp");
+@@clientName(Microsoft.Network.PacketCapture, "PacketCaptureContent", "csharp");
+@@clientName(Microsoft.Network.PacketCaptureResult, "PacketCapture", "csharp");
+@@clientName(Microsoft.Network.AdminRuleCollection, "AdminRuleGroup", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayWafDynamicManifestResult, "ApplicationGatewayWafDynamicManifest", "csharp");
+@@clientName(Microsoft.Network.SwapResource, "CloudServiceSwap", "csharp");
+@@clientName(Microsoft.Network.StaticMember, "NetworkGroupStaticMember", "csharp");
+@@clientName(Microsoft.Network.RoutingRuleCollection, "NetworkManagerRoutingRules", "csharp");
+@@clientName(Microsoft.Network.RoutingRule, "NetworkManagerRoutingRule", "csharp");
+@@clientName(Microsoft.Network.SecurityUserConfiguration, "NetworkManagerSecurityUserConfiguration", "csharp");
+@@clientName(Microsoft.Network.SecurityUserRuleCollection, "NetworkManagerSecurityUserRules", "csharp");
+@@clientName(Microsoft.Network.SecurityUserRule, "NetworkManagerSecurityUserRule", "csharp");
+@@clientName(Common.PrivateEndpointConnection, "NetworkPrivateEndpointConnection", "csharp");
+@@clientName(Microsoft.Network.NspAssociation, "NetworkSecurityPerimeterAssociation", "csharp");
+@@clientName(Microsoft.Network.NspLinkReference, "NetworkSecurityPerimeterLinkReference", "csharp");
+@@clientName(Microsoft.Network.NspLink, "NetworkSecurityPerimeterLink", "csharp");
+@@clientName(Microsoft.Network.NspLoggingConfiguration, "NetworkSecurityPerimeterLoggingConfiguration", "csharp");
+@@clientName(Microsoft.Network.NspProfile, "NetworkSecurityPerimeterProfile", "csharp");
+@@clientName(Microsoft.Network.NspAccessRule, "NetworkSecurityPerimeterAccessRule", "csharp");
+@@clientName(Microsoft.Network.VerifierWorkspace, "NetworkVerifierWorkspace", "csharp");
+@@clientName(Microsoft.Network.SignaturesOverrides, "PolicySignaturesOverridesForIdps", "csharp");
+@@clientName(Microsoft.Network.ConnectionSharedKeyResult, "VpnLinkConnectionSharedKey", "csharp");

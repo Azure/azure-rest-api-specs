@@ -349,7 +349,12 @@ interface NetworkWatchers {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface PacketCaptures {
   /**
    * Create and start a packet capture on the specified VM.
    */
@@ -358,7 +363,7 @@ interface NetworkWatchers {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
-  create is PacketCaptureOps.ActionAsync<
+  createOrUpdate is PacketCaptureOps.ActionAsync<
     NetworkWatcher,
     PacketCapture,
     void,
@@ -374,27 +379,18 @@ interface NetworkWatchers {
    * Gets a packet capture session by name.
    */
   @tag("PacketCaptures")
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
-  packetCapturesGet is PacketCaptureOps.ActionSync<
-    NetworkWatcher,
-    void,
-    Response = ArmResponse<PacketCaptureResult>,
-    OverrideErrorType = ErrorResponse
-  >;
+  @autoRoute
+  get is ArmResourceRead<PacketCaptureResult, Error = ErrorResponse>;
 
   /**
    * Deletes the specified packet capture session.
    */
   @tag("PacketCaptures")
-  @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
-  packetCapturesDelete is PacketCaptureOps.ActionAsync<
-    NetworkWatcher,
-    void,
-    void,
+  @autoRoute
+  delete is ArmResourceDeleteWithoutOkAsync<
+    PacketCaptureResult,
     Response = ArmAcceptedLroResponse | NoContentResponse,
-    OverrideErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
@@ -404,7 +400,7 @@ interface NetworkWatchers {
   @action("stop")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop")
   stop is PacketCaptureOps.ActionAsync<
-    NetworkWatcher,
+    PacketCaptureResult,
     void,
     Result = void,
     Response =
@@ -424,7 +420,7 @@ interface NetworkWatchers {
   @action("queryStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus")
   getStatus is PacketCaptureOps.ActionAsync<
-    NetworkWatcher,
+    PacketCaptureResult,
     void,
     Result = void,
     Response =
@@ -441,13 +437,10 @@ interface NetworkWatchers {
    * Lists all packet capture sessions within the specified resource group.
    */
   @tag("PacketCaptures")
-  @list
-  @get
-  @action("packetCaptures")
-  packetCapturesList is ArmResourceActionSync<
-    NetworkWatcher,
-    void,
-    ArmResponse<PacketCaptureListResult>,
+  @autoRoute
+  list is ArmResourceListByParent<
+    PacketCaptureResult,
+    Response = ArmResponse<PacketCaptureListResult>,
     Error = ErrorResponse
   >;
 }
@@ -511,6 +504,6 @@ interface NetworkWatchers {
   "Parameters to get network configuration diagnostic."
 );
 @@doc(
-  NetworkWatchers.create::parameters.body,
+  PacketCaptures.createOrUpdate::parameters.body,
   "Parameters that define the create packet capture operation."
 );

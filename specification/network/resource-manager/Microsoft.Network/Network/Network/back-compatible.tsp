@@ -435,32 +435,32 @@ using TypeSpec.Versioning;
   "parameters"
 );
 @@clientLocation(
-  PrivateEndpoints.privateDnsZoneGroupsDelete,
+  PrivateDnsZoneGroups.privateDnsZoneGroupsDelete,
   "PrivateDnsZoneGroups"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsDelete, "Delete");
+@@clientName(PrivateDnsZoneGroups.privateDnsZoneGroupsDelete, "Delete");
 @@clientLocation(
-  PrivateEndpoints.privateDnsZoneGroupsGet,
+  PrivateDnsZoneGroups.get,
   "PrivateDnsZoneGroups"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsGet, "Get");
+@@clientName(PrivateDnsZoneGroups.get, "Get");
 @@clientLocation(
-  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
+  PrivateDnsZoneGroups.createOrUpdate,
   "PrivateDnsZoneGroups"
 );
 @@clientName(
-  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
+  PrivateDnsZoneGroups.createOrUpdate,
   "CreateOrUpdate"
 );
 @@clientName(
-  PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
+  PrivateDnsZoneGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(
-  PrivateEndpoints.privateDnsZoneGroupsList,
+  PrivateDnsZoneGroups.list,
   "PrivateDnsZoneGroups"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsList, "List");
+@@clientName(PrivateDnsZoneGroups.list, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpoint.properties);
 
@@ -861,10 +861,10 @@ using TypeSpec.Versioning;
 );
 @@clientName(ExpressRoutePorts.updateTags::parameters.properties, "parameters");
 @@clientName(ExpressRoutePorts.generateLOA::parameters.body, "request");
-@@clientLocation(ExpressRoutePorts.expressRouteLinksGet, "ExpressRouteLinks");
-@@clientName(ExpressRoutePorts.expressRouteLinksGet, "Get");
-@@clientLocation(ExpressRoutePorts.expressRouteLinksList, "ExpressRouteLinks");
-@@clientName(ExpressRoutePorts.expressRouteLinksList, "List");
+@@clientLocation(ExpressRouteLinks.get, "ExpressRouteLinks");
+@@clientName(ExpressRouteLinks.get, "Get");
+@@clientLocation(ExpressRouteLinks.list, "ExpressRouteLinks");
+@@clientName(ExpressRouteLinks.list, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRoutePort.properties);
 
@@ -1267,23 +1267,23 @@ using TypeSpec.Versioning;
   "request"
 );
 @@clientLocation(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
+  NetworkVirtualApplianceConnections.createOrUpdate,
   NetworkVirtualApplianceConnections
 );
 @@clientName(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
+  NetworkVirtualApplianceConnections.createOrUpdate,
   "CreateOrUpdate"
 );
 @@clientName(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
+  NetworkVirtualApplianceConnections.createOrUpdate::parameters.resource,
   "NetworkVirtualApplianceConnectionParameters"
 );
 @@clientLocation(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
+  NetworkVirtualApplianceConnections.get,
   NetworkVirtualApplianceConnections
 );
 @@clientName(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
+  NetworkVirtualApplianceConnections.get,
   "Get"
 );
 @@clientLocation(
@@ -1295,11 +1295,11 @@ using TypeSpec.Versioning;
   "Delete"
 );
 @@clientLocation(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
+  NetworkVirtualApplianceConnections.list,
   NetworkVirtualApplianceConnections
 );
 @@clientName(
-  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
+  NetworkVirtualApplianceConnections.list,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1358,16 +1358,16 @@ using TypeSpec.Versioning;
   NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
   "parameters"
 );
-@@clientLocation(NetworkWatchers.create, "PacketCaptures");
-@@clientName(NetworkWatchers.create::parameters.body, "parameters");
-@@clientLocation(NetworkWatchers.packetCapturesGet, "PacketCaptures");
-@@clientName(NetworkWatchers.packetCapturesGet, "Get");
-@@clientLocation(NetworkWatchers.packetCapturesDelete, "PacketCaptures");
-@@clientName(NetworkWatchers.packetCapturesDelete, "Delete");
-@@clientLocation(NetworkWatchers.stop, "PacketCaptures");
-@@clientLocation(NetworkWatchers.getStatus, "PacketCaptures");
-@@clientLocation(NetworkWatchers.packetCapturesList, "PacketCaptures");
-@@clientName(NetworkWatchers.packetCapturesList, "List");
+@@clientLocation(PacketCaptures.createOrUpdate, "PacketCaptures");
+@@clientName(PacketCaptures.createOrUpdate::parameters.body, "parameters");
+@@clientLocation(PacketCaptures.get, "PacketCaptures");
+@@clientName(PacketCaptures.get, "Get");
+@@clientLocation(PacketCaptures.delete, "PacketCaptures");
+@@clientName(PacketCaptures.delete, "Delete");
+@@clientLocation(PacketCaptures.stop, "PacketCaptures");
+@@clientLocation(PacketCaptures.getStatus, "PacketCaptures");
+@@clientLocation(PacketCaptures.list, "PacketCaptures");
+@@clientName(PacketCaptures.list, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkWatcher.properties);
 
@@ -1401,20 +1401,20 @@ using TypeSpec.Versioning;
   "routeFilterParameters"
 );
 @@clientName(RouteFilters.updateTags::parameters.properties, "parameters");
-@@clientLocation(RouteFilters.routeFilterRulesDelete, "RouteFilterRules");
-@@clientName(RouteFilters.routeFilterRulesDelete, "Delete");
-@@clientLocation(RouteFilters.routeFilterRulesGet, "RouteFilterRules");
-@@clientName(RouteFilters.routeFilterRulesGet, "Get");
+@@clientLocation(RouteFilterRules.delete, "RouteFilterRules");
+@@clientName(RouteFilterRules.delete, "Delete");
+@@clientLocation(RouteFilterRules.get, "RouteFilterRules");
+@@clientName(RouteFilterRules.get, "Get");
 @@clientLocation(
-  RouteFilters.routeFilterRulesCreateOrUpdate,
+  RouteFilterRules.createOrUpdate,
   "RouteFilterRules"
 );
-@@clientName(RouteFilters.routeFilterRulesCreateOrUpdate, "CreateOrUpdate");
+@@clientName(RouteFilterRules.createOrUpdate, "CreateOrUpdate");
 @@clientName(
-  RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
+  RouteFilterRules.createOrUpdate::parameters.resource,
   "routeFilterRuleParameters"
 );
-@@clientLocation(RouteFilters.listByRouteFilter, "RouteFilterRules");
+@@clientLocation(RouteFilterRules.list, "RouteFilterRules");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RouteFilter.properties);
 
@@ -1624,7 +1624,7 @@ using TypeSpec.Versioning;
   P2SVpnGateways.updateTags::parameters.properties,
   "p2SVpnGatewayParameters"
 );
-@@clientLocation(P2SVpnGateways.reset, "P2sVpnGateways", "javascript, go");
+@@clientLocation(P2SVpnGateways.reset, "P2sVpnGateways", "!java,!python");
 @@clientLocation(P2SVpnGateways.delete, "P2sVpnGateways", "!java,!python");
 @@clientLocation(
   P2SVpnGateways.listByResourceGroup,
@@ -1708,59 +1708,59 @@ using TypeSpec.Versioning;
   "getOutboundRoutesParameters"
 );
 @@clientLocation(
-  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
+  HubVirtualNetworkConnections.createOrUpdate,
   "HubVirtualNetworkConnections"
 );
 @@clientName(
-  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
+  HubVirtualNetworkConnections.createOrUpdate,
   "CreateOrUpdate"
 );
 @@clientName(
-  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
+  HubVirtualNetworkConnections.createOrUpdate::parameters.resource,
   "hubVirtualNetworkConnectionParameters"
 );
 @@clientLocation(
-  VirtualHubs.hubVirtualNetworkConnectionsDelete,
+  HubVirtualNetworkConnections.hubVirtualNetworkConnectionsDelete,
   "HubVirtualNetworkConnections"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsDelete, "Delete");
+@@clientName(HubVirtualNetworkConnections.hubVirtualNetworkConnectionsDelete, "Delete");
 @@clientLocation(
-  VirtualHubs.hubVirtualNetworkConnectionsGet,
+  HubVirtualNetworkConnections.get,
   "HubVirtualNetworkConnections"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsGet, "Get");
+@@clientName(HubVirtualNetworkConnections.get, "Get");
 @@clientLocation(
-  VirtualHubs.hubVirtualNetworkConnectionsList,
+  HubVirtualNetworkConnections.list,
   "HubVirtualNetworkConnections"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsList, "List");
+@@clientName(HubVirtualNetworkConnections.list, "List");
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sGet,
+  VirtualHubRouteTableV2s.get,
   "VirtualHubRouteTableV2s"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sGet, "Get");
+@@clientName(VirtualHubRouteTableV2s.get, "Get");
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  VirtualHubRouteTableV2s.createOrUpdate,
   "VirtualHubRouteTableV2s"
 );
 @@clientName(
-  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  VirtualHubRouteTableV2s.createOrUpdate,
   "CreateOrUpdate"
 );
 @@clientName(
-  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
+  VirtualHubRouteTableV2s.createOrUpdate::parameters.resource,
   "virtualHubRouteTableV2Parameters"
 );
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sDelete,
+  VirtualHubRouteTableV2s.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2s"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sDelete, "Delete");
+@@clientName(VirtualHubRouteTableV2s.virtualHubRouteTableV2sDelete, "Delete");
 @@clientLocation(
-  VirtualHubs.virtualHubRouteTableV2sList,
+  VirtualHubRouteTableV2s.list,
   "VirtualHubRouteTableV2s"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sList, "List");
+@@clientName(VirtualHubRouteTableV2s.list, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualHub.properties);
 
@@ -1781,35 +1781,34 @@ using TypeSpec.Versioning;
 );
 @@clientName(VpnGateways.startPacketCapture::parameters.body, "parameters");
 @@clientName(VpnGateways.stopPacketCapture::parameters.body, "parameters");
-@@clientLocation(VpnGateways.vpnConnectionsGet, "VpnConnections");
-@@clientName(VpnGateways.vpnConnectionsGet, "Get");
-@@clientLocation(VpnGateways.vpnConnectionsCreateOrUpdate, "VpnConnections");
-@@clientName(VpnGateways.vpnConnectionsCreateOrUpdate, "CreateOrUpdate");
+@@clientLocation(VpnConnections.get, "VpnConnections");
+@@clientName(VpnConnections.get, "Get");
+@@clientLocation(VpnConnections.createOrUpdate, "VpnConnections");
+@@clientName(VpnConnections.createOrUpdate, "CreateOrUpdate");
 @@clientName(
-  VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
+  VpnConnections.createOrUpdate::parameters.resource,
   "VpnConnectionParameters"
 );
-@@clientLocation(VpnGateways.vpnConnectionsDelete, "VpnConnections");
-@@clientName(VpnGateways.vpnConnectionsDelete, "Delete");
+@@clientLocation(VpnConnections.vpnConnectionsDelete, "VpnConnections");
+@@clientName(VpnConnections.vpnConnectionsDelete, "Delete");
 @@clientLocation(
-  VpnGateways.vpnConnectionsStartPacketCapture,
+  VpnConnections.startPacketCapture,
   "VpnConnections"
 );
 @@clientName(
-  VpnGateways.vpnConnectionsStartPacketCapture,
+  VpnConnections.startPacketCapture,
   "StartPacketCapture"
 );
 @@clientName(
-  VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,
+  VpnConnections.startPacketCapture::parameters.body,
   "parameters"
 );
-@@clientLocation(VpnGateways.vpnConnectionsStopPacketCapture, "VpnConnections");
-@@clientName(VpnGateways.vpnConnectionsStopPacketCapture, "StopPacketCapture");
+@@clientLocation(VpnConnections.stopPacketCapture, "VpnConnections");
+@@clientName(VpnConnections.stopPacketCapture, "StopPacketCapture");
 @@clientName(
-  VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
+  VpnConnections.stopPacketCapture::parameters.body,
   "parameters"
 );
-@@clientLocation(VpnGateways.listByVpnGateway, "VpnConnections");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VpnGateway.properties);
 
@@ -1863,28 +1862,28 @@ using TypeSpec.Versioning;
   "expressRouteGatewayParameters"
 );
 @@clientLocation(
-  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
+  ExpressRouteConnections.createOrUpdate,
   "ExpressRouteConnections"
 );
 @@clientName(
-  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
+  ExpressRouteConnections.createOrUpdate,
   "CreateOrUpdate"
 );
 @@clientName(
-  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
+  ExpressRouteConnections.createOrUpdate::parameters.resource,
   "putExpressRouteConnectionParameters"
 );
 @@clientLocation(
-  ExpressRouteGateways.expressRouteConnectionsGet,
+  ExpressRouteConnections.get,
   "ExpressRouteConnections"
 );
-@@clientName(ExpressRouteGateways.expressRouteConnectionsGet, "Get");
+@@clientName(ExpressRouteConnections.get, "Get");
 @@clientLocation(
-  ExpressRouteGateways.expressRouteConnectionsDelete,
+  ExpressRouteConnections.expressRouteConnectionsDelete,
   "ExpressRouteConnections"
 );
-@@clientName(ExpressRouteGateways.expressRouteConnectionsDelete, "Delete");
-@@clientLocation(ExpressRouteGateways.list, "ExpressRouteConnections");
+@@clientName(ExpressRouteConnections.expressRouteConnectionsDelete, "Delete");
+@@clientLocation(ExpressRouteConnections.list, "ExpressRouteConnections");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpressRouteGateway.properties);
 

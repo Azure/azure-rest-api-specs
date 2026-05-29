@@ -194,18 +194,20 @@ interface VirtualHubs {
     EffectiveRouteMapRouteList,
     Error = CloudError
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface HubVirtualNetworkConnections {
   /**
    * Creates a hub virtual network connection if it doesn't exist else updates the existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @put
+  @autoRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
-  hubVirtualNetworkConnectionsCreateOrUpdate is HubVirtualNetworkConnectionOps.ActionAsync<
-    VirtualHub,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     HubVirtualNetworkConnection,
-    void,
     Response =
       | ArmResponse<HubVirtualNetworkConnection>
       | ArmResourceCreatedResponse<
@@ -213,7 +215,7 @@ interface VirtualHubs {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
-    OverrideErrorType = CloudError
+    Error = CloudError
   >;
 
   /**
@@ -238,52 +240,38 @@ interface VirtualHubs {
   /**
    * Retrieves the details of a HubVirtualNetworkConnection.
    */
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
-  hubVirtualNetworkConnectionsGet is HubVirtualNetworkConnectionOps.ActionSync<
-    VirtualHub,
-    void,
-    Response = ArmResponse<HubVirtualNetworkConnection>,
-    OverrideErrorType = CloudError
-  >;
+  @autoRoute
+  get is ArmResourceRead<HubVirtualNetworkConnection, Error = CloudError>;
 
   /**
    * Retrieves the details of all HubVirtualNetworkConnections.
    */
-  @list
-  @get
   @autoRoute
-  @action("hubVirtualNetworkConnections")
-  hubVirtualNetworkConnectionsList is ArmResourceActionSync<
-    VirtualHub,
-    void,
-    ArmResponse<ListHubVirtualNetworkConnectionsResult>,
+  list is ArmResourceListByParent<
+    HubVirtualNetworkConnection,
+    Response = ArmResponse<ListHubVirtualNetworkConnectionsResult>,
     Error = CloudError
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface VirtualHubRouteTableV2s {
   /**
    * Retrieves the details of a VirtualHubRouteTableV2.
    */
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}")
-  virtualHubRouteTableV2sGet is VirtualHubRouteTableV2Ops.ActionSync<
-    VirtualHub,
-    void,
-    Response = ArmResponse<VirtualHubRouteTableV2>,
-    OverrideErrorType = Error
-  >;
+  @autoRoute
+  get is ArmResourceRead<VirtualHubRouteTableV2, Error = Error>;
 
   /**
    * Creates a VirtualHubRouteTableV2 resource if it doesn't exist else updates the existing VirtualHubRouteTableV2.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @put
+  @autoRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}")
-  virtualHubRouteTableV2sCreateOrUpdate is VirtualHubRouteTableV2Ops.ActionAsync<
-    VirtualHub,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualHubRouteTableV2,
-    void,
     Response =
       | ArmResponse<VirtualHubRouteTableV2>
       | ArmResourceCreatedResponse<
@@ -291,7 +279,7 @@ interface VirtualHubs {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
-    OverrideErrorType = Error
+    Error = Error
   >;
 
   /**
@@ -315,13 +303,10 @@ interface VirtualHubs {
   /**
    * Retrieves the details of all VirtualHubRouteTableV2s.
    */
-  @list
-  @get
-  @action("routeTables")
-  virtualHubRouteTableV2sList is ArmResourceActionSync<
-    VirtualHub,
-    void,
-    ArmResponse<ListVirtualHubRouteTableV2SResult>,
+  @autoRoute
+  list is ArmResourceListByParent<
+    VirtualHubRouteTableV2,
+    Response = ArmResponse<ListVirtualHubRouteTableV2SResult>,
     Error = CloudError
   >;
 }
@@ -349,10 +334,10 @@ interface VirtualHubs {
   "Parameters supplied to get the outbound routes for a connection resource."
 );
 @@doc(
-  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
+  HubVirtualNetworkConnections.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a hub virtual network connection."
 );
 @@doc(
-  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
+  VirtualHubRouteTableV2s.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VirtualHubRouteTableV2."
 );

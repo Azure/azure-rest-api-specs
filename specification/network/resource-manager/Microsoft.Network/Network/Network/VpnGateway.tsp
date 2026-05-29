@@ -207,29 +207,26 @@ interface VpnGateways {
     Error = CloudError
   >;
 
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+interface VpnConnections {
   /**
    * Retrieves the details of a vpn connection.
    */
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
-  vpnConnectionsGet is VpnConnectionOps.ActionSync<
-    VpnGateway,
-    void,
-    Response = ArmResponse<VpnConnection>,
-    OverrideErrorType = CloudError
-  >;
+  @autoRoute
+  get is ArmResourceRead<VpnConnection, Error = CloudError>;
 
   /**
    * Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @put
+  @autoRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
-  vpnConnectionsCreateOrUpdate is VpnConnectionOps.ActionAsync<
-    VpnGateway,
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VpnConnection,
-    void,
     Response =
       | ArmResponse<VpnConnection>
       | ArmResourceCreatedResponse<
@@ -237,7 +234,7 @@ interface VpnGateways {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
-    OverrideErrorType = CloudError
+    Error = CloudError
   >;
 
   /**
@@ -264,8 +261,8 @@ interface VpnGateways {
    */
   @action("startpacketcapture")
   @autoRoute
-  vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
-    VpnGateway,
+  startPacketCapture is VpnConnection2Ops.ActionAsync<
+    VpnConnection,
     VpnConnectionPacketCaptureStartParameters,
     {
       @body body: stringApplicationJson;
@@ -281,8 +278,8 @@ interface VpnGateways {
    */
   @action("stoppacketcapture")
   @autoRoute
-  vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
-    VpnGateway,
+  stopPacketCapture is VpnConnection2Ops.ActionAsync<
+    VpnConnection,
     VpnConnectionPacketCaptureStopParameters,
     {
       @body body: stringApplicationJson;
@@ -296,14 +293,10 @@ interface VpnGateways {
   /**
    * Retrieves all vpn connections for a particular virtual wan vpn gateway.
    */
-  @list
-  @get
-  @action("vpnConnections")
   @autoRoute
-  listByVpnGateway is ArmResourceActionSync<
-    VpnGateway,
-    void,
-    ArmResponse<ListVpnConnectionsResult>,
+  list is ArmResourceListByParent<
+    VpnConnection,
+    Response = ArmResponse<ListVpnConnectionsResult>,
     Error = CloudError
   >;
 }
@@ -327,14 +320,14 @@ interface VpnGateways {
   "Vpn gateway packet capture parameters supplied to stop packet capture on vpn gateway."
 );
 @@doc(
-  VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
+  VpnConnections.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a VPN Connection."
 );
 @@doc(
-  VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,
+  VpnConnections.startPacketCapture::parameters.body,
   "Vpn Connection packet capture parameters supplied to start packet capture on gateway connection."
 );
 @@doc(
-  VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
+  VpnConnections.stopPacketCapture::parameters.body,
   "Vpn Connection packet capture parameters supplied to stop packet capture on gateway connection."
 );
