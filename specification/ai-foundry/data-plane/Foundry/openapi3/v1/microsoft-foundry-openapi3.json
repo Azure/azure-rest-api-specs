@@ -25138,12 +25138,12 @@
       "ModelPendingUploadResponse": {
         "type": "object",
         "required": [
-          "blobReference",
+          "blobReferenceForConsumption",
           "pendingUploadId",
           "pendingUploadType"
         ],
         "properties": {
-          "blobReference": {
+          "blobReferenceForConsumption": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/BlobReference"
@@ -48200,11 +48200,7 @@
         "type": "object",
         "properties": {
           "createdAt": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
+            "type": "string",
             "description": "Timestamp of resource creation"
           },
           "createdBy": {
@@ -48216,11 +48212,7 @@
             "description": "Type of identity that created the resource"
           },
           "lastModifiedAt": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
+            "type": "string",
             "description": "Timestamp of last resource modification"
           }
         },

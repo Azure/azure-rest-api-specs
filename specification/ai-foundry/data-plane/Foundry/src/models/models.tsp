@@ -121,13 +121,21 @@ model ModelVersion {
   ...AssetBase;
 }
 
-@@visibility(ModelVersion.description, Lifecycle.Create, Lifecycle.Update, Lifecycle.Read);
-@@visibility(ModelVersion.tags, Lifecycle.Create, Lifecycle.Update, Lifecycle.Read);
+@@visibility(ModelVersion.description,
+  Lifecycle.Create,
+  Lifecycle.Update,
+  Lifecycle.Read
+);
+@@visibility(ModelVersion.tags,
+  Lifecycle.Create,
+  Lifecycle.Update,
+  Lifecycle.Read
+);
 
 @doc("System metadata for a resource")
 model SystemDataV3 {
   @doc("Timestamp of resource creation")
-  createdAt?: FoundryTimestamp;
+  createdAt?: string;
 
   @doc("Identity that created the resource")
   createdBy?: string;
@@ -136,7 +144,7 @@ model SystemDataV3 {
   createdByType?: string;
 
   @doc("Timestamp of last resource modification")
-  lastModifiedAt?: FoundryTimestamp;
+  lastModifiedAt?: string;
 }
 
 @doc("Source information for the model")
@@ -196,7 +204,7 @@ model ModelPendingUploadRequest {
 @doc("Represents the response for a model pending upload request.")
 model ModelPendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
-  blobReference: BlobReference;
+  blobReferenceForConsumption: BlobReference;
 
   @doc("ID for this upload request.")
   pendingUploadId: string;

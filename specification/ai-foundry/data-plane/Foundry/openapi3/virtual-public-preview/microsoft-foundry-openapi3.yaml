@@ -19928,11 +19928,11 @@ components:
     ModelPendingUploadResponse:
       type: object
       required:
-        - blobReference
+        - blobReferenceForConsumption
         - pendingUploadId
         - pendingUploadType
       properties:
-        blobReference:
+        blobReferenceForConsumption:
           allOf:
             - $ref: '#/components/schemas/BlobReference'
           description: Container-level read, write, list SAS.
@@ -37056,8 +37056,7 @@ components:
       type: object
       properties:
         createdAt:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
+          type: string
           description: Timestamp of resource creation
         createdBy:
           type: string
@@ -37066,8 +37065,7 @@ components:
           type: string
           description: Type of identity that created the resource
         lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
+          type: string
           description: Timestamp of last resource modification
       description: System metadata for a resource
     SystemMessage:
