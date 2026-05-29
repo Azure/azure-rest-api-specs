@@ -484,21 +484,6 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 
-model StaticRoutePatchPropertiesReplacement {
-  prefix: string;
-  nextHop: string[];
-}
-@@alternateType(
-  StaticRoutePatchProperties,
-  StaticRoutePatchPropertiesReplacement,
-  "csharp"
-);
-@@clientName(
-  StaticRoutePatchPropertiesReplacement,
-  "StaticRoutePatchProperties",
-  "csharp"
-);
-
 model TerminalServerPatchConfigurationReplacement {
   username?: string;
   password?: string;
@@ -1548,11 +1533,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 @@usage(BgpConfiguration, Usage.input | Usage.output | Usage.json, "csharp");
 @@usage(
   StaticRouteConfiguration,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
-  StaticRoutePatchPropertiesReplacement,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
