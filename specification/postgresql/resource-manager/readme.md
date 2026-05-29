@@ -45,8 +45,12 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions.DataEncryption.properties.primaryFederatedIdentityClientId
-    reason: Microsoft Entra application client ID (RFC 4122 UUID) per ARM identity guidelines. Approved by Azure API review board pull request 43065.
+    where: $.definitions["Azure.Core.uuid"]
+    reason: >-
+      Used only for Microsoft Entra application clientId properties on
+      DataEncryption (primaryFederatedIdentityClientId,
+      geoBackupFederatedIdentityClientId). Both are RFC 4122 UUIDs per ARM
+      identity guidelines. Approved by Azure API review board pull request 43065.
   - code: GuidUsage
     from: openapi.json
     where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
