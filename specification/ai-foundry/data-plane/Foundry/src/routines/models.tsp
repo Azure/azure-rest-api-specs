@@ -132,7 +132,7 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
   type: RoutineTriggerType.timer;
 
-  @doc("The UTC date and time at which the timer fires.")
+  @doc("The UTC date and time at which the timer fires, as an ISO-8601 timestamp (e.g., `\"2026-06-01T09:00:00Z\"`). The built-in `reminder_preview` agent tool sets this field by computing `now + minutes`, where `minutes` is the positive integer argument supplied by the model when the tool is invoked.")
   at?: utcDateTime;
 }
 
