@@ -45,7 +45,7 @@ input-file:
 suppressions:
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions["Azure.Core.uuid"]
+    where: $.definitions["Azure.Core.uuid"].format
     reason: >-
       Used only for Microsoft Entra application clientId properties on
       DataEncryption (primaryFederatedIdentityClientId,
