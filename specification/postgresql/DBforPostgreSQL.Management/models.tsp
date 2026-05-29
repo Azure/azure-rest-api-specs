@@ -4018,7 +4018,8 @@ model MaintenanceEventResource
   ...ResourceNameParameter<
     MaintenanceEventResource,
     KeyName = "maintenanceEventId",
-    SegmentName = "maintenanceEvents"
+    SegmentName = "maintenanceEvents",
+    NamePattern = "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
   >;
 }
 
@@ -4027,10 +4028,10 @@ model MaintenanceEventResource
 union MaintenanceEventStatusFilter {
   string,
 
-  @doc("Return events that are scheduled or in progress (Planned, InProgress, Suspended).")
+  @doc("Return events that have a scheduled or in progress status.")
   Upcoming: "Upcoming",
 
-  @doc("Return events that have completed (Succeeded, Failed, Canceled, TimedOut).")
+  @doc("Return events that have a completed status.")
   Past: "Past",
 }
 
@@ -4060,8 +4061,8 @@ model MaintenanceEventActionResponse {
   @doc("The full Azure resource ID of the server.")
   serverId?: armResourceIdentifier;
 
-  @doc("The status (e.g. 'Accepted', 'Succeeded').")
-  status?: string;
+  @doc("The status of the maintenance event.")
+  status?: MaintenanceEventStatus;
 
   @doc("The planned start time of the maintenance event (UTC).")
   plannedStartTime?: utcDateTime;
