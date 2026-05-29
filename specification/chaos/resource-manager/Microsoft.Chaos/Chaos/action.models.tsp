@@ -59,6 +59,13 @@ union ActionKind {
 }
 
 /**
+ * JSON Schema describing the parameters for an action.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "parametersSchema is a dynamic JSON Schema object whose structure varies per action."
+@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
+model ActionParametersSchema {}
+
+/**
  * Model that represents the properties of an Action resource.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
@@ -110,9 +117,8 @@ model ActionProperties {
   /**
    * JSON Schema describing the parameters for this action.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "parametersSchema is a dynamic JSON Schema object whose structure varies per action."
   @visibility(Lifecycle.Read)
-  parametersSchema?: {};
+  parametersSchema?: ActionParametersSchema;
 
   /**
    * Recommended Azure RBAC role definition GUIDs for this action.

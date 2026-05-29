@@ -258,13 +258,13 @@ model EntraIdentity {
    * The identity object id.
    */
   @visibility(Lifecycle.Read)
-  objectId: string;
+  objectId: uuid;
 
   /**
    * The identity tenant id.
    */
   @visibility(Lifecycle.Read)
-  tenantId: string;
+  tenantId: uuid;
 }
 
 /**
@@ -424,7 +424,7 @@ model RoleAssignmentResult {
    * The managed identity principal ID.
    */
   @visibility(Lifecycle.Read)
-  principalId: string;
+  principalId: uuid;
 
   /**
    * The Azure RBAC role definition ID.

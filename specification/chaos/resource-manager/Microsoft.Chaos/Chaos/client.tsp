@@ -76,6 +76,102 @@ using Microsoft.Chaos;
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
 @@clientName(WorkspaceEvaluation, "ChaosWorkspaceEvaluationData", "csharp");
 @@clientName(
+  PrivateEndpointConnection,
+  "ChaosPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnectionProperties,
+  "ChaosPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(ActionDependency, "ChaosScenarioActionDependency", "csharp");
+@@clientName(
+  ActionDependencyType,
+  "ChaosScenarioActionDependencyType",
+  "csharp"
+);
+@@clientName(ActionLifecycle, "ChaosActionLifecycle", "csharp");
+@@clientName(ActionParametersSchema, "ChaosActionParametersSchema", "csharp");
+@@clientName(EntraIdentity, "ChaosEntraIdentity", "csharp");
+@@clientName(PermissionError, "ChaosPermissionError", "csharp");
+@@clientName(
+  PermissionsFixProperties,
+  "ChaosPermissionsFixProperties",
+  "csharp"
+);
+@@clientName(PermissionsFixState, "ChaosPermissionsFixState", "csharp");
+@@clientName(PermissionsFixSummary, "ChaosPermissionsFixSummary", "csharp");
+@@clientName(
+  CustomerDataStorageProperties,
+  "ChaosCustomerDataStorageProperties",
+  "csharp"
+);
+@@clientName(
+  DiscoveredResourceProperties,
+  "ChaosDiscoveredResourceProperties",
+  "csharp"
+);
+@@clientName(
+  PhysicalToLogicalZoneMapping,
+  "ChaosPhysicalToLogicalZoneMapping",
+  "csharp"
+);
+@@clientName(
+  PublicNetworkAccessOption,
+  "ChaosPrivateAccessPublicNetworkAccessOption",
+  "csharp"
+);
+@@clientName(RecommendationStatus, "ChaosRecommendationStatus", "csharp");
+@@clientName(ResourceStateError, "ChaosResourceStateError", "csharp");
+@@clientName(
+  ValidationProperties,
+  "ChaosScenarioValidationProperties",
+  "csharp"
+);
+@@clientName(ZoneResolutionInfo, "ChaosZoneResolutionInfo", "csharp");
+@@clientName(ZoneResolutionMapping, "ChaosZoneResolutionMapping", "csharp");
+@@clientName(ZoneResolutionMode, "ChaosZoneResolutionMode", "csharp");
+@@clientName(RoleAssignmentError, "ChaosRoleAssignmentError", "csharp");
+@@clientName(RoleAssignmentResult, "ChaosRoleAssignmentResult", "csharp");
+@@clientName(RoleAssignmentStatus, "ChaosRoleAssignmentStatus", "csharp");
+@@clientName(RunAfter, "ChaosRunAfter", "csharp");
+@@clientName(RunAfterBehavior, "ChaosRunAfterBehavior", "csharp");
+@@clientName(ScenarioAction, "ChaosScenarioAction", "csharp");
+@@clientName(
+  ScenarioConfigurationProperties,
+  "ChaosScenarioConfigurationProperties",
+  "csharp"
+);
+@@clientName(ScenarioErrors, "ChaosScenarioErrors", "csharp");
+@@clientName(
+  ScenarioEvaluationResultItem,
+  "ChaosScenarioEvaluationResultItem",
+  "csharp"
+);
+@@clientName(ScenarioProperties, "ChaosScenarioProperties", "csharp");
+@@clientName(ScenarioRunProperties, "ChaosScenarioRunProperties", "csharp");
+@@clientName(ScenarioRunResource, "ChaosScenarioRunResource", "csharp");
+@@clientName(ScenarioRunState, "ChaosScenarioRunState", "csharp");
+@@clientName(
+  ScenarioRunSummaryAction,
+  "ChaosScenarioRunSummaryAction",
+  "csharp"
+);
+@@clientName(ScenarioSummaryState, "ChaosScenarioSummaryState", "csharp");
+@@clientName(ScenarioValidationState, "ChaosScenarioValidationState", "csharp");
+@@clientName(
+  WorkspaceEvaluationProperties,
+  "ChaosWorkspaceEvaluationProperties",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEvaluationStatus,
+  "ChaosWorkspaceEvaluationStatus",
+  "csharp"
+);
+@@clientName(WorkspaceProperties, "ChaosWorkspaceProperties", "csharp");
+@@clientName(
   ActionSupportedTargetType,
   "ChaosActionSupportedTargetType",
   "csharp"

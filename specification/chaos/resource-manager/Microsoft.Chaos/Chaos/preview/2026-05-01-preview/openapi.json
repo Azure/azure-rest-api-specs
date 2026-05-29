@@ -4152,6 +4152,10 @@
         "value"
       ]
     },
+    "ActionParametersSchema": {
+      "type": "object",
+      "description": "JSON Schema describing the parameters for an action."
+    },
     "ActionProperties": {
       "type": "object",
       "description": "Model that represents the properties of an Action resource.",
@@ -4198,7 +4202,7 @@
           ]
         },
         "parametersSchema": {
-          "type": "object",
+          "$ref": "#/definitions/ActionParametersSchema",
           "description": "JSON Schema describing the parameters for this action.",
           "readOnly": true
         },
@@ -4992,12 +4996,12 @@
       "description": "Model that represents the Azure Entra identity.",
       "properties": {
         "objectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The identity object id.",
           "readOnly": true
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The identity tenant id.",
           "readOnly": true
         }
@@ -5750,6 +5754,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The Azure identifier for private endpoint.",
           "readOnly": true
         }
@@ -6153,7 +6158,7 @@
           "readOnly": true
         },
         "principalId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The managed identity principal ID.",
           "readOnly": true
         },
@@ -6649,7 +6654,7 @@
           "readOnly": true
         },
         "managedIdentityPrincipalId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The principal id for the managed identity used for the run.",
           "readOnly": true
         },
@@ -6733,6 +6738,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource id.",
           "readOnly": true
         }

@@ -61,7 +61,7 @@ model PrivateEndpoint {
    * The Azure identifier for private endpoint.
    */
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier;
 }
 
 /**

@@ -81,7 +81,7 @@ model ScenarioRunProperties {
    * The principal id for the managed identity used for the run.
    */
   @visibility(Lifecycle.Read)
-  managedIdentityPrincipalId: string;
+  managedIdentityPrincipalId: uuid;
 
   /**
    * The scenario run status.
@@ -276,7 +276,7 @@ model ScenarioRunResource {
    */
   @visibility(Lifecycle.Read)
   @key
-  id: string;
+  id: Azure.Core.armResourceIdentifier;
 }
 
 /**
