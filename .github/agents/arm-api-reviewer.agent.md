@@ -338,7 +338,7 @@ Use GitHub tools to fetch the PR details and list all changed files. Classify ea
 2. The fast path **never** skips Step 7 (critic). Independent verification applies to every posted comment regardless of PR size.
 3. If the fast-path review surfaces any blocking finding that suggests broader risk (e.g., a description change that reveals the schema is wrong, an example that references a property not in the spec), **escalate to full review** before reporting.
 
-**Size guardrail (full-review track only).** If the PR touches > 50 spec files **or** > 5000 added+deleted lines across spec files, stop before Step 2 and ask the human to choose:
+**Size guardrail (full-review track only).** If the PR touches > 500 spec files **or** > 50000 added+deleted lines across spec files, stop before Step 2 and ask the human to choose:
 
 - (a) Review a specified subset of files (human provides the list).
 - (b) Split into per-service or per-RP batches reviewed sequentially as separate sessions.
@@ -607,7 +607,7 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 
 These issues were **introduced in this PR** and must be resolved.
 
-1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
+1. **[NEW]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
    **Issue:** <clear description of the violation>
    **Fix:** <exact code or JSON change to apply>
    <!-- Add a **Note:** line ONLY when the critic changed something about this finding. Examples: -->
@@ -619,20 +619,20 @@ These issues were **introduced in this PR** and must be resolved.
 
 These issues also exist in the previous version (`<previous-version>`) and were **not introduced by this PR**. They represent pre-existing technical debt.
 
-1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
+1. **[EXISTING]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
    **Issue:** <clear description of the violation>
    **Previous version:** Also present in `<previous-version-file-path>` - line <N>
    **Fix:** <exact code or JSON change to apply>
 
 ### Warnings - New (should fix)
 
-1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N>
+1. **[NEW]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N>
    **Issue:** <description>
    **Fix:** <suggestion>
 
 ### Warnings - Existing (consider fixing)
 
-1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N>
+1. **[EXISTING]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N>
    **Issue:** <description>
    **Previous version:** Also present in `<previous-version-file-path>` - line <N>
    **Fix:** <suggestion>
@@ -890,18 +890,38 @@ After the human chooses, execute the approved subset of the plan:
 6. **PROPOSE-HUMAN-RESOLVE** (Scenario F) - do **not** resolve and do **not** reply automatically. For each row, ask the human (per-thread) whether to post the reply "_The violation flagged in this comment appears to have been addressed at `<file>` - line <N>._" and resolve. Resolve only with explicit human consent on a per-thread basis. If approved, the reply does not require a telemetry marker (same reason as Scenario E).
 7. **SKIP-COVERED** (Scenario A) and **Scenario D** - take no action. The existing comment(s) already cover the finding; the row exists in the plan for transparency and Critic audit only.
 
+**Review-body preamble (the top-level review comment posted alongside the inline findings).** When submitting the GitHub review (e.g., `gh pr review --body` or the MCP equivalent), use the following exact template for the review body. Do **not** improvise alternate phrasings such as "automated ARM API review" or "ARM review bot" -- the wording, link, and tone below are the agreed-upon professional preamble:
+
+```markdown
+## ARM API Review
+
+Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (critic-verified, <N> iteration(s), converged) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.<optional sentence describing any findings posted as top-level comments because they concern files outside the PR diff>
+```
+
+Substitution rules:
+
+- `<N>`: the Critic iteration count from Step 7.
+- `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.
+- `<full-sha>`: the **full 40-character** session SHA pinned in Step 1, used in the link target. Do not abbreviate the link target -- short SHAs in URLs are acceptable but the full SHA is canonical and matches the `head-sha` field in each comment's telemetry marker, which is what auditors will grep for.
+- `<owner>`, `<repo>`, `<pr-number>`: derived from the PR URL captured in Step 1 (e.g., `Azure`, `azure-rest-api-specs`, `41405`).
+- `<range-or-list>`: the inline-finding numbering used in the chat report (e.g., `1-12`, or `3-12` when findings 1-2 were posted as top-level comments). Use a plain space + number; **never** prefix with `#` (see next bullet).
+- The optional trailing sentence is included **only** when one or more findings could not be attached to a line in the PR diff and were therefore posted as top-level review comments instead of inline comments. Omit it otherwise.
+
 **Posted-comment formatting and telemetry** (applies to every POST-NEW and RESOLVE-AND-REPOST comment):
 
+- **Never prefix finding numbers with `#` in posted comments or chat output.** GitHub auto-linkifies `#<number>` to a PR/issue reference (e.g., `#1` -> `https://github.com/Azure/azure-rest-api-specs/pull/1`), which produces misleading cross-links. When numbering findings in headings, summaries, lists, or sentences (e.g., "Blocking 1 - ...", "Warning 3 - ..."), use a plain space and the bare number, **not** `#`. The same rule applies to the chat-rendered Step 6 report. The only acceptable use of `#<number>` is when intentionally referencing a real GitHub PR or issue.
+- **Chat-PR Parity (REQUIRED -- no divergence).** The body of every posted PR comment MUST be **byte-for-byte identical** to the corresponding finding rendered in the Step 6 chat report -- same rule-ID hyperlink, same `[NEW]`/`[EXISTING]` tag, same severity badge, same `Issue:` text, same `Fix:` code block, same trailing telemetry marker. Build the finding body **once** as a single canonical string at Step 6; reference that exact string when assembling the GitHub review payload's `comments[].body` field. Do **not** paraphrase, shorten, drop hyperlinks, collapse code blocks, or re-author for the posting surface. The full rule, including the post-fetch verification step (re-fetch each posted comment and confirm the live body matches the canonical string), is defined in [`armapi-review.instructions.md` -> Reviewer-Posted Parity](../instructions/armapi-review.instructions.md#reviewer-posted-parity-required----no-divergence). This is the single most common posting-time regression mode; treat any divergence as a Step 8 failure and re-post.
 - Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR - this property did not exist in the previous version").
 - For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟠 Warning`, or `🔵 Suggestion`.
-- Use the format: ``**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` or ``**[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` followed by the classification reasoning and suggested fix.
+- **Rule-ID hyperlink (REQUIRED).** Every rule ID in a posted PR comment AND in the Step 6 chat-rendered report MUST be a markdown link to its authoritative definition. A bare `[OAPI027]` is **not acceptable** -- it MUST be `[[OAPI027](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi027)]`. The canonical format, anchor-resolution rules, and multi-rule citation pattern are defined in [`armapi-review.instructions.md` -> Rule Citation Format](../instructions/armapi-review.instructions.md#rule-citation-format-required-for-posted-pr-comments) (loaded by Step 2 for ARM PRs). The Critic re-verifies each citation in Re-validation step 3 and records the instruction-file path + line range in its `Re-verified rule citations` output table; use that to construct the link target. Apply this rule to both the chat-rendered Step 6 report and the posted PR comment -- the Reviewer-Posted Parity rule in the same instructions file forbids divergence.
+- Use the format: ``**[NEW] 🔴 Blocking** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> - <issue description>`` or ``**[EXISTING]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> - <issue description>`` followed by the classification reasoning and suggested fix.
 - Every posted comment **MUST** end with a hidden HTML telemetry marker as the very last line of the comment body. The marker format is:
 
   ```html
   <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| override-reason: <required-when-critic=override>] -->
   ```
 
-  - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`).
+  - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`). The literal value `summary` is reserved for the (rare) case of a top-level PR review summary comment that aggregates multiple findings rather than flagging a single rule violation -- e.g., a closing "Review complete: N findings, M blocking" comment. Per the current workflow, the agent does **not** post summary comments by default (every finding becomes its own POST-NEW comment); use `rule: summary` only when explicitly approved by the human and accompanied by `severity: suggestion` and `classification: new`.
   - **`severity`**: One of `blocking`, `warning`, or `suggestion`.
   - **`classification`**: One of `new` (introduced in this PR) or `existing` (pre-existing technical debt).
   - **`critic`**: The critic's per-finding verdict from Step 7 - `pass`, `warn`, or `override`. `override` means a critic `FAIL` on the finding itself was overridden by the human reviewer. **Note:** `override` is only valid for finding-level FAILs - reconciliation FAILs cannot be overridden via this marker (see Step 7 item 9).
