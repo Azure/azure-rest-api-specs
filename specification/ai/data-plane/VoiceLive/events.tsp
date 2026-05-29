@@ -32,6 +32,14 @@ union ClientEventType {
   /** Sent by the client to initiate a WebRTC session with an SDP offer. */
   @added(Versions.v2026_06_01_preview)
   rtc_call_sdp_create: "rtc.call.sdp.create",
+
+  /** Streamed delta of input text content being appended to an item. */
+  @added(Versions.v2026_06_01_preview)
+  input_text_delta: "input_text.delta",
+
+  /** Signals that the streamed input text content for an item is complete. */
+  @added(Versions.v2026_06_01_preview)
+  input_text_done: "input_text.done",
 }
 
 /** Server event types used in VoiceLive protocol. */
