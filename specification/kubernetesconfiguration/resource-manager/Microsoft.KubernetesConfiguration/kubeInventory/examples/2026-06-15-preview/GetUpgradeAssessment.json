@@ -1,0 +1,80 @@
+{
+  "title": "Get UpgradeAssessment",
+  "operationId": "UpgradeAssessments_Get",
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "default",
+    "assessmentName": "current",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/default/upgradeAssessments/current",
+        "name": "current",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory/upgradeAssessments",
+        "systemData": {
+          "createdBy": "cluster-managed-identity",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "cluster-managed-identity",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-10T08:30:00.000Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "assessmentTime": "2026-06-10T08:30:00.000Z",
+          "kubernetesVersion": "1.29",
+          "targetKubernetesVersion": "1.30",
+          "overallSeverity": "warning",
+          "componentCompatibility": [
+            {
+              "name": "containerd",
+              "version": "1.7.2",
+              "compatibilityStatus": "compatible",
+              "severity": "pass",
+              "minCompatibleVersion": "1.7.0"
+            },
+            {
+              "name": "calico",
+              "version": "3.25.0",
+              "compatibilityStatus": "untested",
+              "severity": "warning",
+              "notes": "Calico 3.25.x has not been validated against Kubernetes 1.30. Consider upgrading to 3.27.x."
+            }
+          ],
+          "deprecatedApis": [
+            {
+              "group": "flowcontrol.apiserver.k8s.io",
+              "version": "v1beta3",
+              "resource": "flowschemas",
+              "removedRelease": "1.32",
+              "usageMetrics": {
+                "get": 12,
+                "list": 45
+              },
+              "lastUsageObservedAt": "2026-06-09T14:22:00.000Z",
+              "severity": "warning"
+            }
+          ],
+          "readinessChecks": [
+            {
+              "category": "NodeStatus",
+              "severity": "pass"
+            },
+            {
+              "category": "PodDisruptionBudget",
+              "name": "default/my-app",
+              "severity": "warning",
+              "details": "PDB allows 0 disruptions; upgrade may be blocked until PDB is relaxed."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

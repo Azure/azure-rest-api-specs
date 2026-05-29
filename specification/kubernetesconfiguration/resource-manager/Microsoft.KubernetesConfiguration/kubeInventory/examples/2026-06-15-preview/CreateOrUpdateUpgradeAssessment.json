@@ -1,0 +1,133 @@
+{
+  "title": "Create or Update UpgradeAssessment",
+  "operationId": "UpgradeAssessments_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "default",
+    "assessmentName": "current",
+    "api-version": "2026-06-15-preview",
+    "resource": {
+      "properties": {
+        "kubernetesVersion": "1.29",
+        "targetKubernetesVersion": "1.30",
+        "overallSeverity": "critical",
+        "componentCompatibility": [
+          {
+            "name": "containerd",
+            "version": "1.6.8",
+            "compatibilityStatus": "incompatible",
+            "severity": "critical",
+            "minCompatibleVersion": "1.7.0",
+            "notes": "containerd 1.6.x is not compatible with Kubernetes 1.30. Upgrade to 1.7.x required."
+          }
+        ],
+        "deprecatedApis": [
+          {
+            "group": "flowcontrol.apiserver.k8s.io",
+            "version": "v1beta3",
+            "resource": "flowschemas",
+            "removedRelease": "1.32",
+            "usageMetrics": {
+              "get": 12,
+              "list": 45
+            },
+            "lastUsageObservedAt": "2026-06-09T14:22:00.000Z",
+            "severity": "warning"
+          }
+        ],
+        "readinessChecks": [
+          {
+            "category": "NodeStatus",
+            "severity": "pass"
+          },
+          {
+            "category": "Storage",
+            "name": "node-pool-1",
+            "severity": "critical",
+            "details": "Node disk pressure detected; upgrade may fail."
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/default/upgradeAssessments/current",
+        "name": "current",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory/upgradeAssessments",
+        "systemData": {
+          "createdBy": "cluster-managed-identity",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "cluster-managed-identity",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-10T09:00:00.000Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "assessmentTime": "2026-06-10T09:00:00.000Z",
+          "kubernetesVersion": "1.29",
+          "targetKubernetesVersion": "1.30",
+          "overallSeverity": "critical",
+          "componentCompatibility": [
+            {
+              "name": "containerd",
+              "version": "1.6.8",
+              "compatibilityStatus": "incompatible",
+              "severity": "critical",
+              "minCompatibleVersion": "1.7.0",
+              "notes": "containerd 1.6.x is not compatible with Kubernetes 1.30. Upgrade to 1.7.x required."
+            }
+          ],
+          "deprecatedApis": [
+            {
+              "group": "flowcontrol.apiserver.k8s.io",
+              "version": "v1beta3",
+              "resource": "flowschemas",
+              "removedRelease": "1.32",
+              "usageMetrics": {
+                "get": 12,
+                "list": 45
+              },
+              "lastUsageObservedAt": "2026-06-09T14:22:00.000Z",
+              "severity": "warning"
+            }
+          ],
+          "readinessChecks": [
+            {
+              "category": "NodeStatus",
+              "severity": "pass"
+            },
+            {
+              "category": "Storage",
+              "name": "node-pool-1",
+              "severity": "critical",
+              "details": "Node disk pressure detected; upgrade may fail."
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/default/upgradeAssessments/current/operations/operationId1?api-version=2026-06-15-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/default/upgradeAssessments/current",
+        "name": "current",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory/upgradeAssessments",
+        "properties": {
+          "provisioningState": "Updating",
+          "kubernetesVersion": "1.29",
+          "targetKubernetesVersion": "1.30"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "title": "Refresh UpgradeAssessment",
+  "operationId": "UpgradeAssessments_Refresh",
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "default",
+    "assessmentName": "current",
+    "api-version": "2026-06-15-preview",
+    "body": {
+      "targetKubernetesVersion": "1.30"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/default/upgradeAssessments/current/operations/operationId1?api-version=2026-06-15-preview",
+        "Retry-After": 30
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/default/upgradeAssessments/current",
+        "name": "current",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory/upgradeAssessments",
+        "systemData": {
+          "createdBy": "cluster-managed-identity",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "cluster-managed-identity",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-10T09:15:00.000Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "assessmentTime": "2026-06-10T09:15:00.000Z",
+          "kubernetesVersion": "1.29",
+          "targetKubernetesVersion": "1.30",
+          "overallSeverity": "pass",
+          "componentCompatibility": [
+            {
+              "name": "containerd",
+              "version": "1.7.4",
+              "compatibilityStatus": "compatible",
+              "severity": "pass",
+              "minCompatibleVersion": "1.7.0"
+            }
+          ],
+          "deprecatedApis": [],
+          "readinessChecks": [
+            {
+              "category": "NodeStatus",
+              "severity": "pass"
+            },
+            {
+              "category": "APIServerHealth",
+              "severity": "pass"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
