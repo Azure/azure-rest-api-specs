@@ -496,48 +496,15 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 
-model OptionAPropertiesReplacement {
-  mtu?: int32;
-  vlanId?: int32;
-  peerASN?: int64;
-  bfdConfiguration?: BfdConfiguration;
-}
-@@alternateType(VpnOptionAProperties, OptionAPropertiesReplacement, "csharp");
-@@clientName(OptionAPropertiesReplacement, "OptionAProperties", "csharp");
-
-model VpnConfigurationOptionAPropertiesReplacement
-  extends OptionAPropertiesReplacement {
-  primaryIpv4Prefix?: string;
-  primaryIpv6Prefix?: string;
-  secondaryIpv4Prefix?: string;
-  secondaryIpv6Prefix?: string;
-}
-@@alternateType(
+@@clientName(
   VpnConfigurationProperties.optionAProperties,
-  VpnConfigurationOptionAPropertiesReplacement,
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationOptionAPropertiesReplacement,
-  "VpnConfigurationOptionAProperties",
+  "OptionASettings",
   "csharp"
 );
 
-model VpnConfigurationPatchableOptionAPropertiesReplacement
-  extends OptionAPropertiesReplacement {
-  primaryIpv4Prefix?: string;
-  primaryIpv6Prefix?: string;
-  secondaryIpv4Prefix?: string;
-  secondaryIpv6Prefix?: string;
-}
-@@alternateType(
-  VpnConfigurationPatchableProperties.optionAProperties,
-  VpnConfigurationPatchableOptionAPropertiesReplacement,
-  "csharp"
-);
 @@clientName(
-  VpnConfigurationPatchableOptionAPropertiesReplacement,
-  "VpnConfigurationPatchableOptionAProperties",
+  VpnConfigurationPatchableProperties.optionAProperties,
+  "OptionASettings",
   "csharp"
 );
 
@@ -989,7 +956,8 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   "csharp"
 );
 @@clientName(L3OptionAProperties.peerASN, "PeerAsn", "csharp");
-@@clientName(OptionAPropertiesReplacement.peerASN, "PeerAsn", "csharp");
+@@clientName(VpnOptionAProperties.peerASN, "PeerAsn", "csharp");
+@@clientName(VpnOptionAPatchProperties.peerASN, "PeerAsn", "csharp");
 @@clientName(OptionBLayer3Configuration.fabricASN, "FabricAsn", "csharp");
 @@clientName(OptionBLayer3Configuration.peerASN, "PeerAsn", "csharp");
 @@clientName(
@@ -1291,46 +1259,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   "csharp"
 );
 @@clientName(
-  VpnConfigurationOptionAPropertiesReplacement.primaryIpv4Prefix,
-  "PrimaryIPv4Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationOptionAPropertiesReplacement.primaryIpv6Prefix,
-  "PrimaryIPv6Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationOptionAPropertiesReplacement.secondaryIpv4Prefix,
-  "SecondaryIPv4Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationOptionAPropertiesReplacement.secondaryIpv6Prefix,
-  "SecondaryIPv6Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationPatchableOptionAPropertiesReplacement.primaryIpv4Prefix,
-  "PrimaryIPv4Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationPatchableOptionAPropertiesReplacement.primaryIpv6Prefix,
-  "PrimaryIPv6Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationPatchableOptionAPropertiesReplacement.secondaryIpv4Prefix,
-  "SecondaryIPv4Prefix",
-  "csharp"
-);
-@@clientName(
-  VpnConfigurationPatchableOptionAPropertiesReplacement.secondaryIpv6Prefix,
-  "SecondaryIPv6Prefix",
-  "csharp"
-);
-@@clientName(
   IpCommunityProperties.ipCommunityRules,
   "IPCommunityRules",
   "csharp"
@@ -1456,26 +1384,11 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   "csharp"
 );
 @@usage(
-  OptionAPropertiesReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
   VpnConfigurationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
 @@usage(IpCommunityIdList, Usage.input | Usage.output | Usage.json, "csharp");
-@@usage(
-  VpnConfigurationOptionAPropertiesReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
-  VpnConfigurationPatchableOptionAPropertiesReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
 // These compatibility base models preserve the shipped C# hierarchy where the
 // action models derive from add-operation models exposing Add*CommunityIds.
 @doc("IP community add operation properties.")
@@ -1513,18 +1426,6 @@ model IPExtendedCommunityAddOperationProperties {
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   StatementConditionProperties,
   IpCommunityIdList,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  VpnConfigurationOptionAPropertiesReplacement,
-  OptionAPropertiesReplacement,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  VpnConfigurationPatchableOptionAPropertiesReplacement,
-  OptionAPropertiesReplacement,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
