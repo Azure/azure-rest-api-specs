@@ -43,10 +43,15 @@ These settings apply only when `--tag=package-flexibleserver-2026-04-01-preview`
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2026-04-01-preview/openapi.json
 suppressions:
+  suppressions:
   - code: GuidUsage
     from: openapi.json
-    where: $.definitions.Azure.Core.uuid
-    reason: Client ID of multi-tenant Microsoft Entra application and multi-tenant Microsoft Entra application for geo-redundant backups, defined as GUID per ARM guidelines.
+    where: $.definitions.DataEncryption.properties.primaryFederatedIdentityClientId
+    reason: Microsoft Entra application client ID (RFC 4122 UUID) per ARM identity guidelines. Approved by Azure API review board - ravimeda.
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions.DataEncryption.properties.geoBackupFederatedIdentityClientId
+    reason: Microsoft Entra application client ID for geo-redundant backups (RFC 4122 UUID) per ARM identity guidelines. Approved by Azure API review board - ravimeda.
   - code: EnumInsteadOfBoolean
     from: openapi.json
     where: $.definitions.PolicyDetail.properties.passed
