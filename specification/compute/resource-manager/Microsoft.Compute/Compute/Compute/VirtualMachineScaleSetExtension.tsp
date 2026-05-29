@@ -20,7 +20,7 @@ namespace Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(VirtualMachineScaleSet)
-@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+@Azure.ResourceManager.Legacy.customAzureResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSetExtension extends SubResourceReadOnly {
   /**
