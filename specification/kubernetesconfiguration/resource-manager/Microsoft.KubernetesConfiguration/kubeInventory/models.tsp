@@ -13,11 +13,9 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.KubernetesConfiguration;
 
-// ─── Enums ───────────────────────────────────────────────────────────────────
+// ─── Provisioning state ───────────────────────────────────────────────────────
 
-/**
- * Provisioning state of the resource.
- */
+/** Provisioning state of an ARM resource. */
 union ProvisioningState {
   string,
 
@@ -34,28 +32,26 @@ union ProvisioningState {
   Updating: "Updating",
 }
 
-/**
- * Severity of a check or upgrade-assessment finding.
- */
+// ─── UpgradeAssessment enums ──────────────────────────────────────────────────
+
+/** Severity of an upgrade-assessment finding or readiness check. */
 union Severity {
   string,
 
   /** No issues found. */
   pass: "pass",
 
-  /** Non-blocking issues found. */
+  /** Non-blocking issues found; upgrade is possible but action is recommended. */
   warning: "warning",
 
-  /** Blocking issues found. */
+  /** Blocking issues found; upgrade should not proceed without remediation. */
   critical: "critical",
 
   /** Severity could not be determined. */
   Unknown: "unknown",
 }
 
-/**
- * Compatibility status of a cluster component with the target Kubernetes version.
- */
+/** Compatibility status of a cluster component with the target Kubernetes version. */
 union CompatibilityStatus {
   string,
 
@@ -72,9 +68,7 @@ union CompatibilityStatus {
   Unknown: "unknown",
 }
 
-/**
- * Category of a cluster readiness check.
- */
+/** Category of a cluster readiness check. */
 union ReadinessCategory {
   string,
 
@@ -97,11 +91,9 @@ union ReadinessCategory {
   Networking: "Networking",
 }
 
-// ─── Supporting models ────────────────────────────────────────────────────────
+// ─── UpgradeAssessment typed sub-models ──────────────────────────────────────
 
-/**
- * Compatibility status of a single cluster component.
- */
+/** Compatibility status of a single cluster component with the target Kubernetes version. */
 model ComponentCompatibility {
   /** Component name (e.g., 'containerd', 'calico'). */
   name: string;
@@ -109,10 +101,10 @@ model ComponentCompatibility {
   /** Installed component version. */
   version: string;
 
-  /** Compatibility status of the component with the target Kubernetes version. */
+  /** Compatibility of the component with the target Kubernetes version. */
   compatibilityStatus: CompatibilityStatus;
 
-  /** Severity associated with the compatibility result. */
+  /** Severity associated with this compatibility result. */
   severity: Severity;
 
   /** Minimum component version known to be compatible with targetKubernetesVersion. */
@@ -122,9 +114,7 @@ model ComponentCompatibility {
   notes?: string;
 }
 
-/**
- * A deprecated Kubernetes API still in use in the cluster.
- */
+/** A deprecated Kubernetes API still in use in the cluster. */
 model DeprecatedApiUsage {
   /** API group (e.g., 'flowcontrol.apiserver.k8s.io'). */
   group: string;
@@ -144,13 +134,11 @@ model DeprecatedApiUsage {
   /** UTC timestamp of the last observed usage. */
   lastUsageObservedAt?: utcDateTime;
 
-  /** Severity of this deprecated API usage. */
+  /** Severity of continued use of this deprecated API. */
   severity: Severity;
 }
 
-/**
- * A single cluster readiness check result.
- */
+/** A single cluster readiness check result. */
 model ReadinessCheck {
   /** Category of the readiness check. */
   category: ReadinessCategory;
@@ -168,37 +156,747 @@ model ReadinessCheck {
   details?: string;
 }
 
-/**
- * Optional request body for the refresh action.
- */
+/** Optional request body for the UpgradeAssessment refresh action. */
 model RefreshRequest {
   /**
-   * Optional override for the target Kubernetes version.
+   * Optional override for the target Kubernetes version to assess.
    * If omitted, the cluster's default upgrade target is used.
    */
   targetKubernetesVersion?: string;
 }
 
-// ─── Resource properties ─────────────────────────────────────────────────────
+// ─── Common Kubernetes types ──────────────────────────────────────────────────
+
+/** A reference from a Kubernetes object to its owner (e.g., a ReplicaSet owning a Pod). */
+model OwnerReference {
+  /** API version of the owner (e.g., 'apps/v1'). */
+  apiVersion: string;
+
+  /** Kind of the owner (e.g., 'ReplicaSet'). */
+  kind: string;
+
+  /** Name of the owner object. */
+  name: string;
+
+  /** UID of the owner object. */
+  uid: string;
+
+  /** True when this owner manages the lifecycle of the referencing object. */
+  controller?: boolean;
+
+  /** If true, deletion of the owner is blocked until this reference is removed. */
+  blockOwnerDeletion?: boolean;
+}
+
+/** Metadata common to all Kubernetes objects (subset of ObjectMeta). */
+model KubernetesObjectMeta {
+  /** Name of the Kubernetes object, unique within its namespace. */
+  name: string;
+
+  /**
+   * Prefix used by the API server to generate a unique name when name is not provided.
+   * The generated name has the form '{generateName}{randomSuffix}'.
+   */
+  generateName?: string;
+
+  /**
+   * Namespace the object belongs to.
+   * Empty for cluster-scoped resources such as Node and Namespace.
+   */
+  namespace?: string;
+
+  /** Immutable UID assigned by the Kubernetes API server. */
+  uid?: string;
+
+  /**
+   * Opaque version string used for optimistic concurrency.
+   * Clients must treat this as opaque and pass it unmodified on updates.
+   */
+  resourceVersion?: string;
+
+  /** Sequence number incremented each time the object spec changes. */
+  generation?: int64;
+
+  /** UTC timestamp when the object was created. */
+  creationTimestamp?: utcDateTime;
+
+  /**
+   * UTC timestamp set when a graceful deletion has been requested.
+   * Absent when the object is not being deleted.
+   */
+  deletionTimestamp?: utcDateTime;
+
+  /** User-defined key/value pairs used for selection and grouping. */
+  labels?: Record<string>;
+
+  /** Key/value pairs for non-identifying auxiliary metadata. */
+  annotations?: Record<string>;
+
+  /** References to the objects that own this object (e.g., the ReplicaSet that owns a Pod). */
+  ownerReferences?: OwnerReference[];
+
+  /** Named lifecycle hooks that must be resolved before the object is deleted. */
+  finalizers?: string[];
+}
+
+/** Whether a Kubernetes condition is currently active. */
+union ConditionStatus {
+  string,
+
+  /** Condition is currently true. */
+  True: "True",
+
+  /** Condition is currently false. */
+  False: "False",
+
+  /** Condition state cannot be determined. */
+  Unknown: "Unknown",
+}
+
+/** A Kubernetes-style status condition reported by a controller. */
+model KubernetesCondition {
+  /** Type of the condition (e.g., 'Ready', 'Available', 'Progressing'). */
+  type: string;
+
+  /** Whether the condition is currently active. */
+  status: ConditionStatus;
+
+  /** Machine-readable reason code for the current status. */
+  reason?: string;
+
+  /** Human-readable explanation of the current status. */
+  message?: string;
+
+  /** UTC timestamp of the last status transition. */
+  lastTransitionTime?: utcDateTime;
+}
+
+// ─── Generic overflow field ───────────────────────────────────────────────────
 
 /**
- * Properties of the KubeInventory resource.
+ * A generic recursive field node used to represent resource-specific fields
+ * that are not captured by the typed properties on KubernetesResourceSpec
+ * or KubernetesResourceStatus (e.g., uncommon fields and CRD-specific data).
  */
-model KubeInventoryProperties {}
+model KubernetesGenericField {
+  /** Field name. */
+  name: string;
+
+  /**
+   * Type of the field value: 'string', 'number', or 'boolean' for scalars;
+   * 'object' when fields[] is populated; 'array' when items[] is populated.
+   */
+  type: string;
+
+  /** Scalar value, populated when type is 'string', 'number', or 'boolean'. */
+  value?: string;
+
+  /**
+   * Child fields, populated when type is 'object'.
+   * Represents a nested key/value structure.
+   */
+  @identifiers(#["name"])
+  fields?: KubernetesGenericField[];
+
+  /**
+   * Array items, populated when type is 'array'.
+   * Each inner array represents one element, itself a set of named fields.
+   */
+  items?: KubernetesGenericField[][];
+}
+
+// ─── Container support models ─────────────────────────────────────────────────
+
+/** A volume mount inside a container. */
+model VolumeMount {
+  /** Name matching a volume declared in the pod spec. */
+  name: string;
+
+  /** Absolute path inside the container where the volume is mounted. */
+  mountPath: string;
+
+  /** Mount the volume as read-only when true. */
+  readOnly?: boolean;
+
+  /** Sub-path within the volume to mount instead of the volume root. */
+  subPath?: string;
+}
+
+/** Linux capability set to add to or drop from a container's default capabilities. */
+model Capabilities {
+  /** Capabilities to add (e.g., 'NET_ADMIN'). */
+  add?: string[];
+
+  /** Capabilities to remove (e.g., 'ALL'). */
+  drop?: string[];
+}
+
+/** Security context applied to a single container. */
+model ContainerSecurityContext {
+  /** Linux capability adjustments for this container. */
+  capabilities?: Capabilities;
+
+  /** Mount the container's root filesystem as read-only when true. */
+  readOnlyRootFilesystem?: boolean;
+
+  /** Prevent the container process from gaining more privileges than its parent when false. */
+  allowPrivilegeEscalation?: boolean;
+
+  /** Require the container to run as a non-root user when true. */
+  runAsNonRoot?: boolean;
+
+  /** UID to run the container process as. */
+  runAsUser?: int64;
+
+  /** GID to run the container process as. */
+  runAsGroup?: int64;
+}
+
+/** Network protocol used by a container port. */
+union NetworkProtocol {
+  string,
+
+  /** Transmission Control Protocol. */
+  TCP: "TCP",
+
+  /** User Datagram Protocol. */
+  UDP: "UDP",
+
+  /** Stream Control Transmission Protocol. */
+  SCTP: "SCTP",
+}
+
+/** A port exposed by a container. */
+model ContainerPort {
+  /** Port number exposed inside the container. */
+  containerPort: int32;
+
+  /** Network protocol for this port. */
+  protocol?: NetworkProtocol;
+
+  /** Optional name for this port. */
+  name?: string;
+}
+
+/** An environment variable set in a container. */
+model EnvVar {
+  /** Name of the environment variable. */
+  name: string;
+
+  /** Literal string value. */
+  value?: string;
+}
+
+/** CPU and memory resource declarations for a container. */
+model ContainerResourceRequirements {
+  /** Maximum resources the container may consume, in Kubernetes notation (e.g., '500m', '256Mi'). */
+  limits?: Record<string>;
+
+  /** Minimum resources the container requires to be scheduled, in Kubernetes notation. */
+  requests?: Record<string>;
+}
+
+/** Specification of a single container within a pod. */
+model ContainerSpec {
+  /** Name of the container, unique within the pod. */
+  name: string;
+
+  /** Container image reference (e.g., 'nginx:1.25'). */
+  image: string;
+
+  /** Ports to expose from the container. */
+  @identifiers(#["name"])
+  ports?: ContainerPort[];
+
+  /** Environment variables to set in the container. */
+  @identifiers(#["name"])
+  env?: EnvVar[];
+
+  /** Compute resource requests and limits. */
+  resources?: ContainerResourceRequirements;
+
+  /** Command to override the container default ENTRYPOINT. */
+  command?: string[];
+
+  /** Arguments to override the container default CMD. */
+  args?: string[];
+
+  /** Volume paths to mount inside the container. */
+  @identifiers(#["name"])
+  volumeMounts?: VolumeMount[];
+
+  /** Security context applied to this container. */
+  securityContext?: ContainerSecurityContext;
+}
+
+// ─── Pod-level support models ─────────────────────────────────────────────────
 
 /**
- * Properties of the UpgradeAssessment resource.
+ * A volume available to containers in a pod.
+ * The sourceType field identifies the kind of volume source
+ * (e.g., 'emptyDir', 'configMap', 'secret', 'persistentVolumeClaim', 'projected').
  */
-model UpgradeAssessmentProperties {
-  /** Provisioning state of the resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+model Volume {
+  /** Name of the volume, referenced by container volumeMounts. */
+  name: string;
 
-  /** UTC timestamp when the cluster computed this assessment. */
+  /**
+   * Kind of volume source
+   * (e.g., 'emptyDir', 'configMap', 'secret', 'persistentVolumeClaim', 'projected').
+   */
+  sourceType?: string;
+
+  /** Primary reference for the volume source (e.g., ConfigMap name or PVC name). */
+  source?: string;
+
+  /** Storage size limit for emptyDir volumes (e.g., '50Mi'). */
+  sizeLimit?: string;
+}
+
+/** A toleration allows a pod to be scheduled on a node with a matching taint. */
+model Toleration {
+  /** Taint key the toleration applies to. Empty matches all keys. */
+  key?: string;
+
+  /**
+   * Operator to use when matching: 'Equal' matches when key and value both match;
+   * 'Exists' matches when the key is present regardless of value.
+   */
+  operator?: string;
+
+  /** Taint value matched when operator is 'Equal'. */
+  value?: string;
+
+  /**
+   * Taint effect this toleration applies to
+   * ('NoSchedule', 'PreferNoSchedule', or 'NoExecute'). Empty matches all effects.
+   */
+  effect?: string;
+
+  /** Seconds a pod tolerates a NoExecute taint before being evicted. */
+  tolerationSeconds?: int64;
+}
+
+/** Security context applied at the pod level, affecting all containers. */
+model PodSecurityContext {
+  /** GID of the owning group for volume mounts; processes also run as this GID. */
+  fsGroup?: int64;
+
+  /** UID to run all containers as. Overridden per-container by ContainerSecurityContext.runAsUser. */
+  runAsUser?: int64;
+
+  /** GID to run all containers as. */
+  runAsGroup?: int64;
+
+  /** Require all containers to run as non-root when true. */
+  runAsNonRoot?: boolean;
+
+  /** Supplemental GIDs applied to each container in addition to the primary GID. */
+  supplementalGroups?: int64[];
+}
+
+/** State of a currently running container. */
+model ContainerStateRunning {
+  /** UTC timestamp when the container started. */
+  startedAt?: utcDateTime;
+}
+
+/** State of a terminated container. */
+model ContainerStateTerminated {
+  /** Exit code of the container process. */
+  exitCode: int32;
+
+  /** Signal that caused the container to terminate, if applicable. */
+  signal?: int32;
+
+  /** Machine-readable reason for termination (e.g., 'OOMKilled', 'Completed'). */
+  reason?: string;
+
+  /** Human-readable message about the termination. */
+  message?: string;
+
+  /** UTC timestamp when the container started its last execution. */
+  startedAt?: utcDateTime;
+
+  /** UTC timestamp when the container terminated. */
+  finishedAt?: utcDateTime;
+}
+
+/** State of a container that is not yet running. */
+model ContainerStateWaiting {
+  /** Machine-readable reason the container is not running (e.g., 'ContainerCreating', 'ImagePullBackOff'). */
+  reason?: string;
+
+  /** Human-readable message about the waiting state. */
+  message?: string;
+}
+
+/** Current or previous state of a container; exactly one of the three fields is populated. */
+model ContainerState {
+  /** Populated when the container is currently executing. */
+  running?: ContainerStateRunning;
+
+  /** Populated when the container has exited. */
+  terminated?: ContainerStateTerminated;
+
+  /** Populated when the container is not yet running. */
+  waiting?: ContainerStateWaiting;
+}
+
+/** Runtime status of a single container as reported in the pod status. */
+model ContainerStatus {
+  /** Name of the container. */
+  name: string;
+
+  /** True when the container has passed its readiness probe. */
+  ready: boolean;
+
+  /** Number of times the container has restarted since the pod was started. */
+  restartCount: int32;
+
+  /** Container image including digest as resolved by the runtime. */
+  image?: string;
+
+  /** Whether the container has passed its startup probe and is considered started. */
+  started?: boolean;
+
+  /** Current state of the container. */
+  state?: ContainerState;
+
+  /** Previous termination state of the container; populated after a restart. */
+  lastState?: ContainerState;
+
+  /** Opaque container runtime identifier (e.g., 'containerd://sha256:...'). */
+  containerId?: string;
+}
+
+// ─── Kubernetes resource kind ─────────────────────────────────────────────────
+
+/** Kind of a Kubernetes resource tracked in the cluster inventory. */
+union KubernetesResourceKind {
+  string,
+
+  /** Core workload: Pod. */
+  Pod: "Pod",
+
+  /** Core workload: Deployment (apps/v1). */
+  Deployment: "Deployment",
+
+  /** Core workload: StatefulSet (apps/v1). */
+  StatefulSet: "StatefulSet",
+
+  /** Core workload: DaemonSet (apps/v1). */
+  DaemonSet: "DaemonSet",
+
+  /** Core workload: ReplicaSet (apps/v1). */
+  ReplicaSet: "ReplicaSet",
+
+  /** Networking: Service. */
+  Service: "Service",
+
+  /** Storage: PersistentVolumeClaim. */
+  PersistentVolumeClaim: "PersistentVolumeClaim",
+
+  /** Cluster infrastructure: Node. */
+  Node: "Node",
+
+  /** Cluster administration: Namespace. */
+  Namespace: "Namespace",
+
+  /** Azure Kubernetes upgrade assessment custom resource. */
+  UpgradeAssessment: "UpgradeAssessment",
+
+  /** Any other custom resource definition instance not enumerated above. */
+  CustomResource: "CustomResource",
+}
+
+// ─── Generic flat spec and status ────────────────────────────────────────────
+
+/**
+ * Desired state (spec) of a Kubernetes resource.
+ *
+ * Well-known fields for native workloads (Pod, Deployment, Service, etc.) are typed
+ * directly. UpgradeAssessment spec fields are merged in as optional typed properties.
+ * Fields not covered by any typed property can be placed in additionalFields.
+ */
+model KubernetesResourceSpec {
+  // ── Pod / workload ──────────────────────────────────────────────────────────
+
+  /** Name of the node the pod is scheduled on. Populated for Pod resources. */
+  nodeName?: string;
+
+  /** Pod restart policy (e.g., 'Always', 'OnFailure', 'Never'). Populated for Pod resources. */
+  restartPolicy?: string;
+
+  /**
+   * Containers belonging to the pod or pod template.
+   * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
+   */
+  @identifiers(#["name"])
+  containers?: ContainerSpec[];
+
+  /**
+   * Init containers that run before app containers start.
+   * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
+   */
+  @identifiers(#["name"])
+  initContainers?: ContainerSpec[];
+
+  /** Grace period in seconds before forcibly terminating the pod on deletion. */
+  terminationGracePeriodSeconds?: int64;
+
+  // ── Deployment / StatefulSet / DaemonSet ────────────────────────────────────
+
+  /** Desired number of pod replicas. Populated for Deployment and StatefulSet resources. */
+  replicas?: int32;
+
+  /**
+   * Headless service name governing StatefulSet pod network identity.
+   * Populated for StatefulSet resources.
+   */
+  serviceName?: string;
+
+  // ── Service ─────────────────────────────────────────────────────────────────
+
+  /**
+   * How the service is exposed (e.g., 'ClusterIP', 'NodePort', 'LoadBalancer').
+   * Populated for Service resources.
+   */
+  serviceType?: string;
+
+  /** Cluster-internal IP assigned to the service. Populated for Service resources. */
+  clusterIP?: string;
+
+  // ── Pod security and scheduling ─────────────────────────────────────────────
+
+  /**
+   * Name of the ServiceAccount the pod runs as.
+   * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
+   */
+  serviceAccountName?: string;
+
+  /**
+   * Tolerations allowing the pod to be scheduled on nodes with matching taints.
+   * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
+   */
+  tolerations?: Toleration[];
+
+  /**
+   * Volumes available to containers in the pod or pod template.
+   * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
+   */
+  @identifiers(#["name"])
+  volumes?: Volume[];
+
+  /**
+   * DNS policy for the pod (e.g., 'ClusterFirst', 'Default', 'None').
+   * Populated for Pod resources.
+   */
+  dnsPolicy?: string;
+
+  /**
+   * Security context applied at the pod level.
+   * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
+   */
+  securityContext?: PodSecurityContext;
+
+  // ── Cross-kind ──────────────────────────────────────────────────────────────
+
+  /** Node label selector constraining which nodes workload pods can be scheduled on. */
+  nodeSelector?: Record<string>;
+
+  /**
+   * Pod label selector used by Deployment, StatefulSet, DaemonSet, and Service
+   * to identify the pods they manage or route to.
+   */
+  selector?: Record<string>;
+
+  // ── UpgradeAssessment (kind = "UpgradeAssessment") ──────────────────────────
+
+  /**
+   * Current Kubernetes version running on the cluster (e.g., '1.29').
+   * Populated for UpgradeAssessment resources.
+   */
+  currentKubernetesVersion?: string;
+
+  /**
+   * Target Kubernetes version to evaluate for upgrade (e.g., '1.30').
+   * Populated for UpgradeAssessment resources.
+   */
+  targetKubernetesVersion?: string;
+
+  // ── Generic overflow ────────────────────────────────────────────────────────
+
+  /**
+   * Additional resource-specific fields not represented by the typed properties above.
+   * Used for uncommon fields and custom resource definition instances.
+   */
+  @identifiers(#["name"])
+  additionalFields?: KubernetesGenericField[];
+}
+
+/**
+ * Observed state (status) of a Kubernetes resource, written by the controller.
+ *
+ * Well-known fields for native workloads (Pod, Deployment, Service, etc.) are typed
+ * directly. UpgradeAssessment status fields are merged in as optional typed properties.
+ * Fields not covered by any typed property can be placed in additionalFields.
+ */
+model KubernetesResourceStatus {
+  // ── Universal ───────────────────────────────────────────────────────────────
+
+  /** Conditions reported by the controller managing this resource. */
+  conditions?: KubernetesCondition[];
+
+  /**
+   * High-level lifecycle phase of the resource.
+   * Examples: 'Running' / 'Pending' / 'Succeeded' / 'Failed' for Pod;
+   * 'Bound' / 'Pending' / 'Lost' for PersistentVolumeClaim;
+   * 'Active' / 'Terminating' for Namespace.
+   */
+  phase?: string;
+
+  /** Human-readable message summarizing the resource state. */
+  message?: string;
+
+  // ── Workload replica counters ────────────────────────────────────────────────
+
+  /** Number of pods ready to serve requests. Populated for Deployment, StatefulSet, DaemonSet. */
+  readyReplicas?: int32;
+
+  /** Number of pods available for at least minReadySeconds. Populated for Deployment, DaemonSet. */
+  availableReplicas?: int32;
+
+  // ── Pod ─────────────────────────────────────────────────────────────────────
+
+  /** IP address allocated to the pod within the cluster. Populated for Pod resources. */
+  podIP?: string;
+
+  /** IP address of the node hosting the pod. Populated for Pod resources. */
+  hostIP?: string;
+
+  /** UTC timestamp when the pod was accepted by the scheduler. Populated for Pod resources. */
+  startTime?: utcDateTime;
+
+  /**
+   * Runtime status of each container in the pod.
+   * Populated for Pod resources.
+   */
+  @identifiers(#["name"])
+  containerStatuses?: ContainerStatus[];
+
+  /**
+   * QoS class assigned by Kubernetes based on resource requests and limits.
+   * One of 'Guaranteed', 'Burstable', or 'BestEffort'. Populated for Pod resources.
+   */
+  qosClass?: string;
+
+  /**
+   * Most recent generation observed by the controller.
+   * Populated for Deployment, StatefulSet, DaemonSet, and Pod resources.
+   */
+  observedGeneration?: int64;
+
+  // ── UpgradeAssessment (kind = "UpgradeAssessment") ──────────────────────────
+
+  /**
+   * UTC timestamp when the in-cluster agent last computed this assessment.
+   * Populated for UpgradeAssessment resources.
+   */
   @visibility(Lifecycle.Read)
   assessmentTime?: utcDateTime;
 
-  /** Current Kubernetes version of the cluster (e.g., '1.29'). */
+  /**
+   * Rolled-up severity across all checks; highest severity wins.
+   * Populated for UpgradeAssessment resources.
+   */
+  overallSeverity?: Severity;
+
+  /**
+   * Per-component compatibility results with the target Kubernetes version.
+   * Populated for UpgradeAssessment resources.
+   */
+  componentCompatibility?: ComponentCompatibility[];
+
+  /**
+   * Deprecated Kubernetes APIs still in use in the cluster.
+   * Populated for UpgradeAssessment resources.
+   */
+  deprecatedApis?: DeprecatedApiUsage[];
+
+  /**
+   * Cluster readiness check results.
+   * Populated for UpgradeAssessment resources.
+   */
+  readinessChecks?: ReadinessCheck[];
+
+  // ── Generic overflow ────────────────────────────────────────────────────────
+
+  /**
+   * Additional resource-specific status fields not represented by the typed properties above.
+   * Used for uncommon fields and custom resource definition instances.
+   */
+  @identifiers(#["name"])
+  additionalFields?: KubernetesGenericField[];
+}
+
+/**
+ * A generic Kubernetes resource object as stored in the cluster inventory.
+ * Follows the Kubernetes object model: apiVersion + kind + metadata + spec + status.
+ */
+model KubernetesResource {
+  /**
+   * Kubernetes API version of this resource
+   * (e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1').
+   */
+  apiVersion: string;
+
+  /** Kind of the Kubernetes resource. */
+  kind: KubernetesResourceKind;
+
+  /** Standard Kubernetes object metadata. */
+  metadata: KubernetesObjectMeta;
+
+  /** Desired state of the resource. */
+  spec?: KubernetesResourceSpec;
+
+  /** Observed state of the resource, written by the controller. */
+  status?: KubernetesResourceStatus;
+}
+
+// ─── ARM resource properties ──────────────────────────────────────────────────
+
+/**
+ * Properties of the KubeInventory resource.
+ * Holds a full snapshot of Kubernetes resources from the cluster,
+ * including native workloads (Pod, Deployment, Service, etc.)
+ * and custom resources such as UpgradeAssessment.
+ */
+model KubeInventoryProperties {
+  /**
+   * Flat list of all Kubernetes resources in the cluster inventory.
+   * Each entry carries its own apiVersion, kind, metadata, spec, and status.
+   */
+  @identifiers(#["metadata"])
+  resources?: KubernetesResource[];
+}
+
+/**
+ * Properties of the UpgradeAssessment ARM resource.
+ * This is the ARM resource model for the standalone UpgradeAssessment endpoint.
+ * The same assessment data also appears inside KubeInventory.properties.resources[]
+ * as a KubernetesResource with kind 'UpgradeAssessment'.
+ */
+model UpgradeAssessmentProperties {
+  /** Provisioning state of the UpgradeAssessment resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** UTC timestamp when the in-cluster agent last computed this assessment. */
+  @visibility(Lifecycle.Read)
+  assessmentTime?: utcDateTime;
+
+  /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
   kubernetesVersion: string;
 
   /** Target Kubernetes version evaluated for upgrade (e.g., '1.30'). */
@@ -207,7 +905,7 @@ model UpgradeAssessmentProperties {
   /** Rolled-up severity across all checks. Highest severity wins. */
   overallSeverity?: Severity;
 
-  /** Compatibility status of cluster components with the target version. */
+  /** Per-component compatibility results with the target Kubernetes version. */
   componentCompatibility?: ComponentCompatibility[];
 
   /** Deprecated Kubernetes APIs still in use in the cluster. */
