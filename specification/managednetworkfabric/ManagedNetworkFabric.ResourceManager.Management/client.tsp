@@ -458,12 +458,6 @@ union NetworkFabricManagedServiceIdentityTypeReplacement {
   "csharp"
 );
 @@clientName(UpdateVersion, "NetworkFabricUpdateVersionContent", "csharp");
-@@usage(UpgradeNetworkFabricProperties, Usage.input, "csharp");
-@@alternateType(
-  NetworkFabrics.upgrade::parameters.body,
-  UpgradeNetworkFabricProperties,
-  "csharp"
-);
 @@clientName(ValidateAction, "NetworkFabricValidateAction", "csharp");
 @@clientName(
   ValidateConfigurationProperties,
@@ -2201,7 +2195,7 @@ model IPExtendedCommunityAddOperationProperties {}
 );
 @@clientName(
   NetworkFabrics.commitConfiguration,
-  "CommitConfiguration",
+  "ApplyConfiguration",
   "csharp"
 );
 @@clientName(NetworkFabrics.deprovision, "Deactivate", "csharp");

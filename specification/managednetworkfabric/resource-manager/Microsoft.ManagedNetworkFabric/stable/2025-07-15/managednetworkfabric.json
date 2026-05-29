@@ -8758,13 +8758,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CommitConfigurationRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CommonPostActionResponseForStateUpdate"
+              "$ref": "#/definitions/CommitConfigurationResponse"
             }
           },
           "202": {
@@ -10256,7 +10265,7 @@
             "description": "Network Fabric properties to update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateVersion"
+              "$ref": "#/definitions/UpgradeNetworkFabricProperties"
             }
           }
         ],
@@ -14843,6 +14852,131 @@
           "$ref": "#/definitions/CommitBatchDetails",
           "description": "Commit Batch Details."
         }
+      }
+    },
+    "CommitConfigurationPolicy": {
+      "type": "string",
+      "description": "Indicates Commit configuration staging policy. Supported policy is StageCEConfiguration, which indicates to prepare the configuration for the CE device type.",
+      "enum": [
+        "StageCEConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "CommitConfigurationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StageCEConfiguration",
+            "value": "StageCEConfiguration",
+            "description": "CommitConfigurationPolicy-StageCEConfiguration"
+          }
+        ]
+      }
+    },
+    "CommitConfigurationRequest": {
+      "type": "object",
+      "description": "Commit Configuration Request.",
+      "properties": {
+        "commitStage": {
+          "$ref": "#/definitions/CommitStage",
+          "description": "Commit stage Action to be performed."
+        },
+        "commitPolicy": {
+          "$ref": "#/definitions/CommitConfigurationPolicy",
+          "description": "Commit configuration Policy. Supported policy is StageCEConfiguration, which indicates to prepare the configuration for the CE device type."
+        },
+        "devices": {
+          "type": "array",
+          "description": "List of ARM resource IDs of devices to be included in the commit operation. Either CE1 or CE2 is allowed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CommitConfigurationResponse": {
+      "type": "object",
+      "description": "Commit Configuration Response.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "operations": {
+          "type": "array",
+          "description": "The operations list.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+          }
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID of the resource against which the original async operation was started.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "CommitStage": {
+      "type": "string",
+      "description": "Commit stage Action to be performed.",
+      "enum": [
+        "Start",
+        "Continue",
+        "Rollback"
+      ],
+      "x-ms-enum": {
+        "name": "CommitStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "CommitStage-Start indicates to prepare the device configuration for the devices which is decided by policy type"
+          },
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "CommitStage-Continue indicates to push the configuration to the devices provided. Either CE1 or CE2 is allowed"
+          },
+          {
+            "name": "Rollback",
+            "value": "Rollback",
+            "description": "CommitStage-Rollback indicates to revert to the previous configuration for the devices to which configuration is pushed as part of staging."
+          }
+        ]
       }
     },
     "CommonDynamicMatchConfiguration": {

@@ -194,7 +194,7 @@ interface NetworkFabrics {
   @sharedRoute
   upgrade is ArmResourceActionAsync<
     NetworkFabric,
-    UpdateVersion,
+    UpgradeNetworkFabricProperties,
     Foundations.OperationStatusResult
   >;
 
@@ -317,8 +317,8 @@ interface NetworkFabrics {
   @sharedRoute
   commitConfiguration is ArmResourceActionAsync<
     NetworkFabric,
-    void,
-    CommonPostActionResponseForStateUpdate,
+    CommitConfigurationRequest,
+    CommitConfigurationResponse,
     OptionalRequestBody = true
   >;
 
