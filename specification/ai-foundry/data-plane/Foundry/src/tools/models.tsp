@@ -974,6 +974,7 @@ namespace Azure.AI.Projects {
     type: "reminder_preview";
 
     ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
   }
 
   // ==============================================================================
