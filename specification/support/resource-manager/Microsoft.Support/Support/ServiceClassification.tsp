@@ -20,7 +20,7 @@ interface ClassifyServices {
    * Classify the list of right Azure services.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceClassifications_classifyServices")
+  @operationId("ServiceClassifications_ClassifyServices")
   @autoRoute
   classifyServices is ArmProviderActionSync<
     Request = ServiceClassificationRequest,
@@ -37,7 +37,7 @@ interface ClassifyServicesNoSubscription {
    * Classify the list of right Azure services.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceClassificationsNoSubscription_classifyServices")
+  @operationId("ServiceClassificationsNoSubscription_ClassifyServices")
   @autoRoute
   classifyServices is ArmProviderActionSync<
     Request = ServiceClassificationRequest,

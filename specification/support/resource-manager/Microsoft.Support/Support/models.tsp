@@ -186,11 +186,6 @@ union ChatConversationStatus {
    * Chat conversation has been closed.
    */
   Closed: "Closed",
-
-  /**
-   * No chat conversation associated.
-   */
-  None: "None",
 }
 
 /**

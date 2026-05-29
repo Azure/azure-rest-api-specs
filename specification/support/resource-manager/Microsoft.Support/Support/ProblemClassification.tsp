@@ -21,7 +21,7 @@ interface ClassifyProblems {
    * Classify the right problem classifications (categories) available for a specific Azure service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProblemClassifications_classifyProblems")
+  @operationId("ProblemClassifications_ClassifyProblems")
   @autoRoute
   classifyProblems is ArmProviderActionSync<
     Request = ProblemClassificationsClassificationInput,
@@ -48,7 +48,7 @@ interface ClassifyProblemsNoSubscription {
    * Classify the right problem classifications (categories) available for a specific Azure service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProblemClassificationsNoSubscription_classifyProblems")
+  @operationId("ProblemClassificationsNoSubscription_ClassifyProblems")
   @autoRoute
   classifyProblems is ArmProviderActionSync<
     Request = ProblemClassificationsClassificationInput,
