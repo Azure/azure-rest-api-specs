@@ -57,15 +57,19 @@ jobs:
       - name: "Set Status"
         uses: actions/github-script@v8
         id: set-status
+        env:
+          MONITORED_WORKFLOW_NAME: ${{ inputs.monitored_workflow_name }}
+          REQUIRED_CHECK_NAME: ${{ inputs.required_check_name }}
+          OVERRIDING_LABEL: ${{ inputs.overriding_label }}
         with:
           script: |
             const { default: setStatus } =
                 await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
             return await setStatus(
               { github, context, core },
-              '${{ inputs.monitored_workflow_name }}',
-              '${{ inputs.required_check_name }}',
-              '${{ inputs.overriding_label }}'
+              process.env.MONITORED_WORKFLOW_NAME,
+              process.env.REQUIRED_CHECK_NAME,
+              process.env.OVERRIDING_LABEL
             );
 
       - if: ${{ always() && steps.set-status.outputs.head_sha }}
