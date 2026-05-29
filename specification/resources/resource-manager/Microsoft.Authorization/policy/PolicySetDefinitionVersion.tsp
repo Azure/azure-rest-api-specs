@@ -43,7 +43,7 @@ alias PolicySetDefinitionVersionOps = Azure.ResourceManager.Legacy.ExtensionOper
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   },
   {},
@@ -71,7 +71,7 @@ alias PolicySetDefinitionVersionTenantOps = Azure.ResourceManager.Legacy.Extensi
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   },
   {},
@@ -104,7 +104,7 @@ alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legac
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   },
   {
@@ -114,7 +114,7 @@ alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legac
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
 
     /** The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number */
