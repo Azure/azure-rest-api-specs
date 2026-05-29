@@ -616,6 +616,8 @@ using Microsoft.Billing;
 @@usage(SavingsPlanOrderModel, Usage.input, "csharp");
 @@usage(SubscriptionPolicy, Usage.input, "csharp");
 @@usage(SubscriptionPolicyProperties, Usage.input, "csharp");
+@@usage(Sku, Usage.input, "csharp");
+@@access(Sku, Access.public, "csharp");
 
 // D7 fix: restore public parameterless ctors on Transfer detail resources by marking the
 // underlying TypeSpec models as Usage.input (the new spec makes them read-only).
@@ -634,7 +636,11 @@ using Microsoft.Billing;
 // D2 fix: Reservation should map to TrackedResource in C# to preserve the GA
 // `BillingReservationData : TrackedResourceData` base. The new spec declares it as
 // ProxyResource with optional location/tags, which yields `: ResourceData` by default.
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Reservation, Azure.ResourceManager.CommonTypes.TrackedResource, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Reservation,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
 
 // D2 fix: Patch models (and Transaction) inherit from ProxyResourceWithTags in the new spec,
 // but the GA C# surface exposes them as `: ResourceData`. Flatten ProxyResourceWithTags into
@@ -677,8 +683,16 @@ using Microsoft.Billing;
 // generator flattens both into BillingSubscriptionData and prefixes alias-only properties
 // to disambiguate. GA used the "Subscription" prefix; new gen uses "SubscriptionAlias".
 // Override to restore GA names.
-@@clientName(BillingSubscriptionAliasProperties.beneficiaryTenantId, "SubscriptionBeneficiaryTenantId", "csharp");
-@@clientName(BillingSubscriptionAliasProperties.customerId, "SubscriptionCustomerId", "csharp");
+@@clientName(
+  BillingSubscriptionAliasProperties.beneficiaryTenantId,
+  "SubscriptionBeneficiaryTenantId",
+  "csharp"
+);
+@@clientName(
+  BillingSubscriptionAliasProperties.customerId,
+  "SubscriptionCustomerId",
+  "csharp"
+);
 
 // D19 fix: BillingRequestProperties.type was GA-named RequestType (the GA generator added
 // a disambiguating suffix). The @@clientName decorator below does not apply because
