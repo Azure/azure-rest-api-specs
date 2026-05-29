@@ -243,6 +243,18 @@ interface DeviceAuthenticationProfiles {
   list is ResourceOperations.ResourceList<DeviceAuthenticationProfile>;
 
   /**
+   * Retrieve the plaintext symmetric keys of a device authentication
+   * profile. Only valid when the profile's authentication type is
+   * SymmetricKey; profiles of any other type return 400 with the
+   * InvalidAuthenticationType error code.
+   */
+  getKeys is ResourceOperations.ResourceAction<
+    DeviceAuthenticationProfile,
+    {},
+    GetDeviceAuthenticationProfileKeysResponse
+  >;
+
+  /**
    * Issue an operational X.509 certificate for the device. The certificate is
    * signed using the certificate authority policy bound to this authentication
    * profile. Applies to Microsoft-managed X.509 authentication profiles. The
@@ -268,18 +280,6 @@ interface DeviceAuthenticationProfiles {
     DeviceAuthenticationProfile,
     OperationIdHeaderParameter,
     {}
-  >;
-
-  /**
-   * Retrieve the plaintext symmetric keys of a device authentication
-   * profile. Only valid when the profile's authentication type is
-   * SymmetricKey; profiles of any other type return 400 with the
-   * InvalidAuthenticationType error code.
-   */
-  getKeys is ResourceOperations.ResourceAction<
-    DeviceAuthenticationProfile,
-    {},
-    GetDeviceAuthenticationProfileKeysResponse
   >;
 }
 
