@@ -215,6 +215,12 @@ namespace Azure.AI.Projects;
 @@convenientAPI(Skills.deleteSkill, false, "java");
 @@convenientAPI(Skills.deleteSkillVersion, false, "java");
 
+//making delete methods internal to add public shims that return void
+@@access(Skills.deleteSkill, Access.internal);
+@@clientName(Skills.deleteSkill, "internalDeleteSkill");
+@@access(Skills.deleteSkillVersion, Access.internal);
+@@clientName(Skills.deleteSkillVersion, "internalDeleteSkillVersion");
+
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
