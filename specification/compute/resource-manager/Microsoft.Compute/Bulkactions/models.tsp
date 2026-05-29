@@ -265,9 +265,6 @@ model BulkVMConfiguration {
 
   @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
   name?: string;
-
-  @doc("Resource group name for the virtual machine.")
-  resourceGroupName?: string;
 }
 
 @doc("Resource creation data model")

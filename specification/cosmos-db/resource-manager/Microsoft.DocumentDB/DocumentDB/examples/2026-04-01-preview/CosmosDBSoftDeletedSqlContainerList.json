@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "location": "West US",
+    "accountName": "softdeleted-cosmosdb-1",
+    "databaseName": "MyDatabase"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/westus/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/MyDatabase/softDeletedSqlContainers/MyContainer",
+            "name": "MyContainer",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers",
+            "properties": {
+              "softDeletionMetadata": {
+                "isSoftDeleted": true,
+                "softDeletionStartTimestamp": 1729000530,
+                "softDeletionResourceExpirationTimestamp": 1731592530
+              },
+              "resource": {
+                "id": "MyContainer",
+                "_rid": "PD5DALigDgwBAAAAAAAAAA==",
+                "partitionKey": {
+                  "paths": [
+                    "/accountNumber"
+                  ],
+                  "kind": "Hash"
+                },
+                "defaultTtl": 3600
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/westus/softDeletedDatabaseAccounts/softdeleted-cosmosdb-1/softDeletedSqlDatabases/MyDatabase/softDeletedSqlContainers/TestContainer",
+            "name": "TestContainer",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers",
+            "properties": {
+              "softDeletionMetadata": {
+                "isSoftDeleted": true,
+                "softDeletionStartTimestamp": 1728668415,
+                "softDeletionResourceExpirationTimestamp": 1731260415
+              },
+              "resource": {
+                "id": "TestContainer",
+                "_rid": "PD5DALigDgwCAAAAAAAAAA==",
+                "partitionKey": {
+                  "paths": [
+                    "/id"
+                  ],
+                  "kind": "Hash"
+                },
+                "defaultTtl": 7200
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SoftDeletedSqlContainers_List",
+  "title": "CosmosDBSoftDeletedSqlContainerList"
+}
