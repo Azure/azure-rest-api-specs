@@ -107,6 +107,108 @@ model CertificateAuthorityCredentials {
 }
 
 // ──────────────────────────────────────────────
+// Shared action parameters
+// ──────────────────────────────────────────────
+
+/**
+ * Shared parameter model carrying the optional client-supplied
+ * `Operation-Id` request header used by the `:issueCert` and
+ * `:revokeCerts` long-running actions. If omitted, the service
+ * generates a GUID.
+ */
+model OperationIdHeaderParameter {
+  /**
+   * Optional client-supplied identifier for the operation's status monitor.
+   * If omitted, the service generates a GUID.
+   */
+  @header("Operation-Id")
+  operationId?: string;
+}
+
+// ──────────────────────────────────────────────
+// Certificate issuance action models
+// ──────────────────────────────────────────────
+
+/** Certificate issuance request. */
+model CertificateIssuanceRequest {
+  /**
+   * Base64-encoded DER certificate signing request (CSR) without PEM
+   * headers and footers. Format of the CSR is in PKCS 10. The CN field of
+   * the CSR must be set to the device's external device id (registrationId).
+   */
+  csr: bytes;
+}
+
+/**
+ * The full chain of the issued certificate, including any intermediate
+ * certification authorities (ICAs) and the root certification authority
+ * (CA). The first certificate in the list is the issued leaf certificate.
+ * Each subsequent certificate is the issuer of the previous.
+ */
+model IssuedCertificateChain is bytes[];
+
+/** Certificate issuance result. */
+model CertificateIssuanceResult {
+  /** The full chain of the issued certificate. */
+  @visibility(Lifecycle.Read)
+  issuedCertificateChain: IssuedCertificateChain;
+}
+
+// ──────────────────────────────────────────────
+// Issue-cert status monitor endpoint
+// ──────────────────────────────────────────────
+
+/** Status monitor for the long-running `:issueCert` action on a device authentication profile. */
+@parentResource(DeviceAuthenticationProfile)
+@resource("issueCertResults")
+model IssueCertResult {
+  /** The unique ID of the operation. */
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The status of the operation. */
+  @Azure.Core.lroStatus
+  @visibility(Lifecycle.Read)
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error object that describes the error when status is "Failed". */
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+
+  /** The result of the certificate issuance, available once `status` is `Succeeded`. */
+  @visibility(Lifecycle.Read)
+  result?: CertificateIssuanceResult;
+}
+
+// ──────────────────────────────────────────────
+// Revoke-cert status monitor endpoint
+// ──────────────────────────────────────────────
+
+/**
+ * Status monitor for the long-running `:revokeCerts` action on a device authentication
+ * profile. The operation has no payload to return on success; `status` carries the
+ * outcome and `error` carries failure details.
+ */
+@parentResource(DeviceAuthenticationProfile)
+@resource("revokeCertsResults")
+model RevokeCertsResult {
+  /** The unique ID of the operation. */
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The status of the operation. */
+  @Azure.Core.lroStatus
+  @visibility(Lifecycle.Read)
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error object that describes the error when status is "Failed". */
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+}
+
+// ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles operation models
 // ──────────────────────────────────────────────
 
@@ -151,4 +253,46 @@ interface DeviceAuthenticationProfiles {
     {},
     GetDeviceAuthenticationProfileKeysResponse
   >;
+
+  /**
+   * Issue an operational X.509 certificate for the device. The certificate is
+   * signed using the certificate authority policy bound to this authentication
+   * profile. Applies to Microsoft-managed X.509 authentication profiles. The
+   * issued certificate chain is delivered by the GET on the corresponding
+   * `issueCertResults` status monitor endpoint.
+   */
+  @pollingOperation(IssueCertResults.get)
+  issueCert is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    CertificateIssuanceRequest & OperationIdHeaderParameter,
+    {}
+  >;
+
+  /**
+   * Revoke certificates issued for the device authentication profile. Applies to
+   * Microsoft-managed X.509 certificates: invalidates outstanding certificates
+   * via the PKI revocation list. The authentication profile itself is preserved.
+   * Status is polled via the dedicated GET on the corresponding
+   * `revokeCertsResults` status monitor endpoint.
+   */
+  @pollingOperation(RevokeCertsResults.get)
+  revokeCerts is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    OperationIdHeaderParameter,
+    {}
+  >;
+}
+
+/** Polling operations for the long-running `:issueCert` action. */
+@tag("Device Authentication Profiles")
+interface IssueCertResults {
+  /** Get the status of a long-running `:issueCert` operation. */
+  get is ResourceOperations.ResourceRead<IssueCertResult>;
+}
+
+/** Polling operations for the long-running `:revokeCerts` action. */
+@tag("Device Authentication Profiles")
+interface RevokeCertsResults {
+  /** Get the status of a long-running `:revokeCerts` operation. */
+  get is ResourceOperations.ResourceRead<RevokeCertsResult>;
 }
