@@ -156,6 +156,6 @@ stimuli:
       - 'Flagged the vague "Matching AiGateway pattern" suppression reason on firewallRules -- suppressions must stand on their own with a real technical justification (TSP-4.1)'
       - 'Recommended using @identifiers(#["volumeId"]) on volumes or @key on volumeId in the StorageVolume model instead of suppressing the rule'
       - 'Did NOT flag the @identifiers(#["moveId"]) on pendingMoves -- this is the correct pattern (positive control)'
-      - 'Did NOT flag the @identifiers(#[]) on diagnosticSnapshots -- explicit empty identifier list is the correct pattern for arrays with no identity (positive control)'
-      - 'Did NOT flag customLabels -- the ClusterLabel item type uses @key on labelKey, which automatically derives x-ms-identifiers (positive control)'
+      - "Did NOT flag the @identifiers(#[]) on diagnosticSnapshots -- explicit empty identifier list is the correct pattern for arrays with no identity (positive control)"
+      - "Did NOT flag customLabels -- the ClusterLabel item type uses @key on labelKey, which automatically derives x-ms-identifiers (positive control)"
       - 'Never suggested @extension("x-ms-identifiers", ...) as a fix in any finding'
