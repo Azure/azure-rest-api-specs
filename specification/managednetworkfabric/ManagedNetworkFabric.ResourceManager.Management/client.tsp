@@ -454,15 +454,9 @@ using Microsoft.ManagedNetworkFabric;
 );
 
 // Replacement models preserve paired base/derived C# model names from the shipped SDK.
-model InternalNetworkBgpConfigurationReplacement extends BgpConfiguration {}
-@@alternateType(
-  InternalNetworkProperties.bgpConfiguration,
-  InternalNetworkBgpConfigurationReplacement,
-  "csharp"
-);
 @@clientName(
-  InternalNetworkBgpConfigurationReplacement,
-  "InternalNetworkBgpConfiguration",
+  InternalNetworkProperties.bgpConfiguration,
+  "BgpSettings",
   "csharp"
 );
 
@@ -1612,11 +1606,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
 );
 @@usage(IpCommunityIdList, Usage.input | Usage.output | Usage.json, "csharp");
 @@usage(
-  InternalNetworkBgpConfigurationReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
   InternalNetworkStaticRouteConfigurationReplacement,
   Usage.input | Usage.output | Usage.json,
   "csharp"
@@ -1656,50 +1645,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
-@@access(BgpConfiguration, Access.public, "csharp");
-@@access(StaticRouteConfiguration, Access.public, "csharp");
-@@access(StaticRoutePatchPropertiesReplacement, Access.public, "csharp");
-@@access(DestinationProperties, Access.public, "csharp");
-@@access(OptionAPropertiesReplacement, Access.public, "csharp");
-@@access(VpnConfigurationProperties, Access.public, "csharp");
-@@access(TerminalServerPatchConfigurationReplacement, Access.public, "csharp");
-@@access(VpnConfigurationProperties, Access.public, "csharp");
-@@access(ManagementNetworkConfigurationProperties, Access.public, "csharp");
-@@access(InternalNetworkBgpConfigurationReplacement, Access.public, "csharp");
-@@access(
-  InternalNetworkStaticRouteConfigurationReplacement,
-  Access.public,
-  "csharp"
-);
-@@access(
-  NetworkToNetworkInterconnectOptionBLayer3ConfigurationReplacement,
-  Access.public,
-  "csharp"
-);
-@@access(
-  NetworkTapPropertiesDestinationsItemReplacement,
-  Access.public,
-  "csharp"
-);
-@@access(
-  NetworkTapPatchableParametersDestinationsItemReplacement,
-  Access.public,
-  "csharp"
-);
-@@access(
-  NetworkFabricPatchablePropertiesTerminalServerConfigurationReplacement,
-  Access.public,
-  "csharp"
-);
-@@access(TerminalServerConfigurationReplacement, Access.public, "csharp");
-@@access(VpnConfigurationOptionAPropertiesReplacement, Access.public, "csharp");
-@@access(
-  VpnConfigurationPatchableOptionAPropertiesReplacement,
-  Access.public,
-  "csharp"
-);
-@@access(InternetGatewayRuleProperties, Access.internal, "csharp");
-@@access(IpExtendedCommunityIdList, Access.public, "csharp");
 // These compatibility base models preserve the shipped C# hierarchy where the
 // action models derive from add-operation models exposing Add*CommunityIds.
 @doc("IP community add operation properties.")
@@ -1712,8 +1657,6 @@ model IPExtendedCommunityAddOperationProperties {
   @doc("List of IP extended community resource IDs to add.")
   add?: IpExtendedCommunityIdList;
 }
-@@access(IPCommunityAddOperationProperties, Access.public, "csharp");
-@@access(IPExtendedCommunityAddOperationProperties, Access.public, "csharp");
 @@usage(
   IPCommunityAddOperationProperties,
   Usage.input | Usage.output | Usage.json,
@@ -1734,29 +1677,11 @@ model IPExtendedCommunityAddOperationProperties {
   "IPExtendedCommunityAddOperationProperties",
   "csharp"
 );
-@@access(L2IsolationDomainPatchProperties, Access.internal, "csharp");
-@@access(L2IsolationDomainProperties, Access.internal, "csharp");
-@@access(NetworkBootstrapInterfacePatchProperties, Access.internal, "csharp");
-@@access(NetworkBootstrapInterfaceProperties, Access.internal, "csharp");
-@@access(NetworkFabricProperties, Access.internal, "csharp");
-@@access(NetworkInterfacePatchProperties, Access.internal, "csharp");
-@@access(NetworkInterfaceProperties, Access.internal, "csharp");
-@@access(NetworkMonitorProperties, Access.internal, "csharp");
-@@access(NetworkRackProperties, Access.internal, "csharp");
-@@access(NetworkTapPatchProperties, Access.internal, "csharp");
-@@access(NetworkTapProperties, Access.internal, "csharp");
-
 // Preserve the shipped C# inheritance hierarchy from the swagger-generated SDK.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   StatementConditionProperties,
   IpCommunityIdList,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  InternalNetworkBgpConfigurationReplacement,
-  BgpConfiguration,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
@@ -1931,19 +1856,6 @@ model IPExtendedCommunityAddOperationProperties {
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ExternalNetworkPatchPropertiesOptionAProperties,
   Layer3IpPrefixProperties,
-  "csharp"
-);
-@@access(ConnectedSubnetRoutePolicy, Access.public, "csharp");
-@@access(IpCommunityIdList, Access.public, "csharp");
-@@access(ManagementNetworkPatchConfiguration, Access.public, "csharp");
-@@access(VpnConfigurationPatchableProperties, Access.public, "csharp");
-@@access(PollingIntervalInSeconds, Access.public, "csharp");
-@@access(TerminalServerPatchConfiguration, Access.public, "csharp");
-@@access(InternetGateways.create, Access.internal, "csharp");
-@@access(InternetGateways.delete, Access.internal, "csharp");
-@@access(
-  InternetGatewayRuleProperties.internetGatewayIds,
-  Access.internal,
   "csharp"
 );
 @@clientName(
