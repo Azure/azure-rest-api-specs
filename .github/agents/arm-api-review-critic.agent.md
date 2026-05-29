@@ -395,13 +395,24 @@ Procedure:
    target the shared definition. If a failing LintDiff run exists on the PR,
    the Reviewer **MUST** quote the reported `jsonpath`; if no run exists yet,
    the suppression must be labeled "provisional".
-4. Verify the `downstream-rule:` marker references a real `linter-rule-coverage.md`
+4. **Suppression `where:` must equal the LintDiff `jsonpath` exactly, segment
+   for segment, including the trailing leaf segment** (`.format`, `.type`,
+   `.x-ms-secret`, etc.). The validator's `where:` is an exact-match
+   comparison, not an ancestor match. An ancestor `where:` (e.g.,
+   `$.definitions["Azure.Core.uuid"]` when the violation jsonpath is
+   `["definitions", "Azure.Core.uuid", "format"]`) silently does not match and
+   the failure persists. Render the Reviewer's `where:` from the quoted
+   jsonpath array and confirm character-for-character equality. A mismatch is
+   `FAIL: suppression-path-mismatch`.
+5. Verify the `downstream-rule:` marker references a real `linter-rule-coverage.md`
    entry. A fabricated rule ID is a `FAIL: rule-not-found`.
 
 If the Reviewer's finding fails any of these checks, mark
-`FAIL: downstream-ci-conflict` and record the specific gap (missing options,
-wrong suppression form, missing marker, fabricated rule ID, or directive
-phrasing). This FAIL is **non-overridable** via the per-comment
+`FAIL: downstream-ci-conflict` (or the more specific
+`FAIL: suppression-path-mismatch` when the path equality check from item 4
+fails) and record the specific gap (missing options, wrong suppression form,
+wrong suppression path, missing marker, fabricated rule ID, or directive
+phrasing). Both are **non-overridable** via the per-comment
 `critic: override` marker, on the same footing as reconciliation FAILs: the
 Reviewer must correct the finding, drop it, or escalate per
 `arm-api-reviewer.agent.md` Step 7.

@@ -58,24 +58,31 @@ The correct `where:` path depends on how the OpenAPI is produced. **Always
 verify the suppression path against the actual LintDiff failure log** before
 recommending it. Do not infer the path from the source property name.
 
+> **Critical: `where:` must equal the LintDiff `jsonpath` exactly, segment for
+> segment, including the trailing leaf segment (`.format`, `.type`,
+> `.x-ms-secret`, etc.).** The validator does **not** treat the `where:` clause
+> as an ancestor match. A `where:` that targets the parent object (for example
+> `$.definitions["Azure.Core.uuid"]` when the violation is at
+> `$.definitions["Azure.Core.uuid"].format`) silently does not match and the
+> failure persists.
+
 ### Form A. TypeSpec-generated OpenAPI
 
 The TypeSpec `uuid` scalar emits a single shared definition that every property
-`$ref`s. LintDiff fires on that shared definition, not on each property. The
-suppression must target the shared definition:
+`$ref`s. LintDiff fires on the `format` leaf of that shared definition, not on
+each property. The suppression must target the exact leaf:
 
 ```yaml
 suppressions:
   - code: GuidUsage
     from: <openapi-file>.json
-    where: $.definitions["Azure.Core.uuid"]
+    where: $.definitions["Azure.Core.uuid"].format
     reason: >-
       Used only for <enumerate the relying properties, e.g.,
       DataEncryption.primaryFederatedIdentityClientId,
       DataEncryption.geoBackupFederatedIdentityClientId>. All are
       Microsoft Entra <client|tenant|principal> IDs (RFC 4122 UUIDs) per
-      ARM identity guidelines. Approved by Azure API review board:
-      <link or reviewer handle>.
+      ARM identity guidelines. Approved by <reviewer GitHub handle>.
 ```
 
 A single entry covers every property that uses the `uuid` scalar (they share
@@ -85,18 +92,39 @@ GUID misuse on unrelated properties is still visible at review time.
 ### Form B. Handwritten OpenAPI
 
 When the property's schema is inlined (no shared definition), LintDiff fires at
-the property path itself. Use one entry per property:
+the `format` leaf of the property. Use one entry per property, and include the
+trailing `.format` segment:
 
 ```yaml
 suppressions:
   - code: GuidUsage
     from: <openapi-file>.json
-    where: $.definitions.<Model>.properties.<propertyName>
+    where: $.definitions.<Model>.properties.<propertyName>.format
     reason: >-
       <Property> is a Microsoft Entra <client|tenant|principal> ID
       (RFC 4122 UUID) per ARM identity guidelines.
-      Approved by Azure API review board: <link or reviewer handle>.
+      Approved by <reviewer GitHub handle>.
 ```
+
+### Common pitfalls (both forms)
+
+1. **Ancestor `where:` does not match.** The `where:` clause is matched
+   exactly against the validator's reported `jsonpath`. The trailing leaf
+   segment (`.format` for `GuidUsage`) is mandatory.
+2. **Per-property `where:` against TypeSpec output does not match.** Every
+   property typed `uuid` resolves to a `$ref` to `Azure.Core.uuid`; LintDiff
+   reports the violation on the shared definition, not on each `$ref` site.
+   Use Form A for TypeSpec-generated specs.
+3. **File-wide suppression (`where:` omitted) is over-broad.** It disables
+   `GuidUsage` for the whole spec including future additions and will be
+   flagged as a Blocking finding.
+4. **`reason: Approved by Azure API review board pull request <N>` is
+   circular.** The PR is what is being approved; cite the approving reviewer's
+   GitHub handle (or a link to the approval comment / ADO work item).
+5. **Leftover entries from earlier attempts.** A wrong-path suppression
+   silently no-ops; it does not error. After fixing the path, delete the
+   stale entries so the next reader is not misled into thinking they are
+   load-bearing.
 
 ### Suppression review notes (both forms)
 
