@@ -151,7 +151,7 @@ using Microsoft.Chaos;
 );
 @@clientName(ScenarioProperties, "ChaosScenarioProperties", "csharp");
 @@clientName(ScenarioRunProperties, "ChaosScenarioRunProperties", "csharp");
-@@clientName(ScenarioRunResource, "ChaosScenarioRunResource", "csharp");
+@@clientName(ScenarioRunResource, "ChaosScenarioRunResourceInfo", "csharp");
 @@clientName(ScenarioRunState, "ChaosScenarioRunState", "csharp");
 @@clientName(
   ScenarioRunSummaryAction,
