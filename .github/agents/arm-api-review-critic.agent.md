@@ -68,6 +68,7 @@ browser "find on page".
 | 2   | Re-read the cited line(s)                    | Off-by-one + conflict-marker check.                                                                |
 | 3   | Re-read and re-quote the cited rule          | Verbatim quote from instruction file.                                                              |
 | 4   | Re-verify [NEW] vs [EXISTING] classification | Fetch previous-version file; compare.                                                              |
+| 4.5 | Re-verify downstream-CI impact               | Non-overridable FAIL when fix would trigger a required LintDiff rule and Reviewer did not handle.  |
 | 5   | Assign a confidence level                    | High/Medium/Low + override-reason validation.                                                      |
 | 6   | Hunt for missed violations (advisory)        | Six bias filters; suppress declined candidates per Input #8.                                       |
 | 7   | Re-verify the reconciliation plan            | Independent re-anchor of every Step 5.5 plan entry.                                                |
@@ -364,6 +365,44 @@ same JSON path / model / operation. Confirm the classification:
 
 If the classification is wrong in either direction, mark
 `FAIL: misclassified` and record the correct classification.
+
+### Step 4.5: Re-verify downstream-CI impact (MANDATORY)
+
+For every finding whose proposed fix would **add or tighten** a type, format,
+decorator, `x-ms-*` extension, or schema constraint, independently confirm
+that the Reviewer performed the Step 4.5 downstream-CI check from
+`arm-api-reviewer.agent.md`. This catches the failure mode where a Reviewer
+recommendation triggers a required LintDiff rule on the resulting Swagger
+(e.g., recommending `format: uuid` produces output that fails `GuidUsage`).
+
+Procedure:
+
+1. Open [`linter-rule-coverage.md`](../skills/azure-api-review/references/linter-rule-coverage.md)
+   and check whether the affected rule area is flagged `⚠️ Conflict-aware`. If
+   yes, open the referenced detail file (e.g.,
+   [`guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md)).
+2. The Reviewer's finding **MUST** be phrased as a multi-option recommendation
+   matching the option set required by the detail file, **MUST NOT** be
+   phrased as a directive, **MUST** carry the `downstream-rule: <rule-id>`
+   telemetry marker, and **SHOULD** default to Suggestion severity unless the
+   property unambiguously meets the "acceptable" criteria.
+3. If the recommendation includes a suppression, the suppression `where:` path
+   **MUST** match the actual generator output (Form A vs Form B in the detail
+   file). For TypeSpec-generated specs, per-property `where:` clauses on
+   shared scalars (`Azure.Core.uuid`, etc.) are wrong and the Reviewer must
+   target the shared definition. If a failing LintDiff run exists on the PR,
+   the Reviewer **MUST** quote the reported `jsonpath`; if no run exists yet,
+   the suppression must be labeled "provisional".
+4. Verify the `downstream-rule:` marker references a real `linter-rule-coverage.md`
+   entry. A fabricated rule ID is a `FAIL: rule-not-found`.
+
+If the Reviewer's finding fails any of these checks, mark
+`FAIL: downstream-ci-conflict` and record the specific gap (missing options,
+wrong suppression form, missing marker, fabricated rule ID, or directive
+phrasing). This FAIL is **non-overridable** via the per-comment
+`critic: override` marker, on the same footing as reconciliation FAILs: the
+Reviewer must correct the finding, drop it, or escalate per
+`arm-api-reviewer.agent.md` Step 7.
 
 ### Step 5: Assign a confidence level
 
