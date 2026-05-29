@@ -35,6 +35,7 @@ jobs:
           # "git show" on specific files instead of cloning whole repo
           sparse-checkout: |
             .github
+          persist-credentials: false
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
