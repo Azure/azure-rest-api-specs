@@ -33,6 +33,7 @@ jobs:
         with:
           sparse-checkout: |
             .github
+          persist-credentials: false
 
       - if: ${{ matrix.folder == '.github' }}
         name: Install dependencies for github-script actions
