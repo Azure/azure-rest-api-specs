@@ -39,16 +39,16 @@ union Severity {
   string,
 
   /** No issues found. */
-  pass: "pass",
+  Pass: "Pass",
 
   /** Non-blocking issues found; upgrade is possible but action is recommended. */
-  warning: "warning",
+  Warning: "Warning",
 
   /** Blocking issues found; upgrade should not proceed without remediation. */
-  critical: "critical",
+  Critical: "Critical",
 
   /** Severity could not be determined. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 }
 
 /** Compatibility status of a cluster component with the target Kubernetes version. */
@@ -56,16 +56,16 @@ union CompatibilityStatus {
   string,
 
   /** Component is compatible with the target version. */
-  compatible: "compatible",
+  Compatible: "Compatible",
 
   /** Compatibility with the target version has not been tested. */
-  untested: "untested",
+  Untested: "Untested",
 
   /** Component is incompatible with the target version. */
-  incompatible: "incompatible",
+  Incompatible: "Incompatible",
 
   /** Compatibility status is unknown. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 }
 
 /** Category of a cluster readiness check. */
@@ -331,10 +331,17 @@ model KubernetesGenericField {
 
   /**
    * Array items, populated when type is 'array'.
-   * Each inner array represents one element, itself a set of named fields.
+   * Each element represents one array entry as a set of named fields.
    */
   @identifiers(#[])
-  items?: KubernetesGenericField[][];
+  items?: KubernetesGenericFieldGroup[];
+}
+
+/** One element of a generic array field, represented as a set of named fields. */
+model KubernetesGenericFieldGroup {
+  /** The named fields comprising this array element. */
+  @identifiers(#["name"])
+  fields: KubernetesGenericField[];
 }
 
 // ─── Container support models ─────────────────────────────────────────────────

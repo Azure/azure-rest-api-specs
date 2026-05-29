@@ -19,7 +19,7 @@ model KubeInventory is Azure.ResourceManager.ProxyResource<KubeInventoryProperti
     Resource = KubeInventory,
     KeyName = "kubeInventoryName",
     SegmentName = "kubeInventory",
-    NamePattern = ""
+    NamePattern = "^[a-z]([a-z0-9._-]{0,126}[a-z0-9])?$"
   >;
 }
 
@@ -41,6 +41,7 @@ alias KubeInventoryOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("providers")
     @key
+    @pattern("^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService)$")
     clusterRp: string;
 
     /**
@@ -49,7 +50,7 @@ alias KubeInventoryOps = Azure.ResourceManager.Legacy.ExtensionOperations<
      */
     @key
     @path
-    @pattern("^[a-zA-Z]*$")
+    @pattern("^[a-zA-Z]+$")
     clusterResourceName: string;
 
     /**
@@ -57,7 +58,7 @@ alias KubeInventoryOps = Azure.ResourceManager.Legacy.ExtensionOperations<
      */
     @key
     @path
-    @pattern("^.*")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$")
     clusterName: string;
   },
   {
