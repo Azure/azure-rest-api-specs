@@ -422,7 +422,7 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(RebootType, "NetworkDeviceRebootType", "csharp");
 @@clientName(
   TerminalServerConfiguration,
-  "TerminalServerConfigurationTemp",
+  "NetworkFabricTerminalServerConfiguration",
   "csharp"
 );
 @@clientName(
@@ -473,6 +473,12 @@ using Microsoft.ManagedNetworkFabric;
 );
 
 @@clientName(
+  NetworkFabricProperties.terminalServerConfiguration,
+  "TerminalServerSettings",
+  "csharp"
+);
+
+@@clientName(
   NetworkTapProperties.destinations,
   "DestinationSettings",
   "csharp"
@@ -515,30 +521,6 @@ model NetworkFabricPatchablePropertiesTerminalServerConfigurationReplacement
 @@clientName(
   NetworkFabricPatchablePropertiesTerminalServerConfigurationReplacement,
   "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
-  "csharp"
-);
-
-model TerminalServerConfigurationReplacement
-  extends TerminalServerPatchConfigurationReplacement {
-  primaryIpv4Prefix?: string;
-  primaryIpv6Prefix?: string;
-  secondaryIpv4Prefix?: string;
-  secondaryIpv6Prefix?: string;
-
-  @visibility(Lifecycle.Read)
-  networkDeviceId?: Azure.Core.armResourceIdentifier;
-
-  @visibility(Lifecycle.Read)
-  secretRotationStatus?: SecretRotationStatus[];
-}
-@@alternateType(
-  TerminalServerConfiguration,
-  TerminalServerConfigurationReplacement,
-  "csharp"
-);
-@@clientName(
-  TerminalServerConfigurationReplacement,
-  "TerminalServerConfiguration",
   "csharp"
 );
 
@@ -1357,26 +1339,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   "csharp"
 );
 @@clientName(
-  TerminalServerConfigurationReplacement.primaryIpv4Prefix,
-  "PrimaryIPv4Prefix",
-  "csharp"
-);
-@@clientName(
-  TerminalServerConfigurationReplacement.primaryIpv6Prefix,
-  "PrimaryIPv6Prefix",
-  "csharp"
-);
-@@clientName(
-  TerminalServerConfigurationReplacement.secondaryIpv4Prefix,
-  "SecondaryIPv4Prefix",
-  "csharp"
-);
-@@clientName(
-  TerminalServerConfigurationReplacement.secondaryIpv6Prefix,
-  "SecondaryIPv6Prefix",
-  "csharp"
-);
-@@clientName(
   VpnConfigurationOptionAPropertiesReplacement.primaryIpv4Prefix,
   "PrimaryIPv4Prefix",
   "csharp"
@@ -1563,11 +1525,6 @@ model VpnConfigurationPatchableOptionAPropertiesReplacement
   "csharp"
 );
 @@usage(
-  TerminalServerConfigurationReplacement,
-  Usage.input | Usage.output | Usage.json,
-  "csharp"
-);
-@@usage(
   VpnConfigurationOptionAPropertiesReplacement,
   Usage.input | Usage.output | Usage.json,
   "csharp"
@@ -1619,12 +1576,6 @@ model IPExtendedCommunityAddOperationProperties {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   NetworkFabricPatchablePropertiesTerminalServerConfigurationReplacement,
-  TerminalServerPatchConfigurationReplacement,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  TerminalServerConfigurationReplacement,
   TerminalServerPatchConfigurationReplacement,
   "csharp"
 );
