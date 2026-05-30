@@ -188,11 +188,6 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@clientName(
-  ManagedServiceIdentityType,
-  "NetworkFabricManagedServiceIdentityType",
-  "csharp"
-);
-@@clientName(
   Microsoft.ManagedNetworkFabric.MicroBfdState,
   "NetworkFabricMicroBfdState",
   "csharp"
@@ -459,12 +454,6 @@ using Microsoft.ManagedNetworkFabric;
   "ValidateConfigurationContent",
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.Foundations.OperationStatusResult,
-  "NetworkFabricOperationStatusResult",
-  "csharp"
-);
-
 // Replacement models preserve paired base/derived C# model names from the shipped SDK.
 @@clientName(
   InternalNetworkProperties.bgpConfiguration,
