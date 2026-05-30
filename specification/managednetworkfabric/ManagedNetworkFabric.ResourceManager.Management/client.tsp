@@ -539,9 +539,9 @@ using Microsoft.ManagedNetworkFabric;
   "OptionBLayer3Settings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkToNetworkInterconnectPatchProperties.npbStaticRouteConfiguration,
-  NpbStaticRouteConfiguration,
+  "NpbStaticRouteSettings",
   "csharp"
 );
 @@alternateType(
@@ -627,16 +627,6 @@ using Microsoft.ManagedNetworkFabric;
 @@alternateType(
   RoutePolicyPatchableProperties.statements,
   RoutePolicyStatementProperties[],
-  "csharp"
-);
-@@alternateType(
-  NpbStaticRouteConfigurationPatch.ipv4Routes,
-  StaticRouteProperties[],
-  "csharp"
-);
-@@alternateType(
-  NpbStaticRouteConfigurationPatch.ipv6Routes,
-  StaticRouteProperties[],
   "csharp"
 );
 @@alternateType(
@@ -807,6 +797,8 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(StaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
 @@clientName(NpbStaticRouteConfiguration.ipv4Routes, "IPv4Routes", "csharp");
 @@clientName(NpbStaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
+@@clientName(NpbStaticRouteConfigurationPatch.ipv4Routes, "IPv4Routes", "csharp");
+@@clientName(NpbStaticRouteConfigurationPatch.ipv6Routes, "IPv6Routes", "csharp");
 @@clientName(
   RouteTargetInformation.exportIpv4RouteTargets,
   "ExportIPv4RouteTargets",
