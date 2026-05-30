@@ -1454,32 +1454,32 @@ using Microsoft.ManagedNetworkFabric;
 // These compatibility base models preserve the shipped C# hierarchy where the
 // action models derive from add-operation models exposing Add*CommunityIds.
 @doc("IP community add operation properties.")
-model IPCommunityAddOperationProperties {
+model IpCommunityAddOperationProperties {
   @doc("List of IP community resource IDs to add.")
   add?: IpCommunityIdList;
 }
 @doc("IP extended community add operation properties.")
-model IPExtendedCommunityAddOperationProperties {
+model IpExtendedCommunityAddOperationProperties {
   @doc("List of IP extended community resource IDs to add.")
   add?: IpExtendedCommunityIdList;
 }
 @@usage(
-  IPCommunityAddOperationProperties,
+  IpCommunityAddOperationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
 @@usage(
-  IPExtendedCommunityAddOperationProperties,
+  IpExtendedCommunityAddOperationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
 @@clientName(
-  IPCommunityAddOperationProperties,
+  IpCommunityAddOperationProperties,
   "IPCommunityAddOperationProperties",
   "csharp"
 );
 @@clientName(
-  IPExtendedCommunityAddOperationProperties,
+  IpExtendedCommunityAddOperationProperties,
   "IPExtendedCommunityAddOperationProperties",
   "csharp"
 );
@@ -1499,13 +1499,13 @@ model IPExtendedCommunityAddOperationProperties {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve shipped base type for migration compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ActionIpCommunityProperties,
-  IPCommunityAddOperationProperties,
+  IpCommunityAddOperationProperties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve shipped base type for migration compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ActionIpExtendedCommunityProperties,
-  IPExtendedCommunityAddOperationProperties,
+  IpExtendedCommunityAddOperationProperties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
