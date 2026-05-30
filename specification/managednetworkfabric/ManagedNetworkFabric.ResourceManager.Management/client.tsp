@@ -579,9 +579,9 @@ using Microsoft.ManagedNetworkFabric;
   "ConnectedSubnetRoutePolicySettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NeighborGroupPatchProperties.destination,
-  NeighborGroupDestination,
+  "DestinationSettings",
   "csharp"
 );
 @@alternateType(
