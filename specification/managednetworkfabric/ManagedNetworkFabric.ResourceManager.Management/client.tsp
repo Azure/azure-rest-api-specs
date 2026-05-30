@@ -569,14 +569,14 @@ using Microsoft.ManagedNetworkFabric;
   "ExportRoutePolicySettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   L3IsolationDomainPatchProperties.aggregateRouteConfiguration,
-  AggregateRouteConfiguration,
+  "AggregateRouteSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   L3IsolationDomainPatchProperties.connectedSubnetRoutePolicy,
-  ConnectedSubnetRoutePolicy,
+  "ConnectedSubnetRoutePolicySettings",
   "csharp"
 );
 @@alternateType(
