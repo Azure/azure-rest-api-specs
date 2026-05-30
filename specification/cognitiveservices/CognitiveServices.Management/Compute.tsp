@@ -19,6 +19,7 @@ namespace Microsoft.CognitiveServices;
  * (Cluster, ContainerInstance) via the computeType discriminator in properties.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @parentResource(Account)
 model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
   ...ResourceNameParameter<
@@ -63,6 +64,7 @@ model Compute is Azure.ResourceManager.ProxyResource<ComputeProperties, false> {
 }
 
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface Computes {
   /**

@@ -248,6 +248,7 @@ interface Accounts {
    * Evaluate Azure Policy compliance for a set of hypothetical deployments without creating them.
    */
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   @tag("CognitiveServicesAccounts")
   evaluateDeploymentPolicies is AccountOps.ActionSync<
     Account,
