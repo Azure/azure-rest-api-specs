@@ -584,24 +584,24 @@ using Microsoft.ManagedNetworkFabric;
   "DestinationSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   AccessControlListPatchProperties.matchConfigurations,
-  AccessControlListMatchConfiguration[],
+  "MatchConfigurationSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   AccessControlListPatchProperties.dynamicMatchConfigurations,
-  CommonDynamicMatchConfiguration[],
+  "DynamicMatchConfigurationSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkTapRulePatchProperties.matchConfigurations,
-  NetworkTapRuleMatchConfiguration[],
+  "MatchConfigurationSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkTapRulePatchProperties.dynamicMatchConfigurations,
-  CommonDynamicMatchConfiguration[],
+  "DynamicMatchConfigurationSettings",
   "csharp"
 );
 @@alternateType(
