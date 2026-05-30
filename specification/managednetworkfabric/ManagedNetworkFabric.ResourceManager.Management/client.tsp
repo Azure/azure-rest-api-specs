@@ -45,6 +45,18 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(IpCommunityRule, "IPCommunityRule", "csharp");
 @@clientName(IpExtendedCommunityRule, "IPExtendedCommunityRule", "csharp");
 @@clientName(IpPrefixRule, "IPPrefixRule", "csharp");
+@@clientName(IpGroupPatchProperties, "IPGroupPatchProperties", "csharp");
+@@clientName(IpMatchConditionPatch, "IPMatchConditionPatch", "csharp");
+@@clientName(
+  ActionIpCommunityPatchProperties,
+  "ActionIPCommunityPatchProperties",
+  "csharp"
+);
+@@clientName(
+  ActionIpExtendedCommunityPatchProperties,
+  "ActionIPExtendedCommunityPatchProperties",
+  "csharp"
+);
 @@clientName(Condition, "IPPrefixRuleCondition", "csharp");
 @@clientName(WellKnownCommunities, "WellKnownCommunity", "csharp");
 @@clientName(InterfaceType, "NetworkDeviceInterfaceType", "csharp");
@@ -614,9 +626,9 @@ using Microsoft.ManagedNetworkFabric;
   "PollingIntervalInSecond",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   RoutePolicyPatchableProperties.statements,
-  RoutePolicyStatementProperties[],
+  "StatementSettings",
   "csharp"
 );
 @@alternateType(
@@ -1126,6 +1138,21 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@clientName(StatementConditionProperties.ipPrefixId, "IPPrefixId", "csharp");
+@@clientName(
+  StatementConditionPatchProperties.ipPrefixId,
+  "IPPrefixId",
+  "csharp"
+);
+@@clientName(
+  StatementConditionPatchProperties.ipCommunityIds,
+  "IPCommunityIds",
+  "csharp"
+);
+@@clientName(
+  StatementConditionPatchProperties.ipExtendedCommunityIds,
+  "IPExtendedCommunityIds",
+  "csharp"
+);
 @@clientName(IpCommunityIdList.ipCommunityIds, "IPCommunityIds", "csharp");
 @@clientName(
   IpExtendedCommunityIdList.ipExtendedCommunityIds,
@@ -1299,10 +1326,25 @@ using Microsoft.ManagedNetworkFabric;
   "IPExtendedCommunityRules",
   "csharp"
 );
+@@clientName(
+  StatementActionPatchProperties.ipCommunityProperties,
+  "IPCommunityProperties",
+  "csharp"
+);
+@@clientName(
+  StatementActionPatchProperties.ipExtendedCommunityProperties,
+  "IPExtendedCommunityProperties",
+  "csharp"
+);
 @@clientName(IpPrefixProperties.ipPrefixRules, "IPPrefixRules", "csharp");
 @@clientName(
   IpPrefixPatchableProperties.ipPrefixRules,
   "IPPrefixRules",
+  "csharp"
+);
+@@clientName(
+  NetworkTapRuleMatchConfigurationPatch.ipAddressType,
+  "IPAddressType",
   "csharp"
 );
 @@clientName(
