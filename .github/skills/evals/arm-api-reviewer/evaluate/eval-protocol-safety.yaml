@@ -16,7 +16,7 @@ scoring:
 stimuli:
   # 160001 -- Subagent dispatch failure must produce handoff and no findings
   - name: critic-subagent-failure-session-handoff
-    prompt: >
+    prompt: |
       You are the ARM API Reviewer mid-session for PR
       Azure/azure-rest-api-specs#12345. Step 1 already pinned session head SHA
       `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` and base SHA
@@ -28,11 +28,18 @@ stimuli:
       response defined in agent.md "Canonical output templates" Template B:
       the `<!-- review-state: critic-mode=pending | iteration=1 |
       pr=Azure/azure-rest-api-specs#12345 -->` marker as the very first line,
-      then the verbatim Rung 2 prompt body (the one that begins "Subagent
-      invocation is not available in this session..." and ends with the
-      `'skip critic'` opt-out). Do NOT render any API findings, graphs,
-      Reconciliation Plan, or posting menu -- the response is only the
-      marker plus the handoff prompt.
+      then the verbatim Rung 2 prompt body. Do NOT render any API findings,
+      graphs, Reconciliation Plan, or posting menu -- the response is only
+      the marker plus the handoff prompt.
+
+      Template B is defined in agent.md as follows (substitute only the
+      marker placeholders; the prompt body MUST be byte-for-byte identical):
+
+      ```markdown
+      <!-- review-state: critic-mode=pending | iteration=<N> | pr=<owner/repo#number> -->
+
+      Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
+      ```
     constraints:
       expect_skills:
         - azure-api-review
@@ -155,7 +162,7 @@ stimuli:
 
   # 160004 -- Happy-path: Critic PASS, READY TO POST report rendered with subagent marker
   - name: critic-pass-renders-ready-to-post
-    prompt: >
+    prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#54321.
       Step 1 pinned session head SHA
       `dddddddddddddddddddddddddddddddddddddddd` and base SHA
@@ -179,6 +186,32 @@ stimuli:
       / Cancel). Do NOT render a CAUTION banner, a SESSION INVALIDATED
       heading, or a session-handoff prompt -- the happy path is silent about
       the Critic mode in the body, but the marker still records it.
+
+      Template C is defined in agent.md as follows. Every posted comment ends
+      with the marker as its literal last line; every field is required on
+      every post (substitute the explicit placeholder if a value is not
+      supplied):
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING (e.g., "Introduced in this PR - this property did not exist in the previous version at base SHA <short-base-sha>")>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      ````
+
+      The trailing telemetry marker is an HTML comment (literal `<!-- ... -->`),
+      pipe-separated, with `:` (not `=`) between field name and value. Field
+      order is fixed: `posted-by`, `rule`, `severity`, `classification`,
+      `critic`, `head-sha`. Do NOT render telemetry as a visible blockquote
+      (`> **Telemetry:** ...`) or with `=` separators -- those forms are not
+      machine-readable.
     constraints:
       expect_skills:
         - azure-api-review
@@ -310,7 +343,7 @@ stimuli:
 
   # 160007 -- Override-reason marker is emitted when human overrides a Critic FAIL
   - name: override-reason-marker-on-human-override
-    prompt: >
+    prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#99999.
       Step 1 pinned session head SHA
       `abcdefabcdefabcdefabcdefabcdefabcdefabcd`. On iteration 1, the
@@ -334,6 +367,36 @@ stimuli:
       defined in Step 7 item 13.4. Do NOT emit the abbreviated marker
       form and do NOT omit `override-reason:` -- both fields are required
       whenever `critic=override`.
+
+      Template C (canonical posted-comment body) and the human-override
+      variant are defined in agent.md as follows. The trailing telemetry
+      marker is an HTML comment, pipe-separated, with `:` between field
+      name and value, in fixed field order:
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      **Note:** Critic FAILed this finding (<critic-reason>); reviewer overrode with justification: <override-reason>.
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
+      ````
+
+      Step 7 item 13.4 specifies that when overriding a Critic FAIL, the
+      finding body MUST include the literal line:
+
+          **Note:** Critic FAILed this finding (<reason>); reviewer overrode with justification: <reason>.
+
+      The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->`
+      is NEVER acceptable on an `critic=override` post; the full 7-field form
+      (with `override-reason:` as the last field) is required.
     constraints:
       expect_skills:
         - azure-api-review
