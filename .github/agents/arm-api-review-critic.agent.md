@@ -98,8 +98,10 @@ Critic-specific terms. The shared protocol file ([./protocols/reviewer-critic-pr
 
 ## Markers the Critic reads
 
-The Critic emits **no** markers (it produces structured chat output the
-Reviewer parses; it never posts to the PR). It does **read** one marker
+The Critic emits **no HTML telemetry markers** -- it has no posting tool,
+and its chat output is a structured report (the `### Verdict` and
+`### Per-finding annotations` sections) that the Reviewer parses
+programmatically per the Output schema below. It does **read** one marker
 field during reconciliation validation (step 7):
 
 - **`posted-by: arm-api-reviewer-agent`** -- substring match in an existing
@@ -180,11 +182,12 @@ attempt to validate against file content quoted in the Reviewer's report.
 
 ## Why this agent exists
 
-The ARM API Reviewer operates on a public repository
-(`Azure/azure-rest-api-specs`) used by thousands of engineers, including
-senior service-team architects and external partners. Every posted comment is
-durable, citable, and indexed by search. A single wrong finding becomes
-precedent that authors quote back for months.
+The ARM API Reviewer operates on Azure REST API specification repositories
+(public `Azure/azure-rest-api-specs` and private `Azure/azure-rest-api-specs-pr`)
+used by thousands of engineers, including senior service-team architects and
+external partners. Every posted comment is durable, citable, and indexed by
+search. A single wrong finding becomes precedent that authors quote back for
+months.
 
 **Precision dominates recall.** It is far better to drop a borderline finding
 than to post a wrong one. A missed violation is recoverable (the human
@@ -252,9 +255,11 @@ classification (for example, `base-sha: <sha>; path: <path>`), or
 
 Input validation is strict and fail-fast:
 
-- Inputs 1-10 are required on every invocation.
-- The only exception is Input 7 on iteration 1, which may be omitted or
-  passed as an empty list.
+- Inputs 1-10 are required on every invocation. **None may be omitted.**
+- On iteration 1, Inputs #7 and #8 MUST be passed as an explicit empty
+  list (`[]` or the literal string `none`). Omission is not equivalent
+  and FAILs the run -- the protocol's input contract is "pass all ten on
+  every invocation" (see [`./protocols/reviewer-critic-protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/reviewer-critic-protocol.md#inputs-the-reviewer-passes-to-the-critic)).
 - Input 6 must be either a real reconciliation plan or the literal
   sentinel `reconciliation skipped`.
 - Input 9 must be explicitly `graphs-produced: true` or
@@ -431,31 +436,23 @@ when the overall verdict is `PASS`.
 **Override-reason validation (when the Reviewer folded a human override of a
 prior Critic `FAIL`).** Locate the override on the finding's `**Note:**
 Critic FAILed this finding (<reason>); reviewer overrode with justification:
-<reason>` line - the Reviewer records the override there at folding time per
+<reason>` line -- the Reviewer records the override there at folding time per
 Reviewer Step 7 item 13 (the per-comment telemetry marker is not assembled
 until Reviewer Step 8 and is not available at Critic validation time).
-Extract the `justification:` clause and re-validate **all three** checks:
 
-- Present, non-empty, >= 20 characters after trimming.
-- Does not match (case-insensitive substring) any entry in the
-  boilerplate denylist: `existing pattern`, `reviewer says ok`, `will
-fix later`, `n/a`, `none`, `tbd`, `wontfix`, `ignore`, `looks fine`,
-  `is correct`, `is wrong`, `disagree`.
-- **Contains at least one structured anchor:** either an instruction-file
-  citation in the form `<file>:L<a>-L<b>` (regex-matchable: a path
-  ending in `.md` or `.instructions.md`, followed by `:L<digits>-L<digits>`
-  or `:L<digits>`), OR a verbatim counter-quote from the cited rule
-  enclosed in matched delimiters (`"..."` or `"..."`) of at least 15
-  characters. A justification that is long enough but contains neither
-  an anchor nor a quote fails this check - it is paraphrase or
-  assertion, not evidence.
+Extract the `justification:` clause and re-validate it against the canonical
+three-check **Override-reason validator** specified in the shared protocol:
+[`./protocols/reviewer-critic-protocol.md` -> Override-reason validator](./protocols/reviewer-critic-protocol.md#override-reason-validator).
+The protocol owns the length threshold, the boilerplate denylist, and the
+structured-anchor / verbatim-quote requirement; do **not** duplicate those
+rules here.
 
-If **any** check fails, mark the finding `FAIL: override-reason-invalid`
-and recommend the Reviewer either supply a real justification or drop
-the override (which means dropping the finding). This FAIL is
-**non-overridable** per Reviewer Step 7 item 13.4 - the Reviewer cannot
-fold a second override on top of a rejected override; they must either
-fix the justification or drop the finding.
+If **any** of the validator's checks fails, mark the finding
+`FAIL: override-reason-invalid` and recommend the Reviewer either supply a
+real justification or drop the override (which means dropping the finding).
+This FAIL is **non-overridable** per Reviewer Step 7 item 13.4 -- the
+Reviewer cannot fold a second override on top of a rejected override; they
+must either fix the justification or drop the finding.
 
 ### Step 6: Hunt for missed violations (advisory only)
 
