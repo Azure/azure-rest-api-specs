@@ -234,8 +234,14 @@ according to these scenarios:
   The agent lists each matching existing thread with its clickable comment URL.
 - **E -- Agent-origin violation fixed:** an existing unresolved agent comment
   flags a violation that no longer exists in the latest code. The agent plans
-  to thank the author and resolve its own thread after overall plan approval.
-  Human-origin fixed threads are surfaced separately for explicit per-thread
+  to thank the author and resolve its own thread. **Important:** approval of
+  the overall plan is **bulk consent** that auto-resolves every Scenario E
+  thread without a separate per-thread prompt. The plan-approval prompt makes
+  this scope explicit by stating the count of Scenario E rows, listing the
+  agent-thread URLs that will be auto-resolved (first 5 inline, rest in the
+  plan table), and reminding you that **Execute selectively** lets you keep
+  any specific Scenario E thread unresolved. Human-origin fixed threads
+  remain in Scenario F and are surfaced separately for explicit per-thread
   consent before any reply or resolution.
 
 Before executing any actions, the agent presents a **reconciliation summary**:
@@ -354,16 +360,16 @@ The agent **does not**:
 
 ### Agent Files (under `.github/`)
 
-| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                                    |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                                               |
-| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                                           |
-| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                                               |
-| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                                      |
-| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                                  |
-| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                                      |
-| `skills/azure-api-review/references/*.md`       | 16 cross-cutting rule references (secret detection, property mutability, provisioning state, naming conventions, enum best practices, example quality, tracked resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight compliance, LRO final-state-via, suppression review criteria, linter rule coverage, design decisions) |
-| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                                             |
+| File                                            | Purpose                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agents/arm-api-reviewer.agent.md`              | Agent definition -- persona, workflow, PR resolution, comment reconciliation                                                                                                                                                                                                                                                                                                       |
+| `instructions/armapi-review.instructions.md`    | ARM control-plane review rules (96 rule IDs: 58 RPC + 38 additional covering policy, template deployment, what-if/preflight, secrets, property design, and more)                                                                                                                                                                                                                   |
+| `instructions/openapi-review.instructions.md`   | Generic OpenAPI review rules                                                                                                                                                                                                                                                                                                                                                       |
+| `instructions/typespec-review.instructions.md`  | TypeSpec review rules                                                                                                                                                                                                                                                                                                                                                              |
+| `instructions/typespec-project.instructions.md` | TypeSpec project structure rules (referenced by the TypeSpec review file)                                                                                                                                                                                                                                                                                                          |
+| `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                              |
+| `skills/azure-api-review/references/*.md`       | 18 cross-cutting rule references covering secret detection, property mutability, provisioning state, naming, enums, examples, tracked-resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight, LRO final-state-via, suppression criteria, linter coverage, design decisions, GUID/UUID on ARM, and "think in graphs" |
+| `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                                     |
 
 ### Evaluation Suite
 
@@ -382,8 +388,8 @@ cd .github/skills/evals/arm-api-reviewer
 ```
 
 The script automatically clones and builds the
-[evaluate](https://github.com/microsoft/evaluate) framework, runs all
-tests, and prints a pass/fail summary. Pass `-EvaluateRepo` to point to an
+[vally](https://github.com/microsoft/vally) framework, runs all
+tests, and prints a pass/fail summary. Pass `-VallyRepo` to point to an
 existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip
 rebuilding. Run `Get-Help .\run-evals.ps1 -Detailed` for all options.
 

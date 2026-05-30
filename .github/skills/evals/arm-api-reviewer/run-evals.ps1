@@ -3,7 +3,7 @@
     Runs the ARM API Reviewer evaluation suite end-to-end.
 
 .DESCRIPTION
-    Single script to clone/update the evaluate (vally) framework, build it,
+    Single script to clone/update the vally framework, build it,
     run the full ARM API Reviewer eval suite, and report results.
 
     Prerequisites:
@@ -12,7 +12,7 @@
       - VS Code with GitHub Copilot active (the executor uses Copilot agent sessions)
 
     The script will:
-      1. Clone microsoft/evaluate (or pull latest if already cloned)
+      1. Clone microsoft/vally (or pull latest if already cloned)
       2. Install dependencies and build
       3. Run the eval suite
       4. Print a pass/fail summary and open the results
@@ -35,14 +35,14 @@
 .PARAMETER Timeout
     Per-stimulus timeout in milliseconds. Default: 600000 (10 minutes).
 
-.PARAMETER EvaluateRepo
-    Path where microsoft/evaluate should be cloned. Default: sibling to azure-rest-api-specs.
+.PARAMETER VallyRepo
+    Path where microsoft/vally should be cloned. Default: sibling to azure-rest-api-specs.
 
 .PARAMETER SkipBuild
-    Skip the npm install + build step (use if evaluate is already built).
+    Skip the npm install + build step (use if vally is already built).
 
 .PARAMETER ShowOutput
-    Show full agent output during execution (passes --verbose to vally).
+    Show full agent output during execution (passes --verbose to the vally CLI).
 
 .PARAMETER Repeat
     Number of times to run the full eval suite back-to-back. Default: 1.
@@ -72,8 +72,8 @@
     .\run-evals.ps1 -SkipBuild
 
 .EXAMPLE
-    # Point to an existing evaluate clone
-    .\run-evals.ps1 -EvaluateRepo "C:\repos\evaluate"
+    # Point to an existing vally clone
+    .\run-evals.ps1 -VallyRepo "C:\repos\vally"
 
 .EXAMPLE
     # Run the full suite 3 times with a 60-second cooldown between runs
@@ -91,7 +91,7 @@ param(
     [string]$JudgeModel = "",
     [int]$Workers = 1,
     [int]$Timeout = 600000,
-    [string]$EvaluateRepo = "",
+    [string]$VallyRepo = "",
     [switch]$SkipBuild,
     [switch]$ShowOutput,
     [ValidateRange(1, 100)]
@@ -106,7 +106,7 @@ Set-StrictMode -Version Latest
 # output as a terminating error -- even "npm warn" or "Cloning into...".
 $ErrorActionPreference = "Continue"
 
-# Ensure console can handle UTF-8 output from vally (which may emit emoji)
+# Ensure console can handle UTF-8 output from the vally CLI (which may emit emoji)
 $prevOutputEncoding = [Console]::OutputEncoding
 $prevConsoleEncoding = $OutputEncoding
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
@@ -117,11 +117,13 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 $ScriptDir = $PSScriptRoot
 if (-not $ScriptDir) { $ScriptDir = (Get-Location).Path }
 
-# The eval project root (where .vally.yaml lives)
+# The eval project root (where the vally CLI's project config lives -- the
+# file is named .vally.yaml because that is the filename the vally CLI
+# looks for; do not rename it).
 $EvalRoot = $ScriptDir
 
-# Default: clone evaluate as a sibling to the azure-rest-api-specs repo
-if (-not $EvaluateRepo) {
+# Default: clone vally as a sibling to the azure-rest-api-specs repo
+if (-not $VallyRepo) {
     # Find the git root of azure-rest-api-specs
     try {
         Push-Location $EvalRoot
@@ -131,10 +133,10 @@ if (-not $EvaluateRepo) {
         Pop-Location
         $SpecsRepo = (Resolve-Path (Join-Path $EvalRoot "..\..\..\..\..")).Path
     }
-    $EvaluateRepo = Join-Path (Split-Path $SpecsRepo -Parent) "evaluate"
+    $VallyRepo = Join-Path (Split-Path $SpecsRepo -Parent) "vally"
 }
 
-$VallyCli = Join-Path $EvaluateRepo "packages\cli\dist\index.js"
+$VallyCli = Join-Path $VallyRepo "packages\cli\dist\index.js"
 $ResultsDir = Join-Path $EvalRoot "results"
 
 # ---- Preflight checks --------------------------------------------------------
@@ -173,22 +175,23 @@ try {
     throw "git not found. Install from https://git-scm.com/"
 }
 
-# Check .vally.yaml exists
+# Check the vally-CLI project config file exists (named .vally.yaml as
+# required by the vally CLI -- do not rename).
 if (-not (Test-Path (Join-Path $EvalRoot ".vally.yaml"))) {
-    throw "Cannot find .vally.yaml in $EvalRoot -- script must live in the eval project root."
+    throw "Cannot find .vally.yaml (the vally-CLI project config) in $EvalRoot -- script must live in the eval project root."
 }
 Write-Host "  [OK] Eval project: $EvalRoot" -ForegroundColor Green
 Write-Host ""
 
-# ---- Step 1: Clone or update evaluate ----------------------------------------
+# ---- Step 1: Clone or update vally ------------------------------------------
 
-Write-Host "---- Step 1: evaluate framework --------------------------------" -ForegroundColor Yellow
+Write-Host "---- Step 1: vally framework -----------------------------------" -ForegroundColor Yellow
 
-if (Test-Path (Join-Path $EvaluateRepo ".git")) {
-    Write-Host "  evaluate repo found at $EvaluateRepo"
+if (Test-Path (Join-Path $VallyRepo ".git")) {
+    Write-Host "  vally repo found at $VallyRepo"
     if (-not $SkipBuild) {
         Write-Host "  Pulling latest..."
-        Push-Location $EvaluateRepo
+        Push-Location $VallyRepo
         $pullOutput = git pull --ff-only 2>&1
         $pullOutput | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
         if ($LASTEXITCODE -ne 0) {
@@ -197,11 +200,11 @@ if (Test-Path (Join-Path $EvaluateRepo ".git")) {
         Pop-Location
     }
 } else {
-    Write-Host "  Cloning microsoft/evaluate to $EvaluateRepo ..."
-    $cloneOutput = git clone https://github.com/microsoft/evaluate.git $EvaluateRepo 2>&1
+    Write-Host "  Cloning microsoft/vally to $VallyRepo ..."
+    $cloneOutput = git clone https://github.com/microsoft/vally.git $VallyRepo 2>&1
     $cloneOutput | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
     if ($LASTEXITCODE -ne 0) {
-        throw "Failed to clone microsoft/evaluate. Check your network and GitHub access."
+        throw "Failed to clone microsoft/vally. Check your network and GitHub access."
     }
 }
 
@@ -216,7 +219,7 @@ if ($SkipBuild -and (Test-Path $VallyCli)) {
     if ($SkipBuild) {
         Write-Warning "  -SkipBuild set but CLI not found at $VallyCli -- building anyway."
     }
-    Push-Location $EvaluateRepo
+    Push-Location $VallyRepo
     Write-Host "  Running npm install..."
     $npmOut = npm install 2>&1
     $npmOut | Select-Object -Last 5 | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
@@ -229,7 +232,7 @@ if ($SkipBuild -and (Test-Path $VallyCli)) {
     Pop-Location
 
     if (-not (Test-Path $VallyCli)) {
-        throw "Build succeeded but CLI not found at $VallyCli -- check evaluate repo structure."
+        throw "Build succeeded but CLI not found at $VallyCli -- check vally repo structure."
     }
     Write-Host "  [OK] vally CLI built" -ForegroundColor Green
 }
@@ -280,7 +283,7 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     if ($Suite -eq "all") {
         $cmd += @("--suite", "all")
     } elseif ($Suite -like "eval-*") {
-        $evalFile = Join-Path $EvalRoot "evaluate\$Suite.yaml"
+        $evalFile = Join-Path $EvalRoot "vally\$Suite.yaml"
         if (-not (Test-Path $evalFile)) {
             throw "Eval file not found: $evalFile"
         }
@@ -317,7 +320,7 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     Write-Host "  Starting... (this takes several minutes)" -ForegroundColor Cyan
     Write-Host ""
 
-    # Run from the eval root so .vally.yaml is discovered
+    # Run from the eval root so the vally CLI's project config (.vally.yaml) is discovered
     Push-Location $EvalRoot
     $evalStart = Get-Date
 
@@ -354,7 +357,7 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     $jsonlFile = Join-Path $outputDir "results.jsonl"
     $junitFile = Join-Path $outputDir "eval-results.junit.xml"
 
-    # Vally may create a nested timestamp subfolder inside --output-dir.
+    # The vally CLI may create a nested timestamp subfolder inside --output-dir.
     # If we don't find results at the top level, search one level down.
     if (-not (Test-Path $jsonlFile)) {
         $nested = Get-ChildItem -Path $outputDir -Filter "results.jsonl" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1

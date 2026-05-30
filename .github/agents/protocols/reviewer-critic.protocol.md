@@ -44,10 +44,10 @@ with reason `missing-inputs`.
 | 4   | List of files reviewed             | Workspace-relative paths.                                                                                                                                                                                                                                |
 | 5   | Previous-version source            | The base-branch path **and base SHA/ref** used for `[NEW]`/`[EXISTING]` classification, e.g. `base-sha: <sha>; path: <path>`, or `None - new service`. Changed PR files are fetched at Input #2; previous-version files are fetched at this base source. |
 | 6   | Step 5.5 reconciliation plan       | Verbatim. If reconciliation was skipped, pass the literal string `reconciliation skipped` (see Sentinel strings).                                                                                                                                        |
-| 7   | Prior iterations' FAIL set summary | The two most recent prior iterations' rule-ID + file/line tuples. Empty list on iteration 1 (see note below). Used for wave-thrash detection at iteration >= 3.                                                                                          |
+| 7   | Prior iterations' FAIL set summary | The two most recent prior iterations' rule-ID + file/line tuples. Empty list on iteration 1 (see note below). Used for wave-thrash detection at iteration 3.                                                                                             |
 | 8   | Considered-and-declined list       | Prior-iteration `Likely missed violations` candidates the Reviewer evaluated and chose not to promote, each with a one-line rationale. The Critic MUST suppress these unless fresh evidence justifies re-surfacing. Empty list on iteration 1.           |
 | 9   | Graph production flag              | `graphs-produced: true\|false`. `false` on fast path or when graph derivation failed; the Critic records `Graph integrity = N/A`.                                                                                                                        |
-| 10  | Current iteration number           | `1` through `5`. The Critic's output header echoes this verbatim; do not infer from input length.                                                                                                                                                        |
+| 10  | Current iteration number           | `1` through `3`. The Critic's output header echoes this verbatim; do not infer from input length.                                                                                                                                                        |
 
 > **Iteration-1 empty-list rule (load-bearing).** On iteration 1, Inputs #7
 > and #8 MUST be passed as an **explicit** empty list -- literally `[]` or
@@ -68,7 +68,7 @@ before folding it into the report:
   in Reviewer Step 1.
 - The Critic header field `Base SHA/Ref:` matches Input #5 when present, or is
   omitted / `n/a` only when Input #5 is `None - new service`.
-- The Critic header field `Iteration:` is a valid `1` through `5` and is
+- The Critic header field `Iteration:` is a valid `1` through `3` and is
   consistent with the Reviewer's current iteration loop.
 - The pasted output includes, verbatim, both the `### Verdict` section and
   the `### Per-finding annotations` section.
@@ -129,7 +129,7 @@ approval prompts, SHA-drift reports.
 |               | `session-handoff`                                                                                     | State A via human-pasted verdict from the fallback prompt.                                                                                                                             |
 |               | `unavailable`                                                                                         | State C: human explicitly opted out at Step 7 fallback Rung 2. `[!CAUTION]` banner rendered. **Never `skipped` -- that value is forbidden.**                                           |
 |               | `invalidated`                                                                                         | State D: Critic returned `Finding accuracy = INVALIDATED`. SHA-drift report only; no findings rendered.                                                                                |
-| `iteration`   | `1`-`5` (Critic iteration this response reflects); `0` for Reviewer-detected drift between iterations | Echo of Input #10 for the most recent Critic call. See note below on `iteration=0`.                                                                                                    |
+| `iteration`   | `1`-`3` (Critic iteration this response reflects); `0` for Reviewer-detected drift between iterations | Echo of Input #10 for the most recent Critic call. See note below on `iteration=0`.                                                                                                    |
 | `pr`          | `owner/repo#number`                                                                                   | Used by State A's session-boundary check.                                                                                                                                              |
 
 Exempt from the marker: responses emitted **before** Step 1 pins the
@@ -142,7 +142,7 @@ session SHA (e.g., out-of-scope-repo decline messages).
 > invalidation report only (no findings, no posting prompts) and
 > `critic-mode` carries whatever value the prior iteration ended with
 > (typically `subagent`). Responses that fold in a Critic verdict require
-> `iteration` in `1`-`5`.
+> `iteration` in `1`-`3`.
 
 ### Per-comment telemetry marker (Step 6 canonical body and Step 8 posting)
 
@@ -179,6 +179,74 @@ that is shown to the human and later posted. Not on reply-only comments
 the review-state marker) is response-scope and describes how the Critic
 ran for the whole response. `critic` (in the per-comment marker) is
 finding-scope and records the per-finding verdict.
+
+### Telemetry fallback policy (load-bearing)
+
+**Telemetry MUST NEVER block the Reviewer or Critic from doing their
+job.** The markers in this section are observability metadata, not
+correctness gates. If marker assembly fails for any reason -- a field
+value cannot be computed, a value contains a character that would
+break HTML-comment syntax, a string-template lookup throws, etc. -- the
+correct behavior is to fall back, not to skip posting the comment or
+abort the review.
+
+**Fallback minimal marker.** When the full per-comment marker cannot
+be assembled, emit this minimal marker in its place and proceed with
+the comment as if the full marker had been emitted:
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: <one-line-summary-of-what-failed> -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+The minimal marker preserves the single contract Step 5.5 depends on
+(`posted-by: arm-api-reviewer-agent` for agent-origin detection) and
+records that the per-finding fields were not captured. The
+`reason:` value SHOULD be a short machine-friendly identifier
+(`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`,
+`assembly-error`) so the gap is queryable later, but any free-text
+one-liner is acceptable.
+
+**Per-field degradation order.** Before falling back to the minimal
+marker, try the following in order; each step degrades one field
+without dropping the others:
+
+1. **Optional fields** (`downstream-rule`, `override-reason` when
+   `critic` is not `override`): omit the field entirely if its value
+   cannot be assembled. The marker is still well-formed.
+2. **`head-sha` field**: if the full 40-char SHA is unavailable but a
+   short SHA or branch name is, omit `head-sha` rather than violate
+   the "short SHAs forbidden" rule. Do not substitute a different
+   identifier into the `head-sha` slot.
+3. **`critic` field**: if the per-finding verdict cannot be looked up
+   (e.g., the response-scope `critic-mode` is `unavailable` and no
+   per-finding verdict was produced), emit `critic: unknown` rather
+   than fabricating `pass`. The minimal marker is preferred over a
+   fabricated `pass`.
+4. **`severity`, `classification`, `rule`**: these three fields are
+   the highest-signal observability fields. If any one of them cannot
+   be assembled, fall back to the minimal marker -- a marker missing
+   the rule ID or severity creates a misleading audit trail and is
+   worse than no per-comment marker at all.
+
+**Posting is non-negotiable.** Once the human has approved the plan
+in Step 8, every approved finding posts. A telemetry-assembly failure
+on finding N MUST NOT prevent the posting of findings N, N+1, ..., or
+the bundled Step 9 label changes. Log the failure (chat output, not
+a posted PR comment) and continue.
+
+**Critic must not FAIL a finding for telemetry shape.** The Critic's
+re-validation procedure validates rule citations, line numbers, file
+content, and reconciliation anchors. Marker field presence, value
+shape, and per-field correctness are **out of scope** for the Critic
+and never produce a `FAIL`. If the Critic notices a malformed marker
+in the Reviewer's Step 6 canonical body, surface it under
+`Telemetry observations` (advisory, separate from `Likely missed
+violations`) so the Reviewer or human can correct future markers, but
+never block the current review on it.
 
 ### Override-reason validator
 

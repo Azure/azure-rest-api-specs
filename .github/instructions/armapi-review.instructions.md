@@ -71,15 +71,19 @@ The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identica
    - the JSON / TypeSpec / code blocks under **Fix:**,
    - inline examples,
    - file path / line number / JSON path citations,
-  - the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent` and the required marker fields.
+
+- the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent` and the required marker fields.
+
 3. **No re-authoring during payload assembly.** Heredoc rebuilds, JSON-string escaping, multi-finding consolidation, or any step that involves "rewriting the body inline" is **forbidden**. Generate each comment body once, store it, and reference the stored value when building the payload.
 4. **Exact one-to-one mapping.** Every finding shown to the reviewer **MUST** map to exactly one inline comment in the posted review. The reviewer **MUST NOT** see N findings and the PR receive N-1 (something dropped) or N+1 (something added). Severity tags (`🔴 Blocking`, `🟠 Warning`, `🔵 Suggestion`) and `[NEW]`/`[EXISTING]` classifications **MUST** match.
 5. **Post-post verification (REQUIRED).** Immediately after posting the review, the agent **MUST** fetch the live comment bodies (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for each created comment) and verify, for every comment:
    - body length matches the canonical text length (within normalisation tolerance for line endings only),
    - the rule ID hyperlinks are present,
    - any code-fence (` ``` `) blocks present in the canonical text are present in the posted body,
-  - the telemetry marker containing `posted-by: arm-api-reviewer-agent` and required fields is present.
-     If any check fails, the agent **MUST** PATCH the affected comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the canonical text and re-verify -- before reporting completion to the user.
+
+- the telemetry marker containing `posted-by: arm-api-reviewer-agent` and required fields is present.
+  If any check fails, the agent **MUST** PATCH the affected comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the canonical text and re-verify -- before reporting completion to the user.
+
 6. **Failure handling.** If a finding cannot be posted as-is (e.g., GitHub API rejects the body, a line anchor cannot be resolved), the agent **MUST** report the discrepancy explicitly to the reviewer rather than silently posting a shortened or altered variant.
 
 **Negative example (do NOT do):** Show the reviewer a finding with a JSON code-block under **Fix:**, then build a multi-comment payload heredoc that omits the code-block to keep the JSON string short.
@@ -88,7 +92,7 @@ The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identica
 
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
-- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, SystemData, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only.
+- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only. **Exception: `systemData` is excluded from this exemption** -- see §20.1; inline redefinition of `systemData` is a Blocking violation (the envelope shape MUST be sourced from `common-types/resource-management/vX/types.json`).
 - **`allOf` + TrackedResource base type:** A resource model that manually declares `id`, `name`, `type`, `location`, `tags`, `systemData` as top-level properties is compliant if the shapes are correct. Using `allOf` with TrackedResource is preferred but NOT required. Flag it as a **suggestion** only.
 - **Non-terminal provisioningState values:** Including only the three terminal states (`Succeeded`, `Failed`, `Canceled`) is compliant. Adding non-terminal states (`Creating`, `Updating`, `Deleting`) is recommended but NOT required for compliance. Flag it as a **suggestion** only.
 
@@ -529,7 +533,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
   - Properties that represent a date, time, or timestamp **MUST** use `"type": "string", "format": "date-time"` (ISO 8601). Do not use a plain unformatted string for timestamps.
   - Properties that represent a duration **MUST** use `"type": "string", "format": "duration"` (ISO 8601 duration).
   - Properties that represent a URL or URI **MUST** use `"type": "string", "format": "uri"`.
-  - Properties that represent a UUID/GUID: **conditional**. On ARM control-plane the required `GuidUsage` LintDiff rule (`R3017`) forbids `"format": "uuid"` without Azure API review board sign-off and a scoped per-property suppression. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree, the acceptable-property list (AAD/Entra `tenantId`, `clientId`, `principalId`, etc.), the unacceptable-property list (opaque platform-assigned IDs, resource-internal IDs), and the required suppression form. Do not blanket-recommend `"format": "uuid"` on ARM specs.
+  - Properties that represent a UUID/GUID: **default is DO NOT use `"format": "uuid"` on ARM control-plane specs.** The required `GuidUsage` LintDiff rule (`R3017`) blocks the PR unless the author obtains Azure API review board sign-off AND adds a scoped per-property (or per-shared-definition) suppression. Acceptable only for Microsoft Entra / AAD identifiers that customers already see and pass as GUIDs through other Azure surfaces (portal, CLI, ARM templates): `tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`. NOT acceptable for opaque platform-assigned IDs (correlation IDs, operation IDs, internal record IDs), resource-internal identifiers (e.g., `interconnectBlockId`, `maintenanceEventId`), or names of any kind. For non-acceptable properties keep `"type": "string"` and convey the format via the description and an optional `pattern`. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree and the exact suppression form (the `where:` path must equal the LintDiff `jsonpath` exactly, including the trailing `.format` segment -- the validator does not do ancestor matching).
   - Properties that represent a Base64-encoded value **MUST** use `"type": "string", "format": "byte"`.
   - Properties that represent a binary value **MUST** use `"type": "string", "format": "binary"`.
   - Properties that represent a password or secret **MUST** use `"type": "string", "format": "password"` and `"x-ms-secret": true`.
@@ -885,7 +889,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - `systemData` is a **required top-level property** on all tracked resources for new API versions. It contains `createdBy`, `createdByType`, `createdAt`, `lastModifiedBy`, `lastModifiedByType`, `lastModifiedAt`.
 - All `systemData` properties **MUST** be `readOnly`.
-- `systemData` **SHOULD** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). A spec that defines the shape inline with the correct fields, `readOnly` annotations, and descriptions is functionally compliant; flag inline redefinition as a non-blocking suggestion, not a blocking violation.
+- `systemData` **MUST** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). Do not define a custom `systemData` model: inline redefinition of `systemData` (even with all the right fields, `readOnly` annotations, and descriptions) is a Blocking violation because it drifts from the canonical envelope shape and silently breaks tooling that resolves `$ref` to the common-types definition.
 - `systemData` **MUST NOT** be placed inside the `properties` bag — it is a top-level ARM envelope property.
 - `*ByType` values (`User`, `Application`, `ManagedIdentity`, `Key`) **MUST** be stored as strings (not enums) to support future identity types without breaking changes.
 
@@ -1216,7 +1220,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Top-level tracked resources support resource move across RG/subscription (RPC003)
 - ✅ `managedBy` / `managedByExtended` are immutable top-level properties; not inside `properties` bag
 - ✅ `systemData` is readOnly, added only with new API versions; `*ByType` stored as string not enum
-- ✅ `systemData` preferably referenced from common-types; inline definitions are only suggestions if the shape is otherwise compliant
+- ✅ `systemData` referenced from common-types; no custom `systemData` model defined
 - ✅ `systemData` not updated for child resource changes, rejected requests, or internal admin operations
 
 ### Availability Zones & Extended Locations
