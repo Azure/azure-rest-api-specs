@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-preview-2026-06-15` is specified o
 
 ``` yaml $(tag) == 'package-preview-2026-06-15'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2026-06-15-preview/kubeInventory.json
+  - Microsoft.KubernetesConfiguration/kubeInventory/preview/2026-06-15-preview/kubeInventory.json
 ```
 
 ### Tag: package-preview-2024-04
