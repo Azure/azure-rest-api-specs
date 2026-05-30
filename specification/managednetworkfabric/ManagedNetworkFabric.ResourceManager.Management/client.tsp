@@ -544,14 +544,14 @@ using Microsoft.ManagedNetworkFabric;
   "NpbStaticRouteSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkToNetworkInterconnectPatchProperties.importRoutePolicy,
-  ImportRoutePolicyInformation,
+  "ImportRoutePolicySettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkToNetworkInterconnectPatchProperties.exportRoutePolicy,
-  ExportRoutePolicyInformation,
+  "ExportRoutePolicySettings",
   "csharp"
 );
 @@alternateType(
