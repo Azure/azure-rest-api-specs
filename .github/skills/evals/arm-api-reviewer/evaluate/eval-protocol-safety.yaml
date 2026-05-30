@@ -68,7 +68,7 @@ stimuli:
 
   # 160002 -- Critic INVALIDATED kills the session and findings stay hidden
   - name: critic-invalidated-stops-session
-    prompt: >
+    prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
       Step 1 pinned session head SHA
       `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. The ARM API Review Critic
@@ -78,16 +78,40 @@ stimuli:
       counter is 1.
 
       Emit the SESSION INVALIDATED response defined in agent.md "Canonical
-      output templates" Template A. The response MUST begin with the literal
-      first line `<!-- review-state: critic-mode=invalidated | iteration=1 |
-      pr=Azure/azure-rest-api-specs#12345 -->`, then the `# SESSION
-      INVALIDATED` markdown heading, then the SHA-drift block showing both
-      the pinned SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` and the
-      current head SHA `cccccccccccccccccccccccccccccccccccccccc` verbatim,
-      and finally the `(a) Restart` / `(b) Abandon` menu. Do NOT fold any
-      Critic corrections, render any findings, or emit a Reconciliation
-      Plan -- the response is only the marker, the heading, the SHA block,
-      and the two-option menu.
+      output templates" Template A. Do NOT fold any Critic corrections,
+      render any findings, or emit a Reconciliation Plan -- the response is
+      only the marker, the heading, the SHA block, and the two-option menu.
+
+      Template A is defined in agent.md as follows (substitute only the
+      bracketed `<placeholders>`; the heading and the `(a) Restart` /
+      `(b) Abandon` menu wording MUST be byte-for-byte identical):
+
+      ```markdown
+      <!-- review-state: critic-mode=invalidated | iteration=<N> | pr=<owner/repo#number> -->
+
+      # SESSION INVALIDATED
+
+      The Critic reported that the session SHA has moved (or is unreachable) since Step 1 pinned it. The findings drafted in Step 6 were judged against a tree that no longer matches the PR head, so they are unsafe to present or post.
+
+      - **Session SHA pinned in Step 1:** `<full-40-char-session-sha>`
+      - **Current PR head SHA:** `<full-40-char-current-head-sha>`
+      - **Invalidation reason:** `<session-sha-moved | session-sha-unreachable>`
+      - **Iteration when invalidation fired:** `<N>`
+
+      Choose one:
+
+      - **(a) Restart** -- re-run from Step 1 against the new head SHA, pinning a fresh session SHA.
+      - **(b) Abandon** -- stop the review session without posting anything.
+
+      Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate further until you choose.
+      ```
+
+      Substitute `<N>` with `1`, `<owner/repo#number>` with
+      `Azure/azure-rest-api-specs#12345`, `<full-40-char-session-sha>` with
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
+      `<full-40-char-current-head-sha>` with
+      `cccccccccccccccccccccccccccccccccccccccc`, and pick
+      `session-sha-moved` for the invalidation reason.
     constraints:
       expect_skills:
         - azure-api-review
@@ -120,7 +144,7 @@ stimuli:
 
   # 160003 -- Conflict-aware recommendations carry downstream-rule telemetry
   - name: downstream-ci-conflict-marker-required
-    prompt: >
+    prompt: |
       You are drafting a single ARM API review finding (Step 6 canonical body)
       where the recommendation is to switch a plain string property named
       `tenantId` to `format: uuid`. Per the downstream-CI impact rule, this
@@ -138,6 +162,30 @@ stimuli:
       reconciliation plan, or posting menu -- just the single canonical
       comment body that would later be posted verbatim per the Reviewer-
       Posted Parity rule.
+
+      Template C (canonical posted-comment body) is defined in agent.md as
+      follows. The trailing telemetry marker is an HTML comment, pipe-
+      separated, with `:` between field name and value, in fixed field order:
+
+      ````markdown
+      **[NEW] 🟡 Suggestion** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING>.
+
+      **Downstream-CI conflict:** This recommendation would collide with required LintDiff rule R3017 (GuidUsage). Three options are available -- the reviewer cannot dictate which one to take:
+
+      1. **Accept the downstream rule and keep the current shape** -- leave `tenantId` as `type: string` (no `format: uuid`), accepting the readability trade-off documented in R3017.
+      2. **Change shape and suppress the downstream rule with justification** -- switch to `format: uuid` AND add a `suppressions.yaml` entry for `R3017` on this path with a non-vague reason that quotes the API design rationale.
+      3. **Raise to the API board** -- if neither trade-off is acceptable for this resource, escalate the rule conflict for resolution.
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: suggestion | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
+      ````
+
+      The body MUST present the three options (not a single corrective fix),
+      and the marker MUST include the trailing `downstream-rule: R3017` field
+      after `head-sha:` (this is the 7-field downstream variant of the
+      6-field base marker). Substitute the placeholder head SHA above; leave
+      `<RULE-ID>`, `<file-path>`, and `<N>` as literal placeholders.
     constraints:
       expect_skills:
         - azure-api-review
@@ -291,7 +339,7 @@ stimuli:
 
   # 160006 -- Iteration 2 marker: re-rendered report after a Critic FAIL was reconciled
   - name: iteration-2-after-critic-reconciliation
-    prompt: >
+    prompt: |
       You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#88888.
       Step 1 pinned session head SHA
       `9999999999999999999999999999999999999999`.
@@ -314,6 +362,30 @@ stimuli:
       `9999999999999999999999999999999999999999`. Do NOT mention F2 in the
       findings list (an iteration-history note acknowledging that one
       finding was dropped during reconciliation is acceptable).
+
+      Each finding body MUST follow agent.md "Canonical output templates"
+      Template C exactly, ending with the full 6-field telemetry marker
+      (`<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity:
+      <blocking|warning|suggestion> | classification: <new|existing> |
+      critic: pass | head-sha: 9999999999999999999999999999999999999999 -->`).
+      Template C is defined in agent.md as follows:
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      ````
+
+      Substitute the head-sha value above for every finding; the rule IDs may
+      remain as `<RULE-ID-F1>` and `<RULE-ID-F3>` placeholders.
     constraints:
       expect_skills:
         - azure-api-review

@@ -31,10 +31,12 @@ stimuli:
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/citesvc/resource-manager/Microsoft.CiteService/stable/2025-01-01/citesvc.json"
-    prompt: >
+    prompt: |
       Review the following ARM resource-manager OpenAPI specification file.
       This is a new service with no previous API version. Report all findings
-      using the standard review report format.
+      using the standard review report format (a structured findings list --
+      do NOT collapse the response into a high-level prose summary that omits
+      individual rule IDs).
 
       For every rule ID you cite (e.g., `SEC-SECRET-DETECT`, `RPC-Put-V1-22`,
       `OAPI034`, `WHATIF-001`), the rule ID MUST be rendered as a markdown
@@ -43,7 +45,26 @@ stimuli:
       `.github/skills/azure-api-review/references/*.md` that defines the rule,
       per the "Rule Citation Format" guidance in
       `.github/instructions/armapi-review.instructions.md`. A bare rule ID
-      without a link is not acceptable.
+      without a link is not acceptable -- this applies to every mention,
+      including ones in recommendation summaries and priority lists, not
+      just the first occurrence in a finding header.
+
+      **Canonical example of the required format** (use this exact pattern
+      for every cited rule ID):
+
+      ```markdown
+      **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/secret-detection.md#oapi034)]** `path/to/file.json` - line 145 - The property `adminPassword` is a credential but is not annotated with `x-ms-secret: true`.
+      ```
+
+      Note how `OAPI034` is wrapped in `[...](...)` with a full
+      `https://github.com/Azure/azure-rest-api-specs/blob/main/.github/...`
+      URL target -- NOT a bare `**OAPI034**`, NOT `[OAPI034]` without a URL,
+      and NOT a relative path. Render EVERY rule ID this way, including
+      ones that appear in priority/summary text outside finding bodies.
+
+      Render structured findings (each with a hyperlinked rule ID) -- do NOT
+      reply with a high-level prose summary that lacks individual finding
+      entries.
 
       File: specification/citesvc/resource-manager/Microsoft.CiteService/stable/2025-01-01/citesvc.json
     constraints:
@@ -81,7 +102,7 @@ stimuli:
       files:
         - src: "../fixtures/arm-openapi/secret-property.json"
           dest: "specification/paritysvc/resource-manager/Microsoft.ParityService/stable/2025-01-01/paritysvc.json"
-    prompt: >
+    prompt: |
       Review the following ARM resource-manager OpenAPI specification and
       prepare the findings as if you were about to post them as inline comments
       on a GitHub pull request. Per the "Reviewer-Posted Parity" guidance in
@@ -90,28 +111,51 @@ stimuli:
       `body` field of each `comments[]` entry of a `POST /repos/.../reviews`
       request -- no shortened, paraphrased, or consolidated variants.
 
-      For each finding, render the **canonical comment body** that would be
-      posted, matching the shape defined in agent.md "Canonical output
-      templates" Template C. Each body MUST include:
+      **Output-token budget constraint for this test:** Render the full
+      canonical comment body (Template C shape, end-to-end) for AT MOST 2
+      findings -- pick the highest-severity / highest-confidence two. For
+      any additional findings, list ONLY the rule ID (as a markdown
+      hyperlink), severity, and a one-sentence summary on a single bullet
+      line; do NOT render their canonical body or telemetry marker. This
+      keeps the response under the 16k output-token cap. (In real usage the
+      reviewer would render all bodies; the cap here is only a test
+      scaffolding constraint to fit within the eval token budget.)
+
+      For each of the (up to 2) findings rendered as a full canonical body,
+      the body MUST match agent.md "Canonical output templates" Template C
+      and include:
         - severity tag (Blocking / Warning / Suggestion) and `[NEW]`/`[EXISTING]` classification,
         - rule ID(s) as markdown hyperlinks,
         - file path, exact line number(s), and JSON path,
         - a concrete Fix section (with code-block examples when applicable),
         - the trailing HTML comment marker as its literal last line, in the
-          full 6-field form: `<!-- posted-by: arm-api-reviewer-agent | rule:
-          <RULE-ID> | severity: <blocking|warning|suggestion> |
-          classification: <new|existing> | critic: <pass|warn|override> |
-          head-sha: <full-40-char-sha> -->`. Because this is a fixture with
-          no PR metadata, use the placeholder head SHA
+          full 6-field form. Because this is a fixture with no PR metadata,
+          use the placeholder head SHA
           `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` (40 characters) and
           `critic: pass` for every finding. Do NOT emit the abbreviated
           form `<!-- posted-by: arm-api-reviewer-agent -->` -- the 6-field
           form is required on every post; the short form is only valid as
           a backward-compat substring for Step 5.5 reconciliation.
 
+      Template C is defined in agent.md as follows:
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING (e.g., "Introduced in this PR - this property did not exist in the previous version at base SHA <short-base-sha>")>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      ````
+
       Then explicitly confirm in plain text that the canonical bodies above are
-      what you would POST verbatim, with no further edits, summarisation, or
-      drops.
+      what you would POST verbatim (for the 2 rendered findings), with no
+      further edits, summarisation, or drops.
 
       File: specification/paritysvc/resource-manager/Microsoft.ParityService/stable/2025-01-01/paritysvc.json
     constraints:
@@ -139,13 +183,12 @@ stimuli:
           pattern: "(?i)(verbatim|byte[- ]for[- ]byte|identical|no (further |further-)?(edit|change|drop|paraphras))"
       - type: prompt
     rubric:
-      - The agent renders each finding as a complete canonical body, not a high-level summary
-      - Each canonical body contains the trailing telemetry marker with the `posted-by`, `rule`, `severity`, `classification`, `critic`, and `head-sha` fields; fixture-mode prompts may use a placeholder SHA when no PR metadata is supplied
-      - Each canonical body cites rule IDs as markdown hyperlinks to the repo
-      - Each canonical body includes severity, [NEW]/[EXISTING] tag, file path, line number, JSON path, and a Fix section
+      - The agent renders AT MOST 2 findings as complete canonical bodies (the highest-severity / highest-confidence ones), with any additional findings listed as a one-line summary that still includes a hyperlinked rule ID -- this is a test-scaffolding cap to fit within the 16k output-token budget
+      - Each rendered canonical body contains the trailing telemetry marker with the `posted-by`, `rule`, `severity`, `classification`, `critic`, and `head-sha` fields; fixture-mode prompts may use the placeholder SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
+      - Each rendered canonical body cites rule IDs as markdown hyperlinks to the repo
+      - Each rendered canonical body includes severity, [NEW]/[EXISTING] tag, file path, line number, JSON path, and a Fix section
       - When a Fix involves a JSON or TypeSpec snippet, the snippet is included inline as a fenced code block (```json or ```tsp) -- not omitted or summarized
-      - The agent explicitly confirms that the bodies shown are what would be posted verbatim, with no rewrites or drops at payload-assembly time
-      - The number of canonical bodies shown matches the number of findings the agent reports
+      - The agent explicitly confirms that the bodies shown are what would be posted verbatim (for the 2 rendered findings), with no rewrites or drops at payload-assembly time
 
   # 130003 -- Negative case: shortened/consolidated post is forbidden
   - name: reviewer-posted-parity-rejects-shortening
