@@ -540,7 +540,11 @@ using Microsoft.ManagedNetworkFabric;
   "ConnectedIPv6SubnetSettings",
   "csharp"
 );
-@@clientName(ConnectedSubnetPatch, "NetworkFabricConnectedSubnetPatch", "csharp");
+@@clientName(
+  ConnectedSubnetPatch,
+  "NetworkFabricConnectedSubnetPatch",
+  "csharp"
+);
 @@clientName(
   NetworkToNetworkInterconnectPatchProperties.layer2Configuration,
   "Layer2Settings",
@@ -799,8 +803,16 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(StaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
 @@clientName(NpbStaticRouteConfiguration.ipv4Routes, "IPv4Routes", "csharp");
 @@clientName(NpbStaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
-@@clientName(NpbStaticRouteConfigurationPatch.ipv4Routes, "IPv4Routes", "csharp");
-@@clientName(NpbStaticRouteConfigurationPatch.ipv6Routes, "IPv6Routes", "csharp");
+@@clientName(
+  NpbStaticRouteConfigurationPatch.ipv4Routes,
+  "IPv4Routes",
+  "csharp"
+);
+@@clientName(
+  NpbStaticRouteConfigurationPatch.ipv6Routes,
+  "IPv6Routes",
+  "csharp"
+);
 @@clientName(
   RouteTargetInformation.exportIpv4RouteTargets,
   "ExportIPv4RouteTargets",
