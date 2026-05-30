@@ -554,19 +554,19 @@ using Microsoft.ManagedNetworkFabric;
   "ExportRoutePolicySettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   ExternalNetworkPatchProperties.optionBProperties,
-  L3OptionBProperties,
+  "OptionBSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   ExternalNetworkPatchProperties.importRoutePolicy,
-  ImportRoutePolicy,
+  "ImportRoutePolicySettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   ExternalNetworkPatchProperties.exportRoutePolicy,
-  ExportRoutePolicy,
+  "ExportRoutePolicySettings",
   "csharp"
 );
 @@alternateType(
@@ -816,6 +816,26 @@ using Microsoft.ManagedNetworkFabric;
 );
 @@clientName(
   RouteTargetInformation.importIpv6RouteTargets,
+  "ImportIPv6RouteTargets",
+  "csharp"
+);
+@@clientName(
+  RouteTargetPatchInformation.exportIpv4RouteTargets,
+  "ExportIPv4RouteTargets",
+  "csharp"
+);
+@@clientName(
+  RouteTargetPatchInformation.exportIpv6RouteTargets,
+  "ExportIPv6RouteTargets",
+  "csharp"
+);
+@@clientName(
+  RouteTargetPatchInformation.importIpv4RouteTargets,
+  "ImportIPv4RouteTargets",
+  "csharp"
+);
+@@clientName(
+  RouteTargetPatchInformation.importIpv6RouteTargets,
   "ImportIPv6RouteTargets",
   "csharp"
 );
