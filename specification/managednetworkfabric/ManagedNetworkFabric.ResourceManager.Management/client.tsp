@@ -529,9 +529,9 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@clientName(ConnectedSubnetPatch, "NetworkFabricConnectedSubnetPatch", "csharp");
-@@alternateType(
+@@clientName(
   NetworkToNetworkInterconnectPatchProperties.layer2Configuration,
-  Layer2Configuration,
+  "Layer2Settings",
   "csharp"
 );
 @@alternateType(
