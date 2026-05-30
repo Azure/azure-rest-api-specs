@@ -570,16 +570,6 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@alternateType(
-  InternalNetworkPatchProperties.importRoutePolicy,
-  ImportRoutePolicy,
-  "csharp"
-);
-@@alternateType(
-  InternalNetworkPatchProperties.exportRoutePolicy,
-  ExportRoutePolicy,
-  "csharp"
-);
-@@alternateType(
   L3IsolationDomainPatchProperties.aggregateRouteConfiguration,
   AggregateRouteConfiguration,
   "csharp"
