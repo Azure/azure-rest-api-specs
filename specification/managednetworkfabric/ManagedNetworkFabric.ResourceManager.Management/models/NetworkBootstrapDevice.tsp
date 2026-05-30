@@ -89,25 +89,25 @@ model NetworkBootstrapDevicePatchProperties {
 
 @doc("Response body for a ResyncPasswords request on a Network Bootstrap Device.")
 model NetworkBootstrapDeviceResyncPasswordsResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("The current status of an refresh configuration async operation.")
 model NetworkBootstrapDeviceRefreshConfigurationResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("Network Bootstrap Device Administrative State Update Response.")
 model NetworkBootstrapDeviceUpdateAdministrativeStateResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("Network Bootstrap Device reboot Response.")
 model NetworkBootstrapDeviceRebootResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("Network Bootstrap Device upgrade Response.")
 model NetworkBootstrapDeviceUpgradeResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }

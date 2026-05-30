@@ -188,25 +188,25 @@ union DeviceAdministrativeState {
 @doc("Response body for a ResyncPasswords request on a Network Device.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceResyncPasswordsResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("Response body for a ResyncCertificates request on a Network Device.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceResyncCertificatesResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("The current status of an refresh configuration async operation.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceRefreshConfigurationResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("Network Device Administrative State Update Response.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceUpdateAdministrativeStateResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("NetworkDevice Upgrade Request Properties.")
@@ -223,13 +223,13 @@ model NetworkDeviceUpgradeRequest {
 @doc("Network Device Upgrade Response.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceUpgradeResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }
 
 @doc("Response body for a RunRwCommand request on a Network Device.")
 @added(Versions.v2025_07_15)
 model NetworkDeviceRunRwCommandResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 
   @doc("Network Device Run Rw Command Response properties.")
   properties?: NetworkDeviceRwCommandResponseProperties;

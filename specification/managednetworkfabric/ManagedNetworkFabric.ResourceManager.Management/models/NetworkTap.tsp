@@ -180,5 +180,5 @@ union Encapsulation {
 @doc("Response for NetworkTap Resync operation.")
 @added(Versions.v2025_07_15)
 model NetworkTapResyncResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 }

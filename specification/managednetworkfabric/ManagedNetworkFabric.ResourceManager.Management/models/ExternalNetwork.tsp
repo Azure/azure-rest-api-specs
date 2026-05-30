@@ -459,7 +459,7 @@ model ExternalNetworkUpdateBfdAdministrativeStateRequest {
 @doc("External Network Update Administrative State response")
 @added(Versions.v2025_07_15)
 model ExternalNetworkUpdateBfdAdministrativeStateResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 
   @doc("Response properties.")
   properties?: ExternalNetworkUpdateBfdAdministrativeStateResponseProperties;

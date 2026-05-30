@@ -501,7 +501,7 @@ model NniUpdateBfdAdministrativeStateRequest {
 @doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State response.")
 @added(Versions.v2025_07_15)
 model NniUpdateBfdAdministrativeStateResponse {
-  ...OperationStatusResult;
+  ...Azure.ResourceManager.Foundations.OperationStatusResult;
 
   @doc("Properties of the NNI BFD Administrative State response.")
   properties?: NniUpdateBfdAdministrativeStateResponseProperties;
