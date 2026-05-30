@@ -53,8 +53,11 @@ stimuli:
       - type: output-matches
         name: "rule ID rendered as markdown link to repo"
         config:
-          # Matches: [SOME-RULE-ID](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/...)
-          pattern: "\\[[A-Za-z][A-Za-z0-9-]+(?:-V\\d+-\\d+)?\\]\\(https://github\\.com/Azure/azure-rest-api-specs/blob/main/\\.github/(?:instructions|skills/azure-api-review/references)/[^)]+\\)"
+          # Matches: [SOME-RULE-ID](https://github.com/...) and the backtick-wrapped
+          # variant [`SOME-RULE-ID`](https://github.com/...). The link text may be
+          # either a bare rule ID (e.g., SEC-SECRET-DETECT, RPC-Put-V1-22) or the
+          # same rule ID wrapped in backticks for monospace rendering.
+          pattern: "\\[`?[A-Za-z][A-Za-z0-9-]+(?:-V\\d+-\\d+)?`?\\]\\(https://github\\.com/Azure/azure-rest-api-specs/blob/main/\\.github/(?:instructions|skills/azure-api-review/references)/[^)]+\\)"
       - type: output-not-matches
         name: "no bare rule IDs without links"
         config:
@@ -88,12 +91,23 @@ stimuli:
       request -- no shortened, paraphrased, or consolidated variants.
 
       For each finding, render the **canonical comment body** that would be
-      posted, including:
+      posted, matching the shape defined in agent.md "Canonical output
+      templates" Template C. Each body MUST include:
         - severity tag (Blocking / Warning / Suggestion) and `[NEW]`/`[EXISTING]` classification,
         - rule ID(s) as markdown hyperlinks,
         - file path, exact line number(s), and JSON path,
         - a concrete Fix section (with code-block examples when applicable),
-        - the trailing HTML comment marker containing `posted-by: arm-api-reviewer-agent`, `rule:`, `severity:`, `classification:`, `critic:`, and `head-sha:` fields.
+        - the trailing HTML comment marker as its literal last line, in the
+          full 6-field form: `<!-- posted-by: arm-api-reviewer-agent | rule:
+          <RULE-ID> | severity: <blocking|warning|suggestion> |
+          classification: <new|existing> | critic: <pass|warn|override> |
+          head-sha: <full-40-char-sha> -->`. Because this is a fixture with
+          no PR metadata, use the placeholder head SHA
+          `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` (40 characters) and
+          `critic: pass` for every finding. Do NOT emit the abbreviated
+          form `<!-- posted-by: arm-api-reviewer-agent -->` -- the 6-field
+          form is required on every post; the short form is only valid as
+          a backward-compat substring for Step 5.5 reconciliation.
 
       Then explicitly confirm in plain text that the canonical bodies above are
       what you would POST verbatim, with no further edits, summarisation, or
@@ -115,7 +129,8 @@ stimuli:
       - type: output-matches
         name: "rule ID rendered as markdown link"
         config:
-          pattern: "\\[[A-Za-z][A-Za-z0-9-]+(?:-V\\d+-\\d+)?\\]\\(https://github\\.com/Azure/azure-rest-api-specs/blob/main/\\.github/[^)]+\\)"
+          # Accepts both [RULE-ID](url) and [`RULE-ID`](url) link-text forms.
+          pattern: "\\[`?[A-Za-z][A-Za-z0-9-]+(?:-V\\d+-\\d+)?`?\\]\\(https://github\\.com/Azure/azure-rest-api-specs/blob/main/\\.github/[^)]+\\)"
       - type: output-matches
         name: "explicit verbatim-post confirmation"
         config:

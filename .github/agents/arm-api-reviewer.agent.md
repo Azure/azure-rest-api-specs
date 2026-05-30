@@ -903,6 +903,81 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 
 If the critic itself errors mid-run (returns malformed output, times out, fails to fetch a file), report the failure verbatim to the human and ask whether to retry, switch to session-handoff, or stop. "Self-critique fallback" is **not** an option on this menu.
 
+#### Canonical output templates for protocol-only responses
+
+These are the literal response shapes for the three protocol-only states that Steps 6-7 produce. **Copy the template verbatim, substitute the bracketed `<placeholders>`, and emit nothing else** when the surrounding context requires one of these responses. Every template begins with the required `<!-- review-state: ... -->` marker as the literal first line.
+
+**Template A -- SESSION INVALIDATED (Critic returned `Finding accuracy = INVALIDATED`, reason `session-sha-moved` or `session-sha-unreachable`; see Step 7 item 11 and the Next-step recommendation row above).** No findings, no Reconciliation Plan, no posting menu.
+
+```markdown
+<!-- review-state: critic-mode=invalidated | iteration=<N> | pr=<owner/repo#number> -->
+
+# SESSION INVALIDATED
+
+The Critic reported that the session SHA has moved (or is unreachable) since Step 1 pinned it. The findings drafted in Step 6 were judged against a tree that no longer matches the PR head, so they are unsafe to present or post.
+
+- **Session SHA pinned in Step 1:** `<full-40-char-session-sha>`
+- **Current PR head SHA:** `<full-40-char-current-head-sha>`
+- **Invalidation reason:** `<session-sha-moved | session-sha-unreachable>`
+- **Iteration when invalidation fired:** `<N>`
+
+Choose one:
+
+- **(a) Restart** -- re-run from Step 1 against the new head SHA, pinning a fresh session SHA.
+- **(b) Abandon** -- stop the review session without posting anything.
+
+Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate further until you choose.
+```
+
+**Template B -- Session-handoff prompt (Step 7 fallback Rung 2).** Emitted verbatim when `runSubagent` for `ARM API Review Critic` fails. No findings; the response is the literal prompt below preceded by the marker.
+
+```markdown
+<!-- review-state: critic-mode=pending | iteration=<N> | pr=<owner/repo#number> -->
+
+Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
+```
+
+The wording of the prompt body MUST match the Rung 2 template above byte-for-byte (it is the same string defined in Step 7); substitute only the marker placeholders.
+
+**Template C -- Canonical posted-comment body with full 6-field telemetry marker (Step 6 chat draft and Step 8 PR post; the two MUST be byte-for-byte identical per the Reviewer-Posted Parity rule).** Every posted comment ends with the marker as its literal last line; every field below is required on every post (do not omit fields just because the host has not supplied a concrete value -- substitute the explicit placeholder shown).
+
+````markdown
+**[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+**Classification reasoning:** <why this is NEW vs EXISTING (e.g., "Introduced in this PR - this property did not exist in the previous version at base SHA <short-base-sha>")>.
+
+**Suggested fix:**
+
+```<lang>
+<code or JSON snippet>
+```
+
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+````
+
+**Template C variants -- additional required fields:**
+
+- **Downstream-CI-conflict finding** (Step 4.5 / R3017-class case where a Reviewer suggestion would collide with a required LintDiff/SDK-Breaking rule). Append the `downstream-rule:` field to the marker, and render the finding body as a **three-option recommendation, not a directive** -- the reviewer cannot tell the author to violate a required CI rule. Example marker:
+
+  ```html
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: warning | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
+  ```
+
+  The body MUST present the three options (e.g., "accept the downstream rule and keep the current shape", "change shape and suppress the downstream rule with justification", "raise to API board") rather than a single corrective fix.
+
+- **Human override of Critic FAIL** (Step 7 item 13). Append `override-reason:` to the marker, value supplied by the human and validated by the Override-reason validator before folding. Example marker:
+
+  ```html
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
+  ```
+
+**Common protocol-mode errors to avoid:**
+
+- Paraphrasing the SESSION INVALIDATED block as a sentence (e.g., "The findings are invalidated because..."). The literal `# SESSION INVALIDATED` heading and the two-option `(a)/(b)` menu are load-bearing -- downstream tooling and the Step 8 menu key off them.
+- Emitting the short marker form `<!-- posted-by: arm-api-reviewer-agent -->` on a posted comment. The 6-field form (`rule:`, `severity:`, `classification:`, `critic:`, `head-sha:`) is required on every post; the short form is only acceptable as a substring match for backward-compat reconciliation in Step 5.5.
+- Omitting `downstream-rule:` from the marker when the finding is a downstream-CI-conflict warning. Without the field, telemetry cannot distinguish R3017-class deferrals from ordinary warnings.
+- Posting a `critic: override` marker without an `override-reason:` field. The field is required whenever `critic=override`; the Override-reason validator must have passed before the marker is emitted.
+
 ### Step 8: Execute the Validated Reconciliation Plan
 
 **Critic gate (from Step 7).** You **MAY NOT** proceed past step 1 of this section unless the report's `Next-step recommendation` is `READY TO POST` or `REVISE RECOMMENDED`. If it is `MANUAL DECISION REQUIRED` (including the case where the Critic returned `FAIL` on any reconciliation entry that was not corrected per Step 7 item 9), you must escalate to the human and obtain explicit per-row approval before any posting or thread resolution.
