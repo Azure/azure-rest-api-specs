@@ -161,7 +161,7 @@ constraint violation.
 
 The full marker schema (field values, mapping rules, mutual exclusion with the
 per-comment telemetry marker) lives in the shared
-[Reviewer<->Critic protocol](./protocols/reviewer-critic-protocol.md#review-state-marker-per-response).
+[Reviewer<->Critic protocol](./protocols/reviewer-critic.protocol.md#review-state-marker-per-response).
 The pointer above is the load-bearing summary; the protocol file is the
 source of truth.
 
@@ -196,12 +196,12 @@ Supporting sections referenced throughout:
 - [Pre-Presentation Invariant](#pre-presentation-invariant-read-this-first-every-time) -- the four states (A/B/C/D) that gate any user-visible findings.
 - [Failure Modes & Recovery](#failure-modes--recovery) -- deterministic recovery table for fetch failures, auth lapses, Critic errors.
 - [Constraints](#constraints) -- hard rules (read-only, PR-only, no hallucinated rules, etc.).
-- [Reviewer<->Critic protocol](./protocols/reviewer-critic-protocol.md) -- the wire contract for Critic inputs, verdict tracks, sentinel strings, and both telemetry markers. **This is the source of truth when this file disagrees with it.**
+- [Reviewer<->Critic protocol](./protocols/reviewer-critic.protocol.md) -- the wire contract for Critic inputs, verdict tracks, sentinel strings, and both telemetry markers. **This is the source of truth when this file disagrees with it.**
 
 ## Glossary
 
 Reviewer-specific terms used throughout this file. See the
-[shared protocol glossary](./protocols/reviewer-critic-protocol.md#glossary) for
+[shared protocol glossary](./protocols/reviewer-critic.protocol.md#glossary) for
 cross-agent terms (session SHA, dispatch, sentinel string, etc.).
 
 | Term                             | Meaning                                                                                                                                                                                                                      |
@@ -808,7 +808,7 @@ at the top of this file; no follow-up question repairs it.
   is the breach.
 
 **Inputs to pass to the critic** (see the
-[shared protocol](./protocols/reviewer-critic-protocol.md#inputs-the-reviewer-passes-to-the-critic)
+[shared protocol](./protocols/reviewer-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic)
 for the canonical schema; the list below restates it for in-file readability):
 
 1. PR URL (owner, repo, number).
@@ -857,7 +857,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 13. **Override workflow for human-overridable Critic FAILs (finding-level only).** Overrides are applied **between Critic iterations** at an interactive checkpoint, not silently at presentation time. The workflow:
     1. **Auto-iterate the first two iterations.** If the Critic returns finding-level FAILs at iteration 1 or 2, attempt the recommended corrections (drop, fix line, fix rule citation) and re-invoke. Do **not** consult the human or apply overrides yet.
     2. **Interactive checkpoint at iteration 3 (and later).** If a finding-level FAIL persists into iteration 3 and you believe the Critic is wrong, **stop the auto-loop** and present the persistent FAIL(s) to the human verbatim: the Critic's reason, the cited rule's verbatim quote, and your counter-argument. Offer three choices: (a) drop the finding (default), (b) supply an override with structured justification (see below), (c) escalate to MANUAL DECISION REQUIRED.
-    3. **Structured override justification (required for choice b).** The `override-reason` MUST satisfy the three-check validator defined in the shared protocol (length, denylist, and structured-anchor-or-quote requirement). See [protocol -> Override-reason validator](./protocols/reviewer-critic-protocol.md#override-reason-validator) for the canonical specification and denylist. Length-only or paraphrase-only justifications fail the validator.
+    3. **Structured override justification (required for choice b).** The `override-reason` MUST satisfy the three-check validator defined in the shared protocol (length, denylist, and structured-anchor-or-quote requirement). See [protocol -> Override-reason validator](./protocols/reviewer-critic.protocol.md#override-reason-validator) for the canonical specification and denylist. Length-only or paraphrase-only justifications fail the validator.
     4. **Fold the override and re-invoke.** Add the `**Note:** Critic FAILed this finding (<reason>); reviewer overrode with justification: <reason>.` line to the finding. Re-invoke the Critic. The Critic's `override-reason` validation (Re-validation Procedure step 5) will re-check the structured-anchor requirement; an `override-reason-invalid` FAIL from the Critic is **non-overridable** - the only legal responses are to supply a better justification and re-invoke, or to drop the finding.
     5. **Reconciliation FAILs, graph-fabrication FAILs, `downstream-ci-conflict` FAILs, and `suppression-path-mismatch` FAILs are never overridable** (per items 9, 10, and Step 4.5). They do not enter this workflow.
 
@@ -887,7 +887,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
    > "Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended)."
 
    Then **wait**. Do not produce findings, recommendations, posting prompts, or fix suggestions while waiting. The only legal way to leave this waiting state is one of:
-   - The human pastes a critic verdict. Before folding it in, validate it against the protocol's [Session-handoff verification](./protocols/reviewer-critic-protocol.md#session-handoff-verification-fallback-path) checks -- all five MUST pass:
+   - The human pastes a critic verdict. Before folding it in, validate it against the protocol's [Session-handoff verification](./protocols/reviewer-critic.protocol.md#session-handoff-verification-fallback-path) checks -- all five MUST pass:
      1. The Critic header `PR:` exactly matches the current PR under review.
      2. The Critic header `Head SHA:` exactly matches the session SHA pinned in Step 1.
      3. The Critic header `Base SHA/Ref:` matches the base SHA/ref pinned in Step 1 (Critic Input #5). It MAY be omitted or rendered `n/a` only when no previous version exists ("None - new service").
@@ -971,13 +971,13 @@ Substitution rules:
   Field-by-field semantics (allowed values, defaults, when each optional
   field is required, format constraints) are the **canonical** specification
   in the shared protocol:
-  [protocol -> Per-comment telemetry marker](./protocols/reviewer-critic-protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting).
+  [protocol -> Per-comment telemetry marker](./protocols/reviewer-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting).
   Do **not** duplicate the field semantics here -- update the protocol and
   reference it.
 
   Reviewer-specific posting behavior (in addition to the field semantics in
   the protocol):
-  - **Validate `override-reason` in Step 7**, not at Step 8 posting time. When the human supplies an override decision during Step 7 item 13, apply the canonical **Override-reason validator** specified in the protocol -- see [`./protocols/reviewer-critic-protocol.md` -> Override-reason validator](./protocols/reviewer-critic-protocol.md#override-reason-validator) -- **before** folding the override into the report. A bad reason must block plan finalization, not posting. If validation fails, refuse to fold the override and surface the validation error to the human so they can supply a real justification before re-invoking the Critic.
+  - **Validate `override-reason` in Step 7**, not at Step 8 posting time. When the human supplies an override decision during Step 7 item 13, apply the canonical **Override-reason validator** specified in the protocol -- see [`./protocols/reviewer-critic.protocol.md` -> Override-reason validator](./protocols/reviewer-critic.protocol.md#override-reason-validator) -- **before** folding the override into the report. A bad reason must block plan finalization, not posting. If validation fails, refuse to fold the override and surface the validation error to the human so they can supply a real justification before re-invoking the Critic.
   - The `head-sha` field MUST be the **full 40-character commit SHA**, not the abbreviated 7-char form. Short SHAs are only acceptable in conversational chat text.
   - Use `rule: summary` only when explicitly approved by the human and accompanied by `severity: suggestion` and `classification: new` (per the current workflow, the agent does not post summary comments by default).
 
@@ -1044,16 +1044,16 @@ places and serve different purposes.
 
 | Marker                           | Where it appears                                                                                              | Defined in                                                                                                                                                                                                                                | Purpose                                                                                                                                                                                       |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Review-state marker**          | Literal first line of every Reviewer response after Step 1 begins                                             | [Required review-state marker](#required-review-state-marker) + [shared protocol](./protocols/reviewer-critic-protocol.md#review-state-marker-per-response)                                                                               | Records `critic-mode`, iteration, and PR identity for transcript auditability.                                                                                                                |
-| **Per-comment telemetry marker** | Last line of every POST-NEW / RESOLVE-AND-REPOST PR comment and any Step 6 canonical body rendered for parity | [Step 8 -> Posted-comment formatting and telemetry](#step-8-execute-the-validated-reconciliation-plan) + [shared protocol](./protocols/reviewer-critic-protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) | Records per-finding rule, severity, classification, Critic verdict, head SHA, downstream CI rule when applicable, and override justification when present. Enables PR-wide telemetry queries. |
+| **Review-state marker**          | Literal first line of every Reviewer response after Step 1 begins                                             | [Required review-state marker](#required-review-state-marker) + [shared protocol](./protocols/reviewer-critic.protocol.md#review-state-marker-per-response)                                                                               | Records `critic-mode`, iteration, and PR identity for transcript auditability.                                                                                                                |
+| **Per-comment telemetry marker** | Last line of every POST-NEW / RESOLVE-AND-REPOST PR comment and any Step 6 canonical body rendered for parity | [Step 8 -> Posted-comment formatting and telemetry](#step-8-execute-the-validated-reconciliation-plan) + [shared protocol](./protocols/reviewer-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) | Records per-finding rule, severity, classification, Critic verdict, head SHA, downstream CI rule when applicable, and override justification when present. Enables PR-wide telemetry queries. |
 
 **Critical distinction.** `critic-mode` (review-state marker) is
 response-scope. `critic` (per-comment marker) is finding-scope. Different
 fields, different value domains. See the protocol file's
-["`critic-mode` vs `critic` field"](./protocols/reviewer-critic-protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting)
+["`critic-mode` vs `critic` field"](./protocols/reviewer-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting)
 note.
 
-The shared [Reviewer<->Critic protocol](./protocols/reviewer-critic-protocol.md) is
+The shared [Reviewer<->Critic protocol](./protocols/reviewer-critic.protocol.md) is
 the source of truth for both marker schemas. If this file's restatements
 ever disagree with the protocol file, the protocol file wins; file a bug.
 

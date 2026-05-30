@@ -79,14 +79,14 @@ browser "find on page".
 Supporting sections:
 
 - **Why this agent exists** -- precision-dominates-recall rationale.
-- **Operating mode** -- inputs received from the Reviewer (canonical schema in the shared protocol: [./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)).
+- **Operating mode** -- inputs received from the Reviewer (canonical schema in the shared protocol: [./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)).
 - **Hard constraints** -- read-only behavior, no subagent recursion, no new findings.
 - **Verdict tracks** -- the four verdicts every output returns (canonical schema in the shared protocol).
 - **Known false-positive and missed-violation patterns** -- reference guard-rails.
 
 ## Glossary
 
-Critic-specific terms. The shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)) contains cross-agent terms (session SHA, dispatch, sentinel string, etc.) in its own Glossary section.
+Critic-specific terms. The shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)) contains cross-agent terms (session SHA, dispatch, sentinel string, etc.) in its own Glossary section.
 
 | Term                    | Meaning                                                                                                                                                                                         |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -108,7 +108,7 @@ field during reconciliation validation (step 7):
   PR comment's body identifies it as agent-origin. Used to validate the
   Reviewer's RESOLVE-AND-REPOST vs REPLY-LINE-SHIFT classification and to
   authorize THANK-AND-RESOLVE on agent-origin threads. The full marker
-  schema is in the shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)), under its "Per-comment telemetry marker" section.
+  schema is in the shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)), under its "Per-comment telemetry marker" section.
 
 The Critic does **not** read or write the Reviewer's per-response
 `<!-- review-state: ... -->` marker.
@@ -199,7 +199,7 @@ You are invoked by the ARM API Reviewer agent (the **reviewer**) after it
 produces its structured findings report (Step 6 of the reviewer's workflow)
 and **before** any human posting decision (Step 8).
 
-Inputs you receive from the reviewer. The shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)) is the canonical schema (see its "Inputs the Reviewer passes to the Critic" section); the list below restates it for in-file readability
+Inputs you receive from the reviewer. The shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)) is the canonical schema (see its "Inputs the Reviewer passes to the Critic" section); the list below restates it for in-file readability
 and adds Critic-specific behavioral notes that are not in the protocol.
 
 1. The PR URL (owner, repo, number).
@@ -259,7 +259,7 @@ Input validation is strict and fail-fast:
 - On iteration 1, Inputs #7 and #8 MUST be passed as an explicit empty
   list (`[]` or the literal string `none`). Omission is not equivalent
   and FAILs the run -- the protocol's input contract is "pass all ten on
-  every invocation" (see [`./protocols/reviewer-critic-protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/reviewer-critic-protocol.md#inputs-the-reviewer-passes-to-the-critic)).
+  every invocation" (see [`./protocols/reviewer-critic.protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/reviewer-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic)).
 - Input 6 must be either a real reconciliation plan or the literal
   sentinel `reconciliation skipped`.
 - Input 9 must be explicitly `graphs-produced: true` or
@@ -442,7 +442,7 @@ until Reviewer Step 8 and is not available at Critic validation time).
 
 Extract the `justification:` clause and re-validate it against the canonical
 three-check **Override-reason validator** specified in the shared protocol:
-[`./protocols/reviewer-critic-protocol.md` -> Override-reason validator](./protocols/reviewer-critic-protocol.md#override-reason-validator).
+[`./protocols/reviewer-critic.protocol.md` -> Override-reason validator](./protocols/reviewer-critic.protocol.md#override-reason-validator).
 The protocol owns the length threshold, the boilerplate denylist, and the
 structured-anchor / verbatim-quote requirement; do **not** duplicate those
 rules here.
@@ -638,7 +638,7 @@ section of the output schema below.
 
 ## Verdict tracks
 
-Return **four** verdicts at the top of every output. The shared protocol file ([./protocols/reviewer-critic-protocol.md](./protocols/reviewer-critic-protocol.md)) is the canonical schema (see its "Critic verdict tracks" section); the table below restates it for in-file
+Return **four** verdicts at the top of every output. The shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)) is the canonical schema (see its "Critic verdict tracks" section); the table below restates it for in-file
 readability and adds the value definitions the Reviewer expects to parse.
 
 | Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
