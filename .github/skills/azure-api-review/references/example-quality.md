@@ -52,6 +52,7 @@ Every example file in a PR **MUST** be referenced by exactly one
 
 - **Rule ID:** `EX-COVERAGE`
 - **Severity:** Warning
+- **Maximum severity is Warning.** This cap is REQUIRED. This rule **MUST NOT** be reported as `Blocking`, `Error`, `Required`, or `Critical` under any circumstances, even when **multiple** example files are missing, when **every** operation lacks examples, or when the missing examples are for security-sensitive operations. Coverage gaps are a quality concern, not a contract violation. If you believe a coverage gap warrants escalation, file a separate rule request. Do not unilaterally upgrade this finding's severity.
 
 ### Rules
 

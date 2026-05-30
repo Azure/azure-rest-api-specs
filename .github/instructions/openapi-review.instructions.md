@@ -105,6 +105,16 @@ If **none** of these signals are present, the new API version is being authored 
 
 **Severity.** Blocking.
 
+**Decision procedure.** This procedure is REQUIRED. Before emitting any TSP-REQUIRED-V1 finding the agent MUST walk this checklist top-to-bottom and stop at the first condition that holds:
+
+1. **API version directory already exists on the base branch?** Then **Rule PASSES. Emit NO finding at any severity, including Warning and Suggestion.** May be listed as `N/A` or compliant in an acknowledgments table, but MUST NOT appear in the findings list.
+2. **PR adds or modifies any `.tsp` file under the same service folder?** Then **Rule PASSES. Emit NO finding.**
+3. **A sibling TypeSpec project containing `main.tsp` and `tspconfig.yaml` is present anywhere under the service folder?** Then **Rule PASSES. Emit NO finding.**
+4. **The new swagger document has `x-typespec-generated` at the top level, meaning as a direct child of the document root, alongside `swagger`, `info`, `paths`?** Then **Rule PASSES. Emit NO finding.** This signal is dispositive on its own. Its presence is sufficient compliance evidence regardless of any other context. The agent MUST NOT downgrade the finding to Warning or Suggestion as a reminder, and MUST NOT raise it because of unrelated concerns about TypeSpec source-of-truth, sibling project hygiene, or repository layout. The marker is the contract.
+5. **Otherwise**, when the new API version directory has no `.tsp` files in the PR, no sibling TypeSpec project, and no `x-typespec-generated` marker, emit a single **Blocking** finding citing rule `TSP-REQUIRED-V1`.
+
+A finding "passes" the rule means the rule does not appear in the findings list at any severity. Listing it in a "Compliant Areas" or "N/A" table is acceptable.
+
 **Fix.** Author the new API version in TypeSpec using the Azure TypeSpec libraries. See [Getting Started with TypeSpec specifications](../../documentation/Getting-started-with-TypeSpec-specifications.md) and the [TypeSpec dev process](../../documentation/typespec-rest-api-dev-process.md) for end-to-end guidance. Generated OpenAPI from `tsp compile .` is then checked in alongside the TypeSpec source.
 
 **Enforcement.** A deterministic CI check is in development to block such PRs automatically (tracked in [PR #42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, this agent rule surfaces the same policy at review time.
@@ -115,6 +125,7 @@ If **none** of these signals are present, the new API version is being authored 
 - Do **not** flag PRs that add a new API version whose swagger is generated from sibling TypeSpec source.
 - If unsure whether a swagger file is TypeSpec-generated, look for the `x-typespec-generated` marker in the JSON before flagging.
 - Do **not** flag PRs that only add or modify example files (`examples/*.json`), `readme.md`, `tspconfig.yaml`, or `.tsp` files — the rule applies only when a new API version directory contains handwritten OpenAPI swagger.
+- The presence of the `x-typespec-generated` marker at the document root is **dispositive** — do **not** emit a Warning, Suggestion, or "informational" TSP-REQUIRED-V1 finding when this marker is present, regardless of any concerns about whether the TypeSpec source is co-located, modified in the PR, or visible to the reviewer.
 
 ## 3. Security Definitions
 
@@ -535,7 +546,8 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 
 - PUT and PATCH operations **SHOULD** have at least two examples (minimum + maximum property set).
 - Operations with polymorphic discriminators **SHOULD** have separate examples per variant.
-- LRO operations **SHOULD** show both the initial response (e.g., `202`) and the final response (e.g., `200`).
+- LRO operations **SHOULD** show both the initial response such as `202` and the final response such as `200`.
+- **Maximum severity is `Warning`.** Missing or incomplete example coverage **MUST NOT** be reported as `Blocking`, `Error`, `Required`, or `Critical`, even when every operation lacks examples or when the missing example is for a security-sensitive operation such as a `listKeys` POST. Coverage gaps are a quality concern, not a contract violation. Severity escalation is forbidden. Flag at `Warning`, or omit entirely on fast-path examples-only PRs.
 
 ### 22.12 Descriptive Example Values (EX-DESCRIPTIVE-VALUES)
 

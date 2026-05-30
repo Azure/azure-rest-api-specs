@@ -441,6 +441,14 @@ To discover which prior version folders exist, prefer this order to minimize API
 
 Do **not** flag updates to files inside pre-existing API version directories, even when those files are handwritten OpenAPI. Do **not** flag PRs that only modify example files, `readme.md`, `tspconfig.yaml`, or `.tsp` files. The full rule definition is in [`openapi-review.instructions.md` Section 2A](../instructions/openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1). A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)); until it ships, this agent rule is the primary enforcement point.
 
+**Hard short-circuit.** This check is REQUIRED. Before emitting any TSP-REQUIRED-V1 finding, walk this checklist top-to-bottom and stop at the first match. The matching branch is dispositive: when the rule passes, the agent MUST NOT emit any finding for TSP-REQUIRED-V1 at any severity, including Warning, Suggestion, and informational. Listing the rule as `N/A` in a compliant-areas table is acceptable.
+
+1. Does the API version directory already exist on the base branch? If yes, the rule passes.
+2. Does the PR add or modify any `.tsp` file under the same service folder? If yes, the rule passes.
+3. Is there a sibling TypeSpec project containing `main.tsp` and `tspconfig.yaml` anywhere under the service folder? If yes, the rule passes.
+4. Does the new swagger document have `x-typespec-generated` at the top level, meaning as a direct child of the document root, alongside `swagger`, `info`, `paths`? If yes, the rule passes. This marker is dispositive on its own; do not flag because the TypeSpec source is not visible in the PR, not co-located, or not freshly modified.
+5. Otherwise, emit a single **Blocking** finding citing `TSP-REQUIRED-V1`.
+
 ### Step 3.5: API Graph & Data-Flow Analysis (think in graphs before lists)
 
 **For every PR touching `.tsp` or resource-manager `.json`** (full-review track only; skipped on fast path -- see Step 1), produce four graph views as Mermaid artifacts inside the Step 6 report, each wrapped in a collapsible `<details>` block so the diagrams do not dominate the chat. The four views are:

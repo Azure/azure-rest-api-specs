@@ -102,6 +102,16 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - Updates to handwritten swagger inside **pre-existing** API version directories remain permitted and **MUST NOT** be flagged.
 - A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, surface this rule at review time.
 
+**Hard short-circuits.** Apply in order and stop at the first match. The full procedure is defined in [openapi-review.instructions.md §2A "Decision procedure"](./openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1).
+
+1. API version directory exists on the base branch: rule **PASSES**, emit **no finding** at any severity.
+2. PR adds or modifies any `.tsp` file under the same service folder: rule **PASSES**, emit **no finding**.
+3. Sibling TypeSpec project with `main.tsp` and `tspconfig.yaml` is present anywhere under the service folder: rule **PASSES**, emit **no finding**.
+4. Swagger document has `x-typespec-generated` at the top level: rule **PASSES**, emit **no finding**. This marker is **dispositive on its own**. Do **not** emit a Warning, Suggestion, or "informational" TSP-REQUIRED-V1 finding when it is present.
+5. Otherwise: emit a single **Blocking** finding.
+
+"PASSES" means the rule does not appear in the findings list at any severity. Listing it as `N/A` or `Compliant` in an acknowledgments or compliant-areas table is acceptable.
+
 ---
 
 ## 1. ARM Resource Path Structure

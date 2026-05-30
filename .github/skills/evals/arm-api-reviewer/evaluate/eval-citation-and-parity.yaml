@@ -222,7 +222,13 @@ stimuli:
         name: "agent refuses to shorten / consolidate"
         config:
           # Matches phrases that signal refusal to drop content or consolidate.
-          pattern: "(?i)(must not|cannot|won't|will not|do not|forbidden|not (acceptable|allowed|permitted))[^.\\n]{0,80}(consolidat|shorten|drop|paraphras|omit|combine|summari[sz]|truncat)"
+          # Trigger verbs: "must not / cannot / won't / forbidden / not allowed",
+          # plus standalone refusal verbs ("refuse / refuses / refused", "forbid /
+          # forbids / forbidding", "prohibit / prohibits / prohibited / prohibiting",
+          # "decline / declines", "reject / rejects"). Action verbs include
+          # consolidate, shorten, drop, paraphrase, omit, combine, summarize,
+          # truncate.
+          pattern: "(?i)(must not|cannot|can't|won't|will not|do not|don't|forbidden|not (?:acceptable|allowed|permitted)|forbid(?:s|ding)?|prohibit(?:s|ed|ing)?|refus(?:e|es|ed|ing)|declin(?:e|es|ed|ing)|reject(?:s|ed|ing)?)[^.\\n]{0,80}(consolidat|shorten|drop|paraphras|omit|combine|summari[sz]|truncat)"
       - type: prompt
     rubric:
       - The agent explicitly states that shortening, consolidating, paraphrasing, or dropping content (e.g., the JSON example) is not allowed by the Reviewer-Posted Parity rule

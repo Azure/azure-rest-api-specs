@@ -36,8 +36,11 @@ stimuli:
         name: "line numbers present"
         config:
           # Matches line number citations in any common format:
-          #   "Line 42", "Lines: 29", "**Line(s)** | 29", "line 29–35"
-          pattern: "(?:\\*\\*)?[Ll]ines?(?:\\(s\\))?(?:\\*\\*)?(?::?\\s*|\\s*\\|\\s*)\\d+"
+          #   "Line 42", "Lines: 29", "**Lines:** 29" (colon inside bold span),
+          #   "**Line(s)** | 29", "line 29-35", "Lines 142-150".
+          # The character class allows any combination of whitespace, ':', '*',
+          # and '|' between the "Line(s)" token and the digits, in any order.
+          pattern: "[Ll]ines?(?:\\(s\\))?[\\s:*|]+\\d+"
       - type: output-matches
         name: "rule IDs present"
         config:
