@@ -534,9 +534,9 @@ using Microsoft.ManagedNetworkFabric;
   "Layer2Settings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   NetworkToNetworkInterconnectPatchProperties.optionBLayer3Configuration,
-  OptionBLayer3Configuration,
+  "OptionBLayer3Settings",
   "csharp"
 );
 @@alternateType(
@@ -964,7 +964,22 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(OptionBLayer3Configuration.fabricASN, "FabricAsn", "csharp");
 @@clientName(OptionBLayer3Configuration.peerASN, "PeerAsn", "csharp");
 @@clientName(
+  OptionBLayer3ConfigurationPatchProperties.fabricASN,
+  "FabricAsn",
+  "csharp"
+);
+@@clientName(
+  OptionBLayer3ConfigurationPatchProperties.peerASN,
+  "PeerAsn",
+  "csharp"
+);
+@@clientName(
   OptionBLayer3Configuration.peLoopbackIpAddress,
+  "PeLoopbackIPAddress",
+  "csharp"
+);
+@@clientName(
+  OptionBLayer3ConfigurationPatchProperties.peLoopbackIpAddress,
   "PeLoopbackIPAddress",
   "csharp"
 );
