@@ -518,16 +518,17 @@ using Microsoft.ManagedNetworkFabric;
   "StaticRouteSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   InternalNetworkPatchProperties.connectedIPv4Subnets,
-  ConnectedSubnet[],
+  "ConnectedIPv4SubnetSettings",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   InternalNetworkPatchProperties.connectedIPv6Subnets,
-  ConnectedSubnet[],
+  "ConnectedIPv6SubnetSettings",
   "csharp"
 );
+@@clientName(ConnectedSubnetPatch, "NetworkFabricConnectedSubnetPatch", "csharp");
 @@alternateType(
   NetworkToNetworkInterconnectPatchProperties.layer2Configuration,
   Layer2Configuration,
