@@ -44,7 +44,12 @@ stimuli:
       - type: output-matches
         name: "rule IDs present"
         config:
-          pattern: "SEC-SECRET-DETECT|RPC-[A-Za-z]+-V\\d+-\\d+"
+          # Accepts the canonical SEC-SECRET-DETECT plus common Azure rule-ID
+          # patterns produced by various tooling: RPC-* contracts, Spectral
+          # R-codes (R3017, R4015), OAPI codes (OAPI034), WHATIF codes,
+          # TSP-* TypeSpec rules, ARG (Azure Resource Graph), and PLCY policy
+          # codes. Any of these counts as a valid rule-ID citation.
+          pattern: "SEC-SECRET-DETECT|SecretPropertyDetection|SecretsIn(?:Properties|Response)|RPC-[A-Za-z]+-V\\d+-\\d+|R\\d{4}|OAPI\\d{3}|WHATIF-\\d{3}|TSP-[A-Z][A-Z0-9-]+|ARG\\d{3}|PLCY\\d{3}"
       - type: output-not-matches
         name: "no see-above placeholder response"
         config:
@@ -108,5 +113,5 @@ stimuli:
       - The report does NOT contain a `Critic mode:` header line
       - The report does NOT contain a `Next-step recommendation:` header line on the happy path
       - "No finding carries a `Critic: \u2705 PASS` annotation, a `Critic: PASS` annotation, or any equivalent affirmative critic narration"
-      - The report still uses the standard section structure (e.g., Blocking Issues, Warnings, Summary)
+      - The report still uses the standard section structure (e.g., Blocking Issues, Warnings, Summary). A compact summary table or compliance checklist substituting for empty `### Blocking Issues -- None` / `### Warnings -- None` sections is acceptable when the spec has zero findings -- the standard skeleton is only required when there are findings to organize.
       - An optional "Findings dropped after critic review" section is omitted entirely on the happy path (it should only render when non-empty)

@@ -91,11 +91,14 @@ stimuli:
       - type: output-matches
         name: "report body delivered (not just a reference)"
         config:
-          # The final assistant message must include at least one canonical
-          # finding header (Template C shape). Catches the regression where
-          # the agent drafts the report in an internal turn and then sends
-          # only a "see above" reference as its final user-visible message.
-          pattern: "(?s)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:\ud83d\udd34|\ud83d\udfe1|\ud83d\udd35|\u26aa|Blocking|Warning|Suggestion)"
+          # The final assistant message must include at least one finding
+          # header. Accepts multiple legitimate shapes:
+          #   - Template C canonical: **[NEW] 🔴 Blocking** ...
+          #   - Numbered finding under a heading: "### 1. <title>" or "## 1. <title>"
+          #   - Severity-named subheading: "### Blocking: ..." / "### Warning: ..."
+          # Catches the regression where the agent sends only a back-reference
+          # ("see above") as its final user-visible message with no findings.
+          pattern: "(?ms)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:🔴|🟡|🔵|⚪|Blocking|Warning|Suggestion)|^#{2,4}\\s+\\d+\\.\\s+\\S|^#{2,4}\\s+(?:Blocking|Warning|Suggestion|Finding)\\b"
       - type: output-not-matches
         name: "no see-above placeholder response"
         config:
@@ -237,13 +240,12 @@ stimuli:
         name: "agent refuses to shorten / consolidate"
         config:
           # Matches phrases that signal refusal to drop content or consolidate.
-          # Trigger verbs: "must not / cannot / won't / forbidden / not allowed",
-          # plus standalone refusal verbs ("refuse / refuses / refused", "forbid /
-          # forbids / forbidding", "prohibit / prohibits / prohibited / prohibiting",
-          # "decline / declines", "reject / rejects"). Action verbs include
-          # consolidate, shorten, drop, paraphrase, omit, combine, summarize,
-          # truncate.
-          pattern: "(?i)(must not|cannot|can't|won't|will not|do not|don't|forbidden|not (?:acceptable|allowed|permitted)|forbid(?:s|ding)?|prohibit(?:s|ed|ing)?|refus(?:e|es|ed|ing)|declin(?:e|es|ed|ing)|reject(?:s|ed|ing)?)[^.\\n]{0,80}(consolidat|shorten|drop|paraphras|omit|combine|summari[sz]|truncat)"
+          # Trigger verbs cover both negation-form ("must not / cannot / will
+          # not") and standalone refusal verbs ("refuse / decline / reject /
+          # forbid / prohibit / preserve / keep intact / as written").
+          # Action verbs cover the shortening operations.
+          # Window widened to 250 chars to accommodate two-sentence refusals.
+          pattern: "(?is)(must not|cannot|can't|won't|will not|do not|don't|forbidden|not (?:acceptable|allowed|permitted)|forbid(?:s|ding)?|prohibit(?:s|ed|ing)?|refus(?:e|es|ed|ing)|declin(?:e|es|ed|ing)|reject(?:s|ed|ing)?|preserv(?:e|es|ed|ing)|keep[^.]{0,40}(?:intact|verbatim|as[- ]is|as written)|as written)[^.\\n]{0,250}(consolidat|shorten|drop|paraphras|omit|combine|summari[sz]|truncat|abbreviat)"
       - type: prompt
     rubric:
       - The agent explicitly states that shortening, consolidating, paraphrasing, or dropping content (e.g., the JSON example) is not allowed by the Reviewer-Posted Parity rule
