@@ -62,6 +62,12 @@ enum Versions {
    */
   @useDependency(LiftrBase.Versions.v3_preview)
   v2026_05_01_preview: "2026-05-01-preview",
+
+  /**
+   * The 2026-05-23-preview API version.
+   */
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_05_23_preview: "2026-05-23-preview",
 }
 
 interface Operations {
