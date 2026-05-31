@@ -7,6 +7,13 @@
 
 # Proactive Secret Detection (SEC-SECRET-DETECT)
 
+> **Canonical rule ID:** `SEC-SECRET-DETECT`. When citing this rule in
+> any review finding, posted PR comment, or report, use this exact
+> string verbatim -- not paraphrases such as `SecretsInProperties`,
+> `SecretPropertyDetection`, `SECRET-DETECT`, or `secret-prop`. The
+> canonical ID is what downstream tooling, telemetry markers, and
+> reviewer-posted-parity checks key on.
+
 Reviewers **MUST** proactively inspect every string property to
 determine whether it could contain a secret, credential, or sensitive
 token -- even when the property is not explicitly annotated as a secret.

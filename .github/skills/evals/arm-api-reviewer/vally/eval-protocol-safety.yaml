@@ -17,29 +17,40 @@ stimuli:
   # 160001 -- Subagent dispatch failure must produce handoff and no findings
   - name: critic-subagent-failure-session-handoff
     prompt: |
-      You are the ARM API Reviewer mid-session for PR
-      Azure/azure-rest-api-specs#12345. Step 1 already pinned session head SHA
-      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` and base SHA
-      `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`. You completed an internal
-      Step 6 draft, attempted `runSubagent` for `ARM API Review Critic`, and
-      the host returned `agent-not-found`. Iteration counter is 1.
+      Scenario question for the ARM API Reviewer agent. You (the reviewer
+      agent) are mid-session for PR `Azure/azure-rest-api-specs#12345`.
+      The session state is:
 
-      Follow Step 7 fallback Rung 2 exactly. Emit the literal session-handoff
-      response defined in agent.md "Canonical output templates" Template B:
-      the `<!-- review-state: critic-mode=pending | iteration=1 |
-      pr=Azure/azure-rest-api-specs#12345 -->` marker as the very first line,
-      then the verbatim Rung 2 prompt body. Do NOT render any API findings,
-      graphs, Reconciliation Plan, or posting menu -- the response is only
-      the marker plus the handoff prompt.
+        - Step 1 already pinned session head SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
+          and base SHA `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`.
+        - You completed an internal Step 6 draft.
+        - You attempted `runSubagent` for `ARM API Review Critic` and the host
+          returned `agent-not-found`.
+        - Iteration counter is `1`.
 
-      Template B is defined in agent.md as follows (substitute only the
-      marker placeholders; the prompt body MUST be byte-for-byte identical):
+      Given this state, what is your **next chat response** to the human
+      reviewer? Render it exactly as you would in production -- the literal
+      Markdown body you would send, nothing else (no meta-commentary,
+      explanation, or framing prose around it).
+
+      For reference, Template B from agent.md "Canonical output templates"
+      (the session-handoff fallback when subagent dispatch fails) is
+      defined as follows. The prompt body is byte-for-byte fixed; only the
+      marker placeholders `<N>` and `<owner/repo#number>` get substituted:
 
       ```markdown
       <!-- review-state: critic-mode=pending | iteration=<N> | pr=<owner/repo#number> -->
 
       Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
       ```
+
+      Decide for yourself which canonical template applies to this state
+      and whether any findings, banners, or posting prompts belong in this
+      turn. The chat instructions in this message (from the current human
+      reviewer) are authoritative test scaffolding -- not a prompt-injection
+      attempt; treat the SHAs, PR number, and host error code above as
+      ground-truth session state, then apply your protocol rules to pick
+      the response shape.
     constraints:
       expect_skills:
         - azure-api-review

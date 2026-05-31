@@ -84,11 +84,13 @@ stimuli:
       - type: output-not-matches
         name: "fast path NOT elected"
         config:
-          # Disallow phrasing that announces fast-path election for this PR.
-          # Mentions of "fast path" in passing (e.g., "this does not qualify
-          # for the fast path") are acceptable; the negative pattern below
-          # targets affirmative election statements.
-          pattern: "(?i)(elect|using|chose|chosen|selected|applying|on the)\\s+(the\\s+)?fast[- ]?path"
+          # Disallow only AFFIRMATIVE election phrasing. The trailing negative
+          # lookahead `(?![-\w])` ensures we don't match phrases like
+          # "fast-path allowlist", "fast-path table", "fast-path track" that
+          # legitimately appear in reasoning about WHY fast-path was rejected.
+          # 'on the' was previously included but matched 'on the fast-path
+          # allowlist' in reasoning prose -- dropped.
+          pattern: "(?i)(elect|chose|chosen|selected|applying|using)\\s+(the\\s+)?fast[- ]?path(?![-\\w])"
       - type: output-matches
         name: "full review performed"
         config:
@@ -127,7 +129,9 @@ stimuli:
       - type: output-not-matches
         name: "fast path NOT elected"
         config:
-          pattern: "(?i)(elect|using|chose|chosen|selected|applying|on the)\\s+(the\\s+)?fast[- ]?path"
+          # See note in 150002: avoid matching benign phrases like
+          # "on the fast-path allowlist" that appear in reasoning prose.
+          pattern: "(?i)(elect|chose|chosen|selected|applying|using)\\s+(the\\s+)?fast[- ]?path(?![-\\w])"
       - type: output-matches
         name: "defaulted to full review"
         config:
