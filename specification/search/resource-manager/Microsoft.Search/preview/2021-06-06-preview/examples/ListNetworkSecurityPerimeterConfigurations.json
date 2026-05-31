@@ -1,0 +1,63 @@
+{
+    "parameters": {
+      "searchServiceName": "mysearchservice",
+      "resourceGroupName": "rg1",
+      "api-version": "2021-06-06-preview",
+      "subscriptionId": "subid"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "value":[
+                    {
+                        "name": "testResource",
+                        "type": "Microsoft.Search/searchServices/networkSecurityPerimeterConfigurations",
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/networkSecurityPerimeterConfigurations/testResource",
+                        "properties": {
+                            "provisioningState": "succeeded",
+                            "networkSecurityPerimeter": {
+                                "id": "/subscriptions/subid/resourceGroup/rg1/providers/Microsoft.Network/networkSecurityPerimeters/testPerimeter",
+                                "perimeterGuid": "testGuid",
+                                "location": "westus"
+                            },
+                            "resourceAssociation": {
+                                "name": "testAssociation",
+                                "accessMode": "learning"
+                            },
+                            "profile": {
+                                "name": "testProfile",
+                                "accessRulesVersion": "1",
+                                "accessRules": [
+                                    {
+                                        "name": "accessRule1",
+                                        "properties": {
+                                            "direction": "inbound",
+                                            "addressPrefixes": [
+                                                "10.0.0.1/16"
+                                            ],
+                                            "fullyQualifiedDomainNames":[
+                                                "contoso.com"
+                                            ],
+                                            "subscriptions": [
+                                                "subid"
+                                            ],
+                                            "networkSecurityPerimeters":[
+                                                {
+                                                    "id": "/subscriptions/subid/resourceGroup/rg1/providers/Microsoft.Network/networkSecurityPerimeters/testPerimeter2",
+                                                    "perimeterGuid": "testGuid2",
+                                                    "location": "westus"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "diagnosticSettingsVersion": "2"
+                            }
+                        }
+                    }
+                ]
+          
+            }
+        }
+    }
+}
