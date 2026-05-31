@@ -45,6 +45,12 @@ stimuli:
         name: "rule IDs present"
         config:
           pattern: "SEC-SECRET-DETECT|RPC-[A-Za-z]+-V\\d+-\\d+"
+      - type: output-not-matches
+        name: "no see-above placeholder response"
+        config:
+          # Catches the subagent-handoff regression: agent drafts the report
+          # internally then sends only a back-reference as the final message.
+          pattern: "(?i)(report (is )?above|already (provided|finished|generated)|see above|no additional action needed|as (rendered|shown) above)"
       - type: prompt
     rubric:
       - Each finding cites a specific line number (e.g., line 42) -- not vague references like "near end"

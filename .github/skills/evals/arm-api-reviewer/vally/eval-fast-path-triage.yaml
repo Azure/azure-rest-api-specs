@@ -132,7 +132,18 @@ stimuli:
         name: "defaulted to full review"
         config:
           pattern: "(?i)full[- ]review|defaulted|uncertain|safer|conservative"
-      - type: prompt
+      - type: output-matches
+        name: "reasoning for full-review default given"
+        config:
+          # Requires the agent to state WHY it defaulted (the rubric criterion
+          # that previously depended on the LLM judge). Accepts any phrasing
+          # that pairs an uncertainty/ambiguity cue with a full-review/default
+          # cue within ~200 chars.
+          pattern: "(?is)(uncertain|cannot (tell|confirm|determine|verify)|not (sure|clear|certain)|ambiguous|unclear).{0,200}(full[- ]review|default(ed|ing)?|safer|conservative)|(full[- ]review|default(ed|ing)?|safer|conservative).{0,200}(uncertain|cannot (tell|confirm|determine|verify)|not (sure|clear|certain)|ambiguous|unclear)"
+      - type: output-contains
+        name: "rules still applied (missing-description finding produced)"
+        config:
+          substring: "description"
     rubric:
       - The agent defaults to the full review track when uncertain about fast-path qualification
       - The agent states its reasoning (e.g., "diff is small but I cannot confirm it is description-only, so defaulting to full review")

@@ -88,6 +88,21 @@ stimuli:
           # This pattern flags **OAPI034** or **RPC-Put-V1-22** style emphasis-only citations
           # (no surrounding link).
           pattern: "\\*\\*(?:RPC-[A-Za-z]+-V\\d+-\\d+|OAPI\\d{3}|WHATIF-\\d{3}|PLCY\\d{3}|SEC-SECRET-DETECT|TSP-REQUIRED-V\\d+|ARG\\d{3})\\*\\*"
+      - type: output-matches
+        name: "report body delivered (not just a reference)"
+        config:
+          # The final assistant message must include at least one canonical
+          # finding header (Template C shape). Catches the regression where
+          # the agent drafts the report in an internal turn and then sends
+          # only a "see above" reference as its final user-visible message.
+          pattern: "(?s)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:\ud83d\udd34|\ud83d\udfe1|\ud83d\udd35|\u26aa|Blocking|Warning|Suggestion)"
+      - type: output-not-matches
+        name: "no see-above placeholder response"
+        config:
+          # Disallows responses whose entire content defers to an earlier
+          # (subagent) turn. Catches phrases like "report is above", "already
+          # provided", "see above", "no additional action needed".
+          pattern: "(?i)(report (is )?above|already (provided|finished|generated)|see above|no additional action needed|as (rendered|shown) above)"
       - type: prompt
     rubric:
       - Every cited rule ID is rendered as a markdown hyperlink, not a bare token
