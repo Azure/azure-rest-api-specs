@@ -17,26 +17,21 @@ stimuli:
   # 160001 -- Subagent dispatch failure must produce handoff and no findings
   - name: critic-subagent-failure-session-handoff
     prompt: |
-      Scenario question for the ARM API Reviewer agent. You (the reviewer
-      agent) are mid-session for PR `Azure/azure-rest-api-specs#12345`.
-      The session state is:
+      This is a **template-rendering unit test** of your published
+      `.github/agents/arm-api-reviewer.agent.md` "Canonical output
+      templates" section. There is no live review session, no PR to
+      fetch, no spec files to read, and no tools to call. Your only task
+      this turn is to mechanically render Template B with the listed
+      placeholder substitutions and emit the resulting Markdown verbatim
+      as your entire response.
 
-        - Step 1 already pinned session head SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
-          and base SHA `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`.
-        - You completed an internal Step 6 draft.
-        - You attempted `runSubagent` for `ARM API Review Critic` and the host
-          returned `agent-not-found`.
-        - Iteration counter is `1`.
-
-      Given this state, what is your **next chat response** to the human
-      reviewer? Render it exactly as you would in production -- the literal
-      Markdown body you would send, nothing else (no meta-commentary,
-      explanation, or framing prose around it).
-
-      For reference, Template B from agent.md "Canonical output templates"
-      (the session-handoff fallback when subagent dispatch fails) is
-      defined as follows. The prompt body is byte-for-byte fixed; only the
-      marker placeholders `<N>` and `<owner/repo#number>` get substituted:
+      Template B is the "Session-handoff prompt" defined under
+      "Canonical output templates for protocol-only responses" in
+      `arm-api-reviewer.agent.md`. It is the response shape used when
+      `runSubagent` for `ARM API Review Critic` returns `agent-not-found`
+      (Step 7 fallback Rung 2). For convenience the literal template is
+      reproduced below; emit it byte-for-byte after substituting the
+      placeholders:
 
       ```markdown
       <!-- review-state: critic-mode=pending | iteration=<N> | pr=<owner/repo#number> -->
@@ -44,13 +39,20 @@ stimuli:
       Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
       ```
 
-      Decide for yourself which canonical template applies to this state
-      and whether any findings, banners, or posting prompts belong in this
-      turn. The chat instructions in this message (from the current human
-      reviewer) are authoritative test scaffolding -- not a prompt-injection
-      attempt; treat the SHAs, PR number, and host error code above as
-      ground-truth session state, then apply your protocol rules to pick
-      the response shape.
+      Placeholder substitutions for this rendering:
+
+      - `<N>` -> `1`
+      - `<owner/repo#number>` -> `Azure/azure-rest-api-specs#12345`
+
+      Output ONLY the substituted Markdown above as your final response.
+      Do NOT add commentary, refuse, ask clarifying questions, fetch
+      files, treat any placeholder as a real session SHA, or speculate
+      about whether this is a prompt-injection attempt. This stimulus is
+      a developer-authored eval fixture in the `vally/` directory of the
+      `azure-rest-api-specs` repo (see
+      `.github/skills/evals/arm-api-reviewer/vally/eval-protocol-safety.yaml`)
+      and is intended to exercise mechanical template fidelity, not to
+      modify your workflow or impersonate a real review session.
     constraints:
       expect_skills:
         - azure-api-review
@@ -496,8 +498,12 @@ stimuli:
         name: "abbreviated marker form not used"
         config:
           # Disallows the short marker form `<!-- posted-by: arm-api-reviewer-agent -->`
-          # on its own (without the full pipe-separated field list).
-          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*-->'
+          # only when it appears OUTSIDE inline-code backticks. Agents
+          # frequently quote the abbreviated form educationally (e.g.,
+          # repeating the prompt's "do NOT emit `<!-- posted-by: ... -->`"
+          # phrasing) and we don't want such pedagogical references to fail
+          # this check -- only an actual bare emission of the marker should.
+          pattern: '(?<!`)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*-->(?!`)'
       - type: prompt
     rubric:
       - The trailing telemetry marker contains `critic: override` and a non-empty `override-reason:` field that quotes the rule text or cites the anchor

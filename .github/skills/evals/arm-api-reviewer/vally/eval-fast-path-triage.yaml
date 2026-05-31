@@ -50,9 +50,12 @@ stimuli:
         config:
           # The agent should NOT perform full breaking-change analysis for an
           # examples-only PR. Either it explicitly says it skipped Step 3, or
-          # the words "breaking change analysis" appear in a "skipped"
-          # / "not applicable" context.
-          pattern: "(?is)(skip|not applicable|n/?a|not required|omitted).{0,80}(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison)|(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison).{0,80}(skip|not applicable|n/?a|not required|omitted)"
+          # the words "breaking change analysis" appear in a "skipped" /
+          # "not applicable" / "unnecessary" / "no...needed" context.
+          # Window widened to 200 chars and skip-verbs broadened (skip,
+          # bypass, forgo, exclude, no...needed/required, unnecessary,
+          # inapplicable, not performed, not run, did not / didn't).
+          pattern: "(?is)(skip|bypass|forgo|exclude|omitted|not applicable|inapplicable|n/?a|not required|not needed|unnecessary|not performed|not run|did not|didn't|no\\s+(?:longer\\s+)?(?:need|require)|without).{0,200}(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison|prior version)|(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison|prior version).{0,200}(skip|bypass|forgo|exclude|omitted|not applicable|inapplicable|n/?a|not required|not needed|unnecessary|not performed|not run|did not|didn't|no\\s+(?:longer\\s+)?(?:need|require)|without)"
       - type: prompt
     rubric:
       - The agent explicitly elects the fast-path track in its output (e.g., "fast path", "trivial review track")
@@ -94,7 +97,13 @@ stimuli:
       - type: output-matches
         name: "full review performed"
         config:
-          pattern: "(?i)full[- ]review|full workflow|all steps|step\\s*3"
+          # Accepts natural variants the agent may use to signal it ran the
+          # full track instead of the fast path: "full review", "full
+          # workflow", "all steps", "step 3", "standard review",
+          # "comprehensive review", "complete review", "deep review",
+          # "full-review track", "thorough review", "end-to-end review",
+          # "steps 1-N".
+          pattern: "(?i)full[- ]review|full workflow|all steps|step\\s*3|standard\\s+review|comprehensive\\s+review|complete\\s+review|thorough\\s+review|deep\\s+review|end[- ]to[- ]end\\s+review|full[- ]review\\s+track|steps?\\s*1\\s*[-\u2013through]+\\s*\\d+"
       - type: output-matches
         name: "secret detection still triggered"
         config:
