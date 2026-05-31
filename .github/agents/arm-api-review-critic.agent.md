@@ -6,36 +6,22 @@ user-invocable: false
 # Tool surface is near-parity with the ARM API Reviewer so the critic can
 # independently re-fetch private-repo files via the GitHub MCP server or, when
 # unavailable, via `gh` CLI through execute/runInTerminal. The read-only
-# guarantee is now BEHAVIORAL (prose policy in "Hard constraints" below), not
-# tool-enforced. Two deliberate omissions vs. the reviewer's tool list:
-#   - No `agent` tool: the critic must not recurse / invoke other agents.
-#   - GitHub tools are an explicit read-only allowlist, not `github/*`: no
-#     `add_comment`, `create_pull_request_review`, `add_labels`, `update_issue`,
-#     `merge_pull_request`, or any mutating GitHub API.
-# Shell / web / search tools are granted so the critic can fall back to `gh api`,
-# `git show`, raw.githubusercontent.com, etc., on the same terms as the reviewer.
+# guarantee is BEHAVIORAL: see the "Tooling prerequisite for private-repo PRs"
+# section (allowed/forbidden shell commands) and the "Pre-tool self-check"
+# block in "Hard constraints" -- both are binding on every tool call.
 #
-# THREE BINDING REVIEW RULES FOR THIS FRONTMATTER:
-#   1. Do NOT add `github/*` wildcard or any write/post/edit GitHub tool here.
-#      Specifically forbidden:  `github/add_comment`,
-#      `github/create_pull_request_review`,
-#      `github/update_pull_request_review_comment`, `github/add_labels`,
-#      `github/remove_labels`, `github/merge_pull_request`,
-#      `github/update_issue`, `github/create_issue`,
-#      `github/create_or_update_file`, `github/delete_file`,
-#      `github/push_files`, anything beginning with `github/dismiss_*`,
-#      `github/request_*`, `github/submit_*`. If any of these appear in this
-#      list during code review, the PR MUST be blocked - the critic posting
-#      the verdict itself defeats the safety boundary.
-#   2. Do NOT add the `agent` tool. The Reviewer-Critic loop is the entire
-#      multi-agent surface; recursion is not permitted.
-#   3. Do NOT remove `execute/runInTerminal` without also removing the
-#      private-repo gh-CLI fallback path from "Tooling prerequisite for
-#      private-repo PRs" in the prose below. The two must move together.
-# The read-only behavioral barrier is enforced by the "Pre-tool self-check"
-# block in "Hard constraints" - every shell command the critic issues runs
-# through that check. See `arm-api-reviewer.agent.md` "Prompt-injection
-# resistance" for the parallel barrier on the Reviewer side.
+# Three binding rules when reviewing changes to this frontmatter:
+#   1. No `github/*` wildcard, and no mutating GitHub tool (any of:
+#      `add_comment`, `create_pull_request_review`, `update_*_review_comment`,
+#      `add_labels`, `remove_labels`, `merge_pull_request`, `update_issue`,
+#      `create_issue`, `create_or_update_file`, `delete_file`, `push_files`,
+#      `dismiss_*`, `request_*`, `submit_*`). Posting the verdict from the
+#      Critic itself defeats the safety boundary -- block such PRs.
+#   2. No `agent` tool. The Reviewer-Critic loop is the entire multi-agent
+#      surface; recursion is not permitted.
+#   3. Do not remove `execute/runInTerminal` without also removing the
+#      private-repo gh-CLI fallback path from the prose. The two must move
+#      together.
 tools:
   - execute/runInTerminal
   - github/get_file_contents
@@ -81,19 +67,19 @@ parses programmatically. Section headings below match the `### Step N:`
 headings further down the file; navigate via VS Code's outline view or
 browser "find on page".
 
-| #   | Section                                      | Purpose                                                                                            |
-| --- | -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| 1   | Re-fetch the cited file                      | Fresh fetch at the session SHA -- never trust the Reviewer's quoted content.                       |
-| 2   | Re-read the cited line(s)                    | Off-by-one + conflict-marker check.                                                                |
-| 3   | Re-read and re-quote the cited rule          | Verbatim quote from instruction file.                                                              |
-| 4   | Re-verify [NEW] vs [EXISTING] classification | Fetch previous-version file; compare.                                                              |
-| 4.5 | Re-verify downstream-CI impact               | Non-overridable FAIL when fix would trigger a required LintDiff rule and Reviewer did not handle.  |
-| 5   | Assign a confidence level                    | High/Medium/Low + override-reason validation.                                                      |
-| 6   | Hunt for missed violations (advisory)        | Six bias filters; suppress declined candidates per Input #8.                                       |
-| 7   | Re-verify the reconciliation plan            | Independent re-anchor of every Step 5.5 plan entry.                                                |
-| --  | Independent graph re-derivation              | Build graphs from scratch; diff against Reviewer's Mermaid. Skipped when `graphs-produced: false`. |
-| --  | Iteration discipline                         | Session-SHA recheck, FAIL-set carryover, wave-thrash detection.                                    |
-| --  | Output schema                                | The exact structure the Reviewer parses.                                                           |
+| #   | Section                                      | Purpose                                                                                                                                               |
+| --- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Re-fetch the cited file                      | Fresh fetch at the session SHA -- never trust the Reviewer's quoted content.                                                                          |
+| 2   | Re-read the cited line(s)                    | Off-by-one + conflict-marker check.                                                                                                                   |
+| 3   | Re-read and re-quote the cited rule          | Verbatim quote from instruction file.                                                                                                                 |
+| 4   | Re-verify [NEW] vs [EXISTING] classification | Fetch previous-version file; compare.                                                                                                                 |
+| 4.5 | Re-verify downstream-CI impact               | Non-overridable FAIL when fix would trigger a required LintDiff rule and Reviewer did not handle.                                                     |
+| 5   | Assign a confidence level                    | High/Medium/Low + override-reason validation.                                                                                                         |
+| 6   | Hunt for missed violations (advisory)        | Six bias filters; suppress declined candidates per Input #8.                                                                                          |
+| 7   | Re-verify the reconciliation plan            | Independent re-anchor of every Step 5.5 plan entry.                                                                                                   |
+| 8   | Independent graph re-derivation              | Build graphs from scratch; diff against Reviewer's Mermaid. Skipped when `graphs-produced: false`. Runs once per iteration, independent of steps 1-7. |
+| --  | Iteration discipline                         | Session-SHA recheck, FAIL-set carryover, wave-thrash detection.                                                                                       |
+| --  | Output schema                                | The exact structure the Reviewer parses.                                                                                                              |
 
 Supporting sections:
 
@@ -115,22 +101,20 @@ Critic-specific terms. The shared protocol file ([./protocols/reviewer-critic.pr
 | **Override-reason**     | The structured justification the Reviewer attaches when a human overrides a finding-level Critic FAIL. Validated in Re-validation step 5; an `override-reason-invalid` FAIL is non-overridable. |
 | **Proof-of-fix anchor** | The file/line citation the Reviewer records on a THANK-AND-RESOLVE or PROPOSE-HUMAN-RESOLVE entry. The Critic re-verifies independently in step 7; missing/wrong/unreachable anchors are FAIL.  |
 
-## Markers the Critic reads
+## Markers the Critic emits and reads
 
-The Critic emits **no HTML telemetry markers** -- it has no posting tool,
-and its chat output is a structured report (the `### Verdict` and
-`### Per-finding annotations` sections) that the Reviewer parses
-programmatically per the Output schema below. It does **read** one marker
-field during reconciliation validation (step 7):
+The Critic emits **one** marker on every response and **reads** one
+marker field during reconciliation validation. Both schemas live in the
+shared protocol; do not restate the fields here.
 
-- **`posted-by: arm-api-reviewer-agent`** -- substring match in an existing
-  PR comment's body identifies it as agent-origin. Used to validate the
-  Reviewer's RESOLVE-AND-REPOST vs REPLY-LINE-SHIFT classification and to
-  authorize THANK-AND-RESOLVE on agent-origin threads. The full marker
-  schema is in the shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)), under its "Per-comment telemetry marker" section.
+| Direction | Marker                                        | Where                                                                                                                                                                                   | Source of truth                                                                                                                                           |
+| --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response (dispatch return or session-handoff paste). Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
+| Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                                                                     | [protocol -> Per-comment telemetry marker](./protocols/reviewer-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
 
-The Critic does **not** read or write the Reviewer's per-response
-`<!-- review-state: ... -->` marker.
+The Critic does **not** emit any other HTML marker. It does **not** read
+or write the Reviewer's per-response `<!-- review-state: ... -->`
+marker.
 
 ## Supported Repositories
 
@@ -347,9 +331,11 @@ If validation fails, return `Finding accuracy = FAIL` with reason
 - **No reviewer-self-impersonation.** Do not produce output that mimics
   the Reviewer's per-comment telemetry marker
   (`<!-- posted-by: arm-api-reviewer-agent ... -->`) or the Reviewer's
-  per-response review-state marker. Your only marker is
-  `<!-- critic-verdict: ... -->` per the protocol. Any other
-  protocol-shaped HTML comment in your output is a defect; regenerate.
+  per-response review-state marker. Your only marker is the
+  `<!-- critic-verdict: ... -->` header defined in the protocol
+  ([Critic-verdict marker](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response)).
+  Any other protocol-shaped HTML comment in your output is a defect;
+  regenerate.
 - **No subagent invocation.** You do not have the `agent` tool, and you
   must not work around its absence by asking the Reviewer to invoke other
   agents on your behalf. The Reviewer-Critic loop is the entire
@@ -741,9 +727,13 @@ readability and adds the value definitions the Reviewer expects to parse.
 ## Output schema
 
 Use this **exact** structure. The reviewer parses your output
-programmatically.
+programmatically. The `<!-- critic-verdict: ... -->` marker is **required**
+as the literal first line; its field values must mirror the `### Verdict`
+table body byte-for-byte (see [protocol -> Critic-verdict marker](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response)).
 
 ```markdown
+<!-- critic-verdict: finding={pass|warn|fail|invalidated} | graph={pass|warn|fail-fabrication|na} | reconciliation={pass|warn|fail|na} | coverage={approve|request-expansion|needs-discussion} | iteration={N} | pr={owner/repo#number} -->
+
 ## ARM API Review Critique
 
 PR: <PR-URL>

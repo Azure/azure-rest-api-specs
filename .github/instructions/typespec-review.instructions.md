@@ -71,7 +71,11 @@ lowercasing the heading, replacing spaces with `-`, and stripping
 punctuation. When in doubt, open the rendered file on GitHub and copy
 the link from the heading's anchor icon.
 
-### Reviewer-Posted Parity (REQUIRED -- no divergence)
+### Reviewer-Posted Parity
+
+<a id="reviewer-posted-parity"></a>
+
+**REQUIRED -- no divergence.**
 
 The set of findings posted to the GitHub PR **MUST** be
 **byte-for-byte identical** to the set of findings shown to the

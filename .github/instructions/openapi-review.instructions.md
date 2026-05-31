@@ -42,7 +42,11 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 **Anchor resolution.** GitHub auto-generates section anchors by lowercasing the heading, replacing spaces with `-`, and stripping punctuation. When in doubt, open the rendered file on GitHub and copy the link from the heading's anchor icon.
 
-### Reviewer-Posted Parity (REQUIRED -- no divergence)
+### Reviewer-Posted Parity
+
+<a id="reviewer-posted-parity"></a>
+
+**REQUIRED -- no divergence.**
 
 The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, examples, fix snippets, or the agent's posted-by marker.
 

@@ -59,7 +59,11 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 > **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/armapi-review.instructions.md#121-use-post-actions-sparingly)]** ...
 
-### Reviewer-Posted Parity (REQUIRED -- no divergence)
+### Reviewer-Posted Parity
+
+<a id="reviewer-posted-parity"></a>
+
+**REQUIRED -- no divergence.**
 
 The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, JSON examples, fix snippets, or the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent`.
 

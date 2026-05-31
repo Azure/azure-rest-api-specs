@@ -36,6 +36,46 @@ Pass all ten on every Critic invocation in this exact order. Missing or
 malformed inputs MUST cause the Critic to return `Finding accuracy = FAIL`
 with reason `missing-inputs`.
 
+### Canonical input-block serialization
+
+To avoid host-dependent prose drift, the Reviewer MUST serialize the ten
+inputs as a single fenced YAML block in the prompt body it sends to the
+Critic dispatch (or pastes into the session-handoff prompt). The Critic
+MUST refuse to validate any invocation whose prompt does not contain
+exactly one such block. The block schema is:
+
+````markdown
+```yaml
+# critic-inputs/v1
+pr_url: https://github.com/<owner>/<repo>/pull/<number>
+session_sha: <full-40-char-sha> # Input #2
+files_reviewed: # Input #4
+  - path/to/file-a.json
+  - path/to/file-b.tsp
+previous_version: # Input #5; null when new service
+  base_sha_or_ref: <sha-or-ref>
+  path: specification/<service>/.../stable/<prev-version>
+prior_fail_sets: # Input #7; [] on iteration 1
+  iteration_n_minus_1: []
+  iteration_n_minus_2: []
+considered_and_declined: [] # Input #8; [] on iteration 1
+graphs_produced: true # Input #9
+iteration: 1 # Input #10; 1..3
+```
+````
+
+Input #3 (Step 6 findings report) and Input #6 (Step 5.5 reconciliation
+plan, or the sentinel `reconciliation skipped`) follow the YAML block
+under explicit `## Step 6 findings report` and `## Step 5.5 reconciliation
+plan` H2 headings, verbatim. Their size and markdown nesting make YAML
+serialization brittle; keep them as native markdown but framed by the
+named headings so the Critic can parse them deterministically.
+
+Empty lists MUST be serialized as `[]` (not omitted, not `null`); see the
+"Iteration-1 empty-list rule" below. The `# critic-inputs/v1` header
+comment is part of the contract -- the Critic uses it to validate that it
+received an input block in this schema rather than free-form prose.
+
 | #   | Input                              | Notes                                                                                                                                                                                                                                                    |
 | --- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | PR URL                             | `owner/repo#number` form.                                                                                                                                                                                                                                |
@@ -179,6 +219,81 @@ that is shown to the human and later posted. Not on reply-only comments
 the review-state marker) is response-scope and describes how the Critic
 ran for the whole response. `critic` (in the per-comment marker) is
 finding-scope and records the per-finding verdict.
+
+### Critic-verdict marker (per Critic response)
+
+Hidden HTML comment as the **literal first line** of every Critic response.
+Mirrors the role of the Reviewer's `review-state` marker: gives a
+machine-auditable header before the structured `### Verdict` table that
+follows. Required on every Critic dispatch return and every
+session-handoff paste.
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- critic-verdict: finding={pass|warn|fail|invalidated} | graph={pass|warn|fail-fabrication|na} | reconciliation={pass|warn|fail|na} | coverage={approve|request-expansion|needs-discussion} | iteration={N} | pr={owner/repo#number} -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+| Field            | Values                                               | Notes                                                                                |
+| ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `finding`        | `pass` / `warn` / `fail` / `invalidated`             | Mirrors `Finding accuracy` row of the `### Verdict` table. Lowercase.                |
+| `graph`          | `pass` / `warn` / `fail-fabrication` / `na`          | Mirrors `Graph integrity` row. `na` only when Input #9 was `graphs-produced: false`. |
+| `reconciliation` | `pass` / `warn` / `fail` / `na`                      | Mirrors `Reconciliation accuracy` row. `na` only when Input #6 was the sentinel.     |
+| `coverage`       | `approve` / `request-expansion` / `needs-discussion` | Mirrors `Coverage quality` row.                                                      |
+| `iteration`      | `1`-`3`                                              | Echo of Input #10.                                                                   |
+| `pr`             | `owner/repo#number`                                  | Same value the Reviewer passed in Input #1.                                          |
+
+**Parsing contract.** The Reviewer parses this marker first, then
+cross-checks the values against the `### Verdict` table body. If the
+marker is missing, malformed, or disagrees with the table body, the
+Reviewer treats the response as a session-handoff validation failure
+(see "Session-handoff verification" above) and rejects it. This makes
+Critic output programmatically auditable without depending on
+markdown-table parsing alone.
+
+The Critic produces no other HTML markers. In particular, the Critic
+MUST NOT emit a `review-state` marker (that is the Reviewer's
+response-scope marker) or a `posted-by: arm-api-reviewer-agent`
+marker (that is the Reviewer's per-comment marker).
+
+## Non-overridable FAIL catalog
+
+Single source of truth for which Critic `FAIL` reasons can be cleared by a
+human override (`critic: override` per-comment marker) and which cannot.
+Both agent files reference this table; do not restate the contents
+elsewhere.
+
+| FAIL reason                    | Critic step                     | Non-overridable?         | Recovery                                                                   |
+| ------------------------------ | ------------------------------- | ------------------------ | -------------------------------------------------------------------------- |
+| `wrong-line`                   | Re-validation 2                 | No                       | Reviewer fixes the line number and re-invokes the Critic.                  |
+| `line-in-conflict-region`      | Re-validation 2                 | No (`WARN`)              | Reviewer drops the finding or waits for conflict resolution.               |
+| `rule-not-found`               | Re-validation 3                 | Override allowed         | Override-reason must cite the corrected instruction-file anchor.           |
+| `rule-misapplied`              | Re-validation 3                 | Override allowed         | Override-reason must quote the rule text that supports the finding.        |
+| `misclassified`                | Re-validation 4                 | No                       | Reviewer applies the Critic's `[NEW]`/`[EXISTING]` correction.             |
+| `downstream-ci-conflict`       | Re-validation 4.5               | **Yes**                  | Reviewer phrases as multi-option, adds suppression + `downstream-rule:`.   |
+| `suppression-path-mismatch`    | Re-validation 4.5               | **Yes**                  | Reviewer renders `where:` from the quoted `jsonpath`, segment-for-segment. |
+| `override-reason-invalid`      | Re-validation 5                 | **Yes**                  | Reviewer supplies a valid justification or drops the finding.              |
+| `unescaped-mention`            | Re-validation 6.5               | **Yes**                  | Reviewer backticks every `@<token>` outside code spans.                    |
+| `hash-number-autolink`         | Re-validation 6.5               | **Yes**                  | Reviewer removes `#` prefix on bare finding numbers.                       |
+| `skip-not-justified`           | Re-validation 7                 | **Yes** (reconciliation) | Demote SKIP-COVERED to POST-NEW.                                           |
+| `shift-misclassified`          | Re-validation 7                 | **Yes** (reconciliation) | Reclassify between Scenarios B and C.                                      |
+| `fix-not-verified`             | Re-validation 7                 | **Yes** (reconciliation) | Drop the Scenario E/F entry; thread stays open.                            |
+| `fix-anchor-wrong`             | Re-validation 7                 | **Yes** (reconciliation) | Drop the Scenario E/F entry; thread stays open.                            |
+| `fix-anchor-unreachable`       | Re-validation 7                 | **Yes** (reconciliation) | Drop the Scenario E/F entry; thread stays open.                            |
+| `Graph integrity: fabrication` | Independent graph re-derivation | **Yes**                  | Reviewer drops dependent findings, re-derives graphs, re-invokes Critic.   |
+| `file-fetch-failed`            | Re-validation 1                 | No                       | Reviewer drops the finding and reports the fetch failure to the human.     |
+| `session-sha-moved`            | Re-validation 1                 | **Yes** (kills session)  | Only legal action: restart from Reviewer Step 1 or abandon.                |
+| `session-sha-unreachable`      | Re-validation 1                 | **Yes** (kills session)  | Only legal action: restart from Reviewer Step 1 or abandon.                |
+| `missing-inputs`               | Input validation                | No                       | Reviewer fixes the input block (see canonical schema) and re-dispatches.   |
+
+"Non-overridable" means the `critic: override` per-comment marker
+(human-supplied `override-reason`) does NOT clear the FAIL. The Reviewer's
+only legal responses are the ones listed in "Recovery". A reconciliation
+or graph-fabrication FAIL that the human disagrees with escalates the
+whole review to `MANUAL DECISION REQUIRED` for per-row human consent --
+not to an override.
 
 ### Telemetry fallback policy (load-bearing)
 
