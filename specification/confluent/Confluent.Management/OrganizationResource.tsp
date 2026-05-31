@@ -340,7 +340,7 @@ interface OrganizationResources {
    * Links a new SaaS to the Confluent organization of the underlying resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+  @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
   @summary("Links a new SaaS to the Confluent organization of the underlying resource.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   linkSaaS is ArmResourceActionAsync<
@@ -356,7 +356,7 @@ interface OrganizationResources {
    * Returns the latest SaaS linked to the Confluent organization of the underlying resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+  @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
   latestLinkedSaaS is ArmResourceActionSync<
     OrganizationResource,
     void,
@@ -422,7 +422,7 @@ interface OrganizationResources {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "SaaS activation is a subscription-level action"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
-@added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 interface SaaSOperationGroup {
   /**
    * Resolve the token to get the SaaS resource ID and activate the SaaS resource

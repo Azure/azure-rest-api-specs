@@ -490,7 +490,7 @@ model OfferDetail {
   /**
    * Marketplace SaaS Resource Id
    */
-  @added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+  @added(Microsoft.Confluent.Versions.v2026_06_02_preview)
   saasResourceId?: string;
 }
 
@@ -2575,7 +2575,7 @@ model AccessPointProperties {
  * SaaS guid & PublisherId for Activate and Validate SaaS Resource
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
-@added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model ActivateSaaSParameterRequest {
   /**
    * SaaS guid for Activate and Validate SaaS Resource
@@ -2592,7 +2592,7 @@ model ActivateSaaSParameterRequest {
  * Marketplace SaaS resource details.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
-@added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model SaaSResourceDetailsResponse
   is Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -2605,7 +2605,7 @@ model SaaSResourceDetailsResponse
  * SaaS-related data properties
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
-@added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model SaaSData {
   /**
    * SaaS resource id
@@ -2618,7 +2618,7 @@ model SaaSData {
  * Response of get latest linked SaaS resource operation
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is an established abbreviation"
-@added(Microsoft.Confluent.Versions.v2026_05_23_preview)
+@added(Microsoft.Confluent.Versions.v2026_06_02_preview)
 model LatestLinkedSaaSResponse {
   /**
    * SaaS resource id
