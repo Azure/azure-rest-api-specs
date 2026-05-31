@@ -57,10 +57,12 @@ instruction files:
 
 The ARM API Reviewer eval suite uses the
 [vally](https://github.com/microsoft/vally) framework. It
-contains **25 stimuli** across **11 eval files** covering ARM resource
-structure, property design, operations, breaking changes, suppressions,
-examples, TypeSpec review, Check Name Availability, true negatives,
-classification, and report format.
+contains **48 stimuli** across **16 eval files** covering ARM resource
+structure, property design, operations, breaking changes, suppressions
+(both `readme.md` and `suppressions.yaml`), examples, TypeSpec review
+(including the TypeSpec-required rule), Check Name Availability,
+true negatives, classification, report format, citation & posted parity,
+fast-path triage, and protocol safety.
 
 See [`evals/arm-api-reviewer/README.md`](evals/arm-api-reviewer/README.md)
 for the full eval suite documentation -- directory structure, fixture
@@ -78,7 +80,7 @@ cd vally && npm install && npm run build && cd -
 # (vally is a monorepo; the vally binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 25 stimuli, 5 concurrent workers)
+# Run the full suite (all 48 stimuli, 5 concurrent workers)
 cd .github/skills/evals/arm-api-reviewer
 node $VALLY_CLI eval --suite all --verbose
 
