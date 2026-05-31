@@ -348,8 +348,7 @@ interface OrganizationResources {
     SaaSData,
     ArmResponse<OrganizationResource>,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = OrganizationResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Error = ResourceProviderDefaultErrorResponse
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -360,8 +359,7 @@ interface OrganizationResources {
   latestLinkedSaaS is ArmResourceActionSync<
     OrganizationResource,
     void,
-    ArmResponse<LatestLinkedSaaSResponse>,
-    Error = ResourceProviderDefaultErrorResponse
+    ArmResponse<LatestLinkedSaaSResponse>
   >;
 }
 
@@ -430,7 +428,6 @@ interface SaaSOperationGroup {
     Request = ActivateSaaSParameterRequest,
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {},
-    Error = ResourceProviderDefaultErrorResponse
+    Parameters = {}
   >;
 }
