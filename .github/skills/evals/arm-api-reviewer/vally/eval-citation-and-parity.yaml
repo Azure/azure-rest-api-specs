@@ -96,9 +96,12 @@ stimuli:
           #   - Template C canonical: **[NEW] 🔴 Blocking** ...
           #   - Numbered finding under a heading: "### 1. <title>" or "## 1. <title>"
           #   - Severity-named subheading: "### Blocking: ..." / "### Warning: ..."
+          #   - Markdown table row whose first column carries a [NEW]/[EXISTING]
+          #     classification or a severity emoji/word (the agent commonly
+          #     renders findings as a table when there are >5 findings).
           # Catches the regression where the agent sends only a back-reference
           # ("see above") as its final user-visible message with no findings.
-          pattern: "(?ms)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:🔴|🟡|🔵|⚪|Blocking|Warning|Suggestion)|^#{2,4}\\s+\\d+\\.\\s+\\S|^#{2,4}\\s+(?:Blocking|Warning|Suggestion|Finding)\\b"
+          pattern: "(?ms)\\*\\*\\[(?:NEW|EXISTING)\\]\\*?\\*?\\s*(?:🔴|🟡|🔵|⚪|Blocking|Warning|Suggestion)|^#{2,4}\\s+\\d+\\.\\s+\\S|^#{2,4}\\s+(?:Blocking|Warning|Suggestion|Finding)\\b|^\\|[^|\\n]*\\[(?:NEW|EXISTING)\\][^|\\n]*\\||^\\|[^|\\n]*(?:🔴|🟡|🔵|⚪|Blocking|Warning|Suggestion)[^|\\n]*\\|"
       - type: output-not-matches
         name: "no see-above placeholder response"
         config:
