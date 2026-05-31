@@ -53,7 +53,6 @@ interface NetworkGatewayResources {
 
 @@doc(NetworkGatewayResource.name, "Confluent network gateway id");
 @@doc(NetworkGatewayResource.properties, "Network Gateway Properties");
-@@doc(
-  NetworkGatewayResources.createOrReplace::parameters.resource,
+@@doc(NetworkGatewayResources.createOrReplace::parameters.resource,
   "Confluent Network Gateway resource model"
 );
