@@ -627,6 +627,15 @@ reviewer actually performed the suppression-continuity analysis if a
 `readme.md` was in the changed files. Note in the output if it appears to
 have been skipped.
 
+### Step 6.5: Posting-hygiene scan for autolink hazards
+
+Scan the body text of every finding (both the Step 6 chat-rendered form and the canonical body that will be posted to GitHub) for tokens that GitHub will silently auto-link into something unintended:
+
+- **Unescaped `@`-mentions.** Run the regex ``(?<![`\w/])@[A-Za-z][\w/-]*`` against the finding body **outside** code spans and fenced code blocks. Any match is a posting hazard: GitHub will resolve `@doc`, `@added`, `@typespec/http`, etc. as a user mention to `https://github.com/<token>` and notify that account. This is a recurring noise source because TypeSpec decorator names and library handles all match the autolink pattern. Mark the finding `FAIL: unescaped-mention` and instruct the Reviewer to wrap every offending token in backticks. This FAIL is **non-overridable** -- silently pinging an unrelated GitHub user is exactly the failure mode this check exists to prevent.
+- **Unescaped `#<number>` tokens.** Already covered by Reviewer formatting rules; flag any leftover as `FAIL: hash-number-autolink`.
+
+These checks apply to every finding regardless of severity or classification, and apply equally to reply text for SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT / THANK-AND-RESOLVE plan rows when the Reviewer surfaces the reply body in Input #6.
+
 ### Step 7: Re-verify the reconciliation plan (Input #6)
 
 The Reviewer's Step 5.5 plan auto-resolves prior threads (THANK-AND-RESOLVE),
