@@ -54,6 +54,7 @@ interface AccessPointResources {
 
 @@doc(AccessPointResource.name, "Confluent access point id");
 @@doc(AccessPointResource.properties, "Access Point Properties");
-@@doc(AccessPointResources.createOrReplace::parameters.resource,
+@@doc(
+  AccessPointResources.createOrReplace::parameters.resource,
   "Confluent Access Point resource model"
 );
