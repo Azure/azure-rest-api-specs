@@ -867,5 +867,3 @@ model KubeInventoryProperties {
   @identifiers(#[])
   events?: KubernetesEvent[];
 }
-
-

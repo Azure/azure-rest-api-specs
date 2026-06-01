@@ -14,7 +14,8 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * Singleton container resource grouping cluster inventory reports.
  */
-model KubeInventory is Azure.ResourceManager.ProxyResource<KubeInventoryProperties> {
+model KubeInventory
+  is Azure.ResourceManager.ProxyResource<KubeInventoryProperties> {
   ...ResourceNameParameter<
     Resource = KubeInventory,
     KeyName = "kubeInventoryName",
