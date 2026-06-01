@@ -9,7 +9,6 @@ using Microsoft.Monitor;
 // PreviewType, KqlmQueryResult, etc.) will be marked as internal.
 // Shared models (EvaluationType, BaselineProperties, Signal, etc.) remain public
 // because they are also used by the public Slis interface.
-@@access(SloView.sliSignalPreview, Access.internal);
 
 @@clientName(Microsoft.Monitor, "MonitorSlisMgmtClient", "python");
 

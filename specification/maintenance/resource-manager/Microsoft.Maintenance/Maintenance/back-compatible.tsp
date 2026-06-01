@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Maintenance;
@@ -142,3 +143,9 @@ using Microsoft.Maintenance;
 );
 @@clientLocation(UpdatesOperationGroup.listParent, "Updates");
 @@clientLocation(UpdatesOperationGroup.list, "Updates");
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.OperationDisplay,
+  "OperationInfo",
+  "python"
+);

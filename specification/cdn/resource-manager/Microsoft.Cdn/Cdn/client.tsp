@@ -1420,6 +1420,7 @@ using Azure.ResourceManager;
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+@@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
 @@clientName(
   PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
   "TWO_HUNDRED",
@@ -1445,6 +1446,29 @@ using Azure.ResourceManager;
   "FOUR_HUNDRED_TWENTY_NINE",
   "python"
 );
+
+// Preserve pre-migration Swagger enum names to avoid breaking changes for Python consumers.
+@@clientName(
+  IsDeviceMatchValue,
+  "IsDeviceMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestMethodMatchValue,
+  "RequestMethodMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestSchemeMatchValue,
+  "RequestSchemeMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  KeyVaultSigningKeyParametersType,
+  "KeyVaultSigningKeyParametersTypeName",
+  "python"
+);
+@@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
 
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods

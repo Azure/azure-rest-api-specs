@@ -30,6 +30,10 @@ union KeyValueFields {
   @doc("Tags field.")
   tags: "tags",
 
+  @added(Versions.v2026_04_01)
+  @doc("Description field.")
+  description: "description",
+
   @doc("Locked field.")
   locked: "locked",
 
@@ -70,6 +74,10 @@ union SnapshotFields {
 
   @doc("Tags field.")
   tags: "tags",
+
+  @added(Versions.v2026_04_01)
+  @doc("Description field.")
+  description: "description",
 
   @doc("Etag field.")
   etag: "etag",
@@ -192,6 +200,10 @@ model KeyValue {
   @doc("The tags of the key-value")
   tags?: Record<string>;
 
+  @added(Versions.v2026_04_01)
+  @doc("The description of the key-value.")
+  description?: string;
+
   @doc("Indicates whether the key-value is locked.")
   locked?: boolean;
 
@@ -268,6 +280,10 @@ model Snapshot {
 
   @doc("The tags of the snapshot.")
   tags?: Record<string>;
+
+  @added(Versions.v2026_04_01)
+  @doc("The description of the snapshot.")
+  description?: string;
 
   @doc("A value representing the current state of the snapshot.")
   @visibility(Lifecycle.Read)
