@@ -5430,7 +5430,7 @@ model HardwareProfile {
   vmSizeProperties?: VMSizeProperties;
 
   /**
-   * Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). Supported on select VM SKU families; verify by checking the SKU's capabilities list before use. This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   * Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
    */
   @added(Versions.v2026_04_01)
   processorMode?: ProcessorMode;
