@@ -183,36 +183,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      }
-    },
     "Capabilities": {
       "type": "object",
       "description": "Linux capability set to add to or drop from a container's default capabilities.",
@@ -750,11 +720,6 @@
       "type": "object",
       "description": "Properties of a single KubeInventory ARM resource.\nEach ARM resource represents one Kubernetes object from the cluster inventory.\nThe ARM resource name encodes the kind, Kubernetes name, and namespace\n(e.g., 'pod-nginx-6d4cf56db6-x7q2p-default', 'upgrade-assessment-current-kube-system').",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Provisioning state of the KubeInventory resource.",
-          "readOnly": true
-        },
         "apiVersion": {
           "type": "string",
           "description": "Kubernetes API version of the represented resource\n(e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1')."

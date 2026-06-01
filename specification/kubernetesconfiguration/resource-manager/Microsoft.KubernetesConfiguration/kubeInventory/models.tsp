@@ -843,11 +843,8 @@ model KubernetesEvent {
  * The ARM resource name encodes the kind, Kubernetes name, and namespace
  * (e.g., 'pod-nginx-6d4cf56db6-x7q2p-default', 'upgrade-assessment-current-kube-system').
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not have a provisioning state per the original Swagger design"
 model KubeInventoryProperties {
-  /** Provisioning state of the KubeInventory resource. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
-
   /**
    * Kubernetes API version of the represented resource
    * (e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1').

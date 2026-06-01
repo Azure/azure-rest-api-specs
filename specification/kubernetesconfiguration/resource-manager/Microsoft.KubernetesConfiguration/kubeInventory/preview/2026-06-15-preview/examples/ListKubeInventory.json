@@ -26,7 +26,6 @@
               "lastModifiedAt": "2026-06-01T10:00:00.000Z"
             },
             "properties": {
-              "provisioningState": "Succeeded",
               "apiVersion": "v1",
               "kind": "Pod",
               "metadata": {
@@ -188,24 +187,24 @@
                     }
                   }
                 ]
-              }
-            },
-            "events": [
-              {
-                "type": "Normal",
-                "reason": "Scheduled",
-                "age": "58d",
-                "from": "default-scheduler",
-                "message": "Successfully assigned kube-system/coredns-5d78c9869d-r4pzt to aks-nodepool1-12345678-1"
               },
-              {
-                "type": "Normal",
-                "reason": "Pulled",
-                "age": "58d",
-                "from": "kubelet",
-                "message": "Container image \"registry.k8s.io/coredns/coredns:v1.11.1\" already present on machine"
-              }
-            ]
+              "events": [
+                {
+                  "type": "Normal",
+                  "reason": "Scheduled",
+                  "age": "58d",
+                  "from": "default-scheduler",
+                  "message": "Successfully assigned kube-system/coredns-5d78c9869d-r4pzt to aks-nodepool1-12345678-1"
+                },
+                {
+                  "type": "Normal",
+                  "reason": "Pulled",
+                  "age": "58d",
+                  "from": "kubelet",
+                  "message": "Container image \"registry.k8s.io/coredns/coredns:v1.11.1\" already present on machine"
+                }
+              ]
+            }
           },
           {
             "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/upgrade-assessment-current-kube-system",
@@ -220,7 +219,6 @@
               "lastModifiedAt": "2026-06-01T10:00:00.000Z"
             },
             "properties": {
-              "provisioningState": "Succeeded",
               "apiVersion": "upgrade.config.io/v1alpha1",
               "kind": "UpgradeAssessment",
               "metadata": {
@@ -286,17 +284,17 @@
                     "severity": "Pass"
                   }
                 ]
-              }
-            },
-            "events": [
-              {
-                "type": "Normal",
-                "reason": "AssessmentComplete",
-                "age": "1h",
-                "from": "azure-kube-inventory-agent",
-                "message": "Upgrade assessment from 1.29 to 1.30 completed with overall severity Pass."
-              }
-            ]
+              },
+              "events": [
+                {
+                  "type": "Normal",
+                  "reason": "AssessmentComplete",
+                  "age": "1h",
+                  "from": "azure-kube-inventory-agent",
+                  "message": "Upgrade assessment from 1.29 to 1.30 completed with overall severity Pass."
+                }
+              ]
+            }
           }
         ],
         "nextLink": null

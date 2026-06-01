@@ -28,14 +28,42 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2026-06-15
 ```
 
-### Tag: package-preview-2026-06-15
+### Tag: package-preview-2026-06
 
-These settings apply only when `--tag=package-preview-2026-06-15` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2026-06-15'
+``` yaml $(tag) == 'package-preview-2026-06'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+  - Microsoft.KubernetesConfiguration/kubeInventory/preview/2026-06-15-preview/kubeInventory.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: AvoidAdditionalProperties
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+```
+
+### Tag: package-preview-2026-06-only
+
+These settings apply only when `--tag=package-preview-2026-06-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-06-only'
 input-file:
   - Microsoft.KubernetesConfiguration/kubeInventory/preview/2026-06-15-preview/kubeInventory.json
 ```
