@@ -79,7 +79,7 @@ interface ManagedAgentIdentityBlueprints {
   /**
    * Lists all managed agent identity blueprints.
    */
-  @summary("List all blueprints")
+  @summary("List blueprints")
   @get
   @route("/managedAgentIdentityBlueprints")
   @extension(

@@ -41,9 +41,9 @@ alias InsightsGetParams = {
 @tag("Insights")
 @route("insights")
 interface Insights {
+  /** Generates an insights report from the provided evaluation configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Following pattern from rest of foundry."
   @summary("Generate insights")
-  @doc("Generates Insights")
   @post
   generate is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
@@ -63,9 +63,9 @@ interface Insights {
     CreatedResponse & Insight
   >;
 
+  /** Retrieves the specified insight report and its results. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Following pattern from rest of foundry."
   @summary("Get an insight")
-  @doc("Gets a specific insight by Id.")
   @route("/{id}")
   get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
@@ -75,9 +75,9 @@ interface Insights {
     Insight
   >;
 
+  /** Returns insights in reverse chronological order, with the most recent entries first. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Following pattern from rest of foundry."
   @summary("List insights")
-  @doc("Lists all insights in reverse chronological order (newest first).")
   @list
   list is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,

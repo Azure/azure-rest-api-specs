@@ -11,9 +11,9 @@ namespace Azure.AI.Projects;
 @tag("Agents")
 interface Agents {
   /**
-   * Retrieves the agent.
+   * Retrieves an agent definition by its unique name.
    */
-  @summary("Retrieve the agent")
+  @summary("Get an agent")
   @get
   @route("/agents/{agent_name}")
   getAgent is FoundryDataPlaneOperation<
@@ -25,9 +25,9 @@ interface Agents {
   >;
 
   /**
-   * Creates the agent.
+   * Creates a new agent from the request payload and returns the created resource.
    */
-  @summary("Create the agent")
+  @summary("Create an agent")
   @post
   @route("/agents")
   @sharedRoute
@@ -132,7 +132,7 @@ interface Agents {
   >;
 
   /**
-   * Creates an agent from a manifest.
+   * Imports the provided manifest to create an agent and returns the created resource.
    */
   @summary("Create an agent from a manifest")
   @post
@@ -179,9 +179,9 @@ interface Agents {
   >;
 
   /**
-   * Returns the list of all agents.
+   * Returns a paged collection of agent resources.
    */
-  @summary("List all agents")
+  @summary("List agents")
   @route("/agents")
   @list
   listAgents is FoundryDataPlaneOperation<
@@ -192,7 +192,7 @@ interface Agents {
   >;
 
   /**
-   * Creates a new agent version.
+   * Creates a new version for the specified agent and returns the created version resource.
    */
   @summary("Create an agent version")
   @post
@@ -218,7 +218,7 @@ interface Agents {
   >;
 
   /**
-   * Creates a new agent version from a manifest.
+   * Imports the provided manifest to create a new version for the specified agent.
    */
   @summary("Create an agent version from manifest")
   @post
@@ -241,9 +241,9 @@ interface Agents {
   >;
 
   /**
-   * Retrieves a specific version of an agent.
+   * Retrieves the specified version of an agent by its agent name and version identifier.
    */
-  @summary("Retrieve a specific version of an agent")
+  @summary("Get an agent version")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
   getAgentVersion is FoundryDataPlaneOperation<
@@ -262,7 +262,7 @@ interface Agents {
    * sessions, the request is rejected with HTTP 409 unless `force` is set to true. When
    * force is true, all sessions associated with this version are cascade-deleted.
    */
-  @summary("Delete a specific version of an agent")
+  @summary("Delete an agent version")
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
   deleteAgentVersion is FoundryDataPlaneOperation<
@@ -280,9 +280,9 @@ interface Agents {
   >;
 
   /**
-   * Returns the list of versions of an agent.
+   * Returns a paged collection of versions for the specified agent.
    */
-  @summary("List versions of an agent")
+  @summary("List agent versions")
   @get
   @route("/agents/{agent_name}/versions")
   @list
@@ -297,7 +297,7 @@ interface Agents {
   >;
 
   /**
-   * Updates an agent endpoint.
+   * Applies a merge-patch update to the specified agent endpoint configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @summary("Update an agent endpoint")
@@ -373,7 +373,7 @@ interface Agents {
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the
    * resolved version's `code_configuration`.
    */
-  @summary("Download the code zip for a code-based hosted agent")
+  @summary("Download agent code")
   @get
   @route("/agents/{agent_name}/code:download")
   @extension(
@@ -402,7 +402,7 @@ interface Agents {
    * The endpoint resolves the backing agent version from `version_indicator` and
    * enforces session ownership using the provided isolation key for session-mutating operations.
    */
-  @summary("Create a new session for an agent endpoint")
+  @summary("Create a session")
   @post
   @route("/agents/{agent_name}/endpoint/sessions")
   @extension(
@@ -424,9 +424,9 @@ interface Agents {
   >;
 
   /**
-   * Retrieves a session by ID.
+   * Retrieves the details of a hosted agent session by agent name and session identifier.
    */
-  @summary("Retrieve a session by ID")
+  @summary("Get a session")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
@@ -453,7 +453,7 @@ interface Agents {
    * Deletes a session synchronously.
    * Returns 204 No Content when the session is deleted or does not exist.
    */
-  @summary("Delete a session synchronously")
+  @summary("Delete a session")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
@@ -477,8 +477,7 @@ interface Agents {
   >;
 
   /**
-   * Stops a session.
-   * Returns 204 No Content when the stop succeeds.
+   * Terminates the specified hosted agent session and returns 204 No Content when the request succeeds.
    */
   @summary("Stop a session")
   @post
@@ -502,7 +501,7 @@ interface Agents {
   >;
 
   /**
-   * Returns a list of sessions for the specified agent.
+   * Returns a paged collection of sessions associated with the specified agent endpoint.
    */
   @summary("List sessions for an agent")
   @get

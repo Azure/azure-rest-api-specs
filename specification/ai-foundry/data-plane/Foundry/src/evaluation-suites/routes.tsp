@@ -32,12 +32,9 @@ interface EvaluationSuites
       ListEvaluationSuiteVersionsParameters
     > {
   // POST /evaluation_suites/{name}/versions
+  /** Creates a new evaluation suite version with an auto-incremented version identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create an evaluation suite version")
-  @doc(
-    "Create a new {name} with auto incremented version id",
-    EvaluationSuiteVersion
-  )
   @post
   @route("/evaluation_suites/{name}/versions")
   @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
@@ -91,7 +88,7 @@ const EvaluationSuiteGenerationJobsRequiredPreviews = #{
 @tag("EvaluationSuiteGenerationJobs")
 @removed(Versions.v1)
 interface EvaluationSuiteGenerationJobs {
-  @summary("Create an evaluation suite generation job.")
+  @summary("Create an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   create is postJobPreview<
@@ -99,7 +96,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Get info about an evaluation suite generation job.")
+  @summary("Get an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   get is queryJobStatusPreview<
@@ -107,7 +104,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("List evaluation suite generation jobs.")
+  @summary("List evaluation suite generation jobs")
   @route("evaluation_suite_generation_jobs")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   list is listJobsPreview<
@@ -115,7 +112,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Cancel an evaluation suite generation job.")
+  @summary("Cancel an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
@@ -123,7 +120,7 @@ interface EvaluationSuiteGenerationJobs {
     EvaluationSuiteGenerationJob
   >;
 
-  @summary("Delete an evaluation suite generation job.")
+  @summary("Delete an evaluation suite generation job")
   @route("evaluation_suite_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluationSuiteGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;

@@ -13,7 +13,7 @@ alias SkillsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptI
 @tag("Skills")
 interface Skills {
   /**
-   * Retrieves a skill.
+   * Retrieves the specified skill and its current configuration.
    */
   @summary("Retrieve a skill")
   @get
@@ -25,9 +25,9 @@ interface Skills {
   >;
 
   /**
-   * Returns the list of all skills.
+   * Returns the skills available in the current project.
    */
-  @summary("List all skills")
+  @summary("List skills")
   @route("/skills")
   @list
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -37,7 +37,7 @@ interface Skills {
   >;
 
   /**
-   * Updates a skill.
+   * Modifies the specified skill's configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @summary("Update a skill")
@@ -51,7 +51,7 @@ interface Skills {
   >;
 
   /**
-   * Deletes a skill.
+   * Removes the specified skill and its associated versions.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @summary("Delete a skill")
@@ -104,10 +104,10 @@ interface Skills {
   >;
 
   /**
-   * Lists all versions of a skill.
+   * Returns the available versions for the specified skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("List all versions of a skill")
+  @summary("List skill versions")
   @operationId("listSkillVersions")
   @get
   @list
@@ -119,7 +119,7 @@ interface Skills {
   >;
 
   /**
-   * Retrieves a specific version of a skill.
+   * Retrieves the specified version of a skill by name and version identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @summary("Retrieve a specific version of a skill")
@@ -161,7 +161,7 @@ interface Skills {
   >;
 
   /**
-   * Deletes a specific version of a skill.
+   * Removes the specified version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @summary("Delete a specific version of a skill")

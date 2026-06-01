@@ -28,11 +28,11 @@ interface FineTuning {
   >;
 
   /**
-   * Lists your organization's fine-tuning jobs
+   * Returns the fine-tuning jobs for the current organization.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("List your organization's fine-tuning jobs")
+  @summary("List fine-tuning jobs")
   @route("jobs")
   @get
   @operationId("listPaginatedFineTuningJobs")
@@ -54,7 +54,7 @@ interface FineTuning {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("Get info about a fine-tuning job")
+  @summary("Get a fine-tuning job")
   @route("jobs/{fine_tuning_job_id}")
   @get
   @operationId("retrieveFineTuningJob")
@@ -67,11 +67,11 @@ interface FineTuning {
   >;
 
   /**
-   * Immediately cancels a fine-tune job.
+   * Immediately cancels the specified fine-tuning job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("Immediately cancel a fine-tune job")
+  @summary("Cancel a fine-tuning job")
   @route("jobs/{fine_tuning_job_id}/cancel")
   @post
   @operationId("cancelFineTuningJob")
@@ -84,11 +84,11 @@ interface FineTuning {
   >;
 
   /**
-   * Pauses a running fine-tune job.
+   * Pauses the specified fine-tuning job while it is running.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("Pause a running fine-tune job")
+  @summary("Pause a fine-tuning job")
   @route("jobs/{fine_tuning_job_id}/pause")
   @post
   @operationId("pauseFineTuningJob")
@@ -101,11 +101,11 @@ interface FineTuning {
   >;
 
   /**
-   * Resumes a paused fine-tune job.
+   * Resumes the specified fine-tuning job after it has been paused.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("Resume a paused fine-tune job")
+  @summary("Resume a fine-tuning job")
   @route("jobs/{fine_tuning_job_id}/resume")
   @post
   @operationId("resumeFineTuningJob")
@@ -118,11 +118,11 @@ interface FineTuning {
   >;
 
   /**
-   * Lists checkpoints for a fine-tuning job.
+   * Returns the checkpoints saved during the specified fine-tuning job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("List checkpoints for a fine-tuning job")
+  @summary("List fine-tuning job checkpoints")
   @route("jobs/{fine_tuning_job_id}/checkpoints")
   @get
   @operationId("listFineTuningJobCheckpoints")
@@ -141,11 +141,11 @@ interface FineTuning {
   >;
 
   /**
-   * Gets fine-grained status updates for a fine-tuning job.
+   * Returns the status events emitted during the specified fine-tuning job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("Get fine-grained status updates for a fine-tuning job")
+  @summary("List fine-tuning job events")
   @route("jobs/{fine_tuning_job_id}/events")
   @get
   @operationId("listFineTuningJobEvents")

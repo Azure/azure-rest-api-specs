@@ -2,7 +2,7 @@
 name: foundry-route-doc-check
 license: MIT
 metadata:
-  version: "1.2.0"
+  version: "1.4.0"
 description: "Validates that all TypeSpec route operations in the AI Foundry data-plane (Foundry) domain have documentation comments and @summary decorators with correct voice. USE FOR: reviewing or authoring routes.tsp files under specification/ai-foundry/data-plane/Foundry/src/. DO NOT USE FOR: files outside the Foundry data-plane area, model-only .tsp files, or SDK client customization files (client.tsp)."
 ---
 
@@ -40,6 +40,9 @@ operations that have an explicit, significant rule violation:
 - Missing `@summary()` or doc comment entirely → fix
 - Wrong grammatical voice (`@summary` using third-person, or doc comment using imperative) → fix
 - Empty or placeholder documentation → fix
+- Summary contains unnecessary filler ("all", "by id") that can be removed → fix
+- Description is near-identical to the summary with no added detail → fix
+- Description uses `@doc()` instead of a TSDoc `/** ... */` comment → fix
 - Minor wording preferences or stylistic differences that do not violate a rule → **leave unchanged**
 
 When in doubt, leave the existing text alone.
@@ -52,10 +55,10 @@ for the full rule definitions, examples, and remediation guidance.
 
 | Rule ID          | Requirement                                                                                    |
 | ---------------- | ---------------------------------------------------------------------------------------------- |
-| `FDOC-001`       | **Every** operation must have a TSDoc comment (`/** ... */`) or `@doc()` — note `/* */` is NOT valid TSDoc |
+| `FDOC-001`       | **Every** operation must have a TSDoc `/** ... */` comment. Prefer TSDoc over `@doc()`. |
 | `FDOC-002`       | **Every** operation must have a `@summary()` decorator — no exceptions                         |
-| `FDOC-003`       | Doc comment / `@doc()` must be non-empty and use **third-person indicative** voice ("Creates an agent") |
-| `FDOC-004`       | `@summary()` must be concise, single-line, and use **imperative** voice ("Create an agent"). Must not be truncated (ending mid-word or mid-sentence). |
+| `FDOC-003`       | The TSDoc description must use **third-person indicative** voice ("Creates an agent"), must add meaningful detail beyond the summary, and must not be near-identical to the summary. |
+| `FDOC-004`       | `@summary()` must be a maximally concise **imperative** phrase ("Create an agent"). No trailing period. No filler ("all", "by ID", "info about"). Must not be truncated. Always include articles. |
 | `FDOC-005`       | Each `@path`, `@query`, `@header`, and `@body` parameter must have a doc comment or `@doc()`   |
 
 ## Post-Edit Steps

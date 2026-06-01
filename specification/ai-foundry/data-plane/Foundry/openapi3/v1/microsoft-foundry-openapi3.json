@@ -85,8 +85,8 @@
     "/agent_optimization_jobs": {
       "post": {
         "operationId": "AgentOptimizationJobs_create",
-        "summary": "Create an agent optimization job.",
-        "description": "Creates an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.",
+        "summary": "Create an agent optimization job",
+        "description": "Creates an agent optimization job and returns the queued job.\nHonors `Operation-Id` for idempotent retry.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -180,8 +180,8 @@
       },
       "get": {
         "operationId": "AgentOptimizationJobs_list",
-        "summary": "List agent optimization jobs.",
-        "description": "Lists optimization jobs. Supports cursor pagination and optional status / agentName filters.",
+        "summary": "List agent optimization jobs",
+        "description": "Returns agent optimization jobs with cursor pagination and optional lifecycle or agent filters.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -329,8 +329,8 @@
     "/agent_optimization_jobs/{jobId}": {
       "get": {
         "operationId": "AgentOptimizationJobs_get",
-        "summary": "Get info about an agent optimization job.",
-        "description": "Gets an optimization job by id. Returns 202 while in progress, 200 when terminal.",
+        "summary": "Get an agent optimization job",
+        "description": "Retrieves the specified agent optimization job.\nReturns 202 while the job is in progress and 200 after it reaches a terminal state.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -425,8 +425,8 @@
       },
       "delete": {
         "operationId": "AgentOptimizationJobs_delete",
-        "summary": "Delete an agent optimization job.",
-        "description": "Deletes the job and its candidate artifacts. Cancels first if non-terminal.",
+        "summary": "Delete an agent optimization job",
+        "description": "Deletes the specified agent optimization job and its candidate artifacts.\nCancels the job first when it is still in a non-terminal state.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -498,8 +498,8 @@
     "/agent_optimization_jobs/{jobId}/candidates": {
       "get": {
         "operationId": "AgentOptimizationJobs_listCandidates",
-        "summary": "List candidates for an optimization job.",
-        "description": "Lists candidates produced by a job.",
+        "summary": "List optimization job candidates",
+        "description": "Returns the candidates produced by the specified optimization job.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -636,8 +636,8 @@
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}": {
       "get": {
         "operationId": "AgentOptimizationJobs_getCandidate",
-        "summary": "Get a candidate by id.",
-        "description": "Gets a single candidate's metadata, manifest, and promotion info.",
+        "summary": "Get an optimization candidate",
+        "description": "Retrieves metadata, manifest information, and promotion details for the specified candidate.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -715,8 +715,8 @@
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}/config": {
       "get": {
         "operationId": "AgentOptimizationJobs_getCandidateConfig",
-        "summary": "Get candidate deploy config.",
-        "description": "Gets the candidate's deploy config JSON. Used to compose `agents.create_version(...)` from a candidate.",
+        "summary": "Get an optimization candidate config",
+        "description": "Retrieves the deploy configuration JSON for the specified candidate.\nClients can use it to compose `agents.create_version(...)` requests.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -794,8 +794,8 @@
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}/files": {
       "get": {
         "operationId": "AgentOptimizationJobs_getCandidateFile",
-        "summary": "Get a candidate file.",
-        "description": "Streams a specific file from the candidate's blob directory.",
+        "summary": "Get an optimization candidate file",
+        "description": "Streams the specified file from the candidate's blob directory.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -884,8 +884,8 @@
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}/results": {
       "get": {
         "operationId": "AgentOptimizationJobs_getCandidateResults",
-        "summary": "Get candidate evaluation results.",
-        "description": "Gets full per-task evaluation results for a candidate.",
+        "summary": "Get optimization candidate results",
+        "description": "Retrieves full per-task evaluation results for the specified candidate.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -963,8 +963,8 @@
     "/agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote": {
       "post": {
         "operationId": "AgentOptimizationJobs_promoteCandidate",
-        "summary": "Promote a candidate.",
-        "description": "Promotes a candidate, recording the deployment timestamp and target agent version.",
+        "summary": "Promote an optimization candidate",
+        "description": "Promotes the specified candidate and records the deployment timestamp and target agent version.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -1053,8 +1053,8 @@
     "/agent_optimization_jobs/{jobId}:cancel": {
       "post": {
         "operationId": "AgentOptimizationJobs_cancel",
-        "summary": "Cancel an agent optimization job.",
-        "description": "Request cancellation. Idempotent on terminal states.",
+        "summary": "Cancel an agent optimization job",
+        "description": "Requests cancellation of the specified agent optimization job.\nThe operation remains idempotent after the job reaches a terminal state.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -1163,8 +1163,8 @@
             }
           }
         ],
-        "description": "Creates the agent. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.\nThe SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
-        "summary": "Create the agent Create a new code-based agent",
+        "description": "Creates a new agent from the request payload and returns the created resource. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.\nThe SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
+        "summary": "Create an agent Create a new code-based agent",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -1218,8 +1218,8 @@
       },
       "get": {
         "operationId": "Agents_listAgents",
-        "summary": "List all agents",
-        "description": "Returns the list of all agents.",
+        "summary": "List agents",
+        "description": "Returns a paged collection of agent resources.",
         "parameters": [
           {
             "name": "kind",
@@ -1340,8 +1340,8 @@
     "/agents/{agent_name}": {
       "get": {
         "operationId": "Agents_getAgent",
-        "summary": "Retrieve the agent",
-        "description": "Retrieves the agent.",
+        "summary": "Get an agent",
+        "description": "Retrieves an agent definition by its unique name.",
         "parameters": [
           {
             "name": "agent_name",
@@ -1548,7 +1548,7 @@
       "patch": {
         "operationId": "Agents_patchAgentObject",
         "summary": "Update an agent endpoint",
-        "description": "Updates an agent endpoint.",
+        "description": "Applies a merge-patch update to the specified agent endpoint configuration.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -1628,7 +1628,7 @@
     "/agents/{agent_name}/code:download": {
       "get": {
         "operationId": "Agents_downloadAgentCode",
-        "summary": "Download the code zip for a code-based hosted agent",
+        "summary": "Download agent code",
         "description": "Downloads the code zip for a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\n\nIf `agent_version` is supplied, returns that version's code zip; otherwise\nreturns the latest version's code zip.\n\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the\nresolved version's `code_configuration`.",
         "parameters": [
           {
@@ -2100,7 +2100,7 @@
     "/agents/{agent_name}/endpoint/sessions": {
       "post": {
         "operationId": "Agents_createSession",
-        "summary": "Create a new session for an agent endpoint",
+        "summary": "Create a session",
         "description": "Creates a new session for an agent endpoint.\nThe endpoint resolves the backing agent version from `version_indicator` and\nenforces session ownership using the provided isolation key for session-mutating operations.",
         "parameters": [
           {
@@ -2188,7 +2188,7 @@
       "get": {
         "operationId": "Agents_listSessions",
         "summary": "List sessions for an agent",
-        "description": "Returns a list of sessions for the specified agent.",
+        "description": "Returns a paged collection of sessions associated with the specified agent endpoint.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2335,7 +2335,7 @@
       "get": {
         "operationId": "AgentSessionFiles_listSessionFiles",
         "summary": "List session files",
-        "description": "Lists files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).\nIf path is not provided, lists the session home directory.",
+        "description": "Returns files and directories at the specified path in the session sandbox.\nThe response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2473,7 +2473,7 @@
       "delete": {
         "operationId": "AgentSessionFiles_deleteSessionFile",
         "summary": "Delete a session file",
-        "description": "Deletes a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
+        "description": "Deletes the specified file or directory from the session sandbox.\nWhen `recursive` is false, deleting a non-empty directory returns 409 Conflict.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2575,7 +2575,7 @@
       "put": {
         "operationId": "AgentSessionFiles_uploadSessionFile",
         "summary": "Upload a session file",
-        "description": "Uploads a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
+        "description": "Uploads binary file content to the specified path in the session sandbox.\nThe service stores the file relative to the session home directory and rejects payloads larger than 50 MB.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2682,7 +2682,7 @@
       "get": {
         "operationId": "AgentSessionFiles_downloadSessionFile",
         "summary": "Download a session file",
-        "description": "Downloads a file from the session sandbox as a binary stream.",
+        "description": "Downloads the file at the specified sandbox path as a binary stream.\nThe path is resolved relative to the session home directory.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2780,8 +2780,8 @@
     "/agents/{agent_name}/endpoint/sessions/{session_id}": {
       "get": {
         "operationId": "Agents_getSession",
-        "summary": "Retrieve a session by ID",
-        "description": "Retrieves a session by ID.",
+        "summary": "Get a session",
+        "description": "Retrieves the details of a hosted agent session by agent name and session identifier.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2866,7 +2866,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteSession",
-        "summary": "Delete a session synchronously",
+        "summary": "Delete a session",
         "description": "Deletes a session synchronously.\nReturns 204 No Content when the session is deleted or does not exist.",
         "parameters": [
           {
@@ -2948,7 +2948,7 @@
       "post": {
         "operationId": "Agents_stopSession",
         "summary": "Stop a session",
-        "description": "Stops a session.\nReturns 204 No Content when the stop succeeds.",
+        "description": "Terminates the specified hosted agent session and returns 204 No Content when the request succeeds.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -3122,7 +3122,7 @@
             }
           }
         ],
-        "description": "Creates a new agent version. Creates a new agent version from code. Uploads the code zip and creates a new version\nfor an existing agent. The SHA-256 hex digest of the zip is provided in the\n`x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
+        "description": "Creates a new version for the specified agent and returns the created version resource. Creates a new agent version from code. Uploads the code zip and creates a new version\nfor an existing agent. The SHA-256 hex digest of the zip is provided in the\n`x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
         "summary": "Create an agent version Create an agent version from code",
         "responses": {
           "200": {
@@ -3177,8 +3177,8 @@
       },
       "get": {
         "operationId": "Agents_listAgentVersions",
-        "summary": "List versions of an agent",
-        "description": "Returns the list of versions of an agent.",
+        "summary": "List agent versions",
+        "description": "Returns a paged collection of versions for the specified agent.",
         "parameters": [
           {
             "name": "agent_name",
@@ -3298,8 +3298,8 @@
     "/agents/{agent_name}/versions/{agent_version}": {
       "get": {
         "operationId": "Agents_getAgentVersion",
-        "summary": "Retrieve a specific version of an agent",
-        "description": "Retrieves a specific version of an agent.",
+        "summary": "Get an agent version",
+        "description": "Retrieves the specified version of an agent by its agent name and version identifier.",
         "parameters": [
           {
             "name": "agent_name",
@@ -3358,7 +3358,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteAgentVersion",
-        "summary": "Delete a specific version of an agent",
+        "summary": "Delete an agent version",
         "description": "Deletes a specific version of an agent. For hosted agents, if the version has active\nsessions, the request is rejected with HTTP 409 unless `force` is set to true. When\nforce is true, all sessions associated with this version are cascade-deleted.",
         "parameters": [
           {
@@ -3520,7 +3520,7 @@
       "post": {
         "operationId": "Agents_createAgentVersionFromManifest",
         "summary": "Create an agent version from manifest",
-        "description": "Creates a new agent version from a manifest.",
+        "description": "Imports the provided manifest to create a new version for the specified agent.",
         "parameters": [
           {
             "name": "agent_name",
@@ -3584,7 +3584,7 @@
       "post": {
         "operationId": "Agents_createAgentFromManifest",
         "summary": "Create an agent from a manifest",
-        "description": "Creates an agent from a manifest.",
+        "description": "Imports the provided manifest to create an agent and returns the created resource.",
         "parameters": [
           {
             "name": "api-version",
@@ -3637,8 +3637,8 @@
     "/connections": {
       "get": {
         "operationId": "Connections_list",
-        "summary": "List all connections",
-        "description": "Lists all connections in the project, without populating connection credentials",
+        "summary": "List connections",
+        "description": "Returns the connections available in the current project, optionally filtered by type or default status.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3716,7 +3716,7 @@
       "get": {
         "operationId": "Connections_get",
         "summary": "Get a connection",
-        "description": "Gets a connection by name, without populating connection credentials",
+        "description": "Retrieves the specified connection and its configuration details without including credential values.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3783,7 +3783,7 @@
       "post": {
         "operationId": "Connections_getWithCredentials",
         "summary": "Get a connection with credentials",
-        "description": "Gets a connection by name, with its connection credentials",
+        "description": "Retrieves the specified connection together with its credential values.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3976,8 +3976,8 @@
       },
       "post": {
         "operationId": "DataGenerationJobs_create",
-        "summary": "Create a data generation job.",
-        "description": "Creates a data generation job.",
+        "summary": "Create a data generation job",
+        "description": "Submits a new data generation job for asynchronous execution.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4073,8 +4073,8 @@
     "/data_generation_jobs/{jobId}": {
       "get": {
         "operationId": "DataGenerationJobs_get",
-        "summary": "Get info about a data generation job.",
-        "description": "Gets the details of a data generation job by its ID.",
+        "summary": "Get a data generation job",
+        "description": "Retrieves the specified data generation job and its current status.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4151,8 +4151,8 @@
       },
       "delete": {
         "operationId": "DataGenerationJobs_delete",
-        "summary": "Delete a data generation job.",
-        "description": "Deletes a data generation job by its ID.",
+        "summary": "Delete a data generation job",
+        "description": "Removes the specified data generation job and its associated output.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4214,8 +4214,8 @@
     "/data_generation_jobs/{jobId}:cancel": {
       "post": {
         "operationId": "DataGenerationJobs_cancel",
-        "summary": "Cancel a data generation job.",
-        "description": "Cancels a data generation job by its ID.",
+        "summary": "Cancel a data generation job",
+        "description": "Cancels the specified data generation job if it is still in progress.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -4284,6 +4284,7 @@
     "/datasets": {
       "get": {
         "operationId": "Datasets_listLatest",
+        "summary": "List latest versions",
         "description": "List the latest version of each DatasetVersion",
         "parameters": [
           {
@@ -4329,6 +4330,7 @@
     "/datasets/{name}/versions": {
       "get": {
         "operationId": "Datasets_listVersions",
+        "summary": "List versions",
         "description": "List all versions of the given DatasetVersion",
         "parameters": [
           {
@@ -4383,6 +4385,7 @@
     "/datasets/{name}/versions/{version}": {
       "get": {
         "operationId": "Datasets_getVersion",
+        "summary": "Get a version",
         "description": "Get the specific version of the DatasetVersion. The service returns 404 Not Found error if the DatasetVersion does not exist.",
         "parameters": [
           {
@@ -4444,6 +4447,7 @@
       },
       "delete": {
         "operationId": "Datasets_deleteVersion",
+        "summary": "Delete a version",
         "description": "Delete the specific version of the DatasetVersion. The service returns 204 No Content if the DatasetVersion was deleted successfully or if the DatasetVersion does not exist.",
         "parameters": [
           {
@@ -4498,6 +4502,7 @@
       },
       "patch": {
         "operationId": "Datasets_createOrUpdateVersion",
+        "summary": "Create or update a version",
         "description": "Create a new or update an existing DatasetVersion with the given version id",
         "parameters": [
           {
@@ -4647,7 +4652,7 @@
       "post": {
         "operationId": "Datasets_startPendingUploadVersion",
         "summary": "Start a pending upload",
-        "description": "Starts a new or get an existing pending upload of a dataset for a specific version.",
+        "description": "Initiates a new pending upload or retrieves an existing one for the specified dataset version.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4721,8 +4726,8 @@
     "/deployments": {
       "get": {
         "operationId": "Deployments_list",
-        "summary": "List all deployments",
-        "description": "Lists all deployed models in the project",
+        "summary": "List deployments",
+        "description": "Returns the deployed models available in the current project, optionally filtered by publisher, model name, or deployment type.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4877,7 +4882,7 @@
       "get": {
         "operationId": "EvaluationRules_list",
         "summary": "List evaluation rules",
-        "description": "Lists all evaluation rules.",
+        "description": "Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -4953,7 +4958,7 @@
       "get": {
         "operationId": "EvaluationRules_get",
         "summary": "Get an evaluation rule",
-        "description": "Gets an evaluation rule.",
+        "description": "Retrieves the specified evaluation rule and its configuration.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5006,7 +5011,7 @@
       "delete": {
         "operationId": "EvaluationRules_delete",
         "summary": "Delete an evaluation rule",
-        "description": "Deletes an evaluation rule.",
+        "description": "Removes the specified evaluation rule from the project.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5052,7 +5057,7 @@
       "put": {
         "operationId": "EvaluationRules_createOrUpdate",
         "summary": "Create or update an evaluation rule",
-        "description": "Creates or updates an evaluation rule.",
+        "description": "Creates a new evaluation rule, or replaces the existing rule when the identifier matches.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5140,7 +5145,7 @@
       "get": {
         "operationId": "EvaluationTaxonomies_list",
         "summary": "List evaluation taxonomies",
-        "description": "Lists evaluation taxonomies",
+        "description": "Returns the evaluation taxonomies available in the project, optionally filtered by input name or input type.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5218,7 +5223,7 @@
       "get": {
         "operationId": "EvaluationTaxonomies_get",
         "summary": "Get an evaluation taxonomy",
-        "description": "Gets an evaluation run by name.",
+        "description": "Retrieves the specified evaluation taxonomy.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5283,7 +5288,7 @@
       "delete": {
         "operationId": "EvaluationTaxonomies_delete",
         "summary": "Delete an evaluation taxonomy",
-        "description": "Deletes an evaluation taxonomy by name.",
+        "description": "Removes the specified evaluation taxonomy from the project.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5341,7 +5346,7 @@
       "put": {
         "operationId": "EvaluationTaxonomies_create",
         "summary": "Create an evaluation taxonomy",
-        "description": "Creates an evaluation taxonomy.",
+        "description": "Creates or replaces the specified evaluation taxonomy with the provided definition.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5427,7 +5432,7 @@
       "patch": {
         "operationId": "EvaluationTaxonomies_update",
         "summary": "Update an evaluation taxonomy",
-        "description": "Updates an evaluation taxonomy.",
+        "description": "Modifies the specified evaluation taxonomy with the provided changes.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -5504,7 +5509,7 @@
     "/evaluator_generation_jobs": {
       "post": {
         "operationId": "EvaluatorGenerationJobs_create",
-        "summary": "Create an evaluator generation job.",
+        "summary": "Create an evaluator generation job",
         "description": "Creates an evaluator generation job. The service generates rubric-based evaluator\ndefinitions from the provided source materials asynchronously.",
         "parameters": [
           {
@@ -5599,7 +5604,7 @@
       },
       "get": {
         "operationId": "EvaluatorGenerationJobs_list",
-        "summary": "List evaluator generation jobs.",
+        "summary": "List evaluator generation jobs",
         "description": "Returns a list of evaluator generation jobs.",
         "parameters": [
           {
@@ -5728,7 +5733,7 @@
     "/evaluator_generation_jobs/{jobId}": {
       "get": {
         "operationId": "EvaluatorGenerationJobs_get",
-        "summary": "Get info about an evaluator generation job.",
+        "summary": "Get an evaluator generation job",
         "description": "Gets the details of an evaluator generation job by its ID.",
         "parameters": [
           {
@@ -5806,7 +5811,7 @@
       },
       "delete": {
         "operationId": "EvaluatorGenerationJobs_delete",
-        "summary": "Delete an evaluator generation job by its ID",
+        "summary": "Delete an evaluator generation job",
         "description": "Deletes an evaluator generation job by its ID. Deletes the job record only;\nthe generated evaluator (if any) is preserved.",
         "parameters": [
           {
@@ -5869,7 +5874,7 @@
     "/evaluator_generation_jobs/{jobId}:cancel": {
       "post": {
         "operationId": "EvaluatorGenerationJobs_cancel",
-        "summary": "Cancel an evaluator generation job.",
+        "summary": "Cancel an evaluator generation job",
         "description": "Cancels an evaluator generation job by its ID.",
         "parameters": [
           {
@@ -6030,7 +6035,7 @@
       "get": {
         "operationId": "Evaluators_listVersions",
         "summary": "List evaluator versions",
-        "description": "Lists all versions of the given evaluator",
+        "description": "Returns the available versions for the specified evaluator.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6127,7 +6132,7 @@
       "post": {
         "operationId": "Evaluators_createVersion",
         "summary": "Create an evaluator version",
-        "description": "Create a new EvaluatorVersion with auto incremented version id",
+        "description": "Creates a new evaluator version with an auto-incremented version identifier.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6204,7 +6209,7 @@
       "get": {
         "operationId": "Evaluators_getVersion",
         "summary": "Get an evaluator version",
-        "description": "Get the specific version of the EvaluatorVersion. The service returns 404 Not Found error if the EvaluatorVersion does not exist.",
+        "description": "Retrieves the specified evaluator version, returning 404 if it does not exist.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6278,7 +6283,7 @@
       "delete": {
         "operationId": "Evaluators_deleteVersion",
         "summary": "Delete an evaluator version",
-        "description": "Delete the specific version of the EvaluatorVersion. The service returns 204 No Content if the EvaluatorVersion was deleted successfully or if the EvaluatorVersion does not exist.",
+        "description": "Removes the specified evaluator version. Returns 204 whether the version existed or not.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6345,7 +6350,7 @@
       "patch": {
         "operationId": "Evaluators_updateVersion",
         "summary": "Update an evaluator version",
-        "description": "Update an existing EvaluatorVersion with the given version id",
+        "description": "Updates the specified evaluator version in place.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -6432,7 +6437,7 @@
       "post": {
         "operationId": "Evaluators_getCredentials",
         "summary": "Get evaluator credentials",
-        "description": "Gets the SAS credential to access the storage account associated with an Evaluator version.",
+        "description": "Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6521,7 +6526,7 @@
       "post": {
         "operationId": "Evaluators_startPendingUpload",
         "summary": "Start a pending upload",
-        "description": "Starts a new or get an existing pending upload of an evaluator for a specific version.",
+        "description": "Initiates a new pending upload or retrieves an existing one for the specified evaluator version.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6609,6 +6614,7 @@
     "/indexes": {
       "get": {
         "operationId": "Indexes_listLatest",
+        "summary": "List latest versions",
         "description": "List the latest version of each Index",
         "parameters": [
           {
@@ -6654,6 +6660,7 @@
     "/indexes/{name}/versions": {
       "get": {
         "operationId": "Indexes_listVersions",
+        "summary": "List versions",
         "description": "List all versions of the given Index",
         "parameters": [
           {
@@ -6708,6 +6715,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_getVersion",
+        "summary": "Get a version",
         "description": "Get the specific version of the Index. The service returns 404 Not Found error if the Index does not exist.",
         "parameters": [
           {
@@ -6769,6 +6777,7 @@
       },
       "delete": {
         "operationId": "Indexes_deleteVersion",
+        "summary": "Delete a version",
         "description": "Delete the specific version of the Index. The service returns 204 No Content if the Index was deleted successfully or if the Index does not exist.",
         "parameters": [
           {
@@ -6823,6 +6832,7 @@
       },
       "patch": {
         "operationId": "Indexes_createOrUpdateVersion",
+        "summary": "Create or update a version",
         "description": "Create a new or update an existing Index with the given version id",
         "parameters": [
           {
@@ -6908,7 +6918,7 @@
       "post": {
         "operationId": "Insights_generate",
         "summary": "Generate insights",
-        "description": "Generates Insights",
+        "description": "Generates an insights report from the provided evaluation configuration.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6992,7 +7002,7 @@
       "get": {
         "operationId": "Insights_list",
         "summary": "List insights",
-        "description": "Lists all insights in reverse chronological order (newest first).",
+        "description": "Returns insights in reverse chronological order, with the most recent entries first.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7098,7 +7108,7 @@
       "get": {
         "operationId": "Insights_get",
         "summary": "Get an insight",
-        "description": "Gets a specific insight by Id.",
+        "description": "Retrieves the specified insight report and its results.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7173,7 +7183,7 @@
       "post": {
         "operationId": "createMemoryStore",
         "summary": "Create a memory store",
-        "description": "Creates a memory store.",
+        "description": "Creates a memory store resource with the provided configuration.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7272,8 +7282,8 @@
       },
       "get": {
         "operationId": "listMemoryStores",
-        "summary": "List all memory stores",
-        "description": "Lists all memory stores.",
+        "summary": "List memory stores",
+        "description": "Returns the memory stores available to the caller.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7402,7 +7412,7 @@
       "post": {
         "operationId": "updateMemoryStore",
         "summary": "Update a memory store",
-        "description": "Updates a memory store.",
+        "description": "Updates the specified memory store with the supplied configuration changes.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7494,7 +7504,7 @@
       "get": {
         "operationId": "getMemoryStore",
         "summary": "Get a memory store",
-        "description": "Retrieves a memory store.",
+        "description": "Retrieves the specified memory store and its current configuration.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7562,7 +7572,7 @@
       "delete": {
         "operationId": "deleteMemoryStore",
         "summary": "Delete a memory store",
-        "description": "Deletes a memory store.",
+        "description": "Deletes the specified memory store.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7632,7 +7642,7 @@
       "post": {
         "operationId": "createMemory",
         "summary": "Create a memory item",
-        "description": "Creates a memory item in a memory store.",
+        "description": "Creates a memory item in the specified memory store.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7735,7 +7745,7 @@
       "post": {
         "operationId": "updateMemory",
         "summary": "Update a memory item",
-        "description": "Updates a memory item in a memory store.",
+        "description": "Updates the specified memory item in the memory store.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7831,7 +7841,7 @@
       "get": {
         "operationId": "getMemory",
         "summary": "Get a memory item",
-        "description": "Retrieves a memory item from a memory store.",
+        "description": "Retrieves the specified memory item from the memory store.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7908,7 +7918,7 @@
       "delete": {
         "operationId": "deleteMemory",
         "summary": "Delete a memory item",
-        "description": "Deletes a memory item from a memory store.",
+        "description": "Deletes the specified memory item from the memory store.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7986,8 +7996,8 @@
     "/memory_stores/{name}/items:list": {
       "post": {
         "operationId": "listMemories",
-        "summary": "List all memory items",
-        "description": "Lists all memory items in a memory store.",
+        "summary": "List memory items",
+        "description": "Returns memory items from the specified memory store.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8154,7 +8164,7 @@
       "get": {
         "operationId": "getUpdateResult",
         "summary": "Get an update result",
-        "description": "Gets memory store update result.",
+        "description": "Retrieves the status and result of a memory store update operation.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8233,7 +8243,7 @@
       "post": {
         "operationId": "deleteScopeMemories",
         "summary": "Delete memories by scope",
-        "description": "Deletes all memories associated with a specific scope from a memory store.",
+        "description": "Deletes all memories in the specified memory store that are associated with the provided scope.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8322,7 +8332,7 @@
       "post": {
         "operationId": "searchMemories",
         "summary": "Search memories",
-        "description": "Searches for relevant memories from a memory store based on conversation context.",
+        "description": "Searches the specified memory store for memories relevant to the provided conversation context.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8430,7 +8440,7 @@
       "post": {
         "operationId": "updateMemories",
         "summary": "Update memories",
-        "description": "Updates memory store with conversation memories.",
+        "description": "Starts an update that writes conversation memories into the specified memory store.\nThe operation returns a long-running status location for polling the update result.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8545,6 +8555,7 @@
     "/models": {
       "get": {
         "operationId": "Models_listLatest",
+        "summary": "List latest versions",
         "description": "List the latest version of each ModelVersion",
         "parameters": [
           {
@@ -8602,6 +8613,7 @@
     "/models/{name}/versions": {
       "get": {
         "operationId": "Models_listVersions",
+        "summary": "List versions",
         "description": "List all versions of the given ModelVersion",
         "parameters": [
           {
@@ -8669,7 +8681,7 @@
       "get": {
         "operationId": "Models_getVersion",
         "summary": "Get a model version",
-        "description": "Get the specific version of the ModelVersion. The service returns 404 Not Found error if the ModelVersion does not exist.",
+        "description": "Retrieves the specified model version, returning 404 if it does not exist.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8748,7 +8760,7 @@
       "delete": {
         "operationId": "Models_deleteVersion",
         "summary": "Delete a model version",
-        "description": "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
+        "description": "Removes the specified model version. Returns 200 whether the version existed or not.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8820,7 +8832,7 @@
       "patch": {
         "operationId": "Models_updateVersion",
         "summary": "Update a model version",
-        "description": "Update an existing ModelVersion with the given version id",
+        "description": "Updates an existing model version identified by its version ID.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8922,7 +8934,7 @@
       "post": {
         "operationId": "Models_createAsync",
         "summary": "Create a model version async",
-        "description": "Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.",
+        "description": "Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a location header for polling the operation status.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9037,7 +9049,7 @@
       "post": {
         "operationId": "Models_getCredentials",
         "summary": "Get model asset credentials",
-        "description": "Gets credentials for a model version asset.",
+        "description": "Retrieves temporary credentials for accessing the storage backing the specified model version.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9128,7 +9140,7 @@
       "post": {
         "operationId": "Models_startPendingUpload",
         "summary": "Start a pending upload",
-        "description": "Starts or retrieve a pending upload for a model version.",
+        "description": "Initiates a new pending upload or retrieves an existing one for the specified model version.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9219,7 +9231,7 @@
       "post": {
         "operationId": "createConversation",
         "summary": "Create a conversation",
-        "description": "Creates a conversation.",
+        "description": "Creates a new conversation resource.",
         "parameters": [
           {
             "name": "x-ms-user-isolation-key",
@@ -9269,8 +9281,8 @@
       },
       "get": {
         "operationId": "listConversations",
-        "summary": "List all conversations",
-        "description": "Returns the list of all conversations.",
+        "summary": "List conversations",
+        "description": "Returns the conversations available in the current project.",
         "parameters": [
           {
             "name": "limit",
@@ -9401,7 +9413,7 @@
       "post": {
         "operationId": "updateConversation",
         "summary": "Update a conversation",
-        "description": "Updates a conversation.",
+        "description": "Modifies the specified conversation's properties.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9461,7 +9473,7 @@
       "get": {
         "operationId": "getConversation",
         "summary": "Retrieve a conversation",
-        "description": "Retrieves a conversation.",
+        "description": "Retrieves the specified conversation and its metadata.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9511,7 +9523,7 @@
       "delete": {
         "operationId": "deleteConversation",
         "summary": "Delete a conversation",
-        "description": "Deletes a conversation.",
+        "description": "Removes the specified conversation resource from the current project.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9562,8 +9574,8 @@
     "/openai/v1/conversations/{conversation_id}/items": {
       "post": {
         "operationId": "createConversationItems",
-        "summary": "Create items in a conversation with the given ID",
-        "description": "Creates items in a conversation with the given ID.",
+        "summary": "Create conversation items",
+        "description": "Adds one or more items to the specified conversation.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9648,8 +9660,8 @@
       },
       "get": {
         "operationId": "listConversationItems",
-        "summary": "List all items for a conversation with the given ID",
-        "description": "Lists all items for a conversation with the given ID.",
+        "summary": "List conversation items",
+        "description": "Returns the items belonging to the specified conversation.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9778,8 +9790,8 @@
     "/openai/v1/conversations/{conversation_id}/items/{item_id}": {
       "get": {
         "operationId": "getConversationItem",
-        "summary": "Get a single item from a conversation with the given IDs",
-        "description": "Gets a single item from a conversation with the given IDs.",
+        "summary": "Get a conversation item",
+        "description": "Retrieves a specific item from the specified conversation.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9837,8 +9849,8 @@
       },
       "delete": {
         "operationId": "deleteConversationItem",
-        "summary": "Delete an item from a conversation with the given IDs",
-        "description": "Deletes an item from a conversation with the given IDs.",
+        "summary": "Delete a conversation item",
+        "description": "Removes the specified item from a conversation.",
         "parameters": [
           {
             "name": "conversation_id",
@@ -9898,8 +9910,8 @@
     "/openai/v1/evals": {
       "get": {
         "operationId": "Evals_listEvals",
-        "summary": "List all evaluations",
-        "description": "Lists evaluations for a project.",
+        "summary": "List evaluations",
+        "description": "Returns the evaluations configured in the current project.",
         "parameters": [
           {
             "name": "after",
@@ -10010,7 +10022,7 @@
       },
       "post": {
         "operationId": "Evals_createEval",
-        "summary": "Create evaluation",
+        "summary": "Create an evaluation",
         "description": "Creates the structure of an evaluation that can be used to test a model's performance.\nAn evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources.\nFor more information, see the [Evals guide](https://platform.openai.com/docs/guides/evals).",
         "parameters": [],
         "responses": {
@@ -10054,7 +10066,7 @@
       "delete": {
         "operationId": "Evals_deleteEval",
         "summary": "Delete an evaluation",
-        "description": "Deletes an evaluation.",
+        "description": "Removes the specified evaluation and its associated data.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10095,7 +10107,7 @@
       "get": {
         "operationId": "Evals_getEval",
         "summary": "Get an evaluation",
-        "description": "Gets an evaluation by ID.",
+        "description": "Retrieves the specified evaluation and its configuration.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10188,8 +10200,8 @@
     "/openai/v1/evals/{eval_id}/runs": {
       "get": {
         "operationId": "Evals_listRuns",
-        "summary": "Get a list of runs for an evaluation",
-        "description": "Gets a list of runs for an evaluation.",
+        "summary": "List evaluation runs",
+        "description": "Returns the runs associated with the specified evaluation.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10312,7 +10324,7 @@
       },
       "post": {
         "operationId": "Evals_createEvalRun",
-        "summary": "Create evaluation run",
+        "summary": "Create an evaluation run",
         "description": "Creates an evaluation run for the specified evaluation.",
         "parameters": [
           {
@@ -10365,8 +10377,8 @@
     "/openai/v1/evals/{eval_id}/runs/{run_id}": {
       "delete": {
         "operationId": "Evals_deleteEvalRun",
-        "summary": "Delete evaluation run",
-        "description": "Deletes an eval run.",
+        "summary": "Delete an evaluation run",
+        "description": "Removes the specified evaluation run.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10416,7 +10428,7 @@
       "get": {
         "operationId": "Evals_getEvalRun",
         "summary": "Get an evaluation run",
-        "description": "Gets an evaluation run by ID.",
+        "description": "Retrieves the specified evaluation run and its current status.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10465,7 +10477,7 @@
       },
       "post": {
         "operationId": "Evals_cancelEvalRun",
-        "summary": "Cancel evaluation run",
+        "summary": "Cancel an evaluation run",
         "description": "Cancels an ongoing evaluation run.",
         "parameters": [
           {
@@ -10517,8 +10529,8 @@
     "/openai/v1/evals/{eval_id}/runs/{run_id}/output_items": {
       "get": {
         "operationId": "Evals_getEvalRunOutputItems",
-        "summary": "Get evaluation run output items",
-        "description": "Gets a list of output items for an evaluation run.",
+        "summary": "List evaluation run output items",
+        "description": "Returns the output items produced by the specified evaluation run.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10648,7 +10660,7 @@
       "get": {
         "operationId": "Evals_getEvalRunOutputItem",
         "summary": "Get an output item of an evaluation run",
-        "description": "Gets an evaluation run output item by ID.",
+        "description": "Retrieves a single output item from the specified evaluation run.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10760,8 +10772,8 @@
       },
       "get": {
         "operationId": "listPaginatedFineTuningJobs",
-        "summary": "List your organization's fine-tuning jobs",
-        "description": "Lists your organization's fine-tuning jobs",
+        "summary": "List fine-tuning jobs",
+        "description": "Returns the fine-tuning jobs for the current organization.",
         "parameters": [
           {
             "name": "after",
@@ -10826,7 +10838,7 @@
     "/openai/v1/fine_tuning/jobs/{fine_tuning_job_id}": {
       "get": {
         "operationId": "retrieveFineTuningJob",
-        "summary": "Get info about a fine-tuning job",
+        "summary": "Get a fine-tuning job",
         "description": "Gets info about a fine-tuning job.\n\n[Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)",
         "parameters": [
           {
@@ -10879,8 +10891,8 @@
     "/openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/cancel": {
       "post": {
         "operationId": "cancelFineTuningJob",
-        "summary": "Immediately cancel a fine-tune job",
-        "description": "Immediately cancels a fine-tune job.",
+        "summary": "Cancel a fine-tuning job",
+        "description": "Immediately cancels the specified fine-tuning job.",
         "parameters": [
           {
             "name": "fine_tuning_job_id",
@@ -10932,8 +10944,8 @@
     "/openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints": {
       "get": {
         "operationId": "listFineTuningJobCheckpoints",
-        "summary": "List checkpoints for a fine-tuning job",
-        "description": "Lists checkpoints for a fine-tuning job.",
+        "summary": "List fine-tuning job checkpoints",
+        "description": "Returns the checkpoints saved during the specified fine-tuning job.",
         "parameters": [
           {
             "name": "fine_tuning_job_id",
@@ -11007,8 +11019,8 @@
     "/openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/events": {
       "get": {
         "operationId": "listFineTuningJobEvents",
-        "summary": "Get fine-grained status updates for a fine-tuning job",
-        "description": "Gets fine-grained status updates for a fine-tuning job.",
+        "summary": "List fine-tuning job events",
+        "description": "Returns the status events emitted during the specified fine-tuning job.",
         "parameters": [
           {
             "name": "fine_tuning_job_id",
@@ -11082,8 +11094,8 @@
     "/openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/pause": {
       "post": {
         "operationId": "pauseFineTuningJob",
-        "summary": "Pause a running fine-tune job",
-        "description": "Pauses a running fine-tune job.",
+        "summary": "Pause a fine-tuning job",
+        "description": "Pauses the specified fine-tuning job while it is running.",
         "parameters": [
           {
             "name": "fine_tuning_job_id",
@@ -11135,8 +11147,8 @@
     "/openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/resume": {
       "post": {
         "operationId": "resumeFineTuningJob",
-        "summary": "Resume a paused fine-tune job",
-        "description": "Resumes a paused fine-tune job.",
+        "summary": "Resume a fine-tuning job",
+        "description": "Resumes the specified fine-tuning job after it has been paused.",
         "parameters": [
           {
             "name": "fine_tuning_job_id",
@@ -11199,8 +11211,8 @@
             }
           }
         ],
-        "description": "Creates a model response. Creates a model response (streaming response).",
-        "summary": "Create a model response Create a model response (streaming response)",
+        "description": "Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response. Creates a streaming model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.",
+        "summary": "Create a model response Create a streaming model response",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -11654,8 +11666,8 @@
       },
       "get": {
         "operationId": "listResponses",
-        "summary": "List all responses",
-        "description": "Returns the list of all responses.",
+        "summary": "List responses",
+        "description": "Returns a collection of all stored responses matching specified filter criteria.",
         "parameters": [
           {
             "name": "limit",
@@ -11795,8 +11807,8 @@
     "/openai/v1/responses/compact": {
       "post": {
         "operationId": "compactResponseConversation",
-        "summary": "Compact a responses conversation",
-        "description": "Produces a compaction of a responses conversation.",
+        "summary": "Compact a conversation",
+        "description": "Compacts a conversation into a response object suitable for long-running and zero-data-retention scenarios.",
         "parameters": [],
         "responses": {
           "200": {
@@ -11900,8 +11912,8 @@
             }
           }
         ],
-        "description": "Retrieves a model response with the given ID. Retrieves a model response with the given ID (streaming response).",
-        "summary": "Retrieve a model response with the given ID Retrieve a model response with the given ID (streaming response)",
+        "description": "Retrieves a model response with the given ID. Retrieves a streaming model response with the given ID.",
+        "summary": "Retrieve a model response Retrieve a streaming model response",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -11945,7 +11957,7 @@
       "delete": {
         "operationId": "deleteResponse",
         "summary": "Delete a model response",
-        "description": "Deletes a model response.",
+        "description": "Removes the specified response and its stored content.",
         "parameters": [
           {
             "name": "response_id",
@@ -12006,7 +12018,7 @@
       "post": {
         "operationId": "cancelResponse",
         "summary": "Cancel a model response",
-        "description": "Cancels a model response.",
+        "description": "Cancels a model response with the given ID. Only responses created with the background parameter set to true can be cancelled.",
         "parameters": [
           {
             "name": "response_id",
@@ -12067,7 +12079,7 @@
       "get": {
         "operationId": "listInputItems",
         "summary": "List input items for a response",
-        "description": "Returns a list of input items for a given response.",
+        "description": "Retrieves the input items associated with the specified response.",
         "parameters": [
           {
             "name": "response_id",
@@ -12194,8 +12206,8 @@
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_list",
-        "summary": "List a redteam by name",
-        "description": "Lists a redteam by name.",
+        "summary": "List redteams",
+        "description": "Returns the redteams available in the current project.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -12252,8 +12264,8 @@
     "/redTeams/runs/{name}": {
       "get": {
         "operationId": "RedTeams_get",
-        "summary": "Get a redteam by name",
-        "description": "Gets a redteam by name.",
+        "summary": "Get a redteam",
+        "description": "Retrieves the specified redteam and its configuration.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -12320,7 +12332,7 @@
       "post": {
         "operationId": "RedTeams_create",
         "summary": "Create a redteam run",
-        "description": "Creates a redteam run.",
+        "description": "Submits a new redteam run for execution with the provided configuration.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12387,7 +12399,7 @@
       "get": {
         "operationId": "listRoutines",
         "summary": "List routines",
-        "description": "Lists routines.",
+        "description": "Returns the routines available in the current project.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12486,7 +12498,7 @@
       "put": {
         "operationId": "createOrUpdateRoutine",
         "summary": "Create or update a routine",
-        "description": "Creates or update a routine.",
+        "description": "Creates a new routine or replaces an existing routine with the supplied definition.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12557,8 +12569,8 @@
       },
       "get": {
         "operationId": "getRoutine",
-        "summary": "Retrieve a routine",
-        "description": "Retrieves a routine.",
+        "summary": "Get a routine",
+        "description": "Retrieves the specified routine and its current configuration.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12620,7 +12632,7 @@
       "delete": {
         "operationId": "deleteRoutine",
         "summary": "Delete a routine",
-        "description": "Deletes a routine.",
+        "description": "Deletes the specified routine.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12677,7 +12689,7 @@
       "get": {
         "operationId": "listRoutineRuns",
         "summary": "List prior runs for a routine",
-        "description": "Lists prior runs for a routine.",
+        "description": "Returns prior runs recorded for the specified routine.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12782,7 +12794,7 @@
       "post": {
         "operationId": "disableRoutine",
         "summary": "Disable a routine",
-        "description": "Disables a routine.",
+        "description": "Disables the specified routine so it no longer runs.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12846,7 +12858,7 @@
       "post": {
         "operationId": "dispatchRoutineAsync",
         "summary": "Queue an asynchronous routine dispatch",
-        "description": "Queues an asynchronous routine dispatch.",
+        "description": "Queues an asynchronous dispatch for the specified routine.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12920,7 +12932,7 @@
       "post": {
         "operationId": "enableRoutine",
         "summary": "Enable a routine",
-        "description": "Enables a routine.",
+        "description": "Enables the specified routine so it can be dispatched.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12983,8 +12995,8 @@
     "/schedules": {
       "get": {
         "operationId": "Schedules_list",
-        "summary": "List all schedules",
-        "description": "Lists all schedules.",
+        "summary": "List schedules",
+        "description": "Returns schedules that match the supplied type and enabled filters.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -13062,7 +13074,7 @@
       "delete": {
         "operationId": "Schedules_delete",
         "summary": "Delete a schedule",
-        "description": "Deletes a schedule.",
+        "description": "Deletes the specified schedule resource.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -13119,8 +13131,8 @@
       },
       "get": {
         "operationId": "Schedules_get",
-        "summary": "Get a schedule by id",
-        "description": "Gets a schedule by id.",
+        "summary": "Get a schedule",
+        "description": "Retrieves the specified schedule resource.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -13184,8 +13196,8 @@
       },
       "put": {
         "operationId": "Schedules_createOrUpdate",
-        "summary": "Create or update operation template",
-        "description": "Creates or update operation template.",
+        "summary": "Create or update a schedule",
+        "description": "Creates a new schedule or updates an existing schedule with the supplied definition.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -13272,8 +13284,8 @@
     "/schedules/{id}/runs": {
       "get": {
         "operationId": "Schedules_listRuns",
-        "summary": "List all schedule runs",
-        "description": "Lists all schedule runs.",
+        "summary": "List schedule runs",
+        "description": "Returns schedule runs that match the supplied filters.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -13359,8 +13371,8 @@
     "/schedules/{schedule_id}/runs/{run_id}": {
       "get": {
         "operationId": "Schedules_getRun",
-        "summary": "Get a schedule run by id",
-        "description": "Gets a schedule run by id.",
+        "summary": "Get a schedule run",
+        "description": "Retrieves the specified run for a schedule.",
         "parameters": [
           {
             "name": "schedule_id",
@@ -13433,8 +13445,8 @@
     "/skills": {
       "get": {
         "operationId": "Skills_listSkills",
-        "summary": "List all skills",
-        "description": "Returns the list of all skills.",
+        "summary": "List skills",
+        "description": "Returns the skills available in the current project.",
         "parameters": [
           {
             "name": "limit",
@@ -13563,7 +13575,7 @@
       "get": {
         "operationId": "Skills_getSkill",
         "summary": "Retrieve a skill",
-        "description": "Retrieves a skill.",
+        "description": "Retrieves the specified skill and its current configuration.",
         "parameters": [
           {
             "name": "name",
@@ -13631,7 +13643,7 @@
       "post": {
         "operationId": "updateSkill",
         "summary": "Update a skill",
-        "description": "Updates a skill.",
+        "description": "Modifies the specified skill's configuration.",
         "parameters": [
           {
             "name": "name",
@@ -13718,7 +13730,7 @@
       "delete": {
         "operationId": "Skills_deleteSkill",
         "summary": "Delete a skill",
-        "description": "Deletes a skill.",
+        "description": "Removes the specified skill and its associated versions.",
         "parameters": [
           {
             "name": "name",
@@ -13963,8 +13975,8 @@
       },
       "get": {
         "operationId": "listSkillVersions",
-        "summary": "List all versions of a skill",
-        "description": "Lists all versions of a skill.",
+        "summary": "List skill versions",
+        "description": "Returns the available versions for the specified skill.",
         "parameters": [
           {
             "name": "name",
@@ -14102,7 +14114,7 @@
       "get": {
         "operationId": "getSkillVersion",
         "summary": "Retrieve a specific version of a skill",
-        "description": "Retrieves a specific version of a skill.",
+        "description": "Retrieves the specified version of a skill by name and version identifier.",
         "parameters": [
           {
             "name": "name",
@@ -14179,7 +14191,7 @@
       "delete": {
         "operationId": "deleteSkillVersion",
         "summary": "Delete a specific version of a skill",
-        "description": "Deletes a specific version of a skill.",
+        "description": "Removes the specified version of a skill.",
         "parameters": [
           {
             "name": "name",
@@ -14337,8 +14349,8 @@
     "/toolboxes": {
       "get": {
         "operationId": "listToolboxes",
-        "summary": "List all toolboxes",
-        "description": "Lists all toolboxes.",
+        "summary": "List toolboxes",
+        "description": "Returns the toolboxes available in the current project.",
         "parameters": [
           {
             "name": "limit",
@@ -14467,7 +14479,7 @@
       "get": {
         "operationId": "getToolbox",
         "summary": "Retrieve a toolbox",
-        "description": "Retrieves a toolbox.",
+        "description": "Retrieves the specified toolbox and its current configuration.",
         "parameters": [
           {
             "name": "name",
@@ -14535,7 +14547,7 @@
       "patch": {
         "operationId": "updateToolbox",
         "summary": "Update a toolbox to point to a specific version",
-        "description": "Updates a toolbox to point to a specific version.",
+        "description": "Updates the toolbox's default version pointer to the specified version.",
         "parameters": [
           {
             "$ref": "#/components/parameters/UpdateToolboxRequest.name"
@@ -14607,7 +14619,7 @@
       "delete": {
         "operationId": "deleteToolbox",
         "summary": "Delete a toolbox and all its versions",
-        "description": "Deletes a toolbox and all its versions.",
+        "description": "Removes the specified toolbox along with all of its versions.",
         "parameters": [
           {
             "name": "name",
@@ -14670,7 +14682,7 @@
       "post": {
         "operationId": "createToolboxVersion",
         "summary": "Create a new version of a toolbox",
-        "description": "Creates a new version of a toolbox. If the toolbox does not exist, it will be created.",
+        "description": "Creates a new toolbox version, provisioning the toolbox itself if it does not already exist.",
         "parameters": [
           {
             "name": "name",
@@ -14787,8 +14799,8 @@
       },
       "get": {
         "operationId": "listToolboxVersions",
-        "summary": "List all versions of a toolbox",
-        "description": "Lists all versions of a toolbox.",
+        "summary": "List toolbox versions",
+        "description": "Returns the available versions for the specified toolbox.",
         "parameters": [
           {
             "name": "name",
@@ -14926,7 +14938,7 @@
       "get": {
         "operationId": "getToolboxVersion",
         "summary": "Retrieve a specific version of a toolbox",
-        "description": "Retrieves a specific version of a toolbox.",
+        "description": "Retrieves the specified version of a toolbox by name and version identifier.",
         "parameters": [
           {
             "name": "name",
@@ -15003,7 +15015,7 @@
       "delete": {
         "operationId": "deleteToolboxVersion",
         "summary": "Delete a specific version of a toolbox",
-        "description": "Deletes a specific version of a toolbox.",
+        "description": "Removes the specified version of a toolbox.",
         "parameters": [
           {
             "name": "name",

@@ -22,8 +22,8 @@ namespace Azure.AI.Projects;
 @tag("Agent Session Files")
 interface AgentSessionFiles {
   /**
-   * Uploads a file to the session sandbox via binary stream.
-   * Maximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.
+   * Uploads binary file content to the specified path in the session sandbox.
+   * The service stores the file relative to the session home directory and rejects payloads larger than 50 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
   @summary("Upload a session file")
@@ -55,7 +55,8 @@ interface AgentSessionFiles {
   >;
 
   /**
-   * Downloads a file from the session sandbox as a binary stream.
+   * Downloads the file at the specified sandbox path as a binary stream.
+   * The path is resolved relative to the session home directory.
    */
   @summary("Download a session file")
   @get
@@ -82,9 +83,8 @@ interface AgentSessionFiles {
   >;
 
   /**
-   * Lists files and directories at a given path in the session sandbox.
-   * Returns only the immediate children of the specified directory (non-recursive).
-   * If path is not provided, lists the session home directory.
+   * Returns files and directories at the specified path in the session sandbox.
+   * The response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.
    */
   @summary("List session files")
   @get
@@ -113,8 +113,8 @@ interface AgentSessionFiles {
   >;
 
   /**
-   * Deletes a file or directory from the session sandbox.
-   * If `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.
+   * Deletes the specified file or directory from the session sandbox.
+   * When `recursive` is false, deleting a non-empty directory returns 409 Conflict.
    */
   @summary("Delete a session file")
   @delete

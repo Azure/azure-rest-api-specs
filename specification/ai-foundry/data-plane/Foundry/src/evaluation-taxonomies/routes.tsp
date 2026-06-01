@@ -20,8 +20,8 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Evaluation Taxonomies")
 interface EvaluationTaxonomies {
+  /** Retrieves the specified evaluation taxonomy. */
   @summary("Get an evaluation taxonomy")
-  @doc("Gets an evaluation run by name.")
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationTaxonomy,
     {
@@ -30,8 +30,8 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
   >;
 
+  /** Returns the evaluation taxonomies available in the project, optionally filtered by input name or input type. */
   @summary("List evaluation taxonomies")
-  @doc("Lists evaluation taxonomies")
   @Rest.listsResource(EvaluationTaxonomy)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationTaxonomy,
@@ -40,8 +40,8 @@ interface EvaluationTaxonomies {
     Azure.Core.Page<EvaluationTaxonomy>
   >;
 
+  /** Removes the specified evaluation taxonomy from the project. */
   @summary("Delete an evaluation taxonomy")
-  @doc("Deletes an evaluation taxonomy by name.")
   @Http.delete
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationTaxonomy,
@@ -51,8 +51,8 @@ interface EvaluationTaxonomies {
     Http.NoContentResponse
   >;
 
+  /** Creates or replaces the specified evaluation taxonomy with the provided definition. */
   @summary("Create an evaluation taxonomy")
-  @doc("Creates an evaluation taxonomy.")
   @put
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
@@ -70,8 +70,8 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
 
+  /** Modifies the specified evaluation taxonomy with the provided changes. */
   @summary("Update an evaluation taxonomy")
-  @doc("Updates an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<

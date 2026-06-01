@@ -18,8 +18,8 @@ interface Deployments {
   @doc("Gets a deployed model.")
   get is DeploymentOperations.ResourceRead<Deployment>;
 
-  @summary("List all deployments")
-  @doc("Lists all deployed models in the project")
+  /** Returns the deployed models available in the current project, optionally filtered by publisher, model name, or deployment type. */
+  @summary("List deployments")
   list is DeploymentOperations.ResourceList<
     Deployment,
     ListQueryParametersTrait<{

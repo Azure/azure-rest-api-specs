@@ -11,12 +11,15 @@ in the AI Foundry data-plane (Foundry) area.
 
 ## FDOC-001 — Operation Documentation Comment
 
-**Requirement:** Every operation in an `interface` block must have either a TSDoc block
-comment (`/** ... */`) immediately preceding it, or a `@doc("...")` decorator.
+**Requirement:** Every operation in an `interface` block must have a TSDoc block
+comment (`/** ... */`) immediately preceding its decorators. Prefer TSDoc comments over
+`@doc("...")` decorators — if an operation currently uses `@doc()`, convert it to a
+TSDoc comment.
 
 **Why:** Documentation comments flow into the generated OpenAPI `description` field and
 are consumed by SDK generators, API reference docs, and developer portals. Missing
-descriptions produce empty documentation in all downstream artifacts.
+descriptions produce empty documentation in all downstream artifacts. TSDoc comments
+are the idiomatic TypeSpec documentation style and are easier to read inline.
 
 ### ✅ Good
 
@@ -44,8 +47,9 @@ createAgent is FoundryDataPlaneOperation<...>;
 
 ### Remediation
 
-Add a `/** ... */` comment block directly above the first decorator of the operation,
-or add a `@doc("...")` decorator. Use **third-person indicative** voice (see FDOC-003).
+Add a `/** ... */` comment block directly above the first decorator of the operation.
+Use **third-person indicative** voice (see FDOC-003). If an existing `@doc("...")`
+decorator is present, convert it to a `/** ... */` TSDoc comment instead.
 
 ---
 
@@ -91,30 +95,49 @@ Add `@summary("Concise imperative phrase")` above the operation. The summary mus
 
 ---
 
-## FDOC-003 — Documentation Voice: Third-Person Indicative
+## FDOC-003 — Documentation Voice and Content
 
-**Requirement:** The TSDoc comment or `@doc()` value must use **third-person indicative**
-voice. The description should read as a statement of what the operation does, not as a
-command to the caller.
+**Requirement:** The TSDoc comment must use **third-person indicative** voice and must
+provide meaningful additional detail relative to the `@summary`. The description should
+not be near-identical to the summary — it should expand on it with specifics such as
+what the operation returns, what identifiers it uses, side effects, or other relevant
+context. Slightly vary word choice so the description doesn't read as a near-copy of
+the summary (e.g. if the summary says "Get", the description might say "Retrieves";
+if the summary says "Delete", the description might say "Removes" or "Permanently deletes").
 
 **Voice pattern:** "Creates …", "Retrieves …", "Deletes …", "Lists …", "Updates …"
 
 ### ✅ Good
 
 ```typespec
-/** Creates an agent with the specified configuration. */
+// Summary: "Get a response" — description adds detail and varies wording
+@summary("Get a response")
+/** Retrieves a model response by its unique identifier. */
 
-@doc("Retrieves the agent by its unique name.")
+// Summary: "List connections" — description adds scope detail
+@summary("List connections")
+/** Returns the available connections configured in the current project. */
 
-/** Lists all connections in the project. */
+// Summary: "Create an agent" — description explains what happens
+@summary("Create an agent")
+/** Creates a new agent with the specified configuration and returns the created resource. */
+```
+
+### ❌ Bad — near-identical to summary
+
+```typespec
+// Summary and description say essentially the same thing
+@summary("Create an agent")
+/** Creates an agent. */
+
+@summary("Delete a session")
+/** Deletes a session. */
 ```
 
 ### ❌ Bad — imperative voice in doc comment
 
 ```typespec
 /** Create an agent with the specified configuration. */
-
-@doc("Retrieve the agent by its unique name.")
 
 /** List all connections in the project. */
 ```
@@ -146,10 +169,25 @@ Rewrite the first word to third-person indicative form:
 
 ---
 
-## FDOC-004 — @summary Voice: Imperative
+## FDOC-004 — @summary Voice and Conciseness
 
-**Requirement:** The `@summary()` value must be a concise, single-line phrase in
-**imperative (vocative) voice**. It reads as a command or action label.
+**Requirement:** The `@summary()` value must be a maximally concise, single-line phrase
+in **imperative (vocative) voice**. It is a terse label, not a sentence.
+
+Summaries must follow all of these constraints:
+- **No trailing period.** Summaries are phrases, not sentences: `"Create an agent"`,
+  not `"Create an agent."`.
+- **Omit filler words** like "all" in "List all X" — just "List X" is sufficient.
+- **Omit indirect phrasing** like "Get info about X" or "Retrieve details of X" —
+  just "Get an X" is sufficient. The verb already implies retrieval of the resource.
+- **Omit qualifiers** like "by ID" or "by name" unless needed to disambiguate from
+  another operation on the same resource (e.g. two different get operations).
+- **Always include articles** for grammatical completeness — "Create a response",
+  not "Create response"; "Get an agent", not "Get agent".
+- **Never truncate** — the text must be a complete, self-contained phrase.
+- **Prefer the shortest correct phrasing.** The summary should name the verb and
+  the resource, plus just enough context to distinguish it from sibling operations.
+  Move any additional detail into the TSDoc description.
 
 **Voice pattern:** "Create an agent", "List connections", "Delete a dataset"
 
@@ -157,8 +195,42 @@ Rewrite the first word to third-person indicative form:
 
 ```typespec
 @summary("Create an agent")
-@summary("List all connections in the project")
+@summary("List connections")
 @summary("Delete a dataset version")
+@summary("Get a response")
+```
+
+### ❌ Bad — unnecessary filler
+
+```typespec
+@summary("List all connections in the project")  // "List connections" suffices
+@summary("Retrieve a session by ID")             // "Get a session" suffices unless disambiguating
+```
+
+### ❌ Bad — trailing period
+
+```typespec
+@summary("Create a data generation job.")   // no period — use "Create a data generation job"
+@summary("Cancel a fine-tuning job.")       // no period — use "Cancel a fine-tuning job"
+```
+
+Summaries are phrases, not sentences. Never end with a period.
+
+### ❌ Bad — indirect phrasing
+
+```typespec
+@summary("Get info about a fine-tuning job")          // just "Get a fine-tuning job"
+@summary("Get info about an evaluator generation job") // just "Get an evaluator generation job"
+```
+
+The verb "Get" already implies retrieving the resource. Do not pad with
+"info about", "details of", "the status of", or similar indirection.
+
+### ❌ Bad — missing article
+
+```typespec
+@summary("Create response")     // should be "Create a response"
+@summary("Delete agent")        // should be "Delete an agent"
 ```
 
 ### ❌ Bad — third-person voice in summary
@@ -198,8 +270,13 @@ Do not repeat the verb or splice in the doc-comment text. Use a clean imperative
 ### Remediation
 
 - Use imperative voice: "Create", "Get", "List", "Delete", "Update" (not "Creates", "Gets", etc.)
+- **No trailing period** — summaries are phrases, not sentences
 - Keep under ~60 characters
-- Move detailed information into the `@doc()` or TSDoc comment
+- Remove filler words ("all", "by ID", "info about") unless needed for disambiguation
+- Always include articles ("a", "an", "the") for grammatical completeness
+- Prefer the shortest correct phrasing — verb + resource + minimal disambiguation
+- Move detailed information into the TSDoc `/** ... */` comment
+- If the intended text exceeds ~60 characters, shorten to a complete phrase
 
 ---
 

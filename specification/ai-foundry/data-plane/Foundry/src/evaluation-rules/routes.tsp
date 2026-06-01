@@ -26,8 +26,8 @@ alias EvaluationRulesFilterQueryParams = {
 @tag("Evaluation Rules")
 interface EvaluationRules {
   // GET /evaluationrules/{id}
+  /** Retrieves the specified evaluation rule and its configuration. */
   @summary("Get an evaluation rule")
-  @doc("Gets an evaluation rule.")
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {},
@@ -35,8 +35,8 @@ interface EvaluationRules {
   >;
 
   // DELETE /evaluationrules/{id}
+  /** Removes the specified evaluation rule from the project. */
   @summary("Delete an evaluation rule")
-  @doc("Deletes an evaluation rule.")
   @Http.delete
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
@@ -45,8 +45,8 @@ interface EvaluationRules {
   >;
 
   // PUT /evaluationrules/{id}
+  /** Creates a new evaluation rule, or replaces the existing rule when the identifier matches. */
   @summary("Create or update an evaluation rule")
-  @doc("Creates or updates an evaluation rule.")
   @Http.put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
@@ -61,8 +61,8 @@ interface EvaluationRules {
   >;
 
   // GET /evaluationrules
+  /** Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state. */
   @summary("List evaluation rules")
-  @doc("Lists all evaluation rules.")
   @Rest.listsResource(EvaluationRule)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationRule,

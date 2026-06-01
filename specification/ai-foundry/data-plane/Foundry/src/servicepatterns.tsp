@@ -210,6 +210,7 @@ interface VersionedOperations<
   TListVersionsParameters extends Reflection.Model = {}
 > {
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "We are using the resource action as a building block."
+  @summary("List versions")
   @doc("List all versions of the given {name}", TEntityType)
   @Rest.action("versions")
   @Rest.actionSeparator("/")
@@ -222,6 +223,7 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("List latest versions")
   @doc("List the latest version of each {name}", TEntityType)
   @Rest.listsResource(TEntityType)
   listLatest is Azure.Core.Foundations.ResourceList<
@@ -231,6 +233,7 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Get a version")
   @doc(
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     TEntityType
@@ -247,6 +250,7 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Delete a version")
   @doc(
     "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
     TEntityType
@@ -264,6 +268,7 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Create or update a version")
   @doc(
     "Create a new or update an existing {name} with the given version id",
     TEntityType

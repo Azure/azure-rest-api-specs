@@ -9,9 +9,9 @@ namespace Azure.AI.Projects;
 
 @tag("Routines")
 interface Routines {
+  /** Creates a new routine or replaces an existing routine with the supplied definition. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Create or update a routine")
-  @doc("Creates or update a routine.")
   @operationId("createOrUpdateRoutine")
   @put
   @route("/routines/{routine_name}")
@@ -22,9 +22,9 @@ interface Routines {
     Routine
   >;
 
+  /** Retrieves the specified routine and its current configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @summary("Retrieve a routine")
-  @doc("Retrieves a routine.")
+  @summary("Get a routine")
   @operationId("getRoutine")
   @get
   @route("/routines/{routine_name}")
@@ -35,9 +35,9 @@ interface Routines {
     Routine
   >;
 
+  /** Enables the specified routine so it can be dispatched. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Enable a routine")
-  @doc("Enables a routine.")
   @operationId("enableRoutine")
   @post
   @route("/routines/{routine_name}:enable")
@@ -48,9 +48,9 @@ interface Routines {
     Routine
   >;
 
+  /** Disables the specified routine so it no longer runs. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Disable a routine")
-  @doc("Disables a routine.")
   @operationId("disableRoutine")
   @post
   @route("/routines/{routine_name}:disable")
@@ -61,9 +61,9 @@ interface Routines {
     Routine
   >;
 
+  /** Returns the routines available in the current project. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("List routines")
-  @doc("Lists routines.")
   @operationId("listRoutines")
   @get
   @list
@@ -75,9 +75,9 @@ interface Routines {
     AgentsPagedResult<Routine>
   >;
 
+  /** Deletes the specified routine. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Delete a routine")
-  @doc("Deletes a routine.")
   @operationId("deleteRoutine")
   @delete
   @route("/routines/{routine_name}")
@@ -88,9 +88,9 @@ interface Routines {
     NoContentResponse
   >;
 
+  /** Returns prior runs recorded for the specified routine. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("List prior runs for a routine")
-  @doc("Lists prior runs for a routine.")
   @operationId("listRoutineRuns")
   @get
   @list
@@ -102,9 +102,9 @@ interface Routines {
     AgentsPagedResult<RoutineRun>
   >;
 
+  /** Queues an asynchronous dispatch for the specified routine. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Queue an asynchronous routine dispatch")
-  @doc("Queues an asynchronous routine dispatch.")
   @operationId("dispatchRoutineAsync")
   @post
   @route("/routines/{routine_name}:dispatch_async")

@@ -18,7 +18,7 @@ alias AgentSessionIdResponseHeader = {
 @tag("Responses")
 interface Responses {
   /**
-   * Creates a model response.
+   * Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
    */
   @summary("Create a model response")
   @operationId("createResponse")
@@ -32,9 +32,9 @@ interface Responses {
   >;
 
   /**
-   * Creates a model response (streaming response).
+   * Creates a streaming model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
    */
-  @summary("Create a model response (streaming response)")
+  @summary("Create a streaming model response")
   @operationId("createResponseStream")
   @post
   @sharedRoute
@@ -52,7 +52,7 @@ interface Responses {
    * @param stream If set to true, model response data will be streamed to the client as it is generated using server-sent events.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
-  @summary("Retrieve a model response with the given ID")
+  @summary("Retrieve a model response")
   @operationId("getResponse")
   @get
   @route("{response_id}")
@@ -76,13 +76,13 @@ interface Responses {
   >;
 
   /**
-   * Retrieves a model response with the given ID (streaming response).
+   * Retrieves a streaming model response with the given ID.
    *
    * @param response_id The ID of the response to retrieve.
    * @param include Specifies additional output data to include in the model response.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
-  @summary("Retrieve a model response with the given ID (streaming response)")
+  @summary("Retrieve a streaming model response")
   @operationId("getResponseStream")
   @get
   @route("{response_id}")
@@ -105,7 +105,7 @@ interface Responses {
   >;
 
   /**
-   * Deletes a model response.
+   * Removes the specified response and its stored content.
    */
   @summary("Delete a model response")
   @delete
@@ -128,7 +128,7 @@ interface Responses {
   >;
 
   /**
-   * Cancels a model response.
+   * Cancels a model response with the given ID. Only responses created with the background parameter set to true can be cancelled.
    */
   @summary("Cancel a model response")
   @post
@@ -151,7 +151,7 @@ interface Responses {
   >;
 
   /**
-   * Returns a list of input items for a given response.
+   * Retrieves the input items associated with the specified response.
    */
   @summary("List input items for a response")
   @operationId("listInputItems")
@@ -173,9 +173,9 @@ interface Responses {
   >;
 
   /**
-   * Returns the list of all responses.
+   * Returns a collection of all stored responses matching specified filter criteria.
    */
-  @summary("List all responses")
+  @summary("List responses")
   @get
   @operationId("listResponses")
   @list
@@ -191,9 +191,9 @@ interface Responses {
   >;
 
   /**
-   * Produces a compaction of a responses conversation.
+   * Compacts a conversation into a response object suitable for long-running and zero-data-retention scenarios.
    */
-  @summary("Compact a responses conversation")
+  @summary("Compact a conversation")
   @post
   @operationId("compactResponseConversation")
   @route("compact")

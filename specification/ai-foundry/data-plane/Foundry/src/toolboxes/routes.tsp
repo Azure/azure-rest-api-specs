@@ -15,9 +15,9 @@ alias ToolboxesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesO
 
 @tag("Toolboxes")
 interface Toolboxes {
+  /** Creates a new toolbox version, provisioning the toolbox itself if it does not already exist. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Create a new version of a toolbox")
-  @doc("Creates a new version of a toolbox. If the toolbox does not exist, it will be created.")
   @operationId("createToolboxVersion")
   @post
   @route("/toolboxes/{name}/versions")
@@ -27,9 +27,9 @@ interface Toolboxes {
     ToolboxVersionObject
   >;
 
+  /** Retrieves the specified toolbox and its current configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Retrieve a toolbox")
-  @doc("Retrieves a toolbox.")
   @operationId("getToolbox")
   @get
   @route("/toolboxes/{name}")
@@ -39,9 +39,9 @@ interface Toolboxes {
     ToolboxObject
   >;
 
+  /** Returns the toolboxes available in the current project. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @summary("List all toolboxes")
-  @doc("Lists all toolboxes.")
+  @summary("List toolboxes")
   @operationId("listToolboxes")
   @get
   @list
@@ -52,9 +52,9 @@ interface Toolboxes {
     AgentsPagedResult<ToolboxObject>
   >;
 
+  /** Returns the available versions for the specified toolbox. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @summary("List all versions of a toolbox")
-  @doc("Lists all versions of a toolbox.")
+  @summary("List toolbox versions")
   @operationId("listToolboxVersions")
   @get
   @list
@@ -65,9 +65,9 @@ interface Toolboxes {
     AgentsPagedResult<ToolboxVersionObject>
   >;
 
+  /** Retrieves the specified version of a toolbox by name and version identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Retrieve a specific version of a toolbox")
-  @doc("Retrieves a specific version of a toolbox.")
   @operationId("getToolboxVersion")
   @get
   @route("/toolboxes/{name}/versions/{version}")
@@ -77,9 +77,9 @@ interface Toolboxes {
     ToolboxVersionObject
   >;
 
+  /** Updates the toolbox's default version pointer to the specified version. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Update a toolbox to point to a specific version")
-  @doc("Updates a toolbox to point to a specific version.")
   @operationId("updateToolbox")
   @patch
   @route("/toolboxes/{name}")
@@ -89,9 +89,9 @@ interface Toolboxes {
     ToolboxObject
   >;
 
+  /** Removes the specified toolbox along with all of its versions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Delete a toolbox and all its versions")
-  @doc("Deletes a toolbox and all its versions.")
   @operationId("deleteToolbox")
   @delete
   @route("/toolboxes/{name}")
@@ -101,9 +101,9 @@ interface Toolboxes {
     void
   >;
 
+  /** Removes the specified version of a toolbox. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @summary("Delete a specific version of a toolbox")
-  @doc("Deletes a specific version of a toolbox.")
   @operationId("deleteToolboxVersion")
   @delete
   @route("/toolboxes/{name}/versions/{version}")

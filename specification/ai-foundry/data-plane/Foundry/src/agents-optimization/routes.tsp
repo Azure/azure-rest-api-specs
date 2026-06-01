@@ -28,8 +28,11 @@ const AgentOptimizationRequiredPreviews = #{
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
-  @summary("Create an agent optimization job.")
-  @doc("Creates an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.")
+  /**
+   * Creates an agent optimization job and returns the queued job.
+   * Honors `Operation-Id` for idempotent retry.
+   */
+  @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @post
@@ -45,8 +48,11 @@ interface AgentOptimizationJobs {
     JobCreatedResponse<OptimizationJob>
   >;
 
-  @summary("Get info about an agent optimization job.")
-  @doc("Gets an optimization job by id. Returns 202 while in progress, 200 when terminal.")
+  /**
+   * Retrieves the specified agent optimization job.
+   * Returns 202 while the job is in progress and 200 after it reaches a terminal state.
+   */
+  @summary("Get an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
@@ -62,8 +68,10 @@ interface AgentOptimizationJobs {
     }
   >;
 
-  @summary("List agent optimization jobs.")
-  @doc("Lists optimization jobs. Supports cursor pagination and optional status / agentName filters.")
+  /**
+   * Returns agent optimization jobs with cursor pagination and optional lifecycle or agent filters.
+   */
+  @summary("List agent optimization jobs")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
@@ -80,8 +88,11 @@ interface AgentOptimizationJobs {
     }
   >;
 
-  @summary("Cancel an agent optimization job.")
-  @doc("Request cancellation. Idempotent on terminal states.")
+  /**
+   * Requests cancellation of the specified agent optimization job.
+   * The operation remains idempotent after the job reaches a terminal state.
+   */
+  @summary("Cancel an agent optimization job")
   @route("agent_optimization_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
@@ -89,8 +100,11 @@ interface AgentOptimizationJobs {
     OptimizationJob
   >;
 
-  @summary("Delete an agent optimization job.")
-  @doc("Deletes the job and its candidate artifacts. Cancels first if non-terminal.")
+  /**
+   * Deletes the specified agent optimization job and its candidate artifacts.
+   * Cancels the job first when it is still in a non-terminal state.
+   */
+  @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @delete
@@ -112,8 +126,10 @@ interface AgentOptimizationJobs {
   // Candidate sub-resource operations
   // ---------------------------------------------------------------------------
 
-  @summary("List candidates for an optimization job.")
-  @doc("Lists candidates produced by a job.")
+  /**
+   * Returns the candidates produced by the specified optimization job.
+   */
+  @summary("List optimization job candidates")
   @route("agent_optimization_jobs/{jobId}/candidates")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
@@ -130,8 +146,10 @@ interface AgentOptimizationJobs {
     AgentsPagedResult<OptimizationCandidate>
   >;
 
-  @summary("Get a candidate by id.")
-  @doc("Gets a single candidate's metadata, manifest, and promotion info.")
+  /**
+   * Retrieves metadata, manifest information, and promotion details for the specified candidate.
+   */
+  @summary("Get an optimization candidate")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
@@ -149,8 +167,11 @@ interface AgentOptimizationJobs {
     CandidateMetadata
   >;
 
-  @summary("Get candidate deploy config.")
-  @doc("Gets the candidate's deploy config JSON. Used to compose `agents.create_version(...)` from a candidate.")
+  /**
+   * Retrieves the deploy configuration JSON for the specified candidate.
+   * Clients can use it to compose `agents.create_version(...)` requests.
+   */
+  @summary("Get an optimization candidate config")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}/config")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
@@ -168,8 +189,10 @@ interface AgentOptimizationJobs {
     CandidateDeployConfig
   >;
 
-  @summary("Get candidate evaluation results.")
-  @doc("Gets full per-task evaluation results for a candidate.")
+  /**
+   * Retrieves full per-task evaluation results for the specified candidate.
+   */
+  @summary("Get optimization candidate results")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}/results")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
@@ -187,8 +210,10 @@ interface AgentOptimizationJobs {
     CandidateResults
   >;
 
-  @summary("Get a candidate file.")
-  @doc("Streams a specific file from the candidate's blob directory.")
+  /**
+   * Streams the specified file from the candidate's blob directory.
+   */
+  @summary("Get an optimization candidate file")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}/files")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
@@ -210,8 +235,10 @@ interface AgentOptimizationJobs {
     bytes
   >;
 
-  @summary("Promote a candidate.")
-  @doc("Promotes a candidate, recording the deployment timestamp and target agent version.")
+  /**
+   * Promotes the specified candidate and records the deployment timestamp and target agent version.
+   */
+  @summary("Promote an optimization candidate")
   @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @post
