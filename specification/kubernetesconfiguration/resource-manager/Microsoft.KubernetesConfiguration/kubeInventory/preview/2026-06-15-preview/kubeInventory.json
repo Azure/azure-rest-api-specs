@@ -931,7 +931,10 @@
           "description": "References to the objects that own this object (e.g., the ReplicaSet that owns a Pod).",
           "items": {
             "$ref": "#/definitions/OwnerReference"
-          }
+          },
+          "x-ms-identifiers": [
+            "uid"
+          ]
         },
         "finalizers": {
           "type": "array",
@@ -1128,7 +1131,8 @@
           "description": "Per-component compatibility results with the target Kubernetes version.\nPopulated for UpgradeAssessment resources.",
           "items": {
             "$ref": "#/definitions/ComponentCompatibility"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "deprecatedApis": {
           "type": "array",
@@ -1143,7 +1147,8 @@
           "description": "Cluster readiness check results.\nPopulated for UpgradeAssessment resources.",
           "items": {
             "$ref": "#/definitions/ReadinessCheck"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "additionalFields": {
           "type": "array",

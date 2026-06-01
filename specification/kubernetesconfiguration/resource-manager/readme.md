@@ -57,6 +57,9 @@ suppressions:
   - code: PatchResponseCodes
     from: fluxconfiguration.json
     reason: Existing service contract needs to be backward compatible.
+  - code: EnumInsteadOfBoolean
+    from: kubeInventory.json
+    reason: Boolean properties mirror the Kubernetes API contract directly and must remain boolean for compatibility.
 ```
 
 ### Tag: package-preview-2026-06-only

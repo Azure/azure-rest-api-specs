@@ -249,6 +249,7 @@ model KubernetesObjectMeta {
   annotations?: KubernetesAnnotation[];
 
   /** References to the objects that own this object (e.g., the ReplicaSet that owns a Pod). */
+  @identifiers(#["uid"])
   ownerReferences?: OwnerReference[];
 
   /** Named lifecycle hooks that must be resolved before the object is deleted. */
@@ -784,6 +785,7 @@ model KubernetesResourceStatus {
    * Per-component compatibility results with the target Kubernetes version.
    * Populated for UpgradeAssessment resources.
    */
+  @identifiers(#[])
   componentCompatibility?: ComponentCompatibility[];
 
   /**
@@ -797,6 +799,7 @@ model KubernetesResourceStatus {
    * Cluster readiness check results.
    * Populated for UpgradeAssessment resources.
    */
+  @identifiers(#[])
   readinessChecks?: ReadinessCheck[];
 
   // ── Generic overflow ────────────────────────────────────────────────────────
