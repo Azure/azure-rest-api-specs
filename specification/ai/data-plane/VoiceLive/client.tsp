@@ -455,6 +455,11 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
 @@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
+@@clientName(
+  VoiceLive.PersonalVoiceModels.`MAI-Voice-1`,
+  "MaiVoice1",
+  "csharp"
+);
 @@clientName(VoiceLive.RequestImageContentPart.url, "Uri", "csharp");
 @@clientName(
   VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
