@@ -3,7 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.ManagedNetworkFabric;
 
@@ -619,11 +618,6 @@ using Microsoft.ManagedNetworkFabric;
 @@alternateType(
   NetworkTapRuleProperties.networkTapId,
   Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  Foundations.OperationStatusResult,
-  NetworkFabricOperationStatusResult,
   "csharp"
 );
 @@clientName(
