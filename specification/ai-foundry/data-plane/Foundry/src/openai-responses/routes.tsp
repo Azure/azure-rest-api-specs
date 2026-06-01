@@ -20,16 +20,14 @@ interface Responses {
   /**
    * Creates a model response.
    */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
   @operationId("createResponse")
   @post
-  @sharedRoute
   createResponse is OpenAIOperation<
     OpenAI.CreateResponse & UserIsolationKeyHeader,
-
-      | (AgentSessionIdResponseHeader & {
-          @body body: OpenAI.Response;
-        })
-      | SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+    (AgentSessionIdResponseHeader &
+      OpenAI.Response) | (AgentSessionIdResponseHeader &
+      SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**
@@ -40,10 +38,10 @@ interface Responses {
    * @param stream If set to true, model response data will be streamed to the client as it is generated using server-sent events.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
   @operationId("getResponse")
   @get
   @route("{response_id}")
-  @sharedRoute
   getResponse is OpenAIOperation<
     {
       @path
@@ -57,37 +55,9 @@ interface Responses {
       @query starting_after?: int32;
       ...UserIsolationKeyHeader;
     },
-    AgentSessionIdResponseHeader & {
-      @body body: OpenAI.Response;
-    }
-  >;
-
-  /**
-   * Retrieves a model response with the given ID (streaming response).
-   *
-   * @param response_id The ID of the response to retrieve.
-   * @param include Specifies additional output data to include in the model response.
-   * @param starting_after The sequence number of the event after which to start streaming.
-   */
-  @operationId("getResponseStream")
-  @get
-  @route("{response_id}")
-  @sharedRoute
-  getResponseStream is OpenAIOperation<
-    {
-      @path
-      @example("resp_677efb5139a88190b512bc3fef8e535d")
-      response_id: string;
-
-      @query(#{ name: "include[]", explode: true })
-      includables?: OpenAI.IncludeEnum[] = #[];
-
-      @header accept: "text/event-stream";
-      @query starting_after?: int32;
-      ...UserIsolationKeyHeader;
-    },
-    AgentSessionIdResponseHeader &
-      SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+    (AgentSessionIdResponseHeader &
+      OpenAI.Response) | (AgentSessionIdResponseHeader &
+      SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**

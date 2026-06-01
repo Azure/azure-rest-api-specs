@@ -13645,7 +13645,8 @@
     },
     "/openai/v1/responses": {
       "post": {
-        "operationId": "createResponse_createResponseStream",
+        "operationId": "createResponse",
+        "description": "Creates a model response.",
         "parameters": [
           {
             "name": "x-ms-user-isolation-key",
@@ -13657,7 +13658,6 @@
             }
           }
         ],
-        "description": "Creates a model response. Creates a model response (streaming response).",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -13673,7 +13673,272 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.Response"
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Metadata"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "top_logprobs": {
+                      "type": "integer",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.integer"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "temperature": {
+                      "type": "number",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.numeric"
+                        }
+                      ],
+                      "nullable": true,
+                      "default": 1
+                    },
+                    "top_p": {
+                      "type": "number",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.numeric"
+                        }
+                      ],
+                      "nullable": true,
+                      "default": 1
+                    },
+                    "user": {
+                      "type": "string",
+                      "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).",
+                      "deprecated": true
+                    },
+                    "safety_identifier": {
+                      "type": "string",
+                      "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+                    },
+                    "prompt_cache_key": {
+                      "type": "string",
+                      "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
+                    },
+                    "service_tier": {
+                      "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                    },
+                    "prompt_cache_retention": {
+                      "type": "string",
+                      "enum": [
+                        "in-memory",
+                        "24h"
+                      ],
+                      "nullable": true
+                    },
+                    "previous_response_id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "The model deployment to use for the creation of this response."
+                    },
+                    "reasoning": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Reasoning"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "background": {
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "max_output_tokens": {
+                      "type": "integer",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.integer"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "max_tool_calls": {
+                      "type": "integer",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.integer"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "text": {
+                      "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
+                    },
+                    "tools": {
+                      "$ref": "#/components/schemas/OpenAI.ToolsArray"
+                    },
+                    "tool_choice": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                        },
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                        }
+                      ]
+                    },
+                    "prompt": {
+                      "$ref": "#/components/schemas/OpenAI.Prompt"
+                    },
+                    "truncation": {
+                      "type": "string",
+                      "enum": [
+                        "auto",
+                        "disabled"
+                      ],
+                      "nullable": true,
+                      "default": "disabled"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this Response."
+                    },
+                    "object": {
+                      "type": "string",
+                      "enum": [
+                        "response"
+                      ],
+                      "description": "The object type of this resource - always set to `response`.",
+                      "x-stainless-const": true
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "completed",
+                        "failed",
+                        "in_progress",
+                        "cancelled",
+                        "queued",
+                        "incomplete"
+                      ],
+                      "description": "The status of the response generation. One of `completed`, `failed`,\n  `in_progress`, `cancelled`, `queued`, or `incomplete`."
+                    },
+                    "created_at": {
+                      "type": "integer",
+                      "format": "unixtime",
+                      "description": "Unix timestamp (in seconds) of when this Response was created."
+                    },
+                    "completed_at": {
+                      "type": "integer",
+                      "format": "unixtime",
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ResponseError"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "incomplete_details": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ResponseIncompleteDetails"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "output": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
+                      },
+                      "description": "An array of content items generated by the model.\n  - The length and order of items in the `output` array is dependent\n  on the model's response.\n  - Rather than accessing the first item in the `output` array and\n  assuming it's an `assistant` message with the content generated by\n  the model, you might consider using the `output_text` property where\n  supported in SDKs."
+                    },
+                    "instructions": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OpenAI.InputItem"
+                          }
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "output_text": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "usage": {
+                      "$ref": "#/components/schemas/OpenAI.ResponseUsage"
+                    },
+                    "parallel_tool_calls": {
+                      "type": "boolean",
+                      "description": "Whether to allow the model to run tool calls in parallel.",
+                      "default": true
+                    },
+                    "conversation": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ConversationReference"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "agent": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/AgentId"
+                        }
+                      ],
+                      "description": "(Deprecated) Use agent_reference instead.\nThe agent used for this response"
+                    },
+                    "agent_session_id": {
+                      "type": "string",
+                      "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
+                    },
+                    "agent_reference": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/AgentReference"
+                        }
+                      ],
+                      "nullable": true,
+                      "description": "The agent used for this response"
+                    },
+                    "content_filters": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ContentFilterResult"
+                      },
+                      "description": "The content filter evaluation results."
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "object",
+                    "created_at",
+                    "error",
+                    "incomplete_details",
+                    "output",
+                    "instructions",
+                    "parallel_tool_calls",
+                    "agent_reference"
+                  ]
                 }
               },
               "text/event-stream": {
@@ -13702,432 +13967,216 @@
           "content": {
             "application/json": {
               "schema": {
-                "anyOf": [
-                  {
+                "type": "object",
+                "properties": {
+                  "metadata": {
                     "type": "object",
-                    "properties": {
-                      "metadata": {
-                        "type": "object",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.Metadata"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "top_logprobs": {
-                        "type": "integer",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.integer"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "temperature": {
-                        "type": "number",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.numeric"
-                          }
-                        ],
-                        "nullable": true,
-                        "default": 1
-                      },
-                      "top_p": {
-                        "type": "number",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.numeric"
-                          }
-                        ],
-                        "nullable": true,
-                        "default": 1
-                      },
-                      "user": {
-                        "type": "string",
-                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).",
-                        "deprecated": true
-                      },
-                      "safety_identifier": {
-                        "type": "string",
-                        "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
-                      },
-                      "prompt_cache_key": {
-                        "type": "string",
-                        "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
-                      },
-                      "service_tier": {
-                        "$ref": "#/components/schemas/OpenAI.ServiceTier"
-                      },
-                      "prompt_cache_retention": {
-                        "type": "string",
-                        "enum": [
-                          "in-memory",
-                          "24h"
-                        ],
-                        "nullable": true
-                      },
-                      "previous_response_id": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "model": {
-                        "type": "string",
-                        "description": "The model deployment to use for the creation of this response."
-                      },
-                      "reasoning": {
-                        "type": "object",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.Reasoning"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "background": {
-                        "type": "boolean",
-                        "nullable": true
-                      },
-                      "max_output_tokens": {
-                        "type": "integer",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.integer"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "max_tool_calls": {
-                        "type": "integer",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.integer"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "text": {
-                        "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
-                      },
-                      "tools": {
-                        "$ref": "#/components/schemas/OpenAI.ToolsArray"
-                      },
-                      "tool_choice": {
-                        "oneOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
-                          },
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
-                          }
-                        ]
-                      },
-                      "prompt": {
-                        "$ref": "#/components/schemas/OpenAI.Prompt"
-                      },
-                      "truncation": {
-                        "type": "string",
-                        "enum": [
-                          "auto",
-                          "disabled"
-                        ],
-                        "nullable": true,
-                        "default": "disabled"
-                      },
-                      "input": {
-                        "$ref": "#/components/schemas/OpenAI.InputParam"
-                      },
-                      "include": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/OpenAI.IncludeEnum"
-                        },
-                        "nullable": true
-                      },
-                      "parallel_tool_calls": {
-                        "type": "boolean",
-                        "nullable": true,
-                        "default": true
-                      },
-                      "store": {
-                        "type": "boolean",
-                        "nullable": true,
-                        "default": true
-                      },
-                      "instructions": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "stream": {
-                        "type": "boolean",
-                        "nullable": true
-                      },
-                      "stream_options": {
-                        "type": "object",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ResponseStreamOptions"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "conversation": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ConversationParam"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "context_management": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/OpenAI.ContextManagementParam"
-                        },
-                        "nullable": true,
-                        "description": "Context management configuration for this request."
-                      },
-                      "agent": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/AgentReference"
-                          }
-                        ],
-                        "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
-                      },
-                      "agent_session_id": {
-                        "type": "string",
-                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
-                      },
-                      "agent_reference": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/AgentReference"
-                          }
-                        ],
-                        "description": "The agent to use for generating the response."
-                      },
-                      "structured_inputs": {
-                        "type": "object",
-                        "additionalProperties": {},
-                        "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.Metadata"
                       }
-                    }
+                    ],
+                    "nullable": true
                   },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "metadata": {
-                        "type": "object",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.Metadata"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "top_logprobs": {
-                        "type": "integer",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.integer"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "temperature": {
-                        "type": "number",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.numeric"
-                          }
-                        ],
-                        "nullable": true,
-                        "default": 1
-                      },
-                      "top_p": {
-                        "type": "number",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.numeric"
-                          }
-                        ],
-                        "nullable": true,
-                        "default": 1
-                      },
-                      "user": {
-                        "type": "string",
-                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).",
-                        "deprecated": true
-                      },
-                      "safety_identifier": {
-                        "type": "string",
-                        "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
-                      },
-                      "prompt_cache_key": {
-                        "type": "string",
-                        "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
-                      },
-                      "service_tier": {
-                        "$ref": "#/components/schemas/OpenAI.ServiceTier"
-                      },
-                      "prompt_cache_retention": {
-                        "type": "string",
-                        "enum": [
-                          "in-memory",
-                          "24h"
-                        ],
-                        "nullable": true
-                      },
-                      "previous_response_id": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "model": {
-                        "type": "string",
-                        "description": "The model deployment to use for the creation of this response."
-                      },
-                      "reasoning": {
-                        "type": "object",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.Reasoning"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "background": {
-                        "type": "boolean",
-                        "nullable": true
-                      },
-                      "max_output_tokens": {
-                        "type": "integer",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.integer"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "max_tool_calls": {
-                        "type": "integer",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.integer"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "text": {
-                        "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
-                      },
-                      "tools": {
-                        "$ref": "#/components/schemas/OpenAI.ToolsArray"
-                      },
-                      "tool_choice": {
-                        "oneOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
-                          },
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
-                          }
-                        ]
-                      },
-                      "prompt": {
-                        "$ref": "#/components/schemas/OpenAI.Prompt"
-                      },
-                      "truncation": {
-                        "type": "string",
-                        "enum": [
-                          "auto",
-                          "disabled"
-                        ],
-                        "nullable": true,
-                        "default": "disabled"
-                      },
-                      "input": {
-                        "$ref": "#/components/schemas/OpenAI.InputParam"
-                      },
-                      "include": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/OpenAI.IncludeEnum"
-                        },
-                        "nullable": true
-                      },
-                      "parallel_tool_calls": {
-                        "type": "boolean",
-                        "nullable": true,
-                        "default": true
-                      },
-                      "store": {
-                        "type": "boolean",
-                        "nullable": true,
-                        "default": true
-                      },
-                      "instructions": {
-                        "type": "string",
-                        "nullable": true
-                      },
-                      "stream": {
-                        "type": "boolean",
-                        "nullable": true
-                      },
-                      "stream_options": {
-                        "type": "object",
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ResponseStreamOptions"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "conversation": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ConversationParam"
-                          }
-                        ],
-                        "nullable": true
-                      },
-                      "context_management": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/OpenAI.ContextManagementParam"
-                        },
-                        "nullable": true,
-                        "description": "Context management configuration for this request."
-                      },
-                      "agent": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/AgentReference"
-                          }
-                        ],
-                        "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
-                      },
-                      "agent_session_id": {
-                        "type": "string",
-                        "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
-                      },
-                      "agent_reference": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/AgentReference"
-                          }
-                        ],
-                        "description": "The agent to use for generating the response."
-                      },
-                      "structured_inputs": {
-                        "type": "object",
-                        "additionalProperties": {},
-                        "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
+                  "top_logprobs": {
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.integer"
                       }
-                    }
+                    ],
+                    "nullable": true
+                  },
+                  "temperature": {
+                    "type": "number",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.numeric"
+                      }
+                    ],
+                    "nullable": true,
+                    "default": 1
+                  },
+                  "top_p": {
+                    "type": "number",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.numeric"
+                      }
+                    ],
+                    "nullable": true,
+                    "default": 1
+                  },
+                  "user": {
+                    "type": "string",
+                    "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).",
+                    "deprecated": true
+                  },
+                  "safety_identifier": {
+                    "type": "string",
+                    "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+                  },
+                  "prompt_cache_key": {
+                    "type": "string",
+                    "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
+                  },
+                  "service_tier": {
+                    "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                  },
+                  "prompt_cache_retention": {
+                    "type": "string",
+                    "enum": [
+                      "in-memory",
+                      "24h"
+                    ],
+                    "nullable": true
+                  },
+                  "previous_response_id": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "model": {
+                    "type": "string",
+                    "description": "The model deployment to use for the creation of this response."
+                  },
+                  "reasoning": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.Reasoning"
+                      }
+                    ],
+                    "nullable": true
+                  },
+                  "background": {
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "max_output_tokens": {
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.integer"
+                      }
+                    ],
+                    "nullable": true
+                  },
+                  "max_tool_calls": {
+                    "type": "integer",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.integer"
+                      }
+                    ],
+                    "nullable": true
+                  },
+                  "text": {
+                    "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
+                  },
+                  "tools": {
+                    "$ref": "#/components/schemas/OpenAI.ToolsArray"
+                  },
+                  "tool_choice": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                      },
+                      {
+                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                      }
+                    ]
+                  },
+                  "prompt": {
+                    "$ref": "#/components/schemas/OpenAI.Prompt"
+                  },
+                  "truncation": {
+                    "type": "string",
+                    "enum": [
+                      "auto",
+                      "disabled"
+                    ],
+                    "nullable": true,
+                    "default": "disabled"
+                  },
+                  "input": {
+                    "$ref": "#/components/schemas/OpenAI.InputParam"
+                  },
+                  "include": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.IncludeEnum"
+                    },
+                    "nullable": true
+                  },
+                  "parallel_tool_calls": {
+                    "type": "boolean",
+                    "nullable": true,
+                    "default": true
+                  },
+                  "store": {
+                    "type": "boolean",
+                    "nullable": true,
+                    "default": true
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "stream": {
+                    "type": "boolean",
+                    "nullable": true
+                  },
+                  "stream_options": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.ResponseStreamOptions"
+                      }
+                    ],
+                    "nullable": true
+                  },
+                  "conversation": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.ConversationParam"
+                      }
+                    ],
+                    "nullable": true
+                  },
+                  "context_management": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.ContextManagementParam"
+                    },
+                    "nullable": true,
+                    "description": "Context management configuration for this request."
+                  },
+                  "agent": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AgentReference"
+                      }
+                    ],
+                    "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
+                  },
+                  "agent_session_id": {
+                    "type": "string",
+                    "description": "Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.\nWhen provided, the request is routed to the same sandbox. When omitted, auto-derived from\nconversation_id/prev_response_id or a new UUID is generated."
+                  },
+                  "agent_reference": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/AgentReference"
+                      }
+                    ],
+                    "description": "The agent to use for generating the response."
+                  },
+                  "structured_inputs": {
+                    "type": "object",
+                    "additionalProperties": {},
+                    "description": "The structured inputs to the response that can participate in prompt template substitution or tool argument bindings."
                   }
-                ]
+                }
               }
             }
           }
@@ -14316,7 +14365,8 @@
     },
     "/openai/v1/responses/{response_id}": {
       "get": {
-        "operationId": "getResponse_getResponseStream",
+        "operationId": "getResponse",
+        "description": "Retrieves a model response with the given ID.",
         "parameters": [
           {
             "name": "response_id",
@@ -14366,20 +14416,8 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "accept",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "text/event-stream"
-              ]
-            }
           }
         ],
-        "description": "Retrieves a model response with the given ID. Retrieves a model response with the given ID (streaming response).",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -14395,7 +14433,272 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.Response"
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Metadata"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "top_logprobs": {
+                      "type": "integer",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.integer"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "temperature": {
+                      "type": "number",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.numeric"
+                        }
+                      ],
+                      "nullable": true,
+                      "default": 1
+                    },
+                    "top_p": {
+                      "type": "number",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.numeric"
+                        }
+                      ],
+                      "nullable": true,
+                      "default": 1
+                    },
+                    "user": {
+                      "type": "string",
+                      "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).",
+                      "deprecated": true
+                    },
+                    "safety_identifier": {
+                      "type": "string",
+                      "description": "A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.\n  The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers)."
+                    },
+                    "prompt_cache_key": {
+                      "type": "string",
+                      "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching)."
+                    },
+                    "service_tier": {
+                      "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                    },
+                    "prompt_cache_retention": {
+                      "type": "string",
+                      "enum": [
+                        "in-memory",
+                        "24h"
+                      ],
+                      "nullable": true
+                    },
+                    "previous_response_id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "The model deployment to use for the creation of this response."
+                    },
+                    "reasoning": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Reasoning"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "background": {
+                      "type": "boolean",
+                      "nullable": true
+                    },
+                    "max_output_tokens": {
+                      "type": "integer",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.integer"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "max_tool_calls": {
+                      "type": "integer",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.integer"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "text": {
+                      "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
+                    },
+                    "tools": {
+                      "$ref": "#/components/schemas/OpenAI.ToolsArray"
+                    },
+                    "tool_choice": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                        },
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                        }
+                      ]
+                    },
+                    "prompt": {
+                      "$ref": "#/components/schemas/OpenAI.Prompt"
+                    },
+                    "truncation": {
+                      "type": "string",
+                      "enum": [
+                        "auto",
+                        "disabled"
+                      ],
+                      "nullable": true,
+                      "default": "disabled"
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this Response."
+                    },
+                    "object": {
+                      "type": "string",
+                      "enum": [
+                        "response"
+                      ],
+                      "description": "The object type of this resource - always set to `response`.",
+                      "x-stainless-const": true
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "completed",
+                        "failed",
+                        "in_progress",
+                        "cancelled",
+                        "queued",
+                        "incomplete"
+                      ],
+                      "description": "The status of the response generation. One of `completed`, `failed`,\n  `in_progress`, `cancelled`, `queued`, or `incomplete`."
+                    },
+                    "created_at": {
+                      "type": "integer",
+                      "format": "unixtime",
+                      "description": "Unix timestamp (in seconds) of when this Response was created."
+                    },
+                    "completed_at": {
+                      "type": "integer",
+                      "format": "unixtime",
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ResponseError"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "incomplete_details": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ResponseIncompleteDetails"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "output": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
+                      },
+                      "description": "An array of content items generated by the model.\n  - The length and order of items in the `output` array is dependent\n  on the model's response.\n  - Rather than accessing the first item in the `output` array and\n  assuming it's an `assistant` message with the content generated by\n  the model, you might consider using the `output_text` property where\n  supported in SDKs."
+                    },
+                    "instructions": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OpenAI.InputItem"
+                          }
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "output_text": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "usage": {
+                      "$ref": "#/components/schemas/OpenAI.ResponseUsage"
+                    },
+                    "parallel_tool_calls": {
+                      "type": "boolean",
+                      "description": "Whether to allow the model to run tool calls in parallel.",
+                      "default": true
+                    },
+                    "conversation": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.ConversationReference"
+                        }
+                      ],
+                      "nullable": true
+                    },
+                    "agent": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/AgentId"
+                        }
+                      ],
+                      "description": "(Deprecated) Use agent_reference instead.\nThe agent used for this response"
+                    },
+                    "agent_session_id": {
+                      "type": "string",
+                      "description": "The session identifier for this response. Currently only relevant for hosted agents.\nAlways returned for hosted agents — either the caller-provided value, the auto-derived value,\nor an auto-generated UUID. Use for session-scoped operations and to maintain sandbox\naffinity in follow-up calls."
+                    },
+                    "agent_reference": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/AgentReference"
+                        }
+                      ],
+                      "nullable": true,
+                      "description": "The agent used for this response"
+                    },
+                    "content_filters": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ContentFilterResult"
+                      },
+                      "description": "The content filter evaluation results."
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "object",
+                    "created_at",
+                    "error",
+                    "incomplete_details",
+                    "output",
+                    "instructions",
+                    "parallel_tool_calls",
+                    "agent_reference"
+                  ]
                 }
               },
               "text/event-stream": {
