@@ -3,6 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.ManagedNetworkFabric;
 
