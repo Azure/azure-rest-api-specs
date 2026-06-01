@@ -1315,6 +1315,11 @@ model UpdateAdministrativeStateResponse {
   properties?: UpdateAdministrativeStateResponseProperties;
 }
 
+@doc("The current status of an async operation.")
+model NetworkFabricOperationStatusResult {
+  ...OperationStatusResult;
+}
+
 @doc("Update Administrative State Response Properties.")
 @added(Versions.v2025_07_15)
 model UpdateAdministrativeStateResponseProperties {
