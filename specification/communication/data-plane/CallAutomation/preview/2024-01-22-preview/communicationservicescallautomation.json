@@ -1926,6 +1926,11 @@
         "dtmfOptions": {
           "$ref": "#/definitions/DtmfConfigurationOptions",
           "description": "DTMF (Dual-Tone Multi-Frequency) configuration for the call."
+        },
+        "postDialTones": {
+          "description": "DTMF tones to send as part of the call for a participant.",
+          "maxLength": 30,
+          "type": "string"
         }
       }
     },
@@ -2074,7 +2079,6 @@
     "MediaStreamingOptions": {
       "description": "Configuration of Media streaming.",
       "required": [
-        "transportUrl",
         "transportType",
         "contentType",
         "audioChannelType"
@@ -2246,6 +2250,10 @@
           "items": {
             "$ref": "#/definitions/MediaStreamingContentType"
           }
+        },
+        "streamUrl": {
+          "description": "Media streaming subscription stream URL.",
+          "type": "string"
         }
       }
     },
@@ -3014,6 +3022,10 @@
         "operationContext": {
           "description": "The value to identify context of the operation.",
           "type": "string"
+        },
+        "dialogCnameOverride": {
+          "description": "Optional CNAME override for the dialog connection host. When provided and the\r\nAcsDialogEnableCallerCnameOverride feature flag is enabled, bypasses ECS-based\r\nCNAME resolution for ACS calls. Only applies to PowerVirtualAgents dialog type.",
+          "type": "string"
         }
       }
     },
@@ -3140,6 +3152,11 @@
         "customCallingContext": {
           "$ref": "#/definitions/CustomCallingContext",
           "description": "Used by customer to send custom calling context to targets"
+        },
+        "postDialTones": {
+          "description": "DTMF tones to send as part of the call for a participant.",
+          "maxLength": 30,
+          "type": "string"
         }
       }
     },
@@ -4138,6 +4155,56 @@
           "readOnly": true
         }
       }
+    },
+    "PostDialDtmfTonesCompleted": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PostDialDtmfTonesFailed": {
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
     },
     "PlayResumed": {
       "type": "object",
@@ -5288,7 +5355,8 @@
         "mediaStreamingStarted",
         "mediaStreamingFailed",
         "mediaStreamingStopped",
-        "unspecifiedError"
+        "unspecifiedError",
+        "mediaStreamingUpdated"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5312,7 +5380,8 @@
         "tooManyRequests",
         "forbidden",
         "serviceTimeout",
-        "initialWebSocketConnectionFailed"
+        "initialWebSocketConnectionFailed",
+        "streamUrlUpdated"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5400,6 +5469,46 @@
         "correlationId": {
           "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MediaStreamingUpdated": {
+      "type": "object",
+      "properties": {
+        "mediaStreamingUpdate": {
+          "$ref": "#/definitions/MediaStreamingUpdate",
+          "description": "Defines the result for MediaStreamingUpdate with the current status and the details about the status",
+          "readOnly": true
+        },
+        "streamUrl": {
+          "description": "Gets the URL of the media stream associated with this instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message.",
           "readOnly": true
         }
       }
