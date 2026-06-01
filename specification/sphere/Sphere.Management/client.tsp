@@ -125,8 +125,5 @@ using Microsoft.AzureSphere;
   "csharp"
 );
 
-// Java client back-compatibility mitigations (post Swagger -> TypeSpec migration)
-@@clientName(Microsoft.AzureSphere, "AzureSphereMgmtClient", "java");
-// Rename the unreachable preview model to avoid Java duplicate-client-name with the rename below.
 @@clientName(CountDeviceResponse, "CountDeviceResponsePreview", "java");
 @@clientName(CountDevicesResponse, "CountDeviceResponse", "java");
