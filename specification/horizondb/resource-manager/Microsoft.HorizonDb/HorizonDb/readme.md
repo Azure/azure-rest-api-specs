@@ -1,14 +1,14 @@
-# HorizonDb
+# HorizonDB
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for HorizonDb.
+This is the AutoRest configuration file for HorizonDB.
 
 ---
 
 ## Getting Started
 
-To build the SDK for HorizonDb, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for HorizonDB, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,11 +22,11 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the HorizonDb API.
+These are the global settings for the HorizonDB API.
 
 ```yaml
 title: HorizonDbManagementClient
-description: The Microsoft HorizonDb Management API provides Azure Resource Manager operations for managing HorizonDb clusters, pools, replicas, and firewall rules.
+description: The Microsoft HorizonDB Management API provides Azure Resource Manager operations for managing HorizonDB clusters, pools, replicas, and firewall rules.
 openapi-type: arm
 tag: package-horizondb-2026-01-20-preview
 ```
