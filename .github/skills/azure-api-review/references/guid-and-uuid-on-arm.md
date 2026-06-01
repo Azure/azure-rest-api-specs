@@ -8,6 +8,24 @@
 
 # GUID / UUID format on ARM specifications
 
+> **Transition note (rule reversal -- 2026-05).** Earlier revisions of
+> the ARM and OpenAPI review instructions recommended `format: uuid`
+> (TypeSpec `uuid` scalar) for every GUID-valued property. That
+> guidance has been **reversed** for ARM control-plane specs because it
+> conflicts with the required `GuidUsage` LintDiff rule (`R3017`).
+>
+> - **In-flight PRs that already use `format: uuid`:** do **not** churn
+>   the PR to remove it. Either keep the format and add the scoped
+>   suppression described below (preferred when the property meets the
+>   "acceptable" criteria), or drop the format in a follow-up cleanup
+>   PR. The Reviewer agent will surface this as a **Suggestion**, not a
+>   Blocking finding, on existing `format: uuid` properties.
+> - **PRs already merged** are out of scope; do not retroactively
+>   flag them.
+> - **New properties going forward** must follow the new default
+>   (keep `string` unless the property is on the acceptable allow-list
+>   below).
+
 ## Summary
 
 The instruction files recommend `format: uuid` (TypeSpec `uuid` scalar) for

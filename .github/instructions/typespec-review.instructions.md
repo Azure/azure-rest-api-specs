@@ -75,41 +75,7 @@ the link from the heading's anchor icon.
 
 <a id="reviewer-posted-parity"></a>
 
-**REQUIRED -- no divergence.**
-
-The set of findings posted to the GitHub PR **MUST** be
-**byte-for-byte identical** to the set of findings shown to the
-reviewer in chat. There **MUST** be no discrepancy in content,
-count, ordering, severity, rule IDs, links, code blocks, examples,
-fix snippets, or the agent's posted-by marker.
-
-**Hard rules.**
-
-1. **Single source of truth.** Build each comment body **once** as the
-   canonical text for that finding. The text rendered to the reviewer
-   in chat and the text written into the GitHub review payload **MUST**
-   come from that same string -- never a reconstructed or shortened
-   variant.
-2. **Verbatim reproduction.** When assembling the review payload
-   (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews`), each
-   `comments[].body` **MUST** contain the canonical text unchanged:
-   rule-ID hyperlinks, code blocks, examples, citations, and the
-   trailing posted-by HTML comment.
-3. **No re-authoring during payload assembly.** Heredoc rebuilds,
-   payload-time paraphrasing, or multi-finding consolidation that
-   drops content is **forbidden**.
-4. **Exact one-to-one mapping.** Every finding shown to the reviewer
-   maps to exactly one posted inline comment. Severity tags and
-   `[NEW]`/`[EXISTING]` classifications **MUST** match.
-5. **Post-post verification (REQUIRED).** Immediately after posting,
-   the agent **MUST** re-fetch each created comment
-   (`GET /repos/{owner}/{repo}/pulls/comments/{id}`) and confirm body
-   length, hyperlinks, code-fence blocks, and marker. On any mismatch,
-   PATCH the comment to restore the canonical text and re-verify
-   before reporting completion.
-6. **Failure handling.** If a finding cannot be posted as-is, report
-   the discrepancy explicitly to the reviewer instead of silently
-   posting a shortened variant.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
 
 ---
 

@@ -146,6 +146,75 @@ Critic can independently diff them).
   the specific structural conclusion (e.g., "`accessKey` reachable via
   LIST response of `Foo_List`"), not the full Mermaid block.
 
+## Size guardrail: when to downgrade rendering
+
+Partitioning keeps each diagram readable, but on extreme-scale RPs
+(SQL-scale, ~146 resources) even the post-partition totals overwhelm
+the chat surface and dominate the Critic's re-derivation budget. When
+**any** of the following thresholds is exceeded after applying the
+partition rules above, the Reviewer **MUST** downgrade rendering for
+the affected view to summary-text mode:
+
+| View                | Downgrade threshold (post-partition)                                        |
+| ------------------- | --------------------------------------------------------------------------- |
+| Resource graph      | > 75 nodes total across all partitions                                      |
+| Operation graph     | > 200 operations total across all partitions                                |
+| Sensitive-data-flow | > 50 secret-bearing nodes                                                   |
+| Version-delta       | Downgrade independently when either side trips the resource-graph threshold |
+
+Why these numbers: the partition thresholds (25 / 40) keep one diagram
+readable; the downgrade thresholds (~3× and ~5× the partition limits)
+are the point at which the **collection** of partitions stops being
+useful. Sampling 10 representative RPs in mid-2026, only **SQL** trips
+the resource-graph threshold; **Network** sits at the edge; all others
+are comfortably clear. The guardrail is designed to fire on ~1-2 RPs
+repo-wide.
+
+In summary-text mode the Reviewer:
+
+- Omits the Mermaid block for the downgraded view(s).
+- Renders a one-line node / edge inventory in its place (e.g.,
+  `Resource graph: 146 nodes, 198 edges across 4 namespace partitions`).
+- Still produces every structural finding derived from the in-memory
+  graph; each finding body carries
+  `Source: structural-analysis (graph downgraded)` so the human sees
+  that the analysis was performed.
+- Sets `graphs-produced: downgraded` in Critic Input #9.
+
+Under `downgraded`, the Critic still independently re-derives the
+sensitive-data-flow view in summary form (rendering cost is irrelevant
+to secret-leak analysis) but skips the resource and operation views.
+The Critic records `Graph integrity = N/A` for rendered-diff purposes
+and surfaces any new secret-bearing LIST-response findings as advisory
+`Likely missed violations`.
+
+Downgrading is a rendering decision, not an analysis skip.
+
+## When graph derivation fails on a full-review PR
+
+Full-review PRs are required to produce graphs; graph-derived findings
+are findings nothing else catches. When derivation fails -- usually a
+context-budget overrun on a very large spec, occasionally a `$ref`
+resolver failure -- the Reviewer follows a three-step fallback ladder
+defined in [`arm-api-reviewer.agent.md` → Step 3.5 "Failure
+recovery"](../../../agents/arm-api-reviewer.agent.md#step-35-api-graph--data-flow-analysis-think-in-graphs-before-lists):
+
+1. **Retry with smaller scope** (per-namespace partitioning, then
+   merge). Default; most failures resolve here.
+2. **Continue with `graphs-produced: degraded`**, render the required
+   `[!CAUTION]` failure banner at the top of the Step 6 report, and
+   proceed. The Critic records `Graph integrity = N/A` but is required
+   to flag the missing banner as `missing-step35-banner` if the
+   Reviewer suppresses it.
+3. **Abort** only on explicit human direction (e.g., the PR touches
+   secret-bearing properties where Step 3.5 is the primary detection
+   mechanism).
+
+`graphs-produced: degraded` is **distinct** from `false` (which is
+reserved for fast-path-by-design and is silent). `degraded` is never
+silent: the banner makes the missing analysis visible to every human
+reading the report.
+
 ## When this step is skipped
 
 Step 3.5 is **skipped on the fast-path track** (examples-only PRs,
@@ -153,4 +222,7 @@ description-only edits, non-AutoRest readme edits). In that case the
 Reviewer MUST tell the Critic via Input #9 (`graphs-produced: false`),
 and the Critic records `Graph integrity = N/A` instead of attempting to
 diff against absent graphs. Step 3.5 is **never** skipped on the
-full-review track.
+full-review track; on extreme-scale full-review PRs use the
+`downgraded` mode above, and on derivation failure use the `degraded`
+mode (see "When graph derivation fails on a full-review PR" above)
+rather than skipping silently.

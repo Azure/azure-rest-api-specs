@@ -63,36 +63,7 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 <a id="reviewer-posted-parity"></a>
 
-**REQUIRED -- no divergence.**
-
-The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, JSON examples, fix snippets, or the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent`.
-
-**Hard rules.**
-
-1. **Single source of truth.** Build the exact comment body **once** as the canonical text for each finding. The text rendered to the reviewer in chat and the text written into the GitHub review payload **MUST** come from that same string -- not a reconstructed, re-summarized, or shortened variant.
-2. **Verbatim reproduction.** When constructing the GitHub review payload (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews` with inline `comments[]`), each comment's `body` field **MUST** contain the canonical finding text **unchanged**. Do **not** drop, paraphrase, collapse, or shorten:
-   - the rule ID hyperlinks,
-   - the JSON / TypeSpec / code blocks under **Fix:**,
-   - inline examples,
-   - file path / line number / JSON path citations,
-
-- the trailing telemetry marker containing `posted-by: arm-api-reviewer-agent` and the required marker fields.
-
-3. **No re-authoring during payload assembly.** Heredoc rebuilds, JSON-string escaping, multi-finding consolidation, or any step that involves "rewriting the body inline" is **forbidden**. Generate each comment body once, store it, and reference the stored value when building the payload.
-4. **Exact one-to-one mapping.** Every finding shown to the reviewer **MUST** map to exactly one inline comment in the posted review. The reviewer **MUST NOT** see N findings and the PR receive N-1 (something dropped) or N+1 (something added). Severity tags (`🔴 Blocking`, `🟠 Warning`, `🔵 Suggestion`) and `[NEW]`/`[EXISTING]` classifications **MUST** match.
-5. **Post-post verification (REQUIRED).** Immediately after posting the review, the agent **MUST** fetch the live comment bodies (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for each created comment) and verify, for every comment:
-   - body length matches the canonical text length (within normalisation tolerance for line endings only),
-   - the rule ID hyperlinks are present,
-   - any code-fence (` ``` `) blocks present in the canonical text are present in the posted body,
-
-- the telemetry marker containing `posted-by: arm-api-reviewer-agent` and required fields is present.
-  If any check fails, the agent **MUST** PATCH the affected comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the canonical text and re-verify -- before reporting completion to the user.
-
-6. **Failure handling.** If a finding cannot be posted as-is (e.g., GitHub API rejects the body, a line anchor cannot be resolved), the agent **MUST** report the discrepancy explicitly to the reviewer rather than silently posting a shortened or altered variant.
-
-**Negative example (do NOT do):** Show the reviewer a finding with a JSON code-block under **Fix:**, then build a multi-comment payload heredoc that omits the code-block to keep the JSON string short.
-
-**Positive example (DO):** Build each finding's body string once with hyperlinks, code blocks, and marker included; serialize that exact string into the `body` field of each `comments[]` entry in the review payload; after posting, re-fetch each comment and confirm the live body matches.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
 
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
@@ -537,7 +508,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
   - Properties that represent a date, time, or timestamp **MUST** use `"type": "string", "format": "date-time"` (ISO 8601). Do not use a plain unformatted string for timestamps.
   - Properties that represent a duration **MUST** use `"type": "string", "format": "duration"` (ISO 8601 duration).
   - Properties that represent a URL or URI **MUST** use `"type": "string", "format": "uri"`.
-  - Properties that represent a UUID/GUID: **default is DO NOT use `"format": "uuid"` on ARM control-plane specs.** The required `GuidUsage` LintDiff rule (`R3017`) blocks the PR unless the author obtains Azure API review board sign-off AND adds a scoped per-property (or per-shared-definition) suppression. Acceptable only for Microsoft Entra / AAD identifiers that customers already see and pass as GUIDs through other Azure surfaces (portal, CLI, ARM templates): `tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`. NOT acceptable for opaque platform-assigned IDs (correlation IDs, operation IDs, internal record IDs), resource-internal identifiers (e.g., `interconnectBlockId`, `maintenanceEventId`), or names of any kind. For non-acceptable properties keep `"type": "string"` and convey the format via the description and an optional `pattern`. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree and the exact suppression form (the `where:` path must equal the LintDiff `jsonpath` exactly, including the trailing `.format` segment -- the validator does not do ancestor matching).
+  - Properties that represent a UUID/GUID: **default is DO NOT use `"format": "uuid"` on ARM control-plane specs.** This is a **reversal** of earlier guidance; for transition rules covering in-flight PRs and already-merged specs, see the **Transition note** at the top of [`guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md). The required `GuidUsage` LintDiff rule (`R3017`) blocks the PR unless the author obtains Azure API review board sign-off AND adds a scoped per-property (or per-shared-definition) suppression. Acceptable only for Microsoft Entra / AAD identifiers that customers already see and pass as GUIDs through other Azure surfaces (portal, CLI, ARM templates): `tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`. NOT acceptable for opaque platform-assigned IDs (correlation IDs, operation IDs, internal record IDs), resource-internal identifiers (e.g., `interconnectBlockId`, `maintenanceEventId`), or names of any kind. For non-acceptable properties keep `"type": "string"` and convey the format via the description and an optional `pattern`. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree and the exact suppression form (the `where:` path must equal the LintDiff `jsonpath` exactly, including the trailing `.format` segment -- the validator does not do ancestor matching).
   - Properties that represent a Base64-encoded value **MUST** use `"type": "string", "format": "byte"`.
   - Properties that represent a binary value **MUST** use `"type": "string", "format": "binary"`.
   - Properties that represent a password or secret **MUST** use `"type": "string", "format": "password"` and `"x-ms-secret": true`.

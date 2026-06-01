@@ -50,12 +50,13 @@ Review specs-pr#23440
 
 **How the agent resolves PR references:**
 
-| Input                      | Resolved repository                                                                                                                                         |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bare number (e.g. `41405`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                         |
-| `specs#<number>`           | `Azure/azure-rest-api-specs`                                                                                                                                |
-| `specs-pr#<number>`        | `Azure/azure-rest-api-specs-pr`                                                                                                                             |
-| Full URL                   | Extracted from the URL. Must be `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork. URLs pointing to other repositories are declined. |
+| Input                      | Resolved repository                                                                                                                                                                                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bare number (e.g. `41405`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                                                                                                                                               |
+| `specs#<number>`           | `Azure/azure-rest-api-specs`                                                                                                                                                                                                                                                      |
+| `specs-pr#<number>`        | `Azure/azure-rest-api-specs-pr`                                                                                                                                                                                                                                                   |
+| Full URL                   | Extracted from the URL. Must be `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork of either. URLs pointing to other repositories are declined.                                                                                                             |
+| Fork URL                   | Treated as a recognized fork if the repo's `parent.full_name` (resolvable via `gh repo view <owner>/<repo> --json parent` or the PR payload's `head.repo.parent.full_name`) equals `Azure/azure-rest-api-specs` or `Azure/azure-rest-api-specs-pr`. Otherwise the agent declines. |
 
 If the PR is not found in the resolved repository, the agent will ask you to
 clarify or confirm before trying the other repo. If the PR is not found in
@@ -86,10 +87,62 @@ The agent will:
 2. **Choose a review track** based on the changed files (see [Review Tracks](#review-tracks) below).
 3. Load the applicable rule sets (OpenAPI, ARM, TypeSpec).
 4. Compare against the previous API version to detect breaking changes (full-review track only).
-5. **Run an independent critic pass** that re-verifies every finding's rule citation, line number, and
+5. **Run a downstream-CI impact check** on any finding whose proposed fix
+   would add or tighten a type, format, decorator, `x-ms-*` extension, or
+   schema constraint. If the fix would trigger a required LintDiff rule
+   (for example, `R3017 GuidUsage` on ARM control-plane GUIDs), the
+   finding is phrased as a multi-option recommendation -- not a directive --
+   and carries a `downstream-rule:` field in its telemetry marker. The
+   conflict-aware rule catalog lives in
+   [`linter-rule-coverage.md`](../.github/skills/azure-api-review/references/linter-rule-coverage.md).
+6. **Run an independent critic pass** that re-verifies every finding's rule citation, line number, and
    classification before anything is shown to you. This happens silently on the happy path; you only see
    critic activity when a finding was downgraded, reclassified, dropped, or the critic could not run.
-6. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+7. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+
+### When the session is invalidated mid-review
+
+If the PR head commit SHA changes after the agent pinned the session
+(typically because the PR author pushed new commits while the review
+was in flight), the critic returns `Finding accuracy = INVALIDATED`.
+The report drafted against the prior SHA is unsafe to post -- the file
+content the agent judged no longer matches the PR -- so the agent
+emits a `SESSION INVALIDATED` message instead and asks you to choose:
+
+- **(a) Restart** -- re-run the review against the new head SHA,
+  pinning a fresh session.
+- **(b) Abandon** -- stop without posting anything.
+
+The agent does not silently re-pin and continue; auditable SHAs are
+the whole point of pinning the session.
+
+### When structural (Step 3.5) graph derivation fails
+
+On the full-review track the agent builds resource, operation, and
+data-flow graphs as a structural pass that catches findings nothing
+else in the review surfaces (orphan resources, asymmetric CRUD,
+secret-in-LIST, `$ref` cycles, silent breaking changes via reference
+removal). If graph derivation fails -- typically a context-budget
+overrun on a very large spec or a `$ref` resolver error -- the agent
+follows a three-step fallback:
+
+1. **Retry with smaller scope** (per-namespace partitioning, then
+   merge). This is the default and resolves most failures silently.
+2. **Continue with a visible failure banner.** If retry fails, the
+   agent renders a `[!CAUTION]` block at the top of the report stating
+   "Step 3.5 graph derivation failed; structural findings unavailable"
+   plus a one-line cause, and proceeds with the remaining steps. The
+   review is **not** mistaken for complete -- the banner makes the
+   gap explicit so you can decide whether to merge as-is, ask for a
+   human structural spot-check, or hold the PR. Internally the agent
+   sets `graphs-produced: degraded` so telemetry and the critic can
+   distinguish "attempted and failed" from "fast-path-by-design."
+3. **Abort** only if you explicitly direct the agent to stop, usually
+   when the PR touches secret-bearing properties or LIST operations
+   where Step 3.5 is the primary detection mechanism.
+
+The agent never silently continues a full-review PR without
+structural analysis -- the banner is the contract.
 
 ## Review Tracks
 
@@ -237,12 +290,21 @@ according to these scenarios:
   to thank the author and resolve its own thread. **Important:** approval of
   the overall plan is **bulk consent** that auto-resolves every Scenario E
   thread without a separate per-thread prompt. The plan-approval prompt makes
-  this scope explicit by stating the count of Scenario E rows, listing the
-  agent-thread URLs that will be auto-resolved (first 5 inline, rest in the
-  plan table), and reminding you that **Execute selectively** lets you keep
-  any specific Scenario E thread unresolved. Human-origin fixed threads
-  remain in Scenario F and are surfaced separately for explicit per-thread
-  consent before any reply or resolution.
+  this scope explicit by stating:
+  - the **count** of Scenario E rows (auto-resolved) and Scenario F rows
+    (per-thread approval),
+  - the **URLs** of the agent threads that will be auto-resolved (first 5
+    inline, rest in the plan table),
+  - the **alternative**: choose **Execute selectively** to keep specific
+    Scenario E rows unresolved, or **Cancel** to leave every existing
+    thread untouched,
+  - the **rollback cost**: a thread auto-resolved in error can be reopened
+    manually on github.com, but the agent will not re-post the original
+    violation -- you must re-flag it yourself.
+
+  Human-origin fixed threads remain in Scenario F and are surfaced
+  separately for explicit per-thread consent before any reply or
+  resolution.
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 
