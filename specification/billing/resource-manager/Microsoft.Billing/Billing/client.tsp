@@ -478,10 +478,14 @@ using Microsoft.Billing;
 );
 
 @@clientName(SpendingLimitType.MSDN, "Msdn", "csharp");
-// SavingsPlanUpdateValidate rename TEMPORARILY commented out — combined with @@clientLocation
-// in back-compatible.tsp, the current emitter drops the action method from the Resource entirely.
-// Tracking root-cause analysis separately; restore once Phase 6 fix lands.
-// @@clientName(SavingsPlanUpdateValidateRequest, "SavingsPlanUpdateValidateContent", "csharp");
+
+// NOTE: Spec-side rename of action-payload models (*Request -> *Content) via
+// @@clientName is unsafe when combined with @@clientLocation: the MPG emitter
+// silently drops the action method from the Resource/Collection, leaving only
+// the REST operation and the model class. Verified on all 6 candidate types
+// (Merge/Split/Cancel/Initiate/PartnerInitiate/SavingsPlanUpdateValidate).
+// Tracking the emitter regression upstream; until fixed, the GA *Content classes
+// are kept as hand-written Custom/Models/*Content shims (with [WirePath(...)]).
 
 // Restore GA C# types for *Id (ResourceIdentifier), *Uri (Uri), tenant IDs (Guid?), and
 // termDuration (TimeSpan?). Spec models these as `string`; @@alternateType maps to the GA shapes.
