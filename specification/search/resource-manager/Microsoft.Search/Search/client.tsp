@@ -1186,6 +1186,18 @@ model AccessRulePropertiesSubscriptionsItem {
   uuid,
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  SearchService,
+  "resource-rbac-roles",
+  #{
+    SearchIndexDataContributor: "8ebe5a00-799e-43f5-93ac-243d3dce84a7",
+    SearchIndexDataReader: "1407120a-92aa-4202-b7e9-c0e197c71c8f",
+    SearchServiceContributor: "7ca78c08-252a-4471-8644-bb5ff32d4ba0",
+  },
+  "csharp"
+);
 @@alternateType(QuotaUsageResult.id, armResourceIdentifier, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
