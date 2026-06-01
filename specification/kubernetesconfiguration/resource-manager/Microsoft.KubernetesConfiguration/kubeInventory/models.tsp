@@ -301,7 +301,7 @@ model KubernetesGenericField {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** Value */
+  /** The string value of the field. */
   value: string;
 }
 
