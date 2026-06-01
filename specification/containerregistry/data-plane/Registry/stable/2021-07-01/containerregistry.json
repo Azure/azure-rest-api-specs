@@ -848,6 +848,182 @@
         }
       }
     },
+    "/acr/v1/_deleted/{name}/_manifests": {
+      "get": {
+        "operationId": "ContainerRegistry_GetDeletedManifests",
+        "summary": "List soft-deleted manifests",
+        "description": "List soft-deleted manifests for the given repository",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the image (including the namespace)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "Query parameter for the last item in previous query. Result set will include\nvalues lexically after last.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "n",
+            "in": "query",
+            "description": "query parameter for max number of items",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeletedManifests"
+            },
+            "headers": {
+              "Link": {
+                "type": "string",
+                "description": "next paginated result"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of soft-deleted manifests": {
+            "$ref": "./examples/GetDeletedManifests.json"
+          }
+        }
+      }
+    },
+    "/acr/v1/_deleted/{name}/_manifests/{digest}": {
+      "post": {
+        "operationId": "ContainerRegistry_RestoreDeletedArtifact",
+        "summary": "Restore a soft-deleted artifact",
+        "description": "Restore a soft-deleted artifact by re-creating the specified tag pointing at\nthe given manifest digest. The manifest must still be within the registry's\nsoft-delete retention window.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the image (including the namespace)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "digest",
+            "in": "path",
+            "description": "Digest of the soft-deleted manifest to restore",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "If true, an existing tag with the same name will be overwritten when the\nartifact is restored.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "Restore request body specifying the tag to recreate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreDeletedArtifactRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restore a soft-deleted artifact": {
+            "$ref": "./examples/RestoreDeletedArtifact.json"
+          }
+        }
+      }
+    },
+    "/acr/v1/_deleted/{name}/_tags": {
+      "get": {
+        "operationId": "ContainerRegistry_GetDeletedTags",
+        "summary": "List soft-deleted tags",
+        "description": "List soft-deleted tags for the given repository",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the image (including the namespace)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "Query parameter for the last item in previous query. Result set will include\nvalues lexically after last.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "n",
+            "in": "query",
+            "description": "query parameter for max number of items",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeletedTags"
+            },
+            "headers": {
+              "Link": {
+                "type": "string",
+                "description": "next paginated result"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get soft-deleted tags of a repository": {
+            "$ref": "./examples/GetDeletedTags.json"
+          }
+        }
+      }
+    },
     "/oauth2/exchange": {
       "post": {
         "operationId": "Authentication_ExchangeAadAccessTokenForAcrRefreshToken",
@@ -1491,66 +1667,6 @@
     }
   },
   "x-ms-paths": {
-    "/v2/{name}/blobs/{digest}?_overload=checkChunkExists": {
-      "head": {
-        "operationId": "ContainerRegistryBlob_CheckChunkExists",
-        "description": "Same as GET, except only the headers are returned.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the image (including the namespace)",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "digest",
-            "in": "path",
-            "description": "Digest of a BLOB",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "range",
-            "in": "header",
-            "description": "Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "Range"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Content-Length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the requested blob content."
-              },
-              "Content-Range": {
-                "type": "string",
-                "description": "Content range of the blob chunk."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/AcrErrors"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get headers without blob Chunk": {
-            "$ref": "./examples/CheckBlobChunk.json"
-          }
-        }
-      }
-    },
     "/v2/{name}/blobs/{digest}?_overload=getChunk": {
       "get": {
         "operationId": "ContainerRegistryBlob_GetChunk",
@@ -1614,6 +1730,66 @@
         "x-ms-examples": {
           "Get a blob Chunk": {
             "$ref": "./examples/GetBlobChunk.json"
+          }
+        }
+      }
+    },
+    "/v2/{name}/blobs/{digest}?_overload=checkChunkExists": {
+      "head": {
+        "operationId": "ContainerRegistryBlob_CheckChunkExists",
+        "description": "Same as GET, except only the headers are returned.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the image (including the namespace)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "digest",
+            "in": "path",
+            "description": "Digest of a BLOB",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "range",
+            "in": "header",
+            "description": "Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "Range"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Content-Length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the requested blob content."
+              },
+              "Content-Range": {
+                "type": "string",
+                "description": "Content range of the blob chunk."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get headers without blob Chunk": {
+            "$ref": "./examples/CheckBlobChunk.json"
           }
         }
       }
@@ -2212,6 +2388,156 @@
         }
       }
     },
+    "DeletedManifest": {
+      "type": "object",
+      "description": "Soft-deleted manifest details",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "description": "Manifest digest",
+          "readOnly": true
+        },
+        "imageSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Image size",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created time",
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time",
+          "readOnly": true
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the manifest was soft-deleted. The manifest is recoverable\nfor the soft-delete retention window configured on the registry (default\n30 days) before it is permanently purged.",
+          "readOnly": true
+        },
+        "architecture": {
+          "$ref": "#/definitions/ArtifactArchitecture",
+          "description": "CPU architecture",
+          "readOnly": true
+        },
+        "os": {
+          "$ref": "#/definitions/ArtifactOperatingSystem",
+          "description": "Operating system",
+          "readOnly": true
+        },
+        "configMediaType": {
+          "type": "string",
+          "description": "Config blob media type"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags that pointed to this manifest at the time it was deleted.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "digest",
+        "deletedTime"
+      ]
+    },
+    "DeletedManifests": {
+      "type": "object",
+      "description": "Deleted manifest list",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io."
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "manifests": {
+          "type": "array",
+          "description": "List of soft-deleted manifests",
+          "items": {
+            "$ref": "#/definitions/DeletedManifest"
+          }
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        }
+      }
+    },
+    "DeletedTag": {
+      "type": "object",
+      "description": "Soft-deleted tag details",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tag name",
+          "readOnly": true
+        },
+        "digest": {
+          "type": "string",
+          "description": "Digest the tag pointed to at the time of deletion",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Tag created time",
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Tag last update time",
+          "readOnly": true
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the tag was soft-deleted. The tag is recoverable for the\nsoft-delete retention window configured on the registry (default 30 days)\nbefore it is permanently purged.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "digest",
+        "deletedTime"
+      ]
+    },
+    "DeletedTags": {
+      "type": "object",
+      "description": "Deleted tag list",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry login server name. This is likely to be similar to\n{registry-name}.azurecr.io."
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of soft-deleted tags",
+          "items": {
+            "$ref": "#/definitions/DeletedTag"
+          }
+        },
+        "link": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        }
+      }
+    },
     "Descriptor": {
       "type": "object",
       "description": "Docker V2 image layer descriptor including config and layers",
@@ -2778,6 +3104,19 @@
           }
         }
       }
+    },
+    "RestoreDeletedArtifactRequest": {
+      "type": "object",
+      "description": "Request body for restoring a soft-deleted manifest. Supplies the tag to\nre-associate with the restored manifest.",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "Tag to re-associate with the restored manifest."
+        }
+      },
+      "required": [
+        "tag"
+      ]
     },
     "TagAttributesBase": {
       "type": "object",
