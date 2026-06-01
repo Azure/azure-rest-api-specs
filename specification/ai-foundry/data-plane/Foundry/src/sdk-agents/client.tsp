@@ -70,6 +70,19 @@ using Azure.AI.Projects;
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
+@@clientName(AgentObject.blueprint, "blueprintIdentity");
+
+@@clientName(CodeConfiguration.content_hash, "contentSha256");
+
+@@clientName(OptimizationCandidate.avg_score, "averageScore");
+@@clientName(OptimizationCandidate.avg_tokens, "averageTokens");
+@@clientName(OptimizationCandidate.eval_id, "evaluationId");
+@@clientName(OptimizationCandidate.eval_run_id, "evaluationRunId");
+
+@@clientName(PromoteCandidateRequest, "PromoteCandidateInput");
+@@clientName(PromoteCandidateResponse, "PromoteCandidateResult");
+@@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
+
 @@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"
 );
@@ -143,6 +156,37 @@ using Azure.AI.Projects;
 @@clientName(ToolboxObject, "ToolboxDetails", "java");
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
+@@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
+
+@@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
+@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.listCandidates,
+  "listOptimizationCandidates",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidate,
+  "getOptimizationCandidate",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidateConfig,
+  "getOptimizationCandidateConfig",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidateResults,
+  "getOptimizationCandidateResults",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.promoteCandidate,
+  "promoteOptimizationCandidate",
+  "java"
+);
+@@clientName(AgentOptimizationJobs.getCandidateFile,
+  "getOptimizationCandidateFile",
+  "java"
+);
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -152,6 +196,7 @@ using Azure.AI.Projects;
 @@access(Agents.updateAgent, Access.internal);
 @@access(Agents.createAgentFromManifest, Access.internal);
 @@access(Agents.updateAgentFromManifest, Access.internal);
+@@access(Agents.createAgentFromCode, Access.internal);
 
 // making methods private to add a public shim using the OpenAI types.
 @@access(MemoryStores.searchMemories, Access.internal);
@@ -164,19 +209,89 @@ using Azure.AI.Projects;
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
 @@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
 @@convenientAPI(MemoryStores.deleteScope, false, "java");
+@@convenientAPI(MemoryStores.deleteMemory, false, "java");
 
 //making delete methods internal to add public shims that return void
 @@access(Agents.deleteAgentVersion, Access.internal);
 @@access(Agents.deleteAgent, Access.internal);
 @@access(MemoryStores.deleteMemoryStore, Access.internal);
 @@access(MemoryStores.deleteScope, Access.internal);
+@@access(MemoryStores.deleteMemory, Access.internal);
 @@clientName(Agents.deleteAgentVersion, "internalDeleteAgentVersion");
 @@clientName(Agents.deleteAgent, "internalDeleteAgent");
 @@clientName(MemoryStores.deleteMemoryStore, "internalDeleteMemoryStore");
 @@clientName(MemoryStores.deleteScope, "internalDeleteScope");
+@@clientName(MemoryStores.deleteMemory, "internalDeleteMemory");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
+
+// Emit Azure-specific OutputItem subtypes as public Java classes
+@@access(BingGroundingToolCall, Access.public);
+@@usage(BingGroundingToolCall, Usage.input);
+
+@@access(BingGroundingToolCallOutput, Access.public);
+@@usage(BingGroundingToolCallOutput, Usage.input);
+
+@@access(SharepointGroundingToolCall, Access.public);
+@@usage(SharepointGroundingToolCall, Usage.input);
+
+@@access(SharepointGroundingToolCallOutput, Access.public);
+@@usage(SharepointGroundingToolCallOutput, Usage.input);
+
+@@access(AzureAISearchToolCall, Access.public);
+@@usage(AzureAISearchToolCall, Usage.input);
+
+@@access(AzureAISearchToolCallOutput, Access.public);
+@@usage(AzureAISearchToolCallOutput, Usage.input);
+
+@@access(BingCustomSearchToolCall, Access.public);
+@@usage(BingCustomSearchToolCall, Usage.input);
+
+@@access(BingCustomSearchToolCallOutput, Access.public);
+@@usage(BingCustomSearchToolCallOutput, Usage.input);
+
+@@access(OpenApiToolCall, Access.public);
+@@usage(OpenApiToolCall, Usage.input);
+
+@@access(OpenApiToolCallOutput, Access.public);
+@@usage(OpenApiToolCallOutput, Usage.input);
+
+@@access(BrowserAutomationToolCall, Access.public);
+@@usage(BrowserAutomationToolCall, Usage.input);
+
+@@access(BrowserAutomationToolCallOutput, Access.public);
+@@usage(BrowserAutomationToolCallOutput, Usage.input);
+
+@@access(FabricDataAgentToolCall, Access.public);
+@@usage(FabricDataAgentToolCall, Usage.input);
+
+@@access(FabricDataAgentToolCallOutput, Access.public);
+@@usage(FabricDataAgentToolCallOutput, Usage.input);
+
+@@access(AzureFunctionToolCall, Access.public);
+@@usage(AzureFunctionToolCall, Usage.input);
+
+@@access(AzureFunctionToolCallOutput, Access.public);
+@@usage(AzureFunctionToolCallOutput, Usage.input);
+
+@@access(A2AToolCall, Access.public);
+@@usage(A2AToolCall, Usage.input);
+
+@@access(A2AToolCallOutput, Access.public);
+@@usage(A2AToolCallOutput, Usage.input);
+
+@@access(MemorySearchToolCall, Access.public);
+@@usage(MemorySearchToolCall, Usage.input);
+
+@@access(MemoryCommandToolCall, Access.public);
+@@usage(MemoryCommandToolCall, Usage.input);
+
+@@access(MemoryCommandToolCallOutput, Access.public);
+@@usage(MemoryCommandToolCallOutput, Usage.input);
+
+@@access(ToolCallStatus, Access.public);
+@@usage(ToolCallStatus, Usage.input);
 
 @@access(FoundryFeaturesOptInKeys, Access.public);
 @@access(AgentDefinitionOptInKeys, Access.public);
@@ -204,7 +319,6 @@ using Azure.AI.Projects;
 
 @@usage(CreateAgentVersionRequest, Usage.input);
 @@access(CreateAgentVersionRequest, Access.public);
-
 
 // Ensure SessionLogEvent and SessionLogEventType are emitted
 @@usage(SessionLogEvent, Usage.output);
@@ -257,6 +371,9 @@ using Azure.AI.Projects;
   },
   "java"
 );
+
+@@alternateType(OpenAI.OutputItem, unknown, "java");
+@@alternateType(OpenAI.InputItem, unknown, "java");
 
 // TimeZone property override via model indirection
 @alternateType(
@@ -513,3 +630,19 @@ union WebSearchToolSearchContextSizeExpandable {
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
+
+// --------------------------------------------------------------------------------
+// AgentOptimizationJobs: relocate operations onto the Agents sub-client
+// --------------------------------------------------------------------------------
+
+@@clientLocation(AgentOptimizationJobs.create, Agents);
+@@clientLocation(AgentOptimizationJobs.get, Agents);
+@@clientLocation(AgentOptimizationJobs.list, Agents);
+@@clientLocation(AgentOptimizationJobs.cancel, Agents);
+@@clientLocation(AgentOptimizationJobs.delete, Agents);
+@@clientLocation(AgentOptimizationJobs.listCandidates, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidate, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidateConfig, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidateResults, Agents);
+@@clientLocation(AgentOptimizationJobs.promoteCandidate, Agents);
+@@clientLocation(AgentOptimizationJobs.getCandidateFile, Agents);
