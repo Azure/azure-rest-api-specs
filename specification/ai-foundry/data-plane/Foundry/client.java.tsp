@@ -129,6 +129,8 @@ namespace Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
+@@clientName(Skill, "SkillDetails");
+
 // // More accurate naming
 @@clientName(AssetCredentialResponse, "DatasetCredential");
 
