@@ -392,21 +392,100 @@ model CertificatePolicy {
 }
 
 /**
+ * The intended usage of a platform-managed certificate. The service maps each usage to a specific
+ * issuer, EKUs, and key-usage defaults. This feature is currently intended for internal use only.
+ */
+@added(Versions.v2026_03_01_preview)
+union CertificateUsage {
+  string,
+
+  /** Public TLS server authentication (issued via OneCertV2-PublicCA, EKU: ServerAuth). */
+  PublicTLSServerAuth: "PublicTLSServerAuth",
+
+  /** Public client and server authentication (issued via OneCertV2-PublicCA, EKUs: ServerAuth + ClientAuth). */
+  PublicClientAndServerAuth: "PublicClientAndServerAuth",
+
+  /** Private TLS server authentication (issued via OneCertV2-PrivateCA, EKU: ServerAuth). */
+  PrivateTLSServerAuth: "PrivateTLSServerAuth",
+
+  /** Private client and server authentication (issued via OneCertV2-PrivateCA, EKUs: ServerAuth + ClientAuth). */
+  PrivateClientAndServerAuth: "PrivateClientAndServerAuth",
+
+  /** STS token acquisition (DSTS or ESTS). Requires appId and stsType in metadata. */
+  STSTokenAcquisition: "STSTokenAcquisition",
+}
+
+/**
+ * The STS type for platform-managed certificates with STSTokenAcquisition usage.
+ */
+@added(Versions.v2026_03_01_preview)
+union PlatformManagedStsType {
+  string,
+
+  /** Microsoft dSTS. */
+  DSTS: "DSTS",
+
+  /** Microsoft eSTS. */
+  ESTS: "ESTS",
+}
+
+/**
+ * Optional overrides for platform-managed certificate behavior.
+ */
+@added(Versions.v2026_03_01_preview)
+model PlatformManagedOverrides {
+  /**
+   * Explicit opt-in to fast rotation for subscriptions that have globally opted out of fast rotation
+   * (via the ReducedCertValidityOptOut AFEC flag). Must be set to true for those subscriptions;
+   * ignored for subscriptions that already have fast rotation enabled. Not persisted - used only
+   * at request validation time.
+   */
+  fastRotation?: boolean;
+}
+
+/**
+ * Structured metadata for a platform-managed certificate.
+ */
+@added(Versions.v2026_03_01_preview)
+model PlatformManagedMetadata {
+  /**
+   * Subject Alternative Names. DNS names are required for standard (non-STSTokenAcquisition) usages;
+   * the Subject is derived from the first DNS name.
+   */
+  subjectAlternateNames?: SubjectAlternativeNames;
+
+  /**
+   * Application ID. Required when certificateUsage is STSTokenAcquisition.
+   */
+  appId?: string;
+
+  /**
+   * STS type. Required when certificateUsage is STSTokenAcquisition.
+   */
+  stsType?: PlatformManagedStsType;
+
+  /**
+   * Optional overrides for platform-managed behavior.
+   */
+  overrides?: PlatformManagedOverrides;
+}
+
+/**
  * Properties of the platform managed certificate. This feature is currently intended for internal use only.
  */
 @added(Versions.v2026_03_01_preview)
 model PlatformManaged {
   /**
-   * The intended usage of the certificate.
+   * The intended usage of the certificate. The service uses this to determine the issuer,
+   * validity period, lifetime actions, EKUs, and key usage for the certificate.
    */
-  certificateUsage: string;
+  certificateUsage: CertificateUsage;
 
   /**
-   * JSON-formatted platform managed metadata. The schema is intentionally undefined as this feature is currently intended for internal use only.
+   * Structured metadata describing the platform-managed certificate. The required fields depend
+   * on the value of certificateUsage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown"
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-  metadata?: Record<unknown>;
+  metadata?: PlatformManagedMetadata;
 }
 
 /**
