@@ -43,18 +43,15 @@
       "name": "Operations"
     },
     {
-      "name": "SkuList"
-    },
-    {
-      "name": "SkuGet"
+      "name": "Skus"
     }
   ],
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus": {
       "get": {
-        "operationId": "SkuList_ListByBillingProfile",
+        "operationId": "Skus_ListByBillingProfile",
         "tags": [
-          "SkuList"
+          "Skus"
         ],
         "description": "Lists SKUs for billing profile.",
         "parameters": [
@@ -138,13 +135,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DiscoveryErrorPayload"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "List SKUs for billing profile": {
-            "$ref": "./examples/SkuList_ListByBillingProfile.json"
+            "$ref": "./examples/Skus_ListByBillingProfile.json"
           }
         },
         "x-ms-pageable": {
@@ -154,9 +151,9 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Marketplace/skus/{skuId}": {
       "get": {
-        "operationId": "SkuGet_GetByBillingProfile",
+        "operationId": "Skus_GetByBillingProfile",
         "tags": [
-          "SkuGet"
+          "Skus"
         ],
         "description": "Gets a single SKU with availabilities for the given billing account and billing profile.\n\nSame as the billing-account-only variant, but additionally scopes the hydration\nclaims to a specific billing profile. Only meaningful for Modern (MCA) billing\naccounts; for EA billing accounts the billing profile is ignored.",
         "parameters": [
@@ -206,22 +203,22 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DiscoveryErrorPayload"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "SkuGet_GetByBillingProfile": {
-            "$ref": "./examples/SkuGet_GetByBillingProfile.json"
+          "Skus_GetByBillingProfile": {
+            "$ref": "./examples/Skus_GetByBillingProfile.json"
           }
         }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skus": {
       "get": {
-        "operationId": "SkuList_ListByBillingAccount",
+        "operationId": "Skus_ListByBillingAccount",
         "tags": [
-          "SkuList"
+          "Skus"
         ],
         "description": "Lists SKUs for billing account.",
         "parameters": [
@@ -302,13 +299,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DiscoveryErrorPayload"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "List SKUs for billing account": {
-            "$ref": "./examples/SkuList_ListByBillingAccount.json"
+            "$ref": "./examples/Skus_ListByBillingAccount.json"
           }
         },
         "x-ms-pageable": {
@@ -318,9 +315,9 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Marketplace/skus/{skuId}": {
       "get": {
-        "operationId": "SkuGet_GetByBillingAccount",
+        "operationId": "Skus_GetByBillingAccount",
         "tags": [
-          "SkuGet"
+          "Skus"
         ],
         "description": "Gets a single SKU with availabilities for the given billing account.\n\nReturns full SKU details (including availabilities) for the SKU identified by\nthe composite `productId/skuId`, scoped to the given billing account. The caller\nmust have billing account permissions. Supports both EA (legacy) and Modern (MCA)\nbilling account ID formats.",
         "parameters": [
@@ -367,13 +364,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DiscoveryErrorPayload"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "SkuGet_GetByBillingAccount": {
-            "$ref": "./examples/SkuGet_GetByBillingAccount.json"
+          "Skus_GetByBillingAccount": {
+            "$ref": "./examples/Skus_GetByBillingAccount.json"
           }
         }
       }
@@ -547,37 +544,6 @@
         "apiVersion",
         "billingAccountId",
         "billingProfileId"
-      ]
-    },
-    "DiscoveryErrorDetails": {
-      "type": "object",
-      "description": "Error details returned in DiscoveryErrorPayload.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "DiscoveryErrorPayload": {
-      "type": "object",
-      "description": "Error payload returned by Marketplace Discovery APIs.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/DiscoveryErrorDetails",
-          "description": "The error details object."
-        }
-      },
-      "required": [
-        "error"
       ]
     },
     "IncludedQuantityProperty": {
@@ -1032,7 +998,7 @@
           "type": "string",
           "description": "Controls plan availability and partner access within the Microsoft Cloud Solution Provider (CSP) program.\\n- `OptIn` - Enables all authorized Cloud Solution Provider partners to resell and deploy the product to customers\\n- `OptOut` - Excluded from Cloud Solution Provider program, available only through direct channels\\n- `SelectiveOptIn` - Available only to selected Cloud Solution Provider partners for resale and customer deployment"
         },
-        "hasRI": {
+        "hasRi": {
           "type": "boolean",
           "description": "A value indicating whether the SKU supports reservations."
         },
@@ -1081,12 +1047,8 @@
         "skuDescription",
         "skuTitle",
         "location",
-        "armRegionName",
         "cloud",
-        "locationType",
-        "region",
-        "skuGroupId",
-        "zone"
+        "locationType"
       ]
     },
     "SkuSummaryListResult": {

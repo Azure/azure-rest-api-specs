@@ -1,9 +1,10 @@
 {
-  "operationId": "SkuList_ListByBillingAccount",
-  "title": "List SKUs for billing account",
+  "operationId": "Skus_ListByBillingProfile",
+  "title": "List SKUs for billing profile",
   "parameters": {
     "api-version": "2025-05-01",
     "billingAccountId": "billing-account-001",
+    "billingProfileId": "billing-profile-001",
     "serviceFamily": "Compute",
     "service": "Virtual Machines"
   },
@@ -45,7 +46,7 @@
             "serviceType": "Standard",
             "minQuantity": 1,
             "cspState": "OptIn",
-            "hasRI": true,
+            "hasRi": true,
             "skuAttributes": [
               {
                 "key": "diskType",
@@ -71,7 +72,7 @@
             ]
           }
         ],
-        "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/billing-account-001/providers/Microsoft.Marketplace/skus?api-version=2025-05-01&serviceFamily=Compute&service=Virtual%20Machines&$skiptoken=token123"
+        "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/billing-account-001/billingProfiles/billing-profile-001/providers/Microsoft.Marketplace/skus?api-version=2025-05-01&serviceFamily=Compute&service=Virtual%20Machines&$skiptoken=token123"
       }
     }
   }

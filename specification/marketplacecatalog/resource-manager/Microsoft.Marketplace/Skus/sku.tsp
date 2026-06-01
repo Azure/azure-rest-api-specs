@@ -191,7 +191,7 @@ model SkuSummary {
   location: string;
 
   /** The ARM region name. */
-  armRegionName: string;
+  armRegionName?: string;
 
   /** The cloud, such as 'Global'. */
   cloud: string;
@@ -200,13 +200,13 @@ model SkuSummary {
   locationType: string;
 
   /** The region. */
-  region: string;
+  region?: string;
 
   /** The SKU group id. */
-  skuGroupId: string;
+  skuGroupId?: string;
 
   /** The zone, such as 'Zone 1'. */
-  zone: string;
+  zone?: string;
 
   /** The feature. */
   feature?: string;
@@ -224,8 +224,7 @@ model SkuSummary {
   cspState?: string;
 
   /** A value indicating whether the SKU supports reservations. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches existing API contract"
-  hasRI?: boolean;
+  hasRi?: boolean;
 
   /** The SKU attributes. */
   @identifiers(#[])

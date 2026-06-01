@@ -32,7 +32,7 @@ model Sku is ProxyResource<SkuSummary> {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations(Sku)
-interface SkuList {
+interface Skus {
   /** Lists SKUs for billing account. */
   @list
   listByBillingAccount is ArmListByBillingAccount<
@@ -112,10 +112,7 @@ interface SkuList {
     },
     Response = ResourceListResult<SkuSummary>
   >;
-}
 
-@armResourceOperations(Sku)
-interface SkuGet {
   /**
    * Gets a single SKU with availabilities for the given billing account.
    *
@@ -143,7 +140,7 @@ interface SkuGet {
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,
-  ): ArmResponse<SkuDetails> | DiscoveryErrorPayload;
+  ): ArmResponse<SkuDetails> | ErrorResponse;
 
   /**
    * Gets a single SKU with availabilities for the given billing account and billing profile.
@@ -172,7 +169,7 @@ interface SkuGet {
     @doc(IncludeFutureAvailabilitiesParameterDescription)
     @query
     includeFutureAvailabilities?: boolean = false,
-  ): ArmResponse<SkuDetails> | DiscoveryErrorPayload;
+  ): ArmResponse<SkuDetails> | ErrorResponse;
 }
 
 /** The operation to list SKUs by billing account. */
@@ -184,7 +181,7 @@ op ArmListByBillingAccount<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<ResourceListResult<SkuSummary>>,
-  Error extends {} = DiscoveryErrorPayload
+  Error extends {} = ErrorResponse
 > is Azure.ResourceManager.Foundations.ArmReadOperation<
   BillingAccountScope<Resource> & Parameters,
   Response,
@@ -200,7 +197,7 @@ op ArmListByBillingProfile<
   Resource extends Azure.ResourceManager.Foundations.Resource,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<ResourceListResult<SkuSummary>>,
-  Error extends {} = DiscoveryErrorPayload
+  Error extends {} = ErrorResponse
 > is Azure.ResourceManager.Foundations.ArmReadOperation<
   BillingProfileScope<Resource> & Parameters,
   Response,
@@ -236,20 +233,4 @@ model BillingProfileBaseParameters
   is Azure.ResourceManager.Foundations.TenantBaseParameters {
   ...BillingAccountIdParameter;
   ...BillingProfileIdParameter;
-}
-
-/** Error payload returned by Marketplace Discovery APIs. */
-@error
-model DiscoveryErrorPayload {
-  /** The error details object. */
-  error: DiscoveryErrorDetails;
-}
-
-/** Error details returned in DiscoveryErrorPayload. */
-model DiscoveryErrorDetails {
-  /** The error code. */
-  code: string;
-
-  /** The error message. */
-  message: string;
 }
