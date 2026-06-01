@@ -586,6 +586,7 @@ using Microsoft.Billing;
 @@usage(BillingAccount, Usage.input, "csharp");
 @@usage(Agreement, Usage.input, "csharp");
 @@usage(AgreementProperties, Usage.input, "csharp");
+@@usage(AvailableBalance, Usage.input, "csharp");
 @@usage(AvailableBalanceProperties, Usage.input, "csharp");
 @@usage(Customer, Usage.input, "csharp");
 @@usage(CustomerProperties, Usage.input, "csharp");
