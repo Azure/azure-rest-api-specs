@@ -314,7 +314,6 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
   "csharp"
 );
 
-@@access(RedisLinkedServer, Access.public, "csharp");
 @@usage(RedisLinkedServer, Usage.output, "csharp");
 
 @@clientName(TlsVersion, "RedisTlsVersion", "csharp");

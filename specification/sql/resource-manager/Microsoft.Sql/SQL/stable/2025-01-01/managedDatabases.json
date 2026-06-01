@@ -1,0 +1,1167 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabases"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases": {
+      "get": {
+        "operationId": "ManagedDatabases_ListByInstance",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a list of managed databases.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List databases by managed instances": {
+            "$ref": "./examples/ManagedDatabaseListByManagedInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}": {
+      "get": {
+        "operationId": "ManagedDatabases_Get",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a managed database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a managed database": {
+            "$ref": "./examples/ManagedDatabaseGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedDatabases_CreateOrUpdate",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Creates a new database or updates an existing database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested database resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedDatabase' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedDatabase' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a new managed database by restoring from an external backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreExternalBackup.json"
+          },
+          "Creates a new managed database by restoring from an external backup using managed identity": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreExternalBackupManagedIdentity.json"
+          },
+          "Creates a new managed database from restoring a geo-replicated backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRecovery.json"
+          },
+          "Creates a new managed database from restoring a long term retention backup": {
+            "$ref": "./examples/ManagedDatabaseCreateRestoreLtrBackup.json"
+          },
+          "Creates a new managed database using cross subscription point in time restore": {
+            "$ref": "./examples/ManagedDatabaseCreateCrossSubscriptionPointInTimeRestore.json"
+          },
+          "Creates a new managed database using point in time restore": {
+            "$ref": "./examples/ManagedDatabaseCreatePointInTimeRestore.json"
+          },
+          "Creates a new managed database with ledger on.": {
+            "$ref": "./examples/CreateManagedDatabaseLedger.json"
+          },
+          "Creates a new managed database with maximal properties": {
+            "$ref": "./examples/ManagedDatabaseCreateMax.json"
+          },
+          "Creates a new managed database with minimal properties": {
+            "$ref": "./examples/ManagedDatabaseCreateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedDatabase"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedDatabases_Update",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Updates an existing database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested database resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a managed database with maximal properties": {
+            "$ref": "./examples/ManagedDatabaseUpdateMax.json"
+          },
+          "Updates a managed database with minimal properties": {
+            "$ref": "./examples/ManagedDatabaseUpdateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedDatabase"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedDatabases_Delete",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Deletes a managed database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete managed database": {
+            "$ref": "./examples/ManagedDatabaseDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/cancelMove": {
+      "post": {
+        "operationId": "ManagedDatabases_CancelMove",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Cancels a managed database move operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters of the cancel managed database move operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseMoveDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancels a managed database move.": {
+            "$ref": "./examples/ManagedDatabaseCancelMove.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeMove": {
+      "post": {
+        "operationId": "ManagedDatabases_CompleteMove",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Completes a managed database move operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters of the complete managed database move operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseMoveDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Completes a managed database move.": {
+            "$ref": "./examples/ManagedDatabaseCompleteMove.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/completeRestore": {
+      "post": {
+        "operationId": "ManagedDatabases_CompleteRestore",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Completes the restore operation on a managed database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The definition for completing the restore of this managed database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompleteDatabaseRestoreDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Completes a managed database external backup restore.": {
+            "$ref": "./examples/ManagedDatabaseCompleteExternalRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/reevaluateInaccessibleDatabaseState": {
+      "post": {
+        "operationId": "ManagedDatabases_ReevaluateInaccessibleDatabaseState",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Reevaluates the inaccessibility state of a managed database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabase"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reevaluate the inaccessibility state of a managed database.": {
+            "$ref": "./examples/ManagedDatabaseReevaluateInaccessibleDatabaseState.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedDatabase"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/startMove": {
+      "post": {
+        "operationId": "ManagedDatabases_StartMove",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Starts a managed database move operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters of the start managed database move operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseStartMoveDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Starts a managed database move with all optional parameters specified.": {
+            "$ref": "./examples/ManagedDatabaseStartMoveMax.json"
+          },
+          "Starts a managed database move with no optional parameters specified.": {
+            "$ref": "./examples/ManagedDatabaseStartMoveMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases": {
+      "get": {
+        "operationId": "ManagedDatabases_ListInaccessibleByInstance",
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Gets a list of inaccessible managed databases in a managed instance",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List inaccessible managed databases by managed instances": {
+            "$ref": "./examples/InaccessibleManagedDatabaseListByManagedInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CompleteDatabaseRestoreDefinition": {
+      "type": "object",
+      "description": "Contains the information necessary to perform a complete database restore operation.",
+      "properties": {
+        "lastBackupName": {
+          "type": "string",
+          "description": "The last backup name to apply"
+        }
+      },
+      "required": [
+        "lastBackupName"
+      ]
+    },
+    "ManagedDatabase": {
+      "type": "object",
+      "description": "A managed database resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedDatabaseExtendedAccessibilityInfo": {
+      "type": "object",
+      "description": "Managed Database Extended Accessibility Information",
+      "properties": {
+        "inaccessibilityReasonErrorCode": {
+          "type": "string",
+          "description": "SQL Server error code connected to the inaccessibility root cause.",
+          "readOnly": true
+        },
+        "inaccessibilityReasonDescription": {
+          "type": "string",
+          "description": "Root cause explanation and mitigation action.",
+          "readOnly": true
+        },
+        "inaccessibilityReasonKind": {
+          "$ref": "./common.json#/definitions/InaccessibilityReason",
+          "description": "Root cause kind. Allowed values are “TransparentDataEncryption”, “DatabaseReplication”, and “Unknown”.",
+          "readOnly": true
+        },
+        "inaccessibilityReasonTdeKeyUri": {
+          "type": "string",
+          "description": "For the root cause kind “TransparentDataEncryption”, the CMK URI.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "inaccessibilityReasonErrorCode",
+        "inaccessibilityReasonDescription",
+        "inaccessibilityReasonKind"
+      ]
+    },
+    "ManagedDatabaseListResult": {
+      "type": "object",
+      "description": "The response of a ManagedDatabase list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedDatabase items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedDatabaseMoveDefinition": {
+      "type": "object",
+      "description": "Contains the information necessary to perform a managed database move.",
+      "properties": {
+        "destinationManagedDatabaseId": {
+          "type": "string",
+          "description": "The destination managed database ID"
+        }
+      },
+      "required": [
+        "destinationManagedDatabaseId"
+      ]
+    },
+    "ManagedDatabaseProperties": {
+      "type": "object",
+      "description": "The managed database's properties.",
+      "properties": {
+        "collation": {
+          "type": "string",
+          "description": "Collation of the managed database.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/ManagedDatabaseStatus",
+          "description": "Status of the database.",
+          "readOnly": true
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation date of the database.",
+          "readOnly": true
+        },
+        "earliestRestorePoint": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest restore point in time for point in time restore.",
+          "readOnly": true
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "defaultSecondaryLocation": {
+          "type": "string",
+          "description": "Geo paired region.",
+          "readOnly": true
+        },
+        "catalogCollation": {
+          "$ref": "./common.json#/definitions/CatalogCollationType",
+          "description": "Collation of the metadata catalog.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "createMode": {
+          "$ref": "./common.json#/definitions/ManagedDatabaseCreateMode",
+          "description": "Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerUri": {
+          "type": "string",
+          "description": "Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the uri of the storage container where backups for this restore are stored.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "The resource identifier of the source database associated with create operation of this database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "crossSubscriptionSourceDatabaseId": {
+          "type": "string",
+          "description": "The resource identifier of the cross-subscription source database associated with create operation of this database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorableDroppedDatabaseId": {
+          "type": "string",
+          "description": "The restorable dropped database resource id to restore when creating this database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "crossSubscriptionRestorableDroppedDatabaseId": {
+          "type": "string",
+          "description": "The restorable cross-subscription dropped database resource id to restore when creating this database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerIdentity": {
+          "type": "string",
+          "description": "Conditional. If createMode is RestoreExternalBackup, this value is used. Specifies the identity used for storage container authentication. Can be 'SharedAccessSignature' or 'ManagedIdentity'; if not specified 'SharedAccessSignature' is assumed.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageContainerSasToken": {
+          "type": "string",
+          "description": "Conditional. If createMode is RestoreExternalBackup and storageContainerIdentity is not ManagedIdentity, this value is required. Specifies the storage container sas token.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "failoverGroupId": {
+          "type": "string",
+          "description": "Instance Failover Group resource identifier that this managed database belongs to.",
+          "readOnly": true
+        },
+        "recoverableDatabaseId": {
+          "type": "string",
+          "description": "The resource identifier of the recoverable database associated with create operation of this database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "longTermRetentionBackupResourceId": {
+          "type": "string",
+          "description": "The name of the Long Term Retention backup to be used for restore of this managed database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "autoCompleteRestore": {
+          "type": "boolean",
+          "description": "Whether to auto complete restore of this managed database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "lastBackupName": {
+          "type": "string",
+          "description": "Last backup file name for restore of this managed database.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "crossSubscriptionTargetManagedInstanceId": {
+          "type": "string",
+          "description": "Target managed instance id used in cross-subscription restore.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "isLedgerOn": {
+          "type": "boolean",
+          "description": "Whether or not this database is a ledger database, which means all tables in the database are ledger tables. Note: the value of this property cannot be changed after the database has been created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedAccessibilityInfo": {
+          "$ref": "#/definitions/ManagedDatabaseExtendedAccessibilityInfo",
+          "description": "Additional observability and troubleshooting information for databases in ‘Inaccessible’ state.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDatabaseStartMoveDefinition": {
+      "type": "object",
+      "description": "Contains the information necessary to start a managed database move.",
+      "properties": {
+        "destinationManagedDatabaseId": {
+          "type": "string",
+          "description": "The destination managed database ID"
+        },
+        "operationMode": {
+          "type": "string",
+          "description": "The move operation mode.",
+          "default": "Move",
+          "enum": [
+            "Move",
+            "Copy"
+          ],
+          "x-ms-enum": {
+            "name": "MoveOperationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Move",
+                "value": "Move",
+                "description": "Move"
+              },
+              {
+                "name": "Copy",
+                "value": "Copy",
+                "description": "Copy"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "destinationManagedDatabaseId"
+      ]
+    },
+    "ManagedDatabaseUpdate": {
+      "type": "object",
+      "description": "An managed database update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
