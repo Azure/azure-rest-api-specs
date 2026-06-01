@@ -2940,3 +2940,4 @@ union CosmosDBAccountOfferType {
   DatabaseAccounts.listConnectionStrings,
   "csharp"
 );
+@@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "javascript");
