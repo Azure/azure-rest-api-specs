@@ -474,6 +474,10 @@ union SchemaFields {
   @encodedName("application/json", "json_schema")
   jsonSchema: "json_schema",
 
+  @doc("Last modified field.")
+  @encodedName("application/json", "last_modified")
+  lastModified: "last_modified",
+
   @doc("Etag field.")
   etag: "etag",
 
@@ -571,6 +575,12 @@ model Schema {
   @doc("The JSON Schema definition.")
   @encodedName("application/json", "json_schema")
   jsonSchema: Record<unknown>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Consistent with other resources in this API."
+  @doc("A date representing the last time the schema was modified.")
+  @encodedName("application/json", "last_modified")
+  @visibility(Lifecycle.Read)
+  lastModified?: offsetDateTime;
 
   @doc("A value representing the current state of the resource.")
   @visibility(Lifecycle.Read)

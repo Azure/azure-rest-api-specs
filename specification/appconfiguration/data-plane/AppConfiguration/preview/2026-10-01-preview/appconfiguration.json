@@ -1939,6 +1939,7 @@
                 "scope",
                 "tags",
                 "json_schema",
+                "last_modified",
                 "etag"
               ],
               "x-ms-enum": {
@@ -1989,6 +1990,11 @@
                     "name": "jsonSchema",
                     "value": "json_schema",
                     "description": "JSON schema field."
+                  },
+                  {
+                    "name": "lastModified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
                   },
                   {
                     "name": "etag",
@@ -2172,6 +2178,7 @@
                 "scope",
                 "tags",
                 "json_schema",
+                "last_modified",
                 "etag"
               ],
               "x-ms-enum": {
@@ -2222,6 +2229,11 @@
                     "name": "jsonSchema",
                     "value": "json_schema",
                     "description": "JSON schema field."
+                  },
+                  {
+                    "name": "lastModified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
                   },
                   {
                     "name": "etag",
@@ -3584,6 +3596,13 @@
           "additionalProperties": {},
           "x-ms-client-name": "jsonSchema"
         },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A date representing the last time the schema was modified.",
+          "readOnly": true,
+          "x-ms-client-name": "lastModified"
+        },
         "etag": {
           "type": "string",
           "description": "A value representing the current state of the resource.",
@@ -3608,6 +3627,7 @@
         "scope",
         "tags",
         "json_schema",
+        "last_modified",
         "etag"
       ],
       "x-ms-enum": {
@@ -3658,6 +3678,11 @@
             "name": "jsonSchema",
             "value": "json_schema",
             "description": "JSON schema field."
+          },
+          {
+            "name": "lastModified",
+            "value": "last_modified",
+            "description": "Last modified field."
           },
           {
             "name": "etag",
