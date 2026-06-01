@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2025-09-16-preview",
+    "licenseProfileName": "default",
+    "machineName": "myMachine",
+    "parameters": {
+      "properties": {
+        "esuProfile": {
+          "assignedLicense": "{LicenseResourceId}"
+        },
+        "productProfile": {
+          "productFeatures": [
+            {
+              "name": "Hotpatch",
+              "subscriptionStatus": "Enable"
+            }
+          ],
+          "productType": "WindowsServer",
+          "subscriptionStatus": "Enable"
+        },
+        "softwareAssurance": {
+          "softwareAssuranceCustomer": true
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.HybridCompute/machines/licenseProfiles",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
+        "location": "eastus2euap",
+        "properties": {
+          "esuProfile": {
+            "assignedLicense": "{LicenseResourceId}",
+            "esuEligibility": "Eligible",
+            "esuKeyState": "Inactive",
+            "esuKeys": [
+              {
+                "licenseStatus": 1,
+                "sku": "skuNumber1"
+              },
+              {
+                "licenseStatus": 1,
+                "sku": "skuNumber2"
+              }
+            ],
+            "serverType": "Standard"
+          },
+          "productProfile": {
+            "billingEndDate": "2023-11-05T20:36:49.745Z",
+            "billingStartDate": "2023-10-05T20:36:49.745Z",
+            "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+            "enrollmentDate": "2023-10-05T20:36:49.745Z",
+            "productFeatures": [
+              {
+                "name": "Hotpatch",
+                "billingEndDate": "2023-11-05T20:36:49.745Z",
+                "billingStartDate": "2023-10-05T20:36:49.745Z",
+                "disenrollmentDate": "2023-11-05T20:36:49.745Z",
+                "enrollmentDate": "2023-10-05T20:36:49.745Z",
+                "subscriptionStatus": "Enabling"
+              }
+            ],
+            "productType": "WindowsServer",
+            "subscriptionStatus": "Enabling"
+          },
+          "softwareAssurance": {
+            "softwareAssuranceCustomer": true
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
+        "Location": "{callbackUrl}",
+        "Retry-After": 200
+      }
+    }
+  },
+  "operationId": "LicenseProfiles_Update",
+  "title": "Update a License Profile"
+}
