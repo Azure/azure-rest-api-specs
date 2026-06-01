@@ -1,0 +1,33 @@
+# Embr
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for Embr.
+
+## Configuration
+
+### Basic Information
+
+This is a TypeSpec project so we only want to readme to default the default tag and point to the outputted swagger file.
+This is used for some tools such as doc generation and swagger apiview generation it isn't used for SDK code gen as we
+use the native TypeSpec code generation configured in the tspconfig.yaml file.
+
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-preview-2026-01-01
+```
+
+### Tag: package-preview-2026-01-01
+
+These settings apply only when `--tag=package-preview-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01'
+input-file:
+  - preview/2026-01-01-preview/embr.json
+suppressions:
+  - code: PathContainsResourceType
+  - code: PathResourceProviderMatchNamespace
+```
+
+---
