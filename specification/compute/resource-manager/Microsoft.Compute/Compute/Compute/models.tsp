@@ -3517,6 +3517,12 @@ model VirtualMachineScaleSetHardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
