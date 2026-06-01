@@ -36,7 +36,8 @@ alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key("trafficManagerUserMetricsKey")
     trafficManagerUserMetricsKey: "default";
   },
-  ErrorType = CloudError
+  ErrorType = CloudError,
+  ResourceName = "TrafficManagerUserMetrics"
 >;
 
 @armResourceOperations
