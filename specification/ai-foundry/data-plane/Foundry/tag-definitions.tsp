@@ -4,8 +4,14 @@ using OpenAPI;
   #{ name: "Responses", description: "Responses from the API" },
   #{ name: "Conversations", parent: "Responses" },
   #{ name: "Agents" },
-  #{ name: "Agent Session Files", parent: "Agents" },
   #{ name: "Agent Invocations", parent: "Agents" },
+  #{
+    name: "Agent Invocations WebSocket",
+    parent: "Agents",
+    description: "Agent Invocations (WebSocket)"
+  },
+  #{ name: "Agent Session Files", parent: "Agents" },
+  #{ name: "Agent Containers", parent: "Agents" },
   #{ name: "Platform APIs" },
   #{ name: "Datasets", parent: "Platform APIs" },
   #{ name: "Indexes", parent: "Platform APIs" },
@@ -26,17 +32,22 @@ using OpenAPI;
   #{ name: "Schedules", parent: "Platform APIs" },
   #{ name: "Skills", parent: "Platform APIs" },
   #{ name: "Toolboxes", parent: "Platform APIs" },
+  #{ name: "Deployments", parent: "Platform APIs" },
   #{
     name: "DataGenerationJobs",
     parent: "Platform APIs",
-    summary: "Data generation jobs",
+    summary: "Data generation jobs"
   },
   #{
     name: "AgentOptimizationJobs",
     parent: "Platform APIs",
-    summary: "Agent optimization jobs",
+    summary: "Agent optimization jobs"
   },
-  #{ name: "Deployments", parent: "Platform APIs" },
+  #{
+    name: "EvaluatorGenerationJobs",
+    parent: "Platform APIs",
+    summary: "Evaluator generation jobs"
+  },
   #{ name: "Evaluations" },
   #{ name: "Evals", parent: "Evaluations" },
   #{ name: "Evaluation Rules", parent: "Evaluations" },
