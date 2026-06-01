@@ -1049,10 +1049,28 @@ model KeySignParameters {
   algorithm?: JsonWebKeySignatureAlgorithm;
 
   /**
-   * The value to operate on.
+   * The value to operate on. Required unless external_mu is specified.
    */
+  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
-  value: bytes;
+  value?: bytes;
+
+  /**
+   * The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.
+   * When specified, the algorithm and value fields must not be set. Only supported for ML-DSA (AKP) keys.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  @encodedName("application/json", "external_mu")
+  @encode("base64url")
+  externalMu?: bytes;
+
+  /**
+   * The application context string for ML-DSA signing (FIPS 204 Section 5.2). Must be 0-255 bytes.
+   * Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  @encode("base64url")
+  context?: bytes;
 }
 
 /**
@@ -1067,10 +1085,11 @@ model KeyVerifyParameters {
   algorithm?: JsonWebKeySignatureAlgorithm;
 
   /**
-   * The digest used for signing.
+   * The digest used for signing. Required unless external_mu is specified.
    */
+  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
-  digest: bytes;
+  digest?: bytes;
 
   /**
    * The signature to be verified.
@@ -1078,6 +1097,23 @@ model KeyVerifyParameters {
   @encodedName("application/json", "value")
   @encode("base64url")
   signature: bytes;
+
+  /**
+   * The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.
+   * When specified, the algorithm and digest fields must not be set. Only supported for ML-DSA (AKP) keys.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  @encodedName("application/json", "external_mu")
+  @encode("base64url")
+  externalMu?: bytes;
+
+  /**
+   * The application context string for ML-DSA verification (FIPS 204 Section 5.2). Must be 0-255 bytes.
+   * Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  @encode("base64url")
+  context?: bytes;
 }
 
 /**

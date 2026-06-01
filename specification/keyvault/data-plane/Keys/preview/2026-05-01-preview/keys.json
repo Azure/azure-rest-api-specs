@@ -829,6 +829,12 @@
           },
           "Sign with ML-DSA key": {
             "$ref": "./examples/sign-MLDSA-example.json"
+          },
+          "Sign with ML-DSA key using external mu": {
+            "$ref": "./examples/sign-MLDSA-externalmu-example.json"
+          },
+          "Sign with ML-DSA key using context": {
+            "$ref": "./examples/sign-MLDSA-context-example.json"
           }
         }
       }
@@ -946,6 +952,12 @@
           },
           "Verify with ML-DSA key": {
             "$ref": "./examples/verify-MLDSA-example.json"
+          },
+          "Verify with ML-DSA key using external mu": {
+            "$ref": "./examples/verify-MLDSA-externalmu-example.json"
+          },
+          "Verify with ML-DSA key using context": {
+            "$ref": "./examples/verify-MLDSA-context-example.json"
           }
         }
       }
@@ -2745,18 +2757,26 @@
       "properties": {
         "alg": {
           "$ref": "#/definitions/JsonWebKeySignatureAlgorithm",
-          "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm identifier. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
           "x-ms-client-name": "algorithm"
         },
         "value": {
           "type": "string",
           "format": "base64url",
-          "description": "The value to operate on."
+          "description": "The value to operate on. Required unless external_mu is specified."
+        },
+        "external_mu": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes. When specified, the algorithm and value fields must not be set. Only supported for ML-DSA (AKP) keys.",
+          "x-ms-client-name": "externalMu"
+        },
+        "context": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The application context string for ML-DSA signing (FIPS 204 Section 5.2). Must be 0-255 bytes. Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "KeyUpdateParameters": {
       "type": "object",
@@ -2806,23 +2826,33 @@
       "properties": {
         "alg": {
           "$ref": "#/definitions/JsonWebKeySignatureAlgorithm",
-          "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
           "x-ms-client-name": "algorithm"
         },
         "digest": {
           "type": "string",
           "format": "base64url",
-          "description": "The digest used for signing."
+          "description": "The digest used for signing. Required unless external_mu is specified."
         },
         "value": {
           "type": "string",
           "format": "base64url",
           "description": "The signature to be verified.",
           "x-ms-client-name": "signature"
+        },
+        "external_mu": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes. When specified, the algorithm and digest fields must not be set. Only supported for ML-DSA (AKP) keys.",
+          "x-ms-client-name": "externalMu"
+        },
+        "context": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The application context string for ML-DSA verification (FIPS 204 Section 5.2). Must be 0-255 bytes. Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
         }
       },
       "required": [
-        "digest",
         "value"
       ]
     },
