@@ -429,8 +429,6 @@ suppressions:
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: OperationsAPIImplementation
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
-  - code: ProvisioningStateMustBeReadOnly
-    reason: "The provisioningState property is already set to readOnly in the model definitions. This is a known pattern inherited from existing resources."
 ```
 
 ---

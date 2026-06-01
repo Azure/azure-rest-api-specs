@@ -187,7 +187,7 @@ union CreateMode {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GeoRestore: "GeoRestore",
 
-  /** Rename an existing server * */
+  /** Rename an existing server. */
   @added(Versions.v2025_12_01_preview)
   Rename: "Rename",
 }
