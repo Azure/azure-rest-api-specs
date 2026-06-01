@@ -940,7 +940,7 @@ union StorageAlignmentStatus {
 }
 
 /**
- * Specifies the processor mode for the virtual machine. 'Deterministic' ensures predictable and consistent processor frequency at the base/nominal level. 'Opportunistic' allows higher frequency bursts when thermal and power headroom permits (current default for Intel/AMD).
+ * Specifies the processor frequency behavior for the virtual machine. See each member for the behavior it controls.
  */
 @added(Versions.v2026_04_01)
 union ProcessorMode {
@@ -949,7 +949,7 @@ union ProcessorMode {
   /** Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled. */
   Deterministic: "Deterministic",
 
-  /** Allows higher frequency bursts when thermal and power headroom permits. This is the current default for Intel/AMD processors. */
+  /** Allows higher frequency bursts when thermal and power headroom permits. */
   Opportunistic: "Opportunistic",
 }
 
@@ -5430,7 +5430,7 @@ model HardwareProfile {
   vmSizeProperties?: VMSizeProperties;
 
   /**
-   * Specifies the processor mode for the virtual machine. 'Deterministic' ensures predictable and consistent processor frequency at the base/nominal level. 'Opportunistic' allows higher frequency bursts when conditions permit. If not specified, the default is determined by the platform. Minimum api-version: 2026-04-01. Only supported on VM SKUs where the 'SupportedProcessorModes' capability is set.
+   * Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). Supported on select VM SKU families; verify by checking the SKU's capabilities list before use. This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
    */
   @added(Versions.v2026_04_01)
   processorMode?: ProcessorMode;
