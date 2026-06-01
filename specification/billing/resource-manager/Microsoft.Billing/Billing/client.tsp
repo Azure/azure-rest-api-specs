@@ -457,11 +457,13 @@ using Microsoft.Billing;
 );
 
 // Resource-level method disambiguation: multiple @get @action ops on same parent resource share name "GetBy<Parent>" causing CS0111.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(
   BillingProfiles.productsListByBillingProfile,
   "GetProducts",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(
   InvoiceSections.productsListByInvoiceSection,
   "GetProducts",
@@ -473,6 +475,12 @@ using Microsoft.Billing;
   "ReservedInstanceFlexibility",
   "csharp"
 );
+
+@@clientName(SpendingLimitType.MSDN, "Msdn", "csharp");
+// SavingsPlanUpdateValidate rename TEMPORARILY commented out — combined with @@clientLocation
+// in back-compatible.tsp, the current emitter drops the action method from the Resource entirely.
+// Tracking root-cause analysis separately; restore once Phase 6 fix lands.
+// @@clientName(SavingsPlanUpdateValidateRequest, "SavingsPlanUpdateValidateContent", "csharp");
 
 // Restore GA C# types for *Id (ResourceIdentifier), *Uri (Uri), tenant IDs (Guid?), and
 // termDuration (TimeSpan?). Spec models these as `string`; @@alternateType maps to the GA shapes.
@@ -627,6 +635,40 @@ using Microsoft.Billing;
 @@usage(TransferProperties, Usage.input, "csharp");
 @@usage(PartnerTransferProperties, Usage.input, "csharp");
 @@usage(RecipientTransferProperties, Usage.input, "csharp");
+
+// D8 fix: GA emitted Amount-typed properties as { get; } only because the inner Amount
+// model has @visibility(Lifecycle.Read) on its fields (currency, value). The MPG emitter,
+// when the containing model is marked Usage.input, ignores the inner type's read-only-ness
+// and emits a public setter — letting callers assign a meaningless BillingAmount whose own
+// Currency/Value cannot be mutated. Restore the GA shape by marking each Amount-typed
+// outer property Lifecycle.Read. This applies across all languages, which is the correct
+// behaviour (Amount is a read-only response shape per spec).
+@@visibility(AvailableBalanceProperties.amount, Lifecycle.Read);
+@@visibility(AvailableBalanceProperties.totalPaymentsOnAccount, Lifecycle.Read);
+@@visibility(PaymentOnAccount.amount, Lifecycle.Read);
+@@visibility(BillingSubscriptionProperties.lastMonthCharges, Lifecycle.Read);
+@@visibility(BillingSubscriptionProperties.monthToDateCharges, Lifecycle.Read);
+@@visibility(InvoiceProperties.amountDue, Lifecycle.Read);
+@@visibility(InvoiceProperties.azurePrepaymentApplied, Lifecycle.Read);
+@@visibility(InvoiceProperties.billedAmount, Lifecycle.Read);
+@@visibility(InvoiceProperties.creditAmount, Lifecycle.Read);
+@@visibility(InvoiceProperties.freeAzureCreditApplied, Lifecycle.Read);
+@@visibility(InvoiceProperties.subTotal, Lifecycle.Read);
+@@visibility(InvoiceProperties.taxAmount, Lifecycle.Read);
+@@visibility(InvoiceProperties.totalAmount, Lifecycle.Read);
+@@visibility(Payment.amount, Lifecycle.Read);
+@@visibility(RefundDetailsSummary.amountRequested, Lifecycle.Read);
+@@visibility(RefundDetailsSummary.amountRefunded, Lifecycle.Read);
+@@visibility(ProductProperties.lastCharge, Lifecycle.Read);
+@@visibility(TransactionProperties.azureCreditApplied, Lifecycle.Read);
+@@visibility(TransactionProperties.consumptionCommitmentDecremented, Lifecycle.Read);
+@@visibility(TransactionProperties.effectivePrice, Lifecycle.Read);
+@@visibility(TransactionProperties.marketPrice, Lifecycle.Read);
+@@visibility(TransactionProperties.subTotal, Lifecycle.Read);
+@@visibility(TransactionProperties.tax, Lifecycle.Read);
+@@visibility(TransactionProperties.transactionAmount, Lifecycle.Read);
+@@visibility(RefundTransactionDetails.amountRequested, Lifecycle.Read);
+@@visibility(RefundTransactionDetails.amountRefunded, Lifecycle.Read);
 
 // D3 fix: BillingTransferValidationResult.Results was IReadOnlyList in GA. The new spec
 // does not mark ValidateTransferResponseProperties.results as read-only, so the C# emitter
