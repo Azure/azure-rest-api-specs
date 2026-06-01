@@ -54,6 +54,7 @@ For every OpenAI operation that is **not already present** in any `specification
    import "@azure-tools/openai-typespec";
 
    using TypeSpec.Http;
+   using TypeSpec.OpenAPI;
 
    namespace Azure.AI.Projects;
 
@@ -62,7 +63,8 @@ For every OpenAI operation that is **not already present** in any `specification
    @route("openai/v1")
    @tag("<Group>")
    interface <Group> {
-     op health is OpenAI.health;
+     @extension("x-ms-ignore-summary", true)
+     health is OpenAI.health;
    }
    ```
 
