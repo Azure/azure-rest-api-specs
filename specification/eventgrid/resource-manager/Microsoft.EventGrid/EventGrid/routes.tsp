@@ -253,7 +253,7 @@ interface TopicsOperationGroup {
        */
       @path
       @segment("providers")
-      extensionProviderNamespace: "microsoft.EventGrid";
+      extensionProviderNamespace: "Microsoft.EventGrid";
     },
     Response = EventTypesListResult
   >;

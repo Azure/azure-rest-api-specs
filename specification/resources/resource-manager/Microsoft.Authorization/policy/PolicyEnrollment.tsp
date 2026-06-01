@@ -17,6 +17,7 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2026_01_01_preview)
+@removed(Versions.v2026_06_01)
 model PolicyEnrollment
   is Azure.ResourceManager.ExtensionResource<PolicyEnrollmentProperties> {
   ...ResourceNameParameter<
@@ -45,6 +46,7 @@ alias PolicyEnrollmentListParameters = {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 @added(Versions.v2026_01_01_preview)
+@removed(Versions.v2026_06_01)
 interface PolicyEnrollmentGenericOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -89,6 +91,7 @@ interface PolicyEnrollmentGenericOps
     > {}
 
 @added(Versions.v2026_01_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface PolicyEnrollments {
   /**
