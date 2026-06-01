@@ -829,12 +829,6 @@
           },
           "Sign with ML-DSA key": {
             "$ref": "./examples/sign-MLDSA-example.json"
-          },
-          "Sign with ML-DSA key using external mu": {
-            "$ref": "./examples/sign-MLDSA-externalmu-example.json"
-          },
-          "Sign with ML-DSA key using context": {
-            "$ref": "./examples/sign-MLDSA-context-example.json"
           }
         }
       }
@@ -952,12 +946,6 @@
           },
           "Verify with ML-DSA key": {
             "$ref": "./examples/verify-MLDSA-example.json"
-          },
-          "Verify with ML-DSA key using external mu": {
-            "$ref": "./examples/verify-MLDSA-externalmu-example.json"
-          },
-          "Verify with ML-DSA key using context": {
-            "$ref": "./examples/verify-MLDSA-context-example.json"
           }
         }
       }
@@ -2131,9 +2119,9 @@
         "A128KW",
         "A192KW",
         "A256KW",
-        "A256KWPAD",
         "A128KWPAD",
         "A192KWPAD",
+        "A256KWPAD",
         "CKM_AES_KEY_WRAP",
         "CKM_AES_KEY_WRAP_PAD"
       ],
@@ -2162,18 +2150,18 @@
             "description": "256-bit AES key wrap."
           },
           {
-            "name": "A256_KWPAD",
-            "value": "A256KWPAD",
-            "description": "128-bit AES key wrap with padding."
-          },
-          {
             "name": "A128_KWPAD",
             "value": "A128KWPAD",
-            "description": "192-bit AES key wrap with padding."
+            "description": "128-bit AES key wrap with padding."
           },
           {
             "name": "A192_KWPAD",
             "value": "A192KWPAD",
+            "description": "192-bit AES key wrap with padding."
+          },
+          {
+            "name": "A256_KWPAD",
+            "value": "A256KWPAD",
             "description": "256-bit AES key wrap with padding."
           },
           {
@@ -2757,24 +2745,24 @@
       "properties": {
         "alg": {
           "$ref": "#/definitions/JsonWebKeySignatureAlgorithm",
-          "description": "The signing/verification algorithm identifier. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
           "x-ms-client-name": "algorithm"
         },
         "value": {
           "type": "string",
           "format": "base64url",
-          "description": "The value to operate on. Required unless external_mu is specified."
+          "description": "The value to operate on."
         },
         "external_mu": {
           "type": "string",
           "format": "base64url",
-          "description": "The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes. When specified, the algorithm and value fields must not be set. Only supported for ML-DSA (AKP) keys.",
+          "description": "The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.\nWhen specified, the algorithm and value fields must not be set. Only supported for ML-DSA (AKP) keys.",
           "x-ms-client-name": "externalMu"
         },
         "context": {
           "type": "string",
           "format": "base64url",
-          "description": "The application context string for ML-DSA signing (FIPS 204 Section 5.2). Must be 0-255 bytes. Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
+          "description": "The application context string for ML-DSA signing (FIPS 204 Section 5.2). Must be 0-255 bytes.\nMust not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
         }
       }
     },
@@ -2826,13 +2814,13 @@
       "properties": {
         "alg": {
           "$ref": "#/definitions/JsonWebKeySignatureAlgorithm",
-          "description": "The signing/verification algorithm. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
           "x-ms-client-name": "algorithm"
         },
         "digest": {
           "type": "string",
           "format": "base64url",
-          "description": "The digest used for signing. Required unless external_mu is specified."
+          "description": "The digest used for signing."
         },
         "value": {
           "type": "string",
@@ -2843,13 +2831,13 @@
         "external_mu": {
           "type": "string",
           "format": "base64url",
-          "description": "The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes. When specified, the algorithm and digest fields must not be set. Only supported for ML-DSA (AKP) keys.",
+          "description": "The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.\nWhen specified, the algorithm and digest fields must not be set. Only supported for ML-DSA (AKP) keys.",
           "x-ms-client-name": "externalMu"
         },
         "context": {
           "type": "string",
           "format": "base64url",
-          "description": "The application context string for ML-DSA verification (FIPS 204 Section 5.2). Must be 0-255 bytes. Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
+          "description": "The application context string for ML-DSA verification (FIPS 204 Section 5.2). Must be 0-255 bytes.\nMust not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
         }
       },
       "required": [

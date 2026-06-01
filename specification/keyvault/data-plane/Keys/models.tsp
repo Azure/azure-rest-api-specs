@@ -1042,14 +1042,14 @@ model KeyOperationResult {
  */
 model KeySignParameters {
   /**
-   * The signing/verification algorithm identifier. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
+   * The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
   @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   algorithm?: JsonWebKeySignatureAlgorithm;
 
   /**
-   * The value to operate on. Required unless external_mu is specified.
+   * The value to operate on.
    */
   @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
@@ -1078,14 +1078,14 @@ model KeySignParameters {
  */
 model KeyVerifyParameters {
   /**
-   * The signing/verification algorithm. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
+   * The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
   @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   algorithm?: JsonWebKeySignatureAlgorithm;
 
   /**
-   * The digest used for signing. Required unless external_mu is specified.
+   * The digest used for signing.
    */
   @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
