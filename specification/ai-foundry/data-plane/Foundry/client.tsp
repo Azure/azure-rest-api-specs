@@ -105,9 +105,6 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
-// Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
-@@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
-
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
 // --------------------------------------------------------------------------------
@@ -531,15 +528,20 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(Skills.createSkillVersion, "create");
-@@clientName(Skills.createSkillVersionFromFiles, "create_from_package");
+@@clientName(Skills.createSkillVersionFromFiles, "create_from_files");
+@@clientName(Skills.deleteSkill, "delete");
+@@clientName(Skills.deleteSkillVersion, "delete_version");
 @@clientName(Skills.getSkill, "get");
 @@clientName(Skills.getSkillContent, "download");
+@@clientName(Skills.getSkillVersion, "get_version");
+@@clientName(Skills.getSkillVersionContent, "download_version");
 @@clientName(Skills.listSkills, "list");
+@@clientName(Skills.listSkillVersions, "list_versions");
 @@clientName(Skills.updateSkill, "update");
-@@clientName(Skills.deleteSkill, "delete");
 
 @@clientName(Skill, "SkillDetails", "python");
 @@clientName(DeleteSkillResponse, "DeleteSkillResult", "python");
+@@clientName(DeleteSkillVersionResponse, "DeleteSkillVersionResult", "python");
 @@clientName(DownloadSkillResponse, "DownloadSkillResult", "python");
 
 // --------------------------------------------------------------------------------

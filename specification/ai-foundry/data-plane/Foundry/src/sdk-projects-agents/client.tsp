@@ -152,11 +152,7 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.WebSearchTool, Access.internal);
   @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool");
 
-  @@clientName(
-    HostedAgentDefinition.container_protocol_versions,
-    "versions",
-    "csharp"
-  );
+  @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
 
   @@clientName(
     BingCustomSearchToolParameters,
@@ -208,7 +204,8 @@ namespace Azure.AI.Projects {
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
   @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
-  @@clientName(TelemetryEndpointAuthType,
+  @@clientName(
+    TelemetryEndpointAuthType,
     "TelemetryEndpointAuthenticationKind"
   );
   @@clientName(TelemetryDataKind, "ExportedDataTypes");
@@ -256,6 +253,7 @@ namespace Azure.AI.Projects {
   @@access(Agents.getSession, Access.internal);
   @@access(Agents.getSession, Access.internal);
   @@access(Agents.deleteSession, Access.internal);
+  @@access(Agents.stopSession, Access.internal);
 
   // --------------------------------------------------------------------------------
   // Toolboxes sub‐client
@@ -278,4 +276,19 @@ namespace Azure.AI.Projects {
   // Skills sub‐client
   // --------------------------------------------------------------------------------
   @@clientName(Skill, "AgentsSkill");
+
+  // --------------------------------------------------------------------------------
+  // AgentOptimizationJobs sub‐client
+  // --------------------------------------------------------------------------------
+  @@access(AgentOptimizationJobs.create, Access.internal);
+  @@access(AgentOptimizationJobs.get, Access.internal);
+  @@access(AgentOptimizationJobs.cancel, Access.internal);
+  @@access(AgentOptimizationJobs.delete, Access.internal);
+  @@access(AgentOptimizationJobs.getCandidateConfig, Access.internal);
+  @@access(AgentOptimizationJobs.getCandidate, Access.internal);
+  @@access(AgentOptimizationJobs.getCandidateFile, Access.internal);
+  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
+  @@access(AgentOptimizationJobs.getCandidateResults, Access.internal);
+  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
+  @@access(AgentOptimizationJobs.listCandidates, Access.internal);
 }
