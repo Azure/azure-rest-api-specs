@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -34,16 +34,19 @@ union AlertRuleKind {
   /**
    * MLBehaviorAnalytics
    */
+  @added(Versions.v2025_10_01_preview)
   MLBehaviorAnalytics: "MLBehaviorAnalytics",
 
   /**
    * ThreatIntelligence
    */
+  @added(Versions.v2025_10_01_preview)
   ThreatIntelligence: "ThreatIntelligence",
 
   /**
    * NRT
    */
+  @added(Versions.v2025_10_01_preview)
   NRT: "NRT",
 }
 
@@ -402,6 +405,7 @@ union EntityKindEnum {
   /**
    * Entity represents network interface in the system.
    */
+  @added(Versions.v2025_10_01_preview)
   Nic: "Nic",
 }
 
@@ -602,12 +606,31 @@ union Kind {
   /**
    * Custom detections enable proactive monitoring and automated response actions for various events and system states across your tenant.
    */
+  @added(Versions.v2025_10_01_preview)
   CustomDetection: "CustomDetection",
+}
+
+/**
+ * Operator used for list of dependencies in criteria array.
+ */
+union MetadataDependencyOperator {
+  string,
+
+  /**
+   * AND
+   */
+  AND: "AND",
+
+  /**
+   * OR
+   */
+  OR: "OR",
 }
 
 /**
  * Represents an operator in a ConditionClause.
  */
+@added(Versions.v2025_10_01_preview)
 union Operator {
   string,
 
@@ -783,6 +806,7 @@ union DataConnectorKind {
   /**
    * ThreatIntelligenceTaxii
    */
+  @added(Versions.v2025_10_01_preview)
   ThreatIntelligenceTaxii: "ThreatIntelligenceTaxii",
 
   /**
@@ -793,26 +817,31 @@ union DataConnectorKind {
   /**
    * OfficeATP
    */
+  @added(Versions.v2025_10_01_preview)
   OfficeATP: "OfficeATP",
 
   /**
    * OfficeIRM
    */
+  @added(Versions.v2025_10_01_preview)
   OfficeIRM: "OfficeIRM",
 
   /**
    * Office365Project
    */
+  @added(Versions.v2025_10_01_preview)
   Office365Project: "Office365Project",
 
   /**
    * MicrosoftPurviewInformationProtection
    */
+  @added(Versions.v2025_10_01_preview)
   MicrosoftPurviewInformationProtection: "MicrosoftPurviewInformationProtection",
 
   /**
    * OfficePowerBI
    */
+  @added(Versions.v2025_10_01_preview)
   OfficePowerBI: "OfficePowerBI",
 
   /**
@@ -823,6 +852,7 @@ union DataConnectorKind {
   /**
    * AmazonWebServicesS3
    */
+  @added(Versions.v2025_10_01_preview)
   AmazonWebServicesS3: "AmazonWebServicesS3",
 
   /**
@@ -838,11 +868,13 @@ union DataConnectorKind {
   /**
    * Dynamics365
    */
+  @added(Versions.v2025_10_01_preview)
   Dynamics365: "Dynamics365",
 
   /**
    * MicrosoftThreatProtection
    */
+  @added(Versions.v2025_10_01_preview)
   MicrosoftThreatProtection: "MicrosoftThreatProtection",
 
   /**
@@ -858,21 +890,25 @@ union DataConnectorKind {
   /**
    * GenericUI
    */
+  @added(Versions.v2025_10_01_preview)
   GenericUI: "GenericUI",
 
   /**
    * APIPolling
    */
+  @added(Versions.v2025_10_01_preview)
   APIPolling: "APIPolling",
 
   /**
    * IOT
    */
+  @added(Versions.v2025_10_01_preview)
   IOT: "IOT",
 
   /**
    * GCP
    */
+  @added(Versions.v2025_10_01_preview)
   GCP: "GCP",
 
   /**
@@ -883,6 +919,7 @@ union DataConnectorKind {
   /**
    * PurviewAudit
    */
+  @added(Versions.v2025_10_01_preview)
   PurviewAudit: "PurviewAudit",
 }
 
@@ -1614,8 +1651,26 @@ union IncidentTaskStatus {
 }
 
 /**
+ * Status of the pull request.
+ */
+union PullRequestState {
+  string,
+
+  /**
+   * Open
+   */
+  Open: "Open",
+
+  /**
+   * Closed
+   */
+  Closed: "Closed",
+}
+
+/**
  * State of recommendation.
  */
+@added(Versions.v2025_10_01_preview)
 union State {
   string,
 
@@ -1996,8 +2051,79 @@ union TIObjectKind {
 }
 
 /**
+ * The provisioning state of the watchlist
+ */
+union WatchlistProvisioningState {
+  string,
+
+  /**
+   * New
+   */
+  New: "New",
+
+  /**
+   * InProgress
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Uploading
+   */
+  Uploading: "Uploading",
+
+  /**
+   * Deleting
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * The provisioning state of the workspace manager job
+ */
+@added(Versions.v2025_10_01_preview)
+union JobProvisioningState {
+  string,
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * InProgress
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+}
+
+/**
  * The triggered analytics rule run provisioning state
  */
+@added(Versions.v2025_10_01_preview)
 union ProvisioningState {
   string,
 
@@ -2235,6 +2361,7 @@ union AlertProperty {
   /**
    * SubTechniques alert property
    */
+  @added(Versions.v2025_10_01_preview)
   SubTechniques: "SubTechniques",
 }
 
@@ -2289,11 +2416,13 @@ union MicrosoftSecurityProductName {
   /**
    * Office 365 Advanced Threat Protection
    */
+  @added(Versions.v2025_10_01_preview)
   `Office 365 Advanced Threat Protection`: "Office 365 Advanced Threat Protection",
 
   /**
    * Microsoft Defender Advanced Threat Protection
    */
+  @added(Versions.v2025_10_01_preview)
   `Microsoft Defender Advanced Threat Protection`: "Microsoft Defender Advanced Threat Protection",
 }
 
@@ -2403,6 +2532,7 @@ union AutomationRulePropertyArrayConditionSupportedArrayType {
   /**
    * Evaluate the condition on the incident labels
    */
+  @added(Versions.v2025_10_01_preview)
   IncidentLabels: "IncidentLabels",
 }
 
@@ -2565,11 +2695,13 @@ union AutomationRulePropertyConditionSupportedProperty {
   /**
    * The Custom-Detection rule ids associated with any of the incident alerts
    */
+  @added(Versions.v2025_10_01_preview)
   IncidentCustomDetectionRuleIds: "IncidentCustomDetectionRuleIds",
 
   /**
    * The alert title associated with any of the incident alerts
    */
+  @added(Versions.v2025_10_01_preview)
   IncidentAlertTitle: "IncidentAlertTitle",
 
   /**
@@ -4048,16 +4180,19 @@ model BookmarkProperties {
    * Describes the entity mappings of the bookmark
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_10_01_preview)
   entityMappings?: BookmarkEntityMappings[];
 
   /**
    * A list of relevant mitre attacks
    */
+  @added(Versions.v2025_10_01_preview)
   tactics?: AttackTactic[];
 
   /**
    * A list of relevant mitre techniques
    */
+  @added(Versions.v2025_10_01_preview)
   techniques?: string[];
 }
 
@@ -4512,7 +4647,7 @@ model MetadataDependencies {
   /**
    * Operator used for list of dependencies in criteria array.
    */
-  operator?: Operator;
+  operator?: MetadataDependencyOperator;
 
   /**
    * This is the list of dependencies we must fulfill, according to the AND/OR operator
@@ -6003,6 +6138,7 @@ model IncidentProperties {
   /**
    * Describes a team for the incident
    */
+  @added(Versions.v2025_10_01_preview)
   teamInformation?: TeamInformation;
 }
 
@@ -6089,6 +6225,7 @@ model IncidentAdditionalData {
   /**
    * The techniques associated with incident's tactics
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   techniques?: string[];
 
@@ -6101,12 +6238,14 @@ model IncidentAdditionalData {
   /**
    * The incident number of the incident that the current incident was merged into
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   mergedIncidentNumber?: string;
 
   /**
    * The URL to the incident that the current incident was merged into
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   mergedIncidentUrl?: string;
 }
@@ -7443,7 +7582,7 @@ model PullRequest {
    * State of the pull request
    */
   @visibility(Lifecycle.Read)
-  state?: State;
+  state?: PullRequestState;
 }
 
 /**
@@ -8341,7 +8480,7 @@ model WatchlistProperties {
    * Describes provisioning state
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: WatchlistProvisioningState;
 }
 
 /**
@@ -8438,7 +8577,7 @@ model WorkspaceManagerAssignmentProperties {
    * State of the last job associated to this assignment
    */
   @visibility(Lifecycle.Read)
-  lastJobProvisioningState?: ProvisioningState;
+  lastJobProvisioningState?: JobProvisioningState;
 
   /**
    * List of resources included in this workspace manager assignment
@@ -8486,7 +8625,7 @@ model JobProperties {
    * State of the job
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: JobProvisioningState;
 
   /**
    * The time the job started
@@ -9000,12 +9139,14 @@ model FusionAlertRuleProperties {
   /**
    * Configuration for all supported source signals in fusion detection.
    */
+  @added(Versions.v2025_10_01_preview)
   @identifiers(#[])
   sourceSettings?: FusionSourceSettings[];
 
   /**
    * Configuration to exclude scenarios in fusion detection.
    */
+  @added(Versions.v2025_10_01_preview)
   @identifiers(#[])
   scenarioExclusionPatterns?: FusionScenarioExclusionPattern[];
 
@@ -9037,6 +9178,7 @@ model FusionAlertRuleProperties {
   /**
    * The sub-techniques of the alert rule
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   subTechniques?: string[];
 }
@@ -9220,11 +9362,13 @@ model FusionAlertRuleTemplateProperties {
   /**
    * The sub-techniques of the alert rule
    */
+  @added(Versions.v2025_10_01_preview)
   subTechniques?: string[];
 
   /**
    * All supported source signal configurations consumed in fusion detection.
    */
+  @added(Versions.v2025_10_01_preview)
   @identifiers(#[])
   sourceSettings?: FusionTemplateSourceSetting[];
 }
@@ -9565,6 +9709,7 @@ model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
    * The sub-techniques of the alert rule
    */
+  @added(Versions.v2025_10_01_preview)
   subTechniques?: string[];
 
   /**
@@ -9688,6 +9833,7 @@ model ScheduledAlertRuleCommonProperties {
    * Array of the sentinel entity mappings of the alert rule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_10_01_preview)
   sentinelEntitiesMappings?: SentinelEntityMapping[];
 }
 
@@ -9886,6 +10032,7 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * The sub-techniques of the alert rule
    */
+  @added(Versions.v2025_10_01_preview)
   subTechniques?: string[];
 
   /**
@@ -9919,6 +10066,7 @@ model ScheduledAlertRuleTemplateProperties {
    * Array of the sentinel entity mappings of the alert rule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_10_01_preview)
   sentinelEntitiesMappings?: SentinelEntityMapping[];
 }
 
@@ -10614,11 +10762,11 @@ model DataConnectorTenantId {
  * Represents AATP (Azure Advanced Threat Protection) requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model AatpCheckRequirements extends DataConnectorsCheckRequirements {
+model AATPCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * AATP (Azure Advanced Threat Protection) requirements check properties.
    */
-  properties?: AatpCheckRequirementsProperties;
+  properties?: AATPCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10632,7 +10780,7 @@ model AatpCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model AatpCheckRequirementsProperties extends DataConnectorTenantId {}
+model AATPCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents ASC (Azure Security Center) requirements check request.
@@ -10713,11 +10861,11 @@ model Dynamics365CheckRequirementsProperties extends DataConnectorTenantId {}
  * Represents MCAS (Microsoft Cloud App Security) requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model McasCheckRequirements extends DataConnectorsCheckRequirements {
+model MCASCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MCAS (Microsoft Cloud App Security) requirements check properties.
    */
-  properties?: McasCheckRequirementsProperties;
+  properties?: MCASCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10731,17 +10879,17 @@ model McasCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model McasCheckRequirementsProperties extends DataConnectorTenantId {}
+model MCASCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MDATP (Microsoft Defender Advanced Threat Protection) requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model MdatpCheckRequirements extends DataConnectorsCheckRequirements {
+model MDATPCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.
    */
-  properties?: MdatpCheckRequirementsProperties;
+  properties?: MDATPCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10755,17 +10903,17 @@ model MdatpCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model MdatpCheckRequirementsProperties extends DataConnectorTenantId {}
+model MDATPCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents Microsoft Threat Intelligence requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model MstiCheckRequirements extends DataConnectorsCheckRequirements {
+model MSTICheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Microsoft Threat Intelligence requirements check properties.
    */
-  properties?: MstiCheckRequirementsProperties;
+  properties?: MSTICheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10779,7 +10927,7 @@ model MstiCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model MstiCheckRequirementsProperties extends DataConnectorTenantId {}
+model MSTICheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MTP (Microsoft Threat Protection) requirements check request.
@@ -11097,11 +11245,11 @@ model DataConnectorDataTypeCommon {
 /**
  * Represents Microsoft Threat Intelligence data connector.
  */
-model MstiDataConnector extends DataConnector {
+model MSTIDataConnector extends DataConnector {
   /**
    * Microsoft Threat Intelligence data connector properties.
    */
-  properties?: MstiDataConnectorProperties;
+  properties?: MSTIDataConnectorProperties;
 
   /**
    * The data connector kind
@@ -11113,17 +11261,17 @@ model MstiDataConnector extends DataConnector {
  * Microsoft Threat Intelligence data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MstiDataConnectorProperties extends DataConnectorTenantId {
+model MSTIDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
    */
-  dataTypes: MstiDataConnectorDataTypes;
+  dataTypes: MSTIDataConnectorDataTypes;
 }
 
 /**
  * The available data types for Microsoft Threat Intelligence Platforms data connector.
  */
-model MstiDataConnectorDataTypes {
+model MSTIDataConnectorDataTypes {
   /**
    * Data type for Microsoft Threat Intelligence Platforms data connector.
    */
@@ -15136,65 +15284,76 @@ model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * A list of owners of the IoTDevice entity.
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   owners?: string[];
 
   /**
    * A list of Nic entity ids of the IoTDevice entity.
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   nicEntityIds?: string[];
 
   /**
    * The site of the device
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   site?: string;
 
   /**
    * The zone location of the device within a site
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   zone?: string;
 
   /**
    * The sensor the device is monitored by
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   sensor?: string;
 
   /**
    * The subType of the device ('PLC', 'HMI', 'EWS', etc.)
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   deviceSubType?: string;
 
   /**
    * Device importance, determines if the device classified as 'crown jewel'
    */
+  @added(Versions.v2025_10_01_preview)
   importance?: DeviceImportance;
 
   /**
    * The Purdue Layer of the device
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   purdueLayer?: string;
 
   /**
    * Determines whether the device classified as authorized device
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   isAuthorized?: boolean;
 
   /**
    * Determines whether the device classified as programming device
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   isProgramming?: boolean;
 
   /**
    * Is the device classified as a scanner device
    */
+  @added(Versions.v2025_10_01_preview)
   @visibility(Lifecycle.Read)
   isScanner?: boolean;
 }
