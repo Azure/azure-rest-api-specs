@@ -488,11 +488,3 @@ enum NameAvailabilityReason {
   #{ minLength: 1, maxLength: 127, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
 );
-// temporary until https://github.com/Azure/typespec-rust/issues/907 is fixed
-@@clientInitialization(
-  Microsoft.KeyVault,
-  {
-    initializedBy: InitializedBy.customizeCode,
-  },
-  "rust"
-);
