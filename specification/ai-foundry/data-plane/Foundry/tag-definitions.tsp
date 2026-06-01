@@ -1,7 +1,7 @@
 using OpenAPI;
 
 @tagMetadata(#[
-  #{ name: "Responses", summary: "Responses from the API" },
+  #{ name: "Responses", description: "Responses from the API" },
   #{ name: "Conversations", parent: "Responses" },
   #{ name: "Agents" },
   #{ name: "Agent Session Files", parent: "Agents" },
