@@ -3,7 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "python");
+@@clientName(Microsoft.HorizonDB, "HorizonDBMgmtClient", "python");
 @@clientName(
   Azure.ResourceManager.PrivateEndpointConnectionResource,
   "HorizonDBPrivateEndpointConnection",

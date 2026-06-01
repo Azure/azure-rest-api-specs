@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 @service(#{ title: "Microsoft HorizonDB Management API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-namespace Microsoft.HorizonDb;
+namespace Microsoft.HorizonDB;
 
 @doc("The available API versions.")
 enum Versions {

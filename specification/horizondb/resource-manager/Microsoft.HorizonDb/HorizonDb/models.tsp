@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Microsoft.HorizonDb;
+namespace Microsoft.HorizonDB;
 
 @doc("Represents the HorizonDB cluster.")
 model HorizonDbCluster

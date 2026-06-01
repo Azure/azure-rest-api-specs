@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
-namespace Microsoft.HorizonDb;
+namespace Microsoft.HorizonDB;
 
 alias HorizonDbPrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
