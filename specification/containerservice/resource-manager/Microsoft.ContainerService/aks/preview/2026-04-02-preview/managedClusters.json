@@ -809,7 +809,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -856,7 +856,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           },
           {
             "name": "resource",
@@ -910,6 +910,57 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "MaintenanceWindows_UpdateTags",
+        "tags": [
+          "MaintenanceWindows"
+        ],
+        "description": "Updates tags on a maintenance window.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "path",
+            "description": "The name of the maintenance window.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Parameters supplied to the Update maintenance window Tags operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindowResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "MaintenanceWindows_Delete",
         "tags": [
@@ -934,7 +985,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -10510,7 +10561,7 @@
         "utcOffset": {
           "type": "string",
           "description": "The UTC offset in format +/-HH:mm. For example, '+05:30' for IST and '-07:00'\nfor PST. If not specified, the default is '+00:00'.\nNote: this is a static offset and does not adjust for Daylight Saving Time.\nCustomers in DST-observing regions should pick the offset that matches their\npreferred wall-clock time year-round; the maintenance window will shift by one\nhour relative to local time when DST starts or ends.",
-          "pattern": "^(-|\\+)[0-9]{2}:[0-9]{2}$"
+          "pattern": "^[+-](0\\d|1[0-4]):(00|15|30|45)$"
         },
         "notAllowedDates": {
           "type": "array",
