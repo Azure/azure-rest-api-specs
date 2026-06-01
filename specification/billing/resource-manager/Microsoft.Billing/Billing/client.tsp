@@ -377,6 +377,7 @@ using Microsoft.Billing;
 @@clientName(ProductStatus, "BillingProductStatus", "csharp");
 @@clientName(ProductTransferStatus, "BillingProductTransferStatus", "csharp");
 @@clientName(ProductType, "BillingProductType", "csharp");
+@@clientName(ProductType.SAAS, "Saas", "csharp");
 @@clientName(
   ProvisioningTenantState,
   "BillingProvisioningTenantState",
@@ -573,8 +574,11 @@ using Microsoft.Billing;
 // which `extends SavingsPlanModelList` (which `is Azure.Core.Page<SavingsPlanModel>`).
 // The C# emitter cannot resolve the inherited `value`/`nextLink` properties as pagination
 // metadata through `extends`, and `@@pageItems` / `Legacy.markAsPageable` workarounds in
-// client.tsp do not propagate either. Suppress the operation for C# and re-expose the
-// equivalent GA back-compat method via a Custom partial on `BillingAccountResource`.
+// client.tsp do not propagate either. Suppress the operation for C# only.
+// Tracking issue: https://github.com/Azure/azure-sdk-for-net/issues/59567
+// Removal criteria: once the emitter resolves inherited Page<T> properties through
+// `extends`, drop this `@@scope` line and regenerate to restore
+// `BillingAccountResource.GetByBillingAccountSavingsPlan(Options)`.
 @@scope(BillingAccounts.savingsPlansListByBillingAccount, "!csharp");
 
 // Restore public setters / parameterless ctors on input models that the new spec marks output-only.
