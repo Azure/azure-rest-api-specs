@@ -59,11 +59,12 @@ model InputAudioContentPart extends MessageContentPart {
 }
 
 /** Input image content part. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model RequestImageContentPart extends ContentPart {
   type: ContentPartType.input_image;
-  url?: string;
+  image_url?: url;
   detail?: RequestImageContentPartDetail;
 }
 

@@ -24,7 +24,7 @@ alias LocationParameter = {
   @minLength(1)
   @segment("locations")
   @key
-  locationparameter: Azure.Core.azureLocation;
+  location: Azure.Core.azureLocation;
 };
 
 @@clientName(
@@ -109,9 +109,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkDeallocate")
   bulkDeallocate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -124,9 +124,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkHibernate")
   bulkHibernate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -140,9 +140,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkStart")
   bulkStart(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -156,9 +156,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkCreate")
   bulkCreate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -172,9 +172,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkVdiFlexCreate")
   bulkVdiFlexCreate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -188,9 +188,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkDelete")
   bulkDelete(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -204,9 +204,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkGetOperationStatus")
   bulkGetOperationsStatus(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -220,9 +220,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkCancel")
   bulkCancel(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -236,9 +236,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkReimage")
   bulkReimage(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")

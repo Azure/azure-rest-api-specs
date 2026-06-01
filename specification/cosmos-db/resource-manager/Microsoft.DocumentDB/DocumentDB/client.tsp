@@ -517,3 +517,4 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraClusterDataCenterNodeItem",
   "python"
 );
+@@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "javascript");
