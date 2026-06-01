@@ -153,7 +153,7 @@ interface Responses {
   /**
    * Returns a list of input items for a given response.
    */
-  @summary("List Returns a list of input items for a given response")
+  @summary("List input items for a response")
   @operationId("listInputItems")
   @get
   @route("{response_id}/input_items")
@@ -193,7 +193,7 @@ interface Responses {
   /**
    * Produces a compaction of a responses conversation.
    */
-  @summary("Produces a compaction of a responses conversation")
+  @summary("Compact a responses conversation")
   @post
   @operationId("compactResponseConversation")
   @route("compact")

@@ -1431,7 +1431,7 @@
           }
         ],
         "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version. Updates a code-based agent by uploading new code and creating a new version.\nIf the code and definition are unchanged (matched by x-ms-code-zip-sha256 header), returns the existing version.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
-        "summary": "Update the agent by adding a new version if there are any changes t Update a code-based agent by uploading new code and creating a new ",
+        "summary": "Update an agent Update a code-based agent",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -2187,7 +2187,7 @@
       },
       "get": {
         "operationId": "Agents_listSessions",
-        "summary": "List Returns a list of sessions for the specified agent",
+        "summary": "List sessions for an agent",
         "description": "Returns a list of sessions for the specified agent.",
         "parameters": [
           {
@@ -3019,7 +3019,7 @@
     "/agents/{agent_name}/import": {
       "post": {
         "operationId": "Agents_updateAgentFromManifest",
-        "summary": "Update the agent from a manifest by adding a new version if there a",
+        "summary": "Update an agent from a manifest",
         "description": "Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
@@ -3431,7 +3431,7 @@
     "/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream": {
       "get": {
         "operationId": "Agents_getSessionLogStream",
-        "summary": "Stream console logs (stdout / stderr) for a specific hosted agent s",
+        "summary": "Stream console logs for a hosted agent session",
         "description": "Streams console logs (stdout / stderr) for a specific hosted agent session\nas a Server-Sent Events (SSE) stream.\n\nEach SSE frame contains:\n- `event`: always `\"log\"`\n- `data`: a plain-text log line (currently JSON-formatted, but the schema\nis not contractual and may include additional keys or change format\nover time — clients should treat it as an opaque string)\n\nExample SSE frames:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting FoundryCBAgent server on port 8088\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.130Z\",\"stream\":\"stderr\",\"message\":\"INFO: Application startup complete.\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:35:52.714Z\",\"stream\":\"status\",\"message\":\"No logs since last 60 seconds\"}\n```\n\nThe stream remains open until the client disconnects or the server\nterminates the connection. Clients should handle reconnection as needed.",
         "parameters": [
           {
@@ -5052,7 +5052,7 @@
       "put": {
         "operationId": "EvaluationRules_createOrUpdate",
         "summary": "Create or update an evaluation rule",
-        "description": "Creates or update an evaluation rule.",
+        "description": "Creates or updates an evaluation rule.",
         "parameters": [
           {
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -10313,6 +10313,7 @@
       "post": {
         "operationId": "Evals_createEvalRun",
         "summary": "Create evaluation run",
+        "description": "Creates an evaluation run for the specified evaluation.",
         "parameters": [
           {
             "name": "eval_id",
@@ -10707,7 +10708,7 @@
     "/openai/v1/fine_tuning/jobs": {
       "post": {
         "operationId": "createFineTuningJob",
-        "summary": "Create a fine-tuning job which begins the process of creating a new",
+        "summary": "Create a fine-tuning job",
         "description": "Creates a fine-tuning job which begins the process of creating a new model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the fine-tuned models once complete.\n\n[Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)",
         "parameters": [
           {
@@ -11794,7 +11795,7 @@
     "/openai/v1/responses/compact": {
       "post": {
         "operationId": "compactResponseConversation",
-        "summary": "Produces a compaction of a responses conversation",
+        "summary": "Compact a responses conversation",
         "description": "Produces a compaction of a responses conversation.",
         "parameters": [],
         "responses": {
@@ -12065,7 +12066,7 @@
     "/openai/v1/responses/{response_id}/input_items": {
       "get": {
         "operationId": "listInputItems",
-        "summary": "List Returns a list of input items for a given response",
+        "summary": "List input items for a response",
         "description": "Returns a list of input items for a given response.",
         "parameters": [
           {
@@ -13891,7 +13892,7 @@
           }
         ],
         "description": "Creates a new version of a skill. If the skill does not exist, it will be created. Creates a new version of a skill from uploaded files via multipart form data.",
-        "summary": "Create a new version of a skill Create a new version of a skill from uploaded files via multipart f",
+        "summary": "Create a new version of a skill Create a skill version from uploaded files",
         "responses": {
           "200": {
             "description": "The request has succeeded.",

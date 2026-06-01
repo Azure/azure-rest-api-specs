@@ -1051,7 +1051,7 @@ paths:
         If the code and definition are unchanged (matched by x-ms-code-zip-sha256 header), returns the existing version.
         The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
         Maximum upload size is 250 MB.
-      summary: 'Update the agent by adding a new version if there are any changes t Update a code-based agent by uploading new code and creating a new '
+      summary: Update an agent Update a code-based agent
       responses:
         '200':
           description: The request has succeeded.
@@ -1568,7 +1568,7 @@ paths:
           - AgentEndpoints=V1Preview
     get:
       operationId: Agents_listSessions
-      summary: List Returns a list of sessions for the specified agent
+      summary: List sessions for an agent
       description: Returns a list of sessions for the specified agent.
       parameters:
         - name: Foundry-Features
@@ -2151,7 +2151,7 @@ paths:
   /agents/{agent_name}/import:
     post:
       operationId: Agents_updateAgentFromManifest
-      summary: Update the agent from a manifest by adding a new version if there a
+      summary: Update an agent from a manifest
       description: |-
         Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
         If no changes, returns the existing agent version.
@@ -3119,7 +3119,7 @@ paths:
   /agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream:
     get:
       operationId: Agents_getSessionLogStream
-      summary: Stream console logs (stdout / stderr) for a specific hosted agent s
+      summary: Stream console logs for a hosted agent session
       description: |-
         Streams console logs (stdout / stderr) for a specific hosted agent session
         as a Server-Sent Events (SSE) stream.
@@ -4766,7 +4766,7 @@ paths:
     put:
       operationId: EvaluationRules_createOrUpdate
       summary: Create or update an evaluation rule
-      description: Creates or update an evaluation rule.
+      description: Creates or updates an evaluation rule.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: id
@@ -8623,6 +8623,7 @@ paths:
     post:
       operationId: Evals_createEvalRun
       summary: Create evaluation run
+      description: Creates an evaluation run for the specified evaluation.
       parameters:
         - name: eval_id
           in: path
@@ -8879,7 +8880,7 @@ paths:
   /openai/v1/fine_tuning/jobs:
     post:
       operationId: createFineTuningJob
-      summary: Create a fine-tuning job which begins the process of creating a new
+      summary: Create a fine-tuning job
       description: |-
         Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
 
@@ -9636,7 +9637,7 @@ paths:
   /openai/v1/responses/compact:
     post:
       operationId: compactResponseConversation
-      summary: Produces a compaction of a responses conversation
+      summary: Compact a responses conversation
       description: Produces a compaction of a responses conversation.
       parameters: []
       responses:
@@ -9810,7 +9811,7 @@ paths:
   /openai/v1/responses/{response_id}/input_items:
     get:
       operationId: listInputItems
-      summary: List Returns a list of input items for a given response
+      summary: List input items for a response
       description: Returns a list of input items for a given response.
       parameters:
         - name: response_id
@@ -10999,7 +11000,7 @@ paths:
             type: string
           explode: false
       description: Creates a new version of a skill. If the skill does not exist, it will be created. Creates a new version of a skill from uploaded files via multipart form data.
-      summary: Create a new version of a skill Create a new version of a skill from uploaded files via multipart f
+      summary: Create a new version of a skill Create a skill version from uploaded files
       responses:
         '200':
           description: The request has succeeded.

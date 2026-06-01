@@ -136,6 +136,7 @@ interface Evals {
     AgentsPagedResult<EvalRun>
   >;
 
+  /** Creates an evaluation run for the specified evaluation. */
   @summary("Create evaluation run")
   @post
   @route("{eval_id}/runs")

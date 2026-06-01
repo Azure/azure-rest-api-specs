@@ -46,7 +46,7 @@ interface EvaluationRules {
 
   // PUT /evaluationrules/{id}
   @summary("Create or update an evaluation rule")
-  @doc("Creates or update an evaluation rule.")
+  @doc("Creates or updates an evaluation rule.")
   @Http.put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,

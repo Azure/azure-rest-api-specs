@@ -84,6 +84,10 @@ Add `@summary("Concise imperative phrase")` above the operation. The summary mus
 - Not use third-person: ~~"Creates an agent"~~, ~~"Lists connections"~~
 - Not exceed ~60 characters
 - Not duplicate the full `@doc` / TSDoc description verbatim
+- **Not be truncated** — the text must form a complete, grammatically valid phrase.
+  Truncated summaries (ending mid-word or mid-sentence, e.g. `"Create a fine-tuning job which begins the process of creating a new"`)
+  are a violation. If the intended summary exceeds ~60 characters, shorten it to a complete
+  phrase rather than cutting it off (e.g. `"Create a fine-tuning job"`).
 
 ---
 
@@ -170,6 +174,26 @@ Rewrite the first word to third-person indicative form:
 ```typespec
 @summary("This operation lists all connections that are currently available in the project, including those that are pending and those that are active, and returns them as a paginated list")
 ```
+
+### ❌ Bad — truncated
+
+```typespec
+@summary("Create a fine-tuning job which begins the process of creating a new")
+@summary("Update the agent by adding a new version if there are any changes t")
+```
+
+Summaries must be complete phrases. If the intended text exceeds ~60 characters, shorten
+it to a self-contained imperative phrase (e.g. `"Create a fine-tuning job"`,
+`"Update an agent"`).
+
+### ❌ Bad — malformed / duplicate verb
+
+```typespec
+@summary("List Returns a list of sessions for the specified agent")
+```
+
+Do not repeat the verb or splice in the doc-comment text. Use a clean imperative phrase
+(e.g. `"List sessions for an agent"`).
 
 ### Remediation
 

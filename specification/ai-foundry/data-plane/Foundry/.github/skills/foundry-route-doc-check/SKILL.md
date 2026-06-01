@@ -2,7 +2,7 @@
 name: foundry-route-doc-check
 license: MIT
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 description: "Validates that all TypeSpec route operations in the AI Foundry data-plane (Foundry) domain have documentation comments and @summary decorators with correct voice. USE FOR: reviewing or authoring routes.tsp files under specification/ai-foundry/data-plane/Foundry/src/. DO NOT USE FOR: files outside the Foundry data-plane area, model-only .tsp files, or SDK client customization files (client.tsp)."
 ---
 
@@ -55,7 +55,7 @@ for the full rule definitions, examples, and remediation guidance.
 | `FDOC-001`       | **Every** operation must have a TSDoc comment (`/** ... */`) or `@doc()` — note `/* */` is NOT valid TSDoc |
 | `FDOC-002`       | **Every** operation must have a `@summary()` decorator — no exceptions                         |
 | `FDOC-003`       | Doc comment / `@doc()` must be non-empty and use **third-person indicative** voice ("Creates an agent") |
-| `FDOC-004`       | `@summary()` must be concise, single-line, and use **imperative** voice ("Create an agent")    |
+| `FDOC-004`       | `@summary()` must be concise, single-line, and use **imperative** voice ("Create an agent"). Must not be truncated (ending mid-word or mid-sentence). |
 | `FDOC-005`       | Each `@path`, `@query`, `@header`, and `@body` parameter must have a doc comment or `@doc()`   |
 
 ## Post-Edit Steps

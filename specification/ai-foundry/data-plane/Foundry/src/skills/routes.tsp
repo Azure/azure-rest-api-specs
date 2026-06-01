@@ -85,7 +85,7 @@ interface Skills {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   #suppress "@azure-tools/typespec-azure-core/byos" "Skill file upload uses multipart form data"
-  @summary("Create a new version of a skill from uploaded files via multipart f")
+  @summary("Create a skill version from uploaded files")
   @operationId("createSkillVersionFromFiles")
   @post
   @route("/skills/{name}/versions")

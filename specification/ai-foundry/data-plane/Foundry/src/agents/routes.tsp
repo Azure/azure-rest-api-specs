@@ -77,7 +77,7 @@ interface Agents {
    * Updates the agent by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  @summary("Update the agent by adding a new version if there are any changes t")
+  @summary("Update an agent")
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
@@ -99,7 +99,7 @@ interface Agents {
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent update, not BYOS."
-  @summary("Update a code-based agent by uploading new code and creating a new ")
+  @summary("Update a code-based agent")
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
@@ -146,7 +146,7 @@ interface Agents {
    * Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  @summary("Update the agent from a manifest by adding a new version if there a")
+  @summary("Update an agent from a manifest")
   @post
   @route("/agents/{agent_name}/import")
   updateAgentFromManifest is FoundryDataPlaneOperation<
@@ -504,7 +504,7 @@ interface Agents {
   /**
    * Returns a list of sessions for the specified agent.
    */
-  @summary("List Returns a list of sessions for the specified agent")
+  @summary("List sessions for an agent")
   @get
   @route("/agents/{agent_name}/endpoint/sessions")
   @list
@@ -554,7 +554,7 @@ interface Agents {
    * The stream remains open until the client disconnects or the server
    * terminates the connection. Clients should handle reconnection as needed.
    */
-  @summary("Stream console logs (stdout / stderr) for a specific hosted agent s")
+  @summary("Stream console logs for a hosted agent session")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream")
   @extension(

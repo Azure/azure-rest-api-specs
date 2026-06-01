@@ -18,7 +18,7 @@ interface FineTuning {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @summary("Create a fine-tuning job which begins the process of creating a new")
+  @summary("Create a fine-tuning job")
   @route("jobs")
   @post
   @operationId("createFineTuningJob")
