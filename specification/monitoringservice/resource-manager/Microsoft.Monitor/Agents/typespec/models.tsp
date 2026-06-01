@@ -52,7 +52,7 @@ namespace Microsoft.Monitor {
     issueCreation: "IssueCreation",
 
     /** Investigation operation. */
-    investigate: "Investigate",
+    investigation: "Investigation",
 
     string,
   }
