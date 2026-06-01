@@ -15,25 +15,6 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.KubernetesConfiguration;
 
-// ─── Provisioning state ───────────────────────────────────────────────────────
-
-/** Provisioning state of an ARM resource. */
-union ProvisioningState {
-  string,
-
-  /** Resource has been created successfully. */
-  Succeeded: "Succeeded",
-
-  /** Resource creation failed. */
-  Failed: "Failed",
-
-  /** Resource creation was canceled. */
-  Canceled: "Canceled",
-
-  /** Resource is being updated. */
-  Updating: "Updating",
-}
-
 // ─── UpgradeAssessment enums ──────────────────────────────────────────────────
 
 /** Severity of an upgrade-assessment finding or readiness check. */
@@ -865,7 +846,7 @@ model KubernetesEvent {
 model KubeInventoryProperties {
   /** Provisioning state of the KubeInventory resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 
   /**
    * Kubernetes API version of the represented resource

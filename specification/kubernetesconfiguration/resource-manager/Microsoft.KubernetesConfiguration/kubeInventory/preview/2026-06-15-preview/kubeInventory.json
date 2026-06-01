@@ -183,6 +183,36 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "Capabilities": {
       "type": "object",
       "description": "Linux capability set to add to or drop from a container's default capabilities.",
@@ -721,7 +751,7 @@
       "description": "Properties of a single KubeInventory ARM resource.\nEach ARM resource represents one Kubernetes object from the cluster inventory.\nThe ARM resource name encodes the kind, Kubernetes name, and namespace\n(e.g., 'pod-nginx-6d4cf56db6-x7q2p-default', 'upgrade-assessment-current-kube-system').",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the KubeInventory resource.",
           "readOnly": true
         },
@@ -1259,42 +1289,6 @@
             "format": "int64"
           }
         }
-      }
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of an ARM resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Updating"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Resource is being updated."
-          }
-        ]
       }
     },
     "ReadinessCategory": {
