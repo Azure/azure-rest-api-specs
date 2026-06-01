@@ -157,6 +157,20 @@ union AcquireStorageAccountLock {
 }
 
 /**
+ * Whether access to the storage account is key-based or identity-based.
+ */
+@added(Versions.v2026_05_31_preview)
+union AccessType {
+  string,
+
+  /** Access using storage account keys. */
+  KeyBased: "KeyBased",
+
+  /** Access using managed identity. */
+  IdentityBased: "IdentityBased",
+}
+
+/**
  * Support status of feature
  */
 union SupportStatus {
@@ -7420,6 +7434,18 @@ model AzureStorageContainer extends ProtectionContainer {
    * Re-Do Operation
    */
   operationType?: OperationType;
+
+  /**
+   * Whether access to the storage account is key-based or identity-based.
+   */
+  @added(Versions.v2026_05_31_preview)
+  accessType?: AccessType;
+
+  /**
+   * Managed identity information required to access the storage account.
+   */
+  @added(Versions.v2026_05_31_preview)
+  identityInfo?: IdentityInfo;
 
   /**
    * Type of the container. The value of this property for: 1. Compute Azure VM is Microsoft.Compute/virtualMachines 2.

@@ -1119,6 +1119,15 @@
           }
         },
         "x-ms-examples": {
+          "Re-register Azure Storage ProtectionContainers switching to System Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_ReRegister_SwitchToSAMI.json"
+          },
+          "Register Azure Storage ProtectionContainers with System Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_Register_WithSAMI.json"
+          },
+          "Register Azure Storage ProtectionContainers with User Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_Register_WithUAMI.json"
+          },
           "RegisterAzure Storage ProtectionContainers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Register.json"
           }
@@ -3562,6 +3571,9 @@
         "x-ms-examples": {
           "List Backup Protection Containers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_List.json"
+          },
+          "List Backup Protection Containers with Access Type": {
+            "$ref": "./examples/AzureStorage/ProtectionContainers_List_WithAccessType.json"
           }
         },
         "x-ms-pageable": {
@@ -5292,6 +5304,30 @@
     }
   },
   "definitions": {
+    "AccessType": {
+      "type": "string",
+      "description": "Whether access to the storage account is key-based or identity-based.",
+      "enum": [
+        "KeyBased",
+        "IdentityBased"
+      ],
+      "x-ms-enum": {
+        "name": "AccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KeyBased",
+            "value": "KeyBased",
+            "description": "Access using storage account keys."
+          },
+          {
+            "name": "IdentityBased",
+            "value": "IdentityBased",
+            "description": "Access using managed identity."
+          }
+        ]
+      }
+    },
     "AcquireStorageAccountLock": {
       "type": "string",
       "description": "Whether storage account lock is to be acquired for this container or not.",
@@ -6199,6 +6235,14 @@
         "operationType": {
           "$ref": "#/definitions/OperationType",
           "description": "Re-Do Operation"
+        },
+        "accessType": {
+          "$ref": "#/definitions/AccessType",
+          "description": "Whether access to the storage account is key-based or identity-based."
+        },
+        "identityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Managed identity information required to access the storage account."
         }
       },
       "allOf": [
