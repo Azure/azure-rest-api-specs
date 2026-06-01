@@ -341,12 +341,18 @@ using Microsoft.ManagedNetworkFabric;
   "NetworkDevicePatchContent",
   "csharp"
 );
+@@clientName(
+  NetworkBootstrapDevicePatch,
+  "NetworkBootstrapDevicePatchContent",
+  "csharp"
+);
 @@clientName(NetworkFabricPatch, "NetworkFabricPatchContent", "csharp");
 @@clientName(
   NetworkFabricControllerPatch,
   "NetworkFabricControllerPatchContent",
   "csharp"
 );
+@@clientName(NetworkMonitorPatch, "NetworkMonitorPatchContent", "csharp");
 @@clientName(
   NetworkPacketBrokerPatch,
   "NetworkPacketBrokerPatchContent",
