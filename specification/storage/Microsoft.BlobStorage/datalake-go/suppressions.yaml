@@ -1,0 +1,13 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - FolderStructure
+    - SdkTspConfigValidation
+  sub-rules:
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-go.package-dir
+  reason: >
+    Suppress SDK configuration validation since this directory is only for batch sdk generation.
