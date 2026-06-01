@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AdvisorManagementClient",
-    "version": "2025-05-01-preview",
+    "version": "2026-03-01-preview",
     "description": "REST APIs for Azure Advisor Resiliency Reviews.",
     "x-typespec-generated": [
       {
@@ -165,56 +165,6 @@
           },
           "GetRecommendationDetailSubscriptionResourceUri": {
             "$ref": "./examples/GetRecommendationDetailSubscriptionResourceUri.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Recommendations_Patch",
-        "tags": [
-          "ResourceRecommendationBases"
-        ],
-        "description": "Update the tracked properties of a Recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "The recommendation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trackedProperties",
-            "in": "body",
-            "description": "The properties to update on the recommendation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrackedRecommendationPropertiesPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceRecommendationBase"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateTrackedRecommendation": {
-            "$ref": "./examples/UpdateTrackedRecommendation.json"
           }
         }
       }
@@ -1110,6 +1060,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
+      "patch": {
+        "operationId": "Recommendations_Update",
+        "tags": [
+          "ResourceRecommendationBases"
+        ],
+        "description": "Update the state of a Recommendation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The recommendation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendationPatchPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceRecommendationBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchRecommendationStateProperties": {
+            "$ref": "./examples/PatchRecommendationStateProperties.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews": {
       "get": {
         "operationId": "resiliencyReviews_List",
@@ -1213,364 +1215,6 @@
         "x-ms-examples": {
           "GetResiliencyReview": {
             "$ref": "./examples/ResiliencyReviewsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations": {
-      "get": {
-        "operationId": "triageRecommendations_List",
-        "summary": "Get list of recommendations for an existing Resiliency Review Id.",
-        "description": "Get list of recommendations for an existing Azure Advisor Resiliency Review Id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of items to be included in the result.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "The number of items to skip before starting to collect the result set.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/triageRecommendationCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageRecommendations": {
-            "$ref": "./examples/TriageRecommendationsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}": {
-      "get": {
-        "operationId": "triageRecommendations_Get",
-        "summary": "Get an existing recommendation by id for an existing Resiliency Review Id.",
-        "description": "Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/triageRecommendation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTriageRecommendation": {
-            "$ref": "./examples/TriageRecommendationsGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/approve": {
-      "post": {
-        "operationId": "triageRecommendations_ApproveTriageRecommendation",
-        "summary": "Approve triage recommendation by id.",
-        "description": "Approve a triage recommendation for a given id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Approve a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsApprove.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources": {
-      "get": {
-        "operationId": "triageResources_List",
-        "summary": "List triage resources based on a review and recommendation.",
-        "description": "List all triage resources that belong to a review and recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/triageResourceCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListTriageResources": {
-            "$ref": "./examples/TriageResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/providers/Microsoft.Advisor/triageResources/{recommendationResourceId}": {
-      "get": {
-        "operationId": "triageResources_Get",
-        "summary": "Get existing triage resource.",
-        "description": "Get a triage resource for a given review and recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationResourceId",
-            "in": "path",
-            "description": "Existing recommendation triage resource associated with a triage recommendation. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/triageResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetTriageResource": {
-            "$ref": "./examples/TriageResourcesGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reject": {
-      "post": {
-        "operationId": "triageRecommendations_RejectTriageRecommendation",
-        "summary": "Reject existing triage recommendation by id.",
-        "description": "Reject an existing triage recommendation for a given id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationRejectBody",
-            "in": "body",
-            "description": "JSON object that contains reason for rejecting triage recommendation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecommendationRejectBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reject a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsReject.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendations/{recommendationId}/reset": {
-      "post": {
-        "operationId": "triageRecommendations_ResetTriageRecommendation",
-        "summary": "Reset existing triage recommendation by id.",
-        "description": "Reset an existing triage recommendation for a given id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "reviewId",
-            "in": "path",
-            "description": "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reset a triage recommendation": {
-            "$ref": "./examples/TriageRecommendationsReset.json"
           }
         }
       }
@@ -1996,11 +1640,6 @@
           "description": "Assessment Type Version"
         }
       }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "Category": {
       "type": "string",
@@ -2583,100 +2222,61 @@
         ]
       }
     },
-    "PriorityName": {
+    "RecommendationDismissReason": {
       "type": "string",
-      "description": "Recommendation priority name enum.",
+      "description": "The reason for dismissing the Recommendation.",
       "enum": [
-        "High",
-        "Medium",
-        "Low"
+        "ExcessiveCostInvestmentRequired",
+        "TooComplexOrImpracticalToImplement",
+        "AnAlternativeSolutionIsAlreadyInPlace",
+        "IncompatibleWithTheCurrentConfiguration",
+        "ImplementationStepsAreUnclear",
+        "RiskIsAcceptable",
+        "Other"
       ],
       "x-ms-enum": {
-        "name": "PriorityName",
+        "name": "RecommendationDismissReason",
         "modelAsString": true,
         "values": [
           {
-            "name": "High",
-            "value": "High",
-            "description": "High"
+            "name": "ExcessiveCostInvestmentRequired",
+            "value": "ExcessiveCostInvestmentRequired"
           },
           {
-            "name": "Medium",
-            "value": "Medium",
-            "description": "Medium"
+            "name": "TooComplexOrImpracticalToImplement",
+            "value": "TooComplexOrImpracticalToImplement"
           },
           {
-            "name": "Low",
-            "value": "Low",
-            "description": "Low"
+            "name": "AnAlternativeSolutionIsAlreadyInPlace",
+            "value": "AnAlternativeSolutionIsAlreadyInPlace"
+          },
+          {
+            "name": "IncompatibleWithTheCurrentConfiguration",
+            "value": "IncompatibleWithTheCurrentConfiguration"
+          },
+          {
+            "name": "ImplementationStepsAreUnclear",
+            "value": "ImplementationStepsAreUnclear"
+          },
+          {
+            "name": "RiskIsAcceptable",
+            "value": "RiskIsAcceptable"
+          },
+          {
+            "name": "Other",
+            "value": "Other"
           }
         ]
       }
     },
-    "Reason": {
-      "type": "string",
-      "description": "The reason the state of the Recommendation was changed.",
-      "enum": [
-        "ExcessiveInvestment",
-        "TooComplex",
-        "AlternativeSolution",
-        "Incompatible",
-        "Unclear",
-        "RiskAccepted"
-      ],
-      "x-ms-enum": {
-        "name": "Reason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ExcessiveInvestment",
-            "value": "ExcessiveInvestment"
-          },
-          {
-            "name": "TooComplex",
-            "value": "TooComplex"
-          },
-          {
-            "name": "AlternativeSolution",
-            "value": "AlternativeSolution"
-          },
-          {
-            "name": "Incompatible",
-            "value": "Incompatible"
-          },
-          {
-            "name": "Unclear",
-            "value": "Unclear"
-          },
-          {
-            "name": "RiskAccepted",
-            "value": "RiskAccepted"
-          }
-        ]
-      }
-    },
-    "ReasonForRejectionName": {
-      "type": "string",
-      "description": "Reason for rejecting recommendation name enum.",
-      "enum": [
-        "NotARisk",
-        "RiskAccepted"
-      ],
-      "x-ms-enum": {
-        "name": "ReasonForRejectionName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotARisk",
-            "value": "NotARisk",
-            "description": "Not A Risk"
-          },
-          {
-            "name": "RiskAccepted",
-            "value": "RiskAccepted",
-            "description": "Risk Accepted"
-          }
-        ]
+    "RecommendationPatchPayload": {
+      "type": "object",
+      "description": "The recommendation patch payload.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationStatePropertiesPayload",
+          "description": "The properties for recommendation patch payload."
+        }
       }
     },
     "RecommendationProperties": {
@@ -2703,10 +2303,37 @@
           "type": "string",
           "description": "The resource identified by Advisor."
         },
+        "recommendationStatus": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The state of the Recommendation"
+        },
+        "completionType": {
+          "type": "string",
+          "description": "The type of recommendation completion, which is either MarkedByUser or SystemVerified"
+        },
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
+          "description": "The reason the Recommendation was dismissed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
+        },
+        "lastRefreshed": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time Advisor evaluated the recommendation for validity (re-ingested)."
+        },
         "lastUpdated": {
           "type": "string",
           "format": "date-time",
-          "description": "The most recent time that Advisor checked the validity of the recommendation."
+          "description": "The most recent time the recommendation state changed (manual or automated)."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the recommendation."
         },
         "metadata": {
           "type": "object",
@@ -2725,12 +2352,9 @@
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
         },
-        "suppressionIds": {
-          "type": "array",
-          "description": "The list of snoozed and dismissed rules for the recommendation.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.uuid"
-          }
+        "suppressionId": {
+          "type": "string",
+          "description": "The single snoozed or dismissed rule for the recommendation."
         },
         "extendedProperties": {
           "type": "object",
@@ -2777,10 +2401,6 @@
           "type": "object",
           "description": "The recommendation metadata properties exposed to customer to provide additional information.",
           "additionalProperties": {}
-        },
-        "tracked": {
-          "type": "boolean",
-          "description": "If the Recommendation has Tracking enabled."
         },
         "trackedProperties": {
           "$ref": "#/definitions/TrackedRecommendationProperties",
@@ -2832,42 +2452,53 @@
         }
       }
     },
-    "RecommendationRejectBody": {
+    "RecommendationStatePropertiesPayload": {
       "type": "object",
-      "description": "Recommendation reject body.",
+      "description": "Properties for recommendation state patch payload.",
       "properties": {
-        "reasonForRejection": {
-          "$ref": "#/definitions/ReasonForRejectionName",
-          "description": "Reason for rejecting recommendation."
+        "recommendationStatus": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The state of the recommendation."
+        },
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
+          "description": "The reason the state of the Recommendation was changed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
         }
       }
     },
-    "RecommendationStatusName": {
+    "RecommendationStatus": {
       "type": "string",
-      "description": "Recommendation status name enum.",
+      "description": "The state of the Recommendation applicable from v2026-02-01-preview.",
       "enum": [
-        "Approved",
-        "Rejected",
-        "Pending"
+        "New",
+        "Postponed",
+        "Dismissed",
+        "Completed"
       ],
       "x-ms-enum": {
-        "name": "RecommendationStatusName",
+        "name": "RecommendationStatus",
         "modelAsString": true,
         "values": [
           {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "Approved"
+            "name": "New",
+            "value": "New"
           },
           {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Rejected"
+            "name": "Postponed",
+            "value": "Postponed"
           },
           {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Pending"
+            "name": "Dismissed",
+            "value": "Dismissed"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
           }
         ]
       }
@@ -2979,7 +2610,6 @@
       "enum": [
         "New",
         "InProgress",
-        "Triaged",
         "Completed"
       ],
       "x-ms-enum": {
@@ -2995,11 +2625,6 @@
             "name": "InProgress",
             "value": "InProgress",
             "description": "The review is currently in progress."
-          },
-          {
-            "name": "Triaged",
-            "value": "Triaged",
-            "description": "The review has been triaged."
           },
           {
             "name": "Completed",
@@ -3103,53 +2728,6 @@
         }
       }
     },
-    "State": {
-      "type": "string",
-      "description": "The state of the Recommendation",
-      "enum": [
-        "Approved",
-        "Rejected",
-        "Pending",
-        "InProgress",
-        "Postponed",
-        "Dismissed",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress"
-          },
-          {
-            "name": "Postponed",
-            "value": "Postponed"
-          },
-          {
-            "name": "Dismissed",
-            "value": "Dismissed"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed"
-          }
-        ]
-      }
-    },
     "SuppressionContract": {
       "type": "object",
       "description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
@@ -3229,140 +2807,9 @@
       "type": "object",
       "description": "The tracked properties of a Recommendation",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/State",
-          "description": "The state of the Recommendation"
-        },
-        "postponedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the Recommendation was postponed until."
-        },
-        "reason": {
-          "$ref": "#/definitions/Reason",
-          "description": "The reason the state of the Recommendation was changed."
-        },
         "priority": {
           "$ref": "#/definitions/Priority",
           "description": "The Priority of the Recommendation."
-        }
-      }
-    },
-    "TrackedRecommendationPropertiesPayload": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TrackedRecommendationPropertiesPayloadProperties"
-        }
-      }
-    },
-    "TrackedRecommendationPropertiesPayloadProperties": {
-      "type": "object",
-      "properties": {
-        "trackedProperties": {
-          "$ref": "#/definitions/TrackedRecommendationProperties",
-          "description": "The tracked properties of a Recommendation"
-        }
-      }
-    },
-    "TriageRecommendationProperties": {
-      "type": "object",
-      "description": "Triage recommendation properties.",
-      "properties": {
-        "reviewId": {
-          "type": "string",
-          "description": "Review id.",
-          "readOnly": true
-        },
-        "title": {
-          "type": "string",
-          "description": "Recommendation label.",
-          "readOnly": true
-        },
-        "priority": {
-          "$ref": "#/definitions/PriorityName",
-          "description": "Recommendation priority.",
-          "readOnly": true
-        },
-        "appliesToSubscriptions": {
-          "type": "array",
-          "description": "List of subscription ids.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "recommendationStatus": {
-          "$ref": "#/definitions/RecommendationStatusName",
-          "description": "Recommendation status.",
-          "readOnly": true
-        },
-        "updatedAt": {
-          "type": "string",
-          "description": "Recommendation potential benefit.",
-          "readOnly": true
-        },
-        "rejectReason": {
-          "type": "string",
-          "description": "Recommendation rejection reason.",
-          "readOnly": true
-        },
-        "potentialBenefits": {
-          "type": "string",
-          "description": "Recommendation potential benefit.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Recommendation description.",
-          "readOnly": true
-        },
-        "notes": {
-          "type": "string",
-          "description": "Recommendation notes.",
-          "readOnly": true
-        }
-      }
-    },
-    "TriageResourceProperties": {
-      "type": "object",
-      "description": "Triage resource properties.",
-      "properties": {
-        "reviewId": {
-          "type": "string",
-          "description": "Unique identifier for the review resource this triageResource belongs to.",
-          "readOnly": true
-        },
-        "recommendationId": {
-          "type": "string",
-          "description": "Unique identifier for the recommendation resource this triageResource belongs to.",
-          "readOnly": true
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Unique identifier for the subscription resource this triageResource belongs to.",
-          "readOnly": true
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "Name of the resource group this triageResource belongs to.",
-          "readOnly": true
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Type of resource this triageResource corresponds to e.g. \"Cosmos DB\".",
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Full Azure resource id path of the resource this triageResource corresponds to.",
-          "readOnly": true
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "Name of the resource this triageResource corresponds to.",
-          "readOnly": true
         }
       }
     },
@@ -3450,80 +2897,6 @@
           "description": "The ResiliencyReview items on this page",
           "items": {
             "$ref": "#/definitions/resiliencyReview"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "triageRecommendation": {
-      "type": "object",
-      "description": "Triage recommendation data structure.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TriageRecommendationProperties",
-          "description": "Advisor resiliency review properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "triageRecommendationCollection": {
-      "type": "object",
-      "description": "Collection of Advisor triage recommendations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of triage recommendations.",
-          "items": {
-            "$ref": "#/definitions/triageRecommendation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The URL to get the next set of triage recommendations, if there are any."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "triageResource": {
-      "type": "object",
-      "description": "Triage resource data structure.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TriageResourceProperties",
-          "description": "Triage resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "triageResourceCollection": {
-      "type": "object",
-      "description": "Collection of Advisor triage resources.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TriageResource items on this page",
-          "items": {
-            "$ref": "#/definitions/triageResource"
           }
         },
         "nextLink": {
