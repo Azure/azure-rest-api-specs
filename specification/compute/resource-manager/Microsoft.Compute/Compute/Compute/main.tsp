@@ -71,9 +71,8 @@ enum Versions {
   v2025_11_01: "2025-11-01",
 }
 
+// Fix https://github.com/Azure/typespec-azure/issues/4518 to use template
 interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LEGACY - DO NOT COPY - FIX ME"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
   @tag("ComputeOperations")
   @autoRoute
   @doc("List the operations for the provider")
