@@ -9,10 +9,11 @@ namespace Azure.AI.Projects;
 @route("openai/v1")
 @tag("Chat")
 interface Chat {
-  op listChatCompletions is OpenAI.listChatCompletions;
-  op createChatCompletion is OpenAI.createChatCompletion;
-  op deleteChatCompletion is OpenAI.deleteChatCompletion;
-  op getChatCompletion is OpenAI.getChatCompletion;
-  op updateChatCompletion is OpenAI.updateChatCompletion;
-  op getChatCompletionMessages is OpenAI.getChatCompletionMessages;
+  listChatCompletions is OpenAI.listChatCompletions;
+  @summary("Create a chat completion. Only Chat Completions that have been stored with the `store` parameter set to `true` will be returned.")
+  createChatCompletion is OpenAI.createChatCompletion;
+  deleteChatCompletion is OpenAI.deleteChatCompletion;
+  getChatCompletion is OpenAI.getChatCompletion;
+  updateChatCompletion is OpenAI.updateChatCompletion;
+  getChatCompletionMessages is OpenAI.getChatCompletionMessages;
 }
