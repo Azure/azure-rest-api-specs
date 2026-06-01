@@ -1287,6 +1287,83 @@ op replacePurge(
   "csharp"
 );
 
+// Back-compat property renames for GA 1.3.0 (continued).
+// New spec field names differ from GA-shipped C# names; rename each back.
+@@clientName(AuthorizationServerContractBaseProperties.clientAuthenticationMethod, "clientAuthenticationMethods", "csharp");
+@@clientName(AuthorizationServerContractBaseProperties.supportState, "doesSupportState", "csharp");
+@@clientName(BackendBaseParameters.type, "typePropertiesType", "csharp");
+@@clientName(CertificateContractProperties.keyVault, "keyVaultDetails", "csharp");
+@@clientName(CertificateCreateOrUpdateProperties.keyVault, "keyVaultDetails", "csharp");
+@@clientName(GatewayHostnameConfigurationContractProperties.negotiateClientCertificate, "isClientCertificateRequired", "csharp");
+@@clientName(GroupContractProperties.type, "groupType", "csharp");
+@@clientName(GroupContractProperties.builtIn, "isBuiltIn", "csharp");
+@@clientName(GroupCreateParametersProperties.type, "apiManagementGroupType", "csharp");
+@@clientName(GroupUpdateParametersProperties.type, "apiManagementGroupType", "csharp");
+@@clientName(IdentityProviderContractProperties.type, "identityProviderType", "csharp");
+@@clientName(IdentityProviderCreateContractProperties.type, "identityProviderType", "csharp");
+@@clientName(IdentityProviderUpdateProperties.type, "identityProviderType", "csharp");
+@@clientName(IdentityProviderBaseParameters.signinPolicyName, "signInPolicyName", "csharp");
+@@clientName(IdentityProviderBaseParameters.signinTenant, "signInTenant", "csharp");
+@@clientName(IdentityProviderBaseParameters.signupPolicyName, "signUpPolicyName", "csharp");
+@@clientName(NamedValueEntityBaseParameters.secret, "isSecret", "csharp");
+@@clientName(NamedValueContractProperties.keyVault, "keyVaultDetails", "csharp");
+@@clientName(PortalSigninSettingProperties.enabled, "isRedirectEnabled", "csharp");
+@@clientName(PortalSignupSettingsProperties.enabled, "isSignUpDeveloperPortalEnabled", "csharp");
+@@clientName(PrivateEndpointConnectionWrapperProperties.privateLinkServiceConnectionState, "connectionState", "csharp");
+@@clientName(ProductEntityBaseParameters.approvalRequired, "isApprovalRequired", "csharp");
+@@clientName(ProductEntityBaseParameters.subscriptionRequired, "isSubscriptionRequired", "csharp");
+@@clientName(OperationTagResourceContractProperties.urlTemplate, "uriTemplate", "csharp");
+@@clientName(OperationUpdateContractProperties.urlTemplate, "uriTemplate", "csharp");
+@@clientName(OperationContractProperties.urlTemplate, "uriTemplate", "csharp");
+@@clientName(DiagnosticContractProperties.logClientIp, "isLogClientIPEnabled", "csharp");
+@@clientName(DiagnosticContractUpdateProperties.logClientIp, "isLogClientIPEnabled", "csharp");
+@@clientName(ApiManagementServiceNameAvailabilityResult.nameAvailable, "isNameAvailable", "csharp");
+@@clientName(ApiManagementSkuCosts.meterID, "meterId", "csharp");
+@@clientName(ApiManagementSkuRestrictions.type, "restrictionsType", "csharp");
+@@clientName(AuthenticationSettingsContract.openid, "openId", "csharp");
+@@clientName(BackendTlsProperties.validateCertificateChain, "shouldValidateCertificateChain", "csharp");
+@@clientName(BackendTlsProperties.validateCertificateName, "shouldValidateCertificateName", "csharp");
+@@clientName(CertificateInformation.expiry, "expireOn", "csharp");
+@@clientName(DeployConfigurationParameterProperties.force, "forceDelete", "csharp");
+@@clientName(SaveConfigurationParameterProperties.force, "forceUpdate", "csharp");
+@@clientName(ConnectivityHop.type, "connectivityHopType", "csharp");
+@@clientName(ConnectivityIssue.type, "issueType", "csharp");
+@@clientName(ConnectivityStatusContract.lastStatusChange, "lastStatusChangedOn", "csharp");
+@@clientName(ConnectivityStatusContract.lastUpdated, "lastUpdatedOn", "csharp");
+@@clientName(OperationResultContractProperties.started, "startedOn", "csharp");
+@@clientName(OperationResultContractProperties.updated, "updatedOn", "csharp");
+@@clientName(HostnameConfiguration.type, "hostnameType", "csharp");
+@@clientName(OpenIdAuthenticationSettingsContract.openidProviderId, "openIdProviderId", "csharp");
+@@clientName(ParameterContract.required, "isRequired", "csharp");
+@@clientName(ParameterContract.type, "parameterContractType", "csharp");
+@@clientName(RequestReportRecordContract.ipAddress, "iPAddress", "csharp");
+@@clientName(AccessInformationContractProperties.enabled, "isDirectAccessEnabled", "csharp");
+@@clientName(AccessInformationCreateParameterProperties.enabled, "isDirectAccessEnabled", "csharp");
+@@clientName(AccessInformationUpdateParameterProperties.enabled, "isDirectAccessEnabled", "csharp");
+@@clientName(AccessInformationSecretsContract.enabled, "isDirectAccessEnabled", "csharp");
+@@clientName(TenantConfigurationSyncStateContractProperties.isExport, "isExported", "csharp");
+@@clientName(TermsOfServiceProperties.consentRequired, "isConsentRequired", "csharp");
+@@clientName(TermsOfServiceProperties.enabled, "isDisplayEnabled", "csharp");
+@@clientName(UserTokenParameterProperties.expiry, "expireOn", "csharp");
+@@clientName(SubscriptionContractProperties.notificationDate, "notifiesOn", "csharp");
+@@clientName(UserContractProperties.registrationDate, "registriesOn", "csharp");
+
+// Deep flattened wire paths (properties.subscriptions.enabled / properties.userRegistration.enabled
+// on ApiManagementPortalDelegationSettingData).
+@@clientName(SubscriptionsDelegationSettingsProperties.enabled, "isSubscriptionDelegationEnabled", "csharp");
+@@clientName(RegistrationDelegationSettingsProperties.enabled, "isUserRegistrationDelegationEnabled", "csharp");
+
+// Restore System.Uri (TypeSpec `url` scalar) for ApiManagementPortalDelegationSettingData.Uri,
+// which GA 1.3.0 shipped as System.Uri but spec now declares as `string`.
+@@alternateType(PortalDelegationSettingsProperties.url, url, "csharp");
+
+// GA 1.3.0 shipped this model under the shorter `ConnectivityCheckRequestHttpConfiguration`
+// name, but renaming `ConnectivityCheckRequestProtocolConfigurationHttpConfiguration` causes
+// the emitter to compute a context-derived `HttpHeaderConfiguration` name for the nested
+// `headers: HttpHeader[]` element while emitting the `HttpHeader` type itself with the wrong
+// file name, breaking the build (see notes at lines ~1232 and ~1246). Tracked as a remaining
+// GA back-compat gap to be addressed via a custom partial or generator fix.
+
 // D2: Restore ApiGatewayData base class from TrackedResourceData to
 // ResourceData (GA 1.3.0 shipped this as a proxy resource).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
