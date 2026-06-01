@@ -4,9 +4,12 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+const ToolboxesRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+};
 
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {

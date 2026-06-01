@@ -152,7 +152,7 @@ paths:
           schema:
             $ref: '#/components/schemas/JobStatus'
           explode: false
-        - name: agentName
+        - name: agent_name
           in: query
           required: false
           description: Filter to jobs targeting this agent name.
@@ -1008,7 +1008,7 @@ paths:
         - name: force
           in: query
           required: false
-          description: For Hosted Agents, if true, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types.
+          description: For Hosted Agents, if `true`, force-deletes the agent even if its versions have active sessions, cascading deletion to all associated sessions. The service defaults to `false` if a value is not specified by the caller. This value is not relevant for other Agent types.
           schema:
             type: boolean
             default: false
@@ -1591,6 +1591,7 @@ paths:
       description: |-
         Lists files and directories at a given path in the session sandbox.
         Returns only the immediate children of the specified directory (non-recursive).
+        If path is not provided, lists the session home directory.
       parameters:
         - name: Foundry-Features
           in: header
@@ -1614,8 +1615,8 @@ paths:
             type: string
         - name: path
           in: query
-          required: true
-          description: The directory path to list, relative to the session home directory.
+          required: false
+          description: The directory path to list, relative to the session home directory. Defaults to the home directory if not provided.
           schema:
             type: string
           explode: false
@@ -1625,6 +1626,46 @@ paths:
           description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -1687,7 +1728,7 @@ paths:
         - name: recursive
           in: query
           required: false
-          description: Whether to recursively delete directory contents. Defaults to false.
+          description: Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller.
           schema:
             type: boolean
             default: false
@@ -2284,7 +2325,7 @@ paths:
         - name: force
           in: query
           required: false
-          description: For Hosted Agents, if true, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. Defaults to `false`. This value is not relevant for other Agent types.
+          description: For Hosted Agents, if `true`, force-deletes the version even if it has active sessions, cascading deletion to all associated sessions. The service defaults to `false` if a value is not specified by the caller. This value is not relevant for other Agent types.
           schema:
             type: boolean
             default: false
@@ -8240,46 +8281,10 @@ paths:
             type: string
             enum:
               - Routines=V1Preview
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
+        - $ref: '#/components/parameters/ListRoutinesParameters.limit'
+        - $ref: '#/components/parameters/ListRoutinesParameters.after'
+        - $ref: '#/components/parameters/ListRoutinesParameters.before'
+        - $ref: '#/components/parameters/ListRoutinesParameters.order'
         - name: api-version
           in: query
           required: true
@@ -8460,46 +8465,10 @@ paths:
               - Routines=V1Preview
         - $ref: '#/components/parameters/ListRoutineRunsParameters.routine_name'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.limit'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.after'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.before'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.order'
         - name: api-version
           in: query
           required: true
@@ -9615,6 +9584,14 @@ paths:
           schema:
             type: string
           explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9656,6 +9633,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
   /toolboxes/{name}:
     get:
       operationId: getToolbox
@@ -9668,6 +9648,14 @@ paths:
           description: The name of the toolbox to retrieve.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9690,12 +9678,23 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
     patch:
       operationId: updateToolbox
       summary: Update a toolbox to point to a specific version
       description: Updates a toolbox to point to a specific version.
       parameters:
         - $ref: '#/components/parameters/UpdateToolboxRequest.name'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9724,6 +9723,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateToolboxRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
     delete:
       operationId: deleteToolbox
       summary: Delete a toolbox and all its versions
@@ -9735,6 +9737,14 @@ paths:
           description: The name of the toolbox to delete.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9753,6 +9763,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
   /toolboxes/{name}/versions:
     post:
       operationId: createToolboxVersion
@@ -9766,6 +9779,14 @@ paths:
           schema:
             type: string
             maxLength: 256
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9820,6 +9841,9 @@ paths:
                   description: Policy configuration for this toolbox version.
               required:
                 - tools
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
     get:
       operationId: listToolboxVersions
       summary: List all versions of a toolbox
@@ -9871,6 +9895,14 @@ paths:
           schema:
             type: string
           explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9912,6 +9944,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
   /toolboxes/{name}/versions/{version}:
     get:
       operationId: getToolboxVersion
@@ -9930,6 +9965,14 @@ paths:
           description: The version identifier to retrieve.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9952,6 +9995,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
     delete:
       operationId: deleteToolboxVersion
       summary: Delete a specific version of a toolbox
@@ -9969,6 +10015,14 @@ paths:
           description: The version identifier to delete.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolboxes=V1Preview
         - name: api-version
           in: query
           required: true
@@ -9987,6 +10041,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Toolboxes
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolboxes=V1Preview
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
@@ -10056,11 +10113,44 @@ components:
       schema:
         type: string
         maxLength: 128
+    ListRoutineRunsParameters.after:
+      name: after
+      in: query
+      required: false
+      description: An opaque cursor returned as last_id by the previous list-runs response.
+      schema:
+        type: string
+      explode: false
+    ListRoutineRunsParameters.before:
+      name: before
+      in: query
+      required: false
+      description: Unsupported. Reserved for future backward pagination support.
+      schema:
+        type: string
+      explode: false
     ListRoutineRunsParameters.filter:
       name: filter
       in: query
       required: false
       description: An optional MLflow search-runs filter expression applied within the routine's experiment.
+      schema:
+        type: string
+      explode: false
+    ListRoutineRunsParameters.limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of runs to return.
+      schema:
+        type: integer
+        format: int32
+      explode: false
+    ListRoutineRunsParameters.order:
+      name: order
+      in: query
+      required: false
+      description: The ordering direction. Supported values are asc and desc.
       schema:
         type: string
       explode: false
@@ -10072,6 +10162,39 @@ components:
       schema:
         type: string
         maxLength: 128
+    ListRoutinesParameters.after:
+      name: after
+      in: query
+      required: false
+      description: An opaque cursor returned as last_id by the previous list response.
+      schema:
+        type: string
+      explode: false
+    ListRoutinesParameters.before:
+      name: before
+      in: query
+      required: false
+      description: Unsupported. Reserved for future backward pagination support.
+      schema:
+        type: string
+      explode: false
+    ListRoutinesParameters.limit:
+      name: limit
+      in: query
+      required: false
+      description: The maximum number of routines to return.
+      schema:
+        type: integer
+        format: int32
+      explode: false
+    ListRoutinesParameters.order:
+      name: order
+      in: query
+      required: false
+      description: The ordering direction. Supported values are asc and desc.
+      schema:
+        type: string
+      explode: false
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -10556,15 +10679,15 @@ components:
     AgentIdentifier:
       type: object
       required:
-        - agentName
+        - agent_name
       properties:
-        agentName:
+        agent_name:
           type: string
           description: Registered Foundry agent name (required).
-        agentVersion:
+        agent_version:
           type: string
           description: Pinned agent version. Defaults to latest if omitted.
-      description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and systemPrompt are specified in options.optimizationConfig.
+      description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
     AgentIdentity:
       type: object
       required:
@@ -10731,7 +10854,6 @@ components:
             - idle
             - updating
             - failed
-            - stopping
             - deleting
             - deleted
             - expired
@@ -12239,7 +12361,7 @@ components:
       required:
         - path
         - type
-        - sizeBytes
+        - size_bytes
       properties:
         path:
           type: string
@@ -12247,7 +12369,7 @@ components:
         type:
           type: string
           description: File type category (e.g. 'config', 'results').
-        sizeBytes:
+        size_bytes:
           type: integer
           format: int64
           description: File size in bytes.
@@ -12255,22 +12377,22 @@ components:
     CandidateMetadata:
       type: object
       required:
-        - candidateId
-        - jobId
-        - candidateName
+        - candidate_id
+        - job_id
+        - candidate_name
         - status
-        - hasResults
-        - createdAt
-        - updatedAt
+        - has_results
+        - created_at
+        - updated_at
         - files
       properties:
-        candidateId:
+        candidate_id:
           type: string
           description: Server-assigned candidate identifier.
-        jobId:
+        job_id:
           type: string
           description: Owning optimization job id.
-        candidateName:
+        candidate_name:
           type: string
           description: Display name of the candidate.
         status:
@@ -12280,14 +12402,14 @@ components:
           type: number
           format: double
           description: Candidate's aggregate score.
-        hasResults:
+        has_results:
           type: boolean
           description: Whether detailed results are available for this candidate.
-        createdAt:
+        created_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when the candidate was created, represented in Unix time.
-        updatedAt:
+        updated_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when the candidate was last updated, represented in Unix time.
@@ -12304,10 +12426,10 @@ components:
     CandidateResults:
       type: object
       required:
-        - candidateId
+        - candidate_id
         - results
       properties:
-        candidateId:
+        candidate_id:
           type: string
           description: Owning candidate id.
         results:
@@ -13128,6 +13250,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Custom credential definition
+    CustomRoutineTrigger:
+      type: object
+      required:
+        - type
+        - provider
+        - parameters
+      properties:
+        type:
+          type: string
+          enum:
+            - custom
+          description: The trigger type.
+        provider:
+          type: string
+          maxLength: 128
+          description: The external provider that emits the custom event.
+        event_name:
+          type: string
+          maxLength: 256
+          description: The provider-specific event name that fires the routine.
+        parameters:
+          type: object
+          additionalProperties: {}
+          description: Provider-specific trigger parameters.
+      allOf:
+        - $ref: '#/components/schemas/RoutineTrigger'
+      description: A custom event routine trigger.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     DailyRecurrenceSchedule:
       type: object
       required:
@@ -13464,8 +13616,8 @@ components:
     DatasetInfo:
       type: object
       required:
-        - taskCount
-        - isInline
+        - task_count
+        - is_inline
       properties:
         name:
           type: string
@@ -13473,11 +13625,11 @@ components:
         version:
           type: string
           description: Dataset version when using a registered dataset reference. Null for inline datasets.
-        taskCount:
+        task_count:
           type: integer
           format: int32
           description: Number of tasks/rows in the dataset.
-        isInline:
+        is_inline:
           type: boolean
           description: True when the dataset was provided inline in the request body.
       description: Metadata about the dataset used for optimization, surfaced in the response.
@@ -13818,7 +13970,7 @@ components:
           description: Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
         always_applicable:
           type: boolean
-          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. Defaults to `false`.
+          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
     DispatchRoutineRequest:
@@ -14860,6 +15012,7 @@ components:
           description: Identifier of the evaluation group.
         evalRun:
           type: object
+          additionalProperties: {}
           description: The evaluation run payload.
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
@@ -15703,34 +15856,50 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
-    GitHubIssueOpenedRoutineTrigger:
+    GitHubIssueEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - opened
+            - closed
+      description: Known GitHub issue events that can fire a routine.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    GitHubIssueRoutineTrigger:
       type: object
       required:
         - type
         - connection_id
-        - assignee
+        - owner
         - repository
+        - issue_event
       properties:
         type:
           type: string
           enum:
-            - github_issue_opened
+            - github_issue
           description: The trigger type.
         connection_id:
           type: string
           maxLength: 256
           description: The workspace connection identifier that resolves the GitHub configuration for the trigger.
-        assignee:
+        owner:
           type: string
           maxLength: 128
-          description: The GitHub assignee or organization filter that scopes which issues can fire the trigger.
+          description: The GitHub owner or organization that scopes which issues can fire the trigger.
         repository:
           type: string
           maxLength: 128
           description: The GitHub repository filter that scopes which issues can fire the trigger.
+        issue_event:
+          allOf:
+            - $ref: '#/components/schemas/GitHubIssueEvent'
+          description: The GitHub issue event that fires the routine.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
-      description: A GitHub issue-opened routine trigger.
+      description: A GitHub issue routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -16159,6 +16328,7 @@ components:
       type: object
       required:
         - type
+        - input
       properties:
         type:
           type: string
@@ -16166,9 +16336,7 @@ components:
             - invoke_agent_invocations_api
           description: The manual dispatch payload type.
         input:
-          type: string
-          maxLength: 32768
-          description: The raw input sent to the downstream invocations target.
+          description: The JSON value sent as the complete downstream invocations input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.
       allOf:
         - $ref: '#/components/schemas/RoutineDispatchPayload'
       description: A manual payload used to test an invocations API routine dispatch.
@@ -16179,24 +16347,29 @@ components:
       type: object
       required:
         - type
-        - agent_endpoint_id
       properties:
         type:
           type: string
           enum:
             - invoke_agent_invocations_api
           description: The action type.
+        agent_name:
+          type: string
+          maxLength: 256
+          description: The project-scoped agent name for routine dispatch.
         agent_endpoint_id:
           type: string
           maxLength: 256
-          description: The endpoint-scoped agent identifier for invocations API dispatch.
+          description: Legacy endpoint-scoped agent identifier for routine dispatch.
+        input:
+          description: Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.
         session_id:
           type: string
           maxLength: 256
           description: An optional existing hosted-agent session identifier to continue during the downstream dispatch.
       allOf:
         - $ref: '#/components/schemas/RoutineAction'
-      description: Dispatches a routine through the raw invocations API.
+      description: Dispatches a routine through the raw invocations API. Exactly one of agent_name or agent_endpoint_id must be provided.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -16204,6 +16377,7 @@ components:
       type: object
       required:
         - type
+        - input
       properties:
         type:
           type: string
@@ -16211,9 +16385,7 @@ components:
             - invoke_agent_responses_api
           description: The manual dispatch payload type.
         input:
-          type: string
-          maxLength: 32768
-          description: The user input sent to the downstream responses target.
+          description: The JSON value sent as the complete downstream responses input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.
       allOf:
         - $ref: '#/components/schemas/RoutineDispatchPayload'
       description: A manual payload used to test a responses API routine dispatch.
@@ -16233,12 +16405,14 @@ components:
         agent_name:
           type: string
           maxLength: 256
-          description: The project-scoped agent name for responses API dispatch.
+          description: The project-scoped agent name for routine dispatch.
         agent_endpoint_id:
           type: string
           maxLength: 256
-          description: The endpoint-scoped agent identifier for responses API dispatch.
-        conversation_id:
+          description: Legacy endpoint-scoped agent identifier for routine dispatch.
+        input:
+          description: Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.
+        conversation:
           type: string
           maxLength: 256
           description: An optional existing conversation identifier to continue during the downstream dispatch.
@@ -16644,7 +16818,7 @@ components:
           default: true
         procedural_memory_enabled:
           type: boolean
-          description: Whether to enable procedural memory extraction and storage. Defaults to `true`.
+          description: Whether to enable procedural memory extraction and storage. The service defaults to `true` if a value is not specified by the caller.
           default: true
         default_ttl_seconds:
           type: integer
@@ -32008,16 +32182,16 @@ components:
     OptimizationAgentDefinition:
       type: object
       properties:
-        agentName:
+        agent_name:
           type: string
           description: Agent name.
-        agentVersion:
+        agent_version:
           type: string
           description: Agent version.
         model:
           type: string
           description: Model deployment name.
-        systemPrompt:
+        system_prompt:
           type: string
           description: System prompt / instructions.
         skills:
@@ -32039,13 +32213,13 @@ components:
         - name
         - config
         - mutations
-        - avgScore
-        - avgTokens
-        - passRate
-        - taskScores
-        - isParetoOptimal
+        - avg_score
+        - avg_tokens
+        - pass_rate
+        - task_scores
+        - is_pareto_optimal
       properties:
-        candidateId:
+        candidate_id:
           type: string
           description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
         name:
@@ -32058,31 +32232,31 @@ components:
         mutations:
           type: object
           additionalProperties: {}
-          description: "What was mutated from the baseline (e.g., {systemPrompt: 'new prompt'})."
-        avgScore:
+          description: "What was mutated from the baseline (e.g., {system_prompt: 'new prompt'})."
+        avg_score:
           type: number
           format: double
           description: Average composite score across all tasks.
-        avgTokens:
+        avg_tokens:
           type: number
           format: double
           description: Average token usage across all tasks.
-        passRate:
+        pass_rate:
           type: number
           format: double
           description: Fraction of tasks that met the pass threshold.
-        taskScores:
+        task_scores:
           type: array
           items:
             $ref: '#/components/schemas/OptimizationTaskResult'
           description: Individual task-level scores.
-        isParetoOptimal:
+        is_pareto_optimal:
           type: boolean
           description: Whether this candidate is on the Pareto frontier (score vs cost).
-        evalId:
+        eval_id:
           type: string
           description: Foundry evaluation identifier used to score this candidate.
-        evalRunId:
+        eval_run_id:
           type: string
           description: Foundry evaluation run identifier for this candidate's scoring run.
         promotion:
@@ -32095,7 +32269,7 @@ components:
       required:
         - id
         - status
-        - createdAt
+        - created_at
       properties:
         id:
           type: string
@@ -32120,15 +32294,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/OptimizationJobInputs'
           description: Caller-supplied inputs.
-        createdAt:
+        created_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time.
           readOnly: true
-        updatedAt:
+        updated_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was last updated, represented in Unix time.
+          description: The timestamp when the job was last updated (status, progress, or result change), represented in Unix time.
           readOnly: true
         progress:
           allOf:
@@ -32145,17 +32319,17 @@ components:
       type: object
       required:
         - agent
-        - trainDatasetReference
+        - train_dataset_reference
       properties:
         agent:
           allOf:
             - $ref: '#/components/schemas/AgentIdentifier'
           description: The agent (and pinned version) being optimized.
-        trainDatasetReference:
+        train_dataset_reference:
           allOf:
             - $ref: '#/components/schemas/DatasetRef'
           description: Reference to a registered training dataset (required).
-        validationDatasetReference:
+        validation_dataset_reference:
           allOf:
             - $ref: '#/components/schemas/DatasetRef'
           description: Optional held-out validation dataset for measuring generalization of the final candidate.
@@ -32172,19 +32346,19 @@ components:
     OptimizationJobProgress:
       type: object
       required:
-        - currentIteration
-        - bestScore
-        - elapsedSeconds
+        - current_iteration
+        - best_score
+        - elapsed_seconds
       properties:
-        currentIteration:
+        current_iteration:
           type: integer
           format: int32
           description: 1-based current iteration index.
-        bestScore:
+        best_score:
           type: number
           format: double
           description: Best score observed so far across all candidates.
-        elapsedSeconds:
+        elapsed_seconds:
           type: number
           format: double
           description: Wall-clock time elapsed in seconds since the job began executing.
@@ -32214,29 +32388,29 @@ components:
           items:
             type: string
           description: Non-fatal warnings from the optimization run (e.g., target attribute failures that were skipped).
-        allTargetAttributesFailed:
+        all_target_attributes_failed:
           type: boolean
           description: True when all target attributes failed — only the baseline was evaluated.
       description: Terminal-state result body. Populated when status is succeeded or failed.
     OptimizationOptions:
       type: object
       properties:
-        maxIterations:
+        max_iterations:
           type: integer
           format: int32
           description: 'Maximum optimization iterations per strategy. Must be >= 1. Default: 5.'
           default: 5
-        optimizationConfig:
+        optimization_config:
           type: object
           additionalProperties: {}
-          description: Per-target-attribute configuration overrides. Contains skills, tools, systemPrompt for the agent, plus model space for model optimization.
-        evalModel:
+          description: Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.
+        eval_model:
           type: string
           description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
-        optimizationModel:
+        optimization_model:
           type: string
           description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
-        evaluationLevel:
+        evaluation_level:
           allOf:
             - $ref: '#/components/schemas/EvaluationLevel'
           description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
@@ -32244,14 +32418,14 @@ components:
     OptimizationTaskResult:
       type: object
       required:
-        - taskName
+        - task_name
         - scores
-        - compositeScore
+        - composite_score
         - tokens
-        - durationSeconds
+        - duration_seconds
         - passed
       properties:
-        taskName:
+        task_name:
           type: string
           description: Task name (from the dataset).
         query:
@@ -32263,22 +32437,22 @@ components:
             type: number
             format: double
           description: Per-evaluator scores keyed by evaluator name.
-        compositeScore:
+        composite_score:
           type: number
           format: double
           description: Composite score combining all evaluator scores.
         tokens:
           type: integer
-          format: int32
+          format: int64
           description: Total tokens consumed during the agent run for this task.
-        durationSeconds:
+        duration_seconds:
           type: number
           format: double
           description: Wall-clock seconds for this task's agent execution.
         passed:
           type: boolean
           description: Whether the task met the pass threshold.
-        errorMessage:
+        error_message:
           type: string
           description: Error message if the task failed during execution.
         rationales:
@@ -32289,7 +32463,7 @@ components:
         response:
           type: string
           description: Raw agent response text.
-        runId:
+        run_id:
           type: string
           description: Identifier of the agent run that produced this result.
       description: Per-task evaluation result for a single candidate.
@@ -32578,57 +32752,57 @@ components:
     PromoteCandidateRequest:
       type: object
       required:
-        - agentName
-        - agentVersion
+        - agent_name
+        - agent_version
       properties:
-        agentName:
+        agent_name:
           type: string
           description: Name of the Foundry agent to promote to.
-        agentVersion:
+        agent_version:
           type: string
           description: Version of the Foundry agent to promote to.
       description: Request body for promoting a candidate to a Foundry agent version.
     PromoteCandidateResponse:
       type: object
       required:
-        - candidateId
+        - candidate_id
         - status
-        - promotedAt
-        - agentName
-        - agentVersion
+        - promoted_at
+        - agent_name
+        - agent_version
       properties:
-        candidateId:
+        candidate_id:
           type: string
           description: The promoted candidate id.
         status:
           type: string
           description: Status after promotion.
-        promotedAt:
+        promoted_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when promotion occurred, represented in Unix time.
-        agentName:
+        agent_name:
           type: string
           description: Name of the Foundry agent promoted to.
-        agentVersion:
+        agent_version:
           type: string
           description: Version of the Foundry agent promoted to.
       description: Response after successfully promoting a candidate.
     PromotionInfo:
       type: object
       required:
-        - promotedAt
-        - agentName
-        - agentVersion
+        - promoted_at
+        - agent_name
+        - agent_version
       properties:
-        promotedAt:
+        promoted_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when promotion occurred, represented in Unix time.
-        agentName:
+        agent_name:
           type: string
           description: Name of the Foundry agent this candidate was promoted to.
-        agentVersion:
+        agent_version:
           type: string
           description: Version of the Foundry agent this candidate was promoted to.
       description: Promotion metadata recorded when a candidate is deployed to a Foundry agent.
@@ -32872,7 +33046,7 @@ components:
           description: List of attack strategies or nested lists of attack strategies.
         simulationOnly:
           type: boolean
-          description: Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.
+          description: Simulation-only or Simulation + Evaluation. If `true` the scan outputs conversation not evaluation result. The service defaults to `false` if a value is not specified by the caller.
           default: false
         riskCategories:
           type: array
@@ -33071,10 +33245,7 @@ components:
     Routine:
       type: object
       required:
-        - name
         - enabled
-        - triggers
-        - action
       properties:
         name:
           type: string
@@ -33153,9 +33324,6 @@ components:
           - Routines=V1Preview
     RoutineCreateOrUpdateRequest:
       type: object
-      required:
-        - triggers
-        - action
       properties:
         description:
           type: string
@@ -33210,16 +33378,14 @@ components:
       type: object
       required:
         - id
-        - status
-        - trigger_type
-        - started_at
       properties:
         id:
           type: string
-          description: The MLflow run identifier for the routine attempt.
+          description: The unique run identifier for the routine attempt.
+          readOnly: true
         status:
           type: string
-          description: The underlying MLflow run status.
+          description: The run status.
         phase:
           allOf:
             - $ref: '#/components/schemas/RoutineRunPhase'
@@ -33228,6 +33394,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutineTriggerType'
           description: The trigger type that produced the routine attempt.
+        trigger_name:
+          type: string
+          description: The configured trigger name that produced the routine attempt.
         attempt_source:
           allOf:
             - $ref: '#/components/schemas/RoutineAttemptSource'
@@ -33236,10 +33405,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutineActionType'
           description: The action type dispatched for the routine attempt.
+        agent_id:
+          type: string
+          description: The project-scoped agent identifier recorded for the routine attempt.
+        agent_endpoint_id:
+          type: string
+          description: The legacy endpoint-scoped agent identifier recorded for the routine attempt.
+        conversation_id:
+          type: string
+          description: The conversation identifier used by a responses API dispatch.
+        session_id:
+          type: string
+          description: The hosted-agent session identifier used by an invocations API dispatch.
         triggered_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The logical trigger time recorded for the routine attempt.
+        scheduled_fire_at:
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
+          description: The scheduled fire time recorded for timer and schedule deliveries.
         started_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
@@ -33260,44 +33445,17 @@ components:
         task_id:
           type: string
           description: The workspace task identifier linked to the routine attempt, when available.
+        error_status_code:
+          type: integer
+          format: int32
+          description: The downstream error status code captured for a failed attempt, when available.
         error_type:
           type: string
           description: The fully qualified error type captured for a failed attempt, when available.
         error_message:
           type: string
           description: The truncated failure message captured for a failed attempt, when available.
-        diagnostics:
-          allOf:
-            - $ref: '#/components/schemas/RoutineRunDiagnostics'
-          description: Diagnostic data captured for the routine attempt.
       description: A single routine run returned from the run history API.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - Routines=V1Preview
-    RoutineRunDiagnostics:
-      type: object
-      required:
-        - parameters
-        - tags
-        - metrics
-      properties:
-        parameters:
-          type: object
-          additionalProperties:
-            type: string
-          description: MLflow parameters recorded on the run, keyed by parameter name.
-        tags:
-          type: object
-          additionalProperties:
-            type: string
-          description: MLflow tags recorded on the run, keyed by tag name.
-        metrics:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-          description: Latest MLflow metric values recorded on the run, keyed by metric name.
-      description: Generic diagnostics captured on a routine run.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -33328,7 +33486,8 @@ components:
         mapping:
           schedule: '#/components/schemas/ScheduleRoutineTrigger'
           timer: '#/components/schemas/TimerRoutineTrigger'
-          github_issue_opened: '#/components/schemas/GitHubIssueOpenedRoutineTrigger'
+          github_issue: '#/components/schemas/GitHubIssueRoutineTrigger'
+          custom: '#/components/schemas/CustomRoutineTrigger'
       description: Base model for a routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
@@ -33338,7 +33497,8 @@ components:
         - type: string
         - type: string
           enum:
-            - github_issue_opened
+            - custom
+            - github_issue
             - schedule
             - timer
       description: The discriminator values supported for routine triggers.
@@ -33587,9 +33747,19 @@ components:
     SessionDirectoryListResponse:
       type: object
       required:
+        - has_more
         - path
         - entries
       properties:
+        first_id:
+          type: string
+          description: The first ID represented in this list.
+        last_id:
+          type: string
+          description: The last ID represented in this list.
+        has_more:
+          type: boolean
+          description: A value indicating whether there are additional values available not captured in this list.
         path:
           type: string
           description: The path that was listed, relative to the session home directory.
@@ -33598,7 +33768,6 @@ components:
           items:
             $ref: '#/components/schemas/SessionDirectoryEntry'
           description: The directory entries.
-      description: Response from listing a directory in a session sandbox.
     SessionFileWriteResponse:
       type: object
       required:
@@ -33923,7 +34092,7 @@ components:
           description: The JSON schema for the structured input (optional).
         required:
           type: boolean
-          description: Whether the input property is required when the agent is invoked. Defaults to `false`.
+          description: Whether the input property is required when the agent is invoked. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: An structured input that can participate in prompt template substitutions and tool argument binding.
     StructuredOutputDefinition:
@@ -34293,6 +34462,7 @@ components:
           description: The version of the evaluator. Latest version if not specified.
         initialization_parameters:
           type: object
+          additionalProperties: {}
           description: The initialization parameters for the evaluation. Must support structured outputs.
         data_mapping:
           type: object
@@ -34305,7 +34475,6 @@ components:
       type: object
       required:
         - type
-        - at
       properties:
         type:
           type: string
@@ -34314,10 +34483,8 @@ components:
           description: The trigger type.
         at:
           type: string
-          description: A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.
-        time_zone:
-          type: string
-          description: An optional IANA or Windows time zone identifier when the timer uses a local timestamp.
+          format: date-time
+          description: The UTC date and time at which the timer fires.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
       description: A one-shot timer routine trigger.
