@@ -1281,6 +1281,7 @@ op replacePurge(
   "csharp"
 );
 @@clientName(ApiContractProperties.serviceUrl, "serviceLink", "csharp");
+@@clientName(ApiContractUpdateProperties.serviceUrl, "serviceLink", "csharp");
 @@alternateType(
   ApiContractProperties.sourceApiId,
   Azure.Core.armResourceIdentifier,
@@ -1413,3 +1414,73 @@ op replacePurge(
 // Map TypeSpec `If-Match` header (declared as string in spec for casing-style reasons)
 // to .NET ETag for back-compat with GA Azure.ResourceManager.ApiManagement.
 @@alternateType(IfMatchHeaderParameter.`If-Match`, Azure.Core.eTag, "csharp");
+
+// D2 (Phase 3): Restore GA 1.3.0 base class for ApiManagementGatewayUpdateParameters
+// and ApiManagementServiceUpdateParameters Patch DTOs. Spec models extend the custom
+// `ApimResource` (id/name/type) base, but GA shipped both Patch types as ResourceData
+// derivatives. Forcing the C# emit base to Foundations.ProxyResource produces
+// `: ResourceData` in the generated class, matching the GA API surface.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ApiManagementGatewayUpdateParameters,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ApiManagementServiceUpdateParameters,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+
+// Phase 3 #11: Flatten SchemaContractProperties.document so that the inner
+// `value/components/definitions` properties surface directly on ApiSchemaData
+// with WirePath `properties.<name>` matching GA 1.3.0 (was previously emitted
+// at `properties.document.<name>` after the outer SchemaContract.properties
+// flatten in back-compatible.tsp).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SchemaContractProperties.document,
+  "csharp"
+);
+
+// Phase 3 #2: Enum value case-normalization to match GA 1.3.0 C# constant names.
+// Spec uses lowercase / SCREAMING_SNAKE / mixed forms; GA used PascalCase.
+@@clientName(ApiType.websocket, "WebSocket", "csharp");
+@@clientName(ApiType.graphql, "GraphQL", "csharp");
+@@clientName(ApiType.odata, "OData", "csharp");
+@@clientName(ApiType.grpc, "GRPC", "csharp");
+@@clientName(Confirmation.signup, "SignUp", "csharp");
+@@clientName(ConnectivityCheckProtocol.TCP, "Tcp", "csharp");
+@@clientName(ConnectivityCheckProtocol.HTTP, "Http", "csharp");
+@@clientName(ConnectivityCheckProtocol.HTTPS, "Https", "csharp");
+@@clientName(ContentFormat.openapi, "OpenApi", "csharp");
+@@clientName(ContentFormat.`openapi+json`, "OpenApiJson", "csharp");
+@@clientName(ContentFormat.`openapi-link`, "OpenApiLink", "csharp");
+@@clientName(ContentFormat.`openapi+json-link`, "OpenApiJsonLink", "csharp");
+@@clientName(ContentFormat.`graphql-link`, "GraphQLLink", "csharp");
+@@clientName(Method.GET, "Get", "csharp");
+@@clientName(Method.POST, "Post", "csharp");
+@@clientName(MigrateToStv2Mode.PreserveIp, "PreserveIP", "csharp");
+@@clientName(NotificationName.BCC, "Bcc", "csharp");
+@@clientName(OperationNameFormat.Url, "Uri", "csharp");
+@@clientName(PolicyContentFormat.rawxml, "RawXml", "csharp");
+@@clientName(PolicyContentFormat.`rawxml-link`, "RawXmlLink", "csharp");
+@@clientName(SoapApiType.gRPC, "Grpc", "csharp");
+
+// Phase 3 #4: Restore GA 1.3.0 `*Uri` (System.Uri) properties for fields the spec
+// now declares as plain `string`. Each pair = `@@clientName` to flip the C# emit
+// name to the GA `*Uri` form, plus `@@alternateType(..., url, "csharp")` to flip
+// the C# type from `string` to `System.Uri`.
+// NOTE: cases where GA shipped BOTH `*Link (string)` AND `*Uri (Uri)` as parallel
+// shim properties (ServiceLink/ServiceUri, TermsOfServiceLink/TermsOfServiceUri)
+// cannot be restored spec-side — they need Custom partial shim properties because
+// a single spec field maps to only one emitted C# property.
+@@clientName(BackendBaseParameters.resourceId, "resourceUri", "csharp");
+@@alternateType(BackendBaseParameters.resourceId, url, "csharp");
+@@clientName(CacheContractProperties.resourceId, "resourceUri", "csharp");
+@@alternateType(CacheContractProperties.resourceId, url, "csharp");
+@@clientName(CacheUpdateProperties.resourceId, "resourceUri", "csharp");
+@@alternateType(CacheUpdateProperties.resourceId, url, "csharp");
+@@clientName(HostnameConfiguration.keyVaultId, "keyVaultSecretUri", "csharp");
+@@alternateType(HostnameConfiguration.keyVaultId, url, "csharp");
