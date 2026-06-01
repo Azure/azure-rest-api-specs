@@ -8666,6 +8666,9 @@ model EdgeMachineUpdateInfo {
 /** Properties for EdgeMachineUpdate resource. */
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineUpdateProperties {
+  /** The solution type for the available updates. */
+  solutionType?: ProvisioningOsType;
+
   /** The list of available updates. */
   @identifiers(#[])
   values: EdgeMachineUpdateInfo[];
