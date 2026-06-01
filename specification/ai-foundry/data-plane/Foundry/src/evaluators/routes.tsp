@@ -183,9 +183,7 @@ interface Evaluators {
 // ============================================================================
 
 const EvaluatorGenerationJobsRequiredPreviews = #{
-  required_previews: #[
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  ],
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
@@ -244,7 +242,5 @@ interface EvaluatorGenerationJobs {
    */
   @route("evaluator_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview
-  >;
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 }

@@ -13,9 +13,7 @@ alias ModelsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptI
 alias ListModelVersionsParameters = {};
 
 const ModelsRequiredPreviews = #{
-  required_previews: #[
-    FoundryFeaturesOptInKeys.models_v1_preview
-  ],
+  required_previews: #[FoundryFeaturesOptInKeys.models_v1_preview],
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
@@ -48,9 +46,7 @@ interface Models
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Delete returns 200 with no body by service design"
-  @doc(
-    "Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist."
-  )
+  @doc("Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.")
   @delete
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
   deleteVersion is Azure.Core.Foundations.ResourceOperation<
@@ -71,13 +67,17 @@ interface Models
   // new model versions are created via the `createAsync` endpoint (which handles blob content
   // validation). The `@operationId` override to "Models_updateVersion" reflects the true semantics.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
-  @doc("Update an existing ModelVersion with the given version id", ModelVersion)
+  @doc(
+    "Update an existing ModelVersion with the given version id",
+    ModelVersion
+  )
   @operationId("Models_updateVersion")
   @patch
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
   createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
     ModelVersion,
-    InputParameters<UpdateModelVersionRequest, "model_version_update"> & ModelsPreviewHeader,
+    InputParameters<UpdateModelVersionRequest, "model_version_update"> &
+      ModelsPreviewHeader,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<ModelVersion>
   >;
 

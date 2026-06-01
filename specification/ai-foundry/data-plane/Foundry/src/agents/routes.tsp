@@ -30,8 +30,11 @@ interface Agents {
   @route("/agents")
   @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
-  @extension("x-ms-summary-override", "Create the agent")
-  @extension("x-ms-description-override", "Creates the agent.")
+  @extension("x-ms-summary-override", "Create an agent")
+  @extension(
+    "x-ms-description-override",
+    "Creates a new agent or a new version of an existing agent."
+  )
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
@@ -79,13 +82,10 @@ interface Agents {
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
-  @extension(
-    "x-ms-summary-override",
-    "Update the agent by adding a new version if there are any changes t"
-  )
+  @extension("x-ms-summary-override", "Update an agent")
   @extension(
     "x-ms-description-override",
-    "Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version."
+    "Updates an existing agent by adding a new version if there are any changes to the agent definition. Without changes, returns the existing agent version."
   )
   updateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,

@@ -38,7 +38,8 @@ interface Responses {
   @sharedRoute
   createResponseStream is OpenAIOperation<
     OpenAI.CreateResponse & UserIsolationKeyHeader,
-    AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+    AgentSessionIdResponseHeader &
+      SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
   /**
@@ -64,7 +65,6 @@ interface Responses {
 
       @query stream?: boolean = false;
       @query starting_after?: int32;
-
       ...UserIsolationKeyHeader;
     },
     AgentSessionIdResponseHeader & {
@@ -94,10 +94,10 @@ interface Responses {
 
       @header accept: "text/event-stream";
       @query starting_after?: int32;
-
       ...UserIsolationKeyHeader;
     },
-    AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+    AgentSessionIdResponseHeader &
+      SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
   /**
