@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -1152,6 +1154,75 @@ model RoutingEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained to match the published API; 'DB' reflects the Cosmos DB product name."
   cosmosDBSqlContainers?: RoutingCosmosDBSqlApiProperties[];
+
+  /**
+   * The list of event stream endpoints that IoT hub routes messages to, based on the routing rules.
+   */
+  @added(Versions.v2026_05_01_preview)
+  eventStreams?: RoutingEventStreamProperties[];
+}
+
+/**
+ * The properties related to an event stream endpoint.
+ */
+@added(Versions.v2026_05_01_preview)
+model RoutingEventStreamProperties {
+  /**
+   * The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.
+   */
+  @pattern("^[A-Za-z0-9-._]{1,64}$")
+  name: string;
+
+  /**
+   * Id of the event stream endpoint
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The subscription identifier of the event stream endpoint.
+   */
+  subscriptionId?: string;
+
+  /**
+   * The name of the resource group of the event stream endpoint.
+   */
+  resourceGroup?: string;
+
+  /**
+   * The url of the underlying event hub namespace of the event stream endpoint. It must include the protocol sb://
+   */
+  endpointUri?: string;
+
+  /**
+   * Event hub name on the event hub namespace
+   */
+  entityPath?: string;
+
+  /**
+   * Method used to authenticate against the event stream endpoint
+   */
+  authenticationType?: AuthenticationType;
+
+  /**
+   * Managed identity properties of routing event stream endpoint.
+   */
+  identity?: ManagedIdentity;
+
+  /**
+   * The workspace Id for the event stream endpoint.
+   */
+  workspaceId?: string;
+
+  /**
+   * The event stream Id.
+   */
+  eventStreamId?: string;
+
+  /**
+   * The source Id.
+   */
+  sourceId?: string;
 }
 
 /**

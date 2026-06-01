@@ -26,7 +26,16 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2026-03
+tag: package-preview-2026-05
+```
+
+### Tag: package-preview-2026-05
+
+These settings apply only when `--tag=package-preview-2026-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-05'
+input-file:
+  - preview/2026-05-01-preview/iothub.json
 ```
 
 ### Tag: package-preview-2026-03
@@ -37,6 +46,14 @@ These settings apply only when `--tag=package-preview-2026-03` is specified on t
 input-file:
   - preview/2026-03-01-preview/iothub.json
 ```
+
+### 2026-05-01-preview Event Stream updates
+
+- Added `properties.routing.endpoints.eventStreams` as a new endpoint array under routing endpoints.
+- Added `RoutingEventStreamProperties` with:
+  - Required: `name`
+  - Optional: `id` (read-only), `subscriptionId`, `resourceGroup`, `endpointUri`, `entityPath`, `authenticationType`, `identity`, `workspaceId`, `eventStreamId`, `sourceId`
+- Updated examples for the new version under `examples/2026-05-01-preview/` to include `eventStreams` payloads.
 
 ### Tag: package-preview-2025-08
 
