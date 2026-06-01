@@ -1,0 +1,576 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-12-31-preview",
+    "title": "Azure Clean Room API",
+    "description": "Azure Clean Room API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/microservices/{microServiceName}": {
+      "put": {
+        "tags": [
+          "Microservices"
+        ],
+        "operationId": "MicroServices_Create",
+        "description": "Create or update a micro service.",
+        "x-ms-examples": {
+          "CreateMicroservice": {
+            "$ref": "./examples/microservices/MicroServices_Create.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MicroServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The micro service to create or update.",
+            "schema": {
+              "$ref": "#/definitions/MicroService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MicroService"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MicroService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "Microservices"
+        ],
+        "operationId": "MicroServices_Get",
+        "description": "Get a micro service.",
+        "x-ms-examples": {
+          "Get a micro service": {
+            "$ref": "./examples/microservices/MicroServices_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MicroServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MicroService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Microservices"
+        ],
+        "operationId": "MicroServices_Update",
+        "description": "Updates tags on a micro service.",
+        "x-ms-examples": {
+          "Update tags on a micro service": {
+            "$ref": "./examples/microservices/MicroServices_Update.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MicroServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "./commonTypes.json#/definitions/ResourceTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MicroService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Microservices"
+        ],
+        "operationId": "MicroServices_Delete",
+        "description": "Deletes an micro service.",
+        "x-ms-examples": {
+          "Delete a micro service": {
+            "$ref": "./examples/microservices/MicroServices_Delete.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MicroServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CleanRoom/microservices": {
+      "get": {
+        "tags": [
+          "Microservices"
+        ],
+        "operationId": "MicroServices_ListBySubscription",
+        "description": "List micro services in a subscription.",
+        "x-ms-examples": {
+          "List micro services in subscription": {
+            "$ref": "./examples/microservices/MicroServices_ListBySubscription.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MicroServicesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/microservices": {
+      "get": {
+        "tags": [
+          "Microservices"
+        ],
+        "operationId": "MicroServices_ListByResourceGroup",
+        "description": "List micro services in a resource group.",
+        "x-ms-examples": {
+          "List micro services in resource group": {
+            "$ref": "./examples/microservices/MicroServices_ListByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MicroServicesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MicroService": {
+      "description": "Defines the micro service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/MicroServiceProperties"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "MicroServicesList": {
+      "description": "List of micro services.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of micro services.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of micro services",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MicroService"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MicroServiceProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "cleanRoomId": {
+          "description": "Gets or sets the ID of the clean room in which the micro service should be deployed.",
+          "type": "string"
+        },
+        "specification": {
+          "description": "Gets or sets the specification of the micro service to be deployed.",
+          "$ref": "#/definitions/MicroServiceSpecification"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "cleanRoomId",
+        "specification"
+      ]
+    },
+    "MicroServiceSpecification": {
+      "description": "Defines the micro service specification.",
+      "type": "object",
+      "properties": {
+        "sandboxConfiguration": {
+          "$ref": "#/definitions/SandboxConfiguration"
+        },
+        "networkAddressType": {
+          "description": "Gets or sets the type of IP address to be used for the service endpoint.",
+          "$ref": "./commonTypes.json#/definitions/NetworkAddressType"
+        },
+        "networkAddress": {
+          "description": "Gets or sets the IP address to be used for the service endpoint.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Gets or sets the port to be used for the service endpoint.",
+          "$ref": "./commonTypes.json#/definitions/NetworkPort"
+        },
+        "applicationContainers": {
+          "description": "Gets or sets the set of application containers that make up one instance of the service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "privilegedContainers": {
+          "description": "Gets or sets the set of privileged containers that make up one instance of the service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "instanceCount": {
+          "description": "Gets or sets the number of instances of the service to be brought up.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "sandboxConfiguration",
+        "networkAddressType"
+      ]
+    },
+    "SandboxConfiguration": {
+      "description": "Configuration details for the sandbox infrastructure preventing data exfiltration from the micro service.",
+      "type": "object",
+      "properties": {
+        "scenario": {
+          "description": "Gets or sets the scenario for which the sandbox is to be configured.",
+          "$ref": "#/definitions/SandboxType"
+        },
+        "scenarioVersion": {
+          "description": "Gets or sets the version of the scenario for which the sandbox is to be configured.",
+          "type": "string"
+        },
+        "policyUrl": {
+          "description": "Gets or sets the URL of the policy to be applied for preventing data exfiltration from the micro service.",
+          "type": "string"
+        },
+        "policyDataJson": {
+          "description": "Gets or sets any additional data required for applying the policy (JSON serialized).",
+          "type": "string"
+        },
+        "customSecurityPolicy": {
+          "description": "Gets or sets any custom security policy to be enforced on the deployment.",
+          "type": "string"
+        }
+      }
+    },
+    "SandboxType": {
+      "type": "string",
+      "description": "Types of network sandbox.",
+      "enum": [
+        "None",
+        "SahamatiLending",
+        "Generic"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "SandboxType"
+      }
+    },
+    "ContainerSpecification": {
+      "description": "Describes properties of a container instance.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the container.",
+          "type": "string"
+        },
+        "image": {
+          "description": "Gets or sets the name of the image to be used for creating the container instance.",
+          "type": "string"
+        },
+        "command": {
+          "description": "Gets or sets the commands to execute within the container instance in exec form.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "environmentVariables": {
+          "description": "Gets or sets the collection of environment variables to be set in the container instance.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ports": {
+          "description": "Gets or sets the collection of ports to be exposed on the container instance.",
+          "type": "array",
+          "items": {
+            "$ref": "./commonTypes.json#/definitions/NetworkPort"
+          },
+          "x-ms-identifiers": []
+        },
+        "resourceRequirement": {
+          "description": "Gets or sets the resource requirements of the container.",
+          "$ref": "#/definitions/ResourceRequirement"
+        }
+      }
+    },
+    "ResourceRequirement": {
+      "description": "Describes the resource requirements of a container.",
+      "type": "object",
+      "properties": {
+        "requests": {
+          "description": "Gets or sets the requests for the resources.",
+          "$ref": "#/definitions/ContainerResource"
+        },
+        "limits": {
+          "description": "Gets or sets the limits for the resources.",
+          "$ref": "#/definitions/ContainerResource",
+          "x-nullable": true
+        }
+      }
+    },
+    "ContainerResource": {
+      "description": "Describes the resource for a container.",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "Gets or sets the number of CPUs required.",
+          "type": "number"
+        },
+        "memoryInGb": {
+          "description": "Gets or sets the memory in GB.",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MicroServiceNameParameter": {
+      "name": "microServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Name of the micro service.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
