@@ -320,5 +320,5 @@ model GlobalNetworkTapRuleActionPatchProperties {
 
 @doc("Response for Network Tap Rule resync operation.")
 model NetworkTapRuleResyncResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }

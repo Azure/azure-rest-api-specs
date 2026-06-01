@@ -498,7 +498,7 @@ model InternalNetworkBgpAdministrativeStateResponse
 @doc("Internal Network Administrative State Response")
 @added(Versions.v2025_07_15)
 model InternalNetworkUpdateBgpAdministrativeStateResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Internal Network BGP Administrative State response properties")
   properties?: InternalNetworkUpdateBgpAdministrativeStateResponseProperties;
@@ -541,7 +541,7 @@ model InternalNetworkUpdateBfdAdministrativeStateRequest {
 @doc("Internal Network BFD Administrative State response")
 @added(Versions.v2025_07_15)
 model InternalNetworkUpdateBfdAdministrativeStateResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Internal Network BFD Administrative State response properties")
   properties?: InternalNetworkUpdateBfdAdministrativeStateResponseProperties;

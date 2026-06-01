@@ -1309,7 +1309,7 @@ model BmpExportPolicyPatchProperties {
 @doc("Update Administrative State Response.")
 @added(Versions.v2025_07_15)
 model UpdateAdministrativeStateResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Response properties in case of successful administrative state update.")
   properties?: UpdateAdministrativeStateResponseProperties;

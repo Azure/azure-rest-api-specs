@@ -635,7 +635,7 @@ model ArmConfigurationDiffResponse extends CommonErrorResponse {
 @doc("Arm Configuration Diff Response V2.")
 @added(Versions.v2025_07_15)
 model ArmConfigurationDiffOperationResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Arm Configuration Diff Response Properties.")
   properties?: ArmConfigurationDiffResponseProperties;
@@ -658,7 +658,7 @@ model ViewDeviceConfigurationResponse extends CommonErrorResponse {
 @doc("View Device Configuration Response V2.")
 @added(Versions.v2025_07_15)
 model ViewDeviceConfigurationOperationResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("View Device Configuration Response Properties.")
   properties?: ViewDeviceConfigurationResponseProperties;
@@ -723,7 +723,7 @@ model CommitBatchStatusResponse extends CommonErrorResponse {
 @doc("Commit Batch Status Response.")
 @added(Versions.v2025_07_15)
 model CommitBatchStatusOperationResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Commit Batch Status Response Properties.")
   properties?: CommitBatchStatusResponseProperties;
@@ -760,7 +760,7 @@ model DiscardCommitBatchResponse extends CommonErrorResponse {
 @doc("Discard Commit Batch Response.")
 @added(Versions.v2025_07_15)
 model DiscardCommitBatchOperationResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Discard commit batch response properties.")
   properties?: DiscardCommitBatchResponseProperties;
@@ -798,25 +798,25 @@ model CommitBatchDetails {
 @doc("Response body for a RotatePasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotatePasswordsResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }
 
 @doc("Response body for a ResyncPasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncPasswordsResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }
 
 @doc("Response body for a RotateCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotateCertificatesResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }
 
 @doc("Response body for a ResyncCertificates request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricResyncCertificatesResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }
 
 @doc("NetworkFabric QoS Properties.")
@@ -886,13 +886,13 @@ model CommitConfigurationRequest {
 @doc("Commit Configuration Response.")
 @added(Versions.v2025_07_15)
 model CommitConfigurationResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }
 
 @doc("GetTopology Response.")
 @added(Versions.v2025_07_15)
 model GetTopologyResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 
   @doc("Properties of the GetTopology Response.")
   properties?: GetTopologyResponseProperties;

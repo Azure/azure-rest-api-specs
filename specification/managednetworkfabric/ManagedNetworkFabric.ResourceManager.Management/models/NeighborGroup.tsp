@@ -93,5 +93,5 @@ model NeighborGroupPatchProperties {
 @doc("Response for Neighbor Group Resync operation.")
 @added(Versions.v2025_07_15)
 model NeighborGroupResyncResponse {
-  ...Azure.ResourceManager.Foundations.OperationStatusResult;
+  ...OperationStatusResult;
 }
