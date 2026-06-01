@@ -8,7 +8,11 @@ using AzureAppConfiguration;
 namespace SdkCustomizations;
 
 // Java specific customizations
+@@clientName(AzureAppConfiguration, "AzureAppConfiguration", "java");
 @@clientName(Azure.Core.Foundations.Error, "CommonError", "java");
+@@clientName(getKeyValues, "listConfigurationSettings", "java");
+@@clientName(putKeyValue, "setConfigurationSetting", "java");
+@@clientName(deleteKeyValue, "deleteConfigurationSetting", "java");
 
 // Python specific customizations
 @@clientName(KeyValueFields, "ConfigurationSettingFields", "python");
@@ -16,6 +20,7 @@ namespace SdkCustomizations;
 @@access(putKeyValue, Access.internal, "python");
 @@access(updateSnapshot, Access.internal, "python");
 @@access(SnapshotUpdateParameters, Access.public, "python");
+@@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
 
 //
 // .NET specific customizations
@@ -56,4 +61,18 @@ namespace SdkCustomizations;
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
 
-@@clientName(Azure.Core.Foundations.Error, "CommonError", "python");
+// TypeScript specific customizations
+@@clientName(Snapshot.expires, "expiresOn", "javascript");
+@@clientName(Snapshot.created, "createdOn", "javascript");
+@@clientName(
+  Snapshot.retentionPeriod,
+  "retentionPeriodInSeconds",
+  "javascript"
+);
+@@clientName(Snapshot.size, "sizeInBytes", "javascript");
+@@clientName(KeyValueFilter.key, "keyFilter", "javascript");
+@@clientName(KeyValueFilter.label, "labelFilter", "javascript");
+@@clientName(KeyValueFilter.tags, "tagsFilter", "javascript");
+@@clientName(KeyValueFilter, "ConfigurationSettingsFilter", "javascript");
+@@clientName(Snapshot, "ConfigurationSnapshot", "javascript");
+@@clientName(AzureAppConfiguration, "AppConfigurationClient", "javascript");
