@@ -58,7 +58,7 @@ interface PrivateLinkResourceOps
       },
       {},
       ResourceRoute = #{
-        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}",
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}",
       }
     > {}
 
@@ -69,7 +69,7 @@ interface PrivateLinkResources {
    */
   @summary("Get a private link resource.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}")
   get is PrivateLinkResourceOps.ActionSync<
     PrivateLinkResource,
     Request = void,
@@ -88,7 +88,7 @@ interface PrivateLinkResources {
    */
   @get
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources")
   @summary("List private link resources under specific topic, domain, or partner namespace or namespace.")
   listByResource is PrivateLinkResourceOps.ActionSync<
     PrivateLinkResource,
