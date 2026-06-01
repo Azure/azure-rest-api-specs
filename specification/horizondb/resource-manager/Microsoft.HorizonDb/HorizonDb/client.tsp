@@ -209,3 +209,13 @@ using Azure.ClientGenerator.Core;
   "PointInTimeUtcOn",
   "csharp"
 );
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterProperties.readonlyEndpoint,
+  "ReadOnlyEndpoint",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbParameterGroupProperties.pgVersion,
+  "PostgreSqlVersion",
+  "csharp"
+);

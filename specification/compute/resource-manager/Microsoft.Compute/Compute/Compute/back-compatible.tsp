@@ -368,9 +368,11 @@ using Common;
   CapacityReservation.properties
 );
 
-@@clientName(VirtualMachineRunCommands.update::parameters.body, "runCommand");
+@@clientName(
+  VirtualMachineRunCommands.update::parameters.properties,
+  "runCommand"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   VirtualMachineRunCommand.properties
 );
@@ -381,7 +383,7 @@ using Common;
 );
 
 @@clientName(
-  VirtualMachineScaleSetVMRunCommands.update::parameters.body,
+  VirtualMachineScaleSetVMRunCommands.update::parameters.properties,
   "runCommand"
 );
 @@clientName(
@@ -433,11 +435,11 @@ using Common;
   "extensionParameters"
 );
 @@clientName(
-  VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.body,
+  VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
 @@clientName(
-  VirtualMachineRunCommands.createOrUpdate::parameters.body,
+  VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
@@ -446,12 +448,6 @@ using Common;
   LogAnalyticsOperationGroup.exportThrottledRequests::parameters.body,
   "parameters"
 );
-
-// @@clientName(VirtualMachineScaleSetExtension.vmName, "name");
-@@clientName(VirtualMachineScaleSetExtension.vmType, "type");
-
-// @@clientName(VirtualMachineScaleSetVMExtension.vmName, "name");
-@@clientName(VirtualMachineScaleSetVMExtension.vmType, "type");
 
 @@clientName(
   AvailabilitySets.convertToVirtualMachineScaleSet::parameters.body,
