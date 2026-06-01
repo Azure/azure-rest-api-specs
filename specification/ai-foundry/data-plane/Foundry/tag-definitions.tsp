@@ -1,17 +1,19 @@
 using OpenAPI;
 
 @tagMetadata(#[
-  #{ name: "Responses", description: "Responses from the API" },
-  #{ name: "Conversations", parent: "Responses" },
-  #{ name: "Agents" },
-  #{ name: "Agent Invocations", parent: "Agents" },
+  #{ name: "Responses Root", description: "Responses" },
+  #{ name: "Responses", parent: "Responses Root", description: "Responses (OpenAI)" },
+  #{ name: "Conversations", parent: "Responses Root", description: "Conversations (OpenAI)" },
+  #{ name: "Agents Root", description: "Agents" },
+  #{ name: "Agents", parent: "Agents Root", description: "Agent Management" },
+  #{ name: "Agent Invocations", parent: "Agents Root" },
   #{
     name: "Agent Invocations WebSocket",
-    parent: "Agents",
-    description: "Agent Invocations (WebSocket)"
+    parent: "Agents Root",
+    description: "Agent Invocations (WebSocket)",
   },
-  #{ name: "Agent Session Files", parent: "Agents" },
-  #{ name: "Agent Containers", parent: "Agents" },
+  #{ name: "Agent Session Files", parent: "Agents Root" },
+  #{ name: "Agent Containers", parent: "Agents Root" },
   #{ name: "Platform APIs" },
   #{ name: "Datasets", parent: "Platform APIs" },
   #{ name: "Indexes", parent: "Platform APIs" },
@@ -36,17 +38,17 @@ using OpenAPI;
   #{
     name: "DataGenerationJobs",
     parent: "Platform APIs",
-    summary: "Data generation jobs"
+    summary: "Data generation jobs",
   },
   #{
     name: "AgentOptimizationJobs",
     parent: "Platform APIs",
-    summary: "Agent optimization jobs"
+    summary: "Agent optimization jobs",
   },
   #{
     name: "EvaluatorGenerationJobs",
     parent: "Platform APIs",
-    summary: "Evaluator generation jobs"
+    summary: "Evaluator generation jobs",
   },
   #{ name: "Evaluations" },
   #{ name: "Evals", parent: "Evaluations" },
