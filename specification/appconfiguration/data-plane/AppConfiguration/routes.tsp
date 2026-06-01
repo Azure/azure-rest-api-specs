@@ -368,14 +368,16 @@ op deleteFeatureFlag is AppConfigOperation<
     ...SyncTokenHeader;
     ...IfMatchHeader;
   },
-  (Body<FeatureFlag> &
-    AppConfigResponseHeaders &
-    ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ff\\\";charset=utf-8">) | {
-    @statusCode
-    statusCode: 204;
 
-    ...SyncTokenHeader;
-  }
+    | (Body<FeatureFlag> &
+        AppConfigResponseHeaders &
+        ContentTypeHeader<"application/json;profile=\\\"https://azconfig.io/mime-profiles/ff\\\";charset=utf-8">)
+    | {
+        @statusCode
+        statusCode: 204;
+
+        ...SyncTokenHeader;
+      }
 >;
 
 alias FeatureFlagRevisionsRequestParams = NameQueryParam<"""
