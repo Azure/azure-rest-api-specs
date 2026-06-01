@@ -113,12 +113,24 @@ union OsType {
 
 @added(Microsoft.Compute.Versions.`2026-04-06-preview`)
 @doc("The priority type for VM allocation")
-union PriorityType {
+union VirtualMachinePriorityTypes {
   @doc("Regular priority VMs")
   Regular: "Regular",
 
   @doc("Spot priority VMs")
   Spot: "Spot",
+
+  string,
+}
+
+@added(Microsoft.Compute.Versions.`2026-04-06-preview`)
+@doc("Different kind of eviction policies")
+union VirtualMachineEvictionPolicyTypes {
+  @doc("When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this.")
+  Delete: "Delete",
+
+  @doc("When evicted, the Spot VM will be deallocated/stopped")
+  Deallocate: "Deallocate",
 
   string,
 }
@@ -171,14 +183,14 @@ model VmSizeProfile {
 @doc("The priority profile for flex VM creation")
 model PriorityProfile {
   @doc("The priority type for VM allocation")
-  type?: PriorityType;
+  type?: VirtualMachinePriorityTypes;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
   @doc("Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview.")
   maxPricePerVM?: float32;
 
   @doc("Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview.")
-  evictionPolicy?: EvictionPolicy;
+  evictionPolicy?: VirtualMachineEvictionPolicyTypes;
 
   @doc("The allocation strategy for VM size selection")
   allocationStrategy?: AllocationStrategy;
@@ -258,7 +270,7 @@ model BulkVMConfiguration {
   tags?: Record<string>;
 
   @doc("Describes the properties of a Virtual Machine.")
-  properties?: BulkactionVMProperties;
+  properties?: BulkActionVMProperties;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;

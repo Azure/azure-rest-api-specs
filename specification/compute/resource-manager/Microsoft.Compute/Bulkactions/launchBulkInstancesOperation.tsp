@@ -163,11 +163,11 @@ union VMOperationStatus {
 @doc("Compute Profile to configure the Virtual Machines.")
 model ComputeProfile {
   @doc("Base Virtual Machine Profile Properties to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineProperties")
-  virtualMachineProfile: BulkactionVMProperties;
+  virtualMachineProfile: BulkActionVMProperties;
 
   @identifiers(#["name"])
   @doc("Virtual Machine Extensions Array to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineExtension")
-  extensions?: Array<BulkactionVMExtension>;
+  extensions?: Array<BulkActionVMExtension>;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines. The default value will be the latest supported computeApiVersion by LaunchBulkInstancesOperation.")
   computeApiVersion?: string;
@@ -353,9 +353,7 @@ interface LaunchBulkInstancesOperation {
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     asyncOperationId: string,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
-    | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 
   @doc("Creates or updates LaunchBulkInstancesOperations.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<

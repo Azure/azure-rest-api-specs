@@ -7,7 +7,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Compute;
 @doc("Describes the properties of a Virtual Machine for bulk create.")
-model BulkactionVMProperties {
+model BulkActionVMProperties {
   @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.")
   scheduledEventsPolicy?: ScheduledEventsPolicy;
 
@@ -51,7 +51,7 @@ model BulkactionVMProperties {
   applicationProfile?: ApplicationProfile;
 
   @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  vmExtensions?: BulkactionVMExtension[];
+  vmExtensions?: BulkActionVMExtension[];
 }
 
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")

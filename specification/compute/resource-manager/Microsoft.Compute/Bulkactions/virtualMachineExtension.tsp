@@ -6,7 +6,7 @@ import "./common.tsp";
 namespace Microsoft.Compute;
 
 @doc("Defines a virtual machine extension.")
-model BulkactionVMExtension {
+model BulkActionVMExtension {
   @doc("The name of the virtual machine extension.")
   name: string;
 

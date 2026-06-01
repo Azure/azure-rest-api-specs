@@ -1407,6 +1407,93 @@
         }
       }
     },
+    "BulkActionVMExtension": {
+      "type": "object",
+      "description": "Defines a virtual machine extension.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual machine extension."
+        },
+        "properties": {
+          "$ref": "#/definitions/BulkActionVmExtensionProperties",
+          "description": "Properties of the virtual machine extension."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "BulkActionVMProperties": {
+      "type": "object",
+      "description": "Describes the properties of a Virtual Machine for bulk create.",
+      "properties": {
+        "scheduledEventsPolicy": {
+          "$ref": "#/definitions/ScheduledEventsPolicy",
+          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware profile for the virtual machine."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machine."
+        },
+        "diagnosticsProfile": {
+          "$ref": "#/definitions/DiagnosticsProfile",
+          "description": "Specifies the boot diagnostic settings state. Minimum compute api-version: 2015-06-15."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
+        },
+        "extensionsTimeBudget": {
+          "type": "string",
+          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). Minimum compute api-version: 2020-06-01."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. Minimum compute api-version: 2021-03-01."
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum compute api-version: 2021-04-01."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM."
+        },
+        "vmExtensions": {
+          "type": "array",
+          "description": "Virtual Machine Extensions Array to be applied to the Virtual Machines.",
+          "items": {
+            "$ref": "#/definitions/BulkActionVMExtension"
+          }
+        }
+      }
+    },
     "BulkActionVmExtensionProperties": {
       "type": "object",
       "description": "Describes the properties of a Virtual Machine Extension.",
@@ -1501,7 +1588,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/BulkactionVMProperties",
+          "$ref": "#/definitions/BulkActionVMProperties",
           "description": "Describes the properties of a Virtual Machine."
         },
         "computeApiVersion": {
@@ -1511,93 +1598,6 @@
         "name": {
           "type": "string",
           "description": "Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix."
-        }
-      }
-    },
-    "BulkactionVMExtension": {
-      "type": "object",
-      "description": "Defines a virtual machine extension.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the virtual machine extension."
-        },
-        "properties": {
-          "$ref": "#/definitions/BulkActionVmExtensionProperties",
-          "description": "Properties of the virtual machine extension."
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ]
-    },
-    "BulkactionVMProperties": {
-      "type": "object",
-      "description": "Describes the properties of a Virtual Machine for bulk create.",
-      "properties": {
-        "scheduledEventsPolicy": {
-          "$ref": "#/definitions/ScheduledEventsPolicy",
-          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Specifies the storage settings for the virtual machine disks."
-        },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware profile for the virtual machine."
-        },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
-          "description": "Specifies the network interfaces of the virtual machine."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Specifies the Security related profile settings for the virtual machine."
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. Minimum compute api-version: 2015-06-15."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
-        },
-        "extensionsTimeBudget": {
-          "type": "string",
-          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). Minimum compute api-version: 2020-06-01."
-        },
-        "scheduledEventsProfile": {
-          "$ref": "#/definitions/ScheduledEventsProfile",
-          "description": "Specifies Scheduled Event related configurations."
-        },
-        "userData": {
-          "type": "string",
-          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. Minimum compute api-version: 2021-03-01."
-        },
-        "capacityReservation": {
-          "$ref": "#/definitions/CapacityReservationProfile",
-          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum compute api-version: 2021-04-01."
-        },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM."
-        },
-        "vmExtensions": {
-          "type": "array",
-          "description": "Virtual Machine Extensions Array to be applied to the Virtual Machines.",
-          "items": {
-            "$ref": "#/definitions/BulkactionVMExtension"
-          }
         }
       }
     },
@@ -1705,14 +1705,14 @@
       "description": "Compute Profile to configure the Virtual Machines.",
       "properties": {
         "virtualMachineProfile": {
-          "$ref": "#/definitions/BulkactionVMProperties",
+          "$ref": "#/definitions/BulkActionVMProperties",
           "description": "Base Virtual Machine Profile Properties to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineProperties"
         },
         "extensions": {
           "type": "array",
           "description": "Virtual Machine Extensions Array to be specified according to specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineExtension",
           "items": {
-            "$ref": "#/definitions/BulkactionVMExtension"
+            "$ref": "#/definitions/BulkActionVMExtension"
           },
           "x-ms-identifiers": [
             "name"
@@ -2263,30 +2263,6 @@
           "type": "string",
           "description": "Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered."
         }
-      }
-    },
-    "EvictionPolicy": {
-      "type": "string",
-      "description": "Different kind of eviction policies",
-      "enum": [
-        "Delete",
-        "Deallocate"
-      ],
-      "x-ms-enum": {
-        "name": "EvictionPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this."
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "When evicted, the Spot VM will be deallocated/stopped"
-          }
-        ]
       }
     },
     "ExecuteCreateRequest": {
@@ -3473,7 +3449,7 @@
       "description": "The priority profile for flex VM creation",
       "properties": {
         "type": {
-          "$ref": "#/definitions/PriorityType",
+          "$ref": "#/definitions/VirtualMachinePriorityTypes",
           "description": "The priority type for VM allocation"
         },
         "maxPricePerVM": {
@@ -3482,37 +3458,13 @@
           "description": "Price per hour of each Spot VM will never exceed this. Available from 2026-04-06-preview."
         },
         "evictionPolicy": {
-          "$ref": "#/definitions/EvictionPolicy",
+          "$ref": "#/definitions/VirtualMachineEvictionPolicyTypes",
           "description": "Eviction Policy to follow when evicting Spot VMs. Available from 2026-04-06-preview."
         },
         "allocationStrategy": {
           "$ref": "#/definitions/AllocationStrategy",
           "description": "The allocation strategy for VM size selection"
         }
-      }
-    },
-    "PriorityType": {
-      "type": "string",
-      "description": "The priority type for VM allocation",
-      "enum": [
-        "Regular",
-        "Spot"
-      ],
-      "x-ms-enum": {
-        "name": "PriorityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regular",
-            "value": "Regular",
-            "description": "Regular priority VMs"
-          },
-          {
-            "name": "Spot",
-            "value": "Spot",
-            "description": "Spot priority VMs"
-          }
-        ]
       }
     },
     "ProtocolTypes": {
@@ -5015,6 +4967,30 @@
         "operationStatus"
       ]
     },
+    "VirtualMachineEvictionPolicyTypes": {
+      "type": "string",
+      "description": "Different kind of eviction policies",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineEvictionPolicyTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this."
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "When evicted, the Spot VM will be deallocated/stopped"
+          }
+        ]
+      }
+    },
     "VirtualMachineIdentity": {
       "type": "object",
       "description": "Identity for the virtual machine.",
@@ -5235,6 +5211,30 @@
             "$ref": "#/definitions/SubResource"
           }
         }
+      }
+    },
+    "VirtualMachinePriorityTypes": {
+      "type": "string",
+      "description": "The priority type for VM allocation",
+      "enum": [
+        "Regular",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachinePriorityTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "Regular priority VMs"
+          },
+          {
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Spot priority VMs"
+          }
+        ]
       }
     },
     "VirtualMachinePublicIPAddressConfiguration": {
