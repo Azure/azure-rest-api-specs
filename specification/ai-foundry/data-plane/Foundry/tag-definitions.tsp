@@ -13,7 +13,11 @@ using OpenAPI;
   #{ name: "Memory stores", parent: "Platform APIs" },
   #{ name: "Scheduler", parent: "Platform APIs" },
   #{ name: "Fine-tuning", parent: "Platform APIs" },
-  #{ name: "EvaluatorGenerationJobs", parent: "Platform APIs" },
+  #{
+    name: "EvaluatorGenerationJobs",
+    parent: "Platform APIs",
+    summary: "Evaluator generation jobs",
+  },
   #{ name: "Models", parent: "Platform APIs" },
   #{ name: "Memory Stores", parent: "Platform APIs" },
   #{ name: "Chat", parent: "Platform APIs" },
