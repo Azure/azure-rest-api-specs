@@ -51,7 +51,11 @@ interface BlobClient {
 @@clientName(ListContainersResponse.containerItems, "FileSystemItems", "go");
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
-@@clientName(UserDelegationKey.signedDelegatedUserTid, "SignedDelegatedUserTenantID", "go");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "SignedDelegatedUserTenantID",
+  "go"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   Service.listContainers,

@@ -194,7 +194,11 @@ enum ListBlobsShowOnlyGo {
   "ListPathsHierarchySegmentResponse",
   "go"
 );
-@@clientName(ListBlobsHierarchySegmentResponse.containerName, "FileSystemName", "go");
+@@clientName(
+  ListBlobsHierarchySegmentResponse.containerName,
+  "FileSystemName",
+  "go"
+);
 @@clientName(BlobHierarchyListSegment, "PathHierarchyListSegment", "go");
 @@clientName(BlobHierarchyListSegment.blobPrefixes, "PathPrefixes", "go");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
