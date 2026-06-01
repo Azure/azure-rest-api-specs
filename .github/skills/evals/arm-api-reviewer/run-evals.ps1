@@ -50,10 +50,11 @@
     Useful for verifying stability of the suite and detecting flaky stimuli.
 
 .PARAMETER DelayBetweenRunsSeconds
-    Cooldown in seconds between consecutive runs when -Repeat > 1. Default: 60.
+    Cooldown in seconds between consecutive runs when -Repeat > 1. Default: 15.
     Gives Copilot agent sessions, network rate-limiters, and judge-model
     contexts time to settle so each run starts from a clean baseline.
-    Set to 0 to run back-to-back with no wait.
+    Set to 0 to run back-to-back with no wait. Bump to 60+ if you see
+    rate-limit errors across runs.
 
 .EXAMPLE
     # Run everything with defaults (safest)
@@ -97,7 +98,7 @@ param(
     [ValidateRange(1, 100)]
     [int]$Repeat = 1,
     [ValidateRange(0, 3600)]
-    [int]$DelayBetweenRunsSeconds = 60
+    [int]$DelayBetweenRunsSeconds = 15
 )
 
 Set-StrictMode -Version Latest
@@ -417,19 +418,40 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
                       $null -ne $_.gradeResult -and
                       $_.gradeResult.passed -eq $true)
             } | ForEach-Object {
-                $name = if ($null -ne $_.PSObject.Properties['stimulusName']) { $_.stimulusName } elseif ($null -ne $_.PSObject.Properties['stimulus']) { $_.stimulus.name } else { "(unknown)" }
+                # Stimulus name lives at trajectory.stimulus.name OR gradeResult.stimulusName.
+                # Earlier versions of this script looked at $_.stimulusName and $_.stimulus.name
+                # at the top of the record; the JSONL schema actually nests them, so
+                # both lookups silently returned "(unknown)". Fixed paths:
+                $name = '(unknown)'
+                if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['stimulusName']) {
+                    $name = $_.gradeResult.stimulusName
+                } elseif ($null -ne $_.PSObject.Properties['trajectory'] -and $null -ne $_.trajectory.stimulus -and $null -ne $_.trajectory.stimulus.name) {
+                    $name = $_.trajectory.stimulus.name
+                }
                 $evidence = if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult) { $_.gradeResult.evidence } elseif ($null -ne $_.PSObject.Properties['error']) { $_.error } else { "No result (timeout or error)" }
+                # List the per-grader names that failed (not just the aggregate evidence).
+                $failedGraders = @()
+                if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['details']) {
+                    $failedGraders = @($_.gradeResult.details | Where-Object { $_.passed -eq $false } | ForEach-Object { $_.name })
+                }
                 Write-Host "    [FAIL] $name" -ForegroundColor Red
                 Write-Host "           $evidence" -ForegroundColor DarkGray
+                if ($failedGraders.Count -gt 0) {
+                    Write-Host ("           Failed graders: {0}" -f ($failedGraders -join ', ')) -ForegroundColor DarkGray
+                }
             }
             Write-Host ""
         }
 
         # Show per-suite breakdown
         Write-Host "  Per-suite breakdown:" -ForegroundColor DarkGray
-        $namedResults = @($results | Where-Object { $null -ne $_.PSObject.Properties['stimulus'] })
+        $namedResults = @($results | Where-Object {
+            $null -ne $_.PSObject.Properties['trajectory'] -and
+            $null -ne $_.trajectory.stimulus -and
+            $null -ne $_.trajectory.stimulus.name
+        })
         if ($namedResults.Count -gt 0) {
-            $namedResults | Group-Object { $_.stimulus.name -replace '-[^-]+$', '' } | Sort-Object Name | ForEach-Object {
+            $namedResults | Group-Object { $_.trajectory.stimulus.name -replace '-[^-]+$', '' } | Sort-Object Name | ForEach-Object {
                 $suiteName = $_.Name
                 $suiteTotal = $_.Count
                 $suitePassed = @($_.Group | Where-Object {
@@ -517,13 +539,22 @@ if ($Repeat -gt 1) {
         if (-not (Test-Path $s.JsonlFile)) { continue }
         Get-Content $s.JsonlFile | ForEach-Object {
             $rec = $_ | ConvertFrom-Json
-            if ($null -ne $rec.PSObject.Properties['status'] -and $null -ne $rec.PSObject.Properties['stimulus']) {
+            # Stimulus name lives at trajectory.stimulus.name (not top-level
+            # $rec.stimulus.name) and gradeResult.stimulusName -- the older
+            # field paths were silently wrong and dropped every record.
+            $stimName = $null
+            if ($null -ne $rec.PSObject.Properties['trajectory'] -and $null -ne $rec.trajectory.stimulus -and $null -ne $rec.trajectory.stimulus.name) {
+                $stimName = $rec.trajectory.stimulus.name
+            } elseif ($null -ne $rec.PSObject.Properties['gradeResult'] -and $null -ne $rec.gradeResult.stimulusName) {
+                $stimName = $rec.gradeResult.stimulusName
+            }
+            if ($null -ne $rec.PSObject.Properties['status'] -and $null -ne $stimName) {
                 $stimulusPassed = ($null -ne $rec.PSObject.Properties['gradeResult'] -and
                                    $null -ne $rec.gradeResult -and
                                    $rec.gradeResult.passed -eq $true)
                 $allStimulusResults += [PSCustomObject]@{
                     Run      = $s.Run
-                    Stimulus = $rec.stimulus.name
+                    Stimulus = $stimName
                     Passed   = $stimulusPassed
                 }
             }

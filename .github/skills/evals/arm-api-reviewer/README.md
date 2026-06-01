@@ -55,9 +55,9 @@ arm-api-reviewer/
 | 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                            |
 | 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                          |
 | 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                              |
-| 16xxxx | Protocol safety               | 7     | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker |
+| 16xxxx | Protocol safety               | 10    | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
 
-Total: 48 stimuli across 16 eval files.
+Total: 51 stimuli across 16 eval files.
 
 ## Fixtures
 

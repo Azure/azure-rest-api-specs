@@ -125,6 +125,11 @@ before folding it into the report:
   omitted / `n/a` only when Input #5 is `None - new service`.
 - The Critic header field `Iteration:` is a valid `1` through `3` and is
   consistent with the Reviewer's current iteration loop.
+- The pasted output begins with a valid `<!-- critic-verdict: ... -->`
+  marker (literal first line) whose field values match the `### Verdict`
+  table body byte-for-byte. A missing or malformed marker, or values that
+  disagree with the table, is a handoff failure per the
+  [Critic-verdict marker parsing contract](#critic-verdict-marker-per-critic-response).
 - The pasted output includes, verbatim, both the `### Verdict` section and
   the `### Per-finding annotations` section.
 

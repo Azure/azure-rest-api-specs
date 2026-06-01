@@ -639,7 +639,10 @@ apply the verdict rules below:
   the URL does not resolve to a real comment, mark `FAIL:
 skip-not-justified` and recommend demoting to POST-NEW.
 - **RESOLVE-AND-REPOST (Scenario B)**: confirm (a) the existing comment is
-  agent-origin (body contains `posted-by: arm-api-reviewer-agent`); (b)
+  agent-origin (body contains the substring `posted-by:
+arm-api-reviewer-agent`, which matches both the full 6-field per-comment
+  marker and the `telemetry: degraded` fallback marker; either form counts
+  as agent-origin); (b)
   the violation is still present at the new line (steps 1-2 above
   re-verified at session SHA); and (c) the original line in the existing
   comment is genuinely shifted (the violation is **not** at the original

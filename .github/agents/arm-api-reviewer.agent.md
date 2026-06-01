@@ -170,9 +170,43 @@ A **review session** spans from Step 1 (session SHA pinned) through Step 10 (cle
 
 On stateless hosts where each turn is fresh, the `runSubagent` call must occur within the current turn -- prior-turn assertions cannot be relied upon. When in doubt, dispatch the Critic.
 
-> Concrete failure shapes that violate this invariant are catalogued in
-> [Step 7 -> Anti-patterns that constitute a Step 7 violation](#anti-patterns-that-constitute-a-step-7-violation).
-> They are illustrative; this invariant is the load-bearing rule.
+### Anti-patterns that constitute an invariant violation
+
+These are real failure shapes observed in prior reviews. Each one **is** a
+breach of the Pre-Presentation Invariant above; no follow-up question
+repairs it. They are illustrative -- the invariant remains the load-bearing
+rule. Step 7 implements the mechanics; this list catalogues the failures.
+
+- Producing a `## API Review:` heading or any "Blocking Issues" / "Warnings" /
+  "Suggestions" list **before** attempting subagent dispatch (the host's
+  subagent-dispatch mechanism: `runSubagent` in VS Code Copilot Chat, the
+  equivalent `agent` tool in other hosts) for `ARM API Review Critic`. The
+  rendered findings themselves are the breach, regardless of any "want me
+  to run the critic?" question that follows.
+- Asking the human "should I (a) run the critic and post, (b) treat this as
+  chat-only, or (c) confirm with the author first?" The critic is not
+  contingent on posting. Chat presentation triggers the gate.
+- Treating `runSubagent` failure or unavailability as "critic unavailable,
+  proceeding to present." Failure mandates the session-handoff prompt
+  verbatim, then WAIT - not advancement.
+- Folding "corrections" into the Step 6 report after the Critic returned
+  `Finding accuracy = INVALIDATED`. INVALIDATED means the session SHA no
+  longer matches the PR; the only permitted output is the SHA-drift
+  report per state D and Step 7 item 11.
+- Substituting an inline self-review ("the findings look correct to me",
+  "self-check: pass", a "Critic:" annotation written by this same agent) for
+  the subagent call. Self-critique by the same agent has none of the
+  properties that make the critic useful.
+- Rendering only "preliminary" or "draft" findings before the critic runs, on
+  the theory that they aren't final. Drafts presented in chat trigger the
+  gate identically to finals.
+- Skipping the gate because the PR "looks small" or "fast-path" qualifies.
+  The fast path in Step 1 explicitly does not skip Step 7.
+- Treating a Critic `INVALIDATED` verdict as a normal `FAIL` and iterating
+  against it. `INVALIDATED` means the session SHA no longer matches the PR;
+  the entire review is unsafe and must be restarted or abandoned per Step 7
+  item 11. Folding "corrections" into a report drafted against a stale SHA
+  is the breach.
 
 ### Required review-state marker
 
@@ -180,8 +214,9 @@ Every response emitted **after Step 1 begins**, for the entire review session
 (through Step 10 cleanup, abandonment, or session invalidation), MUST begin
 with a hidden HTML comment as the literal first line. This includes - but is
 not limited to - findings, graphs, "no issues found" summaries, posting
-prompts, the Step 7 session-handoff prompt, the Step 8 plan-approval prompt,
-the Step 9 label-approval prompt, error reports, and SHA-drift reports. The
+prompts, the Step 7 session-handoff prompt, the Step 8 plan-approval prompt
+(which bundles the Step 9 label approval -- there is no separate Step 9
+prompt), error reports, and SHA-drift reports. The
 rule is response-scope, not content-scope: if the session is live, the marker
 is required. The only responses exempt from the marker are those emitted
 **before** the session SHA has been pinned in Step 1 (e.g., the PR-resolution
@@ -216,7 +251,7 @@ The marker format is:
   findings, no posting prompts -- and `critic-mode` carries whatever value
   the prior iteration ended with (typically `subagent`). Never use
   `iteration=0` on a response that folds in a fresh Critic verdict; that
-  requires `1`-`5`.
+  requires `1`-`3`.
 
 **Note:** This `critic-mode` field describes how (and whether) the critic
 ran for the whole response. It is distinct from the `critic` field in the
@@ -924,7 +959,7 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
     > **Critic: UNAVAILABLE** - independent verification did not run for this review. All findings are reviewer self-check only. -->
 ```
 
-**Internal tracking (not rendered to the reviewer).** You must still track the critic's verdict, mode (`subagent | session-handoff | UNAVAILABLE`), iteration count, and the `Next-step recommendation` (`READY TO POST | REVISE RECOMMENDED | MANUAL DECISION REQUIRED | SESSION INVALIDATED`) - these gate Step 8 and feed the hidden HTML telemetry markers on posted comments. They are simply not part of the chat-rendered report unless the exception conditions above are met.
+**Internal tracking (not rendered to the reviewer).** You must still track the critic's verdict, mode (`subagent | session-handoff | unavailable`), iteration count, and the `Next-step recommendation` (`READY TO POST | REVISE RECOMMENDED | MANUAL DECISION REQUIRED | SESSION INVALIDATED`) - these gate Step 8 and feed the hidden HTML telemetry markers on posted comments. They are simply not part of the chat-rendered report unless the exception conditions above are met.
 
 Use the rule IDs from the instruction files (e.g., `RPC-Put-V1-01`, `RPC-Patch-V1-10`, `ARG001`, `TSP-2.1`). For generic rules without an explicit ID, cite the section name (e.g., "Section 6.1 - Naming", "Section 9 - Collections & Pagination").
 
@@ -936,46 +971,20 @@ After producing the Step 6 report and **before** presenting findings to the huma
 
 **Dispatch nomenclature.** Throughout this document "invoke the Critic as a subagent" means "use the host's subagent-dispatch mechanism": `runSubagent` with `agentName: "ARM API Review Critic"` in VS Code Copilot Chat, the equivalent `agent` tool in other hosts. The names `runSubagent` and `agent` refer to the same capability and are interchangeable in this file.
 
-**GitHub MCP tool naming.** Exact GitHub MCP tool names vary by server version. This file uses `get_pull_request`, `list_pull_request_files`, `get_file_contents`, `get_review_comments`, `create_review_comment`. If a tool of that exact name is unavailable, use the host's equivalent (e.g., `get_pull_request_comments`, `list_review_comments_for_pull_request`) or fall back to the `gh` CLI via `execute/runInTerminal`.
+**GitHub MCP tool naming.** Exact GitHub MCP tool names vary by server version. This file uses `get_pull_request`, `list_pull_request_files`, `get_file_contents`, `get_review_comments` for reads, and `create_pull_request_review` (to submit a review with multiple inline comments in a single payload) plus `create_review_comment` (to add an individual inline comment to an existing review) for posting. If a tool of that exact name is unavailable, use the host's equivalent (e.g., `get_pull_request_comments`, `list_review_comments_for_pull_request`) or fall back to the `gh` CLI via `execute/runInTerminal`.
+
+**Posting tool preference.** For mutating actions (Step 8 posting and Step 9 label changes), prefer the GitHub MCP tool when available; fall back to the `gh` CLI through `execute/runInTerminal` only when the MCP tool is missing or errors. This mirrors the read-side preference rule above and keeps audit/permission semantics consistent across the review.
 
 **Why this gate exists.** This agent operates on a public repository used by thousands of engineers, including senior service-team architects and external partners. Every posted comment is durable, citable, and indexed by search. A wrong finding becomes precedent. The critic is an independent verifier whose job is to catch errors in _your_ findings before they reach a public PR. Precision dominates recall: dropping a borderline finding is far cheaper than posting a wrong one.
 
 #### Anti-patterns that constitute a Step 7 violation
 
-These are real failure shapes observed in prior reviews. Each one **is** the
-breach of the [Pre-Presentation Invariant](#pre-presentation-invariant-read-this-first-every-time)
-at the top of this file; no follow-up question repairs it.
-
-- Producing a `## API Review:` heading or any "Blocking Issues" / "Warnings" /
-  "Suggestions" list **before** attempting subagent dispatch (the host's
-  subagent-dispatch mechanism: `runSubagent` in VS Code Copilot Chat, the
-  equivalent `agent` tool in other hosts) for `ARM API Review Critic`. The
-  rendered findings themselves are the breach, regardless of any "want me
-  to run the critic?" question that follows.
-- Asking the human "should I (a) run the critic and post, (b) treat this as
-  chat-only, or (c) confirm with the author first?" The critic is not
-  contingent on posting. Chat presentation triggers the gate.
-- Treating `runSubagent` failure or unavailability as "critic unavailable,
-  proceeding to present." Failure mandates the session-handoff prompt
-  verbatim, then WAIT - not advancement.
-- Folding "corrections" into the Step 6 report after the Critic returned
-  `Finding accuracy = INVALIDATED`. INVALIDATED means the session SHA no
-  longer matches the PR; the only permitted output is the SHA-drift
-  report per state D and Step 7 item 11.
-- Substituting an inline self-review ("the findings look correct to me",
-  "self-check: pass", a "Critic:" annotation written by this same agent) for
-  the subagent call. Self-critique by the same agent has none of the
-  properties that make the critic useful.
-- Rendering only "preliminary" or "draft" findings before the critic runs, on
-  the theory that they aren't final. Drafts presented in chat trigger the
-  gate identically to finals.
-- Skipping the gate because the PR "looks small" or "fast-path" qualifies.
-  The fast path in Step 1 explicitly does not skip Step 7.
-- Treating a Critic `INVALIDATED` verdict as a normal `FAIL` and iterating
-  against it. `INVALIDATED` means the session SHA no longer matches the PR;
-  the entire review is unsafe and must be restarted or abandoned per Step 7
-  item 11. Folding "corrections" into a report drafted against a stale SHA
-  is the breach.
+The catalogue of concrete failure shapes has moved to the
+[Pre-Presentation Invariant](#anti-patterns-that-constitute-an-invariant-violation)
+at the top of this file, since each anti-pattern is a breach of that
+invariant rather than of Step 7 alone. Step 7 implements the mechanics; the
+invariant defines the gate. If you reached this anchor from an older link,
+read the anti-patterns list there.
 
 **Inputs to pass to the critic.** **Copy the YAML template at
 [`./protocols/critic-inputs.template.md`](./protocols/critic-inputs.template.md)
@@ -1020,8 +1029,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 6. **Re-invoke the critic** if any finding was changed. The prior verdict is stale. **Before re-invoking, verify the session SHA still matches the PR head.** Run `gh pr view <n> --json headRefOid` (or `get_pull_request`) and confirm `head.sha` equals the session SHA pinned in Step 1. If it has moved, abort per Step 1's session-invalidation rule and Step 7 item 11 -- do not pass a stale SHA to the Critic.
 7. **Iteration with convergence detection.** Re-invoke the Critic after revisions. Stop iterating when one of these conditions is met:
    - **Convergence**: the Critic returns zero `FAIL`s **and** no new candidate missed violations (i.e., its `Likely missed violations` section is empty or every item was already considered in the prior iteration). At that point the report is stable.
-   - **Hard cap**: 3 iterations. If after 3 iterations any `FAIL` remains, set the (internally tracked) `Next-step recommendation` to `MANUAL DECISION REQUIRED`, render the corresponding exception banner at the top of the Step 6 report, and escalate both the report and the Critic's last output to the human. (The cap was reduced from 5 to 3 to keep the Reviewer<->Critic loop tight; extra iterations rarely converged and the interactive checkpoint at iteration 3 already routes hard cases to the human.)
-   - **Hard cap**: iteration 3. If any `FAIL` is outstanding at iteration 3, escalate with `MANUAL DECISION REQUIRED`. The cap is the single exit condition; there is no separate wave-thrash branch.
+   - **Hard cap**: iteration 3. If any `FAIL` is outstanding at iteration 3, set the (internally tracked) `Next-step recommendation` to `MANUAL DECISION REQUIRED`, render the corresponding exception banner at the top of the Step 6 report, and escalate both the report and the Critic's last output to the human. The cap is the single exit condition; there is no separate wave-thrash branch. (Reduced from 5 to keep the Reviewer<->Critic loop tight; extra iterations rarely converged and the interactive checkpoint at iteration 3 already routes hard cases to the human.)
 8. **Consensus rule for `Blocking` severity.** A finding may only be posted at `Blocking` severity when **both** the Reviewer's Step 6 assigned severity is `Blocking` **and** the Critic returns High or Medium confidence on that finding (Re-validation Procedure step 5). If the Critic returned Low confidence on a Blocking finding or recommended DOWNGRADE, the finding is automatically capped at `Warning` for posting. The human can upgrade back to Blocking via the override mechanism (with the standard `critic: override` telemetry marker plus a valid `override-reason` per the [protocol's Override-reason validator](./protocols/reviewer-critic.protocol.md#override-reason-validator)). This prevents the most damaging failure mode -- a public PR comment marked Blocking that turns out to be wrong.
 9. **Reconciliation `FAIL`s (special handling - no standard override path).** If the Critic returns `FAIL` on any **reconciliation** entry (Critic verdict track `Reconciliation accuracy`, produced by the Critic's Re-validation Procedure step 7 - `Re-verify the reconciliation plan`), only these resolutions are valid:
    - **Correct and re-invoke**: re-fetch and fix the disposition if the Critic identifies a wrong-line, wrong-anchor (`fix-anchor-wrong`), or unreachable-anchor (`fix-anchor-unreachable`) error, then re-invoke the Critic.
@@ -1045,7 +1053,7 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 | Critic Finding accuracy                                                          | Critic Graph integrity  | Critic Reconciliation accuracy | Critic Coverage | Adjustments applied | Recommendation                                                                                                                                                                                                                                                                                                                                                    |
 | -------------------------------------------------------------------------------- | ----------------------- | ------------------------------ | --------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `INVALIDATED` (reason `session-sha-moved` or `session-sha-unreachable`)          | any                     | any                            | any             | n/a                 | **SESSION INVALIDATED** -- Stop. Do not present findings, do not post, do not iterate. Report both SHAs to the human verbatim and ask whether to (a) restart the review against the new head SHA (re-run from Step 1 with a fresh session SHA) or (b) abandon. The current report is unsafe to post because the files the Reviewer judged no longer match the PR. |
-| `UNAVAILABLE` (no critic verdict; reached fallback Rung 3)                       | n/a                     | n/a                            | n/a             | n/a                 | **MANUAL DECISION REQUIRED** -- Critic did not run; reviewer self-check only. The `[!CAUTION]` "Critic UNAVAILABLE" banner MUST be rendered in both required locations (report top + Summary).                                                                                                                                                                    |
+| `unavailable` (no critic verdict; reached fallback Rung 3)                       | n/a                     | n/a                            | n/a             | n/a                 | **MANUAL DECISION REQUIRED** -- Critic did not run; reviewer self-check only. The `[!CAUTION]` "Critic UNAVAILABLE" banner MUST be rendered in both required locations (report top + Summary).                                                                                                                                                                    |
 | `PASS`, all High confidence                                                      | `PASS` or `N/A`         | `PASS` or `N/A`                | `APPROVE`       | None or trivial     | **READY TO POST**                                                                                                                                                                                                                                                                                                                                                 |
 | `PASS` or `WARN` with >= 1 Medium/Low, or any DOWNGRADE/RECLASSIFY/DROP applied  | `PASS` / `WARN` / `N/A` | `PASS` / `WARN` / `N/A`        | any             | Revisions present   | **REVISE RECOMMENDED**                                                                                                                                                                                                                                                                                                                                            |
 | `FAIL` after iteration 3, or Blocking finding where critic and reviewer disagree | any                     | any                            | any             | Unresolved          | **MANUAL DECISION REQUIRED**                                                                                                                                                                                                                                                                                                                                      |
@@ -1070,9 +1078,10 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
      1. The Critic header `PR:` exactly matches the current PR under review.
      2. The Critic header `Head SHA:` exactly matches the session SHA pinned in Step 1.
      3. The Critic header `Base SHA/Ref:` matches the base SHA/ref pinned in Step 1 (Critic Input #5). It MAY be omitted or rendered `n/a` only when no previous version exists ("None - new service").
-     4. The Critic header `Iteration:` is `1`-`5` and is consistent with the current loop iteration.
-     5. The pasted output contains, verbatim, both a `### Verdict` section and a `### Per-finding annotations` section. A paste missing either section is invalid -- the Reviewer parses both programmatically.
-        If **any** of the five checks fails, reject the pasted verdict as invalid handoff data, state which check failed, and request a corrected verbatim paste. Free-form acknowledgments such as "looks fine" are never valid substitutes.
+     4. The Critic header `Iteration:` is `1`-`3` and is consistent with the current loop iteration.
+     5. The pasted output begins with a valid `<!-- critic-verdict: ... -->` marker (literal first line) whose field values match the `### Verdict` table body byte-for-byte. A missing or malformed marker, or values that disagree with the table, is an invalid handoff per the protocol's [Critic-verdict marker parsing contract](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response).
+     6. The pasted output contains, verbatim, both a `### Verdict` section and a `### Per-finding annotations` section. A paste missing either section is invalid -- the Reviewer parses both programmatically.
+        If **any** of the six checks fails, reject the pasted verdict as invalid handoff data, state which check failed, and request a corrected verbatim paste. Free-form acknowledgments such as "looks fine" are never valid substitutes.
    - The human explicitly replies `skip critic` (or unambiguous equivalent such as "skip the critic", "no critic", "proceed without critic"). Only then may you advance to Rung 3.
    - The human cancels the review.
 
@@ -1150,6 +1159,14 @@ The wording of the prompt body MUST match the Rung 2 template above byte-for-byt
   <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
   ```
 
+- **Telemetry-degraded fallback** (when one or more required per-comment fields cannot be assembled -- see the protocol's [Telemetry fallback policy](./protocols/reviewer-critic.protocol.md#telemetry-fallback-policy-load-bearing)). Emit the minimal marker below in place of the full 6-field form; the comment itself still posts. The `reason:` value SHOULD be a short machine-friendly identifier (`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`, `assembly-error`). Example marker:
+
+  ```html
+  <!-- posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: head-sha-unavailable -->
+  ```
+
+  Per the protocol's per-field degradation order, prefer omitting optional fields first (`downstream-rule`, `override-reason` when not required) and degrading `critic` to `unknown` before falling back to this minimal form. Use the minimal form only when one of `severity`, `classification`, or `rule` cannot be assembled (those three are the highest-signal fields and a marker missing any of them is worse than no per-comment marker).
+
 **Common protocol-mode errors to avoid:**
 
 - Paraphrasing the SESSION INVALIDATED block as a sentence (e.g., "The findings are invalidated because..."). The literal `# SESSION INVALIDATED` heading and the two-option `(a)/(b)` menu are load-bearing -- downstream tooling and the Step 8 menu key off them.
@@ -1182,13 +1199,13 @@ The wording of the prompt body MUST match the Rung 2 template above byte-for-byt
 **Bulk auto-resolve disclosure (load-bearing).** "Execute plan" is a **bulk consent**: it auto-resolves **every** agent-origin thread marked THANK-AND-RESOLVE (Scenario E) and posts a reply on each, without a per-thread prompt. This is intentional -- the agent owns its own prior threads and the Critic in Step 7 already independently re-verified each fix-anchor -- but it is also the single highest-blast-radius action this agent takes. The approval prompt MUST therefore make the scope explicit, by including these four elements verbatim:
 
 1. **Count the affected threads.** State the number of THANK-AND-RESOLVE rows (Scenario E) and the number of PROPOSE-HUMAN-RESOLVE rows (Scenario F) in the plan, even when zero, e.g. `Scope: 4 agent-origin threads will be auto-resolved (Scenario E); 0 threads require per-thread approval (Scenario F).`
-2. **List each auto-resolved thread URL** (Scenario E rows only) so the human can spot-check them before approving. If the list has more than 5 entries, render the first 5 and say `... and N more (see Reconciliation Plan table above for the full list).`
+2. **List each auto-resolved thread URL** (Scenario E rows only) so the human can spot-check them before approving. If the list has more than 15 entries, render the first 15 and say `... and N more (see Reconciliation Plan table above for the full list).`
 3. **Name the alternative.** Tell the human that **Execute selectively** lets them keep specific Scenario E rows unresolved (the equivalent of per-thread approval), and that **Cancel** leaves every existing thread untouched.
 4. **Name the rollback cost.** Auto-resolving a thread is reversible (the human can re-open it manually on github.com), but the agent will not re-post the original violation; if a Scenario E row was auto-resolved in error, the human must re-flag the issue themselves.
 
 If the plan has zero Scenario E rows, elements 1 and 4 still appear (with a `0`-count and an `N/A` rollback note) so the disclosure shape is stable across plans and no review accidentally relies on the absence of the disclosure to infer that no auto-resolves are planned.
 
-**Bundle the Step 9 label proposal into this same approval prompt.** When asking for plan approval, also ask the human to approve (a) adding the `ARMChangesRequested` label, and (b) removing the `WaitForARMFeedback` label if present. Bundling avoids the discoverability gap where the human approves posting but never reaches Step 9 (chat closes, session times out), leaving agent comments on the PR with no `ARMChangesRequested` signal for the PR author or downstream bots. If the plan is `Cancel`-ed, the label proposal is also cancelled. If the plan is `Execute plan` or `Execute selectively`, the label changes execute after the last posting action in Step 9.
+**Bundle the Step 9 label proposal into this same approval prompt.** When asking for plan approval, also ask the human to approve (a) adding the `ARMChangesRequested` label **if** the plan will result in at least one POST-NEW or RESOLVE-AND-REPOST action executing (skip this proposal when the count is zero -- see Step 9 for the rationale), and (b) removing the `WaitForARMFeedback` label if present. Bundling avoids the discoverability gap where the human approves posting but never reaches Step 9 (chat closes, session times out), leaving agent comments on the PR with no `ARMChangesRequested` signal for the PR author or downstream bots. If the plan is `Cancel`-ed, the label proposal is also cancelled. If the plan is `Execute plan` or `Execute selectively`, the label changes execute after the last posting action in Step 9.
 
 After the human chooses, execute the approved subset of the plan:
 
@@ -1203,14 +1220,14 @@ After the human chooses, execute the approved subset of the plan:
 **Thread-resolution mechanism (Scenarios E and F).** The GitHub MCP server bound to this agent exposes a comment-creation tool (`create_review_comment`) but no thread-resolution tool. To resolve a review thread, use the GraphQL `resolveReviewThread` mutation via the `gh` CLI through `execute/runInTerminal`. The Reviewer's tool allowlist is read-only on the GraphQL surface, so the mutation runs through the shell, not through `github/*`. Canonical form:
 
 ```pwsh
-gh api graphql --repo <owner>/<repo> -f query='
+gh api graphql -f query='
   mutation($threadId: ID!) {
     resolveReviewThread(input: { threadId: $threadId }) { thread { id isResolved } }
   }
 ' -F threadId=<thread-node-id>
 ```
 
-The `<thread-node-id>` is the GraphQL node ID captured in Step 5.5 step 1 when the existing-comment inventory was built (the `reviewThreads` query exposes `id`). Do **not** attempt to look up the thread ID via the REST `/pulls/<n>/comments` API at posting time -- REST does not expose thread IDs and re-fetching at this point violates the "No re-fetching of existing PR comments here" rule above. If the captured thread ID is unavailable for a Scenario E or F row, mark the row as **failed-to-resolve** in the post-execution outcome report and surface the URL to the human for manual resolution; do not skip the row silently.
+(`gh api graphql` does not accept `--repo`; thread node IDs are globally unique, so no repo scope is needed.) The `<thread-node-id>` is the GraphQL node ID captured in Step 5.5 step 1 when the existing-comment inventory was built (the `reviewThreads` query exposes `id`). Do **not** attempt to look up the thread ID via the REST `/pulls/<n>/comments` API at posting time -- REST does not expose thread IDs and re-fetching at this point violates the "No re-fetching of existing PR comments here" rule above. If the captured thread ID is unavailable for a Scenario E or F row, mark the row as **failed-to-resolve** in the post-execution outcome report and surface the URL to the human for manual resolution; do not skip the row silently.
 
 **Review-body preamble (the top-level review comment posted alongside the inline findings).** When submitting the GitHub review (e.g., `gh pr review --body` or the MCP equivalent), use the following exact template for the review body. Do **not** improvise alternate phrasings such as "automated ARM API review" or "ARM review bot" -- the wording, link, and tone below are the agreed-upon professional preamble:
 
@@ -1243,7 +1260,7 @@ Substitution rules:
 - Every posted comment **MUST** end with a hidden HTML telemetry marker as the very last line of the comment body. The marker format is:
 
   ```html
-  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
+  <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] [| telemetry: degraded | reason: <one-line>] -->
   ```
 
   Field-by-field semantics (allowed values, defaults, when each optional
@@ -1261,7 +1278,7 @@ Substitution rules:
 
   Example (normal post): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: pass | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 -->`
 
-  Example (human override of critic FAIL): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: override | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 | override-reason: Rule citation verified against RPC contract section 7.2; critic rule-not-found is a stale instruction-file index -->`
+  Example (human override of critic FAIL): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new | critic: override | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 | override-reason: armapi-review.instructions.md:L482-L489 says "PUT MUST return 200 or 201 for create-or-update"; critic cited the wrong response-code clause -->`
 
   This marker is invisible in rendered markdown but enables querying agent-posted comments via the GitHub API, computing telemetry (comments per day, top rule violations, new-vs-existing ratio, override rate), and distinguishing agent comments from human comments during the next review's Step 5.5 reconciliation. Do not omit this marker.
 
@@ -1279,9 +1296,9 @@ Execute the label changes that were **already approved as part of the bundled St
 
 1. If the human chose `Cancel` at the Step 8 prompt, the label changes are also cancelled. Skip the rest of this step.
 2. If the human chose `Execute plan` or `Execute selectively`, apply the approved label changes via the GitHub tools, **after** the last posting action in Step 8 completes:
-   - **Add** the `ARMChangesRequested` label to signal that the PR author needs to address review feedback.
-   - **Remove** the `WaitForARMFeedback` label only if it was present on the PR at Step 8 approval time; otherwise skip the removal.
-3. Report to the human reviewer which labels were added and removed.
+   - **Add** the `ARMChangesRequested` label **only if** at least one POST-NEW or RESOLVE-AND-REPOST action was actually executed (i.e., at least one new agent comment was posted on the PR). If zero comments were posted (clean spec, or every finding was SKIP-COVERED / REPLY-LINE-SHIFT), do **not** add `ARMChangesRequested` -- it would falsely signal pending changes to the author and downstream bots.
+   - **Remove** the `WaitForARMFeedback` label only if it was present on the PR at Step 8 approval time; otherwise skip the removal. (Removal is independent of the posted-comment count: the review ran to completion either way.)
+3. Report to the human reviewer which labels were added and removed (and, when applicable, which were intentionally skipped and why).
 
 ### Step 10: Clean Up Local Workspace (MANDATORY)
 
@@ -1299,7 +1316,7 @@ Cleanup is **mandatory at the end of every review**, including reviews that ende
 1. **Probe the workspace for agent-attributable artifacts.** Do not rely on session memory. Run all three checks:
    - `git worktree list` - look for any worktree whose path matches `*specs-pr-*` or `*pr-<number>*`.
    - `git branch --list "pr-*"` and `git branch --list "*review*"` - look for local branches matching the agent's naming patterns (`pr-<number>`, `pr-review-*`, etc.).
-   - `Get-ChildItem -Path . -Filter "review-*.json" -ErrorAction SilentlyContinue; Get-ChildItem -Path . -Filter "review-*.txt" -ErrorAction SilentlyContinue` - look for scratch payload files in the workspace root.
+   - Resolve the workspace root first (do **not** assume the terminal cwd is the workspace root -- it may drift between turns): `$wsRoot = git rev-parse --show-toplevel 2>$null; if (-not $wsRoot) { $wsRoot = $env:WORKSPACE_FOLDER }`. Then: `Get-ChildItem -Path $wsRoot -Filter "review-*.json" -ErrorAction SilentlyContinue; Get-ChildItem -Path $wsRoot -Filter "review-*.txt" -ErrorAction SilentlyContinue` - look for scratch payload files in the workspace root.
 2. **Classify each leftover** as agent-attributable or not:
    - **Agent-attributable** (must clean up): branches matching `pr-<digits>` or `pr-review-*`; worktrees under `*specs-pr-*`; files matching `review-payload.*`, `review-body.*`, `review-comments.*`.
    - **NOT agent-attributable** (leave alone): the user's working branches, branches with author names or feature descriptions, worktrees in unrelated locations, the user's stashes, any file outside the patterns above. When in doubt, ask before removing.
