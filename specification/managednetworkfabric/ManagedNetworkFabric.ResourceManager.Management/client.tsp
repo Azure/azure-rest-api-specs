@@ -621,7 +621,7 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@alternateType(
-  Azure.ResourceManager.Foundations.OperationStatusResult,
+  Foundations.OperationStatusResult,
   NetworkFabricOperationStatusResult,
   "csharp"
 );
