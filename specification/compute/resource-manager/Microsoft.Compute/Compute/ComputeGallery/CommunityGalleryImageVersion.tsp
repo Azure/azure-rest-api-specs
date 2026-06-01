@@ -19,7 +19,7 @@ namespace ComputeGallery;
 @parentResource(CommunityGalleryImage)
 model CommunityGalleryImageVersion
   is ProxyResourceCommunity<CommunityGalleryImageVersionProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
+  ...ResourceNameParameter<
     Resource = CommunityGalleryImageVersion,
     KeyName = "galleryImageVersionName",
     SegmentName = "versions",
@@ -37,7 +37,7 @@ interface CommunityGalleryImageVersions {
   /**
    * List community gallery image versions inside an image.
    */
-  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
+  list is ComputeResourceListByParent<
     CommunityGalleryImageVersion,
     Response = CommunityGalleryImageVersionList
   >;
