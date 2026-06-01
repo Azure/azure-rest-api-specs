@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft HorizonDb Management API",
+    "title": "Microsoft HorizonDB Management API",
     "version": "2026-01-20-preview",
-    "description": "Azure Resource Provider API for managing HorizonDb clusters, pools, replicas, and firewall rules",
+    "description": "Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -65,7 +65,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.HorizonDb/operations": {
+    "/providers/Microsoft.HorizonDB/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -92,7 +92,7 @@
           }
         },
         "x-ms-examples": {
-          "List operations for Microsoft.HorizonDb": {
+          "List operations for Microsoft.HorizonDB": {
             "$ref": "./examples/Operations_List.json"
           }
         },
@@ -101,13 +101,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/clusters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDB/clusters": {
       "get": {
         "operationId": "HorizonDbClusters_ListBySubscription",
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Lists all HorizonDb clusters in a subscription.",
+        "description": "Lists all HorizonDB clusters in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -131,7 +131,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb clusters by subscription": {
+          "List HorizonDB clusters by subscription": {
             "$ref": "./examples/Clusters_ListBySubscription.json"
           }
         },
@@ -140,13 +140,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDb/parameterGroups": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HorizonDB/parameterGroups": {
       "get": {
         "operationId": "HorizonDbParameterGroups_ListBySubscription",
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Lists all HorizonDb parameter groups in a subscription.",
+        "description": "Lists all HorizonDB parameter groups in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -170,7 +170,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb parameter groups in a subscription": {
+          "List HorizonDB parameter groups in a subscription": {
             "$ref": "./examples/ParameterGroups_ListBySubscription.json"
           }
         },
@@ -179,13 +179,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters": {
       "get": {
         "operationId": "HorizonDbClusters_ListByResourceGroup",
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Lists all HorizonDb clusters in a resource group.",
+        "description": "Lists all HorizonDB clusters in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -212,7 +212,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb clusters in a resource group": {
+          "List HorizonDB clusters in a resource group": {
             "$ref": "./examples/Clusters_ListByResourceGroup.json"
           }
         },
@@ -221,13 +221,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}": {
       "get": {
         "operationId": "HorizonDbClusters_Get",
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Gets information about a HorizonDb cluster.",
+        "description": "Gets information about a HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -241,7 +241,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -264,7 +264,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDb cluster": {
+          "Get a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Get.json"
           }
         }
@@ -274,7 +274,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Creates a new HorizonDb cluster or updates an existing cluster.",
+        "description": "Creates a new HorizonDB cluster or updates an existing cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -288,7 +288,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -337,7 +337,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDb cluster": {
+          "Create or update a HorizonDB cluster": {
             "$ref": "./examples/Clusters_CreateOrUpdate.json"
           }
         },
@@ -352,7 +352,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Updates an existing HorizonDb cluster (e.g., tags, virtual cores, replica count).",
+        "description": "Updates an existing HorizonDB cluster (e.g., tags, virtual cores, replica count).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -366,7 +366,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -412,7 +412,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDb cluster": {
+          "Update a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Update.json"
           }
         },
@@ -427,7 +427,7 @@
         "tags": [
           "HorizonDbClusters"
         ],
-        "description": "Deletes a HorizonDb cluster.",
+        "description": "Deletes a HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -441,7 +441,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -480,7 +480,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a HorizonDb cluster": {
+          "Delete a HorizonDB cluster": {
             "$ref": "./examples/Clusters_Delete.json"
           }
         },
@@ -490,13 +490,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/pools": {
       "get": {
         "operationId": "HorizonDbPools_List",
         "tags": [
           "HorizonDbPools"
         ],
-        "description": "Lists all HorizonDb pools in a cluster.",
+        "description": "Lists all HorizonDB pools in a cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -510,7 +510,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -533,7 +533,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb pools in a cluster": {
+          "List HorizonDB pools in a cluster": {
             "$ref": "./examples/Pools_List.json"
           }
         },
@@ -542,13 +542,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/pools/{poolName}": {
       "get": {
         "operationId": "HorizonDbPools_Get",
         "tags": [
           "HorizonDbPools"
         ],
-        "description": "Gets information about a HorizonDb pool.",
+        "description": "Gets information about a HorizonDB pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -562,7 +562,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -572,7 +572,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -595,19 +595,19 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDb pool": {
+          "Get a HorizonDB pool": {
             "$ref": "./examples/Pools_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/pools/{poolName}/firewallRules": {
       "get": {
         "operationId": "HorizonDbFirewallRules_List",
         "tags": [
           "HorizonDbFirewallRules"
         ],
-        "description": "Lists all HorizonDb firewall rules in a pool.",
+        "description": "Lists all HorizonDB firewall rules in a pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -621,7 +621,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -631,7 +631,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -654,7 +654,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb firewall rules in a pool": {
+          "List HorizonDB firewall rules in a pool": {
             "$ref": "./examples/FirewallRules_List.json"
           }
         },
@@ -663,13 +663,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/pools/{poolName}/firewallRules/{firewallRuleName}": {
       "get": {
         "operationId": "HorizonDbFirewallRules_Get",
         "tags": [
           "HorizonDbFirewallRules"
         ],
-        "description": "Gets information about a HorizonDb firewall rule.",
+        "description": "Gets information about a HorizonDB firewall rule.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -683,7 +683,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -693,7 +693,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -703,7 +703,7 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDb firewall rule.",
+            "description": "The name of the HorizonDB firewall rule.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -726,7 +726,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDb firewall rule": {
+          "Get a HorizonDB firewall rule": {
             "$ref": "./examples/FirewallRules_Get.json"
           }
         }
@@ -736,7 +736,7 @@
         "tags": [
           "HorizonDbFirewallRules"
         ],
-        "description": "Creates a new HorizonDb firewall rule or updates an existing rule.",
+        "description": "Creates a new HorizonDB firewall rule or updates an existing rule.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -750,7 +750,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -760,7 +760,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -770,7 +770,7 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDb firewall rule.",
+            "description": "The name of the HorizonDB firewall rule.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -819,7 +819,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDb firewall rule": {
+          "Create or update a HorizonDB firewall rule": {
             "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
           }
         },
@@ -834,7 +834,7 @@
         "tags": [
           "HorizonDbFirewallRules"
         ],
-        "description": "Deletes a HorizonDb firewall rule.",
+        "description": "Deletes a HorizonDB firewall rule.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -848,7 +848,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -858,7 +858,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -868,7 +868,7 @@
           {
             "name": "firewallRuleName",
             "in": "path",
-            "description": "The name of the HorizonDb firewall rule.",
+            "description": "The name of the HorizonDB firewall rule.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -907,7 +907,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a HorizonDb firewall rule": {
+          "Delete a HorizonDB firewall rule": {
             "$ref": "./examples/FirewallRules_Delete.json"
           }
         },
@@ -917,13 +917,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/pools/{poolName}/replicas": {
       "get": {
         "operationId": "HorizonDbReplicas_List",
         "tags": [
           "HorizonDbReplicas"
         ],
-        "description": "Lists all HorizonDb replicas in a pool.",
+        "description": "Lists all HorizonDB replicas in a pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -937,7 +937,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -947,7 +947,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -970,7 +970,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb replicas in a pool": {
+          "List HorizonDB replicas in a pool": {
             "$ref": "./examples/Replicas_List.json"
           }
         },
@@ -979,13 +979,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}/replicas/{replicaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/pools/{poolName}/replicas/{replicaName}": {
       "get": {
         "operationId": "HorizonDbReplicas_Get",
         "tags": [
           "HorizonDbReplicas"
         ],
-        "description": "Gets information about a HorizonDb replica.",
+        "description": "Gets information about a HorizonDB replica.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -999,7 +999,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1009,7 +1009,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1019,7 +1019,7 @@
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the HorizonDb replica.",
+            "description": "The name of the HorizonDB replica.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1042,7 +1042,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDb replica": {
+          "Get a HorizonDB replica": {
             "$ref": "./examples/Replicas_Get.json"
           }
         }
@@ -1052,7 +1052,7 @@
         "tags": [
           "HorizonDbReplicas"
         ],
-        "description": "Creates a new HorizonDb replica or updates an existing replica.",
+        "description": "Creates a new HorizonDB replica or updates an existing replica.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1066,7 +1066,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1076,7 +1076,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1086,7 +1086,7 @@
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the HorizonDb replica.",
+            "description": "The name of the HorizonDB replica.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1135,7 +1135,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDb replica": {
+          "Create or update a HorizonDB replica": {
             "$ref": "./examples/Replicas_CreateOrUpdate.json"
           }
         },
@@ -1150,7 +1150,7 @@
         "tags": [
           "HorizonDbReplicas"
         ],
-        "description": "Updates an existing HorizonDb replica (e.g., role).",
+        "description": "Updates an existing HorizonDB replica (e.g., role).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1164,7 +1164,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1174,7 +1174,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1184,7 +1184,7 @@
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the HorizonDb replica.",
+            "description": "The name of the HorizonDB replica.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1230,7 +1230,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDb replica": {
+          "Update a HorizonDB replica": {
             "$ref": "./examples/Replicas_Update.json"
           }
         },
@@ -1245,7 +1245,7 @@
         "tags": [
           "HorizonDbReplicas"
         ],
-        "description": "Deletes a HorizonDb replica.",
+        "description": "Deletes a HorizonDB replica.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1259,7 +1259,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1269,7 +1269,7 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "The name of the HorizonDb pool.",
+            "description": "The name of the HorizonDB pool.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1279,7 +1279,7 @@
           {
             "name": "replicaName",
             "in": "path",
-            "description": "The name of the HorizonDb replica.",
+            "description": "The name of the HorizonDB replica.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1318,7 +1318,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a HorizonDb replica": {
+          "Delete a HorizonDB replica": {
             "$ref": "./examples/Replicas_Delete.json"
           }
         },
@@ -1328,13 +1328,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/privateEndpointConnections": {
       "get": {
         "operationId": "HorizonDbPrivateEndpointConnections_List",
         "tags": [
           "HorizonDbPrivateEndpointConnections"
         ],
-        "description": "Lists private endpoint connections in a HorizonDb cluster.",
+        "description": "Lists private endpoint connections in a HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1348,7 +1348,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1380,7 +1380,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "HorizonDbPrivateEndpointConnections_Get",
         "tags": [
@@ -1400,7 +1400,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1432,13 +1432,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/privateLinkResources": {
       "get": {
         "operationId": "HorizonDbPrivateLinkResources_List",
         "tags": [
           "HorizonDbPrivateLinkResources"
         ],
-        "description": "Lists private link resources in a HorizonDb cluster.",
+        "description": "Lists private link resources in a HorizonDB cluster.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1452,7 +1452,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1475,7 +1475,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets private link resources for HorizonDb": {
+          "Gets private link resources for HorizonDB": {
             "$ref": "./examples/PrivateLinkResources_List.json"
           }
         },
@@ -1484,7 +1484,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/clusters/{clusterName}/privateLinkResources/{groupName}": {
       "get": {
         "operationId": "HorizonDbPrivateLinkResources_Get",
         "tags": [
@@ -1504,7 +1504,7 @@
           {
             "name": "clusterName",
             "in": "path",
-            "description": "The name of the HorizonDb cluster.",
+            "description": "The name of the HorizonDB cluster.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1537,19 +1537,19 @@
           }
         },
         "x-ms-examples": {
-          "Gets a private link resource for HorizonDb": {
+          "Gets a private link resource for HorizonDB": {
             "$ref": "./examples/PrivateLinkResources_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/parameterGroups": {
       "get": {
         "operationId": "HorizonDbParameterGroups_ListByResourceGroup",
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Lists all HorizonDb parameter groups in a resource group.",
+        "description": "Lists all HorizonDB parameter groups in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1576,7 +1576,7 @@
           }
         },
         "x-ms-examples": {
-          "List HorizonDb parameter groups in a resource group": {
+          "List HorizonDB parameter groups in a resource group": {
             "$ref": "./examples/ParameterGroups_ListByResourceGroup.json"
           }
         },
@@ -1585,13 +1585,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/parameterGroups/{parameterGroupName}": {
       "get": {
         "operationId": "HorizonDbParameterGroups_Get",
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Gets information about a HorizonDb parameter group.",
+        "description": "Gets information about a HorizonDB parameter group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1605,7 +1605,7 @@
           {
             "name": "parameterGroupName",
             "in": "path",
-            "description": "The name of the HorizonDb parameter group.",
+            "description": "The name of the HorizonDB parameter group.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1628,7 +1628,7 @@
           }
         },
         "x-ms-examples": {
-          "Get a HorizonDb parameter group": {
+          "Get a HorizonDB parameter group": {
             "$ref": "./examples/ParameterGroups_Get.json"
           }
         }
@@ -1638,7 +1638,7 @@
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Creates a new HorizonDb parameter group or updates an existing parameter group.",
+        "description": "Creates a new HorizonDB parameter group or updates an existing parameter group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1652,7 +1652,7 @@
           {
             "name": "parameterGroupName",
             "in": "path",
-            "description": "The name of the HorizonDb parameter group.",
+            "description": "The name of the HorizonDB parameter group.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1701,7 +1701,7 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDb parameter group": {
+          "Create or update a HorizonDB parameter group": {
             "$ref": "./examples/ParameterGroups_CreateOrUpdate.json"
           }
         },
@@ -1716,7 +1716,7 @@
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Updates an existing HorizonDb parameter group.",
+        "description": "Updates an existing HorizonDB parameter group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1730,7 +1730,7 @@
           {
             "name": "parameterGroupName",
             "in": "path",
-            "description": "The name of the HorizonDb parameter group.",
+            "description": "The name of the HorizonDB parameter group.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1776,7 +1776,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a HorizonDb parameter group": {
+          "Update a HorizonDB parameter group": {
             "$ref": "./examples/ParameterGroups_Update.json"
           }
         },
@@ -1791,7 +1791,7 @@
         "tags": [
           "HorizonDbParameterGroups"
         ],
-        "description": "Deletes a HorizonDb parameter group.",
+        "description": "Deletes a HorizonDB parameter group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1805,7 +1805,7 @@
           {
             "name": "parameterGroupName",
             "in": "path",
-            "description": "The name of the HorizonDb parameter group.",
+            "description": "The name of the HorizonDB parameter group.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1844,7 +1844,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a HorizonDb parameter group": {
+          "Delete a HorizonDB parameter group": {
             "$ref": "./examples/ParameterGroups_Delete.json"
           }
         },
@@ -1854,7 +1854,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/parameterGroups/{parameterGroupName}/connections": {
       "get": {
         "operationId": "HorizonDbParameterGroups_ListConnections",
         "tags": [
@@ -1874,7 +1874,7 @@
           {
             "name": "parameterGroupName",
             "in": "path",
-            "description": "The name of the HorizonDb parameter group.",
+            "description": "The name of the HorizonDB parameter group.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1897,7 +1897,7 @@
           }
         },
         "x-ms-examples": {
-          "List connections for a HorizonDb parameter group": {
+          "List connections for a HorizonDB parameter group": {
             "$ref": "./examples/ParameterGroups_ListConnections.json"
           }
         },
@@ -1906,7 +1906,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/parameterGroups/{parameterGroupName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/parameterGroups/{parameterGroupName}/versions": {
       "get": {
         "operationId": "HorizonDbParameterGroups_ListVersions",
         "tags": [
@@ -1926,7 +1926,7 @@
           {
             "name": "parameterGroupName",
             "in": "path",
-            "description": "The name of the HorizonDb parameter group.",
+            "description": "The name of the HorizonDB parameter group.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1966,7 +1966,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDB/privateEndpointConnections/{privateEndpointConnectionName}": {
       "patch": {
         "operationId": "HorizonDbPrivateEndpointConnections_Update",
         "tags": [
@@ -2124,7 +2124,7 @@
     },
     "CreateModeCluster": {
       "type": "string",
-      "description": "The mode to create a new HorizonDb cluster.",
+      "description": "The mode to create a new HorizonDB cluster.",
       "enum": [
         "Create",
         "Update",
@@ -2154,7 +2154,7 @@
     },
     "CreateModePool": {
       "type": "string",
-      "description": "The mode to create a new HorizonDb cluster.",
+      "description": "The mode to create a new HorizonDB cluster.",
       "enum": [
         "Create",
         "Update"
@@ -2178,7 +2178,7 @@
     },
     "HorizonDbCluster": {
       "type": "object",
-      "description": "Represents the HorizonDb cluster.",
+      "description": "Represents the HorizonDB cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterProperties",
@@ -2193,7 +2193,7 @@
     },
     "HorizonDbClusterForPatchUpdate": {
       "type": "object",
-      "description": "HorizonDb cluster for update operations.",
+      "description": "HorizonDB cluster for update operations.",
       "properties": {
         "tags": {
           "type": "object",
@@ -2204,7 +2204,7 @@
         },
         "properties": {
           "$ref": "#/definitions/HorizonDbClusterPropertiesForPatchUpdate",
-          "description": "The properties that can be updated for a HorizonDb cluster."
+          "description": "The properties that can be updated for a HorizonDB cluster."
         }
       }
     },
@@ -2231,7 +2231,7 @@
     },
     "HorizonDbClusterParameterGroupConnectionProperties": {
       "type": "object",
-      "description": "Connection information for HorizonDb parameter group.",
+      "description": "Connection information for HorizonDB parameter group.",
       "properties": {
         "id": {
           "type": "string",
@@ -2244,7 +2244,7 @@
         },
         "syncStatus": {
           "type": "string",
-          "description": "Indication of if parameter group is applied on HorizonDb resource.",
+          "description": "Indication of if parameter group is applied on HorizonDB resource.",
           "readOnly": true
         },
         "applyImmediately": {
@@ -2259,7 +2259,7 @@
     },
     "HorizonDbClusterProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDb cluster.",
+      "description": "Properties of a HorizonDB cluster.",
       "properties": {
         "administratorLogin": {
           "type": "string",
@@ -2285,11 +2285,11 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of the HorizonDb cluster."
+          "description": "The version of the HorizonDB cluster."
         },
         "createMode": {
           "$ref": "#/definitions/CreateModeCluster",
-          "description": "The mode to create a new HorizonDb cluster."
+          "description": "The mode to create a new HorizonDB cluster."
         },
         "pointInTimeUTC": {
           "type": "string",
@@ -2329,7 +2329,7 @@
         },
         "processorType": {
           "type": "string",
-          "description": "The processor type for the HorizonDb cluster."
+          "description": "The processor type for the HorizonDB cluster."
         },
         "network": {
           "$ref": "#/definitions/Network",
@@ -2378,7 +2378,7 @@
     },
     "HorizonDbClusterPropertiesForPatchUpdate": {
       "type": "object",
-      "description": "Properties of a HorizonDb cluster for update operations.",
+      "description": "Properties of a HorizonDB cluster for update operations.",
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
@@ -2409,7 +2409,7 @@
     },
     "HorizonDbFirewallRule": {
       "type": "object",
-      "description": "Represents the HorizonDb firewall rule.",
+      "description": "Represents the HorizonDB firewall rule.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HorizonDbFirewallRuleProperties",
@@ -2445,7 +2445,7 @@
     },
     "HorizonDbFirewallRuleProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDb firewall rule.",
+      "description": "Properties of a HorizonDB firewall rule.",
       "properties": {
         "startIpAddress": {
           "type": "string",
@@ -2467,7 +2467,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the HorizonDb firewall rule.",
+          "description": "The description of the HorizonDB firewall rule.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -2487,7 +2487,7 @@
     },
     "HorizonDbParameterGroup": {
       "type": "object",
-      "description": "Represents the HorizonDb parameter group.",
+      "description": "Represents the HorizonDB parameter group.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HorizonDbParameterGroupProperties",
@@ -2502,7 +2502,7 @@
     },
     "HorizonDbParameterGroupConnectionProperties": {
       "type": "object",
-      "description": "Connection information for HorizonDb parameter group.",
+      "description": "Connection information for HorizonDB parameter group.",
       "properties": {
         "name": {
           "type": "string",
@@ -2545,7 +2545,7 @@
     },
     "HorizonDbParameterGroupForPatchUpdate": {
       "type": "object",
-      "description": "HorizonDb parameter group for update operations.",
+      "description": "HorizonDB parameter group for update operations.",
       "properties": {
         "tags": {
           "type": "object",
@@ -2556,7 +2556,7 @@
         },
         "properties": {
           "$ref": "#/definitions/HorizonDbParameterGroupPropertiesForPatchUpdate",
-          "description": "The properties that can be updated for a HorizonDb parameter group."
+          "description": "The properties that can be updated for a HorizonDB parameter group."
         }
       }
     },
@@ -2583,7 +2583,7 @@
     },
     "HorizonDbParameterGroupProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDb parameter group.",
+      "description": "Properties of a HorizonDB parameter group.",
       "properties": {
         "parameters": {
           "type": "array",
@@ -2642,7 +2642,7 @@
     },
     "HorizonDbParameterGroupPropertiesForPatchUpdate": {
       "type": "object",
-      "description": "Properties of a HorizonDb parameter group for update operations.",
+      "description": "Properties of a HorizonDB parameter group for update operations.",
       "properties": {
         "parameters": {
           "type": "array",
@@ -2675,7 +2675,7 @@
     },
     "HorizonDbPool": {
       "type": "object",
-      "description": "Represents the HorizonDb pool.",
+      "description": "Represents the HorizonDB pool.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HorizonDbPoolProperties",
@@ -2718,11 +2718,11 @@
     },
     "HorizonDbPoolProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDb pool.",
+      "description": "Properties of a HorizonDB pool.",
       "properties": {
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The location of the HorizonDb pool.",
+          "description": "The location of the HorizonDB pool.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -2741,7 +2741,7 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of the HorizonDb pool.",
+          "description": "The version of the HorizonDB pool.",
           "readOnly": true
         },
         "createMode": {
@@ -2758,7 +2758,7 @@
     },
     "HorizonDbPrivateLinkResource": {
       "type": "object",
-      "description": "Represents the HorizonDb private link resource.",
+      "description": "Represents the HorizonDB private link resource.",
       "properties": {
         "properties": {
           "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
@@ -2794,7 +2794,7 @@
     },
     "HorizonDbReplica": {
       "type": "object",
-      "description": "Represents the HorizonDb replica.",
+      "description": "Represents the HorizonDB replica.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HorizonDbReplicaProperties",
@@ -2809,11 +2809,11 @@
     },
     "HorizonDbReplicaForPatchUpdate": {
       "type": "object",
-      "description": "HorizonDb replica for update operations.",
+      "description": "HorizonDB replica for update operations.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HorizonDbReplicaPropertiesForPatchUpdate",
-          "description": "Properties of a HorizonDb replica for update operations."
+          "description": "Properties of a HorizonDB replica for update operations."
         }
       }
     },
@@ -2840,7 +2840,7 @@
     },
     "HorizonDbReplicaProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDb replica.",
+      "description": "Properties of a HorizonDB replica.",
       "properties": {
         "role": {
           "$ref": "#/definitions/ReplicaRole",
@@ -2874,7 +2874,7 @@
     },
     "HorizonDbReplicaPropertiesForPatchUpdate": {
       "type": "object",
-      "description": "Properties of a HorizonDb replica for update operations.",
+      "description": "Properties of a HorizonDB replica for update operations.",
       "properties": {
         "role": {
           "$ref": "#/definitions/ReplicaRole",
@@ -2898,7 +2898,7 @@
     },
     "ParameterProperties": {
       "type": "object",
-      "description": "Properties of a HorizonDb parameters.",
+      "description": "Properties of a HorizonDB parameters.",
       "properties": {
         "name": {
           "type": "string",
