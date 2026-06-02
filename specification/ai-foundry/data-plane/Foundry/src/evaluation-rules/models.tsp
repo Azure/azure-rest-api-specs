@@ -42,10 +42,10 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
   @doc("Maximum number of evaluation runs allowed per hour.")
   maxHourlyRuns?: int32;
 
-  @doc("Percentage (0-100] chance that a matching event triggers an evaluation. Omit to evaluate every event.")
+  @doc("Percentage (0-100] chance that a matching event triggers an evaluation. When omitted, the service-default is to evaluate every event, which is equivalent to setting a sampling rate of 100.")
   @minValueExclusive(0)
   @maxValue(100)
-  samplingRate?: float64;
+  samplingRate?: float64 = 100;
 }
 
 @doc("Evaluation rule action for human evaluation.")
