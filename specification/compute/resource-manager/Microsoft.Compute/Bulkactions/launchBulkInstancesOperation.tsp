@@ -102,17 +102,6 @@ union CapacityType {
   string,
 }
 
-@doc("Different kind of eviction policies")
-union EvictionPolicy {
-  @doc("When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this.")
-  Delete: "Delete",
-
-  @doc("When evicted, the Spot VM will be deallocated/stopped")
-  Deallocate: "Deallocate",
-
-  string,
-}
-
 @doc("Distribution strategies for LaunchBulkInstancesOperation zone allocation policy.")
 union ZoneDistributionStrategy {
   @doc("Default. Launch instances in a single zone based on best effort. If capacity is not available, LaunchBulkInstancesOperation can allocate capacity in different zones.")
