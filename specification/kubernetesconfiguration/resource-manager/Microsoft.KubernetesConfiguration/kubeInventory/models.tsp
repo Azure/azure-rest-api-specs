@@ -869,4 +869,7 @@ model KubeInventoryProperties {
   /** Kubernetes events recorded against this resource. */
   @identifiers(#[])
   events?: KubernetesEvent[];
+
+  /** Name of the extension this inventory resource is attached to. */
+  attachedToExtension?: string;
 }
