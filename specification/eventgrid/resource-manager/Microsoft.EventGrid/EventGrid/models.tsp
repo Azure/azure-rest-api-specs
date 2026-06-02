@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -557,6 +559,12 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * 1.3
+   */
+  @added(Versions.v2025_10_15_preview)
+  `1.3`: "1.3",
 }
 
 /**
