@@ -11,4 +11,4 @@ import "../agents-optimization/routes.tsp";
 import "../openai-responses/models.tsp";
 import "../openai-conversations/routes.tsp";
 
-import "../../relocate-beta-operations.tsp";
+import "./relocate-beta-operations.tsp";
