@@ -328,6 +328,19 @@ suppressions:
     reason: This route definition is defined by NSP for all partner services and the right integration with NSP relies on that. We cannot change this as we don't own the contract here and in order for the NSP integration to work, we need to adhere to NSP requirements in this route defintion.
     from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"]
+
+  - code: ConsistentPatchProperties
+    reason: EventSubscriptionUpdateParameters has a flat structure for backward compatibility. These properties exist in the resource model under 'properties' (x-ms-client-flatten) and cannot be restructured without breaking existing API consumers.
+    from: EventGrid.json
+
+  - code: EvenSegmentedPathForPutOperation
+    reason: The privateEndpointConnections path uses {parentType}/{parentName} pattern to support multiple parent resource types (topics, domains, partnerNamespaces, namespaces). This multi-parent pattern requires an odd segment count and cannot be changed without breaking the API.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: EnumInsteadOfBoolean
+    reason: These boolean properties are already part of the existing API contract from previous preview versions and cannot be changed to enums without introducing a breaking change.
+    from: EventGrid.json
 ```
 
 ### Tag: package-2025-07-preview
