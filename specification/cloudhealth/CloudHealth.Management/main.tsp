@@ -830,7 +830,7 @@ union DependenciesAggregationUnit {
 union AggregationType {
   string,
 
-  @doc("Worst health state across members is propagated. Default behaviour.")
+  @doc("Worst health state across members is propagated. Default behavior.")
   WorstOf: "WorstOf",
 
   @removed(Versions.v2026_01_01_preview)
