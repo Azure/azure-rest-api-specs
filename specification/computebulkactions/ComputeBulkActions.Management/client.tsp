@@ -85,24 +85,32 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Warning: Plural enum names → singular
 // =====================================================================
-@@clientName(CachingTypes, "CachingType", "csharp");
+@@clientName(CachingTypes, "ComputeBulkActionsCachingType", "csharp");
 @@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
 @@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
 @@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
 @@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
 @@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
-@@clientName(IPVersions, "IPVersion", "csharp");
-@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
-@@clientName(ProtocolTypes, "ProtocolType", "csharp");
+@@clientName(IPVersions, "ComputeBulkActionsIPVersion", "csharp");
+@@clientName(
+  OperatingSystemTypes,
+  "ComputeBulkActionsOperatingSystemType",
+  "csharp"
+);
+@@clientName(ProtocolTypes, "ComputeBulkActionsProtocolType", "csharp");
 @@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
-@@clientName(SecurityTypes, "SecurityType", "csharp");
+@@clientName(SecurityTypes, "ComputeBulkActionsSecurityType", "csharp");
 @@clientName(
   SettingNames,
   "AdditionalUnattendContentSettingName",
   "csharp"
 );
-@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
-@@clientName(DeleteOptions, "DeleteOption", "csharp");
+@@clientName(
+  StorageAccountTypes,
+  "ComputeBulkActionsStorageAccountType",
+  "csharp"
+);
+@@clientName(DeleteOptions, "ComputeBulkActionsDeleteOption", "csharp");
 @@clientName(DiffDiskOptions, "DiffDiskOption", "csharp");
 
 // =====================================================================
@@ -162,6 +170,62 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(StorageProfile, "ComputeBulkActionsStorageProfile", "csharp");
 @@clientName(ProvisioningState, "BulkActionProvisioningState", "csharp");
 @@clientName(OperationState, "BulkActionOperationState", "csharp");
+@@clientName(
+  AllocationStrategy,
+  "ComputeBulkActionsAllocationStrategy",
+  "csharp"
+);
+@@clientName(CapacityType, "ComputeBulkActionsCapacityType", "csharp");
+@@clientName(DeadlineType, "ComputeBulkActionsDeadlineType", "csharp");
+@@clientName(EvictionPolicy, "ComputeBulkActionsEvictionPolicy", "csharp");
+@@clientName(
+  OptimizationPreference,
+  "ComputeBulkActionsOptimizationPreference",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineType,
+  "ComputeBulkActionsVirtualMachineType",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineProfile,
+  "ComputeBulkActionsVirtualMachineProfile",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineExtension,
+  "ComputeBulkActionsVirtualMachineExtension",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineExtensionProperties,
+  "ComputeBulkActionsVirtualMachineExtensionProperties",
+  "csharp"
+);
+@@clientName(
+  LinuxConfiguration,
+  "ComputeBulkActionsLinuxConfiguration",
+  "csharp"
+);
+@@clientName(
+  WindowsConfiguration,
+  "ComputeBulkActionsWindowsConfiguration",
+  "csharp"
+);
+@@clientName(SshPublicKey, "ComputeBulkActionsSshPublicKey", "csharp");
+@@clientName(
+  NetworkApiVersion,
+  "ComputeBulkActionsNetworkApiVersion",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReference,
+  "ComputeBulkActionsNetworkInterfaceReference",
+  "csharp"
+);
+@@clientName(PriorityProfile, "ComputeBulkActionsPriorityProfile", "csharp");
+@@clientName(ZonePreference, "ComputeBulkActionsZonePreference", "csharp");
 
 // =====================================================================
 // Warning: DateTimeOffset property naming (*On suffix)
