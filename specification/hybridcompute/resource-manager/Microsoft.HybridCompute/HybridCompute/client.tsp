@@ -352,7 +352,6 @@ union CustomPublicNetworkAccessType {
   "IsAsyncExecution",
   "csharp"
 );
-@@clientName(RunCommandInputParameter, "RunCommandInputContent", "csharp");
 
 // C# backward compatibility with the checked-in .NET API listings.
 @@clientName(ExtensionsStatusLevelTypes, "ExtensionsStatusLevelType", "csharp");
