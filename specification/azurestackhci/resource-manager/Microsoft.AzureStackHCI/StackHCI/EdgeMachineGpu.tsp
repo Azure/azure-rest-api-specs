@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Details of a particular GPU in an EdgeMachine.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_06_01_preview)
 @parentResource(EdgeMachine)
 model EdgeMachineGpu
   is Azure.ResourceManager.ProxyResource<EdgeMachineGpuProperties> {
@@ -29,7 +29,7 @@ model EdgeMachineGpu
 /**
  * CRUD + List operations for Edge Machine GPUs.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_06_01_preview)
 @armResourceOperations
 interface EdgeMachineGpus {
   /**
@@ -60,7 +60,7 @@ interface EdgeMachineGpus {
  * Details of a GPU Job on an Edge Machine GPU.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_06_01_preview)
 @parentResource(EdgeMachineGpu)
 model EdgeMachineGpuJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineGpuJobProperties> {
@@ -75,7 +75,7 @@ model EdgeMachineGpuJob
 /**
  * CRUD + List operations for Edge Machine GPU Jobs.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_06_01_preview)
 @armResourceOperations
 interface EdgeMachineGpuJobs {
   /** Get a specific GPU Job on an Edge Machine GPU. */

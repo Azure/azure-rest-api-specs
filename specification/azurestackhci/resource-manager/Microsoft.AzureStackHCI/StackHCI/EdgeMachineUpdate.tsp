@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureStackHCI;
 
 /** EdgeMachine Update resource that stores validated update configurations for an edge machine. */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_06_01_preview)
 @parentResource(EdgeMachine)
 model EdgeMachineUpdate
   is Azure.ResourceManager.ProxyResource<EdgeMachineUpdateProperties> {
@@ -26,7 +26,7 @@ model EdgeMachineUpdate
 /**
  * Operations for EdgeMachine Update.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_06_01_preview)
 @armResourceOperations
 interface EdgeMachineUpdates {
   /**
