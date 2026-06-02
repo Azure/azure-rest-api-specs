@@ -27,6 +27,9 @@ enum Versions {
 
   @doc("2026-05-01-preview")
   v2026_05_01_preview: "2026-05-01-preview",
+
+  @doc("2026-09-01")
+  v2026_09_01: "2026-09-01",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -108,6 +111,11 @@ scalar signalDefinitionName extends string;
 @pattern(proxyResourceNameRegex)
 @doc("Type for signal name.")
 scalar signalName extends string;
+
+@added(Versions.v2026_09_01)
+@pattern(proxyResourceNameRegex)
+@doc("Name of a signal aggregation group. Must be unique within an entity. Independent of signal names.")
+scalar signalAggregationGroupName extends string;
 
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
@@ -566,6 +574,12 @@ model EntityProperties {
   @doc("Signal groups which are assigned to this entity")
   signalGroups?: SignalGroups;
 
+  @added(Versions.v2026_09_01)
+  @doc("Logical aggregation groups over the signals on this entity. Overlap is allowed: the same signal may appear in more than one group's members. Each group is evaluated independently according to its strategy, and a shared signal can contribute to multiple group states and related per-group telemetry. Group states contribute alongside any ungrouped signals and the dependency-aggregated child health to the entity's overall worst-of composite.")
+  @maxItems(20)
+  @identifiers(#["name"])
+  signalAggregationGroups?: SignalAggregationGroup[];
+
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
   discoveredBy?: discoveryRuleName;
@@ -723,7 +737,8 @@ model DependenciesSignalGroup {
 @doc("Properties for dependent entities, i.e. child entities")
 model DependenciesSignalGroupV2 {
   @doc("Aggregation type for child dependencies.")
-  aggregationType: DependenciesAggregationType = DependenciesAggregationType.WorstOf;
+  @typeChangedFrom(Versions.v2026_09_01, DependenciesAggregationType)
+  aggregationType: AggregationType = AggregationType.WorstOf;
 
   @doc("Degraded threshold for aggregation. For MinHealthy: parent is degraded when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is degraded when not-healthy count/percentage reaches or exceeds this value. Optional — if not set, there is no degraded state (transitions directly from Healthy to Unhealthy).")
   @minValue(0)
@@ -734,13 +749,51 @@ model DependenciesSignalGroupV2 {
   unhealthyThreshold?: float64;
 
   @doc("Unit type for the aggregation thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy.")
-  unit?: DependenciesAggregationUnit;
+  @typeChangedFrom(Versions.v2026_09_01, DependenciesAggregationUnit)
+  unit?: AggregationUnit;
 
   @doc("If true, children with Unknown health state are excluded from aggregation calculations. Defaults to true.")
   ignoreUnknown?: boolean = true;
 }
+@added(Versions.v2026_09_01)
+@doc("A logical group of signals on an entity, evaluated under a configurable aggregation strategy. Groups are independent even when they share members. Each group's aggregated state is one of the inputs to the entity's composite health computation alongside any signals not declared in any group's members[].")
+model SignalAggregationGroup {
+  @doc("Name of the aggregation group. Unique within the entity.")
+  name: signalAggregationGroupName;
+
+  @doc("Aggregation strategy applied across the members of this group.")
+  aggregationType: AggregationType = AggregationType.WorstOf;
+
+  @doc("Names of signals on this entity which are members of the group. Members are matched by name; references to signals that do not currently exist on the entity are accepted (typically for pre-declared external signals) and surfaced via 'unresolvedMembers'. A signal may be listed in multiple groups; no duplicates within this list.")
+  @minItems(1)
+  @maxItems(50)
+  members: signalName[];
+
+  @doc("Degraded threshold for threshold-bearing strategies (MinHealthy, MaxNotHealthy). For MinHealthy: group is degraded when the healthy member count/percentage falls to or below this value. For MaxNotHealthy: group is degraded when the not-healthy member count/percentage reaches or exceeds this value. Optional — if not set, the group transitions directly between Healthy and Unhealthy. MUST NOT be set when aggregationType is WorstOf or BestOf.")
+  @minValue(0)
+  degradedThreshold?: float64;
+
+  @doc("Unhealthy threshold for threshold-bearing strategies. Required when aggregationType is MinHealthy or MaxNotHealthy; MUST NOT be set otherwise.")
+  @minValue(0)
+  unhealthyThreshold?: float64;
+
+  @doc("Unit type for the thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy; MUST NOT be set otherwise.")
+  unit?: AggregationUnit;
+
+  @doc("If true (default), members reporting Unknown are excluded from the aggregation. For MinHealthy and MaxNotHealthy this flag affects the denominator/count and is meaningful. For WorstOf and BestOf the flag has no observable effect: under WorstOf, Unknown=0 is the lowest severity and can never beat any non-Unknown member in a Max() so filtering it changes nothing observable; under BestOf, Unknown is unconditionally excluded by the strategy itself irrespective of the flag. The flag is retained on the contract for vocabulary symmetry across all four strategies.")
+  ignoreUnknown?: boolean = true;
+
+  @visibility(Lifecycle.Read)
+  @doc("Computed aggregated health state of the group as of the last entity evaluation. Unknown if no resolvable members or all members filtered out.")
+  aggregatedHealthState?: HealthState;
+
+  @visibility(Lifecycle.Read)
+  @doc("Members listed in 'members' that do not currently resolve to a signal on this entity at the time of the last entity evaluation. Treated as Unknown during aggregation. Empty/omitted when every member resolves.")
+  unresolvedMembers?: signalName[];
+}
 
 @doc("Aggregation type for child dependencies.")
+@removed(Versions.v2026_09_01)
 union DependenciesAggregationType {
   string,
 
@@ -769,6 +822,44 @@ union DependenciesAggregationUnit {
   Absolute: "Absolute",
 
   @doc("Threshold is a percentage of entities (0-100).")
+  Percentage: "Percentage",
+}
+
+@doc("Aggregation strategy for combining a set of health states into one.")
+@added(Versions.v2026_09_01)
+union AggregationType {
+  string,
+
+  @doc("Worst health state across members is propagated. Default behaviour.")
+  WorstOf: "WorstOf",
+
+  @removed(Versions.v2026_01_01_preview)
+  @doc("Based on configurable thresholds.")
+  Thresholds: "Thresholds",
+
+  @added(Versions.v2026_09_01)
+  @doc("Best (least severe) health state across the non-Unknown members is propagated. Unknown members are excluded from the selection; if every member is Unknown the group resolves to Unknown. The 'ignoreUnknown' flag has no observable effect for this strategy and is documented as such.")
+  BestOf: "BestOf",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Healthy if the count/percentage of healthy members meets the threshold.")
+  MinHealthy: "MinHealthy",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Healthy if the count/percentage of not-healthy members stays below the threshold.")
+  MaxNotHealthy: "MaxNotHealthy",
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Unit type for the thresholds used by threshold-bearing aggregation strategies.")
+@renamedFrom(Versions.v2026_09_01, "DependenciesAggregationUnit")
+union AggregationUnit {
+  string,
+
+  @doc("Threshold is an absolute count of members.")
+  Absolute: "Absolute",
+
+  @doc("Threshold is a percentage of members (0-100).")
   Percentage: "Percentage",
 }
 
