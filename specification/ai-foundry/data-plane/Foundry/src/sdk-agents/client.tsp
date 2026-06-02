@@ -85,7 +85,8 @@ using Azure.AI.Projects;
 @@clientName(PromoteCandidateResponse, "PromoteCandidateResult");
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 
-@@clientName(OpenAI.ResponseFormatJsonSchemaSchema,
+@@clientName(
+  OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner"
 );
 @@clientName(
@@ -176,27 +177,33 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
-@@clientName(AgentOptimizationJobs.listCandidates,
+@@clientName(
+  AgentOptimizationJobs.listCandidates,
   "listOptimizationCandidates",
   "java"
 );
-@@clientName(AgentOptimizationJobs.getCandidate,
+@@clientName(
+  AgentOptimizationJobs.getCandidate,
   "getOptimizationCandidate",
   "java"
 );
-@@clientName(AgentOptimizationJobs.getCandidateConfig,
+@@clientName(
+  AgentOptimizationJobs.getCandidateConfig,
   "getOptimizationCandidateConfig",
   "java"
 );
-@@clientName(AgentOptimizationJobs.getCandidateResults,
+@@clientName(
+  AgentOptimizationJobs.getCandidateResults,
   "getOptimizationCandidateResults",
   "java"
 );
-@@clientName(AgentOptimizationJobs.promoteCandidate,
+@@clientName(
+  AgentOptimizationJobs.promoteCandidate,
   "promoteOptimizationCandidate",
   "java"
 );
-@@clientName(AgentOptimizationJobs.getCandidateFile,
+@@clientName(
+  AgentOptimizationJobs.getCandidateFile,
   "getOptimizationCandidateFile",
   "java"
 );
@@ -423,7 +430,8 @@ union ComputerEnvironmentExpandable {
 }
 
 @@clientName(ComputerEnvironmentExpandable, "ComputerEnvironment", "java");
-@@alternateType(OpenAI.ComputerEnvironment,
+@@alternateType(
+  OpenAI.ComputerEnvironment,
   ComputerEnvironmentExpandable,
   "java"
 );
@@ -442,7 +450,8 @@ union ContainerMemoryLimitExpandable {
 @@clientName(ContainerMemoryLimitExpandable.memory_4g, "MEMORY_4GB", "java");
 @@clientName(ContainerMemoryLimitExpandable.memory_16g, "MEMORY_16GB", "java");
 @@clientName(ContainerMemoryLimitExpandable.memory_64g, "MEMORY_64GB", "java");
-@@alternateType(OpenAI.ContainerMemoryLimit,
+@@alternateType(
+  OpenAI.ContainerMemoryLimit,
   ContainerMemoryLimitExpandable,
   "java"
 );
@@ -466,7 +475,8 @@ union ImageGenActionEnumExpandable {
 }
 
 @@clientName(ImageGenActionEnumExpandable, "ImageGenActionEnum", "java");
-@@alternateType(OpenAI.ImageGenActionEnum,
+@@alternateType(
+  OpenAI.ImageGenActionEnum,
   ImageGenActionEnumExpandable,
   "java"
 );
@@ -479,11 +489,13 @@ union ImageGenToolBackgroundExpandable {
   auto: "auto",
 }
 
-@@clientName(ImageGenToolBackgroundExpandable,
+@@clientName(
+  ImageGenToolBackgroundExpandable,
   "ImageGenToolBackground",
   "java"
 );
-@@alternateType(OpenAI.ImageGenTool.background,
+@@alternateType(
+  OpenAI.ImageGenTool.background,
   ImageGenToolBackgroundExpandable,
   "java"
 );
@@ -495,11 +507,13 @@ union ImageGenToolModerationExpandable {
   low: "low",
 }
 
-@@clientName(ImageGenToolModerationExpandable,
+@@clientName(
+  ImageGenToolModerationExpandable,
   "ImageGenToolModeration",
   "java"
 );
-@@alternateType(OpenAI.ImageGenTool.moderation,
+@@alternateType(
+  OpenAI.ImageGenTool.moderation,
   ImageGenToolModerationExpandable,
   "java"
 );
@@ -512,11 +526,13 @@ union ImageGenToolOutputFormatExpandable {
   jpeg: "jpeg",
 }
 
-@@clientName(ImageGenToolOutputFormatExpandable,
+@@clientName(
+  ImageGenToolOutputFormatExpandable,
   "ImageGenToolOutputFormat",
   "java"
 );
-@@alternateType(OpenAI.ImageGenTool.output_format,
+@@alternateType(
+  OpenAI.ImageGenTool.output_format,
   ImageGenToolOutputFormatExpandable,
   "java"
 );
@@ -531,7 +547,8 @@ union ImageGenToolQualityExpandable {
 }
 
 @@clientName(ImageGenToolQualityExpandable, "ImageGenToolQuality", "java");
-@@alternateType(OpenAI.ImageGenTool.quality,
+@@alternateType(
+  OpenAI.ImageGenTool.quality,
   ImageGenToolQualityExpandable,
   "java"
 );
@@ -546,15 +563,18 @@ union ImageGenToolSizeExpandable {
 }
 
 @@clientName(ImageGenToolSizeExpandable, "ImageGenToolSize", "java");
-@@clientName(ImageGenToolSizeExpandable.size_1024x1024,
+@@clientName(
+  ImageGenToolSizeExpandable.size_1024x1024,
   "RESOLUTION_1024_X_1024",
   "java"
 );
-@@clientName(ImageGenToolSizeExpandable.size_1024x1536,
+@@clientName(
+  ImageGenToolSizeExpandable.size_1024x1536,
   "RESOLUTION_1024_X_1536",
   "java"
 );
-@@clientName(ImageGenToolSizeExpandable.size_1536x1024,
+@@clientName(
+  ImageGenToolSizeExpandable.size_1536x1024,
   "RESOLUTION_1536_X_1024",
   "java"
 );
@@ -584,7 +604,8 @@ union McpToolConnectorIdExpandable {
 }
 
 @@clientName(McpToolConnectorIdExpandable, "McpToolConnectorId", "java");
-@@alternateType(OpenAI.MCPTool.connector_id,
+@@alternateType(
+  OpenAI.MCPTool.connector_id,
   McpToolConnectorIdExpandable,
   "java"
 );
@@ -597,7 +618,8 @@ union RankerVersionTypeExpandable {
 }
 
 @@clientName(RankerVersionTypeExpandable, "RankerVersionType", "java");
-@@clientName(RankerVersionTypeExpandable.default_2024_11_15,
+@@clientName(
+  RankerVersionTypeExpandable.default_2024_11_15,
   "DEFAULT_2024_11_15",
   "java"
 );
@@ -622,11 +644,13 @@ union WebSearchToolSearchContextSizeExpandable {
   high: "high",
 }
 
-@@clientName(WebSearchToolSearchContextSizeExpandable,
+@@clientName(
+  WebSearchToolSearchContextSizeExpandable,
   "WebSearchToolSearchContextSize",
   "java"
 );
-@@alternateType(OpenAI.WebSearchTool.search_context_size,
+@@alternateType(
+  OpenAI.WebSearchTool.search_context_size,
   WebSearchToolSearchContextSizeExpandable,
   "java"
 );

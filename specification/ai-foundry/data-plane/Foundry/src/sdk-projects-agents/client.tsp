@@ -204,7 +204,8 @@ namespace Azure.AI.Projects {
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
   @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
-  @@clientName(TelemetryEndpointAuthType,
+  @@clientName(
+    TelemetryEndpointAuthType,
     "TelemetryEndpointAuthenticationKind"
   );
   @@clientName(TelemetryDataKind, "ExportedDataTypes");

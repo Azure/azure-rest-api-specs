@@ -132,7 +132,9 @@ model EvaluationSuiteVersion {
     Supports template type (prompt with column placeholders) and
     item_reference type (column containing pre-built messages).
     """)
-  input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
+  input_messages?:
+    | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
+    | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
 
   @doc("""
     Default evaluation level for this suite. Can be overridden at run time.
@@ -292,7 +294,9 @@ model EvaluationSuiteGenerationJobInputs {
     How to send dataset rows to the target.
     If omitted and target is provided, defaults to a template using item.query.
     """)
-  input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
+  input_messages?:
+    | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
+    | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
 
   @doc("""
     Evaluation level for the generated suite.

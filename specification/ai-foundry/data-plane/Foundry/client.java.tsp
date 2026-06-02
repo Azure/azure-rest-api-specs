@@ -183,12 +183,14 @@ namespace Azure.AI.Projects;
 @@access(FoundryFeaturesOptInKeys, Access.public);
 
 // Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
-@@usage(GraderAzureAIEvaluator,
+@@usage(
+  GraderAzureAIEvaluator,
   Usage.input | Usage.output | Usage.json,
   "java"
 );
 @@access(GraderAzureAIEvaluator, Access.public, "java");
-@@usage(TestingCriterionAzureAIEvaluator,
+@@usage(
+  TestingCriterionAzureAIEvaluator,
   Usage.input | Usage.output | Usage.json,
   "java"
 );
@@ -244,13 +246,15 @@ namespace Azure.AI.Projects;
 // OpenAI de-dup: suppress ComparisonFilter & CompoundFilter (and their anonymous
 // enum types FileSearchToolFiltersType / FileSearchToolFiltersType1) in favour of
 // the equivalent openai-java models.
-@@alternateType(OpenAI.ComparisonFilter,
+@@alternateType(
+  OpenAI.ComparisonFilter,
   {
     identity: "com.openai.models.ComparisonFilter",
   },
   "java"
 );
-@@alternateType(OpenAI.CompoundFilter,
+@@alternateType(
+  OpenAI.CompoundFilter,
   {
     identity: "com.openai.models.CompoundFilter",
   },
@@ -269,14 +273,16 @@ union GrammarSyntaxExpandable {
 @@clientName(GrammarSyntaxExpandable, "GrammarSyntax", "java");
 @@alternateType(OpenAI.GrammarSyntax1, GrammarSyntaxExpandable, "java");
 
-@@alternateType(DayOfWeek,
+@@alternateType(
+  DayOfWeek,
   {
     identity: "java.time.DayOfWeek",
   },
   "java"
 );
 
-@@alternateType(PageOrder,
+@@alternateType(
+  PageOrder,
   {
     identity: "com.azure.ai.agents.models.PageOrder",
   },

@@ -468,7 +468,8 @@ namespace Azure.AI.Projects {
   }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
-  @@copyProperties(OpenAI.Response,
+  @@copyProperties(
+    OpenAI.Response,
     {
       /** The content filter evaluation results. */
       content_filters?: ContentFilterResult[],

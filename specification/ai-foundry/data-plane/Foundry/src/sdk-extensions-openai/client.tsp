@@ -35,7 +35,8 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.ConversationResource, Usage.output);
   @@access(OpenAI.ConversationResource, Access.public);
   @@clientName(OpenAI.ConversationResource, "ProjectConversation");
-  @@usage(OpenAI.CreateConversationBody,
+  @@usage(
+    OpenAI.CreateConversationBody,
     Usage.output | Usage.json | Usage.input
   );
   @@access(OpenAI.CreateConversationBody, Access.public);
@@ -59,7 +60,8 @@ namespace Azure.AI.Projects {
   @@clientName(CreatedBy, "AgentResponseItemSource");
   @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
 
-  @@clientName(OAuthConsentRequestOutputItem,
+  @@clientName(
+    OAuthConsentRequestOutputItem,
     "OAuthConsentRequestResponseItem"
   );
   @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
@@ -284,7 +286,8 @@ namespace Azure.AI.Projects {
   );
 
   @@access(OpenAI.FunctionToolCallOutput, Access.internal);
-  @@clientName(OpenAI.FunctionToolCallOutput,
+  @@clientName(
+    OpenAI.FunctionToolCallOutput,
     "InternalOutputItemFunctionToolCallOutput"
   );
 
@@ -301,7 +304,8 @@ namespace Azure.AI.Projects {
   );
 
   @@access(OpenAI.ItemResourceComputerToolCallOutput, Access.internal);
-  @@clientName(OpenAI.ItemResourceComputerToolCallOutput,
+  @@clientName(
+    OpenAI.ItemResourceComputerToolCallOutput,
     "InternalOutputItemComputerToolCallOutput"
   );
 
@@ -329,7 +333,8 @@ namespace Azure.AI.Projects {
   );
 
   @@access(OpenAI.OutputItemCustomToolCallResource, Access.internal);
-  @@clientName(OpenAI.OutputItemCustomToolCallResource,
+  @@clientName(
+    OpenAI.OutputItemCustomToolCallResource,
     "InternalOutputItemCustomToolCallResource"
   );
 
@@ -426,11 +431,13 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Renames for tools.
   // --------------------------------------------------------------------------------
-  @@clientName(OpenAI.FunctionCallOutputStatusEnum,
+  @@clientName(
+    OpenAI.FunctionCallOutputStatusEnum,
     "ResponsesFunctionCallOutputStatus"
   );
   @@clientName(OpenAI.FunctionCallStatus, "ResponsesFunctionCallStatus");
-  @@clientName(OpenAI.ToolSearchExecutionType,
+  @@clientName(
+    OpenAI.ToolSearchExecutionType,
     "ResponsesToolSearchExecutionType"
   );
 }

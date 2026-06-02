@@ -140,7 +140,8 @@ namespace Azure.AI.Projects;
 @@access(OpenAI.DetailEnum, Access.internal);
 @@clientName(OpenAI.DetailEnum, "InternalImageDetailLevel");
 @@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
-@@clientName(OpenAI.InputImageContentParamAutoParam,
+@@clientName(
+  OpenAI.InputImageContentParamAutoParam,
   "InternalInputImageContentParamAutoParam"
 );
 // --------------------------------------------------------------------------------
@@ -166,11 +167,13 @@ namespace Azure.AI.Projects;
 
 @@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
 
-@@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
+@@clientName(
+  MemoryStoreDefaultOptions.chat_summary_enabled,
   "IsChatSummaryEnabled",
   "csharp"
 );
-@@clientName(MemoryStoreDefaultOptions.user_profile_enabled,
+@@clientName(
+  MemoryStoreDefaultOptions.user_profile_enabled,
   "IsUserProfileEnabled",
   "csharp"
 );

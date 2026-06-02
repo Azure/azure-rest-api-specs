@@ -69,7 +69,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.getAgentVersion, "getVersion");
 @@clientName(Agents.deleteAgentVersion, "deleteVersion");
 @@clientName(Agents.listAgentVersions, "listVersions");
-@@clientName(Agents.createAgentVersionFromManifest,
+@@clientName(
+  Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
@@ -189,14 +190,17 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
-@@clientName(AgentOptimizationJobs.listCandidates,
+@@clientName(
+  AgentOptimizationJobs.listCandidates,
   "listOptimizationCandidates"
 );
 @@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate");
-@@clientName(AgentOptimizationJobs.getCandidateConfig,
+@@clientName(
+  AgentOptimizationJobs.getCandidateConfig,
   "getOptimizationCandidateConfig"
 );
-@@clientName(AgentOptimizationJobs.getCandidateResults,
+@@clientName(
+  AgentOptimizationJobs.getCandidateResults,
   "getOptimizationCandidateResults"
 );
 
@@ -220,7 +224,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse,
+@@clientName(
+  SessionDirectoryListResponse,
   "SessionDirectoryListResult",
   "python"
 );
@@ -235,10 +240,12 @@ using Azure.AI.Projects;
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatText,
   "TextResponseFormatText"
 );
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
   "TextResponseFormatJsonObject"
 );
 
@@ -387,11 +394,13 @@ using Azure.AI.Projects;
 @@clientName(Models.getCredentials, "getCredentials");
 @@clientName(Models.createAsync, "pendingCreateVersion");
 
-@@clientName(CreateModelVersionAsyncResponse,
+@@clientName(
+  CreateModelVersionAsyncResponse,
   "ModelPendingCreateVersionResult",
   "python"
 );
-@@clientName(CreateModelVersionAsyncResponse,
+@@clientName(
+  CreateModelVersionAsyncResponse,
   "ModelPendingCreateVersionResponse",
   "javascript"
 );
