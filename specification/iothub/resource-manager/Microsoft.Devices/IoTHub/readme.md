@@ -51,8 +51,8 @@ input-file:
 
 - Added `properties.routing.endpoints.eventStreams` as a new endpoint array under routing endpoints.
 - Added `RoutingEventStreamProperties` with:
-  - Required: `name`
-  - Optional: `id` (read-only), `subscriptionId`, `resourceGroup`, `endpointUri`, `entityPath`, `authenticationType`, `identity`, `workspaceId`, `eventStreamId`, `sourceId`
+  - Required: `name`, `endpointUri`, `entityPath`
+  - Optional: `id` (read-only), `subscriptionId`, `resourceGroup`, `authenticationType`, `identity`, `workspaceId`, `eventStreamId`, `sourceId`
 - Updated examples for the new version under `examples/2026-05-01-preview/` to include `eventStreams` payloads.
 
 ### Tag: package-preview-2025-08
