@@ -512,7 +512,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "ManagedServiceIdentityUserAssignedIdentity",
   "python"
 );
-
 @@clientName(
   ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems,
   "CassandraClusterDataCenterNodeItem",
@@ -2633,26 +2632,14 @@ model RestorableGremlinResourceData
 );
 
 // TrackedResource wrappers for *CreateOrUpdateContent / ThroughputSettingsUpdateData.
-//
-// These spec models extend ARMResourceProperties (id/name/type/location/tags/identity).
-// The previously shipped SDK exposed them as TrackedResourceData subclasses
-// (Tags + Location, no Identity), so we wrap each with a custom model that
-// extends Azure.ResourceManager.CommonTypes.TrackedResource and substitute
-// via @@alternateType. OmitProperties drops id/name/type (provided by the
-// CommonTypes resource base) and location/tags (provided by TrackedResource).
-// The wrapper model name is the desired C# class name; this also obviates
-// the previous @@clientName(*, "...", "csharp") renames for the same models.
-//
-// Identity is also omitted for every wrapper except
-// CosmosDBAccountCreateOrUpdateContent — only the legacy database-account
-// create-or-update content surfaced Identity with full round-trip support.
-//
-// CosmosDBAccountCreateOrUpdateContent caveat: the inner `properties` holder
-// cannot be flattened via @@Legacy.flattenProperty (TCGC rejects spread
-// members as decorator targets) and cannot be spread directly (wire format
-// requires `properties` to remain nested). The flattened C# setters are
-// therefore re-emitted via SDK partial classes (see
-// `src/Custom/Models/CosmosDBAccountCreateOrUpdateContent.cs`).
+// Spec models extend ARMResourceProperties (with Identity); 1.4.0 GA shipped
+// these as TrackedResourceData subclasses (no Identity). Each wrapper below
+// extends CommonTypes.TrackedResource + OmitProperties (drops id/name/type +
+// location/tags, plus identity except on CosmosDBAccountCreateOrUpdateContent
+// which historically round-tripped Identity), bound via @@alternateType.
+// `@@usage(Usage.input | Usage.output, "csharp")` promotes implicit-flatten
+// to emit setter-bearing proxies (default is getter-only when the inner
+// `properties` holder has required ctor args).
 
 /**
  * Parameters to create and update Cosmos DB database accounts.
@@ -2671,6 +2658,13 @@ model CosmosDBAccountCreateOrUpdateContent
   CosmosDBAccountCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  CosmosDBAccountCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to update Cosmos DB resource throughput.
@@ -2686,6 +2680,13 @@ model ThroughputSettingsUpdateData
 @@alternateType(
   ThroughputSettingsUpdateParameters,
   ThroughputSettingsUpdateData,
+  "csharp"
+);
+@@usage(
+  ThroughputSettingsUpdateData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2706,6 +2707,13 @@ model CosmosDBSqlDatabaseCreateOrUpdateContent
   CosmosDBSqlDatabaseCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  CosmosDBSqlDatabaseCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB container.
@@ -2722,6 +2730,13 @@ model CosmosDBSqlContainerCreateOrUpdateContent
 @@alternateType(
   SqlContainerCreateUpdateParameters,
   CosmosDBSqlContainerCreateOrUpdateContent,
+  "csharp"
+);
+@@usage(
+  CosmosDBSqlContainerCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2742,6 +2757,13 @@ model CosmosDBSqlStoredProcedureCreateOrUpdateContent
   CosmosDBSqlStoredProcedureCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  CosmosDBSqlStoredProcedureCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB userDefinedFunction.
@@ -2758,6 +2780,13 @@ model CosmosDBSqlUserDefinedFunctionCreateOrUpdateContent
 @@alternateType(
   SqlUserDefinedFunctionCreateUpdateParameters,
   CosmosDBSqlUserDefinedFunctionCreateOrUpdateContent,
+  "csharp"
+);
+@@usage(
+  CosmosDBSqlUserDefinedFunctionCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2778,6 +2807,13 @@ model CosmosDBSqlTriggerCreateOrUpdateContent
   CosmosDBSqlTriggerCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  CosmosDBSqlTriggerCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB MongoDB database.
@@ -2794,6 +2830,13 @@ model MongoDBDatabaseCreateOrUpdateContent
 @@alternateType(
   MongoDBDatabaseCreateUpdateParameters,
   MongoDBDatabaseCreateOrUpdateContent,
+  "csharp"
+);
+@@usage(
+  MongoDBDatabaseCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2814,6 +2857,13 @@ model MongoDBCollectionCreateOrUpdateContent
   MongoDBCollectionCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  MongoDBCollectionCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB Table.
@@ -2830,6 +2880,13 @@ model CosmosDBTableCreateOrUpdateContent
 @@alternateType(
   TableCreateUpdateParameters,
   CosmosDBTableCreateOrUpdateContent,
+  "csharp"
+);
+@@usage(
+  CosmosDBTableCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2849,6 +2906,13 @@ model CassandraKeyspaceCreateOrUpdateContent
   CassandraKeyspaceCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  CassandraKeyspaceCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB Cassandra table.
@@ -2864,6 +2928,13 @@ model CassandraTableCreateOrUpdateContent
 @@alternateType(
   CassandraTableCreateUpdateParameters,
   CassandraTableCreateOrUpdateContent,
+  "csharp"
+);
+@@usage(
+  CassandraTableCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2883,6 +2954,13 @@ model CassandraViewCreateOrUpdateContent
   CassandraViewCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  CassandraViewCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB Gremlin database.
@@ -2900,6 +2978,13 @@ model GremlinDatabaseCreateOrUpdateContent
   GremlinDatabaseCreateOrUpdateContent,
   "csharp"
 );
+@@usage(
+  GremlinDatabaseCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
 /**
  * Parameters to create and update Cosmos DB Gremlin graph.
@@ -2915,6 +3000,13 @@ model GremlinGraphCreateOrUpdateContent
 @@alternateType(
   GremlinGraphCreateUpdateParameters,
   GremlinGraphCreateOrUpdateContent,
+  "csharp"
+);
+@@usage(
+  GremlinGraphCreateOrUpdateContent,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
