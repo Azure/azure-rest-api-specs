@@ -8,13 +8,13 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-@tag("Agents")
 interface Agents {
   /**
    * Retrieves the agent.
    */
   @get
   @route("/agents/{agent_name}")
+  @tag("Agents")
   getAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
@@ -30,6 +30,7 @@ interface Agents {
   @route("/agents")
   @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+  @tag("Agents")
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
@@ -51,6 +52,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @tag("Agents")
   createAgentFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -77,6 +79,7 @@ interface Agents {
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
+  @tag("Agents")
   updateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -102,6 +105,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @tag("Agents")
   updateAgentFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -131,6 +135,7 @@ interface Agents {
    */
   @post
   @route("/agents:import")
+  @tag("Agents")
   createAgentFromManifest is FoundryDataPlaneOperation<
     CreateAgentFromManifestRequest,
     AgentObject
@@ -142,6 +147,7 @@ interface Agents {
    */
   @post
   @route("/agents/{agent_name}/import")
+  @tag("Agents")
   updateAgentFromManifest is FoundryDataPlaneOperation<
     {
       /** The name of the agent to update. */
@@ -159,6 +165,7 @@ interface Agents {
    */
   @delete
   @route("/agents/{agent_name}")
+  @tag("Agents")
   deleteAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to delete. */
@@ -175,6 +182,7 @@ interface Agents {
    */
   @route("/agents")
   @list
+  @tag("Agents")
   listAgents is FoundryDataPlaneOperation<
     {
       ...ListAgentQueryParameters;
@@ -189,6 +197,7 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
+  @tag("Agent Versions")
   createAgentVersion is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -212,6 +221,7 @@ interface Agents {
    */
   @post
   @route("/agents/{agent_name}/versions:import")
+  @tag("Agent Versions")
   createAgentVersionFromManifest is FoundryDataPlaneOperation<
     {
       /**
@@ -234,6 +244,7 @@ interface Agents {
    */
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
+  @tag("Agent Versions")
   getAgentVersion is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
@@ -252,6 +263,7 @@ interface Agents {
    */
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
+  @tag("Agent Versions")
   deleteAgentVersion is FoundryDataPlaneOperation<
     {
       /** The name of the agent to delete. */
@@ -272,6 +284,7 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/versions")
   @list
+  @tag("Agent Versions")
   listAgentVersions is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve versions for. */
@@ -294,6 +307,7 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
+  @tag("Agents")
   patchAgentObject is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -321,6 +335,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @tag("Agent Versions")
   createAgentVersionFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -361,6 +376,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @tag("Agent Versions")
   downloadAgentCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     {
@@ -391,6 +407,7 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
+  @tag("Agent Sessions")
   createSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -414,6 +431,7 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
+  @tag("Agent Sessions")
   getSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -440,6 +458,7 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
+  @tag("Agent Sessions")
   deleteSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -466,6 +485,7 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
+  @tag("Agent Sessions")
   stopSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -490,6 +510,7 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
+  @tag("Agent Sessions")
   listSessions is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -536,6 +557,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
   )
+  @tag("Agent Sessions")
   getSessionLogStream is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
     {
