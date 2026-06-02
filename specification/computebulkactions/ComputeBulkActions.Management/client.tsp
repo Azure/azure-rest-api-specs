@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 
 namespace Microsoft.ComputeBulkActions;
 
@@ -74,6 +75,12 @@ namespace Microsoft.ComputeBulkActions;
 // Critical: Parameters suffix
 // =====================================================================
 @@clientName(ExecutionParameters, "BulkActionExecutionConfig", "csharp");
+@@clientName(ManagedDiskParameters, "ManagedDiskInfo", "csharp");
+@@clientName(
+  DiskEncryptionSetParameters,
+  "DiskEncryptionSetReference",
+  "csharp"
+);
 
 // =====================================================================
 // Warning: Plural enum names → singular
@@ -91,6 +98,37 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(SecurityTypes, "SecurityType", "csharp");
 @@clientName(SettingNames, "SettingName", "csharp");
 @@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
+@@clientName(DeleteOptions, "DeleteOption", "csharp");
+@@clientName(DiffDiskOptions, "DiffDiskOption", "csharp");
+
+// =====================================================================
+// Warning: Acronym casing
+// =====================================================================
+@@clientName(AcceleratorType.GPU, "Gpu", "csharp");
+@@clientName(AcceleratorType.FPGA, "Fpga", "csharp");
+@@clientName(LocalStorageDiskType.HDD, "Hdd", "csharp");
+@@clientName(LocalStorageDiskType.SSD, "Ssd", "csharp");
+
+// =====================================================================
+// Warning: ARM resource identifier types
+// =====================================================================
+@@alternateType(ApiEntityReference.id, armResourceIdentifier, "csharp");
+@@alternateType(SubResource.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  VMGalleryApplication.packageReferenceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EncryptionIdentity.userAssignedIdentityResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  HostEndpointSettings.inVMAccessControlProfileReferenceId,
+  armResourceIdentifier,
+  "csharp"
+);
 
 // =====================================================================
 // Warning: Ambiguous type names
@@ -102,7 +140,7 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(InnerError, "ComputeBulkActionsInnerError", "csharp");
 @@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
 @@clientName(RetryPolicy, "BulkActionRetryPolicy", "csharp");
-@@clientName(ResourceOperation, "BulkActionResourceOperation", "csharp");
+@@clientName(ResourceOperation, "BulkActionResourceOperationInfo", "csharp");
 
 // =====================================================================
 // Warning: DateTimeOffset property naming (*On suffix)
@@ -129,6 +167,11 @@ namespace Microsoft.ComputeBulkActions;
 
 // DataDisk
 @@clientName(DataDisk.toBeDetached, "IsToBeDetached", "csharp");
+@@clientName(
+  DataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
 
 // DiskEncryptionSettings
 @@clientName(DiskEncryptionSettings.enabled, "IsEnabled", "csharp");
@@ -173,6 +216,13 @@ namespace Microsoft.ComputeBulkActions;
 // OSImageNotificationProfile
 @@clientName(OSImageNotificationProfile.enable, "IsEnabled", "csharp");
 
+// OSDisk
+@@clientName(
+  OSDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+
 // OSProfile
 @@clientName(
   OSProfile.allowExtensionOperations,
@@ -214,6 +264,11 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(
   VMGalleryApplication.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication.treatFailureAsDeploymentFailure,
+  "ShouldTreatFailureAsDeploymentFailure",
   "csharp"
 );
 
