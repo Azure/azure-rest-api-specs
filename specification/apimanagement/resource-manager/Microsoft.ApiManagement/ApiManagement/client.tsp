@@ -206,6 +206,7 @@ op replaceApiManagementServiceDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
   serviceName: string,
 ):
   | ArmDeletedResponse
