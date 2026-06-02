@@ -181,9 +181,15 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Warning: Ambiguous type names
 // =====================================================================
+@@clientName(
+  LocationBasedLaunchBulkInstancesOperation,
+  "BulkAction",
+  "csharp"
+);
 @@clientName(Mode, "ComputeBulkActionsProxyAgentMode", "csharp");
 @@clientName(Modes, "ComputeBulkActionsHostEndpointMode", "csharp");
 @@clientName(ApiError, "ComputeBulkActionsApiError", "csharp");
+@@clientName(ApiError.innererror, "InnerError", "csharp");
 @@clientName(ApiErrorBase, "ComputeBulkActionsApiErrorBase", "csharp");
 @@clientName(InnerError, "ComputeBulkActionsInnerError", "csharp");
 @@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
