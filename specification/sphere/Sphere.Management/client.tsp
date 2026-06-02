@@ -124,3 +124,5 @@ using Microsoft.AzureSphere;
   "No3RdPartyAppUpdates",
   "csharp"
 );
+
+// trigger validation
