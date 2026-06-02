@@ -376,7 +376,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
-  @tag("Agent Versions")
+  @tag("Agents")
   downloadAgentCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     {
