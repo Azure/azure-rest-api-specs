@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "EventGridManagementClient",
-    "version": "2025-07-15-preview",
+    "version": "2025-11-15-preview",
     "description": "Azure EventGrid Management Client",
     "x-typespec-generated": [
       {
@@ -12196,6 +12196,26 @@
         ]
       }
     },
+    "AutoScaleConfiguration": {
+      "type": "object",
+      "description": "Auto-scale configuration for the namespace resource. When enabled, the namespace will automatically scale between minimumThroughputUnits and maximumThroughputUnits based on usage patterns.",
+      "properties": {
+        "enableAutoScale": {
+          "type": "boolean",
+          "description": "Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale between minimumThroughputUnits and maximumThroughputUnits based on usage patterns."
+        },
+        "minimumThroughputUnits": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true."
+        },
+        "maximumThroughputUnits": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true."
+        }
+      }
+    },
     "Azure.Core.armResourceType": {
       "type": "string",
       "description": "Represents an Azure Resource Type."
@@ -15319,6 +15339,10 @@
         "minimumTlsVersionAllowed": {
           "$ref": "#/definitions/TlsVersion",
           "description": "Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported."
+        },
+        "autoScaleConfiguration": {
+          "$ref": "#/definitions/AutoScaleConfiguration",
+          "description": "Auto-scale configuration for the namespace resource."
         }
       }
     },
@@ -15668,6 +15692,10 @@
             "$ref": "#/definitions/InboundIpRule"
           },
           "x-ms-identifiers": []
+        },
+        "autoScaleConfiguration": {
+          "$ref": "#/definitions/UpdateAutoScaleConfiguration",
+          "description": "Auto-scale configuration update parameters for the namespace resource."
         }
       }
     },
@@ -19973,6 +20001,26 @@
       "required": [
         "value"
       ]
+    },
+    "UpdateAutoScaleConfiguration": {
+      "type": "object",
+      "description": "Auto-scale configuration update parameters for the namespace resource.",
+      "properties": {
+        "enableAutoScale": {
+          "type": "boolean",
+          "description": "Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale between minimumThroughputUnits and maximumThroughputUnits based on usage patterns."
+        },
+        "minimumThroughputUnits": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true."
+        },
+        "maximumThroughputUnits": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true."
+        }
+      }
     },
     "UpdateTopicSpacesConfigurationInfo": {
       "type": "object",
