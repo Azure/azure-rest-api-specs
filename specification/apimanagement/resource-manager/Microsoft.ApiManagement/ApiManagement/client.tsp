@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 @@clientName(
   Microsoft.ApiManagement.TagTagResourceContractProperties,
   "TagResourceContractProperties",
-  "java,python"
+  "java,python,javascript"
 );
 @@clientName(
   Microsoft.ApiManagement.ConnectivityCheckRequest.preferredIPVersion,
@@ -137,7 +137,7 @@ op replaceGetByName(
 @@override(
   DeletedServiceContracts.getByName,
   replaceGetByName,
-  "go,java,python"
+  "go,java,python,javascript"
 );
 
 /**
@@ -159,7 +159,11 @@ op replacePurge(
     })
   | ArmDeletedNoContentResponse;
 
-@@override(DeletedServiceContracts.purge, replacePurge, "go,java,python");
+@@override(
+  DeletedServiceContracts.purge,
+  replacePurge,
+  "go,java,python,javascript"
+);
 
 // Mitigate model rename: ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration -> ...HttpConfiguration
 @@clientName(
@@ -192,3 +196,27 @@ op replacePurge(
 @@apiVersion(ApiRevisionInfoContract.apiVersionSet, false);
 @@apiVersion(ApiManagementServiceBaseProperties.apiVersionConstraint, false);
 @@apiVersion(ApiManagementSku.apiVersions, false);
+
+/**
+ * override for ApiManagementServiceResources.delete - remove final result for JavaScript
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op replaceApiManagementServiceDelete(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  serviceName: string,
+):
+  | ArmDeletedResponse
+  | (ArmDeleteAcceptedLroResponse & {
+      @bodyRoot
+      _: ApiManagementServiceResource;
+    })
+  | ArmDeletedNoContentResponse;
+
+@@override(
+  ApiManagementServiceResources.delete,
+  replaceApiManagementServiceDelete,
+  "javascript"
+);
