@@ -78,6 +78,19 @@ suppressions:
     where:
       - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
       - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
+  - code: EnumInsteadOfBoolean
+    from: desktopvirtualization.json
+    reason: |
+      The service contract uses boolean flags for existing and new feature toggles.
+      Aligning with current API behavior avoids introducing breaking enum changes.
+  - code: AllProxyResourcesShouldHaveDelete
+    from: desktopvirtualization.json
+    reason: |
+      SessionHostConfiguration and SessionHostManagement are singleton control resources in the service design
+      and intentionally do not expose delete operations.
+    where:
+      - $.definitions.SessionHostConfiguration
+      - $.definitions.SessionHostManagement
 tag: package-preview-2026-03-01-preview
 ```
 
