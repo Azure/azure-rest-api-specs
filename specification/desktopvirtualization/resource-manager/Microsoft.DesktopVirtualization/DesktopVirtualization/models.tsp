@@ -3323,7 +3323,7 @@ model ApplicationProperties {
   /**
    * Additional shortcut settings for the remote application.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.vLatestPreview)
   shortcutsExtension?: ShortcutsExtension;
 
   /**
@@ -3436,7 +3436,7 @@ model ApplicationPatchProperties {
   /**
    * Additional shortcut settings for the remote application.
    */
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.vLatestPreview)
   shortcutsExtension?: ShortcutsExtension;
 }
 
