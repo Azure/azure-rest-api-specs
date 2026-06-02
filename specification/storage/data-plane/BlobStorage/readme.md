@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the FileStorage API.
+These are the global settings for the BlobStorage API.
 
 ```yaml
 openapi-type: data-plane
