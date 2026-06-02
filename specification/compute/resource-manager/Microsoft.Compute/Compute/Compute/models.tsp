@@ -1689,7 +1689,8 @@ model ListUsagesResult is Azure.Core.Page<Usage>;
 
 @@identifiers(ListUsagesResult.value, #[]);
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
-@@doc(ListUsagesResult.nextLink,
+@@doc(
+  ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
 );
 
@@ -1792,10 +1793,12 @@ model VirtualMachineSize {
 model VirtualMachineScaleSetListResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListResult.value,
+@@doc(
+  VirtualMachineScaleSetListResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
 );
 
@@ -3861,10 +3864,12 @@ model VirtualMachineScaleSetIdentity {
 model VirtualMachineScaleSetListWithLinkResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListWithLinkResult.value,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListWithLinkResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
 );
 /**
@@ -4452,10 +4457,12 @@ model VirtualMachineScaleSetExtensionListResult
 
 @@identifiers(VirtualMachineScaleSetExtensionListResult.value, #["name", "id"]);
 
-@@doc(VirtualMachineScaleSetExtensionListResult.value,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.value,
   "The list of VM scale set extensions."
 );
-@@doc(VirtualMachineScaleSetExtensionListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.nextLink,
   "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
 );
 
@@ -4640,7 +4647,8 @@ model OrchestrationServiceSummary {
   lastStatusChangeTime?: utcDateTime;
 }
 
-@@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@identifiers(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   #["location", "type"]
 );
 
@@ -4650,10 +4658,12 @@ model OrchestrationServiceSummary {
 model VirtualMachineScaleSetListOSUpgradeHistory
   is Azure.Core.Page<UpgradeOperationHistoricalStatusInfo>;
 
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   "The list of OS upgrades performed on the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
   "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
 );
 
@@ -4928,7 +4938,8 @@ model OrchestrationServiceStateInput {
   action: OrchestrationServiceStateAction;
 }
 
-@@identifiers(VirtualMachineScaleSetListSkusResult.value,
+@@identifiers(
+  VirtualMachineScaleSetListSkusResult.value,
   #["resourceType", "sku/name"]
 );
 /**
@@ -4937,10 +4948,12 @@ model OrchestrationServiceStateInput {
 model VirtualMachineScaleSetListSkusResult
   is Azure.Core.Page<VirtualMachineScaleSetSku>;
 
-@@doc(VirtualMachineScaleSetListSkusResult.value,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.value,
   "The list of skus available for the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListSkusResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
 );
 
@@ -5002,10 +5015,12 @@ model VirtualMachineScaleSetSkuCapacity {
 model VirtualMachineScaleSetVMListResult
   is Azure.Core.Page<VirtualMachineScaleSetVM>;
 
-@@doc(VirtualMachineScaleSetVMListResult.value,
+@@doc(
+  VirtualMachineScaleSetVMListResult.value,
   "The list of virtual machine scale sets VMs."
 );
-@@doc(VirtualMachineScaleSetVMListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetVMListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs."
 );
 
@@ -6386,7 +6401,8 @@ model RetrieveBootDiagnosticsDataResult {
 model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 @@doc(VirtualMachineListResult.value, "The list of virtual machines.");
-@@doc(VirtualMachineListResult.nextLink,
+@@doc(
+  VirtualMachineListResult.nextLink,
   "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
 );
 /**
@@ -7523,7 +7539,8 @@ model VirtualMachineExtensionImageProperties {
 model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
 
 @@doc(AvailabilitySetListResult.value, "The list of availability sets.");
-@@doc(AvailabilitySetListResult.nextLink,
+@@doc(
+  AvailabilitySetListResult.nextLink,
   "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
 );
 
@@ -7648,10 +7665,12 @@ model AvailabilitySetUpdate extends UpdateResource {
 model ProximityPlacementGroupListResult
   is Azure.Core.Page<ProximityPlacementGroup>;
 
-@@doc(ProximityPlacementGroupListResult.value,
+@@doc(
+  ProximityPlacementGroupListResult.value,
   "The list of proximity placement groups."
 );
-@@doc(ProximityPlacementGroupListResult.nextLink,
+@@doc(
+  ProximityPlacementGroupListResult.nextLink,
   "The URI to fetch the next page of proximity placement groups."
 );
 
@@ -7726,7 +7745,8 @@ model ProximityPlacementGroupUpdate extends UpdateResource {}
 model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
 
 @@doc(DedicatedHostGroupListResult.value, "The list of dedicated host groups.");
-@@doc(DedicatedHostGroupListResult.nextLink,
+@@doc(
+  DedicatedHostGroupListResult.nextLink,
   "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
 );
 
@@ -7868,7 +7888,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
 
 @@doc(DedicatedHostListResult.value, "The list of dedicated hosts.");
-@@doc(DedicatedHostListResult.nextLink,
+@@doc(
+  DedicatedHostListResult.nextLink,
   "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
 );
 
@@ -7970,7 +7991,8 @@ model DedicatedHostSizeListResult {
 model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
 @@doc(SshPublicKeysGroupListResult.value, "The list of SSH public keys.");
-@@doc(SshPublicKeysGroupListResult.nextLink,
+@@doc(
+  SshPublicKeysGroupListResult.nextLink,
   "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
 );
 
@@ -7992,7 +8014,8 @@ model SshPublicKeyResourceProperties {
 model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
 
 @@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
-@@doc(InterconnectBlockListResult.nextLink,
+@@doc(
+  InterconnectBlockListResult.nextLink,
   "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
 );
 
@@ -8179,7 +8202,8 @@ model SshPublicKeyGenerateKeyPairResult {
 model ImageListResult is Azure.Core.Page<Image>;
 
 @@doc(ImageListResult.value, "The list of Images");
-@@doc(ImageListResult.nextLink,
+@@doc(
+  ImageListResult.nextLink,
   "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
 );
 
@@ -8317,10 +8341,12 @@ model ImageUpdate extends UpdateResource {
 model RestorePointCollectionListResult
   is Azure.Core.Page<RestorePointCollection>;
 
-@@doc(RestorePointCollectionListResult.value,
+@@doc(
+  RestorePointCollectionListResult.value,
   "Gets the list of restore point collections."
 );
-@@doc(RestorePointCollectionListResult.nextLink,
+@@doc(
+  RestorePointCollectionListResult.nextLink,
   "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections."
 );
 
@@ -8708,10 +8734,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 model CapacityReservationGroupListResult
   is Azure.Core.Page<CapacityReservationGroup>;
 
-@@doc(CapacityReservationGroupListResult.value,
+@@doc(
+  CapacityReservationGroupListResult.value,
   "The list of capacity reservation groups."
 );
-@@doc(CapacityReservationGroupListResult.nextLink,
+@@doc(
+  CapacityReservationGroupListResult.nextLink,
   "The URI to fetch the next page of capacity reservation groups. Call ListNext() with this URI to fetch the next page of capacity reservation groups."
 );
 /**
@@ -8875,10 +8903,12 @@ model CapacityReservationGroupUpdate extends UpdateResource {
  */
 model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
-@@doc(CapacityReservationListResult.value,
+@@doc(
+  CapacityReservationListResult.value,
   "The list of capacity reservations."
 );
-@@doc(CapacityReservationListResult.nextLink,
+@@doc(
+  CapacityReservationListResult.nextLink,
   "The URI to fetch the next page of capacity reservations. Call ListNext() with this URI to fetch the next page of capacity reservations."
 );
 
@@ -9045,7 +9075,8 @@ model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 
 @@doc(RunCommandListResult.value, "The list of virtual machine run commands.");
-@@doc(RunCommandListResult.nextLink,
+@@doc(
+  RunCommandListResult.nextLink,
   "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
 );
 
@@ -9129,7 +9160,8 @@ model VirtualMachineRunCommandsListResult
   is Azure.Core.Page<VirtualMachineRunCommand>;
 
 @@doc(VirtualMachineRunCommandsListResult.value, "The list of run commands.");
-@@doc(VirtualMachineRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineRunCommandsListResult.nextLink,
   "The uri to fetch the next page of run commands."
 );
 
