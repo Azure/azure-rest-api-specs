@@ -429,6 +429,9 @@ suppressions:
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
   - code: OperationsAPIImplementation
     reason: "Some files are too old to pass verification, and modifying them in this change would be too large. With future updates, we will gradually remove those suppressions."
+  - code: ProvisioningStateMustBeReadOnly
+    from: preview/2025-12-01-preview/openapi.json
+    reason: "The TypeSpec source marks provisioningState with @visibility(Lifecycle.Read) and the emitter outputs readOnly:true, but it appears as a sibling of $ref. Per JSON Schema, readOnly next to $ref is ignored, so the lint rule still fires. This is an emitter limitation, not a spec authoring issue."
 ```
 
 ---
