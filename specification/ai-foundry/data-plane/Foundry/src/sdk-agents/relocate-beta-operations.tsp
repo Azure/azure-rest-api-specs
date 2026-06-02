@@ -7,17 +7,13 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
 
-/** Builder parameter bag */
-model JavaBuilderOptions {
-  /** Whether to include beta operations in the generated client. Default is false. */
-  allowBetaTypes: boolean = false;
-}
-
 @@clientInitialization(
   Azure.AI.Projects.Beta,
   {
     initializedBy: InitializedBy.parent,
-    parameters: JavaBuilderOptions,
+    parameters: {
+      allowBetaTypes: boolean = false,
+    },
   },
   "java"
 );
