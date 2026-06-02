@@ -2144,6 +2144,36 @@
         }
       }
     },
+    "IotHubAuthenticationType": {
+      "type": "string",
+      "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.",
+      "enum": [
+        "KeyBased",
+        "UserAssigned",
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "IotHubAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "KeyBased",
+            "value": "KeyBased",
+            "description": "Key Based authentication type."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned authentication type."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned authentication type."
+          }
+        ]
+      }
+    },
     "IotHubDefinitionDescription": {
       "type": "object",
       "description": "Description of the IoT hub.",
@@ -2162,9 +2192,29 @@
           "description": "Host name of the IoT hub.",
           "readOnly": true
         },
+        "hostName": {
+          "type": "string",
+          "description": "Host name of the IoT hub. This is required when connectionString is not provided."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/IotHubAuthenticationType",
+          "description": "IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned."
+        },
+        "selectedUserAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The selected user-assigned identity resource Id associated with IoT hub. This is required when authenticationType is UserAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
         "connectionString": {
           "type": "string",
-          "description": "Connection string of the IoT hub."
+          "description": "Connection string of the IoT hub. This is required when authenticationType is KeyBased."
         },
         "location": {
           "type": "string",
@@ -2172,7 +2222,6 @@
         }
       },
       "required": [
-        "connectionString",
         "location"
       ]
     },
