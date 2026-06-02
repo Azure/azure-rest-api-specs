@@ -78,6 +78,7 @@ interface AlertRules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("alertRule_TriggerRuleRun")
   @tag("trigger analytics rule run")
+  @added(Versions.v2025_10_01_preview)
   triggerRuleRun is Extension.ActionAsyncBase<
     OperationalInsights,
     AlertRule,

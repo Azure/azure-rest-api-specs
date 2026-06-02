@@ -72,6 +72,7 @@ interface Bookmarks {
    * Expand an bookmark
    */
   @tag("Bookmark")
+  @added(Versions.v2025_10_01_preview)
   expand is Extension.ActionSync<
     OperationalInsights,
     Bookmark,
