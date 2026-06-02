@@ -3712,6 +3712,10 @@
           "minimum": 0,
           "title": "The soak duration for a node",
           "description": "The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node. If not specified, the default is 0 minutes."
+        },
+        "enableUpgradeGate": {
+          "type": "boolean",
+          "description": "Whether to enable upgrade gating for this agent pool. When enabled, the upgrade will wait for health signal validation and abort if getting unhealthy signal."
         }
       },
       "description": "Settings for upgrading an agentpool"
@@ -5462,6 +5466,10 @@
         "overrideSettings": {
           "$ref": "#/definitions/UpgradeOverrideSettings",
           "description": "Settings for overrides."
+        },
+        "enableUpgradeGate": {
+          "type": "boolean",
+          "description": "Whether to enable upgrade gating for the cluster. When enabled, the upgrade will wait for health signal validation and abort if getting unhealthy signal."
         }
       },
       "description": "Settings for upgrading a cluster."
