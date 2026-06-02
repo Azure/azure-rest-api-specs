@@ -175,7 +175,6 @@ using Microsoft.StorageCache;
 @@alternateType(CacheUsernameDownloadSettings.groupFileURI, url, "csharp");
 @@alternateType(CacheUsernameDownloadSettings.userFileURI, url, "csharp");
 @@alternateType(CacheUsernameDownloadSettings.caCertificateURI, url, "csharp");
-@@alternateType(AmlFilesystemProperties.clusterUuid, uuid, "csharp");
 @@alternateType(KeyVaultKeyReferenceSourceVault.id, armResourceIdentifier, "csharp");
 @@alternateType(BlobNfsTarget.target, armResourceIdentifier, "csharp");
 @@alternateType(ClfsTarget.target, armResourceIdentifier, "csharp");
