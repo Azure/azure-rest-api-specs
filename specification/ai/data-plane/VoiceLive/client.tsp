@@ -485,7 +485,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
 @@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
 @@clientName(VoiceLive.AvatarConfigTypes, "AvatarConfigKind", "csharp");
-@@clientName(VoiceLive.PersonalVoiceModels, "PersonalVoiceModel", "csharp");
 @@clientName(
   VoiceLive.PersonalVoiceModels.`MAI-Voice-1`,
   "MaiVoice1",
