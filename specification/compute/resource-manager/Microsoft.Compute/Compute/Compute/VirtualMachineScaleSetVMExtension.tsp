@@ -16,9 +16,18 @@ namespace Compute;
  * Describes a VMSS VM Extension.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Azure.ResourceManager.Legacy.customAzureResource
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(VirtualMachineScaleSetVM)
-model VirtualMachineScaleSetVMExtension
-  is ProxySubResourceReadOnly<VirtualMachineExtensionProperties> {
+model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
+  /**
+   * Describes the properties of a Virtual Machine Extension.
+   */
+  properties?: VirtualMachineExtensionProperties;
+
   /**
    * The location of the extension.
    */
@@ -30,8 +39,7 @@ model VirtualMachineScaleSetVMExtension
    * Resource type
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "type")
-  vmType?: string;
+  type?: string;
 
   /**
    * Resource name
@@ -51,9 +59,12 @@ model VirtualMachineScaleSetVMExtension
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMExtensionsOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
-        ...Azure.ResourceManager.Legacy.BasePath,
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
 
         @doc("The name of the VM scale set.")
         @path
@@ -72,7 +83,8 @@ interface VirtualMachineScaleSetVMExtensionsOps
           KeyName = "vmssExtensionName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
 @armResourceOperations
