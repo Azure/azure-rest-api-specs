@@ -35,7 +35,9 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.ConversationResource, Usage.output);
   @@access(OpenAI.ConversationResource, Access.public);
   @@clientName(OpenAI.ConversationResource, "ProjectConversation");
-  @@usage(OpenAI.CreateConversationBody, Usage.output | Usage.json | Usage.input);
+  @@usage(OpenAI.CreateConversationBody,
+    Usage.output | Usage.json | Usage.input
+  );
   @@access(OpenAI.CreateConversationBody, Access.public);
   @@usage(OpenAI.UpdateConversationBody, Usage.input);
   @@access(OpenAI.UpdateConversationBody, Access.public);
