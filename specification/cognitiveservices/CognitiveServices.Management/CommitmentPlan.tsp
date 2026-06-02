@@ -15,15 +15,22 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services account commitment plan.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'CommitmentPlan' to maintain SDK backward compatibility"
-@parentResource(Account)
 model CommitmentPlan
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CommitmentPlanProperties> {
+  is Azure.ResourceManager.ProxyResource<CommitmentPlanProperties> {
   ...ResourceNameParameter<
     Resource = CommitmentPlan,
     KeyName = "commitmentPlanName",
     SegmentName = "commitmentPlans",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 
   /**
    * Resource Etag.
@@ -69,7 +76,8 @@ interface CommitmentPlanOps
         @segment("commitmentPlans")
         @key
         commitmentPlanName: string,
-      }
+      },
+      ResourceName = "CommitmentPlan"
     > {}
 
 @armResourceOperations
@@ -90,7 +98,10 @@ interface CommitmentPlans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'createOrUpdate' match existing service endpoint behavior"
   delete is CommitmentPlanOps.DeleteWithoutOkAsync<
     CommitmentPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -117,7 +128,8 @@ interface CommitmentPlanOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
         commitmentPlanName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesCommitmentPlan"
     > {}
 
 @armResourceOperations
@@ -170,7 +182,10 @@ interface CommitmentPlanOperationGroup {
   @tag("CognitiveServicesCommitmentPlans")
   deletePlan is CommitmentPlanOperationGroupOps.DeleteWithoutOkAsync<
     CommitmentPlan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -192,19 +207,24 @@ interface CommitmentPlanOperationGroup {
   >;
 }
 
-@@doc(CommitmentPlan.name,
+@@doc(
+  CommitmentPlan.name,
   "The name of the commitmentPlan associated with the Cognitive Services Account"
 );
 @@encodedName(CommitmentPlan.etag, "application/json", "etag");
-@@doc(CommitmentPlan.properties,
+@@doc(
+  CommitmentPlan.properties,
   "Properties of Cognitive Services account commitment plan."
 );
-@@doc(CommitmentPlans.createOrUpdate::parameters.resource,
+@@doc(
+  CommitmentPlans.createOrUpdate::parameters.resource,
   "The commitmentPlan properties."
 );
-@@doc(CommitmentPlanOperationGroup.createOrUpdatePlan::parameters.resource,
+@@doc(
+  CommitmentPlanOperationGroup.createOrUpdatePlan::parameters.resource,
   "The parameters to provide for the created commitment plan."
 );
-@@doc(CommitmentPlanOperationGroup.updatePlan::parameters.properties,
+@@doc(
+  CommitmentPlanOperationGroup.updatePlan::parameters.properties,
   "The parameters to provide for the created commitment plan."
 );

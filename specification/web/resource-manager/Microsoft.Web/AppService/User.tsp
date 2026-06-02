@@ -62,6 +62,7 @@ interface Users {
 
 @@doc(User.name, "");
 @@doc(User.properties, "User resource specific properties");
-@@doc(Users.updatePublishingUser::parameters.resource,
+@@doc(
+  Users.updatePublishingUser::parameters.resource,
   "Details of publishing user"
 );

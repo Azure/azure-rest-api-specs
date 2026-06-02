@@ -4,22 +4,27 @@ using Microsoft.DatabaseWatcher;
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AlertRuleResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AlertRuleResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HealthValidation.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HealthValidation.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SharedPrivateLinkResource.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Watcher.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Watcher.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

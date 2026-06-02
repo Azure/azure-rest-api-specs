@@ -243,7 +243,7 @@ suppressions:
     where:
       - $.definitions.ManagedNetworkSettings.properties.outboundRules
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    reason: ManagedNetwork PUT is an async operation that returns 202 Accepted for long-running network infrastructure provisioning. The backend is shared with Machine Learning Services RP and returns 202 instead of ARM-standard 200/201. Changing response codes would be a breaking change for existing clients. provisioningState is present in the resource model and returned in the final LRO result.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
@@ -270,6 +270,14 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema.properties.properties.properties.computeType
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].patch.parameters[5].schema      
+  - code: PatchBodyParametersSchema
+    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body), consistent with the existing Compute resource pattern. Required properties (targetClusterId, imageLink) are within the optional properties bag.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema
   - code: GuidUsage
     reason: Approved to be suppressed in AML swagger.
     where:
@@ -280,7 +288,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].delete
   - code: AvoidAdditionalProperties
-    reason: Approved to be suppressed in AML swagger
+    reason: Metadata is a user-defined key-value property bag where customers store arbitrary metadata about connections (e.g. API versions, deployment config). Keys are not predefined by the service. CustomKeys.keys holds user-provided authentication credentials with user-defined key names. Both are Dictionary of string in the backend.
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
@@ -291,7 +299,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
   - code: AvoidAdditionalProperties
-    reason: Same as existing account resource, trying to have the same behavior
+    reason: Endpoints is a read-only dictionary of service endpoint names to URLs (e.g. OpenAI, Speech). Keys are dynamically determined at runtime by the account kind and region from the service API catalog. Same pattern as AccountProperties.endpoints which has shipped in stable since the original TypeSpec migration.
     where:
       - $.definitions.ProjectProperties.properties.endpoints
   - code: AvoidAdditionalProperties
@@ -317,6 +325,14 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[5].schema.type
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[5].schema.type
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: ManagedComputeUsageListResult is a usage/quota list envelope, not an ARM resource. Same pattern as existing UsageListResult. Individual ManagedComputeUsage items already include id, name, and type properties.
+    where:
+      - $.definitions.ManagedComputeUsageListResult
+  - code: AvoidAdditionalProperties
+    reason: EvaluateDeploymentPoliciesResponse.results is a dictionary keyed by deployment name, mapping each hypothetical deployment to its policy evaluation result. Keys are user-provided deployment names from the request.
+    where:
+      - $.definitions.EvaluateDeploymentPoliciesResponse.properties.results
 ```
 
 
@@ -1013,6 +1029,10 @@ directive:
     from: cognitiveservices.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans/{commitmentPlanName}"]
     reason: The resource accounts/commitmentPlans is not a tracked resource
+  - suppress: RPC-Patch-V1-10 
+    from: cognitiveservices.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5]
+    reason: computeType (within properties) is mandatory for this PATCH operation to validate resource consistency.
 ```
 
 ---

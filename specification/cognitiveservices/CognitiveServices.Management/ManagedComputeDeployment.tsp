@@ -33,13 +33,13 @@ model ManagedComputeDeployment
   /**
    * The resource model definition representing SKU
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'sku' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc defines its own Sku model — using ResourceSkuProperty causes duplicate-client-name errors in Java/Python SDK generation due to collision with ARM common-type Sku"
   sku?: Sku;
 
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag' which would be a breaking change"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -62,7 +62,6 @@ interface ManagedComputeDeployments {
   /**
    * Updates the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "PATCH for 'createOrUpdate' follows existing service implementation pattern"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ManagedComputeDeployment,
@@ -79,11 +78,19 @@ interface ManagedComputeDeployments {
   /**
    * Deletes the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ManagedComputeDeployment can have dependent resources, deleting it will be a LRO, result code will be 202. If the dependent resource is not provisioned, the result code will be 200."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Managed compute deployment delete can complete synchronously with 200 OK, or asynchronously with 202 Accepted and LRO headers."
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedComputeDeployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+          ArmOperationStatus,
+          void
+        > &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,16 +102,20 @@ interface ManagedComputeDeployments {
   >;
 }
 
-@@doc(ManagedComputeDeployment.name,
+@@doc(
+  ManagedComputeDeployment.name,
   "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
 @@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
-@@doc(ManagedComputeDeployment.properties,
+@@doc(
+  ManagedComputeDeployment.properties,
   "Properties of the Cognitive Services managed compute deployment."
 );
-@@doc(ManagedComputeDeployments.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedComputeDeployments.createOrUpdate::parameters.resource,
   "The managed compute deployment properties."
 );
-@@doc(ManagedComputeDeployments.update::parameters.properties,
+@@doc(
+  ManagedComputeDeployments.update::parameters.properties,
   "The managed compute deployment patch properties."
 );

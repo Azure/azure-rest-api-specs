@@ -43,6 +43,7 @@ import "./StaticSiteUserProvidedFunctionAppARMResource.tsp";
 import "./StaticSiteBasicAuthPropertiesARMResource.tsp";
 import "./StaticSiteCustomDomainOverviewARMResource.tsp";
 import "./StaticSiteLinkedBackendARMResource.tsp";
+import "./StaticSitesAsyncOperations.tsp";
 import "./Site.tsp";
 import "./AIGateway.tsp";
 import "./BackupItem.tsp";
@@ -113,9 +114,14 @@ enum Versions {
   v2025_05_01: "2025-05-01",
 
   /**
-   * The 2026-03-01-preview API version.
+   * The 2026-03-15 API version.
    */
   v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-03-15 API version.
+   */
+  v2026_03_15: "2026-03-15",
 }
 
 @tag("Provider")
