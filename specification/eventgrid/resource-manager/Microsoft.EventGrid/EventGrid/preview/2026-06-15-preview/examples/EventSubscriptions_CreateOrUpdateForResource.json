@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "eventSubscriptionInfo": {
+      "properties": {
+        "destination": {
+          "endpointType": "WebHook",
+          "properties": {
+            "endpointUrl": "https://requestb.in/15ksip71"
+          }
+        },
+        "filter": {
+          "isSubjectCaseSensitive": false,
+          "subjectBeginsWith": "ExamplePrefix",
+          "subjectEndsWith": "ExampleSuffix"
+        }
+      }
+    },
+    "eventSubscriptionName": "examplesubscription10",
+    "scope": "subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "examplesubscription10",
+        "type": "Microsoft.EventGrid/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription10",
+        "properties": {
+          "destination": {
+            "endpointType": "WebHook",
+            "properties": {
+              "endpointBaseUrl": "https://requestb.in/15ksip71"
+            }
+          },
+          "filter": {
+            "isSubjectCaseSensitive": false,
+            "subjectBeginsWith": "ExamplePrefix",
+            "subjectEndsWith": "ExampleSuffix"
+          },
+          "provisioningState": "Succeeded",
+          "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1"
+        }
+      }
+    }
+  },
+  "operationId": "EventSubscriptions_CreateOrUpdate",
+  "title": "EventSubscriptions_CreateOrUpdateForResource"
+}
