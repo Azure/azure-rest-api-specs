@@ -31,43 +31,67 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Critical: Request suffix → Content suffix
 // =====================================================================
-@@clientName(CancelOperationsRequest, "CancelOperationsContent", "csharp");
+@@clientName(
+  CancelOperationsRequest,
+  "BulkActionCancelOperationsContent",
+  "csharp"
+);
 @@clientName(ExecuteTypeRequest, "ExecuteTypeContent", "csharp");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "csharp");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "csharp");
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "csharp");
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "csharp");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent", "csharp");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "csharp");
+@@clientName(ExecuteCreateRequest, "BulkActionExecuteCreateContent", "csharp");
+@@clientName(
+  ExecuteDeallocateRequest,
+  "BulkActionExecuteDeallocateContent",
+  "csharp"
+);
+@@clientName(ExecuteDeleteRequest, "BulkActionExecuteDeleteContent", "csharp");
+@@clientName(
+  ExecuteHibernateRequest,
+  "BulkActionExecuteHibernateContent",
+  "csharp"
+);
+@@clientName(ExecuteStartRequest, "BulkActionExecuteStartContent", "csharp");
+@@clientName(
+  GetOperationStatusRequest,
+  "BulkActionGetOperationStatusContent",
+  "csharp"
+);
 
 // =====================================================================
 // Critical: Response suffix → Result suffix
 // =====================================================================
-@@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
+@@clientName(
+  CancelOperationsResponse,
+  "BulkActionCancelOperationsResult",
+  "csharp"
+);
 @@clientName(
   CreateResourceOperationResponse,
-  "CreateResourceOperationResult",
+  "BulkActionCreateResourceOperationResult",
   "csharp"
 );
 @@clientName(
   DeallocateResourceOperationResponse,
-  "DeallocateResourceOperationResult",
+  "BulkActionDeallocateResourceOperationResult",
   "csharp"
 );
 @@clientName(
   DeleteResourceOperationResponse,
-  "DeleteResourceOperationResult",
+  "BulkActionDeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
+@@clientName(
+  GetOperationStatusResponse,
+  "BulkActionGetOperationStatusResult",
+  "csharp"
+);
 @@clientName(
   HibernateResourceOperationResponse,
-  "HibernateResourceOperationResult",
+  "BulkActionHibernateResourceOperationResult",
   "csharp"
 );
 @@clientName(
   StartResourceOperationResponse,
-  "StartResourceOperationResult",
+  "BulkActionStartResourceOperationResult",
   "csharp"
 );
 
@@ -75,10 +99,14 @@ namespace Microsoft.ComputeBulkActions;
 // Critical: Parameters suffix
 // =====================================================================
 @@clientName(ExecutionParameters, "BulkActionExecutionConfig", "csharp");
-@@clientName(ManagedDiskParameters, "ManagedDiskInfo", "csharp");
+@@clientName(
+  ManagedDiskParameters,
+  "ComputeBulkActionsManagedDiskInfo",
+  "csharp"
+);
 @@clientName(
   DiskEncryptionSetParameters,
-  "DiskEncryptionSetReference",
+  "ComputeBulkActionsDiskEncryptionSetReference",
   "csharp"
 );
 
@@ -98,7 +126,11 @@ namespace Microsoft.ComputeBulkActions;
   "csharp"
 );
 @@clientName(ProtocolTypes, "ComputeBulkActionsProtocolType", "csharp");
-@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
+@@clientName(
+  SecurityEncryptionTypes,
+  "ComputeBulkActionsSecurityEncryptionType",
+  "csharp"
+);
 @@clientName(SecurityTypes, "ComputeBulkActionsSecurityType", "csharp");
 @@clientName(
   SettingNames,
@@ -145,8 +177,8 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Warning: Ambiguous type names
 // =====================================================================
-@@clientName(Mode, "ProxyAgentMode", "csharp");
-@@clientName(Modes, "HostEndpointMode", "csharp");
+@@clientName(Mode, "ComputeBulkActionsProxyAgentMode", "csharp");
+@@clientName(Modes, "ComputeBulkActionsHostEndpointMode", "csharp");
 @@clientName(ApiError, "ComputeBulkActionsApiError", "csharp");
 @@clientName(ApiErrorBase, "ComputeBulkActionsApiErrorBase", "csharp");
 @@clientName(InnerError, "ComputeBulkActionsInnerError", "csharp");
@@ -226,6 +258,120 @@ namespace Microsoft.ComputeBulkActions;
 );
 @@clientName(PriorityProfile, "ComputeBulkActionsPriorityProfile", "csharp");
 @@clientName(ZonePreference, "ComputeBulkActionsZonePreference", "csharp");
+@@clientName(
+  ResourceOperationDetails,
+  "BulkActionResourceOperationDetails",
+  "csharp"
+);
+@@clientName(
+  ResourceOperationError,
+  "BulkActionResourceOperationError",
+  "csharp"
+);
+@@clientName(
+  ResourceOperationType,
+  "BulkActionResourceOperationType",
+  "csharp"
+);
+@@clientName(
+  ResourceProvisionPayload,
+  "BulkActionResourceProvisionPayload",
+  "csharp"
+);
+@@clientName(VMOperationStatus, "BulkActionVMOperationStatus", "csharp");
+@@clientName(
+  AcceleratorManufacturer,
+  "ComputeBulkActionsAcceleratorManufacturer",
+  "csharp"
+);
+@@clientName(AcceleratorType, "ComputeBulkActionsAcceleratorType", "csharp");
+@@clientName(ArchitectureType, "ComputeBulkActionsArchitectureType", "csharp");
+@@clientName(CpuManufacturer, "ComputeBulkActionsCpuManufacturer", "csharp");
+@@clientName(ComputeProfile, "BulkActionComputeProfile", "csharp");
+@@clientName(
+  HostEndpointSettings,
+  "ComputeBulkActionsHostEndpointSettings",
+  "csharp"
+);
+@@clientName(
+  ProxyAgentSettings,
+  "ComputeBulkActionsProxyAgentSettings",
+  "csharp"
+);
+@@clientName(
+  DiskEncryptionSettings,
+  "ComputeBulkActionsDiskEncryptionSettings",
+  "csharp"
+);
+@@clientName(
+  KeyVaultKeyReference,
+  "ComputeBulkActionsKeyVaultKeyReference",
+  "csharp"
+);
+@@clientName(
+  KeyVaultSecretReference,
+  "ComputeBulkActionsKeyVaultSecretReference",
+  "csharp"
+);
+@@clientName(PublicIPAddressSku, "ComputeBulkActionsPublicIPAddressSku", "csharp");
+@@clientName(
+  PublicIPAddressSkuName,
+  "ComputeBulkActionsPublicIPAddressSkuName",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuTier,
+  "ComputeBulkActionsPublicIPAddressSkuTier",
+  "csharp"
+);
+@@clientName(
+  PublicIPAllocationMethod,
+  "ComputeBulkActionsPublicIPAllocationMethod",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceAuxiliaryMode,
+  "ComputeBulkActionsNetworkInterfaceAuxiliaryMode",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceAuxiliarySku,
+  "ComputeBulkActionsNetworkInterfaceAuxiliarySku",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties,
+  "ComputeBulkActionsNetworkInterfaceReferenceProperties",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsPolicy,
+  "ComputeBulkActionsScheduledEventsPolicy",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsProfile,
+  "ComputeBulkActionsScheduledEventsProfile",
+  "csharp"
+);
+@@clientName(
+  TerminateNotificationProfile,
+  "ComputeBulkActionsTerminateNotificationProfile",
+  "csharp"
+);
+@@clientName(VaultCertificate, "ComputeBulkActionsVaultCertificate", "csharp");
+@@clientName(VaultSecretGroup, "ComputeBulkActionsVaultSecretGroup", "csharp");
+@@clientName(VMCategory, "ComputeBulkActionsVMCategory", "csharp");
+@@clientName(
+  ZoneAllocationPolicy,
+  "ComputeBulkActionsZoneAllocationPolicy",
+  "csharp"
+);
+@@clientName(
+  ZoneDistributionStrategy,
+  "ComputeBulkActionsZoneDistributionStrategy",
+  "csharp"
+);
 
 // =====================================================================
 // Warning: DateTimeOffset property naming (*On suffix)
