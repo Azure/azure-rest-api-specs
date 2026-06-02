@@ -138,7 +138,7 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(SecurityTypes, "ComputeBulkActionsSecurityType", "csharp");
 @@clientName(
   SettingNames,
-  "AdditionalUnattendContentSettingName",
+  "ComputeBulkActionsAdditionalUnattendContentSettingName",
   "csharp"
 );
 @@clientName(
