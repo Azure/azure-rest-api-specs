@@ -10,6 +10,7 @@ using Microsoft.DevHub;
 @@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "java");
 @@clientName(PullRequest.prURL, "prUrl", "java");
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
+@@clientName(Microsoft.DevHub, "DevHubMgmtClient", "python");
 @@clientName(ACR, "Acr", "java,javascript");
 @@clientName(Deployment, "DeploymentProperties", "java,javascript");
 // consistency on "AdoOAuth"
