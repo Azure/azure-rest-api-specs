@@ -35,6 +35,11 @@ namespace Microsoft.CleanRoom;
  */
 enum Versions {
   /**
+   * The 2025-01-31-preview API version.
+   */
+  v2025_01_31_preview: "2025-01-31-preview",
+
+  /**
    * The 2025-10-31-preview API version.
    */
   v2025_10_31_preview: "2025-10-31-preview",

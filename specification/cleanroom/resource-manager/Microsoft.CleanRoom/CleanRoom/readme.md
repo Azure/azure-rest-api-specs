@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2026-04-30-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-04-30-preview'
 input-file:
-  - Microsoft.CleanRoom/preview/2026-04-30-preview/openapi.json
+  - preview/2026-04-30-preview/openapi.json
 ```
 
 ### Tag: package-preview-2026-03-31-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-preview-2026-03-31-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-03-31-preview'
 input-file:
-  - Microsoft.CleanRoom/preview/2026-03-31-preview/openapi.json
+  - preview/2026-03-31-preview/openapi.json
 ```
 
 ### Tag: package-preview-2025-10-31-preview
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-preview-2025-10-31-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-31-preview'
 input-file:
-  - Microsoft.CleanRoom/preview/2025-10-31-preview/openapi.json
+  - preview/2025-10-31-preview/openapi.json
 ```
 
 ### Tag: package-2025-01-31-preview
@@ -63,19 +63,7 @@ These settings apply only when `--tag=package-2025-01-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-01-31-preview'
 input-file:
-  - Microsoft.CleanRoom/preview/2025-01-31-preview/openapi.json
-```
-
-### Tag: package-2022-12-31-preview
-
-These settings apply only when `--tag=package-2022-12-31-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-12-31-preview'
-input-file:
-  - Microsoft.CleanRoom/preview/2022-12-31-preview/cleanrooms.json
-  - Microsoft.CleanRoom/preview/2022-12-31-preview/microservices.json
-  - Microsoft.CleanRoom/preview/2022-12-31-preview/operations.json
-  - Microsoft.CleanRoom/preview/2022-12-31-preview/commonTypes.json
+  - preview/2025-01-31-preview/openapi.json
 ```
 
 ---
