@@ -1498,42 +1498,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.createdByType": {
-      "type": "string",
-      "description": "The kind of entity that created the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "createdByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "The entity was created by a user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "The entity was created by an application."
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "The entity was created by a managed identity."
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "The entity was created by a key."
-          }
-        ]
-      }
-    },
     "AzureFirewallApplicationRuleProtocolType": {
       "type": "string",
       "description": "The protocol type of a Application Rule resource.",
@@ -3831,6 +3795,42 @@
             "name": "Full",
             "value": "Full",
             "description": "Full"
+          }
+        ]
+      }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
           }
         ]
       }
@@ -7860,7 +7860,7 @@
           "description": "The identity that created the resource."
         },
         "createdByType": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.createdByType",
+          "$ref": "#/definitions/CreatedByType",
           "description": "The type of identity that created the resource."
         },
         "createdAt": {
@@ -7873,7 +7873,7 @@
           "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.createdByType",
+          "$ref": "#/definitions/CreatedByType",
           "description": "The type of identity that last modified the resource."
         },
         "lastModifiedAt": {
