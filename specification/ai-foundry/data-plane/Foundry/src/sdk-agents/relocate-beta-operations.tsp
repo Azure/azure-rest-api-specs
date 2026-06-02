@@ -10,7 +10,7 @@ namespace Azure.AI.Projects.Beta;
 @@clientInitialization(
   Azure.AI.Projects.Beta,
   {
-    initializedBy: InitializedBy.individually,
+    initializedBy: InitializedBy.individually | InitializedBy.parent,
   },
   "java"
 );
