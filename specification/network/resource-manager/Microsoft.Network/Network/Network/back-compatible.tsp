@@ -2096,3 +2096,8 @@ using TypeSpec.Versioning;
   DdosCustomPolicyPropertiesFormat.publicIPAddresses,
   Microsoft.Network.Versions.v2025_07_01
 );
+
+@@clientName(
+  SecurityPerimeterResource.systemData,
+  "SecurityPerimeterSystemData"
+);
