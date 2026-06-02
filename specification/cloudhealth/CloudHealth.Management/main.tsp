@@ -1271,8 +1271,9 @@ model DiscoveryRuleProperties {
   numberOfDiscoveredEntities?: int32;
 
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_09_01)
   @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
-  entityName: string;
+  entityName?: string;
 }
 
 @added(Versions.v2026_01_01_preview)
