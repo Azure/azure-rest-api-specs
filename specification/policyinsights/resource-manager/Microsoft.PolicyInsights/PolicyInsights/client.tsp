@@ -1490,7 +1490,7 @@ op remediationsListDeploymentsAtSubscription(
   | ArmResponse<RemediationDeploymentsListResult>
   | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationSubscriptionOperations.listDeploymentsAtSubscription,
+  Remediations.listDeploymentsAtSubscription,
   remediationsListDeploymentsAtSubscription,
   "!java,!python"
 );
@@ -1509,7 +1509,7 @@ op remediationsListForSubscription(
   queryOptions?: RemediationsListForSubscriptionQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationSubscriptionOperations.listForSubscription,
+  Remediations.listForSubscription,
   remediationsListForSubscription,
   "!java,!python"
 );
@@ -1533,7 +1533,7 @@ op remediationsListDeploymentsAtResourceGroup(
   | ArmResponse<RemediationDeploymentsListResult>
   | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
+  Remediations.listDeploymentsAtResourceGroup,
   remediationsListDeploymentsAtResourceGroup,
   "!java,!python"
 );
@@ -1548,7 +1548,7 @@ op remediationsListForResourceGroup(
   queryOptions?: RemediationsListForResourceGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceGroupOperations.listForResourceGroup,
+  Remediations.listForResourceGroup,
   remediationsListForResourceGroup,
   "!java,!python"
 );
@@ -1572,7 +1572,7 @@ op remediationsListDeploymentsAtResource(
   | ArmResponse<RemediationDeploymentsListResult>
   | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceOperations.listDeploymentsAtResource,
+  Remediations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
   "!java,!python"
 );
@@ -1589,7 +1589,7 @@ op remediationsListForResource(
   queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  RemediationResourceOperations.listForResource,
+  Remediations.listForResource,
   remediationsListForResource,
   "!java,!python"
 );
@@ -1625,7 +1625,7 @@ op attestationsListForResourceGroup(
   queryOptions?: AttestationsListForResourceGroupQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  AttestationResourceGroupOperations.listForResourceGroup,
+  Attestations.listForResourceGroup,
   attestationsListForResourceGroup,
   "!java,!python"
 );
@@ -1642,7 +1642,7 @@ op attestationsListForResource(
   queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
 @@override(
-  AttestationOperationGroup.listForResource,
+  Attestations.listForResource,
   attestationsListForResource,
   "!java,!python"
 );
