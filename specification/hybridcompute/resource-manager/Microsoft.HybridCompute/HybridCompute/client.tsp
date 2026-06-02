@@ -347,6 +347,12 @@ union CustomPublicNetworkAccessType {
 // MachineRunCommandData backward compatibility with the existing SDK API.
 @@alternateType(MachineRunCommandProperties.outputBlobUri, url, "csharp");
 @@alternateType(MachineRunCommandProperties.errorBlobUri, url, "csharp");
+@@clientName(
+  MachineRunCommandProperties.asyncExecution,
+  "IsAsyncExecution",
+  "csharp"
+);
+@@clientName(RunCommandInputParameter, "RunCommandInputContent", "csharp");
 
 // C# backward compatibility with the checked-in .NET API listings.
 @@clientName(ExtensionsStatusLevelTypes, "ExtensionsStatusLevelType", "csharp");
