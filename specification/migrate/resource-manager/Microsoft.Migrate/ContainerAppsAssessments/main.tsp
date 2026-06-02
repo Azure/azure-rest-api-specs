@@ -16,7 +16,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations endpoint is provided by the parent AssessmentProjects.Management project"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations endpoint is provided by the parent AssessmentProjects project"
 @armProviderNamespace
 @service(#{ title: "Azure Migrate Assessment Service" })
 @versioned(ContainerAppsApiVersions)
