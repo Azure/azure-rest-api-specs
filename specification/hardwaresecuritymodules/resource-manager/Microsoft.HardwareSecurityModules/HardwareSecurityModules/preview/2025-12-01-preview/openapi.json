@@ -1864,7 +1864,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,23}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Parameters to create Payment HSM Cluster",
             "required": true,
@@ -1941,7 +1941,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,23}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "Parameters to create Payment HSM Cluster",
             "required": true,
@@ -2751,7 +2751,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PaymentHsmClusterProperties",
-          "description": "Properties of the Payment HSM Cluster"
+          "description": "Properties of the Payment HSM Cluster",
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/PaymentHsmClusterSku",
@@ -2856,7 +2857,7 @@
     },
     "PaymentHsmClusterSku": {
       "type": "object",
-      "description": "Cloud Hsm Cluster SKU information",
+      "description": "Payment Hsm Cluster SKU information",
       "properties": {
         "family": {
           "$ref": "#/definitions/PaymentHsmClusterSkuFamily",

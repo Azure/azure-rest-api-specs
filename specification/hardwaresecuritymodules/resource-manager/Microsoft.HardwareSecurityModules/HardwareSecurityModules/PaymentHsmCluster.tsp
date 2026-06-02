@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
@@ -89,13 +90,16 @@ interface PaymentHsmClusters {
 
 @@maxLength(PaymentHsmCluster.name, 23);
 @@minLength(PaymentHsmCluster.name, 3);
-@@doc(PaymentHsmCluster.name,
+@@doc(
+  PaymentHsmCluster.name,
   "The name of the Payment HSM Cluster within the specified resource group. Payment HSM Cluster names must be between 3 and 23 characters in length."
 );
 @@doc(PaymentHsmCluster.properties, "Properties of the Payment HSM Cluster");
-@@doc(PaymentHsmClusters.createOrUpdate::parameters.resource,
+@@doc(
+  PaymentHsmClusters.createOrUpdate::parameters.resource,
   "Parameters to create Payment HSM Cluster"
 );
-@@doc(PaymentHsmClusters.update::parameters.properties,
+@@doc(
+  PaymentHsmClusters.update::parameters.properties,
   "Parameters to create Payment HSM Cluster"
 );

@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -862,7 +863,7 @@ enum PaymentHsmClusterSkuName {
 }
 
 /**
- * Cloud Hsm Cluster SKU information
+ * Payment Hsm Cluster SKU information
  */
 @Versioning.added(Versions.v2025_12_01_preview)
 model PaymentHsmClusterSku {
