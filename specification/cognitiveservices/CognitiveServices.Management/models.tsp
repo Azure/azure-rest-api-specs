@@ -3086,6 +3086,12 @@ model DeploymentProperties {
   `model`?: DeploymentModel;
 
   /**
+   * Speculative decoding settings for the deployment. This configuration applies to Fireworks model formats.
+   */
+  @added(Versions.v2026_05_15_preview)
+  speculativeDecoding?: DeploymentSpeculativeDecoding;
+
+  /**
    * Properties of Cognitive Services account deployment model. (Deprecated, please use Deployment.sku instead.)
    */
   scaleSettings?: DeploymentScaleSettings;
@@ -3160,6 +3166,23 @@ model DeploymentProperties {
    * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
+}
+
+/**
+ * Speculative decoding settings for a deployment.
+ */
+@added(Versions.v2026_05_15_preview)
+model DeploymentSpeculativeDecoding {
+  /**
+   * Draft model used to generate speculative decoding tokens.
+   */
+  draftModel: DeploymentModel;
+
+  /**
+   * The number of draft tokens attempted per speculation step.
+   */
+  @minValue(1)
+  draftTokenCount?: int32 = 4;
 }
 
 /**
