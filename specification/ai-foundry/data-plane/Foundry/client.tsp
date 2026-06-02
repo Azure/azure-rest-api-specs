@@ -65,18 +65,14 @@ using Azure.AI.Projects;
 @@clientName(Agents.getAgent, "get");
 @@clientName(Agents.deleteAgent, "delete");
 @@clientName(Agents.listAgents, "list");
-@@clientName(Agents.createAgentVersion, "create_version", "python");
-@@clientName(Agents.getAgentVersion, "get_version", "python");
-@@clientName(Agents.deleteAgentVersion, "delete_version", "python");
-@@clientName(Agents.listAgentVersions, "list_versions", "python");
+@@clientName(Agents.createAgentVersion, "createVersion");
+@@clientName(Agents.getAgentVersion, "getVersion");
+@@clientName(Agents.deleteAgentVersion, "deleteVersion");
+@@clientName(Agents.listAgentVersions, "listVersions");
 @@clientName(Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
-@@clientName(Agents.createAgentVersion, "createVersion", "javascript");
-@@clientName(Agents.getAgentVersion, "getVersion", "javascript");
-@@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
-@@clientName(Agents.listAgentVersions, "listVersions", "javascript");
 
 // Exclude these operations entirely from the Python SDK.
 // Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
@@ -115,19 +111,12 @@ using Azure.AI.Projects;
 @@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
 @@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
 
-// Data generation jobs — renamed for Python SDK discoverability
-@@clientName(DataGenerationJobs.get, "get_generation_job", "python");
-@@clientName(DataGenerationJobs.list, "list_generation_jobs", "python");
-@@clientName(DataGenerationJobs.create, "create_generation_job", "python");
-@@clientName(DataGenerationJobs.cancel, "cancel_generation_job", "python");
-@@clientName(DataGenerationJobs.delete, "delete_generation_job", "python");
-
-// Data generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(DataGenerationJobs.get, "getGenerationJob", "javascript");
-@@clientName(DataGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(DataGenerationJobs.create, "createGenerationJob", "javascript");
-@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob", "javascript");
-@@clientName(DataGenerationJobs.delete, "deleteGenerationJob", "javascript");
+// Data generation jobs — renamed for SDK discoverability
+@@clientName(DataGenerationJobs.get, "getGenerationJob");
+@@clientName(DataGenerationJobs.list, "listGenerationJobs");
+@@clientName(DataGenerationJobs.create, "createGenerationJob");
+@@clientName(DataGenerationJobs.cancel, "cancelGenerationJob");
+@@clientName(DataGenerationJobs.delete, "deleteGenerationJob");
 
 // More accurate naming
 @@clientName(AssetCredentialResponse, "DatasetCredential");
@@ -195,58 +184,15 @@ using Azure.AI.Projects;
 // Beta Agents sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(AgentOptimizationJobs.create, "create_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.get, "get_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.list, "list_optimization_jobs", "python");
-@@clientName(AgentOptimizationJobs.cancel, "cancel_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.delete, "delete_optimization_job", "python");
-@@clientName(AgentOptimizationJobs.listCandidates,
-  "list_optimization_candidates",
-  "python"
-);
-@@clientName(AgentOptimizationJobs.getCandidate,
-  "get_optimization_candidate",
-  "python"
-);
-@@clientName(AgentOptimizationJobs.getCandidateConfig,
-  "get_optimization_candidate_config",
-  "python"
-);
-@@clientName(AgentOptimizationJobs.getCandidateResults,
-  "get_optimization_candidate_results",
-  "python"
-);
-
-@@clientName(AgentOptimizationJobs.create,
-  "createOptimizationJob",
-  "javascript"
-);
-@@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "javascript");
-@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "javascript");
-@@clientName(AgentOptimizationJobs.cancel,
-  "cancelOptimizationJob",
-  "javascript"
-);
-@@clientName(AgentOptimizationJobs.delete,
-  "deleteOptimizationJob",
-  "javascript"
-);
-@@clientName(AgentOptimizationJobs.listCandidates,
-  "listOptimizationCandidates",
-  "javascript"
-);
-@@clientName(AgentOptimizationJobs.getCandidate,
-  "getOptimizationCandidate",
-  "javascript"
-);
-@@clientName(AgentOptimizationJobs.getCandidateConfig,
-  "getOptimizationCandidateConfig",
-  "javascript"
-);
-@@clientName(AgentOptimizationJobs.getCandidateResults,
-  "getOptimizationCandidateResults",
-  "javascript"
-);
+@@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
+@@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
+@@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
+@@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
+@@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
+@@clientName(AgentOptimizationJobs.listCandidates, "listOptimizationCandidates");
+@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate");
+@@clientName(AgentOptimizationJobs.getCandidateConfig, "getOptimizationCandidateConfig");
+@@clientName(AgentOptimizationJobs.getCandidateResults, "getOptimizationCandidateResults");
 
 // DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
 // to define Agent optimization request. If emitted as-is, it pulls in a lot of
@@ -265,15 +211,7 @@ using Azure.AI.Projects;
 @@scope(Agents.updateAgentFromCode, "!(python, javascript)");
 
 @@clientName(Agents.downloadAgentCode, "download_code", "python");
-
-@@clientName(Agents.createAgentVersionFromCode,
-  "create_version_from_code",
-  "python"
-);
-@@clientName(Agents.createAgentVersionFromCode,
-  "createVersionFromCode",
-  "javascript"
-);
+@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
 @@clientName(SessionDirectoryListResponse,
@@ -358,15 +296,13 @@ using Azure.AI.Projects;
 // Beta Routines sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Routines.createOrUpdateRoutine, "create_or_update", "python");
-@@clientName(Routines.createOrUpdateRoutine, "createOrUpdate", "javascript");
+@@clientName(Routines.createOrUpdateRoutine, "createOrUpdate");
 @@clientName(Routines.getRoutine, "get");
 @@clientName(Routines.enableRoutine, "enable");
 @@clientName(Routines.disableRoutine, "disable");
 @@clientName(Routines.listRoutines, "list");
 @@clientName(Routines.deleteRoutine, "delete");
-@@clientName(Routines.listRoutineRuns, "list_runs", "python");
-@@clientName(Routines.listRoutineRuns, "listRuns", "javascript");
+@@clientName(Routines.listRoutineRuns, "listRuns");
 @@clientName(Routines.dispatchRoutineAsync, "dispatch");
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
 
@@ -380,39 +316,16 @@ using Azure.AI.Projects;
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
-// Evaluator generation jobs — unscoped names (fixes AllScopes conflict)
-@@clientName(EvaluatorGenerationJobs.create, "create_generation_job");
-@@clientName(EvaluatorGenerationJobs.get, "get_generation_job");
-@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job");
-@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job");
-
-// Evaluator generation jobs — renamed for JavaScript SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create,
-  "createGenerationJob",
-  "javascript"
-);
-@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob", "javascript");
-@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs", "javascript");
-@@clientName(EvaluatorGenerationJobs.cancel,
-  "cancelGenerationJob",
-  "javascript"
-);
-@@clientName(EvaluatorGenerationJobs.delete,
-  "deleteGenerationJob",
-  "javascript"
-);
+// Evaluator generation jobs — renamed for SDK discoverability
+@@clientName(EvaluatorGenerationJobs.create, "createGenerationJob");
+@@clientName(EvaluatorGenerationJobs.get, "getGenerationJob");
+@@clientName(EvaluatorGenerationJobs.list, "listGenerationJobs");
+@@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob");
+@@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
-
-// Evaluator generation jobs — renamed for Python SDK discoverability
-@@clientName(EvaluatorGenerationJobs.create, "create_generation_job", "python");
-@@clientName(EvaluatorGenerationJobs.get, "get_generation_job", "python");
-@@clientName(EvaluatorGenerationJobs.list, "list_generation_jobs", "python");
-@@clientName(EvaluatorGenerationJobs.cancel, "cancel_generation_job", "python");
-@@clientName(EvaluatorGenerationJobs.delete, "delete_generation_job", "python");
 
 // // EvaluationSuites versioned operations
 // @@clientName(EvaluationSuites.listVersions, "list_evaluation_suite_versions");
