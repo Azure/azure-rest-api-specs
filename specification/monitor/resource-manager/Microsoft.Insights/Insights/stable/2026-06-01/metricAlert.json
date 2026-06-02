@@ -199,7 +199,7 @@
         "tags": [
           "MetricAlerts"
         ],
-        "description": "Create or update an metric alert definition.",
+        "description": "Create or update a metric alert definition.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -230,6 +230,12 @@
         "responses": {
           "200": {
             "description": "Resource 'MetricAlertResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetricAlertResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'MetricAlertResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/MetricAlertResource"
             }
@@ -272,7 +278,7 @@
           "Create or update an alert rule on Resource group(s)": {
             "$ref": "./examples/createOrUpdateMetricAlertResourceGroup.json"
           },
-          "Create or update an alert rule on Subscription ": {
+          "Create or update an alert rule on Subscription": {
             "$ref": "./examples/createOrUpdateMetricAlertSubscription.json"
           },
           "Create or update an alert rules with dimensions": {
@@ -285,7 +291,7 @@
         "tags": [
           "MetricAlerts"
         ],
-        "description": "Update an metric alert definition.",
+        "description": "Update a metric alert definition.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -738,7 +744,9 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "Alert severity {0, 1, 2, 3, 4}"
+          "description": "Alert severity {0, 1, 2, 3, 4}",
+          "minimum": 0,
+          "maximum": 4
         },
         "enabled": {
           "type": "boolean",
