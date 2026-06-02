@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -3565,6 +3567,12 @@ model NamespaceProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipV6Enabled?: boolean;
+
+  /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
    */
   @identifiers(#[])
@@ -3958,6 +3966,12 @@ model NamespaceUpdateParameterProperties {
    * You can further restrict to specific IPs by configuring <seealso cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.PubSub.NamespaceUpdateParameterProperties.InboundIpRules" />
    */
   publicNetworkAccess?: PublicNetworkAccess;
+
+  /**
+   * This property indicates if IPv6 is enabled for the namespace.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipV6Enabled?: boolean;
 
   /**
    * This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.
