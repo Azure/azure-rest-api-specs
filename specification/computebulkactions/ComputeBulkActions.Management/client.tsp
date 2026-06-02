@@ -114,11 +114,15 @@ namespace Microsoft.ComputeBulkActions;
 // Warning: Plural enum names → singular
 // =====================================================================
 @@clientName(CachingTypes, "ComputeBulkActionsCachingType", "csharp");
-@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
-@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
-@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
-@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
-@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
+@@clientName(DiskControllerTypes, "ComputeBulkActionsDiskControllerType", "csharp");
+@@clientName(DiskCreateOptionTypes, "ComputeBulkActionsDiskCreateOptionType", "csharp");
+@@clientName(DiskDeleteOptionTypes, "ComputeBulkActionsDiskDeleteOptionType", "csharp");
+@@clientName(DiskDetachOptionTypes, "ComputeBulkActionsDiskDetachOptionType", "csharp");
+@@clientName(
+  DomainNameLabelScopeTypes,
+  "ComputeBulkActionsDomainNameLabelScopeType",
+  "csharp"
+);
 @@clientName(IPVersions, "ComputeBulkActionsIPVersion", "csharp");
 @@clientName(
   OperatingSystemTypes,
@@ -143,7 +147,7 @@ namespace Microsoft.ComputeBulkActions;
   "csharp"
 );
 @@clientName(DeleteOptions, "ComputeBulkActionsDeleteOption", "csharp");
-@@clientName(DiffDiskOptions, "DiffDiskOption", "csharp");
+@@clientName(DiffDiskOptions, "ComputeBulkActionsDiffDiskOption", "csharp");
 
 // =====================================================================
 // Warning: Acronym casing
@@ -372,6 +376,136 @@ namespace Microsoft.ComputeBulkActions;
   "ComputeBulkActionsZoneDistributionStrategy",
   "csharp"
 );
+@@clientName(
+  AdditionalUnattendContent,
+  "ComputeBulkActionsAdditionalUnattendContent",
+  "csharp"
+);
+@@clientName(
+  DiffDiskPlacement,
+  "ComputeBulkActionsDiffDiskPlacement",
+  "csharp"
+);
+@@clientName(DiffDiskSettings, "ComputeBulkActionsDiffDiskSettings", "csharp");
+@@clientName(
+  EventGridAndResourceGraph,
+  "ComputeBulkActionsEventGridAndResourceGraph",
+  "csharp"
+);
+@@clientName(HyperVGeneration, "ComputeBulkActionsHyperVGeneration", "csharp");
+@@clientName(
+  LaunchBulkInstancesOperationProperties,
+  "ComputeBulkActionsLaunchBulkInstancesOperationProperties",
+  "csharp"
+);
+@@clientName(
+  LinuxPatchAssessmentMode,
+  "ComputeBulkActionsLinuxPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(LinuxPatchSettings, "ComputeBulkActionsLinuxPatchSettings", "csharp");
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+  "ComputeBulkActionsLinuxVMGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings,
+  "ComputeBulkActionsLinuxVMGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchMode,
+  "ComputeBulkActionsLinuxVMGuestPatchMode",
+  "csharp"
+);
+@@clientName(LocalStorageDiskType, "ComputeBulkActionsLocalStorageDiskType", "csharp");
+@@clientName(
+  OSImageNotificationProfile,
+  "ComputeBulkActionsOSImageNotificationProfile",
+  "csharp"
+);
+@@clientName(UefiSettings, "ComputeBulkActionsUefiSettings", "csharp");
+@@clientName(
+  VirtualMachineIpTag,
+  "ComputeBulkActionsVirtualMachineIpTag",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfiguration,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfiguration,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceIPConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfiguration,
+  "ComputeBulkActionsVirtualMachinePublicIPAddressConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties,
+  "ComputeBulkActionsVirtualMachinePublicIPAddressConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressDnsSettingsConfiguration,
+  "ComputeBulkActionsVirtualMachinePublicIPAddressDnsSettingsConfiguration",
+  "csharp"
+);
+@@clientName(
+  VMAttributeMinMaxDouble,
+  "ComputeBulkActionsVMAttributeMinMaxDouble",
+  "csharp"
+);
+@@clientName(
+  VMAttributeMinMaxInteger,
+  "ComputeBulkActionsVMAttributeMinMaxInteger",
+  "csharp"
+);
+@@clientName(VMAttributes, "ComputeBulkActionsVMAttributes", "csharp");
+@@clientName(VMAttributeSupport, "ComputeBulkActionsVMAttributeSupport", "csharp");
+@@clientName(
+  VMDiskSecurityProfile,
+  "ComputeBulkActionsVMDiskSecurityProfile",
+  "csharp"
+);
+@@clientName(VMGalleryApplication, "ComputeBulkActionsVMGalleryApplication", "csharp");
+@@clientName(VmSizeProfile, "ComputeBulkActionsVmSizeProfile", "csharp");
+@@clientName(
+  WindowsPatchAssessmentMode,
+  "ComputeBulkActionsWindowsPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+  "ComputeBulkActionsWindowsVMGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings,
+  "ComputeBulkActionsWindowsVMGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchMode,
+  "ComputeBulkActionsWindowsVMGuestPatchMode",
+  "csharp"
+);
+@@clientName(WinRMListener, "ComputeBulkActionsWinRMListener", "csharp");
 
 // =====================================================================
 // Warning: DateTimeOffset property naming (*On suffix)
