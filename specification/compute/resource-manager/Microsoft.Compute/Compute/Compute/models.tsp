@@ -3817,7 +3817,7 @@ model SkuProfileVMSize {
 }
 
 /**
- * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
+ * Specifies the configuration parameters used to control automatic SKU migration for the virtual machine scale set. When enabled, the platform may migrate instances to a different VM size from the SKU profile depending on platform demands.
  */
 @added(Versions.v2026_03_01)
 model AutomaticSkuMigrationPolicy {
