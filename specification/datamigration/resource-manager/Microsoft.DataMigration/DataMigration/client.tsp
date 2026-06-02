@@ -117,6 +117,11 @@ using Microsoft.DataMigration;
   "csharp"
 );
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
+@@clientName(
+  ResourceSkusOperationGroup.listSkus,
+  "GetSkusResourceSkus",
+  "csharp"
+);
 
 // --- Type renames (from autorest.md rename-mapping) ---
 @@clientName(AuthenticationKeys, "SqlMigrationAuthenticationKeys", "csharp");
