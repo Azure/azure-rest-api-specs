@@ -69,8 +69,8 @@ model PoolProperties {
   fabricProfile: FabricProfile;
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
-  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
-  devCenterProjectResourceId?: string;
+  @removed(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  devCenterProjectResourceId: string;
 
   @doc("The runtime configuration of the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
