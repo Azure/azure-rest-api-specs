@@ -29,8 +29,12 @@ enum Versions {
 
   /** 2026-04-17-preview version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
-  @Azure.Core.previewVersion
   v2026_04_17_preview: "2026-04-17-preview",
+
+  /** 2026-06-02-preview version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  @Azure.Core.previewVersion
+  v2026_06_02_preview: "2026-06-02-preview",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -65,7 +69,8 @@ model PoolProperties {
   fabricProfile: FabricProfile;
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
-  devCenterProjectResourceId: string;
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  devCenterProjectResourceId?: string;
 
   @doc("The runtime configuration of the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
@@ -313,6 +318,26 @@ model PoolImage {
   @visibility(Lifecycle.Read)
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   isEphemeral?: boolean;
+
+  @doc("The ARM resource ID of the storage account hosting provisioning scripts for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  provisioningScriptStorageAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  @doc("The managed identity client ID used to access provisioning script content for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  provisioningScriptManagedIdentityClientId?: string;
+
+  @doc("Determines whether the machine should be restarted after provisioning script execution for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  provisioningScriptShouldRestart?: boolean;
+
+  @doc("The provisioning script entry point for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  provisioningScriptEntryPoint?: string;
 }
 
 @doc("The OS profile of the machines in the pool.")
