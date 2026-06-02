@@ -96,7 +96,11 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ProtocolTypes, "ProtocolType", "csharp");
 @@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
 @@clientName(SecurityTypes, "SecurityType", "csharp");
-@@clientName(SettingNames, "SettingName", "csharp");
+@@clientName(
+  SettingNames,
+  "AdditionalUnattendContentSettingName",
+  "csharp"
+);
 @@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
 @@clientName(DeleteOptions, "DeleteOption", "csharp");
 @@clientName(DiffDiskOptions, "DiffDiskOption", "csharp");
@@ -141,6 +145,23 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
 @@clientName(RetryPolicy, "BulkActionRetryPolicy", "csharp");
 @@clientName(ResourceOperation, "BulkActionResourceOperationInfo", "csharp");
+@@clientName(VirtualMachine, "BulkActionVirtualMachineResult", "csharp");
+@@clientName(
+  AdditionalCapabilities,
+  "ComputeBulkActionsAdditionalCapabilities",
+  "csharp"
+);
+@@clientName(BootDiagnostics, "ComputeBulkActionsBootDiagnostics", "csharp");
+@@clientName(DataDisk, "ComputeBulkActionsDataDisk", "csharp");
+@@clientName(ImageReference, "ComputeBulkActionsImageReference", "csharp");
+@@clientName(NetworkProfile, "ComputeBulkActionsNetworkProfile", "csharp");
+@@clientName(OSDisk, "ComputeBulkActionsOSDisk", "csharp");
+@@clientName(OSProfile, "ComputeBulkActionsOSProfile", "csharp");
+@@clientName(PatchSettings, "ComputeBulkActionsPatchSettings", "csharp");
+@@clientName(SecurityProfile, "ComputeBulkActionsSecurityProfile", "csharp");
+@@clientName(StorageProfile, "ComputeBulkActionsStorageProfile", "csharp");
+@@clientName(ProvisioningState, "BulkActionProvisioningState", "csharp");
+@@clientName(OperationState, "BulkActionOperationState", "csharp");
 
 // =====================================================================
 // Warning: DateTimeOffset property naming (*On suffix)
