@@ -3647,9 +3647,34 @@ model HostPoolProvisioningControlParameter {
   cancelMessage?: string;
 }
 
-@@added(HostPoolPatch.identity, Versions.vLatestPreview);
+@@typeChangedFrom(
+  HostPool.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  HostPoolPatch.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
 @@OpenAPI.extension(HostPoolPatch.identity, "x-nullable", true);
+
+@@typeChangedFrom(
+  Workspace.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  ApplicationGroup.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
+@@typeChangedFrom(
+  ScalingPlan.identity,
+  Versions.vLatestPreview,
+  Foundations.SystemAssignedServiceIdentity
+);
 
 /**
  * HostPool properties that can be patched.
