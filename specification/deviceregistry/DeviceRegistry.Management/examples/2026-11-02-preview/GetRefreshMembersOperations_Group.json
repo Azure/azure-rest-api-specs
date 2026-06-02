@@ -1,0 +1,31 @@
+{
+  "title": "Group GetRefreshMembersOperations",
+  "operationId": "Groups_GetRefreshMembersOperations",
+  "description": "Gets the status of a refresh members operation.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-3",
+    "groupName": "my-group-1",
+    "body": {
+      "operationId": "00000000-0000-0000-0000-000000000001"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "name": "refreshMembers",
+        "status": "Succeeded",
+        "startTime": "2025-01-01T00:00:00Z",
+        "endTime": "2025-01-01T00:05:00Z",
+        "totalMemberCount": 1500,
+        "membersAddedCount": 100,
+        "membersRemovedCount": 50,
+        "membersFailedCount": 0,
+        "lastRefreshTimestamp": "2025-01-01T00:05:00Z"
+      }
+    }
+  }
+}
