@@ -1,0 +1,134 @@
+name: arm-api-reviewer-eval-typespec-required
+description: |
+  TypeSpec-required-for-new-API-versions tests (12xxxx).
+  Validates rule TSP-REQUIRED-V1: new API version directories that contain
+  only handwritten OpenAPI swagger (no sibling TypeSpec source, no
+  x-typespec-generated marker, no .tsp files added in the PR) MUST be flagged
+  as Blocking. Updates to handwritten swagger inside pre-existing API version
+  directories MUST NOT be flagged.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 120001 — Violation: new API version with handwritten swagger only
+  - name: new-api-version-handwritten-swagger-flagged
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification.
+
+      Context for this PR:
+        - The directory `specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/`
+          is a NEW API version directory introduced by this PR. It does not exist on the base branch.
+        - There are NO previous API versions for this service.
+        - The PR does NOT add or modify any `.tsp` files.
+        - There is NO sibling TypeSpec project (no `main.tsp`, no `tspconfig.yaml`) anywhere under
+          `specification/handwrittensvc/`.
+        - The swagger file does NOT contain the `x-typespec-generated` extension.
+
+      Apply all applicable review rules from the loaded instruction files,
+      including the TypeSpec-required rule defined in `openapi-review.instructions.md` §2A
+      (rule ID `TSP-REQUIRED-V1`). Report all findings with rule IDs, severity,
+      line numbers, and fix suggestions.
+
+      File: specification/handwrittensvc/resource-manager/Microsoft.HandwrittenService/stable/2026-05-01/handwrittensvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "rule TSP-REQUIRED-V1 cited"
+        config:
+          substring: "TSP-REQUIRED-V1"
+      - type: output-matches
+        name: "TSP-REQUIRED-V1 reported as Blocking"
+        config:
+          pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
+      - type: prompt
+    rubric:
+      - The agent MUST flag rule `TSP-REQUIRED-V1` as a Blocking finding because the PR introduces a new API version directory that contains only handwritten OpenAPI swagger and none of the compliance signals (sibling TypeSpec project, `x-typespec-generated` marker, or added `.tsp` files) are present
+      - The finding must clearly identify the file path and explain that new API versions must be authored in TypeSpec with the Azure TypeSpec libraries
+      - The fix suggestion must point the author to authoring the new API version in TypeSpec (e.g., creating a `main.tsp` and `tspconfig.yaml`, then generating swagger via `tsp compile .`)
+
+  # 120002 — True negative: new API version with TypeSpec-generated swagger
+  - name: new-api-version-typespec-generated-not-flagged
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/typespec-generated-spec.json"
+          dest: "specification/tspgenservice/TspGenService.Management/stable/2026-05-01/tspgenservice.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification.
+
+      Context for this PR:
+        - The directory `specification/tspgenservice/TspGenService.Management/stable/2026-05-01/`
+          is a NEW API version directory introduced by this PR.
+        - The swagger file at the top level contains the `x-typespec-generated` extension,
+          indicating it was generated from TypeSpec source by `@azure-tools/typespec-autorest`.
+        - The TypeSpec source (`main.tsp`, `tspconfig.yaml`) lives in the sibling project directory
+          `specification/tspgenservice/TspGenService.Management/` and is not modified in this PR.
+
+      Apply all applicable review rules from the loaded instruction files.
+      Report all findings with rule IDs, severity, line numbers, and fix suggestions.
+      If the spec is fully compliant, state that no blocking issues were found.
+
+      File: specification/tspgenservice/TspGenService.Management/stable/2026-05-01/tspgenservice.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "TSP-REQUIRED-V1 must NOT be flagged"
+        config:
+          pattern: "(?i)TSP-REQUIRED-V1"
+      - type: prompt
+    rubric:
+      - The agent MUST NOT flag rule `TSP-REQUIRED-V1` because the swagger file contains the `x-typespec-generated` extension at the top level, which is one of the compliance signals defined in the rule
+      - Flagging `TSP-REQUIRED-V1` on this fixture is a false positive and constitutes a test failure
+      - Other unrelated minor findings or suggestions are acceptable and do not affect the grade
+
+  # 120003 — True negative: maintenance edit to existing API version
+  - name: maintenance-edit-existing-handwritten-version-not-flagged
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/legacysvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification.
+
+      Context for this PR:
+        - The directory `specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/`
+          ALREADY EXISTS on the base branch. It is a pre-migration handwritten OpenAPI API version.
+        - This PR makes an in-place edit to the swagger file inside this existing directory
+          (e.g., adds a property description, fixes an enum value).
+        - The PR does NOT introduce a new API version directory.
+        - The PR does NOT add or modify any `.tsp` files.
+        - There is no sibling TypeSpec project for this service.
+
+      Apply all applicable review rules from the loaded instruction files.
+      Report all findings with rule IDs, severity, line numbers, and fix suggestions.
+      If the spec is fully compliant, state that no blocking issues were found.
+
+      File: specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/legacysvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "TSP-REQUIRED-V1 must NOT be flagged on maintenance edits"
+        config:
+          pattern: "(?i)TSP-REQUIRED-V1"
+      - type: prompt
+    rubric:
+      - The agent MUST NOT flag rule `TSP-REQUIRED-V1` because the PR is an in-place edit to a pre-existing API version directory, not the introduction of a new API version
+      - Updates to handwritten OpenAPI inside existing API version directories are explicitly permitted by the rule
+      - Flagging `TSP-REQUIRED-V1` on this fixture is a false positive and constitutes a test failure
+      - Other unrelated minor findings or suggestions are acceptable and do not affect the grade

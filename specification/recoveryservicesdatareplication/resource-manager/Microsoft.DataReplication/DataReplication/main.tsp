@@ -16,7 +16,6 @@ import "./FabricAgentModel.tsp";
 import "./JobModel.tsp";
 import "./PolicyModel.tsp";
 import "./PrivateEndpointConnection.tsp";
-import "./PrivateEndpointConnectionProxy.tsp";
 import "./PrivateLinkResource.tsp";
 import "./ProtectedItemModel.tsp";
 import "./RecoveryPointModel.tsp";
@@ -24,10 +23,6 @@ import "./ReplicationExtensionModel.tsp";
 import "./VaultModel.tsp";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -47,4 +42,9 @@ enum Versions {
    * The 2024-09-01 API version.
    */
   v2024_09_01: "2024-09-01",
+
+  /**
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
 }

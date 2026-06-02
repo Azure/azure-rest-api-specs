@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FirewallPolicyRuleCollectionGroup.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -64,12 +66,15 @@ interface FirewallPolicyRuleCollectionGroupDrafts {
   >;
 }
 
-@@doc(FirewallPolicyRuleCollectionGroupDraft.name,
+@@doc(
+  FirewallPolicyRuleCollectionGroupDraft.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(FirewallPolicyRuleCollectionGroupDraft.properties,
+@@doc(
+  FirewallPolicyRuleCollectionGroupDraft.properties,
   "The properties of the firewall policy rule collection group."
 );
-@@doc(FirewallPolicyRuleCollectionGroupDrafts.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallPolicyRuleCollectionGroupDrafts.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation."
 );

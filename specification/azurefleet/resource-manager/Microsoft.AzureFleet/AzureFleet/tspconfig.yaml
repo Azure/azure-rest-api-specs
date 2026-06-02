@@ -15,14 +15,6 @@ options:
     emit-common-types-schema: "never"
     output-file: "{version-status}/{version}/azurefleet.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.ResourceManager.ComputeFleet"
-    # Added to support generic model conversion from compute VM types
-    use-model-reader-writer: true
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computefleet"
     namespace: "azure.mgmt.computefleet"

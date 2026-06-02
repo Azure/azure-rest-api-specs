@@ -60,9 +60,11 @@ interface Creators {
 @@minLength(Creator.name, 1);
 @@doc(Creator.name, "The name of the Maps Creator instance.");
 @@doc(Creator.properties, "The Creator resource properties.");
-@@doc(Creators.createOrUpdate::parameters.resource,
+@@doc(
+  Creators.createOrUpdate::parameters.resource,
   "The new or updated parameters for the Creator resource."
 );
-@@doc(Creators.update::parameters.properties,
+@@doc(
+  Creators.update::parameters.properties,
   "The update parameters for Maps Creator."
 );

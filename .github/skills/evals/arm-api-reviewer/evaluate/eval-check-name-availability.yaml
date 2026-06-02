@@ -1,0 +1,43 @@
+name: arm-api-reviewer-eval-check-name-availability
+description: |
+  Check Name Availability tests (08xxxx).
+  Validates detection of custom (non-common-types) checkNameAvailability
+  request/response models and missing input validation on the name field.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 080001 — checkNameAvailability with custom models and no input validation
+  - name: detect-cna-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/cna-violations.json"
+          dest: "specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "checkNameAvailability"
+      - type: output-matches
+        config:
+          pattern: "(?i)CNA|common.types|CheckNameAvailabilityRequest"
+      - type: prompt
+    rubric:
+      - "Flagged the custom inline CheckNameAvailabilityRequest and/or CheckNameAvailabilityResponse definitions — should use common-types $ref instead"
+      - "Identified the name field in CheckNameAvailabilityRequest as lacking input validation (no pattern or maxLength constraint), OR recommended replacing the custom model with common-types which inherently provides validation"

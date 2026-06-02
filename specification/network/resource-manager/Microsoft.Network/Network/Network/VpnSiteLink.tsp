@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VpnSite.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -60,7 +62,8 @@ interface VpnSiteLinks {
   >;
 }
 
-@@doc(VpnSiteLink.name,
+@@doc(
+  VpnSiteLink.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(VpnSiteLink.properties, "Properties of the VPN site link.");

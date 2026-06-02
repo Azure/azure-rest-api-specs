@@ -198,6 +198,7 @@ union QuotaUsageStatus {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -377,7 +378,7 @@ union DeploymentState {
 }
 
 /**
- * The routing mode that determines how requests are distributed across models.
+ * The model-router routing mode that determines how requests are distributed across models.
  */
 union RoutingMode {
   string,
@@ -388,27 +389,27 @@ union RoutingMode {
   Cost: "cost",
 
   /**
-   * Balance cost and accuracy when routing requests across models.
+   * Balance cost and quality when routing requests across models.
    */
   Balanced: "balanced",
 
   /**
-   * Route requests to maximize accuracy regardless of cost.
+   * Route requests to maximize quality regardless of cost.
    */
-  Accuracy: "accuracy",
+  Quality: "quality",
 }
 
 /**
- * Routing configuration for the deployment. Specifies how requests are routed across multiple models.
+ * Routing configuration for the model-router deployment. Specifies how requests are routed across multiple models.
  */
 model DeploymentRouting {
   /**
-   * The routing mode that determines how requests are distributed across models.
+   * The model-router routing mode that determines how requests are distributed across models.
    */
   mode?: RoutingMode = RoutingMode.Balanced;
 
   /**
-   * Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
+   * Optional. The list of model-router supported models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
    */
   @identifiers(#["name", "version"])
   models?: DeploymentModel[];
@@ -1643,6 +1644,7 @@ model AccountProperties {
    */
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1666,6 +1668,7 @@ model AccountProperties {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1686,6 +1689,7 @@ union FoundryAutoUpgradeMode {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2317,6 +2321,7 @@ model Usage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2325,6 +2330,7 @@ model Usage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeId?: string | null;
 }
 
@@ -2846,6 +2852,7 @@ model ModelSkuCapacityProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeId?: string | null;
 
   /**
@@ -2854,6 +2861,7 @@ model ModelSkuCapacityProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   scopeType?: QuotaScopeType | null;
 }
 
@@ -3133,7 +3141,7 @@ model DeploymentProperties {
   deploymentState?: DeploymentState | null;
 
   /**
-   * Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset.
+   * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
 }
@@ -3236,6 +3244,17 @@ model SkuResource {
    * The capacity configuration.
    */
   capacity?: CapacityConfig;
+}
+
+/**
+ * The object being used to update sku of a resource, in general used for PATCH operations.
+ */
+@added(Versions.v2026_03_15_preview)
+model PatchResourceSku {
+  /**
+   * The resource model definition representing SKU
+   */
+  sku?: Sku;
 }
 
 /**
@@ -3378,6 +3397,7 @@ model RaiPolicyProperties {
   /**
    * The list of custom rai topics.
    */
+  @removed(Versions.v2025_10_01_preview)
   @identifiers(#[])
   customTopics?: CustomTopicConfig[];
 
@@ -3453,6 +3473,7 @@ model RaiBlocklistConfig {
  * Gets or sets the source to which filter applies.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CustomTopicConfig' extends 'RaiTopicConfig' using inheritance to match service-side object hierarchy"
+@removed(Versions.v2025_10_01_preview)
 model CustomTopicConfig extends RaiTopicConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3463,6 +3484,7 @@ model CustomTopicConfig extends RaiTopicConfig {
 /**
  * Azure OpenAI RAI topic config.
  */
+@removed(Versions.v2025_10_01_preview)
 model RaiTopicConfig {
   /**
    * Name of RAI topic.
@@ -3673,66 +3695,6 @@ model RaiExternalSafetyProviderSchemaProperties {
    * Last modified time of the safety provider.
    */
   @visibility(Lifecycle.Read)
-  lastModifiedAt?: utcDateTime;
-}
-
-/**
- * Cognitive Services Rai External Safety provider.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'RaiExternalSafetyProvider' uses base type inheritance matching service-side object hierarchy"
-model RaiExternalSafetyProvider
-  extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Resource Etag.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'RaiExternalSafetyProvider' to support extensible key-value pairs matching service behavior"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-
-  /**
-   * Properties of Cognitive Services Rai External Safety provider.
-   */
-  properties?: RaiExternalSafetyProviderProperties;
-}
-
-/**
- * RAI External SafetyProvider properties.
- */
-model RaiExternalSafetyProviderProperties {
-  /**
-   * The unique identifier of the safety provider.
-   */
-  providerId?: string;
-
-  /**
-   * Name of the safety provider.
-   */
-  providerName?: string;
-
-  /**
-   * Safety provider mode sync/async.
-   */
-  mode?: string;
-
-  /**
-   * Webhook URL for the safety provider.
-   */
-  url?: url;
-
-  /**
-   * Creation time of the safety provider.
-   */
-  createdAt?: utcDateTime;
-
-  /**
-   * Last modified time of the safety provider.
-   */
   lastModifiedAt?: utcDateTime;
 }
 
@@ -5695,3 +5657,798 @@ model RaiPolicyListResult {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Properties of a Cognitive Services managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentProperties {
+  /**
+   * AzureML Registry model asset URI. Required on creation; immutable after creation.
+   * Example: azureml://registries/{registry}/models/{model}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  `model`: url;
+
+  /**
+   * Deployment template identifier. Optional on creation.
+   * Accepts an AzureML Registry deployment template URI or a project-scoped deployment template path for VmManagedCompute.
+   * Examples: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}, projects/{project}/deploymentTemplates/{template}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  deploymentTemplate?: string;
+
+  /**
+   * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  acceleratorType?: string;
+
+  /**
+   * Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  computeId?: string;
+
+  /**
+   * Scheduling priority for VM-backed managed compute deployments. Immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  priority?: string;
+
+  /**
+   * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorsPerInstance?: int32;
+
+  /**
+   * Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.
+   */
+  @visibility(Lifecycle.Read)
+  totalAccelerators?: int32;
+
+  /**
+   * Read-only. Current provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Read-only. Status message and timestamp from the last provisioning operation.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningDetails?: ManagedComputeDeploymentProvisioningDetails;
+
+  /**
+   * Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  routes?: ManagedComputeDeploymentRoutes;
+}
+
+/**
+ * Provisioning status details for a managed compute deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentProvisioningDetails {
+  /**
+   * A human-readable status message from the last provisioning operation.
+   */
+  message?: string;
+
+  /**
+   * Timestamp of the last provisioning operation.
+   */
+  lastOperationTimestamp?: utcDateTime;
+}
+
+/**
+ * Inference route paths for a managed compute deployment, relative to the account endpoint.
+ * Populated when provisioningState is Succeeded.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentRoutes {
+  /**
+   * Relative path to the chat completions scoring endpoint.
+   */
+  chatCompletionsScoringPath?: string;
+
+  /**
+   * Relative path to the Swagger/OpenAPI endpoint.
+   */
+  swagger?: string;
+
+  /**
+   * Relative path to the messages API scoring endpoint.
+   */
+  messagesApiScoringPath?: string;
+}
+
+/**
+ * The list of managed compute deployments.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentListResult {
+  /**
+   * The link used to get the next page of managed compute deployments.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of managed compute deployments and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ManagedComputeDeployment[];
+}
+
+/**
+ * The provisioning state of a compute resource.
+ */
+@added(Versions.v2026_03_15_preview)
+union ComputeProvisioningState {
+  string,
+
+  /** The resource provisioning request has been accepted. */
+  Accepted: "Accepted",
+
+  /** The resource has been fully provisioned. */
+  Succeeded: "Succeeded",
+
+  /** The resource provisioning has failed. */
+  Failed: "Failed",
+
+  /** The resource provisioning was canceled. */
+  Canceled: "Canceled",
+
+  /** The resource is being deleted. */
+  Deleting: "Deleting",
+
+  /** The resource is scaling. */
+  Scaling: "Scaling",
+
+  /** The resource is disabled. */
+  Disabled: "Disabled",
+
+  /** The compute resource is starting. */
+  Starting: "Starting",
+
+  /** The compute resource is stopping. */
+  Stopping: "Stopping",
+
+  /** The compute resource is restarting. */
+  Restarting: "Restarting",
+
+  /** The compute resource is stopped. */
+  Stopped: "Stopped",
+}
+
+/**
+ * VM priority for a compute pool.
+ */
+@added(Versions.v2026_03_15_preview)
+union VmPriority {
+  string,
+
+  /** Regular VM priority. */
+  Regular: "Regular",
+
+  /** Low-priority VM. */
+  LowPriority: "LowPriority",
+}
+
+/**
+ * A compute pool configuration.
+ */
+@added(Versions.v2026_03_15_preview)
+model Pool {
+  /**
+   * The name of the pool.
+   */
+  name: string;
+
+  /**
+   * The VM priority of the pool.
+   */
+  vmPriority: VmPriority;
+
+  /**
+   * The instance type (VM SKU) used in the pool.
+   */
+  instanceType: string;
+
+  /**
+   * The number of nodes in the pool.
+   */
+  nodeCount: int32;
+}
+
+/**
+ * The type of compute resource.
+ */
+@added(Versions.v2026_03_15_preview)
+union ComputeType {
+  string,
+
+  /** Cluster (AKS-backed) compute type. */
+  Cluster: "Cluster",
+
+  /** Container Instance compute type. */
+  ContainerInstance: "ContainerInstance",
+}
+
+/**
+ * Base properties for all compute resource types.
+ * The computeType discriminator determines the concrete property shape.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("computeType")
+model ComputeProperties {
+  /**
+   * The type of compute resource.
+   */
+  computeType: ComputeType;
+
+  /**
+   * Provisioning state of the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ComputeProvisioningState;
+
+  /**
+   * Error details for the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: Azure.ResourceManager.CommonTypes.ErrorDetail[];
+
+  /**
+   * Creation time of the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+}
+
+/**
+ * Properties for a Cluster (AKS-backed) compute resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model ClusterComputeProperties extends ComputeProperties {
+  /**
+   * The type of compute resource.
+   */
+  computeType: "Cluster";
+
+  /**
+   * Pools attached to this compute cluster.
+   */
+  pools: Pool[];
+
+  /**
+   * ARM ID of the subnet used for compute.
+   */
+  subnetArmId?: string;
+}
+
+/**
+ * Properties for a Container Instance compute resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model ContainerInstanceComputeProperties extends ComputeProperties {
+  /**
+   * The type of compute resource.
+   */
+  computeType: "ContainerInstance";
+
+  /**
+   * ARM resource ID of the parent cluster that hosts this container instance.
+   */
+  targetClusterId: string;
+
+  /**
+   * Container image URI (e.g., MCR or ACR image path) for the container instance.
+   */
+  imageLink: string;
+
+  /**
+   * ISO 8601 duration before the idle instance is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+
+  /**
+   * SSH configuration for remote access to the container instance.
+   */
+  sshSettings?: SshSettings;
+
+  /**
+   * Network connectivity endpoints assigned to the container instance.
+   */
+  @visibility(Lifecycle.Read)
+  connectivityEndpoints?: ConnectivityEndpoints;
+}
+
+/**
+ * SSH configuration for a Container Instance compute.
+ */
+@added(Versions.v2026_03_15_preview)
+model SshSettings {
+  /**
+   * The SSH public key for authenticating to the compute instance.
+   */
+  sshPublicKey?: string;
+
+  /**
+   * Whether SSH admin access is enabled.
+   */
+  adminEnabled?: boolean;
+}
+
+/**
+ * Network connectivity endpoints for a Container Instance compute.
+ */
+@added(Versions.v2026_03_15_preview)
+model ConnectivityEndpoints {
+  /**
+   * The public IP address of the compute instance.
+   */
+  @visibility(Lifecycle.Read)
+  publicIpAddress?: string;
+
+  /**
+   * The SSH port for the compute instance.
+   */
+  @visibility(Lifecycle.Read)
+  sshPort?: int32;
+}
+
+/**
+ * The list of cognitive services computes operation response.
+ */
+@added(Versions.v2026_03_15_preview)
+model ComputeListResult {
+  /**
+   * The link used to get the next page of compute list.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of computes.
+   */
+  @pageItems
+  value?: Compute[];
+}
+
+/**
+ * Properties for a Workbench resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkbenchProperties {
+  /**
+   * ARM resource ID of the parent cluster that hosts this workbench.
+   */
+  targetClusterId: string;
+
+  /**
+   * Container image URI (e.g., MCR or ACR image path) for the workbench.
+   */
+  imageLink: string;
+
+  /**
+   * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+
+  /**
+   * The dataset ID to mount for the workbench.
+   */
+  datasetId?: string;
+
+  /**
+   * SSH configuration for remote access to the workbench.
+   */
+  sshSettings?: SshSettings;
+
+  /**
+   * Network connectivity endpoints assigned to the workbench.
+   */
+  @visibility(Lifecycle.Read)
+  connectivityEndpoints?: ConnectivityEndpoints;
+
+  /**
+   * The web endpoint URL for accessing the workbench.
+   */
+  @visibility(Lifecycle.Read)
+  webEndpoint?: string;
+
+  /**
+   * Provisioning state of the workbench resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ComputeProvisioningState;
+
+  /**
+   * Error details for the workbench resource.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: Azure.ResourceManager.CommonTypes.ErrorDetail[];
+
+  /**
+   * Creation time of the workbench resource.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+}
+
+/**
+ * The list of workbenches operation response.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkbenchListResult {
+  /**
+   * The link used to get the next page of workbench list.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of workbenches.
+   */
+  @pageItems
+  value?: Workbench[];
+}
+
+/**
+ * Deployment detail within a managed compute usage entry.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeDeploymentInfo {
+  /**
+   * Full ARM resource ID of the deployment.
+   */
+  deploymentId?: string;
+
+  /**
+   * Full ARM resource ID of the account/project.
+   */
+  projectId?: string;
+
+  /**
+   * Model name (e.g., 'azureml://registries//models//versions/gpt-4o').
+   */
+  modelId?: string;
+
+  /**
+   * Number of GPUs consumed by this deployment.
+   */
+  acceleratorCount?: int64;
+
+  /**
+   * Number of instances for this deployment.
+   */
+  instanceCount?: int32;
+}
+
+/**
+ * Managed compute quota usage for a specific SKU.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeUsage {
+  /**
+   * Fully qualified resource ID for the managed compute usage.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: MetricName;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  unit?: UnitType;
+
+  /**
+   * Maximum value for this metric.
+   */
+  limit?: float64;
+
+  /**
+   * Current value for this metric.
+   */
+  currentValue?: float64;
+
+  /**
+   * Offer scope (e.g., 'Global', 'Datazone-US').
+   */
+  offerScope?: string;
+
+  /**
+   * Deployments consuming this managed compute quota.
+   */
+  @identifiers(#["deploymentId"])
+  deployments?: ManagedComputeDeploymentInfo[];
+}
+
+/**
+ * List of managed compute quota entries.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeUsageListResult {
+  /**
+   * The link used to get the next page of managed compute usages.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Per-SKU managed compute quota usage entries.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  value?: ManagedComputeUsage[];
+}
+
+/**
+ * Request body for the evaluateDeploymentPolicies action.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesRequest {
+  /**
+   * The list of hypothetical deployments to evaluate against Azure Policy.
+   */
+  deployments: EvaluateDeploymentPoliciesDeployment[];
+}
+
+/**
+ * A hypothetical deployment definition used for policy dry-run evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesDeployment {
+  /**
+   * The name of the hypothetical deployment.
+   */
+  name: string;
+
+  /**
+   * Properties of the hypothetical deployment.
+   */
+  properties: EvaluateDeploymentPoliciesDeploymentProperties;
+}
+
+/**
+ * Properties of a hypothetical deployment for policy evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesDeploymentProperties {
+  /**
+   * The model to evaluate.
+   */
+  `model`: DeploymentModel;
+
+  /**
+   * The name of the RAI policy to evaluate.
+   */
+  raiPolicyName?: string;
+}
+
+/**
+ * Response body for the evaluateDeploymentPolicies action.
+ */
+@added(Versions.v2026_03_15_preview)
+model EvaluateDeploymentPoliciesResponse {
+  /**
+   * Per-deployment policy evaluation results, keyed by deployment name.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record type used to represent a dictionary of deployment policy evaluation results keyed by deployment name"
+  results?: Record<DeploymentPolicyEvaluationResult>;
+}
+
+/**
+ * The outcome of a policy evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+union PolicyEvaluationOutcome {
+  string,
+
+  /** The deployment is compliant with all policies. */
+  Compliant: "Compliant",
+
+  /** The deployment violates one or more policies. */
+  NonCompliant: "NonCompliant",
+
+  /** An error occurred during evaluation. */
+  Error: "Error",
+}
+
+/**
+ * Policy evaluation result for a single deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentPolicyEvaluationResult {
+  /**
+   * The evaluation outcome.
+   */
+  evaluationOutcome?: PolicyEvaluationOutcome;
+
+  /**
+   * Error message if the evaluation outcome is Error.
+   */
+  errorMessage?: string;
+
+  /**
+   * Details of non-compliant policy assignments.
+   */
+  @identifiers(#[])
+  nonCompliantAssignments?: PolicyAssignmentEvaluationDetails[];
+}
+
+/**
+ * Details of a non-compliant policy assignment.
+ */
+@added(Versions.v2026_03_15_preview)
+model PolicyAssignmentEvaluationDetails {
+  /**
+   * The policy assignment ID.
+   */
+  assignmentId?: string;
+
+  /**
+   * The policy definition ID.
+   */
+  policyDefinitionId?: string;
+
+  /**
+   * The policy set definition ID.
+   */
+  policySetDefinitionId?: string;
+
+  /**
+   * The evaluation outcome for this assignment.
+   */
+  evaluationOutcome?: PolicyEvaluationOutcome;
+
+  /**
+   * The reason for non-compliance.
+   */
+  nonComplianceReason?: string;
+
+  /**
+   * The policy effect (e.g., Deny, Audit).
+   */
+  effect?: string;
+
+  /**
+   * Expression-level evaluation details.
+   */
+  @identifiers(#[])
+  expressionEvaluations?: PolicyExpressionEvaluationDetails[];
+}
+
+/**
+ * Details of a policy expression evaluation.
+ */
+@added(Versions.v2026_03_15_preview)
+model PolicyExpressionEvaluationDetails {
+  /**
+   * The policy expression.
+   */
+  expression?: string;
+
+  /**
+   * The kind of expression.
+   */
+  expressionKind?: string;
+
+  /**
+   * The operator used in evaluation.
+   */
+  operator?: string;
+
+  /**
+   * The evaluation result.
+   */
+  result?: string;
+
+  /**
+   * The target value of the expression.
+   */
+  targetValue?: string;
+
+  /**
+   * The actual value of the expression.
+   */
+  expressionValue?: string;
+}
+
+/**
+ * Properties of a managed compute capacity resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ManagedComputeCapacity is a read-only resource that does not have a provisioning state"
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeCapacityProperties {
+  /**
+   * The type of accelerator (e.g., Azure.A100, Azure.H100).
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorType?: string;
+
+  /**
+   * The Azure region where the capacity is available.
+   */
+  @visibility(Lifecycle.Read)
+  location?: string;
+
+  /**
+   * The number of available accelerators in the region.
+   */
+  @visibility(Lifecycle.Read)
+  availableAccelerators?: int32;
+
+  /**
+   * Capacity information broken down by deployment size.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  deploymentSizeCapacities?: DeploymentSizeCapacity[];
+}
+
+/**
+ * Capacity information for a specific deployment size.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeploymentSizeCapacity {
+  /**
+   * The number of accelerators required per model instance.
+   */
+  @visibility(Lifecycle.Read)
+  modelInstanceAcceleratorCount?: int32;
+
+  /**
+   * The total available capacity for this deployment size.
+   */
+  @visibility(Lifecycle.Read)
+  totalAvailableCapacity?: int32;
+
+  /**
+   * The largest contiguous deployment capacity available for this deployment size.
+   */
+  @visibility(Lifecycle.Read)
+  largestDeploymentCapacity?: int32;
+}
+
+/**
+ * The list of managed compute capacities response.
+ */
+@added(Versions.v2026_03_15_preview)
+model ManagedComputeCapacityListResult {
+  /**
+   * The link used to get the next page of managed compute capacities.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of managed compute capacities.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  value?: ManagedComputeCapacity[];
+}

@@ -6,25 +6,31 @@ using Microsoft.Kubernetes;
 // csharp SDK considers this as a new RP therefore we no longer add this flatten decorator here.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectedClusterPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConnectedClusterPatch.properties,
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectedCluster.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConnectedCluster.properties,
   "!csharp"
 );
 
-@@clientName(ConnectedClusters.createOrReplace::parameters.resource,
+@@clientName(
+  ConnectedClusters.createOrReplace::parameters.resource,
   "ConnectedCluster"
 );
-@@clientName(ConnectedClusters.update::parameters.properties,
+@@clientName(
+  ConnectedClusters.update::parameters.properties,
   "ConnectedClusterPatch"
 );
-@@clientName(ConnectedClusters.updateAsync::parameters.properties,
+@@clientName(
+  ConnectedClusters.updateAsync::parameters.properties,
   "ConnectedClusterPatch"
 );
-@@clientName(ConnectedClusters.listClusterUserCredential::parameters.body,
+@@clientName(
+  ConnectedClusters.listClusterUserCredential::parameters.body,
   "Properties"
 );
 
@@ -38,6 +44,7 @@ using Microsoft.Kubernetes;
 @@clientLocation(ConnectedClusters.delete, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.listByResourceGroup, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.listBySubscription, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.listClusterUserCredential,
+@@clientLocation(
+  ConnectedClusters.listClusterUserCredential,
   "ConnectedCluster"
 );

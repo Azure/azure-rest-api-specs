@@ -5,6 +5,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/openapi.json"
@@ -29,6 +30,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.Chaos"
+    api-version: "2026-05-01-preview"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/chaos"
     emitter-output-dir: "{output-dir}/{service-dir}/armchaos"

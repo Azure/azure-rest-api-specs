@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -91,7 +93,10 @@ interface VirtualWans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualWAN,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -147,10 +152,12 @@ interface VirtualWans {
     VirtualWAN,
     GetVpnSitesConfigurationRequest,
     Result = void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>>,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+          ArmLroLocationHeader<FinalResult = void>>,
     OverrideErrorType = CloudError
   >;
 
@@ -168,15 +175,19 @@ interface VirtualWans {
 
 @@doc(VirtualWAN.name, "The name of the VirtualWAN being retrieved.");
 @@doc(VirtualWAN.properties, "Properties of the virtual WAN.");
-@@doc(VirtualWans.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualWans.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VirtualWAN."
 );
-@@doc(VirtualWans.updateTags::parameters.properties,
+@@doc(
+  VirtualWans.updateTags::parameters.properties,
   "Parameters supplied to Update VirtualWAN tags."
 );
-@@doc(VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
+@@doc(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile::parameters.body,
   "Parameters supplied to the generate VirtualWan VPN profile generation operation."
 );
-@@doc(VirtualWans.download::parameters.body,
+@@doc(
+  VirtualWans.download::parameters.body,
   "Parameters supplied to download vpn-sites configuration."
 );

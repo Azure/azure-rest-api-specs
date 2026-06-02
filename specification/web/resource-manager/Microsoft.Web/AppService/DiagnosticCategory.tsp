@@ -129,6 +129,7 @@ interface DiagnosticCategoryOperationGroup {
 }
 
 @@doc(DiagnosticCategory.name, "Diagnostic Category");
-@@doc(DiagnosticCategory.properties,
+@@doc(
+  DiagnosticCategory.properties,
   "DiagnosticCategory resource specific properties"
 );

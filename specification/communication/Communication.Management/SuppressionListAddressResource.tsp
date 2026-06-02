@@ -61,12 +61,15 @@ interface SuppressionListAddresses {
 
 @@maxLength(SuppressionListAddressResource.name, 253);
 @@minLength(SuppressionListAddressResource.name, 1);
-@@doc(SuppressionListAddressResource.name,
+@@doc(
+  SuppressionListAddressResource.name,
   "The id of the address in a suppression list."
 );
-@@doc(SuppressionListAddressResource.properties,
+@@doc(
+  SuppressionListAddressResource.properties,
   "The properties of a SuppressionListAddress resource."
 );
-@@doc(SuppressionListAddresses.createOrUpdate::parameters.resource,
+@@doc(
+  SuppressionListAddresses.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
