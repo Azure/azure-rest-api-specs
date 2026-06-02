@@ -1,0 +1,68 @@
+{
+  "title": "Reservations_ListBySubscription",
+  "operationId": "Reservations_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "reservationInternalId": "res-abc123-xyz789",
+              "marketplace": {
+                "subscriptionId": "Read Storage Poolst-sub-123",
+                "subscriptionStatus": "PendingFulfillmentStart",
+                "offerDetails": {
+                  "publisherId": "pure_storage",
+                  "offerId": "purestorage-block-offer",
+                  "planId": "standard-plan",
+                  "planName": "Standard Plan",
+                  "termUnit": "month",
+                  "termId": "12-month-term"
+                }
+              },
+              "user": {
+                "firstName": "John",
+                "lastName": "Doe",
+                "emailAddress": "john.doe@contoso.com",
+                "upn": "john.doe@contoso.com",
+                "phoneNumber": "+1-425-555-1234",
+                "companyDetails": {
+                  "companyName": "Contoso Ltd.",
+                  "address": {
+                    "addressLine1": "f",
+                    "addressLine2": "Suite 100",
+                    "city": "Redmond",
+                    "state": "Washington",
+                    "country": "United States",
+                    "postalCode": "98052"
+                  }
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "environment": "production"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+            "name": "reservation-01",
+            "type": "PureStorage.Block/reservations",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-01-16T07:25:56.721Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/PureStorage.Block/operations?api-version=2026-01-01-preview&$skiptoken=abc123"
+      }
+    }
+  }
+}

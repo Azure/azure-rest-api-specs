@@ -55,11 +55,13 @@ interface DatadogMonitorResources {
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     DatadogMonitorResource,
     Request = DatadogMonitorResourceUpdateParameters,
-    Response = ArmResponse<DatadogMonitorResource> | ArmResourceCreatedResponse<
-      DatadogMonitorResource,
-      LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<DatadogMonitorResource>
+      | ArmResourceCreatedResponse<
+          DatadogMonitorResource,
+          LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OptionalRequestBody = true
   >;
 
@@ -70,7 +72,10 @@ interface DatadogMonitorResources {
   @summary("Delete a monitor resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     DatadogMonitorResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -240,15 +245,18 @@ interface DatadogMonitorResources {
 @@maxLength(DatadogMonitorResource.name, 32);
 @@minLength(DatadogMonitorResource.name, 2);
 @@doc(DatadogMonitorResource.name, "Monitor resource name");
-@@doc(DatadogMonitorResource.properties,
+@@doc(
+  DatadogMonitorResource.properties,
   "Properties specific to the monitor resource."
 );
 @@doc(DatadogMonitorResources.create::parameters.resource, "");
 @@doc(DatadogMonitorResources.update::parameters.resource, "");
 @@doc(DatadogMonitorResources.setDefaultKey::parameters.body, "");
-@@doc(DatadogMonitorResources.linkSaaS::parameters.body,
+@@doc(
+  DatadogMonitorResources.linkSaaS::parameters.body,
   "Link SaaS body parameter"
 );
-@@doc(DatadogMonitorResources.resubscribe::parameters.body,
+@@doc(
+  DatadogMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"
 );

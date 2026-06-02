@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/operationalInsights"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/"
+    output-file: "{version-status}/{version}/openapi.json"
+    emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.OperationalInsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-operationalinsights"
+    namespace: "azure.mgmt.operationalinsights"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/loganalytics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-loganalytics"
+    namespace: "com.azure.resourcemanager.loganalytics"
+    service-name: "LogAnalytics"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-operationalinsights"
+    flavor: azure
+    service-dir: "sdk/operationalinsights"
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-operationalinsights"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/operationalinsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/armoperationalinsights"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armoperationalinsights/v2"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

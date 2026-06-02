@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Monitor;
 
@@ -67,6 +69,7 @@ interface SloView {
   @armResourceCollectionAction
   @action("providers/Microsoft.Monitor/sliSignalPreview")
   @doc("Returns preview data for the signal.")
+  @scope("!(csharp, python, java, javascript, go)")
   sliSignalPreview(
     ...ServiceGroupBaseParameters,
     ...Azure.ResourceManager.ApiVersionParameter,
@@ -74,8 +77,10 @@ interface SloView {
     @body
     @doc("The signal preview properties.")
     body: SignalPreviewSliProperties,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: KqlmQueryResult;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body body: KqlmQueryResult;
+      }
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }

@@ -62,6 +62,7 @@ interface NetworkFabricControllers {
 }
 
 @@doc(NetworkFabricControllers.create::parameters.resource, "Request payload.");
-@@doc(NetworkFabricControllers.update::parameters.properties,
+@@doc(
+  NetworkFabricControllers.update::parameters.properties,
   "Network Fabric Controller properties to update."
 );

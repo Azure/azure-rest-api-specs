@@ -75,7 +75,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -203,7 +206,10 @@ interface Clusters {
   executeScriptActions is ArmResourceActionAsyncBase<
     Cluster,
     ExecuteScriptActionParameters,
-    OkResponse | ClustersExecuteScriptActionsBadRequestError | ArmAcceptedLroResponse,
+
+      | OkResponse
+      | ClustersExecuteScriptActionsBadRequestError
+      | ArmAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     Error = ErrorResponse
   >;
@@ -213,21 +219,27 @@ interface Clusters {
 @@doc(Cluster.properties, "The properties of the cluster.");
 @@doc(Clusters.create::parameters.resource, "The cluster create request.");
 @@doc(Clusters.update::parameters.properties, "The cluster patch request.");
-@@doc(Clusters.resize::parameters.body,
+@@doc(
+  Clusters.resize::parameters.body,
   "The parameters for the resize operation."
 );
-@@doc(Clusters.updateAutoScaleConfiguration::parameters.body,
+@@doc(
+  Clusters.updateAutoScaleConfiguration::parameters.body,
   "The parameters for the update autoscale configuration operation."
 );
-@@doc(Clusters.rotateDiskEncryptionKey::parameters.body,
+@@doc(
+  Clusters.rotateDiskEncryptionKey::parameters.body,
   "The parameters for the disk encryption operation."
 );
-@@doc(Clusters.updateGatewaySettings::parameters.body,
+@@doc(
+  Clusters.updateGatewaySettings::parameters.body,
   "The cluster configurations."
 );
-@@doc(Clusters.updateIdentityCertificate::parameters.body,
+@@doc(
+  Clusters.updateIdentityCertificate::parameters.body,
   "The cluster configurations."
 );
-@@doc(Clusters.executeScriptActions::parameters.body,
+@@doc(
+  Clusters.executeScriptActions::parameters.body,
   "The parameters for executing script actions."
 );

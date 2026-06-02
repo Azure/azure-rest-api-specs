@@ -1,0 +1,37 @@
+parameters:
+  "service-dir":
+    default: "sdk/policyinsights"
+options:
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-policyinsights"
+    namespace: "azure.mgmt.policyinsights"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-policyinsights"
+    namespace: "com.azure.resourcemanager.policyinsights"
+    service-name: "PolicyInsights"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-policyinsights"
+    flavor: azure
+    experimental-extensible-enums: true
+    compatibility-lro: true
+    package-details:
+      name: "@azure/arm-policyinsights"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/policyinsights"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpolicyinsights"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpolicyinsights"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    factory-gather-all-params: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -7,21 +7,26 @@ using Microsoft.AlertsManagement;
 @@Legacy.flattenProperty(PrometheusRuleGroupResourcePatchParameters.properties);
 
 @@clientLocation(PrometheusRuleGroupResources.get, "PrometheusRuleGroups");
-@@clientLocation(PrometheusRuleGroupResources.createOrUpdate,
+@@clientLocation(
+  PrometheusRuleGroupResources.createOrUpdate,
   "PrometheusRuleGroups"
 );
-@@clientName(PrometheusRuleGroupResources.createOrUpdate::parameters.resource,
+@@clientName(
+  PrometheusRuleGroupResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PrometheusRuleGroupResources.update, "PrometheusRuleGroups");
-@@clientName(PrometheusRuleGroupResources.update::parameters.properties,
+@@clientName(
+  PrometheusRuleGroupResources.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(PrometheusRuleGroupResources.delete, "PrometheusRuleGroups");
-@@clientLocation(PrometheusRuleGroupResources.listByResourceGroup,
+@@clientLocation(
+  PrometheusRuleGroupResources.listByResourceGroup,
   "PrometheusRuleGroups"
 );
-@@clientLocation(PrometheusRuleGroupResources.listBySubscription,
+@@clientLocation(
+  PrometheusRuleGroupResources.listBySubscription,
   "PrometheusRuleGroups"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

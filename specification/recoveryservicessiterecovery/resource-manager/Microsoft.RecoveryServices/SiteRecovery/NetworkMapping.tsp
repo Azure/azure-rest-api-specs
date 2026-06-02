@@ -48,8 +48,10 @@ interface NetworkMappings {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     NetworkMapping,
     Request = CreateNetworkMappingInput,
-    Response = ArmResourceUpdatedResponse<NetworkMapping> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkMapping> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<NetworkMapping>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkMapping> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -84,9 +86,11 @@ interface NetworkMappings {
 
 @@doc(NetworkMapping.name, "Network mapping name.");
 @@doc(NetworkMapping.properties, "The Network Mapping Properties.");
-@@doc(NetworkMappings.create::parameters.resource,
+@@doc(
+  NetworkMappings.create::parameters.resource,
   "Create network mapping input."
 );
-@@doc(NetworkMappings.update::parameters.properties,
+@@doc(
+  NetworkMappings.update::parameters.properties,
   "Update network mapping input."
 );

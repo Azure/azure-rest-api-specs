@@ -19,7 +19,7 @@ using ComputeSku;
     service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
     autoMergeService: true,
   },
-  "!python"
+  "!(javascript, python)"
 )
 @client(
   {
@@ -27,25 +27,30 @@ using ComputeSku;
     service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
     autoMergeService: true,
   },
-  "python"
+  "javascript, python"
 )
 namespace ComputeCombine;
 
 // VirtualMachineInstanceView needs input usage for premium layer constructor and setters
-@@usage(VirtualMachineInstanceView,
+@@usage(
+  VirtualMachineInstanceView,
   Azure.ClientGenerator.Core.Usage.input,
   "java"
 );
 
 // AvailabilitySetSkuTypes needs public access and input+output usage for premium layer
 @@access(AvailabilitySetSkuTypes, Access.public, "java");
-@@usage(AvailabilitySetSkuTypes,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  AvailabilitySetSkuTypes,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
 
 // TODO: maximumDuration type changed from String to Duration, revert to String to avoid breaking change
-@@alternateType(VirtualMachineInstallPatchesParameters.maximumDuration,
+@@alternateType(
+  VirtualMachineInstallPatchesParameters.maximumDuration,
   string,
   "java"
 );
@@ -58,7 +63,16 @@ namespace ComputeCombine;
 @@clientName(ResourceSkuCosts.meterID, "meterId", "java");
 
 // Rename model to match old Swagger-generated name
-@@clientName(UserAssignedIdentitiesValue,
+@@clientName(
+  UserAssignedIdentitiesValue,
   "VirtualMachineIdentityUserAssignedIdentities",
   "java"
 );
+
+@@apiVersion(VirtualMachineScaleSetNetworkProfile.networkApiVersion, false);
+@@apiVersion(
+  VirtualMachineScaleSetUpdateNetworkProfile.networkApiVersion,
+  false
+);
+@@apiVersion(NetworkProfile.networkApiVersion, false);
+@@apiVersion(ResourceSku.apiVersions, false);

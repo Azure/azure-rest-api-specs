@@ -32,7 +32,6 @@ interface MosaicCollectionsTileSetList {
     {
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
@@ -60,7 +59,6 @@ interface MosaicCollectionsTileSetMetadata {
     {
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
@@ -683,6 +681,7 @@ interface MosaicCollectionsWmts {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...AssetQueryParameters;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -731,6 +730,7 @@ interface MosaicCollectionsWmtsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...AssetQueryParameters;
     },
     WmtsCapabilitiesXmlResponse
   >;
@@ -763,7 +763,6 @@ interface MosaicCollectionsAssetsForTiles {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...ZxyPathParameters;
 
       /**
@@ -800,7 +799,6 @@ interface MosaicCollectionsAssetsForTileMatrixSets {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * Identifier selecting one of the TileMatrixSetId supported
@@ -839,7 +837,6 @@ interface MosaicCollectionsAssetsForBbox {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
       ...BoundingBoxPathParameters;
 
       /**
@@ -935,8 +932,9 @@ interface MosaicCollectionsBbox {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -1009,8 +1007,9 @@ interface MosaicCollectionsBboxWithDimensions {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MosaicCropQueryParameters;
       ...MiscTileQueryParameters;
@@ -1058,8 +1057,9 @@ interface MosaicCollectionsFeatureGeoJson {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -1125,8 +1125,9 @@ interface MosaicCollectionsFeatureGeoJsonFormat {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...DimensionsQueryParameters;
       ...MosaicCropQueryParameters;
@@ -1198,8 +1199,9 @@ interface MosaicCollectionsFeatureGeoJsonWidthByHeight {
       /**
        * Image output size limit if width and height limits are not set.
        */
+      @maxValue(2048)
       @query("max_size")
-      maxSize?: int32 = 1024;
+      maxSize?: int32 = 2048;
 
       ...MosaicCropQueryParameters;
       ...MiscTileQueryParameters;
@@ -1234,7 +1236,6 @@ interface MosaicCollectionsPoint {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
@@ -1289,7 +1290,6 @@ interface MosaicCollectionsPointAssets {
       ...MosaicSearchQueryParameters;
       ...CollectionMosaicFilterQueryParameters;
       ...CollectionSubDatasetQueryParameters;
-      ...CollectionQueryParameter;
 
       /**
        * STAC Collection Identifier
