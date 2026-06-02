@@ -15593,7 +15593,8 @@ components:
           description: The overall object JSON schema for the run data source items.
       discriminator:
         propertyName: type
-        mapping: {}
+        mapping:
+          azure_ai_source: '#/components/schemas/AzureAIDataSourceConfig'
       description: Base class for run data sources with discriminator support.
     DatasetDataGenerationJobOutput:
       type: object
@@ -19156,6 +19157,7 @@ components:
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
           conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
       anyOf:
@@ -22100,6 +22102,7 @@ components:
         mapping:
           text: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText'
           json_object: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject'
+          json_schema: '#/components/schemas/OpenAI.ResponseFormatJsonSchema'
       description: |-
         An object specifying the format that the model must output.
         Setting to `{ "type": "json_schema", "json_schema": {...} }` enables
@@ -29734,6 +29737,7 @@ components:
           refusal: '#/components/schemas/OpenAI.MessageContentRefusalContent'
           input_image: '#/components/schemas/OpenAI.MessageContentInputImageContent'
           input_file: '#/components/schemas/OpenAI.MessageContentInputFileContent'
+          summary_text: '#/components/schemas/OpenAI.SummaryTextContent'
       description: A content part that makes up an input or output item.
     OpenAI.MessageContentInputFileContent:
       type: object

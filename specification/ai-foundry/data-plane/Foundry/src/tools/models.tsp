@@ -91,7 +91,8 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.CodeInterpreterTool,
+  @@copyProperties(
+    OpenAI.CodeInterpreterTool,
     {
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,
@@ -99,7 +100,8 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.ImageGenTool,
+  @@copyProperties(
+    OpenAI.ImageGenTool,
     {
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,
@@ -107,7 +109,8 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.LocalShellToolParam,
+  @@copyProperties(
+    OpenAI.LocalShellToolParam,
     {
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,
@@ -115,7 +118,8 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.FunctionShellToolParam,
+  @@copyProperties(
+    OpenAI.FunctionShellToolParam,
     {
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,
@@ -123,7 +127,8 @@ namespace Azure.AI.Projects {
   );
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(OpenAI.FileSearchTool,
+  @@copyProperties(
+    OpenAI.FileSearchTool,
     {
       ...ToolNameAndDescriptionExtension,
       ...ToolConfigExtension,

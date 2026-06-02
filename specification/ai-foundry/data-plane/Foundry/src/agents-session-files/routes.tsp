@@ -48,7 +48,6 @@ interface AgentSessionFiles {
       @header("Content-Type") contentType: "application/octet-stream";
 
       @body content: bytes;
-
       ...UserIsolationKeyHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>

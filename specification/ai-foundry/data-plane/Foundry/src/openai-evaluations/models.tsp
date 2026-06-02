@@ -650,7 +650,8 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.EvalRunPerTestingCriteriaResults,
+@@copyProperties(
+  OpenAI.EvalRunPerTestingCriteriaResults,
   {
     /** Number of tests that errored for this criteria. */
     #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
@@ -665,7 +666,8 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.EvalRunResultCounts,
+@@copyProperties(
+  OpenAI.EvalRunResultCounts,
   {
     /** Number of output items that were skipped during the evaluation. */
     #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Auto-suppressed warnings non-applicable rules during import."
