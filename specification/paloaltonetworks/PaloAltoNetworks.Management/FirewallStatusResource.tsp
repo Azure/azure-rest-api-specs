@@ -40,6 +40,7 @@ interface FirewallStatusResources {
 }
 
 @@doc(FirewallStatusResource.name, "");
-@@doc(FirewallStatusResource.properties,
+@@doc(
+  FirewallStatusResource.properties,
   "The resource-specific properties for this resource."
 );

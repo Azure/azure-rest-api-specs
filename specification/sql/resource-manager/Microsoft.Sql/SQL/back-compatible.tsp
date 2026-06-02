@@ -16,11 +16,13 @@ using Microsoft.Sql;
 @@Legacy.flattenProperty(ImportExportOperationResult.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput.properties
+@@Legacy.flattenProperty(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DatabaseSqlVulnerabilityAssessmentRuleBaselineInput.properties
+@@Legacy.flattenProperty(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselineInput.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -72,7 +74,8 @@ using Microsoft.Sql;
 @@Legacy.flattenProperty(ManagedInstanceUpdate.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(RefreshExternalGovernanceStatusOperationResultMI.properties
+@@Legacy.flattenProperty(
+  RefreshExternalGovernanceStatusOperationResultMI.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -88,7 +91,8 @@ using Microsoft.Sql;
 @@Legacy.flattenProperty(ServerUpdate.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(RefreshExternalGovernanceStatusOperationResult.properties
+@@Legacy.flattenProperty(
+  RefreshExternalGovernanceStatusOperationResult.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -106,49 +110,59 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(UpdateVirtualClusterDnsServersOperation.properties);
 
-@@clientName(BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(BackupShortTermRetentionPolicies.update::parameters.properties,
+@@clientName(
+  BackupShortTermRetentionPolicies.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BackupShortTermRetentionPolicy.properties);
 
-@@clientName(ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerBlobAuditingPolicy.properties);
 
-@@clientName(DatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseBlobAuditingPolicy.properties);
 
-@@clientName(ExtendedDatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ExtendedDatabaseBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExtendedDatabaseBlobAuditingPolicy.properties);
 
-@@clientName(ExtendedServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ExtendedServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExtendedServerBlobAuditingPolicy.properties);
 
-@@clientLocation(DatabaseAdvancedThreatProtections.get,
+@@clientLocation(
+  DatabaseAdvancedThreatProtections.get,
   "DatabaseAdvancedThreatProtectionSettings"
 );
-@@clientLocation(DatabaseAdvancedThreatProtections.createOrUpdate,
+@@clientLocation(
+  DatabaseAdvancedThreatProtections.createOrUpdate,
   "DatabaseAdvancedThreatProtectionSettings"
 );
-@@clientName(DatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(DatabaseAdvancedThreatProtections.listByDatabase,
+@@clientLocation(
+  DatabaseAdvancedThreatProtections.listByDatabase,
   "DatabaseAdvancedThreatProtectionSettings"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -165,7 +179,8 @@ using Microsoft.Sql;
 @@clientLocation(RecommendedActions.get, "DatabaseRecommendedActions");
 @@clientLocation(RecommendedActions.update, "DatabaseRecommendedActions");
 @@clientName(RecommendedActions.update::parameters.properties, "parameters");
-@@clientLocation(RecommendedActions.listByDatabaseAdvisor,
+@@clientLocation(
+  RecommendedActions.listByDatabaseAdvisor,
   "DatabaseRecommendedActions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -173,7 +188,8 @@ using Microsoft.Sql;
 
 @@clientLocation(DatabaseAutomaticTunings.get, "DatabaseAutomaticTuning");
 @@clientLocation(DatabaseAutomaticTunings.update, "DatabaseAutomaticTuning");
-@@clientName(DatabaseAutomaticTunings.update::parameters.properties,
+@@clientName(
+  DatabaseAutomaticTunings.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -182,16 +198,20 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseColumn.properties);
 
-@@clientLocation(ImportExportExtensionsOperationResults.get,
+@@clientLocation(
+  ImportExportExtensionsOperationResults.get,
   "DatabaseExtensions"
 );
-@@clientLocation(ImportExportExtensionsOperationResults.createOrUpdate,
+@@clientLocation(
+  ImportExportExtensionsOperationResults.createOrUpdate,
   "DatabaseExtensions"
 );
-@@clientName(ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
+@@clientName(
+  ImportExportExtensionsOperationResults.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ImportExportExtensionsOperationResults.listByDatabase,
+@@clientLocation(
+  ImportExportExtensionsOperationResults.listByDatabase,
   "DatabaseExtensions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -202,7 +222,8 @@ using Microsoft.Sql;
 @@clientLocation(Databases.listByDatabase, DatabaseColumns);
 @@clientLocation(Databases.revalidate, "DatabaseEncryptionProtectors");
 @@clientLocation(Databases.revert, "DatabaseEncryptionProtectors");
-@@clientLocation(Databases.databaseOperationsListByDatabase,
+@@clientLocation(
+  Databases.databaseOperationsListByDatabase,
   "DatabaseOperations"
 );
 @@clientName(Databases.databaseOperationsListByDatabase, "ListByDatabase");
@@ -220,91 +241,114 @@ using Microsoft.Sql;
 @@clientName(Databases.sensitivityLabelsUpdate, "Update");
 @@clientName(Databases.sensitivityLabelsUpdate::parameters.body, "parameters");
 @@clientLocation(Databases.listRecommendedByDatabase, SensitivityLabels);
-@@clientLocation(Databases.recommendedSensitivityLabelsUpdate,
+@@clientLocation(
+  Databases.recommendedSensitivityLabelsUpdate,
   "RecommendedSensitivityLabels"
 );
 @@clientName(Databases.recommendedSensitivityLabelsUpdate, "Update");
-@@clientName(Databases.recommendedSensitivityLabelsUpdate::parameters.body,
+@@clientName(
+  Databases.recommendedSensitivityLabelsUpdate::parameters.body,
   "parameters"
 );
 @@clientLocation(Databases.sensitivityLabelsListByDatabase, SensitivityLabels);
 @@clientName(Databases.sensitivityLabelsListByDatabase, "ListByDatabase");
-@@clientLocation(Databases.synapseLinkWorkspacesListByDatabase,
+@@clientLocation(
+  Databases.synapseLinkWorkspacesListByDatabase,
   "SynapseLinkWorkspaces"
 );
 @@clientName(Databases.synapseLinkWorkspacesListByDatabase, "ListByDatabase");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Database.properties);
 
-@@clientName(DatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseSecurityAlertPolicy.properties);
 
-@@clientLocation(DatabaseSqlVulnerabilityAssessmentBaselineSets.get,
+@@clientLocation(
+  DatabaseSqlVulnerabilityAssessmentBaselineSets.get,
   "DatabaseSqlVulnerabilityAssessmentBaselines"
 );
-@@clientLocation(DatabaseSqlVulnerabilityAssessmentBaselineSets.createOrUpdate,
+@@clientLocation(
+  DatabaseSqlVulnerabilityAssessmentBaselineSets.createOrUpdate,
   "DatabaseSqlVulnerabilityAssessmentBaselines"
 );
-@@clientName(DatabaseSqlVulnerabilityAssessmentBaselineSets.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseSqlVulnerabilityAssessmentBaselineSets.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(DatabaseSqlVulnerabilityAssessmentBaselineSets.listBySqlVulnerabilityAssessment,
+@@clientLocation(
+  DatabaseSqlVulnerabilityAssessmentBaselineSets.listBySqlVulnerabilityAssessment,
   "DatabaseSqlVulnerabilityAssessmentBaselines"
 );
-@@clientLocation(SqlVulnerabilityAssessmentBaseline.createOrUpdate,
+@@clientLocation(
+  SqlVulnerabilityAssessmentBaseline.createOrUpdate,
   "SqlVulnerabilityAssessmentBaselines"
 );
-@@clientName(SqlVulnerabilityAssessmentBaseline.createOrUpdate::parameters.resource,
+@@clientName(
+  SqlVulnerabilityAssessmentBaseline.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DatabaseSqlVulnerabilityAssessmentBaselineSet.properties
+@@Legacy.flattenProperty(
+  DatabaseSqlVulnerabilityAssessmentBaselineSet.properties
 );
 
-@@clientName(DatabaseSqlVulnerabilityAssessmentRuleBaselines.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselines.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(SqlVulnerabilityAssessmentRuleBaseline.createOrUpdate::parameters.resource,
+@@clientName(
+  SqlVulnerabilityAssessmentRuleBaseline.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(SqlVulnerabilityAssessmentRuleBaseline.delete,
+@@clientLocation(
+  SqlVulnerabilityAssessmentRuleBaseline.delete,
   "SqlVulnerabilityAssessmentRuleBaselines"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DatabaseSqlVulnerabilityAssessmentRuleBaseline.properties
+@@Legacy.flattenProperty(
+  DatabaseSqlVulnerabilityAssessmentRuleBaseline.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlVulnerabilityAssessmentScanResults.properties);
 
-@@clientLocation(SqlVulnerabilityAssessmentScanRecords.get,
+@@clientLocation(
+  SqlVulnerabilityAssessmentScanRecords.get,
   "DatabaseSqlVulnerabilityAssessmentScans"
 );
-@@clientLocation(SqlVulnerabilityAssessmentScanRecords.listBySqlVulnerabilityAssessments,
+@@clientLocation(
+  SqlVulnerabilityAssessmentScanRecords.listBySqlVulnerabilityAssessments,
   "DatabaseSqlVulnerabilityAssessmentScans"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlVulnerabilityAssessmentScanRecord.properties);
 
-@@clientLocation(SqlVulnerabilityAssessments.get,
+@@clientLocation(
+  SqlVulnerabilityAssessments.get,
   "DatabaseSqlVulnerabilityAssessmentsSettings"
 );
-@@clientLocation(SqlVulnerabilityAssessments.listByDatabase,
+@@clientLocation(
+  SqlVulnerabilityAssessments.listByDatabase,
   "DatabaseSqlVulnerabilityAssessmentsSettings"
 );
-@@clientLocation(SqlVulnerabilityAssessments.execute,
+@@clientLocation(
+  SqlVulnerabilityAssessments.execute,
   "DatabaseSqlVulnerabilityAssessmentExecuteScan"
 );
-@@clientName(SqlVulnerabilityAssessmentsSettings.createOrUpdate::parameters.resource,
+@@clientName(
+  SqlVulnerabilityAssessmentsSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(SqlVulnerabilityAssessmentsSettings.delete,
+@@clientLocation(
+  SqlVulnerabilityAssessmentsSettings.delete,
   SqlVulnerabilityAssessments
 );
-@@clientLocation(SqlVulnerabilityAssessmentsSettings.execute,
+@@clientLocation(
+  SqlVulnerabilityAssessmentsSettings.execute,
   "SqlVulnerabilityAssessmentExecuteScan"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -313,60 +357,75 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseTable.properties);
 
-@@clientName(DatabaseVulnerabilityAssessmentRuleBaselines.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseVulnerabilityAssessmentRuleBaselines.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ManagedDatabaseVulnerabilityAssessmentRuleBaselines.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedDatabaseVulnerabilityAssessmentRuleBaselines.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DatabaseVulnerabilityAssessmentRuleBaseline.properties
+@@Legacy.flattenProperty(
+  DatabaseVulnerabilityAssessmentRuleBaseline.properties
 );
 
-@@clientName(DatabaseVulnerabilityAssessments.createOrUpdate::parameters.resource,
+@@clientName(
+  DatabaseVulnerabilityAssessments.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ManagedDatabaseVulnerabilityAssessments.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedDatabaseVulnerabilityAssessments.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseVulnerabilityAssessment.properties);
 
-@@clientLocation(VulnerabilityAssessmentScanRecords.get,
+@@clientLocation(
+  VulnerabilityAssessmentScanRecords.get,
   "DatabaseVulnerabilityAssessmentScans"
 );
-@@clientLocation(VulnerabilityAssessmentScanRecords.listByDatabase,
+@@clientLocation(
+  VulnerabilityAssessmentScanRecords.listByDatabase,
   "DatabaseVulnerabilityAssessmentScans"
 );
-@@clientLocation(VulnerabilityAssessmentScanRecords.export,
+@@clientLocation(
+  VulnerabilityAssessmentScanRecords.export,
   "DatabaseVulnerabilityAssessmentScans"
 );
-@@clientLocation(VulnerabilityAssessmentScanRecords.initiateScan,
+@@clientLocation(
+  VulnerabilityAssessmentScanRecords.initiateScan,
   "DatabaseVulnerabilityAssessmentScans"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VulnerabilityAssessmentScanRecord.properties);
 
-@@clientName(DataMaskingPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  DataMaskingPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DataMaskingPolicies.listByDatabase, "DataMaskingRules");
-@@clientLocation(DataMaskingPolicies.dataMaskingRulesCreateOrUpdate,
+@@clientLocation(
+  DataMaskingPolicies.dataMaskingRulesCreateOrUpdate,
   "DataMaskingRules"
 );
-@@clientName(DataMaskingPolicies.dataMaskingRulesCreateOrUpdate,
+@@clientName(
+  DataMaskingPolicies.dataMaskingRulesCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(DataMaskingPolicies.dataMaskingRulesCreateOrUpdate::parameters.body,
+@@clientName(
+  DataMaskingPolicies.dataMaskingRulesCreateOrUpdate::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataMaskingPolicy.properties);
 
-@@clientLocation(DataWarehouseUserActivitiesOperationGroup.get,
+@@clientLocation(
+  DataWarehouseUserActivitiesOperationGroup.get,
   "DataWarehouseUserActivities"
 );
-@@clientLocation(DataWarehouseUserActivitiesOperationGroup.listByDatabase,
+@@clientLocation(
+  DataWarehouseUserActivitiesOperationGroup.listByDatabase,
   "DataWarehouseUserActivities"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -375,16 +434,20 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DeletedServer.properties);
 
-@@clientName(DistributedAvailabilityGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  DistributedAvailabilityGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(DistributedAvailabilityGroups.update::parameters.properties,
+@@clientName(
+  DistributedAvailabilityGroups.update::parameters.properties,
   "parameters"
 );
-@@clientName(DistributedAvailabilityGroups.failover::parameters.body,
+@@clientName(
+  DistributedAvailabilityGroups.failover::parameters.body,
   "parameters"
 );
-@@clientName(DistributedAvailabilityGroups.setRole::parameters.body,
+@@clientName(
+  DistributedAvailabilityGroups.setRole::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -393,17 +456,20 @@ using Microsoft.Sql;
 @@clientName(ElasticPools.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ElasticPools.update::parameters.properties, "parameters");
 @@clientLocation(ElasticPools.listByElasticPool, Databases);
-@@clientLocation(ElasticPools.elasticPoolOperationsListByElasticPool,
+@@clientLocation(
+  ElasticPools.elasticPoolOperationsListByElasticPool,
   "ElasticPoolOperations"
 );
-@@clientName(ElasticPools.elasticPoolOperationsListByElasticPool,
+@@clientName(
+  ElasticPools.elasticPoolOperationsListByElasticPool,
   "ListByElasticPool"
 );
 @@clientLocation(ElasticPools.cancel, "ElasticPoolOperations");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ElasticPool.properties);
 
-@@clientName(EncryptionProtectors.createOrUpdate::parameters.resource,
+@@clientName(
+  EncryptionProtectors.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -424,13 +490,15 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerImportExportOperationResult.properties);
 
-@@clientName(GeoBackupPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  GeoBackupPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GeoBackupPolicy.properties);
 
-@@clientName(InstanceFailoverGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  InstanceFailoverGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -447,7 +515,8 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(InstancePool.properties);
 
-@@clientName(IPv6FirewallRules.createOrUpdate::parameters.resource,
+@@clientName(
+  IPv6FirewallRules.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -466,7 +535,8 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(JobExecution.properties);
 
-@@clientName(JobPrivateEndpoints.createOrUpdate::parameters.resource,
+@@clientName(
+  JobPrivateEndpoints.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -488,136 +558,171 @@ using Microsoft.Sql;
 @@Legacy.flattenProperty(JobTargetGroup.properties);
 
 @@clientLocation(LedgerDigestUploadsOperationGroup.get, "LedgerDigestUploads");
-@@clientLocation(LedgerDigestUploadsOperationGroup.createOrUpdate,
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.createOrUpdate,
   "LedgerDigestUploads"
 );
-@@clientName(LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  LedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(LedgerDigestUploadsOperationGroup.listByDatabase,
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.listByDatabase,
   "LedgerDigestUploads"
 );
-@@clientLocation(LedgerDigestUploadsOperationGroup.disable,
+@@clientLocation(
+  LedgerDigestUploadsOperationGroup.disable,
   "LedgerDigestUploads"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LedgerDigestUploads.properties);
 
-@@clientName(LongTermRetentionBackups.changeAccessTier::parameters.body,
+@@clientName(
+  LongTermRetentionBackups.changeAccessTier::parameters.body,
   "parameters"
 );
 @@clientName(LongTermRetentionBackups.copy::parameters.body, "parameters");
 @@clientName(LongTermRetentionBackups.update::parameters.body, "parameters");
-@@clientLocation(LongTermRetentionBackupOperationGroup.getByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.getByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.deleteByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.deleteByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.listByResourceGroupDatabase,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.listByResourceGroupDatabase,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientName(LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
+@@clientName(
+  LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
   "parameters"
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.copyByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.copyByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientName(LongTermRetentionBackupOperationGroup.copyByResourceGroup::parameters.body,
+@@clientName(
+  LongTermRetentionBackupOperationGroup.copyByResourceGroup::parameters.body,
   "parameters"
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.lockTimeBasedImmutabilityByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.lockTimeBasedImmutabilityByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.removeLegalHoldImmutabilityByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.removeLegalHoldImmutabilityByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.removeTimeBasedImmutabilityByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.removeTimeBasedImmutabilityByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.setLegalHoldImmutabilityByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.setLegalHoldImmutabilityByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupOperationGroup.updateByResourceGroup,
+@@clientLocation(
+  LongTermRetentionBackupOperationGroup.updateByResourceGroup,
   LongTermRetentionBackups
 );
-@@clientName(LongTermRetentionBackupOperationGroup.updateByResourceGroup::parameters.body,
+@@clientName(
+  LongTermRetentionBackupOperationGroup.updateByResourceGroup::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LongTermRetentionBackup.properties);
 
-@@clientLocation(ManagedInstanceLongTermRetentionBackups.get,
+@@clientLocation(
+  ManagedInstanceLongTermRetentionBackups.get,
   LongTermRetentionManagedInstanceBackups
 );
-@@clientLocation(ManagedInstanceLongTermRetentionBackups.delete,
+@@clientLocation(
+  ManagedInstanceLongTermRetentionBackups.delete,
   LongTermRetentionManagedInstanceBackups
 );
-@@clientLocation(ManagedInstanceLongTermRetentionBackups.listByDatabase,
+@@clientLocation(
+  ManagedInstanceLongTermRetentionBackups.listByDatabase,
   LongTermRetentionManagedInstanceBackups
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceLongTermRetentionBackup.properties);
 
-@@clientName(LongTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  LongTermRetentionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LongTermRetentionPolicy.properties);
 
-@@clientLocation(MaintenanceWindowOptionsOperationGroup.get,
+@@clientLocation(
+  MaintenanceWindowOptionsOperationGroup.get,
   "MaintenanceWindowOptions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MaintenanceWindowOptions.properties);
 
 @@clientLocation(MaintenanceWindowsOperationGroup.get, "MaintenanceWindows");
-@@clientLocation(MaintenanceWindowsOperationGroup.createOrUpdate,
+@@clientLocation(
+  MaintenanceWindowsOperationGroup.createOrUpdate,
   "MaintenanceWindows"
 );
-@@clientName(MaintenanceWindowsOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  MaintenanceWindowsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MaintenanceWindows.properties);
 
-@@clientName(ManagedBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ManagedBackupShortTermRetentionPolicies.update::parameters.properties,
+@@clientName(
+  ManagedBackupShortTermRetentionPolicies.update::parameters.properties,
   "parameters"
 );
-@@clientName(ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.update::parameters.properties,
+@@clientName(
+  ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedBackupShortTermRetentionPolicy.properties);
 
-@@clientLocation(ManagedDatabaseAdvancedThreatProtections.get,
+@@clientLocation(
+  ManagedDatabaseAdvancedThreatProtections.get,
   "ManagedDatabaseAdvancedThreatProtectionSettings"
 );
-@@clientLocation(ManagedDatabaseAdvancedThreatProtections.createOrUpdate,
+@@clientLocation(
+  ManagedDatabaseAdvancedThreatProtections.createOrUpdate,
   "ManagedDatabaseAdvancedThreatProtectionSettings"
 );
-@@clientName(ManagedDatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedDatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ManagedDatabaseAdvancedThreatProtections.listByDatabase,
+@@clientLocation(
+  ManagedDatabaseAdvancedThreatProtections.listByDatabase,
   "ManagedDatabaseAdvancedThreatProtectionSettings"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedDatabaseAdvancedThreatProtection.properties);
 
-@@clientLocation(ManagedDatabaseMoveOperationResults.get,
+@@clientLocation(
+  ManagedDatabaseMoveOperationResults.get,
   "ManagedDatabaseMoveOperations"
 );
-@@clientLocation(ManagedDatabaseMoveOperationResults.listByLocation,
+@@clientLocation(
+  ManagedDatabaseMoveOperationResults.listByLocation,
   "ManagedDatabaseMoveOperations"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -628,13 +733,15 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceQuery.properties);
 
-@@clientLocation(ManagedDatabaseRestoreDetailsResults.get,
+@@clientLocation(
+  ManagedDatabaseRestoreDetailsResults.get,
   "ManagedDatabaseRestoreDetails"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedDatabaseRestoreDetailsResult.properties);
 
-@@clientName(ManagedDatabases.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedDatabases.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ManagedDatabases.update::parameters.properties, "parameters");
@@ -643,141 +750,175 @@ using Microsoft.Sql;
 @@clientName(ManagedDatabases.completeMove::parameters.body, "parameters");
 @@clientName(ManagedDatabases.completeRestore::parameters.body, "parameters");
 @@clientName(ManagedDatabases.startMove::parameters.body, "parameters");
-@@clientLocation(ManagedDatabases.managedDatabaseSecurityEventsListByDatabase,
+@@clientLocation(
+  ManagedDatabases.managedDatabaseSecurityEventsListByDatabase,
   "ManagedDatabaseSecurityEvents"
 );
-@@clientName(ManagedDatabases.managedDatabaseSecurityEventsListByDatabase,
+@@clientName(
+  ManagedDatabases.managedDatabaseSecurityEventsListByDatabase,
   "ListByDatabase"
 );
-@@clientLocation(ManagedDatabases.listCurrentByDatabase,
+@@clientLocation(
+  ManagedDatabases.listCurrentByDatabase,
   "ManagedDatabaseSensitivityLabels"
 );
-@@clientLocation(ManagedDatabases.managedDatabaseSensitivityLabelsUpdate,
+@@clientLocation(
+  ManagedDatabases.managedDatabaseSensitivityLabelsUpdate,
   "ManagedDatabaseSensitivityLabels"
 );
 @@clientName(ManagedDatabases.managedDatabaseSensitivityLabelsUpdate, "Update");
-@@clientName(ManagedDatabases.managedDatabaseSensitivityLabelsUpdate::parameters.body,
+@@clientName(
+  ManagedDatabases.managedDatabaseSensitivityLabelsUpdate::parameters.body,
   "parameters"
 );
-@@clientLocation(ManagedDatabases.listRecommendedByDatabase,
+@@clientLocation(
+  ManagedDatabases.listRecommendedByDatabase,
   "ManagedDatabaseSensitivityLabels"
 );
-@@clientLocation(ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate,
+@@clientLocation(
+  ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate,
   "ManagedDatabaseRecommendedSensitivityLabels"
 );
-@@clientName(ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate,
+@@clientName(
+  ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate,
   "Update"
 );
-@@clientName(ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate::parameters.body,
+@@clientName(
+  ManagedDatabases.managedDatabaseRecommendedSensitivityLabelsUpdate::parameters.body,
   "parameters"
 );
-@@clientLocation(ManagedDatabases.managedDatabaseSensitivityLabelsListByDatabase,
+@@clientLocation(
+  ManagedDatabases.managedDatabaseSensitivityLabelsListByDatabase,
   "ManagedDatabaseSensitivityLabels"
 );
-@@clientName(ManagedDatabases.managedDatabaseSensitivityLabelsListByDatabase,
+@@clientName(
+  ManagedDatabases.managedDatabaseSensitivityLabelsListByDatabase,
   "ListByDatabase"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedDatabase.properties);
 
-@@clientName(ManagedDatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedDatabaseSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedDatabaseSecurityAlertPolicy.properties);
 
 @@clientLocation(SensitivityLabels.get, "ManagedDatabaseSensitivityLabels");
-@@clientLocation(SensitivityLabels.createOrUpdate,
+@@clientLocation(
+  SensitivityLabels.createOrUpdate,
   "ManagedDatabaseSensitivityLabels"
 );
-@@clientName(SensitivityLabels.createOrUpdate::parameters.resource,
+@@clientName(
+  SensitivityLabels.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(SensitivityLabels.delete, "ManagedDatabaseSensitivityLabels");
-@@clientLocation(SensitivityLabels.disableRecommendation,
+@@clientLocation(
+  SensitivityLabels.disableRecommendation,
   "ManagedDatabaseSensitivityLabels"
 );
-@@clientLocation(SensitivityLabels.enableRecommendation,
+@@clientLocation(
+  SensitivityLabels.enableRecommendation,
   "ManagedDatabaseSensitivityLabels"
 );
 @@clientLocation(SensitivityLabelOperationGroup.get, SensitivityLabels);
-@@clientLocation(SensitivityLabelOperationGroup.createOrUpdate,
+@@clientLocation(
+  SensitivityLabelOperationGroup.createOrUpdate,
   SensitivityLabels
 );
-@@clientName(SensitivityLabelOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  SensitivityLabelOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(SensitivityLabelOperationGroup.delete, SensitivityLabels);
-@@clientLocation(SensitivityLabelOperationGroup.disableRecommendation,
+@@clientLocation(
+  SensitivityLabelOperationGroup.disableRecommendation,
   SensitivityLabels
 );
-@@clientLocation(SensitivityLabelOperationGroup.enableRecommendation,
+@@clientLocation(
+  SensitivityLabelOperationGroup.enableRecommendation,
   SensitivityLabels
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SensitivityLabel.properties);
 
-@@clientLocation(ManagedTransparentDataEncryptions.get,
+@@clientLocation(
+  ManagedTransparentDataEncryptions.get,
   "ManagedDatabaseTransparentDataEncryption"
 );
-@@clientLocation(ManagedTransparentDataEncryptions.createOrUpdate,
+@@clientLocation(
+  ManagedTransparentDataEncryptions.createOrUpdate,
   "ManagedDatabaseTransparentDataEncryption"
 );
-@@clientName(ManagedTransparentDataEncryptions.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedTransparentDataEncryptions.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ManagedTransparentDataEncryptions.listByDatabase,
+@@clientLocation(
+  ManagedTransparentDataEncryptions.listByDatabase,
   "ManagedDatabaseTransparentDataEncryption"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedTransparentDataEncryption.properties);
 
-@@clientName(ManagedInstanceAdministrators.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceAdministrators.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceAdministrator.properties);
 
-@@clientLocation(ManagedInstanceAdvancedThreatProtections.get,
+@@clientLocation(
+  ManagedInstanceAdvancedThreatProtections.get,
   "ManagedInstanceAdvancedThreatProtectionSettings"
 );
-@@clientLocation(ManagedInstanceAdvancedThreatProtections.createOrUpdate,
+@@clientLocation(
+  ManagedInstanceAdvancedThreatProtections.createOrUpdate,
   "ManagedInstanceAdvancedThreatProtectionSettings"
 );
-@@clientName(ManagedInstanceAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ManagedInstanceAdvancedThreatProtections.listByInstance,
+@@clientLocation(
+  ManagedInstanceAdvancedThreatProtections.listByInstance,
   "ManagedInstanceAdvancedThreatProtectionSettings"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceAdvancedThreatProtection.properties);
 
-@@clientName(ManagedInstanceAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceAzureADOnlyAuthentication.properties);
 
-@@clientName(ManagedInstanceDtcs.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceDtcs.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceDtc.properties);
 
-@@clientName(ManagedInstanceEncryptionProtectors.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceEncryptionProtectors.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceEncryptionProtector.properties);
 
-@@clientName(ManagedInstanceKeys.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceKeys.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceKey.properties);
 
-@@clientName(ManagedInstanceLongTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceLongTermRetentionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -786,25 +927,30 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceOperation.properties);
 
-@@clientName(ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstancePrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstancePrivateEndpointConnection.properties);
 
-@@clientLocation(ManagedInstancePrivateLinks.get,
+@@clientLocation(
+  ManagedInstancePrivateLinks.get,
   "ManagedInstancePrivateLinkResources"
 );
-@@clientLocation(ManagedInstancePrivateLinks.listByManagedInstance,
+@@clientLocation(
+  ManagedInstancePrivateLinks.listByManagedInstance,
   "ManagedInstancePrivateLinkResources"
 );
 
-@@clientName(ManagedInstances.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstances.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ManagedInstances.update::parameters.properties, "parameters");
 @@clientLocation(ManagedInstances.listInaccessibleByInstance, ManagedDatabases);
-@@clientName(ManagedInstances.validateAzureKeyVaultEncryptionKey::parameters.body,
+@@clientName(
+  ManagedInstances.validateAzureKeyVaultEncryptionKey::parameters.body,
   "parameters"
 );
 @@clientLocation(ManagedInstances.create, "ManagedInstanceTdeCertificates");
@@ -813,38 +959,46 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstance.properties);
 
-@@clientName(ManagedInstanceVulnerabilityAssessments.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedInstanceVulnerabilityAssessments.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedInstanceVulnerabilityAssessment.properties);
 
-@@clientLocation(ManagedLedgerDigestUploadsOperationGroup.get,
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.get,
   "ManagedLedgerDigestUploads"
 );
-@@clientLocation(ManagedLedgerDigestUploadsOperationGroup.createOrUpdate,
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.createOrUpdate,
   "ManagedLedgerDigestUploads"
 );
-@@clientName(ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ManagedLedgerDigestUploadsOperationGroup.listByDatabase,
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.listByDatabase,
   "ManagedLedgerDigestUploads"
 );
-@@clientLocation(ManagedLedgerDigestUploadsOperationGroup.disable,
+@@clientLocation(
+  ManagedLedgerDigestUploadsOperationGroup.disable,
   "ManagedLedgerDigestUploads"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedLedgerDigestUploads.properties);
 
-@@clientName(ManagedServerDnsAliases.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedServerDnsAliases.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ManagedServerDnsAliases.acquire::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedServerDnsAlias.properties);
 
-@@clientName(ManagedServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ManagedServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -856,7 +1010,8 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(OutboundFirewallRule.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -868,7 +1023,8 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RecoverableManagedDatabase.properties);
 
-@@clientName(ReplicationLinks.createOrUpdate::parameters.resource,
+@@clientName(
+  ReplicationLinks.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ReplicationLinks.update::parameters.properties, "parameters");
@@ -884,16 +1040,20 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorePoint.properties);
 
-@@clientLocation(ServerAdvancedThreatProtections.get,
+@@clientLocation(
+  ServerAdvancedThreatProtections.get,
   "ServerAdvancedThreatProtectionSettings"
 );
-@@clientLocation(ServerAdvancedThreatProtections.createOrUpdate,
+@@clientLocation(
+  ServerAdvancedThreatProtections.createOrUpdate,
   "ServerAdvancedThreatProtectionSettings"
 );
-@@clientName(ServerAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ServerAdvancedThreatProtections.listByServer,
+@@clientLocation(
+  ServerAdvancedThreatProtections.listByServer,
   "ServerAdvancedThreatProtectionSettings"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -901,37 +1061,43 @@ using Microsoft.Sql;
 
 @@clientLocation(ServerAutomaticTunings.get, "ServerAutomaticTuning");
 @@clientLocation(ServerAutomaticTunings.update, "ServerAutomaticTuning");
-@@clientName(ServerAutomaticTunings.update::parameters.properties,
+@@clientName(
+  ServerAutomaticTunings.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerAutomaticTuning.properties);
 
-@@clientName(ServerAzureADAdministrators.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerAzureADAdministrators.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerAzureADAdministrator.properties);
 
-@@clientName(ServerAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerAzureADOnlyAuthentications.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerAzureADOnlyAuthentication.properties);
 
-@@clientName(ServerConfigurationOptions.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerConfigurationOptions.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerConfigurationOption.properties);
 
-@@clientName(ServerConnectionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerConnectionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerConnectionPolicy.properties);
 
-@@clientName(ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -961,25 +1127,29 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Server.properties);
 
-@@clientName(ServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerSecurityAlertPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerSecurityAlertPolicy.properties);
 
-@@clientName(ServerTrustCertificates.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerTrustCertificates.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerTrustCertificate.properties);
 
-@@clientName(ServerTrustGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerTrustGroups.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ServerTrustGroup.properties);
 
-@@clientName(ServerVulnerabilityAssessments.createOrUpdate::parameters.resource,
+@@clientName(
+  ServerVulnerabilityAssessments.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -987,13 +1157,15 @@ using Microsoft.Sql;
 
 @@clientLocation(SqlAgentConfigurations.get, "SqlAgent");
 @@clientLocation(SqlAgentConfigurations.createOrUpdate, "SqlAgent");
-@@clientName(SqlAgentConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  SqlAgentConfigurations.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlAgentConfiguration.properties);
 
-@@clientName(StartStopManagedInstanceSchedules.createOrUpdate::parameters.resource,
+@@clientName(
+  StartStopManagedInstanceSchedules.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1019,22 +1191,28 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TimeZone.properties);
 
-@@clientLocation(LogicalDatabaseTransparentDataEncryptions.get,
+@@clientLocation(
+  LogicalDatabaseTransparentDataEncryptions.get,
   "TransparentDataEncryptions"
 );
-@@clientLocation(LogicalDatabaseTransparentDataEncryptions.createOrUpdate,
+@@clientLocation(
+  LogicalDatabaseTransparentDataEncryptions.createOrUpdate,
   "TransparentDataEncryptions"
 );
-@@clientName(LogicalDatabaseTransparentDataEncryptions.createOrUpdate::parameters.resource,
+@@clientName(
+  LogicalDatabaseTransparentDataEncryptions.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(LogicalDatabaseTransparentDataEncryptions.listByDatabase,
+@@clientLocation(
+  LogicalDatabaseTransparentDataEncryptions.listByDatabase,
   "TransparentDataEncryptions"
 );
-@@clientLocation(LogicalDatabaseTransparentDataEncryptions.resume,
+@@clientLocation(
+  LogicalDatabaseTransparentDataEncryptions.resume,
   "TransparentDataEncryptions"
 );
-@@clientLocation(LogicalDatabaseTransparentDataEncryptions.suspend,
+@@clientLocation(
+  LogicalDatabaseTransparentDataEncryptions.suspend,
   "TransparentDataEncryptions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1045,13 +1223,15 @@ using Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualCluster.properties);
 
-@@clientName(VirtualNetworkRules.createOrUpdate::parameters.resource,
+@@clientName(
+  VirtualNetworkRules.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(VirtualNetworkRule.properties);
 
-@@clientName(WorkloadClassifiers.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkloadClassifiers.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1065,29 +1245,37 @@ using Microsoft.Sql;
 
 @@clientLocation(CapabilitiesOperationGroup.listByLocation, "Capabilities");
 
-@@clientLocation(LongTermRetentionBackupsOperationGroup.listByLocation,
+@@clientLocation(
+  LongTermRetentionBackupsOperationGroup.listByLocation,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupsOperationGroup.listByServer,
+@@clientLocation(
+  LongTermRetentionBackupsOperationGroup.listByServer,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupsOperationGroup.listByResourceGroupLocation,
+@@clientLocation(
+  LongTermRetentionBackupsOperationGroup.listByResourceGroupLocation,
   LongTermRetentionBackups
 );
-@@clientLocation(LongTermRetentionBackupsOperationGroup.listByResourceGroupServer,
+@@clientLocation(
+  LongTermRetentionBackupsOperationGroup.listByResourceGroupServer,
   LongTermRetentionBackups
 );
 
-@@clientLocation(LongTermRetentionManagedInstanceBackupsOperationGroup.listByLocation,
+@@clientLocation(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByLocation,
   LongTermRetentionManagedInstanceBackups
 );
-@@clientLocation(LongTermRetentionManagedInstanceBackupsOperationGroup.listByInstance,
+@@clientLocation(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByInstance,
   LongTermRetentionManagedInstanceBackups
 );
-@@clientLocation(LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupLocation,
+@@clientLocation(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupLocation,
   LongTermRetentionManagedInstanceBackups
 );
-@@clientLocation(LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupInstance,
+@@clientLocation(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupInstance,
   LongTermRetentionManagedInstanceBackups
 );
 
@@ -1095,13 +1283,15 @@ using Microsoft.Sql;
 
 @@clientLocation(SyncGroupsOperationGroup.listSyncDatabaseIds, SyncGroups);
 
-@@clientName(ServersOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  ServersOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
 @@visibility(ManagedInstancePrivateLink.properties, Lifecycle.Read);
 @@visibility(PrivateLinkResource.properties, Lifecycle.Read);
 @@doc(RestorableDroppedDatabase.location, "Resource location.");
-@@clientName(Azure.ResourceManager.CommonTypes.SystemData,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.SystemData,
   "systemdata",
   "!javascript,!python,!java,!go"
 );

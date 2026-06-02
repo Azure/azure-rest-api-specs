@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/http";
 
 using TypeSpec.Versioning;
 using TypeSpec.Http;

@@ -5,19 +5,22 @@ using Azure.ClientGenerator.Core;
 using Microsoft.StorageMover;
 using Azure.Core;
 
-@@alternateType(Azure.ResourceManager.ProxyResource.id,
+@@alternateType(
+  Azure.ResourceManager.ProxyResource.id,
   armResourceIdentifier,
   "csharp"
 );
 
 @@clientName(Endpoint, "StorageMoverEndpoint", "csharp");
-@@clientName(EndpointBaseUpdateParameters,
+@@clientName(
+  EndpointBaseUpdateParameters,
   "StorageMoverEndpointPatch",
   "csharp"
 );
 @@clientName(Project, "StorageMoverProject", "csharp");
 @@clientName(Agent, "StorageMoverAgent", "csharp");
-@@clientName(AgentPropertiesErrorDetails,
+@@clientName(
+  AgentPropertiesErrorDetails,
   "StorageMoverAgentPropertiesErrorDetails",
   "csharp"
 );
@@ -30,57 +33,70 @@ using Azure.Core;
 @@clientName(WeeklyRecurrence, "ScheduleWeeklyRecurrence", "csharp");
 @@clientName(Recurrence, "ScheduleRecurrence", "csharp");
 @@clientName(Time, "ScheduleTime", "csharp");
-@@clientName(JobRunResourceId.jobRunResourceId,
+@@clientName(
+  JobRunResourceId.jobRunResourceId,
   "JobRunResourceIdValue",
   "csharp"
 );
 
-@@alternateType(JobDefinitionProperties.agentResourceId,
+@@alternateType(
+  JobDefinitionProperties.agentResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(JobDefinitionProperties.latestJobRunResourceId,
+@@alternateType(
+  JobDefinitionProperties.latestJobRunResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(JobDefinitionProperties.sourceResourceId,
+@@alternateType(
+  JobDefinitionProperties.sourceResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(JobDefinitionProperties.targetResourceId,
+@@alternateType(
+  JobDefinitionProperties.targetResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(JobRunProperties.agentResourceId,
+@@alternateType(
+  JobRunProperties.agentResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(JobRunProperties.sourceResourceId,
+@@alternateType(
+  JobRunProperties.sourceResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(JobRunProperties.targetResourceId,
+@@alternateType(
+  JobRunProperties.targetResourceId,
   armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(JobRunResourceId.jobRunResourceId,
+@@alternateType(
+  JobRunResourceId.jobRunResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AzureStorageBlobContainerEndpointProperties.storageAccountResourceId,
+@@alternateType(
+  AzureStorageBlobContainerEndpointProperties.storageAccountResourceId,
   string,
   "csharp"
 );
-@@clientName(AzureKeyVaultSmbCredentials.passwordUri,
+@@clientName(
+  AzureKeyVaultSmbCredentials.passwordUri,
   "PasswordUriString",
   "csharp"
 );
-@@clientName(AzureKeyVaultSmbCredentials.usernameUri,
+@@clientName(
+  AzureKeyVaultSmbCredentials.usernameUri,
   "UsernameUriString",
   "csharp"
 );
-@@clientName(ConnectionProperties,
+@@clientName(
+  ConnectionProperties,
   "StorageMoverConnectionProperties",
   "csharp"
 );
@@ -102,11 +118,13 @@ using Azure.Core;
 @@clientName(TriggerType, "StorageMoverJobTriggerType", "csharp");
 @@clientName(ScheduleInfo, "StorageMoverScheduleInfo", "csharp");
 @@clientName(SchedulerTime, "StorageMoverSchedulerTime", "csharp");
-@@clientName(DataIntegrityValidation,
+@@clientName(
+  DataIntegrityValidation,
   "StorageMoverDataIntegrityValidation",
   "csharp"
 );
-@@clientName(JobDefinitionProperties.preservePermissions,
+@@clientName(
+  JobDefinitionProperties.preservePermissions,
   "IsPermissionsPreserved",
   "csharp"
 );

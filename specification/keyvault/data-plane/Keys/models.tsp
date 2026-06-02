@@ -159,13 +159,13 @@ union JsonWebKeyWrapAlgorithm {
   A256_KW: "A256KW",
 
   /** 128-bit AES key wrap with padding. */
-  A256_KWPAD: "A256KWPAD",
-
-  /** 192-bit AES key wrap with padding. */
   A128_KWPAD: "A128KWPAD",
 
-  /** 256-bit AES key wrap with padding. */
+  /** 192-bit AES key wrap with padding. */
   A192_KWPAD: "A192KWPAD",
+
+  /** 256-bit AES key wrap with padding. */
+  A256_KWPAD: "A256KWPAD",
 
   /** CKM AES key wrap. */
   @added(KeyVault.Versions.`v7.6_preview.2`)

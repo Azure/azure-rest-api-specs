@@ -6,12 +6,14 @@ using Microsoft.DesktopVirtualization;
 
 @@scope(Operations.list, "!csharp");
 
-@@clientName(AgentUpdatePatchProperties,
+@@clientName(
+  AgentUpdatePatchProperties,
   "SessionHostAgentUpdatePatchProperties",
   "csharp"
 );
 
-@@clientName(AgentUpdateProperties,
+@@clientName(
+  AgentUpdateProperties,
   "SessionHostAgentUpdateProperties",
   "csharp"
 );
@@ -24,7 +26,8 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(ApplicationType, "VirtualApplicationType", "csharp");
 
-@@clientName(CommandLineSetting,
+@@clientName(
+  CommandLineSetting,
   "VirtualApplicationCommandLineSetting",
   "csharp"
 );
@@ -35,41 +38,48 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(HealthCheckResult, "SessionHostHealthCheckResult", "csharp");
 
-@@clientName(HostpoolPublicNetworkAccess,
+@@clientName(
+  HostpoolPublicNetworkAccess,
   "HostPoolPublicNetworkAccess",
   "csharp"
 );
 
 @@clientName(LoadBalancerType, "HostPoolLoadBalancerType", "csharp");
 
-@@clientName(ScalingPlanPooledScheduleProperties.name,
+@@clientName(
+  ScalingPlanPooledScheduleProperties.name,
   "scheduleName",
   "csharp"
 );
 
-@@clientName(ScalingPlanPooledSchedulePatchProperties.name,
+@@clientName(
+  ScalingPlanPooledSchedulePatchProperties.name,
   "scheduleName",
   "csharp"
 );
 
-@@clientName(MaintenanceWindowProperties,
+@@clientName(
+  MaintenanceWindowProperties,
   "SessionHostMaintenanceWindowProperties",
   "csharp"
 );
 
-@@clientName(PrivateEndpointConnectionWithSystemData,
+@@clientName(
+  PrivateEndpointConnectionWithSystemData,
   "DesktopVirtualizationPrivateEndpointConnectionDataData",
   "csharp"
 );
 
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "DesktopVirtualizationPrivateLinkResourceData",
   "csharp"
 );
 
 @@clientName(ProvisioningState, "AppAttachPackageProvisioningState", "csharp");
 
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "DesktopVirtualizationPublicNetworkAccess",
   "csharp"
 );
@@ -78,7 +88,8 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(RegistrationInfoPatch, "HostPoolRegistrationInfoPatch", "csharp");
 
-@@clientName(RegistrationTokenOperation,
+@@clientName(
+  RegistrationTokenOperation,
   "HostPoolRegistrationTokenOperation",
   "csharp"
 );
@@ -109,44 +120,52 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(HostPoolType.BYODesktop, "BringYourOwnDesktop", "csharp");
 
-@@clientName(AgentUpdatePatchProperties.useSessionHostLocalTime,
+@@clientName(
+  AgentUpdatePatchProperties.useSessionHostLocalTime,
   "DoesUseSessionHostLocalTime",
   "csharp"
 );
 
-@@clientName(AgentUpdateProperties.useSessionHostLocalTime,
+@@clientName(
+  AgentUpdateProperties.useSessionHostLocalTime,
   "DoesUseSessionHostLocalTime",
   "csharp"
 );
 
-@@clientName(AppAttachPackageInfoProperties.certificateExpiry,
+@@clientName(
+  AppAttachPackageInfoProperties.certificateExpiry,
   "CertificateExpireOn",
   "csharp"
 );
 
-@@clientName(AppAttachPackageInfoProperties.lastUpdated,
+@@clientName(
+  AppAttachPackageInfoProperties.lastUpdated,
   "LastUpdatedOn",
   "csharp"
 );
 
-@@clientName(AppAttachPackagePatchProperties.keyVaultURL,
+@@clientName(
+  AppAttachPackagePatchProperties.keyVaultURL,
   "KeyVaultUri",
   "csharp"
 );
 
 @@clientName(AppAttachPackageProperties.keyVaultURL, "KeyVaultUri", "csharp");
 
-@@clientName(ApplicationGroupProperties.cloudPcResource,
+@@clientName(
+  ApplicationGroupProperties.cloudPcResource,
   "IsCloudPCResource",
   "csharp"
 );
 
-@@clientName(ApplicationGroupProperties.hostPoolArmPath,
+@@clientName(
+  ApplicationGroupProperties.hostPoolArmPath,
   "HostPoolId",
   "csharp"
 );
 
-@@clientName(ApplicationGroupProperties.workspaceArmPath,
+@@clientName(
+  ApplicationGroupProperties.workspaceArmPath,
   "WorkspaceId",
   "csharp"
 );
@@ -157,46 +176,54 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(HostPoolProperties.ssoadfsAuthority, "SsoAdfsAuthority", "csharp");
 
-@@clientName(HostPoolProperties.validationEnvironment,
+@@clientName(
+  HostPoolProperties.validationEnvironment,
   "IsValidationEnvironment",
   "csharp"
 );
 
-@@clientName(HostPoolPatchProperties.ssoadfsAuthority,
+@@clientName(
+  HostPoolPatchProperties.ssoadfsAuthority,
   "SsoAdfsAuthority",
   "csharp"
 );
 
-@@clientName(HostPoolPatchProperties.validationEnvironment,
+@@clientName(
+  HostPoolPatchProperties.validationEnvironment,
   "IsValidationEnvironment",
   "csharp"
 );
 
-@@clientName(AllowRDPShortPathWithPrivateLink,
+@@clientName(
+  AllowRDPShortPathWithPrivateLink,
   "DesktopVirtualizationAllowRdpShortPathWithPrivateLink",
   "csharp"
 );
 
-@@clientName(HostPoolProperties.managedPrivateUDP,
+@@clientName(
+  HostPoolProperties.managedPrivateUDP,
   "ManagedPrivateUdp",
   "csharp"
 );
 @@clientName(HostPoolProperties.directUDP, "DirectUdp", "csharp");
 @@clientName(HostPoolProperties.publicUDP, "PublicUdp", "csharp");
 @@clientName(HostPoolProperties.relayUDP, "RelayUdp", "csharp");
-@@clientName(HostPoolProperties.allowRDPShortPathWithPrivateLink,
+@@clientName(
+  HostPoolProperties.allowRDPShortPathWithPrivateLink,
   "AllowRdpShortPathWithPrivateLink",
   "csharp"
 );
 
-@@clientName(HostPoolPatchProperties.managedPrivateUDP,
+@@clientName(
+  HostPoolPatchProperties.managedPrivateUDP,
   "ManagedPrivateUdp",
   "csharp"
 );
 @@clientName(HostPoolPatchProperties.directUDP, "DirectUdp", "csharp");
 @@clientName(HostPoolPatchProperties.publicUDP, "PublicUdp", "csharp");
 @@clientName(HostPoolPatchProperties.relayUDP, "RelayUdp", "csharp");
-@@clientName(HostPoolPatchProperties.allowRDPShortPathWithPrivateLink,
+@@clientName(
+  HostPoolPatchProperties.allowRDPShortPathWithPrivateLink,
   "AllowRdpShortPathWithPrivateLink",
   "csharp"
 );
@@ -206,12 +233,14 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(ScalingHostPoolReference.hostPoolArmPath, "HostPoolId", "csharp");
 
-@@clientName(ScalingHostPoolReference.scalingPlanEnabled,
+@@clientName(
+  ScalingHostPoolReference.scalingPlanEnabled,
   "IsScalingPlanEnabled",
   "csharp"
 );
 
-@@clientName(ScalingPlanProperties.hostPoolType,
+@@clientName(
+  ScalingPlanProperties.hostPoolType,
   "ScalingHostPoolType",
   "csharp"
 );
@@ -222,12 +251,14 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(SessionHostProperties.virtualMachineId, "VmId", "csharp");
 
-@@clientName(WorkspaceProperties.cloudPcResource,
+@@clientName(
+  WorkspaceProperties.cloudPcResource,
   "IsCloudPCResource",
   "csharp"
 );
 
-@@alternateType(AppAttachPackagePatchProperties.keyVaultURL,
+@@alternateType(
+  AppAttachPackagePatchProperties.keyVaultURL,
   TypeSpec.url,
   "csharp"
 );
@@ -242,47 +273,56 @@ using Microsoft.DesktopVirtualization;
 
 @@alternateType(MsixPackageApplications.rawPng, unknown, "csharp");
 
-@@alternateType(ResourceModelWithAllowedPropertySet.managedBy,
+@@alternateType(
+  ResourceModelWithAllowedPropertySet.managedBy,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(ApplicationGroupProperties.hostPoolArmPath,
+@@alternateType(
+  ApplicationGroupProperties.hostPoolArmPath,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(ApplicationGroupProperties.workspaceArmPath,
+@@alternateType(
+  ApplicationGroupProperties.workspaceArmPath,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(ScalingHostPoolReference.hostPoolArmPath,
+@@alternateType(
+  ScalingHostPoolReference.hostPoolArmPath,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(SessionHostProperties.resourceId,
+@@alternateType(
+  SessionHostProperties.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(NetworkInfoProperties.securityGroupId,
+@@alternateType(
+  NetworkInfoProperties.securityGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(NetworkInfoPatchProperties.securityGroupId,
+@@alternateType(
+  NetworkInfoPatchProperties.securityGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(ScalingSchedule.daysOfWeek,
+@@alternateType(
+  ScalingSchedule.daysOfWeek,
   ScalingScheduleDaysOfWeekItemUsingStruct[],
   "csharp"
 );
 
-@@clientName(AppAttachPackageArchitectures,
+@@clientName(
+  AppAttachPackageArchitectures,
   "AppAttachPackageArchitecture",
   "csharp"
 );
@@ -290,24 +330,29 @@ using Microsoft.DesktopVirtualization;
 @@clientName(SetStartVMOnConnect, "SetStartVmOnConnect", "csharp");
 @@clientName(ScalingPlans.listByHostPool, "listScalingPlans", "csharp");
 @@clientName(UserSessions.listByHostPool, "listUserSessions", "csharp");
-@@clientName(SessionHostManagementProvisioningStatuses.get,
+@@clientName(
+  SessionHostManagementProvisioningStatuses.get,
   "getProvisioningStatus",
   "csharp"
 );
-@@clientName(SessionHostManagementUpdateStatuses.get,
+@@clientName(
+  SessionHostManagementUpdateStatuses.get,
   "getUpdateStatus",
   "csharp"
 );
-@@clientName(HostPoolProvisioningControlParameter,
+@@clientName(
+  HostPoolProvisioningControlParameter,
   "HostPoolProvisioningControlContent",
   "csharp"
 );
 
-@@clientName(ResourceProviderOperation,
+@@clientName(
+  ResourceProviderOperation,
   "ResourceProviderOperationInfo",
   "csharp"
 );
-@@clientName(HostPoolUpdateControlParameter,
+@@clientName(
+  HostPoolUpdateControlParameter,
   "HostPoolUpdateControlContent",
   "csharp"
 );
@@ -317,28 +362,34 @@ using Microsoft.DesktopVirtualization;
 @@clientName(MSIXImageURI, "MsixImageUri", "csharp");
 @@clientName(HostPoolProperties.startVMOnConnect, "StartVmOnConnect", "csharp");
 @@clientName(AppAttachPackageArchitectures.x86a64, "X86A64", "csharp");
-@@clientName(HostPoolPatchProperties.startVMOnConnect,
+@@clientName(
+  HostPoolPatchProperties.startVMOnConnect,
   "StartVmOnConnect",
   "csharp"
 );
-@@clientName(MsixPackageApplications.appUserModelID,
+@@clientName(
+  MsixPackageApplications.appUserModelID,
   "AppUserModelId",
   "csharp"
 );
 
-@@clientName(ScalingPlanPersonalSchedulePatchProperties.offPeakStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalSchedulePatchProperties.offPeakStartVMOnConnect,
   "OffPeakStartVmOnConnect",
   "csharp"
 );
-@@clientName(ScalingPlanPersonalSchedulePatchProperties.peakStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalSchedulePatchProperties.peakStartVMOnConnect,
   "PeakStartVmOnConnect",
   "csharp"
 );
-@@clientName(ScalingPlanPersonalSchedulePatchProperties.rampDownStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalSchedulePatchProperties.rampDownStartVMOnConnect,
   "RampDownStartVmOnConnect",
   "csharp"
 );
-@@clientName(ScalingPlanPersonalSchedulePatchProperties.rampUpStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalSchedulePatchProperties.rampUpStartVMOnConnect,
   "RampUpStartVmOnConnect",
   "csharp"
 );
@@ -346,52 +397,63 @@ using Microsoft.DesktopVirtualization;
 @@clientName(AgentUpdatePatchProperties.type, "UpdateType", "csharp");
 @@clientName(AgentUpdateProperties.type, "UpdateType", "csharp");
 
-@@clientName(HealthCheckName.SxSStackListenerCheck,
+@@clientName(
+  HealthCheckName.SxSStackListenerCheck,
   "SxsStackListenerCheck",
   "csharp"
 );
-@@clientName(HealthCheckName.WebRTCRedirectorCheck,
+@@clientName(
+  HealthCheckName.WebRTCRedirectorCheck,
   "WebRtcRedirectorCheck",
   "csharp"
 );
-@@clientName(Status.SxSStackListenerNotReady,
+@@clientName(
+  Status.SxSStackListenerNotReady,
   "SxsStackListenerNotReady",
   "csharp"
 );
 
-@@clientName(ScalingPlanPersonalScheduleProperties.offPeakStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalScheduleProperties.offPeakStartVMOnConnect,
   "OffPeakStartVmOnConnect",
   "csharp"
 );
-@@clientName(ScalingPlanPersonalScheduleProperties.peakStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalScheduleProperties.peakStartVMOnConnect,
   "PeakStartVmOnConnect",
   "csharp"
 );
-@@clientName(ScalingPlanPersonalScheduleProperties.rampDownStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalScheduleProperties.rampDownStartVMOnConnect,
   "RampDownStartVmOnConnect",
   "csharp"
 );
-@@clientName(ScalingPlanPersonalScheduleProperties.rampUpStartVMOnConnect,
+@@clientName(
+  ScalingPlanPersonalScheduleProperties.rampUpStartVMOnConnect,
   "RampUpStartVmOnConnect",
   "csharp"
 );
 
 @@clientName(SessionHostProperties.osVersion, "OSVersion", "csharp");
-@@clientName(SessionHostProperties.sxSStackVersion,
+@@clientName(
+  SessionHostProperties.sxSStackVersion,
   "SxsStackVersion",
   "csharp"
 );
 
 @@alternateType(HostPool.managedBy, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(ScalingPlan.managedBy,
+@@alternateType(
+  ScalingPlan.managedBy,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ApplicationGroup.managedBy,
+@@alternateType(
+  ApplicationGroup.managedBy,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Workspace.managedBy,
+@@alternateType(
+  Workspace.managedBy,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -402,137 +464,164 @@ using Microsoft.DesktopVirtualization;
 @@alternateType(Workspace.etag, Azure.Core.eTag, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionWithSystemData.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnectionWithSystemData.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Workspace.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpandMsixImage.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExpandMsixImage.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HostPool.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HostPool.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MSIXPackage.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MSIXPackage.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MSIXPackagePatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MSIXPackagePatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlan.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlan.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPersonalSchedule.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPersonalSchedule.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPooledSchedule.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPooledSchedule.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHost.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SessionHost.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserSession.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  UserSession.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Application.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Application.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroup.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationGroup.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Desktop.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Desktop.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Workspace.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StartMenuItem.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StartMenuItem.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HostPoolPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HostPoolPatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPersonalSchedulePatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPersonalSchedulePatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPooledSchedulePatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPooledSchedulePatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHostPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SessionHostPatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroupPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationGroupPatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationPatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DesktopPatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DesktopPatch.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspacePatch.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkspacePatch.properties,
   "csharp"
 );
 
@@ -553,22 +642,26 @@ using Microsoft.DesktopVirtualization;
 @@usage(PrivateEndpointConnection, Usage.input, "csharp");
 @@usage(PrivateLinkResource, Usage.input, "csharp");
 
-@@clientName(ScalingScheduleDaysOfWeekItem,
+@@clientName(
+  ScalingScheduleDaysOfWeekItem,
   "ScalingScheduleDaysOfWeekItemOld",
   "csharp"
 );
-@@clientName(ScalingScheduleDaysOfWeekItemUsingStruct,
+@@clientName(
+  ScalingScheduleDaysOfWeekItemUsingStruct,
   "ScalingScheduleDaysOfWeekItem",
   "csharp"
 );
-@@alternateType(ScalingScheduleDaysOfWeekItem,
+@@alternateType(
+  ScalingScheduleDaysOfWeekItem,
   ScalingScheduleDaysOfWeekItemUsingStruct,
   "csharp"
 );
 
 @@alternateType(SendMessageRequest, SendMessage, "csharp");
 @@clientName(SendMessage, "UserSessionMessage", "csharp");
-@@clientName(UserSessions.sendMessage::parameters.body,
+@@clientName(
+  UserSessions.sendMessage::parameters.body,
   "sendMessage",
   "csharp"
 );
@@ -576,228 +669,279 @@ using Microsoft.DesktopVirtualization;
 
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 
-@@clientName(AppAttachPackageInfo.`import`,
+@@clientName(
+  AppAttachPackageInfo.`import`,
   "importAppAttachPackageInfos",
   "csharp"
 );
 @@clientName(MSIXImages.expand, "expandMsixImages", "csharp");
 @@clientName(StartMenuItems.list, "getStartMenuItems", "csharp");
-@@clientName(PrivateLinkResources.listByHostPool,
+@@clientName(
+  PrivateLinkResources.listByHostPool,
   "getPrivateLinkResources",
   "csharp"
 );
-@@clientName(PrivateLinkResources.listByWorkspace,
+@@clientName(
+  PrivateLinkResources.listByWorkspace,
   "getPrivateLinkResources",
   "csharp"
 );
-@@clientLocation(PrivateLinkResources.listByWorkspace,
+@@clientLocation(
+  PrivateLinkResources.listByWorkspace,
   "PrivateLinkResourcesByWorkspace",
   "csharp"
 );
 
-@@Azure.ClientGenerator.Core.alternateType(CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
+@@Azure.ClientGenerator.Core.alternateType(
+  CustomPrivateEndpointConnection.updateByWorkspace::parameters.resource,
   PrivateEndpointConnection,
   "csharp"
 );
-@@Azure.ClientGenerator.Core.alternateType(CustomPrivateEndpointConnection.updateByHostPool::parameters.resource,
+@@Azure.ClientGenerator.Core.alternateType(
+  CustomPrivateEndpointConnection.updateByHostPool::parameters.resource,
   PrivateEndpointConnection,
   "csharp"
 );
 
-@@clientName(InitiateSessionHostUpdate.post,
+@@clientName(
+  InitiateSessionHostUpdate.post,
   "initiateSessionHostUpdate",
   "csharp"
 );
-@@clientName(ControlSessionHostProvisioning.post,
+@@clientName(
+  ControlSessionHostProvisioning.post,
   "controlSessionHostProvisioning",
   "csharp"
 );
-@@clientName(ControlSessionHostUpdate.post,
+@@clientName(
+  ControlSessionHostUpdate.post,
   "controlSessionHostUpdate",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(SessionHosts.listSingleSessionHostRegistrationTokens
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  SessionHosts.listSingleSessionHostRegistrationTokens
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(HostPools.listRegistrationTokens
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  HostPools.listRegistrationTokens
 );
 
 @@clientName(type, "DesktopVirtualizationImageType", "csharp");
-@@clientName(updateStatus,
+@@clientName(
+  updateStatus,
   "SessionHostManagementUpdateOperationStatus",
   "csharp"
 );
 @@clientName(CanaryPolicy, "DesktopVirtualizationCanaryPolicy", "csharp");
 @@clientName(DeploymentScope, "DesktopVirtualizationDeploymentScope", "csharp");
-@@clientName(CreateDeleteProperties,
+@@clientName(
+  CreateDeleteProperties,
   "DesktopVirtualizationCreateDeleteProperties",
   "csharp"
 );
 @@clientName(DiffDiskOption, "DesktopVirtualizationDiffDiskOption", "csharp");
-@@clientName(DiffDiskPlacement,
+@@clientName(
+  DiffDiskPlacement,
   "DesktopVirtualizationDiffDiskPlacement",
   "csharp"
 );
-@@clientName(DiffDiskProperties,
+@@clientName(
+  DiffDiskProperties,
   "DesktopVirtualizationDiffDiskProperties",
   "csharp"
 );
 @@clientName(DirectUDP, "DesktopVirtualizationDirectUdp", "csharp");
-@@clientName(DiskInfoProperties,
+@@clientName(
+  DiskInfoProperties,
   "DesktopVirtualizationDiskInfoProperties",
   "csharp"
 );
-@@clientName(DomainInfoProperties,
+@@clientName(
+  DomainInfoProperties,
   "DesktopVirtualizationDomainInfoProperties",
   "csharp"
 );
 @@clientName(DomainJoinType, "DesktopVirtualizationDomainJoinType", "csharp");
-@@clientName(ImageInfoProperties,
+@@clientName(
+  ImageInfoProperties,
   "DesktopVirtualizationImageInfoProperties",
   "csharp"
 );
-@@clientName(ImageInfoPatchProperties,
+@@clientName(
+  ImageInfoPatchProperties,
   "DesktopVirtualizationImageInfoPatchProperties",
   "csharp"
 );
-@@clientName(KeyVaultCredentialsPatchProperties,
+@@clientName(
+  KeyVaultCredentialsPatchProperties,
   "DesktopVirtualizationKeyVaultCredentialsPatchProperties",
   "csharp"
 );
-@@clientName(KeyVaultCredentialsProperties,
+@@clientName(
+  KeyVaultCredentialsProperties,
   "DesktopVirtualizationKeyVaultCredentialsProperties",
   "csharp"
 );
-@@clientName(ManagedPrivateUDP,
+@@clientName(
+  ManagedPrivateUDP,
   "DesktopVirtualizationManagedPrivateUdp",
   "csharp"
 );
-@@clientName(NetworkInfoPatchProperties,
+@@clientName(
+  NetworkInfoPatchProperties,
   "DesktopVirtualizationNetworkInfoPatchProperties",
   "csharp"
 );
 @@clientName(ManagementType, "DesktopVirtualizationManagementType", "csharp");
-@@clientName(NetworkInfoProperties,
+@@clientName(
+  NetworkInfoProperties,
   "DesktopVirtualizationNetworkInfoProperties",
   "csharp"
 );
 @@clientName(PublicUDP, "DesktopVirtualizationPublicUdp", "csharp");
-@@clientName(ProvisioningStateSHC,
+@@clientName(
+  ProvisioningStateSHC,
   "SessionHostConfigurationProvisioningState",
   "csharp"
 );
-@@clientName(RegistrationTokenList,
+@@clientName(
+  RegistrationTokenList,
   "DesktopVirtualizationRegistrationTokenList",
   "csharp"
 );
-@@clientName(RegistrationTokenMinimal,
+@@clientName(
+  RegistrationTokenMinimal,
   "DesktopVirtualizationRegistrationTokenMinimal",
   "csharp"
 );
 @@clientName(RelayUDP, "DesktopVirtualizationRelayUdp", "csharp");
-@@clientName(ScalingMethodType,
+@@clientName(
+  ScalingMethodType,
   "DesktopVirtualizationScalingMethodType",
   "csharp"
 );
-@@clientName(SecurityInfoPatchProperties,
+@@clientName(
+  SecurityInfoPatchProperties,
   "DesktopVirtualizationSecurityInfoPatchProperties",
   "csharp"
 );
-@@clientName(SecurityInfoProperties,
+@@clientName(
+  SecurityInfoProperties,
   "DesktopVirtualizationSecurityInfoProperties",
   "csharp"
 );
-@@clientName(UpdateSessionHostsRequestBody,
+@@clientName(
+  UpdateSessionHostsRequestBody,
   "DesktopVirtualizationUpdateSessionHostsContent",
   "csharp"
 );
-@@clientName(VirtualMachineDiskType,
+@@clientName(
+  VirtualMachineDiskType,
   "DesktopVirtualizationVirtualMachineDiskType",
   "csharp"
 );
-@@clientName(VirtualMachineSecurityType,
+@@clientName(
+  VirtualMachineSecurityType,
   "DesktopVirtualizationVirtualMachineSecurityType",
   "csharp"
 );
-@@clientName(FailedSessionHostCleanupPolicySHC,
+@@clientName(
+  FailedSessionHostCleanupPolicySHC,
   "SessionHostConfigurationFailedSessionHostCleanupPolicy",
   "csharp"
 );
 
-@@clientName(SessionHostProvisioningConfigurationProperties.setDrainMode,
+@@clientName(
+  SessionHostProvisioningConfigurationProperties.setDrainMode,
   "IsDrainModeEnabled",
   "csharp"
 );
-@@clientName(SessionHostProvisioningConfigurationPatchProperties.setDrainMode,
+@@clientName(
+  SessionHostProvisioningConfigurationPatchProperties.setDrainMode,
   "IsDrainModeEnabled",
   "csharp"
 );
 @@clientName(BootDiagnosticsInfoProperties.enabled, "IsEnabled", "csharp");
 @@clientName(BootDiagnosticsInfoPatchProperties.enabled, "IsEnabled", "csharp");
-@@clientName(SecurityInfoProperties.secureBootEnabled,
+@@clientName(
+  SecurityInfoProperties.secureBootEnabled,
   "IsSecureBootEnabled",
   "csharp"
 );
-@@clientName(SecurityInfoPatchProperties.secureBootEnabled,
+@@clientName(
+  SecurityInfoPatchProperties.secureBootEnabled,
   "IsSecureBootEnabled",
   "csharp"
 );
-@@clientName(HostPoolUpdateConfigurationProperties.deleteOriginalVm,
+@@clientName(
+  HostPoolUpdateConfigurationProperties.deleteOriginalVm,
   "ShouldDeleteOriginalVm",
   "csharp"
 );
-@@clientName(HostPoolUpdateConfigurationPatchProperties.deleteOriginalVm,
+@@clientName(
+  HostPoolUpdateConfigurationPatchProperties.deleteOriginalVm,
   "ShouldDeleteOriginalVm",
   "csharp"
 );
 
-@@alternateType(ActiveSessionHostConfigurationProperties.vmLocation,
+@@alternateType(
+  ActiveSessionHostConfigurationProperties.vmLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(SessionHostConfigurationProperties.vmLocation,
+@@alternateType(
+  SessionHostConfigurationProperties.vmLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(SessionHostConfigurationPatchProperties.vmLocation,
+@@alternateType(
+  SessionHostConfigurationPatchProperties.vmLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
 
 // Fix generic names — add DesktopVirtualization prefix
-@@clientName(ActiveDirectoryInfoProperties,
+@@clientName(
+  ActiveDirectoryInfoProperties,
   "DesktopVirtualizationActiveDirectoryInfoProperties",
   "csharp"
 );
-@@clientName(BootDiagnosticsInfoProperties,
+@@clientName(
+  BootDiagnosticsInfoProperties,
   "DesktopVirtualizationBootDiagnosticsInfoProperties",
   "csharp"
 );
-@@clientName(BootDiagnosticsInfoPatchProperties,
+@@clientName(
+  BootDiagnosticsInfoPatchProperties,
   "DesktopVirtualizationBootDiagnosticsInfoPatchProperties",
   "csharp"
 );
-@@clientName(MarketplaceInfoProperties,
+@@clientName(
+  MarketplaceInfoProperties,
   "DesktopVirtualizationMarketplaceInfoProperties",
   "csharp"
 );
-@@clientName(MarketplaceInfoPatchProperties,
+@@clientName(
+  MarketplaceInfoPatchProperties,
   "DesktopVirtualizationMarketplaceInfoPatchProperties",
   "csharp"
 );
 // Fix ScopedRegistrationTokenProperties — POST body should use Content suffix
-@@clientName(ScopedRegistrationTokenProperties,
+@@clientName(
+  ScopedRegistrationTokenProperties,
   "ScopedRegistrationTokenContent",
   "csharp"
 );
-@@clientName(ScopedRegistrationTokenProperties.expirationTimeInUtc,
+@@clientName(
+  ScopedRegistrationTokenProperties.expirationTimeInUtc,
   "ExpirationOn",
   "csharp"
 );

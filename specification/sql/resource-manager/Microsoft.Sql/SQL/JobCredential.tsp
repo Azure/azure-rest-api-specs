@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A stored credential that can be used by a job to connect to target databases.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(JobAgent)
+@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 model JobCredential
   is Azure.ResourceManager.ProxyResource<JobCredentialProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model JobCredential
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
 interface JobCredentials {
   /**
    * Gets a jobs credential.
@@ -50,6 +54,7 @@ interface JobCredentials {
 
 @@doc(JobCredential.name, "The name of the credential.");
 @@doc(JobCredential.properties, "Resource properties.");
-@@doc(JobCredentials.createOrUpdate::parameters.resource,
+@@doc(
+  JobCredentials.createOrUpdate::parameters.resource,
   "The requested job credential state."
 );

@@ -7,14 +7,16 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Rest;
 
-@@clientName(Microsoft.Network,
+@@clientName(
+  Microsoft.Network,
   "FrontDoorManagementClient",
   "python, javascript"
 );
 @@clientName(Experiment, "FrontDoorExperiment", "csharp");
 @@clientName(Profile, "FrontDoorNetworkExperimentProfile", "csharp");
 @@clientName(RulesEngine, "FrontDoorRulesEngine", "csharp");
-@@clientName(WebApplicationFirewallPolicy,
+@@clientName(
+  WebApplicationFirewallPolicy,
   "FrontDoorWebApplicationFirewallPolicy",
   "csharp"
 );
@@ -30,11 +32,13 @@ using TypeSpec.Rest;
 @@clientName(FrontendEndpointUpdateParameters.hostName, "hostname", "java");
 @@clientName(FrontendEndpointProperties.hostName, "hostname", "java");
 @@clientName(LatencyMetric.endDateTimeUTC, "endDateTimeUtc", "java");
-@@clientName(LatencyScorecardProperties.startDateTimeUTC,
+@@clientName(
+  LatencyScorecardProperties.startDateTimeUTC,
   "startDateTimeUtc",
   "java"
 );
-@@clientName(LatencyScorecardProperties.endDateTimeUTC,
+@@clientName(
+  LatencyScorecardProperties.endDateTimeUTC,
   "endDateTimeUtc",
   "java"
 );
@@ -42,19 +46,22 @@ using TypeSpec.Rest;
 @@clientName(TimeseriesProperties.endDateTimeUTC, "endDateTimeUtc", "java");
 @@clientName(TimeseriesDataPoint.dateTimeUTC, "dateTimeUtc", "java");
 
-@@clientName(GetLatencyScorecardsParameters.endDateTimeUTC,
+@@clientName(
+  GetLatencyScorecardsParameters.endDateTimeUTC,
   "endDateTimeUtc",
   "java"
 );
 @@clientName(GetLatencyScorecardsParameters.endDateTimeUTC, "endOn", "csharp");
-@@clientName(GetTimeseriesParameters.startDateTimeUTC,
+@@clientName(
+  GetTimeseriesParameters.startDateTimeUTC,
   "startDateTimeUtc",
   "java"
 );
 @@clientName(GetTimeseriesParameters.endDateTimeUTC, "endDateTimeUtc", "java");
 @@clientName(GetTimeseriesParameters.startDateTimeUTC, "startOn", "csharp");
 @@clientName(GetTimeseriesParameters.endDateTimeUTC, "endOn", "csharp");
-@@clientName(GetTimeseriesParameters.timeseriesType,
+@@clientName(
+  GetTimeseriesParameters.timeseriesType,
   "timeSeriesType",
   "csharp"
 );
@@ -82,16 +89,20 @@ interface ProfilesOverrides {
     ...ResourceGroupParameter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     parameters: Microsoft.Network.Profile,
-  ): ArmResourceUpdatedResponse<Profile> | ArmResourceCreatedResponse<
-    Profile,
-    ArmLroLocationHeader<FinalResult = Profile> &
-      Azure.Core.Foundations.RetryAfterHeader
-  > | (ArmAcceptedLroResponse & {
-    @bodyRoot
-    _: Profile;
-  });
+  ):
+    | ArmResourceUpdatedResponse<Profile>
+    | ArmResourceCreatedResponse<
+        Profile,
+        ArmLroLocationHeader<FinalResult = Profile> &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
+    | (ArmAcceptedLroResponse & {
+        @bodyRoot
+        _: Profile;
+      });
 }
-@@override(Profiles.createOrUpdate,
+@@override(
+  Profiles.createOrUpdate,
   ProfilesOverrides.replaceCreateOrUpdate,
   "go,javascript,python"
 );
@@ -103,88 +114,107 @@ interface ProfilesOverrides {
 @@clientName(Timeseries, "FrontDoorTimeSeriesInfo", "csharp");
 @@clientName(TimeseriesProperties.startDateTimeUTC, "StartOn", "csharp");
 @@clientName(TimeseriesProperties.endDateTimeUTC, "EndOn", "csharp");
-@@clientName(WebApplicationFirewallPolicyProperties.customRules,
+@@clientName(
+  WebApplicationFirewallPolicyProperties.customRules,
   "RulesList",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten managedRules into parent; baseline 1.4.1 exposed ManagedRuleSets directly on Data."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WebApplicationFirewallPolicyProperties.managedRules,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WebApplicationFirewallPolicyProperties.managedRules,
   "csharp"
 );
-@@clientName(HealthProbeSettingsModel,
+@@clientName(
+  HealthProbeSettingsModel,
   "FrontDoorHealthProbeSettingsData",
   "csharp"
 );
-@@clientName(LoadBalancingSettingsModel,
+@@clientName(
+  LoadBalancingSettingsModel,
   "FrontDoorLoadBalancingSettingsData",
   "csharp"
 );
 @@clientName(RoutingRule, "RoutingRuleData", "csharp");
 @@clientName(PurgeParameters, "FrontDoorEndpointPurgeContent", "csharp");
-@@clientName(ValidateCustomDomainInput,
+@@clientName(
+  ValidateCustomDomainInput,
   "FrontDoorValidateCustomDomainContent",
   "csharp"
 );
-@@clientName(ValidateCustomDomainOutput,
+@@clientName(
+  ValidateCustomDomainOutput,
   "FrontDoorValidateCustomDomainResult",
   "csharp"
 );
-@@clientName(ValidateCustomDomainOutput.customDomainValidated,
+@@clientName(
+  ValidateCustomDomainOutput.customDomainValidated,
   "IsCustomDomainValidated",
   "csharp"
 );
-@@clientName(CustomHttpsProvisioningState,
+@@clientName(
+  CustomHttpsProvisioningState,
   "FrontendEndpointCustomHttpsProvisioningState",
   "csharp"
 );
-@@clientName(CustomHttpsProvisioningSubstate,
+@@clientName(
+  CustomHttpsProvisioningSubstate,
   "FrontendEndpointCustomHttpsProvisioningSubstate",
   "csharp"
 );
-@@clientName(ProfileUpdateModel,
+@@clientName(
+  ProfileUpdateModel,
   "FrontDoorNetworkExperimentProfilePatch",
   "csharp"
 );
-@@clientName(PolicySettings,
+@@clientName(
+  PolicySettings,
   "FrontDoorWebApplicationFirewallPolicySettings",
   "csharp"
 );
-@@clientName(PolicyResourceState,
+@@clientName(
+  PolicyResourceState,
   "FrontDoorWebApplicationFirewallPolicyResourceState",
   "csharp"
 );
 @@clientName(CustomRule, "WebApplicationCustomRule", "csharp");
-@@clientName(CheckNameAvailabilityInput,
+@@clientName(
+  CheckNameAvailabilityInput,
   "FrontDoorNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityInput.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityOutput,
+@@clientName(
+  CheckNameAvailabilityOutput,
   "FrontDoorNameAvailabilityResult",
   "csharp"
 );
 @@clientName(ActionType, "RuleMatchActionType", "csharp");
 @@clientName(Availability, "FrontDoorNameAvailabilityState", "csharp");
 @@clientName(Backend, "FrontDoorBackend", "csharp");
-@@alternateType(Backend.privateLinkResourceId,
+@@alternateType(
+  Backend.privateLinkResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Backend.privateLinkLocation,
+@@alternateType(
+  Backend.privateLinkLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(PrivateEndpointStatus, "BackendPrivateEndpointStatus", "csharp");
 @@clientName(BackendPool, "FrontDoorBackendPool", "csharp");
-@@clientName(BackendPoolsSettings.sendRecvTimeoutSeconds,
+@@clientName(
+  BackendPoolsSettings.sendRecvTimeoutSeconds,
   "SendRecvTimeoutInSeconds",
   "csharp"
 );
-@@clientName(FrontDoorCertificateType,
+@@clientName(
+  FrontDoorCertificateType,
   "FrontDoorEndpointConnectionCertificateType",
   "csharp"
 );
-@@clientName(CustomHttpsProvisioningSubstate.PendingDomainControlValidationREquestApproval,
+@@clientName(
+  CustomHttpsProvisioningSubstate.PendingDomainControlValidationREquestApproval,
   "PendingDomainControlValidationRequestApproval",
   "csharp"
 );
@@ -202,18 +232,21 @@ interface ProfilesOverrides {
 @@clientName(HeaderActionType, "RulesEngineHeaderActionType", "csharp");
 @@clientName(LatencyScorecardProperties.id, "LatencyScorecardId", "csharp");
 @@clientName(LatencyScorecardProperties.name, "LatencyScorecardName", "csharp");
-@@clientName(LatencyScorecardProperties.endpointA,
+@@clientName(
+  LatencyScorecardProperties.endpointA,
   "ScorecardEndpointA",
   "csharp"
 );
-@@clientName(LatencyScorecardProperties.endpointB,
+@@clientName(
+  LatencyScorecardProperties.endpointB,
   "ScorecardEndpointB",
   "csharp"
 );
 @@clientName(LatencyScorecardProperties.startDateTimeUTC, "StartOn", "csharp");
 @@clientName(LatencyScorecardProperties.endDateTimeUTC, "EndOn", "csharp");
 @@clientName(PolicyMode, "FrontDoorWebApplicationFirewallPolicyMode", "csharp");
-@@clientName(RulesEngineMatchCondition.negateCondition,
+@@clientName(
+  RulesEngineMatchCondition.negateCondition,
   "IsNegateCondition",
   "csharp"
 );
@@ -222,7 +255,8 @@ interface ProfilesOverrides {
 @@clientName(Transform.UrlEncode, "UriEncode", "csharp");
 @@clientName(ResourceType, "FrontDoorResourceType", "csharp");
 @@clientName(MinimumTLSVersion, "FrontDoorRequiredMinimumTlsVersion", "csharp");
-@@clientName(ManagedRuleSetException,
+@@clientName(
+  ManagedRuleSetException,
   "FrontDoorManagedRuleSetException",
   "csharp"
 );
@@ -231,11 +265,13 @@ interface ProfilesOverrides {
 @@clientName(RuleScope, "FrontDoorRuleScope", "csharp");
 @@clientName(SensitivityType, "FrontDoorSensitivityType", "csharp");
 @@clientName(LatencyMetric.endDateTimeUTC, "EndOn", "csharp");
-@@clientName(AggregationInterval,
+@@clientName(
+  AggregationInterval,
   "FrontDoorTimeSeriesInfoAggregationInterval",
   "csharp"
 );
-@@clientName(TimeseriesAggregationInterval,
+@@clientName(
+  TimeseriesAggregationInterval,
   "FrontDoorTimeSeriesAggregationInterval",
   "csharp"
 );
@@ -245,11 +281,13 @@ interface ProfilesOverrides {
 @@clientName(EndpointType.ATM, "AzureTrafficManager", "csharp");
 @@clientName(TimeseriesDataPoint, "FrontDoorTimeSeriesDataPoint", "csharp");
 @@clientName(TimeseriesType, "FrontDoorTimeSeriesType", "csharp");
-@@clientName(VariableName,
+@@clientName(
+  VariableName,
   "FrontDoorWebApplicationFirewallPolicyGroupByVariableName",
   "csharp"
 );
-@@clientName(GroupByVariable,
+@@clientName(
+  GroupByVariable,
   "FrontDoorWebApplicationFirewallPolicyGroupByVariable",
   "csharp"
 );
@@ -258,7 +296,8 @@ interface ProfilesOverrides {
 @@alternateType(TimeseriesProperties.endpoint, url, "csharp");
 @@alternateType(LatencyScorecardProperties.endpointA, url, "csharp");
 @@alternateType(LatencyScorecardProperties.endpointB, url, "csharp");
-@@clientName(ManagedRuleExclusionSelectorMatchOperator.Equals,
+@@clientName(
+  ManagedRuleExclusionSelectorMatchOperator.Equals,
   "EqualsValue",
   "csharp"
 );
@@ -266,11 +305,13 @@ interface ProfilesOverrides {
 @@clientName(ExceptionSelectorMatchOperator.Equals, "EqualsValue", "csharp");
 @@clientName(ExceptionValueMatchOperator.Equals, "EqualsValue", "csharp");
 
-@@clientName(FrontDoorNameAvailabilityOperationGroup.check,
+@@clientName(
+  FrontDoorNameAvailabilityOperationGroup.check,
   "CheckFrontDoorNameAvailability",
   "csharp"
 );
-@@clientName(FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check,
+@@clientName(
+  FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check,
   "CheckFrontDoorNameAvailability",
   "csharp"
 );
@@ -278,20 +319,24 @@ interface ProfilesOverrides {
 @@clientName(FrontDoorHealthProbeMethod.HEAD, "Head", "csharp");
 @@clientName(TimeseriesDataPoint.dateTimeUTC, "DateTimeUtc", "csharp");
 @@clientName(ActionType.CAPTCHA, "Captcha", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Network.Resource.id,
+@@alternateType(
+  Microsoft.Network.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ResourcewithSettableName.id,
+@@alternateType(
+  ResourcewithSettableName.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(BasicResource.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(BasicResourceWithSettableIDName.id,
+@@alternateType(
+  BasicResourceWithSettableIDName.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -307,24 +352,29 @@ interface ProfilesOverrides {
 
 @@clientName(SubResource, "FrontDoorSubResource", "csharp");
 @@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
-@@clientName(BasicResourceWithSettableIDName,
+@@clientName(
+  BasicResourceWithSettableIDName,
   "FrontDoorResourceData",
   "csharp"
 );
 @@clientName(BasicResourceWithSettableIDName.type, "ResourceType", "csharp");
-@@alternateType(BasicResourceWithSettableIDName.type,
+@@alternateType(
+  BasicResourceWithSettableIDName.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id,
+@@alternateType(
+  RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink.id,
+@@alternateType(
+  FrontendEndpointUpdateParametersWebApplicationFirewallPolicyLink.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(KeyVaultCertificateSourceParametersVault.id,
+@@alternateType(
+  KeyVaultCertificateSourceParametersVault.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -344,7 +394,8 @@ model RoutingRuleReplacement extends BasicResourceWithSettableIDName {
 @@alternateType(RoutingRule, RoutingRuleReplacement, "csharp");
 @@clientName(RoutingRuleReplacement, "RoutingRuleData", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RoutingRuleReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RoutingRuleReplacement.properties,
   "csharp"
 );
 
@@ -357,16 +408,19 @@ model LoadBalancingSettingsModelReplacement
   @doc("Properties of the load balancing settings")
   properties?: LoadBalancingSettingsProperties;
 }
-@@alternateType(LoadBalancingSettingsModel,
+@@alternateType(
+  LoadBalancingSettingsModel,
   LoadBalancingSettingsModelReplacement,
   "csharp"
 );
-@@clientName(LoadBalancingSettingsModelReplacement,
+@@clientName(
+  LoadBalancingSettingsModelReplacement,
   "FrontDoorLoadBalancingSettingsData",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadBalancingSettingsModelReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LoadBalancingSettingsModelReplacement.properties,
   "csharp"
 );
 
@@ -379,16 +433,19 @@ model HealthProbeSettingsModelReplacement
   @doc("Properties of the health probe settings")
   properties?: HealthProbeSettingsProperties;
 }
-@@alternateType(HealthProbeSettingsModel,
+@@alternateType(
+  HealthProbeSettingsModel,
   HealthProbeSettingsModelReplacement,
   "csharp"
 );
-@@clientName(HealthProbeSettingsModelReplacement,
+@@clientName(
+  HealthProbeSettingsModelReplacement,
   "FrontDoorHealthProbeSettingsData",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HealthProbeSettingsModelReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HealthProbeSettingsModelReplacement.properties,
   "csharp"
 );
 
@@ -403,7 +460,8 @@ model BackendPoolReplacement extends BasicResourceWithSettableIDName {
 @@alternateType(BackendPool, BackendPoolReplacement, "csharp");
 @@clientName(BackendPoolReplacement, "FrontDoorBackendPool", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendPoolReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BackendPoolReplacement.properties,
   "csharp"
 );
 
@@ -411,40 +469,49 @@ model BackendPoolReplacement extends BasicResourceWithSettableIDName {
 @@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(PolicySettings.redirectUrl, url, "csharp");
 
-@@alternateType(Microsoft.Network.Resource,
+@@alternateType(
+  Microsoft.Network.Resource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
-@@alternateType(ResourcewithSettableName,
+@@alternateType(
+  ResourcewithSettableName,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
-@@alternateType(BasicResource,
+@@alternateType(
+  BasicResource,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(FrontDoor,
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  FrontDoor,
   #{ isAzureResource: true }
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(Experiment,
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  Experiment,
   #{ isAzureResource: true }
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(Profile,
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  Profile,
   #{ isAzureResource: true }
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(RulesEngine,
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  RulesEngine,
   #{ isAzureResource: true }
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(WebApplicationFirewallPolicy,
+@@Azure.ResourceManager.Legacy.customAzureResource(
+  WebApplicationFirewallPolicy,
   #{ isAzureResource: true }
 );
 
-@@alternateType(GetLatencyScorecardsParameters.endDateTimeUTC,
+@@alternateType(
+  GetLatencyScorecardsParameters.endDateTimeUTC,
   utcDateTime,
   "csharp"
 );
@@ -457,7 +524,8 @@ model BackendPoolReplacement extends BasicResourceWithSettableIDName {
 @@clientName(TimeseriesProperties.timeseriesType, "TimeSeriesType", "csharp");
 @@clientName(TimeseriesProperties.timeseriesData, "TimeSeriesData", "csharp");
 
-@@clientName(FrontendEndpointUpdateParameters.sessionAffinityTtlSeconds,
+@@clientName(
+  FrontendEndpointUpdateParameters.sessionAffinityTtlSeconds,
   "SessionAffinityTtlInSeconds",
   "csharp"
 );
@@ -474,37 +542,45 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-@@alternateType(RoutingRuleUpdateParameters.frontendEndpoints,
+@@alternateType(
+  RoutingRuleUpdateParameters.frontendEndpoints,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(WebApplicationFirewallPolicyProperties.frontendEndpointLinks,
+@@alternateType(
+  WebApplicationFirewallPolicyProperties.frontendEndpointLinks,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(WebApplicationFirewallPolicyProperties.routingRuleLinks,
+@@alternateType(
+  WebApplicationFirewallPolicyProperties.routingRuleLinks,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(WebApplicationFirewallPolicyProperties.securityPolicyLinks,
+@@alternateType(
+  WebApplicationFirewallPolicyProperties.securityPolicyLinks,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
 
-@@clientName(Experiments.getLatencyScorecards,
+@@clientName(
+  Experiments.getLatencyScorecards,
   "GetLatencyScorecardsReport",
   "csharp"
 );
 @@clientName(Experiments.getTimeseries, "GetTimeSeriesReport", "csharp");
-@@clientName(WebApplicationFirewallPolicies.listBySubscription,
+@@clientName(
+  WebApplicationFirewallPolicies.listBySubscription,
   "GetFrontDoorWebApplicationFirewallPoliciesByFrontDoorWebApplicationFirewallPolicy",
   "csharp"
 );
-@@clientName(Profiles.preconfiguredEndpointsList,
+@@clientName(
+  Profiles.preconfiguredEndpointsList,
   "GetPreconfiguredEndpoints",
   "csharp"
 );
-@@clientName(ManagedRuleSetsOperationGroup.list,
+@@clientName(
+  ManagedRuleSetsOperationGroup.list,
   "GetManagedRuleSets",
   "csharp"
 );

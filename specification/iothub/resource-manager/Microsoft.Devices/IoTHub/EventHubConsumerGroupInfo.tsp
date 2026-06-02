@@ -97,10 +97,12 @@ interface EventHubConsumerGroupInfos {
   >;
 }
 
-@@doc(EventHubConsumerGroupInfo.name,
+@@doc(
+  EventHubConsumerGroupInfo.name,
   "The name of the consumer group to retrieve."
 );
 @@doc(EventHubConsumerGroupInfo.properties, "The tags.");
-@@doc(EventHubConsumerGroupInfos.createEventHubConsumerGroup::parameters.resource,
+@@doc(
+  EventHubConsumerGroupInfos.createEventHubConsumerGroup::parameters.resource,
   "The consumer group to add."
 );

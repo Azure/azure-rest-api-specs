@@ -91,7 +91,10 @@ interface CustomIpPrefixes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomIpPrefix,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -108,9 +111,11 @@ interface CustomIpPrefixes {
 
 @@doc(CustomIpPrefix.name, "The name of the custom IP prefix.");
 @@doc(CustomIpPrefix.properties, "Custom IP prefix properties.");
-@@doc(CustomIpPrefixes.createOrUpdate::parameters.resource,
+@@doc(
+  CustomIpPrefixes.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update custom IP prefix operation."
 );
-@@doc(CustomIpPrefixes.updateTags::parameters.properties,
+@@doc(
+  CustomIpPrefixes.updateTags::parameters.properties,
   "Parameters supplied to update custom IP prefix tags."
 );

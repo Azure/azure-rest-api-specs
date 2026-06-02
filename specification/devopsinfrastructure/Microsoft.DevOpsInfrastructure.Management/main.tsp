@@ -26,6 +26,11 @@ enum Versions {
   /** 2025-09-20 version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2025_09_20: "2025-09-20",
+
+  /** 2026-04-17-preview version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  @Azure.Core.previewVersion
+  v2026_04_17_preview: "2026-04-17-preview",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -190,6 +195,14 @@ model RuntimeConfiguration {
 model DevOpsAzureSku {
   @doc("The Azure SKU name of the machines in the pool.")
   name: string;
+
+  @doc("The drive letter for the NVMe striped volume on Windows (e.g., 'N'). Defaults to 'N' when not specified.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_04_17_preview)
+  windowsNvmeDrive?: string;
+
+  @doc("The mount path for the NVMe striped volume on Linux (e.g., '/mnt/azure_nvme_temp'). Defaults to '/mnt/azure_nvme_temp' when not specified.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_04_17_preview)
+  linuxNvmePath?: string;
 }
 
 @doc("The storage profile of the VMSS.")

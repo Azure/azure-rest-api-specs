@@ -55,7 +55,8 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(MicrosoftSecurityIncidentCreationAlertRule.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MicrosoftSecurityIncidentCreationAlertRuleTemplate.properties
+@@Legacy.flattenProperty(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -107,7 +108,8 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(OfficeIRMCheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MicrosoftPurviewInformationProtectionCheckRequirements.properties
+@@Legacy.flattenProperty(
+  MicrosoftPurviewInformationProtectionCheckRequirements.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -135,7 +137,8 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(MstiDataConnector.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(PremiumMicrosoftDefenderForThreatIntelligence.properties
+@@Legacy.flattenProperty(
+  PremiumMicrosoftDefenderForThreatIntelligence.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -169,7 +172,8 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(OfficeATPDataConnector.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MicrosoftPurviewInformationProtectionDataConnector.properties
+@@Legacy.flattenProperty(
+  MicrosoftPurviewInformationProtectionDataConnector.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -294,7 +298,8 @@ using Microsoft.SecurityInsights;
 
 @@clientName(AlertRules.createOrUpdate::parameters.resource, "alertRule");
 @@clientLocation(AlertRules.triggerRuleRun, "alertRule");
-@@clientName(AlertRules.triggerRuleRun::parameters.body,
+@@clientName(
+  AlertRules.triggerRuleRun::parameters.body,
   "analyticsRuleRunTriggerParameter"
 );
 
@@ -306,7 +311,8 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ActionResponse.properties);
 
-@@clientName(AutomationRules.createOrUpdate::parameters.resource,
+@@clientName(
+  AutomationRules.createOrUpdate::parameters.resource,
   "automationRuleToUpsert"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -333,7 +339,8 @@ using Microsoft.SecurityInsights;
 
 @@clientLocation(PackageModels.get, "ContentPackages");
 @@clientLocation(PackageModels.install, "ContentPackage");
-@@clientName(PackageModels.install::parameters.resource,
+@@clientName(
+  PackageModels.install::parameters.resource,
   "packageInstallationProperties"
 );
 @@clientLocation(PackageModels.uninstall, "ContentPackage");
@@ -353,7 +360,8 @@ using Microsoft.SecurityInsights;
 
 @@clientLocation(TemplateModels.get, "ContentTemplate");
 @@clientLocation(TemplateModels.install, "ContentTemplate");
-@@clientName(TemplateModels.install::parameters.resource,
+@@clientName(
+  TemplateModels.install::parameters.resource,
   "templateInstallationProperties"
 );
 @@clientLocation(TemplateModels.delete, "ContentTemplate");
@@ -361,11 +369,13 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TemplateModel.properties);
 
-@@clientName(DataConnectorDefinitions.createOrUpdate::parameters.resource,
+@@clientName(
+  DataConnectorDefinitions.createOrUpdate::parameters.resource,
   "connectorDefinitionInput"
 );
 
-@@clientName(DataConnectors.createOrUpdate::parameters.resource,
+@@clientName(
+  DataConnectors.createOrUpdate::parameters.resource,
   "dataConnector"
 );
 @@clientName(DataConnectors.connect::parameters.body, "connectBody");
@@ -393,7 +403,8 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Incident.properties);
 
-@@clientName(IncidentComments.createOrUpdate::parameters.resource,
+@@clientName(
+  IncidentComments.createOrUpdate::parameters.resource,
   "incidentComment"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -422,7 +433,8 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(OfficeConsent.properties);
 
-@@clientName(SentinelOnboardingStates.create::parameters.resource,
+@@clientName(
+  SentinelOnboardingStates.create::parameters.resource,
   "sentinelOnboardingStateParameter"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -430,7 +442,8 @@ using Microsoft.SecurityInsights;
 
 @@clientLocation(Recommendations.singleRecommendation, "Get");
 @@clientLocation(Recommendations.recommendation, "Update");
-@@clientName(Recommendations.recommendation::parameters.properties,
+@@clientName(
+  Recommendations.recommendation::parameters.properties,
   "recommendationPatch"
 );
 @@clientLocation(Recommendations.list, "GetRecommendations");
@@ -439,7 +452,8 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Recommendation.properties);
 
-@@clientName(SecurityMLAnalyticsSettings.createOrUpdate::parameters.resource,
+@@clientName(
+  SecurityMLAnalyticsSettings.createOrUpdate::parameters.resource,
   "securityMLAnalyticsSetting"
 );
 
@@ -450,36 +464,46 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SourceControl.properties);
 
-@@clientLocation(ThreatIntelligenceInformationOperations.get,
+@@clientLocation(
+  ThreatIntelligenceInformationOperations.get,
   "ThreatIntelligenceIndicator"
 );
-@@clientLocation(ThreatIntelligenceInformationOperations.create,
+@@clientLocation(
+  ThreatIntelligenceInformationOperations.create,
   "ThreatIntelligenceIndicator"
 );
-@@clientName(ThreatIntelligenceInformationOperations.create::parameters.resource,
+@@clientName(
+  ThreatIntelligenceInformationOperations.create::parameters.resource,
   "ThreatIntelligenceProperties"
 );
-@@clientLocation(ThreatIntelligenceInformationOperations.delete,
+@@clientLocation(
+  ThreatIntelligenceInformationOperations.delete,
   "ThreatIntelligenceIndicator"
 );
-@@clientLocation(ThreatIntelligenceInformationOperations.list,
+@@clientLocation(
+  ThreatIntelligenceInformationOperations.list,
   "ThreatIntelligenceIndicators"
 );
-@@clientLocation(ThreatIntelligenceInformationOperations.appendTags,
+@@clientLocation(
+  ThreatIntelligenceInformationOperations.appendTags,
   "ThreatIntelligenceIndicator"
 );
-@@clientName(ThreatIntelligenceInformationOperations.appendTags::parameters.body,
+@@clientName(
+  ThreatIntelligenceInformationOperations.appendTags::parameters.body,
   "ThreatIntelligenceAppendTags"
 );
-@@clientLocation(ThreatIntelligenceInformationOperations.replaceTags,
+@@clientLocation(
+  ThreatIntelligenceInformationOperations.replaceTags,
   "ThreatIntelligenceIndicator"
 );
-@@clientName(ThreatIntelligenceInformationOperations.replaceTags::parameters.body,
+@@clientName(
+  ThreatIntelligenceInformationOperations.replaceTags::parameters.body,
   "ThreatIntelligenceReplaceTags"
 );
 
 @@clientLocation(triggeredAnalyticsRuleRun.get, triggeredAnalyticsRuleRun);
-@@clientLocation(triggeredAnalyticsRuleRun.list,
+@@clientLocation(
+  triggeredAnalyticsRuleRun.list,
   "getTriggeredAnalyticsRuleRuns"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -489,16 +513,19 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Watchlist.properties);
 
-@@clientName(WatchlistItems.createOrUpdate::parameters.resource,
+@@clientName(
+  WatchlistItems.createOrUpdate::parameters.resource,
   "watchlistItem"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WatchlistItem.properties);
 
-@@clientName(WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
   "workspaceManagerAssignment"
 );
-@@clientLocation(WorkspaceManagerAssignments.create,
+@@clientLocation(
+  WorkspaceManagerAssignments.create,
   "WorkspaceManagerAssignmentJobs"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -510,45 +537,53 @@ using Microsoft.SecurityInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Job.properties);
 
-@@clientName(WorkspaceManagerConfigurations.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceManagerConfigurations.createOrUpdate::parameters.resource,
   "workspaceManagerConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkspaceManagerConfiguration.properties);
 
-@@clientName(WorkspaceManagerGroups.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceManagerGroups.createOrUpdate::parameters.resource,
   "workspaceManagerGroup"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkspaceManagerGroup.properties);
 
-@@clientName(WorkspaceManagerMembers.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceManagerMembers.createOrUpdate::parameters.resource,
   "workspaceManagerMember"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkspaceManagerMember.properties);
 
-@@clientLocation(DataConnectorsCheckRequirementsOperationGroup.post,
+@@clientLocation(
+  DataConnectorsCheckRequirementsOperationGroup.post,
   "DataConnectorsCheckRequirements"
 );
 
 @@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControl");
 @@clientName(SourceControlOperationGroup.listRepositories, "listRepositories");
 
-@@clientLocation(ThreatIntelligenceIndicatorOperationGroup.createIndicator,
+@@clientLocation(
+  ThreatIntelligenceIndicatorOperationGroup.createIndicator,
   "ThreatIntelligenceIndicator"
 );
-@@clientLocation(ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
+@@clientLocation(
+  ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
   "ThreatIntelligenceIndicator"
 );
 
-@@clientLocation(ThreatIntelligenceIndicatorMetricsOperationGroup.list,
+@@clientLocation(
+  ThreatIntelligenceIndicatorMetricsOperationGroup.list,
   "ThreatIntelligenceIndicatorMetrics"
 );
 
 @@clientLocation(ThreatIntelligenceOperationGroup.count, "ThreatIntelligence");
 @@clientLocation(ThreatIntelligenceOperationGroup.query, "ThreatIntelligence");
-@@clientName(ThreatIntelligenceIndicatorOperationGroup.createIndicator::parameters.body,
+@@clientName(
+  ThreatIntelligenceIndicatorOperationGroup.createIndicator::parameters.body,
   "ThreatIntelligenceProperties"
 );
 
@@ -575,81 +610,102 @@ using Microsoft.SecurityInsights;
 @@clientName(PackageBaseProperties, "packageBaseProperties");
 @@clientName(ProductPackageProperties, "productPackageProperties");
 @@clientName(PackageProperties, "packageProperties");
-@@clientName(ProductPackageAdditionalProperties,
+@@clientName(
+  ProductPackageAdditionalProperties,
   "productPackageAdditionalProperties"
 );
 
-@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+@@visibility(
+  Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   Lifecycle.Read
 );
-@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+@@visibility(
+  Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   Lifecycle.Create
 );
-@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+@@visibility(
+  Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   Lifecycle.Update
 );
-@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+@@visibility(
+  Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   Lifecycle.Delete
 );
-@@visibility(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+@@visibility(
+  Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   Lifecycle.Query
 );
-@@pattern(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
+@@pattern(
+  Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   ""
 );
 
 @@doc(IncidentComments.get, "Gets an incident comment.");
 @@doc(Relations.createOrUpdate, "Creates or updates the incident relation.");
 
-@@doc(AADDataConnector,
+@@doc(
+  AADDataConnector,
   "Represents AADIP (Azure Active Directory Identity Protection) data connector."
 );
-@@doc(AADDataConnector.properties,
+@@doc(
+  AADDataConnector.properties,
   "AADIP (Azure Active Directory Identity Protection) data connector properties."
 );
 @@doc(EntityManualTriggerRequestBody.incidentArmId, "Incident ARM id.");
 @@doc(EntityQueryTemplate.kind, "The kind of the entity query template.");
-@@doc(FusionAlertRuleTemplateProperties,
+@@doc(
+  FusionAlertRuleTemplateProperties,
   "Fusion alert rule template properties"
 );
-@@doc(FusionAlertRuleTemplateProperties.alertRulesCreatedByTemplateCount,
+@@doc(
+  FusionAlertRuleTemplateProperties.alertRulesCreatedByTemplateCount,
   "The number of alert rules that were created by this template"
 );
-@@doc(FusionAlertRuleTemplateProperties.techniques,
+@@doc(
+  FusionAlertRuleTemplateProperties.techniques,
   "The techniques of the alert rule"
 );
 @@doc(Azure.Core.armResourceIdentifier, "Related Analytic rule resource id");
-@@doc(MetadataProperties.firstPublishDate,
+@@doc(
+  MetadataProperties.firstPublishDate,
   "first publish date of solution content item"
 );
-@@doc(MetadataProperties.lastPublishDate,
+@@doc(
+  MetadataProperties.lastPublishDate,
   "last publish date of solution content item"
 );
-@@doc(MetadataPropertiesPatch.contentId,
+@@doc(
+  MetadataPropertiesPatch.contentId,
   "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a template, both will have the same contentId."
 );
-@@doc(MetadataPropertiesPatch.firstPublishDate,
+@@doc(
+  MetadataPropertiesPatch.firstPublishDate,
   "first publish date of solution content item"
 );
-@@doc(MetadataPropertiesPatch.lastPublishDate,
+@@doc(
+  MetadataPropertiesPatch.lastPublishDate,
   "last publish date of solution content item"
 );
-@@doc(MetadataProperties.contentId,
+@@doc(
+  MetadataProperties.contentId,
   "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Can be optionally set for user created content to define dependencies.  If an active content item is made from a template, both will have the same contentId."
 );
 
 @@clientName(OutputType, "outputType");
 @@clientName(JobItem, "jobItem");
 @@clientName(McasCheckRequirements, "MCASCheckRequirements");
-@@clientName(McasCheckRequirementsProperties,
+@@clientName(
+  McasCheckRequirementsProperties,
   "MCASCheckRequirementsProperties"
 );
 @@clientName(MdatpCheckRequirements, "MDATPCheckRequirements");
-@@clientName(MdatpCheckRequirementsProperties,
+@@clientName(
+  MdatpCheckRequirementsProperties,
   "MDATPCheckRequirementsProperties"
 );
 @@clientName(MstiCheckRequirements, "MSTICheckRequirements");
-@@clientName(MstiCheckRequirementsProperties,
+@@clientName(
+  MstiCheckRequirementsProperties,
   "MSTICheckRequirementsProperties"
 );
 @@clientName(MstiDataConnector, "MSTIDataConnector");
@@ -657,15 +713,18 @@ using Microsoft.SecurityInsights;
 @@clientName(MstiDataConnectorDataTypes, "MSTIDataConnectorDataTypes");
 @@clientName(AssignmentItem, "assignmentItem");
 @@clientName(Error, "error");
-@@clientName(ProductTemplateAdditionalProperties,
+@@clientName(
+  ProductTemplateAdditionalProperties,
   "productTemplateAdditionalProperties"
 );
 @@visibility(RelationList.nextLink, Lifecycle.Read);
-@@clientName(ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
+@@clientName(
+  ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
   "ThreatIntelligenceFilteringCriteria"
 );
 @@clientName(AatpCheckRequirements, "AATPCheckRequirements");
-@@clientName(AatpCheckRequirementsProperties,
+@@clientName(
+  AatpCheckRequirementsProperties,
   "AATPCheckRequirementsProperties"
 );
 @@clientName(BookmarkRelations.createOrUpdate::parameters.resource, "relation");

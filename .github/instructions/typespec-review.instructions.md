@@ -35,6 +35,78 @@ of file" or "around line 50" are not acceptable -- always resolve the
 actual line number by reading the file content. Respond in markdown
 format.
 
+### Rule Citation Format (REQUIRED for posted PR comments)
+
+Every rule ID cited in a posted PR comment **MUST** be accompanied by a
+markdown hyperlink to the rule's authoritative location in this
+repository. A bare rule ID without a link is **not acceptable** --
+authors must be able to one-click navigate to the exact section that
+defines the rule.
+
+**Format.** Use a markdown link whose visible text is the rule ID and
+whose target is a permanent GitHub URL (use the `main` branch ref)
+anchored to the section that defines the rule:
+
+```
+[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/<path-to-rule-file>#<section-anchor>)
+```
+
+**Where to link.** Pick the most specific source for the rule:
+
+- TypeSpec-specific rules → link to the corresponding section in
+  `.github/instructions/typespec-review.instructions.md` or
+  `.github/instructions/typespec-project.instructions.md`.
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to
+  `.github/instructions/armapi-review.instructions.md`.
+- Generic OpenAPI rules (e.g., `OAPI020`, `OAPI034`, `WHATIF-001`) →
+  link to `.github/instructions/openapi-review.instructions.md` or to
+  the dedicated reference file under
+  `.github/skills/azure-api-review/references/*.md`.
+
+**Multiple rule IDs.** When a finding cites more than one rule ID, each
+ID **MUST** be its own hyperlink (e.g., `[OAPI034](...) / [RPC-Put-V1-12](...)`).
+
+**Anchor resolution.** GitHub auto-generates section anchors by
+lowercasing the heading, replacing spaces with `-`, and stripping
+punctuation. When in doubt, open the rendered file on GitHub and copy
+the link from the heading's anchor icon.
+
+### Reviewer-Posted Parity (REQUIRED -- no divergence)
+
+The set of findings posted to the GitHub PR **MUST** be
+**byte-for-byte identical** to the set of findings shown to the
+reviewer in chat. There **MUST** be no discrepancy in content,
+count, ordering, severity, rule IDs, links, code blocks, examples,
+fix snippets, or the agent's posted-by marker.
+
+**Hard rules.**
+
+1. **Single source of truth.** Build each comment body **once** as the
+   canonical text for that finding. The text rendered to the reviewer
+   in chat and the text written into the GitHub review payload **MUST**
+   come from that same string -- never a reconstructed or shortened
+   variant.
+2. **Verbatim reproduction.** When assembling the review payload
+   (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews`), each
+   `comments[].body` **MUST** contain the canonical text unchanged:
+   rule-ID hyperlinks, code blocks, examples, citations, and the
+   trailing posted-by HTML comment.
+3. **No re-authoring during payload assembly.** Heredoc rebuilds,
+   payload-time paraphrasing, or multi-finding consolidation that
+   drops content is **forbidden**.
+4. **Exact one-to-one mapping.** Every finding shown to the reviewer
+   maps to exactly one posted inline comment. Severity tags and
+   `[NEW]`/`[EXISTING]` classifications **MUST** match.
+5. **Post-post verification (REQUIRED).** Immediately after posting,
+   the agent **MUST** re-fetch each created comment
+   (`GET /repos/{owner}/{repo}/pulls/comments/{id}`) and confirm body
+   length, hyperlinks, code-fence blocks, and marker. On any mismatch,
+   PATCH the comment to restore the canonical text and re-verify
+   before reporting completion.
+6. **Failure handling.** If a finding cannot be posted as-is, report
+   the discrepancy explicitly to the reviewer instead of silently
+   posting a shortened variant.
+
 ---
 
 ## 1. Project Structure & File Organization
@@ -218,6 +290,7 @@ Flag these issues when found:
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
 - **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
 - **Empty model literal `{}` as POST action body** -- when an `ArmResourceActionAsync` or `ArmResourceActionSync` POST action does not need a request body, use `void` instead of `{}`. An empty model literal triggers the `no-empty-model` lint rule, and suppressing it is the wrong fix. Use `void` and remove the suppression.
+- **`@extension(...)` in TypeSpec source** -- never add `@extension(...)` decorators to TypeSpec source for any reason. This includes `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, and any other OpenAPI extension. `@extension` bypasses TypeSpec's type system and emitter conventions. Use the appropriate built-in decorator instead: `@identifiers` / `@key` for `x-ms-identifiers`, `@visibility` for mutability, `@secret` for secret data, etc. (see TSP-ARRAY-IDENTIFIERS for the `x-ms-identifiers` case).
 
 ---
 
@@ -247,6 +320,47 @@ Flag these issues when found:
 
 - Properties whose names or doc comments clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`) **SHOULD** use `int32`, `int64`, or `float64` — not `string`.
 - If backward compatibility forces a string type for a numeric value, the doc comment **MUST** document the expected format and units.
+
+### 6.5 Array Identifiers — `x-ms-identifiers` (TSP-ARRAY-IDENTIFIERS)
+
+The `missing-x-ms-identifiers` linter rule fires on array-typed properties whose item models do not declare which property uniquely identifies an item. **Do not silence this rule with `@extension("x-ms-identifiers", [])`.** `@extension` is forbidden in TypeSpec source for any reason (see Section 5 anti-patterns).
+
+Use one of the following built-in TypeSpec decorators instead:
+
+- **Preferred — `@key` on the identity property of the item type.** The emitter automatically derives `x-ms-identifiers` from `@key`. Use this when the item model has a single, natural identity property:
+
+  ```tsp
+  model MoveRequest {
+    @key moveId: string;
+    from: string;
+    to: string;
+  }
+
+  model MoveCollection {
+    moves?: MoveRequest[];
+  }
+  ```
+
+- **Alternative — `@identifiers(#["<propertyName>", ...])` on the array property.** Use this when the identity property cannot be marked with `@key` on the item type (e.g., the item type is shared and `@key` would conflict, or identity is composed of multiple properties):
+
+  ```tsp
+  @identifiers(#["moveId"])
+  moves?: MoveRequest[];
+  ```
+
+- **Items genuinely have no identifier — `@identifiers(#[])` on the array property.** For arrays whose items are ordered result records, primitive values, or otherwise have no stable identity field, declare the empty identifier list explicitly. This satisfies the linter without a suppression and documents the design intent:
+
+  ```tsp
+  @identifiers(#[])
+  testResults?: TestResultRecord[];
+  ```
+
+**Forbidden patterns:**
+
+- `@extension("x-ms-identifiers", [])` — never add `@extension` in TypeSpec source for any reason. Replace with `@identifiers(#[])` (or `@key` on the item type).
+- `#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "..."` — suppression is **only** acceptable as a last resort when neither `@key` nor `@identifiers` is technically feasible (extremely rare). The suppression reason must still meet Section 4.1 rules (real technical justification, no `FIXME`/`TODO`/`TBD`, no "matching another resource"). For brand-new operations and models, suppression is never the right fix — use `@identifiers` or `@key`.
+
+When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifiers` or `@key` as the fix. **Never** suggest `@extension("x-ms-identifiers", ...)`.
 
 ---
 
@@ -324,6 +438,8 @@ When reviewing TypeSpec files, verify:
 - ✅ ARM resource ID properties use `armResourceIdentifier` not `string` (TSP-ARM-RESOURCE-ID)
 - ✅ No `@operationId` overrides — restructure interfaces instead
 - ✅ URI properties use `url` scalar type, not plain `string`
+- ✅ Array-typed properties declare item identity via `@key` (on item type) or `@identifiers` (on array property); use `@identifiers(#[])` when items have no identifier (TSP-ARRAY-IDENTIFIERS)
+- ✅ No `@extension(...)` decorators in TypeSpec source — never `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, etc.
 - ✅ Standard ARM base types used (no custom/private resource decorators)
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset
