@@ -960,3 +960,35 @@ using Microsoft.DesktopVirtualization;
   "java"
 );
 @@clientName(AppAttachPackageProperties.keyVaultURL, "keyVaultUrl", "java");
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Sku,
+  "ResourceModelWithAllowedPropertySetSku",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Plan,
+  "ResourceModelWithAllowedPropertySetPlan",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "ResourceModelWithAllowedPropertySetIdentity",
+  "java"
+);
+
+@@clientName(
+  ResourceModelWithAllowedPropertySetSku,
+  "ResourceModelWithAllowedPropertySetSkuLegacy",
+  "java"
+);
+@@clientName(
+  ResourceModelWithAllowedPropertySetPlan,
+  "ResourceModelWithAllowedPropertySetPlanLegacy",
+  "java"
+);
+@@clientName(
+  ResourceModelWithAllowedPropertySetIdentity,
+  "ResourceModelWithAllowedPropertySetIdentityLegacy",
+  "java"
+);
