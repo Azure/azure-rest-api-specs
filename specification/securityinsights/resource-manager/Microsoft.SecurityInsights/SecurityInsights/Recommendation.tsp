@@ -19,7 +19,8 @@ model Recommendation
     Resource = Recommendation,
     KeyName = "recommendationId",
     SegmentName = "recommendations",
-    NamePattern = ""
+    NamePattern = "",
+    Type = Azure.Core.uuid
   >;
 
   /**
@@ -78,8 +79,6 @@ interface Recommendations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@format(Recommendation.name, "uuid");
 @@doc(Recommendation.name, "Recommendation Id.");
 @@doc(Recommendation.properties, "Recommendation properties object.");
 @@doc(

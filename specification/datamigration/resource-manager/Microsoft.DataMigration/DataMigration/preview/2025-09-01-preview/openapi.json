@@ -5561,6 +5561,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureActiveDirectoryApp": {
       "type": "object",
       "description": "Azure Active Directory Application",
@@ -12616,8 +12621,7 @@
       "description": "Migration Operation Input",
       "properties": {
         "migrationOperationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "ID tracking migration operation."
         }
       }
@@ -16018,8 +16022,7 @@
       "description": "Information of backup set",
       "properties": {
         "backupSetId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Backup set id.",
           "readOnly": true
         },

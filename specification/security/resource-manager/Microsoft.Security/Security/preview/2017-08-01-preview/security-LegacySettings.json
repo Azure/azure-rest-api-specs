@@ -766,6 +766,11 @@
         "autoProvision"
       ]
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Common.CloudError": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
@@ -1001,8 +1006,7 @@
           "description": "The order of the information type."
         },
         "recommendedLabelId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The recommended label id to be associated with this information type."
         },
         "enabled": {

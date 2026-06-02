@@ -4365,7 +4365,6 @@ model ServerBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
 }
 
@@ -4503,7 +4502,6 @@ model DatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
 }
 
@@ -4646,7 +4644,6 @@ model ExtendedDatabaseBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
 }
 
@@ -4804,7 +4801,6 @@ model ExtendedServerBlobAuditingPolicyProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
 }
 
@@ -5240,7 +5236,6 @@ model ImportExportExtensionsOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   requestId?: Azure.Core.uuid;
 
@@ -5603,7 +5598,6 @@ model DatabaseIdentity {
   /**
    * The Azure Active Directory tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tenantId?: Azure.Core.uuid;
 
@@ -5623,14 +5617,12 @@ model DatabaseUserIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   principalId?: Azure.Core.uuid;
 
   /**
    * The Azure Active Directory client id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   clientId?: Azure.Core.uuid;
 }
@@ -5705,7 +5697,6 @@ model DatabaseProperties {
   /**
    * The ID of the database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   databaseId?: Azure.Core.uuid;
 
@@ -5887,7 +5878,6 @@ model DatabaseProperties {
   /**
    * The Client id used for cross tenant per database CMK scenario
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   federatedClientId?: Azure.Core.uuid;
 
   /**
@@ -6112,7 +6102,6 @@ model DatabaseUpdateProperties {
   /**
    * The ID of the database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   databaseId?: Azure.Core.uuid;
 
@@ -6294,7 +6283,6 @@ model DatabaseUpdateProperties {
   /**
    * The Client id used for cross tenant per database CMK scenario
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   federatedClientId?: Azure.Core.uuid;
 
   /**
@@ -6430,7 +6418,6 @@ model ImportExportOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   requestId?: Azure.Core.uuid;
 
@@ -7486,7 +7473,6 @@ model DistributedAvailabilityGroupProperties {
   /**
    * ID of the distributed availability group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   distributedAvailabilityGroupId?: Azure.Core.uuid;
 
@@ -7552,14 +7538,12 @@ model DistributedAvailabilityGroupDatabase {
   /**
    * Managed instance replica id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   instanceReplicaId?: Azure.Core.uuid;
 
   /**
    * SQL server replica id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   partnerReplicaId?: Azure.Core.uuid;
 
@@ -8629,7 +8613,6 @@ model JobAgentIdentity {
   /**
    * The job agent identity tenant id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
 
   /**
@@ -8653,14 +8636,12 @@ model JobAgentUserAssignedIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   principalId?: Azure.Core.uuid;
 
   /**
    * The Azure Active Directory client id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   clientId?: Azure.Core.uuid;
 }
@@ -8753,7 +8734,6 @@ model JobExecutionProperties {
   /**
    * The unique identifier of the job execution.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   jobExecutionId?: Azure.Core.uuid;
 
@@ -9012,7 +8992,6 @@ model JobStepOutput {
   /**
    * The output destination subscription id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptionId?: Azure.Core.uuid;
 
   /**
@@ -9304,7 +9283,6 @@ model ServiceObjectiveCapability {
   /**
    * The unique ID of the service objective.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: Azure.Core.uuid;
 
@@ -10671,7 +10649,6 @@ model LongTermRetentionOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   requestId?: Azure.Core.uuid;
 
@@ -11993,13 +11970,11 @@ model ManagedInstanceAdministratorProperties {
   /**
    * SID (object ID) of the managed instance administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sid: Azure.Core.uuid;
 
   /**
    * Tenant ID of the managed instance administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
 }
 
@@ -12496,7 +12471,6 @@ model ResourceIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   principalId?: Azure.Core.uuid;
 
@@ -12508,7 +12482,6 @@ model ResourceIdentity {
   /**
    * The Azure Active Directory tenant id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tenantId?: Azure.Core.uuid;
 }
@@ -12520,14 +12493,12 @@ model UserIdentity {
   /**
    * The Azure Active Directory principal id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   principalId?: Azure.Core.uuid;
 
   /**
    * The Azure Active Directory client id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   clientId?: Azure.Core.uuid;
 }
@@ -12836,13 +12807,11 @@ model ManagedInstanceExternalAdministrator {
   /**
    * SID (object ID) of the server administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sid?: Azure.Core.uuid;
 
   /**
    * Tenant ID of the administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
 
   /**
@@ -12996,7 +12965,6 @@ model RefreshExternalGovernanceStatusOperationResultPropertiesMI {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   requestId?: Azure.Core.uuid;
 
@@ -13901,13 +13869,11 @@ model AdministratorProperties {
   /**
    * SID (object ID) of the server administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sid: Azure.Core.uuid;
 
   /**
    * Tenant ID of the administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
 
   /**
@@ -14017,7 +13983,6 @@ model ServerDevOpsAuditSettingsProperties {
   /**
    * Specifies the blob storage subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   storageAccountSubscriptionId?: Azure.Core.uuid;
 }
 
@@ -14308,7 +14273,6 @@ model ServerProperties {
   /**
    * The Client id used for cross tenant CMK scenario
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   federatedClientId?: Azure.Core.uuid;
 
   /**
@@ -14394,13 +14358,11 @@ model ServerExternalAdministrator {
   /**
    * SID (object ID) of the server administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sid?: Azure.Core.uuid;
 
   /**
    * Tenant ID of the administrator.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tenantId?: Azure.Core.uuid;
 
   /**
@@ -14530,7 +14492,6 @@ model RefreshExternalGovernanceStatusOperationResultProperties {
   /**
    * Request Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   requestId?: Azure.Core.uuid;
 
@@ -15274,7 +15235,6 @@ model SyncGroupLogProperties {
   /**
    * TracingId of the sync group log.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   tracingId?: Azure.Core.uuid;
 
@@ -15305,7 +15265,6 @@ model SyncMemberProperties {
   /**
    * SQL Server database id of the sync member.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sqlServerDatabaseId?: Azure.Core.uuid;
 
   /**

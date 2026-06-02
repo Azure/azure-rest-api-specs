@@ -21,7 +21,8 @@ model JobExecution
     Resource = JobExecution,
     KeyName = "jobExecutionId",
     SegmentName = "executions",
-    NamePattern = ""
+    NamePattern = "",
+    Type = Azure.Core.uuid
   >;
 }
 
@@ -408,7 +409,5 @@ interface JobTargetExecutions {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@format(JobExecution.name, "uuid");
 @@doc(JobExecution.name, "The id of the job execution");
 @@doc(JobExecution.properties, "Resource properties.");

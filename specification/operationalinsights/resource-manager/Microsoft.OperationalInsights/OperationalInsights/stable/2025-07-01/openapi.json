@@ -5085,8 +5085,7 @@
       "description": "The list of Log Analytics workspaces associated with the cluster.",
       "properties": {
         "workspaceId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Associated workspace immutable id.",
           "readOnly": true
         },
@@ -5160,6 +5159,11 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "AzureEntityResource": {
       "type": "object",

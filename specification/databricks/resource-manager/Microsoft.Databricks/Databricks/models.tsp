@@ -737,16 +737,12 @@ model WorkspaceProviderAuthorization {
   /**
    * The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the workspace resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  principalId: string;
+  principalId: Azure.Core.uuid;
 
   /**
    * The provider's role definition identifier. This role will define all the permissions that the provider must have on the workspace's container resource group. This role definition cannot have permission to delete the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  roleDefinitionId: string;
+  roleDefinitionId: Azure.Core.uuid;
 }
 
 /**
@@ -756,10 +752,8 @@ model CreatedBy {
   /**
    * The Object ID that created the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  oid?: string;
+  oid?: Azure.Core.uuid;
 
   /**
    * The Personal Object ID corresponding to the object ID above
@@ -770,10 +764,8 @@ model CreatedBy {
   /**
    * The application ID of the application that initiated the creation of the workspace. For example, Azure Portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  applicationId?: string;
+  applicationId?: Azure.Core.uuid;
 }
 
 /**
@@ -783,18 +775,14 @@ model ManagedIdentityConfiguration {
   /**
    * The objectId of the Managed Identity that is linked to the Managed Storage account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 
   /**
    * The tenant Id where the Managed Identity is created.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * The type of Identity created. It can be either SystemAssigned or UserAssigned.

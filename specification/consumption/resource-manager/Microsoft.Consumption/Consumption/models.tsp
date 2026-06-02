@@ -550,18 +550,14 @@ model MarketplaceProperties {
   /**
    * The meter id (GUID).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  meterId?: string;
+  meterId?: Azure.Core.uuid;
 
   /**
    * Subscription guid.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  subscriptionGuid?: string;
+  subscriptionGuid?: Azure.Core.uuid;
 
   /**
    * Subscription name.
@@ -1708,10 +1704,8 @@ model LegacyReservationTransactionProperties {
   /**
    * The subscription guid that makes the transaction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  purchasingSubscriptionGuid?: string;
+  purchasingSubscriptionGuid?: Azure.Core.uuid;
 
   /**
    * The subscription name that makes the transaction.
@@ -1899,10 +1893,8 @@ model ModernReservationTransactionProperties {
   /**
    * The subscription guid that makes the transaction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  purchasingSubscriptionGuid?: string;
+  purchasingSubscriptionGuid?: Azure.Core.uuid;
 
   /**
    * The subscription name that makes the transaction.
@@ -1980,10 +1972,8 @@ model PriceSheetProperties {
   /**
    * The meter id (GUID)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  meterId?: string;
+  meterId?: Azure.Core.uuid;
 
   /**
    * The details about the meter. By default this is not populated, unless it's specified in $expand.
@@ -2849,10 +2839,8 @@ model LegacyUsageDetailProperties {
   /**
    * The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  meterId?: string;
+  meterId?: Azure.Core.uuid;
 
   /**
    * The details about the meter. By default this is not populated, unless it's specified in $expand.
@@ -3186,10 +3174,8 @@ model ModernUsageDetailProperties {
   /**
    * The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  meterId?: string;
+  meterId?: Azure.Core.uuid;
 
   /**
    * Identifies the name of the meter against which consumption is measured.
@@ -3616,10 +3602,8 @@ model LegacyReservationRecommendationProperties {
   /**
    * The meter id (GUID)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  meterId?: string;
+  meterId?: Azure.Core.uuid;
 
   /**
    * The azure resource type.
@@ -3720,10 +3704,8 @@ model LegacySingleScopeReservationRecommendationProperties
   /**
    * Subscription id associated with single scoped recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  subscriptionId?: string;
+  subscriptionId?: Azure.Core.uuid;
 
   /**
    * Shared or single recommendation.
@@ -3801,10 +3783,8 @@ model ModernReservationRecommendationProperties {
   /**
    * The meter id (GUID)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  meterId?: string;
+  meterId?: Azure.Core.uuid;
 
   /**
    * Term period of the reservation. ex: P1M, P1Y or P3Y.
@@ -3891,10 +3871,8 @@ model ModernSingleScopeReservationRecommendationProperties
   /**
    * Subscription ID associated with single scoped recommendation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  subscriptionId?: string;
+  subscriptionId?: Azure.Core.uuid;
 
   /**
    * Shared or single recommendation.

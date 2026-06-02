@@ -4262,8 +4262,7 @@
           "description": "Specifies the version info w.r.t AgentUpgrade for the machine."
         },
         "correlationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The correlation ID associated with an agent upgrade operation."
         },
         "enableAutomaticUpgrade": {
@@ -4430,6 +4429,11 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "CloudMetadata": {
       "type": "object",
@@ -6119,8 +6123,7 @@
           "readOnly": true
         },
         "assessmentActivityId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The activity ID of the operation that produced this result.",
           "readOnly": true
         },
@@ -6585,8 +6588,7 @@
           "readOnly": true
         },
         "vmId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies the hybrid machine unique ID.",
           "x-ms-mutability": [
             "read",
@@ -6630,8 +6632,7 @@
           "description": "The type of Operating System (windows/linux)."
         },
         "vmUuid": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies the Arc Machine's unique SMBIOS ID",
           "readOnly": true
         },

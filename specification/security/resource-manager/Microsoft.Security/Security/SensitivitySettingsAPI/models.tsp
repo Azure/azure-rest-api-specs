@@ -58,8 +58,7 @@ model UpdateSensitivitySettingsRequest {
    * The id of the sensitivity threshold label. Any label at or above this rank will be considered sensitive.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  sensitivityThresholdLabelId?: string;
+  sensitivityThresholdLabelId?: Azure.Core.uuid;
 }
 
 /**
@@ -81,8 +80,7 @@ model GetSensitivitySettingsResponseProperties {
    * The id of the sensitivity threshold label. Any label at or above this rank will be considered sensitive.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  sensitivityThresholdLabelId?: string;
+  sensitivityThresholdLabelId?: Azure.Core.uuid;
 
   /**
    * Microsoft information protection built-in and custom information types, labels, and integration status.
@@ -128,8 +126,7 @@ model Label {
    * The ID of the label
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  id?: string;
+  id?: Azure.Core.uuid;
 
   /**
    * Labels are ordered by sensitivity level. The higher the order of the label, the more sensitive it is.
@@ -150,8 +147,7 @@ model InfoType {
    * Id of the info type
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  id?: string;
+  id?: Azure.Core.uuid;
 
   /**
    * Description of the info type
@@ -172,8 +168,7 @@ model BuiltInInfoType {
    * Id of the info type
    */
   #suppress "@azure-tools/typespec-azure-core/no-format"
-  @format("uuid")
-  id?: string;
+  id?: Azure.Core.uuid;
 
   /**
    * Category of the built-in info type

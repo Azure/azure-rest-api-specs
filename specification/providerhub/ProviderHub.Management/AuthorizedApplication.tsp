@@ -19,7 +19,8 @@ model AuthorizedApplication
     Resource = AuthorizedApplication,
     KeyName = "applicationId",
     SegmentName = "authorizedApplications",
-    NamePattern = ""
+    NamePattern = "",
+    Type = Azure.Core.uuid
   >;
 }
 
@@ -49,8 +50,6 @@ interface AuthorizedApplications {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@format(AuthorizedApplication.name, "uuid");
 @@doc(AuthorizedApplication.name, "The application ID.");
 @@doc(AuthorizedApplication.properties, "");
 @@doc(

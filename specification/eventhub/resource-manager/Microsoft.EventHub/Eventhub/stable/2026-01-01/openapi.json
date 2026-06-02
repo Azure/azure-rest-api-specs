@@ -4503,6 +4503,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "CaptureDescription": {
       "type": "object",
       "description": "Properties to configure capture description for eventhub",
@@ -4912,8 +4917,7 @@
           "description": "Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order"
         },
         "dataLakeSubscriptionId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Subscription Id of Azure Data Lake Store"
         },
         "dataLakeAccountName": {
@@ -6611,8 +6615,7 @@
           "readOnly": true
         },
         "eTag": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The ETag value.",
           "readOnly": true
         },

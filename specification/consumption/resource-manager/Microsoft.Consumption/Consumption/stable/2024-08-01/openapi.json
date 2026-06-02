@@ -2312,6 +2312,11 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Balance": {
       "type": "object",
       "description": "A balance resource.",
@@ -3431,8 +3436,7 @@
           "readOnly": true
         },
         "meterId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The meter id (GUID)",
           "readOnly": true
         },
@@ -3581,8 +3585,7 @@
           "readOnly": true
         },
         "purchasingSubscriptionGuid": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The subscription guid that makes the transaction.",
           "readOnly": true
         },
@@ -3671,8 +3674,7 @@
       "description": "The properties of the legacy reservation recommendation for single scope.",
       "properties": {
         "subscriptionId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Subscription id associated with single scoped recommendation.",
           "readOnly": true
         }
@@ -3777,8 +3779,7 @@
           "readOnly": true
         },
         "meterId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
           "readOnly": true
         },
@@ -4348,14 +4349,12 @@
           "readOnly": true
         },
         "meterId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The meter id (GUID).",
           "readOnly": true
         },
         "subscriptionGuid": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Subscription guid.",
           "readOnly": true
         },
@@ -4681,8 +4680,7 @@
           "readOnly": true
         },
         "meterId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The meter id (GUID)",
           "readOnly": true
         },
@@ -4860,8 +4858,7 @@
           "readOnly": true
         },
         "purchasingSubscriptionGuid": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The subscription guid that makes the transaction.",
           "readOnly": true
         },
@@ -4932,8 +4929,7 @@
       "description": "The properties of the modern reservation recommendation for single scope.",
       "properties": {
         "subscriptionId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Subscription ID associated with single scoped recommendation.",
           "readOnly": true
         }
@@ -5034,8 +5030,7 @@
           "readOnly": true
         },
         "meterId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
           "readOnly": true
         },
@@ -5627,8 +5622,7 @@
           "readOnly": true
         },
         "meterId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The meter id (GUID)",
           "readOnly": true
         },

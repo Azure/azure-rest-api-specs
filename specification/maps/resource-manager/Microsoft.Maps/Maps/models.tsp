@@ -333,16 +333,12 @@ model EncryptionCustomerManagedKeyEncryptionKeyEncryptionKeyIdentity {
   /**
    * application client identity to use for accessing key encryption key Url in a different tenant. Ex: f83c6b1b-4d34-47e4-bb34-9d83df58b540
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  federatedClientId?: string;
+  federatedClientId?: Azure.Core.uuid;
 
   /**
    * delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  delegatedIdentityClientId?: string;
+  delegatedIdentityClientId?: Azure.Core.uuid;
 }
 
 /**

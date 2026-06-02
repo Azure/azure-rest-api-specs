@@ -32,10 +32,8 @@ alias ScopeTenantIdParameters = {
   /**
    * The tenant ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
   @query("scopeTenantId")
-  scopeTenantId: string;
+  scopeTenantId: Azure.Core.uuid;
 };
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -1649,6 +1649,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "ComplianceSecurityProfileDefinition": {
       "type": "object",
       "description": "Status of Compliance Security Profile feature.",
@@ -1717,8 +1722,7 @@
       "description": "Provides details of the entity that created/updated the workspace.",
       "properties": {
         "oid": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Object ID that created the workspace.",
           "readOnly": true
         },
@@ -1728,8 +1732,7 @@
           "readOnly": true
         },
         "applicationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The application ID of the application that initiated the creation of the workspace. For example, Azure Portal.",
           "readOnly": true
         }
@@ -2297,14 +2300,12 @@
       "description": "The Managed Identity details for storage account.",
       "properties": {
         "principalId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The objectId of the Managed Identity that is linked to the Managed Storage account.",
           "readOnly": true
         },
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The tenant Id where the Managed Identity is created.",
           "readOnly": true
         },
@@ -3343,13 +3344,11 @@
       "description": "The workspace provider authorization.",
       "properties": {
         "principalId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The provider's principal identifier. This is the identity that the provider will use to call ARM to manage the workspace resources."
         },
         "roleDefinitionId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The provider's role definition identifier. This role will define all the permissions that the provider must have on the workspace's container resource group. This role definition cannot have permission to delete the resource group."
         }
       },

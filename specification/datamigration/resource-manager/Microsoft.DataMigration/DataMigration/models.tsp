@@ -2538,9 +2538,7 @@ model MigrationOperationInput {
   /**
    * ID tracking migration operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  migrationOperationId?: string;
+  migrationOperationId?: Azure.Core.uuid;
 }
 
 /**
@@ -2665,10 +2663,8 @@ model SqlBackupSetInfo {
   /**
    * Backup set id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  backupSetId?: string;
+  backupSetId?: Azure.Core.uuid;
 
   /**
    * First LSN of the backup set.

@@ -1804,9 +1804,7 @@ model DestinationProperties {
   /**
    * Subscription Id of Azure Data Lake Store
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "The format constraint is required to match the original OpenAPI specification."
-  @format("uuid")
-  dataLakeSubscriptionId?: string;
+  dataLakeSubscriptionId?: Azure.Core.uuid;
 
   /**
    * The Azure Data Lake Store name for the captured events
@@ -1872,10 +1870,8 @@ model SchemaGroupProperties {
   /**
    * The ETag value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "The format constraint is required to match the original OpenAPI specification."
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  eTag?: string;
+  eTag?: Azure.Core.uuid;
 
   /**
    * dictionary object for SchemaGroup group properties

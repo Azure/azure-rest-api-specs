@@ -11254,6 +11254,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureQueryProperties": {
       "type": "object",
       "description": "Azure query for the update configuration.",
@@ -13565,8 +13570,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the job.",
           "readOnly": true
         },
@@ -13699,8 +13703,7 @@
           "description": "Runtime Environment Property"
         },
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Gets or sets the id of the job."
         },
         "creationTime": {
@@ -18253,14 +18256,12 @@
           "readOnly": true
         },
         "correlationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "correlation id of the software update configuration machine run",
           "readOnly": true
         },
         "sourceComputerId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "source computer id of the software update configuration machine run",
           "readOnly": true
         },
