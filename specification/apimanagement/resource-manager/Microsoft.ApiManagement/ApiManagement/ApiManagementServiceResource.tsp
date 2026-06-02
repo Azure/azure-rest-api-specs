@@ -873,7 +873,6 @@ interface ApiManagementServiceResources {
   ApiManagementServiceResource.name,
   "The name of the API Management service."
 );
-@@encodedName(ApiManagementServiceResource.etag, "application/json", "etag");
 @@doc(
   ApiManagementServiceResource.properties,
   "Properties of the API Management service."
