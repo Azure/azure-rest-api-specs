@@ -37,6 +37,103 @@ These settings apply only when `--tag=package-2026-06-preview` is specified on t
 ```yaml $(tag) == 'package-2026-06-preview'
 input-file:
 - preview/2026-06-15-preview/EventGrid.json
+
+suppressions:
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"]
+
+  - code: PathResourceTypeNameCamelCase
+    reason: "Resource type naming must follow camel case. Path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}'"
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"].get.responses[200].schema
+
+  - code: PathForResourceAction
+    reason: "Path for 'post' method on a resource type MUST follow valid resource naming."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"]
+
+  - code: PathResourceTypeNameCamelCase
+    reason: "Resource type naming must follow camel case. Path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile'"
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"]
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: "provisioningState property must be set to readOnly."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"].post.responses[200].schema
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources"]
+
+  - code: PathContainsResourceType
+    reason: "The path for the CURD methods do not contain a resource type."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}"]
+
+  - code: PatchResponseCodes
+    reason: "Long-running PATCH operations must have responses with 200, 202 and default return codes. They also must not have other response codes."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].patch
+
+  - code: DeleteResponseCodes
+    reason: "Long-running delete operations must have responses with 202, 204 and default return codes. They also must have no other response codes."
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerDestinations/{partnerDestinationName}"].delete
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.FederatedIdentityCredentialInfo.properties.federatedClientId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.Partner.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerDestinationProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerRegistrationProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.PartnerTopicProperties.properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: "Usage of Guid is not recommended. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board."
+    from: EventGrid.json
+    where: $.definitions.VerifiedPartnerProperties.properties.partnerRegistrationImmutableId.format
+
 ```
 
 ### Tag: package-2025-07-preview
