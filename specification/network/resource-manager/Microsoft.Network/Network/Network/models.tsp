@@ -1862,6 +1862,33 @@ union IpType {
 }
 
 /**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Application
+   */
+  Application: "Application",
+
+  /**
+   * ManagedIdentity
+   */
+  ManagedIdentity: "ManagedIdentity",
+
+  /**
+   * Key
+   */
+  Key: "Key",
+}
+
+/**
  * Name of a service gateway SKU.
  */
 union ServiceGatewaySkuName {
