@@ -73,3 +73,12 @@
 - tool: TypeSpecRequirement
   path: ./stable/2025-04-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  reason: >
+    The namespace "azure.mgmt.resource.resources" is required for the resources package
+    and intentionally differs from the value derived from emitter-output-dir.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.namespace
+  paths:
+    - tspconfig.yaml

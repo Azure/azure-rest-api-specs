@@ -63,9 +63,11 @@ interface ConnectionTypes {
 }
 
 @@doc(ConnectionType.name, "The name of connection type.");
-@@doc(ConnectionType.properties,
+@@doc(
+  ConnectionType.properties,
   "Gets or sets the properties of the connection type."
 );
-@@doc(ConnectionTypes.createOrUpdate::parameters.resource,
+@@doc(
+  ConnectionTypes.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update connection type operation."
 );

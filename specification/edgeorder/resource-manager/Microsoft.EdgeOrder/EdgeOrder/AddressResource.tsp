@@ -37,8 +37,10 @@ interface AddressResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     AddressResource,
-    Response = ArmResourceUpdatedResponse<AddressResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AddressResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<AddressResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AddressResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -120,13 +122,16 @@ interface AddressResources {
 
 @@maxLength(AddressResource.name, 24);
 @@minLength(AddressResource.name, 3);
-@@doc(AddressResource.name,
+@@doc(
+  AddressResource.name,
   "The name of the address Resource within the specified resource group. address names must be between 3 and 24 characters in length and use any alphanumeric and underscore only."
 );
 @@doc(AddressResource.properties, "Properties of an address.");
-@@doc(AddressResources.create::parameters.resource,
+@@doc(
+  AddressResources.create::parameters.resource,
   "Address details from request body."
 );
-@@doc(AddressResources.update::parameters.properties,
+@@doc(
+  AddressResources.update::parameters.properties,
   "Address update parameters from request body."
 );

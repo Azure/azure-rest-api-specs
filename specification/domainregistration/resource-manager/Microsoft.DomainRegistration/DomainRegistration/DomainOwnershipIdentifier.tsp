@@ -85,12 +85,15 @@ interface DomainOwnershipIdentifiers {
 }
 
 @@doc(DomainOwnershipIdentifier.name, "Name of identifier.");
-@@doc(DomainOwnershipIdentifier.properties,
+@@doc(
+  DomainOwnershipIdentifier.properties,
   "DomainOwnershipIdentifier resource specific properties"
 );
-@@doc(DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier::parameters.resource,
+@@doc(
+  DomainOwnershipIdentifiers.createOrUpdateOwnershipIdentifier::parameters.resource,
   "A JSON representation of the domain ownership properties."
 );
-@@doc(DomainOwnershipIdentifiers.updateOwnershipIdentifier::parameters.properties,
+@@doc(
+  DomainOwnershipIdentifiers.updateOwnershipIdentifier::parameters.properties,
   "A JSON representation of the domain ownership properties."
 );

@@ -117,6 +117,7 @@ interface TopicRecords {
 
 @@doc(TopicRecord.name, "Confluent kafka or schema registry topic name");
 @@doc(TopicRecord.properties, "Topic Properties");
-@@doc(TopicRecords.create::parameters.resource,
+@@doc(
+  TopicRecords.create::parameters.resource,
   "Confluent Topics resource model"
 );

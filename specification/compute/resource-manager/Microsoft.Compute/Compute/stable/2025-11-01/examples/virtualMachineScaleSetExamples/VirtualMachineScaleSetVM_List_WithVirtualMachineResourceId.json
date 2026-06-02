@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "resourceGroupName": "resourceGroupname",
+    "virtualMachineScaleSetName": "vmssName",
+    "api-version": "2025-11-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{vmss-flex-vm-name}_1",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-flex-name}/virtualMachines/{vmss-flex-vm-name}_1",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
+            "location": "eastus2euap",
+            "instanceId": "{vmss-flex-vm-name}_1",
+            "etag": "\"3\"",
+            "properties": {
+              "virtualMachineResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vmss-flex-vm-name}_1"
+            }
+          },
+          {
+            "name": "{vmss-flex-vm-name}_2",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-flex-name}/virtualMachines/{vmss-flex-vm-name}_2",
+            "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
+            "location": "eastus2euap",
+            "instanceId": "{vmss-flex-vm-name}_2",
+            "etag": "\"3\"",
+            "properties": {
+              "virtualMachineResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vmss-flex-vm-name}_2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMs_List",
+  "title": "List Vmss VMs with VirtualMachineResourceId."
+}

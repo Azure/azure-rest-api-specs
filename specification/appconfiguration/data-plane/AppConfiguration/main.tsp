@@ -10,13 +10,15 @@ using TypeSpec.Versioning;
 @service(#{ title: "Azure App Configuration" })
 @versioned(Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Connection String"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://azconfig.io/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Connection String">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.implicit,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          scopes: ["https://azconfig.io/.default"],
+        }
+      ]>
 )
 @server(
   "{endpoint}",
@@ -35,4 +37,7 @@ enum Versions {
 
   @doc("The 2024-09-01 API version")
   v2024_09_01: "2024-09-01",
+
+  @doc("The 2026-04-01 API version")
+  v2026_04_01: "2026-04-01",
 }

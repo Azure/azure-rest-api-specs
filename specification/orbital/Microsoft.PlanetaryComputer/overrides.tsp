@@ -240,11 +240,6 @@ model GetPreviewOptions {
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
-
-  /**
-   * Subdataset parameters
-   */
-  ...SubDatasetQueryParameters;
 }
 
 /**
@@ -457,7 +452,8 @@ op getTileCustomized(
   options: GetTileOptions,
 ): TileResponse;
 
-@@override(TilerTileMatrixSets.getZxyScaleByFormat,
+@@override(
+  TilerTileMatrixSets.getZxyScaleByFormat,
   getTileCustomized,
   "!python,!csharp,!javascript"
 );
@@ -476,7 +472,8 @@ op getWmtsCapabilitiesCustomized(
   options: GetWmtsCapabilitiesOptions,
 ): WmtsCapabilitiesXmlResponse;
 
-@@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
+@@override(
+  TilerWmtsTileMatrixSets.getCapabilitiesXml,
   getWmtsCapabilitiesCustomized,
   "!python,!csharp,!javascript"
 );
@@ -495,7 +492,8 @@ op getAssetStatisticsCustomized(
   options: GetAssetStatisticsOptions,
 ): Record<Record<BandStatistics>>;
 
-@@override(TilerAssetStatistics.getAll,
+@@override(
+  TilerAssetStatistics.getAll,
   getAssetStatisticsCustomized,
   "!python,!csharp,!javascript"
 );
@@ -511,7 +509,8 @@ op getAssetStatisticsCustomizedForCsharp(
   ...StatisticsQueryParameters,
 ): Record<unknown>;
 
-@@override(TilerAssetStatistics.getAll,
+@@override(
+  TilerAssetStatistics.getAll,
   getAssetStatisticsCustomizedForCsharp,
   "csharp"
 );
@@ -536,7 +535,8 @@ op cropGeoJsonCustomized(
   body: Feature,
 ): TileResponse;
 
-@@override(TilerGeoJsons.cropFormat,
+@@override(
+  TilerGeoJsons.cropFormat,
   cropGeoJsonCustomized,
   "!python,!csharp,!javascript"
 );
@@ -561,7 +561,8 @@ op cropGeoJsonWithDimensionsCustomized(
   body: Feature,
 ): TileResponse;
 
-@@override(TilerGeoJsons.cropWidthByHeightFormat,
+@@override(
+  TilerGeoJsons.cropWidthByHeightFormat,
   cropGeoJsonWithDimensionsCustomized,
   "!python,!csharp,!javascript"
 );
@@ -586,7 +587,8 @@ op getGeoJsonStatisticsCustomized(
   body: Feature,
 ): StacItemStatisticsGeoJson;
 
-@@override(TilerGeoJsonStatistics.get,
+@@override(
+  TilerGeoJsonStatistics.get,
   getGeoJsonStatisticsCustomized,
   "!python,!csharp,!javascript"
 );
@@ -605,7 +607,8 @@ op getPartCustomized(
   options: GetPartOptions,
 ): TileResponse;
 
-@@override(TilerParts.getCroppedToBoundingBox,
+@@override(
+  TilerParts.getCroppedToBoundingBox,
   getPartCustomized,
   "!python,!csharp,!javascript"
 );
@@ -624,7 +627,8 @@ op getPartWithDimensionsCustomized(
   options: GetPartOptions,
 ): TileResponse;
 
-@@override(TilerParts.getCroppedToBoundingBoxWidthByHeight,
+@@override(
+  TilerParts.getCroppedToBoundingBoxWidthByHeight,
   getPartWithDimensionsCustomized,
   "!python,!csharp,!javascript"
 );
@@ -643,7 +647,8 @@ op getPreviewCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-@@override(TilerPreviews.get,
+@@override(
+  TilerPreviews.get,
   getPreviewCustomized,
   "!python,!csharp,!javascript"
 );
@@ -662,7 +667,8 @@ op getPreviewWithFormatCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-@@override(TilerPreviews.getFormat,
+@@override(
+  TilerPreviews.getFormat,
   getPreviewWithFormatCustomized,
   "!python,!csharp,!javascript"
 );
@@ -681,7 +687,8 @@ op listStatisticsCustomized(
   options: GetStatisticsOptions,
 ): TilerStacItemStatistics;
 
-@@override(TilerStatistics.getAll,
+@@override(
+  TilerStatistics.getAll,
   listStatisticsCustomized,
   "!python,!csharp,!javascript"
 );
@@ -700,7 +707,8 @@ op getTileJsonCustomized(
   options: GetTileJsonOptions,
 ): TileJsonMetadata;
 
-@@override(TilerTileJsonTileMatrixSets.get,
+@@override(
+  TilerTileJsonTileMatrixSets.get,
   getTileJsonCustomized,
   "!python,!csharp,!javascript"
 );
@@ -719,7 +727,8 @@ op getMosaicsTileJsonCustomized(
   options: GetMosaicTileJsonOptions,
 ): TileJsonMetadata;
 
-@@override(MosaicsTileMatrixSetsTileJson.get,
+@@override(
+  MosaicsTileMatrixSetsTileJson.get,
   getMosaicsTileJsonCustomized,
   "!python,!csharp,!javascript"
 );
@@ -738,7 +747,8 @@ op getMosaicsTileCustomized(
   options: GetMosaicTileOptions,
 ): TileResponse;
 
-@@override(MosaicsTileMatrixSets.getZxyScaleByFormat,
+@@override(
+  MosaicsTileMatrixSets.getZxyScaleByFormat,
   getMosaicsTileCustomized,
   "!python,!csharp,!javascript"
 );
@@ -757,7 +767,8 @@ op getMosaicsWmtsCapabilitiesCustomized(
   options: GetMosaicWmtsCapabilitiesOptions,
 ): WmtsCapabilitiesXmlResponse;
 
-@@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
+@@override(
+  MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
   getMosaicsWmtsCapabilitiesCustomized,
   "!python,!csharp,!javascript"
 );

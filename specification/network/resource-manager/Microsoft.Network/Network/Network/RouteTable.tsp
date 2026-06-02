@@ -56,7 +56,10 @@ interface RouteTables {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RouteTable,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -73,9 +76,11 @@ interface RouteTables {
 
 @@doc(RouteTable.name, "The name of the route table.");
 @@doc(RouteTable.properties, "Properties of the route table.");
-@@doc(RouteTables.createOrUpdate::parameters.resource,
+@@doc(
+  RouteTables.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update route table operation."
 );
-@@doc(RouteTables.updateTags::parameters.properties,
+@@doc(
+  RouteTables.updateTags::parameters.properties,
   "Parameters supplied to update route table tags."
 );

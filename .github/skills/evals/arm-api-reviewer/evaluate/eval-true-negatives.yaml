@@ -1,0 +1,97 @@
+name: arm-api-reviewer-eval-true-negatives
+description: |
+  True negative (false-positive resistance) tests (09xxxx).
+  Validates that the reviewer does NOT flag blocking violations on clean,
+  fully compliant specs and examples.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 090001 — Clean ARM spec (no blocking issues expected)
+  - name: clean-arm-spec-no-blocking-issues
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
+        - src: "../fixtures/examples/example-clean.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions. If the spec is fully compliant, state
+      that no blocking issues were found.
+
+      File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no false-positive blocking findings"
+        config:
+          pattern: "(?i)\\bmissing (DELETE|PATCH|PUT|GET|list)\\b|\\bmissing provisioningState\\b|\\bSEC-SECRET-DETECT\\b"
+      - type: prompt
+    rubric:
+      - The spec is fully compliant with ARM RPC rules — uses common-types v5 $ref for TrackedResource, ErrorResponse, OperationListResult, and standard ARM parameters; has all required CRUD operations, ListByResourceGroup, ListBySubscription, Operations API, provisioningState (read-only with terminal states and modelAsString), x-ms-pageable with nextLink, correct security definitions, and proper x-ms-mutability on location via TrackedResource
+      - The agent MUST NOT report any blocking violations (Error or Required severity). There are no blocking RPC rule violations, security violations, or breaking changes in this spec. Any finding at blocking/required severity is a false positive and constitutes a test failure.
+      - Minor suggestions (e.g., adding non-terminal provisioningState values like Creating/Updating/Deleting, etag for optimistic concurrency, server-side default annotations) and informational observations are acceptable and do not affect the grade
+
+  # 090002 — Clean example file (no issues expected)
+  - name: clean-example-no-issues
+    environment:
+      files:
+        - src: "../fixtures/examples/example-clean.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
+    prompt: >
+      Review the following example JSON file for compliance with Azure REST API
+      example file guidelines. This example is for a GET operation on an ARM
+      resource. Report all findings with rule IDs and fix suggestions.
+
+      File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: prompt
+    rubric:
+      - The example is well-formed — has a proper fully-qualified ARM resource ID, no realistic secrets, correct formatting, proper provisioningState, tags, and systemData
+      - The agent should avoid flagging serious EX-* rule violations that would be false positives
+      - Minor observations or suggestions are acceptable
+
+  # 090003 — Clean proxy resource (no location/tags/move required)
+  - name: clean-proxy-resource-no-blocking-issues
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-proxy-resource.json"
+          dest: "specification/proxysvc/resource-manager/Microsoft.ProxyTest/stable/2025-01-01/proxysvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a
+      proxy (extension) resource nested under a parent resource — it does NOT
+      have a location property and is NOT a tracked resource. Report all findings
+      with rule IDs, line numbers, and fix suggestions. If the spec is fully
+      compliant, state that no blocking issues were found.
+
+      File: specification/proxysvc/resource-manager/Microsoft.ProxyTest/stable/2025-01-01/proxysvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no false-positive tracked-resource findings"
+        config:
+          pattern: "(?i)\\bmissing (location|tags)\\b|\\bmissing.*(ListBySubscription|ListByResourceGroup)\\b|\\bresource move\\b"
+      - type: prompt
+    rubric:
+      - This is a proxy resource (extends ProxyResource from common-types v5) — it correctly has no location, no tags, and no resource move requirement
+      - The agent MUST NOT flag missing location, missing tags, missing ListBySubscription, missing ListByResourceGroup, or missing resource move as violations — these rules apply only to tracked resources, not proxy resources
+      - The proxy resource correctly implements PUT, GET, DELETE, and a list-by-parent operation with x-ms-pageable
+      - Minor suggestions are acceptable and do not affect the grade
