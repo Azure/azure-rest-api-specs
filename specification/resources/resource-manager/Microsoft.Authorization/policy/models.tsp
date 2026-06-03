@@ -60,6 +60,12 @@ union SelectorKind {
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
 
   /**
+   * The selector kind to filter policies by the resource percentage.
+   */
+  @added(Versions.v2026_06_01)
+  resourcePercentage: "resourcePercentage",
+
+  /**
    * The selector kind to filter policies by the user principal ID.
    */
   @added(Versions.v2025_12_01_preview)
@@ -477,6 +483,14 @@ model Selector {
    * The list of values to filter out.
    */
   notIn?: string[];
+
+  /**
+   * The percent of total resources that will be governed by the policy.
+   */
+  @added(Versions.v2026_06_01)
+  @maxValue(99)
+  @minValue(1)
+  progress?: int32;
 }
 
 /**
