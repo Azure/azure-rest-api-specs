@@ -35,7 +35,7 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 **Where to link.** Pick the most specific source for the rule:
 
 - Generic OpenAPI rules (e.g., `OAPI020`, `OAPI027`, `OAPI034`, `WHATIF-001`, `PLCY008`, `TSP-REQUIRED-V1`) → link to the rule's section in `.github/instructions/openapi-review.instructions.md` **or** to the dedicated reference file under `.github/skills/azure-api-review/references/*.md` when the rule has a full reference page (e.g., `property-mutability.md#oapi034`, `secret-detection.md`, `provisioning-state.md`).
-- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to the corresponding section in `.github/instructions/armapi-review.instructions.md`.
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to the corresponding section in `.github/instructions/arm-api-review.instructions.md`.
 - TypeSpec-only rules → link to the corresponding section in `.github/instructions/typespec-review.instructions.md`.
 
 **Multiple rule IDs.** When a finding cites more than one rule ID, each ID **MUST** be its own hyperlink (e.g., `[OAPI034](...) / [WHATIF-001](...)`).
@@ -206,7 +206,7 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 - Object definitions **MUST NOT** be free-form (i.e., `"type": "object"` with no `properties` defined and no `$ref`). Every object must have a defined schema. If the service truly needs to accept arbitrary key-value data, use `additionalProperties` with explicit justification.
 - Array properties **MUST** have an `items` schema defined.
 - Date/time properties **MUST** use `"format": "date-time"` (RFC 3339).
-- UUID properties: on **data-plane** specs use `"format": "uuid"` (RFC 4122). On **ARM control-plane** specs the default is **DO NOT use `"format": "uuid"`** -- the required `GuidUsage` LintDiff rule (`R3017`) blocks the PR unless the author obtains Azure API review board sign-off AND adds a scoped per-property (or per-shared-definition) suppression whose `where:` path equals the LintDiff `jsonpath` exactly (including the trailing `.format` segment). The narrow allow-list is Microsoft Entra / AAD identifiers customers already see as GUIDs: `tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`. Opaque platform-assigned IDs, resource-internal IDs, and names are **not** on the allow-list -- keep `"type": "string"`. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) and [`armapi-review.instructions.md` §8.4](./armapi-review.instructions.md) for the decision tree and the exact suppression form.
+- UUID properties: on **data-plane** specs use `"format": "uuid"` (RFC 4122). On **ARM control-plane** specs the default is **DO NOT use `"format": "uuid"`** -- the required `GuidUsage` LintDiff rule (`R3017`) blocks the PR unless the author obtains Azure API review board sign-off AND adds a scoped per-property (or per-shared-definition) suppression whose `where:` path equals the LintDiff `jsonpath` exactly (including the trailing `.format` segment). The narrow allow-list is Microsoft Entra / AAD identifiers customers already see as GUIDs: `tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`. Opaque platform-assigned IDs, resource-internal IDs, and names are **not** on the allow-list -- keep `"type": "string"`. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) and [`arm-api-review.instructions.md` §8.4](./arm-api-review.instructions.md) for the decision tree and the exact suppression form.
 - ARM resource ID properties **SHOULD** use `"format": "arm-id"` to enable ARM-aware tooling and SDK generation.
 - URI/URL properties **MUST** use `"format": "uri"` to enable SDK validation and proper typing.
 - Duration properties **SHOULD** use fixed time intervals with the unit in the property name (e.g. `backupTimeInMinutes`, `ttlSeconds`). Use ISO 8601 durations only when variable calendar intervals are needed.
@@ -296,7 +296,7 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
 
 > **Note:** This section describes general LRO patterns. For ARM control-plane,
-> see `armapi-review.instructions.md` sections 5-6 for precise response code
+> see `arm-api-review.instructions.md` sections 5-6 for precise response code
 > requirements per verb (sync vs async response codes differ). For data-plane,
 > see section 21 -- use `Operation-Location`, not `Azure-AsyncOperation`.
 

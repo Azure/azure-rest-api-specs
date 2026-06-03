@@ -48,7 +48,7 @@ The agent depends on the **azure-api-review** shared skill
 ([`skills/azure-api-review/`](azure-api-review/)) and three
 instruction files:
 
-- [`instructions/armapi-review.instructions.md`](../instructions/armapi-review.instructions.md)
+- [`instructions/arm-api-review.instructions.md`](../instructions/arm-api-review.instructions.md)
   -- ARM-specific rules (100+ rule IDs)
 - [`instructions/openapi-review.instructions.md`](../instructions/openapi-review.instructions.md) -- generic OpenAPI rules
 - [`instructions/typespec-review.instructions.md`](../instructions/typespec-review.instructions.md) -- TypeSpec rules

@@ -57,7 +57,7 @@ anchored to the section that defines the rule:
   `.github/instructions/typespec-review.instructions.md` or
   `.github/instructions/typespec-project.instructions.md`.
 - ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to
-  `.github/instructions/armapi-review.instructions.md`.
+  `.github/instructions/arm-api-review.instructions.md`.
 - Generic OpenAPI rules (e.g., `OAPI020`, `OAPI034`, `WHATIF-001`) →
   link to `.github/instructions/openapi-review.instructions.md` or to
   the dedicated reference file under

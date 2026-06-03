@@ -1,7 +1,7 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
      Upstream alignment: 2026-05-31
      Source of truth for the Reviewer-Posted Parity contract referenced by
-     `armapi-review.instructions.md`, `openapi-review.instructions.md`, and
+     `arm-api-review.instructions.md`, `openapi-review.instructions.md`, and
      `typespec-review.instructions.md`. Prior to consolidation the same
      hard-rules list was duplicated across all three instruction files; the
      duplicates drifted (marker form, severity glyphs). Edit here only. -->

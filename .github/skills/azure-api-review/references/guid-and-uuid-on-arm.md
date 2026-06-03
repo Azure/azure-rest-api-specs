@@ -201,7 +201,7 @@ IDs, resource-internal IDs, names), the agent **MUST NOT** recommend
 ## Source rule pointers
 
 - ARM control-plane review rules:
-  [`armapi-review.instructions.md` §8.4](../../../instructions/armapi-review.instructions.md)
+  [`arm-api-review.instructions.md` §8.4](../../../instructions/arm-api-review.instructions.md)
 - OpenAPI review rules:
   [`openapi-review.instructions.md` Types & Formats](../../../instructions/openapi-review.instructions.md)
 - TypeSpec review rules:

@@ -46,7 +46,7 @@ For each file type, apply the corresponding instruction files. These are the
 single source of truth -- do not invent rules beyond what they specify.
 
 1. **ARM control-plane specs** (`specification/**/resource-manager/**/*.json`):
-   Apply `.github/instructions/armapi-review.instructions.md` (ARM-specific
+   Apply `.github/instructions/arm-api-review.instructions.md` (ARM-specific
    rules take precedence) AND `.github/instructions/openapi-review.instructions.md`.
 2. **All OpenAPI specs** (`specification/**/*.json`):
    Apply `.github/instructions/openapi-review.instructions.md`.
@@ -88,7 +88,7 @@ exhaustively.
 - **OpenAPI JSON** -- apply the "Review Checklist Summary" at the end of
   `openapi-review.instructions.md`
 - **ARM resource-manager JSON** -- apply **both** the OpenAPI checklist AND the
-  "ARM Review Checklist Summary" at the end of `armapi-review.instructions.md`
+  "ARM Review Checklist Summary" at the end of `arm-api-review.instructions.md`
 - **TypeSpec** -- apply the "TypeSpec Review Checklist Summary" at the end of
   `typespec-review.instructions.md`
 - **`readme.md` suppressions** -- perform suppression continuity analysis:
@@ -244,7 +244,7 @@ Do not flood a PR with comments. Prioritize and cap:
 If more findings exist beyond the cap, summarize them in a single comment:
 "_N additional warnings/suggestions were identified but not posted individually.
 Key themes: [list]. The author should review the full checklist in
-`armapi-review.instructions.md`._"
+`arm-api-review.instructions.md`._"
 
 ---
 

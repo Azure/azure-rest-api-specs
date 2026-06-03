@@ -423,7 +423,7 @@ to `CONFLICTING` mid-session).
 ### Step 3: Re-read and re-quote the cited rule
 
 Open the relevant instruction file (`openapi-review.instructions.md`,
-`armapi-review.instructions.md`, `typespec-review.instructions.md`, or a
+`arm-api-review.instructions.md`, `typespec-review.instructions.md`, or a
 referenced shared-skill file) and locate the cited rule ID or section.
 Extract a **verbatim** quote of the normative sentence(s) and record the
 instruction-file line range. Confirm the quoted text supports the
@@ -769,7 +769,7 @@ Omit this entire section if Input #6 was `reconciliation skipped` (note that fac
 
 | Rule ID       | Instruction file               | Lines    | Verbatim quote        |
 | ------------- | ------------------------------ | -------- | --------------------- |
-| RPC-Put-V1-11 | armapi-review.instructions.md  | L482-489 | "<exact quoted text>" |
+| RPC-Put-V1-11 | arm-api-review.instructions.md | L482-489 | "<exact quoted text>" |
 | OAPI027       | openapi-review.instructions.md | L312-315 | "<exact quoted text>" |
 
 ### Graph diff vs. reviewer's Mermaid
@@ -852,7 +852,7 @@ auto-invalidates if the underlying rule moves.
 
 - **Proxy resources without `provisioningState`.** `provisioningState` is
   required on tracked resources, not on proxy or extension resources.
-  Anchor: `armapi-review.instructions.md`, provisioning-state section.
+  Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
   breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
 - **Suppressions carried forward from a prior version.** Only newly added

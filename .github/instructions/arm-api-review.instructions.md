@@ -39,7 +39,7 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 **Where to link.** Pick the most specific source for the rule:
 
-- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`, `RPC-Patch-V1-10`) → link to the corresponding section in `.github/instructions/armapi-review.instructions.md`.
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`, `RPC-Patch-V1-10`) → link to the corresponding section in `.github/instructions/arm-api-review.instructions.md`.
 - Generic OpenAPI rules (e.g., `OAPI020`, `OAPI027`, `OAPI034`, `WHATIF-001`, `PLCY008`, `TSP-REQUIRED-V1`) → link to the rule's section in `.github/instructions/openapi-review.instructions.md` **or** to the dedicated reference file under `.github/skills/azure-api-review/references/*.md` when the rule has a full reference page (e.g., `property-mutability.md#oapi034`, `secret-detection.md`, `provisioning-state.md`).
 - TypeSpec-only rules → link to the corresponding section in `.github/instructions/typespec-review.instructions.md`.
 
@@ -57,7 +57,7 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 **Positive example (DO post):**
 
-> **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/armapi-review.instructions.md#121-use-post-actions-sparingly)]** ...
+> **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md#121-use-post-actions-sparingly)]** ...
 
 ### Reviewer-Posted Parity
 
