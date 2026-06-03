@@ -70,6 +70,10 @@ model RequestSession {
   /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
 
+  /** Whether the model is allowed to call tools in parallel. */
+  @added(Versions.v2026_06_01_preview)
+  parallel_tool_calls?: boolean = true;
+
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
 
@@ -88,6 +92,20 @@ model RequestSession {
   /** Configuration for interim response generation during latency or tool calls. */
   @added(Versions.v2026_01_01_preview)
   interim_response?: InterimResponseConfig;
+
+  /** List of include options for the session (e.g., logprobs, phrases, file search results). */
+  @added(Versions.v2026_04_10)
+  include?: SessionIncludeOption[];
+
+  /**
+   * Set of up to 16 key-value pairs that can be attached to the session. This is useful for
+   * storing additional information about the session in a structured format, such as tracking IDs,
+   * user context, or application-specific labels. These key-value pairs are also included in
+   * Foundry resource logs for tracing and diagnostics. Keys can be a maximum of 64 characters
+   * long and values can be a maximum of 512 characters long.
+   */
+  @added(Versions.v2026_04_10)
+  metadata?: Record<string>;
 }
 
 /**
@@ -205,6 +223,10 @@ union AzureVoiceType {
 
   /** Azure personal voice. */
   azure_personal: "azure-personal",
+
+  /** Azure avatar voice sync. */
+  @added(Versions.v2026_04_10)
+  avatar_voice_sync: "avatar-voice-sync",
 }
 /** Azure custom voice configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
@@ -225,13 +247,58 @@ model AzureCustomVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
+
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
+
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
@@ -250,13 +317,58 @@ model AzureStandardVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
+
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
+
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
@@ -277,13 +389,58 @@ model AzurePersonalVoice extends AzureVoice {
   /** Underlying neural model to use for personal voice. */
   `model`: PersonalVoiceModels;
 
+  /** URL of a custom lexicon file for pronunciation customization. */
   custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
   custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
   prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
   locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
   style?: string;
+
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
   pitch?: string;
+
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
   rate?: string;
+
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
   volume?: string;
 }
 
@@ -299,6 +456,146 @@ union PersonalVoiceModels {
 
   /** Use the Phoenix V2 model. */
   "PhoenixV2Neural",
+
+  /** Use the latest Dragon HD Omni model. */
+  @added(Versions.v2026_04_10)
+  "DragonHDOmniLatestNeural",
+
+  /** Use the MAI-Voice-1 model. */
+  @added(Versions.v2026_04_10)
+  `MAI-Voice-1`: "MAI-Voice-1",
+}
+
+/** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(DualUsage)
+model AzureAvatarVoiceSyncVoice extends AzureVoice {
+  type: AzureVoiceType.avatar_voice_sync;
+
+  /** Underlying neural model to use. */
+  `model`: PersonalVoiceModels;
+
+  /** Temperature must be between 0.0 and 1.0. */
+  @minValue(0)
+  @maxValue(1)
+  temperature?: float32;
+
+  /** URL of a custom lexicon file for pronunciation customization. */
+  custom_lexicon_url?: string;
+
+  /** URL of a custom text normalization endpoint. */
+  custom_text_normalization_url?: string;
+
+  /**
+   * Preferred locales in BCP-47 format that change the accents of languages.
+   * If not set, TTS uses the default accent for each language (e.g., American English for English,
+   * Mexican Spanish for Spanish). Setting this to `["en-GB", "es-ES"]` changes the English accent
+   * to British English and the Spanish accent to European Spanish, while TTS can still speak other
+   * languages like French or Chinese with their default accents.
+   */
+  prefer_locales?: string[];
+
+  /**
+   * Enforced locale in BCP-47 format for TTS output. If set, TTS will always use the specified
+   * locale to speak. For example, setting locale to `en-US` forces American English accent for all
+   * text content, even if the text is in another language, and TTS will output silence for
+   * unsupported languages (e.g., Chinese text with `en-US` locale). If not set, TTS automatically
+   * detects the language from the text content.
+   */
+  locale?: string;
+
+  /** Speaking style for the voice (e.g., 'cheerful', 'sad'). */
+  style?: string;
+
+  /**
+   * Pitch adjustment for the voice output. Follows the same rules as the `pitch` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-low`, `low`, `medium`, `high`, `x-high`, `default`),
+   * a relative change (e.g., `+10%`, `-5%`, `+50Hz`, `-2st`), or an absolute frequency (e.g., `200Hz`).
+   */
+  pitch?: string;
+
+  /**
+   * Speaking rate adjustment for the voice output. Follows the same rules as the `rate` attribute of
+   * the SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`x-slow`, `slow`, `medium`, `fast`, `x-fast`, `default`),
+   * a relative percentage (e.g., `+20%`, `-10%`), or a non-negative multiplier (e.g., `0.5`, `1.5`).
+   */
+  rate?: string;
+
+  /**
+   * Volume adjustment for the voice output. Follows the same rules as the `volume` attribute of the
+   * SSML `prosody` element (see
+   * https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody).
+   * Typical values: a named level (`silent`, `x-soft`, `soft`, `medium`, `loud`, `x-loud`, `default`),
+   * an absolute number from 0.0 to 100.0, or a relative change (e.g., `+10`, `-6dB`).
+   */
+  volume?: string;
+}
+
+/**
+ * Currently known voice names for the Azure realtime native voice type.
+ * This is an extensible enum; additional voice names may be accepted by the
+ * service in the future.
+ */
+@added(Versions.v2026_06_01_preview)
+union AzureRealtimeNativeVoiceName {
+  string,
+
+  /** Aarti voice. */
+  aarti: "aarti",
+
+  /** Andrew voice. */
+  andrew: "andrew",
+
+  /** Ava voice. */
+  ava: "ava",
+
+  /** Denise voice. */
+  denise: "denise",
+
+  /** Diya voice. */
+  diya: "diya",
+
+  /** Elsa voice. */
+  elsa: "elsa",
+
+  /** Florian voice. */
+  florian: "florian",
+
+  /** Francisca voice. */
+  francisca: "francisca",
+
+  /** Meera voice. */
+  meera: "meera",
+
+  /** Xiaoxiao voice. */
+  xiaoxiao: "xiaoxiao",
+
+  /** Yunxi voice. */
+  yunxi: "yunxi",
+
+  /** Ximena voice. */
+  ximena: "ximena",
+}
+
+/**
+ * Azure realtime native voice configuration. These voices are natively
+ * supported by the `azure-realtime` model and offer higher quality speech
+ * synthesis than standard Azure voices. Only valid when using the
+ * `azure-realtime` model.
+ */
+@added(Versions.v2026_06_01_preview)
+@usage(DualUsage)
+model AzureRealtimeNativeVoice {
+  /** The type of the voice. */
+  type: "azure-realtime-native";
+
+  /** The name of the Azure realtime native voice. */
+  name: AzureRealtimeNativeVoiceName;
 }
 
 // --- Top-level Voice union -------------------------------------------------
@@ -308,7 +605,10 @@ union PersonalVoiceModels {
 union Voice {
   OAIVoice,
   OpenAIVoice,
-  AzureVoice, // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
+  AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
+
+  @added(Versions.v2026_06_01_preview)
+  AzureRealtimeNativeVoice,
 }
 
 /** Input audio format types supported. */
@@ -364,14 +664,25 @@ model AudioInputTranscriptionOptions {
   /**
    * The transcription model to use. Supported values:
    * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
-   * 'azure-speech'.
+   * 'mai-transcribe-1', 'azure-speech'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  @typeChangedFrom(
+    Versions.v2026_04_10,
+
+      | string
+      | "whisper-1"
+      | "gpt-4o-transcribe"
+      | "gpt-4o-mini-transcribe"
+      | "azure-speech"
+  )
   `model`:
     | string
     | "whisper-1"
     | "gpt-4o-transcribe"
     | "gpt-4o-mini-transcribe"
+    | "gpt-4o-transcribe-diarize"
+    | "mai-transcribe-1"
     | "azure-speech";
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
@@ -406,10 +717,19 @@ union Modality {
 @usage(RequestUsage)
 model EouDetection {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  @typeChangedFrom(
+    Versions.v2026_06_01_preview,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | string
+  )
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
     | "semantic_detection_v1_multilingual"
+    | "smart_end_of_turn_detection"
     | string;
 }
 
@@ -471,6 +791,25 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
   timeout_ms?: int32;
 }
 
+/**
+ * Audio-based end-of-turn detection. Operates directly on the input audio
+ * stream rather than text. Use `threshold_level` and `timeout_ms` to tune
+ * detection.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_06_01_preview)
+@usage(RequestUsage)
+model SmartEndOfTurnDetection extends EouDetection {
+  `model`: "smart_end_of_turn_detection";
+
+  /** Threshold level setting. One of `low`, `medium`, `high`, or `default`. */
+  threshold_level?: EouThresholdLevel;
+
+  /** Timeout in milliseconds. */
+  @minValue(0)
+  timeout_ms?: int32;
+}
+
 /** Top-level union for turn detection configuration. */
 @discriminator("type")
 @usage(RequestUsage)
@@ -492,15 +831,27 @@ union TurnDetectionType {
 model ServerVad extends TurnDetection {
   type: TurnDetectionType.server_vad;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -510,18 +861,36 @@ model ServerVad extends TurnDetection {
 model AzureSemanticVad extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Minimum speech duration in milliseconds to trigger detection. */
   speech_duration_ms?: int32;
+
+  /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
   remove_filler_words?: boolean = false;
+
+  /** List of BCP-47 language codes for speech detection. */
   languages?: string[];
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -531,17 +900,33 @@ model AzureSemanticVad extends TurnDetection {
 model AzureSemanticVadEn extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_en;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Minimum speech duration in milliseconds to trigger detection. */
   speech_duration_ms?: int32;
+
+  /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
   remove_filler_words?: boolean = false;
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -551,18 +936,36 @@ model AzureSemanticVadEn extends TurnDetection {
 model AzureSemanticVadMultilingual extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_multilingual;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Minimum speech duration in milliseconds to trigger detection. */
   speech_duration_ms?: int32;
+
+  /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
   remove_filler_words?: boolean = false;
+
+  /** List of BCP-47 language codes for speech detection. */
   languages?: string[];
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -575,10 +978,43 @@ model AudioNoiseReduction {
 }
 
 /** Echo cancellation configuration for server-side audio processing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
 @usage(RequestUsage)
 model AudioEchoCancellation {
   /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
+
+  /**
+   * The source of the echo cancellation reference signal.
+   * - `server`: EC uses the internal TTS loopback as the reference signal (default, existing behavior).
+   * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
+   */
+  @added(Versions.v2026_06_01_preview)
+  reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
+
+  /**
+   * Number of input audio channels.
+   * - `1`: Mono input (default).
+   * - `2`: Interleaved stereo input where channel 0 is the microphone signal and channel 1 is the echo reference signal.
+   * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @minValue(1)
+  @maxValue(2)
+  channels?: int32 = 1;
+}
+
+/** The source of the echo cancellation reference signal. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
+@added(Versions.v2026_06_01_preview)
+union EchoCancellationReferenceSource {
+  string,
+
+  /** EC uses the internal TTS loopback as the reference signal. */
+  server: "server",
+
+  /** EC uses the client-supplied reference channel from the stereo input stream. */
+  client: "client",
 }
 
 /** Output timestamp types supported in audio response content. */
@@ -893,4 +1329,23 @@ model Background {
 
   /** Background image URL. Cannot be set if `color` is provided. */
   image_url?: string;
+}
+
+// -----------------------------------------------------------------------
+// New types added in v2026_04_10
+// -----------------------------------------------------------------------
+
+/** Options for what additional data to include in session responses. */
+@added(Versions.v2026_04_10)
+union SessionIncludeOption {
+  string,
+
+  /** Include log probabilities for input audio transcription. */
+  item_input_audio_transcription_logprobs: "item.input_audio_transcription.logprobs",
+
+  /** Include phrase-level details for input audio transcription. */
+  item_input_audio_transcription_phrases: "item.input_audio_transcription.phrases",
+
+  /** Include file search call results. */
+  file_search_call_results: "file_search_call.results",
 }

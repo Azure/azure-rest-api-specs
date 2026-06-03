@@ -72,9 +72,11 @@ interface KafkaConfigurations {
 @@maxLength(KafkaConfiguration.name, 63);
 @@minLength(KafkaConfiguration.name, 3);
 @@doc(KafkaConfiguration.name, "Name of kafka configuration.");
-@@doc(KafkaConfiguration.properties,
+@@doc(
+  KafkaConfiguration.properties,
   "The kafka configuration properties of the event streaming service attached to the Purview account for kafka notifications."
 );
-@@doc(KafkaConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  KafkaConfigurations.createOrUpdate::parameters.resource,
   "The kafka configuration of the account."
 );

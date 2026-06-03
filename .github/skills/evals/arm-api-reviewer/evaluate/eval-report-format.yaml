@@ -35,7 +35,9 @@ stimuli:
       - type: output-matches
         name: "line numbers present"
         config:
-          pattern: "(?:\\*\\*)?[Ll]ines?(?:\\*\\*)?:?\\s*\\d+"
+          # Matches line number citations in any common format:
+          #   "Line 42", "Lines: 29", "**Line(s)** | 29", "line 29–35"
+          pattern: "(?:\\*\\*)?[Ll]ines?(?:\\(s\\))?(?:\\*\\*)?(?::?\\s*|\\s*\\|\\s*)\\d+"
       - type: output-matches
         name: "rule IDs present"
         config:

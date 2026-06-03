@@ -34,7 +34,8 @@ using Microsoft.Cache;
 
 @@clientLocation(RedisResources.flushCache, "Redis", "!csharp");
 
-@@clientLocation(RedisResources.listByRedisCache,
+@@clientLocation(
+  RedisResources.listByRedisCache,
   "PrivateLinkResources",
   "!csharp"
 );
@@ -42,7 +43,8 @@ using Microsoft.Cache;
 // RedisOperationGroup operations from routes.tsp
 @@clientLocation(RedisOperationGroup.checkNameAvailability, "Redis", "!csharp");
 
-@@clientLocation(AsyncOperationStatusOperationGroup.get,
+@@clientLocation(
+  AsyncOperationStatusOperationGroup.get,
   "AsyncOperationStatus",
   "!csharp"
 );
@@ -50,7 +52,8 @@ using Microsoft.Cache;
 // RedisCacheAccessPolicies operations
 @@clientLocation(RedisCacheAccessPolicies.get, "AccessPolicy", "!csharp");
 
-@@clientLocation(RedisCacheAccessPolicies.createUpdate,
+@@clientLocation(
+  RedisCacheAccessPolicies.createUpdate,
   "AccessPolicy",
   "!csharp"
 );
@@ -60,22 +63,26 @@ using Microsoft.Cache;
 @@clientLocation(RedisCacheAccessPolicies.list, "AccessPolicy", "!csharp");
 
 // RedisCacheAccessPolicyAssignments operations
-@@clientLocation(RedisCacheAccessPolicyAssignments.get,
+@@clientLocation(
+  RedisCacheAccessPolicyAssignments.get,
   "AccessPolicyAssignment",
   "!csharp"
 );
 
-@@clientLocation(RedisCacheAccessPolicyAssignments.createUpdate,
+@@clientLocation(
+  RedisCacheAccessPolicyAssignments.createUpdate,
   "AccessPolicyAssignment",
   "!csharp"
 );
 
-@@clientLocation(RedisCacheAccessPolicyAssignments.delete,
+@@clientLocation(
+  RedisCacheAccessPolicyAssignments.delete,
   "AccessPolicyAssignment",
   "!csharp"
 );
 
-@@clientLocation(RedisCacheAccessPolicyAssignments.list,
+@@clientLocation(
+  RedisCacheAccessPolicyAssignments.list,
   "AccessPolicyAssignment",
   "!csharp"
 );
@@ -92,14 +99,16 @@ using Microsoft.Cache;
 // RedisPatchSchedules operations
 @@clientLocation(RedisPatchSchedules.get, "PatchSchedules", "!csharp");
 
-@@clientLocation(RedisPatchSchedules.createOrUpdate,
+@@clientLocation(
+  RedisPatchSchedules.createOrUpdate,
   "PatchSchedules",
   "!csharp"
 );
 
 @@clientLocation(RedisPatchSchedules.delete, "PatchSchedules", "!csharp");
 
-@@clientLocation(RedisPatchSchedules.listByRedisResource,
+@@clientLocation(
+  RedisPatchSchedules.listByRedisResource,
   "PatchSchedules",
   "!csharp"
 );
@@ -107,69 +116,89 @@ using Microsoft.Cache;
 // Existing client decorators and properties
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisCreateParameters.properties
 );
 
-@@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
   "rdbBackupEnabled"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-frequency`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`rdb-backup-frequency`,
   "rdbBackupFrequency"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-max-snapshot-count`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`rdb-backup-max-snapshot-count`,
   "rdbBackupMaxSnapshotCount"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-storage-connection-string`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`rdb-storage-connection-string`,
   "rdbStorageConnectionString"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
   "aofBackupEnabled"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`aof-storage-connection-string-0`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`aof-storage-connection-string-0`,
   "aofStorageConnectionString0"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`aof-storage-connection-string-1`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`aof-storage-connection-string-1`,
   "aofStorageConnectionString1"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxfragmentationmemory-reserved`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxfragmentationmemory-reserved`,
   "maxfragmentationmemoryReserved"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-policy`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxmemory-policy`,
   "maxmemoryPolicy"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-reserved`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxmemory-reserved`,
   "maxmemoryReserved"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-delta`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxmemory-delta`,
   "maxmemoryDelta"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`notify-keyspace-events`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`notify-keyspace-events`,
   "notifyKeyspaceEvents"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`preferred-data-archive-auth-method`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`preferred-data-archive-auth-method`,
   "preferredDataArchiveAuthMethod"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`preferred-data-persistence-auth-method`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`preferred-data-persistence-auth-method`,
   "preferredDataPersistenceAuthMethod"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`zonal-configuration`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`zonal-configuration`,
   "zonalConfiguration"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`storage-subscription-id`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`storage-subscription-id`,
   "storageSubscriptionId"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`aad-enabled`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`aad-enabled`,
   "aadEnabled"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisLinkedServerCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisLinkedServerCreateParameters.properties
 );
 
 @@clientName(RedisResources.create::parameters.resource, "parameters");
@@ -185,47 +214,58 @@ using Microsoft.Cache;
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
-@@clientName(RedisFirewallRules.createOrUpdate::parameters.resource,
+@@clientName(
+  RedisFirewallRules.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisFirewallRule.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisFirewallRule.properties
 );
 
-@@clientName(RedisPatchSchedules.createOrUpdate::parameters.resource,
+@@clientName(
+  RedisPatchSchedules.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisPatchSchedule.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisPatchSchedule.properties
 );
 
 @@clientName(LinkedServer.create::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisLinkedServerWithProperties.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisLinkedServerWithProperties.properties
 );
 
-@@clientName(RedisCacheAccessPolicies.createUpdate::parameters.resource,
+@@clientName(
+  RedisCacheAccessPolicies.createUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisCacheAccessPolicy.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisCacheAccessPolicy.properties
 );
 
-@@clientName(RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
+@@clientName(
+  RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisCacheAccessPolicyAssignment.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RedisCacheAccessPolicyAssignment.properties
 );
 @@clientName(ScheduleEntries.scheduleEntries, "ScheduleEntries");
-@@clientName(RedisOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  RedisOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );

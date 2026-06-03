@@ -83,8 +83,10 @@ interface Communications {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is CommunicationOps.CreateOrUpdateAsync<
     CommunicationDetails,
-    Response = ArmResourceUpdatedResponse<CommunicationDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CommunicationDetails>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -145,8 +147,10 @@ interface CommunicationsNoSubscription {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is CommunicationsNoSubscriptionOps.CreateOrUpdateAsync<
     CommunicationDetails,
-    Response = ArmResourceUpdatedResponse<CommunicationDetails> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<CommunicationDetails>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CommunicationDetails> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -174,6 +178,7 @@ interface CommunicationsNoSubscription {
 @@doc(CommunicationDetails.name, "Communication name.");
 @@doc(CommunicationDetails.properties, "Properties of the resource.");
 @@doc(Communications.create::parameters.resource, "Communication object.");
-@@doc(CommunicationsNoSubscription.create::parameters.resource,
+@@doc(
+  CommunicationsNoSubscription.create::parameters.resource,
   "Communication object."
 );

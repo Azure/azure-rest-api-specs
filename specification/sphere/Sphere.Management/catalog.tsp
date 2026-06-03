@@ -141,10 +141,12 @@ interface Catalogs {
   uploadImage is ArmResourceActionNoResponseContentAsync<Catalog, Image>;
 }
 
-@@doc(Catalogs.listDeviceGroups::parameters.body,
+@@doc(
+  Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );
-@@clientName(Catalogs.listDeviceGroups::parameters.body,
+@@clientName(
+  Catalogs.listDeviceGroups::parameters.body,
   "listDeviceGroupsRequest"
 );
 @@doc(Catalogs.uploadImage::parameters.body, "Image upload request body.");

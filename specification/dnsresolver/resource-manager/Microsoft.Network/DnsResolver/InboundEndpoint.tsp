@@ -53,11 +53,14 @@ interface InboundEndpoints {
       @header
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<InboundEndpoint> | ArmResourceCreatedResponse<
-      InboundEndpoint,
-      ArmLroLocationHeader<FinalResult = InboundEndpoint> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse,
+    Response =
+      | ArmResourceUpdatedResponse<InboundEndpoint>
+      | ArmResourceCreatedResponse<
+          InboundEndpoint,
+          ArmLroLocationHeader<FinalResult = InboundEndpoint> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -91,7 +94,10 @@ interface InboundEndpoints {
       @header
       ifMatch?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -111,13 +117,16 @@ interface InboundEndpoints {
   >;
 }
 
-@@doc(InboundEndpoint.name,
+@@doc(
+  InboundEndpoint.name,
   "The name of the inbound endpoint for the DNS resolver."
 );
 @@doc(InboundEndpoint.properties, "Properties of the inbound endpoint.");
-@@doc(InboundEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  InboundEndpoints.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(InboundEndpoints.update::parameters.properties,
+@@doc(
+  InboundEndpoints.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

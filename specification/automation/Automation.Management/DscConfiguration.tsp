@@ -126,12 +126,15 @@ interface DscConfigurations {
 }
 
 @@doc(DscConfiguration.name, "The configuration name.");
-@@doc(DscConfiguration.properties,
+@@doc(
+  DscConfiguration.properties,
   "Gets or sets the configuration properties."
 );
-@@doc(DscConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DscConfigurations.createOrUpdate::parameters.resource,
   "The create or update parameters for configuration."
 );
-@@doc(DscConfigurations.update::parameters.properties,
+@@doc(
+  DscConfigurations.update::parameters.properties,
   "The create or update parameters for configuration."
 );
