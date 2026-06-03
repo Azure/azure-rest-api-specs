@@ -15,13 +15,13 @@ union WeatherDataUnit {
   string,
 
   /**
-   * Return data using imperial units such as fahrenheit (F) for temperature and
+   * Return data using imperial units such as Fahrenheit (F) for temperature and
    * miles (mi) for distance.
    */
   imperial: "imperial",
 
   /**
-   * Return data using metric units such as celsius (C) for temperature and
+   * Return data using metric units such as Celsius (C) for temperature and
    * kilometer (km) for distance.
    */
   metric: "metric",
@@ -294,16 +294,16 @@ union UnitType {
 union PrecipitationType {
   string,
 
-  /** Ice. */
+  /** Ice */
   Ice: "Ice",
 
-  /** Mix. */
+  /** Mix */
   Mix: "Mix",
 
-  /** Rain. */
+  /** Rain */
   Rain: "Rain",
 
-  /** Snow. */
+  /** Snow */
   Snow: "Snow",
 }
 
@@ -335,15 +335,11 @@ union DayQuarter {
  * The aggregated severity/hazard index for each waypoint can be utilized to
  * color-code segments of a route, indicating the safety level for drivers.
  *
- * 0 - No hazard.
- *
- * 1 - Be informed, be aware.
- *
- * 2 - Pay attention, be prepared.
- *
- * 3 - Take action.
- *
- * 4 - Life threatening, emergency.
+ * - 0: No hazard.
+ * - 1: Be informed, be aware.
+ * - 2: Pay attention, be prepared.
+ * - 3: Take action.
+ * - 4: Life threatening, emergency.
  */
 union HazardIndex {
   integer,
@@ -1228,13 +1224,10 @@ model QuarterDayForecast {
   /**
    * Specifies the quarter-day period:
    *
-   * 0 = morning (7am - 1pm)
-   *
-   * 1 = afternoon (1pm - 7pm)
-   *
-   * 2 = evening (7pm - 1am)
-   *
-   * 3 = overnight (1am - 7am)
+   * - 0: morning (7am - 1pm)
+   * - 1: afternoon (1pm - 7pm)
+   * - 2: evening (7pm - 1am)
+   * - 3: overnight (1am - 7am)
    */
   quarter?: DayQuarter;
 
