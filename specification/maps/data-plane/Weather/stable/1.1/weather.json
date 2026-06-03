@@ -2210,11 +2210,11 @@
     },
     "ActiveStormResult": {
       "type": "object",
-      "description": "The ActiveStormResult object provides comprehensive information about ongoing\ntropical storms. It includes an array of ActiveStorm objects, each detailing\nspecific attributes of individual storms. These attributes encompass the\nstorm's government ID, basin ID, year of origin, name, and subtropical\nstatus.",
+      "description": "The `ActiveStormResult` object provides comprehensive information about ongoing\ntropical storms. It includes an array of `ActiveStorm` objects, each detailing\nspecific attributes of individual storms. These attributes encompass the\nstorm's government ID, basin ID, year of origin, name, and subtropical\nstatus.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "An array of ActiveStorm objects, each providing essential details about an\nongoing tropical storm, as reported by national weather forecasting\nagencies.",
+          "description": "An array of `ActiveStorm` objects, each providing essential details about an\nongoing tropical storm, as reported by national weather forecasting\nagencies.",
           "items": {
             "$ref": "#/definitions/ActiveStorm"
           }
@@ -2227,7 +2227,7 @@
     },
     "AirAndPollen": {
       "type": "object",
-      "description": "The AirAndPollen object provides comprehensive environmental data. It\nidentifies various pollen types such as tree, grass, ragweed, and mold, and\npollutants including PM2.5, PM10, O3, NO2, SO2, and CO. Additionally, it\nreports the UV Index on a scale from 1 to 10, offers qualitative descriptions\nof air quality or pollen levels, and provides numerical measurements of the\nconcentration of pollutants or pollen in the air. This detailed information\nhelps users assess air quality and pollen conditions along their travel route.",
+      "description": "The `AirAndPollen` object provides comprehensive environmental data. It\nidentifies various pollen types such as tree, grass, ragweed, and mold, and\npollutants including PM2.5, PM10, O3, NO2, SO2, and CO. Additionally, it\nreports the UV Index on a scale from 1 to 10, offers qualitative descriptions\nof air quality or pollen levels, and provides numerical measurements of the\nconcentration of pollutants or pollen in the air. This detailed information\nhelps users assess air quality and pollen conditions along their travel route.",
       "properties": {
         "name": {
           "type": "string",
@@ -2249,18 +2249,18 @@
         },
         "type": {
           "type": "string",
-          "description": "Specifies the type of air pollutant being measured. Only used when the\n*name* property equals *AirQuality*. Examples of air pollutants include\nParticulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2),\nSulfur Dioxide (SO2), and Carbon Monoxide (CO)."
+          "description": "Specifies the type of air pollutant being measured. Only used when the\n*name* property equals *`AirQuality`*. Examples of air pollutants include\nParticulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2),\nSulfur Dioxide (SO2), and Carbon Monoxide (CO)."
         }
       }
     },
     "AirQuality": {
       "type": "object",
-      "description": "The AirQuality object provides comprehensive information about the current air\nquality at the specified location. This includes the concentration levels of\nvarious pollutants, numerical Air Quality Index (AQI) values indicating the\noverall air quality, and identification of the dominant pollutant affecting the\nair quality. Additionally, it offers a risk level summary, which briefly\noutlines potential health risks and suggests precautions.",
+      "description": "The `AirQuality` object provides comprehensive information about the current air\nquality at the specified location. This includes the concentration levels of\nvarious pollutants, numerical Air Quality Index (AQI) values indicating the\noverall air quality, and identification of the dominant pollutant affecting the\nair quality. Additionally, it offers a risk level summary, which briefly\noutlines potential health risks and suggests precautions.",
       "properties": {
         "dateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation, displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
+          "description": "Date and time the air quality data applies to, displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "index": {
           "type": "number",
@@ -2406,7 +2406,7 @@
     },
     "ColorValue": {
       "type": "object",
-      "description": "The full spectrum color that maps to the `dBZ`. A value is only returned if\nthe `dBZ` value is greater than zero. Verify the following is accurate: Use\nto provide a visual representation of various weather conditions. For more\ninformation on color mappings, see [Weather service in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).",
+      "description": "The full spectrum color that maps to the `dBZ`. A value is only returned if\nthe `dBZ` value is greater than zero. Used to provide a visual representation\nof various weather conditions. For more information on color mappings, see\n[Weather service in Azure\nMaps](/azure/azure-maps/weather-services-concepts#radar-images).",
       "properties": {
         "red": {
           "type": "integer",
@@ -2469,19 +2469,19 @@
         "relativeHumidity": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of water vapor present in the air, expressed as a percentage of\nthe maximum amount the air can hold at the same temperature. This value\nindicates how close the air is to being saturated with moisture. Slightly\nmore detailed version: The amount of water vapor present in the air,\nexpressed as a percentage of the maximum amount the air can hold at the\nsame temperature. This value indicates how close the air is to being\nsaturated with moisture, affecting how comfortable or humid the environment\nfeels."
+          "description": "The amount of water vapor present in the air, expressed as a percentage of\nthe maximum amount the air can hold at the same temperature. This value\nindicates how close the air is to being saturated with moisture, affecting\nhow comfortable or humid the environment feels."
         },
         "dewPoint": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "The temperature at which air becomes saturated with moisture and dew begins\nto form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending\non the unit specified. Additional information: The temperature at which air\nbecomes saturated with moisture and dew begins to form. It is measured in\ndegrees Fahrenheit (F) or Celsius (C), depending on the unit specified.\nThis value is crucial for understanding humidity levels, as a higher dew\npoint indicates more moisture in the air, making it feel more humid."
+          "description": "The temperature at which air becomes saturated with moisture and dew begins\nto form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending\non the unit specified. This value is crucial for understanding humidity\nlevels, as a higher dew point indicates more moisture in the air, making it\nfeel more humid."
         },
         "wind": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Current wind speed (km/h or mph) and direction (0° to 359° azimuth). More\ndetailed alternative: Current wind speed and direction. Wind speed is\nmeasured in units such as kilometers per hour (km/h) or miles per hour\n(mph), based on the unit specified in the request. Wind direction is given\nin azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.\nLonger more detailed alternative: Provides the current wind speed and\ndirection. Wind speed is measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the specified unit. Wind direction is measured in\nazimuth degrees, ranging from 0° (true North) to 359°, moving clockwise\n(east is 90°, south is 180°, west is 270°)."
+          "description": "Provides the current wind speed and direction. Wind speed is measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the specified\nunit. Wind direction is measured in azimuth degrees, ranging from 0° (true\nNorth) to 359°, moving clockwise (east is 90°, south is 180°, west is\n270°)."
         },
         "windGust": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Minimal description: Maximum short-burst wind speed (km/h or mph) and\ndirection (0° to 359° azimuth). (TBD: What exactly is the timeframe?) More\ndetailed alternative: Returns the current expected maximum short-burst wind\nspeed and direction, measured in kilometers per hour (km/h) or miles per\nhour (mph), depending on the unit specified in the request. Wind direction\nis given in azimuth degrees, ranging from 0° (true North) to 359°, moving\nclockwise. additional info: Wind gusts are a sudden, brief increase in wind\nspeed, important for understanding short-term variations that can impact\nactivities like aviation, sailing, kite flying and other outdoor events."
+          "description": "Returns the current expected maximum short-burst wind speed and direction,\nmeasured in kilometers per hour (km/h) or miles per hour (mph), depending\non the unit specified in the request. Wind direction is given in azimuth\ndegrees, ranging from 0° (true North) to 359°, moving clockwise. Wind gusts\nare a sudden, brief increase in wind speed, important for understanding\nshort-term variations that can impact activities like aviation, sailing,\nkite flying and other outdoor events."
         },
         "uvIndex": {
           "type": "integer",
@@ -2494,7 +2494,7 @@
         },
         "visibility": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Returns the distance at which an object or light can be clearly discerned,\nmeasured in kilometers (km) or miles (mi), depending on the unit specified\nin the request. Added explanation: Returns the distance at which an object\nor light can be clearly discerned, measured in kilometers (km) or miles\n(mi), depending on the unit specified in the request. This indicates how\nfar one can clearly see, which is crucial for activities like driving and\naviation."
+          "description": "Returns the distance at which an object or light can be clearly discerned,\nmeasured in kilometers (km) or miles (mi), depending on the unit specified\nin the request. This indicates how far one can clearly see, which is\ncrucial for activities like driving and aviation."
         },
         "obstructionsToVisibility": {
           "type": "string",
@@ -2507,7 +2507,7 @@
         },
         "ceiling": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Cloud ceiling: The height of the lowest layer of clouds above the ground,\nmeasured in feet or meters based on the unit specified in the request.\nSlightly longer: Cloud ceiling: The height of the lowest layer of clouds\nabove the ground, measured in feet or meters based on the unit specified in\nthe request. This measurement is crucial for aviation and weather\nforecasting. Longer version: Cloud ceiling: The height of the lowest layer\nof clouds above the ground, measured in feet or meters, depending on the\nunit specified in the request. This value is crucial for aviation and\nweather forecasting, as it indicates the altitude at which clouds begin to\nform, affecting visibility and flight safety."
+          "description": "Cloud ceiling: The height of the lowest layer of clouds above the ground,\nmeasured in feet or meters, depending on the unit specified in the request.\nThis value is crucial for aviation and weather forecasting, as it indicates\nthe altitude at which clouds begin to form, affecting visibility and flight\nsafety."
         },
         "pressure": {
           "$ref": "#/definitions/WeatherValue",
@@ -2519,7 +2519,7 @@
         },
         "pastTwentyFourHourTemperatureDeparture": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Indicates the difference between the current temperature and the\ntemperature recorded 24 hours ago, measured in degrees Celsius (C) or\nFahrenheit (F), depending on the unit specified in the request. Longer\nversion: Indicates the difference between the current temperature and the\ntemperature recorded 24 hours ago, measured in degrees Celsius (C) or\nFahrenheit (F), depending on the unit specified in the request. This value\nhelps to understand how much the temperature has changed over the past day,\nproviding insights into short-term temperature trends."
+          "description": "Indicates the difference between the current temperature and the\ntemperature recorded 24 hours ago, measured in degrees Celsius (C) or\nFahrenheit (F), depending on the unit specified in the request. This value\nhelps to understand how much the temperature has changed over the past day,\nproviding insights into short-term temperature trends."
         },
         "apparentTemperature": {
           "$ref": "#/definitions/WeatherValue",
@@ -2559,12 +2559,12 @@
     },
     "DailyAirQuality": {
       "type": "object",
-      "description": "Provides forecasted air quality conditions for a specific day and location,\nin the requested language. Includes an air quality level categorization with\ncorresponding color, and description, along with both a global index for\ncomparing air quality conditions globally and a local index based on regional\nair quality standards. First draft: Provides information about the forecasted\nair quality conditions for a specific day and location, in the requested\nlanguage. Detailed description: Provides forecasted air quality conditions\nfor a specific day and location, in the requested language. Includes\nproperties such as category (air quality level), categoryColor (associated\ncolor), description (textual explanation), dominantPollutant (primary\npollutant), globalIndex (standardized index), and index (specific air quality\nvalue). More detailed description: Provides a summary of the forecasted air\nquality conditions for a specific day and location, in the requested\nlanguage. The returned properties include: category, which indicates the air\nquality level; categoryColor, representing the color associated with the air\nquality category; description, offering a textual explanation of the air\nquality; dominantPollutant, identifying the primary pollutant affecting air\nquality; globalIndex, providing a standardized air quality index; and index,\ndetailing the specific air quality index value for the day.",
+      "description": "Provides a summary of the forecasted air quality conditions for a specific\nday and location, in the requested language. The returned properties\ninclude: category, which indicates the air quality level; `categoryColor`,\nrepresenting the color associated with the air quality category;\ndescription, offering a textual explanation of the air quality;\n`dominantPollutant`, identifying the primary pollutant affecting air quality;\n`globalIndex`, providing a standardized air quality index; and index,\ndetailing the specific air quality index value for the day.",
       "properties": {
         "dateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation, displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
+          "description": "Date and time of the daily air quality forecast, displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "index": {
           "type": "number",
@@ -2596,7 +2596,7 @@
     },
     "DailyAirQualityForecastResult": {
       "type": "object",
-      "description": "Returns an array of DailyAirQuality objects, each detailing the forecasted\nair quality for a specific day. The number of days included is determined by\nthe `duration` URI parameter (1-7 days, default is 1).",
+      "description": "Returns an array of `DailyAirQuality` objects, each detailing the forecasted\nair quality for a specific day. The number of days included is determined by\nthe `duration` URI parameter (1-7 days, default is 1).",
       "properties": {
         "results": {
           "type": "array",
@@ -2672,7 +2672,7 @@
         "date": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation, displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
+          "description": "Date of the daily forecast, displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueRange",
@@ -2684,12 +2684,12 @@
         },
         "realFeelTemperatureShade": {
           "$ref": "#/definitions/WeatherValueRange",
-          "description": "Provides RealFeel™ Temperature values for the specified day in shaded\nareas. This metric, developed by AccuWeather, incorporates over a dozen\nfactors, including humidity, wind speed, cloud cover, and sun intensity, to\noffer a comprehensive measure of how the weather actually feels in the\nshade. For more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)\nShort: A temperature value that uses a variety of factors to determine how\nthe temperature actually feels outside in the shade."
+          "description": "Provides RealFeel™ Temperature values for the specified day in shaded\nareas. This metric, developed by AccuWeather, incorporates over a dozen\nfactors, including humidity, wind speed, cloud cover, and sun intensity, to\noffer a comprehensive measure of how the weather actually feels in the\nshade. For more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
         },
         "hoursOfSun": {
           "type": "number",
           "format": "float",
-          "description": "Provides the expected number of hours of sunshine for the specified day.\nMore explanation: This property helps users understand how much sunlight\nthey can anticipate, which can be useful for planning outdoor activities\nand understanding the overall weather conditions."
+          "description": "Provides the expected number of hours of sunshine for the specified day.\nThis property helps users understand how much sunlight they can anticipate,\nwhich can be useful for planning outdoor activities and understanding the\noverall weather conditions."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
@@ -2725,7 +2725,7 @@
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "Numeric value representing an image that corresponds to the current weather\ncondition described by the `Phrase` property. For more information, see\n[Weather services in Azure\nMaps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL."
+          "description": "Numeric value representing an image that corresponds to the forecasted\nweather condition for the specified portion of the day, described by the\n`iconPhrase` property. For more information, see [Weather services in\nAzure Maps](/azure/azure-maps/weather-services-concepts#weather-icons).\nMay be NULL."
         },
         "iconPhrase": {
           "type": "string",
@@ -2758,76 +2758,76 @@
         "precipitationProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percent representing the probability of precipitation. For example, '20'."
+          "description": "Shows the probability of precipitation during the specified day, expressed\nas a percentage from 0 to 100. A value of 0 means no chance of\nprecipitation, while 100 means precipitation is certain. This helps users\nassess the likelihood of rain, snow, or other forms of precipitation."
         },
         "thunderstormProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percent representing the probability of a thunderstorm. For example, '80'."
+          "description": "Shows the probability of a thunderstorm during the specified day, expressed\nas a percentage from 0 to 100. A value of 0 means no chance of a thunderstorm,\nwhile 100 means a thunderstorm is certain. This helps users assess the\nlikelihood of thunderstorms."
         },
         "rainProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percent representing the probability of rain. For example, '40'."
+          "description": "Shows the probability of rain during the specified day, expressed as a\npercentage from 0 to 100. A value of 0 means no chance of rain, while 100\nmeans rain is certain. This helps users assess the likelihood of rain."
         },
         "snowProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percent representing the probability of snow. For example, '30'."
+          "description": "Shows the probability of snow during the specified day, expressed as a\npercentage from 0 to 100. A value of 0 means no chance of snow, while 100\nmeans snow is certain. This helps users assess the likelihood of snow."
         },
         "iceProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percent representing the probability of ice. For example, '30'."
+          "description": "Shows the probability of ice formation during the specified day, expressed\nas a percentage from 0 to 100. A value of 0 means no chance of ice\nformation, while 100 means ice formation is certain. This information helps\nusers evaluate the potential for icy conditions."
         },
         "wind": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Wind details being returned including speed and direction."
+          "description": "Provides the forecasted wind speed and direction. Wind speed is measured\nin kilometers per hour (km/h) or miles per hour (mph), based on the\nspecified unit. Wind direction is measured in azimuth degrees, ranging\nfrom 0° (true North) to 359°, moving clockwise (east is 90°, south is\n180°, west is 270°)."
         },
         "windGust": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Wind gust. Wind gust is a sudden, brief increase in speed of the wind."
+          "description": "Returns the expected maximum short-burst wind speed and direction,\nmeasured in kilometers per hour (km/h) or miles per hour (mph), depending\non the unit specified in the request. Wind direction is given in azimuth\ndegrees, ranging from 0° (true North) to 359°, moving clockwise. Wind gusts\nare a sudden, brief increase in wind speed, important for understanding\nshort-term variations that can impact activities like aviation, sailing,\nkite flying and other outdoor events."
         },
         "totalLiquid": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Total liquid equivalent of precipitation during the forecast period."
+          "description": "Returns the total amount of liquid precipitation (such as rain) expected\nduring each day of the forecast period, measured in millimeters (mm) or\ninches (in), depending on the unit specified in the request."
         },
         "rain": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Rain"
+          "description": "Returns the amount of rainfall expected during each day in the forecast,\nmeasured in millimeters (mm) or inches (in), depending on the unit\nspecified in the request."
         },
         "snow": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Snow"
+          "description": "Returns the amount of snow accumulation expected during the specified day,\nmeasured in millimeters (mm) or inches (in), depending on the unit\nspecified in the request."
         },
         "ice": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Ice"
+          "description": "Returns the amount of ice accumulation expected during the specified day,\nmeasured in millimeters (mm) or inches (in), depending on the unit\nspecified in the request."
         },
         "hoursOfPrecipitation": {
           "type": "number",
           "format": "float",
-          "description": "Hours of precipitation"
+          "description": "Shows the total number of hours during the specified day when precipitation is expected. This helps users understand the duration of potential rain, snow, or other forms of precipitation."
         },
         "hoursOfRain": {
           "type": "number",
           "format": "float",
-          "description": "Hours of rain."
+          "description": "Shows the total number of hours during the specified day when rain is expected. This helps users understand the duration of potential rain events."
         },
         "hoursOfSnow": {
           "type": "number",
           "format": "float",
-          "description": "Hours of snow."
+          "description": "Shows the total number of hours during the specified day when snow is expected. This helps users understand the duration of potential snow events."
         },
         "hoursOfIce": {
           "type": "number",
           "format": "float",
-          "description": "Hours of ice."
+          "description": "Shows the total number of hours during the specified day when ice formation is expected. This helps users understand the duration of potential icy conditions."
         },
         "cloudCover": {
           "type": "integer",
           "format": "int32",
-          "description": "Percent representing cloud cover."
+          "description": "The percentage of the sky covered by clouds at the specified day. This\nvalue ranges from 0% (clear skies) to 100% (completely overcast). May be\nNULL."
         }
       }
     },
@@ -2867,7 +2867,7 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicates the severity of the forecasted weather as an integer. Lower\nnumbers represent higher severity: 0 = Unknown, 1 = Significant, 2 = Major,\n3 = Moderate, 4 = Minor, 5 = Minimal, 6 = Insignificant, 7 = Informational.\nLonger alternative: Severity values indicate a level of danger assigned to\nthe weather event. The following list shows all possible values along with\na description for each level. Severity (Description) - 0 (Unknown) - 1\n(Significant) - 2 (Major) - 3 (Moderate) - 4 (Minor) - 5 (Minimal) - 6\n(Insignificant) - 7 (Informational)"
+          "description": "Indicates the severity of the forecasted weather as an integer. Severity\nvalues indicate a level of danger assigned to the weather event. The\nfollowing list shows all possible values along with a description for each\nlevel. Severity (Description) - 0 (Unknown) - 1 (Significant) - 2 (Major) -\n3 (Moderate) - 4 (Minor) - 5 (Minimal) - 6 (Insignificant) - 7\n(Informational)"
         },
         "phrase": {
           "type": "string",
@@ -2881,7 +2881,7 @@
     },
     "DailyHistoricalActuals": {
       "type": "object",
-      "description": "Provides observed historical weather data for specified date and location.\nLonger version: Provides climatology data for a specific day, including\nobserved temperatures, precipitation, snowfall, snow depth, and\nheating/cooling degree days.",
+      "description": "Provides observed historical weather data (climatology) for a specific day\nand location, including observed temperatures, precipitation, snowfall, snow\ndepth, and heating/cooling degree days.",
       "properties": {
         "date": {
           "type": "string",
@@ -2912,7 +2912,7 @@
     },
     "DailyHistoricalActualsResult": {
       "type": "object",
-      "description": "Returns an array of DailyHistoricalActuals objects, each detailing the\nobserved historical weather data for the specified date and location. The\nnumber of days included is determined by the `startDate` and `endDate` URI\nparameters which can include up to 31 days.",
+      "description": "Returns an array of `DailyHistoricalActuals` objects, each detailing the\nobserved historical weather data for the specified date and location. The\nnumber of days included is determined by the `startDate` and `endDate` URI\nparameters which can include up to 31 days.",
       "properties": {
         "results": {
           "type": "array",
@@ -2934,7 +2934,7 @@
         "date": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation, displayed in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_8601) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
+          "description": "Date of the historical normals, displayed in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_8601) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueMaxMinAvg",
@@ -2952,7 +2952,7 @@
     },
     "DailyHistoricalNormalsResult": {
       "type": "object",
-      "description": "Returns an array of DailyHistoricalNormals objects, each detailing\nclimatology data such as past daily normal temperatures, precipitation, and\ncooling/heating degree day information for the specified date range,\ncalculated as a 30-year average (1991-2020). The number of days included is\ndetermined by the `startDate` and `endDate` URI parameters, which can include\nup to 31 days.",
+      "description": "Returns an array of `DailyHistoricalNormals` objects, each detailing\nclimatology data such as past daily normal temperatures, precipitation, and\ncooling/heating degree day information for the specified date range,\ncalculated as a 30-year average (1991-2020). The number of days included is\ndetermined by the `startDate` and `endDate` URI parameters, which can include\nup to 31 days.",
       "properties": {
         "results": {
           "type": "array",
@@ -2974,7 +2974,7 @@
         "date": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation, displayed in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_8601) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
+          "description": "Date of the historical record, displayed in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_8601) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueYearMaxMinAvg",
@@ -3009,7 +3009,7 @@
     },
     "DailyIndex": {
       "type": "object",
-      "description": "The DailyIndex object helps users plan outdoor activities based on weather\nconditions by providing the activity name, such as 'Ski Weather Forecast'; a\nnumerical rating from 0.0 to 10.0 indicating suitability; a text rating, such\nas 'Poor'; and a brief description of the conditions, such as 'Expect poor\nconditions for skiing.'",
+      "description": "The `DailyIndex` object helps users plan outdoor activities based on weather\nconditions by providing the activity name, such as 'Ski Weather Forecast'; a\nnumerical rating from 0.0 to 10.0 indicating suitability; a text rating, such\nas 'Poor'; and a brief description of the conditions, such as 'Expect poor\nconditions for skiing.'",
       "properties": {
         "indexName": {
           "type": "string",
@@ -3105,11 +3105,11 @@
       "properties": {
         "heating": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Possible alternative: Heating Degree Days (HDD) indicate the demand for\nenergy needed to heat a building, calculated based on the number of degrees\nthat a day's average temperature is below the baseline temperature of 65\ndegrees F/ 18 degree C."
+          "description": "Heating Degree Days (HDD) indicate the demand for energy needed to heat a\nbuilding, calculated based on the number of degrees that a day's average\ntemperature is below the baseline temperature of 65 degrees F/ 18 degree C."
         },
         "cooling": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Possible alternative: Cooling Degree Days (CDD) indicate the demand for\nenergy needed to cool a building, calculated based on the number of degrees\nthat a day's average temperature is above the baseline temperature of 65\ndegrees F/ 18 degree C."
+          "description": "Cooling Degree Days (CDD) indicate the demand for energy needed to cool a\nbuilding, calculated based on the number of degrees that a day's average\ntemperature is above the baseline temperature of 65 degrees F/ 18 degree C."
         }
       }
     },
@@ -3250,7 +3250,7 @@
         },
         "threshold": {
           "type": "string",
-          "description": "Specifies the threshold value for precipitation intensity. Along with\nprecipitationType, it is used to determine the simplifiedColor. This\nproperty is included in the response when dBZ is greater than zero.\nDetailed version: Specifies the precipitation intensity level at which a\ncertain type of precipitation (such as rain, snow, or ice) is considered\nsignificant. This helps categorize and visualize precipitation events based\non their intensity. Along with precipitationType, it is used to determine\nthe simplifiedColor. This property is included in the response when dBZ is\ngreater than zero."
+          "description": "Specifies the precipitation intensity level at which a certain type of\nprecipitation (such as rain, snow, or ice) is considered significant. This\nhelps categorize and visualize precipitation events based on their\nintensity. Along with `precipitationType`, it is used to determine the\n`simplifiedColor`. This property is included in the response when dBZ is\ngreater than zero."
         },
         "color": {
           "$ref": "#/definitions/ColorValue",
@@ -3258,7 +3258,7 @@
         },
         "simplifiedColor": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The band color that maps to the precipitation type and threshold. This\nproperty is included in the response when dBZ is greater than zero.\nDetailed version: Used for visual representations based on precipitation\ntype and threshold. It maps colors to specific precipitation types and\ntheir intensities, making it easier to quickly identify weather conditions\nwithout detailed color mappings. This is suitable for applications that\nrequire quick, easy-to-understand visual cues. This property is included in\nthe response when dBZ is greater than zero."
+          "description": "The band color that maps to the precipitation type and threshold, used for\nvisual representations based on precipitation type and threshold. It maps\ncolors to specific precipitation types and their intensities, making it\neasier to quickly identify weather conditions without detailed color\nmappings. This is suitable for applications that require quick,\neasy-to-understand visual cues. This property is included in the response\nwhen dBZ is greater than zero."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType",
@@ -3552,7 +3552,7 @@
         },
         "hazardCode": {
           "type": "string",
-          "description": "Consider a bulleted list, such as: A unique identifier for each type of\nhazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -\nHeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -\nHeavyIce - Hail - LargeHail - SunGlare - SunGlareHigh - Lightning -\nSevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -\nFlashFloodWarning - TornadoWarning - TsunamiWarning -\nSevereThunderstormWarning"
+          "description": "Consider a bulleted list, such as: A unique identifier for each type of\nhazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -\nHeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -\nHeavyIce - Hail - LargeHail - `SunGlare` - SunGlareHigh - Lightning -\nSevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -\nFlashFloodWarning - TornadoWarning - TsunamiWarning -\nSevereThunderstormWarning"
         },
         "shortPhrase": {
           "type": "string",
@@ -3652,7 +3652,7 @@
     },
     "HourlyForecast": {
       "type": "object",
-      "description": "The HourlyForecast object provides hourly weather details, including date and\ntime, expected and perceived temperatures, and dew point. It covers wind\nspeed and direction, wind gusts, relative humidity, visibility, and\nprecipitation probability. It indicates if precipitation is expected and\nspecifies its type. Additional properties include UV index, cloud cover\npercentage, and cloud ceiling height. It also features an icon code and\nphrase describing the weather condition.",
+      "description": "The `HourlyForecast` object provides hourly weather details, including date and\ntime, expected and perceived temperatures, and dew point. It covers wind\nspeed and direction, wind gusts, relative humidity, visibility, and\nprecipitation probability. It indicates if precipitation is expected and\nspecifies its type. Additional properties include UV index, cloud cover\npercentage, and cloud ceiling height. It also features an icon code and\nphrase describing the weather condition.",
       "properties": {
         "date": {
           "type": "string",
@@ -3689,24 +3689,24 @@
         },
         "dewPoint": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "The temperature at which air becomes saturated with moisture and dew begins\nto form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending\non the unit specified. Additional information: The temperature at which air\nbecomes saturated with moisture and dew begins to form. It is measured in\ndegrees Fahrenheit (F) or Celsius (C), depending on the unit specified.\nThis value is crucial for understanding humidity levels, as a higher dew\npoint indicates more moisture in the air, making it feel more humid."
+          "description": "The temperature at which air becomes saturated with moisture and dew begins\nto form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending\non the unit specified. This value is crucial for understanding humidity\nlevels, as a higher dew point indicates more moisture in the air, making it\nfeel more humid."
         },
         "wind": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Wind speed (km/h or mph) and direction (0° to 359° azimuth). More detailed\nalternative: Provides the expected wind speed and direction. Wind speed is\nmeasured in units such as kilometers per hour (km/h) or miles per hour\n(mph), based on the unit specified in the request. Wind direction is given\nin azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.\nLonger more detailed alternative: Provides the expected wind speed and\ndirection. Wind speed is measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the specified unit. Wind direction is measured in\nazimuth degrees, ranging from 0° (true North) to 359°, moving clockwise\n(east is 90°, south is 180°, west is 270°)."
+          "description": "Provides the expected wind speed and direction. Wind speed is measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the specified\nunit. Wind direction is measured in azimuth degrees, ranging from 0° (true\nNorth) to 359°, moving clockwise (east is 90°, south is 180°, west is\n270°)."
         },
         "windGust": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Minimal description: Maximum short-burst wind speed (km/h or mph) and\ndirection (0° to 359° azimuth) expected during each hour of the forecast\nperiod. More detailed alternative: Expected maximum wind gust speed and\ndirection during each hour of the forecast period, measured in kilometers\nper hour (km/h) or miles per hour (mph), based on the specified unit. Wind\ndirection is given in azimuth degrees, ranging from 0° (true North) to\n359°, moving clockwise. With additional info: Returns the expected maximum\nwind gust speed during each hour of the forecast period, measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the specified\nunit. Wind direction is given in azimuth degrees, ranging from 0° (true\nNorth) to 359°, moving clockwise. Wind gusts are brief increases in wind\nspeed, important for understanding short-term variations that can impact\nactivities like aviation, sailing, and outdoor events."
+          "description": "Returns the expected maximum wind gust speed during each hour of the\nforecast period, measured in kilometers per hour (km/h) or miles per hour\n(mph), based on the specified unit. Wind direction is given in azimuth\ndegrees, ranging from 0° (true North) to 359°, moving clockwise. Wind gusts\nare brief increases in wind speed, important for understanding short-term\nvariations that can impact activities like aviation, sailing, and outdoor\nevents."
         },
         "relativeHumidity": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of water vapor present in the air, expressed as a percentage of\nthe maximum amount the air can hold at the same temperature. This value\nindicates how close the air is to being saturated with moisture. Slightly\nmore detailed version: The amount of water vapor present in the air,\nexpressed as a percentage of the maximum amount the air can hold at the\nsame temperature. This value indicates how close the air is to being\nsaturated with moisture, affecting how comfortable or humid the environment\nfeels."
+          "description": "The amount of water vapor present in the air, expressed as a percentage of\nthe maximum amount the air can hold at the same temperature. This value\nindicates how close the air is to being saturated with moisture, affecting\nhow comfortable or humid the environment feels."
         },
         "visibility": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Returns the distance at which an object or light can be clearly discerned\nfor each hour of the forecast period, measured in kilometers (km) or miles\n(mi), depending on the unit specified in the request. Added explanation:\nReturns the distance at which an object or light can be clearly discerned\nfor each hour of the forecast period, measured in kilometers (km) or miles\n(mi), depending on the unit specified in the request. This indicates how\nfar one can clearly see, which is crucial for activities like driving and\naviation."
+          "description": "Returns the distance at which an object or light can be clearly discerned\nfor each hour of the forecast period, measured in kilometers (km) or miles\n(mi), depending on the unit specified in the request. This indicates how\nfar one can clearly see, which is crucial for activities like driving and\naviation."
         },
         "ceiling": {
           "$ref": "#/definitions/WeatherValue",
@@ -3724,12 +3724,12 @@
         "precipitationProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage value (0-100) representing the probability of precipitation\nduring the specified hour. Longer / detailed version: Shows the probability\nof precipitation during the specified hour, expressed as a percentage from\n0 to 100. A value of 0 means no chance of precipitation, while 100 means\nprecipitation is certain. This helps users assess the likelihood of rain,\nsnow, or other forms of precipitation."
+          "description": "Shows the probability of precipitation during the specified hour, expressed\nas a percentage from 0 to 100. A value of 0 means no chance of\nprecipitation, while 100 means precipitation is certain. This helps users\nassess the likelihood of rain, snow, or other forms of precipitation."
         },
         "rainProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage value (0-100) representing the probability of a rain during the\nspecified timeframe. Longer version: Shows the probability of rain during\nthe specified timeframe, expressed as a percentage from 0 to 100. A value\nof 0 means no chance of rain, while 100 means rain is certain."
+          "description": "Shows the probability of rain during the specified timeframe, expressed as\na percentage from 0 to 100. A value of 0 means no chance of rain, while 100\nmeans rain is certain."
         },
         "snowProbability": {
           "type": "integer",
@@ -3739,7 +3739,7 @@
         "iceProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage value (0-100) representing the probability of ice formation\nduring the specified hour. Longer version: Shows the probability of ice\nformation during the specified hour, expressed as a percentage from 0 to\n100. A value of 0 means no chance of ice formation, while 100 means ice\nformation is certain. This information helps users evaluate the potential\nfor icy conditions."
+          "description": "Shows the probability of ice formation during the specified hour, expressed\nas a percentage from 0 to 100. A value of 0 means no chance of ice\nformation, while 100 means ice formation is certain. This information helps\nusers evaluate the potential for icy conditions."
         },
         "totalLiquid": {
           "$ref": "#/definitions/WeatherValue",
@@ -3766,11 +3766,11 @@
     },
     "HourlyForecastResult": {
       "type": "object",
-      "description": "An array of HourlyForecast objects, one for each of the requested hours.",
+      "description": "An array of `HourlyForecast` objects, one for each of the requested hours.",
       "properties": {
         "forecasts": {
           "type": "array",
-          "description": "An array of HourlyForecast objects, one for each of the requested hours.",
+          "description": "An array of `HourlyForecast` objects, one for each of the requested hours.",
           "items": {
             "$ref": "#/definitions/HourlyForecast"
           },
@@ -4032,7 +4032,7 @@
     },
     "IntervalSummary": {
       "type": "object",
-      "description": "The IntervalSummary provides a summary of weather conditions for a specified\ninterval. This object includes aggregated data such as average precipitation\nintensity, predominant precipitation type, and overall cloud cover for the\ninterval. It helps users quickly understand the general weather trends over\nthe forecast period",
+      "description": "The `IntervalSummary` provides a summary of weather conditions for a specified\ninterval. This object includes aggregated data such as average precipitation\nintensity, predominant precipitation type, and overall cloud cover for the\ninterval. It helps users quickly understand the general weather trends over\nthe forecast period",
       "properties": {
         "startMinute": {
           "type": "integer",
@@ -4047,7 +4047,7 @@
         "totalMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "<No change>"
+          "description": "The number of minutes for which the summary applies."
         },
         "shortPhrase": {
           "type": "string",
@@ -4085,7 +4085,7 @@
     },
     "LatestStatus": {
       "type": "object",
-      "description": "Returns a keyword indicating the latest status of the alert in the specified\nlocation. For a list of all possible keywords, see the LatestStatusKeyword\nenum.",
+      "description": "Returns a keyword indicating the latest status of the alert in the specified\nlocation. For a list of all possible keywords, see the `LatestStatusKeyword`\nenum.",
       "properties": {
         "localized": {
           "type": "string",
@@ -4122,7 +4122,7 @@
           {
             "name": "Continue",
             "value": "Continue",
-            "description": "Indicates that the alert has been updated since its initial issuance, but\nno changes were made to alertDetails, startTime, endTime, or class."
+            "description": "Indicates that the alert has been updated since its initial issuance, but\nno changes were made to `alertDetails`, `startTime`, `endTime`, or class."
           },
           {
             "name": "Correct",
@@ -4182,7 +4182,7 @@
       "properties": {
         "summary": {
           "$ref": "#/definitions/MinuteForecastSummary",
-          "description": "<No change>",
+          "description": "Phrase summaries for the entire forecast period.",
           "readOnly": true
         },
         "intervalSummaries": {
@@ -4195,7 +4195,7 @@
         },
         "intervals": {
           "type": "array",
-          "description": "Contains an array of ForecastInterval objects, each providing detailed\nforecast data for a specific time interval within the minute-by-minute\nforecast.",
+          "description": "Contains an array of `ForecastInterval` objects, each providing detailed\nforecast data for a specific time interval within the minute-by-minute\nforecast.",
           "items": {
             "$ref": "#/definitions/ForecastInterval"
           },
@@ -4205,23 +4205,23 @@
     },
     "MinuteForecastSummary": {
       "type": "object",
-      "description": "<No change>",
+      "description": "Phrase summaries for the entire forecast period.",
       "properties": {
         "briefPhrase60": {
           "type": "string",
-          "description": "<No change>"
+          "description": "Summary phrase for the next 60 minutes. Phrase length is approximately 60 characters."
         },
         "shortPhrase": {
           "type": "string",
-          "description": "<No change>"
+          "description": "Short summary phrase for the next 120 minutes. Phrase length is approximately 25 characters."
         },
         "briefPhrase": {
           "type": "string",
-          "description": "<No change>"
+          "description": "Summary phrase for the next 120 minutes. Phrase length is approximately 60 characters."
         },
         "longPhrase": {
           "type": "string",
-          "description": "<No change>"
+          "description": "Long summary phrase for the next 120 minutes. Phrase length is 60+ characters."
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
@@ -4369,22 +4369,22 @@
           {
             "name": "Ice",
             "value": "Ice",
-            "description": "<No change>"
+            "description": "Ice"
           },
           {
             "name": "Mix",
             "value": "Mix",
-            "description": "<No change>"
+            "description": "Mix"
           },
           {
             "name": "Rain",
             "value": "Rain",
-            "description": "<No change>"
+            "description": "Rain"
           },
           {
             "name": "Snow",
             "value": "Snow",
-            "description": "<No change>"
+            "description": "Snow"
           }
         ]
       }
@@ -4443,24 +4443,24 @@
         },
         "dewPoint": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "The temperature at which air becomes saturated with moisture and dew begins\nto form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending\non the unit specified. Additional information: The temperature at which air\nbecomes saturated with moisture and dew begins to form. It is measured in\ndegrees Fahrenheit (F) or Celsius (C), depending on the unit specified.\nThis value is crucial for understanding humidity levels, as a higher dew\npoint indicates more moisture in the air, making it feel more humid."
+          "description": "The temperature at which air becomes saturated with moisture and dew begins\nto form. It is measured in degrees Fahrenheit (F) or Celsius (C), depending\non the unit specified. This value is crucial for understanding humidity\nlevels, as a higher dew point indicates more moisture in the air, making it\nfeel more humid."
         },
         "relativeHumidity": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of water vapor present in the air, expressed as a percentage of\nthe maximum amount the air can hold at the same temperature. This value\nindicates how close the air is to being saturated with moisture. Slightly\nmore detailed version: The amount of water vapor present in the air,\nexpressed as a percentage of the maximum amount the air can hold at the\nsame temperature. This value indicates how close the air is to being\nsaturated with moisture, affecting how comfortable or humid the environment\nfeels."
+          "description": "The amount of water vapor present in the air, expressed as a percentage of\nthe maximum amount the air can hold at the same temperature. This value\nindicates how close the air is to being saturated with moisture, affecting\nhow comfortable or humid the environment feels."
         },
         "wind": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Wind speed (km/h or mph) and direction (0° to 359° azimuth). More detailed\nalternative: Provides the expected wind speed and direction. Wind speed is\nmeasured in units such as kilometers per hour (km/h) or miles per hour\n(mph), based on the unit specified in the request. Wind direction is given\nin azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.\nLonger more detailed alternative: Provides the expected wind speed and\ndirection. Wind speed is measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the specified unit. Wind direction is measured in\nazimuth degrees, ranging from 0° (true North) to 359°, moving clockwise\n(east is 90°, south is 180°, west is 270°)."
+          "description": "Provides the expected wind speed and direction. Wind speed is measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the specified\nunit. Wind direction is measured in azimuth degrees, ranging from 0° (true\nNorth) to 359°, moving clockwise (east is 90°, south is 180°, west is\n270°)."
         },
         "windGust": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Minimal description: Maximum short-burst wind speed (km/h or mph) and\ndirection (0° to 359° azimuth) expected during each quarter of the forecast\nperiod. More detailed alternative: Expected maximum wind gust speed and\ndirection during each quarter of the forecast period, measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the specified\nunit. Wind direction is given in azimuth degrees, ranging from 0° (true\nNorth) to 359°, moving clockwise. Additional info: This is important for\nunderstanding short-term variations in wind speed, which can impact\nactivities such as aviation, sailing, and outdoor events"
+          "description": "Expected maximum wind gust speed and direction during each quarter of the\nforecast period, measured in kilometers per hour (km/h) or miles per hour\n(mph), based on the specified unit. Wind direction is given in azimuth\ndegrees, ranging from 0° (true North) to 359°, moving clockwise. This is\nimportant for understanding short-term variations in wind speed, which can\nimpact activities such as aviation, sailing, and outdoor events."
         },
         "visibility": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Returns the distance at which an object or light can be clearly discerned\nfor each quarter of the forecast period, measured in kilometers (km) or\nmiles (mi), depending on the unit specified in the request. Added\nexplanation: Returns the distance at which an object or light can be\nclearly discerned for each quarter of the forecast period, measured in\nkilometers (km) or miles (mi), depending on the unit specified in the\nrequest. This indicates how far one can clearly see, which is crucial for\nactivities like driving and aviation."
+          "description": "Returns the distance at which an object or light can be clearly discerned\nfor each quarter of the forecast period, measured in kilometers (km) or\nmiles (mi), depending on the unit specified in the request. This indicates\nhow far one can clearly see, which is crucial for activities like driving\nand aviation."
         },
         "cloudCover": {
           "type": "integer",
@@ -4482,12 +4482,12 @@
         "precipitationProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage value (0-100) representing the probability of precipitation\nduring the specified quarter-day period. Longer / detailed version: Shows\nthe probability of precipitation during the specified quarter-day period,\nexpressed as a percentage from 0 to 100. A value of 0 means no chance of\nprecipitation, while 100 means precipitation is certain. This helps users\nassess the likelihood of rain, snow, or other forms of precipitation."
+          "description": "Shows the probability of precipitation during the specified quarter-day\nperiod, expressed as a percentage from 0 to 100. A value of 0 means no\nchance of precipitation, while 100 means precipitation is certain. This\nhelps users assess the likelihood of rain, snow, or other forms of\nprecipitation."
         },
         "thunderstormProbability": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage value (0-100) representing the probability of a thunderstorm\nduring the specified quarter-day period. Longer version: Shows the\nprobability of a thunderstorm occurring during the specified quarter-day\nperiod, expressed as a percentage from 0 to 100. A value of 0 means no\nchance of a thunderstorm, while 100 means a thunderstorm is certain."
+          "description": "Shows the probability of a thunderstorm occurring during the specified\nquarter-day period, expressed as a percentage from 0 to 100. A value of 0\nmeans no chance of a thunderstorm, while 100 means a thunderstorm is\ncertain."
         },
         "totalLiquid": {
           "$ref": "#/definitions/WeatherValue",
@@ -4509,7 +4509,7 @@
     },
     "QuarterDayForecastResult": {
       "type": "object",
-      "description": "Returns an array of QuarterDayForecast objects, each providing detailed\nforecast data for the requested quarter-day periods.",
+      "description": "Returns an array of `QuarterDayForecast` objects, each providing detailed\nforecast data for the requested quarter-day periods.",
       "properties": {
         "forecasts": {
           "type": "array",
@@ -4523,17 +4523,17 @@
     },
     "RadiusSector": {
       "type": "object",
-      "description": "Provides the necessary information to plot wind radius quadrants.\n`beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90\n= NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW\nquadrant). `range` specifies the radius in nautical miles. Terse version:\nContains information to plot wind radius quadrants. beginBearing and\nendBearing indicate angles in degrees (0–90 for NE, 90–180 for SE, 180–270\nfor SW, 270–360 for NW). range specifies the radius in nautical miles.",
+      "description": "Provides the necessary information to plot wind radius quadrants.\n`beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90\n= NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW\nquadrant). `range` specifies the radius in nautical miles.",
       "properties": {
         "beginBearing": {
           "type": "number",
           "format": "double",
-          "description": "Starting angle of the quadrant, measured in degrees from true north. More\ndetailed:Specifies the starting angle of the quadrant, measured in degrees\nfrom true north. This property defines the orientation of the sector within\nthe radius."
+          "description": "Specifies the starting angle of the quadrant, measured in degrees from true\nnorth. This property defines the orientation of the sector within the\nradius."
         },
         "endBearing": {
           "type": "number",
           "format": "double",
-          "description": "Ending angle of the quadrant, measured in degrees from true north. More\ndetailed: Specifies the ending angle of the quadrant, measured in degrees\nfrom true north. This property, along with beginBearing, defines the\nangular span of the sector within the radius."
+          "description": "Specifies the ending angle of the quadrant, measured in degrees from true\nnorth. This property, along with `beginBearing`, defines the angular span of\nthe sector within the radius."
         },
         "range": {
           "type": "number",
@@ -4544,7 +4544,7 @@
     },
     "SevereWeatherAlert": {
       "type": "object",
-      "description": "A SevereWeatherAlert object provides detailed information about significant\nweather conditions that could pose risks to life and property. These alerts\ncover various severe weather phenomena, such as hurricanes, thunderstorms,\nflooding, lightning, heat waves, or forest fires, and include details about\nactive alerts for a specified location. Sort version: Provides information\nabout significant weather conditions that pose risks to life and property,\nincluding hurricanes, thunderstorms, flooding, lightning, heat waves, or\nforest fires.",
+      "description": "A `SevereWeatherAlert` object provides detailed information about significant\nweather conditions that could pose risks to life and property. These alerts\ncover various severe weather phenomena, such as hurricanes, thunderstorms,\nflooding, lightning, heat waves, or forest fires, and include details about\nactive alerts for a specified location.",
       "properties": {
         "countryCode": {
           "type": "string",
@@ -4557,7 +4557,7 @@
         },
         "description": {
           "$ref": "#/definitions/SevereWeatherAlertDescription",
-          "description": "Description of the alert."
+          "description": "A `SevereWeatherAlertDescription` object that contains a short summary\nphrase for the alert, returned both in the language specified in the\nrequest (`localized`) and in English (`english`)."
         },
         "category": {
           "type": "string",
@@ -4591,7 +4591,7 @@
         },
         "alertAreas": {
           "type": "array",
-          "description": "Array of AlertArea objects representing specific areas covered by the\nalert. Each object includes the name, description, and geographical\ncoordinates of the affected area. Detailed (verbose) version: An array of\nAlertArea objects, each representing a specific area covered by the alert.\nThese objects collectively define the regions affected by the severe\nweather alert. Each AlertArea includes the name of the affected area, a\nbrief description of the alert, and the geographical coordinates that\ndefine it. This helps identify the locations under threat and provides\nessential information specific to those areas.",
+          "description": "An array of `AlertArea` objects, each representing a specific area covered by\nthe alert. These objects collectively define the regions affected by the\nsevere weather alert. Each `AlertArea` includes the name of the affected\narea, a brief description of the alert, and the geographical coordinates\nthat define it. This helps identify the locations under threat and provides\nessential information specific to those areas.",
           "items": {
             "$ref": "#/definitions/AlertArea"
           }
@@ -4628,7 +4628,7 @@
     },
     "StormForecast": {
       "type": "object",
-      "description": "The StormForecast object contains detailed Government-issued information about\nforecasted tropical storms, including the storm's location, status, forecast\ncreation date, wind speed, and wind radii.",
+      "description": "The `StormForecast` object contains detailed Government-issued information about\nforecasted tropical storms, including the storm's location, status, forecast\ncreation date, wind speed, and wind radii.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -4644,11 +4644,11 @@
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Minimal description: Maximum short-burst wind speed (km/h or mph) and\ndirection (0° to 359° azimuth) expected during the storm. More detailed\nalternative: Specifies the expected maximum wind gust speed and direction\nexpected during the storm, measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the specified unit. Wind direction is given in\nazimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.\nMay be NULL."
+          "description": "Specifies the expected maximum wind gust speed and direction expected\nduring the storm, measured in kilometers per hour (km/h) or miles per hour\n(mph), based on the specified unit. Wind direction is given in azimuth\ndegrees, ranging from 0° (true North) to 359°, moving clockwise. May be\nNULL."
         },
         "sustainedWind": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Specifies the maximum sustained wind speed (km/h or mph) expected during\nthe storm. Longer version: Specifies the maximum sustained wind speed\nexpected during the storm, measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the unit specified in the request."
+          "description": "Specifies the maximum sustained wind speed expected during the storm,\nmeasured in kilometers per hour (km/h) or miles per hour (mph), based on\nthe unit specified in the request."
         },
         "status": {
           "type": "string",
@@ -4660,7 +4660,7 @@
         },
         "windRadiiSummary": {
           "type": "array",
-          "description": "Contains an array of StormWindRadiiSummary objects, detailing wind radii in\ndifferent quadrants around the storm's center. Displayed when details=true\nor radiiGeometry=true in the request.",
+          "description": "Contains an array of `StormWindRadiiSummary` objects, detailing wind radii in\ndifferent quadrants around the storm's center. Displayed when details=true\nor `radiiGeometry`=true in the request.",
           "items": {
             "$ref": "#/definitions/StormWindRadiiSummary"
           }
@@ -4669,7 +4669,7 @@
     },
     "StormForecastResult": {
       "type": "object",
-      "description": "An array of StormForecast objects, each detailing individual storm forecasts\nissued by government authorities.",
+      "description": "An array of `StormForecast` objects, each detailing individual storm forecasts\nissued by government authorities.",
       "properties": {
         "results": {
           "type": "array",
@@ -4698,7 +4698,7 @@
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Minimal description: Maximum short-burst wind speed (km/h or mph) and\ndirection (0° to 359° azimuth) expected during the storm. More detailed\nalternative: Specifies the expected maximum wind gust speed and direction\nexpected during the storm, measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the specified unit. Wind direction is given in\nazimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.\nMay be NULL."
+          "description": "Specifies the expected maximum wind gust speed and direction expected\nduring the storm, measured in kilometers per hour (km/h) or miles per hour\n(mph), based on the specified unit. Wind direction is given in azimuth\ndegrees, ranging from 0° (true North) to 359°, moving clockwise. May be\nNULL."
         },
         "sustainedWind": {
           "$ref": "#/definitions/WeatherValue",
@@ -4730,7 +4730,7 @@
         },
         "windRadiiSummary": {
           "type": "array",
-          "description": "Contains an array of StormWindRadiiSummary objects, detailing wind radii in\ndifferent quadrants around the storm's center. Displayed when details=true\nor radiiGeometry=true in the request.",
+          "description": "Contains an array of `StormWindRadiiSummary` objects, detailing wind radii in\ndifferent quadrants around the storm's center. Displayed when details=true\nor `radiiGeometry`=true in the request.",
           "items": {
             "$ref": "#/definitions/StormWindRadiiSummary"
           }
@@ -4739,7 +4739,7 @@
     },
     "StormLocationsResult": {
       "type": "object",
-      "description": "Contains an array of StormLocation objects, representing government-issued\nactive storm events. More details: Contains an array of StormLocation\nobjects, representing government-issued active storm events. Includes details\nsuch as latitude and longitude coordinates, wind speed and direction, wind\nradii, basin identifier, minimum pressure, movement, status, and other\nrelevant attributes.",
+      "description": "Contains an array of `StormLocation` objects, representing government-issued\nactive storm events. Includes details such as latitude and longitude\ncoordinates, wind speed and direction, wind radii, basin identifier, minimum\npressure, movement, status, and other relevant attributes.",
       "properties": {
         "results": {
           "type": "array",
@@ -4756,11 +4756,11 @@
     },
     "StormSearchResult": {
       "type": "object",
-      "description": "Contains a list of government-issued storms that meet the specified search\ncriteria. More details: Contains a list of government-issued storms that meet\nthe specified search criteria, including details such as the storm's basin\nID, government-issued ID and status.",
+      "description": "Contains a list of government-issued storms that meet the specified search\ncriteria, including details such as the storm's basin ID, government-issued\nID and status.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "Array of StormSearchResultItem objects, each representing a tropical storm\nmatching the search criteria provided in the request.",
+          "description": "Array of `StormSearchResultItem` objects, each representing a tropical storm\nmatching the search criteria provided in the request.",
           "items": {
             "$ref": "#/definitions/StormSearchResultItem"
           }
@@ -4773,7 +4773,7 @@
     },
     "StormSearchResultItem": {
       "type": "object",
-      "description": "A government-issued storm event, including the storm's basin identifier\n(basinId), government-issued identifier (govId) and status. More details: A\ngovernment-issued storm event, including the storm's basin identifier\n(basinId), government-issued identifier (govId) and status. This object is\nreturned as part of an array within the `StormSearchResult` object.",
+      "description": "A government-issued storm event, including the storm's basin identifier\n(`basinId`), government-issued identifier (`govId`) and status. This object is\nreturned as part of an array within the `StormSearchResult` object.",
       "properties": {
         "year": {
           "type": "string",
@@ -4802,13 +4802,13 @@
         "govId": {
           "type": "integer",
           "format": "int32",
-          "description": "A unique identifier assigned to tropical storms by national weather\nforecasting agencies. more detail: A unique identifier assigned to tropical\nstorms by national weather forecasting agencies. This identifier helps\ntrack and reference specific storms accurately, including its status,\nlocation, and intensity. More detailed alternative: A Government storm ID\nis a unique identifier assigned to tropical storms by national weather\nforecasting agencies. This ID is used to track and manage storm\ninformation, including its status, location, and intensity. It helps\nmeteorologists, emergency services, and the public stay informed about\nactive storm events."
+          "description": "A Government storm ID is a unique identifier assigned to tropical storms by\nnational weather forecasting agencies. This ID is used to track and manage\nstorm information, including its status, location, and intensity. It helps\nmeteorologists, emergency services, and the public stay informed about\nactive storm events."
         }
       }
     },
     "StormWindRadiiSummary": {
       "type": "object",
-      "description": "Provides a high-level overview of the wind distribution around a tropical\nstorm. Displayed when the request includes details=true or\nradiiGeometry=true. More details: The StormWindRadiiSummary object provides a\nhigh-level overview of the wind distribution around a tropical storm. It\nincludes the geometric representation of wind radii (radiiGeometry), detailed\nsector-based wind data (radiusSectorData), and the wind speeds at various\ndistances from the storm's center (windSpeed). These properties collectively\nhelp in understanding the spatial extent and intensity of winds associated\nwith the storm. Displayed when the request includes details=true or\nradiiGeometry=true.",
+      "description": "The `StormWindRadiiSummary` object provides a high-level overview of the wind\ndistribution around a tropical storm. It includes the geometric\nrepresentation of wind radii (`radiiGeometry`), detailed sector-based wind data\n(`radiusSectorData`), and the wind speeds at various distances from the\nstorm's center (`windSpeed`). These properties collectively help in\nunderstanding the spatial extent and intensity of winds associated with the\nstorm. Displayed when the request includes details=true or\n`radiiGeometry`=true.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -4816,18 +4816,18 @@
         },
         "windSpeed": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Wind speed (km/h or mph) associated with the radiusSectorData. More\ndetailed: Wind speed associated with the radiusSectorData, measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the unit\nspecified in the request. Details: The overall wind speed associated with\nthe storm's wind radii data. This single wind speed value applies\ncollectively to all the sectors within the \"radiusSectorData\" array, which\nprovides detailed geographical information for the NE, SE, SW, and NW\nquadrants of the storm's wind radii."
+          "description": "The overall wind speed associated with the storm's wind radii data,\nmeasured in kilometers per hour (km/h) or miles per hour (mph), based on\nthe unit specified in the request. This single wind speed value applies\ncollectively to all the sectors within the \"radiusSectorData\" array, which\nprovides detailed geographical information for the NE, SE, SW, and NW\nquadrants of the storm's wind radii."
         },
         "radiusSectorData": {
           "type": "array",
-          "description": "An array of RadiusSector objects. Each object contains detailed\ngeographical information (in geoJSON format) needed to plot wind radius\nquadrants: 0–90° for NE, 90–180° for SE, 180–270° for SW, and 270–360° for\nNW.",
+          "description": "An array of `RadiusSector` objects. Each object contains detailed\ngeographical information (in geoJSON format) needed to plot wind radius\nquadrants: 0–90° for NE, 90–180° for SE, 180–270° for SW, and 270–360° for\nNW.",
           "items": {
             "$ref": "#/definitions/RadiusSector"
           }
         },
         "radiiGeometry": {
           "$ref": "#/definitions/GeoJsonGeometry",
-          "description": "A geoJSON object that is returned when the radiiGeometry parameter is set\nto true in the API request. It provides detailed geographical information\nabout the storm's wind radii, including the spatial representation of areas\naffected by different wind speeds."
+          "description": "A geoJSON object that is returned when the `radiiGeometry` parameter is set\nto true in the API request. It provides detailed geographical information\nabout the storm's wind radii, including the spatial representation of areas\naffected by different wind speeds."
         }
       }
     },
@@ -5048,11 +5048,11 @@
         },
         "wind": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Wind speed (km/h or mph) and direction (0° to 359° azimuth). More detailed\nalternative: Provides the expected wind speed and direction. Wind speed is\nmeasured in units such as kilometers per hour (km/h) or miles per hour\n(mph), based on the unit specified in the request. Wind direction is given\nin azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise.\nLonger more detailed alternative: Provides the expected wind speed and\ndirection. Wind speed is measured in kilometers per hour (km/h) or miles\nper hour (mph), based on the specified unit. Wind direction is measured in\nazimuth degrees, ranging from 0° (true North) to 359°, moving clockwise\n(east is 90°, south is 180°, west is 270°)."
+          "description": "Provides the expected wind speed and direction. Wind speed is measured in\nkilometers per hour (km/h) or miles per hour (mph), based on the specified\nunit. Wind direction is measured in azimuth degrees, ranging from 0° (true\nNorth) to 359°, moving clockwise (east is 90°, south is 180°, west is\n270°)."
         },
         "windGust": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Minimal description: Maximum short-burst wind speed (km/h or mph) and\ndirection (0° to 359° azimuth) expected at a specific waypoint along the\nroute. More detailed alternative: Returns the expected maximum short-burst\nwind speed and direction at a specific waypoint along the route, measured\nin kilometers per hour (km/h) or miles per hour (mph), depending on the\nunit specified in the request. Wind direction is given in azimuth degrees,\nranging from 0° (true North) to 359°, moving clockwise."
+          "description": "Returns the expected maximum short-burst wind speed and direction at a\nspecific waypoint along the route, measured in kilometers per hour (km/h)\nor miles per hour (mph), depending on the unit specified in the request.\nWind direction is given in azimuth degrees, ranging from 0° (true North) to\n359°, moving clockwise."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherAlongRoutePrecipitation",
@@ -5097,7 +5097,7 @@
     },
     "WeatherAlongRouteResult": {
       "type": "object",
-      "description": "The WeatherAlongRouteResult object offers a comprehensive weather summary for\na route, accompanied by an array of WeatherWaypoint objects. Each waypoint\nprovides detailed weather information for its specific location along the\nroute.",
+      "description": "The `WeatherAlongRouteResult` object offers a comprehensive weather summary for\na route, accompanied by an array of WeatherWaypoint objects. Each waypoint\nprovides detailed weather information for its specific location along the\nroute.",
       "properties": {
         "summary": {
           "$ref": "#/definitions/WeatherAlongRouteSummary",
@@ -5106,7 +5106,7 @@
         },
         "waypoints": {
           "type": "array",
-          "description": "An array of `WeatherWaypoint` objects, each providing detailed weather\ninformation for specific points along a route, including cloud cover,\nweather hazards, lightning count, hazard notifications, precipitation\nforecasts, sun glare ratings, temperature, and wind details Alternative: An\narray of `WeatherWaypoint` objects, returned in the same order as specified\nin the request. Each WeatherWaypoint provides detailed weather information\nfor a waypoint along the route.",
+          "description": "An array of `WeatherWaypoint` objects, each providing detailed weather\ninformation for specific points along a route, including cloud cover,\nweather hazards, lightning count, hazard notifications, precipitation\nforecasts, sun glare ratings, temperature, and wind details. Returned in\nthe same order as specified in the request.",
           "items": {
             "$ref": "#/definitions/WaypointForecast"
           },
@@ -5116,7 +5116,7 @@
     },
     "WeatherAlongRouteSummary": {
       "type": "object",
-      "description": "Provides a short summary of weather conditions at specific waypoints along\nthe route, including a weather icon, descriptive phrase (e.g., Sunny, Partly\nCloudy, Rain, Snow), and any significant weather hazards. Detailed version:\nEach WeatherAlongRouteSummary object provides a concise overview of the\nweather conditions at a specific waypoint along the route. It includes key\ndetails such as a weather icon and descriptive phrase (such as Sunny, Partly\nCloudy, Rain, Snow), as well as any significant weather hazards that are\nexpected. This summary helps users quickly understand the weather they might\nencounter at each waypoint along the route.",
+      "description": "Provides a concise overview of the weather conditions at a specific waypoint\nalong the route. It includes key details such as a weather icon and\ndescriptive phrase (such as Sunny, Partly Cloudy, Rain, Snow), as well as any\nsignificant weather hazards that are expected. This summary helps users\nquickly understand the weather they might encounter at each waypoint along\nthe route.",
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode",
@@ -5183,7 +5183,7 @@
         },
         "hazardCode": {
           "type": "string",
-          "description": "Consider a bulleted list, such as: A unique identifier for each type of\nhazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -\nHeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -\nHeavyIce - Hail - LargeHail - SunGlare - SunGlareHigh - Lightning -\nSevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -\nFlashFloodWarning - TornadoWarning - TsunamiWarning -\nSevereThunderstormWarning"
+          "description": "Consider a bulleted list, such as: A unique identifier for each type of\nhazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -\nHeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -\nHeavyIce - Hail - LargeHail - `SunGlare` - SunGlareHigh - Lightning -\nSevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -\nFlashFloodWarning - TornadoWarning - TsunamiWarning -\nSevereThunderstormWarning"
         },
         "shortPhrase": {
           "type": "string",
@@ -5297,7 +5297,7 @@
     },
     "WeatherWindow": {
       "type": "object",
-      "description": "Used to track the storm's movement and status over time, the WeatherWindow\nobject provides the start and end times, storm status, movement coordinates,\nand locations of points on the left and right sides of the forecast window.\nDetailed description: Provides details about the forecast window for a\ntropical storm, including the start and end times (beginDateTime,\nendDateTime), storm status at the start and end (beginStatus, endStatus), the\nmovement coordinates (geometry), and the locations of points on the left and\nright sides of the window (left, right). This object helps track the storm's\nmovement and status over a specified timeframe.",
+      "description": "Provides details about the forecast window for a tropical storm, including\nthe start and end times (`beginDateTime`, `endDateTime`), storm status at the\nstart and end (`beginStatus`, `endStatus`), the movement coordinates (geometry),\nand the locations of points on the left and right sides of the window (left,\nright). This object helps track the storm's movement and status over a\nspecified timeframe.",
       "properties": {
         "left": {
           "$ref": "#/definitions/LatLongPair",
@@ -5337,11 +5337,11 @@
       "properties": {
         "direction": {
           "$ref": "#/definitions/WindDirection",
-          "description": "Wind direction in azimuth degrees (0° to 359°). Detailed version: Wind\ndirection is measured in azimuth degrees, starting at true North (0°) and\nmoving clockwise. East corresponds to 90°, south to 180°, and west to 270°.\nPossible values range from 0° to 359°. This property returns an integer\nrepresenting the wind direction."
+          "description": "Wind direction is measured in azimuth degrees, starting at true North (0°)\nand moving clockwise. East corresponds to 90°, south to 180°, and west to\n270°. Possible values range from 0° to 359°. This property returns an\ninteger representing the wind direction."
         },
         "speed": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Wind speed (km/h or mph). More detailed: The expected wind speed, measured\nin kilometers per hour (km/h) or miles per hour (mph), depending on the\nunit specified in the request."
+          "description": "The expected wind speed, measured in kilometers per hour (km/h) or miles\nper hour (mph), depending on the unit specified in the request."
         }
       }
     },
