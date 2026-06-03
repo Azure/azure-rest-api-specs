@@ -667,6 +667,10 @@ using Microsoft.DataMigration;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Project.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ProjectFile.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ProjectTask.etag, Azure.Core.eTag, "csharp");
+@@alternateType(DataMigrationService.etag, Azure.Core.eTag, "csharp");
 
 // --- Property renames for GA compat (replacing SDK-side shims) ---
 @@clientName(MongoDbClusterInfo.type, "ClusterType", "csharp");
