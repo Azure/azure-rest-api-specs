@@ -122,6 +122,9 @@ using Microsoft.OperationalInsights;
 @@clientName(WorkspaceSkuNameEnum, "OperationalInsightsWorkspaceSkuName", "csharp");
 @@clientName(CapacityReservationLevel, "OperationalInsightsWorkspaceCapacityReservationLevel", "csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET base type for workspace patch data"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(WorkspacePatch, Azure.ResourceManager.Foundations.Resource, "csharp");
+
 @@alternateType(ClusterSku.capacity, Capacity, "csharp");
 @@alternateType(WorkspaceSku.capacityReservationLevel, CapacityReservationLevel, "csharp");
 @@clientName(TableProperties.retentionInDaysAsDefault, "IsRetentionInDaysAsDefault", "csharp");
