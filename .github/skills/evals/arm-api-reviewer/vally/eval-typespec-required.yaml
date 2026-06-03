@@ -7,9 +7,9 @@ description: |
   as Blocking. Updates to handwritten swagger inside pre-existing API version
   directories MUST NOT be flagged.
 
-config:
+defaults:
   runs: 1
-  timeout: 300
+  timeout: "300s"
   model: claude-opus-4.6-1m
   judge_model: claude-sonnet-4.6
 
@@ -85,14 +85,18 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
+      # Negative grader: only fails when TSP-REQUIRED-V1 is presented as an actual
+      # finding (rule ID within 250 chars of a severity tag), not when it is merely
+      # mentioned in a "Compliant Areas" / "N/A" / acknowledgment table.
       - type: output-not-matches
         name: "TSP-REQUIRED-V1 must NOT be flagged"
         config:
-          pattern: "(?i)TSP-REQUIRED-V1"
+          pattern: "(?is)TSP-REQUIRED-V1.{0,250}\\b(?:Blocking|Warning|Suggestion|Critical)\\b|\\b(?:Blocking|Warning|Suggestion|Critical)\\b.{0,250}TSP-REQUIRED-V1|🔴.{0,250}TSP-REQUIRED-V1|TSP-REQUIRED-V1.{0,250}🔴"
       - type: prompt
     rubric:
       - The agent MUST NOT flag rule `TSP-REQUIRED-V1` because the swagger file contains the `x-typespec-generated` extension at the top level, which is one of the compliance signals defined in the rule
       - Flagging `TSP-REQUIRED-V1` on this fixture is a false positive and constitutes a test failure
+      - Listing `TSP-REQUIRED-V1` as N/A or compliant in an acknowledgments / compliant-areas table is acceptable and does NOT count as flagging
       - Other unrelated minor findings or suggestions are acceptable and do not affect the grade
 
   # 120003 — True negative: maintenance edit to existing API version
@@ -122,13 +126,17 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
+      # Negative grader: only fails when TSP-REQUIRED-V1 is presented as an actual
+      # finding (rule ID within 250 chars of a severity tag), not when it is merely
+      # mentioned in a "Compliant Areas" / "N/A" / acknowledgment table.
       - type: output-not-matches
         name: "TSP-REQUIRED-V1 must NOT be flagged on maintenance edits"
         config:
-          pattern: "(?i)TSP-REQUIRED-V1"
+          pattern: "(?is)TSP-REQUIRED-V1.{0,250}\\b(?:Blocking|Warning|Suggestion|Critical)\\b|\\b(?:Blocking|Warning|Suggestion|Critical)\\b.{0,250}TSP-REQUIRED-V1|🔴.{0,250}TSP-REQUIRED-V1|TSP-REQUIRED-V1.{0,250}🔴"
       - type: prompt
     rubric:
       - The agent MUST NOT flag rule `TSP-REQUIRED-V1` because the PR is an in-place edit to a pre-existing API version directory, not the introduction of a new API version
       - Updates to handwritten OpenAPI inside existing API version directories are explicitly permitted by the rule
       - Flagging `TSP-REQUIRED-V1` on this fixture is a false positive and constitutes a test failure
+      - Listing `TSP-REQUIRED-V1` as N/A or compliant in an acknowledgments / compliant-areas table is acceptable and does NOT count as flagging
       - Other unrelated minor findings or suggestions are acceptable and do not affect the grade
