@@ -41,6 +41,28 @@ alias OperationParameter = {
   id: string;
 };
 
+/** The current status of a ComputeBulkActions async operation. */
+model ComputeBulkActionsOperationStatusResult {
+  /** Fully qualified ID for the async operation. */
+  id?: string;
+
+  /** Name of the async operation. */
+  name?: string;
+
+  /** Operation status. */
+  status: string;
+
+  /** Additional information, if available. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Operation status details are service-defined extension data."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matches ARM operation status response shape."
+  properties?: Record<string> | null;
+
+  /** If present, details of the operation error. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matches ARM operation status response shape."
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
+}
+
 alias LaunchBulkInstancesOperationId = {
   /** The name of the LaunchBulkInstancesOperation. */
   @path
