@@ -1,0 +1,18 @@
+- tool: TypeSpecValidation
+  reason: Azure Migrate does not support any SDK Generation yet. More changes are needed for supporting SDK Generation which will come in the future changes.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - ./tspconfig.yaml
+
+- tool: BreakingChange
+  path: preview/2026-06-01-preview/waves.json
+  reason: |
+    TaskProperties.taskType and TaskProperties.isEditable are transitioning
+    from required to optional in 2026-06-01-preview only (via @madeOptional in
+    TypeSpec). Both properties are readOnly, so they were never settable by
+    clients on create/update. Keeping them as required+readOnly produced an
+    inconsistent schema that broke modular JavaScript SDK sample generation
+    (TS2739: sample literal missing readOnly fields that the input type still
+    required). Preview-only contract correction.

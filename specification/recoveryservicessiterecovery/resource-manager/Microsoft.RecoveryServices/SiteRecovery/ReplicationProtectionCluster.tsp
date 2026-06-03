@@ -60,7 +60,8 @@ alias ReplicationProtectionClusterOps = Azure.ResourceManager.Legacy.LegacyOpera
     @key
     @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
     replicationProtectionClusterName: string;
-  }
+  },
+  ResourceName = "SiteRecoveryReplicationProtectionClusterResource"
 >;
 
 @armResourceOperations
@@ -218,7 +219,8 @@ alias ReplicationProtectionClusterOperationGroupOps = Azure.ResourceManager.Lega
     @key
     @pattern("^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$")
     jobId: string;
-  }
+  },
+  ResourceName = "SiteRecoveryReplicationProtectionClusterResource"
 >;
 
 @armResourceOperations

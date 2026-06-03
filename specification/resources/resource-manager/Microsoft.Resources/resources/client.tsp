@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.Resources;
 
 @@clientName(
   Microsoft.Resources,
@@ -49,3 +50,6 @@ using Azure.ClientGenerator.Core;
   "ErrorResponse",
   "go"
 );
+@@responseAsBool(SpecificResources.checkExistence, "javascript");
+@@responseAsBool(Resources.checkExistenceById, "javascript");
+@@responseAsBool(ResourceGroups.checkExistence, "javascript");
