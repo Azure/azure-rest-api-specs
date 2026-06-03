@@ -3000,6 +3000,7 @@ union DistributionType {
    * Ray distribution type.
    */
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   Ray: "Ray",
 }
 
@@ -12086,6 +12087,7 @@ model AzureFileDatastore extends DatastoreProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+@removed(Versions.v2026_05_01)
 model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning Azure Open AI model.
@@ -13079,6 +13081,7 @@ model CustomMetricThreshold {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+@removed(Versions.v2026_05_01)
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
@@ -15297,6 +15300,7 @@ model PyTorch extends DistributionConfiguration {
  * A class for managing the configuration for a distributed Ray job.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model Ray extends DistributionConfiguration {
   /**
    * The port of the head ray process.

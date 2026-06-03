@@ -225,9 +225,5 @@ interface RaiPolicy {
   RaiPolicyPropertiesBasicResource.properties,
   "Azure OpenAI Content Filters properties."
 );
-@@doc(RaiPolicyPropertiesBasicResources.create::parameters.resource,
-  "Content filter policy resource to create or update."
-);
-@@doc(RaiPolicy.create::parameters.resource,
-  "Content filter policy resource to create or update."
-);
+@@doc(RaiPolicyPropertiesBasicResources.create::parameters.resource, "");
+@@doc(RaiPolicy.create::parameters.resource, "");
