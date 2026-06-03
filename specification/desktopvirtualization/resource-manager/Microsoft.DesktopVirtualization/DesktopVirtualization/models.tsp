@@ -3596,7 +3596,7 @@ model ShortcutsExtension {
   /**
    * Indicates whether to create a desktop shortcut for the remote application.
    */
-  putShortcutOnDesktop: boolean;
+  putShortcutOnDesktop?: boolean;
 }
 
 /**
