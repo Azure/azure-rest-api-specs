@@ -92,3 +92,24 @@ using Microsoft.ManagedNetworkFabric;
   "hostname",
   "java"
 );
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric,
+  "ManagedNetworkFabricMgmtClient",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
+  "ManagementNetworkConfigurationPatchableProperties",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
+  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
+  "OptionBProperties",
+  "python"
+);
