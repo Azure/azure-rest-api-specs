@@ -12088,37 +12088,6 @@
       },
       "readOnly": true
     },
-    "RefreshGroupMembersOperationResult": {
-      "type": "object",
-      "description": "The result details of a successful refresh members operation.",
-      "properties": {
-        "totalMemberCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total count of members in the group after the refresh."
-        },
-        "membersAddedCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of members added during the refresh."
-        },
-        "membersRemovedCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of members removed during the refresh."
-        },
-        "membersFailedCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of members that failed to be processed during the refresh."
-        },
-        "lastRefreshTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the last successful refresh."
-        }
-      }
-    },
     "RefreshGroupMembersResult": {
       "type": "object",
       "description": "The status of a refresh members operation.",
@@ -12160,9 +12129,34 @@
           "description": "The end time of the operation.",
           "readOnly": true
         },
-        "result": {
-          "$ref": "#/definitions/RefreshGroupMembersOperationResult",
-          "description": "The result of the refresh members operation when status is Succeeded.",
+        "totalMemberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of members in the group after the refresh.",
+          "readOnly": true
+        },
+        "membersAddedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members added during the refresh.",
+          "readOnly": true
+        },
+        "membersRemovedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members removed during the refresh.",
+          "readOnly": true
+        },
+        "membersFailedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members that failed to be processed during the refresh.",
+          "readOnly": true
+        },
+        "lastRefreshTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last successful refresh.",
           "readOnly": true
         }
       },
