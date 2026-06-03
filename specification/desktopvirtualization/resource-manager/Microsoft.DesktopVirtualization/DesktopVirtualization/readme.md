@@ -78,7 +78,6 @@ suppressions:
     where:
       - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
       - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
-tag: package-preview-2026-03-01-preview
 ```
 
 ### Tag: package-preview-2026-03-01-preview
