@@ -749,7 +749,7 @@ model CefExternalSecuritySolution extends ExternalSecuritySolution {
   /**
    * The external security solution properties for CEF solutions
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-replace-inherited-props" "FIXME: The base type should not contain a definition for properties"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-override-props" "FIXME: The base type should not contain a definition for properties"
   properties?: CefSolutionProperties;
 
   kind: ExternalSecuritySolutionKind.CEF;
@@ -803,7 +803,7 @@ model AtaExternalSecuritySolution extends ExternalSecuritySolution {
   /**
    * The external security solution properties for ATA solutions
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-replace-inherited-props" "FIXME: The base type should not contain a definition for properties"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-override-props" "FIXME: The base type should not contain a definition for properties"
   properties?: AtaSolutionProperties;
 
   kind: ExternalSecuritySolutionKind.ATA;
@@ -827,7 +827,7 @@ model AadExternalSecuritySolution extends ExternalSecuritySolution {
   /**
    * The external security solution properties for AAD solutions
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-replace-inherited-props" "FIXME: The base type should not contain a definition for properties"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-override-props" "FIXME: The base type should not contain a definition for properties"
   properties?: AadSolutionProperties;
 
   kind: ExternalSecuritySolutionKind.AAD;
