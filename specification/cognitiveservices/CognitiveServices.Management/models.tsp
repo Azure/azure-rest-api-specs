@@ -6427,12 +6427,6 @@ model ManagedComputeCapacityProperties {
   acceleratorType?: string;
 
   /**
-   * The Azure region where the capacity is available.
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
    * The number of available accelerators in the region.
    */
   @visibility(Lifecycle.Read)
