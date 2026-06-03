@@ -1823,3 +1823,176 @@ op attestationsListForResource(
   "javascript"
 );
 @@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");
+
+// ============================================================================
+// C# customizations
+//
+// Rationale:
+// 1) Back-compat renames preserve the GA C# SDK surface (Summary/SummaryResults
+//    were renamed to PolicySummary/PolicySummaryResults via the prior autorest
+//    config). Also works around a current C# mgmt generator inconsistency where
+//    ArmPolicyInsightsModelFactory references `Models.PolicySummaryResults`
+//    while only `Models.SummaryResults` is emitted.
+// 2) CheckRestrictionEvaluationDetails is referenced as a parameter on the
+//    public Arm*ModelFactory.PolicyEvaluationResult overload, but generated as
+//    internal. Make it public for C#.
+// 3) The spec defines per-scope LegacyOperations aliases (management group,
+//    subscription, resource group, and generic AtResource) for both Attestation
+//    and Remediation, all sharing the same ResourceName. The current C# mgmt
+//    generator emits one ArmClient extension set per alias, producing
+//    duplicate method signatures (CS0111) and per-scope helper extensions that
+//    did not exist on the GA C# SDK. Suppressing every alias except the
+//    generic AtResource one for C# only restores the GA surface (ArmClient
+//    extensions only) without changing the swagger emitted for other
+//    languages. The remaining AtResource alias uses `{resourceId}` which
+//    accepts any subscription/resource-group/management-group scope at runtime.
+// ============================================================================
+
+@@clientName(Summary, "PolicySummary", "csharp");
+@@clientName(SummaryResults, "PolicySummaryResults", "csharp");
+@@clientName(CheckRestrictionsRequest, "CheckPolicyRestrictionsContent", "csharp");
+@@clientName(
+  CheckManagementGroupRestrictionsRequest,
+  "CheckManagementGroupPolicyRestrictionsContent",
+  "csharp"
+);
+@@clientName(CheckRestrictionsResult, "CheckPolicyRestrictionsResult", "csharp");
+// Back-compat class renames (previously done via the autorest rename-mapping).
+@@clientName(Attestation, "PolicyAttestation", "csharp");
+@@clientName(Remediation, "PolicyRemediation", "csharp");
+@@clientName(ComplianceState, "PolicyComplianceState", "csharp");
+@@clientName(PolicyEventsResourceType, "PolicyEventType", "csharp");
+@@clientName(PolicyStatesResource, "PolicyStateType", "csharp");
+@@clientName(PolicyStatesSummaryResourceType, "PolicyStateSummaryType", "csharp");
+@@clientName(
+  PolicyTrackedResource,
+  "PolicyTrackedResourceRecord",
+  "csharp"
+);
+@@clientName(
+  PolicyTrackedResourcesResourceType,
+  "PolicyTrackedResourceType",
+  "csharp"
+);
+// Back-compat property renames.
+@@clientName(AttestationProperties.expiresOn, "expireOn", "csharp");
+@@clientName(AttestationProperties.assessmentDate, "assessOn", "csharp");
+@@clientName(RemediationProperties.filters, "filter", "csharp");
+@@clientName(PolicyTrackedResource.lastUpdateUtc, "lastUpdateOn", "csharp");
+@@clientName(
+  PolicyEvaluationResult.evaluationDetails,
+  "checkRestrictionEvaluationDetails",
+  "csharp"
+);
+@@clientName(PolicyEvent.resourceType, "resourceTypeString", "csharp");
+@@clientName(PolicyState.resourceType, "resourceTypeString", "csharp");
+
+// Back-compat property types: ARM ID strings should be typed as ResourceIdentifier.
+@@alternateType(AttestationProperties.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(RemediationProperties.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  PolicyAssignmentSummary.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyAssignmentSummary.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PolicyEvent.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyEvent.policyDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyEvent.resourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyEvent.policySetDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyReference.policyDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyReference.policySetDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyReference.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyState.resourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyState.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyState.policyDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PolicyState.policySetDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  IfNotExistsEvaluationDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDefinitionSummary.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PolicyTrackedResource.trackedResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  RemediationDeployment.remediatedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RemediationDeployment.deploymentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  TrackedResourceModificationDetails.deploymentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Back-compat property types: location strings should be typed as AzureLocation.
+@@alternateType(PolicyEvent.resourceLocation, Azure.Core.azureLocation, "csharp");
+@@alternateType(PolicyState.resourceLocation, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  RemediationDeployment.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@access(CheckRestrictionEvaluationDetails, Access.public, "csharp");
+// The generator emits a model PolicyMetadataCollection (paging envelope for
+// SlimPolicyMetadata) that conflicts with the ArmCollection type of the same
+// name. The GA C# SDK only exposed the ArmCollection publicly.
+@@access(PolicyMetadataCollection, Access.internal, "csharp");
+// GA C# SDK did not expose the Operations RP model publicly.
+@@access(PolicyInsightsApi.Operation, Access.internal, "csharp");
+@@access(OperationsListResults, Access.internal, "csharp");
+@@scope(PolicyInsightsApi.Operations.list, "!csharp");
+
+// Remediations: hide management-group, subscription, resource-group scope operations from C#
+@@scope(Remediations.getAtManagementGroup, "!csharp");
+@@scope(Remediations.createOrUpdateAtManagementGroup, "!csharp");
+@@scope(Remediations.deleteAtManagementGroup, "!csharp");
+@@scope(Remediations.listForManagementGroup, "!csharp");
+@@scope(Remediations.getAtSubscription, "!csharp");
+@@scope(Remediations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Remediations.deleteAtSubscription, "!csharp");
+@@scope(Remediations.listForSubscription, "!csharp");
+@@scope(Remediations.listDeploymentsAtSubscription, "!csharp");
+@@scope(Remediations.cancelAtSubscription, "!csharp");
+@@scope(Remediations.getAtResourceGroup, "!csharp");
+@@scope(Remediations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Remediations.deleteAtResourceGroup, "!csharp");
+@@scope(Remediations.listForResourceGroup, "!csharp");
+@@scope(Remediations.listDeploymentsAtResourceGroup, "!csharp");
+@@scope(Remediations.cancelAtResourceGroup, "!csharp");
+
+// Attestations: hide subscription and resource-group scope operations from C#
+@@scope(Attestations.getAtSubscription, "!csharp");
+@@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Attestations.deleteAtSubscription, "!csharp");
+@@scope(Attestations.listForSubscription, "!csharp");
+@@scope(Attestations.getAtResourceGroup, "!csharp");
+@@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Attestations.deleteAtResourceGroup, "!csharp");
+@@scope(Attestations.listForResourceGroup, "!csharp");
+
