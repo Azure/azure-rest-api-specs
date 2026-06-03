@@ -172,7 +172,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+              "$ref": "#/definitions/ComputeBulkActionsOperationStatusResult"
             }
           },
           "default": {
@@ -1356,6 +1356,41 @@
           }
         ]
       }
+    },
+    "ComputeBulkActionsOperationStatusResult": {
+      "type": "object",
+      "description": "The current status of a ComputeBulkActions async operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional information, if available.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error.",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "ComputeProfile": {
       "type": "object",
