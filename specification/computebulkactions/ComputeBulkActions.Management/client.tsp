@@ -6,6 +6,12 @@ using Azure.Core;
 
 namespace Microsoft.ComputeBulkActions;
 
+@@clientName(
+  Azure.ResourceManager.CommonTypes.OperationStatusResult,
+  "ComputeBulkActionsOperationStatusResult",
+  "csharp"
+);
+
 @@clientName(ExecuteTypeRequest.correlationid, "correlationId", "java");
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");
 @@clientName(GetOperationStatusRequest.correlationid, "correlationId", "java");
