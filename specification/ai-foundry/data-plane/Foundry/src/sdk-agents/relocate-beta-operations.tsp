@@ -11,9 +11,6 @@ namespace Azure.AI.Projects.Beta;
   Azure.AI.Projects.Beta,
   {
     initializedBy: InitializedBy.parent,
-    parameters: {
-      allowBetaTypes: boolean = false,
-    },
   },
   "java"
 );
