@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-01-02-preview",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "alertconfig1",
+            "type": "Microsoft.ContainerService/managedClusters/alertConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/alertConfigurations/alertconfig1",
+            "properties": {
+              "mode": "Managed",
+              "notification": {
+                "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Insights/actionGroups/actiongroup1"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2025-01-01T00:00:00.0000000Z",
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2025-01-01T00:00:00.0000000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AlertConfigurations_ListByManagedCluster",
+  "title": "List Alert Configurations by Managed Cluster"
+}
