@@ -3922,6 +3922,9 @@
         "x-ms-examples": {
           "Get Maintenance Configuration Configured With Maintenance Window": {
             "$ref": "./examples/MaintenanceConfigurationsGet_MaintenanceWindow.json"
+          },
+          "Get a Linked Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsGet_LinkedMaintenanceWindow.json"
           }
         }
       },
@@ -3989,8 +3992,11 @@
           }
         },
         "x-ms-examples": {
-          "Create/Update Maintenance Configuration with Maintenance Window": {
+          "Create an Inline Maintenance Configuration": {
             "$ref": "./examples/MaintenanceConfigurationsCreate_Update_MaintenanceWindow.json"
+          },
+          "Create a Linked Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsCreate_LinkedMaintenanceWindow.json"
           }
         }
       },
@@ -10443,6 +10449,18 @@
             "$ref": "#/definitions/TimeSpan"
           },
           "x-ms-identifiers": []
+        },
+        "maintenanceWindowId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified resource ID of the maintenance window that this maintenance configuration is linked to. When set, the schedule is derived read-only from the linked maintenance window — maintenanceWindow becomes a computed field. When absent (the default), the schedule is defined inline via the maintenanceWindow property. The caller must have read access to the target maintenance window.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/maintenanceWindows"
+              }
+            ]
+          }
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",

@@ -2,24 +2,14 @@
   "parameters": {
     "api-version": "2026-05-02-preview",
     "configName": "aksManagedAutoUpgradeSchedule",
-    "parameters": {
-      "properties": {
-        "maintenanceWindow": {
-          "schedule": {
-            "weekly": {
-              "intervalWeeks": 1,
-              "dayOfWeek": "Sunday"
-            }
-          },
-          "startTime": "03:00",
-          "durationHours": 4,
-          "utcOffset": "+00:00"
-        }
-      }
-    },
     "resourceGroupName": "rg1",
     "resourceName": "clustername1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "maintenanceWindowId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/maintenanceWindows/production-weekends"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -28,24 +18,32 @@
         "type": "Microsoft.ContainerService/managedClusters/maintenanceConfigurations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedAutoUpgradeSchedule",
         "properties": {
+          "maintenanceWindowId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/maintenanceWindows/production-weekends",
           "maintenanceWindow": {
             "schedule": {
               "weekly": {
                 "intervalWeeks": 1,
-                "dayOfWeek": "Sunday"
+                "dayOfWeek": "Saturday"
               }
             },
-            "startTime": "03:00",
-            "durationHours": 4,
-            "utcOffset": "+00:00"
+            "startDate": "2026-04-05",
+            "startTime": "02:00",
+            "durationHours": 8,
+            "utcOffset": "-07:00",
+            "notAllowedDates": [
+              {
+                "start": "2026-12-23",
+                "end": "2027-01-03"
+              }
+            ]
           }
         },
         "systemData": {
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdAt": "2026-04-01T12:00:00.0000000Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
+          "lastModifiedAt": "2026-04-01T12:00:00.0000000Z",
+          "lastModifiedBy": "user1",
           "lastModifiedByType": "User"
         }
       }
@@ -56,29 +54,37 @@
         "type": "Microsoft.ContainerService/managedClusters/maintenanceConfigurations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedAutoUpgradeSchedule",
         "properties": {
+          "maintenanceWindowId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/maintenanceWindows/production-weekends",
           "maintenanceWindow": {
             "schedule": {
               "weekly": {
                 "intervalWeeks": 1,
-                "dayOfWeek": "Sunday"
+                "dayOfWeek": "Saturday"
               }
             },
-            "startTime": "03:00",
-            "durationHours": 4,
-            "utcOffset": "+00:00"
+            "startDate": "2026-04-05",
+            "startTime": "02:00",
+            "durationHours": 8,
+            "utcOffset": "-07:00",
+            "notAllowedDates": [
+              {
+                "start": "2026-12-23",
+                "end": "2027-01-03"
+              }
+            ]
           }
         },
         "systemData": {
-          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdAt": "2026-04-01T12:00:00.0000000Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
-          "lastModifiedBy": "user2",
+          "lastModifiedAt": "2026-04-01T12:00:00.0000000Z",
+          "lastModifiedBy": "user1",
           "lastModifiedByType": "User"
         }
       }
     }
   },
   "operationId": "MaintenanceConfigurations_CreateOrUpdate",
-  "title": "Create an Inline Maintenance Configuration"
+  "title": "Create a Linked Maintenance Configuration"
 }
