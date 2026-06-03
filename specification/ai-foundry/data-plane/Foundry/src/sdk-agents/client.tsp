@@ -2,6 +2,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
+using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
@@ -11,6 +12,18 @@ using Azure.AI.Projects;
 
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
 @@clientName(Azure.AI.Projects, "AgentsClient");
+
+model BetaFeaturesOptInHeaders {
+  @header("x-ms-foundry-features-opt-in")
+  foundryFeaturesOptIn?: FoundryFeaturesOptInKeys;
+
+  @header("x-ms-agent-definition-features-opt-in")
+  agentDefinitionFeaturesOptIn?: AgentDefinitionOptInKeys;
+}
+
+@@clientInitialization(Azure.AI.Projects, {
+  parameters: BetaFeaturesOptInHeaders,
+}, "java");
 
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
 @@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
