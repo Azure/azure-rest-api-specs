@@ -1,0 +1,40 @@
+{
+  "title": "List shared limit caps for the caller's subscription",
+  "operationId": "SharedLimitCaps_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardDSv3Family",
+            "name": "StandardDSv3Family",
+            "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+            "properties": {
+              "hostSubscriptionId": "aabbccdd-1234-5678-9abc-112233445566",
+              "subscriptionCap": 500,
+              "subscriptionUsage": 320,
+              "sharedLimit": 1500,
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardFSv2Family",
+            "name": "StandardFSv2Family",
+            "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+            "properties": {
+              "hostSubscriptionId": "aabbccdd-1234-5678-9abc-112233445566",
+              "subscriptionCap": 600,
+              "subscriptionUsage": 450,
+              "sharedLimit": 2000,
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Get a shared limit cap for a VM family",
+  "operationId": "SharedLimitCaps_Get",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "vmFamilyName": "StandardDSv3Family"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardDSv3Family",
+        "name": "StandardDSv3Family",
+        "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+        "properties": {
+          "hostSubscriptionId": "aabbccdd-1234-5678-9abc-112233445566",
+          "subscriptionCap": 500,
+          "subscriptionUsage": 320,
+          "sharedLimit": 1500,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
