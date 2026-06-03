@@ -81,3 +81,14 @@ using Microsoft.ManagedNetworkFabric;
   "peerAsn",
   "java"
 );
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
+  "hostname",
+  "java"
+);
