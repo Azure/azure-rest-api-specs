@@ -12,17 +12,6 @@ using Azure.AI.Projects;
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
 @@clientName(Azure.AI.Projects, "AgentsClient");
 
-@@clientInitialization(
-  Azure.AI.Projects,
-  {
-    initializedBy: InitializedBy.individually,
-    parameters: {
-      allowBetaTypes: boolean = false,
-    },
-  },
-  "java"
-);
-
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
 @@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
 @@clientName(OpenAI.LogProb.logprob, "logProb");

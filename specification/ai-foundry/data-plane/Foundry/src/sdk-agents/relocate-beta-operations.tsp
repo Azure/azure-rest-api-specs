@@ -7,14 +7,6 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
 
-@@clientInitialization(
-  Azure.AI.Projects.Beta,
-  {
-    initializedBy: InitializedBy.parent,
-  },
-  "java"
-);
-
 interface MemoryStores {}
 @@clientLocation(
   Azure.AI.Projects.MemoryStores.createMemoryStore,
