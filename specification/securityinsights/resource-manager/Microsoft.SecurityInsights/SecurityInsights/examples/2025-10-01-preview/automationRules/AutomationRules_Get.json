@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "automationRuleId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/automationRules",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/automationRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "properties": {
+          "actions": [
+            {
+              "actionConfiguration": {
+                "description": "Reset passwords for compromised users.",
+                "title": "Reset user passwords"
+              },
+              "actionType": "AddIncidentTask",
+              "order": 1
+            }
+          ],
+          "createdBy": {
+            "name": "john doe",
+            "email": "john.doe@contoso.com",
+            "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+            "userPrincipalName": "john@contoso.com"
+          },
+          "createdTimeUtc": "2019-01-01T13:00:00Z",
+          "displayName": "Suspicious user sign-in events",
+          "lastModifiedBy": {
+            "name": "john doe",
+            "email": "john.doe@contoso.com",
+            "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+            "userPrincipalName": "john@contoso.com"
+          },
+          "lastModifiedTimeUtc": "2019-01-01T13:00:30Z",
+          "order": 1,
+          "triggeringLogic": {
+            "conditions": [
+              {
+                "conditionProperties": {
+                  "arrayConditionType": "AnyItem",
+                  "arrayType": "IncidentLabels",
+                  "itemConditions": [
+                    {
+                      "conditionProperties": {
+                        "operator": "Equals",
+                        "propertyName": "IncidentLabel",
+                        "propertyValues": [
+                          "myLabel"
+                        ]
+                      },
+                      "conditionType": "Property"
+                    }
+                  ]
+                },
+                "conditionType": "PropertyArray"
+              }
+            ],
+            "isEnabled": true,
+            "triggersOn": "Incidents",
+            "triggersWhen": "Created"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AutomationRules_Get",
+  "title": "AutomationRules_Get"
+}
