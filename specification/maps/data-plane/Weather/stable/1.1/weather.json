@@ -377,7 +377,7 @@
                 {
                   "name": "OneHour",
                   "value": 1,
-                  "description": "1 Hours"
+                  "description": "1 Hour"
                 },
                 {
                   "name": "TwelveHours",
@@ -2187,7 +2187,7 @@
         },
         "basinId": {
           "$ref": "#/definitions/BasinId",
-          "description": "Categorizes the different ocean basins where tropical storms can originate.\nEach basin is assigned a unique identifier to help specify the location of the\nstorm's origin. Valid Basin identifiers include AL, CP, EP, NI, NP, SI, and SP."
+          "description": "Categorizes the different ocean basins where tropical storms can originate.\nEach basin is assigned a unique identifier to help specify the location of\nthe storm's origin. Valid Basin identifiers include **AL**, **CP**, **EP**,\n**NI**, **NP**, **SI**, and **SP**."
         },
         "name": {
           "type": "string",
@@ -2199,18 +2199,18 @@
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "A return value of true indicates that the storm is classified as a subtropical\ncyclone, meaning it has both tropical and extratropical features."
+          "description": "If true, the storm is classified as a subtropical cyclone — a hybrid system\nwith characteristics of both tropical and extratropical cyclones. If false,\nthe storm is not subtropical."
         },
         "govId": {
           "type": "integer",
           "format": "int32",
-          "description": "A unique identifier assigned to tropical storms by national weather forecasting\nagencies. This identifier helps track and reference specific storms accurately,\nincluding its status, location, and intensity."
+          "description": "A unique identifier assigned to tropical storms by national weather\nforecasting agencies. This identifier helps track and reference specific\nstorms accurately, including its status, location, and intensity."
         }
       }
     },
     "ActiveStormResult": {
       "type": "object",
-      "description": "The `ActiveStormResult` object provides comprehensive information about ongoing\ntropical storms. It includes an array of `ActiveStorm` objects, each detailing\nspecific attributes of individual storms. These attributes encompass the\nstorm's government ID, basin ID, year of origin, name, and subtropical\nstatus.",
+      "description": "The `ActiveStormResult` object provides comprehensive information about ongoing\ntropical storms. It includes an array of `ActiveStorm` objects, each detailing\nspecific attributes of individual storms. These attributes encompass the\nstorm's government ID, basin ID, year of origin, name, and subtropical\nstatus.",
       "properties": {
         "results": {
           "type": "array",
@@ -2221,26 +2221,26 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
     "AirAndPollen": {
       "type": "object",
-      "description": "The `AirAndPollen` object provides comprehensive environmental data. It\nidentifies various pollen types such as tree, grass, ragweed, and mold, and\npollutants including PM2.5, PM10, O3, NO2, SO2, and CO. Additionally, it\nreports the UV Index on a scale from 1 to 10, offers qualitative descriptions\nof air quality or pollen levels, and provides numerical measurements of the\nconcentration of pollutants or pollen in the air. This detailed information\nhelps users assess air quality and pollen conditions along their travel route.",
+      "description": "The `AirAndPollen` object provides comprehensive environmental data. It\nidentifies various pollen types such as tree, grass, ragweed, and mold, and\npollutants including **PM2.5**, **PM10**, **O3**, **NO2**, **SO2**, and\n**CO**. Additionally, it reports the UV Index on a scale from 1 to 10,\noffers qualitative descriptions of air quality or pollen levels, and\nprovides numerical measurements of the concentration of pollutants or pollen\nin the air. This detailed information helps users assess air quality and\npollen conditions along their travel route.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "For pollen: Returns the name of the pollen, such as tree, grass, ragweed,\nor mold. For pollutants: When the name property is 'AirQuality', the name\nof the pollutant is returned in the type property. Valid pollutants include\nPM2.5, PM10, O3, NO2, SO2, and CO. For UV Index: When the name property is\n'UVIndex', the UV index is returned in the value property. Valid UV Index\nvalues range from 0 to 11+ and represent the intensity of ultraviolet\nradiation. UV Index values are categorized as follows: - 0-2: Low - 3-5:\nModerate - 6-7: High - 8-10: Very High"
+          "description": "For pollen: Returns the name of the pollen, such as tree, grass, ragweed,\nor mold.\n\nFor pollutants: When the name property is 'AirQuality', the name of the\npollutant is returned in the type property. Valid pollutants include **PM2.5**,\n**PM10**, **O3**, **NO2**, **SO2**, and **CO**.\n\nFor UV Index: When the name property is 'UVIndex', the UV index is returned\nin the value property. Valid UV Index values range from 0 to 11+ and\nrepresent the intensity of ultraviolet radiation. UV Index values are\ncategorized as follows:\n\n- 0-2: Low\n- 3-5: Moderate\n- 6-7: High\n- 8-10: Very High"
         },
         "value": {
           "type": "integer",
           "format": "int32",
-          "description": "Provides a numerical measurement of the concentration of pollutants or pollen\nin the air. This value is typically expressed in units relevant to the type of\npollutant or pollen being measured, such as micrograms per cubic meter (µg/m³)\nfor particulate matter or parts per billion (ppb) for gases like ozone. Both\nair quality and UV are indices, so they are unitless."
+          "description": "Provides a numerical measurement of the concentration of pollutants or\npollen in the air. This value is typically expressed in units relevant to\nthe type of pollutant or pollen being measured, such as micrograms per\ncubic meter (µg/m³) for particulate matter or parts per billion (ppb) for\ngases like ozone. Both air quality and UV are indices, so they are\nunitless."
         },
         "category": {
           "type": "string",
-          "description": "Provides a one-word qualitative description of the air quality or pollen level\nfor the forecast period in the specified language. This property categorizes\nthe air quality or pollen count into different levels, such as low, high, good,\nmoderate, unhealthy, hazardous giving users an easy-to-understand assessment of\nthe current conditions."
+          "description": "Provides a one-word qualitative description of the air quality or pollen\nlevel for the forecast period in the specified language. This property\ncategorizes the air quality or pollen count into different levels, such as\nlow, high, good, moderate, unhealthy, hazardous giving users an\neasy-to-understand assessment of the current conditions."
         },
         "categoryValue": {
           "type": "integer",
@@ -2249,13 +2249,13 @@
         },
         "type": {
           "type": "string",
-          "description": "Specifies the type of air pollutant being measured. Only used when the\n*name* property equals *`AirQuality`*. Examples of air pollutants include\nParticulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2),\nSulfur Dioxide (SO2), and Carbon Monoxide (CO)."
+          "description": "Specifies the type of air pollutant being measured. Only used when the\n*name* property equals *`AirQuality`*. Examples of air pollutants include\nParticulate Matter (**PM2.5**, **PM10**), Ozone (**O3**), Nitrogen Dioxide (**NO2**),\nSulfur Dioxide (**SO2**), and Carbon Monoxide (**CO**)."
         }
       }
     },
     "AirQuality": {
       "type": "object",
-      "description": "The `AirQuality` object provides comprehensive information about the current air\nquality at the specified location. This includes the concentration levels of\nvarious pollutants, numerical Air Quality Index (AQI) values indicating the\noverall air quality, and identification of the dominant pollutant affecting the\nair quality. Additionally, it offers a risk level summary, which briefly\noutlines potential health risks and suggests precautions.",
+      "description": "The `AirQuality` object provides comprehensive information about the current\nair quality at the specified location. This includes the concentration levels\nof various pollutants, numerical Air Quality Index (AQI) values indicating\nthe overall air quality, and identification of the dominant pollutant\naffecting the air quality. Additionally, it offers a risk level summary,\nwhich briefly outlines potential health risks and suggests precautions.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -2265,12 +2265,12 @@
         "index": {
           "type": "number",
           "format": "float",
-          "description": "The air quality index (AQI) is an air quality rating scale set by local\nregulating bodies. Scales can vary widely based on location. For more\ninformation, see [Air quality\nindex](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
+          "description": "The air quality index (AQI) is an air quality rating scale set by local\nregulating bodies. Scales can vary widely based on location. For more\ninformation, see [Air quality\nindex](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
         },
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "Provides an internationally standardized way to understand the\nconcentration of pollutants in the air. Ratings range from 0 to 300 and up,\nwith higher numbers representing worse air quality. The pollutants measured\nincludes PM2.5, PM10, NO2, SO2, CO, and O3."
+          "description": "Provides an internationally standardized way to understand the\nconcentration of pollutants in the air. Ratings range from 0 to 300 and up,\nwith higher numbers representing worse air quality. The pollutants measured\nincludes **PM2.5**, **PM10**, **NO2**, **SO2**, **CO**, and **O3**."
         },
         "dominantPollutant": {
           "$ref": "#/definitions/DominantPollutant",
@@ -2278,11 +2278,11 @@
         },
         "category": {
           "type": "string",
-          "description": "Provides a one-word description of the air quality for the forecast period in\nthe specified language, such as Poor, Fair, or Excellent."
+          "description": "Provides a one-word description of the air quality for the forecast period\nin the specified language, such as Poor, Fair, or Excellent."
         },
         "categoryColor": {
           "type": "string",
-          "description": "Provides a unique hexadecimal color code corresponding to the air quality\ncategory for each day in the forecast period. This color helps users quickly\nidentify the air quality level visually, with each color corresponding to a\ncategory such as Poor, Fair, or Excellent."
+          "description": "Provides a unique hexadecimal color code corresponding to the air quality\ncategory for each day in the forecast period. This color helps users\nquickly identify the air quality level visually, with each color\ncorresponding to a category such as Poor, Fair, or Excellent."
         },
         "description": {
           "type": "string",
@@ -2290,7 +2290,7 @@
         },
         "pollutants": {
           "type": "array",
-          "description": "An array containing detailed information about each pollutant in the response.\nReturned when the `pollutants` URI Parameter is *true*.",
+          "description": "An array containing detailed information about each pollutant in the\nresponse. Returned when the `pollutants` URI Parameter is *true*.",
           "items": {
             "$ref": "#/definitions/Pollutant"
           }
@@ -2303,14 +2303,14 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "Detailed air quality results within the specified location, including\nproperties such as the air quality index (AQI), dominant pollutant, pollutant\nlevels, risk level, and suggested precautions.",
+          "description": "Detailed air quality results within the specified location, including\nproperties such as the air quality index (AQI), dominant pollutant,\npollutant levels, risk level, and suggested precautions.",
           "items": {
             "$ref": "#/definitions/AirQuality"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -2324,7 +2324,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "A brief description of the alert. For example: 'Heat Advisory in effect\nuntil 10:00 PM PDT. Source: U.S. National Weather Service'"
+          "description": "A brief description of the alert. For example:\n\n'Heat Advisory in effect until 10:00 PM PDT. Source: U.S. National Weather Service'"
         },
         "startTime": {
           "type": "string",
@@ -2334,7 +2334,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time at which the alert ended or will end in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_format (yyyy-mm-ddThh:mm:ss-hh:mm). For\nexample, *2025-04-29T07:00:00-07:00*. If the alert spans multiple time zones,\nthe response will provide the local time corresponding to the requested\ncoordinates."
+          "description": "The date and time at which the alert ended or will end in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_format (yyyy-mm-ddThh:mm:ss-hh:mm).\nFor example, *2025-04-29T07:00:00-07:00*. If the alert spans multiple time\nzones, the response will provide the local time corresponding to the\nrequested coordinates."
         },
         "latestStatus": {
           "$ref": "#/definitions/LatestStatus",
@@ -2440,11 +2440,11 @@
         },
         "phrase": {
           "type": "string",
-          "description": "A descriptive term that corresponds to a specific weather condition, such\nas 'Sunny'. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A descriptive term that corresponds to a specific weather condition, such\nas 'Sunny'. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "Numeric value representing an image that corresponds to the current weather\ncondition described by the `Phrase` property. For more information, see\n[Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL."
+          "description": "Numeric value representing an image that corresponds to the current weather\ncondition described by the `Phrase` property. For more information, see\n[Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons). May be\nNULL."
         },
         "hasPrecipitation": {
           "type": "boolean",
@@ -2460,7 +2460,7 @@
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "The current RealFeel™ Temperature values, measured in degrees Celsius (C)\nor Fahrenheit (F), depending on the unit specified in the request. This\nmetric, developed by AccuWeather, incorporates over a dozen factors,\nincluding humidity, wind speed, cloud cover, and sun intensity, to offer a\ncomprehensive measure of how the weather actually feels. For more\ninformation, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655"
+          "description": "The current RealFeel™ Temperature values, measured in degrees Celsius (C)\nor Fahrenheit (F), depending on the unit specified in the request. This\nmetric, developed by AccuWeather, incorporates over a dozen factors,\nincluding humidity, wind speed, cloud cover, and sun intensity, to offer a\ncomprehensive measure of how the weather actually feels.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655"
         },
         "realFeelTemperatureShade": {
           "$ref": "#/definitions/WeatherValue",
@@ -2486,7 +2486,7 @@
         "uvIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "Provides the current ultraviolet (UV) index, helping users understand the\ncurrent risk of sun exposure. Supported values are: 0-2 - Low danger from\nthe sun's UV rays or the average person. 3-5 - Moderate risk of harm from\nunprotected sun exposure. 6-7 - High risk of harm from unprotected sun\nexposure. 8-10 - Very high risk of harm from unprotected sun exposure. 11+\n- Extreme risk of harm from unprotected sun exposure."
+          "description": "Provides the current ultraviolet (UV) index, helping users understand the\ncurrent risk of sun exposure. Supported values are:\n\n- 0-2: Low danger from the sun's UV rays or the average person.\n- 3-5: Moderate risk of harm from unprotected sun exposure.\n- 6-7: High risk of harm from unprotected sun exposure.\n- 8-10: Very high risk of harm from unprotected sun exposure.\n- 11+: Extreme risk of harm from unprotected sun exposure."
         },
         "uvIndexPhrase": {
           "type": "string",
@@ -2498,7 +2498,7 @@
         },
         "obstructionsToVisibility": {
           "type": "string",
-          "description": "Identifies any factors that may impair visibility. This can include\nelements such as fog, smoke, haze, or heavy precipitation, providing\ncrucial information for activities that depend on clear visibility, like\ndriving or aviation. Possible values: A = heavy thunderstorm/hail BD =\nblowing dust BN = blowing sand BS = blowing snow D = dust F = fog GF =\nground fog HZ = haze I = ice IC = ice crystals IF = ice fog IP = ice\npellets IPW = ice pellets shower K = smoke L = drizzle R = rain RS =\nrain/snow RW = rain shower S = snow SG = snow granules SP = snow pellets SW\n= snow shower T = thunderstorm UP = undefined precipitation ZL = freezing\ndrizzle ZR = freezing rain + = heavy - = light"
+          "description": "Identifies any factors that may impair visibility. This can include\nelements such as fog, smoke, haze, or heavy precipitation, providing\ncrucial information for activities that depend on clear visibility, like\ndriving or aviation.\n\nPossible values:\n\n- **A** = heavy thunderstorm/hail\n- **BD** = blowing dust\n- **BN** = blowing sand\n- **BS** = blowing snow\n- **D** = dust\n- **F** = fog\n- **GF** = ground fog\n- **HZ** = haze\n- **I** = ice\n- **IC** = ice crystals\n- **IF** = ice fog\n- **IP** = ice pellets\n- **IPW** = ice pellets shower\n- **K** = smoke\n- **L** = drizzle\n- **R** = rain\n- **RS** = rain/snow\n- **RW** = rain shower\n- **S** = snow\n- **SG** = snow granules\n- **SP** = snow pellets\n- **SW** = snow shower\n- **T** = thunderstorm\n- **UP** = undefined precipitation\n- **ZL** = freezing drizzle\n- **ZR** = freezing rain\n- **+** = heavy\n- **-** = light"
         },
         "cloudCover": {
           "type": "integer",
@@ -2559,7 +2559,7 @@
     },
     "DailyAirQuality": {
       "type": "object",
-      "description": "Provides a summary of the forecasted air quality conditions for a specific\nday and location, in the requested language. The returned properties\ninclude: category, which indicates the air quality level; `categoryColor`,\nrepresenting the color associated with the air quality category;\ndescription, offering a textual explanation of the air quality;\n`dominantPollutant`, identifying the primary pollutant affecting air quality;\n`globalIndex`, providing a standardized air quality index; and index,\ndetailing the specific air quality index value for the day.",
+      "description": "Provides a summary of the forecasted air quality conditions for a specific\nday and location, in the requested language. The returned properties include:\ncategory, which indicates the air quality level; `categoryColor`, representing\nthe color associated with the air quality category; description, offering a\ntextual explanation of the air quality; `dominantPollutant`, identifying the\nprimary pollutant affecting air quality; `globalIndex`, providing a\nstandardized air quality index; and index, detailing the specific air quality\nindex value for the day.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -2569,12 +2569,12 @@
         "index": {
           "type": "number",
           "format": "float",
-          "description": "The air quality index (AQI) is a rating scale set by local regulating bodies,\nwhich can vary widely by location. For more information, see [Air quality\nindex](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
+          "description": "The air quality index (AQI) is a rating scale set by local regulating\nbodies, which can vary widely by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
         },
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "Provides an internationally standardized air quality rating from 0 to 300\nand above, with higher numbers indicating worse air quality. The index\nmeasures pollutants such as PM2.5, PM10, NO2, SO2, CO, and O3."
+          "description": "Provides an internationally standardized air quality rating from 0 to 300\nand above, with higher numbers indicating worse air quality. The index\nmeasures pollutants such as **PM2.5**, **PM10**, **NO2**, **SO2**, **CO**, and **O3**."
         },
         "dominantPollutant": {
           "$ref": "#/definitions/DominantPollutant",
@@ -2582,15 +2582,15 @@
         },
         "category": {
           "type": "string",
-          "description": "Provides a one-word summary of the air quality for the forecast period in the\nspecified language, such as Poor, Fair, or Excellent. This summary helps users\nquickly understand the overall air quality conditions."
+          "description": "Provides a one-word summary of the air quality for the forecast period in\nthe specified language, such as Poor, Fair, or Excellent. This summary\nhelps users quickly understand the overall air quality conditions."
         },
         "categoryColor": {
           "type": "string",
-          "description": "Provides a unique hexadecimal color code for each air quality category in the\ndaily forecast, visually representing levels such as Poor, Fair, or Excellent."
+          "description": "Provides a unique hexadecimal color code for each air quality category in\nthe daily forecast, visually representing levels such as Poor, Fair, or\nExcellent."
         },
         "description": {
           "type": "string",
-          "description": "Provides a summary of the forecasted air quality conditions for a specific day\nand location, in the requested language."
+          "description": "Provides a summary of the forecasted air quality conditions for a specific\nday and location, in the requested language."
         }
       }
     },
@@ -2600,14 +2600,14 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "Detailed air quality forecast data for each day within the requested duration,\nincluding properties such as date, air quality index (AQI), dominant pollutant,\npollutant levels, risk level, and suggested precautions.",
+          "description": "Detailed air quality forecast data for each day within the requested\nduration, including properties such as date, air quality index (AQI),\ndominant pollutant, pollutant levels, risk level, and suggested\nprecautions.",
           "items": {
             "$ref": "#/definitions/DailyAirQuality"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -2667,7 +2667,7 @@
     },
     "DailyForecast": {
       "type": "object",
-      "description": "Provides detailed weather information for a specific day, such as\ntemperature, wind, precipitation, air quality, and UV index. Provides\ncomprehensive weather information for a specific day. This object includes\nvarious properties that detail different aspects of the daily weather\nforecast.",
+      "description": "Provides detailed weather information for a specific day, such as\ntemperature, wind, precipitation, air quality, and UV index.\n\nProvides comprehensive weather information for a specific day. This object\nincludes various properties that detail different aspects of the daily\nweather forecast.",
       "properties": {
         "date": {
           "type": "string",
@@ -2680,11 +2680,11 @@
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherValueRange",
-          "description": "Provides RealFeel™ Temperature values for the specified day, measured in\ndegrees Celsius (C) or Fahrenheit (F), depending on the unit specified in\nthe request. This metric, developed by AccuWeather, incorporates over a\ndozen factors, including humidity, wind speed, cloud cover, and sun\nintensity, to offer a comprehensive measure of how the weather actually\nfeels. For more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
+          "description": "Provides RealFeel™ Temperature values for the specified day, measured in\ndegrees Celsius (C) or Fahrenheit (F), depending on the unit specified in\nthe request. This metric, developed by AccuWeather, incorporates over a\ndozen factors, including humidity, wind speed, cloud cover, and sun\nintensity, to offer a comprehensive measure of how the weather actually\nfeels.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
         },
         "realFeelTemperatureShade": {
           "$ref": "#/definitions/WeatherValueRange",
-          "description": "Provides RealFeel™ Temperature values for the specified day in shaded\nareas. This metric, developed by AccuWeather, incorporates over a dozen\nfactors, including humidity, wind speed, cloud cover, and sun intensity, to\noffer a comprehensive measure of how the weather actually feels in the\nshade. For more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
+          "description": "Provides RealFeel™ Temperature values for the specified day in shaded\nareas. This metric, developed by AccuWeather, incorporates over a dozen\nfactors, including humidity, wind speed, cloud cover, and sun intensity, to\noffer a comprehensive measure of how the weather actually feels in the\nshade.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
         },
         "hoursOfSun": {
           "type": "number",
@@ -2693,22 +2693,22 @@
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Provides a summary of heating and cooling degree days, which measure\ntemperature deviations from a standard of 65°F / 18°C to indicate energy\nusage for heating or cooling. Provides a summary of heating and cooling\ndegree days. Heating Degree Days (HDD) measure the demand for energy to\nheat a building, calculated based on the degrees a day's average\ntemperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the\ndemand for energy to cool a building, calculated based on the degrees a\nday's average temperature is above 65°F/18°C. This summary aids in energy\nmanagement and planning."
+          "description": "Provides a summary of heating and cooling degree days, which measure\ntemperature deviations from a standard of 65°F / 18°C to indicate energy\nusage for heating or cooling.\n\nProvides a summary of heating and cooling degree days. Heating Degree Days\n(HDD) measure the demand for energy to heat a building, calculated based on\nthe degrees a day's average temperature is below 65°F/18°C. Cooling Degree\nDays (CDD) measure the demand for energy to cool a building, calculated\nbased on the degrees a day's average temperature is above 65°F/18°C. This\nsummary aids in energy management and planning."
         },
         "airAndPollen": {
           "type": "array",
-          "description": "A list containing pollutants, pollen levels, and the UV index for the daily\nforecast. Each list item includes forecasted amounts and categories (e.g., low,\nhigh, good, moderate, unhealthy, hazardous) to assess potential health risks.",
+          "description": "A list containing pollutants, pollen levels, and the UV index for the daily\nforecast. Each list item includes forecasted amounts and categories (e.g.,\nlow, high, good, moderate, unhealthy, hazardous) to assess potential health\nrisks.",
           "items": {
             "$ref": "#/definitions/AirAndPollen"
           }
         },
         "day": {
           "$ref": "#/definitions/DailyForecastDetail",
-          "description": "Provides detailed weather information for the daytime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the daytime weather forecast."
+          "description": "Provides detailed weather information for the daytime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\n\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the daytime weather forecast."
         },
         "night": {
           "$ref": "#/definitions/DailyForecastDetail",
-          "description": "Provides detailed weather information for the nighttime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the nighttime weather forecast."
+          "description": "Provides detailed weather information for the nighttime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\n\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the nighttime weather forecast."
         },
         "sources": {
           "type": "array",
@@ -2807,22 +2807,22 @@
         "hoursOfPrecipitation": {
           "type": "number",
           "format": "float",
-          "description": "Shows the total number of hours during the specified day when precipitation is expected. This helps users understand the duration of potential rain, snow, or other forms of precipitation."
+          "description": "Shows the total number of hours during the specified day when precipitation is expected. This\nhelps users understand the duration of potential rain, snow, or other forms of precipitation."
         },
         "hoursOfRain": {
           "type": "number",
           "format": "float",
-          "description": "Shows the total number of hours during the specified day when rain is expected. This helps users understand the duration of potential rain events."
+          "description": "Shows the total number of hours during the specified day when rain is expected.\nThis helps users understand the duration of potential rain events."
         },
         "hoursOfSnow": {
           "type": "number",
           "format": "float",
-          "description": "Shows the total number of hours during the specified day when snow is expected. This helps users understand the duration of potential snow events."
+          "description": "Shows the total number of hours during the specified day when snow is expected.\nThis helps users understand the duration of potential snow events."
         },
         "hoursOfIce": {
           "type": "number",
           "format": "float",
-          "description": "Shows the total number of hours during the specified day when ice formation is expected. This helps users understand the duration of potential icy conditions."
+          "description": "Shows the total number of hours during the specified day when ice formation is expected.\nThis helps users understand the duration of potential icy conditions."
         },
         "cloudCover": {
           "type": "integer",
@@ -2867,34 +2867,34 @@
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicates the severity of the forecasted weather as an integer. Severity\nvalues indicate a level of danger assigned to the weather event. The\nfollowing list shows all possible values along with a description for each\nlevel. Severity (Description) - 0 (Unknown) - 1 (Significant) - 2 (Major) -\n3 (Moderate) - 4 (Minor) - 5 (Minimal) - 6 (Insignificant) - 7\n(Informational)"
+          "description": "Severity values indicate a level of danger assigned to the weather event.\nLower numbers represent higher severity. The following list shows all\npossible values along with a description for each level.\n\nSeverity (Description)\n\n- 0 (Unknown)\n- 1 (Significant)\n- 2 (Major)\n- 3 (Moderate)\n- 4 (Minor)\n- 5 (Minimal)\n- 6 (Insignificant)\n- 7 (Informational)"
         },
         "phrase": {
           "type": "string",
-          "description": "Provides a brief textual summary of the daily weather conditions, displayed in\nthe specified language."
+          "description": "Provides a brief textual summary of the daily weather conditions, displayed\nin the specified language."
         },
         "category": {
           "type": "string",
-          "description": "Provides a one or two-word summary of the forecasted weather conditions, such\nas Sunny, Partly Cloudy, Rain, or Snow."
+          "description": "Provides a one or two-word summary of the forecasted weather conditions,\nsuch as Sunny, Partly Cloudy, Rain, or Snow."
         }
       }
     },
     "DailyHistoricalActuals": {
       "type": "object",
-      "description": "Provides observed historical weather data (climatology) for a specific day\nand location, including observed temperatures, precipitation, snowfall, snow\ndepth, and heating/cooling degree days.",
+      "description": "Provides climatology data for a specific day, including observed\ntemperatures, precipitation, snowfall, snow depth, and heating/cooling degree\ndays.",
       "properties": {
         "date": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time for the requested weather data in ISO 8061 format displayed\nin [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
+          "description": "The date and time for the requested weather data in ISO 8061 format\ndisplayed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueMaxMinAvg",
-          "description": "Provides the observed maximum, minimum, and average temperatures for a specific\nday at a given location."
+          "description": "Provides the observed maximum, minimum, and average temperatures for a\nspecific day at a given location."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Provides a summary of heating and cooling degree days, which measure\ntemperature deviations from a standard of 65°F / 18°C to indicate energy\nusage for heating or cooling. Provides a summary of heating and cooling\ndegree days. Heating Degree Days (HDD) measure the demand for energy to\nheat a building, calculated based on the degrees a day's average\ntemperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the\ndemand for energy to cool a building, calculated based on the degrees a\nday's average temperature is above 65°F/18°C. This summary aids in energy\nmanagement and planning."
+          "description": "Provides a summary of heating and cooling degree days, which measure\ntemperature deviations from a standard of 65°F / 18°C to indicate energy\nusage for heating or cooling.\n\nProvides a summary of heating and cooling degree days. Heating Degree Days\n(HDD) measure the demand for energy to heat a building, calculated based on\nthe degrees a day's average temperature is below 65°F/18°C. Cooling Degree\nDays (CDD) measure the demand for energy to cool a building, calculated\nbased on the degrees a day's average temperature is above 65°F/18°C. This\nsummary aids in energy management and planning."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherValue",
@@ -2902,11 +2902,11 @@
         },
         "snowfall": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Provides the amount of snow that has fallen over the specified day, measured in\ncentimeters (cm) or inches (in), based on the specified unit in the request."
+          "description": "Provides the amount of snow that has fallen over the specified day,\nmeasured in centimeters (cm) or inches (in), based on the specified unit in\nthe request."
         },
         "snowDepth": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Provides the average accumulated snow depth, measured in centimeters (cm) or\ninches (in), based on the specified unit in the request."
+          "description": "Provides the average accumulated snow depth, measured in centimeters (cm)\nor inches (in), based on the specified unit in the request."
         }
       }
     },
@@ -2916,14 +2916,14 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "Aggregates detailed historical weather data for specific dates and locations,\nincluding temperature, precipitation, snowfall, snow depth, and degree day\nsummaries.",
+          "description": "Aggregates detailed historical weather data for specific dates and\nlocations, including temperature, precipitation, snowfall, snow depth, and\ndegree day summaries.",
           "items": {
             "$ref": "#/definitions/DailyHistoricalActuals"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -2938,11 +2938,11 @@
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueMaxMinAvg",
-          "description": "Provides the normal high, low, and average temperatures for a specific day at a\ngiven location, calculated as a 30-year average (1991-2020)."
+          "description": "Provides the normal high, low, and average temperatures for a specific day\nat a given location, calculated as a 30-year average (1991-2020)."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Provides a summary of heating and cooling degree days, which measure\ntemperature deviations from a standard of 65°F / 18°C to indicate energy\nusage for heating or cooling. Provides a summary of heating and cooling\ndegree days. Heating Degree Days (HDD) measure the demand for energy to\nheat a building, calculated based on the degrees a day's average\ntemperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the\ndemand for energy to cool a building, calculated based on the degrees a\nday's average temperature is above 65°F/18°C. This summary aids in energy\nmanagement and planning."
+          "description": "Provides a summary of heating and cooling degree days, which measure\ntemperature deviations from a standard of 65°F / 18°C to indicate energy\nusage for heating or cooling.\n\nProvides a summary of heating and cooling degree days. Heating Degree Days\n(HDD) measure the demand for energy to heat a building, calculated based on\nthe degrees a day's average temperature is below 65°F/18°C. Cooling Degree\nDays (CDD) measure the demand for energy to cool a building, calculated\nbased on the degrees a day's average temperature is above 65°F/18°C. This\nsummary aids in energy management and planning."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherValue",
@@ -2956,14 +2956,14 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "Aggregates detailed climatology data for each requested day, including\nnormal temperatures, precipitation, snowfall, snow depth, and degree day\nsummaries. previous draft: Each object in this array provides detailed\nhistorical weather data for specific dates and locations, including metrics\nsuch as temperature, precipitation, snowfall, snow depth, and degree day\nsummaries. This property essentially aggregates the historical weather data\nfor the requested date and location.",
+          "description": "Aggregates detailed climatology data for each requested day, including\nnormal temperatures, precipitation, snowfall, snow depth, and degree day\nsummaries.",
           "items": {
             "$ref": "#/definitions/DailyHistoricalNormals"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -2978,7 +2978,7 @@
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueYearMaxMinAvg",
-          "description": "Returns the year in which both the minimum and the maximum temperatures\noccurred on a specified day, along with the recorded amounts. Also returns the\naverage temperature for the given date. Measured in degrees Celsius (C) or\nFahrenheit (F), depending on the unit specified in the request."
+          "description": "Returns the year in which both the minimum and the maximum temperatures\noccurred on a specified day, along with the recorded amounts. Also returns\nthe average temperature for the given date. Measured in degrees Celsius (C)\nor Fahrenheit (F), depending on the unit specified in the request."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherValueYearMax",
@@ -2986,24 +2986,24 @@
         },
         "snowfall": {
           "$ref": "#/definitions/WeatherValueYearMax",
-          "description": "Returns the year in which the record high snowfall occurred on a specified\ndate, along with the recorded amounts, measured in centimeters (cm) or inches\n(in), based on the unit specified in the request."
+          "description": "Returns the year in which the record high snowfall occurred on a specified\ndate, along with the recorded amounts, measured in centimeters (cm) or\ninches (in), based on the unit specified in the request."
         }
       }
     },
     "DailyHistoricalRecordsResult": {
       "type": "object",
-      "description": "Provides an array of historical Daily Historical Records for specified dates\nand locations, each with aggregate detailed climatology data for the requested\nday, such as record temperatures, precipitation, and snowfall.",
+      "description": "Provides an array of historical Daily Historical Records for specified dates\nand locations, each with aggregate detailed climatology data for the\nrequested day, such as record temperatures, precipitation, and snowfall.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "Aggregates detailed climatology data for each requested day, including\nrecord temperatures, precipitation, snowfall, snow depth, and degree day\nsummaries. previous draft: Each object in this array provides detailed\nhistorical weather data for specific dates and locations, including metrics\nsuch as temperature, precipitation, snowfall, snow depth, and degree day\nsummaries. This property essentially aggregates the historical weather data\nfor the requested date and location.",
+          "description": "Aggregates detailed climatology data for each requested day, including\nrecord temperatures, precipitation, snowfall, snow depth, and degree day\nsummaries.",
           "items": {
             "$ref": "#/definitions/DailyHistoricalRecords"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -3013,12 +3013,12 @@
       "properties": {
         "indexName": {
           "type": "string",
-          "description": "The name of the index, indicating the type of activity or condition it relates\nto, such as running, golfing, or other outdoor activities. For more\ninformation, see [Index\nIDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids)\nin the *Weather service in Azure Maps* concepts article."
+          "description": "The name of the index, indicating the type of activity or condition it\nrelates to, such as running, golfing, or other outdoor activities. For more\ninformation, see [Index\nIDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids)\nin the *Weather service in Azure Maps* concepts article."
         },
         "indexId": {
           "type": "integer",
           "format": "int32",
-          "description": "A numeric identifier that uniquely represents a specific index type,\ndistinguishing between different indices for various outdoor activities. For\nexample, an 'indexId' of 1 corresponds to the 'Running' index, and an 'indexId'\nof 5 corresponds to the 'Golfing' index. For more information, see [Index\nIDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids)\nin the *Weather service in Azure Maps* concepts article."
+          "description": "A numeric identifier that uniquely represents a specific index type,\ndistinguishing between different indices for various outdoor activities.\nFor example, an 'indexId' of 1 corresponds to the 'Running' index, and an\n'indexId' of 5 corresponds to the 'Golfing' index. For more information,\nsee [Index\nIDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids)\nin the *Weather service in Azure Maps* concepts article."
         },
         "dateTime": {
           "type": "string",
@@ -3037,15 +3037,15 @@
         "categoryValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Provides a numeric representation of the category property, indicating the\nqualitative assessment of the index. Values range from 1 to 5 and should be\nused with the ascending flag, as they can differ among indices. For example,\nfor Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, Extreme=5."
+          "description": "Provides a numeric representation of the category property, indicating the\nqualitative assessment of the index. Values range from 1 to 5 and should be\nused with the ascending flag, as they can differ among indices. For\nexample, for Mosquito Activity:\n\n- Low = 1\n- Moderate = 2\n- High = 3\n- Very High = 4\n- Extreme = 5"
         },
         "ascending": {
           "type": "boolean",
-          "description": "Indicates the direction of the `value` and `categoryValue` properties. When\ntrue, the poorest value is 0 and the best value is 10. When false, the\npoorest value is 10 and the best value is 0. OR Indicates the direction of\nthe index value. When true, the poorest value is 0 and the best value is\n10. When false, the poorest value is 10 and the best value is 0."
+          "description": "Indicates the direction of the `value` and `categoryValue` properties. When\ntrue, the poorest value is 0 and the best value is 10. When false, the\npoorest value is 10 and the best value is 0."
         },
         "description": {
           "type": "string",
-          "description": "Provides a brief, user-friendly explanation of the index value, helping users\nunderstand its significance in relation to specific weather conditions or\nactivities. For example, if the index value for Outdoor Barbecue is\n'Excellent', the description will be 'This is a great day for an outdoor\nbarbecue!'"
+          "description": "Provides a brief, user-friendly explanation of the index value, helping\nusers understand its significance in relation to specific weather\nconditions or activities. For example, if the index value for Outdoor\nBarbecue is 'Excellent', the description will be 'This is a great day for\nan outdoor barbecue!'"
         }
       }
     },
@@ -3065,7 +3065,7 @@
     },
     "DayQuarter": {
       "type": "number",
-      "description": "Divides the day into four 6-hour quarters. Valid values are 0-3: - 0: Morning\n(7am - 1pm) - 1: Afternoon (1pm - 7pm) - 2: Evening (7pm - 1am) - 3:\nOvernight (1am - 7am)",
+      "description": "Divides the day into four 6-hour quarters. Valid values are 0-3:\n\n- 0: Morning (7am - 1pm)\n- 1: Afternoon (1pm - 7pm)\n- 2: Evening (7pm - 1am)\n- 3: Overnight (1am - 7am)",
       "enum": [
         0,
         1,
@@ -3131,32 +3131,32 @@
           {
             "name": "Carbon Monoxide",
             "value": "Carbon Monoxide",
-            "description": "Carbon monoxide (CO) is a colorless, odorless, and tasteless but highly toxic\ngas produced by the incomplete combustion of carbon-containing fuels. Common\nsources include vehicle exhaust, gas stoves, furnaces, and wood fires."
+            "description": "Carbon monoxide (CO) is a colorless, odorless, and tasteless but highly\ntoxic gas produced by the incomplete combustion of carbon-containing fuels.\nCommon sources include vehicle exhaust, gas stoves, furnaces, and wood\nfires."
           },
           {
             "name": "Nitrogen Dioxide",
             "value": "Nitrogen Dioxide",
-            "description": "Nitrogen dioxide (NO2) is a significant atmospheric pollutant. It is regulated\nand subject to recommended limit guidelines set by the World Health\nOrganization (WHO)."
+            "description": "Nitrogen dioxide (NO2) is a significant atmospheric pollutant. It is\nregulated and subject to recommended limit guidelines set by the World\nHealth Organization (WHO)."
           },
           {
             "name": "Ozone",
             "value": "Ozone",
-            "description": "Ozone (O3) is a key component of photochemical smog, the brown, harmful haze\nthat envelops many large cities, resulting from a photochemical reaction\nbetween sunlight and certain specific pollutants."
+            "description": "Ozone (O3) is a key component of photochemical smog, the brown, harmful\nhaze that envelops many large cities, resulting from a photochemical\nreaction between sunlight and certain specific pollutants."
           },
           {
             "name": "Particulate Matter 2.5",
             "value": "Particulate Matter 2.5",
-            "description": "Particulate matter 2.5 (PM2.5) also known as aerosols, is a mix of fine\ndust and tiny liquid droplets suspended in the air. There are 4\ncategories:\\n - PM10 (Course)\\n - PM2.5 (Fine)\\nPM1 (very fine)\\nPM0.1\n(ultrafine)."
+            "description": "Particulate matter 2.5 (PM2.5) also known as aerosols, is a mix of fine\ndust and tiny liquid droplets suspended in the air. There are 4\ncategories:\n\n- PM10 (Course)\n- PM2.5 (Fine)\n- PM1 (very fine)\n- PM0.1 (ultrafine)."
           },
           {
             "name": "Particulate Matter 10",
             "value": "Particulate Matter 10",
-            "description": "Particulate matter 10 (PM10) also known as aerosols, is a mix of fine dust\nand tiny liquid droplets suspended in the air. There are 4 categories of\nparticulate matter:\\n - PM10 (Course)\\n - PM2.5 (Fine)\\nPM1 (very\nfine)\\nPM0.1 (ultrafine)."
+            "description": "Particulate matter 10 (PM10) also known as aerosols, is a mix of fine dust\nand tiny liquid droplets suspended in the air. There are 4 categories of\nparticulate matter:\n\n- PM10 (Course)\n- PM2.5 (Fine)\n- PM1 (very fine)\n- PM0.1 (ultrafine)."
           },
           {
             "name": "Sulfur Dioxide",
             "value": "Sulfur Dioxide",
-            "description": "Sulfur dioxide (SO2) is a heavy, colorless inorganic gas with a pungent,\nirritating odor. It is mainly produced by burning fossil fuels at power plants\nand industrial facilities, but it can also be emitted from natural sources such\nas volcanoes."
+            "description": "Sulfur dioxide (SO2) is a heavy, colorless inorganic gas with a pungent,\nirritating odor. It is mainly produced by burning fossil fuels at power\nplants and industrial facilities, but it can also be emitted from natural\nsources such as volcanoes."
           }
         ]
       }
@@ -3258,7 +3258,7 @@
         },
         "simplifiedColor": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The band color that maps to the precipitation type and threshold, used for\nvisual representations based on precipitation type and threshold. It maps\ncolors to specific precipitation types and their intensities, making it\neasier to quickly identify weather conditions without detailed color\nmappings. This is suitable for applications that require quick,\neasy-to-understand visual cues. This property is included in the response\nwhen dBZ is greater than zero."
+          "description": "Used for visual representations based on precipitation type and threshold.\nIt maps colors to specific precipitation types and their intensities,\nmaking it easier to quickly identify weather conditions without detailed\ncolor mappings. This is suitable for applications that require quick,\neasy-to-understand visual cues. This property is included in the response\nwhen dBZ is greater than zero."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType",
@@ -3266,7 +3266,7 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "cloudCover": {
           "type": "integer",
@@ -3548,11 +3548,11 @@
       "properties": {
         "hazardIndex": {
           "$ref": "#/definitions/HazardIndex",
-          "description": "An aggregated severity/hazard index for each waypoint, useful for\ncolor-coding route segments to indicate safety levels. The index is rated\nas follows: 0: No hazard 1: Be informed, be aware 2: Pay attention, be\nprepared 3: Take action 4: Life-threatening, emergency"
+          "description": "An aggregated severity/hazard index for each waypoint, useful for\ncolor-coding route segments to indicate safety levels. The index is rated\nas follows:\n\n- **0**: No hazard\n- **1**: Be informed, be aware\n- **2**: Pay attention, be prepared\n- **3**: Take action\n- **4**: Life-threatening, emergency"
         },
         "hazardCode": {
           "type": "string",
-          "description": "Consider a bulleted list, such as: A unique identifier for each type of\nhazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -\nHeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -\nHeavyIce - Hail - LargeHail - `SunGlare` - SunGlareHigh - Lightning -\nSevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -\nFlashFloodWarning - TornadoWarning - TsunamiWarning -\nSevereThunderstormWarning"
+          "description": "A unique identifier for each type of hazard:\n\n- LightRain\n- ModerateRain\n- HeavyRain\n- LightMix\n- ModerateMix\n- HeavyMix\n- LightSnow\n- ModerateSnow\n- HeavySnow\n- LightIce\n- ModerateIce\n- HeavyIce\n- Hail\n- LargeHail\n- `SunGlare`\n- SunGlareHigh\n- Lightning\n- SevereLightning\n- WindModerate\n- WindHigh\n- WindExtreme\n- FloodWarning\n- FlashFloodWarning\n- TornadoWarning\n- TsunamiWarning\n- SevereThunderstormWarning"
         },
         "shortPhrase": {
           "type": "string",
@@ -3562,7 +3562,7 @@
     },
     "HazardIndex": {
       "type": "number",
-      "description": "The aggregated severity/hazard index for each waypoint can be utilized to\ncolor-code segments of a route, indicating the safety level for drivers. 0 -\nNo hazard. 1 - Be informed, be aware. 2 - Pay attention, be prepared. 3 -\nTake action. 4 - Life threatening, emergency.",
+      "description": "The aggregated severity/hazard index for each waypoint can be utilized to\ncolor-code segments of a route, indicating the safety level for drivers.\n\n0 - No hazard.\n\n1 - Be informed, be aware.\n\n2 - Pay attention, be prepared.\n\n3 - Take action.\n\n4 - Life threatening, emergency.",
       "enum": [
         0,
         1,
@@ -3620,7 +3620,7 @@
           {
             "name": "OneHour",
             "value": 1,
-            "description": "1 Hours"
+            "description": "1 Hour"
           },
           {
             "name": "TwelveHours",
@@ -3661,15 +3661,15 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "iconPhrase": {
           "type": "string",
-          "description": "A descriptive term that corresponds to a specific weather condition, such\nas 'Sunny'. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A descriptive term that corresponds to a specific weather condition, such\nas 'Sunny'. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "hasPrecipitation": {
           "type": "boolean",
-          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or\nhail) is expected during the specified timeframe. Returns true if precipitation\nis expected, otherwise false."
+          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or\nhail) is expected during the specified timeframe. Returns true if\nprecipitation is expected, otherwise false."
         },
         "isDaylight": {
           "type": "boolean",
@@ -3681,7 +3681,7 @@
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Provides RealFeel™ Temperature values for the specified hour, measured in\ndegrees Celsius (C) or Fahrenheit (F), depending on the unit specified in\nthe request. This metric, developed by AccuWeather, incorporates over a\ndozen factors, including humidity, wind speed, cloud cover, and sun\nintensity, to offer a comprehensive measure of how the weather actually\nfeels. For more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
+          "description": "Provides RealFeel™ Temperature values for the specified hour, measured in\ndegrees Celsius (C) or Fahrenheit (F), depending on the unit specified in\nthe request. This metric, developed by AccuWeather, incorporates over a\ndozen factors, including humidity, wind speed, cloud cover, and sun\nintensity, to offer a comprehensive measure of how the weather actually\nfeels.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
         },
         "wetBulbTemperature": {
           "$ref": "#/definitions/WeatherValue",
@@ -3715,7 +3715,7 @@
         "uvIndex": {
           "type": "integer",
           "format": "int32",
-          "description": "Provides the ultraviolet (UV) index for each hour of the forecast period.\nThis index indicates the level of ultraviolet radiation expected, helping\nusers understand the potential risk of sun exposure during different times\nof the day. Supported values are: 0-2 - Low danger from the sun's UV rays\nor the average person. 3-5 - Moderate risk of harm from unprotected sun\nexposure. 6-7 - High risk of harm from unprotected sun exposure. 8-10 -\nVery high risk of harm from unprotected sun exposure. 11+ - Extreme risk of\nharm from unprotected sun exposure."
+          "description": "Provides the ultraviolet (UV) index for each hour of the forecast period.\nThis index indicates the level of ultraviolet radiation expected, helping\nusers understand the potential risk of sun exposure during different times\nof the day. Supported values are:\n\n- 0-2: Low danger from the sun's UV rays or the average person.\n- 3-5: Moderate risk of harm from unprotected sun exposure.\n- 6-7: High risk of harm from unprotected sun exposure.\n- 8-10: Very high risk of harm from unprotected sun exposure.\n- 11+: Extreme risk of harm from unprotected sun exposure."
         },
         "uvIndexPhrase": {
           "type": "string",
@@ -4063,7 +4063,7 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         }
       }
     },
@@ -4122,7 +4122,7 @@
           {
             "name": "Continue",
             "value": "Continue",
-            "description": "Indicates that the alert has been updated since its initial issuance, but\nno changes were made to `alertDetails`, `startTime`, `endTime`, or class."
+            "description": "Indicates that the alert has been updated since its initial issuance, but\nno changes were made to `alertDetails`, `startTime`, `endTime`, or class."
           },
           {
             "name": "Correct",
@@ -4137,7 +4137,7 @@
           {
             "name": "Extend",
             "value": "Extend",
-            "description": "Indicates that the alert has been extended in duration, area, or both since its\ninitial issuance."
+            "description": "Indicates that the alert has been extended in duration, area, or both since\nits initial issuance."
           },
           {
             "name": "New",
@@ -4152,7 +4152,7 @@
           {
             "name": "Upgrade",
             "value": "Upgrade",
-            "description": "Indicates that the alert has been elevated to a higher class or category since\nfirst issued."
+            "description": "Indicates that the alert has been elevated to a higher class or category\nsince first issued."
           }
         ]
       }
@@ -4225,7 +4225,7 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         }
       }
     },
@@ -4249,7 +4249,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/PollutantType",
-          "description": "The type of pollutant, such as PM2.5, PM10, O3, NO2, SO2, and CO. Note that\nadditional types may be added."
+          "description": "The type of pollutant, such as **PM2.5**, **PM10**, **O3**, **NO2**, **SO2**, and **CO**. Note that\nadditional types may be added."
         },
         "name": {
           "type": "string",
@@ -4258,12 +4258,12 @@
         "index": {
           "type": "number",
           "format": "float",
-          "description": "The air quality index (AQI) as defined by local regulatory bodies. The\nscale can vary significantly by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
+          "description": "The air quality index (AQI) as defined by local regulatory bodies. The\nscale can vary significantly by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
         },
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "An internationally normalized air quality rating on a scale from 0 to 300+,\nwhere higher values denote poorer air quality. This index measures\nconcentrations of PM2.5, PM10, NO2, SO2, CO, and O3."
+          "description": "An internationally normalized air quality rating on a scale from 0 to 300+,\nwhere higher values denote poorer air quality. This index measures\nconcentrations of **PM2.5**, **PM10**, **NO2**, **SO2**, **CO**, and **O3**."
         },
         "concentration": {
           "$ref": "#/definitions/WeatherValue",
@@ -4273,7 +4273,7 @@
     },
     "PollutantType": {
       "type": "string",
-      "description": "A description for each type of pollutant, such as CO, NO2, O3, PM10, PM2.5 and SO2.",
+      "description": "A description for each type of pollutant, such as **CO**, **NO2**, **O3**, **PM10**, **PM2.5** and **SO2**.",
       "enum": [
         "CO",
         "NO2",
@@ -4289,32 +4289,32 @@
           {
             "name": "CO",
             "value": "CO",
-            "description": "The average concentration of carbon monoxide (CO) in parts per million\n(ppm) over the past hour. CO is a colorless, odorless, and tasteless but\nhighly toxic gas produced by the incomplete combustion of carbon-containing\nfuels. Common sources include vehicle exhaust, gas stoves, furnaces, and\nwood fires."
+            "description": "The average concentration of carbon monoxide (CO) in parts per million\n(ppm) over the past hour.\n\nCO is a colorless, odorless, and tasteless but highly toxic gas produced by\nthe incomplete combustion of carbon-containing fuels. Common sources\ninclude vehicle exhaust, gas stoves, furnaces, and wood fires."
           },
           {
             "name": "NO2",
             "value": "NO2",
-            "description": "The average concentration of nitrogen dioxide (NO2) in micrograms per cubic\nmeter (µg/m³) over the past hour. NO2 is a significant atmospheric\npollutant. It is regulated and subject to recommended limit guidelines set\nby the World Health Organization (WHO)."
+            "description": "The average concentration of nitrogen dioxide (NO2) in micrograms per cubic\nmeter (µg/m³) over the past hour.\n\nNO2 is a significant atmospheric pollutant. It is regulated and subject to\nrecommended limit guidelines set by the World Health Organization (WHO)."
           },
           {
             "name": "O3",
             "value": "O3",
-            "description": "The average concentration of Ozone (O3) in micrograms per cubic meter\n(µg/m³) over the past hour. O3 is a key component of photochemical smog,\nthe brown, harmful haze that envelops many large cities, resulting from a\nphotochemical reaction between sunlight and specific pollutants."
+            "description": "The average concentration of Ozone (O3) in micrograms per cubic meter\n(µg/m³) over the past hour.\n\nO3 is a key component of photochemical smog, the brown, harmful haze that\nenvelops many large cities, resulting from a photochemical reaction between\nsunlight and specific pollutants."
           },
           {
             "name": "PM2_5",
             "value": "PM2.5",
-            "description": "The average concentration of particles smaller than 2.5 microns in\ndiameter, measured in micrograms per cubic meter (µg/m³), over the past\nhour. PM2.5, also known as aerosols, consists of fine dust and tiny liquid\ndroplets suspended in the air. There are four categories of particulate\nmatter:\\n - PM10 (Course)\\n - PM2.5 (Fine)\\nPM1 (very fine)\\nPM0.1\n(ultrafine)."
+            "description": "The average concentration of particles smaller than 2.5 microns in\ndiameter, measured in micrograms per cubic meter (µg/m³), over the past\nhour.\n\nPM2.5, also known as aerosols, consists of fine dust and tiny liquid\ndroplets suspended in the air. There are four categories of particulate\nmatter:\n\n- PM10 (Course)\n- PM2.5 (Fine)\n- PM1 (very fine)\n- PM0.1 (ultrafine)."
           },
           {
             "name": "PM10",
             "value": "PM10",
-            "description": "The average concentration of particles with diameters between 2.5 and 10\nmicrons, measured in micrograms per cubic meter (µg/m³) over the past hour.\nParticulate matter 10 (PM10), also known as aerosols, consists of fine dust\nand tiny liquid droplets suspended in the air. There are four categories of\nparticulate matter:\\n - PM10 (Course)\\n - PM2.5 (Fine)\\nPM1 (very\nfine)\\nPM0.1 (ultrafine)."
+            "description": "The average concentration of particles with diameters between 2.5 and 10\nmicrons, measured in micrograms per cubic meter (µg/m³) over the past hour.\n\nParticulate matter 10 (PM10), also known as aerosols, consists of fine dust\nand tiny liquid droplets suspended in the air. There are four categories of\nparticulate matter:\n\n- PM10 (Course)\n- PM2.5 (Fine)\n- PM1 (very fine)\n- PM0.1 (ultrafine)."
           },
           {
             "name": "SO2",
             "value": "SO2",
-            "description": "The average concentration of Sulfur dioxide (SO2) in micrograms per cubic\nmeter (µg/m³) over the past hour. SO2 is a dense, colorless inorganic gas\nwith a pungent, irritating odor. It is primarily produced by the combustion\nof fossil fuels at power plants and industrial facilities, but it can also\nbe emitted from natural sources such as volcanoes."
+            "description": "The average concentration of Sulfur dioxide (SO2) in micrograms per cubic\nmeter (µg/m³) over the past hour.\n\nSO2 is a dense, colorless inorganic gas with a pungent, irritating odor. It\nis primarily produced by the combustion of fossil fuels at power plants and\nindustrial facilities, but it can also be emitted from natural sources such\nas volcanoes."
           }
         ]
       }
@@ -4355,7 +4355,7 @@
     },
     "PrecipitationType": {
       "type": "string",
-      "description": "Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or Mix.\nThis property is included in the response when dBZ is greater than zero.",
+      "description": "Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or\nMix. This property is included in the response when dBZ is greater than zero.",
       "enum": [
         "Ice",
         "Mix",
@@ -4369,22 +4369,22 @@
           {
             "name": "Ice",
             "value": "Ice",
-            "description": "Ice"
+            "description": "Ice."
           },
           {
             "name": "Mix",
             "value": "Mix",
-            "description": "Mix"
+            "description": "Mix."
           },
           {
             "name": "Rain",
             "value": "Rain",
-            "description": "Rain"
+            "description": "Rain."
           },
           {
             "name": "Snow",
             "value": "Snow",
-            "description": "Snow"
+            "description": "Snow."
           }
         ]
       }
@@ -4399,7 +4399,7 @@
         },
         "code": {
           "type": "string",
-          "description": "Pressure tendency codes universally understood: F for Falling, S for\nSteady, and R for Rising."
+          "description": "Pressure tendency codes universally understood: **F** for Falling, **S** for\nSteady, and **R** for Rising."
         }
       }
     },
@@ -4419,19 +4419,19 @@
         },
         "quarter": {
           "$ref": "#/definitions/DayQuarter",
-          "description": "Specifies the quarter-day period: 0 = morning (7am - 1pm) 1 = afternoon\n(1pm - 7pm) 2 = evening (7pm - 1am) 3 = overnight (1am - 7am)"
+          "description": "Specifies the quarter-day period:\n\n0 = morning (7am - 1pm)\n\n1 = afternoon (1pm - 7pm)\n\n2 = evening (7pm - 1am)\n\n3 = overnight (1am - 7am)"
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "iconPhrase": {
           "type": "string",
-          "description": "A one or two word descriptive term that corresponds to a specific weather\ncondition, such as 'Sunny'. It is paired with an `iconCode`, which is a\nnumeric value representing an image that visually depicts the weather\ncondition described by the `iconPhrase`. For more information, see [Weather\nservices in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A one or two word descriptive term that corresponds to a specific weather\ncondition, such as 'Sunny'. It is paired with an `iconCode`, which is a\nnumeric value representing an image that visually depicts the weather\ncondition described by the `iconPhrase`. For more information, see [Weather\nservices in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "phrase": {
           "type": "string",
-          "description": "Provides a brief textual description of the weather conditions for each\nquarter of the day. It uses more descriptive terms than iconePhrase, which\nmight return 'Thunderstorms' where phrase returns 'Cloudy with a couple of\nshowers and a thunderstorm'. This makes it easy to understand and integrate\ninto applications for clear and concise weather forecasts."
+          "description": "Provides a brief textual description of the weather conditions for each\nquarter of the day. It uses more descriptive terms than iconePhrase, which\nmight return 'Thunderstorms' where phrase returns 'Cloudy with a couple of\nshowers and a thunderstorm'. This makes it easy to understand and integrate\ninto applications for clear and concise weather forecasts."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueRange",
@@ -4439,7 +4439,7 @@
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherValueRange",
-          "description": "Provides RealFeel™ Temperature values for the specified quarter-day period,\nmeasured in degrees Celsius (C) or Fahrenheit (F), depending on the unit\nspecified in the request. This metric, developed by AccuWeather,\nincorporates over a dozen factors, including humidity, wind speed, cloud\ncover, and sun intensity, to offer a comprehensive measure of how the\nweather actually feels. For more information, see [What is the AccuWeather\nRealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
+          "description": "Provides RealFeel™ Temperature values for the specified quarter-day period,\nmeasured in degrees Celsius (C) or Fahrenheit (F), depending on the unit\nspecified in the request. This metric, developed by AccuWeather,\nincorporates over a dozen factors, including humidity, wind speed, cloud\ncover, and sun intensity, to offer a comprehensive measure of how the\nweather actually feels.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
         },
         "dewPoint": {
           "$ref": "#/definitions/WeatherValue",
@@ -4469,7 +4469,7 @@
         },
         "hasPrecipitation": {
           "type": "boolean",
-          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or\nhail) is expected during the specified timeframe. Returns true if precipitation\nis expected, otherwise false."
+          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or\nhail) is expected during the specified timeframe. Returns true if\nprecipitation is expected, otherwise false."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType",
@@ -4477,7 +4477,7 @@
         },
         "precipitationIntensity": {
           "type": "string",
-          "description": "Indicates the intensity of precipitation (light, moderate, heavy). Only\nreturned if `hasPrecipitation` is true."
+          "description": "Indicates the intensity of precipitation (light, moderate, heavy). Only\nreturned if `hasPrecipitation` is true."
         },
         "precipitationProbability": {
           "type": "integer",
@@ -4523,7 +4523,7 @@
     },
     "RadiusSector": {
       "type": "object",
-      "description": "Provides the necessary information to plot wind radius quadrants.\n`beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90\n= NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW\nquadrant). `range` specifies the radius in nautical miles.",
+      "description": "Provides the necessary information to plot wind radius quadrants.\n`beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90\n= NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW\nquadrant). `range` specifies the radius in nautical miles.",
       "properties": {
         "beginBearing": {
           "type": "number",
@@ -4628,7 +4628,7 @@
     },
     "StormForecast": {
       "type": "object",
-      "description": "The `StormForecast` object contains detailed Government-issued information about\nforecasted tropical storms, including the storm's location, status, forecast\ncreation date, wind speed, and wind radii.",
+      "description": "The `StormForecast` object contains detailed Government-issued information\nabout forecasted tropical storms, including the storm's location, status,\nforecast creation date, wind speed, and wind radii.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -4640,7 +4640,7 @@
         },
         "location": {
           "$ref": "#/definitions/LatLongPair",
-          "description": "Specifies the geographical coordinates (latitude and longitude) of the storm's\nforecasted position."
+          "description": "Specifies the geographical coordinates (latitude and longitude) of the\nstorm's forecasted position."
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherValue",
@@ -4652,11 +4652,11 @@
         },
         "status": {
           "type": "string",
-          "description": "Indicates the current state or condition of the storm. This property\nprovides information on whether the storm is active, dissipating, or has\nreached another significant status. Possible values: Cyclonic storm Deep\ndepression Depression Extremely severe cyclonic storm Hurricane category\n(1-5) Intense tropical cyclone Moderate tropical storm Post-tropical\ncyclone Potential tropical cyclone Severe cyclonic storm Severe tropical\nstorm Subtropical Super cyclonic storm Tropical cyclone Tropical cyclone\ncategory (1-5) Tropical depression Tropical disturbance Tropical storm\nTyphoon Very intense tropical cyclone Very severe cyclonic storm Very\nstrong typhoon Violent typhoon"
+          "description": "Indicates the current state or condition of the storm. This property\nprovides information on whether the storm is active, dissipating, or has\nreached another significant status. Possible values:\n\n- Cyclonic storm\n- Deep depression\n- Depression\n- Extremely severe cyclonic storm\n- Hurricane category (1-5)\n- Intense tropical cyclone\n- Moderate tropical storm\n- Post-tropical cyclone\n- Potential tropical cyclone\n- Severe cyclonic storm\n- Severe tropical storm\n- Subtropical\n- Super cyclonic storm\n- Tropical cyclone\n- Tropical cyclone category (1-5)\n- Tropical depression\n- Tropical disturbance\n- Tropical storm\n- Typhoon\n- Very intense tropical cyclone\n- Very severe cyclonic storm\n- Very strong typhoon\n- Violent typhoon"
         },
         "window": {
           "$ref": "#/definitions/WeatherWindow",
-          "description": "Provides forecast details for the storm within the specified time frame. If\nthe `windowGeometry` parameter is set to true in the API request, this\nproperty will include geoJSON details for the window geometry."
+          "description": "Provides forecast details for the storm within the specified time frame. If\nthe `windowGeometry` parameter is set to true in the API request, this\nproperty will include geoJSON details for the window geometry."
         },
         "windRadiiSummary": {
           "type": "array",
@@ -4680,7 +4680,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -4706,19 +4706,19 @@
         },
         "minimumPressure": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "Specifies the lowest atmospheric pressure associated with the storm, measured\nin millibars (mb) or  inches of mercury (inHg), depending on the unit specified\nin the request. This value may be NULL."
+          "description": "Specifies the lowest atmospheric pressure associated with the storm,\nmeasured in millibars (mb) or inches of mercury (inHg), depending on the\nunit specified in the request. This value may be NULL."
         },
         "movement": {
           "$ref": "#/definitions/WindDetails",
-          "description": "Returns the storm's current direction (in degrees) and speed, measured in\nkilometers per hour (km/h) or miles per hour (mph), depending on the specified\nunit."
+          "description": "Returns the storm's current direction (in degrees) and speed, measured in\nkilometers per hour (km/h) or miles per hour (mph), depending on the\nspecified unit."
         },
         "status": {
           "type": "string",
-          "description": "Returns the current classification or stage of the storm in English, such as a\ntropical depression, tropical storm, or hurricane."
+          "description": "Returns the current classification or stage of the storm in English, such\nas a tropical depression, tropical storm, or hurricane."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "A return value of true indicates that the storm is classified as a subtropical\ncyclone, meaning it has both tropical and extratropical features."
+          "description": "If true, the storm is classified as a subtropical cyclone — a hybrid system\nwith characteristics of both tropical and extratropical cyclones. If false,\nthe storm is not subtropical."
         },
         "hasTropicalPotential": {
           "type": "boolean",
@@ -4743,14 +4743,14 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "Array of data points, each detailing the location of an individual\ngovernment-issued storm, including coordinates, geometry, basin ID, date, wind\ndetails, and wind radii.",
+          "description": "Array of data points, each detailing the location of an individual\ngovernment-issued storm, including coordinates, geometry, basin ID, date,\nwind details, and wind radii.",
           "items": {
             "$ref": "#/definitions/StormLocation"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -4767,7 +4767,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Contains the URL to fetch the next page of results if the response is\npaginated. This is useful when the response is too large to be returned in a\nsingle call, allowing users to navigate through multiple pages of results."
+          "description": "Contains the URL to fetch the next page of results if the response is\npaginated.\n\nThis is useful when the response is too large to be returned in a single\ncall, allowing users to navigate through multiple pages of results."
         }
       }
     },
@@ -4781,7 +4781,7 @@
         },
         "basinId": {
           "$ref": "#/definitions/BasinId",
-          "description": "The \"basinId\" enum categorizes the different ocean basins where tropical\nstorms can originate. Each basin is assigned a unique identifier to help\nspecify the location of the storm's origin. Valid Basin identifiers include\nAL, CP, EP, NI, NP, SI, and SP."
+          "description": "The \"basinId\" enum categorizes the different ocean basins where tropical\nstorms can originate. Each basin is assigned a unique identifier to help\nspecify the location of the storm's origin. Valid Basin identifiers include\n**AL**, **CP**, **EP**, **NI**, **NP**, **SI**, and **SP**."
         },
         "name": {
           "type": "string",
@@ -4789,7 +4789,7 @@
         },
         "isActive": {
           "type": "boolean",
-          "description": "Indicates whether the tropical storm is currently active. If true, the storm is\nactive; if false, the storm is not active"
+          "description": "Indicates whether the tropical storm is currently active. If true, the\nstorm is active; if false, the storm is not active"
         },
         "isRetired": {
           "type": "boolean",
@@ -4797,7 +4797,7 @@
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "Returns true if the storm is classified as a subtropical cyclone, meaning it\nhas both tropical and extratropical features."
+          "description": "If true, the storm is classified as a subtropical cyclone — a hybrid system\nwith characteristics of both tropical and extratropical cyclones. If false,\nthe storm is not subtropical."
         },
         "govId": {
           "type": "integer",
@@ -4808,7 +4808,7 @@
     },
     "StormWindRadiiSummary": {
       "type": "object",
-      "description": "The `StormWindRadiiSummary` object provides a high-level overview of the wind\ndistribution around a tropical storm. It includes the geometric\nrepresentation of wind radii (`radiiGeometry`), detailed sector-based wind data\n(`radiusSectorData`), and the wind speeds at various distances from the\nstorm's center (`windSpeed`). These properties collectively help in\nunderstanding the spatial extent and intensity of winds associated with the\nstorm. Displayed when the request includes details=true or\n`radiiGeometry`=true.",
+      "description": "The `StormWindRadiiSummary` object provides a high-level overview of the wind\ndistribution around a tropical storm. It includes the geometric\nrepresentation of wind radii (`radiiGeometry`), detailed sector-based wind data\n(`radiusSectorData`), and the wind speeds at various distances from the storm's\ncenter (`windSpeed`). These properties collectively help in understanding the\nspatial extent and intensity of winds associated with the storm. Displayed\nwhen the request includes details=true or `radiiGeometry`=true.",
       "properties": {
         "dateTime": {
           "type": "string",
@@ -4867,7 +4867,7 @@
     },
     "UnitType": {
       "type": "number",
-      "description": "An integer value associated with the type of unit being displayed. Can be\nused for unit translation. For more information, see [Weather services in\nAzure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).",
+      "description": "An integer value associated with the type of unit being displayed. Can be\nused for unit translation. For more information, see [Weather services in\nAzure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).",
       "enum": [
         0,
         1,
@@ -5027,7 +5027,7 @@
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "Returns a numeric value that corresponds to an image displaying the\n`iconPhrase`. For more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "Returns a numeric value that corresponds to an image displaying the\n`iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "shortPhrase": {
           "type": "string",
@@ -5061,7 +5061,7 @@
         "lightningCount": {
           "type": "integer",
           "format": "int32",
-          "description": "<Cannot confirm an accurate definition>"
+          "description": "Estimation of thunderstorm intensity on an open scale. A value of 0\nmeans there is no thunderstorm; values of 1 and higher mean there is\na thunderstorm in increasing intensity."
         },
         "sunGlare": {
           "$ref": "#/definitions/SunGlare",
@@ -5097,7 +5097,7 @@
     },
     "WeatherAlongRouteResult": {
       "type": "object",
-      "description": "The `WeatherAlongRouteResult` object offers a comprehensive weather summary for\na route, accompanied by an array of WeatherWaypoint objects. Each waypoint\nprovides detailed weather information for its specific location along the\nroute.",
+      "description": "The `WeatherAlongRouteResult` object offers a comprehensive weather summary for\na route, accompanied by an array of `WeatherWaypoint` objects. Each waypoint\nprovides detailed weather information for its specific location along the\nroute.",
       "properties": {
         "summary": {
           "$ref": "#/definitions/WeatherAlongRouteSummary",
@@ -5106,7 +5106,7 @@
         },
         "waypoints": {
           "type": "array",
-          "description": "An array of `WeatherWaypoint` objects, each providing detailed weather\ninformation for specific points along a route, including cloud cover,\nweather hazards, lightning count, hazard notifications, precipitation\nforecasts, sun glare ratings, temperature, and wind details. Returned in\nthe same order as specified in the request.",
+          "description": "An array of `WeatherWaypoint` objects, returned in the same order as\nspecified in the request. Each `WeatherWaypoint` provides detailed weather\ninformation for a waypoint along the route, including cloud cover, weather\nhazards, lightning count, hazard notifications, precipitation forecasts,\nsun glare ratings, temperature, and wind details.",
           "items": {
             "$ref": "#/definitions/WaypointForecast"
           },
@@ -5116,11 +5116,11 @@
     },
     "WeatherAlongRouteSummary": {
       "type": "object",
-      "description": "Provides a concise overview of the weather conditions at a specific waypoint\nalong the route. It includes key details such as a weather icon and\ndescriptive phrase (such as Sunny, Partly Cloudy, Rain, Snow), as well as any\nsignificant weather hazards that are expected. This summary helps users\nquickly understand the weather they might encounter at each waypoint along\nthe route.",
+      "description": "Each `WeatherAlongRouteSummary` object provides a concise overview of the\nweather conditions at a specific waypoint along the route. It includes key\ndetails such as a weather icon and descriptive phrase (such as Sunny, Partly\nCloudy, Rain, Snow), as well as any significant weather hazards that are\nexpected. This summary helps users quickly understand the weather they might\nencounter at each waypoint along the route.",
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure Maps\n](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "hazards": {
           "$ref": "#/definitions/WeatherHazards",
@@ -5130,7 +5130,7 @@
     },
     "WeatherDataUnit": {
       "type": "string",
-      "description": "Specifies whether to return data in metric or imperial units, with metric as\nthe default. For example\\n\\nMetric: millimeter (mm), meter (m), kilometer\n(km), Celsius (C)\\n\\nImperial: inch (in), foot (ft), mile (mi), Fahrenheit\n(F)",
+      "description": "Specifies whether to return data in metric or imperial units, with metric as\nthe default. For example:\n\n- Metric: millimeter (mm), meter (m), kilometer (km), Celsius (C)\n- Imperial: inch (in), foot (ft), mile (mi), Fahrenheit (F)",
       "enum": [
         "imperial",
         "metric"
@@ -5158,7 +5158,7 @@
       "properties": {
         "maxHazardIndex": {
           "$ref": "#/definitions/HazardIndex",
-          "description": "An aggregated severity/hazard index for each waypoint, useful for\ncolor-coding route segments to indicate safety levels. The index is rated\nas follows: 0: No hazard 1: Be informed, be aware 2: Pay attention, be\nprepared 3: Take action 4: Life-threatening, emergency"
+          "description": "An aggregated severity/hazard index for each waypoint, useful for\ncolor-coding route segments to indicate safety levels. The index is rated\nas follows:\n\n- **0**: No hazard\n- **1**: Be informed, be aware\n- **2**: Pay attention, be prepared\n- **3**: Take action\n- **4**: Life-threatening, emergency"
         },
         "hazardDetails": {
           "type": "array",
@@ -5179,11 +5179,11 @@
         },
         "hazardIndex": {
           "$ref": "#/definitions/HazardIndex",
-          "description": "An aggregated severity/hazard index for each waypoint, useful for\ncolor-coding route segments to indicate safety levels. The index is rated\nas follows: 0: No hazard 1: Be informed, be aware 2: Pay attention, be\nprepared 3: Take action 4: Life-threatening, emergency"
+          "description": "An aggregated severity/hazard index for each waypoint, useful for\ncolor-coding route segments to indicate safety levels. The index is rated\nas follows:\n\n- **0**: No hazard\n- **1**: Be informed, be aware\n- **2**: Pay attention, be prepared\n- **3**: Take action\n- **4**: Life-threatening, emergency"
         },
         "hazardCode": {
           "type": "string",
-          "description": "Consider a bulleted list, such as: A unique identifier for each type of\nhazard: - LightRain - ModerateRain - HeavyRain - LightMix - ModerateMix -\nHeavyMix - LightSnow - ModerateSnow - HeavySnow - LightIce - ModerateIce -\nHeavyIce - Hail - LargeHail - `SunGlare` - SunGlareHigh - Lightning -\nSevereLightning - WindModerate - WindHigh - WindExtreme - FloodWarning -\nFlashFloodWarning - TornadoWarning - TsunamiWarning -\nSevereThunderstormWarning"
+          "description": "A unique identifier for each type of hazard:\n\n- LightRain\n- ModerateRain\n- HeavyRain\n- LightMix\n- ModerateMix\n- HeavyMix\n- LightSnow\n- ModerateSnow\n- HeavySnow\n- LightIce\n- ModerateIce\n- HeavyIce\n- Hail\n- LargeHail\n- SunGlare\n- SunGlareHigh\n- Lightning\n- SevereLightning\n- WindModerate\n- WindHigh\n- WindExtreme\n- FloodWarning\n- FlashFloodWarning\n- TornadoWarning\n- TsunamiWarning\n- SevereThunderstormWarning"
         },
         "shortPhrase": {
           "type": "string",
@@ -5249,7 +5249,7 @@
         "value": {
           "type": "number",
           "format": "float",
-          "description": "The value property represents the specific measurement for any given\nweather parameter. For example, if the weather parameter is maximum\ntemperature, and the location is Dilworth Park in Philadelphia, PA the\nvalue is 21.1 °C."
+          "description": "The value property represents the specific measurement for any given\nweather parameter. For example, if the weather parameter is maximum\ntemperature, and the location is Dilworth Park in Philadelphia, PA\nthe value is 21.1 °C."
         },
         "unit": {
           "type": "string",
@@ -5279,7 +5279,7 @@
     },
     "WeatherValueYearMaxMinAvg": {
       "type": "object",
-      "description": "The WeatherUnitYearMaxMinAvg object returns the year in which both the\nminimum and the maximum temperatures occurred on a specified day, along with\nthe recorded amounts. Also returns the average temperature for the given\ndate. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the\nunit specified in the request.",
+      "description": "The WeatherUnitYearMaxMinAvg object returns the year in which both the\nminimum and the maximum temperatures occurred on a specified day, along with\nthe recorded amounts. Also returns the average temperature for the given\ndate. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the\nunit specified in the request.",
       "properties": {
         "maximum": {
           "$ref": "#/definitions/WeatherValueYear",
@@ -5310,20 +5310,20 @@
         "beginDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the forecast window begins. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
+          "description": "The date and time when the forecast window begins. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
         },
         "endDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the forecast window ends. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
+          "description": "The date and time when the forecast window ends. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
         },
         "beginStatus": {
           "type": "string",
-          "description": "The status of the tropical storm at the start of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
+          "description": "The status of the tropical storm at the start of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
         },
         "endStatus": {
           "type": "string",
-          "description": "The status of the tropical storm at the end of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
+          "description": "The status of the tropical storm at the end of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
         },
         "geometry": {
           "$ref": "#/definitions/GeoJsonGeometry",
