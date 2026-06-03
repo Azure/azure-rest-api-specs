@@ -93,8 +93,11 @@ using Microsoft.ManagedNetworkFabric;
   "java"
 );
 
-// Python SDK mitigations for TypeSpec migration
-@@clientName(Microsoft.ManagedNetworkFabric, "ManagedNetworkFabricMgmtClient", "python");
+@@clientName(
+  Microsoft.ManagedNetworkFabric,
+  "ManagedNetworkFabricMgmtClient",
+  "python"
+);
 @@clientName(
   Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
   "ManagementNetworkConfigurationPatchableProperties",
