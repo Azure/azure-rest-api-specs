@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -3632,6 +3633,30 @@ model Settings {
    * will be deprecated once clients upgrade to consider this flag.
    */
   isCompression?: boolean;
+
+  /**
+   * VDI (Virtual Device Interface) settings used while taking backups. Currently applicable to SQL workload only.
+   */
+  @added(Versions.v2026_06_01)
+  vdiSettings?: VdiSettings;
+}
+
+/**
+ * VDI settings used while taking backups. Controls multi-stream VDI behavior for SQL workloads.
+ */
+@added(Versions.v2026_06_01)
+model VdiSettings {
+  /**
+   * Flag to indicate whether multi-stream VDI backup is enabled for the workload.
+   */
+  isMultiVdiSupportEnabled?: boolean;
+
+  /**
+   * Number of VDI streams to use when multi-VDI is enabled. Allowed range is 1 to 32.
+   */
+  @minValue(1)
+  @maxValue(32)
+  noOfVdiStreams?: int32;
 }
 
 /**
