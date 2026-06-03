@@ -246,3 +246,19 @@ using TypeSpec.Http;
 @@usage(Gate, Usage.input, "csharp");
 @@usage(UpdateRunGateTargetProperties, Usage.input, "csharp");
 @@usage(GateTarget, Usage.input, "csharp");
+
+@@clientName(CiliumProperties, "ContainerServiceFleetCiliumProperties", "csharp");
+@@clientName(MeshMemberState, "ContainerServiceFleetMeshMemberState", "csharp");
+@@clientName(MeshMemberStatus, "ContainerServiceFleetMeshMemberStatus", "csharp");
+@@clientName(MeshProperties, "ContainerServiceFleetMeshMemberProperties", "csharp");
+@@clientName(UpdateRunGateStatus, "ContainerServiceFleetUpdateRunGateStatus", "csharp");
+@@clientName(
+  UpdateRunGateTargetProperties,
+  "ContainerServiceFleetUpdateRunGateTargetProperties",
+  "csharp"
+);
+@@clientName(
+  AutoUpgradeProfileProperties.longTermSupport,
+  "isLongTermSupport",
+  "csharp"
+);
