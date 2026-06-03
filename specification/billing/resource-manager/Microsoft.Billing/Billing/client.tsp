@@ -143,26 +143,118 @@ using Microsoft.Billing;
   "python"
 );
 
-// C# SDK customizations: model/property/enum/operation renames and type alternates derived from the legacy autorest.md (rename-mapping, prepend-rp-prefix, override-operation-name).
+// Restore GA SDK 1.2.2 C# names for models, properties, enums, enum-values, and operations.
+// Also covers workarounds for:
+//   - identical-valued union dedup (e.g. Enrollment*ViewCharges -> *ViewCharge),
+//   - CS0111 resource-method disambiguation (BillingProfiles/InvoiceSections products list -> GetProducts),
+//   - double-nested flatten name collisions (ReservationPurchaseRequest*.instanceFlexibility).
 @@clientName(AcceptanceMode, "AgreementAcceptanceMode", "csharp");
 @@clientName(AcceptTransferRequest, "AcceptTransferContent", "csharp");
 @@clientName(AccessDecision, "BillingProfileAccessDecision", "csharp");
+@@clientName(AccountStatus, "BillingAccountStatus", "csharp");
+@@clientName(AccountSubType, "BillingAccountSubType", "csharp");
+@@clientName(AccountType, "BillingAccountType", "csharp");
+@@clientName(AddressDetails, "BillingAddressDetails", "csharp");
 @@clientName(
   AddressValidationResponse,
   "BillingAddressValidationResult",
   "csharp"
 );
-@@clientName(AutoRenew, "BillingSubscriptionAutoRenewState", "csharp");
+@@clientName(
+  AddressValidationStatus,
+  "BillingAddressValidationStatus",
+  "csharp"
+);
+@@clientName(Agreement, "BillingAgreement", "csharp");
+@@clientName(AgreementProperties, "BillingAgreementProperties", "csharp");
+@@clientName(AgreementType, "BillingAgreementType", "csharp");
 @@clientName(Amount, "BillingAmount", "csharp");
+@@clientName(AppliedScopeProperties, "BillingAppliedScopeProperties", "csharp");
+@@clientName(AppliedScopeType, "BillingAppliedScopeType", "csharp");
+@@clientName(AssociatedTenant, "BillingAssociatedTenant", "csharp");
+@@clientName(
+  AssociatedTenantProperties,
+  "BillingAssociatedTenantProperties",
+  "csharp"
+);
+@@clientName(AutoRenew, "BillingSubscriptionAutoRenewState", "csharp");
 @@clientName(AvailableBalance, "BillingAvailableBalanceData", "csharp");
+@@clientName(
+  AvailableBalanceOperationGroup.getByBillingProfile,
+  "GetBillingProfileAvailableBalance",
+  "csharp"
+);
+@@clientName(
+  AvailableBalanceProperties,
+  "BillingAvailableBalanceProperties",
+  "csharp"
+);
+@@clientName(
+  AvailableBalances.getByBillingAccount,
+  "GetBillingAccountAvailableBalance",
+  "csharp"
+);
 @@clientName(AzurePlan, "BillingAzurePlan", "csharp");
+@@clientName(Beneficiary, "BillingBeneficiary", "csharp");
+@@clientName(
+  BillingAccounts.checkAccessByBillingAccount,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.createByBillingAccount,
+  "createByBillingAccountBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.listByBillingAccount,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.resolveByBillingAccount,
+  "resolveByBillingAccountBillingRoleAssignment",
+  "csharp"
+);
 @@clientName(
   BillingProfileProperties.invoiceEmailOptIn,
   "IsInvoiceEmailOptIn",
   "csharp"
 );
-@@clientName(BillingRelationshipType.CSPPartner, "CspPartner", "csharp");
+@@clientName(
+  BillingProfiles.checkAccessByBillingProfile,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.createByBillingProfile,
+  "createByBillingProfileBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.listByBillingProfile,
+  "getBillingPermissions",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@clientName(
+  BillingProfiles.productsListByBillingProfile,
+  "GetProducts",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.resolveByBillingProfile,
+  "resolveByBillingProfileBillingRoleAssignment",
+  "csharp"
+);
 @@clientName(BillingRelationshipType.CSPCustomer, "CspCustomer", "csharp");
+@@clientName(BillingRelationshipType.CSPPartner, "CspPartner", "csharp");
+@@clientName(BillingRequestProperties.type, "RequestType", "csharp");
+@@clientName(
+  BillingSubscriptionAliasProperties.beneficiaryTenantId,
+  "SubscriptionAliasBeneficiaryTenantId",
+  "csharp"
+);
 @@clientName(
   BillingSubscriptionAliasProperties.billingSubscriptionId,
   "SubscriptionAliasSubscriptionId",
@@ -174,8 +266,13 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
-  BillingSubscriptionAliasProperties.beneficiaryTenantId,
-  "SubscriptionAliasBeneficiaryTenantId",
+  BillingSubscriptionProperties.beneficiaryTenantId,
+  "BeneficiaryTenantId",
+  "csharp"
+);
+@@clientName(
+  BillingSubscriptionProperties.customerId,
+  "CustomerId",
   "csharp"
 );
 @@clientName(Cancellation, "PolicyOverrideCancellation", "csharp");
@@ -190,7 +287,57 @@ using Microsoft.Billing;
 @@clientName(Commitment, "BillingBenefitCommitment", "csharp");
 @@clientName(CommitmentGrain, "BillingBenefitCommitmentGrain", "csharp");
 @@clientName(CreditType, "BillingTransactionCreditType", "csharp");
+@@clientName(Customer, "BillingCustomer", "csharp");
+@@clientName(
+  CustomerOperationGroup.listByCustomerAtBillingAccount,
+  "getBillingPermissionsByCustomerAtBillingAccount",
+  "csharp"
+);
+@@clientName(CustomerPolicy, "BillingCustomerPolicy", "csharp");
+@@clientName(
+  CustomerPolicyProperties,
+  "BillingCustomerPolicyProperties",
+  "csharp"
+);
+@@clientName(CustomerProperties, "BillingCustomerProperties", "csharp");
+@@clientName(
+  Customers.checkAccessByCustomer,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  Customers.createByCustomer,
+  "createByCustomerBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  Customers.createOrUpdateByCustomer,
+  "createOrUpdateByCustomerPolicy",
+  "csharp"
+);
+@@clientName(
+  Customers.listByCustomer,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  Customers.resolveByCustomer,
+  "resolveByCustomerBillingRoleAssignment",
+  "csharp"
+);
 @@clientName(CustomerStatus, "BillingCustomerStatus", "csharp");
+@@clientName(Department, "BillingDepartment", "csharp");
+@@clientName(DepartmentProperties, "BillingDepartmentProperties", "csharp");
+@@clientName(
+  Departments.checkAccessByDepartment,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  Departments.listByDepartment,
+  "getBillingPermissions",
+  "csharp"
+);
 @@clientName(
   DocumentDownloadRequest,
   "BillingDocumentDownloadRequestContent",
@@ -201,19 +348,87 @@ using Microsoft.Billing;
 @@clientName(DocumentSource, "BillingDocumentSource", "csharp");
 @@clientName(DocumentSource.DRS, "Drs", "csharp");
 @@clientName(DocumentSource.ENF, "Enf", "csharp");
+@@clientName(EnrollmentAccount, "BillingEnrollmentAccount", "csharp");
+@@clientName(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  EnrollmentAccountOwnerViewCharges,
+  "EnrollmentAccountOwnerViewCharge",
+  "csharp"
+);
+@@clientName(
+  EnrollmentAccountProperties,
+  "BillingEnrollmentAccountProperties",
+  "csharp"
+);
+@@clientName(
+  EnrollmentDepartmentAdminViewCharges,
+  "EnrollmentDepartmentAdminViewCharge",
+  "csharp"
+);
 @@clientName(EnrollmentDetails, "BillingAccountEnrollmentDetails", "csharp");
 @@clientName(FailedPayment, "BillingInvoiceFailedPayment", "csharp");
+@@clientName(FailedPayment.date, "On", "csharp");
 @@clientName(
   FailedPaymentReason,
   "BillingInvoiceFailedPaymentReason",
   "csharp"
 );
-@@clientName(MarkupStatus, "EnrollmentMarkupStatus", "csharp");
+@@clientName(Invoice, "BillingInvoice", "csharp");
+@@clientName(InvoiceProperties, "BillingInvoiceProperties", "csharp");
 @@clientName(
-  MoveBillingSubscriptionRequest,
-  "BillingSubscriptionMoveContent",
+  Invoices.getTransactionSummaryByInvoice,
+  "getTransactionSummaryByInvoiceTransaction",
   "csharp"
 );
+@@clientName(
+  Invoices.transactionsDownloadByInvoice,
+  "transactionsDownloadByInvoiceTransaction",
+  "csharp"
+);
+@@clientName(InvoiceSection, "BillingInvoiceSection", "csharp");
+@@clientName(
+  InvoiceSectionProperties,
+  "BillingInvoiceSectionProperties",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.checkAccessByInvoiceSection,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.createByInvoiceSection,
+  "createByInvoiceSectionBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.listByInvoiceSection,
+  "getBillingPermissions",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@clientName(
+  InvoiceSections.productsListByInvoiceSection,
+  "GetProducts",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.resolveByInvoiceSection,
+  "resolveByInvoiceSectionBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(InvoiceStatus, "BillingInvoiceStatus", "csharp");
+@@clientName(InvoiceType, "BillingInvoiceType", "csharp");
+@@clientName(MarkupStatus, "EnrollmentMarkupStatus", "csharp");
 @@clientName(
   MoveBillingSubscriptionEligibilityResult,
   "BillingSubscriptionValidateMoveEligibilityResult",
@@ -224,15 +439,78 @@ using Microsoft.Billing;
   "BillingSubscriptionValidateMoveEligibilityError",
   "csharp"
 );
+@@clientName(
+  MoveBillingSubscriptionRequest,
+  "BillingSubscriptionMoveContent",
+  "csharp"
+);
 @@clientName(MoveProductRequest, "MoveProductContent", "csharp");
 @@clientName(
   NextBillingCycleDetails.billingFrequency,
   "NextBillingCycleBillingFrequency",
   "csharp"
 );
+@@clientName(Operation, "BillingOperationInfo", "csharp");
+@@clientName(OperationDisplay, "BillingOperationDisplay", "csharp");
+@@clientName(OperationListResult, "BillingOperationInfoListResult", "csharp");
 @@clientName(Participant, "BillingAgreementParticipant", "csharp");
+@@clientName(PartnerTransferDetails, "PartnerTransferDetail", "csharp");
+@@clientName(PatchProperties.renew, "IsRenewed", "csharp");
+@@clientName(Payment, "BillingInvoicePayment", "csharp");
+@@clientName(Payment.date, "MadeOn", "csharp");
+@@clientName(PaymentDetail, "BillingPlanPaymentDetail", "csharp");
+@@clientName(PaymentDetail.paymentDate, "PaymentCompletedOn", "csharp");
+@@clientName(PaymentMethod, "BillingPaymentMethod", "csharp");
+@@clientName(PaymentMethodLink, "BillingPaymentMethodLink", "csharp");
+@@clientName(
+  PaymentMethodProperties,
+  "PaymentMethodProjectionProperties",
+  "csharp"
+);
+@@clientName(PaymentMethodProperties.id, "PaymentMethodId", "csharp");
+@@clientName(PaymentOnAccount, "BillingPaymentOnAccount", "csharp");
+@@clientName(PaymentOnAccount.date, "On", "csharp");
+@@clientName(PaymentStatus, "BillingPaymentStatus", "csharp");
+@@clientName(PaymentTerm, "BillingPaymentTerm", "csharp");
+@@clientName(PolicySummary, "BillingPolicySummary", "csharp");
+@@clientName(PolicyType, "BillingPolicyType", "csharp");
+@@clientName(Price, "BillingPrice", "csharp");
+@@clientName(Principal, "BillingPrincipal", "csharp");
+@@clientName(PrincipalType, "BillingPrincipalType", "csharp");
+@@clientName(Product, "BillingProduct", "csharp");
+@@clientName(ProductDetails, "BillingProductDetails", "csharp");
+@@clientName(ProductProperties, "BillingProductProperties", "csharp");
+@@clientName(ProductStatus, "BillingProductStatus", "csharp");
+@@clientName(ProductTransferStatus, "BillingProductTransferStatus", "csharp");
+@@clientName(ProductType, "BillingProductType", "csharp");
+@@clientName(ProductType.SAAS, "Saas", "csharp");
+@@clientName(ProvisioningState, "BillingProvisioningState", "csharp");
+@@clientName(
+  ProvisioningTenantState,
+  "BillingProvisioningTenantState",
+  "csharp"
+);
+@@clientName(PurchaseRequest, "BillingPurchaseProperties", "csharp");
+@@clientName(PurchaseRequestProperties.renew, "IsRenewed", "csharp");
+@@clientName(RebillDetails.rebillDetails, "RebillDetailsValue", "csharp");
+@@clientName(RecipientTransferDetails, "RecipientTransferDetail", "csharp");
+@@clientName(RegistrationNumber, "BillingRegistrationNumber", "csharp");
+@@clientName(RegistrationNumber.required, "IsRequired", "csharp");
+@@clientName(RegistrationNumber.type, "RegistrationNumberType", "csharp");
 @@clientName(RenewalTermDetails, "SubscriptionRenewalTermDetails", "csharp");
+@@clientName(RenewProperties, "BillingRenewProperties", "csharp");
+@@clientName(RenewPropertiesResponse, "ReservationRenewProperties", "csharp");
 @@clientName(Reseller, "CreatedSubscriptionReseller", "csharp");
+@@clientName(Reservation, "BillingReservation", "csharp");
+@@clientName(ReservationOrder, "BillingReservationOrder", "csharp");
+@@clientName(ReservationOrderProperty.expiryDate, "ExpireOn", "csharp");
+@@clientName(
+  ReservationOrderProperty.expiryDateTime,
+  "ReservationExpireOn",
+  "csharp"
+);
+@@clientName(ReservationOrderProperty.reviewDateTime, "ReviewedOn", "csharp");
+@@clientName(ReservationProperty.archived, "IsArchived", "csharp");
 @@clientName(ReservationProperty.expiryDate, "ExpireOn", "csharp");
 @@clientName(
   ReservationProperty.expiryDateTime,
@@ -245,33 +523,21 @@ using Microsoft.Billing;
   "ReservationPurchaseOn",
   "csharp"
 );
-@@clientName(ReservationProperty.archived, "IsArchived", "csharp");
 @@clientName(ReservationProperty.renew, "IsRenewed", "csharp");
-@@clientName(ReservationOrderProperty.expiryDate, "ExpireOn", "csharp");
 @@clientName(
-  ReservationOrderProperty.expiryDateTime,
-  "ReservationExpireOn",
+  ReservationPurchaseRequestProperties.instanceFlexibility,
+  "InstanceFlexibilityPropertiesInstanceFlexibility",
   "csharp"
 );
-@@clientName(ReservationOrderProperty.reviewDateTime, "ReviewedOn", "csharp");
 @@clientName(ReservationPurchaseRequestProperties.renew, "IsRenewed", "csharp");
-@@clientName(Payment, "BillingInvoicePayment", "csharp");
-@@clientName(Payment.date, "MadeOn", "csharp");
-@@clientName(PaymentDetail, "BillingPlanPaymentDetail", "csharp");
-@@clientName(PaymentDetail.paymentDate, "PaymentCompletedOn", "csharp");
-@@clientName(PaymentMethodProperties.id, "PaymentMethodId", "csharp");
 @@clientName(
-  PaymentMethodProperties,
-  "PaymentMethodProjectionProperties",
+  ReservationPurchaseRequestPropertiesReservedResourceProperties.instanceFlexibility,
+  "InstanceFlexibilityPropertiesReservedResourcePropertiesInstanceFlexibility",
   "csharp"
 );
-@@clientName(PatchProperties.renew, "IsRenewed", "csharp");
-@@clientName(PurchaseRequest, "BillingPurchaseProperties", "csharp");
-@@clientName(PurchaseRequestProperties.renew, "IsRenewed", "csharp");
-@@clientName(RegistrationNumber.required, "IsRequired", "csharp");
-@@clientName(RenewPropertiesResponse, "ReservationRenewProperties", "csharp");
 @@clientName(SavingsPlanModel, "BillingSavingsPlanModel", "csharp");
 @@clientName(SavingsPlanModelProperties.renew, "IsRenewed", "csharp");
+@@clientName(SavingsPlanTerm, "BillingSavingsPlanTerm", "csharp");
 @@clientName(SavingsPlanUpdateRequestProperties.renew, "IsRenewed", "csharp");
 @@clientName(
   SavingsPlanValidateResponse,
@@ -279,9 +545,25 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(SavingsPlanValidResponseProperty.valid, "IsValid", "csharp");
+@@clientName(SpendingLimit, "BillingSpendingLimit", "csharp");
+@@clientName(SpendingLimitDetails.type, "LimitType", "csharp");
+@@clientName(SpendingLimitType.MSDN, "Msdn", "csharp");
+@@clientName(SupportedAccountType, "BillingSupportedAccountType", "csharp");
 @@clientName(SupportLevel, "BillingEnrollmentSupportLevel", "csharp");
+@@clientName(SystemOverrides, "BillingSystemOverrides", "csharp");
+@@clientName(TaxIdentifier, "BillingTaxIdentifier", "csharp");
+@@clientName(TaxIdentifier.type, "IdentifierType", "csharp");
+@@clientName(TaxIdentifierStatus, "BillingTaxIdentifierStatus", "csharp");
+@@clientName(TaxIdentifierType, "BillingTaxIdentifierType", "csharp");
 @@clientName(Transaction, "BillingTransactionData", "csharp");
+@@clientName(TransactionKind, "BillingTransactionKind", "csharp");
+@@clientName(TransactionProperties, "BillingTransactionProperties", "csharp");
+@@clientName(TransactionProperties.date, "On", "csharp");
+@@clientName(TransactionSummary, "BillingTransactionSummary", "csharp");
+@@clientName(TransferDetails, "BillingTransferDetail", "csharp");
+@@clientName(TransferError, "BillingTransferError", "csharp");
 @@clientName(TransferStatus, "PartnerTransferStatus", "csharp");
+@@clientName(TransitionDetails, "BillingTransitionDetails", "csharp");
 @@clientName(Utilization, "SavingsPlanUtilization", "csharp");
 @@clientName(
   UtilizationAggregates,
@@ -298,202 +580,10 @@ using Microsoft.Billing;
   "BillingTransferValidationResultProperties",
   "csharp"
 );
-@@clientName(AccountStatus, "BillingAccountStatus", "csharp");
-@@clientName(AccountSubType, "BillingAccountSubType", "csharp");
-@@clientName(AccountType, "BillingAccountType", "csharp");
-@@clientName(AddressDetails, "BillingAddressDetails", "csharp");
-@@clientName(
-  AddressValidationStatus,
-  "BillingAddressValidationStatus",
-  "csharp"
-);
-@@clientName(AgreementType, "BillingAgreementType", "csharp");
-@@clientName(Agreement, "BillingAgreement", "csharp");
-@@clientName(AgreementProperties, "BillingAgreementProperties", "csharp");
-@@clientName(AppliedScopeProperties, "BillingAppliedScopeProperties", "csharp");
-@@clientName(AppliedScopeType, "BillingAppliedScopeType", "csharp");
-@@clientName(AssociatedTenant, "BillingAssociatedTenant", "csharp");
-@@clientName(
-  AssociatedTenantProperties,
-  "BillingAssociatedTenantProperties",
-  "csharp"
-);
-@@clientName(
-  AvailableBalanceProperties,
-  "BillingAvailableBalanceProperties",
-  "csharp"
-);
-@@clientName(Beneficiary, "BillingBeneficiary", "csharp");
-@@clientName(Customer, "BillingCustomer", "csharp");
-@@clientName(CustomerProperties, "BillingCustomerProperties", "csharp");
-@@clientName(CustomerPolicy, "BillingCustomerPolicy", "csharp");
-@@clientName(
-  CustomerPolicyProperties,
-  "BillingCustomerPolicyProperties",
-  "csharp"
-);
-@@clientName(Department, "BillingDepartment", "csharp");
-@@clientName(DepartmentProperties, "BillingDepartmentProperties", "csharp");
-@@clientName(EnrollmentAccount, "BillingEnrollmentAccount", "csharp");
-@@clientName(
-  EnrollmentAccountProperties,
-  "BillingEnrollmentAccountProperties",
-  "csharp"
-);
-@@clientName(Invoice, "BillingInvoice", "csharp");
-@@clientName(InvoiceProperties, "BillingInvoiceProperties", "csharp");
-@@clientName(InvoiceSection, "BillingInvoiceSection", "csharp");
-@@clientName(
-  InvoiceSectionProperties,
-  "BillingInvoiceSectionProperties",
-  "csharp"
-);
-@@clientName(InvoiceStatus, "BillingInvoiceStatus", "csharp");
-@@clientName(InvoiceType, "BillingInvoiceType", "csharp");
-@@clientName(PaymentMethod, "BillingPaymentMethod", "csharp");
-@@clientName(PaymentMethodLink, "BillingPaymentMethodLink", "csharp");
-@@clientName(PaymentOnAccount, "BillingPaymentOnAccount", "csharp");
-@@clientName(PaymentStatus, "BillingPaymentStatus", "csharp");
-@@clientName(PaymentTerm, "BillingPaymentTerm", "csharp");
-@@clientName(PolicySummary, "BillingPolicySummary", "csharp");
-@@clientName(PolicyType, "BillingPolicyType", "csharp");
-@@clientName(Price, "BillingPrice", "csharp");
-@@clientName(Principal, "BillingPrincipal", "csharp");
-@@clientName(PrincipalType, "BillingPrincipalType", "csharp");
-@@clientName(ProvisioningState, "BillingProvisioningState", "csharp");
-@@clientName(Product, "BillingProduct", "csharp");
-@@clientName(ProductProperties, "BillingProductProperties", "csharp");
-@@clientName(ProductDetails, "BillingProductDetails", "csharp");
-@@clientName(ProductStatus, "BillingProductStatus", "csharp");
-@@clientName(ProductTransferStatus, "BillingProductTransferStatus", "csharp");
-@@clientName(ProductType, "BillingProductType", "csharp");
-@@clientName(ProductType.SAAS, "Saas", "csharp");
-@@clientName(
-  ProvisioningTenantState,
-  "BillingProvisioningTenantState",
-  "csharp"
-);
-@@clientName(RenewProperties, "BillingRenewProperties", "csharp");
-@@clientName(Reservation, "BillingReservation", "csharp");
-@@clientName(ReservationOrder, "BillingReservationOrder", "csharp");
-@@clientName(RegistrationNumber, "BillingRegistrationNumber", "csharp");
-@@clientName(SavingsPlanTerm, "BillingSavingsPlanTerm", "csharp");
-@@clientName(SpendingLimit, "BillingSpendingLimit", "csharp");
-@@clientName(SupportedAccountType, "BillingSupportedAccountType", "csharp");
-@@clientName(SystemOverrides, "BillingSystemOverrides", "csharp");
-@@clientName(TaxIdentifier, "BillingTaxIdentifier", "csharp");
-@@clientName(TaxIdentifierType, "BillingTaxIdentifierType", "csharp");
-@@clientName(TaxIdentifierStatus, "BillingTaxIdentifierStatus", "csharp");
-@@clientName(TransactionKind, "BillingTransactionKind", "csharp");
-@@clientName(TransactionProperties, "BillingTransactionProperties", "csharp");
-@@clientName(TransactionSummary, "BillingTransactionSummary", "csharp");
-@@clientName(TransferDetails, "BillingTransferDetail", "csharp");
-@@clientName(PartnerTransferDetails, "PartnerTransferDetail", "csharp");
-@@clientName(RecipientTransferDetails, "RecipientTransferDetail", "csharp");
-@@clientName(TransferError, "BillingTransferError", "csharp");
-@@clientName(TransitionDetails, "BillingTransitionDetails", "csharp");
-@@clientName(
-  AvailableBalances.getByBillingAccount,
-  "GetBillingAccountAvailableBalance",
-  "csharp"
-);
-@@clientName(
-  AvailableBalanceOperationGroup.getByBillingProfile,
-  "GetBillingProfileAvailableBalance",
-  "csharp"
-);
-@@clientName(BillingRequestProperties.type, "RequestType", "csharp");
-@@alternateType(DocumentDownloadResult.expiryTime, utcDateTime, "csharp");
-@@alternateType(ReservationProperty.expiryDate, utcDateTime, "csharp");
-@@alternateType(
-  PaymentMethodProperties.id,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  PaymentOnAccount.invoiceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  RebillDetails.invoiceDocumentId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  RebillDetails.creditNoteDocumentId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  RefundDetailsSummary.rebillInvoiceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  TransactionProperties.invoiceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
 
-// Disambiguate identical-valued unions (workaround for MPG generator dedup bug)
-@@clientName(
-  EnrollmentAccountOwnerViewCharges,
-  "EnrollmentAccountOwnerViewCharge",
-  "csharp"
-);
-@@clientName(
-  EnrollmentDepartmentAdminViewCharges,
-  "EnrollmentDepartmentAdminViewCharge",
-  "csharp"
-);
-
-// Resource-level method disambiguation: multiple @get @action ops on same parent resource share name "GetBy<Parent>" causing CS0111.
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@clientName(
-  BillingProfiles.productsListByBillingProfile,
-  "GetProducts",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@clientName(
-  InvoiceSections.productsListByInvoiceSection,
-  "GetProducts",
-  "csharp"
-);
-
-@@clientName(
-  ReservationPurchaseRequestPropertiesReservedResourceProperties.instanceFlexibility,
-  "InstanceFlexibilityPropertiesReservedResourcePropertiesInstanceFlexibility",
-  "csharp"
-);
-@@clientName(
-  ReservationPurchaseRequestProperties.instanceFlexibility,
-  "InstanceFlexibilityPropertiesInstanceFlexibility",
-  "csharp"
-);
-@@clientName(
-  BillingSubscriptionProperties.customerId,
-  "CustomerId",
-  "csharp"
-);
-@@clientName(
-  BillingSubscriptionProperties.beneficiaryTenantId,
-  "BeneficiaryTenantId",
-  "csharp"
-);
-@@clientName(SpendingLimitType.MSDN, "Msdn", "csharp");
-
-// NOTE: Spec-side rename of action-payload models (*Request -> *Content) via
-// @@clientName is unsafe when combined with @@clientLocation: the MPG emitter
-// silently drops the action method from the Resource/Collection, leaving only
-// the REST operation and the model class. Verified on all 6 candidate types
-// (Merge/Split/Cancel/Initiate/PartnerInitiate/SavingsPlanUpdateValidate).
-// Tracking the emitter regression upstream; until fixed, the GA *Content classes
-// are kept as hand-written Custom/Models/*Content shims (with [WirePath(...)]).
-
-// Restore GA C# types for *Id (ResourceIdentifier), *Uri (Uri), tenant IDs (Guid?), and
-// termDuration (TimeSpan?). Spec models these as `string`; @@alternateType maps to the GA shapes.
+// Restore GA C# property types that the new spec models as plain `string`:
+//   resource IDs -> Azure.Core.armResourceIdentifier, URLs -> url, tenant IDs -> uuid (Guid?),
+//   dates that lost their utcDateTime base -> utcDateTime, termDuration -> duration (TimeSpan?).
 @@alternateType(
   BillingSubscriptionProperties.beneficiaryTenantId,
   uuid,
@@ -509,16 +599,69 @@ using Microsoft.Billing;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(BillingSubscriptionProperties.resourceUri, url, "csharp");
-@@alternateType(BillingSubscriptionProperties.termDuration, duration, "csharp");
 @@alternateType(
   BillingSubscriptionProperties.provisioningTenantId,
   uuid,
   "csharp"
 );
-
+@@alternateType(BillingSubscriptionProperties.resourceUri, url, "csharp");
+@@alternateType(BillingSubscriptionProperties.termDuration, duration, "csharp");
+@@alternateType(DocumentDownloadResult.expiryTime, utcDateTime, "csharp");
+@@alternateType(
+  PaymentMethodLinkProperties.paymentMethodId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PaymentMethodProperties.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PaymentOnAccount.invoiceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RebillDetails.creditNoteDocumentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RebillDetails.invoiceDocumentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RecipientTransferProperties.customerTenantId, uuid, "csharp");
+@@alternateType(
+  RefundDetailsSummary.rebillInvoiceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RenewalTermDetails.termDuration, duration, "csharp");
+@@alternateType(
+  ReservationOrderProperty.billingAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ReservationOrderProperty.billingProfileId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ReservationOrderProperty.customerId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ReservationProperty.expiryDate, utcDateTime, "csharp");
 @@alternateType(
   SavingsPlanModelProperties.billingAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SavingsPlanModelProperties.billingProfileId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -528,13 +671,12 @@ using Microsoft.Billing;
   "csharp"
 );
 @@alternateType(
-  SavingsPlanModelProperties.billingProfileId,
+  SavingsPlanOrderModelProperties.billingAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
 @@alternateType(
-  SavingsPlanOrderModelProperties.billingAccountId,
+  SavingsPlanOrderModelProperties.billingProfileId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -544,58 +686,89 @@ using Microsoft.Billing;
   "csharp"
 );
 @@alternateType(
-  SavingsPlanOrderModelProperties.billingProfileId,
+  TransactionProperties.invoiceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(
-  ReservationOrderProperty.billingAccountId,
-  Azure.Core.armResourceIdentifier,
+// Pin BillingPermissions/CheckAccess family operations back to the parent Resource for C#.
+// back-compatible.tsp routes them to synthetic sub-clients for non-C# emitters; GA SDK 1.2.2
+// exposed them directly on the parent Resource (e.g. BillingAccountResource.GetBillingPermissions).
+@@clientLocation(
+  BillingAccounts.checkAccessByBillingAccount,
+  BillingAccounts,
   "csharp"
 );
-@@alternateType(
-  ReservationOrderProperty.customerId,
-  Azure.Core.armResourceIdentifier,
+@@clientLocation(
+  BillingAccounts.listByBillingAccount,
+  BillingAccounts,
   "csharp"
 );
-@@alternateType(
-  ReservationOrderProperty.billingProfileId,
-  Azure.Core.armResourceIdentifier,
+@@clientLocation(
+  BillingProfiles.checkAccessByBillingProfile,
+  BillingProfiles,
+  "csharp"
+);
+@@clientLocation(
+  BillingProfiles.listByBillingProfile,
+  BillingProfiles,
+  "csharp"
+);
+@@clientLocation(
+  CustomerOperationGroup.listByCustomerAtBillingAccount,
+  CustomerOperationGroup,
+  "csharp"
+);
+@@clientLocation(Customers.checkAccessByCustomer, Customers, "csharp");
+@@clientLocation(Customers.listByCustomer, Customers, "csharp");
+@@clientLocation(
+  Departments.checkAccessByDepartment,
+  Departments,
+  "csharp"
+);
+@@clientLocation(Departments.listByDepartment, Departments, "csharp");
+@@clientLocation(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
+  EnrollmentAccountOperationGroup,
+  "csharp"
+);
+@@clientLocation(
+  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
+  EnrollmentAccountOperationGroup,
+  "csharp"
+);
+@@clientLocation(
+  InvoiceSections.checkAccessByInvoiceSection,
+  InvoiceSections,
+  "csharp"
+);
+@@clientLocation(
+  InvoiceSections.listByInvoiceSection,
+  InvoiceSections,
   "csharp"
 );
 
-@@alternateType(
-  PaymentMethodLinkProperties.paymentMethodId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-
-@@alternateType(RenewalTermDetails.termDuration, duration, "csharp");
-
-@@clientName(Operation, "BillingOperationInfo", "csharp");
-@@clientName(OperationDisplay, "BillingOperationDisplay", "csharp");
-@@clientName(OperationListResult, "BillingOperationInfoListResult", "csharp");
-
-// Workaround for MPG emitter no-matching-items-property error:
-// `BillingAccounts.savingsPlansListByBillingAccount` returns `SavingsPlanModelListResult`,
-// which `extends SavingsPlanModelList` (which `is Azure.Core.Page<SavingsPlanModel>`).
-// The C# emitter cannot resolve the inherited `value`/`nextLink` properties as pagination
-// metadata through `extends`, and `@@pageItems` / `Legacy.markAsPageable` workarounds in
-// client.tsp do not propagate either. Suppress the operation for C# only.
-// Tracking issue: https://github.com/Azure/azure-sdk-for-net/issues/59567
-// Removal criteria: once the emitter resolves inherited Page<T> properties through
-// `extends`, drop this `@@scope` line and regenerate to restore
-// `BillingAccountResource.GetByBillingAccountSavingsPlan(Options)`.
+// Workaround for MPG emitter no-matching-items-property error on
+// BillingAccounts.savingsPlansListByBillingAccount — the C# emitter cannot resolve inherited
+// value/nextLink properties through `extends SavingsPlanModelList is Page<SavingsPlanModel>`.
+// Tracking: https://github.com/Azure/azure-sdk-for-net/issues/59567. Remove once fixed.
 @@scope(BillingAccounts.savingsPlansListByBillingAccount, "!csharp");
 
 // Restore public setters / parameterless ctors on input models that the new spec marks output-only.
-// MPG generator drops setters and ctors when usage is read-only; @@usage(Usage.input, "csharp") restores both.
-@@usage(BillingAccount, Usage.input, "csharp");
+// MPG generator drops setters and ctors when usage is read-only; @@usage(Usage.input, "csharp")
+// restores both — required for GA 1.2.2 input + Transfer detail resources whose ctors were public.
 @@usage(Agreement, Usage.input, "csharp");
 @@usage(AgreementProperties, Usage.input, "csharp");
 @@usage(AvailableBalance, Usage.input, "csharp");
 @@usage(AvailableBalanceProperties, Usage.input, "csharp");
+@@usage(BillingAccount, Usage.input, "csharp");
+@@usage(BillingPlanInformation, Usage.input, "csharp");
+@@usage(BillingRequestProperties, Usage.input, "csharp");
+@@usage(BillingRoleDefinition, Usage.input, "csharp");
+@@usage(BillingRoleDefinitionProperties, Usage.input, "csharp");
+@@usage(BillingSubscription, Usage.input, "csharp");
+@@usage(BillingSubscriptionAlias, Usage.input, "csharp");
+@@usage(BillingSubscriptionPatch, Usage.input, "csharp");
 @@usage(Customer, Usage.input, "csharp");
 @@usage(CustomerProperties, Usage.input, "csharp");
 @@usage(Department, Usage.input, "csharp");
@@ -604,66 +777,49 @@ using Microsoft.Billing;
 @@usage(EnrollmentAccountProperties, Usage.input, "csharp");
 @@usage(Invoice, Usage.input, "csharp");
 @@usage(InvoiceProperties, Usage.input, "csharp");
+@@usage(PartnerTransferDetails, Usage.input, "csharp");
+@@usage(PartnerTransferProperties, Usage.input, "csharp");
+@@usage(PaymentDetail, Usage.input, "csharp");
 @@usage(PaymentMethod, Usage.input, "csharp");
 @@usage(PaymentMethodLink, Usage.input, "csharp");
-@@usage(BillingPlanInformation, Usage.input, "csharp");
-@@usage(PaymentDetail, Usage.input, "csharp");
-@@usage(Product, Usage.input, "csharp");
-@@usage(BillingRequestProperties, Usage.input, "csharp");
-@@usage(Reservation, Usage.input, "csharp");
-@@usage(ReservationOrder, Usage.input, "csharp");
-@@usage(BillingRoleDefinition, Usage.input, "csharp");
-@@usage(BillingRoleDefinitionProperties, Usage.input, "csharp");
-@@usage(SavingsPlanModel, Usage.input, "csharp");
-@@usage(BillingSubscriptionAlias, Usage.input, "csharp");
-@@usage(BillingSubscription, Usage.input, "csharp");
-@@usage(BillingSubscriptionPatch, Usage.input, "csharp");
-@@usage(TaxIdentifier, Usage.input, "csharp");
-@@usage(Transaction, Usage.input, "csharp");
-@@usage(TransactionProperties, Usage.input, "csharp");
 @@usage(PaymentMethodLogo, Usage.input, "csharp");
 @@usage(PaymentMethodProperties, Usage.input, "csharp");
+@@usage(Product, Usage.input, "csharp");
+@@usage(RecipientTransferDetails, Usage.input, "csharp");
+@@usage(RecipientTransferProperties, Usage.input, "csharp");
 @@usage(RefundDetailsSummary, Usage.input, "csharp");
 @@usage(RefundTransactionDetails, Usage.input, "csharp");
+@@usage(RenewPropertiesResponse, Usage.input, "csharp");
+@@usage(Reservation, Usage.input, "csharp");
 @@usage(ReservationExtendedStatusInfo, Usage.input, "csharp");
 @@usage(ReservationMergeProperties, Usage.input, "csharp");
+@@usage(ReservationOrder, Usage.input, "csharp");
 @@usage(ReservationOrderBillingPlanInformation, Usage.input, "csharp");
 @@usage(ReservationPaymentDetail, Usage.input, "csharp");
 @@usage(ReservationPurchaseRequest, Usage.input, "csharp");
-@@usage(RenewPropertiesResponse, Usage.input, "csharp");
 @@usage(ReservationSplitProperties, Usage.input, "csharp");
 @@usage(ReservationSwapProperties, Usage.input, "csharp");
 @@usage(ReservationUtilizationAggregates, Usage.input, "csharp");
+@@usage(SavingsPlanModel, Usage.input, "csharp");
 @@usage(SavingsPlanOrderModel, Usage.input, "csharp");
+@@usage(Sku, Usage.input, "csharp");
 @@usage(SubscriptionPolicy, Usage.input, "csharp");
 @@usage(SubscriptionPolicyProperties, Usage.input, "csharp");
-@@usage(Sku, Usage.input, "csharp");
+@@usage(TaxIdentifier, Usage.input, "csharp");
+@@usage(Transaction, Usage.input, "csharp");
+@@usage(TransactionProperties, Usage.input, "csharp");
+@@usage(TransferDetails, Usage.input, "csharp");
+@@usage(TransferProperties, Usage.input, "csharp");
+
+// Restore GA-public Sku model (the new spec marks it internal-only).
 @@access(Sku, Access.public, "csharp");
 
-// D7 fix: restore public parameterless ctors on Transfer detail resources by marking the
-// underlying TypeSpec models as Usage.input (the new spec makes them read-only).
-@@usage(TransferDetails, Usage.input, "csharp");
-@@usage(PartnerTransferDetails, Usage.input, "csharp");
-@@usage(RecipientTransferDetails, Usage.input, "csharp");
-@@usage(TransferProperties, Usage.input, "csharp");
-@@usage(PartnerTransferProperties, Usage.input, "csharp");
-@@usage(RecipientTransferProperties, Usage.input, "csharp");
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Reservation,
-  Azure.ResourceManager.CommonTypes.TrackedResource,
-  "csharp"
-);
+// Restore GA inheritance: Reservation extended TrackedResource and the *Patch models extended
+// ProxyResource in 1.2.2. The new spec defines them as standalone models; this decorator
+// re-introduces the GA base type for source/binary compat.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BillingAccountPatch,
-  Azure.ResourceManager.CommonTypes.ProxyResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  ProductPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
@@ -675,219 +831,19 @@ using Microsoft.Billing;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Transaction,
+  ProductPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
-
-// D19 fix: restore GA property names that the new spec renamed/restructured.
-@@clientName(FailedPayment.date, "On", "csharp");
-@@clientName(PaymentOnAccount.date, "On", "csharp");
-@@clientName(TransactionProperties.date, "On", "csharp");
-@@clientName(RegistrationNumber.type, "RegistrationNumberType", "csharp");
-@@clientName(TaxIdentifier.type, "IdentifierType", "csharp");
-@@clientName(SpendingLimitDetails.type, "LimitType", "csharp");
-@@clientName(RebillDetails.rebillDetails, "RebillDetailsValue", "csharp");
-
-// D3 fix: GA emitted RecipientTransferDetailData.CustomerTenantId as Guid?, but the new spec
-// declares customerTenantId as plain string. Force the C# property type back to Guid via uuid alias.
-@@alternateType(RecipientTransferProperties.customerTenantId, uuid, "csharp");
-
-// =====================================================================================
-// D20: C# back-compat for GA SDK 1.2.2 method placement and names.
-//
-// (1) back-compatible.tsp moves several List/CheckAccess ops onto a synthetic
-//     "BillingPermissions" sub-client (multi-language). GA SDK 1.2.2 instead exposed those
-//     methods directly on the parent Resource (e.g. BillingAccountResource.GetBillingPermissions).
-//     Override @@clientLocation with a C#-scoped directive that pins them back to the natural
-//     parent interface so they appear on the parent Resource in the .NET SDK.
-//
-// (2) MPG derives Action/List method names from the operation identifier (e.g. "ListByBillingAccount"),
-//     while GA SDK 1.2.2 used "GetBillingPermissions". Use @@clientName(..., "csharp") to override
-//     just the C# method name, preserving wire/spec names.
-// =====================================================================================
-
-// (1) Pin BillingPermissions family back to their parent Resource for C# only.
-@@clientLocation(
-  BillingAccounts.listByBillingAccount,
-  BillingAccounts,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Reservation,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
-@@clientLocation(
-  BillingAccounts.checkAccessByBillingAccount,
-  BillingAccounts,
-  "csharp"
-);
-@@clientLocation(
-  BillingProfiles.listByBillingProfile,
-  BillingProfiles,
-  "csharp"
-);
-@@clientLocation(
-  BillingProfiles.checkAccessByBillingProfile,
-  BillingProfiles,
-  "csharp"
-);
-@@clientLocation(Customers.listByCustomer, Customers, "csharp");
-@@clientLocation(Customers.checkAccessByCustomer, Customers, "csharp");
-@@clientLocation(
-  CustomerOperationGroup.listByCustomerAtBillingAccount,
-  CustomerOperationGroup,
-  "csharp"
-);
-@@clientLocation(
-  Departments.listByDepartment,
-  Departments,
-  "csharp"
-);
-@@clientLocation(
-  Departments.checkAccessByDepartment,
-  Departments,
-  "csharp"
-);
-@@clientLocation(
-  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
-  EnrollmentAccountOperationGroup,
-  "csharp"
-);
-@@clientLocation(
-  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
-  EnrollmentAccountOperationGroup,
-  "csharp"
-);
-@@clientLocation(
-  InvoiceSections.listByInvoiceSection,
-  InvoiceSections,
-  "csharp"
-);
-@@clientLocation(
-  InvoiceSections.checkAccessByInvoiceSection,
-  InvoiceSections,
-  "csharp"
-);
-
-// (2a) Pattern A: BillingPermissions family - rename methods to GA-style names.
-@@clientName(
-  BillingAccounts.checkAccessByBillingAccount,
-  "checkAccessBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  BillingAccounts.listByBillingAccount,
-  "getBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  BillingProfiles.checkAccessByBillingProfile,
-  "checkAccessBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  BillingProfiles.listByBillingProfile,
-  "getBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  Customers.checkAccessByCustomer,
-  "checkAccessBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  Customers.listByCustomer,
-  "getBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  CustomerOperationGroup.listByCustomerAtBillingAccount,
-  "getBillingPermissionsByCustomerAtBillingAccount",
-  "csharp"
-);
-@@clientName(
-  Departments.checkAccessByDepartment,
-  "checkAccessBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  Departments.listByDepartment,
-  "getBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
-  "checkAccessBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
-  "getBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  InvoiceSections.checkAccessByInvoiceSection,
-  "checkAccessBillingPermissions",
-  "csharp"
-);
-@@clientName(
-  InvoiceSections.listByInvoiceSection,
-  "getBillingPermissions",
-  "csharp"
-);
-
-// (2b) Pattern B: BillingRoleAssignment family - GA suffixes parent scope in method name.
-@@clientName(
-  BillingAccounts.createByBillingAccount,
-  "createByBillingAccountBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  BillingAccounts.resolveByBillingAccount,
-  "resolveByBillingAccountBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  BillingProfiles.createByBillingProfile,
-  "createByBillingProfileBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  BillingProfiles.resolveByBillingProfile,
-  "resolveByBillingProfileBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  Customers.createByCustomer,
-  "createByCustomerBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  Customers.resolveByCustomer,
-  "resolveByCustomerBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  InvoiceSections.createByInvoiceSection,
-  "createByInvoiceSectionBillingRoleAssignment",
-  "csharp"
-);
-@@clientName(
-  InvoiceSections.resolveByInvoiceSection,
-  "resolveByInvoiceSectionBillingRoleAssignment",
-  "csharp"
-);
-
-// (2c) Pattern C-1: Individual ops needing GA-named restoration.
-@@clientName(
-  Invoices.transactionsDownloadByInvoice,
-  "transactionsDownloadByInvoiceTransaction",
-  "csharp"
-);
-@@clientName(
-  Invoices.getTransactionSummaryByInvoice,
-  "getTransactionSummaryByInvoiceTransaction",
-  "csharp"
-);
-@@clientName(
-  Customers.createOrUpdateByCustomer,
-  "createOrUpdateByCustomerPolicy",
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Transaction,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
