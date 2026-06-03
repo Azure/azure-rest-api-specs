@@ -1,8 +1,8 @@
-# DataLakeStorage
+# BlobStorage
 
 > see https://aka.ms/autorest
 
-This is the configuration file for DataLakeStorage swaggers.
+This is the configuration file for BlobStorage swaggers.
 
 ---
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the DataLakeStorage API.
+These are the global settings for the BlobStorage API.
 
 ```yaml
 openapi-type: data-plane
@@ -31,13 +31,40 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2025-11-tsp
+
+These settings apply only when `--tag=package-2025-11-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-tsp'
+input-file:
+  - stable/2025-11-05/generated_blob.json
+```
+
+### Tag: package-2026-02-tsp
+
+These settings apply only when `--tag=package-2026-02-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-tsp'
+input-file:
+  - stable/2026-02-06/generated_blob.json
+```
+
+### Tag: package-2026-04-tsp
+
+These settings apply only when `--tag=package-2026-04-tsp` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-tsp'
+input-file:
+  - stable/2026-04-06/generated_blob.json
+```
+
 ### Tag: package-2026-06-tsp
 
 These settings apply only when `--tag=package-2026-06-tsp` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-06-tsp'
 input-file:
-  - stable/2026-06-06/generated_datalake.json
+  - stable/2026-06-06/generated_blob.json
 ```
 
 ### Suppression
@@ -55,54 +82,54 @@ directive:
 ```yaml
 suppressions:
   - code: LroExtension
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Legacy operations not defined as lro
 ```
 
 ```yaml
 directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Service uses XML, not JSON, so cannot validate.
   - suppress: ValidFormats
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Properly specifying parameter format.
   - suppress: EnumInsteadOfBoolean
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract
   - suppress: ErrorResponse
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract
   - suppress: MsPaths
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Auto-generated swagger based on typespec
   - suppress: SuccessResponseBody
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract
   - suppress: LroHeaders
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract
   - suppress: VersionPolicy
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API with api version header
   - suppress: PutInOperationName
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API with sdk usage
   - suppress: OperationId
-    from: generated_datalake.json
+    from: generated_blob.json
   - suppress: GetInOperationName
-    from: generated_datalake.json
+    from: generated_blob.json
   - suppress: XmsEnumValidation
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract and auto-generated enum definitions
   - suppress: SecurityDefinitionDescription
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Auto-generated swagger from typespec
   - suppress: PathParameterSchema
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract
   - suppress: PutRequestResponseScheme
-    from: generated_datalake.json
+    from: generated_blob.json
     reason: Existing API contract
 ```
 
