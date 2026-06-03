@@ -199,6 +199,7 @@ union QuotaUsageStatus {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -1645,6 +1646,7 @@ model AccountProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
   /**
@@ -1669,6 +1671,7 @@ model AccountProperties {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union FoundryAutoUpgradeMode {
   string,
 
@@ -1690,6 +1693,7 @@ union FoundryAutoUpgradeMode {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model FoundryAutoUpgrade {
   /**
    * Gets or sets the auto-upgrade mode.
@@ -2322,6 +2326,7 @@ model Usage {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2331,6 +2336,7 @@ model Usage {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   scopeId?: string | null;
 }
 
@@ -2853,6 +2859,7 @@ model ModelSkuCapacityProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   scopeId?: string | null;
 
   /**
@@ -2862,6 +2869,7 @@ model ModelSkuCapacityProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   scopeType?: QuotaScopeType | null;
 }
 
@@ -3250,6 +3258,7 @@ model SkuResource {
  * The object being used to update sku of a resource, in general used for PATCH operations.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model PatchResourceSku {
   /**
    * The resource model definition representing SKU
@@ -5662,6 +5671,7 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
  * Properties of a Cognitive Services managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
@@ -5737,6 +5747,7 @@ model ManagedComputeDeploymentProperties {
  * Provisioning status details for a managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
@@ -5754,6 +5765,7 @@ model ManagedComputeDeploymentProvisioningDetails {
  * Populated when provisioningState is Succeeded.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
@@ -5775,6 +5787,7 @@ model ManagedComputeDeploymentRoutes {
  * The list of managed compute deployments.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeDeploymentListResult {
   /**
    * The link used to get the next page of managed compute deployments.
@@ -5794,6 +5807,7 @@ model ManagedComputeDeploymentListResult {
  * The provisioning state of a compute resource.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union ComputeProvisioningState {
   string,
 
@@ -5835,6 +5849,7 @@ union ComputeProvisioningState {
  * VM priority for a compute pool.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union VmPriority {
   string,
 
@@ -5849,6 +5864,7 @@ union VmPriority {
  * A compute pool configuration.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model Pool {
   /**
    * The name of the pool.
@@ -5875,6 +5891,7 @@ model Pool {
  * The type of compute resource.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union ComputeType {
   string,
 
@@ -5890,6 +5907,7 @@ union ComputeType {
  * The computeType discriminator determines the concrete property shape.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @discriminator("computeType")
 model ComputeProperties {
   /**
@@ -5920,6 +5938,7 @@ model ComputeProperties {
  * Properties for a Cluster (AKS-backed) compute resource.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ClusterComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -5941,6 +5960,7 @@ model ClusterComputeProperties extends ComputeProperties {
  * Properties for a Container Instance compute resource.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
    * The type of compute resource.
@@ -5978,6 +5998,7 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
  * SSH configuration for a Container Instance compute.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model SshSettings {
   /**
    * The SSH public key for authenticating to the compute instance.
@@ -5994,6 +6015,7 @@ model SshSettings {
  * Network connectivity endpoints for a Container Instance compute.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ConnectivityEndpoints {
   /**
    * The public IP address of the compute instance.
@@ -6012,6 +6034,7 @@ model ConnectivityEndpoints {
  * The list of cognitive services computes operation response.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ComputeListResult {
   /**
    * The link used to get the next page of compute list.
@@ -6030,6 +6053,7 @@ model ComputeListResult {
  * Properties for a Workbench resource.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model WorkbenchProperties {
   /**
    * ARM resource ID of the parent cluster that hosts this workbench.
@@ -6091,6 +6115,7 @@ model WorkbenchProperties {
  * The list of workbenches operation response.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model WorkbenchListResult {
   /**
    * The link used to get the next page of workbench list.
@@ -6109,6 +6134,7 @@ model WorkbenchListResult {
  * Deployment detail within a managed compute usage entry.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeDeploymentInfo {
   /**
    * Full ARM resource ID of the deployment.
@@ -6140,6 +6166,7 @@ model ManagedComputeDeploymentInfo {
  * Managed compute quota usage for a specific SKU.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeUsage {
   /**
    * Fully qualified resource ID for the managed compute usage.
@@ -6190,6 +6217,7 @@ model ManagedComputeUsage {
  * List of managed compute quota entries.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeUsageListResult {
   /**
    * The link used to get the next page of managed compute usages.
@@ -6209,6 +6237,7 @@ model ManagedComputeUsageListResult {
  * Request body for the evaluateDeploymentPolicies action.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model EvaluateDeploymentPoliciesRequest {
   /**
    * The list of hypothetical deployments to evaluate against Azure Policy.
@@ -6220,6 +6249,7 @@ model EvaluateDeploymentPoliciesRequest {
  * A hypothetical deployment definition used for policy dry-run evaluation.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model EvaluateDeploymentPoliciesDeployment {
   /**
    * The name of the hypothetical deployment.
@@ -6236,6 +6266,7 @@ model EvaluateDeploymentPoliciesDeployment {
  * Properties of a hypothetical deployment for policy evaluation.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model EvaluateDeploymentPoliciesDeploymentProperties {
   /**
    * The model to evaluate.
@@ -6252,6 +6283,7 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
  * Response body for the evaluateDeploymentPolicies action.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model EvaluateDeploymentPoliciesResponse {
   /**
    * Per-deployment policy evaluation results, keyed by deployment name.
@@ -6264,6 +6296,7 @@ model EvaluateDeploymentPoliciesResponse {
  * The outcome of a policy evaluation.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union PolicyEvaluationOutcome {
   string,
 
@@ -6281,6 +6314,7 @@ union PolicyEvaluationOutcome {
  * Policy evaluation result for a single deployment.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model DeploymentPolicyEvaluationResult {
   /**
    * The evaluation outcome.
@@ -6303,6 +6337,7 @@ model DeploymentPolicyEvaluationResult {
  * Details of a non-compliant policy assignment.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model PolicyAssignmentEvaluationDetails {
   /**
    * The policy assignment ID.
@@ -6345,6 +6380,7 @@ model PolicyAssignmentEvaluationDetails {
  * Details of a policy expression evaluation.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model PolicyExpressionEvaluationDetails {
   /**
    * The policy expression.
@@ -6382,6 +6418,7 @@ model PolicyExpressionEvaluationDetails {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ManagedComputeCapacity is a read-only resource that does not have a provisioning state"
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeCapacityProperties {
   /**
    * The type of accelerator (e.g., Azure.A100, Azure.H100).
@@ -6413,6 +6450,7 @@ model ManagedComputeCapacityProperties {
  * Capacity information for a specific deployment size.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model DeploymentSizeCapacity {
   /**
    * The number of accelerators required per model instance.
@@ -6437,6 +6475,7 @@ model DeploymentSizeCapacity {
  * The list of managed compute capacities response.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ManagedComputeCapacityListResult {
   /**
    * The link used to get the next page of managed compute capacities.
