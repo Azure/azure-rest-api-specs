@@ -13,8 +13,9 @@ using Azure.AI.Projects;
 @@clientName(Azure.AI.Projects, "AgentsClient");
 
 @@clientInitialization(
-  Azure.AI.Projects.Beta,
+  Azure.AI.Projects,
   {
+    initializedBy: InitializedBy.individually,
     parameters: {
       allowBetaTypes: boolean = false,
     },
