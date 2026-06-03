@@ -5515,6 +5515,12 @@
           }
         },
         "x-ms-examples": {
+          "Create a VMSS with Deterministic Processor Mode": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithDeterministicProcessorMode.json"
+          },
+          "Create a VMSS with Opportunistic Processor Mode": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithOpportunisticProcessorMode.json"
+          },
           "Create a VMSS with an extension that has suppressFailures enabled": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithExtensionsSuppressFailuresEnabled.json"
           },
@@ -10088,8 +10094,14 @@
           "Get a virtual machine placed on a dedicated host group through automatic placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_AutoPlacedOnDedicatedHostGroup.json"
           },
+          "Get a virtual machine with Deterministic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithDeterministicProcessorMode.json"
+          },
           "Get a virtual machine with Disk Controller Type Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithDiskControllerType.json"
+          },
+          "Get a virtual machine with Opportunistic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithOpportunisticProcessorMode.json"
           },
           "Get a virtual machine with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizeProperties.json"
@@ -10195,6 +10207,9 @@
           "Create a VM from a shared gallery image": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromASharedGalleryImage.json"
           },
+          "Create a VM with Deterministic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDeterministicProcessorMode.json"
+          },
           "Create a VM with Disk Controller Type": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDiskControllerType.json"
           },
@@ -10203,6 +10218,9 @@
           },
           "Create a VM with HibernationEnabled": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithHibernationEnabled.json"
+          },
+          "Create a VM with Opportunistic Processor Mode": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithOpportunisticProcessorMode.json"
           },
           "Create a VM with ProxyAgent Settings of enabled and mode.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithProxyAgentSettings.json"
@@ -14606,6 +14624,10 @@
         "vmSizeProperties": {
           "$ref": "#/definitions/VMSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        },
+        "processorMode": {
+          "$ref": "#/definitions/ProcessorMode",
+          "description": "Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01."
         }
       }
     },
@@ -16425,6 +16447,30 @@
           "description": "The percentage of VM instances, after the base regular priority count has been reached, that are expected to use regular priority.",
           "maximum": 100
         }
+      }
+    },
+    "ProcessorMode": {
+      "type": "string",
+      "description": "Specifies the processor frequency behavior for the virtual machine. See each member for the behavior it controls.",
+      "enum": [
+        "Deterministic",
+        "Opportunistic"
+      ],
+      "x-ms-enum": {
+        "name": "ProcessorMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deterministic",
+            "value": "Deterministic",
+            "description": "Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled."
+          },
+          {
+            "name": "Opportunistic",
+            "value": "Opportunistic",
+            "description": "Allows higher frequency bursts when thermal and power headroom permits."
+          }
+        ]
       }
     },
     "ProtocolTypes": {
@@ -19523,7 +19569,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "status": {
           "$ref": "#/definitions/InstanceViewStatus",
@@ -19617,7 +19663,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "substatuses": {
           "type": "array",
@@ -19655,7 +19701,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -19731,7 +19777,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -21007,7 +21053,7 @@
         },
         "typeHandlerVersion": {
           "type": "string",
-          "description": "Specifies the version of the script handler."
+          "description": "Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series."
         },
         "autoUpgradeMinorVersion": {
           "type": "boolean",
@@ -21078,6 +21124,10 @@
         "vmSizeProperties": {
           "$ref": "#/definitions/VMSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        },
+        "processorMode": {
+          "$ref": "#/definitions/ProcessorMode",
+          "description": "Specifies the processor mode for the virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VMSS without deallocation or reboot. Minimum api-version: 2026-04-01."
         }
       }
     },

@@ -940,6 +940,20 @@ union StorageAlignmentStatus {
 }
 
 /**
+ * Specifies the processor frequency behavior for the virtual machine. See each member for the behavior it controls.
+ */
+@added(Versions.v2026_04_01)
+union ProcessorMode {
+  string,
+
+  /** Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled. */
+  Deterministic: "Deterministic",
+
+  /** Allows higher frequency bursts when thermal and power headroom permits. */
+  Opportunistic: "Opportunistic",
+}
+
+/**
  * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
 union IPVersions {
@@ -3326,7 +3340,7 @@ model VirtualMachineScaleSetExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -3503,6 +3517,12 @@ model VirtualMachineScaleSetHardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
@@ -5222,7 +5242,7 @@ model VirtualMachineExtensionHandlerInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5350,7 +5370,7 @@ model VirtualMachineExtensionInstanceView {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor.Patch.Hotfix version of the script handler. Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -5414,6 +5434,12 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
@@ -6066,7 +6092,7 @@ model VirtualMachineExtensionProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
@@ -6205,7 +6231,7 @@ model VirtualMachineExtensionUpdateProperties {
   type?: string;
 
   /**
-   * Specifies the version of the script handler.
+   * Specifies the Major.Minor version of the script handler. Customer is able to specify only the Major.Minor version of an extension, Azure platform will deliver the latest Patch.Hotfix version in the Major.Minor series.
    */
   typeHandlerVersion?: string;
 
