@@ -70,6 +70,7 @@ interface HybridConnectionOperationGroup {
 @@minLength(HybridConnection.name, 1);
 @@doc(HybridConnection.name, "The hybrid connection name.");
 @@doc(HybridConnection.properties, "Properties of the HybridConnection.");
-@@doc(HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  HybridConnectionOperationGroup.createOrUpdate::parameters.resource,
   "Parameters supplied to create a hybrid connection."
 );

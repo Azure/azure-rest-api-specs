@@ -1,0 +1,43 @@
+{
+  "operationId": "ManagedComputeDeployments_Get",
+  "title": "GetManagedComputeDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "gpt-oss-120b-gpu",
+    "api-version": "2026-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-gpu",
+        "name": "gpt-oss-120b-gpu",
+        "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+        "etag": "\"0x8D...\"",
+        "properties": {
+          "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
+          "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
+          "acceleratorType": "H100_80GB",
+          "acceleratorsPerInstance": 4,
+          "totalAccelerators": 4,
+          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment is healthy and serving traffic.",
+            "lastOperationTimestamp": "2026-03-23T14:45:00Z"
+          },
+          "routes": {
+            "chatCompletionsScoringPath": "/managedComputeDeployments/gpt-oss-120b-gpu/chat/completions",
+            "swagger": "/managedComputeDeployments/gpt-oss-120b-gpu/swagger.json",
+            "messagesApiScoringPath": "/managedComputeDeployments/gpt-oss-120b-gpu/messages"
+          }
+        },
+        "sku": {
+          "name": "GlobalManagedCompute",
+          "capacity": 1
+        }
+      }
+    }
+  }
+}

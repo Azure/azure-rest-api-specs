@@ -9,50 +9,62 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(ContainerRegistry, "ContainerRegistry");
 // Rename ChangeableAttributes models to WriteableProperties for Python SDK backward compatibility
-@@clientName(ContainerRegistry.ManifestChangeableAttributes,
+@@clientName(
+  ContainerRegistry.ManifestChangeableAttributes,
   "ManifestWriteableProperties",
   "python"
 );
-@@clientName(ContainerRegistry.TagChangeableAttributes,
+@@clientName(
+  ContainerRegistry.TagChangeableAttributes,
   "TagWriteableProperties",
   "python"
 );
-@@clientName(ContainerRegistry.RepositoryChangeableAttributes,
+@@clientName(
+  ContainerRegistry.RepositoryChangeableAttributes,
   "RepositoryWriteableProperties",
   "python"
 );
 
 // Client name mappings for ContainerRepositoryProperties
-@@clientName(ContainerRegistry.ContainerRepositoryProperties.registry,
+@@clientName(
+  ContainerRegistry.ContainerRepositoryProperties.registry,
   "registryLoginServer"
 );
 @@clientName(ContainerRegistry.ContainerRepositoryProperties.imageName, "name");
-@@clientName(ContainerRegistry.ContainerRepositoryProperties.createdTime,
+@@clientName(
+  ContainerRegistry.ContainerRepositoryProperties.createdTime,
   "createdOn"
 );
-@@clientName(ContainerRegistry.ContainerRepositoryProperties.lastUpdateTime,
+@@clientName(
+  ContainerRegistry.ContainerRepositoryProperties.lastUpdateTime,
   "lastUpdatedOn"
 );
 
 // Client name mappings for RepositoryChangeableAttributes
-@@clientName(ContainerRegistry.RepositoryChangeableAttributes.deleteEnabled,
+@@clientName(
+  ContainerRegistry.RepositoryChangeableAttributes.deleteEnabled,
   "canDelete"
 );
-@@clientName(ContainerRegistry.RepositoryChangeableAttributes.writeEnabled,
+@@clientName(
+  ContainerRegistry.RepositoryChangeableAttributes.writeEnabled,
   "canWrite"
 );
-@@clientName(ContainerRegistry.RepositoryChangeableAttributes.listEnabled,
+@@clientName(
+  ContainerRegistry.RepositoryChangeableAttributes.listEnabled,
   "canList"
 );
-@@clientName(ContainerRegistry.RepositoryChangeableAttributes.readEnabled,
+@@clientName(
+  ContainerRegistry.RepositoryChangeableAttributes.readEnabled,
   "canRead"
 );
 
 // Client name mappings for DeleteRepositoryResult
-@@clientName(ContainerRegistry.DeleteRepositoryResult.manifestsDeleted,
+@@clientName(
+  ContainerRegistry.DeleteRepositoryResult.manifestsDeleted,
   "deletedManifests"
 );
-@@clientName(ContainerRegistry.DeleteRepositoryResult.tagsDeleted,
+@@clientName(
+  ContainerRegistry.DeleteRepositoryResult.tagsDeleted,
   "deletedTags"
 );
 
@@ -63,25 +75,30 @@ using Azure.ClientGenerator.Core;
 
 // Client name mappings for TagAttributesBase
 @@clientName(ContainerRegistry.TagAttributesBase.createdTime, "createdOn");
-@@clientName(ContainerRegistry.TagAttributesBase.lastUpdateTime,
+@@clientName(
+  ContainerRegistry.TagAttributesBase.lastUpdateTime,
   "lastUpdatedOn"
 );
 
 // Client name mappings for TagChangeableAttributes
-@@clientName(ContainerRegistry.TagChangeableAttributes.deleteEnabled,
+@@clientName(
+  ContainerRegistry.TagChangeableAttributes.deleteEnabled,
   "canDelete"
 );
-@@clientName(ContainerRegistry.TagChangeableAttributes.writeEnabled,
+@@clientName(
+  ContainerRegistry.TagChangeableAttributes.writeEnabled,
   "canWrite"
 );
 @@clientName(ContainerRegistry.TagChangeableAttributes.listEnabled, "canList");
 @@clientName(ContainerRegistry.TagChangeableAttributes.readEnabled, "canRead");
 
 // Client name mappings for ArtifactTagProperties
-@@clientName(ContainerRegistry.ArtifactTagProperties.registry,
+@@clientName(
+  ContainerRegistry.ArtifactTagProperties.registry,
   "registryLoginServer"
 );
-@@clientName(ContainerRegistry.ArtifactTagProperties.imageName,
+@@clientName(
+  ContainerRegistry.ArtifactTagProperties.imageName,
   "repositoryName"
 );
 
@@ -92,11 +109,13 @@ using Azure.ClientGenerator.Core;
 // Client name mappings for ManifestAttributesBase
 @@clientName(ContainerRegistry.ManifestAttributesBase.imageSize, "size");
 @@clientName(ContainerRegistry.ManifestAttributesBase.createdTime, "createdOn");
-@@clientName(ContainerRegistry.ManifestAttributesBase.lastUpdateTime,
+@@clientName(
+  ContainerRegistry.ManifestAttributesBase.lastUpdateTime,
   "lastUpdatedOn"
 );
 @@clientName(ContainerRegistry.ManifestAttributesBase.os, "operatingSystem");
-@@clientName(ContainerRegistry.ManifestAttributesBase.references,
+@@clientName(
+  ContainerRegistry.ManifestAttributesBase.references,
   "relatedArtifacts"
 );
 
@@ -104,23 +123,29 @@ using Azure.ClientGenerator.Core;
 @@clientName(ContainerRegistry.ArtifactManifestPlatform.os, "operatingSystem");
 
 // Client name mappings for ManifestChangeableAttributes
-@@clientName(ContainerRegistry.ManifestChangeableAttributes.deleteEnabled,
+@@clientName(
+  ContainerRegistry.ManifestChangeableAttributes.deleteEnabled,
   "canDelete"
 );
-@@clientName(ContainerRegistry.ManifestChangeableAttributes.writeEnabled,
+@@clientName(
+  ContainerRegistry.ManifestChangeableAttributes.writeEnabled,
   "canWrite"
 );
-@@clientName(ContainerRegistry.ManifestChangeableAttributes.listEnabled,
+@@clientName(
+  ContainerRegistry.ManifestChangeableAttributes.listEnabled,
   "canList"
 );
-@@clientName(ContainerRegistry.ManifestChangeableAttributes.readEnabled,
+@@clientName(
+  ContainerRegistry.ManifestChangeableAttributes.readEnabled,
   "canRead"
 );
 
 // Client name mappings for ArtifactManifestProperties
-@@clientName(ContainerRegistry.ArtifactManifestProperties.registry,
+@@clientName(
+  ContainerRegistry.ArtifactManifestProperties.registry,
   "registryLoginServer"
 );
-@@clientName(ContainerRegistry.ArtifactManifestProperties.imageName,
+@@clientName(
+  ContainerRegistry.ArtifactManifestProperties.imageName,
   "repositoryName"
 );

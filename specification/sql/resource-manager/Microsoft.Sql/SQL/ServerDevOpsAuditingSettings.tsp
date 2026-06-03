@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A server DevOps auditing settings.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 model ServerDevOpsAuditingSettings
   is Azure.ResourceManager.ProxyResource<ServerDevOpsAuditSettingsProperties> {
   ...ResourceNameParameter<
@@ -27,7 +29,9 @@ model ServerDevOpsAuditingSettings
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.ServerDevOpsAudit)
 interface ServerDevOpsAuditSettings {
   /**
    * Gets a server's DevOps audit settings.
@@ -43,7 +47,9 @@ interface ServerDevOpsAuditSettings {
   @tag("ServerDevOpsAudit")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerDevOpsAuditingSettings,
-    Response = ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerDevOpsAuditingSettings>>
+    Response =
+      | ArmResourceUpdatedResponse<ServerDevOpsAuditingSettings>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ServerDevOpsAuditingSettings>>
   >;
 
   /**
@@ -58,6 +64,7 @@ interface ServerDevOpsAuditSettings {
 
 @@doc(ServerDevOpsAuditingSettings.name, "");
 @@doc(ServerDevOpsAuditingSettings.properties, "Resource properties.");
-@@doc(ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
+@@doc(
+  ServerDevOpsAuditSettings.createOrUpdate::parameters.resource,
   "Properties of DevOps audit settings"
 );
