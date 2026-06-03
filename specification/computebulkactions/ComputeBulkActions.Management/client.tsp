@@ -663,6 +663,23 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
 
+// ScheduledEventsPolicy flattened properties
+@@clientName(
+  UserInitiatedRedeploy.automaticallyApprove,
+  "IsRedeployAutomaticallyApproved",
+  "csharp"
+);
+@@clientName(
+  UserInitiatedReboot.automaticallyApprove,
+  "IsRebootAutomaticallyApproved",
+  "csharp"
+);
+@@clientName(
+  AllInstancesDown.automaticallyApprove,
+  "IsAllInstancesDownAutomaticallyApproved",
+  "csharp"
+);
+
 // VMGalleryApplication
 @@clientName(
   VMGalleryApplication.enableAutomaticUpgrade,
