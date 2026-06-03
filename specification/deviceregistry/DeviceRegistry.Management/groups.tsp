@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -58,47 +59,62 @@ model GroupMemberCountResponse {
 }
 
 @added(Versions.v2026_11_02_preview)
+@parentResource(Group)
 @doc("The status of a refresh members operation.")
-model GroupRefreshMembersOperationStatus {
-  @doc("The unique ID of the operation.")
-  id: string;
-
-  @doc("The name of the operation.")
+model RefreshGroupMembersResult
+  is ProxyResource<RefreshGroupMembersResultProperties> {
+  @doc("The operation ID.")
+  @key("operationId")
+  @segment("refreshGroupMembersResults")
+  @path
   name: string;
+}
 
-  @doc("The status of the operation.")
-  status: string;
+@added(Versions.v2026_11_02_preview)
+@doc("The properties of a refresh group members result.")
+model RefreshGroupMembersResultProperties {
+  @doc("The current status of the operation.")
+  @visibility(Lifecycle.Read)
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("Error details when the operation failed.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 
   @doc("The start time of the operation.")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   @doc("The end time of the operation.")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
-  @doc("Error object that describes the error when status is Failed.")
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
-
   @doc("The total count of members in the group after the refresh.")
+  @visibility(Lifecycle.Read)
   totalMemberCount?: int64;
 
   @doc("The count of members added during the refresh.")
+  @visibility(Lifecycle.Read)
   membersAddedCount?: int64;
 
   @doc("The count of members removed during the refresh.")
+  @visibility(Lifecycle.Read)
   membersRemovedCount?: int64;
 
   @doc("The count of members that failed to be processed during the refresh.")
+  @visibility(Lifecycle.Read)
   membersFailedCount?: int64;
 
   @doc("The timestamp of the last successful refresh.")
+  @visibility(Lifecycle.Read)
   lastRefreshTimestamp?: utcDateTime;
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("The request parameters for getting the status of a refresh members operation.")
-model GetRefreshMembersOperationsRequest {
-  @doc("The operation ID.")
-  operationId: string;
+@tag("Groups")
+interface RefreshGroupMembersResults {
+  /** Get the status of the group refresh long-running operation. */
+  get is ResourceOperations.ResourceRead<RefreshGroupMembersResult>;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -118,6 +134,7 @@ interface Groups {
   >;
 
   @doc("Refreshes the members of this group.")
+  @pollingOperation(RefreshGroupMembersResults.get)
   refreshMembers is ArmResourceActionNoResponseContentAsync<Group, void>;
 
   @doc("Returns the current count of members of this group.")
@@ -125,12 +142,5 @@ interface Groups {
     Group,
     void,
     GroupMemberCountResponse
-  >;
-
-  @doc("Gets the status of a refresh members operation.")
-  getRefreshMembersOperations is ArmResourceActionSync<
-    Group,
-    GetRefreshMembersOperationsRequest,
-    GroupRefreshMembersOperationStatus
   >;
 }

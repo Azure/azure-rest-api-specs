@@ -30,6 +30,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.CommonTypes.Private;
 using Azure.ResourceManager.Private;
 using Azure.ResourceManager.Foundations;
+using Azure.Core.Traits;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.DeviceRegistry management service" })
@@ -110,3 +111,7 @@ interface OperationStatus {
     operationId: string,
   ): ArmResponse<OperationStatusResult> | ErrorResponse;
 }
+
+alias ResourceOperations = Azure.Core.ResourceOperations<NoConditionalRequests &
+  NoRepeatableRequests &
+  NoClientRequestId>;

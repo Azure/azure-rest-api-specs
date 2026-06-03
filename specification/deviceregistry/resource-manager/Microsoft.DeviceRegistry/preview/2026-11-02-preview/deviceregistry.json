@@ -98,6 +98,72 @@
     }
   ],
   "paths": {
+    "/namespaces/{namespaceName}/groups/{groupName}/refreshGroupMembersResults/{operationId}": {
+      "get": {
+        "operationId": "RefreshGroupMembersResults_Get",
+        "tags": [
+          "Groups"
+        ],
+        "description": "Get the status of the group refresh long-running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RefreshGroupMembersResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get RefreshGroupMembersResult": {
+            "$ref": "./examples/GetRefreshMembersOperations_Group.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.DeviceRegistry/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -4494,74 +4560,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/getRefreshMembersOperations": {
-      "post": {
-        "operationId": "Groups_GetRefreshMembersOperations",
-        "tags": [
-          "Groups"
-        ],
-        "description": "Gets the status of a refresh members operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "description": "The name of the group.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetRefreshMembersOperationsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GroupRefreshMembersOperationStatus"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Group GetRefreshMembersOperations": {
-            "$ref": "./examples/GetRefreshMembersOperations_Group.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/previewMembers": {
       "post": {
         "operationId": "Groups_PreviewMembers",
@@ -4685,11 +4683,7 @@
           "Group RefreshMembers": {
             "$ref": "./examples/RefreshMembers_Group.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/jobs": {
@@ -6890,6 +6884,109 @@
         ]
       }
     },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -7988,19 +8085,6 @@
         ]
       }
     },
-    "GetRefreshMembersOperationsRequest": {
-      "type": "object",
-      "description": "The request parameters for getting the status of a refresh members operation.",
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "The operation ID."
-        }
-      },
-      "required": [
-        "operationId"
-      ]
-    },
     "Group": {
       "type": "object",
       "description": "A flexible grouping mechanism that allows devices to be grouped by their property values.",
@@ -8213,68 +8297,6 @@
           "description": "Human-readable display name for the group."
         }
       }
-    },
-    "GroupRefreshMembersOperationStatus": {
-      "type": "object",
-      "description": "The status of a refresh members operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the operation."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end time of the operation."
-        },
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error object that describes the error when status is Failed."
-        },
-        "totalMemberCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The total count of members in the group after the refresh."
-        },
-        "membersAddedCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of members added during the refresh."
-        },
-        "membersRemovedCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of members removed during the refresh."
-        },
-        "membersFailedCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The count of members that failed to be processed during the refresh."
-        },
-        "lastRefreshTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the last successful refresh."
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "status"
-      ]
     },
     "GroupType": {
       "type": "string",
@@ -12066,6 +12088,88 @@
       },
       "readOnly": true
     },
+    "RefreshGroupMembersOperationResult": {
+      "type": "object",
+      "description": "The result details of a successful refresh members operation.",
+      "properties": {
+        "totalMemberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of members in the group after the refresh."
+        },
+        "membersAddedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members added during the refresh."
+        },
+        "membersRemovedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members removed during the refresh."
+        },
+        "membersFailedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members that failed to be processed during the refresh."
+        },
+        "lastRefreshTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last successful refresh."
+        }
+      }
+    },
+    "RefreshGroupMembersResult": {
+      "type": "object",
+      "description": "The status of a refresh members operation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RefreshGroupMembersResultProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RefreshGroupMembersResultProperties": {
+      "type": "object",
+      "description": "The properties of a refresh group members result.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current status of the operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error details when the operation failed.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation.",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/RefreshGroupMembersOperationResult",
+          "description": "The result of the refresh members operation when status is Succeeded.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
     "Schema": {
       "type": "object",
       "description": "Schema definition.",
@@ -12761,5 +12865,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
 }
