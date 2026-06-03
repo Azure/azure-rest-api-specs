@@ -164,16 +164,6 @@ using Microsoft.Billing;
 @@clientName(BillingRelationshipType.CSPPartner, "CspPartner", "csharp");
 @@clientName(BillingRelationshipType.CSPCustomer, "CspCustomer", "csharp");
 @@clientName(
-  BillingSubscriptionProperties.customerId,
-  "SubscriptionCustomerId",
-  "csharp"
-);
-@@clientName(
-  BillingSubscriptionProperties.beneficiaryTenantId,
-  "SubscriptionBeneficiaryTenantId",
-  "csharp"
-);
-@@clientName(
   BillingSubscriptionAliasProperties.billingSubscriptionId,
   "SubscriptionAliasSubscriptionId",
   "csharp"
@@ -412,6 +402,7 @@ using Microsoft.Billing;
   "GetBillingProfileAvailableBalance",
   "csharp"
 );
+@@clientName(BillingRequestProperties.type, "RequestType", "csharp");
 @@alternateType(DocumentDownloadResult.expiryTime, utcDateTime, "csharp");
 @@alternateType(ReservationProperty.expiryDate, utcDateTime, "csharp");
 @@alternateType(
@@ -470,13 +461,27 @@ using Microsoft.Billing;
   "GetProducts",
   "csharp"
 );
-// Resolve CS0102: ReservationPurchaseRequestProperties has direct .instanceFlexibility AND .reservedResourceProperties.instanceFlexibility (flattened by back-compatible.tsp). Rename the flatten source.
+
 @@clientName(
   ReservationPurchaseRequestPropertiesReservedResourceProperties.instanceFlexibility,
-  "ReservedInstanceFlexibility",
+  "InstanceFlexibilityPropertiesReservedResourcePropertiesInstanceFlexibility",
   "csharp"
 );
-
+@@clientName(
+  ReservationPurchaseRequestProperties.instanceFlexibility,
+  "InstanceFlexibilityPropertiesInstanceFlexibility",
+  "csharp"
+);
+@@clientName(
+  BillingSubscriptionProperties.customerId,
+  "CustomerId",
+  "csharp"
+);
+@@clientName(
+  BillingSubscriptionProperties.beneficiaryTenantId,
+  "BeneficiaryTenantId",
+  "csharp"
+);
 @@clientName(SpendingLimitType.MSDN, "Msdn", "csharp");
 
 // NOTE: Spec-side rename of action-payload models (*Request -> *Content) via
@@ -568,7 +573,6 @@ using Microsoft.Billing;
 
 @@alternateType(RenewalTermDetails.termDuration, duration, "csharp");
 
-// Resolve AZC0033: model named "Operation" must use a non-generic suffix.
 @@clientName(Operation, "BillingOperationInfo", "csharp");
 @@clientName(OperationDisplay, "BillingOperationDisplay", "csharp");
 @@clientName(OperationListResult, "BillingOperationInfoListResult", "csharp");
@@ -645,72 +649,31 @@ using Microsoft.Billing;
 @@usage(PartnerTransferProperties, Usage.input, "csharp");
 @@usage(RecipientTransferProperties, Usage.input, "csharp");
 
-// D8 fix: GA emitted Amount-typed properties as { get; } only because the inner Amount
-// model has @visibility(Lifecycle.Read) on its fields (currency, value). The MPG emitter,
-// when the containing model is marked Usage.input, ignores the inner type's read-only-ness
-// and emits a public setter — letting callers assign a meaningless BillingAmount whose own
-// Currency/Value cannot be mutated. Restore the GA shape by marking each Amount-typed
-// outer property Lifecycle.Read. This applies across all languages, which is the correct
-// behaviour (Amount is a read-only response shape per spec).
-@@visibility(AvailableBalanceProperties.amount, Lifecycle.Read);
-@@visibility(AvailableBalanceProperties.totalPaymentsOnAccount, Lifecycle.Read);
-@@visibility(PaymentOnAccount.amount, Lifecycle.Read);
-@@visibility(BillingSubscriptionProperties.lastMonthCharges, Lifecycle.Read);
-@@visibility(BillingSubscriptionProperties.monthToDateCharges, Lifecycle.Read);
-@@visibility(InvoiceProperties.amountDue, Lifecycle.Read);
-@@visibility(InvoiceProperties.azurePrepaymentApplied, Lifecycle.Read);
-@@visibility(InvoiceProperties.billedAmount, Lifecycle.Read);
-@@visibility(InvoiceProperties.creditAmount, Lifecycle.Read);
-@@visibility(InvoiceProperties.freeAzureCreditApplied, Lifecycle.Read);
-@@visibility(InvoiceProperties.subTotal, Lifecycle.Read);
-@@visibility(InvoiceProperties.taxAmount, Lifecycle.Read);
-@@visibility(InvoiceProperties.totalAmount, Lifecycle.Read);
-@@visibility(Payment.amount, Lifecycle.Read);
-@@visibility(RefundDetailsSummary.amountRequested, Lifecycle.Read);
-@@visibility(RefundDetailsSummary.amountRefunded, Lifecycle.Read);
-@@visibility(ProductProperties.lastCharge, Lifecycle.Read);
-@@visibility(TransactionProperties.azureCreditApplied, Lifecycle.Read);
-@@visibility(TransactionProperties.consumptionCommitmentDecremented, Lifecycle.Read);
-@@visibility(TransactionProperties.effectivePrice, Lifecycle.Read);
-@@visibility(TransactionProperties.marketPrice, Lifecycle.Read);
-@@visibility(TransactionProperties.subTotal, Lifecycle.Read);
-@@visibility(TransactionProperties.tax, Lifecycle.Read);
-@@visibility(TransactionProperties.transactionAmount, Lifecycle.Read);
-@@visibility(RefundTransactionDetails.amountRequested, Lifecycle.Read);
-@@visibility(RefundTransactionDetails.amountRefunded, Lifecycle.Read);
-
-// D3 fix: BillingTransferValidationResult.Results was IReadOnlyList in GA. The new spec
-// does not mark ValidateTransferResponseProperties.results as read-only, so the C# emitter
-// would emit IList. Force read-only visibility here to preserve the GA shape.
-@@visibility(ValidateTransferResponseProperties.results, Lifecycle.Read);
-
-// D2 fix: Reservation should map to TrackedResource in C# to preserve the GA
-// `BillingReservationData : TrackedResourceData` base. The new spec declares it as
-// ProxyResource with optional location/tags, which yields `: ResourceData` by default.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Reservation,
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
-
-// D2 fix: Patch models (and Transaction) inherit from ProxyResourceWithTags in the new spec,
-// but the GA C# surface exposes them as `: ResourceData`. Flatten ProxyResourceWithTags into
-// the C# layer so the public surface keeps the GA base type and Tags becomes a direct property.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BillingAccountPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ProductPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BillingSubscriptionPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Transaction,
   Azure.ResourceManager.CommonTypes.ProxyResource,
@@ -730,25 +693,201 @@ using Microsoft.Billing;
 // declares customerTenantId as plain string. Force the C# property type back to Guid via uuid alias.
 @@alternateType(RecipientTransferProperties.customerTenantId, uuid, "csharp");
 
-// D19 fix: BillingSubscriptionAliasProperties extends BillingSubscriptionProperties; the
-// generator flattens both into BillingSubscriptionData and prefixes alias-only properties
-// to disambiguate. GA used the "Subscription" prefix; new gen uses "SubscriptionAlias".
-// Override to restore GA names.
-@@clientName(
-  BillingSubscriptionAliasProperties.beneficiaryTenantId,
-  "SubscriptionBeneficiaryTenantId",
+// =====================================================================================
+// D20: C# back-compat for GA SDK 1.2.2 method placement and names.
+//
+// (1) back-compatible.tsp moves several List/CheckAccess ops onto a synthetic
+//     "BillingPermissions" sub-client (multi-language). GA SDK 1.2.2 instead exposed those
+//     methods directly on the parent Resource (e.g. BillingAccountResource.GetBillingPermissions).
+//     Override @@clientLocation with a C#-scoped directive that pins them back to the natural
+//     parent interface so they appear on the parent Resource in the .NET SDK.
+//
+// (2) MPG derives Action/List method names from the operation identifier (e.g. "ListByBillingAccount"),
+//     while GA SDK 1.2.2 used "GetBillingPermissions". Use @@clientName(..., "csharp") to override
+//     just the C# method name, preserving wire/spec names.
+// =====================================================================================
+
+// (1) Pin BillingPermissions family back to their parent Resource for C# only.
+@@clientLocation(
+  BillingAccounts.listByBillingAccount,
+  BillingAccounts,
   "csharp"
 );
-@@clientName(
-  BillingSubscriptionAliasProperties.customerId,
-  "SubscriptionCustomerId",
+@@clientLocation(
+  BillingAccounts.checkAccessByBillingAccount,
+  BillingAccounts,
+  "csharp"
+);
+@@clientLocation(
+  BillingProfiles.listByBillingProfile,
+  BillingProfiles,
+  "csharp"
+);
+@@clientLocation(
+  BillingProfiles.checkAccessByBillingProfile,
+  BillingProfiles,
+  "csharp"
+);
+@@clientLocation(Customers.listByCustomer, Customers, "csharp");
+@@clientLocation(Customers.checkAccessByCustomer, Customers, "csharp");
+@@clientLocation(
+  CustomerOperationGroup.listByCustomerAtBillingAccount,
+  CustomerOperationGroup,
+  "csharp"
+);
+@@clientLocation(
+  Departments.listByDepartment,
+  Departments,
+  "csharp"
+);
+@@clientLocation(
+  Departments.checkAccessByDepartment,
+  Departments,
+  "csharp"
+);
+@@clientLocation(
+  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
+  EnrollmentAccountOperationGroup,
+  "csharp"
+);
+@@clientLocation(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
+  EnrollmentAccountOperationGroup,
+  "csharp"
+);
+@@clientLocation(
+  InvoiceSections.listByInvoiceSection,
+  InvoiceSections,
+  "csharp"
+);
+@@clientLocation(
+  InvoiceSections.checkAccessByInvoiceSection,
+  InvoiceSections,
   "csharp"
 );
 
-// D19 fix: BillingRequestProperties.type was GA-named RequestType (the GA generator added
-// a disambiguating suffix). The @@clientName decorator below does not apply because
-// TypeSpec resolves `BillingRequestProperties.type` against the model's intrinsic `type`
-// metadata rather than the property; the RequestType alias is restored via SDK-side
-// Custom partial (sdk/billing/.../src/Custom/Models/BillingRequestProperties.cs).
-// Decorator kept commented for documentation purposes only.
-// @@clientName(BillingRequestProperties.type, "RequestType", "csharp");
+// (2a) Pattern A: BillingPermissions family - rename methods to GA-style names.
+@@clientName(
+  BillingAccounts.checkAccessByBillingAccount,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.listByBillingAccount,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.checkAccessByBillingProfile,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.listByBillingProfile,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  Customers.checkAccessByCustomer,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  Customers.listByCustomer,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  CustomerOperationGroup.listByCustomerAtBillingAccount,
+  "getBillingPermissionsByCustomerAtBillingAccount",
+  "csharp"
+);
+@@clientName(
+  Departments.checkAccessByDepartment,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  Departments.listByDepartment,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
+  "getBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.checkAccessByInvoiceSection,
+  "checkAccessBillingPermissions",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.listByInvoiceSection,
+  "getBillingPermissions",
+  "csharp"
+);
+
+// (2b) Pattern B: BillingRoleAssignment family - GA suffixes parent scope in method name.
+@@clientName(
+  BillingAccounts.createByBillingAccount,
+  "createByBillingAccountBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.resolveByBillingAccount,
+  "resolveByBillingAccountBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.createByBillingProfile,
+  "createByBillingProfileBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  BillingProfiles.resolveByBillingProfile,
+  "resolveByBillingProfileBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  Customers.createByCustomer,
+  "createByCustomerBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  Customers.resolveByCustomer,
+  "resolveByCustomerBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.createByInvoiceSection,
+  "createByInvoiceSectionBillingRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  InvoiceSections.resolveByInvoiceSection,
+  "resolveByInvoiceSectionBillingRoleAssignment",
+  "csharp"
+);
+
+// (2c) Pattern C-1: Individual ops needing GA-named restoration.
+@@clientName(
+  Invoices.transactionsDownloadByInvoice,
+  "transactionsDownloadByInvoiceTransaction",
+  "csharp"
+);
+@@clientName(
+  Invoices.getTransactionSummaryByInvoice,
+  "getTransactionSummaryByInvoiceTransaction",
+  "csharp"
+);
+@@clientName(
+  Customers.createOrUpdateByCustomer,
+  "createOrUpdateByCustomerPolicy",
+  "csharp"
+);
