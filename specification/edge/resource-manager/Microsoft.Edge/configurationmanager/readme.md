@@ -86,6 +86,26 @@ directive:
   - suppress: OperationsAPIImplementation
     from: configurationmanager.json
     reason: RP is in Public and PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
+  
+  - suppress: PostResponseCodes
+    from: configurationmanager.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/linkToHierarchies"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/unLinkFromHierarchies"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/removeVersion"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkDeploySolution"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkPublishSolution"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionTemplates/{solutionTemplateName}/versions/{solutionTemplateVersionName}/bulkReviewSolution"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/installSolution"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/uninstallSolution"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/removeRevision"].post
+    reason: |
+      Fire-and-forget LRO POST actions return 202 (Accepted) only with no terminal response body.
+      The recommended TypeSpec template ArmResourceActionNoResponseContentAsync models this correctly
+      and emits {202, default}, but the LintDiff PostResponseCodes rule requires the exact set
+      {202, 204, default} for no-content async POSTs. This is a known mismatch between the
+      recommended template and the validator. Precedent: Microsoft.NetworkCloud,
+      Microsoft.AzureStackHCI/arcSettings, Microsoft.DeviceUpdate.
 
 ```
 ---
