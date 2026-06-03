@@ -6,7 +6,8 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.DBforMySQL;
 
-@@clientName(Microsoft.DBforMySQL,
+@@clientName(
+  Microsoft.DBforMySQL,
   "MySQLManagementFlexibleServerClient",
   "javascript"
 );
@@ -27,7 +28,8 @@ using Microsoft.DBforMySQL;
 
 @@clientName(Capability, "MySqlFlexibleServersCapability", "csharp");
 @@clientName(Storage.storageSizeGB, "StorageSizeInGB", "csharp");
-@@clientName(SkuCapability.supportedMemoryPerVCoreMB,
+@@clientName(
+  SkuCapability.supportedMemoryPerVCoreMB,
   "SupportedMemoryPerVCoreInMB",
   "csharp"
 );
@@ -39,7 +41,8 @@ using Microsoft.DBforMySQL;
 @@usage(ServerBackup, Usage.input, "csharp");
 @@clientName(ServerBackupV2, "MySqlFlexibleServerBackupV2", "csharp");
 @@clientName(Server, "MySqlFlexibleServer", "csharp");
-@@alternateType(Server.identity,
+@@alternateType(
+  Server.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -48,7 +51,8 @@ using Microsoft.DBforMySQL;
 @@clientName(EnableStatusEnum, "MySqlFlexibleServerEnableStatusEnum", "csharp");
 @@clientName(ReplicationRole, "MySqlFlexibleServerReplicationRole", "csharp");
 @@clientName(DataEncryption, "MySqlFlexibleServerDataEncryption", "csharp");
-@@clientName(MaintenanceWindow,
+@@clientName(
+  MaintenanceWindow,
   "MySqlFlexibleServerMaintenanceWindow",
   "csharp"
 );
@@ -57,169 +61,207 @@ using Microsoft.DBforMySQL;
 @@clientName(MySQLServerSku, "MySqlFlexibleServerSku", "csharp");
 @@clientName(Network, "MySqlFlexibleServerNetwork", "csharp");
 @@clientName(HighAvailability, "MySqlFlexibleServerHighAvailability", "csharp");
-@@clientName(HighAvailabilityMode,
+@@clientName(
+  HighAvailabilityMode,
   "MySqlFlexibleServerHighAvailabilityMode",
   "csharp"
 );
-@@clientName(HighAvailabilityState,
+@@clientName(
+  HighAvailabilityState,
   "MySqlFlexibleServerHighAvailabilityState",
   "csharp"
 );
-@@alternateType(ServerForUpdate.identity,
+@@alternateType(
+  ServerForUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@clientName(ServerListResult, "MySqlFlexibleServerListResult", "csharp");
-@@clientName(ServerRestartParameter,
+@@clientName(
+  ServerRestartParameter,
   "MySqlFlexibleServerRestartParameter",
   "csharp"
 );
 @@clientName(ServerState, "MySqlFlexibleServerState", "csharp");
-@@clientName(ServerBackupListResult,
+@@clientName(
+  ServerBackupListResult,
   "MySqlFlexibleServerBackupListResult",
   "csharp"
 );
-@@clientName(FirewallRuleListResult,
+@@clientName(
+  FirewallRuleListResult,
   "MySqlFlexibleServerFirewallRuleListResult",
   "csharp"
 );
-@@clientName(DatabaseListResult,
+@@clientName(
+  DatabaseListResult,
   "MySqlFlexibleServerDatabaseListResult",
   "csharp"
 );
-@@clientName(ConfigurationSource,
+@@clientName(
+  ConfigurationSource,
   "MySqlFlexibleServerConfigurationSource",
   "csharp"
 );
-@@clientName(ConfigurationListResult,
+@@clientName(
+  ConfigurationListResult,
   "MySqlFlexibleServerConfigurations",
   "csharp"
 );
-@@clientName(ConfigurationForBatchUpdate,
+@@clientName(
+  ConfigurationForBatchUpdate,
   "MySqlFlexibleServerConfigurationForBatchUpdate",
   "csharp"
 );
-@@clientName(ConfigurationListForBatchUpdate,
+@@clientName(
+  ConfigurationListForBatchUpdate,
   "MySqlFlexibleServerConfigurationListForBatchUpdate",
   "csharp"
 );
-@@clientName(VirtualNetworkSubnetUsageParameter,
+@@clientName(
+  VirtualNetworkSubnetUsageParameter,
   "MySqlFlexibleServerVirtualNetworkSubnetUsageParameter",
   "csharp"
 );
-@@clientName(DelegatedSubnetUsage,
+@@clientName(
+  DelegatedSubnetUsage,
   "MySqlFlexibleServerDelegatedSubnetUsage",
   "csharp"
 );
-@@clientName(VirtualNetworkSubnetUsageResult,
+@@clientName(
+  VirtualNetworkSubnetUsageResult,
   "MySqlFlexibleServerVirtualNetworkSubnetUsageResult",
   "csharp"
 );
 @@clientName(SkuCapability, "MySqlFlexibleServerSkuCapability", "csharp");
-@@clientName(ServerVersionCapability,
+@@clientName(
+  ServerVersionCapability,
   "MySqlFlexibleServerServerVersionCapability",
   "csharp"
 );
-@@clientName(StorageEditionCapability,
+@@clientName(
+  StorageEditionCapability,
   "MySqlFlexibleServerStorageEditionCapability",
   "csharp"
 );
-@@clientName(ServerEditionCapability,
+@@clientName(
+  ServerEditionCapability,
   "MySqlFlexibleServerEditionCapability",
   "csharp"
 );
-@@clientName(CapabilityProperties,
+@@clientName(
+  CapabilityProperties,
   "MySqlFlexibleServerCapabilityProperties",
   "csharp"
 );
-@@clientName(CapabilitiesListResult,
+@@clientName(
+  CapabilitiesListResult,
   "MySqlFlexibleServerCapabilitiesListResult",
   "csharp"
 );
-@@clientName(GetPrivateDnsZoneSuffixResponse,
+@@clientName(
+  GetPrivateDnsZoneSuffixResponse,
   "MySqlFlexibleServerPrivateDnsZoneSuffixResponse",
   "csharp"
 );
-@@clientName(NameAvailabilityRequest,
+@@clientName(
+  NameAvailabilityRequest,
   "MySqlFlexibleServerNameAvailabilityContent",
   "csharp"
 );
 @@clientName(NameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(NameAvailability,
+@@clientName(
+  NameAvailability,
   "MySqlFlexibleServerNameAvailabilityResult",
   "csharp"
 );
 @@clientName(CreateMode, "MySqlFlexibleServerCreateMode", "csharp");
-@@clientName(DataEncryptionType,
+@@clientName(
+  DataEncryptionType,
   "MySqlFlexibleServerDataEncryptionType",
   "csharp"
 );
 @@clientName(ServerSkuTier, "MySqlFlexibleServerSkuTier", "csharp");
 @@clientName(IsReadOnly, "MySqlFlexibleServerConfigReadOnlyState", "csharp");
-@@clientName(IsDynamicConfig,
+@@clientName(
+  IsDynamicConfig,
   "MySqlFlexibleServerConfigDynamicState",
   "csharp"
 );
-@@clientName(IsConfigPendingRestart,
+@@clientName(
+  IsConfigPendingRestart,
   "MySqlFlexibleServerConfigPendingRestartState",
   "csharp"
 );
 @@clientName(NameAvailability.nameAvailable, "IsNameAvailable", "csharp");
-@@clientName(AzureADAdministrator,
+@@clientName(
+  AzureADAdministrator,
   "MySqlFlexibleServerAadAdministrator",
   "csharp"
 );
-@@clientName(AdministratorListResult,
+@@clientName(
+  AdministratorListResult,
   "MySqlFlexibleServerAadAdministratorListResult",
   "csharp"
 );
-@@clientName(AdministratorName,
+@@clientName(
+  AdministratorName,
   "MySqlFlexibleServerAdministratorName",
   "csharp"
 );
-@@clientName(BackupAndExportRequest,
+@@clientName(
+  BackupAndExportRequest,
   "MySqlFlexibleServerBackupAndExportContent",
   "csharp"
 );
-@@clientName(BackupAndExportResponse,
+@@clientName(
+  BackupAndExportResponse,
   "MySqlFlexibleServerBackupAndExportResult",
   "csharp"
 );
 @@usage(BackupAndExportResponse, Usage.input, "csharp");
 @@clientName(BackupFormat, "MySqlFlexibleServerBackupFormat", "csharp");
-@@clientName(BackupRequestBase,
+@@clientName(
+  BackupRequestBase,
   "MySqlFlexibleServerBackupContentBase",
   "csharp"
 );
 @@clientName(BackupSettings, "MySqlFlexibleServerBackupSettings", "csharp");
 
-@@clientName(FullBackupStoreDetails,
+@@clientName(
+  FullBackupStoreDetails,
   "MySqlFlexibleServerFullBackupStoreDetails",
   "csharp"
 );
-@@clientName(AdministratorType,
+@@clientName(
+  AdministratorType,
   "MySqlFlexibleServerAdministratorType",
   "csharp"
 );
 @@clientName(LogFile, "MySqlFlexibleServerLogFile", "csharp");
 @@usage(LogFile, Usage.input, "csharp");
-@@clientName(LogFileListResult,
+@@clientName(
+  LogFileListResult,
   "MySqlFlexibleServerLogFileListResult",
   "csharp"
 );
-@@clientName(OperationStatus,
+@@clientName(
+  OperationStatus,
   "MySqlFlexibleServerBackupAndExportOperationStatus",
   "csharp"
 );
-@@clientName(ResetAllToDefault,
+@@clientName(
+  ResetAllToDefault,
   "MySqlFlexibleServerConfigurationResetAllToDefault",
   "csharp"
 );
-@@clientName(ServerGtidSetParameter,
+@@clientName(
+  ServerGtidSetParameter,
   "MySqlFlexibleServerGtidSetContent",
   "csharp"
 );
-@@clientName(ValidateBackupResponse,
+@@clientName(
+  ValidateBackupResponse,
   "MySqlFlexibleServerValidateBackupResult",
   "csharp"
 );
@@ -227,38 +269,46 @@ using Microsoft.DBforMySQL;
 @@clientName(Maintenance, "MySqlFlexibleServerMaintenance", "csharp");
 @@clientName(MaintenanceType, "MySqlFlexibleServerMaintenanceType", "csharp");
 @@clientName(MaintenanceState, "MySqlFlexibleServerMaintenanceState", "csharp");
-@@clientName(MaintenanceProvisioningState,
+@@clientName(
+  MaintenanceProvisioningState,
   "MySqlFlexibleServerMaintenanceProvisioningState",
   "csharp"
 );
 @@clientName(BackupType, "MySqlFlexibleServerBackupType", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "MySqlFlexibleServerBackupProvisioningState",
   "csharp"
 );
-@@clientName(ServerProperties.privateEndpointConnections,
+@@clientName(
+  ServerProperties.privateEndpointConnections,
   "ServerPrivateEndpointConnections",
   "csharp"
 );
-@@clientName(BatchOfMaintenance,
+@@clientName(
+  BatchOfMaintenance,
   "MySqlFlexibleServerBatchOfMaintenance",
   "csharp"
 );
 @@clientName(FeatureProperty, "MySqlFlexibleServerFeatureProperty", "csharp");
 @@clientName(PatchStrategy, "MySqlFlexibleServerPatchStrategy", "csharp");
-@@clientName(StorageRedundancyEnum,
+@@clientName(
+  StorageRedundancyEnum,
   "MySqlFlexibleServerStorageRedundancyType",
   "csharp"
 );
-@@clientName(ServerDetachVNetParameter,
+@@clientName(
+  ServerDetachVNetParameter,
   "MySqlFlexibleServerDetachVnetContent",
   "csharp"
 );
-@@clientName(CheckNameAvailability.execute,
+@@clientName(
+  CheckNameAvailability.execute,
   "CheckMySqlFlexibleServerNameAvailability",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityWithoutLocation.execute,
+@@clientName(
+  CheckNameAvailabilityWithoutLocation.execute,
   "CheckMySqlFlexibleServerNameAvailabilityWithoutLocation",
   "csharp"
 );
@@ -277,12 +327,14 @@ using Microsoft.DBforMySQL;
 @@scope(PrivateLinkResources.listByServer, "!csharp");
 
 @@alternateType(LocationNameParameter.locationName, azureLocation, "csharp");
-@@alternateType(AdministratorProperties.identityResourceId,
+@@alternateType(
+  AdministratorProperties.identityResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(AdministratorProperties.tenantId, uuid, "csharp");
-@@alternateType(ServerProperties.sourceServerResourceId,
+@@alternateType(
+  ServerProperties.sourceServerResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -293,63 +345,76 @@ using Microsoft.DBforMySQL;
 @@alternateType(ImportSourceProperties.storageUrl, url, "csharp");
 @@alternateType(DataEncryption.primaryKeyURI, url, "csharp");
 @@alternateType(DataEncryption.geoBackupKeyURI, url, "csharp");
-@@alternateType(DataEncryption.primaryUserAssignedIdentityId,
+@@alternateType(
+  DataEncryption.primaryUserAssignedIdentityId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(DataEncryption.geoBackupUserAssignedIdentityId,
+@@alternateType(
+  DataEncryption.geoBackupUserAssignedIdentityId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(LogFileProperties.url, url, "csharp");
 @@alternateType(NameAvailabilityRequest.type, armResourceType, "csharp");
-@@alternateType(Network.delegatedSubnetResourceId,
+@@alternateType(
+  Network.delegatedSubnetResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Network.privateDnsZoneResourceId,
+@@alternateType(
+  Network.privateDnsZoneResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(VirtualNetworkSubnetUsageParameter.virtualNetworkResourceId,
+@@alternateType(
+  VirtualNetworkSubnetUsageParameter.virtualNetworkResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(VirtualNetworkSubnetUsageResult.location,
+@@alternateType(
+  VirtualNetworkSubnetUsageResult.location,
   azureLocation,
   "csharp"
 );
-@@clientName(BackupStoreDetails,
+@@clientName(
+  BackupStoreDetails,
   "MySqlFlexibleServerBackupStoreDetails",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "MySqlFlexibleServersPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(DataEncryption.primaryKeyURI, "PrimaryKeyUri", "csharp");
 @@clientName(DataEncryption.geoBackupKeyURI, "GeoBackupKeyUri", "csharp");
-@@usage(AdvancedThreatProtectionUpdateProperties,
+@@usage(
+  AdvancedThreatProtectionUpdateProperties,
   Usage.input | Usage.output,
   "csharp"
 );
 
 @@clientName(LogFiles.listByServer, "GetLogFiles", "csharp");
 @@clientName(Replicas.listByServer, "GetReplicas", "csharp");
-@@clientName(CheckVirtualNetworkSubnetUsage.execute,
+@@clientName(
+  CheckVirtualNetworkSubnetUsage.execute,
   "ExecuteCheckVirtualNetworkSubnetUsage",
   "csharp"
 );
-@@clientName(GetPrivateDnsZoneSuffix.execute,
+@@clientName(
+  GetPrivateDnsZoneSuffix.execute,
   "ExecuteGetPrivateDnsZoneSuffix",
   "csharp"
 );
-@@clientName(LocationBasedCapabilities.list,
+@@clientName(
+  LocationBasedCapabilities.list,
   "GetLocationBasedCapabilities",
   "csharp"
 );
 @@clientName(BackupAndExport.create, "CreateBackupAndExport", "csharp");
-@@clientName(ServersMigration.cutoverMigration,
+@@clientName(
+  ServersMigration.cutoverMigration,
   "CutoverMigrationServersMigration",
   "csharp"
 );
@@ -358,7 +423,8 @@ using Microsoft.DBforMySQL;
 @@clientName(BackupAndExport.create::parameters.body, "content", "csharp");
 @@clientName(Servers.update::parameters.properties, "patch", "csharp");
 @@clientName(Servers.resetGtid::parameters.body, "content", "csharp");
-@@clientName(AdvancedThreatProtectionSettings.update::parameters.properties,
+@@clientName(
+  AdvancedThreatProtectionSettings.update::parameters.properties,
   "patch",
   "csharp"
 );

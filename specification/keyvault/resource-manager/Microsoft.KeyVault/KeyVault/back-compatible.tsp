@@ -14,24 +14,28 @@ using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionItem.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnectionItem.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateEndpointConnectionItem.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MhsmPrivateEndpointConnectionItem.properties
 );
 
 @@clientName(Error.innererror, "innerError");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MhsmPrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -48,14 +52,17 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Key.properties);
 
-@@clientName(ManagedHsmKeys.createIfNotExist::parameters.resource,
+@@clientName(
+  ManagedHsmKeys.createIfNotExist::parameters.resource,
   "parameters"
 );
-@@clientLocation(ManagedHsmKeyOperationGroup.getVersion,
+@@clientLocation(
+  ManagedHsmKeyOperationGroup.getVersion,
   ManagedHsmKeys,
   "!csharp"
 );
-@@clientLocation(ManagedHsmKeyOperationGroup.listVersions,
+@@clientLocation(
+  ManagedHsmKeyOperationGroup.listVersions,
   ManagedHsmKeys,
   "!csharp"
 );
@@ -72,38 +79,46 @@ using Azure.Core;
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
 @@clientName(ManagedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedHsms.update::parameters.properties, "parameters");
-@@clientLocation(ManagedHsms.listByMHSMResource,
+@@clientLocation(
+  ManagedHsms.listByMHSMResource,
   "MHSMPrivateLinkResources",
   "!csharp,!java"
 );
 @@clientLocation(ManagedHsms.listByResource, "MHSMRegions", "!csharp,!java");
 
-@@clientLocation(MhsmPrivateEndpointConnections.get,
+@@clientLocation(
+  MhsmPrivateEndpointConnections.get,
   "MHSMPrivateEndpointConnections",
   "!csharp,!java"
 );
-@@clientLocation(MhsmPrivateEndpointConnections.put,
+@@clientLocation(
+  MhsmPrivateEndpointConnections.put,
   "MHSMPrivateEndpointConnections",
   "!csharp,!java"
 );
-@@clientName(MhsmPrivateEndpointConnections.put::parameters.resource,
+@@clientName(
+  MhsmPrivateEndpointConnections.put::parameters.resource,
   "properties"
 );
-@@clientLocation(MhsmPrivateEndpointConnections.delete,
+@@clientLocation(
+  MhsmPrivateEndpointConnections.delete,
   "MHSMPrivateEndpointConnections",
   "!csharp,!java"
 );
-@@clientLocation(MhsmPrivateEndpointConnections.listByResource,
+@@clientLocation(
+  MhsmPrivateEndpointConnections.listByResource,
   "MHSMPrivateEndpointConnections",
   "!csharp,!java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MhsmPrivateEndpointConnection.properties
 );
 
 @@clientLocation(DeletedManagedHsms.getDeleted, ManagedHsms, "!csharp");
@@ -117,50 +132,61 @@ using Azure.Core;
 @@clientLocation(VaultsOperationGroup.checkNameAvailability, Vaults, "!csharp");
 
 @@clientLocation(ManagedHsmsOperationGroup.listDeleted, ManagedHsms, "!csharp");
-@@clientLocation(ManagedHsmsOperationGroup.checkMhsmNameAvailability,
+@@clientLocation(
+  ManagedHsmsOperationGroup.checkMhsmNameAvailability,
   ManagedHsms,
   "!csharp"
 );
-@@clientName(ManagedHsmsOperationGroup.checkMhsmNameAvailability::parameters.body,
+@@clientName(
+  ManagedHsmsOperationGroup.checkMhsmNameAvailability::parameters.body,
   "mhsmName"
 );
-@@clientName(VaultsOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  VaultsOperationGroup.checkNameAvailability::parameters.body,
   "vaultName"
 );
-@@clientName(MhsmPrivateEndpointConnection,
+@@clientName(
+  MhsmPrivateEndpointConnection,
   "MHSMPrivateEndpointConnection",
   "!java,!csharp"
 );
-@@clientName(MhsmPrivateLinkResource,
+@@clientName(
+  MhsmPrivateLinkResource,
   "MHSMPrivateLinkResource",
   "!java,!csharp"
 );
-@@clientName(MhsmPrivateLinkResourceListResult,
+@@clientName(
+  MhsmPrivateLinkResourceListResult,
   "MHSMPrivateLinkResourceListResult",
   "!java,!csharp"
 );
 @@clientName(MhsmRegionsListResult, "MHSMRegionsListResult", "!java,!csharp");
-@@clientName(MhsmPrivateEndpointConnectionProperties,
+@@clientName(
+  MhsmPrivateEndpointConnectionProperties,
   "MHSMPrivateEndpointConnectionProperties",
   "!java,!csharp"
 );
 @@clientName(MhsmPrivateEndpoint, "MHSMPrivateEndpoint", "!java,!csharp");
-@@clientName(MhsmPrivateLinkServiceConnectionState,
+@@clientName(
+  MhsmPrivateLinkServiceConnectionState,
   "MHSMPrivateLinkServiceConnectionState",
   "!java,!csharp"
 );
-@@clientName(MhsmPrivateEndpointConnectionItem,
+@@clientName(
+  MhsmPrivateEndpointConnectionItem,
   "MHSMPrivateEndpointConnectionItem",
   "!java,!csharp"
 );
 @@clientName(MhsmNetworkRuleSet, "MHSMNetworkRuleSet", "!java,!csharp");
-@@clientName(MhsmGeoReplicatedRegion,
+@@clientName(
+  MhsmGeoReplicatedRegion,
   "MHSMGeoReplicatedRegion",
   "!java,!csharp"
 );
 @@clientName(MhsmVirtualNetworkRule, "MHSMVirtualNetworkRule", "!java,!csharp");
 @@clientName(MhsmipRule, "MHSMIPRule", "!java,!csharp");
-@@clientName(MhsmPrivateLinkResourceProperties,
+@@clientName(
+  MhsmPrivateLinkResourceProperties,
   "MHSMPrivateLinkResourceProperties",
   "!java,!csharp"
 );
@@ -171,7 +197,8 @@ using Azure.Core;
 
 @@Azure.ResourceManager.identifiers(MhsmRegionsListResult.value, #["name"]);
 
-@@clientName(Azure.ResourceManager.CommonTypes.createdByType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.createdByType,
   "IdentityType",
   "python"
 );
@@ -275,19 +302,23 @@ op ManagedHsmsPurgeDeletedCustomized(
   body: void,
 ): void;
 
-@@override(DeletedVaults.getDeleted,
+@@override(
+  DeletedVaults.getDeleted,
   VaultsGetDeletedCustomized,
   "python,go,java,javascript"
 );
-@@override(DeletedVaults.purgeDeleted,
+@@override(
+  DeletedVaults.purgeDeleted,
   VaultsPurgeDeletedCustomized,
   "python,go,java,javascript"
 );
-@@override(DeletedManagedHsms.getDeleted,
+@@override(
+  DeletedManagedHsms.getDeleted,
   ManagedHsmsGetDeletedCustomized,
   "python,go,java,javascript"
 );
-@@override(DeletedManagedHsms.purgeDeleted,
+@@override(
+  DeletedManagedHsms.purgeDeleted,
   ManagedHsmsPurgeDeletedCustomized,
   "python,go,java,javascript"
 );

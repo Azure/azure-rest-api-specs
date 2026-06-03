@@ -52,8 +52,10 @@ interface OrderItemResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     OrderItemResource,
-    Response = ArmResourceUpdatedResponse<OrderItemResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OrderItemResource> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<OrderItemResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OrderItemResource> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -173,13 +175,16 @@ interface OrderItemResources {
 @@minLength(OrderItemResource.name, 3);
 @@doc(OrderItemResource.name, "The name of the order item.");
 @@doc(OrderItemResource.properties, "Order item properties.");
-@@doc(OrderItemResources.create::parameters.resource,
+@@doc(
+  OrderItemResources.create::parameters.resource,
   "Order item details from request body."
 );
-@@doc(OrderItemResources.update::parameters.properties,
+@@doc(
+  OrderItemResources.update::parameters.properties,
   "Order item update parameters from request body."
 );
 @@doc(OrderItemResources.cancel::parameters.body, "Reason for cancellation.");
-@@doc(OrderItemResources.returnOrderItem::parameters.body,
+@@doc(
+  OrderItemResources.returnOrderItem::parameters.body,
   "Return order item details."
 );

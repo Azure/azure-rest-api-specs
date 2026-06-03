@@ -8,15 +8,18 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects.Beta;
 
 interface MemoryStores {}
-@@clientLocation(Azure.AI.Projects.MemoryStores.createMemoryStore,
+@@clientLocation(
+  Azure.AI.Projects.MemoryStores.createMemoryStore,
   MemoryStores
 );
-@@clientLocation(Azure.AI.Projects.MemoryStores.updateMemoryStore,
+@@clientLocation(
+  Azure.AI.Projects.MemoryStores.updateMemoryStore,
   MemoryStores
 );
 @@clientLocation(Azure.AI.Projects.MemoryStores.getMemoryStore, MemoryStores);
 @@clientLocation(Azure.AI.Projects.MemoryStores.listMemoryStores, MemoryStores);
-@@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemoryStore,
+@@clientLocation(
+  Azure.AI.Projects.MemoryStores.deleteMemoryStore,
   MemoryStores
 );
 @@clientLocation(Azure.AI.Projects.MemoryStores.searchMemories, MemoryStores);
@@ -89,19 +92,24 @@ interface Insights {}
 @@clientLocation(Azure.AI.Projects.Insights.list, Insights);
 
 interface EvaluationTaxonomies {}
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.get,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.get,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.list,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.list,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.delete,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.delete,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.create,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.create,
   EvaluationTaxonomies
 );
-@@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
+@@clientLocation(
+  Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
 
@@ -116,17 +124,22 @@ interface Toolboxes {}
 @@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolboxVersion, Toolboxes);
 
 interface Skills {}
-@@clientLocation(Azure.AI.Projects.Skills.createSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.createSkillFromPackage, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.createSkillVersion, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.createSkillVersionFromFiles, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.getSkill, Skills);
-@@clientLocation(Azure.AI.Projects.Skills.downloadSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.getSkillContent, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.listSkills, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.listSkillVersions, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.getSkillVersion, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.getSkillVersionContent, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.deleteSkillVersion, Skills);
 
 interface Agents {}
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
+@@clientLocation(
+  Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
   Agents
 );
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
@@ -136,6 +149,7 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.createSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.stopSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.createAgentFromCode, Agents);
@@ -148,10 +162,27 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.listCandidates, Agents);
+@@clientLocation(
+  Azure.AI.Projects.AgentOptimizationJobs.listCandidates,
+  Agents
+);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, Agents);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig, Agents);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults, Agents);
+@@clientLocation(
+  Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig,
+  Agents
+);
+@@clientLocation(
+  Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults,
+  Agents
+);
+@@clientLocation(
+  Azure.AI.Projects.AgentOptimizationJobs.getCandidateFile,
+  Agents
+);
+@@clientLocation(
+  Azure.AI.Projects.AgentOptimizationJobs.promoteCandidate,
+  Agents
+);
 
 interface Datasets {}
 @@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);

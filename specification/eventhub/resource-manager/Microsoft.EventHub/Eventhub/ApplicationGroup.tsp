@@ -67,6 +67,7 @@ interface ApplicationGroups {
 @@minLength(ApplicationGroup.name, 1);
 @@doc(ApplicationGroup.name, "The Application Group name ");
 @@doc(ApplicationGroup.properties, "");
-@@doc(ApplicationGroups.createOrUpdateApplicationGroup::parameters.resource,
+@@doc(
+  ApplicationGroups.createOrUpdateApplicationGroup::parameters.resource,
   "The ApplicationGroup."
 );

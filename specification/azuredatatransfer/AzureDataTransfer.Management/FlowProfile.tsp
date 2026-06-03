@@ -65,15 +65,19 @@ interface FlowProfiles {
 
 @@maxLength(FlowProfile.name, 64);
 @@minLength(FlowProfile.name, 3);
-@@doc(FlowProfile.name,
+@@doc(
+  FlowProfile.name,
   "The name of the FlowProfile resource to operate on. Must be 3 to 64 characters long and contain only alphanumeric characters or hyphens."
 );
-@@doc(FlowProfile.properties,
+@@doc(
+  FlowProfile.properties,
   "The set of configuration properties that define the behavior and rules of the FlowProfile."
 );
-@@doc(FlowProfiles.createOrUpdate::parameters.resource,
+@@doc(
+  FlowProfiles.createOrUpdate::parameters.resource,
   "The FlowProfile resource definition to create or update."
 );
-@@doc(FlowProfiles.update::parameters.properties,
+@@doc(
+  FlowProfiles.update::parameters.properties,
   "The FlowProfile patch definition containing the properties to update."
 );

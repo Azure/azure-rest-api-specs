@@ -86,12 +86,15 @@ interface ServiceGroups {
 }
 
 @@doc(ServiceGroup.name, "ServiceGroup Name.");
-@@doc(ServiceGroup.properties,
+@@doc(
+  ServiceGroup.properties,
   "ServiceGroup creation request body parameters."
 );
-@@doc(ServiceGroups.createOrUpdateServiceGroup::parameters.resource,
+@@doc(
+  ServiceGroups.createOrUpdateServiceGroup::parameters.resource,
   "ServiceGroup creation parameters"
 );
-@@doc(ServiceGroups.updateServiceGroup::parameters.properties,
+@@doc(
+  ServiceGroups.updateServiceGroup::parameters.properties,
   "ServiceGroup update parameters"
 );

@@ -22,6 +22,39 @@ When performing a code review on OpenAPI v2 (Swagger) JSON definition files in t
 
 Flag every violation clearly with the file path, the **exact line number** (e.g., `line 42` or `line 10-15` for ranges), the JSON path (e.g., `$.definitions.Widget.properties.name`), the specific rule being violated, and a concrete suggestion for how to fix it. Vague references like "near end of file" or "around line 50" are not acceptable -- always resolve the actual line number by reading the file content. Respond in markdown format.
 
+### Rule Citation Format (REQUIRED for posted PR comments)
+
+Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown hyperlink to the rule's authoritative location in this repository. A bare rule ID without a link is **not acceptable** -- reviewers and authors must be able to one-click navigate to the exact section that defines the rule.
+
+**Format.** Use a markdown link whose visible text is the rule ID and whose target is a permanent GitHub URL (use the `main` branch ref) anchored to the section that defines the rule:
+
+```
+[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/<path-to-rule-file>#<section-anchor>)
+```
+
+**Where to link.** Pick the most specific source for the rule:
+
+- Generic OpenAPI rules (e.g., `OAPI020`, `OAPI027`, `OAPI034`, `WHATIF-001`, `PLCY008`, `TSP-REQUIRED-V1`) → link to the rule's section in `.github/instructions/openapi-review.instructions.md` **or** to the dedicated reference file under `.github/skills/azure-api-review/references/*.md` when the rule has a full reference page (e.g., `property-mutability.md#oapi034`, `secret-detection.md`, `provisioning-state.md`).
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to the corresponding section in `.github/instructions/armapi-review.instructions.md`.
+- TypeSpec-only rules → link to the corresponding section in `.github/instructions/typespec-review.instructions.md`.
+
+**Multiple rule IDs.** When a finding cites more than one rule ID, each ID **MUST** be its own hyperlink (e.g., `[OAPI034](...) / [WHATIF-001](...)`).
+
+**Anchor resolution.** GitHub auto-generates section anchors by lowercasing the heading, replacing spaces with `-`, and stripping punctuation. When in doubt, open the rendered file on GitHub and copy the link from the heading's anchor icon.
+
+### Reviewer-Posted Parity (REQUIRED -- no divergence)
+
+The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, examples, fix snippets, or the agent's posted-by marker.
+
+**Hard rules.**
+
+1. **Single source of truth.** Build each comment body **once** as the canonical text for that finding. The text rendered to the reviewer in chat and the text written into the GitHub review payload **MUST** come from that same string -- never a reconstructed or shortened variant.
+2. **Verbatim reproduction.** When assembling the review payload (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews`), each `comments[].body` **MUST** contain the canonical text unchanged: rule-ID hyperlinks, code blocks, examples, citations, and the trailing posted-by HTML comment.
+3. **No re-authoring during payload assembly.** Heredoc rebuilds, payload-time paraphrasing, or multi-finding consolidation that drops content is **forbidden**.
+4. **Exact one-to-one mapping.** Every finding shown to the reviewer maps to exactly one posted inline comment. Severity tags and `[NEW]`/`[EXISTING]` classifications **MUST** match.
+5. **Post-post verification (REQUIRED).** Immediately after posting, the agent **MUST** re-fetch each created comment (`GET /repos/{owner}/{repo}/pulls/comments/{id}`) and confirm body length, hyperlinks, code-fence blocks, and marker. On any mismatch, PATCH the comment to restore the canonical text and re-verify before reporting completion.
+6. **Failure handling.** If a finding cannot be posted as-is, report the discrepancy explicitly to the reviewer instead of silently posting a shortened variant.
+
 ---
 
 ## 1. File & Directory Structure

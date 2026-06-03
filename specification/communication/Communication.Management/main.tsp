@@ -53,7 +53,8 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.Communication provider."
 );
 @@summary(Operations.list, "List Operations");

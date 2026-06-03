@@ -177,12 +177,15 @@ interface DatabaseMigrationsMongoToCosmosDbvCoreMongo {
 }
 
 @@doc(DatabaseMigrationCosmosDbMongo.name, "Name of the migration.");
-@@doc(DatabaseMigrationCosmosDbMongo.properties,
+@@doc(
+  DatabaseMigrationCosmosDbMongo.properties,
   "Database Migration Resource properties for CosmosDb for Mongo."
 );
-@@doc(DatabaseMigrationCosmosDbMongos.create::parameters.resource,
+@@doc(
+  DatabaseMigrationCosmosDbMongos.create::parameters.resource,
   "Details of CosmosDB for Mongo API Migration resource."
 );
-@@doc(DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
+@@doc(
+  DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
   "Details of CosmosDB for Mongo API Migration resource."
 );

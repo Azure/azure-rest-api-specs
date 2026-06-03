@@ -191,7 +191,12 @@ model ChatRequestUserMessage extends ChatRequestMessage {
     ServiceApiVersions.v2025_01_01_Preview,
     string | ChatMessageTextContentItem[] | ChatMessageImageContentItem[]
   )
-  content: string | (ChatMessageTextContentItem | ChatMessageImageContentItem | ChatMessageAudioContentItem)[];
+  content:
+    | string
+    | (
+        | ChatMessageTextContentItem
+        | ChatMessageImageContentItem
+        | ChatMessageAudioContentItem)[];
 
   @doc("An optional name for the participant.")
   name?: string;

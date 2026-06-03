@@ -32,13 +32,15 @@ interface AgentOptimizationJobs {
   @doc("Create an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @post create is FoundryDataPlanePreviewOperation<
+  @post
+  create is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       ...WithOperationId;
 
       @doc("The optimization job inputs.")
-      @body body: OptimizationJobInputs;
+      @body
+      inputs: OptimizationJobInputs;
     },
     JobCreatedResponse<OptimizationJob>
   >;
@@ -47,7 +49,8 @@ interface AgentOptimizationJobs {
   @doc("Get an optimization job by id. Returns 202 while in progress, 200 when terminal.")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @get get is FoundryDataPlanePreviewOperation<
+  @get
+  get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       /** The ID of the job. */
@@ -60,7 +63,7 @@ interface AgentOptimizationJobs {
   >;
 
   @summary("Returns a list of agent optimization jobs.")
-  @doc("List optimization jobs. Supports cursor pagination and optional status / agentName filters.")
+  @doc("List optimization jobs. Supports cursor pagination and optional status / agent_name filters.")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
@@ -73,7 +76,7 @@ interface AgentOptimizationJobs {
 
       @doc("Filter to jobs targeting this agent name.")
       @query
-      agentName?: string;
+      agent_name?: string;
     }
   >;
 
@@ -95,7 +98,8 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The ID of the job to delete.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       @doc("When true, force-delete even if the job is in a non-terminal state.")
       @query
@@ -113,11 +117,13 @@ interface AgentOptimizationJobs {
   @route("agent_optimization_jobs/{jobId}/candidates")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @get
+  @list
   listCandidates is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The optimization job id.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       ...CommonPageQueryParameters;
     },
@@ -133,10 +139,12 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The optimization job id.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       @doc("The candidate id.")
-      @path candidateId: string;
+      @path
+      candidateId: string;
     },
     CandidateMetadata
   >;
@@ -150,10 +158,12 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The optimization job id.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       @doc("The candidate id.")
-      @path candidateId: string;
+      @path
+      candidateId: string;
     },
     CandidateDeployConfig
   >;
@@ -167,10 +177,12 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The optimization job id.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       @doc("The candidate id.")
-      @path candidateId: string;
+      @path
+      candidateId: string;
     },
     CandidateResults
   >;
@@ -184,10 +196,12 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The optimization job id.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       @doc("The candidate id.")
-      @path candidateId: string;
+      @path
+      candidateId: string;
 
       @doc("Relative path of the file to download (e.g. 'files/examples.jsonl').")
       @query
@@ -205,13 +219,16 @@ interface AgentOptimizationJobs {
     FoundryFeaturesOptInKeys.agents_optimization_v1_preview,
     {
       @doc("The optimization job id.")
-      @path jobId: string;
+      @path
+      jobId: string;
 
       @doc("The candidate id to promote.")
-      @path candidateId: string;
+      @path
+      candidateId: string;
 
       @doc("Promotion details.")
-      @body body: PromoteCandidateRequest;
+      @body
+      candidate_request: PromoteCandidateRequest;
     },
     PromoteCandidateResponse
   >;
