@@ -876,9 +876,22 @@ using Microsoft.DesktopVirtualization;
   "IsSecureBootEnabled",
   "csharp"
 );
+
+@@clientName(
+  SecurityInfoProperties.vTpmEnabled,
+  "IsVTpmEnabled",
+  "csharp"
+);
+
 @@clientName(
   SecurityInfoPatchProperties.secureBootEnabled,
   "IsSecureBootEnabled",
+  "csharp"
+);
+
+@@clientName(
+  SecurityInfoPatchProperties.vTpmEnabled,
+  "IsVTpmEnabled",
   "csharp"
 );
 @@clientName(

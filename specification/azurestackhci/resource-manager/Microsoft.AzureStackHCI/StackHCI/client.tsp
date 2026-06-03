@@ -258,6 +258,11 @@ using Microsoft.AzureStackHCI;
 @@clientName(NetworkAdapter, "HciNetworkAdapter", "csharp");
 @@clientName(OsProfile, "HciDeploymentOSProfile", "csharp");
 @@clientName(UserDetails, "HciUserDetails", "csharp");
+@@clientName(
+  ValidatedSolutionRecipeComponentMetadata.lcmUpdate,
+  "IsLcmUpdate",
+  "csharp"
+);
 @@clientName(TimeConfiguration, "HciTimeConfiguration", "csharp");
 @@clientName(WebProxyConfiguration, "HciWebProxyConfiguration", "csharp");
 @@clientName(DnsZones, "HciDnsZones", "csharp");
