@@ -1,0 +1,27 @@
+{
+  "operationId": "DeviceAuthenticationProfiles_Get",
+  "title": "Get a device authentication profile",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "deviceName": "my-device-01",
+    "authenticationProfileName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "etag": "\"c80325f9-0000-0800-0000-66fcb0290000\"",
+        "uuid": "00001300-0000-0100-0000-6671f0170000",
+        "name": "default",
+        "type": "Microsoft.DeviceRegistry/namespaces/devices/authenticationProfiles",
+        "properties": {
+          "type": "CertificateAuthority",
+          "certificateAuthority": {
+            "adrCertificatePolicyResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rg-device-registry/providers/Microsoft.DeviceRegistry/namespaces/my-namespace/credentials/certificatePolicies/policy-default"
+          }
+        }
+      }
+    }
+  }
+}

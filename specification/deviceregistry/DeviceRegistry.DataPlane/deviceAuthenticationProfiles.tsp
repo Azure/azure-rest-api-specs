@@ -229,15 +229,18 @@ model GetDeviceAuthenticationProfileKeysResponse {
 @tag("Device Authentication Profiles")
 interface DeviceAuthenticationProfiles {
   /** Create or replace a device authentication profile. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   createOrReplace is ResourceOperations.ResourceCreateOrReplace<DeviceAuthenticationProfile>;
 
   /** Get a device authentication profile. */
   get is ResourceOperations.ResourceRead<DeviceAuthenticationProfile>;
 
   /** Update a device authentication profile. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceAuthenticationProfile>;
 
   /** Delete a device authentication profile. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   delete is ResourceOperations.ResourceDelete<DeviceAuthenticationProfile>;
 
   /** List authentication profiles for a device. */
@@ -262,6 +265,7 @@ interface DeviceAuthenticationProfiles {
    * issued certificate chain is delivered by the GET on the corresponding
    * `issueCertResults` status monitor endpoint.
    */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   @pollingOperation(IssueCertResults.get)
   issueCert is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
@@ -288,6 +292,7 @@ interface DeviceAuthenticationProfiles {
 @tag("Device Authentication Profiles")
 interface IssueCertResults {
   /** Get the status of a long-running `:issueCert` operation. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   get is ResourceOperations.ResourceRead<IssueCertResult>;
 }
 

@@ -1,0 +1,46 @@
+{
+  "operationId": "Devices_Provision",
+  "title": "Provision devices in a namespace",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {
+      "iotHubDeviceId": "dps-enrollment-device-abc-123",
+      "targetEndpoint": {
+        "name": "my-iothub",
+        "address": "my-iothub.azure-devices.net"
+      },
+      "authentication": {
+        "type": "SymmetricKey",
+        "symmetricKey": {
+          "primaryKey": "dGhpcyBpcyBhIHByaW1hcnkga2V5",
+          "secondaryKey": "dGhpcyBpcyBhIHNlY29uZGFyeSBrZXk="
+        }
+      },
+      "deviceTwin": {
+        "tags": {
+          "environment": "production",
+          "site": "factory-floor-1"
+        },
+        "properties": {
+          "desired": {
+            "telemetryInterval": "30",
+            "firmwareVersion": "2.0.1"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/operations/op1"
+      },
+      "body": {
+        "id": "op1",
+        "status": "InProgress"
+      }
+    }
+  }
+}

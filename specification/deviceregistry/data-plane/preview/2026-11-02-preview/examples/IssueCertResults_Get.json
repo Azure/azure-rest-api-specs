@@ -1,0 +1,27 @@
+{
+  "operationId": "IssueCertResults_Get",
+  "title": "Get the result of a long-running :issueCert operation",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "deviceName": "contoso-device-001",
+    "authenticationProfileName": "default",
+    "operationId": "op-7f3c1a92-9b0e-4d57-a8b8-1a2b3c4d5e6f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "op-7f3c1a92-9b0e-4d57-a8b8-1a2b3c4d5e6f",
+        "status": "Succeeded",
+        "result": {
+          "issuedCertificateChain": [
+            "TGVhZkNlcnRFeGFtcGxlQ29udGVudF9QbGFjZWhvbGRlckZvckFEUklzc3VlQ2VydFJlc3VsdA==",
+            "SW50ZXJtZWRpYXRlQ0FDb250ZW50X1BsYWNlaG9sZGVyRm9yQURSSXNzdWVDZXJ0UmVzdWx0",
+            "Um9vdENBQ29udGVudF9QbGFjZWhvbGRlckZvckFEUklzc3VlQ2VydFJlc3VsdA=="
+          ]
+        }
+      }
+    }
+  }
+}

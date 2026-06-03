@@ -154,6 +154,7 @@ model ProvisionDeviceResult {
 @tag("Devices")
 interface Devices {
   /** Look up a device by its unique identifier. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   getDeviceByUuid is ResourceOperations.ResourceCollectionAction<
     Device,
     GetDeviceByUuidRequest,
@@ -161,6 +162,7 @@ interface Devices {
   >;
 
   /** Look up a device by its external identifier. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   getDeviceByExternalId is ResourceOperations.ResourceCollectionAction<
     Device,
     GetDeviceByExternalIdRequest,
@@ -168,6 +170,7 @@ interface Devices {
   >;
 
   /** Query devices in a namespace using a query expression. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   query is ResourceOperations.ResourceCollectionAction<
     Device,
     QueryDevicesRequest,
@@ -176,6 +179,7 @@ interface Devices {
 
   /** Provision devices in a namespace. */
   @pollingOperation(Operations.get)
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
     ProvisionDeviceRequest,

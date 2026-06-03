@@ -1,0 +1,27 @@
+{
+  "operationId": "Groups_GetGroupsForDevice",
+  "title": "Get group memberships for a device",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "deviceUuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "uuid": "d1e2f3a4-5678-90ab-cdef-aabbccddeeff",
+        "name": "my-device-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/devices",
+        "groups": [
+          {
+            "groupUuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab"
+          },
+          {
+            "groupUuid": "g2c3d4e5-6789-01ab-cdef-2345678901bc"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -44,6 +44,9 @@ namespace Microsoft.DeviceRegistry;
 enum Versions {
   /** The 2026-11-01-preview API version. */
   v2026_11_01_preview: "2026-11-01-preview",
+
+  /** The 2026-11-02-preview API version. */
+  v2026_11_02_preview: "2026-11-02-preview",
 }
 
 alias ResourceOperations = Azure.Core.ResourceOperations<NoConditionalRequests &

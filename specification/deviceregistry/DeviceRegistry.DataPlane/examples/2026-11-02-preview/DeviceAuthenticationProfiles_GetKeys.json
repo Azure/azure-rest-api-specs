@@ -1,0 +1,21 @@
+{
+  "operationId": "DeviceAuthenticationProfiles_GetKeys",
+  "title": "Retrieve the symmetric keys of a SymmetricKey device authentication profile",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "deviceName": "my-device-01",
+    "authenticationProfileName": "hub-creds"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "symmetricKey": {
+          "primaryKey": "QmFzZTY0RW5jb2RlZFByaW1hcnlLZXk=",
+          "secondaryKey": "QmFzZTY0RW5jb2RlZFNlY29uZGFyeUtleQ=="
+        }
+      }
+    }
+  }
+}

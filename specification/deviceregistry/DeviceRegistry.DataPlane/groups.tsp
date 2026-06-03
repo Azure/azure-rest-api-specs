@@ -81,6 +81,7 @@ model GetGroupsForDeviceResult {
 @tag("Groups")
 interface Groups {
   /** Look up a group by its unique identifier. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   getGroupByUuid is ResourceOperations.ResourceCollectionAction<
     Group,
     GetGroupByUuidRequest,
@@ -88,6 +89,7 @@ interface Groups {
   >;
 
   /** Returns the groups that a device belongs to. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   getGroupsForDevice is ResourceOperations.ResourceCollectionAction<
     Group,
     GetGroupsForDeviceRequest,

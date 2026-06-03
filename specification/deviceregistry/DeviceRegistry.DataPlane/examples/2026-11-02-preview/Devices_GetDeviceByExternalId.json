@@ -1,0 +1,29 @@
+{
+  "operationId": "Devices_GetDeviceByExternalId",
+  "title": "Look up a device by its external ID",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "externalDeviceId": "ext-device-001",
+    "expandInfo": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "etag": "\"d1e2f3a4-0000-0800-0000-66fcb0290000\"",
+        "uuid": "d1e2f3a4-5678-90ab-cdef-aabbccddeeff",
+        "name": "my-device-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/devices",
+        "properties": {
+          "externalDeviceId": "ext-device-001",
+          "manufacturer": "Contoso",
+          "model": "Sensor-v2",
+          "operatingSystem": "Linux",
+          "operatingSystemVersion": "5.15",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

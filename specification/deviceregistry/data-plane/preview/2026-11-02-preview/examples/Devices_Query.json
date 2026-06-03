@@ -1,0 +1,29 @@
+{
+  "operationId": "Devices_Query",
+  "title": "Query devices in a namespace",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {
+      "query": "SELECT name, properties.manufacturer FROM devices WHERE properties.enabled = 'Enabled'",
+      "top": 10
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "my-device-01",
+            "manufacturer": "Contoso"
+          },
+          {
+            "name": "my-device-02",
+            "manufacturer": "Contoso"
+          }
+        ]
+      }
+    }
+  }
+}

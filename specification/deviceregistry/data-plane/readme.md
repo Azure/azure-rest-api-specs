@@ -13,7 +13,16 @@ This is used for some tools such as doc generation and swagger apiview generatio
 use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
-tag: package-2026-11-01-preview
+tag: package-2026-11-02-preview
+```
+
+### Tag: package-2026-11-02-preview
+
+These settings apply only when `--tag=package-2026-11-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-02-preview'
+input-file:
+  - preview/2026-11-02-preview/deviceregistry.json
 ```
 
 ### Tag: package-2026-11-01-preview

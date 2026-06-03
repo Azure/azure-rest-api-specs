@@ -142,22 +142,26 @@ model GetCapabilityByUuidRequest {
 interface DeviceCapabilities {
   /** Create or replace a device capability. */
   @pollingOperation(Operations.get)
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   createOrReplace is ResourceOperations.LongRunningResourceCreateOrReplace<DeviceCapability>;
 
   /** Get a device capability. */
   get is ResourceOperations.ResourceRead<DeviceCapability>;
 
   /** Update a device capability. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceCapability>;
 
   /** Delete a device capability. This is a long-running operation that tears down any provider-side resources (e.g. IoT Hub device registration) before removing the capability document. */
   @pollingOperation(Operations.get)
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   delete is ResourceOperations.LongRunningResourceDelete<DeviceCapability>;
 
   /** List capabilities for a device. */
   list is ResourceOperations.ResourceList<DeviceCapability>;
 
   /** Look up a capability by its unique identifier. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   getCapabilityByUuid is ResourceOperations.ResourceCollectionAction<
     DeviceCapability,
     GetCapabilityByUuidRequest,

@@ -1,0 +1,26 @@
+{
+  "operationId": "Namespaces_GenerateReport",
+  "title": "Generate a namespace update compliance report",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {
+      "reportType": "NamespaceUpdateComplianceReport"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/operations/op-7af3"
+      },
+      "body": {
+        "id": "op-7af3",
+        "kind": "GenerateReport.NamespaceUpdateComplianceReport",
+        "status": "InProgress",
+        "executedAt": "2026-04-28T20:58:43Z",
+        "expiresAt": "2026-04-29T20:58:43Z"
+      }
+    }
+  }
+}
