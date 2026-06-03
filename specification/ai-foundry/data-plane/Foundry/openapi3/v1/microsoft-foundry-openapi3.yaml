@@ -12628,6 +12628,14 @@ components:
           type: integer
           format: int32
           description: Maximum number of evaluation runs allowed per hour.
+        samplingRate:
+          type: number
+          format: double
+          maximum: 100
+          description: Percentage (0-100] chance that a matching event triggers an evaluation. When omitted, the service-default is to evaluate every event, which is equivalent to setting a sampling rate of 100.
+          minimum: 0
+          exclusiveMinimum: true
+          default: 100
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for continuous evaluation.
