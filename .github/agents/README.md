@@ -16,7 +16,7 @@ level is auto-registered by Visual Studio Code.
 Multi-agent contracts live in [`protocols/`](./protocols/). The
 subdirectory keeps reference files out of Visual Studio Code's agent scan path.
 
-- [`protocols/reviewer-critic.protocol.md`](./protocols/reviewer-critic.protocol.md)
+- [`protocols/arm-api-review-critic.protocol.md`](./protocols/arm-api-review-critic.protocol.md)
   is the Reviewer-Critic wire contract (inputs, verdicts, sentinels, marker schemas).
   Source of truth if either agent file disagrees.
 

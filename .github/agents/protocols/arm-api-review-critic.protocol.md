@@ -48,7 +48,7 @@ with reason `missing-inputs`.
 ### Canonical input-block serialization
 
 The template both agents include is in a dedicated file:
-[`./critic-inputs.template.md`](./critic-inputs.template.md). Copy that
+[`./arm-api-review-critic-inputs.template.md`](./arm-api-review-critic-inputs.template.md). Copy that
 template verbatim into every dispatch prompt and every session-handoff
 paste; the schema below restates it for in-file readability but the
 template file is the single source of truth.

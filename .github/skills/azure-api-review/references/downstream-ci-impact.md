@@ -88,7 +88,7 @@ satisfy all five:
 The Critic returns a non-overridable FAIL when any of the following is
 true. **Non-overridable** means the per-comment `critic: override`
 marker does NOT clear it -- see
-[protocol → Non-overridable FAIL catalog](../../../agents/protocols/reviewer-critic.protocol.md#non-overridable-fail-catalog).
+[protocol → Non-overridable FAIL catalog](../../../agents/protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog).
 
 | Critic FAIL                 | Triggered when                                                                                                                | Recovery                                                                                           |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |

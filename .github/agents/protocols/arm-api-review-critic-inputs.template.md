@@ -1,6 +1,6 @@
 <!-- Source of truth for the Critic-invocation input block. Both the
      Reviewer (Step 7) and the Critic (Operating mode) link here.
-     Schema definitions live in `reviewer-critic.protocol.md`; this file
+     Schema definitions live in `arm-api-review-critic.protocol.md`; this file
      is the **literal template** the Reviewer copies into every dispatch
      prompt and every session-handoff paste. -->
 
@@ -11,8 +11,8 @@ in the prompt body it sends to the Critic dispatch (or pastes into the
 session-handoff prompt). The Critic MUST refuse to validate any
 invocation whose prompt does not contain exactly one such block. Field
 semantics, the empty-list rule, and the sentinel-string contract are
-defined in [`reviewer-critic.protocol.md` → Inputs the Reviewer passes
-to the Critic](./reviewer-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic).
+defined in [`arm-api-review-critic.protocol.md` → Inputs the Reviewer passes
+to the Critic](./arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic).
 
 ## Template (copy verbatim; substitute placeholders)
 
@@ -56,7 +56,7 @@ plan` heading or the literal sentinel `reconciliation skipped` --
 - `session_sha` is the full 40-char commit SHA; short SHAs are a
   validation failure.
 - `iteration` is `1`, `2`, or `3` -- the iteration cap (see
-  [protocol → Iteration discipline](./reviewer-critic.protocol.md#critic-verdict-tracks)).
+  [protocol → Iteration discipline](./arm-api-review-critic.protocol.md#critic-verdict-tracks)).
 
 ## When something cannot be assembled
 

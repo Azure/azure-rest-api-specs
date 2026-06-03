@@ -16,7 +16,7 @@ identical** to the set of findings shown to the reviewer in chat. There
 IDs, links, code blocks, examples, fix snippets, or the trailing
 per-comment telemetry marker (the comment body's last line containing
 `posted-by: arm-api-reviewer-agent` plus the required fields defined in
-the [protocol per-comment marker schema](../../../agents/protocols/reviewer-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting)).
+the [protocol per-comment marker schema](../../../agents/protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting)).
 
 ## Hard rules
 
@@ -82,6 +82,6 @@ matches.
 ## Telemetry-marker degradation
 
 Telemetry marker assembly failures **MUST NOT** block posting; fall back
-per the [protocol telemetry fallback policy](../../../agents/protocols/reviewer-critic.protocol.md#telemetry-fallback-policy-load-bearing).
+per the [protocol telemetry fallback policy](../../../agents/protocols/arm-api-review-critic.protocol.md#telemetry-fallback-policy-load-bearing).
 A degraded marker still satisfies parity as long as the chat-rendered
 body and the posted body carry the **same** marker bytes.

@@ -91,14 +91,14 @@ browser "find on page".
 Supporting sections:
 
 - **Why this agent exists** -- precision-dominates-recall rationale.
-- **Operating mode** -- inputs received from the Reviewer (canonical schema in the shared protocol: [./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)).
+- **Operating mode** -- inputs received from the Reviewer (canonical schema in the shared protocol: [./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)).
 - **Hard constraints** -- read-only behavior, no subagent recursion, no new findings.
 - **Verdict tracks** -- the four verdicts every output returns (canonical schema in the shared protocol).
 - **Known false-positive and missed-violation patterns** -- reference guard-rails.
 
 ## Glossary
 
-Critic-specific terms have been consolidated into the [shared protocol glossary](./protocols/reviewer-critic.protocol.md#glossary). When this file mentions **bias filter**, **graph-diff**, **override-reason**, or **proof-of-fix anchor**, the protocol is the source of truth. Do not maintain a duplicate glossary in this file.
+Critic-specific terms have been consolidated into the [shared protocol glossary](./protocols/arm-api-review-critic.protocol.md#glossary). When this file mentions **bias filter**, **graph-diff**, **override-reason**, or **proof-of-fix anchor**, the protocol is the source of truth. Do not maintain a duplicate glossary in this file.
 
 ## Markers the Critic emits and reads
 
@@ -106,10 +106,10 @@ The Critic emits **one** marker on every response and **reads** one
 marker field during reconciliation validation. Both schemas live in the
 shared protocol; do not restate the fields here.
 
-| Direction | Marker                                        | Where                                                                                                                                                                                   | Source of truth                                                                                                                                           |
-| --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response (dispatch return or session-handoff paste). Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
-| Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                                                                     | [protocol -> Per-comment telemetry marker](./protocols/reviewer-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
+| Direction | Marker                                        | Where                                                                                                                                                                                   | Source of truth                                                                                                                                                 |
+| --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response (dispatch return or session-handoff paste). Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
+| Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                                                                     | [protocol -> Per-comment telemetry marker](./protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
 
 The Critic does **not** emit any other HTML marker. It does **not** read
 or write the Reviewer's per-response `<!-- review-state: ... -->`
@@ -203,8 +203,8 @@ and **before** any human posting decision (Step 8).
 
 Inputs you receive from the reviewer. The canonical wire format is the
 YAML template at
-[`./protocols/critic-inputs.template.md`](./protocols/critic-inputs.template.md);
-the shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)) defines the field semantics (see its "Inputs the Reviewer passes to the Critic" section). FAIL any invocation whose prompt does not contain exactly one `# critic-inputs/v1` block. The list below restates the field meanings for in-file readability
+[`./protocols/arm-api-review-critic-inputs.template.md`](./protocols/arm-api-review-critic-inputs.template.md);
+the shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) defines the field semantics (see its "Inputs the Reviewer passes to the Critic" section). FAIL any invocation whose prompt does not contain exactly one `# critic-inputs/v1` block. The list below restates the field meanings for in-file readability
 and adds Critic-specific behavioral notes that are not in the protocol.
 
 1. The PR URL (owner, repo, number).
@@ -264,7 +264,7 @@ Input validation is strict and fail-fast:
 - On iteration 1, Inputs #7 and #8 MUST be passed as an explicit empty
   list (`[]` or the literal string `none`). Omission is not equivalent
   and FAILs the run -- the protocol's input contract is "pass all ten on
-  every invocation" (see [`./protocols/reviewer-critic.protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/reviewer-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic)).
+  every invocation" (see [`./protocols/arm-api-review-critic.protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic)).
 - Input 6 must be either a real reconciliation plan or the literal
   sentinel `reconciliation skipped`.
 - Input 9 must be explicitly `graphs-produced: true`,
@@ -349,7 +349,7 @@ If validation fails, return `Finding accuracy = FAIL` with reason
   (`<!-- posted-by: arm-api-reviewer-agent ... -->`) or the Reviewer's
   per-response review-state marker. Your only marker is the
   `<!-- critic-verdict: ... -->` header defined in the protocol
-  ([Critic-verdict marker](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response)).
+  ([Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)).
   Any other protocol-shaped HTML comment in your output is a defect;
   regenerate.
 - **No subagent invocation.** You do not have the `agent` tool, and you
@@ -492,7 +492,7 @@ until Reviewer Step 8 and is not available at Critic validation time).
 
 Extract the `justification:` clause and re-validate it against the canonical
 three-check **Override-reason validator** specified in the shared protocol:
-[`./protocols/reviewer-critic.protocol.md` -> Override-reason validator](./protocols/reviewer-critic.protocol.md#override-reason-validator).
+[`./protocols/arm-api-review-critic.protocol.md` -> Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator).
 The protocol owns the length threshold, the boilerplate denylist, and the
 structured-anchor / verbatim-quote requirement; do **not** duplicate those
 rules here.
@@ -700,7 +700,7 @@ section of the output schema below.
 
 ## Verdict tracks
 
-Return **four** verdicts at the top of every output. The shared protocol file ([./protocols/reviewer-critic.protocol.md](./protocols/reviewer-critic.protocol.md)) is the canonical schema (see its "Critic verdict tracks" section); the table below restates it for in-file
+Return **four** verdicts at the top of every output. The shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) is the canonical schema (see its "Critic verdict tracks" section); the table below restates it for in-file
 readability and adds the value definitions the Reviewer expects to parse.
 
 | Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -725,7 +725,7 @@ readability and adds the value definitions the Reviewer expects to parse.
 Use this **exact** structure. The reviewer parses your output
 programmatically. The `<!-- critic-verdict: ... -->` marker is **required**
 as the literal first line; its field values must mirror the `### Verdict`
-table body byte-for-byte (see [protocol -> Critic-verdict marker](./protocols/reviewer-critic.protocol.md#critic-verdict-marker-per-critic-response)).
+table body byte-for-byte (see [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)).
 
 ```markdown
 <!-- critic-verdict: finding={pass|warn|fail|invalidated} | graph={pass|warn|fail-fabrication|na} | reconciliation={pass|warn|fail|na} | coverage={approve|request-expansion|needs-discussion} | iteration={N} | pr={owner/repo#number} -->
