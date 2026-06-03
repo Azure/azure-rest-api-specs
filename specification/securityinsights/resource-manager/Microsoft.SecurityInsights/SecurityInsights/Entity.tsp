@@ -148,4 +148,3 @@ interface Entities {
   Entities.entitiesGetTimelineList::parameters.body,
   "The parameters required to execute an timeline operation on the given entity."
 );
-
