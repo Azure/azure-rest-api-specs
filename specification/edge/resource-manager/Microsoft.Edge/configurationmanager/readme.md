@@ -100,12 +100,11 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/uninstallSolution"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targets/{targetName}/removeRevision"].post
     reason: |
-      Fire-and-forget LRO POST actions return 202 (Accepted) only with no terminal response body.
-      The recommended TypeSpec template ArmResourceActionNoResponseContentAsync models this correctly
-      and emits {202, default}, but the LintDiff PostResponseCodes rule requires the exact set
-      {202, 204, default} for no-content async POSTs. This is a known mismatch between the
-      recommended template and the validator. Precedent: Microsoft.NetworkCloud,
-      Microsoft.AzureStackHCI/arcSettings, Microsoft.DeviceUpdate.
+      False positive. These are fire-and-forget LRO POST actions generated from the
+      recommended TypeSpec template ArmResourceActionNoResponseContentAsync, which
+      emits {202, default}. The LintDiff PostResponseCodes rule still requires
+      {202, 204, default}, a known mismatch between the recommended template and
+      the validator.
 
 ```
 ---
