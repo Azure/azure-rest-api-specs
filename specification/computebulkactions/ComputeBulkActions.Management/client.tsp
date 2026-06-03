@@ -114,10 +114,26 @@ namespace Microsoft.ComputeBulkActions;
 // Warning: Plural enum names → singular
 // =====================================================================
 @@clientName(CachingTypes, "ComputeBulkActionsCachingType", "csharp");
-@@clientName(DiskControllerTypes, "ComputeBulkActionsDiskControllerType", "csharp");
-@@clientName(DiskCreateOptionTypes, "ComputeBulkActionsDiskCreateOptionType", "csharp");
-@@clientName(DiskDeleteOptionTypes, "ComputeBulkActionsDiskDeleteOptionType", "csharp");
-@@clientName(DiskDetachOptionTypes, "ComputeBulkActionsDiskDetachOptionType", "csharp");
+@@clientName(
+  DiskControllerTypes,
+  "ComputeBulkActionsDiskControllerType",
+  "csharp"
+);
+@@clientName(
+  DiskCreateOptionTypes,
+  "ComputeBulkActionsDiskCreateOptionType",
+  "csharp"
+);
+@@clientName(
+  DiskDeleteOptionTypes,
+  "ComputeBulkActionsDiskDeleteOptionType",
+  "csharp"
+);
+@@clientName(
+  DiskDetachOptionTypes,
+  "ComputeBulkActionsDiskDetachOptionType",
+  "csharp"
+);
 @@clientName(
   DomainNameLabelScopeTypes,
   "ComputeBulkActionsDomainNameLabelScopeType",
@@ -181,11 +197,7 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Warning: Ambiguous type names
 // =====================================================================
-@@clientName(
-  LocationBasedLaunchBulkInstancesOperation,
-  "BulkAction",
-  "csharp"
-);
+@@clientName(LocationBasedLaunchBulkInstancesOperation, "BulkAction", "csharp");
 @@clientName(Mode, "ComputeBulkActionsProxyAgentMode", "csharp");
 @@clientName(Modes, "ComputeBulkActionsHostEndpointMode", "csharp");
 @@clientName(ApiError, "ComputeBulkActionsApiError", "csharp");
@@ -323,7 +335,11 @@ namespace Microsoft.ComputeBulkActions;
   "ComputeBulkActionsKeyVaultSecretReference",
   "csharp"
 );
-@@clientName(PublicIPAddressSku, "ComputeBulkActionsPublicIPAddressSku", "csharp");
+@@clientName(
+  PublicIPAddressSku,
+  "ComputeBulkActionsPublicIPAddressSku",
+  "csharp"
+);
 @@clientName(
   PublicIPAddressSkuName,
   "ComputeBulkActionsPublicIPAddressSkuName",
@@ -409,7 +425,11 @@ namespace Microsoft.ComputeBulkActions;
   "ComputeBulkActionsLinuxPatchAssessmentMode",
   "csharp"
 );
-@@clientName(LinuxPatchSettings, "ComputeBulkActionsLinuxPatchSettings", "csharp");
+@@clientName(
+  LinuxPatchSettings,
+  "ComputeBulkActionsLinuxPatchSettings",
+  "csharp"
+);
 @@clientName(
   LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
   "ComputeBulkActionsLinuxVMGuestPatchAutomaticByPlatformRebootSetting",
@@ -425,7 +445,11 @@ namespace Microsoft.ComputeBulkActions;
   "ComputeBulkActionsLinuxVMGuestPatchMode",
   "csharp"
 );
-@@clientName(LocalStorageDiskType, "ComputeBulkActionsLocalStorageDiskType", "csharp");
+@@clientName(
+  LocalStorageDiskType,
+  "ComputeBulkActionsLocalStorageDiskType",
+  "csharp"
+);
 @@clientName(
   OSImageNotificationProfile,
   "ComputeBulkActionsOSImageNotificationProfile",
@@ -483,13 +507,21 @@ namespace Microsoft.ComputeBulkActions;
   "csharp"
 );
 @@clientName(VMAttributes, "ComputeBulkActionsVMAttributes", "csharp");
-@@clientName(VMAttributeSupport, "ComputeBulkActionsVMAttributeSupport", "csharp");
+@@clientName(
+  VMAttributeSupport,
+  "ComputeBulkActionsVMAttributeSupport",
+  "csharp"
+);
 @@clientName(
   VMDiskSecurityProfile,
   "ComputeBulkActionsVMDiskSecurityProfile",
   "csharp"
 );
-@@clientName(VMGalleryApplication, "ComputeBulkActionsVMGalleryApplication", "csharp");
+@@clientName(
+  VMGalleryApplication,
+  "ComputeBulkActionsVMGalleryApplication",
+  "csharp"
+);
 @@clientName(VmSizeProfile, "ComputeBulkActionsVmSizeProfile", "csharp");
 @@clientName(
   WindowsPatchAssessmentMode,
