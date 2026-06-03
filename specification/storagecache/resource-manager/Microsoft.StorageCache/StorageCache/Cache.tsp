@@ -13,15 +13,23 @@ namespace Microsoft.StorageCache;
 /**
  * A cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Cache
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CacheProperties> {
+model Cache is Azure.ResourceManager.ProxyResource<CacheProperties> {
   ...ResourceNameParameter<
     Resource = Cache,
     KeyName = "cacheName",
     SegmentName = "caches",
     NamePattern = "^[-0-9a-zA-Z_]{1,80}$"
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /** Region name string. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /**
    * The identity of the cache, if configured.

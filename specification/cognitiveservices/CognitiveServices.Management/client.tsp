@@ -181,6 +181,11 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(AssignedIdentity, "CognitiveServicesAssignedIdentity", "csharp");
+@@clientName(
+  UserAssignedIdentity,
+  "CognitiveServicesUserAssignedIdentity",
+  "csharp"
+);
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
 @@clientName(
   AgentDeploymentProperties,
@@ -789,7 +794,11 @@ op regenerateKeyCustom(
   "GetModelCapacities",
   "csharp"
 );
-@@clientName(DeletedAccounts.list, "GetDeletedAccounts", "csharp");
+@@clientName(
+  DeletedAccounts.list,
+  "GetCognitiveServicesDeletedAccounts",
+  "csharp"
+);
 @@clientName(
   ManagedNetworkSettingsPropertiesBasicResources.post,
   "UpdateOutboundRules",

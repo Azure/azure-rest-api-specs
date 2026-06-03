@@ -52,7 +52,7 @@ alias TriggerRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     triggerName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers",
   }
 >;
 
@@ -174,7 +174,7 @@ interface TriggerResources {
    * Rerun single trigger instance by runId.
    */
   @tag("triggerruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun")
   rerun is TriggerRunsOps.ActionSync<
     TriggerResource,
     void,
@@ -193,7 +193,7 @@ interface TriggerResources {
    * Cancel a single trigger instance by runId.
    */
   @tag("triggerruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/cancel")
   cancel is TriggerRunsOps.ActionSync<
     TriggerResource,
     void,

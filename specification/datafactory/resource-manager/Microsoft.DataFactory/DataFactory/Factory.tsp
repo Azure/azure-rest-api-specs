@@ -13,16 +13,13 @@ namespace Microsoft.DataFactory;
 /**
  * Factory resource type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Factory
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FactoryProperties> {
+model Factory is Azure.ResourceManager.ProxyResource<FactoryProperties> {
   ...ResourceNameParameter<
     Resource = Factory,
     KeyName = "factoryName",
     SegmentName = "factories",
     NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 
   /**
    * Managed service identity of the factory.
@@ -31,6 +28,18 @@ model Factory
   identity?: FactoryIdentity;
 
   ...Record<unknown>;
+
+  /** The resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /** The resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -50,7 +59,7 @@ alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     factoryName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories",
   }
 >;
 
@@ -193,7 +202,7 @@ interface Factories {
    */
   @tag("pipelineruns")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
   pipelineRunsGet is PipelineRunsOps.ActionSync<
     Factory,
     void,
@@ -212,7 +221,7 @@ interface Factories {
    * Cancel a pipeline run by its run ID.
    */
   @tag("pipelineruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
   cancel is PipelineRunsOps.ActionSync<
     Factory,
     void,
@@ -237,7 +246,7 @@ interface Factories {
    * Query activity runs based on input filter conditions.
    */
   @tag("activityruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
   queryByPipelineRun is PipelineRunsOps.ActionSync<
     Factory,
     RunFilterParameters,

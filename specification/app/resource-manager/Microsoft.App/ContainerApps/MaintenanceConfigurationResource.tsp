@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -49,31 +50,6 @@ alias MaintenanceConfigurationResourceOps = Azure.ResourceManager.Legacy.LegacyO
   }
 >;
 
-alias MaintenanceConfigurationResourceCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the managed environment. */
-    @path
-    @segment("managedEnvironments")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    environmentName: string;
-  },
-  {
-    /** Name of the Maintenance Configuration. */
-    @path
-    @segment("maintenanceConfigurations")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    configName: string;
-  },
-  ErrorType = DefaultErrorResponse
->;
-
 @armResourceOperations
 interface MaintenanceConfigurations {
   /**
@@ -84,17 +60,17 @@ interface MaintenanceConfigurations {
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
-  createOrUpdate is MaintenanceConfigurationResourceCustomErrorOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
+  createOrUpdate is MaintenanceConfigurationResourceOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
-  delete is MaintenanceConfigurationResourceCustomErrorOps.DeleteSync<MaintenanceConfigurationResource>;
+  delete is MaintenanceConfigurationResourceOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
-  list is MaintenanceConfigurationResourceCustomErrorOps.List<
+  list is MaintenanceConfigurationResourceOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>
   >;
