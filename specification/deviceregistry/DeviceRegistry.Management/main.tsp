@@ -110,3 +110,33 @@ interface OperationStatus {
     operationId: string,
   ): ArmResponse<OperationStatusResult> | ErrorResponse;
 }
+
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "consistent with existing OperationStatus interface"
+@added(Versions.v2026_11_01_preview)
+@armResourceOperations
+interface AsyncOperationStatus {
+  @doc("Returns the current status of an async operation.")
+  @autoRoute
+  @armUpdateProviderNamespace
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.DeviceRegistry",
+
+    ...LocationParameter,
+
+    @path
+    @segment("asyncOperationStatuses")
+    @minLength(1)
+    @doc("The ID of an ongoing async operation.")
+    @armCommonParameter(
+      "OperationIdParameter",
+      Azure.ResourceManager.CommonTypes.Versions.v6
+    )
+    operationId: string,
+  ): ArmResponse<OperationStatusResult> | ErrorResponse;
+}

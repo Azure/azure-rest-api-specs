@@ -46,6 +46,9 @@
       "name": "OperationStatus"
     },
     {
+      "name": "AsyncOperationStatus"
+    },
+    {
       "name": "Assets"
     },
     {
@@ -284,6 +287,48 @@
         "x-ms-examples": {
           "Get_BillingContainer": {
             "$ref": "./examples/Get_BillingContainer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceRegistry/locations/{location}/asyncOperationStatuses/{operationId}": {
+      "get": {
+        "operationId": "AsyncOperationStatus_Get",
+        "tags": [
+          "AsyncOperationStatus"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_AsyncOperationStatus": {
+            "$ref": "./examples/Get_AsyncOperationStatus.json"
           }
         }
       }
