@@ -206,51 +206,67 @@ interface ProjectConnections {
   >;
 }
 
-@@doc(ConnectionPropertiesV2BasicResource.name,
+@@doc(
+  ConnectionPropertiesV2BasicResource.name,
   "Friendly name of the connection"
 );
-@@doc(ConnectionPropertiesV2BasicResource.properties,
+@@doc(
+  ConnectionPropertiesV2BasicResource.properties,
   "Connection property base schema."
 );
-@@doc(ConnectionPropertiesV2BasicResources.create::parameters.resource,
+@@doc(
+  ConnectionPropertiesV2BasicResources.create::parameters.resource,
   "The object for creating or updating a new account connection"
 );
-@@doc(ConnectionPropertiesV2BasicResources.update::parameters.properties,
+@@doc(
+  ConnectionPropertiesV2BasicResources.update::parameters.properties,
   "Parameters for account connection update."
 );
-@@doc(ProjectConnections.create::parameters.resource,
+@@doc(
+  ProjectConnections.create::parameters.resource,
   "The object for creating or updating a new account connection"
 );
-@@doc(ProjectConnections.update::parameters.properties,
+@@doc(
+  ProjectConnections.update::parameters.properties,
   "Parameters for account connection update."
 );
-@@summary(ConnectionPropertiesV2BasicResources.list,
+@@summary(
+  ConnectionPropertiesV2BasicResources.list,
   "Lists all the available  Cognitive Services account connections under the specified account."
 );
-@@summary(ConnectionPropertiesV2BasicResources.get,
+@@summary(
+  ConnectionPropertiesV2BasicResources.get,
   "Lists Cognitive Services account connection by name."
 );
-@@summary(ConnectionPropertiesV2BasicResources.create,
+@@summary(
+  ConnectionPropertiesV2BasicResources.create,
   "Create or update Cognitive Services account connection under the specified account."
 );
-@@summary(ConnectionPropertiesV2BasicResources.update,
+@@summary(
+  ConnectionPropertiesV2BasicResources.update,
   "Update Cognitive Services account connection under the specified account."
 );
-@@summary(ConnectionPropertiesV2BasicResources.delete,
+@@summary(
+  ConnectionPropertiesV2BasicResources.delete,
   "Delete Cognitive Services account connection by name."
 );
-@@summary(ProjectConnections.list,
+@@summary(
+  ProjectConnections.list,
   "Lists all the available Cognitive Services project connections under the specified project."
 );
-@@summary(ProjectConnections.get,
+@@summary(
+  ProjectConnections.get,
   "Lists Cognitive Services project connection by name."
 );
-@@summary(ProjectConnections.create,
+@@summary(
+  ProjectConnections.create,
   "Create or update Cognitive Services project connection under the specified project."
 );
-@@summary(ProjectConnections.update,
+@@summary(
+  ProjectConnections.update,
   "Update Cognitive Services project connection under the specified project."
 );
-@@summary(ProjectConnections.delete,
+@@summary(
+  ProjectConnections.delete,
   "Delete Cognitive Services project connection by name."
 );

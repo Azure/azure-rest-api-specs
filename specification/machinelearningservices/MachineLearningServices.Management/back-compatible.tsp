@@ -4,28 +4,34 @@ using Azure.ClientGenerator.Core;
 using Microsoft.MachineLearningServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClusterUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegistryPrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RegistryPrivateEndpointConnection.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SharedPrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspaceUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkspaceUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties
 );
 
 @@clientLocation(ComputeResources.get, "Compute");
 @@clientLocation(ComputeResources.createOrUpdate, "Compute");
-@@clientName(ComputeResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ComputeResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ComputeResources.update, "Compute");
@@ -33,7 +39,8 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(ComputeResources.delete, "Compute");
 @@clientLocation(ComputeResources.list, "Compute");
 @@clientLocation(ComputeResources.updateCustomServices, "Compute");
-@@clientName(ComputeResources.updateCustomServices::parameters.body,
+@@clientName(
+  ComputeResources.updateCustomServices::parameters.body,
   "customServices"
 );
 @@clientLocation(ComputeResources.listNodes, "Compute");
@@ -44,7 +51,8 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(ComputeResources.stop, "Compute");
 @@clientLocation(ComputeResources.restart, "Compute");
 @@clientLocation(ComputeResources.updateIdleShutdownSetting, "Compute");
-@@clientName(ComputeResources.updateIdleShutdownSetting::parameters.body,
+@@clientName(
+  ComputeResources.updateIdleShutdownSetting::parameters.body,
   "parameters"
 );
 @@clientLocation(ComputeResources.getAllowedResizeSizes, "Compute");
@@ -59,7 +67,8 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(CodeContainers.list, "RegistryCodeContainers");
 @@clientLocation(CodeContainerOperationGroup.get, CodeContainers);
 @@clientLocation(CodeContainerOperationGroup.createOrUpdate, CodeContainers);
-@@clientName(CodeContainerOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  CodeContainerOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(CodeContainerOperationGroup.delete, CodeContainers);
@@ -70,33 +79,39 @@ using Microsoft.MachineLearningServices;
 @@clientName(CodeVersions.createOrUpdate::parameters.resource, "body");
 @@clientLocation(CodeVersions.delete, "RegistryCodeVersions");
 @@clientLocation(CodeVersions.list, "RegistryCodeVersions");
-@@clientLocation(CodeVersions.createOrGetStartPendingUpload,
+@@clientLocation(
+  CodeVersions.createOrGetStartPendingUpload,
   "RegistryCodeVersions"
 );
 @@clientLocation(CodeVersionOperationGroup.get, CodeVersions);
 @@clientLocation(CodeVersionOperationGroup.createOrUpdate, CodeVersions);
-@@clientName(CodeVersionOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  CodeVersionOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(CodeVersionOperationGroup.delete, CodeVersions);
 @@clientLocation(CodeVersionOperationGroup.list, CodeVersions);
 @@clientLocation(CodeVersionOperationGroup.publish, CodeVersions);
-@@clientLocation(CodeVersionOperationGroup.createOrGetStartPendingUpload,
+@@clientLocation(
+  CodeVersionOperationGroup.createOrGetStartPendingUpload,
   CodeVersions
 );
 
 @@clientLocation(ComponentContainers.get, "RegistryComponentContainers");
-@@clientLocation(ComponentContainers.createOrUpdate,
+@@clientLocation(
+  ComponentContainers.createOrUpdate,
   "RegistryComponentContainers"
 );
 @@clientName(ComponentContainers.createOrUpdate::parameters.resource, "body");
 @@clientLocation(ComponentContainers.delete, "RegistryComponentContainers");
 @@clientLocation(ComponentContainers.list, "RegistryComponentContainers");
 @@clientLocation(ComponentContainerOperationGroup.get, ComponentContainers);
-@@clientLocation(ComponentContainerOperationGroup.createOrUpdate,
+@@clientLocation(
+  ComponentContainerOperationGroup.createOrUpdate,
   ComponentContainers
 );
-@@clientName(ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(ComponentContainerOperationGroup.delete, ComponentContainers);
@@ -108,10 +123,12 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(ComponentVersions.delete, "RegistryComponentVersions");
 @@clientLocation(ComponentVersions.list, "RegistryComponentVersions");
 @@clientLocation(ComponentVersionOperationGroup.get, ComponentVersions);
-@@clientLocation(ComponentVersionOperationGroup.createOrUpdate,
+@@clientLocation(
+  ComponentVersionOperationGroup.createOrUpdate,
   ComponentVersions
 );
-@@clientName(ComponentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ComponentVersionOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(ComponentVersionOperationGroup.delete, ComponentVersions);
@@ -125,7 +142,8 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(DataContainers.list, "RegistryDataContainers");
 @@clientLocation(DataContainerOperationGroup.get, DataContainers);
 @@clientLocation(DataContainerOperationGroup.createOrUpdate, DataContainers);
-@@clientName(DataContainerOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  DataContainerOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(DataContainerOperationGroup.delete, DataContainers);
@@ -136,44 +154,53 @@ using Microsoft.MachineLearningServices;
 @@clientName(DataVersionBases.createOrUpdate::parameters.resource, "body");
 @@clientLocation(DataVersionBases.delete, "RegistryDataVersions");
 @@clientLocation(DataVersionBases.list, "RegistryDataVersions");
-@@clientLocation(DataVersionBases.createOrGetStartPendingUpload,
+@@clientLocation(
+  DataVersionBases.createOrGetStartPendingUpload,
   "RegistryDataVersions"
 );
 @@clientName(DataVersions.createOrUpdate::parameters.resource, "body");
 
 @@clientLocation(EnvironmentContainers.get, "RegistryEnvironmentContainers");
-@@clientLocation(EnvironmentContainers.createOrUpdate,
+@@clientLocation(
+  EnvironmentContainers.createOrUpdate,
   "RegistryEnvironmentContainers"
 );
 @@clientName(EnvironmentContainers.createOrUpdate::parameters.resource, "body");
 @@clientLocation(EnvironmentContainers.delete, "RegistryEnvironmentContainers");
 @@clientLocation(EnvironmentContainers.list, "RegistryEnvironmentContainers");
 @@clientLocation(EnvironmentContainerOperationGroup.get, EnvironmentContainers);
-@@clientLocation(EnvironmentContainerOperationGroup.createOrUpdate,
+@@clientLocation(
+  EnvironmentContainerOperationGroup.createOrUpdate,
   EnvironmentContainers
 );
-@@clientName(EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(EnvironmentContainerOperationGroup.delete,
+@@clientLocation(
+  EnvironmentContainerOperationGroup.delete,
   EnvironmentContainers
 );
-@@clientLocation(EnvironmentContainerOperationGroup.list,
+@@clientLocation(
+  EnvironmentContainerOperationGroup.list,
   EnvironmentContainers
 );
 
 @@clientLocation(EnvironmentVersions.get, "RegistryEnvironmentVersions");
-@@clientLocation(EnvironmentVersions.createOrUpdate,
+@@clientLocation(
+  EnvironmentVersions.createOrUpdate,
   "RegistryEnvironmentVersions"
 );
 @@clientName(EnvironmentVersions.createOrUpdate::parameters.resource, "body");
 @@clientLocation(EnvironmentVersions.delete, "RegistryEnvironmentVersions");
 @@clientLocation(EnvironmentVersions.list, "RegistryEnvironmentVersions");
 @@clientLocation(EnvironmentVersionOperationGroup.get, EnvironmentVersions);
-@@clientLocation(EnvironmentVersionOperationGroup.createOrUpdate,
+@@clientLocation(
+  EnvironmentVersionOperationGroup.createOrUpdate,
   EnvironmentVersions
 );
-@@clientName(EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(EnvironmentVersionOperationGroup.delete, EnvironmentVersions);
@@ -187,7 +214,8 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(ModelContainers.list, "RegistryModelContainers");
 @@clientLocation(ModelContainerOperationGroup.get, ModelContainers);
 @@clientLocation(ModelContainerOperationGroup.createOrUpdate, ModelContainers);
-@@clientName(ModelContainerOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ModelContainerOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(ModelContainerOperationGroup.delete, ModelContainers);
@@ -198,12 +226,14 @@ using Microsoft.MachineLearningServices;
 @@clientName(ModelVersions.createOrUpdate::parameters.resource, "body");
 @@clientLocation(ModelVersions.delete, "RegistryModelVersions");
 @@clientLocation(ModelVersions.list, "RegistryModelVersions");
-@@clientLocation(ModelVersions.createOrGetStartPendingUpload,
+@@clientLocation(
+  ModelVersions.createOrGetStartPendingUpload,
   "RegistryModelVersions"
 );
 @@clientLocation(ModelVersionOperationGroup.get, ModelVersions);
 @@clientLocation(ModelVersionOperationGroup.createOrUpdate, ModelVersions);
-@@clientName(ModelVersionOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  ModelVersionOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(ModelVersionOperationGroup.delete, ModelVersions);
@@ -224,11 +254,13 @@ using Microsoft.MachineLearningServices;
 
 @@clientName(FeaturesetVersions.createOrUpdate::parameters.resource, "body");
 
-@@clientName(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+@@clientName(
+  FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
   "body"
 );
 
-@@clientName(FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
+@@clientName(
+  FeaturestoreEntityVersions.createOrUpdate::parameters.resource,
   "body"
 );
 
@@ -248,7 +280,8 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(JobBases.list, "Jobs");
 @@clientLocation(JobBases.cancel, "Jobs");
 
-@@clientName(MarketplaceSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  MarketplaceSubscriptions.createOrUpdate::parameters.resource,
   "body"
 );
 
@@ -276,179 +309,230 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(Workspaces.getInWorkspace, EndpointDeployment);
 @@clientLocation(Workspaces.privateLinkResourcesList, "PrivateLinkResources");
 @@clientName(Workspaces.privateLinkResourcesList, "List");
-@@clientLocation(Workspaces.provisionManagedNetwork,
+@@clientLocation(
+  Workspaces.provisionManagedNetwork,
   "ManagedNetworkProvisions"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.get,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.get,
   "WorkspaceConnections"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.create,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.create,
   "WorkspaceConnections"
 );
-@@clientName(WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+@@clientName(
+  WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.update,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.update,
   "WorkspaceConnections"
 );
-@@clientName(WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
+@@clientName(
+  WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
   "body"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.delete,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.delete,
   "WorkspaceConnections"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.list,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.list,
   "WorkspaceConnections"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.listSecrets,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.listSecrets,
   "WorkspaceConnections"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.testConnection,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.testConnection,
   "WorkspaceConnections"
 );
-@@clientLocation(WorkspaceConnectionPropertiesV2BasicResources.getModels,
+@@clientLocation(
+  WorkspaceConnectionPropertiesV2BasicResources.getModels,
   "Connection"
 );
 
-@@clientLocation(EndpointDeploymentResourcePropertiesBasicResources.getDeployment,
+@@clientLocation(
+  EndpointDeploymentResourcePropertiesBasicResources.getDeployment,
   "Connection"
 );
-@@clientLocation(EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment,
+@@clientLocation(
+  EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment,
   "Connection"
 );
-@@clientName(EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
+@@clientName(
+  EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
   "body"
 );
-@@clientLocation(EndpointDeploymentResourcePropertiesBasicResources.deleteDeployment,
+@@clientLocation(
+  EndpointDeploymentResourcePropertiesBasicResources.deleteDeployment,
   "Connection"
 );
-@@clientLocation(EndpointDeploymentResourcePropertiesBasicResources.listDeployments,
+@@clientLocation(
+  EndpointDeploymentResourcePropertiesBasicResources.listDeployments,
   "Connection"
 );
 @@clientName(EndpointDeployment.createOrUpdate::parameters.resource, "body");
 
-@@clientLocation(RaiBlocklistPropertiesBasicResources.get,
+@@clientLocation(
+  RaiBlocklistPropertiesBasicResources.get,
   "ConnectionRaiBlocklist"
 );
-@@clientLocation(RaiBlocklistPropertiesBasicResources.create,
+@@clientLocation(
+  RaiBlocklistPropertiesBasicResources.create,
   "ConnectionRaiBlocklist"
 );
-@@clientName(RaiBlocklistPropertiesBasicResources.create::parameters.resource,
+@@clientName(
+  RaiBlocklistPropertiesBasicResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(RaiBlocklistPropertiesBasicResources.delete,
+@@clientLocation(
+  RaiBlocklistPropertiesBasicResources.delete,
   "ConnectionRaiBlocklist"
 );
-@@clientLocation(RaiBlocklistPropertiesBasicResources.list,
+@@clientLocation(
+  RaiBlocklistPropertiesBasicResources.list,
   "ConnectionRaiBlocklists"
 );
-@@clientLocation(RaiBlocklistPropertiesBasicResources.addBulk,
+@@clientLocation(
+  RaiBlocklistPropertiesBasicResources.addBulk,
   "ConnectionRaiBlocklistItem"
 );
-@@clientLocation(RaiBlocklistPropertiesBasicResources.deleteBulk,
+@@clientLocation(
+  RaiBlocklistPropertiesBasicResources.deleteBulk,
   "ConnectionRaiBlocklistItem"
 );
 
-@@clientLocation(RaiBlocklistItemPropertiesBasicResources.get,
+@@clientLocation(
+  RaiBlocklistItemPropertiesBasicResources.get,
   "ConnectionRaiBlocklistItem"
 );
-@@clientLocation(RaiBlocklistItemPropertiesBasicResources.create,
+@@clientLocation(
+  RaiBlocklistItemPropertiesBasicResources.create,
   "ConnectionRaiBlocklistItem"
 );
-@@clientName(RaiBlocklistItemPropertiesBasicResources.create::parameters.resource,
+@@clientName(
+  RaiBlocklistItemPropertiesBasicResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(RaiBlocklistItemPropertiesBasicResources.delete,
+@@clientLocation(
+  RaiBlocklistItemPropertiesBasicResources.delete,
   "ConnectionRaiBlocklistItem"
 );
-@@clientLocation(RaiBlocklistItemPropertiesBasicResources.list,
+@@clientLocation(
+  RaiBlocklistItemPropertiesBasicResources.list,
   "ConnectionRaiBlocklistItems"
 );
 
 @@clientLocation(RaiPolicyPropertiesBasicResources.get, "ConnectionRaiPolicy");
-@@clientLocation(RaiPolicyPropertiesBasicResources.create,
+@@clientLocation(
+  RaiPolicyPropertiesBasicResources.create,
   "ConnectionRaiPolicy"
 );
-@@clientName(RaiPolicyPropertiesBasicResources.create::parameters.resource,
+@@clientName(
+  RaiPolicyPropertiesBasicResources.create::parameters.resource,
   "body"
 );
-@@clientLocation(RaiPolicyPropertiesBasicResources.delete,
+@@clientLocation(
+  RaiPolicyPropertiesBasicResources.delete,
   "ConnectionRaiPolicy"
 );
-@@clientLocation(RaiPolicyPropertiesBasicResources.list,
+@@clientLocation(
+  RaiPolicyPropertiesBasicResources.list,
   "ConnectionRaiPolicies"
 );
 @@clientName(RaiPolicy.create::parameters.resource, "body");
 @@clientLocation(RaiPolicy.list, "RaiPolicies");
 
 @@clientLocation(EndpointResourcePropertiesBasicResources.get, "Endpoint");
-@@clientLocation(EndpointResourcePropertiesBasicResources.createOrUpdate,
+@@clientLocation(
+  EndpointResourcePropertiesBasicResources.createOrUpdate,
   "Endpoint"
 );
-@@clientName(EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
+@@clientName(
+  EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(EndpointResourcePropertiesBasicResources.list, "Endpoint");
 @@clientLocation(EndpointResourcePropertiesBasicResources.listKeys, "Endpoint");
-@@clientLocation(EndpointResourcePropertiesBasicResources.getModels,
+@@clientLocation(
+  EndpointResourcePropertiesBasicResources.getModels,
   "Endpoint"
 );
-@@clientLocation(EndpointResourcePropertiesBasicResources.regenerateKeys,
+@@clientLocation(
+  EndpointResourcePropertiesBasicResources.regenerateKeys,
   "Endpoint"
 );
 
 @@clientLocation(OutboundRuleBasicResources.get, "ManagedNetworkSettingsRule");
-@@clientLocation(OutboundRuleBasicResources.createOrUpdate,
+@@clientLocation(
+  OutboundRuleBasicResources.createOrUpdate,
   "ManagedNetworkSettingsRule"
 );
-@@clientName(OutboundRuleBasicResources.createOrUpdate::parameters.resource,
+@@clientName(
+  OutboundRuleBasicResources.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(OutboundRuleBasicResources.delete,
+@@clientLocation(
+  OutboundRuleBasicResources.delete,
   "ManagedNetworkSettingsRule"
 );
 @@clientLocation(OutboundRuleBasicResources.list, "ManagedNetworkSettingsRule");
 @@clientLocation(OutboundRuleBasicResourceOperationGroup.get, "OutboundRule");
-@@clientLocation(OutboundRuleBasicResourceOperationGroup.createOrUpdate,
+@@clientLocation(
+  OutboundRuleBasicResourceOperationGroup.createOrUpdate,
   "OutboundRule"
 );
-@@clientName(OutboundRuleBasicResourceOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  OutboundRuleBasicResourceOperationGroup.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(OutboundRuleBasicResourceOperationGroup.delete,
+@@clientLocation(
+  OutboundRuleBasicResourceOperationGroup.delete,
   "OutboundRule"
 );
 @@clientLocation(OutboundRuleBasicResourceOperationGroup.list, "OutboundRule");
 
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.get,
+@@clientLocation(
+  ManagedNetworkSettingsPropertiesBasicResources.get,
   "ManagedNetworkSettings"
 );
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.put,
+@@clientLocation(
+  ManagedNetworkSettingsPropertiesBasicResources.put,
   "ManagedNetworkSettings"
 );
-@@clientName(ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
+@@clientName(
+  ManagedNetworkSettingsPropertiesBasicResources.put::parameters.resource,
   "body"
 );
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.patch,
+@@clientLocation(
+  ManagedNetworkSettingsPropertiesBasicResources.patch,
   "ManagedNetworkSettings"
 );
-@@clientName(ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
+@@clientName(
+  ManagedNetworkSettingsPropertiesBasicResources.patch::parameters.properties,
   "body"
 );
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.list,
+@@clientLocation(
+  ManagedNetworkSettingsPropertiesBasicResources.list,
   "ManagedNetworkSettings"
 );
-@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.post,
+@@clientLocation(
+  ManagedNetworkSettingsPropertiesBasicResources.post,
   "OutboundRules"
 );
 

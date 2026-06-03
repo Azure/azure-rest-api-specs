@@ -10,112 +10,134 @@ using Microsoft.Billing;
 @@clientName(SavingsPlanTerm.P3Y, "P3_Y", "python");
 @@clientName(SavingsPlanTerm.P5Y, "P5_Y", "python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AssociatedTenantsListByBillingAccountParameters.includeRevoked,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  AssociatedTenantsListByBillingAccountParameters.includeRevoked,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingAccountsListParameters.includeAll,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingAccountsListParameters.includeAll,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingAccountsListParameters.includeAllWithoutBillingProfiles,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingAccountsListParameters.includeAllWithoutBillingProfiles,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingAccountsListParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingAccountsListParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingAccountsListParameters.includePendingAgreement,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingAccountsListParameters.includePendingAgreement,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingAccountsListParameters.includeResellee,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingAccountsListParameters.includeResellee,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingPropertyGetParameters.includeBillingCountry,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingPropertyGetParameters.includeBillingCountry,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingPropertyGetParameters.includeTransitionStatus,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingPropertyGetParameters.includeTransitionStatus,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingProfilesListByBillingAccountParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingProfilesListByBillingAccountParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionAliasesListByBillingAccountParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionAliasesListByBillingAccountParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingRoleAssignmentsResolveByBillingAccountParameters.resolveScopeDisplayNames,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingRoleAssignmentsResolveByBillingAccountParameters.resolveScopeDisplayNames,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingRoleAssignmentsResolveByBillingProfileParameters.resolveScopeDisplayNames,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingRoleAssignmentsResolveByBillingProfileParameters.resolveScopeDisplayNames,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingRoleAssignmentsResolveByInvoiceSectionParameters.resolveScopeDisplayNames,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingRoleAssignmentsResolveByInvoiceSectionParameters.resolveScopeDisplayNames,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingRoleAssignmentsResolveByCustomerParameters.resolveScopeDisplayNames,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingRoleAssignmentsResolveByCustomerParameters.resolveScopeDisplayNames,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByBillingAccountParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByBillingAccountParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByBillingAccountParameters.includeTenantSubscriptions,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByBillingAccountParameters.includeTenantSubscriptions,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByBillingAccountParameters.includeFailed,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByBillingAccountParameters.includeFailed,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByBillingProfileParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByBillingProfileParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByCustomerParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByCustomerParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByCustomerAtBillingAccountParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByCustomerAtBillingAccountParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BillingSubscriptionsListByInvoiceSectionParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  BillingSubscriptionsListByInvoiceSectionParameters.includeDeleted,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(InvoiceSectionsListByBillingProfileParameters.includeDeleted,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  InvoiceSectionsListByBillingProfileParameters.includeDeleted,
   false,
   "python"
 );

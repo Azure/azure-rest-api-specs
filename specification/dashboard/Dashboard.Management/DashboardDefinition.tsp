@@ -49,21 +49,24 @@ interface DashboardDefinitions {
     @doc("The dashboard definition resource to create or update.")
     @bodyRoot
     requestBodyParameters: DashboardDefinition,
-  ): {
-    @statusCode _: 200;
+  ):
+    | {
+        @statusCode _: 200;
 
-    @doc("Resource 'DashboardDefinition' update operation succeeded")
-    @body
-    @added(Versions.v2025_09_01_preview)
-    requestBodyParameters: DashboardDefinition;
-  } | {
-    @statusCode _: 201;
+        @doc("Resource 'DashboardDefinition' update operation succeeded")
+        @body
+        @added(Versions.v2025_09_01_preview)
+        requestBodyParameters: DashboardDefinition;
+      }
+    | {
+        @statusCode _: 201;
 
-    @doc("Resource 'DashboardDefinition' create operation succeeded")
-    @body
-    @added(Versions.v2025_09_01_preview)
-    requestBodyParameters: DashboardDefinition;
-  } | ErrorResponse;
+        @doc("Resource 'DashboardDefinition' create operation succeeded")
+        @body
+        @added(Versions.v2025_09_01_preview)
+        requestBodyParameters: DashboardDefinition;
+      }
+    | ErrorResponse;
 
   /**
    * Delete a dashboard definition.
@@ -82,6 +85,7 @@ interface DashboardDefinitions {
 }
 
 @@doc(DashboardDefinition.name, "The name of the Dashboard Definition.");
-@@doc(DashboardDefinition.properties,
+@@doc(
+  DashboardDefinition.properties,
   "Properties specific to the dashboard definition resource."
 );

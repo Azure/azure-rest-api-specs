@@ -17,7 +17,8 @@ using Microsoft.Elastic;
 @@clientName(PlanDetails.termID, "termId", "java,csharp");
 
 // Fix case changes for createAndAssociate operations (IP -> Ip)
-@@clientLocation(ElasticMonitorResources.createAndAssociateIPFilterCreate,
+@@clientLocation(
+  ElasticMonitorResources.createAndAssociateIPFilterCreate,
   "createAndAssociateIpFilters",
   "java"
 );
@@ -30,75 +31,91 @@ using Microsoft.Elastic;
 @@clientName(PlanDetails, "ElasticPlanDetails", "csharp");
 @@clientName(ProvisioningState, "ElasticProvisioningState", "csharp");
 @@clientName(ElasticMonitorResource, "ElasticMonitor", "csharp");
-@@alternateType(ElasticMonitorResource.identity,
+@@alternateType(
+  ElasticMonitorResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@clientName(MonitoringTagRules, "ElasticTagRule", "csharp");
-@@clientName(MonitoringTagRulesProperties,
+@@clientName(
+  MonitoringTagRulesProperties,
   "ElasticTagRuleProperties",
   "csharp"
 );
-@@clientName(ElasticVersionListProperties.version,
+@@clientName(
+  ElasticVersionListProperties.version,
   "AvailableVersion",
   "csharp"
 );
 @@clientName(OpenAIIntegrationRPModel, "ElasticOpenAIIntegration", "csharp");
-@@clientName(OpenAIIntegrationProperties,
+@@clientName(
+  OpenAIIntegrationProperties,
   "ElasticOpenAIIntegrationProperties",
   "csharp"
 );
-@@alternateType(OpenAIIntegrationProperties.openAIResourceId,
+@@alternateType(
+  OpenAIIntegrationProperties.openAIResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(BillingInfoResponse, "ElasticBillingInfoResult", "csharp");
-@@alternateType(ConnectedPartnerResourceProperties.azureResourceId,
+@@alternateType(
+  ConnectedPartnerResourceProperties.azureResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ConnectedPartnerResourceProperties.location,
+@@alternateType(
+  ConnectedPartnerResourceProperties.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(ConnectedPartnerResourceProperties.partnerDeploymentUri,
+@@alternateType(
+  ConnectedPartnerResourceProperties.partnerDeploymentUri,
   url,
   "csharp"
 );
-@@clientName(ConnectedPartnerResourceProperties.type,
+@@clientName(
+  ConnectedPartnerResourceProperties.type,
   "ConnectedPartnerResourcePropertiesType",
   "csharp"
 );
-@@clientName(ConnectedPartnerResourcesListFormat,
+@@clientName(
+  ConnectedPartnerResourcesListFormat,
   "ConnectedPartnerResourceInfo",
   "csharp"
 );
 @@clientName(DeploymentInfoResponse, "ElasticDeploymentInfoResult", "csharp");
-@@clientName(ElasticOrganizationToAzureSubscriptionMappingResponse,
+@@clientName(
+  ElasticOrganizationToAzureSubscriptionMappingResponse,
   "ElasticOrganizationToAzureSubscriptionMappingResult",
   "csharp"
 );
-@@clientName(ElasticOrganizationToAzureSubscriptionMappingResponseProperties,
+@@clientName(
+  ElasticOrganizationToAzureSubscriptionMappingResponseProperties,
   "ElasticOrganizationToAzureSubscriptionMappingProperties",
   "csharp"
 );
 @@clientName(ElasticProperties, "ElasticCloudProperties", "csharp");
-@@clientName(ElasticTrafficFilter.includeByDefault,
+@@clientName(
+  ElasticTrafficFilter.includeByDefault,
   "DoesIncludeByDefault",
   "csharp"
 );
 @@clientName(ElasticTrafficFilter.type, "FilterType", "csharp");
-@@clientName(ElasticTrafficFilterResponse,
+@@clientName(
+  ElasticTrafficFilterResponse,
   "ElasticTrafficFilterListResult",
   "csharp"
 );
 @@clientName(ElasticVersionListFormat, "ElasticVersion", "csharp");
-@@clientName(ElasticVersionListProperties,
+@@clientName(
+  ElasticVersionListProperties,
   "ElasticVersionProperties",
   "csharp"
 );
 @@clientName(ExternalUserInfo, "ElasticExternalUserContent", "csharp");
-@@clientName(ExternalUserCreationResponse,
+@@clientName(
+  ExternalUserCreationResponse,
   "ElasticExternalUserCreationResult",
   "csharp"
 );
@@ -107,7 +124,8 @@ using Microsoft.Elastic;
 @@clientName(LiftrResourceCategories, "ElasticLiftrResourceCategory", "csharp");
 @@clientName(LogRules, "ElasticLogRules", "csharp");
 @@clientName(LogRules.sendAadLogs, "ShouldAadLogsBeSent", "csharp");
-@@clientName(LogRules.sendSubscriptionLogs,
+@@clientName(
+  LogRules.sendSubscriptionLogs,
   "ShouldSubscriptionLogsBeSent",
   "csharp"
 );
@@ -116,11 +134,13 @@ using Microsoft.Elastic;
 @@clientName(MonitoredResource, "MonitoredResourceInfo", "csharp");
 @@alternateType(MonitoredResource.id, armResourceIdentifier, "csharp");
 @@clientName(MonitorProperties.generateApiKey, "IsApiKeyGenerated", "csharp");
-@@clientName(OpenAIIntegrationStatusResponse,
+@@clientName(
+  OpenAIIntegrationStatusResponse,
   "ElasticOpenAIIntegrationStatusResult",
   "csharp"
 );
-@@clientName(OpenAIIntegrationStatusResponseProperties,
+@@clientName(
+  OpenAIIntegrationStatusResponseProperties,
   "ElasticOpenAIIntegrationStatusProperties",
   "csharp"
 );
@@ -132,38 +152,44 @@ using Microsoft.Elastic;
 @@clientName(Type.ip, "IP", "csharp");
 @@clientName(UpgradableVersionsList, "UpgradableVersionListResult", "csharp");
 @@clientName(UserApiKeyResponse, "ElasticUserApiKeyResult", "csharp");
-@@clientName(UserApiKeyResponseProperties,
+@@clientName(
+  UserApiKeyResponseProperties,
   "ElasticUserApiKeyProperties",
   "csharp"
 );
 @@clientName(UserInfo, "ElasticUserInfo", "csharp");
 @@clientName(UserEmailId, "ElasticUserEmailId", "csharp");
 @@clientName(VMCollectionUpdate, "VmCollectionContent", "csharp");
-@@alternateType(VMCollectionUpdate.vmResourceId,
+@@alternateType(
+  VMCollectionUpdate.vmResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(VMIngestionDetailsResponse, "VmIngestionDetailsResult", "csharp");
 @@clientName(VMResources, "ElasticVmResourceInfo", "csharp");
 @@alternateType(VMResources.vmResourceId, armResourceIdentifier, "csharp");
-@@clientName(ConfigurationType,
+@@clientName(
+  ConfigurationType,
   "ElasticsearchProjectConfigurationType",
   "csharp"
 );
 @@clientName(HostingType, "MonitorResourceHostingType", "csharp");
-@@alternateType(MarketplaceSaaSInfoMarketplaceSubscription.id,
+@@alternateType(
+  MarketplaceSaaSInfoMarketplaceSubscription.id,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(Operation, "ResourcePatchOperation", "csharp");
-@@alternateType(MonitoredSubscription.subscriptionId,
+@@alternateType(
+  MonitoredSubscription.subscriptionId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(ProjectDetails, "MonitorResourceProjectDetails", "csharp");
 @@clientName(ProjectType, "MonitorResourceProjectType", "csharp");
 @@clientName(Status, "MonitoringStatus", "csharp");
-@@alternateType(ResubscribeProperties.subscriptionId,
+@@alternateType(
+  ResubscribeProperties.subscriptionId,
   armResourceIdentifier,
   "csharp"
 );
@@ -174,90 +200,111 @@ using Microsoft.Elastic;
 @@alternateType(DeploymentInfoResponse.deploymentUrl, url, "csharp");
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 
-@@clientName(ElasticMonitorResources.billingInfoGet,
+@@clientName(
+  ElasticMonitorResources.billingInfoGet,
   "GetBillingInfo",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.deploymentInfoList,
+@@clientName(
+  ElasticMonitorResources.deploymentInfoList,
   "GetDeploymentInfo",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.details,
+@@clientName(
+  ElasticMonitorResources.details,
   "GetVmIngestionDetails",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.vMCollectionUpdate,
+@@clientName(
+  ElasticMonitorResources.vMCollectionUpdate,
   "UpdateVmCollection",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.upgradableVersionsDetails,
+@@clientName(
+  ElasticMonitorResources.upgradableVersionsDetails,
   "GetUpgradableVersionDetails",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.allTrafficFiltersList,
+@@clientName(
+  ElasticMonitorResources.allTrafficFiltersList,
   "GetAllTrafficFilters",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.listAssociatedTrafficFiltersList,
+@@clientName(
+  ElasticMonitorResources.listAssociatedTrafficFiltersList,
   "GetAssociatedTrafficFilters",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.createAndAssociateIPFilterCreate,
+@@clientName(
+  ElasticMonitorResources.createAndAssociateIPFilterCreate,
   "CreateAndAssociateIPFilter",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.createAndAssociatePLFilterCreate,
+@@clientName(
+  ElasticMonitorResources.createAndAssociatePLFilterCreate,
   "CreateAndAssociatePrivateLinkFilter",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.associate,
+@@clientName(
+  ElasticMonitorResources.associate,
   "AssociateTrafficFilter",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.detachAndDeleteTrafficFilterDelete,
+@@clientName(
+  ElasticMonitorResources.detachAndDeleteTrafficFilterDelete,
   "DetachAndDeleteTrafficFilter",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.detachTrafficFilterUpdate,
+@@clientName(
+  ElasticMonitorResources.detachTrafficFilterUpdate,
   "DetachTrafficFilter",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.trafficFiltersDelete,
+@@clientName(
+  ElasticMonitorResources.trafficFiltersDelete,
   "DeleteTrafficFilter",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.connectedPartnerResourcesList,
+@@clientName(
+  ElasticMonitorResources.connectedPartnerResourcesList,
   "GetConnectedPartnerResources",
   "csharp"
 );
 @@clientName(ElasticMonitorResources.vMHostList, "GetVMHosts", "csharp");
-@@clientName(ElasticMonitorResources.createOrUpdate,
+@@clientName(
+  ElasticMonitorResources.createOrUpdate,
   "CreateOrUpdateExternalUser",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.monitoredResourcesList,
+@@clientName(
+  ElasticMonitorResources.monitoredResourcesList,
   "GetMonitoredResources",
   "csharp"
 );
-@@clientName(ElasticMonitorResources.resubscribe,
+@@clientName(
+  ElasticMonitorResources.resubscribe,
   "ResubscribeOrganization",
   "csharp"
 );
 @@clientName(ElasticMonitorResources.upgrade, "UpgradeMonitor", "csharp");
 @@clientName(OrganizationsOperationGroup.getApiKey, "GetApiKey", "csharp");
-@@clientName(OrganizationsOperationGroup.getElasticToAzureSubscriptionMapping,
+@@clientName(
+  OrganizationsOperationGroup.getElasticToAzureSubscriptionMapping,
   "GetElasticToAzureSubscriptionMapping",
   "csharp"
 );
-@@clientName(ElasticVersionsOperationGroup.list,
+@@clientName(
+  ElasticVersionsOperationGroup.list,
   "GetElasticVersions",
   "csharp"
 );
-@@clientName(MonitoredSubscriptionProperties,
+@@clientName(
+  MonitoredSubscriptionProperties,
   "ElasticMonitoredSubscription",
   "csharp"
 );
-@@clientName(SubscriptionList,
+@@clientName(
+  SubscriptionList,
   "ElasticMonitoredSubscriptionProperties",
   "csharp"
 );

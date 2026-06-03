@@ -35,6 +35,10 @@ interface EvaluationSuites
   /** Creates a new evaluation suite version with an auto-incremented version identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create an evaluation suite version")
+  @doc(
+    "Create a new {name} with auto incremented version id",
+    EvaluationSuiteVersion
+  )
   @post
   @route("/evaluation_suites/{name}/versions")
   @extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)

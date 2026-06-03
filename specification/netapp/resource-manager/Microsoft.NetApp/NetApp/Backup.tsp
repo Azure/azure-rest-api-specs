@@ -230,11 +230,13 @@ interface Backups {
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Backup,
     PatchModel = BackupPatch,
-    Response = ArmResponse<Backup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Backup> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Backup;
-    }),
+    Response =
+      | ArmResponse<Backup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Backup> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Backup;
+        }),
     OptionalRequestBody = true
   >;
 
@@ -271,12 +273,15 @@ interface Backups {
 
 @@doc(Backup.name, "The name of the backup");
 @@doc(Backup.properties, "Backup Properties");
-@@doc(Backups.create::parameters.resource,
+@@doc(
+  Backups.create::parameters.resource,
   "Backup object supplied in the body of the operation."
 );
-@@doc(Backups.update::parameters.properties,
+@@doc(
+  Backups.update::parameters.properties,
   "Backup object supplied in the body of the operation."
 );
-@@doc(Backups.restoreFiles::parameters.body,
+@@doc(
+  Backups.restoreFiles::parameters.body,
   "Restore payload supplied in the body of the operation."
 );

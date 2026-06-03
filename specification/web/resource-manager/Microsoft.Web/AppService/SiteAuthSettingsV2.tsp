@@ -159,12 +159,15 @@ interface SiteAuthSettingsV2OperationGroup {
 }
 
 @@doc(SiteAuthSettingsV2.name, "");
-@@doc(SiteAuthSettingsV2.properties,
+@@doc(
+  SiteAuthSettingsV2.properties,
   "SiteAuthSettingsV2 resource specific properties"
 );
-@@doc(SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
+@@doc(
+  SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
   "Auth settings associated with web app."
 );
-@@doc(SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
+@@doc(
+  SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
   "Auth settings associated with web app."
 );

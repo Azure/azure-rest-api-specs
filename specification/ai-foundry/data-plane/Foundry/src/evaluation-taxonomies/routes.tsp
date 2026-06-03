@@ -71,7 +71,9 @@ interface EvaluationTaxonomies {
   >;
 
   /** Modifies the specified evaluation taxonomy with the provided changes. */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @summary("Update an evaluation taxonomy")
+  @doc("Update an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<

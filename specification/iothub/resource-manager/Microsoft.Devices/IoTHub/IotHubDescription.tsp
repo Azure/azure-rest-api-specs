@@ -349,24 +349,31 @@ interface IotHubDescriptionOperationGroup {
 
 @@doc(IotHubDescription.name, "The name of the IoT hub.");
 @@doc(IotHubDescription.properties, "IotHub properties");
-@@doc(IotHubDescriptions.createOrUpdate::parameters.resource,
+@@doc(
+  IotHubDescriptions.createOrUpdate::parameters.resource,
   "The IoT hub metadata and security metadata."
 );
-@@doc(IotHubDescriptions.update::parameters.properties,
+@@doc(
+  IotHubDescriptions.update::parameters.properties,
   "Updated tag information to set into the iot hub instance."
 );
-@@doc(IotHubDescriptions.testAllRoutes::parameters.body,
+@@doc(
+  IotHubDescriptions.testAllRoutes::parameters.body,
   "Input for testing all routes"
 );
-@@doc(IotHubDescriptions.testRoute::parameters.body,
+@@doc(
+  IotHubDescriptions.testRoute::parameters.body,
   "Route that needs to be tested"
 );
-@@doc(IotHubDescriptions.exportDevices::parameters.body,
+@@doc(
+  IotHubDescriptions.exportDevices::parameters.body,
   "The parameters that specify the export devices operation."
 );
-@@doc(IotHubDescriptions.importDevices::parameters.body,
+@@doc(
+  IotHubDescriptions.importDevices::parameters.body,
   "The parameters that specify the import devices operation."
 );
-@@doc(IotHubDescriptions.manualFailover::parameters.body,
+@@doc(
+  IotHubDescriptions.manualFailover::parameters.body,
   "Region to failover to. Must be the Azure paired region. Get the value from the secondary location in the locations property. To learn more, see https://aka.ms/manualfailover/region"
 );
