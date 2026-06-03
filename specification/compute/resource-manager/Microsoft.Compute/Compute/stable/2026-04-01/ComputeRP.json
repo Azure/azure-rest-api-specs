@@ -1013,7 +1013,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "The expand expression to apply on the operation.",
+            "description": "Expand the response to include additional read-only metadata. Allowed values: `properties` — returns extended metadata (`releaseCategory`, `urgencyLevel`, `runProfile`).",
             "required": false,
             "type": "string",
             "enum": [
@@ -14575,7 +14575,9 @@
           "items": {
             "$ref": "#/definitions/ExtensionFeatureTag"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -14591,7 +14593,10 @@
           "type": "string",
           "description": "The value of the feature tag."
         }
-      }
+      },
+      "required": [
+        "key"
+      ]
     },
     "ExternalHealthPolicy": {
       "type": "object",

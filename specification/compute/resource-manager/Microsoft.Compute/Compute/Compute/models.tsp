@@ -7618,7 +7618,7 @@ model ExtensionFeatureMetadata {
   /**
    * List of additional metadata properties (e.g., compliance flags, supported features).
    */
-  @identifiers(#[])
+  @identifiers(#["key"])
   extensionFeatureTags?: ExtensionFeatureTag[];
 }
 
@@ -7630,7 +7630,7 @@ model ExtensionFeatureTag {
   /**
    * The key of the feature tag.
    */
-  key?: string;
+  key: string;
 
   /**
    * The value of the feature tag.

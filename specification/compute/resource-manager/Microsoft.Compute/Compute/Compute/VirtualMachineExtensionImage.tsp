@@ -91,7 +91,7 @@ interface VirtualMachineExtensionImages {
       $orderby?: string;
 
       /**
-       * The expand expression to apply on the operation.
+       * Expand the response to include additional read-only metadata. Allowed values: `properties` — returns extended metadata (`releaseCategory`, `urgencyLevel`, `runProfile`).
        */
       @added(Versions.v2026_04_01)
       @query("$expand")
