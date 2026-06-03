@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -113,6 +115,12 @@ union LicenseTarget {
    * Windows Server 2012 R2
    */
   `Windows Server 2012 R2`: "Windows Server 2012 R2",
+
+  /**
+   * Windows Server 2016
+   */
+  @added(Versions.v2026_02_12_preview)
+  `Windows Server 2016`: "Windows Server 2016",
 }
 
 /**
