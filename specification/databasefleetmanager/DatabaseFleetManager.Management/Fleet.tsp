@@ -80,7 +80,8 @@ interface Fleets {
 
 @@doc(Fleet.name, "Name of the database fleet.");
 @@doc(Fleet.properties, "The fleet properties.");
-@@doc(Fleets.createOrUpdate::parameters.resource,
+@@doc(
+  Fleets.createOrUpdate::parameters.resource,
   "The fleet object to create or update."
 );
 @@doc(Fleets.update::parameters.properties, "The fleet object to patch.");

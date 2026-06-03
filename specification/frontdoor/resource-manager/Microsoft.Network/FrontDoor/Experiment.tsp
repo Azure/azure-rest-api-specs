@@ -48,14 +48,17 @@ interface Experiments {
   @tag("Experiments")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Experiment,
-    Response = ArmResourceUpdatedResponse<Experiment> | ArmResourceCreatedResponse<
-      Experiment,
-      ArmLroLocationHeader<FinalResult = Experiment> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: Experiment;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Experiment>
+      | ArmResourceCreatedResponse<
+          Experiment,
+          ArmLroLocationHeader<FinalResult = Experiment> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: Experiment;
+        }),
     Error = ErrorResponse
   >;
 
@@ -69,11 +72,13 @@ interface Experiments {
   update is ArmCustomPatchAsync<
     Experiment,
     PatchModel = ExperimentUpdateModel,
-    Response = ArmResponse<Experiment> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Experiment> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Experiment;
-    }),
+    Response =
+      | ArmResponse<Experiment>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Experiment> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Experiment;
+        }),
     Error = ErrorResponse
   >;
 
@@ -85,7 +90,10 @@ interface Experiments {
   @tag("Experiments")
   delete is ArmResourceDeleteWithoutOkAsync<
     Experiment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -131,11 +139,13 @@ interface Experiments {
   >;
 }
 
-@@doc(Experiment.name,
+@@doc(
+  Experiment.name,
   "The Experiment identifier associated with the Experiment"
 );
 @@doc(Experiment.properties, "The properties of an Experiment");
-@@doc(Experiments.createOrUpdate::parameters.resource,
+@@doc(
+  Experiments.createOrUpdate::parameters.resource,
   "The Experiment resource"
 );
 @@doc(Experiments.update::parameters.properties, "The Experiment Update Model");

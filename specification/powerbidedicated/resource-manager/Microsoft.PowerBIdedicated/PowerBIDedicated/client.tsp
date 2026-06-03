@@ -7,37 +7,44 @@ using Azure.ResourceManager.Foundations;
 using Microsoft.PowerBIDedicated;
 
 @@clientName(Capacities.getDetails, "get", "csharp");
-@@clientName(CheckCapacityNameAvailabilityParameters,
+@@clientName(
+  CheckCapacityNameAvailabilityParameters,
   "CheckCapacityNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckCapacityNameAvailabilityParameters.type,
+@@clientName(
+  CheckCapacityNameAvailabilityParameters.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(CapacitiesOperationGroup.checkNameAvailability,
+@@clientName(
+  CapacitiesOperationGroup.checkNameAvailability,
   "checkNameAvailabilityCapacity",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(SkuDetailsForExistingResource, "SkuDetails", "csharp");
 @@alternateType(DedicatedCapacityMutableProperties.tenantId, uuid, "csharp");
-@@alternateType(CapacitiesOperationGroup.checkNameAvailability::parameters.location,
+@@alternateType(
+  CapacitiesOperationGroup.checkNameAvailability::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(CapacitiesOperationGroup.listSkus, "GetSkusCapacities", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "make it pageable for backwards compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Capacities.listSkusForCapacity,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Capacities.listSkusForCapacity,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "make it pageable for backwards compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(CapacitiesOperationGroup.listSkus,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  CapacitiesOperationGroup.listSkus,
   "csharp"
 );
 

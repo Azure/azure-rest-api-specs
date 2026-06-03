@@ -61,13 +61,16 @@ interface Registries {
   @summary("Delete registry")
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,9 +98,9 @@ interface Registries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation pattern for existing API"
   @summary("Get blob reference SAS Uri.")
   @post
-  getBlobReferenceSAS(
-    ...ReferenceSASParameters,
-  ): ArmResponse<GetBlobReferenceSASResponseDto> | ErrorResponse;
+  getBlobReferenceSAS(...ReferenceSASParameters):
+    | ArmResponse<GetBlobReferenceSASResponseDto>
+    | ErrorResponse;
 
   /**
    * Remove regions from registry
@@ -106,36 +109,43 @@ interface Registries {
   removeRegions is ArmResourceActionAsyncBase<
     Registry,
     Registry,
-    Response = ArmResponse<Registry> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Registry>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      }),
+    Response =
+      | ArmResponse<Registry>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Registry>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Registry>,
     Error = ErrorResponse
   >;
 }
 
-@@doc(Registry.name,
+@@doc(
+  Registry.name,
   "Name of Azure Machine Learning registry. This is case-insensitive"
 );
 @@doc(Registry.properties, "[Required] Additional attributes of the entity.");
-@@doc(Registries.createOrUpdate::parameters.resource,
+@@doc(
+  Registries.createOrUpdate::parameters.resource,
   "Details required to create the registry."
 );
-@@doc(Registries.update::parameters.properties,
+@@doc(
+  Registries.update::parameters.properties,
   "Details required to create the registry."
 );
 // @@doc(Registries.getBlobReferenceSAS::parameters.body,
 //   "Asset id and blob uri."
 // );
-@@doc(Registries.removeRegions::parameters.body,
+@@doc(
+  Registries.removeRegions::parameters.body,
   "Details required to create the registry."
 );
-@@doc(Registry.identity,
+@@doc(
+  Registry.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
 @@doc(Registry.sku, "Sku details required for ARM contract for Autoscaling.");

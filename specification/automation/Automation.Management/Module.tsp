@@ -320,21 +320,27 @@ interface Python3Package {
 
 @@doc(Module.name, "The module name.");
 @@doc(Module.properties, "Gets or sets the module properties.");
-@@doc(Modules.createOrUpdate::parameters.resource,
+@@doc(
+  Modules.createOrUpdate::parameters.resource,
   "The create or update parameters for module."
 );
-@@doc(Modules.update::parameters.properties,
+@@doc(
+  Modules.update::parameters.properties,
   "The update parameters for module."
 );
-@@doc(Python2Package.createOrUpdate::parameters.resource,
+@@doc(
+  Python2Package.createOrUpdate::parameters.resource,
   "The create or update parameters for python package."
 );
-@@doc(Python2Package.update::parameters.properties,
+@@doc(
+  Python2Package.update::parameters.properties,
   "The update parameters for python package."
 );
-@@doc(Python3Package.createOrUpdate::parameters.resource,
+@@doc(
+  Python3Package.createOrUpdate::parameters.resource,
   "The create or update parameters for python package."
 );
-@@doc(Python3Package.update::parameters.properties,
+@@doc(
+  Python3Package.update::parameters.properties,
   "The update parameters for python package."
 );

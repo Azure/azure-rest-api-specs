@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2026-05-11-preview",
+    "firewallName": "firewall1",
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/firewalls/firewall1/customCaptureConfigurations/default",
+            "name": "default",
+            "type": "paloaltonetworks.cloudngfw/firewalls/customcaptureconfigurations",
+            "properties": {
+              "pcapFilter": [
+                {
+                  "protocol": "TCP",
+                  "sourceIpAddress": "10.0.0.5",
+                  "destinationIpAddress": "52.39.204.87",
+                  "destinationPort": 443
+                }
+              ],
+              "pcapStages": [
+                "Firewall"
+              ],
+              "durationInSec": 30,
+              "storageAccountResourceId": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/Microsoft.Storage/storageAccounts/pcapstorage",
+              "pcapStatus": "Success"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CustomCaptureConfigurationsFirewallResources_ListByFirewall",
+  "title": "CustomCaptureConfigurationsFirewallResources_ListByFirewall_MaximumSet_Gen"
+}
