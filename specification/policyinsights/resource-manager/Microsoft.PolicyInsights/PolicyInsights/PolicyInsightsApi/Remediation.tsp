@@ -49,7 +49,8 @@ alias RemediationManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOper
     @segment("remediations")
     @key
     remediationName: string;
-  }
+  },
+  ResourceName = "PolicyRemediation"
 >;
 
 alias RemediationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -70,7 +71,8 @@ alias RemediationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @segment("remediations")
     @key
     remediationName: string;
-  }
+  },
+  ResourceName = "PolicyRemediation"
 >;
 
 alias RemediationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -86,7 +88,8 @@ alias RemediationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperation
     @segment("remediations")
     @key
     remediationName: string;
-  }
+  },
+  ResourceName = "PolicyRemediation"
 >;
 
 alias RemediationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -107,7 +110,8 @@ alias RemediationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     remediationName: string;
   },
-  ErrorType = ErrorResponse
+  ErrorType = ErrorResponse,
+  ResourceName = "PolicyRemediation"
 >;
 
 @armResourceOperations(#{ omitTags: true })

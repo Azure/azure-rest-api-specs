@@ -39,7 +39,8 @@ alias AttestationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @segment("attestations")
     @key
     attestationName: string;
-  }
+  },
+  ResourceName = "PolicyAttestation"
 >;
 
 alias AttestationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -55,7 +56,8 @@ alias AttestationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperation
     @segment("attestations")
     @key
     attestationName: string;
-  }
+  },
+  ResourceName = "PolicyAttestation"
 >;
 
 alias AttestationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -76,6 +78,7 @@ alias AttestationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     attestationName: string;
   },
+  ResourceName = "PolicyAttestation",
   ErrorType = ErrorResponse
 >;
 
