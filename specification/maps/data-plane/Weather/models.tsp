@@ -372,7 +372,7 @@ union LatestStatusKeyword {
 
   /**
    * Indicates that the alert has been updated since its initial issuance, but
-   * no changes were made to `alertDetails`, `startTime`, `endTime`, or class.
+   * no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`.
    */
   Continue: "Continue",
 
@@ -402,7 +402,7 @@ union LatestStatusKeyword {
 }
 
 /**
- * The "basinId" enum categorizes the different ocean basins where tropical
+ * The `basinId` enum categorizes the different ocean basins where tropical
  * storms can originate. Each basin is assigned a unique identifier to help
  * specify the location of the storm's origin.
  */
@@ -410,47 +410,47 @@ union BasinId {
   string,
 
   /**
-   * The Atlantic Ocean. Crucial for tracking hurricanes that affect the
+   * The **Atlantic Ocean**. Crucial for tracking hurricanes that affect the
    * Americas and the Caribbean. It is one of the most active regions for
    * tropical storms.
    */
   AL: "AL",
 
   /**
-   * The Central Pacific Ocean. This basin is used for storms affecting Hawaii
+   * The **Central Pacific Ocean**. This basin is used for storms affecting Hawaii
    * and surrounding areas.
    */
   CP: "CP",
 
   /**
-   * The Eastern Pacific Ocean. This basin tracks storms impacting the western
+   * The **Eastern Pacific Ocean**. This basin tracks storms impacting the western
    * coast of the Americas, including Mexico and Central America. It is adjacent
    * to the Central Pacific basin.
    */
   EP: "EP",
 
   /**
-   * The North Indian Ocean. This basin covers storms impacting South Asia,
+   * The **North Indian Ocean**. This basin covers storms impacting South Asia,
    * including countries like India and Bangladesh, which are frequently
    * affected by cyclones.
    */
   NI: "NI",
 
   /**
-   * The Northwest Pacific Ocean. This basin is important for tracking typhoons
+   * The **Northwest Pacific Ocean**. This basin is important for tracking typhoons
    * that affect East Asia, including countries like China, Japan, and the
    * Philippines. It is the most active tropical storm regions globally.
    */
   NP: "NP",
 
   /**
-   * The South Indian Ocean. This basin, positioned south of the equator, covers
+   * The **South Indian Ocean**. This basin, positioned south of the equator, covers
    * cyclones impacting Madagascar, Africa, and surrounding regions.
    */
   SI: "SI",
 
   /**
-   * The South Pacific Ocean. This basin, positioned south of the equator, is
+   * The **South Pacific Ocean**. This basin, positioned south of the equator, is
    * relevant for cyclones affecting Australia and the South Pacific islands.
    */
   SP: "SP",
@@ -2921,7 +2921,7 @@ model StormSearchResultItem {
   year?: string;
 
   /**
-   * The "basinId" enum categorizes the different ocean basins where tropical
+   * The `basinId` enum categorizes the different ocean basins where tropical
    * storms can originate. Each basin is assigned a unique identifier to help
    * specify the location of the storm's origin. Valid Basin identifiers include
    * **AL**, **CP**, **EP**, **NI**, **NP**, **SI**, and **SP**.
@@ -3058,7 +3058,7 @@ model StormForecast {
   /**
    * Provides forecast details for the storm within the specified time frame. If
    * the `windowGeometry` parameter is set to true in the API request, this
-   * property will include geoJSON details for the window geometry.
+   * property will include GeoJSON details for the window geometry.
    */
   window?: WeatherWindow;
 
@@ -3148,7 +3148,7 @@ model StormWindRadiiSummary {
    * The overall wind speed associated with the storm's wind radii data,
    * measured in kilometers per hour (km/h) or miles per hour (mph), based on
    * the unit specified in the request. This single wind speed value applies
-   * collectively to all the sectors within the "radiusSectorData" array, which
+   * collectively to all the sectors within the `radiusSectorData` array, which
    * provides detailed geographical information for the NE, SE, SW, and NW
    * quadrants of the storm's wind radii.
    */
@@ -3156,14 +3156,14 @@ model StormWindRadiiSummary {
 
   /**
    * An array of `RadiusSector` objects. Each object contains detailed
-   * geographical information (in geoJSON format) needed to plot wind radius
+   * geographical information (in GeoJSON format) needed to plot wind radius
    * quadrants: 0–90° for NE, 90–180° for SE, 180–270° for SW, and 270–360° for
    * NW.
    */
   radiusSectorData?: RadiusSector[];
 
   /**
-   * A geoJSON object that is returned when the `radiiGeometry` parameter is set
+   * A GeoJSON object that is returned when the `radiiGeometry` parameter is set
    * to true in the API request. It provides detailed geographical information
    * about the storm's wind radii, including the spatial representation of areas
    * affected by different wind speeds.
