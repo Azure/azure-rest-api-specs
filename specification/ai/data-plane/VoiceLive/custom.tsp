@@ -463,7 +463,7 @@ union PersonalVoiceModels {
 
   /** Use the MAI-Voice-1 model. */
   @added(Versions.v2026_04_10)
-  "MAI-Voice-1",
+  `MAI-Voice-1`: "MAI-Voice-1",
 }
 
 /** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
