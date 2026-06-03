@@ -81,3 +81,35 @@ using Microsoft.ManagedNetworkFabric;
   "peerAsn",
   "java"
 );
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
+  "hostname",
+  "java"
+);
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric,
+  "ManagedNetworkFabricMgmtClient",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
+  "ManagementNetworkConfigurationPatchableProperties",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
+  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
+  "OptionBProperties",
+  "python"
+);
