@@ -468,6 +468,18 @@ interface VirtualMachineScaleSets {
     Response = OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Migrates one or more virtual machines in a VM scale set to a different availability zone.
+   */
+  @added(Versions.v2026_04_01)
+  @action("migrateVMAvailabilityZone")
+  migrateVMAvailabilityZone is ComputeResourceActionAsync<
+    VirtualMachineScaleSet,
+    MigrateVMAvailabilityZoneInput,
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
@@ -521,4 +533,7 @@ interface VirtualMachineScaleSets {
 );
 @@doc(VirtualMachineScaleSets.scaleOut::parameters.body,
   "The input object for ScaleOut API."
+);
+@@doc(VirtualMachineScaleSets.migrateVMAvailabilityZone::parameters.body,
+  "The input object for the MigrateVMAvailabilityZone API."
 );
