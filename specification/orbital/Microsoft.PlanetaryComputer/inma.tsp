@@ -1,12 +1,14 @@
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "./models.stac.spec.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Foundations;
-@service(#{ title: "MPCPro Ingestion and Management API" })
+
 namespace Microsoft.PlanetaryComputer;
 
 @doc("Generic paged response model")
@@ -29,10 +31,9 @@ interface Ingestions {
   @route("/inma/collections/{collectionId}/ingestions")
   @get
   @list
-  list(
-    ...CollectionParameters,
-    ...OdataQuery,
-  ): Page<IngestionDefinition> | ErrorResponse;
+  list(...CollectionParameters, ...OdataQuery):
+    | Page<IngestionDefinition>
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get the definition of an ingestion")
@@ -50,19 +51,22 @@ interface Ingestions {
     @doc("Definition of the ingestion")
     @body
     body: IngestionDefinition,
-  ): {
-    @doc("Url of the created ingestion")
-    @header
-    location: url;
+  ):
+    | {
+        @doc("Url of the created ingestion")
+        @header
+        location: url;
 
-    @statusCode statusCode: 201;
+        @statusCode statusCode: 201;
 
-    @doc("Ingestion definition")
-    @body
-    _: IngestionDefinition;
-  } | ErrorResponse;
+        @doc("Ingestion definition")
+        @body
+        _: IngestionDefinition;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update an existing ingestion")
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
   @patch(#{ implicitOptionality: true })
@@ -76,35 +80,39 @@ interface Ingestions {
     @doc("Ingestion properties to update")
     @body
     body: IngestionDefinition,
-  ): {
-    @statusCode statusCode: 200;
+  ):
+    | {
+        @statusCode statusCode: 200;
 
-    @body
-    _: IngestionDefinition;
-  } | ErrorResponse;
+        @body
+        _: IngestionDefinition;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete an ingestion from a catalog. All runs of the ingestion will be deleted. Ingestion must not have any runs in progress or queued.")
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
   @delete
   @pollingOperation(IngestionOperations.get)
-  delete(...IngestionParameters): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  delete(...IngestionParameters):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @doc("Status code")
-    @statusCode
-    statusCode: 202;
+        @doc("Status code")
+        @statusCode
+        statusCode: 202;
 
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 }
 
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
@@ -125,6 +133,10 @@ model IngestionDefinition {
 
   @doc("Source catalog URL. Required for StaticCatalog ingestion type")
   sourceCatalogUrl?: url;
+
+  @added(Versions.v2026_04_15)
+  @doc("Parquet catalog URL. Required for StacGeoparquet ingestion type")
+  stacGeoparquetUrl?: url;
 
   @doc("Skip processing existing items in the catalog")
   skipExistingItems?: boolean;
@@ -147,6 +159,10 @@ union IngestionType {
 
   @doc("Static STAC Catalog")
   StaticCatalog: "StaticCatalog",
+
+  @added(Versions.v2026_04_15)
+  @doc("Ingestion STAC Geoparquet catalog")
+  StacGeoparquet: "StacGeoparquet",
 }
 
 @doc("Ingestion status")
@@ -175,10 +191,9 @@ interface IngestionRuns {
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}/runs")
   @get
   @list
-  list(
-    ...IngestionParameters,
-    ...OdataQuery,
-  ): Page<IngestionRun> | ErrorResponse;
+  list(...IngestionParameters, ...OdataQuery):
+    | Page<IngestionRun>
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get a run of an ingestion")
@@ -190,17 +205,19 @@ interface IngestionRuns {
   @doc("Create a new run of an ingestion")
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}/runs")
   @post
-  create(...IngestionParameters): {
-    @doc("Url of the created ingestion run")
-    @header
-    location: url;
+  create(...IngestionParameters):
+    | {
+        @doc("Url of the created ingestion run")
+        @header
+        location: url;
 
-    @statusCode statusCode: 201;
+        @statusCode statusCode: 201;
 
-    @doc("Ingestion run")
-    @body
-    _: IngestionRun;
-  } | ErrorResponse;
+        @doc("Ingestion run")
+        @body
+        _: IngestionRun;
+      }
+    | ErrorResponse;
 }
 
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
@@ -351,6 +368,27 @@ interface StacItems {
      */
     @query
     datetime?: string,
+
+    /**
+     * Whether to sign asset URLs in the response.
+     */
+    @added(Versions.v2026_04_15)
+    @query("sign")
+    sign?: StacAssetUrlSigningMode,
+
+    /**
+     * URL signature duration in minutes.
+     */
+    @added(Versions.v2026_04_15)
+    @query("duration")
+    durationInMinutes?: int32,
+
+    /**
+     * Pagination token for fetching the next set of results.
+     */
+    @added(Versions.v2026_04_15)
+    @query("token")
+    token?: string,
   ): StacItemCollection | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -365,6 +403,20 @@ interface StacItems {
     @maxLength(500)
     @pattern(".*")
     itemId: string,
+
+    /**
+     * Whether to sign asset URLs in the response.
+     */
+    @added(Versions.v2026_04_15)
+    @query("sign")
+    sign?: StacAssetUrlSigningMode,
+
+    /**
+     * URL signature duration in minutes.
+     */
+    @added(Versions.v2026_04_15)
+    @query("duration")
+    durationInMinutes?: int32,
   ): StacItem | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -393,25 +445,29 @@ interface StacItems {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backcompatibility with existing clients"
     @body
     body: StacItemOrStacItemCollection,
-  ): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  ):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @statusCode statusCode: 202;
+        @statusCode statusCode: 202;
 
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @removed(Versions.v2026_04_15)
   @doc("Create or replace a STAC item in a collection")
+  @sharedRoute
   @route("/stac/collections/{collectionId}/items/{itemId}")
   @put
   @pollingOperation(IngestionOperations.get)
@@ -427,24 +483,65 @@ interface StacItems {
     @doc("STAC Item")
     @body
     body: StacItem,
-  ): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  ):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @statusCode statusCode: 202;
+        @statusCode statusCode: 202;
 
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @doc("Replace a STAC item in a collection")
+  @sharedRoute
+  @route("/stac/collections/{collectionId}/items/{itemId}")
+  @put
+  @pollingOperation(IngestionOperations.get)
+  replace(
+    ...CollectionParameters,
+
+    @doc("STAC Item id")
+    @path
+    @maxLength(500)
+    @pattern(".*")
+    itemId: string,
+
+    @doc("STAC Item")
+    @body
+    body: StacItem,
+  ):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
+
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
+
+        @statusCode statusCode: 202;
+
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update a STAC item in a collection")
   @route("/stac/collections/{collectionId}/items/{itemId}")
   @patch(#{ implicitOptionality: true })
@@ -465,22 +562,24 @@ interface StacItems {
     @doc("STAC Item")
     @body
     body: StacItem,
-  ): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  ):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @statusCode statusCode: 202;
+        @statusCode statusCode: 202;
 
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete a STAC item from a collection")
@@ -495,22 +594,24 @@ interface StacItems {
     @maxLength(500)
     @pattern(".*")
     itemId: string,
-  ): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  ):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @statusCode statusCode: 202;
+        @statusCode statusCode: 202;
 
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 }
 
 @tag("Ingestion Sources")
@@ -521,19 +622,17 @@ interface IngestionSources {
   @route("/inma/ingestion-sources")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...OdataQuery,
-  ): Page<IngestionSourceSummary> | ErrorResponse;
+  list(...ApiVersionParameter, ...OdataQuery):
+    | Page<IngestionSourceSummary>
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get an ingestion source in a geo-catalog")
   @route("/inma/ingestion-sources/{id}")
   @get
-  get(
-    ...IngestionSourceParameters,
-    ...ApiVersionParameter,
-  ): IngestionSource | ErrorResponse;
+  get(...IngestionSourceParameters, ...ApiVersionParameter):
+    | IngestionSource
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new ingestion source in a geo-catalog")
@@ -545,17 +644,19 @@ interface IngestionSources {
     @doc("Definition of the ingestion source")
     @body
     body: IngestionSource,
-  ): {
-    @doc("Url of the created ingestion source")
-    @header
-    location: url;
+  ):
+    | {
+        @doc("Url of the created ingestion source")
+        @header
+        location: url;
 
-    @statusCode statusCode: 201;
+        @statusCode statusCode: 201;
 
-    @doc("Ingestion source summary")
-    @body
-    _: IngestionSource;
-  } | ErrorResponse;
+        @doc("Ingestion source summary")
+        @body
+        _: IngestionSource;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Update an existing ingestion source in a geo-catalog")
@@ -571,17 +672,19 @@ interface IngestionSources {
     @doc("Definition of the ingestion source")
     @body
     body: IngestionSource,
-  ): {
-    @doc("Url of the created ingestion source")
-    @header
-    location: url;
+  ):
+    | {
+        @doc("Url of the created ingestion source")
+        @header
+        location: url;
 
-    @statusCode statusCode: 200;
+        @statusCode statusCode: 200;
 
-    @doc("Ingestion source summary")
-    @body
-    _: IngestionSource;
-  } | ErrorResponse;
+        @doc("Ingestion source summary")
+        @body
+        _: IngestionSource;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete an ingestion source from a geo-catalog")
@@ -593,9 +696,11 @@ interface IngestionSources {
     @doc("Ingestion source id")
     @path
     id: uuid,
-  ): {
-    @statusCode statusCode: 204;
-  } | ErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 204;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
@@ -603,9 +708,9 @@ interface IngestionSources {
   @route("/inma/ingestion-sources/managed-identities")
   @get
   @list
-  listManagedIdentities(
-    ...ApiVersionParameter,
-  ): Page<ManagedIdentityMetadata> | ErrorResponse;
+  listManagedIdentities(...ApiVersionParameter):
+    | Page<ManagedIdentityMetadata>
+    | ErrorResponse;
 }
 
 @doc("Ingestion source summary")
@@ -753,17 +858,21 @@ interface IngestionOperations {
     @path
     @maxLength(500)
     operationId: uuid,
-  ): {
-    @statusCode statusCode: 204;
-  } | ErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 204;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @doc("Cancel all running operations of a geo-catalog collection")
+  @doc("Cancel all pending and running operations across the entire GeoCatalog instance. This is a catalog-wide operation and is not scoped to a specific collection.")
   @route("/inma/operations")
   @delete
-  deleteAll(...ApiVersionParameter): {
-    @statusCode statusCode: 204;
-  } | ErrorResponse;
+  deleteAll(...ApiVersionParameter):
+    | {
+        @statusCode statusCode: 204;
+      }
+    | ErrorResponse;
 }
 
 @doc("Error information wrapper")
@@ -907,22 +1016,24 @@ interface StacCollections {
     @doc("Request collection body")
     @body
     body: StacCollection,
-  ): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  ):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @statusCode statusCode: 202;
+        @statusCode statusCode: 202;
 
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get a collection in the GeoCatalog instance")
@@ -958,12 +1069,12 @@ interface StacCollections {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
-  @doc("Create or replace a collection in the GeoCatalog instance")
-  @summary("Create or update Collection")
+  @doc("Replace an existing collection in the GeoCatalog instance")
+  @summary("Replace Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/collections")
   @put
-  createOrReplace(
+  replace(
     ...CollectionParameters,
 
     @doc("Request collection body")
@@ -978,20 +1089,22 @@ interface StacCollections {
   @route("/stac/collections")
   @delete
   @pollingOperation(IngestionOperations.get)
-  delete(...CollectionParameters): {
-    @pollingLocation
-    @doc("Url used to monitor the background operation")
-    @header
-    location: url;
+  delete(...CollectionParameters):
+    | {
+        @pollingLocation
+        @doc("Url used to monitor the background operation")
+        @header
+        location: url;
 
-    @doc("Url used to monitor the background operation")
-    @header("operation-location")
-    operationLocation: url;
+        @doc("Url used to monitor the background operation")
+        @header("operation-location")
+        operationLocation: url;
 
-    @statusCode statusCode: 202;
+        @statusCode statusCode: 202;
 
-    @doc("Operation")
-    @body
-    _: Operation;
-  } | ErrorResponse;
+        @doc("Operation")
+        @body
+        _: Operation;
+      }
+    | ErrorResponse;
 }

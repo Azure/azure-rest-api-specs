@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -79,8 +81,11 @@ interface NetworkSecurityPerimeters {
       @query("forceDeletion")
       forceDeletion?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -132,15 +137,19 @@ interface NetworkSecurityPerimeters {
 }
 
 @@maxLength(NetworkSecurityPerimeter.name, 80);
-@@doc(NetworkSecurityPerimeter.name,
+@@doc(
+  NetworkSecurityPerimeter.name,
   "The name of the network security perimeter."
 );
-@@doc(NetworkSecurityPerimeter.properties,
+@@doc(
+  NetworkSecurityPerimeter.properties,
   "The network security perimeter properties"
 );
-@@doc(NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkSecurityPerimeters.createOrUpdate::parameters.resource,
   "Parameter supplied to create or update the network security perimeter."
 );
-@@doc(NetworkSecurityPerimeters.patch::parameters.properties,
+@@doc(
+  NetworkSecurityPerimeters.patch::parameters.properties,
   "Parameter supplied to the network security perimeter."
 );

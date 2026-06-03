@@ -7,23 +7,28 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
 @@clientName(Microsoft.Compute, "RecommenderMgmtClient", "python");
-@@clientName(Microsoft.Compute,
+@@clientName(
+  Microsoft.Compute,
   "ComputeRecommenderManagementClient",
   "javascript"
 );
-@@alternateType(SpotPlacementScoresInput.desiredLocations,
+@@alternateType(
+  SpotPlacementScoresInput.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@clientName(SpotPlacementScoresInput,
+@@clientName(
+  SpotPlacementScoresInput,
   "ComputeRecommenderGenerateContent",
   "csharp"
 );
-@@alternateType(SpotPlacementScoresResponse.desiredLocations,
+@@alternateType(
+  SpotPlacementScoresResponse.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@clientName(SpotPlacementScoresResponse,
+@@clientName(
+  SpotPlacementScoresResponse,
   "ComputeRecommenderGenerateResult",
   "csharp"
 );
@@ -31,8 +36,27 @@ using Microsoft.Compute;
 @@clientName(PlacementScore, "ComputeRecommenderPlacementScore", "csharp");
 @@clientName(ResourceSize, "ComputeRecommenderResourceSize", "csharp");
 @@clientName(ComputeDiagnosticBase, "ComputeRecommenderDiagnostic", "csharp");
-@@clientName(DiagnosticProperties,
+@@clientName(
+  DiagnosticProperties,
   "ComputeRecommenderDiagnosticProperties",
   "csharp"
 );
 @@clientName(ComputeDiagnosticBases.post, "generate", "csharp");
+@@clientName(
+  SkuMixPlacementRequest,
+  "ComputeSkuMixPlacementGenerateContent",
+  "csharp"
+);
+@@clientName(
+  SkuMixPlacementResponse,
+  "ComputeSkuMixPlacementGenerateResult",
+  "csharp"
+);
+@@clientName(
+  SkuMixPlacementDeploymentChoice,
+  "ComputeSkuMixPlacementDeploymentChoice",
+  "csharp"
+);
+@@clientName(SkuMixPlacementItem, "ComputeSkuMixPlacementItem", "csharp");
+@@clientName(SkuMixPlacementBase, "ComputeSkuMixPlacementResource", "csharp");
+@@clientName(SkuMixPlacementScores.post, "generate", "csharp");

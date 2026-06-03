@@ -4,11 +4,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Dashboard;
 
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(ManagedGrafanas.refresh,
+@@clientName(
+  ManagedGrafanas.refresh,
   "RefreshManagedPrivateEndpoint",
   "csharp"
 );
@@ -18,24 +20,29 @@ using Microsoft.Dashboard;
 @@clientName(PublicNetworkAccess, "GrafanaPublicNetworkAccess", "csharp");
 @@clientName(ZoneRedundancy, "GrafanaZoneRedundancy", "csharp");
 @@clientName(ApiKey, "GrafanaApiKey", "csharp");
-@@clientName(GrafanaIntegrations.azureMonitorWorkspaceIntegrations,
+@@clientName(
+  GrafanaIntegrations.azureMonitorWorkspaceIntegrations,
   "MonitorWorkspaceIntegrations",
   "csharp"
 );
-@@clientName(AzureMonitorWorkspaceIntegration,
+@@clientName(
+  AzureMonitorWorkspaceIntegration,
   "MonitorWorkspaceIntegration",
   "csharp"
 );
-@@clientName(AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
+@@clientName(
+  AzureMonitorWorkspaceIntegration.azureMonitorWorkspaceResourceId,
   "MonitorWorkspaceResourceId",
   "csharp"
 );
-@@clientName(ManagedGrafanaPropertiesUpdateParameters,
+@@clientName(
+  ManagedGrafanaPropertiesUpdateParameters,
   "ManagedGrafanaPatchProperties",
   "csharp"
 );
 @@clientName(IntegrationFabric, "GrafanaIntegrationFabric", "csharp");
-@@clientName(IntegrationFabricProperties,
+@@clientName(
+  IntegrationFabricProperties,
   "GrafanaIntegrationFabricProperties",
   "csharp"
 );
@@ -43,7 +50,8 @@ using Microsoft.Dashboard;
 @@clientName(Snapshots.externalEnabled, "IsExternalEnabled", "csharp");
 @@clientName(Security, "GrafanaSecuritySettings", "csharp");
 @@clientName(Security.csrfAlwaysCheck, "IsCsrfAlwaysCheckEnabled", "csharp");
-@@clientName(UnifiedAlertingScreenshots.captureEnabled,
+@@clientName(
+  UnifiedAlertingScreenshots.captureEnabled,
   "IsCaptureEnabled",
   "csharp"
 );
@@ -51,7 +59,8 @@ using Microsoft.Dashboard;
 @@clientName(Smtp.enabled, "IsEnabled", "csharp");
 @@clientName(Users, "GrafanaUserSettings", "csharp");
 @@clientName(StartTLSPolicy, "GrafanaStartTlsPolicy", "csharp");
-@@clientName(StartTLSPolicy.OpportunisticStartTLS,
+@@clientName(
+  StartTLSPolicy.OpportunisticStartTLS,
   "OpportunisticStartTls",
   "csharp"
 );
@@ -59,43 +68,51 @@ using Microsoft.Dashboard;
 @@clientName(StartTLSPolicy.NoStartTLS, "NoStartTls", "csharp");
 @@clientName(CreatorCanAdmin, "GrafanaCreatorCanAdmin", "csharp");
 @@clientName(Size, "GrafanaSize", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "GrafanaPrivateEndpointConnection",
   "csharp"
 );
 
 @@clientName(DeterministicOutboundIP, "DeterministicOutboundIp", "java");
 @@clientName(StartTLSPolicy, "StartTlsPolicy", "java");
-@@clientName(ManagedGrafanaProperties.deterministicOutboundIP,
+@@clientName(
+  ManagedGrafanaProperties.deterministicOutboundIP,
   "deterministicOutboundIp",
   "java"
 );
-@@clientName(ManagedGrafanaPropertiesUpdateParameters.deterministicOutboundIP,
+@@clientName(
+  ManagedGrafanaPropertiesUpdateParameters.deterministicOutboundIP,
   "deterministicOutboundIp",
   "java"
 );
-@@clientName(ManagedPrivateEndpointModelProperties.privateLinkServicePrivateIP,
+@@clientName(
+  ManagedPrivateEndpointModelProperties.privateLinkServicePrivateIP,
   "privateLinkServicePrivateIp",
   "java"
 );
 @@clientName(Smtp.startTLSPolicy, "startTlsPolicy", "java");
 @@clientName(Microsoft.Dashboard, "DashboardManagementClient", "javascript");
 @@clientName(Microsoft.Dashboard, "DashboardManagementClient", "python");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(GrafanaAvailablePluginListResponse,
+@@clientName(
+  GrafanaAvailablePluginListResponse,
   "GrafanaAvailablePluginListResult",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedGrafana,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ManagedGrafana,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

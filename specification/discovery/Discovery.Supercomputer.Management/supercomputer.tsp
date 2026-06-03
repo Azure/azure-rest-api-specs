@@ -18,6 +18,13 @@ namespace Microsoft.Discovery;
 @doc("Supercomputer tracked resource")
 model Supercomputer is TrackedResource<SupercomputerProperties> {
   ...ResourceNameParameter<Supercomputer>;
+
+  // ...ManagedSystemAssignedIdentityProperty cannot be decorated with versioning info
+  // This is equivalent to `...ManagedSystemAssignedIdentityProperty`
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property identity is not valid in the resource envelope"
+  @doc("The managed service identities assigned to this resource.")
+  @added(Versions.v2026_06_01)
+  identity?: CommonTypes.SystemAssignedServiceIdentity;
 }
 
 @doc("Supported System SKU Sizes.")
@@ -136,7 +143,9 @@ model SupercomputerIdentities {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
   @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
+  workloadIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
 }
 
 @armResourceOperations

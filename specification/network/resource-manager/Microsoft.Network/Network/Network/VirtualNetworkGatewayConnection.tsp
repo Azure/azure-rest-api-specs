@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetworkGatewayConnection extends Resource {
+model VirtualNetworkGatewayConnection extends Common.Resource {
   properties: VirtualNetworkGatewayConnectionPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -76,7 +78,10 @@ interface VirtualNetworkGatewayConnections {
   @tag("VirtualNetworkGatewayConnections")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGatewayConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -112,11 +117,13 @@ interface VirtualNetworkGatewayConnections {
   setSharedKey is ArmResourceActionAsyncBase<
     VirtualNetworkGatewayConnection,
     ConnectionSharedKey,
-    ArmResponse<ConnectionSharedKey> | ArmResourceCreatedResponse<
-      ConnectionSharedKey,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectionSharedKey> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+
+      | ArmResponse<ConnectionSharedKey>
+      | ArmResourceCreatedResponse<
+          ConnectionSharedKey,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectionSharedKey> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>,
     Error = CloudError
   >;
@@ -207,30 +214,39 @@ interface VirtualNetworkGatewayConnections {
   >;
 }
 
-@@doc(VirtualNetworkGatewayConnection.name,
+@@doc(
+  VirtualNetworkGatewayConnection.name,
   "The name of the virtual network gateway connection."
 );
-@@doc(VirtualNetworkGatewayConnection.properties,
+@@doc(
+  VirtualNetworkGatewayConnection.properties,
   "Properties of the virtual network gateway connection."
 );
-@@doc(VirtualNetworkGatewayConnections.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkGatewayConnections.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network gateway connection operation."
 );
-@@doc(VirtualNetworkGatewayConnections.updateTags::parameters.properties,
+@@doc(
+  VirtualNetworkGatewayConnections.updateTags::parameters.properties,
   "Parameters supplied to update virtual network gateway connection tags."
 );
-@@doc(VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript::parameters.body,
+@@doc(
+  VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript::parameters.body,
   "Parameters supplied to the generate vpn device script operation."
 );
-@@doc(VirtualNetworkGatewayConnections.setSharedKey::parameters.body,
+@@doc(
+  VirtualNetworkGatewayConnections.setSharedKey::parameters.body,
   "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
 );
-@@doc(VirtualNetworkGatewayConnections.resetSharedKey::parameters.body,
+@@doc(
+  VirtualNetworkGatewayConnections.resetSharedKey::parameters.body,
   "Parameters supplied to the begin reset virtual network gateway connection shared key operation through network resource provider."
 );
-@@doc(VirtualNetworkGatewayConnections.startPacketCapture::parameters.body,
+@@doc(
+  VirtualNetworkGatewayConnections.startPacketCapture::parameters.body,
   "Virtual network gateway packet capture parameters supplied to start packet capture on gateway connection."
 );
-@@doc(VirtualNetworkGatewayConnections.stopPacketCapture::parameters.body,
+@@doc(
+  VirtualNetworkGatewayConnections.stopPacketCapture::parameters.body,
   "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway connection."
 );

@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -88,8 +90,11 @@ interface ExpressRoutePortAuthorizations {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ExpressRoutePortAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRoutePortAuthorization,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -105,6 +110,7 @@ interface ExpressRoutePortAuthorizations {
 
 @@doc(ExpressRoutePortAuthorization.name, "The name of the authorization.");
 @@doc(ExpressRoutePortAuthorization.properties, "ExpressRoutePort properties.");
-@@doc(ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
+@@doc(
+  ExpressRoutePortAuthorizations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update express route port authorization operation."
 );

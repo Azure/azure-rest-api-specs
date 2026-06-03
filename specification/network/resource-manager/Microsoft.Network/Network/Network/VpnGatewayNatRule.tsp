@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VpnGateway.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -64,7 +66,10 @@ interface VpnGatewayNatRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnGatewayNatRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -78,10 +83,12 @@ interface VpnGatewayNatRules {
   >;
 }
 
-@@doc(VpnGatewayNatRule.name,
+@@doc(
+  VpnGatewayNatRule.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(VpnGatewayNatRule.properties, "Properties of the VpnGateway NAT rule.");
-@@doc(VpnGatewayNatRules.createOrUpdate::parameters.resource,
+@@doc(
+  VpnGatewayNatRules.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a Nat Rule."
 );

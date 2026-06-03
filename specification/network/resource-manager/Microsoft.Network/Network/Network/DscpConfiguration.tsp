@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model DscpConfiguration extends Resource {
+model DscpConfiguration extends Common.Resource {
   properties?: DscpConfigurationPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -62,7 +64,10 @@ interface DscpConfigurations {
   @tag("DscpConfiguration")
   delete is ArmResourceDeleteWithoutOkAsync<
     DscpConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -81,6 +86,7 @@ interface DscpConfigurations {
 
 @@doc(DscpConfiguration.name, "The name of the resource.");
 @@doc(DscpConfiguration.properties, "Properties of the network interface.");
-@@doc(DscpConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  DscpConfigurations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update DscpConfiguration operation."
 );

@@ -33,9 +33,13 @@ import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
+import "./EdgeMachineUpdate.tsp";
 import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
 import "./DevicePool.tsp";
+import "./EdgeMachineGpu.tsp";
+import "./EdgeMachineNetworkAdapters.tsp";
+import "./EdgeMachineStorage.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -51,6 +55,20 @@ namespace Microsoft.AzureStackHCI;
 
 /**
  * The available API versions.
+ *
+ * This enum lists only the currently active API versions. Retired preview
+ * versions (e.g. 2025-11-01-preview through 2026-04-01-preview) are
+ * intentionally omitted — each new preview fully supersedes the previous one,
+ * and customers are expected to adopt the latest preview. Including every
+ * shipped preview would require extensive `@added`/`@removed` decorator
+ * chains across hundreds of models, rendering the TypeSpec source unreadable
+ * and unmaintainable.
+ *
+ * The published swagger files under `preview/<retired-version>/` remain on
+ * disk for backward compatibility with existing consumers (CI pipelines,
+ * unit tests, and customer dependencies). Those swaggers are frozen and
+ * must be regenerated from a pinned commit if changes are ever needed —
+ * not from the latest main.
  */
 enum Versions {
   /**
@@ -59,7 +77,12 @@ enum Versions {
   v2026_02_01: "2026-02-01",
 
   /**
-   * The 2026-04-01-preview API version.
+   * The 2026-04-30 API version.
    */
-  v2026_04_01_preview: "2026-04-01-preview",
+  v2026_04_30: "2026-04-30",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
 }

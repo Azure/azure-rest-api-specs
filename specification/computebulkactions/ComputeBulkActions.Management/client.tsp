@@ -9,7 +9,8 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");
 @@clientName(GetOperationStatusRequest.correlationid, "correlationId", "java");
 @@clientName(CancelOperationsRequest.correlationid, "correlationId", "java");
-@@clientName(Microsoft.ComputeBulkActions,
+@@clientName(
+  Microsoft.ComputeBulkActions,
   "ComputeBulkActionsMgmtClient",
   "python"
 );
@@ -19,7 +20,8 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 @@clientName(ExecuteTypeRequest.correlationid, "CorrelationId", "csharp");
 @@clientName(ExecuteCreateRequest.correlationid, "CorrelationId", "csharp");
-@@clientName(GetOperationStatusRequest.correlationid,
+@@clientName(
+  GetOperationStatusRequest.correlationid,
   "CorrelationId",
   "csharp"
 );
@@ -41,24 +43,29 @@ namespace Microsoft.ComputeBulkActions;
 // Critical: Response suffix → Result suffix
 // =====================================================================
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
-@@clientName(CreateResourceOperationResponse,
+@@clientName(
+  CreateResourceOperationResponse,
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(DeallocateResourceOperationResponse,
+@@clientName(
+  DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
   "csharp"
 );
-@@clientName(DeleteResourceOperationResponse,
+@@clientName(
+  DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
   "csharp"
 );
 @@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
-@@clientName(HibernateResourceOperationResponse,
+@@clientName(
+  HibernateResourceOperationResponse,
   "HibernateResourceOperationResult",
   "csharp"
 );
-@@clientName(StartResourceOperationResponse,
+@@clientName(
+  StartResourceOperationResponse,
   "StartResourceOperationResult",
   "csharp"
 );
@@ -106,11 +113,13 @@ namespace Microsoft.ComputeBulkActions;
 // Warning: Boolean property naming (verb prefix)
 // =====================================================================
 // AdditionalCapabilities
-@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+@@clientName(
+  AdditionalCapabilities.ultraSSDEnabled,
   "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(AdditionalCapabilities.hibernationEnabled,
+@@clientName(
+  AdditionalCapabilities.hibernationEnabled,
   "IsHibernationEnabled",
   "csharp"
 );
@@ -131,27 +140,32 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 
 // LinuxConfiguration
-@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+@@clientName(
+  LinuxConfiguration.disablePasswordAuthentication,
   "IsPasswordAuthenticationDisabled",
   "csharp"
 );
-@@clientName(LinuxConfiguration.provisionVMAgent,
+@@clientName(
+  LinuxConfiguration.provisionVMAgent,
   "IsVMAgentProvisioned",
   "csharp"
 );
-@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+@@clientName(
+  LinuxConfiguration.enableVMAgentPlatformUpdates,
   "IsVMAgentPlatformUpdatesEnabled",
   "csharp"
 );
 
 // LinuxVMGuestPatchAutomaticByPlatformSettings
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "IsBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );
 
 // NetworkInterfaceReferenceProperties
-@@clientName(NetworkInterfaceReferenceProperties.primary,
+@@clientName(
+  NetworkInterfaceReferenceProperties.primary,
   "IsPrimary",
   "csharp"
 );
@@ -160,11 +174,13 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(OSImageNotificationProfile.enable, "IsEnabled", "csharp");
 
 // OSProfile
-@@clientName(OSProfile.allowExtensionOperations,
+@@clientName(
+  OSProfile.allowExtensionOperations,
   "IsExtensionOperationsAllowed",
   "csharp"
 );
-@@clientName(OSProfile.requireGuestProvisionSignal,
+@@clientName(
+  OSProfile.requireGuestProvisionSignal,
   "IsGuestProvisionSignalRequired",
   "csharp"
 );
@@ -174,13 +190,15 @@ namespace Microsoft.ComputeBulkActions;
 
 // ProxyAgentSettings
 @@clientName(ProxyAgentSettings.enabled, "IsEnabled", "csharp");
-@@clientName(ProxyAgentSettings.addProxyAgentExtension,
+@@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
   "ShouldAddProxyAgentExtension",
   "csharp"
 );
 
 // SecurityProfile
-@@clientName(SecurityProfile.encryptionAtHost,
+@@clientName(
+  SecurityProfile.encryptionAtHost,
   "IsEncryptionAtHostEnabled",
   "csharp"
 );
@@ -193,61 +211,73 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
 
 // VMGalleryApplication
-@@clientName(VMGalleryApplication.enableAutomaticUpgrade,
+@@clientName(
+  VMGalleryApplication.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
 
 // VirtualMachineExtensionProperties
-@@clientName(VirtualMachineExtensionProperties.autoUpgradeMinorVersion,
+@@clientName(
+  VirtualMachineExtensionProperties.autoUpgradeMinorVersion,
   "IsAutoUpgradeMinorVersionEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineExtensionProperties.enableAutomaticUpgrade,
+@@clientName(
+  VirtualMachineExtensionProperties.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineExtensionProperties.suppressFailures,
+@@clientName(
+  VirtualMachineExtensionProperties.suppressFailures,
   "IsSuppressFailures",
   "csharp"
 );
 
 // VirtualMachineNetworkInterfaceConfigurationProperties
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking,
   "IsAcceleratedNetworkingEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking,
   "IsTcpStateTrackingDisabled",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga,
   "IsFpgaEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
   "IsIPForwardingEnabled",
   "csharp"
 );
 
 // VirtualMachineNetworkInterfaceIPConfigurationProperties
-@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
 
 // WindowsConfiguration
-@@clientName(WindowsConfiguration.provisionVMAgent,
+@@clientName(
+  WindowsConfiguration.provisionVMAgent,
   "IsVMAgentProvisioned",
   "csharp"
 );
 
 // WindowsVMGuestPatchAutomaticByPlatformSettings
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "IsBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );

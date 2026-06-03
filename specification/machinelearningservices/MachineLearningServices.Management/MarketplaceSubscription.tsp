@@ -43,16 +43,18 @@ interface MarketplaceSubscriptions {
   @summary("Create or update Marketplace Subscription (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MarketplaceSubscription,
-    Response = ArmResourceUpdatedResponse<MarketplaceSubscription> | (ArmResourceCreatedResponse<
-      MarketplaceSubscription,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = MarketplaceSubscription>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<MarketplaceSubscription>
+      | (ArmResourceCreatedResponse<
+          MarketplaceSubscription,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = MarketplaceSubscription>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -61,13 +63,15 @@ interface MarketplaceSubscriptions {
   @summary("Delete Marketplace Subscription (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     MarketplaceSubscription,
-    Response = (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -88,9 +92,11 @@ interface MarketplaceSubscriptions {
 }
 
 @@doc(MarketplaceSubscription.name, "Container name.");
-@@doc(MarketplaceSubscription.properties,
+@@doc(
+  MarketplaceSubscription.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(MarketplaceSubscriptions.createOrUpdate::parameters.resource,
+@@doc(
+  MarketplaceSubscriptions.createOrUpdate::parameters.resource,
   "Marketplace Subscription entity to apply during operation."
 );

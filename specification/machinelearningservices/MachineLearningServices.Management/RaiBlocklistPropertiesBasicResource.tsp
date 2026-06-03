@@ -20,6 +20,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource
@@ -38,6 +39,7 @@ model RaiBlocklistPropertiesBasicResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
@@ -89,6 +91,7 @@ interface RaiBlocklistPropertiesBasicResources {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
@@ -101,6 +104,7 @@ interface RaiBlocklistPropertiesBasicResources {
       @removed(Versions.v2025_12_01)
       @added(Versions.v2026_01_15_preview)
       @removed(Versions.v2026_03_01)
+      @added(Versions.v2026_03_15_preview)
       @removed(Versions.v2026_05_01)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
@@ -123,16 +127,20 @@ interface RaiBlocklistPropertiesBasicResources {
   >;
 }
 
-@@doc(RaiBlocklistPropertiesBasicResource.name,
+@@doc(
+  RaiBlocklistPropertiesBasicResource.name,
   "The name of the RaiBlocklist."
 );
-@@doc(RaiBlocklistPropertiesBasicResource.properties,
+@@doc(
+  RaiBlocklistPropertiesBasicResource.properties,
   "RAI Custom Blocklist properties."
 );
 @@doc(RaiBlocklistPropertiesBasicResources.create::parameters.resource, "");
-@@doc(RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
+@@doc(
+  RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
   "Properties describing the custom blocklist items."
 );
-@@doc(RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
+@@doc(
+  RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
   "List of RAI Blocklist Items Names."
 );

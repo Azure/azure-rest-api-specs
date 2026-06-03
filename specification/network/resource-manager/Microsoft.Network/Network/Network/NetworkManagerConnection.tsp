@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -169,13 +171,16 @@ interface ManagementGroupNetworkManagerConnections {
   >;
 }
 
-@@doc(NetworkManagerConnection.name,
+@@doc(
+  NetworkManagerConnection.name,
   "Name for the network manager connection."
 );
 @@doc(NetworkManagerConnection.properties, "The scope connection properties");
-@@doc(NetworkManagerConnections.createOrUpdate::parameters.resource,
+@@doc(
+  NetworkManagerConnections.createOrUpdate::parameters.resource,
   "Network manager connection to be created/updated."
 );
-@@doc(ManagementGroupNetworkManagerConnections.createOrUpdate::parameters.resource,
+@@doc(
+  ManagementGroupNetworkManagerConnections.createOrUpdate::parameters.resource,
   "Network manager connection to be created/updated."
 );

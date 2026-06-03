@@ -40,18 +40,23 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@clientName(EndpointResources.createOrUpdate::parameters.resource,
+@@clientName(
+  EndpointResources.createOrUpdate::parameters.resource,
   "EndpointResource"
 );
-@@clientName(EndpointResources.listManagedProxyDetails::parameters.body,
+@@clientName(
+  EndpointResources.listManagedProxyDetails::parameters.body,
   "ManagedProxyRequest"
 );
-@@clientName(ServiceConfigurationResources.update::parameters.properties,
+@@clientName(
+  ServiceConfigurationResources.update::parameters.properties,
   "ServiceConfigurationResource"
 );
-@@clientName(EndpointResources.update::parameters.properties,
+@@clientName(
+  EndpointResources.update::parameters.properties,
   "EndpointResource"
 );
-@@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
+@@clientName(
+  ServiceConfigurationResources.createOrupdate::parameters.resource,
   "ServiceConfigurationResource"
 );

@@ -35,6 +35,21 @@ model ApiManagementWorkspaceLinksResource
   etag?: Azure.Core.eTag;
 }
 
+alias ApiManagementWorkspaceLinksListPagingParameters = {
+  /**
+   * Number of records to return.
+   */
+  @query("$top")
+  @minValue(1)
+  $top?: int32;
+
+  /**
+   * Skip token for retrieving the next page of results.
+   */
+  @query("$skipToken")
+  $skipToken?: string;
+};
+
 @armResourceOperations
 interface ApiManagementWorkspaceLinksResources {
   /**
@@ -47,19 +62,23 @@ interface ApiManagementWorkspaceLinksResources {
    */
   listByService is ArmResourceListByParent<
     ApiManagementWorkspaceLinksResource,
+    Parameters = ApiManagementWorkspaceLinksListPagingParameters,
     Response = ArmResponse<ApiManagementWorkspaceLinksListResult>
   >;
 }
 
 @@maxLength(ApiManagementWorkspaceLinksResource.name, 80);
 @@minLength(ApiManagementWorkspaceLinksResource.name, 1);
-@@doc(ApiManagementWorkspaceLinksResource.name,
+@@doc(
+  ApiManagementWorkspaceLinksResource.name,
   "Workspace identifier. Must be unique in the current API Management service instance."
 );
-@@encodedName(ApiManagementWorkspaceLinksResource.etag,
+@@encodedName(
+  ApiManagementWorkspaceLinksResource.etag,
   "application/json",
   "etag"
 );
-@@doc(ApiManagementWorkspaceLinksResource.properties,
+@@doc(
+  ApiManagementWorkspaceLinksResource.properties,
   "Properties of the API Management WorkspaceLinks."
 );

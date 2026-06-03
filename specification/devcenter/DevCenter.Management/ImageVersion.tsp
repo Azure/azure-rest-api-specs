@@ -119,7 +119,8 @@ interface ImageVersionOperationGroupOps
         @minLength(5)
         @maxLength(32)
         versionName: string,
-      }
+      },
+      ResourceName = "ProjectImageVersion"
     > {}
 
 @armResourceOperations

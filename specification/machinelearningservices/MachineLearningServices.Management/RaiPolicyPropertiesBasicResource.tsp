@@ -19,6 +19,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiPolicyPropertiesBasicResource
@@ -37,6 +38,7 @@ model RaiPolicyPropertiesBasicResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResourceOps
@@ -77,6 +79,7 @@ interface RaiPolicyPropertiesBasicResourceOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
@@ -129,6 +132,7 @@ interface RaiPolicyPropertiesBasicResources {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface RaiPolicyOps
@@ -169,6 +173,7 @@ interface RaiPolicyOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface RaiPolicy {
@@ -216,7 +221,8 @@ interface RaiPolicy {
 }
 
 @@doc(RaiPolicyPropertiesBasicResource.name, "Name of the Rai Policy.");
-@@doc(RaiPolicyPropertiesBasicResource.properties,
+@@doc(
+  RaiPolicyPropertiesBasicResource.properties,
   "Azure OpenAI Content Filters properties."
 );
 @@doc(RaiPolicyPropertiesBasicResources.create::parameters.resource,

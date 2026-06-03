@@ -117,6 +117,7 @@ interface PriceSheet {
 }
 
 @@doc(PriceSheetResult.name, "");
-@@doc(PriceSheetResult.properties,
+@@doc(
+  PriceSheetResult.properties,
   "price sheet result. It contains the pricesheet associated with billing period"
 );

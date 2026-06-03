@@ -20,6 +20,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource
@@ -41,6 +42,7 @@ model EndpointDeploymentResourcePropertiesBasicResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
@@ -81,6 +83,7 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
@@ -133,6 +136,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface EndpointDeploymentOps
@@ -173,6 +177,7 @@ interface EndpointDeploymentOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @armResourceOperations
 interface EndpointDeployment {
@@ -189,8 +194,10 @@ interface EndpointDeployment {
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -214,13 +221,16 @@ interface EndpointDeployment {
   >;
 }
 
-@@doc(EndpointDeploymentResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResource.name,
   "Name of the deployment resource"
 );
 @@doc(EndpointDeploymentResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
+@@doc(
+  EndpointDeploymentResourcePropertiesBasicResources.createOrUpdateDeployment::parameters.resource,
   "deployment object"
 );
-@@doc(EndpointDeployment.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointDeployment.createOrUpdate::parameters.resource,
   "deployment object"
 );

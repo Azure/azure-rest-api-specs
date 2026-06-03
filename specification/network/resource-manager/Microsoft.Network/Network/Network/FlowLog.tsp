@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -53,9 +54,11 @@ interface FlowLogs {
 
 @@doc(FlowLog.name, "The name of the flow log resource.");
 @@doc(FlowLog.properties, "Properties of the flow log.");
-@@doc(FlowLogs.createOrUpdate::parameters.resource,
+@@doc(
+  FlowLogs.createOrUpdate::parameters.resource,
   "Parameters that define the create or update flow log resource."
 );
-@@doc(FlowLogs.updateTags::parameters.properties,
+@@doc(
+  FlowLogs.updateTags::parameters.properties,
   "Parameters supplied to update flow log tags."
 );
