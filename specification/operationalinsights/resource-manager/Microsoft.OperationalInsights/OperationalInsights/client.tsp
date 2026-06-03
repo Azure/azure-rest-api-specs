@@ -66,6 +66,9 @@ using Microsoft.OperationalInsights;
 @@alternateType(LogAnalyticsQueryPackQueryProperties.id, uuid, "csharp");
 @@clientName(LogAnalyticsQueryPackQueryProperties.timeCreated, "CreatedOn", "csharp");
 @@clientName(LogAnalyticsQueryPackQueryProperties.timeModified, "ModifiedOn", "csharp");
+@@alternateType(LogAnalyticsQueryPackProperties.queryPackId, uuid, "csharp");
+@@clientName(LogAnalyticsQueryPackProperties.timeCreated, "CreatedOn", "csharp");
+@@clientName(LogAnalyticsQueryPackProperties.timeModified, "ModifiedOn", "csharp");
 @@clientName(
   LogAnalyticsQueryPackQueryPropertiesRelated,
   "LogAnalyticsQueryRelatedMetadata",
@@ -76,6 +79,8 @@ using Microsoft.OperationalInsights;
 @@clientName(BillingType, "OperationalInsightsBillingType", "csharp");
 @@clientName(CapacityReservationProperties, "OperationalInsightsCapacityReservationProperties", "csharp");
 @@clientName(AssociatedWorkspace, "OperationalInsightsClusterAssociatedWorkspace", "csharp");
+@@clientName(AssociatedWorkspace.associateDate, "AssociatedOn", "csharp");
+@@alternateType(ClusterProperties.clusterId, uuid, "csharp");
 @@clientName(ClusterEntityStatus, "OperationalInsightsClusterEntityStatus", "csharp");
 @@clientName(ClusterSkuNameEnum, "OperationalInsightsClusterSkuName", "csharp");
 @@clientName(ClusterReplicationState, "OperationalInsightsClusterReplicationState", "csharp");
@@ -145,6 +150,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(SearchGetSchemaResponse, "OperationalInsightsSearchSchemaResult", "csharp");
 @@clientName(SearchSchemaValue, "OperationalInsightsSearchSchemaValue", "csharp");
+@@clientName(SearchSchemaValue.type, "SearchSchemaValueType", "csharp");
 @@clientName(UsageMetric, "OperationalInsightsUsageMetric", "csharp");
 @@clientName(SharedKeys, "OperationalInsightsWorkspaceSharedKeys", "csharp");
 @@clientName(WorkspacePurgeBody, "OperationalInsightsWorkspacePurgeContent", "csharp");
@@ -175,6 +181,8 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(WorkspaceFeatures.unifiedSentinelBillingOnly, "IsUnifiedSentinelBillingOnly", "csharp");
 @@clientName(WorkspaceCapping.dailyQuotaGb, "DailyQuotaInGB", "csharp");
+@@alternateType(WorkspaceProperties.customerId, uuid, "csharp");
+@@alternateType(WorkspaceProperties.defaultDataCollectionRuleResourceId, armResourceIdentifier, "csharp");
 @@alternateType(LinkedServiceProperties.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(LinkedServiceProperties.writeAccessResourceId, armResourceIdentifier, "csharp");
 @@clientName(LinkedStorageAccountsProperties.dataSourceType, "DataSourceType", "csharp");
@@ -189,6 +197,13 @@ using Microsoft.OperationalInsights;
 @@clientName(Workspaces.managementGroupsList, "GetManagementGroups", "csharp");
 @@clientName(Workspaces.schemaGet, "GetSchemas", "csharp");
 @@clientName(Workspaces.usagesList, "GetUsages", "csharp");
+@@clientName(Workspaces.gatewaysDelete, "DeleteGateway", "csharp");
+@@clientName(Workspaces.disable, "DisableIntelligencePack", "csharp");
+@@clientName(Workspaces.enable, "EnableIntelligencePack", "csharp");
+@@clientName(Workspaces.regenerate, "RegenerateSharedKey", "csharp");
+@@clientName(WorkspacesOperationGroup.failover, "FailoverWorkspace", "csharp");
+@@alternateType(WorkspacesOperationGroup.failover::parameters.location, Azure.Core.azureLocation, "csharp");
+@@clientName(QueryPacksOperationGroup.createOrUpdateWithoutName, "CreateOrUpdateWithoutNameQueryPack", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET pageable shape for the single-page saved search list operation"
 @@markAsPageable(SavedSearches.listByWorkspace, "csharp");
