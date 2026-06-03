@@ -57,7 +57,9 @@ interface AvailableBalances {
     @path
     @pattern("^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$")
     billingAccountName: string,
-  ): ArmResponse<AvailableBalance> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<AvailableBalance>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: AvailableBalance is not a deployable Azure resource; @armResourceOperations does not apply."
@@ -82,5 +84,7 @@ interface AvailableBalanceOperationGroup {
     @path
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     billingProfileName: string,
-  ): ArmResponse<AvailableBalance> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | ArmResponse<AvailableBalance>
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }

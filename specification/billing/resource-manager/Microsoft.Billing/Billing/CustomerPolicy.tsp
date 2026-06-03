@@ -73,8 +73,7 @@ alias CustomerPolicyOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     policyName: ServiceDefinedResourceName;
-  }
-  ,
+  },
   "BillingProfileCustomerPolicy"
 >;
 
@@ -119,8 +118,7 @@ alias PolicyOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @segment("policies")
     @key
     default: "default";
-  }
-  ,
+  },
   "BillingCustomerPolicy"
 >;
 

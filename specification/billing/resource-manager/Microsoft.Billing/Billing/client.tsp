@@ -270,11 +270,7 @@ using Microsoft.Billing;
   "BeneficiaryTenantId",
   "csharp"
 );
-@@clientName(
-  BillingSubscriptionProperties.customerId,
-  "CustomerId",
-  "csharp"
-);
+@@clientName(BillingSubscriptionProperties.customerId, "CustomerId", "csharp");
 @@clientName(Cancellation, "PolicyOverrideCancellation", "csharp");
 @@clientName(
   CancellationReason,
@@ -315,11 +311,7 @@ using Microsoft.Billing;
   "createOrUpdateByCustomerPolicy",
   "csharp"
 );
-@@clientName(
-  Customers.listByCustomer,
-  "getBillingPermissions",
-  "csharp"
-);
+@@clientName(Customers.listByCustomer, "getBillingPermissions", "csharp");
 @@clientName(
   Customers.resolveByCustomer,
   "resolveByCustomerBillingRoleAssignment",
@@ -333,11 +325,7 @@ using Microsoft.Billing;
   "checkAccessBillingPermissions",
   "csharp"
 );
-@@clientName(
-  Departments.listByDepartment,
-  "getBillingPermissions",
-  "csharp"
-);
+@@clientName(Departments.listByDepartment, "getBillingPermissions", "csharp");
 @@clientName(
   DocumentDownloadRequest,
   "BillingDocumentDownloadRequestContent",
@@ -721,11 +709,7 @@ using Microsoft.Billing;
 );
 @@clientLocation(Customers.checkAccessByCustomer, Customers, "csharp");
 @@clientLocation(Customers.listByCustomer, Customers, "csharp");
-@@clientLocation(
-  Departments.checkAccessByDepartment,
-  Departments,
-  "csharp"
-);
+@@clientLocation(Departments.checkAccessByDepartment, Departments, "csharp");
 @@clientLocation(Departments.listByDepartment, Departments, "csharp");
 @@clientLocation(
   EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,

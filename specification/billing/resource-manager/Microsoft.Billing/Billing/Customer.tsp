@@ -64,8 +64,7 @@ alias CustomerOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     customerName: string;
-  }
-  ,
+  },
   "BillingProfileCustomer"
 >;
 
@@ -409,8 +408,7 @@ alias CustomerOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperatio
     @key
     @pattern("^[a-zA-Z\\d-_]{1,128}$")
     customerName: string;
-  }
-  ,
+  },
   "BillingCustomer"
 >;
 

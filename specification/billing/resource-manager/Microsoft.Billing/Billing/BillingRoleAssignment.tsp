@@ -65,8 +65,7 @@ alias BillingRoleAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
-  ,
+  },
   "BillingProfileRoleAssignment"
 >;
 
@@ -157,8 +156,7 @@ alias BillingRoleAssignmentByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
-  ,
+  },
   "BillingCustomerRoleAssignment"
 >;
 
@@ -249,8 +247,7 @@ alias BillingRoleAssignmentByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
-  ,
+  },
   "BillingInvoiceSectionRoleAssignment"
 >;
 
@@ -327,8 +324,7 @@ alias BillingRoleAssignmentByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
-  ,
+  },
   "BillingRoleAssignment"
 >;
 
@@ -424,8 +420,7 @@ alias BillingRoleAssignmentByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
-  ,
+  },
   "BillingDepartmentRoleAssignment"
 >;
 
@@ -502,8 +497,7 @@ alias BillingRoleAssignmentByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
-  ,
+  },
   "BillingEnrollmentAccountRoleAssignment"
 >;
 
