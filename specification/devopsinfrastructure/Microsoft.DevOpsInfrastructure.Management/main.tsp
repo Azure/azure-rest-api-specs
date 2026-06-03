@@ -208,6 +208,36 @@ model DevOpsAzureSku {
   @doc("The mount path for the NVMe striped volume on Linux (e.g., '/mnt/azure_nvme_temp'). Defaults to '/mnt/azure_nvme_temp' when not specified.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_04_17_preview)
   linuxNvmePath?: string;
+
+  @doc("The tier of the Azure SKU (e.g., 'Standard').")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  tier?: string;
+
+  @doc("The priority of the pool VMs.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  poolVmPriority?: PoolVmPriority;
+
+  @doc("The list of VM sizes for instance mix configurations.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  @identifiers(#[])
+  vmSizes?: VmSize[];
+}
+
+@doc("The priority of pool VMs.")
+union PoolVmPriority {
+  string,
+
+  @doc("Regular priority VMs.")
+  Regular: "Regular",
+
+  @doc("Spot priority VMs.")
+  Spot: "Spot",
+}
+
+@doc("Defines a VM size for instance mix.")
+model VmSize {
+  @doc("The name of the VM size (e.g., 'Standard_D2ads_v5').")
+  name: string;
 }
 
 @doc("The storage profile of the VMSS.")
