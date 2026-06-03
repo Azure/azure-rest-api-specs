@@ -8,8 +8,8 @@ using Azure.Core;
 using Microsoft.NetworkCloud;
 
 // --- go ---
-@@clientName(HugepagesSize.`1G`, "OneG", "go,javascript");
-@@clientName(HugepagesSize.`2M`, "TwoM", "go,javascript");
+@@clientName(HugepagesSize.`1G`, "OneG", "go");
+@@clientName(HugepagesSize.`2M`, "TwoM", "go");
 @@alternateType(
   Azure.ResourceManager.Foundations.ExtendedLocation.type,
   string,
@@ -85,6 +85,11 @@ using Microsoft.NetworkCloud;
 @@clientName(AccessBridge, "NetworkCloudAccessBridge", "csharp");
 @@clientName(KubernetesVersion, "NetworkCloudKubernetesVersion", "csharp");
 @@clientName(DeploymentType, "NetworkCloudDeploymentType", "csharp");
+@@clientName(
+  BareMetalMachineConfigurationDataPatch,
+  "BareMetalMachineConfigurationPatch",
+  "csharp"
+);
 @@clientName(BareMetalMachineKeySetProperties.expiration, "ExpireOn", "csharp");
 @@alternateType(
   BareMetalMachineKeySetProperties.jumpHostsAllowed,
@@ -179,6 +184,11 @@ using Microsoft.NetworkCloud;
 @@clientName(IdentitySelector, "ManagedServiceIdentitySelector", "csharp");
 @@clientName(
   ImageRepositoryCredentials.registryUrl,
+  "registryUriString",
+  "csharp"
+);
+@@clientName(
+  ImageRepositoryCredentialsPatch.registryUrl,
   "registryUriString",
   "csharp"
 );
@@ -288,6 +298,12 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@alternateType(
+  RackDefinitionPatch.networkRackId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RackDefinitionPatch.rackSkuId, armResourceIdentifier, "csharp");
+@@alternateType(
   StorageApplianceProperties.clusterId,
   armResourceIdentifier,
   "csharp"
@@ -305,6 +321,11 @@ using Microsoft.NetworkCloud;
 @@clientName(
   StorageApplianceConfigurationData,
   "StorageApplianceConfiguration",
+  "csharp"
+);
+@@clientName(
+  StorageApplianceConfigurationDataPatch,
+  "StorageApplianceConfigurationPatch",
   "csharp"
 );
 @@alternateType(
@@ -428,7 +449,9 @@ using Microsoft.NetworkCloud;
 @@clientName(Nic, "NetworkCloudNic", "csharp");
 @@clientName(OsDisk, "NetworkCloudOSDisk", "csharp");
 @@clientName(RackDefinition, "NetworkCloudRackDefinition", "csharp");
+@@clientName(RackDefinitionPatch, "NetworkCloudRackDefinitionPatch", "csharp");
 @@clientName(SshPublicKey, "NetworkCloudSshPublicKey", "csharp");
+@@clientName(SshPublicKeyPatch, "NetworkCloudSshPublicKeyPatch", "csharp");
 @@clientName(StorageProfile, "NetworkCloudStorageProfile", "csharp");
 @@clientName(
   OperationStatusResult,
@@ -438,6 +461,7 @@ using Microsoft.NetworkCloud;
 @@clientName(VirtualMachineBootMethod.BIOS, "Bios", "csharp");
 @@clientName(VirtualMachineBootMethod.UEFI, "Uefi", "csharp");
 @@clientName(ValidationThreshold.type, "ThresholdType", "csharp");
+@@clientName(ValidationThresholdPatch.type, "ThresholdType", "csharp");
 @@clientName(MachineSkuDiskConnectionType.PCIE, "Pcie", "csharp");
 @@clientName(MachineSkuDiskConnectionType.RAID, "Raid", "csharp");
 @@clientName(MachineSkuDiskConnectionType.SATA, "Sata", "csharp");
@@ -669,13 +693,4 @@ using Microsoft.NetworkCloud;
   AccessBridgeSecurityRule,
   "NetworkCloudAccessBridgeSecurityRule",
   "csharp"
-);
-
-// --- java ---
-@@clientName(KeySetUser.azureUserName, "azureUsername", "java");
-@@clientName(KeySetUserStatus.azureUserName, "azureUsername", "java");
-@@clientName(
-  VirtualMachineIPAllocationMethod,
-  "VirtualMachineIpAllocationMethod",
-  "java"
 );

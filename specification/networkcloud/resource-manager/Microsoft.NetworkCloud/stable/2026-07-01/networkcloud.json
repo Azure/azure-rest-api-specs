@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "NetworkCloud",
-    "version": "2026-05-01-preview",
+    "version": "2026-07-01",
     "description": "The Network Cloud APIs provide management of the Azure Operator Nexus compute resources such as on-premises clusters, hardware resources, and workload infrastructure resources.",
     "x-typespec-generated": [
       {
@@ -9596,6 +9596,24 @@
         "username"
       ]
     },
+    "AdministrativeCredentialsPatch": {
+      "type": "object",
+      "description": "AdministrativeCredentialsPatch represents the admin credentials for the device requiring password-based authentication.",
+      "properties": {
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The password of the administrator of the device used during initialization.",
+          "minLength": 1,
+          "x-ms-secret": true
+        },
+        "username": {
+          "type": "string",
+          "description": "The username of the administrator of the device used during initialization.",
+          "minLength": 1
+        }
+      }
+    },
     "AdministratorConfiguration": {
       "type": "object",
       "description": "AdministratorConfiguration represents the administrative credentials that will be applied to the control plane and agent pool nodes in Kubernetes clusters.",
@@ -10287,6 +10305,53 @@
         "serialNumber"
       ]
     },
+    "BareMetalMachineConfigurationDataPatch": {
+      "type": "object",
+      "description": "BareMetalMachineConfigurationDataPatch represents configuration for the bare metal machine for patch operations.",
+      "properties": {
+        "bmcConnectionString": {
+          "type": "string",
+          "description": "The connection string for the baseboard management controller including IP address and protocol.",
+          "readOnly": true
+        },
+        "bmcCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentialsPatch",
+          "description": "The credentials of the baseboard management controller on this bare metal machine. The password field is expected to be an Azure Key Vault key URL. Until the cluster is converted to utilize managed identity by setting the secret archive settings, the actual password value should be provided instead."
+        },
+        "bmcMacAddress": {
+          "type": "string",
+          "description": "The MAC address of the BMC for this machine.",
+          "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
+        },
+        "bootMacAddress": {
+          "type": "string",
+          "description": "The MAC address associated with the PXE NIC card.",
+          "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
+        },
+        "machineDetails": {
+          "type": "string",
+          "description": "The free-form additional information about the machine, e.g. an asset tag.",
+          "maxLength": 256
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The user-provided name for the bare metal machine created from this specification. If not provided, the machine name will be generated programmatically.",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,62}[a-zA-Z0-9])$"
+        },
+        "rackSlot": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The slot the physical machine is in the rack based on the BOM configuration.",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the machine. Hardware suppliers may use an alternate value. For example, service tag.",
+          "maxLength": 64
+        }
+      }
+    },
     "BareMetalMachineCordonParameters": {
       "type": "object",
       "description": "BareMetalMachineCordonParameters represents the body of the request to evacuate workloads from node on a bare metal machine.",
@@ -10769,7 +10834,21 @@
         "value"
       ]
     },
-    "BareMetalMachineMetricsConfigurationStatusLogLevel": {
+    "BareMetalMachineMonitoringConfigurationStatus": {
+      "type": "object",
+      "description": "BareMetalMachineMonitoringConfigurationStatus represents the monitoring configuration status of the bare metal machine.",
+      "properties": {
+        "logLevel": {
+          "$ref": "#/definitions/BareMetalMachineMonitoringConfigurationStatusLogLevel",
+          "description": "The log level for the monitoring configuration status of the bare metal machine."
+        },
+        "metricsLevel": {
+          "$ref": "#/definitions/BareMetalMachineMonitoringConfigurationStatusMetricsLevel",
+          "description": "The metrics level for the monitoring configuration status of the bare metal machine."
+        }
+      }
+    },
+    "BareMetalMachineMonitoringConfigurationStatusLogLevel": {
       "type": "string",
       "description": "The log level for the monitoring configuration status of the bare metal machine.",
       "enum": [
@@ -10777,7 +10856,7 @@
         "Nexus"
       ],
       "x-ms-enum": {
-        "name": "BareMetalMachineMetricsConfigurationStatusLogLevel",
+        "name": "BareMetalMachineMonitoringConfigurationStatusLogLevel",
         "modelAsString": true,
         "values": [
           {
@@ -10793,7 +10872,7 @@
         ]
       }
     },
-    "BareMetalMachineMetricsConfigurationStatusMetricsLevel": {
+    "BareMetalMachineMonitoringConfigurationStatusMetricsLevel": {
       "type": "string",
       "description": "The metrics level for the monitoring configuration status of the bare metal machine.",
       "enum": [
@@ -10801,7 +10880,7 @@
         "Nexus"
       ],
       "x-ms-enum": {
-        "name": "BareMetalMachineMetricsConfigurationStatusMetricsLevel",
+        "name": "BareMetalMachineMonitoringConfigurationStatusMetricsLevel",
         "modelAsString": true,
         "values": [
           {
@@ -10815,20 +10894,6 @@
             "description": "Metrics are emitted at the Nexus metrics level."
           }
         ]
-      }
-    },
-    "BareMetalMachineMonitoringConfigurationStatus": {
-      "type": "object",
-      "description": "BareMetalMachineMonitoringConfigurationStatus represents the monitoring configuration status of the bare metal machine.",
-      "properties": {
-        "logLevel": {
-          "$ref": "#/definitions/BareMetalMachineMetricsConfigurationStatusLogLevel",
-          "description": "The log level for the monitoring configuration status of the bare metal machine."
-        },
-        "metricsLevel": {
-          "$ref": "#/definitions/BareMetalMachineMetricsConfigurationStatusMetricsLevel",
-          "description": "The metrics level for the monitoring configuration status of the bare metal machine."
-        }
       }
     },
     "BareMetalMachinePatchParameters": {
@@ -13288,7 +13353,7 @@
       "description": "ClusterPatchProperties represents the properties of the cluster for patching.",
       "properties": {
         "aggregatorOrSingleRackDefinition": {
-          "$ref": "#/definitions/RackDefinition",
+          "$ref": "#/definitions/RackDefinitionPatch",
           "description": "The rack definition that is intended to reflect only a single rack in a single rack cluster, or an aggregator rack in a multi-rack cluster."
         },
         "analyticsOutputSettings": {
@@ -13300,7 +13365,7 @@
           "description": "The customer-provided location information to identify where the cluster resides."
         },
         "clusterServicePrincipal": {
-          "$ref": "#/definitions/ServicePrincipalInformation",
+          "$ref": "#/definitions/ServicePrincipalInformationPatch",
           "description": "Field Deprecated: Use managed identity to provide cluster privileges. The service principal to be used by the cluster during Arc Appliance installation."
         },
         "commandOutputSettings": {
@@ -13308,25 +13373,25 @@
           "description": "The settings for commands run in this cluster, such as bare metal machine run read only commands and data extracts."
         },
         "computeDeploymentThreshold": {
-          "$ref": "#/definitions/ValidationThreshold",
+          "$ref": "#/definitions/ValidationThresholdPatch",
           "description": "The validation threshold indicating the allowable failures of compute machines during environment validation and deployment."
         },
         "computeRackDefinitions": {
           "type": "array",
           "description": "The list of rack definitions for the compute racks in a multi-rack cluster, or an empty list in a single-rack cluster.",
           "items": {
-            "$ref": "#/definitions/RackDefinition"
+            "$ref": "#/definitions/RackDefinitionPatch"
           },
           "x-ms-identifiers": [
             "networkRackId"
           ]
         },
         "runtimeProtectionConfiguration": {
-          "$ref": "#/definitions/RuntimeProtectionConfiguration",
+          "$ref": "#/definitions/RuntimeProtectionConfigurationPatch",
           "description": "The settings for cluster runtime protection."
         },
         "secretArchive": {
-          "$ref": "#/definitions/ClusterSecretArchive",
+          "$ref": "#/definitions/ClusterSecretArchivePatch",
           "description": "The configuration for use of a key vault to store secrets for later retrieval by the operator."
         },
         "secretArchiveSettings": {
@@ -13334,7 +13399,7 @@
           "description": "The settings for the secret archive used to hold credentials for the cluster."
         },
         "updateStrategy": {
-          "$ref": "#/definitions/ClusterUpdateStrategy",
+          "$ref": "#/definitions/ClusterUpdateStrategyPatch",
           "description": "The strategy for updating the cluster."
         },
         "vulnerabilityScanningSettings": {
@@ -13697,6 +13762,52 @@
         "keyVaultId"
       ]
     },
+    "ClusterSecretArchiveEnabled": {
+      "type": "string",
+      "description": "The indicator if the specified key vault should be used to archive the secrets of the cluster.",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterSecretArchiveEnabled",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "True",
+            "description": "Enable the cluster secret archive with the specified key vault."
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "Disable use of the cluster secret archive even if a key vault is specified."
+          }
+        ]
+      }
+    },
+    "ClusterSecretArchivePatch": {
+      "type": "object",
+      "description": "ClusterSecretArchivePatch configures the key vault to archive the secrets of the cluster for later retrieval for patch operations.",
+      "properties": {
+        "keyVaultId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the key vault to archive the secrets of the cluster.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "useKeyVault": {
+          "$ref": "#/definitions/ClusterSecretArchiveEnabled",
+          "description": "The indicator if the specified key vault should be used to archive the secrets of the cluster."
+        }
+      }
+    },
     "ClusterType": {
       "type": "string",
       "description": "The type of rack configuration for the cluster.",
@@ -13759,6 +13870,39 @@
         "thresholdType",
         "thresholdValue"
       ]
+    },
+    "ClusterUpdateStrategyPatch": {
+      "type": "object",
+      "description": "ClusterUpdateStrategyPatch represents the strategy for updating the cluster for patch operations.",
+      "properties": {
+        "maxUnavailable": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of worker nodes that can be offline within the increment of update, e.g., rack-by-rack. Limited by the maximum number of machines in the increment. Defaults to the whole increment size.",
+          "minimum": 1
+        },
+        "strategyType": {
+          "$ref": "#/definitions/ClusterUpdateStrategyType",
+          "description": "The mode of operation for runtime protection."
+        },
+        "thresholdType": {
+          "$ref": "#/definitions/ValidationThresholdType",
+          "description": "Selection of how the threshold should be evaluated."
+        },
+        "thresholdValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The numeric threshold value.",
+          "minimum": 0
+        },
+        "waitTimeMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The time to wait between the increments of update defined by the strategy.",
+          "minimum": 0,
+          "maximum": 60
+        }
+      }
     },
     "ClusterUpdateStrategyType": {
       "type": "string",
@@ -14051,7 +14195,7 @@
           "description": "The date and time after which the key will be disallowed access."
         },
         "sshPublicKey": {
-          "$ref": "#/definitions/SshPublicKey",
+          "$ref": "#/definitions/SshPublicKeyPatch",
           "description": "The SSH public key that will be provisioned for user access. The user is expected to have the corresponding SSH private key for logging in."
         }
       }
@@ -14564,6 +14708,28 @@
         "registryUrl",
         "username"
       ]
+    },
+    "ImageRepositoryCredentialsPatch": {
+      "type": "object",
+      "description": "ImageRepositoryCredentialsPatch represents the credentials used to login to the image repository for patch operations.",
+      "properties": {
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The password or token used to access an image in the target repository.",
+          "minLength": 1,
+          "x-ms-secret": true
+        },
+        "registryUrl": {
+          "type": "string",
+          "description": "The URL of the authentication server used to validate the repository credentials."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username used to access an image in the target repository.",
+          "minLength": 1
+        }
+      }
     },
     "InitialAgentPoolConfiguration": {
       "type": "object",
@@ -17263,6 +17429,61 @@
         "rackSkuId"
       ]
     },
+    "RackDefinitionPatch": {
+      "type": "object",
+      "description": "RackDefinitionPatch represents details regarding the rack for patch operations.",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "The zone name used for this rack when created. Availability zones are used for workload placement.",
+          "pattern": "^[a-zA-Z0-9]{1,10}$"
+        },
+        "bareMetalMachineConfigurationData": {
+          "type": "array",
+          "description": "The unordered list of bare metal machine configuration.",
+          "items": {
+            "$ref": "#/definitions/BareMetalMachineConfigurationDataPatch"
+          },
+          "x-ms-identifiers": []
+        },
+        "networkRackId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the network rack that matches this rack definition."
+        },
+        "rackLocation": {
+          "type": "string",
+          "description": "The free-form description of the rack's location.",
+          "maxLength": 256
+        },
+        "rackSerialNumber": {
+          "type": "string",
+          "description": "The unique identifier for the rack within Network Cloud cluster. An alternate unique alphanumeric value other than a serial number may be provided if desired.",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "rackSkuId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the sku for the rack being added.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetworkCloud/rackSkus"
+              }
+            ]
+          }
+        },
+        "storageApplianceConfigurationData": {
+          "type": "array",
+          "description": "The list of storage appliance configuration data for this rack.",
+          "items": {
+            "$ref": "#/definitions/StorageApplianceConfigurationDataPatch"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "RackDetailedStatus": {
       "type": "string",
       "description": "The more detailed status of the rack.",
@@ -17821,6 +18042,20 @@
         }
       }
     },
+    "RuntimeProtectionConfigurationPatch": {
+      "type": "object",
+      "description": "RuntimeProtectionConfigurationPatch represents the runtime protection configuration for the cluster for patch operations.",
+      "properties": {
+        "definitionUpdateMode": {
+          "$ref": "#/definitions/RuntimeProtectionDefinitionUpdateMode",
+          "description": "The definition update mode for runtime protection."
+        },
+        "enforcementLevel": {
+          "$ref": "#/definitions/RuntimeProtectionEnforcementLevel",
+          "description": "The mode of operation for runtime protection."
+        }
+      }
+    },
     "RuntimeProtectionDefinitionUpdateMode": {
       "type": "string",
       "description": "The definition update mode for runtime protection.",
@@ -18233,6 +18468,30 @@
         "tenantId"
       ]
     },
+    "ServicePrincipalInformationPatch": {
+      "type": "object",
+      "description": "ServicePrincipalInformationPatch represents the details of the service principal to be used by the cluster during Arc Appliance installation for patch operations.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The application ID, also known as client ID, of the service principal."
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The password of the service principal.",
+          "x-ms-secret": true
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID, also known as the object ID, of the service principal."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID, also known as the directory ID, of the tenant in which the service principal is created."
+        }
+      }
+    },
     "SshPublicKey": {
       "type": "object",
       "description": "SshPublicKey represents the public key used to authenticate with a resource through SSH.",
@@ -18246,6 +18505,17 @@
       "required": [
         "keyData"
       ]
+    },
+    "SshPublicKeyPatch": {
+      "type": "object",
+      "description": "SshPublicKeyPatch represents the public key used to authenticate with a resource through SSH.",
+      "properties": {
+        "keyData": {
+          "type": "string",
+          "description": "The SSH public key data.",
+          "minLength": 1
+        }
+      }
     },
     "StepState": {
       "type": "object",
@@ -18398,6 +18668,32 @@
         "serialNumber"
       ]
     },
+    "StorageApplianceConfigurationDataPatch": {
+      "type": "object",
+      "description": "StorageApplianceConfigurationDataPatch represents configuration for the storage application for patch operations.",
+      "properties": {
+        "adminCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentialsPatch",
+          "description": "The credentials of the administrative interface on this storage appliance. The password field is expected to be an Azure Key Vault key URL. Until the cluster is converted to utilize managed identity by setting the secret archive settings, the actual password value should be provided instead."
+        },
+        "rackSlot": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The slot that storage appliance is in the rack based on the BOM configuration.",
+          "minimum": 1,
+          "maximum": 256
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the appliance."
+        },
+        "storageApplianceName": {
+          "type": "string",
+          "description": "The user-provided name for the storage appliance that will be created from this specification.",
+          "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$"
+        }
+      }
+    },
     "StorageApplianceDetailedStatus": {
       "type": "string",
       "description": "The detailed status of the storage appliance.",
@@ -18482,7 +18778,21 @@
         "value"
       ]
     },
-    "StorageApplianceMetricsConfigurationStatusLogLevel": {
+    "StorageApplianceMonitoringConfigurationStatus": {
+      "type": "object",
+      "description": "The monitoring configuration status of the storage appliance.",
+      "properties": {
+        "logLevel": {
+          "$ref": "#/definitions/StorageApplianceMonitoringConfigurationStatusLogLevel",
+          "description": "The log level for the monitoring configuration status of the storage appliance."
+        },
+        "metricsLevel": {
+          "$ref": "#/definitions/StorageApplianceMonitoringConfigurationStatusMetricsLevel",
+          "description": "The metrics level for the monitoring configuration status of the storage appliance."
+        }
+      }
+    },
+    "StorageApplianceMonitoringConfigurationStatusLogLevel": {
       "type": "string",
       "description": "The log level for the monitoring configuration status of the storage appliance.",
       "enum": [
@@ -18490,7 +18800,7 @@
         "Nexus"
       ],
       "x-ms-enum": {
-        "name": "StorageApplianceMetricsConfigurationStatusLogLevel",
+        "name": "StorageApplianceMonitoringConfigurationStatusLogLevel",
         "modelAsString": true,
         "values": [
           {
@@ -18506,7 +18816,7 @@
         ]
       }
     },
-    "StorageApplianceMetricsConfigurationStatusMetricsLevel": {
+    "StorageApplianceMonitoringConfigurationStatusMetricsLevel": {
       "type": "string",
       "description": "The metrics level for the monitoring configuration status of the storage appliance.",
       "enum": [
@@ -18514,7 +18824,7 @@
         "Nexus"
       ],
       "x-ms-enum": {
-        "name": "StorageApplianceMetricsConfigurationStatusMetricsLevel",
+        "name": "StorageApplianceMonitoringConfigurationStatusMetricsLevel",
         "modelAsString": true,
         "values": [
           {
@@ -18528,20 +18838,6 @@
             "description": "Metrics are emitted at the Nexus metrics level."
           }
         ]
-      }
-    },
-    "StorageApplianceMonitoringConfigurationStatus": {
-      "type": "object",
-      "description": "The monitoring configuration status of the storage appliance.",
-      "properties": {
-        "logLevel": {
-          "$ref": "#/definitions/StorageApplianceMetricsConfigurationStatusLogLevel",
-          "description": "The log level for the monitoring configuration status of the storage appliance."
-        },
-        "metricsLevel": {
-          "$ref": "#/definitions/StorageApplianceMetricsConfigurationStatusMetricsLevel",
-          "description": "The metrics level for the monitoring configuration status of the storage appliance."
-        }
       }
     },
     "StorageAppliancePatchParameters": {
@@ -18576,18 +18872,18 @@
       "type": "object",
       "description": "StorageApplianceProperties represents the properties of the storage appliance.",
       "properties": {
-        "administratorCredentials": {
-          "$ref": "#/definitions/AdministrativeCredentials",
-          "description": "The credentials of the administrative interface on this storage appliance.",
+        "rackId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the rack where this storage appliance resides.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "rackId": {
+        "storageApplianceSkuId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the rack where this storage appliance resides.",
+          "description": "The SKU for the storage appliance.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18608,9 +18904,9 @@
           "type": "string",
           "description": "The serial number for the storage appliance."
         },
-        "storageApplianceSkuId": {
-          "type": "string",
-          "description": "The SKU for the storage appliance.",
+        "administratorCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials",
+          "description": "The credentials of the administrative interface on this storage appliance.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18711,11 +19007,11 @@
         }
       },
       "required": [
-        "administratorCredentials",
         "rackId",
+        "storageApplianceSkuId",
         "rackSlot",
         "serialNumber",
-        "storageApplianceSkuId"
+        "administratorCredentials"
       ]
     },
     "StorageApplianceProvisioningState": {
@@ -19277,6 +19573,26 @@
         ]
       }
     },
+    "ValidationThresholdPatch": {
+      "type": "object",
+      "description": "ValidationThresholdPatch indicates allowed machine and node hardware and deployment failures for patch operations.",
+      "properties": {
+        "grouping": {
+          "$ref": "#/definitions/ValidationThresholdGrouping",
+          "description": "Selection of how the type evaluation is applied to the cluster calculation."
+        },
+        "type": {
+          "$ref": "#/definitions/ValidationThresholdType",
+          "description": "Selection of how the threshold should be evaluated."
+        },
+        "value": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The numeric threshold value.",
+          "minimum": 0
+        }
+      }
+    },
     "ValidationThresholdType": {
       "type": "string",
       "description": "Selection of how the threshold should be evaluated.",
@@ -19526,7 +19842,7 @@
       "description": "VirtualMachinePatchProperties represents the properties of the virtual machine that can be patched.",
       "properties": {
         "vmImageRepositoryCredentials": {
-          "$ref": "#/definitions/ImageRepositoryCredentials",
+          "$ref": "#/definitions/ImageRepositoryCredentialsPatch",
           "description": "The credentials used to login to the image repository that has access to the specified image."
         }
       }
