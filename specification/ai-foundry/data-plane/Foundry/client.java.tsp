@@ -19,7 +19,7 @@ import "./src/routines/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 
-import "./relocate-beta-operations.tsp";
+import "./relocate-beta-operations.java.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
