@@ -7,6 +7,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.NetworkCloud;
 
+// ---javascript ---
+@@clientName(HugepagesSize.`1G`, "OneG", "go,javascript");
+@@clientName(HugepagesSize.`2M`, "TwoM", "go,javascript");
+
 // --- go ---
 @@clientName(HugepagesSize.`1G`, "OneG", "go");
 @@clientName(HugepagesSize.`2M`, "TwoM", "go");
@@ -693,4 +697,13 @@ using Microsoft.NetworkCloud;
   AccessBridgeSecurityRule,
   "NetworkCloudAccessBridgeSecurityRule",
   "csharp"
+);
+
+// --- java ---
+@@clientName(KeySetUser.azureUserName, "azureUsername", "java");
+@@clientName(KeySetUserStatus.azureUserName, "azureUsername", "java");
+@@clientName(
+  VirtualMachineIPAllocationMethod,
+  "VirtualMachineIpAllocationMethod",
+  "java"
 );
