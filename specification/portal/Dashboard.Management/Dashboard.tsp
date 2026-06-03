@@ -58,19 +58,23 @@ interface Dashboards {
 @@maxLength(Dashboard.name, 64);
 @@minLength(Dashboard.name, 3);
 @@doc(Dashboard.name, "The name of the dashboard.");
-@@doc(Dashboards.createOrUpdate::parameters.resource,
+@@doc(
+  Dashboards.createOrUpdate::parameters.resource,
   "The parameters required to create or update a dashboard."
 );
-@@doc(Dashboards.update::parameters.properties,
+@@doc(
+  Dashboards.update::parameters.properties,
   "The updatable fields of a Dashboard."
 );
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Dashboards.createOrUpdate::parameters.resource,
+@@encodedName(
+  Dashboards.createOrUpdate::parameters.resource,
   "application/json",
   "dashboard"
 );
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Dashboards.update::parameters.properties,
+@@encodedName(
+  Dashboards.update::parameters.properties,
   "application/json",
   "dashboard"
 );

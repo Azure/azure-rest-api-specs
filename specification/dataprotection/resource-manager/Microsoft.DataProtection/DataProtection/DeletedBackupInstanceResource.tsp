@@ -57,9 +57,11 @@ interface DeletedBackupInstanceResources {
   >;
 }
 
-@@doc(DeletedBackupInstanceResource.name,
+@@doc(
+  DeletedBackupInstanceResource.name,
   "The name of the deleted backup instance"
 );
-@@doc(DeletedBackupInstanceResource.properties,
+@@doc(
+  DeletedBackupInstanceResource.properties,
   "DeletedBackupInstanceResource properties"
 );

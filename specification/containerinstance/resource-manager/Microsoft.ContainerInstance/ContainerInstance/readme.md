@@ -38,6 +38,20 @@ input-file:
   - ./stable/2025-09-01/containerInstance.json
 ```
 
+### Tag: package-preview-2026-06-01
+
+These settings apply only when `--tag=package-preview-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06-01'
+input-file:
+  - ./preview/2026-06-01-preview/containerInstance.json
+directive:
+  - suppress: ProvisioningStateMustBeReadOnly
+    reason: provisioningState is read-only by design - the property carries readOnly via the referenced enum schema (use-read-only-status-schema), and the TypeSpec source uses @visibility(Lifecycle.Read). The LintDiff rule does not follow $ref to detect the readOnly flag. Surfacing readOnly on the property reference would be inconsistent with prior API versions of this provider.
+  - suppress: LroErrorContent
+    reason: The long-running operations on this provider use the existing CloudError shape, consistent with the prior 2025-09-01 stable API version of this service. Switching to the standard ErrorResponse envelope from common-types v2+ would be a breaking change versus the published stable API.
+```
+
 ### Tag: package-preview-2024-11
 
 These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
@@ -257,7 +271,7 @@ suppressions:
     where:
       - $.definitions.SecretReferenceVolume
   - code: GetCollectionResponseSchema
-    reason: We do not return the instanceView property in our List operation, we just return this 
+    reason: We do not return the instanceView property in our List operation, we just return this
             property for our Get operations. This change has been part of our stable api versions for a couple of years
     from:
       - containerInstance.json

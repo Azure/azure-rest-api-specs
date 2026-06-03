@@ -19,7 +19,7 @@ namespace ComputeGallery;
 @parentResource(CommunityGallery)
 model CommunityGalleryImage
   is ProxyResourceCommunity<CommunityGalleryImageProperties> {
-  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
+  ...ResourceNameParameter<
     Resource = CommunityGalleryImage,
     KeyName = "galleryImageName",
     SegmentName = "images",
@@ -37,15 +37,17 @@ interface CommunityGalleryImages {
   /**
    * List community gallery images inside a gallery.
    */
-  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
+  list is ComputeResourceListByParent<
     CommunityGalleryImage,
     Response = CommunityGalleryImageList
   >;
 }
 
-@@doc(CommunityGalleryImage.name,
+@@doc(
+  CommunityGalleryImage.name,
   "The name of the community gallery image definition."
 );
-@@doc(CommunityGalleryImage.properties,
+@@doc(
+  CommunityGalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );

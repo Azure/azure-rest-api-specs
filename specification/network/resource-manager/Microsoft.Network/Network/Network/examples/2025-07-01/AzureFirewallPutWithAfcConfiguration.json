@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "azureFirewallName": "azurefirewall",
+    "createAfcControlPlane": true,
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "azureFirewallIpConfiguration",
+            "properties": {
+              "publicIPAddress": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+              },
+              "subnet": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/AzureFirewallSubnet"
+              }
+            }
+          }
+        ],
+        "sku": {
+          "name": "AZFW_VNet",
+          "tier": "Standard"
+        },
+        "threatIntelMode": "Alert"
+      },
+      "tags": {
+        "key1": "value1"
+      },
+      "zones": []
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azurefirewall",
+        "type": "Microsoft.Network/azureFirewalls",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall",
+        "location": "West US",
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "azureFirewallIpConfiguration",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall/ipConfigurations/azureFirewallIpConfiguration",
+              "properties": {
+                "privateIPAddress": "10.0.0.0",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/AzureFirewallSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "AZFW_VNet",
+            "tier": "Standard"
+          },
+          "threatIntelMode": "Alert",
+          "afcConfiguration": {
+            "serviceEndpoint": "5e73bbe79102451d968d1cac9b5dbd41.afc.azure.com"
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "zones": []
+      }
+    },
+    "201": {
+      "body": {
+        "name": "azurefirewall",
+        "type": "Microsoft.Network/azureFirewalls",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall",
+        "location": "West US",
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "azureFirewallIpConfiguration",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall/ipConfigurations/azureFirewallIpConfiguration",
+              "properties": {
+                "privateIPAddress": "10.0.0.0",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/AzureFirewallSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "AZFW_VNet",
+            "tier": "Standard"
+          },
+          "threatIntelMode": "Alert",
+          "afcConfiguration": {
+            "serviceEndpoint": "5e73bbe79102451d968d1cac9b5dbd41.afc.azure.com"
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "zones": []
+      }
+    }
+  },
+  "operationId": "AzureFirewalls_CreateOrUpdate",
+  "title": "Create Azure Firewall With AFC Control Plane"
+}

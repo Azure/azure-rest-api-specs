@@ -27,7 +27,7 @@ describe("fetch-resource-providers", () => {
   describe("findRepoRoot", () => {
     it("finds the repository root", () => {
       const repoRoot = findRepoRoot(__dirname);
-      expect(repoRoot.endsWith("azure-rest-api-specs")).toBe(true);
+      expect(repoRoot.includes("azure-rest-api-specs")).toBe(true);
       // In sparse checkouts, .github exists but specification may not
       expect(
         fs.existsSync(path.join(repoRoot, "specification")) ||

@@ -10,37 +10,45 @@ using Versioning;
 namespace Language.ConversationsAuthoringClientCustomizations;
 
 // C#-specific client name customizations
-@@clientName(Language.Conversations.Authoring,
+@@clientName(
+  Language.Conversations.Authoring,
   "ConversationAnalysisAuthoring",
   "csharp"
 );
-@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
+@@clientName(
+  AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
   "UtteranceEntityEvaluationResult",
   "csharp"
 );
 
 @@clientName(conversationAuthoringListDeployments, "listDeployments");
 @@clientName(conversationAuthoringListProjects, "listProjects");
-@@clientName(conversationAuthoringListSupportedLanguages,
+@@clientName(
+  conversationAuthoringListSupportedLanguages,
   "listSupportedLanguages"
 );
-@@clientName(conversationAuthoringListAssignedResourceDeployments,
+@@clientName(
+  conversationAuthoringListAssignedResourceDeployments,
   "listAssignedResourceDeployments"
 );
-@@clientName(conversationAuthoringListProjectResources,
+@@clientName(
+  conversationAuthoringListProjectResources,
   "listDeploymentResources"
 );
-@@clientName(conversationAuthoringListSupportedPrebuiltEntities,
+@@clientName(
+  conversationAuthoringListSupportedPrebuiltEntities,
   "listSupportedPrebuiltEntities"
 );
-@@clientName(conversationAuthoringListTrainingConfigVersions,
+@@clientName(
+  conversationAuthoringListTrainingConfigVersions,
   "listTrainingConfigVersions"
 );
 @@clientName(conversationAuthoringListTrainingJobs, "listTrainingJobs");
 @@clientName(conversationAuthoringListTrainedModels, "listTrainedModels");
 @@clientName(conversationAuthoringListExportedModels, "listExportedModels");
 
-@@clientName(ConversationAuthoringProject.copyProjectAuthorization,
+@@clientName(
+  ConversationAuthoringProject.copyProjectAuthorization,
   "AuthorizeProjectCopy"
 );
 @@clientName(ProjectKind, "ConversationAuthoringProjectKind");
@@ -50,7 +58,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(InnerErrorCode, "ConversationAuthoringInnerErrorCode");
 @@clientName(InnerErrorCode, "InnerErrorCode", "python");
 @@clientName(StringIndexType, "StringIndexType");
-@@clientName(ExportedProjectFormat,
+@@clientName(
+  ExportedProjectFormat,
   "ConversationAuthoringExportedProjectFormat"
 );
 @@clientName(ExportedProjectFormat, "ExportedProjectFormat", "python");
@@ -64,671 +73,862 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(CompositionSetting, "CompositionMode", "python");
 @@clientName(OrchestrationTargetProjectKind, "OrchestrationTargetProjectKind");
 
-@@clientName(AnalyzeConversationAuthoringProjectsMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringProjectsMetadata,
   "ConversationAuthoringProjectsMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringProjectsMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringProjectsMetadata,
   "ProjectsMetadata",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringProjectMetadata,
   "ConversationAuthoringProjectMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringProjectMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringProjectMetadata,
   "ProjectDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectMetadata.createdDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectMetadata.createdDateTime,
   "createdOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectMetadata.lastModifiedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectMetadata.lastModifiedDateTime,
   "lastModifiedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectMetadata.lastTrainedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectMetadata.lastTrainedDateTime,
   "lastTrainedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectMetadata.lastDeployedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectMetadata.lastDeployedDateTime,
   "lastDeployedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectSettings,
+@@clientName(
+  AnalyzeConversationAuthoringProjectSettings,
   "ConversationAuthoringProjectSettings"
 );
-@@clientName(AnalyzeConversationAuthoringProjectSettings,
+@@clientName(
+  AnalyzeConversationAuthoringProjectSettings,
   "ProjectSettings",
   "python"
 );
 @@clientName(InnerErrorModel, "ConversationAuthoringInnerErrorModel");
 @@clientName(InnerErrorModel, "InnerErrorModel", "python");
-@@clientName(AnalyzeConversationAuthoringCreateProjectOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCreateProjectOptions,
   "ConversationAuthoringCreateProjectDetails"
 );
-@@clientName(AnalyzeConversationAuthoringCreateProjectOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCreateProjectOptions,
   "CreateProjectOptions",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringCopyAuthorizationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCopyAuthorizationOptions,
   "ConversationAuthoringCopyAuthorizationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringCopyAuthorizationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCopyAuthorizationOptions,
   "CopyAuthorizationDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringCopiedProjectOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCopiedProjectOptions,
   "ConversationAuthoringCopyProjectDetails"
 );
-@@clientName(AnalyzeConversationAuthoringCopiedProjectOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCopiedProjectOptions,
   "CopyProjectDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedProject,
+@@clientName(
+  AnalyzeConversationAuthoringExportedProject,
   "ConversationAuthoringExportedProject"
 );
-@@clientName(AnalyzeConversationAuthoringExportedProject,
+@@clientName(
+  AnalyzeConversationAuthoringExportedProject,
   "ExportedProject",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedProjectAssets,
+@@clientName(
+  AnalyzeConversationAuthoringExportedProjectAssets,
   "ConversationAuthoringExportedProjectAsset"
 );
-@@clientName(AnalyzeConversationAuthoringExportedProjectAssets,
+@@clientName(
+  AnalyzeConversationAuthoringExportedProjectAssets,
   "ExportedProjectAsset",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobOptions,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobOptions,
   "ConversationAuthoringTrainingJobDetails"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobOptions,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobOptions,
   "TrainingJobDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationOptions,
   "ConversationAuthoringEvaluationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationOptions,
   "EvaluationDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringCopiedProjectJobState,
+@@clientName(
+  AnalyzeConversationAuthoringCopiedProjectJobState,
   "ConversationAuthoringCopyProjectState"
 );
-@@clientName(AnalyzeConversationAuthoringCopiedProjectJobState,
+@@clientName(
+  AnalyzeConversationAuthoringCopiedProjectJobState,
   "CopyProjectState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringJobState,
+@@clientName(
+  AnalyzeConversationAuthoringJobState,
   "ConversationAuthoringState"
 );
 @@clientName(AnalyzeConversationAuthoringJobState, "State", "python");
 @@clientName(AnalyzeConversationAuthoringJobState.createdDateTime, "createdOn");
-@@clientName(AnalyzeConversationAuthoringJobState.lastUpdatedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringJobState.lastUpdatedDateTime,
   "lastUpdatedOn"
 );
-@@clientName(AnalyzeConversationAuthoringJobState.expirationDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringJobState.expirationDateTime,
   "expiresOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployments,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployments,
   "ConversationAuthoringProjectDeployments"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployments,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployments,
   "ProjectDeployments",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployment,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployment,
   "ConversationAuthoringProjectDeployment"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployment,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployment,
   "ProjectDeployment",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployment.lastTrainedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployment.lastTrainedDateTime,
   "lastTrainedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployment.lastDeployedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployment.lastDeployedDateTime,
   "lastDeployedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeployment.deploymentExpirationDate,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeployment.deploymentExpirationDate,
   "deploymentExpiredOn"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentResource,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentResource,
   "ConversationAuthoringDeploymentResource"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentResource,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentResource,
   "DeploymentResource",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringCreateDeploymentOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCreateDeploymentOptions,
   "ConversationAuthoringCreateDeploymentDetails"
 );
-@@clientName(AnalyzeConversationAuthoringCreateDeploymentOptions,
+@@clientName(
+  AnalyzeConversationAuthoringCreateDeploymentOptions,
   "CreateDeploymentDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
+@@clientName(
+  AnalyzeConversationAuthoringProjectAzureResourceIds,
   "ConversationAuthoringDeleteDeploymentDetails"
 );
-@@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
+@@clientName(
+  AnalyzeConversationAuthoringProjectAzureResourceIds,
   "DeleteDeploymentDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentJobState,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentJobState,
   "ConversationAuthoringDeploymentState"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentJobState,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentJobState,
   "DeploymentState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState,
   "ConversationAuthoringDeploymentDeleteFromResourcesState"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState,
   "DeploymentDeleteFromResourcesState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringSwapDeploymentsJobState,
+@@clientName(
+  AnalyzeConversationAuthoringSwapDeploymentsJobState,
   "ConversationAuthoringSwapDeploymentsState"
 );
-@@clientName(AnalyzeConversationAuthoringSwapDeploymentsJobState,
+@@clientName(
+  AnalyzeConversationAuthoringSwapDeploymentsJobState,
   "SwapDeploymentsState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringSwapDeploymentsOptions,
+@@clientName(
+  AnalyzeConversationAuthoringSwapDeploymentsOptions,
   "ConversationAuthoringSwapDeploymentsDetails"
 );
-@@clientName(AnalyzeConversationAuthoringSwapDeploymentsOptions,
+@@clientName(
+  AnalyzeConversationAuthoringSwapDeploymentsOptions,
   "SwapDeploymentsDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportProjectJobState,
+@@clientName(
+  AnalyzeConversationAuthoringExportProjectJobState,
   "ConversationAuthoringExportProjectState"
 );
-@@clientName(AnalyzeConversationAuthoringExportProjectJobState,
+@@clientName(
+  AnalyzeConversationAuthoringExportProjectJobState,
   "ExportProjectState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportProjectJobState.resultUrl,
+@@clientName(
+  AnalyzeConversationAuthoringExportProjectJobState.resultUrl,
   "resultUri"
 );
-@@clientName(AnalyzeConversationAuthoringImportProjectJobState,
+@@clientName(
+  AnalyzeConversationAuthoringImportProjectJobState,
   "ConversationAuthoringImportProjectState"
 );
-@@clientName(AnalyzeConversationAuthoringImportProjectJobState,
+@@clientName(
+  AnalyzeConversationAuthoringImportProjectJobState,
   "ImportProjectState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectTrainedModels,
+@@clientName(
+  AnalyzeConversationAuthoringProjectTrainedModels,
   "ConversationAuthoringProjectTrainedModels"
 );
-@@clientName(AnalyzeConversationAuthoringProjectTrainedModels,
+@@clientName(
+  AnalyzeConversationAuthoringProjectTrainedModels,
   "ProjectTrainedModels",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectTrainedModel,
+@@clientName(
+  AnalyzeConversationAuthoringProjectTrainedModel,
   "ConversationAuthoringProjectTrainedModel"
 );
-@@clientName(AnalyzeConversationAuthoringProjectTrainedModel,
+@@clientName(
+  AnalyzeConversationAuthoringProjectTrainedModel,
   "ProjectTrainedModel",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectTrainedModel.lastTrainedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringProjectTrainedModel.lastTrainedDateTime,
   "lastTrainedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectTrainedModel.modelExpirationDate,
+@@clientName(
+  AnalyzeConversationAuthoringProjectTrainedModel.modelExpirationDate,
   "modelExpiredOn"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationJobState,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationJobState,
   "ConversationAuthoringEvaluationState"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationJobState,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationJobState,
   "EvaluationState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationJobResult,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationJobResult,
   "ConversationAuthoringEvaluationJobResult"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationJobResult,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationJobResult,
   "EvaluationJobResult",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationJobResult.evaluationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationJobResult.evaluationOptions,
   "evaluationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationResults,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationResults,
   "ConversationAuthoringEvalResults"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationResults,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationResults,
   "EvalResults",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationSummary,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationSummary,
   "ConversationAuthoringEvalSummary"
 );
-@@clientName(AnalyzeConversationAuthoringEvaluationSummary,
+@@clientName(
+  AnalyzeConversationAuthoringEvaluationSummary,
   "EvalSummary",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringEntitiesEvaluationSummary,
+@@clientName(
+  AnalyzeConversationAuthoringEntitiesEvaluationSummary,
   "EntitiesEvaluationSummary"
 );
-@@clientName(AnalyzeConversationAuthoringIntentsEvaluationSummary,
+@@clientName(
+  AnalyzeConversationAuthoringIntentsEvaluationSummary,
   "IntentsEvaluationSummary"
 );
-@@clientName(AnalyzeConversationAuthoringIntentEvaluationSummary,
+@@clientName(
+  AnalyzeConversationAuthoringIntentEvaluationSummary,
   "IntentEvaluationSummary"
 );
-@@clientName(AnalyzeConversationAuthoringLoadSnapshotJobState,
+@@clientName(
+  AnalyzeConversationAuthoringLoadSnapshotJobState,
   "ConversationAuthoringLoadSnapshotState"
 );
-@@clientName(AnalyzeConversationAuthoringLoadSnapshotJobState,
+@@clientName(
+  AnalyzeConversationAuthoringLoadSnapshotJobState,
   "LoadSnapshotState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentResourcesInfoList,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentResourcesInfoList,
   "ConversationAuthoringAssignedDeploymentResources"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentResourcesInfoList,
+@@clientName(
+  AnalyzeConversationAuthoringDeploymentResourcesInfoList,
   "AssignedDeploymentResources",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceInfo,
   "ConversationAuthoringAssignedDeploymentResource"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceInfo,
   "AssignedDeploymentResource",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceInfo.azureResourceId,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceInfo.azureResourceId,
   "resourceId"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceAssignments,
   "ConversationAuthoringAssignDeploymentResourcesDetails"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceAssignments,
   "AssignDeploymentResourcesDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceAssignments.projectResources,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceAssignments.projectResources,
   "metadata"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
   "ConversationAuthoringResourceMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
   "ResourceMetadata",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions,
+@@clientName(
+  AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions,
   "ConversationAuthoringUnassignDeploymentResourcesDetails"
 );
-@@clientName(AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions,
+@@clientName(
+  AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions,
   "UnassignDeploymentResourcesDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourcesJobState,
   "ConversationAuthoringDeploymentResourcesState"
 );
-@@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
+@@clientName(
+  AnalyzeConversationAuthoringProjectResourcesJobState,
   "DeploymentResourcesState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobs,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobs,
   "ConversationAuthoringTrainingJobs"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobs,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobs,
   "TrainingJobs",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobState,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobState,
   "ConversationAuthoringTrainingState"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobState,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobState,
   "TrainingState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobResult,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobResult,
   "ConversationAuthoringTrainingJobResult"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobResult,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobResult,
   "TrainingJobResult",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingJobResult.estimatedEndDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingJobResult.estimatedEndDateTime,
   "estimatedEndOn"
 );
-@@clientName(AnalyzeConversationAuthoringSubTrainingJobState,
+@@clientName(
+  AnalyzeConversationAuthoringSubTrainingJobState,
   "ConversationAuthoringSubTrainingState"
 );
-@@clientName(AnalyzeConversationAuthoringSubTrainingJobState,
+@@clientName(
+  AnalyzeConversationAuthoringSubTrainingJobState,
   "SubTrainingState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringSubTrainingJobState.startDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringSubTrainingJobState.startDateTime,
   "startedOn"
 );
-@@clientName(AnalyzeConversationAuthoringSubTrainingJobState.endDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringSubTrainingJobState.endDateTime,
   "endedOn"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeletionJobState,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeletionJobState,
   "ConversationAuthoringProjectDeletionState"
 );
-@@clientName(AnalyzeConversationAuthoringProjectDeletionJobState,
+@@clientName(
+  AnalyzeConversationAuthoringProjectDeletionJobState,
   "ProjectDeletionState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
   "ConversationAuthoringAssignedResourceDeploymentsMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
   "AssignedResourceDeploymentsMetadata",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
   "ConversationAuthoringAssignedProjectDeploymentsMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
   "AssignedProjectDeploymentsMetadata",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata,
   "ConversationAuthoringAssignedProjectDeploymentMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata,
   "AssignedProjectDeploymentMetadata",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata.lastDeployedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata.lastDeployedDateTime,
   "lastDeployedOn"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata.deploymentExpirationDate,
+@@clientName(
+  AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata.deploymentExpirationDate,
   "DeploymentExpiresOn"
 );
-@@clientName(AnalyzeConversationAuthoringSupportedLanguages,
+@@clientName(
+  AnalyzeConversationAuthoringSupportedLanguages,
   "ConversationAuthoringSupportedLanguages"
 );
-@@clientName(AnalyzeConversationAuthoringSupportedLanguages,
+@@clientName(
+  AnalyzeConversationAuthoringSupportedLanguages,
   "SupportedLanguages",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringSupportedLanguage,
+@@clientName(
+  AnalyzeConversationAuthoringSupportedLanguage,
   "ConversationAuthoringSupportedLanguage"
 );
-@@clientName(AnalyzeConversationAuthoringSupportedLanguage,
+@@clientName(
+  AnalyzeConversationAuthoringSupportedLanguage,
   "SupportedLanguage",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringPrebuiltEntities,
+@@clientName(
+  AnalyzeConversationAuthoringPrebuiltEntities,
   "ConversationAuthoringPrebuiltEntities"
 );
-@@clientName(AnalyzeConversationAuthoringPrebuiltEntities,
+@@clientName(
+  AnalyzeConversationAuthoringPrebuiltEntities,
   "PrebuiltEntities",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringPrebuiltEntity,
+@@clientName(
+  AnalyzeConversationAuthoringPrebuiltEntity,
   "ConversationAuthoringPrebuiltEntity"
 );
-@@clientName(AnalyzeConversationAuthoringPrebuiltEntity,
+@@clientName(
+  AnalyzeConversationAuthoringPrebuiltEntity,
   "PrebuiltEntity",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingConfigVersions,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingConfigVersions,
   "ConversationAuthoringTrainingConfigVersions"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingConfigVersions,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingConfigVersions,
   "TrainingConfigVersions",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingConfigVersion,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingConfigVersion,
   "ConversationAuthoringTrainingConfigVersion"
 );
-@@clientName(AnalyzeConversationAuthoringTrainingConfigVersion,
+@@clientName(
+  AnalyzeConversationAuthoringTrainingConfigVersion,
   "TrainingConfigVersion",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedEntity,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedEntity,
   "ConversationExportedEntity"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedEntity,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedEntity,
   "ConversationExportedEntity",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedEntity.compositionSetting,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedEntity.compositionSetting,
   "compositionMode"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityList,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityList,
   "ConversationAuthoringExportedEntityList"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityList,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityList,
   "ExportedEntityList",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntitySublist,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntitySublist,
   "ConversationAuthoringExportedEntitySublist"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntitySublist,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntitySublist,
   "ExportedEntitySublist",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityListSynonym,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityListSynonym,
   "ConversationAuthoringExportedEntityListSynonym"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityListSynonym,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityListSynonym,
   "ExportedEntityListSynonym",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedPrebuiltEntity,
+@@clientName(
+  AnalyzeConversationAuthoringExportedPrebuiltEntity,
   "ConversationAuthoringExportedPrebuiltEntity"
 );
-@@clientName(AnalyzeConversationAuthoringExportedPrebuiltEntity,
+@@clientName(
+  AnalyzeConversationAuthoringExportedPrebuiltEntity,
   "ExportedPrebuiltEntity",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityRegex,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityRegex,
   "ExportedEntityRegex"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityRegex,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityRegex,
   "ExportedEntityRegex",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityRegexExpression,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityRegexExpression,
   "ExportedEntityRegexExpression"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityRegexExpression,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityRegexExpression,
   "ExportedEntityRegexExpression",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedIntent,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedIntent,
   "ConversationExportedIntent"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedIntent,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedIntent,
   "ConversationExportedIntent",
   "python"
 );
-@@clientName(AnalyzeConversationExportedAssociatedEntityLabel,
+@@clientName(
+  AnalyzeConversationExportedAssociatedEntityLabel,
   "ConversationExportedAssociatedEntityLabel"
 );
-@@clientName(AnalyzeConversationExportedAssociatedEntityLabel,
+@@clientName(
+  AnalyzeConversationExportedAssociatedEntityLabel,
   "ConversationExportedAssociatedEntityLabel",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedProjectAsset,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedProjectAsset,
   "ConversationExportedProjectAsset"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedProjectAsset,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedProjectAsset,
   "ConversationExportedProjectAsset",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedUtterance,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedUtterance,
   "ConversationExportedUtterance"
 );
-@@clientName(AnalyzeConversationAuthoringConversationExportedUtterance,
+@@clientName(
+  AnalyzeConversationAuthoringConversationExportedUtterance,
   "ConversationExportedUtterance",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedUtteranceEntityLabel,
+@@clientName(
+  AnalyzeConversationAuthoringExportedUtteranceEntityLabel,
   "ExportedUtteranceEntityLabel"
 );
-@@clientName(AnalyzeConversationAuthoringExportedUtteranceEntityLabel,
+@@clientName(
+  AnalyzeConversationAuthoringExportedUtteranceEntityLabel,
   "ExportedUtteranceEntityLabel",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset,
+@@clientName(
+  AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset,
   "ConversationSummarizationExportedProjectAsset"
 );
-@@clientName(AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset,
+@@clientName(
+  AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset,
   "ConversationSummarizationExportedProjectAsset",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringCustomConversationSummarizationConversation,
+@@clientName(
+  AnalyzeConversationAuthoringCustomConversationSummarizationConversation,
   "CustomConversationSummarizationConversation"
 );
-@@clientName(AnalyzeConversationAuthoringCustomConversationSummarizationConversation,
+@@clientName(
+  AnalyzeConversationAuthoringCustomConversationSummarizationConversation,
   "CustomConversationSummarizationConversation",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedConversationOrchestration,
+@@clientName(
+  AnalyzeConversationAuthoringExportedConversationOrchestration,
   "ExportedConversationOrchestration"
 );
-@@clientName(AnalyzeConversationAuthoringExportedConversationOrchestration,
+@@clientName(
+  AnalyzeConversationAuthoringExportedConversationOrchestration,
   "ExportedConversationOrchestration",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedConversationOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedConversationOrchestrationOptions,
   "ExportedConversationOrchestrationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringExportedConversationOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedConversationOrchestrationOptions,
   "ExportedConversationOrchestrationDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedOrchestrationOptions,
   "ExportedOrchestrationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringExportedOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedOrchestrationOptions,
   "ExportedOrchestrationDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedLuisOrchestration,
+@@clientName(
+  AnalyzeConversationAuthoringExportedLuisOrchestration,
   "ExportedLuisOrchestration"
 );
-@@clientName(AnalyzeConversationAuthoringExportedLuisOrchestration,
+@@clientName(
+  AnalyzeConversationAuthoringExportedLuisOrchestration,
   "ExportedLuisOrchestration",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedLuisOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedLuisOrchestrationOptions,
   "ExportedLuisOrchestrationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringExportedLuisOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedLuisOrchestrationOptions,
   "ExportedLuisOrchestrationDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration,
+@@clientName(
+  AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration,
   "ExportedQuestionAnsweringOrchestration"
 );
-@@clientName(AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration,
+@@clientName(
+  AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration,
   "ExportedQuestionAnsweringOrchestration",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions,
   "ExportedQuestionAnsweringOrchestrationDetails"
 );
-@@clientName(AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions,
+@@clientName(
+  AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions,
   "ExportedQuestionAnsweringOrchestrationDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringOrchestrationExportedIntent,
+@@clientName(
+  AnalyzeConversationAuthoringOrchestrationExportedIntent,
   "OrchestrationExportedIntent"
 );
-@@clientName(AnalyzeConversationAuthoringOrchestrationExportedIntent,
+@@clientName(
+  AnalyzeConversationAuthoringOrchestrationExportedIntent,
   "OrchestrationExportedIntent",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringOrchestrationExportedProjectAsset,
+@@clientName(
+  AnalyzeConversationAuthoringOrchestrationExportedProjectAsset,
   "OrchestrationExportedProjectAsset"
 );
-@@clientName(AnalyzeConversationAuthoringOrchestrationExportedProjectAsset,
+@@clientName(
+  AnalyzeConversationAuthoringOrchestrationExportedProjectAsset,
   "OrchestrationExportedProjectAsset",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringOrchestrationExportedUtterance,
+@@clientName(
+  AnalyzeConversationAuthoringOrchestrationExportedUtterance,
   "OrchestrationExportedUtterance"
 );
-@@clientName(AnalyzeConversationAuthoringOrchestrationExportedUtterance,
+@@clientName(
+  AnalyzeConversationAuthoringOrchestrationExportedUtterance,
   "OrchestrationExportedUtterance",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedTrainedModel,
+@@clientName(
+  AnalyzeConversationAuthoringExportedTrainedModel,
   "ConversationAuthoringExportedTrainedModel"
 );
-@@clientName(AnalyzeConversationAuthoringExportedTrainedModel,
+@@clientName(
+  AnalyzeConversationAuthoringExportedTrainedModel,
   "ExportedTrainedModel",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedTrainedModel.lastTrainedDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringExportedTrainedModel.lastTrainedDateTime,
   "lastTrainedOn"
 );
-@@clientName(AnalyzeConversationAuthoringExportedTrainedModel.lastExportedModelDateTime,
+@@clientName(
+  AnalyzeConversationAuthoringExportedTrainedModel.lastExportedModelDateTime,
   "lastExportedModelOn"
 );
-@@clientName(AnalyzeConversationAuthoringExportedTrainedModel.modelExpirationDate,
+@@clientName(
+  AnalyzeConversationAuthoringExportedTrainedModel.modelExpirationDate,
   "modelExpiredOn"
 );
-@@clientName(AnalyzeConversationAuthoringExportedModelJobState,
+@@clientName(
+  AnalyzeConversationAuthoringExportedModelJobState,
   "ConversationAuthoringExportedModelState"
 );
-@@clientName(AnalyzeConversationAuthoringExportedModelJobState,
+@@clientName(
+  AnalyzeConversationAuthoringExportedModelJobState,
   "ExportedModelState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringModelFile,
+@@clientName(
+  AnalyzeConversationAuthoringModelFile,
   "ConversationAuthoringModelFile"
 );
 @@clientName(AnalyzeConversationAuthoringModelFile, "ModelFile", "python");
 @@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
-@@clientName(AnalyzeConversationAuthoringUtteranceEvaluationResult,
+@@clientName(
+  AnalyzeConversationAuthoringUtteranceEvaluationResult,
   "UtteranceEvaluationResult",
   "python"
 );
 
-@@clientName(AnalyzeConversationAuthoringConfusionMatrixCell,
+@@clientName(
+  AnalyzeConversationAuthoringConfusionMatrixCell,
   "ConfusionMatrixCell",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringConfusionMatrixRow,
+@@clientName(
+  AnalyzeConversationAuthoringConfusionMatrixRow,
   "ConfusionMatrixRow",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDataGenerationConnectionInfo,
+@@clientName(
+  AnalyzeConversationAuthoringDataGenerationConnectionInfo,
   "DataGenerationConnectionInfo",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDataGenerationConnectionKind,
+@@clientName(
+  AnalyzeConversationAuthoringDataGenerationConnectionKind,
   "DataGenerationConnectionKind",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDataGenerationSettings,
+@@clientName(
+  AnalyzeConversationAuthoringDataGenerationSettings,
   "DataGenerationSettings",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringEntityEvaluationSummary,
+@@clientName(
+  AnalyzeConversationAuthoringEntityEvaluationSummary,
   "EntityEvaluationSummary",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult,
+@@clientName(
+  AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult,
   "UtteranceEntitiesEvaluationResult",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
+@@clientName(
+  AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
   "UtteranceEntityEvaluationResult",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult,
+@@clientName(
+  AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult,
   "UtteranceIntentsEvaluationResult",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityListSynonym.values,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityListSynonym.values,
   "synonyms",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringExportedEntityListSynonym.values,
+@@clientName(
+  AnalyzeConversationAuthoringExportedEntityListSynonym.values,
   "synonyms",
   "python"
 );
@@ -898,7 +1098,8 @@ namespace ConversationAuthoringProjectClient {
   }
 }
 
-@@clientInitialization(ConversationAuthoringProjectClient,
+@@clientInitialization(
+  ConversationAuthoringProjectClient,
   {
     parameters: ConversationAuthoringProjectClientOptions,
   },

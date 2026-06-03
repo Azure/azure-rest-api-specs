@@ -47,7 +47,10 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -57,9 +60,11 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "Private endpoint connection name");
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The properties of a private endpoint."
 );
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );

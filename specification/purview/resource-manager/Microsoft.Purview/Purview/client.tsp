@@ -18,25 +18,29 @@ using Microsoft.Purview;
 @@clientName(AccountEndpoints, "PurviewAccountEndpoint", "csharp");
 @@clientName(AccountMergeInfo, "PurviewAccountMergeInfo", "csharp");
 @@clientName(AccountProperties, "PurviewAccountProperties", "csharp");
-@@clientName(AccountProvisioningState,
+@@clientName(
+  AccountProvisioningState,
   "PurviewAccountProvisioningState",
   "csharp"
 );
 @@clientName(AccountSku, "PurviewAccountSku", "csharp");
 @@clientName(AccountSkuName, "PurviewAccountSkuName", "csharp");
 @@clientName(AccountStatus, "PurviewAccountStatus", "csharp");
-@@clientName(AccountStatusErrorDetails,
+@@clientName(
+  AccountStatusErrorDetails,
   "PurviewAccountStatusErrorDetails",
   "csharp"
 );
 @@clientName(AccountUpdateParameters, "PurviewAccountPatch", "csharp");
 @@clientName(BatchFeatureRequest, "PurviewBatchFeatureContent", "csharp");
 @@clientName(BatchFeatureStatus, "PurviewBatchFeatureStatus", "csharp");
-@@clientName(CheckNameAvailabilityRequest,
+@@clientName(
+  CheckNameAvailabilityRequest,
   "PurviewAccountNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "PurviewAccountNameAvailabilityResult",
   "csharp"
 );
@@ -48,7 +52,8 @@ using Microsoft.Purview;
 @@clientName(EventStreamingType, "PurviewEventStreamingType", "csharp");
 @@clientName(IngestionStorage, "PurviewIngestionStorage", "csharp");
 @@clientName(KafkaConfiguration, "PurviewKafkaConfiguration", "csharp");
-@@clientName(KafkaConfigurationIdentityType,
+@@clientName(
+  KafkaConfigurationIdentityType,
   "PurviewCredentialsType",
   "csharp"
 );
@@ -56,27 +61,33 @@ using Microsoft.Purview;
 @@clientName(ManagedResources, "PurviewManagedResource", "csharp");
 @@clientName(MergeAccountType, "PurviewMergeAccountType", "csharp");
 @@clientName(MergeStatus, "PurviewMergeStatus", "csharp");
-@@clientName(Microsoft.Purview.PrivateEndpointConnection,
+@@clientName(
+  Microsoft.Purview.PrivateEndpointConnection,
   "PurviewPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionStatus,
+@@clientName(
+  PrivateEndpointConnectionStatus,
   "PurviewPrivateLinkServiceStatus",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionStatusUpdateRequest,
+@@clientName(
+  PrivateEndpointConnectionStatusUpdateRequest,
   "PrivateEndpointConnectionStatusUpdateContent",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionStatusUpdateResponse,
+@@clientName(
+  PrivateEndpointConnectionStatusUpdateResponse,
   "PrivateEndpointConnectionStatusUpdateResult",
   "csharp"
 );
-@@clientName(Microsoft.Purview.PrivateLinkResource,
+@@clientName(
+  Microsoft.Purview.PrivateLinkResource,
   "PurviewPrivateLinkResource",
   "csharp"
 );
-@@clientName(Microsoft.Purview.PrivateLinkServiceConnectionState,
+@@clientName(
+  Microsoft.Purview.PrivateLinkServiceConnectionState,
   "PurviewPrivateLinkServiceConnectionState",
   "csharp"
 );
@@ -95,21 +106,25 @@ using Microsoft.Purview;
 @@clientName(AccountProperties.createdAt, "CreatedOn", "csharp");
 @@clientName(AccountStatus.errorDetails, "Error", "csharp");
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(CheckNameAvailabilityResult.nameAvailable,
+@@clientName(
+  CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(CloudConnectors.awsExternalId,
+@@clientName(
+  CloudConnectors.awsExternalId,
   "CloudConnectorsAwsExternalId",
   "csharp"
 );
 @@clientName(CollectionAdminUpdate.objectId, "AdminObjectId", "csharp");
 @@clientName(Credentials.type, "CredentialsType", "csharp");
-@@clientName(Microsoft.Purview.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  Microsoft.Purview.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse.error,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse.error,
   "ErrorDetails",
   "csharp"
 );
@@ -117,27 +132,32 @@ using Microsoft.Purview;
 // --- clientName: operation renames ---
 @@clientName(Accounts.accountGet, "AccountGetFeature", "csharp");
 @@clientName(Accounts.list, "GetIngestionPrivateEndpointConnections", "csharp");
-@@clientName(Accounts.updateStatus,
+@@clientName(
+  Accounts.updateStatus,
   "UpdateStatusIngestionPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(AccountsOperationGroup.checkNameAvailability,
+@@clientName(
+  AccountsOperationGroup.checkNameAvailability,
   "CheckPurviewAccountNameAvailability",
   "csharp"
 );
 @@clientName(DefaultAccountsOperationGroup.get, "GetDefaultAccount", "csharp");
-@@clientName(DefaultAccountsOperationGroup.remove,
+@@clientName(
+  DefaultAccountsOperationGroup.remove,
   "RemoveDefaultAccount",
   "csharp"
 );
 @@clientName(DefaultAccountsOperationGroup.set, "SetDefaultAccount", "csharp");
-@@clientName(FeaturesOperationGroup.subscriptionGet,
+@@clientName(
+  FeaturesOperationGroup.subscriptionGet,
   "SubscriptionGetFeature",
   "csharp"
 );
 @@clientName(UsagesOperationGroup.get, "GetUsages", "csharp");
 // --- alternateType overrides ---
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -145,55 +165,67 @@ using Microsoft.Purview;
 @@alternateType(AccountProperties.accountStatus, AccountStatus, "csharp");
 @@alternateType(AccountProperties.endpoints, AccountEndpoints, "csharp");
 @@alternateType(AccountProperties.managedResources, ManagedResources, "csharp");
-@@alternateType(AccountProperties.managedResourcesPublicNetworkAccess,
+@@alternateType(
+  AccountProperties.managedResourcesPublicNetworkAccess,
   ManagedResourcesPublicNetworkAccess,
   "csharp"
 );
-@@alternateType(AccountStatus.errorDetails,
+@@alternateType(
+  AccountStatus.errorDetails,
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "csharp"
 );
-@@alternateType(Account.identity,
+@@alternateType(
+  Account.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(AccountUpdateParameters.identity,
+@@alternateType(
+  AccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(DefaultAccountPayload.scopeTenantId, Azure.Core.uuid, "csharp");
-@@alternateType(ScopeTenantIdParameters.scopeTenantId,
+@@alternateType(
+  ScopeTenantIdParameters.scopeTenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(ManagedResources.eventHubNamespace,
+@@alternateType(
+  ManagedResources.eventHubNamespace,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ManagedResources.resourceGroup,
+@@alternateType(
+  ManagedResources.resourceGroup,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ManagedResources.storageAccount,
+@@alternateType(
+  ManagedResources.storageAccount,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.Purview.PrivateEndpoint.id,
+@@alternateType(
+  Microsoft.Purview.PrivateEndpoint.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // --- Legacy transforms ---
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccountProperties.cloudConnectors,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AccountProperties.cloudConnectors,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(UsagesOperationGroup.get,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  UsagesOperationGroup.get,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Account,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Account,
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );

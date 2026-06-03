@@ -59,6 +59,7 @@ interface SlotConfigNamesResources {
 
 @@doc(SlotConfigNamesResource.name, "");
 @@doc(SlotConfigNamesResource.properties, "Core resource properties");
-@@doc(SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
+@@doc(
+  SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
   "Names of application settings and connection strings. See example."
 );
