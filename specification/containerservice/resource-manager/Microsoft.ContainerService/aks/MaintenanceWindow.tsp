@@ -30,7 +30,7 @@ namespace Microsoft.ContainerService;
  * or more managed clusters.
  * For more information, see https://aka.ms/aks/maintenance-windows.
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 model MaintenanceWindowResource
   is Azure.ResourceManager.TrackedResource<MaintenanceWindowResourceProperties> {
   ...ResourceNameParameter<
@@ -58,7 +58,7 @@ model MaintenanceWindowResource
 );
 
 @armResourceOperations
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 interface MaintenanceWindows {
   /**
    * Gets the specified maintenance window.
@@ -103,7 +103,7 @@ interface MaintenanceWindows {
  * Properties of a maintenance window.
  * For more information, see https://aka.ms/aks/maintenance-windows.
  */
-@added(Versions.v2026_04_02_preview)
+@added(Versions.v2026_05_02_preview)
 model MaintenanceWindowResourceProperties {
   /**
    * The provisioning state of the maintenance window.
