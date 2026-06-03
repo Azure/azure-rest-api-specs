@@ -10763,11 +10763,11 @@ model DataConnectorTenantId {
  * Represents AATP (Azure Advanced Threat Protection) requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model AATPCheckRequirements extends DataConnectorsCheckRequirements {
+model AatpCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * AATP (Azure Advanced Threat Protection) requirements check properties.
    */
-  properties?: AATPCheckRequirementsProperties;
+  properties?: AatpCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10781,7 +10781,7 @@ model AATPCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model AATPCheckRequirementsProperties extends DataConnectorTenantId {}
+model AatpCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents ASC (Azure Security Center) requirements check request.
@@ -10862,11 +10862,11 @@ model Dynamics365CheckRequirementsProperties extends DataConnectorTenantId {}
  * Represents MCAS (Microsoft Cloud App Security) requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model MCASCheckRequirements extends DataConnectorsCheckRequirements {
+model McasCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MCAS (Microsoft Cloud App Security) requirements check properties.
    */
-  properties?: MCASCheckRequirementsProperties;
+  properties?: McasCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10880,17 +10880,17 @@ model MCASCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model MCASCheckRequirementsProperties extends DataConnectorTenantId {}
+model McasCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MDATP (Microsoft Defender Advanced Threat Protection) requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model MDATPCheckRequirements extends DataConnectorsCheckRequirements {
+model MdatpCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.
    */
-  properties?: MDATPCheckRequirementsProperties;
+  properties?: MdatpCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10904,17 +10904,17 @@ model MDATPCheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model MDATPCheckRequirementsProperties extends DataConnectorTenantId {}
+model MdatpCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents Microsoft Threat Intelligence requirements check request.
  */
 @added(Versions.v2025_10_01_preview)
-model MSTICheckRequirements extends DataConnectorsCheckRequirements {
+model MstiCheckRequirements extends DataConnectorsCheckRequirements {
   /**
    * Microsoft Threat Intelligence requirements check properties.
    */
-  properties?: MSTICheckRequirementsProperties;
+  properties?: MstiCheckRequirementsProperties;
 
   /**
    * Describes the kind of connector to be checked.
@@ -10928,7 +10928,7 @@ model MSTICheckRequirements extends DataConnectorsCheckRequirements {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_01_preview)
-model MSTICheckRequirementsProperties extends DataConnectorTenantId {}
+model MstiCheckRequirementsProperties extends DataConnectorTenantId {}
 
 /**
  * Represents MTP (Microsoft Threat Protection) requirements check request.
@@ -11246,11 +11246,11 @@ model DataConnectorDataTypeCommon {
 /**
  * Represents Microsoft Threat Intelligence data connector.
  */
-model MSTIDataConnector extends DataConnector {
+model MstiDataConnector extends DataConnector {
   /**
    * Microsoft Threat Intelligence data connector properties.
    */
-  properties?: MSTIDataConnectorProperties;
+  properties?: MstiDataConnectorProperties;
 
   /**
    * The data connector kind
@@ -11262,17 +11262,17 @@ model MSTIDataConnector extends DataConnector {
  * Microsoft Threat Intelligence data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MSTIDataConnectorProperties extends DataConnectorTenantId {
+model MstiDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
    */
-  dataTypes: MSTIDataConnectorDataTypes;
+  dataTypes: MstiDataConnectorDataTypes;
 }
 
 /**
  * The available data types for Microsoft Threat Intelligence Platforms data connector.
  */
-model MSTIDataConnectorDataTypes {
+model MstiDataConnectorDataTypes {
   /**
    * Data type for Microsoft Threat Intelligence Platforms data connector.
    */

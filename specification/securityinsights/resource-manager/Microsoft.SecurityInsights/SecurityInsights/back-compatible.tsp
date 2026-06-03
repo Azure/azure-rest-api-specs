@@ -81,7 +81,7 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(AADCheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(AATPCheckRequirements.properties);
+@@Legacy.flattenProperty(AatpCheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ASCCheckRequirements.properties);
@@ -90,13 +90,13 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(Dynamics365CheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MCASCheckRequirements.properties);
+@@Legacy.flattenProperty(McasCheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MDATPCheckRequirements.properties);
+@@Legacy.flattenProperty(MdatpCheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MSTICheckRequirements.properties);
+@@Legacy.flattenProperty(MstiCheckRequirements.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MtpCheckRequirements.properties);
@@ -134,7 +134,7 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(AADDataConnector.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(MSTIDataConnector.properties);
+@@Legacy.flattenProperty(MstiDataConnector.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(
@@ -693,24 +693,24 @@ using Microsoft.SecurityInsights;
 
 @@clientName(OutputType, "outputType");
 @@clientName(JobItem, "jobItem");
-@@clientName(MCASCheckRequirements, "MCASCheckRequirements");
+@@clientName(McasCheckRequirements, "MCASCheckRequirements");
 @@clientName(
-  MCASCheckRequirementsProperties,
+  McasCheckRequirementsProperties,
   "MCASCheckRequirementsProperties"
 );
-@@clientName(MDATPCheckRequirements, "MDATPCheckRequirements");
+@@clientName(MdatpCheckRequirements, "MDATPCheckRequirements");
 @@clientName(
-  MDATPCheckRequirementsProperties,
+  MdatpCheckRequirementsProperties,
   "MDATPCheckRequirementsProperties"
 );
-@@clientName(MSTICheckRequirements, "MSTICheckRequirements");
+@@clientName(MstiCheckRequirements, "MSTICheckRequirements");
 @@clientName(
-  MSTICheckRequirementsProperties,
+  MstiCheckRequirementsProperties,
   "MSTICheckRequirementsProperties"
 );
-@@clientName(MSTIDataConnector, "MSTIDataConnector");
-@@clientName(MSTIDataConnectorProperties, "MSTIDataConnectorProperties");
-@@clientName(MSTIDataConnectorDataTypes, "MSTIDataConnectorDataTypes");
+@@clientName(MstiDataConnector, "MSTIDataConnector");
+@@clientName(MstiDataConnectorProperties, "MSTIDataConnectorProperties");
+@@clientName(MstiDataConnectorDataTypes, "MSTIDataConnectorDataTypes");
 @@clientName(AssignmentItem, "assignmentItem");
 @@clientName(Error, "error");
 @@clientName(
@@ -722,9 +722,9 @@ using Microsoft.SecurityInsights;
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
   "ThreatIntelligenceFilteringCriteria"
 );
-@@clientName(AATPCheckRequirements, "AATPCheckRequirements");
+@@clientName(AatpCheckRequirements, "AATPCheckRequirements");
 @@clientName(
-  AATPCheckRequirementsProperties,
+  AatpCheckRequirementsProperties,
   "AATPCheckRequirementsProperties"
 );
 @@clientName(BookmarkRelations.createOrUpdate::parameters.resource, "relation");
