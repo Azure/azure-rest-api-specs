@@ -10,7 +10,8 @@ using TypeSpec.Versioning;
 
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "python");
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "java");
-@@clientNamespace(Microsoft.ComputeSchedule,
+@@clientNamespace(
+  Microsoft.ComputeSchedule,
   "com.azure.resourcemanager.computeschedule",
   "java"
 );
@@ -25,83 +26,101 @@ using TypeSpec.Versioning;
 @@clientName(NotificationProperties, "NotificationSettings", "csharp");
 @@clientName(NotificationProperties.disabled, "IsDisabled", "csharp");
 
-@@clientName(ScheduledActions.virtualMachinesSubmitDeallocate,
+@@clientName(
+  ScheduledActions.virtualMachinesSubmitDeallocate,
   "SubmitVirtualMachineDeallocate",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesSubmitHibernate,
+@@clientName(
+  ScheduledActions.virtualMachinesSubmitHibernate,
   "SubmitVirtualMachineHibernate",
   "csharp"
 );
 
-@@clientName(ScheduledActions.virtualMachinesSubmitStart,
+@@clientName(
+  ScheduledActions.virtualMachinesSubmitStart,
   "SubmitVirtualMachineStart",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesExecuteDeallocate,
+@@clientName(
+  ScheduledActions.virtualMachinesExecuteDeallocate,
   "ExecuteVirtualMachineDeallocate",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesExecuteHibernate,
+@@clientName(
+  ScheduledActions.virtualMachinesExecuteHibernate,
   "ExecuteVirtualMachineHibernate",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesExecuteStart,
+@@clientName(
+  ScheduledActions.virtualMachinesExecuteStart,
   "ExecuteVirtualMachineStart",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesGetOperationStatus,
+@@clientName(
+  ScheduledActions.virtualMachinesGetOperationStatus,
   "GetVirtualMachineOperationStatus",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesCancelOperations,
+@@clientName(
+  ScheduledActions.virtualMachinesCancelOperations,
   "CancelVirtualMachineOperations",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesGetOperationErrors,
+@@clientName(
+  ScheduledActions.virtualMachinesGetOperationErrors,
   "GetVirtualMachineOperationErrors",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesExecuteCreate,
+@@clientName(
+  ScheduledActions.virtualMachinesExecuteCreate,
   "ExecuteVirtualMachineCreateOperation",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesExecuteDelete,
+@@clientName(
+  ScheduledActions.virtualMachinesExecuteDelete,
   "ExecuteVirtualMachineDeleteOperation",
   "csharp"
 );
-@@clientName(ScheduledActions.virtualMachinesExecuteCreateFlex,
+@@clientName(
+  ScheduledActions.virtualMachinesExecuteCreateFlex,
   "ExecuteVirtualMachineCreateFlexOperation",
   "csharp"
 );
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
-@@clientName(CreateFlexResourceOperationResponse,
+@@clientName(
+  CreateFlexResourceOperationResponse,
   "ScheduledActionCreateFlexResult",
   "csharp"
 );
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
-@@clientName(DeallocateResourceOperationResponse,
+@@clientName(
+  DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
   "csharp"
 );
-@@clientName(DeallocateResourceOperationResponse.type,
+@@clientName(
+  DeallocateResourceOperationResponse.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(ExecutionParameters,
+@@clientName(
+  ExecutionParameters,
   "ScheduledActionExecutionParameterDetail",
   "csharp"
 );
 @@clientName(GetOperationErrorsResponse, "GetOperationErrorsResult", "csharp");
 @@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
-@@clientName(HibernateResourceOperationResponse,
+@@clientName(
+  HibernateResourceOperationResponse,
   "HibernateResourceOperationResult",
   "csharp"
 );
 @@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
-@@clientName(OptimizationPreference,
+@@clientName(
+  OptimizationPreference,
   "ScheduledActionOptimizationPreference",
   "csharp"
 );
@@ -109,86 +128,105 @@ using TypeSpec.Versioning;
 @@clientName(Resources, "UserRequestResources", "csharp");
 @@clientName(RetryPolicy, "UserRequestRetryPolicy", "csharp");
 @@clientName(Schedule, "UserRequestSchedule", "csharp");
-@@clientName(StartResourceOperationResponse,
+@@clientName(
+  StartResourceOperationResponse,
   "StartResourceOperationResult",
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
-@@clientName(CreateFlexResourceOperationResponse.type,
+@@clientName(
+  CreateFlexResourceOperationResponse.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(ExecuteDeleteRequest.correlationid,
+@@clientName(
+  ExecuteDeleteRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
-@@clientName(ExecuteCreateRequest.correlationid,
+@@clientName(
+  ExecuteCreateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(ExecuteCreateFlexRequest.correlationid,
+@@clientName(
+  ExecuteCreateFlexRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(SubmitDeallocateRequest.correlationid,
+@@clientName(
+  SubmitDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(SubmitStartRequest.correlationid,
+@@clientName(
+  SubmitStartRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(SubmitHibernateRequest.correlationid,
+@@clientName(
+  SubmitHibernateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(ExecuteDeallocateRequest.correlationid,
+@@clientName(
+  ExecuteDeallocateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(ExecuteHibernateRequest.correlationid,
+@@clientName(
+  ExecuteHibernateRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(ExecuteStartRequest.correlationid,
+@@clientName(
+  ExecuteStartRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(GetOperationStatusRequest.correlationid,
+@@clientName(
+  GetOperationStatusRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
-@@clientName(CancelOperationsRequest.correlationid,
+@@clientName(
+  CancelOperationsRequest.correlationid,
   "correlationId",
   "csharp,javascript"
 );
 @@clientName(Schedule.deadLine, "userRequestDeadline", "csharp,javascript");
 @@clientName(Schedule.timeZone, "userRequestTimezone", "csharp,javascript");
-@@clientName(ResourceOperationDetails.timeZone,
+@@clientName(
+  ResourceOperationDetails.timeZone,
   "operationTimezone",
   "csharp,javascript"
 );
-@@clientName(OperationErrorDetails.timeStamp,
+@@clientName(
+  OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp,javascript"
 );
-@@clientName(Versions.`2024-10-01`,
+@@clientName(
+  Versions.`2024-10-01`,
   "$DO_NOT_NORMALIZE$V2024-10-01",
   "javascript"
 );
-@@clientName(DeleteResourceOperationResponse,
+@@clientName(
+  DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(CreateResourceOperationResponse,
+@@clientName(
+  CreateResourceOperationResponse,
   "CreateResourceOperationResult",
   "csharp"
 );
 // [SUFFIX006] ScheduledActionResource is not a ResourceData-derived ARM
 // resource (it's an item embedded in attach/patch payloads), so it must not
 // carry the "Data" suffix in C#.
-@@clientName(ScheduledActionResource,
+@@clientName(
+  ScheduledActionResource,
   "ScheduledActionResourceDetails",
   "csharp"
 );
@@ -198,42 +236,50 @@ using TypeSpec.Versioning;
 // [RESINFIX001] OccurrenceExtensionResource derives from ResourceData; keep
 // the "Data" suffix but drop the redundant "Resource" infix.
 @@clientName(OccurrenceExtensionResource, "OccurrenceExtensionData", "csharp");
-@@clientName(ResourceOperationResponse,
+@@clientName(
+  ResourceOperationResponse,
   "ScheduledActionResourceOperationResult",
   "csharp"
 );
-@@clientName(ResourceProvisioningState,
+@@clientName(
+  ResourceProvisioningState,
   "OccurrenceResourceProvisioningState",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "ScheduledActionResourceProvisioningState",
   "csharp"
 );
 @@clientName(Occurrence, "ScheduledActionOccurrence", "csharp");
-@@clientName(OccurrenceProperties,
+@@clientName(
+  OccurrenceProperties,
   "ScheduledActionOccurrenceProperties",
   "csharp"
 );
 @@clientName(OccurrenceState, "ScheduledActionOccurrenceState", "csharp");
-@@clientName(ResourceAttachRequest,
+@@clientName(
+  ResourceAttachRequest,
   "ScheduledActionResourceAttachContent",
   "csharp"
 );
-@@clientName(ResourceDetachRequest,
+@@clientName(
+  ResourceDetachRequest,
   "ScheduledActionResourceDetachContent",
   "csharp"
 );
 @@clientName(ResourcePatchRequest, "ScheduledActionResourcePatch", "csharp");
 @@clientName(ResourceStatus, "ScheduledActionResourceStatus", "csharp");
-@@clientName(ResourceOperationStatus,
+@@clientName(
+  ResourceOperationStatus,
   "ScheduledActionResourceOperationStatus",
   "csharp"
 );
 @@clientName(ResourceType, "ScheduledActionResourceType", "csharp");
 
 @@clientName(AllocationStrategy, "ComputeScheduleAllocationStrategy", "csharp");
-@@clientName(DistributionStrategy,
+@@clientName(
+  DistributionStrategy,
   "ComputeScheduleDistributionStrategy",
   "csharp"
 );
@@ -243,53 +289,64 @@ using TypeSpec.Versioning;
 @@clientName(FlexProperties, "ComputeScheduleFlexProperties", "csharp");
 @@clientName(VmSizeProfile, "ComputeScheduleVmSizeProfile", "csharp");
 @@clientName(ZonePreference, "ComputeScheduleZonePreference", "csharp");
-@@clientName(ZoneAllocationPolicy,
+@@clientName(
+  ZoneAllocationPolicy,
   "ComputeScheduleZoneAllocationPolicy",
   "csharp"
 );
 
-@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+@@clientName(
+  UserInitiatedRedeploy.automaticallyApprove,
   "IsAutomaticallyApprovedForRedeploy",
   "csharp"
 );
-@@clientName(UserInitiatedReboot.automaticallyApprove,
+@@clientName(
+  UserInitiatedReboot.automaticallyApprove,
   "IsAutomaticallyApprovedForReboot",
   "csharp"
 );
-@@clientName(AllInstancesDown.automaticallyApprove,
+@@clientName(
+  AllInstancesDown.automaticallyApprove,
   "IsAutomaticallyApprovedForAllInstancesDown",
   "csharp"
 );
 
-@@clientName(DiskEncryptionSetParameters,
+@@clientName(
+  DiskEncryptionSetParameters,
   "ComputeScheduleDiskEncryptionSetConfig",
   "csharp"
 );
-@@clientName(ManagedDiskParameters,
+@@clientName(
+  ManagedDiskParameters,
   "ComputeScheduleManagedDiskConfig",
   "csharp"
 );
-@@clientName(VirtualMachineReimageParameters,
+@@clientName(
+  VirtualMachineReimageParameters,
   "ComputeScheduleVirtualMachineReimageConfig",
   "csharp"
 );
 
-@@clientName(OccurrenceExtension.listOccurrenceByVms,
+@@clientName(
+  OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
   "csharp"
 );
 @@clientName(ScheduledActions.listResources, "GetAttachedResources", "csharp");
 @@clientName(Occurrences.listResources, "GetAttachedResources", "csharp");
-@@clientName(ScheduledActionExtension.listByVms,
+@@clientName(
+  ScheduledActionExtension.listByVms,
   "GetAssociatedScheduledActions",
   "csharp"
 );
 
-@@clientName(ResourceOperationResponse,
+@@clientName(
+  ResourceOperationResponse,
   "RecurringActionsResourceOperationResult",
   "javascript,go,python,java"
 );
-@@clientName(Microsoft.ComputeSchedule.Versions.`2025-05-01`,
+@@clientName(
+  Microsoft.ComputeSchedule.Versions.`2025-05-01`,
   "V2025-05-01",
   "javascript"
 );
@@ -307,7 +364,8 @@ using TypeSpec.Versioning;
 @@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "csharp");
 @@clientName(SubmitStartRequest, "SubmitStartContent", "csharp");
 @@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "csharp");
-@@clientName(ScheduledActionsExtensionProperties,
+@@clientName(
+  ScheduledActionsExtensionProperties,
   "ScheduledActionsExtensionProperties"
 );
 
@@ -341,12 +399,14 @@ model ResourcePatchRequestInput {
   resources: Array<ScheduledActionResourceInput>;
 }
 
-@@alternateType(ScheduledActions.attachResources::parameters.body,
+@@alternateType(
+  ScheduledActions.attachResources::parameters.body,
   ResourceAttachRequestInput,
   "javascript"
 );
 
-@@alternateType(ScheduledActions.patchResources::parameters.body,
+@@alternateType(
+  ScheduledActions.patchResources::parameters.body,
   ResourcePatchRequestInput,
   "javascript"
 );
@@ -369,37 +429,44 @@ model ResourcePatchRequestInput {
 // =====================================================================
 // C# naming alignment with Azure.ResourceManager.Compute SDK
 // =====================================================================
-@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+@@clientName(
+  AdditionalCapabilities.ultraSSDEnabled,
   "UltraSsdEnabled",
   "csharp"
 );
 @@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
-@@clientName(WindowsConfiguration.provisionVMAgent,
+@@clientName(
+  WindowsConfiguration.provisionVMAgent,
   "ProvisionVmAgent",
   "csharp"
 );
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
-@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+@@clientName(
+  LinuxConfiguration.disablePasswordAuthentication,
   "IsPasswordAuthenticationDisabled",
   "csharp"
 );
-@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+@@clientName(
+  LinuxConfiguration.enableVMAgentPlatformUpdates,
   "IsVmAgentPlatformUpdatesEnabled",
   "csharp"
 );
-@@clientName(WindowsConfiguration.enableAutomaticUpdates,
+@@clientName(
+  WindowsConfiguration.enableAutomaticUpdates,
   "IsAutomaticUpdatesEnabled",
   "csharp"
 );
 @@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
 @@clientName(OSDisk.osType, "OSType", "csharp");
-@@clientName(ScheduledEventsProfile.osImageNotificationProfile,
+@@clientName(
+  ScheduledEventsProfile.osImageNotificationProfile,
   "OSImageNotificationProfile",
   "csharp"
 );
 
-@@alternateType(ApiEntityReference.id,
+@@alternateType(
+  ApiEntityReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -426,7 +493,8 @@ model ResourcePatchRequestInput {
 @@clientName(StorageProfile, "VirtualMachineStorageProfile", "csharp");
 @@clientName(HardwareProfile, "VirtualMachineHardwareProfile", "csharp");
 @@clientName(VmSizeProperties, "VirtualMachineSizeProperties", "csharp");
-@@clientName(NetworkInterfaceReference,
+@@clientName(
+  NetworkInterfaceReference,
   "VirtualMachineNetworkInterfaceReference",
   "csharp"
 );
@@ -435,20 +503,24 @@ model ResourcePatchRequestInput {
 // C# type renames: Match Compute SDK type names
 // =====================================================================
 @@clientName(SshPublicKey, "SshPublicKeyConfiguration", "csharp");
-@@clientName(BulkActionVMProperties,
+@@clientName(
+  BulkActionVMProperties,
   "BulkActionVirtualMachineProperties",
   "csharp"
 );
 @@clientName(BulkActionVMExtension, "BulkActionVmExtension", "csharp");
-@@clientName(BulkActionVmExtensionProperties,
+@@clientName(
+  BulkActionVmExtensionProperties,
   "BulkActionVirtualMachineExtensionProperties",
   "csharp"
 );
-@@clientName(NetworkInterfaceReferenceProperties,
+@@clientName(
+  NetworkInterfaceReferenceProperties,
   "VirtualMachineNetworkInterfaceReferenceProperties",
   "csharp"
 );
-@@clientName(OccurrenceExtensionProperties,
+@@clientName(
+  OccurrenceExtensionProperties,
   "ScheduledActionOccurrenceExtensionProperties",
   "csharp"
 );
@@ -475,7 +547,8 @@ model ResourcePatchRequestInput {
 // =====================================================================
 // C# property renames: Match Compute SDK property names
 // =====================================================================
-@@clientName(ImageReference.sharedGalleryImageId,
+@@clientName(
+  ImageReference.sharedGalleryImageId,
   "SharedGalleryImageUniqueId",
   "csharp"
 );
@@ -484,7 +557,8 @@ model ResourcePatchRequestInput {
 // [ARMCOMMON001] Use framework ManagedServiceIdentity instead of local
 // VirtualMachineIdentity / UserAssignedIdentitiesValue / ResourceIdentityType
 // =====================================================================
-@@alternateType(BulkVMConfiguration.identity,
+@@alternateType(
+  BulkVMConfiguration.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
@@ -504,15 +578,18 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(KeyVaultSecretReference.sourceVault,
+@@alternateType(
+  KeyVaultSecretReference.sourceVault,
   Azure.ResourceManager.Models.WritableSubResource,
   "csharp"
 );
-@@alternateType(KeyVaultKeyReference.sourceVault,
+@@alternateType(
+  KeyVaultKeyReference.sourceVault,
   Azure.ResourceManager.Models.WritableSubResource,
   "csharp"
 );
-@@alternateType(VaultSecretGroup.sourceVault,
+@@alternateType(
+  VaultSecretGroup.sourceVault,
   Azure.ResourceManager.Models.WritableSubResource,
   "csharp"
 );
@@ -525,26 +602,31 @@ namespace Azure.ResourceManager.Models {
 @@clientName(BulkVMConfiguration, "BulkVmConfiguration", "csharp");
 @@clientName(VMGalleryApplication, "VmGalleryApplication", "csharp");
 @@clientName(LinuxVMGuestPatchMode, "LinuxVmGuestPatchMode", "csharp");
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings,
   "LinuxVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
   "LinuxVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
 @@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings,
   "WindowsVmGuestPatchAutomaticByPlatformSettings",
   "csharp"
 );
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
   "WindowsVmGuestPatchAutomaticByPlatformRebootSetting",
   "csharp"
 );
 // VMDiskSecurityProfile -> VirtualMachineDiskSecurityProfile to match the
 // type name used by Azure.ResourceManager.Compute.
-@@clientName(VMDiskSecurityProfile,
+@@clientName(
+  VMDiskSecurityProfile,
   "VirtualMachineDiskSecurityProfile",
   "csharp"
 );

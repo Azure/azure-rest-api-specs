@@ -109,6 +109,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instances {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<InstanceResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<InstanceResource, InstanceResourceUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;

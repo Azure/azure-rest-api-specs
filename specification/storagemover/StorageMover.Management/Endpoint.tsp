@@ -65,7 +65,10 @@ interface Endpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Endpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -78,7 +81,8 @@ interface Endpoints {
 }
 
 @@doc(Endpoint.name, "The name of the Endpoint resource.");
-@@doc(Endpoint.properties,
+@@doc(
+  Endpoint.properties,
   "The resource specific properties for the Storage Mover resource."
 );
 @@doc(Endpoints.createOrUpdate::parameters.resource, "");

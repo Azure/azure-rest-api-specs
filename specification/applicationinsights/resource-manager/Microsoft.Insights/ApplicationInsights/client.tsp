@@ -26,6 +26,7 @@ using WorkbookTemplatesApi;
 
 using Azure.ClientGenerator.Core;
 
+#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "ApplicationInsightsManagementClient",
   service: [
@@ -46,7 +47,8 @@ using Azure.ClientGenerator.Core;
 })
 namespace ApplicationInsightsManagementClient;
 
-@@clientName(ComponentAPIs.ApplicationInsightsComponentAPIKey,
+@@clientName(
+  ComponentAPIs.ApplicationInsightsComponentAPIKey,
   "ApplicationInsightsComponentApiKey",
   "java"
 );
@@ -57,34 +59,41 @@ namespace ApplicationInsightsManagementClient;
 @@clientLocation(ComponentAPIs.APIKeysOperationGroup.delete, "ApiKeys", "java");
 @@clientLocation(ComponentAPIs.APIKeysOperationGroup.get, "ApiKeys", "java");
 
-@@clientName(ComponentAPIs.APIKeysOperationGroup.create::parameters.body,
+@@clientName(
+  ComponentAPIs.APIKeysOperationGroup.create::parameters.body,
   "apiKeyProperties",
   "java"
 );
 
-@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
+@@clientName(
+  WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
   "sslCheck",
   "java"
 );
-@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+@@clientName(
+  WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
   "sslCertRemainingLifetimeCheck",
   "java"
 );
-@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
+@@clientName(
+  WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
   "sSLCheck",
   "javascript"
 );
-@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+@@clientName(
+  WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
   "sSLCertRemainingLifetimeCheck",
   "javascript"
 );
-@@clientName(AnalyticsItems.AnalyticsItemsOperationGroup.list::parameters.type,
+@@clientName(
+  AnalyticsItems.AnalyticsItemsOperationGroup.list::parameters.type,
   "$DO_NOT_NORMALIZE$type",
   "javascript"
 );
 @@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");
 
-@@clientLocation(webTestLocationsOperationGroup.list,
+@@clientLocation(
+  webTestLocationsOperationGroup.list,
   "WebTestLocations",
   "python"
 );
