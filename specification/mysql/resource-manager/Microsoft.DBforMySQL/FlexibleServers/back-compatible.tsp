@@ -5,17 +5,20 @@ using Microsoft.DBforMySQL;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupAndExportResponse.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BackupAndExportResponse.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ValidateBackupResponse.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ValidateBackupResponse.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationForBatchUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConfigurationForBatchUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -24,7 +27,8 @@ using Microsoft.DBforMySQL;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvancedThreatProtectionForUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AdvancedThreatProtectionForUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -33,19 +37,22 @@ using Microsoft.DBforMySQL;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaintenanceUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MaintenanceUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Provisioning.properties);
 
-@@clientName(AzureADAdministrators.createOrUpdate::parameters.resource,
+@@clientName(
+  AzureADAdministrators.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureADAdministrator.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AzureADAdministrator.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -77,7 +84,8 @@ using Microsoft.DBforMySQL;
 @@clientName(Servers.update::parameters.properties, "parameters");
 @@clientName(BackupAndExport.create::parameters.body, "parameters");
 @@clientName(Configurations.batchUpdate::parameters.body, "parameters");
-@@clientName(Servers.validateEstimateHighAvailability::parameters.body,
+@@clientName(
+  Servers.validateEstimateHighAvailability::parameters.body,
   "parameters"
 );
 @@clientName(Servers.restart::parameters.body, "parameters");
@@ -87,23 +95,28 @@ using Microsoft.DBforMySQL;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Server.properties);
 
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
-@@clientName(AdvancedThreatProtectionSettings.updatePut::parameters.resource,
+@@clientName(
+  AdvancedThreatProtectionSettings.updatePut::parameters.resource,
   "parameters"
 );
-@@clientName(AdvancedThreatProtectionSettings.update::parameters.properties,
+@@clientName(
+  AdvancedThreatProtectionSettings.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvancedThreatProtection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AdvancedThreatProtection.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -117,17 +130,21 @@ using Microsoft.DBforMySQL;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties
 );
 
-@@clientName(CheckNameAvailabilityWithoutLocation.execute::parameters.body,
+@@clientName(
+  CheckNameAvailabilityWithoutLocation.execute::parameters.body,
   "nameAvailabilityRequest"
 );
 
-@@clientName(CheckVirtualNetworkSubnetUsage.execute::parameters.body,
+@@clientName(
+  CheckVirtualNetworkSubnetUsage.execute::parameters.body,
   "parameters"
 );
 
-@@clientName(CheckNameAvailability.execute::parameters.body,
+@@clientName(
+  CheckNameAvailability.execute::parameters.body,
   "nameAvailabilityRequest"
 );

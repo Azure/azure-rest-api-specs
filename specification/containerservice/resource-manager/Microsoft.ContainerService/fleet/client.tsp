@@ -6,61 +6,74 @@ using Microsoft.ContainerService;
 using Azure.Core;
 using TypeSpec.Http;
 
-@@clientName(Microsoft.ContainerService,
+@@clientName(
+  Microsoft.ContainerService,
   "ContainerServiceFleetManagementClient",
   "java"
 );
 
-@@clientName(Microsoft.ContainerService,
+@@clientName(
+  Microsoft.ContainerService,
   "ContainerServiceFleetMgmtClient",
   "python"
 );
 
-@@clientName(Microsoft.ContainerService.APIServerAccessProfile,
+@@clientName(
+  Microsoft.ContainerService.APIServerAccessProfile,
   "ApiServerAccessProfile",
   "java"
 );
 @@clientName(Azure.ResourceManager.EntityTagProperty.eTag, "etag", "java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
   "SYSTEM_ASSIGNED_USER_ASSIGNED",
   "python"
 );
-@@clientName(Microsoft.ContainerService.FleetMembers.updateAsync,
+@@clientName(
+  Microsoft.ContainerService.FleetMembers.updateAsync,
   "begin_update",
   "python"
 );
-@@clientName(Microsoft.ContainerService.Fleets.create,
+@@clientName(
+  Microsoft.ContainerService.Fleets.create,
   "begin_create_or_update",
   "python"
 );
-@@clientName(Microsoft.ContainerService.Fleets.updateAsync,
+@@clientName(
+  Microsoft.ContainerService.Fleets.updateAsync,
   "begin_update",
   "python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.TrackedResource.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.ProxyResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.ProxyResource.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
 );
-@@clientName(Microsoft.ContainerService,
+@@clientName(
+  Microsoft.ContainerService,
   "ContainerServiceFleetClient",
   "javascript"
 );
@@ -70,7 +83,8 @@ using TypeSpec.Http;
 @@clientName(Gate, "ContainerServiceFleetGate", "csharp");
 @@clientName(UpdateRun, "ContainerServiceFleetUpdateRun", "csharp");
 @@clientName(FleetMember, "ContainerServiceFleetMember", "csharp");
-@@clientName(FleetManagedNamespace,
+@@clientName(
+  FleetManagedNamespace,
   "ContainerServiceFleetManagedNamespace",
   "csharp"
 );
@@ -84,53 +98,63 @@ using TypeSpec.Http;
 @@clientName(FleetStatus, "ContainerServiceFleetStatus", "csharp");
 @@clientName(Timing, "ContainerServiceFleetGateTiming", "csharp");
 @@clientName(AgentProfile, "ContainerServiceFleetAgentProfile", "csharp");
-@@clientName(APIServerAccessProfile,
+@@clientName(
+  APIServerAccessProfile,
   "ContainerServiceFleetAPIServerAccessProfile",
   "csharp"
 );
 @@clientName(GateType, "ContainerServiceFleetGateType", "csharp");
-@@clientName(GateProvisioningState,
+@@clientName(
+  GateProvisioningState,
   "ContainerServiceFleetGateProvisioningState",
   "csharp"
 );
 @@clientName(GateState, "ContainerServiceFleetGateState", "csharp");
 @@clientName(GateTarget, "ContainerServiceFleetGateTarget", "csharp");
-@@clientName(GateConfiguration,
+@@clientName(
+  GateConfiguration,
   "ContainerServiceFleetGateConfiguration",
   "csharp"
 );
 @@clientName(UpdateStatus, "ContainerServiceFleetUpdateStatus", "csharp");
 @@clientName(WaitStatus, "ContainerServiceFleetWaitStatus", "csharp");
-@@clientName(UpdateStageStatus,
+@@clientName(
+  UpdateStageStatus,
   "ContainerServiceFleetUpdateStageStatus",
   "csharp"
 );
 @@clientName(UpdateStage, "ContainerServiceFleetUpdateStage", "csharp");
-@@clientName(UpdateRunStrategy,
+@@clientName(
+  UpdateRunStrategy,
   "ContainerServiceFleetUpdateRunStrategy",
   "csharp"
 );
 @@clientName(UpdateRunStatus, "ContainerServiceFleetUpdateRunStatus", "csharp");
-@@clientName(UpdateRunProvisioningState,
+@@clientName(
+  UpdateRunProvisioningState,
   "ContainerServiceFleetUpdateRunProvisioningState",
   "csharp"
 );
-@@clientName(UpdateGroupStatus,
+@@clientName(
+  UpdateGroupStatus,
   "ContainerServiceFleetUpdateGroupStatus",
   "csharp"
 );
 @@clientName(UpdateGroup, "ContainerServiceFleetUpdateGroup", "csharp");
 @@clientName(UpdateState, "ContainerServiceFleetUpdateState", "csharp");
-@@clientName(ManagedClusterUpdate,
+@@clientName(
+  ManagedClusterUpdate,
   "ContainerServiceFleetManagedClusterUpdate",
   "csharp"
 );
-@@clientName(ManagedClusterUpgradeSpec,
+@@clientName(
+  ManagedClusterUpgradeSpec,
   "ContainerServiceFleetManagedClusterUpgradeSpec",
   "csharp"
 );
 @@clientName(ManagedClusterUpgradeSpec.type, "UpgradeType", "csharp");
-@@clientName(ManagedClusterUpgradeType,
+@@clientName(
+  ManagedClusterUpgradeType,
   "ContainerServiceFleetManagedClusterUpgradeType",
   "csharp"
 );
@@ -139,68 +163,83 @@ using TypeSpec.Http;
 @@clientName(AdoptionPolicy, "ContainerServiceFleetAdoptionPolicy", "csharp");
 @@clientName(DeletePolicy, "ContainerServiceFleetDeletePolicy", "csharp");
 @@clientName(NetworkPolicy, "ContainerServiceFleetNetworkPolicy", "csharp");
-@@clientName(PlacementProfile,
+@@clientName(
+  PlacementProfile,
   "ContainerServiceFleetPlacementProfile",
   "csharp"
 );
 @@clientName(PolicyRule, "ContainerServiceFleetPolicyRule", "csharp");
-@@clientName(PropagationPolicy,
+@@clientName(
+  PropagationPolicy,
   "ContainerServiceFleetPropagationPolicy",
   "csharp"
 );
 @@clientName(PropagationType, "ContainerServiceFleetPropagationType", "csharp");
 @@clientName(ResourceQuota, "ContainerServiceFleetResourceQuota", "csharp");
-@@clientName(Placement.V1.PlacementPolicy,
+@@clientName(
+  Placement.V1.PlacementPolicy,
   "ContainerServiceFleetPlacementPolicy",
   "csharp"
 );
-@@clientName(Placement.V1.PlacementType,
+@@clientName(
+  Placement.V1.PlacementType,
   "ContainerServiceFleetPlacementType",
   "csharp"
 );
-@@clientName(Placement.V1.ClusterAffinity,
+@@clientName(
+  Placement.V1.ClusterAffinity,
   "ContainerServiceFleetClusterAffinity",
   "csharp"
 );
-@@clientName(Placement.V1.ClusterSelectorTerm,
+@@clientName(
+  Placement.V1.ClusterSelectorTerm,
   "ContainerServiceFleetClusterSelectorTerm",
   "csharp"
 );
-@@clientName(Placement.V1.PropertySelectorOperator,
+@@clientName(
+  Placement.V1.PropertySelectorOperator,
   "ContainerServiceFleetPropertySelectorOperator",
   "csharp"
 );
-@@clientName(Placement.V1.PropertySelectorRequirement,
+@@clientName(
+  Placement.V1.PropertySelectorRequirement,
   "ContainerServiceFleetPropertySelectorRequirement",
   "csharp"
 );
-@@clientName(Placement.V1.Toleration,
+@@clientName(
+  Placement.V1.Toleration,
   "ContainerServiceFleetToleration",
   "csharp"
 );
 @@clientName(Core.V1.TaintEffect, "ContainerServiceFleetTaintEffect", "csharp");
-@@clientName(Core.V1.TolerationOperator,
+@@clientName(
+  Core.V1.TolerationOperator,
   "ContainerServiceFleetTolerationOperator",
   "csharp"
 );
-@@clientName(Meta.V1.LabelSelector,
+@@clientName(
+  Meta.V1.LabelSelector,
   "ContainerServiceFleetLabelSelector",
   "csharp"
 );
-@@clientName(Meta.V1.LabelSelectorOperator,
+@@clientName(
+  Meta.V1.LabelSelectorOperator,
   "ContainerServiceFleetLabelSelectorOperator",
   "csharp"
 );
-@@clientName(Meta.V1.LabelSelectorRequirement,
+@@clientName(
+  Meta.V1.LabelSelectorRequirement,
   "ContainerServiceFleetLabelSelectorRequirement",
   "csharp"
 );
 
-@@alternateType(Azure.ResourceManager.EntityTagProperty.eTag,
+@@alternateType(
+  Azure.ResourceManager.EntityTagProperty.eTag,
   EtagProperty.etag,
   "csharp"
 );
-@@alternateType(MemberUpdateStatus.clusterResourceId,
+@@alternateType(
+  MemberUpdateStatus.clusterResourceId,
   armResourceIdentifier,
   "csharp"
 );

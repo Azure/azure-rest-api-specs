@@ -25,9 +25,10 @@ interface Responses {
   @post
   createResponse is OpenAIOperation<
     OpenAI.CreateResponse & UserIsolationKeyHeader,
-    (AgentSessionIdResponseHeader &
-      OpenAI.Response) | (AgentSessionIdResponseHeader &
-      SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+
+      | (AgentSessionIdResponseHeader & OpenAI.Response)
+      | (AgentSessionIdResponseHeader &
+          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**
@@ -55,9 +56,9 @@ interface Responses {
       @query starting_after?: int32;
       ...UserIsolationKeyHeader;
     },
-    (AgentSessionIdResponseHeader &
-      OpenAI.Response) | (AgentSessionIdResponseHeader &
-      SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+    AgentSessionIdResponseHeader & {
+      @body body: OpenAI.Response;
+    }
   >;
 
   /**

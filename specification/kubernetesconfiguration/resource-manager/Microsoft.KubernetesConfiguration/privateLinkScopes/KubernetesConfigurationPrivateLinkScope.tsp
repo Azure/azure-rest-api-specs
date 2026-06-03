@@ -60,15 +60,19 @@ interface KubernetesConfigurationPrivateLinkScopes {
   list is ArmListBySubscription<KubernetesConfigurationPrivateLinkScope>;
 }
 
-@@doc(KubernetesConfigurationPrivateLinkScope.name,
+@@doc(
+  KubernetesConfigurationPrivateLinkScope.name,
   "The name of the Azure Arc PrivateLinkScope resource."
 );
-@@doc(KubernetesConfigurationPrivateLinkScope.properties,
+@@doc(
+  KubernetesConfigurationPrivateLinkScope.properties,
   "Properties that define a Azure Arc PrivateLinkScope resource."
 );
-@@doc(KubernetesConfigurationPrivateLinkScopes.createOrUpdate::parameters.resource,
+@@doc(
+  KubernetesConfigurationPrivateLinkScopes.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create or update a Azure Arc for Servers and Clusters PrivateLinkScope."
 );
-@@doc(KubernetesConfigurationPrivateLinkScopes.updateTags::parameters.properties,
+@@doc(
+  KubernetesConfigurationPrivateLinkScopes.updateTags::parameters.properties,
   "Updated tag information to set into the PrivateLinkScope instance."
 );

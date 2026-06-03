@@ -108,12 +108,15 @@ interface BillingRequests {
   >;
 }
 
-@@doc(BillingRequest.name,
+@@doc(
+  BillingRequest.name,
   "The ID that uniquely identifies a billing request."
 );
-@@doc(BillingRequest.properties,
+@@doc(
+  BillingRequest.properties,
   "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests."
 );
-@@doc(BillingRequests.createOrUpdate::parameters.resource,
+@@doc(
+  BillingRequests.createOrUpdate::parameters.resource,
   "A request submitted by a user to manage billing. Users with an owner role on the scope can approve or decline these requests."
 );

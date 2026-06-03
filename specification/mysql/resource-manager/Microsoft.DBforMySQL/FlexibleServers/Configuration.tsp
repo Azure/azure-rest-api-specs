@@ -40,8 +40,10 @@ interface Configurations {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Configuration,
-    Response = ArmResourceUpdatedResponse<Configuration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<Configuration>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Configuration> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -96,19 +98,24 @@ interface Configurations {
     Server,
     ConfigurationListForBatchUpdate,
     BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
-    Response = ArmResponse<ConfigurationListResult> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationListResult> &
-      ArmLroLocationHeader>
+    Response =
+      | ArmResponse<ConfigurationListResult>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigurationListResult> &
+          ArmLroLocationHeader>
   >;
 }
 
 @@doc(Configuration.name, "The name of the server configuration.");
 @@doc(Configuration.properties, "The properties of a configuration.");
-@@doc(Configurations.createOrUpdate::parameters.resource,
+@@doc(
+  Configurations.createOrUpdate::parameters.resource,
   "The required parameters for updating a server configuration."
 );
-@@doc(Configurations.update::parameters.properties,
+@@doc(
+  Configurations.update::parameters.properties,
   "The required parameters for updating a server configuration."
 );
-@@doc(Configurations.batchUpdate::parameters.body,
+@@doc(
+  Configurations.batchUpdate::parameters.body,
   "The parameters for updating a list of server configuration."
 );
