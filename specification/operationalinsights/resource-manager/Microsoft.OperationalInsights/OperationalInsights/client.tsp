@@ -39,3 +39,10 @@ using Microsoft.OperationalInsights;
 
 // Fix etag casing for backward compatibility
 @@clientName(Microsoft.OperationalInsights.SearchMetadata.eTag, "etag", "java");
+
+// Python: Keep original client name from swagger
+@@clientName(
+  Microsoft.OperationalInsights,
+  "LogAnalyticsManagementClient",
+  "python"
+);
