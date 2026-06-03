@@ -53,3 +53,21 @@ using Microsoft.CloudHealth;
 @@clientName(SignalOperator, "EntitySignalOperator", "csharp");
 
 @@clientName(SignalOperator.Equals, "EqualsValue", "csharp");
+
+@@clientName(
+  DynamicThresholdSensitivity,
+  "EntityDynamicThresholdSensitivity",
+  "csharp"
+);
+
+@@clientName(DataAnnotation, "EntityDataAnnotation", "csharp");
+@@clientName(
+  GetDataAnnotationsRequest,
+  "EntityGetDataAnnotationsRequest",
+  "csharp"
+);
+@@clientName(
+  GetDataAnnotationsResponse,
+  "EntityGetDataAnnotationsResponse",
+  "csharp"
+);

@@ -19,7 +19,6 @@ namespace Microsoft.DataBoxEdge;
 model Order is Azure.ResourceManager.ProxyResource<OrderProperties> {
   ...ResourceNameParameter<
     Resource = Order,
-    KeyName = "order",
     SegmentName = "orders",
     NamePattern = ""
   >;

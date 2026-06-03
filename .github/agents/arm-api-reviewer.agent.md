@@ -371,6 +371,24 @@ After successfully posting review comments to the PR:
 4. If the PR does not have the `WaitForARMFeedback` label, skip the removal step and only propose adding `ARMChangesRequested`.
 5. Report to the human reviewer which labels were added and removed.
 
+### Step 9: Clean Up Local Workspace
+
+If the review required creating any local artifacts to inspect the PR (typically a Git worktree and/or local branch tracking the PR's head ref - for example, when the PR is too large for `gh pr diff` to handle), **clean these up at the end of the review**, after the comments have been posted (Step 7) and labels updated (Step 8).
+
+1. **Inventory** anything created during this session:
+   - Local branches matching `pr-<number>` or similar patterns created by you.
+   - Worktrees created by you (e.g., `<repo>/../specs-pr-<number>`).
+   - Temporary files written to the workspace root (e.g., `review-payload.json`, `review-body.txt`).
+2. **Confirm the user is not still using them.** If `git status` in the worktree shows uncommitted work, ask the user before removing.
+3. **Remove** the artifacts (PowerShell):
+   - `git worktree remove <worktree-path>`
+   - `git branch -D <branch-name>`
+   - `Remove-Item ./review-payload.json, ./review-body.txt -ErrorAction SilentlyContinue`
+4. **Do not** touch branches, worktrees, or files that pre-existed the review (e.g., the user's working branch, unrelated worktrees, the user's stashes).
+5. **Report** what was cleaned up to the user.
+
+This keeps the user's workspace tidy and prevents accumulation of stale `pr-*` branches across reviews.
+
 ## Constraints
 
 - **Read-only.** This agent does not modify specification files. Its job is to flag issues and suggest fixes, not apply them.
@@ -381,6 +399,7 @@ After successfully posting review comments to the PR:
 - **Clean specs get clean reports.** If after thorough review a specification has no blocking violations, explicitly state that no blocking issues were found. Do not downgrade compliant patterns into violations. For example: a spec that correctly uses common-types, has all required CRUD operations, includes `provisioningState` with the right terminal states, and follows naming conventions should receive a clean bill of health -- not a list of fabricated issues. The absence of findings is a valid review outcome.
 - **Scope boundaries.** Do not review SDK code, pipeline configs, or infrastructure files. Only review specification artifacts (OpenAPI JSON, TypeSpec `.tsp`, `tspconfig.yaml`, examples, readmes for AutoRest config).
 - **Always compare versions.** When a previous API version exists in the repository, load it and check for breaking changes. Do not skip this step.
+- **Clean up after yourself.** Any local branches, worktrees, or temporary files you create to inspect a PR MUST be removed at the end of the review (see Step 9). Never leave stale `pr-*` branches or scratch JSON payloads in the user's workspace.
 
 ## Example Prompts
 

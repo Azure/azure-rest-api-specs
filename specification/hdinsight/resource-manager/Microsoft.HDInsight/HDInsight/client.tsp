@@ -54,7 +54,6 @@ using Azure.ClientGenerator.Core;
 
 // C# client name decorators for backward compatibility
 @@clientName(ErrorResponse, "HDInsightErrorDetail", "csharp");
-@@access(ErrorResponse, Access.internal, "csharp");
 @@clientName(Application, "HDInsightApplication", "csharp");
 @@clientName(Cluster, "HDInsightCluster", "csharp");
 @@clientName(Clusters, "HDInsightCluster", "csharp");

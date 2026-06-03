@@ -93,7 +93,7 @@ alias GroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
   GroupUserParentParameters,
   GroupUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users",
   }
 >;
 
@@ -147,7 +147,7 @@ alias WorkspaceGroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
   WorkspaceGroupUserParentParameters,
   WorkspaceGroupUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/groups/{groupId}/users",
   }
 >;
 

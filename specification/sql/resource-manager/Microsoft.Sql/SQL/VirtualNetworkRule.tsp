@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A virtual network rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.VirtualNetworkRules)
 model VirtualNetworkRule
   is Azure.ResourceManager.ProxyResource<VirtualNetworkRuleProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model VirtualNetworkRule
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.VirtualNetworkRules)
 interface VirtualNetworkRules {
   /**
    * Gets a virtual network rule.

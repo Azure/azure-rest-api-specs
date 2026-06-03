@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./SqlDatabaseGetResults.tsp";
 
@@ -9,22 +10,31 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB resource throughput.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @parentResource(SqlDatabaseGetResults)
 model ThroughputSettingsGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ThroughputSettingsGetProperties> {
+  is Azure.ResourceManager.ProxyResource<ThroughputSettingsGetProperties> {
   ...ResourceNameParameter<
     Resource = ThroughputSettingsGetResults,
     KeyName = "throughputSetting",
     SegmentName = "throughputSettings",
     NamePattern = ""
   >;
+
+  /** The location of the resource group to which the resource belongs. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /** Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\". */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Identity for the resource.
@@ -117,6 +127,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -132,6 +143,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -233,6 +245,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL container
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   sqlContainerRetrieveThroughputDistribution is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -247,6 +260,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL container
    */
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   sqlContainerRedistributeThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -346,6 +360,7 @@ interface MongoDBResources {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   mongoDBDatabaseRetrieveThroughputDistribution is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -361,6 +376,7 @@ interface MongoDBResources {
   /**
    * Redistribute throughput for an Azure Cosmos DB MongoDB database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   mongoDBDatabaseRedistributeThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -435,6 +451,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB container
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   mongoDBContainerRetrieveThroughputDistribution is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -451,6 +468,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
    * Redistribute throughput for an Azure Cosmos DB MongoDB container
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   mongoDBContainerRedistributeThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -781,6 +799,7 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**

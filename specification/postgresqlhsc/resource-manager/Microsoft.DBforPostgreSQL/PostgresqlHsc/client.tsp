@@ -9,7 +9,7 @@ using Microsoft.DBforPostgreSQL;
 @@alternateType(
   NameAvailabilityRequest.type,
   "Microsoft.DBforPostgreSQL/serverGroupsv2",
-  "java"
+  "java,go"
 );
 
 // rename-mapping: model renames

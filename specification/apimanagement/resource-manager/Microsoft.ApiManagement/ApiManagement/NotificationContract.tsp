@@ -62,7 +62,7 @@ alias NotificationRecipientEmailOps = Azure.ResourceManager.Legacy.RoutedOperati
   NotificationRecipientEmailParentParameters,
   NotificationRecipientEmailParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
   }
 >;
 
@@ -104,7 +104,7 @@ alias NotificationRecipientUserOps = Azure.ResourceManager.Legacy.RoutedOperatio
   NotificationRecipientUserParentParameters,
   NotificationRecipientUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
   }
 >;
 
