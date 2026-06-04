@@ -856,10 +856,11 @@ union PaymentHsmClusterSkuFamily {
 /**
  * Sku name of the Payment HSM Cluster
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Versioning.added(Versions.v2025_12_01_preview)
-enum PaymentHsmClusterSkuName {
-  Standard_B1v2,
+union PaymentHsmClusterSkuName {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Standard_B1v2: "Standard_B1v2",
 }
 
 /**
