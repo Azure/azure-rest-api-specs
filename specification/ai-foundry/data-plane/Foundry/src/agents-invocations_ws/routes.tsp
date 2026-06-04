@@ -24,6 +24,7 @@ interface AgentWebsocket {
    *
    * The client must send an HTTP GET with `Upgrade: websocket` headers.
    */
+  @summary("Establish a WebSocket connection to a hosted agent")
   @get
   @route("/agents/endpoint/protocols/invocations_ws")
   @extension("x-ms-foundry-meta", AgentWebsocketRequiredPreviews)
