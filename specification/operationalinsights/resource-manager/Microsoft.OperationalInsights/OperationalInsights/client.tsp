@@ -29,7 +29,7 @@ using Microsoft.OperationalInsights;
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   global.AccessRulePropertiesSubscriptionsItem[],
-  "java"
+  "java,python"
 );
 
 @@clientName(
