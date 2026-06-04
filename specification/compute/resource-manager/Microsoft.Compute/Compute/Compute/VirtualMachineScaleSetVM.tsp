@@ -74,7 +74,10 @@ model VirtualMachineScaleSetVM
 }
 
 alias VirtualMachineScaleSetPath = {
-  ...Azure.ResourceManager.Legacy.BasePath;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
   ...KeysOf<ResourceNameParameter<
     VirtualMachineScaleSet,
     SegmentName = "virtualMachineScaleSets",
@@ -85,17 +88,19 @@ alias VirtualMachineScaleSetPath = {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMSOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VirtualMachineScaleSetPath,
       KeysOf<{
         ...ResourceNameParameter<
           VirtualMachineScaleSetVM,
           SegmentName = "virtualMachines"
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
+@tag("VirtualMachineScaleSetVMs")
 interface VirtualMachineScaleSetVMS {
   /**
    * Gets a virtual machine from a VM scale set.

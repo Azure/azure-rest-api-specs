@@ -11,7 +11,6 @@ using Microsoft.DocumentDB;
   "MongoClusterManagementClient",
   "javascript,java"
 );
-@@access(Operations.list, Access.internal, "csharp");
 @@clientName(
   CheckNameAvailabilityResponse,
   "MongoClusterNameAvailabilityResult",
