@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-01-01",
+    "expansionJob": {
+      "tags": {
+        "Dept": "ContosoFinance"
+      }
+    },
+    "expansionJobName": "expansionjob1",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "expansionjob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob1",
+        "location": "eastus",
+        "properties": {
+          "newStorageCapacityTiB": 16,
+          "provisioningState": "Succeeded",
+          "status": {
+            "completionTimeUTC": "2024-03-21T19:15:43.511Z",
+            "percentComplete": 100,
+            "startTimeUTC": "2024-03-21T17:25:43.511Z",
+            "state": "Completed",
+            "statusMessage": "Expansion completed successfully"
+          }
+        },
+        "tags": {
+          "Dept": "ContosoFinance"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?api-version=2026-01-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.StorageCache/locations/eastus/ascOperations/00000000-0000-0000-0000-000000000000?monitor=true&api-version=2026-01-01"
+      }
+    }
+  },
+  "operationId": "expansionJobs_Update",
+  "title": "expansionJobs_Update"
+}
