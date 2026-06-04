@@ -89,7 +89,7 @@ interface Agents {
   @extension("x-ms-summary-override", "Update an agent")
   @extension(
     "x-ms-description-override",
-    "Updates an existing agent by adding a new version if there are any changes to the agent definition. Without changes, returns the existing agent version."
+    "Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version."
   )
   updateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
