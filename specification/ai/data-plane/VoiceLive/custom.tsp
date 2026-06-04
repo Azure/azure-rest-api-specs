@@ -171,16 +171,24 @@ model ResponseSession is RequestSession {
  * Feature opt-in keys for VoiceLive preview capabilities.
  *
  * Mirrors Foundry's `FoundryFeaturesOptInKeys`: each member is a feature flag opt-in
- * string sent on the `VoiceLive-Features` header to enable preview features or to
- * modify persisted preview resources on the `v1` channel. Preview-only, so it is added
- * at the virtual `PuPr` version and fenced out of the GA `v1` swagger via `@removed`.
+ * string sent on the `VoiceLive-Features` header (see `WithConditionalVoiceLivePreviewHeader`)
+ * to enable preview features. This is the evergreen registry of opt-in keys: the union exists
+ * from the virtual `PuPr` version onward (preview + GA `v1` channels) so the connect operation
+ * can carry the header in every modeled version. It is an open union (`string`) so future
+ * preview keys can be added without a breaking change, and so it never becomes empty when a
+ * preview key is fenced out of GA. Individual keys whose feature is fenced out of GA carry
+ * their own `@removed(Versions.v1)`.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed opt-in key set, mirroring Foundry's FoundryFeaturesOptInKeys."
 @added(Versions.PuPr)
-@removed(Versions.v1)
 union VoiceLiveFeaturesOptInKeys {
-  /** Opt-in key enabling the experimental barge-in preview feature. */
+  string,
+
+  /**
+   * Opt-in key enabling the experimental barge-in preview feature. Fenced out of GA `v1`
+   * because the feature it gates (`experimental_barge_in`) is preview-only.
+   */
+  @removed(Versions.v1)
   barge_in_v1_preview: "BargeIn=V1Preview",
 }
 
