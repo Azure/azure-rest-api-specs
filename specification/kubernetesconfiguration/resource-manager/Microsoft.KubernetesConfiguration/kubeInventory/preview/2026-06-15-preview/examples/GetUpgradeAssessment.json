@@ -1,0 +1,261 @@
+{
+  "title": "Get Upgrade Assessment",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "upgrade-assessment-current",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/upgrade-assessment-current",
+        "name": "upgrade-assessment-current",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-02T10:15:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-02T10:15:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "upgrade.config.io/v1alpha1",
+          "kind": "UpgradeAssessment",
+          "metadata": {
+            "name": "current",
+            "uid": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+            "creationTimestamp": "2026-06-02T10:15:00Z"
+          },
+          "spec": {
+            "currentKubernetesVersion": "1.27.9",
+            "targetKubernetesVersion": "1.30.0"
+          },
+          "status": {
+            "assessmentTime": "2026-06-02T10:15:00Z",
+            "overallSeverity": "Critical",
+            "componentCompatibility": [
+              {
+                "name": "kube-proxy",
+                "version": "1.27.9",
+                "compatibilityStatus": "Compatible",
+                "severity": "Pass"
+              },
+              {
+                "name": "coredns",
+                "version": "1.10.1",
+                "compatibilityStatus": "Compatible",
+                "severity": "Pass"
+              },
+              {
+                "name": "metrics-server",
+                "version": "0.6.3",
+                "compatibilityStatus": "Compatible",
+                "severity": "Pass"
+              },
+              {
+                "name": "azure-cni",
+                "version": "1.4.14",
+                "compatibilityStatus": "Compatible",
+                "severity": "Pass"
+              },
+              {
+                "name": "cert-manager",
+                "version": "1.8.0",
+                "compatibilityStatus": "Incompatible",
+                "severity": "Critical",
+                "minCompatibleVersion": "1.12.0",
+                "notes": "cert-manager v1.8.0 does not support Kubernetes 1.30+. The cert-manager webhook API group was changed in K8s 1.29 and cert-manager >= 1.12.0 is required."
+              },
+              {
+                "name": "ingress-nginx",
+                "version": "1.2.1",
+                "compatibilityStatus": "Incompatible",
+                "severity": "Critical",
+                "minCompatibleVersion": "1.9.0",
+                "notes": "ingress-nginx v1.2.1 uses networking.k8s.io/v1beta1 which is removed in Kubernetes 1.29. Upgrade to >= 1.9.0."
+              },
+              {
+                "name": "azure-policy",
+                "version": "1.2.1",
+                "compatibilityStatus": "Incompatible",
+                "severity": "Critical",
+                "minCompatibleVersion": "1.6.0",
+                "notes": "azure-policy v1.2.1 relies on PodSecurityPolicy (policy/v1beta1/podsecuritypolicies) which was removed in Kubernetes 1.25."
+              },
+              {
+                "name": "kube-state-metrics",
+                "version": "2.7.0",
+                "compatibilityStatus": "Untested",
+                "severity": "Warning",
+                "notes": "kube-state-metrics v2.7.0 has been tested up to Kubernetes 1.28. Compatibility with 1.30 is not confirmed; upgrade to >= 2.10.0 is recommended."
+              },
+              {
+                "name": "cluster-autoscaler",
+                "version": "1.27.2",
+                "compatibilityStatus": "Untested",
+                "severity": "Warning",
+                "notes": "cluster-autoscaler v1.27.2 is outside the tested range for Kubernetes 1.30. The autoscaler major version should match the cluster minor version."
+              },
+              {
+                "name": "prometheus-operator",
+                "version": "0.63.0",
+                "compatibilityStatus": "Untested",
+                "severity": "Warning",
+                "notes": "prometheus-operator v0.63.0 has not been validated against Kubernetes 1.30. Upgrade to >= 0.72.0 which includes 1.30 test coverage."
+              }
+            ],
+            "deprecatedApis": [
+              {
+                "group": "networking.k8s.io",
+                "version": "v1beta1",
+                "resource": "ingresses",
+                "removedRelease": "1.22",
+                "usageMetrics": {
+                  "get": 142,
+                  "list": 89,
+                  "watch": 512,
+                  "post": 3,
+                  "put": 7
+                },
+                "lastUsageObservedAt": "2026-06-02T09:58:34Z",
+                "severity": "Critical"
+              },
+              {
+                "group": "policy",
+                "version": "v1beta1",
+                "resource": "poddisruptionbudgets",
+                "removedRelease": "1.25",
+                "usageMetrics": {
+                  "get": 54,
+                  "list": 31,
+                  "watch": 210
+                },
+                "lastUsageObservedAt": "2026-06-02T10:01:12Z",
+                "severity": "Critical"
+              },
+              {
+                "group": "autoscaling",
+                "version": "v2beta2",
+                "resource": "horizontalpodautoscalers",
+                "removedRelease": "1.26",
+                "usageMetrics": {
+                  "get": 22,
+                  "list": 15,
+                  "watch": 88
+                },
+                "lastUsageObservedAt": "2026-06-02T09:45:00Z",
+                "severity": "Critical"
+              },
+              {
+                "group": "batch",
+                "version": "v1beta1",
+                "resource": "cronjobs",
+                "removedRelease": "1.25",
+                "usageMetrics": {
+                  "get": 8,
+                  "list": 4,
+                  "watch": 27,
+                  "post": 1
+                },
+                "lastUsageObservedAt": "2026-06-01T22:30:00Z",
+                "severity": "Critical"
+              },
+              {
+                "group": "storage.k8s.io",
+                "version": "v1beta1",
+                "resource": "storageclasses",
+                "removedRelease": "1.32",
+                "usageMetrics": {
+                  "get": 5,
+                  "list": 3
+                },
+                "lastUsageObservedAt": "2026-06-02T08:10:00Z",
+                "severity": "Warning"
+              }
+            ],
+            "readinessChecks": [
+              {
+                "category": "APIServerHealth",
+                "severity": "Pass",
+                "details": "API server /healthz and /readyz endpoints responded successfully."
+              },
+              {
+                "category": "NodeStatus",
+                "name": "aks-nodepool1-12345678-vmss000000",
+                "severity": "Pass",
+                "details": "Node is Ready. Kubelet version: v1.27.9."
+              },
+              {
+                "category": "NodeStatus",
+                "name": "aks-nodepool1-12345678-vmss000001",
+                "severity": "Pass",
+                "details": "Node is Ready. Kubelet version: v1.27.9."
+              },
+              {
+                "category": "NodeStatus",
+                "name": "aks-nodepool1-12345678-vmss000002",
+                "severity": "Pass",
+                "details": "Node is Ready. Kubelet version: v1.27.9."
+              },
+              {
+                "category": "NodeStatus",
+                "name": "aks-nodepool1-12345678-vmss000003",
+                "severity": "Critical",
+                "details": "Node is NotReady. Last transition: 2026-06-02T07:42:00Z. Condition: KubeletNotReady — PLEG is not healthy: pleg was last seen active 3m45s ago; threshold is 3m0s."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "default/frontend-pdb",
+                "severity": "Pass",
+                "details": "PDB allows disruption: minAvailable=2, current replicas=5, disruptions allowed=3."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "default/backend-pdb",
+                "severity": "Pass",
+                "details": "PDB allows disruption: minAvailable=1, current replicas=4, disruptions allowed=3."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "kube-system/coredns-pdb",
+                "severity": "Pass",
+                "details": "PDB allows disruption: minAvailable=1, current replicas=2, disruptions allowed=1."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "monitoring/prometheus-pdb",
+                "severity": "Pass",
+                "details": "PDB allows disruption: maxUnavailable=1, current replicas=3, disruptions allowed=1."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "production/payments-api-pdb",
+                "severity": "Critical",
+                "details": "PDB is blocking: minAvailable=3, current replicas=3, disruptions allowed=0. No pods can be evicted during node drain."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "production/order-service-pdb",
+                "severity": "Critical",
+                "details": "PDB is blocking: minAvailable=2, current replicas=2, disruptions allowed=0. Scale up replicas or reduce minAvailable before upgrading."
+              },
+              {
+                "category": "PodDisruptionBudget",
+                "name": "ingress-nginx/ingress-nginx-pdb",
+                "severity": "Critical",
+                "details": "PDB is blocking: maxUnavailable=0, current replicas=2, disruptions allowed=0. maxUnavailable=0 prevents all evictions."
+              }
+            ]
+          },
+          "attachedToExtension": "k8s-upgrade-assessment"
+        }
+      }
+    }
+  }
+}

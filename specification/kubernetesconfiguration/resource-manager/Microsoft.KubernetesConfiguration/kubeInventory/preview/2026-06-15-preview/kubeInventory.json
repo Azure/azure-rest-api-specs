@@ -64,10 +64,10 @@
           {
             "name": "clusterRp",
             "in": "path",
-            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,\nMicrosoft.HybridContainerService.",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,\nMicrosoft.HybridContainerService, Microsoft.KubernetesConfiguration.",
             "required": true,
             "type": "string",
-            "pattern": "^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService)$"
+            "pattern": "^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService|KubernetesConfiguration)$"
           },
           {
             "name": "clusterResourceName",
@@ -130,10 +130,10 @@
           {
             "name": "clusterRp",
             "in": "path",
-            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,\nMicrosoft.HybridContainerService.",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,\nMicrosoft.HybridContainerService, Microsoft.KubernetesConfiguration.",
             "required": true,
             "type": "string",
-            "pattern": "^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService)$"
+            "pattern": "^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService|KubernetesConfiguration)$"
           },
           {
             "name": "clusterResourceName",
@@ -177,6 +177,9 @@
         "x-ms-examples": {
           "Get KubeInventory": {
             "$ref": "./examples/GetKubeInventory.json"
+          },
+          "Get Upgrade Assessment": {
+            "$ref": "./examples/GetUpgradeAssessment.json"
           }
         }
       }
