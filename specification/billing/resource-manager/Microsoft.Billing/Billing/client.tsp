@@ -564,8 +564,39 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
+  BillingSubscriptionMergeRequest,
+  "BillingSubscriptionMergeContent",
+  "csharp"
+);
+@@clientName(
+  BillingSubscriptionSplitRequest,
+  "BillingSubscriptionSplitContent",
+  "csharp"
+);
+@@clientName(
+  InitiateTransferRequest,
+  "BillingTransferDetailCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(CancelSubscriptionRequest, "CancelSubscriptionContent", "csharp");
+@@clientName(
+  PartnerInitiateTransferRequest,
+  "PartnerTransferDetailCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  SavingsPlanUpdateValidateRequest,
+  "SavingsPlanUpdateValidateContent",
+  "csharp"
+);
+@@clientName(
   ValidationResultProperties,
   "BillingTransferValidationResultProperties",
+  "csharp"
+);
+@@clientName(
+  InvoicesOperationGroup.downloadDocumentsByBillingSubscription,
+  "DownloadDocumentsByBillingSubscriptionInvoice",
   "csharp"
 );
 @@clientName(
@@ -581,6 +612,11 @@ using Microsoft.Billing;
 @@clientName(
   BillingAccounts.validatePaymentTerms::parameters.body,
   "arrayOfPaymentTerm",
+  "csharp"
+);
+@@clientName(
+  InvoicesOperationGroup.downloadDocumentsByBillingSubscription::parameters.downloadUrls,
+  "arrayOfDocumentDownloadRequest",
   "csharp"
 );
 
@@ -609,6 +645,11 @@ using Microsoft.Billing;
 );
 @@alternateType(BillingSubscriptionProperties.resourceUri, url, "csharp");
 @@alternateType(BillingSubscriptionProperties.termDuration, duration, "csharp");
+@@alternateType(
+  BillingSubscriptionSplitRequest.termDuration,
+  duration,
+  "csharp"
+);
 @@alternateType(DocumentDownloadResult.expiryTime, utcDateTime, "csharp");
 @@alternateType(
   PaymentMethodLinkProperties.paymentMethodId,
