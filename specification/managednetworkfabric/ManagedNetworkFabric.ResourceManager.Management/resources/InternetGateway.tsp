@@ -55,7 +55,6 @@ interface InternetGateways {
 }
 
 @@doc(InternetGateways.create::parameters.resource, "Request payload.");
-@@doc(
-  InternetGateways.update::parameters.properties,
+@@doc(InternetGateways.update::parameters.properties,
   "API to update certain properties of the InternetGateway resource.."
 );
