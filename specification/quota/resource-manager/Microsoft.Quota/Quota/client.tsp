@@ -158,11 +158,7 @@ op quotaRequestStatusGet(
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(
-  QuotaRequestStatus.get,
-  quotaRequestStatusGet,
-  "java,python"
-);
+@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -177,8 +173,4 @@ op currentUsagesBasesGet(
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(
-  CurrentUsagesBases.get,
-  currentUsagesBasesGet,
-  "java,python"
-);
+@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python");
