@@ -5,6 +5,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Microsoft.Monitor;
@@ -45,6 +46,10 @@ using Microsoft.Monitor;
 @@clientName(IssueResourceUpdate, "MonitorIssuePatch", "csharp");
 @@clientName(ListParameter, "IssueListContent", "csharp");
 @@clientName(Notifications, "IssueNotifications", "csharp");
+@@clientName(Notifications.excludeDefaultActionGroups,
+  "ShouldExcludeDefaultActionGroups",
+  "csharp"
+);
 @@clientName(RelatedAlert, "IssueRelatedAlertProperties", "csharp");
 @@clientName(RelatedAlerts, "IssueRelatedAlertPropertiesList", "csharp");
 @@clientName(RelatedResource, "IssueRelatedResourceProperties", "csharp");
@@ -64,7 +69,18 @@ using Microsoft.Monitor;
   "MonitorWorkspacePrivateEndpointConnectionProperties",
   "csharp"
 );
-
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
+  "MonitorWorkspacePrivateLinkServiceConnectionState",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
+  "MonitorWorkspacePrivateEndpointConnectionProvisioningState",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "MonitorWorkspacePrivateEndpointConnection",
+  "csharp"
+);
 @@clientName(Issue.addInvestigationResult::parameters.body,
   "content",
   "csharp"
@@ -73,6 +89,22 @@ using Microsoft.Monitor;
 @@clientName(Issue.addOrUpdateResources::parameters.body, "content", "csharp");
 @@clientName(Issue.setBackgroundVisualization::parameters.body,
   "content",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  eTag,
+  "csharp"
+);
+@@alternateType(AzureMonitorWorkspaceDefaultIngestionSettings.dataCollectionRuleResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AzureMonitorWorkspaceDefaultIngestionSettings.dataCollectionEndpointResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Notifications.actionGroupIds,
+  armResourceIdentifier[],
   "csharp"
 );
 
