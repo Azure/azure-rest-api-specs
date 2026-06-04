@@ -217,9 +217,6 @@ union DataGenerationJobSourceType {
   @doc("Traces source — conversation traces from Application Insights.")
   traces: "traces",
 
-  @doc("Dataset source — reference to a dataset.")
-  dataset: "dataset",
-
   @doc("File source — Azure OpenAI file.")
   file: "file",
 }
@@ -246,11 +243,6 @@ model AgentDataGenerationJobSource extends DataGenerationJobSource {
 @doc("Traces source for data generation jobs — conversation traces from Application Insights.")
 model TracesDataGenerationJobSource extends DataGenerationJobSource {
   ...TracesJobSource;
-}
-
-@doc("Dataset source for data generation jobs — reference to a dataset.")
-model DatasetDataGenerationJobSource extends DataGenerationJobSource {
-  ...DatasetJobSource;
 }
 
 @doc("File source for data generation jobs — Azure OpenAI file input.")

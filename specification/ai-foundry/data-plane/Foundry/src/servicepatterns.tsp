@@ -16,13 +16,79 @@ alias FoundryDataPlaneApiVersionParameter = {
   apiVersion: string;
 };
 
+/** Error response for Azure range errors. */
+alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(499)
+      @minValue(400)
+      @statusCode
+      statusCode: int32;
+    }
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(599)
+      @minValue(500)
+      @statusCode
+      statusCode: int32;
+    };
+
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
   Azure.Core.Traits.NoConditionalRequests &
   FoundryDataPlaneApiVersionParameter;
 
-alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
-  FoundryDataPlaneAzureTraits>;
+alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<
+  ExtraTraits & FoundryDataPlaneAzureTraits,
+  AzureRangeErrorResponse
+>;
+
+alias FoundryStandardResourceOperations = Azure.Core.ResourceOperations<
+  Azure.Core.Traits.NoConditionalRequests &
+    Azure.Core.Traits.NoRepeatableRequests &
+    Azure.Core.Traits.NoClientRequestId,
+  AzureRangeErrorResponse
+>;
+
+op FoundryOperation<
+  Params extends Reflection.Model,
+  Response,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.Operation<
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryResourceOperation<
+  Resource extends Reflection.Model,
+  Params extends Reflection.Model,
+  Response,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.ResourceOperation<
+  Resource,
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
+op FoundryResourceList<
+  Resource extends Reflection.Model,
+  Params extends Reflection.Model,
+  Response extends Reflection.Model,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.ResourceList<
+  Resource,
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -30,7 +96,9 @@ op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
+>(...Params, ...FoundryDataPlaneApiVersionParameter):
+  | Response
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 // ---- Feature opt-in keys & preview headers ----
 
@@ -53,13 +121,16 @@ union FoundryFeaturesOptInKeys {
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
   routines_v1_preview: "Routines=V1Preview",
+  toolboxes_v1_preview: "Toolboxes=V1Preview",
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
   agents_optimization_v1_preview: "AgentsOptimization=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -67,7 +138,9 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
   foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
@@ -209,32 +282,35 @@ interface VersionedOperations<
   TListVersionsParameters extends Reflection.Model = {}
 > {
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "We are using the resource action as a building block."
+  @summary("List versions")
   @doc("List all versions of the given {name}", TEntityType)
   @Rest.action("versions")
   @Rest.actionSeparator("/")
   @get
   @list
-  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listVersions is FoundryStandardResourceOperations.ResourceAction<
     TEntityType,
     TListVersionsParameters,
     Azure.Core.Page<TEntityType>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("List latest versions")
   @doc("List the latest version of each {name}", TEntityType)
   @Rest.listsResource(TEntityType)
-  listLatest is Azure.Core.Foundations.ResourceList<
+  listLatest is FoundryResourceList<
     TEntityType,
     TListLatestParameters,
     Azure.Core.Page<TEntityType>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Get a version")
   @doc(
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     TEntityType
   )
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     TEntityType,
     {
       @doc("The specific version id of the {name} to retrieve.", TEntityType)
@@ -246,12 +322,13 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Delete a version")
   @doc(
     "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
     TEntityType
   )
   @delete
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     TEntityType,
     {
       @doc("The version of the {name} to delete.", TEntityType)
@@ -263,12 +340,13 @@ interface VersionedOperations<
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
+  @summary("Create or update a version")
   @doc(
     "Create a new or update an existing {name} with the given version id",
     TEntityType
   )
   @patch
-  createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdateVersion is FoundryResourceOperation<
     TEntityType,
     TInputParameters,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
@@ -476,7 +554,9 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
 /** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJobPreview<AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
+op deleteJobPreview<AreaPreviewLabel extends
+  | FoundryFeaturesOptInKeys
+  | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */

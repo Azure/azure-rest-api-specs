@@ -81,6 +81,7 @@ interface FileSystems {
   listBySubscription is ArmListBySubscription<LiftrBase.Storage.FileSystemResource>;
 }
 
-@@doc(LiftrBase.Storage.FileSystemResource.name,
+@@doc(
+  LiftrBase.Storage.FileSystemResource.name,
   "Name of the filesystem resource"
 );

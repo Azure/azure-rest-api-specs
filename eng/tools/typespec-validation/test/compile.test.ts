@@ -71,43 +71,16 @@ describe("compile", function () {
     });
   });
 
-  it("should fail if no emitter was configured", async function () {
-    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
-      if (args.join(" ").includes("tsp compile")) {
-        return Promise.resolve([null, "no emitter was configured", ""]);
-      } else {
-        return Promise.resolve([null, "", ""]);
-      }
-    });
-
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
-      success: false,
-    });
-  });
-
-  it("should fail if no output was generated", async function () {
-    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
-      if (args.join(" ").includes("tsp compile")) {
-        return Promise.resolve([null, "no output was generated", ""]);
-      } else {
-        return Promise.resolve([null, "", ""]);
-      }
-    });
-
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
-      success: false,
-    });
-  });
-
-  it("should throw if output has no generated swaggers", async function () {
+  it("should succeed if output has no generated swaggers", async function () {
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, "not-swagger", ""]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).rejects.toThrowErrorMatchingInlineSnapshot(
-      `[Error: No generated swaggers found in output of 'tsp compile']`,
-    );
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
+    });
   });
 
   it("should fail if extra swaggers", async function () {

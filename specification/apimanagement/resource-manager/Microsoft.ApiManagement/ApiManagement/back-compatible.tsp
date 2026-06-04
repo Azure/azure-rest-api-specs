@@ -4,87 +4,107 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ApiManagement;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiManagementGatewayUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AllPoliciesContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AllPoliciesContract.properties
 );
 
 @@clientName(ApiEntityBaseContract.type, "ApiType");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiCreateOrUpdateParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiCreateOrUpdateParameter.properties
 );
 
 @@clientName(ApiCreateOrUpdateProperties.apiType, "SoapApiType");
-@@clientName(ApiCreateOrUpdateProperties.translateRequiredQueryParameters,
+@@clientName(
+  ApiCreateOrUpdateProperties.translateRequiredQueryParameters,
   "TranslateRequiredQueryParametersConduct"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OperationUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResolverUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResolverUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaContractProperties.document
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SchemaContractProperties.document
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IssueUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagDescriptionCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TagDescriptionCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WikiUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WikiUpdateContract.properties
 );
 
 @@clientName(ApiExportResult.format, "ExportResultFormat");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiVersionSetUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiVersionSetUpdateParameters.properties
 );
 
-@@clientName(AuthorizationContractProperties.oauth2grantType,
+@@clientName(
+  AuthorizationContractProperties.oauth2grantType,
   "OAuth2GrantType"
 );
 
-@@clientName(AuthorizationContractProperties.authorizationType,
+@@clientName(
+  AuthorizationContractProperties.authorizationType,
   "AuthorizationType"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationServerUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AuthorizationServerUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BackendUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendReconnectContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BackendReconnectContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CacheUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CertificateCreateOrUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CertificateCreateOrUpdateParameters.properties
 );
 
-@@clientName(ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
+@@clientName(
+  ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
   "httpConfiguration"
 );
 
@@ -92,172 +112,214 @@ using Microsoft.ApiManagement;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RemotePrivateEndpointConnectionWrapper.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RemotePrivateEndpointConnectionWrapper.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementServiceUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiManagementServiceUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DocumentationUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DocumentationUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EmailTemplateUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EmailTemplateUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AssociationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AssociationContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GroupCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GroupUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityProviderCreateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IdentityProviderCreateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityProviderUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IdentityProviderUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoggerUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LoggerUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamedValueCreateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NamedValueCreateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamedValueUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NamedValueUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecipientUserContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RecipientUserContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecipientEmailContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RecipientEmailContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OpenidConnectProviderUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OpenidConnectProviderUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyDescriptionContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PolicyDescriptionContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyRestrictionUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PolicyRestrictionUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationResultContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OperationResultContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalSettingsContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PortalSettingsContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProductUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaCounterValueUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  QuotaCounterValueUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalSchemaContractProperties.document
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GlobalSchemaContractProperties.document
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SubscriptionCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SubscriptionUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagCreateUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TagCreateUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccessInformationCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AccessInformationCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccessInformationUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AccessInformationUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeployConfigurationParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DeployConfigurationParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SaveConfigurationParameter.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SaveConfigurationParameter.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TenantConfigurationSyncStateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TenantConfigurationSyncStateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserCreateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  UserCreateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  UserUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserTokenParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  UserTokenParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticUpdateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DiagnosticUpdateContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyWithComplianceContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PolicyWithComplianceContract.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaCounterValueContract.value
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  QuotaCounterValueContract.value
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResolverResultContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResolverResultContract.properties
 );
 
 @@clientLocation(ApiManagementGatewayResources.get, "ApiGateway");
 @@clientLocation(ApiManagementGatewayResources.createOrUpdate, "ApiGateway");
-@@clientName(ApiManagementGatewayResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiManagementGatewayResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiManagementGatewayResources.update, "ApiGateway");
-@@clientName(ApiManagementGatewayResources.update::parameters.properties,
+@@clientName(
+  ApiManagementGatewayResources.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(ApiManagementGatewayResources.delete, "ApiGateway");
-@@clientLocation(ApiManagementGatewayResources.listByResourceGroup,
+@@clientLocation(
+  ApiManagementGatewayResources.listByResourceGroup,
   "ApiGateway"
 );
 @@clientLocation(ApiManagementGatewayResources.list, "ApiGateway");
-@@clientLocation(ApiManagementGatewayResources.listAvailableSkus,
+@@clientLocation(
+  ApiManagementGatewayResources.listAvailableSkus,
   "ApiManagementGatewaySkus"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiManagementGatewayResource.properties
 );
 
 @@clientLocation(ApiContracts.get, "Api");
@@ -274,7 +336,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiContracts.listByTags, "Operation");
 @@clientName(WorkspaceApi.createOrUpdate::parameters.resource, "parameters");
 @@clientName(WorkspaceApi.update::parameters.properties, "parameters");
-@@clientLocation(WorkspaceApi.workspaceApiRevisionListByService,
+@@clientLocation(
+  WorkspaceApi.workspaceApiRevisionListByService,
   "WorkspaceApiRevision"
 );
 @@clientName(WorkspaceApi.workspaceApiRevisionListByService, "ListByService");
@@ -284,37 +347,43 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiReleaseContracts.get, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.getEntityTag, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.createOrUpdate, "ApiRelease");
-@@clientName(ApiReleaseContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiReleaseContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiReleaseContracts.update, "ApiRelease");
 @@clientName(ApiReleaseContracts.update::parameters.properties, "parameters");
 @@clientLocation(ApiReleaseContracts.delete, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.listByService, "ApiRelease");
-@@clientName(WorkspaceApiRelease.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiRelease.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceApiRelease.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiReleaseContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiReleaseContract.properties
 );
 
 @@clientLocation(OperationContracts.get, "ApiOperation");
 @@clientLocation(OperationContracts.getEntityTag, "ApiOperation");
 @@clientLocation(OperationContracts.createOrUpdate, "ApiOperation");
-@@clientName(OperationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  OperationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(OperationContracts.update, "ApiOperation");
 @@clientName(OperationContracts.update::parameters.properties, "parameters");
 @@clientLocation(OperationContracts.delete, "ApiOperation");
 @@clientLocation(OperationContracts.listByApi, "ApiOperation");
-@@clientName(WorkspaceApiOperation.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiOperation.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceApiOperation.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OperationContract.properties
 );
 
 @@clientLocation(PolicyContracts.get, "ApiOperationPolicy");
@@ -323,20 +392,24 @@ using Microsoft.ApiManagement;
 @@clientName(PolicyContracts.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(PolicyContracts.delete, "ApiOperationPolicy");
 @@clientLocation(PolicyContracts.listByOperation, "ApiOperationPolicy");
-@@clientName(GraphQLApiResolverPolicy.createOrUpdate::parameters.resource,
+@@clientName(
+  GraphQLApiResolverPolicy.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ApiPolicy.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Policy.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ProductPolicy.createOrUpdate::parameters.resource, "parameters");
 @@clientName(WorkspacePolicy.createOrUpdate::parameters.resource, "parameters");
-@@clientName(WorkspaceApiOperationPolicy.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiOperationPolicy.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(WorkspaceApiPolicy.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiPolicy.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(WorkspaceProductPolicy.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceProductPolicy.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -355,11 +428,13 @@ using Microsoft.ApiManagement;
 @@clientLocation(TagContractOperationGroup.get, Tag);
 @@clientLocation(TagContractOperationGroup.getEntityState, Tag);
 @@clientLocation(TagContractOperationGroup.createOrUpdate, Tag);
-@@clientName(TagContractOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  TagContractOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagContractOperationGroup.update, Tag);
-@@clientName(TagContractOperationGroup.update::parameters.properties,
+@@clientName(
+  TagContractOperationGroup.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(TagContractOperationGroup.delete, Tag);
@@ -372,7 +447,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(ResolverContracts.get, "GraphQLApiResolver");
 @@clientLocation(ResolverContracts.getEntityTag, "GraphQLApiResolver");
 @@clientLocation(ResolverContracts.createOrUpdate, "GraphQLApiResolver");
-@@clientName(ResolverContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ResolverContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ResolverContracts.update, "GraphQLApiResolver");
@@ -380,13 +456,15 @@ using Microsoft.ApiManagement;
 @@clientLocation(ResolverContracts.delete, "GraphQLApiResolver");
 @@clientLocation(ResolverContracts.listByApi, "GraphQLApiResolver");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResolverContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResolverContract.properties
 );
 
 @@clientLocation(ProductContracts.get, "Product");
 @@clientLocation(ProductContracts.getEntityTag, "Product");
 @@clientLocation(ProductContracts.createOrUpdate, "Product");
-@@clientName(ProductContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ProductContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ProductContracts.update, "Product");
@@ -401,10 +479,12 @@ using Microsoft.ApiManagement;
 @@clientName(ProductContracts.productApiDelete, "Delete");
 @@clientLocation(ProductContracts.productGroupListByProduct, "ProductGroup");
 @@clientName(ProductContracts.productGroupListByProduct, "ListByProduct");
-@@clientLocation(ProductContracts.productGroupCheckEntityExists,
+@@clientLocation(
+  ProductContracts.productGroupCheckEntityExists,
   "ProductGroup"
 );
-@@clientName(ProductContracts.productGroupCheckEntityExists,
+@@clientName(
+  ProductContracts.productGroupCheckEntityExists,
   "CheckEntityExists"
 );
 @@clientLocation(ProductContracts.productGroupCreateOrUpdate, "ProductGroup");
@@ -412,7 +492,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(ProductContracts.productGroupDelete, "ProductGroup");
 @@clientName(ProductContracts.productGroupDelete, "Delete");
 @@clientLocation(ProductContracts.list, "ProductSubscriptions");
-@@clientName(WorkspaceProduct.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceProduct.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceProduct.update::parameters.properties, "parameters");
@@ -425,7 +506,8 @@ using Microsoft.ApiManagement;
 @@clientName(SchemaContracts.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(SchemaContracts.delete, "ApiSchema");
 @@clientLocation(SchemaContracts.listByApi, "ApiSchema");
-@@clientName(WorkspaceApiSchema.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiSchema.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -434,7 +516,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(DiagnosticContracts.get, "ApiDiagnostic");
 @@clientLocation(DiagnosticContracts.getEntityTag, "ApiDiagnostic");
 @@clientLocation(DiagnosticContracts.createOrUpdate, "ApiDiagnostic");
-@@clientName(DiagnosticContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  DiagnosticContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DiagnosticContracts.update, "ApiDiagnostic");
@@ -443,18 +526,22 @@ using Microsoft.ApiManagement;
 @@clientLocation(DiagnosticContracts.listByService, "ApiDiagnostic");
 @@clientName(Diagnostic.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Diagnostic.update::parameters.properties, "parameters");
-@@clientName(WorkspaceDiagnostic.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceDiagnostic.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceDiagnostic.update::parameters.properties, "parameters");
-@@clientName(WorkspaceApiDiagnostic.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiDiagnostic.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(WorkspaceApiDiagnostic.update::parameters.properties,
+@@clientName(
+  WorkspaceApiDiagnostic.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DiagnosticContract.properties
 );
 
 @@clientLocation(IssueContracts.get, "ApiIssue");
@@ -471,37 +558,43 @@ using Microsoft.ApiManagement;
 @@clientLocation(IssueCommentContracts.get, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.getEntityTag, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.createOrUpdate, "ApiIssueComment");
-@@clientName(IssueCommentContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  IssueCommentContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(IssueCommentContracts.delete, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.listByService, "ApiIssueComment");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueCommentContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IssueCommentContract.properties
 );
 
 @@clientLocation(IssueAttachmentContracts.get, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.getEntityTag, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.createOrUpdate, "ApiIssueAttachment");
-@@clientName(IssueAttachmentContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  IssueAttachmentContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(IssueAttachmentContracts.delete, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.listByService, "ApiIssueAttachment");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueAttachmentContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IssueAttachmentContract.properties
 );
 
 @@clientLocation(TagDescriptionContracts.get, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.getEntityTag, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.createOrUpdate, "ApiTagDescription");
-@@clientName(TagDescriptionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  TagDescriptionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagDescriptionContracts.delete, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.listByService, "ApiTagDescription");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagDescriptionContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TagDescriptionContract.properties
 );
 
 @@clientLocation(WikiContracts.get, "ApiWiki");
@@ -533,112 +626,141 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiVersionSetContracts.get, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.getEntityTag, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.createOrUpdate, "ApiVersionSet");
-@@clientName(ApiVersionSetContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiVersionSetContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiVersionSetContracts.update, "ApiVersionSet");
-@@clientName(ApiVersionSetContracts.update::parameters.properties,
+@@clientName(
+  ApiVersionSetContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(ApiVersionSetContracts.delete, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.listByService, "ApiVersionSet");
-@@clientName(WorkspaceApiVersionSet.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceApiVersionSet.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(WorkspaceApiVersionSet.update::parameters.properties,
+@@clientName(
+  WorkspaceApiVersionSet.update::parameters.properties,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiVersionSetContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiVersionSetContract.properties
 );
 
 @@clientLocation(AuthorizationProviderContracts.get, "AuthorizationProvider");
-@@clientLocation(AuthorizationProviderContracts.createOrUpdate,
+@@clientLocation(
+  AuthorizationProviderContracts.createOrUpdate,
   "AuthorizationProvider"
 );
-@@clientName(AuthorizationProviderContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  AuthorizationProviderContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(AuthorizationProviderContracts.delete,
+@@clientLocation(
+  AuthorizationProviderContracts.delete,
   "AuthorizationProvider"
 );
-@@clientLocation(AuthorizationProviderContracts.listByService,
+@@clientLocation(
+  AuthorizationProviderContracts.listByService,
   "AuthorizationProvider"
 );
-@@clientLocation(AuthorizationProviderContracts.refreshSecret,
+@@clientLocation(
+  AuthorizationProviderContracts.refreshSecret,
   "AuthorizationProvider"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationProviderContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AuthorizationProviderContract.properties
 );
 
 @@clientLocation(AuthorizationContracts.get, "Authorization");
 @@clientLocation(AuthorizationContracts.createOrUpdate, "Authorization");
-@@clientName(AuthorizationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  AuthorizationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(AuthorizationContracts.delete, "Authorization");
-@@clientLocation(AuthorizationContracts.listByAuthorizationProvider,
+@@clientLocation(
+  AuthorizationContracts.listByAuthorizationProvider,
   "Authorization"
 );
 @@clientLocation(AuthorizationContracts.confirmConsentCode, "Authorization");
-@@clientName(AuthorizationContracts.confirmConsentCode::parameters.body,
+@@clientName(
+  AuthorizationContracts.confirmConsentCode::parameters.body,
   "parameters"
 );
 @@clientLocation(AuthorizationContracts.post, "AuthorizationLoginLinks");
 @@clientName(AuthorizationContracts.post::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AuthorizationContract.properties
 );
 
-@@clientLocation(AuthorizationAccessPolicyContracts.get,
+@@clientLocation(
+  AuthorizationAccessPolicyContracts.get,
   "AuthorizationAccessPolicy"
 );
-@@clientLocation(AuthorizationAccessPolicyContracts.createOrUpdate,
+@@clientLocation(
+  AuthorizationAccessPolicyContracts.createOrUpdate,
   "AuthorizationAccessPolicy"
 );
-@@clientName(AuthorizationAccessPolicyContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  AuthorizationAccessPolicyContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(AuthorizationAccessPolicyContracts.delete,
+@@clientLocation(
+  AuthorizationAccessPolicyContracts.delete,
   "AuthorizationAccessPolicy"
 );
-@@clientLocation(AuthorizationAccessPolicyContracts.listByAuthorization,
+@@clientLocation(
+  AuthorizationAccessPolicyContracts.listByAuthorization,
   "AuthorizationAccessPolicy"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationAccessPolicyContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AuthorizationAccessPolicyContract.properties
 );
 
 @@clientLocation(AuthorizationServerContracts.get, "AuthorizationServer");
-@@clientLocation(AuthorizationServerContracts.getEntityTag,
+@@clientLocation(
+  AuthorizationServerContracts.getEntityTag,
   "AuthorizationServer"
 );
-@@clientLocation(AuthorizationServerContracts.createOrUpdate,
+@@clientLocation(
+  AuthorizationServerContracts.createOrUpdate,
   "AuthorizationServer"
 );
-@@clientName(AuthorizationServerContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  AuthorizationServerContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(AuthorizationServerContracts.update, "AuthorizationServer");
-@@clientName(AuthorizationServerContracts.update::parameters.properties,
+@@clientName(
+  AuthorizationServerContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(AuthorizationServerContracts.delete, "AuthorizationServer");
-@@clientLocation(AuthorizationServerContracts.listByService,
+@@clientLocation(
+  AuthorizationServerContracts.listByService,
   "AuthorizationServer"
 );
-@@clientLocation(AuthorizationServerContracts.listSecrets,
+@@clientLocation(
+  AuthorizationServerContracts.listSecrets,
   "AuthorizationServer"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationServerContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AuthorizationServerContract.properties
 );
 
 @@clientLocation(BackendContracts.get, "Backend");
 @@clientLocation(BackendContracts.getEntityTag, "Backend");
 @@clientLocation(BackendContracts.createOrUpdate, "Backend");
-@@clientName(BackendContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  BackendContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(BackendContracts.update, "Backend");
@@ -647,7 +769,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(BackendContracts.listByService, "Backend");
 @@clientLocation(BackendContracts.reconnect, "Backend");
 @@clientName(BackendContracts.reconnect::parameters.body, "parameters");
-@@clientName(WorkspaceBackend.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceBackend.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceBackend.update::parameters.properties, "parameters");
@@ -668,158 +791,198 @@ using Microsoft.ApiManagement;
 @@clientLocation(CertificateContracts.get, "Certificate");
 @@clientLocation(CertificateContracts.getEntityTag, "Certificate");
 @@clientLocation(CertificateContracts.createOrUpdate, "Certificate");
-@@clientName(CertificateContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  CertificateContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(CertificateContracts.delete, "Certificate");
 @@clientLocation(CertificateContracts.listByService, "Certificate");
 @@clientLocation(CertificateContracts.refreshSecret, "Certificate");
-@@clientName(WorkspaceCertificate.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceCertificate.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CertificateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CertificateContract.properties
 );
 
 @@clientLocation(ContentTypeContracts.get, "ContentType");
 @@clientLocation(ContentTypeContracts.createOrUpdate, "ContentType");
-@@clientName(ContentTypeContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ContentTypeContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ContentTypeContracts.delete, "ContentType");
 @@clientLocation(ContentTypeContracts.listByService, "ContentType");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ContentTypeContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ContentTypeContract.properties
 );
 
 @@clientLocation(ContentItemContracts.get, "ContentItem");
 @@clientLocation(ContentItemContracts.getEntityTag, "ContentItem");
 @@clientLocation(ContentItemContracts.createOrUpdate, "ContentItem");
-@@clientName(ContentItemContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ContentItemContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ContentItemContracts.delete, "ContentItem");
 @@clientLocation(ContentItemContracts.listByService, "ContentItem");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ContentItemContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ContentItemContract.properties
 );
 
 @@clientLocation(DeletedServiceContracts.getByName, "DeletedServices");
 @@clientLocation(DeletedServiceContracts.purge, "DeletedServices");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeletedServiceContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DeletedServiceContract.properties
 );
 
 @@clientLocation(ApiManagementServiceResources.get, "ApiManagementService");
-@@clientLocation(ApiManagementServiceResources.createOrUpdate,
+@@clientLocation(
+  ApiManagementServiceResources.createOrUpdate,
   "ApiManagementService"
 );
-@@clientName(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.update, "ApiManagementService");
-@@clientName(ApiManagementServiceResources.update::parameters.properties,
+@@clientName(
+  ApiManagementServiceResources.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.delete, "ApiManagementService");
-@@clientLocation(ApiManagementServiceResources.listByResourceGroup,
+@@clientLocation(
+  ApiManagementServiceResources.listByResourceGroup,
   "ApiManagementService"
 );
 @@clientLocation(ApiManagementServiceResources.list, "ApiManagementService");
 @@clientLocation(ApiManagementServiceResources.listByService, "AllPolicies");
 @@clientLocation(ApiManagementServiceResources.listByTags, "Api");
-@@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
+@@clientLocation(
+  ApiManagementServiceResources.performConnectivityCheckAsync,
   ""
 );
-@@clientName(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "connectivityCheckRequestParams"
 );
-@@clientLocation(ApiManagementServiceResources.listAvailableServiceSkus,
+@@clientLocation(
+  ApiManagementServiceResources.listAvailableServiceSkus,
   "ApiManagementServiceSkus"
 );
 @@clientLocation(ApiManagementServiceResources.restore, "ApiManagementService");
-@@clientName(ApiManagementServiceResources.restore::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.restore::parameters.body,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.backup, "ApiManagementService");
-@@clientName(ApiManagementServiceResources.backup::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.backup::parameters.body,
   "parameters"
 );
-@@clientLocation(ApiManagementServiceResources.migrateToStv2,
+@@clientLocation(
+  ApiManagementServiceResources.migrateToStv2,
   "ApiManagementService"
 );
-@@clientName(ApiManagementServiceResources.migrateToStv2::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.migrateToStv2::parameters.body,
   "parameters"
 );
-@@clientLocation(ApiManagementServiceResources.getSsoToken,
+@@clientLocation(
+  ApiManagementServiceResources.getSsoToken,
   "ApiManagementService"
 );
-@@clientLocation(ApiManagementServiceResources.applyNetworkConfigurationUpdates,
+@@clientLocation(
+  ApiManagementServiceResources.applyNetworkConfigurationUpdates,
   "ApiManagementService"
 );
-@@clientName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "parameters"
 );
-@@clientLocation(ApiManagementServiceResources.refreshHostnames,
+@@clientLocation(
+  ApiManagementServiceResources.refreshHostnames,
   "ApiManagementService"
 );
-@@clientLocation(ApiManagementServiceResources.networkStatusListByService,
+@@clientLocation(
+  ApiManagementServiceResources.networkStatusListByService,
   "NetworkStatus"
 );
-@@clientName(ApiManagementServiceResources.networkStatusListByService,
+@@clientName(
+  ApiManagementServiceResources.networkStatusListByService,
   "ListByService"
 );
 @@clientLocation(ApiManagementServiceResources.listByLocation, "NetworkStatus");
-@@clientLocation(ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
+@@clientLocation(
+  ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
   "OutboundNetworkDependenciesEndpoints"
 );
-@@clientName(ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
+@@clientName(
+  ApiManagementServiceResources.outboundNetworkDependenciesEndpointsListByService,
   "ListByService"
 );
-@@clientLocation(ApiManagementServiceResources.policyDescriptionListByService,
+@@clientLocation(
+  ApiManagementServiceResources.policyDescriptionListByService,
   "PolicyDescription"
 );
-@@clientName(ApiManagementServiceResources.policyDescriptionListByService,
+@@clientName(
+  ApiManagementServiceResources.policyDescriptionListByService,
   "ListByService"
 );
-@@clientLocation(ApiManagementServiceResources.byService,
+@@clientLocation(
+  ApiManagementServiceResources.byService,
   "PolicyRestrictionValidations"
 );
-@@clientLocation(ApiManagementServiceResources.portalSettingsListByService,
+@@clientLocation(
+  ApiManagementServiceResources.portalSettingsListByService,
   "PortalSettings"
 );
-@@clientName(ApiManagementServiceResources.portalSettingsListByService,
+@@clientName(
+  ApiManagementServiceResources.portalSettingsListByService,
   "ListByService"
 );
 @@clientLocation(ApiManagementServiceResources.productListByTags, "Product");
 @@clientName(ApiManagementServiceResources.productListByTags, "ListByTags");
-@@clientLocation(ApiManagementServiceResources.quotaByCounterKeysListByService,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByCounterKeysListByService,
   "QuotaByCounterKeys"
 );
-@@clientName(ApiManagementServiceResources.quotaByCounterKeysListByService,
+@@clientName(
+  ApiManagementServiceResources.quotaByCounterKeysListByService,
   "ListByService"
 );
-@@clientLocation(ApiManagementServiceResources.quotaByCounterKeysUpdate,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate,
   "QuotaByCounterKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate, "Update");
 
-@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "parameters"
 );
-@@clientLocation(ApiManagementServiceResources.quotaByPeriodKeysGet,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByPeriodKeysGet,
   "QuotaByPeriodKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByPeriodKeysGet, "Get");
-@@clientLocation(ApiManagementServiceResources.quotaByPeriodKeysUpdate,
+@@clientLocation(
+  ApiManagementServiceResources.quotaByPeriodKeysUpdate,
   "QuotaByPeriodKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByPeriodKeysUpdate, "Update");
-@@clientName(ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
   "parameters"
 );
 @@clientLocation(ApiManagementServiceResources.regionListByService, "Region");
-@@clientName(ApiManagementServiceResources.regionListByService,
+@@clientName(
+  ApiManagementServiceResources.regionListByService,
   "ListByService"
 );
 @@clientLocation(ApiManagementServiceResources.listByApi, "Reports");
@@ -830,93 +993,116 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiManagementServiceResources.listBySubscription, "Reports");
 @@clientLocation(ApiManagementServiceResources.listByTime, "Reports");
 @@clientLocation(ApiManagementServiceResources.listByRequest, "Reports");
-@@clientLocation(ApiManagementServiceResources.tagResourceListByService,
+@@clientLocation(
+  ApiManagementServiceResources.tagResourceListByService,
   "TagResource"
 );
-@@clientName(ApiManagementServiceResources.tagResourceListByService,
+@@clientName(
+  ApiManagementServiceResources.tagResourceListByService,
   "ListByService"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementServiceResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiManagementServiceResource.properties
 );
 
 @@clientLocation(DocumentationContracts.get, "Documentation");
 @@clientLocation(DocumentationContracts.getEntityTag, "Documentation");
 @@clientLocation(DocumentationContracts.createOrUpdate, "Documentation");
-@@clientName(DocumentationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  DocumentationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(DocumentationContracts.update, "Documentation");
-@@clientName(DocumentationContracts.update::parameters.properties,
+@@clientName(
+  DocumentationContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(DocumentationContracts.delete, "Documentation");
 @@clientLocation(DocumentationContracts.listByService, "Documentation");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DocumentationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DocumentationContract.properties
 );
 
 @@clientLocation(EmailTemplateContracts.get, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.getEntityTag, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.createOrUpdate, "EmailTemplate");
-@@clientName(EmailTemplateContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  EmailTemplateContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(EmailTemplateContracts.update, "EmailTemplate");
-@@clientName(EmailTemplateContracts.update::parameters.properties,
+@@clientName(
+  EmailTemplateContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(EmailTemplateContracts.delete, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.listByService, "EmailTemplate");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EmailTemplateContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EmailTemplateContract.properties
 );
 
-@@clientLocation(ApiManagementGatewayConfigConnectionResources.get,
+@@clientLocation(
+  ApiManagementGatewayConfigConnectionResources.get,
   "ApiGatewayConfigConnection"
 );
-@@clientLocation(ApiManagementGatewayConfigConnectionResources.createOrUpdate,
+@@clientLocation(
+  ApiManagementGatewayConfigConnectionResources.createOrUpdate,
   "ApiGatewayConfigConnection"
 );
-@@clientName(ApiManagementGatewayConfigConnectionResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApiManagementGatewayConfigConnectionResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ApiManagementGatewayConfigConnectionResources.delete,
+@@clientLocation(
+  ApiManagementGatewayConfigConnectionResources.delete,
   "ApiGatewayConfigConnection"
 );
-@@clientLocation(ApiManagementGatewayConfigConnectionResources.listByGateway,
+@@clientLocation(
+  ApiManagementGatewayConfigConnectionResources.listByGateway,
   "ApiGatewayConfigConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayConfigConnectionResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiManagementGatewayConfigConnectionResource.properties
 );
 
-@@clientLocation(GatewayHostnameBindingResources.get,
+@@clientLocation(
+  GatewayHostnameBindingResources.get,
   "ApiGatewayHostnameBinding"
 );
-@@clientLocation(GatewayHostnameBindingResources.createOrUpdate,
+@@clientLocation(
+  GatewayHostnameBindingResources.createOrUpdate,
   "ApiGatewayHostnameBinding"
 );
-@@clientName(GatewayHostnameBindingResources.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayHostnameBindingResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GatewayHostnameBindingResources.delete,
+@@clientLocation(
+  GatewayHostnameBindingResources.delete,
   "ApiGatewayHostnameBinding"
 );
-@@clientLocation(GatewayHostnameBindingResources.listByGateway,
+@@clientLocation(
+  GatewayHostnameBindingResources.listByGateway,
   "ApiGatewayHostnameBinding"
 );
-@@clientLocation(GatewayHostnameBindingResources.refreshSecret,
+@@clientLocation(
+  GatewayHostnameBindingResources.refreshSecret,
   "ApiGatewayHostnameBinding"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayHostnameBindingResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GatewayHostnameBindingResource.properties
 );
 
 @@clientLocation(GatewayContracts.get, "Gateway");
 @@clientLocation(GatewayContracts.getEntityTag, "Gateway");
 @@clientLocation(GatewayContracts.createOrUpdate, "Gateway");
-@@clientName(GatewayContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(GatewayContracts.update, "Gateway");
@@ -930,7 +1116,8 @@ using Microsoft.ApiManagement;
 @@clientName(GatewayContracts.generateToken::parameters.body, "parameters");
 @@clientLocation(GatewayContracts.invalidateDebugCredentials, "Gateway");
 @@clientLocation(GatewayContracts.listDebugCredentials, "Gateway");
-@@clientName(GatewayContracts.listDebugCredentials::parameters.body,
+@@clientName(
+  GatewayContracts.listDebugCredentials::parameters.body,
   "parameters"
 );
 @@clientLocation(GatewayContracts.listTrace, "Gateway");
@@ -941,7 +1128,8 @@ using Microsoft.ApiManagement;
 @@clientName(GatewayContracts.gatewayApiGetEntityTag, "GetEntityTag");
 @@clientLocation(GatewayContracts.gatewayApiCreateOrUpdate, "GatewayApi");
 @@clientName(GatewayContracts.gatewayApiCreateOrUpdate, "CreateOrUpdate");
-@@clientName(GatewayContracts.gatewayApiCreateOrUpdate::parameters.body,
+@@clientName(
+  GatewayContracts.gatewayApiCreateOrUpdate::parameters.body,
   "parameters"
 );
 @@clientLocation(GatewayContracts.gatewayApiDelete, "GatewayApi");
@@ -949,48 +1137,62 @@ using Microsoft.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayContract.properties);
 
-@@clientLocation(GatewayHostnameConfigurationContracts.get,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.get,
   "GatewayHostnameConfiguration"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.getEntityTag,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.getEntityTag,
   "GatewayHostnameConfiguration"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.createOrUpdate,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.createOrUpdate,
   "GatewayHostnameConfiguration"
 );
-@@clientName(GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayHostnameConfigurationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.delete,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.delete,
   "GatewayHostnameConfiguration"
 );
-@@clientLocation(GatewayHostnameConfigurationContracts.listByService,
+@@clientLocation(
+  GatewayHostnameConfigurationContracts.listByService,
   "GatewayHostnameConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayHostnameConfigurationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GatewayHostnameConfigurationContract.properties
 );
 
-@@clientLocation(GatewayCertificateAuthorityContracts.get,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.get,
   "GatewayCertificateAuthority"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.getEntityTag,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.getEntityTag,
   "GatewayCertificateAuthority"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.createOrUpdate,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.createOrUpdate,
   "GatewayCertificateAuthority"
 );
-@@clientName(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.delete,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.delete,
   "GatewayCertificateAuthority"
 );
-@@clientLocation(GatewayCertificateAuthorityContracts.listByService,
+@@clientLocation(
+  GatewayCertificateAuthorityContracts.listByService,
   "GatewayCertificateAuthority"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayCertificateAuthorityContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GatewayCertificateAuthorityContract.properties
 );
 
 @@clientLocation(GroupContracts.get, "Group");
@@ -1037,18 +1239,21 @@ using Microsoft.ApiManagement;
 @@clientLocation(IdentityProviderContracts.get, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.getEntityTag, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.createOrUpdate, "IdentityProvider");
-@@clientName(IdentityProviderContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  IdentityProviderContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(IdentityProviderContracts.update, "IdentityProvider");
-@@clientName(IdentityProviderContracts.update::parameters.properties,
+@@clientName(
+  IdentityProviderContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(IdentityProviderContracts.delete, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.listByService, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.listSecrets, "IdentityProvider");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityProviderContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IdentityProviderContract.properties
 );
 
 @@clientLocation(LoggerContracts.get, "Logger");
@@ -1067,7 +1272,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(NamedValueContracts.get, "NamedValue");
 @@clientLocation(NamedValueContracts.getEntityTag, "NamedValue");
 @@clientLocation(NamedValueContracts.createOrUpdate, "NamedValue");
-@@clientName(NamedValueContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  NamedValueContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(NamedValueContracts.update, "NamedValue");
@@ -1076,273 +1282,344 @@ using Microsoft.ApiManagement;
 @@clientLocation(NamedValueContracts.listByService, "NamedValue");
 @@clientLocation(NamedValueContracts.listValue, "NamedValue");
 @@clientLocation(NamedValueContracts.refreshSecret, "NamedValue");
-@@clientName(WorkspaceNamedValue.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceNamedValue.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceNamedValue.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamedValueContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NamedValueContract.properties
 );
 
 @@clientLocation(NotificationContracts.get, "Notification");
 @@clientLocation(NotificationContracts.createOrUpdate, "Notification");
 @@clientLocation(NotificationContracts.listByService, "Notification");
-@@clientLocation(NotificationContracts.listByNotification,
+@@clientLocation(
+  NotificationContracts.listByNotification,
   "NotificationRecipientUser"
 );
-@@clientLocation(NotificationContracts.checkEntityExists,
+@@clientLocation(
+  NotificationContracts.checkEntityExists,
   "NotificationRecipientUser"
 );
-@@clientLocation(NotificationContracts.notificationRecipientUserCreateOrUpdate,
+@@clientLocation(
+  NotificationContracts.notificationRecipientUserCreateOrUpdate,
   "NotificationRecipientUser"
 );
-@@clientName(NotificationContracts.notificationRecipientUserCreateOrUpdate,
+@@clientName(
+  NotificationContracts.notificationRecipientUserCreateOrUpdate,
   "CreateOrUpdate"
 );
 @@clientLocation(NotificationContracts.delete, "NotificationRecipientUser");
-@@clientLocation(NotificationContracts.notificationRecipientEmailListByNotification,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailListByNotification,
   "NotificationRecipientEmail"
 );
-@@clientName(NotificationContracts.notificationRecipientEmailListByNotification,
+@@clientName(
+  NotificationContracts.notificationRecipientEmailListByNotification,
   "ListByNotification"
 );
-@@clientLocation(NotificationContracts.notificationRecipientEmailCheckEntityExists,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailCheckEntityExists,
   "NotificationRecipientEmail"
 );
-@@clientName(NotificationContracts.notificationRecipientEmailCheckEntityExists,
+@@clientName(
+  NotificationContracts.notificationRecipientEmailCheckEntityExists,
   "CheckEntityExists"
 );
-@@clientLocation(NotificationContracts.notificationRecipientEmailCreateOrUpdate,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailCreateOrUpdate,
   "NotificationRecipientEmail"
 );
-@@clientName(NotificationContracts.notificationRecipientEmailCreateOrUpdate,
+@@clientName(
+  NotificationContracts.notificationRecipientEmailCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientLocation(NotificationContracts.notificationRecipientEmailDelete,
+@@clientLocation(
+  NotificationContracts.notificationRecipientEmailDelete,
   "NotificationRecipientEmail"
 );
 @@clientName(NotificationContracts.notificationRecipientEmailDelete, "Delete");
-@@clientLocation(WorkspaceNotification.listByNotification,
+@@clientLocation(
+  WorkspaceNotification.listByNotification,
   "WorkspaceNotificationRecipientUser"
 );
-@@clientLocation(WorkspaceNotification.checkEntityExists,
+@@clientLocation(
+  WorkspaceNotification.checkEntityExists,
   "WorkspaceNotificationRecipientUser"
 );
-@@clientLocation(WorkspaceNotification.workspaceNotificationRecipientUserCreateOrUpdate,
+@@clientLocation(
+  WorkspaceNotification.workspaceNotificationRecipientUserCreateOrUpdate,
   "WorkspaceNotificationRecipientUser"
 );
-@@clientName(WorkspaceNotification.workspaceNotificationRecipientUserCreateOrUpdate,
+@@clientName(
+  WorkspaceNotification.workspaceNotificationRecipientUserCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientLocation(WorkspaceNotification.delete,
+@@clientLocation(
+  WorkspaceNotification.delete,
   "WorkspaceNotificationRecipientUser"
 );
-@@clientLocation(WorkspaceNotification.workspaceNotificationRecipientEmailListByNotification,
+@@clientLocation(
+  WorkspaceNotification.workspaceNotificationRecipientEmailListByNotification,
   "WorkspaceNotificationRecipientEmail"
 );
-@@clientName(WorkspaceNotification.workspaceNotificationRecipientEmailListByNotification,
+@@clientName(
+  WorkspaceNotification.workspaceNotificationRecipientEmailListByNotification,
   "ListByNotification"
 );
-@@clientLocation(WorkspaceNotification.workspaceNotificationRecipientEmailCheckEntityExists,
+@@clientLocation(
+  WorkspaceNotification.workspaceNotificationRecipientEmailCheckEntityExists,
   "WorkspaceNotificationRecipientEmail"
 );
-@@clientName(WorkspaceNotification.workspaceNotificationRecipientEmailCheckEntityExists,
+@@clientName(
+  WorkspaceNotification.workspaceNotificationRecipientEmailCheckEntityExists,
   "CheckEntityExists"
 );
-@@clientLocation(WorkspaceNotification.workspaceNotificationRecipientEmailCreateOrUpdate,
+@@clientLocation(
+  WorkspaceNotification.workspaceNotificationRecipientEmailCreateOrUpdate,
   "WorkspaceNotificationRecipientEmail"
 );
-@@clientName(WorkspaceNotification.workspaceNotificationRecipientEmailCreateOrUpdate,
+@@clientName(
+  WorkspaceNotification.workspaceNotificationRecipientEmailCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientLocation(WorkspaceNotification.workspaceNotificationRecipientEmailDelete,
+@@clientLocation(
+  WorkspaceNotification.workspaceNotificationRecipientEmailDelete,
   "WorkspaceNotificationRecipientEmail"
 );
-@@clientName(WorkspaceNotification.workspaceNotificationRecipientEmailDelete,
+@@clientName(
+  WorkspaceNotification.workspaceNotificationRecipientEmailDelete,
   "Delete"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NotificationContract.properties
 );
 
 @@clientLocation(OpenidConnectProviderContracts.get, "OpenIdConnectProvider");
-@@clientLocation(OpenidConnectProviderContracts.getEntityTag,
+@@clientLocation(
+  OpenidConnectProviderContracts.getEntityTag,
   "OpenIdConnectProvider"
 );
-@@clientLocation(OpenidConnectProviderContracts.createOrUpdate,
+@@clientLocation(
+  OpenidConnectProviderContracts.createOrUpdate,
   "OpenIdConnectProvider"
 );
-@@clientName(OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  OpenidConnectProviderContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(OpenidConnectProviderContracts.update,
+@@clientLocation(
+  OpenidConnectProviderContracts.update,
   "OpenIdConnectProvider"
 );
-@@clientName(OpenidConnectProviderContracts.update::parameters.properties,
+@@clientName(
+  OpenidConnectProviderContracts.update::parameters.properties,
   "parameters"
 );
-@@clientLocation(OpenidConnectProviderContracts.delete,
+@@clientLocation(
+  OpenidConnectProviderContracts.delete,
   "OpenIdConnectProvider"
 );
-@@clientLocation(OpenidConnectProviderContracts.listByService,
+@@clientLocation(
+  OpenidConnectProviderContracts.listByService,
   "OpenIdConnectProvider"
 );
-@@clientLocation(OpenidConnectProviderContracts.listSecrets,
+@@clientLocation(
+  OpenidConnectProviderContracts.listSecrets,
   "OpenIdConnectProvider"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OpenidConnectProviderContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OpenidConnectProviderContract.properties
 );
 
 @@clientLocation(PolicyFragmentContracts.get, "PolicyFragment");
 @@clientLocation(PolicyFragmentContracts.getEntityTag, "PolicyFragment");
 @@clientLocation(PolicyFragmentContracts.createOrUpdate, "PolicyFragment");
-@@clientName(PolicyFragmentContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  PolicyFragmentContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PolicyFragmentContracts.delete, "PolicyFragment");
 @@clientLocation(PolicyFragmentContracts.listByService, "PolicyFragment");
 @@clientLocation(PolicyFragmentContracts.listReferences, "PolicyFragment");
-@@clientName(WorkspacePolicyFragment.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspacePolicyFragment.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyFragmentContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PolicyFragmentContract.properties
 );
 
 @@clientLocation(PolicyRestrictionContracts.get, "PolicyRestriction");
 @@clientLocation(PolicyRestrictionContracts.getEntityTag, "PolicyRestriction");
-@@clientLocation(PolicyRestrictionContracts.createOrUpdate,
+@@clientLocation(
+  PolicyRestrictionContracts.createOrUpdate,
   "PolicyRestriction"
 );
-@@clientName(PolicyRestrictionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  PolicyRestrictionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PolicyRestrictionContracts.update, "PolicyRestriction");
-@@clientName(PolicyRestrictionContracts.update::parameters.properties,
+@@clientName(
+  PolicyRestrictionContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(PolicyRestrictionContracts.delete, "PolicyRestriction");
 @@clientLocation(PolicyRestrictionContracts.listByService, "PolicyRestriction");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyRestrictionContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PolicyRestrictionContract.properties
 );
 
 @@clientLocation(PortalConfigContracts.get, "PortalConfig");
 @@clientLocation(PortalConfigContracts.getEntityTag, "PortalConfig");
 @@clientLocation(PortalConfigContracts.createOrUpdate, "PortalConfig");
-@@clientName(PortalConfigContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  PortalConfigContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PortalConfigContracts.update, "PortalConfig");
 @@clientName(PortalConfigContracts.update::parameters.properties, "parameters");
 @@clientLocation(PortalConfigContracts.listByService, "PortalConfig");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalConfigContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PortalConfigContract.properties
 );
 
 @@clientLocation(ClientApplicationContracts.get, "ClientApplication");
 @@clientLocation(ClientApplicationContracts.getEntityTag, "ClientApplication");
-@@clientLocation(ClientApplicationContracts.createOrUpdate,
+@@clientLocation(
+  ClientApplicationContracts.createOrUpdate,
   "ClientApplication"
 );
-@@clientName(ClientApplicationContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ClientApplicationContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ClientApplicationContracts.delete, "ClientApplication");
 @@clientLocation(ClientApplicationContracts.listByService, "ClientApplication");
 @@clientLocation(ClientApplicationContracts.listSecrets, "ClientApplication");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClientApplicationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClientApplicationContract.properties
 );
 
-@@clientLocation(ClientApplicationProductLinkContracts.get,
+@@clientLocation(
+  ClientApplicationProductLinkContracts.get,
   "ClientApplicationProductLink"
 );
-@@clientLocation(ClientApplicationProductLinkContracts.create,
+@@clientLocation(
+  ClientApplicationProductLinkContracts.create,
   "ClientApplicationProductLink"
 );
-@@clientName(ClientApplicationProductLinkContracts.create::parameters.resource,
+@@clientName(
+  ClientApplicationProductLinkContracts.create::parameters.resource,
   "parameters"
 );
-@@clientLocation(ClientApplicationProductLinkContracts.delete,
+@@clientLocation(
+  ClientApplicationProductLinkContracts.delete,
   "ClientApplicationProductLink"
 );
-@@clientLocation(ClientApplicationProductLinkContracts.listByClientApplications,
+@@clientLocation(
+  ClientApplicationProductLinkContracts.listByClientApplications,
   "ClientApplicationProductLink"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClientApplicationProductLinkContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClientApplicationProductLinkContract.properties
 );
 
 @@clientLocation(PortalRevisionContracts.get, "PortalRevision");
 @@clientLocation(PortalRevisionContracts.getEntityTag, "PortalRevision");
 @@clientLocation(PortalRevisionContracts.createOrUpdate, "PortalRevision");
-@@clientName(PortalRevisionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  PortalRevisionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(PortalRevisionContracts.update, "PortalRevision");
-@@clientName(PortalRevisionContracts.update::parameters.properties,
+@@clientName(
+  PortalRevisionContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(PortalRevisionContracts.listByService, "PortalRevision");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalRevisionContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PortalRevisionContract.properties
 );
 
 @@clientName(SignInSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignInSettings.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalSigninSettings.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PortalSigninSettings.properties
 );
 
 @@clientName(SignUpSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignUpSettings.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalSignupSettings.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PortalSignupSettings.properties
 );
 
-@@clientName(DelegationSettings.createOrUpdate::parameters.resource,
+@@clientName(
+  DelegationSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(DelegationSettings.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalDelegationSettings.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PortalDelegationSettings.properties
 );
 
-@@clientLocation(PrivateEndpointConnections.getByName,
+@@clientLocation(
+  PrivateEndpointConnections.getByName,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateEndpointConnections.createOrUpdate,
+@@clientLocation(
+  PrivateEndpointConnections.createOrUpdate,
   "PrivateEndpointConnection"
 );
-@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "privateEndpointConnectionRequest"
 );
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateEndpointConnections.listByService,
+@@clientLocation(
+  PrivateEndpointConnections.listByService,
   "PrivateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
-@@clientLocation(PrivateLinkResources.getPrivateLinkResource,
+@@clientLocation(
+  PrivateLinkResources.getPrivateLinkResource,
   "PrivateEndpointConnection"
 );
-@@clientLocation(PrivateLinkResources.listPrivateLinkResources,
+@@clientLocation(
+  PrivateLinkResources.listPrivateLinkResources,
   "PrivateEndpointConnection"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties
 );
 
 @@clientLocation(SubscriptionContracts.get, "Subscription");
 @@clientLocation(SubscriptionContracts.getEntityTag, "Subscription");
 @@clientLocation(SubscriptionContracts.createOrUpdate, "Subscription");
-@@clientName(SubscriptionContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  SubscriptionContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(SubscriptionContracts.update, "Subscription");
@@ -1352,133 +1629,162 @@ using Microsoft.ApiManagement;
 @@clientLocation(SubscriptionContracts.regeneratePrimaryKey, "Subscription");
 @@clientLocation(SubscriptionContracts.regenerateSecondaryKey, "Subscription");
 @@clientLocation(SubscriptionContracts.listSecrets, "Subscription");
-@@clientName(WorkspaceSubscription.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceSubscription.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(WorkspaceSubscription.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SubscriptionContract.properties
 );
 
 @@clientLocation(ProductApiLinkContracts.get, "ProductApiLink");
 @@clientLocation(ProductApiLinkContracts.createOrUpdate, "ProductApiLink");
-@@clientName(ProductApiLinkContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ProductApiLinkContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ProductApiLinkContracts.delete, "ProductApiLink");
 @@clientLocation(ProductApiLinkContracts.listByProduct, "ProductApiLink");
-@@clientName(WorkspaceProductApiLink.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceProductApiLink.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductApiLinkContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProductApiLinkContract.properties
 );
 
 @@clientLocation(ProductGroupLinkContracts.get, "ProductGroupLink");
 @@clientLocation(ProductGroupLinkContracts.createOrUpdate, "ProductGroupLink");
-@@clientName(ProductGroupLinkContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  ProductGroupLinkContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(ProductGroupLinkContracts.delete, "ProductGroupLink");
 @@clientLocation(ProductGroupLinkContracts.listByProduct, "ProductGroupLink");
-@@clientName(WorkspaceProductGroupLink.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceProductGroupLink.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductGroupLinkContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ProductGroupLinkContract.properties
 );
 
 @@clientLocation(GlobalSchemaContracts.get, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.getEntityTag, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.createOrUpdate, "GlobalSchema");
-@@clientName(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(GlobalSchemaContracts.delete, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.listByService, "GlobalSchema");
-@@clientName(WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalSchemaContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GlobalSchemaContract.properties
 );
 
 @@clientLocation(TenantSettingsContracts.get, "TenantSettings");
 @@clientLocation(TenantSettingsContracts.listByService, "TenantSettings");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TenantSettingsContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TenantSettingsContract.properties
 );
 
 @@clientLocation(TagApiLinkContracts.get, "TagApiLink");
 @@clientLocation(TagApiLinkContracts.createOrUpdate, "TagApiLink");
-@@clientName(TagApiLinkContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  TagApiLinkContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagApiLinkContracts.delete, "TagApiLink");
 @@clientLocation(TagApiLinkContracts.listByProduct, "TagApiLink");
-@@clientName(WorkspaceTagApiLink.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceTagApiLink.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagApiLinkContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TagApiLinkContract.properties
 );
 
 @@clientLocation(TagOperationLinkContracts.get, "TagOperationLink");
 @@clientLocation(TagOperationLinkContracts.createOrUpdate, "TagOperationLink");
-@@clientName(TagOperationLinkContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  TagOperationLinkContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagOperationLinkContracts.delete, "TagOperationLink");
 @@clientLocation(TagOperationLinkContracts.listByProduct, "TagOperationLink");
-@@clientName(WorkspaceTagOperationLink.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceTagOperationLink.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagOperationLinkContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TagOperationLinkContract.properties
 );
 
 @@clientLocation(TagProductLinkContracts.get, "TagProductLink");
 @@clientLocation(TagProductLinkContracts.createOrUpdate, "TagProductLink");
-@@clientName(TagProductLinkContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  TagProductLinkContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(TagProductLinkContracts.delete, "TagProductLink");
 @@clientLocation(TagProductLinkContracts.listByProduct, "TagProductLink");
-@@clientName(WorkspaceTagProductLink.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceTagProductLink.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagProductLinkContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  TagProductLinkContract.properties
 );
 
 @@clientLocation(AccessInformationContracts.get, "TenantAccess");
 @@clientLocation(AccessInformationContracts.getEntityTag, "TenantAccess");
 @@clientLocation(AccessInformationContracts.create, "TenantAccess");
-@@clientName(AccessInformationContracts.create::parameters.resource,
+@@clientName(
+  AccessInformationContracts.create::parameters.resource,
   "parameters"
 );
 @@clientLocation(AccessInformationContracts.update, "TenantAccess");
-@@clientName(AccessInformationContracts.update::parameters.properties,
+@@clientName(
+  AccessInformationContracts.update::parameters.properties,
   "parameters"
 );
 @@clientLocation(AccessInformationContracts.listByService, "TenantAccess");
-@@clientLocation(AccessInformationContracts.regeneratePrimaryKey,
+@@clientLocation(
+  AccessInformationContracts.regeneratePrimaryKey,
   "TenantAccess"
 );
-@@clientLocation(AccessInformationContracts.regenerateSecondaryKey,
+@@clientLocation(
+  AccessInformationContracts.regenerateSecondaryKey,
   "TenantAccess"
 );
 @@clientLocation(AccessInformationContracts.listSecrets, "TenantAccess");
-@@clientLocation(AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
+@@clientLocation(
+  AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
   "TenantAccessGit"
 );
-@@clientName(AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
+@@clientName(
+  AccessInformationContracts.tenantAccessGitRegeneratePrimaryKey,
   "RegeneratePrimaryKey"
 );
-@@clientLocation(AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
+@@clientLocation(
+  AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
   "TenantAccessGit"
 );
-@@clientName(AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
+@@clientName(
+  AccessInformationContracts.tenantAccessGitRegenerateSecondaryKey,
   "RegenerateSecondaryKey"
 );
 @@clientLocation(AccessInformationContracts.deploy, "TenantConfiguration");
@@ -1486,30 +1792,37 @@ using Microsoft.ApiManagement;
 @@clientLocation(AccessInformationContracts.save, "TenantConfiguration");
 @@clientName(AccessInformationContracts.save::parameters.body, "parameters");
 @@clientLocation(AccessInformationContracts.validate, "TenantConfiguration");
-@@clientName(AccessInformationContracts.validate::parameters.body,
+@@clientName(
+  AccessInformationContracts.validate::parameters.body,
   "parameters"
 );
-@@clientLocation(AccessInformationContracts.getSyncState,
+@@clientLocation(
+  AccessInformationContracts.getSyncState,
   "TenantConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccessInformationContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AccessInformationContract.properties
 );
 
-@@clientLocation(ApiManagementWorkspaceLinksResources.get,
+@@clientLocation(
+  ApiManagementWorkspaceLinksResources.get,
   "ApiManagementWorkspaceLink"
 );
-@@clientLocation(ApiManagementWorkspaceLinksResources.listByService,
+@@clientLocation(
+  ApiManagementWorkspaceLinksResources.listByService,
   "ApiManagementWorkspaceLinks"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementWorkspaceLinksResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApiManagementWorkspaceLinksResource.properties
 );
 
 @@clientLocation(WorkspaceContracts.get, "Workspace");
 @@clientLocation(WorkspaceContracts.getEntityTag, "Workspace");
 @@clientLocation(WorkspaceContracts.createOrUpdate, "Workspace");
-@@clientName(WorkspaceContracts.createOrUpdate::parameters.resource,
+@@clientName(
+  WorkspaceContracts.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(WorkspaceContracts.update, "Workspace");
@@ -1517,19 +1830,23 @@ using Microsoft.ApiManagement;
 @@clientLocation(WorkspaceContracts.delete, "Workspace");
 @@clientLocation(WorkspaceContracts.listByService, "Workspace");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspaceContract.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkspaceContract.properties
 );
 
 @@clientLocation(ApiExportOperationGroup.get, "ApiExport");
 
-@@clientLocation(DeletedServicesOperationGroup.listBySubscription,
+@@clientLocation(
+  DeletedServicesOperationGroup.listBySubscription,
   "DeletedServices"
 );
 
-@@clientLocation(ApiManagementServiceOperationGroup.checkNameAvailability,
+@@clientLocation(
+  ApiManagementServiceOperationGroup.checkNameAvailability,
   "ApiManagementService"
 );
-@@clientLocation(ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier,
+@@clientLocation(
+  ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier,
   "ApiManagementService"
 );
 
@@ -1543,20 +1860,25 @@ using Microsoft.ApiManagement;
 
 @@clientLocation(Operations.list, "ApiManagementOperations");
 
-@@clientName(ApiManagementServiceOperationGroup.checkNameAvailability::parameters.body,
+@@clientName(
+  ApiManagementServiceOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
 @@doc(Azure.ResourceManager.ArmLroLocationHeader.location, "Location header");
-@@TypeSpec.Http.header(Azure.ResourceManager.ArmLroLocationHeader.location,
+@@TypeSpec.Http.header(
+  Azure.ResourceManager.ArmLroLocationHeader.location,
   "location"
 );
-@@TypeSpec.Http.header(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+@@TypeSpec.Http.header(
+  Azure.ResourceManager.ArmCombinedLroHeaders.location,
   "location"
 );
-@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+@@doc(
+  Azure.ResourceManager.ArmCombinedLroHeaders.location,
   "Location header contains the URL where the status of the long running operation can be checked"
 );
-@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
+@@doc(
+  Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
   "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked"
 );
 @@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location, "Location header");
@@ -1565,6 +1887,7 @@ using Microsoft.ApiManagement;
 @@clientName(GlobalSchemaContractProperties.schemaType, "SchemaType");
 @@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings", "!python");
 @@clientName(LlmMessageLogTypes, "Llm-message-log-types", "!python");
-@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+@@clientName(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "parameters"
 );

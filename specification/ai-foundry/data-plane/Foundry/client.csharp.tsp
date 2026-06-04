@@ -70,12 +70,14 @@ namespace Azure.AI.Projects;
 @@clientName(Index, "AIProjectIndex", "csharp");
 @@clientName(CosmosDBIndex, "AIProjectCosmosDBIndex", "csharp");
 @@clientName(BaseCredentials, "AIProjectConnectionBaseCredential", "csharp");
-@@clientName(ApiKeyCredentials,
+@@clientName(
+  ApiKeyCredentials,
   "AIProjectConnectionApiKeyCredential",
   "csharp"
 );
 @@clientName(CustomCredential, "AIProjectConnectionCustomCredential", "csharp");
-@@clientName(EntraIDCredentials,
+@@clientName(
+  EntraIDCredentials,
   "AIProjectConnectionEntraIdCredential",
   "csharp"
 );
@@ -96,7 +98,8 @@ namespace Azure.AI.Projects;
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Connections.get, "getConnection", "csharp");
-@@clientName(Connections.getWithCredentials,
+@@clientName(
+  Connections.getWithCredentials,
   "getConnectionWithCredentials",
   "csharp"
 );
@@ -116,7 +119,8 @@ namespace Azure.AI.Projects;
 @@access(Connections.getWithCredentials, Access.internal);
 
 // The fix for ambiguous import of OperationState
-@@clientName(Azure.Core.Foundations.OperationState,
+@@clientName(
+  Azure.Core.Foundations.OperationState,
   "operationStatus",
   "csharp"
 );
@@ -125,7 +129,8 @@ namespace Azure.AI.Projects;
 
 @@clientName(AttackStrategy.ROT13, "Rot13", "csharp");
 
-@@alternateType(DayOfWeek,
+@@alternateType(
+  DayOfWeek,
   {
     identity: "System.DayOfWeek",
   },
@@ -135,7 +140,8 @@ namespace Azure.AI.Projects;
 @@access(OpenAI.DetailEnum, Access.internal);
 @@clientName(OpenAI.DetailEnum, "InternalImageDetailLevel");
 @@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
-@@clientName(OpenAI.InputImageContentParamAutoParam,
+@@clientName(
+  OpenAI.InputImageContentParamAutoParam,
   "InternalInputImageContentParamAutoParam"
 );
 // --------------------------------------------------------------------------------
@@ -161,11 +167,13 @@ namespace Azure.AI.Projects;
 
 @@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
 
-@@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
+@@clientName(
+  MemoryStoreDefaultOptions.chat_summary_enabled,
   "IsChatSummaryEnabled",
   "csharp"
 );
-@@clientName(MemoryStoreDefaultOptions.user_profile_enabled,
+@@clientName(
+  MemoryStoreDefaultOptions.user_profile_enabled,
   "IsUserProfileEnabled",
   "csharp"
 );
@@ -214,12 +222,23 @@ namespace Azure.AI.Projects;
 @@clientName(Models.listLatest, "getLatestModelVersions", "csharp");
 @@clientName(Models.deleteVersion, "deleteModelVersion", "csharp");
 @@clientName(Models.createOrUpdateVersion, "updateModelVersion", "csharp");
-@@clientName(Models.createAsync, "createModelVersionAsync", "csharp");
+@@clientName(Models.createAsync, "createModelVersionRequest", "csharp");
 @@clientName(Models.startPendingUpload, "startModelPendingUpload", "csharp");
 @@clientName(Models.getCredentials, "getModelCredentials", "csharp");
+
+@@usage(UpdateModelVersionRequest, Usage.input | Usage.output);
+@@access(UpdateModelVersionRequest, Access.public);
+@@clientName(UpdateModelVersionRequest, "UpdateModelVersionOptions");
 
 // --------------------------------------------------------------------------------
 // Routines sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Routines, "AIProjectRoutines");
 @@clientName(Routine, "ProjectsRoutine");
+@@access(Routines.createOrUpdateRoutine, Access.internal);
+@@access(Routines.getRoutine, Access.internal);
+@@access(Routines.enableRoutine, Access.internal);
+@@access(Routines.disableRoutine, Access.internal);
+@@access(Routines.deleteRoutine, Access.internal);
+@@clientName(Routines.dispatchRoutineAsync, "dispatchAsyncRoutine", "csharp");
+@@access(Routines.dispatchRoutineAsync, Access.internal);

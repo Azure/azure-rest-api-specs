@@ -58,6 +58,7 @@ interface NetworkPacketBrokers {
 }
 
 @@doc(NetworkPacketBrokers.create::parameters.resource, "Request payload.");
-@@doc(NetworkPacketBrokers.update::parameters.properties,
+@@doc(
+  NetworkPacketBrokers.update::parameters.properties,
   "Network Packet Broker properties to update."
 );

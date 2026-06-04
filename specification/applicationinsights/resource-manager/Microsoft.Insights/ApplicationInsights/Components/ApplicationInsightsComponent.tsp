@@ -144,18 +144,23 @@ interface ComponentPurgeStatusOperationGroup {
   ): ArmResponse<ComponentPurgeStatusResponse> | ErrorResponseComponents;
 }
 
-@@doc(ApplicationInsightsComponent.name,
+@@doc(
+  ApplicationInsightsComponent.name,
   "The name of the Application Insights component resource."
 );
-@@doc(ApplicationInsightsComponent.properties,
+@@doc(
+  ApplicationInsightsComponent.properties,
   "Properties that define an Application Insights component resource."
 );
-@@doc(ApplicationInsightsComponents.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationInsightsComponents.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create an Application Insights component."
 );
-@@doc(ApplicationInsightsComponents.updateTags::parameters.properties,
+@@doc(
+  ApplicationInsightsComponents.updateTags::parameters.properties,
   "Updated tag information to set into the component instance."
 );
-@@doc(ApplicationInsightsComponents.purge::parameters.body,
+@@doc(
+  ApplicationInsightsComponents.purge::parameters.body,
   "Describes the body of a request to purge data in a single table of an Application Insights component"
 );

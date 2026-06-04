@@ -286,6 +286,9 @@ union AgentProtocol {
   responses: "responses",
   mcp: "mcp",
   invocations: "invocations",
+
+  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
+  invocations_ws: "invocations_ws",
 }
 
 union AgentEndpointProtocol {
@@ -297,7 +300,6 @@ union AgentEndpointProtocol {
   invocations: "invocations",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
-  @removed(Versions.v1)
   invocations_ws: "invocations_ws",
 }
 
@@ -610,7 +612,7 @@ model StructuredInputDefinition {
   @doc("The JSON schema for the structured input (optional).")
   schema?: Record<unknown>;
 
-  @doc("Whether the input property is required when the agent is invoked. Defaults to `false`.")
+  @doc("Whether the input property is required when the agent is invoked. The service defaults to `false` if a value is not specified by the caller.")
   required?: boolean = false;
 }
 
@@ -976,9 +978,6 @@ union AgentSessionStatus {
 
   /** Session initialization or lifecycle handling failed and requires delete to recover. */
   Failed: "failed",
-
-  /** Session is being stopped */
-  Stopping: "stopping",
 
   /** Session is being deleted (cleanup in progress). */
   Deleting: "deleting",

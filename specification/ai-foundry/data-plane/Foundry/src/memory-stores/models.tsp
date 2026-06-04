@@ -107,7 +107,7 @@ model MemoryStoreDefaultOptions {
   @doc("Whether to enable chat summary extraction and storage. Defaults to `true`.")
   chat_summary_enabled: boolean = true;
 
-  @doc("Whether to enable procedural memory extraction and storage. Defaults to `true`.")
+  @doc("Whether to enable procedural memory extraction and storage. The service defaults to `true` if a value is not specified by the caller.")
   procedural_memory_enabled?: boolean = true;
 
   @doc("The default time-to-live for memories in seconds. A value of `0` indicates that memories do not expire. Defaults to `0`.")

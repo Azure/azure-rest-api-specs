@@ -76,12 +76,15 @@ interface NetworkInterfaces {
 }
 
 @@doc(NetworkInterfaces.create::parameters.resource, "Request payload.");
-@@doc(NetworkInterfaces.update::parameters.properties,
+@@doc(
+  NetworkInterfaces.update::parameters.properties,
   "NetworkInterface properties to update. Only tags are supported."
 );
-@@doc(NetworkInterfaces.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  NetworkInterfaces.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(NetworkInterfaces.updateAdministrativeState::parameters.body,
+@@doc(
+  NetworkInterfaces.updateAdministrativeState::parameters.body,
   "Request payload."
 );
