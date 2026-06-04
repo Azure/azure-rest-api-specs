@@ -2575,8 +2575,3 @@ op replaceprivateDnsZoneGroupsList(
   CommonTypes.ProxyResource,
   "java"
 );
-
-@@clientName(
-  SecurityPerimeterResource.systemData,
-  "SecurityPerimeterSystemData"
-);
