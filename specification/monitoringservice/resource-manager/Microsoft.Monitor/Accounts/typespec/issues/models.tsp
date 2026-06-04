@@ -396,7 +396,6 @@ model IssueResourceUpdate {
   properties?: IssuePropertiesUpdate;
 }
 
-@@clientName(ListParameter, "ListParameterContent", "csharp");
 @doc("Parameters for listing related entities")
 model ListParameter {
   @doc("The filter to apply on the operation. For example, to filter by relevance, use \"$filter=relevance eq 'Relevant'\". Note: this property is currently a placeholder and is not in use.")

@@ -11,8 +11,7 @@ using Microsoft.Monitor;
 
 @@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.Origin,
+@@clientName(Azure.ResourceManager.CommonTypes.Origin,
   "ArmOrigin",
   "python,go,javascript"
 );
@@ -21,6 +20,61 @@ using Microsoft.Monitor;
 @@clientName(AzureMonitorWorkspace, "MonitorWorkspaceProperties", "csharp");
 @@clientName(IssueResource, "MonitorIssue", "csharp");
 @@clientName(IssueProperties, "MonitorIssueProperties", "csharp");
+@@clientName(MetricsContainerResource, "MonitorMetricsContainer", "csharp");
+@@clientName(MetricsContainer, "MonitorMetricsContainerProperties", "csharp");
+@@clientName(AddedByType, "MonitorEntityType", "csharp");
+@@clientName(Origin, "MonitorEntityOrigin", "csharp");
+@@clientName(AzureMonitorWorkspaceDefaultIngestionSettings,
+  "MonitorWorkspaceDefaultIngestionSettings",
+  "csharp"
+);
+@@clientName(AzureMonitorWorkspaceMetrics, "MonitorWorkspaceMetrics", "csharp");
+@@clientName(Background, "MonitorIssueBackground", "csharp");
+@@clientName(BackgroundDetails, "MonitorIssueBackgroundDetails", "csharp");
+@@clientName(BackgroundVisualization,
+  "MonitorIssueBackgroundVisualization",
+  "csharp"
+);
+@@clientName(FetchInvestigationResultParameters,
+  "FetchInvestigationResultContent",
+  "csharp"
+);
+@@clientName(InvestigationMetadata, "IssueInvestigationMetadata", "csharp");
+@@clientName(InvestigationResult, "IssueInvestigationResult", "csharp");
+@@clientName(IssuePropertiesUpdate, "MonitorIssuePatchProperties", "csharp");
+@@clientName(IssueResourceUpdate, "MonitorIssuePatch", "csharp");
+@@clientName(ListParameter, "IssueListContent", "csharp");
+@@clientName(Notifications, "IssueNotifications", "csharp");
+@@clientName(RelatedAlert, "IssueRelatedAlertProperties", "csharp");
+@@clientName(RelatedAlerts, "IssueRelatedAlertPropertiesList", "csharp");
+@@clientName(RelatedResource, "IssueRelatedResourceProperties", "csharp");
+@@clientName(RelatedResources, "IssueRelatedResourcePropertiesList", "csharp");
+@@clientName(Relevance, "MonitorRelevanceStatus", "csharp");
+@@clientName(Status, "MonitorIssueStatus", "csharp");
+@@clientName(PublicNetworkAccess,
+  "MonitorWorkspacePublicNetworkAccess",
+  "csharp"
+);
+@@clientName(UpdateType, "IssueNotificationUpdateType", "csharp");
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "MonitorWorkspaceProvisioningState",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+  "MonitorWorkspacePrivateEndpointConnectionProperties",
+  "csharp"
+);
+
+@@clientName(Issue.addInvestigationResult::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(Issue.addOrUpdateAlerts::parameters.body, "content", "csharp");
+@@clientName(Issue.addOrUpdateResources::parameters.body, "content", "csharp");
+@@clientName(Issue.setBackgroundVisualization::parameters.body,
+  "content",
+  "csharp"
+);
 
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties,
@@ -102,24 +156,19 @@ namespace Microsoft.Monitor {
   }
 }
 
-@@alternateType(
-  Issue.create::parameters.resource,
+@@alternateType(Issue.create::parameters.resource,
   IssueResourceCreate,
   "javascript"
 );
-@@alternateType(
-  Issue.setBackgroundVisualization::parameters.body,
+@@alternateType(Issue.setBackgroundVisualization::parameters.body,
   BackgroundVisualizationCreate,
   "javascript"
 );
-@@alternateType(
-  Issue.addOrUpdateAlerts::parameters.body,
+@@alternateType(Issue.addOrUpdateAlerts::parameters.body,
   RelatedAlertsCreate,
   "javascript"
 );
-@@alternateType(
-  Issue.addOrUpdateResources::parameters.body,
+@@alternateType(Issue.addOrUpdateResources::parameters.body,
   RelatedResourcesCreate,
   "javascript"
 );
-
