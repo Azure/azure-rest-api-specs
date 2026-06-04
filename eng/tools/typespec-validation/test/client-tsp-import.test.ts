@@ -14,9 +14,7 @@ describe("client-tsp-import", function () {
 
   beforeEach(() => {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
-    readFileSpy = vi
-      .spyOn(fsPromises, "readFile")
-      .mockResolvedValue('import "./client.tsp";\n');
+    readFileSpy = vi.spyOn(fsPromises, "readFile").mockResolvedValue('import "./client.tsp";\n');
   });
 
   afterEach(() => {
