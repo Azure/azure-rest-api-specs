@@ -992,3 +992,29 @@ using Microsoft.DesktopVirtualization;
   "ResourceModelWithAllowedPropertySetIdentityLegacy",
   "java"
 );
+
+// Java: preserve old property names to avoid breaking renames
+@@clientName(
+  UserSessionProperties.activeDirectoryUserName,
+  "activeDirectoryUsername",
+  "java"
+);
+@@clientName(MsixPackageApplications.appUserModelID, "appUserModelId", "java");
+
+// Java: preserve flattened properties (old SDK exposed leaf accessors directly,
+// not a nested properties() object)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StartMenuItem.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DesktopPatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkspacePatch.properties,
+  "java"
+);
