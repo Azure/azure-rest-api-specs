@@ -1282,7 +1282,7 @@
             }
           }
         ],
-        "description": "Creates a new agent from the request payload and returns the created resource. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.\nThe SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
+        "description": "Creates a new agent or a new version of an existing agent. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.\nThe SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
         "summary": "Create an agent Create a new code-based agent",
         "responses": {
           "200": {
@@ -3859,7 +3859,7 @@
             }
           }
         },
-        "x-ms-description-override": "Creates a new agent version.",
+        "x-ms-description-override": "Creates a new version for the specified agent and returns the created version resource.",
         "x-ms-summary-override": "Create an agent version",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -19854,7 +19854,7 @@
       },
       "delete": {
         "operationId": "deleteToolbox",
-        "summary": "Delete a toolbox and all its versions",
+        "summary": "Delete a toolbox",
         "description": "Removes the specified toolbox along with all of its versions.",
         "parameters": [
           {
