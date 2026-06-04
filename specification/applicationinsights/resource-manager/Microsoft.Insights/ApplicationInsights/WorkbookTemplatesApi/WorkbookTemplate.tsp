@@ -67,15 +67,19 @@ interface WorkbookTemplates {
   >;
 }
 
-@@doc(WorkbookTemplate.name,
+@@doc(
+  WorkbookTemplate.name,
   "The name of the Application Insights component resource."
 );
-@@doc(WorkbookTemplate.properties,
+@@doc(
+  WorkbookTemplate.properties,
   "Metadata describing a workbook template for an Azure resource."
 );
-@@doc(WorkbookTemplates.createOrUpdate::parameters.resource,
+@@doc(
+  WorkbookTemplates.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create a new workbook."
 );
-@@doc(WorkbookTemplates.update::parameters.properties,
+@@doc(
+  WorkbookTemplates.update::parameters.properties,
   "Properties that need to be specified to patch a workbook template."
 );

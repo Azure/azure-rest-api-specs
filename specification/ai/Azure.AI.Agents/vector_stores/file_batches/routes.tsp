@@ -125,8 +125,10 @@ namespace Azure.AI.Agents {
 
       ...ApiVersionParameter,
       ...AgentsListOptions,
-    ): {
-      ...AgentsPagedResult<VectorStoreFile>;
-    } | AgentV1Error;
+    ):
+      | {
+          ...AgentsPagedResult<VectorStoreFile>;
+        }
+      | AgentV1Error;
   }
 }

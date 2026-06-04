@@ -3868,9 +3868,11 @@ model RulesEngineListResult is Azure.Core.Page<RulesEngine>;
 @@visibility(ProfileList.value, Lifecycle.Read);
 @@visibility(RulesEngineListResult.value, Lifecycle.Read);
 @@visibility(WebApplicationFirewallPolicyList.value, Lifecycle.Read);
-@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryMatchOperator,
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryMatchOperator,
   "scrubbingRuleEntryMatchOperator"
 );
-@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryState,
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryState,
   "scrubbingRuleEntryState"
 );

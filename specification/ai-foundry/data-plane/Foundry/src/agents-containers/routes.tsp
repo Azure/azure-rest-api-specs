@@ -15,10 +15,10 @@ namespace Azure.AI.Projects;
 @removed(Versions.v1)
 interface AgentContainers {
   /**
-   * Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
-   * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
+   * Starts the default container for the specified agent version.
+   * The long-running operation provisions replicas when a container is not already running.
    */
+  @summary("Start an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:start")
@@ -49,10 +49,10 @@ interface AgentContainers {
   >;
 
   /**
-   * Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.
-   * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
+   * Updates the replica settings for the default container of the specified agent version.
+   * The long-running operation applies changes only when a container is already running.
    */
+  @summary("Update an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:update")
@@ -83,10 +83,10 @@ interface AgentContainers {
   >;
 
   /**
-   * Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.
-   * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
+   * Stops the default container for the specified agent version.
+   * The long-running operation completes even when the container is already stopped.
    */
+  @summary("Stop an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:stop")
@@ -111,10 +111,10 @@ interface AgentContainers {
   >;
 
   /**
-   * Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.
-   * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
-   * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
+   * Deletes the default container for the specified agent version.
+   * The long-running operation returns an operation resource that can be polled to completion.
    */
+  @summary("Delete an agent container")
   @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:delete")
@@ -139,8 +139,10 @@ interface AgentContainers {
   >;
 
   /**
-   * Get a container for a specific version of an agent.
+   * Retrieves the default container resource for the specified agent version.
+   * The response includes the current container state and configuration.
    */
+  @summary("Get an agent container")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default")
   @extension(
@@ -164,29 +166,13 @@ interface AgentContainers {
   >;
 
   /**
-   * Stream logs from a container for a specific version of an agent.
+   * Streams console or system logs from the default container for the specified agent version.
+   * Clients can target a specific replica and request trailing log lines before the chunked text stream begins.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+  @summary("Stream agent container logs")
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:logstream")
-  @doc("""
-    Container log entry streamed from the container as text chunks.
-    Each chunk is a UTF-8 string that may be either a plain text log line
-    or a JSON-formatted log entry, depending on the type of container log being streamed.
-    Clients should treat each chunk as opaque text and, if needed, attempt
-    to parse it as JSON based on their logging requirements.
-    
-    For system logs, the format is JSON with the following structure:
-    {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting to the events collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
-    {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully connected to events server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
-    
-    For console logs, the format is plain text as emitted by the container's stdout/stderr.
-    2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...
-    2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
-    2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET /readiness HTTP/1.1" 200 OK
-    2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
-    2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
-    """)
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -227,8 +213,9 @@ interface AgentContainers {
   >;
 
   /**
-   * Get the status of a container operation for an agent.
+   * Retrieves the status and details of the specified container operation for an agent.
    */
+  @summary("Get an agent container operation")
   @get
   @route("/agents/{agent_name}/operations/{operation_id}")
   @extension(
@@ -252,8 +239,9 @@ interface AgentContainers {
   >;
 
   /**
-   * List container operations for an agent.
+   * Returns container operations recorded for the specified agent across its container lifecycle.
    */
+  @summary("List agent container operations")
   @get
   @route("/agents/{agent_name}/operations")
   @list
@@ -277,8 +265,9 @@ interface AgentContainers {
   >;
 
   /**
-   * List container operations for a specific version of an agent.
+   * Returns container operations for the default container of the specified agent version.
    */
+  @summary("List agent version container operations")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default/operations")
   @list

@@ -103,6 +103,7 @@ model EvaluationSuiteVersion {
     """)
   dataset?: EvaluationDatasetReference;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching eval group testing_criteria pattern"
   @doc("""
     Testing criteria — the evaluator configurations for this suite.
     Supports all grader types: azure_ai_evaluator, string_check, label_model,
@@ -110,15 +111,13 @@ model EvaluationSuiteVersion {
     At least one entry is required.
     """)
   @minItems(1)
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching eval group testing_criteria pattern"
   testing_criteria: (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | TestingCriterionAzureAIEvaluator
-  )[];
+    | TestingCriterionAzureAIEvaluator)[];
 
   @doc("""
     Target for this evaluation suite. Uses the existing Target discriminated type
@@ -127,13 +126,14 @@ model EvaluationSuiteVersion {
     """)
   target?: Target;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
   @doc("""
     How to send dataset rows to the target (agent or model).
     Supports template type (prompt with column placeholders) and
     item_reference type (column containing pre-built messages).
     """)
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
-  input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
+  input_messages?:
+    | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
     | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
 
   @doc("""
@@ -289,12 +289,13 @@ model EvaluationSuiteGenerationJobInputs {
     """)
   target?: Target;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
   @doc("""
     How to send dataset rows to the target.
     If omitted and target is provided, defaults to a template using item.query.
     """)
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Supporting both input message types"
-  input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
+  input_messages?:
+    | OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate
     | OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference;
 
   @doc("""

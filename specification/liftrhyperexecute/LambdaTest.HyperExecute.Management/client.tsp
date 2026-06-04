@@ -4,64 +4,78 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using LambdaTest.HyperExecute;
 
-@@clientName(LambdaTest.HyperExecute,
+@@clientName(
+  LambdaTest.HyperExecute,
   "LambdaTestHyperExecuteMgmtClient",
   "java"
 );
-@@clientName(LambdaTest.HyperExecute,
+@@clientName(
+  LambdaTest.HyperExecute,
   "LambdaTestHyperExecuteMgmtClient",
   "python"
 );
 
 // csharp
-@@clientName(OrganizationResource,
+@@clientName(
+  OrganizationResource,
   "LambdaTestHyperExecuteOrganization",
   "csharp"
 );
-@@clientName(OrganizationProperties,
+@@clientName(
+  OrganizationProperties,
   "LambdaTestHyperExecuteOrganizationProperties",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceDetails,
+@@clientName(
+  LiftrBase.MarketplaceDetails,
   "LambdaTestHyperExecuteMarketplaceDetails",
   "csharp"
 );
-@@clientName(LiftrBase.MarketplaceSubscriptionStatus,
+@@clientName(
+  LiftrBase.MarketplaceSubscriptionStatus,
   "LambdaTestHyperExecuteMarketplaceSubscriptionStatus",
   "csharp"
 );
-@@clientName(LiftrBase.OfferDetails,
+@@clientName(
+  LiftrBase.OfferDetails,
   "LambdaTestHyperExecuteOfferDetails",
   "csharp"
 );
-@@clientName(PartnerProperties,
+@@clientName(
+  PartnerProperties,
   "LambdaTestHyperExecuteOfferPartnerProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "LambdaTestHyperExecuteOfferProvisioningState",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnPropertiesV2,
+@@clientName(
+  LiftrBase.SingleSignOnPropertiesV2,
   "LambdaTestHyperExecuteSingleSignOnPropertiesV2",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnStates,
+@@clientName(
+  LiftrBase.SingleSignOnStates,
   "LambdaTestHyperExecuteSingleSignOnState",
   "csharp"
 );
-@@clientName(LiftrBase.SingleSignOnType,
+@@clientName(
+  LiftrBase.SingleSignOnType,
   "LambdaTestHyperExecuteSingleSignOnType",
   "csharp"
 );
-@@clientName(LiftrBase.UserDetails,
+@@clientName(
+  LiftrBase.UserDetails,
   "LambdaTestHyperExecuteUserDetails",
   "csharp"
 );
 
 // Renamed to preserve C# property name after flatten lift-to-nullable change in mgmt generator.
 // Old `PartnerLicensesSubscribed` (System.Nullable<int>) is restored as an [Obsolete] backward-compat shim in custom code.
-@@clientName(PartnerProperties.licensesSubscribed,
+@@clientName(
+  PartnerProperties.licensesSubscribed,
   "subscribedLicensesCount",
   "csharp"
 );

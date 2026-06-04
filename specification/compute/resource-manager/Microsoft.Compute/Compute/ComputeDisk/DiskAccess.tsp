@@ -44,10 +44,12 @@ interface DiskAccesses {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DiskAccess,
-    Response = ArmResourceUpdatedResponse<DiskAccess> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: DiskAccess;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DiskAccess>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: DiskAccess;
+        })
   >;
 
   /**
@@ -58,10 +60,12 @@ interface DiskAccesses {
   update is ComputeCustomPatchAsync<
     DiskAccess,
     DiskAccessUpdate,
-    Response = ArmResponse<DiskAccess> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: DiskAccess;
-    })
+    Response =
+      | ArmResponse<DiskAccess>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskAccess> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: DiskAccess;
+        })
   >;
 
   /**
@@ -97,13 +101,16 @@ interface DiskAccesses {
   >;
 }
 
-@@doc(DiskAccess.name,
+@@doc(
+  DiskAccess.name,
   "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
 @@doc(DiskAccess.properties, "");
-@@doc(DiskAccesses.createOrUpdate::parameters.resource,
+@@doc(
+  DiskAccesses.createOrUpdate::parameters.resource,
   "disk access object supplied in the body of the Put disk access operation."
 );
-@@doc(DiskAccesses.update::parameters.properties,
+@@doc(
+  DiskAccesses.update::parameters.properties,
   "disk access object supplied in the body of the Patch disk access operation."
 );

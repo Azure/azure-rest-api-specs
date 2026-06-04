@@ -161,21 +161,26 @@ interface ServiceGateways {
 
 @@doc(ServiceGateway.name, "The name of the service gateway.");
 @@doc(ServiceGateway.properties, "Properties of service gateway.");
-@@doc(ServiceGateways.createOrUpdate::parameters.resource,
+@@doc(
+  ServiceGateways.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update service gateway operation."
 );
-@@doc(ServiceGateways.updateTags::parameters.properties,
+@@doc(
+  ServiceGateways.updateTags::parameters.properties,
   "Parameters supplied to update service gateway tags."
 );
-@@doc(ServiceGateways.updateAddressLocations::parameters.body,
+@@doc(
+  ServiceGateways.updateAddressLocations::parameters.body,
   "Parameters supplied to the create or updates address locations in service gateway operation."
 );
-@@doc(ServiceGateways.updateServices::parameters.body,
+@@doc(
+  ServiceGateways.updateServices::parameters.body,
   "Parameters supplied to the create or updates services in service gateway operation."
 );
 @@clientName(ServiceGateways.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ServiceGateways.updateTags::parameters.properties, "parameters");
-@@clientName(ServiceGateways.updateAddressLocations::parameters.body,
+@@clientName(
+  ServiceGateways.updateAddressLocations::parameters.body,
   "parameters"
 );
 @@clientName(ServiceGateways.updateServices::parameters.body, "parameters");

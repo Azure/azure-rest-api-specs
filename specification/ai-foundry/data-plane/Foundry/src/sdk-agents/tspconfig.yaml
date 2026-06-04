@@ -20,6 +20,7 @@ options:
       AzureFunctionDefinitionFunction: AzureFunctionDefinitionDetails
       MCPToolConnectorId: McpToolConnectorId
       UpdateAgentDetailsPatchRequest: UpdateAgentDetailsOptions
+      AgentsPagedResultOptimizationCandidate: OptimizationCandidatePagedResult
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
   "@typespec/json-schema":
@@ -53,6 +54,7 @@ imports:
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/evals"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:

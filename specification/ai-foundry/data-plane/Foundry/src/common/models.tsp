@@ -13,7 +13,8 @@ model ApiErrorResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.Error,
+@@copyProperties(
+  OpenAI.Error,
   {
     details?: OpenAI.Error[],
     additionalInfo?: Record<unknown>,
@@ -39,11 +40,12 @@ alias UserIsolationKeyHeader = {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"
 op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | ErrorResponse;
+>(...Params): Response | AzureRangeErrorResponse<ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -52,10 +54,9 @@ op OpenAIOperationWithPreview<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(
-  ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>,
-  ...Params,
-): Response | ErrorResponse;
+>(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
+  | Response
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")
