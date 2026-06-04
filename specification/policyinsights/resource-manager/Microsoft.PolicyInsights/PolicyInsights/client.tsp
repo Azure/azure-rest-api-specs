@@ -2107,6 +2107,16 @@ op attestationsListForResource(
 
 @@clientName(QueryOptions, "PolicyQuerySettings", "csharp");
 
+// Restore GA OData property names (uppercase D after O) on the user-facing models.
+@@clientName(PolicyEvent.`@odata.id`, "ODataId", "csharp");
+@@clientName(PolicyEvent.`@odata.context`, "ODataContext", "csharp");
+@@clientName(PolicyState.`@odata.id`, "ODataId", "csharp");
+@@clientName(PolicyState.`@odata.context`, "ODataContext", "csharp");
+@@clientName(ComponentPolicyState.`@odata.id`, "ODataId", "csharp");
+@@clientName(ComponentPolicyState.`@odata.context`, "ODataContext", "csharp");
+@@clientName(Summary.`@odata.id`, "ODataId", "csharp");
+@@clientName(Summary.`@odata.context`, "ODataContext", "csharp");
+
 // Rename auto-emitted Mockable*Resource / PolicyInsightsExtensions extension
 // method names back to GA. Per skill ref §9.35 the C# emitter ignores
 // @@clientName on the @@override-shimmed top-level ops (e.g.
