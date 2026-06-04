@@ -288,8 +288,8 @@ union UnitType {
 }
 
 /**
- * Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or
- * Mix. This property is included in the response when dBZ is greater than zero.
+ * Specifies the type of precipitation. Valid values are *Rain*, *Snow*, *Ice*, or
+ * *Mix*. This property is included in the response when dBZ is greater than zero.
  */
 union PrecipitationType {
   string,
@@ -318,16 +318,16 @@ union PrecipitationType {
 union DayQuarter {
   integer,
 
-  /** 7:00 am - 1:00 pm / 7:00- 13:00 */
+  /** 7:00 am - 1:00 pm / 07:00 - 13:00 */
   FirstQuarter: 0,
 
-  /** 1:00 pm - 7:00 pm/ 13:00- 19:00 */
+  /** 1:00 pm - 7:00 pm / 13:00 - 19:00 */
   SecondQuarter: 1,
 
-  /** 7:00 pm - 1:00 am/ 19:00 - 01:00 */
+  /** 7:00 pm - 1:00 am / 19:00 - 01:00 */
   ThirdQuarter: 2,
 
-  /** 1:00 am - 7:00 am/ 01:00 - 07:00 */
+  /** 1:00 am - 7:00 am / 01:00 - 07:00 */
   ForthQuarter: 3,
 }
 
@@ -335,11 +335,11 @@ union DayQuarter {
  * The aggregated severity/hazard index for each waypoint can be utilized to
  * color-code segments of a route, indicating the safety level for drivers.
  *
- * - 0: No hazard.
- * - 1: Be informed, be aware.
- * - 2: Pay attention, be prepared.
- * - 3: Take action.
- * - 4: Life threatening, emergency.
+ * - **0**: No hazard
+ * - **1**: Be informed, be aware
+ * - **2**: Pay attention, be prepared
+ * - **3**: Take action
+ * - **4**: Life-threatening, emergency
  */
 union HazardIndex {
   integer,
@@ -410,47 +410,47 @@ union BasinId {
   string,
 
   /**
-   * The **Atlantic Ocean**. Crucial for tracking hurricanes that affect the
+   * **The Atlantic Ocean**. Crucial for tracking hurricanes that affect the
    * Americas and the Caribbean. It is one of the most active regions for
    * tropical storms.
    */
   AL: "AL",
 
   /**
-   * The **Central Pacific Ocean**. This basin is used for storms affecting Hawaii
+   * **The Central Pacific Ocean**. This basin is used for storms affecting Hawaii
    * and surrounding areas.
    */
   CP: "CP",
 
   /**
-   * The **Eastern Pacific Ocean**. This basin tracks storms impacting the western
+   * **The Eastern Pacific Ocean**. This basin tracks storms impacting the western
    * coast of the Americas, including Mexico and Central America. It is adjacent
    * to the Central Pacific basin.
    */
   EP: "EP",
 
   /**
-   * The **North Indian Ocean**. This basin covers storms impacting South Asia,
+   * **The North Indian Ocean**. This basin covers storms impacting South Asia,
    * including countries like India and Bangladesh, which are frequently
    * affected by cyclones.
    */
   NI: "NI",
 
   /**
-   * The **Northwest Pacific Ocean**. This basin is important for tracking typhoons
+   * **The Northwest Pacific Ocean**. This basin is important for tracking typhoons
    * that affect East Asia, including countries like China, Japan, and the
    * Philippines. It is the most active tropical storm regions globally.
    */
   NP: "NP",
 
   /**
-   * The **South Indian Ocean**. This basin, positioned south of the equator, covers
+   * **The South Indian Ocean**. This basin, positioned south of the equator, covers
    * cyclones impacting Madagascar, Africa, and surrounding regions.
    */
   SI: "SI",
 
   /**
-   * The **South Pacific Ocean**. This basin, positioned south of the equator, is
+   * **The South Pacific Ocean**. This basin, positioned south of the equator, is
    * relevant for cyclones affecting Australia and the South Pacific islands.
    */
   SP: "SP",
@@ -461,7 +461,7 @@ union DominantPollutant {
   string,
 
   /**
-   * Carbon monoxide (CO) is a colorless, odorless, and tasteless but highly
+   * Carbon monoxide (**CO**) is a colorless, odorless, and tasteless but highly
    * toxic gas produced by the incomplete combustion of carbon-containing fuels.
    * Common sources include vehicle exhaust, gas stoves, furnaces, and wood
    * fires.
@@ -469,45 +469,45 @@ union DominantPollutant {
   `Carbon Monoxide`: "Carbon Monoxide",
 
   /**
-   * Nitrogen dioxide (NO2) is a significant atmospheric pollutant. It is
+   * Nitrogen dioxide (**NO2**) is a significant atmospheric pollutant. It is
    * regulated and subject to recommended limit guidelines set by the World
    * Health Organization (WHO).
    */
   `Nitrogen Dioxide`: "Nitrogen Dioxide",
 
   /**
-   * Ozone (O3) is a key component of photochemical smog, the brown, harmful
+   * Ozone (**O3**) is a key component of photochemical smog, the brown, harmful
    * haze that envelops many large cities, resulting from a photochemical
    * reaction between sunlight and certain specific pollutants.
    */
   Ozone: "Ozone",
 
   /**
-   * Particulate matter 2.5 (PM2.5) also known as aerosols, is a mix of fine
+   * Particulate matter 2.5 (**PM2.5**) also known as aerosols, is a mix of fine
    * dust and tiny liquid droplets suspended in the air. There are 4
    * categories:
    *
-   * - PM10 (Course)
-   * - PM2.5 (Fine)
-   * - PM1 (very fine)
-   * - PM0.1 (ultrafine).
+   * - **PM10** (Course)
+   * - **PM2.5** (Fine)
+   * - **PM1** (very fine)
+   * - **PM0.1** (ultrafine).
    */
   `Particulate Matter 2.5`: "Particulate Matter 2.5",
 
   /**
-   * Particulate matter 10 (PM10) also known as aerosols, is a mix of fine dust
+   * Particulate matter 10 (**PM10**) also known as aerosols, is a mix of fine dust
    * and tiny liquid droplets suspended in the air. There are 4 categories of
    * particulate matter:
    *
-   * - PM10 (Course)
-   * - PM2.5 (Fine)
-   * - PM1 (very fine)
-   * - PM0.1 (ultrafine).
+   * - **PM10** (Course)
+   * - **PM2.5** (Fine)
+   * - **PM1** (very fine)
+   * - **PM0.1** (ultrafine).
    */
   `Particulate Matter 10`: "Particulate Matter 10",
 
   /**
-   * Sulfur dioxide (SO2) is a heavy, colorless inorganic gas with a pungent,
+   * Sulfur dioxide (**SO2**) is a heavy, colorless inorganic gas with a pungent,
    * irritating odor. It is mainly produced by burning fossil fuels at power
    * plants and industrial facilities, but it can also be emitted from natural
    * sources such as volcanoes.
@@ -557,10 +557,10 @@ union PollutantType {
    * droplets suspended in the air. There are four categories of particulate
    * matter:
    *
-   * - PM10 (Course)
-   * - PM2.5 (Fine)
-   * - PM1 (very fine)
-   * - PM0.1 (ultrafine).
+   * - **PM10** (Course)
+   * - **PM2.5** (Fine)
+   * - **PM1** (very fine)
+   * - **PM0.1** (ultrafine).
    */
   PM2_5: "PM2.5",
 
@@ -572,10 +572,10 @@ union PollutantType {
    * and tiny liquid droplets suspended in the air. There are four categories of
    * particulate matter:
    *
-   * - PM10 (Course)
-   * - PM2.5 (Fine)
-   * - PM1 (very fine)
-   * - PM0.1 (ultrafine).
+   * - **PM10** (Course)
+   * - **PM2.5** (Fine)
+   * - **PM1** (very fine)
+   * - **PM0.1** (ultrafine).
    */
   PM10: "PM10",
 
@@ -688,7 +688,7 @@ model HourlyForecast {
 
   /**
    * A descriptive term that corresponds to a specific weather condition, such
-   * as 'Sunny'. It is paired with an `iconCode`, which is a numeric value
+   * as *Sunny*. It is paired with an `iconCode`, which is a numeric value
    * representing an image that visually depicts the weather condition described
    * by the `iconPhrase`. For more information, see [Weather services in Azure
    * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
@@ -887,8 +887,8 @@ model WeatherValue {
   value?: float32;
 
   /**
-   * The unit of measurement used in the return value, such as "C" for Celsius,
-   * "F" for Fahrenheit.
+   * The unit of measurement used in the return value, such as `C` for Celsius,
+   * `F` for Fahrenheit.
    */
   unit?: string;
 
@@ -933,8 +933,8 @@ model WindDirection {
 
   /**
    * A localized abbreviation of the wind direction, returned in the language
-   * specified in the request. For example, 'N' for North, 'E' for East, 'S' for
-   * South, and 'W' for West.
+   * specified in the request. For example, `N` for North, `E` for East, `S` for
+   * South, and `W` for West.
    */
   localizedDescription?: string;
 }
@@ -1017,8 +1017,8 @@ model MinuteForecastResult {
 
   /**
    * Provides concise weather summaries for each forecast interval, detailing
-   * start and end times, duration, and a brief description, such as "Rain
-   * ending in 25 min."
+   * start and end times, duration, and a brief description, such as *Rain
+   * ending in 25 min.*
    */
   @visibility(Lifecycle.Read)
   intervalSummaries?: IntervalSummary[];
@@ -1182,7 +1182,7 @@ model ColorValue {
   /** Blue component of the RGB value. Valid values range from 0-255. */
   blue?: int32;
 
-  /** Hexadecimal color value. For example, red is '#FF0000'. */
+  /** Hexadecimal color value. For example, red is `#FF0000`. */
   hex?: string;
 }
 
@@ -1224,10 +1224,10 @@ model QuarterDayForecast {
   /**
    * Specifies the quarter-day period:
    *
-   * - 0: morning (7am - 1pm)
-   * - 1: afternoon (1pm - 7pm)
-   * - 2: evening (7pm - 1am)
-   * - 3: overnight (1am - 7am)
+   * - 0: Morning (7am - 1pm)
+   * - 1: Afternoon (1pm - 7pm)
+   * - 2: Evening (7pm - 1am)
+   * - 3: Overnight (1am - 7am)
    */
   quarter?: DayQuarter;
 
@@ -1240,7 +1240,7 @@ model QuarterDayForecast {
 
   /**
    * A one or two word descriptive term that corresponds to a specific weather
-   * condition, such as 'Sunny'. It is paired with an `iconCode`, which is a
+   * condition, such as *Sunny*. It is paired with an `iconCode`, which is a
    * numeric value representing an image that visually depicts the weather
    * condition described by the `iconPhrase`. For more information, see [Weather
    * services in Azure
@@ -1250,9 +1250,9 @@ model QuarterDayForecast {
 
   /**
    * Provides a brief textual description of the weather conditions for each
-   * quarter of the day. It uses more descriptive terms than iconePhrase, which
-   * might return 'Thunderstorms' where phrase returns 'Cloudy with a couple of
-   * showers and a thunderstorm'. This makes it easy to understand and integrate
+   * quarter of the day. It uses more descriptive terms than `iconPhrase`, which
+   * might return *Thunderstorms* where phrase returns *Cloudy with a couple of
+   * showers and a thunderstorm*. This makes it easy to understand and integrate
    * into applications for clear and concise weather forecasts.
    */
   phrase?: string;
@@ -1445,7 +1445,7 @@ model CurrentConditions {
 
   /**
    * A descriptive term that corresponds to a specific weather condition, such
-   * as 'Sunny'. It is paired with an `iconCode`, which is a numeric value
+   * as *Sunny*. It is paired with an `iconCode`, which is a numeric value
    * representing an image that visually depicts the weather condition described
    * by the `iconPhrase`. For more information, see [Weather services in Azure
    * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
@@ -1820,14 +1820,14 @@ model DailyForecastSummary {
    *
    * Severity (Description)
    *
-   * - 0 (Unknown)
-   * - 1 (Significant)
-   * - 2 (Major)
-   * - 3 (Moderate)
-   * - 4 (Minor)
-   * - 5 (Minimal)
-   * - 6 (Insignificant)
-   * - 7 (Informational)
+   * - 0: Unknown
+   * - 1: Significant
+   * - 2: Major
+   * - 3: Moderate
+   * - 4: Minor
+   * - 5: Minimal
+   * - 6: Insignificant
+   * - 7: Informational
    */
   severity?: int32;
 
@@ -1986,11 +1986,11 @@ model AirAndPollen {
    * For pollen: Returns the name of the pollen, such as tree, grass, ragweed,
    * or mold.
    *
-   * For pollutants: When the name property is 'AirQuality', the name of the
+   * For pollutants: When the name property is `AirQuality`, the name of the
    * pollutant is returned in the type property. Valid pollutants include **PM2.5**,
    * **PM10**, **O3**, **NO2**, **SO2**, and **CO**.
    *
-   * For UV Index: When the name property is 'UVIndex', the UV index is returned
+   * For UV Index: When the name property is `UVIndex`, the UV index is returned
    * in the value property. Valid UV Index values range from 0 to 11+ and
    * represent the intensity of ultraviolet radiation. UV Index values are
    * categorized as follows:
@@ -2050,7 +2050,7 @@ model DailyForecastDetail {
 
   /**
    * Phrase description of the icon. Displayed in specified language. For example,
-   * 'Sunny'.
+   * *Sunny*.
    */
   iconPhrase?: string;
 
@@ -2391,7 +2391,7 @@ model WaypointForecast {
 
   /**
    * Indicates whether it is currently daytime at the specified waypoint.
-   * Returns true if it is daytime and false if it is nighttime
+   * Returns true for daytime and false for nighttime.
    */
   isDayTime?: boolean;
 
@@ -2465,7 +2465,7 @@ model WeatherAlongRoutePrecipitation {
 
   /**
    * Type of precipitation. If precipitation occurs, it will be classified as
-   * 'RAIN,' 'HAIL,' 'SNOW,' 'ICE,' or 'MIX.'
+   * *Rain*, *Hail*, *Snow*, *Ice*, or *Mix*.
    */
   type?: string;
 }
@@ -2572,7 +2572,7 @@ model SevereWeatherAlertsResult {
  */
 model SevereWeatherAlert {
   /**
-   * 2-character ISO 3166-1 Alpha-2 country code, for example, "US". For more
+   * 2-character ISO 3166-1 Alpha-2 country code, for example, `US`. For more
    * information, see [ISO 3166 country
    * codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).
    */
@@ -2667,7 +2667,7 @@ model AlertArea {
   /**
    * A brief description of the alert. For example:
    * 
-   * 'Heat Advisory in effect until 10:00 PM PDT. Source: U.S. National Weather Service'
+   * *Heat Advisory in effect until 10:00 PM PDT. Source: U.S. National Weather Service*
    */
   summary?: string;
 
@@ -2741,10 +2741,10 @@ model DailyIndicesResult {
 
 /**
  * The `DailyIndex` object helps users plan outdoor activities based on weather
- * conditions by providing the activity name, such as 'Ski Weather Forecast'; a
+ * conditions by providing the activity name, such as *Ski Weather Forecast*; a
  * numerical rating from 0.0 to 10.0 indicating suitability; a text rating, such
- * as 'Poor'; and a brief description of the conditions, such as 'Expect poor
- * conditions for skiing.'
+ * as *Poor*; and a brief description of the conditions, such as *Expect poor
+ * conditions for skiing.*
  */
 model DailyIndex {
   /**
@@ -2759,8 +2759,8 @@ model DailyIndex {
   /**
    * A numeric identifier that uniquely represents a specific index type,
    * distinguishing between different indices for various outdoor activities.
-   * For example, an 'indexId' of 1 corresponds to the 'Running' index, and an
-   * 'indexId' of 5 corresponds to the 'Golfing' index. For more information,
+   * For example, an `indexId` of 1 corresponds to the *Running* index, and an
+   * `indexId` of 5 corresponds to the *Golfing* index. For more information,
    * see [Index
    * IDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids)
    * in the *Weather service in Azure Maps* concepts article.
@@ -2778,8 +2778,8 @@ model DailyIndex {
    * A numerical value ranging from 0.0 to 10.0 that quantifies the suitability
    * of weather conditions for a specific activity or condition, such as running
    * or golfing. Higher values typically indicate more favorable conditions. For
-   * example, a value of 8 for the 'Running' index suggests very good weather
-   * for running, while a value of 6 for the 'Golfing' index indicates good but
+   * example, a value of 8 for the *Running* index suggests very good weather
+   * for running, while a value of 6 for the *Golfing* index indicates good but
    * slightly less ideal conditions. For more information, see [Daily index
    * range sets](/azure/azure-maps/daily-index-range-sets) in the *Weather
    * service in Azure Maps* concepts article.
@@ -2818,8 +2818,8 @@ model DailyIndex {
    * Provides a brief, user-friendly explanation of the index value, helping
    * users understand its significance in relation to specific weather
    * conditions or activities. For example, if the index value for Outdoor
-   * Barbecue is 'Excellent', the description will be 'This is a great day for
-   * an outdoor barbecue!'
+   * Barbecue is *Excellent*, the description will be *This is a great day for
+   * an outdoor barbecue!*
    */
   description?: string;
 }
@@ -3706,8 +3706,8 @@ model WeatherValueYear {
   value?: float32;
 
   /**
-   * The unit of measurement used in the return value, such as "C" for Celsius,
-   * "F" for Fahrenheit.
+   * The unit of measurement used in the return value, such as `C` for Celsius,
+   * `F` for Fahrenheit.
    */
   unit?: string;
 
