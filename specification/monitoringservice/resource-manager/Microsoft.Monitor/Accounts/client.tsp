@@ -12,7 +12,8 @@ using Microsoft.Monitor;
 
 @@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
 
-@@clientName(Azure.ResourceManager.CommonTypes.Origin,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Origin,
   "ArmOrigin",
   "python,go,javascript"
 );
@@ -25,18 +26,21 @@ using Microsoft.Monitor;
 @@clientName(MetricsContainer, "MonitorMetricsContainerProperties", "csharp");
 @@clientName(AddedByType, "MonitorEntityType", "csharp");
 @@clientName(Origin, "MonitorEntityOrigin", "csharp");
-@@clientName(AzureMonitorWorkspaceDefaultIngestionSettings,
+@@clientName(
+  AzureMonitorWorkspaceDefaultIngestionSettings,
   "MonitorWorkspaceDefaultIngestionSettings",
   "csharp"
 );
 @@clientName(AzureMonitorWorkspaceMetrics, "MonitorWorkspaceMetrics", "csharp");
 @@clientName(Background, "MonitorIssueBackground", "csharp");
 @@clientName(BackgroundDetails, "MonitorIssueBackgroundDetails", "csharp");
-@@clientName(BackgroundVisualization,
+@@clientName(
+  BackgroundVisualization,
   "MonitorIssueBackgroundVisualization",
   "csharp"
 );
-@@clientName(FetchInvestigationResultParameters,
+@@clientName(
+  FetchInvestigationResultParameters,
   "FetchInvestigationResultContent",
   "csharp"
 );
@@ -46,7 +50,8 @@ using Microsoft.Monitor;
 @@clientName(IssueResourceUpdate, "MonitorIssuePatch", "csharp");
 @@clientName(ListParameter, "IssueListContent", "csharp");
 @@clientName(Notifications, "IssueNotifications", "csharp");
-@@clientName(Notifications.excludeDefaultActionGroups,
+@@clientName(
+  Notifications.excludeDefaultActionGroups,
   "ShouldExcludeDefaultActionGroups",
   "csharp"
 );
@@ -56,58 +61,71 @@ using Microsoft.Monitor;
 @@clientName(RelatedResources, "IssueRelatedResourceInfoList", "csharp");
 @@clientName(Relevance, "MonitorRelevanceStatus", "csharp");
 @@clientName(Status, "MonitorIssueStatus", "csharp");
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "MonitorWorkspacePublicNetworkAccess",
   "csharp"
 );
 @@clientName(UpdateType, "IssueNotificationUpdateType", "csharp");
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "MonitorWorkspaceProvisioningState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
   "MonitorWorkspacePrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState,
   "MonitorWorkspacePrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
   "MonitorWorkspacePrivateEndpointConnectionProvisioningState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
   "MonitorWorkspacePrivateEndpointServiceConnectionStatus",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "MonitorWorkspacePrivateEndpointConnection",
   "csharp"
 );
-@@clientName(Issue.addInvestigationResult::parameters.body,
+@@clientName(
+  Issue.addInvestigationResult::parameters.body,
   "content",
   "csharp"
 );
 @@clientName(Issue.addOrUpdateAlerts::parameters.body, "content", "csharp");
 @@clientName(Issue.addOrUpdateResources::parameters.body, "content", "csharp");
-@@clientName(Issue.setBackgroundVisualization::parameters.body,
+@@clientName(
+  Issue.setBackgroundVisualization::parameters.body,
   "content",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+@@alternateType(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   eTag,
   "csharp"
 );
-@@alternateType(AzureMonitorWorkspaceDefaultIngestionSettings.dataCollectionRuleResourceId,
+@@alternateType(
+  AzureMonitorWorkspaceDefaultIngestionSettings.dataCollectionRuleResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AzureMonitorWorkspaceDefaultIngestionSettings.dataCollectionEndpointResourceId,
+@@alternateType(
+  AzureMonitorWorkspaceDefaultIngestionSettings.dataCollectionEndpointResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Notifications.actionGroupIds,
+@@alternateType(
+  Notifications.actionGroupIds,
   armResourceIdentifier[],
   "csharp"
 );
@@ -192,19 +210,23 @@ namespace Microsoft.Monitor {
   }
 }
 
-@@alternateType(Issue.create::parameters.resource,
+@@alternateType(
+  Issue.create::parameters.resource,
   IssueResourceCreate,
   "javascript"
 );
-@@alternateType(Issue.setBackgroundVisualization::parameters.body,
+@@alternateType(
+  Issue.setBackgroundVisualization::parameters.body,
   BackgroundVisualizationCreate,
   "javascript"
 );
-@@alternateType(Issue.addOrUpdateAlerts::parameters.body,
+@@alternateType(
+  Issue.addOrUpdateAlerts::parameters.body,
   RelatedAlertsCreate,
   "javascript"
 );
-@@alternateType(Issue.addOrUpdateResources::parameters.body,
+@@alternateType(
+  Issue.addOrUpdateResources::parameters.body,
   RelatedResourcesCreate,
   "javascript"
 );
