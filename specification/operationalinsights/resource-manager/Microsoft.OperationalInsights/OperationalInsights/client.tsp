@@ -35,12 +35,12 @@ using Microsoft.OperationalInsights;
 @@clientName(
   Microsoft.OperationalInsights.ProvisioningStateEnum,
   "SummaryLogsProvisioningState",
-  "java"
+  "java,python"
 );
 @@clientName(
   OperationalInsightsTableProvisioningState,
   "ProvisioningStateEnum",
-  "java"
+  "java,python"
 );
 
 // Fix etag casing for backward compatibility
