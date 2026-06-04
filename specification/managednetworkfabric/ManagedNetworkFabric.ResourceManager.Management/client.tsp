@@ -99,17 +99,22 @@ using Microsoft.ManagedNetworkFabric;
   "python"
 );
 @@clientName(
-  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
-  "ManagementNetworkConfigurationPatchableProperties",
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
+  "StaticRoutePolicy",
   "python"
 );
 @@clientName(
-  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
-  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicyPatch,
+  "StaticRoutePolicyPatch",
   "python"
 );
 @@clientName(
-  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
-  "OptionBProperties",
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainProperties.staticRouteRoutePolicy,
+  "staticRoutePolicy",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainPatchProperties.staticRouteRoutePolicy,
+  "staticRoutePolicy",
   "python"
 );
