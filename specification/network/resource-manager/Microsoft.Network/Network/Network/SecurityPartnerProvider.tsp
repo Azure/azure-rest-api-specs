@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model SecurityPartnerProvider extends Resource {
+model SecurityPartnerProvider extends Common.Resource {
   properties?: SecurityPartnerProviderPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -69,7 +71,10 @@ interface SecurityPartnerProviders {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SecurityPartnerProvider,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -87,15 +92,19 @@ interface SecurityPartnerProviders {
   list is ArmListBySubscription<SecurityPartnerProvider, Error = CloudError>;
 }
 
-@@doc(SecurityPartnerProvider.name,
+@@doc(
+  SecurityPartnerProvider.name,
   "The name of the Security Partner Provider."
 );
-@@doc(SecurityPartnerProvider.properties,
+@@doc(
+  SecurityPartnerProvider.properties,
   "Properties of the Security Partner Provider."
 );
-@@doc(SecurityPartnerProviders.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityPartnerProviders.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Security Partner Provider operation."
 );
-@@doc(SecurityPartnerProviders.updateTags::parameters.properties,
+@@doc(
+  SecurityPartnerProviders.updateTags::parameters.properties,
   "Parameters supplied to update Security Partner Provider tags."
 );

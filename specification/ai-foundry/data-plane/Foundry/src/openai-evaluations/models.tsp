@@ -104,7 +104,8 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
 #suppress "deprecated" "Deprecated status inherited from source OpenAI specification"
-@@changePropertyType(OpenAI.Eval.data_source_config,
+@@changePropertyType(
+  OpenAI.Eval.data_source_config,
 
     | OpenAI.CreateEvalCustomDataSourceConfig
     | OpenAI.CreateEvalLogsDataSourceConfig
@@ -117,7 +118,8 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.Eval.testing_criteria,
+@@changePropertyType(
+  OpenAI.Eval.testing_criteria,
   (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
@@ -150,7 +152,8 @@ model Eval is OpenAI.Eval {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
 #suppress "deprecated" "Deprecated status inherited from source OpenAI specification"
-@@changePropertyType(OpenAI.CreateEvalRequest.data_source_config,
+@@changePropertyType(
+  OpenAI.CreateEvalRequest.data_source_config,
 
     | OpenAI.CreateEvalCustomDataSourceConfig
     | OpenAI.CreateEvalLogsDataSourceConfig
@@ -163,7 +166,8 @@ model Eval is OpenAI.Eval {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.CreateEvalRequest.testing_criteria,
+@@changePropertyType(
+  OpenAI.CreateEvalRequest.testing_criteria,
   (
     | OpenAI.EvalGraderLabelModel
     | OpenAI.EvalGraderStringCheck
@@ -359,8 +363,7 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   lookback_hours?: int32 = 168;
 
   /** Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time. */
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  end_time?: utcDateTime;
+  end_time?: FoundryTimestamp;
 
   /** Sampling limit applied to traces retrieved for evaluation. */
   max_traces?: int32 = 1000;
@@ -497,7 +500,8 @@ model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.EvalRun.data_source,
+@@changePropertyType(
+  OpenAI.EvalRun.data_source,
 
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
@@ -526,7 +530,8 @@ model EvalRun is OpenAI.EvalRun {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Imported from OpenAI spec."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-@@changePropertyType(OpenAI.CreateEvalRunRequest.data_source,
+@@changePropertyType(
+  OpenAI.CreateEvalRunRequest.data_source,
 
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
@@ -552,7 +557,8 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
 
 /** Represents the result of an evaluation run output item. */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(OpenAI.EvalRunOutputItemResult,
+@@copyProperties(
+  OpenAI.EvalRunOutputItemResult,
   {
     /** The name of the metric (e.g., "fluency", "f1_score"). */
     metric?: string,
@@ -574,7 +580,8 @@ model UpdateEvalParametersBody is OpenAI.UpdateEvalParametersBody {
 model EvalRunOutputItemResult is OpenAI.EvalRunOutputItemResult;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(OpenAI.EvalRunOutputItem.results,
+@@changePropertyType(
+  OpenAI.EvalRunOutputItem.results,
   EvalRunOutputItemResult[]
 );
 
@@ -593,12 +600,14 @@ model EvalRunOutputItemSampleInput is OpenAI.EvalRunOutputItemSampleInput {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(OpenAI.EvalRunOutputItemSample.input,
+@@changePropertyType(
+  OpenAI.EvalRunOutputItemSample.input,
   EvalRunOutputItemSampleInput[]
 );
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@changePropertyType(OpenAI.EvalRunOutputItemSample.output,
+@@changePropertyType(
+  OpenAI.EvalRunOutputItemSample.output,
   EvalRunOutputItemSampleOutput[]
 );
 

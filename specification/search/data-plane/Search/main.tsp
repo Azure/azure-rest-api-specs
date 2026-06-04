@@ -18,13 +18,15 @@ using TypeSpec.Versioning;
  * Client that can be used to manage and query indexes and documents, as well as manage other resources, on a search service.
  */
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://search.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "api-key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.implicit,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+          scopes: ["https://search.azure.com/.default"],
+        }
+      ]>
 )
 @server(
   "{endpoint}",
@@ -42,4 +44,10 @@ namespace Search;
 enum Versions {
   /** The 2025-11-01-preview API version. */
   v2025_11_01_preview: "2025-11-01-preview",
+
+  /** The 2026-04-01 API version. */
+  v2026_04_01: "2026-04-01",
+
+  /** The 2026-05-01-preview API version. */
+  v2026_05_01_preview: "2026-05-01-preview",
 }

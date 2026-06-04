@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./GuestSubscription.tsp";
 import "./SharedLimit.tsp";
 import "./Feature.tsp";
+import "./VmFamily.tsp";
 import "./back-compat.tsp";
 
 using Azure.ResourceManager;
@@ -24,6 +25,12 @@ enum Versions {
 
   /** The 2026-03-20 API version. */
   v2026_03_20: "2026-03-20",
+
+  /** The 2026-04-30 API version. */
+  v2026_04_30: "2026-04-30",
+
+  /** The 2026-06-01 API version. */
+  v2026_06_01: "2026-06-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

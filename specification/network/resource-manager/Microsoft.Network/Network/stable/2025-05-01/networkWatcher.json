@@ -166,7 +166,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkWatcher"
+              "$ref": "#/definitions/Common.NetworkWatcher"
             }
           },
           "default": {
@@ -211,7 +211,7 @@
             "description": "Parameters that define the network watcher resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkWatcher"
+              "$ref": "#/definitions/Common.NetworkWatcher"
             }
           }
         ],
@@ -219,13 +219,13 @@
           "200": {
             "description": "Resource 'NetworkWatcher' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NetworkWatcher"
+              "$ref": "#/definitions/Common.NetworkWatcher"
             }
           },
           "201": {
             "description": "Resource 'NetworkWatcher' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NetworkWatcher"
+              "$ref": "#/definitions/Common.NetworkWatcher"
             }
           },
           "default": {
@@ -278,7 +278,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkWatcher"
+              "$ref": "#/definitions/Common.NetworkWatcher"
             }
           },
           "default": {
@@ -1139,7 +1139,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/Common.FlowLog"
             }
           },
           "default": {
@@ -1191,7 +1191,7 @@
             "description": "Parameters that define the create or update flow log resource.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/Common.FlowLog"
             }
           }
         ],
@@ -1199,13 +1199,13 @@
           "200": {
             "description": "Resource 'FlowLog' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/Common.FlowLog"
             }
           },
           "201": {
             "description": "Resource 'FlowLog' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/Common.FlowLog"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1233,7 +1233,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FlowLog"
+          "final-state-schema": "#/definitions/Common.FlowLog"
         },
         "x-ms-long-running-operation": true
       },
@@ -1281,7 +1281,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/Common.FlowLog"
             }
           },
           "default": {
@@ -2579,6 +2579,185 @@
         "endTime"
       ]
     },
+    "Common.FlowLog": {
+      "type": "object",
+      "description": "A flow log resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Common.FlowLogPropertiesFormat",
+          "description": "Properties of the flow log.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/Common.ManagedServiceIdentity",
+          "description": "FlowLog resource Managed Identity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.Resource"
+        }
+      ]
+    },
+    "Common.FlowLogFormatParameters": {
+      "type": "object",
+      "description": "Parameters that define the flow log format.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/Common.FlowLogFormatType",
+          "description": "The file type of flow log."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version (revision) of the flow log.",
+          "default": 0
+        }
+      }
+    },
+    "Common.FlowLogPropertiesFormat": {
+      "type": "object",
+      "description": "Parameters that define the configuration of flow log.",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "ID of network security group to which flow log will be applied."
+        },
+        "targetResourceGuid": {
+          "type": "string",
+          "description": "Guid of network security group to which flow log will be applied.",
+          "readOnly": true
+        },
+        "storageId": {
+          "type": "string",
+          "description": "ID of the storage account which is used to store the flow log."
+        },
+        "enabledFilteringCriteria": {
+          "type": "string",
+          "description": "Optional field to filter network traffic logs based on SrcIP, SrcPort, DstIP, DstPort, Protocol, Encryption, Direction and Action. If not specified, all network traffic will be logged."
+        },
+        "recordTypes": {
+          "type": "string",
+          "description": "Optional field to filter network traffic logs based on flow states. Value of this field could be any comma separated combination string of letters B,C,E or D. B represents Begin, when a flow is created. C represents Continue for an ongoing flow generated at every five-minute interval. E represents End, when a flow is terminated. D represents Deny, when a flow is denied. If not specified, all network traffic will be logged."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag to enable/disable flow logging."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/Common.RetentionPolicyParameters",
+          "description": "Parameters that define the retention policy for flow log."
+        },
+        "format": {
+          "$ref": "#/definitions/Common.FlowLogFormatParameters",
+          "description": "Parameters that define the flow log format."
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/Common.TrafficAnalyticsProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the flow log.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetResourceId",
+        "storageId"
+      ]
+    },
+    "Common.NetworkWatcher": {
+      "type": "object",
+      "description": "Network watcher in a resource group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Common.NetworkWatcherPropertiesFormat",
+          "description": "Properties of the network watcher.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.Resource"
+        }
+      ]
+    },
+    "Common.NetworkWatcherPropertiesFormat": {
+      "type": "object",
+      "description": "The network watcher properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the network watcher resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "Common.RetentionPolicyParameters": {
+      "type": "object",
+      "description": "Parameters that define the retention policy for flow log.",
+      "properties": {
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of days to retain flow log records.",
+          "default": 0
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag to enable/disable retention.",
+          "default": false
+        }
+      }
+    },
+    "Common.TrafficAnalyticsConfigurationProperties": {
+      "type": "object",
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag to enable/disable traffic analytics."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The resource guid of the attached workspace."
+        },
+        "workspaceRegion": {
+          "type": "string",
+          "description": "The location of the attached workspace."
+        },
+        "workspaceResourceId": {
+          "type": "string",
+          "description": "Resource Id of the attached workspace."
+        },
+        "trafficAnalyticsInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval in minutes which would decide how frequently TA service should do flow analytics."
+        }
+      }
+    },
+    "Common.TrafficAnalyticsProperties": {
+      "type": "object",
+      "description": "Parameters that define the configuration of traffic analytics.",
+      "properties": {
+        "networkWatcherFlowAnalyticsConfiguration": {
+          "$ref": "#/definitions/Common.TrafficAnalyticsConfigurationProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
+        }
+      }
+    },
     "ConnectionMonitor": {
       "type": "object",
       "description": "Parameters that define the operation to create a connection monitor.",
@@ -2901,7 +3080,7 @@
       "description": "Describes the properties of a connection monitor.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the connection monitor.",
           "readOnly": true
         },
@@ -3268,7 +3447,7 @@
           "description": "Configuration of the protocol."
         },
         "preferredIPVersion": {
-          "$ref": "./common.json#/definitions/IPVersion",
+          "$ref": "./common.json#/definitions/Common.IPVersion",
           "description": "Preferred IP version of the connection."
         }
       },
@@ -3334,47 +3513,6 @@
         }
       }
     },
-    "FlowLog": {
-      "type": "object",
-      "description": "A flow log resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FlowLogPropertiesFormat",
-          "description": "Properties of the flow log.",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
-          "description": "FlowLog resource Managed Identity"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Resource"
-        }
-      ]
-    },
-    "FlowLogFormatParameters": {
-      "type": "object",
-      "description": "Parameters that define the flow log format.",
-      "properties": {
-        "type": {
-          "$ref": "./common.json#/definitions/FlowLogFormatType",
-          "description": "The file type of flow log."
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The version (revision) of the flow log.",
-          "default": 0
-        }
-      }
-    },
     "FlowLogInformation": {
       "type": "object",
       "description": "Information on the configuration of flow log and traffic analytics (optional) .",
@@ -3389,11 +3527,11 @@
           "x-ms-client-flatten": true
         },
         "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsProperties",
+          "$ref": "#/definitions/Common.TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "identity": {
-          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "$ref": "./common.json#/definitions/Common.ManagedServiceIdentity",
           "description": "FlowLog resource Managed Identity"
         }
       },
@@ -3410,7 +3548,7 @@
           "type": "array",
           "description": "The FlowLog items on this page",
           "items": {
-            "$ref": "#/definitions/FlowLog"
+            "$ref": "#/definitions/Common.FlowLog"
           }
         },
         "nextLink": {
@@ -3444,69 +3582,17 @@
           "description": "Flag to enable/disable flow logging."
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicyParameters",
+          "$ref": "#/definitions/Common.RetentionPolicyParameters",
           "description": "Parameters that define the retention policy for flow log."
         },
         "format": {
-          "$ref": "#/definitions/FlowLogFormatParameters",
+          "$ref": "#/definitions/Common.FlowLogFormatParameters",
           "description": "Parameters that define the flow log format."
         }
       },
       "required": [
         "storageId",
         "enabled"
-      ]
-    },
-    "FlowLogPropertiesFormat": {
-      "type": "object",
-      "description": "Parameters that define the configuration of flow log.",
-      "properties": {
-        "targetResourceId": {
-          "type": "string",
-          "description": "ID of network security group to which flow log will be applied."
-        },
-        "targetResourceGuid": {
-          "type": "string",
-          "description": "Guid of network security group to which flow log will be applied.",
-          "readOnly": true
-        },
-        "storageId": {
-          "type": "string",
-          "description": "ID of the storage account which is used to store the flow log."
-        },
-        "enabledFilteringCriteria": {
-          "type": "string",
-          "description": "Optional field to filter network traffic logs based on SrcIP, SrcPort, DstIP, DstPort, Protocol, Encryption, Direction and Action. If not specified, all network traffic will be logged."
-        },
-        "recordTypes": {
-          "type": "string",
-          "description": "Optional field to filter network traffic logs based on flow states. Value of this field could be any comma separated combination string of letters B,C,E or D. B represents Begin, when a flow is created. C represents Continue for an ongoing flow generated at every five-minute interval. E represents End, when a flow is terminated. D represents Deny, when a flow is denied. If not specified, all network traffic will be logged."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable flow logging."
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicyParameters",
-          "description": "Parameters that define the retention policy for flow log."
-        },
-        "format": {
-          "$ref": "#/definitions/FlowLogFormatParameters",
-          "description": "Parameters that define the flow log format."
-        },
-        "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsProperties",
-          "description": "Parameters that define the configuration of traffic analytics."
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the flow log.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "targetResourceId",
-        "storageId"
       ]
     },
     "FlowLogStatusParameters": {
@@ -3746,7 +3832,7 @@
           "type": "array",
           "description": "Collection of custom security rules.",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/Common.SecurityRule"
           }
         }
       }
@@ -3756,7 +3842,7 @@
       "description": "Network configuration diagnostic result corresponded provided traffic query.",
       "properties": {
         "securityRuleAccessResult": {
-          "$ref": "./common.json#/definitions/SecurityRuleAccess",
+          "$ref": "./common.json#/definitions/Common.SecurityRuleAccess",
           "description": "The network traffic is allowed or denied."
         },
         "evaluatedNetworkSecurityGroups": {
@@ -3799,27 +3885,6 @@
         }
       }
     },
-    "NetworkWatcher": {
-      "type": "object",
-      "description": "Network watcher in a resource group.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkWatcherPropertiesFormat",
-          "description": "Properties of the network watcher.",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Resource"
-        }
-      ]
-    },
     "NetworkWatcherListResult": {
       "type": "object",
       "description": "Response for ListNetworkWatchers API service call.",
@@ -3828,23 +3893,12 @@
           "type": "array",
           "description": "List of network watcher resources.",
           "items": {
-            "$ref": "#/definitions/NetworkWatcher"
+            "$ref": "#/definitions/Common.NetworkWatcher"
           }
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results."
-        }
-      }
-    },
-    "NetworkWatcherPropertiesFormat": {
-      "type": "object",
-      "description": "The network watcher properties.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the network watcher resource.",
-          "readOnly": true
         }
       }
     },
@@ -4127,7 +4181,7 @@
       "description": "The properties of a packet capture session.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the packet capture session.",
           "readOnly": true
         }
@@ -4213,23 +4267,6 @@
         "targetResourceId"
       ]
     },
-    "RetentionPolicyParameters": {
-      "type": "object",
-      "description": "Parameters that define the retention policy for flow log.",
-      "properties": {
-        "days": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of days to retain flow log records.",
-          "default": 0
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable retention.",
-          "default": false
-        }
-      }
-    },
     "SecurityGroupNetworkInterface": {
       "type": "object",
       "description": "Network interface and all its associated security rules.",
@@ -4286,7 +4323,7 @@
           "type": "array",
           "description": "Collection of default security rules of the network security group.",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/Common.SecurityRule"
           }
         },
         "effectiveSecurityRules": {
@@ -4311,7 +4348,7 @@
           "type": "array",
           "description": "Collection of custom security rules.",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/Common.SecurityRule"
           }
         }
       }
@@ -4373,11 +4410,11 @@
           "description": "The name of the target resource group to perform topology on."
         },
         "targetVirtualNetwork": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json#/definitions/Common.SubResource",
           "description": "The reference to the Virtual Network resource."
         },
         "targetSubnet": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json#/definitions/Common.SubResource",
           "description": "The reference to the Subnet resource."
         }
       }
@@ -4404,43 +4441,6 @@
           "items": {
             "$ref": "#/definitions/TopologyAssociation"
           }
-        }
-      }
-    },
-    "TrafficAnalyticsConfigurationProperties": {
-      "type": "object",
-      "description": "Parameters that define the configuration of traffic analytics.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Flag to enable/disable traffic analytics."
-        },
-        "workspaceId": {
-          "type": "string",
-          "description": "The resource guid of the attached workspace."
-        },
-        "workspaceRegion": {
-          "type": "string",
-          "description": "The location of the attached workspace."
-        },
-        "workspaceResourceId": {
-          "type": "string",
-          "description": "Resource Id of the attached workspace."
-        },
-        "trafficAnalyticsInterval": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The interval in minutes which would decide how frequently TA service should do flow analytics."
-        }
-      }
-    },
-    "TrafficAnalyticsProperties": {
-      "type": "object",
-      "description": "Parameters that define the configuration of traffic analytics.",
-      "properties": {
-        "networkWatcherFlowAnalyticsConfiguration": {
-          "$ref": "#/definitions/TrafficAnalyticsConfigurationProperties",
-          "description": "Parameters that define the configuration of traffic analytics."
         }
       }
     },

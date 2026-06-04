@@ -3,11 +3,13 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(DeploymentScriptsClient.ContainerConfiguration,
+@@clientName(
+  DeploymentScriptsClient.ContainerConfiguration,
   "ScriptContainerConfiguration",
   "csharp"
 );
-@@clientName(DeploymentScriptsClient.ContainerGroupSubnetId,
+@@clientName(
+  DeploymentScriptsClient.ContainerGroupSubnetId,
   "ScriptContainerGroupSubnet",
   "csharp"
 );

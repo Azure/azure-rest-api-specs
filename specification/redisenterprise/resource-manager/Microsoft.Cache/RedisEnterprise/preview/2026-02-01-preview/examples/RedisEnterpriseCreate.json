@@ -1,0 +1,215 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "clusterName": "cache1",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {}
+        }
+      },
+      "location": "West US",
+      "properties": {
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "userAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+            },
+            "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+          }
+        },
+        "minimumTlsVersion": "1.2",
+        "publicNetworkAccess": "Disabled",
+        "maintenanceConfiguration": {
+          "maintenanceWindows": [
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Monday"
+              }
+            },
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Tuesday"
+              }
+            },
+            {
+              "type": "Weekly",
+              "duration": "PT6H",
+              "startHourUtc": 3,
+              "schedule": {
+                "dayOfWeek": "Wednesday"
+              }
+            }
+          ]
+        }
+      },
+      "sku": {
+        "name": "EnterpriseFlash_F300",
+        "capacity": 3
+      },
+      "tags": {
+        "tag1": "value1"
+      },
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "kind": "v1",
+        "location": "West US",
+        "properties": {
+          "hostName": "cache1.westus.something.azure.net",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled",
+          "maintenanceConfiguration": {
+            "maintenanceWindows": [
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Monday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Tuesday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Wednesday"
+                }
+              }
+            ]
+          },
+          "redisVersion": "5",
+          "resourceState": "Running"
+        },
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "tags": {
+          "tag1": "value1"
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cache1",
+        "type": "Microsoft.Cache/redisEnterprise",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "kind": "v1",
+        "location": "West US",
+        "properties": {
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "userAssignedIdentity",
+                "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity"
+              },
+              "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+            }
+          },
+          "hostName": "cache1.westus.something.azure.net",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Creating",
+          "publicNetworkAccess": "Disabled",
+          "maintenanceConfiguration": {
+            "maintenanceWindows": [
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Monday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Tuesday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Wednesday"
+                }
+              }
+            ]
+          },
+          "redisVersion": "5",
+          "resourceState": "Creating"
+        },
+        "sku": {
+          "name": "EnterpriseFlash_F300",
+          "capacity": 3
+        },
+        "tags": {
+          "tag1": "value1"
+        },
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    }
+  },
+  "operationId": "RedisEnterprise_Create",
+  "title": "RedisEnterpriseCreate"
+}

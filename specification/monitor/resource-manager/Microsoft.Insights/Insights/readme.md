@@ -44,28 +44,20 @@ These settings apply only when `--tag=package-2025-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-08'
 input-file:
-  - stable/2024-03-11/dataCollectionEndpoints_API.json
-  - stable/2024-03-11/dataCollectionRuleAssociations_API.json
-  - stable/2024-03-11/dataCollectionRules_API.json
-  - preview/2023-06-01-preview/privateLinkScopes_API.json
-  - stable/2022-10-01/autoscale_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
-  - stable/2024-02-01/metricDefinitions_API.json
-  - stable/2016-09-01/serviceDiagnosticsSettings_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
-  - stable/2024-02-01/metrics_API.json
+  - stable/2024-03-11/dataCollection.json
+  - preview/2023-06-01-preview/privateLinkScopes.json
+  - stable/2022-10-01/autoScale.json
+  - stable/2015-04-01/activityLogs.json
+  - stable/2016-09-01/serviceDiagnosticsSettings.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
+  - stable/2024-02-01/metrics.json
   - stable/2026-01-01/activityLogAlerts_API.json
-  - preview/2024-03-01-preview/metricAlert_API.json
+  - preview/2024-03-01-preview/metricAlert.json
   - stable/2026-03-01/scheduledQueryRule_API.json
-  - stable/2019-03-01/metricBaselines_API.json
-  - preview/2024-10-01-preview/actionGroups_API.json
-  - stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
-  - stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
-  - stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
-  - stable/2024-02-01/metricNamespaces_API.json
+  - stable/2019-03-01/metricBaselines.json
+  - preview/2024-10-01-preview/actionGroups.json
+  - stable/2021-10-01/networkSecurityPerimeter.json
 ```
 
 ### Tag: package-2026-03-01
@@ -74,7 +66,7 @@ These settings apply only when `--tag=package-2026-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-03-01'
 input-file:
-  - preview/2024-10-01-preview/actionGroups_API.json
+  - preview/2024-10-01-preview/actionGroups.json
   - stable/2026-03-01/scheduledQueryRule_API.json
 ```
 
@@ -84,8 +76,8 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
-  - preview/2024-10-01-preview/actionGroups_API.json
-  - preview/2025-01-01-preview/scheduledQueryRule_API.json
+  - preview/2024-10-01-preview/actionGroups.json
+  - preview/2025-01-01-preview/scheduledQueryRule.json
 ```
 
 ### Tag: package-preview-2024-10
@@ -94,7 +86,7 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
-  - preview/2024-10-01-preview/actionGroups_API.json
+  - preview/2024-10-01-preview/actionGroups.json
 
 suppressions:
   - code: AvoidAdditionalProperties
@@ -126,7 +118,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - preview/2024-03-01-preview/metricAlert_API.json
+  - preview/2024-03-01-preview/metricAlert.json
 
 suppressions:
   - code: RequiredPropertiesMissingInResourceModel
@@ -140,24 +132,18 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-04'
 input-file:
-  - stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
-  - stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
-  - stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
+  - stable/2021-10-01/networkSecurityPerimeter.json
   - preview/2023-09-01-preview/actionGroups_API.json
-  - stable/2024-02-01/metricNamespaces_API.json
-  - stable/2024-02-01/metricDefinitions_API.json
-  - stable/2024-02-01/metrics_API.json
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2024-02-01/metrics.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - preview/2023-05-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2015-04-01/activityLogs.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
@@ -176,22 +162,18 @@ These settings apply only when `--tag=package-python-sdk-stable` is specified on
 input-file:
   - stable/2023-01-01/actionGroups_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2015-04-01/activityLogs.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2022-10-01/autoScale.json
   - stable/2023-03-11/dataCollectionEndpoints_API.json
   - stable/2023-03-11/dataCollectionRuleAssociations_API.json
   - stable/2023-03-11/dataCollectionRules_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/logProfiles.json
   - stable/2018-03-01/metricAlert_API.json
-  - stable/2019-03-01/metricBaselines_API.json
-  - stable/2024-02-01/metricDefinitions_API.json
-  - stable/2024-02-01/metricNamespaces_API.json
-  - stable/2024-02-01/metrics_API.json
+  - stable/2019-03-01/metricBaselines.json
+  - stable/2024-02-01/metrics.json
   - stable/2015-04-01/operations_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
 ```
 
 ### Tag: package-python-sdk-for-cli-only
@@ -202,24 +184,20 @@ These settings apply only when `--tag=package-python-sdk-for-cli-only` is specif
 input-file:
  - stable/2023-01-01/actionGroups_API.json
  - stable/2020-10-01/activityLogAlerts_API.json
- - stable/2015-04-01/activityLogs_API.json
- - stable/2015-04-01/tenantActivityLogs_API.json
- - stable/2016-03-01/alertRulesIncidents_API.json
- - stable/2022-10-01/autoscale_API.json
- - stable/2019-03-01/metricBaselines_API.json
+ - stable/2015-04-01/activityLogs.json
+ - stable/2016-03-01/alertRulesIncidents.json
+ - stable/2022-10-01/autoScale.json
+ - stable/2019-03-01/metricBaselines.json
  - preview/2021-05-01-preview/diagnosticsSettings_API.json
  - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
- - stable/2015-04-01/eventCategories_API.json
  - preview/2018-06-01-preview/guestDiagnosticSettings_API.json
  - preview/2018-06-01-preview/guestDiagnosticSettingsAssociation_API.json
- - stable/2016-03-01/logProfiles_API.json
- - preview/2024-03-01-preview/metricAlert_API.json
- - stable/2024-02-01/metricDefinitions_API.json
- - stable/2024-02-01/metricNamespaces_API.json
- - stable/2024-02-01/metrics_API.json
+ - stable/2016-03-01/logProfiles.json
+ - preview/2024-03-01-preview/metricAlert.json
+ - stable/2024-02-01/metrics.json
  - stable/2015-04-01/operations_API.json
  - stable/2023-12-01/scheduledQueryRule_API.json
- - stable/2016-09-01/serviceDiagnosticsSettings_API.json
+ - stable/2016-09-01/serviceDiagnosticsSettings.json
  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
  - preview/2019-10-17-preview/privateLinkScopes_API.json
  - preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
@@ -235,20 +213,16 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - preview/2023-09-01-preview/actionGroups_API.json
-  - stable/2024-02-01/metricNamespaces_API.json
-  - stable/2024-02-01/metricDefinitions_API.json
-  - stable/2024-02-01/metrics_API.json
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2024-02-01/metrics.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - preview/2023-05-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2015-04-01/activityLogs.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
@@ -265,21 +239,17 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-03'
 input-file:
-  - stable/2024-02-01/metricNamespaces_API.json
-  - stable/2024-02-01/metricDefinitions_API.json
-  - stable/2024-02-01/metrics_API.json
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2024-02-01/metrics.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-05-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2015-04-01/activityLogs.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
@@ -296,21 +266,17 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - stable/2024-02-01/metricNamespaces_API.json
-  - stable/2024-02-01/metricDefinitions_API.json
-  - stable/2024-02-01/metrics_API.json
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2024-02-01/metrics.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-05-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2015-04-01/activityLogs.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
@@ -327,20 +293,18 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-10'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-05-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2023-10-01/metricDefinitions_API.json
   - stable/2023-10-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - preview/2022-08-01-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -358,7 +322,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-- preview/2023-06-01-preview/privateLinkScopes_API.json
+- preview/2023-06-01-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-2023-05-01-preview-only
@@ -376,20 +340,18 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-04'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-05-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - preview/2022-08-01-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -407,20 +369,18 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-03-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - preview/2023-03-15-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -467,7 +427,7 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - preview/2023-01-01-preview/activityLogAlerts_API.json
+  - preview/2023-01-01-preview/activityLogAlerts.json
 ```
 
 ### Tag: package-2022-08-01-preview-only
@@ -485,20 +445,18 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-03-01-preview/tenantActionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - preview/2023-03-15-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -516,19 +474,17 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - preview/2022-08-01-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -546,19 +502,17 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -576,19 +530,17 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-01'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2023-01-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -606,19 +558,17 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-10'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2022-06-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -636,7 +586,7 @@ These settings apply only when `--tag=package-2022-10-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-10-01-only'
 input-file:
-  - stable/2022-10-01/autoscale_API.json
+  - stable/2022-10-01/autoScale.json
 ```
 
 ### Tag: package-2022-06
@@ -647,17 +597,15 @@ These settings apply only when `--tag=package-2022-06` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2022-06-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -697,8 +645,8 @@ These settings apply only when `--tag=package-2016-03-preview-monitorlegacy` is 
 ```yaml $(tag) == 'package-2016-03-preview-monitorlegacy'
 input-file:
   - stable/2015-04-01/eventCategories_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 ```
 
@@ -741,7 +689,7 @@ These settings apply only when `--tag=package-2021-05-metrics` is specified on t
 input-file:
   - preview/2017-12-01-preview/metricNamespaces_API.json
   - stable/2018-03-01/metricAlert_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
   - stable/2021-05-01/operations_API.json
@@ -775,17 +723,15 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2021-09-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -824,17 +770,15 @@ These settings apply only when `--tag=package-2021-07` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2019-06-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -863,17 +807,15 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2019-06-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -962,18 +904,16 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2019-06-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -989,19 +929,17 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2019-06-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -1036,18 +974,16 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2019-06-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -1062,18 +998,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2019-03-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
@@ -1088,15 +1022,13 @@ These settings apply only when `--tag=package-2018-11-preview` is specified on t
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2018-09-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
   - stable/2018-03-01/metricAlert_API.json
@@ -1113,15 +1045,13 @@ These settings apply only when `--tag=package-2018-09` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2018-09-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
   - stable/2018-03-01/metricAlert_API.json
@@ -1137,15 +1067,13 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2018-03-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
   - stable/2018-03-01/metricAlert_API.json
@@ -1160,15 +1088,13 @@ These settings apply only when `--tag=package-2018-02-preview` is specified on t
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2017-04-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2018-01-01/metricDefinitions_API.json
   - stable/2018-01-01/metrics_API.json
 ```
@@ -1181,15 +1107,13 @@ These settings apply only when `--tag=package-2017-12` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2017-04-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - preview/2017-05-01-preview/metricDefinitions_API.json
   - preview/2017-05-01-preview/metrics_API.json
 ```
@@ -1202,15 +1126,13 @@ These settings apply only when `--tag=package-2017-09` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2018-09-01/actionGroups_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - preview/2017-05-01-preview/metricDefinitions_API.json
   - preview/2017-05-01-preview/metrics_API.json
 ```
@@ -1234,8 +1156,8 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 input-file:
   - stable/2015-04-01/autoscale_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2017-04-01/actionGroups_API.json
@@ -1268,7 +1190,7 @@ These settings apply only when `--tag=package-2019-03-01-only` is specified on t
 ```yaml $(tag) == 'package-2019-03-01-only'
 input-file:
   - stable/2019-03-01/actionGroups_API.json
-  - stable/2019-03-01/metricBaselines_API.json
+  - stable/2019-03-01/metricBaselines.json
 ```
 
 ### Tag: package-2018-11-27-preview-only
@@ -1386,7 +1308,7 @@ These settings apply only when `--tag=package-2016-09-01-only` is specified on t
 ```yaml $(tag) == 'package-2016-09-01-only'
 input-file:
   - stable/2016-09-01/metrics_API.json
-  - stable/2016-09-01/serviceDiagnosticsSettings_API.json
+  - stable/2016-09-01/serviceDiagnosticsSettings.json
 ```
 
 ### Tag: package-2016-06-only
@@ -1405,8 +1327,8 @@ These settings apply only when `--tag=package-2016-03-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2016-03-01-only'
 input-file:
-  - stable/2016-03-01/alertRulesIncidents_API.json
-  - stable/2016-03-01/logProfiles_API.json
+  - stable/2016-03-01/alertRulesIncidents.json
+  - stable/2016-03-01/logProfiles.json
   - stable/2016-03-01/metricDefinitions_API.json
 ```
 
@@ -1438,11 +1360,9 @@ These settings apply only when `--tag=package-2015-04-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2015-04-01-only'
 input-file:
-  - stable/2015-04-01/activityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2015-04-01/autoscale_API.json
-  - stable/2015-04-01/eventCategories_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
 ```
 
 ### Tag: package-2015-04-01-python-only
@@ -1451,11 +1371,9 @@ These settings apply only when `--tag=package-2015-04-01-python-only` is specifi
 
 ```yaml $(tag) == 'package-2015-04-01-python-only'
 input-file:
-  - stable/2015-04-01/activityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2015-04-01/autoscale_API.json
-  - stable/2015-04-01/eventCategories_API.json
   - stable/2015-04-01/operations_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
 ```
 
 ### Tag: package-2014-04-01-only
@@ -1592,7 +1510,7 @@ directive:
     where: $.paths
     reason: "The operations API is implemented however the tool is still firing due to the casing being different"
   - suppress: OperationsAPIImplementation
-    from: serviceDiagnosticsSettings_API.json
+    from: serviceDiagnosticsSettings.json
     where: $.paths
     reason: "Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/Insights/stable/2015-04-01/operations_API.json)"
   - suppress: OperationsAPIImplementation

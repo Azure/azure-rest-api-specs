@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/LoadBalancer.tsp";
 
@@ -9,6 +10,8 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -50,6 +53,13 @@ interface LoadBalancers {
        */
       @query("$expand")
       $expand?: string;
+
+      /**
+       * Controls verbosity of the returned load balancer resource. When set to 'Reduced', read-only back-reference collections (e.g., rules referencing frontendIPConfigurations) are omitted from the response.
+       */
+      @added(Versions.v2025_07_01)
+      @query("detailLevel")
+      detailLevel?: LoadBalancerDetailLevel;
     },
     Error = CloudError
   >;
@@ -78,7 +88,10 @@ interface LoadBalancers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     LoadBalancer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -119,12 +132,15 @@ interface LoadBalancers {
 
 @@doc(LoadBalancer.name, "The name of the load balancer.");
 @@doc(LoadBalancer.properties, "Properties of load balancer.");
-@@doc(LoadBalancers.createOrUpdate::parameters.resource,
+@@doc(
+  LoadBalancers.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update load balancer operation."
 );
-@@doc(LoadBalancers.updateTags::parameters.properties,
+@@doc(
+  LoadBalancers.updateTags::parameters.properties,
   "Parameters supplied to update load balancer tags."
 );
-@@doc(LoadBalancers.migrateToIpBased::parameters.body,
+@@doc(
+  LoadBalancers.migrateToIpBased::parameters.body,
   "Parameters supplied to the migrateToIpBased Api."
 );
