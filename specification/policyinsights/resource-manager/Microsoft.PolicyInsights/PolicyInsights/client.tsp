@@ -2073,14 +2073,14 @@ op attestationsListForResource(
 @@scope(Remediations.cancelAtResourceGroup, "!csharp");
 
 // Attestations: hide subscription and resource-group scope operations from C#
-@@scope(Attestations.getAtSubscription, "!csharp");
-@@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
-@@scope(Attestations.deleteAtSubscription, "!csharp");
-@@scope(Attestations.listForSubscription, "!csharp");
-@@scope(Attestations.getAtResourceGroup, "!csharp");
-@@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
-@@scope(Attestations.deleteAtResourceGroup, "!csharp");
-@@scope(Attestations.listForResourceGroup, "!csharp");
+// @@scope(Attestations.getAtSubscription, "!csharp");
+// @@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
+// @@scope(Attestations.deleteAtSubscription, "!csharp");
+// @@scope(Attestations.listForSubscription, "!csharp");
+// @@scope(Attestations.getAtResourceGroup, "!csharp");
+// @@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
+// @@scope(Attestations.deleteAtResourceGroup, "!csharp");
+// @@scope(Attestations.listForResourceGroup, "!csharp");
 
 // Restore ResourceData base class on response models that GA's autorest emitted
 // as ResourceData-derived (they have id/name/type fields).
