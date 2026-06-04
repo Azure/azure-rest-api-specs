@@ -130,7 +130,6 @@ model InvestigationResult {
   result: string;
 }
 
-@@clientName(RunParameters, "RunParametersContent", "csharp");
 @removed(Versions.v2025_10_03)
 @doc("The parameters used to run the investigation")
 model RunParameters {
