@@ -237,6 +237,39 @@
           "x-ms-enum": {
             "modelAsString": false
           }
+        },
+        "reference_source": {
+          "type": "string",
+          "description": "The source of the echo cancellation reference signal.\n- `server`: EC uses the internal TTS loopback as the reference signal (default, existing behavior).\n- `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.",
+          "default": "server",
+          "enum": [
+            "server",
+            "client"
+          ],
+          "x-ms-enum": {
+            "name": "EchoCancellationReferenceSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "server",
+                "value": "server",
+                "description": "EC uses the internal TTS loopback as the reference signal."
+              },
+              {
+                "name": "client",
+                "value": "client",
+                "description": "EC uses the client-supplied reference channel from the stereo input stream."
+              }
+            ]
+          }
+        },
+        "channels": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of input audio channels.\n- `1`: Mono input (default).\n- `2`: Interleaved stereo input where channel 0 is the microphone signal and channel 1 is the echo reference signal.\nWhen set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 2
         }
       },
       "required": [
@@ -660,6 +693,114 @@
         }
       ],
       "x-ms-discriminator-value": "azure-personal"
+    },
+    "AzureRealtimeNativeVoice": {
+      "type": "object",
+      "description": "Azure realtime native voice configuration. These voices are natively\nsupported by the `azure-realtime` model and offer higher quality speech\nsynthesis than standard Azure voices. Only valid when using the\n`azure-realtime` model.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the voice.",
+          "enum": [
+            "azure-realtime-native"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/AzureRealtimeNativeVoiceName",
+          "description": "The name of the Azure realtime native voice."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "AzureRealtimeNativeVoiceName": {
+      "type": "string",
+      "description": "Currently known voice names for the Azure realtime native voice type.\nThis is an extensible enum; additional voice names may be accepted by the\nservice in the future.",
+      "enum": [
+        "aarti",
+        "andrew",
+        "ava",
+        "denise",
+        "diya",
+        "elsa",
+        "florian",
+        "francisca",
+        "meera",
+        "xiaoxiao",
+        "yunxi",
+        "ximena"
+      ],
+      "x-ms-enum": {
+        "name": "AzureRealtimeNativeVoiceName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "aarti",
+            "value": "aarti",
+            "description": "Aarti voice."
+          },
+          {
+            "name": "andrew",
+            "value": "andrew",
+            "description": "Andrew voice."
+          },
+          {
+            "name": "ava",
+            "value": "ava",
+            "description": "Ava voice."
+          },
+          {
+            "name": "denise",
+            "value": "denise",
+            "description": "Denise voice."
+          },
+          {
+            "name": "diya",
+            "value": "diya",
+            "description": "Diya voice."
+          },
+          {
+            "name": "elsa",
+            "value": "elsa",
+            "description": "Elsa voice."
+          },
+          {
+            "name": "florian",
+            "value": "florian",
+            "description": "Florian voice."
+          },
+          {
+            "name": "francisca",
+            "value": "francisca",
+            "description": "Francisca voice."
+          },
+          {
+            "name": "meera",
+            "value": "meera",
+            "description": "Meera voice."
+          },
+          {
+            "name": "xiaoxiao",
+            "value": "xiaoxiao",
+            "description": "Xiaoxiao voice."
+          },
+          {
+            "name": "yunxi",
+            "value": "yunxi",
+            "description": "Yunxi voice."
+          },
+          {
+            "name": "ximena",
+            "value": "ximena",
+            "description": "Ximena voice."
+          }
+        ]
+      }
     },
     "AzureSemanticDetection": {
       "type": "object",
@@ -1306,6 +1447,61 @@
       ],
       "x-ms-discriminator-value": "input_audio.turn.start"
     },
+    "ClientEventInputTextDelta": {
+      "type": "object",
+      "description": "Streams a delta of input text content into the specified item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the item the text delta is being appended to."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The text delta to append."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part within the item the delta applies to.",
+          "default": 0
+        }
+      },
+      "required": [
+        "id",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text.delta"
+    },
+    "ClientEventInputTextDone": {
+      "type": "object",
+      "description": "Signals that the streamed input text content for the specified item is complete.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the item whose text content has finished streaming."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part within the item.",
+          "default": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text.done"
+    },
     "ClientEventOutputAudioBufferClear": {
       "type": "object",
       "description": "Client request to clear the avatar output buffer.",
@@ -1350,6 +1546,29 @@
         }
       ],
       "x-ms-discriminator-value": "response.create"
+    },
+    "ClientEventRtcCallSdpCreate": {
+      "type": "object",
+      "description": "Sent by the client to initiate a WebRTC session with an SDP offer.",
+      "properties": {
+        "sdp_offer": {
+          "type": "string",
+          "description": "The SDP offer from the client for WebRTC negotiation."
+        },
+        "session": {
+          "$ref": "#/definitions/RequestSession",
+          "description": "Optional initial session configuration. If provided, applied before the session is established."
+        }
+      },
+      "required": [
+        "sdp_offer"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "rtc.call.sdp.create"
     },
     "ClientEventSessionAvatarConnect": {
       "type": "object",
@@ -1409,7 +1628,10 @@
         "response.cancel",
         "session.avatar.connect",
         "mcp_approval_response",
-        "output_audio_buffer.clear"
+        "output_audio_buffer.clear",
+        "rtc.call.sdp.create",
+        "input_text.delta",
+        "input_text.done"
       ],
       "x-ms-enum": {
         "name": "ClientEventType",
@@ -1487,6 +1709,21 @@
             "name": "output_audio_buffer_clear",
             "value": "output_audio_buffer.clear",
             "description": "Client request to clear the avatar output buffer."
+          },
+          {
+            "name": "rtc_call_sdp_create",
+            "value": "rtc.call.sdp.create",
+            "description": "Sent by the client to initiate a WebRTC session with an SDP offer."
+          },
+          {
+            "name": "input_text_delta",
+            "value": "input_text.delta",
+            "description": "Streamed delta of input text content being appended to an item."
+          },
+          {
+            "name": "input_text_done",
+            "value": "input_text.done",
+            "description": "Signals that the streamed input text content for an item is complete."
           }
         ]
       }
@@ -1560,6 +1797,30 @@
         "type"
       ]
     },
+    "EchoCancellationReferenceSource": {
+      "type": "string",
+      "description": "The source of the echo cancellation reference signal.",
+      "enum": [
+        "server",
+        "client"
+      ],
+      "x-ms-enum": {
+        "name": "EchoCancellationReferenceSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "server",
+            "value": "server",
+            "description": "EC uses the internal TTS loopback as the reference signal."
+          },
+          {
+            "name": "client",
+            "value": "client",
+            "description": "EC uses the client-supplied reference channel from the stereo input stream."
+          }
+        ]
+      }
+    },
     "EouDetection": {
       "type": "object",
       "description": "Top-level union for end-of-utterance (EOU) semantic detection configuration.",
@@ -1569,7 +1830,8 @@
           "enum": [
             "semantic_detection_v1",
             "semantic_detection_v1_en",
-            "semantic_detection_v1_multilingual"
+            "semantic_detection_v1_multilingual",
+            "smart_end_of_turn_detection"
           ],
           "x-ms-enum": {
             "modelAsString": true
@@ -2618,8 +2880,9 @@
       "type": "object",
       "description": "Input image content part.",
       "properties": {
-        "url": {
-          "type": "string"
+        "image_url": {
+          "type": "string",
+          "format": "uri"
         },
         "detail": {
           "$ref": "#/definitions/RequestImageContentPartDetail"
@@ -2806,6 +3069,11 @@
         "tool_choice": {
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
         },
         "temperature": {
           "type": "number",
@@ -3135,6 +3403,11 @@
         "interim_response": {
           "$ref": "#/definitions/InterimResponseConfig",
           "description": "Configuration for interim response generation during latency or tool calls."
+        },
+        "invoke_input": {
+          "type": "object",
+          "description": "Input data to invoke the hosted agent. This feature is in preview.",
+          "additionalProperties": {}
         }
       }
     },
@@ -3158,10 +3431,6 @@
       "type": "object",
       "description": "A response item that represents a file search call.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the file search tool call."
-        },
         "queries": {
           "type": "array",
           "description": "The queries used for the file search.",
@@ -3630,6 +3899,11 @@
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
+        },
         "temperature": {
           "type": "number",
           "format": "float",
@@ -3745,10 +4019,6 @@
       "type": "object",
       "description": "A response item that represents a web search call.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the web search tool call."
-        },
         "status": {
           "type": "string",
           "description": "The status of the web search tool call.",
@@ -3772,6 +4042,28 @@
         }
       ],
       "x-ms-discriminator-value": "web_search_call"
+    },
+    "RtcCallErrorDetails": {
+      "type": "object",
+      "description": "Error details for RTC call errors.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The error category: `invalid_request_error` or `server_error`."
+        },
+        "code": {
+          "type": "string",
+          "description": "A machine-readable error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable error description."
+        }
+      },
+      "required": [
+        "type",
+        "message"
+      ]
     },
     "Scene": {
       "type": "object",
@@ -4232,6 +4524,38 @@
         }
       ],
       "x-ms-discriminator-value": "output_audio_buffer.cleared"
+    },
+    "ServerEventOutputAudioBufferStarted": {
+      "type": "object",
+      "description": "Returned when model audio output starts playing.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response whose audio started playing."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "output_audio_buffer.started"
+    },
+    "ServerEventOutputAudioBufferStopped": {
+      "type": "object",
+      "description": "Returned when model audio output finishes playing.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response whose audio stopped playing."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "output_audio_buffer.stopped"
     },
     "ServerEventResponseAnimationBlendshapeDelta": {
       "type": "object",
@@ -4978,6 +5302,26 @@
       ],
       "x-ms-discriminator-value": "response.function_call_arguments.done"
     },
+    "ServerEventResponseInvocationDelta": {
+      "type": "object",
+      "description": "Returned when a hosted agent invocation produces a non-speech SSE event, passed through as-is.",
+      "properties": {
+        "delta": {
+          "type": "object",
+          "description": "The raw event data from the hosted agent invocation.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.invocation.delta"
+    },
     "ServerEventResponseMcpCallArgumentsDelta": {
       "type": "object",
       "description": "Represents a delta update of the arguments for an MCP tool call.",
@@ -5402,6 +5746,57 @@
       ],
       "x-ms-discriminator-value": "response.web_search_call.searching"
     },
+    "ServerEventRtcCallError": {
+      "type": "object",
+      "description": "Returned when a WebRTC call operation fails.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The operation that caused the error (e.g., `rtc.call.sdp.create`)."
+        },
+        "rtc_call_id": {
+          "type": "string",
+          "description": "The RTC call identifier, if available."
+        },
+        "error": {
+          "$ref": "#/definitions/RtcCallErrorDetails",
+          "description": "The error details."
+        }
+      },
+      "required": [
+        "error"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "rtc.call.error"
+    },
+    "ServerEventRtcCallSdpCreated": {
+      "type": "object",
+      "description": "Returned when the WebRTC SDP negotiation completes successfully.",
+      "properties": {
+        "rtc_call_id": {
+          "type": "string",
+          "description": "The unique identifier for this RTC call session."
+        },
+        "sdp_answer": {
+          "type": "string",
+          "description": "The SDP answer from the server for WebRTC negotiation."
+        }
+      },
+      "required": [
+        "rtc_call_id",
+        "sdp_answer"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "rtc.call.sdp.created"
+    },
     "ServerEventSessionAvatarConnecting": {
       "type": "object",
       "description": "Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.",
@@ -5547,7 +5942,12 @@
         "response.file_search_call.in_progress",
         "response.file_search_call.completed",
         "output_audio_buffer.cleared",
-        "response.audio_transcript.annotation.added"
+        "response.audio_transcript.annotation.added",
+        "response.invocation.delta",
+        "rtc.call.sdp.created",
+        "rtc.call.error",
+        "output_audio_buffer.started",
+        "output_audio_buffer.stopped"
       ],
       "x-ms-enum": {
         "name": "ServerEventType",
@@ -5783,6 +6183,31 @@
             "name": "response_audio_transcript_annotation_added",
             "value": "response.audio_transcript.annotation.added",
             "description": "Audio transcript annotation added."
+          },
+          {
+            "name": "response_invocation_delta",
+            "value": "response.invocation.delta",
+            "description": "Invocation passthrough delta from hosted agent."
+          },
+          {
+            "name": "rtc_call_sdp_created",
+            "value": "rtc.call.sdp.created",
+            "description": "Returned when the WebRTC SDP negotiation completes successfully."
+          },
+          {
+            "name": "rtc_call_error",
+            "value": "rtc.call.error",
+            "description": "Returned when a WebRTC call operation fails."
+          },
+          {
+            "name": "output_audio_buffer_started",
+            "value": "output_audio_buffer.started",
+            "description": "Output audio buffer playback started."
+          },
+          {
+            "name": "output_audio_buffer_stopped",
+            "value": "output_audio_buffer.stopped",
+            "description": "Output audio buffer playback stopped."
           }
         ]
       }
@@ -5908,6 +6333,28 @@
           }
         ]
       }
+    },
+    "SmartEndOfTurnDetection": {
+      "type": "object",
+      "description": "Audio-based end-of-turn detection. Operates directly on the input audio\nstream rather than text. Use `threshold_level` and `timeout_ms` to tune\ndetection.",
+      "properties": {
+        "threshold_level": {
+          "$ref": "#/definitions/EouThresholdLevel",
+          "description": "Threshold level setting. One of `low`, `medium`, `high`, or `default`."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout in milliseconds.",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EouDetection"
+        }
+      ],
+      "x-ms-discriminator-value": "smart_end_of_turn_detection"
     },
     "StaticInterimResponseConfig": {
       "type": "object",
@@ -6313,6 +6760,10 @@
       "required": [
         "message"
       ]
+    },
+    "VoiceLiveFeaturesOptInKeys": {
+      "type": "string",
+      "x-nullable": false
     }
   },
   "parameters": {}
