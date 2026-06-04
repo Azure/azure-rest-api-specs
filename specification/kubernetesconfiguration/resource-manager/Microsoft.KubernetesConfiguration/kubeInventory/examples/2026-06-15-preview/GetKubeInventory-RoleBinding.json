@@ -1,0 +1,59 @@
+{
+  "title": "Get KubeInventory - RoleBinding",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "rolebinding-read-pods-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/rolebinding-read-pods-default",
+        "name": "rolebinding-read-pods-default",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "RoleBinding",
+          "metadata": {
+            "name": "read-pods",
+            "namespaceName": "default",
+            "uid": "d6e7f8a9-b0c1-2345-defa-567890123456",
+            "resourceVersion": "1467890",
+            "creationTimestamp": "2026-01-20T14:05:00Z"
+          },
+          "spec": {
+            "rbacSubjects": [
+              {
+                "kind": "ServiceAccount",
+                "name": "monitoring-sa",
+                "namespaceName": "monitoring"
+              },
+              {
+                "kind": "User",
+                "name": "alice@example.com"
+              }
+            ],
+            "rbacRoleRefKind": "Role",
+            "rbacRoleRefName": "pod-reader"
+          },
+          "status": {},
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

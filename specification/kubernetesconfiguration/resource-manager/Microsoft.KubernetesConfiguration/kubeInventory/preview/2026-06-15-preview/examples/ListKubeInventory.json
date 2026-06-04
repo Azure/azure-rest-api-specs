@@ -207,6 +207,84 @@
               "attachedToExtension": "azure-kube-inventory"
             }
           }
+          ,
+          {
+            "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/deployment-nginx-default",
+            "name": "deployment-nginx-default",
+            "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "Application",
+              "createdAt": "2026-06-01T10:00:00.000Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+            },
+            "properties": {
+              "apiVersion": "apps/v1",
+              "kind": "Deployment",
+              "metadata": {
+                "name": "nginx",
+                "namespaceName": "default",
+                "uid": "b1c2d3e4-f5a6-7890-bcde-f12345678901",
+                "resourceVersion": "2234567",
+                "generation": 3,
+                "creationTimestamp": "2026-04-15T09:00:00Z",
+                "labels": [
+                  { "name": "app", "value": "nginx" }
+                ]
+              },
+              "spec": {
+                "replicas": 3,
+                "selector": [
+                  { "name": "app", "value": "nginx" }
+                ],
+                "strategyType": "RollingUpdate",
+                "maxUnavailable": "25%",
+                "maxSurge": "25%",
+                "containers": [
+                  {
+                    "name": "nginx",
+                    "image": "nginx:1.25.4",
+                    "imagePullPolicy": "IfNotPresent",
+                    "ports": [
+                      { "name": "http", "containerPort": 80, "protocol": "TCP" }
+                    ],
+                    "resources": {
+                      "requests": { "cpu": "100m", "memory": "128Mi" },
+                      "limits": { "cpu": "500m", "memory": "512Mi" }
+                    }
+                  }
+                ]
+              },
+              "status": {
+                "replicas": 3,
+                "readyReplicas": 3,
+                "availableReplicas": 3,
+                "updatedReplicas": 3,
+                "unavailableReplicas": 0,
+                "observedGeneration": 3,
+                "conditions": [
+                  {
+                    "type": "Available",
+                    "status": "True",
+                    "reason": "MinimumReplicasAvailable",
+                    "message": "Deployment has minimum availability.",
+                    "lastTransitionTime": "2026-04-15T09:00:20Z"
+                  },
+                  {
+                    "type": "Progressing",
+                    "status": "True",
+                    "reason": "NewReplicaSetAvailable",
+                    "message": "ReplicaSet has successfully progressed.",
+                    "lastTransitionTime": "2026-04-15T09:00:20Z"
+                  }
+                ]
+              },
+              "events": [],
+              "attachedToExtension": "azure-kube-inventory"
+            }
+          }
         ],
         "nextLink": null
       }

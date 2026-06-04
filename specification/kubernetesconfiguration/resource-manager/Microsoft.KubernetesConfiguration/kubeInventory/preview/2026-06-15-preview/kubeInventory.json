@@ -177,12 +177,89 @@
         "x-ms-examples": {
           "Get KubeInventory": {
             "$ref": "./examples/GetKubeInventory.json"
+          },
+          "Get KubeInventory - CronJob": {
+            "$ref": "./examples/GetKubeInventory-CronJob.json"
+          },
+          "Get KubeInventory - DaemonSet": {
+            "$ref": "./examples/GetKubeInventory-DaemonSet.json"
+          },
+          "Get KubeInventory - Deployment": {
+            "$ref": "./examples/GetKubeInventory-Deployment.json"
+          },
+          "Get KubeInventory - HorizontalPodAutoscaler": {
+            "$ref": "./examples/GetKubeInventory-HorizontalPodAutoscaler.json"
+          },
+          "Get KubeInventory - Ingress": {
+            "$ref": "./examples/GetKubeInventory-Ingress.json"
+          },
+          "Get KubeInventory - IngressClass": {
+            "$ref": "./examples/GetKubeInventory-IngressClass.json"
+          },
+          "Get KubeInventory - Job": {
+            "$ref": "./examples/GetKubeInventory-Job.json"
+          },
+          "Get KubeInventory - NetworkPolicy": {
+            "$ref": "./examples/GetKubeInventory-NetworkPolicy.json"
+          },
+          "Get KubeInventory - Node": {
+            "$ref": "./examples/GetKubeInventory-Node.json"
+          },
+          "Get KubeInventory - PersistentVolume": {
+            "$ref": "./examples/GetKubeInventory-PersistentVolume.json"
+          },
+          "Get KubeInventory - PersistentVolumeClaim": {
+            "$ref": "./examples/GetKubeInventory-PersistentVolumeClaim.json"
+          },
+          "Get KubeInventory - PodDisruptionBudget": {
+            "$ref": "./examples/GetKubeInventory-PodDisruptionBudget.json"
+          },
+          "Get KubeInventory - ReplicaSet": {
+            "$ref": "./examples/GetKubeInventory-ReplicaSet.json"
+          },
+          "Get KubeInventory - Role": {
+            "$ref": "./examples/GetKubeInventory-Role.json"
+          },
+          "Get KubeInventory - RoleBinding": {
+            "$ref": "./examples/GetKubeInventory-RoleBinding.json"
+          },
+          "Get KubeInventory - Service": {
+            "$ref": "./examples/GetKubeInventory-Service.json"
+          },
+          "Get KubeInventory - ServiceAccount": {
+            "$ref": "./examples/GetKubeInventory-ServiceAccount.json"
+          },
+          "Get KubeInventory - StatefulSet": {
+            "$ref": "./examples/GetKubeInventory-StatefulSet.json"
+          },
+          "Get KubeInventory - StorageClass": {
+            "$ref": "./examples/GetKubeInventory-StorageClass.json"
+          },
+          "Get KubeInventory - VolumeAttachment": {
+            "$ref": "./examples/GetKubeInventory-VolumeAttachment.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "AttachedVolume": {
+      "type": "object",
+      "description": "A volume attached to a Kubernetes Node by the attach/detach controller.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the attached volume (matches the PersistentVolume name)."
+        },
+        "devicePath": {
+          "type": "string",
+          "description": "Device path on the node where the volume is attached (e.g., '/dev/sdc')."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "Capabilities": {
       "type": "object",
       "description": "Linux capability set to add to or drop from a container's default capabilities.",
@@ -255,6 +332,25 @@
         "containerPort"
       ]
     },
+    "ContainerProbe": {
+      "type": "object",
+      "description": "Simplified health probe configuration for a container.\nCaptures the probe mechanism type and the primary target (path or port).\nDetailed timing parameters (initialDelaySeconds, periodSeconds, etc.) can be stored in additionalFields.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Probe mechanism: 'HTTPGet', 'TCPSocket', 'Exec', or 'GRPC'."
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path for HTTPGet probes (e.g., '/healthz', '/readyz')."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number for HTTPGet or TCPSocket probes."
+        }
+      }
+    },
     "ContainerResourceQuantity": {
       "type": "object",
       "description": "CPU and memory resource quantities for a container.\nValues use Kubernetes resource notation: CPU as millicores (e.g., '500m', '2')\nand memory as byte-unit strings (e.g., '256Mi', '1Gi').\nSee: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
@@ -291,6 +387,10 @@
           "$ref": "#/definitions/Capabilities",
           "description": "Linux capability adjustments for this container."
         },
+        "privileged": {
+          "type": "boolean",
+          "description": "When true, the container runs with full host privileges (root + all Linux capabilities)."
+        },
         "readOnlyRootFilesystem": {
           "type": "boolean",
           "description": "Mount the container's root filesystem as read-only when true."
@@ -312,6 +412,10 @@
           "type": "integer",
           "format": "int64",
           "description": "GID to run the container process as."
+        },
+        "seccompProfile": {
+          "type": "string",
+          "description": "Seccomp profile type applied to this container ('RuntimeDefault', 'Unconfined', or 'Localhost')."
         }
       }
     },
@@ -326,6 +430,10 @@
         "image": {
           "type": "string",
           "description": "Container image reference (e.g., 'nginx:1.25')."
+        },
+        "imagePullPolicy": {
+          "type": "string",
+          "description": "Image pull policy for this container ('Always', 'IfNotPresent', or 'Never')."
         },
         "ports": {
           "type": "array",
@@ -346,6 +454,14 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "envFrom": {
+          "type": "array",
+          "description": "Sources that populate environment variables in bulk from ConfigMaps or Secrets.",
+          "items": {
+            "$ref": "#/definitions/EnvFromSource"
+          },
+          "x-ms-identifiers": []
         },
         "resources": {
           "$ref": "#/definitions/ContainerResourceRequirements",
@@ -378,6 +494,14 @@
         "securityContext": {
           "$ref": "#/definitions/ContainerSecurityContext",
           "description": "Security context applied to this container."
+        },
+        "livenessProbe": {
+          "$ref": "#/definitions/ContainerProbe",
+          "description": "Liveness probe that determines when to restart the container."
+        },
+        "readinessProbe": {
+          "$ref": "#/definitions/ContainerProbe",
+          "description": "Readiness probe that determines when the container is ready to accept traffic."
         }
       },
       "required": [
@@ -509,6 +633,24 @@
         "restartCount"
       ]
     },
+    "EnvFromSource": {
+      "type": "object",
+      "description": "A source for bulk-importing environment variables into a container from a ConfigMap or Secret.",
+      "properties": {
+        "configMapRef": {
+          "type": "string",
+          "description": "Name of the ConfigMap whose keys are imported as environment variables."
+        },
+        "secretRef": {
+          "type": "string",
+          "description": "Name of the Secret whose keys are imported as environment variables."
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Optional prefix prepended to each imported environment variable name."
+        }
+      }
+    },
     "EnvVar": {
       "type": "object",
       "description": "An environment variable set in a container.",
@@ -525,6 +667,67 @@
       "required": [
         "name"
       ]
+    },
+    "IngressPath": {
+      "type": "object",
+      "description": "An HTTP path rule within an Ingress host entry, mapping a URL path to a backend Service.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "URL path to match (e.g., '/api', '/')."
+        },
+        "pathType": {
+          "type": "string",
+          "description": "Path matching semantics ('Exact', 'Prefix', or 'ImplementationSpecific')."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Name of the backend Service receiving matched traffic."
+        },
+        "servicePort": {
+          "type": "string",
+          "description": "Port of the backend Service (numeric string or named port)."
+        }
+      },
+      "required": [
+        "serviceName",
+        "servicePort"
+      ]
+    },
+    "IngressRule": {
+      "type": "object",
+      "description": "A host-level routing rule in an Ingress resource.",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Fully qualified domain name or wildcard host (e.g., 'api.example.com', '*.example.com')."
+        },
+        "paths": {
+          "type": "array",
+          "description": "HTTP path rules mapping URL paths to backend Services.",
+          "items": {
+            "$ref": "#/definitions/IngressPath"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "IngressTls": {
+      "type": "object",
+      "description": "TLS configuration entry for an Ingress resource.",
+      "properties": {
+        "hosts": {
+          "type": "array",
+          "description": "Hostnames covered by this TLS certificate.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Secret containing the TLS certificate and private key."
+        }
+      }
     },
     "KubeInventory": {
       "type": "object",
@@ -835,6 +1038,47 @@
           "format": "int64",
           "description": "Grace period in seconds before forcibly terminating the pod on deletion."
         },
+        "nodeSelector": {
+          "type": "array",
+          "description": "Node label selector constraining which nodes this pod may be scheduled on.\nPopulated for Pod, Deployment, StatefulSet, and DaemonSet resources.",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "priorityClassName": {
+          "type": "string",
+          "description": "Name of the PriorityClass governing scheduling priority and preemption for this pod.\nPopulated for Pod, Deployment, StatefulSet, and DaemonSet resources."
+        },
+        "hostNetwork": {
+          "type": "boolean",
+          "description": "When true, the pod uses the host network namespace (disables pod network isolation).\nPopulated for Pod resources."
+        },
+        "hostPid": {
+          "type": "boolean",
+          "description": "When true, the pod shares the host PID namespace. Populated for Pod resources."
+        },
+        "hostIpc": {
+          "type": "boolean",
+          "description": "When true, the pod shares the host IPC namespace. Populated for Pod resources."
+        },
+        "runtimeClassName": {
+          "type": "string",
+          "description": "Name of the RuntimeClass for sandbox or specialized container runtimes\n(e.g., 'gvisor', 'kata-containers'). Populated for Pod resources."
+        },
+        "imagePullSecrets": {
+          "type": "array",
+          "description": "Names of Secrets used to authenticate image pulls from private registries.\nPopulated for Pod, Deployment, StatefulSet, and DaemonSet resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "podOs": {
+          "type": "string",
+          "description": "Operating system of the containers ('linux' or 'windows').\nPopulated for Pod resources."
+        },
         "replicas": {
           "type": "integer",
           "format": "int32",
@@ -844,6 +1088,46 @@
           "type": "string",
           "description": "Headless service name governing StatefulSet pod network identity.\nPopulated for StatefulSet resources."
         },
+        "selector": {
+          "type": "array",
+          "description": "Label selector identifying which pods are managed by this workload.\nPopulated for Deployment, StatefulSet, DaemonSet, and ReplicaSet resources.",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "strategyType": {
+          "type": "string",
+          "description": "Rollout strategy type.\n'RollingUpdate' or 'Recreate' for Deployment;\n'RollingUpdate' or 'OnDelete' for StatefulSet and DaemonSet."
+        },
+        "maxUnavailable": {
+          "type": "string",
+          "description": "Maximum number of pods that can be unavailable during a rolling update\n(absolute number or percentage string, e.g., '25%').\nPopulated for Deployment and DaemonSet resources."
+        },
+        "maxSurge": {
+          "type": "string",
+          "description": "Maximum number of pods that can be created above the desired count during a rolling update\n(absolute number or percentage string, e.g., '25%').\nPopulated for Deployment resources."
+        },
+        "paused": {
+          "type": "boolean",
+          "description": "When true, the Deployment rollout is paused. Populated for Deployment resources."
+        },
+        "podManagementPolicy": {
+          "type": "string",
+          "description": "Pod creation and deletion ordering policy for a StatefulSet\n('OrderedReady' for sequential or 'Parallel' for simultaneous).\nPopulated for StatefulSet resources."
+        },
+        "volumeClaimTemplates": {
+          "type": "array",
+          "description": "PVC templates stamped out per StatefulSet replica to provide stable per-pod storage.\nPopulated for StatefulSet resources.",
+          "items": {
+            "$ref": "#/definitions/VolumeClaimTemplate"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "serviceType": {
           "type": "string",
           "description": "How the service is exposed (e.g., 'ClusterIP', 'NodePort', 'LoadBalancer').\nPopulated for Service resources."
@@ -851,6 +1135,49 @@
         "clusterIp": {
           "type": "string",
           "description": "Cluster-internal IP assigned to the service. Populated for Service resources."
+        },
+        "servicePorts": {
+          "type": "array",
+          "description": "Ports exposed by the Service. Populated for Service resources.",
+          "items": {
+            "$ref": "#/definitions/ServicePort"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "serviceSelector": {
+          "type": "array",
+          "description": "Label selector routing traffic to pods backing this Service.\nPopulated for Service resources.",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "externalIps": {
+          "type": "array",
+          "description": "External IP addresses accepted by cluster nodes for this Service. Populated for Service resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalName": {
+          "type": "string",
+          "description": "DNS CNAME alias target for ExternalName Services. Populated for Service resources."
+        },
+        "externalTrafficPolicy": {
+          "type": "string",
+          "description": "Traffic routing policy for externally-facing addresses ('Cluster' or 'Local').\nPopulated for Service resources."
+        },
+        "loadBalancerClass": {
+          "type": "string",
+          "description": "Load balancer implementation class identifier. Populated for LoadBalancer Service resources."
+        },
+        "loadBalancerIp": {
+          "type": "string",
+          "description": "Static IP address requested from the cloud provider for a LoadBalancer Service.\nDeprecated in Kubernetes 1.24 in favor of spec.loadBalancerIP on the Service.\nPopulated for LoadBalancer Service resources."
         },
         "serviceAccountName": {
           "type": "string",
@@ -881,6 +1208,259 @@
         "securityContext": {
           "$ref": "#/definitions/PodSecurityContext",
           "description": "Security context applied at the pod level.\nPopulated for Pod, Deployment, StatefulSet, and DaemonSet resources."
+        },
+        "completions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total successful pod completions required for the Job to succeed.\nPopulated for Job resources."
+        },
+        "parallelism": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of pods running concurrently for a Job.\nPopulated for Job resources."
+        },
+        "backoffLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of retries before marking the Job as failed.\nPopulated for Job resources."
+        },
+        "schedule": {
+          "type": "string",
+          "description": "Cron schedule expression.\nPopulated for CronJob resources."
+        },
+        "concurrencyPolicy": {
+          "type": "string",
+          "description": "Concurrency policy for simultaneous CronJob runs ('Allow', 'Forbid', or 'Replace').\nPopulated for CronJob resources."
+        },
+        "suspend": {
+          "type": "boolean",
+          "description": "When true, future executions are suspended.\nPopulated for CronJob and Job resources."
+        },
+        "activeDeadlineSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum duration in seconds before the Job is terminated regardless of its success.\nPopulated for Job resources."
+        },
+        "completionMode": {
+          "type": "string",
+          "description": "Completion tracking mode for Job pods: 'NonIndexed' (default) or 'Indexed'.\nPopulated for Job resources."
+        },
+        "ttlSecondsAfterFinished": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds after Job completion before the Job and its pods are deleted automatically.\nPopulated for Job resources."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "IANA time zone name for CronJob scheduling (e.g., 'America/New_York', 'UTC').\nPopulated for CronJob resources."
+        },
+        "startingDeadlineSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deadline in seconds for a CronJob run to start if missed; missed runs are ignored beyond this window.\nPopulated for CronJob resources."
+        },
+        "accessModes": {
+          "type": "array",
+          "description": "Storage access modes requested or granted\n(e.g., 'ReadWriteOnce', 'ReadOnlyMany', 'ReadWriteMany').\nPopulated for PersistentVolumeClaim and PersistentVolume resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "Name of the StorageClass for dynamic provisioning or PVC-to-PV binding.\nPopulated for PVC, PV, and StorageClass resources."
+        },
+        "storageRequest": {
+          "type": "string",
+          "description": "Storage quantity requested by a PVC (e.g., '10Gi').\nPopulated for PersistentVolumeClaim resources."
+        },
+        "storageCapacity": {
+          "type": "string",
+          "description": "Total storage capacity of a PV (e.g., '100Gi').\nPopulated for PersistentVolume resources."
+        },
+        "reclaimPolicy": {
+          "type": "string",
+          "description": "Reclaim policy for a PV after its claim is released ('Retain', 'Delete', or 'Recycle').\nPopulated for PersistentVolume and StorageClass resources."
+        },
+        "volumeMode": {
+          "type": "string",
+          "description": "Volume mode describing how the volume is used ('Filesystem' or 'Block').\nPopulated for PVC and PV resources."
+        },
+        "boundVolumeName": {
+          "type": "string",
+          "description": "For a PVC: the name of the PV it is bound to.\nFor a PV: the name of the PVC bound to it."
+        },
+        "claimRefNamespace": {
+          "type": "string",
+          "description": "Namespace of the PVC bound to a PV (populated in PV claimRef).\nPopulated for PersistentVolume resources."
+        },
+        "csiDriver": {
+          "type": "string",
+          "description": "CSI driver name managing this PersistentVolume (e.g., 'disk.csi.azure.com').\nPopulated for PersistentVolume resources backed by a CSI driver."
+        },
+        "csiVolumeHandle": {
+          "type": "string",
+          "description": "Unique volume handle assigned by the CSI driver.\nPopulated for PersistentVolume resources backed by a CSI driver."
+        },
+        "provisioner": {
+          "type": "string",
+          "description": "CSI driver (provisioner) name for a StorageClass (e.g., 'disk.csi.azure.com').\nPopulated for StorageClass resources."
+        },
+        "volumeBindingMode": {
+          "type": "string",
+          "description": "When to bind a PV to a PVC: 'Immediate' binds on creation;\n'WaitForFirstConsumer' delays until a pod claims the PVC.\nPopulated for StorageClass resources."
+        },
+        "allowVolumeExpansion": {
+          "type": "boolean",
+          "description": "When true, PVCs using this StorageClass may be expanded after provisioning.\nPopulated for StorageClass resources."
+        },
+        "secretType": {
+          "type": "string",
+          "description": "Kubernetes Secret type (e.g., 'Opaque', 'kubernetes.io/tls', 'kubernetes.io/service-account-token').\nPopulated for Secret resources."
+        },
+        "automountServiceAccountToken": {
+          "type": "boolean",
+          "description": "When false, prevents the default Kubernetes service account token from being\nauto-mounted into pods running as this ServiceAccount.\nPopulated for ServiceAccount resources."
+        },
+        "attacherName": {
+          "type": "string",
+          "description": "Name of the CSI driver that should attach/detach the volume (e.g., 'disk.csi.azure.com').\nPopulated for VolumeAttachment resources."
+        },
+        "attachedVolumeName": {
+          "type": "string",
+          "description": "Name of the PersistentVolume being attached.\nPopulated for VolumeAttachment resources."
+        },
+        "ingressClassName": {
+          "type": "string",
+          "description": "Name of the IngressClass that governs this Ingress resource.\nPopulated for Ingress resources."
+        },
+        "ingressRules": {
+          "type": "array",
+          "description": "Routing rules mapping hostnames and URL paths to backend Services.\nPopulated for Ingress resources.",
+          "items": {
+            "$ref": "#/definitions/IngressRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "ingressTls": {
+          "type": "array",
+          "description": "TLS termination configuration for Ingress resources.\nPopulated for Ingress resources.",
+          "items": {
+            "$ref": "#/definitions/IngressTls"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultBackendServiceName": {
+          "type": "string",
+          "description": "Backend Service name to route traffic when no rule matches.\nPopulated for Ingress resources."
+        },
+        "defaultBackendServicePort": {
+          "type": "string",
+          "description": "Backend Service port to route traffic when no rule matches (number or named port).\nPopulated for Ingress resources."
+        },
+        "ingressController": {
+          "type": "string",
+          "description": "Controller class reference for an IngressClass (e.g., 'nginx.ingress.kubernetes.io/controller').\nPopulated for IngressClass resources."
+        },
+        "podSelectorLabels": {
+          "type": "array",
+          "description": "Label selector identifying the pods this NetworkPolicy applies to.\nPopulated for NetworkPolicy resources.",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "networkPolicyTypes": {
+          "type": "array",
+          "description": "Policy directions enforced ('Ingress', 'Egress', or both).\nPopulated for NetworkPolicy resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rbacRules": {
+          "type": "array",
+          "description": "RBAC permission rules granting access to Kubernetes API resources.\nPopulated for Role and ClusterRole resources.",
+          "items": {
+            "$ref": "#/definitions/PolicyRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "rbacSubjects": {
+          "type": "array",
+          "description": "Subjects (users, groups, service accounts) granted permissions by this binding.\nPopulated for RoleBinding and ClusterRoleBinding resources.",
+          "items": {
+            "$ref": "#/definitions/RbacSubject"
+          },
+          "x-ms-identifiers": []
+        },
+        "rbacRoleRefKind": {
+          "type": "string",
+          "description": "Kind of the role referenced by a binding ('Role' or 'ClusterRole').\nPopulated for RoleBinding and ClusterRoleBinding resources."
+        },
+        "rbacRoleRefName": {
+          "type": "string",
+          "description": "Name of the role referenced by a binding.\nPopulated for RoleBinding and ClusterRoleBinding resources."
+        },
+        "scaleTargetRefKind": {
+          "type": "string",
+          "description": "Kind of the resource being autoscaled (e.g., 'Deployment', 'StatefulSet').\nPopulated for HorizontalPodAutoscaler resources."
+        },
+        "scaleTargetRefName": {
+          "type": "string",
+          "description": "Name of the resource being autoscaled.\nPopulated for HorizontalPodAutoscaler resources."
+        },
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum replica count for autoscaling.\nPopulated for HorizontalPodAutoscaler resources."
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum replica count for autoscaling.\nPopulated for HorizontalPodAutoscaler resources."
+        },
+        "minAvailable": {
+          "type": "string",
+          "description": "Minimum number of pods that must remain available during voluntary disruptions\n(absolute number or percentage string, e.g., '2', '50%').\nPopulated for PodDisruptionBudget resources."
+        },
+        "maxUnavailablePods": {
+          "type": "string",
+          "description": "Maximum number of pods that may be simultaneously unavailable during voluntary disruptions.\nPopulated for PodDisruptionBudget resources."
+        },
+        "priorityValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Numeric scheduling priority value for a PriorityClass.\nPopulated for PriorityClass resources."
+        },
+        "globalDefault": {
+          "type": "boolean",
+          "description": "When true, this PriorityClass is the cluster default for pods without an explicit priorityClassName.\nPopulated for PriorityClass resources."
+        },
+        "preemptionPolicy": {
+          "type": "string",
+          "description": "Preemption policy for pods with this priority class when system resources are scarce\n('PreemptLowerPriority' or 'Never').\nPopulated for PriorityClass resources."
+        },
+        "taints": {
+          "type": "array",
+          "description": "Taints applied to the node, repelling pods that lack a matching toleration.\nPopulated for Node resources.",
+          "items": {
+            "$ref": "#/definitions/NodeTaint"
+          },
+          "x-ms-identifiers": []
+        },
+        "unschedulable": {
+          "type": "boolean",
+          "description": "When true, the node is cordoned and will not accept new pod scheduling.\nPopulated for Node resources."
+        },
+        "providerId": {
+          "type": "string",
+          "description": "Cloud provider identifier for the node\n(e.g., 'azure:///subscriptions/.../virtualMachines/vm-0').\nPopulated for Node resources."
+        },
+        "podCidr": {
+          "type": "string",
+          "description": "IP range assigned to pods running on this node.\nPopulated for Node resources."
         },
         "additionalFields": {
           "type": "array",
@@ -916,6 +1496,11 @@
           "type": "string",
           "description": "Human-readable message summarizing the resource state."
         },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total non-terminating pods targeted by this workload. Populated for Deployment, StatefulSet, ReplicaSet."
+        },
         "readyReplicas": {
           "type": "integer",
           "format": "int32",
@@ -924,15 +1509,87 @@
         "availableReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of pods available for at least minReadySeconds. Populated for Deployment, DaemonSet."
+          "description": "Number of pods available for at least minReadySeconds. Populated for Deployment, DaemonSet, StatefulSet."
+        },
+        "updatedReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Pods running the current (desired) template spec. Populated for Deployment, StatefulSet, DaemonSet."
+        },
+        "unavailableReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Pods required but not yet available. Populated for Deployment resources."
+        },
+        "currentReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Pods running the previous revision (before update completes).\nPopulated for StatefulSet resources."
+        },
+        "currentRevision": {
+          "type": "string",
+          "description": "Name of the StatefulSet revision corresponding to currentReplicas.\nPopulated for StatefulSet resources."
+        },
+        "updateRevision": {
+          "type": "string",
+          "description": "Name of the StatefulSet revision applied to updatedReplicas.\nPopulated for StatefulSet resources."
+        },
+        "desiredReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired replica count calculated by the HorizontalPodAutoscaler.\nPopulated for HorizontalPodAutoscaler resources."
+        },
+        "terminatingReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Pods that are terminating but not yet removed from the endpoints.\nPopulated for Deployment and ReplicaSet resources."
+        },
+        "desiredNumberScheduled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total nodes that should run the daemon pod. Populated for DaemonSet resources."
+        },
+        "currentNumberScheduled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Nodes running at least one daemon pod. Populated for DaemonSet resources."
+        },
+        "numberReady": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Nodes with a Ready daemon pod. Populated for DaemonSet resources."
+        },
+        "numberMisscheduled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Nodes running the daemon pod that should not be running it.\nPopulated for DaemonSet resources."
+        },
+        "numberUnavailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Nodes missing an available daemon pod. Populated for DaemonSet resources."
         },
         "podIp": {
           "type": "string",
           "description": "IP address allocated to the pod within the cluster. Populated for Pod resources."
         },
+        "podIps": {
+          "type": "array",
+          "description": "Additional pod IPs assigned in multi-network or dual-stack clusters. Populated for Pod resources.",
+          "items": {
+            "type": "string"
+          }
+        },
         "hostIp": {
           "type": "string",
           "description": "IP address of the node hosting the pod. Populated for Pod resources."
+        },
+        "hostIps": {
+          "type": "array",
+          "description": "Additional host IPs for dual-stack nodes. Populated for Pod resources.",
+          "items": {
+            "type": "string"
+          }
         },
         "startTime": {
           "type": "string",
@@ -949,14 +1606,147 @@
             "name"
           ]
         },
+        "initContainerStatuses": {
+          "type": "array",
+          "description": "Runtime status of each init container in the pod.\nPopulated for Pod resources.",
+          "items": {
+            "$ref": "#/definitions/ContainerStatus"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "qosClass": {
           "type": "string",
           "description": "QoS class assigned by Kubernetes based on resource requests and limits.\nOne of 'Guaranteed', 'Burstable', or 'BestEffort'. Populated for Pod resources."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Brief CamelCase reason for the pod's current state (e.g., 'Evicted', 'OOMKilled').\nPopulated for Pod resources."
         },
         "observedGeneration": {
           "type": "integer",
           "format": "int64",
           "description": "Most recent generation observed by the controller.\nPopulated for Deployment, StatefulSet, DaemonSet, and Pod resources."
+        },
+        "activeJobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of currently active (running or pending) pods. Populated for Job resources."
+        },
+        "succeededJobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pods that completed successfully. Populated for Job resources."
+        },
+        "failedJobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pods that failed. Populated for Job resources."
+        },
+        "readyPods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pods in ready state for a Job. Populated for Job resources."
+        },
+        "jobStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp when the Job started executing. Populated for Job resources."
+        },
+        "jobCompletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp when the Job completed successfully. Populated for Job resources."
+        },
+        "lastScheduleTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp when the CronJob last successfully scheduled a Job."
+        },
+        "lastSuccessfulTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp when the last Job triggered by this CronJob completed successfully."
+        },
+        "loadBalancerIngress": {
+          "type": "array",
+          "description": "External IP addresses or hostnames assigned to LoadBalancer Services or Ingress resources.\nPopulated for Service (type LoadBalancer) and Ingress resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastScaleTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the most recent scaling event triggered by the HPA.\nPopulated for HorizontalPodAutoscaler resources."
+        },
+        "nodeAddresses": {
+          "type": "array",
+          "description": "Network addresses of the node (InternalIP, ExternalIP, Hostname).\nPopulated for Node resources.",
+          "items": {
+            "$ref": "#/definitions/NodeAddress"
+          },
+          "x-ms-identifiers": [
+            "address"
+          ]
+        },
+        "nodeInfo": {
+          "$ref": "#/definitions/NodeSystemInfo",
+          "description": "Operating system and runtime information for the node.\nPopulated for Node resources."
+        },
+        "nodeCapacity": {
+          "$ref": "#/definitions/NodeResourceMap",
+          "description": "Total hardware resources of the node (cpu, memory, pods, ephemeral-storage).\nPopulated for Node resources."
+        },
+        "nodeAllocatable": {
+          "$ref": "#/definitions/NodeResourceMap",
+          "description": "Resources available for scheduling after system reservation.\nPopulated for Node resources."
+        },
+        "volumesAttached": {
+          "type": "array",
+          "description": "Volumes that have been successfully attached to the node by the attach/detach controller.\nPopulated for Node resources.",
+          "items": {
+            "$ref": "#/definitions/AttachedVolume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "currentHealthy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Currently healthy (Ready) pods counted by the PodDisruptionBudget."
+        },
+        "desiredHealthy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum healthy pods required by the PodDisruptionBudget."
+        },
+        "disruptionsAllowed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pod disruptions currently allowed by the PodDisruptionBudget."
+        },
+        "expectedPods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of pods counted by the PodDisruptionBudget (ready + not ready)."
+        },
+        "pvcCapacity": {
+          "type": "string",
+          "description": "Actual provisioned storage capacity for the PVC after binding (e.g., '10Gi').\nPopulated for PersistentVolumeClaim resources."
+        },
+        "pvcAccessModes": {
+          "type": "array",
+          "description": "Access modes granted to the PVC after it is bound to a PV.\nPopulated for PersistentVolumeClaim resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "volumeAttached": {
+          "type": "boolean",
+          "description": "When true, the volume is successfully attached to the target node.\nPopulated for VolumeAttachment resources."
         },
         "additionalFields": {
           "type": "array",
@@ -996,6 +1786,132 @@
             "name": "SCTP",
             "value": "SCTP",
             "description": "Stream Control Transmission Protocol."
+          }
+        ]
+      }
+    },
+    "NodeAddress": {
+      "type": "object",
+      "description": "A network address associated with a Kubernetes Node.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Address type (e.g., 'InternalIP', 'ExternalIP', 'Hostname')."
+        },
+        "address": {
+          "type": "string",
+          "description": "The address value (IP address or hostname)."
+        }
+      },
+      "required": [
+        "type",
+        "address"
+      ]
+    },
+    "NodeResourceMap": {
+      "type": "object",
+      "description": "Resource quantities reported for a Kubernetes Node (capacity or allocatable).",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "CPU quantity (e.g., '4', '3850m')."
+        },
+        "memory": {
+          "type": "string",
+          "description": "Memory quantity (e.g., '16Gi', '14902Mi')."
+        },
+        "pods": {
+          "type": "string",
+          "description": "Maximum number of pods the node supports."
+        },
+        "ephemeralStorage": {
+          "type": "string",
+          "description": "Ephemeral storage quantity (e.g., '119Gi')."
+        }
+      }
+    },
+    "NodeSystemInfo": {
+      "type": "object",
+      "description": "Operating system and runtime information reported by the kubelet for a Node.",
+      "properties": {
+        "kernelVersion": {
+          "type": "string",
+          "description": "Kernel version of the node OS (e.g., '5.15.0-1041-azure')."
+        },
+        "osImage": {
+          "type": "string",
+          "description": "Human-readable OS image string (e.g., 'Ubuntu 22.04.3 LTS')."
+        },
+        "containerRuntimeVersion": {
+          "type": "string",
+          "description": "Container runtime name and version (e.g., 'containerd://1.7.2')."
+        },
+        "kubeletVersion": {
+          "type": "string",
+          "description": "Kubelet binary version running on the node (e.g., 'v1.29.2')."
+        },
+        "kubeProxyVersion": {
+          "type": "string",
+          "description": "kube-proxy version running on the node."
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture of the node (e.g., 'amd64', 'arm64')."
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Operating system family ('linux' or 'windows')."
+        }
+      }
+    },
+    "NodeTaint": {
+      "type": "object",
+      "description": "A taint applied to a Kubernetes Node that repels pods without a matching toleration.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Taint key (e.g., 'node.kubernetes.io/not-ready')."
+        },
+        "value": {
+          "type": "string",
+          "description": "Taint value matched by tolerations using the 'Equal' operator."
+        },
+        "effect": {
+          "$ref": "#/definitions/NodeTaintEffect",
+          "description": "Effect applied to non-tolerating pods."
+        }
+      },
+      "required": [
+        "key",
+        "effect"
+      ]
+    },
+    "NodeTaintEffect": {
+      "type": "string",
+      "description": "Effect applied to pods that do not tolerate a node taint.",
+      "enum": [
+        "NoSchedule",
+        "PreferNoSchedule",
+        "NoExecute"
+      ],
+      "x-ms-enum": {
+        "name": "NodeTaintEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoSchedule",
+            "value": "NoSchedule",
+            "description": "New pods will not be scheduled on the tainted node."
+          },
+          {
+            "name": "PreferNoSchedule",
+            "value": "PreferNoSchedule",
+            "description": "The scheduler tries to avoid placing new pods on the tainted node."
+          },
+          {
+            "name": "NoExecute",
+            "value": "NoExecute",
+            "description": "Existing pods without a matching toleration are evicted from the tainted node."
           }
         ]
       }
@@ -1066,8 +1982,106 @@
             "type": "integer",
             "format": "int64"
           }
+        },
+        "seccompProfile": {
+          "type": "string",
+          "description": "Seccomp profile type applied to all containers ('RuntimeDefault', 'Unconfined', or 'Localhost')."
         }
       }
+    },
+    "PolicyRule": {
+      "type": "object",
+      "description": "A single RBAC permission rule granting verbs on Kubernetes API resources.",
+      "properties": {
+        "apiGroups": {
+          "type": "array",
+          "description": "API groups the rule applies to (use '' for the core group).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "description": "Resource types the rule applies to (e.g., 'pods', 'deployments', 'secrets').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verbs": {
+          "type": "array",
+          "description": "Actions permitted (e.g., 'get', 'list', 'watch', 'create', 'update', 'patch', 'delete').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceNames": {
+          "type": "array",
+          "description": "Specific resource names this rule applies to. Empty means all instances.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "verbs"
+      ]
+    },
+    "RbacSubject": {
+      "type": "object",
+      "description": "A subject (user, group, or service account) in a RoleBinding or ClusterRoleBinding.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the subject: 'User', 'Group', or 'ServiceAccount'."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the subject."
+        },
+        "namespaceName": {
+          "type": "string",
+          "description": "Namespace of the ServiceAccount. Required when kind is ServiceAccount."
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ]
+    },
+    "ServicePort": {
+      "type": "object",
+      "description": "A port exposed by a Kubernetes Service.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number the Service listens on (cluster-internal)."
+        },
+        "targetPort": {
+          "type": "string",
+          "description": "Port or named port on the target pod the traffic is forwarded to."
+        },
+        "nodePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "NodePort allocated for NodePort and LoadBalancer Services."
+        },
+        "protocol": {
+          "$ref": "#/definitions/NetworkProtocol",
+          "description": "Network protocol for this port."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional name for this port, unique within the Service."
+        },
+        "appProtocol": {
+          "type": "string",
+          "description": "Application-level protocol hint (e.g., 'http', 'https', 'grpc')."
+        }
+      },
+      "required": [
+        "port"
+      ]
     },
     "Toleration": {
       "type": "object",
@@ -1119,6 +2133,38 @@
         "sizeLimit": {
           "type": "string",
           "description": "Storage size limit for emptyDir volumes (e.g., '50Mi')."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "VolumeClaimTemplate": {
+      "type": "object",
+      "description": "A PersistentVolumeClaim template in a StatefulSet that provisions stable storage per replica.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume claim template, referenced by container volumeMounts."
+        },
+        "accessModes": {
+          "type": "array",
+          "description": "Requested storage access modes (e.g., 'ReadWriteOnce').",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "StorageClass used for dynamic provisioning."
+        },
+        "storageRequest": {
+          "type": "string",
+          "description": "Storage quantity requested per replica (e.g., '10Gi')."
+        },
+        "volumeMode": {
+          "type": "string",
+          "description": "Volume mode ('Filesystem' or 'Block')."
         }
       },
       "required": [

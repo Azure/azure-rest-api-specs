@@ -67,11 +67,21 @@
             "serviceAccountName": "nginx-sa",
             "dnsPolicy": "ClusterFirst",
             "terminationGracePeriodSeconds": 30,
+            "priorityClassName": "high-priority",
+            "nodeSelector": [
+              { "name": "kubernetes.io/os", "value": "linux" },
+              { "name": "agentpool", "value": "nodepool1" }
+            ],
+            "hostNetwork": false,
+            "hostPid": false,
+            "hostIpc": false,
+            "runtimeClassName": "containerd",
             "securityContext": {
               "runAsUser": 1000,
               "runAsGroup": 3000,
               "fsGroup": 2000,
-              "runAsNonRoot": true
+              "runAsNonRoot": true,
+              "seccompProfile": "RuntimeDefault"
             },
             "tolerations": [
               {
@@ -107,6 +117,7 @@
               {
                 "name": "nginx",
                 "image": "nginx:1.25.4",
+                "imagePullPolicy": "IfNotPresent",
                 "ports": [
                   {
                     "name": "http",
@@ -128,6 +139,9 @@
                     "name": "NGINX_WORKER_PROCESSES",
                     "value": "2"
                   }
+                ],
+                "envFrom": [
+                  { "configMapRef": "nginx-common-config" }
                 ],
                 "resources": {
                   "requests": {
@@ -160,11 +174,23 @@
                   "readOnlyRootFilesystem": true,
                   "runAsNonRoot": true,
                   "runAsUser": 1000,
+                  "privileged": false,
+                  "seccompProfile": "RuntimeDefault",
                   "capabilities": {
                     "drop": [
                       "ALL"
                     ]
                   }
+                },
+                "livenessProbe": {
+                  "type": "HTTPGet",
+                  "path": "/healthz",
+                  "port": 8080
+                },
+                "readinessProbe": {
+                  "type": "HTTPGet",
+                  "path": "/readyz",
+                  "port": 8080
                 }
               }
             ]
@@ -172,9 +198,13 @@
           "status": {
             "phase": "Running",
             "podIp": "10.244.1.42",
+            "podIps": ["10.244.1.42", "fd00::1:2a"],
             "hostIp": "10.240.0.4",
+            "hostIps": ["10.240.0.4"],
             "startTime": "2026-05-01T10:00:05Z",
             "qosClass": "Burstable",
+            "reason": "",
+            "initContainerStatuses": [],
             "conditions": [
               {
                 "type": "Initialized",

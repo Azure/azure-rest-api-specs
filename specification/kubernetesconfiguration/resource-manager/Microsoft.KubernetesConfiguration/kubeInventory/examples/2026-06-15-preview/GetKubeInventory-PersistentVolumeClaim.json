@@ -1,0 +1,60 @@
+{
+  "title": "Get KubeInventory - PersistentVolumeClaim",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "persistentvolumeclaim-data-postgres-0-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/persistentvolumeclaim-data-postgres-0-default",
+        "name": "persistentvolumeclaim-data-postgres-0-default",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "v1",
+          "kind": "PersistentVolumeClaim",
+          "metadata": {
+            "name": "data-postgres-0",
+            "namespaceName": "default",
+            "uid": "d0e1f2a3-b4c5-6789-defa-901234567890",
+            "resourceVersion": "9012345",
+            "creationTimestamp": "2026-03-01T10:00:05Z",
+            "labels": [
+              { "name": "app", "value": "postgres" },
+              { "name": "statefulset.kubernetes.io/pod-name", "value": "postgres-0" }
+            ]
+          },
+          "spec": {
+            "accessModes": ["ReadWriteOnce"],
+            "storageClassName": "managed-premium",
+            "storageRequest": "50Gi",
+            "volumeMode": "Filesystem",
+            "boundVolumeName": "pvc-d0e1f2a3-b4c5-6789-defa-901234567890"
+          },
+          "status": {
+            "phase": "Bound",
+            "pvcCapacity": "50Gi",
+            "pvcAccessModes": ["ReadWriteOnce"],
+            "conditions": []
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

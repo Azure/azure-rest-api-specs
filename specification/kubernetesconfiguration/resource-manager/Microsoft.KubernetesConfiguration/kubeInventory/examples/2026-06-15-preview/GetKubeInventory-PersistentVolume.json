@@ -1,0 +1,59 @@
+{
+  "title": "Get KubeInventory - PersistentVolume",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "persistentvolume-pvc-d0e1f2a3-b4c5-6789-defa",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/persistentvolume-pvc-d0e1f2a3-b4c5-6789-defa",
+        "name": "persistentvolume-pvc-d0e1f2a3-b4c5-6789-defa",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "v1",
+          "kind": "PersistentVolume",
+          "metadata": {
+            "name": "pvc-d0e1f2a3-b4c5-6789-defa-901234567890",
+            "uid": "e1f2a3b4-c5d6-7890-efab-012345678901",
+            "resourceVersion": "9123456",
+            "creationTimestamp": "2026-03-01T10:00:05Z",
+            "labels": [
+              { "name": "failure-domain.beta.kubernetes.io/zone", "value": "eastus-1" }
+            ]
+          },
+          "spec": {
+            "storageCapacity": "50Gi",
+            "accessModes": ["ReadWriteOnce"],
+            "reclaimPolicy": "Delete",
+            "storageClassName": "managed-premium",
+            "volumeMode": "Filesystem",
+            "claimRefNamespace": "default",
+            "boundVolumeName": "data-postgres-0",
+            "csiDriver": "disk.csi.azure.com",
+            "csiVolumeHandle": "/subscriptions/subId1/resourceGroups/mc_rg1_clusterName1_eastus/providers/Microsoft.Compute/disks/pvc-d0e1f2a3-b4c5-6789-defa-901234567890"
+          },
+          "status": {
+            "phase": "Bound"
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

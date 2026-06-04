@@ -1,0 +1,92 @@
+{
+  "title": "Get KubeInventory - ReplicaSet",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "replicaset-nginx-7d9f8c-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/replicaset-nginx-7d9f8c-default",
+        "name": "replicaset-nginx-7d9f8c-default",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "apps/v1",
+          "kind": "ReplicaSet",
+          "metadata": {
+            "name": "nginx-7d9f8c",
+            "namespaceName": "default",
+            "uid": "e4f5a6b7-c8d9-0123-efab-456789012345",
+            "resourceVersion": "4567890",
+            "generation": 1,
+            "creationTimestamp": "2026-04-15T09:00:10Z",
+            "labels": [
+              { "name": "app", "value": "nginx" },
+              { "name": "pod-template-hash", "value": "7d9f8c" }
+            ],
+            "ownerReferences": [
+              {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "nginx",
+                "uid": "b1c2d3e4-f5a6-7890-bcde-f12345678901",
+                "controller": true,
+                "blockOwnerDeletion": true
+              }
+            ]
+          },
+          "spec": {
+            "replicas": 3,
+            "selector": [
+              { "name": "app", "value": "nginx" },
+              { "name": "pod-template-hash", "value": "7d9f8c" }
+            ],
+            "containers": [
+              {
+                "name": "nginx",
+                "image": "nginx:1.25.4",
+                "imagePullPolicy": "IfNotPresent",
+                "ports": [
+                  { "name": "http", "containerPort": 80, "protocol": "TCP" }
+                ],
+                "resources": {
+                  "requests": { "cpu": "100m", "memory": "128Mi" },
+                  "limits": { "cpu": "500m", "memory": "512Mi" }
+                }
+              }
+            ]
+          },
+          "status": {
+            "replicas": 3,
+            "readyReplicas": 3,
+            "availableReplicas": 3,
+            "observedGeneration": 1,
+            "conditions": [
+              {
+                "type": "ReplicaFailure",
+                "status": "False",
+                "lastTransitionTime": "2026-04-15T09:00:10Z"
+              }
+            ]
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

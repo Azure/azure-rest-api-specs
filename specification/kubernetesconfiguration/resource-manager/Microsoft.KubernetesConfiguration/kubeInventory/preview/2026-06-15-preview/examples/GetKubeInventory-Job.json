@@ -1,0 +1,112 @@
+{
+  "title": "Get KubeInventory - Job",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "job-db-migration-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/job-db-migration-default",
+        "name": "job-db-migration-default",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "batch/v1",
+          "kind": "Job",
+          "metadata": {
+            "name": "db-migration",
+            "namespaceName": "default",
+            "uid": "b8c9d0e1-f2a3-4567-bcde-789012345678",
+            "resourceVersion": "7890123",
+            "generation": 1,
+            "creationTimestamp": "2026-06-01T06:00:00Z",
+            "labels": [
+              { "name": "app", "value": "db-migration" },
+              { "name": "batch.kubernetes.io/job-name", "value": "db-migration" }
+            ]
+          },
+          "spec": {
+            "completions": 1,
+            "parallelism": 1,
+            "backoffLimit": 3,
+            "suspend": false,
+            "activeDeadlineSeconds": 600,
+            "completionMode": "NonIndexed",
+            "ttlSecondsAfterFinished": 3600,
+            "serviceAccountName": "migration-sa",
+            "containers": [
+              {
+                "name": "migration",
+                "image": "myapp/migration:v2.3.0",
+                "imagePullPolicy": "Always",
+                "envFrom": [
+                  { "secretRef": "db-credentials" },
+                  { "configMapRef": "migration-config" }
+                ],
+                "resources": {
+                  "requests": { "cpu": "200m", "memory": "256Mi" },
+                  "limits": { "cpu": "500m", "memory": "512Mi" }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "readOnlyRootFilesystem": true,
+                  "privileged": false,
+                  "runAsNonRoot": true,
+                  "runAsUser": 1000
+                }
+              }
+            ]
+          },
+          "status": {
+            "activeJobCount": 0,
+            "succeededJobCount": 1,
+            "failedJobCount": 0,
+            "readyPods": 0,
+            "jobStartTime": "2026-06-01T06:00:05Z",
+            "jobCompletionTime": "2026-06-01T06:02:30Z",
+            "conditions": [
+              {
+                "type": "Complete",
+                "status": "True",
+                "reason": "Completed",
+                "message": "Job completed successfully",
+                "lastTransitionTime": "2026-06-01T06:02:30Z"
+              }
+            ]
+          },
+          "events": [
+            {
+              "type": "Normal",
+              "reason": "SuccessfulCreate",
+              "age": "3d",
+              "from": "job-controller",
+              "message": "Created pod: db-migration-xk9p2"
+            },
+            {
+              "type": "Normal",
+              "reason": "Completed",
+              "age": "3d",
+              "from": "job-controller",
+              "message": "Job completed"
+            }
+          ],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

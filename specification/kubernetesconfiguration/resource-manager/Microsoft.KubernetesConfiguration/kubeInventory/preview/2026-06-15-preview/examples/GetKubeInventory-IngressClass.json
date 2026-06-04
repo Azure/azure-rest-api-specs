@@ -1,0 +1,56 @@
+{
+  "title": "Get KubeInventory - IngressClass",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "ingressclass-nginx",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/ingressclass-nginx",
+        "name": "ingressclass-nginx",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "networking.k8s.io/v1",
+          "kind": "IngressClass",
+          "metadata": {
+            "name": "nginx",
+            "uid": "a3b4c5d6-e7f8-9012-abcd-456789012345",
+            "resourceVersion": "9345678",
+            "creationTimestamp": "2026-01-10T07:30:00Z",
+            "labels": [
+              { "name": "app.kubernetes.io/component", "value": "controller" },
+              { "name": "app.kubernetes.io/instance", "value": "ingress-nginx" },
+              { "name": "app.kubernetes.io/name", "value": "ingress-nginx" }
+            ],
+            "annotations": [
+              { "name": "ingressclass.kubernetes.io/is-default-class", "value": "true" }
+            ]
+          },
+          "spec": {
+            "ingressController": "k8s.io/ingress-nginx"
+          },
+          "status": {
+            "conditions": []
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}
