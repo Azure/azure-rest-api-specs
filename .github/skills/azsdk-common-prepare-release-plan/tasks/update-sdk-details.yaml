@@ -1,0 +1,16 @@
+id: release-plan-update-sdk-001
+name: Update SDK Details in Release Plan
+description: |
+  Test that the skill updates SDK/package details in a release plan using the TypeSpec project path.
+tags:
+  - basic
+  - update
+inputs:
+  prompt: "Update the SDK details in release plan work item 67890 using the TypeSpec project at specification/contosowidgetmanager/Contoso.WidgetManager."
+expected:
+  output_contains:
+    - "SDK"
+    - "release plan"
+  behavior:
+    max_tool_calls: 3
+    max_response_time_ms: 15000

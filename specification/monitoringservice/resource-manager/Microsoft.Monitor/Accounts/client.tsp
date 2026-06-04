@@ -9,6 +9,8 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Microsoft.Monitor;
 
+@@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
+
 @@clientName(
   Azure.ResourceManager.CommonTypes.Origin,
   "ArmOrigin",

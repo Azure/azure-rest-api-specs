@@ -1,0 +1,118 @@
+# cspell:ignore supprsvc secsupprsvc noreasonsvc vaguesvc existingsvc Suppr
+name: arm-api-reviewer-eval-suppressions-yaml
+description: |
+  suppressions.yaml continuity tests (14xxxx).
+  Validates the agent applies the same inventory-compare-classify
+  workflow to repo-root / service-scoped `suppressions.yaml` files as it
+  does to `readme.md` suppressions: new entries without a `reason:`
+  field are flagged, and new entries that suppress security-related
+  rules with vague or absent justification are treated as Blocking.
+
+defaults:
+  runs: 1
+  timeout: "180s"
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 140001 — New suppressions.yaml entry without a reason field
+  - name: detect-suppressions-yaml-no-reason
+    environment:
+      files:
+        - src: "../fixtures/suppressions-yaml/suppressions-no-reason.yaml"
+          dest: "specification/suppressions.yaml"
+    prompt: >
+      Review the following `specification/suppressions.yaml` file. The PR adds
+      two new entries to a previously-existing file:
+
+        1. A new entry for `tool: TypeSpecValidation`, `rules: [NoUnreferencedTypes]`,
+           paths `noreasonsvc/NoReason.Management` — with NO `reason:` field at all.
+        2. A new entry for `tool: TypeSpecValidation`, `rules: [RequireDocumentation]`,
+           paths `vaguesvc/Vague.Management` — with `reason: existing pattern`
+           (a vague, non-actionable placeholder).
+
+      The pre-existing entry (`FolderStructure / MustUseV2` on
+      `existingsvc/Existing.Management`) was already present on the base branch
+      and should NOT be flagged.
+
+      Apply the suppressions.yaml continuity analysis described in
+      `.github/agents/arm-api-reviewer.agent.md` (Step 4, "For
+      `suppressions.yaml` files"). Report findings with rule IDs, severity,
+      and the specific tuple (`tool` + `rules` + `paths`) being flagged.
+
+      File: specification/suppressions.yaml
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "missing-reason entry flagged"
+        config:
+          pattern: "(?is)NoUnreferencedTypes.{0,300}(reason|justification)|(reason|justification).{0,300}NoUnreferencedTypes"
+      - type: output-matches
+        name: "vague-reason entry flagged"
+        config:
+          pattern: "(?is)RequireDocumentation.{0,300}(vague|existing pattern|insufficient|non-actionable)|(vague|existing pattern|insufficient|non-actionable).{0,300}RequireDocumentation"
+      - type: output-not-matches
+        name: "pre-existing entry NOT flagged"
+        config:
+          pattern: "(?is)\\bNew\\b.{0,80}(FolderStructure|MustUseV2)|(FolderStructure|MustUseV2).{0,80}\\bNew\\b"
+      - type: prompt
+    rubric:
+      - The `NoUnreferencedTypes` entry on `noreasonsvc/NoReason.Management` is flagged because it has no `reason:` field at all
+      - The `RequireDocumentation` entry on `vaguesvc/Vague.Management` is flagged because `reason: existing pattern` is a vague, non-actionable placeholder
+      - The pre-existing `FolderStructure / MustUseV2` entry on `existingsvc/Existing.Management` is NOT flagged as a new finding — it was carried over from the base branch
+      - The agent identifies each finding by the `tool` + `rules` + `paths` tuple, not by line number alone
+      - The agent classifies both new findings as `[NEW]` (they did not exist on the base branch)
+
+  # 140002 — New suppressions.yaml entry for a security-related rule
+  - name: detect-suppressions-yaml-security-rule
+    environment:
+      files:
+        - src: "../fixtures/suppressions-yaml/suppressions-security-rule.yaml"
+          dest: "specification/suppressions.yaml"
+    prompt: >
+      Review the following `specification/suppressions.yaml` file. The PR adds
+      two new entries to a previously-existing file:
+
+        1. `tool: Spectral`, `rules: [XmsSecretNotReadBack]`, paths
+           `secsupprsvc/SecSuppr.Management`, `reason: will fix later`.
+        2. `tool: Spectral`, `rules: [SecretPropertyMustBeWriteOnly]`, paths
+           `secsupprsvc/SecSuppr.Management`, NO `reason:` field.
+
+      Both `XmsSecretNotReadBack` and `SecretPropertyMustBeWriteOnly` are
+      SECURITY-related rules — they prevent secrets from being read back through
+      the API surface.
+
+      Apply the suppressions.yaml continuity analysis described in
+      `.github/agents/arm-api-reviewer.agent.md`. Report findings with rule IDs,
+      severity, and the specific tuple being flagged. Per agent guidance,
+      suppressions of security-related rules with insufficient justification
+      must be treated as Blocking.
+
+      File: specification/suppressions.yaml
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "XmsSecretNotReadBack flagged as Blocking"
+        config:
+          pattern: "(?is)XmsSecretNotReadBack.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}XmsSecretNotReadBack"
+      - type: output-matches
+        name: "SecretPropertyMustBeWriteOnly flagged as Blocking"
+        config:
+          pattern: "(?is)SecretPropertyMustBeWriteOnly.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}SecretPropertyMustBeWriteOnly"
+      - type: output-matches
+        name: "security framing present"
+        config:
+          pattern: "(?i)security|secret"
+      - type: prompt
+    rubric:
+      - Both new entries (XmsSecretNotReadBack and SecretPropertyMustBeWriteOnly) are flagged as Blocking because they suppress security-related rules with insufficient justification
+      - The agent explicitly notes that these are security-related rules and that suppressing them requires specific, verifiable justification — `will fix later` and an absent reason both fail this bar
+      - The pre-existing `FolderStructure / MustUseV2` entry is NOT flagged as a new finding
+      - Both new findings are classified as `[NEW]`
