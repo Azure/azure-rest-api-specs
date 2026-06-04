@@ -196,28 +196,3 @@ op replacePurge(
 @@apiVersion(ApiRevisionInfoContract.apiVersionSet, false);
 @@apiVersion(ApiManagementServiceBaseProperties.apiVersionConstraint, false);
 @@apiVersion(ApiManagementSku.apiVersions, false);
-
-/**
- * override for ApiManagementServiceResources.delete - remove final result for JavaScript
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceApiManagementServiceDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  serviceName: string,
-):
-  | ArmDeletedResponse
-  | (ArmDeleteAcceptedLroResponse & {
-      @bodyRoot
-      _: ApiManagementServiceResource;
-    })
-  | ArmDeletedNoContentResponse;
-
-@@override(
-  ApiManagementServiceResources.delete,
-  replaceApiManagementServiceDelete,
-  "javascript"
-);

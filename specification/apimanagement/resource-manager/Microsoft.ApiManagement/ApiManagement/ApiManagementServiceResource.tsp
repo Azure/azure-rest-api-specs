@@ -177,7 +177,7 @@ interface ApiManagementServiceResources {
     ApiManagementServiceResource,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: ApiManagementServiceResource;
