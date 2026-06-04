@@ -10,15 +10,6 @@ options:
     # output-file: "openapi3/{version}/microsoft-foundry-openapi3.yaml"
     file-type: [yaml, json]
     omit-unreachable-types: true
-  "@azure-tools/typespec-python":
-    package-mode: "dataplane"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
-    package-name: "azure-ai-projects"
-    namespace: "azure.ai.projects"
-    api-version: "v1"
-    flavor: azure
-    generate-test: false
-    generate-sample: false
   "@typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects
@@ -30,18 +21,6 @@ options:
     api-version: "virtual-public-preview"
     flavor: azure
     clear-output-folder: true
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/ai-projects"
-    api-version: "v1"
-    is-modular-library: true
-    generate-test: true
-    generate-metadata: false
-    ignore-property-name-normalize: true
-    ignore-enum-member-name-normalize: true
-    package-details:
-      name: "@azure/ai-projects"
-      description: "Azure AI Projects Client"
-    flavor: azure
   "@azure-tools/typespec-java":
     api-version: "v1"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
