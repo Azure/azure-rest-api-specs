@@ -6,11 +6,7 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias DeploymentServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
-
-alias DeploymentOperations = Azure.Core.ResourceOperations<DeploymentServiceTraits>;
+alias DeploymentOperations = FoundryAzureOperations<{}>;
 
 @tag("Deployments")
 interface Deployments {

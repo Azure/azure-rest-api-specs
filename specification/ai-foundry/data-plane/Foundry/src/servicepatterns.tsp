@@ -16,13 +16,79 @@ alias FoundryDataPlaneApiVersionParameter = {
   apiVersion: string;
 };
 
+/** Error response for Azure range errors. */
+alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(499)
+      @minValue(400)
+      @statusCode
+      statusCode: int32;
+    }
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(599)
+      @minValue(500)
+      @statusCode
+      statusCode: int32;
+    };
+
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
   Azure.Core.Traits.NoConditionalRequests &
   FoundryDataPlaneApiVersionParameter;
 
-alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
-  FoundryDataPlaneAzureTraits>;
+alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<
+  ExtraTraits & FoundryDataPlaneAzureTraits,
+  AzureRangeErrorResponse
+>;
+
+alias FoundryStandardResourceOperations = Azure.Core.ResourceOperations<
+  Azure.Core.Traits.NoConditionalRequests &
+    Azure.Core.Traits.NoRepeatableRequests &
+    Azure.Core.Traits.NoClientRequestId,
+  AzureRangeErrorResponse
+>;
+
+op FoundryOperation<
+  Params extends Reflection.Model,
+  Response,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.Operation<
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryResourceOperation<
+  Resource extends Reflection.Model,
+  Params extends Reflection.Model,
+  Response,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.ResourceOperation<
+  Resource,
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
+
+op FoundryResourceList<
+  Resource extends Reflection.Model,
+  Params extends Reflection.Model,
+  Response extends Reflection.Model,
+  Traits extends Reflection.Model = {}
+> is Azure.Core.Foundations.ResourceList<
+  Resource,
+  Params,
+  Response,
+  Traits,
+  AzureRangeErrorResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -30,7 +96,9 @@ op FoundryDataPlaneOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
+>(...Params, ...FoundryDataPlaneApiVersionParameter):
+  | Response
+  | AzureRangeErrorResponse<ErrorResponse>;
 
 // ---- Feature opt-in keys & preview headers ----
 
@@ -220,7 +288,7 @@ interface VersionedOperations<
   @Rest.actionSeparator("/")
   @get
   @list
-  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listVersions is FoundryStandardResourceOperations.ResourceAction<
     TEntityType,
     TListVersionsParameters,
     Azure.Core.Page<TEntityType>
@@ -230,7 +298,7 @@ interface VersionedOperations<
   @summary("List latest versions")
   @doc("List the latest version of each {name}", TEntityType)
   @Rest.listsResource(TEntityType)
-  listLatest is Azure.Core.Foundations.ResourceList<
+  listLatest is FoundryResourceList<
     TEntityType,
     TListLatestParameters,
     Azure.Core.Page<TEntityType>
@@ -242,7 +310,7 @@ interface VersionedOperations<
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     TEntityType
   )
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     TEntityType,
     {
       @doc("The specific version id of the {name} to retrieve.", TEntityType)
@@ -260,7 +328,7 @@ interface VersionedOperations<
     TEntityType
   )
   @delete
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     TEntityType,
     {
       @doc("The version of the {name} to delete.", TEntityType)
@@ -278,7 +346,7 @@ interface VersionedOperations<
     TEntityType
   )
   @patch
-  createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdateVersion is FoundryResourceOperation<
     TEntityType,
     TInputParameters,
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>

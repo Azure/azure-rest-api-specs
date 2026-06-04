@@ -22,7 +22,7 @@ interface Datasets
   /** Initiates a new pending upload or retrieves an existing one for the specified dataset version. */
   @summary("Start a pending upload")
   @Rest.action("startPendingUpload")
-  startPendingUploadVersion is Azure.Core.Foundations.ResourceOperation<
+  startPendingUploadVersion is FoundryResourceOperation<
     DatasetVersion,
     {
       @doc("The pending upload request parameters")
@@ -45,7 +45,7 @@ interface Datasets
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
-  getCredentials is Azure.Core.Foundations.ResourceOperation<
+  getCredentials is FoundryResourceOperation<
     DatasetVersion,
     {
       @doc("The specific version id of the DatasetVersion to operate on.")

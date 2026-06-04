@@ -29,7 +29,7 @@ interface Evaluators {
   @Rest.actionSeparator("/")
   @Http.get
   @list
-  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listVersions is FoundryStandardResourceOperations.ResourceAction<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
     Azure.Core.Page<EvaluatorVersion>
@@ -40,7 +40,7 @@ interface Evaluators {
   @summary("List latest evaluator versions")
   @doc("Lists the latest version of each evaluator")
   @Rest.listsResource(EvaluatorVersion)
-  listLatestVersions is Azure.Core.Foundations.ResourceList<
+  listLatestVersions is FoundryResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
     Azure.Core.Page<EvaluatorVersion>
@@ -50,7 +50,7 @@ interface Evaluators {
   /** Retrieves the specified evaluator version, returning 404 if it does not exist. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Get an evaluator version")
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -71,7 +71,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Delete an evaluator version")
   @Http.delete
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -90,7 +90,7 @@ interface Evaluators {
   @summary("Create an evaluator version")
   @Rest.segment("versions")
   @Http.post
-  createVersion is Azure.Core.Foundations.ResourceOperation<
+  createVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;
@@ -107,7 +107,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Update an evaluator version")
   @Http.patch(#{ implicitOptionality: true })
-  updateVersion is Azure.Core.Foundations.ResourceOperation<
+  updateVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
       ...EvaluatorsPreviewHeader;

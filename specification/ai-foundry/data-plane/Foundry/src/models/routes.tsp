@@ -29,7 +29,7 @@ interface Models
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @summary("Get a model version")
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  getVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is FoundryResourceOperation<
     ModelVersion,
     {
       ...ModelsPreviewHeader;
@@ -49,7 +49,7 @@ interface Models
   @doc("Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.")
   @delete
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  deleteVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is FoundryResourceOperation<
     ModelVersion,
     {
       ...ModelsPreviewHeader;
@@ -76,7 +76,7 @@ interface Models
   @operationId("Models_updateVersion")
   @patch
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  createOrUpdateVersion is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdateVersion is FoundryResourceOperation<
     ModelVersion,
     InputParameters<UpdateModelVersionRequest, "model_version_update"> &
       ModelsPreviewHeader,
@@ -89,7 +89,7 @@ interface Models
   @route("/models/{name}/versions/{version}/createAsync")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  createAsync is Azure.Core.Foundations.Operation<
+  createAsync is FoundryOperation<
     {
       ...ModelsPreviewHeader;
 
@@ -114,7 +114,7 @@ interface Models
   @route("/models/{name}/versions/{version}/startPendingUpload")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  startPendingUpload is Azure.Core.Foundations.Operation<
+  startPendingUpload is FoundryOperation<
     {
       ...ModelsPreviewHeader;
 
@@ -138,7 +138,7 @@ interface Models
   @route("/models/{name}/versions/{version}/credentials")
   @post
   @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
-  getCredentials is Azure.Core.Foundations.Operation<
+  getCredentials is FoundryOperation<
     {
       ...ModelsPreviewHeader;
 

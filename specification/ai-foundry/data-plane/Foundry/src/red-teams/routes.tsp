@@ -12,7 +12,7 @@ interface RedTeams {
   /** Retrieves the specified redteam and its configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @summary("Get a redteam")
-  get is Azure.Core.Foundations.ResourceOperation<
+  get is FoundryResourceOperation<
     RedTeam,
     {
       ...RedTeamsPreviewHeader;
@@ -24,7 +24,7 @@ interface RedTeams {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @summary("List redteams")
   @Rest.listsResource(RedTeam)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     RedTeam,
     RedTeamsPreviewHeader,
     Azure.Core.Page<RedTeam>

@@ -28,7 +28,7 @@ interface EvaluationRules {
   // GET /evaluationrules/{id}
   /** Retrieves the specified evaluation rule and its configuration. */
   @summary("Get an evaluation rule")
-  get is Azure.Core.Foundations.ResourceOperation<
+  get is FoundryResourceOperation<
     EvaluationRule,
     {},
     Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>
@@ -38,7 +38,7 @@ interface EvaluationRules {
   /** Removes the specified evaluation rule from the project. */
   @summary("Delete an evaluation rule")
   @Http.delete
-  delete is Azure.Core.Foundations.ResourceOperation<
+  delete is FoundryResourceOperation<
     EvaluationRule,
     {},
     Http.NoContentResponse
@@ -48,7 +48,7 @@ interface EvaluationRules {
   /** Creates a new evaluation rule, or replaces the existing rule when the identifier matches. */
   @summary("Create or update an evaluation rule")
   @Http.put
-  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
+  createOrUpdate is FoundryResourceOperation<
     EvaluationRule,
     {
       ...EvaluationRulesPreviewHeader;
@@ -64,7 +64,7 @@ interface EvaluationRules {
   /** Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state. */
   @summary("List evaluation rules")
   @Rest.listsResource(EvaluationRule)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     EvaluationRule,
     EvaluationRulesFilterQueryParams,
     Azure.Core.Page<EvaluationRule>
