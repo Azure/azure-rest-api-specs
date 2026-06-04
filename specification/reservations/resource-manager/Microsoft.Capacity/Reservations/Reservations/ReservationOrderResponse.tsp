@@ -89,7 +89,7 @@ interface ReservationOrderResponses {
     SplitRequest,
 
       | ArmResponse<ReservationResponse[]>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse> &
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReservationResponse[]> &
           Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = Error
