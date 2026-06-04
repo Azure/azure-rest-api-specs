@@ -1887,11 +1887,6 @@ op attestationsListForResource(
 @@clientName(AttestationProperties.assessmentDate, "assessOn", "csharp");
 @@clientName(RemediationProperties.filters, "filter", "csharp");
 @@clientName(PolicyTrackedResource.lastUpdateUtc, "lastUpdateOn", "csharp");
-@@clientName(
-  PolicyEvaluationResult.evaluationDetails,
-  "checkRestrictionEvaluationDetails",
-  "csharp"
-);
 @@clientName(PolicyEvent.resourceType, "resourceTypeString", "csharp");
 @@clientName(PolicyState.resourceType, "resourceTypeString", "csharp");
 
@@ -2050,6 +2045,14 @@ op attestationsListForResource(
 @@access(PolicyInsightsApi.Operation, Access.internal, "csharp");
 @@access(OperationsListResults, Access.internal, "csharp");
 @@scope(PolicyInsightsApi.Operations.list, "!csharp");
+// NOTE: ComponentPolicyStatesQueryResults and SummarizeResults are paging
+// envelopes that GA hid by returning Pageable<T> (autorest's automatic
+// pageable detection via x-ms-pageable). The new spec ops are non-pageable
+// (no @pageItems / @nextLink on response models), so the C# emitter exposes
+// the envelopes directly. @@Legacy.markAsPageable is ineffective without
+// those markers. Accepted as additive new public surface; revisit if the
+// generator gains support for marking these as pageable without modifying
+// the shared models.tsp.
 
 // Remediations: hide management-group, subscription, resource-group scope operations from C#
 @@scope(Remediations.getAtManagementGroup, "!csharp");
