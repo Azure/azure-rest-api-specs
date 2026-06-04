@@ -2033,6 +2033,13 @@ op attestationsListForResource(
   Azure.Core.azureLocation,
   "csharp"
 );
+// GA autorest's `format-by-name-rules: '*Uri': 'Uri'` retyped the slim
+// metadata's additionalContentUrl to System.Uri; preserve that.
+@@alternateType(
+  PolicyMetadataSlimProperties.additionalContentUrl,
+  url,
+  "csharp"
+);
 
 @@access(CheckRestrictionEvaluationDetails, Access.public, "csharp");
 // The generator emits a model PolicyMetadataCollection (paging envelope for
@@ -2071,6 +2078,29 @@ op attestationsListForResource(
 @@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
 @@scope(Attestations.deleteAtResourceGroup, "!csharp");
 @@scope(Attestations.listForResourceGroup, "!csharp");
+
+// Restore ResourceData base class on response models that GA's autorest emitted
+// as ResourceData-derived (they have id/name/type fields).
+// NOTE: ComponentEventDetails and ComponentStateDetails also have id/name/type
+// fields and ResourceData-base in GA, but applying @@hierarchyBuilding to them
+// triggers a generator bug (CS0103 additionalProperties0 in *.Serialization.cs)
+// because they also have `...Record<unknown>` spread. Re-enable once fixed.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "GA back-compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SlimPolicyMetadata,
+  Azure.ResourceManager.CommonTypes.Resource,
+  "csharp"
+);
+
+// TODO(generator-bug): @@hierarchyBuilding on ComponentEventDetails and
+// ComponentStateDetails would restore their GA ResourceData base, but the
+// C# mgmt generator currently emits broken deserialization code (an
+// undeclared `additionalProperties0` variable) when a model has both
+// `...Record<unknown>` and a hierarchy base. Tried swapping via
+// @@alternateType to a replacement model with the same `...Record<unknown>`
+// spread but it caused the original Models.ComponentEventDetails /
+// Models.ComponentStateDetails to be unemitted while factory code still
+// referenced them (CS0234). Filed upstream and re-visit once fixed.
 
 @@clientName(QueryOptions, "PolicyQuerySettings", "csharp");
 @@alternateType(
