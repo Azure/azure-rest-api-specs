@@ -1,0 +1,144 @@
+{
+  "parameters": {
+    "api-version": "2026-05-02-preview",
+    "identityBindingName": "identitybinding1",
+    "parameters": {
+      "properties": {
+        "managedIdentity": {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+        },
+        "allowedSubjects": [
+          {
+            "namespaceSelector": {
+              "matchLabels": {
+                "kubernetes.io/metadata.name": "team-a"
+              }
+            }
+          },
+          {
+            "namespaceSelector": {
+              "matchExpressions": [
+                {
+                  "key": "kubernetes.io/metadata.name",
+                  "operator": "In",
+                  "values": [
+                    "team-a",
+                    "team-b"
+                  ]
+                }
+              ]
+            },
+            "serviceAccountSelector": {
+              "matchLabels": {
+                "app": "my-workload"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "identitybinding1",
+        "type": "Microsoft.ContainerService/managedClusters/identityBindings",
+        "eTag": "string",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/identityBindings/identitybinding1",
+        "properties": {
+          "managedIdentity": {
+            "clientId": "00000000-0000-0000-0000-000000000000",
+            "objectId": "00000000-0000-0000-0000-000000000000",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+            "tenantId": "00000000-0000-0000-0000-000000000000"
+          },
+          "oidcIssuer": {
+            "oidcIssuerUrl": "https://oidc-endpoint"
+          },
+          "provisioningState": "Succeeded",
+          "allowedSubjects": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "team-a"
+                }
+              }
+            },
+            {
+              "namespaceSelector": {
+                "matchExpressions": [
+                  {
+                    "key": "kubernetes.io/metadata.name",
+                    "operator": "In",
+                    "values": [
+                      "team-a",
+                      "team-b"
+                    ]
+                  }
+                ]
+              },
+              "serviceAccountSelector": {
+                "matchLabels": {
+                  "app": "my-workload"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "identitybinding1",
+        "type": "Microsoft.ContainerService/managedClusters/identityBindings",
+        "eTag": "string",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/identityBindings/identitybinding1",
+        "properties": {
+          "managedIdentity": {
+            "clientId": "00000000-0000-0000-0000-000000000000",
+            "objectId": "00000000-0000-0000-0000-000000000000",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1",
+            "tenantId": "00000000-0000-0000-0000-000000000000"
+          },
+          "oidcIssuer": {
+            "oidcIssuerUrl": "https://oidc-endpoint"
+          },
+          "provisioningState": "Succeeded",
+          "allowedSubjects": [
+            {
+              "namespaceSelector": {
+                "matchLabels": {
+                  "kubernetes.io/metadata.name": "team-a"
+                }
+              }
+            },
+            {
+              "namespaceSelector": {
+                "matchExpressions": [
+                  {
+                    "key": "kubernetes.io/metadata.name",
+                    "operator": "In",
+                    "values": [
+                      "team-a",
+                      "team-b"
+                    ]
+                  }
+                ]
+              },
+              "serviceAccountSelector": {
+                "matchLabels": {
+                  "app": "my-workload"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "IdentityBindings_CreateOrUpdate",
+  "title": "Create or update Identity Binding with allowed subjects"
+}
