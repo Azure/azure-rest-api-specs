@@ -41,6 +41,7 @@ input-file:
   - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
   - Microsoft.KubernetesConfiguration/kubeInventory/preview/2026-06-15-preview/kubeInventory.json
+  - Microsoft.KubernetesConfiguration/upgradeAssessment/preview/2026-06-15-preview/upgradeAssessment.json
 suppressions:
   - code: ResourceNameRestriction
     from: fluxconfiguration.json
@@ -69,6 +70,11 @@ These settings apply only when `--tag=package-preview-2026-06-only` is specified
 ``` yaml $(tag) == 'package-preview-2026-06-only'
 input-file:
   - Microsoft.KubernetesConfiguration/kubeInventory/preview/2026-06-15-preview/kubeInventory.json
+  - Microsoft.KubernetesConfiguration/upgradeAssessment/preview/2026-06-15-preview/upgradeAssessment.json
+suppressions:
+  - code: EnumInsteadOfBoolean
+    from: kubeInventory.json
+    reason: Boolean properties mirror the Kubernetes API contract directly and must remain boolean for compatibility.
 ```
 
 ### Tag: package-preview-2024-04
