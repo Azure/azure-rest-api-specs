@@ -15,14 +15,17 @@ alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 @route("evaluations")
 @removed(Versions.v1)
 interface Evaluations {
-  @doc("Get an evaluation run by name.")
+  /** Retrieves the specified evaluation run and its current status. */
+  @summary("Get an evaluation run")
   get is EvaluationsOperations.ResourceRead<Evaluation>;
 
-  @doc("List evaluation runs")
+  /** Returns the evaluation runs available in the current project. */
+  @summary("List evaluation runs")
   list is EvaluationsOperations.ResourceList<Evaluation>;
 
+  /** Submits a new evaluation run with the provided configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates an evaluation run.")
+  @summary("Create an evaluation run")
   @route("runs:run")
   @post
   create is Azure.Core.Foundations.Operation<
@@ -34,8 +37,9 @@ interface Evaluations {
     ResourceCreatedResponse<Evaluation>
   >;
 
+  /** Submits a new agent evaluation run with the provided request. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates an agent evaluation run.")
+  @summary("Create an agent evaluation run")
   @route("runs:runAgent")
   @post
   createAgentEvaluation is Azure.Core.Foundations.Operation<
@@ -47,8 +51,9 @@ interface Evaluations {
     ResourceCreatedResponse<AgentEvaluation>
   >;
 
+  /** Cancels the specified evaluation run before it completes. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Cancel an evaluation run by name")
+  @summary("Cancel an evaluation run")
   @post
   cancel is EvaluationsOperations.ResourceAction<
     Evaluation,
@@ -56,6 +61,7 @@ interface Evaluations {
     Http.NoContentResponse
   >;
 
-  @doc("Delete an evaluation run by name")
+  /** Removes the specified evaluation run from the project. */
+  @summary("Delete an evaluation run")
   delete is EvaluationsOperations.ResourceDelete<Evaluation>;
 }
