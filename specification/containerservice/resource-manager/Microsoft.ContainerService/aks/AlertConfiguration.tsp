@@ -153,9 +153,11 @@ interface AlertConfigurations {
 }
 
 @@doc(AlertConfiguration.name, "The name of the alert configuration.");
-@@doc(AlertConfiguration.properties,
+@@doc(
+  AlertConfiguration.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(AlertConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  AlertConfigurations.createOrUpdate::parameters.resource,
   "The alert configuration to create or update."
 );
