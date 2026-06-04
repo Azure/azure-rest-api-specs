@@ -6,90 +6,95 @@ using Language.Conversations;
 
 namespace Language.ConversationsClientCustomizations;
 
-@@clientName(Conversations, "ConversationAnalysis");
-@@clientName(analyzeConversations, "AnalyzeConversation");
+@@clientName(Conversations, "ConversationAnalysis", "!autorest");
+@@clientName(analyzeConversations, "AnalyzeConversation", "!autorest");
 
-@@clientName(ConversationEntity.confidenceScore, "confidence");
-@@clientName(ConversationIntent.confidenceScore, "confidence");
-@@clientName(TargetIntentResult.confidenceScore, "confidence");
-@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence");
-@@clientName(KnowledgeBaseAnswer.id, "qnaId");
-@@clientName(KnowledgeBaseAnswer.answerSpan, "shortAnswer");
-@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence");
-@@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion");
+@@clientName(ConversationEntity.confidenceScore, "confidence", "!autorest");
+@@clientName(ConversationIntent.confidenceScore, "confidence", "!autorest");
+@@clientName(TargetIntentResult.confidenceScore, "confidence", "!autorest");
+@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence", "!autorest");
+@@clientName(KnowledgeBaseAnswer.id, "qnaId", "!autorest");
+@@clientName(KnowledgeBaseAnswer.answerSpan, "shortAnswer", "!autorest");
+@@clientName(KnowledgeBaseAnswer.confidenceScore, "confidence", "!autorest");
+@@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion", "!autorest");
 
-@@clientName(AnswersOptions.confidenceScoreThreshold, "confidenceThreshold");
-@@clientName(AnswersOptions.context, "answerContext");
-@@clientName(AnswersOptions.rankerType, "rankerKind");
-@@clientName(AnswersOptions.answerSpanRequest, "shortAnswerOptions");
+@@clientName(AnswersOptions.confidenceScoreThreshold, "confidenceThreshold", "!autorest");
+@@clientName(AnswersOptions.context, "answerContext", "!autorest");
+@@clientName(AnswersOptions.rankerType, "rankerKind", "!autorest");
+@@clientName(AnswersOptions.answerSpanRequest, "shortAnswerOptions", "!autorest");
 
 @@clientName(
   ShortAnswerOptions.confidenceScoreThreshold,
-  "confidenceThreshold"
+  "confidenceThreshold",
+  "!autorest"
 );
-@@clientName(ShortAnswerOptions.topAnswersWithSpan, "top");
+@@clientName(ShortAnswerOptions.topAnswersWithSpan, "top", "!autorest");
 
-@@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction");
+@@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction", "!autorest");
 
-@@clientName(AnalyzeConversationLROTask.taskName, "Name");
+@@clientName(AnalyzeConversationLROTask.taskName, "Name", "!autorest");
 
-@@clientName(BasePrediction, "PredictionBase");
+@@clientName(BasePrediction, "PredictionBase", "!autorest");
 
-@@clientName(LengthUnit.Pt, "Point");
-@@clientName(LogicalOperationKind.AND, "And");
-@@clientName(LogicalOperationKind.OR, "Or");
+@@clientName(LengthUnit.Pt, "Point", "!autorest");
+@@clientName(LogicalOperationKind.AND, "And", "!autorest");
+@@clientName(LogicalOperationKind.OR, "Or", "!autorest");
 
-@@clientName(redactionCharacter.perCent, "Percent");
+@@clientName(redactionCharacter.perCent, "Percent", "!autorest");
 
-@@clientName(TemporalModifier.AfterApprox, "AfterApproximate");
-@@clientName(TemporalModifier.BeforeApprox, "BeforeApproximate");
-@@clientName(TemporalModifier.Approx, "Approximate");
+@@clientName(TemporalModifier.AfterApprox, "AfterApproximate", "!autorest");
+@@clientName(TemporalModifier.BeforeApprox, "BeforeApproximate", "!autorest");
+@@clientName(TemporalModifier.Approx, "Approximate", "!autorest");
 
-@@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized");
+@@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized", "!autorest");
 @@clientName(
   RedactedTranscriptContent.maskedItn,
-  "MaskedInverseTextNormalized"
+  "MaskedInverseTextNormalized",
+  "!autorest"
 );
-@@clientName(Error, "ConversationError");
+@@clientName(Error, "ConversationError", "!autorest");
 
-@@clientName(AnalysisParameters, "AnalysisConfig");
-@@clientName(LuisParameters, "LuisConfig");
-@@clientName(ConversationParameters, "ConversationConfig");
-@@clientName(QuestionAnsweringParameters, "QuestionAnsweringConfig");
-@@clientName(AnswersOptions, "QuestionAnswersConfig");
-@@clientName(ShortAnswerOptions, "ShortAnswerConfig");
-@@clientName(ConversationCallingOptions, "ConversationCallingConfig");
-@@clientName(LuisCallingOptions, "LuisCallingConfig");
+@@clientName(AnalysisParameters, "AnalysisConfig", "!autorest");
+@@clientName(LuisParameters, "LuisConfig", "!autorest");
+@@clientName(ConversationParameters, "ConversationConfig", "!autorest");
+@@clientName(QuestionAnsweringParameters, "QuestionAnsweringConfig", "!autorest");
+@@clientName(AnswersOptions, "QuestionAnswersConfig", "!autorest");
+@@clientName(ShortAnswerOptions, "ShortAnswerConfig", "!autorest");
+@@clientName(ConversationCallingOptions, "ConversationCallingConfig", "!autorest");
+@@clientName(LuisCallingOptions, "LuisCallingConfig", "!autorest");
 
-@@clientName(ConversationAnalysisOptions, "ConversationAnalysisInput");
+@@clientName(ConversationAnalysisOptions, "ConversationAnalysisInput", "!autorest");
 
-@@clientName(Tasks, "ConversationActions");
+@@clientName(Tasks, "ConversationActions", "!autorest");
 @@clientName(Tasks.items, "taskResults", "python");
-@@clientName(State, "ConversationActionState");
-@@clientName(role, "ParticipantRole");
+@@clientName(State, "ConversationActionState", "!autorest");
+@@clientName(role, "ParticipantRole", "!autorest");
 @@clientName(
   NoneLinkedTargetIntentResult,
   "NonLinkedTargetIntentResult",
   "python"
 );
 
-@@clientName(Entity, "NamedEntity");
+@@clientName(Entity, "NamedEntity", "!autorest");
 
 @@clientName(
   CustomConversationSummarizationTaskParameters,
-  "CustomConversationSummarizationActionContent"
+  "CustomConversationSummarizationActionContent",
+  "!autorest"
 );
 
 @@clientName(
   ConversationTaskParameters,
-  "ConversationLanguageUnderstandingActionContent"
+  "ConversationLanguageUnderstandingActionContent",
+  "!autorest"
 );
 
 @@clientName(ConversationTaskParameters, "ConversationActionContent", "python");
 
 @@clientName(
   ConversationalAIInputParameters,
-  "AIConversationLanguageUnderstandingActionContent"
+  "AIConversationLanguageUnderstandingActionContent",
+  "!autorest"
 );
 @@clientName(
   ConversationalAIInputParameters,
@@ -99,137 +104,157 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(
   ConversationSummarizationTaskParameters,
-  "ConversationSummarizationActionContent"
+  "ConversationSummarizationActionContent",
+  "!autorest"
 );
-@@clientName(ConversationPiiTaskParameters, "ConversationPiiActionContent");
+@@clientName(ConversationPiiTaskParameters, "ConversationPiiActionContent", "!autorest");
 
-@@clientName(Conversation, "ConversationInput");
+@@clientName(Conversation, "ConversationInput", "!autorest");
 
 @@clientName(
   ConversationPiiCategoriesExclude.USSocialSecurityNumber,
-  "UsSocialSecurityNumber"
+  "UsSocialSecurityNumber",
+  "!autorest"
 );
 @@clientName(
   ConversationPiiCategoriesExclude,
-  "ConversationPiiCategoryExclusions"
+  "ConversationPiiCategoryExclusions",
+  "!autorest"
 );
 @@clientName(
   ConversationPiiCategoriesExclude.USSocialSecurityNumber,
-  "UsSocialSecurityNumber"
+  "UsSocialSecurityNumber",
+  "!autorest"
 );
-@@clientName(ErrorCode, "ConversationErrorCode");
+@@clientName(ErrorCode, "ConversationErrorCode", "!autorest");
 
-@@clientName(BaseResolution, "ResolutionBase");
-@@clientName(BaseExtraInformation, "ConversationEntityExtraInformation");
+@@clientName(BaseResolution, "ResolutionBase", "!autorest");
+@@clientName(BaseExtraInformation, "ConversationEntityExtraInformation", "!autorest");
 
-@@clientName(TranscriptConversationItem.itn, "InverseTextNormalized");
+@@clientName(TranscriptConversationItem.itn, "InverseTextNormalized", "!autorest");
 @@clientName(
   TranscriptConversationItem.maskedItn,
-  "MaskedInverseTextNormalized"
+  "MaskedInverseTextNormalized",
+  "!autorest"
 );
 
-@@clientName(AnalyzeConversationTask, "AnalyzeConversationInput");
-@@clientName(AnalyzeConversationTaskKind, "AnalyzeConversationInputKind");
+@@clientName(AnalyzeConversationTask, "AnalyzeConversationInput", "!autorest");
+@@clientName(AnalyzeConversationTaskKind, "AnalyzeConversationInputKind", "!autorest");
 
-@@clientName(ConversationalTask, "ConversationLanguageUnderstandingInput");
+@@clientName(ConversationalTask, "ConversationLanguageUnderstandingInput", "!autorest");
 
-@@clientName(ConversationalTask.analysisInput, "ConversationInput");
-@@clientName(ConversationalTask.parameters, "ActionContent");
+@@clientName(ConversationalTask.analysisInput, "ConversationInput", "!autorest");
+@@clientName(ConversationalTask.parameters, "ActionContent", "!autorest");
 
-@@clientName(AnalyzeConversationTaskResult, "AnalyzeConversationActionResult");
+@@clientName(AnalyzeConversationTaskResult, "AnalyzeConversationActionResult", "!autorest");
 @@clientName(
   AnalyzeConversationTaskResultsKind,
-  "AnalyzeConversationResultKind"
+  "AnalyzeConversationResultKind",
+  "!autorest"
 );
 
-@@clientName(ConversationalTaskResult, "ConversationActionResult");
+@@clientName(ConversationalTaskResult, "ConversationActionResult", "!autorest");
 
 @@clientName(
   MultiLanguageConversationAnalysisInput,
-  "MultiLanguageConversationInput"
+  "MultiLanguageConversationInput",
+  "!autorest"
 );
 
-@@clientName(AnalyzeConversationJobsInput, "AnalyzeConversationOperationInput");
-@@clientName(AnalyzeConversationJobsInput.analysisInput, "ConversationInput");
-@@clientName(AnalyzeConversationJobsInput.tasks, "Actions");
+@@clientName(AnalyzeConversationJobsInput, "AnalyzeConversationOperationInput", "!autorest");
+@@clientName(AnalyzeConversationJobsInput.analysisInput, "ConversationInput", "!autorest");
+@@clientName(AnalyzeConversationJobsInput.tasks, "Actions", "!autorest");
 
-@@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction");
-@@clientName(AnalyzeConversationLROTask.taskName, "Name");
+@@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction", "!autorest");
+@@clientName(AnalyzeConversationLROTask.taskName, "Name", "!autorest");
 
 @@clientName(
   AnalyzeConversationLROTaskKind,
-  "AnalyzeConversationOperationActionKind"
+  "AnalyzeConversationOperationActionKind",
+  "!autorest"
 );
 
-@@clientName(AnalyzeConversationPiiTask, "PiiOperationAction");
-@@clientName(AnalyzeConversationPiiTask.parameters, "ActionContent");
+@@clientName(AnalyzeConversationPiiTask, "PiiOperationAction", "!autorest");
+@@clientName(AnalyzeConversationPiiTask.parameters, "ActionContent", "!autorest");
 
 @@clientName(
   AnalyzeCustomConversationSummarizationTask,
-  "CustomSummarizationOperationAction"
+  "CustomSummarizationOperationAction",
+  "!autorest"
 );
 @@clientName(
   AnalyzeCustomConversationSummarizationTask.parameters,
-  "ActionContent"
+  "ActionContent",
+  "!autorest"
 );
 
 @@clientName(
   AnalyzeConversationSummarizationTask,
-  "SummarizationOperationAction"
+  "SummarizationOperationAction",
+  "!autorest"
 );
-@@clientName(AnalyzeConversationSummarizationTask.parameters, "ActionContent");
+@@clientName(AnalyzeConversationSummarizationTask.parameters, "ActionContent", "!autorest");
 
-@@clientName(AnalyzeConversationJobState, "AnalyzeConversationOperationState");
-@@clientName(AnalyzeConversationJobState.tasks, "Actions");
+@@clientName(AnalyzeConversationJobState, "AnalyzeConversationOperationState", "!autorest");
+@@clientName(AnalyzeConversationJobState.tasks, "Actions", "!autorest");
 
 @@clientName(
   AnalyzeConversationJobResult,
-  "AnalyzeConversationOperationResult"
+  "AnalyzeConversationOperationResult",
+  "!autorest"
 );
-@@clientName(AnalyzeConversationJobResult.taskName, "Name");
+@@clientName(AnalyzeConversationJobResult.taskName, "Name", "!autorest");
 
 @@clientName(
   AnalyzeConversationResultsKind,
-  "AnalyzeConversationOperationResultsKind"
+  "AnalyzeConversationOperationResultsKind",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationResultsKind.ConversationalSummarizationResults,
-  "SummarizationOperationResults"
+  "SummarizationOperationResults",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationResultsKind.ConversationalPIIResults,
-  "PiiOperationResults"
+  "PiiOperationResults",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationResultsKind.CustomConversationalSummarizationResults,
-  "CustomSummarizationOperationResults"
+  "CustomSummarizationOperationResults",
+  "!autorest"
 );
 
 @@clientName(
   AnalyzeConversationConversationPiiResult,
-  "ConversationPiiOperationResult"
+  "ConversationPiiOperationResult",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationSummarizationResult,
-  "SummarizationOperationResult"
+  "SummarizationOperationResult",
+  "!autorest"
 );
 @@clientName(
   AnalyzeCustomConversationSummarizationResult,
-  "CustomSummarizationOperationResult"
+  "CustomSummarizationOperationResult",
+  "!autorest"
 );
 
 @@clientName(
   analyzeConversationsSubmitJob,
-  "AnalyzeConversationSubmitOperation"
+  "AnalyzeConversationSubmitOperation",
+  "!autorest"
 );
 @@clientName(analyzeConversationsSubmitJob, "AnalyzeConversationJob", "python");
 
-@@clientName(analyzeConversationsJobStatus, "GetAnalyzeConversationJobStatus");
+@@clientName(analyzeConversationsJobStatus, "GetAnalyzeConversationJobStatus", "!autorest");
 
 @@clientName(analyzeConversationsJobStatus, "getJobStatus", "python");
 
-@@clientName(analyzeConversationsCancelJob, "CancelAnalyzeConversations");
+@@clientName(analyzeConversationsCancelJob, "CancelAnalyzeConversations", "!autorest");
 
 @@clientName(analyzeConversationsCancelJob, "cancelJob", "python");
 
-@@clientName(ConversationalPiiResultWithResultBase, "ConversationalPiiResult");
+@@clientName(ConversationalPiiResultWithResultBase, "ConversationalPiiResult", "!autorest");

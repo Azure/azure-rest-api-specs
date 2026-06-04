@@ -79,8 +79,8 @@ interface QuestionAnsweringAuthoringClientOperations {
   addFeedback is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.addFeedback;
 }
 
-@@clientName(QuestionAnsweringProjectMetadata, "QuestionAnsweringProject");
+@@clientName(QuestionAnsweringProjectMetadata, "QuestionAnsweringProject", "!autorest");
 @@clientName(ExportQueryParameters.format, "fileFormat", "python");
 @@clientName(ImportQueryParameters.format, "fileFormat", "python");
-@@clientName(AssestKind, "AssetKind");
-@@clientName(Error, "QuestionAnsweringError");
+@@clientName(AssestKind, "AssetKind", "!autorest");
+@@clientName(Error, "QuestionAnsweringError", "!autorest");

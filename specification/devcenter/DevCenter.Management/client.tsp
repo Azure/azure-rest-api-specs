@@ -14,7 +14,7 @@ using Microsoft.DevCenter;
 
 @@clientName(Microsoft.DevCenter.DevCenterSku, "SkuInfo", "go");
 
-@@clientName(Microsoft.DevCenter.UserRoleAssignment, "UserRoleAssignmentValue");
+@@clientName(Microsoft.DevCenter.UserRoleAssignment, "UserRoleAssignmentValue", "!autorest");
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,

@@ -21,61 +21,69 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "csharp"
 );
 
-@@clientName(conversationAuthoringListDeployments, "listDeployments");
-@@clientName(conversationAuthoringListProjects, "listProjects");
+@@clientName(conversationAuthoringListDeployments, "listDeployments", "!autorest");
+@@clientName(conversationAuthoringListProjects, "listProjects", "!autorest");
 @@clientName(
   conversationAuthoringListSupportedLanguages,
-  "listSupportedLanguages"
+  "listSupportedLanguages",
+  "!autorest"
 );
 @@clientName(
   conversationAuthoringListAssignedResourceDeployments,
-  "listAssignedResourceDeployments"
+  "listAssignedResourceDeployments",
+  "!autorest"
 );
 @@clientName(
   conversationAuthoringListProjectResources,
-  "listDeploymentResources"
+  "listDeploymentResources",
+  "!autorest"
 );
 @@clientName(
   conversationAuthoringListSupportedPrebuiltEntities,
-  "listSupportedPrebuiltEntities"
+  "listSupportedPrebuiltEntities",
+  "!autorest"
 );
 @@clientName(
   conversationAuthoringListTrainingConfigVersions,
-  "listTrainingConfigVersions"
+  "listTrainingConfigVersions",
+  "!autorest"
 );
-@@clientName(conversationAuthoringListTrainingJobs, "listTrainingJobs");
-@@clientName(conversationAuthoringListTrainedModels, "listTrainedModels");
-@@clientName(conversationAuthoringListExportedModels, "listExportedModels");
+@@clientName(conversationAuthoringListTrainingJobs, "listTrainingJobs", "!autorest");
+@@clientName(conversationAuthoringListTrainedModels, "listTrainedModels", "!autorest");
+@@clientName(conversationAuthoringListExportedModels, "listExportedModels", "!autorest");
 
 @@clientName(
   ConversationAuthoringProject.copyProjectAuthorization,
-  "AuthorizeProjectCopy"
+  "AuthorizeProjectCopy",
+  "!autorest"
 );
-@@clientName(ProjectKind, "ConversationAuthoringProjectKind");
+@@clientName(ProjectKind, "ConversationAuthoringProjectKind", "!autorest");
 @@clientName(ProjectKind, "ProjectKind", "python");
-@@clientName(ErrorCode, "ConversationAuthoringErrorCode");
+@@clientName(ErrorCode, "ConversationAuthoringErrorCode", "!autorest");
 @@clientName(ErrorCode, "ErrorCode", "python");
-@@clientName(InnerErrorCode, "ConversationAuthoringInnerErrorCode");
+@@clientName(InnerErrorCode, "ConversationAuthoringInnerErrorCode", "!autorest");
 @@clientName(InnerErrorCode, "InnerErrorCode", "python");
-@@clientName(StringIndexType, "StringIndexType");
+@@clientName(StringIndexType, "StringIndexType", "!autorest");
 @@clientName(
   ExportedProjectFormat,
-  "ConversationAuthoringExportedProjectFormat"
+  "ConversationAuthoringExportedProjectFormat",
+  "!autorest"
 );
 @@clientName(ExportedProjectFormat, "ExportedProjectFormat", "python");
-@@clientName(TrainingMode, "ConversationAuthoringTrainingMode");
+@@clientName(TrainingMode, "ConversationAuthoringTrainingMode", "!autorest");
 @@clientName(TrainingMode, "TrainingMode", "python");
-@@clientName(EvaluationKind, "ConversationAuthoringEvaluationKind");
+@@clientName(EvaluationKind, "ConversationAuthoringEvaluationKind", "!autorest");
 @@clientName(EvaluationKind, "EvaluationKind", "python");
-@@clientName(JobStatus, "ConversationAuthoringOperationStatus");
+@@clientName(JobStatus, "ConversationAuthoringOperationStatus", "!autorest");
 @@clientName(JobStatus, "OperationStatus", "python");
-@@clientName(CompositionSetting, "ConversationAuthoringCompositionMode");
+@@clientName(CompositionSetting, "ConversationAuthoringCompositionMode", "!autorest");
 @@clientName(CompositionSetting, "CompositionMode", "python");
-@@clientName(OrchestrationTargetProjectKind, "OrchestrationTargetProjectKind");
+@@clientName(OrchestrationTargetProjectKind, "OrchestrationTargetProjectKind", "!autorest");
 
 @@clientName(
   AnalyzeConversationAuthoringProjectsMetadata,
-  "ConversationAuthoringProjectsMetadata"
+  "ConversationAuthoringProjectsMetadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectsMetadata,
@@ -84,7 +92,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectMetadata,
-  "ConversationAuthoringProjectMetadata"
+  "ConversationAuthoringProjectMetadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectMetadata,
@@ -93,34 +102,40 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectMetadata.createdDateTime,
-  "createdOn"
+  "createdOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectMetadata.lastModifiedDateTime,
-  "lastModifiedOn"
+  "lastModifiedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectMetadata.lastTrainedDateTime,
-  "lastTrainedOn"
+  "lastTrainedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectMetadata.lastDeployedDateTime,
-  "lastDeployedOn"
+  "lastDeployedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectSettings,
-  "ConversationAuthoringProjectSettings"
+  "ConversationAuthoringProjectSettings",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectSettings,
   "ProjectSettings",
   "python"
 );
-@@clientName(InnerErrorModel, "ConversationAuthoringInnerErrorModel");
+@@clientName(InnerErrorModel, "ConversationAuthoringInnerErrorModel", "!autorest");
 @@clientName(InnerErrorModel, "InnerErrorModel", "python");
 @@clientName(
   AnalyzeConversationAuthoringCreateProjectOptions,
-  "ConversationAuthoringCreateProjectDetails"
+  "ConversationAuthoringCreateProjectDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringCreateProjectOptions,
@@ -129,7 +144,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringCopyAuthorizationOptions,
-  "ConversationAuthoringCopyAuthorizationDetails"
+  "ConversationAuthoringCopyAuthorizationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringCopyAuthorizationOptions,
@@ -138,7 +154,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringCopiedProjectOptions,
-  "ConversationAuthoringCopyProjectDetails"
+  "ConversationAuthoringCopyProjectDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringCopiedProjectOptions,
@@ -147,7 +164,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedProject,
-  "ConversationAuthoringExportedProject"
+  "ConversationAuthoringExportedProject",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedProject,
@@ -156,7 +174,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedProjectAssets,
-  "ConversationAuthoringExportedProjectAsset"
+  "ConversationAuthoringExportedProjectAsset",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedProjectAssets,
@@ -165,7 +184,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobOptions,
-  "ConversationAuthoringTrainingJobDetails"
+  "ConversationAuthoringTrainingJobDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobOptions,
@@ -174,7 +194,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationOptions,
-  "ConversationAuthoringEvaluationDetails"
+  "ConversationAuthoringEvaluationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationOptions,
@@ -183,7 +204,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringCopiedProjectJobState,
-  "ConversationAuthoringCopyProjectState"
+  "ConversationAuthoringCopyProjectState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringCopiedProjectJobState,
@@ -192,21 +214,25 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringJobState,
-  "ConversationAuthoringState"
+  "ConversationAuthoringState",
+  "!autorest"
 );
 @@clientName(AnalyzeConversationAuthoringJobState, "State", "python");
-@@clientName(AnalyzeConversationAuthoringJobState.createdDateTime, "createdOn");
+@@clientName(AnalyzeConversationAuthoringJobState.createdDateTime, "createdOn", "!autorest");
 @@clientName(
   AnalyzeConversationAuthoringJobState.lastUpdatedDateTime,
-  "lastUpdatedOn"
+  "lastUpdatedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringJobState.expirationDateTime,
-  "expiresOn"
+  "expiresOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployments,
-  "ConversationAuthoringProjectDeployments"
+  "ConversationAuthoringProjectDeployments",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployments,
@@ -215,7 +241,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployment,
-  "ConversationAuthoringProjectDeployment"
+  "ConversationAuthoringProjectDeployment",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployment,
@@ -224,19 +251,23 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployment.lastTrainedDateTime,
-  "lastTrainedOn"
+  "lastTrainedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployment.lastDeployedDateTime,
-  "lastDeployedOn"
+  "lastDeployedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeployment.deploymentExpirationDate,
-  "deploymentExpiredOn"
+  "deploymentExpiredOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentResource,
-  "ConversationAuthoringDeploymentResource"
+  "ConversationAuthoringDeploymentResource",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentResource,
@@ -245,7 +276,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringCreateDeploymentOptions,
-  "ConversationAuthoringCreateDeploymentDetails"
+  "ConversationAuthoringCreateDeploymentDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringCreateDeploymentOptions,
@@ -254,7 +286,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectAzureResourceIds,
-  "ConversationAuthoringDeleteDeploymentDetails"
+  "ConversationAuthoringDeleteDeploymentDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectAzureResourceIds,
@@ -263,7 +296,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentJobState,
-  "ConversationAuthoringDeploymentState"
+  "ConversationAuthoringDeploymentState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentJobState,
@@ -272,7 +306,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState,
-  "ConversationAuthoringDeploymentDeleteFromResourcesState"
+  "ConversationAuthoringDeploymentDeleteFromResourcesState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState,
@@ -281,7 +316,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringSwapDeploymentsJobState,
-  "ConversationAuthoringSwapDeploymentsState"
+  "ConversationAuthoringSwapDeploymentsState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSwapDeploymentsJobState,
@@ -290,7 +326,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringSwapDeploymentsOptions,
-  "ConversationAuthoringSwapDeploymentsDetails"
+  "ConversationAuthoringSwapDeploymentsDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSwapDeploymentsOptions,
@@ -299,7 +336,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportProjectJobState,
-  "ConversationAuthoringExportProjectState"
+  "ConversationAuthoringExportProjectState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportProjectJobState,
@@ -308,11 +346,13 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportProjectJobState.resultUrl,
-  "resultUri"
+  "resultUri",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringImportProjectJobState,
-  "ConversationAuthoringImportProjectState"
+  "ConversationAuthoringImportProjectState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringImportProjectJobState,
@@ -321,7 +361,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectTrainedModels,
-  "ConversationAuthoringProjectTrainedModels"
+  "ConversationAuthoringProjectTrainedModels",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectTrainedModels,
@@ -330,7 +371,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectTrainedModel,
-  "ConversationAuthoringProjectTrainedModel"
+  "ConversationAuthoringProjectTrainedModel",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectTrainedModel,
@@ -339,15 +381,18 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectTrainedModel.lastTrainedDateTime,
-  "lastTrainedOn"
+  "lastTrainedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectTrainedModel.modelExpirationDate,
-  "modelExpiredOn"
+  "modelExpiredOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationJobState,
-  "ConversationAuthoringEvaluationState"
+  "ConversationAuthoringEvaluationState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationJobState,
@@ -356,7 +401,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationJobResult,
-  "ConversationAuthoringEvaluationJobResult"
+  "ConversationAuthoringEvaluationJobResult",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationJobResult,
@@ -365,11 +411,13 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationJobResult.evaluationOptions,
-  "evaluationDetails"
+  "evaluationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationResults,
-  "ConversationAuthoringEvalResults"
+  "ConversationAuthoringEvalResults",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationResults,
@@ -378,7 +426,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationSummary,
-  "ConversationAuthoringEvalSummary"
+  "ConversationAuthoringEvalSummary",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringEvaluationSummary,
@@ -387,19 +436,23 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringEntitiesEvaluationSummary,
-  "EntitiesEvaluationSummary"
+  "EntitiesEvaluationSummary",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringIntentsEvaluationSummary,
-  "IntentsEvaluationSummary"
+  "IntentsEvaluationSummary",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringIntentEvaluationSummary,
-  "IntentEvaluationSummary"
+  "IntentEvaluationSummary",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringLoadSnapshotJobState,
-  "ConversationAuthoringLoadSnapshotState"
+  "ConversationAuthoringLoadSnapshotState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringLoadSnapshotJobState,
@@ -408,7 +461,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentResourcesInfoList,
-  "ConversationAuthoringAssignedDeploymentResources"
+  "ConversationAuthoringAssignedDeploymentResources",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringDeploymentResourcesInfoList,
@@ -417,7 +471,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceInfo,
-  "ConversationAuthoringAssignedDeploymentResource"
+  "ConversationAuthoringAssignedDeploymentResource",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceInfo,
@@ -426,11 +481,13 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceInfo.azureResourceId,
-  "resourceId"
+  "resourceId",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceAssignments,
-  "ConversationAuthoringAssignDeploymentResourcesDetails"
+  "ConversationAuthoringAssignDeploymentResourcesDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceAssignments,
@@ -439,11 +496,13 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceAssignments.projectResources,
-  "metadata"
+  "metadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
-  "ConversationAuthoringResourceMetadata"
+  "ConversationAuthoringResourceMetadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
@@ -452,7 +511,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions,
-  "ConversationAuthoringUnassignDeploymentResourcesDetails"
+  "ConversationAuthoringUnassignDeploymentResourcesDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions,
@@ -461,7 +521,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourcesJobState,
-  "ConversationAuthoringDeploymentResourcesState"
+  "ConversationAuthoringDeploymentResourcesState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectResourcesJobState,
@@ -470,7 +531,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobs,
-  "ConversationAuthoringTrainingJobs"
+  "ConversationAuthoringTrainingJobs",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobs,
@@ -479,7 +541,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobState,
-  "ConversationAuthoringTrainingState"
+  "ConversationAuthoringTrainingState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobState,
@@ -488,7 +551,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobResult,
-  "ConversationAuthoringTrainingJobResult"
+  "ConversationAuthoringTrainingJobResult",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobResult,
@@ -497,11 +561,13 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingJobResult.estimatedEndDateTime,
-  "estimatedEndOn"
+  "estimatedEndOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSubTrainingJobState,
-  "ConversationAuthoringSubTrainingState"
+  "ConversationAuthoringSubTrainingState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSubTrainingJobState,
@@ -510,15 +576,18 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringSubTrainingJobState.startDateTime,
-  "startedOn"
+  "startedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSubTrainingJobState.endDateTime,
-  "endedOn"
+  "endedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeletionJobState,
-  "ConversationAuthoringProjectDeletionState"
+  "ConversationAuthoringProjectDeletionState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringProjectDeletionJobState,
@@ -527,7 +596,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
-  "ConversationAuthoringAssignedResourceDeploymentsMetadata"
+  "ConversationAuthoringAssignedResourceDeploymentsMetadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata,
@@ -536,7 +606,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
-  "ConversationAuthoringAssignedProjectDeploymentsMetadata"
+  "ConversationAuthoringAssignedProjectDeploymentsMetadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
@@ -545,7 +616,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata,
-  "ConversationAuthoringAssignedProjectDeploymentMetadata"
+  "ConversationAuthoringAssignedProjectDeploymentMetadata",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata,
@@ -554,15 +626,18 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata.lastDeployedDateTime,
-  "lastDeployedOn"
+  "lastDeployedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata.deploymentExpirationDate,
-  "DeploymentExpiresOn"
+  "DeploymentExpiresOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSupportedLanguages,
-  "ConversationAuthoringSupportedLanguages"
+  "ConversationAuthoringSupportedLanguages",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSupportedLanguages,
@@ -571,7 +646,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringSupportedLanguage,
-  "ConversationAuthoringSupportedLanguage"
+  "ConversationAuthoringSupportedLanguage",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringSupportedLanguage,
@@ -580,7 +656,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringPrebuiltEntities,
-  "ConversationAuthoringPrebuiltEntities"
+  "ConversationAuthoringPrebuiltEntities",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringPrebuiltEntities,
@@ -589,7 +666,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringPrebuiltEntity,
-  "ConversationAuthoringPrebuiltEntity"
+  "ConversationAuthoringPrebuiltEntity",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringPrebuiltEntity,
@@ -598,7 +676,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingConfigVersions,
-  "ConversationAuthoringTrainingConfigVersions"
+  "ConversationAuthoringTrainingConfigVersions",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingConfigVersions,
@@ -607,7 +686,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingConfigVersion,
-  "ConversationAuthoringTrainingConfigVersion"
+  "ConversationAuthoringTrainingConfigVersion",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringTrainingConfigVersion,
@@ -616,7 +696,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedEntity,
-  "ConversationExportedEntity"
+  "ConversationExportedEntity",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedEntity,
@@ -625,11 +706,13 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedEntity.compositionSetting,
-  "compositionMode"
+  "compositionMode",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityList,
-  "ConversationAuthoringExportedEntityList"
+  "ConversationAuthoringExportedEntityList",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityList,
@@ -638,7 +721,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntitySublist,
-  "ConversationAuthoringExportedEntitySublist"
+  "ConversationAuthoringExportedEntitySublist",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntitySublist,
@@ -647,7 +731,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityListSynonym,
-  "ConversationAuthoringExportedEntityListSynonym"
+  "ConversationAuthoringExportedEntityListSynonym",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityListSynonym,
@@ -656,7 +741,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedPrebuiltEntity,
-  "ConversationAuthoringExportedPrebuiltEntity"
+  "ConversationAuthoringExportedPrebuiltEntity",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedPrebuiltEntity,
@@ -665,7 +751,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityRegex,
-  "ExportedEntityRegex"
+  "ExportedEntityRegex",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityRegex,
@@ -674,7 +761,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityRegexExpression,
-  "ExportedEntityRegexExpression"
+  "ExportedEntityRegexExpression",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedEntityRegexExpression,
@@ -683,7 +771,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedIntent,
-  "ConversationExportedIntent"
+  "ConversationExportedIntent",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedIntent,
@@ -692,7 +781,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationExportedAssociatedEntityLabel,
-  "ConversationExportedAssociatedEntityLabel"
+  "ConversationExportedAssociatedEntityLabel",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationExportedAssociatedEntityLabel,
@@ -701,7 +791,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedProjectAsset,
-  "ConversationExportedProjectAsset"
+  "ConversationExportedProjectAsset",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedProjectAsset,
@@ -710,7 +801,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedUtterance,
-  "ConversationExportedUtterance"
+  "ConversationExportedUtterance",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationExportedUtterance,
@@ -719,7 +811,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedUtteranceEntityLabel,
-  "ExportedUtteranceEntityLabel"
+  "ExportedUtteranceEntityLabel",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedUtteranceEntityLabel,
@@ -728,7 +821,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset,
-  "ConversationSummarizationExportedProjectAsset"
+  "ConversationSummarizationExportedProjectAsset",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset,
@@ -737,7 +831,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringCustomConversationSummarizationConversation,
-  "CustomConversationSummarizationConversation"
+  "CustomConversationSummarizationConversation",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringCustomConversationSummarizationConversation,
@@ -746,7 +841,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedConversationOrchestration,
-  "ExportedConversationOrchestration"
+  "ExportedConversationOrchestration",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedConversationOrchestration,
@@ -755,7 +851,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedConversationOrchestrationOptions,
-  "ExportedConversationOrchestrationDetails"
+  "ExportedConversationOrchestrationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedConversationOrchestrationOptions,
@@ -764,7 +861,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedOrchestrationOptions,
-  "ExportedOrchestrationDetails"
+  "ExportedOrchestrationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedOrchestrationOptions,
@@ -773,7 +871,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedLuisOrchestration,
-  "ExportedLuisOrchestration"
+  "ExportedLuisOrchestration",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedLuisOrchestration,
@@ -782,7 +881,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedLuisOrchestrationOptions,
-  "ExportedLuisOrchestrationDetails"
+  "ExportedLuisOrchestrationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedLuisOrchestrationOptions,
@@ -791,7 +891,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration,
-  "ExportedQuestionAnsweringOrchestration"
+  "ExportedQuestionAnsweringOrchestration",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration,
@@ -800,7 +901,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions,
-  "ExportedQuestionAnsweringOrchestrationDetails"
+  "ExportedQuestionAnsweringOrchestrationDetails",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions,
@@ -809,7 +911,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringOrchestrationExportedIntent,
-  "OrchestrationExportedIntent"
+  "OrchestrationExportedIntent",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringOrchestrationExportedIntent,
@@ -818,7 +921,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringOrchestrationExportedProjectAsset,
-  "OrchestrationExportedProjectAsset"
+  "OrchestrationExportedProjectAsset",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringOrchestrationExportedProjectAsset,
@@ -827,7 +931,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringOrchestrationExportedUtterance,
-  "OrchestrationExportedUtterance"
+  "OrchestrationExportedUtterance",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringOrchestrationExportedUtterance,
@@ -836,7 +941,8 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedTrainedModel,
-  "ConversationAuthoringExportedTrainedModel"
+  "ConversationAuthoringExportedTrainedModel",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedTrainedModel,
@@ -845,19 +951,23 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedTrainedModel.lastTrainedDateTime,
-  "lastTrainedOn"
+  "lastTrainedOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedTrainedModel.lastExportedModelDateTime,
-  "lastExportedModelOn"
+  "lastExportedModelOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedTrainedModel.modelExpirationDate,
-  "modelExpiredOn"
+  "modelExpiredOn",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedModelJobState,
-  "ConversationAuthoringExportedModelState"
+  "ConversationAuthoringExportedModelState",
+  "!autorest"
 );
 @@clientName(
   AnalyzeConversationAuthoringExportedModelJobState,
@@ -866,10 +976,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 );
 @@clientName(
   AnalyzeConversationAuthoringModelFile,
-  "ConversationAuthoringModelFile"
+  "ConversationAuthoringModelFile",
+  "!autorest"
 );
 @@clientName(AnalyzeConversationAuthoringModelFile, "ModelFile", "python");
-@@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails");
+@@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails", "!autorest");
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
 @@clientName(
   AnalyzeConversationAuthoringUtteranceEvaluationResult,

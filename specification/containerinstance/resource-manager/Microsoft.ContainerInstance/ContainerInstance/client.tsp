@@ -381,7 +381,7 @@ using Microsoft.ContainerInstance;
 );
 @@clientName(ContainerGroups.listLogs, "GetContainerLogs", "csharp");
 
-@@clientName(ContainerGroupUpdate, "Resource");
+@@clientName(ContainerGroupUpdate, "Resource", "!autorest");
 
 // Category D: Property renames for backward compat
 @@clientName(AzureFileVolume.readOnly, "IsReadOnly", "csharp");

@@ -350,7 +350,7 @@ using TypeSpec.Versioning;
   "V2025-05-01",
   "javascript"
 );
-@@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
+@@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType", "!autorest");
 
 @@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent", "csharp");
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "csharp");
@@ -366,7 +366,8 @@ using TypeSpec.Versioning;
 @@clientName(SubmitHibernateRequest, "SubmitHibernateContent", "csharp");
 @@clientName(
   ScheduledActionsExtensionProperties,
-  "ScheduledActionsExtensionProperties"
+  "ScheduledActionsExtensionProperties",
+  "!autorest"
 );
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)

@@ -4,18 +4,18 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using MapsSearch;
 
-@@clientName(FeatureCollectionEnum, "FeatureCollection");
-@@clientName(FeatureTypeEnum, "FeatureType");
-@@clientName(ConfidenceEnum, "Confidence");
-@@clientName(MatchCodesEnum, "MatchCodes");
-@@clientName(CalculationMethodEnum, "CalculationMethod");
-@@clientName(UsageTypeEnum, "UsageType");
-@@clientName(BoundaryResultTypeEnum, "BoundaryResultType");
-@@clientName(ResolutionEnum, "Resolution");
-@@clientName(ReverseGeocodingResultTypeEnum, "ReverseGeocodingResultType");
-@@clientName(ResultTypeEnum, "ResultType");
-@@clientName(AutocompleteResultTypeGroupsEnum, "AutocompleteResultTypeGroups");
-@@clientName(AutocompleteResultTypeEnum, "AutocompleteResultType");
+@@clientName(FeatureCollectionEnum, "FeatureCollection", "!autorest");
+@@clientName(FeatureTypeEnum, "FeatureType", "!autorest");
+@@clientName(ConfidenceEnum, "Confidence", "!autorest");
+@@clientName(MatchCodesEnum, "MatchCodes", "!autorest");
+@@clientName(CalculationMethodEnum, "CalculationMethod", "!autorest");
+@@clientName(UsageTypeEnum, "UsageType", "!autorest");
+@@clientName(BoundaryResultTypeEnum, "BoundaryResultType", "!autorest");
+@@clientName(ResolutionEnum, "Resolution", "!autorest");
+@@clientName(ReverseGeocodingResultTypeEnum, "ReverseGeocodingResultType", "!autorest");
+@@clientName(ResultTypeEnum, "ResultType", "!autorest");
+@@clientName(AutocompleteResultTypeGroupsEnum, "AutocompleteResultTypeGroups", "!autorest");
+@@clientName(AutocompleteResultTypeEnum, "AutocompleteResultType", "!autorest");
 
 // Flatten operations onto client instead of having an operation group attribute
 @client({

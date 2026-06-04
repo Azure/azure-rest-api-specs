@@ -1,6 +1,7 @@
 import "./LiftrBase.Storage/main.tsp";
 import "./back-compatible.tsp";
 import "@typespec/openapi";
+import "./client.tsp";
 
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
