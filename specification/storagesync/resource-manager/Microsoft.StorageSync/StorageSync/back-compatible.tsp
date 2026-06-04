@@ -126,7 +126,12 @@ using Microsoft.StorageSync;
 @@clientLocation(
   OperationStatusOperationGroup.get,
   "OperationStatus",
-  "!csharp"
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  OperationStatusOperationGroup.get,
+  "OperationStatusOperations",
+  "javascript"
 );
 @@clientLocation(
   StorageSyncServices.listByStorageSyncService,

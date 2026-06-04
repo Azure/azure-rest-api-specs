@@ -60,8 +60,7 @@ namespace Microsoft.Kubernetes;
 );
 @@clientName(ConnectedClusterKind.AWS, "Aws", "csharp");
 @@clientName(ConnectedClusterKind.GCP, "Gcp", "csharp");
-@@clientName(ConnectedClusterProperties.gateway, "IsGateway", "csharp");
-@@clientName(ConnectedClusterPatchProperties.gateway, "IsGateway", "csharp");
+@@clientName(Gateway.enabled, "IsGatewayEnabled", "csharp");
 @@clientName(CredentialResult, "ClusterUserCredentialResult", "csharp");
 @@clientName(CredentialResults, "ClusterUserCredentialsResult", "csharp");
 @@clientName(
@@ -98,6 +97,15 @@ namespace Microsoft.Kubernetes;
 @@clientName(
   HybridConnectionConfig.expirationTime,
   "ExpirationTimeInSeconds",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+@@clientOption(
+  ConnectedCluster,
+  "resource-rbac-roles",
+  #{
+    KubernetesClusterAzureArcOnboarding: "34e09817-6cbe-4d01-b1a2-e0eac5743d41",
+  },
   "csharp"
 );
 @@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "javascript");
