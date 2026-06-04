@@ -1850,25 +1850,33 @@ op attestationsListForResource(
 
 @@clientName(Summary, "PolicySummary", "csharp");
 @@clientName(SummaryResults, "PolicySummaryResults", "csharp");
-@@clientName(CheckRestrictionsRequest, "CheckPolicyRestrictionsContent", "csharp");
+@@clientName(
+  CheckRestrictionsRequest,
+  "CheckPolicyRestrictionsContent",
+  "csharp"
+);
 @@clientName(
   CheckManagementGroupRestrictionsRequest,
   "CheckManagementGroupPolicyRestrictionsContent",
   "csharp"
 );
-@@clientName(CheckRestrictionsResult, "CheckPolicyRestrictionsResult", "csharp");
+@@clientName(
+  CheckRestrictionsResult,
+  "CheckPolicyRestrictionsResult",
+  "csharp"
+);
 // Back-compat class renames (previously done via the autorest rename-mapping).
 @@clientName(Attestation, "PolicyAttestation", "csharp");
 @@clientName(Remediation, "PolicyRemediation", "csharp");
 @@clientName(ComplianceState, "PolicyComplianceState", "csharp");
 @@clientName(PolicyEventsResourceType, "PolicyEventType", "csharp");
 @@clientName(PolicyStatesResource, "PolicyStateType", "csharp");
-@@clientName(PolicyStatesSummaryResourceType, "PolicyStateSummaryType", "csharp");
 @@clientName(
-  PolicyTrackedResource,
-  "PolicyTrackedResourceRecord",
+  PolicyStatesSummaryResourceType,
+  "PolicyStateSummaryType",
   "csharp"
 );
+@@clientName(PolicyTrackedResource, "PolicyTrackedResourceRecord", "csharp");
 @@clientName(
   PolicyTrackedResourcesResourceType,
   "PolicyTrackedResourceType",
@@ -1888,8 +1896,16 @@ op attestationsListForResource(
 @@clientName(PolicyState.resourceType, "resourceTypeString", "csharp");
 
 // Back-compat property types: ARM ID strings should be typed as ResourceIdentifier.
-@@alternateType(AttestationProperties.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(RemediationProperties.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  AttestationProperties.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationProperties.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   PolicyAssignmentSummary.policyAssignmentId,
   Azure.Core.armResourceIdentifier,
@@ -1915,17 +1931,61 @@ op attestationsListForResource(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PolicyEvent.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyEvent.policyDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyEvent.resourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyEvent.policySetDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyReference.policyDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyReference.policySetDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyReference.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyState.resourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyState.policyAssignmentId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyState.policyDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(PolicyState.policySetDefinitionId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  PolicyEvent.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   IfNotExistsEvaluationDetails.resourceId,
   Azure.Core.armResourceIdentifier,
@@ -1936,13 +1996,21 @@ op attestationsListForResource(
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PolicyTrackedResource.trackedResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  PolicyTrackedResource.trackedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   RemediationDeployment.remediatedResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RemediationDeployment.deploymentId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  RemediationDeployment.deploymentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   TrackedResourceModificationDetails.deploymentId,
   Azure.Core.armResourceIdentifier,
@@ -1950,8 +2018,16 @@ op attestationsListForResource(
 );
 
 // Back-compat property types: location strings should be typed as AzureLocation.
-@@alternateType(PolicyEvent.resourceLocation, Azure.Core.azureLocation, "csharp");
-@@alternateType(PolicyState.resourceLocation, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  PolicyEvent.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(
   RemediationDeployment.resourceLocation,
   Azure.Core.azureLocation,
@@ -1996,3 +2072,234 @@ op attestationsListForResource(
 @@scope(Attestations.deleteAtResourceGroup, "!csharp");
 @@scope(Attestations.listForResourceGroup, "!csharp");
 
+@@clientName(QueryOptions, "PolicyQuerySettings", "csharp");
+@@alternateType(
+  attestationsListForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyMetadataList::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  attestationsListForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  attestationsListForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
