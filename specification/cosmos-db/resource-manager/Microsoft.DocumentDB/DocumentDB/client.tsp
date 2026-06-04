@@ -2487,11 +2487,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 // and strips the inherited base properties (id/name/type/systemData) from the
 // renamed wrapper.
 
-@@clientName(
-  RestorableSqlDatabaseGetResult,
-  "RestorableSqlDatabase",
-  "csharp"
-);
+@@clientName(RestorableSqlDatabaseGetResult, "RestorableSqlDatabase", "csharp");
 
 @@clientName(
   RestorableSqlContainerGetResult,
@@ -2562,7 +2558,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   DatabaseAccountCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2573,7 +2571,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   ThroughputSettingsUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2584,7 +2584,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   SqlDatabaseCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2595,7 +2597,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   SqlContainerCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2606,7 +2610,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   SqlStoredProcedureCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2617,7 +2623,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   SqlUserDefinedFunctionCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2628,7 +2636,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   SqlTriggerCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2639,7 +2649,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   MongoDBDatabaseCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2650,7 +2662,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   MongoDBCollectionCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2661,7 +2675,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   TableCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2672,7 +2688,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   CassandraKeyspaceCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2683,7 +2701,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   CassandraTableCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2694,7 +2714,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   CassandraViewCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2705,7 +2727,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   GremlinDatabaseCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
@@ -2716,7 +2740,9 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 );
 @@usage(
   GremlinGraphCreateUpdateParameters,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 
