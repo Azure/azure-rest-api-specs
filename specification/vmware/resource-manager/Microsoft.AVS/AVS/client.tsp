@@ -12,36 +12,43 @@ using Microsoft.AVS;
 
 @@clientName(Addon, "AvsPrivateCloudAddon", "csharp");
 @@clientName(AddonProperties, "AvsPrivateCloudAddonProperties", "csharp");
-@@alternateType(CloudLinkProperties.linkedCloud,
+@@alternateType(
+  CloudLinkProperties.linkedCloud,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(Cluster, "AvsPrivateCloudCluster", "csharp");
 @@clientName(Datastore, "AvsPrivateCloudDatastore", "csharp");
 @@alternateType(NetAppVolume.id, armResourceIdentifier, "csharp");
-@@alternateType(ExpressRouteAuthorizationProperties.expressRouteAuthorizationId,
+@@alternateType(
+  ExpressRouteAuthorizationProperties.expressRouteAuthorizationId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ExpressRouteAuthorizationProperties.expressRouteId,
+@@alternateType(
+  ExpressRouteAuthorizationProperties.expressRouteId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GlobalReachConnectionProperties.expressRouteId,
+@@alternateType(
+  GlobalReachConnectionProperties.expressRouteId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(GlobalReachConnectionProperties.peerExpressRouteCircuit,
+@@alternateType(
+  GlobalReachConnectionProperties.peerExpressRouteCircuit,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(AvailabilityProperties,
+@@clientName(
+  AvailabilityProperties,
   "PrivateCloudAvailabilityProperties",
   "csharp"
 );
 @@clientName(Circuit, "ExpressRouteCircuit", "csharp");
 @@clientName(Circuit.expressRouteID, "ExpressRouteId", "csharp");
-@@clientName(Circuit.expressRoutePrivatePeeringID,
+@@clientName(
+  Circuit.expressRoutePrivatePeeringID,
   "ExpressRoutePrivatePeeringId",
   "csharp"
 );
@@ -51,23 +58,28 @@ using Microsoft.AVS;
 @@alternateType(IdentitySource.primaryServer, url, "csharp");
 @@alternateType(IdentitySource.secondaryServer, url, "csharp");
 @@clientName(InternetEnum, "InternetConnectivityState", "csharp");
-@@clientName(ScriptExecutionParameter,
+@@clientName(
+  ScriptExecutionParameter,
   "ScriptExecutionParameterDetails",
   "csharp"
 );
-@@clientName(PSCredentialExecutionParameter,
+@@clientName(
+  PSCredentialExecutionParameter,
   "PSCredentialExecutionParameterDetails",
   "csharp"
 );
-@@clientName(ScriptSecureStringExecutionParameter,
+@@clientName(
+  ScriptSecureStringExecutionParameter,
   "ScriptSecureStringExecutionParameterDetails",
   "csharp"
 );
-@@clientName(ScriptStringExecutionParameter,
+@@clientName(
+  ScriptStringExecutionParameter,
   "ScriptStringExecutionParameterDetails",
   "csharp"
 );
-@@alternateType(ScriptExecutionProperties.scriptCmdletId,
+@@alternateType(
+  ScriptExecutionProperties.scriptCmdletId,
   armResourceIdentifier,
   "csharp"
 );
@@ -79,7 +91,8 @@ using Microsoft.AVS;
 @@clientName(VirtualMachine, "AvsPrivateCloudClusterVirtualMachine", "csharp");
 @@usage(VirtualMachine, Usage.input, "csharp");
 @@usage(WorkloadNetwork, Usage.input, "csharp");
-@@alternateType(WorkloadNetworkDnsServiceProperties.dnsServiceIp,
+@@alternateType(
+  WorkloadNetworkDnsServiceProperties.dnsServiceIp,
   ipV4Address,
   "csharp"
 );
@@ -92,36 +105,43 @@ using Microsoft.AVS;
 @@clientName(DnsServiceStatusEnum, "DnsServiceStatus", "csharp");
 @@clientName(DnsServiceStatusEnum.SUCCESS, "Success", "csharp");
 @@clientName(DnsServiceStatusEnum.FAILURE, "Failure", "csharp");
-@@alternateType(WorkloadNetworkDnsZoneProperties.sourceIp,
+@@alternateType(
+  WorkloadNetworkDnsZoneProperties.sourceIp,
   ipV4Address,
   "csharp"
 );
 @@usage(WorkloadNetworkGateway, Usage.input, "csharp");
 @@usage(WorkloadNetworkVirtualMachine, Usage.input, "csharp");
-@@alternateType(WorkloadNetworkDnsZoneProperties.dnsServerIps,
+@@alternateType(
+  WorkloadNetworkDnsZoneProperties.dnsServerIps,
   ipV4Address[],
   "csharp"
 );
-@@clientName(WorkloadNetworkDnsZoneProperties.dnsServerIps,
+@@clientName(
+  WorkloadNetworkDnsZoneProperties.dnsServerIps,
   "DnsServerIPs",
   "csharp"
 );
 @@clientName(WorkloadNetworkDnsZoneProperties.sourceIp, "SourceIP", "csharp");
-@@clientName(WorkloadNetworkPortMirroring,
+@@clientName(
+  WorkloadNetworkPortMirroring,
   "WorkloadNetworkPortMirroringProfile",
   "csharp"
 );
-@@clientName(PortMirroringDirectionEnum,
+@@clientName(
+  PortMirroringDirectionEnum,
   "PortMirroringProfileDirection",
   "csharp"
 );
 @@clientName(PortMirroringDirectionEnum.INGRESS, "Ingress", "csharp");
 @@clientName(PortMirroringDirectionEnum.EGRESS, "Egress", "csharp");
-@@clientName(PortMirroringDirectionEnum.BIDIRECTIONAL,
+@@clientName(
+  PortMirroringDirectionEnum.BIDIRECTIONAL,
   "Bidirectional",
   "csharp"
 );
-@@clientName(WorkloadNetworkPortMirroringProvisioningState,
+@@clientName(
+  WorkloadNetworkPortMirroringProvisioningState,
   "WorkloadNetworkPortMirroringProfileProvisioningState",
   "csharp"
 );
@@ -143,7 +163,8 @@ using Microsoft.AVS;
 @@clientName(Trial, "AvsSubscriptionTrialAvailabilityResult", "csharp");
 @@clientName(TrialStatus, "AvsSubscriptionTrialStatus", "csharp");
 @@alternateType(Circuit.expressRouteID, armResourceIdentifier, "csharp");
-@@alternateType(Circuit.expressRoutePrivatePeeringID,
+@@alternateType(
+  Circuit.expressRoutePrivatePeeringID,
   armResourceIdentifier,
   "csharp"
 );
@@ -153,49 +174,60 @@ using Microsoft.AVS;
 @@clientName(SslEnum, "SslCertificateStatus", "csharp");
 @@clientName(OptionalParamEnum, "ParameterOptionalityStatus", "csharp");
 @@clientName(VisibilityParameterEnum, "ParameterVisibilityStatus", "csharp");
-@@clientName(ClusterProvisioningState,
+@@clientName(
+  ClusterProvisioningState,
   "AvsPrivateCloudClusterProvisioningState",
   "csharp"
 );
-@@clientName(DatastoreProvisioningState,
+@@clientName(
+  DatastoreProvisioningState,
   "AvsPrivateCloudDatastoreProvisioningState",
   "csharp"
 );
-@@clientName(VirtualMachineRestrictMovement,
+@@clientName(
+  VirtualMachineRestrictMovement,
   "AvsPrivateCloudClusterVirtualMachineRestrictMovement",
   "csharp"
 );
-@@clientName(PrivateClouds.rotateVcenterPassword,
+@@clientName(
+  PrivateClouds.rotateVcenterPassword,
   "RotateVCenterPassword",
   "csharp"
 );
 @@clientName(PrivateCloud, "AvsPrivateCloud", "csharp");
-@@alternateType(PrivateCloud.identity,
+@@alternateType(
+  PrivateCloud.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(PrivateCloudUpdate.identity,
+@@alternateType(
+  PrivateCloudUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(PrivateCloudProperties.externalCloudLinks,
+@@alternateType(
+  PrivateCloudProperties.externalCloudLinks,
   armResourceIdentifier[],
   "csharp"
 );
-@@clientName(PrivateCloudProvisioningState,
+@@clientName(
+  PrivateCloudProvisioningState,
   "AvsPrivateCloudProvisioningState",
   "csharp"
 );
 @@clientName(PrivateCloudProperties.vmotionNetwork, "VMotionNetwork", "csharp");
-@@clientName(PrivateCloudProperties.vcenterPassword,
+@@clientName(
+  PrivateCloudProperties.vcenterPassword,
   "VCenterPassword",
   "csharp"
 );
-@@clientName(PrivateCloudProperties.vcenterCertificateThumbprint,
+@@clientName(
+  PrivateCloudProperties.vcenterCertificateThumbprint,
   "VCenterCertificateThumbprint",
   "csharp"
 );
-@@clientName(PrivateCloudProperties.nsxPublicIpQuotaRaised,
+@@clientName(
+  PrivateCloudProperties.nsxPublicIpQuotaRaised,
   "NsxPublicIPQuotaRaised",
   "csharp"
 );
@@ -207,22 +239,26 @@ using Microsoft.AVS;
 @@clientName(EncryptionVersionType, "AvsEncryptionVersionType", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagementCluster,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ManagementCluster,
   CommonClusterProperties,
   "csharp"
 );
 @@clientName(ManagementCluster, "AvsManagementCluster", "csharp");
-@@clientName(AffinityStrength,
+@@clientName(
+  AffinityStrength,
   "VmHostPlacementPolicyAffinityStrength",
   "csharp"
 );
 @@clientName(ClusterZone, "AvsClusterZone", "csharp");
-@@clientName(CloudLinkProvisioningState,
+@@clientName(
+  CloudLinkProvisioningState,
   "AvsCloudLinkProvisioningState",
   "csharp"
 );
 @@clientName(DnsZoneType, "AvsDnsZoneType", "csharp");
-@@clientName(VirtualMachineProvisioningState,
+@@clientName(
+  VirtualMachineProvisioningState,
   "AvsVirtualMachineProvisioningState",
   "csharp"
 );
@@ -230,18 +266,21 @@ using Microsoft.AVS;
 @@clientName(CloudLinkStatus, "AvsCloudLinkStatus", "csharp");
 @@clientName(ClusterZoneList, "AvsClusterZoneListResult", "csharp");
 @@clientName(Clusters.listZones, "getClusterZones", "csharp");
-@@clientName(EncryptionKeyVaultProperties,
+@@clientName(
+  EncryptionKeyVaultProperties,
   "AvsEncryptionKeyVaultProperties",
   "csharp"
 );
 @@alternateType(EncryptionKeyVaultProperties.keyVaultUrl, url, "csharp");
 @@clientName(EncryptionKeyStatus, "AvsEncryptionKeyStatus", "csharp");
 @@alternateType(Location.name, azureLocation, "csharp");
-@@clientName(Locations.checkQuotaAvailability,
+@@clientName(
+  Locations.checkQuotaAvailability,
   "CheckAvsQuotaAvailability",
   "csharp"
 );
-@@clientName(Locations.checkTrialAvailability,
+@@clientName(
+  Locations.checkTrialAvailability,
   "CheckAvsTrialAvailability",
   "csharp"
 );
@@ -249,42 +288,50 @@ using Microsoft.AVS;
 @@clientName(Microsoft.AVS.ResourceSku, "AvsResourceSku", "csharp");
 @@clientName(DhcpTypeEnum.SERVER, "Server", "csharp");
 @@clientName(DhcpTypeEnum.RELAY, "Relay", "csharp");
-@@alternateType(PlacementPolicyUpdateProperties.vmMembers,
+@@alternateType(
+  PlacementPolicyUpdateProperties.vmMembers,
   armResourceIdentifier[],
   "csharp"
 );
 @@clientName(ScriptParameter.type, "ParameterType", "csharp");
-@@alternateType(VmHostPlacementPolicyProperties.vmMembers,
+@@alternateType(
+  VmHostPlacementPolicyProperties.vmMembers,
   armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(VmVmPlacementPolicyProperties.vmMembers,
+@@alternateType(
+  VmVmPlacementPolicyProperties.vmMembers,
   armResourceIdentifier[],
   "csharp"
 );
 @@clientName(Host, "AvsHost", "csharp");
 @@clientName(HostProperties, "AvsHostProperties", "csharp");
 @@clientName(GeneralHostProperties, "GeneralAvsHostProperties", "csharp");
-@@clientName(SpecializedHostProperties,
+@@clientName(
+  SpecializedHostProperties,
   "SpecializedAvsHostProperties",
   "csharp"
 );
 @@clientName(HostMaintenance, "AvsHostMaintenance", "csharp");
 @@clientName(HostProvisioningState, "AvsHostProvisioningState", "csharp");
-@@clientName(ProvisionedNetworkProperties,
+@@clientName(
+  ProvisionedNetworkProperties,
   "AvsProvisionedNetworkProperties",
   "csharp"
 );
-@@clientName(ProvisionedNetworkProvisioningState,
+@@clientName(
+  ProvisionedNetworkProvisioningState,
   "AvsProvisionedNetworkProvisioningState",
   "csharp"
 );
 @@clientName(ProvisionedNetworkTypes, "AvsProvisionedNetworkType", "csharp");
-@@clientName(PureStoragePolicyProperties,
+@@clientName(
+  PureStoragePolicyProperties,
   "AvsPureStoragePolicyProperties",
   "csharp"
 );
-@@clientName(PureStoragePolicyProvisioningState,
+@@clientName(
+  PureStoragePolicyProvisioningState,
   "AvsPureStoragePolicyProvisioningState",
   "csharp"
 );
@@ -294,30 +341,36 @@ using Microsoft.AVS;
 @@clientName(ResourceSkuCapabilities, "AvsResourceSkuCapabilities", "csharp");
 @@clientName(ResourceSkuLocationInfo, "AvsResourceSkuLocationInfo", "csharp");
 @@clientName(ResourceSkuResourceType, "AvsResourceSkuResourceType", "csharp");
-@@clientName(ResourceSkuRestrictionInfo,
+@@clientName(
+  ResourceSkuRestrictionInfo,
   "AvsResourceSkuRestrictionInfo",
   "csharp"
 );
 @@clientName(ResourceSkuRestrictions, "AvsResourceSkuRestrictions", "csharp");
-@@clientName(ResourceSkuRestrictionsReasonCode,
+@@clientName(
+  ResourceSkuRestrictionsReasonCode,
   "AvsResourceSkuRestrictionsReasonCode",
   "csharp"
 );
-@@clientName(ResourceSkuRestrictionsType,
+@@clientName(
+  ResourceSkuRestrictionsType,
   "AvsResourceSkuRestrictionsType",
   "csharp"
 );
 @@clientName(ResourceSkuZoneDetails, "AvsResourceSkuZoneDetails", "csharp");
-@@clientName(NsxPublicIpQuotaRaisedEnum,
+@@clientName(
+  NsxPublicIpQuotaRaisedEnum,
   "NsxPublicIPQuotaRaisedEnum",
   "csharp"
 );
 @@clientName(WorkloadNetworkVMGroup, "WorkloadNetworkVmGroup", "csharp");
-@@clientName(WorkloadNetworkVMGroupProvisioningState,
+@@clientName(
+  WorkloadNetworkVMGroupProvisioningState,
   "WorkloadNetworkVmGroupProvisioningState",
   "csharp"
 );
-@@clientName(WorkloadNetworkDnsServiceProperties.dnsServiceIp,
+@@clientName(
+  WorkloadNetworkDnsServiceProperties.dnsServiceIp,
   "DnsServiceIP",
   "csharp"
 );
@@ -325,11 +378,13 @@ using Microsoft.AVS;
 @@clientName(Endpoints.vcenterIp, "VcenterIP", "csharp");
 @@clientName(Endpoints.hcxCloudManagerIp, "HcxCloudManagerIP", "csharp");
 @@clientName(ScriptParameterTypes, "ScriptParameterType", "csharp");
-@@clientName(ImpactedMaintenanceResource,
+@@clientName(
+  ImpactedMaintenanceResource,
   "ImpactedMaintenanceResourceDetails",
   "csharp"
 );
-@@clientName(ImpactedMaintenanceResourceError.actionRequired,
+@@clientName(
+  ImpactedMaintenanceResourceError.actionRequired,
   "IsActionRequired",
   "csharp"
 );
@@ -342,35 +397,42 @@ using Microsoft.AVS;
 @@clientName(LicenseProvisioningState, "AvsLicenseProvisioningState", "csharp");
 @@clientName(Maintenance, "AvsMaintenance", "csharp");
 @@clientName(MaintenanceProperties, "AvsMaintenanceProperties", "csharp");
-@@clientName(MaintenanceProperties.scheduledByMicrosoft,
+@@clientName(
+  MaintenanceProperties.scheduledByMicrosoft,
   "IsScheduledByMicrosoft",
   "csharp"
 );
 @@clientName(MaintenanceCheckType, "AvsMaintenanceCheckType", "csharp");
 @@clientName(MaintenanceFailedCheck, "AvsMaintenanceFailedCheck", "csharp");
-@@clientName(MaintenanceManagementOperation,
+@@clientName(
+  MaintenanceManagementOperation,
   "AvsMaintenanceManagementOperation",
   "csharp"
 );
-@@clientName(MaintenanceProvisioningState,
+@@clientName(
+  MaintenanceProvisioningState,
   "AvsMaintenanceProvisioningState",
   "csharp"
 );
 @@clientName(MaintenanceReadiness, "AvsMaintenanceReadiness", "csharp");
 @@clientName(MaintenanceReadiness.lastUpdated, "LastUpdatedOn", "csharp");
-@@clientName(MaintenanceReadinessRefreshOperation,
+@@clientName(
+  MaintenanceReadinessRefreshOperation,
   "AvsMaintenanceReadinessRefreshOperation",
   "csharp"
 );
-@@clientName(MaintenanceReadinessRefreshOperation.refreshedByMicrosoft,
+@@clientName(
+  MaintenanceReadinessRefreshOperation.refreshedByMicrosoft,
   "IsRefreshedByMicrosoft",
   "csharp"
 );
-@@clientName(MaintenanceReadinessRefreshOperationStatus,
+@@clientName(
+  MaintenanceReadinessRefreshOperationStatus,
   "AvsMaintenanceReadinessRefreshOperationStatus",
   "csharp"
 );
-@@clientName(MaintenanceReadinessStatus,
+@@clientName(
+  MaintenanceReadinessStatus,
   "AvsMaintenanceReadinessStatus",
   "csharp"
 );
@@ -384,18 +446,21 @@ using Microsoft.AVS;
 @@clientName(MaintenanceType.ESXI, "Esxi", "csharp");
 @@clientName(MaintenanceType.NSXT, "Nsxt", "csharp");
 @@clientName(RescheduleOperation, "AvsRescheduleOperation", "csharp");
-@@clientName(RescheduleOperationConstraint,
+@@clientName(
+  RescheduleOperationConstraint,
   "AvsRescheduleOperationConstraint",
   "csharp"
 );
 @@clientName(ScheduleOperation, "AvsScheduleOperation", "csharp");
-@@clientName(ScheduleOperationConstraint,
+@@clientName(
+  ScheduleOperationConstraint,
   "AvsScheduleOperationConstraint",
   "csharp"
 );
 @@clientName(SchedulingWindow, "AvsSchedulingWindow", "csharp");
 @@clientName(SchedulingWindow, "AvsSchedulingWindow", "csharp");
-@@clientName(VmwareFirewallLicenseProperties,
+@@clientName(
+  VmwareFirewallLicenseProperties,
   "VMwareFirewallLicenseProperties",
   "csharp"
 );
@@ -408,43 +473,51 @@ using Microsoft.AVS;
 // model
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
 
-@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity",
   "java,go,javascript,python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType",
   "java,go,javascript,python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceIdentityType,
   "SystemAssignedResourceIdentityType",
   "java,go,javascript,python"
 );
 
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
-@@clientName(WorkloadNetworkPublicIPProvisioningState,
+@@clientName(
+  WorkloadNetworkPublicIPProvisioningState,
   "WorkloadNetworkPublicIpProvisioningState",
   "java"
 );
 
 // property
 @@clientName(Circuit.expressRouteID, "expressRouteId", "java");
-@@clientName(Circuit.expressRoutePrivatePeeringID,
+@@clientName(
+  Circuit.expressRoutePrivatePeeringID,
   "expressRoutePrivatePeeringId",
   "java"
 );
-@@clientName(WorkloadNetworkPublicIPProperties,
+@@clientName(
+  WorkloadNetworkPublicIPProperties,
   "WorkloadNetworkPublicIpProperties",
   "java"
 );
-@@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock,
+@@clientName(
+  WorkloadNetworkPublicIPProperties.publicIPBlock,
   "publicIpBlock",
   "java"
 );
 
 // parameter
 @@clientName(PublicIPIdParameter.publicIPId, "publicIpId", "java");
-@@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
+@@clientName(
+  WorkloadNetworkPublicIps.create::parameters.resource,
   "workloadNetworkPublicIp",
   "java"
 );
@@ -452,153 +525,183 @@ using Microsoft.AVS;
 // flatten
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.TrackedResource.properties,
   "java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
   "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Location.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Location.properties,
   "java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Cluster.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Datastore.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Datastore.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HcxEnterpriseSite.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HcxEnterpriseSite.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpressRouteAuthorization.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExpressRouteAuthorization.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalReachConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  GlobalReachConnection.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetwork.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetwork.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkSegment.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkSegment.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkGateway.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkGateway.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPortMirroring.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkPortMirroring.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVMGroup.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkVMGroup.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVirtualMachine.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkVirtualMachine.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsService.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkDnsService.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsZone.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkDnsZone.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPublicIP.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkloadNetworkPublicIP.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudLink.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CloudLink.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  VirtualMachine.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptPackage.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScriptPackage.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptCmdlet.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScriptCmdlet.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptExecution.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScriptExecution.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IscsiPath.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  IscsiPath.properties,
   "java,python,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloud.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateCloud.properties,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloudUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateCloudUpdate.properties,
   "java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClusterUpdate.properties,
   "java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PlacementPolicyUpdate.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PlacementPolicyUpdate.properties,
   "java,python"
 );
 
-@@alternateType(ScriptExecutionProperties.namedOutputs,
+@@alternateType(
+  ScriptExecutionProperties.namedOutputs,
   Record<unknown>,
   "java,go"
 );
 
 // We do not wish for ServiceComponents operations to be in the SDKs.
-@@scope(ServiceComponents.checkAvailability,
+@@scope(
+  ServiceComponents.checkAvailability,
   "!(python,javascript,go,java,csharp)"
 );

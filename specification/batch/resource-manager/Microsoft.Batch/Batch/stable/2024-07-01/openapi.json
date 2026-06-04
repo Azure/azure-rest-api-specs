@@ -1934,9 +1934,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
             }
           },
           "default": {
@@ -1995,7 +1995,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
@@ -5996,6 +5996,27 @@
           }
         ]
       }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a NetworkSecurityPerimeterConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSecurityPerimeterConfiguration items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NodeCommunicationMode": {
       "type": "string",

@@ -1,0 +1,2604 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VirtualMachineImageTemplate",
+    "version": "2025-10-01",
+    "description": "Virtual Machine Image Template",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "VirtualMachineImageTemplate"
+    },
+    {
+      "name": "Triggers"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.VirtualMachineImages/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists available operations for the Microsoft.VirtualMachineImages provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve operations list": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VirtualMachineImages/imageTemplates": {
+      "get": {
+        "operationId": "VirtualMachineImageTemplates_List",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Gets information about the VM image templates associated with the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List images by subscription.": {
+            "$ref": "./examples/ListImageTemplates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates": {
+      "get": {
+        "operationId": "VirtualMachineImageTemplates_ListByResourceGroup",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Gets information about the VM image templates associated with the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List images by resource group": {
+            "$ref": "./examples/ListImageTemplatesByRg.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}": {
+      "get": {
+        "operationId": "VirtualMachineImageTemplates_Get",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Get information about a virtual machine image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve an Image Template.": {
+            "$ref": "./examples/GetImageTemplate.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineImageTemplates_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Create or update a virtual machine image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the CreateImageTemplate operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ImageTemplate' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            }
+          },
+          "201": {
+            "description": "Resource 'ImageTemplate' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an Image Template for Linux.": {
+            "$ref": "./examples/CreateImageTemplateLinux.json"
+          },
+          "Create an Image Template for Windows.": {
+            "$ref": "./examples/CreateImageTemplateWindows.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ImageTemplate"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualMachineImageTemplates_Update",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Update the tags for this Virtual Machine Image Template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Additional parameters for Image Template update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageTemplateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageTemplate"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to query for the status of the asynchronous operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to query for the result of the asynchronous operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove identities for an Image Template.": {
+            "$ref": "./examples/UpdateImageTemplateToRemoveIdentities.json"
+          },
+          "Update parameters for vm profile.": {
+            "$ref": "./examples/UpdateImageTemplateVmProfile.json"
+          },
+          "Update the tags for an Image Template.": {
+            "$ref": "./examples/UpdateImageTemplateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ImageTemplate"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualMachineImageTemplates_Delete",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Delete a virtual machine image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Image Template.": {
+            "$ref": "./examples/DeleteImageTemplate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/cancel": {
+      "post": {
+        "operationId": "VirtualMachineImageTemplates_Cancel",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Cancel the long running image build based on the image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to query for the status of the asynchronous operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to query for the result of the asynchronous operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel the image build based on the imageTemplate.": {
+            "$ref": "./examples/CancelImageBuild.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/run": {
+      "post": {
+        "operationId": "VirtualMachineImageTemplates_Run",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Create artifacts from a existing image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to query for the status of the asynchronous operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to query for the result of the asynchronous operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create image(s) from existing imageTemplate.": {
+            "$ref": "./examples/RunImageTemplate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs": {
+      "get": {
+        "operationId": "VirtualMachineImageTemplates_ListRunOutputs",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "List all run outputs for the specified Image Template resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunOutputCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a list of all outputs created by the last run of an Image Template": {
+            "$ref": "./examples/ListRunOutputs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs/{runOutputName}": {
+      "get": {
+        "operationId": "VirtualMachineImageTemplates_GetRunOutput",
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "description": "Get the specified run output for the specified image template resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "runOutputName",
+            "in": "path",
+            "description": "The name of the run output",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RunOutput"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve single runOutput": {
+            "$ref": "./examples/GetRunOutput.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/triggers": {
+      "get": {
+        "operationId": "Triggers_ListByImageTemplate",
+        "tags": [
+          "Triggers"
+        ],
+        "description": "List all triggers for the specified Image Template resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TriggerCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List triggers by image template": {
+            "$ref": "./examples/ListTriggers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/triggers/{triggerName}": {
+      "get": {
+        "operationId": "Triggers_Get",
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Get the specified trigger for the specified image template resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "description": "The name of the trigger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a trigger resource": {
+            "$ref": "./examples/GetTrigger.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Triggers_CreateOrUpdate",
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Create or update a trigger for the specified virtual machine image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "description": "The name of the trigger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the CreateTrigger operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Trigger' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "201": {
+            "description": "Resource 'Trigger' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a source image type trigger": {
+            "$ref": "./examples/CreateSourceImageTrigger.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Trigger"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Triggers_Delete",
+        "tags": [
+          "Triggers"
+        ],
+        "description": "Delete a trigger for the specified virtual machine image template",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "imageTemplateName",
+            "in": "path",
+            "description": "The name of the image Template",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "description": "The name of the trigger",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a trigger resource": {
+            "$ref": "./examples/DeleteTrigger.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AutoRunState": {
+      "type": "string",
+      "description": "Enabling this field will trigger an automatic build on image template creation or update.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AutoRunState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "AutoRunEnabled",
+            "value": "Enabled",
+            "description": "Autorun is enabled"
+          },
+          {
+            "name": "AutoRunDisabled",
+            "value": "Disabled",
+            "description": "Autorun is disabled"
+          }
+        ]
+      }
+    },
+    "DataDisk": {
+      "type": "object",
+      "description": "Data disk properties.",
+      "properties": {
+        "sizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the data disk in GB.",
+          "minimum": 0
+        }
+      }
+    },
+    "DistributeVersioner": {
+      "type": "object",
+      "description": "Describes how to generate new x.y.z version number for distribution.",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "Version numbering scheme to be used."
+        }
+      },
+      "discriminator": "scheme",
+      "required": [
+        "scheme"
+      ]
+    },
+    "DistributeVersionerLatest": {
+      "type": "object",
+      "description": "Generates version number that will be latest based on existing version numbers.",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Major version for the generated version number. Determine what is \"latest\" based on versions with this value as the major version. -1 is equivalent to leaving it unset.",
+          "default": -1,
+          "minimum": -1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributeVersioner"
+        }
+      ],
+      "x-ms-discriminator-value": "Latest"
+    },
+    "DistributeVersionerSource": {
+      "type": "object",
+      "description": "Generates version number based on version number of source image",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributeVersioner"
+        }
+      ],
+      "x-ms-discriminator-value": "Source"
+    },
+    "ImageTemplate": {
+      "type": "object",
+      "description": "Image template is an ARM resource managed by Microsoft.VirtualMachineImages provider",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImageTemplateProperties",
+          "description": "The properties of the image template",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ImageTemplateIdentity",
+          "description": "The identity of the image template, if configured."
+        }
+      },
+      "required": [
+        "identity"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ImageTemplateAutoRun": {
+      "type": "object",
+      "description": "Indicates if the image template needs to be built on create/update",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AutoRunState",
+          "description": "Enabling this field will trigger an automatic build on image template creation or update."
+        }
+      }
+    },
+    "ImageTemplateCustomizer": {
+      "type": "object",
+      "description": "Describes a unit of image customization",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of customization tool you want to use on the Image. For example, \"Shell\" can be shell customizer"
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly Name to provide context on what this customization step does"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ImageTemplateDistributor": {
+      "type": "object",
+      "description": "Generic distribution object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of distribution."
+        },
+        "runOutputName": {
+          "type": "string",
+          "description": "The name to be used for the associated RunOutput.",
+          "pattern": "^[A-Za-z0-9-_.]{1,64}$"
+        },
+        "artifactTags": {
+          "type": "object",
+          "description": "Tags that will be applied to the artifact once it has been created/updated by the distributor.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "runOutputName"
+      ]
+    },
+    "ImageTemplateFileCustomizer": {
+      "type": "object",
+      "description": "Uploads files to VMs (Linux, Windows). Corresponds to Packer file provisioner",
+      "properties": {
+        "sourceUri": {
+          "type": "string",
+          "description": "The URI of the file to be uploaded for customizing the VM. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the file provided in the sourceUri field above",
+          "default": ""
+        },
+        "destination": {
+          "type": "string",
+          "description": "The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "File"
+    },
+    "ImageTemplateFileValidator": {
+      "type": "object",
+      "description": "Uploads files required for validation to VMs (Linux, Windows). Corresponds to Packer file provisioner",
+      "properties": {
+        "sourceUri": {
+          "type": "string",
+          "description": "The URI of the file to be uploaded to the VM for validation. It can be a github link, Azure Storage URI (authorized or SAS), etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the file provided in the sourceUri field above",
+          "default": ""
+        },
+        "destination": {
+          "type": "string",
+          "description": "The absolute path to a file (with nested directory structures already created) where the file (from sourceUri) will be uploaded to in the VM"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateInVMValidator"
+        }
+      ],
+      "x-ms-discriminator-value": "File"
+    },
+    "ImageTemplateIdentity": {
+      "type": "object",
+      "description": "Identity for the image template.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of identity used for the image template. The type 'None' will remove any identities from the image template."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ImageTemplateInVMValidator": {
+      "type": "object",
+      "description": "Describes a unit of in-VM validation of image",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of validation you want to use on the Image. For example, \"Shell\" can be shell validation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Friendly Name to provide context on what this validation step does"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ImageTemplateLastRunStatus": {
+      "type": "object",
+      "description": "Describes the latest status of running an image template",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the last run (UTC)"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the last run (UTC)"
+        },
+        "runState": {
+          "$ref": "#/definitions/RunState",
+          "description": "State of the last run"
+        },
+        "runSubState": {
+          "$ref": "#/definitions/RunSubState",
+          "description": "Sub-state of the last run"
+        },
+        "message": {
+          "type": "string",
+          "description": "Verbose information about the last run state"
+        }
+      }
+    },
+    "ImageTemplateListResult": {
+      "type": "object",
+      "description": "The response of a ImageTemplate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ImageTemplate items on this page",
+          "items": {
+            "$ref": "#/definitions/ImageTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImageTemplateManagedImageDistributor": {
+      "type": "object",
+      "description": "Distribute as a Managed Disk Image.",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "Resource Id of the Managed Disk Image"
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location for the image, should match if image already exists"
+        }
+      },
+      "required": [
+        "imageId",
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateDistributor"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedImage"
+    },
+    "ImageTemplateManagedImageSource": {
+      "type": "object",
+      "description": "Describes an image source that is a managed image in customer subscription. This image must reside in the same subscription and region as the Image Builder template.",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "ARM resource id of the managed image in customer subscription"
+        }
+      },
+      "required": [
+        "imageId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateSource"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedImage"
+    },
+    "ImageTemplatePlatformImageSource": {
+      "type": "object",
+      "description": "Describes an image source from [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages).",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "Image Publisher in [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages)."
+        },
+        "offer": {
+          "type": "string",
+          "description": "Image offer from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages)."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Image sku from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). If 'latest' is specified here, the version is evaluated when the image build takes place, not when the template is submitted."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.",
+          "readOnly": true
+        },
+        "planInfo": {
+          "$ref": "#/definitions/PlatformImagePurchasePlan",
+          "description": "Optional configuration of purchase plan for platform image."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateSource"
+        }
+      ],
+      "x-ms-discriminator-value": "PlatformImage"
+    },
+    "ImageTemplatePowerShellCustomizer": {
+      "type": "object",
+      "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the power shell script provided in the scriptUri field above",
+          "default": ""
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of PowerShell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runElevated": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges",
+          "default": false
+        },
+        "runAsSystem": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true.",
+          "default": false
+        },
+        "validExitCodes": {
+          "type": "array",
+          "description": "Valid exit codes for the PowerShell script. [Default: 0]",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "PowerShell"
+    },
+    "ImageTemplatePowerShellValidator": {
+      "type": "object",
+      "description": "Runs the specified PowerShell script during the validation phase (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the PowerShell script to be run for validation. It can be a github link, Azure Storage URI, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the power shell script provided in the scriptUri field above",
+          "default": ""
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of PowerShell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        },
+        "runElevated": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges",
+          "default": false
+        },
+        "runAsSystem": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges using the Local System user. Can only be true when the runElevated field above is set to true.",
+          "default": false
+        },
+        "validExitCodes": {
+          "type": "array",
+          "description": "Valid exit codes for the PowerShell script. [Default: 0]",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateInVMValidator"
+        }
+      ],
+      "x-ms-discriminator-value": "PowerShell"
+    },
+    "ImageTemplateProperties": {
+      "type": "object",
+      "description": "Describes the properties of an image template",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ImageTemplateSource",
+          "description": "Specifies the properties used to describe the source image."
+        },
+        "customize": {
+          "type": "array",
+          "description": "Specifies the properties used to describe the customization steps of the image, like Image source etc",
+          "items": {
+            "$ref": "#/definitions/ImageTemplateCustomizer"
+          },
+          "x-ms-identifiers": []
+        },
+        "optimize": {
+          "$ref": "#/definitions/ImageTemplatePropertiesOptimize",
+          "description": "Specifies optimization to be performed on image."
+        },
+        "validate": {
+          "$ref": "#/definitions/ImageTemplatePropertiesValidate",
+          "description": "Configuration options and list of validations to be performed on the resulting image."
+        },
+        "distribute": {
+          "type": "array",
+          "description": "The distribution targets where the image output needs to go to.",
+          "items": {
+            "$ref": "#/definitions/ImageTemplateDistributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorHandling": {
+          "$ref": "#/definitions/ImageTemplatePropertiesErrorHandling",
+          "description": "Error handling options upon a build failure"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource",
+          "readOnly": true
+        },
+        "provisioningError": {
+          "$ref": "#/definitions/ProvisioningError",
+          "description": "Provisioning error, if any",
+          "readOnly": true
+        },
+        "lastRunStatus": {
+          "$ref": "#/definitions/ImageTemplateLastRunStatus",
+          "description": "State of 'run' that is currently executing or was last executed.",
+          "readOnly": true
+        },
+        "buildTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum duration to wait while building the image template (includes all customizations, optimization, validations, and distributions). Omit or specify 0 to use the default (4 hours).",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 960
+        },
+        "vmProfile": {
+          "$ref": "#/definitions/ImageTemplateVmProfile",
+          "description": "Describes how virtual machine is set up to build images"
+        },
+        "additionalDataDisks": {
+          "type": "array",
+          "description": "Optional array of additional data disks to be added to the image.",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          }
+        },
+        "stagingResourceGroup": {
+          "type": "string",
+          "description": "The staging resource group id in the same subscription as the image template that will be used to build the image. If this field is empty, a resource group with a random name will be created. If the resource group specified in this field doesn't exist, it will be created with the same name. If the resource group specified exists, it must be empty and in the same region as the image template. The resource group created will be deleted during template deletion if this field is empty or the resource group specified doesn't exist, but if the resource group specified exists the resources created in the resource group will be deleted during template deletion and the resource group itself will remain."
+        },
+        "exactStagingResourceGroup": {
+          "type": "string",
+          "description": "The staging resource group id in the same subscription as the image template that will be used to build the image. This read-only field differs from 'stagingResourceGroup' only if the value specified in the 'stagingResourceGroup' field is empty.",
+          "readOnly": true
+        },
+        "autoRun": {
+          "$ref": "#/definitions/ImageTemplateAutoRun",
+          "description": "Indicates whether or not to automatically run the image template build on template creation or update."
+        },
+        "managedResourceTags": {
+          "type": "object",
+          "description": "Tags that will be applied to the resource group and/or resources created by the service.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "source",
+        "distribute"
+      ]
+    },
+    "ImageTemplatePropertiesErrorHandling": {
+      "type": "object",
+      "description": "Error handling options upon a build failure",
+      "properties": {
+        "onCustomizerError": {
+          "type": "string",
+          "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved.",
+          "default": "cleanup",
+          "enum": [
+            "cleanup",
+            "abort"
+          ],
+          "x-ms-enum": {
+            "name": "OnBuildError",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "cleanup",
+                "value": "cleanup",
+                "description": "cleanup"
+              },
+              {
+                "name": "abort",
+                "value": "abort",
+                "description": "abort"
+              }
+            ]
+          }
+        },
+        "onValidationError": {
+          "type": "string",
+          "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved.",
+          "default": "cleanup",
+          "enum": [
+            "cleanup",
+            "abort"
+          ],
+          "x-ms-enum": {
+            "name": "OnBuildError",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "cleanup",
+                "value": "cleanup",
+                "description": "cleanup"
+              },
+              {
+                "name": "abort",
+                "value": "abort",
+                "description": "abort"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ImageTemplatePropertiesOptimize": {
+      "type": "object",
+      "description": "Specifies optimization to be performed on image.",
+      "properties": {
+        "vmBoot": {
+          "$ref": "#/definitions/ImageTemplatePropertiesOptimizeVmBoot",
+          "description": "Optimization is applied on the image for a faster VM boot."
+        },
+        "workload": {
+          "$ref": "#/definitions/ImageTemplatePropertiesOptimizeWorkload",
+          "description": "Optimization is applied on the image for specific workloads."
+        }
+      }
+    },
+    "ImageTemplatePropertiesOptimizeVmBoot": {
+      "type": "object",
+      "description": "Optimization is applied on the image for a faster VM boot.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/VMBootOptimizationState",
+          "description": "Enabling this field will improve VM boot time by optimizing the final customized image output."
+        }
+      }
+    },
+    "ImageTemplatePropertiesOptimizeWorkload": {
+      "type": "object",
+      "description": "Optimization is applied on the image for specific workloads.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/WorkloadOptimizationState",
+          "description": "Enabling this field will optimize vm images for specific workloads."
+        },
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the script to be run for workload optimization. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the script provided in the scriptUri field",
+          "default": ""
+        }
+      }
+    },
+    "ImageTemplatePropertiesValidate": {
+      "type": "object",
+      "description": "Configuration options and list of validations to be performed on the resulting image.",
+      "properties": {
+        "continueDistributeOnFailure": {
+          "type": "boolean",
+          "description": "If validation fails and this field is set to false, output image(s) will not be distributed. This is the default behavior. If validation fails and this field is set to true, output image(s) will still be distributed. Please use this option with caution as it may result in bad images being distributed for use. In either case (true or false), the end to end image run will be reported as having failed in case of a validation failure. [Note: This field has no effect if validation succeeds.]",
+          "default": false
+        },
+        "sourceValidationOnly": {
+          "type": "boolean",
+          "description": "If this field is set to true, the image specified in the 'source' section will directly be validated. No separate build will be run to generate and then validate a customized image.",
+          "default": false
+        },
+        "inVMValidations": {
+          "type": "array",
+          "description": "List of validations to be performed.",
+          "items": {
+            "$ref": "#/definitions/ImageTemplateInVMValidator"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ImageTemplateRestartCustomizer": {
+      "type": "object",
+      "description": "Reboots a VM and waits for it to come back online (Windows). Corresponds to Packer windows-restart provisioner",
+      "properties": {
+        "restartCommand": {
+          "type": "string",
+          "description": "Command to execute the restart [Default: 'shutdown /r /f /t 0 /c \"packer restart\"']"
+        },
+        "restartCheckCommand": {
+          "type": "string",
+          "description": "Command to check if restart succeeded [Default: '']"
+        },
+        "restartTimeout": {
+          "type": "string",
+          "description": "Restart timeout specified as a string of magnitude and unit, e.g. '5m' (5 minutes) or '2h' (2 hours) [Default: '5m']"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "WindowsRestart"
+    },
+    "ImageTemplateSharedImageDistributor": {
+      "type": "object",
+      "description": "Distribute via Azure Compute Gallery.",
+      "properties": {
+        "galleryImageId": {
+          "type": "string",
+          "description": "Resource Id of the Azure Compute Gallery image"
+        },
+        "replicationRegions": {
+          "type": "array",
+          "description": "[Deprecated] A list of regions that the image will be replicated to. This list can be specified only if targetRegions is not specified. This field is deprecated - use targetRegions instead.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "Flag that indicates whether created image version should be excluded from latest. Omit to use the default (false).",
+          "default": false
+        },
+        "storageAccountType": {
+          "$ref": "#/definitions/SharedImageStorageAccountType",
+          "description": "[Deprecated] Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS). This field can be specified only if replicationRegions is specified. This field is deprecated - use targetRegions instead."
+        },
+        "targetRegions": {
+          "type": "array",
+          "description": "The target regions where the distributed Image Version is going to be replicated to. This object supersedes replicationRegions and can be specified only if replicationRegions is not specified.",
+          "items": {
+            "$ref": "#/definitions/TargetRegion"
+          },
+          "x-ms-identifiers": []
+        },
+        "versioning": {
+          "$ref": "#/definitions/DistributeVersioner",
+          "description": "Describes how to generate new x.y.z version number for distribution."
+        },
+        "replicationMode": {
+          "$ref": "#/definitions/ReplicationMode",
+          "description": "Describes replication mode for distribution in Azure Compute Gallery. Omit to use the default (Full)."
+        }
+      },
+      "required": [
+        "galleryImageId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateDistributor"
+        }
+      ],
+      "x-ms-discriminator-value": "SharedImage"
+    },
+    "ImageTemplateSharedImageVersionSource": {
+      "type": "object",
+      "description": "Describes an image source that is an image version in an Azure Compute Gallery or a Direct Shared Gallery.",
+      "properties": {
+        "imageVersionId": {
+          "type": "string",
+          "description": "ARM resource id of the image version. When image version name is 'latest', the version is evaluated when the image build takes place."
+        },
+        "exactVersion": {
+          "type": "string",
+          "description": "Exact ARM resource id of the image version. This readonly field differs from the image version Id in 'imageVersionId' only if the version name specified in 'imageVersionId' field is 'latest'.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "imageVersionId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateSource"
+        }
+      ],
+      "x-ms-discriminator-value": "SharedImageVersion"
+    },
+    "ImageTemplateShellCustomizer": {
+      "type": "object",
+      "description": "Runs a shell script during the customization phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the shell script provided in the scriptUri field",
+          "default": ""
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of shell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "Shell"
+    },
+    "ImageTemplateShellValidator": {
+      "type": "object",
+      "description": "Runs the specified shell script during the validation phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
+      "properties": {
+        "scriptUri": {
+          "type": "string",
+          "description": "URI of the shell script to be run for validation. It can be a github link, Azure Storage URI, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the shell script provided in the scriptUri field",
+          "default": ""
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of shell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateInVMValidator"
+        }
+      ],
+      "x-ms-discriminator-value": "Shell"
+    },
+    "ImageTemplateSource": {
+      "type": "object",
+      "description": "Describes a virtual machine image source for building, customizing and distributing",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of source image you want to start with."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ImageTemplateUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an image template.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ImageTemplateIdentity",
+          "description": "The identity of the image template, if configured."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The user-specified tags associated with the image template.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ImageTemplateUpdateParametersProperties",
+          "description": "Parameters for updating an image template."
+        }
+      }
+    },
+    "ImageTemplateUpdateParametersProperties": {
+      "type": "object",
+      "description": "Parameters for updating an image template.",
+      "properties": {
+        "distribute": {
+          "type": "array",
+          "description": "The distribution targets where the image output needs to go to.",
+          "items": {
+            "$ref": "#/definitions/ImageTemplateDistributor"
+          },
+          "x-ms-identifiers": []
+        },
+        "vmProfile": {
+          "$ref": "#/definitions/ImageTemplateVmProfile",
+          "description": "Describes how virtual machine is set up to build images"
+        }
+      }
+    },
+    "ImageTemplateVhdDistributor": {
+      "type": "object",
+      "description": "Distribute via VHD in a storage account.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Optional Azure Storage URI for the distributed VHD blob. Omit to use the default (empty string) in which case VHD would be published to the storage account in the staging resource group."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateDistributor"
+        }
+      ],
+      "x-ms-discriminator-value": "VHD"
+    },
+    "ImageTemplateVmProfile": {
+      "type": "object",
+      "description": "Describes the virtual machines used to build and validate images",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2 for Gen1 images and Standard_D2ds_v4 for Gen2 images).",
+          "default": ""
+        },
+        "osDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size.",
+          "default": 0,
+          "minimum": 0
+        },
+        "userAssignedIdentities": {
+          "type": "array",
+          "description": "Optional array of resource IDs of user assigned managed identities to be configured on the build VM and validation VM. This may include the identity of the image template.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vnetConfig": {
+          "$ref": "#/definitions/VirtualNetworkConfig",
+          "description": "Optional configuration of the virtual network to use to deploy the build VM and validation VM in. Omit if no specific virtual network needs to be used."
+        }
+      }
+    },
+    "ImageTemplateWindowsUpdateCustomizer": {
+      "type": "object",
+      "description": "Installs Windows Updates. Corresponds to Packer Windows Update Provisioner (https://github.com/rgl/packer-provisioner-windows-update)",
+      "properties": {
+        "searchCriteria": {
+          "type": "string",
+          "description": "Criteria to search updates. Omit or specify empty string to use the default (search all). Refer to above link for examples and detailed description of this field."
+        },
+        "filters": {
+          "type": "array",
+          "description": "Array of filters to select updates to apply. Omit or specify empty array to use the default (no filter). Refer to above link for examples and detailed description of this field.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)",
+          "default": 0,
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "x-ms-discriminator-value": "WindowsUpdate"
+    },
+    "Operation": {
+      "type": "object",
+      "description": "A REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "This is of the format {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that describes the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The intended executor of the operation."
+        },
+        "properties": {
+          "description": "Properties of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The flag that indicates whether the operation applies to data plane."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that describes the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Friendly name of the resource provider."
+        },
+        "operation": {
+          "type": "string",
+          "description": "For example: read, write, delete, or listKeys/action"
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource type on which the operation is performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "The friendly name of the operation"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of operations supported by the resource provider.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of operation list results if there are any."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlatformImagePurchasePlan": {
+      "type": "object",
+      "description": "Purchase plan configuration for platform image.",
+      "properties": {
+        "planName": {
+          "type": "string",
+          "description": "Name of the purchase plan."
+        },
+        "planProduct": {
+          "type": "string",
+          "description": "Product of the purchase plan."
+        },
+        "planPublisher": {
+          "type": "string",
+          "description": "Publisher of the purchase plan."
+        }
+      },
+      "required": [
+        "planName",
+        "planProduct",
+        "planPublisher"
+      ]
+    },
+    "ProvisioningError": {
+      "type": "object",
+      "description": "Describes the error happened when create or update an image template",
+      "properties": {
+        "provisioningErrorCode": {
+          "$ref": "#/definitions/ProvisioningErrorCode",
+          "description": "Error code of the provisioning failure"
+        },
+        "message": {
+          "type": "string",
+          "description": "Verbose error message about the provisioning failure"
+        }
+      }
+    },
+    "ProvisioningErrorCode": {
+      "type": "string",
+      "description": "Error code of the provisioning failure",
+      "enum": [
+        "BadSourceType",
+        "BadPIRSource",
+        "BadManagedImageSource",
+        "BadSharedImageVersionSource",
+        "BadCustomizerType",
+        "UnsupportedCustomizerType",
+        "NoCustomizerScript",
+        "BadValidatorType",
+        "UnsupportedValidatorType",
+        "NoValidatorScript",
+        "BadDistributeType",
+        "BadSharedImageDistribute",
+        "BadStagingResourceGroup",
+        "ServerError",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BadSourceType",
+            "value": "BadSourceType",
+            "description": "BadSourceType"
+          },
+          {
+            "name": "BadPIRSource",
+            "value": "BadPIRSource",
+            "description": "BadPIRSource"
+          },
+          {
+            "name": "BadManagedImageSource",
+            "value": "BadManagedImageSource",
+            "description": "BadManagedImageSource"
+          },
+          {
+            "name": "BadSharedImageVersionSource",
+            "value": "BadSharedImageVersionSource",
+            "description": "BadSharedImageVersionSource"
+          },
+          {
+            "name": "BadCustomizerType",
+            "value": "BadCustomizerType",
+            "description": "BadCustomizerType"
+          },
+          {
+            "name": "UnsupportedCustomizerType",
+            "value": "UnsupportedCustomizerType",
+            "description": "UnsupportedCustomizerType"
+          },
+          {
+            "name": "NoCustomizerScript",
+            "value": "NoCustomizerScript",
+            "description": "NoCustomizerScript"
+          },
+          {
+            "name": "BadValidatorType",
+            "value": "BadValidatorType",
+            "description": "BadValidatorType"
+          },
+          {
+            "name": "UnsupportedValidatorType",
+            "value": "UnsupportedValidatorType",
+            "description": "UnsupportedValidatorType"
+          },
+          {
+            "name": "NoValidatorScript",
+            "value": "NoValidatorScript",
+            "description": "NoValidatorScript"
+          },
+          {
+            "name": "BadDistributeType",
+            "value": "BadDistributeType",
+            "description": "BadDistributeType"
+          },
+          {
+            "name": "BadSharedImageDistribute",
+            "value": "BadSharedImageDistribute",
+            "description": "BadSharedImageDistribute"
+          },
+          {
+            "name": "BadStagingResourceGroup",
+            "value": "BadStagingResourceGroup",
+            "description": "BadStagingResourceGroup"
+          },
+          {
+            "name": "ServerError",
+            "value": "ServerError",
+            "description": "ServerError"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          }
+        ]
+      }
+    },
+    "ReplicationMode": {
+      "type": "string",
+      "description": "Describes replication mode for distribution in Azure Compute Gallery. Omit to use the default (Full).",
+      "enum": [
+        "Full",
+        "Shallow"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "Full replication mode"
+          },
+          {
+            "name": "Shallow",
+            "value": "Shallow",
+            "description": "Shallow replication mode"
+          }
+        ]
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of identity used for the image template. The type 'None' will remove any identities from the image template.",
+      "enum": [
+        "UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "UserAssigned"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          }
+        ]
+      }
+    },
+    "RunOutput": {
+      "type": "object",
+      "description": "Represents an output that was created by running an image template.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunOutputProperties",
+          "description": "The properties of the run output",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RunOutputCollection": {
+      "type": "object",
+      "description": "The result of List run outputs operation",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RunOutput items on this page",
+          "items": {
+            "$ref": "#/definitions/RunOutput"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RunOutputProperties": {
+      "type": "object",
+      "description": "Describes the properties of a run output",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "The resource id of the artifact."
+        },
+        "artifactUri": {
+          "type": "string",
+          "description": "The location URI of the artifact."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource",
+          "readOnly": true
+        }
+      }
+    },
+    "RunState": {
+      "type": "string",
+      "description": "State of the last run",
+      "enum": [
+        "Running",
+        "Canceling",
+        "Succeeded",
+        "PartiallySucceeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "RunState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "Canceling",
+            "value": "Canceling",
+            "description": "Canceling"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "PartiallySucceeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          }
+        ]
+      }
+    },
+    "RunSubState": {
+      "type": "string",
+      "description": "Sub-state of the last run",
+      "enum": [
+        "Queued",
+        "Building",
+        "Customizing",
+        "Optimizing",
+        "Validating",
+        "Distributing"
+      ],
+      "x-ms-enum": {
+        "name": "RunSubState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Queued"
+          },
+          {
+            "name": "Building",
+            "value": "Building",
+            "description": "Building"
+          },
+          {
+            "name": "Customizing",
+            "value": "Customizing",
+            "description": "Customizing"
+          },
+          {
+            "name": "Optimizing",
+            "value": "Optimizing",
+            "description": "Optimizing"
+          },
+          {
+            "name": "Validating",
+            "value": "Validating",
+            "description": "Validating"
+          },
+          {
+            "name": "Distributing",
+            "value": "Distributing",
+            "description": "Distributing"
+          }
+        ]
+      }
+    },
+    "SharedImageStorageAccountType": {
+      "type": "string",
+      "description": "Specifies the storage account type to be used to store the Azure Compute Gallery image version in.",
+      "enum": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "SharedImageStorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard_LRS"
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS",
+            "description": "Standard_ZRS"
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium_LRS"
+          }
+        ]
+      }
+    },
+    "SourceImageTriggerProperties": {
+      "type": "object",
+      "description": "Properties of SourceImage kind of trigger",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TriggerProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SourceImage"
+    },
+    "TargetRegion": {
+      "type": "object",
+      "description": "Describes the target region information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the region."
+        },
+        "replicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas of the Image Version to be created in this region. Omit to use the default (1).",
+          "default": 1,
+          "minimum": 1
+        },
+        "storageAccountType": {
+          "$ref": "#/definitions/SharedImageStorageAccountType",
+          "description": "Specifies the storage account type to be used to store the image in this region. Omit to use the default (Standard_LRS)."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Trigger": {
+      "type": "object",
+      "description": "Represents a trigger that can invoke an image template build.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TriggerProperties",
+          "description": "The properties of a trigger"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TriggerCollection": {
+      "type": "object",
+      "description": "The result of List triggers operation",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Trigger items on this page",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TriggerProperties": {
+      "type": "object",
+      "description": "Describes the properties of a trigger",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of trigger.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/TriggerStatus",
+          "description": "Trigger status",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TriggerStatus": {
+      "type": "object",
+      "description": "Describes the status of a trigger",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed status message, including for alerts and error messages.",
+          "readOnly": true
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the status.",
+          "readOnly": true
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User assigned identity properties",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the assigned identity.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMBootOptimizationState": {
+      "type": "string",
+      "description": "Enabling this field will improve VM boot time by optimizing the final customized image output.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "VMBootOptimizationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "VirtualNetworkConfig": {
+      "type": "object",
+      "description": "Virtual Network configuration.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource id of a pre-existing subnet on which the build VM and validation VM will be deployed"
+        },
+        "containerInstanceSubnetId": {
+          "type": "string",
+          "description": "Resource id of a pre-existing subnet on which Azure Container Instance will be deployed for Isolated Builds. This field may be specified only if `subnetId` is also specified and must be on the same Virtual Network as the subnet specified in `subnetId`."
+        },
+        "proxyVmSize": {
+          "type": "string",
+          "description": "Size of the proxy virtual machine used to pass traffic to the build VM and validation VM. This must not be specified if `containerInstanceSubnetId` is specified because no proxy virtual machine is deployed in that case. Omit or specify empty string to use the default (Standard_A1_v2).",
+          "default": ""
+        }
+      }
+    },
+    "WorkloadOptimizationState": {
+      "type": "string",
+      "description": "Enabling this field will optimize vm images for specific workloads.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadOptimizationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Workload optimization is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Workload optimization is disabled"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

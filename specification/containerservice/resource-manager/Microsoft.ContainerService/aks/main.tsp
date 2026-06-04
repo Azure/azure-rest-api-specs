@@ -21,6 +21,7 @@ import "./SafeguardsAvailableVersion.tsp";
 import "./MeshRevisionProfile.tsp";
 import "./MeshUpgradeProfile.tsp";
 import "./MaintenanceConfiguration.tsp";
+import "./MaintenanceWindow.tsp";
 import "./ManagedNamespace.tsp";
 import "./AgentPool.tsp";
 import "./AgentPoolUpgradeProfile.tsp";
@@ -64,8 +65,23 @@ enum Versions {
   v2026_01_01: "2026-01-01",
 
   /**
-   * The 2026-01-02-preview API version.
+   * The 2026-02-01 API version.
+   */
+  v2026_02_01: "2026-02-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
+
+  /**
+   * The 2026-04-02-preview API version.
    */
   @previewVersion
-  v2026_01_02_preview: "2026-01-02-preview",
+  v2026_04_02_preview: "2026-04-02-preview",
 }

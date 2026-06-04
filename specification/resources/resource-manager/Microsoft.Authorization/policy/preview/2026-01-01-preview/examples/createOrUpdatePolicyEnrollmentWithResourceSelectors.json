@@ -1,0 +1,127 @@
+{
+  "title": "Create or update a policy enrollment with resource selectors",
+  "operationId": "PolicyEnrollments_CreateOrUpdate",
+  "parameters": {
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/demoCluster",
+    "policyEnrollmentName": "DemoExpensiveVM",
+    "api-version": "2026-01-01-preview",
+    "parameters": {
+      "properties": {
+        "policyAssignmentId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+        "policyDefinitionReferenceIds": [
+          "Limit_Skus"
+        ],
+        "displayName": "Enroll demo cluster",
+        "description": "Enroll demo cluster from limit sku",
+        "metadata": {
+          "reason": "Enrollment for a expensive VM demo"
+        },
+        "assignmentScopeValidation": "Default",
+        "resourceSelectors": [
+          {
+            "name": "SDPRegions",
+            "selectors": [
+              {
+                "kind": "resourceLocation",
+                "in": [
+                  "eastus2euap",
+                  "centraluseuap"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "policyAssignmentId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+          "policyAssignmentInstanceId": "00000000-0000-0000-0000-000000000000",
+          "policyDefinitionReferenceIds": [
+            "Limit_Skus"
+          ],
+          "displayName": "Enroll demo cluster",
+          "description": "Enroll demo cluster from limit sku",
+          "metadata": {
+            "reason": "Enrollment for a expensive VM demo"
+          },
+          "assignmentScopeValidation": "Default",
+          "resourceSelectors": [
+            {
+              "name": "SDPRegions",
+              "selectors": [
+                {
+                  "kind": "resourceLocation",
+                  "in": [
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-07-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-07-01T01:01:01.1075056Z"
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/demoCluster/providers/Microsoft.Authorization/policyEnrollments/DemoExpensiveVM",
+        "type": "Microsoft.Authorization/policyEnrollments",
+        "eTag": "00000000-0000-0000-0000-000000000000",
+        "name": "DemoExpensiveVM"
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "properties": {
+          "policyAssignmentId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/CostManagement",
+          "policyAssignmentInstanceId": "00000000-0000-0000-0000-000000000000",
+          "policyDefinitionReferenceIds": [
+            "Limit_Skus"
+          ],
+          "displayName": "Enroll demo cluster",
+          "description": "Enroll demo cluster from limit sku",
+          "metadata": {
+            "reason": "Enrollment for a expensive VM demo"
+          },
+          "assignmentScopeValidation": "Default",
+          "resourceSelectors": [
+            {
+              "name": "SDPRegions",
+              "selectors": [
+                {
+                  "kind": "resourceLocation",
+                  "in": [
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-07-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-07-01T01:01:01.1075056Z"
+        },
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/resourceGroups/demoCluster/providers/Microsoft.Authorization/policyEnrollments/DemoExpensiveVM",
+        "type": "Microsoft.Authorization/policyEnrollments",
+        "eTag": "00000000-0000-0000-0000-000000000000",
+        "name": "DemoExpensiveVM"
+      }
+    }
+  }
+}

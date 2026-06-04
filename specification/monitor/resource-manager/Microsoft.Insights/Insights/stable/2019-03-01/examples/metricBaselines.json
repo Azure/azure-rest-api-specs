@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "aggregation": "average",
+    "api-version": "2019-03-01",
+    "interval": "PT1H",
+    "metricName": "Percentage Cpu",
+    "resourceUri": "subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
+    "sensitivities": "Low,Medium",
+    "timespan": "2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Percentage CPU",
+            "type": "microsoft.insights/metricBaselines",
+            "id": "/subscriptions/11aeb0ed-456b-4ca0-8df5-b9fbdc63d0d3/resourceGroups/SmartAnalytics-DEV-VM/providers/Microsoft.Compute/virtualMachines/DemoVM1/providers/microsoft.insights/metricBaselines/Percentage CPU",
+            "properties": {
+              "baselines": [
+                {
+                  "aggregation": "average",
+                  "data": [
+                    {
+                      "highThresholds": [
+                        90.3453,
+                        91.3453
+                      ],
+                      "lowThresholds": [
+                        30,
+                        31.1
+                      ],
+                      "sensitivity": "Low"
+                    },
+                    {
+                      "highThresholds": [
+                        70.3453,
+                        71.3453
+                      ],
+                      "lowThresholds": [
+                        50,
+                        51.1
+                      ],
+                      "sensitivity": "Medium"
+                    }
+                  ],
+                  "dimensions": [],
+                  "metadataValues": [
+                    {
+                      "name": "ErrorType",
+                      "value": "TooManyAnomalies"
+                    },
+                    {
+                      "name": "SeasonalityFrequency",
+                      "value": "288"
+                    }
+                  ],
+                  "timestamps": [
+                    "2019-03-12T11:00:00.000Z",
+                    "2019-03-12T12:00:00.000Z"
+                  ]
+                }
+              ],
+              "interval": "PT1H",
+              "namespace": "microsoft.compute/virtualmachines",
+              "timespan": "2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Baselines_List",
+  "title": "Get metric baselines"
+}

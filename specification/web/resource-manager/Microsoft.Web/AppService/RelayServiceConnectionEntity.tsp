@@ -55,7 +55,8 @@ interface RelayServiceConnectionEntityOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface RelayServiceConnectionEntities {
   /**
    * Description for Gets a hybrid connection configuration by its name.
@@ -129,7 +130,8 @@ interface RelayServiceConnectionEntityOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Gets a hybrid connection configuration by its name.
@@ -175,18 +177,23 @@ interface RelayServiceConnectionEntityOperationGroup {
 }
 
 @@doc(RelayServiceConnectionEntity.name, "Name of the hybrid connection.");
-@@doc(RelayServiceConnectionEntity.properties,
+@@doc(
+  RelayServiceConnectionEntity.properties,
   "RelayServiceConnectionEntity resource specific properties"
 );
-@@doc(RelayServiceConnectionEntities.createOrUpdateRelayServiceConnection::parameters.resource,
+@@doc(
+  RelayServiceConnectionEntities.createOrUpdateRelayServiceConnection::parameters.resource,
   "Details of the hybrid connection configuration."
 );
-@@doc(RelayServiceConnectionEntities.updateRelayServiceConnection::parameters.properties,
+@@doc(
+  RelayServiceConnectionEntities.updateRelayServiceConnection::parameters.properties,
   "Details of the hybrid connection configuration."
 );
-@@doc(RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot::parameters.resource,
+@@doc(
+  RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot::parameters.resource,
   "Details of the hybrid connection configuration."
 );
-@@doc(RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot::parameters.properties,
+@@doc(
+  RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot::parameters.properties,
   "Details of the hybrid connection configuration."
 );

@@ -22,6 +22,16 @@ model HeatMapModel extends ProxyResource {
   properties?: HeatMapProperties;
 }
 
+alias HeatMapOpsResourceParameters = {
+  /**
+   * The type of the heatmap.
+   */
+  @path
+  @segment("heatMaps")
+  @key("heatMapType")
+  heatMapType: HeatMapType;
+};
+
 alias HeatMapModelsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -37,15 +47,7 @@ alias HeatMapModelsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("trafficmanagerprofiles")
     profileName: string;
   },
-  {
-    /**
-     * The type of the heatmap.
-     */
-    @path
-    @segment("heatMaps")
-    @key("heatMapType")
-    heatMapType: HeatMapType;
-  },
+  HeatMapOpsResourceParameters,
   ErrorType = CloudError
 >;
 
@@ -76,6 +78,7 @@ interface HeatMapModels {
   >;
 }
 
-@@doc(HeatMapModel.properties,
+@@doc(
+  HeatMapModel.properties,
   "The properties of the Traffic Manager HeatMap."
 );

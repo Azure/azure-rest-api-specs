@@ -196,7 +196,7 @@
             "x-ms-client-request-id": true
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -291,7 +291,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Gets a list of all Search services in the given subscription.",
+        "description": "Gets a list of all search services in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -346,7 +346,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Gets a list of all Search services in the given resource group.",
+        "description": "Gets a list of all search services in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -503,7 +503,7 @@
           {
             "name": "service",
             "in": "body",
-            "description": "The definition of the search service to create or update.",
+            "description": "The definition of the search service to create or update. Create applies to both serverless and dedicated search services; update applies only to dedicated search services.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SearchService"
@@ -684,7 +684,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Deletes a search service in the given resource group, along with its associated resources.",
+        "description": "Deletes a search service in the given resource group, along with its associated resources.\nReturns 200 (OK) on successful deletion, or 204 (No Content) if the service is not found.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -726,9 +726,6 @@
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "404": {
-            "description": "The server cannot find the requested resource."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -820,7 +817,7 @@
         "tags": [
           "QueryKeys"
         ],
-        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
+        "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.\nReturns 200 (OK) on successful deletion, 204 (No Content) if the service exists but the query keys not found, or 404 (Not Found) if the service is not found.\nNOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1404,7 +1401,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Disconnects the private endpoint connection and deletes it from the search service.",
+        "description": "Disconnects the private endpoint connection and deletes it from the search service.\nReturns 200 (OK) with the deleted connection details on successful deletion, or 404 (Not Found) if the connection does not exist.\nNOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1858,7 +1855,7 @@
         "tags": [
           "SharedPrivateLinkResources"
         ],
-        "description": "Initiates the deletion of the shared private link resource from the search service.",
+        "description": "Initiates the deletion of the shared private link resource from the search service.\nReturns 202 (Accepted) for asynchronous deletion, 204 (No Content) if the service exists but the shared private link is not found, or 404 (Not Found) if the service is not found.\nNOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -2204,7 +2201,7 @@
           {
             "name": "Confidential",
             "value": "Confidential",
-            "description": "Create the service with Azure Confidential Compute."
+            "description": "Create the dedicated service with Azure Confidential Compute."
           }
         ]
       }
@@ -2293,12 +2290,12 @@
           {
             "name": "Default",
             "value": "Default",
-            "description": "The limit on number of indexes is determined by the default limits for the SKU."
+            "description": "The maximum limit of indexes is determined by the SKU or pricing tier."
           },
           {
             "name": "HighDensity",
             "value": "HighDensity",
-            "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+            "description": "Only applies to the Standard3 (S3) SKU, where the search services can have up to 1,000 indexes."
           }
         ]
       }
@@ -2779,7 +2776,7 @@
           {
             "name": "Provisioning",
             "value": "provisioning",
-            "description": "The search service is being provisioned or scaled up or down."
+            "description": "The search service is being provisioned or scaled up or down. For dedicated search services only."
           },
           {
             "name": "Failed",
@@ -2859,14 +2856,14 @@
         },
         "name": {
           "$ref": "#/definitions/QuotaUsageResultName",
-          "description": "The name of the SKU supported by Azure AI Search.",
+          "description": "The SKU name information of the current search service.",
           "readOnly": true
         }
       }
     },
     "QuotaUsageResultName": {
       "type": "object",
-      "description": "The name of the SKU supported by Azure AI Search.",
+      "description": "The SKU name information, including its identifier and localized display name.",
       "properties": {
         "value": {
           "type": "string",
@@ -2996,7 +2993,7 @@
     },
     "SearchSemanticSearch": {
       "type": "string",
-      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+      "description": "Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
       "enum": [
         "disabled",
         "free",
@@ -3009,17 +3006,17 @@
           {
             "name": "disabled",
             "value": "disabled",
-            "description": "Indicates that semantic reranker is disabled for the search service. This is the default."
+            "description": "Indicates that semantic reranker is disabled for the search service."
           },
           {
             "name": "free",
             "value": "free",
-            "description": "Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services."
+            "description": "Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services. This is the default."
           },
           {
             "name": "standard",
             "value": "standard",
-            "description": "Enables semantic reranker on a search service as a billable feature, with higher throughput and volume of semantically reranked queries."
+            "description": "Enables semantic reranker on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of semantically reranked queries."
           }
         ]
       }
@@ -3078,7 +3075,7 @@
         "replicaCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas in the search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.",
+          "description": "The number of replicas in the dedicated search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.",
           "default": 1,
           "minimum": 1,
           "maximum": 12
@@ -3086,7 +3083,7 @@
         "partitionCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
+          "description": "The number of partitions in the dedicated search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.",
           "default": 1,
           "minimum": 1,
           "maximum": 12
@@ -3111,12 +3108,12 @@
               {
                 "name": "Default",
                 "value": "Default",
-                "description": "The limit on number of indexes is determined by the default limits for the SKU."
+                "description": "The maximum limit of indexes is determined by the SKU or pricing tier."
               },
               {
                 "name": "HighDensity",
                 "value": "HighDensity",
-                "description": "Only application for standard3 SKU, where the search service can have up to 1000 indexes."
+                "description": "Only applies to the Standard3 (S3) SKU, where the search services can have up to 1,000 indexes."
               }
             ]
           }
@@ -3197,7 +3194,7 @@
         },
         "semanticSearch": {
           "$ref": "#/definitions/SearchSemanticSearch",
-          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.",
+          "description": "Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
           "x-nullable": true
         },
         "privateEndpointConnections": {
@@ -3570,7 +3567,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'"
+          "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions. 'serverless': Serverless tier with auto-scaling capabilities."
         }
       },
       "externalDocs": {
@@ -3579,7 +3576,7 @@
     },
     "SkuName": {
       "type": "string",
-      "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'",
+      "description": "The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions. 'serverless': Serverless tier with auto-scaling capabilities.",
       "enum": [
         "free",
         "basic",
@@ -3657,7 +3654,7 @@
     },
     "UpgradeAvailable": {
       "type": "string",
-      "description": "Indicates if the search service has an upgrade available.",
+      "description": "Indicates if the dedicated search service has an upgrade available.",
       "enum": [
         "notAvailable",
         "available"
@@ -3669,12 +3666,12 @@
           {
             "name": "NotAvailable",
             "value": "notAvailable",
-            "description": "An upgrade is currently not available for the service."
+            "description": "An upgrade is currently not available for the dedicated service."
           },
           {
             "name": "Available",
             "value": "available",
-            "description": "There is an upgrade available for the service."
+            "description": "There is an upgrade available for the dedicated service."
           }
         ]
       }

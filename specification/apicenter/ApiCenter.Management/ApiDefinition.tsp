@@ -44,7 +44,9 @@ interface ApiDefinitions {
   importSpecification is ArmResourceActionAsync<
     ApiDefinition,
     ApiSpecImportRequest,
-    ApiImportSuccess
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
   @doc("Exports the API specification.")
   exportSpecification is ArmResourceActionAsync<
@@ -52,10 +54,4 @@ interface ApiDefinitions {
     void,
     ApiSpecExportResult
   >;
-}
-
-/** The API specification was successfully imported. */
-model ApiImportSuccess {
-  /** The response status code */
-  @statusCode code: 200;
 }

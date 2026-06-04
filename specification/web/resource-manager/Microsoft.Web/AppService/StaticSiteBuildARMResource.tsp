@@ -33,7 +33,8 @@ model StaticSiteBuildARMResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("StaticSites")
+@armResourceOperations(#{ omitTags: true })
 interface StaticSiteBuildARMResources {
   /**
    * Description for Gets the details of a static site build.
@@ -51,7 +52,10 @@ interface StaticSiteBuildARMResources {
   @summary("Deletes a static site build.")
   deleteStaticSiteBuild is ArmResourceDeleteWithoutOkAsync<
     StaticSiteBuildARMResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -162,15 +166,19 @@ interface StaticSiteBuildARMResources {
 }
 
 @@doc(StaticSiteBuildARMResource.name, "The stage site identifier.");
-@@doc(StaticSiteBuildARMResource.properties,
+@@doc(
+  StaticSiteBuildARMResource.properties,
   "StaticSiteBuildARMResource resource specific properties"
 );
-@@doc(StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings::parameters.body,
+@@doc(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings::parameters.body,
   "The dictionary containing the static site app settings to update."
 );
-@@doc(StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings::parameters.body,
+@@doc(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings::parameters.body,
   "The dictionary containing the static site function app settings to update."
 );
-@@doc(StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild::parameters.body,
+@@doc(
+  StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild::parameters.body,
   "A JSON representation of the StaticSiteZipDeployment properties. See example."
 );

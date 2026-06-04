@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "elasticPoolName": "sqlcrudtest-8102",
+    "parameters": {
+      "location": "Japan East",
+      "properties": {
+        "autoPauseDelay": 60,
+        "minCapacity": 0.5,
+        "perDatabaseSettings": {
+          "autoPauseDelay": 80,
+          "maxCapacity": 2,
+          "minCapacity": 0
+        }
+      },
+      "sku": {
+        "name": "GP_S_Gen5_2",
+        "capacity": 2,
+        "tier": "GeneralPurpose"
+      }
+    },
+    "resourceGroupName": "sqlcrudtest-2369",
+    "serverName": "sqlcrudtest-8069",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sqlcrudtest-8102",
+        "type": "Microsoft.Sql/servers/elasticPools",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
+        "kind": null,
+        "location": "Japan East",
+        "properties": {
+          "autoPauseDelay": 60,
+          "creationDate": "2017-02-10T01:25:25.033Z",
+          "maxSizeBytes": 102400,
+          "minCapacity": 0.5,
+          "perDatabaseSettings": {
+            "autoPauseDelay": 80,
+            "maxCapacity": 2,
+            "minCapacity": 0
+          },
+          "state": "Ready"
+        },
+        "sku": {
+          "name": "GP_S_Gen5_2",
+          "capacity": 2,
+          "tier": "GeneralPurpose"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sqlcrudtest-8102",
+        "type": "Microsoft.Sql/servers/elasticPools",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/servers/sqlcrudtest-8069/elasticPools/sqlcrudtest-8102",
+        "kind": null,
+        "location": "Japan East",
+        "properties": {
+          "autoPauseDelay": 60,
+          "creationDate": "2017-02-10T01:25:25.033Z",
+          "maxSizeBytes": 102400,
+          "minCapacity": 0.5,
+          "perDatabaseSettings": {
+            "autoPauseDelay": 80,
+            "maxCapacity": 2,
+            "minCapacity": 0
+          },
+          "state": "Ready"
+        },
+        "sku": {
+          "name": "GP_S_Gen5_2",
+          "capacity": 2,
+          "tier": "GeneralPurpose"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/locations/japaneast1/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-05-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sqlcrudtest-2369/providers/Microsoft.Sql/locations/japaneast1/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2023-05-01"
+      }
+    }
+  },
+  "operationId": "ElasticPools_CreateOrUpdate",
+  "title": "Create or Update an elastic pool with serverless properties"
+}

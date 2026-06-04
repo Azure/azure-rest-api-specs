@@ -54,7 +54,8 @@ interface SiteAuthSettingsV2Ops
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
@@ -120,7 +121,8 @@ interface SiteAuthSettingsV2OperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteAuthSettingsV2OperationGroup {
   /**
    * Gets site's Authentication / Authorization settings for apps via the V2 format
@@ -157,12 +159,15 @@ interface SiteAuthSettingsV2OperationGroup {
 }
 
 @@doc(SiteAuthSettingsV2.name, "");
-@@doc(SiteAuthSettingsV2.properties,
+@@doc(
+  SiteAuthSettingsV2.properties,
   "SiteAuthSettingsV2 resource specific properties"
 );
-@@doc(SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
+@@doc(
+  SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
   "Auth settings associated with web app."
 );
-@@doc(SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
+@@doc(
+  SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
   "Auth settings associated with web app."
 );

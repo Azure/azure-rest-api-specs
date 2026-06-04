@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -20,7 +20,7 @@ model IpExtendedCommunity
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The IpExtendedCommunity properties */
+  @doc("The IpExtendedCommunity properties")
   properties: IpExtendedCommunityProperties;
 }
 
@@ -47,6 +47,7 @@ interface IpExtendedCommunities {
 }
 
 @@doc(IpExtendedCommunities.create::parameters.resource, "Request payload.");
-@@doc(IpExtendedCommunities.update::parameters.properties,
+@@doc(
+  IpExtendedCommunities.update::parameters.properties,
   "IP Extended Community properties to update."
 );

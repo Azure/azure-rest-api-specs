@@ -548,33 +548,6 @@ enum CreateMode {
   default,
 }
 
-/**
- * The vault's create mode to indicate whether the vault need to be recovered or not.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum KeyVaultCreateMode {
-  recover,
-  default,
-}
-
-/**
- * The vault's create mode to indicate whether the vault need to be recovered or not.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum KeyVaultPatchMode {
-  recover,
-  default,
-}
-
-/**
- * The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ManagedHsmCreateMode {
-  recover,
-  default,
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AccessPolicyUpdateKind {
@@ -2482,7 +2455,8 @@ model MHSMPrivateEndpointConnectionsListResult
  */
 model VaultListResult
   is Azure.Core.Page<Azure.ResourceManager.Foundations.TrackedResource>;
-@@doc(VaultListResult.nextLink,
+@@doc(
+  VaultListResult.nextLink,
   "The URL to get the next set of vault resources."
 );
 @@doc(VaultListResult.value, "The list of vault resources.");

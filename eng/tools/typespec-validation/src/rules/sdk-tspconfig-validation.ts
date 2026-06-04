@@ -229,10 +229,11 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       };
     }
     // Handle various path formats with different prefixes
-    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
-    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
-    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-    // Format 4: {output-dir}/sdk/dellstorage/{xxxx} where we need to validate "{xxxx}"
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor          → azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor                       → azure-mgmt-advisor
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings            → azadmin/settings
+    // Format 4: {output-dir}/sdk/dellstorage/{xxxx}                    → {xxxx} (resolved below)
+    // Format 5: {output-dir}/sdk/recoveryservices-backup/Azure.Foo     → Azure.Foo
 
     let extractedPath: string;
     if (!actualValue.includes("/")) {
@@ -243,11 +244,15 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         (part) => !(part === "{output-dir}" || part === "{service-dir}"),
       );
 
-      // If the last part is a variable (e.g., {namespace}, {package-name}, {xxxx}), use it as extractedPath
-      const lastPart = pathParts[pathParts.length - 1];
+      // If the last part is a variable (e.g., {namespace}, {package-name}), use just that (Format 4)
+      const lastPart = filteredParts[filteredParts.length - 1];
       if (lastPart.startsWith("{") && lastPart.endsWith("}")) {
         extractedPath = lastPart;
       } else {
+        // Strip a leading sdk/<service-name>/ segment if present (Format 5)
+        if (filteredParts.length >= 3 && filteredParts[0] === "sdk") {
+          filteredParts.splice(0, 2);
+        }
         extractedPath = filteredParts.join("/");
       }
     }

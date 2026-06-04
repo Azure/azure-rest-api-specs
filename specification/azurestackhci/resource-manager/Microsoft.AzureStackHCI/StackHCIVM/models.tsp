@@ -1517,6 +1517,43 @@ model InboundNATRule {
   properties: InboundNATRuleProperties;
 }
 
+@added(Versions.v2026_04_01_preview)
+@doc("Inbound rule properties - extends InboundNATRuleProperties with additional status tracking")
+model InboundRuleProperties {
+  ...InboundNATRuleProperties;
+
+  @doc("Provisioning state of the inbound rule")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Inbound Rule")
+  @visibility(Lifecycle.Read)
+  status?: InboundRuleStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The observed state of inbound rule")
+model InboundRuleStatus {
+  @doc("InboundRule provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("InboundRule provisioning status")
+  provisioningStatus?: InboundRuleStatusProvisioningStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Provisioning status of Inbound Rule")
+model InboundRuleStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the inbound rule")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the inbound rule [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 @added(Versions.v2025_09_01_preview)
 @doc("Nat Gateway resource properties")
 model NatGatewayProperties {
@@ -1531,7 +1568,8 @@ model NatGatewayProperties {
   subnets?: VirtualNetworkSubnetArmReference[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
-  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet. Removed in 2026-04-01-preview; use InboundRule Child resource instead.")
+  @removed(Versions.v2026_04_01_preview)
   @Azure.ResourceManager.identifiers(#[])
   inboundNATRules?: InboundNATRule[];
 
@@ -2784,4 +2822,11 @@ model GuestCredential {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   password?: string;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
+model PowerOffVirtualMachineOptions {
+  @doc("Indicates whether to perform an immediate shut down. When set to true, the VM is forcefully shut down. If not specified, the default value is false, and the operation attempts a graceful shut down of the VM.")
+  skipShutdown?: boolean = false;
 }

@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.EventHub;
 
@@ -16,7 +18,7 @@ namespace Microsoft.EventHub;
  */
 union ClusterSkuName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Dedicated: "Dedicated",
 }
 
@@ -25,13 +27,13 @@ union ClusterSkuName {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Key: "Key",
 }
 
@@ -40,21 +42,21 @@ union CreatedByType {
  */
 union ProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Scaling: "Scaling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Canceled: "Canceled",
 }
 
@@ -63,9 +65,9 @@ union ProvisioningState {
  */
 union Mode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Enabled: "Enabled",
 }
 
@@ -74,11 +76,11 @@ union Mode {
  */
 union SkuName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Premium: "Premium",
 }
 
@@ -87,11 +89,11 @@ union SkuName {
  */
 union SkuTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Premium: "Premium",
 }
 
@@ -100,13 +102,13 @@ union SkuTier {
  */
 union TlsVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   `1.0`: "1.0",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   `1.1`: "1.1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   `1.2`: "1.2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   `1.3`: "1.3",
 }
 
@@ -115,11 +117,11 @@ union TlsVersion {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
@@ -128,13 +130,13 @@ union PublicNetworkAccess {
  */
 union PrivateLinkConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Disconnected: "Disconnected",
 }
 
@@ -143,17 +145,17 @@ union PrivateLinkConnectionStatus {
  */
 union EndPointProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Failed: "Failed",
 }
 
@@ -162,9 +164,9 @@ union EndPointProvisioningState {
  */
 union GeoDRRoleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Primary: "Primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Secondary: "Secondary",
 }
 
@@ -173,27 +175,27 @@ union GeoDRRoleType {
  */
 union NetworkSecurityPerimeterConfigurationProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Accepted: "Accepted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   InvalidResponse: "InvalidResponse",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   SucceededWithIssues: "SucceededWithIssues",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Deleted: "Deleted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Canceled: "Canceled",
 }
 
@@ -202,15 +204,15 @@ union NetworkSecurityPerimeterConfigurationProvisioningState {
  */
 union ResourceAssociationAccessMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   NoAssociationMode: "NoAssociationMode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   EnforcedMode: "EnforcedMode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   LearningMode: "LearningMode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   AuditMode: "AuditMode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   UnspecifiedMode: "UnspecifiedMode",
 }
 
@@ -219,9 +221,9 @@ union ResourceAssociationAccessMode {
  */
 union NspAccessRuleDirection {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Inbound: "Inbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Outbound: "Outbound",
 }
 
@@ -230,9 +232,9 @@ union NspAccessRuleDirection {
  */
 union DefaultAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Allow: "Allow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Deny: "Deny",
 }
 
@@ -241,7 +243,7 @@ union DefaultAction {
  */
 union NetworkRuleIPAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Allow: "Allow",
 }
 
@@ -250,22 +252,22 @@ union NetworkRuleIPAction {
  */
 union PublicNetworkAccessFlag {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 union AccessRights {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Manage: "Manage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Send: "Send",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Listen: "Listen",
 }
 
@@ -274,9 +276,9 @@ union AccessRights {
  */
 union KeyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   PrimaryKey: "PrimaryKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   SecondaryKey: "SecondaryKey",
 }
 
@@ -285,11 +287,11 @@ union KeyType {
  */
 union CleanupPolicyRetentionDescription {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Delete: "Delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Compact: "Compact",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   DeleteOrCompact: "DeleteOrCompact",
 }
 
@@ -298,33 +300,33 @@ union CleanupPolicyRetentionDescription {
  */
 union TimestampType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   LogAppend: "LogAppend",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Create: "Create",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 union SchemaCompatibility {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Backward: "Backward",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Forward: "Forward",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 union SchemaType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Avro: "Avro",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   ProtoBuf: "ProtoBuf",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   Json: "Json",
 }
 
@@ -333,7 +335,7 @@ union SchemaType {
  */
 union ApplicationGroupPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   ThrottlingPolicy: "ThrottlingPolicy",
 }
 
@@ -342,20 +344,20 @@ union ApplicationGroupPolicyType {
  */
 union MetricId {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   IncomingBytes: "IncomingBytes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   OutgoingBytes: "OutgoingBytes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   IncomingMessages: "IncomingMessages",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   OutgoingMessages: "OutgoingMessages",
 }
 
 /**
  * Type of managed service identity.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
 enum ManagedServiceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -366,7 +368,7 @@ enum ManagedServiceIdentityType {
 /**
  * Specifies the reason for the unavailability of the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
 enum UnavailableReason {
   None,
   InvalidName,
@@ -379,8 +381,8 @@ enum UnavailableReason {
 /**
  * Provisioning state of the Alias(Disaster Recovery configuration) - possible values 'Accepted' or 'Succeeded' or 'Failed'
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
 enum ProvisioningStateDR {
   Accepted,
   Succeeded,
@@ -390,7 +392,7 @@ enum ProvisioningStateDR {
 /**
  * role of namespace in GEO DR - possible values 'Primary' or 'PrimaryNotReplicating' or 'Secondary'
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
 enum RoleDisasterRecovery {
   Primary,
   PrimaryNotReplicating,
@@ -400,7 +402,7 @@ enum RoleDisasterRecovery {
 /**
  * Enumerates the possible values for the status of the Event Hub.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
 enum EntityStatus {
   Active,
   Disabled,
@@ -416,7 +418,7 @@ enum EntityStatus {
 /**
  * Enumerates the possible values for the encoding format of capture description. Note: 'AvroDeflate' will be deprecated in New API Version
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
 enum EncodingCaptureDescription {
   Avro,
   AvroDeflate,
@@ -425,7 +427,7 @@ enum EncodingCaptureDescription {
 /**
  * Type of Azure Active Directory Managed Identity.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed enum from the original OpenAPI specification. Changing to an extensible union would be a breaking change for existing clients."
 enum CaptureIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -438,7 +440,7 @@ model AvailableClustersList {
   /**
    * The count of readily available and pre-provisioned Event Hubs Clusters per region.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The array items do not have a unique identifier property as defined in the original OpenAPI specification."
   value?: AvailableCluster[];
 }
 
@@ -488,14 +490,14 @@ model ErrorDetail {
   /**
    * The error details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The array items do not have a unique identifier property as defined in the original OpenAPI specification."
   @visibility(Lifecycle.Read)
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The array items do not have a unique identifier property as defined in the original OpenAPI specification."
   @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
@@ -513,7 +515,7 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The property type is defined as a generic object without a specific schema in the original OpenAPI specification."
   @visibility(Lifecycle.Read)
   info?: unknown;
 }
@@ -551,7 +553,6 @@ model SystemData {
   /**
    * The timestamp of resource creation (UTC).
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
@@ -567,7 +568,6 @@ model SystemData {
   /**
    * The type of identity that last modified the resource.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedAt?: utcDateTime;
 }
 
@@ -610,17 +610,23 @@ model ClusterProperties {
    */
   supportsScaling?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   platformCapabilities?: PlatformCapabilities;
+
+  /**
+   * A value that indicates whether the cluster is zone redundant.
+   */
+  @added(Versions.v2026_01_01)
+  zoneRedundant?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model PlatformCapabilities {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   confidentialCompute?: ConfidentialCompute;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model ConfidentialCompute {
   /**
    * Setting to Enable or Disable Confidential Compute
@@ -631,7 +637,7 @@ model ConfidentialCompute {
 /**
  * Definition of resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintaining inheritance structure from the original OpenAPI specification to preserve backward compatibility."
 model TrackedResource extends Resource {
   /**
    * Resource location.
@@ -642,7 +648,7 @@ model TrackedResource extends Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This property is a dictionary/map type as defined in the original OpenAPI specification."
   tags?: Record<string>;
 }
 
@@ -672,7 +678,7 @@ model Resource {
 /**
  * The response of the List Namespace IDs operation
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 model EHNamespaceIdListResult {
   /**
    * Result of the List Namespace IDs operation
@@ -684,7 +690,7 @@ model EHNamespaceIdListResult {
 /**
  * The full ARM ID of an Event Hubs Namespace
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 model EHNamespaceIdContainer {
   /**
    * id parameter
@@ -737,7 +743,7 @@ model Identity {
   /**
    * Properties for User Assigned Identities
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This property is a dictionary/map type as defined in the original OpenAPI specification."
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
@@ -761,7 +767,7 @@ model UserAssignedIdentity {
 /**
  * Namespace properties supplied for create namespace operation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 model EHNamespaceProperties {
   /**
    * The minimum TLS version for the cluster to support, e.g. '1.2'
@@ -771,7 +777,7 @@ model EHNamespaceProperties {
   /**
    * Provisioning state of the Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -785,14 +791,12 @@ model EHNamespaceProperties {
    * The time the Namespace was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The time the Namespace was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -858,13 +862,19 @@ model EHNamespaceProperties {
    */
   alternateName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   platformCapabilities?: PlatformCapabilities;
 
   /**
    * Geo Data Replication settings for the namespace
    */
   geoDataReplication?: GeoDataReplicationProperties;
+
+  /**
+   * Value that indicates whether IPv6 is enabled for public network access.
+   */
+  @added(Versions.v2026_01_01)
+  ipV6Enabled?: boolean;
 }
 
 /**
@@ -874,7 +884,7 @@ model Encryption {
   /**
    * Properties of KeyVault
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The array items do not have a unique identifier property as defined in the original OpenAPI specification."
   keyVaultProperties?: KeyVaultProperties[];
 
   /**
@@ -907,11 +917,11 @@ model KeyVaultProperties {
    */
   keyVersion?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   identity?: UserAssignedIdentityProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model UserAssignedIdentityProperties {
   /**
    * ARM ID of user Identity selected for encryption
@@ -936,7 +946,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the Private Endpoint Connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
   provisioningState?: EndPointProvisioningState;
 }
 
@@ -1036,13 +1046,13 @@ model NamespaceReplicaLocation {
   clusterArmId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model FailOver {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   properties?: FailOverProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model FailOverProperties {
   /**
    * Query parameter for the new primary location after failover.
@@ -1119,7 +1129,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Provisioning state of NetworkSecurityPerimeter configuration propagation
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
   provisioningState?: NetworkSecurityPerimeterConfigurationProvisioningState;
 
   /**
@@ -1333,14 +1343,14 @@ model ClusterQuotaConfigurationProperties {
   /**
    * All possible Cluster settings - a collection of key/value paired settings which apply to quotas and configurations imposed on the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This property is a dictionary/map type as defined in the original OpenAPI specification."
   settings?: Record<string>;
 }
 
 /**
  * NetworkRuleSet properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
 model NetworkRuleSetProperties {
   /**
    * Value that indicates whether Trusted Service Access is Enabled or not.
@@ -1355,13 +1365,13 @@ model NetworkRuleSetProperties {
   /**
    * List VirtualNetwork Rules
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The array items do not have a unique identifier property as defined in the original OpenAPI specification."
   virtualNetworkRules?: NWRuleSetVirtualNetworkRules[];
 
   /**
    * List of IpRules
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "The array items do not have a unique identifier property as defined in the original OpenAPI specification."
   ipRules?: NWRuleSetIpRules[];
 
   /**
@@ -1373,7 +1383,7 @@ model NetworkRuleSetProperties {
 /**
  * The response from the List namespace operation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 model NWRuleSetVirtualNetworkRules {
   /**
    * Subnet properties
@@ -1399,7 +1409,7 @@ model Subnet {
 /**
  * The response from the List namespace operation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The model name preserves the original casing from the OpenAPI specification for backward compatibility."
 model NWRuleSetIpRules {
   /**
    * IP Mask
@@ -1415,7 +1425,7 @@ model NWRuleSetIpRules {
 /**
  * Properties supplied to create or update AuthorizationRule
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
 model AuthorizationRuleProperties {
   /**
    * The rights associated with the rule.
@@ -1454,14 +1464,14 @@ model AccessKeys {
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property represents an access key used for SAS authentication and is a secret. However, adding @secret would be a breaking change for existing clients."
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This property represents an access key used for SAS authentication and is a secret. However, adding @secret would be a breaking change for existing clients."
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 
@@ -1521,20 +1531,18 @@ model CheckNameAvailabilityResult {
 /**
  * Single item in List or Get Consumer group operation
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
 model ConsumerGroupProperties {
   /**
    * Exact time the message was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -1604,7 +1612,7 @@ model Operation {
   /**
    * Properties of the operation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "The property type is defined as a generic object without a specific schema in the original OpenAPI specification."
   properties?: unknown;
 }
 
@@ -1640,7 +1648,7 @@ model OperationDisplay {
 /**
  * Properties supplied to the Create Or Update Event Hub operation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
 model EventhubProperties {
   /**
    * Current number of shards on the Event Hub.
@@ -1652,14 +1660,12 @@ model EventhubProperties {
    * Exact time the Event Hub was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   /**
    * The exact time the message was updated.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   /**
@@ -1798,7 +1804,7 @@ model DestinationProperties {
   /**
    * Subscription Id of Azure Data Lake Store
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "The format constraint is required to match the original OpenAPI specification."
   @format("uuid")
   dataLakeSubscriptionId?: string;
 
@@ -1848,27 +1854,25 @@ model MessageTimestampDescription {
   timestampType?: TimestampType;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model SchemaGroupProperties {
   /**
    * Exact time the Schema Group was updated
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAtUtc?: utcDateTime;
 
   /**
    * Exact time the Schema Group was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAtUtc?: utcDateTime;
 
   /**
    * The ETag value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "The format constraint is required to match the original OpenAPI specification."
   @visibility(Lifecycle.Read)
   @format("uuid")
   eTag?: string;
@@ -1876,17 +1880,17 @@ model SchemaGroupProperties {
   /**
    * dictionary object for SchemaGroup group properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This property is a dictionary/map type as defined in the original OpenAPI specification."
   groupProperties?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   schemaCompatibility?: SchemaCompatibility;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
   schemaType?: SchemaType;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing API uses a custom provisioning state type defined in the original OpenAPI specification. Changing to the standard type would be a breaking change."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "The enum value name is self-descriptive and does not require additional documentation."
 model ApplicationGroupProperties {
   /**
    * Determines if Application Group is allowed to create connection with namespace or not. Once the isEnabled is set to false, all the existing connections of application group gets dropped and no new connections will be allowed

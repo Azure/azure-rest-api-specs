@@ -44,10 +44,12 @@ interface DiskEncryptionSets {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DiskEncryptionSet,
-    Response = ArmResourceUpdatedResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: DiskEncryptionSet;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DiskEncryptionSet>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: DiskEncryptionSet;
+        })
   >;
 
   /**
@@ -58,10 +60,12 @@ interface DiskEncryptionSets {
   update is ComputeCustomPatchAsync<
     DiskEncryptionSet,
     DiskEncryptionSetUpdate,
-    Response = ArmResponse<DiskEncryptionSet> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: DiskEncryptionSet;
-    })
+    Response =
+      | ArmResponse<DiskEncryptionSet>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DiskEncryptionSet> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: DiskEncryptionSet;
+        })
   >;
 
   /**
@@ -102,13 +106,16 @@ interface DiskEncryptionSets {
   >;
 }
 
-@@doc(DiskEncryptionSet.name,
+@@doc(
+  DiskEncryptionSet.name,
   "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters."
 );
 @@doc(DiskEncryptionSet.properties, "");
-@@doc(DiskEncryptionSets.createOrUpdate::parameters.resource,
+@@doc(
+  DiskEncryptionSets.createOrUpdate::parameters.resource,
   "disk encryption set object supplied in the body of the Put disk encryption set operation."
 );
-@@doc(DiskEncryptionSets.update::parameters.properties,
+@@doc(
+  DiskEncryptionSets.update::parameters.properties,
   "disk encryption set object supplied in the body of the Patch disk encryption set operation."
 );

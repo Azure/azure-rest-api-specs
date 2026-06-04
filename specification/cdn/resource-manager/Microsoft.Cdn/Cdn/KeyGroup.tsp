@@ -17,6 +17,7 @@ namespace Microsoft.Cdn;
  * Contains a list of references of UrlSigningKey type secret objects.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @parentResource(Profile)
 model KeyGroup is Azure.ResourceManager.ProxyResource<KeyGroupProperties> {
   ...ResourceNameParameter<
@@ -31,16 +32,19 @@ model KeyGroup is Azure.ResourceManager.ProxyResource<KeyGroupProperties> {
  * Defines a KeyGroup response body for long-running operations.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 model KeyGroupAcceptedBody {
   /**
    * Defines a KeyGroup response body
    */
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
   _: KeyGroup;
 }
 
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface KeyGroups {
   /**
@@ -55,8 +59,11 @@ interface KeyGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createUpdate is ArmResourceCreateOrReplaceAsync<
     KeyGroup,
-    Response = ArmResourceUpdatedResponse<KeyGroup> | ArmResourceCreatedResponse<KeyGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
-      KeyGroupAcceptedBody)
+    Response =
+      | ArmResourceUpdatedResponse<KeyGroup>
+      | ArmResourceCreatedResponse<KeyGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+          KeyGroupAcceptedBody)
   >;
 
   /**
@@ -67,8 +74,10 @@ interface KeyGroups {
   update is ArmCustomPatchAsync<
     KeyGroup,
     PatchModel = KeyGroupUpdatePropertiesParameters,
-    Response = ArmResponse<KeyGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
-      KeyGroupAcceptedBody)
+    Response =
+      | ArmResponse<KeyGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+          KeyGroupAcceptedBody)
   >;
 
   /**
@@ -76,7 +85,9 @@ interface KeyGroups {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     KeyGroup,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -88,7 +99,8 @@ interface KeyGroups {
 @@maxLength(KeyGroup.name, 260);
 @@minLength(KeyGroup.name, 1);
 @@doc(KeyGroup.name, "Name of the KeyGroup under the profile.");
-@@doc(KeyGroup.properties,
+@@doc(
+  KeyGroup.properties,
   "The JSON object that contains the properties of the key group to create."
 );
 @@doc(KeyGroups.createUpdate::parameters.resource, "The KeyGroup properties.");

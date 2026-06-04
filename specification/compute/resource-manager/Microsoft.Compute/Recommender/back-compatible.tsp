@@ -5,6 +5,13 @@ using Microsoft.Compute;
 
 @@clientLocation(ComputeDiagnosticBases.get, "SpotPlacementScores");
 @@clientLocation(ComputeDiagnosticBases.post, "SpotPlacementScores");
-@@clientName(ComputeDiagnosticBases.post::parameters.body,
+@@clientName(
+  ComputeDiagnosticBases.post::parameters.body,
   "spotPlacementScoresInput"
+);
+@@clientLocation(SkuMixPlacementScores.get, "SkuMixPlacementScores");
+@@clientLocation(SkuMixPlacementScores.post, "SkuMixPlacementScores");
+@@clientName(
+  SkuMixPlacementScores.post::parameters.body,
+  "skuMixPlacementRequest"
 );

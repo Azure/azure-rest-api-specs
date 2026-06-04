@@ -102,6 +102,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   @tag("Rules")
@@ -199,7 +200,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_Get_V2: #{ $ref: "./examples/Rules_Get_V2.json" } }
+    #{ Rules_Get_AssetDQ: #{ $ref: "./examples/Rules_Get_AssetDQ.json" } }
   )
   @doc("Retrieves all rules associated with data assets. Data product is specified as optional query parameter.")
   op getRulesForAssetDQ is RpcOperation<
@@ -237,7 +238,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rule_Get_V2: #{ $ref: "./examples/Rule_Get_V2.json" } }
+    #{ Rule_Get_AssetDQ: #{ $ref: "./examples/Rule_Get_AssetDQ.json" } }
   )
   @doc("Retrieves a specific rule associated with a data asset. Data product is specified as optional query parameter.")
   op getRuleForAssetDQ is RpcOperation<
@@ -279,7 +280,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_Delete_V2: #{ $ref: "./examples/Rules_Delete_V2.json" } }
+    #{ Rules_Delete_AssetDQ: #{ $ref: "./examples/Rules_Delete_AssetDQ.json" } }
   )
   @doc("Deletes a specific rule associated with a data asset. Data product is specified as optional query parameter.")
   op deleteRuleForAssetDQ is RpcOperation<
@@ -320,7 +321,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_Update_V2: #{ $ref: "./examples/Rules_Update_V2.json" } }
+    #{ Rules_Update_AssetDQ: #{ $ref: "./examples/Rules_Update_AssetDQ.json" } }
   )
   @doc("Updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRuleForAssetDQ is RpcOperation<
@@ -360,13 +361,18 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2026_01_12_preview)
   @patch(#{ implicitOptionality: true })
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_UpdatePatch_V2: #{ $ref: "./examples/Rules_UpdatePatch_V2.json" } }
+    #{
+      Rules_UpdatePatch_AssetDQ: #{
+        $ref: "./examples/Rules_UpdatePatch_AssetDQ.json",
+      },
+    }
   )
   @doc("Partially updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRulePatchForAssetDQ is RpcOperation<
@@ -431,6 +437,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2025_09_01_preview)
   @route("/data-assets/{dataAssetId}/asset-metadata")
   @patch(#{ implicitOptionality: true })
@@ -556,6 +563,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2025_09_01_preview)
   @tag("Schedules")
   @doc("Updates the details of an existing schedule under a specific business domain.")
@@ -815,7 +823,7 @@ namespace PurviewDataQuality {
   @tag("JobRunMonitoring")
   @extension(
     "x-ms-examples",
-    #{ Runs_Get_V2: #{ $ref: "./examples/Runs_Get_V2.json" } }
+    #{ Runs_Get_AssetDQ: #{ $ref: "./examples/Runs_Get_AssetDQ.json" } }
   )
   @doc("Retrieves all runs associated with a specific data asset, optionally filtered by run type. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/runs")
@@ -904,7 +912,9 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Observation_Create_V2: #{ $ref: "./examples/Observation_Create_V2.json" },
+      Observation_Create_AssetDQ: #{
+        $ref: "./examples/Observation_Create_AssetDQ.json",
+      },
     }
   )
   @doc("Triggers a long-running observation job for a specific data asset. Data product is specified as optional query parameter.")
@@ -973,7 +983,9 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Observation_Delete_V2: #{ $ref: "./examples/Observation_Delete_V2.json" },
+      Observation_Delete_AssetDQ: #{
+        $ref: "./examples/Observation_Delete_AssetDQ.json",
+      },
     }
   )
   @doc("Deletes a specific observation associated with a data asset. Data product is specified as optional query parameter.")
@@ -1130,6 +1142,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2025_09_01_preview)
   @tag("DataSources")
   @doc("Updates an existing data source within a given business domain.")
@@ -1322,6 +1335,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2025_09_01_preview)
   @tag("Scoped Asset Metadata")
   @doc("Create or update the scoped asset metadata for a given data asset within a business domain.")
@@ -1379,8 +1393,8 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      ScopedAssetMetaData_Get_V2: #{
-        $ref: "./examples/ScopedAssetMetaData_Get_V2.json",
+      ScopedAssetMetaData_Get_AssetDQ: #{
+        $ref: "./examples/ScopedAssetMetaData_Get_AssetDQ.json",
       },
     }
   )
@@ -1412,13 +1426,14 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2026_01_12_preview)
   @tag("Scoped Asset Metadata")
   @extension(
     "x-ms-examples",
     #{
-      ScopedAssetMetaData_Update_V2: #{
-        $ref: "./examples/ScopedAssetMetaData_Update_V2.json",
+      ScopedAssetMetaData_Update_AssetDQ: #{
+        $ref: "./examples/ScopedAssetMetaData_Update_AssetDQ.json",
       },
     }
   )
@@ -1459,8 +1474,8 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      ScopedAssetMetaData_Delete_V2: #{
-        $ref: "./examples/ScopedAssetMetaData_Delete_V2.json",
+      ScopedAssetMetaData_Delete_AssetDQ: #{
+        $ref: "./examples/ScopedAssetMetaData_Delete_AssetDQ.json",
       },
     }
   )
@@ -1545,7 +1560,11 @@ namespace PurviewDataQuality {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-examples",
-    #{ Profile_Create_V2: #{ $ref: "./examples/Profile_Create_V2.json" } }
+    #{
+      Profile_Create_AssetDQ: #{
+        $ref: "./examples/Profile_Create_AssetDQ.json",
+      },
+    }
   )
   @doc("Creates or updates the profile for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @post
@@ -1605,7 +1624,11 @@ namespace PurviewDataQuality {
   @tag("Profiles")
   @extension(
     "x-ms-examples",
-    #{ Profile_Delete_V2: #{ $ref: "./examples/Profile_Delete_V2.json" } }
+    #{
+      Profile_Delete_AssetDQ: #{
+        $ref: "./examples/Profile_Delete_AssetDQ.json",
+      },
+    }
   )
   @doc("Deletes a specific profile run for a given data asset within a business domain. Data product is specified as optional query parameter.")
   op deleteProfileRunForAssetDQ is RpcOperation<
@@ -1640,13 +1663,14 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/assets")
   @patch(#{ implicitOptionality: true })
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Create_V2: #{ $ref: "./examples/DQAsset_Create_V2.json" } }
+    #{ AssetLevelDQ_Create: #{ $ref: "./examples/AssetLevelDQ_Create.json" } }
   )
   @doc("Creates a DQ asset within a business domain. Data product is specified as optional query parameter.")
   op createDQAssetForAssetDQ is RpcOperation<
@@ -1687,7 +1711,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Get_V2: #{ $ref: "./examples/DQAsset_Get_V2.json" } }
+    #{ AssetLevelDQ_Get: #{ $ref: "./examples/AssetLevelDQ_Get.json" } }
   )
   @doc("Retrieves a DQ asset by identifier within a business domain. Data product is specified as optional query parameter.")
   op getDQAssetForAssetDQ is RpcOperation<
@@ -1725,7 +1749,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Delete_V2: #{ $ref: "./examples/DQAsset_Delete_V2.json" } }
+    #{ AssetLevelDQ_Delete: #{ $ref: "./examples/AssetLevelDQ_Delete.json" } }
   )
   @doc("Deletes a DQ asset within a business domain. Data product is specified as optional query parameter.")
   op deleteDQAssetForAssetDQ is RpcOperation<
@@ -1762,7 +1786,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAssets_List_V2: #{ $ref: "./examples/DQAssets_List_V2.json" } }
+    #{ AssetLevelDQ_List: #{ $ref: "./examples/AssetLevelDQ_List.json" } }
   )
   @doc("Retrieves DQ assets for a business domain with pagination. Data product is specified as optional query parameter.")
   op getDQAssetsPaginationForAssetDQ is RpcOperation<
@@ -1800,7 +1824,11 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ AssetScores_Get_V2: #{ $ref: "./examples/AssetScores_Get_V2.json" } }
+    #{
+      AssetScores_Get_AssetDQ: #{
+        $ref: "./examples/AssetScores_Get_AssetDQ.json",
+      },
+    }
   )
   @doc("Retrieves asset scores for specified assets. Data product is specified as optional query parameter.")
   op getAssetScoresForAssetDQ is RpcOperation<
@@ -1810,8 +1838,8 @@ namespace PurviewDataQuality {
       businessDomainId: string;
 
       @doc("Comma-separated list of asset identifiers to get scores for. Required.")
-      @query("assetIdString")
-      assetIdString: string;
+      @query("assetId")
+      assetId: string;
 
       @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
@@ -1838,7 +1866,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Clone_V2: #{ $ref: "./examples/DQAsset_Clone_V2.json" } }
+    #{ AssetLevelDQ_Clone: #{ $ref: "./examples/AssetLevelDQ_Clone.json" } }
   )
   @doc("Submits a clone job for a DQ asset. Data product is specified as optional query parameter.")
   op cloneDQAssetForAssetDQ is RpcOperation<
@@ -1947,7 +1975,9 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      LatestSnapshot_Get_V2: #{ $ref: "./examples/LatestSnapshot_Get_V2.json" },
+      LatestSnapshot_Get_AssetDQ: #{
+        $ref: "./examples/LatestSnapshot_Get_AssetDQ.json",
+      },
     }
   )
   @doc("Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.")
@@ -2219,6 +2249,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @tag("Alerts")
   @added(ApiVersions.v2026_01_12_preview)
   @extension(

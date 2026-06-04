@@ -73,7 +73,8 @@ interface ManagedDashboards {
 }
 
 @@doc(ManagedDashboard.name, "The name of the Azure Managed Dashboard.");
-@@doc(ManagedDashboard.properties,
+@@doc(
+  ManagedDashboard.properties,
   "Properties specific to the managed dashboard resource."
 );
 @@doc(ManagedDashboards.create::parameters.resource, "");

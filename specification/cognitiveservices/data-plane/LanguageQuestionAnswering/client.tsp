@@ -15,7 +15,8 @@ namespace Language.QuestionAnsweringClientCustomizations;
 
 @@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion");
 
-@@clientName(ShortAnswerOptions.confidenceScoreThreshold,
+@@clientName(
+  ShortAnswerOptions.confidenceScoreThreshold,
   "confidenceThreshold"
 );
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top");

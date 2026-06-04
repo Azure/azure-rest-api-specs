@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "domainServiceName": "example-domainservice",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Domain service unsuspended successfully."
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Domain service could not be unsuspended (not in a suspended state or not eligible)."
+        }
+      }
+    }
+  },
+  "operationId": "DomainServices_Unsuspend",
+  "title": "Unsuspend Domain Service"
+}

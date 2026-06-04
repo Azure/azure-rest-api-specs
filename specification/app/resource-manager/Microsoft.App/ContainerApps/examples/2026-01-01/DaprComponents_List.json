@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "reddog",
+            "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/reddog",
+            "properties": {
+              "componentType": "state.azure.cosmosdb",
+              "ignoreErrors": false,
+              "initTimeout": "50s",
+              "metadata": [
+                {
+                  "name": "url",
+                  "value": "<COSMOS-URL>"
+                },
+                {
+                  "name": "database",
+                  "value": "itemsDB"
+                },
+                {
+                  "name": "collection",
+                  "value": "items"
+                },
+                {
+                  "name": "masterkey",
+                  "secretRef": "masterkey"
+                }
+              ],
+              "scopes": [
+                "container-app-1",
+                "container-app-2"
+              ],
+              "secrets": [
+                {
+                  "name": "masterkey"
+                }
+              ],
+              "version": "v1"
+            }
+          },
+          {
+            "name": "vaultdog",
+            "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
+            "properties": {
+              "componentType": "state.azure.cosmosdb",
+              "ignoreErrors": false,
+              "initTimeout": "50s",
+              "metadata": [
+                {
+                  "name": "url",
+                  "value": "<COSMOS-URL>"
+                },
+                {
+                  "name": "database",
+                  "value": "itemsDB"
+                },
+                {
+                  "name": "collection",
+                  "value": "items"
+                },
+                {
+                  "name": "masterkey",
+                  "secretRef": "masterkey"
+                }
+              ],
+              "scopes": [
+                "container-app-1",
+                "container-app-2"
+              ],
+              "secretStoreComponent": "my-secret-store",
+              "version": "v1"
+            }
+          },
+          {
+            "name": "vaultdog",
+            "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
+            "properties": {
+              "componentType": "state.azure.cosmosdb",
+              "ignoreErrors": false,
+              "initTimeout": "50s",
+              "metadata": [
+                {
+                  "name": "url",
+                  "secretRef": "cosmosdb/url"
+                },
+                {
+                  "name": "database",
+                  "value": "itemsDB"
+                },
+                {
+                  "name": "collection",
+                  "value": "items"
+                },
+                {
+                  "name": "masterkey",
+                  "secretRef": "cosmosdb/masterkey"
+                }
+              ],
+              "scopes": [
+                "container-app-1",
+                "container-app-2"
+              ],
+              "secretStoreComponent": "my-secret-store",
+              "version": "v1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DaprComponents_List",
+  "title": "List Dapr Components"
+}

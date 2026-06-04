@@ -27,15 +27,15 @@ model RaiBlocklist
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'RaiBlocklist' to support extensible key-value pairs matching service behavior"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -82,19 +82,24 @@ interface RaiBlocklists {
     NoContentResponse
   >;
 }
-@@doc(RaiBlocklist.name,
+@@doc(
+  RaiBlocklist.name,
   "The name of the RaiBlocklist associated with the Cognitive Services Account"
 );
 @@encodedName(RaiBlocklist.etag, "application/json", "etag");
-@@doc(RaiBlocklist.properties,
+@@doc(
+  RaiBlocklist.properties,
   "Properties of Cognitive Services RaiBlocklist."
 );
-@@doc(RaiBlocklists.createOrUpdate::parameters.resource,
+@@doc(
+  RaiBlocklists.createOrUpdate::parameters.resource,
   "Properties describing the custom blocklist."
 );
-@@doc(RaiBlocklists.batchAdd::parameters.body,
+@@doc(
+  RaiBlocklists.batchAdd::parameters.body,
   "Properties describing the custom blocklist items."
 );
-@@doc(RaiBlocklists.batchDelete::parameters.body,
+@@doc(
+  RaiBlocklists.batchDelete::parameters.body,
   "List of RAI Blocklist Items Names."
 );

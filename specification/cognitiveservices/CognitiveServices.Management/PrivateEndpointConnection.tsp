@@ -27,14 +27,14 @@ model PrivateEndpointConnection
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The location of the private endpoint connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'location' on the resource envelope for backward compatibility"
   location?: string;
 }
 
@@ -48,24 +48,29 @@ interface PrivateEndpointConnections {
   /**
    * Update the state of specified private endpoint connection associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'get' returns no response body, matching existing service endpoint behavior"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: PrivateEndpointConnection;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: PrivateEndpointConnection;
+        })
   >;
 
   /**
    * Deletes the specified private endpoint connection associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'createOrUpdate' match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -77,10 +82,12 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The name of the private endpoint connection associated with the Cognitive Services Account"
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection properties."
 );

@@ -1,0 +1,1240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ExtensionsClient",
+    "version": "2025-03-01",
+    "description": "Use these APIs to create extension resources through ARM, for Kubernetes Clusters.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Extensions"
+    },
+    {
+      "name": "ClusterExtensions"
+    },
+    {
+      "name": "Extension Operation Status"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions": {
+      "get": {
+        "operationId": "Extensions_List",
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "List all Extensions in the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Extensions": {
+            "$ref": "./examples/ListExtensions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}": {
+      "get": {
+        "operationId": "Extensions_Get",
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Gets Kubernetes Cluster Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Extension": {
+            "$ref": "./examples/GetExtension.json"
+          },
+          "Get Extension with Additional Details": {
+            "$ref": "./examples/GetExtensionWithAdditionalDetails.json"
+          },
+          "Get Extension with Extension State": {
+            "$ref": "./examples/GetExtensionWithExtensionState.json"
+          },
+          "Get Extension with ManagedBy": {
+            "$ref": "./examples/GetExtensionWithManagedBy.json"
+          },
+          "Get Extension with Management Details": {
+            "$ref": "./examples/GetExtensionWithManagementDetails.json"
+          },
+          "Get Extension with Plan": {
+            "$ref": "./examples/GetExtensionWithPlan.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Extensions_Create",
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Create a new Kubernetes Cluster Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extension",
+            "in": "body",
+            "description": "Properties necessary to Create an Extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Extension' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "201": {
+            "description": "Resource 'Extension' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Extension": {
+            "$ref": "./examples/CreateExtension.json"
+          },
+          "Create Extension with Plan": {
+            "$ref": "./examples/CreateExtensionWithPlan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Extension"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Extensions_Update",
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Patch an existing Kubernetes Cluster Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patchExtension",
+            "in": "body",
+            "description": "Properties to Patch in an existing Extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchExtension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Extension": {
+            "$ref": "./examples/PatchExtension.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Extension"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Extensions_Delete",
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Delete the extension resource in Azure - not the normal asynchronous delete.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Extension": {
+            "$ref": "./examples/DeleteExtension.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "Extension Operation Status"
+        ],
+        "description": "Get Async Operation status",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]*$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.*"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionAsyncOperationStatus Get": {
+            "$ref": "./examples/GetExtensionAsyncOperationStatus.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AKSIdentityType": {
+      "type": "string",
+      "description": "The identity type.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "Workload"
+      ],
+      "x-ms-enum": {
+        "name": "AKSIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "SystemAssigned identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "UserAssigned identity"
+          },
+          {
+            "name": "Workload",
+            "value": "Workload",
+            "description": "Workload identity"
+          }
+        ]
+      }
+    },
+    "AccessDetail": {
+      "type": "object",
+      "description": "Metadata about the access details of the managing entity of the extension",
+      "properties": {
+        "entity": {
+          "type": "string",
+          "description": "The entity to which the access details apply"
+        },
+        "allowedActions": {
+          "type": "array",
+          "description": "The list of allowed actions for the entity",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the entity"
+        }
+      }
+    },
+    "AdditionalDetails": {
+      "type": "object",
+      "description": "Additional details provided by the publisher of the extension.",
+      "properties": {
+        "docs": {
+          "type": "string",
+          "description": "Documentation for the extension."
+        },
+        "releaseNotes": {
+          "type": "string",
+          "description": "Release Notes of the extension."
+        },
+        "troubleshootingGuide": {
+          "type": "string",
+          "description": "Troubleshooting guide for the extension."
+        }
+      }
+    },
+    "AutoUpgradeMode": {
+      "type": "string",
+      "description": "The upgrade mode for auto upgrade.\nThe default is \"compatible\".",
+      "enum": [
+        "none",
+        "patch",
+        "compatible"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "The extension will not be automatically upgraded."
+          },
+          {
+            "name": "patch",
+            "value": "patch",
+            "description": "The extension will be automatically upgraded to the latest patch version within the minor version."
+          },
+          {
+            "name": "compatible",
+            "value": "compatible",
+            "description": "The extension will be automatically upgraded to compatible versions as determined by the user."
+          }
+        ]
+      }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Created through an interactive sign-in by a person."
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Created by an app registration or service principal acting as a client."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Created via an Azure managed identity (system- or user-assigned)."
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Created using a key-based credential flow supported by some services."
+          }
+        ]
+      }
+    },
+    "Extension": {
+      "type": "object",
+      "description": "The Extension object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "Properties of an Extension resource",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity",
+          "description": "Identity of the Extension resource"
+        },
+        "managedBy": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Properties of an Extension resource",
+      "properties": {
+        "extensionType": {
+          "type": "string",
+          "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
+          "default": true
+        },
+        "releaseTrain": {
+          "type": "string",
+          "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+          "default": "Stable"
+        },
+        "version": {
+          "type": "string",
+          "description": "User-specified version of the extension for this extension to 'pin'. To use 'version', autoUpgradeMinorVersion must be 'false'.",
+          "x-nullable": true
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Scope at which the extension is installed."
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "Currently installed version of the extension.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Status of installation of this extension.",
+          "readOnly": true
+        },
+        "statuses": {
+          "type": "array",
+          "description": "Status from this extension.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ExtensionStatus"
+          }
+        },
+        "errorInfo": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "Error information from the Agent - e.g. errors during installation.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "customLocationSettings": {
+          "type": "object",
+          "description": "Custom Location settings properties.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "packageUri": {
+          "type": "string",
+          "description": "Uri of the Helm package",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "aksAssignedIdentity": {
+          "$ref": "#/definitions/ExtensionPropertiesAksAssignedIdentity",
+          "description": "Identity of the Extension resource in an AKS cluster",
+          "x-nullable": true
+        },
+        "isSystemExtension": {
+          "type": "boolean",
+          "description": "Flag to note if this extension is a system extension",
+          "default": false,
+          "readOnly": true
+        },
+        "autoUpgradeMode": {
+          "type": "string",
+          "description": "The upgrade mode for auto upgrade.\nThe default is \"compatible\".",
+          "default": "compatible",
+          "enum": [
+            "none",
+            "patch",
+            "compatible"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "The extension will not be automatically upgraded."
+              },
+              {
+                "name": "patch",
+                "value": "patch",
+                "description": "The extension will be automatically upgraded to the latest patch version within the minor version."
+              },
+              {
+                "name": "compatible",
+                "value": "compatible",
+                "description": "The extension will be automatically upgraded to compatible versions as determined by the user."
+              }
+            ]
+          }
+        },
+        "managementDetails": {
+          "$ref": "#/definitions/ManagementDetails",
+          "description": "Management details of the extension"
+        },
+        "additionalDetails": {
+          "$ref": "#/definitions/AdditionalDetails",
+          "description": "Additional details provided by the publisher of the extension."
+        },
+        "extensionState": {
+          "type": "string",
+          "description": "State of the extension on the cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionPropertiesAksAssignedIdentity": {
+      "type": "object",
+      "description": "Identity of the Extension resource in an AKS cluster",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/AKSIdentityType",
+          "description": "The identity type."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of resource identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of resource identity."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ID of the resource identity."
+        }
+      }
+    },
+    "ExtensionStatus": {
+      "type": "object",
+      "description": "Status from the extension.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Status code provided by the Extension"
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "Short description of status of the extension."
+        },
+        "level": {
+          "type": "string",
+          "description": "Level of the status.",
+          "default": "Information",
+          "enum": [
+            "Error",
+            "Warning",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "LevelType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "Indicates an error status from the extension."
+              },
+              {
+                "name": "Warning",
+                "value": "Warning",
+                "description": "Indicates a warning status from the extension."
+              },
+              {
+                "name": "Information",
+                "value": "Information",
+                "description": "Indicates an informational status from the extension."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message of the status from the Extension."
+        },
+        "time": {
+          "type": "string",
+          "description": "DateLiteral (per ISO8601) noting the time of installation status."
+        }
+      }
+    },
+    "ExtensionsList": {
+      "type": "object",
+      "description": "Result of the request to list Extensions.  It contains a list of Extension objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Extension items on this page",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LevelType": {
+      "type": "string",
+      "description": "Level of the status.",
+      "enum": [
+        "Error",
+        "Warning",
+        "Information"
+      ],
+      "x-ms-enum": {
+        "name": "LevelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Indicates an error status from the extension."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Indicates a warning status from the extension."
+          },
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Indicates an informational status from the extension."
+          }
+        ]
+      }
+    },
+    "ManagementDetails": {
+      "type": "object",
+      "description": "Metadata about the managing entity of the extension and the permitted operations.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the managing entity"
+        },
+        "accessDetails": {
+          "type": "array",
+          "description": "The list of access details of the managing entity",
+          "items": {
+            "$ref": "#/definitions/AccessDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OperationStatusResult": {
+      "type": "object",
+      "description": "The current status of an async operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional information, if available.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error.",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "PatchExtension": {
+      "type": "object",
+      "description": "The Extension Patch Request object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchExtensionProperties",
+          "description": "Updatable properties of an Extension Patch Request",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PatchExtensionProperties": {
+      "type": "object",
+      "description": "Updatable properties of an Extension Patch Request",
+      "properties": {
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
+          "default": true
+        },
+        "autoUpgradeMode": {
+          "type": "string",
+          "description": "The upgrade mode for auto upgrade.\nThe default is \"compatible\".",
+          "default": "compatible",
+          "enum": [
+            "none",
+            "patch",
+            "compatible"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "none",
+                "value": "none",
+                "description": "The extension will not be automatically upgraded."
+              },
+              {
+                "name": "patch",
+                "value": "patch",
+                "description": "The extension will be automatically upgraded to the latest patch version within the minor version."
+              },
+              {
+                "name": "compatible",
+                "value": "compatible",
+                "description": "The extension will be automatically upgraded to compatible versions as determined by the user."
+              }
+            ]
+          }
+        },
+        "releaseTrain": {
+          "type": "string",
+          "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+          "default": "Stable"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
+          "x-nullable": true
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "format": "password",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "description": "Scope of the extension. It can be either Cluster or Namespace; but not both.",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/ScopeCluster",
+          "description": "Specifies that the scope of the extension is Cluster",
+          "x-nullable": true
+        },
+        "namespace": {
+          "$ref": "#/definitions/ScopeNamespace",
+          "description": "Specifies that the scope of the extension is Namespace",
+          "x-nullable": true
+        }
+      }
+    },
+    "ScopeCluster": {
+      "type": "object",
+      "description": "Specifies that the scope of the extension is Cluster",
+      "properties": {
+        "releaseNamespace": {
+          "type": "string",
+          "description": "Namespace where the extension Release must be placed, for a Cluster scoped extension.  If this namespace does not exist, it will be created"
+        }
+      }
+    },
+    "ScopeNamespace": {
+      "type": "object",
+      "description": "Specifies that the scope of the extension is Namespace",
+      "properties": {
+        "targetNamespace": {
+          "type": "string",
+          "description": "Namespace where the extension will be created for an Namespace scoped extension.  If this namespace does not exist, it will be created"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
