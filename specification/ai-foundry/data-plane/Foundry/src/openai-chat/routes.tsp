@@ -10,17 +10,34 @@ namespace Azure.AI.Projects;
 @route("openai/v1")
 @tag("Chat")
 interface Chat {
-  @extension("x-ms-ignore-summary", true)
+  /**
+   * Returns stored chat completions that were created with the `store` parameter enabled.
+   */
+  @summary("List chat completions")
   listChatCompletions is OpenAI.listChatCompletions;
-  @summary("Create a chat completion. Only Chat Completions that have been stored with the `store` parameter set to `true` will be returned.")
-  @extension("x-ms-ignore-summary", true)
+  /**
+   * Creates a model response for the provided chat conversation.
+   */
+  @summary("Create a chat completion")
   createChatCompletion is OpenAI.createChatCompletion;
-  @extension("x-ms-ignore-summary", true)
+  /**
+   * Deletes a stored chat completion that was created with the `store` parameter enabled.
+   */
+  @summary("Delete a chat completion")
   deleteChatCompletion is OpenAI.deleteChatCompletion;
-  @extension("x-ms-ignore-summary", true)
+  /**
+   * Retrieves a stored chat completion by its identifier.
+   */
+  @summary("Get a chat completion")
   getChatCompletion is OpenAI.getChatCompletion;
-  @extension("x-ms-ignore-summary", true)
+  /**
+   * Updates a stored chat completion by modifying its metadata.
+   */
+  @summary("Update a chat completion")
   updateChatCompletion is OpenAI.updateChatCompletion;
-  @extension("x-ms-ignore-summary", true)
+  /**
+   * Returns the messages for a stored chat completion.
+   */
+  @summary("List messages for a chat completion")
   getChatCompletionMessages is OpenAI.getChatCompletionMessages;
 }
