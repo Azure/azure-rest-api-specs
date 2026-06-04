@@ -1,0 +1,439 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EncryptionProtectors"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/encryptionProtector": {
+      "get": {
+        "operationId": "EncryptionProtectors_ListByServer",
+        "tags": [
+          "EncryptionProtectors"
+        ],
+        "description": "Gets a list of server encryption protectors",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List encryption protectors by server": {
+            "$ref": "./examples/EncryptionProtectorList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/encryptionProtector/{encryptionProtectorName}": {
+      "get": {
+        "operationId": "EncryptionProtectors_Get",
+        "tags": [
+          "EncryptionProtectors"
+        ],
+        "description": "Gets a server encryption protector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector to be retrieved.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the encryption protector": {
+            "$ref": "./examples/EncryptionProtectorGet.json"
+          },
+          "Get the encryption protector with versionless key": {
+            "$ref": "./examples/EncryptionProtectorGetWithVersionlessKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EncryptionProtectors_CreateOrUpdate",
+        "tags": [
+          "EncryptionProtectors"
+        ],
+        "description": "Updates an existing encryption protector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector to be retrieved.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested encryption protector resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EncryptionProtector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EncryptionProtector"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the encryption protector to key vault": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateKeyVault.json"
+          },
+          "Update the encryption protector to key vault with versionless key": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateKeyVaultWithVersionlessKey.json"
+          },
+          "Update the encryption protector to service managed": {
+            "$ref": "./examples/EncryptionProtectorCreateOrUpdateServiceManaged.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/EncryptionProtector"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/encryptionProtector/{encryptionProtectorName}/revalidate": {
+      "post": {
+        "operationId": "EncryptionProtectors_Revalidate",
+        "tags": [
+          "EncryptionProtectors"
+        ],
+        "description": "Revalidates an existing encryption protector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "encryptionProtectorName",
+            "in": "path",
+            "description": "The name of the encryption protector to be retrieved.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionProtectorName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Revalidates the encryption protector": {
+            "$ref": "./examples/EncryptionProtectorRevalidate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "EncryptionProtector": {
+      "type": "object",
+      "description": "The server encryption protector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EncryptionProtectorProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EncryptionProtectorListResult": {
+      "type": "object",
+      "description": "The response of a EncryptionProtector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EncryptionProtector items on this page",
+          "items": {
+            "$ref": "#/definitions/EncryptionProtector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EncryptionProtectorProperties": {
+      "type": "object",
+      "description": "Properties for an encryption protector execution.",
+      "properties": {
+        "subregion": {
+          "type": "string",
+          "description": "Subregion of the encryption protector.",
+          "readOnly": true
+        },
+        "serverKeyName": {
+          "type": "string",
+          "description": "The name of the server key."
+        },
+        "serverKeyType": {
+          "$ref": "./common.json#/definitions/ServerKeyType",
+          "description": "The encryption protector type like 'ServiceManaged', 'AzureKeyVault'."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the server key.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the server key.",
+          "readOnly": true
+        },
+        "autoRotationEnabled": {
+          "type": "boolean",
+          "description": "Key auto rotation opt-in flag. Either true or false."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the server key being used as encryption protector",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serverKeyType"
+      ]
+    }
+  },
+  "parameters": {}
+}

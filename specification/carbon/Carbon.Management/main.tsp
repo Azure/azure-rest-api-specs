@@ -523,7 +523,7 @@ interface CarbonService {
   @doc("API for query carbon emission data available date range")
   @post
   @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
-  queryCarbonEmissionDataAvailableDateRange(
-    ...ApiVersionParameter,
-  ): ArmResponse<CarbonEmissionDataAvailableDateRange> | ErrorResponse;
+  queryCarbonEmissionDataAvailableDateRange(...ApiVersionParameter):
+    | ArmResponse<CarbonEmissionDataAvailableDateRange>
+    | ErrorResponse;
 }

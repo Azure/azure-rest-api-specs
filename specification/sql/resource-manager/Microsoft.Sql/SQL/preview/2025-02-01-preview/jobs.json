@@ -1,0 +1,410 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Jobs"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs": {
+      "get": {
+        "operationId": "Jobs_ListByAgent",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Gets a list of jobs.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List jobs in a job agent": {
+            "$ref": "./examples/ListJobsByAgent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/jobs/{jobName}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Gets a job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a job": {
+            "$ref": "./examples/GetJob.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_CreateOrUpdate",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Creates or updates a job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested job state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Job' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "201": {
+            "description": "Resource 'Job' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a job with all properties specified": {
+            "$ref": "./examples/CreateOrUpdateJobMax.json"
+          },
+          "Create a job with default properties": {
+            "$ref": "./examples/CreateOrUpdateJobMin.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Jobs_Delete",
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Deletes a job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the job to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a job": {
+            "$ref": "./examples/DeleteJob.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Job": {
+      "type": "object",
+      "description": "A job.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobListResult": {
+      "type": "object",
+      "description": "The response of a Job list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Job items on this page",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobProperties": {
+      "type": "object",
+      "description": "Properties of a job.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "User-defined description of the job.",
+          "default": ""
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The job version number.",
+          "readOnly": true
+        },
+        "schedule": {
+          "$ref": "#/definitions/JobSchedule",
+          "description": "Schedule properties of the job."
+        }
+      }
+    },
+    "JobSchedule": {
+      "type": "object",
+      "description": "Scheduling properties of a job.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Schedule start time.",
+          "default": "0001-01-01T05:30:00+05:30"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Schedule end time.",
+          "default": "9999-12-31T17:29:59+05:30"
+        },
+        "type": {
+          "type": "string",
+          "description": "Schedule interval type",
+          "default": "Once",
+          "enum": [
+            "Once",
+            "Recurring"
+          ],
+          "x-ms-enum": {
+            "name": "JobScheduleType",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Once",
+                "value": "Once",
+                "description": "Once"
+              },
+              {
+                "name": "Recurring",
+                "value": "Recurring",
+                "description": "Recurring"
+              }
+            ]
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether or not the schedule is enabled."
+        },
+        "interval": {
+          "type": "string",
+          "description": "Value of the schedule's recurring interval, if the ScheduleType is recurring. ISO8601 duration format."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -75,6 +75,7 @@ interface SourceControls {
 
 @@doc(SourceControl.name, "Type of source control");
 @@doc(SourceControl.properties, "SourceControl resource specific properties");
-@@doc(SourceControls.updateSourceControl::parameters.resource,
+@@doc(
+  SourceControls.updateSourceControl::parameters.resource,
   "Source control token information"
 );

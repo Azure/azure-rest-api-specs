@@ -86,12 +86,15 @@ interface ScalingPlanPersonalSchedules {
 @@maxLength(ScalingPlanPersonalSchedule.name, 64);
 @@minLength(ScalingPlanPersonalSchedule.name, 1);
 @@doc(ScalingPlanPersonalSchedule.name, "The name of the ScalingPlanSchedule");
-@@doc(ScalingPlanPersonalSchedule.properties,
+@@doc(
+  ScalingPlanPersonalSchedule.properties,
   "Detailed properties for ScalingPlanPersonalSchedule"
 );
-@@doc(ScalingPlanPersonalSchedules.create::parameters.resource,
+@@doc(
+  ScalingPlanPersonalSchedules.create::parameters.resource,
   "Object containing ScalingPlanPersonalSchedule definitions."
 );
-@@clientName(ScalingPlanPersonalSchedules.update::parameters.body,
+@@clientName(
+  ScalingPlanPersonalSchedules.update::parameters.body,
   "scalingPlanSchedule"
 );

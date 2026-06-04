@@ -237,11 +237,13 @@ interface SnapshotPolicies {
   update is ArmCustomPatchAsync<
     SnapshotPolicy,
     PatchModel = SnapshotPolicyPatch,
-    Response = ArmResponse<SnapshotPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SnapshotPolicy> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: SnapshotPolicy;
-    })
+    Response =
+      | ArmResponse<SnapshotPolicy>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SnapshotPolicy> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: SnapshotPolicy;
+        })
   >;
 
   /**
@@ -250,7 +252,10 @@ interface SnapshotPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SnapshotPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -275,9 +280,11 @@ interface SnapshotPolicies {
 
 @@doc(SnapshotPolicy.name, "The name of the snapshot policy");
 @@doc(SnapshotPolicy.properties, "Snapshot policy Properties");
-@@doc(SnapshotPolicies.create::parameters.resource,
+@@doc(
+  SnapshotPolicies.create::parameters.resource,
   "Snapshot policy object supplied in the body of the operation."
 );
-@@doc(SnapshotPolicies.update::parameters.properties,
+@@doc(
+  SnapshotPolicies.update::parameters.properties,
   "Snapshot policy object supplied in the body of the operation."
 );

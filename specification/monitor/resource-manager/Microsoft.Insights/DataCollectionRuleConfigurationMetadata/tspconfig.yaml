@@ -1,0 +1,50 @@
+parameters:
+  service-dir:
+    default: "sdk/monitor"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/dataCollectionRuleConfigurationMetadata.json"
+    new-line: lf
+    omit-unreachable-types: true
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.ResourceManager.DataCollectionRuleConfigurationMetadata"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.DataCollectionRuleConfigurationMetadata"
+    clear-output-folder: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-datacollectionruleconfigurationmetadata"
+    namespace: "azure.mgmt.datacollectionruleconfigurationmetadata"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dcrmetadata"
+    namespace: "com.azure.resourcemanager.dcrmetadata"
+    service-name: "DataCollectionRuleConfigurationMetadata"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-datacollectionruleconfigurationmetadata"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-datacollectionruleconfigurationmetadata"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/datacollectionruleconfigurationmetadata"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatacollectionruleconfigurationmetadata"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatacollectionruleconfigurationmetadata"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

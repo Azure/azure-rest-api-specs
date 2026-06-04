@@ -1,40 +1,49 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "@typespec/rest";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.CognitiveServices;
 using Azure.ResourceManager;
 
-@@clientName(Microsoft.CognitiveServices,
+@@clientName(
+  Microsoft.CognitiveServices,
   "CognitiveServicesManagementClient",
   "javascript,python"
 );
 
 @@clientName(AgentProtocol.A2A, "A2_A", "python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(ConnectionsListParameters.includeAll,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  ConnectionsListParameters.includeAll,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AgentDeploymentsListParameters.count,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  AgentDeploymentsListParameters.count,
   30,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AgentDeploymentsListParameters.orderByAsc,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  AgentDeploymentsListParameters.orderByAsc,
   false,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AgentApplicationsListParameters.count,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  AgentApplicationsListParameters.count,
   30,
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(AgentApplicationsListParameters.orderByAsc,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  AgentApplicationsListParameters.orderByAsc,
   false,
   "python"
 );
@@ -50,7 +59,8 @@ op checkDomainAvailabilityCustom(
   type: string,
   kind?: string,
 ): DomainAvailability;
-@@override(checkDomainAvailability,
+@@override(
+  checkDomainAvailability,
   checkDomainAvailabilityCustom,
   "javascript"
 );
@@ -82,15 +92,38 @@ op calculateModelCapacityCustom(
 
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
 
-@@clientName(PATAuthTypeConnectionProperties,
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op regenerateKeyCustom(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
+  @segment("accounts")
+  @key
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @minLength(2)
+  @maxLength(64)
+  accountName: string,
+
+  keyName: KeyName,
+): ApiKeys;
+@@override(Accounts.regenerateKey, regenerateKeyCustom, "javascript");
+
+@@clientName(
+  PATAuthTypeConnectionProperties,
   "PatAuthTypeConnectionProperties",
   "java"
 );
-@@clientName(SASAuthTypeConnectionProperties,
+@@clientName(
+  SASAuthTypeConnectionProperties,
   "SasAuthTypeConnectionProperties",
   "java"
 );
-@@clientName(AADAuthTypeConnectionProperties,
+@@clientName(
+  AADAuthTypeConnectionProperties,
   "AadAuthTypeConnectionProperties",
   "java"
 );
@@ -99,17 +132,20 @@ op calculateModelCapacityCustom(
 @@clientLocation(checkSkuAvailability, "ManagementClient", "go");
 @@clientLocation(calculateModelCapacity, "ManagementClient", "go");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
-@@clientLocation(ModelsOperationGroup.list,
+@@clientLocation(
+  ModelsOperationGroup.list,
   "CognitiveServicesModels",
   "csharp"
 );
 @@clientName(ModelsOperationGroup.list, "GetModels", "csharp");
 @@clientName(ResourceSkusOperationGroup.list, "GetResourceSkus", "csharp");
-@@clientName(CommitmentTiersOperationGroup.list,
+@@clientName(
+  CommitmentTiersOperationGroup.list,
   "GetCommitmentTiers",
   "csharp"
 );
@@ -117,12 +153,14 @@ op calculateModelCapacityCustom(
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
 @@alternateType(Account.location, azureLocation, "csharp");
 @@alternateType(Account.etag, eTag, "csharp");
-@@alternateType(Account.identity,
+@@alternateType(
+  Account.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
-@@hierarchyBuilding(Account,
+@@hierarchyBuilding(
+  Account,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
@@ -132,113 +170,142 @@ op calculateModelCapacityCustom(
 @@clientName(Deployment, "CognitiveServicesAccountDeployment", "csharp");
 @@alternateType(Deployment.etag, eTag, "csharp");
 @@clientName(AgentApplication, "CognitiveServicesAgentApplication", "csharp");
-@@clientName(AgenticApplicationProperties,
+@@clientName(
+  AgenticApplicationProperties,
   "CognitiveServicesAgenticApplicationProperties",
   "csharp"
 );
-@@clientName(AgenticApplicationProvisioningState,
+@@clientName(
+  AgenticApplicationProvisioningState,
   "CognitiveServicesAgenticApplicationProvisioningState",
   "csharp"
 );
 @@clientName(AssignedIdentity, "CognitiveServicesAssignedIdentity", "csharp");
+@@clientName(
+  UserAssignedIdentity,
+  "CognitiveServicesUserAssignedIdentity",
+  "csharp"
+);
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
-@@clientName(AgentDeploymentProperties,
+@@clientName(
+  AgentDeploymentProperties,
   "CognitiveServicesAgentDeploymentProperties",
   "csharp"
 );
-@@clientName(AgentDeploymentProvisioningState,
+@@clientName(
+  AgentDeploymentProvisioningState,
   "CognitiveServicesAgentDeploymentProvisioningState",
   "csharp"
 );
-@@clientName(AgentDeploymentState,
+@@clientName(
+  AgentDeploymentState,
   "CognitiveServicesAgentDeploymentState",
   "csharp"
 );
 @@clientName(AgentProtocol, "CognitiveServicesAgentProtocol", "csharp");
-@@clientName(AgentProtocolVersion,
+@@clientName(
+  AgentProtocolVersion,
   "CognitiveServicesAgentProtocolVersion",
   "csharp"
 );
 @@clientName(AgentReference, "CognitiveServicesAgentReference", "csharp");
-@@clientName(AgentReferenceProperties,
+@@clientName(
+  AgentReferenceProperties,
   "CognitiveServicesAgentReferenceProperties",
   "csharp"
 );
 @@clientName(EncryptionScope, "CognitiveServicesEncryptionScope", "csharp");
 @@alternateType(EncryptionScope.etag, eTag, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator to flatten PrivateEndpointConnection.properties for SDK backward compatibility"
-@@flattenProperty(Microsoft.CognitiveServices.PrivateEndpointConnection.properties,
+@@flattenProperty(
+  Microsoft.CognitiveServices.PrivateEndpointConnection.properties,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(Microsoft.CognitiveServices.PrivateEndpointConnection,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateEndpointConnection,
   "CognitiveServicesPrivateEndpointConnection",
   "csharp"
 );
-@@alternateType(Microsoft.CognitiveServices.PrivateEndpointConnection.location,
+@@alternateType(
+  Microsoft.CognitiveServices.PrivateEndpointConnection.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(Microsoft.CognitiveServices.PrivateEndpointConnection.etag,
+@@alternateType(
+  Microsoft.CognitiveServices.PrivateEndpointConnection.etag,
   eTag,
   "csharp"
 );
-@@clientName(Microsoft.CognitiveServices.PrivateEndpointConnectionProperties,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateEndpointConnectionProperties,
   "CognitiveServicesPrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(Microsoft.CognitiveServices.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@clientName(Microsoft.CognitiveServices.PrivateEndpointOutboundRule,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateEndpointOutboundRule,
   "CognitiveServicesPrivateEndpointOutboundRule",
   "csharp"
 );
-@@clientName(Microsoft.CognitiveServices.PrivateEndpointOutboundRuleDestination,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateEndpointOutboundRuleDestination,
   "CognitiveServicesPrivateEndpointOutboundRuleDestination",
   "csharp"
 );
-@@alternateType(Microsoft.CognitiveServices.PrivateEndpointOutboundRuleDestination.serviceResourceId,
+@@alternateType(
+  Microsoft.CognitiveServices.PrivateEndpointOutboundRuleDestination.serviceResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(Project, "CognitiveServicesProject", "csharp");
 @@alternateType(Project.location, azureLocation, "csharp");
 @@alternateType(Project.etag, eTag, "csharp");
-@@alternateType(Project.identity,
+@@alternateType(
+  Project.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
-@@hierarchyBuilding(Project,
+@@hierarchyBuilding(
+  Project,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 @@clientName(CapabilityHost, "CognitiveServicesCapabilityHost", "csharp");
-@@clientName(ConnectionPropertiesV2BasicResource,
+@@clientName(
+  ConnectionPropertiesV2BasicResource,
   "CognitiveServicesConnection",
   "csharp"
 );
-@@clientName(ProjectCapabilityHost,
+@@clientName(
+  ProjectCapabilityHost,
   "CognitiveServicesProjectScopedCapabilityHost",
   "csharp"
 );
-@@clientName(ProjectCapabilityHostProperties,
+@@clientName(
+  ProjectCapabilityHostProperties,
   "CognitiveServicesProjectScopedCapabilityHostProperties",
   "csharp"
 );
 
-@@clientName(AADAuthTypeConnectionProperties,
+@@clientName(
+  AADAuthTypeConnectionProperties,
   "AadAuthTypeConnectionProperties",
   "csharp"
 );
 @@clientName(AccountModel, "CognitiveServicesAccountModel", "csharp");
 @@clientName(AccountProperties, "CognitiveServicesAccountProperties", "csharp");
-@@clientName(AccountProperties.networkInjections,
+@@clientName(
+  AccountProperties.networkInjections,
   "AIFoundryNetworkInjections",
   "csharp"
 );
@@ -246,7 +313,8 @@ op calculateModelCapacityCustom(
 @@alternateType(AccountProperties.dateCreated, utcDateTime, "csharp");
 @@clientName(AccountProperties.deletionDate, "DeletedOn", "csharp");
 @@alternateType(AccountProperties.deletionDate, utcDateTime, "csharp");
-@@clientName(AccountProperties.dynamicThrottlingEnabled,
+@@clientName(
+  AccountProperties.dynamicThrottlingEnabled,
   "EnableDynamicThrottling",
   "csharp"
 );
@@ -256,42 +324,50 @@ op calculateModelCapacityCustom(
 @@clientName(ApiProperties, "ServiceAccountApiProperties", "csharp");
 @@alternateType(ApiProperties.aadClientId, uuid, "csharp");
 @@alternateType(ApiProperties.aadTenantId, uuid, "csharp");
-@@alternateType(ApiProperties.qnaAzureSearchEndpointId,
+@@alternateType(
+  ApiProperties.qnaAzureSearchEndpointId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(ApiProperties.statisticsEnabled, "EnableStatistics", "csharp");
 @@clientName(ByPassSelection, "TrustedServicesByPassSelection", "csharp");
-@@clientName(CalculateModelCapacityParameter,
+@@clientName(
+  CalculateModelCapacityParameter,
   "CalculateModelCapacityContent",
   "csharp"
 );
 @@clientName(CallRateLimit, "ServiceAccountCallRateLimit", "csharp");
-@@clientName(CapabilityHostProperties,
+@@clientName(
+  CapabilityHostProperties,
   "CognitiveServicesCapabilityHostProperties",
   "csharp"
 );
 @@clientName(CapacityConfig, "CognitiveServicesCapacityConfig", "csharp");
-@@clientName(CheckDomainAvailabilityParameter,
+@@clientName(
+  CheckDomainAvailabilityParameter,
   "CognitiveServicesDomainAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckDomainAvailabilityParameter.type, "ResourceType", "csharp");
-@@alternateType(CheckDomainAvailabilityParameter.type,
+@@alternateType(
+  CheckDomainAvailabilityParameter.type,
   armResourceType,
   "csharp"
 );
-@@clientName(CheckSkuAvailabilityParameter,
+@@clientName(
+  CheckSkuAvailabilityParameter,
   "CognitiveServicesSkuAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckSkuAvailabilityParameter.type, "ResourceType", "csharp");
 @@alternateType(CheckSkuAvailabilityParameter.type, armResourceType, "csharp");
-@@clientName(ConnectionAccessKey,
+@@clientName(
+  ConnectionAccessKey,
   "CognitiveServicesConnectionAccessKey",
   "csharp"
 );
-@@clientName(ConnectionCategory,
+@@clientName(
+  ConnectionCategory,
   "CognitiveServicesConnectionCategory",
   "csharp"
 );
@@ -302,7 +378,8 @@ op calculateModelCapacityCustom(
 @@clientName(ConnectionCategory.AzureSqlDb, "AzureSqlDB", "csharp");
 @@clientName(ConnectionCategory.AzureSqlMi, "AzureSqlMI", "csharp");
 @@clientName(ConnectionCategory.CosmosDb, "CosmosDB", "csharp");
-@@clientName(ConnectionCategory.CosmosDbMongoDbApi,
+@@clientName(
+  ConnectionCategory.CosmosDbMongoDbApi,
   "CosmosDBMongoDBApi",
   "csharp"
 );
@@ -310,64 +387,78 @@ op calculateModelCapacityCustom(
 @@clientName(ConnectionCategory.MongoDbAtlas, "MongoDBAtlas", "csharp");
 @@clientName(ConnectionCategory.MongoDbV2, "MongoDBV2", "csharp");
 @@clientName(ConnectionGroup, "CognitiveServicesConnectionGroup", "csharp");
-@@clientName(ConnectionManagedIdentity,
+@@clientName(
+  ConnectionManagedIdentity,
   "CognitiveServicesConnectionManagedIdentity",
   "csharp"
 );
 @@clientName(ConnectionOAuth2, "CognitiveServicesConnectionOAuth2", "csharp");
 @@alternateType(ConnectionOAuth2.tenantId, uuid, "csharp");
-@@clientName(ConnectionPropertiesV2,
+@@clientName(
+  ConnectionPropertiesV2,
   "CognitiveServicesConnectionProperties",
   "csharp"
 );
-@@clientName(ConnectionServicePrincipal,
+@@clientName(
+  ConnectionServicePrincipal,
   "CognitiveServicesConnectionServicePrincipal",
   "csharp"
 );
 @@alternateType(ConnectionServicePrincipal.tenantId, uuid, "csharp");
-@@clientName(ConnectionUpdateContent,
+@@clientName(
+  ConnectionUpdateContent,
   "CognitiveServicesConnectionPatch",
   "csharp"
 );
-@@clientName(ConnectionUsernamePassword,
+@@clientName(
+  ConnectionUsernamePassword,
   "CognitiveServicesConnectionUsernamePassword",
   "csharp"
 );
 @@clientName(ContentLevel, "RaiPolicyContentLevel", "csharp");
-@@clientName(DeploymentModel,
+@@clientName(
+  DeploymentModel,
   "CognitiveServicesAccountDeploymentModel",
   "csharp"
 );
-@@clientName(DeploymentProperties,
+@@clientName(
+  DeploymentProperties,
   "CognitiveServicesAccountDeploymentProperties",
   "csharp"
 );
-@@clientName(DeploymentProperties.dynamicThrottlingEnabled,
+@@clientName(
+  DeploymentProperties.dynamicThrottlingEnabled,
   "IsDynamicThrottlingEnabled",
   "csharp"
 );
-@@clientName(DeploymentProvisioningState,
+@@clientName(
+  DeploymentProvisioningState,
   "CognitiveServicesAccountDeploymentProvisioningState",
   "csharp"
 );
-@@clientName(DeploymentScaleSettings,
+@@clientName(
+  DeploymentScaleSettings,
   "CognitiveServicesAccountDeploymentScaleSettings",
   "csharp"
 );
-@@clientName(DeploymentScaleType,
+@@clientName(
+  DeploymentScaleType,
   "CognitiveServicesAccountDeploymentScaleType",
   "csharp"
 );
-@@clientName(DomainAvailability,
+@@clientName(
+  DomainAvailability,
   "CognitiveServicesDomainAvailabilityList",
   "csharp"
 );
 @@clientName(DomainAvailability.type, "DomainAvailabilityType", "csharp");
-@@clientName(Microsoft.CognitiveServices.Encryption,
+@@clientName(
+  Microsoft.CognitiveServices.Encryption,
   "ServiceAccountEncryptionProperties",
   "csharp"
 );
-@@clientName(EncryptionScopeProperties,
+@@clientName(
+  EncryptionScopeProperties,
   "CognitiveServicesEncryptionScopeProperties",
   "csharp"
 );
@@ -375,7 +466,8 @@ op calculateModelCapacityCustom(
 @@clientName(IpRule, "CognitiveServicesIPRule", "csharp");
 @@clientName(KeyName, "ServiceAccountKeyName", "csharp");
 @@clientName(KeySource, "ServiceAccountEncryptionKeySource", "csharp");
-@@clientName(KeyVaultProperties,
+@@clientName(
+  KeyVaultProperties,
   "CognitiveServicesKeyVaultProperties",
   "csharp"
 );
@@ -383,7 +475,8 @@ op calculateModelCapacityCustom(
 @@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
 @@clientName(MetricName, "ServiceAccountUsageMetricName", "csharp");
 @@clientName(Model, "CognitiveServicesModel", "csharp");
-@@clientName(ModelDeprecationInfo,
+@@clientName(
+  ModelDeprecationInfo,
   "ServiceAccountModelDeprecationInfo",
   "csharp"
 );
@@ -392,7 +485,8 @@ op calculateModelCapacityCustom(
 @@clientName(ModelDeprecationInfo.inference, "InferenceOn", "csharp");
 @@alternateType(ModelDeprecationInfo.inference, utcDateTime, "csharp");
 @@clientName(ModelSku, "CognitiveServicesModelSku", "csharp");
-@@clientName(MultiRegionSettings,
+@@clientName(
+  MultiRegionSettings,
   "CognitiveServicesMultiRegionSettings",
   "csharp"
 );
@@ -401,74 +495,89 @@ op calculateModelCapacityCustom(
 @@clientName(NetworkRuleAction, "CognitiveServicesNetworkRuleAction", "csharp");
 @@clientName(NetworkRuleSet, "CognitiveServicesNetworkRuleSet", "csharp");
 @@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
-@@clientName(NetworkSecurityPerimeter,
+@@clientName(
+  NetworkSecurityPerimeter,
   "CognitiveServicesNetworkSecurityPerimeter",
   "csharp"
 );
 @@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
 @@alternateType(NetworkSecurityPerimeter.perimeterGuid, uuid, "csharp");
-@@clientName(PATAuthTypeConnectionProperties,
+@@clientName(
+  PATAuthTypeConnectionProperties,
   "PatAuthTypeConnectionProperties",
   "csharp"
 );
 @@clientName(PatchResourceTags, "CognitiveServicesPatchResourceTags", "csharp");
-@@clientName(Microsoft.CognitiveServices.PrivateLinkResource,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateLinkResource,
   "CognitiveServicesPrivateLinkResource",
   "csharp"
 );
-@@clientName(Microsoft.CognitiveServices.PrivateLinkResourceProperties,
+@@clientName(
+  Microsoft.CognitiveServices.PrivateLinkResourceProperties,
   "CognitiveServicesPrivateLinkResourceProperties",
   "csharp"
 );
 @@clientName(ProjectProperties, "CognitiveServicesProjectProperties", "csharp");
-@@clientName(ProvisioningIssue,
+@@clientName(
+  ProvisioningIssue,
   "NetworkSecurityPerimeterProvisioningIssue",
   "csharp"
 );
-@@clientName(ProvisioningIssueProperties,
+@@clientName(
+  ProvisioningIssueProperties,
   "NetworkSecurityPerimeterProvisioningIssueProperties",
   "csharp"
 );
 @@clientName(ProvisioningState, "ServiceAccountProvisioningState", "csharp");
 @@clientName(ProvisioningState.ResolvingDNS, "ResolvingDns", "csharp");
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "ServiceAccountPublicNetworkAccess",
   "csharp"
 );
 @@clientName(QuotaLimit, "ServiceAccountQuotaLimit", "csharp");
 @@clientName(QuotaUsageStatus, "ServiceAccountQuotaUsageStatus", "csharp");
-@@clientName(RaiBlocklistItemBulkRequest,
+@@clientName(
+  RaiBlocklistItemBulkRequest,
   "RaiBlocklistItemBulkContent",
   "csharp"
 );
 @@clientName(RegionSetting, "CognitiveServicesRegionSetting", "csharp");
-@@clientName(RegenerateKeyParameters,
+@@clientName(
+  RegenerateKeyParameters,
   "RegenerateServiceAccountKeyContent",
   "csharp"
 );
-@@clientName(RequestMatchPattern,
+@@clientName(
+  RequestMatchPattern,
   "ServiceAccountThrottlingMatchPattern",
   "csharp"
 );
 @@clientName(ResourceBase, "CognitiveServicesResourceBase", "csharp");
-@@clientName(Microsoft.CognitiveServices.ResourceSku,
+@@clientName(
+  Microsoft.CognitiveServices.ResourceSku,
   "AvailableCognitiveServicesSku",
   "csharp"
 );
-@@clientName(ResourceSkuRestrictionInfo,
+@@clientName(
+  ResourceSkuRestrictionInfo,
   "CognitiveServicesSkuRestrictionInfo",
   "csharp"
 );
-@@clientName(ResourceSkuRestrictions,
+@@clientName(
+  ResourceSkuRestrictions,
   "CognitiveServicesSkuRestrictions",
   "csharp"
 );
 @@clientName(ResourceSkuRestrictions.type, "RestrictionsType", "csharp");
-@@clientName(ResourceSkuRestrictionsReasonCode,
+@@clientName(
+  ResourceSkuRestrictionsReasonCode,
   "CognitiveServicesSkuRestrictionReasonCode",
   "csharp"
 );
-@@clientName(ResourceSkuRestrictionsType,
+@@clientName(
+  ResourceSkuRestrictionsType,
   "CognitiveServicesSkuRestrictionsType",
   "csharp"
 );
@@ -484,45 +593,54 @@ op calculateModelCapacityCustom(
 @@clientName(SkuResource, "CognitiveServicesResourceSku", "csharp");
 @@clientName(SkuTier, "CognitiveServicesSkuTier", "csharp");
 @@clientName(ThrottlingRule, "ServiceAccountThrottlingRule", "csharp");
-@@clientName(ThrottlingRule.dynamicThrottlingEnabled,
+@@clientName(
+  ThrottlingRule.dynamicThrottlingEnabled,
   "IsDynamicThrottlingEnabled",
   "csharp"
 );
 @@clientName(UnitType, "ServiceAccountUsageUnitType", "csharp");
-@@clientName(Microsoft.CognitiveServices.Usage,
+@@clientName(
+  Microsoft.CognitiveServices.Usage,
   "ServiceAccountUsage",
   "csharp"
 );
 @@clientName(UserOwnedStorage, "ServiceAccountUserOwnedStorage", "csharp");
 @@alternateType(UserOwnedStorage.resourceId, armResourceIdentifier, "csharp");
 @@alternateType(UserOwnedStorage.identityClientId, uuid, "csharp");
-@@clientName(VirtualNetworkRule,
+@@clientName(
+  VirtualNetworkRule,
   "CognitiveServicesVirtualNetworkRule",
   "csharp"
 );
 @@alternateType(VirtualNetworkRule.id, armResourceIdentifier, "csharp");
-@@clientName(ManagedNetworkProvisionStatus.status,
+@@clientName(
+  ManagedNetworkProvisionStatus.status,
   "ManagedNetworkStatus",
   "csharp"
 );
-@@clientName(ManagedNetworkSettingsPropertiesBasicResource,
+@@clientName(
+  ManagedNetworkSettingsPropertiesBasicResource,
   "CognitiveServicesManagedNetworkSettings",
   "csharp"
 );
-@@clientName(ManagedNetworkSettingsProperties,
+@@clientName(
+  ManagedNetworkSettingsProperties,
   "CognitiveServicesManagedNetworkSettingsProperties",
   "csharp"
 );
-@@clientName(OutboundRuleBasicResource,
+@@clientName(
+  OutboundRuleBasicResource,
   "CognitiveServicesOutboundRuleBasic",
   "csharp"
 );
-@@clientName(OutboundRule,
+@@clientName(
+  OutboundRule,
   "CognitiveServicesOutboundRuleBasicProperties",
   "csharp"
 );
 @@clientName(QuotaTier, "CognitiveServicesQuotaTier", "csharp");
-@@clientName(QuotaTierProperties,
+@@clientName(
+  QuotaTierProperties,
   "CognitiveServicesQuotaTierProperties",
   "csharp"
 );
@@ -533,63 +651,77 @@ op calculateModelCapacityCustom(
 @@alternateType(CommitmentPlanProperties.commitmentPlanGuid, uuid, "csharp");
 @@clientName(FirewallSku, "CognitiveServicesFirewallSku", "csharp");
 @@clientName(FqdnOutboundRule, "CognitiveServicesFqdnOutboundRule", "csharp");
-@@clientName(HostedAgentDeployment,
+@@clientName(
+  HostedAgentDeployment,
   "CognitiveServicesHostedAgentDeployment",
   "csharp"
 );
 @@clientName(IdentityKind, "CognitiveServicesIdentityKind", "csharp");
-@@clientName(IdentityManagementType,
+@@clientName(
+  IdentityManagementType,
   "CognitiveServicesIdentityManagementType",
   "csharp"
 );
-@@clientName(IdentityProvisioningState,
+@@clientName(
+  IdentityProvisioningState,
   "CognitiveServicesIdentityProvisioningState",
   "csharp"
 );
 @@clientName(IsolationMode, "CognitiveServicesIsolationMode", "csharp");
-@@clientName(ManagedAgentDeployment,
+@@clientName(
+  ManagedAgentDeployment,
   "CognitiveServicesManagedAgentDeployment",
   "csharp"
 );
-@@clientName(ManagedNetworkKind,
+@@clientName(
+  ManagedNetworkKind,
   "CognitiveServicesManagedNetworkKind",
   "csharp"
 );
-@@clientName(ManagedNetworkProvisioningState,
+@@clientName(
+  ManagedNetworkProvisioningState,
   "CognitiveServicesManagedNetworkProvisioningState",
   "csharp"
 );
-@@clientName(ManagedNetworkProvisionOptions,
+@@clientName(
+  ManagedNetworkProvisionOptions,
   "CognitiveServicesManagedNetworkProvisionOptions",
   "csharp"
 );
-@@clientName(ManagedNetworkProvisionStatus,
+@@clientName(
+  ManagedNetworkProvisionStatus,
   "CognitiveServicesManagedNetworkProvisionStatus",
   "csharp"
 );
-@@clientName(ManagedNetworkSettingsBasicResource,
+@@clientName(
+  ManagedNetworkSettingsBasicResource,
   "CognitiveServicesManagedNetworkSettingsContent",
   "csharp"
 );
-@@clientName(ManagedNetworkSettings,
+@@clientName(
+  ManagedNetworkSettings,
   "CognitiveServicesManagedNetworkConfiguration",
   "csharp"
 );
-@@clientName(ManagedNetworkSettingsEx,
+@@clientName(
+  ManagedNetworkSettingsEx,
   "CognitiveServicesManagedNetworkConfigurationExtended",
   "csharp"
 );
-@@clientName(ManagedNetworkStatus,
+@@clientName(
+  ManagedNetworkStatus,
   "CognitiveServicesManagedNetworkStatus",
   "csharp"
 );
 @@clientName(DeploymentRouting, "CognitiveServicesDeploymentRouting", "csharp");
 @@clientName(DeprecationStatus, "CognitiveServicesDeprecationStatus", "csharp");
-@@clientName(OutboundRuleListResult,
+@@clientName(
+  OutboundRuleListResult,
   "CognitiveServicesOutboundRuleListResult",
   "csharp"
 );
-@@alternateType(ModelCapacityListResultValueItem.location,
+@@alternateType(
+  ModelCapacityListResultValueItem.location,
   azureLocation,
   "csharp"
 );
@@ -603,11 +735,13 @@ op calculateModelCapacityCustom(
 @@alternateType(RaiTopic.etag, eTag, "csharp");
 @@alternateType(DefenderForAISetting.etag, eTag, "csharp");
 @@clientName(DeploymentState, "CognitiveServicesDeploymentState", "csharp");
-@@alternateType(Azure.ResourceManager.LocationParameter.location,
+@@alternateType(
+  Azure.ResourceManager.LocationParameter.location,
   azureLocation,
   "csharp"
 );
-@@clientName(CommitmentPlanOperationGroup.listPlansBySubscription,
+@@clientName(
+  CommitmentPlanOperationGroup.listPlansBySubscription,
   "GetCognitiveServicesCommitmentPlans",
   "csharp"
 );
@@ -621,17 +755,20 @@ op calculateModelCapacityCustom(
 @@clientName(Accounts.listModels, "GetModels", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
 @@markAsPageable(checkSkuAvailability, "csharp");
-@@clientName(Accounts.privateLinkResourcesList,
+@@clientName(
+  Accounts.privateLinkResourcesList,
   "GetPrivateLinkResources",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
 @@markAsPageable(Accounts.privateLinkResourcesList, "csharp");
-@@alternateType(AgentReferenceResourceArmPaginatedResult.value,
+@@alternateType(
+  AgentReferenceResourceArmPaginatedResult.value,
   AgentReference[],
   "csharp"
 );
-@@alternateType(AgentReferenceResourceArmPaginatedResult.nextLink,
+@@alternateType(
+  AgentReferenceResourceArmPaginatedResult.nextLink,
   string,
   "csharp"
 );
@@ -641,21 +778,29 @@ op calculateModelCapacityCustom(
 @@markAsPageable(PrivateEndpointConnections.list, "csharp");
 @@clientName(RaiBlocklists.batchAdd, "BatchAddRaiBlocklistItem", "csharp");
 @@clientName(RaiBlocklists.batchAdd::parameters.body, "content", "csharp");
-@@clientName(RaiBlocklists.batchDelete,
+@@clientName(
+  RaiBlocklists.batchDelete,
   "BatchDeleteRaiBlocklistItem",
   "csharp"
 );
-@@clientName(LocationBasedModelCapacitiesOperationGroup.list,
+@@clientName(
+  LocationBasedModelCapacitiesOperationGroup.list,
   "GetLocationBasedModelCapacities",
   "csharp"
 );
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
-@@clientName(ModelCapacitiesOperationGroup.list,
+@@clientName(
+  ModelCapacitiesOperationGroup.list,
   "GetModelCapacities",
   "csharp"
 );
-@@clientName(DeletedAccounts.list, "GetDeletedAccounts", "csharp");
-@@clientName(ManagedNetworkSettingsPropertiesBasicResources.post,
+@@clientName(
+  DeletedAccounts.list,
+  "GetCognitiveServicesDeletedAccounts",
+  "csharp"
+);
+@@clientName(
+  ManagedNetworkSettingsPropertiesBasicResources.post,
   "UpdateOutboundRules",
   "csharp"
 );
@@ -663,7 +808,8 @@ op calculateModelCapacityCustom(
 @@clientName(RaiActionType.ANNOTATING, "Annotating", "csharp");
 @@clientName(RaiActionType.HITL, "Hitl", "csharp");
 @@clientName(RaiActionType.RETRY, "Retry", "csharp");
-@@alternateType(RaiMonitorConfig.adxStorageResourceId,
+@@alternateType(
+  RaiMonitorConfig.adxStorageResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -671,28 +817,34 @@ op calculateModelCapacityCustom(
 @@clientName(RaiPolicyProperties.type, "PolicyType", "csharp");
 @@clientName(ServiceTier, "CognitiveServicesDeploymentServiceTier", "csharp");
 @@clientName(TierUpgradePolicy, "CognitiveServicesTierUpgradePolicy", "csharp");
-@@clientName(TrafficRoutingProtocol,
+@@clientName(
+  TrafficRoutingProtocol,
   "CognitiveServicesTrafficRoutingProtocol",
   "csharp"
 );
-@@clientName(TrafficRoutingRule,
+@@clientName(
+  TrafficRoutingRule,
   "CognitiveServicesTrafficRoutingRule",
   "csharp"
 );
-@@clientName(UpgradeAvailabilityStatus,
+@@clientName(
+  UpgradeAvailabilityStatus,
   "QuotaTierUpgradeAvailabilityStatus",
   "csharp"
 );
 @@alternateType(UserOwnedAmlWorkspace.identityClientId, uuid, "csharp");
-@@alternateType(UserOwnedAmlWorkspace.resourceId,
+@@alternateType(
+  UserOwnedAmlWorkspace.resourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(VersionedAgentReference,
+@@clientName(
+  VersionedAgentReference,
   "CognitiveServicesVersionedAgentReference",
   "csharp"
 );
-@@alternateType(CommitmentPlanAssociation.commitmentPlanId,
+@@alternateType(
+  CommitmentPlanAssociation.commitmentPlanId,
   armResourceIdentifier,
   "csharp"
 );
@@ -710,80 +862,137 @@ op calculateModelCapacityCustom(
 
 @@scope(ComputeOperations.get, "!csharp"); // Core lib supports query operation status, so scope out this operation for .NET.
 
-@@usage(NetworkSecurityPerimeterConfiguration,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeterConfiguration,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(RaiContentFilter,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  RaiContentFilter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(BillingMeterInfo,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  BillingMeterInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(AccountModel,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  AccountModel,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(CapacityConfig,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  CapacityConfig,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ModelSku,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ModelSku,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(NetworkSecurityPerimeter,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(Microsoft.CognitiveServices.PrivateLinkResource,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  Microsoft.CognitiveServices.PrivateLinkResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ModelSkuCapacityProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ModelSkuCapacityProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(NetworkSecurityPerimeterAccessRule,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeterAccessRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(NetworkSecurityPerimeterAccessRuleProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeterAccessRuleProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(NetworkSecurityPerimeterConfigurationAssociationInfo,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeterConfigurationAssociationInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(NetworkSecurityPerimeterConfigurationProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeterConfigurationProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(NetworkSecurityPerimeterProfileInfo,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  NetworkSecurityPerimeterProfileInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ProvisioningIssue,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ProvisioningIssue,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ProvisioningIssueProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ProvisioningIssueProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(RaiContentFilterProperties,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  RaiContentFilterProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(ModelCapacityListResultValueItem,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  ModelCapacityListResultValueItem,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-@@usage(CallRateLimit,
-  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+@@usage(
+  CallRateLimit,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 

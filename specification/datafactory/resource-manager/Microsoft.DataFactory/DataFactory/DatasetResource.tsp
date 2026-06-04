@@ -86,6 +86,7 @@ interface DatasetResources {
 @@minLength(DatasetResource.name, 1);
 @@doc(DatasetResource.name, "The dataset name.");
 @@doc(DatasetResource.properties, "Dataset properties.");
-@@doc(DatasetResources.createOrUpdate::parameters.resource,
+@@doc(
+  DatasetResources.createOrUpdate::parameters.resource,
   "Dataset resource definition."
 );
