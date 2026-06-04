@@ -239,13 +239,13 @@ namespace Azure.AI.Projects {
   @@clientName(CreateAgentFromCodeContent, "CreateAgentFromCodeOptions");
 
   // --------------------------------------------------------------------------------
-  // Hide Agent administration opertaions, containing the foundry features
+  // Hide Agent administration operations, containing the foundry features
   // --------------------------------------------------------------------------------
   @@access(Agents.createAgentVersionFromCode, Access.internal);
   @@access(Agents.downloadAgentCode, Access.internal);
 
   // --------------------------------------------------------------------------------
-  // Hide session opertaions, containing the foundry features
+  // Hide session operations, containing the foundry features
   // --------------------------------------------------------------------------------
 
   // Hide the protocol methods and methods using feature headers
