@@ -130,24 +130,6 @@ input-file:
   - stable/2025-11-05/blob.json
 ```
 
-### Tag: package-2025-11-tsp
-
-These settings apply only when `--tag=package-2025-11-tsp` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-11-tsp'
-input-file:
-  - stable/2025-11-05/generated_blob.json
-```
-
-### Tag: package-2026-02-tsp
-
-These settings apply only when `--tag=package-2026-02-tsp` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-02-tsp'
-input-file:
-  - stable/2026-02-06/generated_blob.json
-```
-
 ### Tag: package-2026-02
 
 These settings apply only when `--tag=package-2026-02` is specified on the command line.
@@ -164,24 +146,6 @@ These settings apply only when `--tag=package-2026-04` is specified on the comma
 ```yaml $(tag) == 'package-2026-04'
 input-file:
   - stable/2026-04-06/blob.json
-```
-
-### Tag: package-2026-04-tsp
-
-These settings apply only when `--tag=package-2026-04-tsp` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-04-tsp'
-input-file:
-  - stable/2026-04-06/generated_blob.json
-```
-
-### Tag: package-2026-06-tsp
-
-These settings apply only when `--tag=package-2026-06-tsp` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-06-tsp'
-input-file:
-  - stable/2026-06-06/generated_blob.json
 ```
 
 ### Tag: package-2026-06
@@ -206,57 +170,3 @@ directive:
 ```
 
 ---
-
-```yaml
-suppressions:
-  - code: LroExtension
-    from: generated_blob.json
-    reason: Legacy operations not defined as lro
-```
-
-```yaml
-directive:
-  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
-    from: generated_blob.json
-    reason: Service uses XML, not JSON, so cannot validate.
-  - suppress: ValidFormats
-    from: generated_blob.json
-    reason: Properly specifying parameter format.
-  - suppress: EnumInsteadOfBoolean
-    from: generated_blob.json
-    reason: Existing API contract
-  - suppress: ErrorResponse
-    from: generated_blob.json
-    reason: Existing API contract
-  - suppress: MsPaths
-    from: generated_blob.json
-    reason: Auto-generated swagger based on typespec
-  - suppress: SuccessResponseBody
-    from: generated_blob.json
-    reason: Existing API contract
-  - suppress: LroHeaders
-    from: generated_blob.json
-    reason: Existing API contract
-  - suppress: VersionPolicy
-    from: generated_blob.json
-    reason: Existing API with api version header
-  - suppress: PutInOperationName
-    from: generated_blob.json
-    reason: Existing API with sdk usage
-  - suppress: OperationId
-    from: generated_blob.json
-  - suppress: GetInOperationName
-    from: generated_blob.json
-  - suppress: XmsEnumValidation
-    from: generated_blob.json
-    reason: Existing API contract and auto-generated enum definitions
-  - suppress: SecurityDefinitionDescription
-    from: generated_blob.json
-    reason: Auto-generated swagger from typespec
-  - suppress: PathParameterSchema
-    from: generated_blob.json
-    reason: Existing API contract
-  - suppress: PutRequestResponseScheme
-    from: generated_blob.json
-    reason: Existing API contract
-```

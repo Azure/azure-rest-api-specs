@@ -137,6 +137,6 @@ The format-specific instruction files reference these shared rules:
 
 | Instruction File                  | Applies To                                    | Relationship                                                                                                           |
 | --------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `armapi-review.instructions.md`   | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
+| `arm-api-review.instructions.md`  | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
 | `openapi-review.instructions.md`  | `specification/**/*.json`                     | References shared rules + adds generic OpenAPI rules (file structure, x-ms extensions, examples, security definitions) |
 | `typespec-review.instructions.md` | `specification/**/*.tsp`                      | References shared rules + adds TypeSpec-specific rules (decorators, project structure, anti-patterns)                  |
