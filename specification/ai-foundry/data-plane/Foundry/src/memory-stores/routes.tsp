@@ -10,8 +10,9 @@ namespace Azure.AI.Projects;
 
 @tag("Memory Stores")
 interface MemoryStores {
+  /** Creates a memory store resource with the provided configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a memory store.")
+  @summary("Create a memory store")
   @operationId("createMemoryStore")
   @post
   @route("/memory_stores")
@@ -22,8 +23,9 @@ interface MemoryStores {
     MemoryStoreObject
   >;
 
+  /** Updates the specified memory store with the supplied configuration changes. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update a memory store.")
+  @summary("Update a memory store")
   @operationId("updateMemoryStore")
   @post
   @route("/memory_stores/{name}")
@@ -34,8 +36,9 @@ interface MemoryStores {
     MemoryStoreObject
   >;
 
+  /** Retrieves the specified memory store and its current configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Retrieve a memory store.")
+  @summary("Get a memory store")
   @operationId("getMemoryStore")
   @get
   @route("/memory_stores/{name}")
@@ -46,8 +49,9 @@ interface MemoryStores {
     MemoryStoreObject
   >;
 
+  /** Returns the memory stores available to the caller. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List all memory stores.")
+  @summary("List memory stores")
   @operationId("listMemoryStores")
   @get
   @list
@@ -59,8 +63,9 @@ interface MemoryStores {
     AgentsPagedResult<MemoryStoreObject>
   >;
 
+  /** Deletes the specified memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a memory store.")
+  @summary("Delete a memory store")
   @operationId("deleteMemoryStore")
   @delete
   @route("/memory_stores/{name}")
@@ -71,8 +76,9 @@ interface MemoryStores {
     DeleteMemoryStoreResponse
   >;
 
+  /** Searches the specified memory store for memories relevant to the provided conversation context. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Search for relevant memories from a memory store based on conversation context.")
+  @summary("Search memories")
   @operationId("searchMemories")
   @post
   @route("/memory_stores/{name}:search_memories")
@@ -83,8 +89,12 @@ interface MemoryStores {
     MemoryStoreSearchResponse
   >;
 
+  /**
+   * Starts an update that writes conversation memories into the specified memory store.
+   * The operation returns a long-running status location for polling the update result.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update memory store with conversation memories.")
+  @summary("Update memories")
   @operationId("updateMemories")
   @post
   @route("/memory_stores/{name}:update_memories")
@@ -98,8 +108,9 @@ interface MemoryStores {
       Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
   >;
 
+  /** Retrieves the status and result of a memory store update operation. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Get memory store update result.")
+  @summary("Get an update result")
   @operationId("getUpdateResult")
   @get
   @route("/memory_stores/{name}/updates/{update_id}")
@@ -110,8 +121,9 @@ interface MemoryStores {
     MemoryStoreUpdateResponse
   >;
 
+  /** Deletes all memories in the specified memory store that are associated with the provided scope. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete all memories associated with a specific scope from a memory store.")
+  @summary("Delete memories by scope")
   @operationId("deleteScopeMemories")
   @post
   @route("/memory_stores/{name}:delete_scope")
@@ -122,8 +134,9 @@ interface MemoryStores {
     MemoryStoreDeleteScopeResponse
   >;
 
+  /** Creates a memory item in the specified memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a memory item in a memory store.")
+  @summary("Create a memory item")
   @operationId("createMemory")
   @post
   @route("/memory_stores/{name}/items")
@@ -134,8 +147,9 @@ interface MemoryStores {
     MemoryItem
   >;
 
+  /** Updates the specified memory item in the memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Update a memory item in a memory store.")
+  @summary("Update a memory item")
   @operationId("updateMemory")
   @post
   @route("/memory_stores/{name}/items/{memory_id}")
@@ -146,8 +160,9 @@ interface MemoryStores {
     MemoryItem
   >;
 
+  /** Retrieves the specified memory item from the memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Retrieve a memory item from a memory store.")
+  @summary("Get a memory item")
   @operationId("getMemory")
   @get
   @route("/memory_stores/{name}/items/{memory_id}")
@@ -158,8 +173,9 @@ interface MemoryStores {
     MemoryItem
   >;
 
+  /** Returns memory items from the specified memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("List all memory items in a memory store.")
+  @summary("List memory items")
   @operationId("listMemories")
   @post
   @list
@@ -171,8 +187,9 @@ interface MemoryStores {
     AgentsPagedResult<MemoryItem>
   >;
 
+  /** Deletes the specified memory item from the memory store. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Delete a memory item from a memory store.")
+  @summary("Delete a memory item")
   @operationId("deleteMemory")
   @delete
   @route("/memory_stores/{name}/items/{memory_id}")

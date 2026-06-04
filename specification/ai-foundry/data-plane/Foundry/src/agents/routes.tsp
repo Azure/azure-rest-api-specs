@@ -11,8 +11,9 @@ namespace Azure.AI.Projects;
 @tag("Agents")
 interface Agents {
   /**
-   * Retrieves the agent.
+   * Retrieves an agent definition by its unique name.
    */
+  @summary("Get an agent")
   @get
   @route("/agents/{agent_name}")
   getAgent is FoundryDataPlaneOperation<
@@ -24,8 +25,9 @@ interface Agents {
   >;
 
   /**
-   * Creates the agent.
+   * Creates a new agent from the request payload and returns the created resource.
    */
+  @summary("Create an agent")
   @post
   @route("/agents")
   @sharedRoute
@@ -49,6 +51,7 @@ interface Agents {
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @summary("Create a new code-based agent")
   @post
   @route("/agents")
   @sharedRoute
@@ -79,6 +82,7 @@ interface Agents {
    * Updates the agent by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
+  @summary("Update an agent")
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
@@ -105,6 +109,7 @@ interface Agents {
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent update, not BYOS."
+  @summary("Update a code-based agent")
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
@@ -137,8 +142,9 @@ interface Agents {
   >;
 
   /**
-   * Creates an agent from a manifest.
+   * Imports the provided manifest to create an agent and returns the created resource.
    */
+  @summary("Create an agent from a manifest")
   @post
   @route("/agents:import")
   createAgentFromManifest is FoundryDataPlaneOperation<
@@ -150,6 +156,7 @@ interface Agents {
    * Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
+  @summary("Update an agent from a manifest")
   @post
   @route("/agents/{agent_name}/import")
   updateAgentFromManifest is FoundryDataPlaneOperation<
@@ -167,6 +174,7 @@ interface Agents {
    * is rejected with HTTP 409 unless `force` is set to true. When force is true, all
    * associated sessions are cascade-deleted along with the agent and its versions.
    */
+  @summary("Delete an agent")
   @delete
   @route("/agents/{agent_name}")
   deleteAgent is FoundryDataPlaneOperation<
@@ -181,8 +189,9 @@ interface Agents {
   >;
 
   /**
-   * Returns the list of all agents.
+   * Returns a paged collection of agent resources.
    */
+  @summary("List agents")
   @route("/agents")
   @list
   listAgents is FoundryDataPlaneOperation<
@@ -193,8 +202,9 @@ interface Agents {
   >;
 
   /**
-   * Create a new agent version.
+   * Creates a new version for the specified agent and returns the created version resource.
    */
+  @summary("Create an agent version")
   @post
   @route("/agents/{agent_name}/versions")
   @sharedRoute
@@ -220,8 +230,9 @@ interface Agents {
   >;
 
   /**
-   * Create a new agent version from a manifest.
+   * Imports the provided manifest to create a new version for the specified agent.
    */
+  @summary("Create an agent version from manifest")
   @post
   @route("/agents/{agent_name}/versions:import")
   createAgentVersionFromManifest is FoundryDataPlaneOperation<
@@ -242,8 +253,9 @@ interface Agents {
   >;
 
   /**
-   * Retrieves a specific version of an agent.
+   * Retrieves the specified version of an agent by its agent name and version identifier.
    */
+  @summary("Get an agent version")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}")
   getAgentVersion is FoundryDataPlaneOperation<
@@ -262,6 +274,7 @@ interface Agents {
    * sessions, the request is rejected with HTTP 409 unless `force` is set to true. When
    * force is true, all sessions associated with this version are cascade-deleted.
    */
+  @summary("Delete an agent version")
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
   deleteAgentVersion is FoundryDataPlaneOperation<
@@ -279,8 +292,9 @@ interface Agents {
   >;
 
   /**
-   * Returns the list of versions of an agent.
+   * Returns a paged collection of versions for the specified agent.
    */
+  @summary("List agent versions")
   @get
   @route("/agents/{agent_name}/versions")
   @list
@@ -295,9 +309,10 @@ interface Agents {
   >;
 
   /**
-   * Updates an agent endpoint.
+   * Applies a merge-patch update to the specified agent endpoint configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
   @extension(
@@ -310,7 +325,9 @@ interface Agents {
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the agent to retrieve. */
-      @path agent_name: string;
+      @summary("The name of the agent to retrieve")
+      @path
+      agent_name: string;
 
       @header("Content-Type") contentType: "application/merge-patch+json";
       ...PatchAgentRequest;
@@ -318,14 +335,15 @@ interface Agents {
     AgentObject
   >;
 
-  /*
-   * Create a new agent version from code. Uploads the code zip and creates a new version
+  /**
+   * Creates a new agent version from code. Uploads the code zip and creates a new version
    * for an existing agent. The SHA-256 hex digest of the zip is provided in the
    * `x-ms-code-zip-sha256` header for integrity and dedup.
    * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @summary("Create an agent version from code")
   @post
   @route("/agents/{agent_name}/versions")
   @sharedRoute
@@ -358,7 +376,7 @@ interface Agents {
   >;
 
   /**
-   * Download the code zip for a code-based hosted agent.
+   * Downloads the code zip for a code-based hosted agent.
    * Returns the previously-uploaded zip (`application/zip`).
    *
    * If `agent_version` is supplied, returns that version's code zip; otherwise
@@ -367,6 +385,7 @@ interface Agents {
    * The SHA-256 digest of the returned bytes matches the `content_hash` on the
    * resolved version's `code_configuration`.
    */
+  @summary("Download agent code")
   @get
   @route("/agents/{agent_name}/code:download")
   @extension(
@@ -395,6 +414,7 @@ interface Agents {
    * The endpoint resolves the backing agent version from `version_indicator` and
    * enforces session ownership using the provided isolation key for session-mutating operations.
    */
+  @summary("Create a session")
   @post
   @route("/agents/{agent_name}/endpoint/sessions")
   @extension(
@@ -416,8 +436,9 @@ interface Agents {
   >;
 
   /**
-   * Retrieves a session by ID.
+   * Retrieves the details of a hosted agent session by agent name and session identifier.
    */
+  @summary("Get a session")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
@@ -444,6 +465,7 @@ interface Agents {
    * Deletes a session synchronously.
    * Returns 204 No Content when the session is deleted or does not exist.
    */
+  @summary("Delete a session")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
@@ -467,9 +489,9 @@ interface Agents {
   >;
 
   /**
-   * Stops a session.
-   * Returns 204 No Content when the stop succeeds.
+   * Terminates the specified hosted agent session and returns 204 No Content when the request succeeds.
    */
+  @summary("Stop a session")
   @post
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
   @extension(
@@ -491,8 +513,9 @@ interface Agents {
   >;
 
   /**
-   * Returns a list of sessions for the specified agent.
+   * Returns a paged collection of sessions associated with the specified agent endpoint.
    */
+  @summary("List sessions for an agent")
   @get
   @route("/agents/{agent_name}/endpoint/sessions")
   @list
@@ -542,6 +565,7 @@ interface Agents {
    * The stream remains open until the client disconnects or the server
    * terminates the connection. Clients should handle reconnection as needed.
    */
+  @summary("Stream console logs for a hosted agent session")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream")
   @extension(

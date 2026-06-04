@@ -10,8 +10,6 @@ namespace Azure.AI.Projects {
   // Operation scope customizations - don't generate OpenAI operations that we'll use the OpenAI client for
   // ------------------------------------------------------------------------------------------------
   @@scope(Responses.createResponse, "!csharp");
-  @@scope(Responses.createResponseStream, "!csharp");
-  @@scope(Responses.getResponseStream, "!csharp");
   @@scope(Responses.getResponse, "!csharp");
   @@scope(Responses.deleteResponse, "!csharp");
   @@scope(Responses.cancelResponse, "!csharp");
