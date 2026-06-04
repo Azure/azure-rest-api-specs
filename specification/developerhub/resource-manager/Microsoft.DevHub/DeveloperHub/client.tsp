@@ -12,7 +12,7 @@ using Microsoft.DevHub;
 @@clientName(Microsoft.DevHub, "DeveloperHubServiceClient", "javascript,java");
 @@clientName(Microsoft.DevHub, "DevHubMgmtClient", "python");
 @@clientName(ACR, "Acr", "java,javascript");
-@@clientName(Deployment, "DeploymentProperties", "java,javascript");
+@@clientName(Deployment, "DeploymentProperties", "java,javascript,python");
 // consistency on "AdoOAuth"
 @@clientName(AdooAuthResponse, "AdoOAuthResponse", "java");
 @@clientName(AdooAuthResponses, "AdoOAuthResponses", "java");
