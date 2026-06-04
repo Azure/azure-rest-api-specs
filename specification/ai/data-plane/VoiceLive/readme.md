@@ -26,6 +26,15 @@ input-file:
   - stable/v1/VoiceLive.json
 ```
 
+### Tag: package-virtual-public-preview
+
+These settings apply only when `--tag=package-virtual-public-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-virtual-public-preview'
+input-file:
+  - preview/virtual-public-preview/VoiceLive.json
+```
+
 ### Tag: package-2026-06-01-preview
 
 These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
