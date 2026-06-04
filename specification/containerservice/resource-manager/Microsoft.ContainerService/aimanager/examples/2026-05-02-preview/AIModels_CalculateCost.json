@@ -1,0 +1,51 @@
+{
+  "title": "AIModels_CalculateCost_MaximumSet",
+  "operationId": "AIModels_CalculateCost",
+  "parameters": {
+    "api-version": "2026-05-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus",
+    "aiModelName": "9806f0c862fdd920",
+    "body": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "currency": "USD",
+        "plans": [
+          {
+            "vmSize": "Standard_NC24ads_A100_v4",
+            "quantization": "fp16",
+            "vmsPerReplica": 1,
+            "maxAvailableReplicas": 4,
+            "servingPerformanceEstimation": {
+              "relativeLatencyScore": 0.72,
+              "relativeThroughputScore": 0.65
+            },
+            "vmHourlyPrice": 3.67,
+            "totalHourlyPrice": 3.67,
+            "priceAsOf": "2026-05-05T06:05:51.775Z",
+            "feasible": true
+          },
+          {
+            "vmSize": "Standard_ND96isr_H100_v5",
+            "quantization": "fp16",
+            "vmsPerReplica": 1,
+            "maxAvailableReplicas": 0,
+            "servingPerformanceEstimation": {
+              "relativeLatencyScore": 1,
+              "relativeThroughputScore": 1
+            },
+            "vmHourlyPrice": 98.32,
+            "priceAsOf": "2026-05-05T06:05:51.775Z",
+            "feasible": false,
+            "infeasibilityReason": {
+              "code": "InsufficientQuota",
+              "message": "Subscription does not have sufficient H100 quota in the target region."
+            }
+          }
+        ]
+      }
+    }
+  }
+}
