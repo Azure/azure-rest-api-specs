@@ -126,7 +126,12 @@ using Microsoft.StorageSync;
 @@clientLocation(
   OperationStatusOperationGroup.get,
   "OperationStatus",
-  "!csharp"
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  OperationStatusOperationGroup.get,
+  "OperationStatusOperations",
+  "javascript"
 );
 @@clientLocation(
   StorageSyncServices.listByStorageSyncService,
@@ -145,5 +150,9 @@ using Microsoft.StorageSync;
 @@clientName(ServerEndpoints.recallAction, "recallAction", "!csharp");
 
 @@clientLocation(locationOperationStatusGet, "MicrosoftStorageSync", "go");
-@@clientName(CloudEndpoints.restoreheartbeat, "restoreheartbeat", "go");
+@@clientName(
+  CloudEndpoints.restoreheartbeat,
+  "restoreheartbeat",
+  "go,javascript"
+);
 @@alternateType(CheckNameAvailabilityParameters.type, "string", "go");

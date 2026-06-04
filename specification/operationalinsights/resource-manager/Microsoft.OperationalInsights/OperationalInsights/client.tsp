@@ -9,6 +9,11 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsManagementClient",
   "javascript,java"
 );
+@@clientName(
+  Microsoft.OperationalInsights,
+  "LogAnalyticsManagementClient",
+  "python"
+);
 @@clientName(LogAnalyticsQueryPacks.search, "listSearch", "javascript");
 
 @@clientName(NetworkSecurityPerimeterConfigurations.getNSP, "getNsp", "java");
