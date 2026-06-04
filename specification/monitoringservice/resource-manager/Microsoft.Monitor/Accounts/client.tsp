@@ -14,6 +14,11 @@ using Microsoft.Monitor;
   "python,go"
 );
 
+@@clientName(AzureMonitorWorkspaceResource, "MonitorWorkspace", "csharp");
+@@clientName(AzureMonitorWorkspace, "MonitorWorkspaceProperties", "csharp");
+@@clientName(IssueResource, "MonitorIssue", "csharp");
+@@clientName(IssueProperties, "MonitorIssueProperties", "csharp");
+
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties,
 // provide write-specific models that omit those fields so SDK users see a clean API.
@@ -110,3 +115,4 @@ namespace Microsoft.Monitor {
   RelatedResourcesCreate,
   "javascript"
 );
+
