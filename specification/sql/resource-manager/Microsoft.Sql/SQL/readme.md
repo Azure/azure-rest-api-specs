@@ -5766,7 +5766,6 @@ suppressions:
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].patch.parameters["3"].schema.properties.properties
   - code: PatchBodyParametersSchema
-    from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].patch.parameters["5"].schema.properties.sku
   - code: MissingSegmentsInNestedResourceListOperation
     from: ElasticPools.json
