@@ -3001,6 +3001,9 @@
         "x-ms-examples": {
           "Create or update Identity Binding": {
             "$ref": "./examples/IdentityBindings_Create_Or_Update.json"
+          },
+          "Create or update Identity Binding with allowed subjects": {
+            "$ref": "./examples/IdentityBindings_Create_Or_UpdateWithAllowedSubjects.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7529,11 +7532,11 @@
       "description": "A subject authorized to use the identity binding for token exchange.\nThe namespace selector is required and must be non-empty. The service\naccount selector is optional; when omitted, all service accounts in\nmatching namespaces are authorized. Selectors within a single\nAllowedSubject are AND'd; multiple AllowedSubjects on an\nIdentityBinding are OR'd.",
       "properties": {
         "namespaceSelector": {
-          "$ref": "#/definitions/IdentityBindingLabelSelector",
+          "$ref": "#/definitions/LabelSelector",
           "description": "Label selector matching the namespaces in which this identity may be\nused. Must be non-empty: an empty selector would match every namespace\nand is rejected to prevent overly permissive bindings. Use the built-in\n`kubernetes.io/metadata.name` label to target specific namespaces by\nname."
         },
         "serviceAccountSelector": {
-          "$ref": "#/definitions/IdentityBindingLabelSelector",
+          "$ref": "#/definitions/LabelSelector",
           "description": "Optional label selector matching the service accounts (within the\nnamespaces matched by `namespaceSelector`) that may use this identity.\nWhen omitted, all service accounts in matching namespaces are\nauthorized. When provided, it must be non-empty."
         }
       },
@@ -8703,56 +8706,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "IdentityBindingLabelSelector": {
-      "type": "object",
-      "description": "A Kubernetes-style label selector. Mirrors\nk8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector. The resulting\nselector matches an object if and only if all `matchLabels` entries\nmatch and all `matchExpressions` requirements are satisfied.",
-      "properties": {
-        "matchLabels": {
-          "type": "object",
-          "description": "Map of key-value pairs that must all match (equality-based). Up to 10\nkeys are permitted per selector. Keys and values must conform to\nKubernetes label syntax (RFC 1123).",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "matchExpressions": {
-          "type": "array",
-          "description": "Set-based match requirements. Up to 10 requirements are permitted per\nselector.",
-          "maxItems": 10,
-          "items": {
-            "$ref": "#/definitions/IdentityBindingLabelSelectorRequirement"
-          },
-          "x-ms-identifiers": [
-            "key"
-          ]
-        }
-      }
-    },
-    "IdentityBindingLabelSelectorRequirement": {
-      "type": "object",
-      "description": "A single set-based requirement on a label key. Mirrors\nk8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The label key the requirement applies to."
-        },
-        "operator": {
-          "$ref": "#/definitions/Operator",
-          "description": "The relationship of the key to a set of values. Must be one of\n`In`, `NotIn`, `Exists`, or `DoesNotExist`. For `In` and `NotIn`,\n`values` must be non-empty. For `Exists` and `DoesNotExist`,\n`values` must be empty."
-        },
-        "values": {
-          "type": "array",
-          "description": "An array of string values, with semantics defined by `operator`. Up\nto 50 values are permitted per requirement.",
-          "maxItems": 50,
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "key",
-        "operator"
       ]
     },
     "IdentityBindingListResult": {

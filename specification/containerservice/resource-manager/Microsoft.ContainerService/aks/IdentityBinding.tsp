@@ -172,7 +172,7 @@ model AllowedSubject {
    * `kubernetes.io/metadata.name` label to target specific namespaces by
    * name.
    */
-  namespaceSelector: IdentityBindingLabelSelector;
+  namespaceSelector: LabelSelector;
 
   /**
    * Optional label selector matching the service accounts (within the
@@ -180,60 +180,7 @@ model AllowedSubject {
    * When omitted, all service accounts in matching namespaces are
    * authorized. When provided, it must be non-empty.
    */
-  serviceAccountSelector?: IdentityBindingLabelSelector;
-}
-
-/**
- * A Kubernetes-style label selector. Mirrors
- * k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector. The resulting
- * selector matches an object if and only if all `matchLabels` entries
- * match and all `matchExpressions` requirements are satisfied.
- */
-@added(Versions.v2026_05_02_preview)
-model IdentityBindingLabelSelector {
-  /**
-   * Map of key-value pairs that must all match (equality-based). Up to 10
-   * keys are permitted per selector. Keys and values must conform to
-   * Kubernetes label syntax (RFC 1123).
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
-  matchLabels?: Record<string>;
-
-  /**
-   * Set-based match requirements. Up to 10 requirements are permitted per
-   * selector.
-   */
-  @identifiers(#["key"])
-  @maxItems(10)
-  matchExpressions?: IdentityBindingLabelSelectorRequirement[];
-}
-
-/**
- * A single set-based requirement on a label key. Mirrors
- * k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement.
- */
-@added(Versions.v2026_05_02_preview)
-model IdentityBindingLabelSelectorRequirement {
-  /**
-   * The label key the requirement applies to.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "The 'key' property refers to a Kubernetes label selector key, not a secret or credential."
-  key: string;
-
-  /**
-   * The relationship of the key to a set of values. Must be one of
-   * `In`, `NotIn`, `Exists`, or `DoesNotExist`. For `In` and `NotIn`,
-   * `values` must be non-empty. For `Exists` and `DoesNotExist`,
-   * `values` must be empty.
-   */
-  operator: Operator;
-
-  /**
-   * An array of string values, with semantics defined by `operator`. Up
-   * to 50 values are permitted per requirement.
-   */
-  @maxItems(50)
-  values?: string[];
+  serviceAccountSelector?: LabelSelector;
 }
 
 /**
