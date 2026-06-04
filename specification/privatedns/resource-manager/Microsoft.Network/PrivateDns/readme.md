@@ -26,7 +26,16 @@ These are the global settings for the Private DNS API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-06
+tag: package-2026-06-preview
+```
+
+### Tag: package-2026-06-preview
+
+These settings apply only when `--tag=package-2026-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06-preview'
+input-file:
+  - preview/2026-06-01-preview/privatedns.json
 ```
 
 ### Tag: package-2018-09
