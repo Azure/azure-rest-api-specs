@@ -28,6 +28,7 @@ import "./SessionHostConfiguration.tsp";
 import "./SessionHostUpdateStatus.tsp";
 import "./SessionHostProvisioningStatus.tsp";
 import "./back-compat.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

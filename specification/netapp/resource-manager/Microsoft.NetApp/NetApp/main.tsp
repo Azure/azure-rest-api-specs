@@ -39,6 +39,7 @@ import "./Elastic/ElasticBackupPolicy.tsp";
 import "./Elastic/ElasticBackup.tsp";
 import "./ActiveDirectory.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

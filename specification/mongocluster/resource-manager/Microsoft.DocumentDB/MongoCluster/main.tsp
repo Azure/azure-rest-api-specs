@@ -9,6 +9,7 @@ import "./FirewallRule.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./User.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
