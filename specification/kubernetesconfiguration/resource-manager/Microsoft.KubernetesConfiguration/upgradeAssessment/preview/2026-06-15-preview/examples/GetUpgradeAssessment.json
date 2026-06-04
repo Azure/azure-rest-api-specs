@@ -1,0 +1,122 @@
+{
+  "title": "Get Upgrade Assessment",
+  "operationId": "UpgradeAssessments_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "upgradeAssessmentName": "current",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/upgradeAssessment/current",
+        "name": "current",
+        "type": "Microsoft.KubernetesConfiguration/upgradeAssessment",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-02T10:15:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-02T10:15:00.000Z"
+        },
+        "properties": {
+          "currentKubernetesVersion": "1.27.9",
+          "targetKubernetesVersion": "1.30.0",
+          "assessmentTime": "2026-06-02T10:15:00Z",
+          "overallSeverity": "Critical",
+          "componentCompatibility": [
+            {
+              "name": "kube-proxy",
+              "version": "1.27.9",
+              "compatibilityStatus": "Compatible",
+              "severity": "Pass"
+            },
+            {
+              "name": "coredns",
+              "version": "1.10.1",
+              "compatibilityStatus": "Compatible",
+              "severity": "Pass"
+            },
+            {
+              "name": "cert-manager",
+              "version": "1.8.0",
+              "compatibilityStatus": "Incompatible",
+              "severity": "Critical",
+              "minCompatibleVersion": "1.12.0",
+              "notes": "cert-manager v1.8.0 does not support Kubernetes 1.30+. Upgrade to >= 1.12.0."
+            },
+            {
+              "name": "ingress-nginx",
+              "version": "1.2.1",
+              "compatibilityStatus": "Incompatible",
+              "severity": "Critical",
+              "minCompatibleVersion": "1.9.0",
+              "notes": "ingress-nginx v1.2.1 uses networking.k8s.io/v1beta1 which is removed in Kubernetes 1.29. Upgrade to >= 1.9.0."
+            }
+          ],
+          "deprecatedApis": [
+            {
+              "group": "networking.k8s.io",
+              "version": "v1beta1",
+              "resource": "ingresses",
+              "removedRelease": "1.22",
+              "usageMetrics": {
+                "get": 142,
+                "list": 89,
+                "watch": 512,
+                "post": 3,
+                "put": 7
+              },
+              "lastUsageObservedAt": "2026-06-02T09:58:34Z",
+              "severity": "Critical"
+            },
+            {
+              "group": "policy",
+              "version": "v1beta1",
+              "resource": "poddisruptionbudgets",
+              "removedRelease": "1.25",
+              "usageMetrics": {
+                "get": 54,
+                "list": 31,
+                "watch": 210
+              },
+              "lastUsageObservedAt": "2026-06-02T10:01:12Z",
+              "severity": "Critical"
+            }
+          ],
+          "readinessChecks": [
+            {
+              "category": "APIServerHealth",
+              "severity": "Pass",
+              "details": "API server /healthz and /readyz endpoints responded successfully."
+            },
+            {
+              "category": "NodeStatus",
+              "name": "aks-nodepool1-12345678-vmss000000",
+              "severity": "Pass",
+              "details": "Node is Ready. Kubelet version: v1.27.9."
+            },
+            {
+              "category": "NodeStatus",
+              "name": "aks-nodepool1-12345678-vmss000001",
+              "severity": "Pass",
+              "details": "Node is Ready. Kubelet version: v1.27.9."
+            },
+            {
+              "category": "PodDisruptionBudget",
+              "name": "default/my-app",
+              "severity": "Warning",
+              "details": "PodDisruptionBudget 'my-app' in namespace 'default' may block node drain during upgrade."
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

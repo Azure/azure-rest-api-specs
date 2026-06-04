@@ -177,9 +177,6 @@
         "x-ms-examples": {
           "Get KubeInventory": {
             "$ref": "./examples/GetKubeInventory.json"
-          },
-          "Get Upgrade Assessment": {
-            "$ref": "./examples/GetUpgradeAssessment.json"
           }
         }
       }
@@ -205,78 +202,6 @@
           }
         }
       }
-    },
-    "CompatibilityStatus": {
-      "type": "string",
-      "description": "Compatibility status of a cluster component with the target Kubernetes version.",
-      "enum": [
-        "Compatible",
-        "Untested",
-        "Incompatible",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "CompatibilityStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Compatible",
-            "value": "Compatible",
-            "description": "Component is compatible with the target version."
-          },
-          {
-            "name": "Untested",
-            "value": "Untested",
-            "description": "Compatibility with the target version has not been tested."
-          },
-          {
-            "name": "Incompatible",
-            "value": "Incompatible",
-            "description": "Component is incompatible with the target version."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Compatibility status is unknown."
-          }
-        ]
-      }
-    },
-    "ComponentCompatibility": {
-      "type": "object",
-      "description": "Compatibility status of a single cluster component with the target Kubernetes version.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Component name (e.g., 'containerd', 'calico')."
-        },
-        "version": {
-          "type": "string",
-          "description": "Installed component version."
-        },
-        "compatibilityStatus": {
-          "$ref": "#/definitions/CompatibilityStatus",
-          "description": "Compatibility of the component with the target Kubernetes version."
-        },
-        "severity": {
-          "$ref": "#/definitions/Severity",
-          "description": "Severity associated with this compatibility result."
-        },
-        "minCompatibleVersion": {
-          "type": "string",
-          "description": "Minimum component version known to be compatible with targetKubernetesVersion."
-        },
-        "notes": {
-          "type": "string",
-          "description": "Additional notes about compatibility."
-        }
-      },
-      "required": [
-        "name",
-        "version",
-        "compatibilityStatus",
-        "severity"
-      ]
     },
     "ConditionStatus": {
       "type": "string",
@@ -584,47 +509,6 @@
         "restartCount"
       ]
     },
-    "DeprecatedApiUsage": {
-      "type": "object",
-      "description": "A deprecated Kubernetes API still in use in the cluster.",
-      "properties": {
-        "group": {
-          "type": "string",
-          "description": "API group (e.g., 'flowcontrol.apiserver.k8s.io')."
-        },
-        "version": {
-          "type": "string",
-          "description": "API version (e.g., 'v1beta3')."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Resource plural name (e.g., 'flowschemas')."
-        },
-        "removedRelease": {
-          "type": "string",
-          "description": "Kubernetes release in which this API is removed (e.g., '1.32')."
-        },
-        "usageMetrics": {
-          "$ref": "#/definitions/HttpVerbUsageMetrics",
-          "description": "HTTP verb call counts observed for this deprecated API."
-        },
-        "lastUsageObservedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC timestamp of the last observed usage."
-        },
-        "severity": {
-          "$ref": "#/definitions/Severity",
-          "description": "Severity of continued use of this deprecated API."
-        }
-      },
-      "required": [
-        "group",
-        "version",
-        "resource",
-        "severity"
-      ]
-    },
     "EnvVar": {
       "type": "object",
       "description": "An environment variable set in a container.",
@@ -641,47 +525,6 @@
       "required": [
         "name"
       ]
-    },
-    "HttpVerbUsageMetrics": {
-      "type": "object",
-      "description": "Observed call counts per HTTP verb for a deprecated Kubernetes API.",
-      "properties": {
-        "get": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of GET requests observed."
-        },
-        "list": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of LIST requests observed."
-        },
-        "post": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of POST (create) requests observed."
-        },
-        "put": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of PUT (replace) requests observed."
-        },
-        "patch": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of PATCH requests observed."
-        },
-        "delete": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of DELETE requests observed."
-        },
-        "watch": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of WATCH requests observed."
-        }
-      }
     },
     "KubeInventory": {
       "type": "object",
@@ -729,7 +572,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service', 'UpgradeAssessment')."
+          "description": "Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service')."
         },
         "metadata": {
           "$ref": "#/definitions/KubernetesObjectMeta",
@@ -957,7 +800,7 @@
     },
     "KubernetesResourceSpec": {
       "type": "object",
-      "description": "Desired state (spec) of a Kubernetes resource.\n\nWell-known fields for native workloads (Pod, Deployment, Service, etc.) are typed\ndirectly. UpgradeAssessment spec fields are merged in as optional typed properties.\nFields not covered by any typed property can be placed in additionalFields.",
+      "description": "Desired state (spec) of a Kubernetes resource.\n\nWell-known fields for native workloads (Pod, Deployment, Service, etc.) are typed\ndirectly. Fields not covered by any typed property can be placed in additionalFields.",
       "properties": {
         "nodeName": {
           "type": "string",
@@ -1039,14 +882,6 @@
           "$ref": "#/definitions/PodSecurityContext",
           "description": "Security context applied at the pod level.\nPopulated for Pod, Deployment, StatefulSet, and DaemonSet resources."
         },
-        "currentKubernetesVersion": {
-          "type": "string",
-          "description": "Current Kubernetes version running on the cluster (e.g., '1.29').\nPopulated for UpgradeAssessment resources."
-        },
-        "targetKubernetesVersion": {
-          "type": "string",
-          "description": "Target Kubernetes version to evaluate for upgrade (e.g., '1.30').\nPopulated for UpgradeAssessment resources."
-        },
         "additionalFields": {
           "type": "array",
           "description": "Additional resource-specific fields not represented by the typed properties above.\nUsed for uncommon fields and custom resource definition instances.",
@@ -1061,7 +896,7 @@
     },
     "KubernetesResourceStatus": {
       "type": "object",
-      "description": "Observed state (status) of a Kubernetes resource, written by the controller.\n\nWell-known fields for native workloads (Pod, Deployment, Service, etc.) are typed\ndirectly. UpgradeAssessment status fields are merged in as optional typed properties.\nFields not covered by any typed property can be placed in additionalFields.",
+      "description": "Observed state (status) of a Kubernetes resource, written by the controller.\n\nWell-known fields for native workloads (Pod, Deployment, Service, etc.) are typed\ndirectly. Fields not covered by any typed property can be placed in additionalFields.",
       "properties": {
         "conditions": {
           "type": "array",
@@ -1122,40 +957,6 @@
           "type": "integer",
           "format": "int64",
           "description": "Most recent generation observed by the controller.\nPopulated for Deployment, StatefulSet, DaemonSet, and Pod resources."
-        },
-        "assessmentTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "UTC timestamp when the in-cluster agent last computed this assessment.\nPopulated for UpgradeAssessment resources.",
-          "readOnly": true
-        },
-        "overallSeverity": {
-          "$ref": "#/definitions/Severity",
-          "description": "Rolled-up severity across all checks; highest severity wins.\nPopulated for UpgradeAssessment resources."
-        },
-        "componentCompatibility": {
-          "type": "array",
-          "description": "Per-component compatibility results with the target Kubernetes version.\nPopulated for UpgradeAssessment resources.",
-          "items": {
-            "$ref": "#/definitions/ComponentCompatibility"
-          },
-          "x-ms-identifiers": []
-        },
-        "deprecatedApis": {
-          "type": "array",
-          "description": "Deprecated Kubernetes APIs still in use in the cluster.\nPopulated for UpgradeAssessment resources.",
-          "items": {
-            "$ref": "#/definitions/DeprecatedApiUsage"
-          },
-          "x-ms-identifiers": []
-        },
-        "readinessChecks": {
-          "type": "array",
-          "description": "Cluster readiness check results.\nPopulated for UpgradeAssessment resources.",
-          "items": {
-            "$ref": "#/definitions/ReadinessCheck"
-          },
-          "x-ms-identifiers": []
         },
         "additionalFields": {
           "type": "array",
@@ -1266,116 +1067,6 @@
             "format": "int64"
           }
         }
-      }
-    },
-    "ReadinessCategory": {
-      "type": "string",
-      "description": "Category of a cluster readiness check.",
-      "enum": [
-        "NodeStatus",
-        "APIServerHealth",
-        "PodDisruptionBudget",
-        "Addon",
-        "Storage",
-        "Networking"
-      ],
-      "x-ms-enum": {
-        "name": "ReadinessCategory",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NodeStatus",
-            "value": "NodeStatus",
-            "description": "Node status check."
-          },
-          {
-            "name": "APIServerHealth",
-            "value": "APIServerHealth",
-            "description": "API server health check."
-          },
-          {
-            "name": "PodDisruptionBudget",
-            "value": "PodDisruptionBudget",
-            "description": "Pod disruption budget check."
-          },
-          {
-            "name": "Addon",
-            "value": "Addon",
-            "description": "Addon compatibility check."
-          },
-          {
-            "name": "Storage",
-            "value": "Storage",
-            "description": "Storage compatibility check."
-          },
-          {
-            "name": "Networking",
-            "value": "Networking",
-            "description": "Networking compatibility check."
-          }
-        ]
-      }
-    },
-    "ReadinessCheck": {
-      "type": "object",
-      "description": "A single cluster readiness check result.",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ReadinessCategory",
-          "description": "Category of the readiness check."
-        },
-        "name": {
-          "type": "string",
-          "description": "Subject of the check (node name, workload namespace/name, etc.).\nOptional for cluster-wide checks."
-        },
-        "severity": {
-          "$ref": "#/definitions/Severity",
-          "description": "Severity of the check result."
-        },
-        "details": {
-          "type": "string",
-          "description": "Human-readable reason when severity is not 'pass'."
-        }
-      },
-      "required": [
-        "category",
-        "severity"
-      ]
-    },
-    "Severity": {
-      "type": "string",
-      "description": "Severity of an upgrade-assessment finding or readiness check.",
-      "enum": [
-        "Pass",
-        "Warning",
-        "Critical",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "Severity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pass",
-            "value": "Pass",
-            "description": "No issues found."
-          },
-          {
-            "name": "Warning",
-            "value": "Warning",
-            "description": "Non-blocking issues found; upgrade is possible but action is recommended."
-          },
-          {
-            "name": "Critical",
-            "value": "Critical",
-            "description": "Blocking issues found; upgrade should not proceed without remediation."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Severity could not be determined."
-          }
-        ]
       }
     },
     "Toleration": {

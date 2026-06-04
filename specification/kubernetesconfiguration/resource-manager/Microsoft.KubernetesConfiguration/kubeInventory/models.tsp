@@ -15,154 +15,6 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.KubernetesConfiguration;
 
-// ─── UpgradeAssessment enums ──────────────────────────────────────────────────
-
-/** Severity of an upgrade-assessment finding or readiness check. */
-union Severity {
-  string,
-
-  /** No issues found. */
-  Pass: "Pass",
-
-  /** Non-blocking issues found; upgrade is possible but action is recommended. */
-  Warning: "Warning",
-
-  /** Blocking issues found; upgrade should not proceed without remediation. */
-  Critical: "Critical",
-
-  /** Severity could not be determined. */
-  Unknown: "Unknown",
-}
-
-/** Compatibility status of a cluster component with the target Kubernetes version. */
-union CompatibilityStatus {
-  string,
-
-  /** Component is compatible with the target version. */
-  Compatible: "Compatible",
-
-  /** Compatibility with the target version has not been tested. */
-  Untested: "Untested",
-
-  /** Component is incompatible with the target version. */
-  Incompatible: "Incompatible",
-
-  /** Compatibility status is unknown. */
-  Unknown: "Unknown",
-}
-
-/** Category of a cluster readiness check. */
-union ReadinessCategory {
-  string,
-
-  /** Node status check. */
-  NodeStatus: "NodeStatus",
-
-  /** API server health check. */
-  APIServerHealth: "APIServerHealth",
-
-  /** Pod disruption budget check. */
-  PodDisruptionBudget: "PodDisruptionBudget",
-
-  /** Addon compatibility check. */
-  Addon: "Addon",
-
-  /** Storage compatibility check. */
-  Storage: "Storage",
-
-  /** Networking compatibility check. */
-  Networking: "Networking",
-}
-
-// ─── UpgradeAssessment typed sub-models ──────────────────────────────────────
-
-/** Compatibility status of a single cluster component with the target Kubernetes version. */
-model ComponentCompatibility {
-  /** Component name (e.g., 'containerd', 'calico'). */
-  name: string;
-
-  /** Installed component version. */
-  version: string;
-
-  /** Compatibility of the component with the target Kubernetes version. */
-  compatibilityStatus: CompatibilityStatus;
-
-  /** Severity associated with this compatibility result. */
-  severity: Severity;
-
-  /** Minimum component version known to be compatible with targetKubernetesVersion. */
-  minCompatibleVersion?: string;
-
-  /** Additional notes about compatibility. */
-  notes?: string;
-}
-
-/** Observed call counts per HTTP verb for a deprecated Kubernetes API. */
-model HttpVerbUsageMetrics {
-  /** Number of GET requests observed. */
-  get?: int64;
-
-  /** Number of LIST requests observed. */
-  list?: int64;
-
-  /** Number of POST (create) requests observed. */
-  post?: int64;
-
-  /** Number of PUT (replace) requests observed. */
-  put?: int64;
-
-  /** Number of PATCH requests observed. */
-  patch?: int64;
-
-  /** Number of DELETE requests observed. */
-  delete?: int64;
-
-  /** Number of WATCH requests observed. */
-  watch?: int64;
-}
-
-/** A deprecated Kubernetes API still in use in the cluster. */
-model DeprecatedApiUsage {
-  /** API group (e.g., 'flowcontrol.apiserver.k8s.io'). */
-  group: string;
-
-  /** API version (e.g., 'v1beta3'). */
-  version: string;
-
-  /** Resource plural name (e.g., 'flowschemas'). */
-  resource: string;
-
-  /** Kubernetes release in which this API is removed (e.g., '1.32'). */
-  removedRelease?: string;
-
-  /** HTTP verb call counts observed for this deprecated API. */
-  usageMetrics?: HttpVerbUsageMetrics;
-
-  /** UTC timestamp of the last observed usage. */
-  lastUsageObservedAt?: utcDateTime;
-
-  /** Severity of continued use of this deprecated API. */
-  severity: Severity;
-}
-
-/** A single cluster readiness check result. */
-model ReadinessCheck {
-  /** Category of the readiness check. */
-  category: ReadinessCategory;
-
-  /**
-   * Subject of the check (node name, workload namespace/name, etc.).
-   * Optional for cluster-wide checks.
-   */
-  name?: string;
-
-  /** Severity of the check result. */
-  severity: Severity;
-
-  /** Human-readable reason when severity is not 'pass'. */
-  details?: string;
-}
-
 /** A single Kubernetes label (key/value pair used for selection and grouping). */
 model KubernetesLabel {
   /** Label key (e.g., 'app.kubernetes.io/name'). */
@@ -594,8 +446,7 @@ model ContainerStatus {
  * Desired state (spec) of a Kubernetes resource.
  *
  * Well-known fields for native workloads (Pod, Deployment, Service, etc.) are typed
- * directly. UpgradeAssessment spec fields are merged in as optional typed properties.
- * Fields not covered by any typed property can be placed in additionalFields.
+ * directly. Fields not covered by any typed property can be placed in additionalFields.
  */
 model KubernetesResourceSpec {
   // ── Pod / workload ──────────────────────────────────────────────────────────
@@ -679,20 +530,6 @@ model KubernetesResourceSpec {
    */
   securityContext?: PodSecurityContext;
 
-  // ── UpgradeAssessment (kind = "UpgradeAssessment") ──────────────────────────
-
-  /**
-   * Current Kubernetes version running on the cluster (e.g., '1.29').
-   * Populated for UpgradeAssessment resources.
-   */
-  currentKubernetesVersion?: string;
-
-  /**
-   * Target Kubernetes version to evaluate for upgrade (e.g., '1.30').
-   * Populated for UpgradeAssessment resources.
-   */
-  targetKubernetesVersion?: string;
-
   // ── Generic overflow ────────────────────────────────────────────────────────
 
   /**
@@ -707,8 +544,7 @@ model KubernetesResourceSpec {
  * Observed state (status) of a Kubernetes resource, written by the controller.
  *
  * Well-known fields for native workloads (Pod, Deployment, Service, etc.) are typed
- * directly. UpgradeAssessment status fields are merged in as optional typed properties.
- * Fields not covered by any typed property can be placed in additionalFields.
+ * directly. Fields not covered by any typed property can be placed in additionalFields.
  */
 model KubernetesResourceStatus {
   // ── Universal ───────────────────────────────────────────────────────────────
@@ -766,42 +602,6 @@ model KubernetesResourceStatus {
    */
   observedGeneration?: int64;
 
-  // ── UpgradeAssessment (kind = "UpgradeAssessment") ──────────────────────────
-
-  /**
-   * UTC timestamp when the in-cluster agent last computed this assessment.
-   * Populated for UpgradeAssessment resources.
-   */
-  @visibility(Lifecycle.Read)
-  assessmentTime?: utcDateTime;
-
-  /**
-   * Rolled-up severity across all checks; highest severity wins.
-   * Populated for UpgradeAssessment resources.
-   */
-  overallSeverity?: Severity;
-
-  /**
-   * Per-component compatibility results with the target Kubernetes version.
-   * Populated for UpgradeAssessment resources.
-   */
-  @identifiers(#[])
-  componentCompatibility?: ComponentCompatibility[];
-
-  /**
-   * Deprecated Kubernetes APIs still in use in the cluster.
-   * Populated for UpgradeAssessment resources.
-   */
-  @identifiers(#[])
-  deprecatedApis?: DeprecatedApiUsage[];
-
-  /**
-   * Cluster readiness check results.
-   * Populated for UpgradeAssessment resources.
-   */
-  @identifiers(#[])
-  readinessChecks?: ReadinessCheck[];
-
   // ── Generic overflow ────────────────────────────────────────────────────────
 
   /**
@@ -854,7 +654,7 @@ model KubeInventoryProperties {
    */
   apiVersion?: string;
 
-  /** Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service', 'UpgradeAssessment'). */
+  /** Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service'). */
   kind?: string;
 
   /** Standard Kubernetes object metadata. */
