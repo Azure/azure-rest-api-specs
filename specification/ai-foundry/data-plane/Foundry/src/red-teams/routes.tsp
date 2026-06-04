@@ -9,8 +9,9 @@ alias RedTeamsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOp
 @route("redTeams")
 @tag("Redteams")
 interface RedTeams {
+  /** Retrieves the specified redteam and its configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("Get a redteam by name.")
+  @summary("Get a redteam")
   get is FoundryResourceOperation<
     RedTeam,
     {
@@ -19,8 +20,9 @@ interface RedTeams {
     Azure.Core.Foundations.ResourceOkResponse<RedTeam>
   >;
 
+  /** Returns the redteams available in the current project. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
-  @doc("List a redteam by name.")
+  @summary("List redteams")
   @Rest.listsResource(RedTeam)
   list is FoundryResourceList<
     RedTeam,
@@ -28,8 +30,9 @@ interface RedTeams {
     Azure.Core.Page<RedTeam>
   >;
 
+  /** Submits a new redteam run for execution with the provided configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates a redteam run.")
+  @summary("Create a redteam run")
   @route("runs:run")
   @post
   create is FoundryDataPlaneOperation<
