@@ -148,10 +148,5 @@ union ProvisioningState {
    */
   Deleted: "Deleted",
 
-  /**
-   * File system resource state is unknown
-   */
-  NotSpecified: "NotSpecified",
-
   string,
 }
