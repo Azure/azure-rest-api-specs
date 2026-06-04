@@ -1,0 +1,53 @@
+{
+  "title": "Projects_ListBySubscription",
+  "operationId": "Projects_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "embrProjectId": "embr-1a2b3c4d",
+              "sourceType": "github",
+              "owner": "contoso",
+              "repositoryName": "widget-service",
+              "repositoryFullName": "contoso/widget-service",
+              "repositoryId": 123456789,
+              "isActive": true,
+              "isSuspended": false,
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "environment": "production"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F/resourceGroups/rgembr/providers/Microsoft.Embr/projects/my-project",
+            "name": "my-project",
+            "type": "Microsoft.Embr/projects",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-01-01T00:28:48.610Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-01-01T00:28:48.610Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F/providers/Microsoft.Embr/projects?api-version=2026-06-01-preview&$skipToken=token"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An unexpected error occurred while processing the operation."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "title": "Projects_CreateOrUpdate",
+  "operationId": "Projects_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F",
+    "resourceGroupName": "rgembr",
+    "projectName": "my-project",
+    "resource": {
+      "properties": {
+        "embrProjectId": "embr-1a2b3c4d",
+        "sourceType": "github",
+        "owner": "contoso",
+        "repositoryName": "widget-service",
+        "repositoryFullName": "contoso/widget-service",
+        "repositoryId": 123456789
+      },
+      "tags": {
+        "environment": "production"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "embrProjectId": "embr-1a2b3c4d",
+          "sourceType": "github",
+          "owner": "contoso",
+          "repositoryName": "widget-service",
+          "repositoryFullName": "contoso/widget-service",
+          "repositoryId": 123456789,
+          "isActive": true,
+          "isSuspended": false,
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F/resourceGroups/rgembr/providers/Microsoft.Embr/projects/my-project",
+        "name": "my-project",
+        "type": "Microsoft.Embr/projects",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:28:48.610Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:28:48.610Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F/providers/Microsoft.Embr/locations/eastus/operationStatuses/op-1a2b3c4d?api-version=2026-06-01-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "properties": {
+          "embrProjectId": "embr-1a2b3c4d",
+          "sourceType": "github",
+          "owner": "contoso",
+          "repositoryName": "widget-service",
+          "repositoryFullName": "contoso/widget-service",
+          "repositoryId": 123456789,
+          "isActive": false,
+          "isSuspended": false,
+          "provisioningState": "Accepted"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/3F7E29D8-7B1A-4F5C-9E2D-1A2B3C4D5E6F/resourceGroups/rgembr/providers/Microsoft.Embr/projects/my-project",
+        "name": "my-project",
+        "type": "Microsoft.Embr/projects",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:28:48.610Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:28:48.610Z"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "The repository 'contoso/widget-service' could not be accessed with the provided source configuration."
+        }
+      }
+    }
+  }
+}

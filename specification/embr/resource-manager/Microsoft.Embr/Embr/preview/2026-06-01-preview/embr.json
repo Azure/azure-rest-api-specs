@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Embr",
-    "version": "2026-01-01-preview",
+    "version": "2026-06-01-preview",
     "description": "Microsoft.Embr Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -75,6 +75,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
         }
       }
     },
@@ -109,6 +114,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_ListBySubscription": {
+            "$ref": "./examples/Projects_ListBySubscription.json"
+          }
         }
       }
     },
@@ -146,6 +156,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Projects_ListByResourceGroup": {
+            "$ref": "./examples/Projects_ListByResourceGroup.json"
+          }
         }
       }
     },
@@ -187,6 +202,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
           }
         }
       },
@@ -258,7 +278,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Projects_CreateOrUpdate": {
+            "$ref": "./examples/Projects_CreateOrUpdate.json"
+          }
+        }
       },
       "patch": {
         "operationId": "Projects_Update",
@@ -306,6 +331,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Update.json"
           }
         }
       },
@@ -362,7 +392,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
+          }
+        }
       }
     }
   },
