@@ -53,6 +53,10 @@ directive:
   - rename-model: 
       from: 'LiftrBase.ProvisioningState'
       to: ProvisioningState
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: Qumulo.Storage.json
+    reason: Required properties in the patch body are inherited from the LiftrBase shared library and cannot be changed.
 ```
 
 
