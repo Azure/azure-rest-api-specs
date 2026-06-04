@@ -4,9 +4,9 @@ description: |
   Validates detection of PATCH body violations, PUT response schema mismatches,
   DELETE response issues, and LRO pattern violations.
 
-config:
+defaults:
   runs: 1
-  timeout: 300
+  timeout: "300s"
   model: claude-opus-4.6-1m
   judge_model: claude-sonnet-4.6
 
@@ -120,10 +120,14 @@ stimuli:
       - type: output-contains
         config:
           substring: "202"
+      # Accept any of the canonical aliases for the async-LRO-PUT response-code
+      # violation: the RPC rule ID, the equivalent linter rule names, or the
+      # missing `x-ms-long-running-operation-options` extension that often appears
+      # alongside the response-code citation.
       - type: output-matches
         config:
-          pattern: "(?i)RPC-Async"
+          pattern: "(?i)RPC-Async|LongRunningOperation(?:s)?Options(?:Validator)?|PutResponseCodes|LongRunningResponseStatusCode|x-ms-long-running-operation-options"
       - type: prompt
     rubric:
-      - Flagged the async PUT returning 202 instead of 200/201 with provisioningState per RPC-Async-V1-01
+      - Flagged the async PUT returning 202 instead of 200/201 with provisioningState per RPC-Async-V1-01 (or the equivalent linter rule names PutResponseCodes / LongRunningResponseStatusCode / LongRunningOperationsOptionsValidator)
       - Flagged the DELETE returning a Widget body in the 200 response per RPC-Delete-V1-04
