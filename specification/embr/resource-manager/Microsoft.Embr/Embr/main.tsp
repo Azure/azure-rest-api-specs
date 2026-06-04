@@ -19,10 +19,10 @@ namespace Microsoft.Embr;
 
 /** The available API versions. */
 enum Versions {
-  /** 2026-01-01-preview version */
+  /** 2026-06-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @previewVersion
-  v2026_01_01_preview: "2026-01-01-preview",
+  v2026_01_01_preview: "2026-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

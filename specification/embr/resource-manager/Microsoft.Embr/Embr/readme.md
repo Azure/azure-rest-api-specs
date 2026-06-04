@@ -15,16 +15,16 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2026-01-01
+tag: package-preview-2026-06-01
 ```
 
-### Tag: package-preview-2026-01-01
+### Tag: package-preview-2026-06-01
 
-These settings apply only when `--tag=package-preview-2026-01-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-01-01'
+```yaml $(tag) == 'package-preview-2026-06-01'
 input-file:
-  - preview/2026-01-01-preview/embr.json
+  - preview/2026-06-01-preview/embr.json
 suppressions:
   - code: PathContainsResourceType
   - code: PathResourceProviderMatchNamespace
