@@ -21,7 +21,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "csharp"
 );
 
-@@clientName(conversationAuthoringListDeployments, "listDeployments", "!autorest");
+@@clientName(
+  conversationAuthoringListDeployments,
+  "listDeployments",
+  "!autorest"
+);
 @@clientName(conversationAuthoringListProjects, "listProjects", "!autorest");
 @@clientName(
   conversationAuthoringListSupportedLanguages,
@@ -48,9 +52,21 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "listTrainingConfigVersions",
   "!autorest"
 );
-@@clientName(conversationAuthoringListTrainingJobs, "listTrainingJobs", "!autorest");
-@@clientName(conversationAuthoringListTrainedModels, "listTrainedModels", "!autorest");
-@@clientName(conversationAuthoringListExportedModels, "listExportedModels", "!autorest");
+@@clientName(
+  conversationAuthoringListTrainingJobs,
+  "listTrainingJobs",
+  "!autorest"
+);
+@@clientName(
+  conversationAuthoringListTrainedModels,
+  "listTrainedModels",
+  "!autorest"
+);
+@@clientName(
+  conversationAuthoringListExportedModels,
+  "listExportedModels",
+  "!autorest"
+);
 
 @@clientName(
   ConversationAuthoringProject.copyProjectAuthorization,
@@ -61,7 +77,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(ProjectKind, "ProjectKind", "python");
 @@clientName(ErrorCode, "ConversationAuthoringErrorCode", "!autorest");
 @@clientName(ErrorCode, "ErrorCode", "python");
-@@clientName(InnerErrorCode, "ConversationAuthoringInnerErrorCode", "!autorest");
+@@clientName(
+  InnerErrorCode,
+  "ConversationAuthoringInnerErrorCode",
+  "!autorest"
+);
 @@clientName(InnerErrorCode, "InnerErrorCode", "python");
 @@clientName(StringIndexType, "StringIndexType", "!autorest");
 @@clientName(
@@ -72,13 +92,25 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(ExportedProjectFormat, "ExportedProjectFormat", "python");
 @@clientName(TrainingMode, "ConversationAuthoringTrainingMode", "!autorest");
 @@clientName(TrainingMode, "TrainingMode", "python");
-@@clientName(EvaluationKind, "ConversationAuthoringEvaluationKind", "!autorest");
+@@clientName(
+  EvaluationKind,
+  "ConversationAuthoringEvaluationKind",
+  "!autorest"
+);
 @@clientName(EvaluationKind, "EvaluationKind", "python");
 @@clientName(JobStatus, "ConversationAuthoringOperationStatus", "!autorest");
 @@clientName(JobStatus, "OperationStatus", "python");
-@@clientName(CompositionSetting, "ConversationAuthoringCompositionMode", "!autorest");
+@@clientName(
+  CompositionSetting,
+  "ConversationAuthoringCompositionMode",
+  "!autorest"
+);
 @@clientName(CompositionSetting, "CompositionMode", "python");
-@@clientName(OrchestrationTargetProjectKind, "OrchestrationTargetProjectKind", "!autorest");
+@@clientName(
+  OrchestrationTargetProjectKind,
+  "OrchestrationTargetProjectKind",
+  "!autorest"
+);
 
 @@clientName(
   AnalyzeConversationAuthoringProjectsMetadata,
@@ -130,7 +162,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "ProjectSettings",
   "python"
 );
-@@clientName(InnerErrorModel, "ConversationAuthoringInnerErrorModel", "!autorest");
+@@clientName(
+  InnerErrorModel,
+  "ConversationAuthoringInnerErrorModel",
+  "!autorest"
+);
 @@clientName(InnerErrorModel, "InnerErrorModel", "python");
 @@clientName(
   AnalyzeConversationAuthoringCreateProjectOptions,
@@ -218,7 +254,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "!autorest"
 );
 @@clientName(AnalyzeConversationAuthoringJobState, "State", "python");
-@@clientName(AnalyzeConversationAuthoringJobState.createdDateTime, "createdOn", "!autorest");
+@@clientName(
+  AnalyzeConversationAuthoringJobState.createdDateTime,
+  "createdOn",
+  "!autorest"
+);
 @@clientName(
   AnalyzeConversationAuthoringJobState.lastUpdatedDateTime,
   "lastUpdatedOn",
@@ -980,7 +1020,11 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "!autorest"
 );
 @@clientName(AnalyzeConversationAuthoringModelFile, "ModelFile", "python");
-@@clientName(ExportedModelOptions, "ConversationAuthoringExportedModelDetails", "!autorest");
+@@clientName(
+  ExportedModelOptions,
+  "ConversationAuthoringExportedModelDetails",
+  "!autorest"
+);
 @@clientName(ExportedModelOptions, "ExportedModelDetails", "python");
 @@clientName(
   AnalyzeConversationAuthoringUtteranceEvaluationResult,

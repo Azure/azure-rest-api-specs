@@ -148,7 +148,11 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
-@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat", "!autorest");
+@@clientName(
+  OpenAI.TextResponseFormatConfiguration,
+  "TextResponseFormat",
+  "!autorest"
+);
 @@clientName(
   OpenAI.TextResponseFormatConfigurationResponseFormatText,
   "TextResponseFormatText",

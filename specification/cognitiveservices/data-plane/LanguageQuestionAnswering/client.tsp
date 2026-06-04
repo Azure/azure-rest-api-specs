@@ -8,12 +8,24 @@ using Language.QuestionAnswering;
 @useDependency(Versions.v2025_05_15_preview)
 namespace Language.QuestionAnsweringClientCustomizations;
 
-@@clientName(AnswersOptions.confidenceScoreThreshold, "confidenceThreshold", "!autorest");
+@@clientName(
+  AnswersOptions.confidenceScoreThreshold,
+  "confidenceThreshold",
+  "!autorest"
+);
 @@clientName(AnswersOptions.context, "answerContext", "!autorest");
 @@clientName(AnswersOptions.rankerType, "rankerKind", "!autorest");
-@@clientName(AnswersOptions.answerSpanRequest, "shortAnswerOptions", "!autorest");
+@@clientName(
+  AnswersOptions.answerSpanRequest,
+  "shortAnswerOptions",
+  "!autorest"
+);
 
-@@clientName(KnowledgeBaseAnswerContext.previousUserQuery, "previousQuestion", "!autorest");
+@@clientName(
+  KnowledgeBaseAnswerContext.previousUserQuery,
+  "previousQuestion",
+  "!autorest"
+);
 
 @@clientName(
   ShortAnswerOptions.confidenceScoreThreshold,

@@ -12,9 +12,17 @@ using MapsSearch;
 @@clientName(UsageTypeEnum, "UsageType", "!autorest");
 @@clientName(BoundaryResultTypeEnum, "BoundaryResultType", "!autorest");
 @@clientName(ResolutionEnum, "Resolution", "!autorest");
-@@clientName(ReverseGeocodingResultTypeEnum, "ReverseGeocodingResultType", "!autorest");
+@@clientName(
+  ReverseGeocodingResultTypeEnum,
+  "ReverseGeocodingResultType",
+  "!autorest"
+);
 @@clientName(ResultTypeEnum, "ResultType", "!autorest");
-@@clientName(AutocompleteResultTypeGroupsEnum, "AutocompleteResultTypeGroups", "!autorest");
+@@clientName(
+  AutocompleteResultTypeGroupsEnum,
+  "AutocompleteResultTypeGroups",
+  "!autorest"
+);
 @@clientName(AutocompleteResultTypeEnum, "AutocompleteResultType", "!autorest");
 
 // Flatten operations onto client instead of having an operation group attribute

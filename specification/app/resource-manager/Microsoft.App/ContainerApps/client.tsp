@@ -6,7 +6,6 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.App;
 
-
 namespace Customizations;
 
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");

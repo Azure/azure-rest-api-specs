@@ -15,16 +15,36 @@ namespace Microsoft.Compute;
   "BulkHibernateOperation",
   "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkStart, "BulkStartOperation", "!autorest");
+@@clientName(
+  VirtualMachineBulkOperations.bulkStart,
+  "BulkStartOperation",
+  "!autorest"
+);
 @@clientName(
   VirtualMachineBulkOperations.bulkGetOperationsStatus,
   "BulkGetOperationsStatus",
   "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCancel, "BulkCancelOperations", "!autorest");
-@@clientName(VirtualMachineBulkOperations.bulkCreate, "BulkCreateOperation", "!autorest");
-@@clientName(VirtualMachineBulkOperations.bulkDelete, "BulkDeleteOperation", "!autorest");
-@@clientName(VirtualMachineBulkOperations.bulkReimage, "BulkReimageOperation", "!autorest");
+@@clientName(
+  VirtualMachineBulkOperations.bulkCancel,
+  "BulkCancelOperations",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkCreate,
+  "BulkCreateOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkDelete,
+  "BulkDeleteOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkReimage,
+  "BulkReimageOperation",
+  "!autorest"
+);
 @@clientName(
   VirtualMachineBulkOperations.bulkVdiFlexCreate,
   "BulkVdiFlexCreateOperation",
@@ -88,10 +108,22 @@ namespace Microsoft.Compute;
 @@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "!autorest");
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!autorest");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent", "!autorest");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "!autorest");
+@@clientName(
+  GetOperationStatusRequest,
+  "GetOperationStatusContent",
+  "!autorest"
+);
 @@clientName(CancelOperationsRequest, "CancelOperationsContent", "!autorest");
-@@clientName(ManagedDiskParameters, "ManagedDiskParametersContent", "!autorest");
-@@clientName(DiskEncryptionSetParameters, "DiskEncryptionSetParametersContent", "!autorest");
+@@clientName(
+  ManagedDiskParameters,
+  "ManagedDiskParametersContent",
+  "!autorest"
+);
+@@clientName(
+  DiskEncryptionSetParameters,
+  "DiskEncryptionSetParametersContent",
+  "!autorest"
+);
 
 @@clientName(
   UserInitiatedRedeploy.automaticallyApprove,

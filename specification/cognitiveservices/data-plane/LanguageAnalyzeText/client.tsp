@@ -48,13 +48,21 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(TokenSentimentValue, "TokenSentiment", "!autorest");
 
-@@clientName(PiiCategoriesExclude.ABARoutingNumber, "AbaRoutingNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.ABARoutingNumber,
+  "AbaRoutingNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.ARNationalIdentityNumber,
   "ArNationalIdentityNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.AUBankAccountNumber, "AuBankAccountNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.AUBankAccountNumber,
+  "AuBankAccountNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.AUDriversLicenseNumber,
   "AuDriversLicenseNumber",
@@ -65,11 +73,31 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AuMedicalAccountNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.AUPassportNumber, "AuPassportNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.AUTaxFileNumber, "AuTaxFileNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.AUBusinessNumber, "AuBusinessNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.AUCompanyNumber, "AuCompanyNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.ATIdentityCard, "AtIdentityCard", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.AUPassportNumber,
+  "AuPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUTaxFileNumber,
+  "AuTaxFileNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUBusinessNumber,
+  "AuBusinessNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUCompanyNumber,
+  "AuCompanyNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ATIdentityCard,
+  "AtIdentityCard",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.ATTaxIdentificationNumber,
   "AtTaxIdentificationNumber",
@@ -91,18 +119,42 @@ namespace Language.AnalyzeTextClientCustomizations;
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.AzureSAS, "AzureSas", "!autorest");
-@@clientName(PiiCategoriesExclude.BENationalNumber, "BeNationalNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.BENationalNumberV2, "BeNationalNumberV2", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.BENationalNumber,
+  "BeNationalNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BENationalNumberV2,
+  "BeNationalNumberV2",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.BEValueAddedTaxNumber,
   "BeValueAddedTaxNumber",
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.BRCPFNumber, "BrCpfNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.BRLegalEntityNumber, "BrLegalEntityNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.BRNationalIDRG, "BrNationalIdRg", "!autorest");
-@@clientName(PiiCategoriesExclude.BGUniformCivilNumber, "BgUniformCivilNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.CABankAccountNumber, "CaBankAccountNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.BRLegalEntityNumber,
+  "BrLegalEntityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BRNationalIDRG,
+  "BrNationalIdRg",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BGUniformCivilNumber,
+  "BgUniformCivilNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CABankAccountNumber,
+  "CaBankAccountNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.CADriversLicenseNumber,
   "CaDriversLicenseNumber",
@@ -113,7 +165,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CaHealthServiceNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.CAPassportNumber, "CaPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.CAPassportNumber,
+  "CaPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.CAPersonalHealthIdentification,
   "CaPersonalHealthIdentification",
@@ -124,14 +180,26 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CaSocialInsuranceNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.CLIdentityCardNumber, "ClIdentityCardNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.CLIdentityCardNumber,
+  "ClIdentityCardNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.CNResidentIdentityCardNumber,
   "CnResidentIdentityCardNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.HRIdentityCardNumber, "HrIdentityCardNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.HRNationalIDNumber, "HrNationalIdNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.HRIdentityCardNumber,
+  "HrIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HRNationalIDNumber,
+  "HrNationalIdNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.HRPersonalIdentificationNumber,
   "HrPersonalIdentificationNumber",
@@ -142,7 +210,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HrPersonalIdentificationOIBNumberV2",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.CYIdentityCard, "CyIdentityCard", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.CYIdentityCard,
+  "CyIdentityCard",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.CYTaxIdentificationNumber,
   "CyTaxIdentificationNumber",
@@ -153,7 +225,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CzPersonalIdentityNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.CZPersonalIdentityV2, "CzPersonalIdentityV2", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.CZPersonalIdentityV2,
+  "CzPersonalIdentityV2",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.DKPersonalIdentificationNumber,
   "DkPersonalIdentificationNumber",
@@ -169,19 +245,31 @@ namespace Language.AnalyzeTextClientCustomizations;
   "EePersonalIdentificationCode",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.EUDebitCardNumber, "EuDebitCardNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.EUDebitCardNumber,
+  "EuDebitCardNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.EUDriversLicenseNumber,
   "EuDriversLicenseNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.EUGPSCoordinates, "EuGpsCoordinates", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.EUGPSCoordinates,
+  "EuGpsCoordinates",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.EUNationalIdentificationNumber,
   "EuNationalIdentificationNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.EUPassportNumber, "EuPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.EUPassportNumber,
+  "EuPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.EUSocialSecurityNumber,
   "EuSocialSecurityNumber",
@@ -198,8 +286,16 @@ namespace Language.AnalyzeTextClientCustomizations;
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.FINationalID, "FiNationalId", "!autorest");
-@@clientName(PiiCategoriesExclude.FINationalIDV2, "FiNationalIdV2", "!autorest");
-@@clientName(PiiCategoriesExclude.FIPassportNumber, "FiPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.FINationalIDV2,
+  "FiNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FIPassportNumber,
+  "FiPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.FRDriversLicenseNumber,
   "FrDriversLicenseNumber",
@@ -211,7 +307,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.FRNationalID, "FrNationalId", "!autorest");
-@@clientName(PiiCategoriesExclude.FRPassportNumber, "FrPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.FRPassportNumber,
+  "FrPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.FRSocialSecurityNumber,
   "FrSocialSecurityNumber",
@@ -232,23 +332,51 @@ namespace Language.AnalyzeTextClientCustomizations;
   "DeDriversLicenseNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.DEPassportNumber, "DePassportNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.DEIdentityCardNumber, "DeIdentityCardNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.DEPassportNumber,
+  "DePassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DEIdentityCardNumber,
+  "DeIdentityCardNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.DETaxIdentificationNumber,
   "DeTaxIdentificationNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.DEValueAddedNumber, "DeValueAddedNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.GRNationalIDCard, "GrNationalIdCard", "!autorest");
-@@clientName(PiiCategoriesExclude.GRNationalIDV2, "GrNationalIdV2", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.DEValueAddedNumber,
+  "DeValueAddedNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.GRNationalIDCard,
+  "GrNationalIdCard",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.GRNationalIDV2,
+  "GrNationalIdV2",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.GRTaxIdentificationNumber,
   "GrTaxIdentificationNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.HKIdentityCardNumber, "HkIdentityCardNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.HUValueAddedNumber, "HuValueAddedNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.HKIdentityCardNumber,
+  "HkIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HUValueAddedNumber,
+  "HuValueAddedNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.HUPersonalIdentificationNumber,
   "HuPersonalIdentificationNumber",
@@ -259,13 +387,21 @@ namespace Language.AnalyzeTextClientCustomizations;
   "HuTaxIdentificationNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.INPermanentAccount, "InPermanentAccount", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.INPermanentAccount,
+  "InPermanentAccount",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.INUniqueIdentificationNumber,
   "InUniqueIdentificationNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.IDIdentityCardNumber, "IdIdentityCardNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.IDIdentityCardNumber,
+  "IdIdentityCardNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.IEPersonalPublicServiceNumber,
   "IePersonalPublicServiceNumber",
@@ -276,7 +412,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "IePersonalPublicServiceNumberV2",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.ILBankAccountNumber, "IlBankAccountNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.ILBankAccountNumber,
+  "IlBankAccountNumber",
+  "!autorest"
+);
 @@clientName(PiiCategoriesExclude.ILNationalID, "IlNationalId", "!autorest");
 @@clientName(
   PiiCategoriesExclude.ITDriversLicenseNumber,
@@ -289,13 +429,21 @@ namespace Language.AnalyzeTextClientCustomizations;
   "ItValueAddedTaxNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.JPBankAccountNumber, "JpBankAccountNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.JPBankAccountNumber,
+  "JpBankAccountNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.JPDriversLicenseNumber,
   "JpDriversLicenseNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.JPPassportNumber, "JpPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.JPPassportNumber,
+  "JpPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.JPResidentRegistrationNumber,
   "JpResidentRegistrationNumber",
@@ -306,15 +454,31 @@ namespace Language.AnalyzeTextClientCustomizations;
   "JpSocialInsuranceNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.JPMyNumberCorporate, "JpMyNumberCorporate", "!autorest");
-@@clientName(PiiCategoriesExclude.JPMyNumberPersonal, "JpMyNumberPersonal", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.JPMyNumberCorporate,
+  "JpMyNumberCorporate",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPMyNumberPersonal,
+  "JpMyNumberPersonal",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.JPResidenceCardNumber,
   "JpResidenceCardNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.LVPersonalCode, "LvPersonalCode", "!autorest");
-@@clientName(PiiCategoriesExclude.LTPersonalCode, "LtPersonalCode", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.LVPersonalCode,
+  "LvPersonalCode",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.LTPersonalCode,
+  "LtPersonalCode",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.LUNationalIdentificationNumberNatural,
   "LuNationalIdentificationNumberNatural",
@@ -325,8 +489,16 @@ namespace Language.AnalyzeTextClientCustomizations;
   "LuNationalIdentificationNumberNonNatural",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.MYIdentityCardNumber, "MyIdentityCardNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.MTIdentityCardNumber, "MtIdentityCardNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.MYIdentityCardNumber,
+  "MyIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.MTIdentityCardNumber,
+  "MtIdentityCardNumber",
+  "!autorest"
+);
 @@clientName(PiiCategoriesExclude.MTTaxIDNumber, "MtTaxIdNumber", "!autorest");
 @@clientName(
   PiiCategoriesExclude.NLCitizensServiceNumber,
@@ -348,7 +520,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "NlValueAddedTaxNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.NZBankAccountNumber, "NzBankAccountNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.NZBankAccountNumber,
+  "NzBankAccountNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.NZDriversLicenseNumber,
   "NzDriversLicenseNumber",
@@ -369,23 +545,43 @@ namespace Language.AnalyzeTextClientCustomizations;
   "NzSocialWelfareNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.NOIdentityNumber, "NoIdentityNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.NOIdentityNumber,
+  "NoIdentityNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.PHUnifiedMultiPurposeIDNumber,
   "PhUnifiedMultiPurposeIdNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.PLIdentityCard, "PlIdentityCard", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.PLIdentityCard,
+  "PlIdentityCard",
+  "!autorest"
+);
 @@clientName(PiiCategoriesExclude.PLNationalID, "PlNationalId", "!autorest");
-@@clientName(PiiCategoriesExclude.PLNationalIDV2, "PlNationalIdV2", "!autorest");
-@@clientName(PiiCategoriesExclude.PLPassportNumber, "PlPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.PLNationalIDV2,
+  "PlNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PLPassportNumber,
+  "PlPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.PLTaxIdentificationNumber,
   "PlTaxIdentificationNumber",
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.PLREGONNumber, "PlRegonNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.PTCitizenCardNumber, "PtCitizenCardNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.PTCitizenCardNumber,
+  "PtCitizenCardNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.PTCitizenCardNumberV2,
   "PtCitizenCardNumberV2",
@@ -417,7 +613,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "SgNationalRegistrationIdentityCardNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.SKPersonalNumber, "SkPersonalNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.SKPersonalNumber,
+  "SkPersonalNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.SITaxIdentificationNumber,
   "SiTaxIdentificationNumber",
@@ -455,8 +655,16 @@ namespace Language.AnalyzeTextClientCustomizations;
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.SENationalID, "SeNationalId", "!autorest");
-@@clientName(PiiCategoriesExclude.SENationalIDV2, "SeNationalIdV2", "!autorest");
-@@clientName(PiiCategoriesExclude.SEPassportNumber, "SePassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.SENationalIDV2,
+  "SeNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SEPassportNumber,
+  "SePassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.SETaxIdentificationNumber,
   "SeTaxIdentificationNumber",
@@ -469,7 +677,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "!autorest"
 );
 @@clientName(PiiCategoriesExclude.TWNationalID, "TwNationalId", "!autorest");
-@@clientName(PiiCategoriesExclude.TWPassportNumber, "TwPassportNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.TWPassportNumber,
+  "TwPassportNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.TWResidentCertificate,
   "TwResidentCertificate",
@@ -510,8 +722,16 @@ namespace Language.AnalyzeTextClientCustomizations;
   "UkUniqueTaxpayerNumber",
   "!autorest"
 );
-@@clientName(PiiCategoriesExclude.USUKPassportNumber, "UsUkPassportNumber", "!autorest");
-@@clientName(PiiCategoriesExclude.USBankAccountNumber, "UsBankAccountNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.USUKPassportNumber,
+  "UsUkPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.USBankAccountNumber,
+  "UsBankAccountNumber",
+  "!autorest"
+);
 @@clientName(
   PiiCategoriesExclude.USDriversLicenseNumber,
   "UsDriversLicenseNumber",
@@ -539,20 +759,52 @@ namespace Language.AnalyzeTextClientCustomizations;
 );
 
 @@clientName(WeightUnit.ShortTonUS, "ShortTonUs", "!autorest");
-@@clientName(WeightUnit.ShortHundredWeightUS, "ShortHundredWeightUs", "!autorest");
+@@clientName(
+  WeightUnit.ShortHundredWeightUS,
+  "ShortHundredWeightUs",
+  "!autorest"
+);
 
 @@access(AnalyzeTextTask, Access.public);
 @@clientName(AnalyzeTextTask, "AnalyzeTextInput", "!autorest");
 @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "!autorest");
 
 @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "!autorest");
-@@clientName(MultiLanguageAnalysisInput.documents, "MultiLanguageInputs", "!autorest");
-@@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "!autorest");
-@@clientName(LanguageDetectionAnalysisInput.documents, "LanguageInputs", "!autorest");
-@@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "!autorest");
-@@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent", "!autorest");
-@@clientName(AnalyzeTextSentimentAnalysisInput.analysisInput, "TextInput", "!autorest");
-@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "!autorest");
+@@clientName(
+  MultiLanguageAnalysisInput.documents,
+  "MultiLanguageInputs",
+  "!autorest"
+);
+@@clientName(
+  LanguageDetectionAnalysisInput,
+  "LanguageDetectionTextInput",
+  "!autorest"
+);
+@@clientName(
+  LanguageDetectionAnalysisInput.documents,
+  "LanguageInputs",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextSentimentAnalysisInput,
+  "TextSentimentAnalysisInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextSentimentAnalysisInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextSentimentAnalysisInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(
+  SentimentAnalysisTaskParameters,
+  "SentimentAnalysisActionContent",
+  "!autorest"
+);
 
 @@clientName(
   AnalyzeTextPiiEntitiesRecognitionInput,
@@ -564,41 +816,105 @@ namespace Language.AnalyzeTextClientCustomizations;
   "ActionContent",
   "!autorest"
 );
-@@clientName(AnalyzeTextPiiEntitiesRecognitionInput.analysisInput, "TextInput", "!autorest");
+@@clientName(
+  AnalyzeTextPiiEntitiesRecognitionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
 @@clientName(PiiTaskParameters, "PiiActionContent", "!autorest");
 
-@@clientName(AnalyzeTextLanguageDetectionInput, "TextLanguageDetectionInput", "!autorest");
-@@clientName(AnalyzeTextLanguageDetectionInput.parameters, "ActionContent", "!autorest");
-@@clientName(AnalyzeTextLanguageDetectionInput.analysisInput, "TextInput", "!autorest");
-@@clientName(LanguageDetectionTaskParameters, "LanguageDetectionActionContent", "!autorest");
+@@clientName(
+  AnalyzeTextLanguageDetectionInput,
+  "TextLanguageDetectionInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextLanguageDetectionInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextLanguageDetectionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(
+  LanguageDetectionTaskParameters,
+  "LanguageDetectionActionContent",
+  "!autorest"
+);
 @@clientName(
   AnalyzeTextKeyPhraseExtractionInput,
   "TextKeyPhraseExtractionInput",
   "!autorest"
 );
-@@clientName(AnalyzeTextKeyPhraseExtractionInput.parameters, "ActionContent", "!autorest");
-@@clientName(AnalyzeTextKeyPhraseExtractionInput.analysisInput, "TextInput", "!autorest");
+@@clientName(
+  AnalyzeTextKeyPhraseExtractionInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextKeyPhraseExtractionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
 @@clientName(KeyPhraseTaskParameters, "KeyPhraseActionContent", "!autorest");
-@@clientName(AnalyzeTextEntityRecognitionInput, "TextEntityRecognitionInput", "!autorest");
-@@clientName(AnalyzeTextEntityRecognitionInput.parameters, "ActionContent", "!autorest");
-@@clientName(AnalyzeTextEntityRecognitionInput.analysisInput, "TextInput", "!autorest");
+@@clientName(
+  AnalyzeTextEntityRecognitionInput,
+  "TextEntityRecognitionInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityRecognitionInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityRecognitionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
 @@clientName(EntitiesTaskParameters, "EntitiesActionContent", "!autorest");
 @@clientName(EntitiesTaskParameters.exclusionList, "Exclusions", "!autorest");
 @@clientName(EntitiesTaskParameters.inclusionList, "Inclusions", "!autorest");
 
-@@clientName(AnalyzeTextEntityLinkingInput, "TextEntityLinkingInput", "!autorest");
-@@clientName(AnalyzeTextEntityLinkingInput.parameters, "ActionContent", "!autorest");
-@@clientName(AnalyzeTextEntityLinkingInput.analysisInput, "TextInput", "!autorest");
-@@clientName(EntityLinkingTaskParameters, "EntityLinkingActionContent", "!autorest");
+@@clientName(
+  AnalyzeTextEntityLinkingInput,
+  "TextEntityLinkingInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityLinkingInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityLinkingInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(
+  EntityLinkingTaskParameters,
+  "EntityLinkingActionContent",
+  "!autorest"
+);
 
 @@clientName(AnalyzeTextTaskResult, "AnalyzeTextResult", "!autorest");
 @@clientName(AnalyzeTextTaskResultsKind, "AnalyzeTextResultsKind", "!autorest");
 
 @@clientName(SentimentTaskResult, "AnalyzeTextSentimentResult", "!autorest");
 @@clientName(PiiTaskResult, "AnalyzeTextPiiResult", "!autorest");
-@@clientName(LanguageDetectionTaskResult, "AnalyzeTextLanguageDetectionResult", "!autorest");
+@@clientName(
+  LanguageDetectionTaskResult,
+  "AnalyzeTextLanguageDetectionResult",
+  "!autorest"
+);
 @@clientName(EntitiesTaskResult, "AnalyzeTextEntitiesResult", "!autorest");
-@@clientName(EntityLinkingTaskResult, "AnalyzeTextEntityLinkingResult", "!autorest");
+@@clientName(
+  EntityLinkingTaskResult,
+  "AnalyzeTextEntityLinkingResult",
+  "!autorest"
+);
 @@clientName(KeyPhraseTaskResult, "AnalyzeTextKeyPhraseResult", "!autorest");
 
 @@clientName(AnalyzeTextJobsInput, "AnalyzeTextOperationInput", "!autorest");
@@ -608,14 +924,26 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextLROTask, "AnalyzeTextOperationAction", "!autorest");
 @@clientName(AnalyzeTextLROTask.taskName, "Name", "!autorest");
 
-@@clientName(AnalyzeTextLROTaskKind, "AnalyzeTextOperationActionKind", "!autorest");
-@@clientName(SentimentAnalysisLROTask, "SentimentAnalysisOperationAction", "!autorest");
+@@clientName(
+  AnalyzeTextLROTaskKind,
+  "AnalyzeTextOperationActionKind",
+  "!autorest"
+);
+@@clientName(
+  SentimentAnalysisLROTask,
+  "SentimentAnalysisOperationAction",
+  "!autorest"
+);
 @@clientName(
   ExtractiveSummarizationLROTask,
   "ExtractiveSummarizationOperationAction",
   "!autorest"
 );
-@@clientName(ExtractiveSummarizationLROTask.parameters, "ActionContent", "!autorest");
+@@clientName(
+  ExtractiveSummarizationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
+);
 @@clientName(
   ExtractiveSummarizationTaskParameters,
   "ExtractiveSummarizationActionContent",
@@ -626,7 +954,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AbstractiveSummarizationOperationAction",
   "!autorest"
 );
-@@clientName(AbstractiveSummarizationLROTask.parameters, "ActionContent", "!autorest");
+@@clientName(
+  AbstractiveSummarizationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
+);
 @@clientName(
   AbstractiveSummarizationTaskParameters,
   "AbstractiveSummarizationActionContent",
@@ -637,7 +969,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CustomMultiLabelClassificationOperationAction",
   "!autorest"
 );
-@@clientName(CustomMultiLabelClassificationLROTask.parameters, "ActionContent", "!autorest");
+@@clientName(
+  CustomMultiLabelClassificationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
+);
 @@clientName(
   CustomMultiLabelClassificationTaskParameters,
   "CustomMultiLabelClassificationActionContent",
@@ -658,8 +994,16 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CustomSingleLabelClassificationActionContent",
   "!autorest"
 );
-@@clientName(CustomEntitiesTaskParameters, "CustomEntitiesActionContent", "!autorest");
-@@clientName(AnalyzeTextLROResultsKind, "AnalyzeTextOperationResultsKind", "!autorest");
+@@clientName(
+  CustomEntitiesTaskParameters,
+  "CustomEntitiesActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextLROResultsKind,
+  "AnalyzeTextOperationResultsKind",
+  "!autorest"
+);
 @@clientName(
   AnalyzeTextLROResultsKind.SentimentAnalysisLROResults,
   "SentimentAnalysisOperationResults",
@@ -735,8 +1079,16 @@ namespace Language.AnalyzeTextClientCustomizations;
   "KeyPhraseExtractionOperationResult",
   "!autorest"
 );
-@@clientName(EntityRecognitionLROResult, "EntityRecognitionOperationResult", "!autorest");
-@@clientName(EntityLinkingLROResult, "EntityLinkingOperationResult", "!autorest");
+@@clientName(
+  EntityRecognitionLROResult,
+  "EntityRecognitionOperationResult",
+  "!autorest"
+);
+@@clientName(
+  EntityLinkingLROResult,
+  "EntityLinkingOperationResult",
+  "!autorest"
+);
 @@clientName(
   CustomMultiLabelClassificationLROResult,
   "CustomMultiLabelClassificationOperationResult",

@@ -321,11 +321,13 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
   "inputTokensCount",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
   "outputTokensCount",
-  "!autorest");
+  "!autorest"
+);
 
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
@@ -3572,52 +3574,114 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   SearchIndexClient.listIndexesWithSelectedProperties,
   "listIndexesWithSelectedProperties",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(SearchIndexClient.getIndex, "getIndex", "!autorest");
-@@clientName(SearchIndexClient.getStatistics, "getIndexStatistics", "!autorest");
+@@clientName(
+  SearchIndexClient.getStatistics,
+  "getIndexStatistics",
+  "!autorest"
+);
 @@clientName(SearchIndexClient.deleteIndex, "deleteIndex", "!autorest");
 @@clientName(SearchIndexClient.createIndex, "createIndex", "!autorest");
-@@clientName(SearchIndexClient.createOrUpdateIndex, "createOrUpdateIndex", "!autorest");
+@@clientName(
+  SearchIndexClient.createOrUpdateIndex,
+  "createOrUpdateIndex",
+  "!autorest"
+);
 @@clientName(SearchIndexClient.analyze, "analyzeText", "!autorest");
 @@clientName(SearchIndexClient.listSynonymMaps, "getSynonymMaps", "!autorest");
 @@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap", "!autorest");
-@@clientName(SearchIndexClient.deleteSynonymMap, "deleteSynonymMap", "!autorest");
-@@clientName(SearchIndexClient.createSynonymMap, "createSynonymMap", "!autorest");
+@@clientName(
+  SearchIndexClient.deleteSynonymMap,
+  "deleteSynonymMap",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.createSynonymMap,
+  "createSynonymMap",
+  "!autorest"
+);
 @@clientName(
   SearchIndexClient.createOrUpdateSynonymMap,
   "createOrUpdateSynonymMap",
-  "!autorest");
-@@clientName(SearchIndexClient.getIndexStatsSummary, "listIndexStatsSummary", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.getIndexStatsSummary,
+  "listIndexStatsSummary",
+  "!autorest"
+);
 @@clientName(SearchIndexClient.listAliases, "listAliases", "!autorest");
 @@clientName(SearchIndexClient.getAlias, "getAlias", "!autorest");
 @@clientName(SearchIndexClient.deleteAlias, "deleteAlias", "!autorest");
 @@clientName(SearchIndexClient.createAlias, "createAlias", "!autorest");
-@@clientName(SearchIndexClient.createOrUpdateAlias, "createOrUpdateAlias", "!autorest");
-@@clientName(SearchIndexClient.deleteKnowledgeBase, "deleteKnowledgeBase", "!autorest");
-@@clientName(SearchIndexClient.createKnowledgeBase, "createKnowledgeBase", "!autorest");
+@@clientName(
+  SearchIndexClient.createOrUpdateAlias,
+  "createOrUpdateAlias",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.deleteKnowledgeBase,
+  "deleteKnowledgeBase",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.createKnowledgeBase,
+  "createKnowledgeBase",
+  "!autorest"
+);
 @@clientName(
   SearchIndexClient.createOrUpdateKnowledgeBase,
   "createOrUpdateKnowledgeBase",
-  "!autorest");
-@@clientName(SearchIndexClient.getKnowledgeBase, "getKnowledgeBase", "!autorest");
-@@clientName(SearchIndexClient.listKnowledgeBases, "listKnowledgeBases", "!autorest");
-@@clientName(SearchIndexClient.deleteKnowledgeSource, "deleteKnowledgeSource", "!autorest");
-@@clientName(SearchIndexClient.createKnowledgeSource, "createKnowledgeSource", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.getKnowledgeBase,
+  "getKnowledgeBase",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.listKnowledgeBases,
+  "listKnowledgeBases",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.deleteKnowledgeSource,
+  "deleteKnowledgeSource",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.createKnowledgeSource,
+  "createKnowledgeSource",
+  "!autorest"
+);
 @@clientName(
   SearchIndexClient.createOrUpdateKnowledgeSource,
   "createOrUpdateKnowledgeSource",
-  "!autorest");
-@@clientName(SearchIndexClient.getKnowledgeSource, "getKnowledgeSource", "!autorest");
-@@clientName(SearchIndexClient.listKnowledgeSources, "listKnowledgeSources", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.getKnowledgeSource,
+  "getKnowledgeSource",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.listKnowledgeSources,
+  "listKnowledgeSources",
+  "!autorest"
+);
 @@clientName(
   SearchIndexClient.getKnowledgeSourceStatus,
   "getKnowledgeSourceStatus",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(SearchIndexerClient.createIndexer, "createIndexer", "!autorest");
 @@clientName(
   SearchIndexerClient.createOrUpdateIndexer,
   "createOrUpdateIndexer",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer", "!autorest");
 @@clientName(SearchIndexerClient.getIndexer, "getIndexer", "!autorest");
 @@clientName(SearchIndexerClient.listIndexers, "getIndexers", "!autorest");
@@ -3625,26 +3689,42 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerClient.resetIndexer, "resetIndexer", "!autorest");
 @@clientName(SearchIndexerClient.resetDocs, "resetDocuments", "!autorest");
 @@clientName(SearchIndexerClient.resync, "resync", "!autorest");
-@@clientName(SearchIndexerClient.getIndexerStatus, "getIndexerStatus", "!autorest");
+@@clientName(
+  SearchIndexerClient.getIndexerStatus,
+  "getIndexerStatus",
+  "!autorest"
+);
 @@clientName(
   SearchIndexerClient.createDataSource,
   "createDataSourceConnection",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   SearchIndexerClient.createOrUpdateDataSource,
   "createOrUpdateDataSourceConnection",
-  "!autorest");
-@@clientName(SearchIndexerClient.getDataSource, "getDataSourceConnection", "!autorest");
-@@clientName(SearchIndexerClient.listDataSources, "getDataSourceConnections", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.getDataSource,
+  "getDataSourceConnection",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.listDataSources,
+  "getDataSourceConnections",
+  "!autorest"
+);
 @@clientName(
   SearchIndexerClient.deleteDataSource,
   "deleteDataSourceConnection",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(SearchIndexerClient.createSkillset, "createSkillset", "!autorest");
 @@clientName(
   SearchIndexerClient.createOrUpdateSkillset,
   "createOrUpdateSkillset",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(SearchIndexerClient.getSkillset, "getSkillset", "!autorest");
 @@clientName(SearchIndexerClient.listSkillsets, "getSkillsets", "!autorest");
 @@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset", "!autorest");
@@ -3655,7 +3735,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(ListIndexesResult.`@odata.count`, "Count", "!autorest");
 @@clientName(ListIndexesResult.`@odata.nextLink`, "NextLink", "!autorest");
 @@clientName(ListIndexesSelectedResult.`@odata.count`, "Count", "!autorest");
-@@clientName(ListIndexesSelectedResult.`@odata.nextLink`, "NextLink", "!autorest");
+@@clientName(
+  ListIndexesSelectedResult.`@odata.nextLink`,
+  "NextLink",
+  "!autorest"
+);
 @@clientName(ListIndexStatsSummary.`@odata.count`, "Count", "!autorest");
 @@clientName(ListIndexStatsSummary.`@odata.nextLink`, "NextLink", "!autorest");
 @@clientName(SearchRequest.count, "includeTotalCount", "!autorest");
@@ -3674,28 +3758,53 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AutocompleteRequest.search, "searchText", "!autorest");
 @@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching", "!autorest");
 @@clientName(ListDataSourcesResult.value, "dataSources", "!autorest");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName", "!autorest");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion", "!autorest");
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyName,
+  "keyName",
+  "!autorest"
+);
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyVersion,
+  "keyVersion",
+  "!autorest"
+);
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri", "!autorest");
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUrl", "java");
 @@clientName(SearchIndexer.disabled, "isDisabled", "!autorest");
 @@clientName(ListIndexersResult.value, "indexers", "!autorest");
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount", "!autorest");
-@@clientName(IndexerExecutionResult.itemsFailed, "failedItemCount", "!autorest");
+@@clientName(
+  IndexerExecutionResult.itemsFailed,
+  "failedItemCount",
+  "!autorest"
+);
 @@clientName(
   SearchIndexerSkillset.cognitiveServices,
   "cognitiveServicesAccount",
-  "!autorest");
-@@clientName(SearchIndexerSkillset.indexProjections, "indexProjection", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerSkillset.indexProjections,
+  "indexProjection",
+  "!autorest"
+);
 @@clientName(ListSkillsetsResult.value, "skillsets", "!autorest");
 @@clientName(ListSynonymMapsResult.value, "synonymMaps", "!autorest");
 @@clientName(AnalyzeRequest, "AnalyzeTextOptions", "!autorest");
 @@clientName(AnalyzeRequest.analyzer, "analyzerName", "!autorest");
 @@clientName(AnalyzeRequest.tokenizer, "tokenizerName", "!autorest");
 @@clientName(AnalyzeRequest.normalizer, "normalizerName", "!autorest");
-@@clientName(SearchIndexerDataSource, "SearchIndexerDataSourceConnection", "!autorest");
+@@clientName(
+  SearchIndexerDataSource,
+  "SearchIndexerDataSourceConnection",
+  "!autorest"
+);
 @@clientName(SearchRequest.speller, "querySpeller", "!autorest");
-@@clientName(SearchRequest.semanticConfiguration, "semanticConfigurationName", "!autorest");
+@@clientName(
+  SearchRequest.semanticConfiguration,
+  "semanticConfigurationName",
+  "!autorest"
+);
 @@clientName(SearchIndex.semantic, "semanticSearch", "!autorest");
 @@clientName(SearchIndexResponse.semantic, "semanticSearch", "!autorest");
 @@clientName(SearchField.analyzer, "analyzerName", "!autorest");
@@ -3704,43 +3813,90 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchField.normalizer, "normalizerName", "!autorest");
 @@clientName(SearchField.synonymMaps, "synonymMapNames", "!autorest");
 @@clientName(SearchField.dimensions, "vectorSearchDimensions", "!autorest");
-@@clientName(SearchField.vectorSearchProfile, "vectorSearchProfileName", "!autorest");
+@@clientName(
+  SearchField.vectorSearchProfile,
+  "vectorSearchProfileName",
+  "!autorest"
+);
 @@clientName(SearchField.vectorEncoding, "vectorEncodingFormat", "!autorest");
 @@clientName(ScoringProfile.text, "textWeights", "!autorest");
-@@clientName(SemanticSearch.defaultConfiguration, "defaultConfigurationName", "!autorest");
+@@clientName(
+  SemanticSearch.defaultConfiguration,
+  "defaultConfigurationName",
+  "!autorest"
+);
 @@clientName(
   SemanticPrioritizedFields.prioritizedContentFields,
   "contentFields",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   SemanticPrioritizedFields.prioritizedKeywordsFields,
   "keywordsFields",
-  "!autorest");
-@@clientName(VectorSearchProfile.algorithm, "algorithmConfigurationName", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  VectorSearchProfile.algorithm,
+  "algorithmConfigurationName",
+  "!autorest"
+);
 @@clientName(VectorSearchProfile.vectorizer, "vectorizerName", "!autorest");
 @@clientName(VectorSearchProfile.compression, "compressionName", "!autorest");
 @@clientName(VectorSearchVectorizer.name, "vectorizerName", "!autorest");
 @@clientName(VectorSearchCompression.name, "compressionName", "!autorest");
 @@clientName(ListIndexesResult.value, "indexes", "!autorest");
 @@clientName(SearchServiceCounters.aliasesCount, "aliasCounter", "!autorest");
-@@clientName(SearchServiceCounters.documentCount, "documentCounter", "!autorest");
+@@clientName(
+  SearchServiceCounters.documentCount,
+  "documentCounter",
+  "!autorest"
+);
 @@clientName(SearchServiceCounters.indexesCount, "indexCounter", "!autorest");
-@@clientName(SearchServiceCounters.indexersCount, "indexerCounter", "!autorest");
-@@clientName(SearchServiceCounters.dataSourcesCount, "dataSourceCounter", "!autorest");
-@@clientName(SearchServiceCounters.storageSize, "storageSizeCounter", "!autorest");
-@@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter", "!autorest");
-@@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter", "!autorest");
-@@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter", "!autorest");
+@@clientName(
+  SearchServiceCounters.indexersCount,
+  "indexerCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.dataSourcesCount,
+  "dataSourceCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.storageSize,
+  "storageSizeCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.synonymMaps,
+  "synonymMapCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.skillsetCount,
+  "skillsetCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.vectorIndexSize,
+  "vectorIndexSizeCounter",
+  "!autorest"
+);
 @@clientName(
   SearchServiceCounters.vectorIndexSize,
   "vectorIndexSizeInBytes",
   "java"
 );
-@@clientName(SearchServiceCounters.knowledgeBasesCount, "knowledgeBaseCounter", "!autorest");
+@@clientName(
+  SearchServiceCounters.knowledgeBasesCount,
+  "knowledgeBaseCounter",
+  "!autorest"
+);
 @@clientName(
   SearchServiceCounters.knowledgeSourcesCount,
   "knowledgeSourceCounter",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   GetIndexStatisticsResult.vectorIndexSize,
   "vectorIndexSizeInBytes",
@@ -3749,29 +3905,56 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   SearchServiceLimits.maxStoragePerIndex,
   "maxStoragePerIndexInBytes",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "csharp");
 @@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "python");
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms", "!autorest");
-@@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder", "!autorest");
-@@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip", "!autorest");
+@@clientName(
+  PathHierarchyTokenizerV2.reverse,
+  "reverseTokenOrder",
+  "!autorest"
+);
+@@clientName(
+  PathHierarchyTokenizerV2.skip,
+  "numberOfTokensToSkip",
+  "!autorest"
+);
 @@clientName(CommonGramTokenFilter.queryMode, "useQueryMode", "!autorest");
 @@clientName(KeepTokenFilter.keepWordsCase, "lowerCaseKeepWords", "!autorest");
 @@clientName(LengthTokenFilter.min, "minLength", "!autorest");
 @@clientName(LengthTokenFilter.max, "maxLength", "!autorest");
 @@clientName(PhoneticTokenFilter.replace, "replaceOriginalTokens", "!autorest");
-@@clientName(StopwordsTokenFilter.removeTrailing, "removeTrailingStopWords", "!autorest");
-@@clientName(HnswAlgorithmConfiguration.hnswParameters, "parameters", "!autorest");
+@@clientName(
+  StopwordsTokenFilter.removeTrailing,
+  "removeTrailingStopWords",
+  "!autorest"
+);
+@@clientName(
+  HnswAlgorithmConfiguration.hnswParameters,
+  "parameters",
+  "!autorest"
+);
 @@clientName(
   ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
   "parameters",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   ScalarQuantizationCompression.scalarQuantizationParameters,
   "parameters",
-  "!autorest");
-@@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters", "!autorest");
-@@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl", "!autorest");
+  "!autorest"
+);
+@@clientName(
+  AzureOpenAIVectorizer.azureOpenAIParameters,
+  "parameters",
+  "!autorest"
+);
+@@clientName(
+  AzureOpenAIVectorizerParameters.resourceUri,
+  "resourceUrl",
+  "!autorest"
+);
 @@clientName(
   AzureOpenAIVectorizerParameters.resourceUri,
   "resourceUri",
@@ -3792,7 +3975,11 @@ namespace KnowledgeBaseRetrievalClient {
   "deploymentName",
   "csharp"
 );
-@@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters", "!autorest");
+@@clientName(
+  WebApiVectorizer.customWebApiParameters,
+  "webApiParameters",
+  "!autorest"
+);
 @@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
 @@clientName(WebApiVectorizerParameters.uri, "url", "python");
 @@clientName(WebApiVectorizerParameters.uri, "url", "java");
@@ -3818,16 +4005,22 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
   "resourceId",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(DistanceScoringFunction.distance, "parameters", "!autorest");
 @@clientName(FreshnessScoringFunction.freshness, "parameters", "!autorest");
 @@clientName(MagnitudeScoringFunction.magnitude, "parameters", "!autorest");
 @@clientName(
   MagnitudeScoringParameters.constantBoostBeyondRange,
   "shouldBoostBeyondRangeByConstant",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(TagScoringFunction.tag, "parameters", "!autorest");
-@@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation", "!autorest");
+@@clientName(
+  OcrSkill.detectOrientation,
+  "shouldDetectOrientation",
+  "!autorest"
+);
 @@clientName(PIIDetectionSkill.minimumPrecision, "minPrecision", "csharp");
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask", "!autorest");
 @@clientName(ListAliasesResult.value, "aliases", "!autorest");
@@ -3856,7 +4049,11 @@ namespace KnowledgeBaseRetrievalClient {
   "odatatype",
   "javascript"
 );
-@@clientName(DataDeletionDetectionPolicy.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  DataDeletionDetectionPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   DataDeletionDetectionPolicy.`@odata.type`,
   "odatatype",
@@ -3901,13 +4098,21 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(KeywordTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(KeywordTokenizerV2.`@odata.type`, "odataType", "!autorest");
 @@clientName(KeywordTokenizerV2.`@odata.type`, "odatatype", "javascript");
-@@clientName(MicrosoftLanguageTokenizer.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  MicrosoftLanguageTokenizer.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   MicrosoftLanguageTokenizer.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(MicrosoftLanguageStemmingTokenizer.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  MicrosoftLanguageStemmingTokenizer.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   MicrosoftLanguageStemmingTokenizer.`@odata.type`,
   "odatatype",
@@ -3938,7 +4143,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(CjkBigramTokenFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(CommonGramTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(CommonGramTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(DictionaryDecompounderTokenFilter.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  DictionaryDecompounderTokenFilter.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   DictionaryDecompounderTokenFilter.`@odata.type`,
   "odatatype",
@@ -3982,7 +4191,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SnowballTokenFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(StemmerTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(StemmerTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(StemmerOverrideTokenFilter.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  StemmerOverrideTokenFilter.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   StemmerOverrideTokenFilter.`@odata.type`,
   "odatatype",
@@ -4002,7 +4215,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(MappingCharFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(PatternReplaceCharFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(PatternReplaceCharFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(ClassicSimilarityAlgorithm.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  ClassicSimilarityAlgorithm.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   ClassicSimilarityAlgorithm.`@odata.type`,
   "odatatype",
@@ -4016,25 +4233,41 @@ namespace KnowledgeBaseRetrievalClient {
   "odatatype",
   "javascript"
 );
-@@clientName(SearchIndexerDataNoneIdentity.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  SearchIndexerDataNoneIdentity.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   SearchIndexerDataNoneIdentity.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SearchIndexerDataUserAssignedIdentity.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  SearchIndexerDataUserAssignedIdentity.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   SearchIndexerDataUserAssignedIdentity.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(HighWaterMarkChangeDetectionPolicy.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  HighWaterMarkChangeDetectionPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   HighWaterMarkChangeDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SqlIntegratedChangeTrackingPolicy.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  SqlIntegratedChangeTrackingPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   SqlIntegratedChangeTrackingPolicy.`@odata.type`,
   "odatatype",
@@ -4043,7 +4276,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
   "odataType",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
   "odatatype",
@@ -4052,19 +4286,28 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
   "odataType",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(DefaultCognitiveServicesAccount.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  DefaultCognitiveServicesAccount.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   DefaultCognitiveServicesAccount.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(CognitiveServicesAccountKey.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  CognitiveServicesAccountKey.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   CognitiveServicesAccountKey.`@odata.type`,
   "odatatype",
@@ -4108,7 +4351,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(TextTranslationSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(DocumentExtractionSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(DocumentExtractionSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(DocumentIntelligenceLayoutSkill.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  DocumentIntelligenceLayoutSkill.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
 @@clientName(
   DocumentIntelligenceLayoutSkill.`@odata.type`,
   "odatatype",

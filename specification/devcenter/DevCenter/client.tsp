@@ -70,7 +70,11 @@ interface EnvironmentClientOperations {
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
 @@usage(DevCenterService.Environment, Usage.input | Usage.output);
 
-@@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus", "!autorest");
+@@clientName(
+  DevCenterService.LocalAdminStatus,
+  "LocalAdministratorStatus",
+  "!autorest"
+);
 @@clientName(
   DevCenterService.StopOnDisconnectEnableStatus,
   "StopOnDisconnectStatus",
@@ -86,7 +90,11 @@ interface EnvironmentClientOperations {
   "DevBoxActionDelayStatus",
   "!autorest"
 );
-@@clientName(DevCenterService.DevBoxActionDelayResult.result, "delayStatus", "!autorest");
+@@clientName(
+  DevCenterService.DevBoxActionDelayResult.result,
+  "delayStatus",
+  "!autorest"
+);
 
 @@clientName(DevCenterService.OsType, "DevBoxOSType", "csharp");
 @@clientName(

@@ -19,7 +19,11 @@ namespace ClientCustomizations;
 @@clientName(ImageType, "FaceImageType", "!autorest");
 @@clientName(OperationStatus, "FaceOperationStatus", "!autorest");
 @@clientName(TrainingResult, "FaceTrainingResult", "!autorest");
-@@clientName(IdentificationCandidate, "FaceIdentificationCandidate", "!autorest");
+@@clientName(
+  IdentificationCandidate,
+  "FaceIdentificationCandidate",
+  "!autorest"
+);
 @@clientName(IdentificationResult, "FaceIdentificationResult", "!autorest");
 
 @@access(DetectionModel, Access.public);

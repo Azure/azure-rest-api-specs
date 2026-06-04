@@ -10,11 +10,23 @@ using PureStorage.Block;
 
 // Client-specific naming overrides
 @@clientName(HealthResponse, "StoragePoolHealthInfo", "!autorest");
-@@clientName(ServiceInitializationData, "ServiceInitializationInfo", "!autorest");
+@@clientName(
+  ServiceInitializationData,
+  "ServiceInitializationInfo",
+  "!autorest"
+);
 
 // Rename sddcResourceId field to avsClusterResourceId in all models
-@@clientName(AzureVmwareService.sddcResourceId, "clusterResourceId", "!autorest");
-@@clientName(ServiceInitializationHandle.sddcResourceId, "clusterResourceId", "!autorest");
+@@clientName(
+  AzureVmwareService.sddcResourceId,
+  "clusterResourceId",
+  "!autorest"
+);
+@@clientName(
+  ServiceInitializationHandle.sddcResourceId,
+  "clusterResourceId",
+  "!autorest"
+);
 @@clientName(AvsStatus.sddcResourceId, "clusterResourceId", "!autorest");
 @@clientName(
   StoragePoolEnableAvsConnectionPost.sddcResourceId,

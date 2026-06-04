@@ -31,7 +31,11 @@ using Azure.ClientGenerator.Core;
   "registryLoginServer",
   "!autorest"
 );
-@@clientName(ContainerRegistry.ContainerRepositoryProperties.imageName, "name", "!autorest");
+@@clientName(
+  ContainerRegistry.ContainerRepositoryProperties.imageName,
+  "name",
+  "!autorest"
+);
 @@clientName(
   ContainerRegistry.ContainerRepositoryProperties.createdTime,
   "createdOn",
@@ -78,12 +82,20 @@ using Azure.ClientGenerator.Core;
 );
 
 // Client name mappings for TagList
-@@clientName(ContainerRegistry.TagList.registry, "registryLoginServer", "!autorest");
+@@clientName(
+  ContainerRegistry.TagList.registry,
+  "registryLoginServer",
+  "!autorest"
+);
 @@clientName(ContainerRegistry.TagList.imageName, "repository", "!autorest");
 @@clientName(ContainerRegistry.TagList.tags, "tagAttributeBases", "!autorest");
 
 // Client name mappings for TagAttributesBase
-@@clientName(ContainerRegistry.TagAttributesBase.createdTime, "createdOn", "!autorest");
+@@clientName(
+  ContainerRegistry.TagAttributesBase.createdTime,
+  "createdOn",
+  "!autorest"
+);
 @@clientName(
   ContainerRegistry.TagAttributesBase.lastUpdateTime,
   "lastUpdatedOn",
@@ -101,8 +113,16 @@ using Azure.ClientGenerator.Core;
   "canWrite",
   "!autorest"
 );
-@@clientName(ContainerRegistry.TagChangeableAttributes.listEnabled, "canList", "!autorest");
-@@clientName(ContainerRegistry.TagChangeableAttributes.readEnabled, "canRead", "!autorest");
+@@clientName(
+  ContainerRegistry.TagChangeableAttributes.listEnabled,
+  "canList",
+  "!autorest"
+);
+@@clientName(
+  ContainerRegistry.TagChangeableAttributes.readEnabled,
+  "canRead",
+  "!autorest"
+);
 
 // Client name mappings for ArtifactTagProperties
 @@clientName(
@@ -117,18 +137,38 @@ using Azure.ClientGenerator.Core;
 );
 
 // Client name mappings for AcrManifests
-@@clientName(ContainerRegistry.AcrManifests.registry, "registryLoginServer", "!autorest");
-@@clientName(ContainerRegistry.AcrManifests.imageName, "repository", "!autorest");
+@@clientName(
+  ContainerRegistry.AcrManifests.registry,
+  "registryLoginServer",
+  "!autorest"
+);
+@@clientName(
+  ContainerRegistry.AcrManifests.imageName,
+  "repository",
+  "!autorest"
+);
 
 // Client name mappings for ManifestAttributesBase
-@@clientName(ContainerRegistry.ManifestAttributesBase.imageSize, "size", "!autorest");
-@@clientName(ContainerRegistry.ManifestAttributesBase.createdTime, "createdOn", "!autorest");
+@@clientName(
+  ContainerRegistry.ManifestAttributesBase.imageSize,
+  "size",
+  "!autorest"
+);
+@@clientName(
+  ContainerRegistry.ManifestAttributesBase.createdTime,
+  "createdOn",
+  "!autorest"
+);
 @@clientName(
   ContainerRegistry.ManifestAttributesBase.lastUpdateTime,
   "lastUpdatedOn",
   "!autorest"
 );
-@@clientName(ContainerRegistry.ManifestAttributesBase.os, "operatingSystem", "!autorest");
+@@clientName(
+  ContainerRegistry.ManifestAttributesBase.os,
+  "operatingSystem",
+  "!autorest"
+);
 @@clientName(
   ContainerRegistry.ManifestAttributesBase.references,
   "relatedArtifacts",
@@ -136,7 +176,11 @@ using Azure.ClientGenerator.Core;
 );
 
 // Client name mappings for ArtifactManifestPlatform
-@@clientName(ContainerRegistry.ArtifactManifestPlatform.os, "operatingSystem", "!autorest");
+@@clientName(
+  ContainerRegistry.ArtifactManifestPlatform.os,
+  "operatingSystem",
+  "!autorest"
+);
 
 // Client name mappings for ManifestChangeableAttributes
 @@clientName(

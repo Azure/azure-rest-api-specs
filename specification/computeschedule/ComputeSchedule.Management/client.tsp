@@ -350,7 +350,11 @@ using TypeSpec.Versioning;
   "V2025-05-01",
   "javascript"
 );
-@@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType", "!autorest");
+@@clientName(
+  Microsoft.ComputeSchedule.ActionType,
+  "ScheduledActionType",
+  "!autorest"
+);
 
 @@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent", "csharp");
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "csharp");

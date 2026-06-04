@@ -7,7 +7,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Web;
 using Azure.ResourceManager;
 
-
 namespace Customizations;
 
 // python

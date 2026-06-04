@@ -14,8 +14,16 @@ namespace Customizations;
 
 @@clientName(WindDirection.localizedDescription, "description", "!autorest");
 
-@@clientName(MinuteForecastSummary.shortPhrase, "shortDescription", "!autorest");
-@@clientName(MinuteForecastSummary.briefPhrase, "briefDescription", "!autorest");
+@@clientName(
+  MinuteForecastSummary.shortPhrase,
+  "shortDescription",
+  "!autorest"
+);
+@@clientName(
+  MinuteForecastSummary.briefPhrase,
+  "briefDescription",
+  "!autorest"
+);
 
 @@clientName(IntervalSummary.shortPhrase, "shortDescription", "!autorest");
 @@clientName(IntervalSummary.briefPhrase, "briefDescription", "!autorest");
@@ -27,13 +35,21 @@ namespace Customizations;
 
 @@clientName(CurrentConditions.phrase, "description", "!autorest");
 @@clientName(CurrentConditions.isDayTime, "isDaytime", "!autorest");
-@@clientName(CurrentConditions.uvIndexPhrase, "uvIndexDescription", "!autorest");
+@@clientName(
+  CurrentConditions.uvIndexPhrase,
+  "uvIndexDescription",
+  "!autorest"
+);
 @@clientName(CurrentConditions.ceiling, "cloudCeiling", "!autorest");
 
 @@clientName(PressureTendency.localizedDescription, "description", "!autorest");
 
 @@clientName(DailyForecast.date, "dateTime", "!autorest");
-@@clientName(DailyForecast.degreeDaySummary, "meanTemperatureDeviation", "!autorest");
+@@clientName(
+  DailyForecast.degreeDaySummary,
+  "meanTemperatureDeviation",
+  "!autorest"
+);
 @@clientName(DailyForecast.airAndPollen, "airQuality", "!autorest");
 @@clientName(DailyForecast.day, "daytimeForecast", "!autorest");
 @@clientName(DailyForecast.night, "nighttimeForecast", "!autorest");
@@ -55,7 +71,11 @@ namespace Customizations;
 @@clientName(SevereWeatherAlert.class, "classification", "!autorest");
 @@clientName(SevereWeatherAlert.alertAreas, "alertDetails", "!autorest");
 
-@@clientName(SevereWeatherAlertDescription.localized, "description", "!autorest");
+@@clientName(
+  SevereWeatherAlertDescription.localized,
+  "description",
+  "!autorest"
+);
 @@clientName(SevereWeatherAlertDescription.english, "status", "!autorest");
 
 @@clientName(AlertArea, "AlertDetails", "!autorest");
@@ -73,7 +93,11 @@ namespace Customizations;
 @@clientName(StormForecastResult.results, "stormForecasts", "!autorest");
 
 @@clientName(StormForecast.dateTime, "timestamp", "!autorest");
-@@clientName(StormForecast.initializedDateTime, "initializedTimestamp", "!autorest");
+@@clientName(
+  StormForecast.initializedDateTime,
+  "initializedTimestamp",
+  "!autorest"
+);
 @@clientName(StormForecast.location, "coordinates", "!autorest");
 @@clientName(StormForecast.window, "weatherWindow", "!autorest");
 
@@ -95,24 +119,44 @@ namespace Customizations;
 
 @@clientName(AirQuality.dateTime, "timestamp", "!autorest");
 
-@@clientName(DailyAirQualityForecastResult.results, "airQualityResults", "!autorest");
+@@clientName(
+  DailyAirQualityForecastResult.results,
+  "airQualityResults",
+  "!autorest"
+);
 
 @@clientName(DailyAirQuality.dateTime, "timestamp", "!autorest");
 
-@@clientName(DailyHistoricalActualsResult.results, "historicalActuals", "!autorest");
+@@clientName(
+  DailyHistoricalActualsResult.results,
+  "historicalActuals",
+  "!autorest"
+);
 
 @@clientName(DailyHistoricalActuals.date, "timestamp", "!autorest");
 
-@@clientName(DailyHistoricalRecordsResult.results, "historicalRecords", "!autorest");
+@@clientName(
+  DailyHistoricalRecordsResult.results,
+  "historicalRecords",
+  "!autorest"
+);
 
 @@clientName(DailyHistoricalRecords.date, "timestamp", "!autorest");
 
-@@clientName(DailyHistoricalNormalsResult.results, "historicalNormals", "!autorest");
+@@clientName(
+  DailyHistoricalNormalsResult.results,
+  "historicalNormals",
+  "!autorest"
+);
 
 @@clientName(DailyHistoricalNormals.date, "timestamp", "!autorest");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Legacy.clientDefaultValue(ResponseFormatParameters.format, "json", "!autorest");
+@@Legacy.clientDefaultValue(
+  ResponseFormatParameters.format,
+  "json",
+  "!autorest"
+);
 
 // Flatten operations onto client instead of having an operation group attribute
 @client({

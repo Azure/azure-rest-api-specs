@@ -46,11 +46,23 @@ interface SingleDocumentTranslationClient {
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
-@@clientName(SingleDocumentTranslationClient.documentTranslate, "translate", "!autorest");
+@@clientName(
+  SingleDocumentTranslationClient.documentTranslate,
+  "translate",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.StatusSummary, "translationStatusSummary", "!autorest");
+@@clientName(
+  DocumentTranslation.StatusSummary,
+  "translationStatusSummary",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.StorageSource, "translationStorageSource", "!autorest");
+@@clientName(
+  DocumentTranslation.StorageSource,
+  "translationStorageSource",
+  "!autorest"
+);
 
 @@clientName(
   DocumentTranslation.GetTranslationsStatusOptions.ids,
@@ -58,9 +70,17 @@ interface SingleDocumentTranslationClient {
   "!autorest"
 );
 
-@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId", "!autorest");
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.id,
+  "translationId",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds", "!autorest");
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.ids,
+  "documentIds",
+  "!autorest"
+);
 
 @@clientName(
   DocumentTranslation.DocumentTranslateBody.body,

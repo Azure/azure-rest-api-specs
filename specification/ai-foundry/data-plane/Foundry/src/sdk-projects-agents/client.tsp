@@ -47,7 +47,11 @@ namespace Azure.AI.Projects {
     "!autorest"
   );
   //  @@clientName(CreatedBy, "AgentResponseItemSource", "!autorest");
-  @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions", "!autorest");
+  @@clientName(
+    FabricDataAgentToolParameters,
+    "FabricDataAgentToolOptions",
+    "!autorest"
+  );
 
   @@clientName(MemorySearchOptions, "MemorySearchToolOptions", "!autorest");
 
@@ -74,7 +78,11 @@ namespace Azure.AI.Projects {
     "OpenApiProjectConnectionSecurityScheme",
     "!autorest"
   );
-  @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme", "!autorest");
+  @@clientName(
+    OpenApiManagedSecurityScheme,
+    "OpenAPIManagedSecurityScheme",
+    "!autorest"
+  );
 
   @@clientName(
     OpenApiFunctionDefinition.auth,
@@ -87,23 +95,39 @@ namespace Azure.AI.Projects {
     "SharePointGroundingToolOptions",
     "!autorest"
   );
-  @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding", "!autorest");
+  @@clientName(
+    ToolArgumentBinding,
+    "StructuredInputToolArgumentBinding",
+    "!autorest"
+  );
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
   // --------------------------------------------------------------------------------
 
   @@access(OpenAI.LocalShellToolParam, Access.internal);
-  @@clientName(OpenAI.LocalShellToolParam, "InternalLocalShellTool", "!autorest");
+  @@clientName(
+    OpenAI.LocalShellToolParam,
+    "InternalLocalShellTool",
+    "!autorest"
+  );
 
   @@access(OpenAI.ApplyPatchToolParam, Access.internal);
-  @@clientName(OpenAI.ApplyPatchToolParam, "InternalApplyPatchToolParam", "!autorest");
+  @@clientName(
+    OpenAI.ApplyPatchToolParam,
+    "InternalApplyPatchToolParam",
+    "!autorest"
+  );
 
   @@access(OpenAI.CustomToolParam, Access.internal);
   @@clientName(OpenAI.CustomToolParam, "InternalCustomToolParam", "!autorest");
 
   @@access(OpenAI.FunctionShellToolParam, Access.internal);
-  @@clientName(OpenAI.FunctionShellToolParam, "InternalFunctionShellToolParam", "!autorest");
+  @@clientName(
+    OpenAI.FunctionShellToolParam,
+    "InternalFunctionShellToolParam",
+    "!autorest"
+  );
 
   @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
   @@clientName(
@@ -116,22 +140,42 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.MCPToolFilter, "InternalMCPToolFilter", "!autorest");
 
   @@access(OpenAI.MCPToolRequireApproval, Access.internal);
-  @@clientName(OpenAI.MCPToolRequireApproval, "InternalMCPToolRequireApproval", "!autorest");
+  @@clientName(
+    OpenAI.MCPToolRequireApproval,
+    "InternalMCPToolRequireApproval",
+    "!autorest"
+  );
 
   @@access(OpenAI.WebSearchActionFind, Access.internal);
-  @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind", "!autorest");
+  @@clientName(
+    OpenAI.WebSearchActionFind,
+    "InternalWebSearchActionFind",
+    "!autorest"
+  );
 
   @@access(OpenAI.CodeInterpreterTool, Access.internal);
-  @@clientName(OpenAI.CodeInterpreterTool, "InternalCodeInterpreterTool", "!autorest");
+  @@clientName(
+    OpenAI.CodeInterpreterTool,
+    "InternalCodeInterpreterTool",
+    "!autorest"
+  );
 
   @@access(OpenAI.ComparisonFilter, Access.internal);
-  @@clientName(OpenAI.ComparisonFilter, "InternalComparisonFilter", "!autorest");
+  @@clientName(
+    OpenAI.ComparisonFilter,
+    "InternalComparisonFilter",
+    "!autorest"
+  );
 
   @@access(OpenAI.CompoundFilter, Access.internal);
   @@clientName(OpenAI.CompoundFilter, "InternalCompoundFilter", "!autorest");
 
   @@access(OpenAI.ComputerUsePreviewTool, Access.internal);
-  @@clientName(OpenAI.ComputerUsePreviewTool, "InternalComputerUsePreviewTool", "!autorest");
+  @@clientName(
+    OpenAI.ComputerUsePreviewTool,
+    "InternalComputerUsePreviewTool",
+    "!autorest"
+  );
   @@access(OpenAI.FileSearchTool, Access.internal);
   @@clientName(OpenAI.FileSearchTool, "InternalFileSearchTool", "!autorest");
 
@@ -151,7 +195,11 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam", "!autorest");
 
   @@access(OpenAI.WebSearchPreviewTool, Access.internal);
-  @@clientName(OpenAI.WebSearchPreviewTool, "InternalWebSearchPreviewTool", "!autorest");
+  @@clientName(
+    OpenAI.WebSearchPreviewTool,
+    "InternalWebSearchPreviewTool",
+    "!autorest"
+  );
 
   @@access(OpenAI.WebSearchTool, Access.internal);
   @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool", "!autorest");
@@ -217,7 +265,11 @@ namespace Azure.AI.Projects {
 
   @@usage(PromptAgentDefinition, Usage.input | Usage.output);
   @@access(PromptAgentDefinition, Access.public);
-  @@clientName(PromptAgentDefinition, "DeclarativeAgentDefinition", "!autorest");
+  @@clientName(
+    PromptAgentDefinition,
+    "DeclarativeAgentDefinition",
+    "!autorest"
+  );
 
   @@usage(AgentObject, Usage.output);
   @@access(AgentObject, Access.public);

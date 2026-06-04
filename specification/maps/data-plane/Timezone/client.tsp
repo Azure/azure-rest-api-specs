@@ -7,7 +7,11 @@ using MapsTimezone;
 namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Legacy.clientDefaultValue(ResponseFormatParameters.format, "json", "!autorest");
+@@Legacy.clientDefaultValue(
+  ResponseFormatParameters.format,
+  "json",
+  "!autorest"
+);
 
 // Flatten operations onto client instead of having an operation group attribute
 @client({

@@ -5,7 +5,6 @@ using Azure.Core.Experimental;
 
 using Azure.AI.Projects;
 
-
 namespace Customizations;
 
 // --------------------------------------------------------------------------------
@@ -21,7 +20,8 @@ namespace Customizations;
 @@clientName(
   MicrosoftFabricPreviewTool.fabric_dataagent_preview,
   "FabricDataAgentPreview",
-  "!autorest");
+  "!autorest"
+);
 
 @@clientName(AgentObject, "AgentDetails", "!autorest");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "!autorest");
@@ -44,12 +44,21 @@ namespace Customizations;
 @@clientName(CreateAgentRequest, "CreateAgentInput", "!autorest");
 @@clientName(UpdateAgentRequest, "UpdateAgentInput", "!autorest");
 @@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput", "!autorest");
-@@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput", "!autorest");
-@@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput", "!autorest");
+@@clientName(
+  CreateAgentFromManifestRequest,
+  "CreateAgentFromManifestInput",
+  "!autorest"
+);
+@@clientName(
+  UpdateAgentFromManifestRequest,
+  "UpdateAgentFromManifestInput",
+  "!autorest"
+);
 @@clientName(
   CreateAgentVersionFromManifestRequest,
   "CreateAgentVersionFromManifestInput",
-  "!autorest");
+  "!autorest"
+);
 
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB", "!autorest");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB", "!autorest");
@@ -60,25 +69,43 @@ namespace Customizations;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel", "!autorest");
 
-@@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations", "!autorest");
+@@clientName(
+  OpenAI.MCPListToolsToolAnnotations,
+  "McpListToolsToolAnnotations",
+  "!autorest"
+);
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool", "!autorest");
 @@clientName(OpenAI.MCPTool, "McpTool", "!autorest");
-@@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema", "!autorest");
+@@clientName(
+  OpenAI.MCPListToolsToolInputSchema,
+  "McpListToolsToolInputSchema",
+  "!autorest"
+);
 @@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus", "!autorest");
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType", "!autorest");
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter", "!autorest");
-@@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval", "!autorest");
+@@clientName(
+  OpenAI.MCPToolRequireApproval,
+  "McpToolRequireApproval",
+  "!autorest"
+);
 
-@@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds", "!autorest");
+@@clientName(
+  MemorySearchPreviewTool.update_delay,
+  "updateDelaySeconds",
+  "!autorest"
+);
 
 @@clientName(
   OpenAI.ResponseFormatJsonSchemaSchema,
   "ResponseFormatJsonSchemaInner",
-  "!autorest");
+  "!autorest"
+);
 @@clientName(
   OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
   "cachedTokensCount",
-  "!autorest");
+  "!autorest"
+);
 
 //rename object types to avoid confusion with Java objects
 @@clientName(AgentObject.object, "objectType", "!autorest");
@@ -91,7 +118,11 @@ namespace Customizations;
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError", "!autorest");
-@@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters", "!autorest");
+@@clientName(
+  OpenApiFunctionDefinition.default_params,
+  "defaultParameters",
+  "!autorest"
+);
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
@@ -164,8 +195,16 @@ namespace Customizations;
 // making methods private to add a public shim using the OpenAI types.
 @@access(MemoryStores.searchMemories, Access.internal);
 @@access(MemoryStores.updateMemories, Access.internal);
-@@clientName(MemoryStores.updateMemories, "internalUpdateMemories", "!autorest");
-@@clientName(MemoryStores.searchMemories, "internalSearchMemories", "!autorest");
+@@clientName(
+  MemoryStores.updateMemories,
+  "internalUpdateMemories",
+  "!autorest"
+);
+@@clientName(
+  MemoryStores.searchMemories,
+  "internalSearchMemories",
+  "!autorest"
+);
 
 // Disabled convenient API generation to provide a custom shim returning `void` in the client
 @@convenientAPI(Agents.deleteAgent, false, "java");
