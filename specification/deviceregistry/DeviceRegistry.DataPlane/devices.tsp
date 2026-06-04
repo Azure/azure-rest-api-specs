@@ -7,7 +7,6 @@ import "./models.tsp";
 import "../common/deviceTypes.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceAuthenticationProfiles.tsp";
-import "./operations.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -166,10 +165,6 @@ model ProvisionDeviceOperation {
   @key("operationId")
   @visibility(Lifecycle.Read)
   id: string;
-
-  /** The kind of operation tracked by this status resource. */
-  @visibility(Lifecycle.Read)
-  kind: OperationKind.ProvisionDevice;
 
   /** The current status of the operation. */
   @Azure.Core.lroStatus

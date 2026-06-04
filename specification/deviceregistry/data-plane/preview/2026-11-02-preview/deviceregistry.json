@@ -4584,17 +4584,6 @@
           "description": "The unique identifier of the operation.",
           "readOnly": true
         },
-        "kind": {
-          "type": "string",
-          "description": "The kind of operation tracked by this status resource.",
-          "enum": [
-            "ProvisionDevice"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The current status of the operation.",
@@ -4625,7 +4614,6 @@
       },
       "required": [
         "id",
-        "kind",
         "status"
       ]
     },
