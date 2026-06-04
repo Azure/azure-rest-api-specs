@@ -14,13 +14,13 @@ namespace Microsoft.Support;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ServiceClassifications")
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 interface ClassifyServices {
   /**
    * Classify the list of right Azure services.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceClassifications_ClassifyServices")
+  @operationId("ServiceClassifications_classifyServices")
   @autoRoute
   classifyServices is ArmProviderActionSync<
     Request = ServiceClassificationRequest,
@@ -31,13 +31,13 @@ interface ClassifyServices {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ServiceClassifications")
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 interface ClassifyServicesNoSubscription {
   /**
    * Classify the list of right Azure services.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceClassificationsNoSubscription_ClassifyServices")
+  @operationId("ServiceClassificationsNoSubscription_classifyServices")
   @autoRoute
   classifyServices is ArmProviderActionSync<
     Request = ServiceClassificationRequest,

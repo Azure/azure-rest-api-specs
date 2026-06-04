@@ -122,7 +122,7 @@ union CreatedByType {
 /**
  * Status of Direct Connect Escalation.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 union EscalationStatus {
   string,
 
@@ -150,42 +150,6 @@ union EscalationStatus {
    * Escalation is unavailable and cannot be initiated due to customer not being enrolled to direct escalation
    */
   EscalationUnavailable: "EscalationUnavailable",
-}
-
-/**
- * Support channel type for the support ticket.
- */
-@added(Versions.v2026_06_01)
-union SupportChannel {
-  string,
-
-  /**
-   * Chat support channel.
-   */
-  Chat: "Chat",
-
-  /**
-   * Web support channel.
-   */
-  Web: "Web",
-}
-
-/**
- * Status of the chat conversation associated with the support ticket.
- */
-@added(Versions.v2026_06_01)
-union ChatConversationStatus {
-  string,
-
-  /**
-   * Chat conversation is currently active.
-   */
-  Active: "Active",
-
-  /**
-   * Chat conversation has been closed.
-   */
-  Closed: "Closed",
 }
 
 /**
@@ -278,7 +242,7 @@ model ServiceProperties {
 /**
  * Input to problem classification Classification API.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model ServiceClassificationRequest {
   /**
    * Natural language description of the customer’s issue.
@@ -299,7 +263,7 @@ model ServiceClassificationRequest {
 /**
  * Output of the service classification API.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model ServiceClassificationOutput {
   /**
    * Set of problem classification objects classified.
@@ -312,7 +276,7 @@ model ServiceClassificationOutput {
  * Service Classification result object.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model ServiceClassificationAnswer extends ClassificationService {
   /**
    * Child service.
@@ -323,7 +287,7 @@ model ServiceClassificationAnswer extends ClassificationService {
 /**
  * Service Classification result object.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model ClassificationService {
   /**
    * Azure resource Id of the service.
@@ -408,7 +372,7 @@ model ProblemClassificationsClassificationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @OpenAPI.extension("x-ms-client-flatten", true)
-  @added(Versions.v2026_06_01)
+  @added(Versions.v2025_06_01_preview)
   relatedService?: ClassificationService;
 }
 
@@ -654,28 +618,14 @@ model SupportTicketDetailsProperties {
   /**
    * Direct Connect Escalation details for a support ticket.
    */
-  @added(Versions.v2026_06_01)
+  @added(Versions.v2025_06_01_preview)
   directConnectEscalation?: DirectConnectEscalation;
 
   /**
    * Contains a link to the post on the community forum.
    */
-  @added(Versions.v2026_06_01)
+  @added(Versions.v2025_06_01_preview)
   communityForumPost?: string;
-
-  /**
-   * Support channel type for the support ticket.
-   */
-  @added(Versions.v2026_06_01)
-  @visibility(Lifecycle.Read)
-  supportChannel?: SupportChannel;
-
-  /**
-   * Status of the chat conversation associated with the support ticket.
-   */
-  @added(Versions.v2026_06_01)
-  @visibility(Lifecycle.Read)
-  chatConversationStatus?: ChatConversationStatus;
 }
 
 /**
@@ -858,7 +808,7 @@ model UpdateSupportTicket {
   /**
    * Direct Connect Escalation details for a support ticket.
    */
-  @added(Versions.v2026_06_01)
+  @added(Versions.v2025_06_01_preview)
   directConnectEscalation?: DirectConnectEscalation;
 }
 
@@ -1071,7 +1021,7 @@ model UploadFile {
 /**
  * Direct Connect Escalation details for a support ticket.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model DirectConnectEscalation {
   /**
    * Status of Direct Connect Escalation.
@@ -1093,7 +1043,7 @@ model DirectConnectEscalation {
 /**
  * The look up resource Id request body
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model LookUpResourceIdRequest {
   /**
    * The System generated Id that is unique. Use supportTicketId property for Microsoft.Support/supportTickets resource type.
@@ -1114,7 +1064,7 @@ model LookUpResourceIdRequest {
 /**
  * The look up resource id response
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2025_06_01_preview)
 model LookUpResourceIdResponse {
   /**
    * The resource Id of support resource type.
