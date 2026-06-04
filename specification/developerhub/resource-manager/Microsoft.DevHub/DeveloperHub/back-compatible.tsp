@@ -32,7 +32,7 @@ using Microsoft.DevHub;
 @@clientLocation(Workflows.get, "WorkflowOperations", "javascript");
 @@clientLocation(Workflows.createOrUpdate, "WorkflowOperations", "javascript");
 @@clientLocation(Workflows.updateTags, "WorkflowOperations", "javascript");
-@@clientLocation(Workflows.delete, "WorkflowOperations", "!javascript");
+@@clientLocation(Workflows.delete, "WorkflowOperations", "javascript");
 @@clientLocation(
   Workflows.listByResourceGroup,
   "WorkflowOperations",
