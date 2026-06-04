@@ -161,7 +161,7 @@ union IconCode {
 /**
  * An integer value associated with the type of unit being displayed. Can be
  * used for unit translation. For more information, see [Weather services in
- * Azure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).
+ * Azure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).
  */
 union UnitType {
   integer,
@@ -372,7 +372,7 @@ union LatestStatusKeyword {
 
   /**
    * Indicates that the alert has been updated since its initial issuance, but
-   * no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`.
+   * no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`.
    */
   Continue: "Continue",
 
@@ -682,7 +682,7 @@ model HourlyForecast {
   /**
    * A numeric value that corresponds to an image displaying the `iconPhrase`.
    * For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
@@ -691,7 +691,7 @@ model HourlyForecast {
    * as *Sunny*. It is paired with an `iconCode`, which is a numeric value
    * representing an image that visually depicts the weather condition described
    * by the `iconPhrase`. For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconPhrase?: string;
 
@@ -1049,7 +1049,7 @@ model MinuteForecastSummary {
   /**
    * A numeric value that corresponds to an image displaying the `iconPhrase`.
    * For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 }
@@ -1086,7 +1086,7 @@ model IntervalSummary {
   /**
    * A numeric value that corresponds to an image displaying the `iconPhrase`.
    * For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 }
@@ -1153,7 +1153,7 @@ model ForecastInterval {
   /**
    * A numeric value that corresponds to an image displaying the `iconPhrase`.
    * For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
@@ -1234,7 +1234,7 @@ model QuarterDayForecast {
   /**
    * A numeric value that corresponds to an image displaying the `iconPhrase`.
    * For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
@@ -1244,14 +1244,14 @@ model QuarterDayForecast {
    * numeric value representing an image that visually depicts the weather
    * condition described by the `iconPhrase`. For more information, see [Weather
    * services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconPhrase?: string;
 
   /**
    * Provides a brief textual description of the weather conditions for each
-   * quarter of the day. It uses more descriptive terms than `iconPhrase`, which
-   * might return *Thunderstorms* where phrase returns *Cloudy with a couple of
+   * quarter of the day. It uses more descriptive terms than `iconPhrase`, which
+   * might return *Thunderstorms* where phrase returns *Cloudy with a couple of
    * showers and a thunderstorm*. This makes it easy to understand and integrate
    * into applications for clear and concise weather forecasts.
    */
@@ -1345,7 +1345,7 @@ model QuarterDayForecast {
 
   /**
    * Indicates the intensity of precipitation (light, moderate, heavy). Only
-   * returned if `hasPrecipitation` is true.
+   * returned if `hasPrecipitation` is true.
    */
   precipitationIntensity?: string;
 
@@ -1448,7 +1448,7 @@ model CurrentConditions {
    * as *Sunny*. It is paired with an `iconCode`, which is a numeric value
    * representing an image that visually depicts the weather condition described
    * by the `iconPhrase`. For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   phrase?: string;
 
@@ -1456,7 +1456,7 @@ model CurrentConditions {
    * Numeric value representing an image that corresponds to the current weather
    * condition described by the `Phrase` property. For more information, see
    * [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons). May be
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons). May be
    * NULL.
    */
   iconCode?: IconCode;
@@ -1489,7 +1489,7 @@ model CurrentConditions {
    * comprehensive measure of how the weather actually feels.
    *
    * For more information, see [What is the AccuWeather RealFeel
-   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655
+   * Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)
    */
   realFeelTemperature?: WeatherValue;
 
@@ -1926,7 +1926,7 @@ model DailyForecast {
    * Provides detailed weather information for the daytime weather forecast,
    * including temperature, precipitation, wind, and other key attributes.
    *
-   * Provides comprehensive weather details that encompasses various attributes
+   * Provides comprehensive weather details that encompasses various attributes
    * describing different facets of the daytime weather forecast.
    */
   day?: DailyForecastDetail;
@@ -1935,7 +1935,7 @@ model DailyForecast {
    * Provides detailed weather information for the nighttime weather forecast,
    * including temperature, precipitation, wind, and other key attributes.
    *
-   * Provides comprehensive weather details that encompasses various attributes
+   * Provides comprehensive weather details that encompasses various attributes
    * describing different facets of the nighttime weather forecast.
    */
   night?: DailyForecastDetail;
@@ -2271,7 +2271,7 @@ model WeatherAlongRouteSummary {
   /**
    * A numeric value that corresponds to an image displaying the `iconPhrase`.
    * For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
@@ -2379,7 +2379,7 @@ model WaypointForecast {
   /**
    * Returns a numeric value that corresponds to an image displaying the
    * `iconPhrase`. For more information, see [Weather services in Azure
-   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
+   * Maps ](/azure/azure-maps/weather-services-concepts#weather-icons).
    */
   iconCode?: IconCode;
 
@@ -2682,7 +2682,7 @@ model AlertArea {
 
   /**
    * The date and time at which the alert ended or will end in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_format (yyyy-mm-ddThh:mm:ss-hh:mm).
+   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm).
    * For example, *2025-04-29T07:00:00-07:00*. If the alert spans multiple time
    * zones, the response will provide the local time corresponding to the
    * requested coordinates.
@@ -2817,16 +2817,16 @@ model DailyIndex {
   /**
    * Provides a brief, user-friendly explanation of the index value, helping
    * users understand its significance in relation to specific weather
-   * conditions or activities. For example, if the index value for Outdoor
-   * Barbecue is *Excellent*, the description will be *This is a great day for
+   * conditions or activities. For example, if the index value for Outdoor
+   * Barbecue is *Excellent*, the description will be *This is a great day for
    * an outdoor barbecue!*
    */
   description?: string;
 }
 
 /**
- * The `ActiveStormResult` object provides comprehensive information about ongoing
- * tropical storms. It includes an array of `ActiveStorm` objects, each detailing
+ * The `ActiveStormResult` object provides comprehensive information about ongoing
+ * tropical storms. It includes an array of `ActiveStorm` objects, each detailing
  * specific attributes of individual storms. These attributes encompass the
  * storm's government ID, basin ID, year of origin, name, and subtropical
  * status.
@@ -3057,7 +3057,7 @@ model StormForecast {
 
   /**
    * Provides forecast details for the storm within the specified time frame. If
-   * the `windowGeometry` parameter is set to true in the API request, this
+   * the `windowGeometry` parameter is set to true in the API request, this
    * property will include GeoJSON details for the window geometry.
    */
   window?: WeatherWindow;
@@ -3094,26 +3094,26 @@ model WeatherWindow {
   /**
    * The date and time when the forecast window begins. It is displayed in [ISO
    * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
-   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00.
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00.
    */
   beginDateTime?: utcDateTime;
 
   /**
    * The date and time when the forecast window ends. It is displayed in [ISO
    * 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format
-   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00.
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00.
    */
   endDateTime?: utcDateTime;
 
   /**
-   * The status of the tropical storm at the start of the forecast window,
+   * The status of the tropical storm at the start of the forecast window,
    * including its classification, such as tropical depression, tropical storm,
    * or hurricane.
    */
   beginStatus?: string;
 
   /**
-   * The status of the tropical storm at the end of the forecast window,
+   * The status of the tropical storm at the end of the forecast window,
    * including its classification, such as tropical depression, tropical storm,
    * or hurricane.
    */
@@ -3173,7 +3173,7 @@ model StormWindRadiiSummary {
 
 /**
  * Provides the necessary information to plot wind radius quadrants.
- * `beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90
+ * `beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90
  * = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW
  * quadrant). `range` specifies the radius in nautical miles.
  */
@@ -3342,7 +3342,7 @@ model AirQuality {
    * The air quality index (AQI) is an air quality rating scale set by local
    * regulating bodies. Scales can vary widely based on location. For more
    * information, see [Air quality
-   * index](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia.
+   * index](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia.
    */
   index?: float32;
 
@@ -3400,7 +3400,7 @@ model Pollutant {
   /**
    * The air quality index (AQI) as defined by local regulatory bodies. The
    * scale can vary significantly by location. For more information, see [Air
-   * quality index](https://en.wikipedia.org/wiki/Air_quality_index) in
+   * quality index](https://en.wikipedia.org/wiki/Air_quality_index) in
    * Wikipedia.
    */
   index?: float32;
@@ -3464,7 +3464,7 @@ model DailyAirQuality {
   /**
    * The air quality index (AQI) is a rating scale set by local regulating
    * bodies, which can vary widely by location. For more information, see [Air
-   * quality index](https://en.wikipedia.org/wiki/Air_quality_index) in
+   * quality index](https://en.wikipedia.org/wiki/Air_quality_index) in
    * Wikipedia.
    */
   index?: float32;
@@ -3662,7 +3662,7 @@ model DailyHistoricalRecords {
 }
 
 /**
- * The WeatherUnitYearMaxMinAvg object returns the year in which both the
+ * The WeatherUnitYearMaxMinAvg object returns the year in which both the
  * minimum and the maximum temperatures occurred on a specified day, along with
  * the recorded amounts. Also returns the average temperature for the given
  * date. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the
@@ -3698,10 +3698,10 @@ model WeatherValueYearMaxMinAvg {
  */
 model WeatherValueYear {
   /**
-   * The value property represents the specific measurement for any given
+   * The value property represents the specific measurement for any given
    * weather parameter. For example, if the weather parameter is maximum
    * temperature, and the location is Dilworth Park in Philadelphia, PA
-   * the value is 21.1 °C.
+   * the value is 21.1 °C.
    */
   value?: float32;
 

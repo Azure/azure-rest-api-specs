@@ -2210,7 +2210,7 @@
     },
     "ActiveStormResult": {
       "type": "object",
-      "description": "The `ActiveStormResult` object provides comprehensive information about ongoing\ntropical storms. It includes an array of `ActiveStorm` objects, each detailing\nspecific attributes of individual storms. These attributes encompass the\nstorm's government ID, basin ID, year of origin, name, and subtropical\nstatus.",
+      "description": "The `ActiveStormResult` object provides comprehensive information about ongoing\ntropical storms. It includes an array of `ActiveStorm` objects, each detailing\nspecific attributes of individual storms. These attributes encompass the\nstorm's government ID, basin ID, year of origin, name, and subtropical\nstatus.",
       "properties": {
         "results": {
           "type": "array",
@@ -2265,7 +2265,7 @@
         "index": {
           "type": "number",
           "format": "float",
-          "description": "The air quality index (AQI) is an air quality rating scale set by local\nregulating bodies. Scales can vary widely based on location. For more\ninformation, see [Air quality\nindex](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
+          "description": "The air quality index (AQI) is an air quality rating scale set by local\nregulating bodies. Scales can vary widely based on location. For more\ninformation, see [Air quality\nindex](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
         },
         "globalIndex": {
           "type": "number",
@@ -2334,7 +2334,7 @@
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time at which the alert ended or will end in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_format (yyyy-mm-ddThh:mm:ss-hh:mm).\nFor example, *2025-04-29T07:00:00-07:00*. If the alert spans multiple time\nzones, the response will provide the local time corresponding to the\nrequested coordinates."
+          "description": "The date and time at which the alert ended or will end in [ISO\n8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm).\nFor example, *2025-04-29T07:00:00-07:00*. If the alert spans multiple time\nzones, the response will provide the local time corresponding to the\nrequested coordinates."
         },
         "latestStatus": {
           "$ref": "#/definitions/LatestStatus",
@@ -2440,11 +2440,11 @@
         },
         "phrase": {
           "type": "string",
-          "description": "A descriptive term that corresponds to a specific weather condition, such\nas *Sunny*. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A descriptive term that corresponds to a specific weather condition, such\nas *Sunny*. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "Numeric value representing an image that corresponds to the current weather\ncondition described by the `Phrase` property. For more information, see\n[Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons). May be\nNULL."
+          "description": "Numeric value representing an image that corresponds to the current weather\ncondition described by the `Phrase` property. For more information, see\n[Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons). May be\nNULL."
         },
         "hasPrecipitation": {
           "type": "boolean",
@@ -2460,7 +2460,7 @@
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherValue",
-          "description": "The current RealFeel™ Temperature values, measured in degrees Celsius (C)\nor Fahrenheit (F), depending on the unit specified in the request. This\nmetric, developed by AccuWeather, incorporates over a dozen factors,\nincluding humidity, wind speed, cloud cover, and sun intensity, to offer a\ncomprehensive measure of how the weather actually feels.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655"
+          "description": "The current RealFeel™ Temperature values, measured in degrees Celsius (C)\nor Fahrenheit (F), depending on the unit specified in the request. This\nmetric, developed by AccuWeather, incorporates over a dozen factors,\nincluding humidity, wind speed, cloud cover, and sun intensity, to offer a\ncomprehensive measure of how the weather actually feels.\n\nFor more information, see [What is the AccuWeather RealFeel\nTemperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
         },
         "realFeelTemperatureShade": {
           "$ref": "#/definitions/WeatherValue",
@@ -2569,7 +2569,7 @@
         "index": {
           "type": "number",
           "format": "float",
-          "description": "The air quality index (AQI) is a rating scale set by local regulating\nbodies, which can vary widely by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
+          "description": "The air quality index (AQI) is a rating scale set by local regulating\nbodies, which can vary widely by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
         },
         "globalIndex": {
           "type": "number",
@@ -2704,11 +2704,11 @@
         },
         "day": {
           "$ref": "#/definitions/DailyForecastDetail",
-          "description": "Provides detailed weather information for the daytime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\n\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the daytime weather forecast."
+          "description": "Provides detailed weather information for the daytime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\n\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the daytime weather forecast."
         },
         "night": {
           "$ref": "#/definitions/DailyForecastDetail",
-          "description": "Provides detailed weather information for the nighttime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\n\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the nighttime weather forecast."
+          "description": "Provides detailed weather information for the nighttime weather forecast,\nincluding temperature, precipitation, wind, and other key attributes.\n\nProvides comprehensive weather details that encompasses various attributes\ndescribing different facets of the nighttime weather forecast."
         },
         "sources": {
           "type": "array",
@@ -3045,7 +3045,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Provides a brief, user-friendly explanation of the index value, helping\nusers understand its significance in relation to specific weather\nconditions or activities. For example, if the index value for Outdoor\nBarbecue is *Excellent*, the description will be *This is a great day for\nan outdoor barbecue!*"
+          "description": "Provides a brief, user-friendly explanation of the index value, helping\nusers understand its significance in relation to specific weather\nconditions or activities. For example, if the index value for Outdoor\nBarbecue is *Excellent*, the description will be *This is a great day for\nan outdoor barbecue!*"
         }
       }
     },
@@ -3266,7 +3266,7 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "cloudCover": {
           "type": "integer",
@@ -3661,11 +3661,11 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "iconPhrase": {
           "type": "string",
-          "description": "A descriptive term that corresponds to a specific weather condition, such\nas *Sunny*. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A descriptive term that corresponds to a specific weather condition, such\nas *Sunny*. It is paired with an `iconCode`, which is a numeric value\nrepresenting an image that visually depicts the weather condition described\nby the `iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "hasPrecipitation": {
           "type": "boolean",
@@ -4063,7 +4063,7 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         }
       }
     },
@@ -4122,7 +4122,7 @@
           {
             "name": "Continue",
             "value": "Continue",
-            "description": "Indicates that the alert has been updated since its initial issuance, but\nno changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
+            "description": "Indicates that the alert has been updated since its initial issuance, but\nno changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
           },
           {
             "name": "Correct",
@@ -4225,7 +4225,7 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         }
       }
     },
@@ -4258,7 +4258,7 @@
         "index": {
           "type": "number",
           "format": "float",
-          "description": "The air quality index (AQI) as defined by local regulatory bodies. The\nscale can vary significantly by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
+          "description": "The air quality index (AQI) as defined by local regulatory bodies. The\nscale can vary significantly by location. For more information, see [Air\nquality index](https://en.wikipedia.org/wiki/Air_quality_index) in\nWikipedia."
         },
         "globalIndex": {
           "type": "number",
@@ -4423,15 +4423,15 @@
         },
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "iconPhrase": {
           "type": "string",
-          "description": "A one or two word descriptive term that corresponds to a specific weather\ncondition, such as *Sunny*. It is paired with an `iconCode`, which is a\nnumeric value representing an image that visually depicts the weather\ncondition described by the `iconPhrase`. For more information, see [Weather\nservices in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A one or two word descriptive term that corresponds to a specific weather\ncondition, such as *Sunny*. It is paired with an `iconCode`, which is a\nnumeric value representing an image that visually depicts the weather\ncondition described by the `iconPhrase`. For more information, see [Weather\nservices in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "phrase": {
           "type": "string",
-          "description": "Provides a brief textual description of the weather conditions for each\nquarter of the day. It uses more descriptive terms than `iconPhrase`, which\nmight return *Thunderstorms* where phrase returns *Cloudy with a couple of\nshowers and a thunderstorm*. This makes it easy to understand and integrate\ninto applications for clear and concise weather forecasts."
+          "description": "Provides a brief textual description of the weather conditions for each\nquarter of the day. It uses more descriptive terms than `iconPhrase`, which\nmight return *Thunderstorms* where phrase returns *Cloudy with a couple of\nshowers and a thunderstorm*. This makes it easy to understand and integrate\ninto applications for clear and concise weather forecasts."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherValueRange",
@@ -4477,7 +4477,7 @@
         },
         "precipitationIntensity": {
           "type": "string",
-          "description": "Indicates the intensity of precipitation (light, moderate, heavy). Only\nreturned if `hasPrecipitation` is true."
+          "description": "Indicates the intensity of precipitation (light, moderate, heavy). Only\nreturned if `hasPrecipitation` is true."
         },
         "precipitationProbability": {
           "type": "integer",
@@ -4523,7 +4523,7 @@
     },
     "RadiusSector": {
       "type": "object",
-      "description": "Provides the necessary information to plot wind radius quadrants.\n`beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90\n= NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW\nquadrant). `range` specifies the radius in nautical miles.",
+      "description": "Provides the necessary information to plot wind radius quadrants.\n`beginBearing` and `endBearing` indicate the angles in degrees (Bearing 0–90\n= NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW\nquadrant). `range` specifies the radius in nautical miles.",
       "properties": {
         "beginBearing": {
           "type": "number",
@@ -4656,7 +4656,7 @@
         },
         "window": {
           "$ref": "#/definitions/WeatherWindow",
-          "description": "Provides forecast details for the storm within the specified time frame. If\nthe `windowGeometry` parameter is set to true in the API request, this\nproperty will include GeoJSON details for the window geometry."
+          "description": "Provides forecast details for the storm within the specified time frame. If\nthe `windowGeometry` parameter is set to true in the API request, this\nproperty will include GeoJSON details for the window geometry."
         },
         "windRadiiSummary": {
           "type": "array",
@@ -4867,7 +4867,7 @@
     },
     "UnitType": {
       "type": "number",
-      "description": "An integer value associated with the type of unit being displayed. Can be\nused for unit translation. For more information, see [Weather services in\nAzure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).",
+      "description": "An integer value associated with the type of unit being displayed. Can be\nused for unit translation. For more information, see [Weather services in\nAzure Maps ](/azure/azure-maps/weather-services-concepts#unit-types).",
       "enum": [
         0,
         1,
@@ -5027,7 +5027,7 @@
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "Returns a numeric value that corresponds to an image displaying the\n`iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "Returns a numeric value that corresponds to an image displaying the\n`iconPhrase`. For more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "shortPhrase": {
           "type": "string",
@@ -5120,7 +5120,7 @@
       "properties": {
         "iconCode": {
           "$ref": "#/definitions/IconCode",
-          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
+          "description": "A numeric value that corresponds to an image displaying the `iconPhrase`.\nFor more information, see [Weather services in Azure\nMaps ](/azure/azure-maps/weather-services-concepts#weather-icons)."
         },
         "hazards": {
           "$ref": "#/definitions/WeatherHazards",
@@ -5249,7 +5249,7 @@
         "value": {
           "type": "number",
           "format": "float",
-          "description": "The value property represents the specific measurement for any given\nweather parameter. For example, if the weather parameter is maximum\ntemperature, and the location is Dilworth Park in Philadelphia, PA\nthe value is 21.1 °C."
+          "description": "The value property represents the specific measurement for any given\nweather parameter. For example, if the weather parameter is maximum\ntemperature, and the location is Dilworth Park in Philadelphia, PA\nthe value is 21.1 °C."
         },
         "unit": {
           "type": "string",
@@ -5279,7 +5279,7 @@
     },
     "WeatherValueYearMaxMinAvg": {
       "type": "object",
-      "description": "The WeatherUnitYearMaxMinAvg object returns the year in which both the\nminimum and the maximum temperatures occurred on a specified day, along with\nthe recorded amounts. Also returns the average temperature for the given\ndate. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the\nunit specified in the request.",
+      "description": "The WeatherUnitYearMaxMinAvg object returns the year in which both the\nminimum and the maximum temperatures occurred on a specified day, along with\nthe recorded amounts. Also returns the average temperature for the given\ndate. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the\nunit specified in the request.",
       "properties": {
         "maximum": {
           "$ref": "#/definitions/WeatherValueYear",
@@ -5310,20 +5310,20 @@
         "beginDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the forecast window begins. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
+          "description": "The date and time when the forecast window begins. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
         },
         "endDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time when the forecast window ends. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
+          "description": "The date and time when the forecast window ends. It is displayed in [ISO\n8601](https://www.iso.org/iso-8601-date-and-time-format.html) format\n(yyyy-mm-ddThh:mm:ss-hh:mm). For example, 2025-04-29T07:00:00-07:00."
         },
         "beginStatus": {
           "type": "string",
-          "description": "The status of the tropical storm at the start of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
+          "description": "The status of the tropical storm at the start of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
         },
         "endStatus": {
           "type": "string",
-          "description": "The status of the tropical storm at the end of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
+          "description": "The status of the tropical storm at the end of the forecast window,\nincluding its classification, such as tropical depression, tropical storm,\nor hurricane."
         },
         "geometry": {
           "$ref": "#/definitions/GeoJsonGeometry",
