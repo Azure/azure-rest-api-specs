@@ -52,10 +52,10 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "Devices"
     },
     {
-      "name": "Devices"
+      "name": "Operations"
     },
     {
       "name": "Device Capabilities"
@@ -2107,7 +2107,7 @@
         "tags": [
           "Devices"
         ],
-        "description": "Provision devices in a namespace.",
+        "description": "Provision a device in a namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2118,6 +2118,9 @@
             "description": "The unique identifier of the namespace.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/OperationIdHeaderParameter"
           },
           {
             "name": "body",
@@ -2162,6 +2165,11 @@
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2179,7 +2187,7 @@
           }
         },
         "x-ms-examples": {
-          "Provision devices in a namespace": {
+          "Provision a device in a namespace": {
             "$ref": "./examples/Devices_Provision.json"
           }
         },
@@ -2445,6 +2453,66 @@
           },
           "Get the status of a long-running operation": {
             "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/provisionDeviceOperations/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetProvisionDeviceOperation",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the status of a device-provisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique identifier of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProvisionDeviceOperation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a device-provisioning operation": {
+            "$ref": "./examples/Devices_GetProvisionDeviceOperation.json"
           }
         }
       }
@@ -4505,6 +4573,60 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ProvisionDeviceOperation": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:provision` action on devices in a\nnamespace. Mirrors the shape of the central `Operation` resource but\nexposes a typed `result` so SDK callers receive the strongly-typed\n`ProvisionDeviceResult` payload directly.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the operation.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of operation tracked by this status resource.",
+          "enum": [
+            "ProvisionDevice"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current status of the operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details when the operation failed.",
+          "readOnly": true
+        },
+        "executedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation result expires (UTC).",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the device-provisioning operation, available once `status` is `Succeeded`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "status"
       ]
     },
     "ProvisionDeviceRequest": {

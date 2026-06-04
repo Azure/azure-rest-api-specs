@@ -1,10 +1,11 @@
 {
   "operationId": "Devices_Provision",
-  "title": "Provision devices in a namespace",
+  "title": "Provision a device in a namespace",
   "parameters": {
     "endpoint": "https://westus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-02-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "Operation-Id": "op-7af3",
     "body": {
       "iotHubDeviceId": "dps-enrollment-device-abc-123",
       "targetEndpoint": {
@@ -35,11 +36,12 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/operations/op1"
+        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/provisionDeviceOperations/op-7af3?api-version=2026-11-02-preview",
+        "Retry-After": 30
       },
       "body": {
-        "id": "op1",
-        "status": "InProgress"
+        "id": "op-7af3",
+        "status": "Running"
       }
     }
   }

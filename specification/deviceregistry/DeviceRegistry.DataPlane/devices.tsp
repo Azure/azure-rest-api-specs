@@ -7,12 +7,15 @@ import "./models.tsp";
 import "../common/deviceTypes.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceAuthenticationProfiles.tsp";
+import "./operations.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -147,6 +150,50 @@ model ProvisionDeviceResult {
 }
 
 // ──────────────────────────────────────────────
+// Provision-device status monitor endpoint
+// ──────────────────────────────────────────────
+
+/**
+ * Status monitor for the long-running `:provision` action on devices in a
+ * namespace. Mirrors the shape of the central `Operation` resource but
+ * exposes a typed `result` so SDK callers receive the strongly-typed
+ * `ProvisionDeviceResult` payload directly.
+ */
+@parentResource(Namespace)
+@resource("provisionDeviceOperations")
+model ProvisionDeviceOperation {
+  /** The unique identifier of the operation. */
+  @key("operationId")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The kind of operation tracked by this status resource. */
+  @visibility(Lifecycle.Read)
+  kind: OperationKind.ProvisionDevice;
+
+  /** The current status of the operation. */
+  @Azure.Core.lroStatus
+  @visibility(Lifecycle.Read)
+  status: Azure.Core.Foundations.OperationState;
+
+  /** Error details when the operation failed. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+
+  /** The time at which the operation was started (UTC). */
+  @visibility(Lifecycle.Read)
+  executedAt?: utcDateTime;
+
+  /** The time at which the operation result expires (UTC). */
+  @visibility(Lifecycle.Read)
+  expiresAt?: utcDateTime;
+
+  /** The result of the device-provisioning operation, available once `status` is `Succeeded`. */
+  @visibility(Lifecycle.Read)
+  result?: ProvisionDeviceResult;
+}
+
+// ──────────────────────────────────────────────
 // Devices interface
 // ──────────────────────────────────────────────
 
@@ -177,12 +224,37 @@ interface Devices {
     QueryDevicesResponse
   >;
 
-  /** Provision devices in a namespace. */
-  @pollingOperation(Operations.get)
+  /** Provision a device in a namespace. */
+  @pollingOperation(ProvisionDeviceOperations.get)
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
-    ProvisionDeviceRequest,
-    ProvisionDeviceResult
+    ProvisionDeviceRequest & OperationIdHeaderParameter,
+    ProvisionDeviceResult,
+    Azure.Core.Foundations.Error,
+    ResponseHeadersTrait<
+      Azure.Core.Foundations.RetryAfterHeader,
+      TraitContext.Action
+    >
+  >;
+}
+
+/** Polling operations for the long-running `:provision` action on devices. */
+@tag("Devices")
+interface ProvisionDeviceOperations {
+  /** Get the status of a device-provisioning operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Devices in generated SDK clients."
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  // Override the emitted operationId to surface this status monitor under
+  // the `Devices` SDK client (matches the wire-side `Devices_Provision`
+  // action that produces these operations) rather than as a top-level
+  // `ProvisionDeviceOperations_Get` method.
+  @operationId("Devices_GetProvisionDeviceOperation")
+  get is ResourceOperations.ResourceRead<
+    ProvisionDeviceOperation,
+    ResponseHeadersTrait<
+      Azure.Core.Foundations.RetryAfterHeader,
+      TraitContext.Read
+    >
   >;
 }
