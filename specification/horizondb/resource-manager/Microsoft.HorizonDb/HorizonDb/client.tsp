@@ -32,7 +32,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-  "HorizonDBClusterForPatchUpdate",
+  "HorizonDBClusterPatch",
   "csharp"
 );
 @@clientName(
@@ -82,7 +82,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-  "HorizonDBParameterGroupForPatchUpdate",
+  "HorizonDBParameterGroupPatch",
   "csharp"
 );
 @@clientName(
