@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-liftr-base";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using LiftrBase;
 
 namespace Microsoft.Confluent;
 
@@ -1964,7 +1966,7 @@ model AzureBlobStorageSinkConnectorServiceInfo
   /**
    * Azure Blob Storage Account Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   storageAccountKey?: string;
 
   /**
@@ -2019,7 +2021,7 @@ model AzureCosmosDBSinkConnectorServiceInfo
   /**
    * Azure Cosmos Database Master Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   cosmosMasterKey?: string;
 
   /**
@@ -2063,7 +2065,7 @@ model AzureCosmosDBSourceConnectorServiceInfo
   /**
    * Azure Cosmos Database Master Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   cosmosMasterKey?: string;
 
   /**
@@ -2116,7 +2118,7 @@ model AzureSynapseAnalyticsSinkConnectorServiceInfo
   /**
    * Azure Synapse SQL login details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   synapseSqlPassword?: string;
 
   /**
@@ -2152,13 +2154,13 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiSecret?: string;
 
   /**
@@ -2225,7 +2227,7 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiKey?: string;
 
   /**
@@ -2289,13 +2291,13 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiSecret?: string;
 
   /**
@@ -2363,7 +2365,7 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiKey?: string;
 
   /**
@@ -2426,13 +2428,13 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
   /**
    * Kafka API Key
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiKey?: string;
 
   /**
    * Kafka API Key Secret
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   apiSecret?: string;
 
   /**
@@ -2475,4 +2477,90 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
    * The partner connector type.
    */
   partnerConnectorType: "KafkaAzureSynapseAnalyticsSink";
+}
+
+/**
+ * A key-value pair for extensibility.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+model KeyValuePair {
+  /** The key. */
+  key: string;
+
+  /** The value. */
+  value: string;
+}
+
+/**
+ * Network Gateway Properties
+ */
+model NetworkGatewayProperties {
+  /**
+   * Display name of the network gateway
+   */
+  networkGatewayName: string;
+
+  /**
+   * The cloud service provider region for the network gateway
+   */
+  region: string;
+
+  /**
+   * Metadata of the record
+   */
+  metadata?: SCMetadataEntity;
+
+  /**
+   * Provisioning state of the network gateway
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisionState;
+
+  /**
+   * Additional properties for extensibility
+   */
+  @identifiers(#["key"])
+  dictionary?: KeyValuePair[];
+}
+
+/**
+ * Access Point Properties
+ */
+model AccessPointProperties {
+  /**
+   * Display name of the access point
+   */
+  accessPointName: string;
+
+  /**
+   * The cloud service provider region for the access point
+   */
+  region: string;
+
+  /**
+   * VNet injection target (LiftrBase standard model). Contains the virtual network resource ID and the delegated subnet resource ID.
+   */
+  vnetInjection: VnetInjectionDetails;
+
+  /**
+   * IP ranges to route through your virtual network instead of Confluent's default path. Required for Kafka clients in peered VNets or on-premises networks (e.g., 10.0.0.0/8, 172.16.0.0/12).
+   */
+  egressRoutes?: string[];
+
+  /**
+   * Metadata of the record
+   */
+  metadata?: SCMetadataEntity;
+
+  /**
+   * Provisioning state of the access point
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisionState;
+
+  /**
+   * Additional properties for extensibility
+   */
+  @identifiers(#["key"])
+  dictionary?: KeyValuePair[];
 }

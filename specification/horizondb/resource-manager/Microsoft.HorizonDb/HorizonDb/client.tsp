@@ -32,7 +32,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-  "HorizonDBClusterForPatchUpdate",
+  "HorizonDBClusterPatch",
   "csharp"
 );
 @@clientName(
@@ -82,7 +82,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-  "HorizonDBParameterGroupForPatchUpdate",
+  "HorizonDBParameterGroupPatch",
   "csharp"
 );
 @@clientName(
@@ -207,5 +207,15 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.HorizonDb.HorizonDbClusterProperties.pointInTimeUTC,
   "PointInTimeUtcOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterProperties.readonlyEndpoint,
+  "ReadOnlyEndpoint",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbParameterGroupProperties.pgVersion,
+  "PostgreSqlVersion",
   "csharp"
 );
