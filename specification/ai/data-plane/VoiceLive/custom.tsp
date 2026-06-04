@@ -102,6 +102,25 @@ model RequestSession {
    */
   @added(Versions.v2026_04_10)
   metadata?: Record<string>;
+
+  /**
+   * (GA `v1`) Maximum duration of the session in seconds before the service automatically
+   * terminates it. Used to bound long-lived realtime connections. This is an additive,
+   * generally-available capability on the `v1` channel.
+   */
+  @added(Versions.v1)
+  @minValue(1)
+  max_session_duration_seconds?: int32;
+
+  /**
+   * (Preview) Experimental barge-in tuning that lets the caller interrupt the assistant more
+   * aggressively. This is preview-only surface: it is opted into at runtime via the
+   * `VoiceLive-Features: BargeIn=V1Preview` request header and is intentionally fenced out of
+   * the GA `v1` swagger via `@removed(Versions.v1)`.
+   */
+  @added(Versions.PuPr)
+  @removed(Versions.v1)
+  experimental_barge_in?: ExperimentalBargeInConfig;
 }
 
 /**
@@ -142,6 +161,54 @@ model ResponseSession is RequestSession {
 
   /** The unique identifier for the session. */
   id?: string;
+}
+
+/**
+ * Feature opt-in keys for VoiceLive preview capabilities.
+ *
+ * Mirrors Foundry's `FoundryFeaturesOptInKeys`: each member is a feature flag opt-in
+ * string sent on the `VoiceLive-Features` header to enable preview features or to
+ * modify persisted preview resources on the `v1` channel. Preview-only, so it is added
+ * at the virtual `PuPr` version and fenced out of the GA `v1` swagger via `@removed`.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed opt-in key set, mirroring Foundry's FoundryFeaturesOptInKeys."
+@added(Versions.PuPr)
+@removed(Versions.v1)
+union VoiceLiveFeaturesOptInKeys {
+  /** Opt-in key enabling the experimental barge-in preview feature. */
+  barge_in_v1_preview: "BargeIn=V1Preview",
+}
+
+/**
+ * (Preview) Configuration for experimental barge-in behavior.
+ *
+ * This model is preview-only surface on the `v1` channel: it is added at the virtual
+ * `PuPr` version and removed at `v1` so it appears in the preview swagger but not in the
+ * GA `v1` swagger. At runtime it is gated behind the `VoiceLive-Features: BargeIn=V1Preview`
+ * opt-in header (see `VoiceLiveFeaturesOptInKeys.barge_in_v1_preview`). When the feature
+ * graduates to GA, drop the `@removed(Versions.v1)` decorator (and the header gate) so it
+ * becomes part of the evergreen `v1` contract.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.PuPr)
+@removed(Versions.v1)
+@usage(RequestUsage)
+model ExperimentalBargeInConfig {
+  /** Whether experimental barge-in is enabled for the session. */
+  enabled: boolean = false;
+
+  /**
+   * Sensitivity of barge-in detection. Range: 0.0 (least sensitive) to 1.0 (most sensitive).
+   * Higher values let the caller interrupt the assistant more easily.
+   */
+  @minValue(0)
+  @maxValue(1)
+  sensitivity?: float32;
+
+  /** Minimum duration of caller speech, in milliseconds, required to trigger a barge-in. */
+  @minValue(0)
+  min_speech_duration_ms?: int32;
 }
 
 /** Supported OpenAI voice names (string enum). */

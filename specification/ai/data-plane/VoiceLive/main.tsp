@@ -22,4 +22,13 @@ enum Versions {
 
   /** Version 2026-04-10. */
   v2026_04_10: "2026-04-10",
+
+  /**
+   * An interim virtual API version representing backwards compatibility changes moving
+   * from public preview to general availability.
+   */
+  PuPr: "virtual-public-preview",
+
+  /** VoiceLive API version v1. */
+  v1: "v1",
 }
