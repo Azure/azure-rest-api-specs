@@ -568,6 +568,21 @@ using Microsoft.Billing;
   "BillingTransferValidationResultProperties",
   "csharp"
 );
+@@clientName(
+  BillingAccounts.addPaymentTerms::parameters.body,
+  "arrayOfPaymentTerm",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.cancelPaymentTerms::parameters.body,
+  "dateTime",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.validatePaymentTerms::parameters.body,
+  "arrayOfPaymentTerm",
+  "csharp"
+);
 
 // Restore GA C# property types that the new spec models as plain `string`:
 //   resource IDs -> Azure.Core.armResourceIdentifier, URLs -> url, tenant IDs -> uuid (Guid?),
@@ -744,7 +759,6 @@ using Microsoft.Billing;
 @@usage(Agreement, Usage.input, "csharp");
 @@usage(AgreementProperties, Usage.input, "csharp");
 @@usage(AvailableBalance, Usage.input, "csharp");
-@@usage(AvailableBalanceProperties, Usage.input, "csharp");
 @@usage(BillingAccount, Usage.input, "csharp");
 @@usage(BillingPlanInformation, Usage.input, "csharp");
 @@usage(BillingRequestProperties, Usage.input, "csharp");
@@ -760,7 +774,6 @@ using Microsoft.Billing;
 @@usage(EnrollmentAccount, Usage.input, "csharp");
 @@usage(EnrollmentAccountProperties, Usage.input, "csharp");
 @@usage(Invoice, Usage.input, "csharp");
-@@usage(InvoiceProperties, Usage.input, "csharp");
 @@usage(PartnerTransferDetails, Usage.input, "csharp");
 @@usage(PartnerTransferProperties, Usage.input, "csharp");
 @@usage(PaymentDetail, Usage.input, "csharp");
@@ -771,8 +784,6 @@ using Microsoft.Billing;
 @@usage(Product, Usage.input, "csharp");
 @@usage(RecipientTransferDetails, Usage.input, "csharp");
 @@usage(RecipientTransferProperties, Usage.input, "csharp");
-@@usage(RefundDetailsSummary, Usage.input, "csharp");
-@@usage(RefundTransactionDetails, Usage.input, "csharp");
 @@usage(RenewPropertiesResponse, Usage.input, "csharp");
 @@usage(Reservation, Usage.input, "csharp");
 @@usage(ReservationExtendedStatusInfo, Usage.input, "csharp");
@@ -829,5 +840,16 @@ using Microsoft.Billing;
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Transaction,
   Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+
+// Restore GA Pageable<BillingTransferValidationResult> return type for RecipientTransfers.validate.
+// Spec models the response envelope `ValidateTransferListResponse` with `@pageItems value`,
+// but `ArmResourceActionSync` doesn't mark the op as paging in TCGC, so the C# generator
+// exposes the envelope (breaking GA which returned `Pageable<BillingTransferValidationResult>`).
+// Client-only override; no swagger impact.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore previous SDK Pageable<BillingTransferValidationResult> return type"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  RecipientTransfers.validate,
   "csharp"
 );
