@@ -50,10 +50,10 @@ using Microsoft.Monitor;
   "ShouldExcludeDefaultActionGroups",
   "csharp"
 );
-@@clientName(RelatedAlert, "IssueRelatedAlertProperties", "csharp");
-@@clientName(RelatedAlerts, "IssueRelatedAlertPropertiesList", "csharp");
-@@clientName(RelatedResource, "IssueRelatedResourceProperties", "csharp");
-@@clientName(RelatedResources, "IssueRelatedResourcePropertiesList", "csharp");
+@@clientName(RelatedAlert, "IssueRelatedAlertInfo", "csharp");
+@@clientName(RelatedAlerts, "IssueRelatedAlertInfoList", "csharp");
+@@clientName(RelatedResource, "IssueRelatedResourceInfo", "csharp");
+@@clientName(RelatedResources, "IssueRelatedResourceInfoList", "csharp");
 @@clientName(Relevance, "MonitorRelevanceStatus", "csharp");
 @@clientName(Status, "MonitorIssueStatus", "csharp");
 @@clientName(PublicNetworkAccess,
@@ -75,6 +75,10 @@ using Microsoft.Monitor;
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
   "MonitorWorkspacePrivateEndpointConnectionProvisioningState",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
+  "MonitorWorkspacePrivateEndpointServiceConnectionStatus",
   "csharp"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
