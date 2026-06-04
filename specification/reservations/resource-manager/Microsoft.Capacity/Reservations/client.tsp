@@ -53,6 +53,7 @@ namespace ReservationsClient;
 
 // Type renames to preserve GA SDK surface.
 @@clientName(ReservationResponse, "ReservationDetail", "csharp");
+@@alternateType(ReservationResponse.location, azureLocation, "csharp");
 @@clientName(ReservationOrderResponse, "ReservationOrder", "csharp");
 @@clientName(Patch, "ReservationDetailPatch", "csharp");
 @@clientName(ReservationsProperties, "ReservationProperties", "csharp");
