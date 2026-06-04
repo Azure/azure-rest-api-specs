@@ -470,7 +470,8 @@ op privateLinkResourcesGetCustomization(
 );
 @@Azure.ClientGenerator.Core.alternateType(
   AdvancedThreatProtectionSettingNameAlias.settingName,
-  "current"
+  "current",
+  "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
@@ -490,7 +491,8 @@ op privateLinkResourcesGetCustomization(
 );
 @@Azure.ClientGenerator.Core.alternateType(
   ServerVulnerabilityAssessmentNameAlias.serverVulnerabilityAssessment,
-  "default"
+  "default",
+  "python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
