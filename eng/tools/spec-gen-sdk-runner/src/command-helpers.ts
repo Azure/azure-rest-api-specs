@@ -289,11 +289,17 @@ export function getBreakingChangeInfo(executionReport: ExecutionReport): boolean
 
 /**
  * Determine whether the SDK generation succeeded but the package build failed.
- * A `warning` execution result means generation produced an SDK that did not build,
- * which is the signal used to flag a generated SDK pull request for automated build repair.
+ *
+ * The `warning` execution result is the contract used by the .NET spec-gen-sdk
+ * script to signal "an SDK was generated but it did not build". That interpretation
+ * of `warning` is currently .NET-specific. It does not impact other languages because
+ * the build-failed label is only emitted for languages that configure a `buildFailed`
+ * label in the centralized `sdkLabels` map (today only .NET); see
+ * {@link setBuildFailedLabelVariable}. A language opts in by defining its own
+ * `buildFailed` label once its build-failed contract is established.
  *
  * @param executionReport - The spec-gen-sdk execution report.
- * @returns true when the build failed (execution result is `warning`).
+ * @returns true when the execution result is `warning`.
  */
 export function getBuildFailedInfo(executionReport: ExecutionReport): boolean {
   return executionReport.executionResult === "warning";
@@ -306,7 +312,8 @@ export function getBuildFailedInfo(executionReport: ExecutionReport): boolean {
  * scenario) and never from plain spec-PR CI validation. The label is applied to the
  * generated SDK pull request so that automated build-failure repair can be triggered.
  * The label name is sourced from the centralized `sdkLabels` map; languages without a
- * configured `buildFailed` label are skipped.
+ * configured `buildFailed` label are skipped, which is what scopes this behavior to
+ * .NET today (see {@link getBuildFailedInfo} for the `warning` contract).
  *
  * @param commandInput - The command input (provides the SDK language).
  * @param executionReport - The spec-gen-sdk execution report.
