@@ -348,11 +348,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SynonymMap, Access.public);
 @@usage(SynonymMap, Usage.input);
 @@access(AutocompleteItem, Access.public);
-@@usage(AutocompleteItem, Usage.input, "!csharp");
+@@usage(AutocompleteItem, Usage.input, "!csharp,!autorest");
 @@access(SuggestResult, Access.public);
 @@usage(SuggestResult, Usage.input);
 @@access(IndexingResult, Access.public);
-@@usage(IndexingResult, Usage.input, "!csharp");
+@@usage(IndexingResult, Usage.input, "!csharp,!autorest");
 @@access(FacetResult, Access.public);
 @@usage(FacetResult, Usage.input);
 @@access(QueryAnswerResult, Access.public);
@@ -3780,7 +3780,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(
   AzureOpenAIVectorizerParameters.deploymentId,
   "deploymentName",
-  "!javascript"
+  "!javascript,!autorest"
 );
 @@clientName(
   AzureOpenAIVectorizerParameters.authIdentity,

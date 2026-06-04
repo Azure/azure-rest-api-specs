@@ -609,7 +609,7 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomized(
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
   webAppsDeletePrivateEndpointConnectionSlotCustomized,
-  "!javascript"
+  "!javascript,!autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

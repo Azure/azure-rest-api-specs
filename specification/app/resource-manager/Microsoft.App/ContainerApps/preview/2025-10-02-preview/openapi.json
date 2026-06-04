@@ -12743,7 +12743,7 @@
         },
         "activeRevisionsMode": {
           "type": "string",
-          "description": "ActiveRevisionsMode controls how active revisions are handled for the Container app:\n<list><item>Multiple: multiple revisions can be active.</item><item>Single: Only one revision can be active at a time. Revision weights can not be used in this mode. If no value if provided, this is the default.</item></list>",
+          "description": "Controls how active revisions are handled for the Container app.",
           "default": "Single",
           "enum": [
             "Multiple",
@@ -17447,12 +17447,14 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/JobPatchPropertiesProperties"
+          "$ref": "#/definitions/JobPatchPropertiesProperties",
+          "description": "Container Apps Job patch resource properties."
         }
       }
     },
     "JobPatchPropertiesProperties": {
       "type": "object",
+      "description": "Container Apps Job patch properties.",
       "properties": {
         "environmentId": {
           "type": "string",
@@ -21348,6 +21350,7 @@
     },
     "TemplateUpdateStatus": {
       "type": "object",
+      "description": "Session pool template update status.",
       "properties": {
         "activeTemplate": {
           "$ref": "#/definitions/TemplateStatus",
