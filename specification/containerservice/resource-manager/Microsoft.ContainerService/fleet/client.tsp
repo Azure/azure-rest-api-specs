@@ -88,6 +88,13 @@ using TypeSpec.Http;
   "ContainerServiceFleetManagedNamespace",
   "csharp"
 );
+// In contrast, the FleetManagedNamespaceProperties gets flattened in the csharp (.NET) SDK,
+// which also avoids a clash with the name applied here.
+@@clientName(
+  ManagedNamespaceProperties,
+  "ContainerServiceFleetManagedNamespaceProperties",
+  "csharp"
+);
 @@clientName(SkipProperties, "ContainerServiceFleetSkipProperties", "csharp");
 @@clientName(SkipTarget, "ContainerServiceFleetSkipTarget", "csharp");
 @@clientName(SkipTarget.type, "TargetType", "csharp");
