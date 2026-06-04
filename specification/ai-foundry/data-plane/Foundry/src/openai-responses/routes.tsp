@@ -18,9 +18,10 @@ alias AgentSessionIdResponseHeader = {
 @tag("Responses")
 interface Responses {
   /**
-   * Creates a model response.
+   * Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
+  @summary("Create a model response")
   @operationId("createResponse")
   @post
   createResponse is OpenAIOperation<
@@ -40,6 +41,7 @@ interface Responses {
    * @param starting_after The sequence number of the event after which to start streaming.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
+  @summary("Retrieve a model response")
   @operationId("getResponse")
   @get
   @route("{response_id}")
@@ -64,6 +66,7 @@ interface Responses {
   /**
    * Deletes a model response.
    */
+  @summary("Delete a model response")
   @delete
   @route("{response_id}")
   @operationId("deleteResponse")
@@ -84,8 +87,9 @@ interface Responses {
   >;
 
   /**
-   * Cancels a model response.
+   * Cancels a model response with the given ID. Only responses created with the background parameter set to true can be cancelled.
    */
+  @summary("Cancel a model response")
   @post
   @route("{response_id}/cancel")
   @operationId("cancelResponse")
@@ -106,8 +110,9 @@ interface Responses {
   >;
 
   /**
-   * Returns a list of input items for a given response.
+   * Retrieves the input items associated with the specified response.
    */
+  @summary("List input items for a response")
   @operationId("listInputItems")
   @get
   @route("{response_id}/input_items")
@@ -127,8 +132,9 @@ interface Responses {
   >;
 
   /**
-   * Returns the list of all responses.
+   * Returns a collection of all stored responses matching specified filter criteria.
    */
+  @summary("List responses")
   @get
   @operationId("listResponses")
   @list
@@ -144,8 +150,9 @@ interface Responses {
   >;
 
   /**
-   * Produces a compaction of a responses conversation.
+   * Compacts a conversation into a response object suitable for long-running and zero-data-retention scenarios.
    */
+  @summary("Compact a conversation")
   @post
   @operationId("compactResponseConversation")
   @route("compact")
