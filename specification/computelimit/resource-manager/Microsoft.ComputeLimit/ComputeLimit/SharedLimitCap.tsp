@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -40,12 +39,23 @@ model GuaranteedCap {
   value: boolean;
 }
 
+/** Per-subscription cap override for a single guest subscription participating in the shared limit. */
+@added(Versions.v2026_07_01)
+model IndividualSubscriptionCap {
+  /** The guest subscription identifier this cap applies to. */
+  subscriptionId: string;
+
+  /** The cap value in count units for this guest subscription. A numeric value sets the cap; null explicitly clears any previously configured cap for this subscription. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tri-state per-subscription semantics on the request: an entry whose 'cap' is a number sets that subscription's cap, an entry whose 'cap' is explicitly null clears that subscription's cap, and a subscription absent from the array entirely is left unchanged. The 'explicit clear' intent is distinct from 'no change' and cannot be expressed with optionality alone."
+  cap: int32 | null;
+}
+
 /** Properties of a shared limit cap resource. */
 @added(Versions.v2026_07_01)
 model SharedLimitCapProperties {
   /** The host subscription that owns this shared limit cap configuration. */
   @visibility(Lifecycle.Read)
-  hostSubscriptionId?: uuid;
+  hostSubscriptionId?: string;
 
   /** The cap configured for the caller's subscription, in count units. */
   @visibility(Lifecycle.Read)
@@ -67,11 +77,10 @@ model SharedLimitCapProperties {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   guaranteedCap?: GuaranteedCap;
 
-  /** Per-subscription cap overrides keyed by guest subscription ID. Omitted keys leave the corresponding subscription's cap unchanged; a numeric value sets the cap; an explicit null clears the cap. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tri-state per-subscription semantics on the request: a missing key leaves that guest subscription's cap unchanged, a numeric value sets that subscription's cap, and an explicit null clears that subscription's cap. TypeSpec Record values cannot be marked optional, so int32 | null is the only way to express the 'explicit clear' intent distinctly from 'no change'."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Keys are dynamic guest subscription IDs known only at runtime, so the set of properties cannot be modeled as an explicit schema. The map shape is part of the public service contract and the value type is fully typed (int32 | null), so the rationale behind the rule (untyped open shapes) does not apply."
+  /** Per-subscription cap overrides for guest subscriptions. A subscription absent from the array is left unchanged; an entry with a numeric 'cap' sets the cap; an entry with an explicit null 'cap' clears the cap. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  individualSubscriptionCaps?: Record<int32 | null>;
+  @identifiers(#["subscriptionId"])
+  individualSubscriptionCaps?: IndividualSubscriptionCap[];
 
   ...DefaultProvisioningStateProperty;
 }

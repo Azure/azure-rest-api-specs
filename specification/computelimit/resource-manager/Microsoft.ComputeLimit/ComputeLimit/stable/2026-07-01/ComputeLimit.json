@@ -994,11 +994,6 @@
     }
   },
   "definitions": {
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1191,6 +1186,26 @@
         }
       }
     },
+    "IndividualSubscriptionCap": {
+      "type": "object",
+      "description": "Per-subscription cap override for a single guest subscription participating in the shared limit.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The guest subscription identifier this cap applies to."
+        },
+        "cap": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The cap value in count units for this guest subscription. A numeric value sets the cap; null explicitly clears any previously configured cap for this subscription.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "cap"
+      ]
+    },
     "LimitName": {
       "type": "object",
       "description": "Properties of the limit name.",
@@ -1266,7 +1281,7 @@
       "description": "Properties of a shared limit cap resource.",
       "properties": {
         "hostSubscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "The host subscription that owns this shared limit cap configuration.",
           "readOnly": true
         },
@@ -1305,13 +1320,14 @@
           ]
         },
         "individualSubscriptionCaps": {
-          "type": "object",
-          "description": "Per-subscription cap overrides keyed by guest subscription ID. Omitted keys leave the corresponding subscription's cap unchanged; a numeric value sets the cap; an explicit null clears the cap.",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer",
-            "x-nullable": true
+          "type": "array",
+          "description": "Per-subscription cap overrides for guest subscriptions. A subscription absent from the array is left unchanged; an entry with a numeric 'cap' sets the cap; an entry with an explicit null 'cap' clears the cap.",
+          "items": {
+            "$ref": "#/definitions/IndividualSubscriptionCap"
           },
+          "x-ms-identifiers": [
+            "subscriptionId"
+          ],
           "x-ms-mutability": [
             "update",
             "create"
