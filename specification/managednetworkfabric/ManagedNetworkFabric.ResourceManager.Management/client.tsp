@@ -67,34 +67,28 @@ using Microsoft.ManagedNetworkFabric;
   "java"
 );
 
-@@clientName(
-  Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
+@@clientName(Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
   "hostname",
   "java"
 );
-@@clientName(
-  Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
+@@clientName(Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
   "hostname",
   "java"
 );
 
-@@clientName(
-  Microsoft.ManagedNetworkFabric,
+@@clientName(Microsoft.ManagedNetworkFabric,
   "ManagedNetworkFabricMgmtClient",
   "python"
 );
-@@clientName(
-  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
+@@clientName(Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
   "ManagementNetworkConfigurationPatchableProperties",
   "python"
 );
-@@clientName(
-  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
+@@clientName(Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
   "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
   "python"
 );
-@@clientName(
-  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
+@@clientName(Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
   "OptionBProperties",
   "python"
 );
