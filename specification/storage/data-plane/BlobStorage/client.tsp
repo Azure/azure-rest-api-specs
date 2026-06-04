@@ -324,6 +324,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   },
   "rust"
 );
+@@alternateType(
+  UserDelegationKey,
+  {
+    identity: "azure_storage_common::models::UserDelegationKey",
+  },
+  "rust"
+);
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
 @@alternateType(
@@ -786,7 +793,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
 @@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
