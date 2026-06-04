@@ -1,5 +1,6 @@
 import {
   APIViewRequestData,
+  sdkLabels,
   SdkName,
   SdkNameSchema,
   SpecGenSdkArtifactInfo,
@@ -284,6 +285,46 @@ export function getBreakingChangeInfo(executionReport: ExecutionReport): boolean
     }
   }
   return false;
+}
+
+/**
+ * Determine whether the SDK generation succeeded but the package build failed.
+ * A `warning` execution result means generation produced an SDK that did not build,
+ * which is the signal used to flag a generated SDK pull request for automated build repair.
+ *
+ * @param executionReport - The spec-gen-sdk execution report.
+ * @returns true when the build failed (execution result is `warning`).
+ */
+export function getBuildFailedInfo(executionReport: ExecutionReport): boolean {
+  return executionReport.executionResult === "warning";
+}
+
+/**
+ * Emit the build-failed label pipeline variable for the SDK PR-creation flow.
+ *
+ * This is intended to be called only from the PR-creation flow (single-spec SDK release
+ * scenario) and never from plain spec-PR CI validation. The label is applied to the
+ * generated SDK pull request so that automated build-failure repair can be triggered.
+ * The label name is sourced from the centralized `sdkLabels` map; languages without a
+ * configured `buildFailed` label are skipped.
+ *
+ * @param commandInput - The command input (provides the SDK language).
+ * @param executionReport - The spec-gen-sdk execution report.
+ */
+export function setBuildFailedLabelVariable(
+  commandInput: SpecGenSdkCmdInput,
+  executionReport: ExecutionReport,
+): void {
+  if (!getBuildFailedInfo(executionReport)) {
+    return;
+  }
+  const buildFailedLabel = sdkLabels[commandInput.sdkLanguage]?.buildFailed;
+  if (buildFailedLabel) {
+    logMessage(
+      `Runner: SDK generation succeeded but the build failed; setting BuildFailedLabel variable to '${buildFailedLabel}'`,
+    );
+    setVsoVariable("BuildFailedLabel", buildFailedLabel);
+  }
 }
 
 /**

@@ -6,12 +6,14 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   generateArtifact,
   getBreakingChangeInfo,
+  getBuildFailedInfo,
   getRequiredSettingValue,
   getSpecPaths,
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
   selectGenerationTool,
+  setBuildFailedLabelVariable,
   setPipelineVariables,
 } from "../src/command-helpers.js";
 import * as log from "../src/log.js";
@@ -399,6 +401,84 @@ describe("commands.ts", () => {
       const result = getBreakingChangeInfo(mockExecutionReport);
 
       expect(result).toBe(false);
+    });
+  });
+
+  describe("getBuildFailedInfo", () => {
+    test("should return true when the execution result is a warning", () => {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "warning",
+        packages: [],
+      };
+
+      expect(getBuildFailedInfo(mockExecutionReport)).toBe(true);
+    });
+
+    test("should return false when the execution result is not a warning", () => {
+      for (const executionResult of ["succeeded", "failed", "notEnabled"] as const) {
+        const mockExecutionReport: ExecutionReport = {
+          executionResult,
+          packages: [],
+        };
+
+        expect(getBuildFailedInfo(mockExecutionReport)).toBe(false);
+      }
+    });
+  });
+
+  describe("setBuildFailedLabelVariable", () => {
+    const mockCommandInput = (sdkLanguage: SdkName) => ({
+      workingFolder: "/working/folder",
+      sdkLanguage,
+      runMode: "",
+      localSpecRepoPath: "",
+      localSdkRepoPath: "",
+      sdkRepoName: "",
+      specCommitSha: "abc123",
+      specRepoHttpsUrl: "",
+    });
+
+    beforeEach(() => {
+      vi.clearAllMocks();
+    });
+
+    test("should set the BuildFailedLabel variable for .NET when the build failed", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Net), {
+        executionResult: "warning",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).toHaveBeenCalledWith("BuildFailedLabel", "auto-sdk-build-fix");
+    });
+
+    test("should not set the variable when the build did not fail", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Net), {
+        executionResult: "succeeded",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
+    });
+
+    test("should not set the variable for languages without a configured build-failed label", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Python), {
+        executionResult: "warning",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
     });
   });
 
