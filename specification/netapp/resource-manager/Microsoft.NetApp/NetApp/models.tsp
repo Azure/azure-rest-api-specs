@@ -246,8 +246,12 @@ union KeySource {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 union ElasticKeySource {
   string,
 

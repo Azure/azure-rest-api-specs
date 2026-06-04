@@ -89,16 +89,20 @@ interface ApiManagementGatewayConfigConnectionResources {
 
 @@maxLength(ApiManagementGatewayConfigConnectionResource.name, 30);
 @@minLength(ApiManagementGatewayConfigConnectionResource.name, 1);
-@@doc(ApiManagementGatewayConfigConnectionResource.name,
+@@doc(
+  ApiManagementGatewayConfigConnectionResource.name,
   "The name of the API Management gateway config connection."
 );
-@@encodedName(ApiManagementGatewayConfigConnectionResource.etag,
+@@encodedName(
+  ApiManagementGatewayConfigConnectionResource.etag,
   "application/json",
   "etag"
 );
-@@doc(ApiManagementGatewayConfigConnectionResource.properties,
+@@doc(
+  ApiManagementGatewayConfigConnectionResource.properties,
   "Properties of the API Management gateway config connection."
 );
-@@doc(ApiManagementGatewayConfigConnectionResources.createOrUpdate::parameters.resource,
+@@doc(
+  ApiManagementGatewayConfigConnectionResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management gateway config connection operation."
 );

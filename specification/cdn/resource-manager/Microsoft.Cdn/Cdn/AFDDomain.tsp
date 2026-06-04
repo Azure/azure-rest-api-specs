@@ -41,14 +41,17 @@ interface AFDDomains {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDDomain,
-    Response = ArmResourceUpdatedResponse<AFDDomain> | ArmResourceCreatedResponse<
-      AFDDomain,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AFDDomain>
-    > | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
-      ArmLroLocationHeader<FinalResult = AFDDomain>> & {
-      @bodyRoot
-      _: AFDDomain;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AFDDomain>
+      | ArmResourceCreatedResponse<
+          AFDDomain,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AFDDomain>
+        >
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
+          ArmLroLocationHeader<FinalResult = AFDDomain>> & {
+          @bodyRoot
+          _: AFDDomain;
+        })
   >;
 
   /**
@@ -59,12 +62,14 @@ interface AFDDomains {
   update is ArmCustomPatchAsync<
     AFDDomain,
     PatchModel = AFDDomainUpdateParameters,
-    Response = ArmResponse<AFDDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
-      ArmLroLocationHeader<FinalResult = AFDDomain> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AFDDomain;
-    })
+    Response =
+      | ArmResponse<AFDDomain>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDDomain> &
+          ArmLroLocationHeader<FinalResult = AFDDomain> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AFDDomain;
+        })
   >;
 
   /**
@@ -74,9 +79,12 @@ interface AFDDomains {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDDomain,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -99,10 +107,12 @@ interface AFDDomains {
   >;
 }
 
-@@doc(AFDDomain.name,
+@@doc(
+  AFDDomain.name,
   "Name of the domain under the profile which is unique globally."
 );
-@@doc(AFDDomain.properties,
+@@doc(
+  AFDDomain.properties,
   "The JSON object that contains the properties of the domain to create."
 );
 @@doc(AFDDomains.create::parameters.resource, "Domain properties");
