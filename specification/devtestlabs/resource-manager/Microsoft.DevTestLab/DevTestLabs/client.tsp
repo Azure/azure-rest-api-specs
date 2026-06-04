@@ -592,3 +592,7 @@ using Microsoft.DevTestLab;
   "username",
   "java"
 );
+@@alternateType(ArmTemplateProperties.contents, unknown, "java");
+@@alternateType(ArtifactProperties.parameters, unknown, "java");
+@@alternateType(ArmTemplateInfo.template, unknown, "java");
+@@alternateType(ArmTemplateInfo.parameters, unknown, "java");
