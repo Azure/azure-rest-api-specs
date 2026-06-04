@@ -20,28 +20,16 @@ interface Responses {
   /**
    * Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
    */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
   @summary("Create a model response")
   @operationId("createResponse")
   @post
-  @sharedRoute
   createResponse is OpenAIOperation<
     OpenAI.CreateResponse & UserIsolationKeyHeader,
-    AgentSessionIdResponseHeader & {
-      @body body: OpenAI.Response;
-    }
-  >;
 
-  /**
-   * Creates a streaming model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
-   */
-  @summary("Create a streaming model response")
-  @operationId("createResponseStream")
-  @post
-  @sharedRoute
-  createResponseStream is OpenAIOperation<
-    OpenAI.CreateResponse & UserIsolationKeyHeader,
-    AgentSessionIdResponseHeader &
-      SseResponseOf<OpenAI.CreateResponseStreamingResponse>
+      | (AgentSessionIdResponseHeader & OpenAI.Response)
+      | (AgentSessionIdResponseHeader &
+          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**
@@ -52,11 +40,11 @@ interface Responses {
    * @param stream If set to true, model response data will be streamed to the client as it is generated using server-sent events.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
   @summary("Retrieve a model response")
   @operationId("getResponse")
   @get
   @route("{response_id}")
-  @sharedRoute
   getResponse is OpenAIOperation<
     {
       @path
@@ -76,36 +64,7 @@ interface Responses {
   >;
 
   /**
-   * Retrieves a streaming model response with the given ID.
-   *
-   * @param response_id The ID of the response to retrieve.
-   * @param include Specifies additional output data to include in the model response.
-   * @param starting_after The sequence number of the event after which to start streaming.
-   */
-  @summary("Retrieve a streaming model response")
-  @operationId("getResponseStream")
-  @get
-  @route("{response_id}")
-  @sharedRoute
-  getResponseStream is OpenAIOperation<
-    {
-      @path
-      @example("resp_677efb5139a88190b512bc3fef8e535d")
-      response_id: string;
-
-      @query(#{ name: "include[]", explode: true })
-      includables?: OpenAI.IncludeEnum[] = #[];
-
-      @header accept: "text/event-stream";
-      @query starting_after?: int32;
-      ...UserIsolationKeyHeader;
-    },
-    AgentSessionIdResponseHeader &
-      SseResponseOf<OpenAI.CreateResponseStreamingResponse>
-  >;
-
-  /**
-   * Removes the specified response and its stored content.
+   * Deletes a model response.
    */
   @summary("Delete a model response")
   @delete
