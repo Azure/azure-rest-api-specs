@@ -28,8 +28,8 @@ describe("client-tsp-import", function () {
   });
 
   it("should pass when client.tsp does not exist", async function () {
-    fileExistsSpy.mockImplementation(async (path: string) => {
-      return !path.endsWith("client.tsp");
+    fileExistsSpy.mockImplementation((path: string) => {
+      return Promise.resolve(!path.endsWith("client.tsp"));
     });
 
     const result = await new ClientTspImportRule().execute(mockFolder);
@@ -37,8 +37,8 @@ describe("client-tsp-import", function () {
   });
 
   it("should pass when main.tsp does not exist", async function () {
-    fileExistsSpy.mockImplementation(async (path: string) => {
-      return !path.endsWith("main.tsp");
+    fileExistsSpy.mockImplementation((path: string) => {
+      return Promise.resolve(!path.endsWith("main.tsp"));
     });
 
     const result = await new ClientTspImportRule().execute(mockFolder);
