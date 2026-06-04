@@ -91,7 +91,7 @@ interface Toolboxes {
 
   /** Removes the specified toolbox along with all of its versions. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @summary("Delete a toolbox and all its versions")
+  @summary("Delete a toolbox")
   @operationId("deleteToolbox")
   @delete
   @route("/toolboxes/{name}")
