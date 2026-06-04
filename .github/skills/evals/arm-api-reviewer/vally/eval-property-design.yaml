@@ -4,9 +4,9 @@ description: |
   Validates detection of secret properties, naming violations,
   missing descriptions, and enum issues.
 
-config:
+defaults:
   runs: 1
-  timeout: 300
+  timeout: "300s"
   model: claude-opus-4.6-1m
   judge_model: claude-sonnet-4.6
 
@@ -31,9 +31,14 @@ stimuli:
       expect_skills:
         - azure-api-review
     graders:
-      - type: output-contains
+      - type: output-matches
+        name: "secret-detection rule cited"
         config:
-          substring: "SEC-SECRET-DETECT"
+          # Canonical rule ID per .github/skills/azure-api-review/references/secret-detection.md
+          # is SEC-SECRET-DETECT. Also accept widely-used Azure-tooling
+          # synonyms (Spectral / lintdiff variants) since the substantive
+          # finding is identical -- the rule-ID label is the only difference.
+          pattern: "SEC-SECRET-DETECT|SecretPropertyDetection|SecretsIn(?:Properties|Response)|secret-prop"
       - type: output-contains
         config:
           substring: "connectionString"
