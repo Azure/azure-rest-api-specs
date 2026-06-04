@@ -9,9 +9,12 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Microsoft.Monitor;
 
-@@clientName(Azure.ResourceManager.CommonTypes.Origin,
+@@clientName(Microsoft.Monitor, "MonitorWorkspacesMgmtClient", "python");
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Origin,
   "ArmOrigin",
-  "python,go"
+  "python,go,javascript"
 );
 
 @@clientName(AzureMonitorWorkspaceResource, "MonitorWorkspace", "csharp");
@@ -99,19 +102,23 @@ namespace Microsoft.Monitor {
   }
 }
 
-@@alternateType(Issue.create::parameters.resource,
+@@alternateType(
+  Issue.create::parameters.resource,
   IssueResourceCreate,
   "javascript"
 );
-@@alternateType(Issue.setBackgroundVisualization::parameters.body,
+@@alternateType(
+  Issue.setBackgroundVisualization::parameters.body,
   BackgroundVisualizationCreate,
   "javascript"
 );
-@@alternateType(Issue.addOrUpdateAlerts::parameters.body,
+@@alternateType(
+  Issue.addOrUpdateAlerts::parameters.body,
   RelatedAlertsCreate,
   "javascript"
 );
-@@alternateType(Issue.addOrUpdateResources::parameters.body,
+@@alternateType(
+  Issue.addOrUpdateResources::parameters.body,
   RelatedResourcesCreate,
   "javascript"
 );

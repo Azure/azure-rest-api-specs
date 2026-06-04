@@ -90,7 +90,8 @@ interface Secrets {
 
 @@doc(Secret.name, "The name of the secret.");
 @@doc(Secret.properties, "Properties of the secret");
-@@doc(Secrets.createOrUpdate::parameters.resource,
+@@doc(
+  Secrets.createOrUpdate::parameters.resource,
   "Parameters to create or update the secret"
 );
 @@doc(Secrets.update::parameters.properties, "Parameters to patch the secret");

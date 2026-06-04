@@ -41,10 +41,13 @@ interface AFDOrigins {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDOrigin,
-    Response = ArmResourceUpdatedResponse<AFDOrigin> | ArmResourceCreatedResponse<AFDOrigin> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AFDOrigin>> & {
-      @bodyRoot
-      _: AFDOrigin;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AFDOrigin>
+      | ArmResourceCreatedResponse<AFDOrigin>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AFDOrigin>> & {
+          @bodyRoot
+          _: AFDOrigin;
+        })
   >;
 
   /**
@@ -55,11 +58,13 @@ interface AFDOrigins {
   update is ArmCustomPatchAsync<
     AFDOrigin,
     PatchModel = AFDOriginUpdateParameters,
-    Response = ArmResponse<AFDOrigin> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOrigin> &
-      ArmLroLocationHeader<FinalResult = AFDOrigin>> & {
-      @bodyRoot
-      _: AFDOrigin;
-    })
+    Response =
+      | ArmResponse<AFDOrigin>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDOrigin> &
+          ArmLroLocationHeader<FinalResult = AFDOrigin>> & {
+          @bodyRoot
+          _: AFDOrigin;
+        })
   >;
 
   /**
@@ -69,9 +74,12 @@ interface AFDOrigins {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDOrigin,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          ArmLroLocationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -82,7 +90,8 @@ interface AFDOrigins {
 }
 
 @@doc(AFDOrigin.name, "Name of the origin which is unique within the profile.");
-@@doc(AFDOrigin.properties,
+@@doc(
+  AFDOrigin.properties,
   "The JSON object that contains the properties of the origin."
 );
 @@doc(AFDOrigins.create::parameters.resource, "Origin properties");

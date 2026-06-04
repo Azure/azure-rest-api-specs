@@ -16,7 +16,8 @@ namespace Customizations;
 @@clientName(NumberFormat, "AtlasNumberFormat", "csharp");
 @@clientName(TimeZone, "AtlasTimeZone", "csharp");
 @@clientName(SortType, "AtlasSortType", "csharp");
-@@clientName(ClassificationAssociateOptions,
+@@clientName(
+  ClassificationAssociateOptions,
   "ClassificationAssociateConfig",
   "csharp"
 );

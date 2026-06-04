@@ -6,11 +6,13 @@ using Microsoft.ManagedOps;
 
 @@clientName(Microsoft.ManagedOps, "ManagedOpsMgmtClient", "python");
 @@clientName(ManagedOps, "ManagedOperations", "csharp");
-@@clientName(AzureMonitorInformation,
+@@clientName(
+  AzureMonitorInformation,
   "ManagedOpsAzureMonitorInformation",
   "csharp"
 );
-@@clientName(ChangeTrackingInformation,
+@@clientName(
+  ChangeTrackingInformation,
   "ManagedOpsChangeTrackingInformation",
   "csharp"
 );
@@ -18,11 +20,13 @@ using Microsoft.ManagedOps;
 @@clientName(ProvisioningState, "ManagedOpsProvisioningState", "csharp");
 @@clientName(ServiceInformation, "ManagedOpsServiceInformation", "csharp");
 @@clientName(DesiredConfiguration, "ManagedOpsDesiredConfiguration", "csharp");
-@@clientName(DesiredConfigurationUpdate,
+@@clientName(
+  DesiredConfigurationUpdate,
   "ManagedOpsDesiredConfigurationUpdate",
   "csharp"
 );
-@@clientName(DesiredEnablementState,
+@@clientName(
+  DesiredEnablementState,
   "ManagedOpsDesiredEnablementState",
   "csharp"
 );

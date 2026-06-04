@@ -54,6 +54,7 @@ interface Operations
       ArmResponse<OperationListResult>,
       CloudError
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.Search provider."
 );

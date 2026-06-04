@@ -211,6 +211,11 @@ stages:
         inputs:
           versionSpec: $(PythonVersion)
 
+      - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+        parameters:
+          SourceRootPath: $(SpecRepoDirectory)
+          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
@@ -238,8 +243,12 @@ stages:
           fi
 
           if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
-            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
+            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"
+            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"
+          fi
+          if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
+            optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
+            sdk_gen_info="$sdk_gen_info SDK Release Type: ${{ parameters.SdkReleaseType }},"
           fi
           sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
 
@@ -266,7 +275,7 @@ stages:
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
         env:
-          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:

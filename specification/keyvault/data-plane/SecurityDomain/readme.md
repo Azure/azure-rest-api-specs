@@ -24,9 +24,18 @@ To see additional help and options, run:
 
 These are the global settings for the KeyVault API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
-tag: package-preview-2026-01-01-preview
+tag: package-preview-2026-03-01-preview
+```
+
+### Tag: package-preview-2026-03-01-preview
+
+These settings apply only when `--tag=package-preview-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-01-preview'
+input-file:
+  - preview/2026-03-01-preview/securitydomain.json
 ```
 
 ### Tag: package-preview-2026-01-01-preview
@@ -69,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-7.6-preview.2` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-7.6-preview.2'
+```yaml $(tag) == 'package-preview-7.6-preview.2'
 input-file:
   - preview/7.6-preview.2/common.json
   - preview/7.6-preview.2/securitydomain.json
@@ -79,7 +88,7 @@ input-file:
 
 These settings apply only when `--tag=package-7.5` is specified on the command line.
 
-``` yaml $(tag) == 'package-7.5'
+```yaml $(tag) == 'package-7.5'
 input-file:
   - stable/7.5/securitydomain.json
 ```
@@ -92,17 +101,17 @@ input-file:
 
 These transforms apply to any generator.
 
-``` yaml
+```yaml
 directive:
-# Rename models back to what they were before 7.4 for autorest-based code generators.
-# Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
-# See https://github.com/Azure/azure-rest-api-specs/pull/22435 for details.
-- from: certificates.json
-  where: $.definitions.Action
-  transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
-- from: keys.json
-  where: $.definitions.LifetimeActionsType
-  transform: $.properties.type["x-ms-enum"].name = "ActionType";
+  # Rename models back to what they were before 7.4 for autorest-based code generators.
+  # Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+  # See https://github.com/Azure/azure-rest-api-specs/pull/22435 for details.
+  - from: certificates.json
+    where: $.definitions.Action
+    transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
+  - from: keys.json
+    where: $.definitions.LifetimeActionsType
+    transform: $.properties.type["x-ms-enum"].name = "ActionType";
 ```
 
 ## C#
@@ -110,7 +119,7 @@ directive:
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -129,7 +138,7 @@ See configuration in [readme.go.md](./readme.go.md)
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
+```yaml $(java)
 java:
   azure-arm: true
   namespace: com.microsoft.azure.keyvault
@@ -141,7 +150,7 @@ java:
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: IntegerTypeMustHaveFormat
     from: securitydomain.json
