@@ -5,90 +5,93 @@ using Azure.Core.Experimental;
 
 using Azure.AI.Projects;
 
+
+namespace Customizations;
+
 // --------------------------------------------------------------------------------
 // Renames
 // --------------------------------------------------------------------------------
 
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
-@@clientName(Azure.AI.Projects, "AgentsClient");
+@@clientName(Azure.AI.Projects, "AgentsClient", "!autorest");
 
-@@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
-@@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
-@@clientName(OpenAI.LogProb.logprob, "logProb");
+@@clientName(OpenAI.OutputTextContent.logprobs, "logProbs", "!autorest");
+@@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration", "!autorest");
+@@clientName(OpenAI.LogProb.logprob, "logProb", "!autorest");
 @@clientName(
   MicrosoftFabricPreviewTool.fabric_dataagent_preview,
-  "FabricDataAgentPreview"
-);
+  "FabricDataAgentPreview",
+  "!autorest");
 
-@@clientName(AgentObject, "AgentDetails");
-@@clientName(AgentVersionObject, "AgentVersionDetails");
+@@clientName(AgentObject, "AgentDetails", "!autorest");
+@@clientName(AgentVersionObject, "AgentVersionDetails", "!autorest");
 
-@@clientName(MemoryStoreObject, "MemoryStoreDetails");
+@@clientName(MemoryStoreObject, "MemoryStoreDetails", "!autorest");
 
-@@clientName(Agents.getAgentVersion, "getAgentVersionDetails");
+@@clientName(Agents.getAgentVersion, "getAgentVersionDetails", "!autorest");
 
-@@clientName(AzureAISearchTool.azure_ai_search, "AzureAISearch");
+@@clientName(AzureAISearchTool.azure_ai_search, "AzureAISearch", "!autorest");
 
-@@clientName(OpenAI.FileSearchTool.max_num_results, "maxResults");
-@@clientName(OpenAI.MCPApprovalResponse.approve, "approved");
+@@clientName(OpenAI.FileSearchTool.max_num_results, "maxResults", "!autorest");
+@@clientName(OpenAI.MCPApprovalResponse.approve, "approved", "!autorest");
 
-@@clientName(CreateAgentRequest.name, "agentName");
-@@clientName(CreateAgentFromManifestRequest.name, "agentName");
+@@clientName(CreateAgentRequest.name, "agentName", "!autorest");
+@@clientName(CreateAgentFromManifestRequest.name, "agentName", "!autorest");
 
 // Rename request models to avoid collision with synthetic body types generated
 // by the Java codegen. The codegen names synthetic bodies as {OperationName}Request,
 // which clashes with the identically-named TypeSpec models, causing a "1" suffix.
-@@clientName(CreateAgentRequest, "CreateAgentInput");
-@@clientName(UpdateAgentRequest, "UpdateAgentInput");
-@@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput");
-@@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput");
-@@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput");
+@@clientName(CreateAgentRequest, "CreateAgentInput", "!autorest");
+@@clientName(UpdateAgentRequest, "UpdateAgentInput", "!autorest");
+@@clientName(CreateAgentVersionRequest, "CreateAgentVersionInput", "!autorest");
+@@clientName(CreateAgentFromManifestRequest, "CreateAgentFromManifestInput", "!autorest");
+@@clientName(UpdateAgentFromManifestRequest, "UpdateAgentFromManifestInput", "!autorest");
 @@clientName(
   CreateAgentVersionFromManifestRequest,
-  "CreateAgentVersionFromManifestInput"
-);
+  "CreateAgentVersionFromManifestInput",
+  "!autorest");
 
-@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB");
-@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB");
-@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB");
-@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB");
+@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB", "!autorest");
+@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB", "!autorest");
+@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "!autorest");
+@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "!autorest");
 
-@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult");
+@@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "!autorest");
 
-@@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
+@@clientName(OpenAI.DetailEnum, "ImageDetailLevel", "!autorest");
 
-@@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
-@@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
-@@clientName(OpenAI.MCPTool, "McpTool");
-@@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema");
-@@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus");
-@@clientName(OpenAI.MCPTool.connector_id, "connectorType");
-@@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
-@@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
+@@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations", "!autorest");
+@@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool", "!autorest");
+@@clientName(OpenAI.MCPTool, "McpTool", "!autorest");
+@@clientName(OpenAI.MCPListToolsToolInputSchema, "McpListToolsToolInputSchema", "!autorest");
+@@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus", "!autorest");
+@@clientName(OpenAI.MCPTool.connector_id, "connectorType", "!autorest");
+@@clientName(OpenAI.MCPToolFilter, "McpToolFilter", "!autorest");
+@@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval", "!autorest");
 
-@@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
+@@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds", "!autorest");
 
 @@clientName(
   OpenAI.ResponseFormatJsonSchemaSchema,
-  "ResponseFormatJsonSchemaInner"
-);
+  "ResponseFormatJsonSchemaInner",
+  "!autorest");
 @@clientName(
   OpenAI.ResponseUsageInputTokensDetails.cached_tokens,
-  "cachedTokensCount"
-);
+  "cachedTokensCount",
+  "!autorest");
 
 //rename object types to avoid confusion with Java objects
-@@clientName(AgentObject.object, "objectType");
-@@clientName(AgentVersionObject.object, "objectType");
-@@clientName(DeleteMemoryStoreResponse.object, "objectType");
-@@clientName(MemoryStoreObject.object, "objectType");
-@@clientName(MemoryStoreDeleteScopeResponse.object, "objectType");
+@@clientName(AgentObject.object, "objectType", "!autorest");
+@@clientName(AgentVersionObject.object, "objectType", "!autorest");
+@@clientName(DeleteMemoryStoreResponse.object, "objectType", "!autorest");
+@@clientName(MemoryStoreObject.object, "objectType", "!autorest");
+@@clientName(MemoryStoreDeleteScopeResponse.object, "objectType", "!autorest");
 
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
-@@clientName(OpenAI.Error, "ApiError");
-@@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters");
+@@clientName(OpenAI.Error, "ApiError", "!autorest");
+@@clientName(OpenApiFunctionDefinition.default_params, "defaultParameters", "!autorest");
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
@@ -161,8 +164,8 @@ using Azure.AI.Projects;
 // making methods private to add a public shim using the OpenAI types.
 @@access(MemoryStores.searchMemories, Access.internal);
 @@access(MemoryStores.updateMemories, Access.internal);
-@@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
-@@clientName(MemoryStores.searchMemories, "internalSearchMemories");
+@@clientName(MemoryStores.updateMemories, "internalUpdateMemories", "!autorest");
+@@clientName(MemoryStores.searchMemories, "internalSearchMemories", "!autorest");
 
 // Disabled convenient API generation to provide a custom shim returning `void` in the client
 @@convenientAPI(Agents.deleteAgent, false, "java");

@@ -1,3 +1,4 @@
+import "./client.tsp";
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
