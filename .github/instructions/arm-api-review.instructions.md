@@ -39,7 +39,7 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 **Where to link.** Pick the most specific source for the rule:
 
-- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`, `RPC-Patch-V1-10`) → link to the corresponding section in `.github/instructions/armapi-review.instructions.md`.
+- ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`, `RPC-Patch-V1-10`) → link to the corresponding section in `.github/instructions/arm-api-review.instructions.md`.
 - Generic OpenAPI rules (e.g., `OAPI020`, `OAPI027`, `OAPI034`, `WHATIF-001`, `PLCY008`, `TSP-REQUIRED-V1`) → link to the rule's section in `.github/instructions/openapi-review.instructions.md` **or** to the dedicated reference file under `.github/skills/azure-api-review/references/*.md` when the rule has a full reference page (e.g., `property-mutability.md#oapi034`, `secret-detection.md`, `provisioning-state.md`).
 - TypeSpec-only rules → link to the corresponding section in `.github/instructions/typespec-review.instructions.md`.
 
@@ -57,38 +57,17 @@ Every rule ID cited in a posted PR comment **MUST** be accompanied by a markdown
 
 **Positive example (DO post):**
 
-> **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/armapi-review.instructions.md#121-use-post-actions-sparingly)]** ...
+> **[NEW] 🔴 Blocking** **[[OAPI034](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/references/property-mutability.md#oapi034) / [Section 12.1](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md#121-use-post-actions-sparingly)]** ...
 
-### Reviewer-Posted Parity (REQUIRED -- no divergence)
+### Reviewer-Posted Parity
 
-The set of findings posted to the GitHub PR **MUST** be **byte-for-byte identical** to the set of findings shown to the reviewer in chat. There **MUST** be no discrepancy in content, count, ordering, severity, rule IDs, links, code blocks, JSON examples, fix snippets, or the `<!-- posted-by: arm-api-reviewer-agent -->` marker.
+<a id="reviewer-posted-parity"></a>
 
-**Hard rules.**
-
-1. **Single source of truth.** Build the exact comment body **once** as the canonical text for each finding. The text rendered to the reviewer in chat and the text written into the GitHub review payload **MUST** come from that same string -- not a reconstructed, re-summarized, or shortened variant.
-2. **Verbatim reproduction.** When constructing the GitHub review payload (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews` with inline `comments[]`), each comment's `body` field **MUST** contain the canonical finding text **unchanged**. Do **not** drop, paraphrase, collapse, or shorten:
-   - the rule ID hyperlinks,
-   - the JSON / TypeSpec / code blocks under **Fix:**,
-   - inline examples,
-   - file path / line number / JSON path citations,
-   - the trailing `<!-- posted-by: arm-api-reviewer-agent -->` marker.
-3. **No re-authoring during payload assembly.** Heredoc rebuilds, JSON-string escaping, multi-finding consolidation, or any step that involves "rewriting the body inline" is **forbidden**. Generate each comment body once, store it, and reference the stored value when building the payload.
-4. **Exact one-to-one mapping.** Every finding shown to the reviewer **MUST** map to exactly one inline comment in the posted review. The reviewer **MUST NOT** see N findings and the PR receive N-1 (something dropped) or N+1 (something added). Severity tags (`🔴 Blocking`, `🟡 Warning`, `🔵 Suggestion`) and `[NEW]`/`[EXISTING]` classifications **MUST** match.
-5. **Post-post verification (REQUIRED).** Immediately after posting the review, the agent **MUST** fetch the live comment bodies (`GET /repos/{owner}/{repo}/pulls/comments/{id}` for each created comment) and verify, for every comment:
-   - body length matches the canonical text length (within normalisation tolerance for line endings only),
-   - the rule ID hyperlinks are present,
-   - any code-fence (` ``` `) blocks present in the canonical text are present in the posted body,
-   - the `<!-- posted-by: arm-api-reviewer-agent -->` marker is present.
-     If any check fails, the agent **MUST** PATCH the affected comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore the canonical text and re-verify -- before reporting completion to the user.
-6. **Failure handling.** If a finding cannot be posted as-is (e.g., GitHub API rejects the body, a line anchor cannot be resolved), the agent **MUST** report the discrepancy explicitly to the reviewer rather than silently posting a shortened or altered variant.
-
-**Negative example (do NOT do):** Show the reviewer a finding with a JSON code-block under **Fix:**, then build a multi-comment payload heredoc that omits the code-block to keep the JSON string short.
-
-**Positive example (DO):** Build each finding's body string once with hyperlinks, code blocks, and marker included; serialize that exact string into the `body` field of each `comments[]` entry in the review payload; after posting, re-fetch each comment and confirm the live body matches.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
 
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
-- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, SystemData, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only.
+- **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, Operation, OperationListResult, TrackedResource, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only. **Exception: `systemData` is excluded from this exemption** -- see §20.1; inline redefinition of `systemData` is a Blocking violation (the envelope shape MUST be sourced from `common-types/resource-management/vX/types.json`).
 - **`allOf` + TrackedResource base type:** A resource model that manually declares `id`, `name`, `type`, `location`, `tags`, `systemData` as top-level properties is compliant if the shapes are correct. Using `allOf` with TrackedResource is preferred but NOT required. Flag it as a **suggestion** only.
 - **Non-terminal provisioningState values:** Including only the three terminal states (`Succeeded`, `Failed`, `Canceled`) is compliant. Adding non-terminal states (`Creating`, `Updating`, `Deleting`) is recommended but NOT required for compliance. Flag it as a **suggestion** only.
 
@@ -101,6 +80,16 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - New API version directories under `specification/**/resource-manager/**/{stable|preview}/<version>/` that contain only handwritten swagger (no sibling TypeSpec source, no `x-typespec-generated` marker, no `.tsp` files added in the PR) are **Blocking** with rule ID `TSP-REQUIRED-V1`.
 - Updates to handwritten swagger inside **pre-existing** API version directories remain permitted and **MUST NOT** be flagged.
 - A deterministic CI check is in development (PR [#42823](https://github.com/Azure/azure-rest-api-specs/pull/42823)). Until that check ships, surface this rule at review time.
+
+**Hard short-circuits.** Apply in order and stop at the first match. The full procedure is defined in [openapi-review.instructions.md §2A "Decision procedure"](./openapi-review.instructions.md#2a-typespec-required-for-new-api-versions-tsp-required-v1).
+
+1. API version directory exists on the base branch: rule **PASSES**, emit **no finding** at any severity.
+2. PR adds or modifies any `.tsp` file under the same service folder: rule **PASSES**, emit **no finding**.
+3. Sibling TypeSpec project with `main.tsp` and `tspconfig.yaml` is present anywhere under the service folder: rule **PASSES**, emit **no finding**.
+4. Swagger document has `x-typespec-generated` at the top level: rule **PASSES**, emit **no finding**. This marker is **dispositive on its own**. Do **not** emit a Warning, Suggestion, or "informational" TSP-REQUIRED-V1 finding when it is present.
+5. Otherwise: emit a single **Blocking** finding.
+
+"PASSES" means the rule does not appear in the findings list at any severity. Listing it as `N/A` or `Compliant` in an acknowledgments or compliant-areas table is acceptable.
 
 ---
 
@@ -519,7 +508,7 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
   - Properties that represent a date, time, or timestamp **MUST** use `"type": "string", "format": "date-time"` (ISO 8601). Do not use a plain unformatted string for timestamps.
   - Properties that represent a duration **MUST** use `"type": "string", "format": "duration"` (ISO 8601 duration).
   - Properties that represent a URL or URI **MUST** use `"type": "string", "format": "uri"`.
-  - Properties that represent a UUID/GUID **MUST** use `"type": "string", "format": "uuid"`.
+  - Properties that represent a UUID/GUID: **default is DO NOT use `"format": "uuid"` on ARM control-plane specs.** This is a **reversal** of earlier guidance; for transition rules covering in-flight PRs and already-merged specs, see the **Transition note** at the top of [`guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md). The required `GuidUsage` LintDiff rule (`R3017`) blocks the PR unless the author obtains Azure API review board sign-off AND adds a scoped per-property (or per-shared-definition) suppression. Acceptable only for Microsoft Entra / AAD identifiers that customers already see and pass as GUIDs through other Azure surfaces (portal, CLI, ARM templates): `tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`. NOT acceptable for opaque platform-assigned IDs (correlation IDs, operation IDs, internal record IDs), resource-internal identifiers (e.g., `interconnectBlockId`, `maintenanceEventId`), or names of any kind. For non-acceptable properties keep `"type": "string"` and convey the format via the description and an optional `pattern`. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree and the exact suppression form (the `where:` path must equal the LintDiff `jsonpath` exactly, including the trailing `.format` segment -- the validator does not do ancestor matching).
   - Properties that represent a Base64-encoded value **MUST** use `"type": "string", "format": "byte"`.
   - Properties that represent a binary value **MUST** use `"type": "string", "format": "binary"`.
   - Properties that represent a password or secret **MUST** use `"type": "string", "format": "password"` and `"x-ms-secret": true`.
@@ -875,7 +864,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 
 - `systemData` is a **required top-level property** on all tracked resources for new API versions. It contains `createdBy`, `createdByType`, `createdAt`, `lastModifiedBy`, `lastModifiedByType`, `lastModifiedAt`.
 - All `systemData` properties **MUST** be `readOnly`.
-- `systemData` **MUST** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). Do not define a custom `systemData` model.
+- `systemData` **MUST** be referenced from ARM common types (`common-types/resource-management/vX/types.json`). Do not define a custom `systemData` model: inline redefinition of `systemData` (even with all the right fields, `readOnly` annotations, and descriptions) is a Blocking violation because it drifts from the canonical envelope shape and silently breaks tooling that resolves `$ref` to the common-types definition.
 - `systemData` **MUST NOT** be placed inside the `properties` bag — it is a top-level ARM envelope property.
 - `*ByType` values (`User`, `Application`, `ManagedIdentity`, `Key`) **MUST** be stored as strings (not enums) to support future identity types without breaking changes.
 
@@ -1206,7 +1195,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Top-level tracked resources support resource move across RG/subscription (RPC003)
 - ✅ `managedBy` / `managedByExtended` are immutable top-level properties; not inside `properties` bag
 - ✅ `systemData` is readOnly, added only with new API versions; `*ByType` stored as string not enum
-- ✅ `systemData` referenced from common-types; no custom systemData model defined
+- ✅ `systemData` referenced from common-types; no custom `systemData` model defined
 - ✅ `systemData` not updated for child resource changes, rejected requests, or internal admin operations
 
 ### Availability Zones & Extended Locations
