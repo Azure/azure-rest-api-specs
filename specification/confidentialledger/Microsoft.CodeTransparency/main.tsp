@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
 
-#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "The autorest emitter cannot represent the service's JWT bearer authentication scheme; authentication is enforced at runtime per IETF SCRAPI."
 @service(#{ title: "Microsoft Code Transparency Service" })
 @useAuth(BearerAuth)
 @server(
@@ -38,7 +38,7 @@ enum Versions {
 // Additional supported traits by the API.
 alias ServiceTraits = SupportsClientRequestId;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @doc("Get the transparency service configuration, mandatory in IETF SCITT draft")
 @route("/.well-known/transparency-configuration")
@@ -51,7 +51,7 @@ op getTransparencyConfigCbor is Foundations.Operation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @doc("Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation")
 @route("/jwks")
@@ -62,8 +62,8 @@ op getPublicKeys is Foundations.Operation<
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name follows the IETF SCRAPI draft (scitt-keys) rather than Azure.Core standard naming."
 @added(Versions.`2026-03-26`)
 @doc("List all service keys in COSE_Key_Set format, per Section 2.1 of draft-ietf-scitt-scrapi-09")
 @route("/.well-known/scitt-keys")
@@ -75,7 +75,7 @@ op listScittKeys is Foundations.Operation<
   AnyCborErrorV09
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2026-03-26`)
 @doc("Get a single service key by kid, per Section 2.2 of draft-ietf-scitt-scrapi-09")
 @route("/.well-known/scitt-keys/{kid}")
@@ -87,7 +87,7 @@ op getScittKey is Foundations.Operation<
   AnyCborErrorV09
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @removed(Versions.`2026-03-26`)
 @sharedRoute
@@ -101,7 +101,7 @@ op createEntry is Foundations.Operation<
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical CreateEntry operationId across versions"
 @added(Versions.`2026-03-26`)
 @operationId("CreateEntry")
@@ -116,7 +116,7 @@ op createEntryV09 is Foundations.Operation<
   AnyCborErrorV09
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @removed(Versions.`2026-03-26`)
 @sharedRoute
@@ -129,7 +129,7 @@ op getOperation is Foundations.Operation<
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetOperation operationId across versions"
 #deprecated "The /operations/{operationId} endpoint is deprecated in SCRAPI v09 (api-version=2026-03-26). Clients should poll /entries/{entryId} directly. Behavior is unchanged for backward compatibility."
 @added(Versions.`2026-03-26`)
@@ -144,7 +144,7 @@ op getOperationV09 is Foundations.Operation<
   AnyCborErrorV09
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @removed(Versions.`2026-03-26`)
 @sharedRoute
@@ -157,7 +157,7 @@ op getEntry is Foundations.Operation<
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetEntry operationId across versions"
 @added(Versions.`2026-03-26`)
 @operationId("GetEntry")
@@ -171,7 +171,7 @@ op getEntryV09 is Foundations.Operation<
   AnyCborErrorV09
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @removed(Versions.`2026-03-26`)
 @sharedRoute
@@ -184,7 +184,7 @@ op getEntryStatement is Foundations.Operation<
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetEntryStatement operationId across versions"
 @added(Versions.`2026-03-26`)
 @operationId("GetEntryStatement")
@@ -517,7 +517,7 @@ model JwksDocument {
   keys: JsonWebKey[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property names follow RFC 7517 (JSON Web Key) and cannot be changed to Azure camelCase."
 @doc("rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types")
 model JsonWebKey {
   @doc("The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.")
