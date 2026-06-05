@@ -341,6 +341,19 @@ suppressions:
   - code: EnumInsteadOfBoolean
     reason: These boolean properties are already part of the existing API contract from previous preview versions and cannot be changed to enums without introducing a breaking change.
     from: EventGrid.json
+
+  - code: PutInOperationName
+    reason: The PrivateEndpointConnections_Update operationId is from an existing API contract (previous stable and preview versions). Renaming to CreateOrUpdate would introduce a cross-version breaking change (ModifiedOperationId) with no functional benefit.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: The provisioningState properties are from existing API versions and were not marked readOnly. Adding readOnly would introduce a cross-version breaking change (ReadonlyPropertyChanged). This will be addressed in a future major version.
+    from: EventGrid.json
+
+  - code: ResourceNameRestriction
+    reason: These path parameters are from existing API versions without pattern/minLength/maxLength constraints. Adding constraints would introduce a cross-version breaking change (ConstraintChanged). This will be addressed in a future major version.
+    from: EventGrid.json
 ```
 
 ### Tag: package-2025-07-preview
