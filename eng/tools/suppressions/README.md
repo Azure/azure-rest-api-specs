@@ -42,8 +42,9 @@ Example `suppressions.yaml`:
   reason: Legacy API version predates the TypeSpec requirement.
 
 - tool: TypeSpecValidation
-  path: "**"
-  reason: Service is exempt while migration is in progress.
+  reason: Specs added as folder structure v1, not yet converted to v2
+  rules: [FolderStructure]
+  paths: [Automation.Management]
 ```
 
 ### Command line
