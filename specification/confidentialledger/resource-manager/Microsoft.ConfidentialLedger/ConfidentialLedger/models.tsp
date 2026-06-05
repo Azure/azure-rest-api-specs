@@ -328,13 +328,6 @@ model LedgerProperties {
   @added(Versions.v2026_05_22_preview)
   @visibility(Lifecycle.Read)
   storageUsageBytes?: int64;
-
-  /**
-   * Maximum storage capacity of the Confidential Ledger, in bytes.
-   */
-  @added(Versions.v2026_05_22_preview)
-  @visibility(Lifecycle.Read)
-  storageCapacityBytes?: int64;
 }
 
 /**
