@@ -7,13 +7,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.NetworkCloud;
 
-// ---javascript ---
 @@clientName(HugepagesSize.`1G`, "OneG", "go,javascript");
 @@clientName(HugepagesSize.`2M`, "TwoM", "go,javascript");
 
 // --- go ---
-@@clientName(HugepagesSize.`1G`, "OneG", "go");
-@@clientName(HugepagesSize.`2M`, "TwoM", "go");
 @@alternateType(
   Azure.ResourceManager.Foundations.ExtendedLocation.type,
   string,
