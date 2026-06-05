@@ -26,7 +26,6 @@ import "./src/openai-completions/routes.tsp";
 import "./src/openai-containers/routes.tsp";
 import "./src/openai-conversations/routes.tsp";
 import "./src/openai-embeddings/routes.tsp";
-import "./src/openai-evals/routes.tsp";
 import "./src/openai-evaluations/routes.tsp";
 import "./src/openai-files/routes.tsp";
 import "./src/openai-finetuning/routes.tsp";
