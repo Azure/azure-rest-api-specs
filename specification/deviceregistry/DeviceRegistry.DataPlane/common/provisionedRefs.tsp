@@ -1,6 +1,12 @@
+import "@typespec/versioning";
+import "../models.tsp";
+
+using TypeSpec.Versioning;
+
 namespace Microsoft.DeviceRegistry;
 
 /** Reference to a provisioned RPaaS resource: its ARM name, system-assigned UUID, and the etag observed at the final write performed during provisioning. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionedResourceRef {
   /** The ARM resource name. */
   name: string;
@@ -14,6 +20,7 @@ model ProvisionedResourceRef {
 
 /** Reference to a provisioned Device resource. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required to mirror C# class hierarchy emitted by @typespec/http-server-csharp; no polymorphic dispatch."
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionedDeviceRef extends ProvisionedResourceRef {
   /** The IoT Hub device id (equal to the originating request's iotHubDeviceId). */
   externalDeviceId: string;
@@ -21,12 +28,14 @@ model ProvisionedDeviceRef extends ProvisionedResourceRef {
 
 /** Reference to a provisioned AuthenticationProfile resource, including the id of the underlying credential. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required to mirror C# class hierarchy emitted by @typespec/http-server-csharp; no polymorphic dispatch."
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionedAuthProfileRef extends ProvisionedResourceRef {
   /** GUID identifying the underlying credential. Only set for CertificateAuthority authentication; omitted otherwise. */
   credentialId?: string;
 }
 
 /** Reference to the messaging endpoint the device was provisioned against. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionedEndpointRef {
   /** Display name of the target endpoint. */
   name: string;
