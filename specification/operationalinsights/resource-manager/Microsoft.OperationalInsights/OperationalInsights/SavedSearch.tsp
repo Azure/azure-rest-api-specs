@@ -64,6 +64,7 @@ interface SavedSearches {
 
 @@doc(SavedSearch.name, "The id of the saved search.");
 @@doc(SavedSearch.properties, "The properties of the saved search.");
-@@doc(SavedSearches.createOrUpdate::parameters.resource,
+@@doc(
+  SavedSearches.createOrUpdate::parameters.resource,
   "The parameters required to save a search."
 );

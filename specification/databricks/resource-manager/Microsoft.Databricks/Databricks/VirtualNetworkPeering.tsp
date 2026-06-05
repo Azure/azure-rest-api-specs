@@ -64,7 +64,10 @@ interface VirtualNetworkPeerings {
   @operationId("vNetPeering_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkPeering,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -83,6 +86,7 @@ interface VirtualNetworkPeerings {
 
 @@doc(VirtualNetworkPeering.name, "The name of the workspace vNet peering.");
 @@doc(VirtualNetworkPeering.properties, "List of properties for vNet Peering");
-@@doc(VirtualNetworkPeerings.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworkPeerings.createOrUpdate::parameters.resource,
   "Parameters supplied to the create workspace vNet Peering."
 );

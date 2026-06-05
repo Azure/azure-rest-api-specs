@@ -26,19 +26,23 @@ namespace Customizations;
 @@clientName(CertificateMetadata.type, "CertificateKind", "csharp");
 
 // Suggestion to rename properties to not have abbreviations
-@@clientName(LoadTestConfiguration.optionalLoadTestConfig,
+@@clientName(
+  LoadTestConfiguration.optionalLoadTestConfig,
   "optionalLoadTestConfiguration",
   "csharp,java"
 );
-@@clientName(LoadTestConfiguration.regionalLoadTestConfig,
+@@clientName(
+  LoadTestConfiguration.regionalLoadTestConfig,
   "regionalLoadTestConfiguration",
   "csharp,java"
 );
-@@clientName(TestInputArtifacts.userPropFileInfo,
+@@clientName(
+  TestInputArtifacts.userPropFileInfo,
   "userPropertyFileInfo",
   "csharp,java"
 );
-@@clientName(TestRunInputArtifacts.userPropFileInfo,
+@@clientName(
+  TestRunInputArtifacts.userPropFileInfo,
   "userPropertyFileInfo",
   "csharp,java"
 );
@@ -49,7 +53,8 @@ namespace Customizations;
 @@clientName(TestKind, "LoadTestKind", "csharp,java");
 @@clientName(Secret, "TestSecret", "csharp,java");
 @@clientName(CertificateMetadata, "TestCertificate", "csharp,java");
-@@clientName(ManagedIdentityType,
+@@clientName(
+  ManagedIdentityType,
   "LoadTestingManagedIdentityType",
   "csharp,java"
 );
@@ -61,7 +66,8 @@ namespace Customizations;
 @@clientName(MetricDefinitionCollection, "MetricDefinitions", "csharp,java");
 
 // Suggestion to fix casing for acronyms
-@@clientName(LoadTestConfiguration.splitAllCSVs,
+@@clientName(
+  LoadTestConfiguration.splitAllCSVs,
   "splitAllCsvs",
   "csharp,java,python"
 ); // NOTE: Python is needed since the emitter bugs out for "CSVs" to cs_vs
@@ -69,7 +75,8 @@ namespace Customizations;
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(PFMetrics, "PfMetrics", "csharp,java");
 
-@@clientName(CreatedByType.GitHubWorkflows,
+@@clientName(
+  CreatedByType.GitHubWorkflows,
   "GithubWorkflows",
   "csharp,java,python"
 );
@@ -77,45 +84,55 @@ namespace Customizations;
 // Suggestion to rename properties in TestRunStatistics for better explanation
 @@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
 @@clientName(TestRunStatistics.meanResTime, "meanResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.medianResTime,
+@@clientName(
+  TestRunStatistics.medianResTime,
   "medianResponseTime",
   "csharp,java"
 );
 @@clientName(TestRunStatistics.maxResTime, "maxResponseTime", "csharp,java");
 @@clientName(TestRunStatistics.minResTime, "minResponseTime", "csharp,java");
-@@clientName(TestRunStatistics.pct75ResTime,
+@@clientName(
+  TestRunStatistics.pct75ResTime,
   "percentile75ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct1ResTime,
+@@clientName(
+  TestRunStatistics.pct1ResTime,
   "percentile90ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct2ResTime,
+@@clientName(
+  TestRunStatistics.pct2ResTime,
   "percentile95ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct96ResTime,
+@@clientName(
+  TestRunStatistics.pct96ResTime,
   "percentile96ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct97ResTime,
+@@clientName(
+  TestRunStatistics.pct97ResTime,
   "percentile97ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct98ResTime,
+@@clientName(
+  TestRunStatistics.pct98ResTime,
   "percentile98ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct3ResTime,
+@@clientName(
+  TestRunStatistics.pct3ResTime,
   "percentile99ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct999ResTime,
+@@clientName(
+  TestRunStatistics.pct999ResTime,
   "percentile999ResponseTime",
   "csharp,java"
 );
-@@clientName(TestRunStatistics.pct9999ResTime,
+@@clientName(
+  TestRunStatistics.pct9999ResTime,
   "percentile9999ResponseTime",
   "csharp,java"
 );
@@ -128,7 +145,8 @@ namespace Customizations;
 @@clientName(FileInfo.url, "uri", "csharp");
 @@clientName(ArtifactsContainerInfo.url, "uri", "csharp");
 @@clientName(TestRun.portalUrl, "portalUri", "csharp");
-@@clientName(OptionalLoadTestConfiguration.endpointUrl,
+@@clientName(
+  OptionalLoadTestConfiguration.endpointUrl,
   "endpointUri",
   "csharp"
 );
@@ -138,7 +156,8 @@ namespace Customizations;
 @@clientName(Recurrence, "LoadTestingRecurrence", "csharp");
 
 // Renames for properties that had unit of duration in name but will get converted to duration type
-@@clientName(AutoStopCriteria.errorRateTimeWindowInSeconds,
+@@clientName(
+  AutoStopCriteria.errorRateTimeWindowInSeconds,
   "errorRateTimeWindow",
   "csharp,java"
 );

@@ -5,7 +5,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Peering;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CdnPeeringPrefix.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CdnPeeringPrefix.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -15,11 +16,13 @@ using Microsoft.Peering;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringLocation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringServiceLocation.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PeeringServiceLocation.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringServiceProvider.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PeeringServiceProvider.properties
 );
 
 @@clientName(Peerings.createOrUpdate::parameters.resource, "peering");
@@ -35,48 +38,58 @@ using Microsoft.Peering;
 
 @@clientLocation(PeeringRegisteredAsns.get, "RegisteredAsns");
 @@clientLocation(PeeringRegisteredAsns.createOrUpdate, "RegisteredAsns");
-@@clientName(PeeringRegisteredAsns.createOrUpdate::parameters.resource,
+@@clientName(
+  PeeringRegisteredAsns.createOrUpdate::parameters.resource,
   "registeredAsn"
 );
 @@clientLocation(PeeringRegisteredAsns.delete, "RegisteredAsns");
 @@clientLocation(PeeringRegisteredAsns.listByPeering, "RegisteredAsns");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringRegisteredAsn.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PeeringRegisteredAsn.properties
 );
 
 @@clientLocation(PeeringRegisteredPrefixes.get, "RegisteredPrefixes");
-@@clientLocation(PeeringRegisteredPrefixes.createOrUpdate,
+@@clientLocation(
+  PeeringRegisteredPrefixes.createOrUpdate,
   "RegisteredPrefixes"
 );
-@@clientName(PeeringRegisteredPrefixes.createOrUpdate::parameters.resource,
+@@clientName(
+  PeeringRegisteredPrefixes.createOrUpdate::parameters.resource,
   "registeredPrefix"
 );
 @@clientLocation(PeeringRegisteredPrefixes.delete, "RegisteredPrefixes");
 @@clientLocation(PeeringRegisteredPrefixes.listByPeering, "RegisteredPrefixes");
 @@clientLocation(PeeringRegisteredPrefixes.validate, "RegisteredPrefixes");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringRegisteredPrefix.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PeeringRegisteredPrefix.properties
 );
 
-@@clientName(ConnectionMonitorTests.createOrUpdate::parameters.resource,
+@@clientName(
+  ConnectionMonitorTests.createOrUpdate::parameters.resource,
   "connectionMonitorTest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectionMonitorTest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConnectionMonitorTest.properties
 );
 
 @@clientLocation(PeeringServicePrefixes.get, "Prefixes");
 @@clientLocation(PeeringServicePrefixes.createOrUpdate, "Prefixes");
-@@clientName(PeeringServicePrefixes.createOrUpdate::parameters.resource,
+@@clientName(
+  PeeringServicePrefixes.createOrUpdate::parameters.resource,
   "peeringServicePrefix"
 );
 @@clientLocation(PeeringServicePrefixes.delete, "Prefixes");
 @@clientLocation(PeeringServicePrefixes.listByPeeringService, "Prefixes");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringServicePrefix.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PeeringServicePrefix.properties
 );
 
-@@clientName(PeeringServices.createOrUpdate::parameters.resource,
+@@clientName(
+  PeeringServices.createOrUpdate::parameters.resource,
   "peeringService"
 );
 @@clientName(PeeringServices.update::parameters.properties, "tags");
@@ -91,27 +104,33 @@ using Microsoft.Peering;
 
 @@clientLocation(PeeringLocationsOperationGroup.list, "PeeringLocations");
 
-@@clientLocation(PeeringServiceCountriesOperationGroup.list,
+@@clientLocation(
+  PeeringServiceCountriesOperationGroup.list,
   "PeeringServiceCountries"
 );
 
-@@clientLocation(PeeringServiceLocationsOperationGroup.list,
+@@clientLocation(
+  PeeringServiceLocationsOperationGroup.list,
   "PeeringServiceLocations"
 );
 
-@@clientLocation(PeeringServiceProvidersOperationGroup.list,
+@@clientLocation(
+  PeeringServiceProvidersOperationGroup.list,
   "PeeringServiceProviders"
 );
 
-@@clientLocation(PeeringServicesOperationGroup.initializeConnectionMonitor,
+@@clientLocation(
+  PeeringServicesOperationGroup.initializeConnectionMonitor,
   PeeringServices
 );
 
-@@clientName(checkServiceProviderAvailability::parameters.body,
+@@clientName(
+  checkServiceProviderAvailability::parameters.body,
   "checkServiceProviderAvailabilityInput"
 );
 
-@@clientLocation(Microsoft.Peering.checkServiceProviderAvailability,
+@@clientLocation(
+  Microsoft.Peering.checkServiceProviderAvailability,
   "Management",
   "go"
 );

@@ -20,6 +20,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @parentResource(Workspace)
 model InferenceGroup
   is Azure.ResourceManager.TrackedResource<InferenceGroupProperties, false> {
@@ -46,6 +47,7 @@ model InferenceGroup
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface InferenceGroupOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -85,6 +87,7 @@ interface InferenceGroupOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface InferenceGroups {
   /**
@@ -100,16 +103,18 @@ interface InferenceGroups {
   @summary("Create or update InferenceGroup (asynchronous).")
   createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<
     InferenceGroup,
-    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmResourceCreatedResponse<
-      InferenceGroup,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceGroup>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceGroup>
+      | (ArmResourceCreatedResponse<
+          InferenceGroup,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceGroup>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -120,14 +125,16 @@ interface InferenceGroups {
   update is InferenceGroupOps.CustomPatchAsync<
     InferenceGroup,
     PatchModel = PartialMinimalTrackedResourceWithSku,
-    Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceGroup>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceGroup>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -137,13 +144,16 @@ interface InferenceGroups {
   @summary("Delete InferenceGroup (asynchronous).")
   delete is InferenceGroupOps.DeleteWithoutOkAsync<
     InferenceGroup,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -258,27 +268,35 @@ interface InferenceGroups {
 }
 
 @@doc(InferenceGroup.name, "InferenceGroup name.");
-@@doc(InferenceGroup.properties,
+@@doc(
+  InferenceGroup.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(InferenceGroups.createOrUpdate::parameters.resource,
+@@doc(
+  InferenceGroups.createOrUpdate::parameters.resource,
   "InferenceGroup entity to apply during operation."
 );
-@@doc(InferenceGroups.update::parameters.properties,
+@@doc(
+  InferenceGroups.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(InferenceGroups.getDeltaModelsStatusAsync::parameters.body,
+@@doc(
+  InferenceGroups.getDeltaModelsStatusAsync::parameters.body,
   "DeltaModelBaseRequest."
 );
-@@doc(InferenceGroups.listDeltaModelsAsync::parameters.body,
+@@doc(
+  InferenceGroups.listDeltaModelsAsync::parameters.body,
   "DeltaModelBaseRequest."
 );
-@@doc(InferenceGroups.modifyDeltaModelsAsync::parameters.body,
+@@doc(
+  InferenceGroups.modifyDeltaModelsAsync::parameters.body,
   "DeltaModelModifyRequest."
 );
-@@doc(InferenceGroup.identity,
+@@doc(
+  InferenceGroup.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(InferenceGroup.sku,
+@@doc(
+  InferenceGroup.sku,
   "Sku details required for ARM contract for Autoscaling."
 );
