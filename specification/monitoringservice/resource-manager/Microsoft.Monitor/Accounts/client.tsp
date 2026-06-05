@@ -5,6 +5,7 @@ import "@typespec/versioning";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -129,6 +130,11 @@ using Microsoft.Monitor;
   armResourceIdentifier[],
   "csharp"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous pageable billing meters SDK surface during MPG migration"
+@@markAsPageable(Issue.listAlerts, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the previous pageable billing meters SDK surface during MPG migration"
+@@markAsPageable(Issue.listResources, "csharp");
 
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties,
