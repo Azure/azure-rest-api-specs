@@ -30,14 +30,14 @@ interface Evals {
 
       /** Sort order for evals by timestamp. Use `asc` for ascending order or `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.asc;
+      order?: OpenAI.OrderEnum = OrderEnum.asc;
 
       /**Evals can be ordered by creation time or last updated time. Use
   `created_at` for creation time or `updated_at` for last updated time.*/
       @query(#{ explode: true })
       order_by?: "created_at" | "updated_at" = "created_at";
     },
-    EvalList
+    OpenAI.EvalList
   >;
 
   @post
@@ -50,7 +50,7 @@ interface Evals {
   createEval is OpenAIOperation<
     {
       @body
-      body: CreateEvalRequest;
+      body: OpenAI.CreateEvalRequest;
     },
     {
       @statusCode
@@ -65,40 +65,40 @@ interface Evals {
       @oneOf
       @changePropertyType(
 
-          | CreateEvalCustomDataSourceConfig
-          | CreateEvalLogsDataSourceConfig
-          | CreateEvalStoredCompletionsDataSourceConfig
+          | OpenAI.CreateEvalCustomDataSourceConfig
+          | OpenAI.CreateEvalLogsDataSourceConfig
+          | OpenAI.CreateEvalStoredCompletionsDataSourceConfig
           | AzureAIDataSourceConfig
           | AzureAIBenchmarkDataSourceConfig
       )
       data_source_config:
-        | CreateEvalCustomDataSourceConfig
-        | CreateEvalLogsDataSourceConfig
-        | CreateEvalStoredCompletionsDataSourceConfig
+        | OpenAI.CreateEvalCustomDataSourceConfig
+        | OpenAI.CreateEvalLogsDataSourceConfig
+        | OpenAI.CreateEvalStoredCompletionsDataSourceConfig
         | AzureAIDataSourceConfig
         | AzureAIBenchmarkDataSourceConfig;
 
       @changePropertyType(
         (
-          | EvalGraderLabelModel
-          | EvalGraderStringCheck
-          | EvalGraderTextSimilarity
-          | EvalGraderPython
-          | EvalGraderScoreModel
+          | OpenAI.EvalGraderLabelModel
+          | OpenAI.EvalGraderStringCheck
+          | OpenAI.EvalGraderTextSimilarity
+          | OpenAI.EvalGraderPython
+          | OpenAI.EvalGraderScoreModel
           | TestingCriterionAzureAIEvaluator)[]
       )
       testing_criteria: (
-        | EvalGraderLabelModel
-        | EvalGraderStringCheck
-        | EvalGraderTextSimilarity
-        | EvalGraderPython
-        | EvalGraderScoreModel
+        | OpenAI.EvalGraderLabelModel
+        | OpenAI.EvalGraderStringCheck
+        | OpenAI.EvalGraderTextSimilarity
+        | OpenAI.EvalGraderPython
+        | OpenAI.EvalGraderScoreModel
         | TestingCriterionAzureAIEvaluator)[];
 
       @encode(DateTimeKnownEncoding.unixTimestamp, integer)
       created_at: utcDateTime;
 
-      metadata: Metadata | null;
+      metadata: OpenAI.Metadata | null;
     }
   >;
 
@@ -114,7 +114,7 @@ interface Evals {
       @path
       eval_id: string;
     },
-    Body<{
+    TypeSpec.Http.Body<{
       object: string;
       deleted: boolean;
       eval_id: string;
@@ -133,7 +133,7 @@ interface Evals {
       @path
       eval_id: string;
     },
-    Eval
+    OpenAI.Eval
   >;
 
   @route("{eval_id}")
@@ -150,9 +150,9 @@ interface Evals {
 
       /** Request to update an evaluation */
       @body
-      body: UpdateEvalParametersBody;
+      body: OpenAI.UpdateEvalParametersBody;
     },
-    Eval
+    OpenAI.Eval
   >;
 
   @list
@@ -180,13 +180,13 @@ interface Evals {
 
       /** Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.asc;
+      order?: OpenAI.OrderEnum = OrderEnum.asc;
 
       /** Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed` | `canceled`. */
       @query(#{ explode: true })
       status?: "queued" | "in_progress" | "completed" | "canceled" | "failed";
     },
-    EvalRunList
+    OpenAI.EvalRunList
   >;
 
   @route("{eval_id}/runs")
@@ -202,7 +202,7 @@ interface Evals {
       eval_id: string;
 
       @body
-      body: CreateEvalRunRequest;
+      body: OpenAI.CreateEvalRunRequest;
     },
     {
       @statusCode
@@ -221,26 +221,26 @@ interface Evals {
       created_at: utcDateTime;
 
       report_url: url;
-      result_counts: EvalRunResultCounts;
-      per_model_usage: EvalRunPerModelUsage[];
-      per_testing_criteria_results: EvalRunPerTestingCriteriaResults[];
+      result_counts: OpenAI.EvalRunResultCounts;
+      per_model_usage: OpenAI.EvalRunPerModelUsage[];
+      per_testing_criteria_results: OpenAI.EvalRunPerTestingCriteriaResults[];
 
       @oneOf
       @changePropertyType(
 
-          | CreateEvalJsonlRunDataSource
-          | CreateEvalCompletionsRunDataSource
-          | CreateEvalResponsesRunDataSource
+          | OpenAI.CreateEvalJsonlRunDataSource
+          | OpenAI.CreateEvalCompletionsRunDataSource
+          | OpenAI.CreateEvalResponsesRunDataSource
           | EvalRunDataSource
       )
       data_source:
-        | CreateEvalJsonlRunDataSource
-        | CreateEvalCompletionsRunDataSource
-        | CreateEvalResponsesRunDataSource
+        | OpenAI.CreateEvalJsonlRunDataSource
+        | OpenAI.CreateEvalCompletionsRunDataSource
+        | OpenAI.CreateEvalResponsesRunDataSource
         | EvalRunDataSource;
 
-      metadata: Metadata | null;
-      error: EvalApiError;
+      metadata: OpenAI.Metadata | null;
+      error: OpenAI.EvalApiError;
     }
   >;
 
@@ -260,7 +260,7 @@ interface Evals {
       @path
       run_id: string;
     },
-    Body<{
+    TypeSpec.Http.Body<{
       object?: string;
       deleted?: boolean;
       run_id?: string;
@@ -283,7 +283,7 @@ interface Evals {
       @path
       run_id: string;
     },
-    EvalRun
+    OpenAI.EvalRun
   >;
 
   @route("{eval_id}/runs/{run_id}")
@@ -302,7 +302,7 @@ interface Evals {
       @path
       run_id: string;
     },
-    EvalRun
+    OpenAI.EvalRun
   >;
 
   @list
@@ -339,9 +339,9 @@ interface Evals {
 
       /** Sort order for output items by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.asc;
+      order?: OpenAI.OrderEnum = OrderEnum.asc;
     },
-    EvalRunOutputItemList
+    OpenAI.EvalRunOutputItemList
   >;
 
   @route("{eval_id}/runs/{run_id}/output_items/{output_item_id}")
@@ -364,6 +364,6 @@ interface Evals {
       @path
       output_item_id: string;
     },
-    EvalRunOutputItem
+    OpenAI.EvalRunOutputItem
   >;
 }

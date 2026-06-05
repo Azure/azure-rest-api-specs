@@ -22,7 +22,7 @@ interface VectorStores {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -34,7 +34,7 @@ interface VectorStores {
       @query(#{ explode: true })
       before?: string;
     },
-    ListVectorStoresResponse
+    OpenAI.ListVectorStoresResponse
   >;
 
   @tag("Vector stores")
@@ -43,9 +43,9 @@ interface VectorStores {
   createVectorStore is OpenAIOperation<
     {
       @body
-      body: CreateVectorStoreRequest;
+      body: OpenAI.CreateVectorStoreRequest;
     },
-    VectorStoreObject
+    OpenAI.VectorStoreObject
   >;
 
   @tag("Vector stores")
@@ -58,7 +58,7 @@ interface VectorStores {
       @path
       vector_store_id: string;
     },
-    DeleteVectorStoreResponse
+    OpenAI.DeleteVectorStoreResponse
   >;
 
   @tag("Vector stores")
@@ -71,7 +71,7 @@ interface VectorStores {
       @path
       vector_store_id: string;
     },
-    VectorStoreObject
+    OpenAI.VectorStoreObject
   >;
 
   @tag("Vector stores")
@@ -85,9 +85,9 @@ interface VectorStores {
       vector_store_id: string;
 
       @body
-      body: UpdateVectorStoreRequest;
+      body: OpenAI.UpdateVectorStoreRequest;
     },
-    VectorStoreObject
+    OpenAI.VectorStoreObject
   >;
 
   @tag("Vector stores")
@@ -101,9 +101,9 @@ interface VectorStores {
       vector_store_id: string;
 
       @body
-      body: CreateVectorStoreFileBatchRequest;
+      body: OpenAI.CreateVectorStoreFileBatchRequest;
     },
-    VectorStoreFileBatchObject
+    OpenAI.VectorStoreFileBatchObject
   >;
 
   @tag("Vector stores")
@@ -120,7 +120,7 @@ interface VectorStores {
       @path
       batch_id: string;
     },
-    VectorStoreFileBatchObject
+    OpenAI.VectorStoreFileBatchObject
   >;
 
   @tag("Vector stores")
@@ -137,7 +137,7 @@ interface VectorStores {
       @path
       batch_id: string;
     },
-    VectorStoreFileBatchObject
+    OpenAI.VectorStoreFileBatchObject
   >;
 
   @tag("Vector stores")
@@ -161,7 +161,7 @@ interface VectorStores {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -175,9 +175,9 @@ interface VectorStores {
 
       /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
       @query(#{ explode: true })
-      filter?: ListVectorStoreFilesFilter;
+      filter?: OpenAI.ListVectorStoreFilesFilter;
     },
-    ListVectorStoreFilesResponse
+    OpenAI.ListVectorStoreFilesResponse
   >;
 
   @tag("Vector stores")
@@ -197,7 +197,7 @@ interface VectorStores {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -211,9 +211,9 @@ interface VectorStores {
 
       /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
       @query(#{ explode: true })
-      filter?: ListVectorStoreFilesFilter;
+      filter?: OpenAI.ListVectorStoreFilesFilter;
     },
-    ListVectorStoreFilesResponse
+    OpenAI.ListVectorStoreFilesResponse
   >;
 
   @tag("Vector stores")
@@ -227,9 +227,9 @@ interface VectorStores {
       vector_store_id: string;
 
       @body
-      body: CreateVectorStoreFileRequest;
+      body: OpenAI.CreateVectorStoreFileRequest;
     },
-    VectorStoreFileObject
+    OpenAI.VectorStoreFileObject
   >;
 
   @tag("Vector stores")
@@ -246,7 +246,7 @@ interface VectorStores {
       @path
       file_id: string;
     },
-    DeleteVectorStoreFileResponse
+    OpenAI.DeleteVectorStoreFileResponse
   >;
 
   @tag("Vector stores")
@@ -263,7 +263,7 @@ interface VectorStores {
       @path
       file_id: string;
     },
-    VectorStoreFileObject
+    OpenAI.VectorStoreFileObject
   >;
 
   @tag("Vector stores")
@@ -281,9 +281,9 @@ interface VectorStores {
       file_id: string;
 
       @body
-      body: UpdateVectorStoreFileAttributesRequest;
+      body: OpenAI.UpdateVectorStoreFileAttributesRequest;
     },
-    VectorStoreFileObject
+    OpenAI.VectorStoreFileObject
   >;
 
   @tag("Vector stores")
@@ -300,7 +300,7 @@ interface VectorStores {
       @path
       file_id: string;
     },
-    VectorStoreFileContentResponse
+    OpenAI.VectorStoreFileContentResponse
   >;
 
   @tag("Vector stores")
@@ -314,8 +314,8 @@ interface VectorStores {
       vector_store_id: string;
 
       @body
-      body: VectorStoreSearchRequest;
+      body: OpenAI.VectorStoreSearchRequest;
     },
-    VectorStoreSearchResultsPage
+    OpenAI.VectorStoreSearchResultsPage
   >;
 }

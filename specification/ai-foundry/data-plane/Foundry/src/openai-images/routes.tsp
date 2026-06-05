@@ -17,9 +17,9 @@ interface Images {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateImageEditRequest;
+      body: OpenAI.CreateImageEditRequest;
     },
-    ImagesResponse
+    OpenAI.ImagesResponse
   >;
 
   @sharedRoute
@@ -29,9 +29,9 @@ interface Images {
   createImageEditJson is OpenAIOperation<
     {
       @body
-      body: EditImageBodyJsonParam;
+      body: OpenAI.EditImageBodyJsonParam;
     },
-    ImagesResponse
+    OpenAI.ImagesResponse
   >;
 
   @route("generations")
@@ -43,9 +43,9 @@ interface Images {
   createImage is OpenAIOperation<
     {
       @body
-      body: CreateImageRequest;
+      body: OpenAI.CreateImageRequest;
     },
-    ImagesResponse
+    OpenAI.ImagesResponse
   >;
 
   @route("variations")
@@ -57,8 +57,8 @@ interface Images {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateImageVariationRequest;
+      body: OpenAI.CreateImageVariationRequest;
     },
-    ImagesResponse
+    OpenAI.ImagesResponse
   >;
 }

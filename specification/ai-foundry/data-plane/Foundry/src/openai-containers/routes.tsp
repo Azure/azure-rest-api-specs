@@ -21,7 +21,7 @@ interface Containers {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -33,7 +33,7 @@ interface Containers {
       @query(#{ explode: true })
       name?: string;
     },
-    ContainerListResource
+    OpenAI.ContainerListResource
   >;
 
   @post
@@ -41,9 +41,9 @@ interface Containers {
   CreateContainer is OpenAIOperation<
     {
       @body
-      body: CreateContainerBody;
+      body: OpenAI.CreateContainerBody;
     },
-    ContainerResource
+    OpenAI.ContainerResource
   >;
 
   @route("{container_id}")
@@ -55,7 +55,7 @@ interface Containers {
       @path
       container_id: string;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 
   @route("{container_id}")
@@ -66,7 +66,7 @@ interface Containers {
       @path
       container_id: string;
     },
-    ContainerResource
+    OpenAI.ContainerResource
   >;
 
   @list
@@ -84,7 +84,7 @@ interface Containers {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -92,7 +92,7 @@ interface Containers {
       @query(#{ explode: true })
       after?: string;
     },
-    ContainerFileListResource
+    OpenAI.ContainerFileListResource
   >;
 
   @sharedRoute
@@ -113,9 +113,9 @@ interface Containers {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateContainerFileBody;
+      body: OpenAI.CreateContainerFileBody;
     },
-    ContainerFileResource
+    OpenAI.ContainerFileResource
   >;
 
   @sharedRoute
@@ -133,9 +133,9 @@ interface Containers {
       container_id: string;
 
       @body
-      body: CreateContainerFileBody;
+      body: OpenAI.CreateContainerFileBody;
     },
-    ContainerFileResource
+    OpenAI.ContainerFileResource
   >;
 
   @route("{container_id}/files/{file_id}")
@@ -149,7 +149,7 @@ interface Containers {
       @path
       file_id: string;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 
   @route("{container_id}/files/{file_id}")
@@ -163,7 +163,7 @@ interface Containers {
       @path
       file_id: string;
     },
-    ContainerFileResource
+    OpenAI.ContainerFileResource
   >;
 
   @route("{container_id}/files/{file_id}/content")
@@ -177,6 +177,6 @@ interface Containers {
       @path
       file_id: string;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 }

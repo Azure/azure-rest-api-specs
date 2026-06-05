@@ -27,7 +27,7 @@ interface Chat {
       /**A list of metadata keys to filter the Chat Completions by. Example:
   `metadata[key1]=value1&metadata[key2]=value2`*/
       @query(#{ explode: true })
-      metadata?: Metadata | null;
+      metadata?: OpenAI.Metadata | null;
 
       /** Identifier for the last chat completion from the previous pagination request. */
       @extension("x-ms-list-continuation-token", true)
@@ -41,9 +41,9 @@ interface Chat {
 
       /** Sort order for Chat Completions by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.asc;
+      order?: OpenAI.OrderEnum = OrderEnum.asc;
     },
-    ChatCompletionList
+    OpenAI.ChatCompletionList
   >;
 
   @route("completions")
@@ -72,9 +72,9 @@ interface Chat {
   createChatCompletion is OpenAIOperation<
     {
       @body
-      body: CreateChatCompletionRequest;
+      body: OpenAI.CreateChatCompletionRequest;
     },
-    CreateChatCompletionResponse
+    OpenAI.CreateChatCompletionResponse
   >;
 
   @route("completions/{completion_id}")
@@ -90,7 +90,7 @@ interface Chat {
       @path
       completion_id: string;
     },
-    ChatCompletionDeleted
+    OpenAI.ChatCompletionDeleted
   >;
 
   @route("completions/{completion_id}")
@@ -106,7 +106,7 @@ interface Chat {
       @path
       completion_id: string;
     },
-    CreateChatCompletionResponse
+    OpenAI.CreateChatCompletionResponse
   >;
 
   @route("completions/{completion_id}")
@@ -124,9 +124,9 @@ interface Chat {
       completion_id: string;
 
       @body
-      body: UpdateChatCompletionParametersBody;
+      body: OpenAI.UpdateChatCompletionParametersBody;
     },
-    CreateChatCompletionResponse
+    OpenAI.CreateChatCompletionResponse
   >;
 
   @list
@@ -156,8 +156,8 @@ interface Chat {
 
       /** Sort order for messages by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.asc;
+      order?: OpenAI.OrderEnum = OrderEnum.asc;
     },
-    ChatCompletionMessageList
+    OpenAI.ChatCompletionMessageList
   >;
 }

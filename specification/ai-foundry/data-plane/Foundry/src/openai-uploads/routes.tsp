@@ -33,9 +33,9 @@ interface Uploads {
   createUpload is OpenAIOperation<
     {
       @body
-      body: CreateUploadRequest;
+      body: OpenAI.CreateUploadRequest;
     },
-    Upload
+    OpenAI.Upload
   >;
 
   @route("{upload_id}/cancel")
@@ -52,7 +52,7 @@ interface Uploads {
       @path
       upload_id: string;
     },
-    Upload
+    OpenAI.Upload
   >;
 
   @route("{upload_id}/complete")
@@ -75,9 +75,9 @@ interface Uploads {
       upload_id: string;
 
       @body
-      body: CompleteUploadRequest;
+      body: OpenAI.CompleteUploadRequest;
     },
-    Upload
+    OpenAI.Upload
   >;
 
   @route("{upload_id}/parts")
@@ -100,8 +100,8 @@ interface Uploads {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: AddUploadPartRequest;
+      body: OpenAI.AddUploadPartRequest;
     },
-    UploadPart
+    OpenAI.UploadPart
   >;
 }

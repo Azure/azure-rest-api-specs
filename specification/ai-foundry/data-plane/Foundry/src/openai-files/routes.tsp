@@ -25,7 +25,7 @@ interface Files {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -33,7 +33,7 @@ interface Files {
       @query(#{ explode: true })
       after?: string;
     },
-    ListFilesResponse
+    OpenAI.ListFilesResponse
   >;
 
   @post
@@ -71,9 +71,9 @@ interface Files {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateFileRequest;
+      body: OpenAI.CreateFileRequest;
     },
-    OpenAIFile
+    OpenAI.OpenAIFile
   >;
 
   @route("{file_id}")
@@ -85,7 +85,7 @@ interface Files {
       @path
       file_id: string;
     },
-    DeleteFileResponse
+    OpenAI.DeleteFileResponse
   >;
 
   @route("{file_id}")
@@ -97,7 +97,7 @@ interface Files {
       @path
       file_id: string;
     },
-    OpenAIFile
+    OpenAI.OpenAIFile
   >;
 
   @route("{file_id}/content")
@@ -109,6 +109,6 @@ interface Files {
       @path
       file_id: string;
     },
-    Body<string>
+    TypeSpec.Http.Body<string>
   >;
 }

@@ -23,7 +23,7 @@ interface VideoGeneration {
 
       /** Sort order of results by timestamp. Use `asc` for ascending order or `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum;
+      order?: OpenAI.OrderEnum;
 
       /** Identifier for the last item from the previous pagination request */
       @extension("x-ms-list-continuation-token", true)
@@ -31,7 +31,7 @@ interface VideoGeneration {
       @query(#{ explode: true })
       after?: string;
     },
-    VideoListResource
+    OpenAI.VideoListResource
   >;
 
   @post
@@ -42,9 +42,9 @@ interface VideoGeneration {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateVideoMultipartBody;
+      body: OpenAI.CreateVideoMultipartBody;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 
   @route("characters")
@@ -56,9 +56,9 @@ interface VideoGeneration {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateVideoCharacterBody;
+      body: OpenAI.CreateVideoCharacterBody;
     },
-    VideoCharacterResource
+    OpenAI.VideoCharacterResource
   >;
 
   @route("characters/{character_id}")
@@ -70,7 +70,7 @@ interface VideoGeneration {
       @path
       character_id: string;
     },
-    VideoCharacterResource
+    OpenAI.VideoCharacterResource
   >;
 
   @sharedRoute
@@ -83,9 +83,9 @@ interface VideoGeneration {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateVideoEditMultipartBody;
+      body: OpenAI.CreateVideoEditMultipartBody;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 
   @sharedRoute
@@ -95,9 +95,9 @@ interface VideoGeneration {
   CreateVideoEditJson is OpenAIOperation<
     {
       @body
-      body: CreateVideoEditJsonBody;
+      body: OpenAI.CreateVideoEditJsonBody;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 
   @sharedRoute
@@ -110,9 +110,9 @@ interface VideoGeneration {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateVideoExtendMultipartBody;
+      body: OpenAI.CreateVideoExtendMultipartBody;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 
   @sharedRoute
@@ -122,9 +122,9 @@ interface VideoGeneration {
   CreateVideoExtendJson is OpenAIOperation<
     {
       @body
-      body: CreateVideoExtendJsonBody;
+      body: OpenAI.CreateVideoExtendJsonBody;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 
   @route("{video_id}")
@@ -136,7 +136,7 @@ interface VideoGeneration {
       @path
       video_id: string;
     },
-    DeletedVideoResource
+    OpenAI.DeletedVideoResource
   >;
 
   @route("{video_id}")
@@ -148,7 +148,7 @@ interface VideoGeneration {
       @path
       video_id: string;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 
   @route("{video_id}/content")
@@ -166,7 +166,7 @@ interface VideoGeneration {
 
       /** Which downloadable asset to return. Defaults to the MP4 video. */
       @query(#{ explode: true })
-      variant?: VideoContentVariant;
+      variant?: OpenAI.VideoContentVariant;
     },
     {
       @header
@@ -190,8 +190,8 @@ interface VideoGeneration {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateVideoRemixBody;
+      body: OpenAI.CreateVideoRemixBody;
     },
-    VideoResource
+    OpenAI.VideoResource
   >;
 }

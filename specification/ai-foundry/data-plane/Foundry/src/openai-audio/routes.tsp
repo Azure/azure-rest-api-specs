@@ -18,7 +18,7 @@ interface Audio {
   createSpeech is OpenAIOperation<
     {
       @body
-      body: CreateSpeechRequest;
+      body: OpenAI.CreateSpeechRequest;
     },
     {
       @header("Transfer-Encoding")
@@ -47,12 +47,12 @@ interface Audio {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateTranscriptionRequest;
+      body: OpenAI.CreateTranscriptionRequest;
     },
-    Body<
-      | CreateTranscriptionResponseJson
-      | CreateTranscriptionResponseDiarizedJson
-      | CreateTranscriptionResponseVerboseJson>
+    TypeSpec.Http.Body<
+      | OpenAI.CreateTranscriptionResponseJson
+      | OpenAI.CreateTranscriptionResponseDiarizedJson
+      | OpenAI.CreateTranscriptionResponseVerboseJson>
   >;
 
   @route("translations")
@@ -64,8 +64,10 @@ interface Audio {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: CreateTranslationRequest;
+      body: OpenAI.CreateTranslationRequest;
     },
-    Body<CreateTranslationResponseJson | CreateTranslationResponseVerboseJson>
+    TypeSpec.Http.Body<
+      | OpenAI.CreateTranslationResponseJson
+      | OpenAI.CreateTranslationResponseVerboseJson>
   >;
 }

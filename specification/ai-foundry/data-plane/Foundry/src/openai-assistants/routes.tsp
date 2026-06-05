@@ -21,7 +21,7 @@ interface Assistants {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -33,7 +33,7 @@ interface Assistants {
       @query(#{ explode: true })
       before?: string;
     },
-    ListAssistantsResponse
+    OpenAI.ListAssistantsResponse
   >;
 
   @post
@@ -41,9 +41,9 @@ interface Assistants {
   createAssistant is OpenAIOperation<
     {
       @body
-      body: CreateAssistantRequest;
+      body: OpenAI.CreateAssistantRequest;
     },
-    AssistantObject
+    OpenAI.AssistantObject
   >;
 
   @route("{assistant_id}")
@@ -55,7 +55,7 @@ interface Assistants {
       @path
       assistant_id: string;
     },
-    DeleteAssistantResponse
+    OpenAI.DeleteAssistantResponse
   >;
 
   @route("{assistant_id}")
@@ -67,7 +67,7 @@ interface Assistants {
       @path
       assistant_id: string;
     },
-    AssistantObject
+    OpenAI.AssistantObject
   >;
 
   @route("{assistant_id}")
@@ -80,8 +80,8 @@ interface Assistants {
       assistant_id: string;
 
       @body
-      body: ModifyAssistantRequest;
+      body: OpenAI.ModifyAssistantRequest;
     },
-    AssistantObject
+    OpenAI.AssistantObject
   >;
 }

@@ -17,8 +17,8 @@ interface Completions {
   createCompletion is OpenAIOperation<
     {
       @body
-      body: CreateCompletionRequest;
+      body: OpenAI.CreateCompletionRequest;
     },
-    CreateCompletionResponse
+    OpenAI.CreateCompletionResponse
   >;
 }

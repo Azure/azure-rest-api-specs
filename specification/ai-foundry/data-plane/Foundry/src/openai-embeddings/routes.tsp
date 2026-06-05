@@ -12,8 +12,8 @@ interface Embeddings {
   createEmbedding is OpenAIOperation<
     {
       @body
-      body: CreateEmbeddingRequest;
+      body: OpenAI.CreateEmbeddingRequest;
     },
-    CreateEmbeddingResponse
+    OpenAI.CreateEmbeddingResponse
   >;
 }

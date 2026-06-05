@@ -24,7 +24,7 @@ interface Batches {
       @query(#{ explode: true })
       limit?: integer = 20;
     },
-    ListBatchesResponse
+    OpenAI.ListBatchesResponse
   >;
 
   @post
@@ -32,9 +32,9 @@ interface Batches {
   createBatch is OpenAIOperation<
     {
       @body
-      body: CreateBatchParametersBody;
+      body: OpenAI.CreateBatchParametersBody;
     },
-    Batch
+    OpenAI.Batch
   >;
 
   @route("{batch_id}")
@@ -46,7 +46,7 @@ interface Batches {
       @path
       batch_id: string;
     },
-    Batch
+    OpenAI.Batch
   >;
 
   @route("{batch_id}/cancel")
@@ -58,6 +58,6 @@ interface Batches {
       @path
       batch_id: string;
     },
-    Batch
+    OpenAI.Batch
   >;
 }

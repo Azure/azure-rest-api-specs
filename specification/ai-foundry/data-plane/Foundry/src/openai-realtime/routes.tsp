@@ -19,7 +19,7 @@ interface Realtime {
       contentType: "multipart/form-data";
 
       @multipartBody
-      body: RealtimeCallCreateRequest;
+      body: OpenAI.RealtimeCallCreateRequest;
     },
     {
       @statusCode
@@ -52,9 +52,9 @@ interface Realtime {
 
       /** Session configuration to apply before the caller is bridged to the model. */
       @body
-      body: RealtimeSessionCreateRequestGA;
+      body: OpenAI.RealtimeSessionCreateRequestGA;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 
   @route("calls/{call_id}/hangup")
@@ -73,7 +73,7 @@ interface Realtime {
       @path
       call_id: string;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 
   @route("calls/{call_id}/refer")
@@ -89,9 +89,9 @@ interface Realtime {
 
       /** Destination URI for the REFER request. */
       @body
-      body: RealtimeCallReferRequest;
+      body: OpenAI.RealtimeCallReferRequest;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 
   @route("calls/{call_id}/reject")
@@ -108,9 +108,9 @@ interface Realtime {
       /**Provide an optional SIP status code. When omitted the API responds with
   `603 Decline`.*/
       @body
-      body: RealtimeCallRejectRequest;
+      body: OpenAI.RealtimeCallRejectRequest;
     },
-    OkResponse
+    TypeSpec.Http.OkResponse
   >;
 
   @route("client_secrets")
@@ -135,9 +135,9 @@ interface Realtime {
     {
       /** Create a client secret with the given session configuration. */
       @body
-      body: RealtimeCreateClientSecretRequest;
+      body: OpenAI.RealtimeCreateClientSecretRequest;
     },
-    RealtimeCreateClientSecretResponse
+    OpenAI.RealtimeCreateClientSecretResponse
   >;
 
   @route("sessions")
@@ -158,9 +158,9 @@ interface Realtime {
     {
       /** Create an ephemeral API key with the given session configuration. */
       @body
-      body: RealtimeSessionCreateRequest;
+      body: OpenAI.RealtimeSessionCreateRequest;
     },
-    RealtimeSessionCreateResponse
+    OpenAI.RealtimeSessionCreateResponse
   >;
 
   @route("transcription_sessions")
@@ -181,9 +181,9 @@ interface Realtime {
     {
       /** Create an ephemeral API key with the given session configuration. */
       @body
-      body: RealtimeTranscriptionSessionCreateRequest;
+      body: OpenAI.RealtimeTranscriptionSessionCreateRequest;
     },
-    RealtimeTranscriptionSessionCreateResponse
+    OpenAI.RealtimeTranscriptionSessionCreateResponse
   >;
 
   @route("translations/client_secrets")
@@ -204,8 +204,8 @@ interface Realtime {
     {
       /** Create a client secret with the given translation session configuration. */
       @body
-      body: RealtimeTranslationClientSecretCreateRequest;
+      body: OpenAI.RealtimeTranslationClientSecretCreateRequest;
     },
-    RealtimeTranslationClientSecretCreateResponse
+    OpenAI.RealtimeTranslationClientSecretCreateResponse
   >;
 }

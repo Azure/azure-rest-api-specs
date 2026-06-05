@@ -18,9 +18,9 @@ interface Threads {
   createThread is OpenAIOperation<
     {
       @body
-      body: CreateThreadRequest;
+      body: OpenAI.CreateThreadRequest;
     },
-    ThreadObject
+    OpenAI.ThreadObject
   >;
 
   @tag("Assistants")
@@ -30,9 +30,9 @@ interface Threads {
   createThreadAndRun is OpenAIOperation<
     {
       @body
-      body: CreateThreadAndRunRequest;
+      body: OpenAI.CreateThreadAndRunRequest;
     },
-    RunObject
+    OpenAI.RunObject
   >;
 
   @tag("Assistants")
@@ -45,7 +45,7 @@ interface Threads {
       @path
       thread_id: string;
     },
-    DeleteThreadResponse
+    OpenAI.DeleteThreadResponse
   >;
 
   @tag("Assistants")
@@ -58,7 +58,7 @@ interface Threads {
       @path
       thread_id: string;
     },
-    ThreadObject
+    OpenAI.ThreadObject
   >;
 
   @tag("Assistants")
@@ -72,9 +72,9 @@ interface Threads {
       thread_id: string;
 
       @body
-      body: ModifyThreadRequest;
+      body: OpenAI.ModifyThreadRequest;
     },
-    ThreadObject
+    OpenAI.ThreadObject
   >;
 
   @tag("Assistants")
@@ -94,7 +94,7 @@ interface Threads {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -110,7 +110,7 @@ interface Threads {
       @query(#{ explode: true })
       run_id?: string;
     },
-    ListMessagesResponse
+    OpenAI.ListMessagesResponse
   >;
 
   @tag("Assistants")
@@ -124,9 +124,9 @@ interface Threads {
       thread_id: string;
 
       @body
-      body: CreateMessageRequest;
+      body: OpenAI.CreateMessageRequest;
     },
-    MessageObject
+    OpenAI.MessageObject
   >;
 
   @tag("Assistants")
@@ -143,7 +143,7 @@ interface Threads {
       @path
       message_id: string;
     },
-    DeleteMessageResponse
+    OpenAI.DeleteMessageResponse
   >;
 
   @tag("Assistants")
@@ -160,7 +160,7 @@ interface Threads {
       @path
       message_id: string;
     },
-    MessageObject
+    OpenAI.MessageObject
   >;
 
   @tag("Assistants")
@@ -178,9 +178,9 @@ interface Threads {
       message_id: string;
 
       @body
-      body: ModifyMessageRequest;
+      body: OpenAI.ModifyMessageRequest;
     },
-    MessageObject
+    OpenAI.MessageObject
   >;
 
   @tag("Assistants")
@@ -200,7 +200,7 @@ interface Threads {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -212,7 +212,7 @@ interface Threads {
       @query(#{ explode: true })
       before?: string;
     },
-    ListRunsResponse
+    OpenAI.ListRunsResponse
   >;
 
   @tag("Assistants")
@@ -231,9 +231,9 @@ interface Threads {
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
 
       @body
-      body: CreateRunRequest;
+      body: OpenAI.CreateRunRequest;
     },
-    RunObject
+    OpenAI.RunObject
   >;
 
   @tag("Assistants")
@@ -250,7 +250,7 @@ interface Threads {
       @path
       run_id: string;
     },
-    RunObject
+    OpenAI.RunObject
   >;
 
   @tag("Assistants")
@@ -268,9 +268,9 @@ interface Threads {
       run_id: string;
 
       @body
-      body: ModifyRunRequest;
+      body: OpenAI.ModifyRunRequest;
     },
-    RunObject
+    OpenAI.RunObject
   >;
 
   @tag("Assistants")
@@ -287,7 +287,7 @@ interface Threads {
       @path
       run_id: string;
     },
-    RunObject
+    OpenAI.RunObject
   >;
 
   @tag("Assistants")
@@ -311,7 +311,7 @@ interface Threads {
 
       /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
       @query(#{ explode: true })
-      order?: OrderEnum = OrderEnum.desc;
+      order?: OpenAI.OrderEnum = OrderEnum.desc;
 
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
       @extension("x-ms-list-continuation-token", true)
@@ -328,7 +328,7 @@ interface Threads {
       @query(#{ explode: true })
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
     },
-    ListRunStepsResponse
+    OpenAI.ListRunStepsResponse
   >;
 
   @tag("Assistants")
@@ -354,7 +354,7 @@ interface Threads {
       @query(#{ explode: true })
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
     },
-    RunStepObject
+    OpenAI.RunStepObject
   >;
 
   @tag("Assistants")
@@ -375,8 +375,8 @@ interface Threads {
       run_id: string;
 
       @body
-      body: SubmitToolOutputsRunRequest;
+      body: OpenAI.SubmitToolOutputsRunRequest;
     },
-    RunObject
+    OpenAI.RunObject
   >;
 }

@@ -10,7 +10,7 @@ interface Models {
   @list
   @get
   @summary("Lists the currently available models, and provides basic information about each one such as the owner and availability.")
-  listModels is OpenAIOperation<{}, ListModelsResponse>;
+  listModels is OpenAIOperation<{}, OpenAI.ListModelsResponse>;
 
   @route("{model}")
   @delete
@@ -21,7 +21,7 @@ interface Models {
       @path
       `model`: string;
     },
-    DeleteModelResponse
+    OpenAI.DeleteModelResponse
   >;
 
   @route("{model}")
@@ -33,6 +33,6 @@ interface Models {
       @path
       `model`: string;
     },
-    Model
+    OpenAI.Model
   >;
 }

@@ -16,8 +16,8 @@ interface Moderations {
   createModeration is OpenAIOperation<
     {
       @body
-      body: CreateModerationRequest;
+      body: OpenAI.CreateModerationRequest;
     },
-    CreateModerationResponse
+    OpenAI.CreateModerationResponse
   >;
 }

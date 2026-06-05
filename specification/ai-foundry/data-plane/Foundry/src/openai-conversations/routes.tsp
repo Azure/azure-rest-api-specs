@@ -29,7 +29,7 @@ interface Conversations {
   - `asc`: Return the input items in ascending order.
   - `desc`: Return the input items in descending order.*/
       @query(#{ explode: true })
-      order?: OrderEnum;
+      order?: OpenAI.OrderEnum;
 
       /** An item ID to list items after, used in pagination. */
       @extension("x-ms-list-continuation-token", true)
@@ -46,9 +46,9 @@ interface Conversations {
   - `message.output_text.logprobs`: Include logprobs with assistant messages.
   - `reasoning.encrypted_content`: Includes an encrypted version of reasoning tokens in reasoning item outputs. This enables reasoning items to be used in multi-turn conversations when using the Responses API statelessly (like when the `store` parameter is set to `false`, or when an organization is enrolled in the zero data retention program).*/
       @query(#{ explode: true })
-      include?: IncludeEnum[];
+      include?: OpenAI.IncludeEnum[];
     },
-    ConversationItemList
+    OpenAI.ConversationItemList
   >;
 
   @route("{conversation_id}/items")
@@ -63,12 +63,12 @@ interface Conversations {
       /**Additional fields to include in the response. See the `include`
   parameter for [listing Conversation items above](/docs/api-reference/conversations/list-items#conversations_list_items-include) for more information.*/
       @query(#{ explode: true })
-      include?: IncludeEnum[];
+      include?: OpenAI.IncludeEnum[];
 
       @body
-      body: CreateConversationItemsParametersBody;
+      body: OpenAI.CreateConversationItemsParametersBody;
     },
-    ConversationItemList
+    OpenAI.ConversationItemList
   >;
 
   @route("{conversation_id}/items/{item_id}")
@@ -84,7 +84,7 @@ interface Conversations {
       @path
       item_id: string;
     },
-    ConversationResource
+    OpenAI.ConversationResource
   >;
 
   @route("{conversation_id}/items/{item_id}")
@@ -103,9 +103,9 @@ interface Conversations {
       /**Additional fields to include in the response. See the `include`
   parameter for [listing Conversation items above](/docs/api-reference/conversations/list-items#conversations_list_items-include) for more information.*/
       @query(#{ explode: true })
-      include?: IncludeEnum[];
+      include?: OpenAI.IncludeEnum[];
     },
-    ConversationItem
+    OpenAI.ConversationItem
   >;
 
   @post
@@ -113,9 +113,9 @@ interface Conversations {
   createConversation is OpenAIAgentOperation<
     {
       @body
-      body: CreateConversationBody;
+      body: OpenAI.CreateConversationBody;
     },
-    ConversationResource
+    OpenAI.ConversationResource
   >;
 
   @route("{conversation_id}")
@@ -127,7 +127,7 @@ interface Conversations {
       @path
       conversation_id: string;
     },
-    DeletedConversationResource
+    OpenAI.DeletedConversationResource
   >;
 
   @route("{conversation_id}")
@@ -139,7 +139,7 @@ interface Conversations {
       @path
       conversation_id: string;
     },
-    ConversationResource
+    OpenAI.ConversationResource
   >;
 
   @route("{conversation_id}")
@@ -152,15 +152,23 @@ interface Conversations {
       conversation_id: string;
 
       @body
-      body: UpdateConversationBody;
+      body: OpenAI.UpdateConversationBody;
     },
-    ConversationResource
+    OpenAI.ConversationResource
   >;
 
   @operationId("listConversations")
   @get
   listConversations is OpenAIAgentFilteredPagedOperation<
-    {},
-    ConversationResource
+    {
+      /** Filter by agent name. If provided, only items associated with the specified agent will be returned. */
+      @query
+      agent_name?: string;
+
+      /** Filter by agent ID in the format `name:version`. If provided, only items associated with the specified agent ID will be returned. */
+      @query
+      agent_id?: string;
+    },
+    OpenAI.ConversationResource
   >;
 }

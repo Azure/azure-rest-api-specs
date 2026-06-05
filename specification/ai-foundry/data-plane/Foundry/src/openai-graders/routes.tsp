@@ -16,9 +16,9 @@ interface Graders {
   runGrader is OpenAIOperation<
     {
       @body
-      body: RunGraderRequest;
+      body: OpenAI.RunGraderRequest;
     },
-    RunGraderResponse
+    OpenAI.RunGraderResponse
   >;
 
   @route("validate")
@@ -30,8 +30,8 @@ interface Graders {
   validateGrader is OpenAIOperation<
     {
       @body
-      body: ValidateGraderRequest;
+      body: OpenAI.ValidateGraderRequest;
     },
-    ValidateGraderResponse
+    OpenAI.ValidateGraderResponse
   >;
 }

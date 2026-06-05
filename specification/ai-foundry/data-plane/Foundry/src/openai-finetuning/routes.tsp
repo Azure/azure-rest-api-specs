@@ -43,7 +43,7 @@ interface FineTuning {
       @query(#{ explode: true })
       order?: "ascending" | "descending" = "descending";
     },
-    ListFineTuningCheckpointPermissionResponse
+    OpenAI.ListFineTuningCheckpointPermissionResponse
   >;
 
   @tag("Fine-tuning")
@@ -62,9 +62,9 @@ interface FineTuning {
       fine_tuned_model_checkpoint: string;
 
       @body
-      body: CreateFineTuningCheckpointPermissionRequest;
+      body: OpenAI.CreateFineTuningCheckpointPermissionRequest;
     },
-    ListFineTuningCheckpointPermissionResponse
+    OpenAI.ListFineTuningCheckpointPermissionResponse
   >;
 
   @tag("Fine-tuning")
@@ -86,7 +86,7 @@ interface FineTuning {
       @path
       permission_id: string;
     },
-    DeleteFineTuningCheckpointPermissionResponse
+    OpenAI.DeleteFineTuningCheckpointPermissionResponse
   >;
 
   @tag("Fine-tuning")
@@ -113,7 +113,7 @@ interface FineTuning {
       @query(#{ explode: true })
       metadata?: Record<string> | null;
     },
-    ListPaginatedFineTuningJobsResponse
+    OpenAI.ListPaginatedFineTuningJobsResponse
   >;
 
   @tag("Fine-tuning")
@@ -130,9 +130,9 @@ interface FineTuning {
   createFineTuningJob is OpenAIOperation<
     {
       @body
-      body: CreateFineTuningJobRequest;
+      body: OpenAI.CreateFineTuningJobRequest;
     },
-    FineTuningJob
+    OpenAI.FineTuningJob
   >;
 
   @tag("Fine-tuning")
@@ -150,7 +150,7 @@ interface FineTuning {
       @path
       fine_tuning_job_id: string;
     },
-    FineTuningJob
+    OpenAI.FineTuningJob
   >;
 
   @tag("Fine-tuning")
@@ -166,7 +166,7 @@ interface FineTuning {
       @path
       fine_tuning_job_id: string;
     },
-    FineTuningJob
+    OpenAI.FineTuningJob
   >;
 
   @tag("Fine-tuning")
@@ -193,7 +193,7 @@ interface FineTuning {
       @query(#{ explode: true })
       limit?: integer = 10;
     },
-    ListFineTuningJobCheckpointsResponse
+    OpenAI.ListFineTuningJobCheckpointsResponse
   >;
 
   @tag("Fine-tuning")
@@ -220,7 +220,7 @@ interface FineTuning {
       @query(#{ explode: true })
       limit?: integer = 20;
     },
-    ListFineTuningJobEventsResponse
+    OpenAI.ListFineTuningJobEventsResponse
   >;
 
   @tag("Fine-tuning")
@@ -236,7 +236,7 @@ interface FineTuning {
       @path
       fine_tuning_job_id: string;
     },
-    FineTuningJob
+    OpenAI.FineTuningJob
   >;
 
   @tag("Fine-tuning")
@@ -252,6 +252,6 @@ interface FineTuning {
       @path
       fine_tuning_job_id: string;
     },
-    FineTuningJob
+    OpenAI.FineTuningJob
   >;
 }

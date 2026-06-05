@@ -3,7 +3,6 @@ import "@typespec/http";
 import "@azure-tools/openai-typespec/models/responses";
 import "@azure-tools/openai-typespec/models/common";
 import "@typespec/openapi";
-import "../common/models.tsp";
 using TypeSpec.Http;
 using OpenAI;
 using TypeSpec.OpenAPI;
@@ -25,9 +24,9 @@ interface Responses {
   createResponse is OpenAIAgentSessionOperation<
     {
       @body
-      body: CreateResponse;
+      body: OpenAI.CreateResponse;
     },
-    Response
+    OpenAI.Response
   >;
 
   @route("{response_id}")
@@ -42,7 +41,7 @@ interface Responses {
       @path
       response_id: string;
     },
-    DeleteResponseResponse
+    OpenAI.DeleteResponseResponse
   >;
 
   @route("{response_id}")
@@ -60,7 +59,7 @@ interface Responses {
       /**Additional fields to include in the response. See the `include`
   parameter for Response creation above for more information.*/
       @query(#{ explode: true })
-      include?: IncludeEnum[];
+      include?: OpenAI.IncludeEnum[];
 
       /**If set to true, the model response data will be streamed to the client
   as it is generated using [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format).
@@ -83,7 +82,7 @@ interface Responses {
       @query(#{ explode: true })
       include_obfuscation?: boolean;
     },
-    Response
+    OpenAI.Response
   >;
 
   @route("{response_id}/cancel")
@@ -100,7 +99,7 @@ interface Responses {
       @path
       response_id: string;
     },
-    Response
+    OpenAI.Response
   >;
 
   @list
@@ -122,7 +121,7 @@ interface Responses {
   - `asc`: Return the input items in ascending order.
   - `desc`: Return the input items in descending order.*/
       @query(#{ explode: true })
-      order?: OrderEnum;
+      order?: OpenAI.OrderEnum;
 
       /** An item ID to list items after, used in pagination. */
       @extension("x-ms-list-continuation-token", true)
@@ -133,9 +132,9 @@ interface Responses {
       /**Additional fields to include in the response. See the `include`
   parameter for Response creation above for more information.*/
       @query(#{ explode: true })
-      include?: IncludeEnum[];
+      include?: OpenAI.IncludeEnum[];
     },
-    ResponseItemList
+    OpenAI.ResponseItemList
   >;
 
   @route("compact")
@@ -145,15 +144,15 @@ interface Responses {
     
     Learn when and how to compact long-running conversations in the [conversation state guide](/docs/guides/conversation-state#managing-the-context-window). For ZDR-compatible compaction details, see [Compaction (advanced)](/docs/guides/conversation-state#compaction-advanced).
     """)
-  Compactconversation is OpenAIOperation<
+  Compactconversation is OpenAISharedOperation<
     {
       @header
       contentType: "application/json" | "application/x-www-form-urlencoded";
 
       @body
-      body: CompactResponseMethodPublicBody;
+      body: OpenAI.CompactResponseMethodPublicBody;
     },
-    CompactResource
+    OpenAI.CompactResource
   >;
 
   @operationId("createResponseStream")
@@ -161,9 +160,9 @@ interface Responses {
   createResponseStream is OpenAIAgentStreamingOperation<
     {
       @body
-      body: CreateResponse;
+      body: OpenAI.CreateResponse;
     },
-    ResponseAudioDeltaEvent
+    OpenAI.ResponseAudioDeltaEvent
   >;
 
   @operationId("getResponseStream")
@@ -175,7 +174,7 @@ interface Responses {
       response_id: string;
 
       @query(#{ name: "include[]", explode: true })
-      includables?: IncludeEnum[] = #[];
+      includables?: OpenAI.IncludeEnum[] = #[];
 
       @header
       accept: "text/event-stream";
@@ -183,12 +182,27 @@ interface Responses {
       @query
       starting_after?: int32;
     },
-    ResponseAudioDeltaEvent
+    OpenAI.ResponseAudioDeltaEvent
   >;
 
   @operationId("listResponses")
   @get
-  listResponses is OpenAIAgentFilteredPagedOperation<{}, Response>;
+  listResponses is OpenAIAgentFilteredPagedOperation<
+    {
+      /** Filter by agent name. If provided, only items associated with the specified agent will be returned. */
+      @query
+      agent_name?: string;
+
+      /** Filter by agent ID in the format `name:version`. If provided, only items associated with the specified agent ID will be returned. */
+      @query
+      agent_id?: string;
+
+      /** Filter by conversation ID. If provided, only responses associated with the specified conversation will be returned. */
+      @query
+      conversation_id?: string;
+    },
+    OpenAI.Response
+  >;
 
   @operationId("compactResponseConversation")
   @post
@@ -196,8 +210,8 @@ interface Responses {
   compactResponseConversation is OpenAIAgentSessionOperation<
     {
       @body
-      body: CompactResponseMethodPublicBody;
+      body: OpenAI.CompactResponseMethodPublicBody;
     },
-    CompactResource
+    OpenAI.CompactResource
   >;
 }
