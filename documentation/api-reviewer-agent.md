@@ -510,7 +510,7 @@ report format, and more. The tests run against fixture files with seeded
 violations and verify the agent detects each issue.
 
 To run the eval suite after making changes to the agent, instruction files,
-skills, **or the `arm-api-review.md` workflow**:
+skills, **or the automated workflow configuration** (`.github/workflows/arm-api-review.md`):
 
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
@@ -525,7 +525,7 @@ existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip
 rebuilding. Run `Get-Help .\run-evals.ps1 -Detailed` for all options.
 
 Include the eval results in any PR that modifies the agent, its rules, or the
-`arm-api-review.md` workflow so reviewers can assess the impact.
+automated workflow configuration so reviewers can assess the impact.
 
 See [`.github/skills/evals/arm-api-reviewer/README.md`](../.github/skills/evals/arm-api-reviewer/README.md)
 for full documentation on test categories, fixtures, graders, and adding

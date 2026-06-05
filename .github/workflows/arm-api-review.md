@@ -165,6 +165,8 @@ imports:
   - ../instructions/typespec-review.instructions.md
   - ../skills/azure-api-review/SKILL.md
 safe-outputs:
+  # max: 3 budget: (1) review summary, (2) overflow findings if per-category
+  # caps are exceeded, (3) error notification if review fails or is skipped.
   add-comment:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
