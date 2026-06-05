@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-azure-core/experimental";
 import "../common/models.tsp";
 import "@typespec/http";
 import "@typespec/openapi";
@@ -5,6 +6,7 @@ import "@azure-tools/openai-typespec/models/common";
 import "@azure-tools/openai-typespec/models/evals";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core.Experimental;
 using OpenAI;
 namespace Azure.AI.Projects;
 @route("openai/v1/evals")

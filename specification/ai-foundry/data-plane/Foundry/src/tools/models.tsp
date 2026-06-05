@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-azure-core/experimental";
 import "../memory-stores/models.tsp";
 
 using Azure.Core.Experimental;

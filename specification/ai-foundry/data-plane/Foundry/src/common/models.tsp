@@ -1,3 +1,5 @@
+import "@azure-tools/typespec-azure-core/experimental";
+
 namespace Azure.AI.Projects;
 
 using Azure.Core.Experimental;
