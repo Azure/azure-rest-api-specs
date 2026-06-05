@@ -16870,6 +16870,11 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]` for backward compatibility. On update, omitting this field leaves it unchanged; an empty list is rejected.
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -16928,6 +16933,11 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]` for backward compatibility. On update, omitting this field leaves it unchanged; an empty list is rejected.
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -16957,6 +16967,11 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]` for backward compatibility. On update, omitting this field leaves it unchanged; an empty list is rejected.
         description:
           type: string
           description: The asset description text.
