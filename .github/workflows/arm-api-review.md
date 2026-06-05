@@ -49,6 +49,7 @@ on:
           core.setOutput('pr_number', String(prNumber));
 
           // ── 2. issue_comment: must contain /arm-review ─────────────────────
+          //    Check this early to avoid unnecessary API calls for unrelated comments.
           if (eventName === 'issue_comment') {
             const body = payload.comment?.body ?? '';
             if (!body.includes('/arm-review')) {
@@ -65,53 +66,19 @@ on:
             }
           }
 
-          // ── 4. Fetch PR details ────────────────────────────────────────────
+          // ── 4. Fetch PR details (shared by all subsequent checks) ────────
           const { data: pr } = await github.rest.pulls.get({
             ...context.repo,
             pull_number: prNumber,
           });
 
-          // ── 5. skip-arm-review label ───────────────────────────────────────
-          if (pr.labels.some(l => l.name === 'skip-arm-review')) {
-            core.setOutput('should_run', 'false');
-            core.notice(`PR #${prNumber} has 'skip-arm-review' label — skipping ARM API review.`);
-            return;
-          }
-
-          // ── 6. Draft PR guard (auto triggers only) ─────────────────────────
-          //    Explicit triggers (/arm-review command, arm-review-requested label,
-          //    workflow_dispatch) always proceed even for drafts.
-          const isExplicit =
-            eventName === 'workflow_dispatch' ||
-            (eventName === 'pull_request_target' && payload.action === 'labeled') ||
-            (eventName === 'issue_comment');
-
-          if (pr.draft && !isExplicit) {
-            core.setOutput('should_run', 'false');
-            core.notice(`PR #${prNumber} is a draft — skipping auto ARM API review. Use /arm-review to review on demand.`);
-            return;
-          }
-
-          // ── 7. specification/ file guard ────────────────────────────────────
-          const { data: files } = await github.rest.pulls.listFiles({
-            ...context.repo,
-            pull_number: prNumber,
-            per_page: 100,
-          });
-          const specFiles = files.filter(f => f.filename.startsWith('specification/'));
-          if (specFiles.length === 0) {
-            core.setOutput('should_run', 'false');
-            core.notice(`PR #${prNumber} has no specification/ changes — skipping ARM API review.`);
-            return;
-          }
-
-          // ── 8. /arm-review permission check ─────────────────────────────────
+          // ── 5. /arm-review permission check ─────────────────────────────────
+          //    Only the PR author or a repository collaborator may use /arm-review.
           if (eventName === 'issue_comment') {
             const commenter = payload.comment.user.login;
             const prAuthor  = pr.user.login;
 
             if (commenter !== prAuthor) {
-              // Is the commenter a repository collaborator?
               try {
                 await github.rest.repos.checkCollaborator({
                   ...context.repo,
@@ -126,6 +93,48 @@ on:
                 return;
               }
             }
+          }
+
+          // ── 6. skip-arm-review label ───────────────────────────────────────
+          if (pr.labels.some(l => l.name === 'skip-arm-review')) {
+            core.setOutput('should_run', 'false');
+            core.notice(`PR #${prNumber} has 'skip-arm-review' label — skipping ARM API review.`);
+            return;
+          }
+
+          // ── 7. Draft PR guard (auto triggers only) ─────────────────────────
+          //    Explicit triggers (/arm-review command, arm-review-requested label,
+          //    workflow_dispatch) always proceed even for drafts.
+          const isExplicit =
+            eventName === 'workflow_dispatch' ||
+            (eventName === 'pull_request_target' && payload.action === 'labeled') ||
+            (eventName === 'issue_comment');
+
+          if (pr.draft && !isExplicit) {
+            core.setOutput('should_run', 'false');
+            core.notice(`PR #${prNumber} is a draft — skipping auto ARM API review. Use /arm-review to review on demand.`);
+            return;
+          }
+
+          // ── 8. specification/ file guard (paginated) ────────────────────────
+          let specFound = false;
+          for (let page = 1; ; page++) {
+            const { data: pageFiles } = await github.rest.pulls.listFiles({
+              ...context.repo,
+              pull_number: prNumber,
+              per_page: 100,
+              page,
+            });
+            if (pageFiles.some(f => f.filename.startsWith('specification/'))) {
+              specFound = true;
+              break;
+            }
+            if (pageFiles.length < 100) break; // last page reached
+          }
+          if (!specFound) {
+            core.setOutput('should_run', 'false');
+            core.notice(`PR #${prNumber} has no specification/ changes — skipping ARM API review.`);
+            return;
           }
 
           core.setOutput('should_run', 'true');
@@ -157,7 +166,7 @@ imports:
   - ../skills/azure-api-review/SKILL.md
 safe-outputs:
   add-comment:
-    max: 1
+    max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   create-pull-request-review-comment:
     max: 30
