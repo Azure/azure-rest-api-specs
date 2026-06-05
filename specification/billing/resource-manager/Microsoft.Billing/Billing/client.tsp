@@ -217,6 +217,11 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
+  BillingAccounts.downloadDocumentsByBillingAccount,
+  "DownloadDocumentsByBillingAccountInvoice",
+  "csharp"
+);
+@@clientName(
   BillingProfileProperties.invoiceEmailOptIn,
   "IsInvoiceEmailOptIn",
   "csharp"
@@ -612,6 +617,11 @@ using Microsoft.Billing;
 @@clientName(
   BillingAccounts.validatePaymentTerms::parameters.body,
   "arrayOfPaymentTerm",
+  "csharp"
+);
+@@clientName(
+  BillingAccounts.downloadDocumentsByBillingAccount::parameters.body,
+  "arrayOfDocumentDownloadRequest",
   "csharp"
 );
 @@clientName(
