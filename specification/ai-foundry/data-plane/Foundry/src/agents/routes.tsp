@@ -25,7 +25,7 @@ interface Agents {
   >;
 
   /**
-   * Creates a new agent from the request payload and returns the created resource.
+   * Creates a new agent or a new version of an existing agent.
    */
   @summary("Create an agent")
   @post
@@ -33,6 +33,11 @@ interface Agents {
   @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   @tag("Agents")
+  @extension("x-ms-summary-override", "Create an agent")
+  @extension(
+    "x-ms-description-override",
+    "Creates a new agent or a new version of an existing agent."
+  )
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
@@ -84,6 +89,11 @@ interface Agents {
   @route("/agents/{agent_name}")
   @sharedRoute
   @tag("Agents")
+  @extension("x-ms-summary-override", "Update an agent")
+  @extension(
+    "x-ms-description-override",
+    "Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version."
+  )
   updateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -208,6 +218,11 @@ interface Agents {
   @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   @tag("Agent Versions")
+  @extension("x-ms-summary-override", "Create an agent version")
+  @extension(
+    "x-ms-description-override",
+    "Creates a new version for the specified agent and returns the created version resource."
+  )
   createAgentVersion is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {

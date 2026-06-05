@@ -75,6 +75,11 @@ interface Skills {
   @route("/skills/{name}/versions")
   @sharedRoute
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+  @extension("x-ms-summary-override", "Create a new version of a skill")
+  @extension(
+    "x-ms-description-override",
+    "Creates a new version of a skill. If the skill does not exist, it will be created."
+  )
   createSkillVersion is FoundryDataPlaneOperation<
     CreateSkillVersionRequest & SkillsPreviewHeader,
     SkillVersion

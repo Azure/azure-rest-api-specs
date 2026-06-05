@@ -58,9 +58,12 @@ interface Responses {
       @query starting_after?: int32;
       ...UserIsolationKeyHeader;
     },
-    AgentSessionIdResponseHeader & {
-      @body body: OpenAI.Response;
-    }
+
+      | (AgentSessionIdResponseHeader & {
+          @body body: OpenAI.Response;
+        })
+      | (AgentSessionIdResponseHeader &
+          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
   >;
 
   /**
