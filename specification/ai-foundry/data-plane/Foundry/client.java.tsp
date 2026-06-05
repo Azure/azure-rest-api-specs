@@ -198,8 +198,9 @@ namespace Azure.AI.Projects;
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
-// Needs forceful exposition
-@@access(FoundryFeaturesOptInKeys, Access.public);
+// Keep preview opt-in enum internal to Java; public builders use allowPreview(boolean).
+@@usage(FoundryFeaturesOptInKeys, Usage.input, "java");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "java");
 
 // Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
 @@usage(
@@ -269,6 +270,16 @@ namespace Azure.AI.Projects;
 @@convenientAPI(Routines.disableRoutine, false, "java");
 @@convenientAPI(Routines.deleteRoutine, false, "java");
 @@convenientAPI(EvaluationRules.createOrUpdate, false, "java");
+
+// Additional Java workaround: these overloads do not collapse to duplicate signatures, but they still expose
+// FoundryFeaturesOptInKeys alongside other optional parameters after @@clientLocation promotes Foundry-Features.
+// The Java clients keep equivalent non-header overloads manually so the enum can remain internal.
+@@convenientAPI(EvaluatorGenerationJobs.create, false, "java");
+@@convenientAPI(EvaluatorGenerationJobs.list, false, "java");
+@@convenientAPI(Insights.get, false, "java");
+@@convenientAPI(Insights.list, false, "java");
+@@convenientAPI(Routines.listRoutines, false, "java");
+@@convenientAPI(Routines.listRoutineRuns, false, "java");
 
 //making delete methods internal to add public shims that return void
 @@access(Skills.deleteSkill, Access.internal);
