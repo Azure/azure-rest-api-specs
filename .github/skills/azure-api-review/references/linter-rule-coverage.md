@@ -260,6 +260,21 @@ instruction files.
 | --             | ResourceNameRestriction         | arm-api-review §15.7 (PREFLIGHT-005) | ✅ Covered   |
 | --             | TenantLevelAPIsNotAllowed       | arm-api-review §12A (RPC-Uri-V1-11)  | ✅ Annotated |
 
+## Pattern Constraint Rules
+
+| Linter Rule ID | Name                     | Instruction Coverage                                       | Status     |
+| -------------- | ------------------------ | ---------------------------------------------------------- | ---------- |
+| *(none)*       | DenylistPatternDetection | openapi-review §4 (OAPI-PATTERN-ALLOWLIST); pattern-validation.md | ❌ NO AUTOMATED RULE |
+
+> ❌ **No automated linter rule** currently exists for `OAPI-PATTERN-ALLOWLIST`
+> in `@microsoft.azure/openapi-validator`, `@azure-tools/typespec-azure-core`,
+> or `@azure-tools/typespec-azure-resource-manager`. This check is enforced
+> exclusively by the ARM API Reviewer agent during code review. A follow-up
+> issue should be filed to add an automated rule to the OpenAPI validator and
+> TypeSpec linter packages. The existing `ResourceNameRestriction` rule
+> verifies that a `pattern` *exists* on resource name parameters but does not
+> verify whether the pattern is an allowlist or a denylist.
+
 ---
 
 ## Coverage Summary
@@ -278,3 +293,9 @@ instruction files.
 | R2063   | OperationIdNounConflictingModelNames | openapi-review §7.1  |
 | R4006   | DeprecatedXmsCodeGenerationSetting   | openapi-review §18   |
 | R2001   | AvoidNestedProperties                | arm-api-review §8.2  |
+
+### Missing Automated Linter Rules
+
+| Rule ID  | Name                     | Status | Follow-Up |
+| -------- | ------------------------ | ------ | --------- |
+| *(none)* | DenylistPatternDetection | ❌ No automated rule | File a follow-up issue to add `OAPI-PATTERN-ALLOWLIST` to `@azure-tools/typespec-azure-core` and `@microsoft.azure/openapi-validator`. Agent-level coverage: `openapi-review.instructions.md §4`, `typespec-review.instructions.md §2.2`, `arm-api-review.instructions.md §21.4`, and [`pattern-validation.md`](pattern-validation.md). |
