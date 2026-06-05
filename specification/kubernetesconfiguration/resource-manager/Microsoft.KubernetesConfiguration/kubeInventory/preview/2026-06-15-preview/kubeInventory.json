@@ -178,6 +178,15 @@
           "Get KubeInventory": {
             "$ref": "./examples/GetKubeInventory.json"
           },
+          "Get KubeInventory - CSIStorageCapacity": {
+            "$ref": "./examples/GetKubeInventory-CSIStorageCapacity.json"
+          },
+          "Get KubeInventory - CertificateSigningRequest": {
+            "$ref": "./examples/GetKubeInventory-CertificateSigningRequest.json"
+          },
+          "Get KubeInventory - ConfigMap": {
+            "$ref": "./examples/GetKubeInventory-ConfigMap.json"
+          },
           "Get KubeInventory - CronJob": {
             "$ref": "./examples/GetKubeInventory-CronJob.json"
           },
@@ -186,6 +195,9 @@
           },
           "Get KubeInventory - Deployment": {
             "$ref": "./examples/GetKubeInventory-Deployment.json"
+          },
+          "Get KubeInventory - EndpointSlice": {
+            "$ref": "./examples/GetKubeInventory-EndpointSlice.json"
           },
           "Get KubeInventory - HorizontalPodAutoscaler": {
             "$ref": "./examples/GetKubeInventory-HorizontalPodAutoscaler.json"
@@ -234,6 +246,12 @@
           },
           "Get KubeInventory - StorageClass": {
             "$ref": "./examples/GetKubeInventory-StorageClass.json"
+          },
+          "Get KubeInventory - ValidatingAdmissionPolicy": {
+            "$ref": "./examples/GetKubeInventory-ValidatingAdmissionPolicy.json"
+          },
+          "Get KubeInventory - ValidatingAdmissionPolicyBinding": {
+            "$ref": "./examples/GetKubeInventory-ValidatingAdmissionPolicyBinding.json"
           },
           "Get KubeInventory - VolumeAttachment": {
             "$ref": "./examples/GetKubeInventory-VolumeAttachment.json"
@@ -505,8 +523,7 @@
         }
       },
       "required": [
-        "name",
-        "image"
+        "name"
       ]
     },
     "ContainerState": {
@@ -628,9 +645,65 @@
         }
       },
       "required": [
-        "name",
-        "ready",
-        "restartCount"
+        "name"
+      ]
+    },
+    "EndpointSliceEndpoint": {
+      "type": "object",
+      "description": "A single endpoint within an EndpointSlice (address + readiness + scheduling hints).",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "description": "IP addresses (IPv4/IPv6) or FQDNs serving this endpoint.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ready": {
+          "type": "boolean",
+          "description": "True when the endpoint is ready to receive traffic."
+        },
+        "nodeName": {
+          "type": "string",
+          "description": "Name of the node hosting this endpoint."
+        },
+        "targetRefKind": {
+          "type": "string",
+          "description": "Kind of the backing object (typically 'Pod')."
+        },
+        "targetRefName": {
+          "type": "string",
+          "description": "Name of the backing object."
+        },
+        "targetRefNamespace": {
+          "type": "string",
+          "description": "Namespace of the backing object."
+        }
+      },
+      "required": [
+        "addresses"
+      ]
+    },
+    "EndpointSlicePort": {
+      "type": "object",
+      "description": "A port entry in an EndpointSlice.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number."
+        },
+        "protocol": {
+          "$ref": "#/definitions/NetworkProtocol",
+          "description": "Network protocol ('TCP', 'UDP', or 'SCTP')."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional name for this port."
+        }
+      },
+      "required": [
+        "port"
       ]
     },
     "EnvFromSource": {
@@ -690,8 +763,7 @@
         }
       },
       "required": [
-        "serviceName",
-        "servicePort"
+        "serviceName"
       ]
     },
     "IngressRule": {
@@ -818,8 +890,7 @@
         }
       },
       "required": [
-        "name",
-        "value"
+        "name"
       ]
     },
     "KubernetesCondition": {
@@ -849,8 +920,7 @@
         }
       },
       "required": [
-        "type",
-        "status"
+        "type"
       ]
     },
     "KubernetesEvent": {
@@ -879,11 +949,7 @@
         }
       },
       "required": [
-        "type",
-        "reason",
-        "age",
-        "from",
-        "message"
+        "reason"
       ]
     },
     "KubernetesGenericField": {
@@ -901,8 +967,7 @@
         }
       },
       "required": [
-        "name",
-        "value"
+        "name"
       ]
     },
     "KubernetesLabel": {
@@ -920,8 +985,7 @@
         }
       },
       "required": [
-        "name",
-        "value"
+        "name"
       ]
     },
     "KubernetesObjectMeta": {
@@ -1128,6 +1192,10 @@
             "name"
           ]
         },
+        "maxUnavailableReplicas": {
+          "type": "string",
+          "description": "Maximum number of pods that can be unavailable during a StatefulSet rolling update\n(absolute number or percentage string, e.g., '1', '25%'). Beta as of Kubernetes 1.24.\nPopulated for StatefulSet resources."
+        },
         "serviceType": {
           "type": "string",
           "description": "How the service is exposed (e.g., 'ClusterIP', 'NodePort', 'LoadBalancer').\nPopulated for Service resources."
@@ -1318,6 +1386,27 @@
           "type": "string",
           "description": "Kubernetes Secret type (e.g., 'Opaque', 'kubernetes.io/tls', 'kubernetes.io/service-account-token').\nPopulated for Secret resources."
         },
+        "configMapData": {
+          "type": "array",
+          "description": "Key-value pairs stored in the ConfigMap (e.g., configuration files, environment values).\nEach entry maps a string key to a string value.\nPopulated for ConfigMap resources.",
+          "items": {
+            "$ref": "#/definitions/KubernetesLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "configMapBinaryDataKeys": {
+          "type": "array",
+          "description": "Keys present in the ConfigMap binaryData field.\nBinary values are not captured; only key names are stored for reference.\nPopulated for ConfigMap resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "configMapImmutable": {
+          "type": "boolean",
+          "description": "When true, the ConfigMap is immutable and cannot be updated after creation.\nPopulated for ConfigMap resources."
+        },
         "automountServiceAccountToken": {
           "type": "boolean",
           "description": "When false, prevents the default Kubernetes service account token from being\nauto-mounted into pods running as this ServiceAccount.\nPopulated for ServiceAccount resources."
@@ -1461,6 +1550,78 @@
         "podCidr": {
           "type": "string",
           "description": "IP range assigned to pods running on this node.\nPopulated for Node resources."
+        },
+        "endpointSliceAddressType": {
+          "type": "string",
+          "description": "Address family for all endpoints in this EndpointSlice ('IPv4', 'IPv6', or 'FQDN').\nPopulated for EndpointSlice resources."
+        },
+        "endpointSliceEndpoints": {
+          "type": "array",
+          "description": "Endpoints contained in this EndpointSlice.\nPopulated for EndpointSlice resources.",
+          "items": {
+            "$ref": "#/definitions/EndpointSliceEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpointSlicePorts": {
+          "type": "array",
+          "description": "Ports exposed by the endpoints in this EndpointSlice.\nPopulated for EndpointSlice resources.",
+          "items": {
+            "$ref": "#/definitions/EndpointSlicePort"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "csrSignerName": {
+          "type": "string",
+          "description": "Name of the signer that will sign the certificate (e.g., 'kubernetes.io/kube-apiserver-client').\nPopulated for CertificateSigningRequest resources."
+        },
+        "csrUsername": {
+          "type": "string",
+          "description": "Name of the user that created the CertificateSigningRequest.\nPopulated for CertificateSigningRequest resources."
+        },
+        "csrUsages": {
+          "type": "array",
+          "description": "Key usages requested for the certificate (e.g., 'client auth', 'server auth', 'digital signature').\nPopulated for CertificateSigningRequest resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "csrExpirationSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Requested duration in seconds for the issued certificate.\nPopulated for CertificateSigningRequest resources."
+        },
+        "storageCapacityAvailable": {
+          "type": "string",
+          "description": "Available storage capacity for the StorageClass in this topology segment (e.g., '500Gi').\nPopulated for CSIStorageCapacity resources."
+        },
+        "maximumVolumeSize": {
+          "type": "string",
+          "description": "Maximum size of a single volume that can be created in this topology segment.\nPopulated for CSIStorageCapacity resources."
+        },
+        "admissionPolicyFailurePolicy": {
+          "type": "string",
+          "description": "What happens when a policy evaluation fails: 'Fail' rejects the request; 'Ignore' allows it.\nPopulated for ValidatingAdmissionPolicy resources."
+        },
+        "admissionPolicyMatchConstraints": {
+          "type": "array",
+          "description": "API resource rules that trigger this ValidatingAdmissionPolicy\n(e.g., 'CREATE pods', 'UPDATE deployments').\nEach entry is a human-readable summary of a resource rule.\nPopulated for ValidatingAdmissionPolicy resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "admissionPolicyBindingPolicyName": {
+          "type": "string",
+          "description": "Name of the ValidatingAdmissionPolicy this binding applies.\nPopulated for ValidatingAdmissionPolicyBinding resources."
+        },
+        "admissionPolicyValidationActions": {
+          "type": "array",
+          "description": "How validation failures are enforced: 'Deny', 'Warn', or 'Audit'.\nPopulated for ValidatingAdmissionPolicyBinding resources.",
+          "items": {
+            "type": "string"
+          }
         },
         "additionalFields": {
           "type": "array",
@@ -1804,7 +1965,6 @@
         }
       },
       "required": [
-        "type",
         "address"
       ]
     },
@@ -1882,8 +2042,7 @@
         }
       },
       "required": [
-        "key",
-        "effect"
+        "key"
       ]
     },
     "NodeTaintEffect": {
@@ -1946,9 +2105,6 @@
         }
       },
       "required": [
-        "apiVersion",
-        "kind",
-        "name",
         "uid"
       ]
     },
@@ -1986,6 +2142,10 @@
         "seccompProfile": {
           "type": "string",
           "description": "Seccomp profile type applied to all containers ('RuntimeDefault', 'Unconfined', or 'Localhost')."
+        },
+        "appArmorProfile": {
+          "type": "string",
+          "description": "AppArmor profile type applied to all containers ('RuntimeDefault', 'Unconfined', or 'Localhost')."
         }
       }
     },
@@ -2044,7 +2204,6 @@
         }
       },
       "required": [
-        "kind",
         "name"
       ]
     },
@@ -2193,8 +2352,7 @@
         }
       },
       "required": [
-        "name",
-        "mountPath"
+        "name"
       ]
     }
   },

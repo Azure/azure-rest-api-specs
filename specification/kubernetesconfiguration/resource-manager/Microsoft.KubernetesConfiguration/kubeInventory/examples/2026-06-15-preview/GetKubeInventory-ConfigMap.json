@@ -1,0 +1,63 @@
+{
+  "title": "Get KubeInventory - ConfigMap",
+  "operationId": "KubeInventories_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubeInventoryName": "configmap-app-config-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/configmap-app-config-default",
+        "name": "configmap-app-config-default",
+        "type": "Microsoft.KubernetesConfiguration/kubeInventory",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "v1",
+          "kind": "ConfigMap",
+          "metadata": {
+            "name": "app-config",
+            "namespaceName": "default",
+            "uid": "d4e5f6a7-b8c9-0123-defa-456789012345",
+            "resourceVersion": "1234567",
+            "generation": 1,
+            "creationTimestamp": "2026-05-01T12:00:00Z",
+            "labels": [
+              { "name": "app", "value": "myapp" },
+              { "name": "environment", "value": "production" }
+            ],
+            "annotations": [
+              { "name": "kubectl.kubernetes.io/last-applied-configuration", "value": "{}" }
+            ]
+          },
+          "spec": {
+            "configMapData": [
+              { "name": "DATABASE_HOST", "value": "postgres.default.svc.cluster.local" },
+              { "name": "DATABASE_PORT", "value": "5432" },
+              { "name": "LOG_LEVEL", "value": "info" },
+              { "name": "FEATURE_FLAGS", "value": "feature-a=true,feature-b=false" }
+            ],
+            "configMapBinaryDataKeys": [
+              "tls.crt",
+              "tls.key"
+            ],
+            "configMapImmutable": false
+          },
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

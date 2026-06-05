@@ -23,7 +23,7 @@ model KubernetesLabel {
   name: string;
 
   /** Label value. */
-  value: string;
+  value?: string;
 }
 
 /** A single Kubernetes annotation (key/value pair for non-identifying auxiliary metadata). */
@@ -34,7 +34,7 @@ model KubernetesAnnotation {
   name: string;
 
   /** Annotation value. */
-  value: string;
+  value?: string;
 }
 
 // ─── Common Kubernetes types ──────────────────────────────────────────────────
@@ -42,13 +42,13 @@ model KubernetesAnnotation {
 /** A reference from a Kubernetes object to its owner (e.g., a ReplicaSet owning a Pod). */
 model OwnerReference {
   /** API version of the owner (e.g., 'apps/v1'). */
-  apiVersion: string;
+  apiVersion?: string;
 
   /** Kind of the owner (e.g., 'ReplicaSet'). */
-  kind: string;
+  kind?: string;
 
   /** Name of the owner object. */
-  name: string;
+  name?: string;
 
   /** UID of the owner object. */
   uid: string;
@@ -128,7 +128,7 @@ model KubernetesCondition {
   type: string;
 
   /** Whether the condition is currently active. */
-  status: ConditionStatus;
+  status?: ConditionStatus;
 
   /** Machine-readable reason code for the current status. */
   reason?: string;
@@ -154,7 +154,7 @@ model KubernetesGenericField {
   name: string;
 
   /** The string value of the field. */
-  value: string;
+  value?: string;
 }
 
 // ─── Container support models ─────────────────────────────────────────────────
@@ -165,7 +165,7 @@ model VolumeMount {
   name: string;
 
   /** Absolute path inside the container where the volume is mounted. */
-  mountPath: string;
+  mountPath?: string;
 
   /** Mount the volume as read-only when true. */
   readOnly?: boolean;
@@ -304,7 +304,7 @@ model ContainerSpec {
   name: string;
 
   /** Container image reference (e.g., 'nginx:1.25'). */
-  image: string;
+  image?: string;
 
   /** Image pull policy for this container ('Always', 'IfNotPresent', or 'Never'). */
   imagePullPolicy?: string;
@@ -414,6 +414,9 @@ model PodSecurityContext {
 
   /** Seccomp profile type applied to all containers ('RuntimeDefault', 'Unconfined', or 'Localhost'). */
   seccompProfile?: string;
+
+  /** AppArmor profile type applied to all containers ('RuntimeDefault', 'Unconfined', or 'Localhost'). */
+  appArmorProfile?: string;
 }
 
 /** State of a currently running container. */
@@ -470,10 +473,10 @@ model ContainerStatus {
   name: string;
 
   /** True when the container has passed its readiness probe. */
-  ready: boolean;
+  ready?: boolean;
 
   /** Number of times the container has restarted since the pod was started. */
-  restartCount: int32;
+  restartCount?: int32;
 
   /** Container image including digest as resolved by the runtime. */
   image?: string;
@@ -540,13 +543,13 @@ model NodeTaint {
   value?: string;
 
   /** Effect applied to non-tolerating pods. */
-  effect: NodeTaintEffect;
+  effect?: NodeTaintEffect;
 }
 
 /** A network address associated with a Kubernetes Node. */
 model NodeAddress {
   /** Address type (e.g., 'InternalIP', 'ExternalIP', 'Hostname'). */
-  type: string;
+  type?: string;
 
   /** The address value (IP address or hostname). */
   address: string;
@@ -620,6 +623,41 @@ model VolumeClaimTemplate {
   volumeMode?: string;
 }
 
+// ─── EndpointSlice models ─────────────────────────────────────────────────────
+
+/** A single endpoint within an EndpointSlice (address + readiness + scheduling hints). */
+model EndpointSliceEndpoint {
+  /** IP addresses (IPv4/IPv6) or FQDNs serving this endpoint. */
+  addresses: string[];
+
+  /** True when the endpoint is ready to receive traffic. */
+  ready?: boolean;
+
+  /** Name of the node hosting this endpoint. */
+  nodeName?: string;
+
+  /** Kind of the backing object (typically 'Pod'). */
+  targetRefKind?: string;
+
+  /** Name of the backing object. */
+  targetRefName?: string;
+
+  /** Namespace of the backing object. */
+  targetRefNamespace?: string;
+}
+
+/** A port entry in an EndpointSlice. */
+model EndpointSlicePort {
+  /** Port number. */
+  port: int32;
+
+  /** Network protocol ('TCP', 'UDP', or 'SCTP'). */
+  protocol?: NetworkProtocol;
+
+  /** Optional name for this port. */
+  name?: string;
+}
+
 // ─── RBAC models ─────────────────────────────────────────────────────────────
 
 /** A single RBAC permission rule granting verbs on Kubernetes API resources. */
@@ -640,7 +678,7 @@ model PolicyRule {
 /** A subject (user, group, or service account) in a RoleBinding or ClusterRoleBinding. */
 model RbacSubject {
   /** Kind of the subject: 'User', 'Group', or 'ServiceAccount'. */
-  kind: string;
+  kind?: string;
 
   /** Name of the subject. */
   name: string;
@@ -663,7 +701,7 @@ model IngressPath {
   serviceName: string;
 
   /** Port of the backend Service (numeric string or named port). */
-  servicePort: string;
+  servicePort?: string;
 }
 
 /** A host-level routing rule in an Ingress resource. */
@@ -817,6 +855,13 @@ model KubernetesResourceSpec {
    */
   @identifiers(#["name"])
   volumeClaimTemplates?: VolumeClaimTemplate[];
+
+  /**
+   * Maximum number of pods that can be unavailable during a StatefulSet rolling update
+   * (absolute number or percentage string, e.g., '1', '25%'). Beta as of Kubernetes 1.24.
+   * Populated for StatefulSet resources.
+   */
+  maxUnavailableReplicas?: string;
 
   // ── Service ─────────────────────────────────────────────────────────────────
 
@@ -1052,6 +1097,29 @@ model KubernetesResourceSpec {
    */
   secretType?: string;
 
+  // ── ConfigMap ──────────────────────────────────────────────────────────────
+
+  /**
+   * Key-value pairs stored in the ConfigMap (e.g., configuration files, environment values).
+   * Each entry maps a string key to a string value.
+   * Populated for ConfigMap resources.
+   */
+  @identifiers(#["name"])
+  configMapData?: KubernetesLabel[];
+
+  /**
+   * Keys present in the ConfigMap binaryData field.
+   * Binary values are not captured; only key names are stored for reference.
+   * Populated for ConfigMap resources.
+   */
+  configMapBinaryDataKeys?: string[];
+
+  /**
+   * When true, the ConfigMap is immutable and cannot be updated after creation.
+   * Populated for ConfigMap resources.
+   */
+  configMapImmutable?: boolean;
+
   // ── ServiceAccount ─────────────────────────────────────────────────────────
 
   /**
@@ -1241,6 +1309,98 @@ model KubernetesResourceSpec {
    * Populated for Node resources.
    */
   podCidr?: string;
+
+  // ── EndpointSlice ──────────────────────────────────────────────────────────
+
+  /**
+   * Address family for all endpoints in this EndpointSlice ('IPv4', 'IPv6', or 'FQDN').
+   * Populated for EndpointSlice resources.
+   */
+  endpointSliceAddressType?: string;
+
+  /**
+   * Endpoints contained in this EndpointSlice.
+   * Populated for EndpointSlice resources.
+   */
+  @identifiers(#[])
+  endpointSliceEndpoints?: EndpointSliceEndpoint[];
+
+  /**
+   * Ports exposed by the endpoints in this EndpointSlice.
+   * Populated for EndpointSlice resources.
+   */
+  @identifiers(#["name"])
+  endpointSlicePorts?: EndpointSlicePort[];
+
+  // ── CertificateSigningRequest ──────────────────────────────────────────────
+
+  /**
+   * Name of the signer that will sign the certificate (e.g., 'kubernetes.io/kube-apiserver-client').
+   * Populated for CertificateSigningRequest resources.
+   */
+  csrSignerName?: string;
+
+  /**
+   * Name of the user that created the CertificateSigningRequest.
+   * Populated for CertificateSigningRequest resources.
+   */
+  csrUsername?: string;
+
+  /**
+   * Key usages requested for the certificate (e.g., 'client auth', 'server auth', 'digital signature').
+   * Populated for CertificateSigningRequest resources.
+   */
+  csrUsages?: string[];
+
+  /**
+   * Requested duration in seconds for the issued certificate.
+   * Populated for CertificateSigningRequest resources.
+   */
+  csrExpirationSeconds?: int32;
+
+  // ── CSIStorageCapacity ────────────────────────────────────────────────────
+
+  /**
+   * Available storage capacity for the StorageClass in this topology segment (e.g., '500Gi').
+   * Populated for CSIStorageCapacity resources.
+   */
+  storageCapacityAvailable?: string;
+
+  /**
+   * Maximum size of a single volume that can be created in this topology segment.
+   * Populated for CSIStorageCapacity resources.
+   */
+  maximumVolumeSize?: string;
+
+  // ── ValidatingAdmissionPolicy ─────────────────────────────────────────────
+
+  /**
+   * What happens when a policy evaluation fails: 'Fail' rejects the request; 'Ignore' allows it.
+   * Populated for ValidatingAdmissionPolicy resources.
+   */
+  admissionPolicyFailurePolicy?: string;
+
+  /**
+   * API resource rules that trigger this ValidatingAdmissionPolicy
+   * (e.g., 'CREATE pods', 'UPDATE deployments').
+   * Each entry is a human-readable summary of a resource rule.
+   * Populated for ValidatingAdmissionPolicy resources.
+   */
+  admissionPolicyMatchConstraints?: string[];
+
+  // ── ValidatingAdmissionPolicyBinding ─────────────────────────────────────
+
+  /**
+   * Name of the ValidatingAdmissionPolicy this binding applies.
+   * Populated for ValidatingAdmissionPolicyBinding resources.
+   */
+  admissionPolicyBindingPolicyName?: string;
+
+  /**
+   * How validation failures are enforced: 'Deny', 'Warn', or 'Audit'.
+   * Populated for ValidatingAdmissionPolicyBinding resources.
+   */
+  admissionPolicyValidationActions?: string[];
 
   // ── Generic overflow ────────────────────────────────────────────────────────
 
@@ -1517,7 +1677,7 @@ model KubernetesResourceStatus {
 /** A Kubernetes event recorded against a resource (equivalent to `kubectl describe` Events). */
 model KubernetesEvent {
   /** Event type: 'Normal' or 'Warning'. */
-  type: string;
+  type?: string;
 
   /** Short machine-readable reason for the event (e.g., 'Scheduled', 'Pulled', 'Failed'). */
   reason: string;
@@ -1526,16 +1686,16 @@ model KubernetesEvent {
    * Human-readable elapsed time since the event last occurred
    * as reported by the Kubernetes API (e.g., '2m28s', '5h').
    */
-  age: string;
+  age?: string;
 
   /**
    * Component that emitted the event
    * (e.g., 'default-scheduler', 'kubelet').
    */
-  from: string;
+  from?: string;
 
   /** Human-readable description of the event. */
-  message: string;
+  message?: string;
 }
 
 // ─── ARM resource properties ──────────────────────────────────────────────────
