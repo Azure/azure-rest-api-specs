@@ -1811,6 +1811,10 @@
           "$ref": "#/definitions/OSSKU",
           "description": "Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows."
         },
+        "workloadRuntime": {
+          "$ref": "#/definitions/WorkloadRuntime",
+          "description": "Determines the type of workload a node can run, e.g. standard OCI containers\n('OCIContainer') or Kata Containers with VM isolation ('KataMshvVmIsolation').\nDefaults to 'OCIContainer' when not specified."
+        },
         "nodeLabels": {
           "type": "object",
           "description": "The node labels to be persisted across all nodes in agent pool.",
@@ -2494,6 +2498,10 @@
           "$ref": "#/definitions/OSSKU",
           "description": "Specifies the OS SKU used by the agent pool. The default is CBLMariner if OSType is Linux. The default is Windows2019 when OSType is Windows."
         },
+        "workloadRuntime": {
+          "$ref": "#/definitions/WorkloadRuntime",
+          "description": "Determines the type of workload a node can run, e.g. standard OCI containers\n('OCIContainer') or Kata Containers with VM isolation ('KataMshvVmIsolation').\nDefaults to 'OCIContainer' when not specified."
+        },
         "nodeLabels": {
           "type": "object",
           "description": "The node labels to be persisted across all nodes in agent pool.",
@@ -2609,7 +2617,8 @@
       "enum": [
         "CBLMariner",
         "Windows2019",
-        "Windows2022"
+        "Windows2022",
+        "Windows2025"
       ],
       "x-ms-enum": {
         "name": "OSSKU",
@@ -2629,6 +2638,11 @@
             "name": "Windows2022",
             "value": "Windows2022",
             "description": "Use Windows2022 as the OS for node images."
+          },
+          {
+            "name": "Windows2025",
+            "value": "Windows2025",
+            "description": "Use Windows2025 as the OS for node images."
           }
         ]
       }
@@ -3518,6 +3532,30 @@
           "description": "The size of the VM SKU",
           "readOnly": true
         }
+      }
+    },
+    "WorkloadRuntime": {
+      "type": "string",
+      "description": "Determines the type of workload a node can run. Mirrors the managed AKS\n(Microsoft.ContainerService) WorkloadRuntime values. Possible values include:\n'OCIContainer' (standard OCI container runtime) and 'KataMshvVmIsolation'\n(Kata Containers with Microsoft Hypervisor VM isolation for sandboxed pods).",
+      "enum": [
+        "OCIContainer",
+        "KataMshvVmIsolation"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadRuntime",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OCIContainer",
+            "value": "OCIContainer",
+            "description": "Nodes use the standard OCI container runtime."
+          },
+          {
+            "name": "KataMshvVmIsolation",
+            "value": "KataMshvVmIsolation",
+            "description": "Nodes run Kata Containers with Microsoft Hypervisor (MSHV) VM isolation for\nstronger pod-level sandboxing."
+          }
+        ]
       }
     }
   },

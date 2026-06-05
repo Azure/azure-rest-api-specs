@@ -70,6 +70,33 @@ union OSSKU {
    * Use Windows2022 as the OS for node images.
    */
   Windows2022: "Windows2022",
+
+  /**
+   * Use Windows2025 as the OS for node images.
+   */
+  @added(Versions.v2026_06_01_preview)
+  Windows2025: "Windows2025",
+}
+
+/**
+ * Determines the type of workload a node can run. Mirrors the managed AKS
+ * (Microsoft.ContainerService) WorkloadRuntime values. Possible values include:
+ * 'OCIContainer' (standard OCI container runtime) and 'KataMshvVmIsolation'
+ * (Kata Containers with Microsoft Hypervisor VM isolation for sandboxed pods).
+ */
+union WorkloadRuntime {
+  string,
+
+  /**
+   * Nodes use the standard OCI container runtime.
+   */
+  OCIContainer: "OCIContainer",
+
+  /**
+   * Nodes run Kata Containers with Microsoft Hypervisor (MSHV) VM isolation for
+   * stronger pod-level sandboxing.
+   */
+  KataMshvVmIsolation: "KataMshvVmIsolation",
 }
 
 /**
@@ -513,6 +540,14 @@ model AgentPoolProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   osSKU?: OSSKU;
+
+  /**
+   * Determines the type of workload a node can run, e.g. standard OCI containers
+   * ('OCIContainer') or Kata Containers with VM isolation ('KataMshvVmIsolation').
+   * Defaults to 'OCIContainer' when not specified.
+   */
+  @added(Versions.v2026_06_01_preview)
+  workloadRuntime?: WorkloadRuntime;
 
   /**
    * The node labels to be persisted across all nodes in agent pool.
