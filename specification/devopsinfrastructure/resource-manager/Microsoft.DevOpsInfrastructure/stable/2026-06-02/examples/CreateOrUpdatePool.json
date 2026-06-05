@@ -2,7 +2,7 @@
   "title": "Pools_CreateOrUpdate",
   "operationId": "Pools_CreateOrUpdate",
   "parameters": {
-    "api-version": "2026-06-02-preview",
+    "api-version": "2026-06-02",
     "subscriptionId": "a2e95d27-c161-4b61-bda4-11512c14c2c2",
     "resourceGroupName": "rg",
     "poolName": "pool",
@@ -27,6 +27,17 @@
           "kind": "Vmss",
           "sku": {
             "name": "Standard_D4ads_v5"
+          },
+          "skuProfile": {
+            "vmSizes": [
+              {
+                "name": "Standard_E2ads_v5"
+              },
+              {
+                "name": "Standard_D2ads_v5"
+              }
+            ],
+            "allocationStrategy": "LowestPrice"
           },
           "images": [
             {
@@ -79,6 +90,17 @@
             "kind": "Vmss",
             "sku": {
               "name": "Standard_D4ads_v5"
+            },
+            "skuProfile": {
+              "vmSizes": [
+                {
+                  "name": "Standard_E2ads_v5"
+                },
+                {
+                  "name": "Standard_D2ads_v5"
+                }
+              ],
+              "allocationStrategy": "LowestPrice"
             },
             "images": [
               {
@@ -134,6 +156,17 @@
             "kind": "Vmss",
             "sku": {
               "name": "Standard_D4ads_v5"
+            },
+            "skuProfile": {
+              "vmSizes": [
+                {
+                  "name": "Standard_E2ads_v5"
+                },
+                {
+                  "name": "Standard_D2ads_v5"
+                }
+              ],
+              "allocationStrategy": "LowestPrice"
             },
             "images": [
               {

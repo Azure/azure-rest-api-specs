@@ -31,10 +31,9 @@ enum Versions {
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2026_04_17_preview: "2026-04-17-preview",
 
-  /** 2026-06-02-preview version */
+  /** 2026-06-02 version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
-  @Azure.Core.previewVersion
-  v2026_06_02_preview: "2026-06-02-preview",
+  v2026_06_02: "2026-06-02",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -69,7 +68,7 @@ model PoolProperties {
   fabricProfile: FabricProfile;
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
-  @removed(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  @removed(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   devCenterProjectResourceId: string;
 
   @doc("The runtime configuration of the pool.")
@@ -187,6 +186,10 @@ model VmssFabricProfile extends FabricProfile {
 
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
+
+  @doc("Specifies the sku profile for the virtual machine scale set.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  skuProfile?: SkuProfile;
 }
 
 @doc("The runtime configuration of the pool.")
@@ -208,36 +211,40 @@ model DevOpsAzureSku {
   @doc("The mount path for the NVMe striped volume on Linux (e.g., '/mnt/azure_nvme_temp'). Defaults to '/mnt/azure_nvme_temp' when not specified.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_04_17_preview)
   linuxNvmePath?: string;
-
-  @doc("The tier of the Azure SKU (e.g., 'Standard').")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
-  tier?: string;
-
-  @doc("The priority of the pool VMs.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
-  poolVmPriority?: PoolVmPriority;
-
-  @doc("The list of VM sizes for instance mix configurations.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
-  @identifiers(#[])
-  vmSizes?: VmSize[];
 }
 
-@doc("The priority of pool VMs.")
-union PoolVmPriority {
+@doc("Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+model SkuProfile {
+  @doc("Specifies the VM sizes for the virtual machine scale set.")
+  @identifiers(#["name"])
+  vmSizes?: SkuProfileVMSize[];
+
+  @doc("Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.")
+  allocationStrategy?: AllocationStrategy;
+}
+
+@doc("Specifies the VM Size.")
+model SkuProfileVMSize {
+  @doc("Specifies the name of the VM Size.")
+  name?: string;
+
+  @doc("Specifies the rank associated with the VM Size. VMs are allocated based on rank when the allocation strategy is set to 'Prioritized'.")
+  rank?: int32;
+}
+
+@doc("Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.")
+union AllocationStrategy {
   string,
 
-  @doc("Regular priority VMs.")
-  Regular: "Regular",
+  @doc("VMs are allocated based on the lowest price available.")
+  LowestPrice: "LowestPrice",
 
-  @doc("Spot priority VMs.")
-  Spot: "Spot",
-}
+  @doc("VMs are allocated based on capacity availability.")
+  CapacityOptimized: "CapacityOptimized",
 
-@doc("Defines a VM size for instance mix.")
-model VmSize {
-  @doc("The name of the VM size (e.g., 'Standard_D2ads_v5').")
-  name: string;
+  @doc("VMs are allocated based on the rank specified for each VM size.")
+  Prioritized: "Prioritized",
 }
 
 @doc("The storage profile of the VMSS.")
@@ -350,7 +357,7 @@ model PoolImage {
   isEphemeral?: boolean;
 
   @doc("The ARM resource ID of the storage account hosting provisioning scripts for this image.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   provisioningScriptStorageAccountResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -358,15 +365,15 @@ model PoolImage {
   ]>;
 
   @doc("The managed identity client ID used to access provisioning script content for this image.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   provisioningScriptManagedIdentityClientId?: string;
 
   @doc("Determines whether the machine should be restarted after provisioning script execution for this image.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   provisioningScriptShouldRestart?: boolean;
 
   @doc("The provisioning script entry point for this image.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02_preview)
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   provisioningScriptEntryPoint?: string;
 }
 

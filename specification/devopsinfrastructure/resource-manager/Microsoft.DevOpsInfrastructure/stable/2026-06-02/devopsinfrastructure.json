@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Managed DevOps Infrastructure",
-    "version": "2026-06-02-preview",
+    "version": "2026-06-02",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -733,6 +733,36 @@
       "required": [
         "kind"
       ]
+    },
+    "AllocationStrategy": {
+      "type": "string",
+      "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.",
+      "enum": [
+        "LowestPrice",
+        "CapacityOptimized",
+        "Prioritized"
+      ],
+      "x-ms-enum": {
+        "name": "AllocationStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowestPrice",
+            "value": "LowestPrice",
+            "description": "VMs are allocated based on the lowest price available."
+          },
+          {
+            "name": "CapacityOptimized",
+            "value": "CapacityOptimized",
+            "description": "VMs are allocated based on capacity availability."
+          },
+          {
+            "name": "Prioritized",
+            "value": "Prioritized",
+            "description": "VMs are allocated based on the rank specified for each VM size."
+          }
+        ]
+      }
     },
     "AutomaticResourcePredictionsProfile": {
       "type": "object",
@@ -2206,6 +2236,41 @@
         "keyExportable"
       ]
     },
+    "SkuProfile": {
+      "type": "object",
+      "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy.",
+      "properties": {
+        "vmSizes": {
+          "type": "array",
+          "description": "Specifies the VM sizes for the virtual machine scale set.",
+          "items": {
+            "$ref": "#/definitions/SkuProfileVMSize"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/AllocationStrategy",
+          "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated."
+        }
+      }
+    },
+    "SkuProfileVMSize": {
+      "type": "object",
+      "description": "Specifies the VM Size.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of the VM Size."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the rank associated with the VM Size. VMs are allocated based on rank when the allocation strategy is set to 'Prioritized'."
+        }
+      }
+    },
     "Stateful": {
       "type": "object",
       "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
@@ -2323,6 +2388,10 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "The network profile of the machines in the pool."
+        },
+        "skuProfile": {
+          "$ref": "#/definitions/SkuProfile",
+          "description": "Specifies the sku profile for the virtual machine scale set."
         }
       },
       "required": [
