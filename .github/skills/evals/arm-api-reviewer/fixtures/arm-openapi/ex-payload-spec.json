@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ExPayloadTestClient",
+    "version": "2025-01-01",
+    "description": "Test resource provider for EX-PAYLOAD severity calibration evals."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExPayload/operations/{operationName}": {
+      "get": {
+        "operationId": "Operations_Get",
+        "description": "Gets a long-running operation resource. The operationType field uses an extensible enum (modelAsString: true).",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "operationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the operation."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation retrieved successfully.",
+            "schema": { "$ref": "#/definitions/Operation" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": "./examples/Operations_Get.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExPayload/closedOperations/{operationName}": {
+      "get": {
+        "operationId": "ClosedOperations_Get",
+        "description": "Gets a closed-enum operation resource. The operationType field uses a closed enum (modelAsString: false).",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "operationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the operation."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation retrieved successfully.",
+            "schema": { "$ref": "#/definitions/ClosedOperation" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        },
+        "x-ms-examples": {
+          "ClosedOperations_Get": "./examples/ClosedOperations_Get.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExPayload/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Gets a polymorphic widget resource. The kind field is a discriminator backed by an extensible enum.",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the widget."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Widget retrieved successfully.",
+            "schema": { "$ref": "#/definitions/WidgetBase" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        },
+        "x-ms-examples": {
+          "Widgets_Get": "./examples/Widgets_Get.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ExPayload/widgetKinds/{widgetKind}/widgets/{widgetName}": {
+      "get": {
+        "operationId": "WidgetsByKind_Get",
+        "description": "Gets a widget by kind. The widgetKind path parameter uses an extensible enum.",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "widgetKind",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The kind of widget. Must be a declared WidgetKind value.",
+            "enum": ["Standard", "Premium"],
+            "x-ms-enum": {
+              "name": "WidgetKind",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the widget."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Widget retrieved successfully.",
+            "schema": { "$ref": "#/definitions/BasicWidget" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        },
+        "x-ms-examples": {
+          "WidgetsByKind_Get": "./examples/WidgetsByKind_Get.json"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Operation": {
+      "type": "object",
+      "description": "A long-running operation resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified resource ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "x-ms-client-flatten": true,
+          "description": "The operation-specific properties."
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "Properties of an operation resource.",
+      "properties": {
+        "operationType": {
+          "type": "string",
+          "description": "The type of the operation. Extensible enum — new values may be added in future API versions.",
+          "enum": ["IssueCreation", "Investigation"],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning status of the operation.",
+          "enum": ["Succeeded", "Failed", "Canceled", "Running"],
+          "x-ms-enum": {
+            "name": "OperationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ClosedOperation": {
+      "type": "object",
+      "description": "An operation resource with a closed enum for operationType.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified resource ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClosedOperationProperties",
+          "x-ms-client-flatten": true,
+          "description": "The operation-specific properties."
+        }
+      }
+    },
+    "ClosedOperationProperties": {
+      "type": "object",
+      "description": "Properties of a closed-enum operation resource.",
+      "properties": {
+        "operationType": {
+          "type": "string",
+          "description": "The type of the operation. Closed enum — only declared values are valid.",
+          "enum": ["IssueCreation", "Investigation"],
+          "x-ms-enum": {
+            "name": "ClosedOperationType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "WidgetBase": {
+      "type": "object",
+      "description": "Base class for widget resources. Uses a discriminator for polymorphism.",
+      "discriminator": "kind",
+      "required": ["kind"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified resource ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Discriminator for polymorphic widget subtypes.",
+          "enum": ["BasicWidget", "AdvancedWidget"],
+          "x-ms-enum": {
+            "name": "WidgetKindDiscriminator",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BasicWidget": {
+      "x-ms-discriminator-value": "BasicWidget",
+      "allOf": [
+        { "$ref": "#/definitions/WidgetBase" }
+      ],
+      "description": "A basic widget resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BasicWidgetProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a basic widget."
+        }
+      }
+    },
+    "AdvancedWidget": {
+      "x-ms-discriminator-value": "AdvancedWidget",
+      "allOf": [
+        { "$ref": "#/definitions/WidgetBase" }
+      ],
+      "description": "An advanced widget resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdvancedWidgetProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of an advanced widget."
+        }
+      }
+    },
+    "BasicWidgetProperties": {
+      "type": "object",
+      "description": "Properties of a basic widget.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the widget."
+        }
+      }
+    },
+    "AdvancedWidgetProperties": {
+      "type": "object",
+      "description": "Properties of an advanced widget.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the widget."
+        },
+        "featureFlags": {
+          "type": "array",
+          "description": "The feature flags enabled for this widget.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": { "type": "string", "description": "The error code." },
+        "message": { "type": "string", "description": "The error message." }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use."
+    }
+  }
+}

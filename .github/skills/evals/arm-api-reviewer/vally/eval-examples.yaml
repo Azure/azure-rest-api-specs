@@ -63,3 +63,142 @@ stimuli:
       - Flagged a realistic password "SuperSecretP@ssw0rd123!" in adminPassword
       - Flagged a Base64-encoded string in primaryKey that looks like a real key
       - Recommended placeholder values instead of realistic secrets
+
+  # 060003 — Unknown enum literal in example response body, extensible enum (expect Warning, not Blocking)
+  - name: ex-payload-extensible-enum-warning
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-spec.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json"
+        - src: "../fixtures/examples/example-ex-payload-extensible-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Operations_Get.json"
+    prompt: >
+      Review the following files for EX-PAYLOAD compliance. The spec defines
+      OperationType as an extensible enum (x-ms-enum.modelAsString: true) with
+      declared values "IssueCreation" and "Investigation". The example uses
+      "Investigate" (an undeclared value) in the operationType response field.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Operations_Get.json
+
+      Report the EX-PAYLOAD finding with the correct severity and explain your reasoning.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)EX-PAYLOAD"
+      - type: output-not-matches
+        config:
+          pattern: "(?i)\\bBlocking\\b"
+      - type: prompt
+    rubric:
+      - Found the EX-PAYLOAD finding for the unknown enum literal "Investigate" in the operationType field
+      - Classified the finding as Warning (not Blocking), because the enum has x-ms-enum.modelAsString true
+      - Explained that ModelValidation accepts arbitrary strings for extensible enums, so CI is not broken
+      - Noted the downstream harm is limited to documentation and SDK samples
+
+  # 060004 — Unknown enum literal in example response body, closed enum (expect Blocking)
+  - name: ex-payload-closed-enum-blocking
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-spec.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json"
+        - src: "../fixtures/examples/example-ex-payload-closed-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedOperations_Get.json"
+    prompt: >
+      Review the following files for EX-PAYLOAD compliance. The spec defines
+      ClosedOperationType as a closed enum (x-ms-enum.modelAsString: false) with
+      declared values "IssueCreation" and "Investigation". The example uses
+      "Investigate" (an undeclared value) in the operationType response field.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedOperations_Get.json
+
+      Report the EX-PAYLOAD finding with the correct severity and explain your reasoning.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)EX-PAYLOAD"
+      - type: output-matches
+        config:
+          pattern: "(?i)\\bBlocking\\b"
+      - type: prompt
+    rubric:
+      - Found the EX-PAYLOAD finding for the unknown enum literal "Investigate" in the operationType field
+      - Classified the finding as Blocking, because the enum has x-ms-enum.modelAsString false (closed enum)
+      - Explained that ModelValidation rejects undeclared values for closed enums, causing CI failures
+
+  # 060005 — Unknown discriminator value in example response body, extensible enum (expect Blocking)
+  - name: ex-payload-discriminator-blocking
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-spec.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json"
+        - src: "../fixtures/examples/example-ex-payload-discriminator.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Widgets_Get.json"
+    prompt: >
+      Review the following files for EX-PAYLOAD compliance. The spec defines
+      WidgetBase with a "kind" discriminator backed by an extensible enum
+      (x-ms-enum.modelAsString: true) with declared values "BasicWidget" and
+      "AdvancedWidget". The example uses "UnknownWidget" as the kind discriminator value.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Widgets_Get.json
+
+      Report the EX-PAYLOAD finding with the correct severity and explain your reasoning.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)EX-PAYLOAD"
+      - type: output-matches
+        config:
+          pattern: "(?i)\\bBlocking\\b"
+      - type: prompt
+    rubric:
+      - Found the EX-PAYLOAD finding for the unknown discriminator value "UnknownWidget" in the kind field
+      - Classified the finding as Blocking, because kind is a discriminator property
+      - Explained that SDK deserializers use the discriminator to select the concrete subtype and an unrecognized value causes the SDK to fall back to the base type, silently losing all subtype fields
+      - Did NOT downgrade to Warning merely because the enum has modelAsString true
+
+  # 060006 — Unknown path parameter value in example, extensible enum (expect Blocking)
+  - name: ex-payload-path-param-blocking
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-spec.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json"
+        - src: "../fixtures/examples/example-ex-payload-path-param.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/WidgetsByKind_Get.json"
+    prompt: >
+      Review the following files for EX-PAYLOAD compliance. The spec defines
+      the widgetKind path parameter as an extensible enum (x-ms-enum.modelAsString: true)
+      with declared values "Standard" and "Premium". The example uses "Enterprise"
+      as the widgetKind path parameter value in the request URL.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/ExPayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/WidgetsByKind_Get.json
+
+      Report the EX-PAYLOAD finding with the correct severity and explain your reasoning.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)EX-PAYLOAD"
+      - type: output-matches
+        config:
+          pattern: "(?i)\\bBlocking\\b"
+      - type: prompt
+    rubric:
+      - Found the EX-PAYLOAD finding for the unknown path parameter value "Enterprise" in the widgetKind path parameter
+      - Classified the finding as Blocking, because undeclared path parameter values cause routing failures at runtime
+      - Explained that path parameters are dispatched against the route table, not the schema, so an undeclared value returns a 404 regardless of modelAsString
+      - Did NOT downgrade to Warning merely because the enum has modelAsString true

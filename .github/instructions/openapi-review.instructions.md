@@ -511,6 +511,21 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 - ARM properties that are objects (`tags`, `systemData`, etc.) **MUST NOT** be set to `null` in examples. Either omit the property or provide a valid object. Setting known ARM object properties to `null` fails schema validation.
 - DELETE 200/204 response examples **SHOULD** have empty bodies (`"200": {}`, `"204": {}`). Do not include unexpected content like `message` fields in DELETE response bodies.
 
+#### EX-PAYLOAD severity calibration for unknown enum literals
+
+When an example string value does not match any declared member of a referenced enum, apply the following severity matrix:
+
+| Context | Enum type | Severity | Rationale |
+|---------|-----------|----------|-----------|
+| Response body field | Extensible (`x-ms-enum.modelAsString: true`) | **Warning** | ModelValidation accepts any string for extensible enums; the defect is downstream only (docs and SDK sample generators publish an undeclared value). All Azure enums are extensible by policy (§7). |
+| Response body field | Closed (`modelAsString: false` or no `x-ms-enum`) | **Blocking** | ModelValidation rejects the value; CI will fail. |
+| Discriminator field (any `discriminator` property) | Any | **Blocking** | SDK deserializers use the discriminator to select the concrete subtype. An unrecognized discriminator value forces the SDK to fall back to the base type, silently losing all subtype-specific fields regardless of `modelAsString`. |
+| Path or query parameter in the request URL | Any | **Blocking** | The request URL is dispatched against the route table, not the schema. An undeclared value in a path segment or query parameter will result in a 404 or routing error at runtime. |
+
+**How to apply:** Before assigning Blocking severity to an unknown enum literal in an example, identify the enum's location (response body field, discriminator, path parameter, or query parameter) and confirm whether `x-ms-enum.modelAsString` is `true`. Downgrade to Warning when all three conditions hold: (1) the value is in a **response body field**, (2) the enum is **extensible** (`modelAsString: true`), and (3) the field is **not a discriminator**.
+
+> See [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md#ex-payload--example-payload-correctness) for the extended rule with cross-references.
+
 ### 22.8 Example Secret & Credential Placeholders (EX-SECRET-PLACEHOLDER)
 
 - Example files **MUST NOT** contain actual or realistic-looking secrets, tokens, SSH keys, passwords, connection strings, or API keys.
