@@ -2697,48 +2697,6 @@
         "value"
       ]
     },
-    "ProvisionDeviceOperation": {
-      "type": "object",
-      "description": "Status monitor for the long-running `:provision` action on devices in a\nnamespace. Mirrors the shape of the central `Operation` resource but\nexposes a typed `result` so SDK callers receive the strongly-typed\n`ProvisionDeviceResult` payload directly.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the operation.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current status of the operation.",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error details when the operation failed.",
-          "readOnly": true
-        },
-        "executedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the operation was started (UTC).",
-          "readOnly": true
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the operation result expires (UTC).",
-          "readOnly": true
-        },
-        "result": {
-          "$ref": "#/definitions/ProvisionDeviceResult",
-          "description": "The result of the device-provisioning operation, available once `status` is `Succeeded`.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
     "ProvisionDeviceRequest": {
       "type": "object",
       "description": "Request body for the provision device endpoint.",
@@ -2792,6 +2750,48 @@
         "deviceResourceId",
         "externalDeviceId",
         "messagingEndpointName"
+      ]
+    },
+    "ProvisionDeviceResultStatusMonitor": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:provision` action on devices in a\nnamespace. Mirrors the shape of the central `Operation` resource but\nexposes a typed `result` so SDK callers receive the strongly-typed\n`ProvisionDeviceResult` payload directly.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current status of the operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details when the operation failed.",
+          "readOnly": true
+        },
+        "executedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation result expires (UTC).",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the device-provisioning operation, available once `status` is `Succeeded`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
       ]
     },
     "QueryDevicesRequest": {

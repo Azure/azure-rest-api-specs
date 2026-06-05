@@ -159,8 +159,8 @@ model ProvisionDeviceResult {
  * `ProvisionDeviceResult` payload directly.
  */
 @parentResource(Namespace)
-@resource("provisionDeviceOperations")
-model ProvisionDeviceOperation {
+@resource("provisionDeviceResults")
+model ProvisionDeviceResultStatusMonitor {
   /** The unique identifier of the operation. */
   @key("operationId")
   @visibility(Lifecycle.Read)
@@ -220,7 +220,7 @@ interface Devices {
   >;
 
   /** Provision a device in a namespace. */
-  @pollingOperation(ProvisionDeviceOperations.get)
+  @pollingOperation(ProvisionDeviceResults.get)
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
@@ -236,17 +236,17 @@ interface Devices {
 
 /** Polling operations for the long-running `:provision` action on devices. */
 @tag("Devices")
-interface ProvisionDeviceOperations {
-  /** Get the status of a device-provisioning operation. */
+interface ProvisionDeviceResults {
+  /** Get the result of a device-provisioning operation. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Devices in generated SDK clients."
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   // Override the emitted operationId to surface this status monitor under
   // the `Devices` SDK client (matches the wire-side `Devices_Provision`
-  // action that produces these operations) rather than as a top-level
-  // `ProvisionDeviceOperations_Get` method.
-  @operationId("Devices_GetProvisionDeviceOperation")
+  // action that produces these results) rather than as a top-level
+  // `ProvisionDeviceResults_Get` method.
+  @operationId("Devices_GetProvisionDeviceResult")
   get is ResourceOperations.ResourceRead<
-    ProvisionDeviceOperation,
+    ProvisionDeviceResultStatusMonitor,
     ResponseHeadersTrait<
       Azure.Core.Foundations.RetryAfterHeader,
       TraitContext.Read
