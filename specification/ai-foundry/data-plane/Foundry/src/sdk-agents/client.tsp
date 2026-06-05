@@ -185,7 +185,13 @@ using Azure.AI.Projects;
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
 
-@@convenientAPI(AgentOptimizationJobs, false, "java");
+@@convenientAPI(AgentOptimizationJobs.get, false, "java");
+@@convenientAPI(AgentOptimizationJobs.cancel, false, "java");
+@@convenientAPI(AgentOptimizationJobs.getCandidate, false, "java");
+@@convenientAPI(AgentOptimizationJobs.getCandidateConfig, false, "java");
+@@convenientAPI(AgentOptimizationJobs.getCandidateResults, false, "java");
+@@convenientAPI(AgentOptimizationJobs.getCandidateFile, false, "java");
+@@convenientAPI(AgentOptimizationJobs.promoteCandidate, false, "java");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
@@ -353,6 +359,48 @@ using Azure.AI.Projects;
 
 @@usage(CreateAgentVersionRequest, Usage.input);
 @@access(CreateAgentVersionRequest, Access.public);
+
+// Ensure agent optimization models used by custom convenience methods are emitted.
+@@usage(AgentIdentifier, Usage.input | Usage.output);
+@@access(AgentIdentifier, Access.public);
+@@usage(CandidateDeployConfig, Usage.input | Usage.output);
+@@access(CandidateDeployConfig, Access.public);
+@@usage(CandidateFileInfo, Usage.input | Usage.output);
+@@access(CandidateFileInfo, Access.public);
+@@usage(CandidateMetadata, Usage.input | Usage.output);
+@@access(CandidateMetadata, Access.public);
+@@usage(CandidateResults, Usage.input | Usage.output);
+@@access(CandidateResults, Access.public);
+@@usage(DatasetInfo, Usage.input | Usage.output);
+@@access(DatasetInfo, Access.public);
+@@usage(DatasetRef, Usage.input | Usage.output);
+@@access(DatasetRef, Access.public);
+@@usage(EvaluationLevel, Usage.input | Usage.output);
+@@access(EvaluationLevel, Access.public);
+@@usage(JobStatus, Usage.input | Usage.output);
+@@access(JobStatus, Access.public);
+@@usage(OptimizationAgentDefinition, Usage.input | Usage.output);
+@@access(OptimizationAgentDefinition, Access.public);
+@@usage(OptimizationCandidate, Usage.input | Usage.output);
+@@access(OptimizationCandidate, Access.public);
+@@usage(OptimizationJob, Usage.input | Usage.output);
+@@access(OptimizationJob, Access.public);
+@@usage(OptimizationJobInputs, Usage.input | Usage.output);
+@@access(OptimizationJobInputs, Access.public);
+@@usage(OptimizationJobProgress, Usage.input | Usage.output);
+@@access(OptimizationJobProgress, Access.public);
+@@usage(OptimizationJobResult, Usage.input | Usage.output);
+@@access(OptimizationJobResult, Access.public);
+@@usage(OptimizationOptions, Usage.input | Usage.output);
+@@access(OptimizationOptions, Access.public);
+@@usage(OptimizationTaskResult, Usage.input | Usage.output);
+@@access(OptimizationTaskResult, Access.public);
+@@usage(PromoteCandidateRequest, Usage.input | Usage.output);
+@@access(PromoteCandidateRequest, Access.public);
+@@usage(PromoteCandidateResponse, Usage.input | Usage.output);
+@@access(PromoteCandidateResponse, Access.public);
+@@usage(PromotionInfo, Usage.input | Usage.output);
+@@access(PromotionInfo, Access.public);
 
 // Ensure SessionLogEvent and SessionLogEventType are emitted
 @@usage(SessionLogEvent, Usage.output);
