@@ -125,6 +125,7 @@ model ProvisionDeviceRequest {
 }
 
 /** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionDeviceResult {
   /** Reference to the provisioned Device resource. */
   device: ProvisionedDeviceRef;
