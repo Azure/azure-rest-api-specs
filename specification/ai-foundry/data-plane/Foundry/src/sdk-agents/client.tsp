@@ -189,6 +189,9 @@ using Azure.AI.Projects;
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
 
+// Temporary Java workaround: after @@clientLocation promotes Foundry-Features, optional-header
+// convenience overloads can collapse to duplicate signatures. Remove these suppressions once
+// the Java emitter de-dupes those generated overloads.
 @@convenientAPI(AgentOptimizationJobs.get, false, "java");
 @@convenientAPI(AgentOptimizationJobs.cancel, false, "java");
 @@convenientAPI(AgentOptimizationJobs.getCandidate, false, "java");
