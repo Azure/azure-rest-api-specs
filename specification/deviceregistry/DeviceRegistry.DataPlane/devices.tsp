@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
+import "./common/provisionedRefs.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceAuthenticationProfiles.tsp";
 
@@ -123,19 +124,19 @@ model ProvisionDeviceRequest {
   deviceTwin?: DeviceTwin;
 }
 
-/** Result of a successful device provisioning operation. */
+/** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
 model ProvisionDeviceResult {
-  /** Unique device identifier assigned by the system. */
-  deviceUuid: string;
+  /** Reference to the provisioned Device resource. */
+  device: ProvisionedDeviceRef;
 
-  /** ARM resource ID of the provisioned device. */
-  deviceResourceId: string;
+  /** Reference to the provisioned Capability child resource. */
+  capability: ProvisionedResourceRef;
 
-  /** External device ID (IoT Hub device ID). */
-  externalDeviceId: string;
+  /** Reference to the provisioned AuthenticationProfile child resource. */
+  authProfile: ProvisionedAuthProfileRef;
 
-  /** Name of the messaging endpoint the device is connected to. */
-  messagingEndpointName: string;
+  /** Reference to the messaging endpoint the device was provisioned against. */
+  endpoint: ProvisionedEndpointRef;
 }
 
 // ──────────────────────────────────────────────

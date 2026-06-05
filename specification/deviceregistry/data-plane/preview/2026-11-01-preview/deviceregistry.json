@@ -2710,30 +2710,104 @@
     },
     "ProvisionDeviceResult": {
       "type": "object",
-      "description": "Result of a successful device provisioning operation.",
+      "description": "Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against.",
       "properties": {
-        "deviceUuid": {
-          "type": "string",
-          "description": "Unique device identifier assigned by the system."
+        "device": {
+          "$ref": "#/definitions/ProvisionedDeviceRef",
+          "description": "Reference to the provisioned Device resource."
         },
-        "deviceResourceId": {
-          "type": "string",
-          "description": "ARM resource ID of the provisioned device."
+        "capability": {
+          "$ref": "#/definitions/ProvisionedResourceRef",
+          "description": "Reference to the provisioned Capability child resource."
         },
-        "externalDeviceId": {
-          "type": "string",
-          "description": "External device ID (IoT Hub device ID)."
+        "authProfile": {
+          "$ref": "#/definitions/ProvisionedAuthProfileRef",
+          "description": "Reference to the provisioned AuthenticationProfile child resource."
         },
-        "messagingEndpointName": {
-          "type": "string",
-          "description": "Name of the messaging endpoint the device is connected to."
+        "endpoint": {
+          "$ref": "#/definitions/ProvisionedEndpointRef",
+          "description": "Reference to the messaging endpoint the device was provisioned against."
         }
       },
       "required": [
-        "deviceUuid",
-        "deviceResourceId",
-        "externalDeviceId",
-        "messagingEndpointName"
+        "device",
+        "capability",
+        "authProfile",
+        "endpoint"
+      ]
+    },
+    "ProvisionedAuthProfileRef": {
+      "type": "object",
+      "description": "Reference to a provisioned AuthenticationProfile resource, including the id of the underlying credential.",
+      "properties": {
+        "credentialId": {
+          "type": "string",
+          "description": "GUID identifying the underlying credential. Only set for CertificateAuthority authentication; omitted otherwise."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceRef"
+        }
+      ]
+    },
+    "ProvisionedDeviceRef": {
+      "type": "object",
+      "description": "Reference to a provisioned Device resource.",
+      "properties": {
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The IoT Hub device id (equal to the originating request's iotHubDeviceId)."
+        }
+      },
+      "required": [
+        "externalDeviceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceRef"
+        }
+      ]
+    },
+    "ProvisionedEndpointRef": {
+      "type": "object",
+      "description": "Reference to the messaging endpoint the device was provisioned against.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net), echoed from the originating request."
+        }
+      },
+      "required": [
+        "name",
+        "address"
+      ]
+    },
+    "ProvisionedResourceRef": {
+      "type": "object",
+      "description": "Reference to a provisioned RPaaS resource: its ARM name, system-assigned UUID, and the etag observed at the final write performed during provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The ARM resource name."
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The system-assigned UUID of the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag observed at the final write performed by the orchestration against this resource."
+        }
+      },
+      "required": [
+        "name",
+        "uuid",
+        "etag"
       ]
     },
     "QueryDevicesRequest": {
