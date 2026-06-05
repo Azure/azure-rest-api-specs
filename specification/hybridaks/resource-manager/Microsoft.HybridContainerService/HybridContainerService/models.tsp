@@ -4,11 +4,25 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.HybridContainerService;
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+/**
+ * The Kubernetes distribution used by the provisioned cluster. Possible values include: 'K8s', 'K3s'.
+ */
+union KubernetesDistribution {
+  /** Full upstream Kubernetes distribution */
+  K8s: "K8s",
+
+  /** Lightweight K3s Kubernetes distribution */
+  K3s: "K3s",
+
+  string,
+}
 
 /**
  * Network policy used for building Kubernetes network. Possible values include: 'calico', 'cilium'.
@@ -224,6 +238,12 @@ model ProvisionedClusterProperties {
    * The version of Kubernetes in use by the provisioned cluster.
    */
   kubernetesVersion?: string;
+
+  /**
+   * The Kubernetes distribution in use by the provisioned cluster. Possible values include: 'K8s', 'K3s'.
+   */
+  @added(Versions.v2026_06_01_preview)
+  kubernetesDistribution?: KubernetesDistribution;
 
   /**
    * The network configuration profile for the provisioned cluster.
