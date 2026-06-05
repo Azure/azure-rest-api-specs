@@ -10,7 +10,6 @@ namespace Azure.AI.Projects;
 @route("openai/v1/vector_stores")
 @tag("Vector stores")
 interface VectorStores {
-  @tag("Vector stores")
   @list
   @get
   @summary("Returns a list of vector stores.")
@@ -37,7 +36,6 @@ interface VectorStores {
     OpenAI.ListVectorStoresResponse
   >;
 
-  @tag("Vector stores")
   @post
   @summary("Create a vector store.")
   createVectorStore is OpenAIOperation<
@@ -48,7 +46,6 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}")
   @delete
   @summary("Delete a vector store.")
@@ -61,7 +58,6 @@ interface VectorStores {
     OpenAI.DeleteVectorStoreResponse
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}")
   @get
   @summary("Retrieves a vector store.")
@@ -74,7 +70,6 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}")
   @post
   @summary("Modifies a vector store.")
@@ -90,7 +85,6 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/file_batches")
   @post
   @summary("Create a vector store file batch.")
@@ -106,7 +100,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileBatchObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/file_batches/{batch_id}")
   @get
   @summary("Retrieves a vector store file batch.")
@@ -123,7 +116,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileBatchObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/file_batches/{batch_id}/cancel")
   @post
   @summary("Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.")
@@ -140,7 +132,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileBatchObject
   >;
 
-  @tag("Vector stores")
   @list
   @route("{vector_store_id}/file_batches/{batch_id}/files")
   @get
@@ -180,7 +171,6 @@ interface VectorStores {
     OpenAI.ListVectorStoreFilesResponse
   >;
 
-  @tag("Vector stores")
   @list
   @route("{vector_store_id}/files")
   @get
@@ -216,7 +206,6 @@ interface VectorStores {
     OpenAI.ListVectorStoreFilesResponse
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/files")
   @post
   @summary("Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).")
@@ -232,7 +221,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/files/{file_id}")
   @delete
   @summary("Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](/docs/api-reference/files/delete) endpoint.")
@@ -249,7 +237,6 @@ interface VectorStores {
     OpenAI.DeleteVectorStoreFileResponse
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/files/{file_id}")
   @get
   @summary("Retrieves a vector store file.")
@@ -266,7 +253,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/files/{file_id}")
   @post
   @summary("Update attributes on a vector store file.")
@@ -286,7 +272,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileObject
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/files/{file_id}/content")
   @get
   @summary("Retrieve the parsed contents of a vector store file.")
@@ -303,7 +288,6 @@ interface VectorStores {
     OpenAI.VectorStoreFileContentResponse
   >;
 
-  @tag("Vector stores")
   @route("{vector_store_id}/search")
   @post
   @summary("Search a vector store for relevant chunks based on a query and file attributes filter.")

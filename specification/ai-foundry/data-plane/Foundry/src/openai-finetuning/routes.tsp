@@ -9,7 +9,6 @@ namespace Azure.AI.Projects;
 @route("openai/v1/fine_tuning")
 @tag("Fine-tuning")
 interface FineTuning {
-  @tag("Fine-tuning")
   @list
   @route("checkpoints/{fine_tuned_model_checkpoint}/permissions")
   @get
@@ -46,7 +45,6 @@ interface FineTuning {
     OpenAI.ListFineTuningCheckpointPermissionResponse
   >;
 
-  @tag("Fine-tuning")
   @route("checkpoints/{fine_tuned_model_checkpoint}/permissions")
   @post
   @summary("""
@@ -67,7 +65,6 @@ interface FineTuning {
     OpenAI.ListFineTuningCheckpointPermissionResponse
   >;
 
-  @tag("Fine-tuning")
   @route("checkpoints/{fine_tuned_model_checkpoint}/permissions/{permission_id}")
   @delete
   @summary("""
@@ -89,7 +86,6 @@ interface FineTuning {
     OpenAI.DeleteFineTuningCheckpointPermissionResponse
   >;
 
-  @tag("Fine-tuning")
   @list
   @route("jobs")
   @get
@@ -116,7 +112,6 @@ interface FineTuning {
     OpenAI.ListPaginatedFineTuningJobsResponse
   >;
 
-  @tag("Fine-tuning")
   @route("jobs")
   @post
   @summary("""
@@ -135,7 +130,6 @@ interface FineTuning {
     OpenAI.FineTuningJob
   >;
 
-  @tag("Fine-tuning")
   @route("jobs/{fine_tuning_job_id}")
   @get
   @summary("""
@@ -153,7 +147,6 @@ interface FineTuning {
     OpenAI.FineTuningJob
   >;
 
-  @tag("Fine-tuning")
   @route("jobs/{fine_tuning_job_id}/cancel")
   @post
   @summary("""
@@ -169,7 +162,6 @@ interface FineTuning {
     OpenAI.FineTuningJob
   >;
 
-  @tag("Fine-tuning")
   @list
   @route("jobs/{fine_tuning_job_id}/checkpoints")
   @get
@@ -196,7 +188,6 @@ interface FineTuning {
     OpenAI.ListFineTuningJobCheckpointsResponse
   >;
 
-  @tag("Fine-tuning")
   @list
   @route("jobs/{fine_tuning_job_id}/events")
   @get
@@ -223,7 +214,6 @@ interface FineTuning {
     OpenAI.ListFineTuningJobEventsResponse
   >;
 
-  @tag("Fine-tuning")
   @route("jobs/{fine_tuning_job_id}/pause")
   @post
   @summary("""
@@ -239,7 +229,6 @@ interface FineTuning {
     OpenAI.FineTuningJob
   >;
 
-  @tag("Fine-tuning")
   @route("jobs/{fine_tuning_job_id}/resume")
   @post
   @summary("""
