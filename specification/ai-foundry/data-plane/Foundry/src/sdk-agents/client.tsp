@@ -7,6 +7,10 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+// Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
+// @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
+// @@clientInitialization requires exact singleton opt-in properties (e.g. agents_optimization_v1_preview) per key.
+// Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
 @@clientLocation(
   Azure.AI.Projects.WithConditionalFoundryPreviewHeader.foundry_features,
   Azure.AI.Projects,
