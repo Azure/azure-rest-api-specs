@@ -29,6 +29,21 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
+// Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
+// @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
+// @@clientInitialization requires exact singleton opt-in properties (e.g. evaluations_v1_preview) per key.
+// Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
+@@clientLocation(
+  Azure.AI.Projects.WithConditionalFoundryPreviewHeader.foundry_features,
+  Azure.AI.Projects,
+  "java"
+);
+@@clientLocation(
+  Azure.AI.Projects.WithRequiredFoundryPreviewHeader.foundry_features,
+  Azure.AI.Projects,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Renames - operations
 // --------------------------------------------------------------------------------
@@ -172,6 +187,8 @@ namespace Azure.AI.Projects;
 @@clientName(ModelPendingUploadRequest, "ModelPendingUploadInput");
 @@clientName(ModelCredentialRequest, "ModelCredentialInput");
 @@clientName(EvaluatorCredentialRequest, "EvaluatorCredentialInput");
+@@usage(EvaluatorCredentialRequest, Usage.input);
+@@access(EvaluatorCredentialRequest, Access.public);
 
 // *Response → *Result renames for public response models
 @@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
@@ -234,6 +251,24 @@ namespace Azure.AI.Projects;
 // Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
 @@convenientAPI(Skills.deleteSkill, false, "java");
 @@convenientAPI(Skills.deleteSkillVersion, false, "java");
+
+// Temporary Java workaround: after @@clientLocation promotes Foundry-Features, optional-header
+// convenience overloads can collapse to duplicate signatures. Remove these suppressions once
+// the Java emitter de-dupes those generated overloads.
+@@convenientAPI(DataGenerationJobs.get, false, "java");
+@@convenientAPI(DataGenerationJobs.cancel, false, "java");
+@@convenientAPI(DataGenerationJobs.delete, false, "java");
+@@convenientAPI(EvaluatorGenerationJobs.get, false, "java");
+@@convenientAPI(EvaluatorGenerationJobs.cancel, false, "java");
+@@convenientAPI(EvaluatorGenerationJobs.delete, false, "java");
+@@convenientAPI(Evaluators.startPendingUpload, false, "java");
+@@convenientAPI(Evaluators.getCredentials, false, "java");
+@@convenientAPI(Insights.generate, false, "java");
+@@convenientAPI(Routines.getRoutine, false, "java");
+@@convenientAPI(Routines.enableRoutine, false, "java");
+@@convenientAPI(Routines.disableRoutine, false, "java");
+@@convenientAPI(Routines.deleteRoutine, false, "java");
+@@convenientAPI(EvaluationRules.createOrUpdate, false, "java");
 
 //making delete methods internal to add public shims that return void
 @@access(Skills.deleteSkill, Access.internal);
