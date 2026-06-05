@@ -1,0 +1,269 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ScopeExtensionClient",
+    "version": "2025-01-01",
+    "description": "Extension resource provider that uses a {scope} path parameter with x-ms-skip-url-encoding. This is a true-negative fixture: the extension is legitimately applied to a multi-segment ARM scope parameter with a justifying description."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.ScopeExtension/locks/{lockName}": {
+      "put": {
+        "operationId": "Locks_CreateOrUpdate",
+        "description": "Creates or updates a lock at the specified scope.",
+        "parameters": [
+          { "$ref": "#/parameters/ScopeParameter" },
+          { "$ref": "#/parameters/LockNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Lock" },
+            "description": "The lock parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lock updated successfully.",
+            "schema": { "$ref": "#/definitions/Lock" }
+          },
+          "201": {
+            "description": "Lock created successfully.",
+            "schema": { "$ref": "#/definitions/Lock" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Locks_Get",
+        "description": "Gets a lock at the specified scope.",
+        "parameters": [
+          { "$ref": "#/parameters/ScopeParameter" },
+          { "$ref": "#/parameters/LockNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lock retrieved successfully.",
+            "schema": { "$ref": "#/definitions/Lock" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Locks_Delete",
+        "description": "Deletes a lock at the specified scope.",
+        "parameters": [
+          { "$ref": "#/parameters/ScopeParameter" },
+          { "$ref": "#/parameters/LockNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lock deleted successfully."
+          },
+          "204": {
+            "description": "Lock does not exist."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ScopeExtension/locks": {
+      "get": {
+        "operationId": "Locks_List",
+        "description": "Lists all locks at the specified scope.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          { "$ref": "#/parameters/ScopeParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of locks.",
+            "schema": { "$ref": "#/definitions/LockListResult" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ScopeExtension/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all operations for the Microsoft.ScopeExtension provider.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method",
+      "description": "The fully-qualified ARM resource scope at which to apply the lock. The value may contain multiple path segments (e.g., subscriptions/{sub}/resourceGroups/{rg} or subscriptions/{sub}/resourceGroups/{rg}/providers/{ns}/{type}/{name}), so URL encoding must be skipped to preserve the embedded slash characters."
+    },
+    "LockNameParameter": {
+      "name": "lockName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the lock.",
+      "pattern": "^[A-Za-z0-9_.-]{1,260}$"
+    }
+  },
+  "definitions": {
+    "Lock": {
+      "type": "object",
+      "description": "A management lock applied at a specified scope.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ARM resource ID of the lock.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the lock.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the lock.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/LockProperties",
+          "description": "The lock properties.",
+          "x-ms-client-flatten": false
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "LockProperties": {
+      "type": "object",
+      "description": "Properties of a management lock.",
+      "required": ["level"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "The lock level that prevents modification or deletion of the locked resource.",
+          "enum": ["NotSpecified", "CanNotDelete", "ReadOnly"],
+          "x-ms-enum": {
+            "name": "LockLevel",
+            "modelAsString": true
+          }
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about the lock. Maximum of 512 characters.",
+          "maxLength": 512
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the lock.",
+          "readOnly": true,
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LockListResult": {
+      "type": "object",
+      "description": "A list of management locks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Lock" },
+          "description": "The list of locks."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      }
+    }
+  }
+}

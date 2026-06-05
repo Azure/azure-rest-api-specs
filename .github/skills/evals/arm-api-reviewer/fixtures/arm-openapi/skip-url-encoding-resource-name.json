@@ -1,0 +1,373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BadEncodingClient",
+    "version": "2025-01-01",
+    "description": "ARM resource provider with x-ms-skip-url-encoding incorrectly applied to a single-segment resource name path parameter. This is a true-positive fixture: ARM-PATH-ENCODING-V1 should be flagged as Blocking."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BadEncoding/widgets/{widgetName}": {
+      "put": {
+        "operationId": "Widgets_CreateOrUpdate",
+        "description": "Creates or updates a widget resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Widget" },
+            "description": "The widget resource parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Widget updated successfully.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "201": {
+            "description": "Widget created successfully.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Gets a widget resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Widget retrieved successfully.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Widgets_Update",
+        "description": "Updates a widget resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/WidgetPatch" },
+            "description": "The widget update parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Widget updated successfully.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Widgets_Delete",
+        "description": "Deletes a widget resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Widget deleted successfully."
+          },
+          "204": {
+            "description": "Widget does not exist."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BadEncoding/widgets": {
+      "get": {
+        "operationId": "Widgets_ListByResourceGroup",
+        "description": "Lists all widgets in the specified resource group.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of widgets.",
+            "schema": { "$ref": "#/definitions/WidgetListResult" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BadEncoding/widgets": {
+      "get": {
+        "operationId": "Widgets_ListBySubscription",
+        "description": "Lists all widgets in the specified subscription.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of widgets.",
+            "schema": { "$ref": "#/definitions/WidgetListResult" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BadEncoding/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all operations for the Microsoft.BadEncoding provider.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "WidgetNameParameter": {
+      "name": "widgetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "description": "The name of the widget.",
+      "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ARM resource ID of the widget.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the widget.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the widget.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the widget.",
+          "x-ms-mutability": ["create", "read"]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/WidgetProperties",
+          "description": "The widget properties."
+        }
+      },
+      "required": ["location"],
+      "x-ms-azure-resource": true
+    },
+    "WidgetProperties": {
+      "type": "object",
+      "description": "Properties of a widget resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the widget."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the widget.",
+          "readOnly": true,
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WidgetPatch": {
+      "type": "object",
+      "description": "The widget patch request.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/WidgetPatchProperties",
+          "description": "The widget patch properties."
+        }
+      }
+    },
+    "WidgetPatchProperties": {
+      "type": "object",
+      "description": "Patchable properties of a widget.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the widget."
+        }
+      }
+    },
+    "WidgetListResult": {
+      "type": "object",
+      "description": "A list of widgets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Widget" },
+          "description": "The list of widgets."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      }
+    }
+  }
+}

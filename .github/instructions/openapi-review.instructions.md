@@ -400,6 +400,31 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 - `x-ms-client-name`: If used, the value **MUST NOT** be empty.
 - `x-ms-paths`: If used, entries **MUST** overload (be equivalent to) existing paths with different query parameters.
 
+### 16.1 `x-ms-skip-url-encoding` on Parameters (ARM-PATH-ENCODING-V1)
+
+<a id="arm-path-encoding-v1"></a>
+
+**References:**
+- [Control URL encoding with x-ms-skip-url-encoding](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/creating-swagger.md#control-url-encoding-with-x-ms-skip-url-encoding)
+- [AutoRest x-ms-skip-url-encoding extension docs](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-skip-url-encoding)
+
+`x-ms-skip-url-encoding: true` disables AutoRest's automatic URL-encoding of a path or query parameter value. Misuse leads to broken request URLs, potential path injection vulnerabilities, and SDK breaking changes when the flag is added or removed across API versions.
+
+**Rules:**
+
+1. **Flag — single-segment path parameters:** Any path parameter with `x-ms-skip-url-encoding: true` whose name identifies a **single ARM path segment** (e.g., a tracked or proxy resource name like `{widgetName}`, `{resourceName}`, `{configName}`) **MUST NOT** use this extension. These values must be URL-encoded normally. Flag as **Blocking**.
+
+2. **Allow — multi-segment path parameters:** The extension is permitted on path parameters that legitimately carry multi-segment paths, such as:
+   - `{scope}` — a fully-qualified ARM resource ID used by extension resources
+   - Parameters whose description explicitly states the value may contain path separators (e.g., blob paths, nested resource IDs, SAS token parameters)
+   - **Requirement:** The parameter's `description` **MUST** justify why encoding must be skipped (e.g., "The ARM resource scope. The value may contain `/` characters representing nested resource IDs."). If the description does not justify the multi-segment nature, flag as **Blocking**.
+
+3. **Flag — query parameters:** Query parameters with `x-ms-skip-url-encoding: true` **MUST** have a clear, specific reason in the description explaining why URL-encoding must be suppressed. Vague or missing justification is **Blocking**.
+
+4. **Cross-version check:** Adding or removing `x-ms-skip-url-encoding` on an existing parameter between API versions is a **potential SDK breaking change**. During the breaking-change comparison step, flag any parameter where this extension is present in one version but absent in the other, or vice versa. Classify as **Blocking** under the breaking-changes rule.
+
+**Fix guidance:** Remove `x-ms-skip-url-encoding: true` from single-segment resource name path parameters. For legitimate multi-segment uses, add a description that clearly explains why encoding must be skipped and that the value may contain reserved characters such as `/`.
+
 ## 17. Descriptions & Documentation Quality
 
 - Every operation, parameter, property, model definition, and enum value **MUST** have a non-empty `description`.
@@ -646,6 +671,7 @@ When reviewing, systematically check:
 - ✅ Resource name path parameters include `pattern` constraints with length limits and character restrictions
 - ✅ PUT operation descriptions use idempotent language ("Creates or updates..." not "Creates a new...")
 - ✅ Operations API display object uses camelCase property names (`provider`, `resource`, `operation`, `description`)
+- ✅ `x-ms-skip-url-encoding` on single-segment path parameters is flagged (ARM-PATH-ENCODING-V1); multi-segment uses (`{scope}`, blob paths) require justification in description; cross-version addition/removal flagged as breaking change
 
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.
 

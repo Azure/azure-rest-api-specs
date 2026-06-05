@@ -1046,6 +1046,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Operations API endpoint exists with `OperationListResult` and `Operation` definitions (preferably from common-types; inline equivalent is acceptable) (RPC-Operations-V1)
 - ✅ Operations API is tenant-scoped only -- not per-subscription (RPC-Operations-V1-02)
 - ✅ Operations API includes ALL operations across all API versions; no operations removed when versioning
+- ✅ `x-ms-skip-url-encoding: true` only on parameters that legitimately carry multi-segment paths (e.g., `{scope}`) with justifying description; single-segment resource name path parameters **MUST NOT** use this extension (ARM-PATH-ENCODING-V1)
 
 ### Output Formatting
 
@@ -1216,6 +1217,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ No type changes on existing properties between API versions (introduce new property name + deprecate old)
 - ✅ No required properties added to or removed from existing models between API versions
 - ✅ DELETE never fails due to API version mismatch with creation version
+- ✅ `x-ms-skip-url-encoding` not added to or removed from an existing parameter between API versions — such a change is a potential SDK breaking change (ARM-PATH-ENCODING-V1)
 
 ### Long-Running Operation Security
 

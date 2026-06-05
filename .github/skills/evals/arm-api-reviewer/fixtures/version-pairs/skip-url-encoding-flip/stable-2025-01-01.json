@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EncodingFlipClient",
+    "version": "2025-01-01",
+    "description": "ARM resource provider - new version that adds x-ms-skip-url-encoding to widgetName. This is a breaking SDK change: adding the extension changes how AutoRest generates the parameter. ARM-PATH-ENCODING-V1 should be flagged as Blocking (single-segment resource name) AND as a breaking change versus stable-2024-01-01.json."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{ "azure_auth": ["user_impersonation"] }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": { "user_impersonation": "impersonate your user account" }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EncodingFlip/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Gets a widget resource.",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true,
+            "description": "The name of the widget."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": { "$ref": "#/definitions/Widget" }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A widget resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The fully qualified ARM resource ID of the widget."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the widget."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type of the widget."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geographic location of the widget.",
+          "x-ms-mutability": ["create", "read"]
+        },
+        "properties": {
+          "$ref": "#/definitions/WidgetProperties",
+          "description": "The widget properties."
+        }
+      },
+      "required": ["location"],
+      "x-ms-azure-resource": true
+    },
+    "WidgetProperties": {
+      "type": "object",
+      "description": "Properties of a widget.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the widget."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the widget.",
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "x-ms-enum": { "name": "ProvisioningState", "modelAsString": true }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error detail."
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": { "type": "string", "description": "The error code." },
+        "message": { "type": "string", "description": "The error message." }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}
