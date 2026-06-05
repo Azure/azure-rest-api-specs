@@ -1,4 +1,5 @@
 import "./main.tsp";
+import "../common/service.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -6,24 +7,23 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+@@clientLocation(
+  Azure.AI.Projects.WithConditionalFoundryPreviewHeader.foundry_features,
+  Azure.AI.Projects,
+  "java"
+);
+@@clientLocation(
+  Azure.AI.Projects.WithRequiredFoundryPreviewHeader.foundry_features,
+  Azure.AI.Projects,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Renames
 // --------------------------------------------------------------------------------
 
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
 @@clientName(Azure.AI.Projects, "AgentsClient");
-
-model BetaFeaturesOptInHeaders {
-  @header("x-ms-foundry-features-opt-in")
-  foundryFeaturesOptIn?: FoundryFeaturesOptInKeys;
-
-  @header("x-ms-agent-definition-features-opt-in")
-  agentDefinitionFeaturesOptIn?: AgentDefinitionOptInKeys;
-}
-
-@@clientInitialization(Azure.AI.Projects, {
-  parameters: BetaFeaturesOptInHeaders,
-}, "java");
 
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
 @@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
@@ -185,6 +185,7 @@ model BetaFeaturesOptInHeaders {
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
 
+@@convenientAPI(AgentOptimizationJobs, false, "java");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
