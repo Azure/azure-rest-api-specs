@@ -338,10 +338,6 @@ suppressions:
     from: EventGrid.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
 
-  - code: EnumInsteadOfBoolean
-    reason: These boolean properties are already part of the existing API contract from previous preview versions and cannot be changed to enums without introducing a breaking change.
-    from: EventGrid.json
-
   - code: PutInOperationName
     reason: The PrivateEndpointConnections_Update operationId is from an existing API contract (previous stable and preview versions). Renaming to CreateOrUpdate would introduce a cross-version breaking change (ModifiedOperationId) with no functional benefit.
     from: EventGrid.json
