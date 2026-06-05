@@ -352,6 +352,7 @@ stages:
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
+              -UpdateExistingPullRequest $true
         
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
