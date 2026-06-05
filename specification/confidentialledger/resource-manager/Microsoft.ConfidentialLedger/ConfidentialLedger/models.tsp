@@ -326,6 +326,7 @@ model LedgerProperties {
    * Current storage usage of the Confidential Ledger, in bytes.
    */
   @added(Versions.v2026_05_22_preview)
+  @minValue(0)
   @visibility(Lifecycle.Read)
   storageUsageBytes?: int64;
 }
