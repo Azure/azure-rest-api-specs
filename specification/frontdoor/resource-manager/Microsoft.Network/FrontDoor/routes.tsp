@@ -61,9 +61,11 @@ interface FrontDoorNameAvailabilityWithSubscriptionOperationGroup {
   >;
 }
 
-@@Azure.ClientGenerator.Core.clientName(FrontDoorNameAvailabilityOperationGroup.check::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  FrontDoorNameAvailabilityOperationGroup.check::parameters.body,
   "checkFrontDoorNameAvailabilityInput"
 );
-@@Azure.ClientGenerator.Core.clientName(FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(
+  FrontDoorNameAvailabilityWithSubscriptionOperationGroup.check::parameters.body,
   "checkFrontDoorNameAvailabilityInput"
 );

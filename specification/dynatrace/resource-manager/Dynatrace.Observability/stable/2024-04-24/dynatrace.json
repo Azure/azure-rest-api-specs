@@ -2235,7 +2235,7 @@
           "description": "Id of the environment created"
         },
         "ingestionKey": {
-          "type": "string",
+          "$ref": "#/definitions/SecretIngestionKey",
           "description": "Ingestion key of the environment"
         },
         "logsIngestionEndpoint": {
@@ -3088,6 +3088,13 @@
           }
         ]
       }
+    },
+    "SecretIngestionKey": {
+      "type": "string",
+      "format": "password",
+      "description": "Ingestion key with secret and read-only attributes for all API versions.",
+      "readOnly": true,
+      "x-ms-secret": true
     },
     "SendAadLogsStatus": {
       "type": "string",
