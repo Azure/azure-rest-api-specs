@@ -477,7 +477,7 @@ interface VirtualMachineScaleSets {
   migrateVMAvailabilityZone is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     MigrateVMAvailabilityZoneInput,
-    Response = OkResponse,
+    Response = ArmNoContentResponse<"Resource operation accepted.">,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
