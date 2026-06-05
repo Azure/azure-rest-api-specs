@@ -29,6 +29,20 @@ using Microsoft.OperationalInsights;
   "java"
 );
 
+// C# names for Network Security Perimeter common types need RP context.
+@@clientName(Azure.ResourceManager.CommonTypes.AccessRule, "OperationalInsightsNspAccessRule", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleDirection, "OperationalInsightsNspAccessRuleDirection", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleProperties, "OperationalInsightsNspAccessRuleProperties", "csharp");
+@@clientName(global.AccessRulePropertiesSubscriptionsItem, "OperationalInsightsNspAccessRuleSubscription", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.IssueType, "OperationalInsightsNspIssueType", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile, "OperationalInsightsNetworkSecurityProfile", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssue, "OperationalInsightsNspProvisioningIssue", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties, "OperationalInsightsNspProvisioningIssueProperties", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociation, "OperationalInsightsNspResourceAssociation", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode, "OperationalInsightsNspResourceAssociationAccessMode", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.Severity, "OperationalInsightsNspSeverity", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location, Azure.Core.azureLocation, "csharp");
+
 @@clientName(
   Microsoft.OperationalInsights.ProvisioningStateEnum,
   "SummaryLogsProvisioningState",
@@ -96,9 +110,13 @@ using Microsoft.OperationalInsights;
 @@clientName(LinkedServiceEntityStatus, "OperationalInsightsLinkedServiceEntityStatus", "csharp");
 @@clientName(MetricName, "OperationalInsightsMetricName", "csharp");
 @@clientName(PrivateLinkScopedResource, "OperationalInsightsPrivateLinkScopedResourceInfo", "csharp");
+@@clientName(ProvisioningStateEnum, "OperationalInsightsNspProvisioningState", "csharp");
 @@clientName(PublicNetworkAccessType, "OperationalInsightsPublicNetworkAccessType", "csharp");
+@@clientName(RuleTypeEnum, "OperationalInsightsNspRuleType", "csharp");
 @@clientName(Schema, "OperationalInsightsSchema", "csharp");
+@@clientName(Severity, "OperationalInsightsNspSeverity", "csharp");
 @@clientName(SkuNameEnum, "OperationalInsightsSkuName", "csharp");
+@@clientName(StatusCodeEnum, "OperationalInsightsNspStatusCode", "csharp");
 @@clientName(TablePlanEnum, "OperationalInsightsTablePlan", "csharp");
 @@clientName(SearchResults, "OperationalInsightsTableSearchResults", "csharp");
 @@clientName(RestoredLogs, "OperationalInsightsTableRestoredLogs", "csharp");
@@ -157,6 +175,8 @@ using Microsoft.OperationalInsights;
 @@clientName(SearchSchemaValue.type, "SearchSchemaValueType", "csharp");
 @@clientName(UsageMetric, "OperationalInsightsUsageMetric", "csharp");
 @@clientName(SharedKeys, "OperationalInsightsWorkspaceSharedKeys", "csharp");
+@@clientName(OperationStatus, "OperationalInsightsOperationStatus", "csharp");
+@@clientName(TimeSelectorEnum, "OperationalInsightsSummaryTimeSelector", "csharp");
 @@clientName(WorkspacePurgeBody, "OperationalInsightsWorkspacePurgeContent", "csharp");
 @@clientName(WorkspacePurgeBodyFilters, "OperationalInsightsWorkspacePurgeFilter", "csharp");
 @@clientName(WorkspacePurgeResponse, "OperationalInsightsWorkspacePurgeResult", "csharp");
