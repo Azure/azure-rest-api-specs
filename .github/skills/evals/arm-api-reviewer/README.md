@@ -42,10 +42,10 @@ arm-api-reviewer/
 | ------ | ----------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 01xxxx | ARM resource structure        | 3     | Missing CRUD ops, missing provisioningState, inline types                                                                                                                                                                                                                     |
 | 02xxxx | Property design               | 4     | Secrets, naming, descriptions, enums                                                                                                                                                                                                                                          |
-| 03xxxx | Operations                    | 4     | PATCH, PUT, DELETE, LRO violations                                                                                                                                                                                                                                            |
+| 03xxxx | Operations                    | 5     | PATCH, PUT, DELETE, LRO violations, GET returning 202                                                                                                                                                                                                                         |
 | 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                 |
 | 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                    |
-| 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                                                                                                                                                                                                                            |
+| 06xxxx | Example file validation       | 4     | Bad resource ID, realistic secrets, non-prod URL hosts, bad ARM ID casing                                                                                                                                                                                                     |
 | 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                      |
 | 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                   |
 | 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                               |
@@ -53,11 +53,11 @@ arm-api-reviewer/
 | 11xxxx | Report format                 | 2     | Line numbers, rule IDs, structured output; critic invisible on clean                                                                                                                                                                                                          |
 | 12xxxx | TypeSpec required             | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK                                                                                                                                                                                                                   |
 | 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                                                                                                                          |
-| 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                        |
+| 14xxxx | suppressions.yaml continuity  | 3     | Missing reason in new entry; security-rule suppression; denylist justifications                                                                                                                                                                                               |
 | 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                            |
 | 16xxxx | Protocol safety               | 10    | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
 
-Total: 51 stimuli across 16 eval files.
+Total: 55 stimuli across 16 eval files.
 
 ## Fixtures
 
@@ -66,10 +66,10 @@ All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated
-- **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
+- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 13 with seeded violations + 1 TypeSpec-generated
+- **3 example JSON files** in `examples/` -- 1 clean + 4 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
-- **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
+- **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason, security-rule, and denylist-justification scenarios
 - **4 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
 - **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
 
@@ -85,7 +85,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (48 stimuli, sequential -- safest)
+# Run the full suite (55 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -137,7 +137,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 48 stimuli, 5 concurrent workers)
+# Run the full suite (all 55 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category

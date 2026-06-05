@@ -1,0 +1,225 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GetReturns202TestClient",
+    "version": "2025-01-01",
+    "description": "Test resource provider with a GET operation that incorrectly returns 202."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AsyncRead/workspaces/{workspaceName}/discoveries/latest": {
+      "get": {
+        "operationId": "WorkspaceDiscoveries_GetLatest",
+        "description": "Gets the latest workspace discovery result. This operation may take time to complete.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/WorkspaceDiscovery" }
+          },
+          "202": {
+            "description": "Accepted - operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Polling URL."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AsyncRead/workspaces/{workspaceName}": {
+      "get": {
+        "operationId": "Workspaces_Get",
+        "description": "Gets a workspace resource.",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workspace."
+          },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "$ref": "#/definitions/Workspace" }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceDiscovery": {
+      "type": "object",
+      "description": "The workspace discovery result.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceDiscoveryProperties",
+          "description": "Discovery properties."
+        }
+      }
+    },
+    "WorkspaceDiscoveryProperties": {
+      "type": "object",
+      "description": "Properties of a workspace discovery.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The discovery status."
+        },
+        "discoveredAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "When the discovery completed."
+        }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "The workspace resource.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": ["create", "read"]
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "Workspace properties."
+        }
+      },
+      "required": ["location"]
+    },
+    "WorkspaceProperties": {
+      "type": "object",
+      "description": "Properties of a workspace.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state.",
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "Error detail.",
+          "properties": {
+            "code": { "type": "string", "description": "Error code." },
+            "message": { "type": "string", "description": "Error message." }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription ID."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group name."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version."
+    }
+  }
+}

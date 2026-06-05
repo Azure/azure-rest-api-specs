@@ -1,0 +1,31 @@
+# cspell:ignore denysvc fixmesvc todosvc
+# Fixture: suppressions.yaml entries with boilerplate/denylist justifications.
+# Used by eval-suppressions-yaml (150003).
+# Mirrors the layout of specification/suppressions.yaml at the repo root.
+
+# Existing entry from prior version — acceptable reason.
+- tool: LintDiff
+  rules: [ProvisioningStateMustBeReadOnly]
+  reason: Pre-existing pattern in the stable/2024-01-01 version; the readOnly annotation was missing from the original handwritten swagger and the TypeSpec emitter now generates it correctly. Fixing in the next API version.
+  paths:
+    - denysvc/Denylist.Management/stable/2024-01-01/**
+
+# New entry added in this PR — FIXME boilerplate reason (denylist hit).
+- tool: LintDiff
+  rules: [ProvisioningStateMustBeReadOnly]
+  reason: "FIXME"
+  paths:
+    - fixmesvc/Fixme.Management/stable/2025-01-01/**
+
+# New entry added in this PR — TODO boilerplate reason (denylist hit).
+- tool: TypeSpecRequirement
+  reason: TODO add real reason
+  paths:
+    - todosvc/Todo.Management/stable/2025-01-01/**
+
+# New entry added in this PR — bare rule name as reason (denylist hit).
+- tool: LintDiff
+  rules: [arm-resource-provisioning-state]
+  reason: arm-resource-provisioning-state
+  paths:
+    - denysvc/Denylist.Management/stable/2025-01-01/**

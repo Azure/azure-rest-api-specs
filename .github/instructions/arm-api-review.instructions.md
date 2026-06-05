@@ -189,6 +189,21 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - For singleton nested resources (only one instance exists), the resource name **SHOULD** be `default`. The collection GET (`/parent/{parentName}/children`) and singleton GET (`/parent/{parentName}/children/default`) must both exist.
 - All child (nested) resource types — including singletons — **MUST** support both a collection GET under the parent and a point GET for a single instance (PLCY008). Without both operations, Azure Policy compliance data cannot be populated for the child resource type.
 
+### 2.3a Duplicate Collection Model (DUPLICATE-COLLECTION-MODEL)
+
+Flag a **Warning** with rule ID `DUPLICATE-COLLECTION-MODEL` when **both** of the following are true:
+
+1. A resource model exposes an inline array property (e.g., `subgroups: Subgroup[]`) whose element type is also used as the response model of a dedicated child-resource endpoint (e.g., `GET .../subgroups` and `GET .../subgroups/{name}`).
+2. The dedicated child-resource endpoint already provides a standard ARM collection (`{ value: Subgroup[], nextLink }`) and point-GET access.
+
+**Why flag it:** When a separate `/subgroups` endpoint exists for listing and reading child resources, embedding a `subgroups[]` array inline in the parent model creates two representations of the same data that can drift, introduces payload bloat (the parent GET now returns a potentially unbounded child list), and adds ambiguity about which representation is authoritative. Azure Resource Graph also discourages embedding child resource collections in the parent body (ARG001).
+
+**Valid exceptions (do NOT flag):** Inline arrays that hold value-type sub-objects (e.g., configuration blobs, IP ranges, rule sets) that are *not* modeled as first-class ARM child resources (no `id`/`name`/`type` envelope) are exempt. This rule targets child resources that have their own ARM resource type path, not simple embedded objects.
+
+**Severity:** Warning. **Rule ID:** `DUPLICATE-COLLECTION-MODEL`
+
+**Fix suggestion:** If the child resources are accessible via a dedicated endpoint, remove the inline array from the parent model and replace it with a comment or pointer in the description. If the inline array has a use case the child endpoint does not cover, document the rationale in the PR.
+
 ### 2.4 Resource References Between Resources
 
 - When a resource needs to reference another resource, use a **single property containing the fully qualified ARM resource ID** of the referenced resource.
@@ -233,6 +248,19 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - **Singleton resources MUST be named "default"** (lowercase). Names like "Experimentation", "config", or any other non-"default" value for a singleton are not allowed unless explicitly approved.
 - Singleton and constrained-collection resource names **MUST** be represented as an **enum path parameter** with `x-ms-enum` and `modelAsString: true` -- not as a static literal in the URI path. See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the correct pattern (RPC-ConstrainedCollections-V1-04).
   (Also enforced by: `ReservedResourceNamesModelAsEnum` linter rule -- warning level)
+
+### 2.7a GET Response Code Contract (RPC-Get-V1-01, RPC-Get-V1-14)
+
+GET operations in ARM are **synchronous read-only** operations. The following response code contract is **strict** — violations are **Blocking**:
+
+- GET operations **MUST** define exactly two responses: `200 OK` (success) and `default` (error). No other response codes are valid on a GET.
+- GET operations **MUST NOT** return `202 Accepted`. `202` is reserved for long-running mutations (PUT/PATCH/DELETE/POST). A GET that returns `202` implies the read itself is async, which conflicts with the ARM GET contract (RPC-Get-V1-01, RPC-Get-V1-14).
+- GET operations **MUST NOT** have `x-ms-long-running-operation: true`. GET is never an LRO.
+- GET operations **MUST NOT** include `Location` or `Azure-AsyncOperation` response headers — these are LRO polling headers, not valid on GET responses.
+
+> **Common false pattern — "polling GET":** Some services model a long-running read as `GET .../resources/{name}/latestResult` that returns `202` while computing. This pattern is **incorrect** for ARM. Instead: either (a) expose the result as a standard point GET on a proxy resource that updates asynchronously, or (b) if the computation genuinely takes seconds, model it as a POST action that returns `202` and polls to a `200` final result.
+
+**Detection.** When reviewing an ARM swagger, for every operation with `"get"` method, verify the responses map contains **only** `"200"` and `"default"`. If `"202"` is present, or if `x-ms-long-running-operation: true` is set, flag it immediately as **Blocking `RPC-Get-V1-01`**.
 
 ### 2.8 Common Type Definitions Should Be Used
 
@@ -428,6 +456,21 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the _status_, not a failure of the underlying operation.
 - The `Azure-AsyncOperation` status object **MUST** include `status` (Required) with terminal values `Succeeded`, `Failed`, or `Canceled`. If `status` is `Failed` or `Canceled`, `error.code` and `error.message` are **Required**.
 - For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `x-ms-long-running-operation-options` / `final-state-via` -- the default SDK behavior is correct. Only specify `"final-state-via": "location"` for POST LROs with a response schema.
+
+### 6.7a Least-Specification for `final-state-via` (LRO-LEAST-SPECIFICATION)
+
+Specifying `x-ms-long-running-operation-options.final-state-via` when the default ARM LRO behavior is already correct introduces unnecessary divergence risk — SDK clients must now rely on the swagger annotation rather than the runtime header-driven behavior, and a mismatch can cause silent polling failures.
+
+**Rule:** Flag `x-ms-long-running-operation-options` with `final-state-via: location` or `final-state-via: azure-async-operation` on a standard ARM PUT, PATCH, or DELETE operation as a **Warning** with rule ID `LRO-LEAST-SPECIFICATION`, unless the operation's description explicitly documents a non-standard polling contract that requires the override.
+
+| Operation | Contains `final-state-via` | Verdict |
+| --------- | -------------------------- | ------- |
+| Standard PUT following `201`/`200` + `provisioningState` | yes | ⚠️ Warning — remove unless non-standard |
+| Standard async PATCH/DELETE with `Location` + `Azure-AsyncOperation` | yes | ⚠️ Warning — remove unless non-standard |
+| POST action with result schema on Location | `"location"` | ✅ Required — keep |
+| POST action with result in status monitor | `"azure-async-operation"` | ✅ Required — keep |
+
+**Fix:** For standard PUT/PATCH/DELETE, remove the `x-ms-long-running-operation-options` block entirely. The ARM SDK will use the runtime `Azure-AsyncOperation`/`Location` headers to determine polling behavior, which is correct. Only retain `final-state-via` when the non-standard contract is documented and confirmed with the ARM team.
 
 ### 6.8 Operation Results Placement
 
@@ -681,6 +724,34 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 Apply the decision framework from the reference file when evaluating suppressions. Key points: suppressions from preview are not automatically acceptable in GA; suppressions must have specific `from`/`where` clauses (not blanket); warnings should not be suppressed; lack of time is never valid.
 
+### 10A.1 Suppression Justification Denylist (SUPPRESSION-JUSTIFICATION-DENYLIST)
+
+Every suppression **MUST** include a clear, specific, and technically accurate justification. Boilerplate or low-information reasons indicate the author deferred the justification and never returned — they do not constitute valid approval evidence.
+
+**Reject any suppression whose `reason` field matches the following denylist** (case-insensitive, partial match is sufficient):
+
+| Denylist pattern           | Example of disallowed text                        |
+| -------------------------- | ------------------------------------------------- |
+| `FIXME`                    | `"FIXME: needs real justification"`               |
+| `TODO`                     | `"TODO: add reason later"`                        |
+| `TBD`                      | `"TBD"`                                           |
+| `legacy`                   | `"legacy pattern"`                                |
+| `existing pattern`         | `"existing pattern from prior version"`           |
+| `will fix later`           | `"will fix in the next release"`                  |
+| Bare quote of the rule name| `"arm-resource-provisioning-state"`               |
+| Single-word reason         | `"compat"`, `"inherited"`, `"known"` (alone)      |
+
+**Severity:**
+- **Blocking** for security-related rules (e.g., `secret-prop`, `security-definition-missing`, `arm-resource-provisioning-state` with a security impact).
+- **Warning** for all other rules.
+
+**Rule ID:** `SUPPRESSION-JUSTIFICATION-DENYLIST`
+
+**Fix:** Replace the boilerplate text with a precise technical justification that explains:
+1. Why the rule does not apply to this specific property/operation/path.
+2. What was verified to confirm the violation is a false alarm (or a pre-existing pattern that cannot be fixed now).
+3. If it is a pre-existing pattern: what the plan is to fix it, or acknowledgment that fixing it would be a breaking change.
+
 ### 10A.3 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
 
 - For ARM RPs, the `operations.json` (or equivalent operations API spec) **MUST** be included in every published package tag's input-file list.
@@ -691,6 +762,7 @@ Apply the decision framework from the reference file when evaluating suppression
 - Starting in 2024, suppressions can also be specified in a YAML file at `specification/<service>/suppressions.yaml` (in addition to `readme.md` directives). Entries use `tool`/`path`/`reason` format.
 - The `path` field **MUST** use narrow, version-scoped globs (e.g., `stable/2025-01-01/**`) -- not broad patterns like `data-plane/**`.
 - Apply the same approval criteria from `suppression-review-criteria.md` for `suppressions.yaml` entries.
+- Apply the `SUPPRESSION-JUSTIFICATION-DENYLIST` check to the `reason` field of every `suppressions.yaml` entry exactly as described in §10A.1 above.
 
 ---
 
@@ -1068,7 +1140,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ PUT returns `201` (create) or `200` (replace) — never `202` for async PUT (RPC-Put-V1-11)
 - ✅ PUT does not implicitly create other tracked resources (RPC-Put-V1-16)
 - ✅ Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)
-- ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14)
+- ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14) — **explicitly verify no `202` response code and no `x-ms-long-running-operation: true` on any GET**
 - ✅ Point GET has no query params other than `api-version` (RPC-Get-V1-08)
 - ✅ Collection GET has only `value` and `nextLink` at top level with `x-ms-pageable`; `nextLink` has `format: uri` (RPC-Get-V1-09, RPC-Get-V1-13)
 - ✅ Collection GET has no query parameters other than `api-version` and OData `$filter` (RPC-Get-V1-15)
@@ -1109,7 +1181,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
 - ✅ Operation statuses at subscription scope for new services; no sensitive data in operation status properties
 - ✅ Operation IDs are globally unique GUIDs — not derived from hashes of resource properties (RPC-BestPractice-08)
-- ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
+- ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema (LRO-LEAST-SPECIFICATION)
 
 ### Property Design (Properties Bag Review)
 
@@ -1167,7 +1239,7 @@ When reviewing ARM resource-manager swagger files, verify:
 
 - ✅ Nested resources (including singletons) have both collection GET and point GET (PLCY008)
 - ✅ Private endpoint connections: three nested types defined; `publicNetworkAccess` property on parent; common-types used
-- ✅ Collections not modeled as both inline array and nested resource
+- ✅ Collections not modeled as both inline array and nested resource — flag when an inline array in the parent model duplicates a dedicated child-resource endpoint (DUPLICATE-COLLECTION-MODEL, Warning)
 - ✅ Inline arrays not used for unbounded/very large collections; large arrays risk exceeding ARM payload size limits
 
 ### Azure Policy Compatibility
@@ -1228,6 +1300,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Suppressions evaluated per decision framework: approve only for false alarms or pre-existing violations; push to fix for new resources
 - ✅ `suppressions.yaml` entries use narrow, version-scoped globs and clear justifications (same criteria as readme.md)
+- ✅ Suppression `reason` fields do not contain denylist text (`FIXME`, `TODO`, `TBD`, `legacy`, `existing pattern`, `will fix later`, bare rule name, single-word reason) — Blocking for security rules, Warning otherwise (SUPPRESSION-JUSTIFICATION-DENYLIST)
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)
 
 ### Naming

@@ -120,6 +120,30 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 - Do **not** flag PRs that only add or modify example files (`examples/*.json`), `readme.md`, `tspconfig.yaml`, or `.tsp` files — the rule applies only when a new API version directory contains handwritten OpenAPI swagger.
 - The presence of the `x-typespec-generated` marker at the document root is **dispositive** — do **not** emit a Warning, Suggestion, or "informational" TSP-REQUIRED-V1 finding when this marker is present, regardless of any concerns about whether the TypeSpec source is co-located, modified in the PR, or visible to the reviewer.
 
+## 2B. Terminology Refresh on New API Versions (TERMINOLOGY-REFRESH-V1)
+
+**Scope.** This rule applies **only** to new API version folders introduced in the PR (directories that do not exist on the base branch). It **MUST NOT** fire on edits to files inside pre-existing API version directories — updating terminology in a published version is a breaking change for customers who do string matching on descriptions.
+
+**Rule.** When a PR introduces a new API version folder, scan all descriptions, summaries, and doc comments in the new spec files for obsolete Microsoft identity-product terminology. If any of the following legacy terms appear in client-facing strings (descriptions, titles, summaries, operationId display names), flag them as **Warning** with rule ID `TERMINOLOGY-REFRESH-V1`:
+
+| Legacy term (flag if found)              | Correct replacement            |
+| ---------------------------------------- | ------------------------------ |
+| `Azure Active Directory`                 | `Microsoft Entra ID`           |
+| `Azure AD`                               | `Microsoft Entra ID`           |
+| `AAD`                                    | `Microsoft Entra ID`           |
+| `AAD application`                        | `Microsoft Entra application`  |
+| `Azure Active Directory application`     | `Microsoft Entra application`  |
+
+**Severity:** Warning. The new API version is a fresh start; carrying forward legacy terminology is a missed opportunity to align with Microsoft's current branding. However, this is not a contract or correctness issue, so it does not block merging.
+
+**False-positive avoidance.**
+
+- Do **not** flag technical identifiers, code strings, or URL paths that happen to contain these patterns (e.g., `login.microsoftonline.com` or `azure_auth`). Only flag human-readable description text.
+- Do **not** flag pre-existing API version directories even if they contain the legacy terms — the risk of breaking customer tooling that matches on descriptions outweighs the benefit.
+- Do **not** flag TypeSpec source files in the same PR if the OpenAPI output is already corrected — the generated OpenAPI is the artifact that matters.
+
+---
+
 ## 3. Security Definitions
 
 **Reference: [Azure Guidelines — HTTP Headers](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#http-query-parameters-and-header-values)**
@@ -212,6 +236,7 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 - Duration properties **SHOULD** use fixed time intervals with the unit in the property name (e.g. `backupTimeInMinutes`, `ttlSeconds`). Use ISO 8601 durations only when variable calendar intervals are needed.
 - A property that specifies `format` **MUST** also specify the corresponding `type` (e.g., `"format": "int64"` requires `"type": "integer"`; `"format": "uuid"` requires `"type": "string"`). A `format` without a `type` may be ignored by tooling.
 - Boolean properties deserve scrutiny — consider if an extensible enum would be more future-proof.
+- **SCHEMA-BOOLEAN-FOR-ENUM (Warning):** When a new `boolean` property's name implies a state machine or multi-state concept (e.g., names matching patterns like `enable*`, `is*Mode`, `*Action`, `*mode`, `*type`), flag it with a suggestion to use an extensible `enum` instead. A boolean can only ever represent two states; an enum keeps the door open to future states (`Enabled`, `Disabled`, `EnabledWithAudit`, etc.) without a breaking change. This is a **Warning**, not Blocking — the boolean may be intentional if exactly two mutually exclusive states are the long-term contract.
 - Integer properties **SHOULD** specify `minimum` and/or `maximum` constraints when the valid range is known (e.g., percentage fields: `"minimum": 0, "maximum": 100`; port numbers: `"minimum": 1, "maximum": 65535`). This enables client-side validation and improves documentation.
 - Enum values **MUST** be semantically distinct. Do not define overlapping or synonymous values (e.g., `InProgress` and `Running` in the same enum). Each value must represent a clearly different state.
 
@@ -263,6 +288,7 @@ A finding "passes" the rule means the rule does not appear in the findings list 
 
 - Polymorphic types **MUST** use a `discriminator` field. The recommended discriminator name is `kind`.
 - The discriminator field **SHOULD** be an extensible enum (`modelAsString: true`).
+- **SCHEMA-DISCRIMINATOR-MUST-BE-UNION (Blocking):** The discriminator property type **MUST** be an `enum` or a closed union — never an unrestricted `string`. An unrestricted `string` discriminator means any string value is valid, which prevents SDK generators from producing correct typed polymorphic deserialization and blocks Azure Policy from auditing discriminator values. If the current spec uses an unrestricted `string` for the discriminator field (with or without a suppression on the rule), flag this as **Blocking** for new API versions. An extensible enum (`x-ms-enum` with `"modelAsString": true`) is the correct form — it defines the known variants while remaining open to future additions.
 - The discriminator field **SHOULD NOT** be changeable via PATCH/update operations.
 - **SHOULD NOT** return polymorphic properties not defined for the requested api-version.
 - **SHOULD NOT** have array properties containing polymorphic objects on updatable resources (JSON Merge Patch cannot handle this version-resiliently).
@@ -473,6 +499,24 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 - The `type` field **MUST** match the full ARM resource type derived from the `id` (e.g., for nested resources `/.../monitors/{name}/tagRules/{ruleName}`, the `type` must be `Dynatrace.Observability/monitors/tagRules`, not `Dynatrace.Observability/monitors`).
 - For nested resource operations, the response **MUST NOT** use the parent resource's `id`/`name`/`type`.
 
+### 22.2a ARM Resource ID Segment Casing (EX-RESOURCE-ID-CASING)
+
+ARM resource IDs in example request URLs (path parameters) and response body `id` fields **MUST** use the canonical casing for every well-known ARM ID segment. The following casing rules are **mandatory**:
+
+| Segment (case-sensitive)    | Correct                  | Wrong                  |
+| --------------------------- | ------------------------ | ---------------------- |
+| Subscription collection     | `subscriptions`          | `Subscriptions`        |
+| Resource group collection   | `resourceGroups`         | `resourcegroups`       |
+| RP namespace prefix         | `providers`              | `Providers`            |
+| RP namespace (e.g., Compute)| `Microsoft.Compute`      | `microsoft.compute`    |
+
+- The well-known segments `subscriptions`, `resourceGroups`, and `providers` are fixed constants — they **MUST** be lowercase or camelCase exactly as shown above.
+- RP namespace names (e.g., `Microsoft.Compute`, `Microsoft.Network`) **MUST** use the canonical PascalCase registered name for the namespace.
+
+**Severity:** Blocking for new examples in a new API version folder; Warning for examples in existing API version folders. **Rule ID:** `EX-RESOURCE-ID-CASING`
+
+**Fix:** Correct the casing to match the canonical ARM segment names above.
+
 ### 22.3 Request-Response Parameter Consistency (EX-PARAM-CONSISTENCY)
 
 - Response `id` fields **MUST** be consistent with the request parameters. For example, if the request has `"resourceGroupName": "rg1"`, the response `id` must contain `/resourceGroups/rg1/` — not `/resourceGroups/Default/` or any other value.
@@ -494,6 +538,23 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 - LRO polling URLs and `nextLink` URLs **MUST** use `https://management.azure.com/...` — not the legacy `https://management.windowsazure.com/...` endpoint.
 - LRO polling URLs in examples **MUST NOT** use placeholder domains (e.g., `https://contoso.com/operationstatus`). They must use realistic `https://management.azure.com/subscriptions/{subId}/providers/{namespace}/locations/{location}/operationStatuses/{operationId}?api-version={version}` URLs.
 - For LRO POST operations that return a result body (e.g., export actions), examples **SHOULD** include both the `202` (Accepted with polling headers) and `200` (final response with result body) to show the complete LRO lifecycle. Omitting the `200` final response leaves consumers guessing about the result shape.
+
+### 22.13 Non-Production Hosts in Example URLs (EX-EXAMPLE-URL-HOST)
+
+Example URLs (request parameters, response body `id` fields, LRO polling headers, `nextLink` values, and any other URL-valued fields) **MUST NOT** reference non-production Azure management endpoints. The following host patterns are **never acceptable** in example files:
+
+| Forbidden pattern            | Description                             |
+| ---------------------------- | --------------------------------------- |
+| `api-dogfood.*`              | Dogfood / internal pre-prod environment |
+| `*.windows-int.net`          | Integration/INT ring (internal only)    |
+| `*.windows-ppe.net`          | PPE / pre-production environment        |
+| `management.windowsazure.com`| Legacy Azure management endpoint        |
+
+All URLs in examples **MUST** use the canonical production endpoint: `https://management.azure.com/...` (for ARM control-plane) or the service's documented production hostname (for data-plane). Using dogfood or integration URLs in examples breaks customer tooling that copies example payloads verbatim, and exposes internal endpoint topology.
+
+**Severity:** Blocking for new examples. **Rule ID:** `EX-EXAMPLE-URL-HOST`
+
+**Fix:** Replace the non-production host with `management.azure.com` (ARM) or the service's public production hostname.
 
 ### 22.6 Timestamp & Format Consistency (EX-FORMAT)
 
@@ -611,6 +672,7 @@ When reviewing, systematically check:
 - ✅ Valid JSON, correct directory placement, and proper file organization
 - ✅ API version follows `YYYY-MM-DD` format (only `-preview` suffix allowed); no version in URL path
 - ✅ New API versions are authored in TypeSpec (TSP-REQUIRED-V1) — handwritten swagger in new version directories is **Blocking**; updates to handwritten swagger in pre-existing API versions remain permitted
+- ✅ New API version descriptions checked for obsolete Azure Active Directory / AAD terminology — replace with Microsoft Entra ID (TERMINOLOGY-REFRESH-V1, Warning)
 - ✅ No breaking changes vs. previous version of the same API
 - ✅ Security definitions present and applied to all operations
 - ✅ All property names in camelCase, model names in PascalCase
@@ -627,6 +689,8 @@ When reviewing, systematically check:
 - ✅ Every operation, parameter, property, and model has a clear description
 - ✅ Integer types have `format` specified; objects have `"type": "object"`; integers have `minimum`/`maximum` when range is known
 - ✅ Enum values are semantically distinct (no overlapping synonyms)
+- ✅ Boolean properties with state-machine names flagged for extensible enum refactor (SCHEMA-BOOLEAN-FOR-ENUM, Warning)
+- ✅ Polymorphic discriminator field is an enum or union — never an unrestricted string (SCHEMA-DISCRIMINATOR-MUST-BE-UNION, Blocking)
 - ✅ No anonymous body parameter types; no request body on DELETE; no array-typed request bodies; no free-form objects
 - ✅ Consistent resource schema across PUT/GET/PATCH responses
 - ✅ No `null` values in response schemas; no secrets in GET responses
@@ -635,7 +699,8 @@ When reviewing, systematically check:
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- ✅ Example files validated: titles match operations, resource IDs are valid and consistent, no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
+- ✅ Example files validated: titles match operations, resource IDs are valid and consistent with correct casing (`resourceGroups` not `resourcegroups`) (EX-RESOURCE-ID-CASING), no `null` nextLink, LRO headers correct, timestamps in RFC3339, no malformed values, values are realistic and descriptive -- not filler like `aaaa` or `string`, no orphaned example files, adequate coverage for PUT/PATCH/LRO (EX-\*)
+- ✅ Example URLs use production endpoints only — no dogfood (`api-dogfood.*`), INT (`*.windows-int.net`), PPE (`*.windows-ppe.net`), or legacy (`management.windowsazure.com`) hosts (EX-EXAMPLE-URL-HOST, Blocking)
 - ✅ No `$ref` with sibling keywords (SCHEMA-REF-SIBLINGS)
 - ✅ Single common-types version per file; no outdated v2 in new specs (SCHEMA-COMMON-TYPES-VERSION)
 - ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
