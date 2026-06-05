@@ -339,6 +339,12 @@ model ProvisionedClusterProperties {
    * Parameters to be applied to the cluster-autoscaler when auto scaling is enabled for the provisioned cluster.
    */
   autoScalerProfile?: ProvisionedClusterPropertiesAutoScalerProfile;
+
+  /**
+   * Configurations for provisioning the cluster with HTTP proxy servers.
+   */
+  @added(Versions.v2026_06_01_preview)
+  httpProxyConfig?: HttpProxyConfig;
 }
 
 /**
@@ -437,6 +443,37 @@ model NetworkProfileLoadBalancerProfile {
    * Number of HA Proxy load balancer VMs. The default value is 0.
    */
   count?: int32;
+}
+
+/**
+ * Configurations for provisioning the cluster with HTTP proxy servers.
+ */
+model HttpProxyConfig {
+  /**
+   * The HTTP proxy server endpoint to use.
+   */
+  httpProxy?: string;
+
+  /**
+   * The HTTPS proxy server endpoint to use.
+   */
+  httpsProxy?: string;
+
+  /**
+   * The endpoints that should not go through proxy.
+   */
+  noProxy?: string[];
+
+  /**
+   * Alternative CA cert to use for connecting to proxy servers.
+   */
+  trustedCa?: string;
+
+  /**
+   * A read-only list of all endpoints for which traffic should not be sent to the proxy. This list is a superset of noProxy and values injected by the platform.
+   */
+  @visibility(Lifecycle.Read)
+  effectiveNoProxy?: string[];
 }
 
 /**

@@ -2103,6 +2103,39 @@
         }
       }
     },
+    "HttpProxyConfig": {
+      "type": "object",
+      "description": "Configurations for provisioning the cluster with HTTP proxy servers.",
+      "properties": {
+        "httpProxy": {
+          "type": "string",
+          "description": "The HTTP proxy server endpoint to use."
+        },
+        "httpsProxy": {
+          "type": "string",
+          "description": "The HTTPS proxy server endpoint to use."
+        },
+        "noProxy": {
+          "type": "array",
+          "description": "The endpoints that should not go through proxy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trustedCa": {
+          "type": "string",
+          "description": "Alternative CA cert to use for connecting to proxy servers."
+        },
+        "effectiveNoProxy": {
+          "type": "array",
+          "description": "A read-only list of all endpoints for which traffic should not be sent to the proxy. This list is a superset of noProxy and values injected by the platform.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "HybridIdentityMetadata": {
       "type": "object",
       "description": "Defines the hybridIdentityMetadata.",
@@ -2874,6 +2907,10 @@
         "autoScalerProfile": {
           "$ref": "#/definitions/ProvisionedClusterPropertiesAutoScalerProfile",
           "description": "Parameters to be applied to the cluster-autoscaler when auto scaling is enabled for the provisioned cluster."
+        },
+        "httpProxyConfig": {
+          "$ref": "#/definitions/HttpProxyConfig",
+          "description": "Configurations for provisioning the cluster with HTTP proxy servers."
         }
       }
     },
