@@ -8,7 +8,7 @@ using OpenAI;
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/vector_stores")
-@tag("Vector Stores")
+@tag("Vector stores")
 interface VectorStores {
   @tag("Vector stores")
   @list

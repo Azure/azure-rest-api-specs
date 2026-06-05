@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 using OpenAI;
 namespace Azure.AI.Projects;
 @route("openai/v1/fine_tuning")
-@tag("Fine-Tuning")
+@tag("Fine-tuning")
 interface FineTuning {
   @tag("Fine-tuning")
   @list
