@@ -498,7 +498,7 @@ interface VirtualMachineScaleSets {
   >;
 
   /**
-   * Migrates one or more virtual machines in a VM scale set to a different availability zone.
+   * Migrates one or more virtual machines in a VM scale set to an availability zone.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "migrateVMAvailabilityZone is a no-body LRO POST; 202+204 is the accurate contract per LintDiff PostResponseCodes requirements"
   @tag("VirtualMachineScaleSets")
