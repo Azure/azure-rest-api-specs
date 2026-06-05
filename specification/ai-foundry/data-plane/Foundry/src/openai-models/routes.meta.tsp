@@ -3,7 +3,7 @@ import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @@extension(
-  Azure.AI.Projects.Models.listModels,
+  Azure.AI.Projects.OpenAIModels.listModels,
   "x-oaiMeta",
   #{
     name: "List models",
@@ -149,10 +149,10 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(Azure.AI.Projects.Models.listModels, "x-ms-list", true);
+@@extension(Azure.AI.Projects.OpenAIModels.listModels, "x-ms-list", true);
 
 @@extension(
-  Azure.AI.Projects.Models.deleteModel,
+  Azure.AI.Projects.OpenAIModels.deleteModel,
   "x-oaiMeta",
   #{
     name: "Delete a fine-tuned model",
@@ -279,7 +279,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Models.retrieveModel,
+  Azure.AI.Projects.OpenAIModels.retrieveModel,
   "x-oaiMeta",
   #{
     name: "Retrieve model",

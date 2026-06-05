@@ -6,7 +6,7 @@ using OpenAI;
 namespace Azure.AI.Projects;
 @route("openai/v1/models")
 @tag("Models")
-interface Models {
+interface OpenAIModels {
   @list
   @get
   @summary("Lists the currently available models, and provides basic information about each one such as the owner and availability.")
