@@ -4,30 +4,30 @@
 //
 
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
-import "./src/agents/routes.tsp";
-import "./src/evaluation-rules/routes.tsp";
+import "../agents/routes.tsp";
+import "../evaluation-rules/routes.tsp";
 
 // Stable operation (GA routes) without preview features
-import "./src/connections/routes.tsp";
-import "./src/datasets/routes.tsp";
-import "./src/deployments/routes.tsp";
-import "./src/indexes/routes.tsp";
+import "../connections/routes.tsp";
+import "../datasets/routes.tsp";
+import "../deployments/routes.tsp";
+import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
-import "./src/evaluation-taxonomies/routes.tsp";
-import "./src/evaluators/routes.tsp";
-import "./src/insights/routes.tsp";
-import "./src/memory-stores/routes.tsp";
-import "./src/models/routes.tsp";
-import "./src/red-teams/routes.tsp";
-import "./src/routines/routes.tsp";
-import "./src/schedules/routes.tsp";
-import "./src/toolboxes/routes.tsp";
-import "./src/skills/routes.tsp";
-import "./src/agents-session-files/routes.tsp";
-import "./src/data_generation_jobs/routes.tsp";
-//import "./src/evaluation-suites/routes.tsp";
-import "./src/agents-optimization/routes.tsp";
+import "../evaluation-taxonomies/routes.tsp";
+import "../evaluators/routes.tsp";
+import "../insights/routes.tsp";
+import "../memory-stores/routes.tsp";
+import "../models/routes.tsp";
+import "../red-teams/routes.tsp";
+import "../routines/routes.tsp";
+import "../schedules/routes.tsp";
+import "../toolboxes/routes.tsp";
+import "../skills/routes.tsp";
+import "../agents-session-files/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
+//import "../evaluation-suites/routes.tsp";
+import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
