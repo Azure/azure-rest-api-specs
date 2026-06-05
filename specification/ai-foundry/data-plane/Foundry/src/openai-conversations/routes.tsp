@@ -1,185 +1,166 @@
-import "./models.tsp";
-import "../common/models.tsp";
-import "../openai-responses/models.tsp";
-
+import "../common/openai-templates.tsp";
+import "@typespec/http";
+import "@azure-tools/openai-typespec/models/common";
+import "@typespec/openapi";
+import "@azure-tools/openai-typespec/models/conversations";
 using TypeSpec.Http;
+using OpenAI;
 using TypeSpec.OpenAPI;
-
 namespace Azure.AI.Projects;
-
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @route("openai/v1/conversations")
 @tag("Conversations")
 interface Conversations {
-  /**
-   * Creates a new conversation resource.
-   */
-  @summary("Create a conversation")
-  @post
-  @operationId("createConversation")
-  createConversation is OpenAIOperation<
-    OpenAI.CreateConversationBody & UserIsolationKeyHeader,
-    OpenAI.ConversationResource
-  >;
-
-  /**
-   * Modifies the specified conversation's properties.
-   */
-  @summary("Update a conversation")
-  @route("{conversation_id}")
-  @post
-  @operationId("updateConversation")
-  updateConversation is OpenAIOperation<
-    {
-      /** The id of the conversation to update. */
-      @path conversation_id: string;
-
-      ...OpenAI.UpdateConversationBody;
-      ...UserIsolationKeyHeader;
-    },
-    OpenAI.ConversationResource
-  >;
-
-  /**
-   * Retrieves the specified conversation and its metadata.
-   */
-  @summary("Retrieve a conversation")
-  @route("{conversation_id}")
-  @get
-  @operationId("getConversation")
-  getConversation is OpenAIOperation<
-    {
-      /** The id of the conversation to retrieve. */
-      @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
-    },
-    OpenAI.ConversationResource
-  >;
-
-  /**
-   * Removes the specified conversation resource from the current project.
-   */
-  @summary("Delete a conversation")
-  @route("{conversation_id}")
-  @delete
-  @operationId("deleteConversation")
-  deleteConversation is OpenAIOperation<
-    {
-      /** The id of the conversation to delete. */
-      @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
-    },
-    OpenAI.DeletedConversationResource
-  >;
-
-  // Development note: the following listConversations operation is currently Foundry-specific.
-  // It does not exist in the upstream OpenAI API as of 2025-09-23.
-
-  /**
-   * Returns the conversations available in the current project.
-   */
-  @summary("List conversations")
-  @get
-  @operationId("listConversations")
   @list
-  listConversations is OpenAIOperation<
+  @route("{conversation_id}/items")
+  @get
+  @summary("List all items for a conversation with the given ID.")
+  listConversationItems is OpenAIAgentOperation<
     {
-      ...CommonPageQueryParameters;
-      ...AgentNameQueryParam;
-      ...AgentIdQueryParam;
-      ...UserIsolationKeyHeader;
+      /** The ID of the conversation to list items for. */
+      @path
+      conversation_id: string;
+
+      /**A limit on the number of objects to be returned. Limit can range between
+  1 and 100, and the default is 20.*/
+      @query(#{ explode: true })
+      limit?: integer = 20;
+
+      /**The order to return the input items in. Default is `desc`.
+  - `asc`: Return the input items in ascending order.
+  - `desc`: Return the input items in descending order.*/
+      @query(#{ explode: true })
+      order?: OrderEnum;
+
+      /** An item ID to list items after, used in pagination. */
+      @extension("x-ms-list-continuation-token", true)
+      @continuationToken
+      @query(#{ explode: true })
+      after?: string;
+
+      /**Specify additional output data to include in the model response. Currently supported values are:
+  - `web_search_call.action.sources`: Include the sources of the web search tool call.
+  - `code_interpreter_call.outputs`: Includes the outputs of python code execution in code interpreter tool call items.
+  - `computer_call_output.output.image_url`: Include image urls from the computer call output.
+  - `file_search_call.results`: Include the search results of the file search tool call.
+  - `message.input_image.image_url`: Include image urls from the input message.
+  - `message.output_text.logprobs`: Include logprobs with assistant messages.
+  - `reasoning.encrypted_content`: Includes an encrypted version of reasoning tokens in reasoning item outputs. This enables reasoning items to be used in multi-turn conversations when using the Responses API statelessly (like when the `store` parameter is set to `false`, or when an organization is enrolled in the zero data retention program).*/
+      @query(#{ explode: true })
+      include?: IncludeEnum[];
     },
-    AgentsPagedResult<OpenAI.ConversationResource>
+    ConversationItemList
   >;
 
-  /**
-   * Adds one or more items to the specified conversation.
-   */
-  @summary("Create conversation items")
   @route("{conversation_id}/items")
   @post
-  @operationId("createConversationItems")
-  createConversationItems is OpenAIOperation<
+  @summary("Create items in a conversation with the given ID.")
+  createConversationItems is OpenAIAgentOperation<
     {
-      /** The id of the conversation on which the item needs to be created. */
-      @path conversation_id: string;
+      /** The ID of the conversation to add the item to. */
+      @path
+      conversation_id: string;
 
-      /**
-       * Additional fields to include in the response.
-       * See the `include` parameter for listing Conversation items for more information.
-       */
-      @query include?: string[];
+      /**Additional fields to include in the response. See the `include`
+  parameter for [listing Conversation items above](/docs/api-reference/conversations/list-items#conversations_list_items-include) for more information.*/
+      @query(#{ explode: true })
+      include?: IncludeEnum[];
 
-      /** The items to add to the conversation. You may add up to 20 items at a time. */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-      @maxItems(20)
-      items: OpenAI.Item[];
-
-      ...UserIsolationKeyHeader;
+      @body
+      body: CreateConversationItemsParametersBody;
     },
-    OpenAI.ConversationItemList
+    ConversationItemList
   >;
 
-  /**
-   * Retrieves a specific item from the specified conversation.
-   */
-  @summary("Get a conversation item")
   @route("{conversation_id}/items/{item_id}")
-  @get
-  @operationId("getConversationItem")
-  getConversationItem is OpenAIOperation<
+  @delete
+  @summary("Delete an item from a conversation with the given IDs.")
+  deleteConversationItem is OpenAIAgentOperation<
     {
       /** The ID of the conversation that contains the item. */
-      @path conversation_id: string;
+      @path
+      conversation_id: string;
 
-      /** The id of the conversation item to retrieve. */
-      @path item_id: string;
-
-      ...UserIsolationKeyHeader;
+      /** The ID of the item to delete. */
+      @path
+      item_id: string;
     },
-    OpenAI.OutputItem
+    ConversationResource
   >;
 
-  /**
-   * Removes the specified item from a conversation.
-   */
-  @summary("Delete a conversation item")
   @route("{conversation_id}/items/{item_id}")
-  @delete
-  @operationId("deleteConversationItem")
-  deleteConversationItem is OpenAIOperation<
+  @get
+  @summary("Get a single item from a conversation with the given IDs.")
+  getConversationItem is OpenAIAgentOperation<
     {
-      /** The id of the conversation on which the item needs to be deleted from. */
-      @path conversation_id: string;
+      /** The ID of the conversation that contains the item. */
+      @path
+      conversation_id: string;
 
-      /** The id of the conversation item to delete. */
-      @path item_id: string;
+      /** The ID of the item to retrieve. */
+      @path
+      item_id: string;
 
-      ...UserIsolationKeyHeader;
+      /**Additional fields to include in the response. See the `include`
+  parameter for [listing Conversation items above](/docs/api-reference/conversations/list-items#conversations_list_items-include) for more information.*/
+      @query(#{ explode: true })
+      include?: IncludeEnum[];
     },
-    OpenAI.ConversationResource
+    ConversationItem
   >;
 
-  /**
-   * Returns the items belonging to the specified conversation.
-   */
-  @summary("List conversation items")
-  @route("{conversation_id}/items")
-  @get
-  @operationId("listConversationItems")
-  @list
-  listConversationItems is OpenAIOperation<
+  @post
+  @summary("Create a conversation.")
+  createConversation is OpenAIAgentOperation<
     {
-      /** The id of the conversation on which the items needs to be listed. */
-      @path conversation_id: string;
-
-      ...CommonPageQueryParameters;
-      ...ItemTypeQueryParameter;
-      ...UserIsolationKeyHeader;
+      @body
+      body: CreateConversationBody;
     },
-    AgentsPagedResult<OpenAI.OutputItem>
+    ConversationResource
+  >;
+
+  @route("{conversation_id}")
+  @delete
+  @summary("Delete a conversation. Items in the conversation will not be deleted.")
+  deleteConversation is OpenAIAgentOperation<
+    {
+      /** The ID of the conversation to delete. */
+      @path
+      conversation_id: string;
+    },
+    DeletedConversationResource
+  >;
+
+  @route("{conversation_id}")
+  @get
+  @summary("Get a conversation")
+  getConversation is OpenAIAgentOperation<
+    {
+      /** The ID of the conversation to retrieve. */
+      @path
+      conversation_id: string;
+    },
+    ConversationResource
+  >;
+
+  @route("{conversation_id}")
+  @post
+  @summary("Update a conversation")
+  updateConversation is OpenAIAgentOperation<
+    {
+      /** The ID of the conversation to update. */
+      @path
+      conversation_id: string;
+
+      @body
+      body: UpdateConversationBody;
+    },
+    ConversationResource
+  >;
+
+  @operationId("listConversations")
+  @get
+  listConversations is OpenAIAgentFilteredPagedOperation<
+    {},
+    ConversationResource
   >;
 }
