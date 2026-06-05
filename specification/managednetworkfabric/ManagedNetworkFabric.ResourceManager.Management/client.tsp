@@ -4,65 +4,117 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.ManagedNetworkFabric;
 
-@@clientName(Microsoft.ManagedNetworkFabric.IPAddressType,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.IPAddressType,
   "IpAddressType",
   "java"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric.NetworkFabricProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkFabricProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.NetworkFabricPatchProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkFabricPatchProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.BgpConfiguration.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpConfiguration.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.fabricASN,
   "fabricAsn",
   "java"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric.BgpConfiguration.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpConfiguration.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.peerASN,
   "peerAsn",
   "java"
+);
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
+  "hostname",
+  "java"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
+  "hostname",
+  "java"
+);
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric,
+  "ManagedNetworkFabricMgmtClient",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
+  "StaticRoutePolicy",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicyPatch,
+  "StaticRoutePolicyPatch",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainProperties.staticRouteRoutePolicy,
+  "staticRoutePolicy",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainPatchProperties.staticRouteRoutePolicy,
+  "staticRoutePolicy",
+  "python"
 );

@@ -377,7 +377,8 @@ interface BillingRoleDefinitionByEnrollmentAccount {
   >;
 }
 
-@@doc(BillingRoleDefinition.name,
+@@doc(
+  BillingRoleDefinition.name,
   "The ID that uniquely identifies a role definition."
 );
 @@doc(BillingRoleDefinition.properties, "The properties of a role definition.");

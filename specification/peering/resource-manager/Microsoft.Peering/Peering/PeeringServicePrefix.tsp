@@ -65,9 +65,11 @@ interface PeeringServicePrefixes {
 }
 
 @@doc(PeeringServicePrefix.name, "The name of the prefix.");
-@@doc(PeeringServicePrefix.properties,
+@@doc(
+  PeeringServicePrefix.properties,
   "Gets or sets the peering prefix properties."
 );
-@@doc(PeeringServicePrefixes.createOrUpdate::parameters.resource,
+@@doc(
+  PeeringServicePrefixes.createOrUpdate::parameters.resource,
   "The properties needed to create a prefix."
 );

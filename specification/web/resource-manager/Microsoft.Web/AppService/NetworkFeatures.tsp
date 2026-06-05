@@ -110,6 +110,7 @@ interface NetworkFeaturesSlotOperationGroup {
     OverrideErrorType = DefaultErrorResponse
   >;
 }
-@@doc(NetworkFeatures.properties,
+@@doc(
+  NetworkFeatures.properties,
   "NetworkFeatures resource specific properties"
 );

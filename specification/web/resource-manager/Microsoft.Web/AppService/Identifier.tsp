@@ -194,15 +194,19 @@ interface IdentifierOperationGroup {
 
 @@doc(Identifier.name, "Name of domain ownership identifier.");
 @@doc(Identifier.properties, "Identifier resource specific properties");
-@@doc(Identifiers.createOrUpdateDomainOwnershipIdentifier::parameters.resource,
+@@doc(
+  Identifiers.createOrUpdateDomainOwnershipIdentifier::parameters.resource,
   "A JSON representation of the domain ownership properties."
 );
-@@doc(Identifiers.updateDomainOwnershipIdentifier::parameters.properties,
+@@doc(
+  Identifiers.updateDomainOwnershipIdentifier::parameters.properties,
   "A JSON representation of the domain ownership properties."
 );
-@@doc(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot::parameters.resource,
+@@doc(
+  IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot::parameters.resource,
   "A JSON representation of the domain ownership properties."
 );
-@@doc(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot::parameters.properties,
+@@doc(
+  IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot::parameters.properties,
   "A JSON representation of the domain ownership properties."
 );

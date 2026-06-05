@@ -33,13 +33,16 @@ model TrustedAccessRoleBinding
 
 @@maxLength(TrustedAccessRoleBinding.name, 24);
 @@minLength(TrustedAccessRoleBinding.name, 1);
-@@doc(TrustedAccessRoleBinding.name,
+@@doc(
+  TrustedAccessRoleBinding.name,
   "The name of trusted access role binding."
 );
-@@doc(TrustedAccessRoleBinding.properties,
+@@doc(
+  TrustedAccessRoleBinding.properties,
   "Properties for trusted access role binding"
 );
-@@doc(TrustedAccessRoleBindings.createOrUpdate::parameters.resource,
+@@doc(
+  TrustedAccessRoleBindings.createOrUpdate::parameters.resource,
   "A trusted access role binding"
 );
 

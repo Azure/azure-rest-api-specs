@@ -7,23 +7,28 @@ using Playwright.Management;
 @@clientName(Playwright.Management, "PlaywrightMgmtClient", "python");
 @@clientName(Playwright.Management, "PlaywrightManagementClient", "javascript");
 
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "PlaywrightNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "PlaywrightNameAvailabilityContent",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "PlaywrightNameUnavailableReason",
   "csharp"
 );
-@@clientName(PlaywrightWorkspaces.checkNameAvailability,
+@@clientName(
+  PlaywrightWorkspaces.checkNameAvailability,
   "CheckPlaywrightNameAvailability",
   "csharp"
 );

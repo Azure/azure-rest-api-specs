@@ -37,7 +37,8 @@ alias DeploymentStacksWhatIfResultNameParameter = ResourceNameParameter<
 
 @@maxLength(DeploymentStacksWhatIfResult.name, 90);
 @@minLength(DeploymentStacksWhatIfResult.name, 1);
-@@doc(DeploymentStacksWhatIfResult.name,
+@@doc(
+  DeploymentStacksWhatIfResult.name,
   "Name of the deployment stack what-if result."
 );
 

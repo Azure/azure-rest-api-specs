@@ -34,14 +34,18 @@ interface GenerateDetailedCostReportOperationResults {
   get is Extension.Read<
     Extension.ScopeParameter,
     GenerateDetailedCostReportOperationResult,
-    Response = ArmResponse<GenerateDetailedCostReportOperationResult> | ArmAcceptedResponse,
+    Response =
+      | ArmResponse<GenerateDetailedCostReportOperationResult>
+      | ArmAcceptedResponse,
     Error = ErrorResponse
   >;
 }
 
-@@doc(GenerateDetailedCostReportOperationResult.name,
+@@doc(
+  GenerateDetailedCostReportOperationResult.name,
   "The target operation Id."
 );
-@@doc(GenerateDetailedCostReportOperationResult.properties,
+@@doc(
+  GenerateDetailedCostReportOperationResult.properties,
   "The properties of the resource generated."
 );

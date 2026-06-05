@@ -156,33 +156,40 @@ interface Report {
   >;
 }
 
-@@doc(Report.createOrUpdate::parameters.resource,
+@@doc(
+  Report.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Report.createOrUpdate::parameters.resource,
+@@encodedName(
+  Report.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );
 
 @@clientName(Report.createOrUpdate::parameters.resource, "properties");
 
-@@doc(Report.update::parameters.properties,
+@@doc(
+  Report.update::parameters.properties,
   "Parameters for the create or update operation"
 );
-@@doc(Report.syncCertRecord::parameters.body,
+@@doc(
+  Report.syncCertRecord::parameters.body,
   "Parameters for synchronize certification record operation"
 );
-@@doc(Report.checkNameAvailability::parameters.body,
+@@doc(
+  Report.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
 );
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Report.update::parameters.properties,
+@@encodedName(
+  Report.update::parameters.properties,
   "application/json",
   "parameters"
 );
 
-@@encodedName(Report.syncCertRecord::parameters.body,
+@@encodedName(
+  Report.syncCertRecord::parameters.body,
   "application/json",
   "parameters"
 );

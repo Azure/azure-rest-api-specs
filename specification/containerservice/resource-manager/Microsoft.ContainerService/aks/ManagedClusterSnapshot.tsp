@@ -17,7 +17,7 @@ namespace Microsoft.ContainerService;
 /**
  * A managed cluster snapshot resource.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_02_preview)
 model ManagedClusterSnapshot
   is Azure.ResourceManager.TrackedResource<ManagedClusterSnapshotProperties> {
   ...ResourceNameParameter<
@@ -31,18 +31,21 @@ model ManagedClusterSnapshot
 @@maxLength(ManagedClusterSnapshot.name, 63);
 @@minLength(ManagedClusterSnapshot.name, 1);
 @@doc(ManagedClusterSnapshot.name, "The name of the managed cluster resource.");
-@@doc(ManagedClusterSnapshot.properties,
+@@doc(
+  ManagedClusterSnapshot.properties,
   "Properties of a managed cluster snapshot."
 );
-@@doc(ManagedClusterSnapshots.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedClusterSnapshots.createOrUpdate::parameters.resource,
   "The managed cluster snapshot to create or update."
 );
-@@doc(ManagedClusterSnapshots.updateTags::parameters.properties,
+@@doc(
+  ManagedClusterSnapshots.updateTags::parameters.properties,
   "Parameters supplied to the Update managed cluster snapshot Tags operation."
 );
 
 @armResourceOperations
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_02_preview)
 interface ManagedClusterSnapshots {
   /**
    * Gets a managed cluster snapshot.
@@ -87,7 +90,7 @@ interface ManagedClusterSnapshots {
  * Properties for a managed cluster snapshot.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_02_preview)
 model ManagedClusterSnapshotProperties {
   /**
    * CreationData to be used to specify the source resource ID to create this snapshot.
@@ -109,7 +112,7 @@ model ManagedClusterSnapshotProperties {
 /**
  * managed cluster properties for snapshot, these properties are read only.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_02_preview)
 model ManagedClusterPropertiesForSnapshot {
   /**
    * The current kubernetes version.
@@ -139,7 +142,7 @@ model ManagedClusterPropertiesForSnapshot {
 /**
  * network profile for managed cluster snapshot, these properties are read only.
  */
-@added(Versions.v2026_03_02_preview)
+@added(Versions.v2026_04_02_preview)
 model NetworkProfileForSnapshot {
   /**
    * networkPlugin for managed cluster snapshot.
