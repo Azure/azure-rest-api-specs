@@ -517,4 +517,2261 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "CassandraClusterDataCenterNodeItem",
   "python"
 );
+
+// C# client name customizations for backward compatibility.
+@@scope(DatabaseAccounts.getReadOnlyKeys, "!csharp");
+
+@@clientName(ApiType, "CosmosDBApiType", "csharp");
+@@clientName(AuthenticationMethod, "CassandraAuthenticationMethod", "csharp");
+@@clientName(AutoReplicate, "CassandraAutoReplicateForm", "csharp");
+@@clientName(BackupInformation, "CosmosDBBackupInformation", "csharp");
+@@clientName(BackupPolicy, "CosmosDBAccountBackupPolicy", "csharp");
+@@clientName(BackupPolicy.type, "BackupPolicyType", "csharp");
+@@clientName(BackupResource, "CassandraClusterBackupResourceInfo", "csharp");
+@@clientName(BackupSchedule, "CassandraClusterBackupSchedule", "csharp");
+@@clientName(BackupState, "CassandraClusterBackupState", "csharp");
+@@clientName(
+  BackupStorageRedundancy,
+  "CosmosDBBackupStorageRedundancy",
+  "csharp"
+);
+@@clientName(Certificate, "CassandraCertificate", "csharp");
+@@clientName(
+  ClientEncryptionIncludedPath,
+  "CosmosDBClientEncryptionIncludedPath",
+  "csharp"
+);
+@@clientName(
+  ClientEncryptionPolicy,
+  "CosmosDBClientEncryptionPolicy",
+  "csharp"
+);
+@@clientName(ClusterKey, "CassandraClusterKey", "csharp");
+@@clientName(Column, "CassandraColumn", "csharp");
+@@clientName(Column.type, "CassandraColumnType", "csharp");
+@@clientName(CommandOutput, "CassandraCommandOutput", "csharp");
+@@clientName(
+  ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems,
+  "CassandraClusterDataCenterNodeItem",
+  "csharp"
+);
+@@clientName(
+  ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems.hostID,
+  "HostId",
+  "csharp"
+);
+@@clientName(CompositePath, "CosmosDBCompositePath", "csharp");
+@@clientName(ConnectionError, "CassandraConnectionError", "csharp");
+@@clientName(ContainerPartitionKey, "CosmosDBContainerPartitionKey", "csharp");
+@@clientName(CopyJobProperties.error, "ErrorResponse", "csharp");
+@@clientName(CreateMode, "CosmosDBAccountCreateMode", "csharp");
+@@clientName(
+  DatabaseAccountConnectionString,
+  "CosmosDBAccountConnectionString",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionListMetrics,
+  "GetMetricsCollections",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionListUsages,
+  "GetUsagesCollections",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionPartitionListMetrics,
+  "GetMetricsCollectionPartitions",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionPartitionListUsages,
+  "GetUsagesCollectionPartitions",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionPartitionRegionListMetrics,
+  "GetMetricsCollectionPartitionRegions",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionRegionListMetrics,
+  "GetMetricsCollectionRegions",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.databaseAccountRegionListMetrics,
+  "GetMetricsDatabaseAccountRegions",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.databaseListMetrics,
+  "GetMetricsDatabases",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.databaseListUsages,
+  "GetUsagesDatabases",
+  "csharp"
+);
+@@clientName(DatabaseAccounts.listMetrics, "GetMetrics", "csharp");
+@@clientName(DatabaseAccounts.listUsages, "GetUsages", "csharp");
+@@clientName(
+  DatabaseAccounts.partitionKeyRangeIdListMetrics,
+  "GetMetricsPartitionKeyRangeIds",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
+  "GetMetricsPartitionKeyRangeIdRegions",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.percentileListMetrics,
+  "GetMetricsPercentiles",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.percentileSourceTargetListMetrics,
+  "GetMetricsPercentileSourceTargets",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.percentileTargetListMetrics,
+  "GetMetricsPercentileTargets",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.collectionListMetricDefinitions,
+  "GetMetricDefinitionsCollections",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccounts.databaseListMetricDefinitions,
+  "GetMetricDefinitionsDatabases",
+  "csharp"
+);
+@@clientName(DatabaseRestoreResource, "DatabaseRestoreResourceInfo", "csharp");
+@@clientName(DataType, "CosmosDBDataType", "csharp");
+@@clientName(ExcludedPath, "CosmosDBExcludedPath", "csharp");
+@@clientName(FailoverPolicies, "CosmosDBFailoverPolicies", "csharp");
+@@clientName(FailoverPolicy, "CosmosDBFailoverPolicy", "csharp");
+@@clientName(IncludedPath, "CosmosDBIncludedPath", "csharp");
+@@clientName(IndexKind, "CosmosDBIndexKind", "csharp");
+@@clientName(Indexes, "CosmosDBPathIndexes", "csharp");
+@@clientName(IndexingMode, "CosmosDBIndexingMode", "csharp");
+@@clientName(IndexingPolicy, "CosmosDBIndexingPolicy", "csharp");
+@@clientName(IpAddressOrRange, "CosmosDBIPAddressOrRange", "csharp");
+@@clientName(IpAddressOrRange.ipAddressOrRange, "IPAddressOrRange", "csharp");
+@@clientName(MetricAvailability, "CosmosDBMetricAvailability", "csharp");
+@@clientName(MetricDefinition, "CosmosDBMetricDefinition", "csharp");
+@@clientName(MetricName, "CosmosDBMetricName", "csharp");
+@@clientName(MetricValue, "CosmosDBMetricValue", "csharp");
+@@clientName(MongoRoleDefinitionType, "MongoDBRoleDefinitionType", "csharp");
+@@clientName(NodeState, "CassandraNodeState", "csharp");
+@@clientName(OperationType, "CosmosDBOperationType", "csharp");
+@@clientName(PartitionKind, "CosmosDBPartitionKind", "csharp");
+@@clientName(PercentileMetric, "CosmosDBPercentileMetric", "csharp");
+@@clientName(
+  GraphAPIComputeServiceResourceCreateUpdateProperties,
+  "GraphApiComputeServiceResourceCreateUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  PhysicalPartitionStorageInfoCollection.physicalPartitionStorageInfoCollection,
+  "PhysicalPartitionStorageInfoItems",
+  "csharp"
+);
+@@clientName(
+  PrimaryAggregationType,
+  "CosmosDBMetricPrimaryAggregationType",
+  "csharp"
+);
+@@clientName(PublicNetworkAccess, "CosmosDBPublicNetworkAccess", "csharp");
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableGremlinDatabasesList,
+  "GetRestorableGremlinDatabases",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableGremlinGraphsList,
+  "GetRestorableGremlinGraphs",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.list,
+  "GetRestorableSqlDatabases",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableGremlinResourcesList,
+  "GetRestorableGremlinResources",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
+  "GetRestorableMongoDBCollections",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
+  "GetRestorableMongoDBDatabases",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
+  "GetAllRestorableMongoDBResourceData",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableSqlContainersList,
+  "GetRestorableSqlContainers",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
+  "GetAllRestorableSqlResourceData",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableTableResourcesList,
+  "GetRestorableTableResources",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableTablesList,
+  "GetRestorableTables",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbCollectionPropertiesResource,
+  "ExtendedRestorableMongoDBCollectionResourceInfo",
+  "csharp"
+);
+@@clientName(Role, "MongoDBRole", "csharp");
+@@clientName(ServerVersion, "CosmosDBServerVersion", "csharp");
+@@clientName(ServiceSize, "CosmosDBServiceSize", "csharp");
+@@clientName(ServiceType, "CosmosDBServiceType", "csharp");
+@@clientName(ServiceType.GraphAPICompute, "GraphApiCompute", "csharp");
+@@clientName(SpatialType, "CosmosDBSpatialType", "csharp");
+@@clientName(Status, "CosmosDBStatus", "csharp");
+@@clientName(Type, "CosmosDBType", "csharp");
+@@clientName(UniqueKey, "CosmosDBUniqueKey", "csharp");
+@@clientName(UniqueKeyPolicy, "CosmosDBUniqueKeyPolicy", "csharp");
+@@clientName(UnitType, "CosmosDBMetricUnitType", "csharp");
+@@clientName(VectorEmbedding, "CosmosDBVectorEmbedding", "csharp");
+@@clientName(VectorIndex, "CosmosDBVectorIndex", "csharp");
+@@clientName(VectorIndex.type, "IndexType", "csharp");
+@@clientName(VirtualNetworkRule, "CosmosDBVirtualNetworkRule", "csharp");
+@@clientName(
+  VirtualNetworkRule.ignoreMissingVNetServiceEndpoint,
+  "IgnoreMissingVnetServiceEndpoint ",
+  "csharp"
+);
+@@clientName(AccountKeyMetadata.generationTime, "GeneratedOn", "csharp");
+@@clientName(
+  AutoscaleSettingsResource,
+  "AutoscaleSettingsResourceInfo",
+  "csharp"
+);
+@@clientName(
+  AutoUpgradePolicyResource,
+  "AutoUpgradePolicyResourceInfo",
+  "csharp"
+);
+@@clientName(AzureConnectionType, "ServiceConnectionType", "csharp");
+@@clientName(AzureConnectionType.VPN, "Vpn", "csharp");
+@@clientName(Capacity, "CosmosDBAccountCapacity", "csharp");
+@@clientName(
+  CassandraKeyspaceResource,
+  "CassandraKeyspaceResourceInfo",
+  "csharp"
+);
+@@clientName(CassandraKeyspaceResource.id, "KeyspaceName", "csharp");
+@@clientName(CassandraTableResource, "CassandraTableResourceInfo", "csharp");
+@@clientName(CassandraTableResource.id, "TableName", "csharp");
+@@clientName(
+  ClientEncryptionKeyGetPropertiesResource,
+  "CosmosDBSqlClientEncryptionKeyProperties",
+  "csharp"
+);
+@@clientName(
+  ClientEncryptionKeyGetResults,
+  "CosmosDBSqlClientEncryptionKey",
+  "csharp"
+);
+@@clientName(
+  ClientEncryptionKeyResource,
+  "CosmosDBSqlClientEncryptionKeyResourceInfo",
+  "csharp"
+);
+@@clientName(ClusterResource, "CassandraCluster", "csharp");
+@@clientName(ClusterResourceProperties, "CassandraClusterProperties", "csharp");
+@@clientName(
+  ClusterResourceProperties.cassandraAuditLoggingEnabled,
+  "IsCassandraAuditLoggingEnabled",
+  "csharp"
+);
+@@clientName(ClusterResourceProperties.deallocated, "IsDeallocated", "csharp");
+@@clientName(
+  ClusterResourceProperties.repairEnabled,
+  "IsRepairEnabled",
+  "csharp"
+);
+@@clientName(ClusterType, "CassandraClusterType", "csharp");
+@@clientName(CommandPostBody, "CassandraCommandPostBody", "csharp");
+@@clientName(CommandPostBody.readwrite, "AllowWrite", "csharp");
+@@clientName(CommandPublicResource, "CassandraClusterCommand", "csharp");
+@@clientName(CommandStatus, "CassandraClusterCommandStatus", "csharp");
+@@clientName(ConnectionState, "CassandraConnectionState", "csharp");
+@@clientName(ContainerPartitionKey.systemKey, "IsSystemKey", "csharp");
+@@clientName(CorsPolicy, "CosmosDBAccountCorsPolicy", "csharp");
+@@clientName(
+  DatabaseAccountGetProperties.enableAnalyticalStorage,
+  "IsAnalyticalStorageEnabled",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccountGetProperties.enableFreeTier,
+  "IsFreeTierEnabled",
+  "csharp"
+);
+@@clientName(DatabaseAccountGetProperties.ipRules, "IPRules", "csharp");
+@@clientName(
+  DatabaseAccountCreateUpdateProperties.enableAnalyticalStorage,
+  "IsAnalyticalStorageEnabled",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccountCreateUpdateProperties.enableFreeTier,
+  "IsFreeTierEnabled",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccountCreateUpdateProperties.ipRules,
+  "IPRules",
+  "csharp"
+);
+@@clientName(DatabaseAccountKind, "CosmosDBAccountKind", "csharp");
+@@clientName(
+  DatabaseAccountUpdateProperties.enableAnalyticalStorage,
+  "IsAnalyticalStorageEnabled",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccountUpdateProperties.enableFreeTier,
+  "IsFreeTierEnabled",
+  "csharp"
+);
+@@clientName(DatabaseAccountUpdateProperties.ipRules, "IPRules", "csharp");
+@@clientName(DataCenterResource, "CassandraDataCenter", "csharp");
+@@clientName(
+  DataCenterResourceProperties,
+  "CassandraDataCenterProperties",
+  "csharp"
+);
+@@clientName(
+  DataCenterResourceProperties.availabilityZone,
+  "DoesSupportAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  DataCenterResourceProperties.privateEndpointIpAddress,
+  "PrivateEndpointIPAddress",
+  "csharp"
+);
+@@clientName(
+  DataTransferRegionalServiceResource,
+  "DataTransferRegionalService",
+  "csharp"
+);
+@@clientName(
+  DataTransferServiceResourceProperties,
+  "DataTransferServiceProperties",
+  "csharp"
+);
+@@clientName(DistanceFunction, "VectorDistanceFunction", "csharp");
+@@clientName(FleetResource, "CosmosDBFleet", "csharp");
+@@clientName(
+  FleetspaceAccountPropertiesGlobalDatabaseAccountProperties,
+  "CosmosDBFleetspaceAccountConfiguration",
+  "csharp"
+);
+@@clientName(FleetspaceAccountResource, "CosmosDBFleetspaceAccount", "csharp");
+@@clientName(
+  FleetspacePropertiesFleetspaceApiKind,
+  "CosmosDBFleetspaceApiKind",
+  "csharp"
+);
+@@clientName(
+  FleetspacePropertiesServiceTier,
+  "CosmosDBFleetspaceServiceTier",
+  "csharp"
+);
+@@clientName(
+  FleetspacePropertiesThroughputPoolConfiguration,
+  "CosmosDBFleetspaceThroughputPoolConfiguration",
+  "csharp"
+);
+@@clientName(FleetspaceResource, "CosmosDBFleetspace", "csharp");
+@@clientName(
+  GraphAPIComputeRegionalServiceResource,
+  "GraphApiComputeRegionalService",
+  "csharp"
+);
+@@clientName(
+  GraphAPIComputeServiceResourceProperties,
+  "GraphApiComputeServiceProperties",
+  "csharp"
+);
+@@clientName(GremlinDatabaseResource, "GremlinDatabaseResourceInfo", "csharp");
+@@clientName(GremlinDatabaseResource.id, "DatabaseName", "csharp");
+@@clientName(
+  GremlinDatabaseRestoreResource,
+  "GremlinDatabaseRestoreResourceInfo",
+  "csharp"
+);
+@@clientName(GremlinGraphResource, "GremlinGraphResourceInfo", "csharp");
+@@clientName(GremlinGraphResource.id, "GraphName", "csharp");
+@@clientName(IndexingPolicy.automatic, "IsAutomatic", "csharp");
+@@clientName(KeyKind, "CosmosDBAccountKeyKind", "csharp");
+@@clientName(ListClusters, "CassandraClusterListResult", "csharp");
+@@clientName(ListDataCenters, "CassandraDataCenterListResult", "csharp");
+@@clientName(LocationProperties, "CosmosDBLocationProperties", "csharp");
+@@clientName(
+  LocationProperties.supportsAvailabilityZone,
+  "DoesSupportAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  ManagedCassandraProvisioningState,
+  "CassandraProvisioningState",
+  "csharp"
+);
+@@clientName(ManagedCassandraReaperStatus, "CassandraReaperStatus", "csharp");
+@@clientName(ManagedCassandraReaperStatus.healthy, "IsHealthy", "csharp");
+@@clientName(
+  MaterializedViewsBuilderRegionalServiceResource,
+  "MaterializedViewsBuilderRegionalService",
+  "csharp"
+);
+@@clientName(
+  MaterializedViewsBuilderServiceResourceProperties,
+  "MaterializedViewsBuilderServiceProperties",
+  "csharp"
+);
+@@clientName(MinimalTlsVersion, "CosmosDBMinimalTlsVersion", "csharp");
+@@clientName(
+  MongoDBCollectionResource,
+  "MongoDBCollectionResourceInfo",
+  "csharp"
+);
+@@clientName(MongoDBCollectionResource.id, "CollectionName", "csharp");
+@@clientName(MongoDBDatabaseResource, "MongoDBDatabaseResourceInfo", "csharp");
+@@clientName(MongoDBDatabaseResource.id, "DatabaseName", "csharp");
+@@clientName(MongoIndex, "MongoDBIndex", "csharp");
+@@clientName(MongoIndex.key, "Key", "csharp");
+@@clientName(MongoIndexOptions, "MongoDBIndexConfig", "csharp");
+@@clientName(MongoIndexOptions.unique, "IsUnique", "csharp");
+@@clientName(MongoRoleDefinitionGetResults, "MongoDBRoleDefinition", "csharp");
+@@clientName(MongoRoleDefinitionResource.type, "RoleDefinitionType", "csharp");
+@@clientName(
+  MongoRoleDefinitionListResult,
+  "MongoDBRoleDefinitionListResult",
+  "csharp"
+);
+@@clientName(MongoUserDefinitionGetResults, "MongoDBUserDefinition", "csharp");
+@@clientName(
+  MongoUserDefinitionListResult,
+  "MongoDBUserDefinitionListResult",
+  "csharp"
+);
+@@clientName(OptionsResource, "CosmosDBBaseConfig", "csharp");
+@@clientName(Privilege, "MongoDBPrivilege", "csharp");
+@@clientName(PrivilegeResource, "MongoDBPrivilegeResourceInfo", "csharp");
+@@clientName(PrivilegeResource.db, "DBName", "csharp");
+@@clientName(RegionalServiceResource, "CosmosDBRegionalService", "csharp");
+@@clientName(
+  RestorableGremlinDatabasePropertiesResource,
+  "ExtendedRestorableGremlinDatabaseResourceInfo",
+  "csharp"
+);
+@@clientName(
+  RestorableGremlinDatabasePropertiesResource.ownerId,
+  "DatabaseName",
+  "csharp"
+);
+@@clientName(
+  RestorableGremlinDatabasePropertiesResource.ownerResourceId,
+  "DatabaseId",
+  "csharp"
+);
+@@clientName(
+  RestorableGremlinGraphPropertiesResource,
+  "ExtendedRestorableGremlinGraphResourceInfo",
+  "csharp"
+);
+@@clientName(
+  RestorableGremlinGraphPropertiesResource.ownerId,
+  "GraphName",
+  "csharp"
+);
+@@clientName(
+  RestorableGremlinGraphPropertiesResource.ownerResourceId,
+  "GraphId",
+  "csharp"
+);
+@@clientName(
+  RestorableLocationResource,
+  "RestorableLocationResourceInfo",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbCollectionPropertiesResource.ownerId,
+  "CollectionName",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbCollectionPropertiesResource.ownerResourceId,
+  "CollectionId",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbDatabasePropertiesResource,
+  "ExtendedRestorableMongoDBDatabaseResourceInfo",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbDatabasePropertiesResource.ownerId,
+  "DatabaseName",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbDatabasePropertiesResource.ownerResourceId,
+  "DatabaseId",
+  "csharp"
+);
+@@clientName(
+  RestorableSqlContainerPropertiesResource,
+  "ExtendedRestorableSqlContainerResourceInfo",
+  "csharp"
+);
+@@clientName(
+  RestorableSqlContainerPropertiesResource.ownerId,
+  "ContainerName",
+  "csharp"
+);
+@@clientName(
+  RestorableSqlContainerPropertiesResource.ownerResourceId,
+  "ContainerId",
+  "csharp"
+);
+@@clientName(
+  RestorableSqlDatabasePropertiesResource,
+  "ExtendedRestorableSqlDatabaseResourceInfo",
+  "csharp"
+);
+@@clientName(
+  RestorableSqlDatabasePropertiesResource.ownerId,
+  "DatabaseName",
+  "csharp"
+);
+@@clientName(
+  RestorableSqlDatabasePropertiesResource.ownerResourceId,
+  "DatabaseId",
+  "csharp"
+);
+@@clientName(
+  RestorableTablePropertiesResource,
+  "ExtendedRestorableTableResourceInfo",
+  "csharp"
+);
+@@clientName(RestorableTablePropertiesResource.ownerId, "TableName", "csharp");
+@@clientName(
+  RestorableTablePropertiesResource.ownerResourceId,
+  "TableId",
+  "csharp"
+);
+@@clientName(
+  RestorableTableResourcesGetResult,
+  "RestorableTableResourceData",
+  "csharp"
+);
+@@clientName(RestorableTableResourcesGetResult.type, "ResourceType", "csharp");
+@@clientName(RestoreMode, "CosmosDBAccountRestoreMode", "csharp");
+@@clientName(RestoreParameters, "CosmosDBAccountRestoreParameters", "csharp");
+@@clientName(
+  RestoreParametersBase.restoreWithTtlDisabled,
+  "IsRestoreWithTtlDisabled",
+  "csharp"
+);
+@@clientName(Role.db, "DBName", "csharp");
+@@clientName(RoleDefinitionType, "CosmosDBSqlRoleDefinitionType", "csharp");
+@@clientName(SeedNode, "CassandraDataCenterSeedNode", "csharp");
+@@clientName(SeedNode.ipAddress, "IPAddress", "csharp");
+@@clientName(ServiceResource, "CosmosDBService", "csharp");
+@@clientName(
+  ServiceResourceCreateUpdateParameters,
+  "CosmosDBServiceCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(ServiceResourceListResult, "CosmosDBServiceListResult", "csharp");
+@@clientName(ServiceResourceProperties, "CosmosDBServiceProperties", "csharp");
+@@clientName(ServiceStatus, "CosmosDBServiceStatus", "csharp");
+@@clientName(
+  SqlContainerListResult,
+  "CosmosDBSqlContainerListResult",
+  "csharp"
+);
+@@clientName(
+  SqlContainerResource,
+  "CosmosDBSqlContainerResourceInfo",
+  "csharp"
+);
+@@clientName(SqlContainerResource.id, "containerName", "csharp");
+@@clientName(SqlDatabaseListResult, "CosmosDBSqlDatabaseListResult", "csharp");
+@@clientName(SqlDatabaseResource, "CosmosDBSqlDatabaseResourceInfo", "csharp");
+@@clientName(SqlDatabaseResource.id, "DatabaseName", "csharp");
+@@clientName(
+  SqlDedicatedGatewayRegionalServiceResource,
+  "SqlDedicatedGatewayRegionalService",
+  "csharp"
+);
+@@clientName(
+  SqlDedicatedGatewayServiceResourceProperties,
+  "SqlDedicatedGatewayServiceProperties",
+  "csharp"
+);
+@@clientName(
+  SqlStoredProcedureListResult,
+  "CosmosDBSqlStoredProcedureListResult",
+  "csharp"
+);
+@@clientName(
+  SqlStoredProcedureResource,
+  "CosmosDBSqlStoredProcedureResourceInfo",
+  "csharp"
+);
+@@clientName(SqlStoredProcedureResource.id, "StoredProcedureName", "csharp");
+@@clientName(SqlTriggerListResult, "CosmosDBSqlTriggerListResult", "csharp");
+@@clientName(SqlTriggerResource, "CosmosDBSqlTriggerResourceInfo", "csharp");
+@@clientName(SqlTriggerResource.id, "TriggerName", "csharp");
+@@clientName(
+  SqlUserDefinedFunctionListResult,
+  "CosmosDBSqlUserDefinedFunctionListResult",
+  "csharp"
+);
+@@clientName(
+  SqlUserDefinedFunctionResource,
+  "CosmosDBSqlUserDefinedFunctionResourceInfo",
+  "csharp"
+);
+@@clientName(SqlUserDefinedFunctionResource.id, "FunctionName", "csharp");
+@@clientName(TableListResult, "CosmosDBTableListResult", "csharp");
+@@clientName(TableResource, "CosmosDBTableResourceInfo", "csharp");
+@@clientName(TableResource.id, "TableName", "csharp");
+@@clientName(
+  TableRoleAssignmentResource,
+  "CosmosDBTableRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  TableRoleDefinitionResource,
+  "CosmosDBTableRoleDefinition",
+  "csharp"
+);
+@@clientName(TableRoleDefinitionResourceProperties.id, "PathId", "csharp");
+@@clientName(
+  TableRoleDefinitionResourceProperties.type,
+  "RoleDefinitionType",
+  "csharp"
+);
+@@clientName(ThroughputBucketResource, "CosmosDBThroughputBucket", "csharp");
+@@clientName(
+  ThroughputPolicyResource,
+  "ThroughputPolicyResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ThroughputPoolAccountResource,
+  "CosmosDBThroughputPoolAccount",
+  "csharp"
+);
+@@clientName(ThroughputPoolResource, "CosmosDBThroughputPool", "csharp");
+@@clientName(
+  ThroughputSettingsResource,
+  "ThroughputSettingsResourceInfo",
+  "csharp"
+);
+@@clientName(TriggerOperation, "CosmosDBSqlTriggerOperation", "csharp");
+@@clientName(TriggerType, "CosmosDBSqlTriggerType", "csharp");
+@@clientName(Microsoft.DocumentDB.Usage, "CosmosDBBaseUsage", "csharp");
+@@clientName(VectorDataType, "CosmosDBVectorDataType", "csharp");
+@@clientName(VectorIndexType, "CosmosDBVectorIndexType", "csharp");
+@@clientName(VectorIndexType.DiskANN, "DiskAnn", "csharp");
+@@clientName(
+  CassandraKeyspaceGetPropertiesOptions,
+  "CassandraKeyspacePropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  CassandraKeyspaceGetPropertiesResource,
+  "ExtendedCassandraKeyspaceResourceInfo",
+  "csharp"
+);
+@@clientName(
+  CassandraTableGetPropertiesOptions,
+  "CassandraTablePropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  CassandraTableGetPropertiesResource,
+  "ExtendedCassandraTableResourceInfo",
+  "csharp"
+);
+@@clientName(
+  SqlContainerGetPropertiesOptions,
+  "CosmosDBSqlContainerPropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  SqlContainerGetPropertiesResource,
+  "ExtendedCosmosDBSqlContainerResourceInfo",
+  "csharp"
+);
+@@clientName(
+  SqlDatabaseGetPropertiesOptions,
+  "CosmosDBSqlDatabasePropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  SqlDatabaseGetPropertiesResource,
+  "ExtendedCosmosDBSqlDatabaseResourceInfo",
+  "csharp"
+);
+@@clientName(
+  SqlStoredProcedureGetPropertiesResource,
+  "ExtendedCosmosDBSqlStoredProcedureResourceInfo",
+  "csharp"
+);
+@@clientName(
+  SqlTriggerGetPropertiesResource,
+  "ExtendedCosmosDBSqlTriggerResourceInfo",
+  "csharp"
+);
+@@clientName(
+  SqlUserDefinedFunctionGetPropertiesResource,
+  "ExtendedCosmosDBSqlUserDefinedFunctionResourceInfo",
+  "csharp"
+);
+@@clientName(CreateUpdateOptions, "CosmosDBCreateUpdateConfig", "csharp");
+@@clientName(
+  GremlinDatabaseGetPropertiesOptions,
+  "GremlinDatabasePropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  GremlinDatabaseGetPropertiesResource,
+  "ExtendedGremlinDatabaseResourceInfo",
+  "csharp"
+);
+@@clientName(
+  GremlinGraphGetPropertiesOptions,
+  "GremlinGraphPropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  GremlinGraphGetPropertiesResource,
+  "ExtendedGremlinGraphResourceInfo",
+  "csharp"
+);
+@@clientName(
+  MongoDBCollectionGetPropertiesOptions,
+  "MongoDBCollectionPropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  MongoDBCollectionGetPropertiesResource,
+  "ExtendedMongoDBCollectionResourceInfo",
+  "csharp"
+);
+@@clientName(
+  MongoDBDatabaseGetPropertiesOptions,
+  "MongoDBDatabasePropertiesConfig",
+  "csharp"
+);
+@@clientName(
+  MongoDBDatabaseGetPropertiesResource,
+  "ExtendedMongoDBDatabaseResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ThroughputSettingsGetPropertiesResource,
+  "ExtendedThroughputSettingsResourceInfo",
+  "csharp"
+);
+
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableSqlResourcesList,
+  "GetAllRestorableSqlResourceData",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbCollectionsList,
+  "GetRestorableMongoDBCollections",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbResourcesList,
+  "GetAllRestorableMongoDBResourceData",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResults.restorableMongodbDatabasesList,
+  "GetRestorableMongoDBDatabases",
+  "csharp"
+);
+
+@@clientName(LocationGetResult, "CosmosDBLocation", "csharp");
+@@clientName(DatabaseAccountGetResults, "CosmosDBAccount", "csharp");
+@@clientName(ThroughputSettingsGetResults, "ThroughputSetting", "csharp");
+@@clientName(
+  ThroughputSettingsGetProperties,
+  "ThroughputSettingsProperties",
+  "csharp"
+);
+@@clientName(SqlDatabaseGetResults, "CosmosDBSqlDatabase", "csharp");
+@@clientName(
+  SqlDatabaseGetProperties,
+  "CosmosDBSqlDatabaseProperties",
+  "csharp"
+);
+@@clientName(SqlContainerGetResults, "CosmosDBSqlContainer", "csharp");
+@@clientName(
+  SqlContainerGetProperties,
+  "CosmosDBSqlContainerProperties",
+  "csharp"
+);
+@@clientName(
+  SqlStoredProcedureGetResults,
+  "CosmosDBSqlStoredProcedure",
+  "csharp"
+);
+@@clientName(
+  SqlStoredProcedureGetProperties,
+  "CosmosDBSqlStoredProcedureProperties",
+  "csharp"
+);
+@@clientName(
+  SqlUserDefinedFunctionGetResults,
+  "CosmosDBSqlUserDefinedFunction",
+  "csharp"
+);
+@@clientName(
+  SqlUserDefinedFunctionGetProperties,
+  "CosmosDBSqlUserDefinedFunctionProperties",
+  "csharp"
+);
+@@clientName(SqlTriggerGetResults, "CosmosDBSqlTrigger", "csharp");
+@@clientName(SqlTriggerGetProperties, "CosmosDBSqlTriggerProperties", "csharp");
+@@clientName(MongoDBDatabaseGetResults, "MongoDBDatabase", "csharp");
+@@clientName(
+  MongoDBDatabaseGetProperties,
+  "MongoDBDatabaseProperties",
+  "csharp"
+);
+@@clientName(MongoDBCollectionGetResults, "MongoDBCollection", "csharp");
+@@clientName(
+  MongoDBCollectionGetProperties,
+  "MongoDBCollectionProperties",
+  "csharp"
+);
+@@clientName(TableGetResults, "CosmosDBTable", "csharp");
+@@clientName(TableGetProperties, "CosmosDBTableProperties", "csharp");
+@@clientName(
+  TableGetPropertiesResource,
+  "CosmosDBTablePropertiesResource",
+  "csharp"
+);
+@@clientName(
+  TableGetPropertiesOptions,
+  "CosmosDBTablePropertiesOptions",
+  "csharp"
+);
+@@clientName(CassandraKeyspaceGetResults, "CassandraKeyspace", "csharp");
+@@clientName(
+  CassandraKeyspaceGetProperties,
+  "CassandraKeyspaceProperties",
+  "csharp"
+);
+@@clientName(CassandraTableGetResults, "CassandraTable", "csharp");
+@@clientName(CassandraTableGetProperties, "CassandraTableProperties", "csharp");
+@@clientName(GremlinDatabaseGetResults, "GremlinDatabase", "csharp");
+@@clientName(
+  GremlinDatabaseGetProperties,
+  "GremlinDatabaseProperties",
+  "csharp"
+);
+@@clientName(GremlinGraphGetResults, "GremlinGraph", "csharp");
+@@clientName(GremlinGraphGetProperties, "GremlinGraphProperties", "csharp");
+@@clientName(
+  DatabaseAccountGetProperties,
+  "CosmosDBAccountProperties",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccountListReadOnlyKeysResult,
+  "CosmosDBAccountReadOnlyKeyList",
+  "csharp"
+);
+@@clientName(DatabaseAccountListKeysResult, "CosmosDBAccountKeyList", "csharp");
+@@clientName(
+  SqlRoleAssignmentListResult,
+  "CosmosDBSqlRoleAssignmentList",
+  "csharp"
+);
+@@clientName(
+  SqlRoleDefinitionListResult,
+  "CosmosDBSqlRoleDefinitionList",
+  "csharp"
+);
+@@clientName(
+  SqlRoleDefinitionGetResults,
+  "CosmosDBSqlRoleDefinition",
+  "csharp"
+);
+@@clientName(
+  SqlRoleAssignmentGetResults,
+  "CosmosDBSqlRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountGetResult,
+  "RestorableCosmosDBAccount",
+  "csharp"
+);
+@@clientName(KeyWrapMetadata, "CosmosDBKeyWrapMetadata", "csharp");
+@@clientName(KeyWrapMetadata.type, "CosmosDBKeyWrapMetadataType", "csharp");
+@@clientName(Metric, "CosmosDBBaseMetric", "csharp");
+@@clientName(Location, "CosmosDBAccountLocation", "csharp");
+@@clientName(Capability, "CosmosDBAccountCapability", "csharp");
+@@clientName(
+  DatabaseAccountRegenerateKeyParameters,
+  "CosmosDBAccountRegenerateKeyContent",
+  "csharp"
+);
+// Most *CreateUpdateParameters renames are performed via the TrackedResource
+// wrapper models below, which both rename and switch the inheritance to
+// TrackedResource. ClientEncryptionKey is renamed here because it isn't
+// flattened from ARMResourceProperties and doesn't need a wrapper.
+@@clientName(
+  ClientEncryptionKeyCreateUpdateParameters,
+  "CosmosDBSqlClientEncryptionKeyCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  SqlRoleAssignmentCreateUpdateParameters,
+  "CosmosDBSqlRoleAssignmentCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  SqlRoleDefinitionCreateUpdateParameters,
+  "CosmosDBSqlRoleDefinitionCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(MetricDefinition.resourceUri, "ResourceId", "csharp");
+@@clientName(DatabaseAccountConnectionString.type, "KeyType", "csharp");
+@@clientName(SqlRoleDefinitionResource.type, "RoleDefinitionType", "csharp");
+@@clientName(ExtendedResourceProperties._ts, "Timestamp", "csharp");
+@@clientName(
+  CommandPublicResource.cassandraStopStart,
+  "shouldStopCassandraBeforeStart",
+  "csharp"
+);
+@@clientName(CommandPublicResource.readWrite, "isReadWrite", "csharp");
+@@clientName(SupportedActions, "CosmosDBChaosFaultSupportedActions", "csharp");
+@@clientName(chaosFaultResource, "ChaosFault", "csharp");
+@@clientName(GraphResourceGetResults, "CosmosDBGraph", "csharp");
+@@clientName(CassandraViewGetResults, "CassandraView", "csharp");
+@@clientName(CopyJobGetResults, "CosmosDBCopyJob", "csharp");
+@@clientName(DataTransferJobGetResults, "DataTransferJob", "csharp");
+@@clientName(
+  PrivateEndpointConnection,
+  "CosmosDBPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(PrivateLinkResource, "CosmosDBPrivateLinkResource", "csharp");
+@@clientName(
+  CassandraRoleAssignmentResource,
+  "CassandraRoleAssignment",
+  "csharp"
+);
+@@clientName(
+  CassandraRoleDefinitionResource,
+  "CassandraRoleDefinition",
+  "csharp"
+);
+@@clientName(GremlinRoleAssignmentResource, "GremlinRoleAssignment", "csharp");
+@@clientName(GremlinRoleDefinitionResource, "GremlinRoleDefinition", "csharp");
+@@clientName(MongoMIRoleAssignmentResource, "MongoMIRoleAssignment", "csharp");
+@@clientName(MongoMIRoleDefinitionResource, "MongoMIRoleDefinition", "csharp");
+@@clientName(GarnetClusterResource, "GarnetCluster", "csharp");
+@@clientName(FleetAnalyticsResource, "FleetAnalytics", "csharp");
+@@clientName(
+  ThroughputSettingsGetResultsOperationGroup,
+  "CosmosDBSqlDatabaseThroughputSetting",
+  "csharp"
+);
+@@clientName(
+  SqlResourcesThroughputSettingsGetResultsOperationGroup,
+  "CosmosDBSqlContainerThroughputSetting",
+  "csharp"
+);
+@@clientName(
+  MongoDBResourcesThroughputSettingsGetResultsOperationGroup,
+  "MongoDBCollectionThroughputSetting",
+  "csharp"
+);
+@@clientName(
+  CassandraResourcesThroughputSettingsGetResultsOperationGroup,
+  "CassandraTableThroughputSetting",
+  "csharp"
+);
+@@clientName(
+  ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup,
+  "CassandraViewThroughputSetting",
+  "csharp"
+);
+@@clientName(
+  GremlinResourcesThroughputSettingsGetResultsOperationGroup,
+  "GremlinGraphThroughputSetting",
+  "csharp"
+);
+@@clientName(Permission, "CosmosDBSqlRolePermission", "csharp");
+@@clientName(
+  MongoRoleDefinitionCreateUpdateParameters,
+  "MongoDBRoleDefinitionCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  MongoRoleDefinitionCreateUpdateParameters,
+  "MongoDBRoleDefinitionCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  MongoUserDefinitionCreateUpdateParameters,
+  "MongoDBUserDefinitionCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(CassandraViewResource, "CassandraViewResourceInfo", "csharp");
+@@clientName(
+  CassandraRoleDefinitionResourceProperties.id,
+  "RoleDefinitionId",
+  "csharp"
+);
+@@clientName(
+  MongoMIRoleDefinitionResourceProperties.id,
+  "RoleDefinitionId",
+  "csharp"
+);
+@@clientName(
+  GremlinRoleDefinitionResourceProperties.id,
+  "RoleDefinitionId",
+  "csharp"
+);
+@@clientName(
+  Microsoft.DocumentDB.ManagedServiceIdentity,
+  "CosmosDBManagedServiceIdentity",
+  "csharp"
+);
+@@clientName(
+  DatabaseAccountsOperationGroup.checkNameExists,
+  "CheckNameExistsDatabaseAccount",
+  "csharp"
+);
+@@clientName(
+  RestorableDatabaseAccountsOperationGroup.list,
+  "GetRestorableCosmosDBAccounts",
+  "csharp"
+);
+@@clientName(
+  RestorableMongodbCollectionsListParameters.restorableMongodbDatabaseRid,
+  "restorableMongoDBDatabaseRid",
+  "csharp"
+);
+@@clientName(
+  GraphResourceCreateUpdateParameters,
+  "CosmosDBGraphCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  NotebookWorkspaceCreateUpdateParameters,
+  "NotebookWorkspaceCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  RetrieveThroughputParameters,
+  "RetrieveThroughputContent",
+  "csharp"
+);
+@@clientName(
+  RedistributeThroughputParameters,
+  "RedistributeThroughputContent",
+  "csharp"
+);
+@@clientName(MergeParameters, "MergeContent", "csharp");
+@@clientName(CreateJobRequest, "CosmosDBJobCreateContent", "csharp");
+@@clientName(
+  GraphResourceGetPropertiesOptions,
+  "CosmosDBGraphConfig",
+  "csharp"
+);
+@@clientName(
+  CassandraViewGetPropertiesOptions,
+  "CassandraViewConfig",
+  "csharp"
+);
+@@clientName(ARMProxyResource, "ArmProxyResource", "csharp");
+@@clientName(ARMResourceProperties, "ArmResourceProperties", "csharp");
+@@clientName(
+  MaterializedViewDefinition,
+  "CosmosDBMaterializedViewDefinition",
+  "csharp"
+);
+@@clientName(
+  MaterializedViewDetails,
+  "CosmosDBMaterializedViewDetails",
+  "csharp"
+);
+@@clientName(CommandAsyncPostBody, "CassandraAsyncCommandContent", "csharp");
+@@clientName(EnableFullTextQuery, "CosmosDBFullTextQueryState", "csharp");
+@@clientName(CopyJobProperties, "CosmosDBCopyJobProperties", "csharp");
+@@clientName(BaseCopyJobProperties, "CosmosDBCopyJobBaseProperties", "csharp");
+@@clientName(BaseCopyJobTask, "CosmosDBCopyJobBaseTask", "csharp");
+@@clientName(PhysicalPartitionId, "CosmosDBPhysicalPartitionId", "csharp");
+@@clientName(
+  physicalPartitionStorageInfo,
+  "CosmosDBPhysicalPartitionStorageInfo",
+  "csharp"
+);
+@@clientName(
+  PhysicalPartitionStorageInfoCollection,
+  "CosmosDBPhysicalPartitionStorageInfoList",
+  "csharp"
+);
+@@clientName(
+  PhysicalPartitionThroughputInfoResource,
+  "CosmosDBPhysicalPartitionThroughputInfo",
+  "csharp"
+);
+@@clientName(
+  PhysicalPartitionThroughputInfoResult,
+  "CosmosDBPhysicalPartitionThroughputResult",
+  "csharp"
+);
+@@clientName(CommandAsyncPostBody.readWrite, "isReadWrite", "csharp");
+@@clientName(
+  GarnetClusterResourceProperties.availabilityZone,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(
+  CapacityModeChangeTransitionState.capacityModeTransitionBeginTimestamp,
+  "capacityModeTransitionBeganOn",
+  "csharp"
+);
+@@clientName(
+  CapacityModeChangeTransitionState.capacityModeTransitionEndTimestamp,
+  "capacityModeTransitionEndedOn",
+  "csharp"
+);
+@@clientName(
+  CapacityModeChangeTransitionState.capacityModeLastSuccessfulTransitionEndTimestamp,
+  "capacityModeLastSuccessfulTransitionEndedOn",
+  "csharp"
+);
+@@clientName(BackupResource.backupStartTimestamp, "backupStartedOn", "csharp");
+@@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
+@@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
+@@clientName(GraphResource.id, "graphName", "csharp");
+
+@@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "csharp");
+
+@@alternateType(
+  GremlinDatabaseGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  GremlinGraphGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  GraphResourceGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  MongoDBDatabaseGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  MongoDBCollectionGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  SqlDatabaseGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  SqlContainerGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  SqlStoredProcedureGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  SqlTriggerGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  SqlUserDefinedFunctionGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  CassandraKeyspaceGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  CassandraTableGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  CassandraViewGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  TableGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  ThroughputSettingsGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  DatabaseAccountGetResults.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  DatabaseAccountUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  ARMResourceProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  ClusterResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  PrivateEndpointProperty.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SqlRoleAssignmentResource.roleDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricDefinition.resourceUri,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseAccountUpdateProperties.networkAclBypassResourceIds,
+  Azure.Core.armResourceIdentifier[],
+  "csharp"
+);
+@@alternateType(
+  DatabaseAccountCreateUpdateProperties.networkAclBypassResourceIds,
+  Azure.Core.armResourceIdentifier[],
+  "csharp"
+);
+@@alternateType(
+  ClusterResourceProperties.privateLinkResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ClusterResourceProperties.delegatedManagementSubnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ThroughputPoolAccountProperties.accountResourceIdentifier,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TableRoleAssignmentResourceProperties.roleDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TableRoleAssignmentResourceProperties.scope,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  FleetspaceAccountPropertiesGlobalDatabaseAccountProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCenterResourceProperties.delegatedSubnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  FleetspaceAccountPropertiesGlobalDatabaseAccountProperties.armLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  FleetspaceProperties.dataRegions,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  DatabaseAccountUpdateParameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RestorableLocationResource.locationName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RestorableDatabaseAccountGetResult.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RegionalServiceResource.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+// After the upstream merge moved these GetResults models from
+// Legacy.TrackedResourceWithOptionalLocation to ProxyResource with an explicit
+// `location?: string`, restore the C# AzureLocation surface (matches the
+// TrackedResourceData base imposed by @@Legacy.hierarchyBuilding below).
+@@alternateType(
+  DatabaseAccountGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ClusterResource.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  CassandraKeyspaceGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  CassandraTableGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  CassandraViewGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  GraphResourceGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  GremlinDatabaseGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  GremlinGraphGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  MongoDBCollectionGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  MongoDBDatabaseGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  SqlContainerGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  SqlDatabaseGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(TableGetResults.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  ThroughputSettingsGetResults.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(Location.locationName, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  ContinuousBackupRestoreLocation.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  FailoverPolicy.locationName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DataCenterResourceProperties.dataCenterLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(LocationGetResult.name, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  RestorableSqlResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RestorableMongodbResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RestorableGremlinResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RestorableTableResourcesListParameters.restoreLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(DatabaseAccountUpdateProperties.keyVaultKeyUri, url, "csharp");
+@@alternateType(
+  DatabaseAccountCreateUpdateProperties.keyVaultKeyUri,
+  url,
+  "csharp"
+);
+@@alternateType(
+  DataCenterResourceProperties.managedDiskCustomerKeyUri,
+  url,
+  "csharp"
+);
+@@alternateType(
+  DataCenterResourceProperties.backupStorageCustomerKeyUri,
+  url,
+  "csharp"
+);
+@@alternateType(DatabaseAccountGetProperties.keyVaultKeyUri, url, "csharp");
+@@alternateType(
+  ExtendedResourceProperties._etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(
+  CassandraClusterPublicStatus.eTag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(PartitionUsage.partitionId, Azure.Core.uuid, "csharp");
+@@alternateType(PartitionMetric.partitionId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  DatabaseAccountGetProperties.instanceId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  RestorableDatabaseAccountGetResult.name,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems.hostID,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SqlRoleAssignmentResource.principalId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  ContinuousBackupInformation.latestRestorableTimestamp,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(
+  ARMResourceProperties.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ThroughputPoolAccountProperties.accountLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@usage(
+  SqlDedicatedGatewayServiceResourceProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlDatabaseGetPropertiesResource,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  GraphAPIComputeServiceResourceProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  CassandraKeyspaceGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  CassandraTableGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  DatabaseAccountGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(FleetResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ServiceResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  ClientEncryptionKeyGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlContainerGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlDatabaseGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlRoleAssignmentGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlRoleDefinitionGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlStoredProcedureGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(Location, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(SqlTriggerGetResults, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  SqlUserDefinedFunctionGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(TableGetResults, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  GremlinDatabaseGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  GremlinGraphGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  MongoDBCollectionGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  MongoDBDatabaseGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  MongoRoleDefinitionGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  MongoUserDefinitionGetResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  FleetspaceAccountResource,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(FleetspaceResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(LocationGetResult, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  DatabaseAccountCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RestorableSqlDatabasePropertiesResourceDatabase,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RestorableSqlContainerPropertiesResourceContainer,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MongoDBDatabaseGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MongoDBCollectionGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MaterializedViewsBuilderServiceResourceProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  GremlinGraphGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  GremlinDatabaseGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ThroughputSettingsGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MongoDBDatabaseGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MongoDBCollectionGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  GremlinGraphGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  GremlinDatabaseGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SqlUserDefinedFunctionGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SqlTriggerGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SqlStoredProcedureGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SqlContainerGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CassandraTableGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CassandraKeyspaceGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataTransferServiceResourceProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TableGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TableGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SqlDatabaseGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SqlContainerGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ClientEncryptionKeyGetPropertiesResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CassandraTableGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CassandraKeyspaceGetPropertiesOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  PrivateLinkResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@access(ThroughputSettingsGetResults, Access.public, "csharp");
+@@usage(
+  ThroughputSettingsGetResults,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+// hierarchyBuilding: pin TrackedResourceData base for resources that use
+// Legacy.TrackedResourceWithOptionalLocation in spec; old SDK exposed them as
+// TrackedResource.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  ClusterResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  DatabaseAccountGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  CassandraKeyspaceGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  CassandraTableGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  CassandraViewGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  GraphResourceGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  GremlinDatabaseGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  GremlinGraphGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  MongoDBCollectionGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  MongoDBDatabaseGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  SqlContainerGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  SqlDatabaseGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  SqlStoredProcedureGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  SqlTriggerGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  SqlUserDefinedFunctionGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  TableGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.hierarchyBuilding(
+  ThroughputSettingsGetResults,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(MongoIndex.key);
+
+// Restorable* "GetResult" models declare id/name/type inline rather than
+// extending CommonTypes.Resource, so the generator cannot infer them as ARM
+// resources and the C# classes lose their ResourceData base. Spec keeps only
+// @@clientName (rename to the GA C# type name); the C# `: ResourceData` base
+// is declared in an SDK Custom partial under src/Custom/Models/<Name>.cs.
+// The generator picks up the base from the partial via CustomCodeView.BaseType
+// and strips the inherited base properties (id/name/type/systemData) from the
+// renamed wrapper.
+
+@@clientName(RestorableSqlDatabaseGetResult, "RestorableSqlDatabase", "csharp");
+
+@@clientName(
+  RestorableSqlContainerGetResult,
+  "RestorableSqlContainer",
+  "csharp"
+);
+
+@@clientName(
+  RestorableMongodbDatabaseGetResult,
+  "RestorableMongoDBDatabase",
+  "csharp"
+);
+
+@@clientName(
+  RestorableMongodbCollectionGetResult,
+  "RestorableMongoDBCollection",
+  "csharp"
+);
+
+@@clientName(
+  RestorableGremlinDatabaseGetResult,
+  "RestorableGremlinDatabase",
+  "csharp"
+);
+
+@@clientName(
+  RestorableGremlinGraphGetResult,
+  "RestorableGremlinGraph",
+  "csharp"
+);
+
+@@clientName(RestorableTableGetResult, "RestorableTable", "csharp");
+
+@@clientName(
+  RestorableSqlResourcesGetResult,
+  "RestorableSqlResourceData",
+  "csharp"
+);
+
+@@clientName(
+  RestorableMongodbResourcesGetResult,
+  "RestorableMongoDBResourceData",
+  "csharp"
+);
+
+@@clientName(
+  RestorableGremlinResourcesGetResult,
+  "RestorableGremlinResourceData",
+  "csharp"
+);
+
+// TrackedResource wrappers for *CreateOrUpdateContent / ThroughputSettingsUpdateData.
+// 1.4.0 GA shipped these as `TrackedResourceData` subclasses; the spec models
+// extend `ARMResourceProperties` (a non-base model). Spec keeps only:
+//   - @@clientName  -> rename to the GA C# type name
+//   - @@usage(input | output) -> promote implicit-flatten to setter-bearing
+//     proxies (default is getter-only when the inner `properties` holder has
+//     required ctor args)
+// The C# `: TrackedResourceData` base is declared in an SDK Custom partial
+// under src/Custom/Models/<Name>.cs. The generator picks up the base from the
+// partial via CustomCodeView.BaseType and strips the inherited ARM base
+// properties (id/name/type/tags/location/identity) from the renamed wrapper.
+
+@@clientName(
+  DatabaseAccountCreateUpdateParameters,
+  "CosmosDBAccountCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  DatabaseAccountCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  ThroughputSettingsUpdateParameters,
+  "ThroughputSettingsUpdateData",
+  "csharp"
+);
+@@usage(
+  ThroughputSettingsUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  SqlDatabaseCreateUpdateParameters,
+  "CosmosDBSqlDatabaseCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  SqlDatabaseCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  SqlContainerCreateUpdateParameters,
+  "CosmosDBSqlContainerCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  SqlContainerCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  SqlStoredProcedureCreateUpdateParameters,
+  "CosmosDBSqlStoredProcedureCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  SqlStoredProcedureCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  SqlUserDefinedFunctionCreateUpdateParameters,
+  "CosmosDBSqlUserDefinedFunctionCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  SqlUserDefinedFunctionCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  SqlTriggerCreateUpdateParameters,
+  "CosmosDBSqlTriggerCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  SqlTriggerCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  MongoDBDatabaseCreateUpdateParameters,
+  "MongoDBDatabaseCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  MongoDBDatabaseCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  MongoDBCollectionCreateUpdateParameters,
+  "MongoDBCollectionCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  MongoDBCollectionCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  TableCreateUpdateParameters,
+  "CosmosDBTableCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  TableCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  CassandraKeyspaceCreateUpdateParameters,
+  "CassandraKeyspaceCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  CassandraKeyspaceCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  CassandraTableCreateUpdateParameters,
+  "CassandraTableCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  CassandraTableCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  CassandraViewCreateUpdateParameters,
+  "CassandraViewCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  CassandraViewCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  GremlinDatabaseCreateUpdateParameters,
+  "GremlinDatabaseCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  GremlinDatabaseCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(
+  GremlinGraphCreateUpdateParameters,
+  "GremlinGraphCreateOrUpdateContent",
+  "csharp"
+);
+@@usage(
+  GremlinGraphCreateUpdateParameters,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+/**
+ * The offer type for the Cosmos DB database account.
+ */
+union CosmosDBAccountOfferType {
+  string,
+
+  /**
+   * Standard.
+   */
+  "Standard",
+}
+@@alternateType(
+  DatabaseAccountCreateUpdateProperties.databaseAccountOfferType,
+  CosmosDBAccountOfferType,
+  "csharp"
+);
+@@alternateType(
+  DatabaseAccountGetProperties.databaseAccountOfferType,
+  CosmosDBAccountOfferType,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/invalid-mark-as-pageable-target" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  DatabaseAccounts.listConnectionStrings,
+  "csharp"
+);
 @@responseAsBool(DatabaseAccountsOperationGroup.checkNameExists, "javascript");
