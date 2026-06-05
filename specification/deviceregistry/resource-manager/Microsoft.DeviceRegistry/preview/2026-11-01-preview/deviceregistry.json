@@ -2163,160 +2163,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/bulkExport": {
-      "post": {
-        "operationId": "Namespaces_BulkExport",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Bulk export device metadata from the namespace into a storage account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespaceBulkExportRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully."
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Namespace BulkExport": {
-            "$ref": "./examples/BulkExport_Namespace.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/bulkImport": {
-      "post": {
-        "operationId": "Namespaces_BulkImport",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Bulk import devices into the namespace from a provided storage account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespaceBulkImportRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully."
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Namespace BulkImport": {
-            "$ref": "./examples/BulkImport_Namespace.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials": {
       "get": {
         "operationId": "Credentials_ListByNamespace",
@@ -6325,13 +6171,9 @@
           "type": "string",
           "description": "Device model."
         },
-        "operatingSystem": {
+        "softwareRevision": {
           "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
+          "description": "The software revision for this device."
         }
       }
     },
@@ -7681,13 +7523,9 @@
           "type": "string",
           "description": "Device model."
         },
-        "operatingSystem": {
+        "softwareRevision": {
           "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
+          "description": "The software revision for this device."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -8357,22 +8195,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "NamespaceBulkExportRequest": {
-      "type": "object",
-      "description": "Request body for the bulk export operation on a Namespace resource."
-    },
-    "NamespaceBulkExportResponse": {
-      "type": "object",
-      "description": "Response for the bulk export operation on a Namespace resource."
-    },
-    "NamespaceBulkImportRequest": {
-      "type": "object",
-      "description": "Request body for the bulk import operation on a Namespace resource."
-    },
-    "NamespaceBulkImportResponse": {
-      "type": "object",
-      "description": "Response for the bulk import operation on a Namespace resource."
     },
     "NamespaceDataPoint": {
       "type": "object",

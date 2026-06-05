@@ -1509,13 +1509,9 @@
           "type": "string",
           "description": "Device model."
         },
-        "operatingSystem": {
+        "softwareRevision": {
           "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
+          "description": "The software revision for this device."
         },
         "provisioningState": {
           "type": "string",
@@ -1549,13 +1545,9 @@
           "type": "string",
           "description": "Device model."
         },
-        "operatingSystem": {
+        "softwareRevision": {
           "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
+          "description": "The software revision for this device."
         }
       }
     },
@@ -1816,10 +1808,6 @@
         "externalDeviceId": {
           "type": "string",
           "description": "The external identifier of the device."
-        },
-        "expandInfo": {
-          "type": "boolean",
-          "description": "Whether to include extended device information in the response."
         }
       },
       "required": [
@@ -1833,10 +1821,6 @@
         "deviceUuid": {
           "type": "string",
           "description": "The unique identifier of the device."
-        },
-        "expandInfo": {
-          "type": "boolean",
-          "description": "Whether to include extended device information in the response."
         }
       },
       "required": [
@@ -2722,76 +2706,6 @@
         "iotHubDeviceId",
         "targetEndpoint",
         "authentication"
-      ]
-    },
-    "ProvisionDeviceResult": {
-      "type": "object",
-      "description": "Result of a successful device provisioning operation.",
-      "properties": {
-        "deviceUuid": {
-          "type": "string",
-          "description": "Unique device identifier assigned by the system."
-        },
-        "deviceResourceId": {
-          "type": "string",
-          "description": "ARM resource ID of the provisioned device."
-        },
-        "externalDeviceId": {
-          "type": "string",
-          "description": "External device ID (IoT Hub device ID)."
-        },
-        "messagingEndpointName": {
-          "type": "string",
-          "description": "Name of the messaging endpoint the device is connected to."
-        }
-      },
-      "required": [
-        "deviceUuid",
-        "deviceResourceId",
-        "externalDeviceId",
-        "messagingEndpointName"
-      ]
-    },
-    "ProvisionDeviceResultStatusMonitor": {
-      "type": "object",
-      "description": "Status monitor for the long-running `:provision` action on devices in a\nnamespace. Mirrors the shape of the central `Operation` resource but\nexposes a typed `result` so SDK callers receive the strongly-typed\n`ProvisionDeviceResult` payload directly.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the operation.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current status of the operation.",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error details when the operation failed.",
-          "readOnly": true
-        },
-        "executedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the operation was started (UTC).",
-          "readOnly": true
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the operation result expires (UTC).",
-          "readOnly": true
-        },
-        "result": {
-          "$ref": "#/definitions/ProvisionDeviceResult",
-          "description": "The result of the device-provisioning operation, available once `status` is `Succeeded`.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "status"
       ]
     },
     "QueryDevicesRequest": {

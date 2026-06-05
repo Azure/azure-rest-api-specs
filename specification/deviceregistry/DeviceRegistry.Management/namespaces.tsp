@@ -317,26 +317,6 @@ union OutboundIdentityType {
   UserAssigned: "UserAssigned",
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Request body for the bulk import operation on a Namespace resource.")
-model NamespaceBulkImportRequest {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Response for the bulk import operation on a Namespace resource.")
-model NamespaceBulkImportResponse {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Request body for the bulk export operation on a Namespace resource.")
-model NamespaceBulkExportRequest {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Response for the bulk export operation on a Namespace resource.")
-model NamespaceBulkExportResponse {}
-
 @added(Versions.v2025_07_01_preview)
 @doc("Request body for the migrate resources operation in to Namespace resource.")
 model NamespaceMigrateRequest {
@@ -405,28 +385,6 @@ interface Namespaces {
     Namespace,
     NamespaceMigrateRequest,
     NamespaceMigrateResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @doc("Bulk import devices into the namespace from a provided storage account.")
-  @added(Versions.v2026_11_01_preview)
-  bulkImport is ArmResourceActionAsync<
-    Namespace,
-    NamespaceBulkImportRequest,
-    NamespaceBulkImportResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @doc("Bulk export device metadata from the namespace into a storage account.")
-  @added(Versions.v2026_11_01_preview)
-  bulkExport is ArmResourceActionAsync<
-    Namespace,
-    NamespaceBulkExportRequest,
-    NamespaceBulkExportResponse,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader

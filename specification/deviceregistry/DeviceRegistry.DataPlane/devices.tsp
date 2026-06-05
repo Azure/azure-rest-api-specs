@@ -5,6 +5,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
+import "./common/provisionedRefs.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceAuthenticationProfiles.tsp";
 
@@ -62,10 +63,6 @@ model GetDeviceByUuidRequest {
   /** The unique identifier of the device. */
   @query
   deviceUuid: string;
-
-  /** Whether to include extended device information in the response. */
-  @query
-  expandInfo?: boolean;
 }
 
 /** Request for looking up a device by its external identifier. */
@@ -73,10 +70,6 @@ model GetDeviceByExternalIdRequest {
   /** The external identifier of the device. */
   @query
   externalDeviceId: string;
-
-  /** Whether to include extended device information in the response. */
-  @query
-  expandInfo?: boolean;
 }
 
 /** Request body for querying devices in a namespace. */
@@ -133,19 +126,20 @@ model ProvisionDeviceRequest {
   deviceTwin?: DeviceTwin;
 }
 
-/** Result of a successful device provisioning operation. */
+/** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionDeviceResult {
-  /** Unique device identifier assigned by the system. */
-  deviceUuid: string;
+  /** Reference to the provisioned Device resource. */
+  device: ProvisionedDeviceRef;
 
-  /** ARM resource ID of the provisioned device. */
-  deviceResourceId: string;
+  /** Reference to the provisioned Capability child resource. */
+  capability: ProvisionedResourceRef;
 
-  /** External device ID (IoT Hub device ID). */
-  externalDeviceId: string;
+  /** Reference to the provisioned AuthenticationProfile child resource. */
+  authProfile: ProvisionedAuthProfileRef;
 
-  /** Name of the messaging endpoint the device is connected to. */
-  messagingEndpointName: string;
+  /** Reference to the messaging endpoint the device was provisioned against. */
+  endpoint: ProvisionedEndpointRef;
 }
 
 // ──────────────────────────────────────────────
@@ -158,6 +152,7 @@ model ProvisionDeviceResult {
  * exposes a typed `result` so SDK callers receive the strongly-typed
  * `ProvisionDeviceResult` payload directly.
  */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 @parentResource(Namespace)
 @resource("provisionDeviceResults")
 model ProvisionDeviceResultStatusMonitor {
@@ -235,11 +230,11 @@ interface Devices {
 }
 
 /** Polling operations for the long-running `:provision` action on devices. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 @tag("Devices")
 interface ProvisionDeviceResults {
   /** Get the result of a device-provisioning operation. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Devices in generated SDK clients."
-  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   // Override the emitted operationId to surface this status monitor under
   // the `Devices` SDK client (matches the wire-side `Devices_Provision`
   // action that produces these results) rather than as a top-level
