@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
 import "../main.tsp";
-import "../client.tsp";
 
 using Azure.ClientGenerator.Core;
 using Storage.Blob;

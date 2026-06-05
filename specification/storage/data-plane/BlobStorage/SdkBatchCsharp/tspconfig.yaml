@@ -6,6 +6,9 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Storage.Blobs.Batch"
     model-namespace: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/storage/data-plane/BlobStorage/Common"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
