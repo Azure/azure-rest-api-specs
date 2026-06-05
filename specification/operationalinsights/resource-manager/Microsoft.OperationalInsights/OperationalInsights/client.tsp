@@ -48,6 +48,7 @@ using Microsoft.OperationalInsights;
 @@clientName(Cluster, "OperationalInsightsCluster", "csharp");
 @@clientName(DataExport, "OperationalInsightsDataExport", "csharp");
 @@clientName(DataSource, "OperationalInsightsDataSource", "csharp");
+@@clientName(DataSourcesListByWorkspaceParameters.$skiptoken, "skipToken", "csharp");
 @@clientName(LinkedService, "OperationalInsightsLinkedService", "csharp");
 @@clientName(
   LinkedStorageAccountsResource,
@@ -201,6 +202,7 @@ using Microsoft.OperationalInsights;
 @@clientName(Workspaces.schemaGet, "GetSchemas", "csharp");
 @@clientName(Workspaces.usagesList, "GetUsages", "csharp");
 @@clientName(Workspaces.gatewaysDelete, "DeleteGateway", "csharp");
+@@alternateType(GatewayNameParameter.gatewayId, uuid, "csharp");
 @@clientName(Workspaces.disable, "DisableIntelligencePack", "csharp");
 @@clientName(Workspaces.enable, "EnableIntelligencePack", "csharp");
 @@clientName(Workspaces.regenerate, "RegenerateSharedKey", "csharp");
