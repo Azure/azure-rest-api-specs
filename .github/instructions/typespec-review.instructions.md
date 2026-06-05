@@ -336,6 +336,235 @@ Use one of the following built-in TypeSpec decorators instead:
 
 When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifiers` or `@key` as the fix. **Never** suggest `@extension("x-ms-identifiers", ...)`.
 
+### 6.6 Visibility / Mutability — `x-ms-mutability` (TSP-EXT-MUTABILITY)
+
+**Forbidden:** `@extension("x-ms-mutability", ["create", "read"])` or any other `x-ms-mutability` argument.
+
+`@extension` is forbidden in TypeSpec source for any reason. Use the `@visibility` decorator with values from the `Lifecycle` class instead. The emitter derives `x-ms-mutability` automatically.
+
+| x-ms-mutability value | TypeSpec replacement                                           |
+| --------------------- | -------------------------------------------------------------- |
+| `["read"]`            | `@visibility(Lifecycle.Read)`                                  |
+| `["create", "read"]`  | `@visibility(Lifecycle.Create, Lifecycle.Read)`                |
+| `["create", "update", "read"]` | _(default; omit the decorator entirely)_              |
+| `["create", "update"]` | `@visibility(Lifecycle.Create, Lifecycle.Update)`             |
+
+**Correct pattern:**
+
+```tsp
+model StorageProperties {
+  // Immutable after creation: create + read only.
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location: string;
+
+  // Readable but not writable (server-computed):
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+```
+
+**`#suppress` acceptability:** There is no linter rule specifically for `@extension("x-ms-mutability", ...)`; the rule that fires is the general `no-openapi-extensions` rule (if enabled). A suppression of `no-openapi-extensions` is **never** acceptable as a workaround for missing `@visibility` support — `@visibility` covers all standard mutability patterns. If a scenario genuinely has no `@visibility` equivalent, file an issue with the TypeSpec Azure library team.
+
+---
+
+### 6.7 Secret Properties — `x-ms-secret` (TSP-EXT-SECRET)
+
+**Forbidden:** `@extension("x-ms-secret", true)`.
+
+Use the `@secret` decorator instead. The emitter derives `x-ms-secret: true` and the `password` format automatically.
+
+**Correct pattern:**
+
+```tsp
+model DatabaseProperties {
+  // Correct: use @secret, not @extension("x-ms-secret", true)
+  @secret
+  connectionString?: string;
+
+  @secret
+  adminPassword?: string;
+}
+```
+
+**`#suppress` acceptability:** Suppressing `secret-prop` is **never** acceptable as a substitute for `@secret`. The `secret-prop` rule fires precisely because the property needs `@secret`. Remove any `#suppress "@azure-tools/.../secret-prop"` directive and apply `@secret` instead. See Section 3 (SEC-SECRET-DETECT) and Section 4.1 (Warning Suppression Policy).
+
+---
+
+### 6.8 Property Flattening — `x-ms-client-flatten` (TSP-EXT-FLATTEN)
+
+**Forbidden:** `@extension("x-ms-client-flatten", true)`.
+
+For **new APIs** and **new properties**: do not flatten at all. Flattening creates SDK-breaking issues and is not recommended for new resource types (see Section 5 anti-patterns — `@flattenProperty on new APIs`).
+
+For **pre-existing flattened properties** preserved for backward compatibility: use `@flattenProperty` on the property in TypeSpec. The emitter derives `x-ms-client-flatten` automatically. Using `@extension("x-ms-client-flatten", true)` alongside or instead of `@flattenProperty` is still forbidden.
+
+**Correct pattern (pre-existing backward-compat only):**
+
+```tsp
+model VirtualMachineProperties {
+  // Pre-existing flattening preserved for backward compat.
+  // Use @flattenProperty, not @extension("x-ms-client-flatten", true).
+  @flattenProperty
+  storageProfile?: StorageProfile;
+}
+```
+
+**Correct pattern (new API — do not flatten):**
+
+```tsp
+model VirtualMachineProperties {
+  // New API: leave nested; no flattening.
+  storageProfile?: StorageProfile;
+}
+```
+
+**`#suppress` acceptability:** There is no TypeSpec linter rule that requires `x-ms-client-flatten`; the pressure comes from keeping parity with an existing Swagger that had `x-ms-client-flatten`. Using `@extension` to add `x-ms-client-flatten` purely to silence an OpenAPI diff tool is not acceptable — use `@flattenProperty` for true backward-compat cases, or remove flattening entirely for new properties.
+
+---
+
+### 6.9 Enum Metadata — `x-ms-enum` (TSP-EXT-ENUM)
+
+**Forbidden:** `@extension("x-ms-enum", { name: "...", modelAsString: true })`.
+
+TypeSpec `union` types with a `string` base automatically emit the correct `x-ms-enum` block (including `name` and `modelAsString: true`) without any `@extension`. Using `@extension("x-ms-enum", ...)` on a TypeSpec `union` or `enum` type is redundant at best and generates conflicting metadata at worst.
+
+**Correct pattern:**
+
+```tsp
+// The Azure TypeSpec emitter derives x-ms-enum automatically.
+union ProvisioningState {
+  string,
+
+  /** Succeeded */
+  Succeeded: "Succeeded",
+
+  /** Failed */
+  Failed: "Failed",
+
+  /** Canceled */
+  Canceled: "Canceled",
+}
+```
+
+**`#suppress` acceptability:** Not applicable — there is no linter rule requiring `@extension("x-ms-enum", ...)` in TypeSpec. Remove the `@extension` call entirely; the emitter already produces the correct output.
+
+---
+
+### 6.10 Discriminator Value — `x-ms-discriminator-value` (TSP-EXT-DISCRIMINATOR)
+
+**Forbidden:** `@extension("x-ms-discriminator-value", "Cat")` on a derived model variant.
+
+Use the standard TypeSpec discriminated union pattern: apply `@discriminator("discriminatorPropertyName")` on the base model and give each variant a literal-typed discriminator property.
+
+**Correct pattern:**
+
+```tsp
+@discriminator("kind")
+model Animal {
+  kind: string;
+  name: string;
+}
+
+model Cat extends Animal {
+  // Literal type makes the discriminator value explicit.
+  kind: "Cat";
+  meowVolume?: int32;
+}
+
+model Dog extends Animal {
+  kind: "Dog";
+  barkVolume?: int32;
+}
+```
+
+**`#suppress` acceptability:** Not applicable. The `@discriminator` decorator is the standard TypeSpec mechanism; there is no scenario where `@extension("x-ms-discriminator-value", ...)` is preferable. Remove the `@extension` call and replace with the discriminated union pattern above.
+
+---
+
+### 6.11 Long-Running Operations — `x-ms-long-running-operation` (TSP-EXT-LRO)
+
+**Forbidden:**
+- `@extension("x-ms-long-running-operation", true)`
+- `@extension("x-ms-long-running-operation-options", { "final-state-via": "azure-async-operation" })`
+
+Use ARM async operation templates. The templates automatically emit the correct `x-ms-long-running-operation` and `x-ms-long-running-operation-options` extensions.
+
+| Operation type | ARM template                                       |
+| -------------- | -------------------------------------------------- |
+| PUT (create/replace) | `ArmResourceCreateOrReplaceAsync<Resource>`  |
+| PATCH (update) | `ArmResourcePatchAsync<Resource, Properties>`      |
+| DELETE         | `ArmResourceDeleteAsync<Resource>`                 |
+| POST action    | `ArmResourceActionAsync<Resource, Request, Response>` |
+
+**Correct pattern:**
+
+```tsp
+@armResourceOperations
+interface Widgets {
+  // The Async suffix signals that the emitter should add x-ms-long-running-operation: true.
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Widget>;
+  update is ArmResourcePatchAsync<Widget, WidgetProperties>;
+  delete is ArmResourceDeleteAsync<Widget>;
+  restart is ArmResourceActionAsync<Widget, void, void>;
+}
+```
+
+**`#suppress` acceptability:** Not applicable. Manual `@extension("x-ms-long-running-operation", ...)` on TypeSpec operations means the author is overriding the emitter instead of using the correct ARM template. Remove the extensions and switch to the appropriate `*Async` template.
+
+---
+
+### 6.12 Azure Resource Marker — `x-ms-azure-resource` (TSP-EXT-AZURE-RESOURCE)
+
+**Forbidden:** `@extension("x-ms-azure-resource", true)` on a model.
+
+Use the ARM resource base model templates instead. They automatically emit `x-ms-azure-resource: true`.
+
+| Resource kind   | ARM base template                             |
+| --------------- | --------------------------------------------- |
+| Tracked resource (with `location` + `tags`) | `TrackedResource<Properties>` |
+| Proxy resource (no `location`)              | `ProxyResource<Properties>`   |
+| Extension resource (attaches to any scope)  | `ExtensionResource<Properties>` |
+
+**Correct pattern:**
+
+```tsp
+// Correct: extends TrackedResource — emitter adds x-ms-azure-resource: true automatically.
+@segment("widgets")
+model Widget is TrackedResource<WidgetProperties> {
+  @key("widgetName")
+  name: string;
+}
+```
+
+**`#suppress` acceptability:** Not applicable. Using `@extension("x-ms-azure-resource", true)` means the model does not extend a proper ARM base type. Remove the extension and change the model to extend the appropriate base template.
+
+---
+
+### 6.13 Pageable Operations — `x-ms-pageable` (TSP-EXT-PAGEABLE)
+
+**Forbidden:** `@extension("x-ms-pageable", { nextLinkName: "nextLink" })` or any `x-ms-pageable` variant.
+
+Use ARM list operation templates or `Azure.Core` paged operation templates. They derive the correct `x-ms-pageable` metadata automatically.
+
+| Scope                  | ARM template                              |
+| ---------------------- | ----------------------------------------- |
+| List by resource group | `ArmResourceListByParent<Resource>`       |
+| List by subscription   | `ArmListBySubscription<Resource>`         |
+| Data-plane list        | `Azure.Core.ResourceList<Resource>`       |
+
+**Correct pattern:**
+
+```tsp
+@armResourceOperations
+interface Widgets {
+  // Correct: templates emit x-ms-pageable automatically.
+  listByResourceGroup is ArmResourceListByParent<Widget>;
+  listBySubscription is ArmListBySubscription<Widget>;
+}
+```
+
+**`#suppress` acceptability:** Not applicable. `@extension("x-ms-pageable", ...)` on an ARM list operation means the author is not using the ARM list templates. Replace the custom operation definition with `ArmResourceListByParent` or `ArmListBySubscription`.
+
 ---
 
 ## 7. `tspconfig.yaml` Additional Validation
@@ -413,7 +642,16 @@ When reviewing TypeSpec files, verify:
 - ✅ No `@operationId` overrides — restructure interfaces instead
 - ✅ URI properties use `url` scalar type, not plain `string`
 - ✅ Array-typed properties declare item identity via `@key` (on item type) or `@identifiers` (on array property); use `@identifiers(#[])` when items have no identifier (TSP-ARRAY-IDENTIFIERS)
-- ✅ No `@extension(...)` decorators in TypeSpec source — never `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, etc.
+- ✅ No `@extension(...)` decorators in TypeSpec source for any reason — use built-in TypeSpec decorators and ARM templates instead:
+  - ✅ No `@extension("x-ms-identifiers", ...)` — use `@identifiers` or `@key` (TSP-ARRAY-IDENTIFIERS)
+  - ✅ No `@extension("x-ms-mutability", ...)` — use `@visibility(Lifecycle.*)` (TSP-EXT-MUTABILITY)
+  - ✅ No `@extension("x-ms-secret", true)` — use `@secret` (TSP-EXT-SECRET)
+  - ✅ No `@extension("x-ms-client-flatten", true)` — use `@flattenProperty` for backward-compat only; omit for new APIs (TSP-EXT-FLATTEN)
+  - ✅ No `@extension("x-ms-enum", ...)` — use TypeSpec `union` with `string` base; emitter derives `x-ms-enum` automatically (TSP-EXT-ENUM)
+  - ✅ No `@extension("x-ms-discriminator-value", ...)` — use `@discriminator("prop")` on base model + literal discriminator property on each variant (TSP-EXT-DISCRIMINATOR)
+  - ✅ No `@extension("x-ms-long-running-operation", ...)` or `@extension("x-ms-long-running-operation-options", ...)` — use `ArmResourceCreateOrReplaceAsync`, `ArmResourcePatchAsync`, `ArmResourceDeleteAsync`, `ArmResourceActionAsync`, etc. (TSP-EXT-LRO)
+  - ✅ No `@extension("x-ms-azure-resource", true)` — use `TrackedResource`, `ProxyResource`, or `ExtensionResource` base templates (TSP-EXT-AZURE-RESOURCE)
+  - ✅ No `@extension("x-ms-pageable", ...)` — use `ArmResourceListByParent`, `ArmListBySubscription`, or `Azure.Core.ResourceList` (TSP-EXT-PAGEABLE)
 - ✅ Standard ARM base types used (no custom/private resource decorators)
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset

@@ -46,7 +46,7 @@ arm-api-reviewer/
 | 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                 |
 | 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                    |
 | 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                                                                                                                                                                                                                            |
-| 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                      |
+| 07xxxx | TypeSpec review               | 12    | Segment casing, secrets, anti-patterns, x-ms-identifiers, x-ms-mutability, x-ms-secret, x-ms-client-flatten, x-ms-enum, x-ms-discriminator-value, x-ms-long-running-operation, x-ms-azure-resource, x-ms-pageable                                                                                                                                                                                                                                                                              |
 | 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                   |
 | 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                               |
 | 10xxxx | Classification                | 1     | NEW vs EXISTING issue tagging                                                                                                                                                                                                                                                 |
@@ -57,11 +57,11 @@ arm-api-reviewer/
 | 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                            |
 | 16xxxx | Protocol safety               | 10    | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
 
-Total: 51 stimuli across 16 eval files.
+Total: 59 stimuli across 16 eval files.
 
 ## Fixtures
 
-All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
+All 44 fixture data files live in `fixtures/` (plus a `README.md`). See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
@@ -70,7 +70,7 @@ eval suites.
 - **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
 - **2 readme.md files** in `readme/` -- suppression scenarios
 - **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
-- **4 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
+- **12 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations, x-ms-mutability, x-ms-secret, x-ms-client-flatten, x-ms-enum, x-ms-discriminator-value, x-ms-lro, x-ms-azure-resource, x-ms-pageable violations
 - **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
 
 ## Quick Start
@@ -85,7 +85,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (48 stimuli, sequential -- safest)
+# Run the full suite (59 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -137,7 +137,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 48 stimuli, 5 concurrent workers)
+# Run the full suite (all 59 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category
