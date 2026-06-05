@@ -148,12 +148,7 @@ model MaintenanceConfigurationProperties {
   notAllowedTime?: TimeSpan[];
 
   /**
-   * The fully qualified resource ID of the maintenance window that this
-   * maintenance configuration is linked to. When set, the schedule is derived
-   * read-only from the linked maintenance window — maintenanceWindow becomes
-   * a computed field. When absent (the default), the schedule is defined
-   * inline via the maintenanceWindow property.
-   * The caller must have read access to the target maintenance window.
+   * The fully qualified resource ID of the maintenance window that this maintenance configuration is linked to. When set, the schedule is derived read-only from the linked maintenance window — maintenanceWindow becomes a computed field. When absent (the default), the schedule is defined inline via the maintenanceWindow property. The caller must have read access to the target maintenance window.
    */
   @added(Versions.v2026_05_02_preview)
   maintenanceWindowId?: Azure.Core.armResourceIdentifier<[
