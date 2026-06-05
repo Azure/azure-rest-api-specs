@@ -270,5 +270,4 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
   @@access(AgentOptimizationJobs.getCandidateResults, Access.internal);
   @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.listCandidates, Access.internal);
 }
