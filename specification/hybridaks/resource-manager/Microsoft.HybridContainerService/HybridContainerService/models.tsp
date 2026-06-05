@@ -421,6 +421,12 @@ model NetworkProfile {
    * A CIDR notation IP Address range from which to assign pod IPs.
    */
   podCidr?: string;
+
+  /**
+   * A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges or the pod CIDR.
+   */
+  @added(Versions.v2026_06_01_preview)
+  serviceCidr?: string;
 }
 
 /**
