@@ -2016,10 +2016,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/GetDeviceByExternalIdRequest.externalDeviceId"
-          },
-          {
-            "$ref": "#/parameters/GetDeviceByExternalIdRequest.expandInfo"
+            "$ref": "#/parameters/GetDeviceByExternalIdRequest"
           }
         ],
         "responses": {
@@ -2068,10 +2065,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/GetDeviceByUuidRequest.deviceUuid"
-          },
-          {
-            "$ref": "#/parameters/GetDeviceByUuidRequest.expandInfo"
+            "$ref": "#/parameters/GetDeviceByUuidRequest"
           }
         ],
         "responses": {
@@ -3256,13 +3250,9 @@
           "type": "string",
           "description": "Device model."
         },
-        "operatingSystem": {
+        "softwareRevision": {
           "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
+          "description": "The software revision for this device."
         },
         "provisioningState": {
           "type": "string",
@@ -3296,13 +3286,9 @@
           "type": "string",
           "description": "Device model."
         },
-        "operatingSystem": {
+        "softwareRevision": {
           "type": "string",
-          "description": "Device operating system."
-        },
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
+          "description": "The software revision for this device."
         }
       }
     },
@@ -5200,15 +5186,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "GetDeviceByExternalIdRequest.expandInfo": {
-      "name": "expandInfo",
-      "in": "query",
-      "description": "Whether to include extended device information in the response.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "GetDeviceByExternalIdRequest.externalDeviceId": {
+    "GetDeviceByExternalIdRequest": {
       "name": "externalDeviceId",
       "in": "query",
       "description": "The external identifier of the device.",
@@ -5216,20 +5194,12 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "GetDeviceByUuidRequest.deviceUuid": {
+    "GetDeviceByUuidRequest": {
       "name": "deviceUuid",
       "in": "query",
       "description": "The unique identifier of the device.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "GetDeviceByUuidRequest.expandInfo": {
-      "name": "expandInfo",
-      "in": "query",
-      "description": "Whether to include extended device information in the response.",
-      "required": false,
-      "type": "boolean",
       "x-ms-parameter-location": "method"
     },
     "GetGroupByUuidRequest": {

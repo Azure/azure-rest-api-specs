@@ -60,10 +60,6 @@ model GetDeviceByUuidRequest {
   /** The unique identifier of the device. */
   @query
   deviceUuid: string;
-
-  /** Whether to include extended device information in the response. */
-  @query
-  expandInfo?: boolean;
 }
 
 /** Request for looking up a device by its external identifier. */
@@ -71,10 +67,6 @@ model GetDeviceByExternalIdRequest {
   /** The external identifier of the device. */
   @query
   externalDeviceId: string;
-
-  /** Whether to include extended device information in the response. */
-  @query
-  expandInfo?: boolean;
 }
 
 /** Request body for querying devices in a namespace. */
