@@ -58,19 +58,59 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthResponse, "ADOOAuthResponse");
 @@clientName(PrLinkResponse, "prLinkResponse");
 
-@@clientName(AdooAuthCallRequest, "DeveloperHubADOOAuthCallRequestContent", "csharp");
-@@clientName(AdooAuthInfoResponse, "DeveloperHubADOOAuthInfoResponseResult", "csharp");
-@@clientName(DeleteWorkflowResponse, "DeveloperHubDeleteWorkflowResponseResult", "csharp");
-@@clientName(ExportTemplateRequest, "DeveloperHubExportTemplateRequestContent", "csharp");
-@@clientName(GenerateVersionedTemplateResponse, "DeveloperHubGenerateVersionedTemplateResponseResult", "csharp");
-@@clientName(GitHubOAuthCallRequest, "DeveloperHubGitHubOAuthCallRequestContent", "csharp");
-@@clientName(GitHubOAuthInfoResponse, "DeveloperHubGitHubOAuthInfoResponseResult", "csharp");
-@@clientName(GitHubOAuthListResponse, "DeveloperHubGitHubOAuthListResponseResult", "csharp");
-@@clientName(Azure.ResourceManager.Foundations.Operation, "DeveloperHubOperationInfo", "csharp");
+@@clientName(
+  AdooAuthCallRequest,
+  "DeveloperHubADOOAuthCallRequestContent",
+  "csharp"
+);
+@@clientName(
+  AdooAuthInfoResponse,
+  "DeveloperHubADOOAuthInfoResponseResult",
+  "csharp"
+);
+@@clientName(
+  DeleteWorkflowResponse,
+  "DeveloperHubDeleteWorkflowResponseResult",
+  "csharp"
+);
+@@clientName(
+  ExportTemplateRequest,
+  "DeveloperHubExportTemplateRequestContent",
+  "csharp"
+);
+@@clientName(
+  GenerateVersionedTemplateResponse,
+  "DeveloperHubGenerateVersionedTemplateResponseResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthCallRequest,
+  "DeveloperHubGitHubOAuthCallRequestContent",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthInfoResponse,
+  "DeveloperHubGitHubOAuthInfoResponseResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthListResponse,
+  "DeveloperHubGitHubOAuthListResponseResult",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.Foundations.Operation,
+  "DeveloperHubOperationInfo",
+  "csharp"
+);
 @@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
 @@clientName(PrLinkResponse, "DeveloperHubPrLinkResponseResult", "csharp");
 @@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");
-@@clientName(ScaleTemplateRequest, "DeveloperHubScaleTemplateRequestContent", "csharp");
+@@clientName(
+  ScaleTemplateRequest,
+  "DeveloperHubScaleTemplateRequestContent",
+  "csharp"
+);
 
 @@visibility(
   Azure.ResourceManager.Foundations.OperationListResult.nextLink,
