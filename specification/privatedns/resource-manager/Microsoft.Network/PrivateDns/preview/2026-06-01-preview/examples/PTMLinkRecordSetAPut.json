@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key1": "value1"
+        },
+        "ttl": 3600,
+        "trafficManagementProfile": {
+          "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+        }
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "A",
+    "relativeRecordSetName": "ptmlinkrecord",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ptmlinkrecord",
+        "type": "Microsoft.Network/privateDnsZones/A",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/ptmlinkrecord",
+        "properties": {
+          "fqdn": "ptmlinkrecord.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "trafficManagementProfile": {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "ptmlinkrecord",
+        "type": "Microsoft.Network/privateDnsZones/A",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/ptmlinkrecord",
+        "properties": {
+          "fqdn": "ptmlinkrecord.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key1": "value1"
+          },
+          "ttl": 3600,
+          "trafficManagementProfile": {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_CreateOrUpdate",
+  "title": "PUT Private DNS Zone PTMLink A Record Set"
+}

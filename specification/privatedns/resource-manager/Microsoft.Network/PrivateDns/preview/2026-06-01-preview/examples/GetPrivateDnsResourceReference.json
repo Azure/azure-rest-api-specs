@@ -1,19 +1,16 @@
 {
   "parameters": {
     "api-version": "2026-06-01-preview",
-    "subscriptionId": "subscriptionId",
     "parameters": {
       "properties": {
         "targetResources": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/trafficManagerProfiles/tm-profile1"
-          },
-          {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/trafficManagerProfiles/tm-profile2"
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
           }
         ]
       }
-    }
+    },
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
@@ -21,23 +18,14 @@
         "properties": {
           "privateDnsResourceReferences": [
             {
-              "targetResource": {
-                "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/trafficManagerProfiles/tm-profile1"
-              },
               "privateDnsResources": [
                 {
-                  "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda"
-                },
-                {
-                  "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/CNAME/aliasrec"
+                  "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/ptmlinkrecord"
                 }
-              ]
-            },
-            {
+              ],
               "targetResource": {
-                "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/trafficManagerProfiles/tm-profile2"
-              },
-              "privateDnsResources": []
+                "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+              }
             }
           ]
         }
@@ -45,5 +33,5 @@
     }
   },
   "operationId": "PrivateDnsResourceReference_GetByTargetResources",
-  "title": "Get Private DNS resource references for target resources"
+  "title": "Get Private DNS resource reference"
 }

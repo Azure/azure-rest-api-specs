@@ -635,6 +635,9 @@
           },
           "GET Private DNS Zone TXT Record Set": {
             "$ref": "./examples/RecordSetTXTGet.json"
+          },
+          "GET Private DNS Zone PTMLink A Record Set": {
+            "$ref": "./examples/PTMLinkRecordSetAGet.json"
           }
         }
       },
@@ -757,6 +760,9 @@
           },
           "PUT Private DNS Zone TXT Record Set": {
             "$ref": "./examples/RecordSetTXTPut.json"
+          },
+          "PUT Private DNS Zone PTMLink A Record Set": {
+            "$ref": "./examples/PTMLinkRecordSetAPut.json"
           }
         }
       },
@@ -865,6 +871,9 @@
           },
           "PATCH Private DNS Zone TXT Record Set": {
             "$ref": "./examples/RecordSetTXTPatch.json"
+          },
+          "PATCH Private DNS Zone PTMLink A Record Set": {
+            "$ref": "./examples/PTMLinkRecordSetAPatch.json"
           }
         }
       },
@@ -1427,7 +1436,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Properties for private DNS resource reference request.",
+            "description": "The request body",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PrivateDnsResourceReferenceRequest"
@@ -1451,48 +1460,6 @@
         "x-ms-examples": {
           "Get Private DNS resource reference": {
             "$ref": "./examples/GetPrivateDnsResourceReference.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkPrivateDnsResourceReference": {
-      "post": {
-        "operationId": "PrivateDnsResourceReference_CheckByTargetResources",
-        "description": "Checks whether the specified target resources are referenced by any private DNS record set. Returns, for each target resource, whether a reference exists and, optionally, the number of referencing record sets.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Properties for private DNS resource reference existence request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateDnsResourceReferenceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PrivateDnsResourceReferenceExistenceResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Check Private DNS resource reference": {
-            "$ref": "./examples/CheckPrivateDnsResourceReference.json"
           }
         }
       }
@@ -1591,10 +1558,7 @@
           "description": "A list of private DNS record sets that reference the target resource.",
           "items": {
             "$ref": "#/definitions/SubResource"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          }
         },
         "targetResource": {
           "$ref": "#/definitions/SubResource",
@@ -1602,64 +1566,20 @@
         }
       }
     },
-    "PrivateDnsResourceReferenceExistence": {
-      "type": "object",
-      "description": "Represents whether a single target Azure resource is referenced by any private DNS record set, and (optionally) how many record sets reference it.",
-      "properties": {
-        "targetResource": {
-          "$ref": "#/definitions/SubResource",
-          "description": "A reference to the azure resource that was checked."
-        },
-        "hasReference": {
-          "type": "boolean",
-          "description": "True if at least one private DNS record set in the subscription references the target resource; otherwise false."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of private DNS record sets that reference the target resource. Omitted when no references exist or when the service does not return a count."
-        }
-      }
-    },
-    "PrivateDnsResourceReferenceExistenceResult": {
-      "type": "object",
-      "description": "Represents the result of a private DNS resource reference existence request.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateDnsResourceReferenceExistenceResultProperties",
-          "description": "The properties of the private DNS resource reference existence result.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateDnsResourceReferenceExistenceResultProperties": {
-      "type": "object",
-      "description": "The result of a private DNS resource reference existence request. Returns, for each target resource in the request, whether a private DNS record set references it.",
-      "properties": {
-        "privateDnsResourceReferences": {
-          "type": "array",
-          "description": "A list of private DNS resource reference existence entries, one per target resource in the request.",
-          "items": {
-            "$ref": "#/definitions/PrivateDnsResourceReferenceExistence"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "PrivateDnsResourceReferenceRequest": {
       "type": "object",
-      "description": "Represents the properties of the private DNS resource reference request. Used by both the get and check operations.",
+      "description": "Represents the properties of the private DNS Resource Reference Request.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateDnsResourceReferenceRequestProperties",
-          "description": "The properties of the private DNS resource reference request.",
+          "description": "The properties of the Resource Reference Request.",
           "x-ms-client-flatten": true
         }
       }
     },
     "PrivateDnsResourceReferenceRequestProperties": {
       "type": "object",
-      "description": "Represents the properties of the private DNS resource reference request.",
+      "description": "Represents the properties of the private DNS Resource Reference Request.",
       "properties": {
         "targetResources": {
           "type": "array",
@@ -1672,22 +1592,22 @@
     },
     "PrivateDnsResourceReferenceResult": {
       "type": "object",
-      "description": "Represents the result of a private DNS resource reference request.",
+      "description": "Represents the properties of the private DNS Resource Reference Result.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateDnsResourceReferenceResultProperties",
-          "description": "The properties of the private DNS resource reference result.",
+          "description": "The result of private dns resource reference request. Returns a list of private dns resource references for each of the azure resource in the request.",
           "x-ms-client-flatten": true
         }
       }
     },
     "PrivateDnsResourceReferenceResultProperties": {
       "type": "object",
-      "description": "The result of a private DNS resource reference request. Returns a list of private DNS resource references for each of the azure resources in the request.",
+      "description": "The result of private dns resource reference request. Returns a list of private dns resource references for each of the azure resource in the request.",
       "properties": {
         "privateDnsResourceReferences": {
           "type": "array",
-          "description": "A list of private DNS resource references, one per target resource in the request.",
+          "description": "The result of private dns resource reference request. A list of private dns resource references for each of the azure resource in the request",
           "items": {
             "$ref": "#/definitions/PrivateDnsResourceReference"
           },
@@ -1990,7 +1910,7 @@
         },
         "trafficManagementProfile": {
           "$ref": "#/definitions/SubResource",
-          "description": "A reference to an azure traffic manager profile resource from where the record set value is taken."
+          "description": "A reference to an azure private traffic manager profile resource from where the record set value is taken. Cannot be combined with aRecords, aaaaRecords, or cnameRecord; service-side validation enforces this."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",

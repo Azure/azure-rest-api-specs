@@ -10,33 +10,32 @@
     },
     "privateZoneName": "privatezone1.com",
     "recordType": "A",
-    "relativeRecordSetName": "recordA",
+    "relativeRecordSetName": "ptmlinkrecord",
     "resourceGroupName": "resourceGroup1",
     "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "recorda",
+        "name": "ptmlinkrecord",
         "type": "Microsoft.Network/privateDnsZones/A",
         "etag": "00000000-0000-0000-0000-000000000000",
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/ptmlinkrecord",
         "properties": {
-          "aRecords": [
-            {
-              "ipv4Address": "1.2.3.4"
-            }
-          ],
-          "fqdn": "recorda.privatezone1.com.",
+          "fqdn": "ptmlinkrecord.privatezone1.com.",
           "isAutoRegistered": false,
           "metadata": {
             "key2": "value2"
           },
-          "ttl": 3600
+          "ttl": 3600,
+          "trafficManagementProfile": {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+          },
+          "provisioningState": "Succeeded"
         }
       }
     }
   },
   "operationId": "RecordSets_Update",
-  "title": "PATCH Private DNS Zone A Record Set"
+  "title": "PATCH Private DNS Zone PTMLink A Record Set"
 }
