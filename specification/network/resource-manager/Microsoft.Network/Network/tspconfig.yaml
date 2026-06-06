@@ -2,6 +2,9 @@ parameters:
   "service-dir":
     default: "sdk/network"
 options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Network"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/network"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-network"

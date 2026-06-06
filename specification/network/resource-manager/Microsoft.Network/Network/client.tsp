@@ -41,11 +41,11 @@ namespace CombineClient;
   Microsoft.Network.PublicIPAddresses
 );
 
-@@clientName(CombineClient, "NetworkManagementClient", "javascript,python");
+@@clientName(CombineClient, "NetworkManagementClient", "csharp,javascript,python");
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
-  "javascript,python"
+  "csharp,javascript,python"
 );
 
 // Java naming mitigations
@@ -2461,6 +2461,296 @@ op replaceprivateDnsZoneGroupsList(
   "ArmResourceProvisioningState",
   "python,javascript"
 );
+
+// Method renames to maintain backward compatibility for C# (from autorest.md.bak)
+@@clientName(
+  ApplicationGatewaysOperationGroup.listAvailableWafRuleSets,
+  "GetAppGatewayAvailableWafRuleSets",
+  "csharp"
+);
+@@clientName(
+  ApplicationGatewayAvailableSslOptionsOperationGroup.listAvailableSslOptions,
+  "GetApplicationGatewayAvailableSslOptions",
+  "csharp"
+);
+@@clientName(
+  ApplicationGatewayAvailableSslOptionsOperationGroup.listAvailableSslPredefinedPolicies,
+  "GetApplicationGatewayAvailableSslPredefinedPolicies",
+  "csharp"
+);
+@@clientName(
+  ApplicationGatewayAvailableSslOptionsOperationGroup.getSslPredefinedPolicy,
+  "GetApplicationGatewaySslPredefinedPolicy",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkGatewayConnections.vpnDeviceConfigurationScript,
+  "VpnDeviceConfigurationScript",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkGateways.generatevpnclientpackage,
+  "GenerateVpnClientPackage",
+  "csharp"
+);
+@@clientName(
+  BgpConnections.listLearnedRoutes,
+  "GetVirtualHubBgpConnectionLearnedRoutes",
+  "csharp"
+);
+@@clientName(
+  BgpConnections.listAdvertisedRoutes,
+  "GetVirtualHubBgpConnectionAdvertisedRoutes",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.getEffectiveVirtualHubRoutes,
+  "GetVirtualHubEffectiveRoutes",
+  "csharp"
+);
+@@clientName(VirtualHubs.getOutboundRoutes, "GetVirtualHubOutboundRoutes", "csharp");
+@@clientName(VirtualHubs.getInboundRoutes, "GetVirtualHubInboundRoutes", "csharp");
+@@clientName(
+  Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  "GetNetworkInterfaces",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+  "GetPublicIPAddresses",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+  "GetPublicIPAddress",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Compute.NetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
+  "GetNetworkInterface",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Compute.NetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
+  "GetNetworkInterfaces",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+  "GetPublicIPAddresses",
+  "csharp"
+);
+@@clientName(
+  VirtualWans.generatevirtualwanvpnserverconfigurationvpnprofile,
+  "GenerateVirtualWanVpnServerConfigurationVpnProfile",
+  "csharp"
+);
+
+// Type renames to maintain backward compatibility for C# (from autorest.md.bak rename-mapping)
+@@clientName(
+  Microsoft.Network.HttpConfiguration,
+  "NetworkHttpConfiguration",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.HttpConfigurationMethod,
+  "NetworkHttpConfigurationMethod",
+  "csharp"
+);
+@@clientName(Microsoft.Network.HttpHeader, "NetworkWatcherHttpHeader", "csharp");
+@@clientName(Microsoft.Network.HttpMethod, "NetworkWatcherHttpMethod", "csharp");
+@@clientName(Common.IPConfiguration, "NetworkIPConfiguration", "csharp");
+@@clientName(
+  Common.IPConfigurationProfile,
+  "NetworkIPConfigurationProfile",
+  "csharp"
+);
+@@clientName(Common.IPVersion, "NetworkIPVersion", "csharp");
+@@clientName(Common.ProvisioningState, "NetworkProvisioningState", "csharp");
+@@clientName(Common.SubResource, "NetworkSubResource", "csharp");
+@@clientName(Common.Resource, "NetworkTrackedResourceData", "csharp");
+@@clientName(Microsoft.Network.TagsObject, "NetworkTagsObject", "csharp");
+@@clientName(
+  Microsoft.Network.QueryRequestOptions,
+  "NetworkManagementQueryContent",
+  "csharp"
+);
+@@clientName(Microsoft.Network.Geo, "CidrAdvertisingGeoCode", "csharp");
+@@clientName(Microsoft.Network.Geo.NAM, "Nam", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayTierTypes.WAF, "Waf", "csharp");
+@@clientName(
+  Microsoft.Network.ApplicationGatewayTierTypes.WAF_v2,
+  "WafV2",
+  "csharp"
+);
+@@clientName(Microsoft.Network.VpnAuthenticationType.AAD, "Aad", "csharp");
+@@clientName(
+  Microsoft.Network.VpnPolicyMemberAttributeType.AADGroupId,
+  "AadGroupId",
+  "csharp"
+);
+@@clientName(Microsoft.Network.IpsecEncryption.DES, "Des", "csharp");
+@@clientName(Microsoft.Network.IpsecEncryption.DES3, "Des3", "csharp");
+@@clientName(Microsoft.Network.IpsecEncryption.AES128, "Aes128", "csharp");
+@@clientName(Microsoft.Network.IpsecEncryption.AES192, "Aes192", "csharp");
+@@clientName(Microsoft.Network.IpsecEncryption.AES256, "Aes256", "csharp");
+@@clientName(
+  Microsoft.Network.IpsecEncryption.GCMAES128,
+  "GcmAes128",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IpsecEncryption.GCMAES192,
+  "GcmAes192",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IpsecEncryption.GCMAES256,
+  "GcmAes256",
+  "csharp"
+);
+@@clientName(Microsoft.Network.IpsecIntegrity.SHA1, "Sha1", "csharp");
+@@clientName(Microsoft.Network.IpsecIntegrity.SHA256, "Sha256", "csharp");
+@@clientName(
+  Microsoft.Network.IpsecIntegrity.GCMAES128,
+  "GcmAes128",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IpsecIntegrity.GCMAES192,
+  "GcmAes192",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IpsecIntegrity.GCMAES256,
+  "GcmAes256",
+  "csharp"
+);
+@@clientName(Microsoft.Network.IkeEncryption.DES, "Des", "csharp");
+@@clientName(Microsoft.Network.IkeEncryption.DES3, "Des3", "csharp");
+@@clientName(Microsoft.Network.IkeEncryption.AES128, "Aes128", "csharp");
+@@clientName(Microsoft.Network.IkeEncryption.AES192, "Aes192", "csharp");
+@@clientName(Microsoft.Network.IkeEncryption.AES256, "Aes256", "csharp");
+@@clientName(
+  Microsoft.Network.IkeEncryption.GCMAES256,
+  "GcmAes256",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IkeEncryption.GCMAES128,
+  "GcmAes128",
+  "csharp"
+);
+@@clientName(Microsoft.Network.IkeIntegrity.SHA1, "Sha1", "csharp");
+@@clientName(Microsoft.Network.IkeIntegrity.SHA256, "Sha256", "csharp");
+@@clientName(Microsoft.Network.IkeIntegrity.SHA384, "Sha384", "csharp");
+@@clientName(
+  Microsoft.Network.IkeIntegrity.GCMAES256,
+  "GcmAes256",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IkeIntegrity.GCMAES128,
+  "GcmAes128",
+  "csharp"
+);
+@@clientName(Microsoft.Network.DhGroup.DHGroup1, "DhGroup1", "csharp");
+@@clientName(Microsoft.Network.DhGroup.DHGroup2, "DhGroup2", "csharp");
+@@clientName(Microsoft.Network.DhGroup.DHGroup14, "DhGroup14", "csharp");
+@@clientName(
+  Microsoft.Network.DhGroup.DHGroup2048,
+  "DhGroup2048",
+  "csharp"
+);
+@@clientName(Microsoft.Network.DhGroup.ECP256, "Ecp256", "csharp");
+@@clientName(Microsoft.Network.DhGroup.ECP384, "Ecp384", "csharp");
+@@clientName(Microsoft.Network.DhGroup.DHGroup24, "DhGroup24", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.PFS1, "Pfs1", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.PFS2, "Pfs2", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.PFS2048, "Pfs2048", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.ECP256, "Ecp256", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.ECP384, "Ecp384", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.PFS24, "Pfs24", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.PFS14, "Pfs14", "csharp");
+@@clientName(Microsoft.Network.PfsGroup.PFSMM, "Pfs", "csharp");
+
+// Property renames to maintain backward compatibility for C# (from autorest.md.bak rename-mapping)
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.dedicatedBackendConnection,
+  "IsDedicatedBackendConnectionEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
+  "RequestTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateCertChainAndExpiry,
+  "IsValidateCertChainAndExpiryEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateSNI,
+  "IsValidateSniEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.enableL4ClientIpPreservation,
+  "IsL4ClientIPPreservationEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendSettingsPropertiesFormat.timeout,
+  "TimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayConnectionDraining.drainTimeoutInSec,
+  "DrainTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayOnDemandProbe.enableProbeProxyProtocolHeader,
+  "IsProbeProxyProtocolHeaderEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayProbePropertiesFormat.enableProbeProxyProtocolHeader,
+  "IsProbeProxyProtocolHeaderEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayProbePropertiesFormat.interval,
+  "IntervalInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayProbePropertiesFormat.timeout,
+  "TimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PacketCaptureParameters.continuousCapture,
+  "IsContinuousCapture",
+  "csharp"
+);
+@@clientName(
+  Common.TrafficAnalyticsConfigurationProperties.trafficAnalyticsInterval,
+  "TrafficAnalyticsIntervalInMinutes",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionDuration,
+  "vpnConnectionDurationInSeconds",
+  "csharp"
+);
+@@clientName(
+  Common.VirtualNetworkPeeringPropertiesFormat.peerCompleteVnets,
+  "AreCompleteVnetsPeered",
+  "csharp"
+);
+@@clientName(Common.VirtualNetworkEncryption.enabled, "IsEnabled", "csharp");
 
 // Move Microsoft.Compute.PublicIPAddresses operations to Microsoft.Network.PublicIPAddresses for Java
 @@clientLocation(
