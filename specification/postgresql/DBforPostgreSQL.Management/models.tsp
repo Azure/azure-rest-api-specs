@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;
 
@@ -2011,7 +2012,7 @@ model MigrationProperties {
   /**
    * Identifier of the private endpoint migration instance.
    */
-  migrationInstanceResourceId?: Azure.Core.armResourceIdentifier;
+  migrationInstanceResourceId?: armResourceIdentifier;
 
   /**
    * Mode used to perform the migration: Online or Offline.
@@ -3005,7 +3006,7 @@ model ServerProperties {
    * Identifier of the server to be used as the source of the new server. Required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', 'Replica', or 'ReviveDropped'. This property is returned only when the target server is a read replica.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  sourceServerResourceId?: Azure.Core.armResourceIdentifier<[
+  sourceServerResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.DBforPostgreSQL/flexibleServers";
     }
@@ -3159,6 +3160,16 @@ model DataEncryption {
    */
   @visibility(Lifecycle.Read)
   geoBackupEncryptionKeyStatus?: EncryptionKeyStatus;
+
+  #suppress "azure-core/no-guid-usage" "The client id of primary federated identity is to be defined as GUID following recommendation by Azure Resource Manager guidelines."
+  @doc("Client id of multi-tenant Microsoft Entra application.")
+  @added(Versions.v2026_04_01)
+  primaryFederatedIdentityClientId?: uuid;
+
+  #suppress "azure-core/no-guid-usage" "The client id of backup federated identity is to be defined as GUID following recommendation by Azure Resource Manager guidelines."
+  @doc("Client id of multi-tenant Microsoft Entra application for when it is configured to support geographically redundant backups.")
+  @added(Versions.v2026_04_01)
+  geoBackupFederatedIdentityClientId?: uuid;
 }
 
 /**
@@ -3196,7 +3207,7 @@ model Network {
   /**
    * Resource identifier of the delegated subnet. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone.
    */
-  delegatedSubnetResourceId?: Azure.Core.armResourceIdentifier<[
+  delegatedSubnetResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
@@ -3205,7 +3216,7 @@ model Network {
   /**
    * Identifier of the private DNS zone. Required during creation of a new server, in case you want the server to be integrated into your own virtual network. For an update operation, you only have to provide this property if you want to change the value assigned for the private DNS zone.
    */
-  privateDnsZoneArmResourceId?: Azure.Core.armResourceIdentifier<[
+  privateDnsZoneArmResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Network/privateDnsZones";
     }
@@ -3914,6 +3925,271 @@ model MigrateNetworkStatus {
    */
   @visibility(Lifecycle.Read)
   state?: NetworkMigrationState;
+}
+
+@doc("The status of a maintenance event.")
+@added(Versions.v2026_04_01)
+union MaintenanceEventStatus {
+  string,
+
+  @doc("The maintenance event is scheduled and has not yet started.")
+  Planned: "Planned",
+
+  @doc("The maintenance event is currently in progress.")
+  InProgress: "InProgress",
+
+  @doc("The maintenance event has completed successfully.")
+  Complete: "Complete",
+
+  @doc("The maintenance event has been rescheduled (postponed) by the customer.")
+  Rescheduled: "Rescheduled",
+
+  @doc("The maintenance event was canceled, failed, or timed out.")
+  Canceled: "Canceled",
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Maintenance events are read-only resources that do not have a provisioning lifecycle."
+@doc("Properties of a maintenance event resource.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventResourceProperties {
+  @doc("A service-generated identifier for this maintenance event, assigned by the platform (e.g., 'YL1T-HFG'). The format is not contractual and clients should not attempt to parse or construct this value.")
+  @visibility(Lifecycle.Read)
+  maintenanceEventId?: string;
+
+  @doc("The maintenance type (e.g., 'PlannedMaintenance').")
+  @visibility(Lifecycle.Read)
+  maintenanceType: MaintenanceType;
+
+  @doc("The human-readable description of the maintenance event.")
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  @doc("The customer-facing status of the maintenance event.")
+  @visibility(Lifecycle.Read)
+  status: MaintenanceEventStatus;
+
+  @doc("The scheduled start time of the maintenance event (UTC).")
+  @visibility(Lifecycle.Read)
+  startTime: utcDateTime;
+
+  @doc("The scheduled end time of the maintenance event (UTC).")
+  @visibility(Lifecycle.Read)
+  endTime: utcDateTime;
+
+  @doc("The estimated downtime as an ISO 8601 duration string (e.g., 'PT60S' = 60 seconds).")
+  @visibility(Lifecycle.Read)
+  estimatedDowntime?: string;
+
+  @doc("A value indicating whether this maintenance event can be rescheduled by the customer.")
+  @visibility(Lifecycle.Read)
+  deferrable: boolean;
+
+  @doc("The latest date/time this maintenance event can be postponed to (UTC). Present only when deferrable is true.")
+  @visibility(Lifecycle.Read)
+  deferralDeadline?: utcDateTime;
+
+  @doc("The previous scheduled start time before the most recent reschedule (UTC). Null if the event has never been rescheduled.")
+  @visibility(Lifecycle.Read)
+  rescheduledFrom?: utcDateTime;
+
+  @doc("The time this maintenance event record was last updated (UTC).")
+  @visibility(Lifecycle.Read)
+  lastUpdatedTime?: utcDateTime;
+
+  @doc("The initial scheduled start time before any reschedule (UTC). Equals startTime when the event has never been rescheduled.")
+  @visibility(Lifecycle.Read)
+  originalStartTime: utcDateTime;
+}
+
+@doc("Type of a maintenance event resource.")
+@added(Versions.v2026_04_01)
+union MaintenanceType {
+  string,
+
+  @doc("Planned maintenance event.")
+  PlannedMaintenance: "PlannedMaintenance",
+}
+
+@doc("Maintenance event resource for a PostgreSQL flexible server.")
+@parentResource(Server)
+@added(Versions.v2026_04_01)
+model MaintenanceEventResource
+  is Azure.ResourceManager.ProxyResource<MaintenanceEventResourceProperties> {
+  ...ResourceNameParameter<
+    MaintenanceEventResource,
+    KeyName = "maintenanceEventId",
+    SegmentName = "maintenanceEvents",
+    NamePattern = "^[A-Z0-9]{4}-[A-Z0-9]{3}$"
+  >;
+}
+
+@doc("Filter for maintenance event status.")
+@added(Versions.v2026_04_01)
+union MaintenanceEventStatusFilter {
+  string,
+
+  @doc("Return events that have a scheduled or in progress status.")
+  Upcoming: "Upcoming",
+
+  @doc("Return events that have a completed status.")
+  Past: "Past",
+}
+
+@doc("Parameters to reschedule a maintenance event.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventRescheduleRequest {
+  @doc("New start time in RFC3339 format.")
+  postponeToDateTime: utcDateTime;
+}
+
+@doc("Error information from precheck validation.")
+@added(Versions.v2026_04_01)
+model PrecheckErrorInfo {
+  @doc("The error code.")
+  errorCode?: int32;
+
+  @doc("The error message.")
+  errorMessage?: string;
+}
+
+@doc("Response model for maintenance event reschedule and apply-now actions.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventActionResponse {
+  @doc("The maintenance event name (maintenance ID).")
+  maintenanceEventId?: string;
+
+  @doc("The full Azure resource ID of the server.")
+  serverId?: armResourceIdentifier;
+
+  @doc("The status of the maintenance event.")
+  status?: MaintenanceEventStatus;
+
+  @doc("The planned start time of the maintenance event (UTC).")
+  plannedStartTime?: utcDateTime;
+
+  @doc("The planned end time of the maintenance event (UTC).")
+  plannedEndTime?: utcDateTime;
+
+  @doc("A value indicating whether this was an apply-now (immediate) action. True for ApplyNow; false for Reschedule.")
+  appliedNow?: boolean;
+
+  @doc("The time this maintenance event record was last updated (UTC).")
+  lastUpdatedTime?: utcDateTime;
+}
+
+@doc("Upgrade sequence information.")
+@added(Versions.v2026_04_01)
+model UpgradeSequence {
+  @doc("The source PostgreSQL version.")
+  sourceVersion?: PostgresMajorVersion;
+
+  @doc("The target PostgreSQL version.")
+  targetVersion?: PostgresMajorVersion;
+}
+
+@doc("Precheck result details.")
+@added(Versions.v2026_04_01)
+model PrecheckResult {
+  @doc("The action performed.")
+  action?: string;
+
+  @doc("The upgrade sequence information.")
+  upgradeSequence?: UpgradeSequence;
+
+  @doc("Array of error information.")
+  @identifiers(#["errorCode"])
+  errorInfo?: PrecheckErrorInfo[];
+}
+
+@doc("Policy validation details.")
+@added(Versions.v2026_04_01)
+model PolicyDetail {
+  @doc("The name of the policy.")
+  policyName?: string;
+
+  @doc("Whether the policy validation passed.")
+  passed?: boolean;
+
+  @doc("The error code if validation failed.")
+  errorCode?: int32;
+
+  @doc("The error message if validation failed.")
+  errorMessage?: string;
+
+  @doc("Description of what the policy validates.")
+  policyDescription?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Major Version Upgrade Precheck are read-only resources that do not have a provisioning lifecycle."
+@doc("Major version upgrade precheck resource with validation results.")
+@added(Versions.v2026_04_01)
+model MajorVersionUpgradePrecheckResourceProperties {
+  @doc("The time when the precheck was created.")
+  createTime?: utcDateTime;
+
+  @doc("The status of the precheck validation.")
+  status?: MajorVersionUpgradePrecheckStatus;
+
+  @doc("The detailed result of the precheck operation.")
+  precheckResult?: PrecheckResult;
+
+  @doc("The target PostgreSQL major version for the upgrade.")
+  targetVersion?: PostgresMajorVersion;
+
+  @doc("Array of policy validation details.")
+  @identifiers(#["policyName"])
+  policyDetails?: PolicyDetail[];
+}
+
+@doc("Request model for starting a major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+model StartMajorVersionUpgradePrecheckRequest {
+  @doc("The target major version to upgrade to.")
+  targetVersion: PostgresMajorVersion;
+}
+
+@doc("Response model for starting a major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+model StartMajorVersionUpgradePrecheckResponse {
+  @doc("The precheck validation ID.")
+  name?: string;
+
+  @doc("The time when the precheck was created.")
+  createTime?: utcDateTime;
+
+  @doc("The status of the precheck validation.")
+  status?: MajorVersionUpgradePrecheckStatus;
+}
+
+@doc("The status of the major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+union MajorVersionUpgradePrecheckStatus {
+  string,
+
+  @doc("Executing prechecks against the source server")
+  Validating: "Validating",
+
+  @doc("Validation succeeded")
+  Succeeded: "Succeeded",
+
+  @doc("Validation failed")
+  Failed: "Failed",
+
+  @doc("Validation canceled")
+  Canceled: "Canceled",
+}
+
+@doc("Major version upgrade precheck resource for a PostgreSQL flexible server.")
+@parentResource(Server)
+@added(Versions.v2026_04_01)
+model MajorVersionUpgradePrecheckResource
+  is Azure.ResourceManager.ProxyResource<MajorVersionUpgradePrecheckResourceProperties> {
+  ...ResourceNameParameter<
+    MajorVersionUpgradePrecheckResource,
+    KeyName = "precheckValidationId",
+    SegmentName = "majorVersionUpgradePrecheck",
+    NamePattern = "^[a-zA-Z0-9-]{3,36}$"
+  >;
 }
 
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);

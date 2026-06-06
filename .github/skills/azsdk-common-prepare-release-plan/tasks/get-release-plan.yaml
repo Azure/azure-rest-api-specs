@@ -1,0 +1,15 @@
+id: release-plan-get-001
+name: Get Release Plan Details
+description: |
+  Test that the skill retrieves release plan details by work item ID or spec PR URL.
+tags:
+  - basic
+  - get
+inputs:
+  prompt: "Get the release plan details for work item 12345."
+expected:
+  output_contains:
+    - "release plan"
+  behavior:
+    max_tool_calls: 3
+    max_response_time_ms: 15000

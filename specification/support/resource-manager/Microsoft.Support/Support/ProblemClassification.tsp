@@ -15,13 +15,13 @@ namespace Microsoft.Support;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ProblemClassifications")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2026_06_01)
 interface ClassifyProblems {
   /**
    * Classify the right problem classifications (categories) available for a specific Azure service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProblemClassifications_classifyProblems")
+  @operationId("ProblemClassifications_ClassifyProblems")
   @autoRoute
   classifyProblems is ArmProviderActionSync<
     Request = ProblemClassificationsClassificationInput,
@@ -42,13 +42,13 @@ interface ClassifyProblems {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("ProblemClassifications")
-@added(Versions.v2025_06_01_preview)
+@added(Versions.v2026_06_01)
 interface ClassifyProblemsNoSubscription {
   /**
    * Classify the right problem classifications (categories) available for a specific Azure service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProblemClassificationsNoSubscription_classifyProblems")
+  @operationId("ProblemClassificationsNoSubscription_ClassifyProblems")
   @autoRoute
   classifyProblems is ArmProviderActionSync<
     Request = ProblemClassificationsClassificationInput,
