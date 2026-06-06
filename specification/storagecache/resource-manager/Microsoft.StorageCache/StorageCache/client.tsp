@@ -180,6 +180,9 @@ using Microsoft.StorageCache;
 @@alternateType(BlobNfsTarget.target, armResourceIdentifier, "csharp");
 @@alternateType(ClfsTarget.target, armResourceIdentifier, "csharp");
 @@alternateType(AscUsagesOperationGroup.list::parameters.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(AmlFilesystem.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(Cache.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(StorageTarget.location, Azure.Core.azureLocation, "csharp");
 
 @@visibility(CacheProperties.primingJobs, Lifecycle.Read);
 @@visibility(AutoExportJobProperties.status, Lifecycle.Read, Lifecycle.Create);
