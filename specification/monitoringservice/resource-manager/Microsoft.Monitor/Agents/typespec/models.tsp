@@ -23,7 +23,7 @@ namespace Microsoft.Monitor {
     enabled?: AgentState;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    @Azure.ResourceManager.identifiers(#["operationType"])
+    @Azure.ResourceManager.identifiers(#["type"])
     operations?: OperationEntry[];
   }
 
@@ -71,7 +71,7 @@ namespace Microsoft.Monitor {
    */
   model OperationEntry {
     /** Type of operation. */
-    operationType: OperationType;
+    type: OperationType;
 
     /** Execution mode for this operation. Defaults to Auto when not specified. */
     mode?: OperationMode;
@@ -96,7 +96,7 @@ namespace Microsoft.Monitor {
     enabled?: AgentState;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    @Azure.ResourceManager.identifiers(#["operationType"])
+    @Azure.ResourceManager.identifiers(#["type"])
     operations?: OperationEntry[];
   }
 
