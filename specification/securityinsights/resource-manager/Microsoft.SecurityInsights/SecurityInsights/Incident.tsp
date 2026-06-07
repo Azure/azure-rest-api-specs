@@ -136,11 +136,15 @@ interface Incidents {
   /**
    * Triggers playbook on a specific incident
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("manualTrigger")
   runPlaybook is IncidentOps.ActionSync<
     Incident,
     Request = ManualTriggerRequestBody,
-    Response = NoContentResponse,
+    Response = NoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body body: unknown;
+    },
     ErrorType = CloudError,
     OptionalRequestBody = true
   >;
