@@ -1,4 +1,4 @@
-﻿import "./Network/main.tsp";
+import "./Network/main.tsp";
 import "./Vmss/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
@@ -41,7 +41,11 @@ namespace CombineClient;
   Microsoft.Network.PublicIPAddresses
 );
 
-@@clientName(CombineClient, "NetworkManagementClient", "csharp,javascript,python");
+@@clientName(
+  CombineClient,
+  "NetworkManagementClient",
+  "csharp,javascript,python"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
@@ -2508,8 +2512,16 @@ op replaceprivateDnsZoneGroupsList(
   "GetVirtualHubEffectiveRoutes",
   "csharp"
 );
-@@clientName(VirtualHubs.getOutboundRoutes, "GetVirtualHubOutboundRoutes", "csharp");
-@@clientName(VirtualHubs.getInboundRoutes, "GetVirtualHubInboundRoutes", "csharp");
+@@clientName(
+  VirtualHubs.getOutboundRoutes,
+  "GetVirtualHubOutboundRoutes",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.getInboundRoutes,
+  "GetVirtualHubInboundRoutes",
+  "csharp"
+);
 @@clientName(
   Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   "GetNetworkInterfaces",
@@ -2557,8 +2569,16 @@ op replaceprivateDnsZoneGroupsList(
   "NetworkHttpConfigurationMethod",
   "csharp"
 );
-@@clientName(Microsoft.Network.HttpHeader, "NetworkWatcherHttpHeader", "csharp");
-@@clientName(Microsoft.Network.HttpMethod, "NetworkWatcherHttpMethod", "csharp");
+@@clientName(
+  Microsoft.Network.HttpHeader,
+  "NetworkWatcherHttpHeader",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.HttpMethod,
+  "NetworkWatcherHttpMethod",
+  "csharp"
+);
 @@clientName(Common.IPConfiguration, "NetworkIPConfiguration", "csharp");
 @@clientName(
   Common.IPConfigurationProfile,
@@ -2577,7 +2597,11 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientName(Microsoft.Network.Geo, "CidrAdvertisingGeoCode", "csharp");
 @@clientName(Microsoft.Network.Geo.NAM, "Nam", "csharp");
-@@clientName(Microsoft.Network.ApplicationGatewayTierTypes.WAF, "Waf", "csharp");
+@@clientName(
+  Microsoft.Network.ApplicationGatewayTierTypes.WAF,
+  "Waf",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.ApplicationGatewayTierTypes.WAF_v2,
   "WafV2",
@@ -2611,57 +2635,25 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientName(Microsoft.Network.IpsecIntegrity.SHA1, "Sha1", "csharp");
 @@clientName(Microsoft.Network.IpsecIntegrity.SHA256, "Sha256", "csharp");
-@@clientName(
-  Microsoft.Network.IpsecIntegrity.GCMAES128,
-  "GcmAes128",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.IpsecIntegrity.GCMAES192,
-  "GcmAes192",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.IpsecIntegrity.GCMAES256,
-  "GcmAes256",
-  "csharp"
-);
+@@clientName(Microsoft.Network.IpsecIntegrity.GCMAES128, "GcmAes128", "csharp");
+@@clientName(Microsoft.Network.IpsecIntegrity.GCMAES192, "GcmAes192", "csharp");
+@@clientName(Microsoft.Network.IpsecIntegrity.GCMAES256, "GcmAes256", "csharp");
 @@clientName(Microsoft.Network.IkeEncryption.DES, "Des", "csharp");
 @@clientName(Microsoft.Network.IkeEncryption.DES3, "Des3", "csharp");
 @@clientName(Microsoft.Network.IkeEncryption.AES128, "Aes128", "csharp");
 @@clientName(Microsoft.Network.IkeEncryption.AES192, "Aes192", "csharp");
 @@clientName(Microsoft.Network.IkeEncryption.AES256, "Aes256", "csharp");
-@@clientName(
-  Microsoft.Network.IkeEncryption.GCMAES256,
-  "GcmAes256",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.IkeEncryption.GCMAES128,
-  "GcmAes128",
-  "csharp"
-);
+@@clientName(Microsoft.Network.IkeEncryption.GCMAES256, "GcmAes256", "csharp");
+@@clientName(Microsoft.Network.IkeEncryption.GCMAES128, "GcmAes128", "csharp");
 @@clientName(Microsoft.Network.IkeIntegrity.SHA1, "Sha1", "csharp");
 @@clientName(Microsoft.Network.IkeIntegrity.SHA256, "Sha256", "csharp");
 @@clientName(Microsoft.Network.IkeIntegrity.SHA384, "Sha384", "csharp");
-@@clientName(
-  Microsoft.Network.IkeIntegrity.GCMAES256,
-  "GcmAes256",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.IkeIntegrity.GCMAES128,
-  "GcmAes128",
-  "csharp"
-);
+@@clientName(Microsoft.Network.IkeIntegrity.GCMAES256, "GcmAes256", "csharp");
+@@clientName(Microsoft.Network.IkeIntegrity.GCMAES128, "GcmAes128", "csharp");
 @@clientName(Microsoft.Network.DhGroup.DHGroup1, "DhGroup1", "csharp");
 @@clientName(Microsoft.Network.DhGroup.DHGroup2, "DhGroup2", "csharp");
 @@clientName(Microsoft.Network.DhGroup.DHGroup14, "DhGroup14", "csharp");
-@@clientName(
-  Microsoft.Network.DhGroup.DHGroup2048,
-  "DhGroup2048",
-  "csharp"
-);
+@@clientName(Microsoft.Network.DhGroup.DHGroup2048, "DhGroup2048", "csharp");
 @@clientName(Microsoft.Network.DhGroup.ECP256, "Ecp256", "csharp");
 @@clientName(Microsoft.Network.DhGroup.ECP384, "Ecp384", "csharp");
 @@clientName(Microsoft.Network.DhGroup.DHGroup24, "DhGroup24", "csharp");
@@ -2742,7 +2734,7 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientName(
   Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionDuration,
-  "vpnConnectionDurationInSeconds",
+  "VpnConnectionDurationInSeconds",
   "csharp"
 );
 @@clientName(
@@ -2751,6 +2743,890 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 @@clientName(Common.VirtualNetworkEncryption.enabled, "IsEnabled", "csharp");
+
+@@clientName(
+  ApplicationGatewayAvailableSslOptions,
+  "ApplicationGatewayAvailableSslOptionsInfo",
+  "csharp"
+);
+@@clientName(CustomIpPrefix, "CustomIPPrefix", "csharp");
+@@clientName(HubIpConfiguration, "HubIPConfiguration", "csharp");
+@@clientName(VirtualWAN, "VirtualWan", "csharp");
+@@clientName(
+  ActiveConfigurationParameter,
+  "ActiveConfigurationContent",
+  "csharp"
+);
+@@clientName(Common.AddressSpace, "VirtualNetworkAddressSpace", "csharp");
+@@clientName(AdminRule, "NetworkAdminRule", "csharp");
+@@clientName(
+  ApplicationGatewayEntraJWTValidationConfig,
+  "ApplicationGatewayEntraJwtValidationConfig",
+  "csharp"
+);
+@@clientName(
+  ApplicationGatewayPrivateLinkIpConfiguration,
+  "ApplicationGatewayPrivateLinkIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  AvailableProvidersListParameters,
+  "AvailableProvidersListContent",
+  "csharp"
+);
+@@clientName(
+  AzureFirewallApplicationRule,
+  "AzureFirewallApplicationRuleCollectionData",
+  "csharp"
+);
+@@clientName(AzureFirewallIPGroups, "AzureFirewallIPGroups", "csharp");
+@@clientName(
+  AzureFirewallNatRule,
+  "AzureFirewallNatRuleCollectionData",
+  "csharp"
+);
+@@clientName(
+  AzureFirewallNetworkRule,
+  "AzureFirewallNetworkRuleCollectionData",
+  "csharp"
+);
+@@clientName(
+  AzureFirewallPacketCaptureResponse,
+  "AzureFirewallPacketCaptureResult",
+  "csharp"
+);
+@@clientName(
+  AzureReachabilityReportParameters,
+  "AzureReachabilityReportContent",
+  "csharp"
+);
+@@clientName(
+  BastionShareableLinkTokenListRequest,
+  "BastionShareableLinkTokenListContent",
+  "csharp"
+);
+@@clientName(BGPCommunity, "BgpCommunity", "csharp");
+@@clientName(
+  ConnectionMonitor,
+  "ConnectionMonitorCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(ConnectivityParameters, "ConnectivityContent", "csharp");
+@@clientName(
+  ContainerNetworkInterfaceIpConfiguration,
+  "ContainerNetworkInterfaceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  Common.CustomDnsConfigPropertiesFormat,
+  "CustomDnsConfigProperties",
+  "csharp"
+);
+@@clientName(DefaultAdminRule, "NetworkDefaultAdminRule", "csharp");
+@@clientName(Common.Delegation, "ServiceDelegation", "csharp");
+@@clientName(
+  DelegationProperties,
+  "VirtualApplianceDelegationProperties",
+  "csharp"
+);
+@@clientName(
+  DisassociateCloudServicePublicIpRequest,
+  "DisassociateCloudServicePublicIPContent",
+  "csharp"
+);
+@@clientName(EffectiveRoutesParameters, "EffectiveRoutesContent", "csharp");
+@@clientName(ExplicitProxy, "FirewallPolicyExplicitProxy", "csharp");
+@@clientName(
+  ExpressRouteFailoverStopApiParameters,
+  "ExpressRouteFailoverStopApiContent",
+  "csharp"
+);
+@@clientName(FilterItems, "IdpsQueryFilterItems", "csharp");
+@@clientName(
+  FirewallPacketCaptureParameters,
+  "FirewallPacketCaptureRequestContent",
+  "csharp"
+);
+@@clientName(
+  FirewallPolicyFilterRuleCollection,
+  "FirewallPolicyFilterRuleCollectionInfo",
+  "csharp"
+);
+@@clientName(
+  FirewallPolicyIdpsSignatureDirection,
+  "FirewallPolicyIdpsSignatureDirection",
+  "csharp"
+);
+@@clientName(
+  FirewallPolicyIdpsSignatureMode,
+  "FirewallPolicyIdpsSignatureMode",
+  "csharp"
+);
+@@clientName(
+  FirewallPolicyIdpsSignatureSeverity,
+  "FirewallPolicyIdpsSignatureSeverity",
+  "csharp"
+);
+@@clientName(
+  FirewallPolicyNatRuleCollection,
+  "FirewallPolicyNatRuleCollectionInfo",
+  "csharp"
+);
+@@clientName(FirewallPolicySnat, "FirewallPolicySnat", "csharp");
+@@clientName(FlowLogProperties, "FlowLogInformationProperties", "csharp");
+@@clientName(FlowLogFormatParameters, "FlowLogProperties", "csharp");
+@@clientName(FlowLogStatusParameters, "FlowLogStatusContent", "csharp");
+@@clientName(
+  GatewayCustomBgpIpAddressIpConfiguration,
+  "GatewayCustomBgpIPAddressIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  GenerateExpressRoutePortsLOARequest,
+  "GenerateExpressRoutePortsLoaContent",
+  "csharp"
+);
+@@clientName(
+  GenerateExpressRoutePortsLOAResult,
+  "GenerateExpressRoutePortsLoaResult",
+  "csharp"
+);
+@@clientName(
+  GetInboundRoutesParameters,
+  "VirtualHubInboundRoutesContent",
+  "csharp"
+);
+@@clientName(
+  GetOutboundRoutesParameters,
+  "VirtualHubOutboundRoutesContent",
+  "csharp"
+);
+@@clientName(
+  GetVpnSitesConfigurationRequest,
+  "GetVpnSitesConfigurationContent",
+  "csharp"
+);
+@@clientName(Hub, "ConnectivityHub", "csharp");
+@@clientName(IdpsQueryObject, "IdpsQueryContent", "csharp");
+@@clientName(InboundNatPool, "LoadBalancerInboundNatPool", "csharp");
+@@clientName(
+  InboundNatPoolPropertiesFormat,
+  "LoadBalancerInboundNatPoolProperties",
+  "csharp"
+);
+@@clientName(IPPrefixesList, "LearnedIPPrefixesListResult", "csharp");
+@@clientName(IpsecPolicy, "IPsecPolicy", "csharp");
+@@clientName(IpTag, "IPTag", "csharp");
+@@clientName(IPTraffic, "NetworkVerifierIPTraffic", "csharp");
+@@clientName(
+  Ipv6CircuitConnectionConfig,
+  "IPv6CircuitConnectionConfig",
+  "csharp"
+);
+@@clientName(
+  Ipv6ExpressRouteCircuitPeeringConfig,
+  "IPv6ExpressRouteCircuitPeeringConfig",
+  "csharp"
+);
+@@clientName(
+  ListVirtualHubIpConfigurationResults,
+  "ListVirtualHubIPConfigurationResults",
+  "csharp"
+);
+@@clientName(
+  ListVirtualHubRouteTableV2SResult,
+  "ListVirtualHubRouteTableV2SResult",
+  "csharp"
+);
+@@clientName(
+  LoadBalancerPropertiesFormat,
+  "LoadBalancingRuleProperties",
+  "csharp"
+);
+@@clientName(
+  LoadBalancerVipSwapRequest,
+  "LoadBalancerVipSwapContent",
+  "csharp"
+);
+@@clientName(MigratedPools, "MigrateLoadBalancerToIPBasedResult", "csharp");
+@@clientName(
+  MigrateLoadBalancerToIpBasedRequest,
+  "MigrateLoadBalancerToIPBasedContent",
+  "csharp"
+);
+@@clientName(
+  NetworkConfigurationDiagnosticParameters,
+  "NetworkConfigurationDiagnosticContent",
+  "csharp"
+);
+@@clientName(
+  NetworkManagerDeploymentStatusParameter,
+  "NetworkManagerDeploymentStatusContent",
+  "csharp"
+);
+@@clientName(
+  NetworkVirtualApplianceBootDiagnosticParameters,
+  "NetworkVirtualApplianceBootDiagnosticContent",
+  "csharp"
+);
+@@clientName(NextHopParameters, "NextHopContent", "csharp");
+@@clientName(
+  NspServiceTagsListResult,
+  "NetworkSecurityPerimeterServiceTagsListResult",
+  "csharp"
+);
+@@clientName(
+  NspServiceTagsResource,
+  "NetworkSecurityPerimeterServiceTags",
+  "csharp"
+);
+@@clientName(OrderBy, "IdpsQueryOrderBy", "csharp");
+@@clientName(
+  P2SVpnConnectionHealthRequest,
+  "P2SVpnConnectionHealthContent",
+  "csharp"
+);
+@@clientName(P2SVpnProfileParameters, "P2SVpnProfileContent", "csharp");
+@@clientName(PacketCapture, "PacketCaptureCreateOrUpdateContent", "csharp");
+@@clientName(
+  PerimeterAssociableResource,
+  "NetworkSecurityPerimeterAssociableResourceType",
+  "csharp"
+);
+@@clientName(PoolAssociation, "IpamPoolAssociation", "csharp");
+@@clientName(PoolUsage, "IpamPoolUsage", "csharp");
+@@clientName(
+  PrepareNetworkPoliciesRequest,
+  "PrepareNetworkPoliciesContent",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkServiceConnection,
+  "NetworkPrivateLinkServiceConnection",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkServiceIpConfiguration,
+  "PrivateLinkServiceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  PublicIpDdosProtectionStatusResult,
+  "PublicIPDdosProtectionStatusResult",
+  "csharp"
+);
+@@clientName(QosDefinition, "DscpQosDefinition", "csharp");
+@@clientName(QosIpRange, "QosIPRange", "csharp");
+@@clientName(
+  QueryInboundNatRulePortMappingRequest,
+  "QueryInboundNatRulePortMappingContent",
+  "csharp"
+);
+@@clientName(QueryResults, "IdpsSignatureListResult", "csharp");
+@@clientName(
+  QueryTroubleshootingParameters,
+  "QueryTroubleshootingContent",
+  "csharp"
+);
+@@clientName(
+  ReserveCloudServicePublicIpAddressRequest,
+  "ReserveCloudServicePublicIPAddressContent",
+  "csharp"
+);
+@@clientName(ResourceBasics, "IpamResourceBasics", "csharp");
+@@clientName(SecurityGroupViewParameters, "SecurityGroupViewContent", "csharp");
+@@clientName(
+  ServiceEndpointPropertiesFormat,
+  "ServiceEndpointProperties",
+  "csharp"
+);
+@@clientName(
+  ServiceGatewayUpdateAddressLocationsRequest,
+  "ServiceGatewayUpdateAddressLocationsContent",
+  "csharp"
+);
+@@clientName(
+  ServiceGatewayUpdateServicesRequest,
+  "ServiceGatewayUpdateServicesContent",
+  "csharp"
+);
+@@clientName(
+  SharedKeyProperties,
+  "VpnLinkConnectionSharedKeyProperties",
+  "csharp"
+);
+@@clientName(
+  SignatureOverridesFilterValuesQuery,
+  "SignatureOverridesFilterValuesQueryContent",
+  "csharp"
+);
+@@clientName(
+  SignatureOverridesFilterValuesResponse,
+  "SignatureOverridesFilterValuesResult",
+  "csharp"
+);
+@@clientName(
+  SignaturesOverridesList,
+  "PolicySignaturesOverridesForIdpsListResult",
+  "csharp"
+);
+@@clientName(
+  SignaturesOverridesProperties,
+  "PolicySignaturesOverridesForIdpsProperties",
+  "csharp"
+);
+@@clientName(SlotType, "SwapSlotType", "csharp");
+@@clientName(SwapResourceListResult, "CloudServiceSwapListResult", "csharp");
+@@clientName(SwapResourceProperties, "CloudServiceSwapProperties", "csharp");
+@@clientName(Topology, "NetworkTopology", "csharp");
+@@clientName(TopologyParameters, "TopologyContent", "csharp");
+@@clientName(Topology, "TopologyResourceInfo", "csharp");
+@@clientName(
+  TrackedResourceWithOptionalLocation,
+  "NetworkResourceData",
+  "csharp"
+);
+@@clientName(
+  TrackedResourceWithSettableIdOptionalLocation,
+  "NetworkWritableResourceData",
+  "csharp"
+);
+@@clientName(TroubleshootingParameters, "TroubleshootingContent", "csharp");
+@@clientName(
+  UnprepareNetworkPoliciesRequest,
+  "UnprepareNetworkPoliciesContent",
+  "csharp"
+);
+@@clientName(UsagesListResult, "NetworkUsagesListResult", "csharp");
+@@clientName(
+  VerificationIPFlowParameters,
+  "VerificationIPFlowContent",
+  "csharp"
+);
+@@clientName(
+  VerifierWorkspaceUpdate,
+  "NetworkVerifierWorkspacePatch",
+  "csharp"
+);
+@@clientName(
+  VerifierWorkspaceProperties,
+  "NetworkVerifierWorkspaceProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkApplianceIpConfiguration,
+  "VirtualNetworkApplianceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkGatewayMigrationParameters,
+  "VirtualNetworkGatewayMigrationContent",
+  "csharp"
+);
+@@clientName(
+  VirtualWanVpnProfileParameters,
+  "VirtualWanVpnProfileContent",
+  "csharp"
+);
+@@clientName(VpnClientParameters, "VpnClientContent", "csharp");
+@@clientName(
+  VpnConnectionPacketCaptureStartParameters,
+  "VpnConnectionPacketCaptureStartContent",
+  "csharp"
+);
+@@clientName(
+  VpnConnectionPacketCaptureStopParameters,
+  "VpnConnectionPacketCaptureStopContent",
+  "csharp"
+);
+@@clientName(VpnDeviceScriptParameters, "VpnDeviceScriptContent", "csharp");
+@@clientName(VpnGatewayIpConfiguration, "VpnGatewayIPConfiguration", "csharp");
+@@clientName(
+  VpnGatewayPacketCaptureStartParameters,
+  "VpnGatewayPacketCaptureStartContent",
+  "csharp"
+);
+@@clientName(
+  VpnGatewayPacketCaptureStopParameters,
+  "VpnGatewayPacketCaptureStopContent",
+  "csharp"
+);
+@@clientName(
+  VpnPacketCaptureStartParameters,
+  "VpnPacketCaptureStartContent",
+  "csharp"
+);
+@@clientName(
+  VpnPacketCaptureStopParameters,
+  "VpnPacketCaptureStopContent",
+  "csharp"
+);
+@@clientName(ApplicationGateway.zones, "AvailabilityZones", "csharp");
+@@clientName(ApplicationGatewayBackendAddress.ipAddress, "IPAddress", "csharp");
+@@clientName(
+  ApplicationGatewayBackendHealthServer.ipConfiguration,
+  "IPConfiguration",
+  "csharp"
+);
+@@clientName(ApplicationRule.sourceIpGroups, "SourceIPGroups", "csharp");
+@@clientName(
+  AzureFirewallApplicationRule.sourceIpGroups,
+  "SourceIPGroups",
+  "csharp"
+);
+@@clientName(AzureFirewallNatRule.sourceIpGroups, "SourceIPGroups", "csharp");
+@@clientName(
+  AzureFirewallNetworkRule.sourceIpGroups,
+  "SourceIPGroups",
+  "csharp"
+);
+@@clientName(
+  AzureFirewallNetworkRule.destinationIpGroups,
+  "DestinationIPGroups",
+  "csharp"
+);
+@@clientName(ConnectionMonitorEndpoint.type, "EndpointType", "csharp");
+@@clientName(
+  ConnectionMonitorHttpConfiguration.preferHTTPS,
+  "PreferHttps",
+  "csharp"
+);
+@@clientName(
+  ConnectivityInformation.connectionStatus,
+  "NetworkConnectionStatus",
+  "csharp"
+);
+@@clientName(
+  ContainerNetworkInterfaceIpConfiguration.type,
+  "ContainerNetworkInterfaceIpConfigurationType",
+  "csharp"
+);
+@@clientName(
+  CustomDnsConfigPropertiesFormat.ipAddresses,
+  "IPAddresses",
+  "csharp"
+);
+@@clientName(
+  EffectiveNetworkSecurityGroup.tagMap,
+  "TagToIPAddresses",
+  "csharp"
+);
+@@clientName(EffectiveRoute.nextHopIpAddress, "NextHopIPAddress", "csharp");
+@@clientName(EndpointServiceResult.type, "ResourceType", "csharp");
+@@clientName(ExpressRouteCircuitArpTable.ipAddress, "IPAddress", "csharp");
+@@clientName(
+  ExpressRouteFailoverConnectionResourceDetails.lastUpdatedTime,
+  "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(ExpressRouteFailoverTestDetails.startTime, "StartOn", "csharp");
+@@clientName(ExpressRouteFailoverTestDetails.endTime, "EndOn", "csharp");
+@@clientName(
+  FirewallPolicyIntrusionDetectionBypassTrafficSpecifications.sourceIpGroups,
+  "SourceIPGroups",
+  "csharp"
+);
+@@clientName(
+  FirewallPolicyIntrusionDetectionBypassTrafficSpecifications.destinationIpGroups,
+  "DestinationIPGroups",
+  "csharp"
+);
+@@clientName(
+  GatewayCustomBgpIpAddressIpConfiguration.customBgpIpAddress,
+  "CustomBgpIPAddress",
+  "csharp"
+);
+@@clientName(
+  GatewayLoadBalancerTunnelInterface.type,
+  "InterfaceType",
+  "csharp"
+);
+@@clientName(IpamPoolProperties.ipAddressType, "IPAddressType", "csharp");
+@@clientName(IpsecPolicy.ipsecEncryption, "IPsecEncryption", "csharp");
+@@clientName(IpsecPolicy.ipsecIntegrity, "IPsecIntegrity", "csharp");
+@@clientName(IPTraffic.destinationIps, "DestinationIPs", "csharp");
+@@clientName(
+  LoadBalancerHealthPerRulePerBackendAddress.networkInterfaceIPConfigurationId,
+  "NetworkInterfaceIPConfigurationResourceId",
+  "csharp"
+);
+@@clientName(NatRule.sourceIpGroups, "SourceIPGroups", "csharp");
+@@clientName(
+  NetworkManagerDeploymentStatus.deploymentStatus,
+  "DeploymentState",
+  "csharp"
+);
+@@clientName(NetworkRule.sourceIpGroups, "SourceIPGroups", "csharp");
+@@clientName(NetworkRule.destinationIpGroups, "DestinationIPGroups", "csharp");
+@@clientName(Common.Resource.type, "ResourceType", "csharp");
+@@clientName(NextHopResult.nextHopIpAddress, "NextHopIPAddress", "csharp");
+@@clientName(
+  PolicySettings.captchaExpirationInMins,
+  "CaptchaCookieExpirationInMins",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointIPConfiguration.type,
+  "PrivateEndpointIPConfigurationType",
+  "csharp"
+);
+@@clientName(
+  PublicIpDdosProtectionStatusResult.publicIpAddress,
+  "PublicIPAddress",
+  "csharp"
+);
+@@clientName(QosDefinition.sourceIpRanges, "SourceIPRanges", "csharp");
+@@clientName(
+  QosDefinition.destinationIpRanges,
+  "DestinationIPRanges",
+  "csharp"
+);
+@@clientName(
+  ReachabilityAnalysisIntentProperties.ipTraffic,
+  "IPTraffic",
+  "csharp"
+);
+@@clientName(RecordSet.ipAddresses, "IPAddresses", "csharp");
+@@clientName(StaticRoute.nextHopIpAddress, "NextHopIPAddress", "csharp");
+@@clientName(
+  TrackedResourceWithOptionalLocation.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(
+  TrackedResourceWithSettableIdOptionalLocation.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(
+  TunnelConnectionHealth.lastConnectionEstablishedUtcTime,
+  "LastConnectionEstablishedOn",
+  "csharp"
+);
+@@clientName(
+  VirtualApplianceAdditionalNicProperties.hasPublicIp,
+  "HasPublicIP",
+  "csharp"
+);
+@@clientName(
+  VirtualApplianceNicProperties.publicIpAddress,
+  "PublicIPAddress",
+  "csharp"
+);
+@@clientName(
+  VirtualApplianceNicProperties.privateIpAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
+@@clientName(VirtualHubRoute.nextHopIpAddress, "NextHopIPAddress", "csharp");
+@@clientName(VirtualWanSecurityProvider.type, "ProviderType", "csharp");
+@@clientName(
+  VpnClientConfiguration.vpnClientIpsecPolicies,
+  "VpnClientIPsecPolicies",
+  "csharp"
+);
+@@clientName(
+  VpnClientConnectionHealth.allocatedIpAddresses,
+  "AllocatedIPAddresses",
+  "csharp"
+);
+@@clientName(
+  VpnClientConnectionHealthDetail.vpnConnectionTime,
+  "VpnConnectionOn",
+  "csharp"
+);
+@@clientName(
+  VpnClientConnectionHealthDetail.publicIpAddress,
+  "PublicIPAddress",
+  "csharp"
+);
+@@clientName(
+  VpnClientConnectionHealthDetail.privateIpAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
+@@clientName(
+  VpnClientIPsecParameters.ipsecEncryption,
+  "IPsecEncryption",
+  "csharp"
+);
+@@clientName(
+  VpnClientIPsecParameters.ipsecIntegrity,
+  "IPsecIntegrity",
+  "csharp"
+);
+@@clientName(
+  VpnGatewayIpConfiguration.publicIpAddress,
+  "PublicIPAddress",
+  "csharp"
+);
+@@clientName(
+  VpnGatewayIpConfiguration.privateIpAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
+@@alternateType(ApplicationGateway.etag, eTag, "csharp");
+@@alternateType(
+  ApplicationGatewayPrivateEndpointConnection.etag,
+  eTag,
+  "csharp"
+);
+@@alternateType(ApplicationSecurityGroup.etag, eTag, "csharp");
+@@alternateType(AzureFirewall.etag, eTag, "csharp");
+@@alternateType(BackendAddressPool.etag, eTag, "csharp");
+@@alternateType(BastionHost.etag, eTag, "csharp");
+@@alternateType(BgpConnection.etag, eTag, "csharp");
+@@alternateType(DdosCustomPolicy.etag, eTag, "csharp");
+@@alternateType(DdosProtectionPlan.etag, eTag, "csharp");
+@@alternateType(DscpConfiguration.etag, eTag, "csharp");
+@@alternateType(ExpressRouteCircuitAuthorization.etag, eTag, "csharp");
+@@alternateType(ExpressRouteCircuitConnection.etag, eTag, "csharp");
+@@alternateType(ExpressRouteCircuit.etag, eTag, "csharp");
+@@alternateType(ExpressRouteCircuitPeering.etag, eTag, "csharp");
+@@alternateType(ExpressRouteCrossConnection.etag, eTag, "csharp");
+@@alternateType(ExpressRouteGateway.etag, eTag, "csharp");
+@@alternateType(ExpressRoutePortAuthorization.etag, eTag, "csharp");
+@@alternateType(ExpressRoutePort.etag, eTag, "csharp");
+@@alternateType(ExpressRouteProviderPort.etag, eTag, "csharp");
+@@alternateType(FirewallPolicy.etag, eTag, "csharp");
+@@alternateType(FirewallPolicyRuleCollectionGroup.etag, eTag, "csharp");
+@@alternateType(FlowLog.etag, eTag, "csharp");
+@@alternateType(FrontendIPConfiguration.etag, eTag, "csharp");
+@@alternateType(HubRouteTable.etag, eTag, "csharp");
+@@alternateType(InboundNatRule.etag, eTag, "csharp");
+@@alternateType(InboundSecurityRule.etag, eTag, "csharp");
+@@alternateType(IpamPool.etag, eTag, "csharp");
+@@alternateType(LoadBalancer.etag, eTag, "csharp");
+@@alternateType(LoadBalancingRule.etag, eTag, "csharp");
+@@alternateType(LocalNetworkGateway.etag, eTag, "csharp");
+@@alternateType(NatGateway.etag, eTag, "csharp");
+@@alternateType(NetworkInterface.etag, eTag, "csharp");
+@@alternateType(NetworkInterfaceIPConfiguration.etag, eTag, "csharp");
+@@alternateType(NetworkInterfaceTapConfiguration.etag, eTag, "csharp");
+@@alternateType(NetworkManager.etag, eTag, "csharp");
+@@alternateType(Common.PrivateEndpointConnection.etag, eTag, "csharp");
+@@alternateType(NetworkProfile.etag, eTag, "csharp");
+@@alternateType(NetworkSecurityGroup.etag, eTag, "csharp");
+@@alternateType(NetworkVirtualAppliance.etag, eTag, "csharp");
+@@alternateType(NetworkVirtualApplianceSku.etag, eTag, "csharp");
+@@alternateType(NetworkWatcher.etag, eTag, "csharp");
+@@alternateType(OutboundRule.etag, eTag, "csharp");
+@@alternateType(P2SVpnGateway.etag, eTag, "csharp");
+@@alternateType(PeerExpressRouteCircuitConnection.etag, eTag, "csharp");
+@@alternateType(Common.PrivateEndpoint.etag, eTag, "csharp");
+@@alternateType(PrivateLinkService.etag, eTag, "csharp");
+@@alternateType(Probe.etag, eTag, "csharp");
+@@alternateType(PublicIPAddress.etag, eTag, "csharp");
+@@alternateType(PublicIPPrefix.etag, eTag, "csharp");
+@@alternateType(Route.etag, eTag, "csharp");
+@@alternateType(RouteFilter.etag, eTag, "csharp");
+@@alternateType(RouteMap.etag, eTag, "csharp");
+@@alternateType(RouteTable.etag, eTag, "csharp");
+@@alternateType(RoutingIntent.etag, eTag, "csharp");
+@@alternateType(SecurityPartnerProvider.etag, eTag, "csharp");
+@@alternateType(SecurityRule.etag, eTag, "csharp");
+@@alternateType(ServiceEndpointPolicy.etag, eTag, "csharp");
+@@alternateType(ServiceEndpointPolicyDefinition.etag, eTag, "csharp");
+@@alternateType(ServiceGateway.etag, eTag, "csharp");
+@@alternateType(Subnet.etag, eTag, "csharp");
+@@alternateType(VirtualApplianceSite.etag, eTag, "csharp");
+@@alternateType(VirtualHub.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkAppliance.etag, eTag, "csharp");
+@@alternateType(VirtualNetwork.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkGatewayConnection.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkGateway.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkGatewayNatRule.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkPeering.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkTap.etag, eTag, "csharp");
+@@alternateType(VirtualRouter.etag, eTag, "csharp");
+@@alternateType(VirtualRouterPeering.etag, eTag, "csharp");
+@@alternateType(VpnGateway.etag, eTag, "csharp");
+@@alternateType(VpnGatewayNatRule.etag, eTag, "csharp");
+@@alternateType(VpnServerConfiguration.etag, eTag, "csharp");
+@@alternateType(VpnServerConfigurationPolicyGroup.etag, eTag, "csharp");
+@@alternateType(VpnSite.etag, eTag, "csharp");
+@@alternateType(VpnSiteLinkConnection.etag, eTag, "csharp");
+@@alternateType(VpnSiteLink.etag, eTag, "csharp");
+@@alternateType(WebApplicationFirewallPolicy.etag, eTag, "csharp");
+@@alternateType(
+  ApplicationGatewayEntraJWTValidationConfig.etag,
+  eTag,
+  "csharp"
+);
+@@alternateType(
+  ApplicationGatewayPrivateLinkIpConfiguration.etag,
+  eTag,
+  "csharp"
+);
+@@alternateType(ContainerNetworkInterfaceIpConfiguration.etag, eTag, "csharp");
+@@alternateType(Delegation.etag, eTag, "csharp");
+@@alternateType(InboundNatPool.etag, eTag, "csharp");
+@@alternateType(PrivateLinkServiceConnection.etag, eTag, "csharp");
+@@alternateType(PrivateLinkServiceIpConfiguration.etag, eTag, "csharp");
+@@alternateType(VirtualNetworkApplianceIpConfiguration.etag, eTag, "csharp");
+@@alternateType(
+  FlowLogStatusParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  NetworkConfigurationDiagnosticParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  NextHopParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  QueryTroubleshootingParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SecurityGroupViewParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TroubleshootingParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VerificationIPFlowParameters.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  AzureFirewallIPGroups.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TrackedResourceWithOptionalLocation.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TrackedResourceWithSettableIdOptionalLocation.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VpnGatewayIpConfiguration.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(EndpointServiceResult.type, armResourceType, "csharp");
+@@alternateType(Common.Resource.type, armResourceType, "csharp");
+@@alternateType(
+  TrackedResourceWithOptionalLocation.type,
+  armResourceType,
+  "csharp"
+);
+@@alternateType(
+  TrackedResourceWithSettableIdOptionalLocation.type,
+  armResourceType,
+  "csharp"
+);
+@@alternateType(FirewallPacketCaptureParameters.sasUrl, url, "csharp");
+@@alternateType(VpnConnectionPacketCaptureStopParameters.sasUrl, url, "csharp");
+@@alternateType(VpnGatewayPacketCaptureStopParameters.sasUrl, url, "csharp");
+@@alternateType(VpnPacketCaptureStopParameters.sasUrl, url, "csharp");
+@@alternateType(GetInboundRoutesParameters.resourceUri, url, "csharp");
+@@alternateType(GetOutboundRoutesParameters.resourceUri, url, "csharp");
+@@alternateType(
+  VirtualNetworkGatewayMigrationParameters.resourceUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  AvailableProvidersListParameters.azureLocations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  AzureReachabilityReportParameters.azureLocations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(ConnectionMonitor.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  EffectiveRoutesParameters.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Hub.resourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  GetVpnSitesConfigurationRequest.outputBlobSasUrl,
+  url,
+  "csharp"
+);
+@@alternateType(P2SVpnConnectionHealthRequest.outputBlobSasUrl, url, "csharp");
+@@alternateType(
+  NextHopParameters.targetNicResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VerificationIPFlowParameters.targetNicResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActiveConfigurationParameter.regions,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  ConnectionMonitorWorkspaceSettings.workspaceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ExpressRouteFailoverConnectionResourceDetails.lastUpdatedTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(
+  ExpressRouteFailoverTestDetails.startTime,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(ExpressRouteFailoverTestDetails.endTime, utcDateTime, "csharp");
+@@alternateType(Hub.resourceType, armResourceType, "csharp");
+@@alternateType(
+  LoadBalancerHealthPerRulePerBackendAddress.networkInterfaceIPConfigurationId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PublicIpDdosProtectionStatusResult.publicIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(
+  PublicIpDdosProtectionStatusResult.ddosProtectionPlanId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ServiceEndpointPropertiesFormat.locations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  VirtualWanVpnProfileParameters.vpnServerConfigurationResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VpnClientConnectionHealthDetail.vpnConnectionTime,
+  utcDateTime,
+  "csharp"
+);
 
 // Move Microsoft.Compute.PublicIPAddresses operations to Microsoft.Network.PublicIPAddresses for Java
 @@clientLocation(
