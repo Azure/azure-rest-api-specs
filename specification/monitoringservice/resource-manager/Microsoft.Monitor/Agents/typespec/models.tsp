@@ -12,10 +12,6 @@ namespace Microsoft.Monitor {
    * Properties for an observability agent resource.
    */
   model ObservabilityAgentProperties {
-    /** The resource provisioning state. */
-    @visibility(Lifecycle.Read)
-    provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
-
     /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
     monitoringAccountId: Azure.Core.armResourceIdentifier<[
       {
@@ -24,17 +20,17 @@ namespace Microsoft.Monitor {
     ]>;
 
     /** Whether the observability agent is enabled. Defaults to Enabled when not specified. */
-    enabled?: EnabledState;
+    enabled?: AgentState;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    @Azure.ResourceManager.identifiers(#["type"])
+    @Azure.ResourceManager.identifiers(#["operationType"])
     operations?: OperationEntry[];
   }
 
   /**
-   * Enabled state for an observability agent.
+   * State for an observability agent.
    */
-  union EnabledState {
+  union AgentState {
     /** The agent is enabled. */
     enabled: "Enabled",
 
@@ -75,7 +71,7 @@ namespace Microsoft.Monitor {
    */
   model OperationEntry {
     /** Type of operation. */
-    type: OperationType;
+    operationType: OperationType;
 
     /** Execution mode for this operation. Defaults to Auto when not specified. */
     mode?: OperationMode;
@@ -97,10 +93,10 @@ namespace Microsoft.Monitor {
     ]>;
 
     /** Whether the observability agent is enabled. */
-    enabled?: EnabledState;
+    enabled?: AgentState;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
-    @Azure.ResourceManager.identifiers(#["type"])
+    @Azure.ResourceManager.identifiers(#["operationType"])
     operations?: OperationEntry[];
   }
 

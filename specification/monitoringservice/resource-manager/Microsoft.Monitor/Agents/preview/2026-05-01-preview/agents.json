@@ -267,6 +267,9 @@
         "x-ms-examples": {
           "ObservabilityAgents_CreateOrUpdate": {
             "$ref": "./examples/ObservabilityAgents_CreateOrUpdate.json"
+          },
+          "ObservabilityAgents_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/ObservabilityAgents_CreateOrUpdate_MinimumSet.json"
           }
         }
       },
@@ -321,6 +324,9 @@
         "x-ms-examples": {
           "ObservabilityAgents_Update": {
             "$ref": "./examples/ObservabilityAgents_Update.json"
+          },
+          "ObservabilityAgents_Update_MinimumSet": {
+            "$ref": "./examples/ObservabilityAgents_Update_MinimumSet.json"
           }
         }
       },
@@ -372,46 +378,15 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ResourceProvisioningState": {
+    "AgentState": {
       "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "EnabledState": {
-      "type": "string",
-      "description": "Enabled state for an observability agent.",
+      "description": "State for an observability agent.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
-        "name": "EnabledState",
+        "name": "AgentState",
         "modelAsString": true,
         "values": [
           {
@@ -452,11 +427,6 @@
       "type": "object",
       "description": "Properties for an observability agent resource.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The resource provisioning state.",
-          "readOnly": true
-        },
         "monitoringAccountId": {
           "type": "string",
           "format": "arm-id",
@@ -470,7 +440,7 @@
           }
         },
         "enabled": {
-          "$ref": "#/definitions/EnabledState",
+          "$ref": "#/definitions/AgentState",
           "description": "Whether the observability agent is enabled. Defaults to Enabled when not specified."
         },
         "operations": {
@@ -480,7 +450,7 @@
             "$ref": "#/definitions/OperationEntry"
           },
           "x-ms-identifiers": [
-            "type"
+            "operationType"
           ]
         }
       },
@@ -505,7 +475,7 @@
           }
         },
         "enabled": {
-          "$ref": "#/definitions/EnabledState",
+          "$ref": "#/definitions/AgentState",
           "description": "Whether the observability agent is enabled."
         },
         "operations": {
@@ -515,7 +485,7 @@
             "$ref": "#/definitions/OperationEntry"
           },
           "x-ms-identifiers": [
-            "type"
+            "operationType"
           ]
         }
       }
@@ -564,7 +534,7 @@
       "type": "object",
       "description": "Configuration for a specific agent operation.",
       "properties": {
-        "type": {
+        "operationType": {
           "$ref": "#/definitions/OperationType",
           "description": "Type of operation."
         },
@@ -579,7 +549,7 @@
         }
       },
       "required": [
-        "type"
+        "operationType"
       ]
     },
     "OperationMode": {
