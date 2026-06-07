@@ -29,18 +29,18 @@ using Microsoft.OperationalInsights;
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   global.AccessRulePropertiesSubscriptionsItem[],
-  "java"
+  "java,python"
 );
 
 @@clientName(
   Microsoft.OperationalInsights.ProvisioningStateEnum,
   "SummaryLogsProvisioningState",
-  "java"
+  "java,python"
 );
 @@clientName(
   OperationalInsightsTableProvisioningState,
   "ProvisioningStateEnum",
-  "java"
+  "java,python"
 );
 
 // Fix etag casing for backward compatibility
