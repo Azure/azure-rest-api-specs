@@ -103,18 +103,23 @@ interface AccessControlLists {
 }
 
 @@doc(AccessControlLists.create::parameters.resource, "Request payload.");
-@@doc(AccessControlLists.update::parameters.properties,
+@@doc(
+  AccessControlLists.update::parameters.properties,
   "Access Control List properties to update."
 );
-@@doc(AccessControlLists.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(
+  AccessControlLists.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(AccessControlLists.updateAdministrativeState::parameters.body,
+@@doc(
+  AccessControlLists.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(AccessControlLists.validateConfigurationDeprecated::parameters.body,
+@@doc(
+  AccessControlLists.validateConfigurationDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(AccessControlLists.validateConfiguration::parameters.body,
+@@doc(
+  AccessControlLists.validateConfiguration::parameters.body,
   "Request payload."
 );

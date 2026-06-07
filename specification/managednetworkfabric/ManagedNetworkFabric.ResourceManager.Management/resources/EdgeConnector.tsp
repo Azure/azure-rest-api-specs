@@ -39,7 +39,10 @@ interface EdgeConnectors {
   update is ArmCustomPatchAsync<
     EdgeConnector,
     EdgeConnectorPatch,
-    Response = ArmResponse<EdgeConnector> | ArmAcceptedLroResponse | ArmResourceNotFoundResponse
+    Response =
+      | ArmResponse<EdgeConnector>
+      | ArmAcceptedLroResponse
+      | ArmResourceNotFoundResponse
   >;
 
   @doc("Deletes the specified EdgeConnector.")
@@ -53,6 +56,7 @@ interface EdgeConnectors {
 }
 
 @@doc(EdgeConnectors.create::parameters.resource, "Request payload.");
-@@doc(EdgeConnectors.update::parameters.properties,
+@@doc(
+  EdgeConnectors.update::parameters.properties,
   "EdgeConnector properties to update."
 );

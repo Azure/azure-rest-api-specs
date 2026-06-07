@@ -39,7 +39,10 @@ interface Fabrics {
   update is ArmCustomPatchAsync<
     Fabric,
     FabricPatch,
-    Response = ArmResponse<Fabric> | ArmAcceptedLroResponse | ArmResourceNotFoundResponse
+    Response =
+      | ArmResponse<Fabric>
+      | ArmAcceptedLroResponse
+      | ArmResourceNotFoundResponse
   >;
 
   @doc("Deletes the specified Fabric.")

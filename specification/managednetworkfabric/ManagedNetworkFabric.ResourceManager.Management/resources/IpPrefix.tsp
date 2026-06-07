@@ -52,6 +52,7 @@ interface IpPrefixes {
 }
 
 @@doc(IpPrefixes.create::parameters.resource, "Request payload.");
-@@doc(IpPrefixes.update::parameters.properties,
+@@doc(
+  IpPrefixes.update::parameters.properties,
   "IP Prefix properties to update."
 );

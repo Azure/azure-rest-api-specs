@@ -98,7 +98,8 @@ using Microsoft.ManagedNetworkFabric;
 
 @@clientName(L2IsolationDomains.create::parameters.resource, "body");
 @@clientName(L2IsolationDomains.update::parameters.properties, "body");
-@@clientName(L2IsolationDomains.updateAdministrativeState,
+@@clientName(
+  L2IsolationDomains.updateAdministrativeState,
   "updateAdministrativeState"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -106,7 +107,8 @@ using Microsoft.ManagedNetworkFabric;
 
 @@clientName(L3IsolationDomains.create::parameters.resource, "body");
 @@clientName(L3IsolationDomains.update::parameters.properties, "body");
-@@clientName(L3IsolationDomains.updateAdministrativeState,
+@@clientName(
+  L3IsolationDomains.updateAdministrativeState,
   "updateAdministrativeState"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -165,13 +167,16 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(Fabrics.update::parameters.properties, "body");
 
 @@clientName(NetworkToNetworkInterconnects.create::parameters.resource, "body");
-@@clientName(NetworkToNetworkInterconnects.update::parameters.properties,
+@@clientName(
+  NetworkToNetworkInterconnects.update::parameters.properties,
   "body"
 );
-@@clientName(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState,
+@@clientName(
+  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState,
   "updateNpbStaticRouteBfdAdministrativeState"
 );
-@@clientName(NetworkToNetworkInterconnects.updateAdministrativeState,
+@@clientName(
+  NetworkToNetworkInterconnects.updateAdministrativeState,
   "updateAdministrativeState"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
