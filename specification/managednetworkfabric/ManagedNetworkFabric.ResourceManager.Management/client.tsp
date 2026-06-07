@@ -90,6 +90,8 @@ using Microsoft.ManagedNetworkFabric;
 );
 @@clientName(Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
   "OptionBProperties",
+  "python"
+);
 @@clientName(
   Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
   "StaticRoutePolicy",
