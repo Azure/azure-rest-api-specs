@@ -103,6 +103,12 @@ using Microsoft.CloudHealth;
   "csharp"
 );
 @@clientName(AzureResourceHealthSignal, "ResourceHealthSignal", "csharp");
+@@clientName(
+  DependenciesSignalGroupV2.ignoreUnknown,
+  "shouldIgnoreUnknown",
+  "csharp"
+);
+@@clientName(LookBackWindow, "DynamicThresholdLookBackWindow", "csharp");
 
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties
