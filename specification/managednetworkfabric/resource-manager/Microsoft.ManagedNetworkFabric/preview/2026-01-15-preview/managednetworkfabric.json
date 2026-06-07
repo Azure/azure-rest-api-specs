@@ -1717,7 +1717,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -1745,7 +1745,7 @@
         "tags": [
           "EdgeConnectors"
         ],
-        "description": "Creates an EdgeConnector.",
+        "description": "Creates or updates an EdgeConnector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1762,7 +1762,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -1837,7 +1837,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -1857,7 +1857,7 @@
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1869,6 +1869,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "404": {
+            "description": "The Azure resource is not found"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1909,7 +1912,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2013,7 +2016,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2041,7 +2044,7 @@
         "tags": [
           "Fabrics"
         ],
-        "description": "Creates a Fabric.",
+        "description": "Creates or updates a Fabric.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2058,7 +2061,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -2136,7 +2139,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -2156,7 +2159,7 @@
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -2168,6 +2171,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "404": {
+            "description": "The Azure resource is not found"
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2208,7 +2214,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {

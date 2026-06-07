@@ -14,7 +14,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @added(Versions.v2026_01_15_preview)
 model EdgeConnector extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the EdgeConnector.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("edgeConnectorName")
   @segment("edgeConnectors")
@@ -31,12 +31,16 @@ interface EdgeConnectors {
   @doc("Gets the specified EdgeConnector.")
   get is ArmResourceRead<EdgeConnector>;
 
-  @doc("Creates an EdgeConnector.")
+  @doc("Creates or updates an EdgeConnector.")
   create is ArmResourceCreateOrReplaceAsync<EdgeConnector>;
 
   @doc("Updates an EdgeConnector.")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<EdgeConnector, EdgeConnectorPatch>;
+  update is ArmCustomPatchAsync<
+    EdgeConnector,
+    EdgeConnectorPatch,
+    Response = ArmResponse<EdgeConnector> | ArmAcceptedLroResponse | ArmResourceNotFoundResponse
+  >;
 
   @doc("Deletes the specified EdgeConnector.")
   delete is ArmResourceDeleteWithoutOkAsync<EdgeConnector>;

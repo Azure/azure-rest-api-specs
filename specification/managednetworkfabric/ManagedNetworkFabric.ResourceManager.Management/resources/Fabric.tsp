@@ -14,7 +14,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @added(Versions.v2026_01_15_preview)
 model Fabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Fabric.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("fabricName")
   @segment("fabrics")
@@ -31,12 +31,16 @@ interface Fabrics {
   @doc("Gets the specified Fabric.")
   get is ArmResourceRead<Fabric>;
 
-  @doc("Creates a Fabric.")
+  @doc("Creates or updates a Fabric.")
   create is ArmResourceCreateOrReplaceAsync<Fabric>;
 
   @doc("Updates a Fabric.")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Fabric, FabricPatch>;
+  update is ArmCustomPatchAsync<
+    Fabric,
+    FabricPatch,
+    Response = ArmResponse<Fabric> | ArmAcceptedLroResponse | ArmResourceNotFoundResponse
+  >;
 
   @doc("Deletes the specified Fabric.")
   delete is ArmResourceDeleteWithoutOkAsync<Fabric>;
