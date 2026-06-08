@@ -46,7 +46,7 @@ For each file type, apply the corresponding instruction files. These are the
 single source of truth -- do not invent rules beyond what they specify.
 
 1. **ARM control-plane specs** (`specification/**/resource-manager/**/*.json`):
-   Apply `.github/instructions/armapi-review.instructions.md` (ARM-specific
+   Apply `.github/instructions/arm-api-review.instructions.md` (ARM-specific
    rules take precedence) AND `.github/instructions/openapi-review.instructions.md`.
 2. **All OpenAPI specs** (`specification/**/*.json`):
    Apply `.github/instructions/openapi-review.instructions.md`.
@@ -88,7 +88,7 @@ exhaustively.
 - **OpenAPI JSON** -- apply the "Review Checklist Summary" at the end of
   `openapi-review.instructions.md`
 - **ARM resource-manager JSON** -- apply **both** the OpenAPI checklist AND the
-  "ARM Review Checklist Summary" at the end of `armapi-review.instructions.md`
+  "ARM Review Checklist Summary" at the end of `arm-api-review.instructions.md`
 - **TypeSpec** -- apply the "TypeSpec Review Checklist Summary" at the end of
   `typespec-review.instructions.md`
 - **`readme.md` suppressions** -- perform suppression continuity analysis:
@@ -176,16 +176,18 @@ PUT operation is missing `201` response for resource creation. ARM PUT must retu
 Every comment **MUST** end with a hidden HTML telemetry marker as the very last line. The format is:
 
 ```html
-<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
+<!-- posted-by: copilot-code-review | rule: <RULE-ID> | severity: blocking|warning|suggestion | classification: new|existing -->
 ```
 
 - **`rule`**: The rule ID of the finding (e.g., `RPC-Put-V1-11`, `OAPI027`). Use `summary` for summary comments.
 - **`severity`**: One of `blocking`, `warning`, or `suggestion`.
 - **`classification`**: One of `new` or `existing`.
 
-Example: `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
+Example: `<!-- posted-by: copilot-code-review | rule: RPC-Put-V1-11 | severity: blocking | classification: new -->`
 
-To detect agent-posted comments during reconciliation, check for the substring `posted-by: arm-api-reviewer-agent` (matches both old and new marker formats).
+To detect Copilot Code Review-posted comments during reconciliation, check for the substring `posted-by: copilot-code-review`.
+
+> **Note on marker prefix.** This `posted-by: copilot-code-review` prefix is distinct from the interactive `ARM API Reviewer` agent's marker, which uses `posted-by: arm-api-reviewer-agent`. The two systems post separately and reconcile independently. Comments posted before the prefix split may still carry the old `posted-by: arm-api-reviewer-agent` prefix and will be matched by the interactive agent's reconciliation; this washes out as old comments are resolved.
 
 ---
 
@@ -242,7 +244,7 @@ Do not flood a PR with comments. Prioritize and cap:
 If more findings exist beyond the cap, summarize them in a single comment:
 "_N additional warnings/suggestions were identified but not posted individually.
 Key themes: [list]. The author should review the full checklist in
-`armapi-review.instructions.md`._"
+`arm-api-review.instructions.md`._"
 
 ---
 
@@ -253,12 +255,12 @@ When reviewing a PR that already has comments from a prior review:
 **Scenario A -- Same finding, same location:**
 The existing comment already covers this violation. **Skip posting.**
 
-**Scenario B -- Same finding, line shifted, agent-posted comment:**
-The existing comment body contains the substring `posted-by: arm-api-reviewer-agent`.
+**Scenario B -- Same finding, line shifted, Copilot Code Review-posted comment:**
+The existing comment body contains the substring `posted-by: copilot-code-review`.
 Resolve the outdated comment and post a new one at the correct line.
 
-**Scenario C -- Same finding, line shifted, human-posted comment:**
-The existing comment does NOT have the agent marker. Do NOT resolve their
+**Scenario C -- Same finding, line shifted, comment from another author:**
+The existing comment does NOT have the `posted-by: copilot-code-review` marker (it may be from a human reviewer or from the interactive `arm-api-reviewer-agent`). Do NOT resolve their
 comment. Reply to the thread noting the line shift.
 
 **Scenario D -- All findings already covered:**
