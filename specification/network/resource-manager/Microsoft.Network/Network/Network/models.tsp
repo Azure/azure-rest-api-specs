@@ -15172,7 +15172,7 @@ model SecurityPerimeterResource {
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SecurityPerimeterSystemData;
+  systemData?: CommonTypes.SystemData;
 }
 
 /**
