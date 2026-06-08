@@ -88,6 +88,7 @@ union ProvisioningState {
 interface Projects {
   get is ArmResourceRead<Project>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Project>;
+  update is ArmResourcePatchSync<Project>;
   delete is ArmResourceDeleteWithoutOkAsync<Project>;
   listByResourceGroup is ArmResourceListByParent<Project>;
   listBySubscription is ArmListBySubscription<Project>;
