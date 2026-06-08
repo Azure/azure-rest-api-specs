@@ -28,7 +28,6 @@ using OpenAPI;
   #{ name: "Datasets", parent: "Platform APIs" },
   #{ name: "Indexes", parent: "Platform APIs" },
   #{ name: "Connections", parent: "Platform APIs" },
-  #{ name: "Memory stores", parent: "Platform APIs" },
   #{ name: "Scheduler", parent: "Platform APIs" },
   #{ name: "Fine-tuning", parent: "Platform APIs", summary: "Fine-Tuning" },
   #{
