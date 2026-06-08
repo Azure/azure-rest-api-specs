@@ -436,21 +436,6 @@
         }
       ]
     },
-    "ProjectUpdate": {
-      "type": "object",
-      "description": "Project resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProjectProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
     "ProjectListResult": {
       "type": "object",
       "description": "The response of a Project list operation.",
@@ -525,6 +510,21 @@
           "readOnly": true
         }
       }
+    },
+    "ProjectUpdate": {
+      "type": "object",
+      "description": "Project resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "ProvisioningState": {
       "type": "string",
