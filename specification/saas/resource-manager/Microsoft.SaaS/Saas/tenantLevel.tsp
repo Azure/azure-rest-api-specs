@@ -54,9 +54,7 @@ interface SaasOperationStatuses {
   @route("/providers/Microsoft.SaaS/operationStatuses/{operationId}")
   getTenantOperationStatus(
     ...ApiVersionParameter,
-
-    /** The operation ID. */
-    @path operationId: string,
+    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
   ):
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
@@ -67,9 +65,7 @@ interface SaasOperationStatuses {
   getSubscriptionOperationStatus(
     ...ApiVersionParameter,
     ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-    /** The operation ID. */
-    @path operationId: string,
+    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
   ):
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
