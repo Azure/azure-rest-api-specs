@@ -35,17 +35,29 @@
             "generation": 3,
             "creationTimestamp": "2026-04-15T09:00:00Z",
             "labels": [
-              { "name": "app", "value": "nginx" },
-              { "name": "version", "value": "1.25" }
+              {
+                "name": "app",
+                "value": "nginx"
+              },
+              {
+                "name": "version",
+                "value": "1.25"
+              }
             ],
             "annotations": [
-              { "name": "deployment.kubernetes.io/revision", "value": "3" }
+              {
+                "name": "deployment.kubernetes.io/revision",
+                "value": "3"
+              }
             ]
           },
           "spec": {
             "replicas": 3,
             "selector": [
-              { "name": "app", "value": "nginx" }
+              {
+                "name": "app",
+                "value": "nginx"
+              }
             ],
             "strategyType": "RollingUpdate",
             "maxUnavailable": "25%",
@@ -53,7 +65,10 @@
             "serviceAccountName": "nginx-sa",
             "priorityClassName": "high-priority",
             "nodeSelector": [
-              { "name": "kubernetes.io/os", "value": "linux" }
+              {
+                "name": "kubernetes.io/os",
+                "value": "linux"
+              }
             ],
             "securityContext": {
               "runAsNonRoot": true,
@@ -71,7 +86,11 @@
               }
             ],
             "volumes": [
-              { "name": "nginx-config", "sourceType": "configMap", "source": "nginx-config" }
+              {
+                "name": "nginx-config",
+                "sourceType": "configMap",
+                "source": "nginx-config"
+              }
             ],
             "containers": [
               {
@@ -79,27 +98,53 @@
                 "image": "nginx:1.25.4",
                 "imagePullPolicy": "IfNotPresent",
                 "ports": [
-                  { "name": "http", "containerPort": 80, "protocol": "TCP" }
+                  {
+                    "name": "http",
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  }
                 ],
                 "env": [
-                  { "name": "ENV", "value": "production" }
+                  {
+                    "name": "ENV",
+                    "value": "production"
+                  }
                 ],
                 "envFrom": [
-                  { "configMapRef": "app-config" },
-                  { "secretRef": "app-secrets", "prefix": "SECRET_" }
+                  {
+                    "configMapRef": "app-config"
+                  },
+                  {
+                    "secretRef": "app-secrets",
+                    "prefix": "SECRET_"
+                  }
                 ],
                 "resources": {
-                  "requests": { "cpu": "100m", "memory": "128Mi" },
-                  "limits": { "cpu": "500m", "memory": "512Mi" }
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  }
                 },
                 "volumeMounts": [
-                  { "name": "nginx-config", "mountPath": "/etc/nginx/conf.d", "readOnly": true }
+                  {
+                    "name": "nginx-config",
+                    "mountPath": "/etc/nginx/conf.d",
+                    "readOnly": true
+                  }
                 ],
                 "securityContext": {
                   "allowPrivilegeEscalation": false,
                   "readOnlyRootFilesystem": true,
                   "privileged": false,
-                  "capabilities": { "drop": ["ALL"] }
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
                 }
               }
             ]

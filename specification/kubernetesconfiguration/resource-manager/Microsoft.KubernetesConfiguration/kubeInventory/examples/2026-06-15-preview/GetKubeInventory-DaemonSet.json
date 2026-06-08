@@ -35,13 +35,22 @@
             "generation": 1,
             "creationTimestamp": "2026-02-01T12:00:00Z",
             "labels": [
-              { "name": "app", "value": "fluent-bit" },
-              { "name": "k8s-app", "value": "fluent-bit" }
+              {
+                "name": "app",
+                "value": "fluent-bit"
+              },
+              {
+                "name": "k8s-app",
+                "value": "fluent-bit"
+              }
             ]
           },
           "spec": {
             "selector": [
-              { "name": "app", "value": "fluent-bit" }
+              {
+                "name": "app",
+                "value": "fluent-bit"
+              }
             ],
             "strategyType": "RollingUpdate",
             "maxUnavailable": "1",
@@ -58,8 +67,16 @@
               }
             ],
             "volumes": [
-              { "name": "varlog", "sourceType": "hostPath", "source": "/var/log" },
-              { "name": "varlibdockercontainers", "sourceType": "hostPath", "source": "/var/lib/docker/containers" }
+              {
+                "name": "varlog",
+                "sourceType": "hostPath",
+                "source": "/var/log"
+              },
+              {
+                "name": "varlibdockercontainers",
+                "sourceType": "hostPath",
+                "source": "/var/lib/docker/containers"
+              }
             ],
             "containers": [
               {
@@ -67,15 +84,31 @@
                 "image": "fluent/fluent-bit:2.2.0",
                 "imagePullPolicy": "IfNotPresent",
                 "envFrom": [
-                  { "configMapRef": "fluent-bit-config" }
+                  {
+                    "configMapRef": "fluent-bit-config"
+                  }
                 ],
                 "resources": {
-                  "requests": { "cpu": "50m", "memory": "50Mi" },
-                  "limits": { "cpu": "200m", "memory": "200Mi" }
+                  "requests": {
+                    "cpu": "50m",
+                    "memory": "50Mi"
+                  },
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "200Mi"
+                  }
                 },
                 "volumeMounts": [
-                  { "name": "varlog", "mountPath": "/var/log", "readOnly": true },
-                  { "name": "varlibdockercontainers", "mountPath": "/var/lib/docker/containers", "readOnly": true }
+                  {
+                    "name": "varlog",
+                    "mountPath": "/var/log",
+                    "readOnly": true
+                  },
+                  {
+                    "name": "varlibdockercontainers",
+                    "mountPath": "/var/lib/docker/containers",
+                    "readOnly": true
+                  }
                 ],
                 "securityContext": {
                   "readOnlyRootFilesystem": false,

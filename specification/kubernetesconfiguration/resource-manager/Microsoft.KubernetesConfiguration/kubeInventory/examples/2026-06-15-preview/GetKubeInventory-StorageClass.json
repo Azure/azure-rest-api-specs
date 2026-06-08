@@ -33,7 +33,10 @@
             "resourceVersion": "1023456",
             "creationTimestamp": "2026-01-10T07:00:10Z",
             "annotations": [
-              { "name": "storageclass.kubernetes.io/is-default-class", "value": "false" }
+              {
+                "name": "storageclass.kubernetes.io/is-default-class",
+                "value": "false"
+              }
             ]
           },
           "spec": {
@@ -42,9 +45,18 @@
             "volumeBindingMode": "WaitForFirstConsumer",
             "allowVolumeExpansion": true,
             "additionalFields": [
-              { "name": "parameters.skuName", "value": "Premium_LRS" },
-              { "name": "parameters.kind", "value": "Managed" },
-              { "name": "parameters.cachingMode", "value": "ReadOnly" }
+              {
+                "name": "parameters.skuName",
+                "value": "Premium_LRS"
+              },
+              {
+                "name": "parameters.kind",
+                "value": "Managed"
+              },
+              {
+                "name": "parameters.cachingMode",
+                "value": "ReadOnly"
+              }
             ]
           },
           "status": {},

@@ -206,8 +206,7 @@
               ],
               "attachedToExtension": "azure-kube-inventory"
             }
-          }
-          ,
+          },
           {
             "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubeInventory/deployment-nginx-default",
             "name": "deployment-nginx-default",
@@ -231,13 +230,19 @@
                 "generation": 3,
                 "creationTimestamp": "2026-04-15T09:00:00Z",
                 "labels": [
-                  { "name": "app", "value": "nginx" }
+                  {
+                    "name": "app",
+                    "value": "nginx"
+                  }
                 ]
               },
               "spec": {
                 "replicas": 3,
                 "selector": [
-                  { "name": "app", "value": "nginx" }
+                  {
+                    "name": "app",
+                    "value": "nginx"
+                  }
                 ],
                 "strategyType": "RollingUpdate",
                 "maxUnavailable": "25%",
@@ -248,11 +253,21 @@
                     "image": "nginx:1.25.4",
                     "imagePullPolicy": "IfNotPresent",
                     "ports": [
-                      { "name": "http", "containerPort": 80, "protocol": "TCP" }
+                      {
+                        "name": "http",
+                        "containerPort": 80,
+                        "protocol": "TCP"
+                      }
                     ],
                     "resources": {
-                      "requests": { "cpu": "100m", "memory": "128Mi" },
-                      "limits": { "cpu": "500m", "memory": "512Mi" }
+                      "requests": {
+                        "cpu": "100m",
+                        "memory": "128Mi"
+                      },
+                      "limits": {
+                        "cpu": "500m",
+                        "memory": "512Mi"
+                      }
                     }
                   }
                 ]

@@ -35,15 +35,24 @@
             "generation": 2,
             "creationTimestamp": "2026-03-10T08:00:00Z",
             "labels": [
-              { "name": "app", "value": "postgres" },
-              { "name": "tier", "value": "database" }
+              {
+                "name": "app",
+                "value": "postgres"
+              },
+              {
+                "name": "tier",
+                "value": "database"
+              }
             ]
           },
           "spec": {
             "replicas": 3,
             "serviceName": "postgres-headless",
             "selector": [
-              { "name": "app", "value": "postgres" }
+              {
+                "name": "app",
+                "value": "postgres"
+              }
             ],
             "strategyType": "RollingUpdate",
             "maxUnavailableReplicas": "1",
@@ -56,7 +65,11 @@
               "runAsNonRoot": true
             },
             "volumes": [
-              { "name": "config", "sourceType": "configMap", "source": "postgres-config" }
+              {
+                "name": "config",
+                "sourceType": "configMap",
+                "source": "postgres-config"
+              }
             ],
             "containers": [
               {
@@ -64,21 +77,44 @@
                 "image": "postgres:15.4",
                 "imagePullPolicy": "IfNotPresent",
                 "ports": [
-                  { "name": "postgres", "containerPort": 5432, "protocol": "TCP" }
+                  {
+                    "name": "postgres",
+                    "containerPort": 5432,
+                    "protocol": "TCP"
+                  }
                 ],
                 "env": [
-                  { "name": "POSTGRES_DB", "value": "appdb" }
+                  {
+                    "name": "POSTGRES_DB",
+                    "value": "appdb"
+                  }
                 ],
                 "envFrom": [
-                  { "secretRef": "postgres-credentials" }
+                  {
+                    "secretRef": "postgres-credentials"
+                  }
                 ],
                 "resources": {
-                  "requests": { "cpu": "500m", "memory": "1Gi" },
-                  "limits": { "cpu": "2", "memory": "4Gi" }
+                  "requests": {
+                    "cpu": "500m",
+                    "memory": "1Gi"
+                  },
+                  "limits": {
+                    "cpu": "2",
+                    "memory": "4Gi"
+                  }
                 },
                 "volumeMounts": [
-                  { "name": "data", "mountPath": "/var/lib/postgresql/data", "subPath": "postgres" },
-                  { "name": "config", "mountPath": "/etc/postgresql", "readOnly": true }
+                  {
+                    "name": "data",
+                    "mountPath": "/var/lib/postgresql/data",
+                    "subPath": "postgres"
+                  },
+                  {
+                    "name": "config",
+                    "mountPath": "/etc/postgresql",
+                    "readOnly": true
+                  }
                 ],
                 "securityContext": {
                   "allowPrivilegeEscalation": false,
@@ -90,7 +126,9 @@
             "volumeClaimTemplates": [
               {
                 "name": "data",
-                "accessModes": ["ReadWriteOnce"],
+                "accessModes": [
+                  "ReadWriteOnce"
+                ],
                 "storageClassName": "managed-premium",
                 "storageRequest": "20Gi",
                 "volumeMode": "Filesystem"

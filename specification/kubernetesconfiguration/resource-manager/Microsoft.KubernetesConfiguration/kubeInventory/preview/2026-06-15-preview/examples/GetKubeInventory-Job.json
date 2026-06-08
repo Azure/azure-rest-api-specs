@@ -35,8 +35,14 @@
             "generation": 1,
             "creationTimestamp": "2026-06-01T06:00:00Z",
             "labels": [
-              { "name": "app", "value": "db-migration" },
-              { "name": "batch.kubernetes.io/job-name", "value": "db-migration" }
+              {
+                "name": "app",
+                "value": "db-migration"
+              },
+              {
+                "name": "batch.kubernetes.io/job-name",
+                "value": "db-migration"
+              }
             ]
           },
           "spec": {
@@ -54,12 +60,22 @@
                 "image": "myapp/migration:v2.3.0",
                 "imagePullPolicy": "Always",
                 "envFrom": [
-                  { "secretRef": "db-credentials" },
-                  { "configMapRef": "migration-config" }
+                  {
+                    "secretRef": "db-credentials"
+                  },
+                  {
+                    "configMapRef": "migration-config"
+                  }
                 ],
                 "resources": {
-                  "requests": { "cpu": "200m", "memory": "256Mi" },
-                  "limits": { "cpu": "500m", "memory": "512Mi" }
+                  "requests": {
+                    "cpu": "200m",
+                    "memory": "256Mi"
+                  },
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  }
                 },
                 "securityContext": {
                   "allowPrivilegeEscalation": false,

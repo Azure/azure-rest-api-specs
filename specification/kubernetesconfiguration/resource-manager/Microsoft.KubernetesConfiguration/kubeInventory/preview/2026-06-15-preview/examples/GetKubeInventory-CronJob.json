@@ -35,7 +35,10 @@
             "generation": 3,
             "creationTimestamp": "2026-01-05T00:00:00Z",
             "labels": [
-              { "name": "app", "value": "report-generator" }
+              {
+                "name": "app",
+                "value": "report-generator"
+              }
             ]
           },
           "spec": {
@@ -53,12 +56,22 @@
                 "image": "myapp/reporter:latest",
                 "imagePullPolicy": "Always",
                 "envFrom": [
-                  { "configMapRef": "report-config" },
-                  { "secretRef": "report-credentials" }
+                  {
+                    "configMapRef": "report-config"
+                  },
+                  {
+                    "secretRef": "report-credentials"
+                  }
                 ],
                 "resources": {
-                  "requests": { "cpu": "100m", "memory": "128Mi" },
-                  "limits": { "cpu": "1000m", "memory": "1Gi" }
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "1000m",
+                    "memory": "1Gi"
+                  }
                 }
               }
             ]

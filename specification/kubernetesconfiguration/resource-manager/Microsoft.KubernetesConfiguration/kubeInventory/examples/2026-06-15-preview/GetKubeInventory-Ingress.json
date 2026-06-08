@@ -34,11 +34,20 @@
             "resourceVersion": "1134567",
             "creationTimestamp": "2026-04-01T08:00:00Z",
             "labels": [
-              { "name": "app", "value": "myapp" }
+              {
+                "name": "app",
+                "value": "myapp"
+              }
             ],
             "annotations": [
-              { "name": "nginx.ingress.kubernetes.io/rewrite-target", "value": "/" },
-              { "name": "nginx.ingress.kubernetes.io/ssl-redirect", "value": "true" }
+              {
+                "name": "nginx.ingress.kubernetes.io/rewrite-target",
+                "value": "/"
+              },
+              {
+                "name": "nginx.ingress.kubernetes.io/ssl-redirect",
+                "value": "true"
+              }
             ]
           },
           "spec": {
@@ -66,13 +75,17 @@
             ],
             "ingressTls": [
               {
-                "hosts": ["myapp.example.com"],
+                "hosts": [
+                  "myapp.example.com"
+                ],
                 "secretName": "myapp-tls-cert"
               }
             ]
           },
           "status": {
-            "loadBalancerIngress": ["203.0.113.10"],
+            "loadBalancerIngress": [
+              "203.0.113.10"
+            ],
             "conditions": []
           },
           "events": [

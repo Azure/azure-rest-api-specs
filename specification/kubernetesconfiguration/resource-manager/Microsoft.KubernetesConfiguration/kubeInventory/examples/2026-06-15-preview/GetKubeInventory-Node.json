@@ -33,15 +33,36 @@
             "resourceVersion": "6789012",
             "creationTimestamp": "2026-01-10T07:00:00Z",
             "labels": [
-              { "name": "kubernetes.io/os", "value": "linux" },
-              { "name": "kubernetes.io/arch", "value": "amd64" },
-              { "name": "node.kubernetes.io/instance-type", "value": "Standard_D4s_v3" },
-              { "name": "topology.kubernetes.io/zone", "value": "eastus-1" },
-              { "name": "agentpool", "value": "nodepool1" }
+              {
+                "name": "kubernetes.io/os",
+                "value": "linux"
+              },
+              {
+                "name": "kubernetes.io/arch",
+                "value": "amd64"
+              },
+              {
+                "name": "node.kubernetes.io/instance-type",
+                "value": "Standard_D4s_v3"
+              },
+              {
+                "name": "topology.kubernetes.io/zone",
+                "value": "eastus-1"
+              },
+              {
+                "name": "agentpool",
+                "value": "nodepool1"
+              }
             ],
             "annotations": [
-              { "name": "node.alpha.kubernetes.io/ttl", "value": "0" },
-              { "name": "volumes.kubernetes.io/controller-managed-attach-detach", "value": "true" }
+              {
+                "name": "node.alpha.kubernetes.io/ttl",
+                "value": "0"
+              },
+              {
+                "name": "volumes.kubernetes.io/controller-managed-attach-detach",
+                "value": "true"
+              }
             ]
           },
           "spec": {
@@ -57,8 +78,14 @@
           },
           "status": {
             "nodeAddresses": [
-              { "type": "InternalIP", "address": "10.240.0.4" },
-              { "type": "Hostname", "address": "aks-nodepool1-12345678-0" }
+              {
+                "type": "InternalIP",
+                "address": "10.240.0.4"
+              },
+              {
+                "type": "Hostname",
+                "address": "aks-nodepool1-12345678-0"
+              }
             ],
             "nodeInfo": {
               "kernelVersion": "5.15.0-1057-azure",
@@ -82,8 +109,14 @@
               "ephemeralStorage": "109Gi"
             },
             "volumesAttached": [
-              { "name": "kubernetes-dynamic-pvc-a1b2c3d4", "devicePath": "/dev/sdc" },
-              { "name": "kubernetes-dynamic-pvc-e5f6a7b8", "devicePath": "/dev/sdd" }
+              {
+                "name": "kubernetes-dynamic-pvc-a1b2c3d4",
+                "devicePath": "/dev/sdc"
+              },
+              {
+                "name": "kubernetes-dynamic-pvc-e5f6a7b8",
+                "devicePath": "/dev/sdd"
+              }
             ],
             "conditions": [
               {

@@ -33,12 +33,17 @@
             "resourceVersion": "9123456",
             "creationTimestamp": "2026-03-01T10:00:05Z",
             "labels": [
-              { "name": "failure-domain.beta.kubernetes.io/zone", "value": "eastus-1" }
+              {
+                "name": "failure-domain.beta.kubernetes.io/zone",
+                "value": "eastus-1"
+              }
             ]
           },
           "spec": {
             "storageCapacity": "50Gi",
-            "accessModes": ["ReadWriteOnce"],
+            "accessModes": [
+              "ReadWriteOnce"
+            ],
             "reclaimPolicy": "Delete",
             "storageClassName": "managed-premium",
             "volumeMode": "Filesystem",

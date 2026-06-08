@@ -35,8 +35,14 @@
             "generation": 1,
             "creationTimestamp": "2026-04-15T09:00:10Z",
             "labels": [
-              { "name": "app", "value": "nginx" },
-              { "name": "pod-template-hash", "value": "7d9f8c" }
+              {
+                "name": "app",
+                "value": "nginx"
+              },
+              {
+                "name": "pod-template-hash",
+                "value": "7d9f8c"
+              }
             ],
             "ownerReferences": [
               {
@@ -52,8 +58,14 @@
           "spec": {
             "replicas": 3,
             "selector": [
-              { "name": "app", "value": "nginx" },
-              { "name": "pod-template-hash", "value": "7d9f8c" }
+              {
+                "name": "app",
+                "value": "nginx"
+              },
+              {
+                "name": "pod-template-hash",
+                "value": "7d9f8c"
+              }
             ],
             "containers": [
               {
@@ -61,11 +73,21 @@
                 "image": "nginx:1.25.4",
                 "imagePullPolicy": "IfNotPresent",
                 "ports": [
-                  { "name": "http", "containerPort": 80, "protocol": "TCP" }
+                  {
+                    "name": "http",
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  }
                 ],
                 "resources": {
-                  "requests": { "cpu": "100m", "memory": "128Mi" },
-                  "limits": { "cpu": "500m", "memory": "512Mi" }
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "512Mi"
+                  }
                 }
               }
             ]

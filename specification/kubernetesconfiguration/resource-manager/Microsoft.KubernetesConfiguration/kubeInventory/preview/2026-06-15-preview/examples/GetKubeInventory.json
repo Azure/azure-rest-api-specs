@@ -69,8 +69,14 @@
             "terminationGracePeriodSeconds": 30,
             "priorityClassName": "high-priority",
             "nodeSelector": [
-              { "name": "kubernetes.io/os", "value": "linux" },
-              { "name": "agentpool", "value": "nodepool1" }
+              {
+                "name": "kubernetes.io/os",
+                "value": "linux"
+              },
+              {
+                "name": "agentpool",
+                "value": "nodepool1"
+              }
             ],
             "hostNetwork": false,
             "hostPid": false,
@@ -141,7 +147,9 @@
                   }
                 ],
                 "envFrom": [
-                  { "configMapRef": "nginx-common-config" }
+                  {
+                    "configMapRef": "nginx-common-config"
+                  }
                 ],
                 "resources": {
                   "requests": {
@@ -198,9 +206,14 @@
           "status": {
             "phase": "Running",
             "podIp": "10.244.1.42",
-            "podIps": ["10.244.1.42", "fd00::1:2a"],
+            "podIps": [
+              "10.244.1.42",
+              "fd00::1:2a"
+            ],
             "hostIp": "10.240.0.4",
-            "hostIps": ["10.240.0.4"],
+            "hostIps": [
+              "10.240.0.4"
+            ],
             "startTime": "2026-05-01T10:00:05Z",
             "qosClass": "Burstable",
             "reason": "",

@@ -34,7 +34,10 @@
             "resourceVersion": "5678901",
             "creationTimestamp": "2026-04-15T09:00:00Z",
             "labels": [
-              { "name": "app", "value": "nginx" }
+              {
+                "name": "app",
+                "value": "nginx"
+              }
             ]
           },
           "spec": {
@@ -55,14 +58,19 @@
               }
             ],
             "serviceSelector": [
-              { "name": "app", "value": "nginx" }
+              {
+                "name": "app",
+                "value": "nginx"
+              }
             ],
             "externalTrafficPolicy": "Local",
             "loadBalancerClass": "service.beta.kubernetes.io/azure-load-balancer-internal",
             "loadBalancerIp": "52.183.12.45"
           },
           "status": {
-            "loadBalancerIngress": ["52.183.12.45"],
+            "loadBalancerIngress": [
+              "52.183.12.45"
+            ],
             "conditions": [
               {
                 "type": "Available",

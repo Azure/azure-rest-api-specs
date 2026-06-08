@@ -34,12 +34,20 @@
             "resourceVersion": "9012345",
             "creationTimestamp": "2026-03-01T10:00:05Z",
             "labels": [
-              { "name": "app", "value": "postgres" },
-              { "name": "statefulset.kubernetes.io/pod-name", "value": "postgres-0" }
+              {
+                "name": "app",
+                "value": "postgres"
+              },
+              {
+                "name": "statefulset.kubernetes.io/pod-name",
+                "value": "postgres-0"
+              }
             ]
           },
           "spec": {
-            "accessModes": ["ReadWriteOnce"],
+            "accessModes": [
+              "ReadWriteOnce"
+            ],
             "storageClassName": "managed-premium",
             "storageRequest": "50Gi",
             "volumeMode": "Filesystem",
@@ -48,7 +56,9 @@
           "status": {
             "phase": "Bound",
             "pvcCapacity": "50Gi",
-            "pvcAccessModes": ["ReadWriteOnce"],
+            "pvcAccessModes": [
+              "ReadWriteOnce"
+            ],
             "conditions": []
           },
           "events": [],

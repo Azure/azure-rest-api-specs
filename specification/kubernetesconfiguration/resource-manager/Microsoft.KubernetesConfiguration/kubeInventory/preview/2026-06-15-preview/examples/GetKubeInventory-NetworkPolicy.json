@@ -34,21 +34,48 @@
             "resourceVersion": "1245678",
             "creationTimestamp": "2026-02-15T12:00:00Z",
             "labels": [
-              { "name": "policy-type", "value": "isolation" }
+              {
+                "name": "policy-type",
+                "value": "isolation"
+              }
             ]
           },
           "spec": {
             "podSelectorLabels": [
-              { "name": "app", "value": "myapp" }
+              {
+                "name": "app",
+                "value": "myapp"
+              }
             ],
-            "networkPolicyTypes": ["Ingress", "Egress"],
+            "networkPolicyTypes": [
+              "Ingress",
+              "Egress"
+            ],
             "additionalFields": [
-              { "name": "ingress[0].from[0].podSelector.matchLabels.app", "value": "frontend" },
-              { "name": "ingress[0].ports[0].port", "value": "8080" },
-              { "name": "ingress[0].ports[0].protocol", "value": "TCP" },
-              { "name": "egress[0].to[0].namespaceSelector.matchLabels.name", "value": "kube-system" },
-              { "name": "egress[0].ports[0].port", "value": "53" },
-              { "name": "egress[0].ports[0].protocol", "value": "UDP" }
+              {
+                "name": "ingress[0].from[0].podSelector.matchLabels.app",
+                "value": "frontend"
+              },
+              {
+                "name": "ingress[0].ports[0].port",
+                "value": "8080"
+              },
+              {
+                "name": "ingress[0].ports[0].protocol",
+                "value": "TCP"
+              },
+              {
+                "name": "egress[0].to[0].namespaceSelector.matchLabels.name",
+                "value": "kube-system"
+              },
+              {
+                "name": "egress[0].ports[0].port",
+                "value": "53"
+              },
+              {
+                "name": "egress[0].ports[0].protocol",
+                "value": "UDP"
+              }
             ]
           },
           "status": {},

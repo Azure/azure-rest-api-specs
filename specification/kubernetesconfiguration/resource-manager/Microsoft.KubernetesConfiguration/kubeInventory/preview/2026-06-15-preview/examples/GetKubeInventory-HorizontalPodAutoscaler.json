@@ -34,7 +34,10 @@
             "resourceVersion": "1578901",
             "creationTimestamp": "2026-04-20T10:00:00Z",
             "labels": [
-              { "name": "app", "value": "nginx" }
+              {
+                "name": "app",
+                "value": "nginx"
+              }
             ]
           },
           "spec": {
@@ -43,14 +46,38 @@
             "minReplicas": 2,
             "maxReplicas": 10,
             "additionalFields": [
-              { "name": "metrics[0].type", "value": "Resource" },
-              { "name": "metrics[0].resource.name", "value": "cpu" },
-              { "name": "metrics[0].resource.target.type", "value": "Utilization" },
-              { "name": "metrics[0].resource.target.averageUtilization", "value": "70" },
-              { "name": "metrics[1].type", "value": "Resource" },
-              { "name": "metrics[1].resource.name", "value": "memory" },
-              { "name": "metrics[1].resource.target.type", "value": "Utilization" },
-              { "name": "metrics[1].resource.target.averageUtilization", "value": "80" }
+              {
+                "name": "metrics[0].type",
+                "value": "Resource"
+              },
+              {
+                "name": "metrics[0].resource.name",
+                "value": "cpu"
+              },
+              {
+                "name": "metrics[0].resource.target.type",
+                "value": "Utilization"
+              },
+              {
+                "name": "metrics[0].resource.target.averageUtilization",
+                "value": "70"
+              },
+              {
+                "name": "metrics[1].type",
+                "value": "Resource"
+              },
+              {
+                "name": "metrics[1].resource.name",
+                "value": "memory"
+              },
+              {
+                "name": "metrics[1].resource.target.type",
+                "value": "Utilization"
+              },
+              {
+                "name": "metrics[1].resource.target.averageUtilization",
+                "value": "80"
+              }
             ]
           },
           "status": {
