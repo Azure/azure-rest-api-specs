@@ -895,6 +895,8 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 
 These issues were **introduced in this PR** and must be resolved.
 
+When several changed locations share the same rule violation and the fix is identical, prefer one representative finding/comment and mention the other file/line locations in the `Issue:` text instead of posting separate comments. Split them only when the fix differs, the evidence differs materially, or separate threads are needed for reconciliation.
+
 1. **[NEW]** **[[<Rule ID>](<rule-instruction-file-url>#<anchor>)]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
    **Issue:** <clear description of the violation>
    **Fix:** <exact code or JSON change to apply>
