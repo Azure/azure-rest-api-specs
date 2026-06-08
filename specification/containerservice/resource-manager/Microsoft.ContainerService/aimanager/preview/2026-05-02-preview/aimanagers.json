@@ -1,0 +1,2844 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceAIManagerClient",
+    "version": "2026-05-02-preview",
+    "description": "Azure Kubernetes AI Manager api client.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AIManagers"
+    },
+    {
+      "name": "AIManagerNamespaces"
+    },
+    {
+      "name": "AIModels"
+    },
+    {
+      "name": "ModelSources"
+    },
+    {
+      "name": "ModelDeployments"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/aiManagers": {
+      "get": {
+        "operationId": "AIManagers_ListBySubscription",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "List AIManager resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIManagerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists AI Manager resources by subscription.": {
+            "$ref": "./examples/AIManagers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/aiModels": {
+      "get": {
+        "operationId": "AIModels_List",
+        "tags": [
+          "AIModels"
+        ],
+        "description": "List AIModel resources by SubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIModels_List_MaximumSet": {
+            "$ref": "./examples/AIModels_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/aiModels/{aiModelName}": {
+      "get": {
+        "operationId": "AIModels_Get",
+        "tags": [
+          "AIModels"
+        ],
+        "description": "Get a AIModel",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "aiModelName",
+            "in": "path",
+            "description": "The name of the AI model resource. A stable, format-defined identifier derived from `modelId` as the lowercase hex of the first 8 bytes (16 characters) of `SHA-256(modelId)` (e.g. upstream `microsoft/Phi-4-mini-instruct` produces `9806f0c862fdd920`). Callers should treat the name as opaque and use the `modelId` property as the human-readable reference. The encoding is a permanent contract of this resource provider and does not depend on any upstream naming policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 16,
+            "maxLength": 16,
+            "pattern": "^[0-9a-f]{16}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIModels_Get_MaximumSet": {
+            "$ref": "./examples/AIModels_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/aiModels/{aiModelName}/calculateCost": {
+      "post": {
+        "operationId": "AIModels_CalculateCost",
+        "tags": [
+          "AIModels"
+        ],
+        "description": "Returns a ranked list of GPU SKU pricing plans for deploying this model in the target region, each annotated with feasibility, per-replica hourly cost, and estimated relative performance. No Azure or Kubernetes resources are provisioned.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "aiModelName",
+            "in": "path",
+            "description": "The name of the AI model resource. A stable, format-defined identifier derived from `modelId` as the lowercase hex of the first 8 bytes (16 characters) of `SHA-256(modelId)` (e.g. upstream `microsoft/Phi-4-mini-instruct` produces `9806f0c862fdd920`). Callers should treat the name as opaque and use the `modelId` property as the human-readable reference. The encoding is a permanent contract of this resource provider and does not depend on any upstream naming policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 16,
+            "maxLength": 16,
+            "pattern": "^[0-9a-f]{16}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalculateCostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CalculateCostResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIModels_CalculateCost_MaximumSet": {
+            "$ref": "./examples/AIModels_CalculateCost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers": {
+      "get": {
+        "operationId": "AIManagers_ListByResourceGroup",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "List AIManager resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIManagerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists AI Manager resources by resource group.": {
+            "$ref": "./examples/AIManagers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}": {
+      "get": {
+        "operationId": "AIManagers_Get",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "Get a AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIManager"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an AI Manager resource.": {
+            "$ref": "./examples/AIManagers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AIManagers_CreateOrUpdate",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "Create a AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AIManager"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AIManager' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AIManager"
+            }
+          },
+          "201": {
+            "description": "Resource 'AIManager' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AIManager"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an AI Manager resource.": {
+            "$ref": "./examples/AIManagers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AIManagers_Update",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "Update a AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AIManagerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIManager"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates an AI Manager resource.": {
+            "$ref": "./examples/AIManagers_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AIManagers_Delete",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "Delete a AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an AI Manager resource.": {
+            "$ref": "./examples/AIManagers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/listCredential": {
+      "post": {
+        "operationId": "AIManagers_ListCredential",
+        "tags": [
+          "AIManagers"
+        ],
+        "description": "Lists the credentials of an AI Manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the credentials of an AI Manager.": {
+            "$ref": "./examples/AIManagers_ListCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/modelSources": {
+      "get": {
+        "operationId": "ModelSources_List",
+        "tags": [
+          "ModelSources"
+        ],
+        "description": "List ModelSource resources by AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ModelSourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelSources_List_MaximumSet": {
+            "$ref": "./examples/ModelSources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/modelSources/{modelSourceName}": {
+      "get": {
+        "operationId": "ModelSources_Get",
+        "tags": [
+          "ModelSources"
+        ],
+        "description": "Get a ModelSource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "modelSourceName",
+            "in": "path",
+            "description": "The name of the model source resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ModelSource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelSources_Get_MaximumSet": {
+            "$ref": "./examples/ModelSources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ModelSources_CreateOrUpdate",
+        "tags": [
+          "ModelSources"
+        ],
+        "description": "Create or update a `ModelSource`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "modelSourceName",
+            "in": "path",
+            "description": "The name of the model source resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelSource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ModelSource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ModelSource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ModelSource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ModelSource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelSources_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ModelSources_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ModelSources_Delete",
+        "tags": [
+          "ModelSources"
+        ],
+        "description": "Delete a ModelSource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "modelSourceName",
+            "in": "path",
+            "description": "The name of the model source resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelSources_Delete_MaximumSet": {
+            "$ref": "./examples/ModelSources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces": {
+      "get": {
+        "operationId": "AIManagerNamespaces_ListByAIManager",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "List AIManagerNamespace resources by AIManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIManagerNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists AI Manager namespace resources by AI Manager.": {
+            "$ref": "./examples/AIManagerNamespaces_ListByAIManager.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}": {
+      "get": {
+        "operationId": "AIManagerNamespaces_Get",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Get a AIManagerNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AIManagerNamespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an AI Manager namespace resource.": {
+            "$ref": "./examples/AIManagerNamespaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AIManagerNamespaces_CreateOrUpdate",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Create a AIManagerNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AIManagerNamespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AIManagerNamespace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AIManagerNamespace"
+            }
+          },
+          "201": {
+            "description": "Resource 'AIManagerNamespace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AIManagerNamespace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an AI Manager namespace resource.": {
+            "$ref": "./examples/AIManagerNamespaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AIManagerNamespaces_Delete",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Delete a AIManagerNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an AI Manager namespace resource.": {
+            "$ref": "./examples/AIManagerNamespaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/listAccessKeys": {
+      "post": {
+        "operationId": "AIManagerNamespaces_ListAccessKeys",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Returns the namespace-scoped LLM gateway endpoint and the current API keys.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAccessInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIManagerNamespaces_ListAccessKeys_MaximumSet": {
+            "$ref": "./examples/AIManagerNamespaces_ListAccessKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/listCredential": {
+      "post": {
+        "operationId": "AIManagerNamespaces_ListCredential",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Lists the credentials of an AI Manager namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the credentials of an AI Manager namespace.": {
+            "$ref": "./examples/AIManagerNamespaces_ListCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/modelDeployments": {
+      "get": {
+        "operationId": "ModelDeployments_ListByAIManagerNamespace",
+        "tags": [
+          "ModelDeployments"
+        ],
+        "description": "List ModelDeployment resources by AIManagerNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ModelDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelDeployments_ListByAIManagerNamespace_MaximumSet": {
+            "$ref": "./examples/ModelDeployments_ListByAIManagerNamespace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/modelDeployments/{modelDeploymentName}": {
+      "get": {
+        "operationId": "ModelDeployments_Get",
+        "tags": [
+          "ModelDeployments"
+        ],
+        "description": "Get a ModelDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "modelDeploymentName",
+            "in": "path",
+            "description": "The name of the model deployment resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ModelDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelDeployments_Get_MaximumSet": {
+            "$ref": "./examples/ModelDeployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ModelDeployments_CreateOrUpdate",
+        "tags": [
+          "ModelDeployments"
+        ],
+        "description": "Create or update a `ModelDeployment`. This is a full-replace operation: any optional property omitted from the request body is reset to its default value, or cleared if it has no default. To safely modify a subset of fields, perform a GET, modify the returned resource, and PUT it back using the returned ETag via the `If-Match` header to avoid concurrent overwrites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "modelDeploymentName",
+            "in": "path",
+            "description": "The name of the model deployment resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ModelDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ModelDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ModelDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ModelDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelDeployments_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ModelDeployments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ModelDeployments_Delete",
+        "tags": [
+          "ModelDeployments"
+        ],
+        "description": "Delete a ModelDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "modelDeploymentName",
+            "in": "path",
+            "description": "The name of the model deployment resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelDeployments_Delete_MaximumSet": {
+            "$ref": "./examples/ModelDeployments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/aiManagers/{aiManagerName}/namespaces/{namespaceName}/rotateKeys": {
+      "post": {
+        "operationId": "AIManagerNamespaces_RotateKeys",
+        "tags": [
+          "AIManagerNamespaces"
+        ],
+        "description": "Rotates the namespace-scoped LLM gateway API keys. A new key is generated and installed as `primaryKey`, and the previous `primaryKey` overwrites `secondaryKey` so clients can roll over without downtime. Returns the updated access info.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiManagerName",
+            "in": "path",
+            "description": "The name of the AI Manager resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the AI Manager namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NamespaceAccessInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AIManagerNamespaces_RotateKeys": {
+            "$ref": "./examples/AIManagerNamespaces_RotateKeys.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AIManager": {
+      "type": "object",
+      "description": "The AI Manager resource. For more information, see https://aka.ms/aks/aimanager.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AIManagerProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AIManagerListResult": {
+      "type": "object",
+      "description": "The response of a AIManager list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AIManager items on this page",
+          "items": {
+            "$ref": "#/definitions/AIManager"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AIManagerNamespace": {
+      "type": "object",
+      "description": "The AI Manager namespace resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AIManagerNamespaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AIManagerNamespaceListResult": {
+      "type": "object",
+      "description": "The response of a AIManagerNamespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AIManagerNamespace items on this page",
+          "items": {
+            "$ref": "#/definitions/AIManagerNamespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AIManagerNamespaceProperties": {
+      "type": "object",
+      "description": "AI Manager namespace properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "Labels applied to the Kubernetes namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Annotations applied to the Kubernetes namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AIManagerNamespaceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the AI Manager namespace resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AIManagerNamespaceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state of a namespace being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a namespace being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state of a namespace being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AIManagerPatch": {
+      "type": "object",
+      "description": "The AI Manager resource patch model.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "AIManagerProperties": {
+      "type": "object",
+      "description": "AI Manager properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AIManagerProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of the AI Manager. Defaults to `Delete` if not specified."
+        },
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "The name of the managed resource group created by the AI Manager to hold underlying infrastructure resources.",
+          "readOnly": true
+        }
+      }
+    },
+    "AIManagerProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the AI Manager resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AIManagerProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AIModel": {
+      "type": "object",
+      "description": "An AI model exposed by Microsoft.ContainerService. Read-only, globally-shared catalog entry that is platform-maintained and auto-provisioned by the resource provider. Can be referenced by `ModelDeployment` resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AIModelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AIModelListResult": {
+      "type": "object",
+      "description": "The response of a AIModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AIModel items on this page",
+          "items": {
+            "$ref": "#/definitions/AIModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AIModelProperties": {
+      "type": "object",
+      "description": "AI model properties.",
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "description": "The Hugging Face model identifier in `<org>/<repo>` form, e.g. `microsoft/Phi-4-mini-instruct`. Uniquely identifies the upstream model that backs this catalog entry.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional, free-form description of the model.",
+          "readOnly": true
+        },
+        "spec": {
+          "$ref": "#/definitions/ModelSpec",
+          "description": "Specification of the model.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "modelId",
+        "spec"
+      ]
+    },
+    "AIModelResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource id of an AIModel.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/aiModels"
+          }
+        ]
+      }
+    },
+    "AutoscaleProfile": {
+      "type": "object",
+      "description": "Autoscaling configuration: scale replica count between a minimum and maximum.",
+      "properties": {
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of replicas. Must be at least `1`; scale-to-zero is not supported in autoscale mode (see `ScalingProfile`).",
+          "minimum": 1
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of replicas. If not specified, the service derives a default from the subscription GPU quota.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "minReplicas"
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CalculateCostPlan": {
+      "type": "object",
+      "description": "A GPU SKU pricing plan returned by the `calculateCost` action. Describes the cost of running a single model replica on the specified `vmSize`. To estimate the cost of running multiple replicas, scale `totalHourlyPrice` by the desired replica count, bounded by `maxAvailableReplicas`.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "Azure VM SKU, e.g. \"Standard_ND96isr_H100_v5\". Matches the value accepted by `ModelDeploymentProperties.vmSize`.",
+          "readOnly": true
+        },
+        "quantization": {
+          "type": "string",
+          "description": "Resolved quantization on this SKU.",
+          "readOnly": true
+        },
+        "vmsPerReplica": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of VMs required to host one replica on this SKU.",
+          "minimum": 1,
+          "readOnly": true
+        },
+        "maxAvailableReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of replicas the caller's subscription can deploy on this SKU today, computed from the available GPU quota in the target region.",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "servingPerformanceEstimation": {
+          "$ref": "#/definitions/ServingPerformanceEstimation",
+          "description": "Estimated relative inference performance of a single model replica on this SKU. Omitted when an estimate is unavailable.",
+          "readOnly": true
+        },
+        "vmHourlyPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "On-demand hourly price for a single VM of this SKU, in `currency`.",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "totalHourlyPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "Projected hourly cost for one replica (`vmsPerReplica` VMs), in `currency`.",
+          "minimum": 0,
+          "readOnly": true
+        },
+        "priceAsOf": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the price snapshot used for this plan.",
+          "readOnly": true
+        },
+        "feasible": {
+          "type": "boolean",
+          "description": "Whether the caller can actually deploy this plan today (region availability, GPU quota, model fit, etc.). This field gates the mutually exclusive properties on this model:\n- When `feasible` is `true`: `totalHourlyPrice` is set and `infeasibilityReason` is omitted.\n- When `feasible` is `false`: `infeasibilityReason` is set and `totalHourlyPrice` is omitted.",
+          "readOnly": true
+        },
+        "infeasibilityReason": {
+          "$ref": "#/definitions/InfeasibilityReason",
+          "description": "Reason explaining why the plan is not deployable. This is a per-plan annotation, not an ARM error envelope.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "vmSize",
+        "vmsPerReplica",
+        "maxAvailableReplicas",
+        "vmHourlyPrice",
+        "feasible"
+      ]
+    },
+    "CalculateCostRequest": {
+      "type": "object",
+      "description": "Request body for the AI model `calculateCost` action."
+    },
+    "CalculateCostResponse": {
+      "type": "object",
+      "description": "Response body for the AI model `calculateCost` action.",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code, e.g. \"USD\".",
+          "readOnly": true
+        },
+        "plans": {
+          "type": "array",
+          "description": "Ranked list of GPU SKU pricing plans. Feasible plans first, ordered by `totalHourlyPrice` ascending; infeasible plans last.",
+          "items": {
+            "$ref": "#/definitions/CalculateCostPlan"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "vmSize"
+          ]
+        }
+      },
+      "required": [
+        "currency",
+        "plans"
+      ]
+    },
+    "CredentialResult": {
+      "type": "object",
+      "description": "The credential result response.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the credential.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
+    },
+    "CredentialResults": {
+      "type": "object",
+      "description": "The list credential result response.",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "description": "Array of credential results.",
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CredentialValue": {
+      "type": "object",
+      "description": "A credential value. Exactly one variant must be set.\n\nIn the current API version, only the `inline` variant is supported. Future\nAPI versions are expected to add additional credential kinds (for example,\nmanaged identity and Key Vault secret references) as sibling variants on\nthis model.",
+      "properties": {
+        "inline": {
+          "$ref": "#/definitions/InlineCredential",
+          "description": "An inline credential containing a secret value supplied in the request payload."
+        }
+      }
+    },
+    "DeletePolicy": {
+      "type": "string",
+      "description": "Delete options of the AI Manager.",
+      "enum": [
+        "Keep",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "DeletePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Keep",
+            "value": "Keep",
+            "description": "Keep the underlying cluster resources even if the AIManager resource is deleted."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete both the underlying cluster resources and the AIManager resource together."
+          }
+        ]
+      }
+    },
+    "InfeasibilityReason": {
+      "type": "object",
+      "description": "Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an ARM error envelope.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InfeasibleCode",
+          "description": "Machine-readable reason code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable message accompanying `code`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "InfeasibleCode": {
+      "type": "string",
+      "description": "The reason a `CalculateCostPlan` is not deployable.",
+      "enum": [
+        "InsufficientQuota",
+        "RegionUnavailable",
+        "InefficientDeployment"
+      ],
+      "x-ms-enum": {
+        "name": "InfeasibleCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InsufficientQuota",
+            "value": "InsufficientQuota",
+            "description": "The caller's subscription does not have enough GPU quota in the target region to deploy this plan."
+          },
+          {
+            "name": "RegionUnavailable",
+            "value": "RegionUnavailable",
+            "description": "The VM SKU is not available in the target region."
+          },
+          {
+            "name": "InefficientDeployment",
+            "value": "InefficientDeployment",
+            "description": "The deployment can start successfully on this SKU, but its estimated runtime performance falls below the acceptable threshold for serving this model."
+          }
+        ]
+      }
+    },
+    "InlineCredential": {
+      "type": "object",
+      "description": "A credential provided inline.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "The access token, password, or other secret value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManualScalingProfile": {
+      "type": "object",
+      "description": "Manual scaling configuration: fixed replica count.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fixed number of replicas. May be `0` to stop serving traffic while keeping the deployment configuration (see `ScalingProfile`).",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "replicas"
+      ]
+    },
+    "ModelDeployment": {
+      "type": "object",
+      "description": "A running deployment of a model in an AI Manager namespace.\n\nPUT (create or update) on this resource is a full replace: the request body\nrepresents the complete desired state, and any optional property omitted\nfrom the body is reset to its default value (or cleared, if it has no\ndefault). Callers must always send the full desired state on every PUT.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModelDeploymentProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ModelDeploymentListResult": {
+      "type": "object",
+      "description": "The response of a ModelDeployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ModelDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/ModelDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ModelDeploymentOverrides": {
+      "type": "object",
+      "description": "User overrides for a model deployment.",
+      "properties": {
+        "values": {
+          "type": "object",
+          "description": "Experimental free-form override key/value pairs. Subject to change without notice; not part of the stable contract. Recognized keys are documented per release and may be added, renamed, or removed at any time.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ModelDeploymentPerformanceMode": {
+      "type": "string",
+      "description": "The runtime performance mode of a model deployment.",
+      "enum": [
+        "Balanced",
+        "Latency",
+        "Throughput"
+      ],
+      "x-ms-enum": {
+        "name": "ModelDeploymentPerformanceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Balanced",
+            "value": "Balanced",
+            "description": "A balanced trade-off between latency and throughput (default)."
+          },
+          {
+            "name": "Latency",
+            "value": "Latency",
+            "description": "Optimize for low request latency."
+          },
+          {
+            "name": "Throughput",
+            "value": "Throughput",
+            "description": "Optimize for high aggregate throughput."
+          }
+        ]
+      }
+    },
+    "ModelDeploymentProperties": {
+      "type": "object",
+      "description": "Model deployment properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ModelDeploymentProvisioningState",
+          "description": "The status of the last reconciliation.",
+          "readOnly": true
+        },
+        "modelResourceId": {
+          "$ref": "#/definitions/AIModelResourceId",
+          "description": "Full ARM resource id of the model to deploy. Phase 1 accepts an `AIModel` resource id only. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "modelSourceResourceId": {
+          "$ref": "#/definitions/ModelSourceResourceId",
+          "description": "Full ARM resource id of a `ModelSource` to use when pulling artifacts for this deployment. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "performanceMode": {
+          "$ref": "#/definitions/ModelDeploymentPerformanceMode",
+          "description": "Runtime performance mode."
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "Azure VM SKU used to host the deployment, e.g. \"Standard_NC96ads_A100_v4\". Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "scale": {
+          "$ref": "#/definitions/ScalingProfile",
+          "description": "Scaling configuration for the deployment. Provide either `manual` (fixed replica count) or `autoscale` (autoscaling between min/max replicas), but not both."
+        },
+        "overrides": {
+          "$ref": "#/definitions/ModelDeploymentOverrides",
+          "description": "User overrides layered on top of profile resolution."
+        },
+        "status": {
+          "$ref": "#/definitions/ModelDeploymentStatus",
+          "description": "Runtime status, populated once reconciliation begins.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "modelResourceId",
+        "vmSize"
+      ]
+    },
+    "ModelDeploymentProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a model deployment resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ModelDeploymentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ModelDeploymentStatus": {
+      "type": "object",
+      "description": "The runtime status of a model deployment. All fields are read-only and populated once reconciliation has started.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The inference endpoint URL exposed by the deployment, once ready.",
+          "readOnly": true
+        },
+        "engine": {
+          "type": "string",
+          "description": "The inference engine used to serve the model, e.g. \"vllm\".",
+          "readOnly": true
+        },
+        "engineVersion": {
+          "type": "string",
+          "description": "The version of the inference engine, e.g. \"0.17\".",
+          "readOnly": true
+        },
+        "maxModelLen": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum model context length, in tokens, configured for this deployment.",
+          "readOnly": true
+        },
+        "quantization": {
+          "type": "string",
+          "description": "The quantization level applied to the model weights, e.g. \"fp16\", \"awq-int4\".",
+          "readOnly": true
+        },
+        "desiredReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The desired replica count reported by the controller. Equals `properties.scale.manual.replicas` when manual scaling is used; current target replica count derived from autoscaler otherwise.",
+          "readOnly": true
+        },
+        "currentReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current number of ready replicas serving traffic.",
+          "readOnly": true
+        },
+        "peakTokensPerMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The peak tokens per minute measured by live stress test.",
+          "readOnly": true
+        },
+        "estimatedProvisionTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Estimated total time, in seconds, for the deployment to become ready end-to-end (GPU vm provisioning, image/weight pull, engine warm-up).",
+          "readOnly": true
+        }
+      }
+    },
+    "ModelSource": {
+      "type": "object",
+      "description": "A model source registered with an AI Manager. Describes an external model registry (e.g. Hugging Face) and the credentials the platform uses to pull artifacts from it.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ModelSourceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ModelSourceListResult": {
+      "type": "object",
+      "description": "The response of a ModelSource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ModelSource items on this page",
+          "items": {
+            "$ref": "#/definitions/ModelSource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ModelSourceProperties": {
+      "type": "object",
+      "description": "Model source properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "sourceType": {
+          "$ref": "#/definitions/ModelSourceType",
+          "description": "Model source type. Constrains the legal authentication kinds. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional, free-form description of the source."
+        },
+        "credential": {
+          "$ref": "#/definitions/CredentialValue",
+          "description": "Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models).",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "sourceType"
+      ]
+    },
+    "ModelSourceResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "The ARM resource id of a ModelSource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/aiManagers/modelSources"
+          }
+        ]
+      }
+    },
+    "ModelSourceType": {
+      "type": "string",
+      "description": "The type of a model source.",
+      "enum": [
+        "HuggingFace"
+      ],
+      "x-ms-enum": {
+        "name": "ModelSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HuggingFace",
+            "value": "HuggingFace",
+            "description": "A Hugging Face model registry."
+          }
+        ]
+      }
+    },
+    "ModelSpec": {
+      "type": "object",
+      "description": "The specification of a model. All fields are read-only.",
+      "properties": {
+        "license": {
+          "type": "string",
+          "description": "The license of the model, when known. SPDX license identifier, e.g. `mit`, `apache-2.0`.",
+          "readOnly": true
+        },
+        "isRestricted": {
+          "type": "boolean",
+          "description": "Whether access to the model is restricted and requires credential.",
+          "readOnly": true
+        },
+        "maxContextLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum context length supported by the model, in tokens.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isRestricted",
+        "maxContextLength"
+      ]
+    },
+    "NamespaceAccessInfo": {
+      "type": "object",
+      "description": "Access information for an AI Manager namespace, including the OpenAI-compatible gateway endpoint and the API keys used to authenticate against it.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "OpenAI-compatible inference gateway base URL (for example, `https://team-alpha.<cluster>.<region>.aksapp.io/v1`).",
+          "readOnly": true
+        },
+        "primaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Primary API key. Send as `Authorization: Bearer <key>` or `api-key: <key>`. Treat as secret; do not log or persist in plaintext.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Secondary API key, accepted by the gateway in the same headers as `primaryKey`. Generated independently when the namespace is created, then overwritten by the previous `primaryKey` on each `rotateKeys` call so clients can roll over without downtime. Treat as secret; do not log or persist in plaintext.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "lastRotatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC time the keys were last rotated by `rotateKeys`. Absent until the first rotation. Clients can use this to detect rotation and refresh cached credentials.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "endpoint",
+        "primaryKey",
+        "secondaryKey"
+      ]
+    },
+    "ScalingProfile": {
+      "type": "object",
+      "description": "Scaling configuration for a model deployment. Exactly one of `manual` or\n`autoscale` must be set.\n\nThis mutual-exclusion constraint is enforced by the service at request\nvalidation time, not by the schema. A PUT request that sets both `manual`\nand `autoscale`, or sets neither, is rejected with HTTP 400 (Bad Request)\nand an `InvalidScalingProfile` error code;\n\nScale-to-zero semantics differ between the two modes:\n- `manual` permits `replicas: 0`. This is an explicit operator action to\n  stop serving traffic while keeping the `ModelDeployment` resource (and\n  its configuration) in place. While at zero replicas the endpoint\n  returns errors for inference requests, and the deployment releases its\n  GPU capacity.\n- `autoscale` does not permit `minReplicas: 0`. Autoscaling decisions are\n  driven by serving-server runtime metrics (request rate, queue depth,\n  GPU utilization); at zero replicas there is no signal for the\n  autoscaler to scale back up from. Combined with GPU cold-start time\n  (on the order of minutes) and constrained regional GPU capacity, a\n  scale-from-zero event would produce unacceptable first-request latency\n  and a high risk of capacity unavailability. Callers that want\n  autoscaling with an idle state should delete the `ModelDeployment`\n  instead.",
+      "properties": {
+        "manual": {
+          "$ref": "#/definitions/ManualScalingProfile",
+          "description": "Manual scaling configuration with a fixed replica count. Mutually exclusive with `autoscale`."
+        },
+        "autoscale": {
+          "$ref": "#/definitions/AutoscaleProfile",
+          "description": "Autoscaling configuration. Mutually exclusive with `manual`."
+        }
+      }
+    },
+    "ServingPerformanceEstimation": {
+      "type": "object",
+      "description": "Estimated relative inference performance of a single model replica on a given GPU SKU. Each metric is a scaling coefficient in the range `[0, 1]` relative to the best-performing SKU for this model, which scores `1`.",
+      "properties": {
+        "relativeLatencyScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Relative inference latency score in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's latency for this model). Note: this is a normalized score, not a raw latency ratio -- a larger value indicates lower latency.",
+          "minimum": 0,
+          "maximum": 1,
+          "readOnly": true
+        },
+        "relativeThroughputScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Relative inference throughput score in `[0, 1]`. Higher is better (`1` matches the best-performing SKU's throughput for this model).",
+          "minimum": 0,
+          "maximum": 1,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "relativeLatencyScore",
+        "relativeThroughputScore"
+      ]
+    }
+  },
+  "parameters": {}
+}
