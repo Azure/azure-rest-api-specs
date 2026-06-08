@@ -116,7 +116,6 @@ namespace CombineClient;
 @@clientName(Common.Resource, "NetworkTrackedResourceData", "csharp");
 @@clientName(Common.SubResource, "NetworkSubResource", "csharp");
 @@clientName(Common.SubResourceModel, "NetworkResourceData", "csharp");
-@@clientName(Microsoft.Network.WritableResource, "NetworkWritableResourceData", "csharp");
 @@clientName(Common.InboundNatPoolPropertiesFormat, "LoadBalancerInboundNatPoolProperties", "csharp");
 @@access(Common.FlowLogPropertiesFormat, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.FlowLogProperties, Azure.ClientGenerator.Core.Access.public, "csharp");
