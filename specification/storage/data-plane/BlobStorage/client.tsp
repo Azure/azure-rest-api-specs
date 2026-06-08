@@ -213,6 +213,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   true,
   "rust"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Storage.Blob.PageBlob.getPageRanges,
+  "python,csharp,javascript,go"
+);
 
 @@clientName(
   BlobProperties.customerProvidedKeySha256,
