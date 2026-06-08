@@ -11,16 +11,8 @@ using Azure.AI.Projects;
 // @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
 // @@clientInitialization requires exact singleton opt-in properties (e.g. agents_optimization_v1_preview) per key.
 // Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
-@@clientLocation(
-  Azure.AI.Projects.WithConditionalFoundryPreviewHeader.foundry_features,
-  Azure.AI.Projects,
-  "java"
-);
-@@clientLocation(
-  Azure.AI.Projects.WithRequiredFoundryPreviewHeader.foundry_features,
-  Azure.AI.Projects,
-  "java"
-);
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!java");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!java");
 
 // --------------------------------------------------------------------------------
 // Renames
@@ -189,16 +181,6 @@ using Azure.AI.Projects;
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
 
-// Temporary Java workaround: after @@clientLocation promotes Foundry-Features, optional-header
-// convenience overloads can collapse to duplicate signatures. Remove these suppressions once
-// the Java emitter de-dupes those generated overloads.
-@@convenientAPI(AgentOptimizationJobs.get, false, "java");
-@@convenientAPI(AgentOptimizationJobs.cancel, false, "java");
-@@convenientAPI(AgentOptimizationJobs.getCandidate, false, "java");
-@@convenientAPI(AgentOptimizationJobs.getCandidateConfig, false, "java");
-@@convenientAPI(AgentOptimizationJobs.getCandidateResults, false, "java");
-@@convenientAPI(AgentOptimizationJobs.getCandidateFile, false, "java");
-@@convenientAPI(AgentOptimizationJobs.promoteCandidate, false, "java");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
