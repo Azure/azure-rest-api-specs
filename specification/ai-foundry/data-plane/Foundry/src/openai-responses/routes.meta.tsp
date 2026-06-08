@@ -2293,7 +2293,7 @@ namespace Azure.AI.Projects;
 @@extension(Azure.AI.Projects.Responses.listInputItems, "x-ms-list", true);
 
 @@extension(
-  Azure.AI.Projects.Responses.Compactconversation,
+  Azure.AI.Projects.Responses.compactResponseConversation,
   "x-oaiMeta",
   #{
     name: "Compact a response",
