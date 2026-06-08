@@ -1,23 +1,23 @@
-import "./src/common/service.tsp";
+import "../common/service.tsp";
 
-import "./src/connections/routes.tsp";
-import "./src/datasets/routes.tsp";
-import "./src/indexes/routes.tsp";
-import "./src/models/routes.tsp";
-import "./src/deployments/routes.tsp";
-import "./src/red-teams/routes.tsp";
-import "./src/evaluation-rules/routes.tsp";
+import "../connections/routes.tsp";
+import "../datasets/routes.tsp";
+import "../indexes/routes.tsp";
+import "../models/routes.tsp";
+import "../deployments/routes.tsp";
+import "../red-teams/routes.tsp";
+import "../evaluation-rules/routes.tsp";
 // Don't import openai-evaluations routes, we'll use Stainless SDK like in AgentsV2.
 // Import only the models so Java codegen can expose Azure-specific eval extensions.
-import "./src/openai-evaluations/models.tsp";
-// import "./openai-evaluations/routes.tsp";
-import "./src/evaluation-taxonomies/routes.tsp";
-import "./src/evaluators/routes.tsp";
-import "./src/insights/routes.tsp";
-import "./src/schedules/routes.tsp";
-import "./src/routines/routes.tsp";
-import "./src/skills/routes.tsp";
-import "./src/data_generation_jobs/routes.tsp";
+import "../openai-evaluations/models.tsp";
+// import "../openai-evaluations/routes.tsp";
+import "../evaluation-taxonomies/routes.tsp";
+import "../evaluators/routes.tsp";
+import "../insights/routes.tsp";
+import "../schedules/routes.tsp";
+import "../routines/routes.tsp";
+import "../skills/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
 
 import "./relocate-beta-operations.java.tsp";
 
