@@ -4317,7 +4317,11 @@ paths:
     get:
       operationId: EvaluatorGenerationJobs_list
       summary: List evaluator generation jobs
-      description: Returns a list of evaluator generation jobs.
+      description: |-
+        Returns a list of evaluator generation jobs. The List API has up to a few
+        seconds of propagation delay, so a recently created job may not appear
+        immediately; use the Get evaluator generation job API with the job ID to
+        retrieve a specific job without delay.
       parameters:
         - name: Foundry-Features
           in: header
@@ -12214,6 +12218,7 @@ components:
           enum:
             - activity_protocol
             - responses
+            - a2a
             - mcp
             - invocations
             - invocations_ws
@@ -16870,6 +16875,13 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
+          default:
+            - turn
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -16928,6 +16940,13 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
+          default:
+            - turn
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -16957,6 +16976,13 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
+          default:
+            - turn
         description:
           type: string
           description: The asset description text.
@@ -36595,7 +36621,8 @@ components:
           description: The unique run identifier for the routine attempt.
           readOnly: true
         status:
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/RoutineRunStatus'
           description: The run status.
         phase:
           allOf:
@@ -36680,6 +36707,12 @@ components:
             - completed
             - failed
       description: Known lifecycle phases recorded for a routine run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRunStatus:
+      type: string
+      description: The status of a routine run.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
