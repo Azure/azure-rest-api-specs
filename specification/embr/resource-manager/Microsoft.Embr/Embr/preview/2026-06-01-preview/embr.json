@@ -285,60 +285,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "Projects_Update",
-        "tags": [
-          "Projects"
-        ],
-        "description": "Update a Project",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the Project",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProjectUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Projects_Update": {
-            "$ref": "./examples/Projects_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Projects_Delete",
         "tags": [
@@ -402,25 +348,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Project": {
       "type": "object",
       "description": "Project resource",
@@ -510,21 +437,6 @@
           "readOnly": true
         }
       }
-    },
-    "ProjectUpdate": {
-      "type": "object",
-      "description": "Project resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProjectProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "ProvisioningState": {
       "type": "string",
