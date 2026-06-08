@@ -62,7 +62,6 @@ namespace CombineClient;
 @@clientName(Microsoft.Network.AzureReachabilityReportParameters, "AzureReachabilityReportContent", "csharp");
 @@clientName(Microsoft.Network.BastionShareableLinkTokenListRequest, "BastionShareableLinkTokenListContent", "csharp");
 @@clientName(Microsoft.Network.ConnectionMonitorParameters, "ConnectionMonitorCreateOrUpdateContent", "csharp");
-@@clientName(Microsoft.Network.ConnectionMonitorListResult, "ConnectionMonitorQueryResult", "csharp");
 @@clientName(Microsoft.Network.ConnectionMonitorType, "ConnectionMonitorEndpointType", "csharp");
 @@clientName(Microsoft.Network.ConnectivityParameters, "ConnectivityContent", "csharp");
 @@clientName(Microsoft.Network.CustomIpPrefixType, "CustomIPPrefixType", "csharp");
