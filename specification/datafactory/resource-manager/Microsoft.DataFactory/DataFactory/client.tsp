@@ -1523,3 +1523,20 @@ using Microsoft.DataFactory;
 );
 @@clientName(TriggerResources.cancel, "CancelTriggerRun", "csharp");
 @@clientName(TriggerResources.rerun, "RerunTriggerRun", "csharp");
+
+// Project the ARM entity-tag (eTag) onto Azure.ETag for the C# surface so the published GA contract
+// (Azure.ETag? ETag on each resource Data type) is preserved; the current emitter otherwise projects
+// it as plain string for some of these resources.
+@@alternateType(ChangeDataCaptureResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(CredentialResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(DataFlowResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(DatasetResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(GlobalParameterResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(IntegrationRuntimeResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(LinkedServiceResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ManagedPrivateEndpointResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ManagedVirtualNetworkResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(PipelineResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(PrivateEndpointConnectionResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(TriggerResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Factory.eTag, Azure.Core.eTag, "csharp");
