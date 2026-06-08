@@ -672,11 +672,6 @@ model NamespaceReplicaLocation {
    * GeoDR Role Types
    */
   roleType?: GeoDRRoleType;
-
-  /**
-   * Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster
-   */
-  clusterArmId?: string;
 }
 
 /**
