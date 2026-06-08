@@ -14,12 +14,12 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Maintenance;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Suppress expected decorator error"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "ScheduledEvents is not modeled as an ARM resource; this group only exposes custom action (POST) operations."
 interface ScheduledEventOperationGroup {
   /**
    * Post ScheduledEvents Acknowledgement
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Suppress expected arm error"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom action POST that acknowledges a ScheduledEvent; not a standard ARM resource lifecycle operation."
   @summary("Post ScheduledEvents Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge")
   @post
@@ -50,7 +50,7 @@ interface ScheduledEventOperationGroup {
   /**
    * Post List of ScheduledEvents Acknowledgement
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Suppress expected arm error"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom action POST that acknowledges a list of ScheduledEvents; not a standard ARM resource lifecycle operation."
   @added(Versions.v2025_10_01_preview)
   @summary("Post ScheduledEvents List Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents")
