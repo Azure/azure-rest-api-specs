@@ -26,9 +26,6 @@ namespace Customizations;
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
 
-// Suppress @fixme for JS reserved word "delete" used as method name on subclient
-@@clientName(Ingestions.delete, "delete", "javascript");
-
 // Fix generic "The most basic operation" docs for search tile operations (without TileMatrixSetId)
 @@doc(
   MosaicSearchesAssetsForTiles.getZxyAssets,
