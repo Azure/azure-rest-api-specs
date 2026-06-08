@@ -12,7 +12,10 @@ namespace Microsoft.SaaS;
 
 @armResourceOperations
 interface SaasSubscriptionLevel {
-  get is ArmResourceRead<SaasResource>;
+  get is ArmResourceRead<
+    SaasResource,
+    Parameters = ExpandCustomerDataQueryParameter
+  >;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SaasResource>;
   update is ArmCustomPatchAsync<
     SaasResource,
@@ -22,7 +25,10 @@ interface SaasSubscriptionLevel {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<SaasResource>;
-  listByResourceGroup is ArmResourceListByParent<SaasResource>;
+  listByResourceGroup is ArmResourceListByParent<
+    SaasResource,
+    Parameters = ExpandCustomerDataQueryParameter
+  >;
   listAccessToken is ArmResourceActionSync<
     SaasResource,
     void,
@@ -38,6 +44,9 @@ interface SaasSubscriptionLevel {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
 interface SaasSubscriptionLevelGlobal {
-  listByAzureSubscription is ArmListBySubscription<SaasResource>;
+  listByAzureSubscription is ArmListBySubscription<
+    SaasResource,
+    Parameters = ExpandCustomerDataQueryParameter
+  >;
   checkNameAvailability is checkGlobalNameAvailability;
 }

@@ -24,7 +24,10 @@ model SaasTenantResource is ProxyResource<SaasResourceProperties> {
 @armResourceOperations
 interface SaasTenantLevel {
   createResource is ArmResourceCreateOrReplaceAsync<SaasTenantResource>;
-  getResource is ArmResourceRead<SaasTenantResource>;
+  getResource is ArmResourceRead<
+    SaasTenantResource,
+    Parameters = ExpandCustomerDataQueryParameter
+  >;
   updateResource is ArmCustomPatchAsync<
     SaasTenantResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -33,7 +36,10 @@ interface SaasTenantLevel {
     >
   >;
   deleteResource is ArmResourceDeleteWithoutOkAsync<SaasTenantResource>;
-  list is ArmResourceListByParent<SaasTenantResource>;
+  list is ArmResourceListByParent<
+    SaasTenantResource,
+    Parameters = ExpandCustomerDataQueryParameter
+  >;
   listAccessToken is ArmResourceActionSync<
     SaasTenantResource,
     void,

@@ -133,6 +133,9 @@
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataQueryParameter"
           }
         ],
         "responses": {
@@ -177,6 +180,9 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,50}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataQueryParameter"
           }
         ],
         "responses": {
@@ -522,6 +528,9 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataQueryParameter"
           }
         ],
         "responses": {
@@ -564,6 +573,9 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataQueryParameter"
           }
         ],
         "responses": {
@@ -614,6 +626,9 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/ExpandCustomerDataQueryParameter"
           }
         ],
         "responses": {
@@ -1214,7 +1229,7 @@
         "purchaserEmail": {
           "type": "string",
           "format": "password",
-          "description": "The purchaser email. Server-derived from authenticated identity.",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
           "readOnly": true,
           "x-ms-secret": true
         },
@@ -1507,5 +1522,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ExpandCustomerDataQueryParameter": {
+      "name": "$expandCustomerData",
+      "in": "query",
+      "description": "When `true`, the response includes customer-data (PII) fields such as `purchaserEmail`. Defaults to `false`.",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "expandCustomerData"
+    }
+  }
 }
