@@ -35,14 +35,23 @@
             "generation": 1,
             "creationTimestamp": "2026-04-01T06:00:00Z",
             "labels": [
-              { "name": "csi.storage.k8s.io/storageclass", "value": "managed-premium" }
+              {
+                "name": "csi.storage.k8s.io/storageclass",
+                "value": "managed-premium"
+              }
             ]
           },
           "spec": {
             "storageClassName": "managed-premium",
             "nodeTopology": [
-              { "name": "topology.kubernetes.io/zone", "value": "eastus-1" },
-              { "name": "kubernetes.io/hostname", "value": "aks-nodepool1-12345678-vmss000000" }
+              {
+                "name": "topology.kubernetes.io/zone",
+                "value": "eastus-1"
+              },
+              {
+                "name": "kubernetes.io/hostname",
+                "value": "aks-nodepool1-12345678-vmss000000"
+              }
             ],
             "storageCapacityAvailable": "512Gi",
             "maximumVolumeSize": "4Ti"
