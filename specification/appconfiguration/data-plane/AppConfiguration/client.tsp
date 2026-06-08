@@ -59,3 +59,11 @@ namespace SdkCustomizations;
 @@clientName(KeyValueFilter, "ConfigurationSettingsFilter", "javascript");
 @@clientName(Snapshot, "ConfigurationSnapshot", "javascript");
 @@clientName(AzureAppConfiguration, "AppConfigurationClient", "javascript");
+
+// Go specific customizations
+@@clientName(KeyValueFields, "SettingFields", "go");
+@@clientName(KeyValueListResult.etag, "ETag", "go");
+@@clientName(PutKeyValueRequestContentTypeGo, "PutKeyValueRequestContentType", "go");
+@@clientName(SnapshotFields.etag, "ETag", "go");
+@@access(PutKeyValueRequestContentTypeGo, Access.internal, "!go");
+@@scope(PutKeyValueRequestContentTypeGo, "go");

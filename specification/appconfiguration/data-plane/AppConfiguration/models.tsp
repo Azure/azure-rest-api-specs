@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace AzureAppConfiguration;
 
@@ -357,11 +359,23 @@ alias ContentTypeHeader<T extends string> = {
   contentType?: T | "application/problem+json";
 };
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+union PutKeyValueRequestContentTypeGo {
+  "application/vnd.microsoft.appconfig.kv+json",
+  "application/vnd.microsoft.appconfig.kvset+json",
+  "application/json",
+  "text/json",
+  @clientName("applicationAnyJson", "go")
+  "application/*+json",
+  "application/json-patch+json",
+};
+
 alias AppConfigResponseHeaders = {
   ...SyncTokenHeader;
 
   @doc("A value representing the current state of the resource.")
   @header("ETag")
+  @clientName("ETag", "go")
   etagHeader?: string;
 };
 
