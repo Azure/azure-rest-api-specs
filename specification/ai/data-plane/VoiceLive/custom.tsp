@@ -72,6 +72,7 @@ model RequestSession {
 
   /** Whether the model is allowed to call tools in parallel. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v1)
   parallel_tool_calls?: boolean = true;
 
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
@@ -106,15 +107,6 @@ model RequestSession {
    */
   @added(Versions.v2026_04_10)
   metadata?: Record<string>;
-
-  /**
-   * (GA `v1`) Maximum duration of the session in seconds before the service automatically
-   * terminates it. Used to bound long-lived realtime connections. This is an additive,
-   * generally-available capability on the `v1` channel.
-   */
-  @added(Versions.v1)
-  @minValue(1)
-  max_session_duration_seconds?: int32;
 
   /**
    * (Preview) Experimental barge-in tuning that lets the caller interrupt the assistant more
@@ -172,23 +164,18 @@ model ResponseSession is RequestSession {
  *
  * Mirrors Foundry's `FoundryFeaturesOptInKeys`: each member is a feature flag opt-in
  * string sent on the `VoiceLive-Features` header (see `WithConditionalVoiceLivePreviewHeader`)
- * to enable preview features. This is the evergreen registry of opt-in keys: the union exists
- * from the virtual `PuPr` version onward (preview + GA `v1` channels) so the connect operation
- * can carry the header in every modeled version. It is an open union (`string`) so future
- * preview keys can be added without a breaking change, and so it never becomes empty when a
- * preview key is fenced out of GA. Individual keys whose feature is fenced out of GA carry
- * their own `@removed(Versions.v1)`.
+ * to enable preview features. This is the preview-only registry of opt-in keys: the union
+ * exists on the virtual `PuPr` channel and is fenced out of GA `v1` via `@removed(Versions.v1)`,
+ * since every opt-in key gates a preview feature. It is an open union (`string`) so future
+ * preview keys can be added without a breaking change.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.PuPr)
+@removed(Versions.v1)
 union VoiceLiveFeaturesOptInKeys {
   string,
 
-  /**
-   * Opt-in key enabling the experimental barge-in preview feature. Fenced out of GA `v1`
-   * because the feature it gates (`experimental_barge_in`) is preview-only.
-   */
-  @removed(Versions.v1)
+  /** Opt-in key enabling the experimental barge-in preview feature. */
   barge_in_v1_preview: "BargeIn=V1Preview",
 }
 
@@ -617,6 +604,7 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
  * service in the future.
  */
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 union AzureRealtimeNativeVoiceName {
   string,
 
@@ -664,6 +652,7 @@ union AzureRealtimeNativeVoiceName {
  * `azure-realtime` model.
  */
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(DualUsage)
 model AzureRealtimeNativeVoice {
   /** The type of the voice. */
@@ -683,6 +672,7 @@ union Voice {
   AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
 
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v1)
   AzureRealtimeNativeVoice,
 }
 
@@ -873,6 +863,7 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(RequestUsage)
 model SmartEndOfTurnDetection extends EouDetection {
   `model`: "smart_end_of_turn_detection";
@@ -1065,6 +1056,7 @@ model AudioEchoCancellation {
    * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v1)
   reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
 
   /**
@@ -1074,6 +1066,7 @@ model AudioEchoCancellation {
    * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v1)
   @minValue(1)
   @maxValue(2)
   channels?: int32 = 1;
@@ -1082,6 +1075,7 @@ model AudioEchoCancellation {
 /** The source of the echo cancellation reference signal. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 union EchoCancellationReferenceSource {
   string,
 

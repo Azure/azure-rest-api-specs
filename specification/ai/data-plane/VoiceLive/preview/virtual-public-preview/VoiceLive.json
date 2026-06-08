@@ -6786,7 +6786,7 @@
     },
     "VoiceLiveFeaturesOptInKeys": {
       "type": "string",
-      "description": "Feature opt-in keys for VoiceLive preview capabilities.\n\nMirrors Foundry's `FoundryFeaturesOptInKeys`: each member is a feature flag opt-in\nstring sent on the `VoiceLive-Features` header (see `WithConditionalVoiceLivePreviewHeader`)\nto enable preview features. This is the evergreen registry of opt-in keys: the union exists\nfrom the virtual `PuPr` version onward (preview + GA `v1` channels) so the connect operation\ncan carry the header in every modeled version. It is an open union (`string`) so future\npreview keys can be added without a breaking change, and so it never becomes empty when a\npreview key is fenced out of GA. Individual keys whose feature is fenced out of GA carry\ntheir own `@removed(Versions.v1)`.",
+      "description": "Feature opt-in keys for VoiceLive preview capabilities.\n\nMirrors Foundry's `FoundryFeaturesOptInKeys`: each member is a feature flag opt-in\nstring sent on the `VoiceLive-Features` header (see `WithConditionalVoiceLivePreviewHeader`)\nto enable preview features. This is the preview-only registry of opt-in keys: the union\nexists on the virtual `PuPr` channel and is fenced out of GA `v1` via `@removed(Versions.v1)`,\nsince every opt-in key gates a preview feature. It is an open union (`string`) so future\npreview keys can be added without a breaking change.",
       "enum": [
         "BargeIn=V1Preview"
       ],
@@ -6797,7 +6797,7 @@
           {
             "name": "barge_in_v1_preview",
             "value": "BargeIn=V1Preview",
-            "description": "Opt-in key enabling the experimental barge-in preview feature. Fenced out of GA `v1`\nbecause the feature it gates (`experimental_barge_in`) is preview-only."
+            "description": "Opt-in key enabling the experimental barge-in preview feature."
           }
         ]
       }

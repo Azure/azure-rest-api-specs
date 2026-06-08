@@ -164,6 +164,7 @@ model ClientEventInputAudioClear extends ClientEvent {
 /** Streams a delta of input text content into the specified item. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputTextDelta extends ClientEvent {
   /** The event type, must be `input_text.delta`. */
@@ -182,6 +183,7 @@ model ClientEventInputTextDelta extends ClientEvent {
 /** Signals that the streamed input text content for the specified item is complete. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventInputTextDone extends ClientEvent {
   /** The event type, must be `input_text.done`. */
@@ -1288,6 +1290,7 @@ model ResponseCreateParams {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: values are user-provided input forwarded to the hosted agent, whose schema is not defined by this API."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent; values are not limited to strings."
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v1)
   invoke_input?: Record<unknown>;
 }
 
@@ -1737,6 +1740,7 @@ model ServerEventResponseAudioTranscriptAnnotationAdded extends ServerEvent {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Opaque passthrough: delta contains raw SSE event JSON from the hosted agent, whose schema is not defined by this API."
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque passthrough JSON from hosted agent SSE event; values are not limited to strings."
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventResponseInvocationDelta extends ServerEvent {
   /** The event type, must be `response.invocation.delta`. */
@@ -1773,6 +1777,7 @@ model ClientEventOutputAudioBufferClear extends ClientEvent {
 /** Sent by the client to initiate a WebRTC session with an SDP offer. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(RequestUsage)
 model ClientEventRtcCallSdpCreate extends ClientEvent {
   /** The event type, must be `rtc.call.sdp.create`. */
@@ -1788,6 +1793,7 @@ model ClientEventRtcCallSdpCreate extends ClientEvent {
 /** Returned when the WebRTC SDP negotiation completes successfully. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventRtcCallSdpCreated extends ServerEvent {
   /** The event type, must be `rtc.call.sdp.created`. */
@@ -1805,6 +1811,7 @@ model ServerEventRtcCallSdpCreated extends ServerEvent {
 /** Error details for RTC call errors. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model RtcCallErrorDetails {
   /** The error category: `invalid_request_error` or `server_error`. */
@@ -1820,6 +1827,7 @@ model RtcCallErrorDetails {
 /** Returned when a WebRTC call operation fails. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventRtcCallError extends ServerEvent {
   /** The event type, must be `rtc.call.error`. */
@@ -1840,6 +1848,7 @@ model ServerEventRtcCallError extends ServerEvent {
 /** Returned when model audio output starts playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventOutputAudioBufferStarted extends ServerEvent {
   /** The event type, must be `output_audio_buffer.started`. */
@@ -1852,6 +1861,7 @@ model ServerEventOutputAudioBufferStarted extends ServerEvent {
 /** Returned when model audio output finishes playing. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v1)
 @usage(ResponseUsage)
 model ServerEventOutputAudioBufferStopped extends ServerEvent {
   /** The event type, must be `output_audio_buffer.stopped`. */
