@@ -14662,6 +14662,30 @@
         }
       ]
     },
+    "CacheFileAccessLogs": {
+      "type": "string",
+      "description": "Flag indicating whether file access logs are enabled for the Cache, based on active diagnostic settings present on the Cache.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CacheFileAccessLogs",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "fileAccessLogs are enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "fileAccessLogs are not enabled"
+          }
+        ]
+      }
+    },
     "CacheLifeCycleState": {
       "type": "string",
       "description": "Azure NetApp Files Cache lifecycle management",
@@ -14934,6 +14958,11 @@
         "writeBack": {
           "$ref": "#/definitions/EnableWriteBackState",
           "description": "Flag indicating whether writeback is enabled for the cache."
+        },
+        "fileAccessLogs": {
+          "$ref": "#/definitions/CacheFileAccessLogs",
+          "description": "Flag indicating whether file access logs are enabled for the Cache, based on active diagnostic settings present on the Cache.",
+          "readOnly": true
         }
       },
       "required": [
