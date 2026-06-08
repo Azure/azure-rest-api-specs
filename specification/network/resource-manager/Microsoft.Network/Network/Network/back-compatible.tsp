@@ -6,6 +6,15 @@ using Common;
 using Microsoft.Network;
 using TypeSpec.Versioning;
 
+@@clientName(Microsoft.Network.ConnectivityGroupItem, "connectivityGroupItem");
+@@clientName(Microsoft.Network.FirewallPolicySnat, "FirewallPolicySNAT");
+@@clientName(Microsoft.Network.HttpConfiguration, "HTTPConfiguration");
+@@clientName(Microsoft.Network.HttpHeader, "HTTPHeader");
+@@clientName(
+  Microsoft.Network.VirtualApplianceNetworkInterfaceConfiguration.type,
+  "NicType"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationGatewayIPConfiguration.properties);
 
