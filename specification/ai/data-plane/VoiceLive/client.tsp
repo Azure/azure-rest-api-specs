@@ -484,6 +484,12 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
 @@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
+@@clientName(VoiceLive.AvatarConfigTypes, "AvatarConfigKind", "csharp");
+@@clientName(
+  VoiceLive.PersonalVoiceModels.`MAI-Voice-1`,
+  "MaiVoice1",
+  "csharp"
+);
 @@clientName(VoiceLive.RequestImageContentPart.image_url, "Uri", "csharp");
 @@clientName(
   VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
@@ -628,6 +634,7 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
+@@alternateType(VoiceLive.MCPServer.server_url, url, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");
@@ -733,14 +740,28 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(VoiceLive.Modality, "InteractionModality", "java");
+@@clientName(VoiceLive.ClientEvent, "SessionClientEvent", "java");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "java");
+@@clientName(VoiceLive.Animation.outputs, "outputTypes", "java");
+@@clientName(VoiceLive.LogProbProperties.logprob, "logProb", "java");
+@@clientName(
+  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  "logProbs",
+  "java"
+);
+@@clientName(
+  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
+  "logProbs",
+  "java"
+);
+@@clientName(VoiceLive.RequestSession.animation, "animationOptions", "java");
+@@clientName(VoiceLive.ResponseSession.animation, "animationOptions", "java");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "java");
 @@clientName(
   VoiceLive.AzureCustomVoice.custom_lexicon_url,
   "CustomLexiconUri",
   "java"
 );
-@@clientName(VoiceLive.IceServer.urls, "Uris", "java");
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "java");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "java");
 @@clientName(VoiceLive.Response, "SessionResponse", "java");
@@ -757,7 +778,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "java");
 @@clientName(VoiceLive.ResponseItemStatus, "SessionResponseItemStatus", "java");
-@@clientName(VoiceLive.ServerEvent, "SessionUpdate", "java");
+@@clientName(VoiceLive.ServerEvent, "SessionServerEvent", "java");
 @@clientName(
   VoiceLive.ServerEventSessionCreated,
   "SessionUpdateSessionCreated",
@@ -934,10 +955,61 @@ using Azure.ClientGenerator.Core;
   "SessionUpdateErrorDetails",
   "java"
 );
+@@clientName(
+  VoiceLive.CachedTokenDetails.text_tokens,
+  "textTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.CachedTokenDetails.audio_tokens,
+  "audioTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.CachedTokenDetails.image_tokens,
+  "imageTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.InputTokenDetails.cached_tokens,
+  "cachedTokenCount",
+  "java"
+);
+@@clientName(VoiceLive.InputTokenDetails.text_tokens, "textTokenCount", "java");
+@@clientName(
+  VoiceLive.InputTokenDetails.audio_tokens,
+  "audioTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.InputTokenDetails.image_tokens,
+  "imageTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.OutputTokenDetails.text_tokens,
+  "textTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.OutputTokenDetails.audio_tokens,
+  "audioTokenCount",
+  "java"
+);
+@@clientName(
+  VoiceLive.OutputTokenDetails.reasoning_tokens,
+  "reasoningTokenCount",
+  "java"
+);
+@@clientName(VoiceLive.TokenUsage.total_tokens, "totalTokenCount", "java");
+@@clientName(VoiceLive.TokenUsage.input_tokens, "inputTokenCount", "java");
+@@clientName(VoiceLive.TokenUsage.output_tokens, "outputTokenCount", "java");
 @@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "java");
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "java");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "java");
-@@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "java");
+@@clientName(VoiceLive.AvatarConfig, "AvatarOptions", "java");
+@@clientName(VoiceLive.RequestSession.avatar, "avatarOptions", "java");
+@@clientName(VoiceLive.ResponseSession.avatar, "avatarOptions", "java");
 @@clientName(VoiceLive.AzureSemanticDetection.timeout_ms, "TimeoutMs", "java");
 @@clientName(
   VoiceLive.AzureSemanticDetectionEn.timeout_ms,
@@ -981,6 +1053,30 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(VoiceLive.Background, "VideoBackground", "java");
+@@clientName(VoiceLive.MCPTool, "McpTool", "java");
+@@clientName(VoiceLive.MCPServer, "McpServer", "java");
+@@clientName(VoiceLive.MCPApprovalType, "McpApprovalType", "java");
+@@clientName(
+  VoiceLive.MCPApprovalResponseRequestItem,
+  "McpApprovalResponseRequestItem",
+  "java"
+);
+@@clientName(
+  VoiceLive.ResponseMCPListToolItem,
+  "ResponseMcpListToolItem",
+  "java"
+);
+@@clientName(VoiceLive.ResponseMCPCallItem, "ResponseMcpCallItem", "java");
+@@clientName(
+  VoiceLive.ResponseMCPApprovalRequestItem,
+  "ResponseMcpApprovalRequestItem",
+  "java"
+);
+@@clientName(
+  VoiceLive.ResponseMCPApprovalResponseItem,
+  "ResponseMcpApprovalResponseItem",
+  "java"
+);
 
 @@clientName(
   VoiceLive.AzureSemanticDetection.timeout_ms,
