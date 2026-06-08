@@ -17,7 +17,7 @@ model Project is TrackedResource<ProjectProperties> {
 
 /** The type used for update operations of the Project. */
 model ProjectUpdate {
-  ... Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 /** Project properties. */
