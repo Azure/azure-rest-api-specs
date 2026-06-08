@@ -309,6 +309,7 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(Workspaces.getAllModels, "Connection");
 @@clientLocation(Workspaces.getInWorkspace, EndpointDeployment);
 @@clientLocation(Workspaces.privateLinkResourcesList, "PrivateLinkResources");
+@@clientName(Workspaces.privateLinkResourcesList, "List");
 @@clientName(
   Workspaces.privateLinkResourcesList,
   "GetPrivateLinkResources",
@@ -561,9 +562,12 @@ using Microsoft.MachineLearningServices;
 
 @@clientName(QuotasOperationGroup.update::parameters.body, "parameters");
 @@clientName(FqdnEndpointsPropertyBag, "FQDNEndpointsPropertyBag");
-@@clientName(FqdnEndpoint, "MachineLearningFqdnEndpoint");
-@@clientName(FqdnEndpointDetail, "MachineLearningFqdnEndpointDetail");
-@@clientName(FqdnEndpoints, "MachineLearningFqdnEndpoints");
+@@clientName(FqdnEndpoint, "FQDNEndpoint");
+@@clientName(FqdnEndpointDetail, "FQDNEndpointDetail");
+@@clientName(FqdnEndpoints, "FQDNEndpoints");
+@@clientName(FqdnEndpoint, "MachineLearningFqdnEndpoint", "csharp");
+@@clientName(FqdnEndpointDetail, "MachineLearningFqdnEndpointDetail", "csharp");
+@@clientName(FqdnEndpoints, "MachineLearningFqdnEndpoints", "csharp");
 
 // Fix duplicate property names in C# - property and type have same name after PascalCase
 @@clientName(
