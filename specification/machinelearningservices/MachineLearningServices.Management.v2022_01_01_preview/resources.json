@@ -1,0 +1,465 @@
+{
+  "Resources": {
+    "Workspace": [
+      {
+        "Name": "Workspace",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+          "Method": "GET",
+          "OperationID": "Workspaces_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the properties of the specified machine learning workspace."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+          "Method": "PUT",
+          "OperationID": "Workspaces_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates a workspace with the specified parameters."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+          "Method": "PATCH",
+          "OperationID": "Workspaces_Update",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Updates a machine learning workspace with the specified parameters."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+          "Method": "DELETE",
+          "OperationID": "Workspaces_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes a machine learning workspace."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces",
+            "Method": "GET",
+            "OperationID": "Workspaces_ListByResourceGroup",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListByResourceGroup",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists all the available machine learning workspaces under the specified resource group."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [
+          {
+            "Name": "_",
+            "Path": "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces",
+            "Method": "GET",
+            "OperationID": "Workspaces_ListBySubscription",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListBySubscription",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists all the available machine learning workspaces under the specified subscription."
+          }
+        ],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "Diagnose",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose",
+            "Method": "POST",
+            "OperationID": "Workspaces_Diagnose",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Diagnose workspace setup issue."
+          },
+          {
+            "Name": "ListKeys",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys",
+            "Method": "POST",
+            "OperationID": "Workspaces_ListKeys",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry"
+          },
+          {
+            "Name": "ResyncKeys",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys",
+            "Method": "POST",
+            "OperationID": "Workspaces_ResyncKeys",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry"
+          },
+          {
+            "Name": "ListNotebookAccessToken",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken",
+            "Method": "POST",
+            "OperationID": "Workspaces_ListNotebookAccessToken",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "return notebook access token and refresh token"
+          },
+          {
+            "Name": "PrepareNotebook",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook",
+            "Method": "POST",
+            "OperationID": "Workspaces_PrepareNotebook",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Prepare a notebook."
+          },
+          {
+            "Name": "ListStorageAccountKeys",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys",
+            "Method": "POST",
+            "OperationID": "Workspaces_ListStorageAccountKeys",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "List storage account keys of a workspace."
+          },
+          {
+            "Name": "ListNotebookKeys",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys",
+            "Method": "POST",
+            "OperationID": "Workspaces_ListNotebookKeys",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "List keys of a notebook."
+          },
+          {
+            "Name": "ListOutboundNetworkDependenciesEndpoints",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints",
+            "Method": "GET",
+            "OperationID": "Workspaces_ListOutboundNetworkDependenciesEndpoints",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListOutboundNetworkDependenciesEndpoints",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically."
+          },
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources",
+            "Method": "GET",
+            "OperationID": "PrivateLinkResources_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "Gets the private link resources that need to be created for a workspace."
+          },
+          {
+            "Name": "List",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/features",
+            "Method": "GET",
+            "OperationID": "WorkspaceFeatures_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists all enabled features for a workspace"
+          }
+        ],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "Workspace",
+        "ResourceType": "Microsoft.MachineLearningServices/workspaces",
+        "ResourceKey": "workspaceName",
+        "ResourceKeySegment": "workspaces",
+        "IsTrackedResource": true,
+        "IsTrackedResourceWithOptionalLocation": true,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "ComputeResource": [
+      {
+        "Name": "ComputeResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}",
+          "Method": "GET",
+          "OperationID": "Compute_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets compute definition by its name. Any secrets (storage keys, service credentials, etc) are not returned - use 'keys' nested resource to get them."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}",
+          "Method": "PUT",
+          "OperationID": "Compute_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}",
+          "Method": "PATCH",
+          "OperationID": "Compute_Update",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}",
+          "Method": "DELETE",
+          "OperationID": "Compute_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes specified Machine Learning compute."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes",
+            "Method": "GET",
+            "OperationID": "Compute_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Gets computes in specified workspace."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [
+          {
+            "Name": "ListNodes",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes",
+            "Method": "POST",
+            "OperationID": "Compute_ListNodes",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "ListNodes",
+              "ItemName": "nodes",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Get the details (e.g IP address, port etc) of all the compute nodes in the compute."
+          },
+          {
+            "Name": "ListKeys",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys",
+            "Method": "POST",
+            "OperationID": "Compute_ListKeys",
+            "IsLongRunning": false,
+            "PagingMetadata": null,
+            "Description": "Gets secrets related to Machine Learning compute (storage keys, service credentials, etc)."
+          },
+          {
+            "Name": "Start",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start",
+            "Method": "POST",
+            "OperationID": "Compute_Start",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Posts a start action to a compute instance"
+          },
+          {
+            "Name": "Stop",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop",
+            "Method": "POST",
+            "OperationID": "Compute_Stop",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Posts a stop action to a compute instance"
+          },
+          {
+            "Name": "Restart",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart",
+            "Method": "POST",
+            "OperationID": "Compute_Restart",
+            "IsLongRunning": true,
+            "PagingMetadata": null,
+            "Description": "Posts a restart action to a compute instance"
+          }
+        ],
+        "Parents": [
+          "Workspace"
+        ],
+        "SwaggerModelName": "ComputeResource",
+        "ResourceType": "Microsoft.MachineLearningServices/workspaces/computes",
+        "ResourceKey": "computeName",
+        "ResourceKeySegment": "computes",
+        "IsTrackedResource": true,
+        "IsTrackedResourceWithOptionalLocation": true,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "PrivateEndpointConnection": [
+      {
+        "Name": "PrivateEndpointConnection",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "GET",
+          "OperationID": "PrivateEndpointConnections_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets the specified private endpoint connection associated with the workspace."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnections_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update the state of specified private endpoint connection associated with the workspace."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "PUT",
+          "OperationID": "PrivateEndpointConnections_CreateOrUpdate",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Update the state of specified private endpoint connection associated with the workspace."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+          "Method": "DELETE",
+          "OperationID": "PrivateEndpointConnections_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Deletes the specified private endpoint connection associated with the workspace."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections",
+            "Method": "GET",
+            "OperationID": "PrivateEndpointConnections_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "List all the private endpoint connections associated with the workspace."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Workspace"
+        ],
+        "SwaggerModelName": "PrivateEndpointConnection",
+        "ResourceType": "Microsoft.MachineLearningServices/workspaces/privateEndpointConnections",
+        "ResourceKey": "privateEndpointConnectionName",
+        "ResourceKeySegment": "privateEndpointConnections",
+        "IsTrackedResource": true,
+        "IsTrackedResourceWithOptionalLocation": true,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ],
+    "WorkspaceConnection": [
+      {
+        "Name": "WorkspaceConnection",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}",
+          "Method": "GET",
+          "OperationID": "WorkspaceConnections_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Get the detail of a workspace connection."
+        },
+        "CreateOperation": {
+          "Name": "CreateOrUpdate",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}",
+          "Method": "PUT",
+          "OperationID": "WorkspaceConnections_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Add a new workspace connection."
+        },
+        "UpdateOperation": {
+          "Name": "Update",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}",
+          "Method": "PUT",
+          "OperationID": "WorkspaceConnections_Create",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Add a new workspace connection."
+        },
+        "DeleteOperation": {
+          "Name": "Delete",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}",
+          "Method": "DELETE",
+          "OperationID": "WorkspaceConnections_Delete",
+          "IsLongRunning": true,
+          "PagingMetadata": null,
+          "Description": "Delete a workspace connection."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections",
+            "Method": "GET",
+            "OperationID": "WorkspaceConnections_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": null
+            },
+            "Description": "List all connections under a AML workspace."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "Workspace"
+        ],
+        "SwaggerModelName": "WorkspaceConnection",
+        "ResourceType": "Microsoft.MachineLearningServices/workspaces/connections",
+        "ResourceKey": "connectionName",
+        "ResourceKeySegment": "connections",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}

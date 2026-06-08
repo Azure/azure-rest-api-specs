@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "Basic",
+            "capabilities": [
+              {
+                "name": "automatedml_readhyperdrivesdk",
+                "value": "{\n  \"id\": \"automatedml_ readhyperdrivesdk\",\n  \"name\": \"Read hyperdrive SDK\",\n  \"description\": \"Read only access to Hyperdrive in the SDK\"\n}"
+              },
+              {
+                "name": "workspace_upgradeworkspacesdk",
+                "value": "{\n  \"id\": \"workspace_upgradeworkspacesdk\",\n  \"name\": \"Upgrade workspace SDK\",\n  \"description\": \"Upgrade workspace from Basic to enterprise from the SDK\"\n}"
+              }
+            ],
+            "locationInfo": [
+              {
+                "location": "westus",
+                "zones": [
+                  "westus-AZ02",
+                  "westus-AZ01"
+                ]
+              }
+            ],
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "workspaces",
+            "restrictions": [],
+            "tier": "Basic"
+          },
+          {
+            "name": "Enterprise",
+            "capabilities": [
+              {
+                "name": "automatedml_createeditexperimentssdk",
+                "value": "{\n  \"id\": \"automatedml_createeditexperimentssdk\",\n  \"name\": \"Create edit experiments SDK\",\n  \"description\": \"Create, edit or delete AutoML experiments in the SDK\"\n}"
+              }
+            ],
+            "locationInfo": [
+              {
+                "location": "westus",
+                "zoneDetails": [
+                  {
+                    "name": [
+                      "westus-AZ01"
+                    ],
+                    "capabilities": [
+                      {
+                        "name": "automatedml_createeditexperimentssdk",
+                        "value": "{\n  \"id\": \"automatedml_createeditexperimentssdk\",\n  \"name\": \"Create edit experiments SDK\",\n  \"description\": \"Create, edit or delete AutoML experiments in the SDK\"\n}"
+                      }
+                    ]
+                  }
+                ],
+                "zones": [
+                  "westus-AZ01"
+                ]
+              }
+            ],
+            "locations": [
+              "westus"
+            ],
+            "resourceType": "workspaces",
+            "restrictions": [],
+            "tier": "Enterprise"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WorkspaceSkus_List",
+  "title": "List Skus"
+}

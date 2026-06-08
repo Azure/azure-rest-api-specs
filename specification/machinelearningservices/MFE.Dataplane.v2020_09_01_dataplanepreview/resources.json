@@ -1,0 +1,96 @@
+{
+  "Resources": {
+    "BatchJobResource": [
+      {
+        "Name": "BatchJobResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}/jobs/{id}",
+          "Method": "GET",
+          "OperationID": "BatchJobDeployment_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a batch inference job by name at deployment."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}/jobs",
+            "Method": "GET",
+            "OperationID": "BatchJobDeployment_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists batch inference jobs in this deployment."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "BatchJobResource",
+        "ResourceType": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/deployments/jobs",
+        "ResourceKey": "id",
+        "ResourceKeySegment": "jobs",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      },
+      {
+        "Name": "BatchJobResource",
+        "GetOperation": {
+          "Name": "Get",
+          "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/jobs/{id}",
+          "Method": "GET",
+          "OperationID": "BatchJobEndpoint_Get",
+          "IsLongRunning": false,
+          "PagingMetadata": null,
+          "Description": "Gets a batch inference endpoint job by name."
+        },
+        "ListOperations": [
+          {
+            "Name": "GetAll",
+            "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/jobs",
+            "Method": "GET",
+            "OperationID": "BatchJobEndpoint_List",
+            "IsLongRunning": false,
+            "PagingMetadata": {
+              "Method": "List",
+              "ItemName": "value",
+              "NextLinkName": "nextLink"
+            },
+            "Description": "Lists batch inference endpoint jobs in this endpoint."
+          }
+        ],
+        "OperationsFromResourceGroupExtension": [],
+        "OperationsFromSubscriptionExtension": [],
+        "OperationsFromManagementGroupExtension": [],
+        "OperationsFromTenantExtension": [],
+        "OtherOperations": [],
+        "Parents": [
+          "ResourceGroupResource"
+        ],
+        "SwaggerModelName": "BatchJobResource",
+        "ResourceType": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/jobs",
+        "ResourceKey": "id",
+        "ResourceKeySegment": "jobs",
+        "IsTrackedResource": false,
+        "IsTrackedResourceWithOptionalLocation": false,
+        "IsManagementGroupResource": false,
+        "ScopeType": "ResourceGroup",
+        "IsSingletonResource": false
+      }
+    ]
+  },
+  "RenameMapping": {},
+  "OverrideOperationName": {}
+}
