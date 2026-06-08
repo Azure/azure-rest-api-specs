@@ -663,6 +663,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(Caching, "MachineLearningCachingType", "csharp");
 @@access(EncryptionKeyVaultUpdateProperties, Access.public, "csharp");
 @@access(TriggerType, Access.public, "csharp");
+@@access(PrivateEndpointResource.subnetArmId, Access.internal, "csharp");
 @@clientName(
   DataVersionBaseProperties,
   "MachineLearningDataVersionProperties",
