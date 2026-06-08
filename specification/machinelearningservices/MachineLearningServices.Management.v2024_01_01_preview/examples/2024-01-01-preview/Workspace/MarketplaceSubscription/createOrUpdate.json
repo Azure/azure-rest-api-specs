@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2024-01-01-preview",
+    "body": {
+      "properties": {
+        "modelId": "string"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "marketplacePlan": {
+            "offerId": "string",
+            "planId": "string",
+            "publisherId": "string"
+          },
+          "marketplaceSubscriptionStatus": "Suspended",
+          "modelId": "string",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:15",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:15",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "marketplacePlan": {
+            "offerId": "string",
+            "planId": "string",
+            "publisherId": "string"
+          },
+          "marketplaceSubscriptionStatus": "PendingFulfillmentStart",
+          "modelId": "string",
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:15",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:15",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "MarketplaceSubscriptions_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Marketplace Subscription."
+}

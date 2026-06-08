@@ -1,0 +1,125 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01-preview",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
+      "properties": {
+        "offer": {
+          "offerName": "string",
+          "publisher": "string"
+        },
+        "reservedCapacity": 1
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Premium"
+      },
+      "tags": {}
+    },
+    "groupId": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "offer": {
+            "offerName": "string",
+            "publisher": "string"
+          },
+          "reservedCapacity": 1
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Premium"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:15",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:15",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "offer": {
+            "offerName": "string",
+            "publisher": "string"
+          },
+          "reservedCapacity": 1
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:15",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:15",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "CapacityReservationGroups_CreateOrUpdate",
+  "title": "CreateOrUpdate Capacity Reservation Group."
+}

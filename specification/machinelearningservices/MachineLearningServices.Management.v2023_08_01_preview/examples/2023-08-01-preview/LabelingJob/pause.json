@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "api-version": "2023-08-01-preview",
+    "id": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "string",
+        "componentId": "string",
+        "computeId": "string",
+        "createdDateTime": "2020-01-01T12:34:56.999+00:21",
+        "dataConfiguration": {
+          "dataId": "string",
+          "incrementalDataRefresh": "Disabled"
+        },
+        "displayName": "string",
+        "experimentName": "string",
+        "identity": {
+          "identityType": "AMLToken"
+        },
+        "isArchived": false,
+        "jobInstructions": {
+          "uri": "string"
+        },
+        "jobType": "Labeling",
+        "labelCategories": {
+          "string": {
+            "classes": {
+              "string": {
+                "displayName": "string",
+                "subclasses": null
+              }
+            },
+            "displayName": "string",
+            "multiSelect": "Disabled"
+          }
+        },
+        "labelingJobMediaProperties": {
+          "annotationType": "Classification",
+          "mediaType": "Image"
+        },
+        "mlAssistConfiguration": {
+          "inferencingComputeBinding": "string",
+          "mlAssist": "Enabled",
+          "trainingComputeBinding": "string"
+        },
+        "notificationSetting": {
+          "emailOn": [
+            "JobFailed"
+          ],
+          "emails": [
+            "string"
+          ],
+          "webhooks": {
+            "string": {
+              "eventType": "string",
+              "webhookType": "AzureDevOps"
+            }
+          }
+        },
+        "progressMetrics": {
+          "completedDatapointCount": 1,
+          "incrementalDataLastRefreshDateTime": "2020-01-01T12:34:56.999+00:21",
+          "skippedDatapointCount": 1,
+          "totalDatapointCount": 1
+        },
+        "projectId": "00000000-1111-2222-3333-444444444444",
+        "properties": {
+          "string": "string"
+        },
+        "provisioningState": "InProgress",
+        "secretsConfiguration": {
+          "string": {
+            "uri": null,
+            "workspaceSecretName": "string"
+          }
+        },
+        "services": {
+          "string": {
+            "endpoint": "string",
+            "errorMessage": "string",
+            "jobServiceType": "string",
+            "nodes": {
+              "nodesValueType": "All"
+            },
+            "port": 1,
+            "properties": {
+              "string": "string"
+            },
+            "status": "string"
+          }
+        },
+        "status": "Queued",
+        "statusMessages": [
+          {
+            "code": "string",
+            "createdDateTime": "2020-01-01T12:34:56.999+00:21",
+            "level": "Information",
+            "message": "string"
+          }
+        ],
+        "tags": {
+          "string": "string"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "LabelingJobs_Pause",
+  "title": "Pause Labeling Job."
+}

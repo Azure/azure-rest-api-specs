@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2024-01-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "rule-1",
+            "type": "Microsoft.MachineLearningServices/workspaces/outboundRules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule-1",
+            "properties": {
+              "type": "FQDN",
+              "category": "Required",
+              "destination": "some_string",
+              "status": "Inactive"
+            }
+          },
+          {
+            "name": "rule-2",
+            "type": "Microsoft.MachineLearningServices/workspaces/outboundRules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule-2",
+            "properties": {
+              "type": "FQDN",
+              "category": "Required",
+              "destination": "some_string",
+              "status": "Inactive"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ManagedNetworkSettingsRule_List",
+  "title": "List ManagedNetworkSettingsRule"
+}

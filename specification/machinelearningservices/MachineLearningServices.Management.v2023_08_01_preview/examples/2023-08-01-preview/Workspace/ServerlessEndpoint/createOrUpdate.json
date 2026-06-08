@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2023-08-01-preview",
+    "body": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
+      "properties": {
+        "authMode": "AAD",
+        "capacityReservation": {
+          "capacityReservationGroupId": "string",
+          "endpointReservedCapacity": 1
+        },
+        "offer": {
+          "offerName": "string",
+          "publisher": "string"
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Standard"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "None",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "authMode": "Key",
+          "capacityReservation": {
+            "capacityReservationGroupId": "string",
+            "endpointReservedCapacity": 1
+          },
+          "inferenceEndpoint": {
+            "headers": {
+              "string": "string"
+            },
+            "uri": "https://www.contoso.com/example"
+          },
+          "offer": {
+            "offerName": "string",
+            "publisher": "string"
+          },
+          "provisioningState": "Canceled"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:46",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:46",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "None",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "authMode": "AAD",
+          "capacityReservation": {
+            "capacityReservationGroupId": "string",
+            "endpointReservedCapacity": 1
+          },
+          "inferenceEndpoint": {
+            "headers": {
+              "string": "string"
+            },
+            "uri": "https://www.contoso.com/example"
+          },
+          "offer": {
+            "offerName": "string",
+            "publisher": "string"
+          },
+          "provisioningState": "Deleting"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Basic"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:46",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:46",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ServerlessEndpoints_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Serverless Endpoint."
+}
