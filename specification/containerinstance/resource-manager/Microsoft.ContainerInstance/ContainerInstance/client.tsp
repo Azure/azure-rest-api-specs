@@ -28,12 +28,12 @@ using Microsoft.ContainerInstance;
 @@clientName(
   ContainerGroupProperties,
   "ContainerGroupPropertiesWrapper",
-  "java,python"
+  "java,python,javascript"
 );
 @@clientName(
   ContainerGroupPropertiesProperties,
   "ContainerGroupProperties",
-  "java,python"
+  "java,python,javascript"
 );
 @@clientName(
   UserAssignedIdentities,
