@@ -39,7 +39,7 @@ using Microsoft.AzureResilienceManagement;
 
 // CSharp: AZC0032 — *Data is reserved (collides with auto-generated *Data POCOs)
 @@clientName(GoalsData, "GoalsInfo", "csharp");
-@@clientName(RecommendationsHighAvailabilityData, "HighAvailabilityRecommendationsInfo", "csharp");
+@@clientName(RecommendationsHighAvailabilityData, "RecommendationsHighAvailabilityInfo", "csharp");
 
 // These three are reference/content models and must not use the *Resource suffix.
 @@clientName(IncludeOrUpdateResource, "IncludeOrUpdateContent", "csharp");
