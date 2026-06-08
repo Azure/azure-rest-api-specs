@@ -2,6 +2,26 @@
 // a new namespace Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
 // It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
+import "../common/service.tsp";
+
+import "../connections/routes.tsp";
+import "../datasets/routes.tsp";
+import "../indexes/routes.tsp";
+import "../models/routes.tsp";
+import "../deployments/routes.tsp";
+import "../red-teams/routes.tsp";
+import "../evaluation-rules/routes.tsp";
+// Don't import openai-evaluations routes, we'll use Stainless SDK like in AgentsV2.
+// Import only the models so Java codegen can expose Azure-specific eval extensions.
+import "../openai-evaluations/models.tsp";
+// import "../openai-evaluations/routes.tsp";
+import "../evaluation-taxonomies/routes.tsp";
+import "../evaluators/routes.tsp";
+import "../insights/routes.tsp";
+import "../schedules/routes.tsp";
+import "../routines/routes.tsp";
+import "../skills/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 
