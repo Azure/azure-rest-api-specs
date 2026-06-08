@@ -43,18 +43,18 @@
           },
           "spec": {
             "storageClassName": "managed-premium",
-            "nodeTopology": [
+            "storageCapacityAvailable": "512Gi",
+            "maximumVolumeSize": "4Ti",
+            "additionalFields": [
               {
-                "name": "topology.kubernetes.io/zone",
+                "name": "nodeTopology.matchLabels.topology.kubernetes.io/zone",
                 "value": "eastus-1"
               },
               {
-                "name": "kubernetes.io/hostname",
+                "name": "nodeTopology.matchLabels.kubernetes.io/hostname",
                 "value": "aks-nodepool1-12345678-vmss000000"
               }
-            ],
-            "storageCapacityAvailable": "512Gi",
-            "maximumVolumeSize": "4Ti"
+            ]
           },
           "attachedToExtension": "azure-kube-inventory"
         }
