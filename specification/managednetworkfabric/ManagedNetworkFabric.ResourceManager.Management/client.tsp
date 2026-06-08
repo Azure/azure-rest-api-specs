@@ -118,3 +118,25 @@ using Microsoft.ManagedNetworkFabric;
   "staticRoutePolicy",
   "python"
 );
+
+// Preserve pre-migration (swagger) Python model names to avoid breaking changes.
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
+  "ManagementNetworkConfigurationPatchableProperties",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
+  "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.VpnOptionAProperties,
+  "OptionAProperties",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
+  "OptionBProperties",
+  "python"
+);
