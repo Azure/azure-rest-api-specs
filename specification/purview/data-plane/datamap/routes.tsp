@@ -29,10 +29,9 @@ op AtlasOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse,
   Traits extends TypeSpec.Reflection.Model = {}
->(
-  ...TraitProperties<Traits, TraitLocation.ApiVersionParameter>,
-  ...TParams,
-): TResponse | AtlasErrorResponse;
+>(...TraitProperties<Traits, TraitLocation.ApiVersionParameter>, ...TParams):
+  | TResponse
+  | AtlasErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
 op AtlasRpcOperation<

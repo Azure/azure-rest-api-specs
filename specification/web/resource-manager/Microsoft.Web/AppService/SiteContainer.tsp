@@ -170,9 +170,11 @@ interface SiteContainerOperationGroup {
 
 @@doc(SiteContainer.name, "Site Container Name");
 @@doc(SiteContainer.properties, "SiteContainer resource specific properties");
-@@doc(SiteContainers.createOrUpdateSiteContainer::parameters.resource,
+@@doc(
+  SiteContainers.createOrUpdateSiteContainer::parameters.resource,
   "Container Entity"
 );
-@@doc(SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
+@@doc(
+  SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
   "Container Entity"
 );

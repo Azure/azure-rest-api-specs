@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "12345678-1234-1234-1234-123456789012",
+    "runId": "abcd1234-5678-9012-3456-789012345678",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/exampleScenario/runs/abcd1234-5678-9012-3456-789012345678",
+        "name": "abcd1234-5678-9012-3456-789012345678",
+        "type": "Microsoft.Chaos/workspaces/scenarios/runs",
+        "properties": {
+          "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
+          "scenarioName": "12345678-1234-1234-1234-123456789012",
+          "workspaceName": "exampleWorkspace",
+          "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+          "status": "Succeeded",
+          "resources": [
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
+            },
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+            }
+          ],
+          "scenarioRunJson": "{\"experiment\":{\"steps\":[{\"name\":\"step1\",\"branches\":[{\"name\":\"branch1\",\"actions\":[{\"name\":\"urn:csci:provider:microsoft:VirtualMachine_Shutdown/1.0\",\"type\":\"continuous\",\"duration\":\"PT10M\",\"selectorId\":\"selector1\"}]}]}]}}",
+          "scenarioRunSummary": [
+            {
+              "actionUrn": "urn:csci:provider:microsoft:VirtualMachine_Shutdown/1.0",
+              "state": "Succeeded",
+              "startedAt": "2025-01-20T14:30:00.000Z",
+              "completedAt": "2025-01-20T14:40:00.000Z",
+              "resources": [
+                {
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
+                },
+                {
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                }
+              ]
+            }
+          ],
+          "startTime": "2025-01-20T14:30:00.000Z",
+          "endTime": "2025-01-20T14:40:00.000Z",
+          "zoneResolution": {
+            "mode": "physical",
+            "requestedPhysicalZones": [
+              "westus2-az1"
+            ],
+            "subscriptionZoneMappings": [
+              {
+                "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+                "zoneMappings": [
+                  {
+                    "physicalZone": "westus2-az1",
+                    "logicalZone": "1"
+                  }
+                ]
+              },
+              {
+                "subscriptionId": "a1b2c3d4-5678-9012-3456-abcdef012345",
+                "zoneMappings": [
+                  {
+                    "physicalZone": "westus2-az1",
+                    "logicalZone": "3"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdAt": "2025-01-20T14:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-20T14:40:00.000Z",
+          "lastModifiedBy": "system",
+          "lastModifiedByType": "Application"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/exampleScenario/runs/abcd1234-5678-9012-3456-789012345678",
+        "name": "abcd1234-5678-9012-3456-789012345678",
+        "type": "Microsoft.Chaos/workspaces/scenarios/runs",
+        "properties": {
+          "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
+          "scenarioName": "12345678-1234-1234-1234-123456789012",
+          "workspaceName": "exampleWorkspace",
+          "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+          "status": "Running",
+          "resources": [
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
+            }
+          ],
+          "startTime": "2025-01-20T14:30:00.000Z"
+        },
+        "systemData": {
+          "createdAt": "2025-01-20T14:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-20T14:30:00.000Z",
+          "lastModifiedBy": "system",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/runs/abcd1234-5678-9012-3456-789012345678?api-version=2026-05-01-preview"
+      }
+    }
+  },
+  "operationId": "ScenarioRuns_Get",
+  "title": "Get a scenario run."
+}

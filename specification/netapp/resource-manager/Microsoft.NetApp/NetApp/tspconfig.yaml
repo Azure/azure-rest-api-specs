@@ -36,10 +36,13 @@ options:
     ignore-nullable-on-optional: false
     package-details:
       name: "@azure/arm-netapp"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.NetApp"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     emitter-output-dir: "{output-dir}/{service-dir}/armnetapp"
     service-dir: "sdk/resourcemanager/netapp"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetapp/v8"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetapp/v10"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

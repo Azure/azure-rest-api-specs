@@ -322,9 +322,11 @@ interface EnrollmentAccountOperationGroup {
 }
 
 @@doc(EnrollmentAccount.name, "The name of the enrollment account.");
-@@doc(EnrollmentAccount.properties,
+@@doc(
+  EnrollmentAccount.properties,
   "It is an organizational hierarchy within a billing account to administer and manage azure costs."
 );
-@@doc(EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount::parameters.body,
+@@doc(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount::parameters.body,
   "The request object against which access of the caller will be checked."
 );

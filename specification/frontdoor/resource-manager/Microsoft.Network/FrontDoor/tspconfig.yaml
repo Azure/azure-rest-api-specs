@@ -37,13 +37,17 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/frontdoor"
     emitter-output-dir: "{output-dir}/{service-dir}/armfrontdoor"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfrontdoor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfrontdoor/v2"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.FrontDoor"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -32,7 +32,16 @@ title: AzureMonitorAccountsClient
 description: Azure Monitor Accounts Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-03-preview
+tag: package-2025-10-03
+```
+
+### Tag: package-2025-10-03
+
+These settings apply only when `--tag=package-2025-10-03` is specified on the command line
+
+``` yaml $(tag) == 'package-2025-10-03'
+input-file:
+- stable/2025-10-03/azuremonitorworkspace.json
 ```
 
 ### Tag: package-2025-10-03-preview
@@ -92,7 +101,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

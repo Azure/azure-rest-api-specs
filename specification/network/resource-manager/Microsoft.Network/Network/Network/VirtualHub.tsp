@@ -131,7 +131,10 @@ interface VirtualHubs {
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualHub,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -203,11 +206,13 @@ interface VirtualHubs {
     VirtualHub,
     HubVirtualNetworkConnection,
     void,
-    Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<
-      HubVirtualNetworkConnection,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<HubVirtualNetworkConnection>
+      | ArmResourceCreatedResponse<
+          HubVirtualNetworkConnection,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = CloudError
   >;
 
@@ -220,10 +225,13 @@ interface VirtualHubs {
     VirtualHub,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -276,11 +284,13 @@ interface VirtualHubs {
     VirtualHub,
     VirtualHubRouteTableV2,
     void,
-    Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<
-      VirtualHubRouteTableV2,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<VirtualHubRouteTableV2>
+      | ArmResourceCreatedResponse<
+          VirtualHubRouteTableV2,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OverrideErrorType = Error
   >;
 
@@ -292,10 +302,13 @@ interface VirtualHubs {
     VirtualHub,
     void,
     void,
-    Response = {
-      @body body: void;
-    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse,
     OverrideErrorType = Error
   >;
 
@@ -315,24 +328,31 @@ interface VirtualHubs {
 
 @@doc(VirtualHub.name, "The name of the VirtualHub.");
 @@doc(VirtualHub.properties, "Properties of the virtual hub.");
-@@doc(VirtualHubs.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualHubs.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VirtualHub."
 );
-@@doc(VirtualHubs.updateTags::parameters.properties,
+@@doc(
+  VirtualHubs.updateTags::parameters.properties,
   "Parameters supplied to update VirtualHub tags."
 );
-@@doc(VirtualHubs.getEffectiveVirtualHubRoutes::parameters.body,
+@@doc(
+  VirtualHubs.getEffectiveVirtualHubRoutes::parameters.body,
   "Parameters supplied to get the effective routes for a specific resource."
 );
-@@doc(VirtualHubs.getInboundRoutes::parameters.body,
+@@doc(
+  VirtualHubs.getInboundRoutes::parameters.body,
   "Parameters supplied to get the inbound routes for a connection resource."
 );
-@@doc(VirtualHubs.getOutboundRoutes::parameters.body,
+@@doc(
+  VirtualHubs.getOutboundRoutes::parameters.body,
   "Parameters supplied to get the outbound routes for a connection resource."
 );
-@@doc(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
+@@doc(
+  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied to create or update a hub virtual network connection."
 );
-@@doc(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
+@@doc(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
   "Parameters supplied to create or update VirtualHubRouteTableV2."
 );

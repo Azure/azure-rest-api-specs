@@ -84,7 +84,9 @@ interface Clusters {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -139,6 +141,16 @@ interface Clusters {
     ClusterInspectParameters,
     OperationStatusResult,
     OptionalRequestBody = true
+  >;
+
+  /**
+   * Rotate the specified cluster credential.
+   */
+  @added(Versions.v2026_05_01_preview)
+  rotateCredential is ActionAsync<
+    Cluster,
+    ClusterRotateCredentialParameters,
+    OperationStatusResult
   >;
 
   /**

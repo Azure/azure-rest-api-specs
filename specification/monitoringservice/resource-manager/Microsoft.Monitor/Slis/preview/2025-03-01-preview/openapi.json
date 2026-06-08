@@ -414,7 +414,7 @@
         },
         "value": {
           "type": "string",
-          "description": "Value used in filtering."
+          "description": "Value used in filtering. For most operators (eq, ne, lt, lte, gt, gte, startswith, notstartswith, contains, notcontains) this is a single value (for example \"GetContosoUsers\"). For the `in` and `notin` operators, multiple values must be joined by the delimiter `^^` (for example \"east^^west^^north\")."
         }
       },
       "required": [
@@ -426,18 +426,18 @@
       "type": "string",
       "description": "Defines operators used in filter conditions.",
       "enum": [
-        "==",
-        "!=",
-        "<",
-        "<=",
-        ">",
-        ">=",
-        "@in",
-        "!in",
+        "eq",
+        "ne",
+        "lt",
+        "lte",
+        "gt",
+        "gte",
+        "in",
+        "notin",
         "startswith",
-        "!startswith",
+        "notstartswith",
         "contains",
-        "!contains"
+        "notcontains"
       ],
       "x-ms-enum": {
         "name": "ConditionOperator",
@@ -445,43 +445,43 @@
         "values": [
           {
             "name": "Equal",
-            "value": "==",
+            "value": "eq",
             "description": "Equal to."
           },
           {
             "name": "NotEqual",
-            "value": "!=",
+            "value": "ne",
             "description": "Not equal to."
           },
           {
             "name": "LessThan",
-            "value": "<",
+            "value": "lt",
             "description": "Less than."
           },
           {
             "name": "LessThanOrEqual",
-            "value": "<=",
+            "value": "lte",
             "description": "Less than or equal to."
           },
           {
             "name": "GreaterThan",
-            "value": ">",
+            "value": "gt",
             "description": "Greater than."
           },
           {
             "name": "GreaterThanOrEqual",
-            "value": ">=",
+            "value": "gte",
             "description": "Greater than or equal to."
           },
           {
             "name": "In",
-            "value": "@in",
-            "description": "In operator."
+            "value": "in",
+            "description": "Matches when `value` is one of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\")."
           },
           {
             "name": "NotIn",
-            "value": "!in",
-            "description": "Not in."
+            "value": "notin",
+            "description": "Matches when `value` is none of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\")."
           },
           {
             "name": "StartsWith",
@@ -490,7 +490,7 @@
           },
           {
             "name": "NotStartsWith",
-            "value": "!startswith",
+            "value": "notstartswith",
             "description": "Does not start with."
           },
           {
@@ -500,7 +500,7 @@
           },
           {
             "name": "NotContains",
-            "value": "!contains",
+            "value": "notcontains",
             "description": "Does not contain the value."
           }
         ]
@@ -803,34 +803,40 @@
       "type": "string",
       "description": "Defines the available sampling types.",
       "enum": [
-        "max",
-        "min",
-        "avg",
-        "sum"
+        "Average",
+        "Sum",
+        "Count",
+        "Min",
+        "Max"
       ],
       "x-ms-enum": {
         "name": "SamplingType",
         "modelAsString": true,
         "values": [
           {
-            "name": "Max",
-            "value": "max",
-            "description": "Maximum value."
-          },
-          {
-            "name": "Min",
-            "value": "min",
-            "description": "Minimum value."
-          },
-          {
-            "name": "Avg",
-            "value": "avg",
+            "name": "Average",
+            "value": "Average",
             "description": "Average value."
           },
           {
             "name": "Sum",
-            "value": "sum",
+            "value": "Sum",
             "description": "Summation."
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count of occurrences."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
           }
         ]
       }
@@ -1505,10 +1511,10 @@
       "type": "string",
       "description": "Defines comparison operators for window uptime criteria.",
       "enum": [
-        "<",
-        ">",
-        "<=",
-        ">="
+        "lt",
+        "gt",
+        "lte",
+        "gte"
       ],
       "x-ms-enum": {
         "name": "WindowUptimeCriteriaComparator",
@@ -1516,22 +1522,22 @@
         "values": [
           {
             "name": "LessThan",
-            "value": "<",
+            "value": "lt",
             "description": "Less than the target value."
           },
           {
             "name": "GreaterThan",
-            "value": ">",
+            "value": "gt",
             "description": "Greater than the target value."
           },
           {
             "name": "LessThanOrEqual",
-            "value": "<=",
+            "value": "lte",
             "description": "Less than or equal to the target value."
           },
           {
             "name": "GreaterThanOrEqual",
-            "value": ">=",
+            "value": "gte",
             "description": "Greater than or equal to the target value."
           }
         ]

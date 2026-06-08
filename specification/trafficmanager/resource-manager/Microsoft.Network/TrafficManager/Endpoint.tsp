@@ -70,23 +70,8 @@ interface Endpoints {
   /**
    * Update a Traffic Manager endpoint.
    */
-  @sharedRoute
-  @removed(Versions.v2024_04_01_preview)
   @patch(#{ implicitOptionality: false })
   update is EndpointsOps.CustomPatchSync<Endpoint, PatchModel = Endpoint>;
-
-  /**
-   * Update a Traffic Manager endpoint.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId needed to match stable version"
-  @sharedRoute
-  @added(Versions.v2024_04_01_preview)
-  @operationId("Endpoints_Update")
-  @patch(#{ implicitOptionality: false })
-  updateV2 is EndpointsOps.CustomPatchSync<
-    Endpoint,
-    PatchModel = EndpointUpdate
-  >;
 
   /**
    * Deletes a Traffic Manager endpoint.
@@ -98,12 +83,11 @@ interface Endpoints {
 }
 
 @@doc(Endpoint.properties, "The properties of the Traffic Manager endpoint.");
-@@doc(Endpoints.createOrUpdate::parameters.resource,
+@@doc(
+  Endpoints.createOrUpdate::parameters.resource,
   "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(Endpoints.update::parameters.properties,
-  "The Traffic Manager endpoint parameters supplied to the Update operation."
-);
-@@doc(Endpoints.updateV2::parameters.properties,
+@@doc(
+  Endpoints.update::parameters.properties,
   "The Traffic Manager endpoint parameters supplied to the Update operation."
 );
