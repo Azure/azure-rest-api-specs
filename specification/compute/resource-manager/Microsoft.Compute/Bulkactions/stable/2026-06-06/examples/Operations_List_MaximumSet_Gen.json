@@ -9,18 +9,40 @@
       "body": {
         "value": [
           {
-            "name": "Microsoft.Compute/locations/launchBulkInstancesOperations/read",
+            "name": "Microsoft.Compute/locations/virtualMachinesBulkGetOperationStatus/action",
             "isDataAction": false,
             "display": {
               "provider": "Microsoft Compute",
-              "resource": "Bulk Instances Launch Operation",
-              "operation": "Get Bulk Instances Launch Operation",
-              "description": "Gets the status of a bulk virtual machine launch operation."
+              "resource": "Virtual Machines Bulk Get Operation Status",
+              "operation": "Bulk Get Operations Status",
+              "description": "BulkGetOperationsStatus: Polling endpoint to read status of operations performed on virtual machines"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Compute/locations/virtualMachinesBulkStart/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Compute",
+              "resource": "Virtual Machines Bulk Start",
+              "operation": "Bulk Start Virtual Machines",
+              "description": "BulkStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Compute/locations/virtualMachinesBulkHibernate/action",
+            "isDataAction": false,
+            "display": {
+              "provider": "Microsoft Compute",
+              "resource": "Virtual Machines Bulk Hibernate",
+              "operation": "Bulk Hibernate Virtual Machines",
+              "description": "BulkHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it."
             },
             "origin": "user,system"
           }
         ],
-        "nextLink": "https://management.azure.com/providers/Microsoft.Compute/operations?api-version=2026-04-06-preview&$skiptoken=opaque-page-token"
+        "nextLink": "https://management.azure.com/providers/Microsoft.Compute/operations?api-version=2026-06-06&$skiptoken=opaque-page-token"
       }
     }
   }
