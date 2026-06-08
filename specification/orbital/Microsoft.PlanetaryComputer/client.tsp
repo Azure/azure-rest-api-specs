@@ -26,6 +26,21 @@ namespace Customizations;
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
 
+// Suppress @fixme for JS reserved word "delete" used as method name on subclient
+@@clientName(Ingestions.delete, "delete", "javascript");
+
+// Fix generic "The most basic operation" docs for search tile operations (without TileMatrixSetId)
+@@doc(MosaicSearchesAssetsForTiles.getZxyAssets,
+  "Return a list of assets which overlap a given tile for a mosaic search.");
+@@doc(MosaicSearchesTiles.getZxyScaleByFormat,
+  "Create a map tile for a mosaic search with specified scale and format.");
+@@doc(MosaicSearchesTilesScale.getZxyByScale,
+  "Create a map tile for a mosaic search with specified scale.");
+@@doc(MosaicSearchesTilesFormat.getZxyByFormat,
+  "Create a map tile for a mosaic search with specified format.");
+@@doc(MosaicSearchesTilesPlain.getZxy,
+  "Create a map tile for a mosaic search.");
+
 // === Python snake_case parameter renames ===
 @@clientName(CollectionMosaicFilterQueryParameters.sortby, "sort_by", "python");
 @@clientName(BoundingBoxPathParameters.minx, "min_x", "python");
