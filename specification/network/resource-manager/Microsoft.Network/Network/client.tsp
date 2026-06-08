@@ -40,6 +40,7 @@ namespace CombineClient;
 @@clientName(Common.PrivateLinkServiceIpConfiguration, "PrivateLinkServiceIPConfiguration", "csharp");
 @@clientName(Common.IpTag, "IPTag", "csharp");
 @@clientName(Common.LoadBalancingRulePropertiesFormat, "LoadBalancingRuleProperties", "csharp");
+@@clientName(Common.ManagedServiceIdentity, "NetworkManagedServiceIdentity", "csharp");
 @@clientName(Common.PublicIpAddressDnsSettingsDomainNameLabelScope, "PublicIPAddressDnsSettingsDomainNameLabelScope", "csharp");
 @@clientName(Common.AddressSpace, "VirtualNetworkAddressSpace", "csharp");
 @@clientName(Common.TransportProtocol, "LoadBalancingTransportProtocol", "csharp");
