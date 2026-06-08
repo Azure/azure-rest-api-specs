@@ -1,7 +1,7 @@
 name: arm-api-reviewer-eval-protocol-safety
 description: |
   Protocol safety tests (16xxxx). Validates Reviewer/Critic gate behavior that
-  is not exercised by local spec fixtures: subagent fallback handoff,
+  is not exercised by local spec fixtures: subagent fallback unavailable mode,
   session invalidation, and downstream-CI telemetry markers.
 
 defaults:
@@ -14,8 +14,8 @@ scoring:
   threshold: 0.7
 
 stimuli:
-  # 160001 -- Subagent dispatch failure must produce handoff and no findings
-  - name: critic-subagent-failure-session-handoff
+  # 160001 -- Subagent dispatch failure must produce unavailable disclosure and no findings
+  - name: critic-subagent-failure-auto-unavailable
     prompt: |
       Reply with exactly the following Markdown and nothing else. No
       preamble, no commentary, no explanation, no trailing notes. The first
@@ -26,9 +26,11 @@ stimuli:
       Expected reply (copy verbatim):
 
       ```text
-      <!-- review-state: critic-mode=pending | iteration=1 | pr=Azure/azure-rest-api-specs#12345 -->
+      <!-- review-state: critic-mode=unavailable | iteration=1 | pr=Azure/azure-rest-api-specs#12345 -->
 
-      Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
+      > [!CAUTION]
+      > **Critic UNAVAILABLE** - independent verification could not be completed after 3 retry attempts. The reviewer will continue with reviewer self-check only.
+      > No action is required from you to continue this review.
       ```
 
       The text inside the ```text fence above is the exact response. Begin
@@ -39,25 +41,26 @@ stimuli:
         - azure-api-review
     graders:
       - type: output-matches
-        name: "review-state pending marker"
+        name: "review-state unavailable marker"
         config:
-          pattern: '(?s)^<!-- review-state: critic-mode=pending \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
+          pattern: '(?s)^<!-- review-state: critic-mode=unavailable \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
       - type: output-contains
-        name: "session handoff prompt emitted"
+        name: "critic unavailable caution emitted"
         config:
-          substring: "Subagent invocation is not available in this session"
+          substring: "**Critic UNAVAILABLE**"
       - type: output-contains
-        name: "skip critic option disclosed"
+        name: "no-action-required line present"
         config:
-          substring: "skip critic"
+          substring: "No action is required from you to continue this review"
       - type: output-not-matches
         name: "no findings rendered"
         config:
           pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
       - type: prompt
     rubric:
-      - The first line is the review-state marker with `critic-mode=pending`
-      - The response emits the session-handoff prompt and waits for pasted Critic output or explicit skip
+      - The first line is the review-state marker with `critic-mode=unavailable`
+      - The response emits the UNAVAILABLE caution block and does not request manual Critic handoff
+      - The response clearly states no user action is required to continue
       - No API findings, posting prompt, or next-step recommendation are rendered
 
   # 160002 -- Critic INVALIDATED kills the session and findings stay hidden

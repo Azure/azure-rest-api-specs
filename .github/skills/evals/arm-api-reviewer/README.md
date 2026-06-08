@@ -9,7 +9,7 @@ Evaluation tests for the **ARM API Reviewer** agent using the
 arm-api-reviewer/
 ├── run-evals.ps1          # One-click script: clone, build, run, report
 ├── .vally.yaml            # Project config; filename fixed by the vally CLI
-├── vally/                 # Eval definitions (16 files)
+├── vally/                 # Eval definitions
 │   ├── eval-arm-resource-structure.yaml
 │   ├── eval-property-design.yaml
 │   ├── eval-operations.yaml
@@ -26,7 +26,7 @@ arm-api-reviewer/
 │   ├── eval-typespec-required.yaml
 │   ├── eval-fast-path-triage.yaml
 │   └── eval-protocol-safety.yaml
-├── fixtures/              # Test fixtures (36 data files + README)
+├── fixtures/              # Test fixtures + README
 │   ├── arm-openapi/       # ARM OpenAPI specs with seeded violations
 │   ├── examples/          # Example JSON files (good and bad)
 │   ├── readme/            # readme.md suppression files
@@ -38,40 +38,44 @@ arm-api-reviewer/
 
 ## Test Categories
 
-| ID     | Category                      | Count | Description                                                                                                                                                                                                                                                                   |
-| ------ | ----------------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 01xxxx | ARM resource structure        | 3     | Missing CRUD ops, missing provisioningState, inline types                                                                                                                                                                                                                     |
-| 02xxxx | Property design               | 4     | Secrets, naming, descriptions, enums                                                                                                                                                                                                                                          |
-| 03xxxx | Operations                    | 4     | PATCH, PUT, DELETE, LRO violations                                                                                                                                                                                                                                            |
-| 04xxxx | Breaking changes              | 4     | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                 |
-| 05xxxx | Suppression analysis (readme) | 2     | Missing reason, security rule suppressions                                                                                                                                                                                                                                    |
-| 06xxxx | Example file validation       | 2     | Bad resource ID, realistic secrets                                                                                                                                                                                                                                            |
-| 07xxxx | TypeSpec review               | 4     | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                      |
-| 08xxxx | Check Name Availability       | 1     | Custom CNA models, missing input validation                                                                                                                                                                                                                                   |
-| 09xxxx | True negatives                | 3     | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                               |
-| 10xxxx | Classification                | 1     | NEW vs EXISTING issue tagging                                                                                                                                                                                                                                                 |
-| 11xxxx | Report format                 | 2     | Line numbers, rule IDs, structured output; critic invisible on clean                                                                                                                                                                                                          |
-| 12xxxx | TypeSpec required             | 3     | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK                                                                                                                                                                                                                   |
-| 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                                                                                                                          |
-| 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                        |
-| 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                            |
-| 16xxxx | Protocol safety               | 10    | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
+<!-- markdownlint-disable MD060 -->
 
-Total: 51 stimuli across 16 eval files.
+| ID     | Category                      | Description                                                                                                                                                                                                                                                                                             |
+| ------ | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 01xxxx | ARM resource structure        | Missing CRUD ops, missing provisioningState, inline types                                                                                                                                                                                                                                               |
+| 02xxxx | Property design               | Secrets, naming, descriptions, enums                                                                                                                                                                                                                                                                    |
+| 03xxxx | Operations                    | PATCH, PUT, DELETE, LRO violations                                                                                                                                                                                                                                                                      |
+| 04xxxx | Breaking changes              | Removed property, type change, enum narrowing, added required                                                                                                                                                                                                                                           |
+| 05xxxx | Suppression analysis (readme) | Missing reason, security rule suppressions                                                                                                                                                                                                                                                              |
+| 06xxxx | Example file validation       | Bad resource ID, realistic secrets                                                                                                                                                                                                                                                                      |
+| 07xxxx | TypeSpec review               | Segment casing, secrets, anti-patterns, x-ms-identifiers                                                                                                                                                                                                                                                |
+| 08xxxx | Check Name Availability       | Custom CNA models, missing input validation                                                                                                                                                                                                                                                             |
+| 09xxxx | True negatives                | Clean spec, clean example, clean proxy resource                                                                                                                                                                                                                                                         |
+| 10xxxx | Classification                | NEW vs EXISTING issue tagging                                                                                                                                                                                                                                                                           |
+| 11xxxx | Report format                 | Line numbers, rule IDs, structured output; critic invisible on clean                                                                                                                                                                                                                                    |
+| 12xxxx | TypeSpec required             | TSP-REQUIRED-V1: new versions need TypeSpec; maintenance OK                                                                                                                                                                                                                                             |
+| 13xxxx | Citation & posted parity      | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                                                                                                                                                    |
+| 14xxxx | suppressions.yaml continuity  | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                                                  |
+| 15xxxx | Fast-path triage              | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                                                      |
+| 16xxxx | Protocol safety               | Subagent 3-retry auto-unavailable fallback; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
+
+<!-- markdownlint-enable MD060 -->
+
+Total: see current `vally/eval-*.yaml` definitions.
 
 ## Fixtures
 
-All 36 fixture data files live in `fixtures/` (plus a `README.md`). See
+Fixture data files live in `fixtures/` (plus a `README.md`). See
 [`fixtures/README.md`](fixtures/README.md) for the complete catalog with
 descriptions, seeded violations, and guidance on reusing fixtures in other
 eval suites.
 
-- **15 ARM OpenAPI specs** in `arm-openapi/` -- 2 clean + 12 with seeded violations + 1 TypeSpec-generated
-- **3 example JSON files** in `examples/` -- 1 clean + 2 with issues
-- **2 readme.md files** in `readme/` -- suppression scenarios
-- **2 suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
-- **4 TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
-- **10 version-pair files** in `version-pairs/` -- 5 pairs for breaking change detection
+- **ARM OpenAPI specs** in `arm-openapi/` -- includes clean and seeded-violation cases plus a TypeSpec-generated sample
+- **Example JSON files** in `examples/` -- includes clean and issue-focused cases
+- **readme.md files** in `readme/` -- suppression scenarios
+- **suppressions.yaml files** in `suppressions-yaml/` -- missing-reason and security-rule scenarios
+- **TypeSpec files** in `typespec/` -- segment/naming, secret/type, anti-pattern, x-ms-identifiers violations
+- **Version-pair files** in `version-pairs/` -- breaking change detection scenarios
 
 ## Quick Start
 
@@ -85,7 +89,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (48 stimuli, sequential -- safest)
+# Run the full suite (sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -137,7 +141,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 48 stimuli, 5 concurrent workers)
+# Run the full suite (5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category

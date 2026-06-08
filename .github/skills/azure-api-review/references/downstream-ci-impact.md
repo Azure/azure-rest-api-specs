@@ -85,10 +85,14 @@ satisfy all five:
 
 ## Failure modes (Critic FAILs)
 
-The Critic returns a non-overridable FAIL when any of the following is
-true. **Non-overridable** means the per-comment `critic: override`
-marker does NOT clear it -- see
-[protocol → Non-overridable FAIL catalog](../../../agents/protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog).
+The Critic returns a FAIL when any of the following is true. These
+FAILs are **overridable** via the per-comment `critic: override` marker
+with a justification, but the Reviewer SHOULD prefer to address them
+by rephrasing the finding rather than overriding -- a downstream-CI
+suppression rendered with the wrong `where:` path will silently fail
+in CI regardless of any Critic override. See
+[protocol → Non-overridable FAIL catalog](../../../agents/protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog)
+for the (much shorter) list of truly non-overridable FAILs.
 
 | Critic FAIL                 | Triggered when                                                                                                                | Recovery                                                                                           |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |

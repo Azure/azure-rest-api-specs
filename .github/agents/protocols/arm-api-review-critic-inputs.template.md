@@ -1,39 +1,25 @@
 <!-- Source of truth for the Critic-invocation input block. Both the
      Reviewer (Step 7) and the Critic (Operating mode) link here.
-     Schema definitions live in `arm-api-review-critic.protocol.md`; this file
+     Field semantics live in `arm-api-review-critic.protocol.md`; this file
      is the **literal template** the Reviewer copies into every dispatch
      prompt and every session-handoff paste. -->
 
-# Critic input-block template
+# Critic input template
 
-The Reviewer MUST embed exactly one fenced YAML block with this schema
-in the prompt body it sends to the Critic dispatch (or pastes into the
-session-handoff prompt). The Critic MUST refuse to validate any
-invocation whose prompt does not contain exactly one such block. Field
-semantics, the empty-list rule, and the sentinel-string contract are
-defined in [`arm-api-review-critic.protocol.md` → Inputs the Reviewer passes
-to the Critic](./arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic).
+Paste this prelude at the top of the Critic dispatch prompt (or the
+session-handoff paste), then the report sections. Fields are read as
+prose; missing optional fields fall back to sensible defaults. There is
+no rigid YAML schema and no header marker -- the Critic does best-effort
+parsing.
 
-## Template (copy verbatim; substitute placeholders)
+## Template
 
-````markdown
-```yaml
-# critic-inputs/v1
-pr_url: https://github.com/<owner>/<repo>/pull/<number>
-session_sha: <full-40-char-sha> # Input #2
-files_reviewed: # Input #4
-  - path/to/file-a.json
-  - path/to/file-b.tsp
-previous_version: # Input #5; null when new service
-  base_sha_or_ref: <sha-or-ref>
-  path: specification/<service>/.../stable/<prev-version>
-prior_fail_sets: # Input #7; [] on iteration 1
-  iteration_n_minus_1: []
-  iteration_n_minus_2: []
-considered_and_declined: [] # Input #8; [] on iteration 1
-graphs_produced: true # Input #9; true | false | downgraded | degraded
-iteration: 1 # Input #10; 1..3
-```
+```markdown
+PR: <owner>/<repo>#<number>
+Head SHA: <full-40-char-sha>
+Base: <full-40-char-base-sha-or-ref> (or: new service)
+Iteration: 1
+Graphs: true (or: false on fast path)
 
 ## Step 6 findings report
 
@@ -42,26 +28,60 @@ iteration: 1 # Input #10; 1..3
 ## Step 5.5 reconciliation plan
 
 <verbatim Step 5.5 plan from the Reviewer, or the literal string `reconciliation skipped`>
-````
+```
 
-## Required invariants
+## Field notes
 
-- The `# critic-inputs/v1` header comment is part of the contract;
-  removing it FAILs Critic input validation.
-- Inputs #7 and #8 MUST be explicit empty containers (`[]` or `none`)
-  on iteration 1, not omitted.
-- Input #6 is either a real plan under the `## Step 5.5 reconciliation
-plan` heading or the literal sentinel `reconciliation skipped` --
-  never an empty plan or omitted heading.
-- `session_sha` is the full 40-char commit SHA; short SHAs are a
-  validation failure.
-- `iteration` is `1`, `2`, or `3` -- the iteration cap (see
-  [protocol → Iteration discipline](./arm-api-review-critic.protocol.md#critic-verdict-tracks)).
+- **PR, Head SHA, Iteration** are required. Head SHA must be the full
+  40-character commit SHA so the Critic can pin re-fetches to the same
+  tree the Reviewer judged.
+- **Base** is required only when a previous API version exists; write
+  `new service` otherwise.
+- **Graphs** defaults to `true`; set to `false` on fast-path PRs where
+  Step 3.5 was skipped by design.
+- **Iteration** is `1`, `2`, or `3` (Step 7 hard cap).
+- **Step 6 findings report** -- include verbatim; the Critic re-reads it
+  end-to-end every iteration. If the Reviewer wants to suppress
+  re-surfacing of a `Likely missed violations` candidate that was
+  already evaluated and declined, just note it inline in the report
+  under a "Considered and declined" heading; no separate input is
+  needed.
+- **Reconciliation plan** -- include verbatim, or write the literal
+  string `reconciliation skipped` if Step 5.5 ran in the skipped mode.
+  A plan whose every row is `POST-NEW` is still a plan; pass it
+  verbatim.
 
 ## When something cannot be assembled
 
-If a required field cannot be filled in (e.g., session SHA never pinned
-because Step 1 failed), do **not** dispatch the Critic. Surface the gap
-to the human per Reviewer Step 7's fallback ladder; the Critic will
-return `Finding accuracy = FAIL` reason `missing-inputs` against any
-incomplete block.
+If `PR`, `Head SHA`, or the findings report cannot be assembled, do
+**not** dispatch the Critic. Surface the gap to the human per Reviewer
+Step 7's fallback ladder.
+
+## Compact mode (iteration >= 2, prompt-size escape valve only)
+
+When iteration `>= 2` **and** the full-report dispatch is hitting a
+host-side prompt-size limit (Rung-1 zero-content / "Agent completed with
+no output" return), replace the `## Step 6 findings report` section with
+the two-part compact-mode body defined in [the protocol's Compact-mode
+iteration prompt](./arm-api-review-critic.protocol.md#compact-mode-iteration-prompt-iteration--2-only):
+
+```markdown
+## Step 6 findings report (compact mode -- iteration N)
+
+### Changed findings (re-verify from scratch)
+
+<verbatim full body of every finding added, modified, or dropped since iteration N-1>
+
+### Carry-over verdicts (unchanged since iteration N-1)
+
+| #   | Rule          | Path:line    | Prior iteration | Prior Critic verdict |
+| --- | ------------- | ------------ | --------------- | -------------------- |
+| 3   | RPC-Put-V1-01 | foo.json:L57 | 1               | pass                 |
+
+...
+```
+
+Compact mode is **not the default**. Use full report on iteration 1
+always, and on iteration >= 2 unless the host is rejecting the full
+prompt. The protocol section above defines the Critic's contract for
+re-fetching cited files and adopting carry-over verdicts.

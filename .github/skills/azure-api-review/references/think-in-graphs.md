@@ -179,14 +179,13 @@ In summary-text mode the Reviewer:
   graph; each finding body carries
   `Source: structural-analysis (graph downgraded)` so the human sees
   that the analysis was performed.
-- Sets `graphs-produced: downgraded` in Critic Input #9.
+- Sets `Graphs: false` in the Critic input.
 
-Under `downgraded`, the Critic still independently re-derives the
-sensitive-data-flow view in summary form (rendering cost is irrelevant
-to secret-leak analysis) but skips the resource and operation views.
-The Critic records `Graph integrity = N/A` for rendered-diff purposes
+The Critic still independently re-derives the sensitive-data-flow view
+in summary form (rendering cost is irrelevant to secret-leak analysis)
 and surfaces any new secret-bearing LIST-response findings as advisory
-`Likely missed violations`.
+`Likely missed violations`. The Critic records `Graph integrity = N/A`
+for rendered-diff purposes.
 
 Downgrading is a rendering decision, not an analysis skip.
 
@@ -201,28 +200,26 @@ recovery"](../../../agents/arm-api-reviewer.agent.md#step-35-api-graph--data-flo
 
 1. **Retry with smaller scope** (per-namespace partitioning, then
    merge). Default; most failures resolve here.
-2. **Continue with `graphs-produced: degraded`**, render the required
-   `[!CAUTION]` failure banner at the top of the Step 6 report, and
-   proceed. The Critic records `Graph integrity = N/A` but is required
-   to flag the missing banner as `missing-step35-banner` if the
-   Reviewer suppresses it.
+2. **Continue with `Graphs: false` plus the failure banner**: render
+   the required `[!CAUTION]` failure banner at the top of the Step 6
+   report so the missing structural analysis is visible to the human.
 3. **Abort** only on explicit human direction (e.g., the PR touches
    secret-bearing properties where Step 3.5 is the primary detection
    mechanism).
 
-`graphs-produced: degraded` is **distinct** from `false` (which is
-reserved for fast-path-by-design and is silent). `degraded` is never
-silent: the banner makes the missing analysis visible to every human
-reading the report.
+The banner is the first-class signal for graph-derivation failure on a
+full-review PR; the Critic input itself is just `Graphs: false`. The
+banner ensures the missing structural analysis cannot be silently
+swallowed.
 
 ## When this step is skipped
 
 Step 3.5 is **skipped on the fast-path track** (examples-only PRs,
 description-only edits, non-AutoRest readme edits). In that case the
-Reviewer MUST tell the Critic via Input #9 (`graphs-produced: false`),
-and the Critic records `Graph integrity = N/A` instead of attempting to
-diff against absent graphs. Step 3.5 is **never** skipped on the
-full-review track; on extreme-scale full-review PRs use the
-`downgraded` mode above, and on derivation failure use the `degraded`
-mode (see "When graph derivation fails on a full-review PR" above)
-rather than skipping silently.
+Reviewer MUST tell the Critic by passing `Graphs: false`, and the
+Critic records `Graph integrity = N/A` instead of attempting to diff
+against absent graphs. Step 3.5 is **never** skipped on the full-review
+track; on extreme-scale full-review PRs use the downgraded rendering
+mode above, and on derivation failure use the failure banner (see
+"When graph derivation fails on a full-review PR") rather than
+skipping silently.

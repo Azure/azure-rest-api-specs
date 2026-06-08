@@ -56,13 +56,13 @@ the spec - **exactly one** of these states MUST be true:
   subagent mechanism (`runSubagent` with `agentName: "ARM API Review Critic"`,
   or equivalent), returned a verdict, and its corrections (drops, downgrades,
   reclassifications, overrides) have been folded into the report per Step 7.
-- **B.** Subagent dispatch was attempted and failed; the **verbatim**
-  session-handoff prompt from Step 7 has been emitted; the chat is currently
-  WAITING for the human's pasted critic verdict or explicit "skip critic".
-  No findings have been rendered.
-- **C.** The human explicitly opted out via "skip critic" while in state B, and
-  the `[!CAUTION]` "Critic UNAVAILABLE" banner from the Step 6 template is
-  rendered at the top of the report.
+- **B.** Subagent dispatch was attempted and failed; the reviewer retried up to
+  3 times with reduced payload and all attempts failed. The reviewer
+  automatically entered `critic-mode=unavailable` and rendered the
+  `[!CAUTION]` "Critic UNAVAILABLE" banner from the Step 6 template. No
+  user action is required.
+- **C.** Reserved / deprecated. Manual session-handoff and explicit opt-out
+  are no longer part of the default fallback path.
 - **D.** The Critic returned `Finding accuracy = INVALIDATED` (reason
   `session-sha-moved` or `session-sha-unreachable`). The only permitted
   output is the SHA-drift report (both SHAs verbatim) plus the
@@ -74,15 +74,28 @@ the spec - **exactly one** of these states MUST be true:
 If none of A / B / C / D holds, you are in violation. **Stop. Do not present
 findings. Do not ask the human "should I run the critic?" - that question is
 itself a violation because it frames the critic as optional.** The only
-permitted output in that state is the Step 7 session-handoff prompt (state B).
+permitted output in that state is the automatic unavailable disclosure from
+Step 7 (state B).
 
 ### Self-check before sending any review-bearing message
 
 Mentally answer "yes" to all five before pressing send:
 
 1. Did `runSubagent` for `ARM API Review Critic` actually execute this turn (or
-   a prior turn in this same review session)? Reading the agent file does not
-   count. Planning to invoke it does not count.
+   a prior turn in this same review session) **AND return a non-empty
+   response that contains a valid `<!-- critic-verdict: ... -->`
+   marker (preferably first line, but accepted within the first 20
+   non-empty lines to tolerate host-added wrapper text) OR a parseable
+   `### Verdict` table with all four tracks**? Reading the agent file does
+   not count. Planning to invoke it does not count. A dispatched call that
+   returned `Agent completed with no output`, an empty string, or neither a
+   usable marker nor a usable verdict table is a Rung-1 **failure**, not a
+   passing verdict -- per Step 7 Rung 1 you must retry up to 3 times with a
+   compact-mode / reduced-payload prompt for that failure shape, then
+   automatically continue in `critic-mode=unavailable` if retries still fail.
+   Treating an
+   empty subagent return as PASS is the single highest-frequency
+   Pre-Presentation Invariant violation observed in this agent's history.
 2. Did I fold the critic's verdict into the report (or, if state B/C, render
    the correct banner / handoff prompt)?
 3. Is the hidden `<!-- review-state: ... -->` marker (see "Required review-state
@@ -187,8 +200,8 @@ rule. Step 7 implements the mechanics; this list catalogues the failures.
   chat-only, or (c) confirm with the author first?" The critic is not
   contingent on posting. Chat presentation triggers the gate.
 - Treating `runSubagent` failure or unavailability as "critic unavailable,
-  proceeding to present." Failure mandates the session-handoff prompt
-  verbatim, then WAIT - not advancement.
+  proceeding to present" without following Step 7 retries and automatic
+  unavailable disclosure.
 - Folding "corrections" into the Step 6 report after the Critic returned
   `Finding accuracy = INVALIDATED`. INVALIDATED means the session SHA no
   longer matches the PR; the only permitted output is the SHA-drift
@@ -214,7 +227,7 @@ Every response emitted **after Step 1 begins**, for the entire review session
 (through Step 10 cleanup, abandonment, or session invalidation), MUST begin
 with a hidden HTML comment as the literal first line. This includes - but is
 not limited to - findings, graphs, "no issues found" summaries, posting
-prompts, the Step 7 session-handoff prompt, the Step 8 plan-approval prompt
+prompts, the Step 7 critic-unavailable disclosure, the Step 8 plan-approval prompt
 (which bundles the Step 9 label approval -- there is no separate Step 9
 prompt), error reports, and SHA-drift reports. The
 rule is response-scope, not content-scope: if the session is live, the marker
@@ -225,25 +238,23 @@ decline message for an out-of-scope repo).
 The marker format is:
 
 ```html
-<!-- review-state: critic-mode={pending|subagent|session-handoff|unavailable|invalidated} | iteration={N} | pr={owner/repo#number} -->
+<!-- review-state: critic-mode={pending|subagent|unavailable|invalidated} | iteration={N} | pr={owner/repo#number} -->
 ```
 
 - `critic-mode=pending` - Step 1 has pinned the session/base SHAs and the
   review session is live, but the Critic has not returned yet. Use only for
-  progress, fetch-error, session-handoff, or SHA-drift messages; never render
-  findings with this value.
+  progress, fetch-error, or SHA-drift messages; never render findings with
+  this value.
 - `critic-mode=subagent` - state A: subagent dispatched and verdict folded in.
-- `critic-mode=session-handoff` - state A via human-pasted verdict from the
-  fallback prompt.
-- `critic-mode=unavailable` - state C: human explicitly opted out at Step 7
-  fallback Rung 2; CAUTION banner rendered. This is the **only** value used
+- `critic-mode=unavailable` - fallback state after Step 7 retries are
+  exhausted; CAUTION banner rendered. This is the **only** value used
   when the critic did not run; `skipped` is **not** a permitted value.
 - `critic-mode=invalidated` - state D: Critic returned
   `Finding accuracy = INVALIDATED`. Findings MUST NOT be rendered; the
   response is the SHA-drift report only (see Step 7 item 11).
-- **Mapping rule:** human opt-out at Step 7 fallback Rung 2 -> `unavailable`.
+- **Mapping rule:** fallback completion after Step 7 retries -> `unavailable`.
   Never `skipped`. If you find yourself about to emit `critic-mode=skipped`,
-  you are in violation; emit the session-handoff prompt instead.
+  you are in violation; emit the automatic unavailable disclosure instead.
 - **`iteration=0`** is reserved for Reviewer-detected drift or
   session-invalidation reports emitted **between** Critic iterations (e.g.,
   the Step 1 SHA invariant fires partway through Step 5). When `iteration=0`,
@@ -294,6 +305,26 @@ specification.
 | 8   | [Execute the Validated Reconciliation Plan](#step-8-execute-the-validated-reconciliation-plan)                  | **user-visible** | Present report; human approves; post comments; bundled Step 9 labels.           |
 | 9   | [Update PR Labels](#step-9-update-pr-labels)                                                                    | user-visible     | Add `ARMChangesRequested`, remove `WaitForARMFeedback`.                         |
 | 10  | [Clean Up Local Workspace](#step-10-clean-up-local-workspace-mandatory)                                         | internal         | Mandatory probe-and-remove of agent artifacts.                                  |
+
+### Visual flow (Critic gate is load-bearing)
+
+```mermaid
+flowchart TD
+    A[Step 1-6: Build internal draft] --> B{Step 7: Dispatch Critic subagent}
+    B -- empty / first-line marker missing --> R[Rung 1 RETRY UP TO 3 TIMES with reduced payload]
+    R -- still empty --> U[Rung 2: Mark UNAVAILABLE and continue]
+    R -- valid verdict --> V[Parse critic-verdict marker]
+    B -- valid verdict --> V
+    U --> S[Step 8: present with UNAVAILABLE caution]
+    V --> D{finding= ?}
+    D -- invalidated --> X[SESSION INVALIDATED template, stop]
+    D -- fail and overridable --> F[Fold corrections, re-invoke up to iteration 3]
+    F --> B
+    D -- pass / warn --> S[Step 8: present to human, post on approval]
+    S --> L[Step 9: labels] --> C[Step 10: cleanup]
+```
+
+The diagram is the binding shape: any path that reaches Step 8 without traversing a non-empty Critic verdict must be explicitly marked `critic-mode=unavailable` with the UNAVAILABLE caution banner rendered.
 
 Supporting sections referenced throughout:
 
@@ -456,10 +487,10 @@ Use GitHub tools to fetch the PR details and list all changed files. Classify ea
 
 **Choose review depth.** Based on the changed-file inventory, classify the PR into one of two tracks:
 
-| Track           | When it applies                                                                                                                                                                                                                           | Workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Fast path**   | The PR modifies **only** files from the allowlist below, AND total additions + deletions across spec files is < 200 lines.                                                                                                                | Run Step 2 (load minimal rule set), Step 4 (systematic review of changed files only), **Step 4.5 (downstream-CI impact check) whenever a fast-path finding would add or tighten a type, format, decorator, `x-ms-*` extension, or schema constraint**, Step 5.5 (existing-comment reconciliation plan), Step 6 (report), Step 7 (critic), Step 8-10. **Skip Steps 3, 3.5, 4a, and 5.** If any finding is produced, perform the minimal previous-version check needed to tag it `[NEW]` / `[EXISTING]`; if that check is not trivial, escalate to full review before rendering. Because Step 3.5 is skipped, no Mermaid graphs are produced; the Reviewer MUST tell the Critic this in Step 7 Input #9 (`graphs-produced: false`) so the Critic records `Graph integrity = N/A` instead of attempting a diff against absent graphs. |
-| **Full review** | Anything else - any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, any PR >= 200 lines. | Run all steps 2-10 (Step 5.5 included).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Track           | When it applies                                                                                                                                                                                                                           | Workflow                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Fast path**   | The PR modifies **only** files from the allowlist below, AND total additions + deletions across spec files is < 200 lines.                                                                                                                | Run Step 2 (load minimal rule set), Step 4 (systematic review of changed files only), **Step 4.5 (downstream-CI impact check) whenever a fast-path finding would add or tighten a type, format, decorator, `x-ms-*` extension, or schema constraint**, Step 5.5 (existing-comment reconciliation plan), Step 6 (report), Step 7 (critic), Step 8-10. **Skip Steps 3, 3.5, 4a, and 5.** If any finding is produced, perform the minimal previous-version check needed to tag it `[NEW]` / `[EXISTING]`; if that check is not trivial, escalate to full review before rendering. Because Step 3.5 is skipped, no Mermaid graphs are produced; the Reviewer MUST tell the Critic this in Step 7 by passing `Graphs: false` so the Critic records `Graph integrity = N/A` instead of attempting a diff against absent graphs. |
+| **Full review** | Anything else - any change to a `.json` spec under `stable/` or `preview/`, any `.tsp` source change, any new API version directory, any `readme.md` AutoRest tag/input-file change, any `suppressions.yaml` change, any PR >= 200 lines. | Run all steps 2-10 (Step 5.5 included).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 **Fast-path allowlist** (a PR qualifies only if _every_ changed file matches one of these):
 
@@ -577,13 +608,12 @@ In summary-text mode the Reviewer:
 - Still produces all structural findings derived from the in-memory
   graph; tag each as `Source: structural-analysis (graph downgraded)`
   in the finding body so the human sees the analysis happened.
-- Sets `graphs-produced: downgraded` in Critic Input #9 (instead of
-  `true` or `false`). The Critic records `Graph integrity = N/A` for
-  rendered-diff purposes but is **still required** to independently
-  re-derive the **sensitive-data-flow** view in summary form -- it is
-  the highest-value missed-violation signal and rendering cost is
-  irrelevant to its analysis. The Critic skips re-derivation of the
-  resource / operation / version-delta views under `downgraded`.
+- Sets `Graphs: false` in the Critic input (instead of `true`). The
+  Critic records `Graph integrity = N/A` for rendered-diff purposes
+  but is **still encouraged** to independently re-derive the
+  **sensitive-data-flow** view in summary form -- it is the
+  highest-value missed-violation signal and rendering cost is
+  irrelevant to its analysis.
 
 Downgrading is not a license to skip structural analysis; it is a
 rendering choice that keeps the chat surface usable on extreme-scale
@@ -601,23 +631,23 @@ findings the step exists to catch.
 
 If graph derivation fails (a spec file cannot be parsed, the in-memory
 graph cannot be built within the available context budget, a `$ref`
-resolver throws, etc.), apply this fallback ladder in order. **Do not**
-set `graphs-produced: false` -- that value is reserved for the
-fast-path-by-design case and is silent. The full-review failure mode
-is `graphs-produced: degraded`, which is never silent.
+resolver throws, etc.), apply this fallback ladder in order. The
+failure must always be made visible via the banner below; never set
+`Graphs: false` silently on a full-review PR.
 
 1. **Retry with smaller scope.** Re-attempt graph derivation on a
    trimmed file set (e.g., one namespace at a time, then merge the
    per-namespace graphs). Most failures are context-budget issues that
    retry-on-subset resolves. This is the default; try it before
    escalating.
-2. **Continue with `graphs-produced: degraded`.** If retry fails, set
-   Input #9 to `degraded`, render the `[!CAUTION]` banner below at the
-   top of the Step 6 report, and proceed with the remaining steps.
-   The Critic records `Graph integrity = N/A` (same gating effect as
-   `false`), but the banner ensures the human cannot mistake the
-   review for structurally complete. Record the failure cause in the
-   banner so future reviewers know what to retry differently.
+2. **Continue with `Graphs: false` plus the failure banner.** If retry
+   fails, set the Critic input to `Graphs: false`, render the
+   `[!CAUTION]` banner below at the top of the Step 6 report, and
+   proceed with the remaining steps. The Critic records
+   `Graph integrity = N/A`, but the banner ensures the human cannot
+   mistake the review for structurally complete. Record the failure
+   cause in the banner so future reviewers know what to retry
+   differently.
 3. **Abort the review.** Only reach this branch on explicit human
    direction, typically when the PR touches secret-bearing properties
    or LIST operations where Step 3.5 is the primary detection
@@ -637,9 +667,10 @@ The required banner for option 2:
 > spot-check before merging high-risk changes.
 ```
 
-`graphs-produced: degraded` is a first-class signal: telemetry, evals,
-and the Critic can distinguish "intentionally skipped on fast path"
-from "attempted and failed on full review."
+The banner is the first-class signal for graph-derivation failure;
+telemetry, evals, and the human reviewer use it (not a separate input
+flag) to distinguish "intentionally skipped on fast path" from
+"attempted and failed on full review."
 
 **Read [`.github/skills/azure-api-review/references/think-in-graphs.md`](../skills/azure-api-review/references/think-in-graphs.md) before producing the graphs.** That reference is the canonical specification for:
 
@@ -724,7 +755,7 @@ For each persona, produce a short internal note ("persona X found N candidate is
 The full procedure is in the shared reference
 [`downstream-ci-impact.md`](../skills/azure-api-review/references/downstream-ci-impact.md):
 scope, the five required-shape rules, suppression `where:` exact-match
-guarantee, and the Critic FAIL classifications (all non-overridable).
+guarantee, and the Critic FAIL classifications.
 Edit there only; do not duplicate the procedure in this file.
 
 **Reviewer obligations.** Before producing any in-scope finding
@@ -745,9 +776,11 @@ Edit there only; do not duplicate the procedure in this file.
    [`linter-rule-coverage.md`](../skills/azure-api-review/references/linter-rule-coverage.md)
    has no entry for the affected rule -- do not invent coverage.
 
-A finding that violates any of the above is a **non-overridable**
-Critic FAIL (`downstream-ci-conflict` or `suppression-path-mismatch`);
-self-checks do not substitute. Recovery is in the reference file's
+A finding that violates any of the above is a Critic FAIL
+(`downstream-ci-conflict` or `suppression-path-mismatch`). The FAIL
+is overridable with a justification, but the Reviewer SHOULD prefer
+to rephrase the finding rather than override -- the downstream CI does
+not honor Critic overrides. Recovery is in the reference file's
 "Failure modes" table.
 
 ### Step 4a: New vs. Existing Issue Classification
@@ -820,11 +853,11 @@ Build the posting plan **before** writing the Step 6 report. Two reasons: (a) th
 
 **5. Scenario D detection.** If every finding from step 3 is labelled SKIP-COVERED or REPLY-LINE-SHIFT (i.e., no POST-NEW or RESOLVE-AND-REPOST replacement comments will be created), set an internal `Scenario-D` flag. The Step 6 Reconciliation Plan section renders the Scenario-D notice and Step 8 makes this explicit when asking for approval. RESOLVE-AND-REPOST is not Scenario D because it resolves an old agent thread and posts a replacement inline comment.
 
-**6. Record the reconciliation plan** as a structured table (per-finding actions, per-existing-thread dispositions, including proof-of-fix anchors). This plan is rendered verbatim in Step 6's `Reconciliation Plan` section and passed verbatim to the Critic in Step 7 as Input #6.
+**6. Record the reconciliation plan** as a structured table (per-finding actions, per-existing-thread dispositions, including proof-of-fix anchors). This plan is rendered verbatim in Step 6's `Reconciliation Plan` section and passed verbatim to the Critic in Step 7 under the `## Step 5.5 reconciliation plan` heading.
 
-**Failure handling.** If the comment list cannot be fetched (auth lapse, rate limit, malformed response), do **not** silently proceed. Report the failure to the human per the Failure Modes table and ask whether to (a) retry, (b) proceed without reconciliation - which risks posting duplicates and skips fix-verification - or (c) stop. If the human chooses (b), every finding defaults to POST-NEW, no Scenario E/F entries are produced, the Step 6 Reconciliation Plan section **must** open with the following `[!CAUTION]` banner, **and** the Reviewer MUST pass the literal string `reconciliation skipped` as Input #6 to the Critic in Step 7 (do not pass an empty plan or omit the input).
+**Failure handling.** If the comment list cannot be fetched (auth lapse, rate limit, malformed response), do **not** silently proceed. Report the failure to the human per the Failure Modes table and ask whether to (a) retry, (b) proceed without reconciliation - which risks posting duplicates and skips fix-verification - or (c) stop. If the human chooses (b), every finding defaults to POST-NEW, no Scenario E/F entries are produced, the Step 6 Reconciliation Plan section **must** open with the following `[!CAUTION]` banner, **and** the Reviewer MUST pass the literal string `reconciliation skipped` to the Critic in Step 7 in place of the plan content (do not pass an empty plan).
 
-**Sentinel-string contract.** The literal string `reconciliation skipped` is the **only** signal the Critic accepts as "no plan submitted." Pass it when no plan exists - specifically: existing-comment fetch failure (above) or explicit human cancellation of reconciliation. **A plan whose every row is POST-NEW is still a plan** (e.g., a PR with zero existing comments produces a real plan that maps every finding to POST-NEW); pass it verbatim so the Critic independently verifies each POST-NEW entry per its Re-validation Procedure step 7. Never pass an empty plan, an empty string, or omit Input #6 - the Critic interprets those as malformed and will FAIL the run.
+**Sentinel-string contract.** The literal string `reconciliation skipped` is the **only** signal the Critic accepts as "no plan submitted." Pass it when no plan exists - specifically: existing-comment fetch failure (above) or explicit human cancellation of reconciliation. **A plan whose every row is POST-NEW is still a plan** (e.g., a PR with zero existing comments produces a real plan that maps every finding to POST-NEW); pass it verbatim so the Critic independently verifies each POST-NEW entry per its Re-validation Procedure step 7. Never pass an empty plan or an empty string in place of the plan; the Critic treats those as missing input.
 
 <!-- Render the banner below verbatim at the top of the Step 6 `Reconciliation Plan` section ONLY when the failure-handling branch fires (fetch failure + human elects to proceed, or human cancellation). -->
 
@@ -967,13 +1000,43 @@ Findings the critic returned `FAIL` on that were dropped in revision. Listed for
     > **Critic: UNAVAILABLE** - independent verification did not run for this review. All findings are reviewer self-check only. -->
 ```
 
-**Internal tracking (not rendered to the reviewer).** You must still track the critic's verdict, mode (`subagent | session-handoff | unavailable`), iteration count, and the `Next-step recommendation` (`READY TO POST | REVISE RECOMMENDED | MANUAL DECISION REQUIRED | SESSION INVALIDATED`) - these gate Step 8 and feed the hidden HTML telemetry markers on posted comments. They are simply not part of the chat-rendered report unless the exception conditions above are met.
+**Internal tracking (not rendered to the reviewer).** You must still track the critic's verdict, mode (`subagent | unavailable`), iteration count, and the `Next-step recommendation` (`READY TO POST | REVISE RECOMMENDED | MANUAL DECISION REQUIRED | SESSION INVALIDATED`) - these gate Step 8 and feed the hidden HTML telemetry markers on posted comments. They are simply not part of the chat-rendered report unless the exception conditions above are met.
 
 Use the rule IDs from the instruction files (e.g., `RPC-Put-V1-01`, `RPC-Patch-V1-10`, `ARG001`, `TSP-2.1`). For generic rules without an explicit ID, cite the section name (e.g., "Section 6.1 - Naming", "Section 9 - Collections & Pagination").
 
 ### Step 7: Mandatory Critic Review (gate -- no findings leave this step unverified)
 
 After producing the Step 6 report and **before** presenting findings to the human reviewer for posting approval, you **MUST** invoke the **ARM API Review Critic** sub-agent ([`.github/agents/arm-api-review-critic.agent.md`](./arm-api-review-critic.agent.md)).
+
+#### Do this immediately (concrete invocation -- copy/adapt verbatim)
+
+The very first action of Step 7 is a single `runSubagent` call. Do not narrate, do not summarize the Step 6 report in chat first, do not ask the human "should I run the critic?". Just dispatch.
+
+```text
+runSubagent(
+  agentName: "ARM API Review Critic",
+  description: "Critic verification iter <N> pr=<owner/repo#number>",
+  prompt: <<<
+PR: <owner>/<repo>#<number>
+Head SHA: <full-40-char-session-SHA pinned in Step 1>
+Base: <full-40-char-base-sha-or-ref>   # or: new service
+Iteration: <1|2|3>
+Graphs: <true|false>                   # false on fast path
+
+## Step 6 findings report
+
+<verbatim Step 6 report -- full body on iteration 1; compact-mode on iteration >= 2 if iteration 1 exceeded ~20 KB, see "Compact-mode iteration prompt" below>
+
+## Step 5.5 reconciliation plan
+
+<verbatim Step 5.5 plan -- or the literal string `reconciliation skipped`>
+>>>
+)
+```
+
+Field semantics live in [`./protocols/arm-api-review-critic-inputs.template.md`](./protocols/arm-api-review-critic-inputs.template.md) and [the shared protocol](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic). Required: PR, Head SHA, the report. Everything else has a default. Tolerant prose -- not a rigid YAML schema -- so the only ways this call fails are listed under "Rung 1 has failed if..." below.
+
+**Compact-mode iteration prompt (use only when iteration >= 2 AND iteration 1's prompt was large enough to risk a host-side prompt-size truncation).** Default for every iteration is "send the full report verbatim." Use compact mode only as a size-pressure escape valve. Compact mode replaces unchanged findings with a one-line `carry-over` row that records the prior iteration's per-finding verdict; the Critic re-fetches each cited file at the session SHA and re-verifies the changed findings from scratch, then accepts carry-over for the unchanged ones. The compact wire format is defined in [the protocol's Compact-mode iteration prompt](./protocols/arm-api-review-critic.protocol.md#compact-mode-iteration-prompt-iteration--2-only).
 
 **Forcing function: Step 6 is not complete without Step 7.** The report produced in Step 6 is a draft until the critic has run (or the fallback ladder below has been applied and the required exception banner is included in the report). You **MUST NOT** show the findings, the next-step recommendation, or any post/skip/edit prompt to the human, and you **MUST NOT** answer any "should I post?" / "can you fix these?" / "what about the warnings?" question from the human, until either (a) the critic has returned a verdict and you have folded its corrections (severity changes, reclassifications, drops, overrides) into the report, or (b) the fallback ladder has been applied and - if it landed on UNAVAILABLE or MANUAL DECISION REQUIRED - the corresponding exception banner from the Step 6 template is rendered. Presenting findings without one of these states is a constraint violation. If the human asks you to advance to Step 8 before Step 7 has completed, refuse and explain why.
 
@@ -994,29 +1057,43 @@ invariant rather than of Step 7 alone. Step 7 implements the mechanics; the
 invariant defines the gate. If you reached this anchor from an older link,
 read the anti-patterns list there.
 
-**Inputs to pass to the critic.** **Copy the YAML template at
+**Inputs to pass to the critic.** **Copy the template at
 [`./protocols/arm-api-review-critic-inputs.template.md`](./protocols/arm-api-review-critic-inputs.template.md)
-verbatim** into every dispatch prompt (and every session-handoff paste);
-the Critic FAILs with `missing-inputs` if the `# critic-inputs/v1`
-fenced YAML block is absent or malformed. Field semantics, the
-empty-list rule, and the sentinel-string contract live in the
+verbatim** into every dispatch prompt.
+The wire format is tolerant prose -- a short prelude followed by the
+report and the reconciliation plan. Field semantics live in the
 [shared protocol](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic).
-The list below restates the field meanings for in-file readability:
+Concretely:
 
-1. PR URL (owner, repo, number).
-2. **The session SHA captured in Step 1.** This is the PR head commit SHA that the entire review session is pinned to. The Critic MUST use exactly this SHA for every file re-fetch across every iteration. The Critic MUST NOT re-resolve the PR head, follow the branch name, or otherwise pick up a newer commit between iterations - if it does, it is verifying a different tree than the one the Reviewer judged, and any disagreement is meaningless.
-3. The full Step 6 findings report (verbatim).
-4. The list of files you reviewed.
-5. The previous-version path and base SHA/ref you used in Step 4a (for example, `base-sha: <sha>; path: <path>`), or "None - new service".
-6. **The Step 5.5 reconciliation plan** (verbatim) - per-finding actions (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT) and per-existing-thread dispositions (THANK-AND-RESOLVE / PROPOSE-HUMAN-RESOLVE), each with anchors (existing comment URL, and for fix-verified dispositions: original line, re-read line at session SHA, construct description). If Step 5.5 ran in the failure-handling "skipped" mode, pass the literal string "reconciliation skipped" so the Critic records `Reconciliation accuracy = N/A`.
-7. **Prior iterations' FAIL set summary** (iteration N-1 and N-2 only) - the rule ID + file/line tuples that came back `FAIL` in each prior iteration. Pass an empty list on iteration 1; pass the iteration-1 FAIL set on iteration 2; pass iterations 1+2 on iteration 3. The Critic uses this to suppress already-considered failures across iterations (it is stateless across invocations and cannot reconstruct its own prior FAIL sets).
-8. **Considered-and-declined list** - the rule-ID + file/line tuples of every `Likely missed violations` candidate the Critic surfaced in prior iterations that the Reviewer evaluated and chose **not** to promote to a finding, with a one-line rationale per entry (e.g., `proxy-resource-no-provisioningState: rule does not apply to proxy resources`). The Critic MUST suppress candidates already on this list unless a re-fetch surfaces new evidence the prior rationale did not address. Empty list on iteration 1. Without this list, advisory items re-surface every iteration and convergence becomes impossible except via the iteration cap.
-9. **Graph production flag** - `graphs-produced: true|false|downgraded|degraded`.
-   - `true` on any full-review PR where Mermaid graphs appear in the Step 6 report; the Critic performs the full graph-diff.
-   - `false` on fast-path reviews (Step 3.5 was skipped by design); the Critic records `Graph integrity = N/A` and skips re-derivation silently. **Forbidden on full-review PRs** -- use `degraded` instead so the banner fires.
-   - `downgraded` on full-review PRs where the Step 3.5 size guardrail tripped (see Step 3.5 "Size guardrail"); the Critic records `Graph integrity = N/A` but is **still required** to independently re-derive the sensitive-data-flow view in summary form, because rendering cost does not affect secret-leak analysis.
-   - `degraded` on full-review PRs where graph derivation was attempted and failed even after retry (see Step 3.5 "Failure recovery"); the Critic records `Graph integrity = N/A` and the Step 6 report MUST carry the failure banner.
-10. **Current iteration number** (`1` through `3`). The Critic's output header MUST echo this value; the Reviewer increments it on each re-invocation.
+**Required:**
+
+1. **PR** -- `owner/repo#number`.
+2. **Head SHA** -- the full 40-char commit SHA pinned at Step 1. Binding
+   for every file fetch by both agents across every iteration. The Critic
+   MUST use exactly this SHA; if it re-resolves the PR head between
+   iterations, it is verifying a different tree than the one you judged.
+3. **Step 6 findings report** -- verbatim, under the `## Step 6 findings
+report` heading.
+
+**Optional (sensible defaults apply if absent):**
+
+4. **Base** -- the base SHA/ref for previous-version fetches used in Step
+   4a, OR the literal string `new service`.
+5. **Iteration** -- `1`, `2`, or `3` (Step 7 hard cap). Defaults to `1`.
+6. **Graphs** -- `true` if the Step 6 report has Mermaid graphs (full
+   review), `false` if not (fast path). Defaults to `true`.
+7. **Step 5.5 reconciliation plan** -- verbatim under the `## Step 5.5
+reconciliation plan` heading, OR the literal sentinel
+   `reconciliation skipped` (the Critic records `Reconciliation accuracy
+= N/A`).
+
+**Iteration carryover (fold inline; no separate input fields).** If the
+Critic surfaced `Likely missed violations` candidates in a prior
+iteration that you evaluated and chose not to promote, note them inline
+in the Step 6 report under a `Considered and declined` heading with a
+one-line rationale per entry. The Critic re-reads the report each
+iteration and respects this inline carryover; no separate `prior_fail_sets`
+or `considered_and_declined` input is needed.
 
 If at any point during the iteration loop a tool call surfaces that the PR head has moved past the session SHA, abort the loop immediately, report the SHA change to the human, and ask whether to restart at the new head or stop. Do **not** silently re-pin.
 
@@ -1048,13 +1125,13 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 
 10. **Graph fabrication is binding and non-overridable.** If the Critic returns `Graph integrity = FAIL: fabrication`, identify every finding whose evidence depends on the fabricated node(s) or edge(s) -- including findings that cite "asymmetric CRUD," "unreachable schema," "secret in LIST," or any structural claim derived from Step 3.5 graphs. Drop those findings or correct them by re-deriving from the re-fetched files, regenerate the Step 6 Mermaid blocks from the corrected graphs, and re-invoke the Critic. Like reconciliation `FAIL`s (item 9), a graph-fabrication `FAIL` MAY NOT be cleared via the `critic: override` telemetry marker -- silently posting findings backed by a fabricated graph is exactly the failure mode this verdict exists to prevent.
 11. **Session invalidation overrides every other verdict.** If the Critic returns `Finding accuracy = INVALIDATED` with reason `session-sha-moved` or `session-sha-unreachable`, ignore all other tracks (Graph, Reconciliation, Coverage, per-finding annotations) -- they were computed against a tree that no longer matches the PR. Do not fold corrections in. Do not advance to Step 8. The only legal next actions are: re-run the entire review from Step 1 with a freshly-pinned session SHA (creating a new session), or abandon. Surface the Critic's reported SHAs verbatim to the human so they can audit the drift.
-12. **Defensive cross-check on `Reconciliation accuracy = N/A`.** `N/A` is legitimate **only** when Input #6 was the literal string `reconciliation skipped`. If the Critic returns `N/A` but Step 5.5 actually produced a non-empty plan, treat the run as `MANUAL DECISION REQUIRED` - the plan was lost in transit and the Critic verified nothing. Re-invoke once with the plan re-attached; if `N/A` recurs against a non-empty plan, escalate to the human.
+12. **Defensive cross-check on `Reconciliation accuracy = N/A`.** `N/A` is legitimate **only** when the reconciliation-plan input was the literal string `reconciliation skipped`. If the Critic returns `N/A` but Step 5.5 actually produced a non-empty plan, treat the run as `MANUAL DECISION REQUIRED` - the plan was lost in transit and the Critic verified nothing. Re-invoke once with the plan re-attached; if `N/A` recurs against a non-empty plan, escalate to the human.
 13. **Override workflow for human-overridable Critic FAILs (finding-level only).** Overrides are applied **between Critic iterations** at an interactive checkpoint, not silently at presentation time. The workflow:
     1. **Auto-iterate the first two iterations.** If the Critic returns finding-level FAILs at iteration 1 or 2, attempt the recommended corrections (drop, fix line, fix rule citation) and re-invoke. Do **not** consult the human or apply overrides yet.
     2. **Interactive checkpoint at iteration 3 (the cap).** If a finding-level FAIL persists into iteration 3 and you believe the Critic is wrong, **stop the auto-loop** and present the persistent FAIL(s) to the human verbatim: the Critic's reason, the cited rule's verbatim quote, and your counter-argument. Offer three choices: (a) drop the finding (default), (b) supply an override with structured justification (see below), (c) escalate to MANUAL DECISION REQUIRED. Note: with the hard cap at 3, an override chosen here is the final word -- the Critic's `override-reason` validator (Re-validation Procedure step 5) is re-run by the Reviewer locally rather than via a fourth Critic invocation. The validator logic is the same; only the runner changes.
     3. **Structured override justification (required for choice b).** The `override-reason` MUST satisfy the three-check validator defined in the shared protocol (length, denylist, and structured-anchor-or-quote requirement). See [protocol -> Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator) for the canonical specification and denylist. Length-only or paraphrase-only justifications fail the validator.
     4. **Fold the override and re-invoke (when iterations remain).** Add the `**Note:** Critic FAILed this finding (<reason>); reviewer overrode with justification: <reason>.` line to the finding. If the override was chosen at iteration 1 or 2, re-invoke the Critic; the Critic's `override-reason` validation (Re-validation Procedure step 5) will re-check the structured-anchor requirement, and an `override-reason-invalid` FAIL from the Critic is **non-overridable** -- the only legal responses are to supply a better justification and re-invoke, or to drop the finding. If the override was chosen at iteration 3 (the cap), the Reviewer re-runs the same validator locally; an `override-reason-invalid` failure is likewise non-overridable.
-    5. **Reconciliation FAILs, graph-fabrication FAILs, `downstream-ci-conflict` FAILs, and `suppression-path-mismatch` FAILs are never overridable** (per items 9, 10, and Step 4.5). They do not enter this workflow.
+    5. **Reconciliation FAILs, graph-fabrication FAILs, and posting-hygiene FAILs (`unescaped-mention`, `hash-number-autolink`) are never overridable** (per the protocol's [Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog)). They do not enter this workflow. Other FAILs (including `downstream-ci-conflict` and `suppression-path-mismatch`) are overridable with a justification, though the Reviewer should prefer to address them by rephrasing as multi-option recommendations per Step 4.5.
 
 **Setting the `Next-step recommendation` (top of report):**
 
@@ -1070,34 +1147,29 @@ If at any point during the iteration loop a tool call surfaces that the PR head 
 
 **Critic failures are not silent, and self-critique is not a substitute.** The whole point of the critic is independent verification by a different agent with a different system prompt and a narrower tool surface. A self-review by this same agent has none of those properties and cannot replace the critic. Apply the following fallback ladder in order. **Never** silently substitute inline self-critique for the critic and present it as a passing verdict.
 
-**Fallback announcement rules.** On the happy path (subagent invocation succeeds), do **not** announce the critic mode in chat - it is internal plumbing. The fallback ladder below uses **Rung 1 / Rung 2 / Rung 3** to avoid collision with the main workflow's Step 1 / Step 2 / Step 3 numbering. Only emit a visible message when the fallback ladder is engaged:
+**Fallback announcement rules.** On the happy path (subagent invocation succeeds), do **not** announce the critic mode in chat - it is internal plumbing. The fallback ladder below uses **Rung 1 / Rung 2** to avoid collision with the main workflow's Step 1 / Step 2 numbering. Only emit a visible message when the fallback ladder is engaged:
 
 - **Rung 1 (subagent) success** -> silent. Track `Critic mode: subagent` internally.
-- **Rung 1 fails -> entering Rung 2** -> you **must** emit the session-handoff prompt below verbatim before doing anything else. This is not optional.
-- **Rung 3 reached** -> render the UNAVAILABLE exception banner at the top of the Step 6 report.
+- **Rung 1 fails after 3 retries -> entering Rung 2** -> automatically mark `Critic mode: unavailable`, set `Next-step recommendation: MANUAL DECISION REQUIRED`, and render the UNAVAILABLE exception banner in both required locations.
 
-1. **Rung 1 -- Preferred: invoke the critic as a subagent.** Use the host's subagent dispatch (the `agent` tool with agent name `ARM API Review Critic`) to invoke [`.github/agents/arm-api-review-critic.agent.md`](./arm-api-review-critic.agent.md). Track `Critic mode: subagent` internally. If the call returns an error (tool-not-found, dispatch-failed, agent-not-found), go to Rung 2 immediately. Do **not** retry silently and do **not** fall through to Rung 3.
-2. **Rung 2 -- Mandatory if Rung 1 fails: session-handoff.** This rung is **not optional** and cannot be skipped by your own judgement. You must stop and emit, verbatim:
+1. **Rung 1 -- Preferred: invoke the critic as a subagent.** Use the host's subagent dispatch (the `agent` tool with agent name `ARM API Review Critic`) to invoke [`.github/agents/arm-api-review-critic.agent.md`](./arm-api-review-critic.agent.md). Track `Critic mode: subagent` internally.
 
-   > "Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended)."
+   Rung 1 has **failed** if the dispatch returns **any** of:
+   - (a) A tool-error response (e.g., `tool-not-found`, `dispatch-failed`, `agent-not-found`).
+   - (b) An **empty / zero-content response** (the host returns `Agent completed with no output`, an empty string, or an equivalent silent return). Per the protocol's [Non-empty response invariant](./protocols/arm-api-review-critic.protocol.md#non-empty-response-invariant), the Critic **never** returns empty -- a silent dispatch return is a host-side failure, **not** a passing verdict. Common causes include host-side dispatch errors, prompt-size limits, and (less commonly than before) malformed inputs that confuse the Critic's tolerant parser.
+   - (c) A response that contains **no usable critic verdict envelope**: no valid `<!-- critic-verdict: ... -->` marker in the first 20 non-empty lines **and** no parseable `### Verdict` table with all four tracks (`Finding accuracy`, `Graph integrity`, `Reconciliation accuracy`, `Coverage quality`). Host wrappers may prepend text; do not require the marker to be the literal first line for acceptance.
 
-   Then **wait**. Do not produce findings, recommendations, posting prompts, or fix suggestions while waiting. The only legal way to leave this waiting state is one of:
-   - The human pastes a critic verdict. Before folding it in, validate it against the protocol's [Session-handoff verification](./protocols/arm-api-review-critic.protocol.md#session-handoff-verification-fallback-path) checks -- all five MUST pass:
-     1. The Critic header `PR:` exactly matches the current PR under review.
-     2. The Critic header `Head SHA:` exactly matches the session SHA pinned in Step 1.
-     3. The Critic header `Base SHA/Ref:` matches the base SHA/ref pinned in Step 1 (Critic Input #5). It MAY be omitted or rendered `n/a` only when no previous version exists ("None - new service").
-     4. The Critic header `Iteration:` is `1`-`3` and is consistent with the current loop iteration.
-     5. The pasted output begins with a valid `<!-- critic-verdict: ... -->` marker (literal first line) whose field values match the `### Verdict` table body byte-for-byte. A missing or malformed marker, or values that disagree with the table, is an invalid handoff per the protocol's [Critic-verdict marker parsing contract](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response).
-     6. The pasted output contains, verbatim, both a `### Verdict` section and a `### Per-finding annotations` section. A paste missing either section is invalid -- the Reviewer parses both programmatically.
-        If **any** of the six checks fails, reject the pasted verdict as invalid handoff data, state which check failed, and request a corrected verbatim paste. Free-form acknowledgments such as "looks fine" are never valid substitutes.
-   - The human explicitly replies `skip critic` (or unambiguous equivalent such as "skip the critic", "no critic", "proceed without critic"). Only then may you advance to Rung 3.
-   - The human cancels the review.
+   **Rung-1 retry rule for transient failures (failure shapes a/b/c when plausibly transient).** Empty / zero-content returns are most often host-side prompt-size truncation, and tool errors can also be transient (`dispatch-failed`, timeout, temporary routing failures). Before advancing to Rung 2, retry Rung 1 **up to 3 times** with a reduced payload:
+   - On iteration 1 (no prior verdict to carry over): re-dispatch with the same required inputs but strip any non-contract narrative (keep PR/Head SHA/Base/Iteration/Graphs + Step 6 findings report + Step 5.5 plan only).
+   - On iteration >= 2: re-dispatch using the compact-mode format from [the protocol's Compact-mode iteration prompt](./protocols/arm-api-review-critic.protocol.md#compact-mode-iteration-prompt-iteration--2-only), which replaces unchanged-finding bodies with one-line carry-over rows.
 
-   You **must not** decide on your own that the human would refuse, that the handoff is too much friction, or that self-check is good enough. Predicting refusal is not the same as receiving refusal. If you are tempted to skip Rung 2 because asking feels redundant or annoying, that is exactly the failure mode this rule exists to prevent.
+Emit a single chat-visible diagnostic line per retry attempt (for example, `Rung-1 dispatch failed (attempt 1/3); retrying with reduced payload.`). If all 3 retry attempts also return failure shape (a), (b), or (c), advance to Rung 2 immediately. **Do not retry more than 3 times.**
 
-3. **Rung 3 -- Last resort: disclose and stop. Only reachable via explicit human refusal in Rung 2.** If, and only if, the human explicitly opted out of the handoff in Rung 2, do **not** post anything. Track `Critic mode: unavailable` and `Next-step recommendation: MANUAL DECISION REQUIRED` internally, and render the UNAVAILABLE exception banner from the Step 6 template **in both required locations: at the top of the report AND in the Summary section** (the two `[!CAUTION]` blocks shown in the Step 6 template are both mandatory -- per-finding annotations stay omitted on this path). The banner **must** state that the human opted out; do not use this branch silently.
+On any other Rung-1 failure (or after the third retry has also failed), emit a **single chat-visible diagnostic line** naming the specific failure shape (for example, `Rung-1 dispatch returned empty after retry 3/3 -- marking critic unavailable and continuing.`), then go to Rung 2 immediately.
 
-If the critic itself errors mid-run (returns malformed output, times out, fails to fetch a file), report the failure verbatim to the human and ask whether to retry, switch to session-handoff, or stop. "Self-critique fallback" is **not** an option on this menu.
+2. **Rung 2 -- Automatic unavailable fallback if Rung 1 still fails.** This rung is automatic and requires no user action. If all retries in Rung 1 fail, do **not** stop and do **not** ask the human to run the Critic manually. Track `Critic mode: unavailable` and `Next-step recommendation: MANUAL DECISION REQUIRED` internally, and render the UNAVAILABLE exception banner from the Step 6 template **in both required locations: at the top of the report AND in the Summary section** (the two `[!CAUTION]` blocks shown in the Step 6 template are both mandatory -- per-finding annotations stay omitted on this path).
+
+If the critic itself errors **mid-run** -- i.e., the dispatch returned content but that content is unusable: the `### Verdict` table is malformed, the verdict marker disagrees with the table body, every cited file came back with `FAIL: file-fetch-failed`, the response is truncated, the Critic itself timed out, etc. -- report the failure verbatim to the human and continue in `critic-mode=unavailable` (no user action required). "Self-critique fallback" is **not** an option on this menu.
 
 #### Canonical output templates for protocol-only responses
 
@@ -1125,12 +1197,14 @@ Choose one:
 Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate further until you choose.
 ```
 
-**Template B -- Session-handoff prompt (Step 7 fallback Rung 2).** Emitted verbatim when `runSubagent` for `ARM API Review Critic` fails. No findings; the response is the literal prompt below preceded by the marker.
+**Template B -- Critic unavailable disclosure (Step 7 fallback Rung 2).** Emitted verbatim when `runSubagent` for `ARM API Review Critic` fails after retries. No findings; the response is the literal notice below preceded by the marker.
 
 ```markdown
-<!-- review-state: critic-mode=pending | iteration=<N> | pr=<owner/repo#number> -->
+<!-- review-state: critic-mode=unavailable | iteration=<N> | pr=<owner/repo#number> -->
 
-Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
+> [!CAUTION]
+> **Critic UNAVAILABLE** - independent verification could not be completed after 3 retry attempts. The reviewer will continue with reviewer self-check only.
+> No action is required from you to continue this review.
 ```
 
 The wording of the prompt body MUST match the Rung 2 template above byte-for-byte (it is the same string defined in Step 7); substitute only the marker placeholders.
@@ -1167,7 +1241,7 @@ The wording of the prompt body MUST match the Rung 2 template above byte-for-byt
   <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
   ```
 
-- **Telemetry-degraded fallback** (when one or more required per-comment fields cannot be assembled -- see the protocol's [Telemetry fallback policy](./protocols/arm-api-review-critic.protocol.md#telemetry-fallback-policy-load-bearing)). Emit the minimal marker below in place of the full 6-field form; the comment itself still posts. The `reason:` value SHOULD be a short machine-friendly identifier (`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`, `assembly-error`). Example marker:
+- **Telemetry-degraded fallback** (when one or more required per-comment fields cannot be assembled -- see the protocol's [Telemetry fallback policy](./protocols/arm-api-review-critic.protocol.md#telemetry-fallback-policy)). Emit the minimal marker below in place of the full 6-field form; the comment itself still posts. The `reason:` value SHOULD be a short machine-friendly identifier (`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`, `assembly-error`). Example marker:
 
   ```html
   <!-- posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: head-sha-unavailable -->
@@ -1364,19 +1438,19 @@ ever disagree with the protocol file, the protocol file wins; file a bug.
 
 When a step in the workflow fails, recover deterministically using the table below rather than guessing or silently continuing. **Never fabricate file content or rule citations to fill a gap caused by a fetch failure.**
 
-| Failure                                              | Detection                                                                                                                                                                              | Recovery                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Previous-version file not found** (Step 3 / 4a)    | `get_file_contents` returns 404 on the base-source prior-version path, or the prior-version directory does not exist.                                                                  | Note explicitly in the report: "Previous version not available - breaking-change comparison skipped." Classify **all** issues found in the new version as `[NEW]` (Step 4a rule for first-version services applies). Do **not** invent an `[EXISTING]` tag without an anchor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| **Changed-file fetch fails**                         | `get_file_contents` errors on a file listed by `list_pull_request_files`.                                                                                                              | Retry once. If it still fails, report the specific file and error to the human, exclude that file from the review, and continue with the rest. Do **not** review a file you could not fetch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **GitHub rate limit hit**                            | API responses include rate-limit headers or `403 rate limit exceeded`.                                                                                                                 | Stop further fetches. Report the limit, the reset time from the response header, and the partial review state to the human. Ask whether to resume after reset or proceed with what was already fetched. Do not switch silently to raw-URL fallback for `azure-rest-api-specs-pr` (private repo - raw URLs will fail unauthenticated).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| **Authentication lapses mid-review**                 | A fetch that previously succeeded starts returning 401.                                                                                                                                | Stop, surface the auth failure verbatim to the human, and ask them to re-authorize the GitHub MCP connection. Do not paper over by switching tools or guessing file content.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Existing-comment fetch fails** (Step 5.5)          | `get_review_comments` errors, returns malformed output, or hits rate limit before the comment list is complete.                                                                        | Per the failure-handling block in Step 5.5: ask the human to (a) retry, (b) proceed without reconciliation - every finding defaults to POST-NEW, no Scenario E/F actions are produced, and the `[!CAUTION]` "Reconciliation skipped" banner is rendered in Step 6's Reconciliation Plan section - or (c) stop. Do **not** silently proceed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **Instruction file load fails**                      | Local read of a `.github/instructions/*.md` file errors.                                                                                                                               | Stop the review and report the failure. The agent has no authority to apply rules it could not load. Do **not** substitute remembered rule text from prior reviews.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| **Critic invocation fails** (Step 7)                 | `agent` tool errors, or the critic returns malformed output.                                                                                                                           | Follow the Step 7 fallback ladder (session-handoff, then disclose-and-stop). Do **not** self-substitute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Comment-post failure** (Step 8)                    | `create_review_comment` errors on a specific finding.                                                                                                                                  | Report which findings posted and which failed. Do not retry blindly - a 422 typically means the line/path is invalid (often a stale SHA). Re-verify against the current head SHA before retry. **Comment body MUST be sent as JSON via `gh api --input <json-file>` (file containing `{"body":"..."}`).** Do **not** use `gh api -f body=@<file>` -- `-f` is a plain-string field and sends the LITERAL string `@<file>`, silently posting useless comments. After every post, re-fetch each created comment (`gh api repos/<owner>/<repo>/issues/comments/<id>` or `pulls/comments/<id>`) and confirm `.body[0:100]` matches the canonical text; if it begins with `@` and a path, the post is broken -- PATCH it with the correct `--input <json-file>` payload.                                                                                                 |
-| **Comment-post returned no visible output** (Step 8) | gh api -X POST .../comments (top-level or inline) returns empty stdout or the wrapping terminal tool reports "no output," instead of the expected { "id": ..., "html_url": ... } JSON. | Do **NOT** retry the POST. Empty output from the wrapping tool is **not** evidence the API call failed -- the comment may have posted successfully and only the stdout was swallowed (encoding, buffering, or tool truncation). Retrying creates duplicates. Instead: list recent comments first (gh api repos/<owner>/<repo>/issues/<n>/comments --paginate --jq '.[-5:][] \| "\(.id) \(.created_at)"' for top-level, pulls/<n>/comments for inline) and check whether your post landed in the last few seconds. If it did, record the ID and proceed. If it did not, then retry. If duplicates are detected (multiple comments with the same body within seconds), delete the older ones via gh api -X DELETE repos/<owner>/<repo>/issues/comments/<id> (or pulls/comments/<id>) and keep the newest, then surface the duplicate-and-cleanup event to the human. |
-| **Inline-anchor 422** (Step 8)                       | `create_review_comment` returns 422 "Line could not be resolved" when posting an inline comment on a line that is unchanged in the PR diff.                                            | The PR Reviews API only accepts inline comments on lines inside the diff hunks. `subject_type: file` is **not** supported by the create-review payload (returns 422 "Field is not defined"). For findings on unchanged lines (typically `[EXISTING]` findings flagged because new sibling code makes them salient), fall back to top-level PR comments via `gh api -X POST repos/<owner>/<repo>/issues/<n>/comments --input <json-file>`, and disclose the fallback in the review preamble (e.g., "Both findings concern lines unchanged in this PR's diff and are posted as top-level PR comments rather than inline.").                                                                                                                                                                                                                                          |
-| **Partial-success state**                            | Some files reviewed, some failed; some comments posted, some not.                                                                                                                      | Always end with a Summary section that distinguishes "reviewed," "skipped due to fetch failure," "posted," and "failed to post." Never present a partial result as complete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Failure                                              | Detection                                                                                                                                                                                             | Recovery                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Previous-version file not found** (Step 3 / 4a)    | `get_file_contents` returns 404 on the base-source prior-version path, or the prior-version directory does not exist.                                                                                 | Note explicitly in the report: "Previous version not available - breaking-change comparison skipped." Classify **all** issues found in the new version as `[NEW]` (Step 4a rule for first-version services applies). Do **not** invent an `[EXISTING]` tag without an anchor.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Changed-file fetch fails**                         | `get_file_contents` errors on a file listed by `list_pull_request_files`.                                                                                                                             | Retry once. If it still fails, report the specific file and error to the human, exclude that file from the review, and continue with the rest. Do **not** review a file you could not fetch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| **GitHub rate limit hit**                            | API responses include rate-limit headers or `403 rate limit exceeded`.                                                                                                                                | Stop further fetches. Report the limit, the reset time from the response header, and the partial review state to the human. Ask whether to resume after reset or proceed with what was already fetched. Do not switch silently to raw-URL fallback for `azure-rest-api-specs-pr` (private repo - raw URLs will fail unauthenticated).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Authentication lapses mid-review**                 | A fetch that previously succeeded starts returning 401.                                                                                                                                               | Stop, surface the auth failure verbatim to the human, and ask them to re-authorize the GitHub MCP connection. Do not paper over by switching tools or guessing file content.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| **Existing-comment fetch fails** (Step 5.5)          | `get_review_comments` errors, returns malformed output, or hits rate limit before the comment list is complete.                                                                                       | Per the failure-handling block in Step 5.5: ask the human to (a) retry, (b) proceed without reconciliation - every finding defaults to POST-NEW, no Scenario E/F actions are produced, and the `[!CAUTION]` "Reconciliation skipped" banner is rendered in Step 6's Reconciliation Plan section - or (c) stop. Do **not** silently proceed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| **Instruction file load fails**                      | Local read of a `.github/instructions/*.md` file errors.                                                                                                                                              | Stop the review and report the failure. The agent has no authority to apply rules it could not load. Do **not** substitute remembered rule text from prior reviews.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Critic invocation fails** (Step 7)                 | `agent` tool errors, returns an empty / zero-content response, or returns content with no usable verdict envelope (no valid marker in first 20 non-empty lines and no parseable `### Verdict` table). | Follow the Step 7 fallback ladder. Retry Rung 1 **up to 3 times** with a reduced payload (compact-mode where applicable; see [protocol](./protocols/arm-api-review-critic.protocol.md#compact-mode-iteration-prompt-iteration--2-only)). If all retries fail, automatically set `critic-mode=unavailable`, render the UNAVAILABLE caution banner, and continue. No user action is required. Do **not** self-substitute. Do **not** treat an empty subagent return as a passing verdict.                                                                                                                                                                                                                                                                                                                                                                            |
+| **Comment-post failure** (Step 8)                    | `create_review_comment` errors on a specific finding.                                                                                                                                                 | Report which findings posted and which failed. Do not retry blindly - a 422 typically means the line/path is invalid (often a stale SHA). Re-verify against the current head SHA before retry. **Comment body MUST be sent as JSON via `gh api --input <json-file>` (file containing `{"body":"..."}`).** Do **not** use `gh api -f body=@<file>` -- `-f` is a plain-string field and sends the LITERAL string `@<file>`, silently posting useless comments. After every post, re-fetch each created comment (`gh api repos/<owner>/<repo>/issues/comments/<id>` or `pulls/comments/<id>`) and confirm `.body[0:100]` matches the canonical text; if it begins with `@` and a path, the post is broken -- PATCH it with the correct `--input <json-file>` payload.                                                                                                 |
+| **Comment-post returned no visible output** (Step 8) | gh api -X POST .../comments (top-level or inline) returns empty stdout or the wrapping terminal tool reports "no output," instead of the expected { "id": ..., "html_url": ... } JSON.                | Do **NOT** retry the POST. Empty output from the wrapping tool is **not** evidence the API call failed -- the comment may have posted successfully and only the stdout was swallowed (encoding, buffering, or tool truncation). Retrying creates duplicates. Instead: list recent comments first (gh api repos/<owner>/<repo>/issues/<n>/comments --paginate --jq '.[-5:][] \| "\(.id) \(.created_at)"' for top-level, pulls/<n>/comments for inline) and check whether your post landed in the last few seconds. If it did, record the ID and proceed. If it did not, then retry. If duplicates are detected (multiple comments with the same body within seconds), delete the older ones via gh api -X DELETE repos/<owner>/<repo>/issues/comments/<id> (or pulls/comments/<id>) and keep the newest, then surface the duplicate-and-cleanup event to the human. |
+| **Inline-anchor 422** (Step 8)                       | `create_review_comment` returns 422 "Line could not be resolved" when posting an inline comment on a line that is unchanged in the PR diff.                                                           | The PR Reviews API only accepts inline comments on lines inside the diff hunks. `subject_type: file` is **not** supported by the create-review payload (returns 422 "Field is not defined"). For findings on unchanged lines (typically `[EXISTING]` findings flagged because new sibling code makes them salient), fall back to top-level PR comments via `gh api -X POST repos/<owner>/<repo>/issues/<n>/comments --input <json-file>`, and disclose the fallback in the review preamble (e.g., "Both findings concern lines unchanged in this PR's diff and are posted as top-level PR comments rather than inline.").                                                                                                                                                                                                                                          |
+| **Partial-success state**                            | Some files reviewed, some failed; some comments posted, some not.                                                                                                                                     | Always end with a Summary section that distinguishes "reviewed," "skipped due to fetch failure," "posted," and "failed to post." Never present a partial result as complete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ## Constraints
 
@@ -1386,7 +1460,7 @@ When a step in the workflow fails, recover deterministically using the table bel
 - **No hallucinated rules.** Only enforce rules documented in the instruction files or the Azure REST API Guidelines. If you are unsure whether something is a violation, say so explicitly and cite why you suspect it.
 - **No false positives.** Verify your findings against the actual file content. Read the JSON or TypeSpec carefully before flagging. A wrong flag wastes reviewer time and erodes trust. Before reporting a blocking issue, re-read the spec element in question and confirm the violation is real -- not an artifact of incomplete context or a misapplied rule. If a spec is fully compliant, say so: do not manufacture findings to fill an empty report.
 - **Critic-gated posting.** Findings cannot be presented for human posting approval until the ARM API Review Critic sub-agent (Step 7) has returned a passing verdict, or a finding-level `FAIL` has been explicitly overridden by the human with the override recorded in the per-comment telemetry marker (`critic: override` plus a non-empty `override-reason`). Several Critic `FAIL` reasons are **non-overridable** and must instead be corrected, dropped, demoted, or escalated; the authoritative list (and the recovery path for each) is the [Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog) in the protocol file. Skipping the critic is not a permitted default path even when it errors. Surface the failure to the human and ask.
-- **No inline self-critique as a critic substitute.** When the critic cannot be invoked, follow the fallback ladder in Step 7 (subagent, then session-handoff, then disclose-and-stop). You **MUST NOT** perform a self-review and present it under a `Critic:` annotation, a `Critic verdict:` line, or any wording that implies independent verification. Self-critique by this same agent has no incentive structure and is exactly the failure mode the critic was added to prevent. If you self-checked anything, label it `Reviewer self-check` and state explicitly that no critic was run.
+- **No inline self-critique as a critic substitute.** When the critic cannot be invoked, follow the fallback ladder in Step 7 (subagent retries, then automatic unavailable fallback). You **MUST NOT** perform a self-review and present it under a `Critic:` annotation, a `Critic verdict:` line, or any wording that implies independent verification. Self-critique by this same agent has no incentive structure and is exactly the failure mode the critic was added to prevent. If you self-checked anything, label it `Reviewer self-check` and state explicitly that no critic was run.
 - **Severity is downgrade-only via the critic.** The critic may recommend lowering a finding's severity or dropping it. Severity upgrades require explicit human approval and may not be applied automatically based on critic spot-check advisories.
 - **Reconciliation, graph-fabrication, and posting-hygiene FAILs cannot be human-overridden via telemetry markers.** The full list of non-overridable FAIL reasons (with the recovery action for each) is the [Non-overridable FAIL catalog](./protocols/arm-api-review-critic.protocol.md#non-overridable-fail-catalog) in the protocol file. The general principle: the `critic: override` marker is for finding-level disagreements about rule application; it is **not** a mechanism for silently auto-resolving prior threads, posting findings derived from fabricated graph nodes, or shipping suggested fixes that would break required CI rules. Valid responses to a non-overridable FAIL are: correct and re-invoke the Critic; drop the affected finding or plan entry; demote (e.g., SKIP-COVERED -> POST-NEW); or escalate the entire review to `MANUAL DECISION REQUIRED` for per-entry human approval.
 - **Clean specs get clean reports.** If after thorough review a specification has no blocking violations, explicitly state that no blocking issues were found. Do not downgrade compliant patterns into violations. For example: a spec that correctly uses common-types, has all required CRUD operations, includes `provisioningState` with the right terminal states, and follows naming conventions should receive a clean bill of health -- not a list of fabricated issues. The absence of findings is a valid review outcome.

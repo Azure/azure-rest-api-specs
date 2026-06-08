@@ -450,7 +450,9 @@ cd .github/skills/evals/arm-api-reviewer
 ```
 
 The script automatically clones and builds the
+
 <!-- cspell:words vally -->
+
 [vally](https://github.com/microsoft/vally) framework, runs all
 tests, and prints a pass/fail summary. Pass `-VallyRepo` to point to an
 existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip

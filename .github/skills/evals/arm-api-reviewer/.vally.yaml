@@ -6,3 +6,32 @@ suites:
   all:
     description: "Full ARM API Reviewer eval suite"
     evals: ["vally/eval-*.yaml"]
+
+  core-deterministic:
+    description: "Core deterministic checks for fast CI gating"
+    evals:
+      - "vally/eval-arm-resource-structure.yaml"
+      - "vally/eval-property-design.yaml"
+      - "vally/eval-operations.yaml"
+      - "vally/eval-breaking-changes.yaml"
+      - "vally/eval-check-name-availability.yaml"
+      - "vally/eval-classification.yaml"
+      - "vally/eval-examples.yaml"
+      - "vally/eval-suppressions.yaml"
+
+  prompt-heavy:
+    description: "Prompt-sensitive suites for nightly reliability tracking"
+    evals:
+      - "vally/eval-fast-path-triage.yaml"
+      - "vally/eval-report-format.yaml"
+      - "vally/eval-suppressions-yaml.yaml"
+      - "vally/eval-typespec.yaml"
+      - "vally/eval-typespec-required.yaml"
+      - "vally/eval-citation-and-parity.yaml"
+      - "vally/eval-true-negatives.yaml"
+
+  canary-reviewer-critic:
+    description: "Quick canary for reviewer/critic protocol and track-selection regressions"
+    evals:
+      - "vally/eval-fast-path-triage.yaml"
+      - "vally/eval-protocol-safety.yaml"

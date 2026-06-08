@@ -34,14 +34,21 @@ stimuli:
            paths `vaguesvc/Vague.Management` — with `reason: existing pattern`
            (a vague, non-actionable placeholder).
 
-      The pre-existing entry (`FolderStructure / MustUseV2` on
-      `existingsvc/Existing.Management`) was already present on the base branch
-      and should NOT be flagged.
+      The pre-existing entry (`tool: TypeSpecValidation`, `rules: [FolderStructure]`,
+      `sub-rules: [MustUseV2]`, paths `existingsvc/Existing.Management`) was already
+      present on the base branch and should NOT be flagged.
 
       Apply the suppressions.yaml continuity analysis described in
       `.github/agents/arm-api-reviewer.agent.md` (Step 4, "For
       `suppressions.yaml` files"). Report findings with rule IDs, severity,
       and the specific tuple (`tool` + `rules` + `paths`) being flagged.
+
+      Add a deterministic tuple inventory section that includes exactly one line
+      per tuple in the file (3 lines total, including the pre-existing unchanged
+      entry) in this format:
+      TupleStatus: <tool>|<rule>|<path>|<status>
+      Use the `tool` value for <tool> and the first `rules` value (NOT
+      `sub-rules`) for <rule>. Status is one of: NEW, EXISTING, UNCHANGED.
 
       File: specification/suppressions.yaml
     constraints:
@@ -56,17 +63,22 @@ stimuli:
         name: "vague-reason entry flagged"
         config:
           pattern: "(?is)RequireDocumentation.{0,300}(vague|existing pattern|insufficient|non-actionable)|(vague|existing pattern|insufficient|non-actionable).{0,300}RequireDocumentation"
+      - type: output-matches
+        name: "new no-reason tuple classified"
+        config:
+          pattern: "(?im)^TupleStatus:\\s*TypeSpecValidation\\|NoUnreferencedTypes\\|noreasonsvc/NoReason\\.Management\\|NEW\\s*$"
+      - type: output-matches
+        name: "new vague-reason tuple classified"
+        config:
+          pattern: "(?im)^TupleStatus:\\s*TypeSpecValidation\\|RequireDocumentation\\|vaguesvc/Vague\\.Management\\|NEW\\s*$"
       - type: output-not-matches
         name: "pre-existing entry NOT flagged"
         config:
-          pattern: "(?is)\\bNew\\b.{0,80}(FolderStructure|MustUseV2)|(FolderStructure|MustUseV2).{0,80}\\bNew\\b"
-      - type: prompt
-    rubric:
-      - The `NoUnreferencedTypes` entry on `noreasonsvc/NoReason.Management` is flagged because it has no `reason:` field at all
-      - The `RequireDocumentation` entry on `vaguesvc/Vague.Management` is flagged because `reason: existing pattern` is a vague, non-actionable placeholder
-      - The pre-existing `FolderStructure / MustUseV2` entry on `existingsvc/Existing.Management` is NOT flagged as a new finding — it was carried over from the base branch
-      - The agent identifies each finding by the `tool` + `rules` + `paths` tuple, not by line number alone
-      - The agent classifies both new findings as `[NEW]` (they did not exist on the base branch)
+          pattern: "(?is)(FolderStructure|MustUseV2|existingsvc/Existing\\.Management).{0,220}(\\[NEW\\]|\\bBlocking\\b|\\bWarning\\b|\\bSuggestion\\b|Issue\\s*\\d+)"
+      - type: output-matches
+        name: "pre-existing entry marked unchanged"
+        config:
+          pattern: "(?im)^TupleStatus:\\s*TypeSpecValidation\\|FolderStructure\\|existingsvc/Existing\\.Management\\|(UNCHANGED|EXISTING)\\s*$"
 
   # 140002 — New suppressions.yaml entry for a security-related rule
   - name: detect-suppressions-yaml-security-rule
@@ -87,11 +99,22 @@ stimuli:
       SECURITY-related rules — they prevent secrets from being read back through
       the API surface.
 
+      The pre-existing entry (`tool: TypeSpecValidation`, `rules: [FolderStructure]`,
+      `sub-rules: [MustUseV2]`, paths `existingsvc/Existing.Management`) was already
+      present on the base branch and should NOT be flagged.
+
       Apply the suppressions.yaml continuity analysis described in
       `.github/agents/arm-api-reviewer.agent.md`. Report findings with rule IDs,
       severity, and the specific tuple being flagged. Per agent guidance,
       suppressions of security-related rules with insufficient justification
       must be treated as Blocking.
+
+      Add a deterministic tuple inventory section that includes exactly one line
+      per tuple in the file (3 lines total, including the pre-existing unchanged
+      entry) in this format:
+      TupleStatus: <tool>|<rule>|<path>|<status>
+      Use the `tool` value for <tool> and the first `rules` value (NOT
+      `sub-rules`) for <rule>. Status is one of: NEW, EXISTING, UNCHANGED.
 
       File: specification/suppressions.yaml
     constraints:
@@ -110,9 +133,15 @@ stimuli:
         name: "security framing present"
         config:
           pattern: "(?i)security|secret"
-      - type: prompt
-    rubric:
-      - Both new entries (XmsSecretNotReadBack and SecretPropertyMustBeWriteOnly) are flagged as Blocking because they suppress security-related rules with insufficient justification
-      - The agent explicitly notes that these are security-related rules and that suppressing them requires specific, verifiable justification — `will fix later` and an absent reason both fail this bar
-      - The pre-existing `FolderStructure / MustUseV2` entry is NOT flagged as a new finding
-      - Both new findings are classified as `[NEW]`
+      - type: output-matches
+        name: "new security tuple XmsSecretNotReadBack classified"
+        config:
+          pattern: "(?im)^TupleStatus:\\s*Spectral\\|XmsSecretNotReadBack\\|secsupprsvc/SecSuppr\\.Management\\|NEW\\s*$"
+      - type: output-matches
+        name: "new security tuple SecretPropertyMustBeWriteOnly classified"
+        config:
+          pattern: "(?im)^TupleStatus:\\s*Spectral\\|SecretPropertyMustBeWriteOnly\\|secsupprsvc/SecSuppr\\.Management\\|NEW\\s*$"
+      - type: output-matches
+        name: "pre-existing entry marked unchanged"
+        config:
+          pattern: "(?im)^TupleStatus:\\s*TypeSpecValidation\\|FolderStructure\\|existingsvc/Existing\\.Management\\|(UNCHANGED|EXISTING)\\s*$"

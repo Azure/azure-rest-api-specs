@@ -6,6 +6,13 @@
     Single script to clone/update the vally framework, build it,
     run the full ARM API Reviewer eval suite, and report results.
 
+        Parameter ordering (usage-priority order):
+            1) Suite selection and execution shape: Suite, Workers, Timeout
+            2) Model controls: Model, JudgeModel
+            3) Runtime behavior toggles: ShowOutput, SkipBuild, NoInfraRetry
+            4) Environment path: VallyRepo
+            5) Stability controls: Repeat, DelayBetweenRunsSeconds
+
     Prerequisites:
       - Node.js >= 20 and npm (https://nodejs.org/)
       - Git
@@ -21,13 +28,6 @@
     Which suite to run. Default: "all" (the full configured eval suite).
     Pass a specific eval file name (without path) to run one category, e.g. "eval-operations".
 
-.PARAMETER Model
-    Override the agent model. Default: use the model declared in each eval YAML.
-    Example: "claude-sonnet-4.6" for faster iteration.
-
-.PARAMETER JudgeModel
-    Override the LLM judge model. Default: use the judge_model from eval YAML.
-
 .PARAMETER Workers
     Number of concurrent stimulus sessions. Default: 1 (sequential -- most reliable).
     Increase to 3-5 if you have no other Copilot sessions open.
@@ -35,14 +35,27 @@
 .PARAMETER Timeout
     Per-stimulus timeout in milliseconds. Default: 600000 (10 minutes).
 
-.PARAMETER VallyRepo
-    Path where microsoft/vally should be cloned. Default: sibling to azure-rest-api-specs.
+.PARAMETER Model
+    Override the agent model. Default: use the model declared in each eval YAML.
+    Example: "claude-sonnet-4.6" for faster iteration.
+
+.PARAMETER JudgeModel
+    Override the LLM judge model. Default: use the judge_model from eval YAML.
+
+.PARAMETER ShowOutput
+    Show full agent output during execution (passes --verbose to the vally CLI).
 
 .PARAMETER SkipBuild
     Skip the npm install + build step (use if vally is already built).
 
-.PARAMETER ShowOutput
-    Show full agent output during execution (passes --verbose to the vally CLI).
+.PARAMETER NoInfraRetry
+    Disable the default one-time auto-retry for infrastructure-only failures.
+    By default, the script retries once when all failed stimuli look like
+    transport/session issues (timeouts, empty subagent output, rate limits,
+    network errors) and no semantic grader failures are present.
+
+.PARAMETER VallyRepo
+    Path where microsoft/vally should be cloned. Default: sibling to azure-rest-api-specs.
 
 .PARAMETER Repeat
     Number of times to run the full eval suite back-to-back. Default: 1.
@@ -61,40 +74,45 @@
     .\run-evals.ps1
 
 .EXAMPLE
-    # Fast iteration: sonnet model, 3 workers
-    .\run-evals.ps1 -Model "claude-sonnet-4.6" -Workers 3
+    # Fast iteration in usage-priority order: suite -> execution shape -> model
+    .\run-evals.ps1 -Suite all -Workers 3 -Timeout 600000 -Model "claude-sonnet-4.6"
 
 .EXAMPLE
-    # Run just the operations tests
+    # Run just one eval category (suite first)
     .\run-evals.ps1 -Suite "eval-operations"
 
 .EXAMPLE
-    # Skip rebuild if you already ran once
-    .\run-evals.ps1 -SkipBuild
+    # Full command in usage-priority order
+    .\run-evals.ps1 -Suite all -Workers 1 -Timeout 600000 -Model "" -JudgeModel "" -ShowOutput -SkipBuild -NoInfraRetry -VallyRepo "C:\repos\vally" -Repeat 2 -DelayBetweenRunsSeconds 30
 
 .EXAMPLE
-    # Point to an existing vally clone
-    .\run-evals.ps1 -VallyRepo "C:\repos\vally"
+    # Point to an existing vally clone (path comes after runtime toggles)
+    .\run-evals.ps1 -Suite all -Workers 1 -Timeout 600000 -SkipBuild -VallyRepo "C:\repos\vally"
 
 .EXAMPLE
-    # Run the full suite 3 times with a 60-second cooldown between runs
-    .\run-evals.ps1 -Repeat 3
+    # Run the full suite 3 times (repeat controls at the end)
+    .\run-evals.ps1 -Suite all -Workers 1 -Timeout 600000 -Repeat 3
 
 .EXAMPLE
     # Three back-to-back runs with no cooldown
-    .\run-evals.ps1 -Repeat 3 -DelayBetweenRunsSeconds 0
+    .\run-evals.ps1 -Suite all -Workers 1 -Timeout 600000 -Repeat 3 -DelayBetweenRunsSeconds 0
+
+.EXAMPLE
+    # Disable infrastructure-only auto-retry (toggle section)
+    .\run-evals.ps1 -Suite all -Workers 1 -Timeout 600000 -NoInfraRetry
 #>
 
 [CmdletBinding()]
 param(
     [string]$Suite = "all",
-    [string]$Model = "",
-    [string]$JudgeModel = "",
     [int]$Workers = 1,
     [int]$Timeout = 600000,
-    [string]$VallyRepo = "",
-    [switch]$SkipBuild,
+    [string]$Model = "",
+    [string]$JudgeModel = "",
     [switch]$ShowOutput,
+    [switch]$SkipBuild,
+    [switch]$NoInfraRetry,
+    [string]$VallyRepo = "",
     [ValidateRange(1, 100)]
     [int]$Repeat = 1,
     [ValidateRange(0, 3600)]
@@ -139,6 +157,98 @@ if (-not $VallyRepo) {
 
 $VallyCli = Join-Path $VallyRepo "packages\cli\dist\index.js"
 $ResultsDir = Join-Path $EvalRoot "results"
+
+# ---- Helpers ----------------------------------------------------------------
+
+function Get-EvalSummaryFromJsonl {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$JsonlPath
+    )
+
+    if (-not (Test-Path $JsonlPath)) {
+        return $null
+    }
+
+    $allRecords = @(Get-Content $JsonlPath | ForEach-Object { $_ | ConvertFrom-Json })
+    $results = @($allRecords | Where-Object { $null -ne $_.PSObject.Properties['status'] })
+    $totalStimuli = $results.Count
+    $passed = @($results | Where-Object {
+        $null -ne $_.PSObject.Properties['gradeResult'] -and
+        $null -ne $_.gradeResult -and
+        $_.gradeResult.passed -eq $true
+    }).Count
+    $failed = $totalStimuli - $passed
+    $passRate = if ($totalStimuli -gt 0) { [math]::Round(($passed / $totalStimuli) * 100, 1) } else { 0 }
+
+    return [PSCustomObject]@{
+        Results     = $results
+        TotalStimuli = $totalStimuli
+        Passed      = $passed
+        Failed      = $failed
+        PassRate    = $passRate
+    }
+}
+
+function Test-IsInfraFailure {
+    param(
+        [string]$Evidence,
+        [string[]]$FailedGraders
+    )
+
+    $text = ($Evidence + " " + ($FailedGraders -join " "))
+    if (-not $text) {
+        return $false
+    }
+
+    $infraPattern = '(?i)timeout.*session\.idle|agent completed with no output|empty\s*/\s*zero-content response|rate[- ]?limit|\b429\b|econnreset|etimedout|network|transport|dispatch|session-sha-(moved|unreachable)|critic-verdict marker|llm judge failed:\s*connection is closed'
+    return ($text -match $infraPattern)
+}
+
+function Get-FailureDiagnostics {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object[]]$Results
+    )
+
+    $failedResults = @($Results | Where-Object {
+        -not ($null -ne $_.PSObject.Properties['gradeResult'] -and
+              $null -ne $_.gradeResult -and
+              $_.gradeResult.passed -eq $true)
+    })
+
+    return @($failedResults | ForEach-Object {
+        $name = '(unknown)'
+        if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['stimulusName']) {
+            $name = $_.gradeResult.stimulusName
+        } elseif ($null -ne $_.PSObject.Properties['trajectory'] -and $null -ne $_.trajectory.stimulus -and $null -ne $_.trajectory.stimulus.name) {
+            $name = $_.trajectory.stimulus.name
+        }
+
+        $evidence = if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult) {
+            $_.gradeResult.evidence
+        } elseif ($null -ne $_.PSObject.Properties['error']) {
+            $_.error
+        } else {
+            'No result (timeout or error)'
+        }
+
+        $failedGraders = @()
+        if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['details']) {
+            $failedGraders = @($_.gradeResult.details | Where-Object { $_.passed -eq $false } | ForEach-Object { $_.name })
+        }
+
+        $isInfra = Test-IsInfraFailure -Evidence $evidence -FailedGraders $failedGraders
+
+        [PSCustomObject]@{
+            StimulusName  = $name
+            Evidence      = $evidence
+            FailedGraders = $failedGraders
+            IsInfra       = $isInfra
+            FailureType   = if ($isInfra) { 'INFRA' } else { 'DETERMINISTIC' }
+        }
+    })
+}
 
 # ---- Preflight checks --------------------------------------------------------
 
@@ -273,6 +383,9 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     $failed        = 0
     $passRate      = 0
     $results       = @()
+    $failureDiagnostics = @()
+    $infraFailed = 0
+    $deterministicFailed = 0
 
     # Build the command (fresh per run -- each gets its own output dir).
     $timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH-mm-ss-fffZ")
@@ -371,24 +484,84 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
     }
 
     if (Test-Path $jsonlFile) {
-        # Parse results.jsonl for summary.
-        # The JSONL may contain different record types (trajectory records + summary).
-        # Filter to trajectory records only (those that have a "status" field).
-        $allRecords = @(Get-Content $jsonlFile | ForEach-Object { $_ | ConvertFrom-Json })
-        $results = @($allRecords | Where-Object { $null -ne $_.PSObject.Properties['status'] })
-        $totalStimuli = $results.Count
-        $passed = @($results | Where-Object {
-            $null -ne $_.PSObject.Properties['gradeResult'] -and
-            $null -ne $_.gradeResult -and
-            $_.gradeResult.passed -eq $true
-        }).Count
-        $failed = $totalStimuli - $passed
+        $summary = Get-EvalSummaryFromJsonl -JsonlPath $jsonlFile
+        if ($null -ne $summary) {
+            $results = $summary.Results
+            $totalStimuli = $summary.TotalStimuli
+            $passed = $summary.Passed
+            $failed = $summary.Failed
+            $passRate = $summary.PassRate
+            $failureDiagnostics = Get-FailureDiagnostics -Results $results
+            $infraFailed = @($failureDiagnostics | Where-Object { $_.IsInfra }).Count
+            $deterministicFailed = $failed - $infraFailed
+        }
 
-        # Compute pass rate
-        if ($totalStimuli -gt 0) {
-            $passRate = [math]::Round(($passed / $totalStimuli) * 100, 1)
-        } else {
-            $passRate = 0
+        # Optional one-time retry for infrastructure-only failures.
+        if (-not $NoInfraRetry -and $failed -gt 0) {
+            $infraFailed = @($failureDiagnostics | Where-Object { $_.IsInfra }).Count
+            $semanticFailed = $failed - $infraFailed
+
+            if ($infraFailed -gt 0 -and $semanticFailed -eq 0) {
+                Write-Host "  [INFO] Infrastructure-only failures detected ($infraFailed). Retrying once..." -ForegroundColor Yellow
+
+                $retryTimestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH-mm-ss-fffZ")
+                $retryOutputDir = Join-Path $ResultsDir $retryTimestamp
+                $retryCmd = @($cmd)
+                $outDirArgIndex = [Array]::IndexOf($retryCmd, "--output-dir")
+                if ($outDirArgIndex -ge 0 -and ($outDirArgIndex + 1) -lt $retryCmd.Count) {
+                    $retryCmd[$outDirArgIndex + 1] = $retryOutputDir
+                }
+
+                Push-Location $EvalRoot
+                $retryStart = Get-Date
+                & $retryCmd[0] $retryCmd[1..($retryCmd.Count - 1)] 2>&1 | ForEach-Object {
+                    $line = $_.ToString()
+                    if ($line -match 'ExperimentalWarning|--trace-warnings') { return }
+                    if ($line -match 'PASS|passed') {
+                        Write-Host "  $line" -ForegroundColor Green
+                    } elseif ($line -match 'FAIL|failed') {
+                        Write-Host "  $line" -ForegroundColor Red
+                    } elseif ($line -match 'WARN') {
+                        Write-Host "  $line" -ForegroundColor Yellow
+                    } else {
+                        Write-Host "  $line"
+                    }
+                }
+                $retryExitCode = $LASTEXITCODE
+                $retryDuration = (Get-Date) - $retryStart
+                Pop-Location
+
+                $retryResultsFile = Join-Path $retryOutputDir "eval-results.md"
+                $retryJsonlFile = Join-Path $retryOutputDir "results.jsonl"
+                $retryJunitFile = Join-Path $retryOutputDir "eval-results.junit.xml"
+                if (-not (Test-Path $retryJsonlFile)) {
+                    $retryNested = Get-ChildItem -Path $retryOutputDir -Filter "results.jsonl" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+                    if ($retryNested) {
+                        $retryActualDir = $retryNested.DirectoryName
+                        $retryResultsFile = Join-Path $retryActualDir "eval-results.md"
+                        $retryJsonlFile = $retryNested.FullName
+                        $retryJunitFile = Join-Path $retryActualDir "eval-results.junit.xml"
+                    }
+                }
+
+                $retrySummary = Get-EvalSummaryFromJsonl -JsonlPath $retryJsonlFile
+                if ($null -ne $retrySummary) {
+                    $results = $retrySummary.Results
+                    $totalStimuli = $retrySummary.TotalStimuli
+                    $passed = $retrySummary.Passed
+                    $failed = $retrySummary.Failed
+                    $passRate = $retrySummary.PassRate
+                    $failureDiagnostics = Get-FailureDiagnostics -Results $results
+                    $infraFailed = @($failureDiagnostics | Where-Object { $_.IsInfra }).Count
+                    $deterministicFailed = $failed - $infraFailed
+                    $evalExitCode = $retryExitCode
+                    $evalDuration = $retryDuration
+                    $outputDir = $retryOutputDir
+                    $resultsFile = $retryResultsFile
+                    $jsonlFile = $retryJsonlFile
+                    $junitFile = $retryJunitFile
+                }
+            }
         }
 
         Write-Host "  +----------------------------------------------+" -ForegroundColor Cyan
@@ -405,7 +578,14 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         } else {
             Write-Host ("  |  Failed:         {0,-28}|" -f "0") -ForegroundColor Cyan
         }
+        if ($failed -gt 0) {
+            Write-Host ("  |  Infra fails:    {0,-28}|" -f $infraFailed) -ForegroundColor Yellow
+            Write-Host ("  |  Deterministic:  {0,-28}|" -f $deterministicFailed) -ForegroundColor Cyan
+        }
         Write-Host ("  |  Pass rate:      {0,-28}|" -f "$passRate%") -ForegroundColor $(if ($passRate -ge 90) { "Green" } elseif ($passRate -ge 70) { "Yellow" } else { "Red" })
+        $semanticDenominator = $totalStimuli - $infraFailed
+        $semanticPassRate = if ($semanticDenominator -gt 0) { [math]::Round(($passed / $semanticDenominator) * 100, 1) } else { 0 }
+        Write-Host ("  |  Semantic rate:  {0,-28}|" -f "$semanticPassRate%") -ForegroundColor $(if ($semanticPassRate -ge 90) { "Green" } elseif ($semanticPassRate -ge 70) { "Yellow" } else { "Red" })
         Write-Host ("  |  Duration:       {0,-28}|" -f "$([math]::Round($evalDuration.TotalMinutes, 1)) min") -ForegroundColor Cyan
         Write-Host "  +----------------------------------------------+" -ForegroundColor Cyan
         Write-Host ""
@@ -413,31 +593,13 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         # Show failed stimuli details
         if ($failed -gt 0) {
             Write-Host "  Failed stimuli:" -ForegroundColor Red
-            $results | Where-Object {
-                -not ($null -ne $_.PSObject.Properties['gradeResult'] -and
-                      $null -ne $_.gradeResult -and
-                      $_.gradeResult.passed -eq $true)
-            } | ForEach-Object {
-                # Stimulus name lives at trajectory.stimulus.name OR gradeResult.stimulusName.
-                # Earlier versions of this script looked at $_.stimulusName and $_.stimulus.name
-                # at the top of the record; the JSONL schema actually nests them, so
-                # both lookups silently returned "(unknown)". Fixed paths:
-                $name = '(unknown)'
-                if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['stimulusName']) {
-                    $name = $_.gradeResult.stimulusName
-                } elseif ($null -ne $_.PSObject.Properties['trajectory'] -and $null -ne $_.trajectory.stimulus -and $null -ne $_.trajectory.stimulus.name) {
-                    $name = $_.trajectory.stimulus.name
-                }
-                $evidence = if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult) { $_.gradeResult.evidence } elseif ($null -ne $_.PSObject.Properties['error']) { $_.error } else { "No result (timeout or error)" }
-                # List the per-grader names that failed (not just the aggregate evidence).
-                $failedGraders = @()
-                if ($null -ne $_.PSObject.Properties['gradeResult'] -and $null -ne $_.gradeResult -and $null -ne $_.gradeResult.PSObject.Properties['details']) {
-                    $failedGraders = @($_.gradeResult.details | Where-Object { $_.passed -eq $false } | ForEach-Object { $_.name })
-                }
-                Write-Host "    [FAIL] $name" -ForegroundColor Red
-                Write-Host "           $evidence" -ForegroundColor DarkGray
-                if ($failedGraders.Count -gt 0) {
-                    Write-Host ("           Failed graders: {0}" -f ($failedGraders -join ', ')) -ForegroundColor DarkGray
+            $failureDiagnostics | ForEach-Object {
+                $label = if ($_.IsInfra) { '[INFRA]' } else { '[FAIL]' }
+                $labelColor = if ($_.IsInfra) { 'Yellow' } else { 'Red' }
+                Write-Host ("    {0} {1}" -f $label, $_.StimulusName) -ForegroundColor $labelColor
+                Write-Host ("           {0}" -f $_.Evidence) -ForegroundColor DarkGray
+                if ($_.FailedGraders.Count -gt 0) {
+                    Write-Host ("           Failed graders: {0}" -f ($_.FailedGraders -join ', ')) -ForegroundColor DarkGray
                 }
             }
             Write-Host ""
@@ -483,6 +645,8 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         Total       = $totalStimuli
         Passed      = $passed
         Failed      = $failed
+        InfraFailed = $infraFailed
+        DeterministicFailed = $deterministicFailed
         PassRate    = $passRate
         DurationMin = [math]::Round($evalDuration.TotalMinutes, 1)
         ExitCode    = $evalExitCode
@@ -515,21 +679,30 @@ if ($Repeat -gt 1) {
     Write-Host ""
 
     $runSummaries |
-        Select-Object Run, Total, Passed, Failed, @{Name='PassRate%'; Expression={$_.PassRate}}, DurationMin, ExitCode |
+        Select-Object Run, Total, Passed, Failed, InfraFailed, DeterministicFailed, @{Name='PassRate%'; Expression={$_.PassRate}}, DurationMin, ExitCode |
         Format-Table -AutoSize | Out-String | Write-Host
 
     $aggTotal  = ($runSummaries | Measure-Object -Property Total  -Sum).Sum
     $aggPassed = ($runSummaries | Measure-Object -Property Passed -Sum).Sum
     $aggFailed = ($runSummaries | Measure-Object -Property Failed -Sum).Sum
+    $aggInfraFailed = ($runSummaries | Measure-Object -Property InfraFailed -Sum).Sum
+    $aggDeterministicFailed = ($runSummaries | Measure-Object -Property DeterministicFailed -Sum).Sum
     if ($aggTotal -gt 0) {
         $aggPassRate = [math]::Round(($aggPassed / $aggTotal) * 100, 1)
     } else {
         $aggPassRate = 0
     }
+    $aggSemanticDenominator = $aggTotal - $aggInfraFailed
+    if ($aggSemanticDenominator -gt 0) {
+        $aggSemanticPassRate = [math]::Round(($aggPassed / $aggSemanticDenominator) * 100, 1)
+    } else {
+        $aggSemanticPassRate = 0
+    }
     $aggDuration = [math]::Round((($runSummaries | Measure-Object -Property DurationMin -Sum).Sum), 1)
 
     $aggColor = if ($aggFailed -eq 0) { "Green" } elseif ($aggPassRate -ge 70) { "Yellow" } else { "Red" }
     Write-Host ("  Aggregate: {0}/{1} passed ({2}%) across {3} runs in {4} min total" -f $aggPassed, $aggTotal, $aggPassRate, $Repeat, $aggDuration) -ForegroundColor $aggColor
+    Write-Host ("  Failure split: infra={0}, deterministic={1}; semantic pass rate={2}%" -f $aggInfraFailed, $aggDeterministicFailed, $aggSemanticPassRate) -ForegroundColor DarkCyan
 
     # Per-stimulus stability: how many runs each stimulus passed.
     # Flaky stimuli (passed sometimes, failed other times) are the main

@@ -108,9 +108,11 @@ stimuli:
     prompt: >
       Review the following ARM resource-manager OpenAPI specification.
 
-      Context for this PR:
+      Context for this PR (authoritative — treat as the PR's git metadata):
         - The directory `specification/legacysvc/resource-manager/Microsoft.LegacyService/stable/2024-02-01/`
           ALREADY EXISTS on the base branch. It is a pre-migration handwritten OpenAPI API version.
+        - `git diff --name-status` for this PR shows the swagger file as `M` (Modified),
+          NOT `A` (Added): the API version directory is not new in this PR.
         - This PR makes an in-place edit to the swagger file inside this existing directory
           (e.g., adds a property description, fixes an enum value).
         - The PR does NOT introduce a new API version directory.

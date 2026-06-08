@@ -36,6 +36,13 @@ stimuli:
       ran or skipped. Apply Step 4's example-file checks (section 22 / EX-* of
       the OpenAPI rules) and report findings.
 
+      At the end of your response, include this exact machine-readable decision
+      block with one value per line:
+      Decision-Track: FAST_PATH
+      Decision-Step3: SKIPPED
+      Decision-Step5: SKIPPED
+      Decision-CriticGate: REQUIRED
+
       Changed file: specification/fastsvc/resource-manager/Microsoft.FastService/stable/2025-01-01/examples/Widgets_Get.json
     constraints:
       expect_skills:
@@ -44,18 +51,19 @@ stimuli:
       - type: output-matches
         name: "fast path elected"
         config:
-          pattern: "(?i)fast[- ]?path"
+          pattern: "(?im)^Decision-Track:\\s*FAST_PATH\\s*$"
       - type: output-matches
         name: "breaking-change comparison explicitly skipped or omitted"
         config:
-          # The agent should NOT perform full breaking-change analysis for an
-          # examples-only PR. Either it explicitly says it skipped Step 3, or
-          # the words "breaking change analysis" appear in a "skipped" /
-          # "not applicable" / "unnecessary" / "no...needed" context.
-          # Window widened to 200 chars and skip-verbs broadened (skip,
-          # bypass, forgo, exclude, no...needed/required, unnecessary,
-          # inapplicable, not performed, not run, did not / didn't).
-          pattern: "(?is)(skip|bypass|forgo|exclude|omitted|not applicable|inapplicable|n/?a|not required|not needed|unnecessary|not performed|not run|did not|didn't|no\\s+(?:longer\\s+)?(?:need|require)|without).{0,200}(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison|prior version)|(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison|prior version).{0,200}(skip|bypass|forgo|exclude|omitted|not applicable|inapplicable|n/?a|not required|not needed|unnecessary|not performed|not run|did not|didn't|no\\s+(?:longer\\s+)?(?:need|require)|without)"
+          pattern: "(?im)^Decision-Step3:\\s*SKIPPED\\s*$"
+      - type: output-matches
+        name: "cross-file consistency explicitly skipped"
+        config:
+          pattern: "(?im)^Decision-Step5:\\s*SKIPPED\\s*$"
+      - type: output-matches
+        name: "critic gate still required"
+        config:
+          pattern: "(?im)^Decision-CriticGate:\\s*REQUIRED\\s*$"
       - type: prompt
     rubric:
       - The agent explicitly elects the fast-path track in its output (e.g., "fast path", "trivial review track")
@@ -79,6 +87,12 @@ stimuli:
       do NOT qualify for the fast path. Conduct the full review. State which
       track you elected.
 
+      At the end of your response, include this exact machine-readable decision
+      block with one value per line:
+      Decision-Track: FULL_REVIEW
+      Decision-Step3: PERFORMED
+      Decision-CriticGate: REQUIRED
+
       Changed file: specification/fpsvc/resource-manager/Microsoft.FpService/stable/2025-01-01/fpsvc.json
     constraints:
       expect_skills:
@@ -87,23 +101,19 @@ stimuli:
       - type: output-not-matches
         name: "fast path NOT elected"
         config:
-          # Disallow only AFFIRMATIVE election phrasing. The trailing negative
-          # lookahead `(?![-\w])` ensures we don't match phrases like
-          # "fast-path allowlist", "fast-path table", "fast-path track" that
-          # legitimately appear in reasoning about WHY fast-path was rejected.
-          # 'on the' was previously included but matched 'on the fast-path
-          # allowlist' in reasoning prose -- dropped.
-          pattern: "(?i)(elect|chose|chosen|selected|applying|using)\\s+(the\\s+)?fast[- ]?path(?![-\\w])"
+          pattern: "(?im)^Decision-Track:\\s*FAST_PATH\\s*$"
       - type: output-matches
         name: "full review performed"
         config:
-          # Accepts natural variants the agent may use to signal it ran the
-          # full track instead of the fast path: "full review", "full
-          # workflow", "all steps", "step 3", "standard review",
-          # "comprehensive review", "complete review", "deep review",
-          # "full-review track", "thorough review", "end-to-end review",
-          # "steps 1-N".
-          pattern: "(?i)full[- ]review|full workflow|all steps|step\\s*3|standard\\s+review|comprehensive\\s+review|complete\\s+review|thorough\\s+review|deep\\s+review|end[- ]to[- ]end\\s+review|full[- ]review\\s+track|steps?\\s*1\\s*[-\u2013through]+\\s*\\d+"
+          pattern: "(?im)^Decision-Track:\\s*FULL_REVIEW\\s*$"
+      - type: output-matches
+        name: "step 3 explicitly performed"
+        config:
+          pattern: "(?im)^Decision-Step3:\\s*PERFORMED\\s*$"
+      - type: output-matches
+        name: "critic gate required"
+        config:
+          pattern: "(?im)^Decision-CriticGate:\\s*REQUIRED\\s*$"
       - type: output-matches
         name: "secret detection still triggered"
         config:
@@ -130,6 +140,11 @@ stimuli:
       uncertain whether a change qualifies for the fast path, you MUST default
       to full review. State which track you elected and your reasoning.
 
+      At the end of your response, include this exact machine-readable decision
+      block with one value per line:
+      Decision-Track: FULL_REVIEW
+      Decision-CriticGate: REQUIRED
+
       Changed file: specification/descsvc/resource-manager/Microsoft.DescService/stable/2025-01-01/descsvc.json
     constraints:
       expect_skills:
@@ -138,9 +153,15 @@ stimuli:
       - type: output-not-matches
         name: "fast path NOT elected"
         config:
-          # See note in 150002: avoid matching benign phrases like
-          # "on the fast-path allowlist" that appear in reasoning prose.
-          pattern: "(?i)(elect|chose|chosen|selected|applying|using)\\s+(the\\s+)?fast[- ]?path(?![-\\w])"
+          pattern: "(?im)^Decision-Track:\\s*FAST_PATH\\s*$"
+      - type: output-matches
+        name: "full review elected"
+        config:
+          pattern: "(?im)^Decision-Track:\\s*FULL_REVIEW\\s*$"
+      - type: output-matches
+        name: "critic gate required"
+        config:
+          pattern: "(?im)^Decision-CriticGate:\\s*REQUIRED\\s*$"
       - type: output-matches
         name: "defaulted to full review"
         config:
@@ -157,7 +178,3 @@ stimuli:
         name: "rules still applied (missing-description finding produced)"
         config:
           substring: "description"
-    rubric:
-      - The agent defaults to the full review track when uncertain about fast-path qualification
-      - The agent states its reasoning (e.g., "diff is small but I cannot confirm it is description-only, so defaulting to full review")
-      - The agent applies the full rule set to the file, including the missing-descriptions findings
