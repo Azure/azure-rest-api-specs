@@ -374,7 +374,7 @@ model BatchJob {
   inputData?: Record<JobInput>;
 
   /**
-   * Dictonary of endpoint URIs, keyed by enumerated job endpoints.
+   * Dictionary of endpoint URIs, keyed by enumerated job endpoints.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
