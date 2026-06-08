@@ -176,8 +176,6 @@ namespace Azure.AI.Projects;
 @@clientName(ModelPendingUploadRequest, "ModelPendingUploadInput");
 @@clientName(ModelCredentialRequest, "ModelCredentialInput");
 @@clientName(EvaluatorCredentialRequest, "EvaluatorCredentialInput");
-@@usage(EvaluatorCredentialRequest, Usage.input);
-@@access(EvaluatorCredentialRequest, Access.public);
 
 // *Response → *Result renames for public response models
 @@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
@@ -204,32 +202,6 @@ namespace Azure.AI.Projects;
   "java"
 );
 @@access(TestingCriterionAzureAIEvaluator, Access.public, "java");
-
-// Ensure models used by custom convenience methods are emitted.
-@@usage(AgentEvaluatorGenerationJobSource, Usage.input | Usage.output, "java");
-@@access(AgentEvaluatorGenerationJobSource, Access.public, "java");
-@@usage(DatasetEvaluatorGenerationJobSource, Usage.input | Usage.output, "java");
-@@access(DatasetEvaluatorGenerationJobSource, Access.public, "java");
-@@usage(EvaluatorGenerationInputs, Usage.input | Usage.output, "java");
-@@access(EvaluatorGenerationInputs, Access.public, "java");
-@@usage(EvaluatorGenerationJob, Usage.input | Usage.output, "java");
-@@access(EvaluatorGenerationJob, Access.public, "java");
-@@usage(EvaluatorGenerationJobSource, Usage.input | Usage.output, "java");
-@@access(EvaluatorGenerationJobSource, Access.public, "java");
-@@usage(EvaluatorGenerationJobSourceType, Usage.input | Usage.output, "java");
-@@access(EvaluatorGenerationJobSourceType, Access.public, "java");
-@@usage(EvaluatorGenerationTokenUsage, Usage.input | Usage.output, "java");
-@@access(EvaluatorGenerationTokenUsage, Access.public, "java");
-@@usage(PromptEvaluatorGenerationJobSource, Usage.input | Usage.output, "java");
-@@access(PromptEvaluatorGenerationJobSource, Access.public, "java");
-@@usage(TracesEvaluatorGenerationJobSource, Usage.input | Usage.output, "java");
-@@access(TracesEvaluatorGenerationJobSource, Access.public, "java");
-@@usage(RoutineAttemptSource, Usage.input | Usage.output, "java");
-@@access(RoutineAttemptSource, Access.public, "java");
-@@usage(RoutineRun, Usage.input | Usage.output, "java");
-@@access(RoutineRun, Access.public, "java");
-@@usage(RoutineRunPhase, Usage.input | Usage.output, "java");
-@@access(RoutineRunPhase, Access.public, "java");
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredential", "java");
