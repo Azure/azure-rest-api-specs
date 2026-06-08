@@ -690,6 +690,8 @@ For each changed specification file, load the applicable instruction file(s) and
 
 - **OpenAPI JSON files** - apply the "Review Checklist Summary" at the end of `openapi-review.instructions.md`
 - **ARM resource-manager JSON files** - apply **both** the OpenAPI checklist AND the "ARM Review Checklist Summary" at the end of `arm-api-review.instructions.md`
+
+  **Conflict guardrail (DELETE response codes):** For `specification/**/resource-manager/**` files, evaluate DELETE response-code findings using ARM RPC rule `RPC-Delete-V1-01` from `arm-api-review.instructions.md` (sync delete: `200` + `204`; async delete: `202` + `204`). Do **not** raise a finding from generic OpenAPI Section 5 that says DELETE must be `204`-only on ARM control-plane specs.
 - **TypeSpec `.tsp` files** - apply the "TypeSpec Review Checklist Summary" at the end of `typespec-review.instructions.md`
 - **`tspconfig.yaml`** - apply section 7 (all subsections: 7.1 TSP-CONFIG-EMIT, 7.2 TSP-CONFIG-SERVICE-DIR, 7.3 TSP-CONFIG-EXAMPLES) from `typespec-review.instructions.md` **plus** section 4.7 (`tspconfig.yaml`) from `typespec-project.instructions.md`, which covers the linter-ruleset requirement and the single-tspconfig-per-service rule
 - **Example files** - apply section 22 (EX-\*) from `openapi-review.instructions.md`
