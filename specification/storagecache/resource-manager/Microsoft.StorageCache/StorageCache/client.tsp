@@ -112,7 +112,7 @@ using Microsoft.StorageCache;
 @@clientName(AscOperation, "StorageCacheAscOperationInfo", "csharp");
 @@clientName(
   AscOperationErrorResponse,
-  "StorageCacheAscOperationErrorResponseResult",
+  "StorageCacheAscOperationError",
   "csharp"
 );
 @@clientName(AmlFilesystem, "AmlFileSystem", "csharp");
@@ -365,5 +365,10 @@ using Microsoft.StorageCache;
   "csharp"
 );
 @@clientName(SkusOperationGroup.list, "GetStorageCacheSkus", "csharp");
+@@clientName(
+  AscOperationsOperationGroup.get,
+  "GetStorageCacheAscOperation",
+  "csharp"
+);
 @@clientName(AscUsagesOperationGroup.list, "GetStorageCacheUsages", "csharp");
 @@clientName(UsageModelsOperationGroup.list, "GetUsageModels", "csharp");
