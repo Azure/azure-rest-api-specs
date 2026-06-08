@@ -16,7 +16,8 @@
 
 - tool: Azure-OpenAPI-Validator
   path: ./stable/2026-05-01/professionalservice.json
-  rules: ParametersInPointGet
+  rules:
+    - ParametersInPointGet
   where:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/professionalServices/{resourceName}"].get
   reason: >-
