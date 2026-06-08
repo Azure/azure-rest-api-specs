@@ -489,7 +489,8 @@
       "properties": {
         "currentKubernetesVersion": {
           "type": "string",
-          "description": "Current Kubernetes version running on the cluster (e.g., '1.29')."
+          "description": "Current Kubernetes version running on the cluster (e.g., '1.29').",
+          "readOnly": true
         },
         "targetKubernetesVersion": {
           "type": "string",
@@ -503,7 +504,8 @@
         },
         "overallSeverity": {
           "$ref": "#/definitions/Severity",
-          "description": "Rolled-up severity across all checks; highest severity wins."
+          "description": "Rolled-up severity across all checks; highest severity wins.",
+          "readOnly": true
         },
         "componentCompatibility": {
           "type": "array",
@@ -511,6 +513,7 @@
           "items": {
             "$ref": "#/definitions/ComponentCompatibility"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "deprecatedApis": {
@@ -519,6 +522,7 @@
           "items": {
             "$ref": "#/definitions/DeprecatedApiUsage"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "readinessChecks": {
@@ -527,6 +531,7 @@
           "items": {
             "$ref": "#/definitions/ReadinessCheck"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       }

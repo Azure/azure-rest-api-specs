@@ -843,23 +843,28 @@
       "properties": {
         "apiVersion": {
           "type": "string",
-          "description": "Kubernetes API version of the represented resource\n(e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1')."
+          "description": "Kubernetes API version of the represented resource\n(e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1').",
+          "readOnly": true
         },
         "kind": {
           "type": "string",
-          "description": "Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service')."
+          "description": "Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service').",
+          "readOnly": true
         },
         "metadata": {
           "$ref": "#/definitions/KubernetesObjectMeta",
-          "description": "Standard Kubernetes object metadata."
+          "description": "Standard Kubernetes object metadata.",
+          "readOnly": true
         },
         "spec": {
           "$ref": "#/definitions/KubernetesResourceSpec",
-          "description": "Desired state of the Kubernetes resource."
+          "description": "Desired state of the Kubernetes resource.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/KubernetesResourceStatus",
-          "description": "Observed state of the Kubernetes resource, written by the controller."
+          "description": "Observed state of the Kubernetes resource, written by the controller.",
+          "readOnly": true
         },
         "events": {
           "type": "array",
@@ -867,11 +872,13 @@
           "items": {
             "$ref": "#/definitions/KubernetesEvent"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "attachedToExtension": {
           "type": "string",
-          "description": "Name of the extension this inventory resource is attached to."
+          "description": "Name of the extension this inventory resource is attached to.",
+          "readOnly": true
         }
       }
     },
@@ -2093,7 +2100,8 @@
         },
         "uid": {
           "type": "string",
-          "description": "UID of the owner object."
+          "description": "UID of the owner object.",
+          "readOnly": true
         },
         "controller": {
           "type": "boolean",

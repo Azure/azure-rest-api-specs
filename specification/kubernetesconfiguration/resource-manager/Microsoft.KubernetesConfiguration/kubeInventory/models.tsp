@@ -51,6 +51,8 @@ model OwnerReference {
   name?: string;
 
   /** UID of the owner object. */
+  @key
+  @visibility(Lifecycle.Read)
   uid: string;
 
   /** True when this owner manages the lifecycle of the referencing object. */
@@ -1712,24 +1714,31 @@ model KubeInventoryProperties {
    * Kubernetes API version of the represented resource
    * (e.g., 'v1', 'apps/v1', 'upgrade.config.io/v1alpha1').
    */
+  @visibility(Lifecycle.Read)
   apiVersion?: string;
 
   /** Kind of the Kubernetes resource (e.g., 'Pod', 'Deployment', 'Service'). */
+  @visibility(Lifecycle.Read)
   kind?: string;
 
   /** Standard Kubernetes object metadata. */
+  @visibility(Lifecycle.Read)
   metadata?: KubernetesObjectMeta;
 
   /** Desired state of the Kubernetes resource. */
+  @visibility(Lifecycle.Read)
   spec?: KubernetesResourceSpec;
 
   /** Observed state of the Kubernetes resource, written by the controller. */
+  @visibility(Lifecycle.Read)
   status?: KubernetesResourceStatus;
 
   /** Kubernetes events recorded against this resource. */
+  @visibility(Lifecycle.Read)
   @identifiers(#[])
   events?: KubernetesEvent[];
 
   /** Name of the extension this inventory resource is attached to. */
+  @visibility(Lifecycle.Read)
   attachedToExtension?: string;
 }

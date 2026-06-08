@@ -169,6 +169,7 @@ model ReadinessCheck {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not have a provisioning state per the original Swagger design"
 model UpgradeAssessmentProperties {
   /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
+  @visibility(Lifecycle.Read)
   currentKubernetesVersion?: string;
 
   /** Target Kubernetes version to evaluate for upgrade (e.g., '1.30'). */
@@ -183,23 +184,27 @@ model UpgradeAssessmentProperties {
   /**
    * Rolled-up severity across all checks; highest severity wins.
    */
+  @visibility(Lifecycle.Read)
   overallSeverity?: Severity;
 
   /**
    * Per-component compatibility results with the target Kubernetes version.
    */
+  @visibility(Lifecycle.Read)
   @identifiers(#[])
   componentCompatibility?: ComponentCompatibility[];
 
   /**
    * Deprecated Kubernetes APIs still in use in the cluster.
    */
+  @visibility(Lifecycle.Read)
   @identifiers(#[])
   deprecatedApis?: DeprecatedApiUsage[];
 
   /**
    * Cluster readiness check results.
    */
+  @visibility(Lifecycle.Read)
   @identifiers(#[])
   readinessChecks?: ReadinessCheck[];
 }
