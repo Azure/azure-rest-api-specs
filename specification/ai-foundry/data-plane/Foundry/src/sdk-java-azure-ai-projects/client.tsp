@@ -30,16 +30,8 @@ namespace Azure.AI.Projects;
 // @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
 // @@clientInitialization requires exact singleton opt-in properties (e.g. evaluations_v1_preview) per key.
 // Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
-@@clientLocation(
-  Azure.AI.Projects.WithConditionalFoundryPreviewHeader.foundry_features,
-  Azure.AI.Projects,
-  "java"
-);
-@@clientLocation(
-  Azure.AI.Projects.WithRequiredFoundryPreviewHeader.foundry_features,
-  Azure.AI.Projects,
-  "java"
-);
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!java");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!java");
 
 // --------------------------------------------------------------------------------
 // Renames - operations
@@ -275,34 +267,6 @@ namespace Azure.AI.Projects;
 // Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
 @@convenientAPI(Skills.deleteSkill, false, "java");
 @@convenientAPI(Skills.deleteSkillVersion, false, "java");
-
-// Temporary Java workaround: after @@clientLocation promotes Foundry-Features, optional-header
-// convenience overloads can collapse to duplicate signatures. Remove these suppressions once
-// the Java emitter de-dupes those generated overloads.
-@@convenientAPI(DataGenerationJobs.get, false, "java");
-@@convenientAPI(DataGenerationJobs.cancel, false, "java");
-@@convenientAPI(DataGenerationJobs.delete, false, "java");
-@@convenientAPI(EvaluatorGenerationJobs.get, false, "java");
-@@convenientAPI(EvaluatorGenerationJobs.cancel, false, "java");
-@@convenientAPI(EvaluatorGenerationJobs.delete, false, "java");
-@@convenientAPI(Evaluators.startPendingUpload, false, "java");
-@@convenientAPI(Evaluators.getCredentials, false, "java");
-@@convenientAPI(Insights.generate, false, "java");
-@@convenientAPI(Routines.getRoutine, false, "java");
-@@convenientAPI(Routines.enableRoutine, false, "java");
-@@convenientAPI(Routines.disableRoutine, false, "java");
-@@convenientAPI(Routines.deleteRoutine, false, "java");
-@@convenientAPI(EvaluationRules.createOrUpdate, false, "java");
-
-// Additional Java workaround: these overloads do not collapse to duplicate signatures, but they still expose
-// FoundryFeaturesOptInKeys alongside other optional parameters after @@clientLocation promotes Foundry-Features.
-// The Java clients keep equivalent non-header overloads manually so the enum can remain internal.
-@@convenientAPI(EvaluatorGenerationJobs.create, false, "java");
-@@convenientAPI(EvaluatorGenerationJobs.list, false, "java");
-@@convenientAPI(Insights.get, false, "java");
-@@convenientAPI(Insights.list, false, "java");
-@@convenientAPI(Routines.listRoutines, false, "java");
-@@convenientAPI(Routines.listRoutineRuns, false, "java");
 
 //making delete methods internal to add public shims that return void
 @@access(Skills.deleteSkill, Access.internal);
