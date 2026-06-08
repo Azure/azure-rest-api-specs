@@ -83,7 +83,7 @@ discontinue it in new API versions.
 ### WHATIF-005: Service Must Reject Unknown Properties
 
 > This rule is defined as **OAPI018** in
-> `armapi-review.instructions.md` §8.18. It is listed here because
+> `arm-api-review.instructions.md` §8.18. It is listed here because
 > silently discarding unknown properties is a common source of What-If
 > noise (the GET response differs from the PUT request).
 
@@ -93,10 +93,10 @@ The following existing rules also prevent What-If noise:
 
 | Rule    | Reference File         | What-If Impact                          |
 | ------- | ---------------------- | --------------------------------------- |
-| OAPI026 | armapi-review §8.17    | Value normalization → false differences |
-| OAPI024 | armapi-review §8.16    | Array reordering → false differences    |
-| OAPI025 | armapi-review §8.14    | Type normalization → false differences  |
-| OAPI022 | armapi-review §8.15    | Non-static defaults → false diffs       |
+| OAPI026 | arm-api-review §8.17   | Value normalization → false differences |
+| OAPI024 | arm-api-review §8.16   | Array reordering → false differences    |
+| OAPI025 | arm-api-review §8.14   | Type normalization → false differences  |
+| OAPI022 | arm-api-review §8.15   | Non-static defaults → false diffs       |
 | OAPI027 | property-mutability.md | Write-only properties → false creates   |
 
 ---

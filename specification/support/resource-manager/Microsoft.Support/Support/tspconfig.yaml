@@ -30,6 +30,7 @@ options:
     package-details:
       name: "@azure/arm-support"
     flavor: azure
+    compatibility-lro: true
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-support"
@@ -39,7 +40,7 @@ options:
     service-name: Support
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/support"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsupport"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsupport/v2"
     emitter-output-dir: "{output-dir}/{service-dir}/armsupport"
     fix-const-stuttering: true
     flavor: "azure"
