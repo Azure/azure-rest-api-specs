@@ -139,7 +139,10 @@ interface Snapshots {
   >;
 
   /**
-   * Locks the immutability policy of a snapshot. Once locked, the policy cannot be reduced or removed until the lock period expires.
+   * Locks or updates the immutability policy of a snapshot. This action requires elevated roles such as 'Owner' or 'Administrator'.
+   * When type is set to 'Locked', the policy is locked and the immutability duration cannot be reduced until expiry.
+   * When type is set to 'Unlocked', the policy is set or updated as an unlocked policy — this is functionally equivalent to calling
+   * updateImmutabilityPolicy, but requires elevated privileges. This action has all the privileges of updateImmutabilityPolicy.
    */
   @added(Versions.v2026_03_02)
   @action("updateImmutabilityPolicyLock")

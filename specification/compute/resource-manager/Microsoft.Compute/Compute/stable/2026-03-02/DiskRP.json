@@ -2561,7 +2561,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Locks the immutability policy of a snapshot. Once locked, the policy cannot be reduced or removed until the lock period expires.",
+        "description": "Locks or updates the immutability policy of a snapshot. This action requires elevated roles such as 'Owner' or 'Administrator'.\nWhen type is set to 'Locked', the policy is locked and the immutability duration cannot be reduced until expiry.\nWhen type is set to 'Unlocked', the policy is set or updated as an unlocked policy — this is functionally equivalent to calling\nupdateImmutabilityPolicy, but requires elevated privileges. This action has all the privileges of updateImmutabilityPolicy.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4281,7 +4281,7 @@
     },
     "ImmutabilityPolicyLockData": {
       "type": "object",
-      "description": "Data used for locking the immutability policy of a snapshot.",
+      "description": "Data used for locking the immutability policy of a snapshot. This action has elevated privileges and can both lock and unlock policies.\nWhen type is set to 'Locked', the policy is locked and cannot be reduced until expiry. When type is set to 'Unlocked', the policy is\nset or updated as an unlocked policy, equivalent to calling updateImmutabilityPolicy. This action requires elevated roles such as\n'Owner' or 'Administrator' regardless of the type value.",
       "properties": {
         "immutabilityDurationDays": {
           "type": "integer",
@@ -4291,7 +4291,7 @@
         },
         "type": {
           "$ref": "#/definitions/ImmutabilityPolicyType",
-          "description": "The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period."
+          "description": "The type of the immutability policy to apply. When set to 'Locked', the policy is locked and the immutability duration cannot be\nreduced (only extended). When set to 'Unlocked', the policy is set or updated as an unlocked policy — this is functionally equivalent\nto calling updateImmutabilityPolicy but requires the elevated privileges of the lock action. Both values are accepted because\nupdateImmutabilityPolicyLock has all the privileges of updateImmutabilityPolicy."
         }
       },
       "required": [

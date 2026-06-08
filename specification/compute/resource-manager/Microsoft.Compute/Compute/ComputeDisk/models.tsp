@@ -1174,7 +1174,10 @@ model ImmutabilityPolicyData {
 }
 
 /**
- * Data used for locking the immutability policy of a snapshot.
+ * Data used for locking the immutability policy of a snapshot. This action has elevated privileges and can both lock and unlock policies.
+ * When type is set to 'Locked', the policy is locked and cannot be reduced until expiry. When type is set to 'Unlocked', the policy is
+ * set or updated as an unlocked policy, equivalent to calling updateImmutabilityPolicy. This action requires elevated roles such as
+ * 'Owner' or 'Administrator' regardless of the type value.
  */
 @added(Versions.v2026_03_02)
 model ImmutabilityPolicyLockData {
@@ -1185,7 +1188,10 @@ model ImmutabilityPolicyLockData {
   immutabilityDurationDays: int32;
 
   /**
-   * The type of the immutability policy. 'Unlocked' allows the policy to be modified by privileged users; 'Locked' prevents reduction of the immutability duration but allows extension of the lock period.
+   * The type of the immutability policy to apply. When set to 'Locked', the policy is locked and the immutability duration cannot be
+   * reduced (only extended). When set to 'Unlocked', the policy is set or updated as an unlocked policy — this is functionally equivalent
+   * to calling updateImmutabilityPolicy but requires the elevated privileges of the lock action. Both values are accepted because
+   * updateImmutabilityPolicyLock has all the privileges of updateImmutabilityPolicy.
    */
   type: ImmutabilityPolicyType;
 }
