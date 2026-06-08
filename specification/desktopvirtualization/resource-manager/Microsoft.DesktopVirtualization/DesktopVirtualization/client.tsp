@@ -1058,3 +1058,21 @@ using Microsoft.DesktopVirtualization;
   SessionHostPatch.properties,
   "java"
 );
+
+// Back compatibility: keep ScalingSchedule.daysOfWeek as the
+// ScalingScheduleDaysOfWeekItem expandable enum for Java.
+@@alternateType(
+  ScalingSchedule.daysOfWeek,
+  ScalingScheduleDaysOfWeekItemUsingStruct[],
+  "java"
+);
+@@clientName(
+  ScalingScheduleDaysOfWeekItem,
+  "ScalingScheduleDaysOfWeekItemOld",
+  "java"
+);
+@@clientName(
+  ScalingScheduleDaysOfWeekItemUsingStruct,
+  "ScalingScheduleDaysOfWeekItem",
+  "java"
+);
