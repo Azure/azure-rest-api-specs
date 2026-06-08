@@ -3,34 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid;
 
-@@clientName(ResourceProvisioningState,
-  "EventGridResourceProvisioningState",
-  "csharp"
-);
-
-// Type renames to preserve backward compatibility with autorest-generated SDK
-@@clientName(Partner, "EventGridPartnerContent", "csharp");
-@@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
-@@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
-@@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
-@@clientName(EventType, "EventTypeUnderTopic", "csharp");
-@@clientName(EventSubscription, "EventGridSubscription", "csharp");
-@@clientName(Domain, "EventGridDomain", "csharp");
-@@clientName(Topic, "EventGridTopic", "csharp");
-@@clientName(Namespace, "EventGridNamespace", "csharp");
-@@clientName(Channel, "PartnerNamespaceChannel", "csharp");
-@@clientName(Client, "EventGridNamespaceClient", "csharp");
-@@clientName(InputSchema, "EventGridInputSchema", "csharp");
-@@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
-@@clientName(ChannelProvisioningState, "PartnerNamespaceChannelProvisioningState", "csharp");
-@@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
-@@clientName(DomainProvisioningState, "EventGridDomainProvisioningState", "csharp");
-@@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
-@@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
-@@clientName(TopicProvisioningState, "EventGridTopicProvisioningState", "csharp");
-@@clientName(Filter, "EventGridFilter", "csharp");
-@@clientName(PrivateEndpointConnection, "EventGridPrivateEndpointConnectionData", "csharp");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ChannelUpdateParameters.properties);
 
