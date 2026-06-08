@@ -734,6 +734,10 @@ Apply the **same six-step inventory-compare-classify workflow** described above 
 - The same classification rules apply: dropped entries require checking whether the underlying violation was fixed; new entries require a clear `reason`; security-rule suppressions are blocking; suppressions that should have been spec fixes are blocking.
 - If the PR adds a brand-new `suppressions.yaml` for a service that did not previously have one, every entry is new - apply the new-suppressions criteria to each.
 
+**Suppression review outcome (labels + feedback mode).** Track one of two outcomes after the suppression continuity analysis:
+- `suppression-clean`: no suppression-related findings and no open suppression-related questions. If the PR currently has `SuppressionReviewRequired`, propose in Step 8/9 to add `Approved-Suppression` and remove `SuppressionReviewRequired`.
+- `suppression-follow-up`: at least one suppression-related finding or open question remains. Include those items in Step 6 and execute per the active mode: in posting mode, include comments in Step 8 after approval; in chat-only mode, provide the feedback in chat. Do **not** add `Approved-Suppression` on this path.
+
 #### For TypeSpec files:
 
 Apply the full "TypeSpec Review Checklist Summary" from `typespec-review.instructions.md`. Key areas include project structure, decorators, versioning, ARM resource patterns, secret detection, suppressions, and anti-patterns.
@@ -1291,7 +1295,7 @@ The wording of the prompt body MUST match the Rung 2 template above byte-for-byt
 
 If the plan has zero Scenario E rows, elements 1 and 4 still appear (with a `0`-count and an `N/A` rollback note) so the disclosure shape is stable across plans and no review accidentally relies on the absence of the disclosure to infer that no auto-resolves are planned.
 
-**Bundle the Step 9 label proposal into this same approval prompt.** When asking for plan approval, also ask the human to approve (a) adding the `ARMChangesRequested` label **if** the plan will result in at least one POST-NEW or RESOLVE-AND-REPOST action executing (skip this proposal when the count is zero -- see Step 9 for the rationale), and (b) removing the `WaitForARMFeedback` label if present. Bundling avoids the discoverability gap where the human approves posting but never reaches Step 9 (chat closes, session times out), leaving agent comments on the PR with no `ARMChangesRequested` signal for the PR author or downstream bots. If the plan is `Cancel`-ed, the label proposal is also cancelled. If the plan is `Execute plan` or `Execute selectively`, the label changes execute after the last posting action in Step 9.
+**Bundle the Step 9 label proposal into this same approval prompt.** When asking for plan approval, also ask the human to approve (a) adding the `ARMChangesRequested` label **if** the plan will result in at least one POST-NEW or RESOLVE-AND-REPOST action executing (skip this proposal when the count is zero -- see Step 9 for the rationale), (b) removing the `WaitForARMFeedback` label if present, and (c) for suppression-review PRs with `suppression-clean` outcome, adding `Approved-Suppression` and removing `SuppressionReviewRequired` when present. Bundling avoids the discoverability gap where the human approves posting but never reaches Step 9 (chat closes, session times out), leaving agent comments on the PR with no `ARMChangesRequested` signal for the PR author or downstream bots. If the plan is `Cancel`-ed, the label proposal is also cancelled. If the plan is `Execute plan` or `Execute selectively`, the label changes execute after the last posting action in Step 9.
 
 After the human chooses, execute the approved subset of the plan:
 
@@ -1384,6 +1388,9 @@ Execute the label changes that were **already approved as part of the bundled St
 2. If the human chose `Execute plan` or `Execute selectively`, apply the approved label changes via the GitHub tools, **after** the last posting action in Step 8 completes:
    - **Add** the `ARMChangesRequested` label **only if** at least one POST-NEW or RESOLVE-AND-REPOST action was actually executed (i.e., at least one new agent comment was posted on the PR). If zero comments were posted (clean spec, or every finding was SKIP-COVERED / REPLY-LINE-SHIFT), do **not** add `ARMChangesRequested` -- it would falsely signal pending changes to the author and downstream bots.
    - **Remove** the `WaitForARMFeedback` label only if it was present on the PR at Step 8 approval time; otherwise skip the removal. (Removal is independent of the posted-comment count: the review ran to completion either way.)
+   - **Suppression labels:** If `SuppressionReviewRequired` was present at Step 8 approval time and suppression continuity analysis ran:
+     - when outcome is `suppression-clean`, **add** `Approved-Suppression` (if missing) and **remove** `SuppressionReviewRequired`;
+     - when outcome is `suppression-follow-up`, keep `SuppressionReviewRequired` and do **not** add `Approved-Suppression`.
 3. Report to the human reviewer which labels were added and removed (and, when applicable, which were intentionally skipped and why).
 
 ### Step 10: Clean Up Local Workspace (MANDATORY)
