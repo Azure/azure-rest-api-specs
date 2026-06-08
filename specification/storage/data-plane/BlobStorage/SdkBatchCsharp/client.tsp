@@ -68,6 +68,16 @@ model BatchBlobClientOptions {
   "csharp"
 );
 
+/** The type of blob deletions. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobDeleteTypeCustom {
+  /** None. */
+  None: "None",
+
+  /** Permanently delete the blob. */
+  Permanent: "Permanent",
+}
+
 /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
@@ -130,7 +140,7 @@ op deleteCsharp is StorageOperationNoBody<
     /** Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled. */
     @query
     @clientName("blobDeleteType")
-    deletetype?: BlobDeleteType;
+    deletetype?: BlobDeleteTypeCustom;
 
     ...AccessTierIfModifiedSinceParameter;
     ...AccessTierIfUnmodifiedSinceParameter;
@@ -189,5 +199,7 @@ op setTierCsharp is StorageOperationNoBody<
 @@clientName(BlobBatchClient.BatchBlobClient, "BlobRestClient", "csharp");
 @@clientName(AccessTier, "BatchAccessTier", "csharp");
 @@clientName(RehydratePriority, "BatchRehydratePriority", "csharp");
+@@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "csharp");
 
 @@access(DeleteSnapshotsOptionType, Access.internal, "csharp");
+@@access(BlobDeleteTypeCustom, Access.internal, "csharp");
