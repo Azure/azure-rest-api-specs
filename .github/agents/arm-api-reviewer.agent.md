@@ -735,7 +735,7 @@ Apply the **same six-step inventory-compare-classify workflow** described above 
 - If the PR adds a brand-new `suppressions.yaml` for a service that did not previously have one, every entry is new - apply the new-suppressions criteria to each.
 
 **Suppression review outcome (labels + feedback mode).** Track one of two outcomes after the suppression continuity analysis:
-- `suppression-clean`: no suppression-related findings and no open suppression-related questions. If the PR currently has `SuppressionReviewRequired`, propose in Step 8/9 to add `Approved-Suppression` and remove `SuppressionReviewRequired`.
+- `suppression-clean`: no suppression-related findings and no open suppression-related questions. If the PR currently has `SuppressionReviewRequired`, propose in Step 8/9 to add `Approved-Suppression`.
 - `suppression-follow-up`: at least one suppression-related finding or open question remains. Include those items in Step 6 and execute per the active mode: in posting mode, include comments in Step 8 after approval; in chat-only mode, provide the feedback in chat. Do **not** add `Approved-Suppression` on this path.
 
 #### For TypeSpec files:
