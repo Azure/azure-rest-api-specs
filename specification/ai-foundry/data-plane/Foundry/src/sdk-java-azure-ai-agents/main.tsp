@@ -1,5 +1,6 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
+import "../common/beta-ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
 import "../memory-stores/routes.tsp";
@@ -10,5 +11,3 @@ import "../agents-optimization/routes.tsp";
 // so we can customize visibility where necessary.
 import "../openai-responses/models.tsp";
 import "../openai-conversations/routes.tsp";
-
-import "./relocate-beta-operations.tsp";
