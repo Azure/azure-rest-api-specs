@@ -1034,7 +1034,6 @@ using Microsoft.MachineLearningServices;
 );
 @@clientName(RuleCategory, "OutboundRuleCategory", "csharp");
 @@clientName(RuleStatus, "OutboundRuleStatus", "csharp");
-@@clientName(PrivateEndpointResource, "PrivateEndpointBase", "csharp");
 @@clientName(PyTorch, "PyTorchDistributionConfiguration", "csharp");
 @@clientName(TensorFlow, "TensorFlowDistributionConfiguration", "csharp");
 @@clientName(
