@@ -4,6 +4,7 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -38,12 +39,25 @@ interface ResourceRecommendationBases {
    * Update the tracked properties of a Recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2026_02_01_preview)
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     ResourceRecommendationBase,
     PatchModel = TrackedRecommendationPropertiesPayload,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
     Error = ArmDefaultErrorResponse
+  >;
+
+  /**
+   * Update the state of a Recommendation
+   */
+  @added(Versions.v2026_02_01_preview)
+  @patch(#{ implicitOptionality: false })
+  update is Extension.CustomPatchSync<
+    Extension.Subscription,
+    ResourceRecommendationBase,
+    RecommendationPatchPayload
   >;
 
   /**
@@ -55,7 +69,11 @@ interface ResourceRecommendationBases {
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
-       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'
+       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.
+       * <br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>
+       * <br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>
+       * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'
        */
       @query("$filter")
       $filter?: string;

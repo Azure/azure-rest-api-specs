@@ -36,6 +36,11 @@ using Microsoft.Advisor;
   "!csharp"
 );
 @@clientLocation(
+  ResourceRecommendationBases.update,
+  "Recommendations",
+  "!csharp"
+);
+@@clientLocation(
   ResourceRecommendationBases.listByTenant,
   "Recommendations",
   "!csharp"

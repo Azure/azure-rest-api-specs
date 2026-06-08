@@ -76,4 +76,8 @@ emit:
 
     assert(!result.success);
   });
+
+  it("should have suppressable flag set to true", function () {
+    assert.equal(new EmitAutorestRule().suppressable, true);
+  });
 });

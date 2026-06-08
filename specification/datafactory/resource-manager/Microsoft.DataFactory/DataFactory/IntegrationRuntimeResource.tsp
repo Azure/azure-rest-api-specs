@@ -53,7 +53,7 @@ alias IntegrationRuntimesOps = Azure.ResourceManager.Legacy.RoutedOperations<
     integrationRuntimeName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes",
   }
 >;
 
@@ -297,7 +297,7 @@ interface IntegrationRuntimeResources {
    */
   @tag("integrationRuntimeNodes")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
   integrationRuntimeNodesGet is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     void,
@@ -320,7 +320,7 @@ interface IntegrationRuntimeResources {
    */
   @tag("integrationRuntimeNodes")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
   integrationRuntimeNodesDelete is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     void,
@@ -342,7 +342,7 @@ interface IntegrationRuntimeResources {
    * Updates a self-hosted integration runtime node.
    */
   @tag("integrationRuntimeNodes")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}")
   @patch(#{ implicitOptionality: false })
   integrationRuntimeNodesUpdate is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
@@ -365,7 +365,7 @@ interface IntegrationRuntimeResources {
    * Get the IP address of self-hosted integration runtime node.
    */
   @tag("integrationRuntimeNodes")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/nodes/{nodeName}/ipAddress")
   getIpAddress is IntegrationRuntimesOps.ActionSync<
     IntegrationRuntimeResource,
     void,

@@ -42,11 +42,11 @@ interface PrivateEndpointConnections {
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("Request id")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -64,11 +64,11 @@ interface PrivateEndpointConnections {
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("Request id")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | ArmDeletedNoContentResponse,
     Error = StorageSyncError
@@ -84,11 +84,11 @@ interface PrivateEndpointConnections {
     Response = ArmResponse<PrivateEndpointConnectionListResult> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;

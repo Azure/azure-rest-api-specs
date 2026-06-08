@@ -46,13 +46,10 @@
       "name": "DiskAccesses"
     },
     {
-      "name": "PrivateEndpointConnections"
-    },
-    {
       "name": "DiskEncryptionSets"
     },
     {
-      "name": "DiskRestorePoints"
+      "name": "IncrementalRestorePoints"
     },
     {
       "name": "Snapshots"
@@ -375,7 +372,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiskAccess"
         },
         "x-ms-long-running-operation": true
       },
@@ -449,7 +447,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiskAccess"
         },
         "x-ms-long-running-operation": true
       },
@@ -520,7 +519,7 @@
       "get": {
         "operationId": "DiskAccesses_ListPrivateEndpointConnections",
         "tags": [
-          "PrivateEndpointConnections"
+          "DiskAccesses"
         ],
         "description": "List information about private endpoint connections under a disk access resource",
         "parameters": [
@@ -569,7 +568,7 @@
       "get": {
         "operationId": "DiskAccesses_GetAPrivateEndpointConnection",
         "tags": [
-          "PrivateEndpointConnections"
+          "DiskAccesses"
         ],
         "description": "Gets information about a private endpoint connection under a disk access resource.",
         "parameters": [
@@ -620,7 +619,7 @@
       "put": {
         "operationId": "DiskAccesses_UpdateAPrivateEndpointConnection",
         "tags": [
-          "PrivateEndpointConnections"
+          "DiskAccesses"
         ],
         "description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.",
         "parameters": [
@@ -694,14 +693,15 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DiskAccesses_DeleteAPrivateEndpointConnection",
         "tags": [
-          "PrivateEndpointConnections"
+          "DiskAccesses"
         ],
         "description": "Deletes a private endpoint connection under a disk access resource.",
         "parameters": [
@@ -980,7 +980,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiskEncryptionSet"
         },
         "x-ms-long-running-operation": true
       },
@@ -1060,7 +1061,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DiskEncryptionSet"
         },
         "x-ms-long-running-operation": true
       },
@@ -1411,7 +1413,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Disk"
         },
         "x-ms-long-running-operation": true
       },
@@ -1512,7 +1515,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Disk"
         },
         "x-ms-long-running-operation": true
       },
@@ -1653,7 +1657,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AccessUri"
         },
         "x-ms-long-running-operation": true
       }
@@ -1723,7 +1728,7 @@
       "get": {
         "operationId": "DiskRestorePoint_ListByRestorePoint",
         "tags": [
-          "DiskRestorePoints"
+          "IncrementalRestorePoints"
         ],
         "description": "Lists diskRestorePoints under a vmRestorePoint.",
         "parameters": [
@@ -1779,7 +1784,7 @@
       "get": {
         "operationId": "DiskRestorePoint_Get",
         "tags": [
-          "DiskRestorePoints"
+          "IncrementalRestorePoints"
         ],
         "description": "Get disk restorePoint resource",
         "parameters": [
@@ -1842,7 +1847,7 @@
       "post": {
         "operationId": "DiskRestorePoint_GrantAccess",
         "tags": [
-          "DiskRestorePoints"
+          "IncrementalRestorePoints"
         ],
         "description": "Grants access to a diskRestorePoint.",
         "parameters": [
@@ -1920,7 +1925,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AccessUri"
         },
         "x-ms-long-running-operation": true
       }
@@ -1929,7 +1935,7 @@
       "post": {
         "operationId": "DiskRestorePoint_RevokeAccess",
         "tags": [
-          "DiskRestorePoints"
+          "IncrementalRestorePoints"
         ],
         "description": "Revokes access to a diskRestorePoint.",
         "parameters": [
@@ -2178,7 +2184,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Snapshot"
         },
         "x-ms-long-running-operation": true
       },
@@ -2255,7 +2262,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Snapshot"
         },
         "x-ms-long-running-operation": true
       },
@@ -2390,7 +2398,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AccessUri"
         },
         "x-ms-long-running-operation": true
       }
