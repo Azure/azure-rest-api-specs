@@ -1,37 +1,11 @@
 parameters:
   "service-dir":
     default: "sdk/ai"
-emit:
-  - "@typespec/openapi3"
 options:
-  "@typespec/openapi3":
-    emitter-output-dir: "{project-root}/"
-    output-file: "openapi3/{version}/microsoft-foundry-openapi3.{file-type}"
-    # output-file: "openapi3/{version}/microsoft-foundry-openapi3.yaml"
-    file-type: [yaml, json]
-    omit-unreachable-types: true
-    openapi-versions:
-      - "3.2.0"
-  "@azure-tools/typespec-java":
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    package-name: Azure.AI.Projects
     api-version: "v1"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
-    namespace: "com.azure.ai.projects"
-    service-name: "AIProjects"
-    partial-update: true
-    enable-sync-stack: true
-    generate-tests: false
-    generate-samples: false
-    custom-types-subpackage: "implementation.models"
-    customization-class: customizations/src/main/java/ProjectsCustomizations.java
-    rename-model:
-      FilesFileDetails: SkillFileDetails
-    flavor: azure
-  "@typespec/json-schema":
-    emitAllModels: true
-    emitAllRefs: false
-    emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
-    file-type: json
-    bundleId: azure-ai-agents-v2.json
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

@@ -4,6 +4,7 @@ info:
   version: virtual-public-preview
 tags:
   - name: EvaluationSuiteGenerationJobs
+  - name: Fine-Tuning
   - name: Responses Root
     description: Responses
   - name: Responses
@@ -43,6 +44,7 @@ tags:
     parent: Platform APIs
   - name: Fine-tuning
     parent: Platform APIs
+    summary: Fine-Tuning
   - name: EvaluatorGenerationJobs
     parent: Platform APIs
     summary: Evaluator generation jobs
@@ -52,7 +54,34 @@ tags:
     parent: Platform APIs
   - name: Chat
     parent: Platform APIs
-  - name: Fine-Tuning
+  - name: Assistants
+    parent: Platform APIs
+  - name: Audio
+    parent: Platform APIs
+  - name: Batch
+    parent: Platform APIs
+  - name: Completions
+    parent: Platform APIs
+  - name: Containers
+    parent: Platform APIs
+  - name: Embeddings
+    parent: Platform APIs
+  - name: Files
+    parent: Platform APIs
+  - name: Images
+    parent: Platform APIs
+  - name: Moderations
+    parent: Platform APIs
+  - name: Realtime
+    parent: Platform APIs
+  - name: Threads
+    parent: Platform APIs
+  - name: Uploads
+    parent: Platform APIs
+  - name: Vector stores
+    parent: Platform APIs
+    summary: Vector Stores
+  - name: Videos
     parent: Platform APIs
   - name: Routines
     parent: Platform APIs
@@ -6142,7 +6171,11 @@ paths:
     get:
       operationId: EvaluatorGenerationJobs_list
       summary: List evaluator generation jobs
-      description: Returns a list of evaluator generation jobs.
+      description: |-
+        Returns a list of evaluator generation jobs. The List API has up to a few
+        seconds of propagation delay, so a recently created job may not appear
+        immediately; use the Get evaluator generation job API with the job ID to
+        retrieve a specific job without delay.
       parameters:
         - name: Foundry-Features
           in: header
@@ -19975,6 +20008,13 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
+          default:
+            - turn
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -20033,6 +20073,13 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
+          default:
+            - turn
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -20062,6 +20109,13 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
+        supported_evaluation_levels:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluationLevel'
+          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
+          default:
+            - turn
         description:
           type: string
           description: The asset description text.

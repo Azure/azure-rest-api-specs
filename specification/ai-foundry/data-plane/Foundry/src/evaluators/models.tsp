@@ -292,6 +292,9 @@ model EvaluatorVersion {
   @doc("The categories of the evaluator")
   categories: EvaluatorCategory[];
 
+  @doc("Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).")
+  supported_evaluation_levels?: EvaluationLevel[] = #[EvaluationLevel.turn];
+
   @doc("Definition of the evaluator")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   definition: EvaluatorDefinition;
