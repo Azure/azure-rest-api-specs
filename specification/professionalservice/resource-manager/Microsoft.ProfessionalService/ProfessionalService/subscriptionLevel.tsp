@@ -60,9 +60,7 @@ interface ProfessionalServiceOperationStatuses {
   getSubscriptionOperationStatus(
     ...ApiVersionParameter,
     ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-    /** The operation ID. */
-    @path operationId: string,
+    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
   ):
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
