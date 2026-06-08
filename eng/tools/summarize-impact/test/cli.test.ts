@@ -3,7 +3,6 @@ import { describe, expect, it } from "vitest"; //vi
 import path from "path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { Octokit } from "@octokit/rest";
 import { PRContext } from "../src/PRContext.js";
 import { evaluateImpact, getRPaaSFolderList } from "../src/impact.js";
 import { LabelContext } from "../src/labelling-types.js";
@@ -30,10 +29,7 @@ describe("Check Changes", () => {
           toRemove: new Set(),
         };
 
-        const github = new Octokit({
-          ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
-        });
-        const rpaaSFolderList = await getRPaaSFolderList(github, "Azure", "azure-rest-api-specs");
+        const rpaaSFolderList = getRPaaSFolderList(targetDirectory);
 
         const prContext = new PRContext(sourceDirectory, targetDirectory, labelContext, {
           sha: "ad7c74cb27d2cf3ba83996aaea36b07caa4d16c8",
