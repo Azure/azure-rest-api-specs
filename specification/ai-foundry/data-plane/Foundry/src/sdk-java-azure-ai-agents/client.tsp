@@ -322,8 +322,10 @@ using Azure.AI.Projects;
 @@access(ToolCallStatus, Access.public);
 @@usage(ToolCallStatus, Usage.input);
 
-@@access(FoundryFeaturesOptInKeys, Access.public);
-@@access(AgentDefinitionOptInKeys, Access.public);
+@@usage(FoundryFeaturesOptInKeys, Usage.input);
+@@access(FoundryFeaturesOptInKeys, Access.internal, "java");
+@@usage(AgentDefinitionOptInKeys, Usage.input);
+@@access(AgentDefinitionOptInKeys, Access.internal, "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
