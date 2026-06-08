@@ -19,7 +19,7 @@
   rules:
     - ParametersInPointGet
   where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/professionalServices/{resourceName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}"].get
   reason: >-
     The optional `$expandCustomerData` query parameter is required to gate PII (purchaser email) per the
     ARM PII guidelines (https://aka.ms/arm-pii). The default GET response excludes customer data so that
