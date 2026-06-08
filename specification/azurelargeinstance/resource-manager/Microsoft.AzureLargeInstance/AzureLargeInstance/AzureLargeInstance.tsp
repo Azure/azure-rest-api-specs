@@ -112,12 +112,13 @@ op ArmResourceActionNoBody<
   TRequest extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model | void,
   TBaseParameters extends TypeSpec.Reflection.Model = Azure.ResourceManager.Foundations.BaseParameters<AzureLargeInstance>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-  ...TRequest,
-): ArmAcceptedLroResponse | TResponse | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>, ...TRequest):
+  | ArmAcceptedLroResponse
+  | TResponse
+  | ErrorResponse;
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(AzureLargeInstances.update::parameters.properties,
+@@encodedName(
+  AzureLargeInstances.update::parameters.properties,
   "application/json",
   "tagsParameter"
 );

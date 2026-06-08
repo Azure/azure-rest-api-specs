@@ -295,12 +295,14 @@ interface ServiceTasks {
 
 @@doc(ProjectTask.name, "Name of the Task");
 @@doc(ProjectTask.properties, "Custom task properties");
-@@doc(ProjectTasks.createOrUpdate::parameters.resource,
+@@doc(
+  ProjectTasks.createOrUpdate::parameters.resource,
   "Information about the task"
 );
 @@doc(ProjectTasks.update::parameters.properties, "Information about the task");
 @@doc(ProjectTasks.command::parameters.body, "Command to execute");
-@@doc(ServiceTasks.createOrUpdate::parameters.resource,
+@@doc(
+  ServiceTasks.createOrUpdate::parameters.resource,
   "Information about the task"
 );
 @@doc(ServiceTasks.update::parameters.properties, "Information about the task");

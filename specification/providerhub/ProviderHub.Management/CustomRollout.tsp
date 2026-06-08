@@ -57,6 +57,7 @@ interface CustomRollouts {
 @@maxLength(CustomRollout.name, 260);
 @@doc(CustomRollout.name, "The rollout name.");
 @@doc(CustomRollout.properties, "Properties of the rollout.");
-@@doc(CustomRollouts.createOrUpdate::parameters.resource,
+@@doc(
+  CustomRollouts.createOrUpdate::parameters.resource,
   "The custom rollout properties supplied to the CreateOrUpdate operation."
 );

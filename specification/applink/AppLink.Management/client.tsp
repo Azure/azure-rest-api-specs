@@ -7,14 +7,16 @@ namespace Microsoft.AppLink;
 
 @@clientName(Microsoft.AppLink, "AppNetworkMgmtClient", "python");
 
-@@clientName(AvailableVersionProperties.selfManagedVersions,
+@@clientName(
+  AvailableVersionProperties.selfManagedVersions,
   "selfManagedVersionDetail",
   "csharp"
 );
 
 @@clientName(ProvisioningState, "AppLinkProvisioningState", "csharp");
 @@clientName(ClusterType, "AppLinkClusterType", "csharp");
-@@clientName(EastWestGatewayVisibility,
+@@clientName(
+  EastWestGatewayVisibility,
   "AppLinkEastWestGatewayVisibility",
   "csharp"
 );
@@ -25,21 +27,25 @@ namespace Microsoft.AppLink;
 @@clientName(ReleaseChannelInfo, "AppLinkReleaseChannelInfo", "csharp");
 @@clientName(VersionInfo, "AppLinkVersionInfo", "csharp");
 @@clientName(AvailableVersion, "AppLinkAvailableVersion", "csharp");
-@@clientName(AvailableVersionProperties,
+@@clientName(
+  AvailableVersionProperties,
   "AppLinkAvailableVersionProperties",
   "csharp"
 );
 @@clientName(UpgradeHistory, "AppLinkUpgradeHistory", "csharp");
-@@clientName(UpgradeHistoryProperties,
+@@clientName(
+  UpgradeHistoryProperties,
   "AppLinkUpgradeHistoryProperties",
   "csharp"
 );
 
-@@clientName(AvailableVersions.listByLocation,
+@@clientName(
+  AvailableVersions.listByLocation,
   "GetAppLinkAvailableVersionsByLocation",
   "csharp"
 );
-@@clientName(UpgradeHistories.listByAppLinkMember,
+@@clientName(
+  UpgradeHistories.listByAppLinkMember,
   "GetAppLinkUpgradeHistories",
   "csharp"
 );
@@ -56,7 +62,8 @@ model AppLinkUpdate {
   tags?: Record<string>;
 }
 
-@@alternateType(Microsoft.AppLink.AppLinks.update::parameters.properties,
+@@alternateType(
+  Microsoft.AppLink.AppLinks.update::parameters.properties,
   AppLinkUpdate,
   "javascript,go,python,java,csharp"
 );
@@ -83,7 +90,8 @@ model AppLinkMemberUpdate {
   properties?: AppLinkMemberUpdateProperties;
 }
 
-@@alternateType(Microsoft.AppLink.AppLinkMembers.update::parameters.properties,
+@@alternateType(
+  Microsoft.AppLink.AppLinkMembers.update::parameters.properties,
   AppLinkMemberUpdate,
   "javascript,go,python,java,csharp"
 );

@@ -79,10 +79,12 @@ interface FrontendEndpoints {
 
 @@maxLength(FrontendEndpoint.name, 255);
 @@minLength(FrontendEndpoint.name, 1);
-@@doc(FrontendEndpoint.name,
+@@doc(
+  FrontendEndpoint.name,
   "Name of the Frontend endpoint which is unique within the Front Door."
 );
 @@doc(FrontendEndpoint.properties, "Properties of the Frontend endpoint");
-@@doc(FrontendEndpoints.enableHttps::parameters.body,
+@@doc(
+  FrontendEndpoints.enableHttps::parameters.body,
   "The configuration specifying how to enable HTTPS"
 );
