@@ -45941,7 +45941,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/RuntimeName",
-          "description": "Function app runtime name. Available options: dotnet-isolated, node, java, powershell, python, custom"
+          "description": "Function app runtime name. Available options: dotnet-isolated, node, java, powershell, python, go, custom"
         },
         "version": {
           "type": "string",
@@ -51521,13 +51521,14 @@
     },
     "RuntimeName": {
       "type": "string",
-      "description": "Function app runtime name. Available options: dotnet-isolated, node, java, powershell, python, custom",
+      "description": "Function app runtime name. Available options: dotnet-isolated, node, java, powershell, python, go, custom",
       "enum": [
         "dotnet-isolated",
         "node",
         "java",
         "powershell",
         "python",
+        "go",
         "custom"
       ],
       "x-ms-enum": {
@@ -51553,6 +51554,10 @@
           {
             "name": "python",
             "value": "python"
+          },
+          {
+            "name": "go",
+            "value": "go"
           },
           {
             "name": "custom",
