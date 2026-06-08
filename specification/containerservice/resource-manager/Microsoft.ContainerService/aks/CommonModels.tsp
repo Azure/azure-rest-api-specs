@@ -1456,7 +1456,7 @@ union ArtifactSource {
 /**
  * The config customization mode for this scheduler instance.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 union SchedulerConfigMode {
   string,
 
@@ -2052,9 +2052,9 @@ model ManagedClusterProperties {
   aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile;
 
   /**
-   * Profile of the pod scheduler configuration.
+   * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_05_01)
   schedulerProfile?: SchedulerProfile;
 
   /**
@@ -4147,34 +4147,23 @@ model ManagedClusterAIToolchainOperatorProfile {
 }
 
 /**
- * The pod scheduler profile for the cluster.
+ * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 model SchedulerProfile {
   /**
-   * Mapping of each scheduler instance to its profile.
-   */
-  schedulerInstanceProfiles?: SchedulerProfileSchedulerInstanceProfiles;
-}
-
-/**
- * Mapping of each scheduler instance to its profile.
- */
-@added(Versions.v2026_05_02_preview)
-model SchedulerProfileSchedulerInstanceProfiles {
-  /**
-   * The scheduler profile for the upstream scheduler instance.
+   * Profile with settings related to upstream variant of kube-scheduler (https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler).
    */
   upstream?: SchedulerInstanceProfile;
 }
 
 /**
- * The scheduler profile for a single scheduler instance.
+ * Profile with settings related to a specific instance of an AKS-managed scheduler.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 model SchedulerInstanceProfile {
   /**
-   * The config customization mode for this scheduler instance.
+   * The configuration mode to be used by the AKS-managed scheduler.
    */
   schedulerConfigMode?: SchedulerConfigMode;
 }
