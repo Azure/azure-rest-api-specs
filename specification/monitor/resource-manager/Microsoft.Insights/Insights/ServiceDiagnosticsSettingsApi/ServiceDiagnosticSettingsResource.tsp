@@ -14,7 +14,6 @@ namespace ServiceDiagnosticsSettingsApi;
  * Description of a service diagnostic setting
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@singleton("service")
 @extensionResource
 model ServiceDiagnosticSettingsResource
   is Azure.ResourceManager.ExtensionResource<ServiceDiagnosticSettings> {

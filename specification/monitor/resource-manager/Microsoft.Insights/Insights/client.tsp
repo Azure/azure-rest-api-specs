@@ -22,8 +22,14 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Microsoft.Insights;
+using ActionGroupsApi;
+using ActivityLogAlertsApi;
+using AlertRulesIncidentsApi;
 using ScheduledQueryRuleApi;
 using AutoScaleApi;
+using DataCollectionApi;
+using LogProfilesApi;
+using MetricAlertApi;
 using Microsoft.Common;
 using PrivateLinkScopesApi;
 using MetricsApi;
@@ -61,6 +67,213 @@ namespace Microsoft.InsightsCombinedClient;
   Microsoft.InsightsCombinedClient,
   "MonitorManagementClient",
   "python"
+);
+
+// C# compatibility names from the shipped AutoRest-based Azure.ResourceManager.Monitor package.
+@@clientName(
+  PrivateLinkScopesApi.AzureMonitorPrivateLinkScope,
+  "MonitorPrivateLinkScope",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.PrivateEndpointConnection,
+  "MonitorPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.PrivateLinkResource,
+  "MonitorPrivateLink",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.ScopedResource,
+  "MonitorPrivateLinkScoped",
+  "csharp"
+);
+@@clientLocation(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.getNSP,
+  "NspActionGroup",
+  "csharp"
+);
+@@clientLocation(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.listNSP,
+  "NspActionGroup",
+  "csharp"
+);
+@@clientLocation(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.reconcileNSP,
+  "NspActionGroup",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownPerfCounterDataSourceStreams,
+  "PerfCounterDataSourceStream",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownWindowsEventLogDataSourceStreams,
+  "WindowsEventLogDataSourceStream",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownSyslogDataSourceStreams,
+  "SyslogDataSourceStream",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownSyslogDataSourceFacilityNames,
+  "SyslogDataSourceFacilityName",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownExtensionDataSourceStreams,
+  "ExtensionDataSourceStream",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFilesDataSourceFormat,
+  "LogFilesDataSourceFormat",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownPrometheusForwarderDataSourceStreams,
+  "DataCollectionRuleKnownPrometheusForwarderDataSourceStream",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.EventHubDestination,
+  "DataCollectionRuleEventHubDestination",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownDataFlowStreams,
+  "DataFlowStream",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.LocationSpec,
+  "DataCollectionRuleBcdrLocationSpec",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLocationSpecProvisioningStatus,
+  "DataCollectionRuleBcdrLocationSpecProvisioningStatus",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownSyslogDataSourceLogLevels,
+  "SyslogDataSourceLogLevel",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.EventHubDirectDestination,
+  "DataCollectionRuleEventHubDirectDestination",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.StorageBlobDestination,
+  "DataCollectionRuleStorageBlobDestination",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.StorageTableDestination,
+  "DataCollectionRuleStorageTableDestination",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.AccessModeSettings,
+  "MonitorPrivateLinkAccessModeSettings",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.AccessModeSettingsExclusion,
+  "MonitorPrivateLinkAccessModeSettingsExclusion",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.AccessMode,
+  "MonitorPrivateLinkAccessMode",
+  "csharp"
+);
+@@clientName(AutoScaleApi.TimeWindow, "MonitorTimeWindow", "csharp");
+@@clientName(AutoScaleApi.Recurrence, "MonitorRecurrence", "csharp");
+@@clientName(AutoScaleApi.ScaleAction, "MonitorScaleAction", "csharp");
+@@clientName(
+  AutoScaleApi.ScaleCapacity,
+  "MonitorScaleCapacity",
+  "csharp"
+);
+@@clientName(AutoScaleApi.ScaleRule, "AutoscaleRule", "csharp");
+@@clientName(
+  AutoScaleApi.TimeAggregationType,
+  "MetricTriggerTimeAggregationType",
+  "csharp"
+);
+@@clientName(AutoScaleApi.ScaleDirection, "MonitorScaleDirection", "csharp");
+@@clientName(
+  AutoScaleApi.ComparisonOperationType,
+  "MetricTriggerComparisonOperation",
+  "csharp"
+);
+@@clientName(
+  AutoScaleApi.ScaleRuleMetricDimension,
+  "AutoscaleRuleMetricDimension",
+  "csharp"
+);
+@@clientName(
+  MetricAlertApi.AggregationTypeEnum,
+  "MetricCriteriaTimeAggregationType",
+  "csharp"
+);
+@@clientName(MetricAlertApi.Operator, "MetricCriteriaOperator", "csharp");
+@@clientName(
+  ScheduledQueryRuleApi.ConditionOperator,
+  "MonitorConditionOperator",
+  "csharp"
+);
+@@clientName(
+  AutoScaleApi.ScaleRuleMetricDimensionOperationType.Equals,
+  "Equal",
+  "csharp"
+);
+@@clientName(MetricAlertApi.Operator.Equals, "Equal", "csharp");
+@@clientName(ScheduledQueryRuleApi.ConditionOperator.Equals, "Equal", "csharp");
+@@clientName(ActivityLogAlertsApi.AlertRuleLeafCondition.equals, "Equal", "csharp");
+@@clientName(AutoScaleApi.AutoscaleSetting.name, "AutoscaleSettingName", "csharp");
+@@clientName(MetricsApi.MetricDefinitionsOperationGroup.list, "GetMonitorMetricDefinitions", "csharp");
+@@clientName(
+  MetricsApi.MetricDefinitionsOperationGroup.listAtSubscriptionScope,
+  "GetSubscriptionMonitorMetricDefinitions",
+  "csharp"
+);
+@@clientName(MetricsApi.MetricNamespacesOperationGroup.list, "GetMonitorMetricNamespaces", "csharp");
+@@clientName(
+  PrivateLinkScopesApi.PrivateLinkResources.listByPrivateLinkScope,
+  "GetAllPrivateLinkResources",
+  "csharp"
+);
+
+union MonitorDayOfWeek {
+  string,
+  Sunday: "Sunday",
+  Monday: "Monday",
+  Tuesday: "Tuesday",
+  Wednesday: "Wednesday",
+  Thursday: "Thursday",
+  Friday: "Friday",
+  Saturday: "Saturday",
+}
+
+union MonitorOperationType {
+  string,
+  Scale: "Scale",
+}
+
+@@alternateType(AutoScaleApi.RecurrentSchedule.days, MonitorDayOfWeek[], "csharp");
+@@alternateType(
+  AutoScaleApi.AutoscaleNotification.operation,
+  MonitorOperationType,
+  "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
@@ -105,12 +318,12 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ErrorResponseAutoGenerated",
-  "java,python"
+  "java,python,csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ErrorDetailAutoGenerated",
-  "java,python"
+  "java,python,csharp"
 );
 
 // Response.resourceregion - rename to resourceRegion for Java camelCase
