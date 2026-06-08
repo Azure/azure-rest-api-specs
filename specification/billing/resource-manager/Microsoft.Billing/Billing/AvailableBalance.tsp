@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Billing;
-/**
- * The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.
- */
+
 // `availableBalance` is NOT a deployable Azure resource — it is not listed in the
 // Microsoft.Billing/billingAccounts Bicep ARM template (only a read-only data shape
 // returned by GET on a singleton path). Modeling it as `is ProxyResource<...>` causes
@@ -26,6 +24,10 @@ namespace Microsoft.Billing;
 // `AllPoliciesContract`). The .NET MPG emitter then assigns the underlying GETs to
 // the closest matching parent Resource (`BillingAccount` / `BillingProfile`) as
 // `Action` methods returning the data type — matching GA byte-for-byte.
+
+/**
+ * The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.
+ */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: AvailableBalance is intentionally modeled as plain proxy-resource-shaped data, not a deployable resource."
 model AvailableBalance extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
