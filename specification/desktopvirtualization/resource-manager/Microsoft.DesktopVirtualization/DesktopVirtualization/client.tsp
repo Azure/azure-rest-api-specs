@@ -877,11 +877,7 @@ using Microsoft.DesktopVirtualization;
   "csharp"
 );
 
-@@clientName(
-  SecurityInfoProperties.vTpmEnabled,
-  "IsVTpmEnabled",
-  "csharp"
-);
+@@clientName(SecurityInfoProperties.vTpmEnabled, "IsVTpmEnabled", "csharp");
 
 @@clientName(
   SecurityInfoPatchProperties.secureBootEnabled,
