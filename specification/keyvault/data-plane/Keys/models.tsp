@@ -83,6 +83,12 @@ union JsonWebKeyOperation {
   /** Indicates that the key can be used to unwrap another key. */
   unwrapKey: "unwrapKey",
 
+  /** Indicates that the key can be used to securely wrap another key. */
+  secureWrapKey: "secureWrapKey",
+
+  /** Indicates that the key can be used to securely unwrap another key. */
+  secureUnwrapKey: "secureUnwrapKey",
+
   /** Indicates that the key can be imported during creation. */
   `import`: "import",
 
