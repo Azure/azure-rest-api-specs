@@ -71,7 +71,16 @@ model ProfessionalServiceResourceProperties {
   /** The storefront. */
   storefront?: string;
 
-  /** The purchaser email. Server-derived from authenticated identity. */
+  /**
+   * The purchaser email. Server-derived from authenticated identity. Read-only.
+   *
+   * Customer data (PII): NOT included in default GET responses. Returned only when
+   * the request specifies `$expandCustomerData=true`. Callers requesting customer
+   * data must have appropriate authorization and handle the value per GDPR requirements.
+   *
+   * `@secret` is applied so SDK generators emit `format: password`, ensuring the value
+   * is redacted in logs, CLI output, and diagnostic traces.
+   */
   @visibility(Lifecycle.Read)
   @secret
   purchaserEmail?: string;
