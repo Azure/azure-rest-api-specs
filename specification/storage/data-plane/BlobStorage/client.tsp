@@ -206,6 +206,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   true,
   "rust"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(
+  Storage.Blob.PageBlob.getPageRanges,
+  "forcePageIterator",
+  true,
+  "rust"
+);
 
 @@clientName(
   BlobProperties.customerProvidedKeySha256,
