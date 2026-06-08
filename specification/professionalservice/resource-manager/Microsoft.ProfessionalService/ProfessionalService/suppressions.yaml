@@ -13,15 +13,3 @@
     Legacy preview spec predates TypeSpec adoption. The stable/2026-05-01 version
     is authored in TypeSpec. The preview remains active until client traffic reaches
     zero — deprecation is traffic-gated, not forced.
-
-- tool: Azure-OpenAPI-Validator
-  path: ./stable/2026-05-01/professionalservice.json
-  rules:
-    - ParametersInPointGet
-  where:
-    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}"].get
-  reason: >-
-    The optional `$expandCustomerData` query parameter is required to gate PII (purchaser email) per the
-    ARM PII guidelines (https://aka.ms/arm-pii). The default GET response excludes customer data so that
-    downstream control plane components (e.g. ARG) do not cache PII. Callers must explicitly opt in via
-    `$expandCustomerData=true` to retrieve the PII. Approved with the ARM reviewer.

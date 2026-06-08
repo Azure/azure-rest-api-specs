@@ -38,6 +38,20 @@ input-file:
   - stable/2026-05-01/professionalservice.json
 ```
 
+### Suppression
+
+```yaml
+directive:
+  - suppress: ParametersInPointGet
+    from: professionalservice.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}"].get.parameters
+    reason: >-
+      The optional `$expandCustomerData` query parameter is required to gate PII (purchaser email) per the
+      ARM PII guidelines (https://aka.ms/arm-pii). The default GET response excludes customer data so that
+      downstream control plane components (e.g. ARG) do not cache PII. Callers must explicitly opt in via
+      `$expandCustomerData=true` to retrieve the PII. Approved with the ARM reviewer.
+```
+
 ### Tag: package-2023-07-01-preview
 
 These settings apply only when `--tag=package-2023-07-01-preview` is specified on the command line.
