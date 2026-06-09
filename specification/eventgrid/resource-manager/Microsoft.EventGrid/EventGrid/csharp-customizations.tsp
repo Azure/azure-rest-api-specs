@@ -1,0 +1,40 @@
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.EventGrid;
+
+namespace Customization;
+
+@@clientName(Microsoft.EventGrid.Channel, "PartnerNamespaceChannel", "csharp");
+@@clientName(ChannelProvisioningState, "PartnerNamespaceChannelProvisioningState", "csharp");
+@@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
+@@clientName(Microsoft.EventGrid.Client, "EventGridNamespaceClient", "csharp");
+@@clientName(Microsoft.EventGrid.ClientGroup, "EventGridNamespaceClientGroup", "csharp");
+@@clientName(ClientProvisioningState, "EventGridNamespaceClientProvisioningState", "csharp");
+@@clientName(ClientState, "EventGridNamespaceClientState", "csharp");
+@@clientName(ResourceProvisioningState, "EventGridResourceProvisioningState", "csharp");
+@@clientName(ConnectionState, "EventGridPrivateEndpointConnectionState", "csharp");
+@@clientName(Microsoft.EventGrid.Domain, "EventGridDomain", "csharp");
+@@clientName(DomainProvisioningState, "EventGridDomainProvisioningState", "csharp");
+@@clientName(DomainRegenerateKeyRequest, "EventGridDomainRegenerateKeyContent", "csharp");
+@@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
+@@clientName(InputSchema, "EventGridInputSchema", "csharp");
+@@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
+@@clientName(EventSubscriptionUpdateParameters, "EventGridSubscriptionPatch", "csharp");
+@@clientName(Filter, "EventGridFilter", "csharp");
+@@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
+@@clientName(IpActionType, "EventGridIPActionType", "csharp");
+@@clientName(Microsoft.EventGrid.Namespace, "EventGridNamespace", "csharp");
+@@clientName(NamespaceRegenerateKeyRequest, "NamespaceRegenerateKeyContent", "csharp");
+@@clientName(Partner, "EventGridPartnerContent", "csharp");
+@@clientName(PartnerNamespaceRegenerateKeyRequest, "PartnerNamespaceRegenerateKeyContent", "csharp");
+@@clientName(Microsoft.EventGrid.PermissionBinding, "EventGridNamespacePermissionBinding", "csharp");
+@@clientName(PersistedConnectionStatus, "EventGridPrivateEndpointPersistedConnectionStatus", "csharp");
+@@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
+@@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
+@@clientName(ResourceRegionType, "EventGridResourceRegionType", "csharp");
+@@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
+@@clientName(Microsoft.EventGrid.Topic, "EventGridTopic", "csharp");
+@@clientName(TopicProvisioningState, "EventGridTopicProvisioningState", "csharp");
+@@clientName(TopicRegenerateKeyRequest, "TopicRegenerateKeyContent", "csharp");
+@@clientName(Microsoft.EventGrid.TopicTypeInfo, "TopicType", "csharp");
