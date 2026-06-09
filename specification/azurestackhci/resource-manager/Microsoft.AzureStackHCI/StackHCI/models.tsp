@@ -7316,13 +7316,13 @@ model EdgeMachineWorkloadInventoryItem {
    * Configured virtual processor count from Hyper-V.
    */
   @visibility(Lifecycle.Read)
-  virtualProcessorCount?: int32;
+  virtualProcessorCount?: string;
 
   /**
    * Maximum memory the VM can consume, in bytes.
    */
   @visibility(Lifecycle.Read)
-  memoryInBytes?: int64;
+  memoryInBytes?: string;
 }
 
 /**
