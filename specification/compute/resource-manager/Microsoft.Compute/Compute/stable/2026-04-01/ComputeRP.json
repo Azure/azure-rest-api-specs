@@ -1062,6 +1062,27 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand the response to include additional read-only metadata. Allowed values: `properties` — returns extended metadata (`releaseCategory`, `urgencyLevel`, `runProfile`).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "properties"
+            ],
+            "x-ms-enum": {
+              "name": "ListVersionsExpandOptions",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Properties",
+                  "value": "properties",
+                  "description": "Expand to include all properties in the response."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -1087,6 +1108,9 @@
           },
           "VirtualMachineExtensionImage_ListVersions_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImage_ListVersions_MinimumSet_Gen.json"
+          },
+          "VirtualMachineExtensionImage_ListVersions_WithExpandProperties_Gen": {
+            "$ref": "./examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImage_ListVersions_WithExpandProperties_Gen.json"
           }
         }
       }
@@ -14650,6 +14674,39 @@
         ]
       }
     },
+    "ExtensionFeatureMetadata": {
+      "type": "object",
+      "description": "Additional metadata about extension features, including compliance and capability tags.",
+      "properties": {
+        "extensionFeatureTags": {
+          "type": "array",
+          "description": "List of additional metadata properties (e.g., compliance flags, supported features).",
+          "items": {
+            "$ref": "#/definitions/ExtensionFeatureTag"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "ExtensionFeatureTag": {
+      "type": "object",
+      "description": "Represents a key-value pair for extension feature metadata.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the feature tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the feature tag."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
     "ExternalHealthPolicy": {
       "type": "object",
       "description": "Specifies the external health policy for the virtual machine scale set.",
@@ -15513,6 +15570,24 @@
       "required": [
         "value"
       ]
+    },
+    "ListVersionsExpandOptions": {
+      "type": "string",
+      "description": "Defines the allowed values for the $expand query parameter on the ListVersions operation.",
+      "enum": [
+        "properties"
+      ],
+      "x-ms-enum": {
+        "name": "ListVersionsExpandOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Properties",
+            "value": "properties",
+            "description": "Expand to include all properties in the response."
+          }
+        ]
+      }
     },
     "LogAnalyticsInputBase": {
       "type": "object",
@@ -16849,6 +16924,48 @@
         }
       }
     },
+    "ReleaseCategory": {
+      "type": "string",
+      "description": "Enumerates the type of change introduced in the extension version.",
+      "enum": [
+        "Other",
+        "BugFix",
+        "SecurityFix",
+        "CompatibilityUpdate",
+        "NewFeature"
+      ],
+      "x-ms-enum": {
+        "name": "ReleaseCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other type of change."
+          },
+          {
+            "name": "BugFix",
+            "value": "BugFix",
+            "description": "Bug fix change."
+          },
+          {
+            "name": "SecurityFix",
+            "value": "SecurityFix",
+            "description": "Security fix change."
+          },
+          {
+            "name": "CompatibilityUpdate",
+            "value": "CompatibilityUpdate",
+            "description": "Compatibility update change."
+          },
+          {
+            "name": "NewFeature",
+            "value": "NewFeature",
+            "description": "New feature change."
+          }
+        ]
+      }
+    },
     "RepairAction": {
       "type": "string",
       "description": "Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.",
@@ -17877,6 +17994,42 @@
         }
       }
     },
+    "RunProfile": {
+      "type": "string",
+      "description": "Specifies the execution profile for the extension.",
+      "enum": [
+        "Other",
+        "RunOnce",
+        "LongRunning",
+        "Hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "RunProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other execution profile."
+          },
+          {
+            "name": "RunOnce",
+            "value": "RunOnce",
+            "description": "Run once execution profile."
+          },
+          {
+            "name": "LongRunning",
+            "value": "LongRunning",
+            "description": "Long running execution profile."
+          },
+          {
+            "name": "Hybrid",
+            "value": "Hybrid",
+            "description": "Hybrid execution profile."
+          }
+        ]
+      }
+    },
     "ScaleInPolicy": {
       "type": "object",
       "description": "Describes a scale-in policy for a virtual machine scale set.",
@@ -18693,6 +18846,36 @@
       "x-ms-enum": {
         "name": "UpgradeState",
         "modelAsString": false
+      }
+    },
+    "UrgencyLevel": {
+      "type": "string",
+      "description": "Defines urgency levels for extension updates.",
+      "enum": [
+        "Regular",
+        "Expedited",
+        "Emergency"
+      ],
+      "x-ms-enum": {
+        "name": "UrgencyLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "Regular urgency level."
+          },
+          {
+            "name": "Expedited",
+            "value": "Expedited",
+            "description": "Expedited urgency level."
+          },
+          {
+            "name": "Emergency",
+            "value": "Emergency",
+            "description": "Emergency urgency level."
+          }
+        ]
       }
     },
     "Usage": {
@@ -19547,6 +19730,31 @@
         "supportsMultipleExtensions": {
           "type": "boolean",
           "description": "Whether the handler can support multiple extensions."
+        },
+        "releaseNotes": {
+          "type": "string",
+          "description": "Summary of changes or updates in this extension version.",
+          "readOnly": true
+        },
+        "releaseCategory": {
+          "$ref": "#/definitions/ReleaseCategory",
+          "description": "Categorizes the type of change introduced (e.g., BugFix, SecurityFix, CompatibilityUpdate, NewFeature, Other).",
+          "readOnly": true
+        },
+        "urgencyLevel": {
+          "$ref": "#/definitions/UrgencyLevel",
+          "description": "Indicates the urgency level for applying this extension update.",
+          "readOnly": true
+        },
+        "runProfile": {
+          "$ref": "#/definitions/RunProfile",
+          "description": "Specifies when and how the extension should be executed.",
+          "readOnly": true
+        },
+        "extensionFeatureMetadata": {
+          "$ref": "#/definitions/ExtensionFeatureMetadata",
+          "description": "Additional metadata about extension features, including compliance and capability tags.",
+          "readOnly": true
         }
       },
       "required": [
