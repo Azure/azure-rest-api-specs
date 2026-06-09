@@ -8160,6 +8160,11 @@
         "value"
       ]
     },
+    "AvailabilityStatus": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The exposure status of the connector to the customers. Available values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal)."
+    },
     "AwsCloudTrailDataConnector": {
       "type": "object",
       "description": "Represents Amazon Web Services CloudTrail data connector.",
@@ -8825,8 +8830,7 @@
       "description": "The exposure status of the connector to the customers.",
       "properties": {
         "status": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/AvailabilityStatus",
           "description": "The exposure status of the connector to the customers. Available values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal)."
         },
         "isPreview": {
@@ -9236,20 +9240,17 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataConnectorDefinition items on this page",
+          "description": "The data connector definitions on this page.",
           "items": {
             "$ref": "#/definitions/DataConnectorDefinition"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DataConnectorDefinitionKind": {
       "type": "string",
@@ -11635,6 +11636,7 @@
       "description": "Instruction step details, to be displayed in the Instructions steps section in the connector's page in Sentinel Portal.",
       "properties": {
         "parameters": {
+          "type": "object",
           "description": "Gets or sets the instruction type parameters settings."
         },
         "type": {
@@ -13186,8 +13188,26 @@
       "description": "Operation provided by provider",
       "properties": {
         "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Properties of the operation"
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            }
+          }
         },
         "name": {
           "type": "string",
