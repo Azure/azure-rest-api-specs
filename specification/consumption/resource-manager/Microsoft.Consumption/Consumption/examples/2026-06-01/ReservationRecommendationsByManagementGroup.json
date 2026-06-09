@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "resourceScope": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2026-06-01&$skiptoken=AQAAAA%3D%3D&",
+        "value": [
+          {
+            "name": "reservationRecommendations1",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations1",
+            "kind": "legacy",
+            "location": "northeurope",
+            "properties": {
+              "costWithNoReservedInstances": 0,
+              "firstUsageDate": "2026-03-06T00:00:00Z",
+              "lastUsageDate": "2026-03-10T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "managementGroupId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 4.634521202630137,
+              "recommendedQuantity": 1,
+              "scope": "ManagementGroup",
+              "term": "P1Y",
+              "totalCostWithReservedInstances": 0,
+              "totalHours": 827
+            },
+            "sku": "Standard_DS1_v2"
+          },
+          {
+            "name": "reservationRecommendations2",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations2",
+            "kind": "modern",
+            "location": "northeurope",
+            "properties": {
+              "costWithNoReservedInstances": {
+                "currency": "USD",
+                "value": 0
+              },
+              "firstUsageDate": "2026-03-06T00:00:00Z",
+              "lastUsageDate": "2026-03-15T00:00:00Z",
+              "lookBackPeriod": 7,
+              "managementGroupId": "/providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": {
+                "currency": "USD",
+                "value": 7.289315723178081
+              },
+              "recommendedQuantity": 1,
+              "scope": "ManagementGroup",
+              "skuName": "Standard_DS1_v2",
+              "term": "P3Y",
+              "totalCostWithReservedInstances": {
+                "currency": "USD",
+                "value": 0
+              },
+              "totalHours": 927
+            },
+            "sku": "Standard_DS1_v2"
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "ReservationRecommendations_List",
+  "title": "ReservationRecommendationsByManagementGroup"
+}
