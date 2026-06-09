@@ -438,6 +438,22 @@ union EgressPolicyRuleActionType {
 
   @doc("Deny matching application egress.")
   deny: "deny",
+
+  @doc("Modify matching application egress without changing its destination.")
+  transform: "transform",
+
+  @doc("Rewrite matching application egress to a different destination.")
+  rewrite: "rewrite",
+}
+
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
+@doc("Header modification operation for a hosted-agent egress policy action.")
+union EgressPolicyHeaderOperationType {
+  @doc("Set the header value on matching application egress.")
+  "set",
 }
 
 @extension(
@@ -459,7 +475,7 @@ model EgressPolicyConfig {
 )
 @doc("A single hosted-agent egress policy rule.")
 model EgressPolicyRuleConfig {
-  @doc("The rule type. V1 supports only FQDN rules.")
+  @doc("The rule type. V1 supports FQDN host and path match rules.")
   type: EgressPolicyRuleType;
 
   @doc("A user-defined rule name that is unique within the policy.")
@@ -480,6 +496,9 @@ model EgressPolicyRuleConfig {
 model EgressPolicyRuleMatchConfig {
   @doc("Host pattern to match, such as an exact host, a leading wildcard subdomain, or '*'.")
   host: string;
+
+  @doc("Optional path pattern to match, such as '/api/*'.")
+  path?: string;
 }
 
 @extension(
@@ -487,6 +506,7 @@ model EgressPolicyRuleMatchConfig {
   #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
 )
 @doc("Action to take when a hosted-agent egress policy rule matches.")
+@discriminator("type")
 model EgressPolicyRuleActionConfig {
   @doc("The action type.")
   type: EgressPolicyRuleActionType;
@@ -561,6 +581,70 @@ model ExternalAgentDefinition extends AgentDefinition {
   otel_agent_id?: string;
 }
 
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
+@doc("Action that allows matching hosted-agent application egress.")
+model EgressPolicyAllowActionConfig extends EgressPolicyRuleActionConfig {
+  type: EgressPolicyRuleActionType.allow;
+}
+
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
+@doc("Action that denies matching hosted-agent application egress.")
+model EgressPolicyDenyActionConfig extends EgressPolicyRuleActionConfig {
+  type: EgressPolicyRuleActionType.deny;
+}
+
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
+@doc("Action that modifies matching hosted-agent application egress without changing its destination.")
+model EgressPolicyTransformActionConfig extends EgressPolicyRuleActionConfig {
+  type: EgressPolicyRuleActionType.transform;
+
+  @doc("Header transformations to apply to matching application egress.")
+  headers?: EgressPolicyHeaderTransformConfig[];
+}
+
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
+@doc("Action that rewrites matching hosted-agent application egress to a different destination.")
+model EgressPolicyRewriteActionConfig extends EgressPolicyRuleActionConfig {
+  type: EgressPolicyRuleActionType.rewrite;
+
+  @doc("Target URI scheme for rewritten application egress, such as 'https'.")
+  scheme: string;
+
+  @doc("Target host for rewritten application egress.")
+  host: string;
+
+  @doc("Header transformations to apply to matching application egress.")
+  headers?: EgressPolicyHeaderTransformConfig[];
+}
+
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
+@doc("Header transformation to apply to matching hosted-agent application egress.")
+model EgressPolicyHeaderTransformConfig {
+  @doc("The header modification operation.")
+  operation: EgressPolicyHeaderOperationType;
+
+  @doc("The header name.")
+  name: string;
+
+  @doc("The header value.")
+  value: string;
+}
+
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -608,7 +692,7 @@ model HostedAgentDefinition extends AgentDefinition {
     #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
   )
   @doc("Customer-authored egress policy for hosted-agent application traffic.")
-  egress_policy_preview?: EgressPolicyConfig;
+  egress_policy?: EgressPolicyConfig;
 
   @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
   @extension(

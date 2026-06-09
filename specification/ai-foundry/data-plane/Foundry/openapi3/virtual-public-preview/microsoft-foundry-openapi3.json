@@ -23097,6 +23097,31 @@
           ]
         }
       },
+      "EgressPolicyAllowActionConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "allow"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EgressPolicyRuleActionConfig"
+          }
+        ],
+        "description": "Action that allows matching hosted-agent application egress.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "EgressPolicy=V1Preview"
+          ]
+        }
+      },
       "EgressPolicyConfig": {
         "type": "object",
         "required": [
@@ -23127,6 +23152,75 @@
           ]
         }
       },
+      "EgressPolicyDenyActionConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "deny"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EgressPolicyRuleActionConfig"
+          }
+        ],
+        "description": "Action that denies matching hosted-agent application egress.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "EgressPolicy=V1Preview"
+          ]
+        }
+      },
+      "EgressPolicyHeaderOperationType": {
+        "type": "string",
+        "enum": [
+          "set"
+        ],
+        "description": "Header modification operation for a hosted-agent egress policy action.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "EgressPolicy=V1Preview"
+          ]
+        }
+      },
+      "EgressPolicyHeaderTransformConfig": {
+        "type": "object",
+        "required": [
+          "operation",
+          "name",
+          "value"
+        ],
+        "properties": {
+          "operation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EgressPolicyHeaderOperationType"
+              }
+            ],
+            "description": "The header modification operation."
+          },
+          "name": {
+            "type": "string",
+            "description": "The header name."
+          },
+          "value": {
+            "type": "string",
+            "description": "The header value."
+          }
+        },
+        "description": "Header transformation to apply to matching hosted-agent application egress.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "EgressPolicy=V1Preview"
+          ]
+        }
+      },
       "EgressPolicyMode": {
         "anyOf": [
           {
@@ -23140,6 +23234,48 @@
           }
         ],
         "description": "Enforcement mode for a hosted-agent egress policy.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "EgressPolicy=V1Preview"
+          ]
+        }
+      },
+      "EgressPolicyRewriteActionConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "scheme",
+          "host"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "rewrite"
+            ]
+          },
+          "scheme": {
+            "type": "string",
+            "description": "Target URI scheme for rewritten application egress, such as 'https'."
+          },
+          "host": {
+            "type": "string",
+            "description": "Target host for rewritten application egress."
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressPolicyHeaderTransformConfig"
+            },
+            "description": "Header transformations to apply to matching application egress."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EgressPolicyRuleActionConfig"
+          }
+        ],
+        "description": "Action that rewrites matching hosted-agent application egress to a different destination.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "EgressPolicy=V1Preview"
@@ -23161,6 +23297,15 @@
             "description": "The action type."
           }
         },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "allow": "#/components/schemas/EgressPolicyAllowActionConfig",
+            "deny": "#/components/schemas/EgressPolicyDenyActionConfig",
+            "transform": "#/components/schemas/EgressPolicyTransformActionConfig",
+            "rewrite": "#/components/schemas/EgressPolicyRewriteActionConfig"
+          }
+        },
         "description": "Action to take when a hosted-agent egress policy rule matches.",
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -23177,7 +23322,9 @@
             "type": "string",
             "enum": [
               "allow",
-              "deny"
+              "deny",
+              "transform",
+              "rewrite"
             ]
           }
         ],
@@ -23203,7 +23350,7 @@
                 "$ref": "#/components/schemas/EgressPolicyRuleType"
               }
             ],
-            "description": "The rule type. V1 supports only FQDN rules."
+            "description": "The rule type. V1 supports FQDN host and path match rules."
           },
           "name": {
             "type": "string",
@@ -23242,6 +23389,10 @@
           "host": {
             "type": "string",
             "description": "Host pattern to match, such as an exact host, a leading wildcard subdomain, or '*'."
+          },
+          "path": {
+            "type": "string",
+            "description": "Optional path pattern to match, such as '/api/*'."
           }
         },
         "description": "Traffic matching criteria for a hosted-agent egress policy rule.",
@@ -23264,6 +23415,38 @@
           }
         ],
         "description": "Rule type for a hosted-agent egress policy rule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "EgressPolicy=V1Preview"
+          ]
+        }
+      },
+      "EgressPolicyTransformActionConfig": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "transform"
+            ]
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EgressPolicyHeaderTransformConfig"
+            },
+            "description": "Header transformations to apply to matching application egress."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EgressPolicyRuleActionConfig"
+          }
+        ],
+        "description": "Action that modifies matching hosted-agent application egress without changing its destination.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "EgressPolicy=V1Preview"
@@ -26667,7 +26850,7 @@
             "description": "The image ID for the agent, applicable to image-based hosted agents.",
             "example": "my-registry.azurecr.io/my-hosted-agent:latest"
           },
-          "egress_policy_preview": {
+          "egress_policy": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/EgressPolicyConfig"
