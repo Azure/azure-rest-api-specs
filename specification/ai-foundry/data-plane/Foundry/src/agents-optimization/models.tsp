@@ -95,7 +95,9 @@ model DatasetItem {
   @doc("Expected ground truth answer.")
   ground_truth?: string;
 
-  @doc("Desired number of conversation turns for simulation mode (1–20).")
+  @doc("Desired number of conversation turns for simulation mode (1-20).")
+  @minValue(1)
+  @maxValue(20)
   desired_num_turns?: int32;
 
   @doc("Per-item evaluation criteria.")
@@ -128,9 +130,9 @@ model EvaluatorRef {
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
+@doc("Identifies the registered Foundry agent to optimize. Skills, tools, and system_prompt are specified in options.optimization_config.")
 model AgentIdentifier {
-  @doc("Registered Foundry agent name (required).")
+  @doc("Registered Foundry agent name.")
   agent_name: string;
 
   @doc("Pinned agent version. Defaults to latest if omitted.")
@@ -163,28 +165,28 @@ model OptimizationOptions {
   @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
   max_candidates?: int32 = 5;
 
-  @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
+  @doc("Per-target-attribute configuration overrides.")
   optimization_config?: Record<unknown>;
 
-  @doc("Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').")
+  @doc("Model deployment used for evaluation.")
   eval_model?: string;
 
-  @doc("Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.")
+  @doc("Model deployment for optimization reasoning (must be gpt-5 family).")
   optimization_model?: string;
 
-  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
+  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
 model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: AgentIdentifier;
+  agent?: AgentIdentifier;
 
-  @doc("Training dataset — either an inline item array or a reference to a registered dataset.")
-  train_dataset: DatasetInput;
+  @doc("Training dataset — either inline items or a reference to a registered dataset.")
+  train_dataset?: DatasetInput;
 
-  @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
+  @doc("Optional held-out validation dataset.")
   validation_dataset?: DatasetInput;
 
   @doc("Job-level evaluators referenced by name and optional version.")
@@ -208,18 +210,6 @@ model OptimizationJobProgress {
 
   @doc("Wall-clock time elapsed in seconds since the job began executing.")
   elapsed_seconds: float64;
-
-  @doc("Unix timestamp (seconds) when the current candidate evaluation started. Null if no candidate is actively being evaluated.")
-  candidate_started_at?: int64;
-
-  @doc("True when a new candidate has been generated but its evaluation has not yet completed.")
-  candidate_generated: boolean;
-
-  @doc("Number of metric scoring calls completed for the current candidate.")
-  metric_calls_completed: int32;
-
-  @doc("Total number of metric scoring calls expected for the current candidate.")
-  metric_calls_total: int32;
 }
 
 // ---------------------------------------------------------------------------
@@ -240,20 +230,8 @@ model OptimizationCandidate {
   @doc("Average token usage across all tasks.")
   avg_tokens: float64;
 
-  @doc("Fraction of tasks that met the pass threshold.")
-  pass_rate: float64;
-
-  @doc("The agent configuration that produced this candidate.")
-  config?: OptimizationAgentDefinition;
-
   @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
   candidate_id?: string;
-
-  @doc("Unix timestamp (seconds) when this candidate's evaluation started.")
-  created_at?: int64;
-
-  @doc("Lifecycle status of this candidate (e.g. 'evaluated', 'best', 'discarded').")
-  completion_status?: string;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   eval_id?: string;
@@ -344,7 +322,7 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 // Slim list item — returned by LIST
 // ---------------------------------------------------------------------------
 
-@doc("Slim job representation returned by the LIST endpoint. Does not include full candidate results or inputs.")
+@doc("Slim job representation returned by the LIST endpoint.")
 model OptimizationJobListItem {
   @doc("Server-assigned unique identifier.")
   @visibility(Lifecycle.Read)
