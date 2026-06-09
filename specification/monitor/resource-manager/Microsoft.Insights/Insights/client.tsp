@@ -66,7 +66,12 @@ namespace Microsoft.InsightsCombinedClient;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   PrivateLinkScopesApi.PrivateEndpointConnections.listByPrivateLinkScope,
-  "java"
+  "java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PrivateLinkScopesApi.PrivateLinkResources.listByPrivateLinkScope,
+  "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -150,7 +155,7 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "java"
+  "java,python"
 );
 
 /**
@@ -178,7 +183,11 @@ model LogSettings {
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
-@@alternateType(ServiceDiagnosticsSettingsApi.LogSettings, LogSettings, "java");
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.LogSettings,
+  LogSettings,
+  "java,python"
+);
 
 @@clientLocation(
   NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
