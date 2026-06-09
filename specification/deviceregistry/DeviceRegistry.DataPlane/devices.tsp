@@ -192,10 +192,7 @@ interface Devices {
     ProvisionDeviceRequest & LongRunningOperationIdHeader,
     ProvisionDeviceResult,
     Azure.Core.Foundations.Error,
-    ResponseHeadersTrait<
-      Azure.Core.Foundations.RetryAfterHeader & LongRunningOperationIdResponseHeader,
-      TraitContext.Action
-    >
+    LongRunningActionResponseHeadersTrait
   >;
 }
 
@@ -212,9 +209,6 @@ interface ProvisionDeviceResults {
   @operationId("Devices_GetProvisionDeviceResult")
   get is ResourceOperations.ResourceRead<
     ProvisionDeviceResultStatusMonitor,
-    ResponseHeadersTrait<
-      Azure.Core.Foundations.RetryAfterHeader,
-      TraitContext.Read
-    >
+    LongRunningStatusMonitorResponseHeadersTrait
   >;
 }

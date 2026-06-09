@@ -625,6 +625,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RevokeCertsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -829,55 +836,6 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List long running operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedOperation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List long-running operations in a namespace": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/namespaces/{namespaceUuid}/operations/{operationId}": {
       "get": {
         "operationId": "Operations_Get",
@@ -909,6 +867,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Operation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2647,7 +2612,7 @@
     },
     "Operation": {
       "type": "object",
-      "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs\n(`:provision`, `:issueCert`, `:revokeCerts`, `:generateReport`) have their\nown per-action status monitor endpoints and do not surface here.",
+      "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs (POST\n`:verb` endpoints) have their own per-action status-monitor endpoints\nand do not surface here.",
       "properties": {
         "id": {
           "type": "string",
@@ -2733,27 +2698,6 @@
           "description": "The DeviceCapability items on this page",
           "items": {
             "$ref": "#/definitions/DeviceCapability"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedOperation": {
-      "type": "object",
-      "description": "Paged collection of Operation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Operation items on this page",
-          "items": {
-            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {

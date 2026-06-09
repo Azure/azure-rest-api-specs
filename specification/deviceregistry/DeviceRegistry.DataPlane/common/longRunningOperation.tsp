@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using Azure.Core.Foundations;
+using Azure.Core.Traits;
 using TypeSpec.Http;
 
 namespace Microsoft.DeviceRegistry;
@@ -74,3 +75,26 @@ model LongRunningOperationIdResponseHeader {
   @header("Operation-Id")
   operationId: string;
 }
+
+/**
+ * Response-headers trait for long-running action triggers (POST `:verb`
+ * endpoints). Emits both `Operation-Id` (status-monitor pointer) and
+ * `Retry-After` (suggested initial polling interval) on the 202 response,
+ * per the Azure API Guidelines.
+ */
+alias LongRunningActionResponseHeadersTrait = ResponseHeadersTrait<
+  RetryAfterHeader & LongRunningOperationIdResponseHeader,
+  TraitContext.Action
+>;
+
+/**
+ * Response-headers trait for long-running operation status-monitor GETs.
+ * Emits only `Retry-After` (suggested polling interval) on the 200 response
+ * while the operation is still running. `Operation-Id` is intentionally
+ * omitted: the client already has the operation ID in the request URL and
+ * in the response body's `id` field.
+ */
+alias LongRunningStatusMonitorResponseHeadersTrait = ResponseHeadersTrait<
+  RetryAfterHeader,
+  TraitContext.Read
+>;

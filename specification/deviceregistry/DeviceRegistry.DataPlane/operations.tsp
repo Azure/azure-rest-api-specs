@@ -20,9 +20,9 @@ namespace Microsoft.DeviceRegistry;
 
 /**
  * Central status monitor for resource long-running operations on a namespace
- * (e.g. DeviceCapability create-or-replace / delete). Action LROs
- * (`:provision`, `:issueCert`, `:revokeCerts`, `:generateReport`) have their
- * own per-action status monitor endpoints and do not surface here.
+ * (e.g. DeviceCapability create-or-replace / delete). Action LROs (POST
+ * `:verb` endpoints) have their own per-action status-monitor endpoints
+ * and do not surface here.
  */
 @parentResource(Namespace)
 @resource("operations")
@@ -36,8 +36,8 @@ model Operation is LongRunningOperationStatus;
 @tag("Operations")
 interface Operations {
   /** Get the status of a long-running operation. */
-  get is ResourceOperations.ResourceRead<Operation>;
-
-  /** List long running operations. */
-  list is ResourceOperations.ResourceList<Operation>;
+  get is ResourceOperations.ResourceRead<
+    Operation,
+    LongRunningStatusMonitorResponseHeadersTrait
+  >;
 }

@@ -249,10 +249,7 @@ interface Namespaces {
     GenerateReportRequest & LongRunningOperationIdHeader,
     Report,
     Azure.Core.Foundations.Error,
-    ResponseHeadersTrait<
-      Azure.Core.Foundations.RetryAfterHeader & LongRunningOperationIdResponseHeader,
-      TraitContext.Action
-    >
+    LongRunningActionResponseHeadersTrait
   >;
 }
 
@@ -268,9 +265,6 @@ interface GenerateReportResults {
   @operationId("Namespaces_GetGenerateReportResult")
   get is ResourceOperations.ResourceRead<
     GenerateReportResult,
-    ResponseHeadersTrait<
-      Azure.Core.Foundations.RetryAfterHeader,
-      TraitContext.Read
-    >
+    LongRunningStatusMonitorResponseHeadersTrait
   >;
 }
