@@ -899,13 +899,13 @@ model WeatherValue {
 }
 
 /**
-* Provides the forecasted wind speed, measured in units such as kilometers
-* per hour (km/h) or miles per hour (mph), depending on the unit specified
-* in the request. Also indicates the wind direction measured in azimuth
-* degrees, starting at true North and moving clockwise. North corresponds
-* to 0°, east to 90°, south to 180°, and west to 270°. Possible values range
-* from 0° to 359°.
-*/
+ * Provides the forecasted wind speed, measured in units such as kilometers
+ * per hour (km/h) or miles per hour (mph), depending on the unit specified
+ * in the request. Also indicates the wind direction measured in azimuth
+ * degrees, starting at true North and moving clockwise. North corresponds
+ * to 0°, east to 90°, south to 180°, and west to 270°. Possible values range
+ * from 0° to 359°.
+ */
 model WindDetails {
   /**
    * Wind direction is measured in azimuth degrees, starting at true North (0°)

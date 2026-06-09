@@ -24,8 +24,7 @@ model MapsGeolocationClientOptions {
   clientId?: string;
 }
 
-@@clientInitialization(
-  MapsGeolocation,
+@@clientInitialization(MapsGeolocation,
   {
     parameters: MapsGeolocationClientOptions,
   }
