@@ -4,7 +4,7 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
-import "./common/longRunningOperationStatus.tsp";
+import "./common/longRunningOperation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -106,25 +106,6 @@ model SelfSignedThumbprints {
 model CertificateAuthorityCredentials {
   /** ADR certificate policy resource ID. */
   adrCertificatePolicyResourceId: string;
-}
-
-// ──────────────────────────────────────────────
-// Shared action parameters
-// ──────────────────────────────────────────────
-
-/**
- * Shared parameter model carrying the optional client-supplied
- * `Operation-Id` request header used by long-running action operations
- * (`:issueCert`, `:revokeCerts`, `:provision`, `:generateReport`). If
- * omitted, the service generates a GUID.
- */
-model OperationIdHeaderParameter {
-  /**
-   * Optional client-supplied identifier for the operation's status monitor.
-   * If omitted, the service generates a GUID.
-   */
-  @header("Operation-Id")
-  operationId?: string;
 }
 
 // ──────────────────────────────────────────────
@@ -238,7 +219,7 @@ interface DeviceAuthenticationProfiles {
   @pollingOperation(IssueCertResults.get)
   issueCert is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
-    CertificateIssuanceRequest & OperationIdHeaderParameter,
+    CertificateIssuanceRequest & LongRunningOperationIdHeader,
     {}
   >;
 
@@ -252,7 +233,7 @@ interface DeviceAuthenticationProfiles {
   @pollingOperation(RevokeCertsResults.get)
   revokeCerts is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
-    OperationIdHeaderParameter,
+    LongRunningOperationIdHeader,
     {}
   >;
 }

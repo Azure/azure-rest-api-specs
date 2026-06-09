@@ -4,8 +4,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "./common/longRunningOperationStatus.tsp";
-import "./deviceAuthenticationProfiles.tsp";
+import "./common/longRunningOperation.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -247,7 +246,7 @@ interface Namespaces {
   @pollingOperation(GenerateReportResults.get)
   generateReport is ResourceOperations.LongRunningResourceAction<
     Namespace,
-    GenerateReportRequest & OperationIdHeaderParameter,
+    GenerateReportRequest & LongRunningOperationIdHeader,
     Report,
     Azure.Core.Foundations.Error,
     ResponseHeadersTrait<

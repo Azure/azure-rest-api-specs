@@ -4,7 +4,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
-import "./common/longRunningOperationStatus.tsp";
+import "./common/longRunningOperation.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

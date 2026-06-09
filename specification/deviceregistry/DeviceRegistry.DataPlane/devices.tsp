@@ -6,9 +6,8 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
 import "./common/provisionedRefs.tsp";
-import "./common/longRunningOperationStatus.tsp";
+import "./common/longRunningOperation.tsp";
 import "./deviceCapabilities.tsp";
-import "./deviceAuthenticationProfiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -190,7 +189,7 @@ interface Devices {
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
-    ProvisionDeviceRequest & OperationIdHeaderParameter,
+    ProvisionDeviceRequest & LongRunningOperationIdHeader,
     ProvisionDeviceResult,
     Azure.Core.Foundations.Error,
     ResponseHeadersTrait<

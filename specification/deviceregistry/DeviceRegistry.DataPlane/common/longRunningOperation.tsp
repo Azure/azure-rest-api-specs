@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 using Azure.Core.Foundations;
+using TypeSpec.Http;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -34,12 +35,27 @@ model LongRunningOperationStatus<
   endTime?: utcDateTime;
 }
 
-// Mark all status-monitor fields read-only and tag `status` so the
-// poller infrastructure can find it on the custom status monitor shape.
+// Mark all status-monitor fields read-only. `status` is automatically
+// recognised as the LRO status field because `OperationState` itself carries
+// `@lroStatus` in Azure Core's foundations.
 @@visibility(LongRunningOperationStatus.id, Lifecycle.Read);
 @@visibility(LongRunningOperationStatus.status, Lifecycle.Read);
-@@Azure.Core.lroStatus(LongRunningOperationStatus.status);
 @@visibility(LongRunningOperationStatus.error, Lifecycle.Read);
 @@visibility(LongRunningOperationStatus.result, Lifecycle.Read);
 @@visibility(LongRunningOperationStatus.startTime, Lifecycle.Read);
 @@visibility(LongRunningOperationStatus.endTime, Lifecycle.Read);
+
+/**
+ * Shared parameter model carrying the optional client-supplied
+ * `Operation-Id` request header used by long-running action operations
+ * (`:issueCert`, `:revokeCerts`, `:provision`, `:generateReport`). If
+ * omitted, the service generates a GUID.
+ */
+model LongRunningOperationIdHeader {
+  /**
+   * Optional client-supplied identifier for the operation's status monitor.
+   * If omitted, the service generates a GUID.
+   */
+  @header("Operation-Id")
+  operationId?: string;
+}
