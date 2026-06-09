@@ -306,6 +306,7 @@ using Microsoft.DataFactory;
 @@clientName(ConfigurationType, "DataFactorySparkConfigurationType", "csharp");
 @@clientName(ConnectionType, "MapperConnectionType", "csharp");
 @@clientName(CopySource, "CopyActivitySource", "csharp");
+@@clientName(CopySource.type, "CopySourceType", "csharp");
 @@clientName(
   CreateDataFlowDebugSessionRequest,
   "DataFactoryDataFlowDebugSessionContent",
@@ -513,8 +514,6 @@ using Microsoft.DataFactory;
 );
 @@clientName(SalesforceV2Source.SOQLQuery, "SoqlQuery", "csharp");
 @@clientName(SalesforceServiceCloudV2Source.SOQLQuery, "SoqlQuery", "csharp");
-// MPG migration: align IntegrationRuntimeNodeIpAddress class & operation naming
-// with the legacy AutoRest SDK (IPAddress capitalization, GetIPAddressIntegrationRuntimeNode method name).
 @@clientName(
   IntegrationRuntimeNodeIpAddress,
   "IntegrationRuntimeNodeIPAddress",
@@ -524,17 +523,6 @@ using Microsoft.DataFactory;
   IntegrationRuntimeResources.getIpAddress,
   "GetIPAddressIntegrationRuntimeNode",
   "csharp"
-);
-// MPG migration: SelfHostedIntegrationRuntimeStatusTypeProperties.nodes & links
-// are output-only collections (all other props in the same model are @visibility(Read));
-// mark them Read so the generator emits IReadOnlyList to match the legacy SDK surface.
-@@visibility(
-  SelfHostedIntegrationRuntimeStatusTypeProperties.nodes,
-  Lifecycle.Read
-);
-@@visibility(
-  SelfHostedIntegrationRuntimeStatusTypeProperties.links,
-  Lifecycle.Read
 );
 @@clientName(
   IntegrationRuntimeResource,
@@ -547,6 +535,7 @@ using Microsoft.DataFactory;
   "csharp"
 );
 @@clientName(IntegrationRuntimeVNetProperties.vNetId, "VnetId", "csharp");
+@@clientName(IntegrationRuntimeStatus.type, "RuntimeType", "csharp");
 @@alternateType(
   IntegrationRuntimeVNetProperties.vNetId,
   Azure.Core.uuid,
@@ -1537,6 +1526,37 @@ using Microsoft.DataFactory;
 @@alternateType(ManagedPrivateEndpointResource.etag, Azure.Core.eTag, "csharp");
 @@alternateType(ManagedVirtualNetworkResource.etag, Azure.Core.eTag, "csharp");
 @@alternateType(PipelineResource.etag, Azure.Core.eTag, "csharp");
-@@alternateType(PrivateEndpointConnectionResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  PrivateEndpointConnectionResource.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 @@alternateType(TriggerResource.etag, Azure.Core.eTag, "csharp");
 @@alternateType(Factory.eTag, Azure.Core.eTag, "csharp");
+
+// Rename the polymorphic discriminator property "type" on the remaining discriminated base models to
+// the GA name "<Base>Type" (matching the previously shipped surface) so the generated discriminator
+// constructor parameter / deserialization local is not emitted as the escaped identifier "@type".
+@@clientName(Activity.type, "ActivityType", "csharp");
+@@clientName(
+  CompressionReadSettings.type,
+  "CompressionReadSettingsType",
+  "csharp"
+);
+@@clientName(CopySink.type, "CopySinkType", "csharp");
+@@clientName(Credential.type, "CredentialType", "csharp");
+@@clientName(CustomSetupBase.type, "CustomSetupBaseType", "csharp");
+@@clientName(DataFlow.type, "DataFlowType", "csharp");
+@@clientName(DatasetLocation.type, "DatasetLocationType", "csharp");
+@@clientName(DatasetStorageFormat.type, "DatasetStorageFormatType", "csharp");
+@@clientName(DependencyReference.type, "DependencyReferenceType", "csharp");
+@@clientName(ExportSettings.type, "ExportSettingsType", "csharp");
+@@clientName(
+  FactoryRepoConfiguration.type,
+  "FactoryRepoConfigurationType",
+  "csharp"
+);
+@@clientName(FormatReadSettings.type, "FormatReadSettingsType", "csharp");
+@@clientName(FormatWriteSettings.type, "FormatWriteSettingsType", "csharp");
+@@clientName(ImportSettings.type, "ImportSettingsType", "csharp");
+@@clientName(Trigger.type, "TriggerType", "csharp");
