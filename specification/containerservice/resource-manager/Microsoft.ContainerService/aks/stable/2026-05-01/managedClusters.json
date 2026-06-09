@@ -1169,6 +1169,9 @@
           "Create Agent Pool with VirtualMachines pool type": {
             "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines.json"
           },
+          "Create Agent Pool with VirtualMachines pool type with autoscaling enabled": {
+            "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines_Autoscale.json"
+          },
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
@@ -5164,6 +5167,26 @@
         "disableOutboundNat": {
           "type": "boolean",
           "description": "Whether to disable OutboundNAT in windows nodes. The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled."
+        }
+      }
+    },
+    "AutoScaleProfile": {
+      "type": "object",
+      "description": "Specifications on auto-scaling.",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'."
+        },
+        "minCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of nodes of the specified sizes."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes of the specified sizes."
         }
       }
     },
@@ -10313,6 +10336,14 @@
           "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size.",
           "items": {
             "$ref": "#/definitions/ManualScaleProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "autoscale": {
+          "type": "array",
+          "description": "Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range.\nEach profile targets a specific VM SKU and is evaluated independently.\nScaling decisions across profiles are governed by the cluster autoscaler expander,\nconfigurable via `ManagedCluster.properties.autoScalerProfile.expander`.",
+          "items": {
+            "$ref": "#/definitions/AutoScaleProfile"
           },
           "x-ms-identifiers": []
         }
