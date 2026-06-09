@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "./CommonModels.tsp";
+import "./FlexNodeBootstrap.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
@@ -136,6 +137,18 @@ interface AgentPools {
         }
       | OkResponse,
     Foundations.DefaultBaseParameters<AgentPool>
+  >;
+
+  /**
+   * Returns pool-level bootstrap configuration for FlexNode machines.
+   */
+  @added(Versions.v2026_05_02_preview)
+  @action("listBootstrapData")
+  @summary("Lists bootstrap data for a FlexNode agent pool.")
+  listBootstrapData is ArmResourceActionSync<
+    AgentPool,
+    ListBootstrapDataRequest,
+    ArmResponse<PoolBootstrapData>
   >;
 
   /**

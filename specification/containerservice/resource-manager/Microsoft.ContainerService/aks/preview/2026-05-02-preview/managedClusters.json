@@ -1872,6 +1872,9 @@
           "Create Agent Pool with Windows OSSKU": {
             "$ref": "./examples/AgentPoolsCreate_WindowsOSSKU.json"
           },
+          "Create FlexNode Agent Pool": {
+            "$ref": "./examples/AgentPoolsCreate_FlexNode.json"
+          },
           "Create Spot Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Spot.json"
           },
@@ -2236,6 +2239,75 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/listBootstrapData": {
+      "post": {
+        "operationId": "AgentPools_ListBootstrapData",
+        "tags": [
+          "AgentPools"
+        ],
+        "summary": "Lists bootstrap data for a FlexNode agent pool.",
+        "description": "Returns pool-level bootstrap configuration for FlexNode machines.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "description": "The name of the agent pool.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12,
+            "pattern": "^[a-z][a-z0-9]{0,11}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListBootstrapDataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolBootstrapData"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Bootstrap Data for FlexNode Agent Pool": {
+            "$ref": "./examples/AgentPoolsListBootstrapData.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/machines": {
@@ -7349,7 +7421,8 @@
       "enum": [
         "VirtualMachineScaleSets",
         "AvailabilitySet",
-        "VirtualMachines"
+        "VirtualMachines",
+        "FlexNode"
       ],
       "x-ms-enum": {
         "name": "AgentPoolType",
@@ -7369,6 +7442,11 @@
             "name": "VirtualMachines",
             "value": "VirtualMachines",
             "description": "Create an Agent Pool backed by a Single Instance VM orchestration mode."
+          },
+          {
+            "name": "FlexNode",
+            "value": "FlexNode",
+            "description": "Create an Agent Pool for BYO machines running the FlexNode agent."
           }
         ]
       }
@@ -7698,6 +7776,152 @@
             "description": "Use the premium SKU of Azure Bastion."
           }
         ]
+      }
+    },
+    "BootstrapAzureConfig": {
+      "type": "object",
+      "description": "Azure configuration returned as part of FlexNode bootstrap data.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Azure tenant ID.",
+          "readOnly": true
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Azure cloud environment.",
+          "readOnly": true
+        },
+        "targetCluster": {
+          "$ref": "#/definitions/BootstrapTargetCluster",
+          "description": "Target cluster identity.",
+          "readOnly": true
+        },
+        "targetAgentPoolName": {
+          "type": "string",
+          "description": "Target agent pool name.",
+          "readOnly": true
+        },
+        "bootstrapToken": {
+          "$ref": "#/definitions/BootstrapTokenInfo",
+          "format": "password",
+          "description": "Bootstrap token for node enrollment. Do not cache or log.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
+    },
+    "BootstrapComponentVersions": {
+      "type": "object",
+      "description": "Component versions returned as part of FlexNode bootstrap data.",
+      "properties": {
+        "kubernetes": {
+          "type": "string",
+          "description": "Kubernetes version.",
+          "readOnly": true
+        },
+        "containerd": {
+          "type": "string",
+          "description": "Containerd version.",
+          "readOnly": true
+        },
+        "runc": {
+          "type": "string",
+          "description": "Runc version.",
+          "readOnly": true
+        }
+      }
+    },
+    "BootstrapKubeletConfig": {
+      "type": "object",
+      "description": "Kubelet configuration returned as part of FlexNode bootstrap data.",
+      "properties": {
+        "clusterFQDN": {
+          "type": "string",
+          "description": "FQDN of the Kubernetes API server.",
+          "readOnly": true
+        },
+        "caCertData": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded PEM certificate of the cluster CA. Do not cache or log.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
+    },
+    "BootstrapNetworkingConfig": {
+      "type": "object",
+      "description": "Network configuration returned as part of FlexNode bootstrap data.",
+      "properties": {
+        "dnsServiceIP": {
+          "type": "string",
+          "description": "IP address of the cluster DNS service.",
+          "readOnly": true
+        },
+        "cniVersion": {
+          "type": "string",
+          "description": "CNI plugin version.",
+          "readOnly": true
+        }
+      }
+    },
+    "BootstrapNodeConfig": {
+      "type": "object",
+      "description": "Node configuration returned as part of FlexNode bootstrap data.",
+      "properties": {
+        "maxPods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum pods per node.",
+          "readOnly": true
+        },
+        "labels": {
+          "type": "object",
+          "description": "Node labels to apply during registration.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "taints": {
+          "type": "array",
+          "description": "Node taints in the format 'key=value:effect'.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "kubelet": {
+          "$ref": "#/definitions/BootstrapKubeletConfig",
+          "description": "Kubelet configuration.",
+          "readOnly": true
+        }
+      }
+    },
+    "BootstrapTargetCluster": {
+      "type": "object",
+      "description": "Target AKS cluster for FlexNode bootstrap.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the target AKS cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "BootstrapTokenInfo": {
+      "type": "object",
+      "description": "Bootstrap token information.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "Short-lived bootstrap token for kubelet. Do not cache or log.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
       }
     },
     "ClusterUpgradeSettings": {
@@ -9575,6 +9799,10 @@
           "description": "The size in MB of a swap file that will be created on each node."
         }
       }
+    },
+    "ListBootstrapDataRequest": {
+      "type": "object",
+      "description": "Empty request body for listing FlexNode bootstrap data."
     },
     "LoadBalancer": {
       "type": "object",
@@ -14489,6 +14717,32 @@
             "description": "Pods with hostNetwork=false cannot access Azure Instance Metadata Service (IMDS)."
           }
         ]
+      }
+    },
+    "PoolBootstrapData": {
+      "type": "object",
+      "description": "Bootstrap configuration for a FlexNode pool.",
+      "properties": {
+        "azure": {
+          "$ref": "#/definitions/BootstrapAzureConfig",
+          "description": "Azure environment and cluster identity information.",
+          "readOnly": true
+        },
+        "components": {
+          "$ref": "#/definitions/BootstrapComponentVersions",
+          "description": "Component versions for the node runtime.",
+          "readOnly": true
+        },
+        "networking": {
+          "$ref": "#/definitions/BootstrapNetworkingConfig",
+          "description": "Network configuration for the node.",
+          "readOnly": true
+        },
+        "node": {
+          "$ref": "#/definitions/BootstrapNodeConfig",
+          "description": "Node-level configuration for kubelet, labels, and taints.",
+          "readOnly": true
+        }
       }
     },
     "PortRange": {

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "agentPoolName": "flexnode1",
+    "api-version": "2026-05-02-preview",
+    "body": {},
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "azure": {
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "cloud": "AzurePublicCloud",
+          "targetCluster": {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1"
+          },
+          "targetAgentPoolName": "flexnode1",
+          "bootstrapToken": {
+            "token": "<redacted-bootstrap-token>"
+          }
+        },
+        "components": {
+          "kubernetes": "1.32.7",
+          "containerd": "2.0.4",
+          "runc": "1.2.1"
+        },
+        "networking": {
+          "dnsServiceIP": "10.0.0.10",
+          "cniVersion": "1.4.1"
+        },
+        "node": {
+          "maxPods": 110,
+          "labels": {
+            "node-role": "edge"
+          },
+          "taints": [
+            "aks.azure.com/flex-node=true:NoSchedule"
+          ],
+          "kubelet": {
+            "clusterFQDN": "cluster-xxxx.hcp.eastus2.azmk8s.io",
+            "caCertData": "<redacted-base64-pem-ca-cert>"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_ListBootstrapData",
+  "title": "List Bootstrap Data for FlexNode Agent Pool"
+}
