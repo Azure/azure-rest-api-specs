@@ -1005,6 +1005,16 @@ using Microsoft.DesktopVirtualization;
 // not a nested properties() object)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExpandMsixImage.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   StartMenuItem.properties,
   "java"
 );
