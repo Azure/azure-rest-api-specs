@@ -72,6 +72,7 @@ union PutKeyValueRequestContentTypeGo {
   "application/*+json",
   "application/json-patch+json",
 };
+@@clientName(AppConfigResponseHeaders.etagHeader, "ETag", "go");
 @@clientName(KeyValueFields, "SettingFields", "go");
 @@clientName(KeyValueListResult.etag, "ETag", "go");
 @@clientName(PutKeyValueRequestContentTypeGo, "PutKeyValueRequestContentType", "go");

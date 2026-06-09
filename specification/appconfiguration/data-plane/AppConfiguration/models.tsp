@@ -2,13 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace AzureAppConfiguration;
 
@@ -378,7 +376,6 @@ alias AppConfigResponseHeaders = {
 
   @doc("A value representing the current state of the resource.")
   @header("ETag")
-  @clientName("ETag", "go")
   etagHeader?: string;
 };
 
