@@ -24,6 +24,7 @@ using Microsoft.HybridCompute;
 );
 
 @@clientName(FirmwareProfile.type, "FirmwareProfileType", "csharp");
+@@clientName(RunCommandInputParameter, "RunCommandInputContent", "csharp");
 
 /**
  * The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).
