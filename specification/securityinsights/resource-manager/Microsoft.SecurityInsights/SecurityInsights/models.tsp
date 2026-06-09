@@ -4898,20 +4898,8 @@ model TemplateAdditionalProperties {
 /**
  * Encapsulate the data connector definition object
  */
-model DataConnectorDefinitionArmCollectionWrapper {
-  /**
-   * The data connector definitions on this page.
-   */
-  @pageItems
-  @identifiers(#[])
-  value?: DataConnectorDefinition[];
-
-  /**
-   * The link to the next page of items.
-   */
-  @nextLink
-  nextLink?: string;
-}
+model DataConnectorDefinitionArmCollectionWrapper
+  is Azure.Core.Page<DataConnectorDefinition>;
 
 /**
  * List all the data connectors.
@@ -7000,27 +6988,7 @@ model Operation {
   /**
    * Properties of the operation
    */
-  display?: {
-    /**
-     * Description of the operation
-     */
-    description?: string;
-
-    /**
-     * Operation name
-     */
-    operation?: string;
-
-    /**
-     * Provider name
-     */
-    provider?: string;
-
-    /**
-     * Resource name
-     */
-    resource?: string;
-  };
+  display?: OperationDisplay;
 
   /**
    * Name of the operation
@@ -10419,19 +10387,11 @@ model SapSolutionUsageStatisticProperties {
 /**
  * The exposure status of the connector to the customers.
  */
-@doc(
-  "The exposure status of the connector to the customers. Available values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal)."
-)
-scalar AvailabilityStatus extends int32;
-
-/**
- * The exposure status of the connector to the customers.
- */
 model ConnectorDefinitionsAvailability {
   /**
    * The exposure status of the connector to the customers. Available values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal).
    */
-  status?: AvailabilityStatus;
+  status?: int32;
 
   /**
    * Gets or sets a value indicating whether the connector is preview.
@@ -10739,8 +10699,8 @@ model InstructionStepDetails {
   /**
    * Gets or sets the instruction type parameters settings.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Preserve the existing stable Swagger contract as a free-form object."
-  parameters: {};
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  parameters: unknown;
 
   /**
    * Gets or sets the instruction type name.
