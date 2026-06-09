@@ -133,8 +133,8 @@ model EvaluationCriterion {
 
 @doc("Tuning knobs and run-mode for an optimization job.")
 model OptimizationOptions {
-  @doc("Maximum optimization iterations per strategy. Must be >= 1. Default: 5.")
-  max_iterations?: int32 = 5;
+  @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
+  max_candidates?: int32 = 5;
 
   @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
   optimization_config?: Record<unknown>;
