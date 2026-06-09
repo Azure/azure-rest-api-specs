@@ -16,9 +16,6 @@ namespace WidgetAnalytics;
 
 @doc("Versions info.")
 enum Versions {
-  @doc("The 2022-11-01-preview version.")
-  v2022_11_01_Preview: "2022-11-01-preview",
-
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
 }
