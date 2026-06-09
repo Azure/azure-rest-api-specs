@@ -282,8 +282,8 @@ describe("Impact Detection - arm-leases folder behavior", () => {
       isDraft: false,
     });
 
-    // Do NOT include "contosowidgermanager2" in the arm-leases folder list
-    const armLeasesFolders = DEFAULT_MAIN_SPEC_FOLDERS;
+    // Only include existing arm-lease entries; omit "contosowidgermanager2" to simulate a truly new RP
+    const armLeasesFolders = ["contosowidgetmanager"];
 
     const actualImpact = await evaluateImpact(prContext, labelContext, armLeasesFolders);
 
