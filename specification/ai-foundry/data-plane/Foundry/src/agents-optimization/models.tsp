@@ -83,7 +83,7 @@ model ReferenceDatasetInput extends DatasetInput {
   @doc("Registered dataset name.")
   name: string;
 
-  @doc("Registered dataset version. If not specified, the latest version is used.")
+  @doc("Dataset version. If not specified, the latest version is used.")
   version?: string;
 }
 
@@ -130,9 +130,9 @@ model EvaluatorRef {
 // Input models
 // ---------------------------------------------------------------------------
 
-@doc("Identifies the registered Foundry agent to optimize. Skills, tools, and system_prompt are specified in options.optimization_config.")
+@doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
 model AgentIdentifier {
-  @doc("Registered Foundry agent name.")
+  @doc("Registered Foundry agent name (required).")
   agent_name: string;
 
   @doc("Pinned agent version. Defaults to latest if omitted.")
@@ -165,59 +165,58 @@ model OptimizationOptions {
   @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
   max_candidates?: int32 = 5;
 
-  @doc("Per-target-attribute configuration overrides.")
+  @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
   optimization_config?: Record<unknown>;
 
-  @doc("Model deployment used for evaluation.")
+  @doc("Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').")
   eval_model?: string;
 
-  @doc("Model deployment for optimization reasoning (must be gpt-5 family).")
+  @doc("Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.")
   optimization_model?: string;
 
-  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for multi-turn simulation scoring.")
+  @doc("Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.")
   evaluation_level?: EvaluationLevel;
 }
 
 @doc("Caller-supplied inputs for an optimization job.")
 model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent?: AgentIdentifier;
+  agent: AgentIdentifier;
 
-  @doc("Training dataset — either inline items or a reference to a registered dataset.")
-  train_dataset?: DatasetInput;
+  @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
+  train_dataset: DatasetInput;
 
-  @doc("Optional held-out validation dataset.")
+  @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
   validation_dataset?: DatasetInput;
 
-  @doc("Job-level evaluators referenced by name and optional version.")
-  evaluators?: EvaluatorRef[];
+  @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
+  evaluators: EvaluatorRef[];
 
   @doc("Tuning knobs and run-mode.")
   options?: OptimizationOptions;
 }
 
 // ---------------------------------------------------------------------------
-// Progress model
+// Progress / result models
 // ---------------------------------------------------------------------------
 
-@doc("In-flight progress; populated while status is queued or in_progress.")
+@doc("In-flight progress; only populated while status is queued or in_progress.")
 model OptimizationJobProgress {
   @doc("Number of candidates whose evaluation has completed so far.")
   candidates_completed: int32;
 
-  @doc("Best score observed so far across all evaluated candidates.")
+  @doc("Best score observed so far across all candidates.")
   best_score: float64;
 
   @doc("Wall-clock time elapsed in seconds since the job began executing.")
   elapsed_seconds: float64;
 }
 
-// ---------------------------------------------------------------------------
-// Candidate model
-// ---------------------------------------------------------------------------
-
-@doc("Aggregated evaluation result for a single candidate agent configuration.")
+@doc("Aggregated evaluation result for a single candidate agent configuration across all tasks.")
 model OptimizationCandidate {
+  @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
+  candidate_id?: string;
+
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
 
@@ -229,9 +228,6 @@ model OptimizationCandidate {
 
   @doc("Average token usage across all tasks.")
   avg_tokens: float64;
-
-  @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
-  candidate_id?: string;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   eval_id?: string;
@@ -278,10 +274,6 @@ model OptimizationTaskResult {
   @doc("Identifier of the agent run that produced this result.")
   run_id?: string;
 }
-
-// ---------------------------------------------------------------------------
-// Result model
-// ---------------------------------------------------------------------------
 
 @doc("Terminal-state result body. Populated when status is succeeded or failed.")
 model OptimizationJobResult {
@@ -344,7 +336,7 @@ model OptimizationJobListItem {
   @visibility(Lifecycle.Read)
   agent?: AgentIdentifier;
 
-  @doc("In-flight progress. Absent in terminal states.")
+  @doc("Progress while in flight. Absent in terminal states.")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
 
