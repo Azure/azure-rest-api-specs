@@ -292,22 +292,6 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(AlertSeverity.`3`, "THREE", "python");
 @@clientName(AlertSeverity.`4`, "FOUR", "python");
 
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.get,
-  "DiagnosticSettings",
-  "python"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.createOrUpdate,
-  "DiagnosticSettings",
-  "python"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.update,
-  "DiagnosticSettings",
-  "python"
-);
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
