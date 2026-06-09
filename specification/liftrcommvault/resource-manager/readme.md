@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Commvault.ContentStore/preview/2024-10-01-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2024-10-01-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
-  - Commvault.ContentStore/preview/2025-01-01-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2025-01-01-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2026-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-03-01-preview'
 input-file:
-  - Commvault.ContentStore/preview/2026-03-01-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2026-03-01-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-2026-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-05-01-preview'
 input-file:
-  - Commvault.ContentStore/preview/2026-05-01-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2026-05-01-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -88,7 +88,7 @@ These settings apply only when `--tag=package-2026-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-06-01-preview'
 input-file:
-  - Commvault.ContentStore/preview/2026-06-01-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2026-06-01-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-2026-06-02-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-06-02-preview'
 input-file:
-  - Commvault.ContentStore/preview/2026-06-02-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2026-06-02-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -114,7 +114,7 @@ These settings apply only when `--tag=package-2026-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-07-01-preview'
 input-file:
-  - Commvault.ContentStore/preview/2026-07-01-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2026-07-01-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
@@ -127,7 +127,7 @@ These settings apply only when `--tag=package-2026-07-03-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-07-03-preview'
 input-file:
-  - Commvault.ContentStore/preview/2026-07-03-preview/commvault.json
+  - Commvault.ContentStore/ContentStore.Management/preview/2026-07-03-preview/commvault.json
 
 suppressions:
   - code: PathContainsResourceType
