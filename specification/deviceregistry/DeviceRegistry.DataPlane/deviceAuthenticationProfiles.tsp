@@ -243,6 +243,12 @@ interface DeviceAuthenticationProfiles {
 interface IssueCertResults {
   /** Get the status of a long-running `:issueCert` operation. */
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with DeviceAuthenticationProfiles in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `DeviceAuthenticationProfiles` SDK client (matches the wire-side
+  // `DeviceAuthenticationProfiles_IssueCert` action that produces these
+  // results) rather than as a top-level `IssueCertResults_Get` method.
+  @operationId("DeviceAuthenticationProfiles_GetIssueCertResult")
   get is ResourceOperations.ResourceRead<IssueCertResult>;
 }
 
@@ -250,5 +256,11 @@ interface IssueCertResults {
 @tag("Device Authentication Profiles")
 interface RevokeCertsResults {
   /** Get the status of a long-running `:revokeCerts` operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with DeviceAuthenticationProfiles in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `DeviceAuthenticationProfiles` SDK client (matches the wire-side
+  // `DeviceAuthenticationProfiles_RevokeCerts` action that produces these
+  // results) rather than as a top-level `RevokeCertsResults_Get` method.
+  @operationId("DeviceAuthenticationProfiles_GetRevokeCertsResult")
   get is ResourceOperations.ResourceRead<RevokeCertsResult>;
 }
