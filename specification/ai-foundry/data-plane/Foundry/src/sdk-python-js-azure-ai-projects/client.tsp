@@ -95,10 +95,14 @@ using Azure.AI.Projects;
 @@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
 
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
-@@clientName(OpenAI.ContainerMemoryLimit.`1g`, "MEMORY_1GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`4g`, "MEMORY_4GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
-@@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`4g`, exact("MEMORY_4GB"), "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`16g`, exact("MEMORY_16GB"), "python");
+@@clientName(OpenAI.ContainerMemoryLimit.`64g`, exact("MEMORY_64GB"), "python");
+
+@@clientName(OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11, exact("WEB_SEARCH_PREVIEW_2025_03_11"), "python");
+@@clientName(OpenAI.RankerVersionType.`default-2024-11-15`, exact("DEFAULT_2024_11_15"), "python");
+@@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
@@ -232,6 +236,8 @@ using Azure.AI.Projects;
 );
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
+@@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
+
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
 // --------------------------------------------------------------------------------
@@ -253,6 +259,8 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Beta Memories sub-client
 // --------------------------------------------------------------------------------
+
+@@clientName(MemoryStoreSearchRequest.items, exact("items"), "python");
 
 @@clientName(MemoryStores.createMemoryStore, "create");
 @@clientName(MemoryStores.updateMemoryStore, "update");
