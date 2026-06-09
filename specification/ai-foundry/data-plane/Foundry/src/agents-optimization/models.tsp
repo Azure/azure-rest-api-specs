@@ -1,5 +1,5 @@
 // Models for the AgentsOptimization data-plane surface.
-// Aligned with in-tree C# DTOs (Contracts/V2Preview/Models/).
+// Aligned with in-tree C# DTOs (Contracts/V2/Models/).
 //
 // Uses shared Foundry job infrastructure from servicepatterns.tsp:
 //   JobLike<TResult, TInputs> — base job shape (id, status, inputs, result, error)
@@ -45,86 +45,6 @@ union OptimizationMode {
 }
 
 // ---------------------------------------------------------------------------
-// Dataset input — discriminated union (inline items or registered reference)
-// ---------------------------------------------------------------------------
-
-/** Discriminator values for the dataset input union. */
-union DatasetInputType {
-  string,
-
-  @doc("Inline dataset — items are provided directly in the request body.")
-  inline: "inline",
-
-  @doc("Reference to a registered Foundry dataset by name and version.")
-  reference: "reference",
-}
-
-/** Base discriminated model for dataset input. Either inline items or a registered reference. */
-@discriminator("type")
-model DatasetInput {
-  @doc("Dataset input type discriminator.")
-  type: DatasetInputType;
-}
-
-/** Inline dataset — items supplied directly in the request body. */
-model InlineDatasetInput extends DatasetInput {
-  @doc("Dataset input type discriminator.")
-  type: "inline";
-
-  @doc("Dataset items.")
-  items: DatasetItem[];
-}
-
-/** Reference to a registered Foundry dataset. */
-model ReferenceDatasetInput extends DatasetInput {
-  @doc("Dataset input type discriminator.")
-  type: "reference";
-
-  @doc("Registered dataset name.")
-  name: string;
-
-  @doc("Registered dataset version. If not specified, the latest version is used.")
-  version?: string;
-}
-
-/** A single item in an inline dataset. */
-model DatasetItem {
-  @doc("The user query / prompt.")
-  query?: string;
-
-  @doc("Expected ground truth answer (optional).")
-  ground_truth?: string;
-
-  @doc("Desired number of conversation turns for simulation mode (1–20).")
-  desired_num_turns?: int32;
-
-  @doc("Per-item evaluation criteria.")
-  criteria?: DatasetCriterion[];
-}
-
-/** Evaluation criterion: a name + instruction pair. */
-model DatasetCriterion {
-  @doc("Criterion name.")
-  name: string;
-
-  @doc("Criterion instruction / description.")
-  instruction: string;
-}
-
-// ---------------------------------------------------------------------------
-// Evaluator reference
-// ---------------------------------------------------------------------------
-
-/** Reference to a named evaluator, optionally pinned to a version. */
-model EvaluatorRef {
-  @doc("Evaluator name.")
-  name: string;
-
-  @doc("Evaluator version. If not specified, the latest version is used.")
-  version?: string;
-}
-
-// ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
 
@@ -158,10 +78,63 @@ model OptimizationAgentDefinition {
   tools?: Record<unknown>[];
 }
 
+@doc("Reference to a registered dataset in the Foundry Dataset Service.")
+model DatasetRef {
+  @doc("Dataset name.")
+  name: string;
+
+  @doc("Dataset version. If not specified, the latest version is used.")
+  version?: string;
+}
+
+@doc("A single evaluation task item with prompt, expected output, and per-item criteria.")
+model DatasetItem {
+  @doc("Display name of this task.")
+  name?: string;
+
+  @doc("Inline prompt sent to the agent (single-turn).")
+  prompt?: string;
+
+  @doc("User query / input for the task.")
+  query?: string;
+
+  @doc("Expected ground truth answer.")
+  ground_truth?: string;
+
+  @doc("Per-item evaluation criteria.")
+  criteria?: EvaluationCriterion[];
+
+  @doc("Unique identifier for this scenario (simulation mode).")
+  id?: string;
+
+  @doc("Natural-language description of what the simulated user should do (simulation mode).")
+  test_case_description?: string;
+
+  @doc("Desired number of conversation turns for simulation mode (1–20).")
+  @minValue(1)
+  @maxValue(20)
+  desired_num_turns?: int32;
+
+  @doc("Pre-computed evaluation results in AOAI-compatible format. When provided with response_items, the baseline run-and-evaluate phase is skipped.")
+  eval_results?: Record<unknown>[];
+
+  @doc("Pre-computed agent response output items from a prior agent run. Used to skip baseline agent execution when results are already available in the dataset.")
+  response_items?: Record<unknown>[];
+}
+
+@doc("A single evaluation criterion: a name + instruction pair.")
+model EvaluationCriterion {
+  @doc("The evaluator metric name (e.g. 'task_adherence', 'groundedness').")
+  name: string;
+
+  @doc("Natural-language instruction describing what this criterion measures.")
+  instruction: string;
+}
+
 @doc("Tuning knobs and run-mode for an optimization job.")
 model OptimizationOptions {
-  @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
-  max_candidates?: int32 = 5;
+  @doc("Maximum optimization iterations per strategy. Must be >= 1. Default: 5.")
+  max_iterations?: int32 = 5;
 
   @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
   optimization_config?: Record<unknown>;
@@ -181,58 +154,54 @@ model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
   agent: AgentIdentifier;
 
-  @doc("Training dataset — either an inline item array or a reference to a registered dataset.")
-  train_dataset: DatasetInput;
+  @doc("Inline dataset items. Mutually exclusive with train_dataset_reference.")
+  dataset?: DatasetItem[];
+
+  @doc("Reference to a registered training dataset.")
+  train_dataset_reference?: DatasetRef;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset?: DatasetInput;
+  validation_dataset_reference?: DatasetRef;
 
-  @doc("Job-level evaluators (referenced by name and optional version).")
-  evaluators?: EvaluatorRef[];
+  @doc("Job-level evaluators referenced by name. Per-task criteria may override. Default: ['task_adherence'].")
+  evaluators?: string[];
+
+  @doc("Job-level evaluation criteria. Override or extend the default evaluators.")
+  criteria?: EvaluationCriterion[];
 
   @doc("Tuning knobs and run-mode.")
   options?: OptimizationOptions;
 }
 
 // ---------------------------------------------------------------------------
-// Progress model
+// Progress / result models
 // ---------------------------------------------------------------------------
 
-@doc("In-flight progress; populated while status is queued or in_progress.")
+@doc("In-flight progress; only populated while status is queued or in_progress.")
 model OptimizationJobProgress {
-  @doc("Number of candidates whose evaluation has completed so far.")
-  candidates_completed: int32;
+  @doc("1-based current iteration index.")
+  current_iteration: int32;
 
-  @doc("Best score observed so far across all evaluated candidates.")
+  @doc("Best score observed so far across all candidates.")
   best_score: float64;
 
   @doc("Wall-clock time elapsed in seconds since the job began executing.")
   elapsed_seconds: float64;
-
-  @doc("Unix timestamp (seconds) when the current candidate evaluation started. Null if no candidate is actively being evaluated.")
-  candidate_started_at?: int64;
-
-  @doc("True when a new candidate has been generated but its evaluation has not yet completed.")
-  candidate_generated: boolean;
-
-  @doc("Number of metric scoring calls completed for the current candidate.")
-  metric_calls_completed: int32;
-
-  @doc("Total number of metric scoring calls expected for the current candidate.")
-  metric_calls_total: int32;
 }
-
-// ---------------------------------------------------------------------------
-// Candidate models
-// ---------------------------------------------------------------------------
 
 @doc("Aggregated evaluation result for a single candidate agent configuration across all tasks.")
 model OptimizationCandidate {
+  @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
+  candidate_id?: string;
+
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
 
+  @doc("The agent configuration that produced this candidate.")
+  config: OptimizationAgentDefinition;
+
   @doc("What was mutated from the baseline (e.g., {system_prompt: 'new prompt'}).")
-  mutations?: Record<unknown>;
+  mutations: Record<unknown>;
 
   @doc("Average composite score across all tasks.")
   avg_score: float64;
@@ -243,11 +212,11 @@ model OptimizationCandidate {
   @doc("Fraction of tasks that met the pass threshold.")
   pass_rate: float64;
 
-  @doc("The agent configuration that produced this candidate.")
-  config?: OptimizationAgentDefinition;
+  @doc("Individual task-level scores.")
+  task_scores: OptimizationTaskResult[];
 
-  @doc("Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.")
-  candidate_id?: string;
+  @doc("Whether this candidate is on the Pareto frontier (score vs cost).")
+  is_pareto_optimal: boolean;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   eval_id?: string;
@@ -295,20 +264,25 @@ model OptimizationTaskResult {
   run_id?: string;
 }
 
-// ---------------------------------------------------------------------------
-// Result model
-// ---------------------------------------------------------------------------
-
 @doc("Terminal-state result body. Populated when status is succeeded or failed.")
 model OptimizationJobResult {
-  @doc("Candidate ID of the original (un-optimized) baseline evaluation.")
-  baseline?: string;
+  @doc("Evaluation scores for the original (un-optimized) agent configuration.")
+  baseline?: OptimizationCandidate;
 
-  @doc("Candidate ID of the highest-scoring candidate found during optimization.")
-  best?: string;
+  @doc("The highest-scoring candidate found during optimization.")
+  best?: OptimizationCandidate;
 
   @doc("All evaluated candidates including baseline.")
   candidates?: OptimizationCandidate[];
+
+  @doc("The options used for this optimization run.")
+  options?: OptimizationOptions;
+
+  @doc("Non-fatal warnings from the optimization run (e.g., target attribute failures that were skipped).")
+  warnings?: string[];
+
+  @doc("True when all target attributes failed — only the baseline was evaluated.")
+  all_target_attributes_failed?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -321,52 +295,36 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
 
-  @doc("The timestamp when the job was last updated, represented in Unix time.")
+  @doc("The timestamp when the job was last updated (status, progress, or result change), represented in Unix time.")
   @visibility(Lifecycle.Read)
-  updated_at: FoundryTimestamp;
+  updated_at?: FoundryTimestamp;
 
   @doc("Progress while in flight. Absent in terminal states.")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
 
-  @doc("Non-fatal warnings emitted at any point during optimization.")
+  @doc("Metadata about the dataset used for this optimization job.")
   @visibility(Lifecycle.Read)
-  warnings?: string[];
+  dataset?: DatasetInfo;
 }
 
 // ---------------------------------------------------------------------------
-// Slim list item — returned by LIST to avoid transmitting full candidate data
+// Dataset info model
 // ---------------------------------------------------------------------------
 
-@doc("Slim job representation returned by the LIST endpoint. Does not include full candidate results.")
-model OptimizationJobListItem {
-  @doc("Server-assigned unique identifier.")
-  @visibility(Lifecycle.Read)
-  id: string;
+@doc("Metadata about the dataset used for optimization, surfaced in the response.")
+model DatasetInfo {
+  @doc("Dataset name when using a registered dataset reference. Null for inline datasets.")
+  name?: string;
 
-  @doc("Current lifecycle status.")
-  @visibility(Lifecycle.Read)
-  status: JobStatus;
+  @doc("Dataset version when using a registered dataset reference. Null for inline datasets.")
+  version?: string;
 
-  @doc("The timestamp when the job was created, represented in Unix time.")
-  @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
+  @doc("Number of tasks/rows in the dataset.")
+  task_count: int32;
 
-  @doc("The timestamp when the job was last updated, represented in Unix time.")
-  @visibility(Lifecycle.Read)
-  updated_at: FoundryTimestamp;
-
-  @doc("The agent targeted by this optimization job.")
-  @visibility(Lifecycle.Read)
-  agent?: AgentIdentifier;
-
-  @doc("In-flight progress. Absent in terminal states.")
-  @visibility(Lifecycle.Read)
-  progress?: OptimizationJobProgress;
-
-  @doc("Error details — populated only on failure.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
+  @doc("True when the dataset was provided inline in the request body.")
+  is_inline: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -489,4 +447,3 @@ model CandidateFileInfo {
   @doc("File size in bytes.")
   size_bytes: int64;
 }
-
