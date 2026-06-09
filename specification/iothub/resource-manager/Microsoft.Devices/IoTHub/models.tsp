@@ -2270,7 +2270,7 @@ model RoutingTwin {
   /**
    * Twin Tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device twin tags are user-defined, free-form key/value pairs with no fixed schema"
   tags?: Record<unknown>;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2282,13 +2282,13 @@ model RoutingTwinProperties {
   /**
    * Twin desired properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device Twin Desired properties are user-defined, free-form key/value pairs with no fixed schema"
   desired?: Record<unknown>;
 
   /**
-   * Twin desired properties
+   * Twin reported properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device Twin Reported properties are user-defined, free-form key/value pairs with no fixed schema"
   reported?: Record<unknown>;
 }
 
