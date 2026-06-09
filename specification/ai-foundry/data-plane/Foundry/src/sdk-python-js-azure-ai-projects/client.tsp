@@ -30,7 +30,8 @@ import "../data_generation_jobs/routes.tsp";
 import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
-import "./relocate-beta-operations.tsp";
+import "../sdk-common/beta-ops-relocation-agents.tsp";
+import "../sdk-common/beta-ops-relocation-projects.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
