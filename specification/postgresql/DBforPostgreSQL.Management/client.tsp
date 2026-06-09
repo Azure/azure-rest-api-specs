@@ -747,7 +747,11 @@ using Azure.ClientGenerator.Core;
 @@alternateType(ServerPropertiesForPatch.authConfig, AuthConfig, "csharp");
 
 // --- Blocking: Type suffix violations (SUFFIX003/SUFFIX005) ---
-@@clientName(MaintenanceEventActionResponse, "MaintenanceEventActionResult", "csharp");
+@@clientName(
+  MaintenanceEventActionResponse,
+  "MaintenanceEventActionResult",
+  "csharp"
+);
 @@clientName(
   MaintenanceEventRescheduleRequest,
   "MaintenanceEventRescheduleContent",
@@ -779,7 +783,11 @@ using Azure.ClientGenerator.Core;
 
 // --- Non-blocking: Resource infix in Data/Collection types (RESINFIX001) ---
 @@clientName(MaintenanceEventResource, "MaintenanceEvent", "csharp");
-@@clientName(MajorVersionUpgradePrecheckResource, "MajorVersionUpgradePrecheck", "csharp");
+@@clientName(
+  MajorVersionUpgradePrecheckResource,
+  "MajorVersionUpgradePrecheck",
+  "csharp"
+);
 
 // --- Non-blocking: DateTimeOffset property suffixes (DATE001) ---
 @@clientName(
@@ -795,10 +803,22 @@ using Azure.ClientGenerator.Core;
 
 // --- Non-blocking: Generic/ambiguous type names (contextual naming) ---
 @@clientName(PolicyDetail, "MajorVersionUpgradePrecheckPolicyDetail", "csharp");
-@@clientName(PrecheckErrorInfo, "MajorVersionUpgradePrecheckErrorInfo", "csharp");
+@@clientName(
+  PrecheckErrorInfo,
+  "MajorVersionUpgradePrecheckErrorInfo",
+  "csharp"
+);
 @@clientName(PrecheckResult, "MajorVersionUpgradePrecheckResult", "csharp");
-@@clientName(UpgradeSequence, "PostgreSqlMajorVersionUpgradeSequence", "csharp");
-@@clientName(MaintenanceType, "PostgreSqlFlexibleServerMaintenanceType", "csharp");
+@@clientName(
+  UpgradeSequence,
+  "PostgreSqlMajorVersionUpgradeSequence",
+  "csharp"
+);
+@@clientName(
+  MaintenanceType,
+  "PostgreSqlFlexibleServerMaintenanceType",
+  "csharp"
+);
 @@clientName(
   MaintenanceEventResourceProperties,
   "MaintenanceEventProperties",
