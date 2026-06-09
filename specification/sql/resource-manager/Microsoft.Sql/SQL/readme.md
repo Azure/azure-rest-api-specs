@@ -31,6 +31,15 @@ tag: package-2025-01-01
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-08-01-preview
+
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - preview/2025-08-01-preview/openapi.json
+```
+
 ### Tag: package-preview-2025-02-01-preview
 
 These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
@@ -5756,6 +5765,9 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].patch.parameters["3"].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}"].patch.parameters["5"].schema.properties.properties
   - code: MissingSegmentsInNestedResourceListOperation
     from: ElasticPools.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools"]
