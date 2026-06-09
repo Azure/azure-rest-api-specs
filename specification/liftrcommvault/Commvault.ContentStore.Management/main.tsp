@@ -110,7 +110,13 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  update is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
+  update is ArmCustomPatchAsync<
+    CloudAccount,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CloudAccount,
+      CloudAccountProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
@@ -627,15 +633,15 @@ model ProtectionGroupProperties {
 
   @doc("The protection group schedule")
   @visibility(Lifecycle.Read)
-  protectionStatus: ProtectionStatus; //Check what values can it have
+  protectionStatus?: ProtectionStatus; //Check what values can it have
 
   @doc("The number of ProtectedItems under the Protection Group")
   @visibility(Lifecycle.Read)
-  numberOfProtectedItems: int32;
+  numberOfProtectedItems?: int32;
 
   @doc("The Commvault Protection Group backup time")
   @visibility(Lifecycle.Read)
-  lastBackUpTime: int64;
+  lastBackUpTime?: int64;
 
   @doc("The backup activity status indicating if backup is enabled or not on the protection group")
   @visibility(Lifecycle.Read)
