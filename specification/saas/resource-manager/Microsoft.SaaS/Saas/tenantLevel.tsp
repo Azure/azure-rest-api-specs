@@ -36,10 +36,7 @@ interface SaasTenantLevel {
     >
   >;
   deleteResource is ArmResourceDeleteWithoutOkAsync<SaasTenantResource>;
-  list is ArmResourceListByParent<
-    SaasTenantResource,
-    Parameters = ExpandCustomerDataQueryParameter
-  >;
+  list is ArmResourceListByParent<SaasTenantResource>;
   listAccessToken is ArmResourceActionSync<
     SaasTenantResource,
     void,

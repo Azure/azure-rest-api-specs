@@ -25,10 +25,7 @@ interface SaasSubscriptionLevel {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<SaasResource>;
-  listByResourceGroup is ArmResourceListByParent<
-    SaasResource,
-    Parameters = ExpandCustomerDataQueryParameter
-  >;
+  listByResourceGroup is ArmResourceListByParent<SaasResource>;
   listAccessToken is ArmResourceActionSync<
     SaasResource,
     void,
@@ -44,9 +41,6 @@ interface SaasSubscriptionLevel {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Global operations not scoped to a single resource"
 interface SaasSubscriptionLevelGlobal {
-  listByAzureSubscription is ArmListBySubscription<
-    SaasResource,
-    Parameters = ExpandCustomerDataQueryParameter
-  >;
+  listByAzureSubscription is ArmListBySubscription<SaasResource>;
   checkNameAvailability is checkGlobalNameAvailability;
 }
