@@ -25,6 +25,20 @@ using Microsoft.HybridCompute;
 
 @@clientName(FirmwareProfile.type, "FirmwareProfileType", "csharp");
 @@clientName(RunCommandInputParameter, "RunCommandInputContent", "csharp");
+@@clientName(ExtensionType, "HybridComputeExtensionType", "csharp");
+@@clientName(IdentityKeyStore, "HybridComputeIdentityKeyStore", "csharp");
+@@clientName(OperationValue, "HybridComputeOperationValue", "csharp");
+@@clientName(
+  OperationValueDisplay,
+  "HybridComputeOperationValueDisplay",
+  "csharp"
+);
+@@clientName(ServiceExtension, "HybridComputeServiceExtension", "csharp");
+@@clientName(
+  ServiceExtensionPublicNetworkAccess,
+  "HybridComputeServiceExtensionPublicNetworkAccess",
+  "csharp"
+);
 
 /**
  * The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).
