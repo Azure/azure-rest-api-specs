@@ -676,6 +676,47 @@ model KubeConfigDefinition {
 }
 
 /**
+ * Parameters to authenticate using Workload Identity for PATCH operations. All properties are optional per ARM PATCH guidelines.
+ */
+@added(Versions.v2026_07_01_preview)
+model ObjectLevelIdentityPatchDefinition {
+  /**
+   * The client ID of the Azure Managed Identity to be used for authentication. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/client-id`.
+   */
+  clientId?: string;
+
+  /**
+   * The tenant ID of the Azure Managed Identity. If omitted, the tenant is inferred from the cluster's workload identity configuration. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/tenant-id`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tenant ID is intentionally nullable to allow inference from cluster config"
+  tenantId?: string | null;
+
+  /**
+   * The name of the Kubernetes ServiceAccount to use for workload identity authentication. If omitted, the agent generates a deterministic name based on the FluxConfiguration name and source type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service account name is intentionally nullable to allow auto-generation"
+  serviceAccountName?: string | null;
+}
+
+/**
+ * Parameters to configure kubeConfig for PATCH operations. All properties are optional per ARM PATCH guidelines.
+ */
+@added(Versions.v2026_07_01_preview)
+model KubeConfigPatchDefinition {
+  /**
+   * The ARM resource ID of the remote AKS cluster to deploy to (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ContainerService/managedClusters/{name}).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of clusterResourceId"
+  clusterResourceId?: string | null;
+
+  /**
+   * Workload identity configuration for authenticating to the remote AKS cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of objectLevelIdentity"
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
+}
+
+/**
  * Parameters to reconcile to the OCIRepository source kind type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1215,7 +1256,7 @@ model GitRepositoryPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
   @added(Versions.v2026_07_01_preview)
-  objectLevelIdentity?: ObjectLevelIdentityDefinition | null;
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
 
   /**
    * Directories to include when cloning the repository via sparse checkout. Only these directories and their subdirectories are included in the fetched artifact. Set to null in PATCH to remove sparse checkout configuration.
@@ -1284,7 +1325,7 @@ model BucketPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
   @added(Versions.v2026_07_01_preview)
-  objectLevelIdentity?: ObjectLevelIdentityDefinition | null;
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
 
   /**
    * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
@@ -1358,7 +1399,7 @@ model AzureBlobPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
   @added(Versions.v2026_07_01_preview)
-  objectLevelIdentity?: ObjectLevelIdentityDefinition | null;
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
 
   /**
    * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
@@ -1495,7 +1536,7 @@ model OCIRepositoryPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of workload identity (FR-009)"
   @added(Versions.v2026_07_01_preview)
-  objectLevelIdentity?: ObjectLevelIdentityDefinition | null;
+  objectLevelIdentity?: ObjectLevelIdentityPatchDefinition | null;
 
   /**
    * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.
@@ -1675,7 +1716,7 @@ model KustomizationPatchDefinition {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable to support PATCH removal of kubeConfig (FR-009)"
   @added(Versions.v2026_07_01_preview)
-  kubeConfig?: KubeConfigDefinition | null;
+  kubeConfig?: KubeConfigPatchDefinition | null;
 
   /**
    * Additional configuration properties to pass through to the Flux custom resource spec. Keys map directly to Flux CR spec field names. Set to null in PATCH to remove all extension properties.

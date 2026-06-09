@@ -708,7 +708,7 @@
           "x-nullable": true
         },
         "objectLevelIdentity": {
-          "$ref": "#/definitions/ObjectLevelIdentityDefinition",
+          "$ref": "#/definitions/ObjectLevelIdentityPatchDefinition",
           "description": "Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.",
           "x-nullable": true
         },
@@ -815,7 +815,7 @@
           "x-nullable": true
         },
         "objectLevelIdentity": {
-          "$ref": "#/definitions/ObjectLevelIdentityDefinition",
+          "$ref": "#/definitions/ObjectLevelIdentityPatchDefinition",
           "description": "Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.",
           "x-nullable": true
         },
@@ -1341,7 +1341,7 @@
           "x-nullable": true
         },
         "objectLevelIdentity": {
-          "$ref": "#/definitions/ObjectLevelIdentityDefinition",
+          "$ref": "#/definitions/ObjectLevelIdentityPatchDefinition",
           "description": "Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.",
           "x-nullable": true
         },
@@ -1412,6 +1412,22 @@
         "clusterResourceId",
         "objectLevelIdentity"
       ]
+    },
+    "KubeConfigPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to configure kubeConfig for PATCH operations. All properties are optional per ARM PATCH guidelines.",
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the remote AKS cluster to deploy to (e.g., /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.ContainerService/managedClusters/{name}).",
+          "x-nullable": true
+        },
+        "objectLevelIdentity": {
+          "$ref": "#/definitions/ObjectLevelIdentityPatchDefinition",
+          "description": "Workload identity configuration for authenticating to the remote AKS cluster.",
+          "x-nullable": true
+        }
+      }
     },
     "KustomizationDefinition": {
       "type": "object",
@@ -1543,7 +1559,7 @@
           "x-nullable": true
         },
         "kubeConfig": {
-          "$ref": "#/definitions/KubeConfigDefinition",
+          "$ref": "#/definitions/KubeConfigPatchDefinition",
           "description": "Parameters to configure kubeConfig for deploying to a remote AKS cluster using workload identity authentication. Set to null in PATCH to remove kubeConfig configuration.",
           "x-nullable": true
         },
@@ -1798,7 +1814,7 @@
           "x-nullable": true
         },
         "objectLevelIdentity": {
-          "$ref": "#/definitions/ObjectLevelIdentityDefinition",
+          "$ref": "#/definitions/ObjectLevelIdentityPatchDefinition",
           "description": "Parameters to authenticate using Workload Identity. Set to null in PATCH to remove workload identity configuration.",
           "x-nullable": true
         },
@@ -1874,6 +1890,26 @@
       "required": [
         "clientId"
       ]
+    },
+    "ObjectLevelIdentityPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to authenticate using Workload Identity for PATCH operations. All properties are optional per ARM PATCH guidelines.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the Azure Managed Identity to be used for authentication. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/client-id`."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the Azure Managed Identity. If omitted, the tenant is inferred from the cluster's workload identity configuration. This value is used to annotate the Kubernetes ServiceAccount with `azure.workload.identity/tenant-id`.",
+          "x-nullable": true
+        },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "The name of the Kubernetes ServiceAccount to use for workload identity authentication. If omitted, the agent generates a deterministic name based on the FluxConfiguration name and source type.",
+          "x-nullable": true
+        }
+      }
     },
     "ObjectReferenceDefinition": {
       "type": "object",
