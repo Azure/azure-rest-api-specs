@@ -79,9 +79,7 @@ model UpdateJobProperties extends JobProperties {
 // exclusively via the Day0 recovery device endpoint. It has no `target`:
 // eligibility is evaluated at serve time from the device's presented
 // compatibility properties + agent profile, so the job needs no
-// per-target binding. Creating a recovery job persists the definition
-// only; device-class generation and deployment materialization happen
-// later when the job is scheduled and runs.
+// per-target binding.
 @added(Versions.v2026_11_02_preview)
 @doc("Job properties for a recovery update job (Day0).")
 model RecoveryUpdateJobProperties extends JobProperties {
@@ -103,7 +101,7 @@ union JobTypeEnum {
   @doc("An update job. Targets a group of registered devices for ADU deployments.")
   Update: "Update",
 
-  @doc("A recovery update job. Targets all compatible devices -- including devices not yet registered in ADR -- served exclusively via the Day0 recovery device endpoint.")
+  @doc("A recovery update job. Targets all compatible devices for ADU deployments -- including devices not yet registered in ADR -- served exclusively via the ADU recovery device endpoint.")
   RecoveryUpdate: "RecoveryUpdate",
 }
 
@@ -179,10 +177,11 @@ model JobScheduleRequest {
 interface Jobs {
   get is ArmResourceRead<Job>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<Job>;
-  // PATCH is restricted to tags-only. Job spec properties (jobType, target,
-  // definition) are immutable after create because mutating them would have
-  // unintended effects on already-scheduled runs. Tags-only PATCH satisfies
-  // the ARM tracked-resource requirement (RPC-Patch-V1-03).
+  // PATCH is restricted to tags-only. Job spec properties (jobType,
+  // definition, and the Update job's target) are immutable after create
+  // because mutating them would have unintended effects on already-scheduled
+  // runs. Tags-only PATCH satisfies the ARM tracked-resource requirement
+  // (RPC-Patch-V1-03).
   update is ArmTagsPatchSync<Job>;
   delete is ArmResourceDeleteWithoutOkAsync<Job>;
   listByNamespace is ArmResourceListByParent<Job>;
