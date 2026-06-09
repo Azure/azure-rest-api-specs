@@ -26,16 +26,16 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-06-01-preview
+tag: package-2026-06-01
 ```
 
-### Tag: package-2025-06-01-preview
+### Tag: package-2026-06-01
 
-These settings apply only when `--tag=package-2025-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-06-01-preview'
+```yaml $(tag) == 'package-2026-06-01'
 input-file:
-  - preview/2025-06-01-preview/support.json
+  - stable/2026-06-01/support.json
 
 suppressions:
   - code: ConsistentPatchProperties
@@ -43,7 +43,7 @@ suppressions:
     where:
       - $.paths["/providers/Microsoft.Support/supportTickets/{supportTicketName}"].patch.parameters[2]["schema"]
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}"].patch.parameters[3]["schema"]
-    reason: "Rule: The property 'directConnectEscalation' in the request body either not apppear in the resource model or has the wrong level. Justification: This rule is being suppressed because all other properties associated with the same request are also suppressed. We are unable to update the public API to a different definition, as doing so would deviate from the expected behavior."
+    reason: "Pre-existing: The PATCH request body uses a separate UpdateSupportTicket model with properties like severity, status, contactDetails, advancedDiagnosticConsent, secondaryConsent, and directConnectEscalation that are at a different level than in the resource model. This is by design for backward compatibility and cannot be changed without breaking existing clients."
 ```
 
 ### Tag: package-2024-04
