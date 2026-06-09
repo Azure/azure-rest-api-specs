@@ -57,7 +57,7 @@ Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.inst
 
 # ARM Api Copilot Review Instructions
 
-Follow [armapi-review.instructions.md](./instructions/armapi-review.instructions.md) and [openapi-review.instructions.md](./instructions/openapi-review.instructions.md) for instructions to review ARM API specifications. GitHub Code review agent must prioritize these instructions over any other instruction files while performing code reviews.
+Follow [arm-api-review.instructions.md](./instructions/arm-api-review.instructions.md) and [openapi-review.instructions.md](./instructions/openapi-review.instructions.md) for instructions to review ARM API specifications. GitHub Code review agent must prioritize these instructions over any other instruction files while performing code reviews.
 
 Cross-cutting review rules (secret detection, property mutability, naming conventions, enum best practices, provisioning state, tracked resource lifecycle) are in the shared [azure-api-review skill](./skills/azure-api-review/SKILL.md). These are referenced by the instruction files and should not be duplicated elsewhere.
 

@@ -1,16 +1,39 @@
 import "../common/service.tsp";
 import "../tools/models.tsp";
 import "../agents/models.tsp";
+import "../skills/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+const ToolboxesRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+};
 
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
   @doc("Responsible AI content filtering configuration.")
   rai_config?: RaiConfig;
+}
+
+@doc("A skill source included in a toolbox.")
+@discriminator("type")
+model ToolboxSkill {
+  @doc("The type of skill source.")
+  type: string;
+}
+
+@doc("A reference to an existing skill to include in a toolbox.")
+model ToolboxSkillReference extends ToolboxSkill {
+  @doc("The type of skill source.")
+  type: "skill_reference";
+
+  @doc("The name of the skill.")
+  name: SkillName;
+
+  @doc("The version of the skill. If not specified, the skill's default version is used. When a version is specified, the reference is pinned to that immutable version.")
+  version?: string;
 }
 
 @doc("A toolbox that stores reusable tool definitions for agents.")
@@ -51,6 +74,9 @@ model ToolboxVersionObject {
   @doc("The list of tools contained in this toolbox version.")
   tools: OpenAI.Tool[];
 
+  @doc("The list of skill sources included in this toolbox version.")
+  skills?: ToolboxSkill[];
+
   @doc("Policy configuration for the toolbox version.")
   policies?: ToolboxPolicies;
 }
@@ -70,6 +96,9 @@ alias CreateToolboxVersionRequest = {
 
   @doc("The list of tools to include in this version.")
   tools: OpenAI.Tool[];
+
+  @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
+  skills?: ToolboxSkill[];
 
   @doc("Policy configuration for this toolbox version.")
   policies?: ToolboxPolicies;

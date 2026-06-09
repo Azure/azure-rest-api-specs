@@ -23,17 +23,20 @@ interface VirtualNetworkAddresses
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(VirtualNetworkAddresses.createOrUpdate,
+@@Autorest.example(
+  VirtualNetworkAddresses.createOrUpdate,
   "./examples/virtualNetworkAddresses_create.json",
   "Create Virtual Network Address"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(VirtualNetworkAddresses.get,
+@@Autorest.example(
+  VirtualNetworkAddresses.get,
   "./examples/virtualNetworkAddresses_get.json",
   "Get Virtual Network Address"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(VirtualNetworkAddresses.delete,
+@@Autorest.example(
+  VirtualNetworkAddresses.delete,
   "./examples/virtualNetworkAddresses_delete.json",
   "Delete Virtual Network Address"
 );

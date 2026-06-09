@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./DatabaseAccountGetResults.tsp";
 
@@ -9,21 +10,30 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB SQL database.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model SqlDatabaseGetResults
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlDatabaseGetProperties> {
+  is Azure.ResourceManager.ProxyResource<SqlDatabaseGetProperties> {
   ...ResourceNameParameter<
     Resource = SqlDatabaseGetResults,
     KeyName = "databaseName",
     SegmentName = "sqlDatabases",
     NamePattern = ""
   >;
+
+  /** The location of the resource group to which the resource belongs. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
+
+  /** Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \"defaultExperience\": \"Cassandra\". Current \"defaultExperience\" values also include \"Table\", \"Graph\", \"DocumentDB\", and \"MongoDB\". */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Identity for the resource.
@@ -46,8 +56,10 @@ interface SqlResources {
   createUpdateSqlDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlDatabaseGetResults,
     Request = SqlDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<SqlDatabaseGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlDatabaseGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -55,7 +67,9 @@ interface SqlResources {
    */
   deleteSqlDatabase is ArmResourceDeleteWithoutOkAsync<
     SqlDatabaseGetResults,
-    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+    Response =
+      | NoContentResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
   >;
 
   /**
@@ -69,28 +83,35 @@ interface SqlResources {
   /**
    * Merges the partitions of a SQL database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("partitionMerge")
   sqlDatabasePartitionMerge is ArmResourceActionAsyncBase<
     SqlDatabaseGetResults,
     MergeParameters,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlDatabaseGetResults>,
-    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<PhysicalPartitionStorageInfoCollection>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 }
 
 @@doc(SqlDatabaseGetResults.name, "Cosmos DB database name.");
-@@doc(SqlDatabaseGetResults.properties,
+@@doc(
+  SqlDatabaseGetResults.properties,
   "The properties of an Azure Cosmos DB SQL database"
 );
-@@doc(SqlResources.createUpdateSqlDatabase::parameters.resource,
+@@doc(
+  SqlResources.createUpdateSqlDatabase::parameters.resource,
   "The parameters to provide for the current SQL database."
 );
-@@doc(SqlResources.sqlDatabasePartitionMerge::parameters.body,
+@@doc(
+  SqlResources.sqlDatabasePartitionMerge::parameters.body,
   "The parameters for the merge operation."
 );
-@@visibility(SqlDatabaseGetResults.location,
+@@visibility(
+  SqlDatabaseGetResults.location,
   Lifecycle.Read,
   Lifecycle.Create,
   Lifecycle.Update

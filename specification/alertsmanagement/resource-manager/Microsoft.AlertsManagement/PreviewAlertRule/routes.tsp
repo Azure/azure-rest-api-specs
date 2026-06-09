@@ -16,7 +16,7 @@ namespace Microsoft.AlertsManagement;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@route("/{resourceId}/providers/microsoft.AlertsManagement/previewAlertRule")
+@route("/{resourceId}/providers/Microsoft.AlertsManagement/previewAlertRule")
 @post
 op previewAlertRule(
   ...ApiVersionParameter,

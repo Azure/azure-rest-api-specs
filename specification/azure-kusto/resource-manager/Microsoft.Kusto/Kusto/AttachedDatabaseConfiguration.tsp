@@ -45,12 +45,15 @@ interface AttachedDatabaseConfigurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AttachedDatabaseConfiguration,
-    Response = ArmResourceUpdatedResponse<AttachedDatabaseConfiguration> | ArmResourceCreatedResponse<AttachedDatabaseConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AttachedDatabaseConfiguration> &
-      ArmAsyncOperationHeader<FinalResult = AttachedDatabaseConfiguration> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AttachedDatabaseConfiguration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AttachedDatabaseConfiguration>
+      | ArmResourceCreatedResponse<AttachedDatabaseConfiguration>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AttachedDatabaseConfiguration> &
+          ArmAsyncOperationHeader<FinalResult = AttachedDatabaseConfiguration> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AttachedDatabaseConfiguration;
+        })
   >;
 
   /**
@@ -59,9 +62,12 @@ interface AttachedDatabaseConfigurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AttachedDatabaseConfiguration,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-      ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+          ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -73,12 +79,15 @@ interface AttachedDatabaseConfigurations {
   >;
 }
 
-@@doc(AttachedDatabaseConfiguration.name,
+@@doc(
+  AttachedDatabaseConfiguration.name,
   "The name of the attached database configuration."
 );
-@@doc(AttachedDatabaseConfiguration.properties,
+@@doc(
+  AttachedDatabaseConfiguration.properties,
   "The properties of the attached database configuration."
 );
-@@doc(AttachedDatabaseConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  AttachedDatabaseConfigurations.createOrUpdate::parameters.resource,
   "The database parameters supplied to the CreateOrUpdate operation."
 );

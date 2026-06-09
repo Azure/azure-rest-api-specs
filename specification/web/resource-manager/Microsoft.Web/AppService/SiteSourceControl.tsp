@@ -73,10 +73,13 @@ interface SiteSourceControls {
   @summary("Gets the source control configuration of an app.")
   getSourceControlSlot is SiteSourceControlOps.Read<
     SiteSourceControl,
-    Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @bodyRoot
-      _: SiteSourceControl;
-    }),
+    Response =
+      | ArmResponse<SiteSourceControl>
+      | ArmResourceCreatedSyncResponse<SiteSourceControl>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: SiteSourceControl;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -88,14 +91,17 @@ interface SiteSourceControls {
   @summary("Updates the source control configuration of an app.")
   createOrUpdateSourceControlSlot is SiteSourceControlOps.CreateOrUpdateAsync<
     SiteSourceControl,
-    Response = ArmResourceUpdatedResponse<SiteSourceControl> | ArmResourceCreatedResponse<
-      SiteSourceControl,
-      ArmLroLocationHeader<FinalResult = SiteSourceControl> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: SiteSourceControl;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<SiteSourceControl>
+      | ArmResourceCreatedResponse<
+          SiteSourceControl,
+          ArmLroLocationHeader<FinalResult = SiteSourceControl> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: SiteSourceControl;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -109,10 +115,13 @@ interface SiteSourceControls {
   updateSourceControlSlot is SiteSourceControlOps.CustomPatchSync<
     SiteSourceControl,
     PatchModel = SiteSourceControl,
-    Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @bodyRoot
-      _: SiteSourceControl;
-    }),
+    Response =
+      | ArmResponse<SiteSourceControl>
+      | ArmResourceCreatedSyncResponse<SiteSourceControl>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: SiteSourceControl;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -168,10 +177,13 @@ interface SiteSourceControlOperationGroup {
   @summary("Gets the source control configuration of an app.")
   getSourceControl is SiteSourceControlOperationGroupOps.Read<
     SiteSourceControl,
-    Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @bodyRoot
-      _: SiteSourceControl;
-    }),
+    Response =
+      | ArmResponse<SiteSourceControl>
+      | ArmResourceCreatedSyncResponse<SiteSourceControl>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: SiteSourceControl;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -183,14 +195,17 @@ interface SiteSourceControlOperationGroup {
   @summary("Updates the source control configuration of an app.")
   createOrUpdateSourceControl is SiteSourceControlOperationGroupOps.CreateOrUpdateAsync<
     SiteSourceControl,
-    Response = ArmResourceUpdatedResponse<SiteSourceControl> | ArmResourceCreatedResponse<
-      SiteSourceControl,
-      ArmLroLocationHeader<FinalResult = SiteSourceControl> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: SiteSourceControl;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<SiteSourceControl>
+      | ArmResourceCreatedResponse<
+          SiteSourceControl,
+          ArmLroLocationHeader<FinalResult = SiteSourceControl> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: SiteSourceControl;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -204,10 +219,13 @@ interface SiteSourceControlOperationGroup {
   updateSourceControl is SiteSourceControlOperationGroupOps.CustomPatchSync<
     SiteSourceControl,
     PatchModel = SiteSourceControl,
-    Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
-      @bodyRoot
-      _: SiteSourceControl;
-    }),
+    Response =
+      | ArmResponse<SiteSourceControl>
+      | ArmResourceCreatedSyncResponse<SiteSourceControl>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: SiteSourceControl;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -230,18 +248,23 @@ interface SiteSourceControlOperationGroup {
 }
 
 @@doc(SiteSourceControl.name, "");
-@@doc(SiteSourceControl.properties,
+@@doc(
+  SiteSourceControl.properties,
   "SiteSourceControl resource specific properties"
 );
-@@doc(SiteSourceControls.createOrUpdateSourceControlSlot::parameters.resource,
+@@doc(
+  SiteSourceControls.createOrUpdateSourceControlSlot::parameters.resource,
   "JSON representation of a SiteSourceControl object. See example."
 );
-@@doc(SiteSourceControls.updateSourceControlSlot::parameters.properties,
+@@doc(
+  SiteSourceControls.updateSourceControlSlot::parameters.properties,
   "JSON representation of a SiteSourceControl object. See example."
 );
-@@doc(SiteSourceControlOperationGroup.createOrUpdateSourceControl::parameters.resource,
+@@doc(
+  SiteSourceControlOperationGroup.createOrUpdateSourceControl::parameters.resource,
   "JSON representation of a SiteSourceControl object. See example."
 );
-@@doc(SiteSourceControlOperationGroup.updateSourceControl::parameters.properties,
+@@doc(
+  SiteSourceControlOperationGroup.updateSourceControl::parameters.properties,
   "JSON representation of a SiteSourceControl object. See example."
 );

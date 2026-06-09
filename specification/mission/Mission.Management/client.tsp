@@ -6,49 +6,58 @@ using Microsoft.Mission;
 
 @@clientName(ApprovalResource, "VirtualEnclaveApproval", "csharp");
 @@clientName(ApprovalProperties, "VirtualEnclaveApprovalProperties", "csharp");
-@@clientName(CommunityEndpointResource,
+@@clientName(
+  CommunityEndpointResource,
   "VirtualEnclaveCommunityEndpoint",
   "csharp"
 );
-@@clientName(CommunityEndpointProperties,
+@@clientName(
+  CommunityEndpointProperties,
   "VirtualEnclaveCommunityEndpointProperties",
   "csharp"
 );
 @@clientName(CommunityResource, "VirtualEnclaveCommunity", "csharp");
-@@clientName(CommunityProperties,
+@@clientName(
+  CommunityProperties,
   "VirtualEnclaveCommunityProperties",
   "csharp"
 );
 @@clientName(EnclaveConnectionResource, "VirtualEnclaveConnection", "csharp");
-@@clientName(EnclaveConnectionProperties,
+@@clientName(
+  EnclaveConnectionProperties,
   "VirtualEnclaveConnectionProperties",
   "csharp"
 );
 @@clientName(EnclaveEndpointResource, "VirtualEnclaveEndpoint", "csharp");
-@@clientName(EnclaveEndpointProperties,
+@@clientName(
+  EnclaveEndpointProperties,
   "VirtualEnclaveEndpointProperties",
   "csharp"
 );
 @@clientName(EnclaveResource, "VirtualEnclave", "csharp");
 @@clientName(TransitHubResource, "VirtualEnclaveTransitHub", "csharp");
 @@clientName(TransitHubResource, "VirtualEnclaveTransitHub", "csharp");
-@@clientName(TransitHubProperties,
+@@clientName(
+  TransitHubProperties,
   "VirtualEnclaveTransitHubProperties",
   "csharp"
 );
 @@clientName(WorkloadResource, "VirtualEnclaveWorkload", "csharp");
 @@clientName(WorkloadProperties, "VirtualEnclaveWorkloadProperties", "csharp");
-@@clientName(TransitHubProperties,
+@@clientName(
+  TransitHubProperties,
   "VirtualEnclaveTransitHubProperties",
   "csharp"
 );
 @@clientName(ApprovalActionResponse, "ApprovalActionResult", "csharp");
 @@clientName(ApprovalCallbackRequest, "ApprovalCallbackContent", "csharp");
-@@clientName(ApprovalDeletionCallbackRequest,
+@@clientName(
+  ApprovalDeletionCallbackRequest,
   "ApprovalDeletionCallbackContent",
   "csharp"
 );
-@@clientName(ApprovalPatchProperties,
+@@clientName(
+  ApprovalPatchProperties,
   "VirtualEnclaveApprovalPatchProperties",
   "csharp"
 );
@@ -56,11 +65,13 @@ using Microsoft.Mission;
 @@clientName(ApprovalPolicy, "VirtualEnclaveApprovalPolicy", "csharp");
 @@clientName(ApprovalSettings, "VirtualEnclaveApprovalSettings", "csharp");
 @@clientName(ApprovalStatus, "VirtualEnclaveApprovalStatus", "csharp");
-@@clientName(CheckAddressSpaceAvailabilityResponse,
+@@clientName(
+  CheckAddressSpaceAvailabilityResponse,
   "CheckAddressSpaceAvailabilityResult",
   "csharp"
 );
-@@clientName(CheckAddressSpaceAvailabilityResponse.value,
+@@clientName(
+  CheckAddressSpaceAvailabilityResponse.value,
   "IsAvailable",
   "csharp"
 );
@@ -80,26 +91,31 @@ using Microsoft.Mission;
 @@clientName(DestinationType.FQDN, "Fqdn", "csharp");
 @@clientName(DestinationType.FQDNTag, "FqdnTag", "csharp");
 @@clientName(CommunityPatchModel, "VirtualEnclaveCommunityPatch", "csharp");
-@@clientName(CommunityPatchProperties,
+@@clientName(
+  CommunityPatchProperties,
   "VirtualEnclaveCommunityPatchProperties",
   "csharp"
 );
-@@clientName(DiagnosticDestination,
+@@clientName(
+  DiagnosticDestination,
   "VirtualEnclaveDiagnosticDestination",
   "csharp"
 );
 @@clientName(FirewallSKU, "VirtualEnclaveFirewallSku", "csharp");
 @@clientName(GovernedServiceItem, "VirtualEnclaveGovernedService", "csharp");
-@@clientName(ServiceIdentifier,
+@@clientName(
+  ServiceIdentifier,
   "VirtualEnclaveGovernedServiceIdentifier",
   "csharp"
 );
 @@clientName(ServiceIdentifier.AKS, "Aks", "csharp");
-@@clientName(MaintenanceModeConfigurationModel,
+@@clientName(
+  MaintenanceModeConfigurationModel,
   "VirtualEnclaveMaintenanceModeConfiguration",
   "csharp"
 );
-@@clientName(MaintenanceModeConfigurationPatchModel,
+@@clientName(
+  MaintenanceModeConfigurationPatchModel,
   "VirtualEnclaveMaintenanceModeConfigurationPatch",
   "csharp"
 );
@@ -108,32 +124,38 @@ using Microsoft.Mission;
 @@clientName(MandatoryApprover, "VirtualEnclaveMandatoryApprover", "csharp");
 @@clientName(ProvisioningState, "VirtualEnclaveProvisioningState", "csharp");
 @@clientName(RoleAssignmentItem, "VirtualEnclaveRoleAssignmentItem", "csharp");
-@@clientName(SubnetConfiguration,
+@@clientName(
+  SubnetConfiguration,
   "VirtualEnclaveSubnetConfiguration",
   "csharp"
 );
 @@clientName(RequestMetadata, "ApprovalRequestMetadata", "csharp");
-@@clientName(RequestMetadataUpdatableProperties,
+@@clientName(
+  RequestMetadataUpdatableProperties,
   "ApprovalRequestMetadataPatch",
   "csharp"
 );
-@@clientName(TransitHubPatchProperties,
+@@clientName(
+  TransitHubPatchProperties,
   "VirtualEnclaveTransitHubPatchProperties",
   "csharp"
 );
-@@clientName(VirtualEnclaveBaseModel.bastionEnabled,
+@@clientName(
+  VirtualEnclaveBaseModel.bastionEnabled,
   "IsBastionEnabled",
   "csharp"
 );
 @@clientName(EnclaveVirtualNetworkModel, "EnclaveVirtualNetwork", "csharp");
 @@clientName(EnclaveAddressSpacesModel, "EnclaveAddressSpaces", "csharp");
 @@clientName(EnclaveDefaultSettingsModel, "EnclaveDefaultSettings", "csharp");
-@@clientName(EnclaveDefaultSettingsPatchModel,
+@@clientName(
+  EnclaveDefaultSettingsPatchModel,
   "EnclaveDefaultSettingsPatch",
   "csharp"
 );
 @@clientName(ApprovalActionRequest, "ApprovalActionContent", "csharp");
-@@clientName(CheckAddressSpaceAvailabilityRequest,
+@@clientName(
+  CheckAddressSpaceAvailabilityRequest,
   "CheckAddressSpaceAvailabilityContent",
   "csharp"
 );

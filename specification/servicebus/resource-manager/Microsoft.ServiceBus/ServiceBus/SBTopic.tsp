@@ -92,6 +92,7 @@ interface SBTopics {
 @@minLength(SBTopic.name, 1);
 @@doc(SBTopic.name, "The topic name.");
 @@doc(SBTopic.properties, "Properties of topic resource.");
-@@doc(SBTopics.createOrUpdate::parameters.resource,
+@@doc(
+  SBTopics.createOrUpdate::parameters.resource,
   "Parameters supplied to create a topic resource."
 );

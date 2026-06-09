@@ -9,6 +9,8 @@ export class EmitAutorestRule implements Rule {
 
   readonly description = 'Must emit "@azure-tools/typespec-autorest" by default';
 
+  readonly suppressable = true;
+
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";

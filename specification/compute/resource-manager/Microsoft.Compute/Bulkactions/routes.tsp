@@ -24,61 +24,79 @@ alias LocationParameter = {
   @minLength(1)
   @segment("locations")
   @key
-  locationparameter: Azure.Core.azureLocation;
+  location: Azure.Core.azureLocation;
 };
 
-@@clientName(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkDeallocate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkHibernate::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkHibernate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkHibernate::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkHibernate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkStart::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkStart::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkStart::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkStart::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCreate::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkCreate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkCreate::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkCreate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkVdiFlexCreate::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkVdiFlexCreate::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkVdiFlexCreate::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkVdiFlexCreate::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkDelete::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkDelete::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkDelete::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkDelete::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkReimage::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkReimage::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkReimage::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkReimage::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkGetOperationsStatus::parameters.body,
   "The request body"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCancel::parameters.body,
+@@clientName(
+  VirtualMachineBulkOperations.bulkCancel::parameters.body,
   "requestBody"
 );
-@@doc(VirtualMachineBulkOperations.bulkCancel::parameters.body,
+@@doc(
+  VirtualMachineBulkOperations.bulkCancel::parameters.body,
   "The request body"
 );
 
@@ -91,9 +109,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkDeallocate")
   bulkDeallocate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -106,9 +124,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkHibernate")
   bulkHibernate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -122,9 +140,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkStart")
   bulkStart(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -138,9 +156,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkCreate")
   bulkCreate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -154,9 +172,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkVdiFlexCreate")
   bulkVdiFlexCreate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -170,9 +188,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkDelete")
   bulkDelete(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -186,9 +204,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkGetOperationStatus")
   bulkGetOperationsStatus(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -202,9 +220,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkCancel")
   bulkCancel(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -218,9 +236,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkReimage")
   bulkReimage(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")

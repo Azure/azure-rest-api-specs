@@ -104,13 +104,13 @@ model MemoryStoreDefaultOptions {
   @doc("Specific categories or types of user profile information to extract and store.")
   user_profile_details?: string;
 
-  @doc("Whether to enable chat summary extraction and storage. Default is true.")
+  @doc("Whether to enable chat summary extraction and storage. Defaults to `true`.")
   chat_summary_enabled: boolean = true;
 
-  @doc("Whether to enable procedural memory extraction and storage. Default is true.")
+  @doc("Whether to enable procedural memory extraction and storage. The service defaults to `true` if a value is not specified by the caller.")
   procedural_memory_enabled?: boolean = true;
 
-  @doc("The default time-to-live for memories in seconds.  A value of 0 indicates that memories do not expire.")
+  @doc("The default time-to-live for memories in seconds. A value of `0` indicates that memories do not expire. Defaults to `0`.")
   @encode(DurationKnownEncoding.seconds, int32)
   default_ttl_seconds?: duration = duration.fromISO("P0D");
 }
