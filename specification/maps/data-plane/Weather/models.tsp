@@ -672,7 +672,7 @@ model HourlyForecast {
   /**
    * Date and time of the forecast in [ISO
    * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-   * (yyyy-mm-ddThh:mm:ss±hh:mm). For example, *2019-11-14T16:00:00-08:00*.
+   * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
   date?: utcDateTime;
 
@@ -899,13 +899,13 @@ model WeatherValue {
 }
 
 /**
-* Provides the forecasted wind speed, measured in units such as kilometers
-* per hour (km/h) or miles per hour (mph), depending on the unit specified
-* in the request. Also indicates the wind direction measured in azimuth
-* degrees, starting at true North and moving clockwise. North corresponds
-* to 0°, east to 90°, south to 180°, and west to 270°. Possible values range
-* from 0° to 359°.
-*/
+ * Provides the forecasted wind speed, measured in units such as kilometers
+ * per hour (km/h) or miles per hour (mph), depending on the unit specified
+ * in the request. Also indicates the wind direction measured in azimuth
+ * degrees, starting at true North and moving clockwise. North corresponds
+ * to 0°, east to 90°, south to 180°, and west to 270°. Possible values range
+ * from 0° to 359°.
+ */
 model WindDetails {
   /**
    * Wind direction is measured in azimuth degrees, starting at true North (0°)
@@ -1159,7 +1159,7 @@ model ForecastInterval {
   /**
    * The start of this forecast interval, in [ISO
    * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-   * (`yyyy-mm-ddThh:mm:ss±hh:mm`). For example, *2019-11-14T15:18:00-08:00*.
+   * (`yyyy-mm-ddThh:mm:ss-hh:mm`). For example, *2025-04-29T07:00:00-07:00*.
    */
   startTime?: utcDateTime;
 
@@ -1286,8 +1286,8 @@ model QuarterDayForecast {
   /**
    * The calendar date this quarter-day belongs to, in [ISO
    * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-   * (`yyyy-mm-ddThh:mm:ss±hh:mm`) at the start of the day. For example,
-   * *2019-11-14T00:00:00-08:00*. Use `effectiveDate` for the actual start
+   * (`yyyy-mm-ddThh:mm:ss-hh:mm`) at the start of the day. For example,
+   * *2025-06-19T00:00:00+00:00*. Use `effectiveDate` for the actual start
    * time of this quarter.
    */
   date?: utcDateTime;
@@ -1295,8 +1295,7 @@ model QuarterDayForecast {
   /**
    * The start of this quarter-day period, in [ISO
    * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-   * (`yyyy-mm-ddThh:mm:ss±hh:mm`). For example, *2019-11-14T07:00:00-08:00*
-   * for the morning quarter on November 14, 2019.
+   * (`yyyy-mm-ddThh:mm:ss-hh:mm`). For example, *2025-04-29T07:00:00-07:00*.
    */
   effectiveDate?: utcDateTime;
 
