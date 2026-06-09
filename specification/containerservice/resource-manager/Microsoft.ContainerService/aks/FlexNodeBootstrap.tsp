@@ -44,12 +44,6 @@ model PoolBootstrapData {
 @added(Versions.v2026_05_02_preview)
 model BootstrapAzureConfig {
   /**
-   * Azure tenant ID.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
    * Azure cloud environment.
    */
   @visibility(Lifecycle.Read)
