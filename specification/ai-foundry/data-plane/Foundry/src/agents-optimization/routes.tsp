@@ -52,7 +52,7 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob,
+    OptimizationJobListItem,
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
