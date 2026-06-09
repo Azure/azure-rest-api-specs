@@ -1,10 +1,28 @@
-import "@azure-tools/typespec-azure-core/experimental";
-import "./main.tsp";
+import "../common/service.tsp";
+import "../common/custom-types.tsp";
+import "../sdk-common/beta-ops-relocation-agents.tsp";
+
+import "../agents/routes.tsp";
+import "../memory-stores/routes.tsp";
+import "../toolboxes/routes.tsp";
+import "../agents-session-files/routes.tsp";
+import "../agents-optimization/routes.tsp";
+// We don't need the operations for these subclients, just the models
+// so we can customize visibility where necessary.
+import "../openai-responses/models.tsp";
+import "../openai-conversations/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
 using Azure.AI.Projects;
+
+// Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
+// @@scope(..., "!java") removes the header from Java entirely, including REST-interface @HeaderParam wiring.
+// @@clientInitialization requires exact singleton opt-in properties (e.g. agents_optimization_v1_preview) per key.
+// Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!java");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!java");
 
 // --------------------------------------------------------------------------------
 // Renames
@@ -314,8 +332,10 @@ using Azure.AI.Projects;
 @@access(ToolCallStatus, Access.public);
 @@usage(ToolCallStatus, Usage.input);
 
-@@access(FoundryFeaturesOptInKeys, Access.public);
-@@access(AgentDefinitionOptInKeys, Access.public);
+@@usage(FoundryFeaturesOptInKeys, Usage.input);
+@@access(FoundryFeaturesOptInKeys, Access.internal, "java");
+@@usage(AgentDefinitionOptInKeys, Usage.input);
+@@access(AgentDefinitionOptInKeys, Access.internal, "java");
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
