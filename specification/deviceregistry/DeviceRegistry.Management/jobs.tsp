@@ -177,10 +177,10 @@ model JobScheduleRequest {
 interface Jobs {
   get is ArmResourceRead<Job>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<Job>;
-  // PATCH is restricted to tags-only. Job spec properties (jobType,
-  // definition, and the Update job's target) are immutable after create
-  // because mutating them would have unintended effects on already-scheduled
-  // runs. Tags-only PATCH satisfies the ARM tracked-resource requirement
+  // PATCH is restricted to tags-only. Job spec properties (jobType and
+  // definition) are immutable after create because mutating them would
+  // have unintended effects on already-scheduled runs.
+  // Tags-only PATCH satisfies the ARM tracked-resource requirement
   // (RPC-Patch-V1-03).
   update is ArmTagsPatchSync<Job>;
   delete is ArmResourceDeleteWithoutOkAsync<Job>;
