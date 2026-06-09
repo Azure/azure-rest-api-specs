@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
 import "./common/provisionedRefs.tsp";
+import "./common/longRunningOperationStatus.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceAuthenticationProfiles.tsp";
 
@@ -146,42 +147,12 @@ model ProvisionDeviceResult {
 // Provision-device status monitor endpoint
 // ──────────────────────────────────────────────
 
-/**
- * Status monitor for the long-running `:provision` action on devices in a
- * namespace. Mirrors the shape of the central `Operation` resource but
- * exposes a typed `result` so SDK callers receive the strongly-typed
- * `ProvisionDeviceResult` payload directly.
- */
+/** Status monitor for the long-running `:provision` action on devices in a namespace. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 @parentResource(Namespace)
 @resource("provisionDeviceResults")
-model ProvisionDeviceResultStatusMonitor {
-  /** The unique identifier of the operation. */
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The current status of the operation. */
-  @Azure.Core.lroStatus
-  @visibility(Lifecycle.Read)
-  status: Azure.Core.Foundations.OperationState;
-
-  /** Error details when the operation failed. */
-  @visibility(Lifecycle.Read)
-  error?: Azure.Core.Foundations.Error;
-
-  /** The time at which the operation was started (UTC). */
-  @visibility(Lifecycle.Read)
-  executedAt?: utcDateTime;
-
-  /** The time at which the operation result expires (UTC). */
-  @visibility(Lifecycle.Read)
-  expiresAt?: utcDateTime;
-
-  /** The result of the device-provisioning operation, available once `status` is `Succeeded`. */
-  @visibility(Lifecycle.Read)
-  result?: ProvisionDeviceResult;
-}
+model ProvisionDeviceResultStatusMonitor
+  is LongRunningOperationStatus<ProvisionDeviceResult>;
 
 // ──────────────────────────────────────────────
 // Devices interface

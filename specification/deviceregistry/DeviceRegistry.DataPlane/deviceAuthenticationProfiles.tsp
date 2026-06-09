@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
+import "./common/longRunningOperationStatus.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -113,9 +114,9 @@ model CertificateAuthorityCredentials {
 
 /**
  * Shared parameter model carrying the optional client-supplied
- * `Operation-Id` request header used by the `:issueCert` and
- * `:revokeCerts` long-running actions. If omitted, the service
- * generates a GUID.
+ * `Operation-Id` request header used by long-running action operations
+ * (`:issueCert`, `:revokeCerts`, `:provision`, `:generateReport`). If
+ * omitted, the service generates a GUID.
  */
 model OperationIdHeaderParameter {
   /**
@@ -162,25 +163,7 @@ model CertificateIssuanceResult {
 /** Status monitor for the long-running `:issueCert` action on a device authentication profile. */
 @parentResource(DeviceAuthenticationProfile)
 @resource("issueCertResults")
-model IssueCertResult {
-  /** The unique ID of the operation. */
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The status of the operation. */
-  @Azure.Core.lroStatus
-  @visibility(Lifecycle.Read)
-  status: Azure.Core.Foundations.OperationState;
-
-  /** Error object that describes the error when status is "Failed". */
-  @visibility(Lifecycle.Read)
-  error?: Azure.Core.Foundations.Error;
-
-  /** The result of the certificate issuance, available once `status` is `Succeeded`. */
-  @visibility(Lifecycle.Read)
-  result?: CertificateIssuanceResult;
-}
+model IssueCertResult is LongRunningOperationStatus<CertificateIssuanceResult>;
 
 // ──────────────────────────────────────────────
 // Revoke-cert status monitor endpoint
@@ -193,21 +176,7 @@ model IssueCertResult {
  */
 @parentResource(DeviceAuthenticationProfile)
 @resource("revokeCertsResults")
-model RevokeCertsResult {
-  /** The unique ID of the operation. */
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The status of the operation. */
-  @Azure.Core.lroStatus
-  @visibility(Lifecycle.Read)
-  status: Azure.Core.Foundations.OperationState;
-
-  /** Error object that describes the error when status is "Failed". */
-  @visibility(Lifecycle.Read)
-  error?: Azure.Core.Foundations.Error;
-}
+model RevokeCertsResult is LongRunningOperationStatus;
 
 // ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles operation models

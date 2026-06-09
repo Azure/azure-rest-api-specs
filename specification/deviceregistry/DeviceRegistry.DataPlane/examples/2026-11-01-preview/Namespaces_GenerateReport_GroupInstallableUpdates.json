@@ -5,6 +5,7 @@
     "endpoint": "https://westus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-01-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "Operation-Id": "op-c4e1",
     "body": {
       "reportType": "GroupInstallableUpdatesReport",
       "reportTarget": "f1e2d3c4-5678-90ab-cdef-1234567890ab"
@@ -13,14 +14,12 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/operations/op-c4e1"
+        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/generateReportResults/op-c4e1?api-version=2026-11-01-preview",
+        "Retry-After": 30
       },
       "body": {
         "id": "op-c4e1",
-        "kind": "GenerateReport.GroupInstallableUpdatesReport",
-        "status": "InProgress",
-        "executedAt": "2026-04-29T16:05:00Z",
-        "expiresAt": "2026-04-30T16:05:00Z"
+        "status": "Running"
       }
     }
   }
