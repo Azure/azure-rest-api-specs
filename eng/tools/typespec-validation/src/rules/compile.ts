@@ -168,19 +168,19 @@ export class CompileRule implements Rule {
                 // Get all versions (preview and stable) from tspGeneratedSwaggers.
                 // A later preview *or* stable version is allowed to supersede an older
                 // preview, leaving the older preview's swagger in place.
-                const allVersions = tspGeneratedSwaggers
+                const generatedVersions = tspGeneratedSwaggers
                   .map(extractVersion)
                   .filter((v): v is string => v !== null);
 
-                if (allVersions.length > 0) {
-                  // Find the latest version (sort descending)
-                  const sortedVersions = [...new Set(allVersions)].sort().reverse();
-                  const latestVersion = sortedVersions[0];
+                if (generatedVersions.length > 0) {
+                  // Find the latest generated version (sort descending)
+                  const sortedVersions = [...new Set(generatedVersions)].sort().reverse();
+                  const latestGeneratedVersion = sortedVersions[0];
 
-                  // Check if any extraSwagger is from the latest version
+                  // Check if any extraSwagger is from the latest generated version
                   const hasLatestVersion = extraSwaggers.some((s) => {
                     const version = extractVersion(s);
-                    return version === latestVersion;
+                    return version === latestGeneratedVersion;
                   });
 
                   isOnlyOlderPreviews = !hasLatestVersion;
