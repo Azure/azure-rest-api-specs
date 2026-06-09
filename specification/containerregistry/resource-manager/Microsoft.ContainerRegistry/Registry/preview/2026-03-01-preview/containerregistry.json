@@ -9822,14 +9822,21 @@
             ]
           }
         },
-        "id": {
+        "virtualNetworkSubnetResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
-          "x-ms-client-name": "VirtualNetworkResourceId"
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         }
       },
       "required": [
-        "id"
+        "virtualNetworkSubnetResourceId"
       ]
     },
     "Webhook": {

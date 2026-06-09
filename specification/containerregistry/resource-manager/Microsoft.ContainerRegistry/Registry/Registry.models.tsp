@@ -1,4 +1,5 @@
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 
@@ -508,8 +509,11 @@ model VirtualNetworkRule {
   /**
    * Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
    */
-  @clientName("VirtualNetworkResourceId")
-  id: string;
+  virtualNetworkSubnetResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 }
 
 /**
