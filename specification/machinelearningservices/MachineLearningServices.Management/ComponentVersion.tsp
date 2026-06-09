@@ -54,7 +54,9 @@ interface ComponentVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearninRegistryComponentVersion"
     > {}
 
 @armResourceOperations
@@ -161,7 +163,9 @@ interface ComponentVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningComponentVersion"
     > {}
 
 @armResourceOperations

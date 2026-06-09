@@ -66,6 +66,7 @@ using Microsoft.MachineLearningServices;
 );
 @@clientName(JobService, "MachineLearningJobService", "csharp");
 @@clientName(JobStatus, "MachineLearningJobStatus", "csharp");
+@@clientName(JobBase, "MachineLearningJob", "csharp");
 @@clientName(LogVerbosity, "MachineLearningLogVerbosity", "csharp");
 @@clientName(NodeState, "MachineLearningNodeState", "csharp");
 @@clientName(NodeStateCounts, "MachineLearningNodeStateCounts", "csharp");
@@ -120,6 +121,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(ComponentContainer, "MachineLearningComponentContainer", "csharp");
 @@clientName(ComponentVersion, "MachineLearningComponentVersion", "csharp");
 @@clientName(Compute, "MachineLearningComputeProperties", "csharp");
+@@clientName(ComputeResource, "MachineLearningCompute", "csharp");
 @@clientName(DataContainer, "MachineLearningDataContainer", "csharp");
 @@clientName(Datastore, "MachineLearningDatastore", "csharp");
 @@clientName(
@@ -163,6 +165,11 @@ using Microsoft.MachineLearningServices;
 @@clientName(Schedule, "MachineLearningSchedule", "csharp");
 @@clientName(ServerlessEndpoint, "MachineLearningServerlessEndpoint", "csharp");
 @@clientName(Workspace, "MachineLearningWorkspace", "csharp");
+@@clientName(
+  WorkspaceConnectionPropertiesV2BasicResource,
+  "MachineLearningWorkspaceConnection",
+  "csharp"
+);
 @@clientName(
   AADAuthTypeWorkspaceConnectionProperties,
   "AadAuthTypeWorkspaceConnectionProperties",
