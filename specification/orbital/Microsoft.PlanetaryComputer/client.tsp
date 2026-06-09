@@ -65,6 +65,9 @@ namespace Customizations;
 // Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
 
+// Rename Ingestions.delete to deleteIngestion for JavaScript to avoid @fixme conflict
+@@clientName(Ingestions.delete, "deleteIngestion", "javascript");
+
 // === Python external type mappings ===
 // NOTE: @@alternateType with ExternalType is currently broken for ALL models used
 // in our API — not just @discriminator hierarchies. See:
