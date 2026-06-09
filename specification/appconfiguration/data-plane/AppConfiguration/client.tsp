@@ -68,15 +68,25 @@ union PutKeyValueRequestContentTypeGo {
   "application/vnd.microsoft.appconfig.kvset+json",
   "application/json",
   "text/json",
+
   @clientName("applicationAnyJson", "go")
   "application/*+json",
+
   "application/json-patch+json",
-};
+}
 @@clientName(AppConfigResponseHeaders.etagHeader, "ETag", "go");
 @@clientName(KeyValueFields, "SettingFields", "go");
 @@clientName(KeyValueListResult.etag, "ETag", "go");
-@@clientName(PutKeyValueRequestContentTypeGo, "PutKeyValueRequestContentType", "go");
+@@clientName(
+  PutKeyValueRequestContentTypeGo,
+  "PutKeyValueRequestContentType",
+  "go"
+);
 @@clientName(SnapshotFields.etag, "ETag", "go");
-@@alternateType(PutKeyValueRequestContentType.contentType, PutKeyValueRequestContentTypeGo, "go");
+@@alternateType(
+  PutKeyValueRequestContentType.contentType,
+  PutKeyValueRequestContentTypeGo,
+  "go"
+);
 @@access(PutKeyValueRequestContentTypeGo, Access.internal, "!go");
 @@scope(PutKeyValueRequestContentTypeGo, "go");
