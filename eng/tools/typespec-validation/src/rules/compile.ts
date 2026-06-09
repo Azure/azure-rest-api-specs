@@ -198,7 +198,7 @@ export class CompileRule implements Rule {
                 errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
               } else {
                 stdOutput += pc.yellow(
-                  `\nNote: Found extra preview swaggers from older versions (not the latest preview). ` +
+                  `\nNote: Found extra preview swaggers from older versions (not the latest version). ` +
                     `These are allowed to remain:\n`,
                 );
                 stdOutput += pc.yellow(extraSwaggers.join("\n") + "\n");
