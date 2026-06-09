@@ -1,0 +1,1383 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.NetworkSecurity management service",
+    "version": "2026-04-16-preview",
+    "description": "Microsoft.NetworkSecurity Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AgentFabrics"
+    },
+    {
+      "name": "Members"
+    },
+    {
+      "name": "PolicyGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.NetworkSecurity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkSecurity/agentFabrics": {
+      "get": {
+        "operationId": "AgentFabrics_ListBySubscription",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "List AgentFabric resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_ListBySubscription": {
+            "$ref": "./examples/AgentFabrics_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkSecurity/policyGroups": {
+      "get": {
+        "operationId": "PolicyGroups_ListBySubscription",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "List PolicyGroup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_ListBySubscription": {
+            "$ref": "./examples/PolicyGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics": {
+      "get": {
+        "operationId": "AgentFabrics_ListByResourceGroup",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "List AgentFabric resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_ListByResourceGroup": {
+            "$ref": "./examples/AgentFabrics_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics/{agentFabricName}": {
+      "get": {
+        "operationId": "AgentFabrics_Get",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Get a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_Get": {
+            "$ref": "./examples/AgentFabrics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AgentFabrics_CreateOrUpdate",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Create a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AgentFabric' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentFabric' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_CreateOrUpdate": {
+            "$ref": "./examples/AgentFabrics_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AgentFabrics_Update",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Update a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentFabricTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_Update": {
+            "$ref": "./examples/AgentFabrics_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AgentFabrics_Delete",
+        "tags": [
+          "AgentFabrics"
+        ],
+        "description": "Delete a AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentFabrics_Delete": {
+            "$ref": "./examples/AgentFabrics_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics/{agentFabricName}/members": {
+      "get": {
+        "operationId": "Members_ListByParent",
+        "tags": [
+          "Members"
+        ],
+        "description": "List Member resources by AgentFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MemberListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_ListByParent": {
+            "$ref": "./examples/Members_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/agentFabrics/{agentFabricName}/members/{memberName}": {
+      "get": {
+        "operationId": "Members_Get",
+        "tags": [
+          "Members"
+        ],
+        "description": "Get a Member",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "description": "The name of the Member",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Member"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_Get": {
+            "$ref": "./examples/Members_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Members_CreateOrUpdate",
+        "tags": [
+          "Members"
+        ],
+        "description": "Create a Member",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "description": "The name of the Member",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Member"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Member' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Member"
+            }
+          },
+          "201": {
+            "description": "Resource 'Member' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Member"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_CreateOrUpdate": {
+            "$ref": "./examples/Members_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Members_Delete",
+        "tags": [
+          "Members"
+        ],
+        "description": "Delete a Member",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentFabricName",
+            "in": "path",
+            "description": "The name of the AgentFabric",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberName",
+            "in": "path",
+            "description": "The name of the Member",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Members_Delete": {
+            "$ref": "./examples/Members_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/policyGroups": {
+      "get": {
+        "operationId": "PolicyGroups_ListByResourceGroup",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "List PolicyGroup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_ListByResourceGroup": {
+            "$ref": "./examples/PolicyGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkSecurity/policyGroups/{policyGroupName}": {
+      "get": {
+        "operationId": "PolicyGroups_Get",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Get a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_Get": {
+            "$ref": "./examples/PolicyGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyGroups_CreateOrUpdate",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Create a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicyGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicyGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_CreateOrUpdate": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PolicyGroups_Update",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Update a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_Update": {
+            "$ref": "./examples/PolicyGroups_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyGroups_Delete",
+        "tags": [
+          "PolicyGroups"
+        ],
+        "description": "Delete a PolicyGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyGroupName",
+            "in": "path",
+            "description": "The name of the PolicyGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyGroups_Delete": {
+            "$ref": "./examples/PolicyGroups_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentFabric": {
+      "type": "object",
+      "description": "AgentFabric resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentFabricProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AgentFabricListResult": {
+      "type": "object",
+      "description": "The response of a AgentFabric list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentFabric items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentFabricProperties": {
+      "type": "object",
+      "description": "AgentFabric properties",
+      "properties": {
+        "defaultPolicyGroups": {
+          "type": "array",
+          "description": "The default policy groups to apply to all members of this fabric.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.NetworkSecurity/policyGroups"
+                }
+              ]
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentFabricTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in AgentFabric resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DestinationDetails": {
+      "type": "object",
+      "description": "Destination details for a network security policy.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names for the destination.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FoundryWorkload": {
+      "type": "object",
+      "description": "Foundry workload configuration.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the Foundry resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Foundry"
+    },
+    "FqdnFilteringPolicy": {
+      "type": "object",
+      "description": "FQDN filtering network security policy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the policy."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the policy."
+        },
+        "direction": {
+          "$ref": "#/definitions/PolicyDirection",
+          "description": "The direction of traffic for the policy."
+        },
+        "ports": {
+          "type": "array",
+          "description": "The ports for the policy.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/SourceDetails",
+          "description": "The source details for the policy."
+        },
+        "destination": {
+          "$ref": "#/definitions/DestinationDetails",
+          "description": "The destination details for the policy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "FqdnFiltering"
+    },
+    "Member": {
+      "type": "object",
+      "description": "Member resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MemberProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MemberListResult": {
+      "type": "object",
+      "description": "The response of a Member list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Member items on this page",
+          "items": {
+            "$ref": "#/definitions/Member"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MemberProperties": {
+      "type": "object",
+      "description": "Member properties",
+      "properties": {
+        "workload": {
+          "$ref": "#/definitions/WorkloadBase",
+          "description": "The workload configuration of the member."
+        },
+        "policyGroups": {
+          "type": "array",
+          "description": "The policy groups to apply to this member.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.NetworkSecurity/policyGroups"
+                }
+              ]
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPolicyBase": {
+      "type": "object",
+      "description": "Base network security policy configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/NetworkSecurityPolicyType",
+          "description": "The network security policy type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "NetworkSecurityPolicyType": {
+      "type": "string",
+      "description": "The type of network security policy.",
+      "enum": [
+        "FqdnFiltering"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkSecurityPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FqdnFiltering",
+            "value": "FqdnFiltering",
+            "description": "FQDN filtering policy type."
+          }
+        ]
+      }
+    },
+    "PolicyDirection": {
+      "type": "string",
+      "description": "The direction of network traffic for a policy.",
+      "enum": [
+        "Outbound",
+        "Inbound",
+        "Both"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Outbound",
+            "value": "Outbound",
+            "description": "Outbound traffic only."
+          },
+          {
+            "name": "Inbound",
+            "value": "Inbound",
+            "description": "Inbound traffic only."
+          },
+          {
+            "name": "Both",
+            "value": "Both",
+            "description": "Both inbound and outbound traffic."
+          }
+        ]
+      }
+    },
+    "PolicyGroup": {
+      "type": "object",
+      "description": "PolicyGroup resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PolicyGroupListResult": {
+      "type": "object",
+      "description": "The response of a PolicyGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicyGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicyGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyGroupProperties": {
+      "type": "object",
+      "description": "PolicyGroup properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the policy group."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the policy group."
+        },
+        "networkSecurityPolicies": {
+          "type": "array",
+          "description": "The list of network security policies.",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPolicyBase"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyGroupTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in PolicyGroup resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource provisioning succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource provisioning was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SourceDetails": {
+      "type": "object",
+      "description": "Source details for a network security policy.",
+      "properties": {
+        "workloadIds": {
+          "type": "array",
+          "description": "The workload identifiers for the source.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WorkloadBase": {
+      "type": "object",
+      "description": "Base workload configuration for a member.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkloadType",
+          "description": "The workload type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "workloadId": {
+          "type": "string",
+          "description": "The unique identifier assigned to the workload by the resource provider.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "WorkloadType": {
+      "type": "string",
+      "description": "The workload type of a member.",
+      "enum": [
+        "Foundry"
+      ],
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Foundry",
+            "value": "Foundry",
+            "description": "Foundry workload type"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

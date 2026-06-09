@@ -1,0 +1,65 @@
+{
+  "title": "PolicyGroups_ListByResourceGroup",
+  "operationId": "PolicyGroups_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-04-16-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "displayName": "Test Policy Group",
+              "description": "A policy group for testing",
+              "priority": 100,
+              "networkSecurityPolicies": [
+                {
+                  "type": "FqdnFiltering",
+                  "name": "allowOutbound",
+                  "priority": 10,
+                  "direction": "Outbound",
+                  "ports": [
+                    443,
+                    80
+                  ],
+                  "source": {
+                    "workloadIds": [
+                      "workload1",
+                      "workload2"
+                    ]
+                  },
+                  "destination": {
+                    "fqdns": [
+                      "example.com",
+                      "contoso.com"
+                    ]
+                  }
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/testPolicyGroup",
+            "name": "testPolicyGroup",
+            "type": "Microsoft.NetworkSecurity/policyGroups",
+            "location": "eastus",
+            "tags": {
+              "env": "test"
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-01-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
