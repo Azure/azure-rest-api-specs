@@ -98,10 +98,10 @@ union JobRunCancellationReason {
   @doc("The customer canceled the run via the cancel action.")
   CanceledByCustomer: "CanceledByCustomer",
 
-  @doc("The run was canceled because another Update job targeting the same group was scheduled and superseded it.")
+  @doc("The run was canceled because another job superseded it. For an Update job this happens when another Update job targeting the same group is scheduled; for a RecoveryUpdate job this happens when another RecoveryUpdate job for the same compatible devices is scheduled.")
   CanceledByAnotherJob: "CanceledByAnotherJob",
 
-  @doc("The run was canceled because the target group was deleted.")
+  @doc("The run was canceled because the target group was deleted. This reason does not apply to RecoveryUpdate jobs, which do not target a group.")
   CanceledByGroupDelete: "CanceledByGroupDelete",
 }
 
