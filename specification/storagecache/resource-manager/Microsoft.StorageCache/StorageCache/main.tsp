@@ -18,6 +18,7 @@ import "./AutoExportJob.tsp";
 import "./ImportJob.tsp";
 import "./AutoImportJob.tsp";
 import "./ExpansionJob.tsp";
+import "./RebalanceJob.tsp";
 import "./Cache.tsp";
 import "./StorageTarget.tsp";
 import "./routes.tsp";

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-08-01",
+    "rebalanceJobName": "expansionjob1-rebalance",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "expansionjob1-rebalance",
+        "type": "Microsoft.StorageCache/amlFilesystems/rebalanceJobs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/rebalanceJobs/expansionjob1-rebalance",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "adminStatus": "Active",
+          "expansionJobName": "expansionjob1",
+          "status": {
+            "state": "InProgress",
+            "statusCode": "RebalanceInProgress",
+            "statusMessage": "Rebalance is 45% complete, migrating files.",
+            "balancePercent": 45.2,
+            "estimatedRemainingSeconds": 3600,
+            "filesMigrated": 150000,
+            "bytesMoved": 1073741824,
+            "filesMovedPerSecond": 250.5,
+            "throughputMbps": 1200.0,
+            "startTimeUTC": "2025-09-12T10:00:00Z",
+            "completionTimeUTC": null
+          }
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        }
+      }
+    }
+  },
+  "operationId": "rebalanceJobs_Get",
+  "title": "rebalanceJobs_Get"
+}

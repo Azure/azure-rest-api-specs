@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -39,6 +41,24 @@ model ExpansionJobsListResult {
 
   /**
    * URL to get the next set of expansion job list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list rebalance jobs. It contains a list of rebalance jobs and a URL link to get the next set of results.
+ */
+@added(Versions.v2026_08_01)
+model RebalanceJobsListResult {
+  /**
+   * List of rebalance jobs.
+   */
+  @pageItems
+  value?: RebalanceJob[];
+
+  /**
+   * URL to get the next set of rebalance job list results, if there are any.
    */
   @nextLink
   nextLink?: url;
@@ -671,8 +691,93 @@ union ExpansionJobStatusType {
 }
 
 /**
- * The status of the AML file system subnet check.
+ * ARM provisioning state for the rebalance job.
  */
+@added(Versions.v2026_08_01)
+union RebalanceJobPropertiesProvisioningState {
+  string,
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Creating
+   */
+  Creating: "Creating",
+
+  /**
+   * Deleting
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Updating
+   */
+  Updating: "Updating",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully (imbalance below low watermark). Failed indicates the rebalance was unable to complete due to a fatal error.
+ */
+@added(Versions.v2026_08_01)
+union RebalanceJobStatusType {
+  string,
+
+  /**
+   * InProgress
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Cancelling
+   */
+  Cancelling: "Cancelling",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Completed
+   */
+  Completed: "Completed",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+}
+
+/**
+ * The administrative status of the rebalance job. Active means the job is running normally. Cancel requests the job to stop.
+ */
+@added(Versions.v2026_08_01)
+union RebalanceJobAdminStatus {
+  string,
+
+  /**
+   * Active
+   */
+  Active: "Active",
+
+  /**
+   * Cancel
+   */
+  Cancel: "Cancel",
+}
 union FilesystemSubnetStatusType {
   string,
 
@@ -2262,6 +2367,20 @@ model ExpansionJobProperties {
    */
   @visibility(Lifecycle.Read)
   status?: ExpansionJobPropertiesStatus;
+
+  /**
+   * When true, expansion creates a RebalanceJob after completing. Optional, defaults to false.
+   */
+  @added(Versions.v2026_08_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  rebalance?: boolean;
+
+  /**
+   * Name of the child rebalance job created by this expansion. Populated after RebalanceJob is created.
+   */
+  @added(Versions.v2026_08_01)
+  @visibility(Lifecycle.Read)
+  rebalanceJobName?: string;
 }
 
 /**
@@ -2320,6 +2439,140 @@ model ExpansionJobUpdate {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+}
+
+/**
+ * Properties of the rebalance job.
+ */
+@added(Versions.v2026_08_01)
+model RebalanceJobProperties {
+  /**
+   * ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: RebalanceJobPropertiesProvisioningState;
+
+  /**
+   * The administrative status of the rebalance job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active rebalance job. By default it is set to 'Active'.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  adminStatus?: RebalanceJobAdminStatus = RebalanceJobAdminStatus.Active;
+
+  /**
+   * Name of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.
+   */
+  @visibility(Lifecycle.Read)
+  expansionJobName?: string;
+
+  /**
+   * The status of the rebalance job.
+   */
+  @visibility(Lifecycle.Read)
+  status?: RebalanceJobPropertiesStatus;
+}
+
+/**
+ * The status of the rebalance job.
+ */
+@added(Versions.v2026_08_01)
+model RebalanceJobPropertiesStatus {
+  /**
+   * The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully. Failed indicates the rebalance was unable to complete due to a fatal error.
+   */
+  @visibility(Lifecycle.Read)
+  state?: RebalanceJobStatusType;
+
+  /**
+   * Server-defined status code for rebalance job.
+   */
+  @visibility(Lifecycle.Read)
+  statusCode?: string;
+
+  /**
+   * Server-defined status message for rebalance job.
+   */
+  @visibility(Lifecycle.Read)
+  statusMessage?: string;
+
+  /**
+   * The balance percentage (0-100). Represents cumulative progress since the rebalance started. Sourced from heartbeat messages.
+   */
+  @visibility(Lifecycle.Read)
+  @maxValue(100)
+  @minValue(0)
+  balancePercent?: float32;
+
+  /**
+   * Estimated remaining time in seconds. May be null during initial assessment.
+   */
+  @visibility(Lifecycle.Read)
+  estimatedRemainingSeconds?: int32;
+
+  /**
+   * Total number of files migrated since the rebalance started.
+   */
+  @visibility(Lifecycle.Read)
+  filesMigrated?: int64;
+
+  /**
+   * Total number of bytes moved since the rebalance started.
+   */
+  @visibility(Lifecycle.Read)
+  bytesMoved?: int64;
+
+  /**
+   * Rolling 60-second average of files moved per second.
+   */
+  @visibility(Lifecycle.Read)
+  filesMovedPerSecond?: float32;
+
+  /**
+   * Rolling 60-second average throughput in megabytes per second.
+   */
+  @visibility(Lifecycle.Read)
+  throughputMbps?: float32;
+
+  /**
+   * The time (in UTC) the rebalance job started.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Non-standard casing matches existing convention in this project"
+  @visibility(Lifecycle.Read)
+  startTimeUTC?: utcDateTime;
+
+  /**
+   * The time (in UTC) when the rebalance job completed. Only populated when job reaches a terminal state.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Non-standard casing matches existing convention in this project"
+  @visibility(Lifecycle.Read)
+  completionTimeUTC?: utcDateTime;
+}
+
+/**
+ * A rebalance job update instance.
+ */
+@added(Versions.v2026_08_01)
+model RebalanceJobUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags use Record<string> per ARM convention"
+  tags?: Record<string>;
+
+  /**
+   * Properties for the rebalance job update.
+   */
+  properties?: RebalanceJobUpdateProperties;
+}
+
+/**
+ * Properties for updating a rebalance job.
+ */
+@added(Versions.v2026_08_01)
+model RebalanceJobUpdateProperties {
+  /**
+   * The administrative status of the rebalance job. Passing in a value of 'Cancel' will cancel the current active rebalance job.
+   */
+  adminStatus?: RebalanceJobAdminStatus;
 }
 
 /**
