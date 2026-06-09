@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 /**
- * APIs for cluster upgrade assessment reports under Microsoft.KubernetesConfiguration.
+ * APIs for K8s inventory reports under Microsoft.KubernetesConfiguration.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "KubeInventory is a proxy resource provider under Microsoft.Kubernetes; no independent operations endpoint is registered."
 @armProviderNamespace

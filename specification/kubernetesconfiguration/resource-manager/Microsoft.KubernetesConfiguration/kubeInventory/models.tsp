@@ -3,7 +3,6 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -11,7 +10,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.KubernetesConfiguration;
 
@@ -227,9 +225,8 @@ union NetworkProtocol {
 }
 
 /** A port exposed by a container. */
-model ContainerPort {
+model ContainerPortInfo {
   /** Port number exposed inside the container. */
-  @clientName("portNumber", "csharp")
   containerPort: int32;
 
   /** Network protocol for this port. */
@@ -237,6 +234,12 @@ model ContainerPort {
 
   /** Optional name for this port. */
   name?: string;
+
+  /** Port number to expose on the host node. */
+  hostPort?: int32;
+
+  /** Host IP to bind the hostPort on. */
+  hostIp?: string;
 }
 
 /** An environment variable set in a container. */
@@ -313,7 +316,7 @@ model ContainerSpec {
 
   /** Ports to expose from the container. */
   @identifiers(#["name"])
-  ports?: ContainerPort[];
+  ports?: ContainerPortInfo[];
 
   /** Environment variables to set in the container. */
   @identifiers(#["name"])

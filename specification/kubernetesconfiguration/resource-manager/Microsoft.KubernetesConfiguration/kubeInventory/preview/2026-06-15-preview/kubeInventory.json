@@ -3,7 +3,7 @@
   "info": {
     "title": "KubeInventoryClient",
     "version": "2026-06-15-preview",
-    "description": "APIs for cluster upgrade assessment reports under Microsoft.KubernetesConfiguration.",
+    "description": "APIs for K8s inventory reports under Microsoft.KubernetesConfiguration.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -328,7 +328,7 @@
         ]
       }
     },
-    "ContainerPort": {
+    "ContainerPortInfo": {
       "type": "object",
       "description": "A port exposed by a container.",
       "properties": {
@@ -344,6 +344,15 @@
         "name": {
           "type": "string",
           "description": "Optional name for this port."
+        },
+        "hostPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number to expose on the host node."
+        },
+        "hostIp": {
+          "type": "string",
+          "description": "Host IP to bind the hostPort on."
         }
       },
       "required": [
@@ -457,7 +466,7 @@
           "type": "array",
           "description": "Ports to expose from the container.",
           "items": {
-            "$ref": "#/definitions/ContainerPort"
+            "$ref": "#/definitions/ContainerPortInfo"
           },
           "x-ms-identifiers": [
             "name"
