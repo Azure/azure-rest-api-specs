@@ -44,6 +44,20 @@ namespace Customization;
 @@clientName(TopicRegenerateKeyRequest, "TopicRegenerateKeyContent", "csharp");
 @@clientName(Microsoft.EventGrid.TopicTypeInfo, "TopicType", "csharp");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Customize expanded private endpoint resource names for GA compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Customize expanded private endpoint resource names for GA compatibility"
+@@clientOption(
+  PrivateEndpointConnections.get,
+  "resource-name",
+  #{
+    topics: "EventGridTopicPrivateEndpointConnection",
+    domains: "EventGridDomainPrivateEndpointConnection",
+    partnerNamespaces: "EventGridPartnerNamespacePrivateEndpointConnection",
+    namespaces: "EventGridNamespacePrivateEndpointConnection",
+  },
+  "csharp"
+);
+
 @@clientName(Subscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(TopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
