@@ -242,9 +242,8 @@ describe("Impact Detection - arm-leases folder behavior", () => {
       isDraft: false,
     });
 
-    // Include "contosowidgermanager2" in the arm-leases folder list (simulating it has an arm-lease)
-    const armLeasesFolders = [...DEFAULT_MAIN_SPEC_FOLDERS, "contosowidgermanager2"];
-
+    // Simulate that the RP folder names are present in the target branch's .github/arm-leases directory
+    const armLeasesFolders = ["contosowidgetmanager", "contosowidgermanager2"];
     const actualImpact = await evaluateImpact(prContext, labelContext, armLeasesFolders);
 
     // Should NOT be flagged because arm-lease exists
