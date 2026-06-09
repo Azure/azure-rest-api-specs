@@ -1250,7 +1250,7 @@ model MachineProperties {
    * Indicates whether the service has detected that this Arc machine is a clone of another onboarded machine. Service-computed; not settable by the user.
    */
   @visibility(Lifecycle.Read)
-  isCloned?: boolean;
+  statusReason?: string;
 
   /**
    * The provisioning state, which only appears in the response.
