@@ -7,6 +7,7 @@ import "./SharedLimit.tsp";
 import "./Feature.tsp";
 import "./VmFamily.tsp";
 import "./SharedLimitCap.tsp";
+import "./Member.tsp";
 import "./back-compat.tsp";
 
 using Azure.ResourceManager;

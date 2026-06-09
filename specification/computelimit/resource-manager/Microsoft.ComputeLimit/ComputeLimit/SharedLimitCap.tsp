@@ -10,8 +10,8 @@ namespace Microsoft.ComputeLimit;
 
 /**
  * Shared limit cap configuration for a VM family, owned by a host subscription
- * and propagated to participating guest subscriptions. The same resource type
- * is readable by host and guest subscriptions, but write operations (PUT/DELETE)
+ * and propagated to its member subscriptions. The same resource type is
+ * readable by host and member subscriptions, but write operations (PUT/DELETE)
  * are scoped to the caller's subscription as the host.
  */
 @added(Versions.v2026_07_01)
@@ -24,65 +24,64 @@ model SharedLimitCap is ProxyResource<SharedLimitCapProperties> {
   >;
 }
 
-/** Default cap configuration applied to subscriptions participating in the shared limit. */
-@added(Versions.v2026_07_01)
-model DefaultCap {
-  /** The default cap value in count units. A numeric value sets the default cap; null sets the default cap to unlimited. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tri-state semantics on the request: a numeric value sets the default cap, an explicit null sets the default cap to unlimited, and omitting the parent DefaultCap object leaves the configuration unchanged. Optionality alone cannot express the 'set to unlimited' intent distinctly from 'no change'."
-  value: int32 | null;
-}
-
-/** Guaranteed cap configuration for the host subscription. */
-@added(Versions.v2026_07_01)
-model GuaranteedCap {
-  /** Whether the host subscription has a guaranteed cap reserved out of the shared limit. */
-  value: boolean;
-}
-
-/** Per-subscription cap override for a single guest subscription participating in the shared limit. */
-@added(Versions.v2026_07_01)
-model IndividualSubscriptionCap {
-  /** The guest subscription identifier this cap applies to. */
-  subscriptionId: string;
-
-  /** The cap value in count units for this guest subscription. A numeric value sets the cap; null explicitly clears any previously configured cap for this subscription. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Tri-state per-subscription semantics on the request: an entry whose 'cap' is a number sets that subscription's cap, an entry whose 'cap' is explicitly null clears that subscription's cap, and a subscription absent from the array entirely is left unchanged. The 'explicit clear' intent is distinct from 'no change' and cannot be expressed with optionality alone."
-  cap: int32 | null;
-}
-
 /** Properties of a shared limit cap resource. */
 @added(Versions.v2026_07_01)
 model SharedLimitCapProperties {
-  /** The host subscription that owns this shared limit cap configuration. */
-  @visibility(Lifecycle.Read)
-  hostSubscriptionId?: string;
+  /**
+   * Baseline cap value (in count units) applied to member subscriptions that
+   * do not have an explicit per-member cap. Uses the `OptionalInt32` wrapper
+   * so PUT requests can distinguish three intents: omit the property to leave
+   * the existing value unchanged, supply `{}` to clear it, or supply
+   * `{ "value": N }` to set it to N. GET responses return the same wrapper
+   * shape (`{ "value": N }` when configured, omitted when unset).
+   */
+  baselineCap?: OptionalInt32;
 
-  /** The cap configured for the caller's subscription, in count units. */
-  @visibility(Lifecycle.Read)
-  subscriptionCap?: int32;
+  /**
+   * Whether the cap is enforced as a hard bound. When true the configured
+   * caps are enforced; when false they are advisory only.
+   */
+  isBoundedCap?: boolean;
 
-  /** The current usage in the caller's subscription, in count units. */
-  @visibility(Lifecycle.Read)
-  subscriptionUsage?: int32;
-
-  /** The total shared limit across all subscriptions participating in this cap, in count units. */
-  @visibility(Lifecycle.Read)
-  sharedLimit?: int32;
-
-  /** The default cap configuration applied to participating subscriptions. Omitting the property leaves the existing default configuration unchanged. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  defaultCap?: DefaultCap;
-
-  /** The guaranteed cap configuration for the host subscription. Omitting the property leaves the existing guaranteed configuration unchanged. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  guaranteedCap?: GuaranteedCap;
-
-  /** Per-subscription cap overrides for guest subscriptions. A subscription absent from the array is left unchanged; an entry with a numeric 'cap' sets the cap; an entry with an explicit null 'cap' clears the cap. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  @identifiers(#["subscriptionId"])
-  individualSubscriptionCaps?: IndividualSubscriptionCap[];
+  /**
+   * Per-member cap overrides. Returned on GET; omitted on list responses to
+   * keep payloads small. On create/replace via PUT, supplying this array
+   * replaces the full set of member caps; omit it to leave the existing set
+   * unchanged. To edit a single member without sending the full list, use
+   * the `Member` child resource.
+   */
+  @maxItems(1000)
+  @identifiers(#["memberSubscriptionId"])
+  members?: MemberCap[];
 
   ...DefaultProvisioningStateProperty;
+}
+
+/**
+ * Per-member cap entry embedded inside `SharedLimitCap.properties.members[]`.
+ * Each entry pairs a member subscription with its bounded cap value.
+ */
+@added(Versions.v2026_07_01)
+model MemberCap {
+  /** The member subscription identifier this cap applies to. */
+  memberSubscriptionId: string;
+
+  /** The cap value in count units for this member subscription. */
+  @minValue(0)
+  boundedCap: int32;
+}
+
+/**
+ * Wrapper that lets callers distinguish three intents for an integer field:
+ * omit the wrapper to leave the value unchanged, supply `{}` to clear it,
+ * or supply `{ "value": N }` to set it to N. GET responses return the same
+ * shape (`{ "value": N }` when configured, omitted when unset).
+ */
+@added(Versions.v2026_07_01)
+model OptionalInt32 {
+  /** The integer value. Omit to clear the field on the server. */
+  @minValue(0)
+  value?: int32;
 }
 
 /** Subscription-scoped operations for shared limit cap resources. */

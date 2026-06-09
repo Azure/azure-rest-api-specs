@@ -7,20 +7,18 @@
     "vmFamilyName": "StandardDSv3Family",
     "resource": {
       "properties": {
-        "defaultCap": {
+        "baselineCap": {
           "value": 100
         },
-        "guaranteedCap": {
-          "value": true
-        },
-        "individualSubscriptionCaps": [
+        "isBoundedCap": true,
+        "members": [
           {
-            "subscriptionId": "11111111-1111-1111-1111-111111111111",
-            "cap": 200
+            "memberSubscriptionId": "11111111-1111-1111-1111-111111111111",
+            "boundedCap": 200
           },
           {
-            "subscriptionId": "22222222-2222-2222-2222-222222222222",
-            "cap": 150
+            "memberSubscriptionId": "22222222-2222-2222-2222-222222222222",
+            "boundedCap": 150
           }
         ]
       }
@@ -33,10 +31,20 @@
         "name": "StandardDSv3Family",
         "type": "Microsoft.ComputeLimit/sharedLimitCaps",
         "properties": {
-          "hostSubscriptionId": "12345678-1234-1234-1234-123456789012",
-          "subscriptionCap": 100,
-          "subscriptionUsage": 0,
-          "sharedLimit": 1500,
+          "baselineCap": {
+            "value": 100
+          },
+          "isBoundedCap": true,
+          "members": [
+            {
+              "memberSubscriptionId": "11111111-1111-1111-1111-111111111111",
+              "boundedCap": 200
+            },
+            {
+              "memberSubscriptionId": "22222222-2222-2222-2222-222222222222",
+              "boundedCap": 150
+            }
+          ],
           "provisioningState": "Succeeded"
         }
       }
@@ -47,10 +55,20 @@
         "name": "StandardDSv3Family",
         "type": "Microsoft.ComputeLimit/sharedLimitCaps",
         "properties": {
-          "hostSubscriptionId": "12345678-1234-1234-1234-123456789012",
-          "subscriptionCap": 100,
-          "subscriptionUsage": 0,
-          "sharedLimit": 1500,
+          "baselineCap": {
+            "value": 100
+          },
+          "isBoundedCap": true,
+          "members": [
+            {
+              "memberSubscriptionId": "11111111-1111-1111-1111-111111111111",
+              "boundedCap": 200
+            },
+            {
+              "memberSubscriptionId": "22222222-2222-2222-2222-222222222222",
+              "boundedCap": 150
+            }
+          ],
           "provisioningState": "Succeeded"
         }
       }
