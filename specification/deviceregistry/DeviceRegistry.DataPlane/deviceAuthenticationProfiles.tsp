@@ -11,6 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -220,7 +222,12 @@ interface DeviceAuthenticationProfiles {
   issueCert is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
     CertificateIssuanceRequest & LongRunningOperationIdHeader,
-    {}
+    {},
+    Azure.Core.Foundations.Error,
+    ResponseHeadersTrait<
+      Azure.Core.Foundations.RetryAfterHeader & LongRunningOperationIdResponseHeader,
+      TraitContext.Action
+    >
   >;
 
   /**
@@ -234,7 +241,12 @@ interface DeviceAuthenticationProfiles {
   revokeCerts is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
     LongRunningOperationIdHeader,
-    {}
+    {},
+    Azure.Core.Foundations.Error,
+    ResponseHeadersTrait<
+      Azure.Core.Foundations.RetryAfterHeader & LongRunningOperationIdResponseHeader,
+      TraitContext.Action
+    >
   >;
 }
 

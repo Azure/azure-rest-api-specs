@@ -59,3 +59,18 @@ model LongRunningOperationIdHeader {
   @header("Operation-Id")
   operationId?: string;
 }
+
+/**
+ * Response-side counterpart of `LongRunningOperationIdHeader`. Long-running
+ * action operations (`:issueCert`, `:revokeCerts`, `:provision`,
+ * `:generateReport`) echo the operation's status-monitor ID back on the
+ * `202` response per the Azure API Guidelines, so callers do not have to
+ * parse the response body or the `Operation-Location` URL to obtain it. The
+ * returned value is either the client-supplied `Operation-Id` request header
+ * or the service-generated GUID.
+ */
+model LongRunningOperationIdResponseHeader {
+  /** The ID of the long-running operation's status monitor. */
+  @header("Operation-Id")
+  operationId: string;
+}

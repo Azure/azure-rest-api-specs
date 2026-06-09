@@ -128,6 +128,10 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
@@ -163,9 +167,6 @@
           "Generate a namespace update compliance report": {
             "$ref": "./examples/Namespaces_GenerateReport.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -542,10 +543,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -566,9 +576,6 @@
           "Revoke certificates for a device authentication profile": {
             "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCerts.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2570,6 +2577,10 @@
         "type": "string",
         "format": "byte"
       }
+    },
+    "LongRunningOperationIdResponseHeader": {
+      "type": "object",
+      "description": "Response-side counterpart of `LongRunningOperationIdHeader`. Long-running\naction operations (`:issueCert`, `:revokeCerts`, `:provision`,\n`:generateReport`) echo the operation's status-monitor ID back on the\n`202` response per the Azure API Guidelines, so callers do not have to\nparse the response body or the `Operation-Location` URL to obtain it. The\nreturned value is either the client-supplied `Operation-Id` request header\nor the service-generated GUID."
     },
     "Namespace": {
       "type": "object",

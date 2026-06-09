@@ -250,7 +250,7 @@ interface Namespaces {
     Report,
     Azure.Core.Foundations.Error,
     ResponseHeadersTrait<
-      Azure.Core.Foundations.RetryAfterHeader,
+      Azure.Core.Foundations.RetryAfterHeader & LongRunningOperationIdResponseHeader,
       TraitContext.Action
     >
   >;
