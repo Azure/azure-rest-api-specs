@@ -12293,6 +12293,7 @@ components:
           enum:
             - activity_protocol
             - responses
+            - a2a
             - mcp
             - invocations
             - invocations_ws
@@ -36818,7 +36819,8 @@ components:
           description: The unique run identifier for the routine attempt.
           readOnly: true
         status:
-          type: string
+          allOf:
+            - $ref: '#/components/schemas/RoutineRunStatus'
           description: The run status.
         phase:
           allOf:
@@ -36903,6 +36905,12 @@ components:
             - completed
             - failed
       description: Known lifecycle phases recorded for a routine run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRunStatus:
+      type: string
+      description: The status of a routine run.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
