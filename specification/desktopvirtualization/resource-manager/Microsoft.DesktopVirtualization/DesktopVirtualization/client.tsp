@@ -945,3 +945,144 @@ using Microsoft.DesktopVirtualization;
   "ExpirationOn",
   "csharp"
 );
+
+@@clientName(MSIXImages, "MsixImages", "java");
+@@clientName(MSIXPackage, "MsixPackage", "java");
+@@clientName(MSIXPackages, "MsixPackages", "java");
+@@clientName(MSIXPackagePatch, "MsixPackagePatch", "java");
+@@clientName(MSIXPackageProperties, "MsixPackageProperties", "java");
+@@clientName(MSIXPackagePatchProperties, "MsixPackagePatchProperties", "java");
+@@clientName(MSIXImageURI, "MsixImageUri", "java");
+@@clientName(SSOSecretType, "SsoSecretType", "java");
+@@clientName(
+  AppAttachPackagePatchProperties.keyVaultURL,
+  "keyVaultUrl",
+  "java"
+);
+@@clientName(AppAttachPackageProperties.keyVaultURL, "keyVaultUrl", "java");
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Sku,
+  "ResourceModelWithAllowedPropertySetSku",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Plan,
+  "ResourceModelWithAllowedPropertySetPlan",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "ResourceModelWithAllowedPropertySetIdentity",
+  "java"
+);
+
+@@clientName(
+  ResourceModelWithAllowedPropertySetSku,
+  "ResourceModelWithAllowedPropertySetSkuLegacy",
+  "java"
+);
+@@clientName(
+  ResourceModelWithAllowedPropertySetPlan,
+  "ResourceModelWithAllowedPropertySetPlanLegacy",
+  "java"
+);
+@@clientName(
+  ResourceModelWithAllowedPropertySetIdentity,
+  "ResourceModelWithAllowedPropertySetIdentityLegacy",
+  "java"
+);
+
+// Java: preserve old property names to avoid breaking renames
+@@clientName(
+  UserSessionProperties.activeDirectoryUserName,
+  "activeDirectoryUsername",
+  "java"
+);
+@@clientName(MsixPackageApplications.appUserModelID, "appUserModelId", "java");
+
+// Java: preserve flattened properties (old SDK exposed leaf accessors directly,
+// not a nested properties() object)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExpandMsixImage.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StartMenuItem.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DesktopPatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  WorkspacePatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  HostPoolPatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationGroupPatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationPatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MSIXPackagePatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPersonalSchedulePatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ScalingPlanPooledSchedulePatch.properties,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SessionHostPatch.properties,
+  "java"
+);
+
+// Back compatibility: keep ScalingSchedule.daysOfWeek as the
+// ScalingScheduleDaysOfWeekItem expandable enum for Java.
+@@alternateType(
+  ScalingSchedule.daysOfWeek,
+  ScalingScheduleDaysOfWeekItemUsingStruct[],
+  "java"
+);
+@@clientName(
+  ScalingScheduleDaysOfWeekItem,
+  "ScalingScheduleDaysOfWeekItemOld",
+  "java"
+);
+@@clientName(
+  ScalingScheduleDaysOfWeekItemUsingStruct,
+  "ScalingScheduleDaysOfWeekItem",
+  "java"
+);
