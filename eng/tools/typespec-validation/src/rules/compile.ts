@@ -165,27 +165,25 @@ export class CompileRule implements Rule {
 
               let isOnlyOlderPreviews = false;
               if (allArePreview) {
-                // Get all preview versions from tspGeneratedSwaggers
-                const previewVersions = tspGeneratedSwaggers
-                  .filter((s) => {
-                    const posixPath = s.split(path.sep).join(path.posix.sep);
-                    return posixPath.includes("/preview/");
-                  })
+                // Get all versions (preview and stable) from tspGeneratedSwaggers.
+                // A later preview *or* stable version is allowed to supersede an older
+                // preview, leaving the older preview's swagger in place.
+                const allVersions = tspGeneratedSwaggers
                   .map(extractVersion)
                   .filter((v): v is string => v !== null);
 
-                if (previewVersions.length > 0) {
-                  // Find the latest preview version (sort descending)
-                  const sortedVersions = [...new Set(previewVersions)].sort().reverse();
-                  const latestPreview = sortedVersions[0];
+                if (allVersions.length > 0) {
+                  // Find the latest version (sort descending)
+                  const sortedVersions = [...new Set(allVersions)].sort().reverse();
+                  const latestVersion = sortedVersions[0];
 
-                  // Check if any extraSwagger is from the latest preview
-                  const hasLatestPreview = extraSwaggers.some((s) => {
+                  // Check if any extraSwagger is from the latest version
+                  const hasLatestVersion = extraSwaggers.some((s) => {
                     const version = extractVersion(s);
-                    return version === latestPreview;
+                    return version === latestVersion;
                   });
 
-                  isOnlyOlderPreviews = !hasLatestPreview;
+                  isOnlyOlderPreviews = !hasLatestVersion;
                 }
               }
 
