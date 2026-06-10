@@ -900,7 +900,7 @@
         "tags": [
           "SharedLimitCaps"
         ],
-        "description": "Creates or updates the shared limit cap configuration for a VM family. The caller's subscription is treated as the host subscription.",
+        "description": "Creates or updates the shared limit cap configuration.\nNote: this PUT uses merge semantics, not the standard ARM replace semantics.\nProperties omitted from the request body are left unchanged on the server.\nTo clear a value, supply the explicit clear shape (e.g. `defaultMemberCap: {}`\nor `memberCapOverrides: []`).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -949,6 +949,21 @@
         "x-ms-examples": {
           "Create or update a shared limit cap for a VM family": {
             "$ref": "./examples/SharedLimitCaps_CreateOrUpdate.json"
+          },
+          "Merge — clear all memberCapOverrides": {
+            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate_ClearAllOverrides.json"
+          },
+          "Merge — clear defaultMemberCap": {
+            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate_ClearDefaultMemberCap.json"
+          },
+          "Merge — replace memberCapOverrides": {
+            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate_ReplaceOverrides.json"
+          },
+          "Merge — set only defaultMemberCap": {
+            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate_SetDefaultMemberCap.json"
+          },
+          "Merge — toggle isBoundedCap only": {
+            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate_ToggleIsBoundedCap.json"
           }
         }
       },

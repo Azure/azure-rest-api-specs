@@ -89,7 +89,13 @@ interface SharedLimitCaps {
   /** Gets the shared limit cap configuration for a VM family, as visible to the caller's subscription. */
   get is ArmResourceRead<SharedLimitCap>;
 
-  /** Creates or updates the shared limit cap configuration for a VM family. The caller's subscription is treated as the host subscription. */
+  /**
+   * Creates or updates the shared limit cap configuration.
+   * Note: this PUT uses merge semantics, not the standard ARM replace semantics.
+   * Properties omitted from the request body are left unchanged on the server.
+   *  To clear a value, supply the explicit clear shape (e.g. `defaultMemberCap: {}`
+   * or `memberCapOverrides: []`).
+   */
   createOrUpdate is ArmResourceCreateOrReplaceSync<SharedLimitCap>;
 
   /** Deletes the shared limit cap configuration for a VM family. The caller's subscription is treated as the host subscription. */

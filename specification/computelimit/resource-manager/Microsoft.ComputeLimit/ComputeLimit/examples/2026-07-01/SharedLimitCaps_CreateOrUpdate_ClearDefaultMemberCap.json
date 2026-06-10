@@ -1,0 +1,58 @@
+{
+  "title": "Merge — clear defaultMemberCap",
+  "operationId": "SharedLimitCaps_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "vmFamilyName": "StandardDSv3Family",
+    "resource": {
+      "properties": {
+        "defaultMemberCap": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardDSv3Family",
+        "name": "StandardDSv3Family",
+        "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+        "properties": {
+          "isBoundedCap": true,
+          "memberCapOverrides": [
+            {
+              "subscriptionId": "11111111-1111-1111-1111-111111111111",
+              "cap": 200
+            },
+            {
+              "subscriptionId": "22222222-2222-2222-2222-222222222222",
+              "cap": 150
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardDSv3Family",
+        "name": "StandardDSv3Family",
+        "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+        "properties": {
+          "isBoundedCap": true,
+          "memberCapOverrides": [
+            {
+              "subscriptionId": "11111111-1111-1111-1111-111111111111",
+              "cap": 200
+            },
+            {
+              "subscriptionId": "22222222-2222-2222-2222-222222222222",
+              "cap": 150
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

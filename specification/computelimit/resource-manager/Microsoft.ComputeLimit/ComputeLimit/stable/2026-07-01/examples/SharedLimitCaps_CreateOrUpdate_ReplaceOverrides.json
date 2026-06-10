@@ -1,0 +1,73 @@
+{
+  "title": "Merge — replace memberCapOverrides",
+  "operationId": "SharedLimitCaps_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "vmFamilyName": "StandardDSv3Family",
+    "resource": {
+      "properties": {
+        "memberCapOverrides": [
+          {
+            "subscriptionId": "33333333-3333-3333-3333-333333333333",
+            "cap": 300
+          },
+          {
+            "subscriptionId": "44444444-4444-4444-4444-444444444444",
+            "cap": 80
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardDSv3Family",
+        "name": "StandardDSv3Family",
+        "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+        "properties": {
+          "defaultMemberCap": {
+            "value": 100
+          },
+          "isBoundedCap": true,
+          "memberCapOverrides": [
+            {
+              "subscriptionId": "33333333-3333-3333-3333-333333333333",
+              "cap": 300
+            },
+            {
+              "subscriptionId": "44444444-4444-4444-4444-444444444444",
+              "cap": 80
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/sharedLimitCaps/StandardDSv3Family",
+        "name": "StandardDSv3Family",
+        "type": "Microsoft.ComputeLimit/sharedLimitCaps",
+        "properties": {
+          "defaultMemberCap": {
+            "value": 100
+          },
+          "isBoundedCap": true,
+          "memberCapOverrides": [
+            {
+              "subscriptionId": "33333333-3333-3333-3333-333333333333",
+              "cap": 300
+            },
+            {
+              "subscriptionId": "44444444-4444-4444-4444-444444444444",
+              "cap": 80
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
