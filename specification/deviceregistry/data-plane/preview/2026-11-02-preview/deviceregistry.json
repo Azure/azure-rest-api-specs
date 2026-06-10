@@ -180,6 +180,118 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}:reprovision": {
+      "post": {
+        "operationId": "Devices_Reprovision",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Reprovision an existing device to a new IoT Hub within the same namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the device resource. Used to prevent concurrent modifications.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ProvisionDeviceResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reprovision a device to a new IoT Hub": {
+            "$ref": "./examples/Devices_Reprovision.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
       "get": {
         "operationId": "DeviceAttributes_List",
@@ -1725,6 +1837,73 @@
         }
       }
     },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/reprovisionDeviceResults/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetReprovisionDeviceResult",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the result of a device-reprovisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceResultStatusMonitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a device-reprovisioning operation": {
+            "$ref": "./examples/Devices_GetReprovisionDeviceResult.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/states": {
       "get": {
         "operationId": "DeviceStates_List",
@@ -2149,6 +2328,33 @@
             "type": "string"
           },
           {
+            "name": "mode",
+            "in": "query",
+            "description": "Controls which operations ADR performs. Defaults to full when omitted.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "full",
+              "registryOnly"
+            ],
+            "x-ms-enum": {
+              "name": "ProvisionMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Full",
+                  "value": "full",
+                  "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+                },
+                {
+                  "name": "RegistryOnly",
+                  "value": "registryOnly",
+                  "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+                }
+              ]
+            }
+          },
+          {
             "$ref": "#/parameters/LongRunningOperationIdHeader"
           },
           {
@@ -2220,6 +2426,9 @@
           }
         },
         "x-ms-examples": {
+          "Provision a device from IoT Hub (registry-only mode, X509 Hub-uploaded CA)": {
+            "$ref": "./examples/Devices_Provision_IotHubSource.json"
+          },
           "Provision a device in a namespace": {
             "$ref": "./examples/Devices_Provision.json"
           }
@@ -2623,7 +2832,8 @@
       "enum": [
         "SymmetricKey",
         "CertificateAuthority",
-        "SelfSignedX509Certificate"
+        "SelfSignedX509Certificate",
+        "X509HubUploadedCertificateAuthority"
       ],
       "x-ms-enum": {
         "name": "AuthenticationType",
@@ -2643,6 +2853,11 @@
             "name": "SelfSignedX509Certificate",
             "value": "SelfSignedX509Certificate",
             "description": "Self-signed X.509 certificate authentication."
+          },
+          {
+            "name": "X509HubUploadedCertificateAuthority",
+            "value": "X509HubUploadedCertificateAuthority",
+            "description": "X.509 certificate authority uploaded to IoT Hub. No additional credential fields required."
           }
         ]
       }
@@ -3573,6 +3788,30 @@
           "$ref": "#/definitions/TwinProperties",
           "description": "The device twin properties."
         }
+      }
+    },
+    "DeviceTwinMode": {
+      "type": "string",
+      "description": "The mode controlling how the device twin is populated on the new IoT Hub during reprovisioning.",
+      "enum": [
+        "Migrate",
+        "Replace"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceTwinMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Migrate",
+            "value": "Migrate",
+            "description": "Copy tags and desired properties from the old hub to the new hub."
+          },
+          {
+            "name": "Replace",
+            "value": "Replace",
+            "description": "Set tags and desired properties on the new hub to the caller-supplied values. Use with empty objects to reset the twin."
+          }
+        ]
       }
     },
     "DeviceUpdateId": {
@@ -4701,6 +4940,30 @@
         "status"
       ]
     },
+    "ProvisionMode": {
+      "type": "string",
+      "description": "Controls which operations ADR performs during provisioning.",
+      "enum": [
+        "full",
+        "registryOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "full",
+            "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+          },
+          {
+            "name": "RegistryOnly",
+            "value": "registryOnly",
+            "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+          }
+        ]
+      }
+    },
     "ProvisionedAuthProfileRef": {
       "type": "object",
       "description": "Reference to a provisioned AuthenticationProfile resource, including the id of the underlying credential.",
@@ -4867,6 +5130,91 @@
           }
         ]
       }
+    },
+    "ReprovisionDeviceRequest": {
+      "type": "object",
+      "description": "Request body for the reprovision device endpoint.",
+      "properties": {
+        "targetEndpoint": {
+          "$ref": "#/definitions/IotHubEndpoint",
+          "description": "The target IoT Hub endpoint (the new hub) to move the device to."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationProfileProperties",
+          "description": "Optional authentication configuration. If omitted, the device's existing AuthenticationProfile is preserved. If supplied, a new AuthenticationProfile is created and the old one is deleted after success."
+        },
+        "deviceTwin": {
+          "$ref": "#/definitions/ReprovisionDeviceTwin",
+          "description": "Optional device twin configuration controlling how the new hub's twin is populated. If omitted, the new hub starts with an empty twin."
+        },
+        "deviceUuid": {
+          "type": "string",
+          "description": "Optional device UUID guard. If supplied and does not match the device's stored UUID, the request is rejected."
+        }
+      },
+      "required": [
+        "targetEndpoint"
+      ]
+    },
+    "ReprovisionDeviceResultStatusMonitor": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:reprovision` action on a device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ReprovisionDeviceTwin": {
+      "type": "object",
+      "description": "Device twin configuration for reprovisioning with an explicit mode.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/DeviceTwinMode",
+          "description": "How to populate the device twin on the new IoT Hub."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceTwin"
+        }
+      ]
     },
     "RevokeCertsResult": {
       "type": "object",
@@ -5400,6 +5748,26 @@
       "type": "object",
       "description": "Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape\nis accepted; the service stores and returns the bag verbatim without inspection. Customers\nwho want to advertise a schema for their bag may include their own field (e.g. `$schema`).",
       "additionalProperties": {}
+    },
+    "X509HubUploadedCertificateAuthorityAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "X509HubUploadedCertificateAuthority"
+    },
+    "X509HubUploadedCertificateAuthorityAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "X509HubUploadedCertificateAuthority"
     }
   },
   "parameters": {

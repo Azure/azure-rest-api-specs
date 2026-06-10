@@ -52,6 +52,10 @@ union AuthenticationType {
 
   /** Self-signed X.509 certificate authentication. */
   SelfSignedX509Certificate: "SelfSignedX509Certificate",
+
+  /** X.509 certificate authority uploaded to IoT Hub. No additional credential fields required. */
+  @added(Versions.v2026_11_02_preview)
+  X509HubUploadedCertificateAuthority: "X509HubUploadedCertificateAuthority",
 }
 
 /** Authentication information for the device. */
@@ -82,6 +86,14 @@ model SelfSignedX509CertificateAuthenticationProfileProperties
 
   /** Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate. */
   selfSignedThumbprints: SelfSignedThumbprints;
+}
+
+/** Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required. */
+@added(Versions.v2026_11_02_preview)
+model X509HubUploadedCertificateAuthorityAuthenticationProfileProperties
+  extends AuthenticationProfileProperties {
+  /** The authentication type. */
+  type: AuthenticationType.X509HubUploadedCertificateAuthority;
 }
 
 /** Symmetric key authentication details. */

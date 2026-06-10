@@ -126,6 +126,22 @@ model ProvisionDeviceRequest {
   deviceTwin?: DeviceTwin;
 }
 
+// ──────────────────────────────────────────────
+// Provision mode
+// ──────────────────────────────────────────────
+
+/** Controls which operations ADR performs during provisioning. */
+@added(Versions.v2026_11_02_preview)
+union ProvisionMode {
+  string,
+
+  /** Full provisioning: ADR creates the device in IoT Hub and sets twin data. */
+  Full: "full",
+
+  /** Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub. */
+  RegistryOnly: "registryOnly",
+}
+
 /** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionDeviceResult {
@@ -151,6 +167,57 @@ model ProvisionDeviceResult {
 @parentResource(Namespace)
 @resource("provisionDeviceResults")
 model ProvisionDeviceResultStatusMonitor
+  is LongRunningOperationStatus<ProvisionDeviceResult>;
+
+// ──────────────────────────────────────────────
+// Reprovision device models
+// ──────────────────────────────────────────────
+
+/** The mode controlling how the device twin is populated on the new IoT Hub during reprovisioning. */
+@added(Versions.v2026_11_02_preview)
+union DeviceTwinMode {
+  string,
+
+  /** Copy tags and desired properties from the old hub to the new hub. */
+  Migrate: "Migrate",
+
+  /** Set tags and desired properties on the new hub to the caller-supplied values. Use with empty objects to reset the twin. */
+  Replace: "Replace",
+}
+
+/** Device twin configuration for reprovisioning with an explicit mode. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required to extend DeviceTwin with the mode discriminator while preserving the existing wire shape."
+@added(Versions.v2026_11_02_preview)
+model ReprovisionDeviceTwin extends DeviceTwin {
+  /** How to populate the device twin on the new IoT Hub. */
+  mode: DeviceTwinMode;
+}
+
+/** Request body for the reprovision device endpoint. */
+@added(Versions.v2026_11_02_preview)
+model ReprovisionDeviceRequest {
+  /** The target IoT Hub endpoint (the new hub) to move the device to. */
+  targetEndpoint: IotHubEndpoint;
+
+  /** Optional authentication configuration. If omitted, the device's existing AuthenticationProfile is preserved. If supplied, a new AuthenticationProfile is created and the old one is deleted after success. */
+  authentication?: AuthenticationProfileProperties;
+
+  /** Optional device twin configuration controlling how the new hub's twin is populated. If omitted, the new hub starts with an empty twin. */
+  deviceTwin?: ReprovisionDeviceTwin;
+
+  /** Optional device UUID guard. If supplied and does not match the device's stored UUID, the request is rejected. */
+  deviceUuid?: string;
+}
+
+// ──────────────────────────────────────────────
+// Reprovision-device status monitor endpoint
+// ──────────────────────────────────────────────
+
+/** Status monitor for the long-running `:reprovision` action on a device. */
+@added(Versions.v2026_11_02_preview)
+@parentResource(Device)
+@resource("reprovisionDeviceResults")
+model ReprovisionDeviceResultStatusMonitor
   is LongRunningOperationStatus<ProvisionDeviceResult>;
 
 // ──────────────────────────────────────────────
@@ -189,7 +256,32 @@ interface Devices {
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
-    ProvisionDeviceRequest & LongRunningOperationIdHeader,
+    {
+      /** Controls which operations ADR performs. Defaults to full when omitted. */
+      @query
+      mode?: ProvisionMode;
+
+      ...ProvisionDeviceRequest;
+      ...LongRunningOperationIdHeader;
+    },
+    ProvisionDeviceResult,
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
+  >;
+
+  /** Reprovision an existing device to a new IoT Hub within the same namespace. */
+  @pollingOperation(ReprovisionDeviceResults.get)
+  @added(Versions.v2026_11_02_preview)
+  reprovision is ResourceOperations.LongRunningResourceAction<
+    Device,
+    {
+      /** The ETag of the device resource. Used to prevent concurrent modifications. */
+      @header("If-Match")
+      ifMatch?: string;
+
+      ...ReprovisionDeviceRequest;
+      ...LongRunningOperationIdHeader;
+    },
     ProvisionDeviceResult,
     Azure.Core.Foundations.Error,
     LongRunningActionResponseHeadersTrait
@@ -209,6 +301,23 @@ interface ProvisionDeviceResults {
   @operationId("Devices_GetProvisionDeviceResult")
   get is ResourceOperations.ResourceRead<
     ProvisionDeviceResultStatusMonitor,
+    LongRunningStatusMonitorResponseHeadersTrait
+  >;
+}
+
+/** Polling operations for the long-running `:reprovision` action on a device. */
+@added(Versions.v2026_11_02_preview)
+@tag("Devices")
+interface ReprovisionDeviceResults {
+  /** Get the result of a device-reprovisioning operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Devices in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `Devices` SDK client (matches the wire-side `Devices_Reprovision`
+  // action that produces these results) rather than as a top-level
+  // `ReprovisionDeviceResults_Get` method.
+  @operationId("Devices_GetReprovisionDeviceResult")
+  get is ResourceOperations.ResourceRead<
+    ReprovisionDeviceResultStatusMonitor,
     LongRunningStatusMonitorResponseHeadersTrait
   >;
 }

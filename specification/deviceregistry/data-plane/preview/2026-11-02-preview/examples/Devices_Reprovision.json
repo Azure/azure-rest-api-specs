@@ -1,0 +1,52 @@
+{
+  "operationId": "Devices_Reprovision",
+  "title": "Reprovision a device to a new IoT Hub",
+  "parameters": {
+    "endpoint": "https://eastus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "00000000-0000-0000-0000-000000000099",
+    "deviceName": "device-abc-123",
+    "If-Match": "\"etag-value-from-get-device\"",
+    "Operation-Id": "op-reprov-001",
+    "body": {
+      "targetEndpoint": {
+        "name": "my-new-iothub-endpoint-key",
+        "address": "my-new-iothub.azure-devices.net"
+      },
+      "authentication": {
+        "type": "SymmetricKey",
+        "symmetricKey": {
+          "primaryKey": "dGhpcyBpcyBhIG5ldyBwcmltYXJ5IGtleQ==",
+          "secondaryKey": "dGhpcyBpcyBhIG5ldyBzZWNvbmRhcnkga2V5"
+        }
+      },
+      "deviceTwin": {
+        "mode": "Replace",
+        "tags": {
+          "deploymentLocation": {
+            "building": "43",
+            "floor": "2"
+          }
+        },
+        "properties": {
+          "desired": {
+            "telemetryInterval": "15"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.deviceregistry.contoso.com/namespaces/00000000-0000-0000-0000-000000000099/devices/device-abc-123/reprovisionDeviceResults/op-reprov-001?api-version=2026-11-02-preview",
+        "Operation-Id": "op-reprov-001",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "op-reprov-001",
+        "status": "Running"
+      }
+    }
+  }
+}

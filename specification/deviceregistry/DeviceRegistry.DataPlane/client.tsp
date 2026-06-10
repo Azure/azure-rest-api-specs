@@ -12,6 +12,10 @@ using Azure.ClientGenerator.Core;
 // Remove @@access lines below to promote an operation to public.
 @@access(Microsoft.DeviceRegistry.Devices.provision, Access.internal);
 @@access(Microsoft.DeviceRegistry.ProvisionDeviceResults.get, Access.internal);
+@@access(Microsoft.DeviceRegistry.Devices.reprovision, Access.internal);
+@@access(Microsoft.DeviceRegistry.ReprovisionDeviceResults.get,
+  Access.internal
+);
 @@access(Microsoft.DeviceRegistry.Devices.query, Access.internal);
 @@access(Microsoft.DeviceRegistry.Devices.getDeviceByExternalId,
   Access.internal
