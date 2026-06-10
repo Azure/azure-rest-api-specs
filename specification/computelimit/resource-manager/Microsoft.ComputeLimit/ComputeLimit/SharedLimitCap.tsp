@@ -46,7 +46,17 @@ model SharedLimitCapProperties {
    */
   isBoundedCap?: boolean;
 
-  /** The member cap overrides. */
+  /**
+   * Per-member cap overrides. Returned on GET; omitted from list responses.
+   * Call GET on a specific `vmFamilyName`, or list the `MemberCapOverride`
+   * child collection, to retrieve the full set.
+   *
+   * On PUT, supplying this array replaces the full set of overrides for the
+   * resource. Supply `[]` to clear all overrides. Omit the property to leave
+   * the existing set unchanged (per the merge semantics of this PUT). To
+   * edit a single override without resending the full list, use the
+   * `MemberCapOverride` child resource.
+   */
   @maxItems(1000)
   @identifiers(#["subscriptionId"])
   memberCapOverrides?: MemberCap[];

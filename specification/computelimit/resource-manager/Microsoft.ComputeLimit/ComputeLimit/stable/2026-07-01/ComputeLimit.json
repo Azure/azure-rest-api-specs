@@ -1562,7 +1562,7 @@
         },
         "memberCapOverrides": {
           "type": "array",
-          "description": "The member cap overrides.",
+          "description": "Per-member cap overrides. Returned on GET; omitted from list responses.\nCall GET on a specific `vmFamilyName`, or list the `MemberCapOverride`\nchild collection, to retrieve the full set.\n\nOn PUT, supplying this array replaces the full set of overrides for the\nresource. Supply `[]` to clear all overrides. Omit the property to leave\nthe existing set unchanged (per the merge semantics of this PUT). To\nedit a single override without resending the full list, use the\n`MemberCapOverride` child resource.",
           "maxItems": 1000,
           "items": {
             "$ref": "#/definitions/MemberCap"
