@@ -20112,9 +20112,7 @@
         },
         "discriminator": {
           "propertyName": "type",
-          "mapping": {
-            "azure_ai_source": "#/components/schemas/AzureAIDataSourceConfig"
-          }
+          "mapping": {}
         },
         "description": "Base class for run data sources with discriminator support."
       },
@@ -24087,8 +24085,7 @@
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
             "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams",
-            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams",
-            "synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams"
+            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -25236,15 +25233,6 @@
           "version"
         ],
         "properties": {
-          "systemData": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SystemDataV3"
-              }
-            ],
-            "description": "System related metadata",
-            "readOnly": true
-          },
           "blobUri": {
             "type": "string",
             "format": "uri",
@@ -28198,8 +28186,7 @@
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText",
-            "json_object": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject",
-            "json_schema": "#/components/schemas/OpenAI.ResponseFormatJsonSchema"
+            "json_object": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject"
           }
         },
         "description": "An object specifying the format that the model must output.\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables\nStructured Outputs which ensures the model will match your supplied JSON\nschema. Learn more in the [Structured Outputs\nguide](/docs/guides/structured-outputs).\nSetting to `{ \"type\": \"json_object\" }` enables the older JSON mode, which\nensures the message the model generates is valid JSON. Using `json_schema`\nis preferred for models that support it."
@@ -38640,8 +38627,7 @@
             "reasoning_text": "#/components/schemas/OpenAI.MessageContentReasoningTextContent",
             "refusal": "#/components/schemas/OpenAI.MessageContentRefusalContent",
             "input_image": "#/components/schemas/OpenAI.MessageContentInputImageContent",
-            "input_file": "#/components/schemas/OpenAI.MessageContentInputFileContent",
-            "summary_text": "#/components/schemas/OpenAI.SummaryTextContent"
+            "input_file": "#/components/schemas/OpenAI.MessageContentInputFileContent"
           }
         },
         "description": "A content part that makes up an input or output item."
@@ -48209,28 +48195,6 @@
           }
         ],
         "description": "Represents the parameters for synthetic data generation item generation."
-      },
-      "SystemDataV3": {
-        "type": "object",
-        "properties": {
-          "createdAt": {
-            "type": "string",
-            "description": "Timestamp of resource creation"
-          },
-          "createdBy": {
-            "type": "string",
-            "description": "Identity that created the resource"
-          },
-          "createdByType": {
-            "type": "string",
-            "description": "Type of identity that created the resource"
-          },
-          "lastModifiedAt": {
-            "type": "string",
-            "description": "Timestamp of last resource modification"
-          }
-        },
-        "description": "System metadata for a resource"
       },
       "Target": {
         "type": "object",

@@ -89,10 +89,6 @@ model FoundryModelWarning {
 @doc("Model Version Definition")
 @Rest.resource("models")
 model ModelVersion {
-  @doc("System related metadata")
-  @visibility(Lifecycle.Read)
-  systemData?: SystemDataV3;
-
   @doc("URI of the model artifact in blob storage")
   blobUri: url;
 
@@ -121,33 +117,16 @@ model ModelVersion {
   ...AssetBase;
 }
 
-@@visibility(
-  ModelVersion.description,
+@@visibility(ModelVersion.description,
   Lifecycle.Create,
   Lifecycle.Update,
   Lifecycle.Read
 );
-@@visibility(
-  ModelVersion.tags,
+@@visibility(ModelVersion.tags,
   Lifecycle.Create,
   Lifecycle.Update,
   Lifecycle.Read
 );
-
-@doc("System metadata for a resource")
-model SystemDataV3 {
-  @doc("Timestamp of resource creation")
-  createdAt?: string;
-
-  @doc("Identity that created the resource")
-  createdBy?: string;
-
-  @doc("Type of identity that created the resource")
-  createdByType?: string;
-
-  @doc("Timestamp of last resource modification")
-  lastModifiedAt?: string;
-}
 
 @doc("Source information for the model")
 model ModelSourceData {
