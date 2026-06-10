@@ -313,6 +313,17 @@ union AgentKind {
   container_app: "container_app",
 }
 
+@doc("The execution runtime for a prompt agent.")
+union AgentHarness {
+  string,
+
+  @doc("The default prompt agent runtime.")
+  prompt: "prompt",
+
+  @doc("The Foundry-managed runtime that adds skills, durable filesystem state, long-running execution, and crash recovery.")
+  managed: "managed",
+}
+
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
 model RaiConfig {
   @doc("The name of the RAI policy to apply.")
@@ -331,6 +342,9 @@ model AgentDefinition {
 @doc("The prompt agent definition")
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
+
+  @doc("The runtime that executes this prompt agent. Defaults to `prompt`.")
+  harness?: AgentHarness = AgentHarness.prompt;
 
   @doc("The model deployment to use for this agent.")
   `model`: string;
