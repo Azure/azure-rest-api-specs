@@ -180,6 +180,57 @@ describe("compile", function () {
     });
   });
 
+  it("should succeed if an older preview is superseded by a later stable version", async function () {
+    // Current TypeSpec only generates the stable 2024-03-01 version, but the older
+    // preview swagger is left in place. This should be allowed.
+    const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra older preview swagger (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([stablePath, olderPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if a preview is newer than the latest stable version", async function () {
+    // Current TypeSpec only generates the stable 2023-01-01 version, but a *newer*
+    // preview swagger is left in place. This is a genuine mismatch and should fail.
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra newer preview swagger (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([stablePath, newerPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
   it("should succeed with multiple older preview versions", async function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
