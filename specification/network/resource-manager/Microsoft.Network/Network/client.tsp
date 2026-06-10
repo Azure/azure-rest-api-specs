@@ -254,9 +254,11 @@ namespace CombineClient {
 @@access(Microsoft.Network.FirewallPolicyIdpsSignatureDirection, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.FirewallPolicyIdpsSignatureMode, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.FirewallPolicyIdpsSignatureSeverity, Azure.ClientGenerator.Core.Access.public, "csharp");
+@@access(Microsoft.Network.Geo, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.InboundSecurityRule, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.PacketCaptureParameters, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.PropagatedRouteTable, Azure.ClientGenerator.Core.Access.public, "csharp");
+@@access(Microsoft.Network.ReferencedPublicIpAddress, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Common.LoadBalancingRulePropertiesFormat, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Common.InboundNatPoolPropertiesFormat, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@alternateType(Common.Resource.id, armResourceIdentifier, "csharp");
