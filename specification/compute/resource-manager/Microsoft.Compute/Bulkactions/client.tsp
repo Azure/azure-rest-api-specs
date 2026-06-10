@@ -74,6 +74,7 @@ namespace Microsoft.Compute;
   "DeleteResourceOperationResult",
   "csharp"
 );
+@@clientName(DeleteResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(
   CreateResourceOperationResponse,
   "CreateResourceOperationResult",
@@ -126,6 +127,25 @@ namespace Microsoft.Compute;
   "BulkActionsOsProfileProvisioningContent",
   "csharp"
 );
+
+// =====================================================================
+// .NET naming convention fixes (C# only)
+// =====================================================================
+// Pluralize collection properties (Array<...>).
+@@clientName(ResourceOperationDetails.resourceId, "resourceIds", "csharp");
+@@clientName(ResourceOperation.resourceId, "resourceIds", "csharp");
+// Expand "Op" abbreviation to "Operation".
+@@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
+@@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
+// Drop redundant type-name prefix; align with FallbackOperationInfo.error.
+@@clientName(
+  ResourceOperationDetails.resourceOperationError,
+  "error",
+  "csharp"
+);
+// Correct .NET casing for TimeZone.
+@@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
+
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
 // parameter because its name contains "apiversion". This causes
