@@ -92,24 +92,6 @@ options:
         set:
           parameter-name: Name
 
-      # Invoke-AzConnectedSetupExtension has a name collision: both the
-      # request-body variants (Setup, SetupViaIdentity) and the expanded
-      # variants (SetupExpanded, SetupViaIdentityExpanded) want to expose
-      # a parameter named -Extension. The body variants get it from the
-      # @@clientName rename of the SetupExtensionRequest body parameter
-      # (in back-compatible.tsp). The expanded variants get it from
-      # singularising SetupExtensionRequest.extensions[]. The proxy
-      # generator can't merge two parameters of the same name but
-      # different types onto a single cmdlet, so rename the body-form
-      # variants to -ExtensionRequest. The user-facing expanded variants
-      # keep -Extension <MachineExtensionProperties[]> which is the
-      # ergonomic form.
-      - where:
-          subject: SetupExtension
-          parameter-name: Extension
-          variant: ^Setup(ViaIdentity)?$
-        set:
-          parameter-name: ExtensionRequest
       # TODO: verify after first generation. TypeSpec PUT body is NOT flattened
       # (only the PATCH body via back-compatible.tsp), so `PropertiesType` may emit
       # as `Type` on the parameter and `Type` / `MachineExtensionType` on the model.
@@ -195,6 +177,16 @@ options:
               - ProvisioningState
 
       # Remove cmdlets we don't ship
+      # SetupExtensions (Invoke-AzConnectedSetupExtension) is not shipped in
+      # PowerShell; 
+      - where:
+          subject: SetupExtension
+          variant: ^Setup$
+        remove: true
+      - where:
+          subject: SetupExtension
+          variant: ^SetupViaIdentity$
+        remove: true
       - where:
           subject: PrivateEndpointConnection
         remove: true

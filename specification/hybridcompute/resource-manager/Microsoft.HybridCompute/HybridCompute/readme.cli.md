@@ -12,6 +12,10 @@ cli:
           group: machines
           op: createOrUpdate
       hidden: true
+    - where:
+          group: machines
+          op: setupExtensions
+      hidden: true
 
   test-scenario:
     ConnectedMachine:

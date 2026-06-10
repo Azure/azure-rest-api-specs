@@ -676,7 +676,10 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/License"
-            },
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -1354,11 +1357,22 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'License' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          },
+          "201": {
+            "description": "Resource 'License' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/License"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1424,11 +1438,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/License"
-            },
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1484,9 +1506,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "202": {
+            "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -6901,7 +6928,7 @@
       "properties": {
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Identity for the resource."
         },
         "kind": {
           "$ref": "#/definitions/ArcKindEnum",
