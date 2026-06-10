@@ -570,8 +570,16 @@ using Microsoft.SecurityInsights;
   "javascript"
 );
 
-@@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControl", "!javascript");
-@@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControlOperations", "javascript");
+@@clientLocation(
+  SourceControlOperationGroup.listRepositories,
+  "SourceControl",
+  "!javascript"
+);
+@@clientLocation(
+  SourceControlOperationGroup.listRepositories,
+  "SourceControlOperations",
+  "javascript"
+);
 @@clientName(SourceControlOperationGroup.listRepositories, "listRepositories");
 
 @@clientLocation(
