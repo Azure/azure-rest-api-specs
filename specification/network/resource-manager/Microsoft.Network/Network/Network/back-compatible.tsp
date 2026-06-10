@@ -14,6 +14,14 @@ using TypeSpec.Versioning;
   Microsoft.Network.VirtualApplianceNetworkInterfaceConfiguration.type,
   "NicType"
 );
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryMatchOperator,
+  "scrubbingRuleEntryMatchOperator"
+);
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryState,
+  "scrubbingRuleEntryState"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationGatewayIPConfiguration.properties);

@@ -5189,7 +5189,7 @@ union ScrubbingRuleEntryMatchVariable {
 /**
  * When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.
  */
-union scrubbingRuleEntryMatchOperator {
+union ScrubbingRuleEntryMatchOperator {
   string,
 
   /**
@@ -5206,7 +5206,7 @@ union scrubbingRuleEntryMatchOperator {
 /**
  * Defines the state of log scrubbing rule. Default value is Enabled.
  */
-union scrubbingRuleEntryState {
+union ScrubbingRuleEntryState {
   string,
 
   /**
@@ -24850,7 +24850,7 @@ model WebApplicationFirewallScrubbingRules {
   /**
    * When matchVariable is a collection, operate on the selector to specify which elements in the collection this rule applies to.
    */
-  selectorMatchOperator: scrubbingRuleEntryMatchOperator;
+  selectorMatchOperator: ScrubbingRuleEntryMatchOperator;
 
   /**
    * When matchVariable is a collection, operator used to specify which elements in the collection this rule applies to.
@@ -24860,7 +24860,7 @@ model WebApplicationFirewallScrubbingRules {
   /**
    * Defines the state of log scrubbing rule. Default value is Enabled.
    */
-  state?: scrubbingRuleEntryState;
+  state?: ScrubbingRuleEntryState;
 }
 
 /**
