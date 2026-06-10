@@ -47,10 +47,8 @@ model LongRunningOperationStatus<
 @@visibility(LongRunningOperationStatus.endTime, Lifecycle.Read);
 
 /**
- * Shared parameter model carrying the optional client-supplied
- * `Operation-Id` request header used by long-running action operations
- * (`:issueCert`, `:revokeCerts`, `:provision`, `:generateReport`). If
- * omitted, the service generates a GUID.
+ * Request `Operation-Id` header used by long-running action operations
+ * (POST `:verb` endpoints). If omitted, the service generates a GUID.
  */
 model LongRunningOperationIdHeader {
   /**
@@ -62,13 +60,8 @@ model LongRunningOperationIdHeader {
 }
 
 /**
- * Response-side counterpart of `LongRunningOperationIdHeader`. Long-running
- * action operations (`:issueCert`, `:revokeCerts`, `:provision`,
- * `:generateReport`) echo the operation's status-monitor ID back on the
- * `202` response per the Azure API Guidelines, so callers do not have to
- * parse the response body or the `Operation-Location` URL to obtain it. The
- * returned value is either the client-supplied `Operation-Id` request header
- * or the service-generated GUID.
+ * Response `Operation-Id` header used by long-running action operations
+ * (POST `:verb` endpoints).
  */
 model LongRunningOperationIdResponseHeader {
   /** The ID of the long-running operation's status monitor. */
@@ -77,10 +70,8 @@ model LongRunningOperationIdResponseHeader {
 }
 
 /**
- * Response-headers trait for long-running action triggers (POST `:verb`
- * endpoints). Emits both `Operation-Id` (status-monitor pointer) and
- * `Retry-After` (suggested initial polling interval) on the 202 response,
- * per the Azure API Guidelines.
+ * Response headers emitted on long-running action trigger responses, per
+ * the Azure API Guidelines.
  */
 alias LongRunningActionResponseHeadersTrait = ResponseHeadersTrait<
   RetryAfterHeader & LongRunningOperationIdResponseHeader,
@@ -88,11 +79,8 @@ alias LongRunningActionResponseHeadersTrait = ResponseHeadersTrait<
 >;
 
 /**
- * Response-headers trait for long-running operation status-monitor GETs.
- * Emits only `Retry-After` (suggested polling interval) on the 200 response
- * while the operation is still running. `Operation-Id` is intentionally
- * omitted: the client already has the operation ID in the request URL and
- * in the response body's `id` field.
+ * Response headers emitted on long-running operation status-monitor GETs
+ * while the operation is still running, per the Azure API Guidelines.
  */
 alias LongRunningStatusMonitorResponseHeadersTrait = ResponseHeadersTrait<
   RetryAfterHeader,

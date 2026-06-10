@@ -2545,7 +2545,7 @@
     },
     "LongRunningOperationIdResponseHeader": {
       "type": "object",
-      "description": "Response-side counterpart of `LongRunningOperationIdHeader`. Long-running\naction operations (`:issueCert`, `:revokeCerts`, `:provision`,\n`:generateReport`) echo the operation's status-monitor ID back on the\n`202` response per the Azure API Guidelines, so callers do not have to\nparse the response body or the `Operation-Location` URL to obtain it. The\nreturned value is either the client-supplied `Operation-Id` request header\nor the service-generated GUID."
+      "description": "Response `Operation-Id` header used by long-running action operations\n(POST `:verb` endpoints)."
     },
     "Namespace": {
       "type": "object",
