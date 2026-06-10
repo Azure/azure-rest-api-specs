@@ -24,6 +24,10 @@ union OperationKind {
   /** Device provisioning status report. */
   ProvisionDevice: "ProvisionDevice",
 
+  /** Device reprovisioning (move to a new IoT Hub). */
+  @added(Versions.v2026_11_02_preview)
+  ReprovisionDevice: "ReprovisionDevice",
+
   /** Compliance report describing the updating state of devices in the namespace. */
   NamespaceUpdateComplianceReport: "GenerateReport.NamespaceUpdateComplianceReport",
 

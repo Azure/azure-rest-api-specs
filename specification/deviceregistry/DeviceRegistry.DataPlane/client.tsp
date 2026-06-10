@@ -11,6 +11,7 @@ using Azure.ClientGenerator.Core;
 // Internal operations — hidden from public SDK surface.
 // Remove @@access lines below to promote an operation to public.
 @@access(Microsoft.DeviceRegistry.Devices.provision, Access.internal);
+@@access(Microsoft.DeviceRegistry.Devices.reprovision, Access.internal);
 @@access(Microsoft.DeviceRegistry.Devices.query, Access.internal);
 @@access(Microsoft.DeviceRegistry.Devices.getDeviceByExternalId,
   Access.internal

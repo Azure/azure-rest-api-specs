@@ -124,6 +124,22 @@ model ProvisionDeviceRequest {
   deviceTwin?: DeviceTwin;
 }
 
+// ──────────────────────────────────────────────
+// Provision mode
+// ──────────────────────────────────────────────
+
+/** Controls which operations ADR performs during provisioning. */
+@added(Versions.v2026_11_02_preview)
+union ProvisionMode {
+  string,
+
+  /** Full provisioning: ADR creates the device in IoT Hub and sets twin data. */
+  Full: "full",
+
+  /** Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub. */
+  RegistryOnly: "registryOnly",
+}
+
 /** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionDeviceResult {
@@ -138,6 +154,46 @@ model ProvisionDeviceResult {
 
   /** Reference to the messaging endpoint the device was provisioned against. */
   endpoint: ProvisionedEndpointRef;
+}
+
+// ──────────────────────────────────────────────
+// Reprovision device models
+// ──────────────────────────────────────────────
+
+/** The mode controlling how the device twin is populated on the new IoT Hub during reprovisioning. */
+@added(Versions.v2026_11_02_preview)
+union DeviceTwinMode {
+  string,
+
+  /** Copy tags and desired properties from the old hub to the new hub. */
+  Migrate: "Migrate",
+
+  /** Set tags and desired properties on the new hub to the caller-supplied values. Use with empty objects to reset the twin. */
+  Replace: "Replace",
+}
+
+/** Device twin configuration for reprovisioning with an explicit mode. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required to extend DeviceTwin with the mode discriminator while preserving the existing wire shape."
+@added(Versions.v2026_11_02_preview)
+model ReprovisionDeviceTwin extends DeviceTwin {
+  /** How to populate the device twin on the new IoT Hub. */
+  mode: DeviceTwinMode;
+}
+
+/** Request body for the reprovision device endpoint. */
+@added(Versions.v2026_11_02_preview)
+model ReprovisionDeviceRequest {
+  /** The target IoT Hub endpoint (the new hub) to move the device to. */
+  targetEndpoint: IotHubEndpoint;
+
+  /** Optional authentication configuration. If omitted, the device's existing AuthenticationProfile is preserved. If supplied, a new AuthenticationProfile is created and the old one is deleted after success. */
+  authentication?: AuthenticationProfileProperties;
+
+  /** Optional device twin configuration controlling how the new hub's twin is populated. If omitted, the new hub starts with an empty twin. */
+  deviceTwin?: ReprovisionDeviceTwin;
+
+  /** Optional device UUID guard. If supplied and does not match the device's stored UUID, the request is rejected. */
+  deviceUuid?: string;
 }
 
 // ──────────────────────────────────────────────
@@ -176,7 +232,28 @@ interface Devices {
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
-    ProvisionDeviceRequest,
+    {
+      /** Controls which operations ADR performs. Defaults to full when omitted. */
+      @query
+      mode?: ProvisionMode;
+
+      ...ProvisionDeviceRequest;
+    },
+    ProvisionDeviceResult
+  >;
+
+  /** Reprovision an existing device to a new IoT Hub within the same namespace. */
+  @pollingOperation(Operations.get)
+  @added(Versions.v2026_11_02_preview)
+  reprovision is ResourceOperations.LongRunningResourceAction<
+    Device,
+    {
+      /** The ETag of the device resource. Used to prevent concurrent modifications. */
+      @header("If-Match")
+      ifMatch?: string;
+
+      ...ReprovisionDeviceRequest;
+    },
     ProvisionDeviceResult
   >;
 }

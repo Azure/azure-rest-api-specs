@@ -1,0 +1,32 @@
+{
+  "operationId": "Devices_Provision",
+  "title": "Provision a device from IoT Hub (registry-only mode, X509 Hub-uploaded CA)",
+  "parameters": {
+    "endpoint": "https://eastus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "mode": "registryOnly",
+    "body": {
+      "iotHubDeviceId": "hub-device-001",
+      "targetEndpoint": {
+        "name": "my-iothub",
+        "address": "my-iothub.azure-devices.net"
+      },
+      "authentication": {
+        "type": "X509HubUploadedCertificateAuthority"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/operations/op-hub-prov-001"
+      },
+      "body": {
+        "id": "op-hub-prov-001",
+        "kind": "ProvisionDevice",
+        "status": "InProgress"
+      }
+    }
+  }
+}
