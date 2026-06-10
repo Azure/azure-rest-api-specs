@@ -112,7 +112,7 @@ using Azure.Core;
 @@alternateType(MoboBrokerResource.id, armResourceIdentifier, "csharp");
 @@clientName(
   RecoveryResourceProperties.needsAttention,
-  "RequiresAttention",
+  "IsAttentionRequired",
   "csharp"
 );
 @@clientName(DrillRunAddNotesRequest.timestamp, "RecordedOn", "csharp");
@@ -138,6 +138,9 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(GoalResource, "GoalMembers", "csharp");
-@@clientName(RecoveryResource, "ResilienceMembers", "csharp");
+@@clientName(RecoveryResource, "RecoveryMembers", "csharp");
 @@clientName(Drill, "ResilienceManagementDrill", "csharp");
 @@clientName(Enrollment, "UsagePlanEnrollment", "csharp");
+@@clientName(GoalType, "ResilienceManagementGoalType", "csharp");
+@@clientName(MembershipType, "ResilienceManagementMembershipType", "csharp");
+@@clientName(JobStatus, "ResilienceManagementJobStatus", "csharp");
