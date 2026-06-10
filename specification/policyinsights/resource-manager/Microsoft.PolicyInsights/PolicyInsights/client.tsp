@@ -2059,6 +2059,8 @@ op attestationsListForResource(
 @@scope(Remediations.createOrUpdateAtManagementGroup, "!csharp");
 @@scope(Remediations.deleteAtManagementGroup, "!csharp");
 @@scope(Remediations.listForManagementGroup, "!csharp");
+@@scope(RemediationsOperationGroup.listDeploymentsAtManagementGroup, "!csharp");
+@@scope(RemediationsOperationGroup.cancelAtManagementGroup, "!csharp");
 @@scope(Remediations.getAtSubscription, "!csharp");
 @@scope(Remediations.createOrUpdateAtSubscription, "!csharp");
 @@scope(Remediations.deleteAtSubscription, "!csharp");
@@ -2073,14 +2075,14 @@ op attestationsListForResource(
 @@scope(Remediations.cancelAtResourceGroup, "!csharp");
 
 // Attestations: hide subscription and resource-group scope operations from C#
-// @@scope(Attestations.getAtSubscription, "!csharp");
-// @@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
-// @@scope(Attestations.deleteAtSubscription, "!csharp");
-// @@scope(Attestations.listForSubscription, "!csharp");
-// @@scope(Attestations.getAtResourceGroup, "!csharp");
-// @@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
-// @@scope(Attestations.deleteAtResourceGroup, "!csharp");
-// @@scope(Attestations.listForResourceGroup, "!csharp");
+@@scope(Attestations.getAtSubscription, "!csharp");
+@@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Attestations.deleteAtSubscription, "!csharp");
+@@scope(Attestations.listForSubscription, "!csharp");
+@@scope(Attestations.getAtResourceGroup, "!csharp");
+@@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Attestations.deleteAtResourceGroup, "!csharp");
+@@scope(Attestations.listForResourceGroup, "!csharp");
 
 // Restore ResourceData base class on response models that GA's autorest emitted
 // as ResourceData-derived (they have id/name/type fields).
@@ -2131,30 +2133,107 @@ op attestationsListForResource(
 // class and the REST operations class. The renames below avoid that pattern —
 // only ops whose default name doesn't already match GA AND whose new name does
 // not collide with another rename in the same target class.
-@@clientName(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition, "GetQueryResultsForPolicyDefinitionPolicyEvents", "csharp");
-@@clientName(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition, "GetQueryResultsForPolicySetDefinitionPolicyEvents", "csharp");
-@@clientName(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment, "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyEvents", "csharp");
-@@clientName(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment, "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyEvents", "csharp");
 
-@@clientName(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition, "GetQueryResultsForPolicyDefinitionPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition, "GetQueryResultsForPolicySetDefinitionPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment, "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment, "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.summarizeForPolicyDefinition, "SummarizeForPolicyDefinitionPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.summarizeForPolicySetDefinition, "SummarizeForPolicySetDefinitionPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment, "SummarizeForSubscriptionLevelPolicyAssignmentPolicyStates", "csharp");
-@@clientName(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment, "SummarizeForResourceGroupLevelPolicyAssignmentPolicyStates", "csharp");
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  "GetQueryResultsForPolicySetDefinitionPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyEvents",
+  "csharp"
+);
 
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription, "GetQueryResultsForSubscriptionComponentPolicyStates", "csharp");
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup, "GetQueryResultsForResourceGroupComponentPolicyStates", "csharp");
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResource, "GetQueryResultsForResourceComponentPolicyStates", "csharp");
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition, "GetQueryResultsForPolicyDefinitionComponentPolicyStates", "csharp");
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment, "GetQueryResultsForSubscriptionLevelPolicyAssignmentComponentPolicyStates", "csharp");
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment, "GetQueryResultsForResourceGroupLevelPolicyAssignmentComponentPolicyStates", "csharp");
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+  "GetQueryResultsForPolicySetDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "SummarizeForPolicyDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "SummarizeForPolicySetDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "SummarizeForSubscriptionLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "SummarizeForResourceGroupLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "GetQueryResultsForSubscriptionComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "GetQueryResultsForResourceGroupComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  "GetQueryResultsForResourceComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentComponentPolicyStates",
+  "csharp"
+);
 
 @@clientName(PolicyMetadataNonResourceOperationGroup.list, "GetAll", "csharp");
 
-@@clientName(Remediations.listDeploymentsAtResource, "GetDeployments", "csharp");
+@@clientName(
+  Remediations.listDeploymentsAtResource,
+  "GetDeployments",
+  "csharp"
+);
 @@clientName(Remediations.cancelAtResource, "Cancel", "csharp");
 @@alternateType(
   attestationsListForResource::parameters.queryOptions,
