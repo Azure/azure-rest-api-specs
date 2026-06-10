@@ -12,6 +12,10 @@ namespace Microsoft.Monitor {
    * Properties for an observability agent resource.
    */
   model ObservabilityAgentProperties {
+    /** The resource provisioning state. */
+    @visibility(Lifecycle.Read)
+    provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
+
     /** Resource ID of the Azure Monitor workspace where this agent stores the issues it produces. */
     monitoringAccountId: Azure.Core.armResourceIdentifier<[
       {
