@@ -12820,6 +12820,60 @@
         ]
       }
     },
+    "HttpMethod": {
+      "type": "string",
+      "description": "HTTP method for policy rule matching.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "x-ms-enum": {
+        "name": "HttpMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GET",
+            "value": "GET",
+            "description": "HTTP GET method."
+          },
+          {
+            "name": "POST",
+            "value": "POST",
+            "description": "HTTP POST method."
+          },
+          {
+            "name": "PUT",
+            "value": "PUT",
+            "description": "HTTP PUT method."
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "HTTP DELETE method."
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH",
+            "description": "HTTP PATCH method."
+          },
+          {
+            "name": "HEAD",
+            "value": "HEAD",
+            "description": "HTTP HEAD method."
+          },
+          {
+            "name": "OPTIONS",
+            "value": "OPTIONS",
+            "description": "HTTP OPTIONS method."
+          }
+        ]
+      }
+    },
     "Identity": {
       "type": "object",
       "description": "Identity for the resource.",
@@ -14224,7 +14278,10 @@
           "$ref": "#/definitions/PolicyRuleAction",
           "description": "The action to take when this rule matches."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "PolicyRuleAction": {
       "type": "string",
@@ -14266,7 +14323,7 @@
           "type": "array",
           "description": "HTTP methods to match. If omitted, all methods are matched.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/HttpMethod"
           }
         }
       }

@@ -6549,7 +6549,36 @@ model PolicyRuleMatch {
   /**
    * HTTP methods to match. If omitted, all methods are matched.
    */
-  methods?: string[];
+  methods?: HttpMethod[];
+}
+
+/**
+ * HTTP method for policy rule matching.
+ */
+@added(Versions.v2026_07_01_preview)
+union HttpMethod {
+  string,
+
+  /** HTTP GET method. */
+  GET: "GET",
+
+  /** HTTP POST method. */
+  POST: "POST",
+
+  /** HTTP PUT method. */
+  PUT: "PUT",
+
+  /** HTTP DELETE method. */
+  DELETE: "DELETE",
+
+  /** HTTP PATCH method. */
+  PATCH: "PATCH",
+
+  /** HTTP HEAD method. */
+  HEAD: "HEAD",
+
+  /** HTTP OPTIONS method. */
+  OPTIONS: "OPTIONS",
 }
 
 /**
@@ -6560,7 +6589,7 @@ model PolicyRule {
   /**
    * Name of the rule. Must be unique within the policy.
    */
-  name?: string;
+  name: string;
 
   /**
    * Description of the rule.
