@@ -1164,7 +1164,7 @@ model ImmutabilityPolicyData {
   /**
    * The immutability duration for the snapshot, in number of days.
    */
-  @minValue(1)
+  @minValue(0)
   immutabilityDurationDays: int32;
 
   /**
