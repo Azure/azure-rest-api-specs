@@ -673,6 +673,10 @@ namespace CombineClient {
 @@access(Microsoft.Network.VpnServerConfigurationProperties.etag, Azure.ClientGenerator.Core.Access.internal, "csharp");
 @@clientName(Microsoft.Network.NetworkVirtualApplianceConnectionProperties.name, "NamePropertiesName", "csharp");
 
+// C# API compatibility: previous GA exposed these ETag fields as Azure.ETag.
+@@alternateType(Common.NetworkInterfaceIPConfiguration.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Common.SecurityRule.etag, Azure.Core.eTag, "csharp");
+
 // Java naming mitigations
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.hostName,
