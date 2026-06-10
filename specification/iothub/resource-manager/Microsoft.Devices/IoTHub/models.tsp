@@ -431,7 +431,7 @@ union RouteErrorSeverity {
 /**
  * The permissions assigned to the shared access policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of access-right combinations (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum AccessRights {
   /**
    * RegistryRead
@@ -512,7 +512,7 @@ enum AccessRights {
 /**
  * The desired action for requests captured by this rule.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IpFilterActionType {
   /**
    * Accept
@@ -528,7 +528,7 @@ enum IpFilterActionType {
 /**
  * The billing tier for the IoT hub.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of billing tiers (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubSkuTier {
   /**
    * Free
@@ -554,7 +554,7 @@ enum IotHubSkuTier {
 /**
  * The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of identity types (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -580,7 +580,7 @@ enum ResourceIdentityType {
 /**
  * The type of the scaling enabled.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubScaleType {
   /**
    * Automatic
@@ -601,7 +601,7 @@ enum IotHubScaleType {
 /**
  * The status of the job.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of job statuses (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum JobStatus {
   /**
    * unknown
@@ -637,7 +637,7 @@ enum JobStatus {
 /**
  * The reason for unavailability.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is a fixed, closed set of values (modelAsString: false) in the published API; retained as a closed enum to preserve backward compatibility."
 enum IotHubNameUnavailabilityReason {
   /**
    * Invalid
@@ -743,13 +743,13 @@ model IotHubProperties {
   /**
    * If true, all device(including Edge devices but excluding modules) scoped SAS keys cannot be used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained as-is to preserve backward compatibility with the published API; 'SAS' is a well-known acronym."
   disableDeviceSAS?: boolean;
 
   /**
    * If true, all module scoped SAS keys cannot be used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained as-is to preserve backward compatibility with the published API; 'SAS' is a well-known acronym."
   disableModuleSAS?: boolean;
 
   /**
@@ -791,7 +791,7 @@ model IotHubProperties {
   /**
    * The provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "provisioningState is typed as a free-form string in the published API; retained as-is to preserve backward compatibility."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -822,7 +822,7 @@ model IotHubProperties {
   /**
    * The Event Hub-compatible endpoint properties. The only possible keys to this dictionary is events. This key has to be present in the dictionary while making create or update calls for the IoT hub.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a dynamically-keyed dictionary of endpoints in the published API; a Record type is required to represent the open-ended key set."
   eventHubEndpoints?: Record<EventHubProperties>;
 
   /**
@@ -833,13 +833,13 @@ model IotHubProperties {
   /**
    * The list of Azure Storage endpoints where you can upload files. Currently you can configure only one Azure Storage account and that MUST have its key as $default. Specifying more than one storage account causes an error to be thrown. Not specifying a value for this property when the enableFileUploadNotifications property is set to True, causes an error to be thrown.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a dynamically-keyed dictionary of storage endpoints in the published API; a Record type is required to represent the open-ended key set."
   storageEndpoints?: Record<StorageEndpointProperties>;
 
   /**
    * The messaging endpoint properties for the file upload notification queue.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This is a dynamically-keyed dictionary of messaging endpoints in the published API; a Record type is required to represent the open-ended key set."
   messagingEndpoints?: Record<MessagingEndpointProperties>;
 
   /**
@@ -941,13 +941,13 @@ model SharedAccessSignatureAuthorizationRule {
   /**
    * The primary key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is part of the established response contract of the published API and cannot be removed without a breaking change."
   primaryKey?: string;
 
   /**
    * The secondary key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is part of the established response contract of the published API and cannot be removed without a breaking change."
   secondaryKey?: string;
 
   /**
@@ -1020,7 +1020,7 @@ model NetworkRuleSetIpRule {
 /**
  * The properties of a private endpoint connection
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "provisioningState on this properties model is typed per the published API contract and retained as-is to preserve backward compatibility."
 model PrivateEndpointConnectionProperties {
   /**
    * The private endpoint property of a private endpoint connection
@@ -1150,7 +1150,7 @@ model RoutingEndpoints {
   /**
    * The list of Cosmos DB container endpoints that IoT hub routes messages to, based on the routing rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name retained to match the published API; 'DB' reflects the Cosmos DB product name."
   cosmosDBSqlContainers?: RoutingCosmosDBSqlApiProperties[];
 }
 
@@ -1399,7 +1399,7 @@ model RoutingStorageContainerProperties {
 /**
  * The properties related to a cosmos DB sql container endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name retained to match the published API schema name; 'DB' reflects the Cosmos DB product name."
 model RoutingCosmosDBSqlApiProperties {
   /**
    * The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.
@@ -1543,7 +1543,7 @@ model EnrichmentProperties {
   /**
    * The key or name for the enrichment property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is the enrichment property key/name, not a secret; it is part of the published API contract and retained for backward compatibility."
   key: string;
 
   /**
@@ -1763,7 +1763,7 @@ model IotHubSkuInfo {
   capacity?: int64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model mirrors the published API identity contract; descriptions are retained as in the original specification."
 model ArmIdentity {
   /**
    * Principal Id
@@ -1785,17 +1785,17 @@ model ArmIdentity {
   /**
    * Dictionary of <ArmUserIdentity>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-assigned identities are keyed by resource ID in the published API; a Record type is required to represent the open-ended key set."
   userAssignedIdentities?: Record<ArmUserIdentity>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model mirrors the published API user-assigned identity contract; descriptions are retained as in the original specification."
 model ArmUserIdentity {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Property mirrors the published API user-assigned identity contract; description retained as in the original specification."
   @visibility(Lifecycle.Read)
   principalId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Property mirrors the published API user-assigned identity contract; description retained as in the original specification."
   @visibility(Lifecycle.Read)
   clientId?: string;
 }
@@ -1868,19 +1868,19 @@ model Resource {
   /**
    * The resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags are an open-ended, user-defined key/value dictionary; a Record type is required to represent the open-ended key set."
   tags?: Record<string>;
 }
 
 /**
  * A container holding only the Tags for a resource, allowing the user to update the tags on an IoT Hub instance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Tags-only PATCH body retained to match the published API update contract for backward compatibility."
 model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ARM resource tags are an open-ended, user-defined key/value dictionary; a Record type is required to represent the open-ended key set."
   tags?: Record<string>;
 }
 
@@ -2253,13 +2253,13 @@ model RoutingMessage {
   /**
    * App properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Message application properties are user-defined, free-form key/value pairs with no fixed schema; a Record type is required to represent the open-ended key set."
   appProperties?: Record<string>;
 
   /**
    * System properties
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Message system properties are a free-form key/value map with no fixed schema; a Record type is required to represent the open-ended key set."
   systemProperties?: Record<string>;
 }
 
@@ -2270,26 +2270,26 @@ model RoutingTwin {
   /**
    * Twin Tags
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device twin tags are user-defined, free-form key/value pairs with no fixed schema"
+  tags?: Record<unknown>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Property mirrors the published API device twin contract; description retained as in the original specification."
   properties?: RoutingTwinProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Model mirrors the published API device twin properties contract; description retained as in the original specification."
 model RoutingTwinProperties {
   /**
    * Twin desired properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  desired?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device Twin Desired properties are user-defined, free-form key/value pairs with no fixed schema"
+  desired?: Record<unknown>;
 
   /**
-   * Twin desired properties
+   * Twin reported properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  reported?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Device Twin Reported properties are user-defined, free-form key/value pairs with no fixed schema"
+  reported?: Record<unknown>;
 }
 
 /**
@@ -2514,7 +2514,7 @@ model CertificateListDescription {
 /**
  * The description of an X509 CA Certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This certificate properties model intentionally has no provisioningState in the published API; retained as-is to preserve backward compatibility."
 model CertificateProperties {
   /**
    * The certificate's subject name.
@@ -2568,9 +2568,9 @@ model CertificateProperties {
 /**
  * The X509 Certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This is a non-standard resource shape from the published API's Proof-Of-Possession flow; a custom resource is required to faithfully reproduce the existing contract."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "This custom resource is returned only as the body of the generate-verification-code action and is not directly addressable, so it has no resource key."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy custom-resource support is required to faithfully reproduce the published API's non-standard certificate resource shape."
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CertificateWithNonceDescription {
   /**
@@ -2698,7 +2698,7 @@ model PrivateLinkResources {
 /**
  * The properties for a group information object
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This group-information properties model intentionally has no provisioningState in the published API; retained as-is to preserve backward compatibility."
 model GroupIdInformationProperties {
   /**
    * The group id
