@@ -6,63 +6,63 @@ Condensed validation rules extracted from the [Azure PowerShell Design Guideline
 
 ## Naming Conventions {#naming}
 
-| Rule | Description |
-| ---- | ----------- |
-| **Verb-Noun format** | Use an [approved PowerShell verb](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands) + specific noun. |
-| **Az prefix** | ARM cmdlet nouns must start with `Az` (e.g., `Get-AzVM`). |
-| **Pascal case** | Capitalize the first letter of the verb and every term in the noun. |
-| **Two-char acronyms** | Fully capitalize (e.g., `VM`, `DB`). |
-| **3+ char acronyms** | Only capitalize the first letter (e.g., `Sql`, `Vmss`). |
-| **Singular nouns** | Use singular form (e.g., `Get-AzVM` not `Get-AzVMs`). |
-| **Set vs. Update** | `Set-` for PUT (full replace); `Update-` for PATCH (partial update). |
+| Rule                  | Description                                                                                                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Verb-Noun format**  | Use an [approved PowerShell verb](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands) + specific noun. |
+| **Az prefix**         | ARM cmdlet nouns must start with `Az` (e.g., `Get-AzVM`).                                                                                                                  |
+| **Pascal case**       | Capitalize the first letter of the verb and every term in the noun.                                                                                                        |
+| **Two-char acronyms** | Fully capitalize (e.g., `VM`, `DB`).                                                                                                                                       |
+| **3+ char acronyms**  | Only capitalize the first letter (e.g., `Sql`, `Vmss`).                                                                                                                    |
+| **Singular nouns**    | Use singular form (e.g., `Get-AzVM` not `Get-AzVMs`).                                                                                                                      |
+| **Set vs. Update**    | `Set-` for PUT (full replace); `Update-` for PATCH (partial update).                                                                                                       |
 
 ---
 
 ## Parameter Best Practices {#parameters}
 
-| Rule | Description |
-| ---- | ----------- |
-| **Three required parameter sets** | Interactive (`-Name` + `-ResourceGroupName`), ResourceId (`-ResourceId`), InputObject (`-InputObject`). |
-| **Pascal case** | Parameter names use Pascal case. |
-| **Specific types** | Never use `object`, `PSObject`, `PSCustomObject`, or `string` as output type. |
-| **-PassThru** | Cmdlets that return no output must implement `-PassThru` (returns `bool`). |
-| **-AsJob** | All long-running operations must support `-AsJob`. |
-| **ShouldProcess** | Cmdlets that create, delete, update, start, or stop resources must implement `SupportsShouldProcess` (adds `-WhatIf` and `-Confirm`). |
-| **-Force** | Only for scenarios requiring extra confirmation (e.g., overwriting existing resources, deleting containers with children). |
-| **Mandatory parameters** | Mark as `Mandatory = true` only when the cmdlet cannot function without the value. |
+| Rule                              | Description                                                                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Three required parameter sets** | Interactive (`-Name` + `-ResourceGroupName`), ResourceId (`-ResourceId`), InputObject (`-InputObject`).                               |
+| **Pascal case**                   | Parameter names use Pascal case.                                                                                                      |
+| **Specific types**                | Never use `object`, `PSObject`, `PSCustomObject`, or `string` as output type.                                                         |
+| **-PassThru**                     | Cmdlets that return no output must implement `-PassThru` (returns `bool`).                                                            |
+| **-AsJob**                        | All long-running operations must support `-AsJob`.                                                                                    |
+| **ShouldProcess**                 | Cmdlets that create, delete, update, start, or stop resources must implement `SupportsShouldProcess` (adds `-WhatIf` and `-Confirm`). |
+| **-Force**                        | Only for scenarios requiring extra confirmation (e.g., overwriting existing resources, deleting containers with children).            |
+| **Mandatory parameters**          | Mark as `Mandatory = true` only when the cmdlet cannot function without the value.                                                    |
 
 ---
 
 ## Output Type Rules
 
-| Rule | Description |
-| ---- | ----------- |
-| **Specific OutputType** | Always declare `[OutputType(typeof(...))]` with a concrete type. |
-| **Wrap SDK types** | Return `PS*` wrapper types (e.g., `PSVirtualMachine`) instead of raw .NET SDK types. |
-| **Enumerate collections** | Use `WriteObject(collection, true)` to enumerate — never return a raw `List<T>`. |
-| **No string returns** | If you need to return string data, wrap it in a typed object. |
+| Rule                      | Description                                                                          |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| **Specific OutputType**   | Always declare `[OutputType(typeof(...))]` with a concrete type.                     |
+| **Wrap SDK types**        | Return `PS*` wrapper types (e.g., `PSVirtualMachine`) instead of raw .NET SDK types. |
+| **Enumerate collections** | Use `WriteObject(collection, true)` to enumerate — never return a raw `List<T>`.     |
+| **No string returns**     | If you need to return string data, wrap it in a typed object.                        |
 
 ---
 
 ## Piping Best Practices {#piping}
 
-| Rule | Description |
-| ---- | ----------- |
-| **InputObject piping** | Support `Get-Az* | Update-Az*` by accepting the output type of the source cmdlet. |
-| **ResourceId piping** | Support `Get-AzResource | Remove-Az*` via the `-ResourceId` parameter set. |
-| **ValueFromPipeline** | Mark `-InputObject` with `ValueFromPipeline = true`. |
+| Rule                                | Description                                                       |
+| ----------------------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------- |
+| **InputObject piping**              | Support `Get-Az\*                                                 | Update-Az\*` by accepting the output type of the source cmdlet. |
+| **ResourceId piping**               | Support `Get-AzResource                                           | Remove-Az\*`via the`-ResourceId` parameter set.                 |
+| **ValueFromPipeline**               | Mark `-InputObject` with `ValueFromPipeline = true`.              |
 | **ValueFromPipelineByPropertyName** | Mark `-ResourceId` with `ValueFromPipelineByPropertyName = true`. |
 
 ---
 
 ## ShouldProcess & Confirm Impact
 
-| Scenario | ConfirmImpact | Behavior |
-| -------- | ------------- | -------- |
-| Read-only (Get) | None | No confirmation |
-| Low-risk change | Low | Confirms only with `-Confirm` |
-| Standard mutation (New, Set, Update) | Medium | Confirms only with `-Confirm` |
-| Destructive action (Remove, Stop) | High | Always prompts unless `-Force` is used |
+| Scenario                             | ConfirmImpact | Behavior                               |
+| ------------------------------------ | ------------- | -------------------------------------- |
+| Read-only (Get)                      | None          | No confirmation                        |
+| Low-risk change                      | Low           | Confirms only with `-Confirm`          |
+| Standard mutation (New, Set, Update) | Medium        | Confirms only with `-Confirm`          |
+| Destructive action (Remove, Stop)    | High          | Always prompts unless `-Force` is used |
 
 ---
 

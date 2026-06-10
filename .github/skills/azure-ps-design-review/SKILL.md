@@ -28,12 +28,12 @@ A conversational skill that guides developers through building a complete PowerS
 
 Then reload the VS Code window and retry.
 
-| Tool | Purpose |
-| ---- | ------- |
+| Tool                                  | Purpose                                                                                                                                                                 |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `github-mcp-server:get_file_contents` | **Primary tool for reading PR changes.** Read TypeSpec files from the PR branch (`refs/pull/{number}/head`) and base branch to diff and identify new/changed resources. |
-| `github-mcp-server:create_issue` | Create the design review issue in `Azure/azure-powershell-cmdlet-review-pr` |
-| `github-mcp-server:search_code` | Search for existing cmdlet patterns in `Azure/azure-powershell` for consistency |
-| `github-mcp-server:list_issues` | Check for existing design reviews to avoid duplicates |
+| `github-mcp-server:create_issue`      | Create the design review issue in `Azure/azure-powershell-cmdlet-review-pr`                                                                                             |
+| `github-mcp-server:search_code`       | Search for existing cmdlet patterns in `Azure/azure-powershell` for consistency                                                                                         |
+| `github-mcp-server:list_issues`       | Check for existing design reviews to avoid duplicates                                                                                                                   |
 
 ## Constraints
 
@@ -63,14 +63,15 @@ Several interview steps require multi-line input (cmdlet syntax blocks, piping e
 
 **When to use scratch files** (vs. chat input):
 
-| Input type | Method |
-| ---------- | ------ |
-| Short answers (release type, date, module name, contacts) | Chat input — ask directly |
+| Input type                                                                                                              | Method                                       |
+| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| Short answers (release type, date, module name, contacts)                                                               | Chat input — ask directly                    |
 | Multi-line content (cmdlet syntax, piping examples, sample usage, business logic, test scenarios, feature descriptions) | **Scratch file** — create and open in editor |
 
 **IMPORTANT**: Do **NOT** ask for multi-line content in the chat input box. Always create a scratch file for any response that would reasonably span more than 2–3 lines. This includes feature descriptions, piping scenarios, sample usage, cmdlet syntax blocks, business logic, and test scenarios. The chat input box is too small for formatted content.
 
 **Scratch file conventions**:
+
 - Location: `.github/skills/azure-ps-design-review/scratch/` (gitignored)
 - Format: Markdown with `<!-- INSTRUCTION: ... -->` comments guiding the developer
 - One file per step that needs it, or a single combined file — agent decides based on complexity
@@ -111,8 +112,8 @@ Copy and update as you progress:
 > 2. I'll ask a few quick questions (release type, contacts, etc.)
 > 3. I'll create a pre-filled design draft — you just fill in the long-form sections
 > 4. I validate against design guidelines and file the review issue
-In a follow-up popup, ask for the TypeSpec PR link with clear instructions. Example:
-> To get started, paste the link to your TypeSpec PR (e.g., `https://github.com/Azure/azure-rest-api-specs/pull/12345`).
+>    In a follow-up popup, ask for the TypeSpec PR link with clear instructions. Example:
+>    To get started, paste the link to your TypeSpec PR (e.g., `https://github.com/Azure/azure-rest-api-specs/pull/12345`).
 
 **If the developer already provided the PR link in their initial message**, skip the introduction and proceed directly to ingesting the PR.
 
@@ -137,7 +138,7 @@ In a follow-up popup, ask for the TypeSpec PR link with clear instructions. Exam
    - Current parameter sets (Interactive, ResourceId, InputObject, etc.)
    - Output type (`OutputType` attribute)
    - Whether `ShouldProcess`, `AsJob`, or `PassThru` are already implemented
-   This gives the agent a baseline of what the cmdlet already supports.
+     This gives the agent a baseline of what the cmdlet already supports.
 7. **Classify each cmdlet as New, Changed, or Unchanged**:
    - **New Cmdlet**: No existing cmdlet matches the verb+noun combination (e.g., `Update-AzSnapshot` doesn't exist yet)
    - **Changed Cmdlet**: An existing cmdlet matches, AND the TypeSpec PR introduces parameters, properties, or operations that are **not already present** in the existing cmdlet source. Only include changes that are actually new — do not flag parameters or behaviors that the cmdlet already supports.
@@ -170,6 +171,7 @@ In a follow-up popup, ask for the TypeSpec PR link with clear instructions. Exam
 > 8. **Feature flags or restrictions**: (optional)
 
 **Rules**:
+
 - Ask all questions in a list of follow-ups in the follow-up popup window so the developer can answer them all at once.
 - Pre-fill any values the agent can infer from the PR and ask the developer to confirm or correct.
 - The developer can answer in any format — numbered list, paragraph, etc. The agent parses the response.
@@ -184,8 +186,9 @@ In a follow-up popup, ask for the TypeSpec PR link with clear instructions. Exam
 
 Use this template — `{...}` values are filled from Steps 1 and 2:
 
-```markdown
+````markdown
 # PowerShell Design Review Draft
+
 <!-- Review the pre-filled sections and fill in the TODO sections.
      Only the long-form sections (scenarios, business logic, sample code) need your input.
      Everything else has been pre-filled from your PR and chat answers. -->
@@ -207,45 +210,54 @@ Use this template — `{...}` values are filled from Steps 1 and 2:
 ## High-Level Scenarios
 
 ### Feature Description
+
 {PR_DESCRIPTION_OR_TITLE}
+
 <!-- TODO: Expand on the above if needed. Describe how this feature is intended to be used by customers. -->
 
 ### Piping Scenarios
+
 <!-- TODO: Show how these cmdlets integrate with existing cmdlets.
      Example: Get-AzVM | Update-AzVM -Tag @{env="prod"}
      Example: Get-AzSnapshot -ResourceGroupName "rg1" | Remove-AzSnapshot -->
 
-
 ### End-to-End Sample Usage
+
 <!-- TODO: Provide comprehensive examples that don't assume additional setup. -->
 
 ```powershell
 
 ```
+````
 
 ## New Cmdlets
 
 <!-- If no new cmdlets, write "N/A" -->
 
 {FOR_EACH_NEW_CMDLET}
+
 ### {CMDLET_NAME} <!-- FROM TYPESPEC -->
 
 **Parameters:** <!-- FROM TYPESPEC — verify and add descriptions -->
 
 | Parameter | Type | Mandatory | Description |
-|-----------|------|-----------|-------------|
+| --------- | ---- | --------- | ----------- |
+
 {PARAMETER_ROWS}
 
 **Business Logic:**
+
 <!-- TODO: Describe what this cmdlet does and any important behavioral details. -->
 
 **Sample Syntax and Output:**
+
 <!-- TODO: Add a PowerShell code block showing usage and expected output. -->
 
 ```powershell
 PS C:\> {CMDLET_NAME} -ResourceGroupName "rg1" -Name "example"
 
 ```
+
 {END_FOR_EACH}
 
 ## Changed Cmdlets
@@ -253,19 +265,23 @@ PS C:\> {CMDLET_NAME} -ResourceGroupName "rg1" -Name "example"
 <!-- If no changed cmdlets, write "N/A" -->
 
 {FOR_EACH_CHANGED_CMDLET}
+
 ### {CMDLET_NAME}
 
 **New/Changed Parameters:**
+
 <!-- TODO: List the new or changed parameters, types, and allowed values. -->
 
 | Parameter | Type | Mandatory | Description |
-|-----------|------|-----------|-------------|
+| --------- | ---- | --------- | ----------- |
 |           |      |           |             |
 
 **Business Logic Changes:**
+
 <!-- TODO: Describe what changed and why. -->
 
 **Sample Syntax or Diff:**
+
 <!-- TODO: Add a PowerShell code block or diff showing the change. -->
 
 ```powershell
@@ -273,11 +289,13 @@ PS C:\> {CMDLET_NAME} -ResourceGroupName "rg1" -Name "example"
 ```
 
 **Affected Parameter Sets:**
+
 <!-- TODO: Which parameter sets are affected by this change? -->
 
 {END_FOR_EACH}
 
 ## Test Cases
+
 <!-- TODO: List every test scenario for this feature.
      Focus on feature-specific behavior — do NOT include tests for standard PowerShell
      patterns like -WhatIf, -Confirm, -AsJob, -PassThru, or -Force (these are handled
@@ -294,9 +312,10 @@ PS C:\> {CMDLET_NAME} -ResourceGroupName "rg1" -Name "example"
      8. Create snapshot with duplicate name in same RG → returns conflict error
 -->
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
+
 ## Additional Information
 
 - **Link to TypeSpec / OpenAPI spec**: {PR_URL}
@@ -306,7 +325,8 @@ PS C:\> {CMDLET_NAME} -ResourceGroupName "rg1" -Name "example"
 ---
 
 > _Created with help from PS design skill_
-```
+
+````
 
 **What should be pre-filled** (not TODO):
 - All service release details (from Step 2 chat)
@@ -406,8 +426,10 @@ For edge cases or when the developer requests detailed rationale, fetch the full
       }
     }
   }
-  ```
-  Do NOT fall back to `gh` CLI, `git`, `curl`, or PowerShell commands. Wait for the developer to fix the MCP configuration and retry.
+````
+
+Do NOT fall back to `gh` CLI, `git`, `curl`, or PowerShell commands. Wait for the developer to fix the MCP configuration and retry.
+
 - **No TypeSpec PR available**: The PR link is required. If the developer doesn't have one yet, advise them to create and submit their TypeSpec PR first, then return to this skill.
 - **GitHub issue creation fails**: Verify the developer has write access to `Azure/azure-powershell-cmdlet-review-pr`. If not, output the Markdown spec so they can file it manually.
 - **Design guideline questions**: Fetch the full guideline document from `Azure/azure-powershell/documentation/development-docs/design-guidelines/` for detailed rationale.
