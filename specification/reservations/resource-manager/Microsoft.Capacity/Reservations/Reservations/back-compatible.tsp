@@ -51,5 +51,3 @@ using Reservations;
 @@clientLocation(CalculateExchangeOperationGroup.post, "CalculateExchange");
 
 @@clientLocation(ExchangeOperationGroup.post, "Exchange");
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Mark collection action placement"
-@@clientOption(AlertActions.simulate, "resource-operation-kind", "CollectionAction", "csharp");
