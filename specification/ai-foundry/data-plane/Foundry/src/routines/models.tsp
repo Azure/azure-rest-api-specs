@@ -103,6 +103,12 @@ union RoutineRunPhase {
   failed: "failed",
 }
 
+@doc("The status of a routine run.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+union RoutineRunStatus {
+  string,
+}
+
 alias RoutineTriggers = Record<RoutineTrigger>;
 
 @doc("Base model for a routine trigger.")
@@ -323,7 +329,7 @@ model RoutineRun {
   id: string;
 
   @doc("The run status.")
-  status?: string;
+  status?: RoutineRunStatus;
 
   @doc("The AgentExtensions lifecycle phase for the routine attempt.")
   phase?: RoutineRunPhase;
