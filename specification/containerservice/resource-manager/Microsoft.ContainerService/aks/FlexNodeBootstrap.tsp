@@ -50,6 +50,12 @@ model BootstrapAzureConfig {
   cloud?: string;
 
   /**
+   * Azure Resource Manager endpoint for the cloud environment.
+   */
+  @visibility(Lifecycle.Read)
+  resourceManagerEndpoint?: string;
+
+  /**
    * Target cluster identity.
    */
   @visibility(Lifecycle.Read)
