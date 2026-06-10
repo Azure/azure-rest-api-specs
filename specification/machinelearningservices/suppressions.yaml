@@ -24,3 +24,14 @@
     - options.@azure-tools/typespec-python.generate-test
   paths:
     - MachineLearningServices.Management/tspconfig.yaml
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: >
+    Brownfield horizontal conversion of frozen preview API versions (no version revving,
+    no API changes). New folders match the layout of the existing v1 MachineLearningServices.Management
+    and AzureAI.Assets folders in this service. Per aka.ms/convert-to-typespec.
+  paths:
+    - MachineLearningServices.Management.v2022_02_01_preview
+    - MachineLearningServices.Management.v2023_02_01_preview
+    - MFE.Dataplane.v2020_09_01_dataplanepreview
