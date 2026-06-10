@@ -37,7 +37,7 @@ model LongRunningOperationStatus<
 }
 
 // Mark all status-monitor fields read-only. `status` is automatically
-// recognised as the LRO status field because `OperationState` itself carries
+// recognized as the LRO status field because `OperationState` itself carries
 // `@lroStatus` in Azure Core's foundations.
 @@visibility(LongRunningOperationStatus.id, Lifecycle.Read);
 @@visibility(LongRunningOperationStatus.status, Lifecycle.Read);
