@@ -92,3 +92,29 @@ using Microsoft.ManagedNetworkFabric;
   "hostname",
   "java"
 );
+
+@@clientName(
+  Microsoft.ManagedNetworkFabric,
+  "ManagedNetworkFabricMgmtClient",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
+  "StaticRoutePolicy",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicyPatch,
+  "StaticRoutePolicyPatch",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainProperties.staticRouteRoutePolicy,
+  "staticRoutePolicy",
+  "python"
+);
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainPatchProperties.staticRouteRoutePolicy,
+  "staticRoutePolicy",
+  "python"
+);
