@@ -290,7 +290,7 @@ union CloudHsmClusterSkuName {
   Standard_B1: "Standard_B1",
 
   /** Standard B10 SKU */
-  `Standard B10`: "Standard B10",
+  StandardB10: "Standard B10",
 }
 
 /**
