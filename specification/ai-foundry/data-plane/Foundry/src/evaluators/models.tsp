@@ -56,6 +56,9 @@ union EvaluatorDefinitionType {
 
   @doc("Rubric-based evaluator definition. Stores dimensions (the scoring blueprint) for both quality and safety evaluators. Can be created via the generate API or manually via createVersion.")
   rubric: "rubric",
+
+  @doc("Endpoint-based evaluator definition. References a customer-owned HTTP endpoint via a Project Connection.")
+  endpoint: "endpoint",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -144,6 +147,15 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold?: float32 = 0.5;
+}
+
+@doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
+model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.endpoint;
+
+  @doc("Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity).")
+  @minLength(1)
+  connection_name: string;
 }
 
 // ============================================================================
