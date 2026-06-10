@@ -10,15 +10,15 @@ import {
   getLine,
   getPathSegment,
   iconFor,
-} from "../src/generateReport.js";
+} from "../src/generateReport.ts";
 import {
-  AutoRestMessage,
-  AutorestRunResult,
-  BeforeAfter,
-  LintDiffViolation,
-  Source,
-} from "../src/lintdiff-types.js";
-import { isWindows } from "./test-util.js";
+  type AutoRestMessage,
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+  type Source,
+} from "../src/lintdiff-types.ts";
+import { isWindows } from "./test-util.ts";
 
 import { vol } from "memfs";
 
@@ -32,7 +32,7 @@ vi.mock("node:fs/promises", async () => {
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { readFile } from "fs/promises";
 
-vi.mock("../src/util.js", async () => {
+vi.mock("../src/util.ts", async () => {
   const original = await vi.importActual("../src/util.js");
   return {
     ...original,
