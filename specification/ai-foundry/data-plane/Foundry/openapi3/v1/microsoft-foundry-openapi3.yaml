@@ -15,6 +15,7 @@ tags:
   - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
+  - name: CommandJob
   - name: Models
   - name: Memory Stores
   - name: Conversations
@@ -4729,6 +4730,524 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
+  /jobs:
+    get:
+      operationId: Jobs_list
+      description: List Jobs.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: jobType
+          in: query
+          required: false
+          description: Filter by job type (e.g. 'Command').
+          schema:
+            $ref: '#/components/schemas/JobType'
+          explode: false
+        - name: tag
+          in: query
+          required: false
+          description: Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').
+          schema:
+            type: string
+          explode: false
+        - name: listViewType
+          in: query
+          required: false
+          description: Specifies which view type to apply when listing jobs.
+          schema:
+            $ref: '#/components/schemas/ListViewType'
+          explode: false
+        - name: properties
+          in: query
+          required: false
+          description: 'Comma-separated user property names and optionally values. Example: prop1,prop2=value2.'
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+  /jobs/{name}:
+    get:
+      operationId: Jobs_get
+      description: Get a Job by name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+    put:
+      operationId: Jobs_createOrUpdate
+      description: Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+        description: The job to create or update.
+    delete:
+      operationId: Jobs_beginDelete
+      description: Delete a Job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '202':
+          description: Response returned when a job delete operation is accepted asynchronously.
+          headers:
+            Location:
+              required: true
+              description: URL to poll for the status of the delete operation.
+              schema:
+                type: string
+            Retry-After:
+              required: false
+              description: Suggested delay in seconds before polling.
+              schema:
+                type: integer
+                format: int32
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+  /jobs/{name}/cancel:
+    post:
+      operationId: Jobs_beginCancel
+      description: Cancel a Job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+        '202':
+          description: Response returned when a job cancel operation is accepted asynchronously.
+          headers:
+            Location:
+              required: true
+              description: URL to poll for the status of the cancel operation.
+              schema:
+                type: string
+            Retry-After:
+              required: false
+              description: Suggested delay in seconds before polling.
+              schema:
+                type: integer
+                format: int32
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts:
+    get:
+      operationId: Jobs_listArtifacts
+      description: List artifacts produced by a job's run.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: experimentId
+          in: path
+          required: true
+          description: The id of the experiment that owns the run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: Optional artifact path or path prefix to filter by.
+          schema:
+            type: string
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Continuation token for the next page.
+          schema:
+            type: string
+          explode: false
+        - name: pageSize
+          in: query
+          required: false
+          description: Maximum number of artifacts per page.
+          schema:
+            type: integer
+            format: int32
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactList'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts/prefix/contentinfo:
+    get:
+      operationId: Jobs_getArtifactContentInformation
+      description: Get content information for artifacts produced by a job's run.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: experimentId
+          in: path
+          required: true
+          description: The id of the experiment that owns the run.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: Optional artifact path prefix to filter by.
+          schema:
+            type: string
+          explode: false
+        - name: continuationToken
+          in: query
+          required: false
+          description: Continuation token for the next page.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactContentInformationList'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/runs/{runId}:
+    get:
+      operationId: Jobs_getRun
+      description: Get a job's run.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Run'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/runs/{runId}/details:
+    get:
+      operationId: Jobs_getRunDetails
+      description: Get runtime details for a job's run, including current status, log file URLs, warnings and any error information. Used to poll job progress and to stream log output.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunDetails'
+      tags:
+        - CommandJob
+  /jobs/{name}/history/runs/{runId}/serviceinstances/{nodeId}:
+    get:
+      operationId: Jobs_showServices
+      description: Get the runtime service instances associated with a job's node. Returns a map of service name to ServiceInstance describing interactive services (e.g. SSH, JupyterLab, VSCode, TensorBoard) currently running on the specified node.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: runId
+          in: path
+          required: true
+          description: The run identifier. For Jobs this currently matches the job name.
+          schema:
+            type: string
+        - name: nodeId
+          in: path
+          required: true
+          description: Zero-based index of the compute node to query.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunServiceInstances'
+      tags:
+        - CommandJob
   /memory_stores:
     post:
       operationId: createMemoryStore
@@ -10871,6 +11390,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Agentic identity credential definition
+    AllNodes:
+      type: object
+      required:
+        - nodesValueType
+      properties:
+        nodesValueType:
+          type: string
+          enum:
+            - All
+          description: Type of the Nodes value.
+      allOf:
+        - $ref: '#/components/schemas/NodeCollection'
+      description: All nodes means the service will be running on all of the nodes of the job.
     ApiErrorResponse:
       type: object
       required:
@@ -10897,6 +11429,114 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: API Key Credential definition
+    Artifact:
+      type: object
+      required:
+        - origin
+        - container
+        - path
+      properties:
+        artifactId:
+          type: string
+          description: The artifact id.
+        origin:
+          type: string
+          description: The artifact origin.
+        container:
+          type: string
+          description: The container name.
+        path:
+          type: string
+          description: The artifact path.
+        etag:
+          type: string
+          description: The artifact Etag.
+        createdTime:
+          type: string
+          format: date-time
+          description: The artifact creation time in UTC.
+        dataPath:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDataPath'
+          description: The artifact data path.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The artifact tags.
+      description: An artifact.
+    ArtifactContentInformation:
+      type: object
+      properties:
+        contentUri:
+          type: string
+          format: uri
+          description: The content URI.
+        origin:
+          type: string
+          description: The artifact origin.
+        container:
+          type: string
+          description: The container name.
+        path:
+          type: string
+          description: The artifact path.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The artifact tags.
+        contentLength:
+          type: integer
+          format: int64
+          description: The content byte length.
+      description: Artifact content information.
+    ArtifactContentInformationList:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArtifactContentInformation'
+          description: The entries in the page.
+        continuationToken:
+          type: string
+          description: Token for the next page.
+        nextLink:
+          type: string
+          description: URL for the next page.
+      description: A page of artifact content information.
+    ArtifactDataPath:
+      type: object
+      properties:
+        dataStoreName:
+          type: string
+          description: The data store name.
+        relativePath:
+          type: string
+          description: The relative path within the data store.
+        sqlDataPath:
+          description: SQL data path information.
+      description: A data store path.
+    ArtifactList:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Artifact'
+          description: The artifacts in the page.
+        continuationToken:
+          type: string
+          description: Token for the next page.
+        nextLink:
+          type: string
+          description: URL for the next page.
+      description: A page of artifacts.
     ArtifactProfile:
       type: object
       required:
@@ -10925,6 +11565,16 @@ components:
     AssetId:
       type: string
       description: Identifier of a saved asset.
+    AssetTypes:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - uri_file
+            - uri_folder
+            - safetensors_model
+            - literal
+      description: Type of job input/output asset.
     AttackStrategy:
       anyOf:
         - type: string
@@ -12498,6 +13148,115 @@ components:
             - bundled
             - remote_build
       description: How package dependencies are resolved at deployment time for a code-based hosted agent.
+    CommandJob:
+      type: object
+      required:
+        - jobType
+        - command
+        - environmentImageReference
+        - computeId
+      properties:
+        jobType:
+          type: string
+          enum:
+            - Command
+          description: Job type.
+        command:
+          type: string
+          description: The command to execute on startup of the job.
+        environmentImageReference:
+          type: string
+          description: ACR path of environment.
+        displayName:
+          type: string
+          description: Display name of job.
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: The asset property dictionary.
+        codeId:
+          type: string
+          description: Code asset reference.
+        computeId:
+          type: string
+          description: Compute resource ID.
+        inputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Input'
+          description: Mapping of input data bindings used in the job.
+        outputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Output'
+          description: Mapping of output data bindings used in the job.
+        environmentVariables:
+          type: object
+          additionalProperties:
+            type: string
+          description: Environment variables included in the job.
+        resources:
+          allOf:
+            - $ref: '#/components/schemas/JobResourceConfiguration'
+          description: Compute Resource configuration for the job.
+        distribution:
+          allOf:
+            - $ref: '#/components/schemas/DistributionConfiguration'
+          description: Distribution configuration of the job.
+        limits:
+          allOf:
+            - $ref: '#/components/schemas/CommandJobLimits'
+          description: Command Job limit.
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/JobService'
+          description: List of job services.
+        queueSettings:
+          allOf:
+            - $ref: '#/components/schemas/QueueSettings'
+          description: Queue settings for the job.
+        userAssignedIdentityId:
+          type: string
+          description: user-assigned managed identity
+        gpuCount:
+          type: integer
+          format: int32
+          description: Number of GPUs to allocate for the job.
+        isArchived:
+          type: boolean
+          description: Is the asset archived?
+        status:
+          type: string
+          description: Status of the job.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/JobProperties'
+      description: Properties of a Command Job.
+    CommandJobLimits:
+      type: object
+      required:
+        - jobLimitsType
+      properties:
+        jobLimitsType:
+          type: string
+          enum:
+            - Command
+          description: JobLimit type.
+        timeout:
+          type: string
+          format: duration
+          description: The max run duration, after which the job will be cancelled.
+      description: Command Job limit class.
     CompletionMessageToolCallChunk:
       type: object
       required:
@@ -13859,6 +14618,22 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    DistributionConfiguration:
+      type: object
+      required:
+        - distributionType
+      properties:
+        distributionType:
+          type: string
+          description: Specifies the type of distribution framework.
+      discriminator:
+        propertyName: distributionType
+        mapping:
+          PyTorch: '#/components/schemas/PyTorchDistribution'
+          Mpi: '#/components/schemas/MpiDistribution'
+          TensorFlow: '#/components/schemas/TensorFlowDistribution'
+          Ray: '#/components/schemas/RayDistribution'
+      description: Distribution configuration of the job.
     EntraAuthorizationScheme:
       type: object
       required:
@@ -13905,6 +14680,15 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+    ErrorAdditionalInfo:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The additional info type.
+        info:
+          description: The additional info.
+      description: The resource management error additional info.
     Eval:
       type: object
       required:
@@ -15968,6 +16752,48 @@ components:
           ManagedAzureSearch: '#/components/schemas/ManagedAzureAISearchIndexUpdate'
           CosmosDBNoSqlVectorStore: '#/components/schemas/CosmosDBIndexUpdate'
       description: Index resource Definition
+    InnerErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The error code.
+        innerError:
+          allOf:
+            - $ref: '#/components/schemas/InnerErrorResponse'
+          description: A nested structure of errors.
+      description: A nested structure of errors.
+    Input:
+      type: object
+      required:
+        - jobInputType
+      properties:
+        jobInputType:
+          allOf:
+            - $ref: '#/components/schemas/AssetTypes'
+          description: Specifies the type of job input.
+        uri:
+          type: string
+          description: Input Asset URI.
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/InputOutputModes'
+          description: Input Asset Delivery Mode.
+        value:
+          type: string
+          description: Literal value for literal-type inputs.
+      description: Job input definition.
+    InputOutputModes:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - ReadOnlyMount
+            - ReadWriteMount
+            - Download
+            - Direct
+            - Upload
+      description: Enum to determine the input/output data delivery mode.
     Insight:
       type: object
       required:
@@ -16335,6 +17161,145 @@ components:
             - synthetic_data_gen_preview
             - conversation_gen_preview
       description: The types of parameters for red team item generation.
+    Job:
+      type: object
+      required:
+        - name
+        - properties
+      properties:
+        name:
+          type: string
+          description: The name of the Job. This is case-sensitive.
+          readOnly: true
+        id:
+          type: string
+          description: The resource ID.
+          readOnly: true
+        type:
+          type: string
+          description: The resource type.
+          readOnly: true
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/JobProperties'
+          description: Properties of the job.
+        systemData:
+          allOf:
+            - $ref: '#/components/schemas/SystemData'
+          description: Metadata pertaining to creation and last modification of the resource.
+          readOnly: true
+      description: Job resource.
+    JobCost:
+      type: object
+      properties:
+        chargedCpuCoreSeconds:
+          type: number
+          format: double
+          description: Charged CPU core-seconds.
+        chargedCpuMemoryMegabyteSeconds:
+          type: number
+          format: double
+          description: Charged CPU memory megabyte-seconds.
+        chargedGpuSeconds:
+          type: number
+          format: double
+          description: Charged GPU seconds.
+        chargedNodeUtilizationSeconds:
+          type: number
+          format: double
+          description: Charged node utilization seconds.
+      description: Cost information for a job run.
+    JobErrorResponse:
+      type: object
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/RootError'
+          description: The root error.
+        correlation:
+          type: object
+          additionalProperties:
+            type: string
+          description: Dictionary containing correlation details for the error.
+        environment:
+          type: string
+          description: The hosting environment.
+        location:
+          type: string
+          description: Location.
+        time:
+          type: string
+          format: date-time
+          description: The time in UTC when the error occurred.
+        componentName:
+          type: string
+          description: Component name where the error originated or was encountered.
+      description: The error response returned for a job's service instance.
+    JobProperties:
+      type: object
+      required:
+        - jobType
+      properties:
+        jobType:
+          type: string
+          description: Job type.
+      discriminator:
+        propertyName: jobType
+        mapping:
+          Command: '#/components/schemas/CommandJob'
+      description: Base properties of a Job.
+    JobResourceConfiguration:
+      type: object
+      properties:
+        instanceCount:
+          type: integer
+          format: int32
+          description: Optional number of instances or nodes used by the compute target.
+        instanceType:
+          type: string
+          description: Optional type of VM used as supported by the compute target.
+        properties:
+          type: object
+          additionalProperties: {}
+          description: Additional properties bag.
+        shmSize:
+          type: string
+          description: Size of the docker container's shared memory block.
+        dockerArgs:
+          type: string
+          description: Extra arguments to pass to the Docker run command.
+      description: Compute Resource configuration for the job.
+    JobService:
+      type: object
+      properties:
+        jobServiceType:
+          type: string
+          description: Endpoint type.
+        port:
+          type: integer
+          format: int32
+          description: Port for endpoint.
+        endpoint:
+          type: string
+          description: Url for endpoint.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional properties to set on the endpoint.
+        nodes:
+          allOf:
+            - $ref: '#/components/schemas/AllNodes'
+          description: Nodes that user would like to start the service on.
+        status:
+          type: string
+          description: Status of endpoint.
+          readOnly: true
+        errorMessage:
+          type: string
+          description: Any error in the service.
+          readOnly: true
+      description: Job endpoint definition.
     JobStatus:
       anyOf:
         - type: string
@@ -16346,6 +17311,22 @@ components:
             - failed
             - cancelled
       description: Extensible status values shared by Foundry jobs.
+    JobType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Command
+      description: Type of a job.
+    ListViewType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - ActiveOnly
+            - ArchivedOnly
+            - All
+      description: Specifies which jobs to include in a list result based on their lifecycle state.
     LoraConfig:
       type: object
       properties:
@@ -17153,6 +18134,23 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Monthly recurrence schedule.
+    MpiDistribution:
+      type: object
+      required:
+        - distributionType
+      properties:
+        distributionType:
+          type: string
+          enum:
+            - Mpi
+          description: Specifies the type of distribution framework.
+        processCountPerNode:
+          type: integer
+          format: int32
+          description: Number of processes per MPI node.
+      allOf:
+        - $ref: '#/components/schemas/DistributionConfiguration'
+      description: MPI distribution configuration.
     NoAuthenticationCredentials:
       type: object
       required:
@@ -17167,6 +18165,18 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Credentials that do not require authentication
+    NodeCollection:
+      type: object
+      required:
+        - nodesValueType
+      properties:
+        nodesValueType:
+          type: string
+          description: Type of the Nodes value.
+      discriminator:
+        propertyName: nodesValueType
+        mapping: {}
+      description: Nodes that user would like to start the service on.
     OAuthConsentRequestOutputItem:
       type: object
       required:
@@ -32352,6 +33362,35 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview
+    Output:
+      type: object
+      required:
+        - jobOutputType
+      properties:
+        jobOutputType:
+          allOf:
+            - $ref: '#/components/schemas/AssetTypes'
+          description: Specifies the type of job output.
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/InputOutputModes'
+          description: Output Asset Delivery Mode.
+        assetName:
+          type: string
+          description: Name of the output data asset to register.
+        assetVersion:
+          type: string
+          description: Version of the output data asset to register.
+        uri:
+          type: string
+          description: Output Asset URI.
+        baseModelId:
+          type: string
+          description: Base model ID.
+        description:
+          type: string
+          description: Description for the output.
+      description: Job output definition.
     PageOrder:
       type: string
       enum:
@@ -32477,6 +33516,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of Insight items
+    PagedJob:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+          description: The Job items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of Job items
     PagedModelVersion:
       type: object
       required:
@@ -32811,6 +33865,30 @@ components:
           type: string
           description: The version string for the protocol, e.g. 'v0.1.1'.
       description: A record mapping for a single protocol and its version.
+    PyTorchDistribution:
+      type: object
+      required:
+        - distributionType
+      properties:
+        distributionType:
+          type: string
+          enum:
+            - PyTorch
+          description: Specifies the type of distribution framework.
+        processCountPerInstance:
+          type: integer
+          format: int32
+          description: Number of processes per node.
+      allOf:
+        - $ref: '#/components/schemas/DistributionConfiguration'
+      description: PyTorch distribution configuration.
+    QueueSettings:
+      type: object
+      properties:
+        jobTier:
+          type: string
+          description: Controls the compute job tier.
+      description: Queue settings for the job.
     RaiConfig:
       type: object
       required:
@@ -32820,6 +33898,39 @@ components:
           type: string
           description: The name of the RAI policy to apply.
       description: Configuration for Responsible AI (RAI) content filtering and safety features.
+    RayDistribution:
+      type: object
+      required:
+        - distributionType
+      properties:
+        distributionType:
+          type: string
+          enum:
+            - Ray
+          description: Specifies the type of distribution framework.
+        port:
+          type: integer
+          format: int32
+          description: The port of the head Ray process.
+        address:
+          type: string
+          description: The address of the Ray head node.
+        includeDashboard:
+          type: boolean
+          description: Whether to start the Ray dashboard GUI.
+        dashboardPort:
+          type: integer
+          format: int32
+          description: The port to bind the dashboard server to.
+        headNodeAdditionalArgs:
+          type: string
+          description: Additional arguments passed to ray start on the head node.
+        workerNodeAdditionalArgs:
+          type: string
+          description: Additional arguments passed to ray start on worker nodes.
+      allOf:
+        - $ref: '#/components/schemas/DistributionConfiguration'
+      description: Ray distribution configuration.
     RecurrenceSchedule:
       type: object
       required:
@@ -33100,6 +34211,51 @@ components:
             - SensitiveDataLeakage
             - TaskAdherence
       description: Risk category for the attack objective.
+    RootError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The service-defined error code.
+        severity:
+          type: integer
+          format: int32
+          description: The severity of the error.
+        message:
+          type: string
+          description: A human-readable representation of the error.
+        messageFormat:
+          type: string
+          description: An unformatted version of the message with no variable substitution.
+        messageParameters:
+          type: object
+          additionalProperties:
+            type: string
+          description: Value substitutions for the message format.
+        referenceCode:
+          type: string
+          description: A reference code for the error.
+        detailsUri:
+          type: string
+          description: A URI with more details about the error.
+        target:
+          type: string
+          description: The target of the error.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/RootError'
+          description: The related errors that occurred during the request.
+        innerError:
+          allOf:
+            - $ref: '#/components/schemas/InnerErrorResponse'
+          description: A nested structure of errors.
+        additionalInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorAdditionalInfo'
+          description: The error additional info.
+      description: The root error.
     Routine:
       type: object
       required:
@@ -33388,6 +34544,521 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
+    Run:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The display name of the run.
+        name:
+          type: string
+          description: The name of the run.
+        dataContainerId:
+          type: string
+          description: An identifier for the data associated with this run.
+        description:
+          type: string
+          description: A description of the run.
+        hidden:
+          type: boolean
+          description: Whether the run is hidden in run listings.
+        runType:
+          type: string
+          description: Run type categorization.
+        runTypeV2:
+          allOf:
+            - $ref: '#/components/schemas/RunTypeV2'
+          description: Run type information.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: The properties dictionary for the run.
+        parameters:
+          type: object
+          additionalProperties: {}
+          description: The parameters dictionary for the run.
+        actionUris:
+          type: object
+          additionalProperties:
+            type: string
+          description: Action URIs for the run, keyed by action name.
+        scriptName:
+          type: string
+          description: The script name associated with the run.
+        target:
+          type: string
+          description: The name of the compute target where the run is executed.
+        uniqueChildRunComputeTargets:
+          type: array
+          items:
+            type: string
+          description: The set of unique compute targets used by child runs.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The tag dictionary for the run. Tags are mutable.
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The run settings.
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/RunEndpointSetting'
+          description: The interactive run services for a run.
+        inputDatasets:
+          type: array
+          items: {}
+          description: A list of datasets used as input to the run.
+        outputDatasets:
+          type: array
+          items: {}
+          description: A list of datasets used as output to the run.
+        runDefinition:
+          description: The run definition specification.
+        jobSpecification:
+          description: The job specification
+        primaryMetricName:
+          type: string
+          description: The primary metric name for the run.
+        createdFrom:
+          description: Information about the source that created this run.
+        cancelUri:
+          type: string
+          description: URI used to cancel this run.
+        completeUri:
+          type: string
+          description: URI used to mark this run as complete.
+        diagnosticsUri:
+          type: string
+          description: URI used to retrieve diagnostics for this run.
+        virtualWorkspaceStorageArmId:
+          type: string
+          description: ARM id of the workspace.
+        computeRequest:
+          description: The compute requests for this run.
+        compute:
+          description: The compute record for this run.
+        retainForLifetimeOfWorkspace:
+          type: boolean
+          description: Whether the run should be retained for the lifetime of the workspace (root runs only).
+        queueingInfo:
+          description: Queueing information for this run.
+        inputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypedAssetReference'
+          description: The inputs for the run, keyed by input name.
+        outputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypedAssetReference'
+          description: The outputs for the run, keyed by output name.
+        runId:
+          type: string
+          description: The identifier for the run.
+        parentRunId:
+          type: string
+          description: The parent of the run if the run is hierarchical; otherwise, null.
+        experimentId:
+          type: string
+          description: The id of the experiment that created this run.
+        status:
+          type: string
+          description: The status of the run.
+        startTimeUtc:
+          type: string
+          format: date-time
+          description: The start time of the run in UTC.
+        endTimeUtc:
+          type: string
+          format: date-time
+          description: The end time of the run in UTC.
+        scheduleId:
+          type: string
+          description: The schedule that created this run, if it was created by a schedule.
+        runNumber:
+          type: integer
+          format: int32
+          description: The run number.
+        rootRunId:
+          type: string
+          description: The id of the root run in the hierarchy.
+        createdUtc:
+          type: string
+          format: date-time
+          description: The time the run was created in UTC.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/RunUser'
+          description: The user that created the run.
+        userId:
+          type: string
+          description: The id of the user that created the run.
+        token:
+          type: string
+          description: A token used for authenticating a run.
+        tokenExpiryTimeUtc:
+          type: string
+          format: date-time
+          description: The Token expiration time in UTC.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/RunErrorResponse'
+          description: Error details for the run, if any.
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunDetailsWarning'
+          description: A list of warnings that occurred during the run.
+        revision:
+          type: integer
+          format: int64
+          description: Revision number.
+        statusRevision:
+          type: integer
+          format: int64
+          description: Status revision number.
+        runUuid:
+          type: string
+          description: A system generated id for the run.
+        parentRunUuid:
+          type: string
+          description: A system generated id for the run's parent.
+        rootRunUuid:
+          type: string
+          description: A system generated id for the root of the run's hierarchy.
+        lastStartTimeUtc:
+          type: string
+          format: date-time
+          description: The last start time of the run in UTC.
+        currentComputeTime:
+          type: string
+          format: duration
+          description: The cumulative compute time for an active run.
+        computeDuration:
+          type: string
+          format: duration
+          description: The total compute time for a terminal run.
+        effectiveStartTimeUtc:
+          type: string
+          format: date-time
+          description: The effective start time of the run in UTC.
+        lastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/RunUser'
+          description: The user that last modified the run.
+        lastModifiedUtc:
+          type: string
+          format: date-time
+          description: The time the run was last modified in UTC.
+        duration:
+          type: string
+          format: duration
+          description: The total duration of the run.
+        cancelationReason:
+          type: string
+          description: The cancelation reason if the run was canceled.
+        currentAttemptId:
+          type: integer
+          format: int32
+          description: The AttemptId of the most recent attempt.
+      description: A job run.
+    RunDetails:
+      type: object
+      properties:
+        runId:
+          type: string
+          description: The identifier for the run.
+        runUuid:
+          type: string
+          description: A system generated id for the run.
+        parentRunUuid:
+          type: string
+          description: A system generated id for the run's parent.
+        rootRunUuid:
+          type: string
+          description: A system generated id for the root of the run's hierarchy.
+        target:
+          type: string
+          description: The name of the compute target where the run is executed.
+        status:
+          type: string
+          description: The status of the run.
+        parentRunId:
+          type: string
+          description: The parent of the run if the run is hierarchical.
+        dataContainerId:
+          type: string
+          description: An identifier for the data associated with this run.
+        createdTimeUtc:
+          type: string
+          format: date-time
+          description: The creation time of the run in UTC.
+        startTimeUtc:
+          type: string
+          format: date-time
+          description: The start time of the run in UTC.
+        endTimeUtc:
+          type: string
+          format: date-time
+          description: The end time of the run in UTC.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/RunErrorResponse'
+          description: Error details for the run, if any.
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/RunDetailsWarning'
+          description: A list of warnings that occurred during the run.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: The tag dictionary for the run. Tags are mutable.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: The properties dictionary for the run. Properties are immutable.
+        parameters:
+          type: object
+          additionalProperties: {}
+          description: The parameters dictionary for the run. Parameters are immutable.
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/RunEndpointSetting'
+          description: The interactive run services for a run. Services are mutable.
+        inputDatasets:
+          type: array
+          items: {}
+          description: A list of datasets used as input to the run.
+        outputDatasets:
+          type: array
+          items: {}
+          description: A list of datasets used as output to the run.
+        runDefinition:
+          description: The run definition specification.
+        logFiles:
+          type: object
+          additionalProperties:
+            type: string
+          description: Map of log file name to its URL.
+        jobCost:
+          allOf:
+            - $ref: '#/components/schemas/JobCost'
+          description: Job cost information.
+        revision:
+          type: integer
+          format: int64
+          description: Revision number.
+        runTypeV2:
+          allOf:
+            - $ref: '#/components/schemas/RunTypeV2'
+          description: Run type information.
+        settings:
+          type: object
+          additionalProperties:
+            type: string
+          description: The run settings.
+        computeRequest:
+          description: The compute requests.
+        compute:
+          description: The compute record.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/RunUser'
+          description: The user that created the run.
+        computeDuration:
+          type: string
+          format: duration
+          description: The total compute time for a terminal run.
+        effectiveStartTimeUtc:
+          type: string
+          format: date-time
+          description: The effective start time of the run in UTC.
+        runNumber:
+          type: integer
+          format: int32
+          description: The run number.
+        rootRunId:
+          type: string
+          description: The id of the root run in the hierarchy.
+        experimentId:
+          type: string
+          description: The experiment id this run belongs to.
+        userId:
+          type: string
+          description: The id of the user that created the run.
+        statusRevision:
+          type: integer
+          format: int64
+          description: Status revision number.
+        currentComputeTime:
+          type: string
+          format: duration
+          description: The cumulative compute time for an active run.
+        lastStartTimeUtc:
+          type: string
+          format: date-time
+          description: The last start time of the run in UTC.
+        lastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/RunUser'
+          description: The user that last modified the run.
+        lastModifiedUtc:
+          type: string
+          format: date-time
+          description: The time the run was last modified in UTC.
+        duration:
+          type: string
+          format: duration
+          description: The total duration of the run.
+        inputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypedAssetReference'
+          description: The inputs for the run, keyed by input name.
+        outputs:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/TypedAssetReference'
+          description: The outputs for the run, keyed by output name.
+        currentAttemptId:
+          type: integer
+          format: int32
+          description: The AttemptId of the most recent attempt.
+      description: Runtime details of a job's run, including status, log file URLs, warnings and any error information.
+    RunDetailsWarning:
+      type: object
+      properties:
+        source:
+          type: string
+          description: The source of the warning.
+        message:
+          type: string
+          description: The warning message.
+      description: A warning that occurred during a run.
+    RunEndpointSetting:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Endpoint type.
+        port:
+          type: integer
+          format: int32
+          description: Port the endpoint listens on.
+        sslThumbprint:
+          type: string
+          description: SSL thumbprint for the endpoint.
+        endpoint:
+          type: string
+          description: Endpoint URL.
+        proxyEndpoint:
+          type: string
+          description: Proxy endpoint URL.
+        status:
+          type: string
+          description: Status of the endpoint.
+        errorMessage:
+          type: string
+          description: Error message if the endpoint failed to start.
+        enabled:
+          type: boolean
+          description: Whether the endpoint is enabled.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional endpoint properties.
+        nodes:
+          type: string
+          description: Nodes on which the endpoint is exposed.
+      description: Interactive endpoint setting on a run service.
+    RunErrorResponse:
+      type: object
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/RootError'
+          description: The top level error that occurred.
+        correlation:
+          type: object
+          additionalProperties:
+            type: string
+          description: Dictionary containing correlation details for the error.
+        environment:
+          type: string
+          description: The hosting environment.
+        location:
+          type: string
+          description: The Azure region.
+        time:
+          type: string
+          format: date-time
+          description: The time in UTC when the error occurred.
+        componentName:
+          type: string
+          description: Component name where the error originated or was encountered.
+      description: Standard error response payload returned for a run.
+    RunServiceInstances:
+      type: object
+      properties:
+        instances:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ServiceInstance'
+          description: Service instances running on the node, keyed by service name.
+      description: Map of service instances running on a job's node, keyed by service name.
+    RunTypeV2:
+      type: object
+      properties:
+        orchestrator:
+          type: string
+          description: Orchestrator that produced the run.
+        traits:
+          type: array
+          items:
+            type: string
+          description: Traits associated with the run.
+        attribution:
+          type: string
+          description: Attribution of the run.
+        computeType:
+          type: string
+          description: Compute type used by the run.
+      description: Run type categorization.
+    RunUser:
+      type: object
+      properties:
+        userObjectId:
+          type: string
+          description: A user or service principal's object ID.
+        userPuId:
+          type: string
+          description: A user or service principal's PuID.
+        userIdp:
+          type: string
+          description: A user identity provider.
+        userAltSecId:
+          type: string
+          description: A user alternate sec id.
+        userIss:
+          type: string
+          description: The issuer which issued the token for this user.
+        userTenantId:
+          type: string
+          description: A user or service principal's tenant ID.
+        userName:
+          type: string
+          description: A user's full name or a service principal's app ID.
+      description: Identity of a user or service principal that created or modified a run.
     SASCredentials:
       type: object
       required:
@@ -33578,6 +35249,32 @@ components:
             - Evaluation
             - Insight
       description: Type of the task.
+    ServiceInstance:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The service type.
+        port:
+          type: integer
+          format: int32
+          description: The port the service is listening on.
+        status:
+          type: string
+          description: The current status of the service.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/JobErrorResponse'
+          description: Error details if the service failed to start.
+        endpoint:
+          type: string
+          description: Endpoint URL used to connect to the service.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional service-specific properties.
+      description: Runtime information about a single interactive service associated with a job's node.
     SessionDirectoryEntry:
       type: object
       required:
@@ -34055,6 +35752,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for synthetic data generation item generation.
+    SystemData:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          description: The identity that created the resource.
+          readOnly: true
+        createdByType:
+          type: string
+          description: The type of identity that created the resource.
+          readOnly: true
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp of resource creation (UTC).
+          readOnly: true
+        lastModifiedBy:
+          type: string
+          description: The identity that last modified the resource.
+          readOnly: true
+        lastModifiedByType:
+          type: string
+          description: The type of identity that last modified the resource.
+          readOnly: true
+        lastModifiedAt:
+          type: string
+          format: date-time
+          description: The timestamp of resource last modification (UTC).
+          readOnly: true
+      description: Metadata pertaining to creation and last modification of the resource.
     SystemDataV3:
       type: object
       properties:
@@ -34297,6 +36024,27 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview
+    TensorFlowDistribution:
+      type: object
+      required:
+        - distributionType
+      properties:
+        distributionType:
+          type: string
+          enum:
+            - TensorFlow
+          description: Specifies the type of distribution framework.
+        workerCount:
+          type: integer
+          format: int32
+          description: Number of workers.
+        parameterServerCount:
+          type: integer
+          format: int32
+          description: Number of parameter server tasks.
+      allOf:
+        - $ref: '#/components/schemas/DistributionConfiguration'
+      description: TensorFlow distribution configuration.
     TestingCriterionAzureAIEvaluator:
       type: object
       required:
@@ -34768,6 +36516,16 @@ components:
             - Recurrence
             - OneTime
       description: Type of the trigger.
+    TypedAssetReference:
+      type: object
+      properties:
+        assetId:
+          type: string
+          description: The asset id.
+        type:
+          type: string
+          description: The asset type.
+      description: Reference to a typed asset (data, model, etc.) consumed or produced by a run.
     UpdateAgentFromManifestRequest:
       type: object
       required:

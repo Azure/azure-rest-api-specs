@@ -1,0 +1,81 @@
+{
+  "title": "Jobs_ShowServices_MaximumSet",
+  "operationId": "Jobs_showServices",
+  "parameters": {
+    "api-version": "v1",
+    "name": "my_training_job_01",
+    "runId": "my_training_job_01",
+    "nodeId": 0,
+    "x-ms-client-request-id": "cf35b680-dc80-4815-ab83-9364acc3bce6",
+    "Foundry-Features": "Jobs=V1Preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "instances": {
+          "ssh": {
+            "type": "SSH",
+            "port": 22,
+            "status": "Running",
+            "endpoint": "ssh://node-<nodeIndex>.my_training_job_01.eastus.batchai.azure.com:22",
+            "properties": {
+              "username": "azureuser"
+            }
+          },
+          "jupyter": {
+            "type": "JupyterLab",
+            "port": 8888,
+            "status": "Running",
+            "endpoint": "https://node-<nodeIndex>.my_training_job_01.eastus.batchai.azure.com:8888",
+            "properties": {
+              "token": "abc123"
+            }
+          },
+          "tensorboard": {
+            "type": "TensorBoard",
+            "port": 6006,
+            "status": "Failed",
+            "endpoint": "https://node-<nodeIndex>.my_training_job_01.eastus.batchai.azure.com:6006",
+            "error": {
+              "error": {
+                "code": "UserError",
+                "severity": 1,
+                "message": "Logdir does not exist.",
+                "messageFormat": "Logdir {logdir} does not exist.",
+                "messageParameters": {
+                  "logdir": "/outputs/tb"
+                },
+                "referenceCode": "TB001",
+                "detailsUri": "https://aka.ms/foundry/tb-errors",
+                "target": "logdir",
+                "details": [],
+                "innerError": {
+                  "code": "PathNotFound",
+                  "innerError": {
+                    "code": "FileSystem"
+                  }
+                },
+                "additionalInfo": [
+                  {
+                    "type": "DiagnosticInfo",
+                    "info": {
+                      "hint": "Ensure your training script writes to the logdir."
+                    }
+                  }
+                ]
+              },
+              "correlation": {
+                "requestId": "00000000-0000-0000-0000-000000000001"
+              },
+              "environment": "prod",
+              "location": "eastus",
+              "time": "2026-05-12T10:15:30Z",
+              "componentName": "runhistory"
+            },
+            "properties": {}
+          }
+        }
+      }
+    }
+  }
+}

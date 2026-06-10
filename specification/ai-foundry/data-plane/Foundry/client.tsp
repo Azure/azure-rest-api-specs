@@ -28,6 +28,7 @@ import "./src/agents-session-files/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 //import "./src/evaluation-suites/routes.tsp";
 import "./src/agents-optimization/routes.tsp";
+import "./src/jobs/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -548,3 +549,19 @@ model AIProjectClientOptions {
   },
   "python"
 );
+
+// --------------------------------------------------------------------------------
+// Jobs sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(Azure.AI.Projects.Jobs.get, "get", "python");
+@@clientName(Azure.AI.Projects.Jobs.list, "list", "python");
+@@clientName(Azure.AI.Projects.Jobs.createOrUpdate,
+  "create_or_update",
+  "python"
+);
+@@clientName(Azure.AI.Projects.Jobs.beginDelete, "begin_delete", "python");
+@@clientName(Azure.AI.Projects.Jobs.beginCancel, "begin_cancel", "python");
+@@access(Azure.AI.Projects.Jobs.getRunDetails, Access.internal);
+@@access(Azure.AI.Projects.Jobs.getRun, Access.internal);
+@@access(Azure.AI.Projects.Jobs.listArtifacts, Access.internal);
+@@access(Azure.AI.Projects.Jobs.getArtifactContentInformation, Access.internal);
