@@ -1014,7 +1014,7 @@ model ScaleProfile {
    * Scaling decisions across profiles are governed by the cluster autoscaler expander,
    * configurable via `ManagedCluster.properties.autoScalerProfile.expander`.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_05_01)
   @identifiers(#[])
   autoscale?: AutoScaleProfile[];
 }
@@ -1037,7 +1037,7 @@ model ManualScaleProfile {
 /**
  * Specifications on auto-scaling.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 model AutoScaleProfile {
   /**
    * VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'.
