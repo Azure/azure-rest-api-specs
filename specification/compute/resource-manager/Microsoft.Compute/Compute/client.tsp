@@ -923,11 +923,15 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventTargetResource,
-  "VmScaleSetLifecycleHookEventTarget",
+  "VirtualMachineScaleSetLifecycleHookEventTarget",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventProperties,
   "VmScaleSetLifecycleHookEventProperties",
+  "csharp"
+);
+@@clientName(VMScaleSetLifecycleHookEventProperties.type,
+  "EventType",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventAdditionalContext,
@@ -939,7 +943,7 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventUpdate,
-  "VmScaleSetLifecycleHookEventPatch",
+  "VirtualMachineScaleSetLifecycleHookEventPatch",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventListResult,
