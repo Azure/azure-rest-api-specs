@@ -122,10 +122,26 @@ using Microsoft.StorageCache;
   StorageTargets.createOrUpdate::parameters.resource,
   "storagetarget"
 );
-@@clientLocation(StorageTargets.flush, "StorageTarget");
-@@clientLocation(StorageTargets.suspend, "StorageTarget");
-@@clientLocation(StorageTargets.resume, "StorageTarget");
-@@clientLocation(StorageTargets.invalidate, "StorageTarget");
+@@clientLocation(StorageTargets.flush, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.suspend, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.resume, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.invalidate, "StorageTarget", "!javascript");
+@@clientLocation(StorageTargets.flush, "StorageTargetOperations", "javascript");
+@@clientLocation(
+  StorageTargets.suspend,
+  "StorageTargetOperations",
+  "javascript"
+);
+@@clientLocation(
+  StorageTargets.resume,
+  "StorageTargetOperations",
+  "javascript"
+);
+@@clientLocation(
+  StorageTargets.invalidate,
+  "StorageTargetOperations",
+  "javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageTarget.properties);
 
