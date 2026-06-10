@@ -302,7 +302,7 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
   @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
 
-  @doc("Progress while in flight. Absent in terminal states.")
+  @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
 
@@ -337,7 +337,7 @@ model OptimizationJobListItem {
   @visibility(Lifecycle.Read)
   agent?: AgentIdentifier;
 
-  @doc("Progress while in flight. Absent in terminal states.")
+  @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
 
@@ -360,109 +360,4 @@ model PromotionInfo {
 
   @doc("Version of the Foundry agent this candidate was promoted to.")
   agent_version: string;
-}
-
-@doc("Request body for promoting a candidate to a Foundry agent version.")
-model PromoteCandidateRequest {
-  @doc("Name of the Foundry agent to promote to.")
-  agent_name: string;
-
-  @doc("Version of the Foundry agent to promote to.")
-  agent_version: string;
-}
-
-@doc("Response after successfully promoting a candidate.")
-model PromoteCandidateResponse {
-  @doc("The promoted candidate id.")
-  candidate_id: string;
-
-  @doc("Status after promotion.")
-  status: string;
-
-  @doc("Timestamp when promotion occurred, represented in Unix time.")
-  promoted_at: FoundryTimestamp;
-
-  @doc("Name of the Foundry agent promoted to.")
-  agent_name: string;
-
-  @doc("Version of the Foundry agent promoted to.")
-  agent_version: string;
-}
-
-// ---------------------------------------------------------------------------
-// Candidate sub-resource bodies
-// ---------------------------------------------------------------------------
-
-@doc("Deploy-config blob for a candidate. Suitable for setting OPTIMIZATION_CONFIG on a hosted-agent version.")
-model CandidateDeployConfig {
-  @doc("System prompt / instructions.")
-  instructions?: string;
-
-  @doc("Foundry deployment name.")
-  `model`?: string;
-
-  @doc("Optional sampling temperature.")
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32;
-
-  @doc("Optional skill overrides.")
-  skills?: Record<unknown>[];
-
-  @doc("Optional tool overrides.")
-  tools?: Record<unknown>[];
-}
-
-@doc("Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.")
-model CandidateResults {
-  @doc("Owning candidate id.")
-  candidate_id: string;
-
-  @doc("Per-task evaluation rows.")
-  results: OptimizationTaskResult[];
-}
-
-@doc("Candidate metadata returned by GET /candidates/{id}.")
-model CandidateMetadata {
-  @doc("Server-assigned candidate identifier.")
-  candidate_id: string;
-
-  @doc("Owning optimization job id.")
-  job_id: string;
-
-  @doc("Display name of the candidate.")
-  candidate_name: string;
-
-  @doc("Candidate lifecycle status.")
-  status: string;
-
-  @doc("Candidate's aggregate score.")
-  score?: float64;
-
-  @doc("Whether detailed results are available for this candidate.")
-  has_results: boolean;
-
-  @doc("Timestamp when the candidate was created, represented in Unix time.")
-  created_at: FoundryTimestamp;
-
-  @doc("Timestamp when the candidate was last updated, represented in Unix time.")
-  updated_at: FoundryTimestamp;
-
-  @doc("Promotion metadata. Null if not promoted.")
-  promotion?: PromotionInfo;
-
-  @doc("Files in the candidate's blob directory.")
-  files: CandidateFileInfo[];
-}
-
-@doc("File entry in a candidate's blob directory.")
-model CandidateFileInfo {
-  @doc("Relative path of the file.")
-  path: string;
-
-  @doc("File type category (e.g. 'config', 'results').")
-  type: string;
-
-  @doc("File size in bytes.")
-  size_bytes: int64;
 }

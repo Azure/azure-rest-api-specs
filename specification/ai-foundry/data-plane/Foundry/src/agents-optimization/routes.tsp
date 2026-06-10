@@ -65,7 +65,7 @@ interface AgentOptimizationJobs {
   >;
 
   @summary("Cancels an agent optimization job.")
-  @doc("Request cancellation. Idempotent on terminal states.")
+  @doc("Request cancellation of a running or queued job. Returns an error if the job is already in a terminal state.")
   @route("agent_optimization_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
@@ -79,115 +79,4 @@ interface AgentOptimizationJobs {
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.agents_optimization_v2_preview>;
 
-  // ---------------------------------------------------------------------------
-  // Candidate sub-resource operations
-  // ---------------------------------------------------------------------------
-
-  @summary("Returns a list of candidates for an optimization job.")
-  @doc("List candidates produced by a job.")
-  @route("agent_optimization_jobs/{jobId}/candidates")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @get
-  listCandidates is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    {
-      @doc("The optimization job id.")
-      @path jobId: string;
-
-      ...CommonPageQueryParameters;
-    },
-    AgentsPagedResult<OptimizationCandidate>
-  >;
-
-  @summary("Get a candidate by id.")
-  @doc("Get a single candidate's metadata, manifest, and promotion info.")
-  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @get
-  getCandidate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    {
-      @doc("The optimization job id.")
-      @path jobId: string;
-
-      @doc("The candidate id.")
-      @path candidateId: string;
-    },
-    CandidateMetadata
-  >;
-
-  @summary("Get candidate deploy config.")
-  @doc("Get the candidate's deploy config JSON. Used to compose `agents.create_version(...)` from a candidate.")
-  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}/config")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @get
-  getCandidateConfig is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    {
-      @doc("The optimization job id.")
-      @path jobId: string;
-
-      @doc("The candidate id.")
-      @path candidateId: string;
-    },
-    CandidateDeployConfig
-  >;
-
-  @summary("Get candidate evaluation results.")
-  @doc("Get full per-task evaluation results for a candidate.")
-  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}/results")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @get
-  getCandidateResults is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    {
-      @doc("The optimization job id.")
-      @path jobId: string;
-
-      @doc("The candidate id.")
-      @path candidateId: string;
-    },
-    CandidateResults
-  >;
-
-  @summary("Get a candidate file.")
-  @doc("Stream a specific file from the candidate's blob directory.")
-  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}/files")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @get
-  getCandidateFile is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    {
-      @doc("The optimization job id.")
-      @path jobId: string;
-
-      @doc("The candidate id.")
-      @path candidateId: string;
-
-      @doc("Relative path of the file to download (e.g. 'files/examples.jsonl').")
-      @query
-      path: string;
-    },
-    bytes
-  >;
-
-  @summary("Promote a candidate.")
-  @doc("Promotes a candidate, recording the deployment timestamp and target agent version.")
-  @route("agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote")
-  @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
-  @post
-  promoteCandidate is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    {
-      @doc("The optimization job id.")
-      @path jobId: string;
-
-      @doc("The candidate id to promote.")
-      @path candidateId: string;
-
-      @doc("Promotion details.")
-      @body body: PromoteCandidateRequest;
-    },
-    PromoteCandidateResponse
-  >;
 }
