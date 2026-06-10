@@ -217,7 +217,6 @@ These settings apply only when `--tag=package-preview-2026-01-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2026-01-01-preview'
 input-file:
   - preview/2026-01-01-preview/defenderForStorageSettings.json
-  - preview/2026-01-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview

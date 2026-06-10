@@ -571,6 +571,15 @@
                 }
               ]
             }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StartMalwareScanRequest"
+            }
           }
         ],
         "responses": {
@@ -973,6 +982,10 @@
           "readOnly": true
         }
       }
+    },
+    "StartMalwareScanRequest": {
+      "type": "object",
+      "description": "Request body for starting a malware scan with optional filters."
     }
   },
   "parameters": {}

@@ -573,9 +573,9 @@
             }
           },
           {
-            "name": "startMalwareScanRequest",
+            "name": "body",
             "in": "body",
-            "description": "Optional request body to filter which blobs and files to scan.",
+            "description": "The content of the action request",
             "required": false,
             "schema": {
               "$ref": "#/definitions/StartMalwareScanRequest"
@@ -605,6 +605,31 @@
     }
   },
   "definitions": {
+    "BlobFilter": {
+      "type": "object",
+      "description": "Filter for blob within a container.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MatchFilter"
+        }
+      ]
+    },
+    "BlobScanFilter": {
+      "type": "object",
+      "description": "Filter for blob scanning. At least one of 'container' or 'blob' must be specified. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.",
+      "properties": {
+        "container": {
+          "$ref": "#/definitions/ContainerFilter",
+          "description": "Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers.",
+          "x-nullable": true
+        },
+        "blob": {
+          "$ref": "#/definitions/BlobFilter",
+          "description": "Optional filter for specific blob(s). If container is specified, this filters blobs within that container. If container is not specified, this filters blobs across all containers.",
+          "x-nullable": true
+        }
+      }
+    },
     "BlobsScanSummary": {
       "type": "object",
       "description": "A summary of the scan results of the blobs that were scanned.",
@@ -702,6 +727,15 @@
         }
       }
     },
+    "ContainerFilter": {
+      "type": "object",
+      "description": "Filter for blob container.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MatchFilter"
+        }
+      ]
+    },
     "DefenderForStorageSetting": {
       "type": "object",
       "description": "The Defender for Storage resource.",
@@ -757,6 +791,31 @@
         }
       }
     },
+    "FileFilter": {
+      "type": "object",
+      "description": "Filter for file within a share.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MatchFilter"
+        }
+      ]
+    },
+    "FileScanFilter": {
+      "type": "object",
+      "description": "Filter for file scanning. At least one of 'share' or 'file' must be specified. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.",
+      "properties": {
+        "share": {
+          "$ref": "#/definitions/ShareFilter",
+          "description": "Optional filter for the file share to scan. If not provided, the file filter will apply across all shares.",
+          "x-nullable": true
+        },
+        "file": {
+          "$ref": "#/definitions/FileFilter",
+          "description": "Optional filter for specific file(s). If share is specified, this filters files within that share. If share is not specified, this filters files across all shares.",
+          "x-nullable": true
+        }
+      }
+    },
     "FilesScanSummary": {
       "type": "object",
       "description": "A summary of the scan results of the files that were scanned.",
@@ -794,6 +853,22 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MalwareScanProperties"
+        }
+      }
+    },
+    "MalwareScanFilters": {
+      "type": "object",
+      "description": "Filters to scope the malware scan.",
+      "properties": {
+        "blobs": {
+          "$ref": "#/definitions/BlobScanFilter",
+          "description": "Optional filter for blob scanning. Specifies which blobs to scan.",
+          "x-nullable": true
+        },
+        "files": {
+          "$ref": "#/definitions/FileScanFilter",
+          "description": "Optional filter for file scanning. Specifies which files to scan.",
+          "x-nullable": true
         }
       }
     },
@@ -903,6 +978,48 @@
         }
       }
     },
+    "MatchFilter": {
+      "type": "object",
+      "description": "Filter with value and matching strategy.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value to match against."
+        },
+        "match": {
+          "$ref": "#/definitions/MatchType",
+          "description": "The matching strategy for the filter."
+        }
+      },
+      "required": [
+        "value",
+        "match"
+      ]
+    },
+    "MatchType": {
+      "type": "string",
+      "description": "The matching strategy for the filter.",
+      "enum": [
+        "Prefix",
+        "Exact"
+      ],
+      "x-ms-enum": {
+        "name": "MatchType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Prefix",
+            "value": "Prefix",
+            "description": "Match resources with values starting with the specified string."
+          },
+          {
+            "name": "Exact",
+            "value": "Exact",
+            "description": "Match resources with the exact value specified."
+          }
+        ]
+      }
+    },
     "OnUploadFilters": {
       "type": "object",
       "description": "Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.",
@@ -983,141 +1100,35 @@
         }
       }
     },
+    "ShareFilter": {
+      "type": "object",
+      "description": "Filter for file share.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MatchFilter"
+        }
+      ]
+    },
     "StartMalwareScanRequest": {
       "type": "object",
+      "description": "Request body for starting a malware scan with optional filters.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StartMalwareScanRequestProperties"
+          "$ref": "#/definitions/StartMalwareScanRequestProperties",
+          "description": "Properties for the malware scan request."
         }
-      },
-      "description": "Request body for starting a malware scan with optional filters."
+      }
     },
     "StartMalwareScanRequestProperties": {
       "type": "object",
+      "description": "Properties for the malware scan request.",
       "properties": {
         "filters": {
           "$ref": "#/definitions/MalwareScanFilters",
-          "x-nullable": true,
-          "description": "Optional filters to scope the malware scan to specific blobs or files."
+          "description": "Optional filters to scope the malware scan to specific blobs or files.",
+          "x-nullable": true
         }
-      },
-      "description": "Properties for the malware scan request."
-    },
-    "MalwareScanFilters": {
-      "type": "object",
-      "properties": {
-        "blobs": {
-          "$ref": "#/definitions/BlobScanFilter",
-          "x-nullable": true,
-          "description": "Optional filter for blob scanning. Specifies which blobs to scan."
-        },
-        "files": {
-          "$ref": "#/definitions/FileScanFilter",
-          "x-nullable": true,
-          "description": "Optional filter for file scanning. Specifies which files to scan."
-        }
-      },
-      "description": "Filters to scope the malware scan."
-    },
-    "BlobScanFilter": {
-      "type": "object",
-      "properties": {
-        "container": {
-          "$ref": "#/definitions/ContainerFilter",
-          "x-nullable": true,
-          "description": "Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers."
-        },
-        "blob": {
-          "$ref": "#/definitions/BlobFilter",
-          "x-nullable": true,
-          "description": "Optional filter for specific blob(s). If container is specified, this filters blobs within that container. If container is not specified, this filters blobs across all containers."
-        }
-      },
-      "description": "Filter for blob scanning. At least one of 'container' or 'blob' must be specified. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned."
-    },
-    "FileScanFilter": {
-      "type": "object",
-      "properties": {
-        "share": {
-          "$ref": "#/definitions/ShareFilter",
-          "x-nullable": true,
-          "description": "Optional filter for the file share to scan. If not provided, the file filter will apply across all shares."
-        },
-        "file": {
-          "$ref": "#/definitions/FileFilter",
-          "x-nullable": true,
-          "description": "Optional filter for specific file(s). If share is specified, this filters files within that share. If share is not specified, this filters files across all shares."
-        }
-      },
-      "description": "Filter for file scanning. At least one of 'share' or 'file' must be specified. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned."
-    },
-    "MatchFilter": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The value to match against."
-        },
-        "match": {
-          "type": "string",
-          "description": "The matching strategy for the filter.",
-          "enum": [
-            "Prefix",
-            "Exact"
-          ],
-          "x-ms-enum": {
-            "name": "MatchType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Prefix",
-                "description": "Match resources with values starting with the specified string."
-              },
-              {
-                "value": "Exact",
-                "description": "Match resources with the exact value specified."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "value",
-        "match"
-      ],
-      "description": "Filter with value and matching strategy."
-    },
-    "ContainerFilter": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ],
-      "description": "Filter for blob container."
-    },
-    "BlobFilter": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ],
-      "description": "Filter for blob within a container."
-    },
-    "ShareFilter": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ],
-      "description": "Filter for file share."
-    },
-    "FileFilter": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ],
-      "description": "Filter for file within a share."
+      }
     }
   },
   "parameters": {}

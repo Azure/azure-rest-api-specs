@@ -2,6 +2,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace DefenderForStorageAPI;
@@ -119,13 +121,23 @@ interface DefenderForStorageSettings {
   /**
    * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
    */
+  // StartMalwareScanRequest exists in all API versions (so ActionSync<> can reference it
+  // unconditionally), but its `properties` field — and all the nested filter models it
+  // points to — are @added(Versions.v2026_01_01_preview). This means:
+  //   - 2025-09-01-preview: body parameter is optional, schema = StartMalwareScanRequest = {}.
+  //     (Empty optional body, accepted by clients that send no body.)
+  //   - 2026-01-01-preview: body parameter is optional, schema includes the filter properties.
+  // This regenerates the shipped 2025-09-01-preview swagger to add an optional empty body
+  // parameter where there was previously none. To be reviewed with the ARM team via the
+  // breaking-change review label flow.
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
   startMalwareScan is DefenderForStorageSettingsOps.ActionSync<
     DefenderForStorageSetting,
-    void,
+    StartMalwareScanRequest,
     ArmResponse<MalwareScan>,
+    OptionalRequestBody = true,
     ErrorType = CloudError
   >;
 
