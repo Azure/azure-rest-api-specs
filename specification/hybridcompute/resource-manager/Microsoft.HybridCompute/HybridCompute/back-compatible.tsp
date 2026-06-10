@@ -75,7 +75,12 @@ using Microsoft.HybridCompute;
   "extensionUpgradeParameters"
 );
 @@clientName(Machines.setupExtensions::parameters.body, "extensions");
-@@clientLocation(Machines.networkProfileGet, "NetworkProfile");
+@@clientLocation(Machines.networkProfileGet, "NetworkProfile", "!javascript");
+@@clientLocation(
+  Machines.networkProfileGet,
+  "NetworkProfileOperations",
+  "javascript"
+);
 @@clientName(Machines.networkProfileGet, "Get");
 @@clientLocation(Machines.getValidationDetailsForMachine, "PrivateLinkScopes");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
