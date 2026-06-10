@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./csharp-alternate-type-stubs.tsp";
 import "./Compute/client.tsp";
 import "./ComputeDisk/client.tsp";
 import "./ComputeGallery/main.tsp";
@@ -78,6 +77,74 @@ namespace ComputeCombine;
 // Common.SubResourceReadOnly has a read-only id → maps to ComputeSubResourceData (matches old AutoRest).
 @@clientName(Common.SubResource, "ComputeWriteableSubResourceData", "csharp");
 @@clientName(Common.SubResourceReadOnly, "ComputeSubResourceData", "csharp");
+
+// SubResource/WritableSubResource properties now use Compute-local subresource models.
+// Keep generated names distinct so SDK customizations can restore the old ARM common
+// SubResource/WritableSubResource property names for binary compatibility.
+@@clientName(AvailabilitySetProperties.virtualMachines, "VirtualMachineResources", "csharp");
+@@clientName(VirtualMachineScaleSetIPConfigurationProperties.applicationGatewayBackendAddressPools,
+  "ApplicationGatewayBackendAddressPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetIPConfigurationProperties.applicationSecurityGroups,
+  "ApplicationSecurityGroupResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerBackendAddressPools,
+  "LoadBalancerBackendAddressPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerInboundNatPools,
+  "LoadBalancerInboundNatPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationGatewayBackendAddressPools,
+  "ApplicationGatewayBackendAddressPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationSecurityGroups,
+  "ApplicationSecurityGroupResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerBackendAddressPools,
+  "LoadBalancerBackendAddressPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerInboundNatPools,
+  "LoadBalancerInboundNatPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationSecurityGroups,
+  "ApplicationSecurityGroupResources",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationGatewayBackendAddressPools,
+  "ApplicationGatewayBackendAddressPoolResources",
+  "csharp"
+);
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.loadBalancerBackendAddressPools,
+  "LoadBalancerBackendAddressPoolResources",
+  "csharp"
+);
+@@clientName(DedicatedHostGroupProperties.hosts, "DedicatedHostResources", "csharp");
+@@clientName(DedicatedHostProperties.virtualMachines, "VirtualMachineResources", "csharp");
+@@clientName(CapacityReservationGroupProperties.capacityReservations,
+  "CapacityReservationResources",
+  "csharp"
+);
+@@clientName(CapacityReservationGroupProperties.virtualMachinesAssociated,
+  "AssociatedVirtualMachineResources",
+  "csharp"
+);
+@@clientName(CapacityReservationProperties.virtualMachinesAssociated,
+  "AssociatedVirtualMachineResources",
+  "csharp"
+);
+@@clientName(ResourceSharingProfile.subscriptionIds,
+  "SharingSubscriptionResources",
+  "csharp"
+);
+@@clientName(RestorePointProperties.excludeDisks, "ExcludedDisks", "csharp");
 
 // Replace Compute's local ExtendedLocation / ExtendedLocationType with ARM common types
 @@alternateType(Common.ExtendedLocation,
@@ -1017,7 +1084,6 @@ model VMSizePropertiesWithAdditionalProperties {
   "UltraSsdEnabled",
   "csharp"
 );
-@@clientName(DedicatedHostGroupProperties.hosts, "DedicatedHosts", "csharp");
 @@clientName(HostEndpointSettings.inVMAccessControlProfileReferenceId,
   "InVmAccessControlProfileReferenceId",
   "csharp"
@@ -1258,92 +1324,6 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@alternateType(VirtualMachineUpdate.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
-  "csharp"
-);
-
-// ── alternateType: SubResource[] for C# backward compat ──
-@@alternateType(AvailabilitySetProperties.virtualMachines,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationGatewayBackendAddressPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationSecurityGroups,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerBackendAddressPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerInboundNatPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationGatewayBackendAddressPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationSecurityGroups,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerBackendAddressPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerInboundNatPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationSecurityGroups,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationGatewayBackendAddressPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.loadBalancerBackendAddressPools,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(DedicatedHostGroupProperties.hosts,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(DedicatedHostProperties.virtualMachines,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(CapacityReservationGroupProperties.capacityReservations,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(CapacityReservationGroupProperties.virtualMachinesAssociated,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(CapacityReservationProperties.virtualMachinesAssociated,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(CapacityReservationUtilization.virtualMachinesAllocated,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(ResourceSharingProfile.subscriptionIds,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(CapacityReservationGroupInstanceView.sharedSubscriptionIds,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(RestorePointProperties.excludeDisks,
-  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
