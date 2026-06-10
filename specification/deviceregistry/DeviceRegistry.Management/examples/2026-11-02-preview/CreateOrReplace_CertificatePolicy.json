@@ -1,0 +1,63 @@
+{
+  "title": "CreateOrReplace_CertificatePolicy",
+  "operationId": "CertificatePolicies_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "certificatePolicyName": "mycertificatepolicy",
+    "resource": {
+      "properties": {
+        "certificate": {
+          "validityPeriodInDays": 10
+        }
+      },
+      "tags": {
+        "key1088": "xzrpbqsac"
+      },
+      "location": "East US 2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificate": {
+            "validityPeriodInDays": 10
+          }
+        },
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "location": "East US 2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/credentials/default/certificatePolicies/mycertificatepolicy",
+        "name": "mycertificatepolicy",
+        "type": "Microsoft.DeviceRegistry/namespaces/credentials/certificatePolicies"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificate": {
+            "validityPeriodInDays": 10
+          }
+        },
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "location": "East US 2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/credentials/default/certificatePolicies/mycertificatepolicy",
+        "name": "mycertificatepolicy",
+        "type": "Microsoft.DeviceRegistry/namespaces/credentials/certificatePolicies"
+      }
+    }
+  }
+}

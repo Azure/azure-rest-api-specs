@@ -11,6 +11,8 @@ import "./discoveredAssetEndpointProfiles.tsp";
 import "./schemaRegistries.tsp";
 import "./namespaces.tsp";
 import "./credential.tsp";
+import "./certificateAuthorities.tsp";
+import "./certificatePolicy.tsp";
 import "./policy.tsp";
 import "./ns_devices.tsp";
 import "./ns_discoveredDevices.tsp";

@@ -1,0 +1,73 @@
+{
+  "title": "CreateOrReplace_CertificateAuthority_BringYourOwn",
+  "operationId": "CertificateAuthorities_CreateOrReplace",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "certificateAuthorityName": "mybyoca",
+    "resource": {
+      "properties": {
+        "certificateAuthorityType": "BringYourOwn",
+        "keyType": "ECC",
+        "bringYourOwn": {}
+      },
+      "tags": {
+        "key1088": "xzrpbqsac"
+      },
+      "location": "East US 2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificateAuthorityType": "BringYourOwn",
+          "keyType": "ECC",
+          "bringYourOwn": {
+            "certificateSigningRequest": "-----BEGIN CERTIFICATE REQUEST-----\\nMIID...\\n-----END CERTIFICATE REQUEST-----",
+            "thumbprint": "A1B2C3D4E5F6",
+            "status": "PendingActivation"
+          },
+          "subject": "CN=mybyoca"
+        },
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "location": "East US 2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/mybyoca",
+        "name": "mybyoca",
+        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "certificateAuthorityType": "BringYourOwn",
+          "keyType": "ECC",
+          "bringYourOwn": {
+            "certificateSigningRequest": "-----BEGIN CERTIFICATE REQUEST-----\\nMIID...\\n-----END CERTIFICATE REQUEST-----",
+            "thumbprint": "A1B2C3D4E5F6",
+            "status": "PendingActivation"
+          },
+          "subject": "CN=mybyoca"
+        },
+        "tags": {
+          "key1088": "xzrpbqsac"
+        },
+        "location": "East US 2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/mybyoca",
+        "name": "mybyoca",
+        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities"
+      }
+    }
+  }
+}

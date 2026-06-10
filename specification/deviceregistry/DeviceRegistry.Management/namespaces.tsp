@@ -62,6 +62,10 @@ model NamespaceProperties {
   @visibility(Lifecycle.Read)
   dataEndpoint?: string;
 
+  @added(Versions.v2026_11_01_preview)
+  @doc("Enables cloud PKI to manage certificate lifecycle operations.")
+  enableCloudPki?: boolean;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the messaging endpoints dictionary."
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
