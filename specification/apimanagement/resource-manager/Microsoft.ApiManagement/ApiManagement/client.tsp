@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 @@clientName(
   Microsoft.ApiManagement.TagTagResourceContractProperties,
   "TagResourceContractProperties",
-  "java,python"
+  "java,python,javascript"
 );
 @@clientName(
   Microsoft.ApiManagement.ConnectivityCheckRequest.preferredIPVersion,
@@ -137,7 +137,7 @@ op replaceGetByName(
 @@override(
   DeletedServiceContracts.getByName,
   replaceGetByName,
-  "go,java,python"
+  "go,java,python,javascript"
 );
 
 /**
@@ -159,7 +159,11 @@ op replacePurge(
     })
   | ArmDeletedNoContentResponse;
 
-@@override(DeletedServiceContracts.purge, replacePurge, "go,java,python");
+@@override(
+  DeletedServiceContracts.purge,
+  replacePurge,
+  "go,java,python,javascript"
+);
 
 // Mitigate model rename: ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration -> ...HttpConfiguration
 @@clientName(
