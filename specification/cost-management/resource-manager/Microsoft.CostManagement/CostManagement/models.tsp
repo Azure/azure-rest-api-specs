@@ -4503,7 +4503,7 @@ model ManagementGroupScopeBenefitRecommendationProperties
   managementGroupId?: string;
 
   /**
-   * Benefit scope. For example, Single, Shared, or ManagementGroup.
+   * ManagementGroup benefit scope.
    */
   scope: "ManagementGroup";
 }
