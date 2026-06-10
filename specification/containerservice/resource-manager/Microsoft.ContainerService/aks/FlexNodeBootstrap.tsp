@@ -44,12 +44,6 @@ model PoolBootstrapData {
 @added(Versions.v2026_05_02_preview)
 model BootstrapAzureConfig {
   /**
-   * Azure cloud environment.
-   */
-  @visibility(Lifecycle.Read)
-  cloud?: string;
-
-  /**
    * Azure Resource Manager endpoint for the cloud environment.
    */
   @visibility(Lifecycle.Read)
