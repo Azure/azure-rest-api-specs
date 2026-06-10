@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-03-30",
+    "artifactName": "fedrbac",
+    "artifactStoreName": "TestArtifactStoreName",
+    "artifactVersionName": "1.0.0",
+    "parameters": {
+      "properties": {
+        "artifactState": "Deprecated"
+      }
+    },
+    "publisherName": "TestPublisher",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fedrbac",
+        "type": "Microsoft.HybridNetwork/publishers/artifactStores/artifactVersions",
+        "id": "/subscriptions/subid/resourceGroups/TestResourceGroup/providers/Microsoft.HybridNetwork/publishers/TestPublisher/artifactStores/TestArtifactStore/artifactVersions/1.0.0",
+        "properties": {
+          "artifactState": "Deprecated",
+          "artifactType": "OCIArtifact",
+          "artifactVersion": "1.0.0"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/microsoft.hybridnetwork/locations/EASTUS2EUAP/operationStatuses/0b37c625-7e7c-49c5-b86e-c817c85acb5d*B77A34159CA34A0BD446D3BC7EC120649181590DDF991982765DAC1A87491B2D?api-version=2021-05-01"
+      }
+    }
+  },
+  "operationId": "ProxyArtifact_UpdateState",
+  "title": "Update an artifact state"
+}
