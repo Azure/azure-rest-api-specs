@@ -1071,13 +1071,6 @@ model VirtualMachineIpTag {
 
   @doc("IP tag associated with the public IP. Example: SQL, Storage etc.")
   tag?: string;
-
-  @doc("The first party service tag resource identifier associated with the public IP address.")
-  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/firstPartyServiceTags";
-    }
-  ]>;
 }
 
 @doc("Specify what happens to the network interface when the VM is deleted")
