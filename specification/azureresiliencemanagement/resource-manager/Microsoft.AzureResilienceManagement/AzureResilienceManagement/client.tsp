@@ -95,20 +95,48 @@ using Azure.Core;
 @@clientName(RBACSetupMode, "ResilienceManagementRbacSetupMode", "csharp");
 @@clientName(VMPresent, "VmPresent", "csharp");
 @@clientName(HAStatus, "HighAvailabilityStatus", "csharp");
-@@clientName(ProvisioningState, "ResilienceManagementProvisioningState", "csharp");
+@@clientName(
+  ProvisioningState,
+  "ResilienceManagementProvisioningState",
+  "csharp"
+);
 @@clientName(ErrorDetails, "ResilienceManagementErrorDetail", "csharp");
 @@clientName(SystemMetadata, "DrillSystemMetadata", "csharp");
 @@clientName(ActionTask, "ResilienceManagementActionTask", "csharp");
 @@clientName(ResourceLists, "DrillResourcesList", "csharp");
-@@clientName(SolutionDisplayName, "ResilienceManagementSolutionDisplayName", "csharp");
+@@clientName(
+  SolutionDisplayName,
+  "ResilienceManagementSolutionDisplayName",
+  "csharp"
+);
 @@alternateType(MoboBrokerResource.id, armResourceIdentifier, "csharp");
-@@clientName(RecoveryResourceProperties.needsAttention, "RequiresAttention", "csharp");
+@@clientName(
+  RecoveryResourceProperties.needsAttention,
+  "RequiresAttention",
+  "csharp"
+);
 @@clientName(DrillRunAddNotesRequest.timestamp, "RecordedOn", "csharp");
-@@alternateType(RecoveryResourceProperties.resourceLocation, azureLocation, "csharp");
-@@alternateType(ResourceProtectionSolutionSettings.activeLocation, azureLocation, "csharp");
-@@alternateType(ResourceProtectionSolutionSettings.activeLocations, azureLocation[], "csharp");
+@@alternateType(
+  RecoveryResourceProperties.resourceLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ResourceProtectionSolutionSettings.activeLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ResourceProtectionSolutionSettings.activeLocations,
+  azureLocation[],
+  "csharp"
+);
 @@clientName(ForceInclusionAndUpdate, "ForceInclusionState", "csharp");
-@@clientName(AssociatedIdentity, "ResilienceManagementAssociatedIdentity", "csharp");
+@@clientName(
+  AssociatedIdentity,
+  "ResilienceManagementAssociatedIdentity",
+  "csharp"
+);
 @@clientName(GoalResource, "GoalMembers", "csharp");
 @@clientName(RecoveryResource, "ResilienceMembers", "csharp");
 @@clientName(Drill, "ResilienceManagementDrill", "csharp");
