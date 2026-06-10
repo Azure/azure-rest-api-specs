@@ -1672,6 +1672,43 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -2002,33 +2039,12 @@
         "user"
       ]
     },
-    "CloudAccountUpdate": {
+    "CloudAccountPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the CloudAccount.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/CloudAccountUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "CloudAccountUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the CloudAccount.",
+      "description": "Properties specific to Commvault Cloud Account resource",
       "properties": {
         "marketplace": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
@@ -2037,10 +2053,29 @@
           ]
         },
         "user": {
-          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
           "description": "Details of the user."
         }
       }
+    },
+    "CloudAccountUpdate": {
+      "type": "object",
+      "description": "A Commvault Cloud Account Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudAccountPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "CommvaultPlan": {
       "type": "object",
@@ -2234,6 +2269,20 @@
         "offerDetails"
       ]
     },
+    "LiftrBase.MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
     "LiftrBase.MarketplaceSubscriptionStatus": {
       "type": "string",
       "description": "Marketplace subscription status of a resource.",
@@ -2305,6 +2354,36 @@
         "planId"
       ]
     },
+    "LiftrBase.OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        }
+      }
+    },
     "LiftrBase.UserDetails": {
       "type": "object",
       "description": "User details for an organization",
@@ -2335,6 +2414,32 @@
         "lastName",
         "emailAddress"
       ]
+    },
+    "LiftrBase.UserDetailsUpdate": {
+      "type": "object",
+      "description": "User details for an organization",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user"
+        },
+        "emailAddress": {
+          "$ref": "#/definitions/LiftrBase.email",
+          "description": "Email address of the user"
+        },
+        "upn": {
+          "type": "string",
+          "description": "User's principal name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number"
+        }
+      }
     },
     "LiftrBase.email": {
       "type": "string",
@@ -2740,7 +2845,10 @@
       "required": [
         "dataSourceType",
         "plan",
-        "resources"
+        "resources",
+        "protectionStatus",
+        "numberOfProtectedItems",
+        "lastBackUpTime"
       ]
     },
     "ProtectionGroupResources": {
