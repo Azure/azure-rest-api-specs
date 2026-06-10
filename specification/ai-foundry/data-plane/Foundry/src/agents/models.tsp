@@ -403,117 +403,6 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Enforcement mode for a hosted-agent egress policy.")
-union EgressPolicyMode {
-  string,
-
-  @doc("Enforce the policy by denying application egress that does not match an allow rule.")
-  enforced: "enforced",
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Rule type for a hosted-agent egress policy rule.")
-union EgressPolicyRuleType {
-  string,
-
-  @doc("Match outbound traffic by fully qualified domain name host pattern.")
-  fqdn: "fqdn",
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Action type for a hosted-agent egress policy rule.")
-union EgressPolicyRuleActionType {
-  string,
-
-  @doc("Allow matching application egress.")
-  allow: "allow",
-
-  @doc("Deny matching application egress.")
-  deny: "deny",
-
-  @doc("Modify matching application egress without changing its destination.")
-  transform: "transform",
-
-  @doc("Rewrite matching application egress to a different destination.")
-  rewrite: "rewrite",
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Header modification operation for a hosted-agent egress policy action.")
-union EgressPolicyHeaderOperationType {
-  @doc("Set the header value on matching application egress.")
-  "set",
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Customer-authored egress policy for hosted-agent application traffic.")
-model EgressPolicyConfig {
-  @doc("The policy enforcement mode. V1 supports only enforced mode.")
-  mode: EgressPolicyMode;
-
-  @doc("Ordered egress policy rules. Enforced mode denies application egress when no rule matches.")
-  rules: EgressPolicyRuleConfig[];
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("A single hosted-agent egress policy rule.")
-model EgressPolicyRuleConfig {
-  @doc("The rule type. V1 supports FQDN host and path match rules.")
-  type: EgressPolicyRuleType;
-
-  @doc("A user-defined rule name that is unique within the policy.")
-  name: string;
-
-  @doc("Traffic matching criteria for the rule.")
-  match: EgressPolicyRuleMatchConfig;
-
-  @doc("The action to take when traffic matches the rule.")
-  action: EgressPolicyRuleActionConfig;
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Traffic matching criteria for a hosted-agent egress policy rule.")
-model EgressPolicyRuleMatchConfig {
-  @doc("Host pattern to match, such as an exact host, a leading wildcard subdomain, or '*'.")
-  host: string;
-
-  @doc("Optional path pattern to match, such as '/api/*'.")
-  path?: string;
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Action to take when a hosted-agent egress policy rule matches.")
-@discriminator("type")
-model EgressPolicyRuleActionConfig {
-  @doc("The action type.")
-  type: EgressPolicyRuleActionType;
-}
-
 @doc("Container-based deployment configuration for a hosted agent.")
 @extension(
   "x-ms-foundry-meta",
@@ -583,70 +472,6 @@ model ExternalAgentDefinition extends AgentDefinition {
   otel_agent_id?: string;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Action that allows matching hosted-agent application egress.")
-model EgressPolicyAllowActionConfig extends EgressPolicyRuleActionConfig {
-  type: EgressPolicyRuleActionType.allow;
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Action that denies matching hosted-agent application egress.")
-model EgressPolicyDenyActionConfig extends EgressPolicyRuleActionConfig {
-  type: EgressPolicyRuleActionType.deny;
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Action that modifies matching hosted-agent application egress without changing its destination.")
-model EgressPolicyTransformActionConfig extends EgressPolicyRuleActionConfig {
-  type: EgressPolicyRuleActionType.transform;
-
-  @doc("Header transformations to apply to matching application egress.")
-  headers?: EgressPolicyHeaderTransformConfig[];
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Action that rewrites matching hosted-agent application egress to a different destination.")
-model EgressPolicyRewriteActionConfig extends EgressPolicyRuleActionConfig {
-  type: EgressPolicyRuleActionType.rewrite;
-
-  @doc("Target URI scheme for rewritten application egress, such as 'https'.")
-  scheme: string;
-
-  @doc("Target host for rewritten application egress.")
-  host: string;
-
-  @doc("Header transformations to apply to matching application egress.")
-  headers?: EgressPolicyHeaderTransformConfig[];
-}
-
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
-)
-@doc("Header transformation to apply to matching hosted-agent application egress.")
-model EgressPolicyHeaderTransformConfig {
-  @doc("The header modification operation.")
-  operation: EgressPolicyHeaderOperationType;
-
-  @doc("The header name.")
-  name: string;
-
-  @doc("The header value.")
-  value: string;
-}
-
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -681,8 +506,8 @@ model HostedAgentDefinition extends AgentDefinition {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
   )
-  @doc("Customer-authored egress policy for hosted-agent application traffic.")
-  egress_policy?: EgressPolicyConfig;
+  @doc("The resource ID of the egress policy to apply to hosted-agent application traffic.")
+  egress_policy_id_preview?: string;
 
   @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
   @extension(
