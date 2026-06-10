@@ -35,6 +35,10 @@ using Microsoft.OperationalInsights;
 @@clientName(Azure.ResourceManager.CommonTypes.AccessRuleProperties, "OperationalInsightsNspAccessRuleProperties", "csharp");
 @@clientName(global.AccessRulePropertiesSubscriptionsItem, "OperationalInsightsNspAccessRuleSubscription", "csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.IssueType, "OperationalInsightsNspIssueType", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter, "OperationalInsightsNetworkSecurityPerimeter", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfiguration, "OperationalInsightsNetworkSecurityPerimeterConfiguration", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties, "OperationalInsightsNetworkSecurityPerimeterConfigurationProperties", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState, "OperationalInsightsNetworkSecurityPerimeterConfigurationProvisioningState", "csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile, "OperationalInsightsNetworkSecurityProfile", "csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssue, "OperationalInsightsNspProvisioningIssue", "csharp");
 @@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties, "OperationalInsightsNspProvisioningIssueProperties", "csharp");
@@ -69,7 +73,10 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsLinkedStorageAccounts",
   "csharp"
 );
+@@clientName(NetworkSecurityPerimeterConfiguration, "OperationalInsightsNetworkSecurityPerimeterConfiguration", "csharp");
 @@clientName(SavedSearch, "OperationalInsightsSavedSearch", "csharp");
+@@clientName(SummaryLogs, "OperationalInsightsSummaryLogs", "csharp");
+@@clientName(SummaryLogsRetryBin, "OperationalInsightsSummaryLogsRetryBin", "csharp");
 @@clientName(Table, "OperationalInsightsTable", "csharp");
 @@clientName(Workspace, "OperationalInsightsWorkspace", "csharp");
 
@@ -90,6 +97,13 @@ using Microsoft.OperationalInsights;
   "csharp"
 );
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
+
+@@alternateType(DataSource.etag, eTag, "csharp");
+@@alternateType(SavedSearch.etag, eTag, "csharp");
+@@alternateType(Workspace.etag, eTag, "csharp");
+@@alternateType(StorageInsight.eTag, eTag, "csharp");
+@@alternateType(Workspace.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(WorkspacePatch.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
 
 @@clientName(BillingType, "OperationalInsightsBillingType", "csharp");
 @@clientName(CapacityReservationProperties, "OperationalInsightsCapacityReservationProperties", "csharp");
