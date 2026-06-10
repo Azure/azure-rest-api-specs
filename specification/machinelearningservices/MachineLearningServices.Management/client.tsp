@@ -639,6 +639,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(AllNodes, "JobAllNodes", "csharp");
 @@clientName(AKS, "MachineLearningAksCompute", "csharp");
 @@clientName(AmlComputeProperties, "AmlComputeProperties", "csharp");
+@@clientName(AmlComputeProperties.errors, "Errors", "csharp");
 @@clientName(AmlComputeProperties.osType, "OSType", "csharp");
 @@clientName(
   AmlComputeProperties.enableNodePublicIp,
