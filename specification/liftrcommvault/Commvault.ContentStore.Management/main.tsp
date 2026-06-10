@@ -856,6 +856,7 @@ interface ProtectionGroups {
   delete is ArmResourceDeleteWithoutOkAsync<ProtectionGroup>;
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion"
   @doc("Stop Backup for a Protection Group")
   @armResourceAction(ProtectionGroup)
   @post
@@ -866,7 +867,7 @@ interface ProtectionGroups {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: StopBackupProtectionGroupRequest,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmNoContentResponse | ErrorResponse;
 
   @doc("Restore resource for a protected items in given protection group.")
   @armResourceAction(ProtectionGroup)
