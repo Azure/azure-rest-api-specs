@@ -7316,13 +7316,13 @@ model EdgeMachineWorkloadInventoryItem {
    * Configured virtual processor count from Hyper-V.
    */
   @visibility(Lifecycle.Read)
-  virtualProcessorCount?: int32;
+  virtualProcessorCount?: string;
 
   /**
    * Maximum memory the VM can consume, in bytes.
    */
   @visibility(Lifecycle.Read)
-  memoryInBytes?: int64;
+  memoryInBytes?: string;
 }
 
 /**
@@ -8822,6 +8822,24 @@ model EdgeMachineGpuProperties {
    */
   @visibility(Lifecycle.Read)
   partitionDetails?: GpuPartitionDetails;
+
+  /**
+   * The type of the accelerator.
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorType?: string;
+
+  /**
+   * The memory model of the GPU. Possible values are 'Dedicated VRAM', 'Unified (Shared System Memory)', and 'Unified (SoC LPDDR)'.
+   */
+  @visibility(Lifecycle.Read)
+  memoryModel?: string;
+
+  /**
+   * The total memory of the GPU in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  totalMemoryInBytes?: int64;
 }
 
 /**

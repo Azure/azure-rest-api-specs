@@ -3240,7 +3240,7 @@
             "description": "Name of ClusterJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -3310,7 +3310,7 @@
             "description": "Name of ClusterJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "resource",
@@ -3413,7 +3413,7 @@
             "description": "Name of ClusterJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -13077,6 +13077,22 @@
           "$ref": "#/definitions/GpuPartitionDetails",
           "description": "Details of the GPU specifically in GPU-P mode.",
           "readOnly": true
+        },
+        "acceleratorType": {
+          "type": "string",
+          "description": "The type of the accelerator.",
+          "readOnly": true
+        },
+        "memoryModel": {
+          "type": "string",
+          "description": "The memory model of the GPU. Possible values are 'Dedicated VRAM', 'Unified (Shared System Memory)', and 'Unified (SoC LPDDR)'.",
+          "readOnly": true
+        },
+        "totalMemoryInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total memory of the GPU in bytes.",
+          "readOnly": true
         }
       }
     },
@@ -14251,14 +14267,12 @@
           "readOnly": true
         },
         "virtualProcessorCount": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "Configured virtual processor count from Hyper-V.",
           "readOnly": true
         },
         "memoryInBytes": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
           "description": "Maximum memory the VM can consume, in bytes.",
           "readOnly": true
         }
