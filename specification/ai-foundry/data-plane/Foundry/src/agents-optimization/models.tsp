@@ -49,7 +49,7 @@ union OptimizationMode {
 // ---------------------------------------------------------------------------
 
 /** Discriminator values for the dataset input union. */
-union DatasetInputType {
+union OptimizationDatasetInputType {
   string,
 
   @doc("Inline dataset — items are provided directly in the request body.")
@@ -61,22 +61,22 @@ union DatasetInputType {
 
 /** Base discriminated model for dataset input. Either inline items or a registered reference. */
 @discriminator("type")
-model DatasetInput {
+model OptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: DatasetInputType;
+  type: OptimizationDatasetInputType;
 }
 
 /** Inline dataset — items supplied directly in the request body. */
-model InlineDatasetInput extends DatasetInput {
+model OptimizationInlineDatasetInput extends OptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: "inline";
 
   @doc("Dataset items.")
-  items: DatasetItem[];
+  items: OptimizationDatasetItem[];
 }
 
 /** Reference to a registered Foundry dataset. */
-model ReferenceDatasetInput extends DatasetInput {
+model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
   type: "reference";
 
@@ -88,7 +88,7 @@ model ReferenceDatasetInput extends DatasetInput {
 }
 
 /** A single item in an inline dataset. */
-model DatasetItem {
+model OptimizationDatasetItem {
   @doc("The user query / prompt.")
   query?: string;
 
@@ -101,11 +101,11 @@ model DatasetItem {
   desired_num_turns?: int32;
 
   @doc("Per-item evaluation criteria.")
-  criteria?: DatasetCriterion[];
+  criteria?: OptimizationDatasetCriterion[];
 }
 
 /** Evaluation criterion: a name + instruction pair used for per-item scoring. */
-model DatasetCriterion {
+model OptimizationDatasetCriterion {
   @doc("Criterion name.")
   name: string;
 
@@ -118,7 +118,7 @@ model DatasetCriterion {
 // ---------------------------------------------------------------------------
 
 /** Reference to a named evaluator, optionally pinned to a version. */
-model EvaluatorRef {
+model OptimizationEvaluatorRef {
   @doc("Evaluator name.")
   name: string;
 
@@ -131,7 +131,7 @@ model EvaluatorRef {
 // ---------------------------------------------------------------------------
 
 @doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
-model AgentIdentifier {
+model OptimizationAgentIdentifier {
   @doc("Registered Foundry agent name (required).")
   agent_name: string;
 
@@ -181,16 +181,16 @@ model OptimizationOptions {
 @doc("Caller-supplied inputs for an optimization job.")
 model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: AgentIdentifier;
+  agent: OptimizationAgentIdentifier;
 
   @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
-  train_dataset: DatasetInput;
+  train_dataset: OptimizationDatasetInput;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset?: DatasetInput;
+  validation_dataset?: OptimizationDatasetInput;
 
   @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
-  evaluators: EvaluatorRef[];
+  evaluators: OptimizationEvaluatorRef[];
 
   @doc("Tuning knobs and run-mode.")
   options?: OptimizationOptions;
@@ -335,7 +335,7 @@ model OptimizationJobListItem {
 
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
-  agent?: AgentIdentifier;
+  agent?: OptimizationAgentIdentifier;
 
   @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
   @visibility(Lifecycle.Read)

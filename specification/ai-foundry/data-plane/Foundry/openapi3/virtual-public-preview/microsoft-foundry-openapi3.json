@@ -21061,23 +21061,6 @@
           }
         }
       },
-      "AgentIdentifier": {
-        "type": "object",
-        "required": [
-          "agent_name"
-        ],
-        "properties": {
-          "agent_name": {
-            "type": "string",
-            "description": "Registered Foundry agent name (required)."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "Pinned agent version. Defaults to latest if omitted."
-          }
-        },
-        "description": "Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config."
-      },
       "AgentIdentity": {
         "type": "object",
         "required": [
@@ -25391,24 +25374,6 @@
         },
         "description": "Base class for run data sources with discriminator support."
       },
-      "DatasetCriterion": {
-        "type": "object",
-        "required": [
-          "name",
-          "instruction"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Criterion name."
-          },
-          "instruction": {
-            "type": "string",
-            "description": "Criterion instruction / description."
-          }
-        },
-        "description": "Evaluation criterion: a name + instruction pair used for per-item scoring."
-      },
       "DatasetDataGenerationJobOutput": {
         "type": "object",
         "required": [
@@ -25525,73 +25490,6 @@
           }
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
-      },
-      "DatasetInput": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DatasetInputType"
-              }
-            ],
-            "description": "Dataset input type discriminator."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "inline": "#/components/schemas/InlineDatasetInput",
-            "reference": "#/components/schemas/ReferenceDatasetInput"
-          }
-        },
-        "description": "Base discriminated model for dataset input. Either inline items or a registered reference."
-      },
-      "DatasetInputType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "inline",
-              "reference"
-            ]
-          }
-        ],
-        "description": "Discriminator values for the dataset input union."
-      },
-      "DatasetItem": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "The user query / prompt."
-          },
-          "ground_truth": {
-            "type": "string",
-            "description": "Expected ground truth answer."
-          },
-          "desired_num_turns": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 20,
-            "description": "Desired number of conversation turns for simulation mode (1-20)."
-          },
-          "criteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DatasetCriterion"
-            },
-            "description": "Per-item evaluation criteria."
-          }
-        },
-        "description": "A single item in an inline dataset."
       },
       "DatasetReference": {
         "type": "object",
@@ -28661,23 +28559,6 @@
         ],
         "description": "The type of the evaluator"
       },
-      "EvaluatorRef": {
-        "type": "object",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Evaluator name."
-          },
-          "version": {
-            "type": "string",
-            "description": "Evaluator version. If not specified, the latest version is used."
-          }
-        },
-        "description": "Reference to a named evaluator, optionally pinned to a version."
-      },
       "EvaluatorType": {
         "anyOf": [
           {
@@ -29828,35 +29709,6 @@
           }
         },
         "description": "Index resource Definition"
-      },
-      "InlineDatasetInput": {
-        "type": "object",
-        "required": [
-          "type",
-          "items"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "inline"
-            ],
-            "description": "Dataset input type discriminator."
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DatasetItem"
-            },
-            "description": "Dataset items."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DatasetInput"
-          }
-        ],
-        "description": "Inline dataset — items supplied directly in the request body."
       },
       "InputData": {
         "type": "object",
@@ -51711,6 +51563,23 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "OptimizationAgentIdentifier": {
+        "type": "object",
+        "required": [
+          "agent_name"
+        ],
+        "properties": {
+          "agent_name": {
+            "type": "string",
+            "description": "Registered Foundry agent name (required)."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "Pinned agent version. Defaults to latest if omitted."
+          }
+        },
+        "description": "Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config."
+      },
       "OptimizationCandidate": {
         "type": "object",
         "required": [
@@ -51760,6 +51629,137 @@
           }
         },
         "description": "Aggregated evaluation result for a single candidate agent configuration across all tasks."
+      },
+      "OptimizationDatasetCriterion": {
+        "type": "object",
+        "required": [
+          "name",
+          "instruction"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Criterion name."
+          },
+          "instruction": {
+            "type": "string",
+            "description": "Criterion instruction / description."
+          }
+        },
+        "description": "Evaluation criterion: a name + instruction pair used for per-item scoring."
+      },
+      "OptimizationDatasetInput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OptimizationDatasetInputType"
+              }
+            ],
+            "description": "Dataset input type discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "inline": "#/components/schemas/OptimizationInlineDatasetInput",
+            "reference": "#/components/schemas/OptimizationReferenceDatasetInput"
+          }
+        },
+        "description": "Base discriminated model for dataset input. Either inline items or a registered reference."
+      },
+      "OptimizationDatasetInputType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "inline",
+              "reference"
+            ]
+          }
+        ],
+        "description": "Discriminator values for the dataset input union."
+      },
+      "OptimizationDatasetItem": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The user query / prompt."
+          },
+          "ground_truth": {
+            "type": "string",
+            "description": "Expected ground truth answer."
+          },
+          "desired_num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20,
+            "description": "Desired number of conversation turns for simulation mode (1-20)."
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptimizationDatasetCriterion"
+            },
+            "description": "Per-item evaluation criteria."
+          }
+        },
+        "description": "A single item in an inline dataset."
+      },
+      "OptimizationEvaluatorRef": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Evaluator name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Evaluator version. If not specified, the latest version is used."
+          }
+        },
+        "description": "Reference to a named evaluator, optionally pinned to a version."
+      },
+      "OptimizationInlineDatasetInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "items"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inline"
+            ],
+            "description": "Dataset input type discriminator."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptimizationDatasetItem"
+            },
+            "description": "Dataset items."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OptimizationDatasetInput"
+          }
+        ],
+        "description": "Inline dataset — items supplied directly in the request body."
       },
       "OptimizationJob": {
         "type": "object",
@@ -51859,7 +51859,7 @@
           "agent": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentIdentifier"
+                "$ref": "#/components/schemas/OptimizationAgentIdentifier"
               }
             ],
             "description": "The agent (and pinned version) being optimized."
@@ -51867,7 +51867,7 @@
           "train_dataset": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DatasetInput"
+                "$ref": "#/components/schemas/OptimizationDatasetInput"
               }
             ],
             "description": "Training dataset — either inline items or a reference to a registered dataset. Required."
@@ -51875,7 +51875,7 @@
           "validation_dataset": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DatasetInput"
+                "$ref": "#/components/schemas/OptimizationDatasetInput"
               }
             ],
             "description": "Optional held-out validation dataset for measuring generalization of the final candidate."
@@ -51883,7 +51883,7 @@
           "evaluators": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EvaluatorRef"
+              "$ref": "#/components/schemas/OptimizationEvaluatorRef"
             },
             "description": "Job-level evaluators referenced by name and optional version. Required; at least one must be provided."
           },
@@ -51942,7 +51942,7 @@
           "agent": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentIdentifier"
+                "$ref": "#/components/schemas/OptimizationAgentIdentifier"
               }
             ],
             "description": "The agent targeted by this optimization job.",
@@ -52048,6 +52048,36 @@
           }
         },
         "description": "Tuning knobs and run-mode for an optimization job."
+      },
+      "OptimizationReferenceDatasetInput": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reference"
+            ],
+            "description": "Dataset input type discriminator."
+          },
+          "name": {
+            "type": "string",
+            "description": "Registered dataset name."
+          },
+          "version": {
+            "type": "string",
+            "description": "Dataset version. If not specified, the latest version is used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OptimizationDatasetInput"
+          }
+        ],
+        "description": "Reference to a registered Foundry dataset."
       },
       "OtlpTelemetryEndpoint": {
         "type": "object",
@@ -53148,36 +53178,6 @@
           }
         ],
         "description": "Represents the parameters for red team taxonomy item generation."
-      },
-      "ReferenceDatasetInput": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "reference"
-            ],
-            "description": "Dataset input type discriminator."
-          },
-          "name": {
-            "type": "string",
-            "description": "Registered dataset name."
-          },
-          "version": {
-            "type": "string",
-            "description": "Dataset version. If not specified, the latest version is used."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DatasetInput"
-          }
-        ],
-        "description": "Reference to a registered Foundry dataset."
       },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
