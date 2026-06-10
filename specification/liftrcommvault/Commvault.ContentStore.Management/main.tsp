@@ -893,9 +893,9 @@ interface ProtectionGroups {
   @action("resumeBackup")
   @post
   @added(Versions.v3_preview)
-  resumeBackup(
-    ...ResourceInstanceParameters<ProtectionGroup>,
-  ): ArmNoContentResponse<"Resource operation accepted."> | ErrorResponse;
+  resumeBackup(...ResourceInstanceParameters<ProtectionGroup>):
+    | ArmNoContentResponse<"Resource operation accepted.">
+    | ErrorResponse;
 
   @doc("Ad-hoc backup of protected items resource in given protection group.")
   @armResourceAction(ProtectionGroup)
@@ -1082,9 +1082,9 @@ interface ProtectedItems {
   @armResourceAction(ProtectedItem)
   @action("getRestorePoints")
   @post
-  getRestorePoints(
-    ...ResourceInstanceParameters<ProtectedItem>,
-  ): ArmResponse<RestorePoints> | ErrorResponse;
+  getRestorePoints(...ResourceInstanceParameters<ProtectedItem>):
+    | ArmResponse<RestorePoints>
+    | ErrorResponse;
 
   @doc("Restore resource for a protected item.")
   @armResourceAction(ProtectedItem)
