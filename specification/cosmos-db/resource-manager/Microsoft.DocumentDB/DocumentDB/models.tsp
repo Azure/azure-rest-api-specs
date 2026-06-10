@@ -8611,8 +8611,13 @@ model FleetResourceProperties {
 /**
  * Represents a fleet resource for updates.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FleetResourceUpdate {
+  /**
+   * Resource tags. A dictionary of key-value pairs used to categorize and organize the Azure Cosmos DB fleet resource across resource groups and subscriptions.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are defined by ARM as an open-ended string-to-string map, so Record<string> is the correct and required representation for the tags property."
+  tags?: Record<string>;
+
   /**
    * Properties to update Azure Cosmos DB fleet resource.
    */
