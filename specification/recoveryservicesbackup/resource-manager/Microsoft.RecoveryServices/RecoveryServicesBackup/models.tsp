@@ -3548,6 +3548,12 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
   targetDetails?: TargetAFSRestoreInfo;
 
   /**
+   * Managed Identity information required to access customer storage account.
+   */
+  @added(Versions.v2026_05_31_preview)
+  identityInfo?: IdentityInfo;
+
+  /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "AzureFileShareRestoreRequest";

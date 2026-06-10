@@ -2305,6 +2305,12 @@
           }
         },
         "x-ms-examples": {
+          "Restore Azure File Share to Original Location with Managed Identity": {
+            "$ref": "./examples/AzureStorage/TriggerRestore_AzureFileShare_WithSAMI.json"
+          },
+          "Restore Azure File Share to Original Location with User Assigned Managed Identity": {
+            "$ref": "./examples/AzureStorage/TriggerRestore_AzureFileShare_WithUAMI.json"
+          },
           "Restore Disks with IaasVMRestoreRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_RestoreDisks_IaasVMRestoreRequest.json"
           },
@@ -5550,6 +5556,10 @@
         "targetDetails": {
           "$ref": "#/definitions/TargetAFSRestoreInfo",
           "description": "Target File Share Details"
+        },
+        "identityInfo": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Managed Identity information required to access customer storage account."
         }
       },
       "allOf": [
