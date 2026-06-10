@@ -1762,7 +1762,53 @@ union ComputeUsageUnit {
   "GallerySharingPermissionType",
   "csharp"
 );
-@@clientName(UpdateResourceDefinition, "GalleryResourcePatch", "csharp");
+
+// Gallery update models previously shipped as ResourceData-derived patch models.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryImageUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryImageVersionUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryApplicationUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryApplicationVersionUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryScriptUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryScriptVersionUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryInVMAccessControlProfileUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for gallery patch models"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryInVMAccessControlProfileVersionUpdate,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
 
 // Accessibility overrides.
 @@access(CommunityGalleryIdentifier, Access.public, "csharp");
