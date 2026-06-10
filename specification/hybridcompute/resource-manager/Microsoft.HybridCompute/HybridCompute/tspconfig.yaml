@@ -56,6 +56,23 @@ options:
     service-name: ConnectedMachine
     module-name: "{prefix}.{service-name}"
     output-folder: "{output-dir}"
+
+    # Official mitigation for the emitter crash on Machines_Update:
+    #   "Parameter IdentityType in operation 'Machines_Update' can not be
+    #    transformed as the best practice design."
+    # The identity-type transform tries to replace the PATCH op with a GET+PUT pair
+    # so it can expose -EnableSystemAssignedIdentity / -UserAssignedIdentity. The
+    # rewrite fails on certain operation shapes (e.g. ops with extra query params),
+    # and the failure is a hard crash that aborts the whole emit before directives
+    # can run. Disabling the transform for just this op lets the emitter produce
+    # the raw cmdlet shape; the hand-written custom/Update-AzConnectedMachine.ps1
+    # wrapper (paired with the `hide: true` directive below) then exposes the
+    # standard Az identity surface and performs the read-modify-write merge.
+    # Reference: https://github.com/Azure/autorest.powershell (search for
+    # `disable-transform-identity-type-for-operation`).
+    disable-transform-identity-type-for-operation:
+      - Machines_Update
+
     directive:
       # GetViaIdentity is rarely useful for users
       - where:
@@ -74,6 +91,25 @@ options:
           parameter-name: ExtensionName
         set:
           parameter-name: Name
+
+      # Invoke-AzConnectedSetupExtension has a name collision: both the
+      # request-body variants (Setup, SetupViaIdentity) and the expanded
+      # variants (SetupExpanded, SetupViaIdentityExpanded) want to expose
+      # a parameter named -Extension. The body variants get it from the
+      # @@clientName rename of the SetupExtensionRequest body parameter
+      # (in back-compatible.tsp). The expanded variants get it from
+      # singularising SetupExtensionRequest.extensions[]. The proxy
+      # generator can't merge two parameters of the same name but
+      # different types onto a single cmdlet, so rename the body-form
+      # variants to -ExtensionRequest. The user-facing expanded variants
+      # keep -Extension <MachineExtensionProperties[]> which is the
+      # ergonomic form.
+      - where:
+          subject: SetupExtension
+          parameter-name: Extension
+          variant: ^Setup(ViaIdentity)?$
+        set:
+          parameter-name: ExtensionRequest
       # TODO: verify after first generation. TypeSpec PUT body is NOT flattened
       # (only the PATCH body via back-compatible.tsp), so `PropertiesType` may emit
       # as `Type` on the parameter and `Type` / `MachineExtensionType` on the model.
@@ -234,7 +270,18 @@ options:
           subject: NetworkConfiguration
         remove: true
 
-      # Hide Update-AzConnectedMachine so custom/ implementation takes over
+      # Paired with `disable-transform-identity-type-for-operation: Machines_Update`
+      # above. Hides the auto-generated public Update-AzConnectedMachine so the
+      # hand-written custom/Update-AzConnectedMachine.ps1 wrapper is the public face.
+      # The wrapper exposes -EnableSystemAssignedIdentity / -UserAssignedIdentity and
+      # performs the read-modify-write merge against the current resource state so
+      # partial identity updates don't accidentally clobber other identities. The
+      # generated internal cmdlet (Az.ConnectedMachine.internal\Update-AzConnectedMachine)
+      # is still produced and is what the custom wrapper delegates to. Do NOT change
+      # to `remove-operation: Machines_Update` — that would delete the internal
+      # cmdlet and break the custom wrapper.
+      # Reference pattern: src/Astro/Astro.Autorest/custom/Update-AzAstroOrganization.ps1
+      # Reference doc: https://github.com/Azure/azure-powershell/blob/main/documentation/development-docs/design-guidelines/managed-identity-best-practices.md
       - where:
           subject: Machine
           verb: Update
