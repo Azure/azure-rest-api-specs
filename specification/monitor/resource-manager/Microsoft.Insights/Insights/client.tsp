@@ -324,3 +324,8 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   "ActionGroup",
   "python"
 );
+@@clientName(
+  Microsoft.Common.CommonErrorResponse,
+  "ErrorResponseCommon",
+  "python"
+);
