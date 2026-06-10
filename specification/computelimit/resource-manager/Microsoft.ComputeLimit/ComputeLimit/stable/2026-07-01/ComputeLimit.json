@@ -58,7 +58,7 @@
       "name": "SharedLimitCaps"
     },
     {
-      "name": "Members"
+      "name": "MemberCapOverrides"
     }
   ],
   "paths": {
@@ -995,13 +995,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/members": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/memberCapOverrides": {
       "get": {
-        "operationId": "Members_ListByParent",
+        "operationId": "MemberCapOverrides_ListByParent",
         "tags": [
-          "Members"
+          "MemberCapOverrides"
         ],
-        "description": "Lists all per-member caps configured under a SharedLimitCap.",
+        "description": "Lists all per-member cap overrides configured under a SharedLimitCap.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1022,7 +1022,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MemberListResult"
+              "$ref": "#/definitions/MemberCapOverrideListResult"
             }
           },
           "default": {
@@ -1033,8 +1033,8 @@
           }
         },
         "x-ms-examples": {
-          "List all member caps under a SharedLimitCap": {
-            "$ref": "./examples/Members_ListByParent.json"
+          "List all member cap overrides under a shared limit cap": {
+            "$ref": "./examples/MemberCapOverrides_ListByParent.json"
           }
         },
         "x-ms-pageable": {
@@ -1042,13 +1042,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/members/{memberSubscriptionId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/memberCapOverrides/{memberSubscriptionId}": {
       "get": {
-        "operationId": "Members_Get",
+        "operationId": "MemberCapOverrides_Get",
         "tags": [
-          "Members"
+          "MemberCapOverrides"
         ],
-        "description": "Gets the cap configured for a single member subscription.",
+        "description": "Gets the cap override configured for a single member subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1067,7 +1067,7 @@
           {
             "name": "memberSubscriptionId",
             "in": "path",
-            "description": "The name of the Member",
+            "description": "The name of the MemberCapOverride",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
@@ -1077,7 +1077,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Member"
+              "$ref": "#/definitions/MemberCapOverride"
             }
           },
           "default": {
@@ -1088,17 +1088,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a single member cap": {
-            "$ref": "./examples/Members_Get.json"
+          "Get a single member cap override": {
+            "$ref": "./examples/MemberCapOverrides_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Members_CreateOrUpdate",
+        "operationId": "MemberCapOverrides_CreateOrUpdate",
         "tags": [
-          "Members"
+          "MemberCapOverrides"
         ],
-        "description": "Creates or replaces the cap for a single member subscription.",
+        "description": "Creates or replaces the cap override for a single member subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1117,7 +1117,7 @@
           {
             "name": "memberSubscriptionId",
             "in": "path",
-            "description": "The name of the Member",
+            "description": "The name of the MemberCapOverride",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
@@ -1128,21 +1128,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Member"
+              "$ref": "#/definitions/MemberCapOverride"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Member' update operation succeeded",
+            "description": "Resource 'MemberCapOverride' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Member"
+              "$ref": "#/definitions/MemberCapOverride"
             }
           },
           "201": {
-            "description": "Resource 'Member' create operation succeeded",
+            "description": "Resource 'MemberCapOverride' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Member"
+              "$ref": "#/definitions/MemberCapOverride"
             }
           },
           "default": {
@@ -1153,15 +1153,15 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a single member cap": {
-            "$ref": "./examples/Members_CreateOrUpdate.json"
+          "Create or update a single member cap override": {
+            "$ref": "./examples/MemberCapOverrides_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
-        "operationId": "Members_Delete",
+        "operationId": "MemberCapOverrides_Delete",
         "tags": [
-          "Members"
+          "MemberCapOverrides"
         ],
         "description": "Removes the per-member cap override for a member subscription.",
         "parameters": [
@@ -1182,7 +1182,7 @@
           {
             "name": "memberSubscriptionId",
             "in": "path",
-            "description": "The name of the Member",
+            "description": "The name of the MemberCapOverride",
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
@@ -1203,8 +1203,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete a single member cap": {
-            "$ref": "./examples/Members_Delete.json"
+          "Delete a single member cap override": {
+            "$ref": "./examples/MemberCapOverrides_Delete.json"
           }
         }
       }
@@ -1393,12 +1393,32 @@
         "value"
       ]
     },
-    "Member": {
+    "MemberCap": {
       "type": "object",
-      "description": "Per-member cap as a standalone child resource of `SharedLimitCap`. Use this\nresource to read or modify a single member's bounded cap without resending\nthe entire `members` array on the parent.",
+      "description": "Per-member cap override embedded inside\n`SharedLimitCap.properties.memberCapOverrides[]`. Each entry pairs a member\nsubscription with its cap value.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The member subscription identifier this cap applies to."
+        },
+        "cap": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The cap value in count units for this member subscription.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "cap"
+      ]
+    },
+    "MemberCapOverride": {
+      "type": "object",
+      "description": "Member cap override as a standalone child resource of `SharedLimitCap`.\nUse this resource to read or modify a single member's cap without\nresending the entire `memberCapOverrides` array on the parent.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MemberProperties",
+          "$ref": "#/definitions/MemberCapOverrideProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -1408,35 +1428,15 @@
         }
       ]
     },
-    "MemberCap": {
+    "MemberCapOverrideListResult": {
       "type": "object",
-      "description": "Per-member cap entry embedded inside `SharedLimitCap.properties.members[]`.\nEach entry pairs a member subscription with its bounded cap value.",
-      "properties": {
-        "memberSubscriptionId": {
-          "type": "string",
-          "description": "The member subscription identifier this cap applies to."
-        },
-        "boundedCap": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The cap value in count units for this member subscription.",
-          "minimum": 0
-        }
-      },
-      "required": [
-        "memberSubscriptionId",
-        "boundedCap"
-      ]
-    },
-    "MemberListResult": {
-      "type": "object",
-      "description": "The response of a Member list operation.",
+      "description": "The response of a MemberCapOverride list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Member items on this page",
+          "description": "The MemberCapOverride items on this page",
           "items": {
-            "$ref": "#/definitions/Member"
+            "$ref": "#/definitions/MemberCapOverride"
           }
         },
         "nextLink": {
@@ -1449,11 +1449,11 @@
         "value"
       ]
     },
-    "MemberProperties": {
+    "MemberCapOverrideProperties": {
       "type": "object",
-      "description": "Properties of a per-member cap.",
+      "description": "Properties of a per-member cap override.",
       "properties": {
-        "boundedCap": {
+        "cap": {
           "type": "integer",
           "format": "int32",
           "description": "The cap value in count units for this member subscription.",
@@ -1466,12 +1466,12 @@
         }
       },
       "required": [
-        "boundedCap"
+        "cap"
       ]
     },
     "OptionalInt32": {
       "type": "object",
-      "description": "Wrapper that lets callers distinguish three intents for an integer field:\nomit the wrapper to leave the value unchanged, supply `{}` to clear it,\nor supply `{ \"value\": N }` to set it to N. GET responses return the same\nshape (`{ \"value\": N }` when configured, omitted when unset).",
+      "description": "Wrapper that lets callers distinguish three intents for an integer field:\nomit the wrapper to leave the value unchanged,\nsupply `{}` to clear it,\nor supply `{ \"value\": N }` to set it to N.",
       "properties": {
         "value": {
           "type": "integer",
@@ -1537,23 +1537,23 @@
       "type": "object",
       "description": "Properties of a shared limit cap resource.",
       "properties": {
-        "baselineCap": {
+        "defaultMemberCap": {
           "$ref": "#/definitions/OptionalInt32",
-          "description": "Baseline cap value (in count units) applied to member subscriptions that\ndo not have an explicit per-member cap. Uses the `OptionalInt32` wrapper\nso PUT requests can distinguish three intents: omit the property to leave\nthe existing value unchanged, supply `{}` to clear it, or supply\n`{ \"value\": N }` to set it to N. GET responses return the same wrapper\nshape (`{ \"value\": N }` when configured, omitted when unset)."
+          "description": "The Default member cap value (in count units)"
         },
         "isBoundedCap": {
           "type": "boolean",
-          "description": "Whether the cap is enforced as a hard bound. When true the configured\ncaps are enforced; when false they are advisory only."
+          "description": "Controls whether the service validates the aggregate cap against the\ngroup limit for the VM family.\n\nSUM(caps) is the sum of all `memberCapOverrides[].cap` values plus\n`defaultMemberCap` multiplied by the number of member subscriptions without an override.\n\nWhen true, the service rejects any configuration where SUM(caps)\nexceeds the group limit. When false, SUM(caps) is permitted to exceed\nthe group limit.\n\nEnabling this flag is rejected if the current configuration already breaches the group limit;\nreduce caps first, then enable."
         },
-        "members": {
+        "memberCapOverrides": {
           "type": "array",
-          "description": "Per-member cap overrides. Returned on GET; omitted on list responses to\nkeep payloads small. On create/replace via PUT, supplying this array\nreplaces the full set of member caps; omit it to leave the existing set\nunchanged. To edit a single member without sending the full list, use\nthe `Member` child resource.",
+          "description": "The member cap overrides.",
           "maxItems": 1000,
           "items": {
             "$ref": "#/definitions/MemberCap"
           },
           "x-ms-identifiers": [
-            "memberSubscriptionId"
+            "subscriptionId"
           ]
         },
         "provisioningState": {

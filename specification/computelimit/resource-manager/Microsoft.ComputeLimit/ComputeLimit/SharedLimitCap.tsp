@@ -27,55 +27,53 @@ model SharedLimitCap is ProxyResource<SharedLimitCapProperties> {
 /** Properties of a shared limit cap resource. */
 @added(Versions.v2026_07_01)
 model SharedLimitCapProperties {
-  /**
-   * Baseline cap value (in count units) applied to member subscriptions that
-   * do not have an explicit per-member cap. Uses the `OptionalInt32` wrapper
-   * so PUT requests can distinguish three intents: omit the property to leave
-   * the existing value unchanged, supply `{}` to clear it, or supply
-   * `{ "value": N }` to set it to N. GET responses return the same wrapper
-   * shape (`{ "value": N }` when configured, omitted when unset).
-   */
-  baselineCap?: OptionalInt32;
+  /** The Default member cap value (in count units) */
+  defaultMemberCap?: OptionalInt32;
 
   /**
-   * Whether the cap is enforced as a hard bound. When true the configured
-   * caps are enforced; when false they are advisory only.
+   * Controls whether the service validates the aggregate cap against the
+   * group limit for the VM family.
+   *
+   * SUM(caps) is the sum of all `memberCapOverrides[].cap` values plus
+   * `defaultMemberCap` multiplied by the number of member subscriptions without an override.
+   *
+   * When true, the service rejects any configuration where SUM(caps)
+   * exceeds the group limit. When false, SUM(caps) is permitted to exceed
+   * the group limit.
+   *
+   * Enabling this flag is rejected if the current configuration already breaches the group limit;
+   * reduce caps first, then enable.
    */
   isBoundedCap?: boolean;
 
-  /**
-   * Per-member cap overrides. Returned on GET; omitted on list responses to
-   * keep payloads small. On create/replace via PUT, supplying this array
-   * replaces the full set of member caps; omit it to leave the existing set
-   * unchanged. To edit a single member without sending the full list, use
-   * the `Member` child resource.
-   */
+  /** The member cap overrides. */
   @maxItems(1000)
-  @identifiers(#["memberSubscriptionId"])
-  members?: MemberCap[];
+  @identifiers(#["subscriptionId"])
+  memberCapOverrides?: MemberCap[];
 
   ...DefaultProvisioningStateProperty;
 }
 
 /**
- * Per-member cap entry embedded inside `SharedLimitCap.properties.members[]`.
- * Each entry pairs a member subscription with its bounded cap value.
+ * Per-member cap override embedded inside
+ * `SharedLimitCap.properties.memberCapOverrides[]`. Each entry pairs a member
+ * subscription with its cap value.
  */
 @added(Versions.v2026_07_01)
 model MemberCap {
   /** The member subscription identifier this cap applies to. */
-  memberSubscriptionId: string;
+  subscriptionId: string;
 
   /** The cap value in count units for this member subscription. */
   @minValue(0)
-  boundedCap: int32;
+  cap: int32;
 }
 
 /**
  * Wrapper that lets callers distinguish three intents for an integer field:
- * omit the wrapper to leave the value unchanged, supply `{}` to clear it,
- * or supply `{ "value": N }` to set it to N. GET responses return the same
- * shape (`{ "value": N }` when configured, omitted when unset).
+ * omit the wrapper to leave the value unchanged,
+ * supply `{}` to clear it,
+ * or supply `{ "value": N }` to set it to N.
  */
 @added(Versions.v2026_07_01)
 model OptionalInt32 {
