@@ -6491,3 +6491,140 @@ model ManagedComputeCapacityListResult {
   @identifiers(#["id"])
   value?: ManagedComputeCapacity[];
 }
+
+/**
+ * The type of policy.
+ */
+@added(Versions.v2026_07_01_preview)
+union PolicyType {
+  string,
+
+  /** Egress policy for controlling outbound network traffic from sandboxes. */
+  Egress: "Egress",
+}
+
+/**
+ * The default action when no policy rules match.
+ */
+@added(Versions.v2026_07_01_preview)
+union PolicyDefaultAction {
+  string,
+
+  /** Allow traffic by default when no rules match. */
+  Allow: "Allow",
+
+  /** Deny traffic by default when no rules match. */
+  Deny: "Deny",
+}
+
+/**
+ * The action to take when a policy rule matches.
+ */
+@added(Versions.v2026_07_01_preview)
+union PolicyRuleAction {
+  string,
+
+  /** Allow the matched traffic. */
+  Allow: "Allow",
+
+  /** Deny the matched traffic. */
+  Deny: "Deny",
+}
+
+/**
+ * The match criteria for a policy rule.
+ */
+@added(Versions.v2026_07_01_preview)
+model PolicyRuleMatch {
+  /**
+   * Host pattern to match (glob pattern, e.g. "*.openai.com").
+   */
+  host?: string;
+
+  /**
+   * Path pattern to match (glob pattern, e.g. "/v1/*").
+   */
+  path?: string;
+
+  /**
+   * HTTP methods to match. If omitted, all methods are matched.
+   */
+  methods?: string[];
+}
+
+/**
+ * A single rule within a policy.
+ */
+@added(Versions.v2026_07_01_preview)
+model PolicyRule {
+  /**
+   * Name of the rule. Must be unique within the policy.
+   */
+  name?: string;
+
+  /**
+   * Description of the rule.
+   */
+  description?: string;
+
+  /**
+   * The match criteria for this rule.
+   */
+  match?: PolicyRuleMatch;
+
+  /**
+   * The action to take when this rule matches.
+   */
+  action?: PolicyRuleAction;
+}
+
+/**
+ * Properties of a Cognitive Services Policy resource.
+ */
+@added(Versions.v2026_07_01_preview)
+model PolicyProperties {
+  /**
+   * The type of policy.
+   */
+  policyType?: PolicyType;
+
+  /**
+   * The default action when no rules match.
+   */
+  defaultAction?: PolicyDefaultAction;
+
+  /**
+   * Description of the policy.
+   */
+  description?: string;
+
+  /**
+   * Ordered list of policy rules. First matching rule wins.
+   */
+  @identifiers(#["name"])
+  rules?: PolicyRule[];
+
+  /**
+   * The provisioning state of the policy resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * A paginated list of Policy resources.
+ */
+@added(Versions.v2026_07_01_preview)
+model PolicyListResult {
+  /**
+   * The link to the next page of Policy objects.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of Policy resources.
+   */
+  @pageItems
+  value?: PolicyResource[];
+}

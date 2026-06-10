@@ -125,6 +125,25 @@ suppressions:
 ```
 
 
+### Tag: package-2026-07-01-preview
+
+These settings apply only when `--tag=package-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01-preview'
+input-file:
+  - Microsoft.CognitiveServices/preview/2026-07-01-preview/cognitiveservices.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.definitions.OutboundRuleBasicResource
+  - code: AvoidAdditionalProperties
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.definitions.ConnectionPropertiesV2
+```
+
+
 ### Tag: package-2026-03-15-preview
 
 These settings apply only when `--tag=package-2026-03-15-preview` is specified on the command line.
