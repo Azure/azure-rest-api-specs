@@ -2279,6 +2279,24 @@
         "saaSGuid"
       ]
     },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -2639,7 +2657,7 @@
       "description": "The type used for update operations of the CloudAccount.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -2660,7 +2678,7 @@
       "description": "The updatable properties of the CloudAccount.",
       "properties": {
         "marketplace": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
@@ -2968,6 +2986,24 @@
         "offerDetails"
       ]
     },
+    "LiftrBase.MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "saasResourceId": {
+          "type": "string",
+          "description": "Marketplace SaaS Resource Id"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
     "LiftrBase.MarketplaceSubscriptionStatus": {
       "type": "string",
       "description": "Marketplace subscription status of a resource.",
@@ -3037,6 +3073,36 @@
         "publisherId",
         "offerId"
       ]
+    },
+    "LiftrBase.OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        }
+      }
     },
     "LiftrBase.UserDetails": {
       "type": "object",
