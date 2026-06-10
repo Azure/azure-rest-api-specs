@@ -8052,7 +8052,7 @@ model InterconnectBlockProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
