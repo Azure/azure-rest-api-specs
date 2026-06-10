@@ -268,6 +268,9 @@ namespace ComputeCombine;
 
 // ── C# operation renames for backward compatibility (migration from AutoRest) ──
 // These mirror the override-operation-name entries from the deleted autorest.md.
+// Operations.list is not using the standard ARM operation template, so omit it
+// from the generated C# SDK surface.
+@@access(Operations.list, Access.internal, "csharp");
 @@clientName(Compute.VirtualMachines.start, "PowerOn", "csharp");
 @@clientName(Compute.VirtualMachines.migrateToVMScaleSet,
   "MigrateToVirtualMachineScaleSet",
