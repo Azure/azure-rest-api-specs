@@ -74,12 +74,16 @@ interface SharedPrivateLinkResources {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
+    Response =
+      | ArmResourceUpdatedResponse<SharedPrivateLinkResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
     Error = CloudError
   >;
 
   /**
    * Initiates the deletion of the shared private link resource from the search service.
+   * Returns 202 (Accepted) for asynchronous deletion, 204 (No Content) if the service exists but the shared private link is not found, or 404 (Not Found) if the service is not found.
+   * NOTE: The behavior of returning 404 is inconsistent with ARM guidelines. Clients should expect a 204 response in future versions and avoid new dependencies on the 404 response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -102,8 +106,11 @@ interface SharedPrivateLinkResources {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse | NotFoundResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse
+      | NotFoundResponse,
     Error = CloudError
   >;
 
@@ -133,12 +140,15 @@ interface SharedPrivateLinkResources {
   >;
 }
 
-@@doc(SharedPrivateLinkResource.name,
+@@doc(
+  SharedPrivateLinkResource.name,
   "The name of the shared private link resource managed by the Azure AI Search service within the specified resource group."
 );
-@@doc(SharedPrivateLinkResource.properties,
+@@doc(
+  SharedPrivateLinkResource.properties,
   "Describes the properties of a shared private link resource managed by the Azure AI Search service."
 );
-@@doc(SharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@doc(
+  SharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "The definition of the shared private link resource to create or update."
 );

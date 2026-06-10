@@ -12,6 +12,9 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.NetworkFunction"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-networkfunction"
     namespace: "azure.mgmt.networkfunction"
@@ -34,7 +37,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/networkfunction"
     emitter-output-dir: "{output-dir}/{service-dir}/armnetworkfunction"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetworkfunction"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetworkfunction/v3"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

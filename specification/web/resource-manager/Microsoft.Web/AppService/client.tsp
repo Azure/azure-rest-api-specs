@@ -21,71 +21,88 @@ using Azure.ResourceManager;
 @@clientName(SupportedTlsVersions.`1.2`, "One2", "go, javascript");
 @@clientName(SupportedTlsVersions.`1.3`, "One3", "go, javascript");
 
-@@clientName(TlsCipherSuites.TLS_AES_256_GCM_SHA384,
+@@clientName(
+  TlsCipherSuites.TLS_AES_256_GCM_SHA384,
   "TLS_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_AES_128_GCM_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_AES_128_GCM_SHA256,
   "TLS_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
   "TLS_ECDHE_ECDSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
   "TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
   "TLS_ECDHE_ECDSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
   "TLS_ECDHE_RSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
   "TLS_ECDHE_RSA_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
   "TLS_ECDHE_RSA_WITH_AES128_CBC_SHA",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_RSA_WITH_AES_256_GCM_SHA384,
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_GCM_SHA384,
   "TLS_RSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_RSA_WITH_AES_128_GCM_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_GCM_SHA256,
   "TLS_RSA_WITH_AES128_GCM_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA256,
   "TLS_RSA_WITH_AES256_CBC_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA256,
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA256,
   "TLS_RSA_WITH_AES128_CBC_SHA256",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA,
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA,
   "TLS_RSA_WITH_AES256_CBC_SHA",
   "python"
 );
-@@clientName(TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA,
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA,
   "TLS_RSA_WITH_AES128_CBC_SHA",
   "python"
 );
@@ -137,7 +154,8 @@ op diagnosticsExecuteSiteAnalysisSlotCustomized(
   body: void,
 ): ArmResponse<DiagnosticAnalysis>;
 
-@@override(AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
+@@override(
+  AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
   diagnosticsExecuteSiteAnalysisSlotCustomized
 );
 
@@ -184,7 +202,8 @@ op diagnosticsExecuteSiteDetectorCustomized(
   body: void,
 ): ArmResponse<DiagnosticDetectorResponse>;
 
-@@override(DetectorDefinitionResources.executeSiteDetector,
+@@override(
+  DetectorDefinitionResources.executeSiteDetector,
   diagnosticsExecuteSiteDetectorCustomized
 );
 
@@ -235,7 +254,8 @@ op diagnosticsExecuteSiteDetectorSlotCustomized(
   body: void,
 ): ArmResponse<DiagnosticDetectorResponse>;
 
-@@override(DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
+@@override(
+  DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
   diagnosticsExecuteSiteDetectorSlotCustomized
 );
 
@@ -264,7 +284,8 @@ op diagnosticsGetSiteAnalysisSlotCustomized(
   slot: string,
 ): ArmResponse<AnalysisDefinition>;
 
-@@override(AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
+@@override(
+  AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
   diagnosticsGetSiteAnalysisSlotCustomized
 );
 
@@ -308,7 +329,8 @@ op diagnosticsGetSiteDetectorResponseSlotCustomized(
   timeGrain?: string,
 ): ArmResponse<DetectorResponse>;
 
-@@override(DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
+@@override(
+  DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
   diagnosticsGetSiteDetectorResponseSlotCustomized
 );
 
@@ -337,7 +359,8 @@ op diagnosticsGetSiteDetectorSlotCustomized(
   slot: string,
 ): ArmResponse<DetectorDefinitionResource>;
 
-@@override(DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
+@@override(
+  DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
   diagnosticsGetSiteDetectorSlotCustomized
 );
 
@@ -362,7 +385,8 @@ op diagnosticsGetSiteDiagnosticCategorySlotCustomized(
   slot: string,
 ): ArmResponse<DiagnosticCategory>;
 
-@@override(DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
+@@override(
+  DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
   diagnosticsGetSiteDiagnosticCategorySlotCustomized
 );
 
@@ -387,7 +411,8 @@ op diagnosticsListSiteAnalysesSlotCustomized(
   slot: string,
 ): ArmResponse<DiagnosticAnalysisCollection>;
 
-@@override(AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
+@@override(
+  AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
   diagnosticsListSiteAnalysesSlotCustomized
 );
 
@@ -412,7 +437,8 @@ op diagnosticsListSiteDetectorsSlotCustomized(
   slot: string,
 ): ArmResponse<DiagnosticDetectorCollection>;
 
-@@override(DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
+@@override(
+  DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
   diagnosticsListSiteDetectorsSlotCustomized
 );
 
@@ -442,7 +468,8 @@ op recommendationsDisableRecommendationForHostingEnvironmentCustomized(
   @body body: void;
 };
 
-@@override(RecommendationRules.disableRecommendationForHostingEnvironment,
+@@override(
+  RecommendationRules.disableRecommendationForHostingEnvironment,
   recommendationsDisableRecommendationForHostingEnvironmentCustomized
 );
 
@@ -470,7 +497,8 @@ op webAppsAddPremierAddOnSlotCustomized(
   premierAddOn: PremierAddOn,
 ): ArmResourceUpdatedResponse<PremierAddOn>;
 
-@@override(PremierAddOnOperationGroup.addPremierAddOnSlot,
+@@override(
+  PremierAddOnOperationGroup.addPremierAddOnSlot,
   webAppsAddPremierAddOnSlotCustomized
 );
 
@@ -497,12 +525,15 @@ op webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
 
   @body
   privateEndpointWrapper: RemotePrivateEndpointConnectionARMResource,
-): ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-  @bodyRoot
-  _: RemotePrivateEndpointConnectionARMResource;
-});
+):
+  | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
+      @bodyRoot
+      _: RemotePrivateEndpointConnectionARMResource;
+    });
 
-@@override(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
+@@override(
+  PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
   webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized
 );
 
@@ -535,7 +566,8 @@ op webAppsCreateInstanceFunctionSlotCustomized(
     Azure.Core.Foundations.RetryAfterHeader
 >;
 
-@@override(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
   webAppsCreateInstanceFunctionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -558,18 +590,23 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
-): ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @body
-  _: unknown;
-}) | (ArmDeletedNoContentResponse & {
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @body
-  _: unknown;
-});
+):
+  | ArmResponse<unknown>
+  | (ArmDeleteAcceptedLroResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    })
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
 
-@@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  webAppsDeletePrivateEndpointConnectionSlotCustomized
+@@override(
+  PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+  webAppsDeletePrivateEndpointConnectionSlotCustomized,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -594,13 +631,17 @@ op webAppsInstallSiteExtensionSlotCustomized(
 
   @body
   resource: void,
-): ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-  SiteExtensionInfo,
-  LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-    Azure.Core.Foundations.RetryAfterHeader
-> | ArmTooManyRequestsResponse;
+):
+  | ArmResponse<SiteExtensionInfo>
+  | ArmResourceCreatedResponse<
+      SiteExtensionInfo,
+      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  | ArmTooManyRequestsResponse;
 
-@@override(SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
+@@override(
+  SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
   webAppsInstallSiteExtensionSlotCustomized
 );
 
@@ -680,7 +721,8 @@ op webAppsCreateDeploymentSlotCustomized(
   deployment: Deployment,
 ): ArmResourceUpdatedResponse<Deployment>;
 
-@@override(DeploymentOperationGroup.createDeploymentSlot,
+@@override(
+  DeploymentOperationGroup.createDeploymentSlot,
   webAppsCreateDeploymentSlotCustomized
 );
 
@@ -708,7 +750,8 @@ op webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized(
   domainOwnershipIdentifier: Identifier,
 ): ArmResourceUpdatedResponse<Identifier>;
 
-@@override(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
+@@override(
+  IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
   webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized
 );
 
@@ -740,7 +783,8 @@ op webAppsCreateOrUpdateFunctionSecretSlotCustomized(
   key: KeyInfo,
 ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
 
-@@override(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
   webAppsCreateOrUpdateFunctionSecretSlotCustomized
 );
 
@@ -768,7 +812,8 @@ op webAppsCreateOrUpdateHostNameBindingSlotCustomized(
   hostNameBinding: HostNameBinding,
 ): ArmResourceUpdatedResponse<HostNameBinding>;
 
-@@override(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
+@@override(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
   webAppsCreateOrUpdateHostNameBindingSlotCustomized
 );
 
@@ -797,9 +842,13 @@ op webAppsCreateOrUpdateHostSecretSlotCustomized(
 
   @body
   key: KeyInfo,
-): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
+):
+  | ArmResponse<KeyInfo>
+  | ArmResourceCreatedSyncResponse<KeyInfo>
+  | DefaultErrorResponse;
 
-@@override(WebApps.createOrUpdateHostSecretSlot,
+@@override(
+  WebApps.createOrUpdateHostSecretSlot,
   webAppsCreateOrUpdateHostSecretSlotCustomized
 );
 
@@ -831,7 +880,8 @@ op webAppsCreateOrUpdateHybridConnectionSlotCustomized(
   connectionEnvelope: HybridConnection,
 ): ArmResourceUpdatedResponse<HybridConnection>;
 
-@@override(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
+@@override(
+  HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
   webAppsCreateOrUpdateHybridConnectionSlotCustomized
 );
 
@@ -859,7 +909,8 @@ op webAppsCreateOrUpdatePublicCertificateSlotCustomized(
   publicCertificate: PublicCertificate,
 ): ArmResourceUpdatedResponse<PublicCertificate>;
 
-@@override(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
+@@override(
+  PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
   webAppsCreateOrUpdatePublicCertificateSlotCustomized
 );
 
@@ -887,7 +938,8 @@ op webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized(
   connectionEnvelope: RelayServiceConnectionEntity,
 ): ArmResourceUpdatedResponse<RelayServiceConnectionEntity>;
 
-@@override(RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
+@@override(
+  RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
   webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized
 );
 
@@ -919,7 +971,8 @@ op webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized(
   connectionEnvelope: VnetGateway,
 ): ArmResourceUpdatedResponse<VnetGateway>;
 
-@@override(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
+@@override(
+  VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
   webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized
 );
 
@@ -947,7 +1000,8 @@ op webAppsCreateOrUpdateVnetConnectionSlotCustomized(
   connectionEnvelope: VnetInfoResource,
 ): ArmResourceUpdatedResponse<VnetInfoResource>;
 
-@@override(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
+@@override(
+  VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
   webAppsCreateOrUpdateVnetConnectionSlotCustomized
 );
 
@@ -973,7 +1027,8 @@ op webAppsDeleteBackupSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
-@@override(BackupItemOperationGroup.deleteBackupSlot,
+@@override(
+  BackupItemOperationGroup.deleteBackupSlot,
   webAppsDeleteBackupSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -998,7 +1053,8 @@ op webAppsDeleteContinuousWebJobSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
-@@override(ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
+@@override(
+  ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
   webAppsDeleteContinuousWebJobSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1023,7 +1079,8 @@ op webAppsDeleteDeploymentSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
-@@override(DeploymentOperationGroup.deleteDeploymentSlot,
+@@override(
+  DeploymentOperationGroup.deleteDeploymentSlot,
   webAppsDeleteDeploymentSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1048,7 +1105,8 @@ op webAppsDeleteDomainOwnershipIdentifierSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
-@@override(IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
+@@override(
+  IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
   webAppsDeleteDomainOwnershipIdentifierSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1077,7 +1135,8 @@ op webAppsDeleteFunctionSecretSlotCustomized(
   slot: string,
 ): NoContentResponse | ArmNotFoundResponse;
 
-@@override(FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
   webAppsDeleteFunctionSecretSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1135,7 +1194,8 @@ op webAppsDeleteHybridConnectionSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
-@@override(HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
+@@override(
+  HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
   webAppsDeleteHybridConnectionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1160,7 +1220,8 @@ op webAppsDeleteInstanceFunctionSlotCustomized(
   slot: string,
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
-@@override(FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
   webAppsDeleteInstanceFunctionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1185,7 +1246,8 @@ op webAppsDeleteInstanceProcessCustomized(
   instanceId: string,
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
-@@override(ProcessInfos.deleteInstanceProcess,
+@@override(
+  ProcessInfos.deleteInstanceProcess,
   webAppsDeleteInstanceProcessCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1214,7 +1276,8 @@ op webAppsDeleteInstanceProcessSlotCustomized(
   instanceId: string,
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
-@@override(InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
+@@override(
+  InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
   webAppsDeleteInstanceProcessSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1239,7 +1302,8 @@ op webAppsDeletePremierAddOnSlotCustomized(
   slot: string,
 ): ArmDeletedResponse;
 
-@@override(PremierAddOnOperationGroup.deletePremierAddOnSlot,
+@@override(
+  PremierAddOnOperationGroup.deletePremierAddOnSlot,
   webAppsDeletePremierAddOnSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1264,7 +1328,8 @@ op webAppsDeleteProcessSlotCustomized(
   slot: string,
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
-@@override(ProcessSlotOperationGroup.deleteProcessSlot,
+@@override(
+  ProcessSlotOperationGroup.deleteProcessSlot,
   webAppsDeleteProcessSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1289,7 +1354,8 @@ op webAppsDeleteRelayServiceConnectionSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
-@@override(RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
+@@override(
+  RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
   webAppsDeleteRelayServiceConnectionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1314,7 +1380,8 @@ op webAppDeleteSiteExtensionSlotCustomized(
   slot: string,
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
-@@override(SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
+@@override(
+  SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
   webAppDeleteSiteExtensionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1339,7 +1406,8 @@ op webAppsDeleteTriggeredWebJobSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
-@@override(TriggeredWebJobs.deleteTriggeredWebJobSlot,
+@@override(
+  TriggeredWebJobs.deleteTriggeredWebJobSlot,
   webAppsDeleteTriggeredWebJobSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1364,7 +1432,8 @@ op webAppsDeleteVnetConnectionSlotCustomized(
   slot: string,
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
-@@override(VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
+@@override(
+  VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
   webAppsDeleteVnetConnectionSlotCustomized
 );
 
@@ -1393,7 +1462,8 @@ op webAppsGetAppSettingKeyVaultReferenceSlotCustomized(
   configreferences: "configreferences",
 ): ArmResponse<ApiKVReference>;
 
-@@override(AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
+@@override(
+  AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
   webAppsGetAppSettingKeyVaultReferenceSlotCustomized
 );
 
@@ -1418,7 +1488,8 @@ op webAppsGetBackupStatusSlotCustomized(
   slot: string,
 ): ArmResponse<BackupItem>;
 
-@@override(BackupItemOperationGroup.getBackupStatusSlot,
+@@override(
+  BackupItemOperationGroup.getBackupStatusSlot,
   webAppsGetBackupStatusSlotCustomized
 );
 
@@ -1447,7 +1518,8 @@ op webAppsGetConfigurationSnapshotSlotCustomized(
   web: "web",
 ): ArmResponse<SiteConfigResource>;
 
-@@override(SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
+@@override(
+  SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
   webAppsGetConfigurationSnapshotSlotCustomized
 );
 
@@ -1472,7 +1544,8 @@ op webAppsGetContinuousWebJobSlotCustomized(
   slot: string,
 ): ArmResponse<ContinuousWebJob> | ArmNotFoundResponse;
 
-@@override(ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
+@@override(
+  ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
   webAppsGetContinuousWebJobSlotCustomized
 );
 
@@ -1497,7 +1570,8 @@ op webAppsGetDeploymentSlotCustomized(
   slot: string,
 ): ArmResponse<Deployment>;
 
-@@override(DeploymentOperationGroup.getDeploymentSlot,
+@@override(
+  DeploymentOperationGroup.getDeploymentSlot,
   webAppsGetDeploymentSlotCustomized
 );
 
@@ -1522,7 +1596,8 @@ op webAppsGetDomainOwnershipIdentifierSlotCustomized(
   slot: string,
 ): ArmResponse<Identifier>;
 
-@@override(IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
+@@override(
+  IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
   webAppsGetDomainOwnershipIdentifierSlotCustomized
 );
 
@@ -1551,7 +1626,8 @@ op webAppsGetHybridConnectionSlotCustomized(
   slot: string,
 ): ArmResponse<HybridConnection>;
 
-@@override(HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
+@@override(
+  HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
   webAppsGetHybridConnectionSlotCustomized
 );
 
@@ -1576,7 +1652,8 @@ op webAppsGetInstanceFunctionSlotCustomized(
   slot: string,
 ): ArmResponse<FunctionEnvelope>;
 
-@@override(FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
   webAppsGetInstanceFunctionSlotCustomized
 );
 
@@ -1601,7 +1678,8 @@ op webAppsGetInstanceInfoSlotCustomized(
   slot: string,
 ): ArmResponse<WebSiteInstanceStatus>;
 
-@@override(WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
+@@override(
+  WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
   webAppsGetInstanceInfoSlotCustomized
 );
 
@@ -1626,7 +1704,8 @@ op webAppsGetInstanceProcessCustomized(
   instanceId: string,
 ): ArmResponse<ProcessInfo>;
 
-@@override(ProcessInfos.getInstanceProcess,
+@@override(
+  ProcessInfos.getInstanceProcess,
   webAppsGetInstanceProcessCustomized
 );
 
@@ -1652,16 +1731,19 @@ op webAppsGetInstanceProcessDumpCustomized(
 
   @body
   body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
+):
+  | {
+      @header("Content-Type")
+      contentType: "*/*";
 
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  body: bytes;
-} | ArmNotFoundResponse;
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    }
+  | ArmNotFoundResponse;
 
-@@override(ProcessInfos.getInstanceProcessDump,
+@@override(
+  ProcessInfos.getInstanceProcessDump,
   webAppsGetInstanceProcessDumpCustomized
 );
 
@@ -1691,16 +1773,19 @@ op webAppsGetInstanceProcessDumpSlotCustomized(
 
   @body
   body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
+):
+  | {
+      @header("Content-Type")
+      contentType: "*/*";
 
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  body: bytes;
-} | ArmNotFoundResponse;
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    }
+  | ArmNotFoundResponse;
 
-@@override(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
+@@override(
+  InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
   webAppsGetInstanceProcessDumpSlotCustomized
 );
 
@@ -1729,7 +1814,8 @@ op webAppsGetInstanceProcessModuleCustomized(
   instanceId: string,
 ): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
 
-@@override(ProcessModuleInfos.getInstanceProcessModule,
+@@override(
+  ProcessModuleInfos.getInstanceProcessModule,
   webAppsGetInstanceProcessModuleCustomized
 );
 
@@ -1762,7 +1848,8 @@ op webAppsGetInstanceProcessModuleSlotCustomized(
   instanceId: string,
 ): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
 
-@@override(InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
+@@override(
+  InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
   webAppsGetInstanceProcessModuleSlotCustomized
 );
 
@@ -1791,7 +1878,8 @@ op webAppsGetInstanceProcessSlotCustomized(
   instanceId: string,
 ): ArmResponse<ProcessInfo> | ArmNotFoundResponse;
 
-@@override(InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
+@@override(
+  InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
   webAppsGetInstanceProcessSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1817,13 +1905,16 @@ op webAppsGetNetworkTraceOperationSlotCustomized(
 
   @body
   body: void,
-): ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-  @identifiers(#[])
-  @bodyRoot
-  _: NetworkTrace[];
-});
+):
+  | ArmResponse<NetworkTrace[]>
+  | (AcceptedResponse & {
+      @identifiers(#[])
+      @bodyRoot
+      _: NetworkTrace[];
+    });
 
-@@override(WebApps.getNetworkTraceOperationSlot,
+@@override(
+  WebApps.getNetworkTraceOperationSlot,
   webAppsGetNetworkTraceOperationSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1849,13 +1940,16 @@ op webAppsGetNetworkTraceOperationSlotV2Customized(
 
   @body
   body: void,
-): ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-  @identifiers(#[])
-  @bodyRoot
-  _: NetworkTrace[];
-});
+):
+  | ArmResponse<NetworkTrace[]>
+  | (AcceptedResponse & {
+      @identifiers(#[])
+      @bodyRoot
+      _: NetworkTrace[];
+    });
 
-@@override(WebApps.getNetworkTraceOperationSlotV2,
+@@override(
+  WebApps.getNetworkTraceOperationSlotV2,
   webAppsGetNetworkTraceOperationSlotV2Customized
 );
 
@@ -1907,7 +2001,8 @@ op webAppsGetNetworkTracesSlotV2Customized(
   body: void,
 ): ArmResponse<NetworkTrace[]>;
 
-@@override(WebApps.getNetworkTracesSlotV2,
+@@override(
+  WebApps.getNetworkTracesSlotV2,
   webAppsGetNetworkTracesSlotV2Customized
 );
 
@@ -1932,7 +2027,8 @@ op webAppsGetPremierAddOnSlotCustomized(
   slot: string,
 ): ArmResponse<PremierAddOn>;
 
-@@override(PremierAddOnOperationGroup.getPremierAddOnSlot,
+@@override(
+  PremierAddOnOperationGroup.getPremierAddOnSlot,
   webAppsGetPremierAddOnSlotCustomized
 );
 
@@ -1957,7 +2053,8 @@ op webAppsGetPrivateEndpointConnectionSlotCustomized(
   slot: string,
 ): ArmResponse<RemotePrivateEndpointConnectionARMResource>;
 
-@@override(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
+@@override(
+  PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
   webAppsGetPrivateEndpointConnectionSlotCustomized
 );
 
@@ -1983,16 +2080,19 @@ op webAppsGetProcessDumpSlotCustomized(
 
   @body
   body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
+):
+  | {
+      @header("Content-Type")
+      contentType: "*/*";
 
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  body: bytes;
-} | ArmNotFoundResponse;
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    }
+  | ArmNotFoundResponse;
 
-@@override(ProcessSlotOperationGroup.getProcessDumpSlot,
+@@override(
+  ProcessSlotOperationGroup.getProcessDumpSlot,
   webAppsGetProcessDumpSlotCustomized
 );
 
@@ -2021,7 +2121,8 @@ op webAppsGetProcessModuleSlotCustomized(
   slot: string,
 ): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
 
-@@override(ProcessModuleSlotOperationGroup.getProcessModuleSlot,
+@@override(
+  ProcessModuleSlotOperationGroup.getProcessModuleSlot,
   webAppsGetProcessModuleSlotCustomized
 );
 
@@ -2046,7 +2147,8 @@ op webAppsGetProcessSlotCustomized(
   slot: string,
 ): ArmResponse<ProcessInfo> | ArmNotFoundResponse;
 
-@@override(ProcessSlotOperationGroup.getProcessSlot,
+@@override(
+  ProcessSlotOperationGroup.getProcessSlot,
   webAppsGetProcessSlotCustomized
 );
 
@@ -2071,7 +2173,8 @@ op webAppsGetRelayServiceConnectionSlotCustomized(
   slot: string,
 ): ArmResponse<RelayServiceConnectionEntity>;
 
-@@override(RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
+@@override(
+  RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
   webAppsGetRelayServiceConnectionSlotCustomized
 );
 
@@ -2100,7 +2203,8 @@ op webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
   configreferences: "configreferences",
 ): ArmResponse<ApiKVReference>;
 
-@@override(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
+@@override(
+  SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
   webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized
 );
 
@@ -2125,7 +2229,8 @@ op webAppsGetSiteExtensionSlotCustomized(
   slot: string,
 ): ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse;
 
-@@override(SiteExtensionInfoOperationGroup.getSiteExtensionSlot,
+@@override(
+  SiteExtensionInfoOperationGroup.getSiteExtensionSlot,
   webAppsGetSiteExtensionSlotCustomized
 );
 
@@ -2154,7 +2259,8 @@ op webAppsGetTriggeredWebJobHistorySlotCustomized(
   slot: string,
 ): ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse;
 
-@@override(TriggeredJobHistories.getTriggeredWebJobHistorySlot,
+@@override(
+  TriggeredJobHistories.getTriggeredWebJobHistorySlot,
   webAppsGetTriggeredWebJobHistorySlotCustomized
 );
 
@@ -2179,7 +2285,8 @@ op webAppsGetTriggeredWebJobSlotCustomized(
   slot: string,
 ): ArmResponse<TriggeredWebJob> | ArmNotFoundResponse;
 
-@@override(TriggeredWebJobs.getTriggeredWebJobSlot,
+@@override(
+  TriggeredWebJobs.getTriggeredWebJobSlot,
   webAppsGetTriggeredWebJobSlotCustomized
 );
 
@@ -2208,7 +2315,8 @@ op webAppsGetVnetConnectionGatewaySlotCustomized(
   slot: string,
 ): ArmResponse<VnetGateway> | ArmNotFoundResponse;
 
-@@override(VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
+@@override(
+  VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
   webAppsGetVnetConnectionGatewaySlotCustomized
 );
 
@@ -2233,7 +2341,8 @@ op webAppsGetVnetConnectionSlotCustomized(
   slot: string,
 ): ArmResponse<VnetInfoResource>;
 
-@@override(VnetInfoResourceOperationGroup.getVnetConnectionSlot,
+@@override(
+  VnetInfoResourceOperationGroup.getVnetConnectionSlot,
   webAppsGetVnetConnectionSlotCustomized
 );
 
@@ -2284,7 +2393,8 @@ op webAppsListBackupStatusSecretsSlotCustomized(
   request: BackupRequest,
 ): ArmResponse<BackupItem>;
 
-@@override(BackupItemOperationGroup.listBackupStatusSecretsSlot,
+@@override(
+  BackupItemOperationGroup.listBackupStatusSecretsSlot,
   webAppsListBackupStatusSecretsSlotCustomized
 );
 
@@ -2312,7 +2422,8 @@ op webAppsListDeploymentLogSlotCustomized(
   body: void,
 ): ArmResponse<Deployment>;
 
-@@override(DeploymentOperationGroup.listDeploymentLogSlot,
+@@override(
+  DeploymentOperationGroup.listDeploymentLogSlot,
   webAppsListDeploymentLogSlotCustomized
 );
 
@@ -2340,7 +2451,8 @@ op webAppsListFunctionKeysSlotCustomized(
   body: void,
 ): ArmResponse<StringDictionary>;
 
-@@override(FunctionEnvelopeOperationGroup.listFunctionKeysSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.listFunctionKeysSlot,
   webAppsListFunctionKeysSlotCustomized
 );
 
@@ -2368,7 +2480,8 @@ op webAppsListFunctionSecretsSlotCustomized(
   body: void,
 ): ArmResponse<FunctionSecrets>;
 
-@@override(FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
+@@override(
+  FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
   webAppsListFunctionSecretsSlotCustomized
 );
 
@@ -2393,7 +2506,8 @@ op webAppsListNetworkFeaturesSlotCustomized(
   slot: string,
 ): ArmResponse<NetworkFeatures> | ArmNotFoundResponse;
 
-@@override(NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
+@@override(
+  NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
   webAppsListNetworkFeaturesSlotCustomized
 );
 
@@ -2418,7 +2532,8 @@ op webAppsListInstanceProcessModulesCustomized(
   instanceId: string,
 ): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
 
-@@override(ProcessModuleInfos.listInstanceProcessModules,
+@@override(
+  ProcessModuleInfos.listInstanceProcessModules,
   webAppsListInstanceProcessModulesCustomized
 );
 
@@ -2447,7 +2562,8 @@ op webAppsListInstanceProcessModulesSlotCustomized(
   instanceId: string,
 ): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
 
-@@override(InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
+@@override(
+  InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
   webAppsListInstanceProcessModulesSlotCustomized
 );
 
@@ -2475,7 +2591,8 @@ op webAppsListInstanceProcessThreadsCustomized(
   body: void,
 ): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
 
-@@override(ProcessInfos.listInstanceProcessThreads,
+@@override(
+  ProcessInfos.listInstanceProcessThreads,
   webAppsListInstanceProcessThreadsCustomized
 );
 
@@ -2507,7 +2624,8 @@ op webAppsListInstanceProcessThreadsSlotCustomized(
   body: void,
 ): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
 
-@@override(InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+@@override(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
   webAppsListInstanceProcessThreadsSlotCustomized
 );
 
@@ -2532,7 +2650,8 @@ op webAppsListProcessModulesSlotCustomized(
   slot: string,
 ): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
 
-@@override(ProcessModuleSlotOperationGroup.listProcessModulesSlot,
+@@override(
+  ProcessModuleSlotOperationGroup.listProcessModulesSlot,
   webAppsListProcessModulesSlotCustomized
 );
 
@@ -2560,7 +2679,8 @@ op webAppsListProcessThreadsSlotCustomized(
   body: void,
 ): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
 
-@@override(ProcessSlotOperationGroup.listProcessThreadsSlot,
+@@override(
+  ProcessSlotOperationGroup.listProcessThreadsSlot,
   webAppsListProcessThreadsSlotCustomized
 );
 
@@ -2585,7 +2705,8 @@ op webAppsListTriggeredWebJobHistorySlotCustomized(
   slot: string,
 ): ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse;
 
-@@override(TriggeredJobHistories.listTriggeredWebJobHistorySlot,
+@@override(
+  TriggeredJobHistories.listTriggeredWebJobHistorySlot,
   webAppsListTriggeredWebJobHistorySlotCustomized
 );
 
@@ -2617,7 +2738,8 @@ op webAppsRecoverSiteConfigurationSnapshotSlotCustomized(
   body: void,
 ): NoContentResponse;
 
-@@override(SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
+@@override(
+  SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
   webAppsRecoverSiteConfigurationSnapshotSlotCustomized
 );
 
@@ -2643,11 +2765,14 @@ op webAppsRunTriggeredWebJobSlotCustomized(
 
   @body
   body: void,
-): {
-  @body body: void;
-} | ArmNotFoundResponse;
+):
+  | {
+      @body body: void;
+    }
+  | ArmNotFoundResponse;
 
-@@override(TriggeredWebJobs.runTriggeredWebJobSlot,
+@@override(
+  TriggeredWebJobs.runTriggeredWebJobSlot,
   webAppsRunTriggeredWebJobSlotCustomized
 );
 
@@ -2673,11 +2798,14 @@ op webAppsStartContinuousWebJobSlotCustomized(
 
   @body
   body: void,
-): {
-  @body body: void;
-} | ArmNotFoundResponse;
+):
+  | {
+      @body body: void;
+    }
+  | ArmNotFoundResponse;
 
-@@override(ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
+@@override(
+  ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
   webAppsStartContinuousWebJobSlotCustomized
 );
 
@@ -2703,11 +2831,14 @@ op webAppsStopContinuousWebJobSlotCustomized(
 
   @body
   body: void,
-): {
-  @body body: void;
-} | ArmNotFoundResponse;
+):
+  | {
+      @body body: void;
+    }
+  | ArmNotFoundResponse;
 
-@@override(ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
+@@override(
+  ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
   webAppsStopContinuousWebJobSlotCustomized
 );
 
@@ -2735,7 +2866,8 @@ op webAppsUpdateDomainOwnershipIdentifierSlotCustomized(
   domainOwnershipIdentifier: Identifier,
 ): ArmResponse<Identifier>;
 
-@@override(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
+@@override(
+  IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
   webAppsUpdateDomainOwnershipIdentifierSlotCustomized
 );
 
@@ -2767,7 +2899,8 @@ op webAppsUpdateHybridConnectionSlotCustomized(
   connectionEnvelope: HybridConnection,
 ): ArmResponse<HybridConnection>;
 
-@@override(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
+@@override(
+  HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
   webAppsUpdateHybridConnectionSlotCustomized
 );
 
@@ -2795,7 +2928,8 @@ op webAppsUpdatePremierAddOnSlotCustomized(
   premierAddOn: PremierAddOnPatchResource,
 ): ArmResponse<PremierAddOn>;
 
-@@override(PremierAddOnOperationGroup.updatePremierAddOnSlot,
+@@override(
+  PremierAddOnOperationGroup.updatePremierAddOnSlot,
   webAppsUpdatePremierAddOnSlotCustomized
 );
 
@@ -2823,7 +2957,8 @@ op webAppsUpdateRelayServiceConnectionSlotCustomized(
   connectionEnvelope: RelayServiceConnectionEntity,
 ): ArmResponse<RelayServiceConnectionEntity>;
 
-@@override(RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
+@@override(
+  RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
   webAppsUpdateRelayServiceConnectionSlotCustomized
 );
 
@@ -2855,7 +2990,8 @@ op webAppsUpdateVnetConnectionGatewaySlotCustomized(
   connectionEnvelope: VnetGateway,
 ): ArmResponse<VnetGateway>;
 
-@@override(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
+@@override(
+  VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
   webAppsUpdateVnetConnectionGatewaySlotCustomized
 );
 
@@ -2883,7 +3019,8 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   connectionEnvelope: VnetInfoResource,
 ): ArmResponse<VnetInfoResource>;
 
-@@override(VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
+@@override(
+  VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
   webAppsUpdateVnetConnectionSlotCustomized
 );
 
@@ -2891,24 +3028,37 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@clientName(CertificateCollection, "AppCertificateCollection", "go");
 @@clientName(CertificatePatchResource, "AppCertificatePatchResource", "go");
 @@clientName(CertificateProperties, "AppCertificateProperties", "go");
-@@clientName(CertificatePatchResourceProperties,
+@@clientName(
+  CertificatePatchResourceProperties,
   "AppCertificatePatchResourceProperties",
   "go"
 );
 
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "java");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
-@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.updateApplicationSettings,
+@@clientName(listBillingMeters, "list", "java");
+@@clientName(
+  listSiteIdentifiersAssignedToHostName,
+  "listSiteIdentifiersAssignedToHostname",
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
-@@Azure.ClientGenerator.Core.Legacy.markAsLro(SiteConfigResources.createOrUpdateConfiguration,
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(
+  Sites.updateApplicationSettings,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(
+  SiteConfigResources.createOrUpdateConfiguration,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
 @@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.update, "java");
 
-@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse");
+@@clientName(
+  Microsoft.Web.ErrorResponse,
+  "WorkflowErrorResponse",
+  "!go,!javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2938,7 +3088,8 @@ op checkNameAvailabilityCustomized(
   environmentId?: string,
 ): ResourceNameAvailability;
 
-@@override(checkNameAvailability,
+@@override(
+  checkNameAvailability,
   checkNameAvailabilityCustomized,
   "javascript"
 );
@@ -2973,123 +3124,452 @@ op regionalCheckNameAvailabilityCustomized(
   autoGeneratedDomainNameLabelScope?: string,
 ): DnlResourceNameAvailability;
 
-@@override(regionalCheckNameAvailability,
+@@override(
+  regionalCheckNameAvailability,
   regionalCheckNameAvailabilityCustomized,
   "javascript"
 );
 
-@@clientName(AppServiceEnvironmentResources.changeVnet,
+@@clientName(
+  AppServiceEnvironmentResources.changeVnet,
   "listChangeVnet",
   "javascript"
 );
 @@clientName(AppServiceEnvironmentResources.resume, "listResume", "javascript");
-@@clientName(AppServiceEnvironmentResources.suspend,
+@@clientName(
+  AppServiceEnvironmentResources.suspend,
   "listSuspend",
   "javascript"
 );
-@@clientName(AppServiceEnvironmentResources.getInboundNetworkDependenciesEndpoints,
+@@clientName(
+  AppServiceEnvironmentResources.getInboundNetworkDependenciesEndpoints,
   "listInboundNetworkDependenciesEndpoints",
   "javascript"
 );
-@@clientName(AppServiceEnvironmentResources.getOutboundNetworkDependenciesEndpoints,
+@@clientName(
+  AppServiceEnvironmentResources.getOutboundNetworkDependenciesEndpoints,
   "listOutboundNetworkDependenciesEndpoints",
   "javascript"
 );
-@@clientName(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnectionList,
+@@clientName(
+  RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnectionList,
   "listPrivateEndpointConnectionList",
   "javascript"
 );
 
-@@clientName(ProviderOperationGroup.getAvailableStacks,
+@@clientName(
+  ProviderOperationGroup.getAvailableStacks,
   "listAvailableStacks",
   "javascript"
 );
-@@clientName(ProviderOperationGroup.getAvailableStacksOnPrem,
+@@clientName(
+  ProviderOperationGroup.getAvailableStacksOnPrem,
   "listAvailableStacksOnPrem",
   "javascript"
 );
-@@clientName(ProviderOperationGroup.getFunctionAppStacks,
+@@clientName(
+  ProviderOperationGroup.getFunctionAppStacks,
   "listFunctionAppStacks",
   "javascript"
 );
-@@clientName(ProviderOperationGroup.getFunctionAppStacksForLocation,
+@@clientName(
+  ProviderOperationGroup.getFunctionAppStacksForLocation,
   "listFunctionAppStacksForLocation",
   "javascript"
 );
-@@clientName(ProviderOperationGroup.getWebAppStacks,
+@@clientName(
+  ProviderOperationGroup.getWebAppStacks,
   "listWebAppStacks",
   "javascript"
 );
-@@clientName(ProviderOperationGroup.getWebAppStacksForLocation,
+@@clientName(
+  ProviderOperationGroup.getWebAppStacksForLocation,
   "listWebAppStacksForLocation",
   "javascript"
 );
 
-@@clientName(DatabaseConnections.getBuildDatabaseConnections,
+@@clientName(
+  DatabaseConnections.getBuildDatabaseConnections,
   "listBuildDatabaseConnections",
   "javascript"
 );
-@@clientName(StaticSiteBuildARMResources.getBuildDatabaseConnectionsWithDetails,
+@@clientName(
+  StaticSiteBuildARMResources.getBuildDatabaseConnectionsWithDetails,
   "listBuildDatabaseConnectionsWithDetails",
   "javascript"
 );
-@@clientName(DatabaseConnectionOperationGroup.getDatabaseConnections,
+@@clientName(
+  DatabaseConnectionOperationGroup.getDatabaseConnections,
   "listDatabaseConnections",
   "javascript"
 );
-@@clientName(StaticSiteARMResources.getDatabaseConnectionsWithDetails,
+@@clientName(
+  StaticSiteARMResources.getDatabaseConnectionsWithDetails,
   "listDatabaseConnectionsWithDetails",
   "javascript"
 );
-@@clientName(StaticSiteLinkedBackendARMResources.getLinkedBackends,
+@@clientName(
+  StaticSiteLinkedBackendARMResources.getLinkedBackends,
   "listLinkedBackends",
   "javascript"
 );
-@@clientName(StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendsForBuild,
+@@clientName(
+  StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendsForBuild,
   "listLinkedBackendsForBuild",
   "javascript"
 );
-@@clientName(StaticSites.getPrivateEndpointConnectionList,
+@@clientName(
+  StaticSites.getPrivateEndpointConnectionList,
   "listPrivateEndpointConnectionList",
   "javascript"
 );
-@@clientName(StaticSiteBuildARMResources.getStaticSiteBuilds,
+@@clientName(
+  StaticSiteBuildARMResources.getStaticSiteBuilds,
   "listStaticSiteBuilds",
   "javascript"
 );
-@@clientName(StaticSiteARMResources.getStaticSitesByResourceGroup,
+@@clientName(
+  StaticSiteARMResources.getStaticSitesByResourceGroup,
   "listStaticSitesByResourceGroup",
   "javascript"
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSiteBuild,
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSiteBuild,
   "listUserProvidedFunctionAppsForStaticSiteBuild",
   "javascript"
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
   "listUserProvidedFunctionAppsForStaticSite",
   "javascript"
 );
-@@clientName(AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
+@@clientName(
+  AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
   "listAppSettingsKeyVaultReferences",
   "javascript"
 );
-@@clientName(AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
+@@clientName(
+  AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
   "listAppSettingsKeyVaultReferencesSlot",
   "javascript"
 );
-@@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
   "listPrivateEndpointConnectionList",
   "javascript"
 );
-@@clientName(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
+@@clientName(
+  PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
   "listPrivateEndpointConnectionListSlot",
   "javascript"
 );
-@@clientName(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
+@@clientName(
+  SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
   "listSiteConnectionStringKeyVaultReferences",
   "javascript"
 );
-@@clientName(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
+@@clientName(
+  SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
   "listSiteConnectionStringKeyVaultReferencesSlot",
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+):
+  | ArmResponse<unknown>
+  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown>> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    })
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+):
+  | ArmResponse<unknown>
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    }>
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
+  appServiceEnvironmentsDeletePrivateEndpointConnectionForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op staticSitesDeletePrivateEndpointConnectionForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+):
+  | ArmResponse<unknown>
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    }>
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  StaticSites.deletePrivateEndpointConnection,
+  staticSitesDeletePrivateEndpointConnectionForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsDeletePrivateEndpointConnectionForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+):
+  | ArmResponse<unknown>
+  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    }>
+  | (ArmDeletedNoContentResponse & {
+      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @body
+      _: unknown;
+    });
+
+@@override(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
+  webAppsDeletePrivateEndpointConnectionForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartNetworkTraceForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  Sites.startNetworkTrace,
+  webAppsStartNetworkTraceForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartNetworkTraceSlotForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  WebApps.startNetworkTraceSlot,
+  webAppsStartNetworkTraceSlotForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartWebSiteNetworkTraceOperationForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  Sites.startWebSiteNetworkTraceOperation,
+  webAppsStartWebSiteNetworkTraceOperationForJs,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+):
+  | ArmResponse<NetworkTrace[]>
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+      @bodyRoot
+      @identifiers(#[])
+      _?: NetworkTrace[];
+    });
+
+@@override(
+  WebApps.startWebSiteNetworkTraceOperationSlot,
+  webAppsStartWebSiteNetworkTraceOperationSlotForJs,
   "javascript"
 );

@@ -19,7 +19,7 @@ namespace Microsoft.ContainerService;
  * Mesh membership of a managed cluster.
  */
 @parentResource(ManagedCluster)
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_02_preview)
 model MeshMembership
   is Azure.ResourceManager.ProxyResource<MeshMembershipProperties> {
   ...ResourceNameParameter<
@@ -42,15 +42,17 @@ model MeshMembership
 @@maxLength(MeshMembership.name, 63);
 @@minLength(MeshMembership.name, 1);
 @@doc(MeshMembership.name, "The name of the mesh membership.");
-@@doc(MeshMembership.properties,
+@@doc(
+  MeshMembership.properties,
   "Mesh membership properties of a managed cluster."
 );
-@@doc(MeshMemberships.createOrUpdate::parameters.resource,
+@@doc(
+  MeshMemberships.createOrUpdate::parameters.resource,
   "The mesh membership to create or update."
 );
 
 @armResourceOperations
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_02_preview)
 interface MeshMemberships {
   /**
    * Gets the mesh membership of a managed cluster.
@@ -88,7 +90,7 @@ interface MeshMemberships {
  * The provisioning state of the last accepted operation.
  */
 @Azure.Core.lroStatus
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_02_preview)
 union MeshMembershipProvisioningState {
   string,
 
@@ -126,7 +128,7 @@ union MeshMembershipProvisioningState {
 /**
  * Mesh membership properties of a managed cluster.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_02_preview)
 model MeshMembershipProperties {
   /**
    * The current provisioning state of the Mesh Membership.
@@ -153,7 +155,7 @@ model MeshMembershipProperties {
 /**
  * Private connect profile for mesh membership.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_02_preview)
 model MeshMembershipPrivateConnectProfile {
   /**
    * The private IP address of the member cluster private FQDN. This is a read-only property populated by the service.
@@ -174,7 +176,7 @@ model MeshMembershipPrivateConnectProfile {
 /**
  * The result of a request to list mesh memberships in a managed cluster.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_04_02_preview)
 model MeshMembershipsListResult {
   /**
    * The list of mesh memberships.

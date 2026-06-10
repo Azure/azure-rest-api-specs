@@ -18,6 +18,9 @@ namespace Microsoft.MachineLearningServices;
  * RaiBlocklistPropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistProperties, false> {
@@ -33,6 +36,9 @@ model RaiBlocklistPropertiesBasicResource
  * RaiBlocklistPropertiesBasicResources interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
   /**
@@ -48,12 +54,7 @@ interface RaiBlocklistPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -66,12 +67,7 @@ interface RaiBlocklistPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     }
   >;
 
@@ -82,12 +78,7 @@ interface RaiBlocklistPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      /**
-       * Api version used by proxy call
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
-      @query("proxy-api-version")
-      `proxy-api-version`?: string;
+      ...ProxyApiVersion;
     },
     Response = ArmResponse<RaiBlocklistPropertiesBasicResourceArmPaginatedResult>
   >;
@@ -96,6 +87,9 @@ interface RaiBlocklistPropertiesBasicResources {
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
   addBulk is ArmResourceActionAsync<
@@ -105,6 +99,9 @@ interface RaiBlocklistPropertiesBasicResources {
       @body
       @identifiers(#[])
       @removed(Versions.v2025_12_01)
+      @added(Versions.v2026_01_15_preview)
+      @removed(Versions.v2026_03_01)
+      @added(Versions.v2026_03_15_preview)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
@@ -126,16 +123,20 @@ interface RaiBlocklistPropertiesBasicResources {
   >;
 }
 
-@@doc(RaiBlocklistPropertiesBasicResource.name,
+@@doc(
+  RaiBlocklistPropertiesBasicResource.name,
   "The name of the RaiBlocklist."
 );
-@@doc(RaiBlocklistPropertiesBasicResource.properties,
+@@doc(
+  RaiBlocklistPropertiesBasicResource.properties,
   "RAI Custom Blocklist properties."
 );
 @@doc(RaiBlocklistPropertiesBasicResources.create::parameters.resource, "");
-@@doc(RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
+@@doc(
+  RaiBlocklistPropertiesBasicResources.addBulk::parameters.body,
   "Properties describing the custom blocklist items."
 );
-@@doc(RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
+@@doc(
+  RaiBlocklistPropertiesBasicResources.deleteBulk::parameters.body,
   "List of RAI Blocklist Items Names."
 );

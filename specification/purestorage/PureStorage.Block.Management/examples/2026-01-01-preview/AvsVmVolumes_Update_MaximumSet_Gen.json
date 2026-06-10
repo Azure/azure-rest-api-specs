@@ -1,0 +1,70 @@
+{
+  "title": "AvsVmVolumes_Update",
+  "operationId": "AvsVmVolumes_Update",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "avsVmId": "abc123def456",
+    "volumeId": "a1b2c3d4-e5f6",
+    "properties": {
+      "properties": {
+        "softDeletion": {
+          "destroyed": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storagePoolInternalId": "pool-abc123",
+          "storagePoolResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01",
+          "volumeInternalId": "vol-xyz789",
+          "displayName": "AVS VM Volume 01",
+          "space": {
+            "totalUsed": 1073741824,
+            "unique": 268435456,
+            "snapshots": 53687091236870912,
+            "shared": 268435456
+          },
+          "softDeletion": {
+            "destroyed": true,
+            "eradicationTimestamp": "2026-01-23T07:25:56.721Z"
+          },
+          "createdTimestamp": "2026-01-16T07:25:56.721Z",
+          "provisionedSize": 10737418240,
+          "volumeType": "avs",
+          "avs": {
+            "diskId": "disk-abc123",
+            "diskName": "avs-disk-01",
+            "folder": "/Datacenter/vm",
+            "avsVmInternalId": "vm-internal-123",
+            "avsVmResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/Microsoft.AVS/privateClouds/avs-cloud-01/clusters/cluster-01/virtualMachines/vm-01",
+            "avsVmName": "avs-vm-01",
+            "avsStorageContainerResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/avsStorageContainers/container-01"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/avsVms/avs-vm-01/volumes/volume-01",
+        "name": "volume-01",
+        "type": "PureStorage.Block/storagePools/avsVms/volumes",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-16T07:25:56.721Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/PureStorage.Block/locations/eastus/operationStatuses/op-123456"
+      }
+    }
+  }
+}

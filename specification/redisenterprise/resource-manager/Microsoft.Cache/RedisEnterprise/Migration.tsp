@@ -39,9 +39,11 @@ interface Migrations {
   @Azure.Core.useFinalStateVia("original-uri")
   start is ArmResourceCreateOrReplaceAsync<
     Migration,
-    Response = (ArmResponse<Migration> &
-      ArmCombinedLroHeaders<FinalResult = Migration>) | (ArmCreatedResponse<Migration> &
-      ArmCombinedLroHeaders<FinalResult = Migration>)
+    Response =
+      | (ArmResponse<Migration> &
+          ArmCombinedLroHeaders<FinalResult = Migration>)
+      | (ArmCreatedResponse<Migration> &
+          ArmCombinedLroHeaders<FinalResult = Migration>)
   >;
 
   /**
@@ -61,10 +63,25 @@ interface Migrations {
     ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Migration>
   >;
+
+  /**
+   * Validates if a source Azure Cache for Redis resource can be migrated to a target Azure Managed Redis resource.
+   */
+  @action("validate")
+  validate is ArmResourceActionSync<
+    Migration,
+    MigrationValidationRequest,
+    Response = ArmResponse<MigrationValidationResponse>
+  >;
 }
 
 @@doc(Migration.name, "");
 @@doc(Migration.properties, "Properties of the migration operation.");
-@@doc(Migrations.start::parameters.resource,
+@@doc(
+  Migrations.start::parameters.resource,
   "Parameters supplied to start a migration operation."
+);
+@@doc(
+  Migrations.validate::parameters.body,
+  "Parameters supplied to validate a migration operation."
 );

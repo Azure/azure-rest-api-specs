@@ -1,0 +1,36 @@
+{
+  "title": "RecoveryJobs_Cancel_MaximumSet",
+  "operationId": "RecoveryJobs_Cancel",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroup",
+    "api-version": "2026-04-01-preview",
+    "recoveryPlanName": "samplePlanName",
+    "recoveryJobName": "c56888ef-9ced-4001-a6d4-7145a0309bdb",
+    "body": {
+      "description": "Cancelling the recovery job due to user request"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "SampleErrorCode",
+          "message": "Sample error message",
+          "target": "SampleTarget",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "SampleType",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import {
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
+  selectGenerationTool,
   setPipelineVariables,
 } from "../src/command-helpers.js";
 import * as log from "../src/log.js";
@@ -622,12 +623,12 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      // Based on the constants in types.ts, JS SDK requires check for data plane
       expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
-      // .NET SDK set (dataplane: false)
-      expect(result3).toBe(false);
+      // .NET SDK set (dataPlane: true)
+      expect(result3).toBe(true);
     });
 
     test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
@@ -646,6 +647,40 @@ describe("commands.ts", () => {
 
       const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
       expect(result2).toBe(true);
+    });
+  });
+
+  describe("selectGenerationTool", () => {
+    test("should return 'skipped' for Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Rust,
+      );
+      expect(result).toBe("skipped");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with tspconfig path", () => {
+      const result = selectGenerationTool(
+        "specification/compute/Compute.Management/tspconfig.yaml",
+        undefined,
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' when no paths are provided", () => {
+      const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
+      expect(result).toBe("spec-gen-sdk");
     });
   });
 });

@@ -29,10 +29,16 @@ enum Versions {
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @doc("Version 1 stable")
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_stable: "2024-11-01",
+
+  @doc("Version 3 preview with Azure native VM support.")
+  @useDependency(LiftrBase.Versions.v2026_01_01_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2026_01_01_preview: "2026-01-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -48,27 +54,27 @@ interface Reservations
   @armResourceAction(Reservation)
   @action("getResourceLimits")
   @post
-  getResourceLimits(
-    ...ResourceInstanceParameters<Reservation>,
-  ): ArmResponse<LimitDetails> | ErrorResponse;
+  getResourceLimits(...ResourceInstanceParameters<Reservation>):
+    | ArmResponse<LimitDetails>
+    | ErrorResponse;
 
   @added(Versions.v2_preview)
   @doc("Provides various statistics about resources billed via given reservation.")
   @armResourceAction(Reservation)
   @action("getBillingStatus")
   @post
-  getBillingStatus(
-    ...ResourceInstanceParameters<Reservation>,
-  ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
+  getBillingStatus(...ResourceInstanceParameters<Reservation>):
+    | ArmResponse<ReservationBillingStatus>
+    | ErrorResponse;
 
   @added(Versions.v2_preview)
   @doc("Provides a summarized report along with actions for resources billed via given reservation")
   @armResourceAction(Reservation)
   @action("getBillingReport")
   @post
-  getBillingReport(
-    ...ResourceInstanceParameters<Reservation>,
-  ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
+  getBillingReport(...ResourceInstanceParameters<Reservation>):
+    | ArmResponse<ReservationBillingUsageReport>
+    | ErrorResponse;
 }
 
 @added(Versions.v2_preview)
@@ -276,25 +282,25 @@ interface StoragePools {
   @armResourceAction(StoragePool)
   @action("getHealthStatus")
   @post
-  getHealthStatus(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<HealthResponse> | ErrorResponse;
+  getHealthStatus(...ResourceInstanceParameters<StoragePool>):
+    | ArmResponse<HealthResponse>
+    | ErrorResponse;
 
   @doc("Returns current information about an on-going connection to an AVS instance")
   @armResourceAction(StoragePool)
   @action("getAvsConnection")
   @post
-  getAvsConnection(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<AvsConnection> | ErrorResponse;
+  getAvsConnection(...ResourceInstanceParameters<StoragePool>):
+    | ArmResponse<AvsConnection>
+    | ErrorResponse;
 
   @doc("Returns the status of the storage pool connection to AVS")
   @armResourceAction(StoragePool)
   @action("getAvsStatus")
   @post
-  getAvsStatus(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<AvsStatus> | ErrorResponse;
+  getAvsStatus(...ResourceInstanceParameters<StoragePool>):
+    | ArmResponse<AvsStatus>
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Initiate a connection between the storage pool and a specified AVS SDDC resource")
@@ -312,10 +318,12 @@ interface StoragePools {
     @doc("Storage pool EnableAvsConnection properties")
     @body
     properties: StoragePoolEnableAvsConnectionPost,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+  ):
+    | ArmAcceptedLroResponse<
+        "Resource Operation accepted",
+        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Disable the existing AVS connection")
@@ -327,12 +335,12 @@ interface StoragePools {
     #{ `final-state-via`: "azure-async-operation" }
   )
   @post
-  disableAvsConnection(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+  disableAvsConnection(...ResourceInstanceParameters<StoragePool>):
+    | ArmAcceptedLroResponse<
+        "Resource Operation accepted",
+        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Finalize an already started AVS connection to a specific AVS SDDC")
@@ -350,10 +358,12 @@ interface StoragePools {
     @doc("Storage pool FinalizeAvsConnection properties")
     @body
     properties: StoragePoolFinalizeAvsConnectionPost,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+  ):
+    | ArmAcceptedLroResponse<
+        "Resource Operation accepted",
+        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
   @doc("Test and repair, if needed, all configuration elements of the storage pool connection to the AVS instance")
@@ -365,12 +375,12 @@ interface StoragePools {
     #{ `final-state-via`: "azure-async-operation" }
   )
   @post
-  repairAvsConnection(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
+  repairAvsConnection(...ResourceInstanceParameters<StoragePool>):
+    | ArmAcceptedLroResponse<
+        "Resource Operation accepted",
+        ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+      >
+    | ErrorResponse;
 }
 
 @doc("Limits constraining certain resource properties")
@@ -643,7 +653,8 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
     NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
-@@doc(AvsStorageContainerVolume.name,
+@@doc(
+  AvsStorageContainerVolume.name,
   "ID of the volume in the storage container"
 );
 
@@ -739,6 +750,7 @@ model AvsDiskDetails {
 
 @armResourceOperations
 interface AvsStorageContainerVolumes {
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update a volume in an AVS storage container")
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -856,6 +868,7 @@ union VolumeContainerType {
 
 @armResourceOperations
 interface AvsVms {
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update an AVS VM")
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -888,6 +901,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
 
 @armResourceOperations
 interface AvsVmVolumes {
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update a volume in an AVS VM")
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -910,4 +924,211 @@ interface AvsVmVolumes {
 model AzureProperties {
   @doc("Azure Volume Group ID assigned to the volume.")
   volumeGroupInternalId: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Volume Group resource")
+@parentResource(StoragePool)
+model VolumeGroup is TrackedResource<VolumeGroupProperties> {
+  @doc("Name of the volume group")
+  @segment("volumeGroups")
+  @key("volumeGroupName")
+  @visibility(Lifecycle.Read)
+  @path
+  @minLength(2)
+  @maxLength(40)
+  @pattern("^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$")
+  name: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Properties of a volume group")
+model VolumeGroupProperties {
+  @doc("Pure Storage's internal ID of the storage pool")
+  @visibility(Lifecycle.Read)
+  storagePoolInternalId?: string;
+
+  @doc("Pure Storage's internal ID of the volume group")
+  @visibility(Lifecycle.Read)
+  volumeGroupInternalId?: string;
+
+  @doc("Azure resource ID of the source volume group for cloning")
+  @visibility(Lifecycle.Create)
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Performance parameters for the volume group")
+  performanceParameters?: PerformanceParameters;
+
+  @doc("Protection parameters for the volume group")
+  protectionParameters?: ProtectionParameters;
+
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Performance parameters for volume group")
+model PerformanceParameters {
+  @doc("Bandwidth limit in MB per second")
+  bandwidthLimitMbPerSec?: int64;
+
+  @doc("IOPS limit")
+  iopsLimit?: int64;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Protection parameters for volume group")
+model ProtectionParameters {
+  @doc("Retention period for snapshots in ISO 8601 duration format")
+  retention?: duration;
+
+  @doc("Snapshot frequency in ISO 8601 duration format")
+  frequency?: duration;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("ISCSI connection endpoint details")
+model IscsiEndpoint {
+  @doc("IP address of the endpoint")
+  ip: string;
+
+  @doc("Port number of the endpoint")
+  port: int32;
+
+  @doc("IQN (iSCSI Qualified Name) of the endpoint")
+  iqn: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("ISCSI connection parameters")
+model IscsiConnectionParameters {
+  @doc("List of ISCSI endpoints for connection")
+  @identifiers(#[])
+  endpoints: IscsiEndpoint[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Connection parameters response")
+model ConnectionParametersResponse {
+  @doc("ISCSI connection parameters")
+  iscsi: IscsiConnectionParameters;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Volume group status information")
+model VolumeGroupStatus {
+  @doc("Storage space usage for the volume group")
+  space: Space;
+
+  @doc("Number of hosts currently connected to the volume group")
+  connectedHostCount: int32;
+}
+
+@added(Versions.v2026_01_01_preview)
+@armResourceOperations
+interface VolumeGroups {
+  @doc("Get a volume group")
+  get is ArmResourceRead<VolumeGroup>;
+  @doc("Create a volume group")
+  create is ArmResourceCreateOrUpdateAsync<VolumeGroup>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @doc("Update a volume group")
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    VolumeGroup,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      VolumeGroup,
+      VolumeGroupProperties
+    >
+  >;
+  @doc("Delete a volume group")
+  delete is ArmResourceDeleteWithoutOkAsync<VolumeGroup>;
+  @doc("List volume groups by storage pool")
+  listByStoragePool is ArmResourceListByParent<VolumeGroup>;
+
+  @doc("Get connection parameters for ISCSI connection to the volume group")
+  @armResourceAction(VolumeGroup)
+  @action("listConnectionParameters")
+  @post
+  listConnectionParameters(...ResourceInstanceParameters<VolumeGroup>):
+    | ArmResponse<ConnectionParametersResponse>
+    | ErrorResponse;
+
+  @doc("Get current status and space information of the volume group")
+  @armResourceAction(VolumeGroup)
+  @action("getStatus")
+  @post
+  getStatus(...ResourceInstanceParameters<VolumeGroup>):
+    | ArmResponse<VolumeGroupStatus>
+    | ErrorResponse;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Azure Volume resource")
+@parentResource(VolumeGroup)
+model Volume is ProxyResource<AzureVolumeProperties> {
+  @doc("Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.")
+  @segment("volumes")
+  @key("volumeName")
+  @visibility(Lifecycle.Read)
+  @path
+  @minLength(2)
+  @pattern("^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$")
+  name: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Properties of an Azure volume")
+model AzureVolumeProperties {
+  @doc("Storage space usage for the volume")
+  @visibility(Lifecycle.Read)
+  space?: Space;
+
+  @doc("Currently provisioned size of the volume, in bytes")
+  @minValue(1048576)
+  provisionedSize?: int64;
+
+  @doc("Serial number of the volume")
+  @visibility(Lifecycle.Read)
+  serialNumber?: string;
+
+  @doc("Volume creation date, as an RFC 3339 timestamp")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  @doc("Azure resource ID of the source volume for cloning")
+  @visibility(Lifecycle.Create)
+  sourceVolumeResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Azure Resource ID of the source volume group to clone from.")
+  @visibility(Lifecycle.Create)
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_01_01_preview)
+@armResourceOperations
+interface Volumes {
+  @doc("Get a volume")
+  get is ArmResourceRead<Volume>;
+  @doc("Create a volume")
+  create is ArmResourceCreateOrUpdateAsync<Volume>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @doc("Update a volume")
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    Volume,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Volume,
+      AzureVolumeProperties
+    >
+  >;
+  @doc("Delete a volume")
+  delete is ArmResourceDeleteWithoutOkAsync<Volume>;
+  @doc("List volumes by volume group")
+  listByVolumeGroup is ArmResourceListByParent<Volume>;
 }

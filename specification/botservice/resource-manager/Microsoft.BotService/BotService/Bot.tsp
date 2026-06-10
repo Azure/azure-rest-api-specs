@@ -136,9 +136,11 @@ interface Bots {
 @@minLength(Bot.name, 2);
 @@doc(Bot.name, "The name of the Bot resource.");
 @@doc(Bot.properties, "The set of properties specific to bot resource");
-@@doc(Bots.create::parameters.resource,
+@@doc(
+  Bots.create::parameters.resource,
   "The parameters to provide for the created bot."
 );
-@@doc(Bots.update::parameters.properties,
+@@doc(
+  Bots.update::parameters.properties,
   "The parameters to provide for the created bot."
 );

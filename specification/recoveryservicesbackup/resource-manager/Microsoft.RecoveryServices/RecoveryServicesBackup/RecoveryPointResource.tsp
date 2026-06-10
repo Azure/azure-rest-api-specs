@@ -14,22 +14,26 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Backward compatibility with existing API structure."
 @parentResource(ProtectedItemResource)
-model RecoveryPointResource
-  is TrackedResourceWithOptionalLocation<RecoveryPoint> {
+model RecoveryPointResource is ProxyResource<RecoveryPoint> {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -72,7 +76,9 @@ interface RecoveryPoints {
    * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
-  @added(Versions.v2026_01_01_preview)
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @added(Versions.v2026_01_31_preview)
+  @removed(Versions.v2026_02_01)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,
@@ -132,17 +138,21 @@ interface ItemLevelRecoveryConnections {
   >;
 }
 
-@@doc(RecoveryPointResource.name,
+@@doc(
+  RecoveryPointResource.name,
   "RecoveryPointID represents the backed up data to be fetched."
 );
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
-@@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
+@@doc(
+  RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
 );
-@@doc(RecoveryPoints.update::parameters.properties,
+@@doc(
+  RecoveryPoints.update::parameters.properties,
   "Request body for operation"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
-@@doc(ItemLevelRecoveryConnections.provision::parameters.body,
+@@doc(
+  ItemLevelRecoveryConnections.provision::parameters.body,
   "resource ILR request"
 );

@@ -54,7 +54,8 @@ interface VnetInfoResourceOps
       }
     > {}
 
-@armResourceOperations
+@tag("AppServicePlans")
+@armResourceOperations(#{ omitTags: true })
 interface VnetInfoResources {
   /**
    * Description for Get a Virtual Network associated with an App Service plan.
@@ -106,7 +107,8 @@ interface VnetInfoResourceOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface VnetInfoResourceOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
@@ -184,7 +186,8 @@ interface VnetConnectionOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface VnetConnectionOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
@@ -242,15 +245,19 @@ interface VnetConnectionOperationGroup {
 
 @@doc(VnetInfoResource.name, "Name of the Virtual Network.");
 @@doc(VnetInfoResource.properties, "Core resource properties");
-@@doc(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
+@@doc(
+  VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
+@@doc(
+  VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
+@@doc(
+  VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
+@@doc(
+  VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );

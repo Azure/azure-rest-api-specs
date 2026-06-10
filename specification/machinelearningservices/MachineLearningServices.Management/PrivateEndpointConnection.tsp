@@ -32,7 +32,7 @@ model PrivateEndpointConnection
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard ARM resource tags property"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   tags?: Record<string>;
@@ -74,12 +74,15 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "NRP Private Endpoint Connection Name");
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "Private endpoint connection properties."
 );
-@@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "PrivateEndpointConnection object"
 );
-@@doc(PrivateEndpointConnection.sku,
+@@doc(
+  PrivateEndpointConnection.sku,
   "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
 );

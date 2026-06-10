@@ -47,16 +47,18 @@ interface OnlineDeployments {
   @summary("Create or update Inference Endpoint Deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineDeployment,
-    Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<
-      OnlineDeployment,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineDeployment>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<OnlineDeployment>
+      | (ArmResourceCreatedResponse<
+          OnlineDeployment,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = OnlineDeployment>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -67,14 +69,16 @@ interface OnlineDeployments {
   update is ArmCustomPatchAsync<
     OnlineDeployment,
     PatchModel = PartialMinimalTrackedResourceWithSku,
-    Response = OnlineDeployment | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineDeployment>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | OnlineDeployment
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OnlineDeployment>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -84,13 +88,16 @@ interface OnlineDeployments {
   @summary("Delete Inference Endpoint Deployment (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeployment,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -159,21 +166,27 @@ interface OnlineDeployments {
 }
 
 @@doc(OnlineDeployment.name, "Inference Endpoint Deployment name.");
-@@doc(OnlineDeployment.properties,
+@@doc(
+  OnlineDeployment.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(OnlineDeployments.createOrUpdate::parameters.resource,
+@@doc(
+  OnlineDeployments.createOrUpdate::parameters.resource,
   "Inference Endpoint entity to apply during operation."
 );
-@@doc(OnlineDeployments.update::parameters.properties,
+@@doc(
+  OnlineDeployments.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(OnlineDeployments.getLogs::parameters.body,
+@@doc(
+  OnlineDeployments.getLogs::parameters.body,
   "The request containing parameters for retrieving logs."
 );
-@@doc(OnlineDeployment.identity,
+@@doc(
+  OnlineDeployment.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(OnlineDeployment.sku,
+@@doc(
+  OnlineDeployment.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

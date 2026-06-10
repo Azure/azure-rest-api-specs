@@ -185,6 +185,7 @@ interface Gates {
   // The create and delete APIs are both internal-only as Gates are created by the Update Run during
   // its processing. As such, we only expose the update API here.
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next release"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
