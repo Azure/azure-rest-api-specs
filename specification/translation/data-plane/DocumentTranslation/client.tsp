@@ -352,3 +352,5 @@ interface SingleDocumentTranslationClient {
   "totalImagesChargedCount",
   "java"
 );
+
+@@usage(DocumentTranslation.DocumentTranslateContent, Usage.json, "csharp");
