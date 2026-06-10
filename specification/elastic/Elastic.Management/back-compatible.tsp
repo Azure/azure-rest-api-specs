@@ -46,11 +46,27 @@ using Microsoft.Elastic;
   "!csharp"
 );
 @@clientName(ElasticMonitorResources.connectedPartnerResourcesList, "List");
-@@clientLocation(ElasticMonitorResources.vMHostList, "VMHost", "!csharp,!javascript");
-@@clientLocation(ElasticMonitorResources.vMHostList, "$DO_NOT_NORMALIZE$vMHost", "javascript");
+@@clientLocation(
+  ElasticMonitorResources.vMHostList,
+  "VMHost",
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  ElasticMonitorResources.vMHostList,
+  "$DO_NOT_NORMALIZE$vMHost",
+  "javascript"
+);
 @@clientName(ElasticMonitorResources.vMHostList, "List");
-@@clientLocation(ElasticMonitorResources.details, "VMIngestion", "!csharp,!javascript");
-@@clientLocation(ElasticMonitorResources.details, "$DO_NOT_NORMALIZE$vMIngestion", "javascript");
+@@clientLocation(
+  ElasticMonitorResources.details,
+  "VMIngestion",
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  ElasticMonitorResources.details,
+  "$DO_NOT_NORMALIZE$vMIngestion",
+  "javascript"
+);
 @@clientName(ElasticMonitorResources.details, "Details");
 @@clientLocation(
   ElasticMonitorResources.vMCollectionUpdate,
