@@ -915,7 +915,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
 @@clientName(VMScaleSetLifecycleHookEvent,
-  "VmScaleSetLifecycleHookEvent",
+  "VirtualMachineScaleSetLifecycleHookEventData",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventState,
