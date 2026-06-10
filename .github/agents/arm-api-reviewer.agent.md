@@ -692,6 +692,7 @@ For each changed specification file, load the applicable instruction file(s) and
 - **ARM resource-manager JSON files** - apply **both** the OpenAPI checklist AND the "ARM Review Checklist Summary" at the end of `arm-api-review.instructions.md`
 
   **Conflict guardrail (DELETE response codes):** For `specification/**/resource-manager/**` files, evaluate DELETE response-code findings using ARM RPC rule `RPC-Delete-V1-01` from `arm-api-review.instructions.md` (sync delete: `200` + `204`; async delete: `202` + `204`). Do **not** raise a finding from generic OpenAPI Section 5 that says DELETE must be `204`-only on ARM control-plane specs.
+
 - **TypeSpec `.tsp` files** - apply the "TypeSpec Review Checklist Summary" at the end of `typespec-review.instructions.md`
 - **`tspconfig.yaml`** - apply section 7 (all subsections: 7.1 TSP-CONFIG-EMIT, 7.2 TSP-CONFIG-SERVICE-DIR, 7.3 TSP-CONFIG-EXAMPLES) from `typespec-review.instructions.md` **plus** section 4.7 (`tspconfig.yaml`) from `typespec-project.instructions.md`, which covers the linter-ruleset requirement and the single-tspconfig-per-service rule
 - **Example files** - apply section 22 (EX-\*) from `openapi-review.instructions.md`
@@ -735,6 +736,7 @@ Apply the **same six-step inventory-compare-classify workflow** described above 
 - If the PR adds a brand-new `suppressions.yaml` for a service that did not previously have one, every entry is new - apply the new-suppressions criteria to each.
 
 **Suppression review outcome (labels + feedback mode).** Track one of two outcomes after the suppression continuity analysis:
+
 - `suppression-clean`: no suppression-related findings and no open suppression-related questions. If the PR currently has `SuppressionReviewRequired`, propose in Step 8/9 to add `Approved-Suppression`.
 - `suppression-follow-up`: at least one suppression-related finding or open question remains. Include those items in Step 6 and execute per the active mode: in posting mode, include comments in Step 8 after approval; in chat-only mode, provide the feedback in chat. Do **not** add `Approved-Suppression` on this path.
 
@@ -1305,7 +1307,7 @@ After the human chooses, execute the approved subset of the plan:
 4. **REPLY-LINE-SHIFT** (Scenario C) - do a quick context check before replying: read the latest comment in that thread and detect whether the author asked a question, asked for guidance, or proposed tradeoffs (common signals: `?`, "prefer", "which approach", "help", "can we", "would this work").
    - If no guidance request is present, post the standard line-shift reply: "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._"
    - If guidance is requested, post a short **way-forward** reply instead: acknowledge the context in one sentence, anchor the moved line, and provide 2-4 concrete next steps constrained to this PR (for example version-scoped fix guidance when shared models affect older previews). Avoid terse imperative-only text like "Action needed" without a path.
-   Do **not** resolve the thread; do **not** post a duplicate top-level comment. The reply body does **not** require a telemetry marker (it does not flag a new rule and is part of an existing thread).
+     Do **not** resolve the thread; do **not** post a duplicate top-level comment. The reply body does **not** require a telemetry marker (it does not flag a new rule and is part of an existing thread).
 5. **THANK-AND-RESOLVE** (Scenario E) - post the reply "_Thanks for addressing this! The violation flagged here is no longer present in the latest changes. Resolving this thread._" to the cited agent-origin thread, then resolve the conversation. The agent owns its own threads, so the bulk plan approval in this step is the consent -- no separate per-thread prompt fires for these rows. The scope of this bulk consent (count + thread URLs) was disclosed to the human in the "Bulk auto-resolve disclosure" block of the approval prompt; if the human chose **Execute selectively** and opted any Scenario E row out, treat that row as a no-op (do not post the reply, do not resolve). The reply body does **not** require a telemetry marker (it does not flag a new rule).
 6. **PROPOSE-HUMAN-RESOLVE** (Scenario F) - do **not** resolve and do **not** reply automatically. For each row, ask the human (per-thread) whether to post the reply "_The violation flagged in this comment appears to have been addressed at `<file>` - line <N>._" and resolve. Resolve only with explicit human consent on a per-thread basis. If approved, the reply does not require a telemetry marker (same reason as Scenario E).
 7. **SKIP-COVERED** (Scenario A) and **Scenario D** - take no action. The existing comment(s) already cover the finding; the row exists in the plan for transparency and Critic audit only.
@@ -1496,5 +1498,3 @@ When a step in the workflow fails, recover deterministically using the table bel
 - "Review all changed JSON files in this PR for Azure REST API guideline violations"
 - "Compare the 2024-03-01 and 2024-07-01 versions of this spec for breaking changes"
 - "Post the approved review comments on PR #41405"
-
-
