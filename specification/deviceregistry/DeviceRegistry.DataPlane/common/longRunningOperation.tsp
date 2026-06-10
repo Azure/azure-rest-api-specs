@@ -46,6 +46,14 @@ model LongRunningOperationStatus<
 @@visibility(LongRunningOperationStatus.startTime, Lifecycle.Read);
 @@visibility(LongRunningOperationStatus.endTime, Lifecycle.Read);
 
+// Override the base `result` doc so derived monitors communicate when
+// `result` is populated. Status-monitor GETs return the envelope at any
+// point in the operation's lifecycle; `result` is only meaningful in the
+// terminal success state.
+@@doc(LongRunningOperationStatus.result,
+  "The result of the operation. Available once `status` is `Succeeded`."
+);
+
 /**
  * Request `Operation-Id` header used by long-running action operations
  * (POST `:verb` endpoints). If omitted, the service generates a GUID.
