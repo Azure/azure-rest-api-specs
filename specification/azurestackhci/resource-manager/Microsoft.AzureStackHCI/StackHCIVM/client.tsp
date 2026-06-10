@@ -161,6 +161,7 @@ using Microsoft.AzureStackHCI;
 @@clientName(AttestHWPlatformEnum.SEVSNP, "Sevsnp", "csharp");
 @@clientName(AttestSecureBootPropertyEnum, "AttestSecureBootStatus", "csharp");
 @@clientName(DiskFileFormat, "HciVmDiskFileFormat", "csharp");
+@@clientName(CreationData, "HciVmCreationContent", "csharp");
 @@clientName(ExtendedLocation, "HciVmExtendedLocation", "csharp");
 @@clientName(ExtendedLocationTypes, "HciVmExtendedLocationType", "csharp");
 @@clientName(GalleryImageIdentifier, "HciVmGalleryImageIdentifier", "csharp");
