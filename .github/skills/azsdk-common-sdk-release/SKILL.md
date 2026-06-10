@@ -19,12 +19,9 @@ compatibility: "azure-sdk-mcp server, SDK package merged on release branch. Supp
 ## Steps
 
 1. **Collect Info** — Get `packageName` and `language` from the user. Optionally get `branch` (defaults to main).
-2. **Check Readiness** — Run `azure-sdk-mcp:azsdk_release_sdk` with `checkReady: true` to verify API review approval, changelog, package name approval, and release date.
-
-- If APIView approval is pending display the link or guidance to find the link if not provided.
-
-3. **Review Results** — If not ready, display failing checks and guide user to resolve.
-4. **Trigger Release** — Once ready, run `azure-sdk-mcp:azsdk_release_sdk` with `checkReady: false`. Show pipeline link and inform user they must approve the release stage.
+2. **Determine Intent** — If the user explicitly asks to "check readiness" or "check if ready", run `azure-sdk-mcp:azsdk_release_sdk` with `checkReady: true`. Otherwise, proceed to trigger the release directly.
+3. **Trigger Release** — Run `azure-sdk-mcp:azsdk_release_sdk` with `checkReady: false` (the default). Show pipeline link and inform user they must approve the release stage.
+4. **Review Results** — If the release fails due to readiness issues, display failing checks and guide user to resolve.
 
 ## Examples
 

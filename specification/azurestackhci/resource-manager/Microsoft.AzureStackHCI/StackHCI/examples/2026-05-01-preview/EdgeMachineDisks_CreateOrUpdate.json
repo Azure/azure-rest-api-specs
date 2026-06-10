@@ -1,0 +1,87 @@
+{
+  "title": "EdgeMachineDisks_CreateOrUpdate",
+  "operationId": "EdgeMachineDisks_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "diskName": "disk-001",
+    "api-version": "2026-05-01-preview",
+    "resource": {
+      "properties": {
+        "diskConfiguration": {
+          "volumes": [
+            {
+              "sizeInBytes": "107374182400",
+              "path": "/data",
+              "fileSystem": "ext4"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "diskConfiguration": {
+            "volumes": [
+              {
+                "sizeInBytes": "107374182400",
+                "path": "/data",
+                "fileSystem": "ext4"
+              }
+            ]
+          },
+          "reportedProperties": {
+            "diskName": "disk-001",
+            "model": "Samsung SSD 980 PRO",
+            "manufacturer": "Samsung",
+            "serialNumber": "S5GXNF0R123456",
+            "firmwareVersion": "5B2QGXA7",
+            "sizeInBytes": "1000204886016",
+            "diskType": "NVMe",
+            "busLocation": "0000:03:00.0",
+            "unallocatedSizeInBytes": "892830703616",
+            "state": "Online",
+            "volumes": [
+              {
+                "sizeInBytes": "107374182400",
+                "path": "/data",
+                "fileSystem": "ext4",
+                "partitionId": "vol-001"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/disks/disk-001",
+        "name": "disk-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/disks"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "diskConfiguration": {
+            "volumes": [
+              {
+                "sizeInBytes": "107374182400",
+                "path": "/data",
+                "fileSystem": "ext4"
+              }
+            ]
+          },
+          "provisioningState": "Accepted"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/disks/disk-001",
+        "name": "disk-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/disks"
+      }
+    }
+  }
+}
