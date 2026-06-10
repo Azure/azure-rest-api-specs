@@ -1762,6 +1762,7 @@ union ComputeUsageUnit {
   "GallerySharingPermissionType",
   "csharp"
 );
+@@clientName(UpdateResourceDefinition, "GalleryResourcePatch", "csharp");
 
 // Accessibility overrides.
 @@access(CommunityGalleryIdentifier, Access.public, "csharp");
