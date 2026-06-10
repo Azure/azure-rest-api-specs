@@ -343,7 +343,7 @@ using TypeSpec.Versioning;
 @@clientName(
   ResourceOperationResponse,
   "RecurringActionsResourceOperationResult",
-  "javascript,go,python,java"
+  "javascript,go,java"
 );
 @@clientName(
   Microsoft.ComputeSchedule.Versions.`2025-05-01`,

@@ -66,7 +66,7 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
-  "java"
+  "java,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility for C# SDK"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility for C# SDK"

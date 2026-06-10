@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/hybridcontainerservice"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    use-read-only-status-schema: true
+    output-file: "{version-status}/{version}/openapi.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hybridcontainerservice"
+    namespace: "azure.mgmt.hybridcontainerservice"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/hybridcontainerservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hybridcontainerservice"
+    namespace: "com.azure.resourcemanager.hybridcontainerservice"
+    service-name: "HybridContainerService"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridcontainerservice"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    compatibility-lro: true
+    package-details:
+      name: "@azure/arm-hybridcontainerservice"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/hybridcontainerservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhybridcontainerservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhybridcontainerservice"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
