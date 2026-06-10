@@ -272,6 +272,7 @@ union IotHubSku {
   /**
    * GEN2
    */
+  @removed(Versions.v2026_05_01_preview)
   GEN2: "GEN2",
 }
 
@@ -550,6 +551,7 @@ enum IotHubSkuTier {
   /**
    * Generation2
    */
+  @removed(Versions.v2026_05_01_preview)
   Generation2,
 }
 
@@ -1180,24 +1182,14 @@ model RoutingEventStreamProperties {
   id?: string;
 
   /**
-   * The subscription identifier of the event stream endpoint.
-   */
-  subscriptionId?: string;
-
-  /**
-   * The name of the resource group of the event stream endpoint.
-   */
-  resourceGroup?: string;
-
-  /**
    * The url of the underlying event hub namespace of the event stream endpoint. It must include the protocol sb://
    */
-  endpointUri?: string;
+  endpointUri: string;
 
   /**
    * Event hub name on the event hub namespace
    */
-  entityPath?: string;
+  entityPath: string;
 
   /**
    * Method used to authenticate against the event stream endpoint
@@ -1220,7 +1212,7 @@ model RoutingEventStreamProperties {
   eventStreamId?: string;
 
   /**
-   * The source Id.
+   * The custom source Id.
    */
   sourceId?: string;
 }
@@ -1803,7 +1795,7 @@ model RootCertificateProperties {
  */
 model DeviceRegistry {
   /**
-   * The identifier of the Azure Device Registry namespace associated with the GEN2 SKU hub.
+   * The identifier of the Azure Device Registry namespace
    */
   namespaceResourceId?: Azure.Core.armResourceIdentifier;
 

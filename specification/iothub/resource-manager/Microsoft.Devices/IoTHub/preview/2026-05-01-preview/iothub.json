@@ -2627,7 +2627,7 @@
         "namespaceResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The identifier of the Azure Device Registry namespace associated with the GEN2 SKU hub."
+          "description": "The identifier of the Azure Device Registry namespace"
         },
         "identityResourceId": {
           "type": "string",
@@ -3574,8 +3574,7 @@
         "S3",
         "B1",
         "B2",
-        "B3",
-        "GEN2"
+        "B3"
       ],
       "x-ms-enum": {
         "name": "IotHubSku",
@@ -3615,11 +3614,6 @@
             "name": "B3",
             "value": "B3",
             "description": "B3"
-          },
-          {
-            "name": "GEN2",
-            "value": "GEN2",
-            "description": "GEN2"
           }
         ]
       }
@@ -3697,8 +3691,7 @@
       "enum": [
         "Free",
         "Standard",
-        "Basic",
-        "Generation2"
+        "Basic"
       ],
       "x-ms-enum": {
         "name": "IotHubSkuTier",
@@ -3718,11 +3711,6 @@
             "name": "Basic",
             "value": "Basic",
             "description": "Basic"
-          },
-          {
-            "name": "Generation2",
-            "value": "Generation2",
-            "description": "Generation2"
           }
         ]
       }
@@ -4729,14 +4717,6 @@
           "description": "Id of the event stream endpoint",
           "readOnly": true
         },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The subscription identifier of the event stream endpoint."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The name of the resource group of the event stream endpoint."
-        },
         "endpointUri": {
           "type": "string",
           "description": "The url of the underlying event hub namespace of the event stream endpoint. It must include the protocol sb://"
@@ -4763,11 +4743,13 @@
         },
         "sourceId": {
           "type": "string",
-          "description": "The source Id."
+          "description": "The custom source Id."
         }
       },
       "required": [
-        "name"
+        "name",
+        "endpointUri",
+        "entityPath"
       ]
     },
     "RoutingMessage": {

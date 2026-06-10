@@ -47,14 +47,6 @@ input-file:
   - preview/2026-03-01-preview/iothub.json
 ```
 
-### 2026-05-01-preview Event Stream updates
-
-- Added `properties.routing.endpoints.eventStreams` as a new endpoint array under routing endpoints.
-- Added `RoutingEventStreamProperties` with:
-  - Required: `name`, `endpointUri`, `entityPath`
-  - Optional: `id` (read-only), `subscriptionId`, `resourceGroup`, `authenticationType`, `identity`, `workspaceId`, `eventStreamId`, `sourceId`
-- Updated examples for the new version under `examples/2026-05-01-preview/` to include `eventStreams` payloads.
-
 ### Tag: package-preview-2025-08
 
 These settings apply only when `--tag=package-preview-2025-08` is specified on the command line.
