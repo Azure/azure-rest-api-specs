@@ -1889,9 +1889,10 @@
           "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure location of the linked Device Registry namespace."
         },
-        "linkingState": {
-          "$ref": "#/definitions/LinkingState",
-          "description": "The linking state of this namespace."
+        "linkingProperties": {
+          "$ref": "#/definitions/LinkingProperties",
+          "description": "Properties related to linking this provisioning service with the Azure Device Registry namespace.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2275,6 +2276,48 @@
       "x-ms-enum": {
         "name": "IpFilterTargetType",
         "modelAsString": false
+      }
+    },
+    "LinkingError": {
+      "type": "object",
+      "description": "The last error encountered when linking the provisioning service with an Azure Device Registry.\nMirrors the shape used by the IoT Hub Device Registry linking error model.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "httpStatusCode": {
+          "type": "string",
+          "description": "The HTTP status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "The error details.",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkingProperties": {
+      "type": "object",
+      "description": "Properties related to linking the provisioning service with an Azure Device Registry namespace.\nRead-only; populated by the service as the linking lifecycle progresses.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/LinkingState",
+          "description": "Indicates whether the provisioning service is linked with an Azure Device Registry.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/LinkingError",
+          "description": "The last error encountered when linking with the Azure Device Registry.",
+          "readOnly": true
+        }
       }
     },
     "LinkingState": {
