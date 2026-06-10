@@ -1068,14 +1068,13 @@ interface VolumeGroups {
 @doc("Azure Volume resource")
 @parentResource(VolumeGroup)
 model Volume is ProxyResource<AzureVolumeProperties> {
-  @doc("Name of the volume")
+  @doc("Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.")
   @segment("volumes")
   @key("volumeName")
   @visibility(Lifecycle.Read)
   @path
   @minLength(2)
-  @maxLength(40)
-  @pattern("^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$")
+  @pattern("^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$")
   name: string;
 }
 

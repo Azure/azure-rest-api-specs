@@ -105,6 +105,19 @@ using Microsoft.ContainerService;
 @@clientName(Code, "ContainerServiceStateCode", "csharp");
 @@clientName(Format, "KubeConfigFormat", "csharp");
 @@clientName(Expander, "AutoScaleExpander", "csharp");
+// C# acronym-casing compliance (API -> Api) for the Gateway API implementations
+// model and its containing property. This also corrects the flattened public
+// property `GatewayApiImplementationsIstioMode` and the model-factory parameter.
+@@clientName(
+  ManagedClusterWebAppRoutingGatewayAPIImplementations,
+  "ManagedClusterWebAppRoutingGatewayApiImplementations",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterIngressProfileWebAppRouting.gatewayAPIImplementations,
+  "gatewayApiImplementations",
+  "csharp"
+);
 @@clientName(
   KubeletConfig.containerLogMaxSizeMB,
   "ContainerLogMaxSizeInMB",
