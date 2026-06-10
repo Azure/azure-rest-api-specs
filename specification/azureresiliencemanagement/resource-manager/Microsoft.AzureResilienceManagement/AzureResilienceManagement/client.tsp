@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureResilienceManagement;
+using Azure.Core;
 
 // @@usage(ChildJobProperties, Usage.input | Usage.output, "go");
 @@usage(JobProperties, Usage.input | Usage.output, "go");
@@ -78,7 +79,7 @@ using Microsoft.AzureResilienceManagement;
 );
 
 // CSharp: AZC0032 — *Data is reserved (collides with auto-generated *Data POCOs)
-@@clientName(GoalsData, "GoalsInfo", "csharp");
+@@clientName(GoalsData, "ResilienceManagementGoalsInfo", "csharp");
 @@clientName(
   RecommendationsHighAvailabilityData,
   "RecommendationsHighAvailabilityInfo",
@@ -87,5 +88,59 @@ using Microsoft.AzureResilienceManagement;
 
 // These three are reference/content models and must not use the *Resource suffix.
 @@clientName(IncludeOrUpdateResource, "IncludeOrUpdateContent", "csharp");
-@@clientName(MoboBrokerResource, "MoboBrokerTarget", "csharp");
+@@clientName(MoboBrokerResource, "ManagedBrokerTarget", "csharp");
 @@clientName(ServiceLevelResource, "ServiceLevelTarget", "csharp");
+
+@@clientName(RBACState, "ResilienceManagementRbacState", "csharp");
+@@clientName(RBACSetupMode, "ResilienceManagementRbacSetupMode", "csharp");
+@@clientName(VMPresent, "VmPresent", "csharp");
+@@clientName(HAStatus, "HighAvailabilityStatus", "csharp");
+@@clientName(
+  ProvisioningState,
+  "ResilienceManagementProvisioningState",
+  "csharp"
+);
+@@clientName(ErrorDetails, "ResilienceManagementErrorDetail", "csharp");
+@@clientName(SystemMetadata, "DrillSystemMetadata", "csharp");
+@@clientName(ActionTask, "ResilienceManagementActionTask", "csharp");
+@@clientName(ResourceLists, "DrillResourcesList", "csharp");
+@@clientName(
+  SolutionDisplayName,
+  "ResilienceManagementSolutionDisplayName",
+  "csharp"
+);
+@@alternateType(MoboBrokerResource.id, armResourceIdentifier, "csharp");
+@@clientName(
+  RecoveryResourceProperties.needsAttention,
+  "IsAttentionRequired",
+  "csharp"
+);
+@@clientName(DrillRunAddNotesRequest.timestamp, "RecordedOn", "csharp");
+@@alternateType(
+  RecoveryResourceProperties.resourceLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ResourceProtectionSolutionSettings.activeLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ResourceProtectionSolutionSettings.activeLocations,
+  azureLocation[],
+  "csharp"
+);
+@@clientName(ForceInclusionAndUpdate, "ForceInclusionState", "csharp");
+@@clientName(
+  AssociatedIdentity,
+  "ResilienceManagementAssociatedIdentity",
+  "csharp"
+);
+@@clientName(GoalResource, "GoalMembers", "csharp");
+@@clientName(RecoveryResource, "RecoveryMembers", "csharp");
+@@clientName(Drill, "ResilienceManagementDrill", "csharp");
+@@clientName(Enrollment, "UsagePlanEnrollment", "csharp");
+@@clientName(GoalType, "ResilienceManagementGoalType", "csharp");
+@@clientName(MembershipType, "ResilienceManagementMembershipType", "csharp");
+@@clientName(JobStatus, "ResilienceManagementJobStatus", "csharp");
