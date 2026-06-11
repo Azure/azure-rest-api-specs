@@ -3089,7 +3089,7 @@ model Time {
  * Request body for listing scoped registration tokens for a session host.
  * @Introduced in 2026-01-01-preview
  */
-@added(Versions.vLatestPreview)
+@added(Versions.v2026_01_01_preview)
 model ScopedRegistrationTokenProperties {
   /**
    * Expiration time of the registration token in UTC.
