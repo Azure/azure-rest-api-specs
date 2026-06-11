@@ -1255,6 +1255,13 @@ model MachineProperties {
   licenseProfile?: LicenseProfileMachineInstanceView;
 
   /**
+   * Indicates whether the service has detected that this Arc machine is a clone of another onboarded machine. Service-computed; not settable by the user.
+   */
+  @added(Versions.v2026_06_16_preview)
+  @visibility(Lifecycle.Read)
+  statusReason?: string;
+
+  /**
    * The provisioning state, which only appears in the response.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2183,7 +2190,8 @@ model MachineUpdate extends ResourceUpdate {
   /**
    * Identity for the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  @typeChangedFrom(Versions.v2026_06_16_preview, Azure.ResourceManager.CommonTypes.Identity)
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
@@ -3771,7 +3779,8 @@ model HybridIdentityMetadataProperties {
    * Identity for the resource.
    */
   @visibility(Lifecycle.Read)
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  @typeChangedFrom(Versions.v2026_06_16_preview, Azure.ResourceManager.CommonTypes.Identity)
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 /**

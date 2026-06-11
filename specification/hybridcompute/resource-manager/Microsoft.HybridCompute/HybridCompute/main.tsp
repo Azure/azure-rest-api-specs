@@ -66,6 +66,14 @@ enum Versions {
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v3)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_06_04_preview: "2026-06-04-preview",
+
+  /**
+   * The 2026-06-16-preview API version.
+   */
+  @Azure.Core.previewVersion
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_06_16_preview: "2026-06-16-preview",
 }
 
 interface Operations {
