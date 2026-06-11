@@ -90,6 +90,9 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorPrivateLinkScoped",
   "csharp"
 );
+
+// Split NSP operations by resource type for C# so each generated client has a single API version.
+// Keeping ActionGroup NSP operations in ActionGroups mixes 2021-10-01 with 2024-10-01-preview.
 @@clientLocation(
   NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.getNSP,
   "NspActionGroup",
@@ -103,6 +106,24 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientLocation(
   NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.reconcileNSP,
   "NspActionGroup",
+  "csharp"
+);
+
+// Split DataCollectionEndpoint NSP operations from the main DataCollectionEndpoints client.
+// The main endpoint operations use 2024-03-11, while NSP operations use 2021-10-01.
+@@clientLocation(
+  NetworkSecurityPerimeterApi.DataCollectionEndpoints.getNSP,
+  "NspDataCollectionEndpoint",
+  "csharp"
+);
+@@clientLocation(
+  NetworkSecurityPerimeterApi.DataCollectionEndpoints.listNSP,
+  "NspDataCollectionEndpoint",
+  "csharp"
+);
+@@clientLocation(
+  NetworkSecurityPerimeterApi.DataCollectionEndpoints.reconcileNSP,
+  "NspDataCollectionEndpoint",
   "csharp"
 );
 @@clientName(
