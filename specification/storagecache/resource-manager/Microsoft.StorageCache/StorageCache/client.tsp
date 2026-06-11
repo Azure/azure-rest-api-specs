@@ -116,7 +116,6 @@ using Microsoft.StorageCache;
   "csharp"
 );
 @@clientName(AmlFilesystem, "AmlFileSystem", "csharp");
-@@clientName(AmlFilesystem.name, "amlFileSystemName", "csharp");
 @@clientName(AmlFilesystemsListResult, "AmlFileSystemsResult", "csharp");
 @@clientName(
   AmlFilesystemEncryptionSettings,
