@@ -39,7 +39,7 @@ input-file:
   - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
   - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
   - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+  - Microsoft.KubernetesConfiguration/operations/preview/2026-06-15-preview/operations.json
   - Microsoft.KubernetesConfiguration/KubernetesResources/preview/2026-06-15-preview/KubernetesResources.json
   - Microsoft.KubernetesConfiguration/upgradeAssessments/preview/2026-06-15-preview/upgradeAssessments.json
 suppressions:
@@ -69,6 +69,7 @@ These settings apply only when `--tag=package-preview-2026-06-only` is specified
 
 ``` yaml $(tag) == 'package-preview-2026-06-only'
 input-file:
+  - Microsoft.KubernetesConfiguration/operations/preview/2026-06-15-preview/operations.json
   - Microsoft.KubernetesConfiguration/KubernetesResources/preview/2026-06-15-preview/KubernetesResources.json
   - Microsoft.KubernetesConfiguration/upgradeAssessments/preview/2026-06-15-preview/upgradeAssessments.json
 suppressions:
