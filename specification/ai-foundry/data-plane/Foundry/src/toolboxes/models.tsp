@@ -49,9 +49,9 @@ model WithFieldsOptional<Source, Keys extends string> {
 /**
  * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
  */
-model ToolFields<Source> {
-  ...OmitProperties<Source, "type" | "name" | "description">;
-}
+alias ToolFields<Source> = {
+  ...OmitProperties<Source, "name" | "description">;
+};
 
 /**
  * Supported tool types for tools stored in a toolbox.
@@ -87,11 +87,6 @@ model ToolboxTool {
  * A code interpreter tool stored in a toolbox.
  */
 model CodeInterpreterToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `code_interpreter`.
-   */
-  type: "code_interpreter";
-
   ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
 
@@ -99,23 +94,16 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
  * A file search tool stored in a toolbox.
  */
 model FileSearchToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `file_search`.
-   */
-  type: "file_search";
-
-  ...WithFieldsOptional<ToolFields<OpenAI.FileSearchTool>, "vector_store_ids">;
+  ...WithFieldsOptional<
+    ToolFields<OpenAI.FileSearchTool>,
+    "vector_store_ids"
+  >;
 }
 
 /**
  * A web search tool stored in a toolbox.
  */
 model WebSearchToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `web_search`.
-   */
-  type: "web_search";
-
   ...ToolFields<OpenAI.WebSearchTool>;
 }
 
@@ -123,11 +111,6 @@ model WebSearchToolboxTool extends ToolboxTool {
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `mcp`.
-   */
-  type: "mcp";
-
   ...ToolFields<OpenAI.MCPTool>;
 }
 
@@ -135,60 +118,35 @@ model MCPToolboxTool extends ToolboxTool {
  * An Azure AI Search tool stored in a toolbox.
  */
 model AzureAISearchToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `azure_ai_search`.
-   */
-  type: "azure_ai_search";
-
-  ...AzureAISearchToolFields;
+  ...ToolFields<AzureAISearchTool>;
 }
 
 /**
  * An OpenAPI tool stored in a toolbox.
  */
 model OpenApiToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `openapi`.
-   */
-  type: "openapi";
-
-  ...OpenApiToolFields;
+  ...ToolFields<OpenApiTool>;
 }
 
 /**
  * An A2A tool stored in a toolbox.
  */
 model A2APreviewToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `a2a_preview`.
-   */
-  type: "a2a_preview";
-
-  ...A2APreviewToolFields;
+  ...ToolFields<A2APreviewTool>;
 }
 
 /**
  * A WorkIQ tool stored in a toolbox.
  */
 model WorkIQPreviewToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `work_iq_preview`.
-   */
-  type: "work_iq_preview";
-
-  ...RequiredToolProjectConnectionIdField;
+  ...ToolFields<WorkIQPreviewTool>;
 }
 
 /**
  * A FabricIQ tool stored in a toolbox.
  */
 model FabricIQPreviewToolboxTool extends ToolboxTool {
-  /**
-   * The type of the tool. Always `fabric_iq_preview`.
-   */
-  type: "fabric_iq_preview";
-
-  ...FabricIQPreviewToolFields;
+  ...ToolFields<FabricIQPreviewTool>;
 }
 
 /**
