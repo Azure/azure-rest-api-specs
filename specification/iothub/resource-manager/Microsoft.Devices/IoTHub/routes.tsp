@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Devices;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface groups provider-level actions (checkNameAvailability) that are not tied to a single ARM resource type; retained to match the published API routing."
 interface IotHubResourceOperationGroup {
   /**
    * Check if an IoT hub name is available.
@@ -29,7 +29,7 @@ interface IotHubResourceOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface groups subscription-level provider actions (usage/quota) that are not tied to a single ARM resource type; retained to match the published API routing."
 interface ResourceProviderCommonOperationGroup {
   /**
    * Get the number of free and paid iot hubs in the subscription

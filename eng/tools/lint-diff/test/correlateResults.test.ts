@@ -8,15 +8,15 @@ import {
   getNewItems,
   getViolations,
   isSameSources,
-} from "../src/correlateResults.js";
+} from "../src/correlateResults.ts";
 import {
-  AutorestRunResult,
-  BeforeAfter,
-  LintDiffViolation,
-  Source,
-} from "../src/lintdiff-types.js";
-import { relativizePath } from "../src/util.js";
-import { isWindows } from "./test-util.js";
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+  type Source,
+} from "../src/lintdiff-types.ts";
+import { relativizePath } from "../src/util.ts";
+import { isWindows } from "./test-util.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
