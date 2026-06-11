@@ -23,6 +23,7 @@ namespace Customization;
 @@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
 @@clientName(InputSchema, "EventGridInputSchema", "csharp");
 @@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
+@@clientName(JsonInputSchemaMapping, "EventGridJsonInputSchemaMapping", "csharp");
 @@clientName(EventSubscriptionUpdateParameters, "EventGridSubscriptionPatch", "csharp");
 @@clientName(Filter, "EventGridFilter", "csharp");
 @@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
@@ -96,6 +97,7 @@ namespace Customization;
 @@alternateType(SystemTopicProperties.source, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(SystemTopicProperties.metricResourceId, Azure.Core.uuid, "csharp");
 @@alternateType(VerifiedPartnerProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryTenantId, Azure.Core.uuid, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(PartnerRegistration.properties, "csharp");
