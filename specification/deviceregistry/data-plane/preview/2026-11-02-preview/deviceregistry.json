@@ -1410,6 +1410,62 @@
         }
       }
     },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles:getAuthenticationProfileByUuid": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_GetAuthenticationProfileByUuid",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Look up a device authentication profile by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetAuthenticationProfileByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a device authentication profile by its UUID": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetAuthenticationProfileByUuid.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
       "get": {
         "operationId": "DeviceCapabilities_List",
@@ -5780,6 +5836,14 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetAuthenticationProfileByUuidRequest": {
+      "name": "authenticationProfileUuid",
+      "in": "query",
+      "description": "The unique identifier of the authentication profile.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "GetCapabilityByUuidRequest": {
       "name": "capabilityUuid",
