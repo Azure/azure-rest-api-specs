@@ -2465,3 +2465,14 @@ op attestationsListForResource(
   QueryOptions,
   "csharp"
 );
+
+@@clientName(
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "TriggerPolicyStateEvaluation",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+  "TriggerPolicyStateEvaluation",
+  "csharp"
+);
