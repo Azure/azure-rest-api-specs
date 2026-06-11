@@ -1395,10 +1395,10 @@ model AzureFileVolume {
   storageAccountKeyReference?: string;
 
   /**
-   * The client id of the user managed identity which has access to the Azure File share..
+   * The client id of the user-assigned managed identity that has access to the Azure File share.
    */
   @added(Versions.v2026_07_01)
-  userManagedIdentityClientId?: string;
+  userAssignedIdentityClientId?: string;
 }
 
 /**

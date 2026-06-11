@@ -2408,9 +2408,9 @@
           "type": "string",
           "description": "The reference to the storage account access key used to access the Azure File share."
         },
-        "userManagedIdentityClientId": {
+        "userAssignedIdentityClientId": {
           "type": "string",
-          "description": "The client id of the user managed identity which has access to the Azure File share.."
+          "description": "The client id of the user-assigned managed identity that has access to the Azure File share."
         }
       },
       "required": [
@@ -5313,7 +5313,6 @@
     "SandboxGroupProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a SandboxGroup resource.",
-      "readOnly": true,
       "enum": [
         "Succeeded",
         "Failed",
