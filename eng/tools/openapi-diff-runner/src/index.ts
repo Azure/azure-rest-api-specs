@@ -8,10 +8,10 @@ import {
   buildPrInfo,
   createContextFromParsedArgs,
   type ParsedCliArguments,
-} from "./command-helpers.js";
-import { validateBreakingChange } from "./commands.js";
-import { logError, logMessage } from "./log.js";
-import { BreakingChangesCheckType } from "./types/breaking-change.js";
+} from "./command-helpers.ts";
+import { validateBreakingChange } from "./commands.ts";
+import { logError, logMessage } from "./log.ts";
+import { type BreakingChangesCheckType } from "./types/breaking-change.ts";
 
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = path.dirname(__filename);
