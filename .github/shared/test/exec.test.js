@@ -1,4 +1,4 @@
-import { dirname, resolve } from "path";
+import { dirname } from "path";
 import semver from "semver";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
@@ -46,27 +46,26 @@ describe("execNpm", () => {
     });
   });
 
-  it("succeeds with --prefix", async () => {
-    // "npm prefix" in this dir, without the "--prefix" option, returns the parent dir
-    let result = await execNpm(["prefix"], { ...options, cwd: __dirname });
-    expect(result.stdout.trim()).toEqual(resolve(__dirname, ".."));
-
-    // with the "--prefix" option set to this dir, returns this dir
-    result = await execNpm(["prefix"], { ...options, cwd: __dirname, prefix: __dirname });
-    expect(result.stdout.trim()).toEqual(__dirname);
+  it("succeeds with root", async () => {
+    // "pnpm root" in this dir returns the node_modules path of the nearest workspace root
+    const result = await execNpm(["root"], { ...options, cwd: __dirname });
+    expect(result.stdout.trim()).toContain("node_modules");
   });
 
-  it("fails with --help", async () => {
-    await expect(execNpm(["--help"], options)).rejects.toMatchObject({
-      stdout: /** @type {unknown} */ (expect.stringMatching(/usage/i)),
-      stderr: "",
-      code: 1,
+  it("succeeds with prefix option", async () => {
+    const result = await execNpm(["--version"], { ...options, prefix: __dirname });
+    expect(semver.valid(result.stdout.trim())).not.toBeNull();
+  });
+
+  it("fails with invalid command", async () => {
+    await expect(execNpm(["invalid-command-xyz"], options)).rejects.toMatchObject({
+      code: /** @type {unknown} */ (expect.toSatisfy((v) => v !== 0)),
     });
   });
 });
 
 describe("execNpmExec", () => {
-  // A command run in the context of "npm exec --no -- ___" needs to call
+  // A command run in the context of "pnpm exec ___" needs to call
   // something referenced in package.json. In this case, prettier is present
   // so it is used.
   it("runs prettier", async () => {

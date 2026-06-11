@@ -233,17 +233,17 @@ function Invoke-TypeSpecAPIViewParser {
   try {
     Write-Host "Compiling files and generating '$Type' APIView for '$resourceProvider'..."
     Push-Location $ProjectPath
-    Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json"
-    npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
+    Write-Host "pnpm exec tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json"
+    pnpm exec tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json
     if ($LASTEXITCODE) {
-      throw "Compilation error when running: 'npm exec --no -- tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json'"
+      throw "Compilation error when running: 'pnpm exec tsp compile . --emit=@azure-tools/typespec-apiview --option @azure-tools/typespec-apiview.emitter-output-dir=$tempWorkingDirectoryPath/output/apiview.json'"
     }
     
     # Generate metadata file using @azure-tools/typespec-metadata emitter
     if ($Type -eq "New") {
       Write-Host "Generating TypeSpec metadata file using @azure-tools/typespec-metadata emitter..."
-      Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-metadata --option @azure-tools/typespec-metadata.outputFile=$tempWorkingDirectoryPath/output/$typeSpecMetadataFileName --option @azure-tools/typespec-metadata.format=json"
-      npm exec --no -- tsp compile . --emit=@azure-tools/typespec-metadata --option "@azure-tools/typespec-metadata.outputFile=$tempWorkingDirectoryPath/output/$typeSpecMetadataFileName" --option "@azure-tools/typespec-metadata.format=json"
+      Write-Host "pnpm exec tsp compile . --emit=@azure-tools/typespec-metadata --option @azure-tools/typespec-metadata.outputFile=$tempWorkingDirectoryPath/output/$typeSpecMetadataFileName --option @azure-tools/typespec-metadata.format=json"
+      pnpm exec tsp compile . --emit=@azure-tools/typespec-metadata --option "@azure-tools/typespec-metadata.outputFile=$tempWorkingDirectoryPath/output/$typeSpecMetadataFileName" --option "@azure-tools/typespec-metadata.format=json"
       if ($LASTEXITCODE) {
         Write-Host "Warning: Failed to generate metadata file. Continuing without metadata."
       }
@@ -466,9 +466,9 @@ function New-TypeSpecAPIViewTokens {
     # Generate New TypeSpec APIView Tokens
     git checkout $SourceCommitId
     Write-Host "Installing required dependencies to generate New API review"
-    npm ci
-    LogGroupStart "npm ls -a" 
-    npm ls -a
+    pnpm install --frozen-lockfile
+    LogGroupStart "pnpm ls" 
+    pnpm ls
     LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
@@ -479,9 +479,9 @@ function New-TypeSpecAPIViewTokens {
     # Generate Baseline TypeSpec APIView Tokens 
     git checkout $TargetCommitId
     Write-Host "Installing required dependencies to generate Baseline API review"
-    npm ci
-    LogGroupStart "npm ls -a" 
-    npm ls -a
+    pnpm install --frozen-lockfile
+    LogGroupStart "pnpm ls" 
+    pnpm ls
     LogGroupEnd 
     foreach ($typeSpecProject in $typeSpecProjects) {
       # Skip Baseline APIView Token for new projects

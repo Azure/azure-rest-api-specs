@@ -4,7 +4,7 @@ import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
 import defaultPath, { basename, dirname, join, type PlatformPath } from "path";
 import { simpleGit } from "simple-git";
-import { getSuppressions as getSuppressionsImpl, type Suppression } from "suppressions";
+import { getSuppressions as getSuppressionsImpl, type Suppression } from "@azure-tools/suppressions";
 import { context } from "./index.ts";
 
 // Enable simple-git debug logging to improve console output

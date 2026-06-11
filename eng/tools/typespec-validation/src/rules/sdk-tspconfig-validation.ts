@@ -2,7 +2,7 @@
 // TODO: Enable eslint, fix errors
 
 import { join } from "path";
-import { type Suppression } from "suppressions";
+import { type Suppression } from "@azure-tools/suppressions";
 import { parse as yamlParse } from "yaml";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";

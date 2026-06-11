@@ -1,5 +1,4 @@
 import child_process from "child_process";
-import { dirname, join } from "path";
 import { promisify } from "util";
 const execFileImpl = promisify(child_process.execFile);
 
@@ -91,38 +90,13 @@ export async function execFile(file, args, options = {}) {
 export async function execNpm(args, options = {}) {
   const { prefix } = options;
 
-  // Exclude platform-specific code from coverage
-  /* v8 ignore start */
-  const { file, defaultArgs } =
-    process.platform === "win32"
-      ? {
-          // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
-          //
-          // "node.exe", ["--", "npm-cli.js", ...args]
-          //
-          // The "--" MUST come BEFORE "npm-cli.js", to ensure args are sent to the script unchanged.
-          // If the "--" comes after "npm-cli.js", the args sent to the script will be ["--", ...args],
-          // which is NOT equivalent, and can break if args itself contains another "--".
-
-          // example: "C:\Program Files\nodejs\node.exe"
-          file: process.execPath,
-
-          // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
-          defaultArgs: [
-            "--",
-            join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"),
-          ],
-        }
-      : { file: "npm", defaultArgs: [] };
-  /* v8 ignore stop */
-
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
 
-  return await execFile(file, [...defaultArgs, ...prefixArgs, ...args], options);
+  return await execFile("pnpm", [...prefixArgs, ...args], options);
 }
 
 /**
- * Calls `execNpm()` with arguments ["exec", "--no", "--"] prepended.
+ * Calls `pnpm exec` with the given arguments.
  *
  * @param {string[]} args
  * @param {ExecNpmOptions} [options]
@@ -130,5 +104,5 @@ export async function execNpm(args, options = {}) {
  * @throws {ExecError}
  */
 export async function execNpmExec(args, options = {}) {
-  return await execNpm(["exec", "--no", "--", ...args], options);
+  return await execNpm(["exec", ...args], options);
 }

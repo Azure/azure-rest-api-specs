@@ -103,6 +103,9 @@ importers:
       '@azure-tools/summarize-impact':
         specifier: workspace:*
         version: link:eng/tools/summarize-impact
+      '@azure-tools/suppressions':
+        specifier: workspace:*
+        version: link:eng/tools/suppressions
       '@azure-tools/typespec-apiview':
         specifier: 0.7.2
         version: 0.7.2(@typespec/compiler@1.13.0(@types/node@25.9.2))(@typespec/versioning@0.83.0(@typespec/compiler@1.13.0(@types/node@25.9.2)))
@@ -133,6 +136,9 @@ importers:
       '@azure-tools/typespec-metadata':
         specifier: 0.2.0
         version: 0.2.0(@typespec/compiler@1.13.0(@types/node@25.9.2))
+      '@azure-tools/typespec-validation':
+        specifier: workspace:*
+        version: link:eng/tools/typespec-validation
       '@azure/avocado':
         specifier: 0.11.0
         version: 0.11.0(tslib@2.8.1)
@@ -227,6 +233,9 @@ importers:
       '@octokit/endpoint':
         specifier: ^11.0.0
         version: 11.0.3
+      '@octokit/request-error':
+        specifier: ^7.1.0
+        version: 7.1.0
       '@octokit/rest':
         specifier: ^22.0.0
         version: 22.0.1
@@ -396,6 +405,12 @@ importers:
       '@azure-tools/typespec-validation':
         specifier: workspace:*
         version: link:typespec-validation
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.19.42
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
 
   eng/tools/lint-diff:
     dependencies:
@@ -530,6 +545,9 @@ importers:
       '@azure/oad':
         specifier: 0.12.4
         version: 0.12.4
+      simple-git:
+        specifier: 'catalog:'
+        version: 3.36.0
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -800,6 +818,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.58.0
         version: 8.61.0(eslint@10.4.1)(typescript@6.0.3)
+      '@vitest/coverage-v8':
+        specifier: 'catalog:'
+        version: 4.1.8(vitest@4.1.8)
       eslint:
         specifier: 'catalog:'
         version: 10.4.1
@@ -809,6 +830,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.8(@types/node@20.19.42)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@20.19.42)(yaml@2.9.0))
 
   eng/tools/typespec-requirement:
     devDependencies:
@@ -5760,7 +5784,7 @@ snapshots:
 
   '@types/node-fetch@2.6.13':
     dependencies:
-      '@types/node': 20.19.42
+      '@types/node': 25.9.2
       form-data: 4.0.5
 
   '@types/node@10.17.60': {}
