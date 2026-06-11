@@ -487,6 +487,13 @@ using Microsoft.DataFactory;
   "csharp"
 );
 @@clientName(CreateRunResponse, "PipelineCreateRunResult", "csharp");
+// Back-compat: the GA (AutoRest) C# SDK exposed the createRun body parameter as
+// "parameterValueSpecification" (generated default is "parameters"); restore it for C#.
+@@clientName(
+  PipelineResources.createRun::parameters.body,
+  "parameterValueSpecification",
+  "csharp"
+);
 @@clientName(Credential, "DataFactoryCredential", "csharp");
 @@clientName(Credential.type, "CredentialType", "csharp");
 @@clientName(
