@@ -726,6 +726,23 @@ model ErrorDetails {
 }
 
 /**
+ * The connection profile that determines the protocol behavior used by the IoT hub.
+ */
+union ConnectionProfile {
+  string,
+
+  /**
+   * Classic connection profile.
+   */
+  Classic: "classic",
+
+  /**
+   * MQTT v5 connection profile.
+   */
+  MqttV5: "mqttv5",
+}
+
+/**
  * The properties of an IoT hub.
  */
 model IotHubProperties {
@@ -898,6 +915,11 @@ model IotHubProperties {
    * Represents properties related to the Azure Device Registry (ADR).
    */
   deviceRegistry?: DeviceRegistry;
+
+  /**
+   * The connection profile that determines the protocol behavior used by the IoT hub.
+   */
+  connectionProfile: ConnectionProfile;
 
   /**
    * Set of additional read-only properties for the IoT hub.

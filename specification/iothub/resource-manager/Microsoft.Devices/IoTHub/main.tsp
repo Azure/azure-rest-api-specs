@@ -40,9 +40,9 @@ namespace Microsoft.Devices;
  */
 enum Versions {
   /**
-   * The 2026-03-01-preview API version.
+   * The 2026-08-01-preview API version.
    */
-  v2026_03_01_preview: "2026-03-01-preview",
+  v2026_08_01_preview: "2026-08-01-preview",
 }
 
 interface Operations
