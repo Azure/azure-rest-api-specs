@@ -69,11 +69,7 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(PollingIntervalInSeconds, "PollingIntervalInSecond", "csharp");
 @@clientName(PollingType, "NetworkTapPollingType", "csharp");
 @@clientName(PortCondition, "NetworkFabricPortCondition", "csharp");
-@@clientName(
-  PortConditionPatch,
-  "NetworkFabricPortConditionPatch",
-  "csharp"
-);
+@@clientName(PortConditionPatch, "NetworkFabricPortConditionPatch", "csharp");
 @@clientName(PortType, "NetworkFabricPortType", "csharp");
 @@clientName(ProvisioningState, "NetworkFabricProvisioningState", "csharp");
 @@clientName(
