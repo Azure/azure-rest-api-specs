@@ -1387,60 +1387,6 @@
           }
         }
       },
-      "put": {
-        "operationId": "Workflows_ReplaceRun",
-        "tags": [
-          "Workflows"
-        ],
-        "description": "Updates a workflow run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "workflowRunId",
-            "in": "path",
-            "description": "The workflow run identifier.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "workflowRun",
-            "in": "body",
-            "description": "The workflow run payload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WorkflowRun"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/WorkflowRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Workflows_ReplaceRun": {
-            "$ref": "./examples/Workflows_ReplaceRun_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Workflows_DeleteRun",
         "tags": [

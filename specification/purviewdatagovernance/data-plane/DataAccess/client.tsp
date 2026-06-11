@@ -20,7 +20,6 @@ namespace Customizations;
 @@clientName(DataSubscriptions.replaceDraft, "Save");
 @@clientName(Workflows.createOrReplace, "CreateOrUpdate");
 @@clientName(Workflows.getRuns, "ListRuns");
-@@clientName(Workflows.replaceRun, "UpdateRun");
 @@clientName(
   DataProductPolicySets.createOrReplaceApplied,
   "CreateOrUpdateApplied"

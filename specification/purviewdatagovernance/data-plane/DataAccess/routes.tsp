@@ -307,19 +307,6 @@ interface Workflows {
   >;
 
   @tag("Workflows")
-  @doc("Updates a workflow run.")
-  @route("/workflowRuns/{workflowRunId}")
-  @put
-  replaceRun is RpcOperation<
-    WorkflowRunIdParameter & {
-      @doc("The workflow run payload.")
-      @body
-      workflowRun: WorkflowRun;
-    },
-    WorkflowRun
-  >;
-
-  @tag("Workflows")
   @doc("Deletes a workflow run.")
   @route("/workflowRuns/{workflowRunId}")
   @delete
