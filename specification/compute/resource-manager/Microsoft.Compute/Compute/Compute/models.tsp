@@ -3158,6 +3158,16 @@ model VirtualMachineScaleSetIpTag {
    * IP tag associated with the public IP. Example: SQL, Storage etc.
    */
   tag?: string;
+
+  /**
+   * The first party service tag resource identifier associated with the public IP address.
+   */
+  @added(Versions.v2026_04_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -6058,6 +6068,16 @@ model VirtualMachineIpTag {
    * IP tag associated with the public IP. Example: SQL, Storage etc.
    */
   tag?: string;
+
+  /**
+   * The first party service tag resource identifier associated with the public IP address.
+   */
+  @added(Versions.v2026_04_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
