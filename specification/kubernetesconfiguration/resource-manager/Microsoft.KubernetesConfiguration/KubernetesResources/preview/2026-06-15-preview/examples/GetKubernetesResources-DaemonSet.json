@@ -47,7 +47,11 @@
             "maxUnavailable": "1",
             "serviceAccountName": "kube-proxy",
             "tolerations": [
-              { "operator": "Exists" }
+              { "key": "node.kubernetes.io/not-ready", "operator": "Exists", "effect": "NoSchedule" },
+              { "key": "node.kubernetes.io/unreachable", "operator": "Exists", "effect": "NoSchedule" },
+              { "key": "node.kubernetes.io/disk-pressure", "operator": "Exists", "effect": "NoSchedule" },
+              { "key": "node.kubernetes.io/memory-pressure", "operator": "Exists", "effect": "NoSchedule" },
+              { "key": "node.kubernetes.io/unschedulable", "operator": "Exists", "effect": "NoSchedule" }
             ],
             "volumes": [
               { "name": "kube-proxy", "sourceType": "configMap", "source": "kube-proxy" },
