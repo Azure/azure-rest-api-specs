@@ -593,6 +593,18 @@ union ArcKindEnum {
   AWS: "AWS",
 }
 
+/**
+ * The reason describing why the service set the machine status to a particular value.
+ */
+union MachineStatusReason {
+  string,
+
+  /**
+   * Indicates the service has detected that this Arc machine is a clone of another onboarded machine.
+   */
+  Cloned: "Cloned",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 union InstanceViewTypes {
   string,
@@ -1259,7 +1271,7 @@ model MachineProperties {
    */
   @added(Versions.v2026_06_16_preview)
   @visibility(Lifecycle.Read)
-  statusReason?: string;
+  statusReason?: MachineStatusReason;
 
   /**
    * The provisioning state, which only appears in the response.
