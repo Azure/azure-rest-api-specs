@@ -9949,12 +9949,6 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
         base_url:
           type: string
           format: uri
@@ -9966,7 +9960,15 @@ components:
             If not provided, defaults to  `/.well-known/agent-card.json`
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: |-
+            The connection ID in the project for the A2A server.
+            The connection stores authentication and other connection details needed to connect to the A2A server.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
@@ -9979,7 +9981,7 @@ components:
           type: string
           enum:
             - a2a_preview
-          description: The type of the tool. Always `a2a_preview`.
+          description: The type of the tool. Always `"a2a_preview`.
         base_url:
           type: string
           format: uri
@@ -9991,7 +9993,9 @@ components:
             If not provided, defaults to  `/.well-known/agent-card.json`
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: |-
+            The connection ID in the project for the A2A server.
+            The connection stores authentication and other connection details needed to connect to the A2A server.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
@@ -11244,7 +11248,7 @@ components:
           type: string
           enum:
             - azure_ai_search
-          description: The type of the tool. Always `azure_ai_search`.
+          description: The object type, which is always 'azure_ai_search'.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -12370,7 +12374,8 @@ components:
           type: string
           enum:
             - code_interpreter
-          description: The type of the tool. Always `code_interpreter`.
+          description: The type of the code interpreter tool. Always `code_interpreter`.
+          x-stainless-const: true
         container:
           anyOf:
             - type: string
@@ -15341,7 +15346,7 @@ components:
           description: The object type, which is always 'fabric_iq_preview'.
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: The ID of the FabricIQ project connection.
         server_label:
           type: string
           description: (Optional) The label of the FabricIQ MCP server to connect to.
@@ -15378,10 +15383,10 @@ components:
           type: string
           enum:
             - fabric_iq_preview
-          description: The type of the tool. Always `fabric_iq_preview`.
+          description: The object type, which is always 'fabric_iq_preview'.
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: The ID of the FabricIQ project connection.
         server_label:
           type: string
           description: (Optional) The label of the FabricIQ MCP server to connect to.
@@ -15477,7 +15482,9 @@ components:
           type: string
           enum:
             - file_search
-          description: The type of the tool. Always `file_search`.
+          description: The type of the file search tool. Always `file_search`.
+          x-stainless-const: true
+          default: file_search
         max_num_results:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -16267,7 +16274,8 @@ components:
           type: string
           enum:
             - mcp
-          description: The type of the tool. Always `mcp`.
+          description: The type of the MCP tool. Always `mcp`.
+          x-stainless-const: true
         server_label:
           type: string
           description: A label for this MCP server, used to identify it in tool calls.
@@ -16339,7 +16347,7 @@ components:
           default: always
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An MCP tool stored in a toolbox.
@@ -26677,7 +26685,7 @@ components:
           default: always
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -31941,7 +31949,7 @@ components:
           type: string
           enum:
             - openapi
-          description: The type of the tool. Always `openapi`.
+          description: The object type, which is always 'openapi'.
         openapi:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
@@ -34952,7 +34960,8 @@ components:
           type: string
           enum:
             - web_search
-          description: The type of the tool. Always `web_search`.
+          description: The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
+          default: web_search
         filters:
           type: object
           allOf:
@@ -35012,7 +35021,7 @@ components:
           description: The object type, which is always 'work_iq_preview'.
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: The ID of the WorkIQ project connection.
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
@@ -35032,10 +35041,10 @@ components:
           type: string
           enum:
             - work_iq_preview
-          description: The type of the tool. Always `work_iq_preview`.
+          description: The object type, which is always 'work_iq_preview'.
         project_connection_id:
           type: string
-          description: The project connection ID used by this tool.
+          description: The ID of the WorkIQ project connection.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A WorkIQ tool stored in a toolbox.
