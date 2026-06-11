@@ -2190,7 +2190,10 @@ model MachineUpdate extends ResourceUpdate {
   /**
    * Identity for the resource.
    */
-  @typeChangedFrom(Versions.v2026_06_16_preview, Azure.ResourceManager.CommonTypes.Identity)
+  @typeChangedFrom(
+    Versions.v2026_06_16_preview,
+    Azure.ResourceManager.CommonTypes.Identity
+  )
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
@@ -3779,7 +3782,10 @@ model HybridIdentityMetadataProperties {
    * Identity for the resource.
    */
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_06_16_preview, Azure.ResourceManager.CommonTypes.Identity)
+  @typeChangedFrom(
+    Versions.v2026_06_16_preview,
+    Azure.ResourceManager.CommonTypes.Identity
+  )
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 

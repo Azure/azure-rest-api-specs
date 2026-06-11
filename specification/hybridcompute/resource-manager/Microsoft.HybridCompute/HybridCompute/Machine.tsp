@@ -33,8 +33,11 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
   /**
    * Identity for the resource.
    */
-  @typeChangedFrom(Versions.v2026_06_16_preview, Azure.ResourceManager.CommonTypes.Identity)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @typeChangedFrom(
+    Versions.v2026_06_16_preview,
+    Azure.ResourceManager.CommonTypes.Identity
+  )
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
