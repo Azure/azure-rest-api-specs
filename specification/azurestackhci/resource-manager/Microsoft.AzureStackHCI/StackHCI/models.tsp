@@ -10353,3 +10353,235 @@ union PrivilegedJobType {
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineDiskPrivilegedJobListResult
   is Azure.Core.Page<EdgeMachineDiskPrivilegedJob>;
+
+/**
+ * The properties of an Edge Machine Deployment Setting.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineDeploymentSettingProperties {
+  /**
+   * The provisioning state of the deployment setting resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Scale units will contain the list of deployment data for the edge machine.
+   */
+  deploymentConfiguration: EdgeMachineDeploymentConfiguration;
+}
+
+/**
+ * Edge Machine Deployment Configuration
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineDeploymentConfiguration {
+  /**
+   * Deployment template version.
+   */
+  version?: string;
+
+  /**
+   * Scale units will contain the list of deployment data.
+   */
+  @identifiers(#[])
+  scaleUnits: EdgeMachineScaleUnits[];
+}
+
+/**
+ * Scale units will contain the list of deployment data.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineScaleUnits {
+  /**
+   * Deployment data to configure the edge machine.
+   */
+  deploymentData: EdgeMachineDeploymentData;
+}
+
+/**
+ * The deployment data of an edge machine.
+ */
+@added(Versions.v2026_05_01_preview)
+model EdgeMachineDeploymentData {
+  /**
+   * iSCSI network configuration for the edge machine.
+   */
+  iScsiNetworkConfig?: IscsiConfig;
+}
+
+/**
+ * iSCSI network configuration.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiConfig {
+  /**
+   * Common adapter properties applied to all iSCSI network adapters.
+   */
+  adapterProperties?: IscsiAdapterProperties;
+
+  /**
+   * Multipath I/O (MPIO) load balancing policy applied to the iSCSI sessions.
+   */
+  mpioPolicy?: IscsiMpioPolicy;
+
+  /**
+   * CHAP authentication settings used when connecting to the iSCSI target portals.
+   */
+  chapSettings?: IscsiChapSettings;
+
+  /**
+   * Per-adapter IP configuration for the iSCSI network adapters.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches the iSCSI network configuration wire format."
+  @identifiers(#["networkAdapterName"])
+  adapterIPConfig?: IscsiAdapterIPConfig[];
+}
+
+/**
+ * Multipath I/O (MPIO) load balancing policy for iSCSI sessions.
+ */
+@added(Versions.v2026_05_01_preview)
+union IscsiMpioPolicy {
+  string,
+
+  /** Round robin: distribute I/O across all available paths in rotation. */
+  RoundRobin: "RoundRobin",
+  // Additional MPIO policies can be added as needed:
+  // RoundRobinWithSubset: "RoundRobinWithSubset",
+  // FailOverOnly: "FailOverOnly",
+  // LeastQueueDepth: "LeastQueueDepth",
+  // LeastBlocks: "LeastBlocks",
+}
+
+/**
+ * Common properties applied to iSCSI network adapters.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiAdapterProperties {
+  /**
+   * 802.1p priority value for iSCSI traffic.
+   */
+  priorityValue8021ActionIscsi?: int32;
+
+  /**
+   * iSCSI bandwidth percentage.
+   */
+  bandwidthPercentageIscsi?: int32;
+
+  /**
+   * Jumbo frame size in bytes.
+   */
+  jumboPacket?: int32;
+}
+
+/**
+ * IP configuration for a single iSCSI network adapter.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiAdapterIPConfig {
+  /**
+   * Name of the iSCSI network adapter.
+   */
+  networkAdapterName?: string;
+
+  /**
+   * VLAN ID associated with the iSCSI network adapter.
+   */
+  vlanId?: int32;
+
+  /**
+   * Address prefix (CIDR notation) for the iSCSI network adapter.
+   */
+  addressPrefix?: string;
+
+  /**
+   * Target portal addresses reachable through this iSCSI network adapter.
+   */
+  @identifiers(#["ipAddress"])
+  targetPortalAddresses?: IscsiTargetPortalAddress[];
+}
+
+/**
+ * iSCSI target portal address.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiTargetPortalAddress {
+  /**
+   * IP address of the iSCSI target portal.
+   */
+  ipAddress?: string;
+
+  /**
+   * Next hop (gateway) IP address used to reach the target portal.
+   */
+  nextHop?: string;
+}
+
+/**
+ * CHAP authentication settings for an iSCSI target portal.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiChapSettings {
+  /**
+   * The CHAP authentication mode to use for the iSCSI connection.
+   */
+  chapType?: IscsiChapType;
+
+  /**
+   * CHAP username used by the initiator to authenticate to the target.
+   */
+  chapUsername?: string;
+
+  /**
+   * Reference to the Key Vault secret holding the CHAP password (secret) used
+   * by the initiator to authenticate to the target.
+   */
+  chapSecret?: IscsiSecretReference;
+
+  /**
+   * Mutual CHAP username used by the target to authenticate to the initiator.
+   * Applicable only when chapType is Bidirectional.
+   */
+  mutualChapUsername?: string;
+
+  /**
+   * Reference to the Key Vault secret holding the mutual CHAP password (secret)
+   * used by the target to authenticate to the initiator. Applicable only when
+   * chapType is Bidirectional.
+   */
+  mutualChapSecret?: IscsiSecretReference;
+}
+
+/**
+ * The CHAP authentication mode for an iSCSI connection.
+ */
+@added(Versions.v2026_05_01_preview)
+union IscsiChapType {
+  string,
+
+  /** No CHAP authentication is used. */
+  NoChap: "NoChap",
+
+  /** One-way CHAP: the target authenticates the initiator. */
+  OneWay: "OneWay",
+
+  /** Bidirectional (mutual) CHAP: initiator and target authenticate each other. */
+  Bidirectional: "Bidirectional",
+}
+
+/**
+ * Reference to a secret stored in Key Vault.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiSecretReference {
+  /**
+   * Name of the secret stored in Key Vault.
+   */
+  secretName?: string;
+
+  /**
+   * Key Vault URI of the secret.
+   */
+  secretLocation?: url;
+}

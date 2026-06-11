@@ -134,6 +134,9 @@
     },
     {
       "name": "EdgeMachineDiskPrivilegedJobs"
+    },
+    {
+      "name": "EdgeMachineDeploymentSettings"
     }
   ],
   "paths": {
@@ -6064,6 +6067,245 @@
         "x-ms-examples": {
           "EdgeMachines_Delete_MaximumSet": {
             "$ref": "./examples/EdgeMachines_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/deploymentSettings": {
+      "get": {
+        "operationId": "EdgeMachineDeploymentSettings_ListByEdgeMachine",
+        "tags": [
+          "EdgeMachineDeploymentSettings"
+        ],
+        "description": "List Edge Machine Deployment Setting resources by Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDeploymentSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/deploymentSettings/{deploymentSettingName}": {
+      "get": {
+        "operationId": "EdgeMachineDeploymentSettings_Get",
+        "tags": [
+          "EdgeMachineDeploymentSettings"
+        ],
+        "description": "Get an Edge Machine Deployment Setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "deploymentSettingName",
+            "in": "path",
+            "description": "Name of Edge Machine Deployment Setting",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDeploymentSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeMachineDeploymentSettings_CreateOrUpdate",
+        "tags": [
+          "EdgeMachineDeploymentSettings"
+        ],
+        "description": "Create or update an Edge Machine Deployment Setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "deploymentSettingName",
+            "in": "path",
+            "description": "Name of Edge Machine Deployment Setting",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDeploymentSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeMachineDeploymentSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDeploymentSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeMachineDeploymentSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineDeploymentSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineDeploymentSettings_Delete",
+        "tags": [
+          "EdgeMachineDeploymentSettings"
+        ],
+        "description": "Delete an Edge Machine Deployment Setting.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "deploymentSettingName",
+            "in": "path",
+            "description": "Name of Edge Machine Deployment Setting",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -12565,6 +12807,95 @@
         ]
       }
     },
+    "EdgeMachineDeploymentConfiguration": {
+      "type": "object",
+      "description": "Edge Machine Deployment Configuration",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Deployment template version."
+        },
+        "scaleUnits": {
+          "type": "array",
+          "description": "Scale units will contain the list of deployment data.",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineScaleUnits"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "scaleUnits"
+      ]
+    },
+    "EdgeMachineDeploymentData": {
+      "type": "object",
+      "description": "The deployment data of an edge machine.",
+      "properties": {
+        "iScsiNetworkConfig": {
+          "$ref": "#/definitions/IscsiConfig",
+          "description": "iSCSI network configuration for the edge machine."
+        }
+      }
+    },
+    "EdgeMachineDeploymentSetting": {
+      "type": "object",
+      "description": "Deployment setting resource for an Edge Machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeMachineDeploymentSettingProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineDeploymentSettingListResult": {
+      "type": "object",
+      "description": "The response of a EdgeMachineDeploymentSetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineDeploymentSetting items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineDeploymentSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeMachineDeploymentSettingProperties": {
+      "type": "object",
+      "description": "The properties of an Edge Machine Deployment Setting.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the deployment setting resource.",
+          "readOnly": true
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/EdgeMachineDeploymentConfiguration",
+          "description": "Scale units will contain the list of deployment data for the edge machine."
+        }
+      },
+      "required": [
+        "deploymentConfiguration"
+      ]
+    },
     "EdgeMachineDisk": {
       "type": "object",
       "description": "Disk resource representing a physical disk on an Edge Machine.",
@@ -13967,6 +14298,19 @@
           "readOnly": true
         }
       }
+    },
+    "EdgeMachineScaleUnits": {
+      "type": "object",
+      "description": "Scale units will contain the list of deployment data.",
+      "properties": {
+        "deploymentData": {
+          "$ref": "#/definitions/EdgeMachineDeploymentData",
+          "description": "Deployment data to configure the edge machine."
+        }
+      },
+      "required": [
+        "deploymentData"
+      ]
     },
     "EdgeMachineState": {
       "type": "string",
@@ -16155,6 +16499,187 @@
         "endingAddress": {
           "type": "string",
           "description": "Ending IP address for the management network. A minimum of six free, contiguous IPv4 addresses (excluding your host IPs) are needed for infrastructure services such as clustering."
+        }
+      }
+    },
+    "IscsiAdapterIPConfig": {
+      "type": "object",
+      "description": "IP configuration for a single iSCSI network adapter.",
+      "properties": {
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the iSCSI network adapter."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VLAN ID associated with the iSCSI network adapter."
+        },
+        "addressPrefix": {
+          "type": "string",
+          "description": "Address prefix (CIDR notation) for the iSCSI network adapter."
+        },
+        "targetPortalAddresses": {
+          "type": "array",
+          "description": "Target portal addresses reachable through this iSCSI network adapter.",
+          "items": {
+            "$ref": "#/definitions/IscsiTargetPortalAddress"
+          },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ]
+        }
+      }
+    },
+    "IscsiAdapterProperties": {
+      "type": "object",
+      "description": "Common properties applied to iSCSI network adapters.",
+      "properties": {
+        "priorityValue8021ActionIscsi": {
+          "type": "integer",
+          "format": "int32",
+          "description": "802.1p priority value for iSCSI traffic."
+        },
+        "bandwidthPercentageIscsi": {
+          "type": "integer",
+          "format": "int32",
+          "description": "iSCSI bandwidth percentage."
+        },
+        "jumboPacket": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Jumbo frame size in bytes."
+        }
+      }
+    },
+    "IscsiChapSettings": {
+      "type": "object",
+      "description": "CHAP authentication settings for an iSCSI target portal.",
+      "properties": {
+        "chapType": {
+          "$ref": "#/definitions/IscsiChapType",
+          "description": "The CHAP authentication mode to use for the iSCSI connection."
+        },
+        "chapUsername": {
+          "type": "string",
+          "description": "CHAP username used by the initiator to authenticate to the target."
+        },
+        "chapSecret": {
+          "$ref": "#/definitions/IscsiSecretReference",
+          "description": "Reference to the Key Vault secret holding the CHAP password (secret) used\nby the initiator to authenticate to the target."
+        },
+        "mutualChapUsername": {
+          "type": "string",
+          "description": "Mutual CHAP username used by the target to authenticate to the initiator.\nApplicable only when chapType is Bidirectional."
+        },
+        "mutualChapSecret": {
+          "$ref": "#/definitions/IscsiSecretReference",
+          "description": "Reference to the Key Vault secret holding the mutual CHAP password (secret)\nused by the target to authenticate to the initiator. Applicable only when\nchapType is Bidirectional."
+        }
+      }
+    },
+    "IscsiChapType": {
+      "type": "string",
+      "description": "The CHAP authentication mode for an iSCSI connection.",
+      "enum": [
+        "NoChap",
+        "OneWay",
+        "Bidirectional"
+      ],
+      "x-ms-enum": {
+        "name": "IscsiChapType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoChap",
+            "value": "NoChap",
+            "description": "No CHAP authentication is used."
+          },
+          {
+            "name": "OneWay",
+            "value": "OneWay",
+            "description": "One-way CHAP: the target authenticates the initiator."
+          },
+          {
+            "name": "Bidirectional",
+            "value": "Bidirectional",
+            "description": "Bidirectional (mutual) CHAP: initiator and target authenticate each other."
+          }
+        ]
+      }
+    },
+    "IscsiConfig": {
+      "type": "object",
+      "description": "iSCSI network configuration.",
+      "properties": {
+        "adapterProperties": {
+          "$ref": "#/definitions/IscsiAdapterProperties",
+          "description": "Common adapter properties applied to all iSCSI network adapters."
+        },
+        "mpioPolicy": {
+          "$ref": "#/definitions/IscsiMpioPolicy",
+          "description": "Multipath I/O (MPIO) load balancing policy applied to the iSCSI sessions."
+        },
+        "chapSettings": {
+          "$ref": "#/definitions/IscsiChapSettings",
+          "description": "CHAP authentication settings used when connecting to the iSCSI target portals."
+        },
+        "adapterIPConfig": {
+          "type": "array",
+          "description": "Per-adapter IP configuration for the iSCSI network adapters.",
+          "items": {
+            "$ref": "#/definitions/IscsiAdapterIPConfig"
+          },
+          "x-ms-identifiers": [
+            "networkAdapterName"
+          ]
+        }
+      }
+    },
+    "IscsiMpioPolicy": {
+      "type": "string",
+      "description": "Multipath I/O (MPIO) load balancing policy for iSCSI sessions.",
+      "enum": [
+        "RoundRobin"
+      ],
+      "x-ms-enum": {
+        "name": "IscsiMpioPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RoundRobin",
+            "value": "RoundRobin",
+            "description": "Round robin: distribute I/O across all available paths in rotation."
+          }
+        ]
+      }
+    },
+    "IscsiSecretReference": {
+      "type": "object",
+      "description": "Reference to a secret stored in Key Vault.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the secret stored in Key Vault."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Key Vault URI of the secret."
+        }
+      }
+    },
+    "IscsiTargetPortalAddress": {
+      "type": "object",
+      "description": "iSCSI target portal address.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address of the iSCSI target portal."
+        },
+        "nextHop": {
+          "type": "string",
+          "description": "Next hop (gateway) IP address used to reach the target portal."
         }
       }
     },
