@@ -185,6 +185,13 @@ model GetDeviceAuthenticationProfileKeysResponse {
   symmetricKey: SymmetricKeyCredentials;
 }
 
+/** Request for looking up a device authentication profile by its UUID. */
+model GetAuthenticationProfileByUuidRequest {
+  /** The unique identifier of the authentication profile. */
+  @query
+  authenticationProfileUuid: string;
+}
+
 // ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles interface
 // ──────────────────────────────────────────────
@@ -209,6 +216,14 @@ interface DeviceAuthenticationProfiles {
 
   /** List authentication profiles for a device. */
   list is ResourceOperations.ResourceList<DeviceAuthenticationProfile>;
+
+  /** Look up a device authentication profile by its unique identifier. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  getAuthenticationProfileByUuid is ResourceOperations.ResourceCollectionAction<
+    DeviceAuthenticationProfile,
+    GetAuthenticationProfileByUuidRequest,
+    DeviceAuthenticationProfile
+  >;
 
   /**
    * Retrieve the plaintext symmetric keys of a device authentication

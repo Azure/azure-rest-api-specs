@@ -59,4 +59,7 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.DeviceRegistry.DeviceAuthenticationProfiles.issueCert,
   Access.internal
 );
+@@access(Microsoft.DeviceRegistry.DeviceAuthenticationProfiles.getAuthenticationProfileByUuid,
+  Access.internal
+);
 @@access(Microsoft.DeviceRegistry.IssueCertResults.get, Access.internal);
