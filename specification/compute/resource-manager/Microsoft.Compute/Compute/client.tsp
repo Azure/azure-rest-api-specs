@@ -319,6 +319,9 @@ namespace ComputeCombine;
   "csharp"
 );
 
+// ApiEntityReference is too generic for the public .NET SDK model surface.
+@@clientName(ApiEntityReference, "ComputeApiEntityReference", "csharp");
+
 // ApiEntityReference.id flattens to XxxId on parent models. Old AutoRest SDK
 // emitted these as ResourceIdentifier; preserve that contract for csharp.
 @@alternateType(ApiEntityReference.id,
@@ -915,7 +918,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
 @@clientName(VMScaleSetLifecycleHookEvent,
-  "VirtualMachineScaleSetLifecycleHookEventData",
+  "VirtualMachineScaleSetLifecycleHookEvent",
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventState,
@@ -939,6 +942,10 @@ model VMSizePropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(VMScaleSetLifecycleHookEventType,
+  "VmScaleSetLifecycleHookEventType",
+  "csharp"
+);
+@@clientName(LifecycleHook.type,
   "VmScaleSetLifecycleHookEventType",
   "csharp"
 );
