@@ -33,7 +33,7 @@ import { Readme } from "@azure-tools/specs-shared/readme";
 import { readFile } from "fs/promises";
 
 vi.mock("../src/util.ts", async () => {
-  const original = await vi.importActual("../src/util.js");
+  const original = await vi.importActual("../src/util.ts");
   return {
     ...original,
     getDependencyVersion: vi.fn().mockResolvedValue("1.0.0"),

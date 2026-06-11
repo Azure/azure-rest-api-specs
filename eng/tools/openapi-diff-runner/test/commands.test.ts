@@ -23,7 +23,7 @@ vi.mock("../src/run-oad.ts", () => ({
 }));
 
 vi.mock("../src/command-helpers.ts", async () => {
-  const actual = await vi.importActual("../src/command-helpers.js");
+  const actual = await vi.importActual("../src/command-helpers.ts");
   return {
     ...actual,
     createDummySwagger: vi.fn(),
