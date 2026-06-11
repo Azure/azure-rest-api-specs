@@ -16,7 +16,7 @@ namespace Microsoft.HybridCompute;
 /**
  * The name of the license profile.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 enum LicenseProfileName {
   /**
    * Default
@@ -593,7 +593,7 @@ union ArcKindEnum {
   AWS: "AWS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 union InstanceViewTypes {
   string,
 
@@ -745,7 +745,7 @@ union VMGuestPatchRebootSetting {
   Always: "Always",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 union VMGuestPatchClassification_Windows {
   string,
 
@@ -790,7 +790,7 @@ union VMGuestPatchClassification_Windows {
   Updates: "Updates",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 union VMGuestPatchClassification_Linux {
   string,
 
@@ -1028,7 +1028,7 @@ union AccessMode {
 /**
  * The level code.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 enum ExtensionsStatusLevelTypes {
   /**
    * Info
@@ -1116,11 +1116,11 @@ model LicenseDetails {
   /**
    * A list of volume license details.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   volumeLicenseDetails?: VolumeLicenseDetails[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model VolumeLicenseDetails {
   /**
    * Describes the program year the volume license is for.
@@ -1136,7 +1136,7 @@ model VolumeLicenseDetails {
 /**
  * Describes a License Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseUpdate extends ResourceUpdate {
   /**
    * License Update properties
@@ -1153,11 +1153,11 @@ model LicenseUpdateProperties {
    */
   licenseType?: LicenseType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   licenseDetails?: LicenseUpdatePropertiesLicenseDetails;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseUpdatePropertiesLicenseDetails {
   /**
    * Describes the state of the license.
@@ -1192,7 +1192,7 @@ model ResourceUpdate {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   tags?: Record<string>;
 }
 
@@ -1264,7 +1264,7 @@ model MachineProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1297,7 +1297,7 @@ model MachineProperties {
   /**
    * Specifies the hybrid machine unique ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   vmId?: string;
@@ -1349,7 +1349,7 @@ model MachineProperties {
   /**
    * Specifies the Arc Machine's unique SMBIOS ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   @format("uuid")
   vmUuid?: string;
@@ -1413,7 +1413,7 @@ model MachineProperties {
   /**
    * Detected properties from the machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   detectedProperties?: Record<string>;
 
@@ -1657,7 +1657,7 @@ model AgentUpgrade {
   /**
    * The correlation ID associated with an agent upgrade operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @format("uuid")
   correlationId?: string;
 
@@ -1716,7 +1716,7 @@ model OSProfile {
 /**
  * Specifies the windows configuration for update management.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model OSProfileWindowsConfiguration {
   /**
    * Specifies the patch settings.
@@ -1769,7 +1769,7 @@ model PatchSettingsStatus {
 /**
  * Specifies the linux configuration for update management.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model OSProfileLinuxConfiguration {
   /**
    * Specifies the patch settings.
@@ -1793,7 +1793,7 @@ model LicenseProfileMachineInstanceView {
   @visibility(Lifecycle.Read)
   licenseChannel?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   softwareAssurance?: LicenseProfileMachineInstanceViewSoftwareAssurance;
 
@@ -1809,7 +1809,7 @@ model LicenseProfileMachineInstanceView {
   productProfile?: LicenseProfileArmProductProfileProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfileMachineInstanceViewSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
@@ -1820,7 +1820,7 @@ model LicenseProfileMachineInstanceViewSoftwareAssurance {
 /**
  * Properties for the Machine ESU profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfileMachineInstanceViewEsuProperties
   extends LicenseProfileArmEsuPropertiesWithoutAssignedLicense {
   /**
@@ -1837,7 +1837,7 @@ model LicenseProfileMachineInstanceViewEsuProperties
 /**
  * Describes the properties of a License Profile ARM model.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfileArmEsuPropertiesWithoutAssignedLicense
   extends LicenseProfileStorageModelEsuProperties {
   /**
@@ -2139,7 +2139,7 @@ model MachineExtensionProperties {
   /**
    * Specifies the type of the extension; an example is "CustomScriptExtension".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   type?: string;
 
   /**
@@ -2160,19 +2160,19 @@ model MachineExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   protectedSettings?: Record<unknown>;
 
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -2185,7 +2185,7 @@ model MachineExtensionProperties {
 /**
  * Describes a hybrid machine Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model MachineUpdate extends ResourceUpdate {
   /**
    * Identity for the resource.
@@ -2256,7 +2256,7 @@ model MachineUpdateProperties {
  * Describe the properties of a license profile.
  */
 model LicenseProfileProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   softwareAssurance?: LicenseProfilePropertiesSoftwareAssurance;
 
   /**
@@ -2276,7 +2276,7 @@ model LicenseProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfilePropertiesSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
@@ -2287,7 +2287,7 @@ model LicenseProfilePropertiesSoftwareAssurance {
 /**
  * Describes the properties of a License Profile ARM model.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfileArmEsuProperties
   extends LicenseProfileArmEsuPropertiesWithoutAssignedLicense {
   /**
@@ -2299,7 +2299,7 @@ model LicenseProfileArmEsuProperties
 /**
  * Describes a License Profile Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfileUpdate extends ResourceUpdate {
   /**
    * Describe the Update properties of a license profile.
@@ -2311,7 +2311,7 @@ model LicenseProfileUpdate extends ResourceUpdate {
  * Describe the Update properties of a license profile.
  */
 model LicenseProfileUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   softwareAssurance?: LicenseProfileUpdatePropertiesSoftwareAssurance;
 
   /**
@@ -2325,7 +2325,7 @@ model LicenseProfileUpdateProperties {
   productProfile?: ProductProfileUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model LicenseProfileUpdatePropertiesSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
@@ -2392,7 +2392,7 @@ model MachineAssessPatchesResult {
   /**
    * The activity ID of the operation that produced this result.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   @format("uuid")
   assessmentActivityId?: string;
@@ -2692,7 +2692,7 @@ model MachineInstallPatchesResult {
 /**
  * Describes a Machine Extension Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model MachineExtensionUpdate extends ResourceUpdate {
   /**
    * Describes Machine Extension Update Properties.
@@ -2737,13 +2737,13 @@ model MachineExtensionUpdateProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   protectedSettings?: Record<unknown>;
 }
 
@@ -2754,7 +2754,7 @@ model MachineExtensionUpgrade {
   /**
    * Describes the Extension Target Properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   extensionTargets?: Record<ExtensionTargetProperties>;
 }
 
@@ -2771,7 +2771,7 @@ model ExtensionTargetProperties {
 /**
  * Describes Extension Metadata properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model ExtensionValueProperties {
   /**
    * The version of the Extension being received.
@@ -2815,8 +2815,8 @@ model ExtensionValueListResult {
 /**
  * Describes Extension Metadata properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model ExtensionValueV2Properties extends ExtensionValueProperties {
   /**
    * A list of locations where the extension packages can be found.
@@ -3029,7 +3029,7 @@ model MachineRunCommandProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3216,7 +3216,7 @@ model GatewayProperties {
 /**
  * Describes a Gateway Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model GatewayUpdate extends ResourceUpdate {
   /**
    * Gateway Update properties
@@ -3243,7 +3243,7 @@ model GatewayUpdateProperties {
 /**
  * Settings properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model SettingsProperties {
   /**
    * Azure resource tenant Id
@@ -3271,12 +3271,12 @@ model SettingsGatewayProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model SetupExtensionRequest {
   /**
    * The list of extensions
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   extensions?: MachineExtensionProperties[];
 }
 
@@ -3292,7 +3292,7 @@ model HybridComputePrivateLinkScopeProperties {
   /**
    * Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3311,7 +3311,7 @@ model HybridComputePrivateLinkScopeProperties {
   /**
    * Enable private link validation for an Azure Arc Extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   serviceExtensions?: ServiceExtension[];
 }
 
@@ -3360,7 +3360,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * State of the private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3448,7 +3448,7 @@ model PrivateLinkScopesResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   tags?: Record<string>;
 }
 
@@ -3459,14 +3459,14 @@ model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   tags?: Record<string>;
 }
 
 /**
  * Properties of a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -3487,7 +3487,7 @@ model PrivateLinkResourceProperties {
   requiredZoneNames?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model PrivateLinkScopeValidationDetails {
   /**
    * Azure resource Id
@@ -3506,7 +3506,7 @@ model PrivateLinkScopeValidationDetails {
   connectionDetails?: ConnectionDetail[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model ConnectionDetail {
   /**
    * Azure resource Id
@@ -3546,7 +3546,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Current state of this NetworkSecurityPerimeter: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3755,7 +3755,7 @@ model HybridIdentityMetadataList is Azure.Core.Page<HybridIdentityMetadata>;
 /**
  * Defines the HybridIdentityMetadata.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model HybridIdentityMetadata
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3801,7 +3801,7 @@ model AgentVersion {
   /**
    * Represents the agent version.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   agentVersion?: string;
 
   /**
@@ -3818,12 +3818,12 @@ model AgentVersion {
 /**
  * Describes a Machine Extension Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model MachineRunCommandUpdate extends ResourceUpdate {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 model NetworkConfiguration
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**

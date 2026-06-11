@@ -26,14 +26,14 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
   /**
    * The list of extensions affiliated to the machine
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @visibility(Lifecycle.Read)
   resources?: MachineExtension[];
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @typeChangedFrom(
     Versions.v2026_06_16_preview,
     Azure.ResourceManager.CommonTypes.Identity
@@ -43,7 +43,7 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   kind?: ArcKindEnum;
 }
 
@@ -112,7 +112,7 @@ interface Machines {
   /**
    * The operation to create or update a hybrid machine. Please note some properties can be set only during machine creation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @tag("machines")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Machine,
@@ -186,7 +186,7 @@ interface Machines {
   /**
    * The operation to Upgrade Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @tag("MachineExtensions Upgrade")
   upgradeExtensions is ArmResourceActionAsync<
     Machine,
@@ -198,7 +198,7 @@ interface Machines {
   /**
    * The operation to Setup Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
   @operationId("SetupExtensions")
   @tag("MachineExtensions Setup")
   @action("addExtensions")
