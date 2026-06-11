@@ -460,22 +460,6 @@ model WorkflowRun {
   @doc("The tenant identifier.")
   tenantId?: uuid;
 
-  @doc("The creation timestamp.")
-  @visibility(Lifecycle.Read)
-  createdAt?: utcDateTime;
-
-  @doc("The user who created the run.")
-  @visibility(Lifecycle.Read)
-  createdBy?: string;
-
-  @doc("The last modification timestamp.")
-  @visibility(Lifecycle.Read)
-  modifiedAt?: utcDateTime;
-
-  @doc("The user who last modified the run.")
-  @visibility(Lifecycle.Read)
-  modifiedBy?: string;
-
   @doc("The version of the model.")
   version?: string;
 }
