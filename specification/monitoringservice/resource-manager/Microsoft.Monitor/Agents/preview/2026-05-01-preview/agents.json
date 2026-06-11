@@ -378,30 +378,6 @@
     }
   },
   "definitions": {
-    "AgentState": {
-      "type": "string",
-      "description": "State for an observability agent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "AgentState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "enabled",
-            "value": "Enabled",
-            "description": "The agent is enabled."
-          },
-          {
-            "name": "disabled",
-            "value": "Disabled",
-            "description": "The agent is disabled."
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -476,8 +452,8 @@
           }
         },
         "enabled": {
-          "$ref": "#/definitions/AgentState",
-          "description": "Whether the observability agent is enabled. Defaults to Enabled when not specified."
+          "type": "boolean",
+          "description": "Whether the observability agent is enabled. Defaults to true when not specified."
         },
         "operations": {
           "type": "array",
@@ -511,7 +487,7 @@
           }
         },
         "enabled": {
-          "$ref": "#/definitions/AgentState",
+          "type": "boolean",
           "description": "Whether the observability agent is enabled."
         },
         "operations": {

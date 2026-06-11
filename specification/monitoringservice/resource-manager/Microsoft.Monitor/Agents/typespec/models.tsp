@@ -23,25 +23,12 @@ namespace Microsoft.Monitor {
       }
     ]>;
 
-    /** Whether the observability agent is enabled. Defaults to Enabled when not specified. */
-    enabled?: AgentState;
+    /** Whether the observability agent is enabled. Defaults to true when not specified. */
+    enabled?: boolean;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
     @Azure.ResourceManager.identifiers(#["type"])
     operations?: OperationEntry[];
-  }
-
-  /**
-   * State for an observability agent.
-   */
-  union AgentState {
-    /** The agent is enabled. */
-    enabled: "Enabled",
-
-    /** The agent is disabled. */
-    disabled: "Disabled",
-
-    string,
   }
 
   /**
@@ -97,7 +84,7 @@ namespace Microsoft.Monitor {
     ]>;
 
     /** Whether the observability agent is enabled. */
-    enabled?: AgentState;
+    enabled?: boolean;
 
     /** Configuration overrides for agent operations. When omitted, default behavior applies for all operations. */
     @Azure.ResourceManager.identifiers(#["type"])
