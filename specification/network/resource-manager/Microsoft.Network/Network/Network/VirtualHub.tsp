@@ -303,10 +303,13 @@ interface VirtualHubRouteTableV2s {
   /**
    * Retrieves the details of all VirtualHubRouteTableV2s.
    */
-  @autoRoute
-  list is ArmResourceListByParent<
-    VirtualHubRouteTableV2,
-    Response = ArmResponse<ListVirtualHubRouteTableV2SResult>,
+  @list
+  @get
+  @action("routeTables")
+  virtualHubRouteTableV2sList is ArmResourceActionSync<
+    VirtualHub,
+    void,
+    ArmResponse<ListVirtualHubRouteTableV2sResult>,
     Error = CloudError
   >;
 }
