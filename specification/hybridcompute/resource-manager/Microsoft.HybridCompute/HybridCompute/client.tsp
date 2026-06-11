@@ -121,6 +121,11 @@ union CustomPublicNetworkAccessType {
 @@clientName(LicenseTarget, "HybridComputeLicenseTarget", "csharp");
 @@clientName(LicenseType, "HybridComputeLicenseType", "csharp");
 @@clientName(LinuxParameters, "HybridComputeLinuxParameters", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.LocationData,
+  "HybridComputeLocation",
+  "csharp"
+);
 @@clientName(Machine, "HybridComputeMachine", "csharp");
 @@clientName(MachineExtension, "HybridComputeMachineExtension", "csharp");
 @@clientName(NetworkInterface, "HybridComputeNetworkInterface", "csharp");
