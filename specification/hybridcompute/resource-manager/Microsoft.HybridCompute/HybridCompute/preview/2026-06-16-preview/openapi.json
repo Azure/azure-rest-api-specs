@@ -6582,7 +6582,7 @@
           "description": "Specifies the License related properties for a machine."
         },
         "statusReason": {
-          "type": "string",
+          "$ref": "#/definitions/MachineStatusReason",
           "description": "Indicates whether the service has detected that this Arc machine is a clone of another onboarded machine. Service-computed; not settable by the user.",
           "readOnly": true
         },
@@ -6921,6 +6921,24 @@
       "required": [
         "value"
       ]
+    },
+    "MachineStatusReason": {
+      "type": "string",
+      "description": "The reason describing why the service set the machine status to a particular value.",
+      "enum": [
+        "Cloned"
+      ],
+      "x-ms-enum": {
+        "name": "MachineStatusReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cloned",
+            "value": "Cloned",
+            "description": "Indicates the service has detected that this Arc machine is a clone of another onboarded machine."
+          }
+        ]
+      }
     },
     "MachineUpdate": {
       "type": "object",

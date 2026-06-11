@@ -585,6 +585,18 @@ union ArcKindEnum {
   AWS: "AWS",
 }
 
+/**
+ * The reason describing why the service set the machine status to a particular value.
+ */
+union MachineStatusReason {
+  string,
+
+  /**
+   * Indicates the service has detected that this Arc machine is a clone of another onboarded machine.
+   */
+  Cloned: "Cloned",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union InstanceViewTypes {
   string,
@@ -1250,7 +1262,7 @@ model MachineProperties {
    * Indicates whether the service has detected that this Arc machine is a clone of another onboarded machine. Service-computed; not settable by the user.
    */
   @visibility(Lifecycle.Read)
-  statusReason?: string;
+  statusReason?: MachineStatusReason;
 
   /**
    * The provisioning state, which only appears in the response.
