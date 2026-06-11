@@ -7,6 +7,7 @@
     "namespaceUuid": "00000000-0000-0000-0000-000000000099",
     "deviceName": "device-abc-123",
     "If-Match": "\"etag-value-from-get-device\"",
+    "Operation-Id": "op-reprov-001",
     "body": {
       "targetEndpoint": {
         "name": "my-new-iothub-endpoint-key",
@@ -38,12 +39,13 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "https://eastus.api.deviceregistry.contoso.com/namespaces/00000000-0000-0000-0000-000000000099/operations/00000000-0000-0000-0000-000000000050"
+        "Operation-Location": "https://eastus.api.deviceregistry.contoso.com/namespaces/00000000-0000-0000-0000-000000000099/devices/device-abc-123/reprovisionDeviceResults/op-reprov-001?api-version=2026-11-02-preview",
+        "Operation-Id": "op-reprov-001",
+        "Retry-After": 30
       },
       "body": {
-        "id": "00000000-0000-0000-0000-000000000050",
-        "kind": "ReprovisionDevice",
-        "status": "InProgress"
+        "id": "op-reprov-001",
+        "status": "Running"
       }
     }
   }

@@ -4,12 +4,15 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
+import "./common/longRunningOperation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -120,25 +123,6 @@ model CertificateAuthorityCredentials {
 }
 
 // ──────────────────────────────────────────────
-// Shared action parameters
-// ──────────────────────────────────────────────
-
-/**
- * Shared parameter model carrying the optional client-supplied
- * `Operation-Id` request header used by the `:issueCert` and
- * `:revokeCerts` long-running actions. If omitted, the service
- * generates a GUID.
- */
-model OperationIdHeaderParameter {
-  /**
-   * Optional client-supplied identifier for the operation's status monitor.
-   * If omitted, the service generates a GUID.
-   */
-  @header("Operation-Id")
-  operationId?: string;
-}
-
-// ──────────────────────────────────────────────
 // Certificate issuance action models
 // ──────────────────────────────────────────────
 
@@ -174,25 +158,7 @@ model CertificateIssuanceResult {
 /** Status monitor for the long-running `:issueCert` action on a device authentication profile. */
 @parentResource(DeviceAuthenticationProfile)
 @resource("issueCertResults")
-model IssueCertResult {
-  /** The unique ID of the operation. */
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The status of the operation. */
-  @Azure.Core.lroStatus
-  @visibility(Lifecycle.Read)
-  status: Azure.Core.Foundations.OperationState;
-
-  /** Error object that describes the error when status is "Failed". */
-  @visibility(Lifecycle.Read)
-  error?: Azure.Core.Foundations.Error;
-
-  /** The result of the certificate issuance, available once `status` is `Succeeded`. */
-  @visibility(Lifecycle.Read)
-  result?: CertificateIssuanceResult;
-}
+model IssueCertResult is LongRunningOperationStatus<CertificateIssuanceResult>;
 
 // ──────────────────────────────────────────────
 // Revoke-cert status monitor endpoint
@@ -205,21 +171,7 @@ model IssueCertResult {
  */
 @parentResource(DeviceAuthenticationProfile)
 @resource("revokeCertsResults")
-model RevokeCertsResult {
-  /** The unique ID of the operation. */
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The status of the operation. */
-  @Azure.Core.lroStatus
-  @visibility(Lifecycle.Read)
-  status: Azure.Core.Foundations.OperationState;
-
-  /** Error object that describes the error when status is "Failed". */
-  @visibility(Lifecycle.Read)
-  error?: Azure.Core.Foundations.Error;
-}
+model RevokeCertsResult is LongRunningOperationStatus;
 
 // ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles operation models
@@ -281,8 +233,10 @@ interface DeviceAuthenticationProfiles {
   @pollingOperation(IssueCertResults.get)
   issueCert is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
-    CertificateIssuanceRequest & OperationIdHeaderParameter,
-    {}
+    CertificateIssuanceRequest & LongRunningOperationIdHeader,
+    {},
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
   >;
 
   /**
@@ -295,8 +249,10 @@ interface DeviceAuthenticationProfiles {
   @pollingOperation(RevokeCertsResults.get)
   revokeCerts is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
-    OperationIdHeaderParameter,
-    {}
+    LongRunningOperationIdHeader,
+    {},
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
   >;
 }
 
@@ -304,13 +260,31 @@ interface DeviceAuthenticationProfiles {
 @tag("Device Authentication Profiles")
 interface IssueCertResults {
   /** Get the status of a long-running `:issueCert` operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with DeviceAuthenticationProfiles in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `DeviceAuthenticationProfiles` SDK client (matches the wire-side
+  // `DeviceAuthenticationProfiles_IssueCert` action that produces these
+  // results) rather than as a top-level `IssueCertResults_Get` method.
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-  get is ResourceOperations.ResourceRead<IssueCertResult>;
+  @operationId("DeviceAuthenticationProfiles_GetIssueCertResult")
+  get is ResourceOperations.ResourceRead<
+    IssueCertResult,
+    LongRunningStatusMonitorResponseHeadersTrait
+  >;
 }
 
 /** Polling operations for the long-running `:revokeCerts` action. */
 @tag("Device Authentication Profiles")
 interface RevokeCertsResults {
   /** Get the status of a long-running `:revokeCerts` operation. */
-  get is ResourceOperations.ResourceRead<RevokeCertsResult>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with DeviceAuthenticationProfiles in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `DeviceAuthenticationProfiles` SDK client (matches the wire-side
+  // `DeviceAuthenticationProfiles_RevokeCerts` action that produces these
+  // results) rather than as a top-level `RevokeCertsResults_Get` method.
+  @operationId("DeviceAuthenticationProfiles_GetRevokeCertsResult")
+  get is ResourceOperations.ResourceRead<
+    RevokeCertsResult,
+    LongRunningStatusMonitorResponseHeadersTrait
+  >;
 }

@@ -4,12 +4,15 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "./common/longRunningOperation.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -221,6 +224,18 @@ model GroupInstallableUpdatesReport extends Report {
 }
 
 // ──────────────────────────────────────────────
+// Generate-report status monitor endpoint
+// ──────────────────────────────────────────────
+
+/**
+ * Status monitor for the long-running `:generateReport` action on a namespace.
+ * The typed `result` is the produced `Report` (polymorphic over `reportType`).
+ */
+@parentResource(Namespace)
+@resource("generateReportResults")
+model GenerateReportResult is LongRunningOperationStatus<Report>;
+
+// ──────────────────────────────────────────────
 // Namespaces interface
 // ──────────────────────────────────────────────
 
@@ -228,10 +243,28 @@ model GroupInstallableUpdatesReport extends Report {
 @tag("Namespaces")
 interface Namespaces {
   /** Generate a report for a namespace. */
-  @pollingOperation(Operations.get)
+  @pollingOperation(GenerateReportResults.get)
   generateReport is ResourceOperations.LongRunningResourceAction<
     Namespace,
-    GenerateReportRequest,
-    Report
+    GenerateReportRequest & LongRunningOperationIdHeader,
+    Report,
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
+  >;
+}
+
+/** Polling operations for the long-running `:generateReport` action on namespaces. */
+@tag("Namespaces")
+interface GenerateReportResults {
+  /** Get the result of a `:generateReport` operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Namespaces in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `Namespaces` SDK client (matches the wire-side `Namespaces_GenerateReport`
+  // action that produces these results) rather than as a top-level
+  // `GenerateReportResults_Get` method.
+  @operationId("Namespaces_GetGenerateReportResult")
+  get is ResourceOperations.ResourceRead<
+    GenerateReportResult,
+    LongRunningStatusMonitorResponseHeadersTrait
   >;
 }

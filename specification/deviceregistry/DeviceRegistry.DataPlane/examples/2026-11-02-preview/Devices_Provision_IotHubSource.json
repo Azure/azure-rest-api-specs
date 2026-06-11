@@ -6,6 +6,7 @@
     "api-version": "2026-11-02-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
     "mode": "registryOnly",
+    "Operation-Id": "op-hub-prov-001",
     "body": {
       "iotHubDeviceId": "hub-device-001",
       "targetEndpoint": {
@@ -20,12 +21,13 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "https://eastus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/operations/op-hub-prov-001"
+        "Operation-Location": "https://eastus.api.deviceregistry.contoso.com/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/provisionDeviceResults/op-hub-prov-001?api-version=2026-11-02-preview",
+        "Operation-Id": "op-hub-prov-001",
+        "Retry-After": 30
       },
       "body": {
         "id": "op-hub-prov-001",
-        "kind": "ProvisionDevice",
-        "status": "InProgress"
+        "status": "Running"
       }
     }
   }

@@ -1,25 +1,26 @@
 {
-  "operationId": "Operations_Get",
-  "title": "Get the result of a completed device reprovisioning operation",
+  "operationId": "Devices_GetReprovisionDeviceResult",
+  "title": "Get the result of a device-reprovisioning operation",
   "parameters": {
     "endpoint": "https://eastus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-02-preview",
     "namespaceUuid": "00000000-0000-0000-0000-000000000099",
-    "operationId": "00000000-0000-0000-0000-000000000050"
+    "deviceName": "device-abc-123",
+    "operationId": "op-reprov-001"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "00000000-0000-0000-0000-000000000050",
-        "kind": "ReprovisionDevice",
+        "id": "op-reprov-001",
         "status": "Succeeded",
-        "executedAt": "2026-09-01T12:00:00Z",
-        "expiresAt": "2026-09-02T12:00:00Z",
+        "startTime": "2026-09-01T12:00:00Z",
+        "endTime": "2026-09-01T12:00:34Z",
         "result": {
           "device": {
             "name": "device-abc-123",
             "uuid": "00000000-0000-0000-0000-000000000002",
-            "etag": "\"new-device-etag-after-reprovision\""
+            "etag": "\"new-device-etag-after-reprovision\"",
+            "externalDeviceId": "device-abc-123"
           },
           "capability": {
             "name": "capability-hub-b-xyz",

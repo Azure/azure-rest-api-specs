@@ -6,14 +6,16 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../common/deviceTypes.tsp";
 import "./common/provisionedRefs.tsp";
+import "./common/longRunningOperation.tsp";
 import "./deviceCapabilities.tsp";
-import "./deviceAuthenticationProfiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -157,6 +159,17 @@ model ProvisionDeviceResult {
 }
 
 // ──────────────────────────────────────────────
+// Provision-device status monitor endpoint
+// ──────────────────────────────────────────────
+
+/** Status monitor for the long-running `:provision` action on devices in a namespace. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+@parentResource(Namespace)
+@resource("provisionDeviceResults")
+model ProvisionDeviceResultStatusMonitor
+  is LongRunningOperationStatus<ProvisionDeviceResult>;
+
+// ──────────────────────────────────────────────
 // Reprovision device models
 // ──────────────────────────────────────────────
 
@@ -197,6 +210,17 @@ model ReprovisionDeviceRequest {
 }
 
 // ──────────────────────────────────────────────
+// Reprovision-device status monitor endpoint
+// ──────────────────────────────────────────────
+
+/** Status monitor for the long-running `:reprovision` action on a device. */
+@added(Versions.v2026_11_02_preview)
+@parentResource(Device)
+@resource("reprovisionDeviceResults")
+model ReprovisionDeviceResultStatusMonitor
+  is LongRunningOperationStatus<ProvisionDeviceResult>;
+
+// ──────────────────────────────────────────────
 // Devices interface
 // ──────────────────────────────────────────────
 
@@ -227,8 +251,8 @@ interface Devices {
     QueryDevicesResponse
   >;
 
-  /** Provision devices in a namespace. */
-  @pollingOperation(Operations.get)
+  /** Provision a device in a namespace. */
+  @pollingOperation(ProvisionDeviceResults.get)
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
@@ -238,12 +262,15 @@ interface Devices {
       mode?: ProvisionMode;
 
       ...ProvisionDeviceRequest;
+      ...LongRunningOperationIdHeader;
     },
-    ProvisionDeviceResult
+    ProvisionDeviceResult,
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
   >;
 
   /** Reprovision an existing device to a new IoT Hub within the same namespace. */
-  @pollingOperation(Operations.get)
+  @pollingOperation(ReprovisionDeviceResults.get)
   @added(Versions.v2026_11_02_preview)
   reprovision is ResourceOperations.LongRunningResourceAction<
     Device,
@@ -253,7 +280,44 @@ interface Devices {
       ifMatch?: string;
 
       ...ReprovisionDeviceRequest;
+      ...LongRunningOperationIdHeader;
     },
-    ProvisionDeviceResult
+    ProvisionDeviceResult,
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
+  >;
+}
+
+/** Polling operations for the long-running `:provision` action on devices. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+@tag("Devices")
+interface ProvisionDeviceResults {
+  /** Get the result of a device-provisioning operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Devices in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `Devices` SDK client (matches the wire-side `Devices_Provision`
+  // action that produces these results) rather than as a top-level
+  // `ProvisionDeviceResults_Get` method.
+  @operationId("Devices_GetProvisionDeviceResult")
+  get is ResourceOperations.ResourceRead<
+    ProvisionDeviceResultStatusMonitor,
+    LongRunningStatusMonitorResponseHeadersTrait
+  >;
+}
+
+/** Polling operations for the long-running `:reprovision` action on a device. */
+@added(Versions.v2026_11_02_preview)
+@tag("Devices")
+interface ReprovisionDeviceResults {
+  /** Get the result of a device-reprovisioning operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with Devices in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `Devices` SDK client (matches the wire-side `Devices_Reprovision`
+  // action that produces these results) rather than as a top-level
+  // `ReprovisionDeviceResults_Get` method.
+  @operationId("Devices_GetReprovisionDeviceResult")
+  get is ResourceOperations.ResourceRead<
+    ReprovisionDeviceResultStatusMonitor,
+    LongRunningStatusMonitorResponseHeadersTrait
   >;
 }
