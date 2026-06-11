@@ -245,7 +245,7 @@ interface AppServicePlans {
   startWebApps is ArmResourceActionSync<
     AppServicePlan,
     void,
-    OkResponse,
+    NoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -258,7 +258,7 @@ interface AppServicePlans {
   stopWebApps is ArmResourceActionSync<
     AppServicePlan,
     void,
-    OkResponse,
+    NoContentResponse,
     Error = DefaultErrorResponse
   >;
 
