@@ -95,6 +95,28 @@ model Resources {
   ]>>;
 }
 
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+@doc("The resources needed for the user request with the resourceContext")
+model ResourceWithContext {
+  @doc("The resource ids used for the request")
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  @doc("The operational context of the resourceId")
+  resourceContext: string;
+}
+
+@doc("The resources needed for the user request with the context for tracking purposes")
+@added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+model ResourcesWithContext {
+  @identifiers(#["resourceId"])
+  @doc("The resource ids used for the request")
+  resources: Array<ResourceWithContext>;
+}
+
 /**
  * The flex properties for flexible VM creation.
  */
@@ -373,6 +395,10 @@ model ResourceOperationDetails {
 
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+  @doc("Resource notification details.")
+  resourceNotificationDetails?: ResourceNotificationDetails;
 }
 
 @doc("High level response from an operation on a resource")
@@ -442,83 +468,73 @@ model OperationErrorsResult {
   requestErrorDetails?: string;
 }
 
-@doc("The response from a deallocate request")
-model DeallocateResourceOperationResponse {
+// ------------------ Common Models ---------------
+@doc("Resource notification details containing notification metadata like the resource context")
+model ResourceNotificationDetails {
+  @doc("Resource context for notification tracking")
+  resourceContext?: string;
+}
+
+@doc("The execute-type request for power operations")
+model ExecuteTypeRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  @madeOptional(Microsoft.Compute.Versions.`2026-06-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+  @doc("The resources for the request with resource context information")
+  resourcesWithContext?: ResourcesWithContext;
+}
+
+@doc("Common model for operation response")
+model OperationResponse {
   @doc("The description of the operation response")
   description: string;
 
-  @doc("The type of resources used in the deallocate request eg virtual machines")
+  @doc("The type of resources used in the request eg virtual machines")
   type: string;
 
-  @doc("The location of the deallocate request eg westus")
+  @doc("The location of the request eg westus")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
   @identifiers(#["resourceId"])
-  @doc("The results from the deallocate request if no errors exist")
+  @doc("The results from the request if no errors exist.")
   results?: Array<ResourceOperation>;
+}
+
+@doc("The response from a deallocate request")
+model DeallocateResourceOperationResponse {
+  ...OperationResponse;
 }
 
 @doc("The response from a start request")
 model StartResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the start request eg virtual machines")
-  type: string;
-
-  @doc("The location of the start request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the start request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the Hibernate request eg virtual machines")
-  type: string;
-
-  @doc("The location of the Hibernate request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the Hibernate request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 // ----------- Execute Operations Request ---------
 @doc("The ExecuteDeallocateRequest request for executeDeallocate operations")
 model ExecuteDeallocateRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
+  ...ExecuteTypeRequest;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
 model ExecuteHibernateRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
+  ...ExecuteTypeRequest;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
 model ExecuteStartRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
+  ...ExecuteTypeRequest;
 }
 
 @doc("The ExecuteCreateRequest request for create operations")
@@ -564,11 +580,7 @@ model ReimagePayload {
 
 @doc("The ExecuteReimageRequest request for reimage operations")
 model ExecuteReimageRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
+  ...ExecuteTypeRequest;
 
   @doc("Reimage parameters including base profile and per-resource overrides")
   reimageParameters?: ReimagePayload;
@@ -576,62 +588,22 @@ model ExecuteReimageRequest {
 
 @doc("The response from a create request")
 model CreateResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the create request eg virtual machines")
-  type: string;
-
-  @doc("The location of the create request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the create request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 @doc("The response from a reimage request")
 model ReimageResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the reimage request eg virtual machines")
-  type: string;
-
-  @doc("The location of the reimage request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the reimage request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 @doc("The response from a delete request")
 model DeleteResourceOperationResponse {
-  @doc("The description of the operation response")
-  description: string;
-
-  @doc("The type of resources used in the delete request eg virtual machines")
-  type: string;
-
-  @doc("The location of the delete request eg westus")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: azureLocation;
-
-  @identifiers(#["resourceId"])
-  @doc("The results from the delete request if no errors exist")
-  results?: Array<ResourceOperation>;
+  ...OperationResponse;
 }
 
 @doc("The ExecuteDeleteRequest for delete VM operation")
 model ExecuteDeleteRequest {
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources: Resources;
+  ...ExecuteTypeRequest;
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
