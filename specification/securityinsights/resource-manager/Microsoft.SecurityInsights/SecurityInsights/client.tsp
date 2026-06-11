@@ -90,5 +90,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
-  "listQueryIndicators"
+  "listQueryIndicators",
+  "javascript"
 );
