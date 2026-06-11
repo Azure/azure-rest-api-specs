@@ -20,8 +20,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - run: corepack enable
-      shell: bash
+    - uses: pnpm/action-setup@v4
 
     - uses: actions/setup-node@v6
       with:
