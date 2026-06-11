@@ -5473,6 +5473,7 @@ model ProvisioningOperationStatusProperty {
  * Properties bag for sessionHostManagement Update Statuses.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
+@added(Versions.vLatestPreview)
 model UpdateStatusProperty {
   /**
    * Properties bag for sessionHostManagement Update Statuses.
@@ -5483,6 +5484,7 @@ model UpdateStatusProperty {
 /**
  * Properties bag for sessionHostManagement Provisioning Statuses.
  */
+@added(Versions.vLatestPreview)
 model ProvisioningStatusProperty {
   /**
    * The custom properties of the SessionHost Provisioning Status.
