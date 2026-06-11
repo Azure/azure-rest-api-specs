@@ -72,6 +72,7 @@ namespace Customization;
 @@clientName(ChannelProperties.expirationTimeIfNotActivatedUtc, "ExpireOnIfNotActivated", "csharp");
 @@clientName(EventSubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
 @@clientName(NamespaceProperties.inboundIpRules, "InboundIPRules", "csharp");
+@@clientName(PartnerTopicProperties.expirationTimeIfNotActivatedUtc, "ExpireOnIfNotActivated", "csharp");
 @@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
 @@clientName(TopicProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
 @@clientName(TopicProperties.inboundIpRules, "InboundIPRules", "csharp");
@@ -84,8 +85,28 @@ namespace Customization;
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(Domain.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
 @@alternateType(Microsoft.EventGrid.Topic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(PartnerTopic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
 @@alternateType(TopicProperties.endpoint, url, "csharp");
 @@alternateType(PartnerNamespaceProperties.partnerRegistrationFullyQualifiedId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Partner.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(PartnerDestinationProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(PartnerRegistrationProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(PartnerTopicProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(SystemTopic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(SystemTopicProperties.source, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(SystemTopicProperties.metricResourceId, Azure.Core.uuid, "csharp");
+@@alternateType(VerifiedPartnerProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(PartnerRegistration.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(PartnerTopic.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(SystemTopic.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(TopicTypeInfo.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(VerifiedPartner.properties, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@markAsPageable(Subscriptions.getDeliveryAttributes, "csharp");
