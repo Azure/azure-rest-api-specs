@@ -1,0 +1,93 @@
+{
+  "title": "Get KubernetesResources - DaemonSet",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "daemonset-kube-proxy-kube-system",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/daemonset-kube-proxy-kube-system",
+        "name": "daemonset-kube-proxy-kube-system",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "apps/v1",
+          "kind": "DaemonSet",
+          "metadata": {
+            "name": "kube-proxy",
+            "namespaceName": "kube-system",
+            "uid": "a1b2c3d4-e5f6-7890-bcde-f01234567890",
+            "resourceVersion": "12345",
+            "generation": 1,
+            "creationTimestamp": "2026-01-01T00:00:00Z",
+            "labels": [
+              { "name": "k8s-app", "value": "kube-proxy" },
+              { "name": "component", "value": "kube-proxy" }
+            ]
+          },
+          "spec": {
+            "selector": [
+              { "name": "k8s-app", "value": "kube-proxy" }
+            ],
+            "strategyType": "RollingUpdate",
+            "maxUnavailable": "1",
+            "serviceAccountName": "kube-proxy",
+            "tolerations": [
+              { "operator": "Exists" }
+            ],
+            "volumes": [
+              { "name": "kube-proxy", "sourceType": "configMap", "source": "kube-proxy" },
+              { "name": "xtables-lock", "sourceType": "hostPath", "source": "/run/xtables.lock" },
+              { "name": "lib-modules", "sourceType": "hostPath", "source": "/lib/modules" }
+            ],
+            "containers": [
+              {
+                "name": "kube-proxy",
+                "image": "registry.k8s.io/kube-proxy:v1.29.0",
+                "imagePullPolicy": "IfNotPresent",
+                "resources": {
+                  "requests": { "cpu": "100m", "memory": "128Mi" }
+                },
+                "volumeMounts": [
+                  { "name": "kube-proxy", "mountPath": "/var/lib/kube-proxy" },
+                  { "name": "xtables-lock", "mountPath": "/run/xtables.lock" },
+                  { "name": "lib-modules", "mountPath": "/lib/modules", "readOnly": true }
+                ],
+                "securityContext": { "privileged": true }
+              }
+            ]
+          },
+          "status": {
+            "desiredNumberScheduled": 3,
+            "currentNumberScheduled": 3,
+            "numberReady": 3,
+            "numberMisscheduled": 0,
+            "numberUnavailable": 0,
+            "availableReplicas": 3,
+            "updatedReplicas": 3,
+            "observedGeneration": 1,
+            "conditions": [
+              { "type": "Available", "status": "True", "lastTransitionTime": "2026-01-01T00:02:00Z" }
+            ]
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,541 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "UpgradeAssessmentsClient",
+    "version": "2026-06-15-preview",
+    "description": "APIs for cluster upgrade assessment resources under Microsoft.KubernetesConfiguration.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "UpgradeAssessments"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/upgradeAssessments": {
+      "get": {
+        "operationId": "UpgradeAssessments_List",
+        "tags": [
+          "UpgradeAssessments"
+        ],
+        "description": "List upgrade assessments for the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,\nMicrosoft.HybridContainerService, Microsoft.KubernetesConfiguration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService|KubernetesConfiguration)$"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters,\nprovisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]+$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradeAssessmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Upgrade Assessments": {
+            "$ref": "./examples/ListUpgradeAssessments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/upgradeAssessments/{upgradeAssessmentName}": {
+      "get": {
+        "operationId": "UpgradeAssessments_Get",
+        "tags": [
+          "UpgradeAssessments"
+        ],
+        "description": "Get the upgrade assessment for a cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,\nMicrosoft.HybridContainerService, Microsoft.KubernetesConfiguration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService|KubernetesConfiguration)$"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters,\nprovisionedClusters, appliances.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]+$"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the kubernetes cluster.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$"
+          },
+          {
+            "name": "upgradeAssessmentName",
+            "in": "path",
+            "description": "Name of the UpgradeAssessments resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z]([a-z0-9._-]{0,126}[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradeAssessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Upgrade Assessment": {
+            "$ref": "./examples/GetUpgradeAssessments.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CompatibilityStatus": {
+      "type": "string",
+      "description": "Compatibility status of a cluster component with the target Kubernetes version.",
+      "enum": [
+        "Compatible",
+        "Untested",
+        "Incompatible",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "CompatibilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compatible",
+            "value": "Compatible",
+            "description": "Component is compatible with the target version."
+          },
+          {
+            "name": "Untested",
+            "value": "Untested",
+            "description": "Compatibility with the target version has not been tested."
+          },
+          {
+            "name": "Incompatible",
+            "value": "Incompatible",
+            "description": "Component is incompatible with the target version."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Compatibility status is unknown."
+          }
+        ]
+      }
+    },
+    "ComponentCompatibility": {
+      "type": "object",
+      "description": "Compatibility status of a single cluster component with the target Kubernetes version.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Component name (e.g., 'containerd', 'calico')."
+        },
+        "version": {
+          "type": "string",
+          "description": "Installed component version."
+        },
+        "compatibilityStatus": {
+          "$ref": "#/definitions/CompatibilityStatus",
+          "description": "Compatibility of the component with the target Kubernetes version."
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Severity associated with this compatibility result."
+        },
+        "minCompatibleVersion": {
+          "type": "string",
+          "description": "Minimum component version known to be compatible with targetKubernetesVersion."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about compatibility."
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "compatibilityStatus",
+        "severity"
+      ]
+    },
+    "DeprecatedApiUsage": {
+      "type": "object",
+      "description": "A deprecated Kubernetes API still in use in the cluster.",
+      "properties": {
+        "group": {
+          "type": "string",
+          "description": "API group (e.g., 'flowcontrol.apiserver.k8s.io')."
+        },
+        "version": {
+          "type": "string",
+          "description": "API version (e.g., 'v1beta3')."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource plural name (e.g., 'flowschemas')."
+        },
+        "removedRelease": {
+          "type": "string",
+          "description": "Kubernetes release in which this API is removed (e.g., '1.32')."
+        },
+        "usageMetrics": {
+          "$ref": "#/definitions/HttpVerbUsageMetrics",
+          "description": "HTTP verb call counts observed for this deprecated API."
+        },
+        "lastUsageObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of the last observed usage."
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Severity of continued use of this deprecated API."
+        }
+      },
+      "required": [
+        "group",
+        "version",
+        "resource",
+        "severity"
+      ]
+    },
+    "HttpVerbUsageMetrics": {
+      "type": "object",
+      "description": "Observed call counts per HTTP verb for a deprecated Kubernetes API.",
+      "properties": {
+        "get": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of GET requests observed."
+        },
+        "list": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of LIST requests observed."
+        },
+        "post": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of POST (create) requests observed."
+        },
+        "put": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of PUT (replace) requests observed."
+        },
+        "patch": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of PATCH requests observed."
+        },
+        "delete": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of DELETE requests observed."
+        },
+        "watch": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of WATCH requests observed."
+        }
+      }
+    },
+    "ReadinessCategory": {
+      "type": "string",
+      "description": "Category of a cluster readiness check.",
+      "enum": [
+        "NodeStatus",
+        "APIServerHealth",
+        "PodDisruptionBudget",
+        "Addon",
+        "Storage",
+        "Networking"
+      ],
+      "x-ms-enum": {
+        "name": "ReadinessCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NodeStatus",
+            "value": "NodeStatus",
+            "description": "Node status check."
+          },
+          {
+            "name": "APIServerHealth",
+            "value": "APIServerHealth",
+            "description": "API server health check."
+          },
+          {
+            "name": "PodDisruptionBudget",
+            "value": "PodDisruptionBudget",
+            "description": "Pod disruption budget check."
+          },
+          {
+            "name": "Addon",
+            "value": "Addon",
+            "description": "Addon compatibility check."
+          },
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Storage compatibility check."
+          },
+          {
+            "name": "Networking",
+            "value": "Networking",
+            "description": "Networking compatibility check."
+          }
+        ]
+      }
+    },
+    "ReadinessCheck": {
+      "type": "object",
+      "description": "A single cluster readiness check result.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ReadinessCategory",
+          "description": "Category of the readiness check."
+        },
+        "name": {
+          "type": "string",
+          "description": "Subject of the check (node name, workload namespace/name, etc.).\nOptional for cluster-wide checks."
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Severity of the check result."
+        },
+        "details": {
+          "type": "string",
+          "description": "Human-readable reason when severity is not 'pass'."
+        }
+      },
+      "required": [
+        "category",
+        "severity"
+      ]
+    },
+    "Severity": {
+      "type": "string",
+      "description": "Severity of an upgrade-assessment finding or readiness check.",
+      "enum": [
+        "Pass",
+        "Warning",
+        "Critical",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pass",
+            "value": "Pass",
+            "description": "No issues found."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Non-blocking issues found; upgrade is possible but action is recommended."
+          },
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Blocking issues found; upgrade should not proceed without remediation."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Severity could not be determined."
+          }
+        ]
+      }
+    },
+    "UpgradeAssessment": {
+      "type": "object",
+      "description": "ARM resource representing a Kubernetes cluster upgrade assessment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpgradeAssessmentProperties",
+          "description": "Properties of the UpgradeAssessments resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UpgradeAssessmentListResult": {
+      "type": "object",
+      "description": "The response of a UpgradeAssessment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpgradeAssessment items on this page",
+          "items": {
+            "$ref": "#/definitions/UpgradeAssessment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpgradeAssessmentProperties": {
+      "type": "object",
+      "description": "Properties of a single UpgradeAssessment ARM resource.",
+      "properties": {
+        "currentKubernetesVersion": {
+          "type": "string",
+          "description": "Current Kubernetes version running on the cluster (e.g., '1.29').",
+          "readOnly": true
+        },
+        "targetKubernetesVersion": {
+          "type": "string",
+          "description": "Target Kubernetes version to evaluate for upgrade (e.g., '1.30')."
+        },
+        "assessmentTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp when the in-cluster agent last computed this assessment.",
+          "readOnly": true
+        },
+        "overallSeverity": {
+          "$ref": "#/definitions/Severity",
+          "description": "Rolled-up severity across all checks; highest severity wins.",
+          "readOnly": true
+        },
+        "componentCompatibility": {
+          "type": "array",
+          "description": "Per-component compatibility results with the target Kubernetes version.",
+          "items": {
+            "$ref": "#/definitions/ComponentCompatibility"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "deprecatedApis": {
+          "type": "array",
+          "description": "Deprecated Kubernetes APIs still in use in the cluster.",
+          "items": {
+            "$ref": "#/definitions/DeprecatedApiUsage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "readinessChecks": {
+          "type": "array",
+          "description": "Cluster readiness check results.",
+          "items": {
+            "$ref": "#/definitions/ReadinessCheck"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

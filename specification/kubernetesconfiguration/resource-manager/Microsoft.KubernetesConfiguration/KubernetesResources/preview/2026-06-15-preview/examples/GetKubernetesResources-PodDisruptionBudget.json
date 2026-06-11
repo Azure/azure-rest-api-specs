@@ -1,0 +1,73 @@
+{
+  "title": "Get KubernetesResources - PodDisruptionBudget",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "poddisruptionbudget-nginx-pdb-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/poddisruptionbudget-nginx-pdb-default",
+        "name": "poddisruptionbudget-nginx-pdb-default",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "policy/v1",
+          "kind": "PodDisruptionBudget",
+          "metadata": {
+            "name": "nginx-pdb",
+            "namespaceName": "default",
+            "uid": "f8a9b0c1-d2e3-4567-fabc-789012345678",
+            "resourceVersion": "1689012",
+            "creationTimestamp": "2026-04-21T09:00:00Z",
+            "labels": [
+              {
+                "name": "app",
+                "value": "nginx"
+              }
+            ]
+          },
+          "spec": {
+            "minAvailable": "2",
+            "serviceSelector": [
+              {
+                "name": "app",
+                "value": "nginx"
+              }
+            ]
+          },
+          "status": {
+            "currentHealthy": 3,
+            "desiredHealthy": 2,
+            "disruptionsAllowed": 1,
+            "expectedPods": 3,
+            "conditions": [
+              {
+                "type": "DisruptionAllowed",
+                "status": "True",
+                "reason": "SufficientPods",
+                "message": "3 healthy replicas found, disruption is allowed",
+                "lastTransitionTime": "2026-04-21T09:01:00Z"
+              }
+            ]
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

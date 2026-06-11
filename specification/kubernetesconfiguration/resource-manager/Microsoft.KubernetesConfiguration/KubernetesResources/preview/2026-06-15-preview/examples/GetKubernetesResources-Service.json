@@ -1,0 +1,103 @@
+{
+  "title": "Get KubernetesResources - Service",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "service-nginx-default",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/service-nginx-default",
+        "name": "service-nginx-default",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+            "name": "nginx",
+            "namespaceName": "default",
+            "uid": "f5a6b7c8-d9e0-1234-fabc-567890123456",
+            "resourceVersion": "5678901",
+            "creationTimestamp": "2026-04-15T09:00:00Z",
+            "labels": [
+              {
+                "name": "app",
+                "value": "nginx"
+              }
+            ]
+          },
+          "spec": {
+            "serviceType": "LoadBalancer",
+            "clusterIp": "10.0.128.45",
+            "servicePorts": [
+              {
+                "name": "http",
+                "port": 80,
+                "targetPort": "http",
+                "protocol": "TCP"
+              },
+              {
+                "name": "https",
+                "port": 443,
+                "targetPort": "https",
+                "protocol": "TCP"
+              }
+            ],
+            "serviceSelector": [
+              {
+                "name": "app",
+                "value": "nginx"
+              }
+            ],
+            "externalTrafficPolicy": "Local",
+            "loadBalancerClass": "service.beta.kubernetes.io/azure-load-balancer-internal",
+            "loadBalancerIp": "52.183.12.45"
+          },
+          "status": {
+            "loadBalancerIngress": [
+              "52.183.12.45"
+            ],
+            "conditions": [
+              {
+                "type": "Available",
+                "status": "True",
+                "lastTransitionTime": "2026-04-15T09:02:00Z"
+              }
+            ]
+          },
+          "events": [
+            {
+              "type": "Normal",
+              "reason": "EnsuringLoadBalancer",
+              "age": "50d",
+              "from": "service-controller",
+              "message": "Ensuring load balancer"
+            },
+            {
+              "type": "Normal",
+              "reason": "EnsuredLoadBalancer",
+              "age": "50d",
+              "from": "service-controller",
+              "message": "Ensured load balancer"
+            }
+          ],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

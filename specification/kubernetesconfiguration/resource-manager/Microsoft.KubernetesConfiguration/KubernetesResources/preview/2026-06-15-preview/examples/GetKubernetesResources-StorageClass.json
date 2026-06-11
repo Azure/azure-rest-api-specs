@@ -1,0 +1,69 @@
+{
+  "title": "Get KubernetesResources - StorageClass",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "storageclass-managed-premium",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/storageclass-managed-premium",
+        "name": "storageclass-managed-premium",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "storage.k8s.io/v1",
+          "kind": "StorageClass",
+          "metadata": {
+            "name": "managed-premium",
+            "uid": "f2a3b4c5-d6e7-8901-fabc-123456789012",
+            "resourceVersion": "1023456",
+            "creationTimestamp": "2026-01-10T07:00:10Z",
+            "annotations": [
+              {
+                "name": "storageclass.kubernetes.io/is-default-class",
+                "value": "false"
+              }
+            ]
+          },
+          "spec": {
+            "provisioner": "disk.csi.azure.com",
+            "reclaimPolicy": "Delete",
+            "volumeBindingMode": "WaitForFirstConsumer",
+            "allowVolumeExpansion": true,
+            "additionalFields": [
+              {
+                "name": "parameters.skuName",
+                "value": "Premium_LRS"
+              },
+              {
+                "name": "parameters.kind",
+                "value": "Managed"
+              },
+              {
+                "name": "parameters.cachingMode",
+                "value": "ReadOnly"
+              }
+            ]
+          },
+          "status": {},
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}
