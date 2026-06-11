@@ -219,10 +219,10 @@ Composite actions are defined in `.github/actions/*/action.yaml`. Key patterns:
 
 ### Workflow JavaScript
 
-Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v8`:
+Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v9`:
 
 ```yaml
-- uses: actions/github-script@v8
+- uses: actions/github-script@v9
   with:
     script: |
       const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.js");

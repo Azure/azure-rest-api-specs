@@ -40,7 +40,7 @@ jobs:
 
       - if: ${{ matrix.folder == '.github' }}
         name: Verify all modules are importable
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const { join } = await import("path");
@@ -52,7 +52,7 @@ jobs:
       - name: Install dev deps
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v8 uses Node 24
+          # actions/github-script@v9 uses Node 24
           node-version: 24.x
           working-directory: ./${{ matrix.folder }}
 
