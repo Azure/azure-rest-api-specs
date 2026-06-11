@@ -96,7 +96,10 @@ namespace Customization;
 @@alternateType(SystemTopic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
 @@alternateType(SystemTopicProperties.source, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(SystemTopicProperties.metricResourceId, Azure.Core.uuid, "csharp");
+@@alternateType(Microsoft.EventGrid.Topic.extendedLocation, Azure.ResourceManager.Foundations.ExtendedLocation, "csharp");
+@@alternateType(IssuerCertificateInfo.certificateUrl, url, "csharp");
 @@alternateType(VerifiedPartnerProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
+@@alternateType(WebhookAuthenticationSettings.azureActiveDirectoryApplicationIdOrUri, url, "csharp");
 @@alternateType(WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryTenantId, Azure.Core.uuid, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
