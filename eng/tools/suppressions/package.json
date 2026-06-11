@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
@@ -22,19 +22,20 @@
   "dependencies": {
     "minimatch": "^10.0.1",
     "yaml": "^2.4.2",
-    "zod": "^4.3.5"
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@azure-tools/specs-shared": "file:../../../.github/shared",
-    "@eslint/js": "^10.0.0",
-    "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^4.1.0",
-    "cross-env": "^10.1.0",
-    "eslint": "^10.0.0",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.0",
-    "vitest": "^4.1.0"
-  }
+    "@azure-tools/specs-shared": "workspace:*",
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "cross-env": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vitest": "catalog:"
+  },
+  "version": "0.0.0"
 }

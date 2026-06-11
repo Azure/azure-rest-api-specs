@@ -41,7 +41,7 @@ jobs:
         id: summarize-impact
         working-directory: after
         run: |
-          npm exec --no -- summarize-impact --sourceDirectory . --targetDirectory ../before \
+          pnpm exec summarize-impact --sourceDirectory . --targetDirectory ../before \
             --number "${{ github.event.pull_request.number }}" \
             --sourceBranch "$HEAD_REF" \
             --targetBranch "${{ github.event.pull_request.base.ref }}" \

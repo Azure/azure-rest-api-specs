@@ -7,32 +7,32 @@
     "tsv": "cmd/tsv.js"
   },
   "dependencies": {
-    "@azure-tools/specs-shared": "file:../../../.github/shared",
-    "debug": "^4.4.3",
+    "@azure-tools/specs-shared": "workspace:*",
+    "debug": "catalog:",
     "globby": "^16.0.0",
     "picocolors": "^1.1.1",
-    "simple-git": "^3.36.0",
-    "suppressions": "file:../suppressions",
+    "simple-git": "catalog:",
+    "@azure-tools/suppressions": "workspace:*",
     "strip-ansi": "^7.1.0",
     "yaml": "^2.4.2",
-    "zod": "^4.3.5"
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.0",
-    "@types/debug": "^4.1.12",
-    "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^4.1.0",
-    "cross-env": "^10.1.0",
-    "eslint": "^10.0.0",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.0",
-    "vitest": "^4.1.0"
+    "@eslint/js": "catalog:",
+    "@types/debug": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "cross-env": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vitest": "catalog:"
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
@@ -42,5 +42,6 @@
   },
   "engines": {
     "node": ">=22.18.0"
-  }
+  },
+  "version": "0.0.0"
 }

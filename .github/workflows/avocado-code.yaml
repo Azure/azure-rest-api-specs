@@ -37,7 +37,7 @@ jobs:
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
-          npm exec --no -- avocado \
+          pnpm exec avocado \
             --excludePaths \
               "/common-types/" \
               "/scenarios/" \

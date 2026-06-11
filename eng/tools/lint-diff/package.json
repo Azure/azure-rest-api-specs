@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "clean": "rm -rf dist && rm -rf node_modules",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
@@ -21,29 +21,30 @@
     "node": ">=22.18.0"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^15.1.3",
-    "@azure-tools/specs-shared": "file:../../../.github/shared",
+    "@apidevtools/json-schema-ref-parser": "catalog:",
+    "@azure-tools/specs-shared": "workspace:*",
     "@microsoft.azure/openapi-validator": "2.2.4",
     "@microsoft.azure/openapi-validator-core": "1.0.7",
     "@microsoft.azure/openapi-validator-rulesets": "2.2.6",
     "autorest": "^3.7.2",
     "change-case": "^5.4.4",
     "deep-eql": "^5.0.2",
-    "marked": "^17.0.0"
+    "marked": "catalog:"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.0",
+    "@eslint/js": "catalog:",
     "@types/deep-eql": "^4.0.2",
-    "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^4.1.0",
-    "cross-env": "^10.1.0",
-    "eslint": "^10.0.0",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "cross-env": "catalog:",
+    "eslint": "catalog:",
     "execa": "^9.5.2",
     "memfs": "^4.17.0",
-    "prettier": "3.8.3",
-    "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.0",
-    "vitest": "^4.1.0"
-  }
+    "prettier": "catalog:",
+    "prettier-plugin-organize-imports": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vitest": "catalog:"
+  },
+  "version": "0.0.0"
 }

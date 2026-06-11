@@ -40,7 +40,7 @@ jobs:
         id: breaking-change-cross-version-analyze-code
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
-          npm exec --no -- openapi-diff-runner \
+          pnpm exec openapi-diff-runner \
             --run-type "CrossVersion" \
             --spec-repo-path "$GITHUB_WORKSPACE" \
             --pr-source-branch "$GITHUB_HEAD_REF" \
