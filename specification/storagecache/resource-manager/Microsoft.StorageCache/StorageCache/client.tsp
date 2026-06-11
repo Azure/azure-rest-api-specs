@@ -102,13 +102,6 @@ using Microsoft.StorageCache;
   "StorageCacheUsernameDownloadCredential",
   "csharp"
 );
-// Preserve the shipped .NET data inheritance while keeping the service TypeSpec resource shape unchanged.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Cache,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
 @@clientName(AscOperation, "StorageCacheAscOperationInfo", "csharp");
 @@clientName(
   AscOperationErrorResponse,
