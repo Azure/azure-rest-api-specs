@@ -6990,6 +6990,76 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/migrateVMAvailabilityZone": {
+      "post": {
+        "operationId": "VirtualMachineScaleSets_MigrateVMAvailabilityZone",
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "description": "Migrates one or more virtual machines in a VM scale set to an availability zone.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The input object for the MigrateVMAvailabilityZone API.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateVMAvailabilityZoneInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource operation accepted."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineScaleSet Migrate VM Availability Zone.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_MigrateVMAvailabilityZone.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade": {
       "post": {
         "operationId": "VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade",
@@ -15758,6 +15828,26 @@
       },
       "required": [
         "virtualMachineScaleSetFlexible"
+      ]
+    },
+    "MigrateVMAvailabilityZoneInput": {
+      "type": "object",
+      "description": "The input for MigrateVMAvailabilityZone.",
+      "properties": {
+        "instanceIds": {
+          "type": "array",
+          "description": "The virtual machine scale set instance ids to be migrated to the target availability zone.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetZone": {
+          "type": "string",
+          "description": "The target logical availability zone (\"1\", \"2\" or \"3\") to migrate the virtual machine scale set instances to. If omitted, the platform selects the target zone."
+        }
+      },
+      "required": [
+        "instanceIds"
       ]
     },
     "MigrateVMToVirtualMachineScaleSetInput": {

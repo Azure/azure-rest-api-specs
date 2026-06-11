@@ -9424,3 +9424,19 @@ model VMScaleSetScaleOutInputProperties {
    */
   zone?: string;
 }
+
+/**
+ * The input for MigrateVMAvailabilityZone.
+ */
+@added(Versions.v2026_04_01)
+model MigrateVMAvailabilityZoneInput {
+  /**
+   * The virtual machine scale set instance ids to be migrated to the target availability zone.
+   */
+  instanceIds: string[];
+
+  /**
+   * The target logical availability zone ("1", "2" or "3") to migrate the virtual machine scale set instances to. If omitted, the platform selects the target zone.
+   */
+  targetZone?: string;
+}
