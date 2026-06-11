@@ -203,3 +203,14 @@ op setTierCsharp is StorageOperationNoBody<
 
 @@access(DeleteSnapshotsOptionType, Access.internal, "csharp");
 @@access(BlobDeleteTypeCustom, Access.internal, "csharp");
+
+@@convenientAPI(
+  BlobBatchClient.BatchServiceClient.submitBatch,
+  false,
+  "csharp"
+);
+@@convenientAPI(
+  BlobBatchClient.BatchContainerClient.submitBatch,
+  false,
+  "csharp"
+);
