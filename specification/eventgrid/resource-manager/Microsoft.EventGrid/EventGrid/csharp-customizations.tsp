@@ -7,41 +7,109 @@ using Microsoft.EventGrid;
 namespace Customization;
 
 @@clientName(Microsoft.EventGrid.Channel, "PartnerNamespaceChannel", "csharp");
-@@clientName(ChannelProvisioningState, "PartnerNamespaceChannelProvisioningState", "csharp");
+@@clientName(
+  ChannelProvisioningState,
+  "PartnerNamespaceChannelProvisioningState",
+  "csharp"
+);
 @@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
 @@clientName(Microsoft.EventGrid.Client, "EventGridNamespaceClient", "csharp");
-@@clientName(Microsoft.EventGrid.ClientGroup, "EventGridNamespaceClientGroup", "csharp");
-@@clientName(ClientProvisioningState, "EventGridNamespaceClientProvisioningState", "csharp");
+@@clientName(
+  Microsoft.EventGrid.ClientGroup,
+  "EventGridNamespaceClientGroup",
+  "csharp"
+);
+@@clientName(
+  ClientProvisioningState,
+  "EventGridNamespaceClientProvisioningState",
+  "csharp"
+);
 @@clientName(ClientState, "EventGridNamespaceClientState", "csharp");
-@@clientName(ResourceProvisioningState, "EventGridResourceProvisioningState", "csharp");
-@@clientName(ConnectionState, "EventGridPrivateEndpointConnectionState", "csharp");
+@@clientName(
+  ResourceProvisioningState,
+  "EventGridResourceProvisioningState",
+  "csharp"
+);
+@@clientName(
+  ConnectionState,
+  "EventGridPrivateEndpointConnectionState",
+  "csharp"
+);
 @@clientName(Microsoft.EventGrid.Domain, "EventGridDomain", "csharp");
-@@clientName(DomainSharedAccessKeys, "EventGridDomainSharedAccessKeys", "csharp");
-@@clientName(Microsoft.EventGrid.EventSubscription, "EventGridSubscription", "csharp");
-@@clientName(DomainProvisioningState, "EventGridDomainProvisioningState", "csharp");
-@@clientName(DomainRegenerateKeyRequest, "EventGridDomainRegenerateKeyContent", "csharp");
+@@clientName(
+  DomainSharedAccessKeys,
+  "EventGridDomainSharedAccessKeys",
+  "csharp"
+);
+@@clientName(
+  Microsoft.EventGrid.EventSubscription,
+  "EventGridSubscription",
+  "csharp"
+);
+@@clientName(
+  DomainProvisioningState,
+  "EventGridDomainProvisioningState",
+  "csharp"
+);
+@@clientName(
+  DomainRegenerateKeyRequest,
+  "EventGridDomainRegenerateKeyContent",
+  "csharp"
+);
 @@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
 @@clientName(InputSchema, "EventGridInputSchema", "csharp");
 @@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
-@@clientName(JsonInputSchemaMapping, "EventGridJsonInputSchemaMapping", "csharp");
-@@clientName(EventSubscriptionUpdateParameters, "EventGridSubscriptionPatch", "csharp");
+@@clientName(
+  JsonInputSchemaMapping,
+  "EventGridJsonInputSchemaMapping",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionUpdateParameters,
+  "EventGridSubscriptionPatch",
+  "csharp"
+);
 @@clientName(Filter, "EventGridFilter", "csharp");
 @@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
 @@clientName(IpActionType, "EventGridIPActionType", "csharp");
 @@clientName(Microsoft.EventGrid.Namespace, "EventGridNamespace", "csharp");
-@@clientName(Microsoft.EventGrid.Subscription, "NamespaceTopicEventSubscription", "csharp");
-@@clientName(NamespaceRegenerateKeyRequest, "NamespaceRegenerateKeyContent", "csharp");
+@@clientName(
+  Microsoft.EventGrid.Subscription,
+  "NamespaceTopicEventSubscription",
+  "csharp"
+);
+@@clientName(
+  NamespaceRegenerateKeyRequest,
+  "NamespaceRegenerateKeyContent",
+  "csharp"
+);
 @@clientName(Partner, "EventGridPartnerContent", "csharp");
-@@clientName(PartnerNamespaceRegenerateKeyRequest, "PartnerNamespaceRegenerateKeyContent", "csharp");
-@@clientName(Microsoft.EventGrid.PermissionBinding, "EventGridNamespacePermissionBinding", "csharp");
-@@clientName(PersistedConnectionStatus, "EventGridPrivateEndpointPersistedConnectionStatus", "csharp");
+@@clientName(
+  PartnerNamespaceRegenerateKeyRequest,
+  "PartnerNamespaceRegenerateKeyContent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.EventGrid.PermissionBinding,
+  "EventGridNamespacePermissionBinding",
+  "csharp"
+);
+@@clientName(
+  PersistedConnectionStatus,
+  "EventGridPrivateEndpointPersistedConnectionStatus",
+  "csharp"
+);
 @@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
 @@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
 @@clientName(ResourceRegionType, "EventGridResourceRegionType", "csharp");
 @@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
 @@clientName(EventType, "EventTypeUnderTopic", "csharp");
 @@clientName(Microsoft.EventGrid.Topic, "EventGridTopic", "csharp");
-@@clientName(TopicProvisioningState, "EventGridTopicProvisioningState", "csharp");
+@@clientName(
+  TopicProvisioningState,
+  "EventGridTopicProvisioningState",
+  "csharp"
+);
 @@clientName(TopicRegenerateKeyRequest, "TopicRegenerateKeyContent", "csharp");
 @@clientName(Microsoft.EventGrid.TopicTypeInfo, "TopicType", "csharp");
 
@@ -63,44 +131,136 @@ namespace Customization;
 @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(TopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(DomainEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
-@@clientName(EventSubscriptionOperationGroup.getFullUrl, "GetFullUri", "csharp");
+@@clientName(
+  EventSubscriptionOperationGroup.getFullUrl,
+  "GetFullUri",
+  "csharp"
+);
 @@clientName(SystemTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
 
-@@clientName(DomainProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
-@@clientName(PartnerNamespaceProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
-@@clientName(ChannelProperties.expirationTimeIfNotActivatedUtc, "ExpireOnIfNotActivated", "csharp");
-@@clientName(EventSubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
+@@clientName(
+  DomainProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(
+  PartnerNamespaceProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(
+  ChannelProperties.expirationTimeIfNotActivatedUtc,
+  "ExpireOnIfNotActivated",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionProperties.expirationTimeUtc,
+  "ExpireOn",
+  "csharp"
+);
 @@clientName(NamespaceProperties.inboundIpRules, "InboundIPRules", "csharp");
-@@clientName(PartnerTopicProperties.expirationTimeIfNotActivatedUtc, "ExpireOnIfNotActivated", "csharp");
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+@@clientName(
+  PartnerTopicProperties.expirationTimeIfNotActivatedUtc,
+  "ExpireOnIfNotActivated",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@clientName(TopicProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
 @@clientName(TopicProperties.inboundIpRules, "InboundIPRules", "csharp");
 @@clientName(SubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
 
 @@alternateType(DomainProperties.endpoint, url, "csharp");
-@@alternateType(Microsoft.EventGrid.Namespace.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(
+  Microsoft.EventGrid.Namespace.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@alternateType(PartnerNamespaceProperties.endpoint, url, "csharp");
 @@alternateType(EventTypeProperties.schemaUrl, url, "csharp");
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(Domain.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
-@@alternateType(Microsoft.EventGrid.Topic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
-@@alternateType(PartnerTopic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(
+  Domain.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.EventGrid.Topic.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  PartnerTopic.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@alternateType(TopicProperties.endpoint, url, "csharp");
-@@alternateType(PartnerNamespaceProperties.partnerRegistrationFullyQualifiedId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(Partner.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
-@@alternateType(PartnerDestinationProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
-@@alternateType(PartnerRegistrationProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
-@@alternateType(PartnerTopicProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
-@@alternateType(SystemTopic.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
-@@alternateType(SystemTopicProperties.source, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(SystemTopicProperties.metricResourceId, Azure.Core.uuid, "csharp");
-@@alternateType(Microsoft.EventGrid.Topic.extendedLocation, Azure.ResourceManager.Foundations.ExtendedLocation, "csharp");
+@@alternateType(
+  PartnerNamespaceProperties.partnerRegistrationFullyQualifiedId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Partner.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  PartnerDestinationProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  PartnerRegistrationProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  PartnerTopicProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SystemTopic.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  SystemTopicProperties.source,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SystemTopicProperties.metricResourceId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.EventGrid.Topic.extendedLocation,
+  Azure.ResourceManager.Foundations.ExtendedLocation,
+  "csharp"
+);
 @@alternateType(IssuerCertificateInfo.certificateUrl, url, "csharp");
-@@alternateType(VerifiedPartnerProperties.partnerRegistrationImmutableId, Azure.Core.uuid, "csharp");
-@@alternateType(WebhookAuthenticationSettings.azureActiveDirectoryApplicationIdOrUri, url, "csharp");
-@@alternateType(WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryTenantId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  VerifiedPartnerProperties.partnerRegistrationImmutableId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  WebhookAuthenticationSettings.azureActiveDirectoryApplicationIdOrUri,
+  url,
+  "csharp"
+);
+@@alternateType(
+  WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryTenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(PartnerRegistration.properties, "csharp");
@@ -122,8 +282,14 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@markAsPageable(DomainEventSubscriptions.getDeliveryAttributes, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(EventSubscriptionOperationGroup.getDeliveryAttributes, "csharp");
+@@markAsPageable(
+  EventSubscriptionOperationGroup.getDeliveryAttributes,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@markAsPageable(SystemTopicEventSubscriptions.getDeliveryAttributes, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@markAsPageable(PartnerTopicEventSubscriptions.getDeliveryAttributes, "csharp");
+@@markAsPageable(
+  PartnerTopicEventSubscriptions.getDeliveryAttributes,
+  "csharp"
+);
