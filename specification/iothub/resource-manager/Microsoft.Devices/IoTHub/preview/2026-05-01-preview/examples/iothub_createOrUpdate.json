@@ -4,6 +4,9 @@
     "iotHubDescription": {
       "etag": "AAAAAAFD6M4=",
       "location": "centraluseuap",
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "cloudToDevice": {
           "defaultTtlAsIso8601": "PT1H",
@@ -61,12 +64,9 @@
             "eventStreams": [
               {
                 "name": "eventstreamendpoint1",
-                "endpointUri": "sb://myeventhubns.azure.servicebus.net",
-                "entityPath": "myeventhub",
+                "endpointUri": "sb://eventstreamcustomsourceehns.azure.servicebus.net",
+                "entityPath": "eventstreamcustomsourceeh",
                 "authenticationType": "identityBased",
-                "identity": {
-                  "userAssignedIdentity": "/subscriptions/01234567-0123-0123-0123-0123456789ab/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
-                },
                 "workspaceId": "myws",
                 "eventStreamId": "myes",
                 "sourceId": "mys"
@@ -110,6 +110,11 @@
         "etag": "AAAAAAFD6M4=",
         "id": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
         "location": "centraluseuap",
+        "identity": {
+          "tenantId": "11111111-2222-3333-4444-555555555555",
+          "type": "SystemAssigned",
+          "principalId": "66666666-7777-8888-9999-aaaaaaaaaaaa"
+        },
         "properties": {
           "cloudToDevice": {
             "defaultTtlAsIso8601": "PT1H",
@@ -188,12 +193,9 @@
                 {
                   "name": "eventstreamendpoint1",
                   "id": "00000000-1111-2222-3333-0123456789ab",
-                  "endpointUri": "sb://myeventhubns.azure.servicebus.net",
-                  "entityPath": "myeventhub",
+                  "endpointUri": "sb://eventstreamcustomsourceehns.azure.servicebus.net",
+                  "entityPath": "eventstreamcustomsourceeh",
                   "authenticationType": "identityBased",
-                  "identity": {
-                    "userAssignedIdentity": "/subscriptions/01234567-0123-0123-0123-0123456789ab/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
-                  },
                   "workspaceId": "myws",
                   "eventStreamId": "myes",
                   "sourceId": "mys"
@@ -238,6 +240,11 @@
         "etag": "AAAAAAFD6M4=",
         "id": "/subscriptions/ae24ff83-d2ca-4fc8-9717-05dae4bba489/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/testHub",
         "location": "centraluseuap",
+        "identity": {
+          "tenantId": "11111111-2222-3333-4444-555555555555",
+          "type": "SystemAssigned",
+          "principalId": "66666666-7777-8888-9999-aaaaaaaaaaaa"
+        },
         "properties": {
           "cloudToDevice": {
             "defaultTtlAsIso8601": "PT1H",
@@ -316,12 +323,9 @@
                 {
                   "name": "eventstreamendpoint1",
                   "id": "00000000-1111-2222-3333-0123456789ab",
-                  "endpointUri": "sb://myeventhubns.azure.servicebus.net",
-                  "entityPath": "myeventhub",
+                  "endpointUri": "sb://eventstreamcustomsourceehns.azure.servicebus.net",
+                  "entityPath": "eventstreamcustomsourceeh",
                   "authenticationType": "identityBased",
-                  "identity": {
-                    "userAssignedIdentity": "/subscriptions/01234567-0123-0123-0123-0123456789ab/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
-                  },
                   "workspaceId": "myws",
                   "eventStreamId": "myes",
                   "sourceId": "mys"
