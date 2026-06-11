@@ -33,6 +33,30 @@ tag: package-2025-04
 
 ---
 
+### Tag: package-preview-2026-06
+
+These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-06'
+input-file:
+  - preview/2026-06-15-preview/operations.json
+suppressions:
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: OperationsApiTenantLevelOnly
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: ResourceNameRestriction
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: OperationsApiResponseSchema
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.
+```
+
+---
+
 ### Tag: package-2025-04
 
 These settings apply only when `--tag=package-2025-04` is specified on the command line.
