@@ -21,10 +21,14 @@
             ],
             "actionDag": [
               {
-                "actionId": "action-1",
-                "actionType": "Approval",
-                "parameters": {
-                  "approverObjectId": "11111111-2222-3333-4444-555555555555"
+                "actionType": "StartAndWaitForApproval",
+                "actionName": "RequestApproval",
+                "inputs": {
+                  "approvalType": "Custom",
+                  "title": "Approve data access request",
+                  "assignedTo": [
+                    "11111111-2222-3333-4444-555555555555"
+                  ]
                 }
               }
             ],

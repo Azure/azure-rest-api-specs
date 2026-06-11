@@ -1930,24 +1930,21 @@
   "definitions": {
     "Action": {
       "type": "object",
-      "description": "An action step in a workflow.",
+      "description": "Base type for a step in a workflow's action DAG. The concrete shape is selected by the `actionType` discriminator.",
       "properties": {
-        "actionId": {
-          "type": "string",
-          "description": "The unique identifier of the action."
-        },
         "actionType": {
-          "type": "string",
-          "description": "The type of action."
+          "$ref": "#/definitions/ActionType",
+          "description": "The type of action, used as the polymorphic discriminator."
         },
-        "parameters": {
-          "type": "object",
-          "description": "The parameters for the action.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "actionName": {
+          "type": "string",
+          "description": "The unique name of the action within the workflow. Names must be unique across the entire DAG."
         }
-      }
+      },
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ]
     },
     "ActionListResponse": {
       "type": "object",
@@ -1964,6 +1961,109 @@
       "required": [
         "value"
       ]
+    },
+    "ActionType": {
+      "type": "string",
+      "description": "The set of supported workflow action kinds.",
+      "enum": [
+        "StartAndWaitForApproval",
+        "Condition",
+        "ApproveDataSubscription",
+        "RejectDataSubscription",
+        "CompleteDataSubscription",
+        "SendEmailNotification",
+        "PublishDataProduct",
+        "PublishTerm",
+        "GrantAccessToAssets"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StartAndWaitForApproval",
+            "value": "StartAndWaitForApproval",
+            "description": "Starts an approval and waits for the response."
+          },
+          {
+            "name": "Condition",
+            "value": "Condition",
+            "description": "Branches execution based on a boolean expression."
+          },
+          {
+            "name": "ApproveDataSubscription",
+            "value": "ApproveDataSubscription",
+            "description": "Approves the parent data subscription."
+          },
+          {
+            "name": "RejectDataSubscription",
+            "value": "RejectDataSubscription",
+            "description": "Rejects the parent data subscription."
+          },
+          {
+            "name": "CompleteDataSubscription",
+            "value": "CompleteDataSubscription",
+            "description": "Completes the parent data subscription after access has been granted."
+          },
+          {
+            "name": "SendEmailNotification",
+            "value": "SendEmailNotification",
+            "description": "Sends an email notification."
+          },
+          {
+            "name": "PublishDataProduct",
+            "value": "PublishDataProduct",
+            "description": "Publishes a data product."
+          },
+          {
+            "name": "PublishTerm",
+            "value": "PublishTerm",
+            "description": "Publishes a term."
+          },
+          {
+            "name": "GrantAccessToAssets",
+            "value": "GrantAccessToAssets",
+            "description": "Grants access to data assets for self-service scenarios."
+          }
+        ]
+      }
+    },
+    "ApprovalAction": {
+      "type": "object",
+      "description": "Starts an approval and waits for the response.",
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/ApprovalInputs",
+          "description": "Inputs that configure the approval request."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "StartAndWaitForApproval"
+    },
+    "ApprovalInputs": {
+      "type": "object",
+      "description": "Inputs that configure an ApprovalAction.",
+      "properties": {
+        "approvalType": {
+          "type": "string",
+          "description": "The type of approval (e.g., 'Custom')."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title displayed on the approval request."
+        },
+        "assignedTo": {
+          "type": "array",
+          "description": "The list of identities (object IDs) assigned to approve the request.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ApprovalWorkflow": {
       "type": "object",
@@ -2060,6 +2160,16 @@
         "value"
       ]
     },
+    "ApproveDataSubscriptionAction": {
+      "type": "object",
+      "description": "Approves the parent data subscription.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "ApproveDataSubscription"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2124,6 +2234,59 @@
       "type": "string",
       "format": "uuid",
       "description": "Universally Unique Identifier"
+    },
+    "CompleteDataSubscriptionAction": {
+      "type": "object",
+      "description": "Completes the parent data subscription after access has been granted.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "CompleteDataSubscription"
+    },
+    "ConditionAction": {
+      "type": "object",
+      "description": "Branches workflow execution based on a boolean expression.",
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/ConditionInputs",
+          "description": "Inputs that configure the branching condition and its branches."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "Condition"
+    },
+    "ConditionInputs": {
+      "type": "object",
+      "description": "Inputs that configure a ConditionAction.",
+      "properties": {
+        "expressions": {
+          "type": "array",
+          "description": "The expressions evaluated to determine which branch to execute.",
+          "items": {
+            "$ref": "#/definitions/Expression"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "description": "The actions to execute when the condition evaluates to true.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "elseActions": {
+          "type": "array",
+          "description": "The actions to execute when the condition evaluates to false.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        }
+      }
     },
     "CriticalDataElementPolicies": {
       "type": "object",
@@ -2559,6 +2722,38 @@
       ],
       "x-ms-discriminator-value": "Domain"
     },
+    "Expression": {
+      "type": "object",
+      "description": "A boolean expression evaluated by a ConditionAction.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The logical operator combining the operands (e.g., 'and', 'or')."
+        },
+        "leftHandSide": {
+          "type": "string",
+          "description": "The left-hand side operand."
+        },
+        "rightHandSide": {
+          "type": "string",
+          "description": "The right-hand side operand."
+        },
+        "equality": {
+          "type": "string",
+          "description": "The equality comparison applied between the operands (e.g., 'IsEqualTo')."
+        }
+      }
+    },
+    "GrantAccessToAssetsAction": {
+      "type": "object",
+      "description": "Grants access to data assets for self-service scenarios.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "GrantAccessToAssets"
+    },
     "Identity": {
       "type": "object",
       "description": "Identity information for a user or group.",
@@ -2732,6 +2927,77 @@
             "description": "Policy set for a critical data element."
           }
         ]
+      }
+    },
+    "PublishDataProductAction": {
+      "type": "object",
+      "description": "Publishes a data product.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "PublishDataProduct"
+    },
+    "PublishTermAction": {
+      "type": "object",
+      "description": "Publishes a term.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "PublishTerm"
+    },
+    "RejectDataSubscriptionAction": {
+      "type": "object",
+      "description": "Rejects the parent data subscription.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "RejectDataSubscription"
+    },
+    "SendEmailNotificationAction": {
+      "type": "object",
+      "description": "Sends an email notification.",
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/SendEmailNotificationInputs",
+          "description": "Inputs that configure the email notification."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "x-ms-discriminator-value": "SendEmailNotification"
+    },
+    "SendEmailNotificationInputs": {
+      "type": "object",
+      "description": "Inputs that configure a SendEmailNotificationAction.",
+      "properties": {
+        "item": {
+          "type": "string",
+          "description": "The item the notification refers to."
+        },
+        "additionalBody": {
+          "type": "string",
+          "description": "Additional body text appended to the notification."
+        },
+        "additionalSubject": {
+          "type": "string",
+          "description": "Additional subject text appended to the notification."
+        },
+        "assignedTo": {
+          "type": "array",
+          "description": "The list of identities (object IDs) that should receive the notification.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
+        }
       }
     },
     "SensitiveMarker": {

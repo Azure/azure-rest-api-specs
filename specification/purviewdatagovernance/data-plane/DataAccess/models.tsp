@@ -250,16 +250,167 @@ union TriggerType {
   TermPublish: "TermPublish",
 }
 
-@doc("An action step in a workflow.")
+// ============================================================
+// Workflow Actions (polymorphic on actionType)
+// ============================================================
+
+@doc("Base type for a step in a workflow's action DAG. The concrete shape is selected by the `actionType` discriminator.")
+@discriminator("actionType")
 model Action {
-  @doc("The unique identifier of the action.")
-  actionId?: string;
+  @doc("The type of action, used as the polymorphic discriminator.")
+  actionType: ActionType;
 
-  @doc("The type of action.")
-  actionType?: string;
+  @doc("The unique name of the action within the workflow. Names must be unique across the entire DAG.")
+  actionName?: string;
+}
 
-  @doc("The parameters for the action.")
-  parameters?: Record<string>;
+@doc("The set of supported workflow action kinds.")
+union ActionType {
+  string,
+
+  @doc("Starts an approval and waits for the response.")
+  StartAndWaitForApproval: "StartAndWaitForApproval",
+
+  @doc("Branches execution based on a boolean expression.")
+  Condition: "Condition",
+
+  @doc("Approves the parent data subscription.")
+  ApproveDataSubscription: "ApproveDataSubscription",
+
+  @doc("Rejects the parent data subscription.")
+  RejectDataSubscription: "RejectDataSubscription",
+
+  @doc("Completes the parent data subscription after access has been granted.")
+  CompleteDataSubscription: "CompleteDataSubscription",
+
+  @doc("Sends an email notification.")
+  SendEmailNotification: "SendEmailNotification",
+
+  @doc("Publishes a data product.")
+  PublishDataProduct: "PublishDataProduct",
+
+  @doc("Publishes a term.")
+  PublishTerm: "PublishTerm",
+
+  @doc("Grants access to data assets for self-service scenarios.")
+  GrantAccessToAssets: "GrantAccessToAssets",
+}
+
+@doc("Starts an approval and waits for the response.")
+model ApprovalAction extends Action {
+  @doc("Discriminator value identifying this as a StartAndWaitForApproval action.")
+  actionType: ActionType.StartAndWaitForApproval;
+
+  @doc("Inputs that configure the approval request.")
+  inputs?: ApprovalInputs;
+}
+
+@doc("Inputs that configure an ApprovalAction.")
+model ApprovalInputs {
+  @doc("The type of approval (e.g., 'Custom').")
+  approvalType?: string;
+
+  @doc("The title displayed on the approval request.")
+  title?: string;
+
+  @doc("The list of identities (object IDs) assigned to approve the request.")
+  assignedTo?: string[];
+}
+
+@doc("Branches workflow execution based on a boolean expression.")
+model ConditionAction extends Action {
+  @doc("Discriminator value identifying this as a Condition action.")
+  actionType: ActionType.Condition;
+
+  @doc("Inputs that configure the branching condition and its branches.")
+  inputs?: ConditionInputs;
+}
+
+@doc("Inputs that configure a ConditionAction.")
+model ConditionInputs {
+  @doc("The expressions evaluated to determine which branch to execute.")
+  expressions?: Expression[];
+
+  @doc("The actions to execute when the condition evaluates to true.")
+  actions?: Action[];
+
+  @doc("The actions to execute when the condition evaluates to false.")
+  elseActions?: Action[];
+}
+
+@doc("A boolean expression evaluated by a ConditionAction.")
+model Expression {
+  @doc("The logical operator combining the operands (e.g., 'and', 'or').")
+  type?: string;
+
+  @doc("The left-hand side operand.")
+  leftHandSide?: string;
+
+  @doc("The right-hand side operand.")
+  rightHandSide?: string;
+
+  @doc("The equality comparison applied between the operands (e.g., 'IsEqualTo').")
+  equality?: string;
+}
+
+@doc("Sends an email notification.")
+model SendEmailNotificationAction extends Action {
+  @doc("Discriminator value identifying this as a SendEmailNotification action.")
+  actionType: ActionType.SendEmailNotification;
+
+  @doc("Inputs that configure the email notification.")
+  inputs?: SendEmailNotificationInputs;
+}
+
+@doc("Inputs that configure a SendEmailNotificationAction.")
+model SendEmailNotificationInputs {
+  @doc("The item the notification refers to.")
+  item?: string;
+
+  @doc("Additional body text appended to the notification.")
+  additionalBody?: string;
+
+  @doc("Additional subject text appended to the notification.")
+  additionalSubject?: string;
+
+  @doc("The list of identities (object IDs) that should receive the notification.")
+  assignedTo?: uuid[];
+}
+
+@doc("Approves the parent data subscription.")
+model ApproveDataSubscriptionAction extends Action {
+  @doc("Discriminator value identifying this as an ApproveDataSubscription action.")
+  actionType: ActionType.ApproveDataSubscription;
+}
+
+@doc("Rejects the parent data subscription.")
+model RejectDataSubscriptionAction extends Action {
+  @doc("Discriminator value identifying this as a RejectDataSubscription action.")
+  actionType: ActionType.RejectDataSubscription;
+}
+
+@doc("Completes the parent data subscription after access has been granted.")
+model CompleteDataSubscriptionAction extends Action {
+  @doc("Discriminator value identifying this as a CompleteDataSubscription action.")
+  actionType: ActionType.CompleteDataSubscription;
+}
+
+@doc("Publishes a data product.")
+model PublishDataProductAction extends Action {
+  @doc("Discriminator value identifying this as a PublishDataProduct action.")
+  actionType: ActionType.PublishDataProduct;
+}
+
+@doc("Publishes a term.")
+model PublishTermAction extends Action {
+  @doc("Discriminator value identifying this as a PublishTerm action.")
+  actionType: ActionType.PublishTerm;
+}
+
+@doc("Grants access to data assets for self-service scenarios.")
+model GrantAccessToAssetsAction extends Action {
+  @doc("Discriminator value identifying this as a GrantAccessToAssets action.")
+  actionType: ActionType.GrantAccessToAssets;
 }
 
 @doc("Represents a workflow run instance.")
