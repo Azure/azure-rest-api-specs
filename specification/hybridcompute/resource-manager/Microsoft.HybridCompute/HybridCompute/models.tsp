@@ -117,7 +117,7 @@ union LicenseTarget {
   `Windows Server 2012 R2`: "Windows Server 2012 R2",
 
   /**
-   * Windows Server 2016
+   * Windows Server 2016 license target.
    */
   @added(Versions.v2026_02_12_preview)
   `Windows Server 2016`: "Windows Server 2016",
