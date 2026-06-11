@@ -170,14 +170,17 @@ model ScenarioEvaluationResultItem {
 @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
 model TemplateEvaluationResultItem {
   /**
-   * The template ID that was evaluated.
+   * The template ID that was evaluated. Optional because the underlying BE field may
+   * be null for legacy evaluations created before template-centric persistence landed;
+   * the GW falls back to `scenarioName` in that case (`scenario.Id == templateId` by BE
+   * convention), so ARM responses are typically populated in practice.
    */
-  templateId: string;
+  templateId?: string;
 
   /**
-   * The template name that was evaluated.
+   * The template name that was evaluated. Optional for the same reason as `templateId`.
    */
-  templateName: string;
+  templateName?: string;
 
   /**
    * The evaluation result for this template.

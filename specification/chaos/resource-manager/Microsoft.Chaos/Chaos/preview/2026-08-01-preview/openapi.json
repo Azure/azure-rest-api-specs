@@ -7279,11 +7279,11 @@
       "properties": {
         "templateId": {
           "type": "string",
-          "description": "The template ID that was evaluated."
+          "description": "The template ID that was evaluated. Optional because the underlying BE field may\nbe null for legacy evaluations created before template-centric persistence landed;\nthe GW falls back to `scenarioName` in that case (`scenario.Id == templateId` by BE\nconvention), so ARM responses are typically populated in practice."
         },
         "templateName": {
           "type": "string",
-          "description": "The template name that was evaluated."
+          "description": "The template name that was evaluated. Optional for the same reason as `templateId`."
         },
         "evaluationResult": {
           "$ref": "#/definitions/RecommendationStatus",
@@ -7291,8 +7291,6 @@
         }
       },
       "required": [
-        "templateId",
-        "templateName",
         "evaluationResult"
       ]
     },
@@ -7580,7 +7578,7 @@
             "$ref": "#/definitions/TemplateEvaluationResultItem"
           },
           "readOnly": true,
-          "x-ms-client-name": "resultsV2",
+          "x-ms-client-name": "Results",
           "x-ms-identifiers": [
             "templateId"
           ]

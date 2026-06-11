@@ -54,6 +54,11 @@ using Microsoft.Chaos;
   "csharp"
 );
 
+// 2026-08-01-preview: `resultsV2` is the TypeSpec property name (renamed to avoid
+// collision with the legacy `results: ScenarioEvaluationResultItem[]`), but the
+// wire format is `results` via @encodedName and SDKs should expose it as `Results`.
+@@clientName(WorkspaceEvaluationProperties.resultsV2, "Results");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExperimentExecutionDetails,
   Azure.ResourceManager.Foundations.ProxyResource,
