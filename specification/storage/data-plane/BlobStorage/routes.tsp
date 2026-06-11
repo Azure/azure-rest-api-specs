@@ -740,6 +740,12 @@ interface Blob {
         ...ContentLanguageResponseHeader;
         ...BlobSequenceNumberResponseHeader;
         ...BlobTypeResponseHeader;
+
+        /** The CRC64 hash of the content. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-content-crc64")
+        contentCrc64?: bytes;
+
         ...CopyCompletionTimeResponseHeader;
         ...CopyStatusDescriptionResponseHeader;
         ...CopyIdResponseHeader;
@@ -2123,6 +2129,12 @@ interface BlockBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
+
+      /** The CRC64 hash of the content. */
+      @added(Versions.v2026_10_06)
+      @header("x-ms-content-crc64")
+      contentCrc64?: bytes;
+
       ...VersionIdResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
