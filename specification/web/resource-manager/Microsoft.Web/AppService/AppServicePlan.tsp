@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Web;
 /**
@@ -231,6 +233,32 @@ interface AppServicePlans {
       @query("softRestart")
       softRestart?: boolean;
     },
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Start all apps in an App Service plan.
+   */
+  @added(Versions.v2026_07_15)
+  @summary("Start all apps in an App Service plan.")
+  @action("startSites")
+  startWebApps is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    OkResponse,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Stop all apps in an App Service plan.
+   */
+  @added(Versions.v2026_07_15)
+  @summary("Stop all apps in an App Service plan.")
+  @action("stopSites")
+  stopWebApps is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    OkResponse,
     Error = DefaultErrorResponse
   >;
 
