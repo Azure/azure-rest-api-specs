@@ -26,6 +26,28 @@ namespace Customizations;
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
 
+// Fix generic "The most basic operation" docs for search tile operations (without TileMatrixSetId)
+@@doc(
+  MosaicSearchesAssetsForTiles.getZxyAssets,
+  "Return a list of assets which overlap a given tile for a mosaic search."
+);
+@@doc(
+  MosaicSearchesTiles.getZxyScaleByFormat,
+  "Create a map tile for a mosaic search with specified scale and format."
+);
+@@doc(
+  MosaicSearchesTilesScale.getZxyByScale,
+  "Create a map tile for a mosaic search with specified scale."
+);
+@@doc(
+  MosaicSearchesTilesFormat.getZxyByFormat,
+  "Create a map tile for a mosaic search with specified format."
+);
+@@doc(
+  MosaicSearchesTilesPlain.getZxy,
+  "Create a map tile for a mosaic search."
+);
+
 // === Python snake_case parameter renames ===
 @@clientName(CollectionMosaicFilterQueryParameters.sortby, "sort_by", "python");
 @@clientName(BoundingBoxPathParameters.minx, "min_x", "python");
@@ -42,6 +64,9 @@ namespace Customizations;
 
 // Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
+
+// Rename Ingestion.delete to deleteIngestion for JavaScript to avoid @fixme conflict
+@@clientName(Ingestion.delete, "deleteIngestion", "javascript");
 
 // === Python external type mappings ===
 // NOTE: @@alternateType with ExternalType is currently broken for ALL models used
@@ -603,3 +628,91 @@ interface SharedAccessSignature {
 @@clientName(ColorMapNames.`viirs-13a1`, "VIIRS_13A1", "python");
 @@clientName(ColorMapNames.`viirs-14a1`, "VIIRS_14A1", "python");
 @@clientName(ColorMapNames.`viirs-15a2H`, "VIIRS_15A2H", "python");
+
+// === Enhanced datetime documentation ===
+// Reuse the same RFC 3339 documentation from inma.tsp (StacItems.getFeatures)
+// to ensure consistent datetime documentation across all Data and STAC APIs.
+
+@@doc(
+  SubDatasetQueryParameters.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """
+);
+
+@@doc(
+  CollectionMosaicFilterQueryParameters.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """
+);
+
+@@doc(
+  RegisterMosaic.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """
+);
+
+@@doc(
+  StacSearchParameters.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """
+);
