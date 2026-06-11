@@ -1,13 +1,13 @@
-import { mockAll, mockFolder } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.ts";
 mockAll();
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-import { FolderStructureRule } from "../src/rules/folder-structure.js";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { FolderStructureRule } from "../src/rules/folder-structure.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
