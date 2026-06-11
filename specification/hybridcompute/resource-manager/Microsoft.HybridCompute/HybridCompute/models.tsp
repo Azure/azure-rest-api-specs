@@ -3214,7 +3214,7 @@ model GatewayProperties {
 }
 
 /**
- * Describes a License Update.
+ * Describes a Gateway Update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayUpdate extends ResourceUpdate {
