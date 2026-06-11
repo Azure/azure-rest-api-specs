@@ -323,7 +323,7 @@ interface Workflows {
   @doc("Deletes a workflow run.")
   @route("/workflowRuns/{workflowRunId}")
   @delete
-  deleteRun is RpcOperation<WorkflowRunIdParameter, {}>;
+  deleteRun is RpcOperation<WorkflowRunIdParameter, NoContentResponse>;
 }
 
 // ============================================================
@@ -354,7 +354,7 @@ interface DataProductPolicySets {
   @doc("Deletes the applied policy set for a data product.")
   @route("/dataProducts/{dataProductId}/policySets/applied")
   @delete
-  deleteApplied is RpcOperation<DataProductIdParameter, {}>;
+  deleteApplied is RpcOperation<DataProductIdParameter, NoContentResponse>;
 
   @tag("PolicySets")
   @doc("Gets the effective policy set for a data product, combining applied and inherited policies.")
@@ -418,7 +418,7 @@ interface DomainPolicySets {
   @doc("Deletes the applied policy set for a business domain.")
   @route("/businessDomains/{domainId}/policySets/applied")
   @delete
-  deleteApplied is RpcOperation<DomainIdParameter, {}>;
+  deleteApplied is RpcOperation<DomainIdParameter, NoContentResponse>;
 }
 
 // ============================================================
@@ -449,7 +449,7 @@ interface TermPolicySets {
   @doc("Deletes the applied policy set for a term.")
   @route("/terms/{termId}/policySets/applied")
   @delete
-  deleteApplied is RpcOperation<TermIdParameter, {}>;
+  deleteApplied is RpcOperation<TermIdParameter, NoContentResponse>;
 }
 
 // ============================================================
