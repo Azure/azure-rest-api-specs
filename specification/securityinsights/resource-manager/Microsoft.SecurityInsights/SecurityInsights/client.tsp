@@ -88,3 +88,7 @@ using Azure.ClientGenerator.Core;
   "ThreatIntelligenceSortingCriteriaEnum",
   "python"
 );
+@@clientName(
+  ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
+  "listQueryIndicators"
+);
