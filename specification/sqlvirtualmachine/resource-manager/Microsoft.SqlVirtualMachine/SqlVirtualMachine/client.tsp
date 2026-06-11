@@ -290,3 +290,11 @@ using Microsoft.SqlVirtualMachine;
   "sqlAuthUpdateUsername",
   "java"
 );
+
+@@clientName(
+  Microsoft.SqlVirtualMachine,
+  "SqlVirtualMachineManagementClient",
+  "javascript"
+);
+@@clientName(ReadableSecondary.No, "$DO_NOT_NORMALIZE$NO", "javascript");
+@@clientName(ReadableSecondary.All, "$DO_NOT_NORMALIZE$ALL", "javascript");
