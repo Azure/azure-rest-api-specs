@@ -218,6 +218,9 @@ importers:
         specifier: 'catalog:'
         version: 4.4.3
     devDependencies:
+      '@actions/github-script':
+        specifier: github:actions/github-script
+        version: https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3
       '@eslint/js':
         specifier: 'catalog:'
         version: 10.0.1(eslint@10.4.1)
@@ -284,10 +287,6 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 4.1.8(@types/node@20.19.42)(@vitest/coverage-v8@4.1.8)(vite@8.0.16(@types/node@20.19.42)(yaml@2.9.0))
-    optionalDependencies:
-      '@actions/github-script':
-        specifier: github:actions/github-script
-        version: https://codeload.github.com/actions/github-script/tar.gz/3a2844b7e9c422d3c10d287c895573f7108da1b3
 
   .github/shared:
     dependencies:
@@ -4249,7 +4248,6 @@ snapshots:
     dependencies:
       '@actions/exec': 1.1.1
       '@actions/http-client': 2.2.3
-    optional: true
 
   '@actions/core@3.0.1':
     dependencies:
@@ -4259,7 +4257,6 @@ snapshots:
   '@actions/exec@1.1.1':
     dependencies:
       '@actions/io': 1.1.3
-    optional: true
 
   '@actions/exec@3.0.0':
     dependencies:
@@ -4276,7 +4273,6 @@ snapshots:
       '@octokit/plugin-request-log': 6.0.0(@octokit/core@7.0.6)
       '@octokit/plugin-retry': 8.1.0(@octokit/core@7.0.6)
       '@types/node': 24.13.1
-    optional: true
 
   '@actions/github@9.1.1':
     dependencies:
@@ -4287,33 +4283,28 @@ snapshots:
       '@octokit/request': 10.0.10
       '@octokit/request-error': 7.1.0
       undici: 6.26.0
-    optional: true
 
   '@actions/glob@0.4.0':
     dependencies:
       '@actions/core': 1.11.1
       minimatch: 3.1.5
-    optional: true
 
   '@actions/http-client@2.2.3':
     dependencies:
       tunnel: 0.0.6
       undici: 6.26.0
-    optional: true
 
   '@actions/http-client@3.0.2':
     dependencies:
       tunnel: 0.0.6
       undici: 6.26.0
-    optional: true
 
   '@actions/http-client@4.0.1':
     dependencies:
       tunnel: 0.0.6
       undici: 6.26.0
 
-  '@actions/io@1.1.3':
-    optional: true
+  '@actions/io@1.1.3': {}
 
   '@actions/io@3.0.2': {}
 
@@ -5313,7 +5304,6 @@ snapshots:
       '@octokit/request-error': 7.1.0
       '@octokit/types': 16.0.0
       bottleneck: 2.19.5
-    optional: true
 
   '@octokit/request-error@7.1.0':
     dependencies:
@@ -5782,7 +5772,6 @@ snapshots:
   '@types/node@24.13.1':
     dependencies:
       undici-types: 7.18.2
-    optional: true
 
   '@types/node@25.9.2':
     dependencies:
@@ -6216,8 +6205,7 @@ snapshots:
 
   bluebird@3.7.2: {}
 
-  bottleneck@2.19.5:
-    optional: true
+  bottleneck@2.19.5: {}
 
   brace-expansion@1.1.15:
     dependencies:
@@ -7920,8 +7908,7 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  undici-types@7.18.2:
-    optional: true
+  undici-types@7.18.2: {}
 
   undici-types@7.24.6: {}
 
