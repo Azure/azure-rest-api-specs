@@ -56,7 +56,7 @@ interface AppAttachPackages {
        * Allows force delete
        * @Introduced in 2023-10-04-preview
        */
-      @added(Versions.vLatestPreview)
+      @added(Versions.v2026_01_01_preview)
       @query("force")
       force?: boolean;
     }

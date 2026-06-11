@@ -611,7 +611,7 @@ union ScalingHostPoolType {
    * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
    * @Introduced in 2024-04-08-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_01_01_preview)
   Personal: "Personal",
 }
 
@@ -1490,28 +1490,28 @@ model AppAttachPackageProperties {
    * Specific name of package owner, is "AppAttach" for native app attach packages
    * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_01_01_preview)
   packageOwnerName?: string;
 
   /**
    * Lookback url to third party control plane, is null for native app attach packages
    * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_01_01_preview)
   packageLookbackUrl?: url;
 
   /**
    * Field that can be populated with custom data and filtered on in list GET calls
    * @Introduced in 2024-03-06-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_01_01_preview)
   customData?: string;
 
   /**
    * DeploymentScope type for AppAttachPackage.
    * @Introduced in 2025-08-01-preview
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_01_01_preview)
   deploymentScope?: DeploymentScope;
 }
 
