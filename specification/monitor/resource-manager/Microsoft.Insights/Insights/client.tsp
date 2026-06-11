@@ -313,3 +313,19 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   PrivateLinkScopeOperationStatusGetCustomized,
   "python"
 );
+
+@@clientName(
+  ActionGroupsApi.ActionGroup,
+  "ActionGroupResourceProperties",
+  "python"
+);
+@@clientName(
+  ActivityLogAlertsApi.ActivityLogAlertActionGroup,
+  "ActionGroup",
+  "python"
+);
+@@clientName(
+  Microsoft.Common.CommonErrorResponse,
+  "ErrorResponseCommon",
+  "python"
+);
