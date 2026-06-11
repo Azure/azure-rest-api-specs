@@ -48,7 +48,10 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
-      ...OptionalToolProjectConnectionIdField,
+      /**
+       * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+       */
+      project_connection_id?: string,
     }
   );
 
@@ -131,26 +134,6 @@ namespace Azure.AI.Projects {
   };
 
   /**
-   * Optional project connection ID for tools that can use project-scoped connections.
-   */
-  alias OptionalToolProjectConnectionIdField = {
-    /**
-     * The project connection ID used by this tool.
-     */
-    project_connection_id?: string;
-  };
-
-  /**
-   * Required project connection ID for tools that use project-scoped connections.
-   */
-  alias RequiredToolProjectConnectionIdField = {
-    /**
-     * The project connection ID used by this tool.
-     */
-    project_connection_id: string;
-  };
-
-  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -226,16 +209,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Shared fields for Azure AI Search tool definitions.
-   */
-  model AzureAISearchToolFields {
-    /**
-     * The azure ai search index resource.
-     */
-    azure_ai_search: AzureAISearchToolResource;
-  }
-
-  /**
    * The input definition information for an Azure AI search tool as used to configure an agent.
    */
   model AzureAISearchTool extends OpenAI.Tool {
@@ -245,7 +218,11 @@ namespace Azure.AI.Projects {
     type: "azure_ai_search";
 
     ...ToolNameAndDescriptionExtension;
-    ...AzureAISearchToolFields;
+
+    /**
+     * The azure ai search index resource.
+     */
+    azure_ai_search: AzureAISearchToolResource;
   }
 
   /**
@@ -323,16 +300,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Shared fields for OpenAPI tool definitions.
-   */
-  model OpenApiToolFields {
-    /**
-     * The openapi function definition.
-     */
-    openapi: OpenApiFunctionDefinition;
-  }
-
-  /**
    * The input definition information for an OpenAPI tool as used to configure an agent.
    */
   model OpenApiTool extends OpenAI.Tool {
@@ -341,7 +308,10 @@ namespace Azure.AI.Projects {
      */
     type: "openapi";
 
-    ...OpenApiToolFields;
+    /**
+     * The openapi function definition.
+     */
+    openapi: OpenApiFunctionDefinition;
   }
 
   /**
@@ -769,9 +739,14 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Shared fields for A2A tool definitions.
+   * An agent implementing the A2A protocol.
    */
-  model A2APreviewToolFields {
+  model A2APreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `"a2a_preview`.
+     */
+    type: "a2a_preview";
+
     /**
      * Base URL of the agent.
      */
@@ -783,20 +758,13 @@ namespace Azure.AI.Projects {
      */
     agent_card_path?: string;
 
-    ...OptionalToolProjectConnectionIdField;
-  }
-
-  /**
-   * An agent implementing the A2A protocol.
-   */
-  model A2APreviewTool extends OpenAI.Tool {
     /**
-     * The type of the tool. Always `"a2a_preview`.
+     * The connection ID in the project for the A2A server.
+     * The connection stores authentication and other connection details needed to connect to the A2A server.
      */
-    type: "a2a_preview";
+    project_connection_id?: string;
 
     ...ToolNameAndDescriptionExtension;
-    ...A2APreviewToolFields;
   }
 
   /**
@@ -808,15 +776,27 @@ namespace Azure.AI.Projects {
      */
     type: "work_iq_preview";
 
-    ...RequiredToolProjectConnectionIdField;
+    /**
+     * The ID of the WorkIQ project connection.
+     */
+    project_connection_id: string;
+
     ...ToolNameAndDescriptionExtension;
   }
 
   /**
-   * Shared fields for FabricIQ tool definitions.
+   * A FabricIQ server-side tool.
    */
-  model FabricIQPreviewToolFields {
-    ...RequiredToolProjectConnectionIdField;
+  model FabricIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'fabric_iq_preview'.
+     */
+    type: "fabric_iq_preview";
+
+    /**
+     * The ID of the FabricIQ project connection.
+     */
+    project_connection_id: string;
 
     /**
      * (Optional) The label of the FabricIQ MCP server to connect to.
@@ -834,18 +814,7 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
-  }
 
-  /**
-   * A FabricIQ server-side tool.
-   */
-  model FabricIQPreviewTool extends OpenAI.Tool {
-    /**
-     * The object type, which is always 'fabric_iq_preview'.
-     */
-    type: "fabric_iq_preview";
-
-    ...FabricIQPreviewToolFields;
     ...ToolNameAndDescriptionExtension;
   }
 

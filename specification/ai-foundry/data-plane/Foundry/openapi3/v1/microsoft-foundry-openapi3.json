@@ -14950,14 +14950,6 @@
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "base_url": {
             "type": "string",
             "format": "uri",
@@ -14969,7 +14961,15 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -14990,7 +14990,7 @@
             "enum": [
               "a2a_preview"
             ],
-            "description": "The type of the tool. Always `a2a_preview`."
+            "description": "The type of the tool. Always `\"a2a_preview`."
           },
           "base_url": {
             "type": "string",
@@ -15003,7 +15003,7 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The connection ID in the project for the A2A server.\nThe connection stores authentication and other connection details needed to connect to the A2A server."
           }
         },
         "allOf": [
@@ -16908,7 +16908,7 @@
             "enum": [
               "azure_ai_search"
             ],
-            "description": "The type of the tool. Always `azure_ai_search`."
+            "description": "The object type, which is always 'azure_ai_search'."
           },
           "azure_ai_search": {
             "allOf": [
@@ -18595,7 +18595,8 @@
             "enum": [
               "code_interpreter"
             ],
-            "description": "The type of the tool. Always `code_interpreter`."
+            "description": "The type of the code interpreter tool. Always `code_interpreter`.",
+            "x-stainless-const": true
           },
           "container": {
             "anyOf": [
@@ -22594,7 +22595,7 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The ID of the FabricIQ project connection."
           },
           "server_label": {
             "type": "string",
@@ -22652,11 +22653,11 @@
             "enum": [
               "fabric_iq_preview"
             ],
-            "description": "The type of the tool. Always `fabric_iq_preview`."
+            "description": "The object type, which is always 'fabric_iq_preview'."
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The ID of the FabricIQ project connection."
           },
           "server_label": {
             "type": "string",
@@ -22806,7 +22807,9 @@
             "enum": [
               "file_search"
             ],
-            "description": "The type of the tool. Always `file_search`."
+            "description": "The type of the file search tool. Always `file_search`.",
+            "x-stainless-const": true,
+            "default": "file_search"
           },
           "max_num_results": {
             "allOf": [
@@ -24024,7 +24027,8 @@
             "enum": [
               "mcp"
             ],
-            "description": "The type of the tool. Always `mcp`."
+            "description": "The type of the MCP tool. Always `mcp`.",
+            "x-stainless-const": true
           },
           "server_label": {
             "type": "string",
@@ -24108,7 +24112,7 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
           }
         },
         "allOf": [
@@ -38472,7 +38476,7 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
           }
         },
         "allOf": [
@@ -45136,7 +45140,7 @@
             "enum": [
               "openapi"
             ],
-            "description": "The type of the tool. Always `openapi`."
+            "description": "The object type, which is always 'openapi'."
           },
           "openapi": {
             "allOf": [
@@ -49597,7 +49601,8 @@
             "enum": [
               "web_search"
             ],
-            "description": "The type of the tool. Always `web_search`."
+            "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.",
+            "default": "web_search"
           },
           "filters": {
             "type": "object",
@@ -49688,7 +49693,7 @@
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The ID of the WorkIQ project connection."
           },
           "name": {
             "type": "string",
@@ -49718,11 +49723,11 @@
             "enum": [
               "work_iq_preview"
             ],
-            "description": "The type of the tool. Always `work_iq_preview`."
+            "description": "The object type, which is always 'work_iq_preview'."
           },
           "project_connection_id": {
             "type": "string",
-            "description": "The project connection ID used by this tool."
+            "description": "The ID of the WorkIQ project connection."
           }
         },
         "allOf": [
