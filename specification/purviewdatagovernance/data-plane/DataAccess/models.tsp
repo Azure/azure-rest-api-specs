@@ -56,25 +56,32 @@ model DataSubscription {
   @visibility(Lifecycle.Read)
   dataSubscriptionId: uuid;
 
-  @doc("Whether this subscription uses a workflow.")
+  @doc("Whether this subscription uses a workflow. Derived from the data product's workflow settings; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   useWorkflow?: boolean;
 
-  @doc("The workflow identifier associated with this subscription.")
+  @doc("The workflow identifier associated with this subscription. Resolved server-side from the data product's workflow settings; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   workflowId?: string;
 
-  @doc("The type of workflow.")
+  @doc("The type of workflow. Resolved server-side from the data product's workflow settings; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   workflowType?: string;
 
-  @doc("The name of the workflow.")
+  @doc("The name of the workflow. Resolved server-side from the data product's workflow settings; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   workflowName?: string;
 
-  @doc("The governance domain path.")
+  @doc("The governance domain path. Enriched server-side from the data product; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   governanceDomain?: string;
 
-  @doc("Whether write access is requested.")
+  @doc("Whether write access is requested. Resolved server-side from the request context; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   writeAccess?: boolean;
 
-  @doc("The status of the subscription.")
+  @doc("The status of the subscription. Transitioned by the approve/reject/complete endpoints; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   subscriptionStatus?: DataSubscriptionStatus;
 
   @doc("The identity of the subscriber.")
@@ -89,10 +96,12 @@ model DataSubscription {
   @doc("The data product identifier.")
   dataProductId: uuid;
 
-  @doc("The name of the data product.")
+  @doc("The name of the data product. Enriched server-side from the referenced data product; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   dataProductName?: string;
 
-  @doc("The name of the business domain.")
+  @doc("The name of the business domain. Enriched server-side from the referenced data product; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   businessDomainName?: string;
 
   @doc("A general comment for the subscription.")
@@ -109,7 +118,8 @@ model DataSubscription {
   @visibility(Lifecycle.Read)
   createdBy?: string;
 
-  @doc("The access expiration date.")
+  @doc("The access expiration date. Computed server-side from the policy duration at approval time; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   accessExpirationDate?: utcDateTime;
 
   @doc("The date when the access decision was made.")
@@ -119,10 +129,12 @@ model DataSubscription {
   @doc("The data assets included in the subscription.")
   dataAssets?: DataAssetValues[];
 
-  @doc("The list of access provider identifiers.")
+  @doc("The list of access provider identifiers. Derived server-side from the workflow approvers; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   accessProviders?: string[];
 
-  @doc("Whether Power Automate is used.")
+  @doc("Whether Power Automate is used. Resolved server-side from the data product's workflow settings; read-only on the wire.")
+  @visibility(Lifecycle.Read)
   usePowerAutomate?: boolean;
 }
 
