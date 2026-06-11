@@ -4,9 +4,9 @@ import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
