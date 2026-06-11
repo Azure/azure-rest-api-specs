@@ -24,7 +24,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the operations in KubernetesConfiguration.
 
-``` yaml
+```yaml
 title: OperationsClient
 description: Operations Client
 openapi-type: arm
@@ -37,7 +37,7 @@ tag: package-2025-04
 
 These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2026-06'
+```yaml $(tag) == 'package-preview-2026-06'
 input-file:
   - preview/2026-06-15-preview/operations.json
 suppressions:
@@ -61,22 +61,22 @@ suppressions:
 
 These settings apply only when `--tag=package-2025-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-04'
+```yaml $(tag) == 'package-2025-04'
 input-file:
   - stable/2025-04-01/operations.json
 suppressions:
   - code: OperationsApiSchemaUsesCommonTypes
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: ResourceNameRestriction
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: OperationsApiResponseSchema
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: Existing service contract needs to be backward compatible.
 ```
 
 ---
@@ -85,22 +85,22 @@ suppressions:
 
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-03'
+```yaml $(tag) == 'package-2025-03'
 input-file:
   - stable/2025-03-01/operations.json
 suppressions:
   - code: OperationsApiSchemaUsesCommonTypes
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: ResourceNameRestriction
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: OperationsApiResponseSchema
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: Existing service contract needs to be backward compatible.
 ```
 
 ---
@@ -109,21 +109,20 @@ suppressions:
 
 These settings apply only when `--tag=package-2024-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-11'
+```yaml $(tag) == 'package-2024-11'
 input-file:
   - stable/2024-11-01/operations.json
 suppressions:
   - code: OperationsApiSchemaUsesCommonTypes
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: ResourceNameRestriction
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.
   - code: OperationsApiResponseSchema
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: Existing service contract needs to be backward compatible.
 ```
-
