@@ -63,7 +63,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -156,116 +156,13 @@
           "type": "array",
           "description": "List of async operations in progress, in the cluster.",
           "items": {
-            "$ref": "#/definitions/OperationStatusResult"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
           },
           "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of Operation Result objects, if any.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationStatusResult": {
-      "type": "object",
-      "description": "The current status of an async operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified ID for the async operation."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the async operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "Operation status."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Additional information, if available.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
-          "description": "If present, details of the operation error.",
-          "x-nullable": true,
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
-    "ResourceProviderOperation": {
-      "type": "object",
-      "description": "Supported operation of this resource provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Operation name, in format of {provider}/{resource}/{operation}"
-        },
-        "display": {
-          "$ref": "#/definitions/ResourceProviderOperationDisplay",
-          "description": "Display metadata associated with the operation."
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "The flag that indicates whether the operation applies to data plane.",
-          "readOnly": true
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationDisplay": {
-      "type": "object",
-      "description": "Display metadata associated with the operation.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Resource provider: Microsoft KubernetesConfiguration."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Resource on which the operation is performed."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Type of operation: get, read, delete, etc."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of this operation."
-        }
-      }
-    },
-    "ResourceProviderOperationList": {
-      "type": "object",
-      "description": "Result of the request to list operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by this resource provider.",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperation"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to the next set of results, if any.",
           "readOnly": true
         }
       }

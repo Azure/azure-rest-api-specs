@@ -64,7 +64,7 @@ enum Versions {
 
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<ResourceProviderOperationList>,
+      ArmResponse<Azure.ResourceManager.CommonTypes.OperationListResult>,
       ErrorResponse
     > {}
 @@doc(
