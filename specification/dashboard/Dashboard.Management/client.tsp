@@ -57,7 +57,10 @@ using Microsoft.Dashboard;
 );
 @@clientName(Smtp, "GrafanaSmtpSettings", "csharp");
 @@clientName(Smtp.enabled, "IsEnabled", "csharp");
+@@clientName(Smtp.startTLSPolicy, "StartTlsPolicy", "csharp");
 @@clientName(Users, "GrafanaUserSettings", "csharp");
+@@clientName(Users.editorsCanAdmin, "CanEditorsAdmin", "csharp");
+@@clientName(Users.viewersCanEdit, "CanViewersEdit", "csharp");
 @@clientName(StartTLSPolicy, "GrafanaStartTlsPolicy", "csharp");
 @@clientName(
   StartTLSPolicy.OpportunisticStartTLS,

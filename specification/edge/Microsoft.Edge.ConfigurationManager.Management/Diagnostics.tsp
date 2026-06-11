@@ -12,13 +12,26 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The properties of a Diagnostic resource.")
 model DiagnosticProperties {
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
+
+@doc("The updatable properties of the Diagnostic.")
+model DiagnosticUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: DiagnosticUpdateProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("The updatable properties of the Diagnostic.")
+model DiagnosticUpdateProperties is DiagnosticProperties;
 
 @doc("A Diagnostic resource.")
 @resource("diagnostics")
@@ -36,20 +49,6 @@ model Diagnostic
   ...ExtendedLocationProperty;
   ...EntityTagProperty;
 }
-
-/** The type used for update operations of the Diagnostic. */
-model DiagnosticUpdate {
-  @doc("The resource-specific properties for this resource.")
-  properties?: DiagnosticUpdateProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("Resource tags.")
-  tags?: Record<string>;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@doc("The updatable properties of the Diagnostic.")
-model DiagnosticUpdateProperties {}
 
 @armResourceOperations
 interface Diagnostics {
