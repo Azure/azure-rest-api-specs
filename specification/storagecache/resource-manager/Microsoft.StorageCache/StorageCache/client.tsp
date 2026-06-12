@@ -242,6 +242,12 @@ using Microsoft.StorageCache;
   "csharp"
 );
 
+@@clientName(ExpansionJobProperties.startTimeUTC, "StartedOn", "csharp");
+@@clientName(
+  ExpansionJobProperties.completionTimeUTC,
+  "CompletedOn",
+  "csharp"
+);
 @@clientName(CacheProperties.mountAddresses, "MountAddresses", "csharp");
 @@clientName(
   CacheActiveDirectorySettings.primaryDnsIpAddress,
