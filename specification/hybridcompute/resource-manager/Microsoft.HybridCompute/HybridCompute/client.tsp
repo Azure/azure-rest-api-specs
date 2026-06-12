@@ -103,6 +103,12 @@ union CustomPublicNetworkAccessType {
 @@clientLocation(Machines.setupExtensions, "ManagementClient", "go");
 @@clientLocation(Machines.upgradeExtensions, "ManagementClient", "go");
 
+@@clientName(
+  Machines.getValidationDetailsForMachine,
+  "GetValidationDetailsForMachinePrivateLinkScope",
+  "csharp"
+);
+
 // C# backward-compat renames to match GA SDK (AutoRest prepend-rp-prefix + rename-mapping)
 @@clientName(CloudMetadata, "HybridComputeCloudMetadata", "csharp");
 @@clientName(
@@ -112,6 +118,12 @@ union CustomPublicNetworkAccessType {
 );
 @@clientName(ConnectionDetail, "HybridComputeConnectionDetail", "csharp");
 @@clientName(ExtensionValue, "HybridComputeExtensionValue", "csharp");
+@@clientName(ExtensionValueV2, "HybridComputeExtensionValueV2", "csharp");
+@@clientName(
+  ExtensionPublisher,
+  "HybridComputeExtensionPublisher",
+  "csharp"
+);
 @@clientName(IpAddress, "HybridComputeIPAddress", "csharp");
 @@clientName(License, "HybridComputeLicense", "csharp");
 @@clientName(LicenseDetails, "HybridComputeLicenseDetails", "csharp");
@@ -128,6 +140,7 @@ union CustomPublicNetworkAccessType {
 );
 @@clientName(Machine, "HybridComputeMachine", "csharp");
 @@clientName(MachineExtension, "HybridComputeMachineExtension", "csharp");
+@@clientName(MachineRunCommand, "HybridComputeMachineRunCommand", "csharp");
 @@clientName(NetworkInterface, "HybridComputeNetworkInterface", "csharp");
 @@clientName(NetworkProfile, "HybridComputeNetworkProfile", "csharp");
 @@clientName(OSProfile, "HybridComputeOSProfile", "csharp");
