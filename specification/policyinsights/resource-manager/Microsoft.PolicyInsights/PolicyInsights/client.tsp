@@ -1865,6 +1865,16 @@ op attestationsListForResource(
   "CheckPolicyRestrictionsResult",
   "csharp"
 );
+@@clientName(
+  CheckRestrictionsResult.contentEvaluationResult,
+  "PolicyEvaluations",
+  "csharp"
+);
+@@clientName(
+  PolicyEvaluationResult.evaluationDetails,
+  "CheckRestrictionEvaluationDetails",
+  "csharp"
+);
 // Back-compat class renames (previously done via the autorest rename-mapping).
 @@clientName(Attestation, "PolicyAttestation", "csharp");
 @@clientName(Remediation, "PolicyRemediation", "csharp");
@@ -2466,13 +2476,28 @@ op attestationsListForResource(
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "for csharp sdk compat"
 @@clientName(
   PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
   "TriggerPolicyStateEvaluation",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "for csharp sdk compat"
 @@clientName(
   PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
   "TriggerPolicyStateEvaluation",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp sdk compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ComponentEventDetails,
+  Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp sdk compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ComponentStateDetails,
+  Foundations.Resource,
   "csharp"
 );
