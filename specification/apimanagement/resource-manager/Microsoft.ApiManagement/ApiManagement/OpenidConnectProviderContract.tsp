@@ -19,7 +19,7 @@ model OpenidConnectProviderContract
   is Azure.ResourceManager.ProxyResource<OpenidConnectProviderContractProperties> {
   ...ResourceNameParameter<
     Resource = OpenidConnectProviderContract,
-    KeyName = "opid",
+    KeyName = "openId",
     SegmentName = "openidConnectProviders",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
