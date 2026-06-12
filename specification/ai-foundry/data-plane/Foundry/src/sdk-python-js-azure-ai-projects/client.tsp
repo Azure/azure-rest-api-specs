@@ -3,36 +3,29 @@
 // the JS client (package @azure/ai-projects).
 //
 
-// Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
-import "../evaluation-rules/routes.tsp";
-
-// Stable operation (GA routes) without preview features
+import "../agents-optimization/routes.tsp";
+import "../agents-session-files/routes.tsp";
 import "../connections/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
-import "../indexes/routes.tsp";
-
-// Beta operations (preview routes, requiring opt-in request header)
+import "../evaluation-rules/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
+import "../indexes/routes.tsp";
 import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../models/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";
 import "../schedules/routes.tsp";
-import "../toolboxes/routes.tsp";
-import "../skills/routes.tsp";
-import "../agents-session-files/routes.tsp";
-import "../data_generation_jobs/routes.tsp";
-//import "../evaluation-suites/routes.tsp";
-import "../agents-optimization/routes.tsp";
-
-// Create a ".beta" subclient for the above beta operations
 import "../sdk-common/beta-ops-relocation-agents.tsp";
 import "../sdk-common/beta-ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
+import "../skills/routes.tsp";
+import "../toolboxes/routes.tsp";
+//import "../evaluation-suites/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;

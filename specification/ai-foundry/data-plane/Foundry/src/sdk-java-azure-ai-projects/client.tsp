@@ -1,23 +1,21 @@
 import "../common/service.tsp";
-import "../sdk-common/error.default.tsp";
-
 import "../connections/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
 import "../datasets/routes.tsp";
-import "../indexes/routes.tsp";
-import "../models/routes.tsp";
 import "../deployments/routes.tsp";
-import "../red-teams/routes.tsp";
 import "../evaluation-rules/routes.tsp";
-import "../openai-evaluations/models.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
+import "../indexes/routes.tsp";
 import "../insights/routes.tsp";
-import "../schedules/routes.tsp";
+import "../models/routes.tsp";
+import "../openai-evaluations/models.tsp";
+import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";
-import "../skills/routes.tsp";
-import "../data_generation_jobs/routes.tsp";
-
+import "../schedules/routes.tsp";
 import "../sdk-common/beta-ops-relocation-projects.tsp";
+import "../sdk-common/error.default.tsp";
+import "../skills/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
