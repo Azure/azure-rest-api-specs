@@ -427,13 +427,13 @@ op BotChannelsUpdate(
   ...Azure.ResourceManager.Legacy.Provider,
   resourceName: string,
   channelName: Microsoft.BotService.ChannelName,
-  properties: Microsoft.BotService.Channel,
-  location: string,
-  tags: Record<string>,
-  sku: Microsoft.BotService.Sku,
-  kind: Microsoft.BotService.Kind,
-  etag: string,
-  zones: string[],
+  properties?: Microsoft.BotService.Channel,
+  location?: string,
+  tags?: Record<string>,
+  sku?: Microsoft.BotService.Sku,
+  kind?: Microsoft.BotService.Kind,
+  etag?: string,
+  zones?: string[],
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
   | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
