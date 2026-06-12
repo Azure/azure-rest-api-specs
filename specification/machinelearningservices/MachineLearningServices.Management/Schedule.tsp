@@ -54,16 +54,18 @@ interface Schedules {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Schedule,
-    Response = ArmResourceUpdatedResponse<Schedule> | (ArmResourceCreatedResponse<
-      Schedule,
-      LroHeaders = ArmAsyncOperationHeader<Schedule>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Schedule>
+      | (ArmResourceCreatedResponse<
+          Schedule,
+          LroHeaders = ArmAsyncOperationHeader<Schedule>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -73,13 +75,16 @@ interface Schedules {
   @summary("Delete schedule.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**

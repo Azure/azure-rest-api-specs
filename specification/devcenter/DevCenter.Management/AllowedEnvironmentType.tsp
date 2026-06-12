@@ -44,6 +44,7 @@ interface AllowedEnvironmentTypes {
 @@maxLength(AllowedEnvironmentType.name, 63);
 @@minLength(AllowedEnvironmentType.name, 3);
 @@doc(AllowedEnvironmentType.name, "The name of the environment type.");
-@@doc(AllowedEnvironmentType.properties,
+@@doc(
+  AllowedEnvironmentType.properties,
   "Properties of an allowed environment type."
 );

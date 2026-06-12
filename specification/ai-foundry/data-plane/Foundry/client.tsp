@@ -51,7 +51,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
 @@clientName(Agents.listAgentVersions, "list_versions", "python");
-@@clientName(Agents.createAgentVersionFromManifest,
+@@clientName(
+  Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
@@ -96,7 +97,8 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
-@@clientName(MemoryStoreDeleteScopeResponse,
+@@clientName(
+  MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
   "python"
 );
@@ -105,12 +107,14 @@ using Azure.AI.Projects;
 // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
 // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
 @@alternateType(OpenAI.InputItem, Record<unknown>);
-@@clientDoc(MemoryStoreUpdateRequest.items,
+@@clientDoc(
+  MemoryStoreUpdateRequest.items,
   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
 );
-@@clientDoc(MemoryStoreSearchRequest.items,
+@@clientDoc(
+  MemoryStoreSearchRequest.items,
   "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
@@ -145,10 +149,12 @@ using Azure.AI.Projects;
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatText,
   "TextResponseFormatText"
 );
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
   "TextResponseFormatJsonObject"
 );
 
@@ -245,7 +251,8 @@ model AIProjectClientOptions {
   allow_preview?: boolean;
 }
 
-@@clientInitialization(Azure.AI.Projects,
+@@clientInitialization(
+  Azure.AI.Projects,
   {
     parameters: AIProjectClientOptions,
   },

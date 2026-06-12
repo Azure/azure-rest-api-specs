@@ -61,15 +61,19 @@ interface NetworkSecurityPerimeterConfigurations {
   createOrUpdate is Legacy.CreateOrReplaceAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | OkResponse
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 }
 
-@@doc(NetworkSecurityPerimeterConfiguration.name,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.name,
   "The ResourceAssociation Name"
 );
-@@doc(NetworkSecurityPerimeterConfiguration.properties,
+@@doc(
+  NetworkSecurityPerimeterConfiguration.properties,
   "Properties of the Network Security Perimeter Configuration"
 );

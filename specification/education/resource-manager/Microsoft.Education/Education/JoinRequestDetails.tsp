@@ -120,7 +120,8 @@ interface JoinRequests {
   >;
 }
 
-@@doc(JoinRequestDetails.name,
+@@doc(
+  JoinRequestDetails.name,
   "The ID that uniquely identifies a join request."
 );
 @@doc(JoinRequestDetails.properties, "join request properties.");

@@ -657,19 +657,6 @@ model ZoomQueryParameters {
 }
 
 /**
- * STAC Collection Identifier as a query parameter
- */
-@added(Versions.v2026_04_15)
-model CollectionQueryParameter {
-  /**
-   * STAC Collection Identifier
-   */
-  @added(Versions.v2026_04_15)
-  @query("collection")
-  collection?: string;
-}
-
-/**
  * Output Coordinate Reference System query parameter
  */
 @added(Versions.v2026_04_15)

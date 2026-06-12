@@ -537,18 +537,23 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   >;
 }
 
-@@doc(BillingRoleAssignment.name,
+@@doc(
+  BillingRoleAssignment.name,
   "The ID that uniquely identifies a role assignment."
 );
-@@doc(BillingRoleAssignment.properties,
+@@doc(
+  BillingRoleAssignment.properties,
   "The properties of the billing role assignment."
 );
-@@doc(BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount::parameters.resource,
+@@doc(
+  BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount::parameters.resource,
   "The properties of the billing role assignment."
 );
-@@doc(BillingRoleAssignmentByDepartment.createOrUpdateByDepartment::parameters.resource,
+@@doc(
+  BillingRoleAssignmentByDepartment.createOrUpdateByDepartment::parameters.resource,
   "The properties of the billing role assignment."
 );
-@@doc(BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount::parameters.resource,
+@@doc(
+  BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount::parameters.resource,
   "The properties of the billing role assignment."
 );

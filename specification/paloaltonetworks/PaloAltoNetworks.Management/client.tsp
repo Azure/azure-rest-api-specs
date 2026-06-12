@@ -4,7 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using PaloAltoNetworks.Cloudngfw;
 
-@@clientName(PaloAltoNetworks.Cloudngfw,
+@@clientName(
+  PaloAltoNetworks.Cloudngfw,
   "PaloAltoNetworksNgfwMgmtClient",
   "python"
 );
@@ -27,16 +28,19 @@ using PaloAltoNetworks.Cloudngfw;
 // CSharp
 @@clientName(EnabledDNSType.CUSTOM, "Custom", "csharp");
 @@clientName(EnabledDNSType.AZURE, "Azure", "csharp");
-@@clientName(CertificateObjectGlobalRulestackResource,
+@@clientName(
+  CertificateObjectGlobalRulestackResource,
   "GlobalRulestackCertificateObject",
   "csharp"
 );
-@@clientName(CertificateObjectLocalRulestackResource,
+@@clientName(
+  CertificateObjectLocalRulestackResource,
   "LocalRulestackCertificateObject",
   "csharp"
 );
 @@clientName(FirewallResource, "PaloAltoNetworksFirewall", "csharp");
-@@clientName(FirewallStatusResource,
+@@clientName(
+  FirewallStatusResource,
   "PaloAltoNetworksFirewallStatus",
   "csharp"
 );
@@ -46,19 +50,22 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(LocalRulesResource, "LocalRulestackRule", "csharp");
 @@clientName(LocalRulestackResource, "LocalRulestack", "csharp");
 @@clientName(PostRulesResource, "PostRulestackRule", "csharp");
-@@clientName(PrefixListGlobalRulestackResource,
+@@clientName(
+  PrefixListGlobalRulestackResource,
   "GlobalRulestackPrefix",
   "csharp"
 );
 @@clientName(PrefixListResource, "LocalRulestackPrefix", "csharp");
 @@clientName(PreRulesResource, "PreRulestackRule", "csharp");
 @@clientName(ActionEnum, "RulestackActionType", "csharp");
-@@clientName(AdvSecurityObjectListResponse,
+@@clientName(
+  AdvSecurityObjectListResponse,
   "AdvancedSecurityObjectListResult",
   "csharp"
 );
 @@clientName(AdvSecurityObjectModel, "AdvancedSecurityObject", "csharp");
-@@clientName(AdvSecurityObjectModel.type,
+@@clientName(
+  AdvSecurityObjectModel.type,
   "AdvSecurityObjectModelType",
   "csharp"
 );
@@ -78,11 +85,13 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(CountriesResponse, "RulestackCountryListResult", "csharp");
 @@clientName(Country, "RulestackCountry", "csharp");
 @@clientName(DecryptionRuleTypeEnum, "DecryptionRuleType", "csharp");
-@@clientName(DecryptionRuleTypeEnum.SSLOutboundInspection,
+@@clientName(
+  DecryptionRuleTypeEnum.SSLOutboundInspection,
   "SslOutboundInspection",
   "csharp"
 );
-@@clientName(DecryptionRuleTypeEnum.SSLInboundInspection,
+@@clientName(
+  DecryptionRuleTypeEnum.SSLInboundInspection,
   "SslInboundInspection",
   "csharp"
 );
@@ -100,12 +109,14 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(EndpointConfiguration, "FirewallEndpointConfiguration", "csharp");
 @@clientName(EventHub, "EventHubConfiguration", "csharp");
 @@alternateType(EventHub.id, Azure.Core.armResourceIdentifier, "csharp");
-@@clientName(FirewallResourceUpdateProperties,
+@@clientName(
+  FirewallResourceUpdateProperties,
   "FirewallUpdateProperties",
   "csharp"
 );
 @@clientName(FrontendSetting, "FirewallFrontendSetting", "csharp");
-@@clientName(GlobalRulestackResourceUpdateProperties,
+@@clientName(
+  GlobalRulestackResourceUpdateProperties,
   "GlobalRulestackUpdateProperties",
   "csharp"
 );
@@ -115,37 +126,44 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(HealthStatus.INITIALIZING, "Initializing", "csharp");
 @@clientName(HealthStatus.RED, "Red", "csharp");
 @@clientName(IPAddress, "IPAddressInfo", "csharp");
-@@alternateType(IPAddress.resourceId,
+@@alternateType(
+  IPAddress.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(IPAddressSpace, "IPAddressSpaceInfo", "csharp");
-@@alternateType(IPAddressSpace.resourceId,
+@@alternateType(
+  IPAddressSpace.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(ListAppIdResponse, "RulestackAppIdListResult", "csharp");
 @@clientName(ListFirewallsResponse, "RulestackFirewallListResult", "csharp");
-@@clientName(LocalRulestackResourceUpdateProperties,
+@@clientName(
+  LocalRulestackResourceUpdateProperties,
   "LocalRulestackUpdateProperties",
   "csharp"
 );
 @@clientName(LogDestination, "FirewallLogDestination", "csharp");
-@@clientName(LogDestination.storageConfigurations,
+@@clientName(
+  LogDestination.storageConfigurations,
   "StorageConfiguration",
   "csharp"
 );
-@@clientName(LogDestination.eventHubConfigurations,
+@@clientName(
+  LogDestination.eventHubConfigurations,
   "EventHubConfiguration",
   "csharp"
 );
-@@clientName(LogDestination.monitorConfigurations,
+@@clientName(
+  LogDestination.monitorConfigurations,
   "MonitorConfiguration",
   "csharp"
 );
 @@clientName(LogOption, "FirewallLogOption", "csharp");
 @@clientName(LogOption.SAME_DESTINATION, "SameDestination", "csharp");
-@@clientName(LogOption.INDIVIDUAL_DESTINATION,
+@@clientName(
+  LogOption.INDIVIDUAL_DESTINATION,
   "IndividualDestination",
   "csharp"
 );
@@ -169,7 +187,8 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(PanoramaConfig, "FirewallPanoramaConfiguration", "csharp");
 @@clientName(PanoramaStatus, "FirewallPanoramaStatus", "csharp");
 @@clientName(PlanData, "FirewallBillingPlanInfo", "csharp");
-@@clientName(PredefinedUrlCategoriesResponse,
+@@clientName(
+  PredefinedUrlCategoriesResponse,
   "PredefinedUrlCategoryListResult",
   "csharp"
 );
@@ -177,7 +196,8 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(ProtocolType.TCP, "Tcp", "csharp");
 @@clientName(ProtocolType.UDP, "Udp", "csharp");
 @@clientName(ProvisioningState, "FirewallProvisioningState", "csharp");
-@@clientName(ReadOnlyProvisioningState,
+@@clientName(
+  ReadOnlyProvisioningState,
   "FirewallProvisioningStateType",
   "csharp"
 );
@@ -186,7 +206,8 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(RuleCounter.timestamp, "ResponseOn", "csharp");
 @@clientName(RuleCounter.lastUpdatedTimestamp, "LastUpdatedOn", "csharp");
 @@clientName(RuleCounterReset, "FirewallRuleResetConter", "csharp");
-@@alternateType(RulestackDetails.resourceId,
+@@alternateType(
+  RulestackDetails.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -194,23 +215,28 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(ScopeType.LOCAL, "Local", "csharp");
 @@clientName(ScopeType.GLOBAL, "Global", "csharp");
 @@clientName(SecurityServices, "RulestackSecurityServices", "csharp");
-@@clientName(SecurityServicesResponse,
+@@clientName(
+  SecurityServicesResponse,
   "RulestackSecurityServiceListResult",
   "csharp"
 );
-@@clientName(SecurityServicesTypeList,
+@@clientName(
+  SecurityServicesTypeList,
   "RulestackSecurityServiceTypeList",
   "csharp"
 );
-@@clientName(SecurityServicesTypeList.type,
+@@clientName(
+  SecurityServicesTypeList.type,
   "SecurityServicesTypeListType",
   "csharp"
 );
-@@clientName(SecurityServicesTypeEnum,
+@@clientName(
+  SecurityServicesTypeEnum,
   "RulestackSecurityServiceType",
   "csharp"
 );
-@@clientName(SecurityServicesTypeEnum.ipsVulnerability,
+@@clientName(
+  SecurityServicesTypeEnum.ipsVulnerability,
   "IPsVulnerability",
   "csharp"
 );
@@ -234,29 +260,35 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(EnableStatus, "FreeTrialEnableStatus", "csharp");
 @@clientName(RegistrationStatus, "AccountRegistrationStatus", "csharp");
 @@clientName(MetricsObjectFirewallResource, "MetricsObjectFirewall", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(RulestackProperties.panEtag, Azure.Core.eTag, "csharp");
-@@alternateType(LocalRulestackResource.identity,
+@@alternateType(
+  LocalRulestackResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@clientName(RulestackProperties.panEtag, "PanETag", "csharp");
-@@alternateType(RulestackProperties.panLocation,
+@@alternateType(
+  RulestackProperties.panLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(GlobalRulestackResourceUpdateProperties.panEtag,
+@@alternateType(
+  GlobalRulestackResourceUpdateProperties.panEtag,
   Azure.Core.eTag,
   "csharp"
 );
-@@clientName(GlobalRulestackResourceUpdateProperties.panEtag,
+@@clientName(
+  GlobalRulestackResourceUpdateProperties.panEtag,
   "PanETag",
   "csharp"
 );
-@@alternateType(GlobalRulestackResourceUpdateProperties.panLocation,
+@@alternateType(
+  GlobalRulestackResourceUpdateProperties.panLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -264,64 +296,78 @@ using PaloAltoNetworks.Cloudngfw;
 @@alternateType(FqdnObject.etag, Azure.Core.eTag, "csharp");
 @@alternateType(RuleEntry.etag, Azure.Core.eTag, "csharp");
 @@alternateType(PrefixObject.etag, Azure.Core.eTag, "csharp");
-@@alternateType(FirewallResource.identity,
+@@alternateType(
+  FirewallResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(FirewallDeploymentProperties.panEtag,
+@@alternateType(
+  FirewallDeploymentProperties.panEtag,
   Azure.Core.eTag,
   "csharp"
 );
 @@clientName(FirewallDeploymentProperties.panEtag, "PanETag", "csharp");
-@@alternateType(FirewallResourceUpdateProperties.panEtag,
+@@alternateType(
+  FirewallResourceUpdateProperties.panEtag,
   Azure.Core.eTag,
   "csharp"
 );
 @@clientName(FirewallResourceUpdateProperties.panEtag, "PanETag", "csharp");
 @@alternateType(MetricsObject.panEtag, Azure.Core.eTag, "csharp");
 @@clientName(MetricsObject.panEtag, "PanETag", "csharp");
-@@alternateType(LocalRulestackResourceUpdate.identity,
+@@alternateType(
+  LocalRulestackResourceUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(LocalRulestackResourceUpdateProperties.panEtag,
+@@alternateType(
+  LocalRulestackResourceUpdateProperties.panEtag,
   Azure.Core.eTag,
   "csharp"
 );
-@@clientName(LocalRulestackResourceUpdateProperties.panEtag,
+@@clientName(
+  LocalRulestackResourceUpdateProperties.panEtag,
   "PanETag",
   "csharp"
 );
-@@alternateType(LocalRulestackResourceUpdateProperties.panLocation,
+@@alternateType(
+  LocalRulestackResourceUpdateProperties.panLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(GlobalRulestackResource.location,
+@@alternateType(
+  GlobalRulestackResource.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(GlobalRulestackResource.identity,
+@@alternateType(
+  GlobalRulestackResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(GlobalRulestackResourceUpdate.location,
+@@alternateType(
+  GlobalRulestackResourceUpdate.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(GlobalRulestackResourceUpdate.identity,
+@@alternateType(
+  GlobalRulestackResourceUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(RulestackDetails.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(FirewallResourceUpdate.identity,
+@@alternateType(
+  FirewallResourceUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@clientName(VnetConfiguration.ipOfTrustSubnetForUdr,
+@@clientName(
+  VnetConfiguration.ipOfTrustSubnetForUdr,
   "IPOfTrustSubnetForUdr",
   "csharp"
 );
-@@clientName(VwanConfiguration.ipOfTrustSubnetForUdr,
+@@clientName(
+  VwanConfiguration.ipOfTrustSubnetForUdr,
   "IPOfTrustSubnetForUdr",
   "csharp"
 );
@@ -334,6 +380,7 @@ using PaloAltoNetworks.Cloudngfw;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
 @@Legacy.nextLinkVerb(LocalRulestackResources.listCountries, "POST");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "POST nextlink"
-@@Legacy.nextLinkVerb(LocalRulestackResources.listPredefinedUrlCategories,
+@@Legacy.nextLinkVerb(
+  LocalRulestackResources.listPredefinedUrlCategories,
   "POST"
 );

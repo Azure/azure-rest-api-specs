@@ -47,7 +47,8 @@ alias ContainerAppsDiagnosticsRevisionOps = Azure.ResourceManager.Legacy.LegacyO
     @key
     revisionName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppDetectorPropertyRevision"
 >;
 
 alias ContainerAppsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -70,7 +71,32 @@ alias ContainerAppsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     detectorName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppDetector"
+>;
+
+alias ContainerAppDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    containerAppName: string;
+  },
+  {
+    /** Proxy API Name for the Container App diagnostic root. */
+    @path
+    @segment("detectorProperties")
+    @key
+    rootApi: "rootApi/";
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppDetectorProperty"
 >;
 
 @armResourceOperations
@@ -98,19 +124,13 @@ interface ContainerAppsDiagnostics {
     },
     Error = DefaultErrorResponse
   >;
-
   /**
    * Get the properties of a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get the properties of a Container App.")
-  @get
-  @action("detectorProperties/rootApi/")
-  getRoot is ArmResourceActionSync<
+  getRoot is ContainerAppDetectorPropertyOps.Read<
     ContainerApp,
-    void,
-    ArmResponse<ContainerApp> | ContainerAppsNotFoundError,
-    Error = DefaultErrorResponse
+    Response = ArmResponse<ContainerApp> | ContainerAppsNotFoundError
   >;
 
   /**
@@ -154,7 +174,8 @@ alias JobsDiagnosticsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations
     @pattern("^[-\\w\\._\\(\\)]+$")
     detectorName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppJobDetector"
 >;
 
 alias ManagedEnvironmentDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -177,7 +198,32 @@ alias ManagedEnvironmentDetectorOps = Azure.ResourceManager.Legacy.LegacyOperati
     @key
     detectorName: string;
   },
-  ErrorType = DefaultErrorResponse
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppManagedEnvironmentDetector"
+>;
+
+alias ContainerAppManagedEnvironmentDetectorResourcePropertyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    environmentName: string;
+  },
+  {
+    /** Proxy API Name for the managed environment diagnostic root. */
+    @path
+    @segment("detectorProperties")
+    @key
+    rootApi: "rootApi/";
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "ContainerAppManagedEnvironmentDetectorResourceProperty"
 >;
 
 @armResourceOperations
@@ -188,13 +234,9 @@ interface ManagedEnvironmentsDiagnostics {
    * Get the properties of a Managed Environment used to host container apps.
    */
   @summary("Get the properties of a Managed Environment.")
-  @get
-  @action("detectorProperties/rootApi/")
-  getRoot is ArmResourceActionSync<
+  getRoot is ContainerAppManagedEnvironmentDetectorResourcePropertyOps.Read<
     ManagedEnvironment,
-    void,
-    ArmResponse<ManagedEnvironment>,
-    Error = DefaultErrorResponse
+    Response = ArmResponse<ManagedEnvironment>
   >;
 
   /**

@@ -56,9 +56,11 @@ interface PeeringRegisteredPrefixes {
 }
 
 @@doc(PeeringRegisteredPrefix.name, "The name of the registered prefix.");
-@@doc(PeeringRegisteredPrefix.properties,
+@@doc(
+  PeeringRegisteredPrefix.properties,
   "The properties that define a registered prefix."
 );
-@@doc(PeeringRegisteredPrefixes.createOrUpdate::parameters.resource,
+@@doc(
+  PeeringRegisteredPrefixes.createOrUpdate::parameters.resource,
   "The properties needed to create a registered prefix."
 );

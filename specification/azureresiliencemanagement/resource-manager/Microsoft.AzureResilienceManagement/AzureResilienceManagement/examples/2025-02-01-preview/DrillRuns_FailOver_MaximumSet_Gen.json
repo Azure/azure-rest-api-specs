@@ -1,0 +1,34 @@
+{
+  "title": "DrillRuns_FailOver_MaximumSet",
+  "operationId": "DrillRuns_FailOver",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2025-02-01-preview",
+    "operation-id": "qmn",
+    "drillName": "drill1",
+    "drillRunName": "ca92602e-53bf-43d2-ae62-d3fc940474b3",
+    "body": {
+      "failoverProperties": {
+        "failoverDirection": "FromSpecificLocations",
+        "failoverRequestProperties": {
+          "sourceLocations": [
+            "westus"
+          ]
+        }
+      },
+      "autoFailover": "Enable"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryJobs/c56888ef-9ced-4001-a6d4-7145a0309bdb"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

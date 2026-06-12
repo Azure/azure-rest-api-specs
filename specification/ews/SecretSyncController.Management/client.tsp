@@ -5,38 +5,46 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.SecretSyncController;
 
-@@clientName(Microsoft.SecretSyncController,
+@@clientName(
+  Microsoft.SecretSyncController,
   "SecretsStoreExtensionMgmt",
   "python"
 );
-@@clientName(Microsoft.SecretSyncController,
+@@clientName(
+  Microsoft.SecretSyncController,
   "SecretsStoreExtensionMgmtClient",
   "java"
 );
-@@clientName(Microsoft.SecretSyncController,
+@@clientName(
+  Microsoft.SecretSyncController,
   "SecretsStoreExtensionManagementClient",
   "javascript"
 );
 
 // CSharp
-@@clientName(AzureKeyVaultSecretProviderClass,
+@@clientName(
+  AzureKeyVaultSecretProviderClass,
   "KeyVaultSecretProviderClass",
   "csharp"
 );
-@@clientName(AzureKeyVaultSecretProviderClassProperties,
+@@clientName(
+  AzureKeyVaultSecretProviderClassProperties,
   "KeyVaultSecretProviderClassProperties",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "SecretsStoreExtensionProvisioningState",
   "csharp"
 );
 @@clientName(StatusConditionType, "SecretSyncConditionStatusType", "csharp");
-@@alternateType(AzureKeyVaultSecretProviderClassProperties.clientId,
+@@alternateType(
+  AzureKeyVaultSecretProviderClassProperties.clientId,
   uuid,
   "csharp"
 );
-@@alternateType(AzureKeyVaultSecretProviderClassProperties.tenantId,
+@@alternateType(
+  AzureKeyVaultSecretProviderClassProperties.tenantId,
   uuid,
   "csharp"
 );
