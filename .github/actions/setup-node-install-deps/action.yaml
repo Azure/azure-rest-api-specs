@@ -23,6 +23,7 @@ runs:
     - uses: pnpm/action-setup@v4
       with:
         standalone: true
+        package_json_file: ${{ inputs.working-directory }}/package.json
 
     - uses: actions/setup-node@v6
       with:

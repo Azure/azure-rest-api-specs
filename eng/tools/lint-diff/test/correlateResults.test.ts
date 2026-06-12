@@ -459,7 +459,7 @@ describe("getNewItems", () => {
         code: "SomeCode1",
         message: "Some Message",
         source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } },
         ],
         details: {},
       } as LintDiffViolation,
@@ -470,7 +470,7 @@ describe("getNewItems", () => {
         code: "SomeCode1",
         message: "Some Message",
         source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } },
         ],
         details: {},
       } as LintDiffViolation,
@@ -488,7 +488,7 @@ describe("getNewItems", () => {
         code: "SomeCode1",
         message: "Some Message",
         source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } },
         ],
         details: {},
       } as LintDiffViolation,
@@ -497,7 +497,7 @@ describe("getNewItems", () => {
         code: "SomeCode2",
         message: "Some Message",
         source: [
-          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } },
         ],
         details: {},
       } as LintDiffViolation,
@@ -514,12 +514,12 @@ describe("getNewItems", () => {
         code: "SomeCode1",
         message: "Some Message",
         source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } },
         ],
         details: {
           jsonpath: ["some", "path"],
         },
-      } as LintDiffViolation,
+      },
     ];
     const after = [
       {
@@ -527,7 +527,7 @@ describe("getNewItems", () => {
         code: "SomeCode1",
         message: "Some Message",
         source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } },
         ],
         details: {
           jsonpath: ["some", "path"],
@@ -538,7 +538,7 @@ describe("getNewItems", () => {
         code: "SomeCode2",
         message: "Some Message",
         source: [
-          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
+          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } },
         ],
         details: {
           jsonpath: ["some", "path"],

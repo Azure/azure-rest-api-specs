@@ -88,11 +88,31 @@ export async function execFile(file, args, options = {}) {
  * @throws {ExecError}
  */
 export async function execNpm(args, options = {}) {
-  const { prefix } = options;
+  const { prefix, cwd, logger, maxBuffer = 16 * 1024 * 1024 } = options;
 
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
+  const allArgs = [...prefixArgs, ...args];
 
-  return await execFile("pnpm", [...prefixArgs, ...args], options);
+  logger?.info(`execNpm(${JSON.stringify(allArgs)})`);
+
+  try {
+    // Use shell: true to support pnpm on all platforms (on Windows, pnpm is typically
+    // installed as pnpm.cmd which requires shell to resolve)
+    const result = await execFileImpl("pnpm", allArgs, {
+      cwd,
+      maxBuffer,
+      shell: process.platform === "win32",
+    });
+
+    logger?.debug(`stdout: '${result.stdout}'`);
+    logger?.debug(`stderr: '${result.stderr}'`);
+
+    return result;
+  } catch (error) {
+    /* v8 ignore next */
+    logger?.debug(`error: '${JSON.stringify(error)}'`);
+    throw error;
+  }
 }
 
 /**
