@@ -5,6 +5,8 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.BotService;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Microsoft.BotService;
 
@@ -425,8 +427,24 @@ op BotChannelsUpdate(
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * The name of the Bot resource.
+   */
+  @path
+  @segment("botServices")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @maxLength(64)
+  @minLength(2)
   resourceName: string,
-  channelName: Microsoft.BotService.ChannelName,
+
+  /**
+   * The name of the Channel resource.
+   */
+  @path
+  @segment("channels")
+  channelName: ChannelName,
+
   properties?: Microsoft.BotService.Channel,
 
   @visibility(Lifecycle.Read)
@@ -445,8 +463,26 @@ op BotChannelsUpdate(
 
 @@override(BotChannels.update, BotChannelsUpdate, "javascript");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Bots.update::parameters.properties,
-  "javascript"
-);
+op BotsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  resourceName: string,
+  properties?: Microsoft.BotService.BotProperties,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+
+  location?: string,
+  tags?: Record<string>,
+  sku?: Microsoft.BotService.Sku,
+  kind?: Microsoft.BotService.Kind,
+  etag?: string,
+  zones?: string[],
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.BotService.Bot>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
+  | Microsoft.BotService.Error;
+
+@@override(Bots.update, BotsUpdate, "javascript");
