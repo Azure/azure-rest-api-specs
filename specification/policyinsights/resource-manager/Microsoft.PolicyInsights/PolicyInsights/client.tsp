@@ -2063,6 +2063,36 @@ op attestationsListForResource(
 // those markers. Accepted as additive new public surface; revisit if the
 // generator gains support for marking these as pageable without modifying
 // the shared models.tsp.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "csharp"
+);
 
 // Remediations: hide management-group, subscription, resource-group scope operations from C#
 @@scope(Remediations.getAtManagementGroup, "!csharp");
