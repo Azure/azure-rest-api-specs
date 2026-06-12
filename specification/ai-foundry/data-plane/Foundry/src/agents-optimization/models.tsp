@@ -163,6 +163,7 @@ model OptimizationAgentDefinition {
 @doc("Tuning knobs and run-mode for an optimization job.")
 model OptimizationOptions {
   @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
+  @minValue(1)
   max_candidates?: int32 = 5;
 
   @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
