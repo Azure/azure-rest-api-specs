@@ -14,7 +14,7 @@ import {
 import { untilLastSegment } from "@azure-tools/specs-shared/path";
 import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { inspect } from "util";
-import { ReportableOavError } from "./formatting.js";
+import { type ReportableOavError } from "./formatting.ts";
 
 export async function preCheckFiltering(
   rootDirectory: string,
