@@ -37,14 +37,71 @@ using Microsoft.Kubernetes;
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(Operations.list, Operations);
 @@clientName(Operations.list, "Get");
-@@clientLocation(ConnectedClusters.get, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.createOrReplace, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.update, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.updateAsync, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.delete, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.listByResourceGroup, "ConnectedCluster");
-@@clientLocation(ConnectedClusters.listBySubscription, "ConnectedCluster");
+@@clientLocation(ConnectedClusters.get, "ConnectedCluster", "!javascript");
+@@clientLocation(
+  ConnectedClusters.createOrReplace,
+  "ConnectedCluster",
+  "!javascript"
+);
+@@clientLocation(ConnectedClusters.update, "ConnectedCluster", "!javascript");
+@@clientLocation(
+  ConnectedClusters.updateAsync,
+  "ConnectedCluster",
+  "!javascript"
+);
+@@clientLocation(ConnectedClusters.delete, "ConnectedCluster", "!javascript");
+@@clientLocation(
+  ConnectedClusters.listByResourceGroup,
+  "ConnectedCluster",
+  "!javascript"
+);
+@@clientLocation(
+  ConnectedClusters.listBySubscription,
+  "ConnectedCluster",
+  "!javascript"
+);
 @@clientLocation(
   ConnectedClusters.listClusterUserCredential,
-  "ConnectedCluster"
+  "ConnectedCluster",
+  "!javascript"
+);
+@@clientLocation(
+  ConnectedClusters.get,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.createOrReplace,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.update,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.updateAsync,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.delete,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.listByResourceGroup,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.listBySubscription,
+  "ConnectedClusterOperations",
+  "javascript"
+);
+@@clientLocation(
+  ConnectedClusters.listClusterUserCredential,
+  "ConnectedClusterOperations",
+  "javascript"
 );
