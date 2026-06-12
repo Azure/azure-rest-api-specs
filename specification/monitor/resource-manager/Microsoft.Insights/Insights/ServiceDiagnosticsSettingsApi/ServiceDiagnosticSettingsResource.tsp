@@ -39,6 +39,33 @@ model ServiceDiagnosticSettingsResource
   tags?: Record<string>;
 }
 
+alias ServiceDiagnosticSettingsResourcesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The identifier of the resource.
+     */
+    @path(#{ allowReserved: true })
+    @minLength(1)
+    resourceUri: string;
+  },
+  {
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /**
+     * The name of the diagnostic setting.
+     */
+    @path
+    @segment("diagnosticSettings")
+    diagnosticSetting: string;
+  },
+  "DiagnosticSetting"
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface ServiceDiagnosticSettingsResources {
@@ -46,10 +73,9 @@ interface ServiceDiagnosticSettingsResources {
    * Gets the active diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.
    */
   @tag("ServiceDiagnosticSettings")
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is ServiceDiagnosticSettingsResourcesOps.Read<
     ServiceDiagnosticSettingsResource,
-    Error = Microsoft.Common.ErrorResponse
+    ErrorType = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -57,22 +83,20 @@ interface ServiceDiagnosticSettingsResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ServiceDiagnosticSettings")
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  createOrUpdate is ServiceDiagnosticSettingsResourcesOps.CreateOrUpdateSync<
     ServiceDiagnosticSettingsResource,
     Response = ArmResourceUpdatedResponse<ServiceDiagnosticSettingsResource>,
-    Error = Microsoft.Common.ErrorResponse
+    ErrorType = Microsoft.Common.ErrorResponse
   >;
 
   /**
    * Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.
    */
   @patch(#{ implicitOptionality: false })
-  update is Extension.CustomPatchSync<
-    Extension.ScopeParameter,
+  update is ServiceDiagnosticSettingsResourcesOps.CustomPatchSync<
     ServiceDiagnosticSettingsResource,
     PatchModel = ServiceDiagnosticSettingsResourcePatch,
-    Error = Microsoft.Common.ErrorResponse
+    ErrorType = Microsoft.Common.ErrorResponse
   >;
 }
 

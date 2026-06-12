@@ -70,6 +70,33 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // C# compatibility names from the shipped AutoRest-based Azure.ResourceManager.Monitor package.
+// DCR association and diagnostic setting are extension resources whose GA SDK surface
+// used resource names without the TypeSpec proxy/service prefixes.
+@@clientName(
+  DataCollectionApi.DataCollectionRuleAssociation,
+  "DataCollectionRuleAssociationProperties",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionRuleAssociationProxyOnlyResource,
+  "DataCollectionRuleAssociation",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownDataCollectionRuleAssociationProvisioningState,
+  "DataCollectionRuleAssociationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettings,
+  "DiagnosticSettingsProperties",
+  "csharp"
+);
+@@clientName(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettingsResource,
+  "DiagnosticSetting",
+  "csharp"
+);
 @@clientName(
   PrivateLinkScopesApi.AzureMonitorPrivateLinkScope,
   "MonitorPrivateLinkScope",

@@ -27,7 +27,7 @@ model DataCollectionRuleAssociationProxyOnlyResource
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
-alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
@@ -38,6 +38,11 @@ alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager
     @minLength(1)
     resourceUri: string;
 
+  },
+  {
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
     ...Azure.ResourceManager.Legacy.Provider;
 
     /**
@@ -47,7 +52,7 @@ alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager
     @segment("dataCollectionRuleAssociations")
     associationName: string;
   },
-  {}
+  "DataCollectionRuleAssociation"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -57,10 +62,9 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
    */
   @tag("DataCollectionRuleAssociations")
   @summary("Returns the specified association.")
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is DataCollectionRuleAssociationProxyOnlyResourcesOps.Read<
     DataCollectionRuleAssociationProxyOnlyResource,
-    Error = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 
   /**
@@ -75,7 +79,7 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
     Response =
       | DataCollectionRuleAssociationProxyOnlyResource
       | ArmResourceCreatedSyncResponse<DataCollectionRuleAssociationProxyOnlyResource>,
-    OverrideErrorType = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 
   /**
@@ -83,10 +87,9 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
    */
   @tag("DataCollectionRuleAssociations")
   @summary("Deletes an association.")
-  delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
+  delete is DataCollectionRuleAssociationProxyOnlyResourcesOps.DeleteSync<
     DataCollectionRuleAssociationProxyOnlyResource,
-    Error = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 
   /**
@@ -94,10 +97,9 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
    */
   @tag("DataCollectionRuleAssociations")
   @summary("Lists associations for the specified resource.")
-  listByResource is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  listByResource is DataCollectionRuleAssociationProxyOnlyResourcesOps.List<
     DataCollectionRuleAssociationProxyOnlyResource,
-    Error = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 }
 
