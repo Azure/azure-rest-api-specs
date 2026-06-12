@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "../Common/main.tsp";
 import "../Common/NetworkInterface.tsp";
 import "../Common/NetworkInterfaceTapConfiguration.tsp";
-import "./NetworkInterface.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,22 +13,6 @@ using TypeSpec.OpenAPI;
 using Common;
 
 namespace Microsoft.Compute;
-
-/**
- * IPConfiguration in a virtual machine scale set VM network interface.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Common.Features.virtualNetwork)
-@parentResource(VirtualMachineScaleSetNetworkInterface)
-model VirtualMachineScaleSetNetworkInterfaceIPConfiguration
-  extends NetworkInterfaceIPConfiguration {
-  @visibility(Lifecycle.Read)
-  @path
-  @key("ipConfigurationName")
-  @segment("ipConfigurations")
-  name: string;
-}
 
 alias NetworkInterfaceIPConfigurationOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
@@ -52,7 +35,7 @@ interface NetworkInterfaceIPConfigurations {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}")
   @tag("NetworkInterfaces")
   getVirtualMachineScaleSetIpConfiguration is NetworkInterfaceIPConfigurationOps.ActionSync<
-    VirtualMachineScaleSetNetworkInterfaceIPConfiguration,
+    NetworkInterfaceIPConfiguration,
     Request = void,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -81,9 +64,7 @@ interface NetworkInterfaceIPConfigurations {
       @query("$expand")
       $expand?: string;
     },
-    Response = ArmResponse<
-      VirtualMachineScaleSetNetworkInterfaceIPConfiguration
-    >,
+    Response = ArmResponse<NetworkInterfaceIPConfiguration>,
     OverrideErrorType = CloudError
   >;
 
@@ -95,7 +76,7 @@ interface NetworkInterfaceIPConfigurations {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations")
   @tag("NetworkInterfaces")
   listVirtualMachineScaleSetIpConfigurations is NetworkInterfaceIPConfigurationOps.ActionSync<
-    VirtualMachineScaleSetNetworkInterfaceIPConfiguration,
+    NetworkInterfaceIPConfiguration,
     Request = void,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -122,9 +103,7 @@ interface NetworkInterfaceIPConfigurations {
       @query("$expand")
       $expand?: string;
     },
-    Response = ArmResponse<
-      ResourceListResult<VirtualMachineScaleSetNetworkInterfaceIPConfiguration>
-    >,
+    Response = ArmResponse<ResourceListResult<NetworkInterfaceIPConfiguration>>,
     OverrideErrorType = CloudError
   >;
 }

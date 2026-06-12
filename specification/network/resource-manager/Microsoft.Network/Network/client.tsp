@@ -135,7 +135,7 @@ namespace CombineClient {
 @@clientName(Microsoft.Network.NspServiceTagsResource, "NetworkSecurityPerimeterServiceTags", "csharp");
 @@clientName(Microsoft.Network.TagsObject, "NetworkTagsObject", "csharp");
 @@clientName(Microsoft.Network.Topology, "NetworkTopology", "csharp");
-@@clientName(Microsoft.Network.HttpMethod, "NetworkWatcherHttpMethod", "csharp");
+@@clientName(Microsoft.Network.HTTPMethod, "NetworkWatcherHttpMethod", "csharp");
 @@clientName(Microsoft.Network.Protocol, "NetworkWatcherProtocol", "csharp");
 @@clientName(Microsoft.Network.NextHopParameters, "NextHopContent", "csharp");
 @@clientName(Microsoft.Network.PacketCaptureParameters, "PacketCaptureCreateOrUpdateContent", "csharp");
@@ -175,9 +175,9 @@ namespace CombineClient {
 @@clientName(Microsoft.Network.IsWorkloadProtected, "WorkloadProtectedFlag", "csharp");
 @@clientName(Microsoft.Network.ApplicationGatewayEntraJWTValidationConfig, "ApplicationGatewayEntraJwtValidationConfig", "csharp");
 @@clientName(Microsoft.Network.VerifierWorkspaceProperties, "NetworkVerifierWorkspaceProperties", "csharp");
-@@clientName(Microsoft.Network.HttpConfigurationMethod, "NetworkHttpConfigurationMethod", "csharp");
+@@clientName(Microsoft.Network.HTTPConfigurationMethod, "NetworkHttpConfigurationMethod", "csharp");
 @@clientName(Microsoft.Network.ApplicationGatewayPrivateLinkIpConfiguration, "ApplicationGatewayPrivateLinkIPConfiguration", "csharp");
-@@clientName(Microsoft.Network.AzureFirewallIPGroups, "AzureFirewallIPGroups", "csharp");
+@@clientName(Microsoft.Network.AzureFirewallIpGroups, "AzureFirewallIPGroups", "csharp");
 @@clientName(Microsoft.Network.Ipv6ExpressRouteCircuitPeeringConfig, "IPv6ExpressRouteCircuitPeeringConfig", "csharp");
 @@clientName(Microsoft.Network.Ipv6CircuitConnectionConfig, "IPv6CircuitConnectionConfig", "csharp");
 @@clientName(Microsoft.Network.FirewallPolicySnat, "FirewallPolicySnat", "csharp");
@@ -250,10 +250,10 @@ namespace CombineClient {
 @@access(Microsoft.Network.ConnectionMonitorSourceStatus, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.ConnectionStateSnapshot, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.EvaluationState, Azure.ClientGenerator.Core.Access.public, "csharp");
-@@access(Microsoft.Network.FirewallPolicyIdpsQuerySortOrder, Azure.ClientGenerator.Core.Access.public, "csharp");
-@@access(Microsoft.Network.FirewallPolicyIdpsSignatureDirection, Azure.ClientGenerator.Core.Access.public, "csharp");
-@@access(Microsoft.Network.FirewallPolicyIdpsSignatureMode, Azure.ClientGenerator.Core.Access.public, "csharp");
-@@access(Microsoft.Network.FirewallPolicyIdpsSignatureSeverity, Azure.ClientGenerator.Core.Access.public, "csharp");
+@@access(Microsoft.Network.FirewallPolicyIDPSQuerySortOrder, Azure.ClientGenerator.Core.Access.public, "csharp");
+@@access(Microsoft.Network.FirewallPolicyIDPSSignatureDirection, Azure.ClientGenerator.Core.Access.public, "csharp");
+@@access(Microsoft.Network.FirewallPolicyIDPSSignatureMode, Azure.ClientGenerator.Core.Access.public, "csharp");
+@@access(Microsoft.Network.FirewallPolicyIDPSSignatureSeverity, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.Geo, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.InboundSecurityRule, Azure.ClientGenerator.Core.Access.public, "csharp");
 @@access(Microsoft.Network.PacketCaptureParameters, Azure.ClientGenerator.Core.Access.public, "csharp");
@@ -2909,22 +2909,22 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(FirewallPolicyIDPSSignatureSeverity.`3`, "THREE", "python");
 
 @@clientLocation(
-  VirtualHubRouteTableV2s.get,
+  VirtualHubs.virtualHubRouteTableV2sGet,
   "VirtualHubRouteTableV2S",
   "python"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.createOrUpdate,
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "VirtualHubRouteTableV2S",
   "python"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.virtualHubRouteTableV2sDelete,
+  VirtualHubs.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2S",
   "python"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.list,
+  VirtualHubs.virtualHubRouteTableV2sList,
   "VirtualHubRouteTableV2S",
   "python"
 );
@@ -3160,22 +3160,22 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.get,
+  VirtualHubs.virtualHubRouteTableV2sGet,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.createOrUpdate,
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.virtualHubRouteTableV2sDelete,
+  VirtualHubs.virtualHubRouteTableV2sDelete,
   "VirtualHubRouteTableV2S",
   "java"
 );
 @@clientLocation(
-  VirtualHubRouteTableV2s.list,
+  VirtualHubs.virtualHubRouteTableV2sList,
   "VirtualHubRouteTableV2S",
   "java"
 );
@@ -3214,6 +3214,125 @@ op replaceprivateDnsZoneGroupsList(
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
   "VirtualMachineScaleSetVmNetwork",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Compute.NetworkInterfaceIPConfigurations,
+  "VirtualMachineScaleSetNetworkInterfaceIPConfigurations",
+  "csharp"
+);
+
+@@clientLocation(P2SVpnGateways.reset, "P2sVpnGateways", "csharp");
+@@clientName(
+  Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsDelete,
+  "DeletePrivateDnsZoneGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsGet,
+  "GetPrivateDnsZoneGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
+  "CreateOrUpdatePrivateDnsZoneGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
+  "GetPrivateDnsZoneGroups",
+  "csharp"
+);
+@@clientName(
+  RouteFilters.routeFilterRulesDelete,
+  "DeleteRouteFilterRule",
+  "csharp"
+);
+@@clientName(RouteFilters.routeFilterRulesGet, "GetRouteFilterRule", "csharp");
+@@clientName(
+  RouteFilters.routeFilterRulesCreateOrUpdate,
+  "CreateOrUpdateRouteFilterRule",
+  "csharp"
+);
+@@clientName(RouteFilters.listByRouteFilter, "GetRouteFilterRules", "csharp");
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsDelete,
+  "DeleteNetworkVirtualApplianceConnection",
+  "csharp"
+);
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsGet,
+  "GetNetworkVirtualApplianceConnection",
+  "csharp"
+);
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate,
+  "CreateOrUpdateNetworkVirtualApplianceConnection",
+  "csharp"
+);
+@@clientName(
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsList,
+  "GetNetworkVirtualApplianceConnections",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.hubVirtualNetworkConnectionsDelete,
+  "DeleteHubVirtualNetworkConnection",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.hubVirtualNetworkConnectionsGet,
+  "GetHubVirtualNetworkConnection",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
+  "CreateOrUpdateHubVirtualNetworkConnection",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.hubVirtualNetworkConnectionsList,
+  "GetHubVirtualNetworkConnections",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.virtualHubRouteTableV2sDelete,
+  "DeleteVirtualHubRouteTableV2",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.virtualHubRouteTableV2sGet,
+  "GetVirtualHubRouteTableV2",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
+  "CreateOrUpdateVirtualHubRouteTableV2",
+  "csharp"
+);
+@@clientName(
+  VirtualHubs.virtualHubRouteTableV2sList,
+  "GetVirtualHubRouteTableV2s",
+  "csharp"
+);
+@@clientName(
+  ExpressRouteGateways.expressRouteConnectionsDelete,
+  "DeleteExpressRouteConnection",
+  "csharp"
+);
+@@clientName(
+  ExpressRouteGateways.expressRouteConnectionsGet,
+  "GetExpressRouteConnection",
+  "csharp"
+);
+@@clientName(
+  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
+  "CreateOrUpdateExpressRouteConnection",
+  "csharp"
+);
+@@clientName(
+  ExpressRouteGateways.list,
+  "GetExpressRouteConnections",
   "csharp"
 );
 @@clientName(Microsoft.Network.ConnectionMonitor, "ConnectionMonitorContent", "csharp");

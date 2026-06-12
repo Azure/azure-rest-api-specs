@@ -49,7 +49,7 @@ alias ExpressRoutePortAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOper
 
     /** The name of the express route port. */
     @path
-    @segment("ExpressRoutePorts")
+    @segment("expressRoutePorts")
     @key
     expressRoutePortName: string;
   },

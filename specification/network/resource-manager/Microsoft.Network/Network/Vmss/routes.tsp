@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "../Common/main.tsp";
 import "../Common/NetworkInterface.tsp";
 import "../Common/PublicIPAddress.tsp";
-import "./NetworkInterface.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
@@ -49,7 +48,7 @@ interface NetworkInterfacesOperationGroup {
   @list
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces")
   listVirtualMachineScaleSetNetworkInterfaces is NetworkInterfaceListOps.ActionSync<
-    VirtualMachineScaleSetNetworkInterface,
+    NetworkInterface,
     Request = void,
     Parameters = {
       /**
@@ -59,7 +58,7 @@ interface NetworkInterfacesOperationGroup {
       @key
       virtualMachineScaleSetName: string;
     },
-    Response = ArmResponse<ResourceListResult<VirtualMachineScaleSetNetworkInterface>>,
+    Response = ArmResponse<ResourceListResult<NetworkInterface>>,
     OverrideErrorType = CloudError
   >;
 }

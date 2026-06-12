@@ -73,9 +73,12 @@ interface NetworkVirtualApplianceConnections {
   /**
    * Creates a connection to Network Virtual Appliance, if it doesn't exist else updates the existing NVA connection'
    */
-  @autoRoute
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @put
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}")
+  networkVirtualApplianceConnectionsCreateOrUpdate is NetworkVirtualApplianceNetworkVirtualApplianceOps.ActionAsync<
+    NetworkVirtualAppliance,
     NetworkVirtualApplianceConnection,
+    void,
     Response =
       | ArmResponse<NetworkVirtualApplianceConnection>
       | (ArmResourceCreatedResponse<
@@ -83,14 +86,20 @@ interface NetworkVirtualApplianceConnections {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkVirtualApplianceConnection>
         > &
           Azure.Core.Foundations.RetryAfterHeader),
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Retrieves the details of specified NVA connection.
    */
-  @autoRoute
-  get is ArmResourceRead<NetworkVirtualApplianceConnection, Error = CloudError>;
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}")
+  networkVirtualApplianceConnectionsGet is NetworkVirtualApplianceNetworkVirtualApplianceOps.ActionSync<
+    NetworkVirtualAppliance,
+    void,
+    Response = ArmResponse<NetworkVirtualApplianceConnection>,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Deletes a NVA connection.
@@ -113,10 +122,14 @@ interface NetworkVirtualApplianceConnections {
   /**
    * Lists NetworkVirtualApplianceConnections under the NVA.
    */
+  @list
+  @get
   @autoRoute
-  list is ArmResourceListByParent<
-    NetworkVirtualApplianceConnection,
-    Response = ArmResponse<NetworkVirtualApplianceConnectionList>,
+  @action("networkVirtualApplianceConnections")
+  networkVirtualApplianceConnectionsList is ArmResourceActionSync<
+    NetworkVirtualAppliance,
+    void,
+    ArmResponse<NetworkVirtualApplianceConnectionList>,
     Error = CloudError
   >;
 }
@@ -246,6 +259,6 @@ interface NetworkVirtualAppliances {
   "Parameters supplied to retrieve boot diagnostic logs for a NVA VM instance"
 );
 @@doc(
-  NetworkVirtualApplianceConnections.createOrUpdate::parameters.resource,
+  NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
 );

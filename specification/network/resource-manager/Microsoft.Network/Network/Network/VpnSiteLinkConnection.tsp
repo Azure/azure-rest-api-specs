@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@parentResource(VpnConnection)
+@parentResource(VpnGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VpnSiteLinkConnection extends SubResourceModel {
   properties?: VpnSiteLinkConnectionProperties;
@@ -88,6 +88,13 @@ interface VpnSiteLinkConnections {
    */
   listByVpnConnection is ArmResourceListByParent<
     VpnSiteLinkConnection,
+    Parameters = {
+      /** The name of the vpn connection. */
+      @path
+      @segment("vpnConnections")
+      @key
+      connectionName: string;
+    },
     Response = ArmResponse<ListVpnSiteLinkConnectionsResult>,
     Error = CloudError
   >;

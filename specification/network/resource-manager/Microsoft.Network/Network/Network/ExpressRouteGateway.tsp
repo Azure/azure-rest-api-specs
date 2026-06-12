@@ -160,21 +160,19 @@ interface ExpressRouteGateways {
     ArmResponse<ExpressRouteGatewayList>,
     OverrideErrorType = CloudError
   >;
-}
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
-interface ExpressRouteConnections {
   /**
    * Creates a connection between an ExpressRoute gateway and an ExpressRoute circuit.
    */
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ExpressRouteConnections")
-  @autoRoute
+  @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
+  expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.ActionAsync<
+    ExpressRouteGateway,
     ExpressRouteConnection,
+    void,
     Response =
       | ArmResponse<ExpressRouteConnection>
       | ArmResourceCreatedResponse<
@@ -182,15 +180,21 @@ interface ExpressRouteConnections {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteConnection> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Gets the specified ExpressRouteConnection.
    */
   @tag("ExpressRouteConnections")
-  @autoRoute
-  get is ArmResourceRead<ExpressRouteConnection, Error = CloudError>;
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
+  expressRouteConnectionsGet is ExpressRouteConnectionOps.ActionSync<
+    ExpressRouteGateway,
+    void,
+    Response = ArmResponse<ExpressRouteConnection>,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Deletes a connection to a ExpressRoute circuit.
@@ -216,10 +220,12 @@ interface ExpressRouteConnections {
    * Lists ExpressRouteConnections.
    */
   @tag("ExpressRouteConnections")
-  @autoRoute
-  list is ArmResourceListByParent<
-    ExpressRouteConnection,
-    Response = ArmResponse<ExpressRouteConnectionList>,
+  @get
+  @action("expressRouteConnections")
+  list is ArmResourceActionSync<
+    ExpressRouteGateway,
+    void,
+    ArmResponse<ExpressRouteConnectionList>,
     Error = CloudError
   >;
 
@@ -387,6 +393,6 @@ interface ExpressRouteConnections {
   "Parameters supplied to update a virtual wan express route gateway tags."
 );
 @@doc(
-  ExpressRouteConnections.createOrUpdate::parameters.resource,
+  ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "Parameters required in an ExpressRouteConnection PUT operation."
 );
