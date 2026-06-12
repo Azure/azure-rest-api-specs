@@ -24,12 +24,15 @@ namespace Microsoft.HealthcareApis;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
 @@Legacy.flattenProperty(
   PrivateEndpointConnectionDescription.properties,
-  "java"
+  "java,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
-@@Legacy.flattenProperty(PrivateLinkResourceDescription.properties, "java");
+@@Legacy.flattenProperty(
+  PrivateLinkResourceDescription.properties,
+  "java,javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
 @@Legacy.flattenProperty(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnection.properties,
-  "java"
+  "java,javascript"
 );
