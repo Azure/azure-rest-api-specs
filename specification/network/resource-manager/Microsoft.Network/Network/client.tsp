@@ -4356,6 +4356,73 @@ namespace CombineClient {
   );
 
   // C# naming mitigations for MPG migration hierarchy parity.
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.ExpressRouteConnection,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.ExpressRouteCrossConnectionPeering,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.ExpressRouteLink,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.HubVirtualNetworkConnection,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.NetworkVirtualApplianceConnection,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.PacketCaptureResult,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.PrivateDnsZoneGroup,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.RouteFilterRule,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.VirtualHubRouteTableV2,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.VpnConnection,
+    Common.SubResourceModel,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    Microsoft.Network.ApplicationGatewayWafDynamicManifestResult,
+    Common.SubResourceModel,
+    "csharp"
+  );
+
   @@clientLocation(
     Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
     "VirtualMachineScaleSetNetwork",
