@@ -4154,6 +4154,11 @@
       "type": "object",
       "description": "Information about packet capture session.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the packet capture session.",
+          "readOnly": true
+        },
         "id": {
           "type": "string",
           "description": "ID of the packet capture operation.",
@@ -4169,12 +4174,7 @@
           "description": "Properties of the packet capture result.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Common.SubResourceModel"
-        }
-      ]
+      }
     },
     "PacketCaptureResultProperties": {
       "type": "object",

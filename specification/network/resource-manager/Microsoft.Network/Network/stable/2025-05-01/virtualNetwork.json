@@ -19194,6 +19194,10 @@
       "type": "object",
       "description": "Private dns zone group resource.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -19207,7 +19211,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Common.SubResourceModel"
+          "$ref": "./common.json#/definitions/Common.SubResource"
         }
       ]
     },
