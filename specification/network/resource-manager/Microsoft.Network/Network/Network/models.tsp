@@ -11592,12 +11592,8 @@ model ExpressRouteCircuitReference {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@parentResource(ExpressRouteCrossConnection)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteCrossConnectionPeering extends SubResourceModel {
+model ExpressRouteCrossConnectionPeering extends SubResource {
   /**
    * Properties of the express route cross connection peering.
    */
@@ -11606,11 +11602,7 @@ model ExpressRouteCrossConnectionPeering extends SubResourceModel {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("peeringName")
-  @segment("peerings")
-  name: string;
+  name?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -11900,13 +11892,9 @@ model ExpressRoutePortPropertiesFormat {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRouteLink")
-@parentResource(ExpressRoutePort)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteLink extends SubResourceModel {
+model ExpressRouteLink extends SubResource {
   /**
    * ExpressRouteLink properties.
    */
@@ -11915,11 +11903,7 @@ model ExpressRouteLink extends SubResourceModel {
   /**
    * Name of child port resource that is unique among child port resources of the parent.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("linkName")
-  @segment("links")
-  name: string;
+  name?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -17002,21 +16986,13 @@ model PacketCaptureSettings {
  * Information about packet capture session.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Brownfield child resource shape required for C# SDK API compatibility."
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
-@parentResource(NetworkWatcher)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model PacketCaptureResult extends SubResourceModel {
+model PacketCaptureResult {
   /**
    * Name of the packet capture session.
    */
   @visibility(Lifecycle.Read)
-  @path
-  @key("packetCaptureName")
-  @segment("packetCaptures")
-  name: string;
+  name?: string;
 
   /**
    * ID of the packet capture operation.
@@ -18859,20 +18835,12 @@ model AvailablePrivateEndpointType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@parentResource(Common.PrivateEndpoint)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model PrivateDnsZoneGroup extends SubResourceModel {
+model PrivateDnsZoneGroup extends SubResource {
   /**
    * Name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("privateDnsZoneGroupName")
-  @segment("privateDnsZoneGroups")
-  name: string;
+  name?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -19216,12 +19184,8 @@ model RouteFilterPropertiesFormat {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@parentResource(RouteFilter)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model RouteFilterRule extends SubResourceModel {
+model RouteFilterRule extends SubResource {
   /**
    * Properties of the route filter rule.
    */
@@ -19230,11 +19194,7 @@ model RouteFilterRule extends SubResourceModel {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("ruleName")
-  @segment("routeFilterRules")
-  name: string;
+  name?: string;
 
   /**
    * Resource location.
@@ -23124,12 +23084,8 @@ model VirtualHubRoute {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@parentResource(VirtualHub)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualHubRouteTableV2 extends SubResourceModel {
+model VirtualHubRouteTableV2 extends SubResource {
   /**
    * Properties of the virtual hub route table v2.
    */
@@ -23138,11 +23094,7 @@ model VirtualHubRouteTableV2 extends SubResourceModel {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("routeTableName")
-  @segment("routeTables")
-  name: string;
+  name?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -23359,12 +23311,8 @@ model ListRouteMapsResult is Azure.Core.Page<RouteMap>;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@parentResource(VirtualHub)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model HubVirtualNetworkConnection extends SubResourceModel {
+model HubVirtualNetworkConnection extends SubResource {
   /**
    * Properties of the hub virtual network connection.
    */
@@ -23373,11 +23321,7 @@ model HubVirtualNetworkConnection extends SubResourceModel {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("connectionName")
-  @segment("hubVirtualNetworkConnections")
-  name: string;
+  name?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -23497,12 +23441,8 @@ model VpnGatewayProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@parentResource(VpnGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VpnConnection extends SubResourceModel {
+model VpnConnection extends SubResource {
   /**
    * Properties of the VPN connection.
    */
@@ -23511,11 +23451,7 @@ model VpnConnection extends SubResourceModel {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("connectionName")
-  @segment("vpnConnections")
-  name: string;
+  name?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -24120,12 +24056,8 @@ model ExpressRouteGatewayPropertiesAutoScaleConfigurationBounds {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@parentResource(ExpressRouteGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteConnection extends SubResourceModel {
+model ExpressRouteConnection extends SubResource {
   /**
    * Properties of the express route connection.
    */
@@ -24134,10 +24066,6 @@ model ExpressRouteConnection extends SubResourceModel {
   /**
    * The name of the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("connectionName")
-  @segment("expressRouteConnections")
   name: string;
 }
 
@@ -24232,12 +24160,8 @@ model ExpressRouteConnectionList {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for brownfield C# SDK compatibility resource shape without changing payload metadata."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield child resource shape required for C# SDK API compatibility."
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@parentResource(NetworkVirtualAppliance)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkVirtualApplianceConnection extends SubResourceModel {
+model NetworkVirtualApplianceConnection extends SubResource {
   /**
    * Properties of the express route connection.
    */
@@ -24246,11 +24170,7 @@ model NetworkVirtualApplianceConnection extends SubResourceModel {
   /**
    * The name of the resource.
    */
-  @visibility(Lifecycle.Read)
-  @path
-  @key("connectionName")
-  @segment("networkVirtualApplianceConnections")
-  name: string;
+  name?: string;
 }
 
 /**
