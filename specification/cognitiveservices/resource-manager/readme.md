@@ -138,9 +138,11 @@ suppressions:
     where:
       - $.definitions.OutboundRuleBasicResource
   - code: AvoidAdditionalProperties
-    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    reason: ConnectionPropertiesV2.metadata is a user-defined key-value bag for arbitrary connection metadata. The schema intentionally uses additionalProperties to allow customers to attach custom metadata without requiring schema changes per key. This pattern is inherited from Machine Learning Services RP.
     where:
       - $.definitions.ConnectionPropertiesV2
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    reason: The CognitiveServices TypeSpec namespace uses common-types v3 via @armCommonTypesVersion decorator. Upgrading to v6 would change all existing API version swagger files and is out of scope for this PR. The upgrade should be coordinated across the CognitiveServices team as a separate change.
 ```
 
 

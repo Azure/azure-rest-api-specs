@@ -95,10 +95,7 @@ interface AccountPolicies {
 // --- Documentation annotations ---
 
 @@doc(PolicyResource.name, "The name of the policy.");
-@@doc(
-  PolicyResource.properties,
-  "Properties of the policy resource."
-);
+@@doc(PolicyResource.properties, "Properties of the policy resource.");
 @@doc(
   AccountPolicies.createOrUpdate::parameters.resource,
   "The policy resource to create or update."
