@@ -1,15 +1,15 @@
 import * as core from "@actions/core";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
-import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
+import { evaluateImpact, getRPaaSFolderList } from "./impact.ts";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { Octokit } from "@octokit/rest";
 import { writeFile } from "fs/promises";
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { parseArgs, type ParseArgsConfig } from "node:util";
 import { resolve } from "path";
-import { LabelContext } from "./labelling-types.js";
-import { PRContext } from "./PRContext.js";
+import { type LabelContext } from "./labelling-types.ts";
+import { PRContext } from "./PRContext.ts";
 
 export async function main() {
   const config: ParseArgsConfig = {
