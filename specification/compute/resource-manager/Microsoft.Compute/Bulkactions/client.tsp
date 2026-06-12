@@ -57,9 +57,9 @@ namespace Microsoft.Compute;
 @@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
 
-@@clientName(ResourceOperation, "ResourceOperationResult", "csharp");
+@@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
-@@clientName(RetryPolicy, "UserRequestRetryPolicy", "csharp");
+@@clientName(RetryPolicy, "BulkOperationRetryPolicy", "csharp");
 @@clientName(
   StartResourceOperationResponse,
   "StartResourceOperationResult",
