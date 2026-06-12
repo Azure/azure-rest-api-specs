@@ -528,6 +528,21 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(ScheduledQueryRuleApi.Condition, "ScheduledQueryRuleCondition", "csharp");
 @@clientName(ScheduledQueryRuleApi.Actions, "ScheduledQueryRuleActions", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSetting.name, "AutoscaleSettingName", "csharp");
+@@clientName(ActivityLogsApi.EventData, "EventDataInfo", "csharp");
+@@clientName(ActivityLogsApi.HttpRequestInfo, "EventDataHttpRequestInfo", "csharp");
+@@clientName(ActivityLogsApi.EventLevel, "MonitorEventLevel", "csharp");
+@@clientName(LocalizableString, "MonitorLocalizableString", "csharp");
+@@clientName(MetricBaselinesApi.SingleMetricBaseline, "MonitorSingleMetricBaseline", "csharp");
+@@clientName(MetricBaselinesApi.TimeSeriesBaseline, "MonitorTimeSeriesBaseline", "csharp");
+@@clientName(MetricsApi.MetricDefinition, "MonitorMetricDefinition", "csharp");
+@@clientName(MetricsApi.MetricClass, "MonitorMetricClass", "csharp");
+@@clientName(MetricsApi.MetricAvailability, "MonitorMetricAvailability", "csharp");
+@@clientName(MetricsApi.MetricAggregationType, "MonitorAggregationType", "csharp");
+@@clientName(MetricsApi.MetricUnit, "MonitorMetricUnit", "csharp");
+@@clientName(MetricsApi.MetricNamespace, "MonitorMetricNamespace", "csharp");
+@@clientName(MetricsApi.NamespaceClassification, "MonitorNamespaceClassification", "csharp");
+@@clientName(MetricsApi.Metric, "MonitorMetric", "csharp");
+@@clientName(MetricsApi.TimeSeriesElement, "MonitorTimeSeriesElement", "csharp");
 @@clientName(
   AutoScaleApi.AutoscaleSettingResources.predictiveMetricGet,
   "GetPredictiveMetric",
