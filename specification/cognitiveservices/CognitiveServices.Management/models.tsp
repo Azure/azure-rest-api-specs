@@ -5734,6 +5734,13 @@ model ManagedComputeDeploymentProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 
   /**
+   * Deployment capabilities represented as key-value pairs.
+   * Example: { assetsV2: "true" }.
+   */
+  @visibility(Lifecycle.Read)
+  capabilities?: Record<string>;
+
+  /**
    * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
