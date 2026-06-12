@@ -30,11 +30,11 @@ model SharedLimitCapProperties {
   /**
    * The default member cap value (in count units).
    * Set to a non-negative integer to apply a cap to all member subscriptions
-   * that do not have a per-member override. Set to `null` to clear the cap.
+   * that do not have a per-member override. Omit the property to leave no
+   * default cap in effect.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Required property where `null` carries the explicit 'clear the cap' intent, distinct from 'leave unchanged'."
   @minValue(0)
-  defaultMemberCap: int32 | null;
+  defaultMemberCap?: int32;
 
   /**
    * Controls whether the service validates the aggregate cap against the
@@ -61,6 +61,7 @@ model SharedLimitCapProperties {
 @added(Versions.v2026_07_01)
 model MemberCap {
   /** The member subscription identifier this cap applies to. */
+  @pattern("^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$")
   subscriptionId: string;
 
   /** The cap value in count units for this member subscription. */

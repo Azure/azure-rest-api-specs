@@ -1455,7 +1455,8 @@
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description": "The member subscription identifier this cap applies to."
+          "description": "The member subscription identifier this cap applies to.",
+          "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
         },
         "cap": {
           "type": "integer",
@@ -1622,9 +1623,8 @@
         "defaultMemberCap": {
           "type": "integer",
           "format": "int32",
-          "description": "The default member cap value (in count units).\nSet to a non-negative integer to apply a cap to all member subscriptions\nthat do not have a per-member override. Set to `null` to clear the cap.",
-          "minimum": 0,
-          "x-nullable": true
+          "description": "The default member cap value (in count units).\nSet to a non-negative integer to apply a cap to all member subscriptions\nthat do not have a per-member override. Omit the property to leave no\ndefault cap in effect.",
+          "minimum": 0
         },
         "isBoundedCap": {
           "type": "boolean",
@@ -1637,7 +1637,6 @@
         }
       },
       "required": [
-        "defaultMemberCap",
         "isBoundedCap"
       ]
     },
