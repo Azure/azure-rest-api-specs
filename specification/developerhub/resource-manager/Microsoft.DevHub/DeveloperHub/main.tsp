@@ -55,7 +55,7 @@ interface Operations {
   @route("/providers/Microsoft.DevHub/operations")
   @summary("Gets a list of operations.")
   @tag("Operations")
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  list(...ApiVersionParameter):
+    | ArmResponse<OperationListResult>
+    | ErrorResponse;
 }

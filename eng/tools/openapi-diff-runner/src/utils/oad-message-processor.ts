@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import { logMessage, logMessageSafeAsync } from "../log.js";
-import { Context, logFileName } from "../types/breaking-change.js";
-import { JsonPath, MessageLevel, ResultMessageRecord } from "../types/message.js";
-import { OadMessage } from "../types/oad-types.js";
-import { sourceBranchHref, specificBranchHref } from "./common-utils.js";
+import { logMessage, logMessageSafeAsync } from "../log.ts";
+import { type Context, logFileName } from "../types/breaking-change.ts";
+import { type JsonPath, type MessageLevel, type ResultMessageRecord } from "../types/message.ts";
+import { type OadMessage } from "../types/oad-types.ts";
+import { sourceBranchHref, specificBranchHref } from "./common-utils.ts";
 
 /**
  * Context for OAD message processing operations

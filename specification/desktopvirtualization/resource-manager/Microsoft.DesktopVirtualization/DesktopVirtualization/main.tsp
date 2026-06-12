@@ -75,5 +75,5 @@ enum Versions {
    * The latest public preview API version.
    */
   @previewVersion
-  vLatestPreview: "2026-01-01-preview",
+  vLatestPreview: "2026-04-01-preview",
 }

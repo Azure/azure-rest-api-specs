@@ -65,7 +65,9 @@ alias DatabaseColumnOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
 interface DatabaseColumns {
   /**
    * Get database column
@@ -126,7 +128,9 @@ alias ManagedDatabaseColumnOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseColumns)
 interface ManagedDatabaseColumns {
   /**
    * Get managed database column

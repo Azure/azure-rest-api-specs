@@ -9,12 +9,14 @@ namespace Oracle.Database;
 interface DnsPrivateViews extends OracleLocationBasedResource<DnsPrivateView> {}
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(DnsPrivateViews.listByLocation,
+@@Autorest.example(
+  DnsPrivateViews.listByLocation,
   "./examples/dnsPrivateViews_listByLocation.json",
   "List DnsPrivateViews by location"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(DnsPrivateViews.get,
+@@Autorest.example(
+  DnsPrivateViews.get,
   "./examples/dnsPrivateViews_get.json",
   "Get a DnsPrivateView by name"
 );

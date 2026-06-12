@@ -29,11 +29,13 @@ using Nginx.NginxPlus;
 @@flattenProperty(NginxDeploymentUpdateProperties.nginxAppProtect, "autorest");
 
 @@clientLocation(NginxDeploymentApiKeyResponses.get, "ApiKeys", "!csharp");
-@@clientLocation(NginxDeploymentApiKeyResponses.createOrUpdate,
+@@clientLocation(
+  NginxDeploymentApiKeyResponses.createOrUpdate,
   "ApiKeys",
   "!csharp"
 );
-@@clientName(NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
+@@clientName(
+  NginxDeploymentApiKeyResponses.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientLocation(NginxDeploymentApiKeyResponses.delete, "ApiKeys", "!csharp");
@@ -46,19 +48,23 @@ using Nginx.NginxPlus;
 @@clientLocation(NginxCertificates.list, "Certificates", "!csharp");
 
 @@clientLocation(NginxConfigurationResponses.get, "Configurations", "!csharp");
-@@clientLocation(NginxConfigurationResponses.createOrUpdate,
+@@clientLocation(
+  NginxConfigurationResponses.createOrUpdate,
   "Configurations",
   "!csharp"
 );
-@@clientName(NginxConfigurationResponses.createOrUpdate::parameters.resource,
+@@clientName(
+  NginxConfigurationResponses.createOrUpdate::parameters.resource,
   "body"
 );
-@@clientLocation(NginxConfigurationResponses.delete,
+@@clientLocation(
+  NginxConfigurationResponses.delete,
   "Configurations",
   "!csharp"
 );
 @@clientLocation(NginxConfigurationResponses.list, "Configurations", "!csharp");
-@@clientLocation(NginxConfigurationResponses.analysis,
+@@clientLocation(
+  NginxConfigurationResponses.analysis,
   "Configurations",
   "!csharp"
 );
@@ -69,13 +75,15 @@ using Nginx.NginxPlus;
 @@clientLocation(NginxDeployments.update, "Deployments", "!csharp");
 @@clientName(NginxDeployments.update::parameters.properties, "body");
 @@clientLocation(NginxDeployments.delete, "Deployments", "!csharp");
-@@clientLocation(NginxDeployments.listByResourceGroup,
+@@clientLocation(
+  NginxDeployments.listByResourceGroup,
   "Deployments",
   "!csharp"
 );
 @@clientLocation(NginxDeployments.list, "Deployments", "!csharp");
 @@clientLocation(NginxDeployments.wafPolicyList, "WafPolicy", "!csharp");
-@@clientLocation(NginxDeployments.defaultWafPolicyList,
+@@clientLocation(
+  NginxDeployments.defaultWafPolicyList,
   "DefaultWafPolicy",
   "!csharp"
 );

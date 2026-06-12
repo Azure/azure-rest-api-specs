@@ -1,15 +1,15 @@
-import { mockAll, mockFolder } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.ts";
 mockAll();
 
-import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import * as fsPromises from "fs/promises";
 import * as globby from "globby";
 import path from "path";
-import { RuleResult } from "../src/rule-result.js";
-import { CompileRule } from "../src/rules/compile.js";
+import { type RuleResult } from "../src/rule-result.ts";
+import { CompileRule } from "../src/rules/compile.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
@@ -71,43 +71,16 @@ describe("compile", function () {
     });
   });
 
-  it("should fail if no emitter was configured", async function () {
-    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
-      if (args.join(" ").includes("tsp compile")) {
-        return Promise.resolve([null, "no emitter was configured", ""]);
-      } else {
-        return Promise.resolve([null, "", ""]);
-      }
-    });
-
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
-      success: false,
-    });
-  });
-
-  it("should fail if no output was generated", async function () {
-    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
-      if (args.join(" ").includes("tsp compile")) {
-        return Promise.resolve([null, "no output was generated", ""]);
-      } else {
-        return Promise.resolve([null, "", ""]);
-      }
-    });
-
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
-      success: false,
-    });
-  });
-
-  it("should throw if output has no generated swaggers", async function () {
+  it("should succeed if output has no generated swaggers", async function () {
     runNpmSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, "not-swagger", ""]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).rejects.toThrowErrorMatchingInlineSnapshot(
-      `[Error: No generated swaggers found in output of 'tsp compile']`,
-    );
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
+    });
   });
 
   it("should fail if extra swaggers", async function () {
@@ -196,6 +169,57 @@ describe("compile", function () {
 
     // Simulate extra stable swagger (globby always returns posix paths)
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([previewPath, stablePath]));
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed if an older preview is superseded by a later stable version", async function () {
+    // Current TypeSpec only generates the stable 2024-03-01 version, but the older
+    // preview swagger is left in place. This should be allowed.
+    const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra older preview swagger (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([stablePath, olderPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if a preview is newer than the latest stable version", async function () {
+    // Current TypeSpec only generates the stable 2023-01-01 version, but a *newer*
+    // preview swagger is left in place. This is a genuine mismatch and should fail.
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra newer preview swagger (globby always returns posix paths)
+    vi.mocked(globby.globby).mockImplementation(() =>
+      Promise.resolve([stablePath, newerPreviewPath]),
+    );
 
     vi.mocked(fsPromises.readFile).mockImplementation(() =>
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),

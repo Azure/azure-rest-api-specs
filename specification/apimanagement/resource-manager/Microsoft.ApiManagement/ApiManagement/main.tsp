@@ -91,8 +91,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "ApiManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version v2 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ApiManagement;
 
 /**
@@ -112,7 +111,8 @@ interface Operations
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.ApiManagement provider."
 );
 @@tag(Operations.list, "ApiManagementOperations");

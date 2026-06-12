@@ -78,10 +78,12 @@ interface PartnerTransfers {
   >;
 }
 
-@@doc(PartnerTransferDetails.name,
+@@doc(
+  PartnerTransferDetails.name,
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(PartnerTransferDetails.properties, "Details of the transfer.");
-@@doc(PartnerTransfers.initiate::parameters.resource,
+@@doc(
+  PartnerTransfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."
 );
