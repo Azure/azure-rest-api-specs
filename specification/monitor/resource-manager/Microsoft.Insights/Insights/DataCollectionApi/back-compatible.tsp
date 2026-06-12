@@ -91,3 +91,8 @@ using DataCollectionApi;
   Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   "Resource entity tag (ETag)."
 );
+@@alternateType(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
