@@ -8,7 +8,7 @@ using Microsoft.Kubernetes;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ConnectedClusterPatch.properties,
-  "!csharp"
+  "!csharp,!javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
@@ -36,7 +36,7 @@ using Microsoft.Kubernetes;
 
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(Operations.list, Operations);
-@@clientName(Operations.list, "Get");
+@@clientName(Operations.list, "Get", "!javascript");
 @@clientLocation(ConnectedClusters.get, "ConnectedCluster", "!javascript");
 @@clientLocation(
   ConnectedClusters.createOrReplace,
