@@ -10,7 +10,8 @@ using Microsoft.Billing;
 @@Legacy.flattenProperty(PurchaseRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(BillingSubscriptionProperties.enrollmentAccountSubscriptionDetails
+@@Legacy.flattenProperty(
+  BillingSubscriptionProperties.enrollmentAccountSubscriptionDetails
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -23,7 +24,8 @@ using Microsoft.Billing;
 @@Legacy.flattenProperty(ReservationPurchaseRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ReservationPurchaseRequestProperties.reservedResourceProperties
+@@Legacy.flattenProperty(
+  ReservationPurchaseRequestProperties.reservedResourceProperties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -44,100 +46,128 @@ using Microsoft.Billing;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ValidateTransferResponse.properties);
 
-@@clientName(AssociatedTenants.createOrUpdate::parameters.resource,
+@@clientName(
+  AssociatedTenants.createOrUpdate::parameters.resource,
   "parameters"
 );
 
-@@clientLocation(AvailableBalanceOperationGroup.getByBillingProfile,
+@@clientLocation(
+  AvailableBalanceOperationGroup.getByBillingProfile,
   AvailableBalances
 );
 
 @@clientName(BillingAccounts.update::parameters.properties, "parameters");
 @@clientName(BillingAccounts.addPaymentTerms::parameters.body, "parameters");
 @@clientName(BillingAccounts.cancelPaymentTerms::parameters.body, "parameters");
-@@clientName(BillingAccounts.validatePaymentTerms::parameters.body,
+@@clientName(
+  BillingAccounts.validatePaymentTerms::parameters.body,
   "parameters"
 );
 @@clientLocation(BillingAccounts.listByBillingAccount, "BillingPermissions");
-@@clientLocation(BillingAccounts.checkAccessByBillingAccount,
+@@clientLocation(
+  BillingAccounts.checkAccessByBillingAccount,
   "BillingPermissions"
 );
-@@clientName(BillingAccounts.checkAccessByBillingAccount::parameters.body,
+@@clientName(
+  BillingAccounts.checkAccessByBillingAccount::parameters.body,
   "parameters"
 );
-@@clientLocation(BillingAccounts.billingRequestsListByBillingAccount,
+@@clientLocation(
+  BillingAccounts.billingRequestsListByBillingAccount,
   BillingRequests
 );
-@@clientName(BillingAccounts.billingRequestsListByBillingAccount,
+@@clientName(
+  BillingAccounts.billingRequestsListByBillingAccount,
   "ListByBillingAccount"
 );
-@@clientLocation(BillingAccounts.createByBillingAccount,
+@@clientLocation(
+  BillingAccounts.createByBillingAccount,
   BillingRoleAssignments
 );
-@@clientName(BillingAccounts.createByBillingAccount::parameters.body,
+@@clientName(
+  BillingAccounts.createByBillingAccount::parameters.body,
   "parameters"
 );
-@@clientLocation(BillingAccounts.resolveByBillingAccount,
+@@clientLocation(
+  BillingAccounts.resolveByBillingAccount,
   BillingRoleAssignments
 );
-@@clientLocation(BillingAccounts.savingsPlansListByBillingAccount,
+@@clientLocation(
+  BillingAccounts.savingsPlansListByBillingAccount,
   "SavingsPlans"
 );
-@@clientName(BillingAccounts.savingsPlansListByBillingAccount,
+@@clientName(
+  BillingAccounts.savingsPlansListByBillingAccount,
   "ListByBillingAccount"
 );
 @@clientLocation(BillingAccounts.downloadDocumentsByBillingAccount, Invoices);
-@@clientName(BillingAccounts.downloadDocumentsByBillingAccount::parameters.body,
+@@clientName(
+  BillingAccounts.downloadDocumentsByBillingAccount::parameters.body,
   "parameters"
 );
-@@clientLocation(BillingAccounts.reservationsListByBillingAccount,
+@@clientLocation(
+  BillingAccounts.reservationsListByBillingAccount,
   Reservations
 );
-@@clientName(BillingAccounts.reservationsListByBillingAccount,
+@@clientName(
+  BillingAccounts.reservationsListByBillingAccount,
   "ListByBillingAccount"
 );
 
 @@clientName(BillingProfiles.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(BillingProfiles.listByBillingProfile, "BillingPermissions");
-@@clientLocation(BillingProfiles.checkAccessByBillingProfile,
+@@clientLocation(
+  BillingProfiles.checkAccessByBillingProfile,
   "BillingPermissions"
 );
-@@clientName(BillingProfiles.checkAccessByBillingProfile::parameters.body,
+@@clientName(
+  BillingProfiles.checkAccessByBillingProfile::parameters.body,
   "parameters"
 );
-@@clientLocation(BillingProfiles.billingRequestsListByBillingProfile,
+@@clientLocation(
+  BillingProfiles.billingRequestsListByBillingProfile,
   BillingRequests
 );
-@@clientName(BillingProfiles.billingRequestsListByBillingProfile,
+@@clientName(
+  BillingProfiles.billingRequestsListByBillingProfile,
   "ListByBillingProfile"
 );
-@@clientLocation(BillingProfiles.createByBillingProfile,
+@@clientLocation(
+  BillingProfiles.createByBillingProfile,
   BillingRoleAssignments
 );
-@@clientName(BillingProfiles.createByBillingProfile::parameters.body,
+@@clientName(
+  BillingProfiles.createByBillingProfile::parameters.body,
   "parameters"
 );
-@@clientLocation(BillingProfiles.resolveByBillingProfile,
+@@clientLocation(
+  BillingProfiles.resolveByBillingProfile,
   BillingRoleAssignments
 );
 @@clientLocation(BillingProfiles.invoicesListByBillingProfile, Invoices);
-@@clientName(BillingProfiles.invoicesListByBillingProfile,
+@@clientName(
+  BillingProfiles.invoicesListByBillingProfile,
   "ListByBillingProfile"
 );
 @@clientLocation(BillingProfiles.productsListByBillingProfile, Products);
-@@clientName(BillingProfiles.productsListByBillingProfile,
+@@clientName(
+  BillingProfiles.productsListByBillingProfile,
   "ListByBillingProfile"
 );
-@@clientLocation(BillingProfiles.reservationsListByBillingProfile,
+@@clientLocation(
+  BillingProfiles.reservationsListByBillingProfile,
   Reservations
 );
-@@clientName(BillingProfiles.reservationsListByBillingProfile,
+@@clientName(
+  BillingProfiles.reservationsListByBillingProfile,
   "ListByBillingProfile"
 );
-@@clientLocation(BillingProfiles.transactionsListByBillingProfile,
+@@clientLocation(
+  BillingProfiles.transactionsListByBillingProfile,
   "Transactions"
 );
-@@clientName(BillingProfiles.transactionsListByBillingProfile,
+@@clientName(
+  BillingProfiles.transactionsListByBillingProfile,
   "ListByBillingProfile"
 );
 
@@ -147,111 +177,146 @@ using Microsoft.Billing;
 
 @@clientName(BillingRequests.createOrUpdate::parameters.resource, "parameters");
 
-@@clientLocation(BillingRoleAssignmentByCustomer.getByCustomer,
+@@clientLocation(
+  BillingRoleAssignmentByCustomer.getByCustomer,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByCustomer.deleteByCustomer,
+@@clientLocation(
+  BillingRoleAssignmentByCustomer.deleteByCustomer,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByCustomer.listByCustomer,
+@@clientLocation(
+  BillingRoleAssignmentByCustomer.listByCustomer,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByInvoiceSection.getByInvoiceSection,
+@@clientLocation(
+  BillingRoleAssignmentByInvoiceSection.getByInvoiceSection,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByInvoiceSection.deleteByInvoiceSection,
+@@clientLocation(
+  BillingRoleAssignmentByInvoiceSection.deleteByInvoiceSection,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByInvoiceSection.listByInvoiceSection,
+@@clientLocation(
+  BillingRoleAssignmentByInvoiceSection.listByInvoiceSection,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByBillingAccount.getByBillingAccount,
+@@clientLocation(
+  BillingRoleAssignmentByBillingAccount.getByBillingAccount,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount,
+@@clientLocation(
+  BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount,
   BillingRoleAssignments
 );
-@@clientName(BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount::parameters.resource,
+@@clientName(
+  BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount::parameters.resource,
   "parameters"
 );
-@@clientLocation(BillingRoleAssignmentByBillingAccount.deleteByBillingAccount,
+@@clientLocation(
+  BillingRoleAssignmentByBillingAccount.deleteByBillingAccount,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByBillingAccount.listByBillingAccount,
+@@clientLocation(
+  BillingRoleAssignmentByBillingAccount.listByBillingAccount,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByDepartment.getByDepartment,
+@@clientLocation(
+  BillingRoleAssignmentByDepartment.getByDepartment,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByDepartment.createOrUpdateByDepartment,
+@@clientLocation(
+  BillingRoleAssignmentByDepartment.createOrUpdateByDepartment,
   BillingRoleAssignments
 );
-@@clientName(BillingRoleAssignmentByDepartment.createOrUpdateByDepartment::parameters.resource,
+@@clientName(
+  BillingRoleAssignmentByDepartment.createOrUpdateByDepartment::parameters.resource,
   "parameters"
 );
-@@clientLocation(BillingRoleAssignmentByDepartment.deleteByDepartment,
+@@clientLocation(
+  BillingRoleAssignmentByDepartment.deleteByDepartment,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByDepartment.listByDepartment,
+@@clientLocation(
+  BillingRoleAssignmentByDepartment.listByDepartment,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByEnrollmentAccount.getByEnrollmentAccount,
+@@clientLocation(
+  BillingRoleAssignmentByEnrollmentAccount.getByEnrollmentAccount,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount,
+@@clientLocation(
+  BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount,
   BillingRoleAssignments
 );
-@@clientName(BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount::parameters.resource,
+@@clientName(
+  BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount::parameters.resource,
   "parameters"
 );
-@@clientLocation(BillingRoleAssignmentByEnrollmentAccount.deleteByEnrollmentAccount,
+@@clientLocation(
+  BillingRoleAssignmentByEnrollmentAccount.deleteByEnrollmentAccount,
   BillingRoleAssignments
 );
-@@clientLocation(BillingRoleAssignmentByEnrollmentAccount.listByEnrollmentAccount,
+@@clientLocation(
+  BillingRoleAssignmentByEnrollmentAccount.listByEnrollmentAccount,
   BillingRoleAssignments
 );
 
-@@clientLocation(BillingRoleDefinitions.getByBillingProfile,
+@@clientLocation(
+  BillingRoleDefinitions.getByBillingProfile,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitions.listByBillingProfile,
+@@clientLocation(
+  BillingRoleDefinitions.listByBillingProfile,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByCustomer.getByCustomer,
+@@clientLocation(
+  BillingRoleDefinitionByCustomer.getByCustomer,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByCustomer.listByCustomer,
+@@clientLocation(
+  BillingRoleDefinitionByCustomer.listByCustomer,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByInvoiceSection.getByInvoiceSection,
+@@clientLocation(
+  BillingRoleDefinitionByInvoiceSection.getByInvoiceSection,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByInvoiceSection.listByInvoiceSection,
+@@clientLocation(
+  BillingRoleDefinitionByInvoiceSection.listByInvoiceSection,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByBillingAccount.getByBillingAccount,
+@@clientLocation(
+  BillingRoleDefinitionByBillingAccount.getByBillingAccount,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByBillingAccount.listByBillingAccount,
+@@clientLocation(
+  BillingRoleDefinitionByBillingAccount.listByBillingAccount,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByDepartment.getByDepartment,
+@@clientLocation(
+  BillingRoleDefinitionByDepartment.getByDepartment,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByDepartment.listByDepartment,
+@@clientLocation(
+  BillingRoleDefinitionByDepartment.listByDepartment,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByEnrollmentAccount.getByEnrollmentAccount,
+@@clientLocation(
+  BillingRoleDefinitionByEnrollmentAccount.getByEnrollmentAccount,
   "BillingRoleDefinition"
 );
-@@clientLocation(BillingRoleDefinitionByEnrollmentAccount.listByEnrollmentAccount,
+@@clientLocation(
+  BillingRoleDefinitionByEnrollmentAccount.listByEnrollmentAccount,
   "BillingRoleDefinition"
 );
 
-@@clientLocation(SavingsPlanOrderModels.getByBillingAccount,
+@@clientLocation(
+  SavingsPlanOrderModels.getByBillingAccount,
   "SavingsPlanOrders"
 );
-@@clientLocation(SavingsPlanOrderModels.listByBillingAccount,
+@@clientLocation(
+  SavingsPlanOrderModels.listByBillingAccount,
   "SavingsPlanOrders"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -259,64 +324,80 @@ using Microsoft.Billing;
 
 @@clientLocation(SavingsPlanModels.getByBillingAccount, "SavingsPlans");
 @@clientLocation(SavingsPlanModels.updateByBillingAccount, "SavingsPlans");
-@@clientName(SavingsPlanModels.updateByBillingAccount::parameters.properties,
+@@clientName(
+  SavingsPlanModels.updateByBillingAccount::parameters.properties,
   "body"
 );
 @@clientLocation(SavingsPlanModels.listBySavingsPlanOrder, "SavingsPlans");
-@@clientLocation(SavingsPlanModels.validateUpdateByBillingAccount,
+@@clientLocation(
+  SavingsPlanModels.validateUpdateByBillingAccount,
   "SavingsPlans"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SavingsPlanModel.properties);
 
 @@clientLocation(BillingSubscriptionOperationGroup.get, BillingSubscriptions);
-@@clientLocation(BillingSubscriptionOperationGroup.update,
+@@clientLocation(
+  BillingSubscriptionOperationGroup.update,
   BillingSubscriptions
 );
-@@clientName(BillingSubscriptionOperationGroup.update::parameters.properties,
+@@clientName(
+  BillingSubscriptionOperationGroup.update::parameters.properties,
   "parameters"
 );
-@@clientLocation(BillingSubscriptionOperationGroup.delete,
+@@clientLocation(
+  BillingSubscriptionOperationGroup.delete,
   BillingSubscriptions
 );
-@@clientLocation(BillingSubscriptionOperationGroup.listByBillingAccount,
+@@clientLocation(
+  BillingSubscriptionOperationGroup.listByBillingAccount,
   BillingSubscriptions
 );
-@@clientLocation(BillingSubscriptionOperationGroup.cancel,
+@@clientLocation(
+  BillingSubscriptionOperationGroup.cancel,
   BillingSubscriptions
 );
-@@clientName(BillingSubscriptionOperationGroup.cancel::parameters.body,
+@@clientName(
+  BillingSubscriptionOperationGroup.cancel::parameters.body,
   "parameters"
 );
 @@clientLocation(BillingSubscriptionOperationGroup.merge, BillingSubscriptions);
-@@clientName(BillingSubscriptionOperationGroup.merge::parameters.body,
+@@clientName(
+  BillingSubscriptionOperationGroup.merge::parameters.body,
   "parameters"
 );
 @@clientLocation(BillingSubscriptionOperationGroup.move, BillingSubscriptions);
-@@clientName(BillingSubscriptionOperationGroup.move::parameters.body,
+@@clientName(
+  BillingSubscriptionOperationGroup.move::parameters.body,
   "parameters"
 );
 @@clientLocation(BillingSubscriptionOperationGroup.split, BillingSubscriptions);
-@@clientName(BillingSubscriptionOperationGroup.split::parameters.body,
+@@clientName(
+  BillingSubscriptionOperationGroup.split::parameters.body,
   "parameters"
 );
-@@clientLocation(BillingSubscriptionOperationGroup.validateMoveEligibility,
+@@clientLocation(
+  BillingSubscriptionOperationGroup.validateMoveEligibility,
   BillingSubscriptions
 );
-@@clientName(BillingSubscriptionOperationGroup.validateMoveEligibility::parameters.body,
+@@clientName(
+  BillingSubscriptionOperationGroup.validateMoveEligibility::parameters.body,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BillingSubscription.properties);
 
 @@clientLocation(BillingSubscriptionAliases.get, "BillingSubscriptionsAliases");
-@@clientLocation(BillingSubscriptionAliases.createOrUpdate,
+@@clientLocation(
+  BillingSubscriptionAliases.createOrUpdate,
   "BillingSubscriptionsAliases"
 );
-@@clientName(BillingSubscriptionAliases.createOrUpdate::parameters.resource,
+@@clientName(
+  BillingSubscriptionAliases.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(BillingSubscriptionAliases.listByBillingAccount,
+@@clientLocation(
+  BillingSubscriptionAliases.listByBillingAccount,
   "BillingSubscriptionsAliases"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -330,7 +411,8 @@ using Microsoft.Billing;
 @@clientLocation(Customers.createByCustomer, BillingRoleAssignments);
 @@clientName(Customers.createByCustomer::parameters.body, "parameters");
 @@clientLocation(Customers.resolveByCustomer, BillingRoleAssignments);
-@@clientLocation(Customers.billingSubscriptionsListByCustomer,
+@@clientLocation(
+  Customers.billingSubscriptionsListByCustomer,
   BillingSubscriptions
 );
 @@clientName(Customers.billingSubscriptionsListByCustomer, "ListByCustomer");
@@ -340,94 +422,119 @@ using Microsoft.Billing;
 @@clientName(Customers.transactionsListByCustomer, "ListByCustomer");
 @@clientLocation(CustomerOperationGroup.getByBillingAccount, Customers);
 @@clientLocation(CustomerOperationGroup.listByBillingAccount, Customers);
-@@clientLocation(CustomerOperationGroup.listByCustomerAtBillingAccount,
+@@clientLocation(
+  CustomerOperationGroup.listByCustomerAtBillingAccount,
   "BillingPermissions"
 );
-@@clientLocation(CustomerOperationGroup.billingSubscriptionsListByCustomerAtBillingAccount,
+@@clientLocation(
+  CustomerOperationGroup.billingSubscriptionsListByCustomerAtBillingAccount,
   BillingSubscriptions
 );
-@@clientName(CustomerOperationGroup.billingSubscriptionsListByCustomerAtBillingAccount,
+@@clientName(
+  CustomerOperationGroup.billingSubscriptionsListByCustomerAtBillingAccount,
   "ListByCustomerAtBillingAccount"
 );
 @@clientLocation(CustomerOperationGroup.listByCustomer, Products);
 
 @@clientLocation(Departments.listByDepartment, "BillingPermissions");
 @@clientLocation(Departments.checkAccessByDepartment, "BillingPermissions");
-@@clientName(Departments.checkAccessByDepartment::parameters.body,
+@@clientName(
+  Departments.checkAccessByDepartment::parameters.body,
   "parameters"
 );
 
 @@clientLocation(EnrollmentAccountOperationGroup.get, EnrollmentAccounts);
-@@clientLocation(EnrollmentAccountOperationGroup.listByBillingAccount,
+@@clientLocation(
+  EnrollmentAccountOperationGroup.listByBillingAccount,
   EnrollmentAccounts
 );
-@@clientLocation(EnrollmentAccountOperationGroup.listByEnrollmentAccount,
+@@clientLocation(
+  EnrollmentAccountOperationGroup.listByEnrollmentAccount,
   "BillingPermissions"
 );
-@@clientLocation(EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
+@@clientLocation(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount,
   "BillingPermissions"
 );
-@@clientName(EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount::parameters.body,
+@@clientName(
+  EnrollmentAccountOperationGroup.checkAccessByEnrollmentAccount::parameters.body,
   "parameters"
 );
-@@clientLocation(EnrollmentAccountOperationGroup.billingSubscriptionsListByEnrollmentAccount,
+@@clientLocation(
+  EnrollmentAccountOperationGroup.billingSubscriptionsListByEnrollmentAccount,
   BillingSubscriptions
 );
-@@clientName(EnrollmentAccountOperationGroup.billingSubscriptionsListByEnrollmentAccount,
+@@clientName(
+  EnrollmentAccountOperationGroup.billingSubscriptionsListByEnrollmentAccount,
   "ListByEnrollmentAccount"
 );
 
 @@clientLocation(Invoices.listByInvoice, "Transactions");
 @@clientLocation(Invoices.transactionsDownloadByInvoice, "Transactions");
 @@clientLocation(Invoices.getTransactionSummaryByInvoice, "Transactions");
-@@clientLocation(InvoiceByBillingSubscription.getByBillingSubscription,
+@@clientLocation(
+  InvoiceByBillingSubscription.getByBillingSubscription,
   Invoices
 );
-@@clientLocation(InvoiceByBillingSubscription.listByBillingSubscription,
+@@clientLocation(
+  InvoiceByBillingSubscription.listByBillingSubscription,
   Invoices
 );
-@@clientLocation(InvoiceByBillingSubscription.downloadByBillingSubscription,
+@@clientLocation(
+  InvoiceByBillingSubscription.downloadByBillingSubscription,
   Invoices
 );
 @@clientLocation(InvoiceById.get, Invoices);
 
 @@clientName(InvoiceSections.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(InvoiceSections.listByInvoiceSection, "BillingPermissions");
-@@clientLocation(InvoiceSections.checkAccessByInvoiceSection,
+@@clientLocation(
+  InvoiceSections.checkAccessByInvoiceSection,
   "BillingPermissions"
 );
-@@clientName(InvoiceSections.checkAccessByInvoiceSection::parameters.body,
+@@clientName(
+  InvoiceSections.checkAccessByInvoiceSection::parameters.body,
   "parameters"
 );
-@@clientLocation(InvoiceSections.billingRequestsListByInvoiceSection,
+@@clientLocation(
+  InvoiceSections.billingRequestsListByInvoiceSection,
   BillingRequests
 );
-@@clientName(InvoiceSections.billingRequestsListByInvoiceSection,
+@@clientName(
+  InvoiceSections.billingRequestsListByInvoiceSection,
   "ListByInvoiceSection"
 );
-@@clientLocation(InvoiceSections.createByInvoiceSection,
+@@clientLocation(
+  InvoiceSections.createByInvoiceSection,
   BillingRoleAssignments
 );
-@@clientName(InvoiceSections.createByInvoiceSection::parameters.body,
+@@clientName(
+  InvoiceSections.createByInvoiceSection::parameters.body,
   "parameters"
 );
-@@clientLocation(InvoiceSections.resolveByInvoiceSection,
+@@clientLocation(
+  InvoiceSections.resolveByInvoiceSection,
   BillingRoleAssignments
 );
-@@clientLocation(InvoiceSections.billingSubscriptionsListByInvoiceSection,
+@@clientLocation(
+  InvoiceSections.billingSubscriptionsListByInvoiceSection,
   BillingSubscriptions
 );
-@@clientName(InvoiceSections.billingSubscriptionsListByInvoiceSection,
+@@clientName(
+  InvoiceSections.billingSubscriptionsListByInvoiceSection,
   "ListByInvoiceSection"
 );
 @@clientLocation(InvoiceSections.productsListByInvoiceSection, Products);
-@@clientName(InvoiceSections.productsListByInvoiceSection,
+@@clientName(
+  InvoiceSections.productsListByInvoiceSection,
   "ListByInvoiceSection"
 );
-@@clientLocation(InvoiceSections.transactionsListByInvoiceSection,
+@@clientLocation(
+  InvoiceSections.transactionsListByInvoiceSection,
   "Transactions"
 );
-@@clientName(InvoiceSections.transactionsListByInvoiceSection,
+@@clientName(
+  InvoiceSections.transactionsListByInvoiceSection,
   "ListByInvoiceSection"
 );
 
@@ -443,23 +550,28 @@ using Microsoft.Billing;
 @@Legacy.flattenProperty(PaymentMethod.properties);
 
 @@clientLocation(CustomerPolicies.getByCustomer, Policies);
-@@clientName(Policies.createOrUpdateByCustomerAtBillingAccount::parameters.resource,
+@@clientName(
+  Policies.createOrUpdateByCustomerAtBillingAccount::parameters.resource,
   "parameters"
 );
 
 @@clientLocation(BillingProfilePolicies.getByBillingProfile, Policies);
-@@clientLocation(BillingProfilePolicies.createOrUpdateByBillingProfile,
+@@clientLocation(
+  BillingProfilePolicies.createOrUpdateByBillingProfile,
   Policies
 );
-@@clientName(BillingProfilePolicies.createOrUpdateByBillingProfile::parameters.resource,
+@@clientName(
+  BillingProfilePolicies.createOrUpdateByBillingProfile::parameters.resource,
   "parameters"
 );
 
 @@clientLocation(BillingAccountPolicies.getByBillingAccount, Policies);
-@@clientLocation(BillingAccountPolicies.createOrUpdateByBillingAccount,
+@@clientLocation(
+  BillingAccountPolicies.createOrUpdateByBillingAccount,
   Policies
 );
-@@clientName(BillingAccountPolicies.createOrUpdateByBillingAccount::parameters.resource,
+@@clientName(
+  BillingAccountPolicies.createOrUpdateByBillingAccount::parameters.resource,
   "parameters"
 );
 
@@ -469,7 +581,8 @@ using Microsoft.Billing;
 @@clientName(Products.move::parameters.body, "parameters");
 @@clientName(Products.validateMoveEligibility::parameters.body, "parameters");
 
-@@clientName(Reservations.updateByBillingAccount::parameters.properties,
+@@clientName(
+  Reservations.updateByBillingAccount::parameters.properties,
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -493,16 +606,19 @@ using Microsoft.Billing;
 
 @@clientLocation(AddressOperationGroup.validate, "Address");
 
-@@clientLocation(InvoicesOperationGroup.downloadDocumentsByBillingSubscription,
+@@clientLocation(
+  InvoicesOperationGroup.downloadDocumentsByBillingSubscription,
   Invoices
 );
-@@clientName(InvoicesOperationGroup.downloadDocumentsByBillingSubscription::parameters.downloadUrls,
+@@clientName(
+  InvoicesOperationGroup.downloadDocumentsByBillingSubscription::parameters.downloadUrls,
   "parameters"
 );
 
 @@clientName(AddressOperationGroup.validate::parameters.body, "parameters");
 
-@@Azure.ResourceManager.identifiers(InvoiceSectionWithCreateSubPermissionListResult.value,
+@@Azure.ResourceManager.identifiers(
+  InvoiceSectionWithCreateSubPermissionListResult.value,
   #["invoiceSectionId"]
 );
 
@@ -511,13 +627,16 @@ using Microsoft.Billing;
 @@Azure.ResourceManager.identifiers(BillingAccountListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(BillingProfileListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(BillingRequestListResult.value, #["id"]);
-@@Azure.ResourceManager.identifiers(BillingRoleAssignmentListResult.value,
+@@Azure.ResourceManager.identifiers(
+  BillingRoleAssignmentListResult.value,
   #["id"]
 );
-@@Azure.ResourceManager.identifiers(BillingRoleDefinitionListResult.value,
+@@Azure.ResourceManager.identifiers(
+  BillingRoleDefinitionListResult.value,
   #["id"]
 );
-@@Azure.ResourceManager.identifiers(BillingSubscriptionAliasListResult.value,
+@@Azure.ResourceManager.identifiers(
+  BillingSubscriptionAliasListResult.value,
   #["id"]
 );
 @@Azure.ResourceManager.identifiers(CustomerListResult.value, #["id"]);
@@ -525,7 +644,8 @@ using Microsoft.Billing;
 @@Azure.ResourceManager.identifiers(EnrollmentAccountListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(InvoiceListResult.value, #["id"]);
 @@Azure.ResourceManager.identifiers(InvoiceSectionListResult.value, #["id"]);
-@@Azure.ResourceManager.identifiers(PaymentMethodLinksListResult.value,
+@@Azure.ResourceManager.identifiers(
+  PaymentMethodLinksListResult.value,
   #["id"]
 );
 @@Azure.ResourceManager.identifiers(PaymentMethodsListResult.value, #["id"]);
@@ -550,7 +670,8 @@ using Microsoft.Billing;
 @@visibility(TransactionListResult.value, Lifecycle.Read);
 @@visibility(BillingAccountListResult.value, Lifecycle.Read);
 @@visibility(BillingPermissionListResult.value, Lifecycle.Read);
-@@visibility(InvoiceSectionWithCreateSubPermissionListResult.value,
+@@visibility(
+  InvoiceSectionWithCreateSubPermissionListResult.value,
   Lifecycle.Read
 );
 @@visibility(PartnerTransferDetailsListResult.value, Lifecycle.Read);

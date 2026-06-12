@@ -1,0 +1,358 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabaseSecurityAlertPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies": {
+      "get": {
+        "operationId": "ManagedDatabaseSecurityAlertPolicies_ListByDatabase",
+        "tags": [
+          "ManagedDatabaseSecurityAlertPolicies"
+        ],
+        "description": "Gets a list of managed database's security alert policies.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of the database's threat detection policies.": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertListByDatabase.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}": {
+      "get": {
+        "operationId": "ManagedDatabaseSecurityAlertPolicies_Get",
+        "tags": [
+          "ManagedDatabaseSecurityAlertPolicies"
+        ],
+        "description": "Gets a managed database's security alert policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a database's threat detection policy": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedDatabaseSecurityAlertPolicies_CreateOrUpdate",
+        "tags": [
+          "ManagedDatabaseSecurityAlertPolicies"
+        ],
+        "description": "Creates or updates a database's security alert policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityAlertPolicyName",
+            "in": "path",
+            "description": "The name of the security alert policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "SecurityAlertPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database security alert policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedDatabaseSecurityAlertPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedDatabaseSecurityAlertPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a database's threat detection policy with all parameters": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertCreateMax.json"
+          },
+          "Update a database's threat detection policy with minimal parameters": {
+            "$ref": "./examples/ManagedDatabaseSecurityAlertCreateMin.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedDatabaseSecurityAlertPolicy": {
+      "type": "object",
+      "description": "A managed database security alert policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAlertPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedDatabaseSecurityAlertPolicyListResult": {
+      "type": "object",
+      "description": "The response of a ManagedDatabaseSecurityAlertPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedDatabaseSecurityAlertPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedDatabaseSecurityAlertPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityAlertPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a security alert policy.",
+      "properties": {
+        "state": {
+          "$ref": "./common.json#/definitions/SecurityAlertPolicyState",
+          "description": "Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database."
+        },
+        "disabledAlerts": {
+          "type": "array",
+          "description": "Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action, Brute_Force",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "Specifies an array of e-mail addresses to which the alert is sent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAccountAdmins": {
+          "type": "boolean",
+          "description": "Specifies that the alert is sent to the account administrators."
+        },
+        "storageEndpoint": {
+          "type": "string",
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs."
+        },
+        "storageAccountAccessKey": {
+          "type": "string",
+          "description": "Specifies the identifier key of the Threat Detection audit storage account."
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the Threat Detection audit logs."
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the UTC creation time of the policy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    }
+  },
+  "parameters": {}
+}

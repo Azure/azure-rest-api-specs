@@ -72,7 +72,10 @@ interface VpnSites {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnSite,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -97,9 +100,11 @@ interface VpnSites {
 
 @@doc(VpnSite.name, "The name of the VpnSite being retrieved.");
 @@doc(VpnSite.properties, "Properties of the VPN site.");
-@@doc(VpnSites.createOrUpdate::parameters.resource,
+@@doc(
+  VpnSites.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update VpnSite."
 );
-@@doc(VpnSites.updateTags::parameters.properties,
+@@doc(
+  VpnSites.updateTags::parameters.properties,
   "Parameters supplied to update VpnSite tags."
 );

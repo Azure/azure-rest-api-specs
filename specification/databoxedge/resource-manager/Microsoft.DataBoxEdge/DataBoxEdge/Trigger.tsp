@@ -41,8 +41,10 @@ interface Triggers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Trigger,
-    Response = ArmResourceUpdatedResponse<Trigger> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Trigger> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Trigger>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Trigger> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -52,7 +54,10 @@ interface Triggers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Trigger,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

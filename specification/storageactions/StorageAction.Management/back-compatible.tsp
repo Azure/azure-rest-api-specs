@@ -5,25 +5,29 @@ using Microsoft.StorageActions;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTaskPreviewAction.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StorageTaskPreviewAction.properties,
   "!csharp,!java,!python,!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTaskUpdateParameters.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StorageTaskUpdateParameters.properties,
   "!csharp,!java,!python,!javascript"
 );
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
 @@clientName(StorageTasks.update::parameters.properties, "parameters");
-@@clientName(StorageTasksOperationGroup.previewActions::parameters.body,
+@@clientName(
+  StorageTasksOperationGroup.previewActions::parameters.body,
   "parameters"
 );
 @@clientName(StorageTasks.storageTaskAssignmentList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTask.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  StorageTask.properties,
   "!csharp,!java,!python,!javascript"
 );
 
@@ -31,6 +35,7 @@ using Microsoft.StorageActions;
 // These ensure consistent operationId generation in the output
 @@clientLocation(StorageTasksOperationGroup.previewActions, StorageTasks);
 @@clientLocation(StorageTasks.list, "StorageTasksReport");
-@@clientLocation(StorageTasks.storageTaskAssignmentList,
+@@clientLocation(
+  StorageTasks.storageTaskAssignmentList,
   "StorageTaskAssignment"
 );

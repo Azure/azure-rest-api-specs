@@ -10,44 +10,54 @@ using Microsoft.ServiceFabric;
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Clusters.update::parameters.properties, "parameters");
-@@clientName(Clusters.listUpgradableVersions::parameters.body,
+@@clientName(
+  Clusters.listUpgradableVersions::parameters.body,
   "versionsDescription"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdateParameters.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClusterUpdateParameters.properties
 );
 
 @@clientLocation(ApplicationTypeResources.get, "ApplicationTypes");
 @@clientLocation(ApplicationTypeResources.createOrUpdate, "ApplicationTypes");
 @@clientLocation(ApplicationTypeResources.delete, "ApplicationTypes");
 @@clientLocation(ApplicationTypeResources.list, "ApplicationTypes");
-@@clientName(ApplicationTypeResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApplicationTypeResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationTypeResource.properties
 );
 
-@@clientLocation(ApplicationTypeVersionResources.get,
+@@clientLocation(
+  ApplicationTypeVersionResources.get,
   "ApplicationTypeVersions"
 );
-@@clientLocation(ApplicationTypeVersionResources.createOrUpdate,
+@@clientLocation(
+  ApplicationTypeVersionResources.createOrUpdate,
   "ApplicationTypeVersions"
 );
-@@clientLocation(ApplicationTypeVersionResources.delete,
+@@clientLocation(
+  ApplicationTypeVersionResources.delete,
   "ApplicationTypeVersions"
 );
-@@clientLocation(ApplicationTypeVersionResources.list,
+@@clientLocation(
+  ApplicationTypeVersionResources.list,
   "ApplicationTypeVersions"
 );
-@@clientName(ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeVersionResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationTypeVersionResource.properties
 );
 
 @@clientLocation(ApplicationResources.get, "Applications");
@@ -55,16 +65,19 @@ using Microsoft.ServiceFabric;
 @@clientLocation(ApplicationResources.update, "Applications");
 @@clientLocation(ApplicationResources.delete, "Applications");
 @@clientLocation(ApplicationResources.list, "Applications");
-@@clientName(ApplicationResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ApplicationResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ApplicationResources.update::parameters.properties, "parameters");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationResource.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationResourceUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ApplicationResourceUpdate.properties
 );
 
 @@clientLocation(ServiceResources.get, "Services");
@@ -72,7 +85,8 @@ using Microsoft.ServiceFabric;
 @@clientLocation(ServiceResources.update, "Services");
 @@clientLocation(ServiceResources.delete, "Services");
 @@clientLocation(ServiceResources.list, "Services");
-@@clientName(ServiceResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ServiceResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(ServiceResources.update::parameters.properties, "parameters");
@@ -87,16 +101,19 @@ using Microsoft.ServiceFabric;
 @@clientLocation(VMSizeResources.list, "UnsupportedVmSizes");
 
 @@clientLocation(ClusterVersionsOperationGroup.get, "ClusterVersions");
-@@clientLocation(ClusterVersionsOperationGroup.getByEnvironment,
+@@clientLocation(
+  ClusterVersionsOperationGroup.getByEnvironment,
   "ClusterVersions"
 );
 @@clientLocation(ClusterVersionsOperationGroup.list, "ClusterVersions");
-@@clientLocation(ClusterVersionsOperationGroup.listByEnvironment,
+@@clientLocation(
+  ClusterVersionsOperationGroup.listByEnvironment,
   "ClusterVersions"
 );
 
 @@clientName(ClusterCodeVersions, "ClusterCodeVersionsResult");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterCodeVersions.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ClusterCodeVersions.properties
 );

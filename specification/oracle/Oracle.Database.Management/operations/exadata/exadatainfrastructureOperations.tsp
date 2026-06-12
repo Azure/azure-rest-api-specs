@@ -36,32 +36,38 @@ interface CloudExadataInfrastructures
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudExadataInfrastructures.listBySubscription,
+@@Autorest.example(
+  CloudExadataInfrastructures.listBySubscription,
   "./examples/exaInfra_listBySubscription.json",
   "List Exadata Infrastructure by subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudExadataInfrastructures.listByResourceGroup,
+@@Autorest.example(
+  CloudExadataInfrastructures.listByResourceGroup,
   "./examples/exaInfra_listByResourceGroup.json",
   "List Exadata Infrastructure by resource group"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudExadataInfrastructures.createOrUpdate,
+@@Autorest.example(
+  CloudExadataInfrastructures.createOrUpdate,
   "./examples/exaInfra_create.json",
   "Create Exadata Infrastructure"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudExadataInfrastructures.get,
+@@Autorest.example(
+  CloudExadataInfrastructures.get,
   "./examples/exaInfra_get.json",
   "Get Exadata Infrastructure"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudExadataInfrastructures.update,
+@@Autorest.example(
+  CloudExadataInfrastructures.update,
   "./examples/exaInfra_patch.json",
   "Patch Exadata Infrastructure"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(CloudExadataInfrastructures.delete,
+@@Autorest.example(
+  CloudExadataInfrastructures.delete,
   "./examples/exaInfra_delete.json",
   "Delete Exadata Infrastructure"
 );

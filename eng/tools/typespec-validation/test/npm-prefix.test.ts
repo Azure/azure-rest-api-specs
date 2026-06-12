@@ -1,14 +1,14 @@
-import { mockFolder, mockSimpleGit } from "./mocks.js";
+import { mockFolder, mockSimpleGit } from "./mocks.ts";
 mockSimpleGit();
 
 import * as simpleGit from "simple-git";
 
 import { strict as assert } from "node:assert";
 import path from "path";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-import { NpmPrefixRule } from "../src/rules/npm-prefix.js";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { NpmPrefixRule } from "../src/rules/npm-prefix.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 describe("npm-prefix", function () {
   let runNpmSpy: MockInstance;

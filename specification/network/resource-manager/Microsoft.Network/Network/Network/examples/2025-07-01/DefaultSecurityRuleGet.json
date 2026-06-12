@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "defaultSecurityRuleName": "AllowVnetInBound",
+    "networkSecurityGroupName": "nsg1",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "AllowVnetInBound",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
+        "properties": {
+          "description": "Allow inbound traffic from all VMs in VNET",
+          "access": "Allow",
+          "destinationAddressPrefix": "VirtualNetwork",
+          "destinationAddressPrefixes": [],
+          "destinationPortRange": "*",
+          "destinationPortRanges": [],
+          "direction": "Inbound",
+          "priority": 65000,
+          "provisioningState": "Succeeded",
+          "sourceAddressPrefix": "VirtualNetwork",
+          "sourceAddressPrefixes": [],
+          "sourcePortRange": "*",
+          "sourcePortRanges": [],
+          "protocol": "*"
+        }
+      }
+    }
+  },
+  "operationId": "DefaultSecurityRules_Get",
+  "title": "DefaultSecurityRuleGet"
+}
