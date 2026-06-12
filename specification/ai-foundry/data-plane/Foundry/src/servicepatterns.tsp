@@ -28,12 +28,6 @@ alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.Er
       ...ErrorResponseParameter;
 
       @statusCode
-      statusCode: 403;
-    }
-  | {
-      ...ErrorResponseParameter;
-
-      @statusCode
       statusCode: 404;
     }
   | {
