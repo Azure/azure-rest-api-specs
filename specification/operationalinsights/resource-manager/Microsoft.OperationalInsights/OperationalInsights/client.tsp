@@ -256,6 +256,7 @@ using Microsoft.OperationalInsights;
 @@markAsPageable(Workspaces.schemaGet, "csharp");
 
 namespace Microsoft.OperationalInsights {
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "Preserve previous .NET numeric enum shape used by @@alternateType for SDK compatibility"
   enum Capacity {
     FiveHundred: 500,
     TenHundred: 1000,
@@ -263,6 +264,7 @@ namespace Microsoft.OperationalInsights {
     FiveThousand: 5000,
   }
 
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "Preserve previous .NET numeric enum shape used by @@alternateType for SDK compatibility"
   enum CapacityReservationLevel {
     OneHundred: 100,
     TwoHundred: 200,
