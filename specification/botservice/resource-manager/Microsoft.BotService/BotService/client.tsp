@@ -421,7 +421,9 @@ model PrivateLinkResourceReplacement
   "BotServiceNspAccessRuleSubscription",
   "csharp"
 );
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op BotChannelsUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -451,6 +453,8 @@ op BotChannelsUpdate(
   name?: string,
 
   location?: string,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>,
   sku?: Microsoft.BotService.Sku,
   kind?: Microsoft.BotService.Kind,
@@ -463,6 +467,9 @@ op BotChannelsUpdate(
 
 @@override(BotChannels.update, BotChannelsUpdate, "javascript");
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op BotsUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -475,6 +482,8 @@ op BotsUpdate(
   name?: string,
 
   location?: string,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>,
   sku?: Microsoft.BotService.Sku,
   kind?: Microsoft.BotService.Kind,
