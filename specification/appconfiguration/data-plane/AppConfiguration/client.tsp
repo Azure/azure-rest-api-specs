@@ -59,3 +59,34 @@ namespace SdkCustomizations;
 @@clientName(KeyValueFilter, "ConfigurationSettingsFilter", "javascript");
 @@clientName(Snapshot, "ConfigurationSnapshot", "javascript");
 @@clientName(AzureAppConfiguration, "AppConfigurationClient", "javascript");
+
+// Go specific customizations
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+union PutKeyValueRequestContentTypeGo {
+  "application/vnd.microsoft.appconfig.kv+json",
+  "application/vnd.microsoft.appconfig.kvset+json",
+  "application/json",
+  "text/json",
+
+  @clientName("applicationAnyJson", "go")
+  "application/*+json",
+
+  "application/json-patch+json",
+}
+@@clientName(AppConfigResponseHeaders.etagHeader, "ETag", "go");
+@@clientName(KeyValueFields, "SettingFields", "go");
+@@clientName(KeyValueListResult.etag, "ETag", "go");
+@@clientName(
+  PutKeyValueRequestContentTypeGo,
+  "PutKeyValueRequestContentType",
+  "go"
+);
+@@clientName(SnapshotFields.etag, "ETag", "go");
+@@alternateType(
+  PutKeyValueRequestContentType.contentType,
+  PutKeyValueRequestContentTypeGo,
+  "go"
+);
+@@access(PutKeyValueRequestContentTypeGo, Access.internal, "!go");
+@@scope(PutKeyValueRequestContentTypeGo, "go");
