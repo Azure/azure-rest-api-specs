@@ -1,4 +1,4 @@
-import "../common/error.default.tsp";
+import "../sdk-common/error.default.tsp";
 import "../common/servicepatterns.tsp";
 import "../common/models.tsp";
 import "../common/service.tsp";
