@@ -1,33 +1,117 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Microsoft Foundry
   version: v1
 tags:
-  - name: Agents
-  - name: Agent Session Files
-  - name: Agent Invocations
-  - name: Connections
-  - name: Datasets
-  - name: Deployments
-  - name: Evaluation Taxonomies
-  - name: Evaluation Rules
-  - name: Evaluators
-  - name: EvaluatorGenerationJobs
-  - name: Indexes
-  - name: Insights
-  - name: Models
-  - name: Memory Stores
-  - name: Conversations
-  - name: Evals
   - name: Fine-Tuning
+  - name: Responses Root
+    description: Responses
   - name: Responses
-  - name: Redteams
+    parent: Responses Root
+    description: Responses (OpenAI)
+  - name: Conversations
+    parent: Responses Root
+    description: Conversations (OpenAI)
+  - name: Agents Root
+    description: Agents
+  - name: Agents
+    parent: Agents Root
+    description: Agent Management
+  - name: Agent Invocations
+    parent: Agents Root
+  - name: Agent Invocations WebSocket
+    parent: Agents Root
+    description: Agent Invocations (WebSocket)
+  - name: Agent Sessions
+    parent: Agents Root
+  - name: Agent Session Files
+    parent: Agents Root
+  - name: Agent Versions
+    parent: Agents Root
+  - name: Agent Containers
+    parent: Agents Root
+  - name: Platform APIs
+  - name: Datasets
+    parent: Platform APIs
+  - name: Indexes
+    parent: Platform APIs
+  - name: Connections
+    parent: Platform APIs
+  - name: Scheduler
+    parent: Platform APIs
+  - name: Fine-tuning
+    parent: Platform APIs
+    summary: Fine-Tuning
+  - name: Models
+    parent: Platform APIs
+  - name: Memory Stores
+    parent: Platform APIs
+  - name: Chat
+    parent: Platform APIs
+  - name: Assistants
+    parent: Platform APIs
+  - name: Audio
+    parent: Platform APIs
+  - name: Batch
+    parent: Platform APIs
+  - name: Completions
+    parent: Platform APIs
+  - name: Containers
+    parent: Platform APIs
+  - name: Embeddings
+    parent: Platform APIs
+  - name: Files
+    parent: Platform APIs
+  - name: Images
+    parent: Platform APIs
+  - name: Moderations
+    parent: Platform APIs
+  - name: Realtime
+    parent: Platform APIs
+  - name: Threads
+    parent: Platform APIs
+  - name: Uploads
+    parent: Platform APIs
+  - name: Vector stores
+    parent: Platform APIs
+    summary: Vector Stores
+  - name: Videos
+    parent: Platform APIs
   - name: Routines
+    parent: Platform APIs
   - name: Schedules
+    parent: Platform APIs
   - name: Skills
+    parent: Platform APIs
   - name: Toolboxes
+    parent: Platform APIs
+  - name: Deployments
+    parent: Platform APIs
   - name: DataGenerationJobs
+    parent: Platform APIs
+    summary: Data generation jobs
   - name: AgentOptimizationJobs
+    parent: Platform APIs
+    summary: Agent optimization jobs
+  - name: EvaluatorGenerationJobs
+    parent: Platform APIs
+    summary: Evaluator generation jobs
+  - name: Evaluations
+  - name: Evals
+    parent: Evaluations
+  - name: Evaluation Rules
+    parent: Evaluations
+  - name: Evaluators
+    parent: Evaluations
+  - name: Evaluation Taxonomies
+    parent: Evaluations
+  - name: Redteams
+    parent: Evaluations
+    summary: Red Teaming
+  - name: Evalsuite
+    parent: Evaluations
+  - name: Insights
+    parent: Evaluations
 paths:
   /agent_optimization_jobs:
     post:
@@ -615,8 +699,7 @@ paths:
           content:
             application/octet-stream:
               schema:
-                type: string
-                format: binary
+                contentMediaType: application/octet-stream
         4XX:
           description: Client error
           content:
@@ -1262,8 +1345,7 @@ paths:
           content:
             application/zip:
               schema:
-                type: string
-                format: binary
+                contentMediaType: application/zip
         4XX:
           description: Client error
           content:
@@ -1397,7 +1479,7 @@ paths:
             application/json:
               schema:
                 type: object
-                additionalProperties: {}
+                unevaluatedProperties: {}
         4XX:
           description: Client error
           content:
@@ -1617,7 +1699,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Sessions
       requestBody:
         required: true
         content:
@@ -1738,7 +1820,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Sessions
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
@@ -2003,8 +2085,7 @@ paths:
         content:
           application/octet-stream:
             schema:
-              type: string
-              format: binary
+              contentMediaType: application/octet-stream
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview
@@ -2061,8 +2142,7 @@ paths:
           content:
             application/octet-stream:
               schema:
-                type: string
-                format: binary
+                contentMediaType: application/octet-stream
         4XX:
           description: Client error
           content:
@@ -2139,7 +2219,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Sessions
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
@@ -2199,7 +2279,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Sessions
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
@@ -2252,7 +2332,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Sessions
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
@@ -2370,7 +2450,7 @@ paths:
         required_previews:
           - CodeAgents=V1Preview
       tags:
-        - Agents
+        - Agent Versions
       requestBody:
         required: true
         content:
@@ -2480,7 +2560,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Versions
   /agents/{agent_name}/versions/{agent_version}:
     get:
       operationId: Agents_getAgentVersion
@@ -2526,7 +2606,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Versions
     delete:
       operationId: Agents_deleteAgentVersion
       summary: Delete an agent version
@@ -2582,7 +2662,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Versions
   /agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream:
     get:
       operationId: Agents_getSessionLogStream
@@ -2668,7 +2748,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Sessions
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview
@@ -2716,7 +2796,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Versions
       requestBody:
         required: true
         content:
@@ -5587,7 +5667,7 @@ paths:
                   description: A human-readable description of the memory store.
                 metadata:
                   type: object
-                  additionalProperties:
+                  unevaluatedProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
                 definition:
@@ -5764,7 +5844,7 @@ paths:
                   description: A human-readable description of the memory store.
                 metadata:
                   type: object
-                  additionalProperties:
+                  unevaluatedProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the memory store.
       x-ms-foundry-meta:
@@ -6881,9 +6961,10 @@ paths:
                     format: uri
                     description: URL to poll for operation status.
                   operationResult:
-                    type: string
-                    format: uri
-                    nullable: true
+                    anyOf:
+                      - type: string
+                        format: uri
+                      - type: 'null'
                     description: URL to the operation result, or null if the operation is still in progress.
         4XX:
           description: Client error
@@ -7600,8 +7681,7 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            allOf:
-              - $ref: '#/components/schemas/integer'
+            $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -7829,8 +7909,7 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            allOf:
-              - $ref: '#/components/schemas/integer'
+            $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -8079,8 +8158,7 @@ paths:
           required: false
           description: Number of runs to retrieve.
           schema:
-            allOf:
-              - $ref: '#/components/schemas/integer'
+            $ref: '#/components/schemas/integer'
             default: 20
           explode: false
         - name: order
@@ -8586,26 +8664,22 @@ paths:
                 type: object
                 properties:
                   metadata:
-                    type: object
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.Metadata'
-                    nullable: true
+                      - type: 'null'
                   top_logprobs:
-                    type: integer
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.integer'
-                    nullable: true
+                      - type: 'null'
                   temperature:
-                    type: number
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.numeric'
-                    nullable: true
+                      - type: 'null'
                     default: 1
                   top_p:
-                    type: number
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.numeric'
-                    nullable: true
+                      - type: 'null'
                     default: 1
                   user:
                     type: string
@@ -8626,30 +8700,31 @@ paths:
                   service_tier:
                     $ref: '#/components/schemas/OpenAI.ServiceTier'
                   prompt_cache_retention:
-                    type: string
-                    enum:
-                      - in_memory
-                      - 24h
-                    nullable: true
+                    anyOf:
+                      - type: string
+                        enum:
+                          - in_memory
+                          - 24h
+                      - type: 'null'
                   previous_response_id:
-                    type: string
-                    nullable: true
+                    anyOf:
+                      - type: string
+                      - type: 'null'
                   model:
                     type: string
                     description: The model deployment to use for the creation of this response.
                   reasoning:
-                    type: object
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.Reasoning'
-                    nullable: true
+                      - type: 'null'
                   background:
-                    type: boolean
-                    nullable: true
+                    anyOf:
+                      - type: boolean
+                      - type: 'null'
                   max_tool_calls:
-                    type: integer
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.integer'
-                    nullable: true
+                      - type: 'null'
                   text:
                     $ref: '#/components/schemas/OpenAI.ResponseTextParam'
                   tools:
@@ -8661,11 +8736,12 @@ paths:
                   prompt:
                     $ref: '#/components/schemas/OpenAI.Prompt'
                   truncation:
-                    type: string
-                    enum:
-                      - auto
-                      - disabled
-                    nullable: true
+                    anyOf:
+                      - type: string
+                        enum:
+                          - auto
+                          - disabled
+                      - type: 'null'
                     default: disabled
                   id:
                     type: string
@@ -8693,19 +8769,20 @@ paths:
                     format: unixtime
                     description: Unix timestamp (in seconds) of when this Response was created.
                   completed_at:
+                    anyOf:
+                      - type: string
+                        format: date-time
+                      - type: 'null'
                     type: integer
-                    format: unixtime
-                    nullable: true
+                    format: unixTimestamp
                   error:
-                    type: object
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.ResponseError'
-                    nullable: true
+                      - type: 'null'
                   incomplete_details:
-                    type: object
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.ResponseIncompleteDetails'
-                    nullable: true
+                      - type: 'null'
                   output:
                     type: array
                     items:
@@ -8724,31 +8801,33 @@ paths:
                       - type: array
                         items:
                           $ref: '#/components/schemas/OpenAI.InputItem'
-                    nullable: true
+                      - type: 'null'
                   output_text:
-                    type: string
-                    nullable: true
+                    anyOf:
+                      - type: string
+                      - type: 'null'
                   usage:
                     $ref: '#/components/schemas/OpenAI.ResponseUsage'
+                  moderation:
+                    anyOf:
+                      - $ref: '#/components/schemas/OpenAI.Moderation'
+                      - type: 'null'
                   parallel_tool_calls:
                     type: boolean
                     description: Whether to allow the model to run tool calls in parallel.
                     default: true
                   conversation:
-                    type: object
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.ConversationReference'
-                    nullable: true
+                      - type: 'null'
                   max_output_tokens:
-                    type: integer
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/OpenAI.integer'
-                    nullable: true
+                      - type: 'null'
                   agent_reference:
-                    type: object
-                    allOf:
+                    anyOf:
                       - $ref: '#/components/schemas/AgentReference'
-                    nullable: true
+                      - type: 'null'
                     description: The agent used for this response
                   content_filters:
                     type: array
@@ -8790,26 +8869,22 @@ paths:
               type: object
               properties:
                 metadata:
-                  type: object
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.Metadata'
-                  nullable: true
+                    - type: 'null'
                 top_logprobs:
-                  type: integer
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.integer'
-                  nullable: true
+                    - type: 'null'
                 temperature:
-                  type: number
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.numeric'
-                  nullable: true
+                    - type: 'null'
                   default: 1
                 top_p:
-                  type: number
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.numeric'
-                  nullable: true
+                    - type: 'null'
                   default: 1
                 user:
                   type: string
@@ -8830,30 +8905,31 @@ paths:
                 service_tier:
                   $ref: '#/components/schemas/OpenAI.ServiceTier'
                 prompt_cache_retention:
-                  type: string
-                  enum:
-                    - in_memory
-                    - 24h
-                  nullable: true
+                  anyOf:
+                    - type: string
+                      enum:
+                        - in_memory
+                        - 24h
+                    - type: 'null'
                 previous_response_id:
-                  type: string
-                  nullable: true
+                  anyOf:
+                    - type: string
+                    - type: 'null'
                 model:
                   type: string
                   description: The model deployment to use for the creation of this response.
                 reasoning:
-                  type: object
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.Reasoning'
-                  nullable: true
+                    - type: 'null'
                 background:
-                  type: boolean
-                  nullable: true
+                  anyOf:
+                    - type: boolean
+                    - type: 'null'
                 max_tool_calls:
-                  type: integer
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.integer'
-                  nullable: true
+                    - type: 'null'
                 text:
                   $ref: '#/components/schemas/OpenAI.ResponseTextParam'
                 tools:
@@ -8865,60 +8941,69 @@ paths:
                 prompt:
                   $ref: '#/components/schemas/OpenAI.Prompt'
                 truncation:
-                  type: string
-                  enum:
-                    - auto
-                    - disabled
-                  nullable: true
+                  anyOf:
+                    - type: string
+                      enum:
+                        - auto
+                        - disabled
+                    - type: 'null'
                   default: disabled
                 input:
                   $ref: '#/components/schemas/OpenAI.InputParam'
                 include:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/OpenAI.IncludeEnum'
-                  nullable: true
+                  anyOf:
+                    - type: array
+                      items:
+                        $ref: '#/components/schemas/OpenAI.IncludeEnum'
+                    - type: 'null'
                 parallel_tool_calls:
-                  type: boolean
-                  nullable: true
+                  anyOf:
+                    - type: boolean
+                    - type: 'null'
                   default: true
                 store:
-                  type: boolean
-                  nullable: true
+                  anyOf:
+                    - type: boolean
+                    - type: 'null'
                   default: true
                 instructions:
-                  type: string
-                  nullable: true
+                  anyOf:
+                    - type: string
+                    - type: 'null'
+                moderation:
+                  anyOf:
+                    - $ref: '#/components/schemas/OpenAI.ModerationParam'
+                    - type: 'null'
                 stream:
-                  type: boolean
-                  nullable: true
+                  anyOf:
+                    - type: boolean
+                    - type: 'null'
                 stream_options:
-                  type: object
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.ResponseStreamOptions'
-                  nullable: true
+                    - type: 'null'
                 conversation:
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.ConversationParam'
-                  nullable: true
+                    - type: 'null'
                 context_management:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/OpenAI.ContextManagementParam'
-                  nullable: true
+                  anyOf:
+                    - type: array
+                      items:
+                        $ref: '#/components/schemas/OpenAI.ContextManagementParam'
+                    - type: 'null'
                   description: Context management configuration for this request.
                 max_output_tokens:
-                  type: integer
-                  allOf:
+                  anyOf:
                     - $ref: '#/components/schemas/OpenAI.integer'
-                  nullable: true
+                    - type: 'null'
                 agent_reference:
                   allOf:
                     - $ref: '#/components/schemas/AgentReference'
                   description: The agent to use for generating the response.
                 structured_inputs:
                   type: object
-                  additionalProperties: {}
+                  unevaluatedProperties: {}
                   description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
     get:
       operationId: listResponses
@@ -10550,8 +10635,7 @@ paths:
           content:
             application/zip:
               schema:
-                type: string
-                format: binary
+                contentMediaType: application/zip
         4XX:
           description: Client error
           content:
@@ -10905,8 +10989,7 @@ paths:
           content:
             application/zip:
               schema:
-                type: string
-                format: binary
+                contentMediaType: application/zip
         4XX:
           description: Client error
           content:
@@ -11238,7 +11321,7 @@ paths:
                   description: A human-readable description of the toolbox.
                 metadata:
                   type: object
-                  additionalProperties:
+                  unevaluatedProperties:
                     type: string
                   description: Arbitrary key-value metadata to associate with the toolbox.
                 tools:
@@ -11655,7 +11738,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -12352,10 +12435,11 @@ components:
         - definition
       properties:
         metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
             useful for storing additional information about the object in a structured
@@ -12848,7 +12932,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -13227,7 +13311,7 @@ components:
               description: A description of what the function does, used by the model to choose when and how to call the function.
             parameters:
               type: object
-              additionalProperties: {}
+              unevaluatedProperties: {}
               description: The parameters the functions accepts, described as a JSON Schema object.
           required:
             - name
@@ -13272,7 +13356,7 @@ components:
           description: The Azure Function Tool definition.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -13420,7 +13504,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -13552,7 +13636,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -13681,7 +13765,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -13782,13 +13866,13 @@ components:
           type: array
           items:
             type: object
-            additionalProperties: {}
+            unevaluatedProperties: {}
           description: Optional skill overrides.
         tools:
           type: array
           items:
             type: object
-            additionalProperties: {}
+            unevaluatedProperties: {}
           description: Optional tool overrides.
       description: Deploy-config blob for a candidate. Suitable for setting OPTIMIZATION_CONFIG on a hosted-agent version.
     CandidateFileInfo:
@@ -13892,7 +13976,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -13958,7 +14042,7 @@ components:
           description: List of clusters identified in the insights.
         coordinates:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ChartCoordinate'
           description: |2-
               Optional mapping of IDs to 2D coordinates used by the UX for visualization.
@@ -14132,7 +14216,7 @@ components:
           readOnly: true
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Metadata of the connection
           readOnly: true
@@ -14161,7 +14245,8 @@ components:
         image:
           type: string
           description: The container image for the hosted agent.
-          example: my-registry.azurecr.io/my-hosted-agent:latest
+          examples:
+            - my-registry.azurecr.io/my-hosted-agent:latest
       description: Container-based deployment configuration for a hosted agent.
       x-ms-foundry-meta:
         required_previews:
@@ -14209,8 +14294,7 @@ components:
           format: double
           maximum: 100
           description: Percentage (0-100] chance that a matching event triggers an evaluation. When omitted, the service-default is to evaluate every event, which is equivalent to setting a sampling rate of 100.
-          minimum: 0
-          exclusiveMinimum: true
+          exclusiveMinimum: 0
           default: 100
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
@@ -14241,7 +14325,7 @@ components:
           default: 5
         data_mapping:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Mapping from source fields to response_id field, which is required for retrieving chat history.
         sampling_params:
@@ -14304,8 +14388,6 @@ components:
             - $ref: '#/components/schemas/CreateAgentVersionFromCodeMetadata'
           description: JSON metadata including description and hosted definition.
         code:
-          type: string
-          format: binary
           description: The code zip file (max 250 MB).
       required:
         - metadata
@@ -14327,7 +14409,7 @@ components:
             - Must not exceed 63 characters.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -14346,7 +14428,7 @@ components:
           description: The manifest ID to import the agent version from.
         parameter_values:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
     CreateAgentRequest:
       type: object
@@ -14364,7 +14446,7 @@ components:
             - Must not exceed 63 characters.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -14439,8 +14521,6 @@ components:
             - $ref: '#/components/schemas/CreateAgentVersionFromCodeMetadata'
           description: JSON metadata including description and hosted definition.
         code:
-          type: string
-          format: binary
           description: The code zip file (max 250 MB).
       required:
         - metadata
@@ -14456,7 +14536,7 @@ components:
           description: A human-readable description of the agent.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -14486,7 +14566,7 @@ components:
       properties:
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -14505,7 +14585,7 @@ components:
           description: The manifest ID to import the agent version from.
         parameter_values:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
     CreateAgentVersionRequest:
       type: object
@@ -14514,7 +14594,7 @@ components:
       properties:
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -14561,10 +14641,9 @@ components:
           type: string
           description: The name of the evaluation.
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         data_source_config:
           oneOf:
             - $ref: '#/components/schemas/OpenAI.CreateEvalCustomDataSourceConfig'
@@ -14586,7 +14665,7 @@ components:
           description: A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -14601,10 +14680,9 @@ components:
           type: string
           description: The name of the run.
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         data_source:
           oneOf:
             - $ref: '#/components/schemas/OpenAI.CreateEvalJsonlRunDataSource'
@@ -14614,7 +14692,7 @@ components:
           description: Details about the run's data source.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -14630,9 +14708,7 @@ components:
       properties:
         files:
           type: array
-          items:
-            type: string
-            format: binary
+          items: {}
           description: Skill files to upload. Upload a single zip file or multiple individual files with relative paths.
         default:
           type: boolean
@@ -14688,7 +14764,7 @@ components:
             - CustomKeys
           description: The credential type
           readOnly: true
-      additionalProperties:
+      unevaluatedProperties:
         type: string
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
@@ -14715,7 +14791,7 @@ components:
           description: The provider-specific event name that fires the routine.
         parameters:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Provider-specific trigger parameters.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
@@ -14870,7 +14946,7 @@ components:
           description: Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
       description: Output options for data generation job.
@@ -14992,7 +15068,7 @@ components:
           description: The data source type discriminator.
         schema:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The overall object JSON schema for the run data source items.
       discriminator:
         propertyName: type
@@ -15027,7 +15103,7 @@ components:
           readOnly: true
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary of the output dataset.
           readOnly: true
@@ -15166,7 +15242,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       discriminator:
@@ -15538,10 +15614,9 @@ components:
           format: unixtime
           description: The Unix timestamp (in seconds) for when the eval was created.
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         modified_at:
           allOf:
             - $ref: '#/components/schemas/integer'
@@ -15551,7 +15626,7 @@ components:
           description: the name of the person who created the run.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -15722,10 +15797,9 @@ components:
             - $ref: '#/components/schemas/EvalRunDataSource'
           description: Information about the run's data source.
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         error:
           $ref: '#/components/schemas/OpenAI.EvalApiError'
         modified_at:
@@ -15737,7 +15811,7 @@ components:
           description: the name of the person who created the run.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -15996,7 +16070,7 @@ components:
           description: The identifier for the data source item.
         datasource_item:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Details of the input data source item.
         results:
           type: array
@@ -16086,9 +16160,10 @@ components:
           type: boolean
           description: Whether the grader considered the output a pass.
         sample:
-          type: object
-          additionalProperties: {}
-          nullable: true
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
           description: Optional sample or intermediate data produced by the grader.
         status:
           allOf:
@@ -16109,10 +16184,10 @@ components:
           description: The reason for the test criteria metric.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Additional details about the test criteria metric.
-      additionalProperties: {}
+      unevaluatedProperties: {}
       description: A single grader result for an evaluation run output item.
       title: EvalRunOutputItemResult
     EvalRunOutputItemResultStatus:
@@ -16352,7 +16427,7 @@ components:
           description: Indicates whether the evaluation rule is enabled. Default is true.
         systemData:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: System metadata for the evaluation rule.
           readOnly: true
@@ -16456,7 +16531,7 @@ components:
           description: Identifier of the evaluation group.
         evalRun:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The evaluation run payload.
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
@@ -16491,7 +16566,7 @@ components:
           description: List of taxonomy categories.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
@@ -16505,7 +16580,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
         taxonomyInput:
@@ -16519,7 +16594,7 @@ components:
           description: List of taxonomy categories.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
@@ -16567,7 +16642,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
         taxonomyInput:
@@ -16581,7 +16656,7 @@ components:
           description: List of taxonomy categories.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
@@ -16618,15 +16693,15 @@ components:
           description: The type of evaluator definition
         init_parameters:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required.
         data_schema:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required.
         metrics:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/EvaluatorMetric'
           description: List of output metrics produced by this evaluator
       discriminator:
@@ -16863,7 +16938,7 @@ components:
           description: Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Metadata about the evaluator
         evaluator_type:
@@ -16928,7 +17003,7 @@ components:
           description: Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Metadata about the evaluator
         evaluator_type:
@@ -16956,7 +17031,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
@@ -16968,7 +17043,7 @@ components:
           description: Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Metadata about the evaluator
         categories:
@@ -16988,7 +17063,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
@@ -17103,12 +17178,9 @@ components:
           description: (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
         require_approval:
           anyOf:
-            - type: object
-              allOf:
-                - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
-              nullable: true
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
             - type: string
-              nullable: true
+            - type: 'null'
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
         name:
@@ -17119,7 +17191,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -17398,15 +17470,18 @@ components:
         header_name:
           type: string
           description: The name of the HTTP header to inject the secret value into.
-          example: X-Otlp-Api-Key
+          examples:
+            - X-Otlp-Api-Key
         secret_id:
           type: string
           description: The identifier of the secret store or connection.
-          example: my-secret-store
+          examples:
+            - my-secret-store
         secret_key:
           type: string
           description: The key within the secret to retrieve the authentication value.
-          example: OTLP_KEY
+          examples:
+            - OTLP_KEY
       allOf:
         - $ref: '#/components/schemas/TelemetryEndpointAuth'
       description: Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.
@@ -17434,19 +17509,21 @@ components:
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
-          example: '0.25'
+          examples:
+            - '0.25'
         memory:
           type: string
           description: The memory configuration for the hosted agent.
-          example: 0.5Gi
+          examples:
+            - 0.5Gi
         environment_variables:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Environment variables to set in the hosted agent container.
-          example:
-            name: LOG_LEVEL
-            value: debug
+          examples:
+            - name: LOG_LEVEL
+              value: debug
         container_configuration:
           allOf:
             - $ref: '#/components/schemas/ContainerConfiguration'
@@ -17459,11 +17536,11 @@ components:
           items:
             $ref: '#/components/schemas/ProtocolVersionRecord'
           description: The protocols that the agent supports for ingress communication.
-          example:
-            - protocol: responses
-              version: v0.1.1
-            - protocol: a2a
-              version: v0.3.0
+          examples:
+            - - protocol: responses
+                version: v0.1.1
+              - protocol: a2a
+                version: v0.3.0
           x-ms-foundry-meta:
             required_previews:
               - CodeAgents=V1Preview
@@ -17565,7 +17642,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       discriminator:
@@ -17709,11 +17786,11 @@ components:
           description: Sample type
         features:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Features to help with additional filtering of data in UX.
         correlationInfo:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Info about the correlation for the analysis sample.
       discriminator:
         propertyName: type
@@ -18187,7 +18264,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -18229,10 +18306,11 @@ components:
             - $ref: '#/components/schemas/ToolCallStatus'
           description: The status of the tool call.
         memories:
-          type: array
-          items:
-            $ref: '#/components/schemas/MemoryItem'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/MemoryItem'
+            - type: 'null'
           description: The results returned from the memory search.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
@@ -18384,7 +18462,7 @@ components:
           description: A human-readable description of the memory store.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Arbitrary key-value metadata to associate with the memory store.
         definition:
@@ -18536,7 +18614,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -18588,7 +18666,7 @@ components:
           readOnly: true
         capabilities:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Capabilities of deployed model
           readOnly: true
@@ -18737,7 +18815,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Model Version Definition
@@ -18879,7 +18957,6 @@ components:
             - create_file
           description: Create a new file with the provided diff.
           x-stainless-const: true
-          default: create_file
         path:
           type: string
           description: Path of the file to create.
@@ -18903,7 +18980,6 @@ components:
             - create_file
           description: The operation type. Always `create_file`.
           x-stainless-const: true
-          default: create_file
         path:
           type: string
           minLength: 1
@@ -18928,7 +19004,6 @@ components:
             - delete_file
           description: Delete the specified file.
           x-stainless-const: true
-          default: delete_file
         path:
           type: string
           description: Path of the file to delete.
@@ -18948,7 +19023,6 @@ components:
             - delete_file
           description: The operation type. Always `delete_file`.
           x-stainless-const: true
-          default: delete_file
         path:
           type: string
           minLength: 1
@@ -19014,7 +19088,6 @@ components:
             - apply_patch
           description: The type of the tool. Always `apply_patch`.
           x-stainless-const: true
-          default: apply_patch
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Allows the assistant to create, delete, or update files using unified diffs.
@@ -19032,7 +19105,6 @@ components:
             - update_file
           description: Update an existing file with the provided diff.
           x-stainless-const: true
-          default: update_file
         path:
           type: string
           description: Path of the file to update.
@@ -19056,7 +19128,6 @@ components:
             - update_file
           description: The operation type. Always `update_file`.
           x-stainless-const: true
-          default: update_file
         path:
           type: string
           minLength: 1
@@ -19082,17 +19153,21 @@ components:
           x-stainless-const: true
           default: approximate
         country:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         region:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         city:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         timezone:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
     OpenAI.AutoCodeInterpreterToolParam:
       type: object
       required:
@@ -19112,9 +19187,9 @@ components:
           maxItems: 50
           description: An optional list of uploaded files to make available to your code.
         memory_limit:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
-          nullable: true
+            - type: 'null'
         network_policy:
           $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
       description: Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.
@@ -19238,7 +19313,6 @@ components:
             - click
           description: Specifies the event type. For a click action, this property is always `click`.
           x-stainless-const: true
-          default: click
         button:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ClickButtonType'
@@ -19252,10 +19326,11 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The y-coordinate where the click occurred.
         keys:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A click action.
@@ -19316,7 +19391,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -19381,24 +19456,27 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.InputItem'
-          nullable: true
+            - type: 'null'
         previous_response_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         instructions:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         prompt_cache_key:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         prompt_cache_retention:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.PromptCacheRetentionEnum'
-          nullable: true
+            - type: 'null'
         service_tier:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ServiceTierEnum'
-          nullable: true
+            - type: 'null'
     OpenAI.ComparisonFilter:
       type: object
       required:
@@ -19519,11 +19597,13 @@ components:
           type: string
           description: The ID of the pending safety check.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         message:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       description: A pending safety check for the computer call.
     OpenAI.ComputerEnvironment:
       type: string
@@ -19547,14 +19627,15 @@ components:
             - computer_screenshot
           description: Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
           x-stainless-const: true
-          default: computer_screenshot
         image_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
@@ -19596,7 +19677,6 @@ components:
             - computer
           description: The type of the computer tool. Always `computer`.
           x-stainless-const: true
-          default: computer
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
@@ -19615,7 +19695,6 @@ components:
             - computer_use_preview
           description: The type of the computer use tool. Always `computer_use_preview`.
           x-stainless-const: true
-          default: computer_use_preview
         environment:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ComputerEnvironment'
@@ -19643,7 +19722,6 @@ components:
             - container_auto
           description: Automatically creates a container for this request
           x-stainless-const: true
-          default: container_auto
         file_ids:
           type: array
           items:
@@ -19651,9 +19729,9 @@ components:
           maxItems: 50
           description: An optional list of uploaded files to make available to your code.
         memory_limit:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
-          nullable: true
+            - type: 'null'
         skills:
           type: array
           items:
@@ -19680,7 +19758,6 @@ components:
             - container_file_citation
           description: The type of the container file citation. Always `container_file_citation`.
           x-stainless-const: true
-          default: container_file_citation
         container_id:
           type: string
           description: The ID of the container file.
@@ -19721,7 +19798,6 @@ components:
             - allowlist
           description: Allow outbound network access only to specified domains. Always `allowlist`.
           x-stainless-const: true
-          default: allowlist
         allowed_domains:
           type: array
           items:
@@ -19741,7 +19817,6 @@ components:
             - disabled
           description: Disable outbound network access. Always `disabled`.
           x-stainless-const: true
-          default: disabled
       allOf:
         - $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
     OpenAI.ContainerNetworkPolicyParam:
@@ -19776,7 +19851,6 @@ components:
             - container_reference
           description: The environment type. Always `container_reference`.
           x-stainless-const: true
-          default: container_reference
         container_id:
           type: string
       allOf:
@@ -19811,10 +19885,9 @@ components:
           type: string
           description: The context management entry type. Currently only 'compaction' is supported.
         compact_threshold:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
     OpenAI.ConversationItem:
       type: object
       required:
@@ -19946,8 +20019,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call output.
@@ -19988,15 +20062,17 @@ components:
           type: string
           description: The ID of the container used to run the code.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         outputs:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A tool call to run code.
@@ -20234,10 +20310,11 @@ components:
             type: string
           description: The queries used to search for files.
         results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: |-
@@ -20276,10 +20353,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call.
@@ -20320,10 +20396,9 @@ components:
             $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContent'
           description: An array of shell call output contents
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The identifier of the actor that created the item.
@@ -20448,8 +20523,9 @@ components:
             - failed
           description: The status of the image generation call.
         result:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: An image generation request made by the model.
@@ -20544,12 +20620,13 @@ components:
           type: string
           description: A JSON string of the output of the local shell tool call.
         status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: The output of a local shell tool call.
@@ -20609,8 +20686,9 @@ components:
           type: boolean
           description: Whether the request was approved.
         reason:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A response to an MCP approval request.
@@ -20674,18 +20752,20 @@ components:
           type: string
           description: A JSON string of the arguments passed to the tool.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         error:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         status:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
         approval_request_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: An invocation of a tool on an MCP server.
@@ -20723,9 +20803,9 @@ components:
             $ref: '#/components/schemas/OpenAI.MessageContent'
           description: The content of the message
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A message to or from the model.
@@ -20747,8 +20827,9 @@ components:
           type: string
           description: The unique identifier of the reasoning content.
         encrypted_content:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         summary:
           type: array
           items:
@@ -20797,8 +20878,9 @@ components:
           type: string
           description: The unique ID of the tool search call item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -20835,8 +20917,9 @@ components:
           type: string
           description: The unique ID of the tool search output item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -21064,15 +21147,15 @@ components:
       type: object
       properties:
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.InputItem'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.InputItem'
+            - type: 'null'
     OpenAI.CreateEvalCompletionsRunDataSource:
       type: object
       required:
@@ -21193,7 +21276,7 @@ components:
           default: custom
         item_schema:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The json schema for each row in the data source.
         include_sample_schema:
           type: boolean
@@ -21265,7 +21348,7 @@ components:
           default: logs
         metadata:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Metadata filters for the logs data source.
       description: |-
         A data source config which specifies the metadata property of your logs query.
@@ -21410,7 +21493,7 @@ components:
           default: stored_completions
         metadata:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Metadata filters for the stored completions data source.
       description: Deprecated in favor of LogsDataSourceConfig.
       title: StoredCompletionsDataSourceConfig
@@ -21460,16 +21543,18 @@ components:
               This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter.
           deprecated: true
         suffix:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
           minLength: 1
           maxLength: 64
           description: |-
             A string of up to 64 characters that will be added to your fine-tuned model name.
               For example, a `suffix` of "custom-model-name" would produce a model name like `ft:gpt-4o-mini:openai:custom-model-name:7p4lURel`.
         validation_file:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
           description: |-
             The ID of an uploaded file that contains validation data.
               If you provide this file, the data is used to generate validation
@@ -21479,16 +21564,16 @@ components:
               Your dataset must be formatted as a JSONL file. You must upload your file with the purpose `fine-tune`.
               See the [fine-tuning guide](/docs/guides/model-optimization) for more details.
         integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegrations'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequestIntegrations'
+            - type: 'null'
           description: A list of integrations to enable for your fine-tuning job.
         seed:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
           minimum: 0
           maximum: 2147483647
           description: |-
@@ -21497,10 +21582,9 @@ components:
         method:
           $ref: '#/components/schemas/OpenAI.FineTuneMethod'
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
     OpenAI.CreateFineTuningJobRequestHyperparameters:
       type: object
       properties:
@@ -21546,11 +21630,13 @@ components:
         project:
           type: string
         name:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         entity:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         tags:
           type: array
           items:
@@ -21623,7 +21709,6 @@ components:
             - grammar
           description: Grammar format. Always `grammar`.
           x-stainless-const: true
-          default: grammar
         syntax:
           allOf:
             - $ref: '#/components/schemas/OpenAI.GrammarSyntax1'
@@ -21646,7 +21731,6 @@ components:
             - text
           description: Unconstrained text format. Always `text`.
           x-stainless-const: true
-          default: text
       allOf:
         - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
       description: Unconstrained free-form text.
@@ -21663,7 +21747,6 @@ components:
             - custom
           description: The type of the custom tool. Always `custom`.
           x-stainless-const: true
-          default: custom
         name:
           type: string
           description: The name of the custom tool, used to identify it in tool calls.
@@ -21739,7 +21822,6 @@ components:
             - double_click
           description: Specifies the event type. For a double click action, this property is always set to `double_click`.
           x-stainless-const: true
-          default: double_click
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -21749,10 +21831,11 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The y-coordinate where the double click occurred.
         keys:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A double click action.
@@ -21769,7 +21852,6 @@ components:
             - drag
           description: Specifies the event type. For a drag action, this property is always set to `drag`.
           x-stainless-const: true
-          default: drag
         path:
           type: array
           items:
@@ -21783,10 +21865,11 @@ components:
               ]
               ```
         keys:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A drag action.
@@ -21816,9 +21899,9 @@ components:
             Text, image, or audio input to the model, used to generate a response.
               Can also contain previous assistant responses.
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
         type:
           type: string
           enum:
@@ -21852,13 +21935,15 @@ components:
         - message
       properties:
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         message:
           type: string
         param:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
         details:
@@ -21867,10 +21952,10 @@ components:
             $ref: '#/components/schemas/OpenAI.Error'
         additionalInfo:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         debugInfo:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
     OpenAI.EvalApiError:
       type: object
       required:
@@ -22000,26 +22085,22 @@ components:
       type: object
       properties:
         seed:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         top_p:
-          type: number
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
+            - type: 'null'
           default: 1
         temperature:
-          type: number
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
+            - type: 'null'
         max_completions_tokens:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         reasoning_effort:
           $ref: '#/components/schemas/OpenAI.ReasoningEffort'
     OpenAI.EvalGraderStringCheck:
@@ -22272,10 +22353,10 @@ components:
       properties:
         item:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         sample:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
     OpenAI.EvalJsonlFileIdSource:
       type: object
       required:
@@ -22304,49 +22385,50 @@ components:
             - responses
           description: The type of run data source. Always `responses`.
         metadata:
-          type: object
-          additionalProperties: {}
-          nullable: true
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
         model:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         instructions_search:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         created_after:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         created_before:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         reasoning_effort:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-          nullable: true
+            - type: 'null'
         temperature:
-          type: number
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
+            - type: 'null'
         top_p:
-          type: number
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
+            - type: 'null'
         users:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
         tools:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       description: A EvalResponsesSource object describing a run data source configuration.
       title: EvalResponsesSource
       x-oaiMeta:
@@ -22492,28 +22574,25 @@ components:
           x-stainless-const: true
           default: stored_completions
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         model:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         created_after:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         created_before:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         limit:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
       description: A StoredCompletionsRunDataSource configuration describing a set of filters
       title: StoredCompletionsRunDataSource
       x-oaiMeta:
@@ -22542,7 +22621,6 @@ components:
             - file_citation
           description: The type of the file citation. Always `file_citation`.
           x-stainless-const: true
-          default: file_citation
         file_id:
           type: string
           description: The ID of the file.
@@ -22598,7 +22676,6 @@ components:
             - file_search
           description: The type of the file search tool. Always `file_search`.
           x-stainless-const: true
-          default: file_search
         vector_store_ids:
           type: array
           items:
@@ -22613,9 +22690,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.RankingOptions'
           description: Ranking options for search.
         filters:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
-          nullable: true
+            - type: 'null'
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
@@ -22624,7 +22701,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -22644,10 +22721,9 @@ components:
         filename:
           type: string
         attributes:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.VectorStoreFileAttributes'
-          nullable: true
+            - type: 'null'
         score:
           type: number
           format: float
@@ -22855,11 +22931,13 @@ components:
         project:
           type: string
         name:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         entity:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         tags:
           type: array
           items:
@@ -22891,17 +22969,20 @@ components:
           format: unixtime
           description: The Unix timestamp (in seconds) for when the fine-tuning job was created.
         error:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FineTuningJobError'
-          nullable: true
+            - type: 'null'
         fine_tuned_model:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         finished_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
           type: integer
-          format: unixtime
-          nullable: true
+          format: unixTimestamp
         hyperparameters:
           allOf:
             - $ref: '#/components/schemas/OpenAI.FineTuningJobHyperparameters'
@@ -22934,36 +23015,39 @@ components:
             - cancelled
           description: The current status of the fine-tuning job, which can be either `validating_files`, `queued`, `running`, `succeeded`, `failed`, or `cancelled`.
         trained_tokens:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         training_file:
           type: string
           description: The file ID used for training. You can retrieve the training data with the [Files API](/docs/api-reference/files/retrieve-contents).
         validation_file:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         integrations:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FineTuningIntegration'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FineTuningIntegration'
+            - type: 'null'
         seed:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The seed used for the fine-tuning job.
         estimated_finish:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
           type: integer
-          format: unixtime
-          nullable: true
+          format: unixTimestamp
         method:
           $ref: '#/components/schemas/OpenAI.FineTuneMethod'
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
       description: The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
       title: FineTuningJob
       x-oaiMeta:
@@ -23095,8 +23179,9 @@ components:
         message:
           type: string
         param:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
     OpenAI.FineTuningJobEvent:
       type: object
       required:
@@ -23162,11 +23247,8 @@ components:
             - type: string
               enum:
                 - auto
-              nullable: true
-            - type: integer
-              allOf:
-                - $ref: '#/components/schemas/OpenAI.integer'
-              nullable: true
+            - $ref: '#/components/schemas/OpenAI.integer'
+            - type: 'null'
           default: auto
         learning_rate_multiplier:
           oneOf:
@@ -23208,8 +23290,9 @@ components:
           x-stainless-const: true
           default: input_file
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         filename:
           type: string
           description: The name of the file to be sent to the model.
@@ -23242,12 +23325,14 @@ components:
           x-stainless-const: true
           default: input_image
         image_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
@@ -23316,11 +23401,12 @@ components:
         parameters:
           $ref: '#/components/schemas/OpenAI.FunctionParameters'
         strict:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
     OpenAI.FunctionParameters:
       type: object
-      additionalProperties: {}
+      unevaluatedProperties: {}
       description: |-
         The parameters the functions accepts, described as a JSON Schema object. See the [guide](/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
         Omitting `parameters` defines a function with an empty parameter list.
@@ -23336,15 +23422,13 @@ components:
           items:
             type: string
         timeout_ms:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
       description: Execute a shell command.
       title: Shell exec action
     OpenAI.FunctionShellActionParam:
@@ -23358,15 +23442,13 @@ components:
             type: string
           description: Ordered shell commands for the execution environment to run.
         timeout_ms:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
       description: Commands and limits describing how to run the shell tool call.
       title: Shell action
     OpenAI.FunctionShellCallEnvironment:
@@ -23510,7 +23592,6 @@ components:
             - exit
           description: The outcome type. Always `exit`.
           x-stainless-const: true
-          default: exit
         exit_code:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -23531,7 +23612,6 @@ components:
             - exit
           description: The outcome type. Always `exit`.
           x-stainless-const: true
-          default: exit
         exit_code:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -23599,7 +23679,6 @@ components:
             - timeout
           description: The outcome type. Always `timeout`.
           x-stainless-const: true
-          default: timeout
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputOutcome'
       description: Indicates that the shell call exceeded its configured time limit.
@@ -23615,7 +23694,6 @@ components:
             - timeout
           description: The outcome type. Always `timeout`.
           x-stainless-const: true
-          default: timeout
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputOutcomeParam'
       description: Indicates that the shell call exceeded its configured time limit.
@@ -23637,12 +23715,10 @@ components:
             - shell
           description: The type of the shell tool. Always `shell`.
           x-stainless-const: true
-          default: shell
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
-          nullable: true
+            - type: 'null'
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
@@ -23651,7 +23727,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -23734,20 +23810,22 @@ components:
             - function
           description: The type of the function tool. Always `function`.
           x-stainless-const: true
-          default: function
         name:
           type: string
           description: The name of the function to call.
         description:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         parameters:
-          type: object
-          additionalProperties: {}
-          nullable: true
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
         strict:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
         defer_loading:
           type: boolean
           description: Whether this function is deferred and loaded via tool search.
@@ -23767,16 +23845,17 @@ components:
           maxLength: 128
           pattern: ^[a-zA-Z0-9_-]+$
         description:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         parameters:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
-          nullable: true
+            - type: 'null'
         strict:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
         type:
           type: string
           enum:
@@ -24180,7 +24259,6 @@ components:
             - image_generation
           description: The type of the image generation tool. Always `image_generation`.
           x-stainless-const: true
-          default: image_generation
         model:
           anyOf:
             - type: string
@@ -24247,9 +24325,9 @@ components:
               `opaque`, or `auto`. Default: `auto`.
           default: auto
         input_fidelity:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.InputFidelity'
-          nullable: true
+            - type: 'null'
         input_image_mask:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenToolInputImageMask'
@@ -24274,7 +24352,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -24330,7 +24408,6 @@ components:
             - inline
           description: Defines an inline skill for this request.
           x-stainless-const: true
-          default: inline
         name:
           type: string
           description: The name of the skill.
@@ -24427,8 +24504,9 @@ components:
           x-stainless-const: true
           default: input_file
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         filename:
           type: string
           description: The name of the file to be sent to the model.
@@ -24461,12 +24539,14 @@ components:
           x-stainless-const: true
           default: input_image
         image_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
@@ -24522,8 +24602,9 @@ components:
           x-stainless-const: true
           default: input_file
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         filename:
           type: string
           description: The name of the file to be sent to the model.
@@ -24553,18 +24634,22 @@ components:
           x-stainless-const: true
           default: input_file
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         filename:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         file_data:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         file_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.FileInputDetail'
@@ -24585,12 +24670,14 @@ components:
           x-stainless-const: true
           default: input_image
         image_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
@@ -24610,16 +24697,18 @@ components:
           x-stainless-const: true
           default: input_image
         image_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         detail:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.DetailEnum'
-          nullable: true
+            - type: 'null'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision)
       title: Input image
     OpenAI.InputItem:
@@ -24672,8 +24761,9 @@ components:
         - tools
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -24711,8 +24801,9 @@ components:
           x-stainless-const: true
           default: apply_patch_call
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -24745,8 +24836,9 @@ components:
           x-stainless-const: true
           default: apply_patch_call_output
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -24757,8 +24849,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: The streamed output emitted by an apply patch tool call.
@@ -24796,15 +24889,17 @@ components:
           type: string
           description: The ID of the container used to run the code.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         outputs:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: A tool call to run code.
@@ -24816,8 +24911,9 @@ components:
         - encrypted_content
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -24841,8 +24937,9 @@ components:
         - output
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -24858,14 +24955,15 @@ components:
         output:
           $ref: '#/components/schemas/OpenAI.ComputerScreenshotImage'
         acknowledged_safety_checks:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
+            - type: 'null'
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: The output of a computer tool call.
@@ -25014,10 +25112,11 @@ components:
             type: string
           description: The queries used to search for files.
         results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: |-
@@ -25032,8 +25131,9 @@ components:
         - output
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -25057,9 +25157,9 @@ components:
                   - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
           description: Text, image, or file output of the function tool call.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: The output of a function tool call.
@@ -25072,8 +25172,9 @@ components:
         - action
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -25091,14 +25192,13 @@ components:
             - $ref: '#/components/schemas/OpenAI.FunctionShellActionParam'
           description: The shell commands and limits that describe how to run the tool call.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemStatus'
-          nullable: true
+            - type: 'null'
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemParamEnvironment'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: A tool representing a request to execute one or more shell commands.
@@ -25111,8 +25211,9 @@ components:
         - output
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -25131,14 +25232,13 @@ components:
             $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContentParam'
           description: Captured chunks of stdout and stderr output, along with their associated outcomes.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemStatus'
-          nullable: true
+            - type: 'null'
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: The streamed output items emitted by a shell tool call.
@@ -25215,8 +25315,9 @@ components:
             - failed
           description: The status of the image generation call.
         result:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: An image generation request made by the model.
@@ -25275,12 +25376,13 @@ components:
           type: string
           description: A JSON string of the output of the local shell tool call.
         status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: The output of a local shell tool call.
@@ -25330,8 +25432,9 @@ components:
           description: The type of the item. Always `mcp_approval_response`.
           x-stainless-const: true
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         approval_request_id:
           type: string
           description: The ID of the approval request being answered.
@@ -25339,8 +25442,9 @@ components:
           type: boolean
           description: Whether the request was approved.
         reason:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: A response to an MCP approval request.
@@ -25404,18 +25508,20 @@ components:
           type: string
           description: A JSON string of the arguments passed to the tool.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         error:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         status:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
         approval_request_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: An invocation of a tool on an MCP server.
@@ -25450,9 +25556,9 @@ components:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
         status:
           type: string
           enum:
@@ -25483,8 +25589,9 @@ components:
           type: string
           description: The unique identifier of the reasoning content.
         encrypted_content:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         summary:
           type: array
           items:
@@ -25519,11 +25626,13 @@ components:
         - arguments
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -25540,9 +25649,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
           description: The arguments supplied to the tool search call.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
     OpenAI.InputItemToolSearchOutputItemParam:
@@ -25552,11 +25661,13 @@ components:
         - tools
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -25574,9 +25685,9 @@ components:
             $ref: '#/components/schemas/OpenAI.Tool'
           description: The loaded tool definitions returned by the tool search output.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
     OpenAI.InputItemType:
@@ -25756,8 +25867,9 @@ components:
         - tools
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -25795,8 +25907,9 @@ components:
           x-stainless-const: true
           default: apply_patch_call
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -25829,8 +25942,9 @@ components:
           x-stainless-const: true
           default: apply_patch_call_output
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -25841,8 +25955,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: The streamed output emitted by an apply patch tool call.
@@ -25880,15 +25995,17 @@ components:
           type: string
           description: The ID of the container used to run the code.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         outputs:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: A tool call to run code.
@@ -25900,8 +26017,9 @@ components:
         - encrypted_content
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -25925,8 +26043,9 @@ components:
         - output
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -25942,14 +26061,15 @@ components:
         output:
           $ref: '#/components/schemas/OpenAI.ComputerScreenshotImage'
         acknowledged_safety_checks:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
+            - type: 'null'
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: The output of a computer tool call.
@@ -26194,8 +26314,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call output.
@@ -26236,15 +26357,17 @@ components:
           type: string
           description: The ID of the container used to run the code.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         outputs:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A tool call to run code.
@@ -26464,10 +26587,11 @@ components:
             type: string
           description: The queries used to search for files.
         results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: |-
@@ -26506,10 +26630,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call.
@@ -26550,10 +26673,9 @@ components:
             $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContent'
           description: An array of shell call output contents
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The identifier of the actor that created the item.
@@ -26678,8 +26800,9 @@ components:
             - failed
           description: The status of the image generation call.
         result:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: An image generation request made by the model.
@@ -26738,12 +26861,13 @@ components:
           type: string
           description: A JSON string of the output of the local shell tool call.
         status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: The output of a local shell tool call.
@@ -26803,8 +26927,9 @@ components:
           type: boolean
           description: Whether the request was approved.
         reason:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A response to an MCP approval request.
@@ -26868,18 +26993,20 @@ components:
           type: string
           description: A JSON string of the arguments passed to the tool.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         error:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         status:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
         approval_request_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: An invocation of a tool on an MCP server.
@@ -26917,9 +27044,9 @@ components:
             $ref: '#/components/schemas/OpenAI.MessageContent'
           description: The content of the message
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A message to or from the model.
@@ -26941,8 +27068,9 @@ components:
           type: string
           description: The unique identifier of the reasoning content.
         encrypted_content:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         summary:
           type: array
           items:
@@ -26991,8 +27119,9 @@ components:
           type: string
           description: The unique ID of the tool search call item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -27029,8 +27158,9 @@ components:
           type: string
           description: The unique ID of the tool search output item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -27153,10 +27283,11 @@ components:
             type: string
           description: The queries used to search for files.
         results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: |-
@@ -27171,8 +27302,9 @@ components:
         - output
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -27196,9 +27328,9 @@ components:
                   - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
           description: Text, image, or file output of the function tool call.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: The output of a function tool call.
@@ -27211,8 +27343,9 @@ components:
         - action
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -27230,14 +27363,13 @@ components:
             - $ref: '#/components/schemas/OpenAI.FunctionShellActionParam'
           description: The shell commands and limits that describe how to run the tool call.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemStatus'
-          nullable: true
+            - type: 'null'
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemParamEnvironment'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: A tool representing a request to execute one or more shell commands.
@@ -27250,8 +27382,9 @@ components:
         - output
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
           type: string
           minLength: 1
@@ -27270,14 +27403,13 @@ components:
             $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContentParam'
           description: Captured chunks of stdout and stderr output, along with their associated outcomes.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemStatus'
-          nullable: true
+            - type: 'null'
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: The streamed output items emitted by a shell tool call.
@@ -27354,8 +27486,9 @@ components:
             - failed
           description: The status of the image generation call.
         result:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: An image generation request made by the model.
@@ -27458,12 +27591,13 @@ components:
           type: string
           description: A JSON string of the output of the local shell tool call.
         status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: The output of a local shell tool call.
@@ -27513,8 +27647,9 @@ components:
           description: The type of the item. Always `mcp_approval_response`.
           x-stainless-const: true
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         approval_request_id:
           type: string
           description: The ID of the approval request being answered.
@@ -27522,8 +27657,9 @@ components:
           type: boolean
           description: Whether the request was approved.
         reason:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: A response to an MCP approval request.
@@ -27587,18 +27723,20 @@ components:
           type: string
           description: A JSON string of the arguments passed to the tool.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         error:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         status:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
         approval_request_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: An invocation of a tool on an MCP server.
@@ -27633,9 +27771,9 @@ components:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
         status:
           type: string
           enum:
@@ -27666,8 +27804,9 @@ components:
           type: string
           description: The unique identifier of the reasoning content.
         encrypted_content:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         summary:
           type: array
           items:
@@ -27707,7 +27846,6 @@ components:
             - item_reference
           description: The type of item to reference. Always `item_reference`.
           x-stainless-const: true
-          default: item_reference
         id:
           type: string
           description: The ID of the item to reference.
@@ -27846,8 +27984,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call output.
@@ -27888,15 +28027,17 @@ components:
           type: string
           description: The ID of the container used to run the code.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         outputs:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: A tool call to run code.
@@ -28134,10 +28275,11 @@ components:
             type: string
           description: The queries used to search for files.
         results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: |-
@@ -28176,10 +28318,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call.
@@ -28220,10 +28361,9 @@ components:
             $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContent'
           description: An array of shell call output contents
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The identifier of the actor that created the item.
@@ -28348,8 +28488,9 @@ components:
             - failed
           description: The status of the image generation call.
         result:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: An image generation request made by the model.
@@ -28452,12 +28593,13 @@ components:
           type: string
           description: A JSON string of the output of the local shell tool call.
         status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: The output of a local shell tool call.
@@ -28517,8 +28659,9 @@ components:
           type: boolean
           description: Whether the request was approved.
         reason:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: A response to an MCP approval request.
@@ -28582,18 +28725,20 @@ components:
           type: string
           description: A JSON string of the arguments passed to the tool.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         error:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         status:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
         approval_request_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: An invocation of a tool on an MCP server.
@@ -28628,9 +28773,9 @@ components:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
         status:
           type: string
           enum:
@@ -28661,8 +28806,9 @@ components:
           type: string
           description: The unique identifier of the reasoning content.
         encrypted_content:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         summary:
           type: array
           items:
@@ -28711,8 +28857,9 @@ components:
           type: string
           description: The unique ID of the tool search call item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -28749,8 +28896,9 @@ components:
           type: string
           description: The unique ID of the tool search output item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -28871,11 +29019,13 @@ components:
         - arguments
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -28892,9 +29042,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
           description: The arguments supplied to the tool search call.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
     OpenAI.ItemToolSearchOutputItemParam:
@@ -28904,11 +29054,13 @@ components:
         - tools
       properties:
         id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         type:
           type: string
           enum:
@@ -28926,9 +29078,9 @@ components:
             $ref: '#/components/schemas/OpenAI.Tool'
           description: The loaded tool definitions returned by the tool search output.
         status:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
     OpenAI.ItemType:
@@ -29038,7 +29190,6 @@ components:
             - keypress
           description: Specifies the event type. For a keypress action, this property is always set to `keypress`.
           x-stainless-const: true
-          default: keypress
         keys:
           type: array
           items:
@@ -29066,11 +29217,13 @@ components:
             - list
           x-stainless-const: true
         first_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         last_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
           x-ms-list-continuation-token: true
         has_more:
           type: boolean
@@ -29123,7 +29276,6 @@ components:
             - local
           description: The environment type. Always `local`.
           x-stainless-const: true
-          default: local
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
       description: Represents the use of a local environment to perform shell actions.
@@ -29148,22 +29300,23 @@ components:
             type: string
           description: The command to run.
         timeout_ms:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         working_directory:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         env:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Environment variables to set for the command.
           x-oaiTypeLabel: map
         user:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       description: Execute a shell command on the server.
       title: Local shell exec action
     OpenAI.LocalShellToolParam:
@@ -29177,7 +29330,6 @@ components:
             - local_shell
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
-          default: local_shell
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
@@ -29186,7 +29338,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -29244,17 +29396,17 @@ components:
           type: string
           description: The name of the tool.
         description:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         input_schema:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPListToolsToolInputSchema'
           description: The JSON schema describing the tool's input.
         annotations:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPListToolsToolAnnotations'
-          nullable: true
+            - type: 'null'
       description: A tool available on an MCP server.
       title: MCP list tools tool
     OpenAI.MCPListToolsToolAnnotations:
@@ -29316,31 +29468,26 @@ components:
           type: string
           description: Optional description of the MCP server, used to provide more context.
         headers:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
         allowed_tools:
           anyOf:
             - type: array
               items:
                 type: string
-              nullable: true
-            - type: object
-              allOf:
-                - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
-              nullable: true
+            - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
+            - type: 'null'
         require_approval:
           anyOf:
-            - type: object
-              allOf:
-                - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
-              nullable: true
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
             - type: string
               enum:
                 - always
                 - never
-              nullable: true
+            - type: 'null'
           default: always
         defer_loading:
           type: boolean
@@ -29350,7 +29497,7 @@ components:
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -29427,8 +29574,9 @@ components:
           x-stainless-const: true
           default: input_file
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         filename:
           type: string
           description: The name of the file to be sent to the model.
@@ -29461,12 +29609,14 @@ components:
           x-stainless-const: true
           default: input_image
         image_url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
         file_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
@@ -29608,7 +29758,7 @@ components:
         - incomplete
     OpenAI.Metadata:
       type: object
-      additionalProperties:
+      unevaluatedProperties:
         type: string
       description: |-
         Set of 16 key-value pairs that can be attached to an object. This can be
@@ -29619,13 +29769,9 @@ components:
       x-oaiTypeLabel: map
     OpenAI.ModelIdsCompaction:
       anyOf:
-        - allOf:
-            - $ref: '#/components/schemas/OpenAI.ModelIdsResponses'
-          description: Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](/docs/models) to browse and compare available models.
-          nullable: true
+        - $ref: '#/components/schemas/OpenAI.ModelIdsResponses'
         - type: string
-          description: Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](/docs/models) to browse and compare available models.
-          nullable: true
+        - type: 'null'
       description: Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](/docs/models) to browse and compare available models.
     OpenAI.ModelIdsResponses:
       anyOf:
@@ -29650,6 +29796,125 @@ components:
       anyOf:
         - type: string
         - $ref: '#/components/schemas/OpenAI.ChatModel'
+    OpenAI.Moderation:
+      type: object
+      required:
+        - input
+        - output
+      properties:
+        input:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+          description: Moderation for the response input.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+          description: Moderation for the response output.
+      description: Moderation results or errors for the response input and output.
+      title: Moderation
+    OpenAI.ModerationEntry:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ModerationEntryType'
+      discriminator:
+        propertyName: type
+        mapping:
+          moderation_result: '#/components/schemas/OpenAI.ModerationResultBody'
+          error: '#/components/schemas/OpenAI.ModerationErrorBody'
+      description: Moderation results or an error for a response moderation check.
+    OpenAI.ModerationEntryType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - moderation_result
+            - error
+    OpenAI.ModerationErrorBody:
+      type: object
+      required:
+        - type
+        - code
+        - message
+      properties:
+        type:
+          type: string
+          enum:
+            - error
+          description: The object type, which was always `error` for moderation failures.
+          x-stainless-const: true
+        code:
+          type: string
+          description: The error code.
+        message:
+          type: string
+          description: The error message.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+      description: An error produced while attempting moderation for the response input or output.
+      title: Moderation error
+    OpenAI.ModerationInputType:
+      type: string
+      enum:
+        - text
+        - image
+    OpenAI.ModerationParam:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'.
+      description: Configuration for running moderation on the input and output of this response.
+    OpenAI.ModerationResultBody:
+      type: object
+      required:
+        - type
+        - model
+        - flagged
+        - categories
+        - category_scores
+        - category_applied_input_types
+      properties:
+        type:
+          type: string
+          enum:
+            - moderation_result
+          description: The object type, which was always `moderation_result` for successful moderation results.
+          x-stainless-const: true
+        model:
+          type: string
+          description: The moderation model that produced this result.
+        flagged:
+          type: boolean
+          description: A boolean indicating whether the content was flagged by any category.
+        categories:
+          type: object
+          unevaluatedProperties:
+            type: boolean
+          description: A dictionary of moderation categories to booleans, True if the input is flagged under this category.
+          x-oaiTypeLabel: map
+        category_scores:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/OpenAI.numeric'
+          description: A dictionary of moderation categories to scores.
+          x-oaiTypeLabel: map
+        category_applied_input_types:
+          type: object
+          unevaluatedProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/OpenAI.ModerationInputType'
+          description: Which modalities of input are reflected by the score for each category.
+          x-oaiTypeLabel: map
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+      description: A moderation result produced for the response input or output.
+      title: Moderation result
     OpenAI.MoveParam:
       type: object
       required:
@@ -29663,7 +29928,6 @@ components:
             - move
           description: Specifies the event type. For a move action, this property is always set to `move`.
           x-stainless-const: true
-          default: move
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -29673,10 +29937,11 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The y-coordinate to move to.
         keys:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A mouse move action.
@@ -29695,7 +29960,6 @@ components:
             - namespace
           description: The type of the tool. Always `namespace`.
           x-stainless-const: true
-          default: namespace
         name:
           type: string
           minLength: 1
@@ -29968,8 +30232,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatus'
           description: The status of the apply patch tool call output. One of `completed` or `failed`.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call output.
@@ -30010,15 +30275,17 @@ components:
           type: string
           description: The ID of the container used to run the code.
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         outputs:
-          type: array
-          items:
-            anyOf:
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
-              - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A tool call to run code.
@@ -30256,10 +30523,11 @@ components:
             type: string
           description: The queries used to search for files.
         results:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: |-
@@ -30298,10 +30566,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The ID of the entity that created this tool call.
@@ -30342,10 +30609,9 @@ components:
             $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContent'
           description: An array of shell call output contents
         max_output_length:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         created_by:
           type: string
           description: The identifier of the actor that created the item.
@@ -30470,8 +30736,9 @@ components:
             - failed
           description: The status of the image generation call.
         result:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An image generation request made by the model.
@@ -30530,12 +30797,13 @@ components:
           type: string
           description: A JSON string of the output of the local shell tool call.
         status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a local shell tool call.
@@ -30595,8 +30863,9 @@ components:
           type: boolean
           description: Whether the request was approved.
         reason:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A response to an MCP approval request.
@@ -30660,18 +30929,20 @@ components:
           type: string
           description: A JSON string of the arguments passed to the tool.
         output:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         error:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         status:
           allOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
           description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
         approval_request_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An invocation of a tool on an MCP server.
@@ -30706,9 +30977,9 @@ components:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
         phase:
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.MessagePhase'
-          nullable: true
+            - type: 'null'
         status:
           type: string
           enum:
@@ -30739,8 +31010,9 @@ components:
           type: string
           description: The unique identifier of the reasoning content.
         encrypted_content:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         summary:
           type: array
           items:
@@ -30789,8 +31061,9 @@ components:
           type: string
           description: The unique ID of the tool search call item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -30827,8 +31100,9 @@ components:
           type: string
           description: The unique ID of the tool search output item.
         call_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -31020,13 +31294,13 @@ components:
           type: string
           description: The unique identifier of the prompt template to use.
         version:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         variables:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ResponsePromptVariables'
-          nullable: true
+            - type: 'null'
       description: |-
         Reference to a prompt template and its variables.
         [Learn more](/docs/guides/text?api-mode=responses#reusable-prompts).
@@ -31136,33 +31410,37 @@ components:
         effort:
           $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         summary:
-          type: string
-          enum:
-            - auto
-            - concise
-            - detailed
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - auto
+                - concise
+                - detailed
+            - type: 'null'
         generate_summary:
-          type: string
-          enum:
-            - auto
-            - concise
-            - detailed
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - auto
+                - concise
+                - detailed
+            - type: 'null'
       description: |-
         **gpt-5 and o-series models only**
         Configuration options for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
       title: Reasoning
     OpenAI.ReasoningEffort:
-      type: string
-      enum:
-        - none
-        - minimal
-        - low
-        - medium
-        - high
-        - xhigh
+      anyOf:
+        - type: string
+          enum:
+            - none
+            - minimal
+            - low
+            - medium
+            - high
+            - xhigh
+        - type: 'null'
       description: |-
         Constrains effort on reasoning for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
@@ -31173,7 +31451,6 @@ components:
         - All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.
         - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
         - `xhigh` is supported for all models after `gpt-5.1-codex-max`.
-      nullable: true
     OpenAI.ReasoningTextContent:
       type: object
       required:
@@ -31206,26 +31483,22 @@ components:
         - agent_reference
       properties:
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         top_logprobs:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         temperature:
-          type: number
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
+            - type: 'null'
           default: 1
         top_p:
-          type: number
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
-          nullable: true
+            - type: 'null'
           default: 1
         user:
           type: string
@@ -31246,30 +31519,31 @@ components:
         service_tier:
           $ref: '#/components/schemas/OpenAI.ServiceTier'
         prompt_cache_retention:
-          type: string
-          enum:
-            - in_memory
-            - 24h
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - in_memory
+                - 24h
+            - type: 'null'
         previous_response_id:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         model:
           type: string
           description: The model deployment to use for the creation of this response.
         reasoning:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Reasoning'
-          nullable: true
+            - type: 'null'
         background:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
         max_tool_calls:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         text:
           $ref: '#/components/schemas/OpenAI.ResponseTextParam'
         tools:
@@ -31281,11 +31555,12 @@ components:
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
         truncation:
-          type: string
-          enum:
-            - auto
-            - disabled
-          nullable: true
+          anyOf:
+            - type: string
+              enum:
+                - auto
+                - disabled
+            - type: 'null'
           default: disabled
         id:
           type: string
@@ -31313,19 +31588,20 @@ components:
           format: unixtime
           description: Unix timestamp (in seconds) of when this Response was created.
         completed_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
           type: integer
-          format: unixtime
-          nullable: true
+          format: unixTimestamp
         error:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ResponseError'
-          nullable: true
+            - type: 'null'
         incomplete_details:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ResponseIncompleteDetails'
-          nullable: true
+            - type: 'null'
         output:
           type: array
           items:
@@ -31344,31 +31620,33 @@ components:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.InputItem'
-          nullable: true
+            - type: 'null'
         output_text:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         usage:
           $ref: '#/components/schemas/OpenAI.ResponseUsage'
+        moderation:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Moderation'
+            - type: 'null'
         parallel_tool_calls:
           type: boolean
           description: Whether to allow the model to run tool calls in parallel.
           default: true
         conversation:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ConversationReference'
-          nullable: true
+            - type: 'null'
         max_output_tokens:
-          type: integer
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
-          nullable: true
+            - type: 'null'
         agent_reference:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/AgentReference'
-          nullable: true
+            - type: 'null'
           description: The agent used for this response
         content_filters:
           type: array
@@ -31395,7 +31673,7 @@ components:
           description: A sequence number for this chunk of the stream response.
         delta:
           type: string
-          format: base64
+          contentEncoding: base64
           description: A chunk of Base64 encoded response audio bytes.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
@@ -32090,14 +32368,16 @@ components:
           description: The type of the event. Always `error`.
           x-stainless-const: true
         code:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         message:
           type: string
           description: The error message.
         param:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         sequence_number:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -32345,11 +32625,12 @@ components:
         schema:
           $ref: '#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema'
         strict:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
     OpenAI.ResponseFormatJsonSchemaSchema:
       type: object
-      additionalProperties: {}
+      unevaluatedProperties: {}
       description: |-
         The schema for the response format, described as a JSON Schema object.
         Learn how to build JSON schemas [here](https://json-schema.org/).
@@ -33271,7 +33552,7 @@ components:
           }
     OpenAI.ResponsePromptVariables:
       type: object
-      additionalProperties:
+      unevaluatedProperties:
         anyOf:
           - type: string
           - $ref: '#/components/schemas/OpenAI.InputTextContent'
@@ -34183,7 +34464,6 @@ components:
             - screenshot
           description: Specifies the event type. For a screenshot action, this property is always set to `screenshot`.
           x-stainless-const: true
-          default: screenshot
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A screenshot action.
@@ -34203,7 +34483,6 @@ components:
             - scroll
           description: Specifies the event type. For a scroll action, this property is always set to `scroll`.
           x-stainless-const: true
-          default: scroll
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -34221,10 +34500,11 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The vertical scroll distance.
         keys:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A scroll action.
@@ -34241,13 +34521,15 @@ components:
         - medium
         - high
     OpenAI.ServiceTier:
-      type: string
-      enum:
-        - auto
-        - default
-        - flex
-        - scale
-        - priority
+      anyOf:
+        - type: string
+          enum:
+            - auto
+            - default
+            - flex
+            - scale
+            - priority
+        - type: 'null'
       description: |-
         Specifies the processing type used for serving the request.
         - If set to 'auto', then the request will be processed with the service tier configured in the Project settings. Unless otherwise configured, the Project will use 'default'.
@@ -34255,7 +34537,6 @@ components:
         - If set to '[flex](/docs/guides/flex-processing)' or '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the corresponding service tier.
         - When not set, the default behavior is 'auto'.
         When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter.
-      nullable: true
     OpenAI.ServiceTierEnum:
       type: string
       enum:
@@ -34275,7 +34556,6 @@ components:
             - skill_reference
           description: References a skill created with the /v1/skills endpoint.
           x-stainless-const: true
-          default: skill_reference
         skill_id:
           type: string
           minLength: 1
@@ -34297,7 +34577,6 @@ components:
             - apply_patch
           description: The tool to call. Always `apply_patch`.
           x-stainless-const: true
-          default: apply_patch
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the apply_patch tool when executing a tool call.
@@ -34313,7 +34592,6 @@ components:
             - shell
           description: The tool to call. Always `shell`.
           x-stainless-const: true
-          default: shell
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the shell tool when a tool call is required.
@@ -34330,7 +34608,6 @@ components:
             - summary_text
           description: The type of the object. Always `summary_text`.
           x-stainless-const: true
-          default: summary_text
         text:
           type: string
           description: A summary of the reasoning output from the model so far.
@@ -34349,7 +34626,6 @@ components:
           enum:
             - text
           x-stainless-const: true
-          default: text
         text:
           type: string
       allOf:
@@ -34447,8 +34723,9 @@ components:
         schema:
           $ref: '#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema'
         strict:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.TextResponseFormatConfiguration'
       description: |-
@@ -34522,7 +34799,7 @@ components:
           type: array
           items:
             type: object
-            additionalProperties: {}
+            unevaluatedProperties: {}
           description: |-
             A list of tool definitions that the model should be allowed to call.
               For the Responses API, the list of tool definitions might look like:
@@ -34675,8 +34952,9 @@ components:
           type: string
           description: The label of the MCP server to use.
         name:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Use this option to force the model to call a specific tool on a remote MCP server.
@@ -34785,19 +35063,18 @@ components:
             - tool_search
           description: The type of the tool. Always `tool_search`.
           x-stainless-const: true
-          default: tool_search
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
           description: Whether tool search is executed by the server or by the client.
         description:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         parameters:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
-          nullable: true
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Hosted or BYOT tool search configuration for deferred tools.
@@ -34885,7 +35162,6 @@ components:
             - type
           description: Specifies the event type. For a type action, this property is always set to `type`.
           x-stainless-const: true
-          default: type
         text:
           type: string
           description: The text to type.
@@ -34899,10 +35175,9 @@ components:
         - metadata
       properties:
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
               Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
@@ -34921,7 +35196,6 @@ components:
             - url_citation
           description: The type of the URL citation. Always `url_citation`.
           x-stainless-const: true
-          default: url_citation
         url:
           type: string
           format: uri
@@ -34943,7 +35217,7 @@ components:
       title: URL citation
     OpenAI.VectorStoreFileAttributes:
       type: object
-      additionalProperties:
+      unevaluatedProperties:
         anyOf:
           - type: string
           - $ref: '#/components/schemas/OpenAI.numeric'
@@ -34956,16 +35230,17 @@ components:
         length of 512 characters, booleans, or numbers.
       x-oaiTypeLabel: map
     OpenAI.Verbosity:
-      type: string
-      enum:
-        - low
-        - medium
-        - high
+      anyOf:
+        - type: string
+          enum:
+            - low
+            - medium
+            - high
+        - type: 'null'
       description: |-
         Constrains the verbosity of the model's response. Lower values will result in
         more concise responses, while higher values will result in more verbose responses.
         Currently supported values are `low`, `medium`, and `high`.
-      nullable: true
     OpenAI.WaitParam:
       type: object
       required:
@@ -34977,7 +35252,6 @@ components:
             - wait
           description: Specifies the event type. For a wait action, this property is always set to `wait`.
           x-stainless-const: true
-          default: wait
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A wait action.
@@ -35016,9 +35290,10 @@ components:
           description: The action type.
           x-stainless-const: true
         url:
-          type: string
-          format: uri
-          nullable: true
+          anyOf:
+            - type: string
+              format: uri
+            - type: 'null'
           description: The URL opened by the model.
       description: Action type "open_page" - Opens a specific URL from search results.
       title: Open page action
@@ -35078,17 +35353,21 @@ components:
           x-stainless-const: true
           default: approximate
         country:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         region:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         city:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
         timezone:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
       description: The approximate location of the user.
       title: Web search approximate location
     OpenAI.WebSearchPreviewTool:
@@ -35102,12 +35381,10 @@ components:
             - web_search_preview
           description: The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
           x-stainless-const: true
-          default: web_search_preview
         user_location:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.ApproximateLocation'
-          nullable: true
+            - type: 'null'
         search_context_size:
           allOf:
             - $ref: '#/components/schemas/OpenAI.SearchContextSize'
@@ -35130,17 +35407,14 @@ components:
           enum:
             - web_search
           description: The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
-          default: web_search
         filters:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
-          nullable: true
+            - type: 'null'
         user_location:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchApproximateLocation'
-          nullable: true
+            - type: 'null'
         search_context_size:
           type: string
           enum:
@@ -35157,7 +35431,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -35179,10 +35453,11 @@ components:
       type: object
       properties:
         allowed_domains:
-          type: array
-          items:
-            type: string
-          nullable: true
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
     OpenAI.integer:
       type: integer
       format: int64
@@ -35246,7 +35521,7 @@ components:
           description: A description of what the function does, used by the model to choose when and how to call the function.
         spec:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The openapi function shape, described as a JSON Schema object.
         auth:
           allOf:
@@ -35270,7 +35545,7 @@ components:
                 description: A description of what the function does, used by the model to choose when and how to call the function.
               parameters:
                 type: object
-                additionalProperties: {}
+                unevaluatedProperties: {}
                 description: The parameters the functions accepts, described as a JSON Schema object.
             required:
               - name
@@ -35349,7 +35624,7 @@ components:
           description: The openapi function definition.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -35435,13 +35710,13 @@ components:
           type: array
           items:
             type: object
-            additionalProperties: {}
+            unevaluatedProperties: {}
           description: Agent skills.
         tools:
           type: array
           items:
             type: object
-            additionalProperties: {}
+            unevaluatedProperties: {}
           description: Agent tools.
       description: Agent definition returned in response payloads (includes resolved config).
     OptimizationCandidate:
@@ -35468,7 +35743,7 @@ components:
           description: The agent configuration that produced this candidate.
         mutations:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: "What was mutated from the baseline (e.g., {system_prompt: 'new prompt'})."
         avg_score:
           type: number
@@ -35639,7 +35914,7 @@ components:
           default: 5
         optimization_config:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.
         eval_model:
           type: string
@@ -35670,7 +35945,7 @@ components:
           description: The user query / input for the task.
         scores:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: number
             format: double
           description: Per-evaluator scores keyed by evaluator name.
@@ -35694,7 +35969,7 @@ components:
           description: Error message if the task failed during execution.
         rationales:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Per-evaluator reasoning keyed by evaluator name.
         response:
@@ -35719,12 +35994,14 @@ components:
         endpoint:
           type: string
           description: The OTLP collector endpoint URL.
-          example: https://my-collector.example.com/otlp
+          examples:
+            - https://my-collector.example.com/otlp
         protocol:
           allOf:
             - $ref: '#/components/schemas/TelemetryTransportProtocol'
           description: The transport protocol for the OTLP endpoint.
-          example: Http
+          examples:
+            - Http
       allOf:
         - $ref: '#/components/schemas/TelemetryEndpoint'
       description: An OTLP (OpenTelemetry Protocol) telemetry export endpoint.
@@ -36057,13 +36334,15 @@ components:
           type: string
           description: The model deployment to use for this agent.
         instructions:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
           description: A system (or developer) message inserted into the model's context.
         temperature:
-          type: number
-          format: float
-          nullable: true
+          anyOf:
+            - type: number
+              format: float
+            - type: 'null'
           minimum: 0
           maximum: 2
           description: |-
@@ -36071,9 +36350,10 @@ components:
             We generally recommend altering this or `top_p` but not both. Defaults to `1`.
           default: 1
         top_p:
-          type: number
-          format: float
-          nullable: true
+          anyOf:
+            - type: number
+              format: float
+            - type: 'null'
           minimum: 0
           maximum: 1
           description: |-
@@ -36084,10 +36364,9 @@ components:
             Defaults to `1`.
           default: 1
         reasoning:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Reasoning'
-          nullable: true
+            - type: 'null'
         tools:
           type: array
           items:
@@ -36108,7 +36387,7 @@ components:
           description: Configuration options for a text response from the model. Can be plain text or structured JSON data.
         structured_inputs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/StructuredInputDefinition'
           description: Set of structured inputs that can participate in prompt template substitution or tool argument bindings.
       allOf:
@@ -36295,12 +36574,12 @@ components:
           description: Application scenario for the red team operation, to generate scenario specific attacks.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Red team's tags. Unlike properties, tags are fully mutable.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.
         status:
@@ -36452,7 +36731,7 @@ components:
           description: The maximum number of turns of chat history to evaluate.
         data_mapping:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Mapping from source fields to response_id field, required for retrieving chat history.
         source:
@@ -36497,7 +36776,7 @@ components:
           description: Whether the routine is enabled.
         triggers:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/RoutineTrigger'
           description: The triggers configured for the routine.
         action:
@@ -36571,7 +36850,7 @@ components:
           description: Whether the routine is enabled.
         triggers:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/RoutineTrigger'
           description: The triggers configured for the routine. In v1, exactly one trigger entry is supported.
         action:
@@ -36853,17 +37132,17 @@ components:
           description: Task for the schedule.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Schedule's tags. Unlike properties, tags are fully mutable.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Schedule's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.
         systemData:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: System metadata for the resource.
           readOnly: true
@@ -36931,7 +37210,7 @@ components:
           readOnly: true
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Properties of the schedule run.
           readOnly: true
@@ -36947,7 +37226,7 @@ components:
           description: Type of the task.
         configuration:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Configuration for the task.
       discriminator:
@@ -37036,11 +37315,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/SessionLogEventType'
           description: The SSE event type. Currently `log`, but additional event types may be added in the future. Clients should ignore unrecognized event types.
-          example: log
+          examples:
+            - log
         data:
           type: string
           description: The event payload as plain text. Currently JSON-formatted but the schema is not contractual and may change.
-          example: '{"timestamp":"2026-03-10T09:33:17.121467567+00:00","stream":"stdout","message":"Starting server on port 18080"}'
+          examples:
+            - '{"timestamp":"2026-03-10T09:33:17.121467567+00:00","stream":"stdout","message":"Starting server on port 18080"}'
       description: |-
         A single Server-Sent Event frame emitted by the hosted agent session log stream.
 
@@ -37157,7 +37438,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -37250,7 +37531,7 @@ components:
           description: Environment requirements or compatibility notes for the skill.
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Arbitrary key-value metadata for additional properties.
         allowed_tools:
@@ -37332,7 +37613,7 @@ components:
           description: The default value for the input if no run-time value is provided.
         schema:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The JSON schema for the structured input (optional).
         required:
           type: boolean
@@ -37355,11 +37636,12 @@ components:
           description: A description of the output to emit. Used by the model to determine when to emit the output.
         schema:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The JSON schema for the structured output.
         strict:
-          type: boolean
-          nullable: true
+          anyOf:
+            - type: boolean
+            - type: 'null'
           description: Whether to enforce strict validation. Default `true`.
       description: A structured output that can be produced by the agent.
     StructuredOutputsOutputItem:
@@ -37547,7 +37829,7 @@ components:
           description: List of taxonomy sub categories.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Additional properties for the taxonomy category.
       description: Taxonomy category definition.
@@ -37572,7 +37854,7 @@ components:
           description: List of taxonomy items under this sub-category.
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
@@ -37619,10 +37901,10 @@ components:
           items:
             $ref: '#/components/schemas/TelemetryDataKind'
           description: Data types to export to this endpoint. Use an empty array to export no data.
-          example:
-            - ContainerStdoutStderr
-            - ContainerOtel
-            - Metrics
+          examples:
+            - - ContainerStdoutStderr
+              - ContainerOtel
+              - Metrics
         auth:
           allOf:
             - $ref: '#/components/schemas/TelemetryEndpointAuth'
@@ -37706,11 +37988,11 @@ components:
           description: The version of the evaluator. Latest version if not specified.
         initialization_parameters:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The initialization parameters for the evaluation. Must support structured outputs.
         data_mapping:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: The model to use for the evaluation. Must support structured outputs.
       description: An Azure AI Evaluator grader used as testing criterion in evaluations.
@@ -37738,7 +38020,7 @@ components:
     ToolCallOutputContent:
       anyOf:
         - type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
         - type: string
         - type: array
           items: {}
@@ -37842,7 +38124,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).
@@ -37899,10 +38181,11 @@ components:
         - tools
       properties:
         metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
             useful for storing additional information about the object in a structured
@@ -38163,7 +38446,7 @@ components:
       properties:
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -38182,7 +38465,7 @@ components:
           description: The manifest ID to import the agent version from.
         parameter_values:
           type: object
-          additionalProperties: {}
+          unevaluatedProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
     UpdateAgentRequest:
       type: object
@@ -38191,7 +38474,7 @@ components:
       properties:
         metadata:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be
@@ -38228,13 +38511,12 @@ components:
         name:
           type: string
         metadata:
-          type: object
-          allOf:
+          anyOf:
             - $ref: '#/components/schemas/OpenAI.Metadata'
-          nullable: true
+            - type: 'null'
         properties:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: |-
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
@@ -38247,7 +38529,7 @@ components:
           description: The asset description text.
         tags:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Request body for updating a model version. Only description and tags can be modified.
@@ -38425,7 +38707,7 @@ components:
           description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
-          additionalProperties:
+          unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
           description: |-
             Per-tool configuration map. Keys are tool names or `*` (catch-all default).

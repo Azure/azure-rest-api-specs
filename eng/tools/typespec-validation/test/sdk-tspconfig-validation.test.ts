@@ -1,7 +1,7 @@
 /* eslint-disable */
 // TODO: Enable eslint, fix errors
 
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strictEqual } from "node:assert";
@@ -42,9 +42,9 @@ import {
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
   TspConfigTsRlcDpPackageNameMatchPatternSubRule,
-} from "../src/rules/sdk-tspconfig-validation.js";
+} from "../src/rules/sdk-tspconfig-validation.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
