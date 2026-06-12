@@ -536,6 +536,7 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricBaselinesApi.TimeSeriesBaseline, "MonitorTimeSeriesBaseline", "csharp");
 @@clientName(MetricBaselinesApi.MetricSingleDimension, "MonitorMetricSingleDimension", "csharp");
 @@clientName(MetricBaselinesApi.SingleBaseline, "MonitorSingleBaseline", "csharp");
+@@clientName(MetricBaselinesApi.BaselineSensitivity, "MonitorBaselineSensitivity", "csharp");
 @@clientName(MetricBaselinesApi.BaselineMetadata, "MonitorBaselineMetadata", "csharp");
 @@clientName(MetricsApi.MetricDefinition, "MonitorMetricDefinition", "csharp");
 @@clientName(MetricsApi.MetricClass, "MonitorMetricClass", "csharp");
