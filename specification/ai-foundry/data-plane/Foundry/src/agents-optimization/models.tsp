@@ -69,7 +69,7 @@ model OptimizationDatasetInput {
 /** Inline dataset — items supplied directly in the request body. */
 model OptimizationInlineDatasetInput extends OptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: "inline";
+  type: OptimizationDatasetInputType.inline;
 
   @doc("Dataset items.")
   items: OptimizationDatasetItem[];
@@ -78,7 +78,7 @@ model OptimizationInlineDatasetInput extends OptimizationDatasetInput {
 /** Reference to a registered Foundry dataset. */
 model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
   @doc("Dataset input type discriminator.")
-  type: "reference";
+  type: OptimizationDatasetInputType.reference;
 
   @doc("Registered dataset name.")
   name: string;
