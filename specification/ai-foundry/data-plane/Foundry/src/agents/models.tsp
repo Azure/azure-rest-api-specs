@@ -313,15 +313,12 @@ union AgentKind {
   container_app: "container_app",
 }
 
-@doc("The execution runtime for a prompt agent.")
+@doc("The execution runtime for a agent. When omitted, the request is served by the existing prompt agent runtime. When set, the request is routed to the corresponding managed runtime.")
 union AgentHarness {
   string,
 
-  @doc("The default prompt agent runtime.")
-  prompt: "prompt",
-
-  @doc("The Foundry-managed runtime that adds skills, durable filesystem state, long-running execution, and crash recovery.")
-  managed: "managed",
+  @doc("GHCP-SDK based managed runtime.")
+  ghcp: "ghcp",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
@@ -343,8 +340,8 @@ model AgentDefinition {
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
-  @doc("The runtime that executes this prompt agent. Defaults to `prompt`.")
-  harness?: AgentHarness = AgentHarness.prompt;
+  @doc("The execution harness for the agent. When omitted (the default), the request is served by the existing prompt agent runtime. When set to `ghcp`, the agent runs on the GHCP-SDK based managed runtime.")
+  harness?: AgentHarness;
 
   @doc("The model deployment to use for this agent.")
   `model`: string;
