@@ -372,7 +372,7 @@
         },
         "path": {
           "type": "string",
-          "description": "URL path for HTTPGet probes (e.g., '/healthz', '/readyz')."
+          "description": "URL path for HTTPGet probes."
         },
         "port": {
           "type": "integer",
@@ -383,11 +383,11 @@
     },
     "ContainerResourceQuantity": {
       "type": "object",
-      "description": "CPU and memory resource quantities for a container.\nValues use Kubernetes resource notation: CPU as millicores (e.g., '500m', '2')\nand memory as byte-unit strings (e.g., '256Mi', '1Gi').\nSee: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
+      "description": "CPU and memory resource quantities for a container.\nSee: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/",
       "properties": {
         "cpu": {
           "type": "string",
-          "description": "CPU quantity (e.g., '500m' for 500 millicores, '2' for 2 cores)."
+          "description": "CPU quantity (e.g., '500m', '2')."
         },
         "memory": {
           "type": "string",
@@ -879,7 +879,7 @@
         },
         "from": {
           "type": "string",
-          "description": "Component that emitted the event\n(e.g., 'default-scheduler', 'kubelet')."
+          "description": "Component that emitted the event."
         },
         "message": {
           "type": "string",
@@ -1149,7 +1149,7 @@
         },
         "runtimeClassName": {
           "type": "string",
-          "description": "Name of the RuntimeClass for sandbox or specialized container runtimes\n(e.g., 'gvisor', 'kata-containers'). Populated for Pod resources."
+          "description": "Name of the RuntimeClass for specialized container runtimes. Populated for Pod resources."
         },
         "imagePullSecrets": {
           "type": "array",
@@ -2011,7 +2011,7 @@
     },
     "NodeSystemInfo": {
       "type": "object",
-      "description": "Operating system and runtime information reported by the kubelet for a Node.",
+      "description": "Operating system and runtime information for a Node.",
       "properties": {
         "kernelVersion": {
           "type": "string",
@@ -2027,7 +2027,7 @@
         },
         "kubeletVersion": {
           "type": "string",
-          "description": "Kubelet binary version running on the node (e.g., 'v1.29.2')."
+          "description": "Node agent version running on the node (e.g., 'v1.29.2')."
         },
         "kubeProxyVersion": {
           "type": "string",

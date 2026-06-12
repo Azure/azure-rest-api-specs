@@ -266,12 +266,10 @@ model EnvFromSource {
 
 /**
  * CPU and memory resource quantities for a container.
- * Values use Kubernetes resource notation: CPU as millicores (e.g., '500m', '2')
- * and memory as byte-unit strings (e.g., '256Mi', '1Gi').
  * See: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
  */
 model ContainerResourceQuantity {
-  /** CPU quantity (e.g., '500m' for 500 millicores, '2' for 2 cores). */
+  /** CPU quantity (e.g., '500m', '2'). */
   cpu?: string;
 
   /** Memory quantity (e.g., '256Mi', '1Gi'). */
@@ -296,7 +294,7 @@ model ContainerProbe {
   /** Probe mechanism: 'HTTPGet', 'TCPSocket', 'Exec', or 'GRPC'. */
   type?: string;
 
-  /** URL path for HTTPGet probes (e.g., '/healthz', '/readyz'). */
+  /** URL path for HTTPGet probes. */
   path?: string;
 
   /** Port number for HTTPGet or TCPSocket probes. */
@@ -560,7 +558,7 @@ model NodeAddress {
   address: string;
 }
 
-/** Operating system and runtime information reported by the kubelet for a Node. */
+/** Operating system and runtime information for a Node. */
 model NodeSystemInfo {
   /** Kernel version of the node OS (e.g., '5.15.0-1041-azure'). */
   kernelVersion?: string;
@@ -571,7 +569,7 @@ model NodeSystemInfo {
   /** Container runtime name and version (e.g., 'containerd://1.7.2'). */
   containerRuntimeVersion?: string;
 
-  /** Kubelet binary version running on the node (e.g., 'v1.29.2'). */
+  /** Node agent version running on the node (e.g., 'v1.29.2'). */
   kubeletVersion?: string;
 
   /** kube-proxy version running on the node. */
@@ -787,10 +785,7 @@ model KubernetesResourceSpec {
   /** When true, the pod shares the host IPC namespace. Populated for Pod resources. */
   hostIpc?: boolean;
 
-  /**
-   * Name of the RuntimeClass for sandbox or specialized container runtimes
-   * (e.g., 'gvisor', 'kata-containers'). Populated for Pod resources.
-   */
+  /** Name of the RuntimeClass for specialized container runtimes. Populated for Pod resources. */
   runtimeClassName?: string;
 
   /**
@@ -1693,10 +1688,7 @@ model KubernetesEvent {
    */
   age?: string;
 
-  /**
-   * Component that emitted the event
-   * (e.g., 'default-scheduler', 'kubelet').
-   */
+  /** Component that emitted the event. */
   from?: string;
 
   /** Human-readable description of the event. */
