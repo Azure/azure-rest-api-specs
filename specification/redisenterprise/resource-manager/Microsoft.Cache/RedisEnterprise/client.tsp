@@ -242,6 +242,7 @@ using Microsoft.Cache;
   "ManagedServiceIdentity",
   "java"
 );
+@@clientName(ClusterCreateProperties, "ClusterProperties", "java");
 @@clientName(ClusterProperties, "ClusterCommonProperties", "java");
 @@clientName(DatabaseProperties, "DatabaseCommonProperties", "java");
 @@clientName(ClusterProperties.hostName, "hostname", "java");
