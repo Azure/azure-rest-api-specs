@@ -158,6 +158,22 @@ model Error {
 
   @doc("The HTTP status code that the error maps to.")
   status?: int32;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The position that the error occurs.")
+  pos?: int32;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The location of the property that resulted in the validation error.")
+  instanceLocation?: string;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The location in the schema that the property violates.")
+  keywordLocation?: string;
+
+  @added(Versions.v2026_08_01_preview)
+  @doc("The uri of the schema.")
+  schema?: string;
 }
 
 @doc("The result of a list request.")
