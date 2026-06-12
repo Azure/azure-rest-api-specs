@@ -120,7 +120,38 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(LogProfilesApi.LogProfileResource, "LogProfile", "csharp");
+@@alternateType(
+  LogProfilesApi.LogProfileProperties.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LogProfilesApi.LogProfileProperties.serviceBusRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LogProfilesApi.LogProfileProperties.locations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
 @@clientName(MetricAlertApi.MetricAlertResource, "MetricAlert", "csharp");
+@@clientName(MetricAlertApi.MetricAlertProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  MetricAlertApi.MetricAlertProperties.autoMitigate,
+  "IsAutoMitigateEnabled",
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.MetricAlertProperties.targetResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.MetricAlertProperties.targetResourceRegion,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(
   ScheduledQueryRuleApi.ScheduledQueryRuleResource,
   "ScheduledQueryRule",
