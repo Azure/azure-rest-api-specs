@@ -416,9 +416,9 @@ union OriginAuthenticationTokenDestinationHeader {
   Authorization: "Authorization",
 
   /**
-   * Place the token in the `X-Azure-FD-Authorization` request header to avoid conflicts with an existing `Authorization` header set by the client.
+   * Place the token in the `X-Azure-Authorization` request header to avoid conflicts with an existing `Authorization` header set by the client.
    */
-  XAzureFDAuthorization: "X-Azure-FD-Authorization",
+  XAzureAuthorization: "X-Azure-Authorization",
 }
 
 /**
