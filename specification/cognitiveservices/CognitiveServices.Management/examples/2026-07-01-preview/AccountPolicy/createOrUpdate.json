@@ -69,6 +69,39 @@
           ]
         }
       }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/policies/corporate-baseline",
+        "name": "corporate-baseline",
+        "type": "Microsoft.CognitiveServices/accounts/policies",
+        "properties": {
+          "policyType": "Egress",
+          "mode": "Enforced",
+          "defaultAction": "Deny",
+          "description": "Corporate baseline egress policy shared across all projects",
+          "rules": [
+            {
+              "name": "allow-openai",
+              "description": "Allow traffic to OpenAI API",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.openai.com"
+              },
+              "action": "Allow"
+            },
+            {
+              "name": "allow-github",
+              "description": "Allow traffic to GitHub",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.github.com"
+              },
+              "action": "Allow"
+            }
+          ]
+        }
+      }
     }
   }
 }
