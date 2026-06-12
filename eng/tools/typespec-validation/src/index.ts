@@ -1,6 +1,6 @@
+import { type Suppression } from "@azure-tools/suppressions";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
-import { type Suppression } from "@azure-tools/suppressions";
 import { type Rule } from "./rule.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";

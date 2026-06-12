@@ -23,12 +23,12 @@ runs:
     - uses: pnpm/action-setup@v4
       with:
         standalone: true
-        package_json_file: ${{ inputs.working-directory }}/package.json
 
     - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
         cache: "pnpm"
+        cache-dependency-path: "**/pnpm-lock.yaml"
 
     - run: |
         echo "::group::$INSTALL_COMMAND"

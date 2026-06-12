@@ -1,10 +1,13 @@
 import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import {
+  getSuppressions as getSuppressionsImpl,
+  type Suppression,
+} from "@azure-tools/suppressions";
 import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
 import defaultPath, { basename, dirname, join, type PlatformPath } from "path";
 import { simpleGit } from "simple-git";
-import { getSuppressions as getSuppressionsImpl, type Suppression } from "@azure-tools/suppressions";
 import { context } from "./index.ts";
 
 // Enable simple-git debug logging to improve console output
