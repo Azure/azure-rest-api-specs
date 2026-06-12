@@ -35,22 +35,86 @@ using Microsoft.OperationalInsights;
 );
 
 // C# names for Network Security Perimeter common types need RP context.
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRule, "OperationalInsightsNspAccessRule", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleDirection, "OperationalInsightsNspAccessRuleDirection", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleProperties, "OperationalInsightsNspAccessRuleProperties", "csharp");
-@@clientName(global.AccessRulePropertiesSubscriptionsItem, "OperationalInsightsNspAccessRuleSubscription", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.IssueType, "OperationalInsightsNspIssueType", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter, "OperationalInsightsNetworkSecurityPerimeter", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfiguration, "OperationalInsightsNetworkSecurityPerimeterConfiguration", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties, "OperationalInsightsNetworkSecurityPerimeterConfigurationProperties", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState, "OperationalInsightsNetworkSecurityPerimeterConfigurationProvisioningState", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile, "OperationalInsightsNetworkSecurityProfile", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssue, "OperationalInsightsNspProvisioningIssue", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties, "OperationalInsightsNspProvisioningIssueProperties", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociation, "OperationalInsightsNspResourceAssociation", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode, "OperationalInsightsNspResourceAssociationAccessMode", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.Severity, "OperationalInsightsNspSeverity", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location, Azure.Core.azureLocation, "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRule,
+  "OperationalInsightsNspAccessRule",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleDirection,
+  "OperationalInsightsNspAccessRuleDirection",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+  "OperationalInsightsNspAccessRuleProperties",
+  "csharp"
+);
+@@clientName(
+  global.AccessRulePropertiesSubscriptionsItem,
+  "OperationalInsightsNspAccessRuleSubscription",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
+  "OperationalInsightsNspIssueType",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+  "OperationalInsightsNetworkSecurityPerimeter",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfiguration,
+  "OperationalInsightsNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+  "OperationalInsightsNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState,
+  "OperationalInsightsNetworkSecurityPerimeterConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+  "OperationalInsightsNetworkSecurityProfile",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssue,
+  "OperationalInsightsNspProvisioningIssue",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
+  "OperationalInsightsNspProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociation,
+  "OperationalInsightsNspResourceAssociation",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
+  "OperationalInsightsNspResourceAssociationAccessMode",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
+  "OperationalInsightsNspSeverity",
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 @@clientName(
   Microsoft.OperationalInsights.ProvisioningStateEnum,
@@ -71,31 +135,67 @@ using Microsoft.OperationalInsights;
 @@clientName(Cluster, "OperationalInsightsCluster", "csharp");
 @@clientName(DataExport, "OperationalInsightsDataExport", "csharp");
 @@clientName(DataSource, "OperationalInsightsDataSource", "csharp");
-@@clientName(DataSourcesListByWorkspaceParameters.$skiptoken, "skipToken", "csharp");
+@@clientName(
+  DataSourcesListByWorkspaceParameters.$skiptoken,
+  "skipToken",
+  "csharp"
+);
 @@clientName(LinkedService, "OperationalInsightsLinkedService", "csharp");
 @@clientName(
   LinkedStorageAccountsResource,
   "OperationalInsightsLinkedStorageAccounts",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfiguration, "OperationalInsightsNetworkSecurityPerimeterConfiguration", "csharp");
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
+  "OperationalInsightsNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
 @@clientName(SavedSearch, "OperationalInsightsSavedSearch", "csharp");
 @@clientName(SummaryLogs, "OperationalInsightsSummaryLogs", "csharp");
-@@clientName(SummaryLogsRetryBin, "OperationalInsightsSummaryLogsRetryBin", "csharp");
+@@clientName(
+  SummaryLogsRetryBin,
+  "OperationalInsightsSummaryLogsRetryBin",
+  "csharp"
+);
 @@clientName(Table, "OperationalInsightsTable", "csharp");
 @@clientName(Workspace, "OperationalInsightsWorkspace", "csharp");
 
 @@clientName(StorageAccount, "OperationalInsightsStorageAccount", "csharp");
 @@alternateType(StorageAccount.id, armResourceIdentifier, "csharp");
 
-@@clientName(LogAnalyticsQueryPackQuery.properties, "QueryProperties", "csharp");
-@@clientName(LogAnalyticsQueryPackQueryProperties.id, "ApplicationId", "csharp");
+@@clientName(
+  LogAnalyticsQueryPackQuery.properties,
+  "QueryProperties",
+  "csharp"
+);
+@@clientName(
+  LogAnalyticsQueryPackQueryProperties.id,
+  "ApplicationId",
+  "csharp"
+);
 @@alternateType(LogAnalyticsQueryPackQueryProperties.id, uuid, "csharp");
-@@clientName(LogAnalyticsQueryPackQueryProperties.timeCreated, "CreatedOn", "csharp");
-@@clientName(LogAnalyticsQueryPackQueryProperties.timeModified, "ModifiedOn", "csharp");
+@@clientName(
+  LogAnalyticsQueryPackQueryProperties.timeCreated,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(
+  LogAnalyticsQueryPackQueryProperties.timeModified,
+  "ModifiedOn",
+  "csharp"
+);
 @@alternateType(LogAnalyticsQueryPackProperties.queryPackId, uuid, "csharp");
-@@clientName(LogAnalyticsQueryPackProperties.timeCreated, "CreatedOn", "csharp");
-@@clientName(LogAnalyticsQueryPackProperties.timeModified, "ModifiedOn", "csharp");
+@@clientName(
+  LogAnalyticsQueryPackProperties.timeCreated,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(
+  LogAnalyticsQueryPackProperties.timeModified,
+  "ModifiedOn",
+  "csharp"
+);
 @@clientName(
   LogAnalyticsQueryPackQueryPropertiesRelated,
   "LogAnalyticsQueryRelatedMetadata",
@@ -107,30 +207,86 @@ using Microsoft.OperationalInsights;
 @@alternateType(SavedSearch.etag, eTag, "csharp");
 @@alternateType(Workspace.etag, eTag, "csharp");
 @@alternateType(StorageInsight.eTag, eTag, "csharp");
-@@alternateType(Workspace.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
-@@alternateType(WorkspacePatch.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(
+  Workspace.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  WorkspacePatch.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 
 @@clientName(BillingType, "OperationalInsightsBillingType", "csharp");
-@@clientName(CapacityReservationProperties, "OperationalInsightsCapacityReservationProperties", "csharp");
-@@clientName(AssociatedWorkspace, "OperationalInsightsClusterAssociatedWorkspace", "csharp");
+@@clientName(
+  CapacityReservationProperties,
+  "OperationalInsightsCapacityReservationProperties",
+  "csharp"
+);
+@@clientName(
+  AssociatedWorkspace,
+  "OperationalInsightsClusterAssociatedWorkspace",
+  "csharp"
+);
 @@clientName(AssociatedWorkspace.associateDate, "AssociatedOn", "csharp");
 @@alternateType(ClusterProperties.clusterId, uuid, "csharp");
-@@clientName(ClusterEntityStatus, "OperationalInsightsClusterEntityStatus", "csharp");
+@@clientName(
+  ClusterEntityStatus,
+  "OperationalInsightsClusterEntityStatus",
+  "csharp"
+);
 @@clientName(ClusterSkuNameEnum, "OperationalInsightsClusterSkuName", "csharp");
-@@clientName(ClusterReplicationState, "OperationalInsightsClusterReplicationState", "csharp");
-@@clientName(ClusterReplicationProperties, "OperationalInsightsClusterReplicationProperties", "csharp");
-@@clientName(ClusterReplicationProperties.enabled, "IsReplicationEnabled", "csharp");
+@@clientName(
+  ClusterReplicationState,
+  "OperationalInsightsClusterReplicationState",
+  "csharp"
+);
+@@clientName(
+  ClusterReplicationProperties,
+  "OperationalInsightsClusterReplicationProperties",
+  "csharp"
+);
+@@clientName(
+  ClusterReplicationProperties.enabled,
+  "IsReplicationEnabled",
+  "csharp"
+);
 @@clientName(ClusterSku, "OperationalInsightsClusterSku", "csharp");
 @@clientName(Capacity, "OperationalInsightsClusterCapacity", "csharp");
 @@clientName(Type, "OperationalInsightsDataExportDestinationType", "csharp");
 @@clientName(DataSourceKind, "OperationalInsightsDataSourceKind", "csharp");
-@@clientName(DataIngestionStatus, "OperationalInsightsDataIngestionStatus", "csharp");
-@@clientName(KeyVaultProperties, "OperationalInsightsKeyVaultProperties", "csharp");
-@@clientName(LinkedServiceEntityStatus, "OperationalInsightsLinkedServiceEntityStatus", "csharp");
+@@clientName(
+  DataIngestionStatus,
+  "OperationalInsightsDataIngestionStatus",
+  "csharp"
+);
+@@clientName(
+  KeyVaultProperties,
+  "OperationalInsightsKeyVaultProperties",
+  "csharp"
+);
+@@clientName(
+  LinkedServiceEntityStatus,
+  "OperationalInsightsLinkedServiceEntityStatus",
+  "csharp"
+);
 @@clientName(MetricName, "OperationalInsightsMetricName", "csharp");
-@@clientName(PrivateLinkScopedResource, "OperationalInsightsPrivateLinkScopedResourceInfo", "csharp");
-@@clientName(ProvisioningStateEnum, "OperationalInsightsNspProvisioningState", "csharp");
-@@clientName(PublicNetworkAccessType, "OperationalInsightsPublicNetworkAccessType", "csharp");
+@@clientName(
+  PrivateLinkScopedResource,
+  "OperationalInsightsPrivateLinkScopedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  ProvisioningStateEnum,
+  "OperationalInsightsNspProvisioningState",
+  "csharp"
+);
+@@clientName(
+  PublicNetworkAccessType,
+  "OperationalInsightsPublicNetworkAccessType",
+  "csharp"
+);
 @@clientName(RuleTypeEnum, "OperationalInsightsNspRuleType", "csharp");
 @@clientName(Schema, "OperationalInsightsSchema", "csharp");
 @@clientName(Severity, "OperationalInsightsNspSeverity", "csharp");
@@ -139,42 +295,106 @@ using Microsoft.OperationalInsights;
 @@clientName(TablePlanEnum, "OperationalInsightsTablePlan", "csharp");
 @@clientName(SearchResults, "OperationalInsightsTableSearchResults", "csharp");
 @@clientName(RestoredLogs, "OperationalInsightsTableRestoredLogs", "csharp");
-@@clientName(ResultStatistics, "OperationalInsightsTableResultStatistics", "csharp");
+@@clientName(
+  ResultStatistics,
+  "OperationalInsightsTableResultStatistics",
+  "csharp"
+);
 @@clientName(ResultStatistics.scannedGb, "ScannedGB", "csharp");
 @@clientName(Column, "OperationalInsightsColumn", "csharp");
 @@clientName(ColumnTypeEnum, "OperationalInsightsColumnType", "csharp");
-@@clientName(ColumnDataTypeHintEnum, "OperationalInsightsColumnDataTypeHint", "csharp");
+@@clientName(
+  ColumnDataTypeHintEnum,
+  "OperationalInsightsColumnDataTypeHint",
+  "csharp"
+);
 @@clientName(SourceEnum, "OperationalInsightsTableCreator", "csharp");
 @@clientName(TableTypeEnum, "OperationalInsightsTableType", "csharp");
 @@clientName(TableSubTypeEnum, "OperationalInsightsTableSubType", "csharp");
 @@clientName(Tag, "OperationalInsightsTag", "csharp");
 @@clientName(WorkspaceCapping, "OperationalInsightsWorkspaceCapping", "csharp");
-@@clientName(WorkspaceEntityStatus, "OperationalInsightsWorkspaceEntityStatus", "csharp");
-@@clientName(WorkspaceFailoverProperties, "OperationalInsightsWorkspaceFailoverProperties", "csharp");
-@@clientName(WorkspaceFailoverState, "OperationalInsightsWorkspaceFailoverState", "csharp");
-@@clientName(WorkspaceFeatures, "OperationalInsightsWorkspaceFeatures", "csharp");
-@@clientName(WorkspaceReplicationProperties, "OperationalInsightsWorkspaceReplicationProperties", "csharp");
-@@clientName(WorkspaceReplicationProperties.enabled, "IsReplicationEnabled", "csharp");
-@@clientName(WorkspaceReplicationState, "OperationalInsightsWorkspaceReplicationState", "csharp");
+@@clientName(
+  WorkspaceEntityStatus,
+  "OperationalInsightsWorkspaceEntityStatus",
+  "csharp"
+);
+@@clientName(
+  WorkspaceFailoverProperties,
+  "OperationalInsightsWorkspaceFailoverProperties",
+  "csharp"
+);
+@@clientName(
+  WorkspaceFailoverState,
+  "OperationalInsightsWorkspaceFailoverState",
+  "csharp"
+);
+@@clientName(
+  WorkspaceFeatures,
+  "OperationalInsightsWorkspaceFeatures",
+  "csharp"
+);
+@@clientName(
+  WorkspaceReplicationProperties,
+  "OperationalInsightsWorkspaceReplicationProperties",
+  "csharp"
+);
+@@clientName(
+  WorkspaceReplicationProperties.enabled,
+  "IsReplicationEnabled",
+  "csharp"
+);
+@@clientName(
+  WorkspaceReplicationState,
+  "OperationalInsightsWorkspaceReplicationState",
+  "csharp"
+);
 @@clientName(WorkspaceSku, "OperationalInsightsWorkspaceSku", "csharp");
-@@clientName(WorkspaceSkuNameEnum, "OperationalInsightsWorkspaceSkuName", "csharp");
-@@clientName(CapacityReservationLevel, "OperationalInsightsWorkspaceCapacityReservationLevel", "csharp");
+@@clientName(
+  WorkspaceSkuNameEnum,
+  "OperationalInsightsWorkspaceSkuName",
+  "csharp"
+);
+@@clientName(
+  CapacityReservationLevel,
+  "OperationalInsightsWorkspaceCapacityReservationLevel",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET base type for workspace patch data"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(WorkspacePatch, Azure.ResourceManager.Foundations.Resource, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  WorkspacePatch,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
 
 @@alternateType(ClusterSku.capacity, Capacity, "csharp");
-@@alternateType(WorkspaceSku.capacityReservationLevel, CapacityReservationLevel, "csharp");
-@@clientName(TableProperties.retentionInDaysAsDefault, "IsRetentionInDaysAsDefault", "csharp");
+@@alternateType(
+  WorkspaceSku.capacityReservationLevel,
+  CapacityReservationLevel,
+  "csharp"
+);
+@@clientName(
+  TableProperties.retentionInDaysAsDefault,
+  "IsRetentionInDaysAsDefault",
+  "csharp"
+);
 @@clientName(
   TableProperties.totalRetentionInDaysAsDefault,
   "IsTotalRetentionInDaysAsDefault",
   "csharp"
 );
 @@alternateType(TableProperties.retentionInDaysAsDefault, boolean, "csharp");
-@@alternateType(TableProperties.totalRetentionInDaysAsDefault, boolean, "csharp");
+@@alternateType(
+  TableProperties.totalRetentionInDaysAsDefault,
+  boolean,
+  "csharp"
+);
 
-@@clientName(AvailableServiceTier, "OperationalInsightsAvailableServiceTier", "csharp");
+@@clientName(
+  AvailableServiceTier,
+  "OperationalInsightsAvailableServiceTier",
+  "csharp"
+);
 @@clientName(AvailableServiceTier.enabled, "IsEnabled", "csharp");
 @@clientName(AvailableServiceTier.lastSkuUpdate, "LastSkuUpdatedOn", "csharp");
 @@alternateType(AvailableServiceTier.lastSkuUpdate, utcDateTime, "csharp");
@@ -182,25 +402,61 @@ using Microsoft.OperationalInsights;
 @@clientName(IntelligencePack.enabled, "IsEnabled", "csharp");
 @@clientName(ManagementGroup, "OperationalInsightsManagementGroup", "csharp");
 @@clientName(ManagementGroupProperties.created, "CreatedOn", "csharp");
-@@clientName(ManagementGroupProperties.dataReceived, "DataReceivedOn", "csharp");
-@@clientName(LogAnalyticsQueryPackQuerySearchProperties, "LogAnalyticsQuerySearchProperties", "csharp");
+@@clientName(
+  ManagementGroupProperties.dataReceived,
+  "DataReceivedOn",
+  "csharp"
+);
+@@clientName(
+  LogAnalyticsQueryPackQuerySearchProperties,
+  "LogAnalyticsQuerySearchProperties",
+  "csharp"
+);
 @@clientName(
   LogAnalyticsQueryPackQuerySearchPropertiesRelated,
   "LogAnalyticsQuerySearchRelatedMetadata",
   "csharp"
 );
-@@clientName(SearchGetSchemaResponse, "OperationalInsightsSearchSchemaResult", "csharp");
-@@clientName(SearchSchemaValue, "OperationalInsightsSearchSchemaValue", "csharp");
+@@clientName(
+  SearchGetSchemaResponse,
+  "OperationalInsightsSearchSchemaResult",
+  "csharp"
+);
+@@clientName(
+  SearchSchemaValue,
+  "OperationalInsightsSearchSchemaValue",
+  "csharp"
+);
 @@clientName(SearchSchemaValue.type, "SearchSchemaValueType", "csharp");
 @@clientName(UsageMetric, "OperationalInsightsUsageMetric", "csharp");
 @@clientName(SharedKeys, "OperationalInsightsWorkspaceSharedKeys", "csharp");
 @@clientName(OperationStatus, "OperationalInsightsOperationStatus", "csharp");
-@@clientName(TimeSelectorEnum, "OperationalInsightsSummaryTimeSelector", "csharp");
-@@clientName(WorkspacePurgeBody, "OperationalInsightsWorkspacePurgeContent", "csharp");
-@@clientName(WorkspacePurgeBodyFilters, "OperationalInsightsWorkspacePurgeFilter", "csharp");
-@@clientName(WorkspacePurgeResponse, "OperationalInsightsWorkspacePurgeResult", "csharp");
+@@clientName(
+  TimeSelectorEnum,
+  "OperationalInsightsSummaryTimeSelector",
+  "csharp"
+);
+@@clientName(
+  WorkspacePurgeBody,
+  "OperationalInsightsWorkspacePurgeContent",
+  "csharp"
+);
+@@clientName(
+  WorkspacePurgeBodyFilters,
+  "OperationalInsightsWorkspacePurgeFilter",
+  "csharp"
+);
+@@clientName(
+  WorkspacePurgeResponse,
+  "OperationalInsightsWorkspacePurgeResult",
+  "csharp"
+);
 @@clientName(WorkspacePurgeResponse.operationId, "OperationStringId", "csharp");
-@@clientName(WorkspacePurgeStatusResponse, "OperationalInsightsWorkspacePurgeStatusResult", "csharp");
+@@clientName(
+  WorkspacePurgeStatusResponse,
+  "OperationalInsightsWorkspacePurgeStatusResult",
+  "csharp"
+);
 @@clientName(PurgeState, "OperationalInsightsWorkspacePurgeState", "csharp");
 @@clientName(RuleDefinition, "OperationalInsightsSummaryRule", "csharp");
 @@clientName(DataSourceType, "OperationalInsightsDataSourceType", "csharp");
@@ -213,30 +469,70 @@ using Microsoft.OperationalInsights;
 @@alternateType(DataExportProperties.lastModifiedDate, utcDateTime, "csharp");
 @@clientName(Destination.type, "DestinationType", "csharp");
 @@alternateType(Destination.resourceId, armResourceIdentifier, "csharp");
-@@clientName(CapacityReservationProperties.lastSkuUpdate, "LastSkuUpdatedOn", "csharp");
+@@clientName(
+  CapacityReservationProperties.lastSkuUpdate,
+  "LastSkuUpdatedOn",
+  "csharp"
+);
 @@clientName(WorkspaceSku.lastSkuUpdate, "LastSkuUpdatedOn", "csharp");
-@@clientName(WorkspaceFeatures.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
-@@clientName(WorkspaceFeatures.enableDataExport, "IsDataExportEnabled", "csharp");
+@@clientName(
+  WorkspaceFeatures.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(
+  WorkspaceFeatures.enableDataExport,
+  "IsDataExportEnabled",
+  "csharp"
+);
 @@clientName(
   WorkspaceFeatures.enableLogAccessUsingOnlyResourcePermissions,
   "IsLogAccessUsingOnlyResourcePermissionsEnabled",
   "csharp"
 );
-@@clientName(WorkspaceFeatures.unifiedSentinelBillingOnly, "IsUnifiedSentinelBillingOnly", "csharp");
+@@clientName(
+  WorkspaceFeatures.unifiedSentinelBillingOnly,
+  "IsUnifiedSentinelBillingOnly",
+  "csharp"
+);
 @@clientName(WorkspaceCapping.dailyQuotaGb, "DailyQuotaInGB", "csharp");
 @@alternateType(WorkspaceProperties.customerId, uuid, "csharp");
-@@alternateType(WorkspaceProperties.defaultDataCollectionRuleResourceId, armResourceIdentifier, "csharp");
-@@alternateType(LinkedServiceProperties.resourceId, armResourceIdentifier, "csharp");
-@@alternateType(LinkedServiceProperties.writeAccessResourceId, armResourceIdentifier, "csharp");
-@@clientName(LinkedStorageAccountsProperties.dataSourceType, "DataSourceType", "csharp");
-@@alternateType(LinkedStorageAccountsProperties.storageAccountIds, armResourceIdentifier[], "csharp");
+@@alternateType(
+  WorkspaceProperties.defaultDataCollectionRuleResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LinkedServiceProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LinkedServiceProperties.writeAccessResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  LinkedStorageAccountsProperties.dataSourceType,
+  "DataSourceType",
+  "csharp"
+);
+@@alternateType(
+  LinkedStorageAccountsProperties.storageAccountIds,
+  armResourceIdentifier[],
+  "csharp"
+);
 @@clientName(Column.type, "ColumnType", "csharp");
 @@clientName(ColumnDataTypeHintEnum.ip, "IP", "csharp");
 @@clientName(StorageInsightState.ERROR, "Error", "csharp");
 
 @@clientName(LogAnalyticsQueryPacks.search, "SearchQueries", "csharp");
 @@clientName(Workspaces.listByWorkspace, "GetAvailableServiceTiers", "csharp");
-@@clientName(Workspaces.intelligencePacksList, "GetIntelligencePacks", "csharp");
+@@clientName(
+  Workspaces.intelligencePacksList,
+  "GetIntelligencePacks",
+  "csharp"
+);
 @@clientName(Workspaces.managementGroupsList, "GetManagementGroups", "csharp");
 @@clientName(Workspaces.schemaGet, "GetSchemas", "csharp");
 @@clientName(Workspaces.usagesList, "GetUsages", "csharp");
@@ -246,8 +542,16 @@ using Microsoft.OperationalInsights;
 @@clientName(Workspaces.enable, "EnableIntelligencePack", "csharp");
 @@clientName(Workspaces.regenerate, "RegenerateSharedKey", "csharp");
 @@clientName(WorkspacesOperationGroup.failover, "FailoverWorkspace", "csharp");
-@@alternateType(WorkspacesOperationGroup.failover::parameters.location, Azure.Core.azureLocation, "csharp");
-@@clientName(QueryPacksOperationGroup.createOrUpdateWithoutName, "CreateOrUpdateWithoutNameQueryPack", "csharp");
+@@alternateType(
+  WorkspacesOperationGroup.failover::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(
+  QueryPacksOperationGroup.createOrUpdateWithoutName,
+  "CreateOrUpdateWithoutNameQueryPack",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve previous .NET pageable shape for the single-page saved search list operation"
 @@markAsPageable(SavedSearches.listByWorkspace, "csharp");
