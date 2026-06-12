@@ -2412,6 +2412,10 @@
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
           "description": "Retry policy the user can pass"
+        },
+        "verifyVmAgentHealth": {
+          "type": "boolean",
+          "description": "When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations."
         }
       }
     },
@@ -3854,7 +3858,8 @@
             "Deallocate",
             "Hibernate",
             "Create",
-            "Delete"
+            "Delete",
+            "GetInstanceView"
           ],
           "x-ms-enum": {
             "name": "ResourceOperationType",
@@ -3889,6 +3894,11 @@
                 "name": "Delete",
                 "value": "Delete",
                 "description": "Delete operations on the resources"
+              },
+              {
+                "name": "GetInstanceView",
+                "value": "GetInstanceView",
+                "description": "Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request"
               }
             ]
           }
@@ -4058,7 +4068,8 @@
         "Deallocate",
         "Hibernate",
         "Create",
-        "Delete"
+        "Delete",
+        "GetInstanceView"
       ],
       "x-ms-enum": {
         "name": "ResourceOperationType",
@@ -4093,6 +4104,11 @@
             "name": "Delete",
             "value": "Delete",
             "description": "Delete operations on the resources"
+          },
+          {
+            "name": "GetInstanceView",
+            "value": "GetInstanceView",
+            "description": "Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request"
           }
         ]
       }

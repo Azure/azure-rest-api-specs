@@ -49,6 +49,10 @@ union ResourceOperationType {
   @doc("Delete operations on the resources")
   Delete: "Delete",
 
+  @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+  @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
+  GetInstanceView: "GetInstanceView",
+
   string,
 }
 
@@ -329,6 +333,10 @@ model RetryPolicy {
 model ExecutionParameters {
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-06-06-preview`)
+  @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
+  verifyVmAgentHealth?: boolean;
 }
 
 @doc("These describe errors that occur at the resource level")
