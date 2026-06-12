@@ -419,11 +419,28 @@ model PrivateLinkResourceReplacement
   "BotServiceNspAccessRuleSubscription",
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  BotChannels.update::parameters.properties,
-  "javascript"
-);
+
+op BotChannelsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  resourceName: string,
+  channelName: Microsoft.BotService.ChannelName,
+  properties: Microsoft.BotService.Channel,
+  location: string,
+  tags: Record<string>,
+  sku: Microsoft.BotService.Sku,
+  kind: Microsoft.BotService.Kind,
+  etag: string,
+  zones: string[],
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
+  | Microsoft.BotService.Error;
+
+@@override(BotChannels.update, BotChannelsUpdate, "javascript");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Bots.update::parameters.properties,
