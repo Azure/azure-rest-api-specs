@@ -1,4 +1,4 @@
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "../agents/routes.tsp";
 import "../agents-containers/routes.tsp";
 import "../agents-invocations_ws/routes.tsp";

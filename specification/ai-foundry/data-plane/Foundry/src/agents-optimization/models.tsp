@@ -9,7 +9,7 @@
 
 import "../common/models.tsp";
 import "../openai-evaluations/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
 
