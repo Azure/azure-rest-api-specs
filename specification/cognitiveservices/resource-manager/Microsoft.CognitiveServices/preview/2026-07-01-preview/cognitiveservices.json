@@ -12820,60 +12820,6 @@
         ]
       }
     },
-    "HttpMethod": {
-      "type": "string",
-      "description": "HTTP method for policy rule matching.",
-      "enum": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE",
-        "PATCH",
-        "HEAD",
-        "OPTIONS"
-      ],
-      "x-ms-enum": {
-        "name": "HttpMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GET",
-            "value": "GET",
-            "description": "HTTP GET method."
-          },
-          {
-            "name": "POST",
-            "value": "POST",
-            "description": "HTTP POST method."
-          },
-          {
-            "name": "PUT",
-            "value": "PUT",
-            "description": "HTTP PUT method."
-          },
-          {
-            "name": "DELETE",
-            "value": "DELETE",
-            "description": "HTTP DELETE method."
-          },
-          {
-            "name": "PATCH",
-            "value": "PATCH",
-            "description": "HTTP PATCH method."
-          },
-          {
-            "name": "HEAD",
-            "value": "HEAD",
-            "description": "HTTP HEAD method."
-          },
-          {
-            "name": "OPTIONS",
-            "value": "OPTIONS",
-            "description": "HTTP OPTIONS method."
-          }
-        ]
-      }
-    },
     "Identity": {
       "type": "object",
       "description": "Identity for the resource.",
@@ -14207,6 +14153,30 @@
         }
       }
     },
+    "PolicyMode": {
+      "type": "string",
+      "description": "The enforcement mode for a policy.",
+      "enum": [
+        "Enforced",
+        "Audit"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enforced",
+            "value": "Enforced",
+            "description": "Policy rules are enforced. Matching traffic is allowed or denied per rule actions."
+          },
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Policy rules are evaluated and logged but not enforced. All traffic is allowed regardless of rule actions."
+          }
+        ]
+      }
+    },
     "PolicyProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services Policy resource.",
@@ -14214,6 +14184,10 @@
         "policyType": {
           "$ref": "#/definitions/PolicyType",
           "description": "The type of policy."
+        },
+        "mode": {
+          "$ref": "#/definitions/PolicyMode",
+          "description": "The enforcement mode for this policy. Defaults to Enforced."
         },
         "defaultAction": {
           "$ref": "#/definitions/PolicyDefaultAction",
@@ -14270,6 +14244,10 @@
           "type": "string",
           "description": "Description of the rule."
         },
+        "ruleType": {
+          "$ref": "#/definitions/PolicyRuleType",
+          "description": "The type of rule (e.g., Fqdn). Determines how match criteria are interpreted."
+        },
         "match": {
           "$ref": "#/definitions/PolicyRuleMatch",
           "description": "The match criteria for this rule."
@@ -14318,14 +14296,25 @@
         "path": {
           "type": "string",
           "description": "Path pattern to match (glob pattern, e.g. \"/v1/*\")."
-        },
-        "methods": {
-          "type": "array",
-          "description": "HTTP methods to match. If omitted, all methods are matched.",
-          "items": {
-            "$ref": "#/definitions/HttpMethod"
-          }
         }
+      }
+    },
+    "PolicyRuleType": {
+      "type": "string",
+      "description": "The type of a policy rule, determining what kind of traffic matching it performs.",
+      "enum": [
+        "Fqdn"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fqdn",
+            "value": "Fqdn",
+            "description": "Fully qualified domain name (FQDN) based rule matching on host and path patterns."
+          }
+        ]
       }
     },
     "PolicyType": {

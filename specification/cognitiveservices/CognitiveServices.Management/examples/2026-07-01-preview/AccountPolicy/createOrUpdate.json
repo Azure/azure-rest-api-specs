@@ -10,12 +10,14 @@
     "resource": {
       "properties": {
         "policyType": "Egress",
+        "mode": "Enforced",
         "defaultAction": "Deny",
         "description": "Corporate baseline egress policy shared across all projects",
         "rules": [
           {
             "name": "allow-openai",
             "description": "Allow traffic to OpenAI API",
+            "ruleType": "Fqdn",
             "match": {
               "host": "*.openai.com"
             },
@@ -24,6 +26,7 @@
           {
             "name": "allow-github",
             "description": "Allow traffic to GitHub",
+            "ruleType": "Fqdn",
             "match": {
               "host": "*.github.com"
             },
@@ -41,12 +44,14 @@
         "type": "Microsoft.CognitiveServices/accounts/policies",
         "properties": {
           "policyType": "Egress",
+          "mode": "Enforced",
           "defaultAction": "Deny",
           "description": "Corporate baseline egress policy shared across all projects",
           "rules": [
             {
               "name": "allow-openai",
               "description": "Allow traffic to OpenAI API",
+              "ruleType": "Fqdn",
               "match": {
                 "host": "*.openai.com"
               },
@@ -55,6 +60,7 @@
             {
               "name": "allow-github",
               "description": "Allow traffic to GitHub",
+              "ruleType": "Fqdn",
               "match": {
                 "host": "*.github.com"
               },

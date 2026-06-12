@@ -6504,6 +6504,20 @@ union PolicyType {
 }
 
 /**
+ * The enforcement mode for a policy.
+ */
+@added(Versions.v2026_07_01_preview)
+union PolicyMode {
+  string,
+
+  /** Policy rules are enforced. Matching traffic is allowed or denied per rule actions. */
+  Enforced: "Enforced",
+
+  /** Policy rules are evaluated and logged but not enforced. All traffic is allowed regardless of rule actions. */
+  Audit: "Audit",
+}
+
+/**
  * The default action when no policy rules match.
  */
 @added(Versions.v2026_07_01_preview)
@@ -6532,6 +6546,17 @@ union PolicyRuleAction {
 }
 
 /**
+ * The type of a policy rule, determining what kind of traffic matching it performs.
+ */
+@added(Versions.v2026_07_01_preview)
+union PolicyRuleType {
+  string,
+
+  /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
+  Fqdn: "Fqdn",
+}
+
+/**
  * The match criteria for a policy rule.
  */
 @added(Versions.v2026_07_01_preview)
@@ -6545,40 +6570,6 @@ model PolicyRuleMatch {
    * Path pattern to match (glob pattern, e.g. "/v1/*").
    */
   path?: string;
-
-  /**
-   * HTTP methods to match. If omitted, all methods are matched.
-   */
-  methods?: HttpMethod[];
-}
-
-/**
- * HTTP method for policy rule matching.
- */
-@added(Versions.v2026_07_01_preview)
-union HttpMethod {
-  string,
-
-  /** HTTP GET method. */
-  GET: "GET",
-
-  /** HTTP POST method. */
-  POST: "POST",
-
-  /** HTTP PUT method. */
-  PUT: "PUT",
-
-  /** HTTP DELETE method. */
-  DELETE: "DELETE",
-
-  /** HTTP PATCH method. */
-  PATCH: "PATCH",
-
-  /** HTTP HEAD method. */
-  HEAD: "HEAD",
-
-  /** HTTP OPTIONS method. */
-  OPTIONS: "OPTIONS",
 }
 
 /**
@@ -6595,6 +6586,11 @@ model PolicyRule {
    * Description of the rule.
    */
   description?: string;
+
+  /**
+   * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
+   */
+  ruleType?: PolicyRuleType;
 
   /**
    * The match criteria for this rule.
@@ -6616,6 +6612,11 @@ model PolicyProperties {
    * The type of policy.
    */
   policyType?: PolicyType;
+
+  /**
+   * The enforcement mode for this policy. Defaults to Enforced.
+   */
+  mode?: PolicyMode;
 
   /**
    * The default action when no rules match.
