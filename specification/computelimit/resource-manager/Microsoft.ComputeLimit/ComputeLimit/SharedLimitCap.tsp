@@ -27,14 +27,20 @@ model SharedLimitCap is ProxyResource<SharedLimitCapProperties> {
 /** Properties of a shared limit cap resource. */
 @added(Versions.v2026_07_01)
 model SharedLimitCapProperties {
-  /** The Default member cap value (in count units) */
-  defaultMemberCap?: OptionalInt32;
+  /**
+   * The default member cap value (in count units).
+   * Set to a non-negative integer to apply a cap to all member subscriptions
+   * that do not have a per-member override. Set to `null` to clear the cap.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Required property where `null` carries the explicit 'clear the cap' intent, distinct from 'leave unchanged'."
+  @minValue(0)
+  defaultMemberCap: int32 | null;
 
   /**
    * Controls whether the service validates the aggregate cap against the
    * group limit for the VM family.
    *
-   * SUM(caps) is the sum of all `memberCapOverrides[].cap` values plus
+   * SUM(caps) is the sum of all per-member overrides' cap values plus
    * `defaultMemberCap` multiplied by the number of member subscriptions without an override.
    *
    * When true, the service rejects any configuration where SUM(caps)
@@ -44,30 +50,13 @@ model SharedLimitCapProperties {
    * Enabling this flag is rejected if the current configuration already breaches the group limit;
    * reduce caps first, then enable.
    */
-  isBoundedCap?: boolean;
-
-  /**
-   * Per-member cap overrides. Returned on GET; omitted from list responses.
-   * Call GET on a specific `vmFamilyName`, or list the `MemberCapOverride`
-   * child collection, to retrieve the full set.
-   *
-   * On PUT, supplying this array replaces the full set of overrides for the
-   * resource. Supply `[]` to clear all overrides. Omit the property to leave
-   * the existing set unchanged (per the merge semantics of this PUT). To
-   * edit a single override without resending the full list, use the
-   * `MemberCapOverride` child resource.
-   */
-  @maxItems(1000)
-  @identifiers(#["subscriptionId"])
-  memberCapOverrides?: MemberCap[];
+  isBoundedCap: boolean;
 
   ...DefaultProvisioningStateProperty;
 }
 
 /**
- * Per-member cap override embedded inside
- * `SharedLimitCap.properties.memberCapOverrides[]`. Each entry pairs a member
- * subscription with its cap value.
+ * Per-member cap override. Pairs a member subscription with its cap value.
  */
 @added(Versions.v2026_07_01)
 model MemberCap {
@@ -79,17 +68,24 @@ model MemberCap {
   cap: int32;
 }
 
-/**
- * Wrapper that lets callers distinguish three intents for an integer field:
- * omit the wrapper to leave the value unchanged,
- * supply `{}` to clear it,
- * or supply `{ "value": N }` to set it to N.
- */
+/** Request body for the `setMemberCapOverrides` action. */
 @added(Versions.v2026_07_01)
-model OptionalInt32 {
-  /** The integer value. Omit to clear the field on the server. */
-  @minValue(0)
-  value?: int32;
+model SetMemberCapOverridesRequest {
+  /**
+   * The full set of per-member cap overrides to persist for this resource.
+   * This call replaces the existing set entirely; supply an empty array
+   * (`[]`) to clear all overrides.
+   */
+  @identifiers(#["subscriptionId"])
+  memberCapOverrides: MemberCap[];
+}
+
+/** Response body for the `setMemberCapOverrides` action. */
+@added(Versions.v2026_07_01)
+model SetMemberCapOverridesResult {
+  /** The per-member cap overrides as persisted after the action completed. */
+  @identifiers(#["subscriptionId"])
+  memberCapOverrides: MemberCap[];
 }
 
 /** Subscription-scoped operations for shared limit cap resources. */
@@ -100,11 +96,7 @@ interface SharedLimitCaps {
   get is ArmResourceRead<SharedLimitCap>;
 
   /**
-   * Creates or updates the shared limit cap configuration.
-   * Note: this PUT uses merge semantics, not the standard ARM replace semantics.
-   * Properties omitted from the request body are left unchanged on the server.
-   *  To clear a value, supply the explicit clear shape (e.g. `defaultMemberCap: {}`
-   * or `memberCapOverrides: []`).
+   * Creates or replaces the shared limit cap configuration for a VM family.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<SharedLimitCap>;
 
@@ -113,4 +105,15 @@ interface SharedLimitCaps {
 
   /** Lists all shared limit cap configurations visible to the caller's subscription. */
   listBySubscription is ArmListBySubscriptionScope<SharedLimitCap>;
+
+  /**
+   * Replaces the full set of per-member cap overrides for this shared limit
+   * cap. The supplied array becomes the new complete set of overrides;
+   * supplying an empty array clears all existing overrides.
+   */
+  setMemberCapOverrides is ArmResourceActionSync<
+    SharedLimitCap,
+    SetMemberCapOverridesRequest,
+    SetMemberCapOverridesResult
+  >;
 }
