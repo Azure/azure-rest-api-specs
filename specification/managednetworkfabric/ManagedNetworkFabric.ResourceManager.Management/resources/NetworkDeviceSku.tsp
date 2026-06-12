@@ -2,17 +2,15 @@ import "../models/common.tsp";
 import "../models/NetworkDeviceSku.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkDeviceSku resource definition.")
 @subscriptionResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
+model NetworkDeviceSku
+  is Azure.ResourceManager.ProxyResource<NetworkDeviceSkuProperties, false> {
   @doc("Name of the Network Device SKU.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,11 +18,9 @@ model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @segment("networkDeviceSkus")
   @visibility(Lifecycle.Read)
   name: string;
-
-  @doc("The Network Device SKU properties.")
-  properties: NetworkDeviceSkuProperties;
 }
 
+@@doc(NetworkDeviceSku.properties, "The Network Device SKU properties.");
 @armResourceOperations
 interface NetworkDeviceSkus {
   @doc("Get a Network Device SKU details.")
