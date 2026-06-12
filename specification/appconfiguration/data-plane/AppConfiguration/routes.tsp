@@ -472,7 +472,7 @@ op getOperationDetails is AppConfigOperation<
   OperationDetails
 >;
 
-// --- Schema operations (added in 2026-10-01-preview) ---
+// --- Schema operations (added in 2026-08-01-preview) ---
 
 alias SchemasRequestParams = {
   ...SyncTokenHeader;
@@ -515,7 +515,7 @@ alias SchemasRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Consistent naming"
 @summary("Gets a list of schemas.")
 @doc("Gets a list of schemas.")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 op getSchemas is Foundations.ResourceList<
   Schema,
   SchemasRequestParams,
@@ -529,7 +529,7 @@ op getSchemas is Foundations.ResourceList<
 @doc("Gets a single schema.")
 @route("/schemas/{schemaName}")
 @get
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 op getSchema is AppConfigOperation<
   {
     ...SchemaNamePathParam<"The name of the schema to retrieve.">;
@@ -548,7 +548,7 @@ op getSchema is AppConfigOperation<
 @doc("Creates or updates a schema.")
 @route("/schemas/{schemaName}")
 @put
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 op createOrReplaceSchema is AppConfigOperation<
   {
     ...SchemaNamePathParam<"The name of the schema to create or update.">;
@@ -570,7 +570,7 @@ op createOrReplaceSchema is AppConfigOperation<
 @doc("Deletes a schema.")
 @route("/schemas/{schemaName}")
 @delete
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 op deleteSchema is AppConfigOperation<
   {
     ...SchemaNamePathParam<"The name of the schema to delete.">;

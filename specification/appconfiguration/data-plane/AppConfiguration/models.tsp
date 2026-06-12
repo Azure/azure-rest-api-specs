@@ -457,14 +457,11 @@ alias NamePathParam<TDoc extends valueof string> = {
   name: string;
 };
 
-// --- Schema resource models (added in 2026-10-01-preview) ---
+// --- Schema resource models (added in 2026-08-01-preview) ---
 
 @doc("Schema fields.")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SchemaFields {
-  @doc("Id field.")
-  id: "id",
-
   @doc("Name field.")
   name: "name",
 
@@ -480,8 +477,13 @@ union SchemaFields {
   @doc("Target field.")
   target: "target",
 
-  @doc("Scope field.")
-  scope: "scope",
+  @doc("Key scope field.")
+  @encodedName("application/json", "key_scope")
+  keyScope: "key_scope",
+
+  @doc("Key label scope field.")
+  @encodedName("application/json", "key_label_scope")
+  keyLabelScope: "key_label_scope",
 
   @doc("Tags field.")
   tags: "tags",
@@ -501,7 +503,7 @@ union SchemaFields {
 }
 
 @doc("Schema status.")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SchemaStatus {
   @doc("Enabled")
   enabled: "enabled",
@@ -513,7 +515,7 @@ union SchemaStatus {
 }
 
 @doc("Schema type.")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SchemaType {
   @doc("Custom user-defined schema.")
   custom: "custom",
@@ -525,7 +527,7 @@ union SchemaType {
 }
 
 @doc("Schema target type.")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 union SchemaTarget {
   @doc("Key-value target.")
   kv: "kv",
@@ -533,18 +535,25 @@ union SchemaTarget {
   string,
 }
 
-@doc("The scope of a schema resource.")
-@added(Versions.v2026_10_01_preview)
-model SchemaScope {
+@doc("A schema scope that targets key-values matching a key pattern.")
+@added(Versions.v2026_08_01_preview)
+model KeyScope {
+  @doc("The key pattern for the schema scope.")
+  key: string;
+}
+
+@doc("A schema scope that targets key-values matching both a key pattern and a label pattern.")
+@added(Versions.v2026_08_01_preview)
+model KeyLabelScope {
   @doc("The key pattern for the schema scope.")
   key: string;
 
   @doc("The label pattern for the schema scope.")
-  label?: string;
+  label: string;
 }
 
 @doc("The result of a schema list request.")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model SchemaListResult {
   @doc("The collection value.")
   @pageItems
@@ -557,7 +566,7 @@ model SchemaListResult {
 
 @doc("A schema resource used for write-time validation of key-values.")
 @resource("schemas")
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2026_08_01_preview)
 model Schema {
   @doc("The unique identifier of the schema.")
   @visibility(Lifecycle.Read)
@@ -578,11 +587,16 @@ model Schema {
   @doc("The status of the schema.")
   status?: SchemaStatus;
 
-  @doc("The target resource type for the schema. Required when scope is present.")
+  @doc("The target resource type for the schema. Required when a scope is present.")
   target?: SchemaTarget;
 
-  @doc("The scope of the schema. Required when target is present.")
-  scope?: SchemaScope;
+  @doc("The key scope of the schema. Mutually exclusive with `key_label_scope`.")
+  @encodedName("application/json", "key_scope")
+  keyScope?: KeyScope;
+
+  @doc("The key and label scope of the schema. Mutually exclusive with `key_scope`.")
+  @encodedName("application/json", "key_label_scope")
+  keyLabelScope?: KeyLabelScope;
 
   @doc("The tags of the schema.")
   tags?: Record<string>;
