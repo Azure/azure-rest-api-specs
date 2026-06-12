@@ -404,6 +404,24 @@ union OriginAuthenticationType {
 }
 
 /**
+ * The HTTP request header where the origin authentication token is placed when forwarding the request to the origin.
+ */
+@added(Versions.v2026_04_01_preview)
+union OriginAuthenticationTokenDestinationHeader {
+  string,
+
+  /**
+   * Place the token in the standard `Authorization` request header (default behavior).
+   */
+  Authorization: "Authorization",
+
+  /**
+   * Place the token in the `X-Azure-Authorization` request header to avoid conflicts with an existing `Authorization` header set by the client.
+   */
+  XAzureAuthorization: "X-Azure-Authorization",
+}
+
+/**
  * Supported protocols for the customer's endpoint.
  */
 union AFDEndpointProtocols {
@@ -3013,6 +3031,12 @@ model OriginAuthenticationProperties {
    * The scope used when requesting token from Microsoft Entra. For example, for Azure Blob Storage, scope could be "https://storage.azure.com/.default".
    */
   scope?: url;
+
+  /**
+   * The HTTP request header where the origin authentication token will be placed when forwarding the request to the origin. If not specified, the service will use the `Authorization` header for backward compatibility.
+   */
+  @added(Versions.v2026_04_01_preview)
+  tokenDestinationHeader?: OriginAuthenticationTokenDestinationHeader;
 }
 
 /**

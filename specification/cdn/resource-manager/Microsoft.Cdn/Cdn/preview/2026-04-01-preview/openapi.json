@@ -13712,7 +13712,35 @@
           "type": "string",
           "format": "uri",
           "description": "The scope used when requesting token from Microsoft Entra. For example, for Azure Blob Storage, scope could be \"https://storage.azure.com/.default\"."
+        },
+        "tokenDestinationHeader": {
+          "$ref": "#/definitions/OriginAuthenticationTokenDestinationHeader",
+          "description": "The HTTP request header where the origin authentication token will be placed when forwarding the request to the origin. If not specified, the service will use the `Authorization` header for backward compatibility."
         }
+      }
+    },
+    "OriginAuthenticationTokenDestinationHeader": {
+      "type": "string",
+      "description": "The HTTP request header where the origin authentication token is placed when forwarding the request to the origin.",
+      "enum": [
+        "Authorization",
+        "X-Azure-Authorization"
+      ],
+      "x-ms-enum": {
+        "name": "OriginAuthenticationTokenDestinationHeader",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Authorization",
+            "value": "Authorization",
+            "description": "Place the token in the standard `Authorization` request header (default behavior)."
+          },
+          {
+            "name": "XAzureAuthorization",
+            "value": "X-Azure-Authorization",
+            "description": "Place the token in the `X-Azure-Authorization` request header to avoid conflicts with an existing `Authorization` header set by the client."
+          }
+        ]
       }
     },
     "OriginAuthenticationType": {
