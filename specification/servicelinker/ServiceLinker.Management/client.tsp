@@ -10,11 +10,13 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @@clientName(Linkers, "LinkersOperations", "java");
-@@clientName(Microsoft.ServiceLinker,
+@@clientName(
+  Microsoft.ServiceLinker,
   "ServiceLinkerManagementClient",
   "javascript"
 );
-@@clientName(Microsoft.ServiceLinker,
+@@clientName(
+  Microsoft.ServiceLinker,
   "ServiceLinkerManagementClient",
   "python"
 );
@@ -164,7 +166,8 @@ op linkerResourcesGenerateConfigurations(
   parameters?: ConfigurationInfo,
 ): ConfigurationResult;
 
-@@override(LinkerResources.generateConfigurations,
+@@override(
+  LinkerResources.generateConfigurations,
   linkerResourcesGenerateConfigurations
 );
 

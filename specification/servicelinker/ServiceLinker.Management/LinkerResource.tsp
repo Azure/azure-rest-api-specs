@@ -60,10 +60,12 @@ interface LinkerResources {
   update is LinkerResourceOps.CustomPatchAsync<
     LinkerResource,
     PatchModel = LinkerPatch,
-    Response = ArmResponse<LinkerResource> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>> & {
-      @bodyRoot
-      _: LinkerResource;
-    })
+    Response =
+      | ArmResponse<LinkerResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>> & {
+          @bodyRoot
+          _: LinkerResource;
+        })
   >;
 
   /**
@@ -73,8 +75,11 @@ interface LinkerResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is LinkerResourceOps.DeleteWithoutOkAsync<
     LinkerResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -128,10 +133,12 @@ interface Linker {
     Extension.ScopeParameter,
     LinkerResource,
     PatchModel = LinkerPatch,
-    Response = ArmResponse<LinkerResource> | ArmResourceCreatedResponse<
-      LinkerResource,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>
-    >
+    Response =
+      | ArmResponse<LinkerResource>
+      | ArmResourceCreatedResponse<
+          LinkerResource,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = LinkerResource>
+        >
   >;
 
   /**
@@ -142,8 +149,11 @@ interface Linker {
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ScopeParameter,
     LinkerResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -191,15 +201,18 @@ interface Linker {
 
 @@doc(LinkerResource.name, "The name Linker resource.");
 @@doc(LinkerResource.properties, "The properties of the Linker.");
-@@doc(LinkerResources.createOrUpdate::parameters.resource,
+@@doc(
+  LinkerResources.createOrUpdate::parameters.resource,
   "Connector details."
 );
 @@doc(LinkerResources.update::parameters.properties, "Connector details.");
 @@doc(Linker.createOrUpdate::parameters.resource, "Linker details.");
 @@doc(Linker.update::parameters.properties, "Linker details.");
-@@doc(LinkerResources.generateConfigurations::parameters.body,
+@@doc(
+  LinkerResources.generateConfigurations::parameters.body,
   "Connection Info, including format, secret store, etc"
 );
-@@doc(Linker.generateConfigurations::parameters.body,
+@@doc(
+  Linker.generateConfigurations::parameters.body,
   "Connection Info, including format, secret store, etc"
 );

@@ -43,6 +43,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists the available ServiceLinker REST API operations."
 );

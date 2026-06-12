@@ -60,7 +60,9 @@ interface DryrunResources {
   updateDryrun is DryrunResourceOps.CustomPatchAsync<
     DryrunResource,
     PatchModel = DryrunPatch,
-    Response = ArmResourceUpdatedResponse<DryrunResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
+    Response =
+      | ArmResourceUpdatedResponse<DryrunResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
   >;
 
   /**
@@ -101,7 +103,9 @@ interface Linkers {
     Extension.ScopeParameter,
     DryrunResource,
     PatchModel = DryrunPatch,
-    Response = ArmResourceUpdatedResponse<DryrunResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
+    Response =
+      | ArmResourceUpdatedResponse<DryrunResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = DryrunResource>>
   >;
 
   /**

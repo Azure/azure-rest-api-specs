@@ -15,15 +15,18 @@ using TypeSpec.Versioning;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LinkerPatch.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ValidateOperationResult.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ValidateOperationResult.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationNameItem.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConfigurationNameItem.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DaprConfigurationResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DaprConfigurationResource.properties
 );
 
 @@clientName(DryrunResources.createDryrun::parameters.resource, "parameters");
@@ -77,19 +80,22 @@ using TypeSpec.Versioning;
 
 // LinkersOperationGroup operations with Linkers_ prefix
 @@clientLocation(LinkersOperationGroup.listDaprConfigurations, Linkers);
-@@clientName(LinkersOperationGroup.listDaprConfigurations,
+@@clientName(
+  LinkersOperationGroup.listDaprConfigurations,
   "ListDaprConfigurations"
 );
 
 // ConfigurationNamesOperationGroup operations with ConfigurationNames_ prefix
 @@clientLocation(ConfigurationNamesOperationGroup.list, "ConfigurationNames");
 @@clientName(ConfigurationNamesOperationGroup.list, "List");
-@@clientName(LinkerResources.generateConfigurations::parameters.body,
+@@clientName(
+  LinkerResources.generateConfigurations::parameters.body,
   "parameters"
 );
 @@clientName(Linker.generateConfigurations::parameters.body, "parameters");
 
-@@doc(Azure.ResourceManager.Extension.ScopeParameter.scope,
+@@doc(
+  Azure.ResourceManager.Extension.ScopeParameter.scope,
   "The fully qualified Azure Resource manager identifier of the resource to be connected."
 );
 @@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceUri");
