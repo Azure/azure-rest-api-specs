@@ -428,6 +428,10 @@ op BotChannelsUpdate(
   resourceName: string,
   channelName: Microsoft.BotService.ChannelName,
   properties?: Microsoft.BotService.Channel,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+
   location?: string,
   tags?: Record<string>,
   sku?: Microsoft.BotService.Sku,
