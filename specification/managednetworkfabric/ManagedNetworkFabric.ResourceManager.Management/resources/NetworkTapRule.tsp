@@ -1,15 +1,13 @@
 import "../models/common.tsp";
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkTapRule resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
+model NetworkTapRule
+  is Azure.ResourceManager.TrackedResource<NetworkTapRuleProperties, false> {
   @doc("Name of the Network Tap Rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -18,15 +16,13 @@ model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The NetworkTapRule Properties")
-  properties: NetworkTapRuleProperties;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkTapRule.properties, "The NetworkTapRule Properties");
 @armResourceOperations
 interface NetworkTapRules {
   @doc("Get Network Tap Rule resource details.")

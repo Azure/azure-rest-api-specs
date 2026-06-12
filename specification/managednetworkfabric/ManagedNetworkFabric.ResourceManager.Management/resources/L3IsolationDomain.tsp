@@ -1,20 +1,16 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The L3 Isolation Domain resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(L3IsolationDomainProperties)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model L3IsolationDomain
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  is Azure.ResourceManager.TrackedResource<L3IsolationDomainProperties, false> {
   @doc("Name of the L3 Isolation Domain.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -24,15 +20,12 @@ model L3IsolationDomain
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The L3 Isolation Domain Properties")
-  properties: L3IsolationDomainProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(L3IsolationDomain.properties, "The L3 Isolation Domain Properties");
 @armResourceOperations
 interface L3IsolationDomains {
   @doc("Retrieves details of this L3 Isolation Domain.")
