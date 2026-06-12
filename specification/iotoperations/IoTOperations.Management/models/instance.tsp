@@ -66,8 +66,32 @@ model InstanceProperties {
   @added(Versions.`2025-07-01-preview`)
   adrNamespaceRef?: AzureDeviceRegistryNamespaceRef;
 
+  @doc("The billing tier for the AIO Instance. Defaults to Standard. Immutable after create.")
+  @added(Versions.`2026-07-01`)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  tier?: InstanceTier;
+
   #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
+}
+
+@doc("The billing tier for an AIO Instance.")
+@added(Versions.`2026-07-01`)
+model InstanceTier {
+  @doc("The name of the tier. Determines the billing meter applied to this instance.")
+  name: InstanceTierName;
+}
+
+@doc("The set of supported tier names for an AIO Instance.")
+@added(Versions.`2026-07-01`)
+union InstanceTierName {
+  string,
+
+  @doc("Essentials tier. Reduced feature set targeted at constrained edge and entry-level workloads.")
+  Essentials: "Essentials",
+
+  @doc("Standard tier. Full feature set. Default when tier is not specified.")
+  Standard: "Standard",
 }
 
 @doc("The reference to the AIO Secret provider class.")
