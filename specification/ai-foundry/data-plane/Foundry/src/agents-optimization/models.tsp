@@ -317,34 +317,11 @@ model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
 // ---------------------------------------------------------------------------
 
 @doc("Slim job representation returned by the LIST endpoint.")
-model OptimizationJobListItem {
-  @doc("Server-assigned unique identifier.")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  @doc("Current lifecycle status.")
-  @visibility(Lifecycle.Read)
-  status: JobStatus;
-
-  @doc("The timestamp when the job was created, represented in Unix time.")
-  @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
-
-  @doc("The timestamp when the job was last updated, represented in Unix time.")
-  @visibility(Lifecycle.Read)
-  updated_at: FoundryTimestamp;
-
+model OptimizationJobListItem
+  is OmitProperties<OptimizationJob, "inputs" | "result" | "warnings"> {
   @doc("The agent targeted by this optimization job.")
   @visibility(Lifecycle.Read)
   agent?: OptimizationAgentIdentifier;
-
-  @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
-  @visibility(Lifecycle.Read)
-  progress?: OptimizationJobProgress;
-
-  @doc("Error details — populated only on failure.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
 }
 
 // ---------------------------------------------------------------------------
