@@ -8608,17 +8608,6 @@ model FleetResourceProperties {
   provisioningState?: Status;
 }
 
-/**
- * Represents a fleet resource for updates.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model FleetResourceUpdate {
-  /**
-   * Properties to update Azure Cosmos DB fleet resource.
-   */
-  properties?: FleetResourceProperties;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
 model FleetAnalyticsProperties {
