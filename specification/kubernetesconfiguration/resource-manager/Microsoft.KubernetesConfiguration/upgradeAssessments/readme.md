@@ -41,6 +41,9 @@ These settings apply only when `--tag=package-2026-06-preview` is specified on t
 input-file:
   - preview/2026-06-15-preview/upgradeAssessments.json
 suppressions:
+  - code: OperationsAPIImplementation
+    from: upgradeAssessments.json
+    reason: Operations API is implemented as a separate service.
   - code: ResourceNameRestriction
     from: upgradeAssessments.json
     reason: Existing service contract needs to be backward compatible.
