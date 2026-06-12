@@ -233,7 +233,7 @@ using Microsoft.Cache;
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity",
-  "javascript"
+  "javascript,python"
 );
 
 // java compatibility mitigations
@@ -253,7 +253,7 @@ using Microsoft.Cache;
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
   "SYSTEM_ASSIGNED_USER_ASSIGNED",
-  "java"
+  "java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @@Legacy.flattenProperty(
