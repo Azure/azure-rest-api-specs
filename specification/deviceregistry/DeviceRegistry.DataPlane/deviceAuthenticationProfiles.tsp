@@ -186,6 +186,7 @@ model GetDeviceAuthenticationProfileKeysResponse {
 }
 
 /** Request for looking up a device authentication profile by its UUID. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model GetAuthenticationProfileByUuidRequest {
   /** The unique identifier of the authentication profile. */
   @query
