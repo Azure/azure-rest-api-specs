@@ -5,6 +5,8 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.BotService;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Microsoft.BotService;
 
@@ -419,3 +421,77 @@ model PrivateLinkResourceReplacement
   "BotServiceNspAccessRuleSubscription",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op BotChannelsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * The name of the Bot resource.
+   */
+  @path
+  @segment("botServices")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @maxLength(64)
+  @minLength(2)
+  resourceName: string,
+
+  /**
+   * The name of the Channel resource.
+   */
+  @path
+  @segment("channels")
+  channelName: ChannelName,
+
+  properties?: Microsoft.BotService.Channel,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+
+  location?: string,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+  sku?: Microsoft.BotService.Sku,
+  kind?: Microsoft.BotService.Kind,
+  etag?: string,
+  zones?: string[],
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
+  | Microsoft.BotService.Error;
+
+@@override(BotChannels.update, BotChannelsUpdate, "javascript");
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op BotsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  resourceName: string,
+  properties?: Microsoft.BotService.BotProperties,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+
+  location?: string,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+  sku?: Microsoft.BotService.Sku,
+  kind?: Microsoft.BotService.Kind,
+  etag?: string,
+  zones?: string[],
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.BotService.Bot>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
+  | Microsoft.BotService.Error;
+
+@@override(Bots.update, BotsUpdate, "javascript");
