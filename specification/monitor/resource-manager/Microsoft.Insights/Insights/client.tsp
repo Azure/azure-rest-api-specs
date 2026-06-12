@@ -153,6 +153,26 @@ namespace Microsoft.InsightsCombinedClient;
   "DiagnosticSetting",
   "csharp"
 );
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettings.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettings.serviceBusRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettings.eventHubAuthorizationRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettings.workspaceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   PrivateLinkScopesApi.AzureMonitorPrivateLinkScope,
   "MonitorPrivateLinkScope",
