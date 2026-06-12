@@ -75,7 +75,7 @@ interface ApiReleaseContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -89,7 +89,7 @@ interface ApiReleaseContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -106,19 +106,21 @@ interface ApiReleaseContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ApiReleaseContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmResourceCreatedSyncResponse<ApiReleaseContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<ApiReleaseContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<ApiReleaseContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -141,7 +143,7 @@ interface ApiReleaseContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -248,7 +250,7 @@ interface WorkspaceApiRelease {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -262,7 +264,7 @@ interface WorkspaceApiRelease {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -279,19 +281,21 @@ interface WorkspaceApiRelease {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<ApiReleaseContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    }) | (ArmCreatedResponse<ApiReleaseContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      etag: string;
-    })
+    Response =
+      | (ArmResponse<ApiReleaseContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<ApiReleaseContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -314,7 +318,7 @@ interface WorkspaceApiRelease {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -365,19 +369,24 @@ interface WorkspaceApiRelease {
 
 @@maxLength(ApiReleaseContract.name, 80);
 @@minLength(ApiReleaseContract.name, 1);
-@@doc(ApiReleaseContract.name,
+@@doc(
+  ApiReleaseContract.name,
   "Release identifier within an API. Must be unique in the current API Management service instance."
 );
 @@doc(ApiReleaseContract.properties, "ApiRelease entity contract properties.");
-@@doc(ApiReleaseContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ApiReleaseContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(ApiReleaseContracts.update::parameters.properties,
+@@doc(
+  ApiReleaseContracts.update::parameters.properties,
   "API Release Update parameters."
 );
-@@doc(WorkspaceApiRelease.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceApiRelease.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(WorkspaceApiRelease.update::parameters.properties,
+@@doc(
+  WorkspaceApiRelease.update::parameters.properties,
   "API Release Update parameters."
 );

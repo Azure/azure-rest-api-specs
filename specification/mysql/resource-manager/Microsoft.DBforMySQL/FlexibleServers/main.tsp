@@ -71,8 +71,7 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<OperationListResult>
+    | ErrorResponse;
 }

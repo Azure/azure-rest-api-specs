@@ -23,7 +23,8 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnswersOptions.rankerType, "rankerKind");
 @@clientName(AnswersOptions.answerSpanRequest, "shortAnswerOptions");
 
-@@clientName(ShortAnswerOptions.confidenceScoreThreshold,
+@@clientName(
+  ShortAnswerOptions.confidenceScoreThreshold,
   "confidenceThreshold"
 );
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top");
@@ -45,7 +46,8 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(TemporalModifier.Approx, "Approximate");
 
 @@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized");
-@@clientName(RedactedTranscriptContent.maskedItn,
+@@clientName(
+  RedactedTranscriptContent.maskedItn,
   "MaskedInverseTextNormalized"
 );
 @@clientName(Error, "ConversationError");
@@ -65,45 +67,54 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(Tasks.items, "taskResults", "python");
 @@clientName(State, "ConversationActionState");
 @@clientName(role, "ParticipantRole");
-@@clientName(NoneLinkedTargetIntentResult,
+@@clientName(
+  NoneLinkedTargetIntentResult,
   "NonLinkedTargetIntentResult",
   "python"
 );
 
 @@clientName(Entity, "NamedEntity");
 
-@@clientName(CustomConversationSummarizationTaskParameters,
+@@clientName(
+  CustomConversationSummarizationTaskParameters,
   "CustomConversationSummarizationActionContent"
 );
 
-@@clientName(ConversationTaskParameters,
+@@clientName(
+  ConversationTaskParameters,
   "ConversationLanguageUnderstandingActionContent"
 );
 
 @@clientName(ConversationTaskParameters, "ConversationActionContent", "python");
 
-@@clientName(ConversationalAIInputParameters,
+@@clientName(
+  ConversationalAIInputParameters,
   "AIConversationLanguageUnderstandingActionContent"
 );
-@@clientName(ConversationalAIInputParameters,
+@@clientName(
+  ConversationalAIInputParameters,
   "ConversationalAIActionContent",
   "python"
 );
 
-@@clientName(ConversationSummarizationTaskParameters,
+@@clientName(
+  ConversationSummarizationTaskParameters,
   "ConversationSummarizationActionContent"
 );
 @@clientName(ConversationPiiTaskParameters, "ConversationPiiActionContent");
 
 @@clientName(Conversation, "ConversationInput");
 
-@@clientName(ConversationPiiCategoriesExclude.USSocialSecurityNumber,
+@@clientName(
+  ConversationPiiCategoriesExclude.USSocialSecurityNumber,
   "UsSocialSecurityNumber"
 );
-@@clientName(ConversationPiiCategoriesExclude,
+@@clientName(
+  ConversationPiiCategoriesExclude,
   "ConversationPiiCategoryExclusions"
 );
-@@clientName(ConversationPiiCategoriesExclude.USSocialSecurityNumber,
+@@clientName(
+  ConversationPiiCategoriesExclude.USSocialSecurityNumber,
   "UsSocialSecurityNumber"
 );
 @@clientName(ErrorCode, "ConversationErrorCode");
@@ -112,7 +123,8 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(BaseExtraInformation, "ConversationEntityExtraInformation");
 
 @@clientName(TranscriptConversationItem.itn, "InverseTextNormalized");
-@@clientName(TranscriptConversationItem.maskedItn,
+@@clientName(
+  TranscriptConversationItem.maskedItn,
   "MaskedInverseTextNormalized"
 );
 
@@ -125,13 +137,15 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ConversationalTask.parameters, "ActionContent");
 
 @@clientName(AnalyzeConversationTaskResult, "AnalyzeConversationActionResult");
-@@clientName(AnalyzeConversationTaskResultsKind,
+@@clientName(
+  AnalyzeConversationTaskResultsKind,
   "AnalyzeConversationResultKind"
 );
 
 @@clientName(ConversationalTaskResult, "ConversationActionResult");
 
-@@clientName(MultiLanguageConversationAnalysisInput,
+@@clientName(
+  MultiLanguageConversationAnalysisInput,
   "MultiLanguageConversationInput"
 );
 
@@ -142,21 +156,25 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction");
 @@clientName(AnalyzeConversationLROTask.taskName, "Name");
 
-@@clientName(AnalyzeConversationLROTaskKind,
+@@clientName(
+  AnalyzeConversationLROTaskKind,
   "AnalyzeConversationOperationActionKind"
 );
 
 @@clientName(AnalyzeConversationPiiTask, "PiiOperationAction");
 @@clientName(AnalyzeConversationPiiTask.parameters, "ActionContent");
 
-@@clientName(AnalyzeCustomConversationSummarizationTask,
+@@clientName(
+  AnalyzeCustomConversationSummarizationTask,
   "CustomSummarizationOperationAction"
 );
-@@clientName(AnalyzeCustomConversationSummarizationTask.parameters,
+@@clientName(
+  AnalyzeCustomConversationSummarizationTask.parameters,
   "ActionContent"
 );
 
-@@clientName(AnalyzeConversationSummarizationTask,
+@@clientName(
+  AnalyzeConversationSummarizationTask,
   "SummarizationOperationAction"
 );
 @@clientName(AnalyzeConversationSummarizationTask.parameters, "ActionContent");
@@ -164,35 +182,44 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnalyzeConversationJobState, "AnalyzeConversationOperationState");
 @@clientName(AnalyzeConversationJobState.tasks, "Actions");
 
-@@clientName(AnalyzeConversationJobResult,
+@@clientName(
+  AnalyzeConversationJobResult,
   "AnalyzeConversationOperationResult"
 );
 @@clientName(AnalyzeConversationJobResult.taskName, "Name");
 
-@@clientName(AnalyzeConversationResultsKind,
+@@clientName(
+  AnalyzeConversationResultsKind,
   "AnalyzeConversationOperationResultsKind"
 );
-@@clientName(AnalyzeConversationResultsKind.ConversationalSummarizationResults,
+@@clientName(
+  AnalyzeConversationResultsKind.ConversationalSummarizationResults,
   "SummarizationOperationResults"
 );
-@@clientName(AnalyzeConversationResultsKind.ConversationalPIIResults,
+@@clientName(
+  AnalyzeConversationResultsKind.ConversationalPIIResults,
   "PiiOperationResults"
 );
-@@clientName(AnalyzeConversationResultsKind.CustomConversationalSummarizationResults,
+@@clientName(
+  AnalyzeConversationResultsKind.CustomConversationalSummarizationResults,
   "CustomSummarizationOperationResults"
 );
 
-@@clientName(AnalyzeConversationConversationPiiResult,
+@@clientName(
+  AnalyzeConversationConversationPiiResult,
   "ConversationPiiOperationResult"
 );
-@@clientName(AnalyzeConversationSummarizationResult,
+@@clientName(
+  AnalyzeConversationSummarizationResult,
   "SummarizationOperationResult"
 );
-@@clientName(AnalyzeCustomConversationSummarizationResult,
+@@clientName(
+  AnalyzeCustomConversationSummarizationResult,
   "CustomSummarizationOperationResult"
 );
 
-@@clientName(analyzeConversationsSubmitJob,
+@@clientName(
+  analyzeConversationsSubmitJob,
   "AnalyzeConversationSubmitOperation"
 );
 @@clientName(analyzeConversationsSubmitJob, "AnalyzeConversationJob", "python");

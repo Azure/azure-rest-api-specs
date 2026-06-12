@@ -73,7 +73,10 @@ interface VirtualNetworks {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,7 +115,8 @@ interface VirtualNetworks {
 
 @@doc(VirtualNetwork.name, "The name of the virtual network.");
 @@doc(VirtualNetwork.properties, "The properties of the resource.");
-@@doc(VirtualNetworks.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualNetworks.createOrUpdate::parameters.resource,
   "A virtual network."
 );
 @@doc(VirtualNetworks.update::parameters.properties, "A virtual network.");

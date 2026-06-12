@@ -5,6 +5,8 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.BotService;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Microsoft.BotService;
 
@@ -21,12 +23,14 @@ namespace Microsoft.BotService;
 @@alternateType(BotProperties.cmekKeyVaultUrl, url, "csharp");
 @@alternateType(BotProperties.tenantId, uuid, "csharp");
 @@alternateType(ServiceProviderParameter.helpUrl, url, "csharp");
-@@alternateType(BotProperties.msaAppMSIResourceId,
+@@alternateType(
+  BotProperties.msaAppMSIResourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@clientName(BotProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
-@@alternateType(BotProperties.storageResourceId,
+@@alternateType(
+  BotProperties.storageResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -39,34 +43,41 @@ namespace Microsoft.BotService;
 @@alternateType(ConnectionSetting.location, azureLocation, "csharp");
 @@alternateType(ConnectionSetting.etag, eTag, "csharp");
 @@usage(ChannelSettings, Usage.input | Usage.output, "csharp");
-@@clientName(CheckNameAvailabilityRequestBody,
+@@clientName(
+  CheckNameAvailabilityRequestBody,
   "BotServiceNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityRequestBody.type, "ResourceType", "csharp");
-@@alternateType(CheckNameAvailabilityRequestBody.type,
+@@alternateType(
+  CheckNameAvailabilityRequestBody.type,
   armResourceType,
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResponseBody,
+@@clientName(
+  CheckNameAvailabilityResponseBody,
   "BotServiceNameAvailabilityResult",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityResponseBody.valid, "IsValid", "csharp");
-@@clientName(ConnectionSettingParameter,
+@@clientName(
+  ConnectionSettingParameter,
   "BotConnectionSettingParameter",
   "csharp"
 );
-@@clientName(ConnectionSettingProperties,
+@@clientName(
+  ConnectionSettingProperties,
   "BotConnectionSettingProperties",
   "csharp"
 );
-@@clientName(CreateEmailSignInUrlResponse,
+@@clientName(
+  CreateEmailSignInUrlResponse,
   "BotCreateEmailSignInUriResult",
   "csharp"
 );
 @@alternateType(CreateEmailSignInUrlResponse.location, azureLocation, "csharp");
-@@alternateType(CreateEmailSignInUrlResponse.id,
+@@alternateType(
+  CreateEmailSignInUrlResponse.id,
   armResourceIdentifier,
   "csharp"
 );
@@ -80,65 +91,79 @@ namespace Microsoft.BotService;
 @@clientName(Key, "BotServiceKey", "csharp");
 
 @@clientName(MsaAppType, "BotMsaAppType", "csharp");
-@@clientName(MsTeamsChannelProperties.enableCalling,
+@@clientName(
+  MsTeamsChannelProperties.enableCalling,
   "IsCallingEnabled",
   "csharp"
 );
 @@clientName(PublicNetworkAccess, "BotServicePublicNetworkAccess", "csharp");
-@@clientName(QnAMakerEndpointKeysRequestBody,
+@@clientName(
+  QnAMakerEndpointKeysRequestBody,
   "GetBotServiceQnAMakerEndpointKeyContent",
   "csharp"
 );
-@@clientName(QnAMakerEndpointKeysResponse,
+@@clientName(
+  QnAMakerEndpointKeysResponse,
   "GetBotServiceQnAMakerEndpointKeyResult",
   "csharp"
 );
-@@clientName(RegenerateKeysChannelName,
+@@clientName(
+  RegenerateKeysChannelName,
   "RegenerateKeysBotChannelName",
   "csharp"
 );
 @@clientName(ServiceProvider, "BotServiceProvider", "csharp");
 @@clientName(ServiceProviderParameter, "BotServiceProviderParameter", "csharp");
-@@clientName(ServiceProviderProperties,
+@@clientName(
+  ServiceProviderProperties,
   "BotServiceProviderProperties",
   "csharp"
 );
 @@clientName(SiteInfo, "BotChannelRegenerateKeysContent", "csharp");
-@@clientName(SkypeChannelProperties.enableMessaging,
+@@clientName(
+  SkypeChannelProperties.enableMessaging,
   "IsMessagingEnabled",
   "csharp"
 );
-@@clientName(SkypeChannelProperties.enableMediaCards,
+@@clientName(
+  SkypeChannelProperties.enableMediaCards,
   "IsMediaCardsEnabled",
   "csharp"
 );
 @@clientName(SkypeChannelProperties.enableVideo, "IsVideoEnabled", "csharp");
-@@clientName(SkypeChannelProperties.enableCalling,
+@@clientName(
+  SkypeChannelProperties.enableCalling,
   "IsCallingEnabled",
   "csharp"
 );
-@@clientName(SkypeChannelProperties.enableScreenSharing,
+@@clientName(
+  SkypeChannelProperties.enableScreenSharing,
   "IsScreenSharingEnabled",
   "csharp"
 );
 @@clientName(SkypeChannelProperties.enableGroups, "IsGroupsEnabled", "csharp");
-@@clientName(ServiceProviderParameterMetadataConstraints.required,
+@@clientName(
+  ServiceProviderParameterMetadataConstraints.required,
   "IsRequired",
   "csharp"
 );
-@@alternateType(DirectLineSpeechChannelProperties.cognitiveServiceResourceId,
+@@alternateType(
+  DirectLineSpeechChannelProperties.cognitiveServiceResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(TelephonyChannelResourceApiConfiguration.cognitiveServiceResourceId,
+@@alternateType(
+  TelephonyChannelResourceApiConfiguration.cognitiveServiceResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(TelephonyPhoneNumbers.acsResourceId,
+@@alternateType(
+  TelephonyPhoneNumbers.acsResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(TelephonyPhoneNumbers.cognitiveServiceResourceId,
+@@alternateType(
+  TelephonyPhoneNumbers.cognitiveServiceResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -154,7 +179,8 @@ namespace Microsoft.BotService;
 // Java SDK back-compat: keep unknown as Object
 @@alternateType(OperationEntity.properties, unknown, "java");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -165,11 +191,13 @@ namespace Microsoft.BotService;
 @@alternateType(FacebookChannelProperties.callbackUrl, url, "csharp");
 @@alternateType(LineChannelProperties.callbackUrl, url, "csharp");
 @@alternateType(HostSettingsResponse.OAuthUrl, url, "csharp");
-@@alternateType(HostSettingsResponse.ToBotFromChannelOpenIdMetadataUrl,
+@@alternateType(
+  HostSettingsResponse.ToBotFromChannelOpenIdMetadataUrl,
   url,
   "csharp"
 );
-@@alternateType(HostSettingsResponse.ToBotFromEmulatorOpenIdMetadataUrl,
+@@alternateType(
+  HostSettingsResponse.ToBotFromEmulatorOpenIdMetadataUrl,
   url,
   "csharp"
 );
@@ -181,17 +209,20 @@ namespace Microsoft.BotService;
 @@alternateType(ChannelName, ChannelNameUnion, "csharp");
 @@clientName(ChannelNameUnion, "BotChannelName", "csharp");
 
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "BotServicePrivateEndpointConnection",
   "csharp"
 );
 
-@@clientName(ServiceProviderParameter.type,
+@@clientName(
+  ServiceProviderParameter.type,
   "ServiceProviderParameterType",
   "csharp"
 );
 @@clientName(TelephonyChannelProperties.premiumSKU, "PremiumSku", "csharp");
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -200,37 +231,45 @@ namespace Microsoft.BotService;
 
 @@clientName(BotChannels.listWithKeys, "GetChannelWithKeys", "csharp");
 @@clientName(Bots.createSignInUrl, "createEmailSignInUri", "csharp");
-@@clientName(Bots.listByBotResource,
+@@clientName(
+  Bots.listByBotResource,
   "GetPrivateLinkResourcesByBotResource",
   "csharp"
 );
-@@clientName(BotChannels.regenerateKeys,
+@@clientName(
+  BotChannels.regenerateKeys,
   "GetBotChannelWithRegenerateKeys",
   "csharp"
 );
-@@clientName(BotsOperationGroup.getCheckNameAvailability,
+@@clientName(
+  BotsOperationGroup.getCheckNameAvailability,
   "CheckBotServiceNameAvailability",
   "csharp"
 );
-@@clientName(BotConnectionOperationGroup.listServiceProviders,
+@@clientName(
+  BotConnectionOperationGroup.listServiceProviders,
   "GetBotConnectionServiceProviders",
   "csharp"
 );
-@@clientName(HostSettingsOperationGroup.get,
+@@clientName(
+  HostSettingsOperationGroup.get,
   "GetBotServiceHostSettings",
   "csharp"
 );
-@@clientName(QnAMakerEndpointKeysOperationGroup.get,
+@@clientName(
+  QnAMakerEndpointKeysOperationGroup.get,
   "GetBotServiceQnAMakerEndpointKey",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Bots.listByBotResource,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Bots.listByBotResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(BotConnectionOperationGroup.listServiceProviders,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  BotConnectionOperationGroup.listServiceProviders,
   "csharp"
 );
 
@@ -316,15 +355,18 @@ model ListChannelWithKeysResponseReplacement
   >;
 }
 
-@@alternateType(ListChannelWithKeysResponse,
+@@alternateType(
+  ListChannelWithKeysResponse,
   ListChannelWithKeysResponseReplacement,
   "csharp"
 );
-@@clientName(ListChannelWithKeysResponseReplacement,
+@@clientName(
+  ListChannelWithKeysResponseReplacement,
   "BotChannelGetWithKeysResult",
   "csharp"
 );
-@@usage(ListChannelWithKeysResponseReplacement,
+@@usage(
+  ListChannelWithKeysResponseReplacement,
   Usage.input | Usage.output,
   "csharp"
 );
@@ -342,16 +384,19 @@ model PrivateLinkResourceReplacement
 }
 
 @@alternateType(PrivateLinkResource, PrivateLinkResourceReplacement, "csharp");
-@@clientName(PrivateLinkResourceReplacement,
+@@clientName(
+  PrivateLinkResourceReplacement,
   "BotServicePrivateLinkResourceData",
   "csharp"
 );
 @@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResourceReplacement.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResourceReplacement.properties
 );
 
-@@clientName(NetworkSecurityPerimeterConfiguration,
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
   "BotServiceNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
@@ -366,11 +411,87 @@ model PrivateLinkResourceReplacement
 @@clientName(AccessMode, "BotServiceAccessMode", "csharp");
 @@clientName(Severity, "BotServiceSeverity", "csharp");
 @@clientName(ProvisioningState, "BotServiceProvisioningState", "csharp");
-@@clientName(OperationResultStatus,
+@@clientName(
+  OperationResultStatus,
   "BotServiceOperationResultStatus",
   "csharp"
 );
-@@clientName(NspAccessRulePropertiesSubscriptionsItem,
+@@clientName(
+  NspAccessRulePropertiesSubscriptionsItem,
   "BotServiceNspAccessRuleSubscription",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op BotChannelsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * The name of the Bot resource.
+   */
+  @path
+  @segment("botServices")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+  @maxLength(64)
+  @minLength(2)
+  resourceName: string,
+
+  /**
+   * The name of the Channel resource.
+   */
+  @path
+  @segment("channels")
+  channelName: ChannelName,
+
+  properties?: Microsoft.BotService.Channel,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+
+  location?: string,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+  sku?: Microsoft.BotService.Sku,
+  kind?: Microsoft.BotService.Kind,
+  etag?: string,
+  zones?: string[],
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.BotService.BotChannel>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.BotChannel>
+  | Microsoft.BotService.Error;
+
+@@override(BotChannels.update, BotChannelsUpdate, "javascript");
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op BotsUpdate(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  resourceName: string,
+  properties?: Microsoft.BotService.BotProperties,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+
+  location?: string,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+  sku?: Microsoft.BotService.Sku,
+  kind?: Microsoft.BotService.Kind,
+  etag?: string,
+  zones?: string[],
+):
+  | Azure.ResourceManager.ArmResponse<Microsoft.BotService.Bot>
+  | Azure.ResourceManager.ArmResourceCreatedSyncResponse<Microsoft.BotService.Bot>
+  | Microsoft.BotService.Error;
+
+@@override(Bots.update, BotsUpdate, "javascript");

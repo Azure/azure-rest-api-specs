@@ -5,17 +5,20 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.CommonTypes;
 using Microsoft.KubernetesRuntime;
 
-@@clientNamespace(Microsoft.KubernetesRuntime,
+@@clientNamespace(
+  Microsoft.KubernetesRuntime,
   "com.azure.resourcemanager.containerorchestratorruntime",
   "java"
 );
 
-@@clientName(Microsoft.KubernetesRuntime,
+@@clientName(
+  Microsoft.KubernetesRuntime,
   "ContainerOrchestratorRuntimeMgmt",
   "python"
 );
 
-@@clientName(Microsoft.KubernetesRuntime,
+@@clientName(
+  Microsoft.KubernetesRuntime,
   "ContainerOrchestratorRuntimeMgmtClient",
   "java"
 );
@@ -26,18 +29,21 @@ using Microsoft.KubernetesRuntime;
 @@clientName(BgpPeer, "ConnectedClusterBgpPeer", "csharp");
 @@clientName(BgpPeerProperties, "ConnectedClusterBgpPeerProperties", "csharp");
 @@clientName(LoadBalancer, "ConnectedClusterLoadBalancer", "csharp");
-@@clientName(LoadBalancerProperties,
+@@clientName(
+  LoadBalancerProperties,
   "ConnectedClusterLoadBalancerProperties",
   "csharp"
 );
 @@clientName(ServiceResource, "ConnectedClusterService", "csharp");
 @@clientName(ServiceProperties, "ConnectedClusterServiceProperties", "csharp");
 @@clientName(StorageClassResource, "ConnectedClusterStorageClass", "csharp");
-@@clientName(StorageClassProperties,
+@@clientName(
+  StorageClassProperties,
   "ConnectedClusterStorageClassProperties",
   "csharp"
 );
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "ContainerOrchestratorProvisioningState",
   "csharp"
 );
