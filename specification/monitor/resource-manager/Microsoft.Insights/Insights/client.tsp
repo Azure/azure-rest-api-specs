@@ -350,13 +350,38 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  AutoScaleApi.PredictiveResponse,
+  "AutoscaleSettingPredicativeResult",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.DataCollectionEndpointResource.etag,
   "ETag",
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionEndpointResource.etag,
+  Azure.Core.eTag,
   "csharp"
 );
 @@clientName(
   DataCollectionApi.DataCollectionEndpointResource.identity,
   "Identity",
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionEndpointResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionRuleResource.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionRuleResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(
