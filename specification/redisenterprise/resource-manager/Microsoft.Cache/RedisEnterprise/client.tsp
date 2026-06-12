@@ -235,3 +235,27 @@ using Microsoft.Cache;
   "ManagedServiceIdentity",
   "javascript"
 );
+
+// java compatibility mitigations
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity",
+  "java"
+);
+@@clientName(ClusterProperties, "ClusterCommonProperties", "java");
+@@clientName(DatabaseProperties, "DatabaseCommonProperties", "java");
+@@clientName(ClusterProperties.hostName, "hostname", "java");
+@@clientName(TlsVersion.One0, "ONE_ZERO", "java");
+@@clientName(TlsVersion.One1, "ONE_ONE", "java");
+@@clientName(TlsVersion.One2, "ONE_TWO", "java");
+@@clientName(RdbFrequency.TwelveH, "ONE_TWOH", "java");
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
+  "SYSTEM_ASSIGNED_USER_ASSIGNED",
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "java"
+);
