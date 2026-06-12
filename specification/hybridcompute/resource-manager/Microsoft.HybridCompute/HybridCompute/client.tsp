@@ -119,11 +119,7 @@ union CustomPublicNetworkAccessType {
 @@clientName(ConnectionDetail, "HybridComputeConnectionDetail", "csharp");
 @@clientName(ExtensionValue, "HybridComputeExtensionValue", "csharp");
 @@clientName(ExtensionValueV2, "HybridComputeExtensionValueV2", "csharp");
-@@clientName(
-  ExtensionPublisher,
-  "HybridComputeExtensionPublisher",
-  "csharp"
-);
+@@clientName(ExtensionPublisher, "HybridComputeExtensionPublisher", "csharp");
 @@clientName(IpAddress, "HybridComputeIPAddress", "csharp");
 @@clientName(License, "HybridComputeLicense", "csharp");
 @@clientName(LicenseDetails, "HybridComputeLicenseDetails", "csharp");
