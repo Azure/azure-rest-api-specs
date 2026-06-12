@@ -14,7 +14,6 @@ import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
-import "../error.range.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
