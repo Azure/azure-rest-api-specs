@@ -68,24 +68,3 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
 @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
-@@clientLocation(
-  Azure.AI.Projects.AgentOptimizationJobs.listCandidates,
-  Agents
-);
-@@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.getCandidate, Agents);
-@@clientLocation(
-  Azure.AI.Projects.AgentOptimizationJobs.getCandidateConfig,
-  Agents
-);
-@@clientLocation(
-  Azure.AI.Projects.AgentOptimizationJobs.getCandidateResults,
-  Agents
-);
-@@clientLocation(
-  Azure.AI.Projects.AgentOptimizationJobs.getCandidateFile,
-  Agents
-);
-@@clientLocation(
-  Azure.AI.Projects.AgentOptimizationJobs.promoteCandidate,
-  Agents
-);
