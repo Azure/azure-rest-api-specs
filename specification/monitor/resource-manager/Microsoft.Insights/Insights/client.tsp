@@ -70,6 +70,62 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // C# compatibility names from the shipped AutoRest-based Azure.ResourceManager.Monitor package.
+@@clientName(ActionGroupsApi.ActionGroup, "ActionGroupProperties", "csharp");
+@@clientName(ActionGroupsApi.ActionGroup.enabled, "IsEnabled", "csharp");
+@@clientName(ActionGroupsApi.ActionGroupResource, "ActionGroup", "csharp");
+@@clientName(ActionGroupsApi.ActionGroupPatchBody, "ActionGroupPatch", "csharp");
+@@clientName(ActionGroupsApi.ActionGroupPatch, "ActionGroupPatchProperties", "csharp");
+@@clientName(ActionGroupsApi.ActionGroupPatch.enabled, "IsEnabled", "csharp");
+@@clientName(ActionGroupsApi.NotificationRequestBody, "NotificationContent", "csharp");
+@@clientName(ActionGroupsApi.TestNotificationDetailsResponse, "NotificationStatus", "csharp");
+@@clientName(ActionGroupsApi.Context, "NotificationContext", "csharp");
+@@clientName(ActionGroupsApi.ActionDetail, "NotificationActionDetail", "csharp");
+@@clientName(ActionGroupsApi.EnableRequest, "ActionGroupEnableContent", "csharp");
+@@clientName(
+  ActionGroupsApi.ActionGroupResources.createNotificationsAtActionGroupResourceLevel,
+  "CreateNotifications",
+  "csharp"
+);
+@@clientName(
+  ActionGroupsApi.ActionGroupResources.getTestNotificationsAtActionGroupResourceLevel,
+  "GetNotificationStatus",
+  "csharp"
+);
+@@clientName(
+  ActivityLogAlertsApi.ActivityLogAlertResource,
+  "ActivityLogAlert",
+  "csharp"
+);
+@@clientName(ActivityLogAlertsApi.AlertRuleProperties.enabled, "IsEnabled", "csharp");
+@@clientName(AutoScaleApi.AutoscaleSetting, "AutoscaleSettingProperties", "csharp");
+@@clientName(AutoScaleApi.AutoscaleSettingResource, "AutoscaleSetting", "csharp");
+@@clientName(
+  DataCollectionApi.DataCollectionEndpoint,
+  "DataCollectionEndpointProperties",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionEndpointResource,
+  "DataCollectionEndpoint",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionRule,
+  "DataCollectionRuleProperties",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionRuleResource,
+  "DataCollectionRule",
+  "csharp"
+);
+@@clientName(LogProfilesApi.LogProfileResource, "LogProfile", "csharp");
+@@clientName(MetricAlertApi.MetricAlertResource, "MetricAlert", "csharp");
+@@clientName(
+  ScheduledQueryRuleApi.ScheduledQueryRuleResource,
+  "ScheduledQueryRule",
+  "csharp"
+);
 // DCR association and diagnostic setting are extension resources whose GA SDK surface
 // used resource names without the TypeSpec proxy/service prefixes.
 @@clientName(
@@ -275,19 +331,132 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(MetricAlertApi.Operator, "MetricCriteriaOperator", "csharp");
 @@clientName(
-  ScheduledQueryRuleApi.ConditionOperator,
-  "MonitorConditionOperator",
-  "csharp"
-);
-@@clientName(
   AutoScaleApi.ScaleRuleMetricDimensionOperationType.Equals,
   "Equal",
   "csharp"
 );
 @@clientName(MetricAlertApi.Operator.Equals, "Equal", "csharp");
-@@clientName(ScheduledQueryRuleApi.ConditionOperator.Equals, "Equal", "csharp");
+@@clientName(AutoScaleApi.AutoscaleSetting.enabled, "IsEnabled", "csharp");
+@@clientName(AutoScaleApi.AutoscaleSetting.notifications, "Notifications", "csharp");
+@@clientName(AutoScaleApi.AutoscaleSetting.targetResourceUri, "TargetResourceId", "csharp");
+@@alternateType(
+  AutoScaleApi.AutoscaleSetting.targetResourceUri,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  AutoScaleApi.AutoscaleSetting.targetResourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionEndpointResource.etag,
+  "ETag",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionEndpointResource.identity,
+  "Identity",
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionRule.dataCollectionEndpointId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionRuleAssociation.dataCollectionRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.DataCollectionRuleAssociation.dataCollectionEndpointId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionRuleAssociationProxyOnlyResource.etag,
+  "ETag",
+  "csharp"
+);
 @@clientName(ActivityLogAlertsApi.AlertRuleLeafCondition.equals, "Equal", "csharp");
+@@clientName(
+  ActivityLogAlertsApi.AlertRuleAnyOfOrLeafCondition,
+  "ActivityLogAlertAnyOfOrLeafCondition",
+  "csharp"
+);
+@@clientName(ActionGroupsApi.EmailReceiver, "MonitorEmailReceiver", "csharp");
+@@clientName(ActionGroupsApi.SmsReceiver, "MonitorSmsReceiver", "csharp");
+@@clientName(ActionGroupsApi.WebhookReceiver, "MonitorWebhookReceiver", "csharp");
+@@clientName(ActionGroupsApi.ItsmReceiver, "MonitorItsmReceiver", "csharp");
+@@clientName(
+  ActionGroupsApi.AzureAppPushReceiver,
+  "MonitorAzureAppPushReceiver",
+  "csharp"
+);
+@@clientName(
+  ActionGroupsApi.AutomationRunbookReceiver,
+  "MonitorAutomationRunbookReceiver",
+  "csharp"
+);
+@@clientName(ActionGroupsApi.VoiceReceiver, "MonitorVoiceReceiver", "csharp");
+@@clientName(ActionGroupsApi.LogicAppReceiver, "MonitorLogicAppReceiver", "csharp");
+@@clientName(
+  ActionGroupsApi.AzureFunctionReceiver,
+  "MonitorAzureFunctionReceiver",
+  "csharp"
+);
+@@clientName(ActionGroupsApi.ArmRoleReceiver, "MonitorArmRoleReceiver", "csharp");
+@@clientName(ActionGroupsApi.EventHubReceiver, "MonitorEventHubReceiver", "csharp");
+@@clientName(ActionGroupsApi.ReceiverStatus, "MonitorReceiverStatus", "csharp");
+@@clientName(
+  DataCollectionApi.KnownDataCollectionEndpointResourceKind,
+  "DataCollectionEndpointResourceKind",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownDataCollectionEndpointProvisioningState,
+  "DataCollectionEndpointProvisioningState",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownPublicNetworkAccessOptions,
+  "MonitorPublicNetworkAccess",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.PrivateLinkScopedResource,
+  "DataCollectionRulePrivateLinkScopedResourceInfo",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownDataCollectionRuleResourceKind,
+  "DataCollectionRuleResourceKind",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownDataCollectionRuleProvisioningState,
+  "DataCollectionRuleProvisioningState",
+  "csharp"
+);
+@@clientName(DataCollectionApi.StreamDeclaration, "DataStreamDeclaration", "csharp");
+@@clientName(DataCollectionApi.ColumnDefinition, "DataColumnDefinition", "csharp");
+@@clientName(ScheduledQueryRuleApi.Kind, "ScheduledQueryRuleKind", "csharp");
+@@clientName(
+  ScheduledQueryRuleApi.TimeAggregation,
+  "ScheduledQueryRuleTimeAggregationType",
+  "csharp"
+);
+@@clientName(ScheduledQueryRuleApi.Dimension, "MonitorDimension", "csharp");
+@@clientName(ScheduledQueryRuleApi.DimensionOperator, "MonitorDimensionOperator", "csharp");
+@@clientName(ScheduledQueryRuleApi.Condition, "ScheduledQueryRuleCondition", "csharp");
+@@clientName(ScheduledQueryRuleApi.Actions, "ScheduledQueryRuleActions", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSetting.name, "AutoscaleSettingName", "csharp");
+@@clientName(
+  AutoScaleApi.AutoscaleSettingResources.predictiveMetricGet,
+  "GetPredictiveMetric",
+  "csharp"
+);
 @@clientName(MetricsApi.MetricDefinitionsOperationGroup.list, "GetMonitorMetricDefinitions", "csharp");
 @@clientName(
   MetricsApi.MetricDefinitionsOperationGroup.listAtSubscriptionScope,
@@ -317,10 +486,23 @@ union MonitorOperationType {
   Scale: "Scale",
 }
 
+enum MonitorConditionOperator {
+  GreaterThan: "GreaterThan",
+  GreaterThanOrEqual: "GreaterThanOrEqual",
+  LessThan: "LessThan",
+  LessThanOrEqual: "LessThanOrEqual",
+  EqualsValue: "Equals",
+}
+
 @@alternateType(AutoScaleApi.RecurrentSchedule.days, MonitorDayOfWeek[], "csharp");
 @@alternateType(
   AutoScaleApi.AutoscaleNotification.operation,
   MonitorOperationType,
+  "csharp"
+);
+@@alternateType(
+  ScheduledQueryRuleApi.Condition.operator,
+  MonitorConditionOperator,
   "csharp"
 );
 

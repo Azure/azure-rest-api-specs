@@ -14,7 +14,7 @@ namespace ActivityLogAlertsApi;
  * An Activity Log Alert rule resource.
  */
 model ActivityLogAlertResource
-  is Azure.ResourceManager.ProxyResource<AlertRuleProperties> {
+  is Azure.ResourceManager.TrackedResource<AlertRuleProperties> {
   ...ResourceNameParameter<
     Resource = ActivityLogAlertResource,
     KeyName = "activityLogAlertName",
@@ -22,15 +22,6 @@ model ActivityLogAlertResource
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
-  /** The tags of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /** The location of the resource. Azure Activity Log Alert rules are supported on Global, West Europe and North Europe regions. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
 }
 
 @armResourceOperations(#{ omitTags: true })
