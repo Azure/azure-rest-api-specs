@@ -36,14 +36,7 @@ interface Fabrics {
 
   @doc("Updates a Fabric.")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    Fabric,
-    FabricPatch,
-    Response =
-      | ArmResponse<Fabric>
-      | ArmAcceptedLroResponse
-      | ArmResourceNotFoundResponse
-  >;
+  update is ArmCustomPatchAsync<Fabric, FabricPatch>;
 
   @doc("Deletes the specified Fabric.")
   delete is ArmResourceDeleteWithoutOkAsync<Fabric>;
