@@ -51463,6 +51463,15 @@
             "description": "Current lifecycle status.",
             "readOnly": true
           },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
           "created_at": {
             "allOf": [
               {
@@ -51481,15 +51490,6 @@
             "description": "The timestamp when the job was last updated, represented in Unix time.",
             "readOnly": true
           },
-          "agent": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OptimizationAgentIdentifier"
-              }
-            ],
-            "description": "The agent targeted by this optimization job.",
-            "readOnly": true
-          },
           "progress": {
             "allOf": [
               {
@@ -51499,13 +51499,13 @@
             "description": "Progress snapshot. May be present in terminal states reflecting last-known progress.",
             "readOnly": true
           },
-          "error": {
+          "agent": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/OpenAI.Error"
+                "$ref": "#/components/schemas/OptimizationAgentIdentifier"
               }
             ],
-            "description": "Error details — populated only on failure.",
+            "description": "The agent targeted by this optimization job.",
             "readOnly": true
           }
         },
@@ -54603,8 +54603,11 @@
             "description": "The trigger type."
           },
           "at": {
-            "type": "string",
-            "format": "date-time",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The UTC date and time at which the timer fires."
           }
         },
