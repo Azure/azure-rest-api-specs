@@ -49,7 +49,7 @@ interface DscNodeConfigurations {
       | OkResponse
       | ArmResourceCreatedResponse<
           DscNodeConfiguration,
-          ArmLroLocationHeader<FinalResult = DscNodeConfiguration> &
+          ArmLroLocationHeader<FinalResult = void> &
             Azure.Core.Foundations.RetryAfterHeader
         >
   >;

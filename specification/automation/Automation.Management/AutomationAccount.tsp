@@ -31,8 +31,7 @@ model AutomationAccount
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Identity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -331,10 +330,9 @@ interface AutomationAccounts {
        * The Id of the software update configuration machine run.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @path
       @segment("softwareUpdateConfigurationMachineRuns")
-      softwareUpdateConfigurationMachineRunId: string;
+      softwareUpdateConfigurationMachineRunId: Azure.Core.uuid;
 
       /**
        * Identifies this specific client request.
@@ -399,10 +397,9 @@ interface AutomationAccounts {
        * The Id of the software update configuration run.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @path
       @segment("softwareUpdateConfigurationRuns")
-      softwareUpdateConfigurationRunId: string;
+      softwareUpdateConfigurationRunId: Azure.Core.uuid;
 
       /**
        * Identifies this specific client request.

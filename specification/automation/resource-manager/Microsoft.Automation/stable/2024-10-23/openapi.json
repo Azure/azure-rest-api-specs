@@ -4721,8 +4721,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/DscNodeConfiguration"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -10969,8 +10968,8 @@
           "description": "Gets or sets the etag of the resource."
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Identity for the resource."
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -11253,6 +11252,11 @@
           }
         ]
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "AzureQueryProperties": {
       "type": "object",
@@ -13565,8 +13569,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The id of the job.",
           "readOnly": true
         },
@@ -13699,8 +13702,7 @@
           "description": "Runtime Environment Property"
         },
         "jobId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Gets or sets the id of the job."
         },
         "creationTime": {
@@ -18253,14 +18255,12 @@
           "readOnly": true
         },
         "correlationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "correlation id of the software update configuration machine run",
           "readOnly": true
         },
         "sourceComputerId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "source computer id of the software update configuration machine run",
           "readOnly": true
         },
