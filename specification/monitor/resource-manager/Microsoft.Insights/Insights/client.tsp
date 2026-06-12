@@ -534,6 +534,9 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(LocalizableString, "MonitorLocalizableString", "csharp");
 @@clientName(MetricBaselinesApi.SingleMetricBaseline, "MonitorSingleMetricBaseline", "csharp");
 @@clientName(MetricBaselinesApi.TimeSeriesBaseline, "MonitorTimeSeriesBaseline", "csharp");
+@@clientName(MetricBaselinesApi.MetricSingleDimension, "MonitorMetricSingleDimension", "csharp");
+@@clientName(MetricBaselinesApi.SingleBaseline, "MonitorSingleBaseline", "csharp");
+@@clientName(MetricBaselinesApi.BaselineMetadata, "MonitorBaselineMetadata", "csharp");
 @@clientName(MetricsApi.MetricDefinition, "MonitorMetricDefinition", "csharp");
 @@clientName(MetricsApi.MetricClass, "MonitorMetricClass", "csharp");
 @@clientName(MetricsApi.MetricAvailability, "MonitorMetricAvailability", "csharp");
@@ -543,6 +546,8 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricsApi.NamespaceClassification, "MonitorNamespaceClassification", "csharp");
 @@clientName(MetricsApi.Metric, "MonitorMetric", "csharp");
 @@clientName(MetricsApi.TimeSeriesElement, "MonitorTimeSeriesElement", "csharp");
+@@clientName(MetricsApi.MetadataValue, "MonitorMetadataValue", "csharp");
+@@clientName(MetricsApi.MetricValue, "MonitorMetricValue", "csharp");
 @@clientName(
   AutoScaleApi.AutoscaleSettingResources.predictiveMetricGet,
   "GetPredictiveMetric",
