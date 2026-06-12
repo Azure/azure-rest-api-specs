@@ -2,11 +2,11 @@
 // TODO: Enable eslint, fix errors
 
 import { join } from "path";
-import { Suppression } from "suppressions";
+import { type Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.ts";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };

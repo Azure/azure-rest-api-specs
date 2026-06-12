@@ -2,18 +2,15 @@ import "../models/common.tsp";
 import "./NetworkDevice.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the NetworkInterface resource.")
 @parentResource(NetworkDevice)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
+model NetworkInterface
+  is Azure.ResourceManager.ProxyResource<NetworkInterfaceProperties, false> {
   @doc("Name of the Network Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -23,15 +20,12 @@ model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The NetworkInterface properties")
-  properties: NetworkInterfaceProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkInterface.properties, "The NetworkInterface properties");
 @armResourceOperations
 interface NetworkInterfaces {
   @doc("Get the Network Interface resource details.")
