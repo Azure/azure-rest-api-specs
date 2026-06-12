@@ -42,13 +42,6 @@ using Reservations;
 @@clientLocation(ReservationResponses.archive, "Reservation");
 @@clientLocation(ReservationResponses.unarchive, "Reservation");
 @@clientLocation(ReservationResponses.listRevisions, "Reservation");
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Mark collection action placement"
-@@clientOption(
-  ReservationResponses.listRevisions,
-  "resource-operation-kind",
-  "CollectionAction",
-  "csharp"
-);
 @@clientLocation(ReservationOperationGroup.listAll, "Reservation");
 
 @@clientLocation(ReservationOrderOperationGroup.calculate, "ReservationOrder");

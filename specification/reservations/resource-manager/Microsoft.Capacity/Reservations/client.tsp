@@ -329,3 +329,10 @@ union ReservationKind {
   MicrosoftCompute: "Microsoft.Compute",
 }
 @@alternateType(ReservationResponse.kind, ReservationKind, "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Mark collection action placement"
+@@clientOption(
+  ReservationResponses.listRevisions,
+  "resource-operation-kind",
+  "CollectionAction",
+  "csharp"
+);
