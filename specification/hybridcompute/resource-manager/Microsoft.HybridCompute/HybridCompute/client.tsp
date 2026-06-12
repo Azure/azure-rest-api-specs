@@ -186,12 +186,7 @@ union CustomPublicNetworkAccessType {
 );
 @@clientName(
   ProductFeatureUpdate,
-  "HybridComputeProductFeaturePatch",
-  "csharp"
-);
-@@clientName(
-  LicenseProfileSubscriptionStatusUpdate,
-  "LicenseProfileSubscriptionStatusPatch",
+  "HybridComputeProductFeatureUpdate",
   "csharp"
 );
 @@clientName(Disk, "HybridComputeDisk", "csharp");
