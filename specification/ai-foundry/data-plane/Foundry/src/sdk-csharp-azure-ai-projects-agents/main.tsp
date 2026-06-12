@@ -1,3 +1,4 @@
+import "../common/error.default.tsp";
 import "../agents/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
