@@ -190,6 +190,12 @@ using Microsoft.StorageCache;
 @@clientName(ImportJob, "StorageCacheImportJob", "csharp");
 @@clientName(ImportJobUpdate, "StorageCacheImportJobPatch", "csharp");
 @@clientName(ImportJobsListResult, "StorageCacheImportJobsResult", "csharp");
+@@clientName(ExpansionJob, "AmlFileSystemExpansionJob", "csharp");
+@@clientName(
+  ExpansionJobUpdate,
+  "AmlFileSystemExpansionJobPatch",
+  "csharp"
+);
 @@clientName(
   KeyVaultKeyReference,
   "StorageCacheEncryptionKeyVaultKeyReference",
@@ -227,7 +233,12 @@ using Microsoft.StorageCache;
 );
 @@clientName(
   ExpansionJobPropertiesProvisioningState,
-  "ExpansionJobProvisioningState",
+  "AmlFileSystemExpansionJobProvisioningState",
+  "csharp"
+);
+@@clientName(
+  ExpansionJobStatusType,
+  "AmlFileSystemExpansionJobStatusType",
   "csharp"
 );
 
