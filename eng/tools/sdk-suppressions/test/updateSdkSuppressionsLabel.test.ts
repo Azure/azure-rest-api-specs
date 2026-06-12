@@ -1,10 +1,10 @@
 import { expect, test, vi } from "vitest";
-import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.js";
+import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.ts";
 import {
   filterSuppressionList,
   getSdkNamesWithChangedSuppressions,
   processLabels,
-} from "../src/updateSdkSuppressionsLabel.js";
+} from "../src/updateSdkSuppressionsLabel.ts";
 
 vi.mock("process", () => ({
   exit: vi.fn(),
