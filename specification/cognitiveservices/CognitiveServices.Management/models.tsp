@@ -6543,6 +6543,12 @@ union PolicyRuleAction {
 
   /** Deny the matched traffic. */
   Deny: "Deny",
+
+  /** Transform the matched traffic (e.g., inject or strip headers). */
+  Transform: "Transform",
+
+  /** Rewrite the matched traffic (e.g., modify request path or host). */
+  Rewrite: "Rewrite",
 }
 
 /**

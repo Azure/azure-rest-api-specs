@@ -14266,7 +14266,9 @@
       "description": "The action to take when a policy rule matches.",
       "enum": [
         "Allow",
-        "Deny"
+        "Deny",
+        "Transform",
+        "Rewrite"
       ],
       "x-ms-enum": {
         "name": "PolicyRuleAction",
@@ -14281,6 +14283,16 @@
             "name": "Deny",
             "value": "Deny",
             "description": "Deny the matched traffic."
+          },
+          {
+            "name": "Transform",
+            "value": "Transform",
+            "description": "Transform the matched traffic (e.g., inject or strip headers)."
+          },
+          {
+            "name": "Rewrite",
+            "value": "Rewrite",
+            "description": "Rewrite the matched traffic (e.g., modify request path or host)."
           }
         ]
       }
