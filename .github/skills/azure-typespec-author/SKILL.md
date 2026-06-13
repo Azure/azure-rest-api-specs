@@ -27,6 +27,7 @@ compatibility:
 - **Always validate** — run every steps in [validation](references/validation.md) after every edit.
 - **Always cite references** — provide links that justify the approach.
 - **Follow the authoring plan exactly** — code changes in Step 4 MUST follow the authoring plan generated in Step 3. Do not deviate by referring to existing code patterns in the TypeSpec project; the authoring plan is the single source of truth for what to change.
+- **ALWAYS display SDK breaking change warnings.** If the MCP plan output includes any `SDK Breaking Changes` section, you MUST display it before applying any edits. Never skip, suppress, or downplay breaking change warnings (see Step 3, bullet 1).
 
 ---
 
@@ -83,6 +84,8 @@ Check your classification from Step 1, then branch:
 
   Do not proceed without an authoring plan from this tool.
 
+  > ⚠️ **CRITICAL:** The MCP tool output may includes an `SDK Breaking Changes` section (if applicable). You MUST inspect this and prepare to display breaking change warnings in Step 3. Do NOT skip or minimize this check.
+
 ---
 
 ### Step 4: Apply Changes
@@ -90,7 +93,15 @@ Check your classification from Step 1, then branch:
 Confirm uncertainties with the user, then make minimal `.tsp` edits.
 
 - **API Version Evolution** → Apply the plan from Step 3.
-- **General Authoring** → Apply the authoring plan from Step 3.
+- **General Authoring** → Apply the authoring plan from Step 3 and follow these principles:
+
+  1. **MANDATORY:** Always check the plan output for an `SDK Breaking Changes` section. If any breaking changes are present, display a dedicated warning block titled `🚨 SDK Breaking Changes` and list each breaking change one-by-one as its own warning bullet under that heading. Do NOT skip this step, even if the impact seems minor.
+  2. Confirm with user if any non-mitigation uncertainties remain.
+  3. Make the minimal changes required in the relevant `.tsp` files for the requested TypeSpec change.
+  4. **MANDATORY:** After the requested TypeSpec change has been applied, if the plan includes a mitigation for any SDK breaking change, explicitly ask the user whether they want that mitigation applied.
+  5. If the user confirms they want mitigation, apply the mitigation solution described in the plan in the relevant mitigation files. If the user declines, proceed without mitigation and state that choice in the summary.
+  6. Prefer the official template/pattern from retrieved context even if the repo has older patterns.
+  7. **MANDATORY GATE:** Complete items 1–6 before starting Step 5. Do not proceed to validation until all applicable items above are finished and documented in the response.
 
 ---
 
