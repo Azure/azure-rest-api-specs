@@ -84,6 +84,9 @@
       "name": "Workflows"
     },
     {
+      "name": "StaticSitesAsyncOperations"
+    },
+    {
       "name": "AiGateways"
     },
     {
@@ -1618,6 +1621,96 @@
         "x-ms-examples": {
           "Generates a preview workflow file for the static site": {
             "$ref": "./examples/GenerateStaticSiteWorkflowPreview.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationResults/{operationId}": {
+      "get": {
+        "operationId": "StaticSitesAsyncOperations_GetOperationResult",
+        "tags": [
+          "StaticSitesAsyncOperations"
+        ],
+        "summary": "Gets the result of a static site async operation.",
+        "description": "Gets the result of a static site async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/staticSitesOperationStatuses/{operationId}": {
+      "get": {
+        "operationId": "StaticSitesAsyncOperations_GetOperationStatus",
+        "tags": [
+          "StaticSitesAsyncOperations"
+        ],
+        "summary": "Gets the status of a static site async operation.",
+        "description": "Gets the status of a static site async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StaticSitesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -3513,6 +3606,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}": {
+      "get": {
+        "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get a diagnostics item for an App Service Environment.",
+        "description": "Description for Get a diagnostics item for an App Service Environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "diagnosticsName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HostingEnvironmentDiagnostics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a diagnostics item for an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_GetDiagnosticsItem.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/inboundNetworkDependenciesEndpoints": {
       "get": {
         "operationId": "AppServiceEnvironments_GetInboundNetworkDependenciesEndpoints",
@@ -3788,6 +3934,63 @@
           "Create or update a multi-role pool.": {
             "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateMultiRolePool_UpdateMultiRolePool.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions": {
+      "get": {
+        "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions",
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
+        "description": "Description for Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the multi-role pool.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4291,7 +4494,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/unknown"
         },
         "x-ms-long-running-operation": true
       }
@@ -5360,6 +5564,70 @@
           "Get properties of a worker pool.": {
             "$ref": "./examples/AppServiceEnvironments_CreateOrUpdateWorkerPool.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions": {
+      "get": {
+        "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions",
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
+        "description": "Description for Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerPoolName",
+            "in": "path",
+            "description": "Name of the worker pool.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Name of the instance in the worker pool.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get metric definitions for a specific instance of a worker pool of an App Service Environment.": {
+            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7619,6 +7887,102 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
+      "post": {
+        "operationId": "AppServicePlans_RebootWorker",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Reboot a worker machine in an App Service plan.",
+        "description": "Description for Reboot a worker machine in an App Service plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "in": "path",
+            "description": "Name of worker machine, which typically starts with RD.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance": {
+      "post": {
+        "operationId": "AppServicePlans_RecycleManagedInstanceWorker",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Recycles a managed instance worker machine.",
+        "description": "Description for Recycles a managed instance worker machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "in": "path",
+            "description": "Name of worker machine, which typically starts with RD.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -12764,6 +13128,126 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}": {
+      "put": {
+        "operationId": "WebApps_CreateOrUpdateFunctionSecret",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a function secret.",
+        "description": "Description for Add or update a function secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "201": {
+            "description": "Resource 'KeyInfo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApps_DeleteFunctionSecret",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a function secret.",
+        "description": "Description for Delete a function secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "functionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/listkeys": {
       "post": {
         "operationId": "WebApps_ListFunctionKeys",
@@ -12894,6 +13378,132 @@
             "schema": {
               "$ref": "#/definitions/stringApplicationJson"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "operationId": "WebApps_CreateOrUpdateHostSecret",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a host level secret.",
+        "description": "Description for Add or update a host level secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "201": {
+            "description": "Resource 'KeyInfo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApps_DeleteHostSecret",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a host level secret.",
+        "description": "Description for Delete a host level secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -17096,6 +17706,223 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "Sites_ListNetworkSecurityPerimeterConfigurations",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Lists all Network Security Perimeter Association Configurations for the site.",
+        "description": "Description for Gets all Network Security Perimeter Association Configurations for the site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterReference}": {
+      "get": {
+        "operationId": "Sites_GetNetworkSecurityPerimeterConfiguration",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.",
+        "description": "Description for Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkSecurityPerimeterReference",
+            "in": "path",
+            "description": "AssociationName and PerimeterGuid of the Network Security Perimeter Association.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTraces",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTraceOperation",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTrace/start": {
       "post": {
         "operationId": "WebApps_StartWebSiteNetworkTrace",
@@ -17248,7 +18075,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkTraceArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -17296,6 +18124,129 @@
         "x-ms-examples": {
           "Stop a currently running network trace operation for a site": {
             "$ref": "./examples/StopWebSiteNetworkTrace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTracesV2",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_SlotV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTraceOperationV2",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_V2.json"
           }
         }
       }
@@ -18019,7 +18970,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/unknown"
         },
         "x-ms-long-running-operation": true
       }
@@ -25934,6 +26886,146 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}": {
+      "put": {
+        "operationId": "WebApps_CreateOrUpdateHostSecretSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Add or update a host level secret.",
+        "description": "Description for Add or update a host level secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "body",
+            "description": "The key to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "201": {
+            "description": "Resource 'KeyInfo' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApps_DeleteHostSecretSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Delete a host level secret.",
+        "description": "Description for Delete a host level secret.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyType",
+            "in": "path",
+            "description": "The type of host key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/listkeys": {
       "post": {
         "operationId": "WebApps_ListHostKeysSlot",
@@ -28215,6 +29307,143 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTracesSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_Slot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTraceOperationSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_Slot.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTrace/start": {
       "post": {
         "operationId": "WebApps_StartWebSiteNetworkTraceSlot",
@@ -28381,7 +29610,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkTraceArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -28436,6 +29666,143 @@
         "x-ms-examples": {
           "Stop a currently running network trace operation for a site": {
             "$ref": "./examples/StopWebSiteNetworkTrace_Slot.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTracesSlotV2",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NetworkTraces for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraces_GetNetworkTracesSlotV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}": {
+      "get": {
+        "operationId": "WebApps_GetNetworkTraceOperationSlotV2",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "GUID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "202": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkTrace"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the current status of a network trace operation for a site": {
+            "$ref": "./examples/GetWebSiteNetworkTraceOperation_SlotV2.json"
           }
         }
       }
@@ -29257,7 +30624,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/unknown"
         },
         "x-ms-long-running-operation": true
       }
@@ -31616,7 +32984,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkTraceArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -33548,7 +34917,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkTraceArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -35049,6 +36419,182 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers": {
+      "post": {
+        "operationId": "StaticSites_ListStaticSiteUsers",
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the list of users of a static site.",
+        "description": "Description for Gets the list of users of a static site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "description": "The auth provider for the users.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List users for a static site": {
+            "$ref": "./examples/ListStaticSiteUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
+      "patch": {
+        "operationId": "StaticSites_UpdateStaticSiteUser",
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Updates a user entry with the listed roles",
+        "description": "Description for Updates a user entry with the listed roles",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSiteUserEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the StaticSiteUser properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteUserARMResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a user for a static site": {
+            "$ref": "./examples/UpdateStaticSiteUser.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StaticSites_DeleteStaticSiteUser",
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes the user entry from the static site.",
+        "description": "Description for Deletes the user entry from the static site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authprovider",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a user for a static site": {
+            "$ref": "./examples/DeleteStaticSiteUser.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/basicAuth": {
@@ -38548,7 +40094,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/unknown"
         },
         "x-ms-long-running-operation": true
       }
@@ -39056,1358 +40603,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/diagnostics/{diagnosticsName}": {
-      "get": {
-        "operationId": "AppServiceEnvironments_GetDiagnosticsItem",
-        "tags": [
-          "AppServiceEnvironments"
-        ],
-        "summary": "Get a diagnostics item for an App Service Environment.",
-        "description": "Description for Get a diagnostics item for an App Service Environment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "diagnosticsName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HostingEnvironmentDiagnostics"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a diagnostics item for an App Service Environment.": {
-            "$ref": "./examples/AppServiceEnvironments_GetDiagnosticsItem.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/multiRolePools/default/instances/{instance}/metricdefinitions": {
-      "get": {
-        "operationId": "AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions",
-        "tags": [
-          "AppServiceEnvironments"
-        ],
-        "summary": "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
-        "description": "Description for Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "instance",
-            "in": "path",
-            "description": "Name of the instance in the multi-role pool.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.": {
-            "$ref": "./examples/AppServiceEnvironments_ListMultiRolePoolInstanceMetricDefinitions.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/hostingEnvironments/{name}/workerPools/{workerPoolName}/instances/{instance}/metricdefinitions": {
-      "get": {
-        "operationId": "AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions",
-        "tags": [
-          "AppServiceEnvironments"
-        ],
-        "summary": "Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
-        "description": "Description for Get metric definitions for a specific instance of a worker pool of an App Service Environment.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workerPoolName",
-            "in": "path",
-            "description": "Name of the worker pool.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "instance",
-            "in": "path",
-            "description": "Name of the instance in the worker pool.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get metric definitions for a specific instance of a worker pool of an App Service Environment.": {
-            "$ref": "./examples/AppServiceEnvironments_ListWorkerPoolInstanceMetricDefinitions.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/reboot": {
-      "post": {
-        "operationId": "AppServicePlans_RebootWorker",
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Reboot a worker machine in an App Service plan.",
-        "description": "Description for Reboot a worker machine in an App Service plan.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workerName",
-            "in": "path",
-            "description": "Name of worker machine, which typically starts with RD.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance": {
-      "post": {
-        "operationId": "AppServicePlans_RecycleManagedInstanceWorker",
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Recycles a managed instance worker machine.",
-        "description": "Description for Recycles a managed instance worker machine.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workerName",
-            "in": "path",
-            "description": "Name of worker machine, which typically starts with RD.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}": {
-      "put": {
-        "operationId": "WebApps_CreateOrUpdateFunctionSecret",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Add or update a function secret.",
-        "description": "Description for Add or update a function secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "functionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key",
-            "in": "body",
-            "description": "The key to create or update",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "201": {
-            "description": "Resource 'KeyInfo' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "WebApps_DeleteFunctionSecret",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Delete a function secret.",
-        "description": "Description for Delete a function secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "functionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}": {
-      "put": {
-        "operationId": "WebApps_CreateOrUpdateHostSecret",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Add or update a host level secret.",
-        "description": "Description for Add or update a host level secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The type of host key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key",
-            "in": "body",
-            "description": "The key to create or update",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "201": {
-            "description": "Resource 'KeyInfo' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "WebApps_DeleteHostSecret",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Delete a host level secret.",
-        "description": "Description for Delete a host level secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The type of host key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTraces",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NetworkTraces for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraces.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTrace/operationresults/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTraceOperation",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "202": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the current status of a network trace operation for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraceOperation.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTracesV2",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NetworkTraces for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraces_SlotV2.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/networkTraces/current/operationresults/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTraceOperationV2",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "202": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the current status of a network trace operation for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraceOperation_V2.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}": {
-      "put": {
-        "operationId": "WebApps_CreateOrUpdateHostSecretSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Add or update a host level secret.",
-        "description": "Description for Add or update a host level secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The type of host key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "key",
-            "in": "body",
-            "description": "The key to create or update",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "201": {
-            "description": "Resource 'KeyInfo' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "WebApps_DeleteHostSecretSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Delete a host level secret.",
-        "description": "Description for Delete a host level secret.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyType",
-            "in": "path",
-            "description": "The type of host key.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "keyName",
-            "in": "path",
-            "description": "The name of the key.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "404": {
-            "description": "The server cannot find the requested resource.",
-            "x-ms-error-response": true
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTracesSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NetworkTraces for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraces_Slot.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTrace/operationresults/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTraceOperationSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "202": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the current status of a network trace operation for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraceOperation_Slot.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTracesSlotV2",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NetworkTraces for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraces_GetNetworkTracesSlotV2.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/slots/{slot}/networkTraces/current/operationresults/{operationId}": {
-      "get": {
-        "operationId": "WebApps_GetNetworkTraceOperationSlotV2",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "description": "Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "GUID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "202": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NetworkTrace"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the current status of a network trace operation for a site": {
-            "$ref": "./examples/GetWebSiteNetworkTraceOperation_SlotV2.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers": {
-      "post": {
-        "operationId": "StaticSites_ListStaticSiteUsers",
-        "tags": [
-          "StaticSites"
-        ],
-        "summary": "Gets the list of users of a static site.",
-        "description": "Description for Gets the list of users of a static site.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authprovider",
-            "in": "path",
-            "description": "The auth provider for the users.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List users for a static site": {
-            "$ref": "./examples/ListStaticSiteUsers.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}": {
-      "patch": {
-        "operationId": "StaticSites_UpdateStaticSiteUser",
-        "tags": [
-          "StaticSites"
-        ],
-        "summary": "Updates a user entry with the listed roles",
-        "description": "Description for Updates a user entry with the listed roles",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authprovider",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "staticSiteUserEnvelope",
-            "in": "body",
-            "description": "A JSON representation of the StaticSiteUser properties. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserARMResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserARMResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a user for a static site": {
-            "$ref": "./examples/UpdateStaticSiteUser.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "StaticSites_DeleteStaticSiteUser",
-        "tags": [
-          "StaticSites"
-        ],
-        "summary": "Deletes the user entry from the static site.",
-        "description": "Description for Deletes the user entry from the static site.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authprovider",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a user for a static site": {
-            "$ref": "./examples/DeleteStaticSiteUser.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
       "post": {
         "operationId": "ValidateMove",
@@ -40587,6 +40782,24 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AiIntegration": {
+      "type": "object",
+      "description": "AI integration configuration for the app.",
+      "properties": {
+        "apiSpecPath": {
+          "type": "string",
+          "description": "Relative path to the API specification file from /home in site files."
+        },
+        "mcp": {
+          "$ref": "#/definitions/McpSettings",
+          "description": "MCP configuration."
+        },
+        "siteAuth": {
+          "$ref": "#/definitions/SiteAuthInfo",
+          "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled)."
         }
       }
     },
@@ -48841,6 +49054,51 @@
         }
       ]
     },
+    "McpServerConfig": {
+      "type": "object",
+      "description": "Configuration for an individual MCP server.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP server."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the MCP server."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the MCP server is enabled. Defaults to true when not specified on creation."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint path for the MCP server."
+        },
+        "toolList": {
+          "type": "array",
+          "description": "The list of tools exposed by this MCP server.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "McpSettings": {
+      "type": "object",
+      "description": "MCP configuration settings.",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "description": "Array of MCP server configurations. This array is replaced in its entirety on update; individual servers cannot be patched independently. An empty array signals that MCP should be disabled/deleted.",
+          "items": {
+            "$ref": "#/definitions/McpServerConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "MetricAvailability": {
       "type": "object",
       "description": "Retention policy of a resource metric.",
@@ -49089,6 +49347,90 @@
         }
       }
     },
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "description": "Network Security Perimeter",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM URI of the Network Security Perimeter resource."
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "GUID of the Network Security Perimeter resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location where the Network Security Perimeter resource."
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "type": "object",
+      "description": "Detailed view of a Network Security Perimeter Configured for the site.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Name of the Network Security Perimeter Profile Access Rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationCollection": {
+      "type": "object",
+      "description": "Collection of Network Security Perimeter Configurations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSecurityPerimeterConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "type": "object",
+      "description": "Network Security Perimeter Configuration Properties",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Reflects state of association persistence and configuration propagation to App Service Data Plane.",
+          "readOnly": true
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "description": "Reflects any misconfigurations and failures detected while provisioning the association or while processing configuration changes.",
+          "items": {
+            "$ref": "#/definitions/NspProvisioningIssue"
+          }
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter",
+          "description": "Associated Network Security Perimeter resource."
+        },
+        "resourceAssociations": {
+          "$ref": "#/definitions/NspResourceAssociation",
+          "description": "Representation of Network Security Perimeter Association."
+        },
+        "profile": {
+          "$ref": "#/definitions/NspProfile",
+          "description": "Associated Network Security Perimeter Profile."
+        }
+      }
+    },
     "NetworkTrace": {
       "type": "object",
       "description": "Network trace",
@@ -49105,6 +49447,12 @@
           "type": "string",
           "description": "Detailed message of a network trace operation, e.g. error message in case of failure."
         }
+      }
+    },
+    "NetworkTraceArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NetworkTrace"
       }
     },
     "Nonce": {
@@ -49133,6 +49481,208 @@
       "x-ms-enum": {
         "name": "NotificationLevel",
         "modelAsString": false
+      }
+    },
+    "NspProfile": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Network Security Perimeter Profile."
+        },
+        "accessRulesVersion": {
+          "type": "string",
+          "description": "Access Rules Version for the Network Security Perimeter Profile."
+        },
+        "accessRules": {
+          "type": "array",
+          "description": "Access Rules for the Network Security Perimeter Profile.",
+          "items": {
+            "$ref": "#/definitions/NspProfileAccessRule"
+          }
+        },
+        "diagnosticSettingsVersion": {
+          "type": "string",
+          "description": "Diagnostic Settings Version for the Network Security Perimeter Profile."
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "description": "Enabled Log Categories for the Network Security Perimeter Profile.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspProfileAccessRule": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile Access Rule",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Network Security Perimeter Profile Access Rule."
+        },
+        "properties": {
+          "$ref": "#/definitions/NspProfileAccessRuleProperties",
+          "description": "Name of the Network Security Perimeter Profile Access Rule."
+        }
+      }
+    },
+    "NspProfileAccessRuleGranularFeature": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile Access Rule Granular Feature",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type of Granular Feature."
+        },
+        "features": {
+          "type": "array",
+          "description": "Names of applied Granular Features.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspProfileAccessRuleProperties": {
+      "type": "object",
+      "description": "Network Security Perimeter Profile Access Rule Properties",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Direction of Access Rule (Inbound/Outbound)."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "IP Address Ranges of Access Rule",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceTags": {
+          "type": "array",
+          "description": "Service Tags of Access Rule",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "Granular Features of Access Rule",
+          "items": {
+            "$ref": "#/definitions/NspProfileAccessRuleGranularFeature"
+          },
+          "x-ms-identifiers": [
+            "resourceType"
+          ]
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "Subscriptions of Access Rule. Not supported by App Service.",
+          "items": {
+            "$ref": "#/definitions/NspSubscription"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "description": "NetworkSecurityPerimeter of Access Rule. Not supported by App Service.",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "description": "Fully Qualified Domain Names of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "Email Addresses of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "description": "Phone Numbers of Access Rule. Not supported by App Service.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspProvisioningIssue": {
+      "type": "object",
+      "description": "Network Security Perimeter Association Provisioning Issue",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Provisioning Issue Name"
+        },
+        "properties": {
+          "$ref": "#/definitions/NspProvisioningIssueProperties",
+          "description": "Provisioning Issue Properties"
+        }
+      }
+    },
+    "NspProvisioningIssueProperties": {
+      "type": "object",
+      "description": "Network Security Perimeter Association Provisioning Issue Properties",
+      "properties": {
+        "issueType": {
+          "type": "string",
+          "description": "Provisioning Issue Type"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Provisioning Issue Severity"
+        },
+        "description": {
+          "type": "string",
+          "description": "Provisioning Issue Description"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "description": "Recommended ARM Ids to resolve the issue",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "description": "Recommended access rules to resolve the issue",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspResourceAssociation": {
+      "type": "object",
+      "description": "Network Security Perimeter Resource Association",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Network Security Perimeter Resource Association Name"
+        },
+        "accessMode": {
+          "type": "string",
+          "description": "Network Security Perimeter Association Access Mode (Learning/Enforced)"
+        }
+      }
+    },
+    "NspSubscription": {
+      "type": "object",
+      "description": "Network Security Perimeter Subscription",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Network Security Perimeter Subscription Id"
+        }
       }
     },
     "OpenAuthenticationAccessPolicies": {
@@ -49643,6 +50193,36 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "PlatformReleaseChannel": {
+      "type": "string",
+      "description": "The platform release channel for the site.",
+      "enum": [
+        "Latest",
+        "Standard",
+        "Extended"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformReleaseChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Latest",
+            "value": "Latest",
+            "description": "Latest receives updates earliest."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard receives updates after Latest."
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "Extended receives updates last with extended support."
+          }
+        ]
       }
     },
     "PremierAddOn": {
@@ -52507,6 +53087,37 @@
         }
       ]
     },
+    "SiteAuthInfo": {
+      "type": "object",
+      "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).\nAt minimum, `scopes` and either `wellKnownOpenIdConfiguration` or `issuer` must be provided.",
+      "properties": {
+        "jwksUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "JWKS URL for verifying JWT signatures."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Expected 'iss' claim. Required for custom site authentication if `wellKnownOpenIdConfiguration` is not provided."
+        },
+        "audience": {
+          "type": "string",
+          "description": "Expected 'aud' claim."
+        },
+        "wellKnownOpenIdConfiguration": {
+          "type": "string",
+          "format": "uri",
+          "description": "OIDC metadata URL. Required for custom site authentication if `issuer` is not provided."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth scopes for Protected Resource Metadata (PRM). Required for custom site authentication.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SiteAuthSettings": {
       "type": "object",
       "description": "Configuration settings for the Azure App Service Authentication / Authorization feature.",
@@ -53782,6 +54393,11 @@
           "type": "boolean",
           "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline)."
         },
+        "siteScopedCertificatesEnabled": {
+          "type": "boolean",
+          "description": "<code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.",
+          "default": false
+        },
         "enabledHostNames": {
           "type": "array",
           "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\nthe app is not served on those hostnames.",
@@ -53849,6 +54465,10 @@
         "siteConfig": {
           "$ref": "#/definitions/SiteConfig",
           "description": "Configuration of the app."
+        },
+        "aiIntegration": {
+          "$ref": "#/definitions/AiIntegration",
+          "description": "AI integration configuration for the app."
         },
         "trafficManagerHostNames": {
           "type": "array",
@@ -54064,6 +54684,11 @@
           "type": "boolean",
           "description": "<code>true</code> if the app is enabled; otherwise, <code>false</code>. Setting this value to false disables the app (takes the app offline)."
         },
+        "siteScopedCertificatesEnabled": {
+          "type": "boolean",
+          "description": "<code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.",
+          "default": false
+        },
         "enabledHostNames": {
           "type": "array",
           "description": "Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,\nthe app is not served on those hostnames.",
@@ -54147,6 +54772,10 @@
         "daprConfig": {
           "$ref": "#/definitions/DaprConfig",
           "description": "Dapr configuration of the app."
+        },
+        "aiIntegration": {
+          "$ref": "#/definitions/AiIntegration",
+          "description": "AI integration configuration for the app."
         },
         "workloadProfileName": {
           "type": "string",
@@ -54328,6 +54957,10 @@
           "type": "string",
           "description": "Current SKU of application based on associated App Service Plan. Some valid SKU values are Free, Shared, Basic, Dynamic, FlexConsumption, Standard, Premium, PremiumV2, PremiumV3, Isolated, IsolatedV2",
           "readOnly": true
+        },
+        "platformReleaseChannel": {
+          "$ref": "#/definitions/PlatformReleaseChannel",
+          "description": "The platform release channel for the site. Latest receives updates earliest, followed by Standard, then Extended."
         }
       }
     },
@@ -55354,7 +55987,8 @@
         },
         "repositoryToken": {
           "type": "string",
-          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets."
+          "description": "A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.",
+          "x-ms-secret": true
         },
         "buildProperties": {
           "$ref": "#/definitions/StaticSiteBuildProperties",
@@ -56317,6 +56951,58 @@
           "$ref": "#/definitions/ProxyOnlyResource"
         }
       ]
+    },
+    "StaticSitesOperationStatus": {
+      "type": "object",
+      "description": "Status object for a static sites asynchronous operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the staticSitesOperationStatus.  For example, /subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSitesOperationStatuses/{operationId}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Web/staticSitesOperationStatuses",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the staticSitesOperationStatus. For example, a1f6e015-a5de-468f-ad54-9c75638d7134",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/StaticSitesOperationStatusProperties",
+          "description": "Properties of the async operation status."
+        }
+      }
+    },
+    "StaticSitesOperationStatusProperties": {
+      "type": "object",
+      "description": "Properties of a static sites asynchronous operation status.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the asynchronous operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the asynchronous operation."
+        },
+        "staticSiteProperties": {
+          "$ref": "#/definitions/StaticSite",
+          "description": "The generic properties of a staticSite."
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Error details for the asynchronous operation, if any."
+        }
+      }
     },
     "StaticSitesWorkflowPreview": {
       "type": "object",
@@ -59841,7 +60527,8 @@
     },
     "stringApplicationJson": {
       "type": "string"
-    }
+    },
+    "unknown": {}
   },
   "parameters": {
     "Azure.Core.ExpandQueryParameter": {

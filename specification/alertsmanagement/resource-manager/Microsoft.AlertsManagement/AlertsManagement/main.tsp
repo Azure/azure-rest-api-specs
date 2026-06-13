@@ -42,6 +42,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List all operations available through Azure Alerts Management Resource Provider."
 );

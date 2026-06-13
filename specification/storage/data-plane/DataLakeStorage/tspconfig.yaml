@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/storage"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/generated_datalake.json"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/storage-file-datalake"
+    generate-metadata: false
+    generate-test: false
+    include-headers-in-response: true
+    enable-storage-compat: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/storage-file-datalake"
+      description: "Azure.Storage.File DataLake Service"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file-datalake"
+    generation-subdir: "_generated"
+    namespace: "azure.storage.filedatalake"
+    package-name: "azure-storage-file-datalake"
+    package-mode: dataplane
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Storage.Files.DataLake"
+    model-namespace: true
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azdatalake"
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azdatalake/internal/generated"
+    generate-fakes: false
+    file-prefix: "zz_"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

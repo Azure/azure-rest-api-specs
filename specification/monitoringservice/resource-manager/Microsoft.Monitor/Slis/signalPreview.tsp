@@ -77,8 +77,10 @@ interface SloView {
     @body
     @doc("The signal preview properties.")
     body: SignalPreviewSliProperties,
-  ): {
-    @statusCode statusCode: 200;
-    @body body: KqlmQueryResult;
-  } | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body body: KqlmQueryResult;
+      }
+    | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }

@@ -6,27 +6,32 @@ using Microsoft.Datadog;
 // csharp configurations
 @@clientName(Microsoft.Datadog, "MicrosoftDatadogClient", "javascript");
 @@clientName(BillingInfoResponse, "DatadogBillingInfoResult", "csharp");
-@@clientName(CreateResourceSupportedResponse,
+@@clientName(
+  CreateResourceSupportedResponse,
   "DatadogSubscriptionStatusResult",
   "csharp"
 );
 @@clientName(AgentRules, "DatadogMonitorAgentRules", "csharp");
-@@clientName(AgentRules.enableAgentMonitoring,
+@@clientName(
+  AgentRules.enableAgentMonitoring,
   "IsAgentMonitoringEnabled",
   "csharp"
 );
-@@clientName(CreateResourceSupportedProperties,
+@@clientName(
+  CreateResourceSupportedProperties,
   "DatadogSubscriptionStatusProperties",
   "csharp"
 );
-@@clientName(CreateResourceSupportedProperties.creationSupported,
+@@clientName(
+  CreateResourceSupportedProperties.creationSupported,
   "IsCreationSupported",
   "csharp"
 );
 @@clientName(DatadogAgreementProperties.accepted, "IsAccepted", "csharp");
 @@clientName(DatadogMonitorResource, "DatadogMonitor", "csharp");
 @@clientName(DatadogOrganizationProperties.cspm, "IsCspm", "csharp");
-@@clientName(DatadogOrganizationProperties.resourceCollection,
+@@clientName(
+  DatadogOrganizationProperties.resourceCollection,
   "IsResourceCollection",
   "csharp"
 );
@@ -42,39 +47,47 @@ using Microsoft.Datadog;
 @@clientName(MetricRules, "DatadogMonitorMetricRules", "csharp");
 @@clientName(MonitoredResource, "DatadogMonitoredResourceResult", "csharp");
 @@clientName(MonitoredResource.sendingLogs, "IsSendingLogsEnabled", "csharp");
-@@clientName(MonitoredResource.sendingMetrics,
+@@clientName(
+  MonitoredResource.sendingMetrics,
   "IsSendingMetricsEnabled",
   "csharp"
 );
-@@clientName(MonitoredSubscription,
+@@clientName(
+  MonitoredSubscription,
   "DatadogMonitoredSubscriptionItem",
   "csharp"
 );
-@@clientName(MonitoredSubscriptionProperties,
+@@clientName(
+  MonitoredSubscriptionProperties,
   "DatadogMonitoredSubscription",
   "csharp"
 );
 @@clientName(MonitoringStatus, "DatadogMonitoringStatus", "csharp");
 @@clientName(MonitoringTagRules, "DataMonitoringTagRule", "csharp");
-@@clientName(MonitoringTagRulesProperties,
+@@clientName(
+  MonitoringTagRulesProperties,
   "MonitoringTagRuleProperties",
   "csharp"
 );
-@@clientName(MonitoringTagRulesProperties.automuting,
+@@clientName(
+  MonitoringTagRulesProperties.automuting,
   "IsAutomutingEnabled",
   "csharp"
 );
-@@clientName(MonitoringTagRulesProperties.customMetrics,
+@@clientName(
+  MonitoringTagRulesProperties.customMetrics,
   "IsCustomMetricsEnabled",
   "csharp"
 );
 @@clientName(MonitorProperties, "DatadogMonitorProperties", "csharp");
-@@clientName(MonitorUpdateProperties,
+@@clientName(
+  MonitorUpdateProperties,
   "DatadogMonitorResourcePatchProperties",
   "csharp"
 );
 @@clientName(MonitorUpdateProperties.cspm, "IsCspm", "csharp");
-@@clientName(MonitorUpdateProperties.resourceCollection,
+@@clientName(
+  MonitorUpdateProperties.resourceCollection,
   "IsResourceCollection",
   "csharp"
 );
@@ -87,98 +100,119 @@ using Microsoft.Datadog;
 @@clientName(SubscriptionList, "DatadogSubscriptionProperties", "csharp");
 @@clientName(TagAction, "DatadogMonitorTagAction", "csharp");
 @@clientName(UserInfo, "DatadogUserInfo", "csharp");
-@@clientName(CreationSupportedOperationGroup.list,
+@@clientName(
+  CreationSupportedOperationGroup.list,
   "GetSubscriptionStatuses",
   "csharp"
 );
-@@clientName(CreationSupportedOperationGroup.get,
+@@clientName(
+  CreationSupportedOperationGroup.get,
   "GetSubscriptionStatus",
   "csharp"
 );
-@@clientName(DatadogMonitorResources.billingInfoGet,
+@@clientName(
+  DatadogMonitorResources.billingInfoGet,
   "GetBillingInfo",
   "csharp"
 );
-@@clientName(DatadogMonitorResourceUpdateParameters,
+@@clientName(
+  DatadogMonitorResourceUpdateParameters,
   "DatadogMonitorPatch",
   "csharp"
 );
-@@clientName(ActivateSaaSParameterRequest,
+@@clientName(
+  ActivateSaaSParameterRequest,
   "DatadogActivateSaaSContent",
   "csharp"
 );
-@@clientName(SaaSResourceDetailsResponse,
+@@clientName(
+  SaaSResourceDetailsResponse,
   "DatadogSaaSResourceDetailsData",
   "csharp"
 );
-@@clientName(LatestLinkedSaaSResponse,
+@@clientName(
+  LatestLinkedSaaSResponse,
   "DatadogLatestLinkedSaaSResult",
   "csharp"
 );
 @@clientName(SaaSData, "DatadogSaaSInfo", "csharp");
-@@clientName(SreAgentConfigurationListResponse,
+@@clientName(
+  SreAgentConfigurationListResponse,
   "DatadogSreAgentConfigurationListResult",
   "csharp"
 );
-@@clientName(SreAgentConnectorRequest,
+@@clientName(
+  SreAgentConnectorRequest,
   "DatadogSreAgentConnectorContent",
   "csharp"
 );
-@@clientName(MarketplaceAgreementsOperationGroup.createOrUpdate,
+@@clientName(
+  MarketplaceAgreementsOperationGroup.createOrUpdate,
   "CreateOrUpdateMarketplaceAgreement",
   "csharp"
 );
-@@clientName(MarketplaceAgreementsOperationGroup.list,
+@@clientName(
+  MarketplaceAgreementsOperationGroup.list,
   "GetMarketplaceAgreements",
   "csharp"
 );
-@@clientName(DatadogMonitorResources.resubscribe,
+@@clientName(
+  DatadogMonitorResources.resubscribe,
   "ResubscribeOrganization",
   "csharp"
 );
-@@clientName(DatadogMonitorResources.latestLinkedSaaS,
+@@clientName(
+  DatadogMonitorResources.latestLinkedSaaS,
   "GetLatestLinkedSaaS",
   "csharp"
 );
 @@clientName(ConnectorAction, "DatadogConnectorAction", "csharp");
-@@clientName(MarketplaceOfferDetails,
+@@clientName(
+  MarketplaceOfferDetails,
   "DatadogMarketplaceOfferDetails",
   "csharp"
 );
 @@clientName(SreAgentConfiguration, "DatadogSreAgentConfiguration", "csharp");
-@@alternateType(SreAgentConfiguration.mcpConnectorResourceId,
+@@alternateType(
+  SreAgentConfiguration.mcpConnectorResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(MonitoredResource.id,
+@@alternateType(
+  MonitoredResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(LinkedResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(LinkedResource.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LatestLinkedSaaSResponse.saaSResourceId,
+@@alternateType(
+  LatestLinkedSaaSResponse.saaSResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SaaSData.saaSResourceId,
+@@alternateType(
+  SaaSData.saaSResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 @@alternateType(DatadogSingleSignOnProperties.singleSignOnUrl, url, "csharp");
 @@alternateType(DatadogOrganizationProperties.redirectUri, url, "csharp");
-@@alternateType(DatadogMonitorResource.identity,
+@@alternateType(
+  DatadogMonitorResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(DatadogAgreementResource, DatadogAgreement, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(DatadogMonitorResources.manageSreAgentConnectors,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  DatadogMonitorResources.manageSreAgentConnectors,
   "csharp"
 );
 

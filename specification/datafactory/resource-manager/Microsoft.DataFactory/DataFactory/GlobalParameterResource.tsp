@@ -69,9 +69,11 @@ interface GlobalParameterResources {
 @@maxLength(GlobalParameterResource.name, 260);
 @@minLength(GlobalParameterResource.name, 1);
 @@doc(GlobalParameterResource.name, "The global parameter name.");
-@@doc(GlobalParameterResource.properties,
+@@doc(
+  GlobalParameterResource.properties,
   "Properties of the global parameter."
 );
-@@doc(GlobalParameterResources.createOrUpdate::parameters.resource,
+@@doc(
+  GlobalParameterResources.createOrUpdate::parameters.resource,
   "Global parameter resource definition."
 );

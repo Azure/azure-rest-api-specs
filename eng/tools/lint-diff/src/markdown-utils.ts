@@ -1,13 +1,14 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { kebabCase } from "change-case";
-import { marked, Tokens } from "marked";
+import { marked, type Tokens } from "marked";
 import { inspect } from "util";
 
-export enum MarkdownType {
-  Arm = "arm",
-  DataPlane = "data-plane",
-  Default = "default",
-}
+export const MarkdownType = {
+  Arm: "arm",
+  DataPlane: "data-plane",
+  Default: "default",
+} as const;
+export type MarkdownType = (typeof MarkdownType)[keyof typeof MarkdownType];
 
 /**
  *

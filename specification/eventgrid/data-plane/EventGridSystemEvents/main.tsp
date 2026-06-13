@@ -5,6 +5,7 @@ import "./Microsoft.ApiManagement/ApiManagement.tsp";
 import "./Microsoft.AppConfiguration/AppConfiguration.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 import "./Microsoft.Communication/AzureCommunicationServices.tsp";
+import "./Microsoft.Compute/VirtualMachineScaleSets.tsp";
 import "./Microsoft.ContainerRegistry/ContainerRegistry.tsp";
 import "./Microsoft.ContainerService/ContainerService.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
