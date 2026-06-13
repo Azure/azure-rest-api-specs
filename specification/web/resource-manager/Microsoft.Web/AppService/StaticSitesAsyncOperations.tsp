@@ -56,17 +56,12 @@ interface StaticSitesAsyncOperations {
 
     ...LocationResourceParameter,
     ...Foundations.OperationIdParameter,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.Resource>
-    | ArmAcceptedLroResponse
-    | DefaultErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.Resource> | ArmAcceptedLroResponse | DefaultErrorResponse;
 }
 
-@@segment(
-  StaticSitesAsyncOperations.getOperationStatus::parameters.operationId,
+@@segment(StaticSitesAsyncOperations.getOperationStatus::parameters.operationId,
   "staticSitesOperationStatuses"
 );
-@@segment(
-  StaticSitesAsyncOperations.getOperationResult::parameters.operationId,
+@@segment(StaticSitesAsyncOperations.getOperationResult::parameters.operationId,
   "staticSitesOperationResults"
 );

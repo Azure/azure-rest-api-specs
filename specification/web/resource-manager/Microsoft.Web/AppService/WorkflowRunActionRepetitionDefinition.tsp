@@ -202,7 +202,6 @@ interface WorkflowRunActionScopeRepetitions {
 }
 
 @@doc(WorkflowRunActionRepetitionDefinition.name, "The workflow repetition.");
-@@doc(
-  WorkflowRunActionRepetitionDefinition.properties,
+@@doc(WorkflowRunActionRepetitionDefinition.properties,
   "The workflow run action repetition properties definition."
 );

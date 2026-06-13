@@ -4236,8 +4236,7 @@ model ResourceMetricAvailability {
 /**
  * Collection of SKU information.
  */
-@@Azure.ResourceManager.identifiers(
-  SkuInfoCollection.value,
+@@Azure.ResourceManager.identifiers(SkuInfoCollection.value,
   #["/sku/name", "resourceType"]
 );
 model SkuInfoCollection is Azure.Core.Page<SkuInfo>;
@@ -4434,8 +4433,7 @@ model ErrorEntity {
 /**
  * Collection of Outbound Environment Endpoints
  */
-@@Azure.ResourceManager.identifiers(
-  OutboundEnvironmentEndpointCollection.value,
+@@Azure.ResourceManager.identifiers(OutboundEnvironmentEndpointCollection.value,
   #["category"]
 );
 model OutboundEnvironmentEndpointCollection

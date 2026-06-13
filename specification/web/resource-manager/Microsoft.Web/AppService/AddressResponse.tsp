@@ -43,7 +43,6 @@ interface AddressResponses {
 }
 
 @@doc(AddressResponse.name, "");
-@@doc(
-  AddressResponse.properties,
+@@doc(AddressResponse.properties,
   "AddressResponse resource specific properties"
 );
