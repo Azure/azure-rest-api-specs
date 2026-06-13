@@ -92,12 +92,15 @@ interface ManagedTrafficConfigs {
   >;
 }
 
-@@doc(ManagedTrafficConfigResource.name,
+@@doc(
+  ManagedTrafficConfigResource.name,
   "Name of the managed traffic configuration."
 );
-@@doc(ManagedTrafficConfigResource.properties,
+@@doc(
+  ManagedTrafficConfigResource.properties,
   "ManagedTrafficConfig resource specific properties"
 );
-@@doc(ManagedTrafficConfigs.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedTrafficConfigs.createOrUpdate::parameters.resource,
   "Traffic configuration properties."
 );

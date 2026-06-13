@@ -107,9 +107,11 @@ interface ServerFarmSilos {
 
 @@doc(ServerFarmSilo.name, "Name of the silo.");
 @@doc(ServerFarmSilo.properties, "ServerFarmSilo resource specific properties");
-@@doc(ServerFarmSilos.createOrUpdate::parameters.resource,
+@@doc(
+  ServerFarmSilos.createOrUpdate::parameters.resource,
   "Details of the silo."
 );
-@@doc(ServerFarmSilos.update::parameters.properties,
+@@doc(
+  ServerFarmSilos.update::parameters.properties,
   "Details of the silo update."
 );

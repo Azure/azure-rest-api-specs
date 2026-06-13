@@ -124,7 +124,8 @@ using Microsoft.Web;
 @@flattenProperty(StaticSiteUserInvitationResponseResource.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StaticSiteCustomDomainRequestPropertiesARMResource.properties
+@@flattenProperty(
+  StaticSiteCustomDomainRequestPropertiesARMResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -174,7 +175,8 @@ using Microsoft.Web;
 @@flattenProperty(MSDeployLog.properties);
 
 @@clientName(FunctionEnvelopeProperties.function_app_id, "functionAppId");
-@@clientName(FunctionEnvelopeProperties.script_root_path_href,
+@@clientName(
+  FunctionEnvelopeProperties.script_root_path_href,
   "scriptRootPathHref"
 );
 @@clientName(FunctionEnvelopeProperties.script_href, "scriptHref");
@@ -182,7 +184,8 @@ using Microsoft.Web;
 @@clientName(FunctionEnvelopeProperties.test_data_href, "testDataHref");
 @@clientName(FunctionEnvelopeProperties.secrets_file_href, "secretsFileHref");
 @@clientName(FunctionEnvelopeProperties.test_data, "testData");
-@@clientName(FunctionEnvelopeProperties.invoke_url_template,
+@@clientName(
+  FunctionEnvelopeProperties.invoke_url_template,
   "invokeUrlTemplate"
 );
 
@@ -190,10 +193,12 @@ using Microsoft.Web;
 
 @@clientName(ProcessInfoProperties.deployment_name, "deploymentName");
 @@clientName(ProcessInfoProperties.is_profile_running, "isProfileRunning");
-@@clientName(ProcessInfoProperties.is_iis_profile_running,
+@@clientName(
+  ProcessInfoProperties.is_iis_profile_running,
   "isIisProfileRunning"
 );
-@@clientName(ProcessInfoProperties.iis_profile_timeout_in_seconds,
+@@clientName(
+  ProcessInfoProperties.iis_profile_timeout_in_seconds,
   "iisProfileTimeoutInSeconds"
 );
 @@clientName(ProcessInfoProperties.open_file_handles, "openFileHandles");
@@ -213,13 +218,15 @@ using Microsoft.Web;
 @@clientName(ProcessInfoProperties.virtual_memory, "virtualMemory");
 @@clientName(ProcessInfoProperties.peak_virtual_memory, "peakVirtualMemory");
 @@clientName(ProcessInfoProperties.paged_system_memory, "pagedSystemMemory");
-@@clientName(ProcessInfoProperties.non_paged_system_memory,
+@@clientName(
+  ProcessInfoProperties.non_paged_system_memory,
   "nonPagedSystemMemory"
 );
 @@clientName(ProcessInfoProperties.paged_memory, "pagedMemory");
 @@clientName(ProcessInfoProperties.peak_paged_memory, "peakPagedMemory");
 @@clientName(ProcessInfoProperties.time_stamp, "timeStamp");
-@@clientName(ProcessInfoProperties.environment_variables,
+@@clientName(
+  ProcessInfoProperties.environment_variables,
   "environmentVariables"
 );
 @@clientName(ProcessInfoProperties.is_scm_site, "isScmSite");
@@ -233,10 +240,12 @@ using Microsoft.Web;
 @@clientName(ProcessThreadInfoProperties.priority_level, "priorityLevel");
 @@clientName(ProcessThreadInfoProperties.base_priority, "basePriority");
 @@clientName(ProcessThreadInfoProperties.start_time, "startTime");
-@@clientName(ProcessThreadInfoProperties.total_processor_time,
+@@clientName(
+  ProcessThreadInfoProperties.total_processor_time,
   "totalProcessorTime"
 );
-@@clientName(ProcessThreadInfoProperties.user_processor_time,
+@@clientName(
+  ProcessThreadInfoProperties.user_processor_time,
   "userProcessorTime"
 );
 @@clientName(ProcessThreadInfoProperties.wait_reason, "waitReason");
@@ -244,7 +253,8 @@ using Microsoft.Web;
 @@clientName(ProcessModuleInfoProperties.base_address, "baseAddress");
 @@clientName(ProcessModuleInfoProperties.file_name, "fileName");
 @@clientName(ProcessModuleInfoProperties.file_path, "filePath");
-@@clientName(ProcessModuleInfoProperties.module_memory_size,
+@@clientName(
+  ProcessModuleInfoProperties.module_memory_size,
   "moduleMemorySize"
 );
 @@clientName(ProcessModuleInfoProperties.file_version, "fileVersion");
@@ -280,18 +290,22 @@ using Microsoft.Web;
 @@clientName(SiteExtensionInfoProperties.icon_url, "iconUrl");
 @@clientName(SiteExtensionInfoProperties.license_url, "licenseUrl");
 @@clientName(SiteExtensionInfoProperties.feed_url, "feedUrl");
-@@clientName(SiteExtensionInfoProperties.installer_command_line_params,
+@@clientName(
+  SiteExtensionInfoProperties.installer_command_line_params,
   "installerCommandLineParams"
 );
-@@clientName(SiteExtensionInfoProperties.published_date_time,
+@@clientName(
+  SiteExtensionInfoProperties.published_date_time,
   "publishedDateTime"
 );
 @@clientName(SiteExtensionInfoProperties.download_count, "downloadCount");
-@@clientName(SiteExtensionInfoProperties.local_is_latest_version,
+@@clientName(
+  SiteExtensionInfoProperties.local_is_latest_version,
   "localIsLatestVersion"
 );
 @@clientName(SiteExtensionInfoProperties.local_path, "localPath");
-@@clientName(SiteExtensionInfoProperties.installed_date_time,
+@@clientName(
+  SiteExtensionInfoProperties.installed_date_time,
   "installedDateTime"
 );
 
@@ -328,107 +342,137 @@ using Microsoft.Web;
 @@flattenProperty(PrivateLinkConnectionApprovalRequestResource.properties);
 
 @@clientLocation(AppServiceEnvironmentResources.get, AppServiceEnvironments);
-@@clientLocation(AppServiceEnvironmentResources.createOrUpdate,
+@@clientLocation(
+  AppServiceEnvironmentResources.createOrUpdate,
   AppServiceEnvironments
 );
-@@clientName(AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
+@@clientName(
+  AppServiceEnvironmentResources.createOrUpdate::parameters.resource,
   "hostingEnvironmentEnvelope"
 );
 @@clientLocation(AppServiceEnvironmentResources.update, AppServiceEnvironments);
-@@clientName(AppServiceEnvironmentResources.update::parameters.properties,
+@@clientName(
+  AppServiceEnvironmentResources.update::parameters.properties,
   "hostingEnvironmentEnvelope"
 );
 @@clientLocation(AppServiceEnvironmentResources.delete, AppServiceEnvironments);
-@@clientLocation(AppServiceEnvironmentResources.listByResourceGroup,
+@@clientLocation(
+  AppServiceEnvironmentResources.listByResourceGroup,
   AppServiceEnvironments
 );
 @@clientLocation(AppServiceEnvironmentResources.list, AppServiceEnvironments);
-@@clientLocation(AppServiceEnvironmentResources.listCapacities,
+@@clientLocation(
+  AppServiceEnvironmentResources.listCapacities,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.changeVnet,
+@@clientLocation(
+  AppServiceEnvironmentResources.changeVnet,
   AppServiceEnvironments
 );
-@@clientName(AppServiceEnvironmentResources.changeVnet::parameters.body,
+@@clientName(
+  AppServiceEnvironmentResources.changeVnet::parameters.body,
   "vnetInfo"
 );
-@@clientLocation(AppServiceEnvironmentResources.listDiagnostics,
+@@clientLocation(
+  AppServiceEnvironmentResources.listDiagnostics,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.getDiagnosticsItem,
+@@clientLocation(
+  AppServiceEnvironmentResources.getDiagnosticsItem,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.getInboundNetworkDependenciesEndpoints,
+@@clientLocation(
+  AppServiceEnvironmentResources.getInboundNetworkDependenciesEndpoints,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.testUpgradeAvailableNotification,
+@@clientLocation(
+  AppServiceEnvironmentResources.testUpgradeAvailableNotification,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.upgrade,
+@@clientLocation(
+  AppServiceEnvironmentResources.upgrade,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.listOperations,
+@@clientLocation(
+  AppServiceEnvironmentResources.listOperations,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.getOutboundNetworkDependenciesEndpoints,
+@@clientLocation(
+  AppServiceEnvironmentResources.getOutboundNetworkDependenciesEndpoints,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.getPrivateLinkResources,
+@@clientLocation(
+  AppServiceEnvironmentResources.getPrivateLinkResources,
   AppServiceEnvironments
 );
 @@clientLocation(AppServiceEnvironmentResources.reboot, AppServiceEnvironments);
 @@clientLocation(AppServiceEnvironmentResources.resume, AppServiceEnvironments);
-@@clientLocation(AppServiceEnvironmentResources.listAppServicePlans,
+@@clientLocation(
+  AppServiceEnvironmentResources.listAppServicePlans,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.listWebApps,
+@@clientLocation(
+  AppServiceEnvironmentResources.listWebApps,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.suspend,
+@@clientLocation(
+  AppServiceEnvironmentResources.suspend,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.listUsages,
+@@clientLocation(
+  AppServiceEnvironmentResources.listUsages,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentRecommendations.listHistoryForHostingEnvironment,
+@@clientLocation(
+  AppServiceEnvironmentRecommendations.listHistoryForHostingEnvironment,
   Recommendations
 );
-@@clientLocation(AppServiceEnvironmentRecommendations.listRecommendedRulesForHostingEnvironment,
+@@clientLocation(
+  AppServiceEnvironmentRecommendations.listRecommendedRulesForHostingEnvironment,
   Recommendations
 );
-@@clientLocation(AppServiceEnvironmentRecommendations.disableAllForHostingEnvironment,
+@@clientLocation(
+  AppServiceEnvironmentRecommendations.disableAllForHostingEnvironment,
   Recommendations
 );
-@@clientLocation(AppServiceEnvironmentRecommendations.resetAllFiltersForHostingEnvironment,
+@@clientLocation(
+  AppServiceEnvironmentRecommendations.resetAllFiltersForHostingEnvironment,
   Recommendations
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceEnvironmentResource.properties);
 
-@@clientLocation(CustomDnsSuffixConfigurations.getAseCustomDnsSuffixConfiguration,
+@@clientLocation(
+  CustomDnsSuffixConfigurations.getAseCustomDnsSuffixConfiguration,
   AppServiceEnvironments
 );
-@@clientLocation(CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration,
+@@clientLocation(
+  CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration,
   AppServiceEnvironments
 );
-@@clientName(CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration::parameters.resource,
+@@clientName(
+  CustomDnsSuffixConfigurations.updateAseCustomDnsSuffixConfiguration::parameters.resource,
   "customDnsSuffixConfiguration"
 );
-@@clientLocation(CustomDnsSuffixConfigurations.deleteAseCustomDnsSuffixConfiguration,
+@@clientLocation(
+  CustomDnsSuffixConfigurations.deleteAseCustomDnsSuffixConfiguration,
   AppServiceEnvironments
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomDnsSuffixConfiguration.properties);
 
-@@clientLocation(AseV3NetworkingConfigurations.getAseV3NetworkingConfiguration,
+@@clientLocation(
+  AseV3NetworkingConfigurations.getAseV3NetworkingConfiguration,
   AppServiceEnvironments
 );
-@@clientLocation(AseV3NetworkingConfigurations.updateAseNetworkingConfiguration,
+@@clientLocation(
+  AseV3NetworkingConfigurations.updateAseNetworkingConfiguration,
   AppServiceEnvironments
 );
-@@clientName(AseV3NetworkingConfigurations.updateAseNetworkingConfiguration::parameters.resource,
+@@clientName(
+  AseV3NetworkingConfigurations.updateAseNetworkingConfiguration::parameters.resource,
   "aseNetworkingConfiguration"
 );
 
@@ -448,14 +492,16 @@ using Microsoft.Web;
 @@clientLocation(Sites.delete, WebApps);
 @@clientLocation(Sites.list, WebApps);
 @@clientLocation(SiteRecommendations.listHistoryForWebApp, Recommendations);
-@@clientLocation(SiteRecommendations.listRecommendedRulesForWebApp,
+@@clientLocation(
+  SiteRecommendations.listRecommendedRulesForWebApp,
   Recommendations
 );
 @@clientLocation(SiteRecommendations.disableAllForWebApp, Recommendations);
 @@clientLocation(SiteRecommendations.resetAllFiltersForWebApp, Recommendations);
 @@clientLocation(Sites.analyzeCustomHostname, WebApps);
 @@clientLocation(Sites.applySlotConfigToProduction, WebApps);
-@@clientName(Sites.applySlotConfigToProduction::parameters.body,
+@@clientName(
+  Sites.applySlotConfigToProduction::parameters.body,
   "slotSwapEntity"
 );
 @@clientLocation(Sites.backup, WebApps);
@@ -467,7 +513,8 @@ using Microsoft.Web;
 @@clientName(Sites.updateAuthSettings::parameters.body, "siteAuthSettings");
 @@clientLocation(Sites.getAuthSettings, WebApps);
 @@clientLocation(Sites.updateAzureStorageAccounts, WebApps);
-@@clientName(Sites.updateAzureStorageAccounts::parameters.body,
+@@clientName(
+  Sites.updateAzureStorageAccounts::parameters.body,
   "azureStorageAccounts"
 );
 @@clientLocation(Sites.listAzureStorageAccounts, WebApps);
@@ -476,7 +523,8 @@ using Microsoft.Web;
 @@clientLocation(Sites.deleteBackupConfiguration, WebApps);
 @@clientLocation(Sites.getBackupConfiguration, WebApps);
 @@clientLocation(Sites.updateConnectionStrings, WebApps);
-@@clientName(Sites.updateConnectionStrings::parameters.body,
+@@clientName(
+  Sites.updateConnectionStrings::parameters.body,
   "connectionStrings"
 );
 @@clientLocation(Sites.listConnectionStrings, WebApps);
@@ -523,7 +571,8 @@ using Microsoft.Web;
 @@clientLocation(Sites.listPremierAddOns, WebApps);
 @@clientLocation(Sites.getPrivateLinkResources, WebApps);
 @@clientLocation(Sites.listPublishingProfileXmlWithSecrets, WebApps);
-@@clientName(Sites.listPublishingProfileXmlWithSecrets::parameters.body,
+@@clientName(
+  Sites.listPublishingProfileXmlWithSecrets::parameters.body,
   "publishingProfileOptions"
 );
 @@clientLocation(Sites.resetProductionSlotConfig, WebApps);
@@ -535,7 +584,8 @@ using Microsoft.Web;
 @@clientLocation(Sites.restoreSnapshot, WebApps);
 @@clientName(Sites.restoreSnapshot::parameters.body, "restoreRequest");
 @@clientLocation(Sites.listSlotDifferencesFromProduction, WebApps);
-@@clientName(Sites.listSlotDifferencesFromProduction::parameters.body,
+@@clientName(
+  Sites.listSlotDifferencesFromProduction::parameters.body,
   "slotSwapEntity"
 );
 @@clientLocation(Sites.swapSlotWithProduction, WebApps);
@@ -550,7 +600,8 @@ using Microsoft.Web;
 @@clientLocation(Sites.syncFunctionTriggers, WebApps);
 @@clientLocation(Sites.listUsages, WebApps);
 @@clientLocation(Sites.deployWorkflowArtifacts, WebApps);
-@@clientName(Sites.deployWorkflowArtifacts::parameters.body,
+@@clientName(
+  Sites.deployWorkflowArtifacts::parameters.body,
   "workflowArtifacts"
 );
 @@clientLocation(Sites.listWorkflowsConnections, WebApps);
@@ -561,138 +612,176 @@ using Microsoft.Web;
 
 @@clientName(WebApps.createOrUpdateSlot::parameters.resource, "siteEnvelope");
 @@clientName(WebApps.updateSlot::parameters.properties, "siteEnvelope");
-@@clientName(WebApps.applySlotConfigurationSlot::parameters.body,
+@@clientName(
+  WebApps.applySlotConfigurationSlot::parameters.body,
   "slotSwapEntity"
 );
 @@clientName(WebApps.backupSlot::parameters.body, "request");
-@@clientName(WebApps.updateApplicationSettingsSlot::parameters.body,
+@@clientName(
+  WebApps.updateApplicationSettingsSlot::parameters.body,
   "appSettings"
 );
-@@clientName(WebApps.updateAuthSettingsSlot::parameters.body,
+@@clientName(
+  WebApps.updateAuthSettingsSlot::parameters.body,
   "siteAuthSettings"
 );
-@@clientName(WebApps.updateAzureStorageAccountsSlot::parameters.body,
+@@clientName(
+  WebApps.updateAzureStorageAccountsSlot::parameters.body,
   "azureStorageAccounts"
 );
 @@clientName(WebApps.updateBackupConfigurationSlot::parameters.body, "request");
-@@clientName(WebApps.updateConnectionStringsSlot::parameters.body,
+@@clientName(
+  WebApps.updateConnectionStringsSlot::parameters.body,
   "connectionStrings"
 );
 @@clientName(WebApps.updateMetadataSlot::parameters.body, "metadata");
-@@clientName(WebApps.updateSitePushSettingsSlot::parameters.body,
+@@clientName(
+  WebApps.updateSitePushSettingsSlot::parameters.body,
   "pushSettings"
 );
 @@clientName(WebApps.discoverBackupSlot::parameters.body, "request");
 @@clientName(WebApps.createOrUpdateHostSecretSlot::parameters.body, "key");
-@@clientName(WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
+@@clientName(
+  WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
   "publishingProfileOptions"
 );
 @@clientName(WebApps.restoreFromBackupBlobSlot::parameters.body, "request");
-@@clientName(WebApps.restoreFromDeletedAppSlot::parameters.body,
+@@clientName(
+  WebApps.restoreFromDeletedAppSlot::parameters.body,
   "restoreRequest"
 );
 @@clientName(WebApps.restoreSnapshotSlot::parameters.body, "restoreRequest");
-@@clientName(WebApps.listSlotDifferencesSlot::parameters.body,
+@@clientName(
+  WebApps.listSlotDifferencesSlot::parameters.body,
   "slotSwapEntity"
 );
 @@clientName(WebApps.swapSlotSlot::parameters.body, "slotSwapEntity");
-@@clientName(WebApps.deployWorkflowArtifactsSlot::parameters.body,
+@@clientName(
+  WebApps.deployWorkflowArtifactsSlot::parameters.body,
   "workflowArtifacts"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Site.properties);
 
 @@clientLocation(WorkerPoolResources.getMultiRolePool, AppServiceEnvironments);
-@@clientLocation(WorkerPoolResources.createOrUpdateMultiRolePool,
+@@clientLocation(
+  WorkerPoolResources.createOrUpdateMultiRolePool,
   AppServiceEnvironments
 );
-@@clientName(WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
+@@clientName(
+  WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
   "multiRolePoolEnvelope"
 );
-@@clientLocation(WorkerPoolResources.updateMultiRolePool,
+@@clientLocation(
+  WorkerPoolResources.updateMultiRolePool,
   AppServiceEnvironments
 );
-@@clientName(WorkerPoolResources.updateMultiRolePool::parameters.properties,
+@@clientName(
+  WorkerPoolResources.updateMultiRolePool::parameters.properties,
   "multiRolePoolEnvelope"
 );
-@@clientLocation(WorkerPoolResources.listMultiRolePools,
+@@clientLocation(
+  WorkerPoolResources.listMultiRolePools,
   AppServiceEnvironments
 );
-@@clientLocation(WorkerPoolResources.listMultiRolePoolInstanceMetricDefinitions,
+@@clientLocation(
+  WorkerPoolResources.listMultiRolePoolInstanceMetricDefinitions,
   AppServiceEnvironments
 );
-@@clientLocation(WorkerPoolResources.listMultiRoleMetricDefinitions,
+@@clientLocation(
+  WorkerPoolResources.listMultiRoleMetricDefinitions,
   AppServiceEnvironments
 );
-@@clientLocation(WorkerPoolResources.listMultiRolePoolSkus,
+@@clientLocation(
+  WorkerPoolResources.listMultiRolePoolSkus,
   AppServiceEnvironments
 );
-@@clientLocation(WorkerPoolResources.listMultiRoleUsages,
+@@clientLocation(
+  WorkerPoolResources.listMultiRoleUsages,
   AppServiceEnvironments
 );
-@@clientName(AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
+@@clientName(
+  AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
   "workerPoolEnvelope"
 );
-@@clientName(AppServiceEnvironments.updateWorkerPool::parameters.properties,
+@@clientName(
+  AppServiceEnvironments.updateWorkerPool::parameters.properties,
   "workerPoolEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkerPoolResource.properties);
 
-@@clientLocation(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnection,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnection,
   AppServiceEnvironments
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResources.approveOrRejectPrivateEndpointConnection,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResources.approveOrRejectPrivateEndpointConnection,
   AppServiceEnvironments
 );
-@@clientName(RemotePrivateEndpointConnectionARMResources.approveOrRejectPrivateEndpointConnection::parameters.resource,
+@@clientName(
+  RemotePrivateEndpointConnectionARMResources.approveOrRejectPrivateEndpointConnection::parameters.resource,
   "privateEndpointWrapper"
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
   AppServiceEnvironments
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnectionList,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResources.getPrivateEndpointConnectionList,
   AppServiceEnvironments
 );
-@@clientName(StaticSites.approveOrRejectPrivateEndpointConnection::parameters.resource,
+@@clientName(
+  StaticSites.approveOrRejectPrivateEndpointConnection::parameters.resource,
   "privateEndpointWrapper"
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnection,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnection,
   WebApps
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection,
   WebApps
 );
-@@clientName(RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection::parameters.resource,
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.approveOrRejectPrivateEndpointConnection::parameters.resource,
   "privateEndpointWrapper"
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
   WebApps
 );
-@@clientLocation(RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
+@@clientLocation(
+  RemotePrivateEndpointConnectionARMResourceOperationGroup.getPrivateEndpointConnectionList,
   WebApps
 );
-@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
+@@clientLocation(
+  PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
   WebApps
 );
-@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
+@@clientLocation(
+  PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
   WebApps
 );
-@@clientName(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
+@@clientName(
+  PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
   "privateEndpointWrapper"
 );
-@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+@@clientLocation(
+  PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
   WebApps
 );
-@@clientLocation(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
+@@clientLocation(
+  PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionListSlot,
   WebApps
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RemotePrivateEndpointConnectionARMResource.properties);
 
-@@clientName(AppServicePlans.createOrUpdate::parameters.resource,
+@@clientName(
+  AppServicePlans.createOrUpdate::parameters.resource,
   "appServicePlan"
 );
 @@clientName(AppServicePlans.update::parameters.properties, "appServicePlan");
@@ -703,48 +792,61 @@ using Microsoft.Web;
 @@clientLocation(HybridConnections.getHybridConnection, AppServicePlans);
 @@clientLocation(HybridConnections.deleteHybridConnection, AppServicePlans);
 @@clientLocation(HybridConnections.listHybridConnectionKeys, AppServicePlans);
-@@clientLocation(HybridConnections.listWebAppsByHybridConnection,
+@@clientLocation(
+  HybridConnections.listWebAppsByHybridConnection,
   AppServicePlans
 );
 @@clientLocation(HybridConnectionOperationGroup.getHybridConnection, WebApps);
-@@clientLocation(HybridConnectionOperationGroup.createOrUpdateHybridConnection,
+@@clientLocation(
+  HybridConnectionOperationGroup.createOrUpdateHybridConnection,
   WebApps
 );
-@@clientName(HybridConnectionOperationGroup.createOrUpdateHybridConnection::parameters.resource,
+@@clientName(
+  HybridConnectionOperationGroup.createOrUpdateHybridConnection::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(HybridConnectionOperationGroup.updateHybridConnection,
+@@clientLocation(
+  HybridConnectionOperationGroup.updateHybridConnection,
   WebApps
 );
-@@clientName(HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
+@@clientName(
+  HybridConnectionOperationGroup.updateHybridConnection::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(HybridConnectionOperationGroup.deleteHybridConnection,
+@@clientLocation(
+  HybridConnectionOperationGroup.deleteHybridConnection,
   WebApps
 );
-@@clientLocation(HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
+@@clientLocation(
+  HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
   WebApps
 );
-@@clientLocation(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
+@@clientLocation(
+  HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
   WebApps
 );
-@@clientName(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
+@@clientName(
+  HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
+@@clientLocation(
+  HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
   WebApps
 );
-@@clientName(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
+@@clientName(
+  HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
+@@clientLocation(
+  HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
   WebApps
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HybridConnection.properties);
 
-@@clientLocation(HybridConnectionLimitsOperationGroup.getHybridConnectionPlanLimit,
+@@clientLocation(
+  HybridConnectionLimitsOperationGroup.getHybridConnectionPlanLimit,
   AppServicePlans
 );
 
@@ -754,33 +856,42 @@ using Microsoft.Web;
 @@clientLocation(VnetInfoResources.getVnetFromServerFarm, AppServicePlans);
 @@clientLocation(VnetInfoResources.listVnets, AppServicePlans);
 @@clientLocation(VnetInfoResourceOperationGroup.getVnetConnectionSlot, WebApps);
-@@clientLocation(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
+@@clientLocation(
+  VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
   WebApps
 );
-@@clientName(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
+@@clientName(
+  VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
+@@clientLocation(
+  VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
   WebApps
 );
-@@clientName(VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
+@@clientName(
+  VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
+@@clientLocation(
+  VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
   WebApps
 );
-@@clientLocation(VnetInfoResourceOperationGroup.listVnetConnectionsSlot,
+@@clientLocation(
+  VnetInfoResourceOperationGroup.listVnetConnectionsSlot,
   WebApps
 );
 @@clientLocation(VnetConnectionOperationGroup.getVnetConnection, WebApps);
-@@clientLocation(VnetConnectionOperationGroup.createOrUpdateVnetConnection,
+@@clientLocation(
+  VnetConnectionOperationGroup.createOrUpdateVnetConnection,
   WebApps
 );
-@@clientName(VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
+@@clientName(
+  VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
   "connectionEnvelope"
 );
 @@clientLocation(VnetConnectionOperationGroup.updateVnetConnection, WebApps);
-@@clientName(VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
+@@clientName(
+  VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
   "connectionEnvelope"
 );
 @@clientLocation(VnetConnectionOperationGroup.deleteVnetConnection, WebApps);
@@ -802,62 +913,79 @@ using Microsoft.Web;
 
 @@clientLocation(VnetGateways.getVnetGateway, AppServicePlans);
 @@clientLocation(VnetGateways.updateVnetGateway, AppServicePlans);
-@@clientName(VnetGateways.updateVnetGateway::parameters.resource,
+@@clientName(
+  VnetGateways.updateVnetGateway::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
+@@clientLocation(
+  VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
   WebApps
 );
-@@clientLocation(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
+@@clientLocation(
+  VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
   WebApps
 );
-@@clientName(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
+@@clientName(
+  VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
+@@clientLocation(
+  VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
   WebApps
 );
-@@clientName(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
+@@clientName(
+  VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(VnetConnectionGatewayOperationGroup.getVnetConnectionGateway,
+@@clientLocation(
+  VnetConnectionGatewayOperationGroup.getVnetConnectionGateway,
   WebApps
 );
-@@clientLocation(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway,
+@@clientLocation(
+  VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway,
   WebApps
 );
-@@clientName(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
+@@clientName(
+  VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway,
+@@clientLocation(
+  VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway,
   WebApps
 );
-@@clientName(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
+@@clientName(
+  VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
   "connectionEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(VnetGateway.properties);
 
-@@clientName(Certificates.createOrUpdate::parameters.resource,
+@@clientName(
+  Certificates.createOrUpdate::parameters.resource,
   "certificateEnvelope"
 );
 @@clientName(Certificates.update::parameters.properties, "certificateEnvelope");
-@@clientName(SiteCertificates.createOrUpdate::parameters.resource,
+@@clientName(
+  SiteCertificates.createOrUpdate::parameters.resource,
   "certificateEnvelope"
 );
-@@clientName(SiteCertificates.update::parameters.properties,
+@@clientName(
+  SiteCertificates.update::parameters.properties,
   "certificateEnvelope"
 );
 @@clientLocation(CertificateOperationGroup.getSlot, SiteCertificates);
-@@clientLocation(CertificateOperationGroup.createOrUpdateSlot,
+@@clientLocation(
+  CertificateOperationGroup.createOrUpdateSlot,
   SiteCertificates
 );
-@@clientName(CertificateOperationGroup.createOrUpdateSlot::parameters.resource,
+@@clientName(
+  CertificateOperationGroup.createOrUpdateSlot::parameters.resource,
   "certificateEnvelope"
 );
 @@clientLocation(CertificateOperationGroup.updateSlot, SiteCertificates);
-@@clientName(CertificateOperationGroup.updateSlot::parameters.properties,
+@@clientName(
+  CertificateOperationGroup.updateSlot::parameters.properties,
   "certificateEnvelope"
 );
 @@clientLocation(CertificateOperationGroup.deleteSlot, SiteCertificates);
@@ -873,16 +1001,20 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DeletedSite.properties);
 
-@@clientLocation(DetectorResponses.getHostingEnvironmentDetectorResponse,
+@@clientLocation(
+  DetectorResponses.getHostingEnvironmentDetectorResponse,
   Diagnostics
 );
-@@clientLocation(DetectorResponses.listHostingEnvironmentDetectorResponses,
+@@clientLocation(
+  DetectorResponses.listHostingEnvironmentDetectorResponses,
   Diagnostics
 );
-@@clientLocation(DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
+@@clientLocation(
+  DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
   Diagnostics
 );
-@@clientLocation(DetectorResponseOperationGroup.listSiteDetectorResponsesSlot,
+@@clientLocation(
+  DetectorResponseOperationGroup.listSiteDetectorResponsesSlot,
   Diagnostics
 );
 
@@ -890,13 +1022,16 @@ using Microsoft.Web;
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(DiagnosticCategories.getSiteDiagnosticCategory, Diagnostics);
-@@clientLocation(DiagnosticCategories.listSiteDiagnosticCategories,
+@@clientLocation(
+  DiagnosticCategories.listSiteDiagnosticCategories,
   Diagnostics
 );
-@@clientLocation(DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
+@@clientLocation(
+  DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
   Diagnostics
 );
-@@clientLocation(DiagnosticCategoryOperationGroup.listSiteDiagnosticCategoriesSlot,
+@@clientLocation(
+  DiagnosticCategoryOperationGroup.listSiteDiagnosticCategoriesSlot,
   Diagnostics
 );
 
@@ -906,13 +1041,16 @@ using Microsoft.Web;
 @@clientLocation(AnalysisDefinitions.getSiteAnalysis, Diagnostics);
 @@clientLocation(AnalysisDefinitions.listSiteAnalyses, Diagnostics);
 @@clientLocation(AnalysisDefinitions.executeSiteAnalysis, Diagnostics);
-@@clientLocation(AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
+@@clientLocation(
+  AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
   Diagnostics
 );
-@@clientLocation(AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
+@@clientLocation(
+  AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
   Diagnostics
 );
-@@clientLocation(AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
+@@clientLocation(
+  AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
   Diagnostics
 );
 
@@ -922,49 +1060,60 @@ using Microsoft.Web;
 @@clientLocation(DetectorDefinitionResources.getSiteDetector, Diagnostics);
 @@clientLocation(DetectorDefinitionResources.listSiteDetectors, Diagnostics);
 @@clientLocation(DetectorDefinitionResources.executeSiteDetector, Diagnostics);
-@@clientLocation(DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
+@@clientLocation(
+  DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
   Diagnostics
 );
-@@clientLocation(DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
+@@clientLocation(
+  DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
   Diagnostics
 );
-@@clientLocation(DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
+@@clientLocation(
+  DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
   Diagnostics
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorDefinitionResource.properties);
 
-@@clientName(KubeEnvironments.createOrUpdate::parameters.resource,
+@@clientName(
+  KubeEnvironments.createOrUpdate::parameters.resource,
   "kubeEnvironmentEnvelope"
 );
-@@clientName(KubeEnvironments.update::parameters.properties,
+@@clientName(
+  KubeEnvironments.update::parameters.properties,
   "kubeEnvironmentEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KubeEnvironment.properties);
 
-@@clientLocation(RecommendationRules.getRuleDetailsByHostingEnvironment,
+@@clientLocation(
+  RecommendationRules.getRuleDetailsByHostingEnvironment,
   Recommendations
 );
-@@clientLocation(RecommendationRules.disableRecommendationForHostingEnvironment,
+@@clientLocation(
+  RecommendationRules.disableRecommendationForHostingEnvironment,
   Recommendations
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RecommendationRule.properties);
 
-@@clientLocation(ResourceHealthMetadataOperationGroup.getBySite,
+@@clientLocation(
+  ResourceHealthMetadataOperationGroup.getBySite,
   "ResourceHealthMetadata"
 );
-@@clientLocation(ResourceHealthMetadataOperationGroup.listBySite,
+@@clientLocation(
+  ResourceHealthMetadataOperationGroup.listBySite,
   "ResourceHealthMetadata"
 );
-@@clientLocation(BySiteSlotOperationGroup.getBySiteSlot,
+@@clientLocation(
+  BySiteSlotOperationGroup.getBySiteSlot,
   "ResourceHealthMetadata"
 );
-@@clientLocation(BySiteSlotOperationGroup.listBySiteSlot,
+@@clientLocation(
+  BySiteSlotOperationGroup.listBySiteSlot,
   "ResourceHealthMetadata"
 );
 
@@ -980,7 +1129,8 @@ using Microsoft.Web;
 
 @@clientLocation(SourceControls.getSourceControl, Microsoft.Web);
 @@clientLocation(SourceControls.updateSourceControl, Microsoft.Web);
-@@clientName(SourceControls.updateSourceControl::parameters.resource,
+@@clientName(
+  SourceControls.updateSourceControl::parameters.resource,
   "requestMessage"
 );
 @@clientLocation(SourceControls.listSourceControls, Microsoft.Web);
@@ -990,34 +1140,43 @@ using Microsoft.Web;
 
 @@clientLocation(Identifiers.getDomainOwnershipIdentifier, WebApps);
 @@clientLocation(Identifiers.createOrUpdateDomainOwnershipIdentifier, WebApps);
-@@clientName(Identifiers.createOrUpdateDomainOwnershipIdentifier::parameters.resource,
+@@clientName(
+  Identifiers.createOrUpdateDomainOwnershipIdentifier::parameters.resource,
   "domainOwnershipIdentifier"
 );
 @@clientLocation(Identifiers.updateDomainOwnershipIdentifier, WebApps);
-@@clientName(Identifiers.updateDomainOwnershipIdentifier::parameters.properties,
+@@clientName(
+  Identifiers.updateDomainOwnershipIdentifier::parameters.properties,
   "domainOwnershipIdentifier"
 );
 @@clientLocation(Identifiers.deleteDomainOwnershipIdentifier, WebApps);
 @@clientLocation(Identifiers.listDomainOwnershipIdentifiers, WebApps);
-@@clientLocation(IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
+@@clientLocation(
+  IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
   WebApps
 );
-@@clientLocation(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
+@@clientLocation(
+  IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
   WebApps
 );
-@@clientName(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot::parameters.resource,
+@@clientName(
+  IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot::parameters.resource,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
+@@clientLocation(
+  IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
   WebApps
 );
-@@clientName(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot::parameters.properties,
+@@clientName(
+  IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot::parameters.properties,
   "domainOwnershipIdentifier"
 );
-@@clientLocation(IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
+@@clientLocation(
+  IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
   WebApps
 );
-@@clientLocation(IdentifierOperationGroup.listDomainOwnershipIdentifiersSlot,
+@@clientLocation(
+  IdentifierOperationGroup.listDomainOwnershipIdentifiersSlot,
   WebApps
 );
 
@@ -1026,15 +1185,18 @@ using Microsoft.Web;
 
 @@clientLocation(StaticSiteARMResources.getStaticSite, StaticSites);
 @@clientLocation(StaticSiteARMResources.createOrUpdateStaticSite, StaticSites);
-@@clientName(StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
   "staticSiteEnvelope"
 );
 @@clientLocation(StaticSiteARMResources.updateStaticSite, StaticSites);
-@@clientName(StaticSiteARMResources.updateStaticSite::parameters.properties,
+@@clientName(
+  StaticSiteARMResources.updateStaticSite::parameters.properties,
   "staticSiteEnvelope"
 );
 @@clientLocation(StaticSiteARMResources.deleteStaticSite, StaticSites);
-@@clientLocation(StaticSiteARMResources.getStaticSitesByResourceGroup,
+@@clientLocation(
+  StaticSiteARMResources.getStaticSitesByResourceGroup,
   StaticSites
 );
 @@clientLocation(StaticSiteARMResources.list, StaticSites);
@@ -1042,46 +1204,58 @@ using Microsoft.Web;
 @@clientLocation(StaticSiteARMResources.deleteStaticSiteUser, StaticSites);
 @@clientLocation(StaticSiteARMResources.updateStaticSiteUser, StaticSites);
 
-@@clientLocation(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings,
+@@clientLocation(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings,
   StaticSites
 );
-@@clientName(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
   "appSettings"
 );
-@@clientLocation(StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings,
+@@clientLocation(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings,
   StaticSites
 );
-@@clientName(StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
   "appSettings"
 );
-@@clientLocation(StaticSiteARMResources.createUserRolesInvitationLink,
+@@clientLocation(
+  StaticSiteARMResources.createUserRolesInvitationLink,
   StaticSites
 );
-@@clientName(StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
+@@clientName(
+  StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
   "staticSiteUserRolesInvitationEnvelope"
 );
 @@clientLocation(StaticSiteARMResources.detachStaticSite, StaticSites);
 @@clientLocation(StaticSiteARMResources.listStaticSiteFunctions, StaticSites);
 @@clientLocation(StaticSiteARMResources.listStaticSiteAppSettings, StaticSites);
-@@clientLocation(StaticSiteARMResources.listStaticSiteConfiguredRoles,
+@@clientLocation(
+  StaticSiteARMResources.listStaticSiteConfiguredRoles,
   StaticSites
 );
-@@clientLocation(StaticSiteARMResources.listStaticSiteFunctionAppSettings,
+@@clientLocation(
+  StaticSiteARMResources.listStaticSiteFunctionAppSettings,
   StaticSites
 );
 @@clientLocation(StaticSiteARMResources.listStaticSiteSecrets, StaticSites);
 @@clientLocation(StaticSiteARMResources.getPrivateLinkResources, StaticSites);
 @@clientLocation(StaticSiteARMResources.resetStaticSiteApiKey, StaticSites);
-@@clientName(StaticSiteARMResources.resetStaticSiteApiKey::parameters.body,
+@@clientName(
+  StaticSiteARMResources.resetStaticSiteApiKey::parameters.body,
   "resetPropertiesEnvelope"
 );
-@@clientLocation(StaticSiteARMResources.getDatabaseConnectionsWithDetails,
+@@clientLocation(
+  StaticSiteARMResources.getDatabaseConnectionsWithDetails,
   StaticSites
 );
-@@clientLocation(StaticSiteARMResources.createZipDeploymentForStaticSite,
+@@clientLocation(
+  StaticSiteARMResources.createZipDeploymentForStaticSite,
   StaticSites
 );
-@@clientName(StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
+@@clientName(
+  StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
   "staticSiteZipDeploymentEnvelope"
 );
 
@@ -1089,38 +1263,49 @@ using Microsoft.Web;
 @@flattenProperty(StaticSiteARMResource.properties);
 
 @@clientLocation(StaticSiteBuildARMResources.getStaticSiteBuild, StaticSites);
-@@clientLocation(StaticSiteBuildARMResources.deleteStaticSiteBuild,
+@@clientLocation(
+  StaticSiteBuildARMResources.deleteStaticSiteBuild,
   StaticSites
 );
 @@clientLocation(StaticSiteBuildARMResources.getStaticSiteBuilds, StaticSites);
-@@clientLocation(StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings,
+@@clientLocation(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings,
   StaticSites
 );
-@@clientName(StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings::parameters.body,
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings::parameters.body,
   "appSettings"
 );
-@@clientLocation(StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings,
+@@clientLocation(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings,
   StaticSites
 );
-@@clientName(StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings::parameters.body,
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings::parameters.body,
   "appSettings"
 );
-@@clientLocation(StaticSiteBuildARMResources.listStaticSiteBuildFunctions,
+@@clientLocation(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctions,
   StaticSites
 );
-@@clientLocation(StaticSiteBuildARMResources.listStaticSiteBuildAppSettings,
+@@clientLocation(
+  StaticSiteBuildARMResources.listStaticSiteBuildAppSettings,
   StaticSites
 );
-@@clientLocation(StaticSiteBuildARMResources.listStaticSiteBuildFunctionAppSettings,
+@@clientLocation(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctionAppSettings,
   StaticSites
 );
-@@clientLocation(StaticSiteBuildARMResources.getBuildDatabaseConnectionsWithDetails,
+@@clientLocation(
+  StaticSiteBuildARMResources.getBuildDatabaseConnectionsWithDetails,
   StaticSites
 );
-@@clientLocation(StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild,
+@@clientLocation(
+  StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild,
   StaticSites
 );
-@@clientName(StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild::parameters.body,
+@@clientName(
+  StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild::parameters.body,
   "staticSiteZipDeploymentEnvelope"
 );
 
@@ -1128,166 +1313,214 @@ using Microsoft.Web;
 @@flattenProperty(StaticSiteBuildARMResource.properties);
 
 @@clientLocation(DatabaseConnections.getBuildDatabaseConnection, StaticSites);
-@@clientLocation(DatabaseConnections.createOrUpdateBuildDatabaseConnection,
+@@clientLocation(
+  DatabaseConnections.createOrUpdateBuildDatabaseConnection,
   StaticSites
 );
-@@clientName(DatabaseConnections.createOrUpdateBuildDatabaseConnection::parameters.resource,
+@@clientName(
+  DatabaseConnections.createOrUpdateBuildDatabaseConnection::parameters.resource,
   "databaseConnectionRequestEnvelope"
 );
-@@clientLocation(DatabaseConnections.updateBuildDatabaseConnection,
+@@clientLocation(
+  DatabaseConnections.updateBuildDatabaseConnection,
   StaticSites
 );
-@@clientName(DatabaseConnections.updateBuildDatabaseConnection::parameters.properties,
+@@clientName(
+  DatabaseConnections.updateBuildDatabaseConnection::parameters.properties,
   "databaseConnectionRequestEnvelope"
 );
-@@clientLocation(DatabaseConnections.deleteBuildDatabaseConnection,
+@@clientLocation(
+  DatabaseConnections.deleteBuildDatabaseConnection,
   StaticSites
 );
 @@clientLocation(DatabaseConnections.getBuildDatabaseConnections, StaticSites);
-@@clientLocation(DatabaseConnections.getBuildDatabaseConnectionWithDetails,
+@@clientLocation(
+  DatabaseConnections.getBuildDatabaseConnectionWithDetails,
   StaticSites
 );
-@@clientLocation(DatabaseConnectionOperationGroup.getDatabaseConnection,
+@@clientLocation(
+  DatabaseConnectionOperationGroup.getDatabaseConnection,
   StaticSites
 );
-@@clientLocation(DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection,
+@@clientLocation(
+  DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection,
   StaticSites
 );
-@@clientName(DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection::parameters.resource,
+@@clientName(
+  DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection::parameters.resource,
   "databaseConnectionRequestEnvelope"
 );
-@@clientLocation(DatabaseConnectionOperationGroup.updateDatabaseConnection,
+@@clientLocation(
+  DatabaseConnectionOperationGroup.updateDatabaseConnection,
   StaticSites
 );
-@@clientName(DatabaseConnectionOperationGroup.updateDatabaseConnection::parameters.properties,
+@@clientName(
+  DatabaseConnectionOperationGroup.updateDatabaseConnection::parameters.properties,
   "databaseConnectionRequestEnvelope"
 );
-@@clientLocation(DatabaseConnectionOperationGroup.deleteDatabaseConnection,
+@@clientLocation(
+  DatabaseConnectionOperationGroup.deleteDatabaseConnection,
   StaticSites
 );
-@@clientLocation(DatabaseConnectionOperationGroup.getDatabaseConnections,
+@@clientLocation(
+  DatabaseConnectionOperationGroup.getDatabaseConnections,
   StaticSites
 );
-@@clientLocation(DatabaseConnectionOperationGroup.getDatabaseConnectionWithDetails,
+@@clientLocation(
+  DatabaseConnectionOperationGroup.getDatabaseConnectionWithDetails,
   StaticSites
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DatabaseConnection.properties);
 
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppForStaticSiteBuild,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppForStaticSiteBuild,
   StaticSites
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild,
   StaticSites
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild::parameters.resource,
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild::parameters.resource,
   "staticSiteUserProvidedFunctionEnvelope"
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResources.detachUserProvidedFunctionAppFromStaticSiteBuild,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResources.detachUserProvidedFunctionAppFromStaticSiteBuild,
   StaticSites
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSiteBuild,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResources.getUserProvidedFunctionAppsForStaticSiteBuild,
   StaticSites
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppForStaticSite,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppForStaticSite,
   StaticSites
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite,
   StaticSites
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite::parameters.resource,
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite::parameters.resource,
   "staticSiteUserProvidedFunctionEnvelope"
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.detachUserProvidedFunctionAppFromStaticSite,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.detachUserProvidedFunctionAppFromStaticSite,
   StaticSites
 );
-@@clientLocation(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
+@@clientLocation(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.getUserProvidedFunctionAppsForStaticSite,
   StaticSites
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteUserProvidedFunctionAppARMResource.properties);
 
-@@clientLocation(StaticSiteBasicAuthPropertiesARMResources.getBasicAuth,
+@@clientLocation(
+  StaticSiteBasicAuthPropertiesARMResources.getBasicAuth,
   StaticSites
 );
-@@clientLocation(StaticSiteBasicAuthPropertiesARMResources.createOrUpdateBasicAuth,
+@@clientLocation(
+  StaticSiteBasicAuthPropertiesARMResources.createOrUpdateBasicAuth,
   StaticSites
 );
-@@clientName(StaticSiteBasicAuthPropertiesARMResources.createOrUpdateBasicAuth::parameters.resource,
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResources.createOrUpdateBasicAuth::parameters.resource,
   "basicAuthEnvelope"
 );
-@@clientLocation(StaticSiteBasicAuthPropertiesARMResources.listBasicAuth,
+@@clientLocation(
+  StaticSiteBasicAuthPropertiesARMResources.listBasicAuth,
   StaticSites
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteBasicAuthPropertiesARMResource.properties);
 
-@@clientLocation(StaticSiteCustomDomainOverviewARMResources.getStaticSiteCustomDomain,
+@@clientLocation(
+  StaticSiteCustomDomainOverviewARMResources.getStaticSiteCustomDomain,
   StaticSites
 );
-@@clientLocation(StaticSiteCustomDomainOverviewARMResources.createOrUpdateStaticSiteCustomDomain,
+@@clientLocation(
+  StaticSiteCustomDomainOverviewARMResources.createOrUpdateStaticSiteCustomDomain,
   StaticSites
 );
-@@clientName(StaticSiteCustomDomainOverviewARMResources.createOrUpdateStaticSiteCustomDomain::parameters.resource,
+@@clientName(
+  StaticSiteCustomDomainOverviewARMResources.createOrUpdateStaticSiteCustomDomain::parameters.resource,
   "staticSiteCustomDomainRequestPropertiesEnvelope"
 );
-@@clientLocation(StaticSiteCustomDomainOverviewARMResources.deleteStaticSiteCustomDomain,
+@@clientLocation(
+  StaticSiteCustomDomainOverviewARMResources.deleteStaticSiteCustomDomain,
   StaticSites
 );
-@@clientLocation(StaticSiteCustomDomainOverviewARMResources.listStaticSiteCustomDomains,
+@@clientLocation(
+  StaticSiteCustomDomainOverviewARMResources.listStaticSiteCustomDomains,
   StaticSites
 );
-@@clientLocation(StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite,
+@@clientLocation(
+  StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite,
   StaticSites
 );
-@@clientName(StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite::parameters.body,
+@@clientName(
+  StaticSiteCustomDomainOverviewARMResources.validateCustomDomainCanBeAddedToStaticSite::parameters.body,
   "staticSiteCustomDomainRequestPropertiesEnvelope"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(StaticSiteCustomDomainOverviewARMResource.properties);
 
-@@clientLocation(StaticSiteLinkedBackendARMResources.getLinkedBackend,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResources.getLinkedBackend,
   StaticSites
 );
 @@clientLocation(StaticSiteLinkedBackendARMResources.linkBackend, StaticSites);
-@@clientName(StaticSiteLinkedBackendARMResources.linkBackend::parameters.resource,
+@@clientName(
+  StaticSiteLinkedBackendARMResources.linkBackend::parameters.resource,
   "staticSiteLinkedBackendEnvelope"
 );
-@@clientLocation(StaticSiteLinkedBackendARMResources.unlinkBackend,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResources.unlinkBackend,
   StaticSites
 );
-@@clientLocation(StaticSiteLinkedBackendARMResources.getLinkedBackends,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResources.getLinkedBackends,
   StaticSites
 );
-@@clientLocation(StaticSiteLinkedBackendARMResources.validateBackend,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResources.validateBackend,
   StaticSites
 );
-@@clientName(StaticSiteLinkedBackendARMResources.validateBackend::parameters.body,
+@@clientName(
+  StaticSiteLinkedBackendARMResources.validateBackend::parameters.body,
   "staticSiteLinkedBackendEnvelope"
 );
-@@clientLocation(StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendForBuild,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendForBuild,
   StaticSites
 );
-@@clientLocation(StaticSiteLinkedBackendARMResourceOperationGroup.linkBackendToBuild,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResourceOperationGroup.linkBackendToBuild,
   StaticSites
 );
-@@clientName(StaticSiteLinkedBackendARMResourceOperationGroup.linkBackendToBuild::parameters.resource,
+@@clientName(
+  StaticSiteLinkedBackendARMResourceOperationGroup.linkBackendToBuild::parameters.resource,
   "staticSiteLinkedBackendEnvelope"
 );
-@@clientLocation(StaticSiteLinkedBackendARMResourceOperationGroup.unlinkBackendFromBuild,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResourceOperationGroup.unlinkBackendFromBuild,
   StaticSites
 );
-@@clientLocation(StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendsForBuild,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResourceOperationGroup.getLinkedBackendsForBuild,
   StaticSites
 );
-@@clientLocation(StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild,
+@@clientLocation(
+  StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild,
   StaticSites
 );
-@@clientName(StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild::parameters.body,
+@@clientName(
+  StaticSiteLinkedBackendARMResourceOperationGroup.validateBackendForBuild::parameters.body,
   "staticSiteLinkedBackendEnvelope"
 );
 
@@ -1305,7 +1538,8 @@ using Microsoft.Web;
 @@clientLocation(BackupItemOperationGroup.deleteBackupSlot, WebApps);
 @@clientLocation(BackupItemOperationGroup.listBackupsSlot, WebApps);
 @@clientLocation(BackupItemOperationGroup.listBackupStatusSecretsSlot, WebApps);
-@@clientName(BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
+@@clientName(
+  BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
   "request"
 );
 @@clientLocation(BackupItemOperationGroup.restoreSlot, WebApps);
@@ -1314,46 +1548,60 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BackupItem.properties);
 
-@@clientLocation(CsmPublishingCredentialsPoliciesEntities.getFtpAllowed,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntities.getFtpAllowed,
   WebApps
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed,
   WebApps
 );
-@@clientName(CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed::parameters.resource,
+@@clientName(
+  CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed::parameters.resource,
   "csmPublishingAccessPoliciesEntity"
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntities.listBasicPublishingCredentialsPolicies,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntities.listBasicPublishingCredentialsPolicies,
   WebApps
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.getScmAllowed,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityOperationGroup.getScmAllowed,
   WebApps
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed,
   WebApps
 );
-@@clientName(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
+@@clientName(
+  CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
   "csmPublishingAccessPoliciesEntity"
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.getFtpAllowedSlot,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.getFtpAllowedSlot,
   WebApps
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot,
   WebApps
 );
-@@clientName(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
+@@clientName(
+  CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
   "csmPublishingAccessPoliciesEntity"
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.listBasicPublishingCredentialsPoliciesSlot,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.listBasicPublishingCredentialsPoliciesSlot,
   WebApps
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.getScmAllowedSlot,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.getScmAllowedSlot,
   WebApps
 );
-@@clientLocation(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot,
+@@clientLocation(
+  CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot,
   WebApps
 );
-@@clientName(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
+@@clientName(
+  CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
   "csmPublishingAccessPoliciesEntity"
 );
 
@@ -1362,46 +1610,59 @@ using Microsoft.Web;
 
 @@clientLocation(SiteConfigResources.getConfiguration, WebApps);
 @@clientLocation(SiteConfigResources.createOrUpdateConfiguration, WebApps);
-@@clientName(SiteConfigResources.createOrUpdateConfiguration::parameters.resource,
+@@clientName(
+  SiteConfigResources.createOrUpdateConfiguration::parameters.resource,
   "siteConfig"
 );
 @@clientLocation(SiteConfigResources.updateConfiguration, WebApps);
-@@clientName(SiteConfigResources.updateConfiguration::parameters.properties,
+@@clientName(
+  SiteConfigResources.updateConfiguration::parameters.properties,
   "siteConfig"
 );
 @@clientLocation(SiteConfigResources.listConfigurationSnapshotInfo, WebApps);
-@@clientLocation(SiteConfigResourceOperationGroup.getConfigurationSnapshot,
+@@clientLocation(
+  SiteConfigResourceOperationGroup.getConfigurationSnapshot,
   WebApps
 );
 @@clientLocation(SiteConfigResourceOperationGroup.listConfigurations, WebApps);
-@@clientLocation(SiteConfigResourceOperationGroup.recoverSiteConfigurationSnapshot,
+@@clientLocation(
+  SiteConfigResourceOperationGroup.recoverSiteConfigurationSnapshot,
   WebApps
 );
-@@clientLocation(SiteConfigSlotResourceOperationGroup.getConfigurationSlot,
+@@clientLocation(
+  SiteConfigSlotResourceOperationGroup.getConfigurationSlot,
   WebApps
 );
-@@clientLocation(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot,
+@@clientLocation(
+  SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot,
   WebApps
 );
-@@clientName(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
+@@clientName(
+  SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
   "siteConfig"
 );
-@@clientLocation(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot,
+@@clientLocation(
+  SiteConfigSlotResourceOperationGroup.updateConfigurationSlot,
   WebApps
 );
-@@clientName(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
+@@clientName(
+  SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
   "siteConfig"
 );
-@@clientLocation(SiteConfigSlotResourceOperationGroup.listConfigurationSnapshotInfoSlot,
+@@clientLocation(
+  SiteConfigSlotResourceOperationGroup.listConfigurationSnapshotInfoSlot,
   WebApps
 );
-@@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
+@@clientLocation(
+  SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
   WebApps
 );
-@@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
+@@clientLocation(
+  SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
   WebApps
 );
-@@clientLocation(SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
+@@clientLocation(
+  SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
   WebApps
 );
 
@@ -1410,48 +1671,61 @@ using Microsoft.Web;
 
 @@clientLocation(SiteAuthSettingsV2s.getAuthSettingsV2WithoutSecrets, WebApps);
 @@clientLocation(SiteAuthSettingsV2s.updateAuthSettingsV2, WebApps);
-@@clientName(SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
+@@clientName(
+  SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
   "siteAuthSettingsV2"
 );
 @@clientLocation(SiteAuthSettingsV2s.getAuthSettingsV2, WebApps);
-@@clientLocation(SiteAuthSettingsV2OperationGroup.getAuthSettingsV2WithoutSecretsSlot,
+@@clientLocation(
+  SiteAuthSettingsV2OperationGroup.getAuthSettingsV2WithoutSecretsSlot,
   WebApps
 );
-@@clientLocation(SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot,
+@@clientLocation(
+  SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot,
   WebApps
 );
-@@clientName(SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
+@@clientName(
+  SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
   "siteAuthSettingsV2"
 );
-@@clientLocation(SiteAuthSettingsV2OperationGroup.getAuthSettingsV2Slot,
+@@clientLocation(
+  SiteAuthSettingsV2OperationGroup.getAuthSettingsV2Slot,
   WebApps
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteAuthSettingsV2.properties);
 
-@@clientLocation(AppSettingKeyVaultReference.getAppSettingKeyVaultReference,
+@@clientLocation(
+  AppSettingKeyVaultReference.getAppSettingKeyVaultReference,
   WebApps
 );
-@@clientLocation(AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
+@@clientLocation(
+  AppSettingKeyVaultReference.getAppSettingsKeyVaultReferences,
   WebApps
 );
-@@clientLocation(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReference,
+@@clientLocation(
+  SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReference,
   WebApps
 );
-@@clientLocation(SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
+@@clientLocation(
+  SiteConnectionStringKeyVaultReference.getSiteConnectionStringKeyVaultReferences,
   WebApps
 );
-@@clientLocation(AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
+@@clientLocation(
+  AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
   WebApps
 );
-@@clientLocation(AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
+@@clientLocation(
+  AppSettingKeyVaultReferenceSlot.getAppSettingsKeyVaultReferencesSlot,
   WebApps
 );
-@@clientLocation(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
+@@clientLocation(
+  SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
   WebApps
 );
-@@clientLocation(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
+@@clientLocation(
+  SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
   WebApps
 );
 
@@ -1460,16 +1734,20 @@ using Microsoft.Web;
 
 @@clientLocation(SiteLogsConfigs.getDiagnosticLogsConfiguration, WebApps);
 @@clientLocation(SiteLogsConfigs.updateDiagnosticLogsConfig, WebApps);
-@@clientName(SiteLogsConfigs.updateDiagnosticLogsConfig::parameters.resource,
+@@clientName(
+  SiteLogsConfigs.updateDiagnosticLogsConfig::parameters.resource,
   "siteLogsConfig"
 );
-@@clientLocation(SiteLogsConfigOperationGroup.getDiagnosticLogsConfigurationSlot,
+@@clientLocation(
+  SiteLogsConfigOperationGroup.getDiagnosticLogsConfigurationSlot,
   WebApps
 );
-@@clientLocation(SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot,
+@@clientLocation(
+  SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot,
   WebApps
 );
-@@clientName(SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
+@@clientName(
+  SiteLogsConfigOperationGroup.updateDiagnosticLogsConfigSlot::parameters.resource,
   "siteLogsConfig"
 );
 
@@ -1477,10 +1755,12 @@ using Microsoft.Web;
 @@flattenProperty(SiteLogsConfig.properties);
 
 @@clientLocation(SlotConfigNamesResources.listSlotConfigurationNames, WebApps);
-@@clientLocation(SlotConfigNamesResources.updateSlotConfigurationNames,
+@@clientLocation(
+  SlotConfigNamesResources.updateSlotConfigurationNames,
   WebApps
 );
-@@clientName(SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
+@@clientName(
+  SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
   "slotConfigNames"
 );
 
@@ -1492,35 +1772,44 @@ using Microsoft.Web;
 @@clientLocation(ContinuousWebJobs.listContinuousWebJobs, WebApps);
 @@clientLocation(ContinuousWebJobs.startContinuousWebJob, WebApps);
 @@clientLocation(ContinuousWebJobs.stopContinuousWebJob, WebApps);
-@@clientLocation(ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
+@@clientLocation(
+  ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
   WebApps
 );
-@@clientLocation(ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
+@@clientLocation(
+  ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
   WebApps
 );
-@@clientLocation(ContinuousWebJobOperationGroup.listContinuousWebJobsSlot,
+@@clientLocation(
+  ContinuousWebJobOperationGroup.listContinuousWebJobsSlot,
   WebApps
 );
-@@clientLocation(ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
+@@clientLocation(
+  ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
   WebApps
 );
-@@clientLocation(ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
+@@clientLocation(
+  ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
   WebApps
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ContinuousWebJob.properties);
 
-@@clientLocation(CsmDeploymentStatuses.getProductionSiteDeploymentStatus,
+@@clientLocation(
+  CsmDeploymentStatuses.getProductionSiteDeploymentStatus,
   WebApps
 );
-@@clientLocation(CsmDeploymentStatuses.listProductionSiteDeploymentStatuses,
+@@clientLocation(
+  CsmDeploymentStatuses.listProductionSiteDeploymentStatuses,
   WebApps
 );
-@@clientLocation(CsmDeploymentStatusOperationGroup.getSlotSiteDeploymentStatusSlot,
+@@clientLocation(
+  CsmDeploymentStatusOperationGroup.getSlotSiteDeploymentStatusSlot,
   WebApps
 );
-@@clientLocation(CsmDeploymentStatusOperationGroup.listSlotSiteDeploymentStatusesSlot,
+@@clientLocation(
+  CsmDeploymentStatusOperationGroup.listSlotSiteDeploymentStatusesSlot,
   WebApps
 );
 
@@ -1535,7 +1824,8 @@ using Microsoft.Web;
 @@clientLocation(Deployments.listDeploymentLog, WebApps);
 @@clientLocation(DeploymentOperationGroup.getDeploymentSlot, WebApps);
 @@clientLocation(DeploymentOperationGroup.createDeploymentSlot, WebApps);
-@@clientName(DeploymentOperationGroup.createDeploymentSlot::parameters.resource,
+@@clientName(
+  DeploymentOperationGroup.createDeploymentSlot::parameters.resource,
   "deployment"
 );
 @@clientLocation(DeploymentOperationGroup.deleteDeploymentSlot, WebApps);
@@ -1547,40 +1837,51 @@ using Microsoft.Web;
 
 @@clientLocation(MSDeployStatuses.getMSDeployStatus, WebApps);
 @@clientLocation(MSDeployStatuses.createMSDeployOperation, WebApps);
-@@clientName(MSDeployStatuses.createMSDeployOperation::parameters.resource,
+@@clientName(
+  MSDeployStatuses.createMSDeployOperation::parameters.resource,
   "MSDeploy"
 );
 @@clientLocation(MSDeployStatuses.getMSDeployLog, WebApps);
-@@clientLocation(MSDeployStatusOperationGroup.getInstanceMsDeployStatus,
+@@clientLocation(
+  MSDeployStatusOperationGroup.getInstanceMsDeployStatus,
   WebApps
 );
-@@clientLocation(MSDeployStatusOperationGroup.createInstanceMSDeployOperation,
+@@clientLocation(
+  MSDeployStatusOperationGroup.createInstanceMSDeployOperation,
   WebApps
 );
-@@clientName(MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
+@@clientName(
+  MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
   "MSDeploy"
 );
 @@clientLocation(MSDeployStatusOperationGroup.getInstanceMSDeployLog, WebApps);
-@@clientLocation(MSDeployStatusSlotOperationGroup.getMSDeployStatusSlot,
+@@clientLocation(
+  MSDeployStatusSlotOperationGroup.getMSDeployStatusSlot,
   WebApps
 );
-@@clientLocation(MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot,
+@@clientLocation(
+  MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot,
   WebApps
 );
-@@clientName(MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot::parameters.resource,
+@@clientName(
+  MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot::parameters.resource,
   "MSDeploy"
 );
 @@clientLocation(MSDeployStatusSlotOperationGroup.getMSDeployLogSlot, WebApps);
-@@clientLocation(InstanceMSDeployStatusOperationGroup.getInstanceMsDeployStatusSlot,
+@@clientLocation(
+  InstanceMSDeployStatusOperationGroup.getInstanceMsDeployStatusSlot,
   WebApps
 );
-@@clientLocation(InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot,
+@@clientLocation(
+  InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot,
   WebApps
 );
-@@clientName(InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
+@@clientName(
+  InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
   "MSDeploy"
 );
-@@clientLocation(InstanceMSDeployStatusOperationGroup.getInstanceMSDeployLogSlot,
+@@clientLocation(
+  InstanceMSDeployStatusOperationGroup.getInstanceMSDeployLogSlot,
   WebApps
 );
 
@@ -1589,7 +1890,8 @@ using Microsoft.Web;
 
 @@clientLocation(FunctionEnvelopes.getFunction, WebApps);
 @@clientLocation(FunctionEnvelopes.createFunction, WebApps);
-@@clientName(FunctionEnvelopes.createFunction::parameters.resource,
+@@clientName(
+  FunctionEnvelopes.createFunction::parameters.resource,
   "function_envelope"
 );
 @@clientLocation(FunctionEnvelopes.deleteFunction, WebApps);
@@ -1598,30 +1900,38 @@ using Microsoft.Web;
 @@clientLocation(FunctionEnvelopes.deleteFunctionSecret, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctionKeys, WebApps);
 @@clientLocation(FunctionEnvelopes.listFunctionSecrets, WebApps);
-@@clientLocation(FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
   WebApps
 );
-@@clientLocation(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
   WebApps
 );
-@@clientName(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
+@@clientName(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
   "function_envelope"
 );
-@@clientLocation(FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
   WebApps
 );
-@@clientLocation(FunctionEnvelopeOperationGroup.listInstanceFunctionsSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.listInstanceFunctionsSlot,
   WebApps
 );
-@@clientLocation(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
   WebApps
 );
 
-@@clientLocation(FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
   WebApps
 );
 @@clientLocation(FunctionEnvelopeOperationGroup.listFunctionKeysSlot, WebApps);
-@@clientLocation(FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
+@@clientLocation(
+  FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
   WebApps
 );
 
@@ -1630,62 +1940,79 @@ using Microsoft.Web;
 
 @@clientLocation(HostNameBindings.getHostNameBinding, WebApps);
 @@clientLocation(HostNameBindings.createOrUpdateHostNameBinding, WebApps);
-@@clientName(HostNameBindings.createOrUpdateHostNameBinding::parameters.resource,
+@@clientName(
+  HostNameBindings.createOrUpdateHostNameBinding::parameters.resource,
   "hostNameBinding"
 );
 @@clientLocation(HostNameBindings.deleteHostNameBinding, WebApps);
 @@clientLocation(HostNameBindings.listHostNameBindings, WebApps);
 @@clientLocation(HostNameBindingOperationGroup.getHostNameBindingSlot, WebApps);
-@@clientLocation(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
+@@clientLocation(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
   WebApps
 );
-@@clientName(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
+@@clientName(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
   "hostNameBinding"
 );
-@@clientLocation(HostNameBindingOperationGroup.deleteHostNameBindingSlot,
+@@clientLocation(
+  HostNameBindingOperationGroup.deleteHostNameBindingSlot,
   WebApps
 );
-@@clientLocation(HostNameBindingOperationGroup.listHostNameBindingsSlot,
+@@clientLocation(
+  HostNameBindingOperationGroup.listHostNameBindingsSlot,
   WebApps
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HostNameBinding.properties);
 
-@@clientLocation(RelayServiceConnectionEntities.getRelayServiceConnection,
+@@clientLocation(
+  RelayServiceConnectionEntities.getRelayServiceConnection,
   WebApps
 );
-@@clientLocation(RelayServiceConnectionEntities.createOrUpdateRelayServiceConnection,
+@@clientLocation(
+  RelayServiceConnectionEntities.createOrUpdateRelayServiceConnection,
   WebApps
 );
-@@clientName(RelayServiceConnectionEntities.createOrUpdateRelayServiceConnection::parameters.resource,
+@@clientName(
+  RelayServiceConnectionEntities.createOrUpdateRelayServiceConnection::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(RelayServiceConnectionEntities.updateRelayServiceConnection,
+@@clientLocation(
+  RelayServiceConnectionEntities.updateRelayServiceConnection,
   WebApps
 );
-@@clientName(RelayServiceConnectionEntities.updateRelayServiceConnection::parameters.properties,
+@@clientName(
+  RelayServiceConnectionEntities.updateRelayServiceConnection::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(RelayServiceConnectionEntities.deleteRelayServiceConnection,
+@@clientLocation(
+  RelayServiceConnectionEntities.deleteRelayServiceConnection,
   WebApps
 );
-@@clientLocation(RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
+@@clientLocation(
+  RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
   WebApps
 );
-@@clientLocation(RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
+@@clientLocation(
+  RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
   WebApps
 );
-@@clientName(RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot::parameters.resource,
+@@clientName(
+  RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
+@@clientLocation(
+  RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
   WebApps
 );
-@@clientName(RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot::parameters.properties,
+@@clientName(
+  RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
+@@clientLocation(
+  RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
   WebApps
 );
 
@@ -1694,10 +2021,12 @@ using Microsoft.Web;
 
 @@clientLocation(WebSiteInstanceStatuses.getInstanceInfo, WebApps);
 @@clientLocation(WebSiteInstanceStatuses.listInstanceIdentifiers, WebApps);
-@@clientLocation(WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
+@@clientLocation(
+  WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
   WebApps
 );
-@@clientLocation(WebSiteInstanceStatusOperationGroup.listInstanceIdentifiersSlot,
+@@clientLocation(
+  WebSiteInstanceStatusOperationGroup.listInstanceIdentifiersSlot,
   WebApps
 );
 
@@ -1714,19 +2043,24 @@ using Microsoft.Web;
 @@clientLocation(ProcessInfoOperationGroup.listProcesses, WebApps);
 @@clientLocation(ProcessInfoOperationGroup.getProcessDump, WebApps);
 @@clientLocation(ProcessInfoOperationGroup.listProcessThreads, WebApps);
-@@clientLocation(InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
+@@clientLocation(
+  InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
   WebApps
 );
-@@clientLocation(InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
+@@clientLocation(
+  InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
   WebApps
 );
-@@clientLocation(InstanceProcessSlotOperationGroup.listInstanceProcessesSlot,
+@@clientLocation(
+  InstanceProcessSlotOperationGroup.listInstanceProcessesSlot,
   WebApps
 );
-@@clientLocation(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
+@@clientLocation(
+  InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
   WebApps
 );
-@@clientLocation(InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+@@clientLocation(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
   WebApps
 );
 @@clientLocation(ProcessSlotOperationGroup.getProcessSlot, WebApps);
@@ -1742,14 +2076,17 @@ using Microsoft.Web;
 @@clientLocation(ProcessModuleInfos.listInstanceProcessModules, WebApps);
 @@clientLocation(ProcessModuleInfoOperationGroup.getProcessModule, WebApps);
 @@clientLocation(ProcessModuleInfoOperationGroup.listProcessModules, WebApps);
-@@clientLocation(InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
+@@clientLocation(
+  InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
   WebApps
 );
-@@clientLocation(InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
+@@clientLocation(
+  InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
   WebApps
 );
 @@clientLocation(ProcessModuleSlotOperationGroup.getProcessModuleSlot, WebApps);
-@@clientLocation(ProcessModuleSlotOperationGroup.listProcessModulesSlot,
+@@clientLocation(
+  ProcessModuleSlotOperationGroup.listProcessModulesSlot,
   WebApps
 );
 
@@ -1757,45 +2094,57 @@ using Microsoft.Web;
 @@flattenProperty(ProcessModuleInfo.properties);
 
 @@clientLocation(MigrateMySqlStatuses.getMigrateMySqlStatus, WebApps);
-@@clientLocation(MigrateMySqlStatusOperationGroup.getMigrateMySqlStatusSlot,
+@@clientLocation(
+  MigrateMySqlStatusOperationGroup.getMigrateMySqlStatusSlot,
   WebApps
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MigrateMySqlStatus.properties);
 
-@@clientLocation(SwiftVirtualNetworks.getSwiftVirtualNetworkConnection,
+@@clientLocation(
+  SwiftVirtualNetworks.getSwiftVirtualNetworkConnection,
   WebApps
 );
-@@clientLocation(SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck,
+@@clientLocation(
+  SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck,
   WebApps
 );
-@@clientName(SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck::parameters.resource,
+@@clientName(
+  SwiftVirtualNetworks.createOrUpdateSwiftVirtualNetworkConnectionWithCheck::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck,
+@@clientLocation(
+  SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck,
   WebApps
 );
-@@clientName(SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck::parameters.properties,
+@@clientName(
+  SwiftVirtualNetworks.updateSwiftVirtualNetworkConnectionWithCheck::parameters.properties,
   "connectionEnvelope"
 );
 @@clientLocation(SwiftVirtualNetworks.deleteSwiftVirtualNetwork, WebApps);
-@@clientLocation(SwiftVirtualNetworkOperationGroup.getSwiftVirtualNetworkConnectionSlot,
+@@clientLocation(
+  SwiftVirtualNetworkOperationGroup.getSwiftVirtualNetworkConnectionSlot,
   WebApps
 );
-@@clientLocation(SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot,
+@@clientLocation(
+  SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot,
   WebApps
 );
-@@clientName(SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.resource,
+@@clientName(
+  SwiftVirtualNetworkOperationGroup.createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.resource,
   "connectionEnvelope"
 );
-@@clientLocation(SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot,
+@@clientLocation(
+  SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot,
   WebApps
 );
-@@clientName(SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.properties,
+@@clientName(
+  SwiftVirtualNetworkOperationGroup.updateSwiftVirtualNetworkConnectionWithCheckSlot::parameters.properties,
   "connectionEnvelope"
 );
-@@clientLocation(SwiftVirtualNetworkOperationGroup.deleteSwiftVirtualNetworkSlot,
+@@clientLocation(
+  SwiftVirtualNetworkOperationGroup.deleteSwiftVirtualNetworkSlot,
   WebApps
 );
 
@@ -1803,7 +2152,8 @@ using Microsoft.Web;
 @@flattenProperty(SwiftVirtualNetwork.properties);
 
 @@clientLocation(NetworkFeaturesOperationGroup.listNetworkFeatures, WebApps);
-@@clientLocation(NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
+@@clientLocation(
+  NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
   WebApps
 );
 
@@ -1812,21 +2162,25 @@ using Microsoft.Web;
 
 @@clientLocation(PremierAddOns.getPremierAddOn, WebApps);
 @@clientLocation(PremierAddOns.addPremierAddOn, WebApps);
-@@clientName(PremierAddOns.addPremierAddOn::parameters.resource,
+@@clientName(
+  PremierAddOns.addPremierAddOn::parameters.resource,
   "premierAddOn"
 );
 @@clientLocation(PremierAddOns.updatePremierAddOn, WebApps);
-@@clientName(PremierAddOns.updatePremierAddOn::parameters.properties,
+@@clientName(
+  PremierAddOns.updatePremierAddOn::parameters.properties,
   "premierAddOn"
 );
 @@clientLocation(PremierAddOns.deletePremierAddOn, WebApps);
 @@clientLocation(PremierAddOnOperationGroup.getPremierAddOnSlot, WebApps);
 @@clientLocation(PremierAddOnOperationGroup.addPremierAddOnSlot, WebApps);
-@@clientName(PremierAddOnOperationGroup.addPremierAddOnSlot::parameters.resource,
+@@clientName(
+  PremierAddOnOperationGroup.addPremierAddOnSlot::parameters.resource,
   "premierAddOn"
 );
 @@clientLocation(PremierAddOnOperationGroup.updatePremierAddOnSlot, WebApps);
-@@clientName(PremierAddOnOperationGroup.updatePremierAddOnSlot::parameters.properties,
+@@clientName(
+  PremierAddOnOperationGroup.updatePremierAddOnSlot::parameters.properties,
   "premierAddOn"
 );
 @@clientLocation(PremierAddOnOperationGroup.deletePremierAddOnSlot, WebApps);
@@ -1836,12 +2190,14 @@ using Microsoft.Web;
 
 @@clientLocation(PrivateAccesses.getPrivateAccess, WebApps);
 @@clientLocation(PrivateAccesses.putPrivateAccessVnet, WebApps);
-@@clientName(PrivateAccesses.putPrivateAccessVnet::parameters.resource,
+@@clientName(
+  PrivateAccesses.putPrivateAccessVnet::parameters.resource,
   "access"
 );
 @@clientLocation(PrivateAccessOperationGroup.getPrivateAccessSlot, WebApps);
 @@clientLocation(PrivateAccessOperationGroup.putPrivateAccessVnetSlot, WebApps);
-@@clientName(PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
+@@clientName(
+  PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
   "access"
 );
 
@@ -1850,24 +2206,30 @@ using Microsoft.Web;
 
 @@clientLocation(PublicCertificates.getPublicCertificate, WebApps);
 @@clientLocation(PublicCertificates.createOrUpdatePublicCertificate, WebApps);
-@@clientName(PublicCertificates.createOrUpdatePublicCertificate::parameters.resource,
+@@clientName(
+  PublicCertificates.createOrUpdatePublicCertificate::parameters.resource,
   "publicCertificate"
 );
 @@clientLocation(PublicCertificates.deletePublicCertificate, WebApps);
 @@clientLocation(PublicCertificates.listPublicCertificates, WebApps);
-@@clientLocation(PublicCertificateOperationGroup.getPublicCertificateSlot,
+@@clientLocation(
+  PublicCertificateOperationGroup.getPublicCertificateSlot,
   WebApps
 );
-@@clientLocation(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
+@@clientLocation(
+  PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
   WebApps
 );
-@@clientName(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
+@@clientName(
+  PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
   "publicCertificate"
 );
-@@clientLocation(PublicCertificateOperationGroup.deletePublicCertificateSlot,
+@@clientLocation(
+  PublicCertificateOperationGroup.deletePublicCertificateSlot,
   WebApps
 );
-@@clientLocation(PublicCertificateOperationGroup.listPublicCertificatesSlot,
+@@clientLocation(
+  PublicCertificateOperationGroup.listPublicCertificatesSlot,
   WebApps
 );
 
@@ -1876,16 +2238,19 @@ using Microsoft.Web;
 
 @@clientLocation(SiteContainers.getSiteContainer, WebApps);
 @@clientLocation(SiteContainers.createOrUpdateSiteContainer, WebApps);
-@@clientName(SiteContainers.createOrUpdateSiteContainer::parameters.resource,
+@@clientName(
+  SiteContainers.createOrUpdateSiteContainer::parameters.resource,
   "request"
 );
 @@clientLocation(SiteContainers.deleteSiteContainer, WebApps);
 @@clientLocation(SiteContainers.listSiteContainers, WebApps);
 @@clientLocation(SiteContainerOperationGroup.getSiteContainerSlot, WebApps);
-@@clientLocation(SiteContainerOperationGroup.createOrUpdateSiteContainerSlot,
+@@clientLocation(
+  SiteContainerOperationGroup.createOrUpdateSiteContainerSlot,
   WebApps
 );
-@@clientName(SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
+@@clientName(
+  SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
   "request"
 );
 @@clientLocation(SiteContainerOperationGroup.deleteSiteContainerSlot, WebApps);
@@ -1899,13 +2264,16 @@ using Microsoft.Web;
 @@clientLocation(SiteExtensionInfos.deleteSiteExtension, WebApps);
 @@clientLocation(SiteExtensionInfos.listSiteExtensions, WebApps);
 @@clientLocation(SiteExtensionInfoOperationGroup.getSiteExtensionSlot, WebApps);
-@@clientLocation(SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
+@@clientLocation(
+  SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
   WebApps
 );
-@@clientLocation(SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
+@@clientLocation(
+  SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
   WebApps
 );
-@@clientLocation(SiteExtensionInfoOperationGroup.listSiteExtensionsSlot,
+@@clientLocation(
+  SiteExtensionInfoOperationGroup.listSiteExtensionsSlot,
   WebApps
 );
 
@@ -1914,23 +2282,28 @@ using Microsoft.Web;
 
 @@clientLocation(SiteSourceControls.getSourceControlSlot, WebApps);
 @@clientLocation(SiteSourceControls.createOrUpdateSourceControlSlot, WebApps);
-@@clientName(SiteSourceControls.createOrUpdateSourceControlSlot::parameters.resource,
+@@clientName(
+  SiteSourceControls.createOrUpdateSourceControlSlot::parameters.resource,
   "siteSourceControl"
 );
 @@clientLocation(SiteSourceControls.updateSourceControlSlot, WebApps);
-@@clientName(SiteSourceControls.updateSourceControlSlot::parameters.properties,
+@@clientName(
+  SiteSourceControls.updateSourceControlSlot::parameters.properties,
   "siteSourceControl"
 );
 @@clientLocation(SiteSourceControls.deleteSourceControlSlot, WebApps);
 @@clientLocation(SiteSourceControlOperationGroup.getSourceControl, WebApps);
-@@clientLocation(SiteSourceControlOperationGroup.createOrUpdateSourceControl,
+@@clientLocation(
+  SiteSourceControlOperationGroup.createOrUpdateSourceControl,
   WebApps
 );
-@@clientName(SiteSourceControlOperationGroup.createOrUpdateSourceControl::parameters.resource,
+@@clientName(
+  SiteSourceControlOperationGroup.createOrUpdateSourceControl::parameters.resource,
   "siteSourceControl"
 );
 @@clientLocation(SiteSourceControlOperationGroup.updateSourceControl, WebApps);
-@@clientName(SiteSourceControlOperationGroup.updateSourceControl::parameters.properties,
+@@clientName(
+  SiteSourceControlOperationGroup.updateSourceControl::parameters.properties,
   "siteSourceControl"
 );
 @@clientLocation(SiteSourceControlOperationGroup.deleteSourceControl, WebApps);
@@ -1952,10 +2325,12 @@ using Microsoft.Web;
 
 @@clientLocation(TriggeredJobHistories.getTriggeredWebJobHistorySlot, WebApps);
 @@clientLocation(TriggeredJobHistories.listTriggeredWebJobHistorySlot, WebApps);
-@@clientLocation(TriggeredJobHistoryOperationGroup.getTriggeredWebJobHistory,
+@@clientLocation(
+  TriggeredJobHistoryOperationGroup.getTriggeredWebJobHistory,
   WebApps
 );
-@@clientLocation(TriggeredJobHistoryOperationGroup.listTriggeredWebJobHistory,
+@@clientLocation(
+  TriggeredJobHistoryOperationGroup.listTriggeredWebJobHistory,
   WebApps
 );
 
@@ -1981,23 +2356,28 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRunAction.properties);
 
-@@clientLocation(WorkflowRunActionRepetitionDefinitions.get,
+@@clientLocation(
+  WorkflowRunActionRepetitionDefinitions.get,
   "WorkflowRunActionRepetitions"
 );
-@@clientLocation(WorkflowRunActionRepetitionDefinitions.list,
+@@clientLocation(
+  WorkflowRunActionRepetitionDefinitions.list,
   "WorkflowRunActionRepetitions"
 );
-@@clientLocation(WorkflowRunActionRepetitionDefinitions.listExpressionTraces,
+@@clientLocation(
+  WorkflowRunActionRepetitionDefinitions.listExpressionTraces,
   "WorkflowRunActionRepetitions"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowRunActionRepetitionDefinition.properties);
 
-@@clientLocation(RequestHistories.get,
+@@clientLocation(
+  RequestHistories.get,
   "WorkflowRunActionRepetitionsRequestHistories"
 );
-@@clientLocation(RequestHistories.list,
+@@clientLocation(
+  RequestHistories.list,
   "WorkflowRunActionRepetitionsRequestHistories"
 );
 
@@ -2010,13 +2390,15 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WorkflowVersion.properties);
 
-@@clientLocation(GlobalOperationGroup.getSubscriptionOperationWithAsyncResponse,
+@@clientLocation(
+  GlobalOperationGroup.getSubscriptionOperationWithAsyncResponse,
   Global
 );
 
 @@clientLocation(ProviderOperationGroup.getAvailableStacks, "Provider");
 @@clientLocation(ProviderOperationGroup.getFunctionAppStacks, "Provider");
-@@clientLocation(ProviderOperationGroup.getFunctionAppStacksForLocation,
+@@clientLocation(
+  ProviderOperationGroup.getFunctionAppStacksForLocation,
   "Provider"
 );
 @@clientLocation(ProviderOperationGroup.getWebAppStacksForLocation, "Provider");
@@ -2024,17 +2406,21 @@ using Microsoft.Web;
 @@clientLocation(ProviderOperationGroup.getAvailableStacksOnPrem, "Provider");
 
 @@clientLocation(RecommendationsOperationGroup.list, Recommendations);
-@@clientLocation(RecommendationsOperationGroup.resetAllFilters,
+@@clientLocation(
+  RecommendationsOperationGroup.resetAllFilters,
   Recommendations
 );
-@@clientLocation(RecommendationsOperationGroup.disableRecommendationForSubscription,
+@@clientLocation(
+  RecommendationsOperationGroup.disableRecommendationForSubscription,
   Recommendations
 );
 
-@@clientLocation(ResourceHealthMetadataNonResourceOperationGroup.list,
+@@clientLocation(
+  ResourceHealthMetadataNonResourceOperationGroup.list,
   "ResourceHealthMetadata"
 );
-@@clientLocation(ResourceHealthMetadataNonResourceOperationGroup.listByResourceGroup,
+@@clientLocation(
+  ResourceHealthMetadataNonResourceOperationGroup.listByResourceGroup,
   "ResourceHealthMetadata"
 );
 
@@ -2046,27 +2432,34 @@ using Microsoft.Web;
 @@clientLocation(Operations.list, "Provider");
 @@clientName(Operations.list, "ListOperations");
 @@clientName(checkNameAvailability::parameters.body, "request");
-@@clientName(listSiteIdentifiersAssignedToHostName::parameters.body,
+@@clientName(
+  listSiteIdentifiersAssignedToHostName::parameters.body,
   "nameIdentifier"
 );
 @@clientName(regionalCheckNameAvailability::parameters.body, "request");
 @@clientName(verifyHostingEnvironmentVnet::parameters.body, "parameters");
-@@clientName(StaticSitesOperationGroup.previewWorkflow::parameters.body,
+@@clientName(
+  StaticSitesOperationGroup.previewWorkflow::parameters.body,
   "staticSitesWorkflowPreviewRequest"
 );
-@@clientName(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+@@clientName(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "key"
 );
-@@summary(Operations.list,
+@@summary(
+  Operations.list,
   "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions"
 );
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Description for Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions"
 );
-@@clientName(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+@@clientName(
+  FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
   "key"
 );
-@@clientName(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
+@@clientName(
+  StaticSiteARMResources.updateStaticSiteUser::parameters.body,
   "staticSiteUserEnvelope"
 );
 
@@ -2080,7 +2473,8 @@ using Microsoft.Web;
 @@clientLocation(listGeoRegions, "WebSiteManagement", "go");
 @@clientLocation(listPremierAddOnOffers, "WebSiteManagement", "go");
 @@clientLocation(listSkus, "WebSiteManagement", "go");
-@@clientLocation(listSiteIdentifiersAssignedToHostName,
+@@clientLocation(
+  listSiteIdentifiersAssignedToHostName,
   "WebSiteManagement",
   "go"
 );
@@ -2108,12 +2502,14 @@ using Microsoft.Web;
 @@clientName(HostNameBindingCollection, "HostnameBindingCollection", "java");
 @@clientName(HostNameBindingProperties, "HostnameBindingProperties", "java");
 @@clientName(HostNameSslState, "HostnameSslState", "java");
-@@clientName(CustomHostNameDnsRecordType,
+@@clientName(
+  CustomHostNameDnsRecordType,
   "CustomHostnameDnsRecordType",
   "java"
 );
 @@clientName(HostNameType, "HostnameType", "java");
-@@clientName(HostNameBindingProperties.customHostNameDnsRecordType,
+@@clientName(
+  HostNameBindingProperties.customHostNameDnsRecordType,
   "customHostnameDnsRecordType",
   "java"
 );
@@ -2129,82 +2525,101 @@ using Microsoft.Web;
 @@clientName(ContainerInfo.previousTimeStamp, "previousTimestamp", "java");
 
 // Java client naming: fix ARM -> Arm casing
-@@clientName(RemotePrivateEndpointConnectionARMResource,
+@@clientName(
+  RemotePrivateEndpointConnectionARMResource,
   "RemotePrivateEndpointConnectionArmResource",
   "java"
 );
-@@clientName(RemotePrivateEndpointConnectionARMResourceProperties,
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceProperties,
   "RemotePrivateEndpointConnectionArmResourceProperties",
   "java"
 );
 @@clientName(StaticSiteARMResource, "StaticSiteArmResource", "java");
-@@clientName(StaticSiteResetPropertiesARMResource,
+@@clientName(
+  StaticSiteResetPropertiesARMResource,
   "StaticSiteResetPropertiesArmResource",
   "java"
 );
-@@clientName(StaticSiteResetPropertiesARMResourceProperties,
+@@clientName(
+  StaticSiteResetPropertiesARMResourceProperties,
   "StaticSiteResetPropertiesArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteBasicAuthPropertiesARMResource,
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResource,
   "StaticSiteBasicAuthPropertiesArmResource",
   "java"
 );
-@@clientName(StaticSiteBasicAuthPropertiesARMResourceProperties,
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResourceProperties,
   "StaticSiteBasicAuthPropertiesArmResourceProperties",
   "java"
 );
 @@clientName(StaticSiteBuildARMResource, "StaticSiteBuildArmResource", "java");
-@@clientName(StaticSiteBuildARMResourceProperties,
+@@clientName(
+  StaticSiteBuildARMResourceProperties,
   "StaticSiteBuildArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteCustomDomainOverviewARMResource,
+@@clientName(
+  StaticSiteCustomDomainOverviewARMResource,
   "StaticSiteCustomDomainOverviewArmResource",
   "java"
 );
-@@clientName(StaticSiteCustomDomainOverviewARMResourceProperties,
+@@clientName(
+  StaticSiteCustomDomainOverviewARMResourceProperties,
   "StaticSiteCustomDomainOverviewArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteCustomDomainRequestPropertiesARMResource,
+@@clientName(
+  StaticSiteCustomDomainRequestPropertiesARMResource,
   "StaticSiteCustomDomainRequestPropertiesArmResource",
   "java"
 );
-@@clientName(StaticSiteCustomDomainRequestPropertiesARMResourceProperties,
+@@clientName(
+  StaticSiteCustomDomainRequestPropertiesARMResourceProperties,
   "StaticSiteCustomDomainRequestPropertiesArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteFunctionOverviewARMResource,
+@@clientName(
+  StaticSiteFunctionOverviewARMResource,
   "StaticSiteFunctionOverviewArmResource",
   "java"
 );
-@@clientName(StaticSiteFunctionOverviewARMResourceProperties,
+@@clientName(
+  StaticSiteFunctionOverviewARMResourceProperties,
   "StaticSiteFunctionOverviewArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteLinkedBackendARMResource,
+@@clientName(
+  StaticSiteLinkedBackendARMResource,
   "StaticSiteLinkedBackendArmResource",
   "java"
 );
-@@clientName(StaticSiteLinkedBackendARMResourceProperties,
+@@clientName(
+  StaticSiteLinkedBackendARMResourceProperties,
   "StaticSiteLinkedBackendArmResourceProperties",
   "java"
 );
 @@clientName(StaticSiteUserARMResource, "StaticSiteUserArmResource", "java");
-@@clientName(StaticSiteUserARMResourceProperties,
+@@clientName(
+  StaticSiteUserARMResourceProperties,
   "StaticSiteUserArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResource,
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResource,
   "StaticSiteUserProvidedFunctionAppArmResource",
   "java"
 );
-@@clientName(StaticSiteUserProvidedFunctionAppARMResourceProperties,
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResourceProperties,
   "StaticSiteUserProvidedFunctionAppArmResourceProperties",
   "java"
 );
-@@clientName(StaticSiteZipDeploymentARMResource,
+@@clientName(
+  StaticSiteZipDeploymentARMResource,
   "StaticSiteZipDeploymentArmResource",
   "java"
 );
@@ -2219,21 +2634,25 @@ using Microsoft.Web;
 
 // Java client naming: fix aksResourceID -> aksResourceId casing
 @@clientName(KubeEnvironmentProperties.aksResourceID, "aksResourceId", "java");
-@@clientName(KubeEnvironmentPatchResourceProperties.aksResourceID,
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.aksResourceID,
   "aksResourceId",
   "java"
 );
-@@clientName(ContainerAppsConfiguration.platformReservedDnsIP,
+@@clientName(
+  ContainerAppsConfiguration.platformReservedDnsIP,
   "platformReservedDnsIp",
   "java"
 );
-@@clientName(SiteConfig.acrUserManagedIdentityID,
+@@clientName(
+  SiteConfig.acrUserManagedIdentityID,
   "acrUserManagedIdentityId",
   "java"
 );
 
 // Java client naming: fix WWW -> Www casing
-@@clientName(AzureActiveDirectoryLogin.disableWWWAuthenticate,
+@@clientName(
+  AzureActiveDirectoryLogin.disableWWWAuthenticate,
   "disableWwwAuthenticate",
   "java"
 );
@@ -2243,42 +2662,51 @@ using Microsoft.Web;
 @@clientName(SiteProperties.hostNameSslStates, "hostnameSslStates", "java");
 
 // Java client naming: fix property casing in SitePatchResourceProperties
-@@clientName(SitePatchResourceProperties.defaultHostName,
+@@clientName(
+  SitePatchResourceProperties.defaultHostName,
   "defaultHostname",
   "java"
 );
-@@clientName(SitePatchResourceProperties.hostNameSslStates,
+@@clientName(
+  SitePatchResourceProperties.hostNameSslStates,
   "hostnameSslStates",
   "java"
 );
 
 // Java client naming: fix HostNameBinding operation casing
 @@clientName(HostNameBindings.getHostNameBinding, "getHostnameBinding", "java");
-@@clientName(HostNameBindings.createOrUpdateHostNameBinding,
+@@clientName(
+  HostNameBindings.createOrUpdateHostNameBinding,
   "createOrUpdateHostnameBinding",
   "java"
 );
-@@clientName(HostNameBindings.deleteHostNameBinding,
+@@clientName(
+  HostNameBindings.deleteHostNameBinding,
   "deleteHostnameBinding",
   "java"
 );
-@@clientName(HostNameBindings.listHostNameBindings,
+@@clientName(
+  HostNameBindings.listHostNameBindings,
   "listHostnameBindings",
   "java"
 );
-@@clientName(HostNameBindingOperationGroup.getHostNameBindingSlot,
+@@clientName(
+  HostNameBindingOperationGroup.getHostNameBindingSlot,
   "getHostnameBindingSlot",
   "java"
 );
-@@clientName(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
+@@clientName(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
   "createOrUpdateHostnameBindingSlot",
   "java"
 );
-@@clientName(HostNameBindingOperationGroup.deleteHostNameBindingSlot,
+@@clientName(
+  HostNameBindingOperationGroup.deleteHostNameBindingSlot,
   "deleteHostnameBindingSlot",
   "java"
 );
-@@clientName(HostNameBindingOperationGroup.listHostNameBindingsSlot,
+@@clientName(
+  HostNameBindingOperationGroup.listHostNameBindingsSlot,
   "listHostnameBindingsSlot",
   "java"
 );
@@ -2289,7 +2717,8 @@ using Microsoft.Web;
 
 // Java client location: move ResourceProvider-level operations to ResourceProviders client
 @@clientLocation(checkNameAvailability, "ResourceProviders", "java");
-@@clientLocation(getSubscriptionDeploymentLocations,
+@@clientLocation(
+  getSubscriptionDeploymentLocations,
   "ResourceProviders",
   "java"
 );
@@ -2299,7 +2728,8 @@ using Microsoft.Web;
 @@clientLocation(listGeoRegions, "ResourceProviders", "java");
 @@clientLocation(listPremierAddOnOffers, "ResourceProviders", "java");
 @@clientLocation(listSkus, "ResourceProviders", "java");
-@@clientLocation(listSiteIdentifiersAssignedToHostName,
+@@clientLocation(
+  listSiteIdentifiersAssignedToHostName,
   "ResourceProviders",
   "java"
 );
@@ -2311,27 +2741,32 @@ using Microsoft.Web;
 @@clientLocation(Users.getPublishingUser, "ResourceProviders", "java");
 @@clientLocation(Users.updatePublishingUser, "ResourceProviders", "java");
 @@clientLocation(SourceControls.getSourceControl, "ResourceProviders", "java");
-@@clientLocation(SourceControls.updateSourceControl,
+@@clientLocation(
+  SourceControls.updateSourceControl,
   "ResourceProviders",
   "java"
 );
-@@clientLocation(SourceControls.listSourceControls,
+@@clientLocation(
+  SourceControls.listSourceControls,
   "ResourceProviders",
   "java"
 );
 
 @@alternateType(CloningInfo.correlationId, Azure.Core.uuid, "java");
 @@alternateType(SiteProperties.inProgressOperationId, Azure.Core.uuid, "java");
-@@alternateType(SitePatchResourceProperties.inProgressOperationId,
+@@alternateType(
+  SitePatchResourceProperties.inProgressOperationId,
   Azure.Core.uuid,
   "java"
 );
 @@alternateType(Operation.geoMasterOperationId, Azure.Core.uuid, "java");
-@@alternateType(RecommendationProperties.recommendationId,
+@@alternateType(
+  RecommendationProperties.recommendationId,
   Azure.Core.uuid,
   "java"
 );
-@@alternateType(RecommendationRuleProperties.recommendationId,
+@@alternateType(
+  RecommendationRuleProperties.recommendationId,
   Azure.Core.uuid,
   "java"
 );

@@ -96,6 +96,7 @@ interface LastKnownGoods {
 }
 
 @@doc(LastKnownGoodResource.name, "Name of the Last Known Good resource.");
-@@doc(LastKnownGoodResource.properties,
+@@doc(
+  LastKnownGoodResource.properties,
   "LastKnownGood resource specific properties"
 );
