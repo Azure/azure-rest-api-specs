@@ -3001,6 +3001,9 @@
         "x-ms-examples": {
           "Create or update Identity Binding": {
             "$ref": "./examples/IdentityBindings_Create_Or_Update.json"
+          },
+          "Create or update Identity Binding with allowed subjects": {
+            "$ref": "./examples/IdentityBindings_Create_Or_UpdateWithAllowedSubjects.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3922,6 +3925,9 @@
         "x-ms-examples": {
           "Get Maintenance Configuration Configured With Maintenance Window": {
             "$ref": "./examples/MaintenanceConfigurationsGet_MaintenanceWindow.json"
+          },
+          "Get a Linked Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsGet_LinkedMaintenanceWindow.json"
           }
         }
       },
@@ -3989,6 +3995,9 @@
           }
         },
         "x-ms-examples": {
+          "Create a Linked Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsCreate_LinkedMaintenanceWindow.json"
+          },
           "Create/Update Maintenance Configuration with Maintenance Window": {
             "$ref": "./examples/MaintenanceConfigurationsCreate_Update_MaintenanceWindow.json"
           }
@@ -7524,6 +7533,23 @@
         }
       }
     },
+    "AllowedSubject": {
+      "type": "object",
+      "description": "A subject authorized to use the identity binding for token exchange.\nThe namespace selector is required and must be non-empty. The service\naccount selector is optional; when omitted, all service accounts in\nmatching namespaces are authorized. Selectors within a single\nAllowedSubject are AND'd; multiple AllowedSubjects on an\nIdentityBinding are OR'd.",
+      "properties": {
+        "namespaceSelector": {
+          "$ref": "#/definitions/LabelSelector",
+          "description": "Label selector matching the namespaces in which this identity may be\nused. Must be non-empty: an empty selector would match every namespace\nand is rejected to prevent overly permissive bindings. Use the built-in\n`kubernetes.io/metadata.name` label to target specific namespaces by\nname."
+        },
+        "serviceAccountSelector": {
+          "$ref": "#/definitions/LabelSelector",
+          "description": "Optional label selector matching the service accounts (within the\nnamespaces matched by `namespaceSelector`) that may use this identity.\nWhen omitted, all service accounts in matching namespaces are\nauthorized. When provided, it must be non-empty."
+        }
+      },
+      "required": [
+        "namespaceSelector"
+      ]
+    },
     "AutoScaleProfile": {
       "type": "object",
       "description": "Specifications on auto-scaling.",
@@ -8785,6 +8811,15 @@
           "$ref": "#/definitions/IdentityBindingProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "allowedSubjects": {
+          "type": "array",
+          "description": "Optional list of subjects authorized to use this identity binding for\ntoken exchange. Each entry pairs a required namespace label selector\nwith an optional service account label selector; selectors within an\nentry are AND'd, and multiple entries are OR'd. When omitted or empty,\nauthorization falls back exclusively to ClusterRole/ClusterRoleBinding\nevaluation. Maximum 100 entries.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/AllowedSubject"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -10444,6 +10479,18 @@
           },
           "x-ms-identifiers": []
         },
+        "maintenanceWindowId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified resource ID of the maintenance window that this maintenance configuration is linked to. When set, the schedule is derived read-only from the linked maintenance window — maintenanceWindow becomes a computed field. When absent (the default), the schedule is defined inline via the maintenanceWindow property. The caller must have read access to the target maintenance window.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/maintenanceWindows"
+              }
+            ]
+          }
+        },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
           "description": "Maintenance window for the maintenance configuration."
@@ -10498,7 +10545,7 @@
     },
     "MaintenanceWindowResource": {
       "type": "object",
-      "description": "A maintenance window is a resource-group-scoped resource that defines a reusable\nmaintenance schedule which can be linked to maintenance configurations on one\nor more managed clusters.\nFor more information, see https://aka.ms/aks/maintenance-windows.",
+      "description": "A maintenance window is a resource-group-scoped resource that defines a reusable maintenance schedule which can be linked to maintenance configurations on one or more managed clusters. For more information, see https://aka.ms/aks/maintenance-windows.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MaintenanceWindowResourceProperties",

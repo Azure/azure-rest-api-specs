@@ -25,10 +25,7 @@ namespace Microsoft.ContainerService;
 // =============================================================================
 
 /**
- * A maintenance window is a resource-group-scoped resource that defines a reusable
- * maintenance schedule which can be linked to maintenance configurations on one
- * or more managed clusters.
- * For more information, see https://aka.ms/aks/maintenance-windows.
+ * A maintenance window is a resource-group-scoped resource that defines a reusable maintenance schedule which can be linked to maintenance configurations on one or more managed clusters. For more information, see https://aka.ms/aks/maintenance-windows.
  */
 @added(Versions.v2026_05_02_preview)
 model MaintenanceWindowResource
