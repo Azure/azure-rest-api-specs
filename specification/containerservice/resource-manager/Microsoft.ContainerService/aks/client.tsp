@@ -105,6 +105,19 @@ using Microsoft.ContainerService;
 @@clientName(Code, "ContainerServiceStateCode", "csharp");
 @@clientName(Format, "KubeConfigFormat", "csharp");
 @@clientName(Expander, "AutoScaleExpander", "csharp");
+// C# acronym-casing compliance (API -> Api) for the Gateway API implementations
+// model and its containing property. This also corrects the flattened public
+// property `GatewayApiImplementationsIstioMode` and the model-factory parameter.
+@@clientName(
+  ManagedClusterWebAppRoutingGatewayAPIImplementations,
+  "ManagedClusterWebAppRoutingGatewayApiImplementations",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterIngressProfileWebAppRouting.gatewayAPIImplementations,
+  "gatewayApiImplementations",
+  "csharp"
+);
 @@clientName(
   KubeletConfig.containerLogMaxSizeMB,
   "ContainerLogMaxSizeInMB",
@@ -1548,6 +1561,31 @@ namespace Azure.ResourceManager.Models {
   "enableCsiProxy",
   "java"
 );
+
+// .NET design guideline naming polish (azure-sdk-for-net PR #59192 review feedback)
+@@clientName(
+  ControlPlaneScalingSize,
+  "ManagedClusterControlPlaneScalingSize",
+  "csharp"
+);
+@@clientName(HardEvictionThreshold, "KubeletHardEvictionThreshold", "csharp");
+@@clientName(KubeReserved, "KubeletReservedResources", "csharp");
+@@clientName(
+  ManagedClusterHostedSystemProfile.systemNodeSubnetID,
+  "SystemNodeSubnetId",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterHostedSystemProfile.nodeSubnetID,
+  "NodeSubnetId",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterAzureMonitorProfileMetrics.controlPlane,
+  "IsControlPlane",
+  "csharp"
+);
+
 // TODO: drop the type replacement upon next major breaking change
 @@alternateType(
   ManagedClusterIdentity.type,

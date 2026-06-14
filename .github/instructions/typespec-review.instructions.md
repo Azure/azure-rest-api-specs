@@ -57,7 +57,7 @@ anchored to the section that defines the rule:
   `.github/instructions/typespec-review.instructions.md` or
   `.github/instructions/typespec-project.instructions.md`.
 - ARM RPC rules (e.g., `RPC-Put-V1-12`, `RPC-Async-V1-06`) → link to
-  `.github/instructions/armapi-review.instructions.md`.
+  `.github/instructions/arm-api-review.instructions.md`.
 - Generic OpenAPI rules (e.g., `OAPI020`, `OAPI034`, `WHATIF-001`) →
   link to `.github/instructions/openapi-review.instructions.md` or to
   the dedicated reference file under
@@ -71,41 +71,11 @@ lowercasing the heading, replacing spaces with `-`, and stripping
 punctuation. When in doubt, open the rendered file on GitHub and copy
 the link from the heading's anchor icon.
 
-### Reviewer-Posted Parity (REQUIRED -- no divergence)
+### Reviewer-Posted Parity
 
-The set of findings posted to the GitHub PR **MUST** be
-**byte-for-byte identical** to the set of findings shown to the
-reviewer in chat. There **MUST** be no discrepancy in content,
-count, ordering, severity, rule IDs, links, code blocks, examples,
-fix snippets, or the agent's posted-by marker.
+<a id="reviewer-posted-parity"></a>
 
-**Hard rules.**
-
-1. **Single source of truth.** Build each comment body **once** as the
-   canonical text for that finding. The text rendered to the reviewer
-   in chat and the text written into the GitHub review payload **MUST**
-   come from that same string -- never a reconstructed or shortened
-   variant.
-2. **Verbatim reproduction.** When assembling the review payload
-   (`POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews`), each
-   `comments[].body` **MUST** contain the canonical text unchanged:
-   rule-ID hyperlinks, code blocks, examples, citations, and the
-   trailing posted-by HTML comment.
-3. **No re-authoring during payload assembly.** Heredoc rebuilds,
-   payload-time paraphrasing, or multi-finding consolidation that
-   drops content is **forbidden**.
-4. **Exact one-to-one mapping.** Every finding shown to the reviewer
-   maps to exactly one posted inline comment. Severity tags and
-   `[NEW]`/`[EXISTING]` classifications **MUST** match.
-5. **Post-post verification (REQUIRED).** Immediately after posting,
-   the agent **MUST** re-fetch each created comment
-   (`GET /repos/{owner}/{repo}/pulls/comments/{id}`) and confirm body
-   length, hyperlinks, code-fence blocks, and marker. On any mismatch,
-   PATCH the comment to restore the canonical text and re-verify
-   before reporting completion.
-6. **Failure handling.** If a finding cannot be posted as-is, report
-   the discrepancy explicitly to the reviewer instead of silently
-   posting a shortened variant.
+See the canonical contract in [`.github/skills/azure-api-review/references/reviewer-posted-parity.md`](../skills/azure-api-review/references/reviewer-posted-parity.md). The hard rules, post-post verification procedure, and worked examples live there; this section is a pointer so the three instruction files cannot drift.
 
 ---
 
@@ -149,6 +119,7 @@ fix snippets, or the agent's posted-by marker.
 
 - String properties with well-known formats **SHOULD** use appropriate
   scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
+  - **ARM caveat for `uuid`:** the TypeSpec `uuid` scalar emits `"format": "uuid"` in the generated Swagger, which on ARM control-plane specs triggers the required `GuidUsage` LintDiff rule (`R3017`). **Default position: do NOT use the `uuid` scalar on ARM control-plane TypeSpec.** Acceptable only for Microsoft Entra / AAD identifiers customers already see as GUIDs (`tenantId`, `clientId`, `principalId`, `objectId`, body-surfaced `subscriptionId`); for everything else (opaque platform-assigned IDs, resource-internal IDs, names), keep `string` and convey the format via the description and an optional `@pattern`. When `uuid` IS justified, the author MUST add a `GuidUsage` suppression in `readme.md` whose `where:` clause targets the `format` leaf of the shared `Azure.Core.uuid` definition in the generated Swagger -- not the per-property path -- and the `reason:` MUST enumerate every relying property by name and record reviewer sign-off. See [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md) for the full decision tree, the exact suppression form (Form A for TypeSpec-generated OpenAPI), and the acceptable/unacceptable property lists.
 - Datetime properties **MUST** use `utcDateTime` (not `string`).
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/no-string-datetime`)
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
@@ -162,7 +133,10 @@ fix snippets, or the agent's posted-by marker.
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
-  of ID they hold (uuid, armResourceIdentifier, or documented format).
+  of ID they hold (`armResourceIdentifier`, or a documented format). For
+  GUID-valued IDs, see the ARM caveat above and
+  [`.github/skills/azure-api-review/references/guid-and-uuid-on-arm.md`](../skills/azure-api-review/references/guid-and-uuid-on-arm.md)
+  before choosing `uuid`.
 - Array properties **MUST** have their element type defined.
 - **AVOID** using `unknown` type.
 

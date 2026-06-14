@@ -28,13 +28,14 @@ options:
     flavor: azure
     typespec-title-map:
       StorageSyncClient: "MicrosoftStorageSync"
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-storagesync"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storagesync"
     emitter-output-dir: "{output-dir}/{service-dir}/armstoragesync"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragesync"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragesync/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

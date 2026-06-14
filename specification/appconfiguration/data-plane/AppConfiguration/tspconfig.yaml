@@ -30,12 +30,11 @@ options:
     namespace: Azure.Data.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-appconfiguration-rest"
-    generate-metadata: true
-    is-modular-library: false
+    emitter-output-dir: "{output-dir}/{service-dir}/app-configuration"
+    generate-metadata: false
+    is-modular-library: true
     package-details:
-      name: "@azure-rest/azure-appconfiguration"
-      description: "Azure App Configuration"
+      name: "@azure/app-configuration"
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration"
@@ -45,6 +44,14 @@ options:
     flavor: azure
     generate-tests: false
     generate-samples: false
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/data/azappconfig/v2"
+    service-dir: "sdk/data"
+    emitter-output-dir: "{output-dir}/{service-dir}/azappconfig/internal/generated"
+    slice-elements-byval: true
+    generate-fakes: false
+    inject-spans: false
+    file-prefix: "zz_"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
