@@ -60,6 +60,15 @@ input-file:
   - stable/2021-10-01/networkSecurityPerimeter.json
 ```
 
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - stable/2026-01-01/metricAlert.json
+```
+
 ### Tag: package-2026-03-01
 
 These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
