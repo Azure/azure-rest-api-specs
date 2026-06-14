@@ -341,15 +341,6 @@ model Resource {
 }
 
 /**
- * Describes the format of Error response.
- */
-@error
-model MetricAlertErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  error?: ErrorResponseError;
-}
-
-/**
  * The metric alert resource for patch operations.
  */
 model MetricAlertResourcePatch {
