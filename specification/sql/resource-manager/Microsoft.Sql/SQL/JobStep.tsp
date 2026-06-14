@@ -57,7 +57,8 @@ alias JobStepOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("steps")
     @key
     stepName: string;
-  }
+  },
+  ResourceName = "SqlServerJobStep"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -125,7 +126,8 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("steps")
     @key
     stepName: string;
-  }
+  },
+  ResourceName = "SqlServerJobVersionStep"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
