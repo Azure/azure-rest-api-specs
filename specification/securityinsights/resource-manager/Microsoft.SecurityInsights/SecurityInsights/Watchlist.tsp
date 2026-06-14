@@ -54,7 +54,7 @@ interface Watchlists {
   delete is Extension.DeleteWithoutOkAsync<
     OperationalInsights,
     Watchlist,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Watchlist>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Watchlist>,
     Error = ErrorResponse
   >;
 
