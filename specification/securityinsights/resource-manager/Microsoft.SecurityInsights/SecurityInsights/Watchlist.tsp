@@ -42,6 +42,7 @@ interface Watchlists {
   createOrUpdate is Extension.CreateOrReplaceAsync<
     OperationalInsights,
     Watchlist,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Watchlist>,
     Error = ErrorResponse
   >;
 
@@ -53,8 +54,7 @@ interface Watchlists {
   delete is Extension.DeleteWithoutOkAsync<
     OperationalInsights,
     Watchlist,
-    LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Watchlist>,
     Error = ErrorResponse
   >;
 
