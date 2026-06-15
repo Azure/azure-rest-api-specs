@@ -97,6 +97,7 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(ActivityLogAlertsApi.AlertRuleProperties.enabled, "IsEnabled", "csharp");
+@@clientName(ActivityLogAlertsApi.AlertRulePatchProperties.enabled, "IsEnabled", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSetting, "AutoscaleSettingProperties", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSettingResource, "AutoscaleSetting", "csharp");
 @@clientName(
@@ -139,6 +140,12 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricAlertApi.MetricAlertProperties.enabled, "IsEnabled", "csharp");
 @@clientName(
   MetricAlertApi.MetricAlertProperties.autoMitigate,
+  "IsAutoMitigateEnabled",
+  "csharp"
+);
+@@clientName(MetricAlertApi.MetricAlertPropertiesPatch.enabled, "IsEnabled", "csharp");
+@@clientName(
+  MetricAlertApi.MetricAlertPropertiesPatch.autoMitigate,
   "IsAutoMitigateEnabled",
   "csharp"
 );
@@ -306,8 +313,28 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  DataCollectionApi.KnownColumnDefinitionType,
+  "DataColumnDefinitionType",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat,
+  "LogFileTextSettingsRecordStartTimestampFormat",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.LocationSpec,
   "DataCollectionRuleBcdrLocationSpec",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.FailoverConfigurationSpec,
+  "DataCollectionRuleBcdrFailoverConfigurationSpec",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.Metadata,
+  "DataCollectionRuleRelatedResourceMetadata",
   "csharp"
 );
 @@clientName(
@@ -323,6 +350,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   DataCollectionApi.EventHubDirectDestination,
   "DataCollectionRuleEventHubDirectDestination",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.EventHubDataSource,
+  "DataCollectionRuleEventHubDataSource",
   "csharp"
 );
 @@clientName(
@@ -370,11 +402,30 @@ namespace Microsoft.InsightsCombinedClient;
   "MetricTriggerComparisonOperation",
   "csharp"
 );
+@@clientName(AutoScaleApi.ScaleType, "MonitorScaleType", "csharp");
 @@clientName(
   AutoScaleApi.ScaleRuleMetricDimension,
   "AutoscaleRuleMetricDimension",
   "csharp"
 );
+@@clientName(
+  AutoScaleApi.MetricTrigger.metricResourceUri,
+  "MetricResourceId",
+  "csharp"
+);
+@@alternateType(
+  AutoScaleApi.MetricTrigger.metricResourceUri,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  AutoScaleApi.MetricTrigger.dividePerInstance,
+  "IsDividedPerInstance",
+  "csharp"
+);
+@@clientName(AutoScaleApi.ScaleAction.type, "ScaleType", "csharp");
+@@clientName(AutoScaleApi.TimeWindow.start, "StartOn", "csharp");
+@@clientName(AutoScaleApi.TimeWindow.end, "EndOn", "csharp");
 @@clientName(
   MetricAlertApi.AggregationTypeEnum,
   "MetricCriteriaTimeAggregationType",
@@ -505,6 +556,7 @@ namespace Microsoft.InsightsCombinedClient;
   "DataCollectionRulePrivateLinkScopedResourceInfo",
   "csharp"
 );
+@@clientName(DataCollectionApi.ColumnDefinition.type, "DefinitionType", "csharp");
 @@clientName(
   DataCollectionApi.KnownDataCollectionRuleResourceKind,
   "DataCollectionRuleResourceKind",
@@ -545,7 +597,10 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricsApi.MetricUnit, "MonitorMetricUnit", "csharp");
 @@clientName(MetricsApi.MetricNamespace, "MonitorMetricNamespace", "csharp");
 @@clientName(MetricsApi.NamespaceClassification, "MonitorNamespaceClassification", "csharp");
+@@clientName(MetricsApi.MetricResultType, "MonitorMetricResultType", "csharp");
+@@clientName(MetricsApi.MetricNamespaceName.metricNamespaceName, "MetricNamespaceNameValue", "csharp");
 @@clientName(MetricsApi.Metric, "MonitorMetric", "csharp");
+@@clientName(MetricsApi.Metric.type, "MetricType", "csharp");
 @@clientName(MetricsApi.TimeSeriesElement, "MonitorTimeSeriesElement", "csharp");
 @@clientName(MetricsApi.MetadataValue, "MonitorMetadataValue", "csharp");
 @@clientName(MetricsApi.MetricValue, "MonitorMetricValue", "csharp");
@@ -561,6 +616,14 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(MetricsApi.MetricNamespacesOperationGroup.list, "GetMonitorMetricNamespaces", "csharp");
+@@clientName(ResultType, "MonitorResultType", "csharp");
+@@clientName(ServiceDiagnosticsSettingsApi.MetricSettings.enabled, "IsEnabled", "csharp");
+@@clientName(ServiceDiagnosticsSettingsApi.LogSettings.enabled, "IsEnabled", "csharp");
+@@clientName(Microsoft.Common.RetentionPolicy.enabled, "IsEnabled", "csharp");
+@@clientName(ActionGroupsApi.ActionDetail.SendTime, "SendOn", "csharp");
+@@clientName(ActionGroupsApi.TestNotificationDetailsResponse.completedTime, "CompletedOn", "csharp");
+@@clientName(ActionGroupsApi.TestNotificationDetailsResponse.createdTime, "CreatedOn", "csharp");
+@@clientName(ScheduledQueryRuleApi.ScheduledQueryRuleProperties.enabled, "IsEnabled", "csharp");
 @@clientName(
   PrivateLinkScopesApi.PrivateLinkResources.listByPrivateLinkScope,
   "GetAllPrivateLinkResources",
@@ -824,6 +887,46 @@ model AccessRulePropertiesSubscriptionsItem {
   DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
   "DD_MMM_YYYY_HH_MM_SS_ZZZ",
   "python"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`YYYY-MM-DD HH:MM:SS`,
+  "YyyyMmDdHhMmSs",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`M/D/YYYY HH:MM:SS AM/PM`,
+  "MDYyyyHhMmSsAMPM",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`Mon DD, YYYY HH:MM:SS`,
+  "MonDdYyyyHhMmSs",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyMMdd HH:mm:ss`,
+  "YyMMddHhMmSs",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`ddMMyy HH:mm:ss`,
+  "DdMMyyHhMmSs",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`MMM d hh:mm:ss`,
+  "MmmDHhMmSs",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
+  "DdMmmYyyyHhMmSsZzz",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyyy-MM-ddTHH:mm:ssK`,
+  "YyyyMmDdTHHMmSsK",
+  "csharp"
 );
 @@clientName(AlertSeverity.`0`, "ZERO", "python");
 @@clientName(AlertSeverity.`1`, "ONE", "python");
