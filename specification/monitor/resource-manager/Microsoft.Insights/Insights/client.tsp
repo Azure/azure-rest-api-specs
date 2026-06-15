@@ -567,6 +567,9 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 
+// LRO status polling endpoints are implementation details and should not generate public C# SDK methods.
+@@scope(PrivateLinkScopeOperationStatusOperationGroup.get, "!csharp");
+
 union MonitorDayOfWeek {
   string,
   Sunday: "Sunday",
