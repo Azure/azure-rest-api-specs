@@ -1,16 +1,16 @@
 import { stat } from "node:fs/promises";
-import { ParseArgsConfig, parseArgs } from "node:util";
-import { Suppression } from "suppressions";
-import { Rule } from "./rule.js";
-import { CompileRule } from "./rules/compile.js";
-import { EmitAutorestRule } from "./rules/emit-autorest.js";
-import { FlavorAzureRule } from "./rules/flavor-azure.js";
-import { FolderStructureRule } from "./rules/folder-structure.js";
-import { FormatRule } from "./rules/format.js";
-import { LinterRulesetRule } from "./rules/linter-ruleset.js";
-import { NpmPrefixRule } from "./rules/npm-prefix.js";
-import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
-import { fileExists, getSuppressions, normalizePath } from "./utils.js";
+import { type ParseArgsConfig, parseArgs } from "node:util";
+import { type Suppression } from "suppressions";
+import { type Rule } from "./rule.ts";
+import { CompileRule } from "./rules/compile.ts";
+import { EmitAutorestRule } from "./rules/emit-autorest.ts";
+import { FlavorAzureRule } from "./rules/flavor-azure.ts";
+import { FolderStructureRule } from "./rules/folder-structure.ts";
+import { FormatRule } from "./rules/format.ts";
+import { LinterRulesetRule } from "./rules/linter-ruleset.ts";
+import { NpmPrefixRule } from "./rules/npm-prefix.ts";
+import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
+import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
