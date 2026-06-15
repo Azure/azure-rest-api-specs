@@ -716,16 +716,10 @@ union GeoReplicationStatusType {
 /** Key information. */
 model KeyInfo {
   /** The date-time the key is active. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
-  @encode("rfc3339-fixed-width")
   @Xml.name("Start")
   start: utcDateTime;
 
   /** The date-time the key expires. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Blob service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
-  @encode("rfc3339-fixed-width")
   @Xml.name("Expiry")
   expiry: utcDateTime;
 
