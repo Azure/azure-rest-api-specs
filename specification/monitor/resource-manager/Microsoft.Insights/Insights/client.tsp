@@ -606,7 +606,7 @@ enum MonitorConditionOperator {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   PrivateLinkScopesApi.PrivateEndpointConnections.listByPrivateLinkScope,
-  "java"
+  "csharp,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
