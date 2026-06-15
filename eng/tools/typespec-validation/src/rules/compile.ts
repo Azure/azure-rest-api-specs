@@ -20,8 +20,6 @@ export class CompileRule implements Rule {
     if (await fileExists(path.join(folder, "main.tsp"))) {
       const [err, stdout, stderr] = await runNpm([
         "exec",
-        "--no",
-        "--",
         "tsp",
         "compile",
         "--list-files",
@@ -216,8 +214,6 @@ export class CompileRule implements Rule {
     if (await fileExists(clientTsp)) {
       const [err, stdout, stderr] = await runNpm([
         "exec",
-        "--no",
-        "--",
         "tsp",
         "compile",
         "--no-emit",

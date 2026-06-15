@@ -4,7 +4,7 @@ import { describe, expect, test } from "vitest";
 // TODO: Actual tests
 describe("e2e", () => {
   test("Executes", async () => {
-    const output = await execa("npm", ["exec", "--no", "--", "lint-diff"], { reject: false });
+    const output = await execa("pnpm", ["exec", "lint-diff"], { reject: false });
 
     try {
       expect(output.exitCode).toBe(1);

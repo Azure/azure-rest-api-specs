@@ -13,7 +13,7 @@ export class FormatRule implements Rule {
 
     let [err, stdout, stderr] = await runNpm(
       // Format parent folder to include shared files
-      ["exec", "--no", "--", "tsp", "format", "../**/*.tsp"],
+      ["exec", "tsp", "format", "../**/*.tsp"],
       folder,
     );
     if (err) {
@@ -23,10 +23,7 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
-    [err, stdout, stderr] = await runNpm(
-      ["exec", "--no", "--", "prettier", "--write", "tspconfig.yaml"],
-      folder,
-    );
+    [err, stdout, stderr] = await runNpm(["exec", "prettier", "--write", "tspconfig.yaml"], folder);
     if (err) {
       success = false;
       errorOutput += err.message;
