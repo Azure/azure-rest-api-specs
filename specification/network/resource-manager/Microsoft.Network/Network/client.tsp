@@ -64,12 +64,14 @@ namespace Common {
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
-  Microsoft.Network.NetworkInterfaces
+  Microsoft.Network.NetworkInterfaces,
+  "java,javascript,python,go"
 );
 
 @@clientLocation(
   Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
-  Microsoft.Network.PublicIPAddresses
+  Microsoft.Network.PublicIPAddresses,
+  "java,javascript,python,go"
 );
 
 @@clientName(CombineClient, "NetworkManagementClient", "javascript,python");
