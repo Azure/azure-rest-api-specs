@@ -1,0 +1,56 @@
+{
+  "operationId": "RoleMappings_List",
+  "title": "RoleMappings_List",
+  "parameters": {
+    "api-version": "2026-07-03-preview",
+    "subscriptionId": "1B4766AF-8D4B-4B44-9CF1-587E003DFF7F",
+    "resourceGroupName": "rgcommvault",
+    "cloudAccountName": "myCloudAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "roles": [
+                {
+                  "roleName": "BackupAdmin",
+                  "entities": [
+                    {
+                      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "displayName": "Backup Admins Group",
+                      "entityType": "Group"
+                    }
+                  ]
+                },
+                {
+                  "roleName": "BackupUser",
+                  "entities": [
+                    {
+                      "id": "22222222-3333-4444-5555-666666666666",
+                      "displayName": "Jane Doe",
+                      "entityType": "User"
+                    }
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/1B4766AF-8D4B-4B44-9CF1-587E003DFF7F/resourceGroups/rgcommvault/providers/Commvault.ContentStore/cloudAccounts/myCloudAccount/roleMappings/default",
+            "name": "default",
+            "type": "Commvault.ContentStore/cloudAccounts/roleMappings",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-05-22T10:17:03.241Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-05-22T10:17:03.241Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
