@@ -409,6 +409,16 @@ model ResourceOperationDetails {
   resourceNotificationDetails?: ResourceNotificationDetails;
 }
 
+@added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+@doc("Information about the flexible allocation of a virtual machine.")
+model VmAllocationInfo {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  vmSize?: string;
+
+  @doc("The zone identifier")
+  zone?: string;
+}
+
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
@@ -426,6 +436,10 @@ model ResourceOperation {
 
   @doc("Details of the operation performed on a resource")
   operation?: ResourceOperationDetails;
+
+  @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @doc("Information about the flexible allocation of the virtual machine")
+  vmAllocationInfo?: VmAllocationInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
