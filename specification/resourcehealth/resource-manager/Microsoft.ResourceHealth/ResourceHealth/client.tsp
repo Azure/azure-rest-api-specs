@@ -168,7 +168,7 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(
   ChildResourcesOperationGroup.list,
-  "GetAvailabilityStatusOfChildResource",
+  "GetAvailabilityStatusOfChildResourceData",
   "csharp"
 );
 @@clientName(
@@ -188,12 +188,12 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(
   AvailabilityStatuses.listByResourceGroup,
-  "GetAvailabilityStatusesByResourceGroup",
+  "GetAvailabilityStatusResourcesByResourceGroup",
   "csharp"
 );
 @@clientName(
   AvailabilityStatuses.listBySubscriptionId,
-  "GetAvailabilityStatusesBySubscription",
+  "GetAvailabilityStatusResourcesBySubscription",
   "csharp"
 );
 
