@@ -7,7 +7,7 @@ using Azure.Core;
 
 @@clientName(
   Microsoft.AzureResilienceManagement,
-  "ResilienceManagementMgmtClient",
+  "ResilienceManagementClient",
   "python"
 );
 
