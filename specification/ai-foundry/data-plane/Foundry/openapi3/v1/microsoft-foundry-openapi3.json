@@ -17631,6 +17631,7 @@
           "mapping": {
             "hosted": "#/components/schemas/HostedAgentDefinition",
             "prompt": "#/components/schemas/PromptAgentDefinition",
+            "prompt_voice": "#/components/schemas/PromptVoiceAgentDefinition",
             "workflow": "#/components/schemas/WorkflowAgentDefinition",
             "external": "#/components/schemas/ExternalAgentDefinition"
           }
@@ -17640,7 +17641,8 @@
             "HostedAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "PromptVoiceAgents=V1Preview"
           ]
         }
       },
@@ -17651,7 +17653,8 @@
           "WorkflowAgents=V1Preview",
           "AgentEndpoints=V1Preview",
           "CodeAgents=V1Preview",
-          "ExternalAgents=V1Preview"
+          "ExternalAgents=V1Preview",
+          "PromptVoiceAgents=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
       },
@@ -17776,7 +17779,8 @@
               "a2a",
               "mcp",
               "invocations",
-              "invocations_ws"
+              "invocations_ws",
+              "voice"
             ]
           }
         ]
@@ -17910,7 +17914,8 @@
               "prompt",
               "hosted",
               "workflow",
-              "external"
+              "external",
+              "prompt_voice"
             ]
           }
         ]
@@ -19762,6 +19767,72 @@
         ],
         "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model."
       },
+      "AzureVoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureVoiceType"
+              }
+            ],
+            "description": "The Azure voice kind."
+          },
+          "name": {
+            "type": "string",
+            "description": "The Azure neural voice name, e.g. 'en-US-AvaNeural'."
+          },
+          "style": {
+            "type": "string",
+            "description": "Optional speaking style, e.g. 'cheerful'."
+          },
+          "pitch": {
+            "type": "string",
+            "description": "Optional pitch adjustment, e.g. '+5%'."
+          },
+          "rate": {
+            "type": "string",
+            "description": "Optional rate adjustment, e.g. '+10%'."
+          },
+          "locale": {
+            "type": "string",
+            "description": "Optional BCP-47 locale override, e.g. 'en-US'."
+          }
+        },
+        "description": "An Azure (Voice Live) neural voice with optional prosody. A Voice Live extension to the OpenAI Realtime voice\nfield; OpenAI built-in voices are specified as a bare string instead.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "AzureVoiceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "azure_standard",
+              "azure_custom",
+              "azure_personal",
+              "azure_avatar_voice_sync",
+              "azure_realtime_native"
+            ]
+          }
+        ],
+        "description": "The Azure (Voice Live) voice kind.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
       "BaseCredentials": {
         "type": "object",
         "required": [
@@ -21058,7 +21129,8 @@
                 "HostedAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
-                "ExternalAgents=V1Preview"
+                "ExternalAgents=V1Preview",
+                "PromptVoiceAgents=V1Preview"
               ]
             }
           },
@@ -21107,7 +21179,8 @@
             "HostedAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "PromptVoiceAgents=V1Preview"
           ]
         }
       },
@@ -21254,7 +21327,8 @@
                 "HostedAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
-                "ExternalAgents=V1Preview"
+                "ExternalAgents=V1Preview",
+                "PromptVoiceAgents=V1Preview"
               ]
             }
           },
@@ -21277,7 +21351,8 @@
             "HostedAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "CodeAgents=V1Preview",
-            "ExternalAgents=V1Preview"
+            "ExternalAgents=V1Preview",
+            "PromptVoiceAgents=V1Preview"
           ]
         }
       },
@@ -49757,6 +49832,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "function": "#/components/schemas/OpenAI.FunctionTool",
+            "mcp": "#/components/schemas/OpenAI.MCPTool",
             "bing_grounding": "#/components/schemas/BingGroundingTool",
             "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
             "sharepoint_grounding_preview": "#/components/schemas/SharepointPreviewTool",
@@ -49772,11 +49849,9 @@
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
-            "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
             "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
             "web_search": "#/components/schemas/OpenAI.WebSearchTool",
-            "mcp": "#/components/schemas/OpenAI.MCPTool",
             "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
             "local_shell": "#/components/schemas/OpenAI.LocalShellToolParam",
             "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
@@ -52267,6 +52342,84 @@
         ],
         "description": "Prompt source for evaluator generation jobs — inline text provided by the user."
       },
+      "PromptVoiceAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "model"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "prompt_voice"
+            ]
+          },
+          "model": {
+            "type": "string",
+            "description": "The model deployment to use for this agent. Must be a realtime- or cascaded-capable deployment. Foundry derives the architecture (realtime vs cascaded) from the deployment's model; there is no architecture field."
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts."
+          },
+          "audio": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAudioConfig"
+              }
+            ],
+            "description": "The audio stack configuration (input/output format, voice, turn detection, noise reduction, transcription),\nfollowing the OpenAI Realtime session schema that Voice Live implements and extends. Authored here as the\ncontrol-plane defaults; a client may override the overridable fields per session at connect time."
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceOutputModality"
+            },
+            "description": "The output modalities the agent produces. Defaults to `[\"audio\"]`. Voice Live adds `animation`/`avatar`\nwhen an avatar is configured."
+          },
+          "avatar": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAvatarConfig"
+              }
+            ],
+            "description": "Optional avatar configuration (a Voice Live extension). Authored here as a control-plane default; overridable per session."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "The tools the agent may use. A prompt voice agent supports exactly four tool kinds (see `VoiceAgentTool`):\nnative `function` (executed by the client), `mcp`, `system` (Voice Live built-in control, e.g. end-call),\nand `toolbox`. Unlike prompt/hosted agents, server-side tools (e.g. `web_search`, `azure_ai_search`,\n`openapi`) are not declared directly on a voice agent; they are packaged in a toolbox and executed by Voice\nLive via the toolbox MCP endpoint."
+          },
+          "structured_inputs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/StructuredInputDefinition"
+            },
+            "description": "Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          }
+        ],
+        "description": "The prompt voice agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,\ntools, optional avatar) drives a managed speech-to-speech experience. The live realtime session is bridged to\nthe managed Voice Live backend and reached as the `voice` protocol on the agent endpoint\n(`/agents/{agent_name}/endpoint/protocols/voice`); the realtime session/audio/event wire schema is owned by\nVoice Live and is not redefined in this spec. Like prompt agents, every create/update produces a new\nimmutable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
       "ProtocolVersionRecord": {
         "type": "object",
         "required": [
@@ -53480,6 +53633,85 @@
           }
         ],
         "description": "Type of the task."
+      },
+      "SemanticVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "semantic_vad"
+            ]
+          },
+          "eagerness": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceTurnDetectionEagerness"
+              }
+            ],
+            "description": "How eagerly the model ends the user's turn."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceTurnDetection"
+          }
+        ],
+        "description": "Semantic (model-based) turn detection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "ServerVadTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "server_vad"
+            ]
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Activation threshold (0-1). Higher requires louder audio to trigger."
+          },
+          "prefix_padding_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Audio (ms) to include before detected speech start."
+          },
+          "silence_duration_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Silence (ms) used to detect speech stop."
+          },
+          "create_response": {
+            "type": "boolean",
+            "description": "Whether the server automatically creates a response when a turn ends. Defaults to true."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VoiceTurnDetection"
+          }
+        ],
+        "description": "Server-side voice activity detection (silence-based).",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
       },
       "SessionDirectoryEntry": {
         "type": "object",
@@ -55302,7 +55534,8 @@
                 "HostedAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "CodeAgents=V1Preview",
-                "ExternalAgents=V1Preview"
+                "ExternalAgents=V1Preview",
+                "PromptVoiceAgents=V1Preview"
               ]
             }
           },
@@ -55556,6 +55789,490 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentTool": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.FunctionTool"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.MCPTool"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceSystemTool"
+          },
+          {
+            "$ref": "#/components/schemas/VoiceToolboxTool"
+          }
+        ],
+        "description": "A tool usable by a prompt voice agent. Exactly four kinds are supported: native `function` (executed by the\nclient) and `mcp` reuse the OpenAI Realtime tool shapes; `system` and `toolbox` are Foundry voice extensions.\nThe generic agent tool set (server-side tools such as `web_search` or `azure_ai_search`) is intentionally not\nallowed here — package those in a toolbox instead.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioConfig": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAudioInputConfig"
+              }
+            ],
+            "description": "Input (microphone) audio configuration."
+          },
+          "output": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAudioOutputConfig"
+              }
+            ],
+            "description": "Output (agent speech) audio configuration."
+          }
+        },
+        "description": "The audio stack configuration for a prompt voice agent, following the OpenAI Realtime session schema (which\nVoice Live implements and extends). Authored as control-plane defaults; overridable per session at connect time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioFormat": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAudioFormatType"
+              }
+            ],
+            "description": "The audio format type, e.g. 'audio/pcm' (16-bit PCM), 'audio/pcmu' (G.711 mu-law), or 'audio/pcma' (G.711 A-law)."
+          },
+          "rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate in Hz. Applies to 'audio/pcm' (e.g. 24000); omit for telephony G.711 formats (8 kHz)."
+          }
+        },
+        "description": "An audio format. Follows the OpenAI Realtime session schema; `type` carries the media subtype.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioFormatType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "audio/pcm",
+              "audio/pcmu",
+              "audio/pcma"
+            ]
+          }
+        ],
+        "description": "The audio format type. Values follow the OpenAI Realtime wire schema and are exempt from the snake_case enum-value rule.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioInputConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAudioFormat"
+              }
+            ],
+            "description": "The input audio format."
+          },
+          "noise_reduction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceNoiseReduction"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Input noise reduction. Set to null to disable."
+          },
+          "turn_detection": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceTurnDetection"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Turn (end-of-speech) detection. Set to null to disable server-side turn detection."
+          },
+          "transcription": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceInputTranscription"
+              }
+            ],
+            "description": "Optional asynchronous input-audio transcription configuration."
+          }
+        },
+        "description": "Input (microphone) audio configuration for a prompt voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAudioOutputConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAudioFormat"
+              }
+            ],
+            "description": "The output audio format."
+          },
+          "voice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/AzureVoice"
+              }
+            ],
+            "description": "The voice. Either an OpenAI Realtime built-in voice name (e.g. 'alloy') or an Azure (Voice Live) neural voice object."
+          },
+          "speed": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.25,
+            "maximum": 1.5,
+            "description": "The speaking speed multiplier, from 0.25 to 1.5. Defaults to 1.",
+            "default": 1
+          }
+        },
+        "description": "Output (agent speech) audio configuration for a prompt voice agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAvatarConfig": {
+        "type": "object",
+        "required": [
+          "type",
+          "character"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAvatarType"
+              }
+            ],
+            "description": "The avatar type. Values follow the Voice Live wire schema."
+          },
+          "character": {
+            "type": "string",
+            "description": "The avatar character identifier, e.g. 'lisa'."
+          },
+          "style": {
+            "type": "string",
+            "description": "The avatar style, e.g. 'casual-sitting'."
+          },
+          "customized": {
+            "type": "boolean",
+            "description": "Whether the avatar is a customer-customized avatar. Defaults to false.",
+            "default": false
+          },
+          "output_protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAvatarOutputProtocol"
+              }
+            ],
+            "description": "The transport used to deliver the avatar video stream."
+          }
+        },
+        "description": "Avatar configuration for a prompt voice agent. A Voice Live extension (not part of the OpenAI Realtime schema).\nAuthored as a control-plane default; overridable per session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAvatarOutputProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "webrtc",
+              "websocket"
+            ]
+          }
+        ],
+        "description": "The transport used to deliver the avatar video stream.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAvatarType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "video-avatar",
+              "photo-avatar"
+            ]
+          }
+        ],
+        "description": "The avatar type. Values follow the Voice Live wire schema.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceInputTranscription": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The transcription model deployment to use."
+          },
+          "language": {
+            "type": "string",
+            "description": "The expected input language as a BCP-47 code (e.g. 'en-US'). Auto-detected when omitted."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Optional prompt to bias transcription toward domain terms."
+          }
+        },
+        "description": "Asynchronous input-audio transcription configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceNoiseReduction": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceNoiseReductionType"
+              }
+            ],
+            "description": "The noise reduction mode."
+          }
+        },
+        "description": "Input audio noise reduction configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceNoiseReductionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "near_field",
+              "far_field",
+              "azure_deep_noise_suppression"
+            ]
+          }
+        ],
+        "description": "The input audio noise reduction mode. 'near_field'/'far_field' follow the OpenAI Realtime schema; 'azure_deep_noise_suppression' is a Voice Live extension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceOutputModality": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "text",
+              "audio",
+              "animation",
+              "avatar"
+            ]
+          }
+        ],
+        "description": "An output modality the agent may produce. 'animation'/'avatar' are Voice Live extensions used when an avatar is configured.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceSystemTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "The type of the tool. Always `system`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the built-in control action, e.g. `end_conversation`."
+          }
+        },
+        "description": "A Voice Live built-in control (system) tool that acts on the live session itself, e.g. ending the call. Executed natively by Voice Live; no customer code or external auth.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceToolboxTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "toolbox_name",
+          "toolbox_version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "toolbox"
+            ],
+            "description": "The type of the tool. Always `toolbox`."
+          },
+          "toolbox_name": {
+            "type": "string",
+            "description": "The name of the toolbox to attach."
+          },
+          "toolbox_version": {
+            "type": "string",
+            "description": "The immutable version of the toolbox to attach."
+          }
+        },
+        "description": "A reference to a Foundry toolbox (a versioned bundle of tools). Voice Live calls the toolbox MCP endpoint and the Foundry tool server runs the tool. This is how a voice agent uses server-side tools (web search, Azure AI Search, OpenAPI, etc.) that it cannot declare directly.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceTurnDetection": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceTurnDetectionType"
+              }
+            ],
+            "description": "The turn detection strategy."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "server_vad": "#/components/schemas/ServerVadTurnDetection",
+            "semantic_vad": "#/components/schemas/SemanticVadTurnDetection"
+          }
+        },
+        "description": "Turn (end-of-speech) detection configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceTurnDetectionEagerness": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "auto",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "description": "How eagerly semantic turn detection ends the user's turn.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceTurnDetectionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "server_vad",
+              "semantic_vad"
+            ]
+          }
+        ],
+        "description": "The turn detection strategy. Values follow the OpenAI Realtime wire schema.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
           ]
         }
       },

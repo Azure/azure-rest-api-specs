@@ -90,6 +90,7 @@ union AgentDefinitionOptInKeys {
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
   code_agents_v1_preview: "CodeAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
+  prompt_voice_agents_v1_preview: "PromptVoiceAgents=V1Preview",
 
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
