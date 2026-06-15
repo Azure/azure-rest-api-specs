@@ -44,6 +44,14 @@ options:
     flavor: azure
     generate-tests: false
     generate-samples: false
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/data/azappconfig/v2"
+    service-dir: "sdk/data"
+    emitter-output-dir: "{output-dir}/{service-dir}/azappconfig/internal/generated"
+    slice-elements-byval: true
+    generate-fakes: false
+    inject-spans: false
+    file-prefix: "zz_"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

@@ -1,5 +1,5 @@
-import { OpenAPI2Document, OpenAPI2Parameter } from "@azure-tools/typespec-autorest";
-import { getOriginalDocument } from "./document.js";
+import { type OpenAPI2Document, type OpenAPI2Parameter } from "@azure-tools/typespec-autorest";
+import { getOriginalDocument } from "./document.ts";
 
 const apiVersionAlias: string[] = ["api-version", "apiVersion", "apiVersionParameter"];
 
@@ -102,14 +102,18 @@ export function isResourceGroupNameParameter(obj: Record<string, any>) {
   return false;
 }
 
-export function getOriginalParameter(refPath: string, originalDocument?: OpenAPI2Document): OpenAPI2Parameter | undefined {
+export function getOriginalParameter(
+  refPath: string,
+  originalDocument?: OpenAPI2Document,
+): OpenAPI2Parameter | undefined {
   originalDocument ??= getOriginalDocument();
   // get the part after '#/parameters/'
   if (refPath.includes("#/parameters/")) {
-    const parameterName = refPath.substring(refPath.indexOf("#/parameters/") + "#/parameters/".length);
+    const parameterName = refPath.substring(
+      refPath.indexOf("#/parameters/") + "#/parameters/".length,
+    );
     return originalDocument?.parameters?.[parameterName];
-  }
-  else {
+  } else {
     return undefined;
   }
 }

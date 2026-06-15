@@ -26,7 +26,16 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01-preview
+tag: package-2026-03-preview
+```
+
+### Tag: package-2026-03-preview
+
+These settings apply only when `--tag=package-2026-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-preview'
+input-file:
+  - preview/2026-03-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2026-01-preview
@@ -286,6 +295,13 @@ suppressions:
     reason: Previously existing implementation (properties retentionDays and metadataSearch), flagged as part of Typespec conversion
     where: 
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: containerregistry.json
+    reason: The `type` property on AdditionalAuthenticationProperties is the polymorphic discriminator selecting the authentication
+     variant. It must remain required in the PATCH body so callers can identify which derived auth schema they are sending;
+     making it optional would break discriminated deserialization.
+    where:
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules/{cacheRuleName}"].patch.parameters[5].schema.properties.properties
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion

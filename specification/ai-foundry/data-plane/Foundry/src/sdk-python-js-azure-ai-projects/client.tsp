@@ -30,7 +30,9 @@ import "../data_generation_jobs/routes.tsp";
 import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
-import "./relocate-beta-operations.tsp";
+import "../sdk-common/beta-ops-relocation-agents.tsp";
+import "../sdk-common/beta-ops-relocation-projects.tsp";
+import "../error.default.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
@@ -190,19 +192,6 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
-@@clientName(
-  AgentOptimizationJobs.listCandidates,
-  "listOptimizationCandidates"
-);
-@@clientName(AgentOptimizationJobs.getCandidate, "getOptimizationCandidate");
-@@clientName(
-  AgentOptimizationJobs.getCandidateConfig,
-  "getOptimizationCandidateConfig"
-);
-@@clientName(
-  AgentOptimizationJobs.getCandidateResults,
-  "getOptimizationCandidateResults"
-);
 
 // DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
 // to define Agent optimization request. If emitted as-is, it pulls in a lot of
