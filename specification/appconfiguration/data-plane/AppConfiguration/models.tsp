@@ -357,6 +357,20 @@ alias ContentTypeHeader<T extends string> = {
   contentType?: T | "application/problem+json";
 };
 
+alias PutKeyValueRequestContentType = {
+  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+  @doc("Content-Type header")
+  @header("Content-Type")
+  contentType:
+    | "application/vnd.microsoft.appconfig.kv+json"
+    | "application/vnd.microsoft.appconfig.kvset+json"
+    | "application/json"
+    | "text/json"
+    | "application/*+json"
+    | "application/json-patch+json";
+};
+
 alias AppConfigResponseHeaders = {
   ...SyncTokenHeader;
 
