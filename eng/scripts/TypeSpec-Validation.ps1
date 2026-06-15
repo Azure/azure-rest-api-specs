@@ -49,7 +49,7 @@ if ($typespecFolders) {
       }
     }
 
-    # Example: '{"checkingAllSpecs"=true}'
+    # Example: '{"checkingAllSpecs":true}'
     $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
     LogInfo "pnpm tsv $typespecFolder ""$context"""
@@ -59,7 +59,11 @@ if ($typespecFolders) {
       continue
     }
 
-    pnpm tsv $typespecFolder "$context" 2>&1 | Write-Host
+    # Invoke the tsv entrypoint with node directly instead of through the pnpm
+    # shim. On Windows the pnpm shim re-quotes arguments and strips the double
+    # quotes from the JSON context (so JSON.parse fails); calling node avoids it.
+    $tsvScript = Join-Path $PSScriptRoot ".." "tools" "typespec-validation" "cmd" "tsv.js"
+    node $tsvScript $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
