@@ -234,7 +234,8 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
-@@clientName(DocumentTranslation.TargetInput.deploymentName,
+@@clientName(
+  DocumentTranslation.TargetInput.deploymentName,
   "deployment_name",
   "python"
 );
