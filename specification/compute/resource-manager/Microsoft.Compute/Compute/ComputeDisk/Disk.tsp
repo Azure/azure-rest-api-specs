@@ -19,7 +19,7 @@ model Disk is Azure.ResourceManager.TrackedResource<DiskProperties> {
     Resource = Disk,
     KeyName = "diskName",
     SegmentName = "disks",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**

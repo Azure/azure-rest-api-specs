@@ -21,7 +21,7 @@ model Snapshot is Azure.ResourceManager.TrackedResource<SnapshotProperties> {
     Resource = Snapshot,
     KeyName = "snapshotName",
     SegmentName = "snapshots",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**
