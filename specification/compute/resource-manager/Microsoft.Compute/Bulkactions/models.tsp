@@ -49,7 +49,7 @@ union ResourceOperationType {
   @doc("Delete operations on the resources")
   Delete: "Delete",
 
-  @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
   GetInstanceView: "GetInstanceView",
 
@@ -99,7 +99,7 @@ model Resources {
   ]>>;
 }
 
-@added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("The resources needed for the user request with the resourceContext")
 model ResourceWithContext {
   @doc("The resource ids used for the request")
@@ -114,7 +114,7 @@ model ResourceWithContext {
 }
 
 @doc("The resources needed for the user request with the context for tracking purposes")
-@added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 model ResourcesWithContext {
   @identifiers(#["resourceId"])
   @doc("The resource ids used for the request")
@@ -334,7 +334,7 @@ model ExecutionParameters {
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
 
-  @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
   verifyVmAgentHealth?: boolean;
 }
@@ -404,7 +404,7 @@ model ResourceOperationDetails {
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
 
-  @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("Resource notification details.")
   resourceNotificationDetails?: ResourceNotificationDetails;
 }
@@ -489,10 +489,10 @@ model ExecuteTypeRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  @madeOptional(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
   resources?: Resources;
 
-  @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("The resources for the request with resource context information")
   resourcesWithContext?: ResourcesWithContext;
 }

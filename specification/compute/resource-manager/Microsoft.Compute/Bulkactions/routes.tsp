@@ -152,6 +152,7 @@ interface VirtualMachineBulkOperations {
 
   /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @removed(Versions.`2026-06-06`)
+  @added(Versions.`2026-07-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -169,6 +170,7 @@ interface VirtualMachineBulkOperations {
 
   /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
   @removed(Versions.`2026-06-06`)
+  @added(Versions.`2026-07-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -234,6 +236,7 @@ interface VirtualMachineBulkOperations {
 
   /** BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @removed(Versions.`2026-06-06`)
+  @added(Versions.`2026-07-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction

@@ -328,7 +328,7 @@ model LaunchBulkInstancesOperationListResult {
 // ============================================================
 
 @removed(Versions.`2026-06-06`)
-@added(Versions.`2026-05-06-preview`)
+@added(Versions.`2026-07-06-preview`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface LaunchBulkInstancesOperation {
   @doc("Gets an instance of LaunchBulkInstancesOperations.")
