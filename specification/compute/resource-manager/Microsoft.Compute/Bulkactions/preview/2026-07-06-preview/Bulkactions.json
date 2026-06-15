@@ -3821,6 +3821,10 @@
         "operation": {
           "$ref": "#/definitions/ResourceOperationDetails",
           "description": "Details of the operation performed on a resource"
+        },
+        "vmAllocationInfo": {
+          "$ref": "#/definitions/VmAllocationInfo",
+          "description": "Information about the flexible allocation of the virtual machine"
         }
       }
     },
@@ -5393,6 +5397,20 @@
         "osProfile": {
           "$ref": "#/definitions/OSProfileProvisioningData",
           "description": "Specifies information required for reimaging the non-ephemeral OS disk."
+        }
+      }
+    },
+    "VmAllocationInfo": {
+      "type": "object",
+      "description": "Information about the flexible allocation of a virtual machine.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The name of the VM size, eg Standard_D2ads_v5"
+        },
+        "zone": {
+          "type": "string",
+          "description": "The zone identifier"
         }
       }
     },

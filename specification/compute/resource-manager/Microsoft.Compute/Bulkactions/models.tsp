@@ -409,7 +409,7 @@ model ResourceOperationDetails {
   resourceNotificationDetails?: ResourceNotificationDetails;
 }
 
-@added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
 @doc("Information about the flexible allocation of a virtual machine.")
 model VmAllocationInfo {
   @doc("The name of the VM size, eg Standard_D2ads_v5")
@@ -437,7 +437,7 @@ model ResourceOperation {
   @doc("Details of the operation performed on a resource")
   operation?: ResourceOperationDetails;
 
-  @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @doc("Information about the flexible allocation of the virtual machine")
   vmAllocationInfo?: VmAllocationInfo;
 }
