@@ -11,12 +11,17 @@ inputs:
   working-directory:
     description: "Working directory"
     default: "."
+  package-json-file:
+    description: 'Path (relative to the repository root) of the package.json containing the "packageManager" field used to select the pnpm version'
+    default: "package.json"
 
 runs:
   using: "composite"
 
   steps:
     - uses: pnpm/action-setup@v6
+      with:
+        package_json_file: ${{ inputs.package-json-file }}
 
     - uses: actions/setup-node@v6
       with:
