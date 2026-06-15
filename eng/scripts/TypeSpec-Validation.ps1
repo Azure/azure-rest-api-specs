@@ -52,19 +52,19 @@ if ($typespecFolders) {
     # Example: '{"checkingAllSpecs"=true}'
     $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
-    LogInfo "pnpm exec tsv $typespecFolder ""$context"""
+    LogInfo "pnpm tsv $typespecFolder ""$context"""
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    pnpm exec tsv $typespecFolder "$context" 2>&1 | Write-Host
+    pnpm tsv $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
       $errorString += "`n > pnpm install"
-      $errorString += "`n > pnpm exec tsv $typespecFolder"
+      $errorString += "`n > pnpm tsv $typespecFolder"
       $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
       LogError $errorString
     }
@@ -87,7 +87,7 @@ if ($typespecFoldersWithFailures.Count -gt 0) {
   LogInfo "TypeSpec Validation failed for some folder to fix run and address any errors:"
   LogInfo " > pnpm install"
   foreach ($typespecFolderWithFailure in $typespecFoldersWithFailures) {
-    LogInfo " > pnpm exec tsv $typespecFolderWithFailure"
+    LogInfo " > pnpm tsv $typespecFolderWithFailure"
   }
   LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
   LogJobFailure
