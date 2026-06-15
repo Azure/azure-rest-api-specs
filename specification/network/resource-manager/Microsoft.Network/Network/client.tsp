@@ -13,6 +13,14 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
+@client({
+  name: "CombineClient",
+  service: [Microsoft.Network, Microsoft.Compute],
+  autoMergeService: true,
+})
+namespace CombineClient;
+
 // Define WritableSubResource in the ARM namespace for C# collection compatibility.
 namespace Azure.ResourceManager.Models {
   model WritableSubResource {
@@ -41,14 +49,6 @@ namespace Common {
     type?: string;
   }
 }
-
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
-@client({
-  name: "CombineClient",
-  service: [Microsoft.Network, Microsoft.Compute],
-  autoMergeService: true,
-})
-namespace CombineClient;
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
