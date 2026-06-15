@@ -1,5 +1,5 @@
 import "@typespec/http";
-import "../servicepatterns.tsp";
+import "./servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -20,11 +20,7 @@ op OpenAISharedOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
-> is OpenAIOperation<
-  Params,
-  Response,
-  ErrorResponse
->;
+> is OpenAIOperation<Params, Response, ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
