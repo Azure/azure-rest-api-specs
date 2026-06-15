@@ -61,14 +61,16 @@ model CertificateAuthorityProperties {
 
 @added(Versions.v2026_11_01_preview)
 @doc("Properties for a self-signed, service-managed root Certificate Authority.")
-model RootCertificateAuthorityProperties extends CertificateAuthorityProperties {
+model RootCertificateAuthorityProperties
+  extends CertificateAuthorityProperties {
   @doc("The self-signed, service-managed root Certificate Authority type.")
   certificateAuthorityType: "Root";
 }
 
 @added(Versions.v2026_11_01_preview)
 @doc("Properties for an intermediate Certificate Authority signed by another same-namespace Certificate Authority.")
-model IntermediateCertificateAuthorityProperties extends CertificateAuthorityProperties {
+model IntermediateCertificateAuthorityProperties
+  extends CertificateAuthorityProperties {
   @doc("The intermediate Certificate Authority type.")
   certificateAuthorityType: "ICA";
 
@@ -79,12 +81,13 @@ model IntermediateCertificateAuthorityProperties extends CertificateAuthorityPro
 
 @added(Versions.v2026_11_01_preview)
 @doc("Properties for a Certificate Authority whose CA certificate is signed by an external issuer.")
-model BringYourOwnCertificateAuthorityProperties extends CertificateAuthorityProperties {
+model BringYourOwnCertificateAuthorityProperties
+  extends CertificateAuthorityProperties {
   @doc("The Bring Your Own Certificate Authority type.")
   certificateAuthorityType: "BringYourOwn";
 
   @doc("Configuration for Bring Your Own.")
-  bringYourOwn: BringYourOwnConfiguration;
+  bringYourOwn?: BringYourOwnConfiguration;
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -155,7 +158,10 @@ interface CertificateAuthorities {
   get is ArmResourceRead<CertificateAuthority>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<CertificateAuthority>;
   delete is ArmResourceDeleteWithoutOkAsync<CertificateAuthority>;
-  update is ArmResourcePatchAsync<CertificateAuthority, CertificateAuthorityProperties>;
+  update is ArmResourcePatchAsync<
+    CertificateAuthority,
+    CertificateAuthorityProperties
+  >;
   listByNamespace is ArmResourceListByParent<CertificateAuthority>;
 
   @doc("Activates the Certificate Authority signed by external PKI.")

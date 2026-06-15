@@ -14,7 +14,7 @@ namespace Microsoft.DeviceRegistry;
 
 @added(Versions.v2026_11_01_preview)
 @doc("A Certificate Policy resource.")
-@parentResource(Credential)
+@parentResource(CertificateAuthority)
 model CertificatePolicy
   is Azure.ResourceManager.TrackedResource<CertificatePolicyProperties> {
   @doc("The name of the Certificate Policy resource.")
