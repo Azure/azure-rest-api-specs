@@ -24,7 +24,7 @@ interface NetAppResourceOperationGroup {
     Request = ResourceNameAvailabilityRequest,
     Response = CheckAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Check if a file path is available.
@@ -35,7 +35,7 @@ interface NetAppResourceOperationGroup {
     Request = FilePathAvailabilityRequest,
     Response = CheckAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Check if a quota is available.
@@ -46,7 +46,7 @@ interface NetAppResourceOperationGroup {
     Request = QuotaAvailabilityRequest,
     Response = CheckAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Provides storage to network proximity and logical zone mapping information.
@@ -58,7 +58,7 @@ interface NetAppResourceOperationGroup {
   queryRegionInfo is ArmProviderActionSync<
     Response = RegionInfo,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Get details of the specified network sibling set.
@@ -69,7 +69,7 @@ interface NetAppResourceOperationGroup {
     Request = QueryNetworkSiblingSetRequest,
     Response = NetworkSiblingSet,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Update the network features of the specified network sibling set.
@@ -80,7 +80,7 @@ interface NetAppResourceOperationGroup {
     Request = UpdateNetworkSiblingSetRequest,
     Response = NetworkSiblingSet,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
 
@@ -97,7 +97,7 @@ interface NetAppResourceUsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = UsagesListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
   /**
    * Get current subscription usage of the specific type

@@ -49,11 +49,13 @@ interface CredentialSets {
   update is ArmCustomPatchAsync<
     CredentialSet,
     PatchModel = CredentialSetUpdateParameters,
-    Response = ArmResponse<CredentialSet> | ArmResourceCreatedResponse<
-      CredentialSet,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = CredentialSet> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<CredentialSet>
+      | ArmResourceCreatedResponse<
+          CredentialSet,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = CredentialSet> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -75,9 +77,11 @@ interface CredentialSets {
 @@minLength(CredentialSet.name, 5);
 @@doc(CredentialSet.name, "The name of the credential set.");
 @@doc(CredentialSet.properties, "The properties of the credential set.");
-@@doc(CredentialSets.create::parameters.resource,
+@@doc(
+  CredentialSets.create::parameters.resource,
   "The parameters for creating a credential set."
 );
-@@doc(CredentialSets.update::parameters.properties,
+@@doc(
+  CredentialSets.update::parameters.properties,
   "The parameters for updating a credential set."
 );

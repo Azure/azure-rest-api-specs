@@ -302,11 +302,13 @@ interface Customers {
     Customer,
     CustomerPolicy,
     CustomerPolicy,
-    Response = ArmResourceCreatedResponse<
-      CustomerPolicy,
-      ArmLroLocationHeader<FinalResult = CustomerPolicy> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmResponse<CustomerPolicy>
+    Response =
+      | ArmResourceCreatedResponse<
+          CustomerPolicy,
+          ArmLroLocationHeader<FinalResult = CustomerPolicy> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmResponse<CustomerPolicy>
   >;
 
   /**
@@ -699,12 +701,15 @@ alias BillingSubscriptionsListByCustomerAtBillingAccountParameters = {
 
 @@doc(Customer.name, "The ID that uniquely identifies a customer.");
 @@doc(Customer.properties, "A partner's customer.");
-@@doc(Customers.checkAccessByCustomer::parameters.body,
+@@doc(
+  Customers.checkAccessByCustomer::parameters.body,
   "The request object against which access of the caller will be checked."
 );
-@@doc(Customers.createByCustomer::parameters.body,
+@@doc(
+  Customers.createByCustomer::parameters.body,
   "The properties of the billing role assignment."
 );
-@@doc(Customers.createOrUpdateByCustomer::parameters.body,
+@@doc(
+  Customers.createOrUpdateByCustomer::parameters.body,
   "A policy at customer scope."
 );

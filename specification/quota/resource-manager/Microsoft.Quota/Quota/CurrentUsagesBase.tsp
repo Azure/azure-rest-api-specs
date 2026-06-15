@@ -46,7 +46,8 @@ interface CurrentUsagesBases {
   >;
 }
 
-@@doc(CurrentUsagesBase.name,
+@@doc(
+  CurrentUsagesBase.name,
   """
     Resource name for a given resource provider. For example:
     - SKU name for Microsoft.Compute
@@ -54,6 +55,7 @@ interface CurrentUsagesBases {
      For Microsoft.Network PublicIPAddresses.
     """
 );
-@@doc(CurrentUsagesBase.properties,
+@@doc(
+  CurrentUsagesBase.properties,
   "Usage properties for the specified resource."
 );

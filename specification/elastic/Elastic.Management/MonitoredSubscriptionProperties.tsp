@@ -90,10 +90,12 @@ interface MonitoredSubscriptions {
   >;
 }
 
-@@doc(MonitoredSubscriptionProperties.name,
+@@doc(
+  MonitoredSubscriptionProperties.name,
   "The configuration name. Only 'default' value is supported."
 );
-@@doc(MonitoredSubscriptionProperties.properties,
+@@doc(
+  MonitoredSubscriptionProperties.properties,
   "The request to update subscriptions needed to be monitored by the Elastic monitor resource."
 );
 @@doc(MonitoredSubscriptions.createorUpdate::parameters.resource, "");

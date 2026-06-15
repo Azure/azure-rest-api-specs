@@ -6,7 +6,8 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Confluent;
 
-@@clientName(Microsoft.Confluent,
+@@clientName(
+  Microsoft.Confluent,
   "ConfluentManagementClient",
   "javascript,python"
 );
@@ -18,20 +19,24 @@ using Microsoft.Confluent;
 @@clientName(APIKeySpecEntity, "ApiKeySpecEntity", "java,csharp");
 @@clientName(APIKeyProperties, "ApiKeyProperties", "java");
 @@clientName(APIKeyRecord, "ApiKeyRecord", "java");
-@@clientName(OrganizationResourceAPIKeyActions.getClusterAPIKey,
+@@clientName(
+  OrganizationResourceAPIKeyActions.getClusterAPIKey,
   "getClusterApiKey",
   "java,csharp"
 );
-@@clientName(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
+@@clientName(
+  OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "deleteClusterApiKey",
   "java,csharp"
 );
 @@clientName(SCClusterRecords.createAPIKey, "createApiKey", "java,csharp");
-@@clientLocation(OrganizationResourceAPIKeyActions.getClusterAPIKey,
+@@clientLocation(
+  OrganizationResourceAPIKeyActions.getClusterAPIKey,
   "OrganizationResourceApiKeyActions",
   "java"
 );
-@@clientLocation(OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
+@@clientLocation(
+  OrganizationResourceAPIKeyActions.deleteClusterAPIKey,
   "OrganizationResourceApiKeyActions",
   "java"
 );
@@ -49,19 +54,23 @@ using Microsoft.Confluent;
 @@alternateType(OrganizationResourceProperties.organizationId, uuid, "csharp");
 @@clientName(ConfluentAgreementResource, "ConfluentAgreement", "csharp");
 @@clientName(ConfluentAgreementProperties.accepted, "IsAccepted", "csharp");
-@@clientName(ConfluentAgreementProperties.retrieveDatetime,
+@@clientName(
+  ConfluentAgreementProperties.retrieveDatetime,
   "RetrieveOn",
   "csharp"
 );
-@@clientName(OrganizationResourceUpdate,
+@@clientName(
+  OrganizationResourceUpdate,
   "ConfluentOrganizationPatch",
   "csharp"
 );
-@@clientName(ConfluentAgreementResourceListResponse,
+@@clientName(
+  ConfluentAgreementResourceListResponse,
   "ConfluentAgreementListResult",
   "csharp"
 );
-@@clientName(ValidationResponse,
+@@clientName(
+  ValidationResponse,
   "ConfluentOrganizationValidationResult",
   "csharp"
 );
@@ -79,17 +88,20 @@ using Microsoft.Confluent;
 @@clientName(SCMetadataEntity.deletedTimestamp, "DeletedOn", "csharp");
 @@alternateType(SCMetadataEntity.deletedTimestamp, utcDateTime, "csharp");
 @@clientName(ListAccessRequestModel, "AccessListContent", "csharp");
-@@clientName(AccessListClusterSuccessResponse,
+@@clientName(
+  AccessListClusterSuccessResponse,
   "AccessClusterListResult",
   "csharp"
 );
 @@clientName(ClusterRecord, "AccessClusterRecord", "csharp");
-@@clientName(AccessListEnvironmentsSuccessResponse,
+@@clientName(
+  AccessListEnvironmentsSuccessResponse,
   "AccessEnvironmentListResult",
   "csharp"
 );
 @@clientName(EnvironmentRecord, "AccessEnvironmentRecord", "csharp");
-@@clientName(AccessListInvitationsSuccessResponse,
+@@clientName(
+  AccessListInvitationsSuccessResponse,
   "AccessInvitationListResult",
   "csharp"
 );
@@ -100,16 +112,19 @@ using Microsoft.Confluent;
 @@alternateType(InvitationRecord.expires_at, utcDateTime, "csharp");
 @@clientName(ListRegionsSuccessResponse, "ConfluentRegionListResult", "csharp");
 @@clientName(RegionRecord, "ConfluentRegionRecord", "csharp");
-@@clientName(AccessRoleBindingNameListSuccessResponse,
+@@clientName(
+  AccessRoleBindingNameListSuccessResponse,
   "AccessRoleBindingNameListResult",
   "csharp"
 );
-@@clientName(AccessListServiceAccountsSuccessResponse,
+@@clientName(
+  AccessListServiceAccountsSuccessResponse,
   "AccessServiceAccountListResult",
   "csharp"
 );
 @@clientName(ServiceAccountRecord, "AccessServiceAccountRecord", "csharp");
-@@clientName(AccessCreateRoleBindingRequestModel,
+@@clientName(
+  AccessCreateRoleBindingRequestModel,
   "AccessRoleBindingCreateContent",
   "csharp"
 );
@@ -117,62 +132,76 @@ using Microsoft.Confluent;
 @@clientName(AccessInviteUserAccountModel, "AccessInvitationContent", "csharp");
 @@clientName(AccessListUsersSuccessResponse, "AccessUserListResult", "csharp");
 @@clientName(UserRecord, "AccessUserRecord", "csharp");
-@@clientName(AccessListRoleBindingsSuccessResponse,
+@@clientName(
+  AccessListRoleBindingsSuccessResponse,
   "AccessRoleBindingListResult",
   "csharp"
 );
 @@clientName(SCClusterRecords.getClusterById, "GetCluster", "csharp");
-@@clientName(SCEnvironmentRecords.getEnvironmentById,
+@@clientName(
+  SCEnvironmentRecords.getEnvironmentById,
   "GetEnvironment",
   "csharp"
 );
-@@clientName(SCEnvironmentRecordCluster.getSchemaRegistryClusterById,
+@@clientName(
+  SCEnvironmentRecordCluster.getSchemaRegistryClusterById,
   "GetSchemaRegistryCluster",
   "csharp"
 );
-@@clientName(ValidationsOperationGroup.validateOrganization,
+@@clientName(
+  ValidationsOperationGroup.validateOrganization,
   "ValidateOrganization",
   "csharp"
 );
-@@clientName(ValidationsOperationGroup.validateOrganizationV2,
+@@clientName(
+  ValidationsOperationGroup.validateOrganizationV2,
   "ValidateOrganizationV2",
   "csharp"
 );
-@@clientName(OrganizationResources.createRoleBinding,
+@@clientName(
+  OrganizationResources.createRoleBinding,
   "CreateAccessRoleBinding",
   "csharp"
 );
-@@clientName(OrganizationResourceRoleBindingIdActions.deleteRoleBinding,
+@@clientName(
+  OrganizationResourceRoleBindingIdActions.deleteRoleBinding,
   "DeleteAccessRoleBinding",
   "csharp"
 );
 @@clientName(OrganizationResources.listClusters, "GetAccessClusters", "csharp");
-@@clientName(SCEnvironmentRecords.listEnvironments,
+@@clientName(
+  SCEnvironmentRecords.listEnvironments,
   "GetAccessEnvironments",
   "csharp"
 );
-@@clientName(OrganizationResources.listInvitations,
+@@clientName(
+  OrganizationResources.listInvitations,
   "GetAccessInvitations",
   "csharp"
 );
-@@clientName(OrganizationResources.listRoleBindingNameList,
+@@clientName(
+  OrganizationResources.listRoleBindingNameList,
   "GetAccessRoleBindingNames",
   "csharp"
 );
-@@clientName(OrganizationResources.listServiceAccounts,
+@@clientName(
+  OrganizationResources.listServiceAccounts,
   "GetAccessServiceAccounts",
   "csharp"
 );
 @@clientName(OrganizationResources.listUsers, "GetAccessUsers", "csharp");
-@@clientName(OrganizationResources.listRoleBindings,
+@@clientName(
+  OrganizationResources.listRoleBindings,
   "GetAccessRoleBindings",
   "csharp"
 );
-@@clientName(MarketplaceAgreementsOperationGroup.create,
+@@clientName(
+  MarketplaceAgreementsOperationGroup.create,
   "CreateMarketplaceAgreement",
   "csharp"
 );
-@@clientName(MarketplaceAgreementsOperationGroup.list,
+@@clientName(
+  MarketplaceAgreementsOperationGroup.list,
   "GetMarketplaceAgreements",
   "csharp"
 );
@@ -201,7 +230,8 @@ using Microsoft.Confluent;
 @@clientName(ConnectorClass.AZUREBLOBSOURCE, "AzureBlobSource", "csharp");
 @@clientName(ConnectorClass.AZUREBLOBSINK, "AzureBlobSink", "csharp");
 @@clientName(ConnectorClass.AZURECOSMOSV2SINK, "AzureCosmosV2Sink", "csharp");
-@@clientName(ConnectorClass.AZURECOSMOSV2SOURCE,
+@@clientName(
+  ConnectorClass.AZURECOSMOSV2SOURCE,
   "AzureCosmosV2Source",
   "csharp"
 );
@@ -220,14 +250,16 @@ using Microsoft.Confluent;
 @@clientName(DataFormatType.PROTOBUF, "Protobuf", "csharp");
 
 // Restore the old operation name for the access-control list environments operation
-@@clientName(OrganizationResources.listEnvironments,
+@@clientName(
+  OrganizationResources.listEnvironments,
   "GetAccessEnvironments",
   "csharp"
 );
 
 // Restore ConfluentAgreement base type to ResourceData for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for backward compatibility"
-@@hierarchyBuilding(ConfluentAgreementResource,
+@@hierarchyBuilding(
+  ConfluentAgreementResource,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );

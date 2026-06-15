@@ -129,7 +129,8 @@ interface AvailabilitySets {
   convertToVirtualMachineScaleSet is ArmResourceActionAsyncBase<
     AvailabilitySet,
     Request = ConvertToVirtualMachineScaleSetInput,
-    Response = ArmAcceptedLroResponse,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>,
     Error = CloudError,
     OptionalRequestBody = true
@@ -138,18 +139,23 @@ interface AvailabilitySets {
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");
 @@doc(AvailabilitySet.properties, "The instance view of a resource.");
-@@doc(AvailabilitySets.createOrUpdate::parameters.resource,
+@@doc(
+  AvailabilitySets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Availability Set operation."
 );
-@@doc(AvailabilitySets.update::parameters.properties,
+@@doc(
+  AvailabilitySets.update::parameters.properties,
   "Parameters supplied to the Update Availability Set operation."
 );
-@@doc(AvailabilitySets.startMigrationToVirtualMachineScaleSet::parameters.body,
+@@doc(
+  AvailabilitySets.startMigrationToVirtualMachineScaleSet::parameters.body,
   "Parameters supplied to the migrate operation on the availability set."
 );
-@@doc(AvailabilitySets.validateMigrationToVirtualMachineScaleSet::parameters.body,
+@@doc(
+  AvailabilitySets.validateMigrationToVirtualMachineScaleSet::parameters.body,
   "Parameters supplied to the migrate operation on the availability set."
 );
-@@doc(AvailabilitySets.convertToVirtualMachineScaleSet::parameters.body,
+@@doc(
+  AvailabilitySets.convertToVirtualMachineScaleSet::parameters.body,
   "Parameters supplied to the migrate operation on the availability set."
 );

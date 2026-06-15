@@ -94,21 +94,25 @@ interface Webhook {
   >;
 }
 
-@@doc(Webhook.createOrUpdate::parameters.resource,
+@@doc(
+  Webhook.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(Webhook.update::parameters.properties,
+@@doc(
+  Webhook.update::parameters.properties,
   "Parameters for the create or update operation"
 );
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Webhook.update::parameters.properties,
+@@encodedName(
+  Webhook.update::parameters.properties,
   "application/json",
   "parameters"
 );
 
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(Webhook.createOrUpdate::parameters.resource,
+@@encodedName(
+  Webhook.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );

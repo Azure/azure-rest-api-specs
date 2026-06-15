@@ -50,8 +50,11 @@ interface HybridComputePrivateLinkScopes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     HybridComputePrivateLinkScope,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -65,15 +68,19 @@ interface HybridComputePrivateLinkScopes {
   list is ArmListBySubscription<HybridComputePrivateLinkScope>;
 }
 
-@@doc(HybridComputePrivateLinkScope.name,
+@@doc(
+  HybridComputePrivateLinkScope.name,
   "The name of the Azure Arc PrivateLinkScope resource."
 );
-@@doc(HybridComputePrivateLinkScope.properties,
+@@doc(
+  HybridComputePrivateLinkScope.properties,
   "Properties that define a Azure Arc PrivateLinkScope resource."
 );
-@@doc(HybridComputePrivateLinkScopes.createOrUpdate::parameters.resource,
+@@doc(
+  HybridComputePrivateLinkScopes.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create or update a Azure Arc for Servers and Clusters PrivateLinkScope."
 );
-@@doc(HybridComputePrivateLinkScopes.updateTags::parameters.properties,
+@@doc(
+  HybridComputePrivateLinkScopes.updateTags::parameters.properties,
   "Updated tag information to set into the PrivateLinkScope instance."
 );
