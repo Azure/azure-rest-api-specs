@@ -1,4 +1,13 @@
-import "./main.tsp";
+//
+// This file is used for emitting the Python client (package azure-ai-finetuning-sessions).
+//
+// It imports the single relevant routes file for the fine-tuning sessions service
+// and applies all SDK-level customizations (client name, sub-client grouping, model
+// renames). The service declaration, models, and versioning stub are brought in
+// transitively through routes.tsp.
+//
+
+import "../session-finetuning/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.FineTuning.Sessions;

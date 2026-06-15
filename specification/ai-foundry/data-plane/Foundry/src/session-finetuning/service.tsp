@@ -10,6 +10,7 @@
 
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "../common/custom-types.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

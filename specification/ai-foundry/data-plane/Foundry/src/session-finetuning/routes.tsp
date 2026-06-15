@@ -1,3 +1,4 @@
+import "./service.tsp";
 import "./models.tsp";
 import "../common/servicepatterns.tsp";
 
