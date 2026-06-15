@@ -11,11 +11,15 @@ steps:
     parameters:
       NodeVersion: ${{ parameters.NodeVersion }}
 
-  - script: npm ci
-    displayName: npm ci
+  - script: npm install -g pnpm@11
+    displayName: Install pnpm
     workingDirectory: ${{ parameters.WorkingDirectory }}
 
-  - script: npm ls -a || true
-    displayName: npm ls -a
+  - script: pnpm install --frozen-lockfile
+    displayName: pnpm install
+    workingDirectory: ${{ parameters.WorkingDirectory }}
+
+  - script: pnpm ls || true
+    displayName: pnpm ls
     condition: succeededOrFailed()
     workingDirectory: ${{ parameters.WorkingDirectory }}

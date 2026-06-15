@@ -260,8 +260,9 @@ stages:
           echo "$sdk_gen_info"
 
           cd $(SpecRepoDirectory)
-          echo "##[group]Run npm ci"
-          npm ci
+          echo "##[group]Run pnpm install"
+          npm install -g pnpm@11
+          pnpm install --frozen-lockfile
           echo "##[endgroup]"
           node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
             --scp $(SpecRepoDirectory) \
