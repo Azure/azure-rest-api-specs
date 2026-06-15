@@ -1,6 +1,6 @@
 import {
-  APIViewRequestData,
-  SdkBreakingChangeData,
+  type APIViewRequestData,
+  type SdkBreakingChangeData,
   SdkName,
   SdkNameSchema,
   type SpecGenSdkArtifactInfo,

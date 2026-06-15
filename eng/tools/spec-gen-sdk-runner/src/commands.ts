@@ -1,4 +1,7 @@
-import { APIViewRequestData, SdkBreakingChangeData } from "@azure-tools/specs-shared/sdk-types";
+import {
+  type APIViewRequestData,
+  type SdkBreakingChangeData,
+} from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
