@@ -689,6 +689,11 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(
+  FoundryAutoUpgrade.plannedByMicrosoft,
+  "IsPlannedByMicrosoft",
+  "csharp"
+);
+@@clientName(
   ManagedNetworkProvisionStatus,
   "CognitiveServicesManagedNetworkProvisionStatus",
   "csharp"
@@ -1055,11 +1060,6 @@ op regenerateKeyCustom(
 @@clientName(
   AccountProperties.storedCompletionsDisabled,
   "IsStoredCompletionsDisabled",
-  "csharp"
-);
-@@clientName(
-  FoundryAutoUpgrade.plannedByMicrosoft,
-  "IsPlannedByMicrosoft",
   "csharp"
 );
 @@clientName(
