@@ -11,45 +11,16 @@ using Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MetadataEntity.properties);
 
-@@clientLocation(EventImpactedResources.get, ImpactedResources);
-@@clientLocation(
-  EventImpactedResources.listBySubscriptionIdAndEventId,
-  ImpactedResources
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EventImpactedResource.properties);
 
-@@clientLocation(EventOperationGroup.getBySubscriptionIdAndTrackingId, "Event");
-@@clientLocation(EventOperationGroup.listBySubscriptionId, "Events");
-@@clientLocation(
-  EventOperationGroup.listBySubscriptionIdAndEventId,
-  "SecurityAdvisoryImpactedResources"
-);
-@@clientLocation(
-  EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
-  "Event"
-);
 @@clientName(
   EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
   "fetchDetailsBySubscriptionIdAndTrackingId"
 );
-@@clientLocation(
-  EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
-  "Event"
-);
 @@clientName(
   EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
   "fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId"
-);
-@@clientLocation(TenantEventOperationGroup.getByTenantIdAndTrackingId, "Event");
-@@clientLocation(TenantEventOperationGroup.listByTenantId, "Events");
-@@clientLocation(
-  TenantEventOperationGroup.listByTenantIdAndEventId,
-  "SecurityAdvisoryImpactedResources"
-);
-@@clientLocation(
-  TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
-  "Event"
 );
 @@clientName(
   TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
