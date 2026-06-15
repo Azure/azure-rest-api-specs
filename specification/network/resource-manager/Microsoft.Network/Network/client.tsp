@@ -52,12 +52,14 @@ namespace Common {
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
-  Microsoft.Network.NetworkInterfaces
+  Microsoft.Network.NetworkInterfaces,
+  "java,javascript,python,go"
 );
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
-  Microsoft.Network.NetworkInterfaces
+  Microsoft.Network.NetworkInterfaces,
+  "java,javascript,python,go"
 );
 
 @@clientLocation(
