@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ComputeLimit;
@@ -15,7 +16,7 @@ namespace Microsoft.ComputeLimit;
  * are scoped to the caller's subscription as the host.
  */
 @added(Versions.v2026_07_01)
-@subscriptionResource
+@parentResource(SubscriptionLocationResource)
 model SharedLimitCap is ProxyResource<SharedLimitCapProperties> {
   ...ResourceNameParameter<
     Resource = SharedLimitCap,
@@ -89,7 +90,7 @@ model SetMemberCapOverridesResult {
   memberCapOverrides: MemberCap[];
 }
 
-/** Subscription-scoped operations for shared limit cap resources. */
+/** Operations for shared limit cap resources. */
 @added(Versions.v2026_07_01)
 @armResourceOperations
 interface SharedLimitCaps {
@@ -105,7 +106,7 @@ interface SharedLimitCaps {
   delete is ArmResourceDeleteSync<SharedLimitCap>;
 
   /** Lists all shared limit cap configurations visible to the caller's subscription. */
-  listBySubscription is ArmListBySubscriptionScope<SharedLimitCap>;
+  list is ArmResourceListAtScope<SharedLimitCap>;
 
   /**
    * Replaces the full set of per-member cap overrides for this shared limit

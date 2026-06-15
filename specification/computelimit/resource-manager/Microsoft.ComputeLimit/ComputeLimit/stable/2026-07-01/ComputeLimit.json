@@ -523,6 +523,485 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/sharedLimitCaps": {
+      "get": {
+        "operationId": "SharedLimitCaps_ListBySubscriptionLocationResource",
+        "tags": [
+          "SharedLimitCaps"
+        ],
+        "description": "Lists all shared limit cap configurations visible to the caller's subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedLimitCapListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List shared limit caps in a region for the caller's subscription": {
+            "$ref": "./examples/SharedLimitCaps_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/sharedLimitCaps/{vmFamilyName}": {
+      "get": {
+        "operationId": "SharedLimitCaps_Get",
+        "tags": [
+          "SharedLimitCaps"
+        ],
+        "description": "Gets the shared limit cap configuration for a VM family, as visible to the caller's subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedLimitCap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a shared limit cap for a VM family": {
+            "$ref": "./examples/SharedLimitCaps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SharedLimitCaps_CreateOrUpdate",
+        "tags": [
+          "SharedLimitCaps"
+        ],
+        "description": "Creates or replaces the shared limit cap configuration for a VM family.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedLimitCap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SharedLimitCap' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedLimitCap"
+            }
+          },
+          "201": {
+            "description": "Resource 'SharedLimitCap' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedLimitCap"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a shared limit cap for a VM family": {
+            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SharedLimitCaps_Delete",
+        "tags": [
+          "SharedLimitCaps"
+        ],
+        "description": "Deletes the shared limit cap configuration for a VM family. The caller's subscription is treated as the host subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete the shared limit cap for a VM family": {
+            "$ref": "./examples/SharedLimitCaps_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/sharedLimitCaps/{vmFamilyName}/memberCapOverrides": {
+      "get": {
+        "operationId": "MemberCapOverrides_ListByParent",
+        "tags": [
+          "MemberCapOverrides"
+        ],
+        "description": "Lists all per-member cap overrides configured under a SharedLimitCap.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MemberCapOverrideListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all member cap overrides under a shared limit cap": {
+            "$ref": "./examples/MemberCapOverrides_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/sharedLimitCaps/{vmFamilyName}/memberCapOverrides/{memberSubscriptionId}": {
+      "get": {
+        "operationId": "MemberCapOverrides_Get",
+        "tags": [
+          "MemberCapOverrides"
+        ],
+        "description": "Gets the cap override configured for a single member subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberSubscriptionId",
+            "in": "path",
+            "description": "The name of the MemberCapOverride",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MemberCapOverride"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single member cap override": {
+            "$ref": "./examples/MemberCapOverrides_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MemberCapOverrides_CreateOrUpdate",
+        "tags": [
+          "MemberCapOverrides"
+        ],
+        "description": "Creates or replaces the cap override for a single member subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberSubscriptionId",
+            "in": "path",
+            "description": "The name of the MemberCapOverride",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MemberCapOverride"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MemberCapOverride' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MemberCapOverride"
+            }
+          },
+          "201": {
+            "description": "Resource 'MemberCapOverride' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MemberCapOverride"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a single member cap override": {
+            "$ref": "./examples/MemberCapOverrides_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MemberCapOverrides_Delete",
+        "tags": [
+          "MemberCapOverrides"
+        ],
+        "description": "Removes the per-member cap override for a member subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "memberSubscriptionId",
+            "in": "path",
+            "description": "The name of the MemberCapOverride",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a single member cap override": {
+            "$ref": "./examples/MemberCapOverrides_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/sharedLimitCaps/{vmFamilyName}/setMemberCapOverrides": {
+      "post": {
+        "operationId": "SharedLimitCaps_SetMemberCapOverrides",
+        "tags": [
+          "SharedLimitCaps"
+        ],
+        "description": "Replaces the full set of per-member cap overrides for this shared limit\ncap. The supplied array becomes the new complete set of overrides;\nsupplying an empty array clears all existing overrides.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the SharedLimitCap",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetMemberCapOverridesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SetMemberCapOverridesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clear all member cap overrides (supply an empty array)": {
+            "$ref": "./examples/SharedLimitCaps_SetMemberCapOverrides_ClearAll.json"
+          },
+          "Replace the full set of member cap overrides for a shared limit cap": {
+            "$ref": "./examples/SharedLimitCaps_SetMemberCapOverrides.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/sharedLimits": {
       "get": {
         "operationId": "SharedLimits_ListBySubscriptionLocationResource",
@@ -809,458 +1288,6 @@
         "x-ms-examples": {
           "Get a VM family": {
             "$ref": "./examples/VmFamilies_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps": {
-      "get": {
-        "operationId": "SharedLimitCaps_ListBySubscription",
-        "tags": [
-          "SharedLimitCaps"
-        ],
-        "description": "Lists all shared limit cap configurations visible to the caller's subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SharedLimitCapListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List shared limit caps for the caller's subscription": {
-            "$ref": "./examples/SharedLimitCaps_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}": {
-      "get": {
-        "operationId": "SharedLimitCaps_Get",
-        "tags": [
-          "SharedLimitCaps"
-        ],
-        "description": "Gets the shared limit cap configuration for a VM family, as visible to the caller's subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SharedLimitCap"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a shared limit cap for a VM family": {
-            "$ref": "./examples/SharedLimitCaps_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SharedLimitCaps_CreateOrUpdate",
-        "tags": [
-          "SharedLimitCaps"
-        ],
-        "description": "Creates or replaces the shared limit cap configuration for a VM family.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SharedLimitCap"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SharedLimitCap' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SharedLimitCap"
-            }
-          },
-          "201": {
-            "description": "Resource 'SharedLimitCap' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SharedLimitCap"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a shared limit cap for a VM family": {
-            "$ref": "./examples/SharedLimitCaps_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SharedLimitCaps_Delete",
-        "tags": [
-          "SharedLimitCaps"
-        ],
-        "description": "Deletes the shared limit cap configuration for a VM family. The caller's subscription is treated as the host subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete the shared limit cap for a VM family": {
-            "$ref": "./examples/SharedLimitCaps_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/memberCapOverrides": {
-      "get": {
-        "operationId": "MemberCapOverrides_ListByParent",
-        "tags": [
-          "MemberCapOverrides"
-        ],
-        "description": "Lists all per-member cap overrides configured under a SharedLimitCap.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MemberCapOverrideListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all member cap overrides under a shared limit cap": {
-            "$ref": "./examples/MemberCapOverrides_ListByParent.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/memberCapOverrides/{memberSubscriptionId}": {
-      "get": {
-        "operationId": "MemberCapOverrides_Get",
-        "tags": [
-          "MemberCapOverrides"
-        ],
-        "description": "Gets the cap override configured for a single member subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "memberSubscriptionId",
-            "in": "path",
-            "description": "The name of the MemberCapOverride",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MemberCapOverride"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a single member cap override": {
-            "$ref": "./examples/MemberCapOverrides_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "MemberCapOverrides_CreateOrUpdate",
-        "tags": [
-          "MemberCapOverrides"
-        ],
-        "description": "Creates or replaces the cap override for a single member subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "memberSubscriptionId",
-            "in": "path",
-            "description": "The name of the MemberCapOverride",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MemberCapOverride"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'MemberCapOverride' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MemberCapOverride"
-            }
-          },
-          "201": {
-            "description": "Resource 'MemberCapOverride' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/MemberCapOverride"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a single member cap override": {
-            "$ref": "./examples/MemberCapOverrides_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "MemberCapOverrides_Delete",
-        "tags": [
-          "MemberCapOverrides"
-        ],
-        "description": "Removes the per-member cap override for a member subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "memberSubscriptionId",
-            "in": "path",
-            "description": "The name of the MemberCapOverride",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}(-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a single member cap override": {
-            "$ref": "./examples/MemberCapOverrides_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/sharedLimitCaps/{vmFamilyName}/setMemberCapOverrides": {
-      "post": {
-        "operationId": "SharedLimitCaps_SetMemberCapOverrides",
-        "tags": [
-          "SharedLimitCaps"
-        ],
-        "description": "Replaces the full set of per-member cap overrides for this shared limit\ncap. The supplied array becomes the new complete set of overrides;\nsupplying an empty array clears all existing overrides.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "vmFamilyName",
-            "in": "path",
-            "description": "The name of the SharedLimitCap",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SetMemberCapOverridesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SetMemberCapOverridesResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Clear all member cap overrides (supply an empty array)": {
-            "$ref": "./examples/SharedLimitCaps_SetMemberCapOverrides_ClearAll.json"
-          },
-          "Replace the full set of member cap overrides for a shared limit cap": {
-            "$ref": "./examples/SharedLimitCaps_SetMemberCapOverrides.json"
           }
         }
       }
