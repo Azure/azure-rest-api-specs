@@ -109,9 +109,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkDeallocate")
   bulkDeallocate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -124,9 +124,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkHibernate")
   bulkHibernate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -140,9 +140,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkStart")
   bulkStart(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -151,14 +151,15 @@ interface VirtualMachineBulkOperations {
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
   /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @removed(Versions.`2026-06-06`)
   @post
   @autoRoute
   @armResourceCollectionAction
   @action("virtualMachinesBulkCreate")
   bulkCreate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -167,14 +168,15 @@ interface VirtualMachineBulkOperations {
   ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
   /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
+  @removed(Versions.`2026-06-06`)
   @post
   @autoRoute
   @armResourceCollectionAction
   @action("virtualMachinesBulkVdiFlexCreate")
   bulkVdiFlexCreate(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -188,9 +190,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkDelete")
   bulkDelete(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -204,9 +206,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkGetOperationStatus")
   bulkGetOperationsStatus(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -220,9 +222,9 @@ interface VirtualMachineBulkOperations {
   @armResourceCollectionAction
   @action("virtualMachinesBulkCancel")
   bulkCancel(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
@@ -231,14 +233,15 @@ interface VirtualMachineBulkOperations {
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
 
   /** BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  @removed(Versions.`2026-06-06`)
   @post
   @autoRoute
   @armResourceCollectionAction
   @action("virtualMachinesBulkReimage")
   bulkReimage(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
-    ...Extension.Subscription,
-    ...ProviderNamespace<Extension.Subscription>,
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
     @doc("The request body")
