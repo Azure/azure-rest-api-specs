@@ -746,11 +746,11 @@ model LogSettings {
   "java"
 );
 
-@@clientName(AlertSeverity.`0`, "Zero", "go,javascript");
-@@clientName(AlertSeverity.`1`, "One", "go,javascript");
-@@clientName(AlertSeverity.`2`, "Two", "go,javascript");
-@@clientName(AlertSeverity.`3`, "Three", "go,javascript");
-@@clientName(AlertSeverity.`4`, "Four", "go,javascript");
+@@clientName(AlertSeverity.`0`, "Zero", "csharp,go,javascript");
+@@clientName(AlertSeverity.`1`, "One", "csharp,go,javascript");
+@@clientName(AlertSeverity.`2`, "Two", "csharp,go,javascript");
+@@clientName(AlertSeverity.`3`, "Three", "csharp,go,javascript");
+@@clientName(AlertSeverity.`4`, "Four", "csharp,go,javascript");
 
 @@alternateType(AutoscaleNotification.operation, "Scale", "go");
 
