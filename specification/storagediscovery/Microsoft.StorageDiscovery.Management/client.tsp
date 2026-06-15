@@ -7,7 +7,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.StorageDiscovery;
 
 // suppress report operations
-@@scope(StorageDiscoveryWorkspaces.report,
+@@scope(
+  StorageDiscoveryWorkspaces.report,
   "!(python,javascript,go,java,csharp)"
 );
 @@scope(Report.get, "!(python,javascript,go,java,csharp)");
@@ -15,20 +16,24 @@ using Microsoft.StorageDiscovery;
 @@scope(Report.listByResourceGroup, "!(python,javascript,go,java,csharp)");
 @@scope(Report.listBySubscription, "!(python,javascript,go,java,csharp)");
 
-@@clientName(Microsoft.StorageDiscovery,
+@@clientName(
+  Microsoft.StorageDiscovery,
   "StorageDiscoveryMgmtClient",
   "python"
 );
 
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
   "StorageDiscoveryProvisioningState",
   "csharp"
 );
-@@clientName(StorageDiscoveryResourceType,
+@@clientName(
+  StorageDiscoveryResourceType,
   "StorageDiscoveryResourceKind",
   "csharp"
 );
-@@clientName(StorageDiscoveryWorkspacePropertiesUpdate,
+@@clientName(
+  StorageDiscoveryWorkspacePropertiesUpdate,
   "StorageDiscoveryWorkspacePatchProperties",
   "csharp"
 );

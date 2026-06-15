@@ -41,7 +41,9 @@ model BookshelfProperties {
   @doc("User assigned identity IDs to be used by knowledgebase workloads. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_02_01_preview)
-  workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
+  workloadIdentities?: Record<
+    | Azure.ResourceManager.CommonTypes.UserAssignedIdentity
+    | null>;
 
   @doc("Whether or not to use a customer managed key when encrypting data at rest")
   @visibility(Lifecycle.Read, Lifecycle.Create)

@@ -54,12 +54,15 @@ interface AdvancedThreatProtectionSettingsModels {
   >;
 }
 
-@@doc(AdvancedThreatProtectionSettingsModel.name,
+@@doc(
+  AdvancedThreatProtectionSettingsModel.name,
   "Name of the advanced threat protection settings."
 );
-@@doc(AdvancedThreatProtectionSettingsModel.properties,
+@@doc(
+  AdvancedThreatProtectionSettingsModel.properties,
   "Advanced threat protection properties."
 );
-@@doc(AdvancedThreatProtectionSettingsModels.createOrUpdate::parameters.resource,
+@@doc(
+  AdvancedThreatProtectionSettingsModels.createOrUpdate::parameters.resource,
   "The Advanced Threat Protection state for the server."
 );

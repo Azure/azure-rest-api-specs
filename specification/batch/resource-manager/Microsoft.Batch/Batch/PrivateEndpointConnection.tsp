@@ -99,12 +99,15 @@ interface PrivateEndpointConnections {
 
 @@maxLength(PrivateEndpointConnection.name, 101);
 @@minLength(PrivateEndpointConnection.name, 1);
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The private endpoint connection name. This must be unique within the account."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The properties associated with the private endpoint connection."
 );
-@@doc(PrivateEndpointConnections.update::parameters.properties,
+@@doc(
+  PrivateEndpointConnections.update::parameters.properties,
   "PrivateEndpointConnection properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged."
 );

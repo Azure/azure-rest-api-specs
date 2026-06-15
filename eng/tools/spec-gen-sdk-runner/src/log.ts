@@ -1,16 +1,18 @@
-export enum LogLevel {
-  Error = "error",
-  Warn = "warn",
-  Info = "info",
-  Debug = "debug",
-  Group = "group",
-  EndGroup = "endgroup",
-}
+export const LogLevel = {
+  Error: "error",
+  Warn: "warn",
+  Info: "info",
+  Debug: "debug",
+  Group: "group",
+  EndGroup: "endgroup",
+} as const;
+export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel];
 
-export enum LogIssueType {
-  Error = "error",
-  Warning = "warning",
-}
+export const LogIssueType = {
+  Error: "error",
+  Warning: "warning",
+} as const;
+export type LogIssueType = (typeof LogIssueType)[keyof typeof LogIssueType];
 
 /**
  * Logs a message to the console with a specified log level. *

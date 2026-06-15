@@ -6,42 +6,50 @@ using Microsoft.ExtendedLocation;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@@clientName(Microsoft.ExtendedLocation,
+@@clientName(
+  Microsoft.ExtendedLocation,
   "CustomLocationsManagementClient",
   "javascript"
 );
 @@clientName(Microsoft.ExtendedLocation, "CustomLocationsMgmtClient", "python");
 
 // C# client name mappings to match the previous GA API surface
-@@clientName(customLocationPropertiesAuthentication,
+@@clientName(
+  customLocationPropertiesAuthentication,
   "CustomLocationAuthentication",
   "csharp"
 );
 @@clientName(HostType, "CustomLocationHostType", "csharp");
-@@clientName(EnabledResourceType,
+@@clientName(
+  EnabledResourceType,
   "CustomLocationEnabledResourceType",
   "csharp"
 );
-@@clientName(EnabledResourceTypePropertiesTypesMetadataItem,
+@@clientName(
+  EnabledResourceTypePropertiesTypesMetadataItem,
   "CustomLocationEnabledResourceTypeMetadata",
   "csharp"
 );
-@@clientName(EnabledResourceTypesListResult,
+@@clientName(
+  EnabledResourceTypesListResult,
   "CustomLocationEnabledResourceTypesResult",
   "csharp"
 );
 
 // Map custom Identity model to ARM common type ManagedServiceIdentity
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(customLocation.identity,
+@@alternateType(
+  customLocation.identity,
   CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(patchableCustomLocations.identity,
+@@alternateType(
+  patchableCustomLocations.identity,
   CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -56,27 +64,32 @@ using Azure.ResourceManager;
 @@clientName(patchableResourceSyncRule, "ResourceSyncRulePatch", "csharp");
 
 // Fix property types to match previous GA API surface
-@@alternateType(customLocationProperties.clusterExtensionIds,
+@@alternateType(
+  customLocationProperties.clusterExtensionIds,
   armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(customLocationProperties.hostResourceId,
+@@alternateType(
+  customLocationProperties.hostResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EnabledResourceTypeProperties.clusterExtensionId,
+@@alternateType(
+  EnabledResourceTypeProperties.clusterExtensionId,
   armResourceIdentifier,
   "csharp"
 );
 
 // Preserve old property name for CustomLocationAuthentication.type
-@@clientName(customLocationPropertiesAuthentication.type,
+@@clientName(
+  customLocationPropertiesAuthentication.type,
   "CustomLocationPropertiesAuthenticationType",
   "csharp"
 );
 
 // Rename it so that its meaning is immediately apparent.
-@@clientName(matchExpressionsProperties,
+@@clientName(
+  matchExpressionsProperties,
   "ResourceSyncRuleMatchExpression",
   "csharp"
 );

@@ -61,11 +61,13 @@ interface Images {
   update is ComputeCustomPatchAsync<
     Image,
     ImageUpdate,
-    Response = ArmResponse<Image> | ArmResourceCreatedResponse<
-      Image,
-      LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Image>
+      | ArmResourceCreatedResponse<
+          Image,
+          LroHeaders = ArmLroLocationHeader<FinalResult = Image> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -92,9 +94,11 @@ interface Images {
 
 @@doc(Image.name, "The name of the image.");
 @@doc(Image.properties, "Describes the properties of an Image.");
-@@doc(Images.createOrUpdate::parameters.resource,
+@@doc(
+  Images.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Image operation."
 );
-@@doc(Images.update::parameters.properties,
+@@doc(
+  Images.update::parameters.properties,
   "Parameters supplied to the Update Image operation."
 );

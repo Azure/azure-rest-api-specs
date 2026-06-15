@@ -20,8 +20,9 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Evaluation Taxonomies")
 interface EvaluationTaxonomies {
-  @doc("Get an evaluation run by name.")
-  get is Azure.Core.Foundations.ResourceOperation<
+  /** Retrieves the specified evaluation taxonomy. */
+  @summary("Get an evaluation taxonomy")
+  get is FoundryResourceOperation<
     EvaluationTaxonomy,
     {
       ...EvaluationTaxonomiesPreviewHeader;
@@ -29,18 +30,20 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
   >;
 
-  @doc("List evaluation taxonomies")
+  /** Returns the evaluation taxonomies available in the project, optionally filtered by input name or input type. */
+  @summary("List evaluation taxonomies")
   @Rest.listsResource(EvaluationTaxonomy)
-  list is Azure.Core.Foundations.ResourceList<
+  list is FoundryResourceList<
     EvaluationTaxonomy,
     EvaluationTaxonomiesFilterQueryParamsTraits &
       EvaluationTaxonomiesPreviewHeader,
     Azure.Core.Page<EvaluationTaxonomy>
   >;
 
-  @doc("Delete an evaluation taxonomy by name.")
+  /** Removes the specified evaluation taxonomy from the project. */
+  @summary("Delete an evaluation taxonomy")
   @Http.delete
-  delete is Azure.Core.Foundations.ResourceOperation<
+  delete is FoundryResourceOperation<
     EvaluationTaxonomy,
     {
       ...EvaluationTaxonomiesPreviewHeader;
@@ -48,10 +51,11 @@ interface EvaluationTaxonomies {
     Http.NoContentResponse
   >;
 
-  @doc("Create an evaluation taxonomy.")
+  /** Creates or replaces the specified evaluation taxonomy with the provided definition. */
+  @summary("Create an evaluation taxonomy")
   @put
   @route("/evaluationtaxonomies/{name}")
-  create is Azure.Core.Foundations.Operation<
+  create is FoundryOperation<
     {
       ...EvaluationTaxonomiesPreviewHeader;
 
@@ -66,10 +70,13 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationTaxonomy>
   >;
 
+  /** Modifies the specified evaluation taxonomy with the provided changes. */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  @summary("Update an evaluation taxonomy")
   @doc("Update an evaluation taxonomy.")
   @patch(#{ implicitOptionality: true })
   @route("/evaluationtaxonomies/{name}")
-  update is Azure.Core.Foundations.Operation<
+  update is FoundryOperation<
     {
       ...EvaluationTaxonomiesPreviewHeader;
 

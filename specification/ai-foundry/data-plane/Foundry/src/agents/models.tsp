@@ -1,5 +1,5 @@
 import "../openai-responses/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -284,6 +284,7 @@ union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
+  a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
 

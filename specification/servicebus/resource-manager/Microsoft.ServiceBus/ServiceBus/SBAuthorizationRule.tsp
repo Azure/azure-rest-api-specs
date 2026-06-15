@@ -429,21 +429,27 @@ interface Topics {
 @@minLength(SBAuthorizationRule.name, 1);
 @@doc(SBAuthorizationRule.name, "The authorization rule name.");
 @@doc(SBAuthorizationRule.properties, "AuthorizationRule properties.");
-@@doc(SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access authorization rule."
 );
-@@doc(SBAuthorizationRules.regenerateKeys::parameters.body,
+@@doc(
+  SBAuthorizationRules.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the authorization rule."
 );
-@@doc(Queues.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  Queues.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access authorization rule."
 );
-@@doc(Queues.regenerateKeys::parameters.body,
+@@doc(
+  Queues.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the authorization rule."
 );
-@@doc(Topics.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  Topics.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access authorization rule."
 );
-@@doc(Topics.regenerateKeys::parameters.body,
+@@doc(
+  Topics.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the authorization rule."
 );

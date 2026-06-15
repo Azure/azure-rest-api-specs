@@ -5,18 +5,21 @@ using Microsoft.BotService;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties
 );
 
 @@clientName(Bots.create::parameters.resource, "parameters");
 @@clientName(Bots.update::parameters.properties, "parameters");
 
-@@clientName(PrivateEndpointConnections.create::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties
 );
 
 @@clientName(BotChannels.create::parameters.resource, "parameters");
@@ -26,10 +29,12 @@ using Microsoft.BotService;
 @@clientName(ConnectionSettings.create::parameters.resource, "parameters");
 @@clientName(ConnectionSettings.update::parameters.properties, "parameters");
 
-@@clientName(BotsOperationGroup.getCheckNameAvailability::parameters.body,
+@@clientName(
+  BotsOperationGroup.getCheckNameAvailability::parameters.body,
   "parameters"
 );
-@@clientName(QnAMakerEndpointKeysOperationGroup.get::parameters.body,
+@@clientName(
+  QnAMakerEndpointKeysOperationGroup.get::parameters.body,
   "parameters"
 );
 
@@ -52,27 +57,32 @@ using Microsoft.BotService;
 @@clientLocation(ConnectionSettings.create, "BotConnection", "!csharp");
 @@clientLocation(ConnectionSettings.update, "BotConnection", "!csharp");
 @@clientLocation(ConnectionSettings.delete, "BotConnection", "!csharp");
-@@clientLocation(ConnectionSettings.listByBotService,
+@@clientLocation(
+  ConnectionSettings.listByBotService,
   "BotConnection",
   "!csharp"
 );
-@@clientLocation(ConnectionSettings.listWithSecrets,
+@@clientLocation(
+  ConnectionSettings.listWithSecrets,
   "BotConnection",
   "!csharp"
 );
 
 // OperationGroup interfaces from routes.tsp - use interface references to avoid conflicts
 @@clientLocation(BotsOperationGroup.getCheckNameAvailability, Bots, "!csharp");
-@@clientLocation(BotConnectionOperationGroup.listServiceProviders,
+@@clientLocation(
+  BotConnectionOperationGroup.listServiceProviders,
   "BotConnection",
   "!csharp"
 );
-@@clientLocation(QnAMakerEndpointKeysOperationGroup.get,
+@@clientLocation(
+  QnAMakerEndpointKeysOperationGroup.get,
   "QnAMakerEndpointKeys",
   "!csharp"
 );
 @@clientLocation(HostSettingsOperationGroup.get, "HostSettings", "!csharp");
-@@clientLocation(OperationResultsOperationGroup.get,
+@@clientLocation(
+  OperationResultsOperationGroup.get,
   "OperationResults",
   "!csharp"
 );

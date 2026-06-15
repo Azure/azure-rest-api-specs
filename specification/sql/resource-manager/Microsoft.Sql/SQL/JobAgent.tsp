@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL job agent.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
+@Azure.ResourceManager.Legacy.feature(Features.JobAgents)
 model JobAgent is Azure.ResourceManager.TrackedResource<JobAgentProperties> {
   ...ResourceNameParameter<
     Resource = JobAgent,
@@ -41,53 +43,71 @@ interface JobAgents {
   /**
    * Gets a job agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   get is ArmResourceRead<JobAgent>;
 
   /**
    * Creates or updates a job agent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     JobAgent,
-    Response = ArmResourceUpdatedResponse<JobAgent> | ArmResourceCreatedResponse<
-      JobAgent,
-      ArmLroLocationHeader<FinalResult = JobAgent> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<JobAgent>
+      | ArmResourceCreatedResponse<
+          JobAgent,
+          ArmLroLocationHeader<FinalResult = JobAgent> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
    * Updates a job agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   update is ArmCustomPatchAsync<JobAgent, PatchModel = JobAgentUpdate>;
 
   /**
    * Deletes a job agent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   delete is ArmResourceDeleteWithoutOkAsync<
     JobAgent,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
    * Gets a list of job agents in a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobAgents")
+  @Azure.ResourceManager.Legacy.feature(Features.JobAgents)
   listByServer is ArmResourceListByParent<JobAgent>;
 
   /**
    * Lists all executions in a job agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("JobExecutions")
   @list
   @get
   @action("executions")
+  @Azure.ResourceManager.Legacy.feature(Features.JobExecutions)
   listByAgent is ArmResourceActionSync<
     JobAgent,
     void,
@@ -140,7 +160,8 @@ interface JobAgents {
 
 @@doc(JobAgent.name, "The name of the job agent to be retrieved.");
 @@doc(JobAgent.properties, "Resource properties.");
-@@doc(JobAgents.createOrUpdate::parameters.resource,
+@@doc(
+  JobAgents.createOrUpdate::parameters.resource,
   "The requested job agent resource state."
 );
 @@doc(JobAgents.update::parameters.properties, "The update to the job agent.");

@@ -137,7 +137,8 @@ interface NewRegionFrontloadRelease {
 @@maxLength(DefaultRollout.name, 260);
 @@doc(DefaultRollout.name, "The rollout name.");
 @@doc(DefaultRollout.properties, "Properties of the rollout.");
-@@doc(DefaultRollouts.createOrUpdate::parameters.resource,
+@@doc(
+  DefaultRollouts.createOrUpdate::parameters.resource,
   "The Default rollout properties supplied to the CreateOrUpdate operation."
 );
 @@doc(NewRegionFrontloadRelease.createOrUpdate::parameters.resource, "");

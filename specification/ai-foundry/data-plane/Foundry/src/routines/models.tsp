@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -103,6 +103,12 @@ union RoutineRunPhase {
   failed: "failed",
 }
 
+@doc("The status of a routine run.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+union RoutineRunStatus {
+  string,
+}
+
 alias RoutineTriggers = Record<RoutineTrigger>;
 
 @doc("Base model for a routine trigger.")
@@ -132,8 +138,8 @@ model TimerRoutineTrigger extends RoutineTrigger {
   @doc("The trigger type.")
   type: RoutineTriggerType.timer;
 
-  @doc("The UTC date and time at which the timer fires, as an ISO-8601 timestamp (e.g., `\"2026-06-01T09:00:00Z\"`). The built-in `reminder_preview` agent tool sets this field by computing `now + minutes`, where `minutes` is the positive integer argument supplied by the model when the tool is invoked.")
-  at?: utcDateTime;
+  @doc("The UTC date and time at which the timer fires.")
+  at?: FoundryTimestamp;
 }
 
 @doc("A GitHub issue routine trigger.")
@@ -323,7 +329,7 @@ model RoutineRun {
   id: string;
 
   @doc("The run status.")
-  status?: string;
+  status?: RoutineRunStatus;
 
   @doc("The AgentExtensions lifecycle phase for the routine attempt.")
   phase?: RoutineRunPhase;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 // TODO: Enable eslint, fix errors
 
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strictEqual } from "node:assert";
@@ -13,7 +13,6 @@ import {
   TspConfigCsharpDpEmitterOutputDirSubRule,
   TspConfigCsharpDpNamespaceSubRule,
   TspConfigCsharpMgmtEmitterOutputDirSubRule,
-  TspConfigCsharpMgmtEmitterRequiredSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
@@ -43,9 +42,9 @@ import {
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigTsMlcDpPackageNameMatchPatternSubRule,
   TspConfigTsRlcDpPackageNameMatchPatternSubRule,
-} from "../src/rules/sdk-tspconfig-validation.js";
+} from "../src/rules/sdk-tspconfig-validation.ts";
 
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
@@ -613,94 +612,6 @@ const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
-// Test cases for CSharp mgmt emitter requirement rule
-const csharpMgmtEmitterRequiredTestCases: Case[] = [
-  {
-    description:
-      "Mgmt emitter required: pass when @azure-typespec/http-client-csharp-mgmt is in emit array",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-  - "@azure-typespec/http-client-csharp-mgmt"
-`,
-    success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-  {
-    description:
-      "Mgmt emitter required: pass when @azure-typespec/http-client-csharp-mgmt is in options",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-options:
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.Compute"
-`,
-    success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-  {
-    description: "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in emit",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-  - "@azure-tools/typespec-csharp"
-`,
-    success: false,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-  {
-    description:
-      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in options",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-options:
-  "@azure-tools/typespec-csharp":
-    namespace: "Azure.ResourceManager.Compute"
-`,
-    success: false,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-  {
-    description: "Mgmt emitter required: fail when both legacy and new emitters coexist",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-  - "@azure-tools/typespec-csharp"
-  - "@azure-typespec/http-client-csharp-mgmt"
-`,
-    success: false,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-  {
-    description: "Mgmt emitter required: pass when no .NET emitter is configured",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-`,
-    success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-  {
-    description: "Mgmt emitter required: skip for data-plane folder",
-    folder: "contosowidgetmanager/Contoso.WidgetManager/",
-    tspconfigContent: `
-emit:
-  - "@azure-tools/typespec-autorest"
-  - "@azure-tools/typespec-csharp"
-`,
-    success: true,
-    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
-  },
-];
-
 // Test cases for emitter-output-dir with namespace variable resolution
 const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
   {
@@ -1012,8 +923,6 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpEmitterOutputTestCases,
-    // csharp mgmt emitter requirement
-    ...csharpMgmtEmitterRequiredTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
   ];

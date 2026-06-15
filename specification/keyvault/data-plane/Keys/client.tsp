@@ -601,7 +601,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKeySignatureAlgorithm.RSNULL, "Rsnull", "javascript");
 @@clientName(JsonWebKeySignatureAlgorithm.ES256_K, "ES256K", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP, "RSAOaep", "javascript");
-@@clientName(JsonWebKeyEncryptionAlgorithm.RSA_OAEP256,
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.RSA_OAEP256,
   "RSAOaep256",
   "javascript"
 );
@@ -615,23 +616,28 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBC, "A128CBC", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBC, "A192CBC", "javascript");
 @@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBC, "A256CBC", "javascript");
-@@clientName(JsonWebKeyEncryptionAlgorithm.A128_CBCPAD,
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.A128_CBCPAD,
   "A128Cbcpad",
   "javascript"
 );
-@@clientName(JsonWebKeyEncryptionAlgorithm.A192_CBCPAD,
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.A192_CBCPAD,
   "A192Cbcpad",
   "javascript"
 );
-@@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBCPAD,
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.A256_CBCPAD,
   "A256Cbcpad",
   "javascript"
 );
-@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP,
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP,
   "CkmAesKeyWrap",
   "javascript"
 );
-@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP_PAD,
+@@clientName(
+  JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP_PAD,
   "CkmAesKeyWrapPad",
   "javascript"
 );
@@ -639,15 +645,18 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKeyType.RSA_HSM, "RSAHSM", "javascript");
 @@clientName(JsonWebKeyType.oct_HSM, "OctHSM", "javascript");
 @@clientName(JsonWebKeyType.oct, "Oct", "javascript");
-@@clientName(KeyEncryptionAlgorithm.CKM_RSA_AES_KEY_WRAP,
+@@clientName(
+  KeyEncryptionAlgorithm.CKM_RSA_AES_KEY_WRAP,
   "CkmRsaAesKeyWrap",
   "javascript"
 );
-@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_256,
+@@clientName(
+  KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_256,
   "RsaAesKeyWrap256",
   "javascript"
 );
-@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_384,
+@@clientName(
+  KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_384,
   "RsaAesKeyWrap384",
   "javascript"
 );
@@ -683,7 +692,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(getKeyVersions, "ListKeyPropertiesVersions", "rust");
 // Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
 @@clientName(KeyVault.updateKey, "UpdateKeyProperties", "rust");
-@@clientDoc(KeyVault.encrypt,
+@@clientDoc(
+  KeyVault.encrypt,
   """
     
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
@@ -694,7 +704,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
   DocumentationMode.append,
   "rust"
 );
-@@clientDoc(KeyVault.sign,
+@@clientDoc(
+  KeyVault.sign,
   """
     
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
@@ -705,7 +716,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
   DocumentationMode.append,
   "rust"
 );
-@@clientDoc(KeyVault.wrapKey,
+@@clientDoc(
+  KeyVault.wrapKey,
   """
     
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
@@ -716,7 +728,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
   DocumentationMode.append,
   "rust"
 );
-@@clientDoc(KeyVault.secureWrapKey,
+@@clientDoc(
+  KeyVault.secureWrapKey,
   """
     
     You should record the ['KeyOperationResult::kid`] that is returned by this operation
@@ -728,7 +741,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
   "rust"
 );
 
-@@clientDoc(KeyOperationResult.kid,
+@@clientDoc(
+  KeyOperationResult.kid,
   """
     
     You should record this when returned from [`KeyClient::encrypt()`](crate::KeyClient::encrypt), [`sign()`](crate::KeyClient::sign),
@@ -743,7 +757,8 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 );
 
 @@clientName(KeyReleaseParameters.enc, "algorithm", "rust");
-@@clientName(KeyOperationsParameters.aad,
+@@clientName(
+  KeyOperationsParameters.aad,
   "AdditionalAuthenticatedData",
   "rust"
 );
