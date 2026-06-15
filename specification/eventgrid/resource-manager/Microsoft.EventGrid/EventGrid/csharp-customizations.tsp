@@ -310,6 +310,16 @@ namespace Customization;
   Azure.Core.azureLocation,
   "csharp"
 );
+@@usage(
+  NetworkSecurityPerimeterConfiguration,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(
+  NetworkSecurityPerimeterConfigurationProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
 @@alternateType(PartnerDetails.setupUri, url, "csharp");
 @@alternateType(
   PartnerEventSubscriptionDestinationProperties.resourceId,
