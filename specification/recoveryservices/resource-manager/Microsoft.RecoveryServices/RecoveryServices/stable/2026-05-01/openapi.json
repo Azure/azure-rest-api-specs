@@ -2092,7 +2092,9 @@
         "durationInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "Duration in days. Required when type is TimeBased, omitted when AsPerPolicy."
+          "description": "Duration in days. Required when type is TimeBased, omitted when AsPerPolicy.",
+          "minimum": 30,
+          "maximum": 36135
         }
       }
     },
@@ -2105,7 +2107,7 @@
         },
         "configuration": {
           "$ref": "#/definitions/ImmutabilityConfiguration",
-          "description": "Immutability configuration of vault."
+          "description": "Immutability configuration of the vault — selects whether immutability is\ninherited from the backup policy (AsPerPolicy) or fixed for a specific\nduration (TimeBased)."
         }
       }
     },

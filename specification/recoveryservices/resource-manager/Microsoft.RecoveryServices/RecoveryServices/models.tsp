@@ -1289,7 +1289,9 @@ model ImmutabilitySettings {
   state?: ImmutabilityState;
 
   /**
-   * Immutability configuration of vault.
+   * Immutability configuration of the vault — selects whether immutability is
+   * inherited from the backup policy (AsPerPolicy) or fixed for a specific
+   * duration (TimeBased).
    */
   @added(Versions.v2026_05_01)
   configuration?: ImmutabilityConfiguration;
@@ -1306,6 +1308,8 @@ model ImmutabilityConfiguration {
   /**
    * Duration in days. Required when type is TimeBased, omitted when AsPerPolicy.
    */
+  @minValue(30)
+  @maxValue(36135)
   durationInDays?: int32;
 }
 
