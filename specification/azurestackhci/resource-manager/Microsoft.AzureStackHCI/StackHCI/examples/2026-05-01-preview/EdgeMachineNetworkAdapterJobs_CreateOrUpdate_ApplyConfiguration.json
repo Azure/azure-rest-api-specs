@@ -1,0 +1,103 @@
+{
+  "title": "EdgeMachineNetworkAdapterJobs_CreateOrUpdate_ApplyConfiguration",
+  "operationId": "EdgeMachineNetworkAdapterJobs_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "networkAdapterName": "ethernet0",
+    "jobName": "ApplyConfiguration",
+    "api-version": "2026-05-01-preview",
+    "resource": {
+      "properties": {
+        "jobType": "ApplyConfiguration",
+        "deploymentMode": "Deploy",
+        "targetConfiguration": {
+          "adapterName": "ethernet0",
+          "ip4Address": "192.168.1.100",
+          "subnetMask": "255.255.255.0",
+          "defaultGateway": "192.168.1.1",
+          "dnsServers": [
+            "8.8.8.8",
+            "8.8.4.4"
+          ],
+          "ipInterfaceType": "Static",
+          "vlanId": 100,
+          "interfaceState": "up"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "ApplyConfiguration",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Succeeded",
+          "jobId": "job-12345",
+          "startTimeUtc": "2026-01-15T10:00:00.000Z",
+          "endTimeUtc": "2026-01-15T10:05:00.000Z",
+          "status": "Succeeded",
+          "targetConfiguration": {
+            "adapterName": "ethernet0",
+            "ip4Address": "192.168.1.100",
+            "subnetMask": "255.255.255.0",
+            "defaultGateway": "192.168.1.1",
+            "dnsServers": [
+              "8.8.8.8",
+              "8.8.4.4"
+            ],
+            "ipInterfaceType": "Static",
+            "vlanId": 100,
+            "interfaceState": "up"
+          },
+          "reportedProperties": {
+            "percentComplete": 100,
+            "validationStatus": {
+              "status": "Success",
+              "steps": []
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": []
+            }
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/networkAdapters/ethernet0/jobs/ApplyConfiguration",
+        "name": "ApplyConfiguration",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/networkAdapters/jobs"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "jobType": "ApplyConfiguration",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Accepted",
+          "jobId": "job-12345",
+          "status": "Running",
+          "targetConfiguration": {
+            "adapterName": "ethernet0",
+            "ip4Address": "192.168.1.100",
+            "subnetMask": "255.255.255.0",
+            "defaultGateway": "192.168.1.1",
+            "dnsServers": [
+              "8.8.8.8",
+              "8.8.4.4"
+            ],
+            "ipInterfaceType": "Static",
+            "vlanId": 100,
+            "interfaceState": "up"
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/networkAdapters/ethernet0/jobs/ApplyConfiguration",
+        "name": "ApplyConfiguration",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/networkAdapters/jobs"
+      }
+    }
+  }
+}
