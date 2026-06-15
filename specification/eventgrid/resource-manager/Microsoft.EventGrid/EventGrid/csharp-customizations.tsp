@@ -186,15 +186,37 @@ namespace Customization;
   "ExpireOnIfNotActivated",
   "csharp"
 );
+@@clientName(InboundIpRule.ipMask, "IPMask", "csharp");
 @@clientName(EventSubscriptionIdentity.type, "IdentityType", "csharp");
 @@clientName(
-  EventSubscriptionProperties.expirationTimeUtc,
+  EventSubscriptionFilter.enableAdvancedFilteringOnArrays,
+  "IsAdvancedFilteringOnArraysEnabled",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionUpdateParameters.expirationTimeUtc,
   "ExpireOn",
   "csharp"
 );
 @@clientName(
   SubscriptionUpdateParametersProperties.expirationTimeUtc,
   "ExpireOn",
+  "csharp"
+);
+@@clientName(
+  Partner.authorizationExpirationTimeInUtc,
+  "AuthorizationExpireOn",
+  "csharp"
+);
+@@clientName(CustomDomainIdentity.type, "IdentityType", "csharp");
+@@clientName(
+  CustomJwtAuthenticationManagedIdentity.type,
+  "IdentityType",
+  "csharp"
+);
+@@clientName(
+  CustomWebhookAuthenticationManagedIdentity.type,
+  "IdentityType",
   "csharp"
 );
 @@clientName(NamespaceProperties.inboundIpRules, "InboundIPRules", "csharp");
@@ -233,6 +255,7 @@ namespace Customization;
   "csharp"
 );
 @@clientName(SubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
+@@clientName(EventSubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
 
 @@alternateType(DomainProperties.endpoint, url, "csharp");
 @@alternateType(
@@ -318,6 +341,21 @@ namespace Customization;
 @@usage(
   NetworkSecurityPerimeterConfigurationProperties,
   Usage.input | Usage.output,
+  "csharp"
+);
+@@clientName(
+  ClientCertificateValidationScheme.IpMatchesAuthenticationName,
+  "IPMatchesAuthenticationName",
+  "csharp"
+);
+@@clientName(
+  EventDeliverySchema.CloudEventSchemaV1_0,
+  "CloudEventSchemaV1_0",
+  "csharp"
+);
+@@clientName(
+  InputSchema.CloudEventSchemaV1_0,
+  "CloudEventSchemaV1_0",
   "csharp"
 );
 @@alternateType(PartnerDetails.setupUri, url, "csharp");
