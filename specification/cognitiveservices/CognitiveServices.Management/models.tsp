@@ -6553,3 +6553,176 @@ model ManagedComputeCapacityListResult {
   @identifiers(#["id"])
   value?: ManagedComputeCapacity[];
 }
+
+/**
+ * The type of policy.
+ */
+@added(Versions.v2026_05_15_preview)
+union PolicyType {
+  string,
+
+  /** Egress policy for controlling outbound network traffic from sandboxes. */
+  Egress: "Egress",
+}
+
+/**
+ * The enforcement mode for a policy.
+ */
+@added(Versions.v2026_05_15_preview)
+union PolicyMode {
+  string,
+
+  /** Policy rules are enforced. Matching traffic is allowed or denied per rule actions. */
+  Enforced: "Enforced",
+
+  /** Policy rules are evaluated and logged but not enforced. All traffic is allowed regardless of rule actions. */
+  Audit: "Audit",
+}
+
+/**
+ * The default action when no policy rules match.
+ */
+@added(Versions.v2026_05_15_preview)
+union PolicyDefaultAction {
+  string,
+
+  /** Allow traffic by default when no rules match. */
+  Allow: "Allow",
+
+  /** Deny traffic by default when no rules match. */
+  Deny: "Deny",
+}
+
+/**
+ * The action to take when a policy rule matches.
+ */
+@added(Versions.v2026_05_15_preview)
+union PolicyRuleAction {
+  string,
+
+  /** Allow the matched traffic. */
+  Allow: "Allow",
+
+  /** Deny the matched traffic. */
+  Deny: "Deny",
+
+  /** Transform the matched traffic (e.g., inject or strip headers). */
+  Transform: "Transform",
+
+  /** Rewrite the matched traffic (e.g., modify request path or host). */
+  Rewrite: "Rewrite",
+}
+
+/**
+ * The type of a policy rule, determining what kind of traffic matching it performs.
+ */
+@added(Versions.v2026_05_15_preview)
+union PolicyRuleType {
+  string,
+
+  /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
+  Fqdn: "Fqdn",
+}
+
+/**
+ * The match criteria for a policy rule.
+ */
+@added(Versions.v2026_05_15_preview)
+model PolicyRuleMatch {
+  /**
+   * Host pattern to match (glob pattern, e.g. "*.openai.com").
+   */
+  host?: string;
+
+  /**
+   * Path pattern to match (glob pattern, e.g. "/v1/*").
+   */
+  path?: string;
+}
+
+/**
+ * A single rule within a policy.
+ */
+@added(Versions.v2026_05_15_preview)
+model PolicyRule {
+  /**
+   * Name of the rule. Must be unique within the policy.
+   */
+  name: string;
+
+  /**
+   * Description of the rule.
+   */
+  description?: string;
+
+  /**
+   * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
+   */
+  ruleType?: PolicyRuleType;
+
+  /**
+   * The match criteria for this rule.
+   */
+  match?: PolicyRuleMatch;
+
+  /**
+   * The action to take when this rule matches.
+   */
+  action?: PolicyRuleAction;
+}
+
+/**
+ * Properties of a Cognitive Services Policy resource.
+ */
+@added(Versions.v2026_05_15_preview)
+model PolicyProperties {
+  /**
+   * The type of policy.
+   */
+  policyType?: PolicyType;
+
+  /**
+   * The enforcement mode for this policy. Defaults to Enforced.
+   */
+  mode?: PolicyMode;
+
+  /**
+   * The default action when no rules match.
+   */
+  defaultAction?: PolicyDefaultAction;
+
+  /**
+   * Description of the policy.
+   */
+  description?: string;
+
+  /**
+   * Ordered list of policy rules. First matching rule wins.
+   */
+  @identifiers(#["name"])
+  rules?: PolicyRule[];
+
+  /**
+   * The provisioning state of the policy resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * A paginated list of Policy resources.
+ */
+@added(Versions.v2026_05_15_preview)
+model PolicyListResult {
+  /**
+   * The link to the next page of Policy objects.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of Policy resources.
+   */
+  @pageItems
+  value?: PolicyResource[];
+}

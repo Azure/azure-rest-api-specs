@@ -1,0 +1,40 @@
+{
+  "operationId": "AccountPolicies_List",
+  "title": "List Account Policies",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "api-version": "2026-05-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/policies/corporate-baseline",
+            "name": "corporate-baseline",
+            "type": "Microsoft.CognitiveServices/accounts/policies",
+            "properties": {
+              "policyType": "Egress",
+              "mode": "Enforced",
+              "defaultAction": "Deny",
+              "description": "Corporate baseline egress policy shared across all projects",
+              "rules": [
+                {
+                  "name": "allow-openai",
+                  "description": "Allow traffic to OpenAI API",
+                  "ruleType": "Fqdn",
+                  "match": {
+                    "host": "*.openai.com"
+                  },
+                  "action": "Allow"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
