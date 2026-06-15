@@ -182,7 +182,18 @@ namespace Customization;
   "csharp"
 );
 @@clientName(
+  ChannelUpdateParametersProperties.expirationTimeIfNotActivatedUtc,
+  "ExpireOnIfNotActivated",
+  "csharp"
+);
+@@clientName(EventSubscriptionIdentity.type, "IdentityType", "csharp");
+@@clientName(
   EventSubscriptionProperties.expirationTimeUtc,
+  "ExpireOn",
+  "csharp"
+);
+@@clientName(
+  SubscriptionUpdateParametersProperties.expirationTimeUtc,
   "ExpireOn",
   "csharp"
 );
@@ -208,6 +219,7 @@ namespace Customization;
   "csharp"
 );
 @@clientName(PrivateEndpoint.id, "PrivateEndpointId", "csharp");
+@@clientName(RoutingIdentityInfo.type, "IdentityType", "csharp");
 @@clientName(TopicProperties.disableLocalAuth, "IsLocalAuthDisabled", "csharp");
 @@clientName(TopicProperties.inboundIpRules, "InboundIPRules", "csharp");
 @@clientName(
@@ -319,6 +331,24 @@ namespace Customization;
   Azure.Core.uuid,
   "csharp"
 );
+@@alternateType(WebHookEventSubscriptionDestinationProperties.endpointBaseUrl, url, "csharp");
+@@alternateType(WebHookEventSubscriptionDestinationProperties.endpointUrl, url, "csharp");
+
+@@clientName(
+  WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryApplicationIdOrUri,
+  "UriOrAzureActiveDirectoryApplicationId",
+  "csharp"
+);
+@@clientName(
+  WebHookEventSubscriptionDestinationProperties.endpointBaseUrl,
+  "BaseEndpoint",
+  "csharp"
+);
+@@clientName(
+  WebHookEventSubscriptionDestinationProperties.endpointUrl,
+  "Endpoint",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(Domain.properties, "csharp");
@@ -331,6 +361,8 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(ExtensionTopic.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(JsonInputSchemaMapping.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(NamespaceUpdateParameters.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(
@@ -339,6 +371,8 @@ namespace Customization;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(PartnerConfiguration.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
+@@flattenProperty(ChannelUpdateParametersProperties.partnerTopicInfo, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(PartnerNamespace.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
