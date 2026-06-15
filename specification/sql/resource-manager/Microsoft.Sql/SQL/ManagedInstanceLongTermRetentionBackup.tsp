@@ -43,6 +43,7 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
     @path
     @segment("locations")
     @key
+    @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
     locationName: string;
 
     /** The name of the managed instance. */
@@ -121,6 +122,7 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
     @path
     @segment("locations")
     @key
+    @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
     locationName: string;
 
     /** The name of the managed instance. */

@@ -37,6 +37,7 @@ alias ManagedDatabaseMoveOperationResultsOps = Azure.ResourceManager.Legacy.Lega
     @path
     @segment("locations")
     @key
+    @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
     locationName: string;
   },
   {

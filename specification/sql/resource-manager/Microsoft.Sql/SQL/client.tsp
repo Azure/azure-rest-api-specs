@@ -1173,6 +1173,11 @@ using Microsoft.Sql;
 );
 @@clientName(ElasticPools.listByElasticPool, "GetDatabases", "csharp");
 @@clientName(
+  ElasticPools.elasticPoolOperationsListByElasticPool,
+  "GetElasticPoolOperations",
+  "csharp"
+);
+@@clientName(
   Servers.serverOperationsListByServer,
   "GetServerOperations",
   "csharp"
@@ -1303,6 +1308,7 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 
+@@usage(EndpointCertificate, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(DatabaseColumn, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@clientName(
   DatabaseColumnProperties.memoryOptimized,
@@ -1319,5 +1325,93 @@ union SqlNameAvailabilityResourceType {
 @@clientName(
   DataMaskingPolicies.dataMaskingRulesCreateOrUpdate,
   "CreateOrUpdateDataMaskingRule",
+  "csharp"
+);
+@@clientName(InstancePools.listByInstancePool, "GetManagedInstances", "csharp");
+@@clientName(InstancePools.usagesListByInstancePool, "GetUsages", "csharp");
+@@usage(
+  LongTermRetentionBackup,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  MaintenanceWindowOptions,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@clientName(
+  SensitivityLabels.disableRecommendation,
+  "DisableRecommendationManagedDatabaseSensitivityLabel",
+  "csharp"
+);
+@@clientName(
+  SensitivityLabels.enableRecommendation,
+  "EnableRecommendationManagedDatabaseSensitivityLabel",
+  "csharp"
+);
+@@clientName(
+  ManagedDatabases.listCurrentByDatabase,
+  "GetCurrentManagedDatabaseSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  ManagedDatabases.listRecommendedByDatabase,
+  "GetRecommendedManagedDatabaseSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  ManagedDatabases.managedDatabaseSensitivityLabelsListByDatabase,
+  "GetManagedDatabaseSensitivityLabelsByDatabase",
+  "csharp"
+);
+@@clientName(
+  ManagedDatabases.listByDatabase,
+  "GetManagedDatabaseColumnsByDatabase",
+  "csharp"
+);
+@@clientName(ManagedInstanceQueries.get, "GetManagedDatabaseQuery", "csharp");
+@@clientName(
+  ManagedDatabases.managedDatabaseSecurityEventsListByDatabase,
+  "GetManagedDatabaseSecurityEventsByDatabase",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceQueries.listByQuery,
+  "GetQueryStatistics",
+  "csharp"
+);
+@@clientName(
+  ManagedDatabases.managedDatabaseSensitivityLabelsUpdate,
+  "UpdateManagedDatabaseSensitivityLabel",
+  "csharp"
+);
+@@alternateType(ManagedInstanceOperation.name, uuid, "csharp");
+@@alternateType(InstancePoolOperation.name, uuid, "csharp");
+@@clientName(ElasticPools.cancel, "CancelElasticPoolOperation", "csharp");
+@@clientName(
+  ManagedInstancePrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(
+  ManagedInstances.create,
+  "CreateManagedInstanceTdeCertificate",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionBackups.changeAccessTier::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
+  "content",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RestorableDroppedDatabase,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

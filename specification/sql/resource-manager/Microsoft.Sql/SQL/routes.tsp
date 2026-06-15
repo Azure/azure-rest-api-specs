@@ -53,6 +53,7 @@ interface CapabilitiesOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -86,6 +87,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -118,6 +120,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -157,6 +160,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -189,6 +193,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -237,6 +242,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -287,6 +293,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -326,6 +333,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -376,6 +384,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
 
       /**
@@ -439,6 +448,7 @@ interface SyncGroupsOperationGroup {
        */
       @path
       @segment("locations")
+      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
       locationName: string;
     }
   >;

@@ -37,6 +37,7 @@ alias InstanceFailoverGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
+    @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
     locationName: string;
   },
   {
