@@ -62,3 +62,14 @@ using Azure.AI.FineTuning.Sessions;
 @@clientName(FineTuningSessionModelData, "SessionModelData");
 @@clientName(CreateFineTuningSessionRequest, "CreateSessionRequest");
 @@clientName(CreateFineTuningSessionResponse, "CreateSessionResponse");
+
+// ─── Forward-only payload types ───────────────────────────────────────────────
+
+// ForwardInput / ForwardRequest are not yet wired to an operation (the forward
+// endpoint is served by a custom client method in _patch.py). Force them to be
+// generated as public input models so the SDK exposes the named types ahead of
+// the operation being added to the REST contract.
+@@usage(ForwardInput, Usage.input);
+@@access(ForwardInput, Access.public);
+@@usage(ForwardRequest, Usage.input);
+@@access(ForwardRequest, Access.public);

@@ -7,16 +7,24 @@ namespace Azure.AI.FineTuning.Sessions;
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
-/** Lifecycle status of a fine-tuning session. */
+/**
+ * Lifecycle status of a fine-tuning session.
+ *
+ * Uses the canonical fine-tuning job vocabulary for consistency
+ * across all API surfaces.
+ */
 union FineTuningSessionStatus {
   string,
   /** Session has been created and is waiting for the GPU engine. */
-  created: "created",
-  /** Session is loaded and ready to receive training or sampling requests. */
-  ready: "ready",
-  /** Session has been unloaded from the GPU engine. */
-  unloaded: "unloaded",
-  /** The engine hosting this session has died; weights are lost. */
+  queued: "queued",
+  /** Session is loaded and actively processing requests. */
+  running: "running",
+  /** Session completed successfully. */
+  succeeded: "succeeded",
+  /**
+   * Session ended in a non-success terminal state (engine death, expiry,
+   * or unrecoverable failure). Any in-memory weights are lost.
+   */
   failed: "failed",
 }
 
@@ -104,6 +112,9 @@ model FineTuningModelInput {
 model LoRAConfig {
   /** Number of LoRA rank dimensions. */
   rank?: int32;
+
+  /** LoRA scaling factor (effective scale = alpha / rank). Defaults to 32.0 server-side. */
+  alpha?: float64;
 
   /**
    * Seed for LoRA weight initialisation.
@@ -327,6 +338,9 @@ model CreateFineTuningSessionRequest {
   lora_config?: LoRAConfig;
 
   user_metadata?: Record<string>;
+
+  /** Opt the session into idle hibernation. Default False. */
+  ejectable?: boolean;
 }
 
 /**
@@ -361,6 +375,20 @@ model ForwardBackwardRequest {
   forward_backward_input: ForwardBackwardInput;
 }
 
+/**
+ * Forward-only payload.
+ *
+ * Currently identical to ForwardBackwardInput. Exists as a named alias so
+ * that the forward endpoint has its own type in the SDK, allowing the
+ * contract to diverge later (e.g. making loss_fn optional for forward).
+ */
+model ForwardInput extends ForwardBackwardInput {}
+
+/** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
+model ForwardRequest {
+  forward_input: ForwardInput;
+}
+
 /** Request body for POST /fine_tuning_sessions/{sessionId}/optim_step. */
 model OptimStepRequest {
   adam_params: AdamParams;
@@ -375,6 +403,12 @@ model SaveCheckpointRequest {
   @pattern("^[a-zA-Z0-9_-]+$")
   @maxLength(255)
   path: string;
+
+  /** Training iteration this checkpoint corresponds to. Optional. */
+  step_number?: int32;
+
+  /** Per-step evaluation metrics at checkpoint time. Optional. */
+  metrics?: Record<unknown>;
 }
 
 /** Request body for POST /fine_tuning_sessions/{sessionId}/checkpoint_sample. */
@@ -443,6 +477,10 @@ model FineTuningHeartbeatResponse {
 /** A single sampled sequence. */
 model FineTuningSampledSequence {
   tokens: int32[];
+
+  /** Decoded text of the generated sequence. */
+  text?: string;
+
   logprobs?: float64[];
   prompt_logprobs?: float64[];
 }
