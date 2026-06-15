@@ -87,4 +87,3 @@ export async function gitDiffTopSpecFolder(folder: string) {
     errorOutput: errorOutput,
   };
 }
-
