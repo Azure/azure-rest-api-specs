@@ -777,6 +777,41 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- CSharp mgmt emitter requirement rule -----
+const CSHARP_MGMT_EMITTER = "@azure-typespec/http-client-csharp-mgmt";
+const LEGACY_CSHARP_EMITTER = "@azure-tools/typespec-csharp";
+
+export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleBase {
+  constructor() {
+    super("emit", CSHARP_MGMT_EMITTER);
+  }
+
+  protected skip(_config: any, folder: string): SkipResult {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const emit: string[] | undefined = config?.emit;
+    const options: Record<string, any> | undefined = config?.options;
+
+    const hasLegacyEmitter =
+      emit?.includes(LEGACY_CSHARP_EMITTER) || options?.[LEGACY_CSHARP_EMITTER] !== undefined;
+
+    if (hasLegacyEmitter) {
+      return this.createFailedResult(
+        `Management plane TypeSpec projects must not use the legacy "${LEGACY_CSHARP_EMITTER}" emitter`,
+        `Please use "${CSHARP_MGMT_EMITTER}" instead of "${LEGACY_CSHARP_EMITTER}" in your tspconfig.yaml`,
+      );
+    }
+
+    return { success: true };
+  }
+
+  public getPathOfKeyToValidate(): string {
+    return `emit.${CSHARP_MGMT_EMITTER}`;
+  }
+}
+
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -785,6 +820,7 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
  */
 export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
+  new TspConfigCsharpMgmtEmitterRequiredSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
