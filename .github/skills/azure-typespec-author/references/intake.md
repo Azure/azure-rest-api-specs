@@ -1,0 +1,60 @@
+# Intake
+
+> Prerequisite: Step 1 (Analyze Project) must be complete.
+
+## 2.1 General Intake (All Cases)
+
+1. Run [agentic search](agentic-search.md) using the Step 1 result and the user's request.
+2. Identify the case from the table below and gather more information if case matches. If no case matches, skip Step 2.2.
+
+| Case | Name                    | Description                                           | Service Type |
+| ---- | ----------------------- | ----------------------------------------------------- | ------------ |
+| 1    | Add Resource Type       | Define a new ARM resource with operations             | ARM          |
+| 2    | Add Resource Operations | Add CRUD or custom actions on an existing resource    | ARM          |
+| 3    | API Version Evolution   | Add, bump, or promote an API version (preview/stable) | ARM          |
+
+---
+
+## 2.2 Case-Specific Intake
+
+### Case 1 — Add Resource Type (ARM)
+
+Collect: target API version, resource name (PascalCase), hierarchy (top-level or nested + parent), properties (name, type, required/optional).
+
+Defaults: top-level → `TrackedResource`, child → `ProxyResource`. Operations: `createOrReplace` (PUT/async), `get`, `update/patch`, `delete` (async), list by parent. Top-level adds list by subscription.
+
+> Use `createOrReplace` (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
+> Top-level tracked resources MUST have `listByResourceGroup` and `listBySubscription`.
+
+### Case 2 — Add Resource Operations (ARM)
+
+Collect: target resource, operation type (CRUD or custom), operation name (custom actions), request/response models (custom actions).
+
+Defaults: never async → GET, LIST, HEAD. Default async → PUT, DELETE. Default sync → PATCH. Always ask user → POST/action.
+
+> Use `createOrReplace` (not `createOrUpdate`). Use `ArmCustomPatch` for PATCH.
+> For async POST, use ARM combined headers: `LroHeaders = ArmCombinedLroHeaders<FinalResult = ExportResult>`.
+
+### Case 3 — API Version Evolution (ARM)
+
+Collect from user:
+
+1. **Target version** (e.g. `2026-01-01-preview` or `2026-01-01`)
+2. **Features to exclude, Do not assume the user wants to carry over all features** — follow this procedure exactly:
+   1. Read the latest version's `.tsp` files and enumerate all resources, operations, models, and properties.
+   2. Present the list to the user as a numbered checklist.
+   3. Ask: _"All features will be carried over to the new version. Are there any you want to exclude? List by number, or say 'none'."_
+   4. Wait for the user's response before proceeding.
+
+---
+
+## 2.3 Confirm
+
+Display and wait for user confirmation:
+
+```
+Case:           [Name]
+Target Version: [version]
+Changes:        [summary]
+Defaults:       [applied defaults]
+```
