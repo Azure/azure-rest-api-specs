@@ -25,6 +25,21 @@ using Microsoft.OperationalInsights;
   "reconcileNsp",
   "java"
 );
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.getNSP,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.listNSP,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.reconcileNSP,
+  "ReconcileNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
 
 @@clientName(DestinationMetaData, "DestinationMetadata", "java");
 
@@ -37,27 +52,27 @@ using Microsoft.OperationalInsights;
 // C# names for Network Security Perimeter common types need RP context.
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRule,
-  "OperationalInsightsNspAccessRule",
+  "OperationalInsightsNetworkSecurityPerimeterAccessRule",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRuleDirection,
-  "OperationalInsightsNspAccessRuleDirection",
+  "OperationalInsightsNetworkSecurityPerimeterAccessRuleDirection",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties,
-  "OperationalInsightsNspAccessRuleProperties",
+  "OperationalInsightsNetworkSecurityPerimeterAccessRuleProperties",
   "csharp"
 );
 @@clientName(
   global.AccessRulePropertiesSubscriptionsItem,
-  "OperationalInsightsNspAccessRuleSubscription",
+  "OperationalInsightsNetworkSecurityPerimeterAccessRuleSubscription",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.IssueType,
-  "OperationalInsightsNspIssueType",
+  "OperationalInsightsNetworkSecurityPerimeterIssueType",
   "csharp"
 );
 @@clientName(
@@ -87,27 +102,27 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProvisioningIssue,
-  "OperationalInsightsNspProvisioningIssue",
+  "OperationalInsightsNetworkSecurityPerimeterProvisioningIssue",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
-  "OperationalInsightsNspProvisioningIssueProperties",
+  "OperationalInsightsNetworkSecurityPerimeterProvisioningIssueProperties",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ResourceAssociation,
-  "OperationalInsightsNspResourceAssociation",
+  "OperationalInsightsNetworkSecurityPerimeterResourceAssociation",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
-  "OperationalInsightsNspResourceAssociationAccessMode",
+  "OperationalInsightsNetworkSecurityPerimeterResourceAssociationAccessMode",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.Severity,
-  "OperationalInsightsNspSeverity",
+  "OperationalInsightsNetworkSecurityPerimeterSeverity",
   "csharp"
 );
 @@alternateType(
@@ -279,7 +294,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(
   ProvisioningStateEnum,
-  "OperationalInsightsNspProvisioningState",
+  "OperationalInsightsNetworkSecurityPerimeterProvisioningState",
   "csharp"
 );
 @@clientName(
@@ -287,11 +302,23 @@ using Microsoft.OperationalInsights;
   "OperationalInsightsPublicNetworkAccessType",
   "csharp"
 );
-@@clientName(RuleTypeEnum, "OperationalInsightsNspRuleType", "csharp");
+@@clientName(
+  RuleTypeEnum,
+  "OperationalInsightsNetworkSecurityPerimeterRuleType",
+  "csharp"
+);
 @@clientName(Schema, "OperationalInsightsSchema", "csharp");
-@@clientName(Severity, "OperationalInsightsNspSeverity", "csharp");
+@@clientName(
+  Severity,
+  "OperationalInsightsNetworkSecurityPerimeterSeverity",
+  "csharp"
+);
 @@clientName(SkuNameEnum, "OperationalInsightsSkuName", "csharp");
-@@clientName(StatusCodeEnum, "OperationalInsightsNspStatusCode", "csharp");
+@@clientName(
+  StatusCodeEnum,
+  "OperationalInsightsNetworkSecurityPerimeterStatusCode",
+  "csharp"
+);
 @@clientName(TablePlanEnum, "OperationalInsightsTablePlan", "csharp");
 @@clientName(SearchResults, "OperationalInsightsTableSearchResults", "csharp");
 @@clientName(RestoredLogs, "OperationalInsightsTableRestoredLogs", "csharp");
