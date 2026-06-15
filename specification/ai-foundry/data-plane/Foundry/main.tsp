@@ -30,4 +30,4 @@ import "./src/toolboxes/routes.tsp";
 import "./src/data_generation_jobs/routes.tsp";
 import "./src/agents-optimization/routes.tsp";
 import "./tag-definitions.tsp";
-import "./src/error.range.tsp";
+import "./src/common/error.range.tsp";

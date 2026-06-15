@@ -2,7 +2,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

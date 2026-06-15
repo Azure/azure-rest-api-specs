@@ -1,5 +1,6 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
+import "../sdk-common/error.default.tsp";
 import "../sdk-common/beta-ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
@@ -100,8 +101,6 @@ using Azure.AI.Projects;
 @@clientName(OptimizationCandidate.eval_id, "evaluationId");
 @@clientName(OptimizationCandidate.eval_run_id, "evaluationRunId");
 
-@@clientName(PromoteCandidateRequest, "PromoteCandidateInput");
-@@clientName(PromoteCandidateResponse, "PromoteCandidateResult");
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
 
 @@clientName(
@@ -196,36 +195,6 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
-@@clientName(
-  AgentOptimizationJobs.listCandidates,
-  "listOptimizationCandidates",
-  "java"
-);
-@@clientName(
-  AgentOptimizationJobs.getCandidate,
-  "getOptimizationCandidate",
-  "java"
-);
-@@clientName(
-  AgentOptimizationJobs.getCandidateConfig,
-  "getOptimizationCandidateConfig",
-  "java"
-);
-@@clientName(
-  AgentOptimizationJobs.getCandidateResults,
-  "getOptimizationCandidateResults",
-  "java"
-);
-@@clientName(
-  AgentOptimizationJobs.promoteCandidate,
-  "promoteOptimizationCandidate",
-  "java"
-);
-@@clientName(
-  AgentOptimizationJobs.getCandidateFile,
-  "getOptimizationCandidateFile",
-  "java"
-);
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -694,18 +663,3 @@ union WebSearchToolSearchContextSizeExpandable {
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
 
-// --------------------------------------------------------------------------------
-// AgentOptimizationJobs: relocate operations onto the Agents sub-client
-// --------------------------------------------------------------------------------
-
-@@clientLocation(AgentOptimizationJobs.create, Agents);
-@@clientLocation(AgentOptimizationJobs.get, Agents);
-@@clientLocation(AgentOptimizationJobs.list, Agents);
-@@clientLocation(AgentOptimizationJobs.cancel, Agents);
-@@clientLocation(AgentOptimizationJobs.delete, Agents);
-@@clientLocation(AgentOptimizationJobs.listCandidates, Agents);
-@@clientLocation(AgentOptimizationJobs.getCandidate, Agents);
-@@clientLocation(AgentOptimizationJobs.getCandidateConfig, Agents);
-@@clientLocation(AgentOptimizationJobs.getCandidateResults, Agents);
-@@clientLocation(AgentOptimizationJobs.promoteCandidate, Agents);
-@@clientLocation(AgentOptimizationJobs.getCandidateFile, Agents);
