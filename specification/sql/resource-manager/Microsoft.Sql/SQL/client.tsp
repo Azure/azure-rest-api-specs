@@ -523,6 +523,39 @@ using Microsoft.Sql;
   "csharp"
 );
 
+// C# alternate type mappings migrated from autorest.md.bak directive format transforms
+@@alternateType(global.Microsoft.Sql.Usage.id, armResourceIdentifier, "csharp");
+@@alternateType(global.Microsoft.Sql.Usage.type, armResourceType, "csharp");
+@@alternateType(ResourceWithWritableName.id, armResourceIdentifier, "csharp");
+@@alternateType(ManagedInstancePecProperty.id, armResourceIdentifier, "csharp");
+@@alternateType(ResourceMoveDefinition.id, armResourceIdentifier, "csharp");
+@@alternateType(PartnerInfo.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  ServerPrivateEndpointConnection.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ServerInfo.serverId, armResourceIdentifier, "csharp");
+@@alternateType(ServicePrincipal.principalId, uuid, "csharp");
+@@alternateType(ServicePrincipal.clientId, uuid, "csharp");
+@@alternateType(
+  ManagedDatabaseProperties.restorableDroppedDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RecommendedActionProperties.executeActionDuration,
+  duration,
+  "csharp"
+);
+@@alternateType(
+  RecommendedActionProperties.revertActionDuration,
+  duration,
+  "csharp"
+);
+@@alternateType(MaintenanceWindowTimeRange.duration, duration, "csharp");
+@@alternateType(JobSchedule.interval, duration, "csharp");
+
 @@clientName(
   ManagedDatabaseProperties.autoCompleteRestore,
   "AllowAutoCompleteRestore",
@@ -664,6 +697,165 @@ using Microsoft.Sql;
   "SupportedMemoryLimitsInMB",
   "csharp"
 );
+
+// C# client name mappings migrated from autorest.md.bak directive x-ms-client-name transforms
+@@clientName(
+  LongTermRetentionBackupProperties.backupExpirationTime,
+  "backupExpireOn",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceLongTermRetentionBackupProperties.backupExpirationTime,
+  "backupExpireOn",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionBackupProperties.databaseDeletionTime,
+  "databaseDeletedOn",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceLongTermRetentionBackupProperties.databaseDeletionTime,
+  "databaseDeletedOn",
+  "csharp"
+);
+@@clientName(SyncAgentProperties.expiryTime, "ExpireOn", "csharp");
+@@clientName(
+  DatabaseProperties.sourceDatabaseDeletionDate,
+  "sourceDatabaseDeletedOn",
+  "csharp"
+);
+@@clientName(
+  DatabaseUpdateProperties.sourceDatabaseDeletionDate,
+  "sourceDatabaseDeletedOn",
+  "csharp"
+);
+@@clientName(
+  DatabaseOperationProperties.estimatedCompletionTime,
+  "estimatedCompleteOn",
+  "csharp"
+);
+@@clientName(
+  ElasticPoolOperationProperties.estimatedCompletionTime,
+  "estimatedCompleteOn",
+  "csharp"
+);
+@@clientName(
+  InstancePoolOperationProperties.estimatedCompletionTime,
+  "estimatedCompleteOn",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceOperationProperties.estimatedCompletionTime,
+  "estimatedCompleteOn",
+  "csharp"
+);
+@@clientName(
+  ServerOperationProperties.estimatedCompletionTime,
+  "estimatedCompleteOn",
+  "csharp"
+);
+@@clientName(
+  SecurityAlertPolicyProperties.emailAccountAdmins,
+  "SendToEmailAccountAdmins",
+  "csharp"
+);
+@@clientName(
+  SecurityAlertsPolicyProperties.emailAccountAdmins,
+  "SendToEmailAccountAdmins",
+  "csharp"
+);
+@@clientName(AdvisorProperties.lastChecked, "LastCheckedOn", "csharp");
+@@clientName(
+  DatabaseColumnProperties.memoryOptimized,
+  "IsMemoryOptimized",
+  "csharp"
+);
+@@clientName(
+  DatabaseTableProperties.memoryOptimized,
+  "IsMemoryOptimized",
+  "csharp"
+);
+@@clientName(DatabaseProperties.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(
+  DatabaseUpdateProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(EditionCapability.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(
+  ElasticPoolEditionCapability.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  ElasticPoolPerformanceLevelCapability.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(ElasticPoolProperties.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(
+  ElasticPoolUpdateProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  MaintenanceConfigurationCapability.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceFamilyCapability.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  ServiceObjectiveCapability.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  EncryptionProtectorProperties.autoRotationEnabled,
+  "IsAutoRotationEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceEncryptionProtectorProperties.autoRotationEnabled,
+  "IsAutoRotationEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceKeyProperties.autoRotationEnabled,
+  "IsAutoRotationEnabled",
+  "csharp"
+);
+@@clientName(
+  ServerKeyProperties.autoRotationEnabled,
+  "IsAutoRotationEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceProperties.publicDataEndpointEnabled,
+  "IsPublicDataEndpointEnabled",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceVcoresCapability.instancePoolSupported,
+  "IsInstancePoolSupported",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceVcoresCapability.standaloneSupported,
+  "IsStandaloneSupported",
+  "csharp"
+);
+@@clientName(JobSchedule.enabled, "IsEnabled", "csharp");
+@@clientName(CheckNameAvailabilityResponse.available, "IsAvailable", "csharp");
 
 // C# operation name mappings migrated from autorest.md.bak override-operation-name
 @@clientName(
@@ -818,11 +1010,7 @@ using Microsoft.Sql;
   "GetServerOperations",
   "csharp"
 );
-@@clientName(
-  Servers.serverUsagesListByServer,
-  "GetServerUsages",
-  "csharp"
-);
+@@clientName(Servers.serverUsagesListByServer, "GetServerUsages", "csharp");
 
 // Scope out any operation methods for csharp as they have been implemented in core lib
 @@scope(ManagedDatabaseMoveOperationResults.get, "!csharp");
@@ -923,6 +1111,7 @@ union ManagedInstancePropertiesProvisioningState {
    */
   TimedOut: "TimedOut",
 }
+// Inherited from the original autorest.md settings.
 @@alternateType(
   ManagedInstanceProperties.provisioningState,
   ManagedInstancePropertiesProvisioningState,
