@@ -14,7 +14,6 @@ namespace PrivateLinkScopesApi;
 /**
  * A private link resource
  */
-@parentResource(AzureMonitorPrivateLinkScope)
 model PrivateLinkResource is PrivateLink;
 alias PrivateLinkOperations = PrivateLinks<PrivateLinkResource>;
 
@@ -23,25 +22,25 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy private link operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "preserve existing wire parameter name"
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "privateLinkResourceName",
     "groupName"
   )
-  get is PrivateLinkOperations.Read<PrivateLinkResource>;
+  get is PrivateLinkOperations.Read<AzureMonitorPrivateLinkScope>;
 
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy operation returns a single page"
+  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "preserve existing wire parameter name"
+  #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "legacy operation returns a single page"
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "privateLinkResourceName",
     "groupName"
   )
-  listByPrivateLinkScope is PrivateLinkOperations.ListSinglePageByParent<PrivateLinkResource>;
+  listByPrivateLinkScope is PrivateLinkOperations.ListSinglePageByParent<AzureMonitorPrivateLinkScope>;
 }
 
 @@doc(PrivateLinkResource.properties, "Resource properties.");

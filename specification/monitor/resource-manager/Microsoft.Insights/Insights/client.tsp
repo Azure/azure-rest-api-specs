@@ -216,12 +216,12 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(
   PrivateLinkScopesApi.PrivateLinkResource,
-  "MonitorPrivateLink",
+  "MonitorPrivateLinkResource",
   "csharp"
 );
 @@clientName(
   PrivateLinkScopesApi.ScopedResource,
-  "MonitorPrivateLinkScoped",
+  "MonitorPrivateLinkScopedResource",
   "csharp"
 );
 
