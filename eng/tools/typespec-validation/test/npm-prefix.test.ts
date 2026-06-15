@@ -5,35 +5,19 @@ import * as simpleGit from "simple-git";
 
 import { strict as assert } from "node:assert";
 import path from "path";
-import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { afterEach, describe, it, vi } from "vitest";
 import { NpmPrefixRule } from "../src/rules/npm-prefix.ts";
 
 import * as utils from "../src/utils.ts";
 
 describe("npm-prefix", function () {
-  let runNpmSpy: MockInstance;
-
-  beforeEach(() => {
-    runNpmSpy = vi
-      .spyOn(utils, "runNpm")
-      .mockImplementation((args, cwd) =>
-        Promise.resolve([null, `runNpm ${args.join(" ")} at ${cwd}`, ""]),
-      );
-  });
-
   afterEach(() => {
-    runNpmSpy.mockReset();
+    vi.restoreAllMocks();
   });
 
   it("should succeed if node returns inconsistent drive letter capitalization", async function () {
-    runNpmSpy.mockImplementation(
-      async (args: string[]): Promise<[Error | null, string, string]> => {
-        if (args.includes("prefix")) {
-          return Promise.resolve([null, `C:${path.sep}Git${path.sep}azure-rest-api-specs`, ""]);
-        } else {
-          return Promise.resolve([null, "", ""]);
-        }
-      },
+    vi.spyOn(utils, "findNearestPackageJson").mockResolvedValue(
+      `C:${path.sep}Git${path.sep}azure-rest-api-specs`,
     );
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -49,13 +33,9 @@ describe("npm-prefix", function () {
   });
 
   it("should fail if npm prefix mismatch", async function () {
-    runNpmSpy.mockImplementation((args: string[]): Promise<[Error | null, string, string]> => {
-      if (args.includes("prefix")) {
-        return Promise.resolve([null, "/Git/azure-rest-api-specs/specification/foo", ""]);
-      } else {
-        return Promise.resolve([null, "", ""]);
-      }
-    });
+    vi.spyOn(utils, "findNearestPackageJson").mockResolvedValue(
+      "/Git/azure-rest-api-specs/specification/foo",
+    );
     // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 
