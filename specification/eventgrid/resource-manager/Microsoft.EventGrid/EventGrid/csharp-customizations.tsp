@@ -331,8 +331,16 @@ namespace Customization;
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(WebHookEventSubscriptionDestinationProperties.endpointBaseUrl, url, "csharp");
-@@alternateType(WebHookEventSubscriptionDestinationProperties.endpointUrl, url, "csharp");
+@@alternateType(
+  WebHookEventSubscriptionDestinationProperties.endpointBaseUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  WebHookEventSubscriptionDestinationProperties.endpointUrl,
+  url,
+  "csharp"
+);
 
 @@clientName(
   WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryApplicationIdOrUri,
