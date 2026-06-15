@@ -195,20 +195,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "crate::models::rfc3339_seconds_only::option::serialize",
   "rust"
 );
-#suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(
-  AccessPolicy.start,
-  "serialize_with",
-  "crate::models::rfc3339_seconds_only::option::serialize",
-  "rust"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(
-  AccessPolicy.expiry,
-  "serialize_with",
-  "crate::models::rfc3339_seconds_only::option::serialize",
-  "rust"
-);
 
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "rust,go");
