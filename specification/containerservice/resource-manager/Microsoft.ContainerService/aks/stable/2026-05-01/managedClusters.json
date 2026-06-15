@@ -8546,6 +8546,10 @@
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
         },
+        "schedulerProfile": {
+          "$ref": "#/definitions/SchedulerProfile",
+          "description": "Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile."
+        },
         "hostedSystemProfile": {
           "$ref": "#/definitions/ManagedClusterHostedSystemProfile",
           "description": "Settings for hosted system addons. For more information, see https://aka.ms/aks/automatic/systemcomponents."
@@ -10368,6 +10372,50 @@
         "relativeMonthly": {
           "$ref": "#/definitions/RelativeMonthlySchedule",
           "description": "For schedules like: 'recur every month on the first Monday' or 'recur every 3 months on last Friday'."
+        }
+      }
+    },
+    "SchedulerConfigMode": {
+      "type": "string",
+      "description": "The config customization mode for this scheduler instance.",
+      "enum": [
+        "Default",
+        "ManagedByCRD"
+      ],
+      "x-ms-enum": {
+        "name": "SchedulerConfigMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "No config customization. Use default configuration."
+          },
+          {
+            "name": "ManagedByCRD",
+            "value": "ManagedByCRD",
+            "description": "Enable config customization. Customer can specify scheduler configuration via a CRD. See aka.ms/aks/scheduler-crd for details."
+          }
+        ]
+      }
+    },
+    "SchedulerInstanceProfile": {
+      "type": "object",
+      "description": "Profile with settings related to a specific instance of an AKS-managed scheduler.",
+      "properties": {
+        "schedulerConfigMode": {
+          "$ref": "#/definitions/SchedulerConfigMode",
+          "description": "The configuration mode to be used by the AKS-managed scheduler."
+        }
+      }
+    },
+    "SchedulerProfile": {
+      "type": "object",
+      "description": "Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.",
+      "properties": {
+        "upstream": {
+          "$ref": "#/definitions/SchedulerInstanceProfile",
+          "description": "Profile with settings related to upstream variant of kube-scheduler (https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler)."
         }
       }
     },
