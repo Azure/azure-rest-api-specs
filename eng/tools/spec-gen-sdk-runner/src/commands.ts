@@ -28,6 +28,7 @@ import {
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
@@ -379,6 +380,15 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         executionReport = getExecutionReport(commandInput);
+        if (commandInput.sdkLanguage === "azure-sdk-for-python") {
+          const pythonPackageValidationSucceeded = await validatePythonPackagesOnPyPI(
+            executionReport.packages,
+          );
+          if (!pythonPackageValidationSucceeded) {
+            statusCode = 1;
+            executionReport.executionResult = "failed";
+          }
+        }
       } catch (error) {
         logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
