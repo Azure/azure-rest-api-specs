@@ -8046,6 +8046,22 @@
           "$ref": "#/definitions/ManagedClusterNATGatewayProfile",
           "description": "Profile of the cluster NAT gateway."
         },
+        "natGatewayId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the NAT gateway to use for egress at cluster startup when outboundType is 'userAssignedNATGateway' using StandardV2 Public IP, backend pool type is podIP, and load balancer type is service SKU. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/natGateways/{natGatewayName}'. When using managed NATGateway this field is auto populated. For more information, see https://aka.ms/aks/container-native-slb",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/natGateways"
+              }
+            ]
+          }
+        },
         "staticEgressGatewayProfile": {
           "$ref": "#/definitions/ManagedClusterStaticEgressGatewayProfile",
           "description": "The profile for Static Egress Gateway addon. For more details about Static Egress Gateway, see https://aka.ms/aks/static-egress-gateway."
@@ -9686,6 +9702,7 @@
       "type": "string",
       "description": "The load balancer sku for the managed cluster. The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs.",
       "enum": [
+        "service",
         "standard",
         "basic"
       ],
@@ -9693,6 +9710,11 @@
         "name": "LoadBalancerSku",
         "modelAsString": true,
         "values": [
+          {
+            "name": "service",
+            "value": "service",
+            "description": "Use a service Load Balancer, with native pod-level load balancing. This SKU is specifically built to scale for container-based workloads, with a single instance utilized for each application. For more information, see https://aka.ms/aks/container-native-slb"
+          },
           {
             "name": "standard",
             "value": "standard",
@@ -11783,7 +11805,8 @@
           "default": "NodeIPConfiguration",
           "enum": [
             "NodeIPConfiguration",
-            "NodeIP"
+            "NodeIP",
+            "PodIP"
           ],
           "x-ms-enum": {
             "name": "BackendPoolType",
@@ -11798,6 +11821,11 @@
                 "name": "NodeIP",
                 "value": "NodeIP",
                 "description": "The type of the managed inbound Load Balancer BackendPool. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend."
+              },
+              {
+                "name": "PodIP",
+                "value": "PodIP",
+                "description": "The type of the managed inbound Load Balancer BackendPool. Used only when loadBalancerSku is specified as 'service'. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend."
               }
             ]
           }
