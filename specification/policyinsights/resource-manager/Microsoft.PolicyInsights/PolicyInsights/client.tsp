@@ -2065,6 +2065,47 @@ op attestationsListForResource(
 // the shared models.tsp.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForSubscription,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForManagementGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   "csharp"
 );
