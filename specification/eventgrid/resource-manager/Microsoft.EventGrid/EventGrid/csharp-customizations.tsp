@@ -293,7 +293,11 @@ namespace Customization;
   "csharp"
 );
 @@alternateType(IssuerCertificateInfo.certificateUrl, url, "csharp");
-@@alternateType(NetworkSecurityPerimeterInfo.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  NetworkSecurityPerimeterInfo.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(PartnerDetails.setupUri, url, "csharp");
 @@alternateType(
   PartnerEventSubscriptionDestinationProperties.resourceId,
@@ -329,7 +333,10 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(NamespaceUpdateParameters.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
-@@flattenProperty(NamespaceUpdateParameterProperties.topicsConfiguration, "csharp");
+@@flattenProperty(
+  NamespaceUpdateParameterProperties.topicsConfiguration,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(PartnerConfiguration.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
@@ -343,7 +350,10 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(PrivateEndpointConnection.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
-@@flattenProperty(PrivateEndpointConnectionProperties.privateEndpoint, "csharp");
+@@flattenProperty(
+  PrivateEndpointConnectionProperties.privateEndpoint,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(SystemTopic.properties, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
