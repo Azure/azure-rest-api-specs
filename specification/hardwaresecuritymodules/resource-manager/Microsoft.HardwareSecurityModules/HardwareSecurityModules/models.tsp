@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -292,6 +293,26 @@ union CloudHsmClusterSkuName {
 
   /** Standard B10 SKU */
   StandardB10: "Standard B10",
+
+  /** Standard_B1v2 SKU */
+  @added(Versions.v2025_12_01_preview)
+  Standard_B1v2: "Standard_B1v2",
+
+  /** Standard_B5v2 SKU */
+  @added(Versions.v2025_12_01_preview)
+  Standard_B5v2: "Standard_B5v2",
+
+  /** Standard_B10v2 SKU */
+  @added(Versions.v2025_12_01_preview)
+  Standard_B10v2: "Standard_B10v2",
+
+  /** Standard_B15v2 SKU */
+  @added(Versions.v2025_12_01_preview)
+  Standard_B15v2: "Standard_B15v2",
+
+  /** Standard_B20v2 SKU */
+  @added(Versions.v2025_12_01_preview)
+  Standard_B20v2: "Standard_B20v2",
 }
 
 /**
