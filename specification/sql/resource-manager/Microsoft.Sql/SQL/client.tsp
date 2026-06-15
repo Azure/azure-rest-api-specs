@@ -235,11 +235,6 @@ using Microsoft.Sql;
 );
 @@clientName(CheckNameAvailabilityReason, "SqlNameUnavailableReason", "csharp");
 @@clientName(
-  CheckNameAvailabilityResourceType,
-  "SqlNameAvailabilityResourceType",
-  "csharp"
-);
-@@clientName(
   CheckNameAvailabilityRequest,
   "SqlNameAvailabilityContent",
   "csharp"
@@ -493,6 +488,46 @@ using Microsoft.Sql;
 );
 
 @@alternateType(
+  CopyLongTermRetentionBackupParametersProperties.targetServerResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DeletedServerProperties.originalId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ElasticPoolProperties.maintenanceConfigurationId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ElasticPoolUpdateProperties.maintenanceConfigurationId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  InstancePoolProperties.subnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LongTermRetentionOperationResultProperties.fromBackupResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LongTermRetentionOperationResultProperties.toBackupResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedDatabaseProperties.crossSubscriptionTargetManagedInstanceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   ManagedDatabaseProperties.crossSubscriptionSourceDatabaseId,
   armResourceIdentifier,
   "csharp"
@@ -503,7 +538,42 @@ using Microsoft.Sql;
   "csharp"
 );
 @@alternateType(
+  ManagedDatabaseProperties.failoverGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedDatabaseProperties.longTermRetentionBackupResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedDatabaseProperties.recoverableDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedDatabaseProperties.sourceDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedInstanceProperties.instancePoolId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedInstanceProperties.maintenanceConfigurationId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   ManagedInstanceProperties.virtualClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedInstancePrivateEndpointProperty.id,
   armResourceIdentifier,
   "csharp"
 );
@@ -522,6 +592,103 @@ using Microsoft.Sql;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(PrivateEndpointProperty.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  ServerProperties.primaryUserAssignedIdentityId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VirtualNetworkRuleProperties.virtualNetworkSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SyncAgentProperties.syncDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SyncGroupProperties.syncDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SyncMemberProperties.syncAgentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SyncMemberProperties.syncMemberAzureDatabaseResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VirtualClusterProperties.subnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(Advisor.location, azureLocation, "csharp");
+@@alternateType(EncryptionProtector.location, azureLocation, "csharp");
+@@alternateType(
+  ManagedDatabaseProperties.defaultSecondaryLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(ServerConnectionPolicy.location, azureLocation, "csharp");
+@@alternateType(
+  ReplicationLinkProperties.partnerLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(RestorePoint.location, azureLocation, "csharp");
+@@alternateType(ServerKey.location, azureLocation, "csharp");
+
+@@alternateType(DatabaseExtensionsProperties.storageUri, url, "csharp");
+@@alternateType(EncryptionProtectorProperties.uri, url, "csharp");
+@@alternateType(
+  ImportExportExtensionsOperationResultProperties.blobUri,
+  url,
+  "csharp"
+);
+@@alternateType(ImportExportOperationResultProperties.blobUri, url, "csharp");
+@@alternateType(ManagedDatabaseProperties.storageContainerUri, url, "csharp");
+@@alternateType(
+  ManagedInstanceEncryptionProtectorProperties.uri,
+  url,
+  "csharp"
+);
+@@alternateType(ManagedInstanceKeyProperties.uri, url, "csharp");
+@@alternateType(ManagedInstanceProperties.keyId, url, "csharp");
+@@alternateType(ServerKeyProperties.uri, url, "csharp");
+@@alternateType(ServerProperties.keyId, url, "csharp");
+
+@@alternateType(SecurityEventProperties.clientIp, ipV4Address, "csharp");
+@@alternateType(SyncAgentLinkedDatabaseProperties.databaseId, uuid, "csharp");
+@@alternateType(
+  ServerProperties.publicNetworkAccess,
+  ServerNetworkAccessFlag,
+  "csharp"
+);
+
+@@clientName(DatabaseIdentity.type, "IdentityType", "csharp");
+@@clientName(JobAgentIdentity.type, "IdentityType", "csharp");
+@@clientName(JobExecutionTarget.type, "TargetType", "csharp");
+@@clientName(JobSchedule.type, "ScheduleType", "csharp");
+@@clientName(JobStepAction.type, "ActionType", "csharp");
+@@clientName(JobStepOutput.type, "OutputType", "csharp");
+@@clientName(JobTarget.type, "TargetType", "csharp");
+@@clientName(DatabaseKey.type, "KeyType", "csharp");
+@@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(ServicePrincipal.type, "PrincipalType", "csharp");
+@@clientName(SyncGroupLogProperties.type, "LogType", "csharp");
+@@usage(QueryStatistics, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 // C# alternate type mappings migrated from autorest.md.bak directive format transforms
 @@alternateType(global.Microsoft.Sql.Usage.id, armResourceIdentifier, "csharp");
@@ -645,7 +812,7 @@ using Microsoft.Sql;
 );
 @@clientName(
   ManagedInstancePrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
-  "ConnectionState",
+  "PrivateLinkServiceConnectionState",
   "csharp"
 );
 @@clientName(RecommendedActionProperties.details, "ActionDetails", "csharp");
@@ -1115,5 +1282,42 @@ union ManagedInstancePropertiesProvisioningState {
 @@alternateType(
   ManagedInstanceProperties.provisioningState,
   ManagedInstancePropertiesProvisioningState,
+  "csharp"
+);
+
+/**
+ * Availability resource type.
+ */
+union SqlNameAvailabilityResourceType {
+  string,
+
+  /**
+   * Microsoft.Sql/servers
+   */
+  MicrosoftSqlServers: "Microsoft.Sql/servers",
+}
+// Inherited from the original autorest.md settings. Change fixed enum to extensible enum.
+@@alternateType(
+  CheckNameAvailabilityRequest.type,
+  SqlNameAvailabilityResourceType,
+  "csharp"
+);
+
+@@usage(DatabaseColumn, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@clientName(
+  DatabaseColumnProperties.memoryOptimized,
+  "IsMemoryOptimized",
+  "csharp"
+);
+@@usage(DatabaseTable, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@clientName(
+  DatabaseTableProperties.memoryOptimized,
+  "IsMemoryOptimized",
+  "csharp"
+);
+@@alternateType(DataMaskingPolicy.location, azureLocation, "csharp");
+@@clientName(
+  DataMaskingPolicies.dataMaskingRulesCreateOrUpdate,
+  "CreateOrUpdateDataMaskingRule",
   "csharp"
 );
