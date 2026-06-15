@@ -13749,6 +13749,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
+          - EgressPolicy=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -13756,12 +13757,13 @@ components:
       type: string
       enum:
         - HostedAgents=V1Preview
+        - EgressPolicy=V1Preview
         - WorkflowAgents=V1Preview
         - AgentEndpoints=V1Preview
         - CodeAgents=V1Preview
         - ExternalAgents=V1Preview
         - ContainerAgents=V1Preview
-      description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
+      description: Feature opt-in keys for agent definition operations supporting preview agent capabilities.
     AgentEndpointAuthorizationScheme:
       type: object
       required:
@@ -16364,6 +16366,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
+          - EgressPolicy=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -16498,6 +16501,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
+          - EgressPolicy=V1Preview
           - WorkflowAgents=V1Preview
           - CodeAgents=V1Preview
           - ExternalAgents=V1Preview
@@ -19995,6 +19999,12 @@ components:
           examples:
             - name: LOG_LEVEL
               value: debug
+        egress_policy_id_preview:
+          type: string
+          description: The resource ID of the egress policy to apply to hosted-agent application traffic.
+          x-ms-foundry-meta:
+            required_previews:
+              - EgressPolicy=V1Preview
         container_configuration:
           allOf:
             - $ref: '#/components/schemas/ContainerConfiguration'

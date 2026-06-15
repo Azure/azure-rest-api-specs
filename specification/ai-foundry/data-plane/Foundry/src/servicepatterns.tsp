@@ -16,6 +16,25 @@ alias FoundryDataPlaneApiVersionParameter = {
   apiVersion: string;
 };
 
+/** Error response for Azure range errors. */
+alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(499)
+      @minValue(400)
+      @statusCode
+      statusCode: int32;
+    }
+  | {
+      ...ErrorResponseParameter;
+
+      @maxValue(599)
+      @minValue(500)
+      @statusCode
+      statusCode: int32;
+    };
+
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
   Azure.Core.Traits.NoConditionalRequests &
@@ -83,9 +102,10 @@ op FoundryDataPlaneOperation<
 
 // ---- Feature opt-in keys & preview headers ----
 
-/** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
+/** Feature opt-in keys for agent definition operations supporting preview agent capabilities. */
 union AgentDefinitionOptInKeys {
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
+  egress_policy_v1_preview: "EgressPolicy=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
   code_agents_v1_preview: "CodeAgents=V1Preview",
@@ -106,7 +126,7 @@ union FoundryFeaturesOptInKeys {
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
-  agents_optimization_v2_preview: "AgentsOptimization=V2Preview",
+  agents_optimization_v1_preview: "AgentsOptimization=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends

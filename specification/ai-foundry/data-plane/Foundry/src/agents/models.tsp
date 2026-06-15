@@ -10,6 +10,7 @@ namespace Azure.AI.Projects;
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+    AgentDefinitionOptInKeys.egress_policy_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.code_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview
@@ -500,6 +501,13 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Environment variables to set in the hosted agent container.")
   @example(#{ name: "LOG_LEVEL", value: "debug" })
   environment_variables?: Record<string>;
+
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+  )
+  @doc("The resource ID of the egress policy to apply to hosted-agent application traffic.")
+  egress_policy_id_preview?: string;
 
   @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
   @extension(
