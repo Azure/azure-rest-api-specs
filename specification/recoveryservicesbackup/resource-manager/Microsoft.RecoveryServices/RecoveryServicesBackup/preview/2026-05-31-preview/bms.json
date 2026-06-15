@@ -5562,7 +5562,7 @@
         },
         "identityInfo": {
           "$ref": "#/definitions/IdentityInfo",
-          "description": "Managed Identity information required to access customer storage account."
+          "description": "Managed identity information required to access the storage account."
         }
       },
       "allOf": [
@@ -6251,7 +6251,7 @@
         },
         "accessType": {
           "$ref": "#/definitions/AccessType",
-          "description": "Whether access to the storage account is key-based or identity-based."
+          "description": "Whether access to the storage account is key-based or identity-based.\nWhen `IdentityBased`, `identityInfo` must be provided to identify the\nmanaged identity used to access the storage account."
         },
         "identityInfo": {
           "$ref": "#/definitions/IdentityInfo",

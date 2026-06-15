@@ -3548,7 +3548,7 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
   targetDetails?: TargetAFSRestoreInfo;
 
   /**
-   * Managed Identity information required to access customer storage account.
+   * Managed identity information required to access the storage account.
    */
   @added(Versions.v2026_05_31_preview)
   identityInfo?: IdentityInfo;
@@ -7443,6 +7443,8 @@ model AzureStorageContainer extends ProtectionContainer {
 
   /**
    * Whether access to the storage account is key-based or identity-based.
+   * When `IdentityBased`, `identityInfo` must be provided to identify the
+   * managed identity used to access the storage account.
    */
   @added(Versions.v2026_05_31_preview)
   accessType?: AccessType;
