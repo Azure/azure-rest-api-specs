@@ -21,7 +21,6 @@ import "./ExpansionJob.tsp";
 import "./Cache.tsp";
 import "./StorageTarget.tsp";
 import "./routes.tsp";
-import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
