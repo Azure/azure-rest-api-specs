@@ -1,4 +1,4 @@
-import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { type APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -13,12 +13,12 @@ import {
   prepareSpecGenSdkCommand,
   selectGenerationTool,
   setPipelineVariables,
-} from "../src/command-helpers.js";
-import * as log from "../src/log.js";
-import { LogLevel } from "../src/log.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import type { ExecutionReport } from "../src/types.js";
-import * as utils from "../src/utils.js";
+} from "../src/command-helpers.ts";
+import * as log from "../src/log.ts";
+import { LogLevel } from "../src/log.ts";
+import * as specHelpers from "../src/spec-helpers.ts";
+import type { ExecutionReport } from "../src/types.ts";
+import * as utils from "../src/utils.ts";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
