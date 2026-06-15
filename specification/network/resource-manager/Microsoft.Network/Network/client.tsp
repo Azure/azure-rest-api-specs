@@ -4790,19 +4790,25 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
-  "VirtualMachineScaleSetVmNetwork",
+  "VirtualMachineScaleSetNetworkInterfaces",
   "csharp"
 );
 
 @@clientLocation(
   Microsoft.Compute.NetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
-  "VirtualMachineScaleSetVmNetwork",
+  "VirtualMachineScaleSetNetworkInterfaces",
   "csharp"
 );
 
 @@clientName(
   Microsoft.Compute.NetworkInterfaceIPConfigurations,
   "VirtualMachineScaleSetNetworkInterfaceIPConfigurations",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Compute.PublicIPAddresses,
+  "VirtualMachineScaleSetNetworkInterfaceIPConfigurationPublicIPAddresses",
   "csharp"
 );
 
