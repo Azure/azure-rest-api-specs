@@ -213,7 +213,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   true,
   "rust"
 );
-@@clientName(Storage.Blob.PageBlob.getPageRanges, "getPageRanges", "rust");
+@@clientName(Storage.Blob.PageBlob.getPageRanges, "listPageRanges", "rust");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.PageBlob.getPageRanges,
