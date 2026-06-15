@@ -32,7 +32,7 @@ using Microsoft.OperationalInsights;
 );
 @@clientName(
   NetworkSecurityPerimeterConfigurations.listNSP,
-  "GetNetworkSecurityPerimeterConfiguration",
+  "GetNetworkSecurityPerimeterConfigurations",
   "csharp"
 );
 @@clientName(
