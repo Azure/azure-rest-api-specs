@@ -22,7 +22,9 @@ describe("npm-prefix", function () {
   });
 
   it("should succeed if node returns inconsistent drive letter capitalization", async function () {
-    vi.mocked(packageDirectory).mockResolvedValue(`C:${path.sep}Git${path.sep}azure-rest-api-specs`);
+    vi.mocked(packageDirectory).mockResolvedValue(
+      `C:${path.sep}Git${path.sep}azure-rest-api-specs`,
+    );
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("c:/Git/azure-rest-api-specs");
@@ -37,9 +39,7 @@ describe("npm-prefix", function () {
   });
 
   it("should fail if npm prefix mismatch", async function () {
-    vi.mocked(packageDirectory).mockResolvedValue(
-      "/Git/azure-rest-api-specs/specification/foo",
-    );
+    vi.mocked(packageDirectory).mockResolvedValue("/Git/azure-rest-api-specs/specification/foo");
     // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 
