@@ -1,5 +1,11 @@
 import "@azure-tools/typespec-azure-core/experimental";
-import "./main.tsp";
+import "../sdk-common/error.default.tsp";
+import "../agents/routes.tsp";
+import "../toolboxes/routes.tsp";
+import "../skills/routes.tsp";
+import "../agents-session-files/routes.tsp";
+import "../managed-blueprints/routes.tsp";
+import "../agents-optimization/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -28,7 +34,8 @@ namespace Azure.AI.Projects {
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(Agents, "AgentAdministrationClient", "csharp");
-  @@clientInitialization(Azure.AI.Projects.Agents,
+  @@clientInitialization(
+    Azure.AI.Projects.Agents,
     {
       initializedBy: InitializedBy.parent | InitializedBy.individually,
     }
@@ -40,10 +47,12 @@ namespace Azure.AI.Projects {
   @@clientName(AgentSessionResource, "ProjectAgentSession");
   @@access(AgentSessionResource, Access.public);
 
-  @@clientName(BingGroundingSearchToolParameters,
+  @@clientName(
+    BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
   );
-  @@clientName(ContainerAppAgentDefinition,
+  @@clientName(
+    ContainerAppAgentDefinition,
     "ContainerApplicationAgentDefinition"
   );
   //  @@clientName(CreatedBy, "AgentResponseItemSource");
@@ -53,27 +62,33 @@ namespace Azure.AI.Projects {
 
   @@clientName(OpenApiTool, "OpenAPITool");
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
-  @@clientName(OpenApiAnonymousAuthDetails,
+  @@clientName(
+    OpenApiAnonymousAuthDetails,
     "OpenAPIAnonymousAuthenticationDetails"
   );
   @@clientName(OpenApiAuthDetails, "OpenApiAuthenticationDetails");
-  @@clientName(OpenApiManagedAuthDetails,
+  @@clientName(
+    OpenApiManagedAuthDetails,
     "OpenAPIManagedAuthenticationDetails"
   );
-  @@clientName(OpenApiProjectConnectionAuthDetails,
+  @@clientName(
+    OpenApiProjectConnectionAuthDetails,
     "OpenApiProjectConnectionAuthenticationDetails"
   );
-  @@clientName(OpenApiProjectConnectionSecurityScheme,
+  @@clientName(
+    OpenApiProjectConnectionSecurityScheme,
     "OpenApiProjectConnectionSecurityScheme"
   );
   @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme");
 
-  @@clientName(OpenApiFunctionDefinition.auth,
+  @@clientName(
+    OpenApiFunctionDefinition.auth,
     "AuthenticationDetails",
     "csharp"
   );
   @@clientName(RaiConfig, "ContentFilterConfiguration");
-  @@clientName(SharepointGroundingToolParameters,
+  @@clientName(
+    SharepointGroundingToolParameters,
     "SharePointGroundingToolOptions"
   );
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
@@ -95,7 +110,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.FunctionShellToolParam, "InternalFunctionShellToolParam");
 
   @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
-  @@clientName(OpenAI.AutoCodeInterpreterToolParam,
+  @@clientName(
+    OpenAI.AutoCodeInterpreterToolParam,
     "InternalAutoCodeInterpreterToolParam"
   );
 
@@ -145,40 +161,49 @@ namespace Azure.AI.Projects {
 
   @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
 
-  @@clientName(BingCustomSearchToolParameters,
+  @@clientName(
+    BingCustomSearchToolParameters,
     "BingCustomSearchToolOptions",
     "csharp"
   );
-  @@clientName(BrowserAutomationToolParameters,
+  @@clientName(
+    BrowserAutomationToolParameters,
     "BrowserAutomationToolOptions",
     "csharp"
   );
-  @@clientName(BingGroundingSearchConfiguration.set_lang,
+  @@clientName(
+    BingGroundingSearchConfiguration.set_lang,
     "BingUserInterfaceLanguage",
     "csharp"
   );
   @@clientName(BingGroundingTool.bing_grounding, "SearchToolOptions", "csharp");
-  @@clientName(BrowserAutomationPreviewTool.browser_automation_preview,
+  @@clientName(
+    BrowserAutomationPreviewTool.browser_automation_preview,
     "ToolParameters",
     "csharp"
   );
-  @@clientName(BrowserAutomationToolParameters.connection,
+  @@clientName(
+    BrowserAutomationToolParameters.connection,
     "ToolConnectionParameters",
     "csharp"
   );
-  @@clientName(CaptureStructuredOutputsTool.outputs,
+  @@clientName(
+    CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",
     "csharp"
   );
-  @@clientName(MemorySearchPreviewTool.update_delay,
+  @@clientName(
+    MemorySearchPreviewTool.update_delay,
     "UpdateDelayInSecs",
     "csharp"
   );
-  @@clientName(MicrosoftFabricPreviewTool.fabric_dataagent_preview,
+  @@clientName(
+    MicrosoftFabricPreviewTool.fabric_dataagent_preview,
     "ToolOptions",
     "csharp"
   );
-  @@clientName(SharepointPreviewTool.sharepoint_grounding_preview,
+  @@clientName(
+    SharepointPreviewTool.sharepoint_grounding_preview,
     "ToolOptions",
     "csharp"
   );
@@ -186,7 +211,8 @@ namespace Azure.AI.Projects {
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
   @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
-  @@clientName(TelemetryEndpointAuthType,
+  @@clientName(
+    TelemetryEndpointAuthType,
     "TelemetryEndpointAuthenticationKind"
   );
   @@clientName(TelemetryDataKind, "ExportedDataTypes");
@@ -265,10 +291,4 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.get, Access.internal);
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateConfig, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateFile, Access.internal);
-  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateResults, Access.internal);
-  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
 }

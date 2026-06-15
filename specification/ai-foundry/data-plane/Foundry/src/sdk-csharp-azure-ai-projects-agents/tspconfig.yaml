@@ -7,8 +7,8 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects.Agents
     api-version: "v1"
-    plugins:
-      - "../codegen"
+    # plugins:
+    #   - "../codegen"
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
@@ -24,7 +24,6 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/agents-session-files
       - specification/ai-foundry/data-plane/Foundry/src/managed-blueprints
       - specification/ai-foundry/data-plane/Foundry/src/agents-optimization
-      - specification/ai-foundry/data-plane/Foundry/src/servicepatterns.tsp
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

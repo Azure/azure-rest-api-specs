@@ -1,5 +1,8 @@
 import "@azure-tools/typespec-azure-core/experimental";
-import "./main.tsp";
+import "../sdk-common/error.default.tsp";
+import "../common/servicepatterns.tsp";
+import "../openai-conversations/routes.tsp";
+import "../openai-responses/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;

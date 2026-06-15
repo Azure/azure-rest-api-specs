@@ -3,20 +3,19 @@ import "../models/common.tsp";
 import "../models/NetworkToNetworkInterconnect.tsp";
 
 using Azure.ResourceManager;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network To Network Interconnect resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @parentResource(NetworkFabric)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkToNetworkInterconnect
-  extends Azure.ResourceManager.Foundations.ProxyResource {
+  is Azure.ResourceManager.ProxyResource<
+    NetworkToNetworkInterconnectProperties,
+    false
+  > {
   @doc("Name of the Network to Network Interconnect.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -24,12 +23,12 @@ model NetworkToNetworkInterconnect
   @segment("networkToNetworkInterconnects")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The NetworkToNetworkInterconnect Properties")
-  properties: NetworkToNetworkInterconnectProperties;
 }
 
+@@doc(
+  NetworkToNetworkInterconnect.properties,
+  "The NetworkToNetworkInterconnect Properties"
+);
 @armResourceOperations
 interface NetworkToNetworkInterconnects {
   @doc("Implements NetworkToNetworkInterconnects GET method.")
