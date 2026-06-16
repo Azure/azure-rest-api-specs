@@ -2,90 +2,118 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
+@@access(
+  Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientState,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
+@@access(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDisconnectionReason,
   Access.public
 );
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.SubscriptionValidationEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.SubscriptionDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientCreatedOrUpdatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientDeletedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionConnectedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.EventGridMQTTClientSessionDisconnectedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.SubscriptionValidationResponse,
   "csharp"
 );

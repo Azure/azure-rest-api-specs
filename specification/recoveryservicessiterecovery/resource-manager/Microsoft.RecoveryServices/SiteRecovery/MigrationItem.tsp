@@ -51,8 +51,10 @@ interface MigrationItems {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MigrationItem,
     Request = EnableMigrationInput,
-    Response = ArmResourceUpdatedResponse<MigrationItem> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MigrationItem> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<MigrationItem>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MigrationItem> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -195,18 +197,22 @@ interface MigrationItems {
 @@doc(MigrationItem.name, "Migration item name.");
 @@doc(MigrationItem.properties, "The migration item properties.");
 @@doc(MigrationItems.create::parameters.resource, "Enable migration input.");
-@@doc(MigrationItems.update::parameters.properties,
+@@doc(
+  MigrationItems.update::parameters.properties,
   "Update migration item input."
 );
 @@doc(MigrationItems.migrate::parameters.body, "Migrate input.");
-@@doc(MigrationItems.pauseReplication::parameters.body,
+@@doc(
+  MigrationItems.pauseReplication::parameters.body,
   "Pause replication input."
 );
-@@doc(MigrationItems.resumeReplication::parameters.body,
+@@doc(
+  MigrationItems.resumeReplication::parameters.body,
   "Resume replication input."
 );
 @@doc(MigrationItems.resync::parameters.body, "Resync input.");
 @@doc(MigrationItems.testMigrate::parameters.body, "Test migrate input.");
-@@doc(MigrationItems.testMigrateCleanup::parameters.body,
+@@doc(
+  MigrationItems.testMigrateCleanup::parameters.body,
   "Test migrate cleanup input."
 );

@@ -72,9 +72,11 @@ interface Connections {
 
 @@doc(Connection.name, "The name of connection.");
 @@doc(Connection.properties, "Gets or sets the properties of the connection.");
-@@doc(Connections.createOrUpdate::parameters.resource,
+@@doc(
+  Connections.createOrUpdate::parameters.resource,
   "The parameters supplied to the create or update connection operation."
 );
-@@doc(Connections.update::parameters.properties,
+@@doc(
+  Connections.update::parameters.properties,
   "The parameters supplied to the update a connection operation."
 );

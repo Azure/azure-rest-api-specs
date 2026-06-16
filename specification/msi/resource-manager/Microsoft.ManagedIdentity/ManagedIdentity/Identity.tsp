@@ -70,9 +70,11 @@ interface Identities {
 
 @@doc(Identity.name, "The name of the identity resource.");
 @@doc(Identity.properties, "The properties associated with the identity.");
-@@doc(Identities.createOrUpdate::parameters.resource,
+@@doc(
+  Identities.createOrUpdate::parameters.resource,
   "Parameters to create or update the identity"
 );
-@@doc(Identities.update::parameters.properties,
+@@doc(
+  Identities.update::parameters.properties,
   "Parameters to update the identity"
 );

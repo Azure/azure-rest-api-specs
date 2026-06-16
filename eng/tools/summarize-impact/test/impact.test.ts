@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
-import { PRContext } from "../src/PRContext.js";
-import { evaluateImpact } from "../src/impact.js";
-import { LabelContext } from "../src/labelling-types.js";
+import { PRContext } from "../src/PRContext.ts";
+import { evaluateImpact } from "../src/impact.ts";
+import { type LabelContext } from "../src/labelling-types.ts";
 
 const FIXTURE_DIRECTORY = path.join(__dirname, "fixtures");
 const BEFORE_REPO_FIXTURE = path.join(FIXTURE_DIRECTORY, "default", "before");

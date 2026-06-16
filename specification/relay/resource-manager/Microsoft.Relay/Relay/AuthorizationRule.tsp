@@ -213,24 +213,31 @@ interface WCFRelays {
   >;
 }
 
-@@doc(AuthorizationRule.properties,
+@@doc(
+  AuthorizationRule.properties,
   "Properties supplied to create or update AuthorizationRule"
 );
-@@doc(AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "The authorization rule parameters."
 );
-@@doc(AuthorizationRules.regenerateKeys::parameters.body,
+@@doc(
+  AuthorizationRules.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate authorization rule."
 );
-@@doc(HybridConnections.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  HybridConnections.createOrUpdateAuthorizationRule::parameters.resource,
   "The authorization rule parameters."
 );
-@@doc(HybridConnections.regenerateKeys::parameters.body,
+@@doc(
+  HybridConnections.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate authorization rule."
 );
-@@doc(WCFRelays.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  WCFRelays.createOrUpdateAuthorizationRule::parameters.resource,
   "The authorization rule parameters."
 );
-@@doc(WCFRelays.regenerateKeys::parameters.body,
+@@doc(
+  WCFRelays.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate authorization rule."
 );

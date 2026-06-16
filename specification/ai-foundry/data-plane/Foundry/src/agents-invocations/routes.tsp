@@ -19,6 +19,7 @@ interface AgentInvocations {
    * Retrieves the OpenAPI specification for an agent version's invocation contract.
    * Returns 404 if the agent does not expose an OpenAPI specification.
    */
+  @summary("Get an agent invocation OpenAPI spec")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
@@ -36,6 +37,7 @@ interface AgentInvocations {
   /**
    * Creates an invocation for the specified agent version.
    */
+  @summary("Create an agent invocation")
   @post
   @route("/agents/{agent_name}/endpoint/protocols/invocations")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
@@ -74,6 +76,7 @@ interface AgentInvocations {
    * Retrieves the invocation with the given ID.
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
+  @summary("Get an agent invocation")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
@@ -103,6 +106,7 @@ interface AgentInvocations {
    * Cancels an invocation.
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
+  @summary("Cancel an agent invocation")
   @post
   @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)

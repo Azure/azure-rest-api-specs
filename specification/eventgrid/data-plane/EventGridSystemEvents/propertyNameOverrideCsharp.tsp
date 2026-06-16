@@ -14,67 +14,82 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
-@@clientName(AcsIncomingCallEventData.to,
+@@clientName(
+  AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "csharp"
 );
-@@clientName(AcsIncomingCallEventData.from,
+@@clientName(
+  AcsIncomingCallEventData.from,
   "fromCommunicationIdentifier",
   "csharp"
 );
 
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+@@clientName(
+  AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "csharp"
 );
 
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "fileurl", "csharp");
 
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FhirServiceHostName",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceFhirId,
   "FhirResourceId",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceVersionId,
   "FhirResourceVersionId",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceType,
   "FhirResourceType",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
   "FhirServiceHostName",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceFhirId,
   "FhirResourceId",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceVersionId,
   "FhirResourceVersionId",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceType,
   "FhirResourceType",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
   "FhirServiceHostName",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FhirResourceId",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceVersionId,
   "FhirResourceVersionId",
   "csharp"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceType,
   "FhirResourceType",
   "csharp"
 );
@@ -83,42 +98,51 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(DeviceTwinProperties.metadata, "$metadata", "csharp");
 @@clientName(DeviceTwinProperties.version, "$version", "csharp");
 
-@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "operationalDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "resourceDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "operationalDetails",
   "csharp"
 );
 
-@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
+@@clientName(
+  StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "queuedOn",
   "csharp"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
+@@clientName(
+  StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn",
   "csharp"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+@@clientName(
+  StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
   "summaryReportBlobUri",
   "csharp"
 );
 
-@@clientName(StorageTaskCompletedEventData.summaryReportBlobUrl,
+@@clientName(
+  StorageTaskCompletedEventData.summaryReportBlobUrl,
   "summaryReportBlobUri",
   "csharp"
 );
 
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "csharp"
 );
@@ -127,7 +151,8 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsMessageReceivedEventData.media, "mediaContent", "csharp");
 
-@@clientName(AcsMessageReceivedEventData.interactive,
+@@clientName(
+  AcsMessageReceivedEventData.interactive,
   "interactiveContent",
   "csharp"
 );
@@ -142,110 +167,132 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsMessageInteractiveListReplyContent.id, "listItemId", "csharp");
 
-@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAnnotatedEventData.resourceInfo,
   "ResourceDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAnnotatedEventData.operationalInfo,
   "OperationalDetails",
   "csharp"
 );
 
-@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.resourceInfo,
   "ResourceDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.operationalInfo,
   "OperationalDetails",
   "csharp"
 );
 
-@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.resourceInfo,
   "ResourceDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.operationalInfo,
   "OperationalDetails",
   "csharp"
 );
-@@clientName(ResourceNotificationsResourceManagementDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementDeletedEventData.resourceInfo,
   "ResourceDetails",
   "csharp"
 );
 
-@@clientName(ResourceNotificationsResourceManagementDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceManagementDeletedEventData.operationalInfo,
   "OperationalDetails",
   "csharp"
 );
 
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
   "receivedTimestamp",
   "csharp"
 );
 
-@@clientName(AcsMessageEventData.receivedTimeStamp,
+@@clientName(
+  AcsMessageEventData.receivedTimeStamp,
   "receivedTimestamp",
   "csharp"
 );
 
-@@clientName(AcsMessageReceivedEventData.receivedTimeStamp,
+@@clientName(
+  AcsMessageReceivedEventData.receivedTimeStamp,
   "receivedTimestamp",
   "csharp"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
   "channelType",
   "csharp"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingContentType,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData.recordingContentType,
   "contentType",
   "csharp"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingFormatType,
+@@clientName(
+  AcsRecordingFileStatusUpdatedEventData.recordingFormatType,
   "formatType",
   "csharp"
 );
 
-@@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
+@@clientName(
+  EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "csharp"
 );
 
-@@clientName(EventGridMQTTClientDeletedEventData,
+@@clientName(
+  EventGridMQTTClientDeletedEventData,
   "EventGridMqttClientDeletedEventData",
   "csharp"
 );
 
-@@clientName(EventGridMQTTClientSessionConnectedEventData,
+@@clientName(
+  EventGridMQTTClientSessionConnectedEventData,
   "EventGridMqttClientSessionConnectedEventData",
   "csharp"
 );
 
-@@clientName(EventGridMQTTClientSessionDisconnectedEventData,
+@@clientName(
+  EventGridMQTTClientSessionDisconnectedEventData,
   "EventGridMqttClientSessionDisconnectedEventData",
   "csharp"
 );
 
-@@clientName(EventGridMQTTClientEventData,
+@@clientName(
+  EventGridMQTTClientEventData,
   "EventGridMqttClientEventData",
   "csharp"
 );
 
 @@clientName(EventGridMQTTClientState, "EventGridMqttClientState", "csharp");
 
-@@clientName(EventGridMQTTClientDisconnectionReason,
+@@clientName(
+  EventGridMQTTClientDisconnectionReason,
   "EventGridMqttClientDisconnectionReason",
   "csharp"
 );
 
-@@clientName(RedisImportRDBCompletedEventData,
+@@clientName(
+  RedisImportRDBCompletedEventData,
   "RedisImportRdbCompletedEventData",
   "csharp"
 );
 
-@@clientName(RedisExportRDBCompletedEventData,
+@@clientName(
+  RedisExportRDBCompletedEventData,
   "RedisExportRdbCompletedEventData",
   "csharp"
 );

@@ -18,6 +18,8 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
 model ComputeOperationStatus
@@ -32,6 +34,8 @@ model ComputeOperationStatus
 
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface ComputeOperations {
   /**
@@ -44,7 +48,8 @@ interface ComputeOperations {
 }
 
 @@doc(ComputeOperationStatus.name, "The ID of the compute operation.");
-@@doc(ComputeOperationStatus.properties,
+@@doc(
+  ComputeOperationStatus.properties,
   "The properties of the compute operation status."
 );
 
@@ -54,6 +59,8 @@ interface ComputeOperations {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operation status resource does not have a provisioning state"
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ComputeOperationStatusProperties {
   /**
    * The start time of the operation.
@@ -83,6 +90,8 @@ model ComputeOperationStatusProperties {
  */
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 union ComputeOperationStatusType {
   string,
 

@@ -9,17 +9,20 @@ using NewRelic.Observability;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrganizationResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  OrganizationResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PlanDataResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PlanDataResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResourceUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NewRelicMonitorResourceUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -33,19 +36,23 @@ using NewRelic.Observability;
 @@clientLocation(NewRelicMonitorResources.listByResourceGroup, "Monitors");
 @@clientLocation(NewRelicMonitorResources.listBySubscription, "Monitors");
 @@clientLocation(NewRelicMonitorResources.getMetricRules, "Monitors");
-@@clientName(NewRelicMonitorResources.getMetricRules::parameters.body,
+@@clientName(
+  NewRelicMonitorResources.getMetricRules::parameters.body,
   "request"
 );
 @@clientLocation(NewRelicMonitorResources.getMetricStatus, "Monitors");
-@@clientName(NewRelicMonitorResources.getMetricStatus::parameters.body,
+@@clientName(
+  NewRelicMonitorResources.getMetricStatus::parameters.body,
   "request"
 );
 @@clientLocation(NewRelicMonitorResources.listAppServices, "Monitors");
-@@clientName(NewRelicMonitorResources.listAppServices::parameters.body,
+@@clientName(
+  NewRelicMonitorResources.listAppServices::parameters.body,
   "request"
 );
 @@clientLocation(NewRelicMonitorResources.switchBilling, "Monitors");
-@@clientName(NewRelicMonitorResources.switchBilling::parameters.body,
+@@clientName(
+  NewRelicMonitorResources.switchBilling::parameters.body,
   "request"
 );
 @@clientLocation(NewRelicMonitorResources.listHosts, "Monitors");
@@ -61,13 +68,15 @@ using NewRelic.Observability;
 @@clientName(NewRelicMonitorResources.billingInfoGet, "Get");
 @@clientLocation(NewRelicMonitorResources.list, "ConnectedPartnerResources");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NewRelicMonitorResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 
-@@clientName(MonitoredSubscriptions.createOrUpdate::parameters.resource,
+@@clientName(
+  MonitoredSubscriptions.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientName(MonitoredSubscriptions.update::parameters.properties, "body");
