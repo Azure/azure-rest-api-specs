@@ -39,7 +39,7 @@ describe("checkPackageOnPyPI", () => {
 
     const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock);
     expect(result.status).toBe("checkFailed");
-    expect(result.reason).toBe("network unavailable");
+    expect(result.reason).toContain("Error: network unavailable");
   });
 
   test("URL-encodes package names", async () => {
@@ -93,13 +93,19 @@ describe("validatePythonPackagesOnPyPI", () => {
     const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
+    const vsoLogIssueSpy = vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const result = await validatePythonPackagesOnPyPI([{ packageName: "azure-mgmt-widget" }]);
 
     expect(result).toBe(false);
     expect(logSpy).toHaveBeenCalledWith(
+      "Checking whether Python package 'azure-mgmt-widget' is registered on PyPI.org...",
+      LogLevel.Info,
+    );
+    expect(vsoLogIssueSpy).toHaveBeenCalledWith(
       "Python package 'azure-mgmt-widget' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
-      LogLevel.Error,
     );
   });
 
@@ -108,13 +114,19 @@ describe("validatePythonPackagesOnPyPI", () => {
     const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
+    const vsoLogIssueSpy = vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
 
     const result = await validatePythonPackagesOnPyPI([{ packageName: "azure-mgmt-widget" }]);
 
     expect(result).toBe(false);
     expect(logSpy).toHaveBeenCalledWith(
+      "Checking whether Python package 'azure-mgmt-widget' is registered on PyPI.org...",
+      LogLevel.Info,
+    );
+    expect(vsoLogIssueSpy).toHaveBeenCalledWith(
       "Unable to verify whether Python package 'azure-mgmt-widget' is registered on PyPI.org. Treating this as a validation failure. Details: PyPI returned HTTP 503",
-      LogLevel.Error,
     );
   });
 
