@@ -19,6 +19,7 @@ import "./NGroup.tsp";
 import "./ContainerGroupProfile.tsp";
 import "./SandboxGroup.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
