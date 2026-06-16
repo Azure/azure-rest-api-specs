@@ -1654,3 +1654,35 @@ union SqlNameAvailabilityResourceType {
   "SnaLu6Point2TransactionsEnabled",
   "csharp"
 );
+@@clientName(
+  DeletedServersOperationGroup.list,
+  "GetDeletedServers",
+  "csharp"
+);
+@@clientName(
+  SyncGroupsOperationGroup.listSyncDatabaseIds,
+  "GetSyncDatabaseIdsSyncGroups",
+  "csharp"
+);
+
+// SqlDatabaseResource sensitivity-label operations: v1.4 exposed long descriptive names.
+@@clientName(
+  Databases.listCurrentByDatabase,
+  "GetCurrentSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  Databases.listRecommendedByDatabase,
+  "GetRecommendedSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  Databases.sensitivityLabelsListByDatabase,
+  "GetSensitivityLabels",
+  "csharp"
+);
+@@clientName(
+  Databases.sensitivityLabelsUpdate,
+  "UpdateSensitivityLabel",
+  "csharp"
+);
