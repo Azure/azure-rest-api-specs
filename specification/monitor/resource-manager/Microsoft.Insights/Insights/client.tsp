@@ -623,9 +623,19 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricBaselinesApi.BaselineSensitivity, "MonitorBaselineSensitivity", "csharp");
 @@clientName(MetricBaselinesApi.BaselineMetadata, "MonitorBaselineMetadata", "csharp");
 @@clientName(MetricsApi.MetricDefinition, "MonitorMetricDefinition", "csharp");
+@@clientName(
+  MetricsApi.MetricDefinition.primaryAggregationType,
+  "PrimaryAggregationKind",
+  "csharp"
+);
+@@clientName(
+  MetricsApi.MetricDefinition.supportedAggregationTypes,
+  "SupportedAggregationKinds",
+  "csharp"
+);
 @@clientName(MetricsApi.MetricClass, "MonitorMetricClass", "csharp");
 @@clientName(MetricsApi.MetricAvailability, "MonitorMetricAvailability", "csharp");
-@@clientName(MetricsApi.MetricAggregationType, "MonitorAggregationType", "csharp");
+@@clientName(MetricsApi.MetricAggregationType, "MonitorAggregationKind", "csharp");
 @@clientName(MetricsApi.MetricUnit, "MonitorMetricUnit", "csharp");
 @@clientName(MetricsApi.MetricNamespace, "MonitorMetricNamespace", "csharp");
 @@clientName(MetricsApi.NamespaceClassification, "MonitorNamespaceClassification", "csharp");
@@ -649,6 +659,16 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(MetricsApi.MetricNamespacesOperationGroup.list, "GetMonitorMetricNamespaces", "csharp");
 @@clientName(ResultType, "MonitorResultType", "csharp");
+@@clientName(
+  MetricsApi.SubscriptionScopeMetricDefinition.primaryAggregationType,
+  "PrimaryAggregationKind",
+  "csharp"
+);
+@@clientName(
+  MetricsApi.SubscriptionScopeMetricDefinition.supportedAggregationTypes,
+  "SupportedAggregationKinds",
+  "csharp"
+);
 @@clientName(ServiceDiagnosticsSettingsApi.MetricSettings.enabled, "IsEnabled", "csharp");
 @@clientName(ServiceDiagnosticsSettingsApi.LogSettings.enabled, "IsEnabled", "csharp");
 @@clientName(Microsoft.Common.RetentionPolicy.enabled, "IsEnabled", "csharp");
