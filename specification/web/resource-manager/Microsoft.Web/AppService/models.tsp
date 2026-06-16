@@ -2418,7 +2418,7 @@ model SiteProperties {
   /**
    * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it to return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
    */
-   @added(Versions.v2026_07_15)
+  @added(Versions.v2026_07_15)
   maintenanceEnabled?: boolean;
 }
 
