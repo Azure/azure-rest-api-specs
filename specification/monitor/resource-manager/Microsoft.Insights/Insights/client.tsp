@@ -729,12 +729,12 @@ enum MonitorConditionOperator {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   PrivateLinkScopesApi.PrivateEndpointConnections.listByPrivateLinkScope,
-  "csharp,java"
+  "csharp,java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   PrivateLinkScopesApi.PrivateLinkResources.listByPrivateLinkScope,
-  "csharp"
+  "csharp,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -818,7 +818,7 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "java"
+  "java,python"
 );
 
 /**
@@ -846,7 +846,11 @@ model LogSettings {
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
-@@alternateType(ServiceDiagnosticsSettingsApi.LogSettings, LogSettings, "java");
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.LogSettings,
+  LogSettings,
+  "java,python"
+);
 
 @@clientLocation(
   NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
@@ -991,22 +995,6 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(AlertSeverity.`3`, "THREE", "python");
 @@clientName(AlertSeverity.`4`, "FOUR", "python");
 
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.get,
-  "DiagnosticSettings",
-  "python"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.createOrUpdate,
-  "DiagnosticSettings",
-  "python"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.update,
-  "DiagnosticSettings",
-  "python"
-);
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1026,5 +1014,21 @@ op PrivateLinkScopeOperationStatusGetCustomized(
 @@override(
   PrivateLinkScopeOperationStatusOperationGroup.get,
   PrivateLinkScopeOperationStatusGetCustomized,
+  "python"
+);
+
+@@clientName(
+  ActionGroupsApi.ActionGroup,
+  "ActionGroupResourceProperties",
+  "python"
+);
+@@clientName(
+  ActivityLogAlertsApi.ActivityLogAlertActionGroup,
+  "ActionGroup",
+  "python"
+);
+@@clientName(
+  Microsoft.Common.CommonErrorResponse,
+  "ErrorResponseCommon",
   "python"
 );

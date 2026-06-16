@@ -13,6 +13,7 @@ import "./streaming/events.tsp";
 import "./vector_stores/routes.tsp";
 import "./vector_stores/files/routes.tsp";
 import "./vector_stores/file_batches/routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
