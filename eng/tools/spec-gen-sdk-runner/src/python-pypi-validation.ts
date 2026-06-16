@@ -85,7 +85,7 @@ export async function validatePythonPackagesOnPyPI(
 
     if (result.status === "notRegistered") {
       errors.push(
-        `Python package '${pkg.packageName}' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.`,
+        `Python package '${pkg.packageName}' is not registered on PyPI.org yet. To reserve this package name, complete these actions:\n1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.`,
       );
     } else {
       errors.push(

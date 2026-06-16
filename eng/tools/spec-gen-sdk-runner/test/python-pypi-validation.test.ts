@@ -99,7 +99,7 @@ describe("validatePythonPackagesOnPyPI", () => {
     expect(result).toEqual({
       succeeded: false,
       errors: [
-        "Python package 'azure-mgmt-widget' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
+        "Python package 'azure-mgmt-widget' is not registered on PyPI.org yet. To reserve this package name, complete these actions:\n1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
       ],
     });
     expect(logSpy).toHaveBeenCalledWith(
@@ -145,7 +145,7 @@ describe("validatePythonPackagesOnPyPI", () => {
 
     expect(result.succeeded).toBe(false);
     expect(result.errors).toEqual([
-      "Python package 'azure-mgmt-new' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
+      "Python package 'azure-mgmt-new' is not registered on PyPI.org yet. To reserve this package name, complete these actions:\n1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
     ]);
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
