@@ -6658,6 +6658,7 @@ model AgentGuardrailsSecretRef {
   secretId: string;
 
   /** Optional key within the secret. */
+  @secret
   secretKey?: string;
 
   /** Optional format for the resolved value; "{value}" is the placeholder, e.g. "Bearer {value}". */

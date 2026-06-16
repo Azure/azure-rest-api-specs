@@ -139,7 +139,7 @@
       "name": "ManagedComputeCapacities"
     },
     {
-      "name": "AccountNetworkPolicyResource"
+      "name": "AccountAgentGuardrailsResource"
     },
     {
       "name": "Skus"
@@ -2007,6 +2007,244 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/agentGuardrails": {
+      "get": {
+        "operationId": "AccountAgentGuardrails_List",
+        "tags": [
+          "AccountAgentGuardrailsResource"
+        ],
+        "summary": "Lists all agent guardrails policies under the specified Cognitive Services account.",
+        "description": "Lists all agent guardrails policies under the specified Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AgentGuardrailsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Account Agent Guardrails Policies": {
+            "$ref": "./examples/AccountAgentGuardrails/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/agentGuardrails/{agentGuardrailsName}": {
+      "get": {
+        "operationId": "AccountAgentGuardrails_Get",
+        "tags": [
+          "AccountAgentGuardrailsResource"
+        ],
+        "summary": "Gets the specified agent guardrails policy associated with the Cognitive Services account.",
+        "description": "Gets the specified agent guardrails policy associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "agentGuardrailsName",
+            "in": "path",
+            "description": "The name of the agent guardrails policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentGuardrailsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Account Agent Guardrails Policy": {
+            "$ref": "./examples/AccountAgentGuardrails/get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AccountAgentGuardrails_CreateOrUpdate",
+        "tags": [
+          "AccountAgentGuardrailsResource"
+        ],
+        "summary": "Creates or updates an agent guardrails policy under the specified Cognitive Services account.",
+        "description": "Creates or updates an agent guardrails policy under the specified Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "agentGuardrailsName",
+            "in": "path",
+            "description": "The name of the agent guardrails policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The agent guardrails policy resource to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentGuardrailsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AgentGuardrailsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentGuardrailsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentGuardrailsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentGuardrailsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Account Agent Guardrails Policy": {
+            "$ref": "./examples/AccountAgentGuardrails/createOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AccountAgentGuardrails_Delete",
+        "tags": [
+          "AccountAgentGuardrailsResource"
+        ],
+        "summary": "Deletes the specified agent guardrails policy from the Cognitive Services account.",
+        "description": "Deletes the specified agent guardrails policy from the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "agentGuardrailsName",
+            "in": "path",
+            "description": "The name of the agent guardrails policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Account Agent Guardrails Policy": {
+            "$ref": "./examples/AccountAgentGuardrails/delete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts": {
@@ -5796,244 +6034,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkPolicies": {
-      "get": {
-        "operationId": "AccountNetworkPolicies_List",
-        "tags": [
-          "AccountNetworkPolicyResource"
-        ],
-        "summary": "Lists all network policies under the specified Cognitive Services account.",
-        "description": "Lists all network policies under the specified Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/NetworkPolicyListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List Account Network Policies": {
-            "$ref": "./examples/AccountNetworkPolicy/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkPolicies/{networkPolicyName}": {
-      "get": {
-        "operationId": "AccountNetworkPolicies_Get",
-        "tags": [
-          "AccountNetworkPolicyResource"
-        ],
-        "summary": "Gets the specified network policy associated with the Cognitive Services account.",
-        "description": "Gets the specified network policy associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "networkPolicyName",
-            "in": "path",
-            "description": "The name of the network policy.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NetworkPolicyResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Account Network Policy": {
-            "$ref": "./examples/AccountNetworkPolicy/get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "AccountNetworkPolicies_CreateOrUpdate",
-        "tags": [
-          "AccountNetworkPolicyResource"
-        ],
-        "summary": "Creates or updates a network policy under the specified Cognitive Services account.",
-        "description": "Creates or updates a network policy under the specified Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "networkPolicyName",
-            "in": "path",
-            "description": "The name of the network policy.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The network policy resource to create or update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NetworkPolicyResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'NetworkPolicyResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NetworkPolicyResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'NetworkPolicyResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NetworkPolicyResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update Account Network Policy": {
-            "$ref": "./examples/AccountNetworkPolicy/createOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "AccountNetworkPolicies_Delete",
-        "tags": [
-          "AccountNetworkPolicyResource"
-        ],
-        "summary": "Deletes the specified network policy from the Cognitive Services account.",
-        "description": "Deletes the specified network policy from the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "networkPolicyName",
-            "in": "path",
-            "description": "The name of the network policy.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Account Network Policy": {
-            "$ref": "./examples/AccountNetworkPolicy/delete.json"
-          }
         }
       }
     },
@@ -12358,6 +12358,453 @@
         ]
       }
     },
+    "AgentGuardrailsActionType": {
+      "type": "string",
+      "description": "The kind of action a policy rule takes when it matches.",
+      "enum": [
+        "Allow",
+        "Deny",
+        "Transform",
+        "Rewrite"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the matched traffic."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny the matched traffic."
+          },
+          {
+            "name": "Transform",
+            "value": "Transform",
+            "description": "Forward the matched traffic after applying header transforms. Requires at least one header."
+          },
+          {
+            "name": "Rewrite",
+            "value": "Rewrite",
+            "description": "Redirect the matched traffic to a new destination, optionally applying header transforms. Requires a rewrite target."
+          }
+        ]
+      }
+    },
+    "AgentGuardrailsDefaultAction": {
+      "type": "string",
+      "description": "The default action when no user-defined policy rules match.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsDefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow traffic by default when no rules match."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny traffic by default when no rules match."
+          }
+        ]
+      }
+    },
+    "AgentGuardrailsHeaderOperation": {
+      "type": "string",
+      "description": "The operation to apply to a header in a Transform or Rewrite action.",
+      "enum": [
+        "Set",
+        "Insert",
+        "Remove"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsHeaderOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Set",
+            "value": "Set",
+            "description": "Set or overwrite the header value, creating it if it does not exist."
+          },
+          {
+            "name": "Insert",
+            "value": "Insert",
+            "description": "Add the header only if it isn't already present."
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove the header if present."
+          }
+        ]
+      }
+    },
+    "AgentGuardrailsHeaderTransform": {
+      "type": "object",
+      "description": "A header transformation applied to matched traffic.\nFor Set or Insert operations, exactly one of value or valueRef must be provided.\nFor Remove operations, neither value nor valueRef should be set.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/AgentGuardrailsHeaderOperation",
+          "description": "The operation to perform on this header."
+        },
+        "name": {
+          "type": "string",
+          "description": "The HTTP header name (e.g., \"Authorization\", \"X-Custom-Auth\")."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "A static header value. Write-only: accepted on create/update, never returned on read.\nIf omitted on update, the existing value is preserved. Use this for non-sensitive values;\nfor credentials, use valueRef instead.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "valueRef": {
+          "$ref": "#/definitions/AgentGuardrailsHeaderValueRef",
+          "description": "A dynamic header value resolved at request time from a secret or managed identity."
+        }
+      },
+      "required": [
+        "operation",
+        "name"
+      ]
+    },
+    "AgentGuardrailsHeaderValueRef": {
+      "type": "object",
+      "description": "A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.",
+      "properties": {
+        "secretRef": {
+          "$ref": "#/definitions/AgentGuardrailsSecretRef",
+          "description": "Resolve the value from a stored secret."
+        },
+        "managedIdentityRef": {
+          "$ref": "#/definitions/AgentGuardrailsManagedIdentityRef",
+          "description": "Resolve the value from a managed-identity token."
+        }
+      }
+    },
+    "AgentGuardrailsListResult": {
+      "type": "object",
+      "description": "A paginated list of Agent Guardrails resources.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of Agent Guardrails objects."
+        },
+        "value": {
+          "type": "array",
+          "description": "The list of Agent Guardrails resources.",
+          "items": {
+            "$ref": "#/definitions/AgentGuardrailsResource"
+          }
+        }
+      }
+    },
+    "AgentGuardrailsManagedIdentityRef": {
+      "type": "object",
+      "description": "A reference to a managed-identity token used as a header value.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The resource/audience the token is requested for."
+        },
+        "format": {
+          "type": "string",
+          "description": "Optional format for the resolved token; \"{value}\" is the placeholder, e.g. \"Bearer {value}\"."
+        },
+        "type": {
+          "$ref": "#/definitions/AgentGuardrailsManagedIdentityType",
+          "description": "Which managed identity to use. Defaults to SystemAssigned if omitted."
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "Resource ID of the user-assigned identity. Required when type is UserAssigned."
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "AgentGuardrailsManagedIdentityType": {
+      "type": "string",
+      "description": "The managed identity type used to resolve a header value from a token.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "The sandbox's system-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "A user-assigned managed identity. When selected, identityResourceId is required."
+          }
+        ]
+      }
+    },
+    "AgentGuardrailsMode": {
+      "type": "string",
+      "description": "The enforcement mode for an agent guardrails policy.\nIf omitted on create, the server defaults to Enforced.",
+      "enum": [
+        "Enforced",
+        "Audit"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enforced",
+            "value": "Enforced",
+            "description": "Policy rules are enforced. Matching traffic is allowed or denied per rule actions."
+          },
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Policy rules are evaluated and logged. A would-be Deny is logged but not blocked — the request is\nforwarded — so a customer can preview what a policy would reject without breaking traffic. Allow,\nTransform, and Rewrite are applied exactly as in Enforced."
+          }
+        ]
+      }
+    },
+    "AgentGuardrailsProperties": {
+      "type": "object",
+      "description": "Properties of a Cognitive Services Agent Guardrails resource.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/AgentGuardrailsType",
+          "description": "The type of policy."
+        },
+        "mode": {
+          "$ref": "#/definitions/AgentGuardrailsMode",
+          "description": "The enforcement mode for this policy.\nIf omitted on create, the server defaults to Enforced. On subsequent GET\nrequests, the server always returns the effective mode."
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/AgentGuardrailsDefaultAction",
+          "description": "The default action when no user-defined rules match. This is security-critical:\nAllow means unmatched traffic is permitted; Deny means it is blocked."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the policy."
+        },
+        "rules": {
+          "type": "array",
+          "description": "Ordered list of user-defined policy rules. First matching rule wins.",
+          "items": {
+            "$ref": "#/definitions/AgentGuardrailsRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "systemRules": {
+          "type": "array",
+          "description": "Read-only list of system-managed rules that ensure Azure infrastructure\nconnectivity (e.g., storage, authentication, monitoring endpoints).\nThese rules are always enforced regardless of user-defined rules and\ncannot be modified or removed by users.",
+          "items": {
+            "$ref": "#/definitions/AgentGuardrailsRule"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the policy resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "defaultAction"
+      ]
+    },
+    "AgentGuardrailsResource": {
+      "type": "object",
+      "description": "Agent Guardrails resource for controlling sandbox traffic at the account level.\nAccount-level policies are shared across all projects, aligning with\nRAI policies and networking which are also account-scoped.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentGuardrailsProperties",
+          "description": "Properties of the agent guardrails policy resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgentGuardrailsRewriteTarget": {
+      "type": "object",
+      "description": "Where a Rewrite action sends matched traffic. At least one field must be set.",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "Target scheme (\"http\" or \"https\"). Original scheme is kept if omitted."
+        },
+        "host": {
+          "type": "string",
+          "description": "Target host. Original host is kept if omitted."
+        },
+        "path": {
+          "type": "string",
+          "description": "Target path. Original path (and query) is kept if omitted."
+        },
+        "targetPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Target port. Original port is kept if omitted."
+        }
+      }
+    },
+    "AgentGuardrailsRule": {
+      "type": "object",
+      "description": "A single rule within an agent guardrails policy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rule. Must be unique within the policy."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "ruleType": {
+          "$ref": "#/definitions/AgentGuardrailsRuleType",
+          "description": "The type of rule (e.g., Fqdn). Determines how match criteria are interpreted."
+        },
+        "match": {
+          "$ref": "#/definitions/AgentGuardrailsRuleMatch",
+          "description": "The match criteria for this rule."
+        },
+        "action": {
+          "$ref": "#/definitions/AgentGuardrailsRuleAction",
+          "description": "The action to take when this rule matches, including the action type and any\ntype-specific configuration (headers for Transform, rewrite target for Rewrite)."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AgentGuardrailsRuleAction": {
+      "type": "object",
+      "description": "The action a policy rule takes when it matches.\n- Allow/Deny: no additional fields needed; headers and rewrite must not be set.\n- Transform: headers is required with at least one entry; rewrite must not be set.\n- Rewrite: rewrite is required with at least one of scheme/host/path/targetPort;\nheaders is optional for injecting headers alongside the redirect.",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/AgentGuardrailsActionType",
+          "description": "The kind of action."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Header transforms to apply. Required for Transform; optional for Rewrite;\nnot allowed for Allow or Deny.",
+          "items": {
+            "$ref": "#/definitions/AgentGuardrailsHeaderTransform"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "rewrite": {
+          "$ref": "#/definitions/AgentGuardrailsRewriteTarget",
+          "description": "Destination override. Required for Rewrite; not allowed otherwise."
+        }
+      },
+      "required": [
+        "actionType"
+      ]
+    },
+    "AgentGuardrailsRuleMatch": {
+      "type": "object",
+      "description": "The match criteria for a policy rule.\nIf both host and path are omitted, the rule matches all traffic.\nHost uses DNS wildcard syntax (e.g., \"*.openai.com\" matches \"api.openai.com\").\nPath uses URI prefix matching with '*' as a single-segment wildcard (e.g., \"/v1/*\" matches \"/v1/chat\").",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host pattern to match using DNS wildcard syntax (e.g., \"*.openai.com\").\nA leading \"*.\" matches any subdomain. Omit to match all hosts."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path pattern to match using URI prefix with '*' wildcard (e.g., \"/v1/*\").\nOmit to match all paths."
+        }
+      }
+    },
+    "AgentGuardrailsRuleType": {
+      "type": "string",
+      "description": "The type of a policy rule, determining what kind of traffic matching it performs.",
+      "enum": [
+        "Fqdn"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fqdn",
+            "value": "Fqdn",
+            "description": "Fully qualified domain name (FQDN) based rule matching on host and path patterns."
+          }
+        ]
+      }
+    },
+    "AgentGuardrailsSecretRef": {
+      "type": "object",
+      "description": "A reference to a stored secret used as a header value.",
+      "properties": {
+        "secretId": {
+          "type": "string",
+          "description": "Identifier of the secret to inject."
+        },
+        "secretKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Optional key within the secret.",
+          "x-ms-secret": true
+        },
+        "format": {
+          "type": "string",
+          "description": "Optional format for the resolved value; \"{value}\" is the placeholder, e.g. \"Bearer {value}\"."
+        }
+      },
+      "required": [
+        "secretId"
+      ]
+    },
+    "AgentGuardrailsType": {
+      "type": "string",
+      "description": "The type of agent guardrails policy.",
+      "enum": [
+        "Egress"
+      ],
+      "x-ms-enum": {
+        "name": "AgentGuardrailsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Egress",
+            "value": "Egress",
+            "description": "Egress policy for controlling outbound network traffic from sandboxes."
+          }
+        ]
+      }
+    },
     "AgentProtocol": {
       "type": "string",
       "description": "Protocol used by the agent/exposed by a deployment.",
@@ -17147,362 +17594,6 @@
           "type": "boolean",
           "description": "Boolean to enable Microsoft Managed Network for subnet delegation"
         }
-      }
-    },
-    "NetworkPolicyActionType": {
-      "type": "string",
-      "description": "The type of action to take when a policy rule matches.",
-      "enum": [
-        "Allow",
-        "Deny",
-        "Transform",
-        "Rewrite"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkPolicyActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "Allow the matched traffic."
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny the matched traffic."
-          },
-          {
-            "name": "Transform",
-            "value": "Transform",
-            "description": "Transform the matched traffic (e.g., inject or strip headers). Requires transformConfig."
-          },
-          {
-            "name": "Rewrite",
-            "value": "Rewrite",
-            "description": "Rewrite the matched traffic destination. Requires rewriteConfig."
-          }
-        ]
-      }
-    },
-    "NetworkPolicyDefaultAction": {
-      "type": "string",
-      "description": "The default action when no user-defined policy rules match.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkPolicyDefaultAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "Allow traffic by default when no rules match."
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny traffic by default when no rules match."
-          }
-        ]
-      }
-    },
-    "NetworkPolicyHeaderOperation": {
-      "type": "string",
-      "description": "The operation to perform on a header in a Transform action.",
-      "enum": [
-        "Add",
-        "Remove",
-        "Overwrite"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkPolicyHeaderOperation",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Add",
-            "value": "Add",
-            "description": "Add the header. If it already exists, the behavior is server-defined (typically append)."
-          },
-          {
-            "name": "Remove",
-            "value": "Remove",
-            "description": "Remove the header if present."
-          },
-          {
-            "name": "Overwrite",
-            "value": "Overwrite",
-            "description": "Overwrite the header value, creating it if it does not exist."
-          }
-        ]
-      }
-    },
-    "NetworkPolicyHeaderTransform": {
-      "type": "object",
-      "description": "A header modification entry for Transform actions.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The HTTP header name (e.g., \"X-Custom-Auth\", \"Authorization\")."
-        },
-        "value": {
-          "type": "string",
-          "description": "The header value. Required for Add and Overwrite operations; omit for Remove."
-        },
-        "operation": {
-          "$ref": "#/definitions/NetworkPolicyHeaderOperation",
-          "description": "The operation to perform on this header."
-        }
-      },
-      "required": [
-        "name",
-        "operation"
-      ]
-    },
-    "NetworkPolicyListResult": {
-      "type": "object",
-      "description": "A paginated list of Network Policy resources.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of Network Policy objects."
-        },
-        "value": {
-          "type": "array",
-          "description": "The list of Network Policy resources.",
-          "items": {
-            "$ref": "#/definitions/NetworkPolicyResource"
-          }
-        }
-      }
-    },
-    "NetworkPolicyMode": {
-      "type": "string",
-      "description": "The enforcement mode for a network policy.\nIf omitted on create, the server defaults to Enforced.",
-      "enum": [
-        "Enforced",
-        "Audit"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkPolicyMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enforced",
-            "value": "Enforced",
-            "description": "Policy rules are enforced. Matching traffic is allowed or denied per rule actions."
-          },
-          {
-            "name": "Audit",
-            "value": "Audit",
-            "description": "Policy rules are evaluated and logged but not enforced. All traffic is allowed regardless of rule actions."
-          }
-        ]
-      }
-    },
-    "NetworkPolicyProperties": {
-      "type": "object",
-      "description": "Properties of a Cognitive Services Network Policy resource.",
-      "properties": {
-        "policyType": {
-          "$ref": "#/definitions/NetworkPolicyType",
-          "description": "The type of policy."
-        },
-        "mode": {
-          "$ref": "#/definitions/NetworkPolicyMode",
-          "description": "The enforcement mode for this policy.\nIf omitted on create, the server defaults to Enforced. On subsequent GET\nrequests, the server always returns the effective mode."
-        },
-        "defaultAction": {
-          "$ref": "#/definitions/NetworkPolicyDefaultAction",
-          "description": "The default action when no user-defined rules match. This is security-critical:\nAllow means unmatched traffic is permitted; Deny means it is blocked."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the policy."
-        },
-        "rules": {
-          "type": "array",
-          "description": "Ordered list of user-defined policy rules. First matching rule wins.",
-          "items": {
-            "$ref": "#/definitions/NetworkPolicyRule"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "systemRules": {
-          "type": "array",
-          "description": "Read-only list of system-managed rules that ensure Azure infrastructure\nconnectivity (e.g., storage, authentication, monitoring endpoints).\nThese rules are always enforced regardless of user-defined rules and\ncannot be modified or removed by users.",
-          "items": {
-            "$ref": "#/definitions/NetworkPolicyRule"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the policy resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "defaultAction"
-      ]
-    },
-    "NetworkPolicyResource": {
-      "type": "object",
-      "description": "Network Policy resource for controlling sandbox traffic at the account level.\nAccount-level policies are shared across all projects, aligning with\nRAI policies and networking which are also account-scoped.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkPolicyProperties",
-          "description": "Properties of the network policy resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NetworkPolicyRewriteConfig": {
-      "type": "object",
-      "description": "Configuration for Rewrite actions. Specifies how to rewrite the destination of matched traffic.",
-      "properties": {
-        "targetHost": {
-          "type": "string",
-          "description": "The target host to rewrite the request destination to."
-        },
-        "targetPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The target port to rewrite the request destination to."
-        }
-      }
-    },
-    "NetworkPolicyRule": {
-      "type": "object",
-      "description": "A single rule within a network policy.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the rule. Must be unique within the policy."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the rule."
-        },
-        "ruleType": {
-          "$ref": "#/definitions/NetworkPolicyRuleType",
-          "description": "The type of rule (e.g., Fqdn). Determines how match criteria are interpreted."
-        },
-        "match": {
-          "$ref": "#/definitions/NetworkPolicyRuleMatch",
-          "description": "The match criteria for this rule."
-        },
-        "action": {
-          "$ref": "#/definitions/NetworkPolicyRuleAction",
-          "description": "The action configuration for this rule, including the action type and any\ntype-specific configuration (e.g., transformConfig, rewriteConfig)."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "NetworkPolicyRuleAction": {
-      "type": "object",
-      "description": "The action configuration for a policy rule. The actionType field determines which\nadditional configuration properties are required:\n- Allow/Deny: no additional config needed.\n- Transform: transformConfig is required.\n- Rewrite: rewriteConfig is required.",
-      "properties": {
-        "actionType": {
-          "$ref": "#/definitions/NetworkPolicyActionType",
-          "description": "The type of action to take when this rule matches."
-        },
-        "transformConfig": {
-          "$ref": "#/definitions/NetworkPolicyTransformConfig",
-          "description": "Configuration for Transform actions. Required when actionType is Transform.\nSpecifies header modifications to apply to matched traffic."
-        },
-        "rewriteConfig": {
-          "$ref": "#/definitions/NetworkPolicyRewriteConfig",
-          "description": "Configuration for Rewrite actions. Required when actionType is Rewrite.\nSpecifies how to rewrite the destination of matched traffic."
-        }
-      },
-      "required": [
-        "actionType"
-      ]
-    },
-    "NetworkPolicyRuleMatch": {
-      "type": "object",
-      "description": "The match criteria for a policy rule.\nIf both host and path are omitted, the rule matches all traffic.\nHost uses DNS wildcard syntax (e.g., \"*.openai.com\" matches \"api.openai.com\").\nPath uses URI prefix matching with '*' as a single-segment wildcard (e.g., \"/v1/*\" matches \"/v1/chat\").",
-      "properties": {
-        "host": {
-          "type": "string",
-          "description": "Host pattern to match using DNS wildcard syntax (e.g., \"*.openai.com\").\nA leading \"*.\" matches any subdomain. Omit to match all hosts."
-        },
-        "path": {
-          "type": "string",
-          "description": "Path pattern to match using URI prefix with '*' wildcard (e.g., \"/v1/*\").\nOmit to match all paths."
-        }
-      }
-    },
-    "NetworkPolicyRuleType": {
-      "type": "string",
-      "description": "The type of a policy rule, determining what kind of traffic matching it performs.",
-      "enum": [
-        "Fqdn"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkPolicyRuleType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Fqdn",
-            "value": "Fqdn",
-            "description": "Fully qualified domain name (FQDN) based rule matching on host and path patterns."
-          }
-        ]
-      }
-    },
-    "NetworkPolicyTransformConfig": {
-      "type": "object",
-      "description": "Configuration for Transform actions. Specifies header modifications to apply to matched traffic.",
-      "properties": {
-        "headers": {
-          "type": "array",
-          "description": "List of header modifications to apply.",
-          "items": {
-            "$ref": "#/definitions/NetworkPolicyHeaderTransform"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "headers"
-      ]
-    },
-    "NetworkPolicyType": {
-      "type": "string",
-      "description": "The type of network policy.",
-      "enum": [
-        "Egress"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkPolicyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Egress",
-            "value": "Egress",
-            "description": "Egress policy for controlling outbound network traffic from sandboxes."
-          }
-        ]
       }
     },
     "NetworkRuleAction": {
