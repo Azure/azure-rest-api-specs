@@ -1,8 +1,8 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { fileExists } from "../utils.ts";
 
 export class ClientTspImportRule implements Rule {
   readonly name = "ClientTspImport";

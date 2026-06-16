@@ -2,7 +2,7 @@ import { mockFolder, mockSimpleGit } from "./mocks.js";
 mockSimpleGit();
 
 import { strict as assert } from "node:assert";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 import { ClientTspImportRule } from "../src/rules/client-tsp-import.js";
 
 import * as fsPromises from "fs/promises";
