@@ -66,7 +66,10 @@ interface MetricAlertResources {
    * Retrieve an alert rule definition.
    */
   @tag("MetricAlerts")
-  get is ArmResourceRead<MetricAlertResource, Error = Microsoft.Common.ErrorResponse>;
+  get is ArmResourceRead<
+    MetricAlertResource,
+    Error = Microsoft.Common.ErrorResponse
+  >;
 
   /**
    * Create or update a metric alert definition.
