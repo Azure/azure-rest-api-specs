@@ -18,6 +18,7 @@ import "./Vault.tsp";
 import "./VaultExtendedInfoResource.tsp";
 import "./routes.tsp";
 import "./DeletedVaults.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
