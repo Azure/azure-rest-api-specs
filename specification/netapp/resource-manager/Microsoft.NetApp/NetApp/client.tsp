@@ -913,4 +913,8 @@ using Microsoft.NetApp;
 @@usage(VolumeReplicationRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeRestoreRelationshipStatus, Usage.input, "csharp");
 
-@@clientLocation(NetAppAccounts.refreshLdapBindPassword, "Accounts");
+@@clientLocation(
+  NetAppAccounts.refreshLdapBindPassword,
+  "Accounts",
+  "!autorest"
+);

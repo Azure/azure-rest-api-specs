@@ -19,6 +19,7 @@ import "./ConnectionSetting.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

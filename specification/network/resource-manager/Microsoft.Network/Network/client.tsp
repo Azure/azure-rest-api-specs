@@ -1456,12 +1456,12 @@ union ProvisioningStateUnion {
 // HTTP → Http casing overrides for Java checkstyle compliance
 @@clientName(Microsoft.Network.HttpConfiguration, "HttpConfiguration", "java");
 @@clientName(
-  Microsoft.Network.HttpConfigurationMethod,
+  Microsoft.Network.HTTPConfigurationMethod,
   "HttpConfigurationMethod",
   "java"
 );
 @@clientName(Microsoft.Network.HttpHeader, "HttpHeader", "java");
-@@clientName(Microsoft.Network.HttpMethod, "HttpMethod", "java");
+@@clientName(Microsoft.Network.HTTPMethod, "HttpMethod", "java");
 @@clientName(
   Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS,
   "preferHttps",
@@ -1564,20 +1564,20 @@ union ProvisioningStateUnion {
   "java"
 );
 
-@@clientName(FirewallPolicyIdpsSignatureDirection.`0`, "Zero", "go");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`1`, "One", "go");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`2`, "Two", "go");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`3`, "Three", "go");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`4`, "Four", "go");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`5`, "Five", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`0`, "Zero", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`1`, "One", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`2`, "Two", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`3`, "Three", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`4`, "Four", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`5`, "Five", "go");
 
-@@clientName(FirewallPolicyIdpsSignatureMode.`0`, "Zero", "go");
-@@clientName(FirewallPolicyIdpsSignatureMode.`1`, "One", "go");
-@@clientName(FirewallPolicyIdpsSignatureMode.`2`, "Two", "go");
+@@clientName(FirewallPolicyIDPSSignatureMode.`0`, "Zero", "go");
+@@clientName(FirewallPolicyIDPSSignatureMode.`1`, "One", "go");
+@@clientName(FirewallPolicyIDPSSignatureMode.`2`, "Two", "go");
 
-@@clientName(FirewallPolicyIdpsSignatureSeverity.`1`, "One", "go");
-@@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "Two", "go");
-@@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "Three", "go");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`1`, "One", "go");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`2`, "Two", "go");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`3`, "Three", "go");
 
 @@clientLocation(
   BastionHosts.deleteBastionShareableLink,
@@ -1940,22 +1940,22 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  FirewallPolicyIdpsQuerySortOrder,
+  FirewallPolicyIDPSQuerySortOrder,
   "FirewallPolicyIdpsQuerySortOrder",
   "java"
 );
 @@clientName(
-  FirewallPolicyIdpsSignatureDirection,
+  FirewallPolicyIDPSSignatureDirection,
   "FirewallPolicyIdpsSignatureDirection",
   "java"
 );
 @@clientName(
-  FirewallPolicyIdpsSignatureMode,
+  FirewallPolicyIDPSSignatureMode,
   "FirewallPolicyIdpsSignatureMode",
   "java"
 );
 @@clientName(
-  FirewallPolicyIdpsSignatureSeverity,
+  FirewallPolicyIDPSSignatureSeverity,
   "FirewallPolicyIdpsSignatureSeverity",
   "java"
 );
@@ -2271,18 +2271,18 @@ op replaceprivateDnsZoneGroupsList(
   "TLS_RSA_WITH_AES256_GCM_SHA384",
   "python"
 );
-@@clientName(FirewallPolicyIdpsSignatureDirection.`0`, "ZERO", "python");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`1`, "ONE", "python");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`2`, "TWO", "python");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`3`, "THREE", "python");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`4`, "FOUR", "python");
-@@clientName(FirewallPolicyIdpsSignatureDirection.`5`, "FIVE", "python");
-@@clientName(FirewallPolicyIdpsSignatureMode.`0`, "ZERO", "python");
-@@clientName(FirewallPolicyIdpsSignatureMode.`1`, "ONE", "python");
-@@clientName(FirewallPolicyIdpsSignatureMode.`2`, "TWO", "python");
-@@clientName(FirewallPolicyIdpsSignatureSeverity.`1`, "ONE", "python");
-@@clientName(FirewallPolicyIdpsSignatureSeverity.`2`, "TWO", "python");
-@@clientName(FirewallPolicyIdpsSignatureSeverity.`3`, "THREE", "python");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`0`, "ZERO", "python");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`1`, "ONE", "python");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`2`, "TWO", "python");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`3`, "THREE", "python");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`4`, "FOUR", "python");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`5`, "FIVE", "python");
+@@clientName(FirewallPolicyIDPSSignatureMode.`0`, "ZERO", "python");
+@@clientName(FirewallPolicyIDPSSignatureMode.`1`, "ONE", "python");
+@@clientName(FirewallPolicyIDPSSignatureMode.`2`, "TWO", "python");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`1`, "ONE", "python");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`2`, "TWO", "python");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`3`, "THREE", "python");
 
 @@clientLocation(
   VirtualHubs.virtualHubRouteTableV2sGet,
