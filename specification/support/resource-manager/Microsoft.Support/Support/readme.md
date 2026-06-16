@@ -26,7 +26,24 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-06-01
+tag: package-2026-06-15
+```
+
+### Tag: package-2026-06-15
+
+These settings apply only when `--tag=package-2026-06-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-15'
+input-file:
+  - stable/2026-06-15/support.json
+
+suppressions:
+  - code: ConsistentPatchProperties
+    from: support.json
+    where:
+      - $.paths["/providers/Microsoft.Support/supportTickets/{supportTicketName}"].patch.parameters[2]["schema"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}"].patch.parameters[3]["schema"]
+    reason: "Pre-existing: The PATCH request body uses a separate UpdateSupportTicket model with properties like severity, status, contactDetails, advancedDiagnosticConsent, secondaryConsent, and directConnectEscalation that are at a different level than in the resource model. This is by design for backward compatibility and cannot be changed without breaking existing clients."
 ```
 
 ### Tag: package-2026-06-01
