@@ -6,6 +6,8 @@ import "./GuestSubscription.tsp";
 import "./SharedLimit.tsp";
 import "./Feature.tsp";
 import "./VmFamily.tsp";
+import "./SharedLimitCap.tsp";
+import "./MemberCapOverride.tsp";
 import "./back-compat.tsp";
 import "./client.tsp";
 
@@ -32,6 +34,9 @@ enum Versions {
 
   /** The 2026-06-01 API version. */
   v2026_06_01: "2026-06-01",
+
+  /** The 2026-07-01 API version. */
+  v2026_07_01: "2026-07-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
