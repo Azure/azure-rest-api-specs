@@ -1,5 +1,5 @@
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
-import { type AzsdkSdkBreakingChange } from "./azsdk-adapter.js";
+import { type AzsdkSdkBreakingChange } from "./azsdk-adapter.ts";
 
 /**
  * SDK automation execution state.
