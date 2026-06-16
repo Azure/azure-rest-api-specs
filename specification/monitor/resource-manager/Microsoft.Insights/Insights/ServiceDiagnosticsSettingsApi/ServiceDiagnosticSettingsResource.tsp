@@ -44,10 +44,9 @@ alias ServiceDiagnosticSettingsResourcesOps = Azure.ResourceManager.Legacy.Exten
     ...ApiVersionParameter;
 
     /**
-     * The identifier of the resource.
+     * The fully qualified Azure Resource manager identifier of the resource.
      */
     @path(#{ allowReserved: true })
-    @minLength(1)
     resourceUri: string;
   },
   {
@@ -61,7 +60,7 @@ alias ServiceDiagnosticSettingsResourcesOps = Azure.ResourceManager.Legacy.Exten
      */
     @path
     @segment("diagnosticSettings")
-    diagnosticSetting: string;
+    diagnosticSetting: "service";
   },
   "DiagnosticSetting"
 >;
