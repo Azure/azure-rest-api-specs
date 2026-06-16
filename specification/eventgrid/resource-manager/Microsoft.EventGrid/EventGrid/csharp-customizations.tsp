@@ -139,6 +139,36 @@ namespace Customization;
 @@clientName(SystemTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
+@@clientName(
+  EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
+  "GetGlobalEventSubscriptionsDataForTopicType",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
+  "GetGlobalEventSubscriptionsDataForTopicType",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionsOperationGroup.listRegionalBySubscription,
+  "GetRegionalEventSubscriptionsData",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
+  "GetRegionalEventSubscriptionsData",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
+  "GetRegionalEventSubscriptionsDataForTopicType",
+  "csharp"
+);
+@@clientName(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
+  "GetRegionalEventSubscriptionsDataForTopicType",
+  "csharp"
+);
 
 @@clientName(
   DomainProperties.disableLocalAuth,
@@ -328,6 +358,26 @@ namespace Customization;
   "csharp"
 );
 @@alternateType(IssuerCertificateInfo.certificateUrl, url, "csharp");
+@@alternateType(
+  EventSubscriptionsOperationGroup.listRegionalBySubscription::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroup::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(
   NetworkSecurityPerimeterInfo.location,
   Azure.Core.azureLocation,
