@@ -25,7 +25,10 @@ namespace Customization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Retrieves the policy assignment with the given ID.")
   @scope("java,csharp,go,python")
-  @clientLocation(Microsoft.Authorization.PolicyAssignments, "java,csharp,go,python")
+  @clientLocation(
+    Microsoft.Authorization.PolicyAssignments,
+    "java,csharp,go,python"
+  )
   @get
   @route("/{+policyAssignmentId}")
   op getById(
@@ -39,7 +42,10 @@ namespace Customization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Creates or updates a policy assignment.")
   @scope("java,csharp,go,python")
-  @clientLocation(Microsoft.Authorization.PolicyAssignments, "java,csharp,go,python")
+  @clientLocation(
+    Microsoft.Authorization.PolicyAssignments,
+    "java,csharp,go,python"
+  )
   @put
   @route("/{+policyAssignmentId}")
   op createById(
@@ -60,7 +66,10 @@ namespace Customization {
   #suppress "@typespec/http/patch-implicit-optional" "For client"
   @summary("Updates a policy assignment.")
   @scope("java,csharp,go,python")
-  @clientLocation(Microsoft.Authorization.PolicyAssignments, "java,csharp,go,python")
+  @clientLocation(
+    Microsoft.Authorization.PolicyAssignments,
+    "java,csharp,go,python"
+  )
   @patch
   @route("/{+policyAssignmentId}")
   op updateById(
@@ -80,7 +89,10 @@ namespace Customization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Deletes a policy assignment.")
   @scope("java,csharp,go,python")
-  @clientLocation(Microsoft.Authorization.PolicyAssignments, "java,csharp,go,python")
+  @clientLocation(
+    Microsoft.Authorization.PolicyAssignments,
+    "java,csharp,go,python"
+  )
   @delete
   @route("/{+policyAssignmentId}")
   op deleteById(
