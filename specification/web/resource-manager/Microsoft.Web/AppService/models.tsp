@@ -2414,6 +2414,12 @@ model SiteProperties {
    */
   @added(Versions.v2026_03_15)
   platformReleaseChannel?: PlatformReleaseChannel;
+
+  /**
+   * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it to return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
+   */
+  @added(Versions.v2026_07_15)
+  maintenanceEnabled?: boolean;
 }
 
 /**
@@ -3345,7 +3351,7 @@ model PushSettingsProperties {
   @doc("""
     Gets or sets a JSON string containing a list of tags that require user authentication to be used in the push registration endpoint.
     Tags can consist of alphanumeric characters and the following:
-    '_', '@', '#', '.', ':', '-'. 
+    '_', '@', '#', '.', ':', '-'.
     Validation should be performed at the PushRequestHandler.
     """)
   tagsRequiringAuth?: string;
@@ -16101,6 +16107,16 @@ model ErrorPage {
    * The status code for which the error page will be used
    */
   statusCode?: int32;
+
+  /**
+   * The substatus code for which the error page will be used
+   */
+  substatusCode: int32;
+
+  /**
+   * The name of the error page. For example, '404' or 'maintenance'
+   */
+  name: string;
 
   /**
    * The content of the error page. There is a 10kb limit imposed on custom error page content.
