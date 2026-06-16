@@ -10,13 +10,19 @@ import { NpmPrefixRule } from "../src/rules/npm-prefix.ts";
 
 import * as utils from "../src/utils.ts";
 
+vi.mock("package-directory", () => ({
+  packageDirectory: vi.fn(),
+}));
+
+import { packageDirectory } from "package-directory";
+
 describe("npm-prefix", function () {
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
   it("should succeed if node returns inconsistent drive letter capitalization", async function () {
-    vi.spyOn(utils, "findNearestPackageJson").mockResolvedValue(
+    vi.mocked(packageDirectory).mockResolvedValue(
       `C:${path.sep}Git${path.sep}azure-rest-api-specs`,
     );
 
@@ -33,10 +39,7 @@ describe("npm-prefix", function () {
   });
 
   it("should fail if npm prefix mismatch", async function () {
-    vi.spyOn(utils, "findNearestPackageJson").mockResolvedValue(
-      "/Git/azure-rest-api-specs/specification/foo",
-    );
-
+    vi.mocked(packageDirectory).mockResolvedValue("/Git/azure-rest-api-specs/specification/foo");
     // eslint-disable-next-line @typescript-eslint/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 

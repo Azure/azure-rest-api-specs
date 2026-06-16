@@ -1,7 +1,8 @@
+import { packageDirectory } from "package-directory";
 import { simpleGit } from "simple-git";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { findNearestPackageJson, normalizePath } from "../utils.ts";
+import { normalizePath } from "../utils.ts";
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
@@ -22,7 +23,7 @@ export class NpmPrefixRule implements Rule {
       };
     }
 
-    const actual_npm_prefix = normalizePath(await findNearestPackageJson(folder));
+    const actual_npm_prefix = normalizePath((await packageDirectory({ cwd: folder })) ?? folder);
 
     let success = true;
     const stdOutput =

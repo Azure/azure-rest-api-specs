@@ -27,25 +27,30 @@ namespace Customizations;
 @@clientName(SharedAccessSignature, "Sas", "python");
 
 // Fix generic "The most basic operation" docs for search tile operations (without TileMatrixSetId)
-@@doc(
+@@clientDoc(
   MosaicSearchesAssetsForTiles.getZxyAssets,
-  "Return a list of assets which overlap a given tile for a mosaic search."
+  "Return a list of assets which overlap a given tile for a mosaic search.",
+  DocumentationMode.replace
 );
-@@doc(
+@@clientDoc(
   MosaicSearchesTiles.getZxyScaleByFormat,
-  "Create a map tile for a mosaic search with specified scale and format."
+  "Create a map tile for a mosaic search with specified scale and format.",
+  DocumentationMode.replace
 );
-@@doc(
+@@clientDoc(
   MosaicSearchesTilesScale.getZxyByScale,
-  "Create a map tile for a mosaic search with specified scale."
+  "Create a map tile for a mosaic search with specified scale.",
+  DocumentationMode.replace
 );
-@@doc(
+@@clientDoc(
   MosaicSearchesTilesFormat.getZxyByFormat,
-  "Create a map tile for a mosaic search with specified format."
+  "Create a map tile for a mosaic search with specified format.",
+  DocumentationMode.replace
 );
-@@doc(
+@@clientDoc(
   MosaicSearchesTilesPlain.getZxy,
-  "Create a map tile for a mosaic search."
+  "Create a map tile for a mosaic search.",
+  DocumentationMode.replace
 );
 
 // === Python snake_case parameter renames ===
@@ -633,7 +638,7 @@ interface SharedAccessSignature {
 // Reuse the same RFC 3339 documentation from inma.tsp (StacItems.getFeatures)
 // to ensure consistent datetime documentation across all Data and STAC APIs.
 
-@@doc(
+@@clientDoc(
   SubDatasetQueryParameters.datetime,
   """
     Either a date-time or an interval, open or closed. Date and time expressions
@@ -651,10 +656,11 @@ interface SharedAccessSignature {
     If a feature has multiple temporal properties, it is the decision of the
     server whether only a single temporal property is used to determine
     the extent or all relevant temporal properties.
-    """
+    """,
+  DocumentationMode.replace
 );
 
-@@doc(
+@@clientDoc(
   CollectionMosaicFilterQueryParameters.datetime,
   """
     Either a date-time or an interval, open or closed. Date and time expressions
@@ -672,10 +678,11 @@ interface SharedAccessSignature {
     If a feature has multiple temporal properties, it is the decision of the
     server whether only a single temporal property is used to determine
     the extent or all relevant temporal properties.
-    """
+    """,
+  DocumentationMode.replace
 );
 
-@@doc(
+@@clientDoc(
   RegisterMosaic.datetime,
   """
     Either a date-time or an interval, open or closed. Date and time expressions
@@ -693,10 +700,11 @@ interface SharedAccessSignature {
     If a feature has multiple temporal properties, it is the decision of the
     server whether only a single temporal property is used to determine
     the extent or all relevant temporal properties.
-    """
+    """,
+  DocumentationMode.replace
 );
 
-@@doc(
+@@clientDoc(
   StacSearchParameters.datetime,
   """
     Either a date-time or an interval, open or closed. Date and time expressions
@@ -714,5 +722,6 @@ interface SharedAccessSignature {
     If a feature has multiple temporal properties, it is the decision of the
     server whether only a single temporal property is used to determine
     the extent or all relevant temporal properties.
-    """
+    """,
+  DocumentationMode.replace
 );
