@@ -1880,13 +1880,13 @@ union ComputeUsageUnit {
 );
 @@clientName(EndpointAccess, "ComputeGalleryEndpointAccess", "csharp");
 
-// Rename child identifier properties to avoid CS0108 hiding conflict with base class Identifier.
+// Rename community gallery child identifier property to avoid CS0108 hiding conflict with base class Identifier.
 @@clientName(CommunityGalleryImageProperties.identifier,
   "ImageIdentifier",
   "csharp"
 );
 @@clientName(SharedGalleryImageProperties.identifier,
-  "ImageIdentifier",
+  "Identifier",
   "csharp"
 );
 
@@ -2021,8 +2021,8 @@ union ComputeUsageUnit {
   "IsExcludedFromLatest",
   "csharp"
 );
-// Match v1.14.0 baseline: property is `Restore` (no Is* prefix).
-@@clientName(GalleryImageVersionProperties.restore, "Restore", "csharp");
+// Match v1.14.0 baseline: property is `IsRestoreEnabled`.
+@@clientName(GalleryImageVersionProperties.restore, "IsRestoreEnabled", "csharp");
 
 // ── Qualified property name renames (C# backward compat) ──
 @@clientName(GalleryApplicationCustomActionParameter.type,
