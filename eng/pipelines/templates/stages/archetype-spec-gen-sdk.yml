@@ -307,6 +307,7 @@ stages:
           continueOnError: true
         env:
           npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
