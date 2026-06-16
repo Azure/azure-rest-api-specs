@@ -424,7 +424,7 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(AutoScaleApi.ScaleDirection, "MonitorScaleDirection", "csharp");
 @@clientName(
   AutoScaleApi.ComparisonOperationType,
-  "MetricTriggerComparisonOperation",
+  "MetricTriggerComparisonOperator",
   "csharp"
 );
 @@clientName(AutoScaleApi.ScaleType, "MonitorScaleType", "csharp");
@@ -443,6 +443,7 @@ namespace Microsoft.InsightsCombinedClient;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@clientName(AutoScaleApi.MetricTrigger.operator, "ComparisonOperator", "csharp");
 @@clientName(
   AutoScaleApi.MetricTrigger.dividePerInstance,
   "IsDividedPerInstance",
