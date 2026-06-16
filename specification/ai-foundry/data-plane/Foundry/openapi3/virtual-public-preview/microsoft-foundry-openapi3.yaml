@@ -663,12 +663,31 @@ paths:
           schema:
             type: string
           explode: false
+        - name: foundry_features
+          in: query
+          required: false
+          description: Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            default:
+              - HostedAgents=V1Preview
+          explode: false
         - name: x-ms-user-isolation-key
           in: header
           required: false
           description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
         - name: api-version
           in: query
           required: true
@@ -702,6 +721,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Invocations WebSocket
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
   /agents/{agent_name}:
     get:
       operationId: Agents_getAgent
@@ -13403,6 +13425,7 @@ components:
       enum:
         - WorkflowAgents=V1Preview
         - ExternalAgents=V1Preview
+        - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentEndpointAuthorizationScheme:
