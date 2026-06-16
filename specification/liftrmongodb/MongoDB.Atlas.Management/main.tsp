@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
 import "@azure-tools/typespec-autorest";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

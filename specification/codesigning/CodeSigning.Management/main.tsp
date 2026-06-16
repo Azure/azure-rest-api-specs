@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./CodeSigningAccount.tsp";
 import "./CertificateProfile.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

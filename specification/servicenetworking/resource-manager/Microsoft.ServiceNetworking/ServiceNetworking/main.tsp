@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
