@@ -181,6 +181,21 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.start,
+  "serialize_with",
+  "crate::models::rfc3339_seconds_only::option::serialize",
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.expiry,
+  "serialize_with",
+  "crate::models::rfc3339_seconds_only::option::serialize",
+  "rust"
+);
+
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "rust,go");
@@ -348,6 +363,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   BlobMetadata,
   {
     identity: "crate::models::BlobMetadata",
+  },
+  "rust"
+);
+@@alternateType(
+  UserDelegationKey,
+  {
+    identity: "azure_storage_common::models::UserDelegationKey",
   },
   "rust"
 );
@@ -813,7 +835,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
 @@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
