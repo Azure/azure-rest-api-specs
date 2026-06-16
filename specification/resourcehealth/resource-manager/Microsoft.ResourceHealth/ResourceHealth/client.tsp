@@ -203,12 +203,12 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(
   RecommendedAction.actionUrlText,
-  "ActionUriComment",
+  "ActionUriText",
   "csharp"
 );
 
 @@clientName(
   RecommendedAction.`_ActionUrl.Comment`,
-  "ActionUriText",
+  "ActionUriComment",
   "csharp"
 );
