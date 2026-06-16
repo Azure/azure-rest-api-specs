@@ -57,21 +57,26 @@ interface ReservationOrderAliasResponses {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<ReservationOrderAliasResponse>
     >,
     ReservationOrderAliasRequest,
-    ReservationOrderAliasResponse | ArmResourceCreatedResponse<
-      ReservationOrderAliasResponse,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+
+      | ReservationOrderAliasResponse
+      | ArmResourceCreatedResponse<
+          ReservationOrderAliasResponse,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ReservationOrderAliasResponse> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     ErrorResponse
   >;
 }
 
-@@doc(ReservationOrderAliasResponse.name,
+@@doc(
+  ReservationOrderAliasResponse.name,
   "Name of the reservation order alias"
 );
-@@doc(ReservationOrderAliasResponse.properties,
+@@doc(
+  ReservationOrderAliasResponse.properties,
   "Reservation order alias response properties"
 );
-@@doc(ReservationOrderAliasResponses.create::parameters.resource,
+@@doc(
+  ReservationOrderAliasResponses.create::parameters.resource,
   "Request body for creating a reservation order alias"
 );

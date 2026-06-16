@@ -103,11 +103,14 @@ interface Resources {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   createOrUpdateById is genericOps.CreateOrUpdateAsync<
     GenericResource,
-    Response = ArmResourceUpdatedResponse<GenericResource> | ArmResourceCreatedResponse<
-      GenericResource,
-      ArmLroLocationHeader<FinalResult = GenericResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedResponse
+    Response =
+      | ArmResourceUpdatedResponse<GenericResource>
+      | ArmResourceCreatedResponse<
+          GenericResource,
+          ArmLroLocationHeader<FinalResult = GenericResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedResponse
   >;
 
   /**
@@ -120,7 +123,10 @@ interface Resources {
    */
   deleteById is genericOps.DeleteWithoutOkAsync<
     GenericResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
@@ -184,11 +190,14 @@ interface SpecificResources {
   @tag("Resources")
   createOrUpdate is specificResourcesOps.CreateOrUpdateAsync<
     GenericResource,
-    Response = ArmResourceUpdatedResponse<GenericResource> | ArmResourceCreatedResponse<
-      GenericResource,
-      ArmLroLocationHeader<FinalResult = GenericResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedResponse
+    Response =
+      | ArmResourceUpdatedResponse<GenericResource>
+      | ArmResourceCreatedResponse<
+          GenericResource,
+          ArmLroLocationHeader<FinalResult = GenericResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedResponse
   >;
 
   /**
@@ -206,6 +215,9 @@ interface SpecificResources {
   @tag("Resources")
   delete is specificResourcesOps.DeleteWithoutOkAsync<
     GenericResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }

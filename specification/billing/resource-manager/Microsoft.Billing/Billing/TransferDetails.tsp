@@ -73,10 +73,12 @@ interface Transfers {
   >;
 }
 
-@@doc(TransferDetails.name,
+@@doc(
+  TransferDetails.name,
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(TransferDetails.properties, "Details of the transfer.");
-@@doc(Transfers.initiate::parameters.resource,
+@@doc(
+  Transfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."
 );

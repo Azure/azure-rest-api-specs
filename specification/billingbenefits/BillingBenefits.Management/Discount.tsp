@@ -83,8 +83,10 @@ interface Discounts {
   update is ArmCustomPatchAsync<
     Discount,
     PatchModel = DiscountPatchRequest,
-    Response = ArmResponse<Discount> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Discount> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<Discount>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Discount> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -94,8 +96,10 @@ interface Discounts {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Discount,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse
   >;
 
   /**
@@ -123,16 +127,20 @@ interface Discounts {
     Discount,
     Request = void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Discount>,
-    Response = ArmResponse<Discount> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Discount> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<Discount>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Discount> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 
 @@doc(Discount.name, "Name of the discount");
 @@doc(Discount.properties, "Discount properties");
-@@doc(Discounts.create::parameters.resource,
+@@doc(
+  Discounts.create::parameters.resource,
   "Request body for creating a discount."
 );
-@@doc(Discounts.update::parameters.properties,
+@@doc(
+  Discounts.update::parameters.properties,
   "Request body for updating discounts"
 );

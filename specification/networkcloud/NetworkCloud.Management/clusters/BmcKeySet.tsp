@@ -78,7 +78,9 @@ interface BmcKeySets {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -94,7 +96,8 @@ interface BmcKeySets {
   >;
 }
 
-@@doc(BmcKeySet.name,
+@@doc(
+  BmcKeySet.name,
   "The name of the baseboard management controller key set."
 );
 @@doc(BmcKeySet.properties, "The list of the resource properties.");

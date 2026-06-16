@@ -1,0 +1,412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "JobTargetGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups": {
+      "get": {
+        "operationId": "JobTargetGroups_ListByAgent",
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Gets all target groups in an agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all target groups in an agent.": {
+            "$ref": "./examples/ListJobTargetGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/jobAgents/{jobAgentName}/targetGroups/{targetGroupName}": {
+      "get": {
+        "operationId": "JobTargetGroups_Get",
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Gets a target group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "The name of the target group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a target group.": {
+            "$ref": "./examples/GetJobTargetGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JobTargetGroups_CreateOrUpdate",
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Creates or updates a target group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "The name of the target group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested state of the target group.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'JobTargetGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'JobTargetGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JobTargetGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a target group with all properties.": {
+            "$ref": "./examples/CreateOrUpdateJobTargetGroupMax.json"
+          },
+          "Create or update a target group with minimal properties.": {
+            "$ref": "./examples/CreateOrUpdateJobTargetGroupMin.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "JobTargetGroups_Delete",
+        "tags": [
+          "JobTargetGroups"
+        ],
+        "description": "Deletes a target group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobAgentName",
+            "in": "path",
+            "description": "The name of the job agent to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "The name of the target group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a target group.": {
+            "$ref": "./examples/DeleteJobTargetGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JobTarget": {
+      "type": "object",
+      "description": "A job target, for example a specific database or a container of databases that is evaluated during job execution.",
+      "properties": {
+        "membershipType": {
+          "type": "string",
+          "description": "Whether the target is included or excluded from the group.",
+          "default": "Include",
+          "enum": [
+            "Include",
+            "Exclude"
+          ],
+          "x-ms-enum": {
+            "name": "JobTargetGroupMembershipType",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Include",
+                "value": "Include",
+                "description": "Include"
+              },
+              {
+                "name": "Exclude",
+                "value": "Exclude",
+                "description": "Exclude"
+              }
+            ]
+          }
+        },
+        "type": {
+          "$ref": "./common.json#/definitions/JobTargetType",
+          "description": "The target type."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The target server name."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The target database name."
+        },
+        "elasticPoolName": {
+          "type": "string",
+          "description": "The target elastic pool name."
+        },
+        "shardMapName": {
+          "type": "string",
+          "description": "The target shard map."
+        },
+        "refreshCredential": {
+          "type": "string",
+          "description": "The resource ID of the credential that is used during job execution to connect to the target and determine the list of databases inside the target."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "JobTargetGroup": {
+      "type": "object",
+      "description": "A group of job targets.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobTargetGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JobTargetGroupListResult": {
+      "type": "object",
+      "description": "The response of a JobTargetGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobTargetGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/JobTargetGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobTargetGroupProperties": {
+      "type": "object",
+      "description": "Properties of job target group.",
+      "properties": {
+        "members": {
+          "type": "array",
+          "description": "Members of the target group.",
+          "items": {
+            "$ref": "#/definitions/JobTarget"
+          }
+        }
+      },
+      "required": [
+        "members"
+      ]
+    }
+  },
+  "parameters": {}
+}

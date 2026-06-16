@@ -61,11 +61,14 @@ interface Projects {
   @tag("CognitiveServicesProjects")
   create is ArmResourceCreateOrReplaceAsync<
     Project,
-    Response = ArmResourceUpdatedResponse<Project> | ArmResourceCreatedResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Project;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Project>
+      | ArmResourceCreatedResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Project;
+        })
   >;
 
   /**
@@ -77,10 +80,12 @@ interface Projects {
   update is ArmCustomPatchAsync<
     Project,
     PatchModel = Project,
-    Response = ArmResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
-      @bodyRoot
-      _: Project;
-    })
+    Response =
+      | ArmResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
+          @bodyRoot
+          _: Project;
+        })
   >;
 
   /**
@@ -90,7 +95,10 @@ interface Projects {
   @tag("CognitiveServicesProjects")
   delete is ArmResourceDeleteWithoutOkAsync<
     Project,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -104,9 +112,11 @@ interface Projects {
 @@minLength(Project.name, 2);
 @@doc(Project.name, "The name of Cognitive Services account's project.");
 @@doc(Project.properties, "Properties of Cognitive Services project.");
-@@doc(Projects.create::parameters.resource,
+@@doc(
+  Projects.create::parameters.resource,
   "The parameters to provide for the created project."
 );
-@@doc(Projects.update::parameters.properties,
+@@doc(
+  Projects.update::parameters.properties,
   "The parameters to provide for the created project."
 );

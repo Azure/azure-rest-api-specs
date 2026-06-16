@@ -136,15 +136,19 @@ interface DnsResolverDomainLists {
 @@maxLength(DnsResolverDomainList.name, 80);
 @@minLength(DnsResolverDomainList.name, 1);
 @@doc(DnsResolverDomainList.name, "The name of the DNS resolver domain list.");
-@@doc(DnsResolverDomainList.properties,
+@@doc(
+  DnsResolverDomainList.properties,
   "Properties of the DNS resolver domain list."
 );
-@@doc(DnsResolverDomainLists.createOrUpdate::parameters.resource,
+@@doc(
+  DnsResolverDomainLists.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsResolverDomainLists.update::parameters.properties,
+@@doc(
+  DnsResolverDomainLists.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );
-@@doc(DnsResolverDomainLists.bulk::parameters.body,
+@@doc(
+  DnsResolverDomainLists.bulk::parameters.body,
   "Parameters supplied to the bulk domain list operation."
 );

@@ -84,6 +84,7 @@ interface SchemaGroups {
 @@minLength(SchemaGroup.name, 1);
 @@doc(SchemaGroup.name, "The Schema Group name ");
 @@doc(SchemaGroup.properties, "");
-@@doc(SchemaGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SchemaGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to create an Event Hub resource."
 );

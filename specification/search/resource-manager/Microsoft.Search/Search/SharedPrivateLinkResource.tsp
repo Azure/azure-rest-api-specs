@@ -74,7 +74,9 @@ interface SharedPrivateLinkResources {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
+    Response =
+      | ArmResourceUpdatedResponse<SharedPrivateLinkResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SharedPrivateLinkResource>>,
     Error = CloudError
   >;
 
@@ -104,8 +106,11 @@ interface SharedPrivateLinkResources {
       @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse | NotFoundResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | NoContentResponse
+      | NotFoundResponse,
     Error = CloudError
   >;
 
@@ -135,12 +140,15 @@ interface SharedPrivateLinkResources {
   >;
 }
 
-@@doc(SharedPrivateLinkResource.name,
+@@doc(
+  SharedPrivateLinkResource.name,
   "The name of the shared private link resource managed by the Azure AI Search service within the specified resource group."
 );
-@@doc(SharedPrivateLinkResource.properties,
+@@doc(
+  SharedPrivateLinkResource.properties,
   "Describes the properties of a shared private link resource managed by the Azure AI Search service."
 );
-@@doc(SharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@doc(
+  SharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "The definition of the shared private link resource to create or update."
 );
