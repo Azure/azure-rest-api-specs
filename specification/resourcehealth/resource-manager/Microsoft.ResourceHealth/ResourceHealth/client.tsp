@@ -201,4 +201,14 @@ using Microsoft.ResourceHealth;
    "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
    "csharp"
  );
- 
+ @@clientName(
+  RecommendedAction.actionUrlText,
+  "ActionUriComment",
+  "csharp"
+);
+
+ @@clientName(
+  RecommendedAction.`_ActionUrl.Comment`,
+  "ActionUriText",
+  "csharp"
+);
