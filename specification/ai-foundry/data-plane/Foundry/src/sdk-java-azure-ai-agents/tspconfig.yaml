@@ -43,6 +43,20 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/conversations/"
       - "specification/ai-foundry/data-plane/Foundry/src/responses/"
       - "specification/ai-foundry/data-plane/Foundry/src/tools/"
+  # Exports the @extension("x-ms-foundry-meta", ...) beta entities for the Java
+  # SDK's @Beta annotation customization. Inert unless this emitter is selected
+  # (e.g. `tsp compile <client.tsp> --emit typespec-extension-exporter`); a plain
+  # `tsp compile` ignores this block. The emitter is not in the spec repo's
+  # dependencies — install it locally first (npm link or npm install --no-save).
+  # Default output is the tsp-ast-input CSV the Java module consumes at
+  # customizations/beta-annotations.csv. For revapi suppressions instead, set
+  # output-shape: revapi, output-format: json, output-file: agents.revapi.json.
+  "typespec-extension-exporter":
+    keys: x-ms-foundry-meta
+    output-shape: tsp-ast-input
+    output-format: csv
+    output-file: beta-annotations.csv
+    java-namespace: com.azure.ai.agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
