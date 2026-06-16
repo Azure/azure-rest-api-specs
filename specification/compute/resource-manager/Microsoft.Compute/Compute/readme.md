@@ -31,7 +31,6 @@ To see additional help and options, run:
 These are the global settings for the Compute API.
 
 ### Suppression
-
 ``` yaml
 directive:
   - suppress: MULTIPLE_API_VERSION
