@@ -54,6 +54,14 @@ interface QueueClient extends Queue {}
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 
+@@alternateType(
+  UserDelegationKey,
+  {
+    identity: "azure_storage_common::models::UserDelegationKey",
+  },
+  "rust"
+);
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   KeyInfo.start,
