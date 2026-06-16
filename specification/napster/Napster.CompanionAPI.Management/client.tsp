@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Napster.CompanionAPI;
 
+@@clientName(Napster.CompanionAPI, "NapsterOmniAgentApiMgmtClient", "python");
+
 // Resource trio: add Napster prefix to avoid generic "Organization" name collision
 // and drop "Resource" infix from Data/Collection types (RESNAME001, RESINFIX001)
 @@clientName(OrganizationResource, "NapsterOrganizationResource", "csharp");

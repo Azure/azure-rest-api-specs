@@ -9,8 +9,8 @@ import { includesSegment } from "@azure-tools/specs-shared/path";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
-import { DiffResult, ReadmeTag, TagConfigDiff, TagDiff } from "./diff-types.js";
-import { LabelContext } from "./labelling-types.js";
+import { type DiffResult, type ReadmeTag, type TagConfigDiff, type TagDiff } from "./diff-types.ts";
+import { type LabelContext } from "./labelling-types.ts";
 
 export type FileListInfo = {
   additions: string[];
