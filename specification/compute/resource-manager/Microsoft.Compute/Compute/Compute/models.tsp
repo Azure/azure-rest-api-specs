@@ -3289,6 +3289,12 @@ model HostEndpointSettings {
    * Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}
    */
   inVMAccessControlProfileReferenceId?: string;
+
+  /**
+   * When set to true, instructs the GuestProxyAgent inside the VM to load additional access control rules defined in a local file on the VM.
+   */
+  @added(Versions.v2026_04_01)
+  useLocalFileRules?: boolean;
 }
 
 /**
