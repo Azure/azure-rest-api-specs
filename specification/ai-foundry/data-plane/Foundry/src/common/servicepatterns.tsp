@@ -16,25 +16,6 @@ alias FoundryDataPlaneApiVersionParameter = {
   apiVersion: string;
 };
 
-/** Error response for Azure range errors. */
-alias AzureRangeErrorResponse<ErrorResponseParameter = Azure.Core.Foundations.ErrorResponse> =
-  | {
-      ...ErrorResponseParameter;
-
-      @maxValue(499)
-      @minValue(400)
-      @statusCode
-      statusCode: int32;
-    }
-  | {
-      ...ErrorResponseParameter;
-
-      @maxValue(599)
-      @minValue(500)
-      @statusCode
-      statusCode: int32;
-    };
-
 alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
   Azure.Core.Traits.NoRepeatableRequests &
   Azure.Core.Traits.NoConditionalRequests &
@@ -125,7 +106,7 @@ union FoundryFeaturesOptInKeys {
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
-  agents_optimization_v1_preview: "AgentsOptimization=V1Preview",
+  agents_optimization_v2_preview: "AgentsOptimization=V2Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends

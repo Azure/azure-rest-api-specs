@@ -1,4 +1,5 @@
 import "../common/service.tsp";
+import "../sdk-common/error.default.tsp";
 
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
