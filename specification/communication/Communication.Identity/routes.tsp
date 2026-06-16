@@ -28,10 +28,12 @@ interface IdentityOperations {
     @doc("If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.")
     @body
     body?: CommunicationIdentityCreateRequest,
-  ): {
-    @statusCode statusCode: 201;
-    @body result: CommunicationIdentityAccessTokenResult;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 201;
+        @body result: CommunicationIdentityAccessTokenResult;
+      }
+    | CommunicationErrorResponse;
 
   @summary("Delete the identity, revoke all tokens for the identity and delete all associated data.")
   @doc("Delete the identity, revoke all tokens for the identity and delete all associated data.")
@@ -46,9 +48,11 @@ interface IdentityOperations {
     @query("api-version")
     @doc("Version of API to invoke.")
     apiVersion: string,
-  ): {
-    @statusCode statusCode: 204;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 204;
+      }
+    | CommunicationErrorResponse;
 
   @summary("Revoke all access tokens for the specific identity.")
   @doc("Revoke all access tokens for the specific identity.")
@@ -63,9 +67,11 @@ interface IdentityOperations {
     @query("api-version")
     @doc("Version of API to invoke.")
     apiVersion: string,
-  ): {
-    @statusCode statusCode: 204;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 204;
+      }
+    | CommunicationErrorResponse;
 
   @summary("Issue a new token for an identity.")
   @doc("Issue a new token for an identity.")
@@ -84,10 +90,12 @@ interface IdentityOperations {
     @doc("Requested scopes for the new token.")
     @body
     body: CommunicationIdentityAccessTokenRequest,
-  ): {
-    @statusCode statusCode: 200;
-    @body result: CommunicationIdentityAccessToken;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body result: CommunicationIdentityAccessToken;
+      }
+    | CommunicationErrorResponse;
 }
 
 // --- Teams User operations ---
@@ -107,10 +115,12 @@ interface TeamsUserOperations {
     @doc("Request payload for the token exchange.")
     @body
     body: TeamsUserExchangeTokenRequest,
-  ): {
-    @statusCode statusCode: 200;
-    @body result: CommunicationIdentityAccessToken;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body result: CommunicationIdentityAccessToken;
+      }
+    | CommunicationErrorResponse;
 }
 
 // --- Teams Extension operations ---
@@ -130,10 +140,12 @@ interface TeamsExtensionOperations {
     @query("api-version")
     @doc("Version of API to invoke.")
     apiVersion: string,
-  ): {
-    @statusCode statusCode: 200;
-    @body result: CommunicationIdentityAccessTokenResult;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body result: CommunicationIdentityAccessTokenResult;
+      }
+    | CommunicationErrorResponse;
 
   @summary("Get Teams Phone access assignment by object id.")
   @doc("Get Teams Phone access assignment by object id.")
@@ -152,10 +164,12 @@ interface TeamsExtensionOperations {
     @query("api-version")
     @doc("Version of API to invoke.")
     apiVersion: string,
-  ): {
-    @statusCode statusCode: 200;
-    @body result: TeamsExtensionAssignmentResponse;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body result: TeamsExtensionAssignmentResponse;
+      }
+    | CommunicationErrorResponse;
 
   @summary("Creates or replaces a Teams Phone access assignment.")
   @doc("Creates or replaces a Teams Phone access assignment.")
@@ -178,13 +192,16 @@ interface TeamsExtensionOperations {
     @doc("Values we want to set.")
     @body
     body: TeamsExtensionAssignmentCreateOrUpdateRequest,
-  ): {
-    @statusCode statusCode: 200;
-    @body result: TeamsExtensionAssignmentResponse;
-  } | {
-    @statusCode statusCode: 201;
-    @body result: TeamsExtensionAssignmentResponse;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 200;
+        @body result: TeamsExtensionAssignmentResponse;
+      }
+    | {
+        @statusCode statusCode: 201;
+        @body result: TeamsExtensionAssignmentResponse;
+      }
+    | CommunicationErrorResponse;
 
   @summary("Removes a Teams Phone access assignment.")
   @doc("Removes a Teams Phone access assignment.")
@@ -203,7 +220,9 @@ interface TeamsExtensionOperations {
     @query("api-version")
     @doc("Version of API to invoke.")
     apiVersion: string,
-  ): {
-    @statusCode statusCode: 204;
-  } | CommunicationErrorResponse;
+  ):
+    | {
+        @statusCode statusCode: 204;
+      }
+    | CommunicationErrorResponse;
 }
