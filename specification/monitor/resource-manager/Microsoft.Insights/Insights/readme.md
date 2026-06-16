@@ -32,7 +32,7 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-01-01
+tag: package-2025-08
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
@@ -53,7 +53,7 @@ input-file:
   - stable/2016-03-01/logProfiles.json
   - stable/2024-02-01/metrics.json
   - stable/2026-01-01/activityLogAlerts_API.json
-  - preview/2024-03-01-preview/metricAlert.json
+  - stable/2026-01-01/metricAlert.json
   - stable/2026-03-01/scheduledQueryRule_API.json
   - stable/2019-03-01/metricBaselines.json
   - preview/2024-10-01-preview/actionGroups.json
