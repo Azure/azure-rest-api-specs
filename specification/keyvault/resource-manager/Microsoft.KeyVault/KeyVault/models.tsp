@@ -588,13 +588,23 @@ enum KeyVaultNameUnavailableReason {
 /**
  * SKU of the managed HSM Pool
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ManagedHsmSkuName {
-  Standard_B1,
-  Custom_B32,
-  Custom_B6,
-  Custom_C42,
-  Custom_C10,
+union ManagedHsmSkuName {
+  string,
+
+  /** Standard_B1 SKU */
+  Standard_B1: "Standard_B1",
+
+  /** Custom_B32 SKU */
+  Custom_B32: "Custom_B32",
+
+  /** Custom_B6 SKU */
+  Custom_B6: "Custom_B6",
+
+  /** Custom_C42 SKU */
+  Custom_C42: "Custom_C42",
+
+  /** Custom_C10 SKU */
+  Custom_C10: "Custom_C10",
 }
 
 /**
