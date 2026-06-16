@@ -19,6 +19,17 @@ union AlertsState {
   Disabled: "Disabled",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union GranularityLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  VaultLevel: "VaultLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemLevel: "ProtectedItemLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemWithParentTag: "ProtectedItemWithParentTag",
+}
+
 /**
  * Provisioning state of the BackupVault resource
  */
@@ -597,6 +608,12 @@ model BackupVault {
   monitoringSettings?: MonitoringSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * Provisioning state of the BackupVault resource
    */
   @visibility(Lifecycle.Read)
@@ -676,6 +693,17 @@ model MonitoringSettings {
 model AzureMonitorAlertSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   alertsForAllJobFailures?: AlertsState;
+}
+
+/**
+ * Cost Management Settings of the vault
+ */
+@added(Versions.v2026_06_01)
+model CostManagementSettings {
+  /**
+   * Settings for granularity level
+   */
+  granularityLevel?: GranularityLevel;
 }
 
 /**
