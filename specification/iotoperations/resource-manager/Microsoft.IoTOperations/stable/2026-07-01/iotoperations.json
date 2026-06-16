@@ -9486,14 +9486,6 @@
           "$ref": "#/definitions/AzureDeviceRegistryNamespaceRef",
           "description": "The Azure Device Registry Namespace used by Assets, Discovered Assets and devices"
         },
-        "tier": {
-          "$ref": "#/definitions/InstanceTier",
-          "description": "The billing tier for the AIO Instance. Defaults to Standard. Immutable after create.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "healthState": {
           "type": "string",
           "description": "The health state of the resource.",
@@ -9587,43 +9579,6 @@
       "required": [
         "value"
       ]
-    },
-    "InstanceTier": {
-      "type": "object",
-      "description": "The billing tier for an AIO Instance.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/InstanceTierName",
-          "description": "The name of the tier. Determines the billing meter applied to this instance."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "InstanceTierName": {
-      "type": "string",
-      "description": "The set of supported tier names for an AIO Instance.",
-      "enum": [
-        "Essentials",
-        "Standard"
-      ],
-      "x-ms-enum": {
-        "name": "InstanceTierName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Essentials",
-            "value": "Essentials",
-            "description": "Essentials tier. Reduced feature set targeted at constrained edge and entry-level workloads."
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard tier. Full feature set. Default when tier is not specified."
-          }
-        ]
-      }
     },
     "KafkaAuthMethod": {
       "type": "string",
