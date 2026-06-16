@@ -16,6 +16,8 @@ namespace Azure.Communication.IdentityService;
 @tag("Identity")
 @route("/identities")
 interface IdentityOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Create a new identity, and optionally, an access token.")
   @doc("Create a new identity, and optionally, an access token.")
   @operationId("CommunicationIdentity_Create")
@@ -35,6 +37,8 @@ interface IdentityOperations {
       }
     | CommunicationErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Delete the identity, revoke all tokens for the identity and delete all associated data.")
   @doc("Delete the identity, revoke all tokens for the identity and delete all associated data.")
   @operationId("CommunicationIdentity_Delete")
@@ -54,6 +58,8 @@ interface IdentityOperations {
       }
     | CommunicationErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Revoke all access tokens for the specific identity.")
   @doc("Revoke all access tokens for the specific identity.")
   @operationId("CommunicationIdentity_RevokeAccessTokens")
@@ -73,6 +79,8 @@ interface IdentityOperations {
       }
     | CommunicationErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Issue a new token for an identity.")
   @doc("Issue a new token for an identity.")
   @operationId("CommunicationIdentity_IssueAccessToken")
@@ -102,6 +110,8 @@ interface IdentityOperations {
 
 @tag("TeamsUser")
 interface TeamsUserOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.")
   @doc("Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.")
   @operationId("CommunicationIdentity_ExchangeTeamsUserAccessToken")
@@ -127,6 +137,8 @@ interface TeamsUserOperations {
 
 @tag("TeamsExtension")
 interface TeamsExtensionOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Exchanges a Teams Phone token for an ACS user access token.")
   @doc("Exchanges a Teams Phone token for an ACS user access token.")
   @operationId("TeamsExtensionToken_Exchange")
@@ -147,6 +159,8 @@ interface TeamsExtensionOperations {
       }
     | CommunicationErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Get Teams Phone access assignment by object id.")
   @doc("Get Teams Phone access assignment by object id.")
   @operationId("TeamsExtensionAssignment_Get")
@@ -171,6 +185,9 @@ interface TeamsExtensionOperations {
       }
     | CommunicationErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving original operation name from swagger"
   @summary("Creates or replaces a Teams Phone access assignment.")
   @doc("Creates or replaces a Teams Phone access assignment.")
   @operationId("TeamsExtensionAssignment_Upsert")
@@ -203,6 +220,8 @@ interface TeamsExtensionOperations {
       }
     | CommunicationErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving original operationId from swagger"
   @summary("Removes a Teams Phone access assignment.")
   @doc("Removes a Teams Phone access assignment.")
   @operationId("TeamsExtensionAssignment_Delete")

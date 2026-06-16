@@ -73,6 +73,7 @@ model CommunicationIdentityAccessTokenResult {
   accessToken?: CommunicationIdentityAccessToken;
 }
 
+@doc("Request to create a new identity with optional access token.")
 model CommunicationIdentityCreateRequest {
   @doc("Also create access token for the created identity.")
   createTokenWithScopes?: CommunicationIdentityTokenScope[];
@@ -83,6 +84,7 @@ model CommunicationIdentityCreateRequest {
   expiresInMinutes?: int32 = 1440;
 }
 
+@doc("Request to issue a new access token for an identity.")
 model CommunicationIdentityAccessTokenRequest {
   @doc("List of scopes attached to the token.")
   scopes: CommunicationIdentityTokenScope[];
