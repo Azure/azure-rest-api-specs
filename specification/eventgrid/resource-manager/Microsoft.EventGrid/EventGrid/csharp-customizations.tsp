@@ -285,7 +285,11 @@ namespace Customization;
   "csharp"
 );
 @@clientName(SubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
-@@clientName(EventSubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
+@@clientName(
+  EventSubscriptionProperties.expirationTimeUtc,
+  "ExpireOn",
+  "csharp"
+);
 
 @@alternateType(DomainProperties.endpoint, url, "csharp");
 @@alternateType(
