@@ -139,6 +139,36 @@ namespace Customization;
 @@clientName(SystemTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
+  "EventSubscriptionsSubscriptionScope",
+  "csharp"
+);
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
+  "EventSubscriptionsResourceGroupScope",
+  "csharp"
+);
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalBySubscription,
+  "EventSubscriptionsSubscriptionScope",
+  "csharp"
+);
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
+  "EventSubscriptionsResourceGroupScope",
+  "csharp"
+);
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
+  "EventSubscriptionsSubscriptionScope",
+  "csharp"
+);
+@@clientLocation(
+  EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
+  "EventSubscriptionsResourceGroupScope",
+  "csharp"
+);
 @@clientName(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   "GetGlobalEventSubscriptionsDataForTopicType",
