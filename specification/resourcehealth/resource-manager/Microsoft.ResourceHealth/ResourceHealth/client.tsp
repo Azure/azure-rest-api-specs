@@ -193,7 +193,7 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(
   AvailabilityStatuses.listBySubscriptionId,
-  "GetAvailabilityStatusResourcesBySubscription",
+  "GetAvailabilityStatusesBySubscription",
   "csharp"
 );
 @@clientName(
