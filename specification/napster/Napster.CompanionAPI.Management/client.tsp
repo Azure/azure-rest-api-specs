@@ -9,7 +9,9 @@ using Napster.CompanionAPI;
 
 // Resource trio: add Napster prefix to avoid generic "Organization" name collision
 // and drop "Resource" infix from Data/Collection types (RESNAME001, RESINFIX001)
-@@clientName(OrganizationResource, "NapsterOrganizationResource", "csharp");
+// Generator auto-appends Resource/Data/Collection to the base noun
+@@clientName(OrganizationResource, "NapsterOrganization", "csharp");
+@@clientName(OrganizationResourceUpdate, "NapsterOrganizationPatch", "csharp");
 @@clientName(OrganizationProperties, "NapsterOrganizationProperties", "csharp");
 @@clientName(PartnerProperties, "NapsterPartnerProperties", "csharp");
 
@@ -22,6 +24,8 @@ using Napster.CompanionAPI;
 
 // SUFFIX005: Response suffix → Data (derives from ResourceData)
 @@clientName(SaaSResourceDetailsResponse, "SaaSResourceDetailsData", "csharp");
+// ACRONYM001: Normalize SaaS casing on saasId property
+@@clientName(SaaSResourceDetailsResponse.saasId, "SaaSId", "csharp");
 
 // SUFFIX005: Response → Result for non-ResourceData response types
 @@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
@@ -57,7 +61,7 @@ using Napster.CompanionAPI;
 @@clientName(LiftrBase.UserDetails, "NapsterUserDetails", "csharp");
 @@clientName(
   LiftrBase.SingleSignOnPropertiesV2,
-  "NapsterSingleSignOnPropertiesV2",
+  "NapsterSingleSignOnProperties",
   "csharp"
 );
 @@clientName(LiftrBase.SingleSignOnType, "NapsterSingleSignOnType", "csharp");
