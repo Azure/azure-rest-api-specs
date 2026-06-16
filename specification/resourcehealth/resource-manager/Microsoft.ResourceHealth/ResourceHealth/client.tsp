@@ -41,6 +41,11 @@ using Microsoft.ResourceHealth;
   "GetSecurityAdvisoryImpactedResourcesBySubscriptionIdAndEventId",
   "csharp"
 );
+@@clientName(
+  TenantEventOperationGroup.listByTenantIdAndEventId,
+  "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
+  "csharp"
+);
 @@clientName(Link.type, "LinkType", "csharp");
 @@clientName(EmergingIssuesGetResult, "ServiceEmergingIssue", "csharp");
 @@clientName(
