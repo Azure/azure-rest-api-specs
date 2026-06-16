@@ -54,6 +54,7 @@ import "./OutboundRuleBasicResource.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

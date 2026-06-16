@@ -25,6 +25,7 @@ import "./SBTopic.tsp";
 import "./Rule.tsp";
 import "./SBSubscription.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
