@@ -26,7 +26,7 @@ model RestorePoint
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface RestorePoints {
   /**
    * The operation to get the restore point.

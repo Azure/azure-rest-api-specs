@@ -56,6 +56,7 @@ import "./resources/NetworkMonitor.tsp";
 import "./resources/NetworkBootstrapDevice.tsp";
 import "./resources/NetworkBootstrapInterface.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

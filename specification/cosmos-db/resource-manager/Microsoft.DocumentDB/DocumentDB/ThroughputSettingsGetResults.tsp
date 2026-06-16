@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./SqlDatabaseGetResults.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
@@ -69,7 +71,9 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "CosmosDBSqlDatabaseThroughputSetting"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -125,6 +129,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -140,6 +145,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -186,7 +192,9 @@ alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Resource
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "CosmosDBSqlContainerThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -241,6 +249,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL container
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   sqlContainerRetrieveThroughputDistribution is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -255,6 +264,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL container
    */
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   sqlContainerRedistributeThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -294,7 +304,9 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "MongoDBDatabaseThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
@@ -354,6 +366,7 @@ interface MongoDBResources {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   mongoDBDatabaseRetrieveThroughputDistribution is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -369,6 +382,7 @@ interface MongoDBResources {
   /**
    * Redistribute throughput for an Azure Cosmos DB MongoDB database
    */
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   mongoDBDatabaseRedistributeThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -415,7 +429,9 @@ alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "MongoDBCollectionThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
@@ -443,6 +459,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB container
    */
+  @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   mongoDBContainerRetrieveThroughputDistribution is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -459,6 +476,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
    * Redistribute throughput for an Azure Cosmos DB MongoDB container
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   mongoDBContainerRedistributeThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -530,7 +548,9 @@ alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "CosmosTableThroughputSetting"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -611,7 +631,9 @@ alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "CassandraKeyspaceThroughputSetting"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -698,7 +720,9 @@ alias CassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Re
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "CassandraTableThroughputSetting"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -786,9 +810,12 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "CassandraViewThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
@@ -867,7 +894,9 @@ alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "GremlinDatabaseThroughputSetting"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -954,7 +983,9 @@ alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     @segment("throughputSettings")
     @key
     default: "default";
-  }
+  },
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "GremlinGraphThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
