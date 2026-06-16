@@ -168,7 +168,7 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(
   ChildResourcesOperationGroup.list,
-  "GetAvailabilityStatusOfChildResourceData",
+  "GetAvailabilityStatusOfChildResource",
   "csharp"
 );
 @@clientName(
