@@ -4,9 +4,12 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+const ToolboxesRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+};
 
 /**
  * Per-tool configuration that controls tool visibility and search behavior.
@@ -50,7 +53,7 @@ model WithFieldsOptional<Source, Keys extends string> {
  * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
  */
 alias ToolFields<Source> = {
-  ...OmitProperties<Source, "name" | "description">;
+  ...OmitProperties<Source, "name" | "description" | "type">;
 };
 
 /**
@@ -87,6 +90,8 @@ model ToolboxTool {
  * A code interpreter tool stored in a toolbox.
  */
 model CodeInterpreterToolboxTool extends ToolboxTool {
+  type: "code_interpreter";
+
   ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
 
@@ -94,6 +99,8 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
  * A file search tool stored in a toolbox.
  */
 model FileSearchToolboxTool extends ToolboxTool {
+  type: "file_search";
+
   ...WithFieldsOptional<
     ToolFields<OpenAI.FileSearchTool>,
     "vector_store_ids"
@@ -104,6 +111,8 @@ model FileSearchToolboxTool extends ToolboxTool {
  * A web search tool stored in a toolbox.
  */
 model WebSearchToolboxTool extends ToolboxTool {
+  type: "web_search";
+
   ...ToolFields<OpenAI.WebSearchTool>;
 }
 
@@ -111,6 +120,8 @@ model WebSearchToolboxTool extends ToolboxTool {
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
+  type: "mcp";
+
   ...ToolFields<OpenAI.MCPTool>;
 }
 
@@ -118,6 +129,8 @@ model MCPToolboxTool extends ToolboxTool {
  * An Azure AI Search tool stored in a toolbox.
  */
 model AzureAISearchToolboxTool extends ToolboxTool {
+  type: "azure_ai_search";
+
   ...ToolFields<AzureAISearchTool>;
 }
 
@@ -125,6 +138,8 @@ model AzureAISearchToolboxTool extends ToolboxTool {
  * An OpenAPI tool stored in a toolbox.
  */
 model OpenApiToolboxTool extends ToolboxTool {
+  type: "openapi";
+
   ...ToolFields<OpenApiTool>;
 }
 
@@ -132,6 +147,8 @@ model OpenApiToolboxTool extends ToolboxTool {
  * An A2A tool stored in a toolbox.
  */
 model A2APreviewToolboxTool extends ToolboxTool {
+  type: "a2a_preview";
+
   ...ToolFields<A2APreviewTool>;
 }
 
@@ -139,6 +156,8 @@ model A2APreviewToolboxTool extends ToolboxTool {
  * A WorkIQ tool stored in a toolbox.
  */
 model WorkIQPreviewToolboxTool extends ToolboxTool {
+  type: "work_iq_preview";
+
   ...ToolFields<WorkIQPreviewTool>;
 }
 
@@ -146,6 +165,8 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
  * A FabricIQ tool stored in a toolbox.
  */
 model FabricIQPreviewToolboxTool extends ToolboxTool {
+  type: "fabric_iq_preview";
+
   ...ToolFields<FabricIQPreviewTool>;
 }
 
