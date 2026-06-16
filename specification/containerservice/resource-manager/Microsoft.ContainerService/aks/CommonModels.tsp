@@ -967,6 +967,12 @@ union LoadBalancerSku {
   string,
 
   /**
+   * Use a service Load Balancer, with native pod-level load balancing. This SKU is specifically built to scale for container-based workloads, with a single instance utilized for each application. For more information, see https://aka.ms/aks/container-native-slb
+   */
+  @added(Versions.v2026_05_02_preview)
+  service: "service",
+
+  /**
    * Use a a standard Load Balancer. This is the recommended Load Balancer SKU. For more information about on working with the load balancer in the managed cluster, see the [standard Load Balancer](https://docs.microsoft.com/azure/aks/load-balancer-standard) article.
    */
   standard: "standard",
@@ -992,6 +998,12 @@ union BackendPoolType {
    * The type of the managed inbound Load Balancer BackendPool. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend.
    */
   NodeIP: "NodeIP",
+
+  /**
+   * The type of the managed inbound Load Balancer BackendPool. Used only when loadBalancerSku is specified as 'service'. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend.
+   */
+  @added(Versions.v2026_05_02_preview)
+  PodIP: "PodIP",
 }
 
 /**
@@ -1456,7 +1468,7 @@ union ArtifactSource {
 /**
  * The config customization mode for this scheduler instance.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 union SchedulerConfigMode {
   string,
 
@@ -2052,9 +2064,9 @@ model ManagedClusterProperties {
   aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile;
 
   /**
-   * Profile of the pod scheduler configuration.
+   * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_05_01)
   schedulerProfile?: SchedulerProfile;
 
   /**
@@ -2477,6 +2489,17 @@ model ContainerServiceNetworkProfile {
    * Profile of the cluster NAT gateway.
    */
   natGatewayProfile?: ManagedClusterNATGatewayProfile;
+
+  /**
+   * The ARM resource ID of the NAT gateway to use for egress at cluster startup when outboundType is 'userAssignedNATGateway' using StandardV2 Public IP, backend pool type is podIP, and load balancer type is service SKU. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/natGateways/{natGatewayName}'. When using managed NATGateway this field is auto populated. For more information, see https://aka.ms/aks/container-native-slb
+   */
+  @added(Versions.v2026_05_02_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  natGatewayId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/natGateways";
+    }
+  ]>;
 
   /**
    * The profile for Static Egress Gateway addon. For more details about Static Egress Gateway, see https://aka.ms/aks/static-egress-gateway.
@@ -4147,34 +4170,23 @@ model ManagedClusterAIToolchainOperatorProfile {
 }
 
 /**
- * The pod scheduler profile for the cluster.
+ * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 model SchedulerProfile {
   /**
-   * Mapping of each scheduler instance to its profile.
-   */
-  schedulerInstanceProfiles?: SchedulerProfileSchedulerInstanceProfiles;
-}
-
-/**
- * Mapping of each scheduler instance to its profile.
- */
-@added(Versions.v2026_05_02_preview)
-model SchedulerProfileSchedulerInstanceProfiles {
-  /**
-   * The scheduler profile for the upstream scheduler instance.
+   * Profile with settings related to upstream variant of kube-scheduler (https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler).
    */
   upstream?: SchedulerInstanceProfile;
 }
 
 /**
- * The scheduler profile for a single scheduler instance.
+ * Profile with settings related to a specific instance of an AKS-managed scheduler.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 model SchedulerInstanceProfile {
   /**
-   * The config customization mode for this scheduler instance.
+   * The configuration mode to be used by the AKS-managed scheduler.
    */
   schedulerConfigMode?: SchedulerConfigMode;
 }

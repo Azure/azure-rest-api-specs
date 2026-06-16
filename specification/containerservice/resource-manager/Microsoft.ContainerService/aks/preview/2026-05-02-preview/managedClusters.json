@@ -95,6 +95,9 @@
     },
     {
       "name": "Skus"
+    },
+    {
+      "name": "AlertConfigurations"
     }
   ],
   "paths": {
@@ -2686,6 +2689,281 @@
             "$ref": "./examples/AgentPoolsGetUpgradeProfile.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/alertConfigurations": {
+      "get": {
+        "operationId": "AlertConfigurations_ListByManagedCluster",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Gets a list of alert configurations in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Alert Configurations by Managed Cluster": {
+            "$ref": "./examples/AlertConfigurations_ListByManagedCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/alertConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "AlertConfigurations_Get",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Gets the specified alert configuration of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the alert configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Alert Configuration": {
+            "$ref": "./examples/AlertConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AlertConfigurations_CreateOrUpdate",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Creates or updates an alert configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the alert configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The alert configuration to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AlertConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'AlertConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Alert Configuration": {
+            "$ref": "./examples/AlertConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AlertConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AlertConfigurations_Delete",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Deletes an alert configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the managed cluster resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the alert configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Alert Configuration": {
+            "$ref": "./examples/AlertConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/availableAgentPoolVersions": {
@@ -7533,6 +7811,159 @@
         }
       }
     },
+    "AlertConfiguration": {
+      "type": "object",
+      "description": "Alert configuration for a managed cluster. Allows configuring AKS-managed alerts\nthat notify users of important cluster events and conditions.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a AlertConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertConfigurationMode": {
+      "type": "string",
+      "description": "The mode of the alert configuration.",
+      "enum": [
+        "Disabled",
+        "Managed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertConfigurationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Alerts are disabled."
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "AKS manages the alerts lifecycle including creation, updates, and deletion.\nUsers receive alerts through the configured notification channel."
+          }
+        ]
+      }
+    },
+    "AlertConfigurationProperties": {
+      "type": "object",
+      "description": "Properties of the alert configuration.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/AlertConfigurationMode",
+          "description": "The mode of the alert configuration. Specifies how AKS manages the alerts."
+        },
+        "notification": {
+          "$ref": "#/definitions/AlertNotification",
+          "description": "Notification settings for the alert configuration."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AlertConfigurationProvisioningState",
+          "description": "The current provisioning state of the alert configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "mode",
+        "notification"
+      ]
+    },
+    "AlertConfigurationProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state of the alert configuration.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "AlertConfigurationProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The alert configuration is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The alert configuration is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The alert configuration is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The alert configuration has been successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The alert configuration provisioning failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The alert configuration provisioning was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AlertNotification": {
+      "type": "object",
+      "description": "Notification settings for the alert configuration.",
+      "properties": {
+        "actionGroupId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the Azure Monitor action group to send notifications to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/actionGroups"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "actionGroupId"
+      ]
+    },
     "AllowedSubject": {
       "type": "object",
       "description": "A subject authorized to use the identity binding for token exchange.\nThe namespace selector is required and must be non-empty. The service\naccount selector is optional; when omitted, all service accounts in\nmatching namespaces are authorized. Selectors within a single\nAllowedSubject are AND'd; multiple AllowedSubjects on an\nIdentityBinding are OR'd.",
@@ -8045,6 +8476,22 @@
         "natGatewayProfile": {
           "$ref": "#/definitions/ManagedClusterNATGatewayProfile",
           "description": "Profile of the cluster NAT gateway."
+        },
+        "natGatewayId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the NAT gateway to use for egress at cluster startup when outboundType is 'userAssignedNATGateway' using StandardV2 Public IP, backend pool type is podIP, and load balancer type is service SKU. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/natGateways/{natGatewayName}'. When using managed NATGateway this field is auto populated. For more information, see https://aka.ms/aks/container-native-slb",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/natGateways"
+              }
+            ]
+          }
         },
         "staticEgressGatewayProfile": {
           "$ref": "#/definitions/ManagedClusterStaticEgressGatewayProfile",
@@ -9686,6 +10133,7 @@
       "type": "string",
       "description": "The load balancer sku for the managed cluster. The default is 'standard'. See [Azure Load Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more information about the differences between load balancer SKUs.",
       "enum": [
+        "service",
         "standard",
         "basic"
       ],
@@ -9693,6 +10141,11 @@
         "name": "LoadBalancerSku",
         "modelAsString": true,
         "values": [
+          {
+            "name": "service",
+            "value": "service",
+            "description": "Use a service Load Balancer, with native pod-level load balancing. This SKU is specifically built to scale for container-based workloads, with a single instance utilized for each application. For more information, see https://aka.ms/aks/container-native-slb"
+          },
           {
             "name": "standard",
             "value": "standard",
@@ -11783,7 +12236,8 @@
           "default": "NodeIPConfiguration",
           "enum": [
             "NodeIPConfiguration",
-            "NodeIP"
+            "NodeIP",
+            "PodIP"
           ],
           "x-ms-enum": {
             "name": "BackendPoolType",
@@ -11798,6 +12252,11 @@
                 "name": "NodeIP",
                 "value": "NodeIP",
                 "description": "The type of the managed inbound Load Balancer BackendPool. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend."
+              },
+              {
+                "name": "PodIP",
+                "value": "PodIP",
+                "description": "The type of the managed inbound Load Balancer BackendPool. Used only when loadBalancerSku is specified as 'service'. https://cloud-provider-azure.sigs.k8s.io/topics/loadbalancer/#configure-load-balancer-backend."
               }
             ]
           }
@@ -12527,7 +12986,7 @@
         },
         "schedulerProfile": {
           "$ref": "#/definitions/SchedulerProfile",
-          "description": "Profile of the pod scheduler configuration."
+          "description": "Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile."
         },
         "hostedSystemProfile": {
           "$ref": "#/definitions/ManagedClusterHostedSystemProfile",
@@ -15528,31 +15987,21 @@
     },
     "SchedulerInstanceProfile": {
       "type": "object",
-      "description": "The scheduler profile for a single scheduler instance.",
+      "description": "Profile with settings related to a specific instance of an AKS-managed scheduler.",
       "properties": {
         "schedulerConfigMode": {
           "$ref": "#/definitions/SchedulerConfigMode",
-          "description": "The config customization mode for this scheduler instance."
+          "description": "The configuration mode to be used by the AKS-managed scheduler."
         }
       }
     },
     "SchedulerProfile": {
       "type": "object",
-      "description": "The pod scheduler profile for the cluster.",
-      "properties": {
-        "schedulerInstanceProfiles": {
-          "$ref": "#/definitions/SchedulerProfileSchedulerInstanceProfiles",
-          "description": "Mapping of each scheduler instance to its profile."
-        }
-      }
-    },
-    "SchedulerProfileSchedulerInstanceProfiles": {
-      "type": "object",
-      "description": "Mapping of each scheduler instance to its profile.",
+      "description": "Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.",
       "properties": {
         "upstream": {
           "$ref": "#/definitions/SchedulerInstanceProfile",
-          "description": "The scheduler profile for the upstream scheduler instance."
+          "description": "Profile with settings related to upstream variant of kube-scheduler (https://github.com/kubernetes/kubernetes/tree/master/pkg/scheduler)."
         }
       }
     },
