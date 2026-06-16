@@ -62,7 +62,7 @@ interface PrivateEndpointConnections {
   /**
    * Update the status of a private endpoint connection with the specified name
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Final-state-via location is retained to match the published LRO behavior of this update operation."
   @summary("Update private endpoint connection")
   @tag("PUT")
   @Azure.Core.useFinalStateVia("location")
@@ -75,8 +75,8 @@ interface PrivateEndpointConnections {
   /**
    * Delete private endpoint connection with the specified name
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match the published API contract and are retained for backward compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The published API returns the deleted private endpoint connection in the body of the synchronous (200) delete response; retained to preserve backward compatibility."
   @summary("Delete private endpoint connection")
   @tag("DELETE")
   delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<
