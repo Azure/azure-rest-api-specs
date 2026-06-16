@@ -65,24 +65,24 @@ interface ContentUnderstandingClient {
 // ============================================================================
 
 // Rename type as fieldType to avoid conflict with built-in 'type' keyword.
-@@clientName(ArrayField.type, "fieldType");
-@@clientName(BooleanField.type, "fieldType");
-@@clientName(DateField.type, "fieldType");
-@@clientName(IntegerField.type, "fieldType");
-@@clientName(NumberField.type, "fieldType");
-@@clientName(ObjectField.type, "fieldType");
-@@clientName(StringField.type, "fieldType");
-@@clientName(TimeField.type, "fieldType");
-@@clientName(JsonField.type, "fieldType");
+@@clientName(ArrayField.type, "fieldType", "!autorest");
+@@clientName(BooleanField.type, "fieldType", "!autorest");
+@@clientName(DateField.type, "fieldType", "!autorest");
+@@clientName(IntegerField.type, "fieldType", "!autorest");
+@@clientName(NumberField.type, "fieldType", "!autorest");
+@@clientName(ObjectField.type, "fieldType", "!autorest");
+@@clientName(StringField.type, "fieldType", "!autorest");
+@@clientName(TimeField.type, "fieldType", "!autorest");
+@@clientName(JsonField.type, "fieldType", "!autorest");
 
 // Rename 'items' to avoid conflict with built-in 'items' method.
-@@clientName(ContentFieldDefinition.items, "itemDefinition");
+@@clientName(ContentFieldDefinition.items, "itemDefinition", "!autorest");
 
-@@clientName(AnalyzeBinaryRequest.input, "binaryInput");
+@@clientName(AnalyzeBinaryRequest.input, "binaryInput", "!autorest");
 
 // Rename 'range' to 'contentRange' for clarity that it specifies content range.
-@@clientName(AnalysisInput.range, "contentRange");
-@@clientName(AnalyzeBinaryRequest.range, "contentRange");
+@@clientName(AnalysisInput.range, "contentRange", "!autorest");
+@@clientName(AnalyzeBinaryRequest.range, "contentRange", "!autorest");
 
 // TCGC infers request-body-only types as internal; override to public for the convenience API.
 @@access(AnalysisInput, Access.public);

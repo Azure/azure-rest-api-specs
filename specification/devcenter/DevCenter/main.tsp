@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "./DevBox/routes.tsp";
 import "./DevCenter/routes.tsp";
 import "./Environments/routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 using TypeSpec.Http;
