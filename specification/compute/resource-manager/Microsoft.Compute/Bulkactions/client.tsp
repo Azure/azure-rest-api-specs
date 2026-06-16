@@ -27,7 +27,7 @@ namespace Microsoft.Compute;
   "BulkVdiFlexCreateOperation"
 );
 
-@@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
+@@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
@@ -44,7 +44,11 @@ namespace Microsoft.Compute;
   "ScheduledActionExecutionParameterDetail",
   "csharp"
 );
-@@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
+@@clientName(
+  GetOperationStatusResponse,
+  "GetBulkOperationStatusResult",
+  "csharp"
+);
 @@clientName(
   HibernateResourceOperationResponse,
   "HibernateResourceOperationResult",
@@ -53,9 +57,9 @@ namespace Microsoft.Compute;
 @@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
 
-@@clientName(ResourceOperation, "ResourceOperationResult", "csharp");
+@@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
-@@clientName(RetryPolicy, "UserRequestRetryPolicy", "csharp");
+@@clientName(RetryPolicy, "BulkOperationRetryPolicy", "csharp");
 @@clientName(
   StartResourceOperationResponse,
   "StartResourceOperationResult",
@@ -74,6 +78,7 @@ namespace Microsoft.Compute;
   "DeleteResourceOperationResult",
   "csharp"
 );
+@@clientName(DeleteResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(
   CreateResourceOperationResponse,
   "CreateResourceOperationResult",
@@ -84,8 +89,8 @@ namespace Microsoft.Compute;
 @@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
-@@clientName(CancelOperationsRequest, "CancelOperationsContent");
+@@clientName(GetOperationStatusRequest, "GetBulkOperationStatusContent");
+@@clientName(CancelOperationsRequest, "CancelBulkOperationsContent");
 @@clientName(ManagedDiskParameters, "ManagedDiskParametersContent");
 @@clientName(DiskEncryptionSetParameters, "DiskEncryptionSetParametersContent");
 
@@ -126,6 +131,33 @@ namespace Microsoft.Compute;
   "BulkActionsOsProfileProvisioningContent",
   "csharp"
 );
+
+// =====================================================================
+// .NET naming convention fixes (C# only)
+// =====================================================================
+// Expand "Op" abbreviation to "Operation".
+@@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
+@@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
+// Drop redundant type-name prefix; align with FallbackOperationInfo.error.
+@@clientName(
+  ResourceOperationDetails.resourceOperationError,
+  "error",
+  "csharp"
+);
+// Correct .NET casing for TimeZone.
+@@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
+
+@@clientName(ResourceOperationType, "ComputeBulkOperationType", "csharp");
+@@clientName(ResourceOperationDetails, "ComputeBulkOperationDetails", "csharp");
+@@clientName(ResourceOperationDetails.deadline, "deadlineOn", "csharp");
+@@clientName(ResourceOperationError, "ComputeBulkOperationError", "csharp");
+
+@@clientName(
+  FallbackOperationInfo,
+  "ComputeBulkFallbackOperationInfo",
+  "csharp"
+);
+
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
 // parameter because its name contains "apiversion". This causes
