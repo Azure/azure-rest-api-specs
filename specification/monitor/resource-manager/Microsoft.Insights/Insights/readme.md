@@ -644,7 +644,7 @@ These settings apply only when `--tag=package-2016-03-preview-monitorlegacy` is 
 
 ```yaml $(tag) == 'package-2016-03-preview-monitorlegacy'
 input-file:
-  - stable/2015-04-01/eventCategories_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
   - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
@@ -671,14 +671,13 @@ These settings apply only when `--tag=package-2020-10-activityLogs` is specified
 
 ```yaml $(tag) == 'package-2020-10-activityLogs'
 input-file:
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2020-10-01/activityLogAlerts_API.json
 directive:
   - from: activityLogAlerts_API.json
     where: $.definitions
     transform: delete $["ErrorResponse"]
-    reason: Description doesn't match, the definition will be "inherit" from activityLogs_API.json
+    reason: Description doesn't match, the definition will be "inherit" from activityLogs.json
 ```
 
 ### Tag: package-2021-05-metrics
@@ -1650,7 +1649,7 @@ input-file:
   - stable/2018-01-01/metrics_API.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-  - stable/2015-04-01/eventCategories_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2015-04-01/operations_API.json
 ```
 
@@ -1665,6 +1664,6 @@ input-file:
   - stable/2018-01-01/metrics_API.json
   - preview/2017-05-01-preview/diagnosticsSettings_API.json
   - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-  - stable/2015-04-01/eventCategories_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2015-04-01/operations_API.json
 ```

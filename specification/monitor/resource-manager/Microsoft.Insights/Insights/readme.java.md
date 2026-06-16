@@ -33,9 +33,7 @@ input-file:
   - preview/2021-05-01-preview/diagnosticsSettings_API.json
   - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
   - stable/2022-06-01/actionGroups_API.json
-  - stable/2015-04-01/activityLogs_API.json
-  - stable/2015-04-01/eventCategories_API.json
-  - stable/2015-04-01/tenantActivityLogs_API.json
+  - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
   - stable/2019-03-01/metricBaselines_API.json
