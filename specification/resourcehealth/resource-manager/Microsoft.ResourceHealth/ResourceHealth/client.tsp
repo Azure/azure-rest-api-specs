@@ -196,3 +196,9 @@ using Microsoft.ResourceHealth;
   "GetAvailabilityStatusResourcesBySubscription",
   "csharp"
 );
+ @@clientName(
+   TenantEventOperationGroup.listByTenantIdAndEventId,
+   "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
+   "csharp"
+ );
+ 
