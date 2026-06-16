@@ -26,6 +26,14 @@ To see additional help and options, run:
 
 ## Configuration
 
+### Suppression
+
+```yaml
+directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: Compute packages multiple sub-services that intentionally use different latest API versions.
+```
+
 ### Basic Information
 
 These are the global settings for the Compute API.
@@ -37,8 +45,6 @@ openapi-type: arm
 tag: package-2025-11-01
 
 directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: Compute packages multiple sub-services that intentionally use different latest API versions.
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
