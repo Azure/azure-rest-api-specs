@@ -1339,26 +1339,43 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
-// C# @@doc customizations.
-@@doc(
+// C# @@clientDoc customizations. Use clientDoc (DocumentationMode.replace) so
+// these descriptions apply to generated clients only and do not change the
+// service swagger output.
+@@clientDoc(
   JobPatchProperties.properties,
-  "Container Apps Job patch resource properties."
+  "Container Apps Job patch resource properties.",
+  DocumentationMode.replace
 );
 
-@@doc(JobPatchPropertiesProperties, "Container Apps Job patch properties.");
+@@clientDoc(
+  JobPatchPropertiesProperties,
+  "Container Apps Job patch properties.",
+  DocumentationMode.replace
+);
 
-@@doc(LogicAppsProxyMethod, "HTTP method used by the Logic Apps proxy.");
+@@clientDoc(
+  LogicAppsProxyMethod,
+  "HTTP method used by the Logic Apps proxy.",
+  DocumentationMode.replace
+);
 
-@@doc(TemplateUpdateStatus, "Session pool template update status.");
+@@clientDoc(
+  TemplateUpdateStatus,
+  "Session pool template update status.",
+  DocumentationMode.replace
+);
 
-@@doc(
+@@clientDoc(
   ActiveRevisionsMode,
-  "Controls how active revisions are handled for the Container app."
+  "Controls how active revisions are handled for the Container app.",
+  DocumentationMode.replace
 );
 
-@@doc(
+@@clientDoc(
   Configuration.activeRevisionsMode,
-  "Controls how active revisions are handled for the Container app."
+  "Controls how active revisions are handled for the Container app.",
+  DocumentationMode.replace
 );
 
 // C# @@flattenProperty customizations.
