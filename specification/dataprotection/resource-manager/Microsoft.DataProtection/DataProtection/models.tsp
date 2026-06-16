@@ -1181,6 +1181,12 @@ model PatchBackupVaultInput {
   featureSettings?: FeatureSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * ResourceGuardOperationRequests on which LAC check will be performed
    */
   resourceGuardOperationRequests?: string[];
