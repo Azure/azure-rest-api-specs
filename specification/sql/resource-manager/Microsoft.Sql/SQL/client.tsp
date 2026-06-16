@@ -1654,6 +1654,7 @@ union SqlNameAvailabilityResourceType {
   "SnaLu6Point2TransactionsEnabled",
   "csharp"
 );
+// --- Rename operations to match v1.4.0 method names (ApiCompat) ---
 @@clientName(
   DeletedServersOperationGroup.list,
   "GetDeletedServers",
