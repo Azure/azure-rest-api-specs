@@ -2740,17 +2740,11 @@ model LatestGalleryImageVersion {
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
- * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResourceCommunity<
-  Properties extends {},
-  PropertiesOptional extends valueof boolean = true
-> extends PirCommunityGalleryResource {
+model ProxyResourceCommunity<Properties extends {}>
+  extends PirCommunityGalleryResource {
   @doc("The resource-specific properties for this resource.")
   properties?: Properties;
 
@@ -2768,17 +2762,11 @@ model ProxyResourceCommunity<
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
- * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResourceShared<
-  Properties extends {},
-  PropertiesOptional extends valueof boolean = true
-> extends PirSharedGalleryResource {
+model ProxyResourceShared<Properties extends {}>
+  extends PirSharedGalleryResource {
   @doc("The resource-specific properties for this resource.")
   properties?: Properties;
 
