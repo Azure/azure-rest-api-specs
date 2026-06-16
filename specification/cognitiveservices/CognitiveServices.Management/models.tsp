@@ -6555,10 +6555,10 @@ model ManagedComputeCapacityListResult {
 }
 
 /**
- * The type of policy.
+ * The type of network policy.
  */
 @added(Versions.v2026_05_15_preview)
-union PolicyType {
+union NetworkPolicyType {
   string,
 
   /** Egress policy for controlling outbound network traffic from sandboxes. */
@@ -6566,10 +6566,11 @@ union PolicyType {
 }
 
 /**
- * The enforcement mode for a policy.
+ * The enforcement mode for a network policy.
+ * If omitted on create, the server defaults to Enforced.
  */
 @added(Versions.v2026_05_15_preview)
-union PolicyMode {
+union NetworkPolicyMode {
   string,
 
   /** Policy rules are enforced. Matching traffic is allowed or denied per rule actions. */
@@ -6580,10 +6581,10 @@ union PolicyMode {
 }
 
 /**
- * The default action when no policy rules match.
+ * The default action when no user-defined policy rules match.
  */
 @added(Versions.v2026_05_15_preview)
-union PolicyDefaultAction {
+union NetworkPolicyDefaultAction {
   string,
 
   /** Allow traffic by default when no rules match. */
@@ -6594,10 +6595,10 @@ union PolicyDefaultAction {
 }
 
 /**
- * The action to take when a policy rule matches.
+ * The type of action to take when a policy rule matches.
  */
 @added(Versions.v2026_05_15_preview)
-union PolicyRuleAction {
+union NetworkPolicyActionType {
   string,
 
   /** Allow the matched traffic. */
@@ -6606,18 +6607,111 @@ union PolicyRuleAction {
   /** Deny the matched traffic. */
   Deny: "Deny",
 
-  /** Transform the matched traffic (e.g., inject or strip headers). */
+  /** Transform the matched traffic (e.g., inject or strip headers). Requires transformConfig. */
   Transform: "Transform",
 
-  /** Rewrite the matched traffic (e.g., modify request path or host). */
+  /** Rewrite the matched traffic destination. Requires rewriteConfig. */
   Rewrite: "Rewrite",
+}
+
+/**
+ * The operation to perform on a header in a Transform action.
+ */
+@added(Versions.v2026_05_15_preview)
+union NetworkPolicyHeaderOperation {
+  string,
+
+  /** Add the header. If it already exists, the behavior is server-defined (typically append). */
+  Add: "Add",
+
+  /** Remove the header if present. */
+  Remove: "Remove",
+
+  /** Overwrite the header value, creating it if it does not exist. */
+  Overwrite: "Overwrite",
+}
+
+/**
+ * A header modification entry for Transform actions.
+ */
+@added(Versions.v2026_05_15_preview)
+model NetworkPolicyHeaderTransform {
+  /**
+   * The HTTP header name (e.g., "X-Custom-Auth", "Authorization").
+   */
+  name: string;
+
+  /**
+   * The header value. Required for Add and Overwrite operations; omit for Remove.
+   */
+  value?: string;
+
+  /**
+   * The operation to perform on this header.
+   */
+  operation: NetworkPolicyHeaderOperation;
+}
+
+/**
+ * Configuration for Transform actions. Specifies header modifications to apply to matched traffic.
+ */
+@added(Versions.v2026_05_15_preview)
+model NetworkPolicyTransformConfig {
+  /**
+   * List of header modifications to apply.
+   */
+  @identifiers(#["name"])
+  headers: NetworkPolicyHeaderTransform[];
+}
+
+/**
+ * Configuration for Rewrite actions. Specifies how to rewrite the destination of matched traffic.
+ */
+@added(Versions.v2026_05_15_preview)
+model NetworkPolicyRewriteConfig {
+  /**
+   * The target host to rewrite the request destination to.
+   */
+  targetHost?: string;
+
+  /**
+   * The target port to rewrite the request destination to.
+   */
+  targetPort?: int32;
+}
+
+/**
+ * The action configuration for a policy rule. The actionType field determines which
+ * additional configuration properties are required:
+ * - Allow/Deny: no additional config needed.
+ * - Transform: transformConfig is required.
+ * - Rewrite: rewriteConfig is required.
+ */
+@added(Versions.v2026_05_15_preview)
+model NetworkPolicyRuleAction {
+  /**
+   * The type of action to take when this rule matches.
+   */
+  actionType: NetworkPolicyActionType;
+
+  /**
+   * Configuration for Transform actions. Required when actionType is Transform.
+   * Specifies header modifications to apply to matched traffic.
+   */
+  transformConfig?: NetworkPolicyTransformConfig;
+
+  /**
+   * Configuration for Rewrite actions. Required when actionType is Rewrite.
+   * Specifies how to rewrite the destination of matched traffic.
+   */
+  rewriteConfig?: NetworkPolicyRewriteConfig;
 }
 
 /**
  * The type of a policy rule, determining what kind of traffic matching it performs.
  */
 @added(Versions.v2026_05_15_preview)
-union PolicyRuleType {
+union NetworkPolicyRuleType {
   string,
 
   /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
@@ -6626,25 +6720,30 @@ union PolicyRuleType {
 
 /**
  * The match criteria for a policy rule.
+ * If both host and path are omitted, the rule matches all traffic.
+ * Host uses DNS wildcard syntax (e.g., "*.openai.com" matches "api.openai.com").
+ * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
  */
 @added(Versions.v2026_05_15_preview)
-model PolicyRuleMatch {
+model NetworkPolicyRuleMatch {
   /**
-   * Host pattern to match (glob pattern, e.g. "*.openai.com").
+   * Host pattern to match using DNS wildcard syntax (e.g., "*.openai.com").
+   * A leading "*." matches any subdomain. Omit to match all hosts.
    */
   host?: string;
 
   /**
-   * Path pattern to match (glob pattern, e.g. "/v1/*").
+   * Path pattern to match using URI prefix with '*' wildcard (e.g., "/v1/*").
+   * Omit to match all paths.
    */
   path?: string;
 }
 
 /**
- * A single rule within a policy.
+ * A single rule within a network policy.
  */
 @added(Versions.v2026_05_15_preview)
-model PolicyRule {
+model NetworkPolicyRule {
   /**
    * Name of the rule. Must be unique within the policy.
    */
@@ -6658,38 +6757,42 @@ model PolicyRule {
   /**
    * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
    */
-  ruleType?: PolicyRuleType;
+  ruleType?: NetworkPolicyRuleType;
 
   /**
    * The match criteria for this rule.
    */
-  match?: PolicyRuleMatch;
+  match?: NetworkPolicyRuleMatch;
 
   /**
-   * The action to take when this rule matches.
+   * The action configuration for this rule, including the action type and any
+   * type-specific configuration (e.g., transformConfig, rewriteConfig).
    */
-  action?: PolicyRuleAction;
+  action?: NetworkPolicyRuleAction;
 }
 
 /**
- * Properties of a Cognitive Services Policy resource.
+ * Properties of a Cognitive Services Network Policy resource.
  */
 @added(Versions.v2026_05_15_preview)
-model PolicyProperties {
+model NetworkPolicyProperties {
   /**
    * The type of policy.
    */
-  policyType?: PolicyType;
+  policyType?: NetworkPolicyType;
 
   /**
-   * The enforcement mode for this policy. Defaults to Enforced.
+   * The enforcement mode for this policy.
+   * If omitted on create, the server defaults to Enforced. On subsequent GET
+   * requests, the server always returns the effective mode.
    */
-  mode?: PolicyMode;
+  mode?: NetworkPolicyMode;
 
   /**
-   * The default action when no rules match.
+   * The default action when no user-defined rules match. This is security-critical:
+   * Allow means unmatched traffic is permitted; Deny means it is blocked.
    */
-  defaultAction?: PolicyDefaultAction;
+  defaultAction: NetworkPolicyDefaultAction;
 
   /**
    * Description of the policy.
@@ -6697,10 +6800,20 @@ model PolicyProperties {
   description?: string;
 
   /**
-   * Ordered list of policy rules. First matching rule wins.
+   * Ordered list of user-defined policy rules. First matching rule wins.
    */
   @identifiers(#["name"])
-  rules?: PolicyRule[];
+  rules?: NetworkPolicyRule[];
+
+  /**
+   * Read-only list of system-managed rules that ensure Azure infrastructure
+   * connectivity (e.g., storage, authentication, monitoring endpoints).
+   * These rules are always enforced regardless of user-defined rules and
+   * cannot be modified or removed by users.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  systemRules?: NetworkPolicyRule[];
 
   /**
    * The provisioning state of the policy resource.
@@ -6710,19 +6823,19 @@ model PolicyProperties {
 }
 
 /**
- * A paginated list of Policy resources.
+ * A paginated list of Network Policy resources.
  */
 @added(Versions.v2026_05_15_preview)
-model PolicyListResult {
+model NetworkPolicyListResult {
   /**
-   * The link to the next page of Policy objects.
+   * The link to the next page of Network Policy objects.
    */
   @nextLink
   nextLink?: string;
 
   /**
-   * The list of Policy resources.
+   * The list of Network Policy resources.
    */
   @pageItems
-  value?: PolicyResource[];
+  value?: NetworkPolicyResource[];
 }

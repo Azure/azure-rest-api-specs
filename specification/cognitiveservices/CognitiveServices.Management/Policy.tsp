@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
-import "./Project.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -16,19 +15,19 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * Policy resource for controlling sandbox traffic at the account level.
+ * Network Policy resource for controlling sandbox traffic at the account level.
  * Account-level policies are shared across all projects, aligning with
  * RAI policies and networking which are also account-scoped.
  */
 @added(Versions.v2026_05_15_preview)
 @parentResource(Account)
-model PolicyResource
-  is Azure.ResourceManager.ProxyResource<PolicyProperties, false> {
+model NetworkPolicyResource
+  is Azure.ResourceManager.ProxyResource<NetworkPolicyProperties, false> {
   ...ResourceNameParameter<
-    Resource = PolicyResource,
-    KeyName = "policyName",
-    SegmentName = "policies",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    Resource = NetworkPolicyResource,
+    KeyName = "networkPolicyName",
+    SegmentName = "networkPolicies",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
   >;
 }
 
@@ -36,7 +35,7 @@ model PolicyResource
 
 @added(Versions.v2026_05_15_preview)
 @armResourceOperations
-interface AccountPolicyOps
+interface AccountNetworkPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -54,65 +53,71 @@ interface AccountPolicyOps
         accountName: string,
       },
       {
-        /** The name of the policy. */
+        /** The name of the network policy. */
         @path
-        @segment("policies")
+        @segment("networkPolicies")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
-        policyName: string,
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$")
+        networkPolicyName: string,
       },
-      ResourceName = "CognitiveServicesAccountPolicy"
+      ResourceName = "CognitiveServicesAccountNetworkPolicy"
     > {}
 
 @added(Versions.v2026_05_15_preview)
 @armResourceOperations(#{ omitTags: true })
-interface AccountPolicies {
+interface AccountNetworkPolicies {
   /**
-   * Gets the specified policy associated with the Cognitive Services account.
+   * Gets the specified network policy associated with the Cognitive Services account.
    */
-  @tag("AccountPolicyResource")
-  get is AccountPolicyOps.Read<PolicyResource>;
+  @tag("AccountNetworkPolicyResource")
+  get is AccountNetworkPolicyOps.Read<NetworkPolicyResource>;
 
   /**
-   * Creates or updates a policy under the specified Cognitive Services account.
+   * Creates or updates a network policy under the specified Cognitive Services account.
    */
-  @tag("AccountPolicyResource")
-  createOrUpdate is AccountPolicyOps.CreateOrUpdateSync<PolicyResource>;
+  @tag("AccountNetworkPolicyResource")
+  createOrUpdate is AccountNetworkPolicyOps.CreateOrUpdateSync<NetworkPolicyResource>;
 
   /**
-   * Deletes the specified policy from the Cognitive Services account.
+   * Deletes the specified network policy from the Cognitive Services account.
    */
-  @tag("AccountPolicyResource")
-  delete is AccountPolicyOps.DeleteSync<PolicyResource>;
+  @tag("AccountNetworkPolicyResource")
+  delete is AccountNetworkPolicyOps.DeleteSync<NetworkPolicyResource>;
 
   /**
-   * Lists all policies under the specified Cognitive Services account.
+   * Lists all network policies under the specified Cognitive Services account.
    */
-  @tag("AccountPolicyResource")
-  list is AccountPolicyOps.List<PolicyResource, Response = PolicyListResult>;
+  @tag("AccountNetworkPolicyResource")
+  list is AccountNetworkPolicyOps.List<
+    NetworkPolicyResource,
+    Response = NetworkPolicyListResult
+  >;
 }
 
 // --- Documentation annotations ---
 
-@@doc(PolicyResource.name, "The name of the policy.");
-@@doc(PolicyResource.properties, "Properties of the policy resource.");
+@@doc(NetworkPolicyResource.name, "The name of the network policy.");
 @@doc(
-  AccountPolicies.createOrUpdate::parameters.resource,
-  "The policy resource to create or update."
+  NetworkPolicyResource.properties,
+  "Properties of the network policy resource."
+);
+@@doc(
+  AccountNetworkPolicies.createOrUpdate::parameters.resource,
+  "The network policy resource to create or update."
 );
 @@summary(
-  AccountPolicies.list,
-  "Lists all policies under the specified Cognitive Services account."
+  AccountNetworkPolicies.list,
+  "Lists all network policies under the specified Cognitive Services account."
 );
 @@summary(
-  AccountPolicies.get,
-  "Gets the specified policy associated with the Cognitive Services account."
+  AccountNetworkPolicies.get,
+  "Gets the specified network policy associated with the Cognitive Services account."
 );
 @@summary(
-  AccountPolicies.createOrUpdate,
-  "Creates or updates a policy under the specified Cognitive Services account."
+  AccountNetworkPolicies.createOrUpdate,
+  "Creates or updates a network policy under the specified Cognitive Services account."
 );
 @@summary(
-  AccountPolicies.delete,
-  "Deletes the specified policy from the Cognitive Services account."
+  AccountNetworkPolicies.delete,
+  "Deletes the specified network policy from the Cognitive Services account."
 );

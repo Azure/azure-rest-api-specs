@@ -1,6 +1,6 @@
 {
-  "operationId": "AccountPolicies_List",
-  "title": "List Account Policies",
+  "operationId": "AccountNetworkPolicies_List",
+  "title": "List Account Network Policies",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
@@ -12,9 +12,9 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/policies/corporate-baseline",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/networkPolicies/corporate-baseline",
             "name": "corporate-baseline",
-            "type": "Microsoft.CognitiveServices/accounts/policies",
+            "type": "Microsoft.CognitiveServices/accounts/networkPolicies",
             "properties": {
               "policyType": "Egress",
               "mode": "Enforced",
@@ -28,7 +28,22 @@
                   "match": {
                     "host": "*.openai.com"
                   },
-                  "action": "Allow"
+                  "action": {
+                    "actionType": "Allow"
+                  }
+                }
+              ],
+              "systemRules": [
+                {
+                  "name": "system-allow-azure-storage",
+                  "description": "Allow Azure Storage for infrastructure operations",
+                  "ruleType": "Fqdn",
+                  "match": {
+                    "host": "*.blob.core.windows.net"
+                  },
+                  "action": {
+                    "actionType": "Allow"
+                  }
                 }
               ]
             }
