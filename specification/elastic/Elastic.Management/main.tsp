@@ -18,6 +18,7 @@ import "./MonitoredSubscriptionProperties.tsp";
 import "./OpenAIIntegrationRPModel.tsp";
 import "./MonitoringTagRules.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
