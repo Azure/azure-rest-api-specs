@@ -11,7 +11,7 @@ const execFileImpl = promisify(child_process.execFile);
 
 /**
  * @typedef {Object} NpmPrefixOptions
- * @property {string} [prefix] Prefix to pass to npm via "--prefix".
+ * @property {string} [prefix] Prefix to pass to pnpm via "--prefix".
  */
 
 /**
@@ -80,7 +80,7 @@ export async function execFile(file, args, options = {}) {
 }
 
 /**
- * Calls `execFile()` with appropriate arguments to run `npm` on all platforms
+ * Calls `execFile()` with appropriate arguments to run `pnpm` on all platforms
  *
  * @param {string[]} args
  * @param {ExecNpmOptions} [options]
@@ -96,12 +96,16 @@ export async function execNpm(args, options = {}) {
   logger?.info(`execNpm(${JSON.stringify(allArgs)})`);
 
   try {
-    // Use shell: true to support pnpm on all platforms (on Windows, pnpm is typically
-    // installed as pnpm.cmd which requires shell to resolve)
-    const result = await execFileImpl("pnpm", allArgs, {
+    const isWindows = process.platform === "win32";
+
+    // On Windows, pnpm is installed as the "pnpm.cmd" batch shim, which can only be
+    // launched through a shell: since the fix for CVE-2024-27980, Node refuses to
+    // spawn .cmd/.bat files unless shell is enabled. On other platforms, call the
+    // "pnpm" binary directly with shell disabled to avoid shell quoting/parsing risks.
+    const result = await execFileImpl(isWindows ? "pnpm.cmd" : "pnpm", allArgs, {
       cwd,
       maxBuffer,
-      shell: process.platform === "win32",
+      shell: isWindows,
     });
 
     logger?.debug(`stdout: '${result.stdout}'`);

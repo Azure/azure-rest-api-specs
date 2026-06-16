@@ -24,8 +24,8 @@ position in an array changes, the error will not correlate and may be reported.
 1. Setup `before` folder state - Clone the specs repo at the _base commit_ for the changes you want to test. (generally cloned to main and in a temp location like `/tmp/rest-api-specs-before`)
 1. Setup `after` folder state - Clone the specs repo at the commit for the changes you want to test in a different folder.
 1. Build a list of changed files from `after` generally by running `git diff --name-only <base> > changed-files.txt` in the `after` folder.
-1. From the root of the repo run `npm ci` to install dependencies.
-1. Run `npm exec --no -- lint-diff --before <before-path> --after <after-path> --changed-files <changed-files.txt>`
+1. From the root of the repo run `pnpm install` to install dependencies.
+1. Run `pnpm exec lint-diff --before <before-path> --after <after-path> --changed-files <changed-files.txt>`
 
 ### Example
 
@@ -40,8 +40,8 @@ git clone https://github.com/Azure/azure-rest-api-specs.git /tmp/rest-api-specs-
 # Diff the current repo (after state) against the base commit
 git diff --name-only main > changed-files.txt
 
-npm ci
-npm exec --no -- lint-diff --before /tmp/rest-api-specs-before --after . --changed-files changed-files.txt
+pnpm install
+pnpm exec lint-diff --before /tmp/rest-api-specs-before --after . --changed-files changed-files.txt
 ```
 
 ## Output
