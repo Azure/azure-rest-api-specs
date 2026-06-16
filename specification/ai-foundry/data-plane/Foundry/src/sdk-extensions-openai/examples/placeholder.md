@@ -1,1 +1,0 @@
-This file is just a placeholder, the `sdk-projects-openai` directory only contains client library customizations.
