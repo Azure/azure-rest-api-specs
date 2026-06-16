@@ -489,6 +489,8 @@ namespace Customization;
   "Endpoint",
   "csharp"
 );
+@@alternateType(EventSubscriptionFullUrl.endpointUrl, url, "csharp");
+@@clientName(EventSubscriptionFullUrl.endpointUrl, "Endpoint", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(Domain.properties, "csharp");
