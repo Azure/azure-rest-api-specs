@@ -1,0 +1,268 @@
+{
+  "operationId": "AccountAgentGuardrails_CreateOrUpdate",
+  "title": "Create or Update Account Agent Guardrails Policy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "agentGuardrailsName": "corporate-baseline",
+    "api-version": "2026-05-15-preview",
+    "resource": {
+      "properties": {
+        "policyType": "Egress",
+        "mode": "Enforced",
+        "defaultAction": "Deny",
+        "description": "Corporate baseline egress policy shared across all projects",
+        "rules": [
+          {
+            "name": "allow-openai",
+            "description": "Allow traffic to OpenAI API",
+            "ruleType": "Fqdn",
+            "match": {
+              "host": "*.openai.com"
+            },
+            "action": {
+              "actionType": "Allow"
+            }
+          },
+          {
+            "name": "inject-openai-key",
+            "description": "Inject a bearer token from a stored secret for OpenAI requests",
+            "ruleType": "Fqdn",
+            "match": {
+              "host": "*.openai.com",
+              "path": "/v1/*"
+            },
+            "action": {
+              "actionType": "Transform",
+              "headers": [
+                {
+                  "operation": "Set",
+                  "name": "Authorization",
+                  "valueRef": {
+                    "secretRef": {
+                      "secretId": "openai-key",
+                      "format": "Bearer {value}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "rewrite-to-foundry",
+            "description": "Redirect gateway address to the real Foundry backend and inject a managed identity token",
+            "ruleType": "Fqdn",
+            "match": {
+              "host": "100.64.100.64",
+              "path": "/api/*"
+            },
+            "action": {
+              "actionType": "Rewrite",
+              "rewrite": {
+                "scheme": "https",
+                "host": "myaccount.services.ai.azure.com"
+              },
+              "headers": [
+                {
+                  "operation": "Set",
+                  "name": "x-foundry-run-token",
+                  "valueRef": {
+                    "managedIdentityRef": {
+                      "resource": "https://ai.azure.com",
+                      "format": "Bearer {value}"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/agentGuardrails/corporate-baseline",
+        "name": "corporate-baseline",
+        "type": "Microsoft.CognitiveServices/accounts/agentGuardrails",
+        "properties": {
+          "policyType": "Egress",
+          "mode": "Enforced",
+          "defaultAction": "Deny",
+          "description": "Corporate baseline egress policy shared across all projects",
+          "rules": [
+            {
+              "name": "allow-openai",
+              "description": "Allow traffic to OpenAI API",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.openai.com"
+              },
+              "action": {
+                "actionType": "Allow"
+              }
+            },
+            {
+              "name": "inject-openai-key",
+              "description": "Inject a bearer token from a stored secret for OpenAI requests",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.openai.com",
+                "path": "/v1/*"
+              },
+              "action": {
+                "actionType": "Transform",
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "Authorization",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "openai-key",
+                        "format": "Bearer {value}"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "rewrite-to-foundry",
+              "description": "Redirect gateway address to the real Foundry backend and inject a managed identity token",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "100.64.100.64",
+                "path": "/api/*"
+              },
+              "action": {
+                "actionType": "Rewrite",
+                "rewrite": {
+                  "scheme": "https",
+                  "host": "myaccount.services.ai.azure.com"
+                },
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "x-foundry-run-token",
+                    "valueRef": {
+                      "managedIdentityRef": {
+                        "resource": "https://ai.azure.com",
+                        "format": "Bearer {value}"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "systemRules": [
+            {
+              "name": "system-allow-azure-storage",
+              "description": "Allow Azure Storage for infrastructure operations",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.blob.core.windows.net"
+              },
+              "action": {
+                "actionType": "Allow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/agentGuardrails/corporate-baseline",
+        "name": "corporate-baseline",
+        "type": "Microsoft.CognitiveServices/accounts/agentGuardrails",
+        "properties": {
+          "policyType": "Egress",
+          "mode": "Enforced",
+          "defaultAction": "Deny",
+          "description": "Corporate baseline egress policy shared across all projects",
+          "rules": [
+            {
+              "name": "allow-openai",
+              "description": "Allow traffic to OpenAI API",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.openai.com"
+              },
+              "action": {
+                "actionType": "Allow"
+              }
+            },
+            {
+              "name": "inject-openai-key",
+              "description": "Inject a bearer token from a stored secret for OpenAI requests",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.openai.com",
+                "path": "/v1/*"
+              },
+              "action": {
+                "actionType": "Transform",
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "Authorization",
+                    "valueRef": {
+                      "secretRef": {
+                        "secretId": "openai-key",
+                        "format": "Bearer {value}"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "rewrite-to-foundry",
+              "description": "Redirect gateway address to the real Foundry backend and inject a managed identity token",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "100.64.100.64",
+                "path": "/api/*"
+              },
+              "action": {
+                "actionType": "Rewrite",
+                "rewrite": {
+                  "scheme": "https",
+                  "host": "myaccount.services.ai.azure.com"
+                },
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "x-foundry-run-token",
+                    "valueRef": {
+                      "managedIdentityRef": {
+                        "resource": "https://ai.azure.com",
+                        "format": "Bearer {value}"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "systemRules": [
+            {
+              "name": "system-allow-azure-storage",
+              "description": "Allow Azure Storage for infrastructure operations",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "*.blob.core.windows.net"
+              },
+              "action": {
+                "actionType": "Allow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

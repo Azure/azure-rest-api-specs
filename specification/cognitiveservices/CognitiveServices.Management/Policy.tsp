@@ -15,18 +15,18 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * Network Policy resource for controlling sandbox traffic at the account level.
+ * Agent Guardrails resource for controlling sandbox traffic at the account level.
  * Account-level policies are shared across all projects, aligning with
  * RAI policies and networking which are also account-scoped.
  */
 @added(Versions.v2026_05_15_preview)
 @parentResource(Account)
-model NetworkPolicyResource
-  is Azure.ResourceManager.ProxyResource<NetworkPolicyProperties, false> {
+model AgentGuardrailsResource
+  is Azure.ResourceManager.ProxyResource<AgentGuardrailsProperties, false> {
   ...ResourceNameParameter<
-    Resource = NetworkPolicyResource,
-    KeyName = "networkPolicyName",
-    SegmentName = "networkPolicies",
+    Resource = AgentGuardrailsResource,
+    KeyName = "agentGuardrailsName",
+    SegmentName = "agentGuardrails",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$"
   >;
 }
@@ -35,7 +35,7 @@ model NetworkPolicyResource
 
 @added(Versions.v2026_05_15_preview)
 @armResourceOperations
-interface AccountNetworkPolicyOps
+interface AccountAgentGuardrailsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -53,71 +53,71 @@ interface AccountNetworkPolicyOps
         accountName: string,
       },
       {
-        /** The name of the network policy. */
+        /** The name of the agent guardrails policy. */
         @path
-        @segment("networkPolicies")
+        @segment("agentGuardrails")
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,62}$")
-        networkPolicyName: string,
+        agentGuardrailsName: string,
       },
-      ResourceName = "CognitiveServicesAccountNetworkPolicy"
+      ResourceName = "CognitiveServicesAccountAgentGuardrails"
     > {}
 
 @added(Versions.v2026_05_15_preview)
 @armResourceOperations(#{ omitTags: true })
-interface AccountNetworkPolicies {
+interface AccountAgentGuardrails {
   /**
-   * Gets the specified network policy associated with the Cognitive Services account.
+   * Gets the specified agent guardrails policy associated with the Cognitive Services account.
    */
-  @tag("AccountNetworkPolicyResource")
-  get is AccountNetworkPolicyOps.Read<NetworkPolicyResource>;
+  @tag("AccountAgentGuardrailsResource")
+  get is AccountAgentGuardrailsOps.Read<AgentGuardrailsResource>;
 
   /**
-   * Creates or updates a network policy under the specified Cognitive Services account.
+   * Creates or updates an agent guardrails policy under the specified Cognitive Services account.
    */
-  @tag("AccountNetworkPolicyResource")
-  createOrUpdate is AccountNetworkPolicyOps.CreateOrUpdateSync<NetworkPolicyResource>;
+  @tag("AccountAgentGuardrailsResource")
+  createOrUpdate is AccountAgentGuardrailsOps.CreateOrUpdateSync<AgentGuardrailsResource>;
 
   /**
-   * Deletes the specified network policy from the Cognitive Services account.
+   * Deletes the specified agent guardrails policy from the Cognitive Services account.
    */
-  @tag("AccountNetworkPolicyResource")
-  delete is AccountNetworkPolicyOps.DeleteSync<NetworkPolicyResource>;
+  @tag("AccountAgentGuardrailsResource")
+  delete is AccountAgentGuardrailsOps.DeleteSync<AgentGuardrailsResource>;
 
   /**
-   * Lists all network policies under the specified Cognitive Services account.
+   * Lists all agent guardrails policies under the specified Cognitive Services account.
    */
-  @tag("AccountNetworkPolicyResource")
-  list is AccountNetworkPolicyOps.List<
-    NetworkPolicyResource,
-    Response = NetworkPolicyListResult
+  @tag("AccountAgentGuardrailsResource")
+  list is AccountAgentGuardrailsOps.List<
+    AgentGuardrailsResource,
+    Response = AgentGuardrailsListResult
   >;
 }
 
 // --- Documentation annotations ---
 
-@@doc(NetworkPolicyResource.name, "The name of the network policy.");
+@@doc(AgentGuardrailsResource.name, "The name of the agent guardrails policy.");
 @@doc(
-  NetworkPolicyResource.properties,
-  "Properties of the network policy resource."
+  AgentGuardrailsResource.properties,
+  "Properties of the agent guardrails policy resource."
 );
 @@doc(
-  AccountNetworkPolicies.createOrUpdate::parameters.resource,
-  "The network policy resource to create or update."
+  AccountAgentGuardrails.createOrUpdate::parameters.resource,
+  "The agent guardrails policy resource to create or update."
 );
 @@summary(
-  AccountNetworkPolicies.list,
-  "Lists all network policies under the specified Cognitive Services account."
+  AccountAgentGuardrails.list,
+  "Lists all agent guardrails policies under the specified Cognitive Services account."
 );
 @@summary(
-  AccountNetworkPolicies.get,
-  "Gets the specified network policy associated with the Cognitive Services account."
+  AccountAgentGuardrails.get,
+  "Gets the specified agent guardrails policy associated with the Cognitive Services account."
 );
 @@summary(
-  AccountNetworkPolicies.createOrUpdate,
-  "Creates or updates a network policy under the specified Cognitive Services account."
+  AccountAgentGuardrails.createOrUpdate,
+  "Creates or updates an agent guardrails policy under the specified Cognitive Services account."
 );
 @@summary(
-  AccountNetworkPolicies.delete,
-  "Deletes the specified network policy from the Cognitive Services account."
+  AccountAgentGuardrails.delete,
+  "Deletes the specified agent guardrails policy from the Cognitive Services account."
 );

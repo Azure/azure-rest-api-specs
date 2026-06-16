@@ -6555,10 +6555,10 @@ model ManagedComputeCapacityListResult {
 }
 
 /**
- * The type of network policy.
+ * The type of agent guardrails policy.
  */
 @added(Versions.v2026_05_15_preview)
-union NetworkPolicyType {
+union AgentGuardrailsType {
   string,
 
   /** Egress policy for controlling outbound network traffic from sandboxes. */
@@ -6566,17 +6566,21 @@ union NetworkPolicyType {
 }
 
 /**
- * The enforcement mode for a network policy.
+ * The enforcement mode for an agent guardrails policy.
  * If omitted on create, the server defaults to Enforced.
  */
 @added(Versions.v2026_05_15_preview)
-union NetworkPolicyMode {
+union AgentGuardrailsMode {
   string,
 
   /** Policy rules are enforced. Matching traffic is allowed or denied per rule actions. */
   Enforced: "Enforced",
 
-  /** Policy rules are evaluated and logged but not enforced. All traffic is allowed regardless of rule actions. */
+  /**
+   * Policy rules are evaluated and logged. A would-be Deny is logged but not blocked — the request is
+   * forwarded — so a customer can preview what a policy would reject without breaking traffic. Allow,
+   * Transform, and Rewrite are applied exactly as in Enforced.
+   */
   Audit: "Audit",
 }
 
@@ -6584,7 +6588,7 @@ union NetworkPolicyMode {
  * The default action when no user-defined policy rules match.
  */
 @added(Versions.v2026_05_15_preview)
-union NetworkPolicyDefaultAction {
+union AgentGuardrailsDefaultAction {
   string,
 
   /** Allow traffic by default when no rules match. */
@@ -6595,10 +6599,10 @@ union NetworkPolicyDefaultAction {
 }
 
 /**
- * The type of action to take when a policy rule matches.
+ * The kind of action a policy rule takes when it matches.
  */
 @added(Versions.v2026_05_15_preview)
-union NetworkPolicyActionType {
+union AgentGuardrailsActionType {
   string,
 
   /** Allow the matched traffic. */
@@ -6607,111 +6611,161 @@ union NetworkPolicyActionType {
   /** Deny the matched traffic. */
   Deny: "Deny",
 
-  /** Transform the matched traffic (e.g., inject or strip headers). Requires transformConfig. */
+  /** Forward the matched traffic after applying header transforms. Requires at least one header. */
   Transform: "Transform",
 
-  /** Rewrite the matched traffic destination. Requires rewriteConfig. */
+  /** Redirect the matched traffic to a new destination, optionally applying header transforms. Requires a rewrite target. */
   Rewrite: "Rewrite",
 }
 
 /**
- * The operation to perform on a header in a Transform action.
+ * The operation to apply to a header in a Transform or Rewrite action.
  */
 @added(Versions.v2026_05_15_preview)
-union NetworkPolicyHeaderOperation {
+union AgentGuardrailsHeaderOperation {
   string,
 
-  /** Add the header. If it already exists, the behavior is server-defined (typically append). */
-  Add: "Add",
+  /** Set or overwrite the header value, creating it if it does not exist. */
+  Set: "Set",
+
+  /** Add the header only if it isn't already present. */
+  Insert: "Insert",
 
   /** Remove the header if present. */
   Remove: "Remove",
-
-  /** Overwrite the header value, creating it if it does not exist. */
-  Overwrite: "Overwrite",
 }
 
 /**
- * A header modification entry for Transform actions.
+ * The managed identity type used to resolve a header value from a token.
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyHeaderTransform {
-  /**
-   * The HTTP header name (e.g., "X-Custom-Auth", "Authorization").
-   */
+union AgentGuardrailsManagedIdentityType {
+  string,
+
+  /** The sandbox's system-assigned managed identity. */
+  SystemAssigned: "SystemAssigned",
+
+  /** A user-assigned managed identity. When selected, identityResourceId is required. */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * A reference to a stored secret used as a header value.
+ */
+@added(Versions.v2026_05_15_preview)
+model AgentGuardrailsSecretRef {
+  /** Identifier of the secret to inject. */
+  secretId: string;
+
+  /** Optional key within the secret. */
+  secretKey?: string;
+
+  /** Optional format for the resolved value; "{value}" is the placeholder, e.g. "Bearer {value}". */
+  format?: string;
+}
+
+/**
+ * A reference to a managed-identity token used as a header value.
+ */
+@added(Versions.v2026_05_15_preview)
+model AgentGuardrailsManagedIdentityRef {
+  /** The resource/audience the token is requested for. */
+  resource: string;
+
+  /** Optional format for the resolved token; "{value}" is the placeholder, e.g. "Bearer {value}". */
+  format?: string;
+
+  /** Which managed identity to use. Defaults to SystemAssigned if omitted. */
+  type?: AgentGuardrailsManagedIdentityType;
+
+  /** Resource ID of the user-assigned identity. Required when type is UserAssigned. */
+  identityResourceId?: string;
+}
+
+/**
+ * A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.
+ */
+@added(Versions.v2026_05_15_preview)
+model AgentGuardrailsHeaderValueRef {
+  /** Resolve the value from a stored secret. */
+  secretRef?: AgentGuardrailsSecretRef;
+
+  /** Resolve the value from a managed-identity token. */
+  managedIdentityRef?: AgentGuardrailsManagedIdentityRef;
+}
+
+/**
+ * A header transformation applied to matched traffic.
+ * For Set or Insert operations, exactly one of value or valueRef must be provided.
+ * For Remove operations, neither value nor valueRef should be set.
+ */
+@added(Versions.v2026_05_15_preview)
+model AgentGuardrailsHeaderTransform {
+  /** The operation to perform on this header. */
+  operation: AgentGuardrailsHeaderOperation;
+
+  /** The HTTP header name (e.g., "Authorization", "X-Custom-Auth"). */
   name: string;
 
   /**
-   * The header value. Required for Add and Overwrite operations; omit for Remove.
+   * A static header value. Write-only: accepted on create/update, never returned on read.
+   * If omitted on update, the existing value is preserved. Use this for non-sensitive values;
+   * for credentials, use valueRef instead.
    */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   value?: string;
 
-  /**
-   * The operation to perform on this header.
-   */
-  operation: NetworkPolicyHeaderOperation;
+  /** A dynamic header value resolved at request time from a secret or managed identity. */
+  valueRef?: AgentGuardrailsHeaderValueRef;
 }
 
 /**
- * Configuration for Transform actions. Specifies header modifications to apply to matched traffic.
+ * Where a Rewrite action sends matched traffic. At least one field must be set.
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyTransformConfig {
-  /**
-   * List of header modifications to apply.
-   */
-  @identifiers(#["name"])
-  headers: NetworkPolicyHeaderTransform[];
-}
+model AgentGuardrailsRewriteTarget {
+  /** Target scheme ("http" or "https"). Original scheme is kept if omitted. */
+  scheme?: string;
 
-/**
- * Configuration for Rewrite actions. Specifies how to rewrite the destination of matched traffic.
- */
-@added(Versions.v2026_05_15_preview)
-model NetworkPolicyRewriteConfig {
-  /**
-   * The target host to rewrite the request destination to.
-   */
-  targetHost?: string;
+  /** Target host. Original host is kept if omitted. */
+  host?: string;
 
-  /**
-   * The target port to rewrite the request destination to.
-   */
+  /** Target path. Original path (and query) is kept if omitted. */
+  path?: string;
+
+  /** Target port. Original port is kept if omitted. */
   targetPort?: int32;
 }
 
 /**
- * The action configuration for a policy rule. The actionType field determines which
- * additional configuration properties are required:
- * - Allow/Deny: no additional config needed.
- * - Transform: transformConfig is required.
- * - Rewrite: rewriteConfig is required.
+ * The action a policy rule takes when it matches.
+ * - Allow/Deny: no additional fields needed; headers and rewrite must not be set.
+ * - Transform: headers is required with at least one entry; rewrite must not be set.
+ * - Rewrite: rewrite is required with at least one of scheme/host/path/targetPort;
+ *   headers is optional for injecting headers alongside the redirect.
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyRuleAction {
-  /**
-   * The type of action to take when this rule matches.
-   */
-  actionType: NetworkPolicyActionType;
+model AgentGuardrailsRuleAction {
+  /** The kind of action. */
+  actionType: AgentGuardrailsActionType;
 
   /**
-   * Configuration for Transform actions. Required when actionType is Transform.
-   * Specifies header modifications to apply to matched traffic.
+   * Header transforms to apply. Required for Transform; optional for Rewrite;
+   * not allowed for Allow or Deny.
    */
-  transformConfig?: NetworkPolicyTransformConfig;
+  @identifiers(#["name"])
+  headers?: AgentGuardrailsHeaderTransform[];
 
-  /**
-   * Configuration for Rewrite actions. Required when actionType is Rewrite.
-   * Specifies how to rewrite the destination of matched traffic.
-   */
-  rewriteConfig?: NetworkPolicyRewriteConfig;
+  /** Destination override. Required for Rewrite; not allowed otherwise. */
+  rewrite?: AgentGuardrailsRewriteTarget;
 }
 
 /**
  * The type of a policy rule, determining what kind of traffic matching it performs.
  */
 @added(Versions.v2026_05_15_preview)
-union NetworkPolicyRuleType {
+union AgentGuardrailsRuleType {
   string,
 
   /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
@@ -6725,7 +6779,7 @@ union NetworkPolicyRuleType {
  * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyRuleMatch {
+model AgentGuardrailsRuleMatch {
   /**
    * Host pattern to match using DNS wildcard syntax (e.g., "*.openai.com").
    * A leading "*." matches any subdomain. Omit to match all hosts.
@@ -6740,10 +6794,10 @@ model NetworkPolicyRuleMatch {
 }
 
 /**
- * A single rule within a network policy.
+ * A single rule within an agent guardrails policy.
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyRule {
+model AgentGuardrailsRule {
   /**
    * Name of the rule. Must be unique within the policy.
    */
@@ -6757,42 +6811,42 @@ model NetworkPolicyRule {
   /**
    * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
    */
-  ruleType?: NetworkPolicyRuleType;
+  ruleType?: AgentGuardrailsRuleType;
 
   /**
    * The match criteria for this rule.
    */
-  match?: NetworkPolicyRuleMatch;
+  match?: AgentGuardrailsRuleMatch;
 
   /**
-   * The action configuration for this rule, including the action type and any
-   * type-specific configuration (e.g., transformConfig, rewriteConfig).
+   * The action to take when this rule matches, including the action type and any
+   * type-specific configuration (headers for Transform, rewrite target for Rewrite).
    */
-  action?: NetworkPolicyRuleAction;
+  action?: AgentGuardrailsRuleAction;
 }
 
 /**
- * Properties of a Cognitive Services Network Policy resource.
+ * Properties of a Cognitive Services Agent Guardrails resource.
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyProperties {
+model AgentGuardrailsProperties {
   /**
    * The type of policy.
    */
-  policyType?: NetworkPolicyType;
+  policyType?: AgentGuardrailsType;
 
   /**
    * The enforcement mode for this policy.
    * If omitted on create, the server defaults to Enforced. On subsequent GET
    * requests, the server always returns the effective mode.
    */
-  mode?: NetworkPolicyMode;
+  mode?: AgentGuardrailsMode;
 
   /**
    * The default action when no user-defined rules match. This is security-critical:
    * Allow means unmatched traffic is permitted; Deny means it is blocked.
    */
-  defaultAction: NetworkPolicyDefaultAction;
+  defaultAction: AgentGuardrailsDefaultAction;
 
   /**
    * Description of the policy.
@@ -6803,7 +6857,7 @@ model NetworkPolicyProperties {
    * Ordered list of user-defined policy rules. First matching rule wins.
    */
   @identifiers(#["name"])
-  rules?: NetworkPolicyRule[];
+  rules?: AgentGuardrailsRule[];
 
   /**
    * Read-only list of system-managed rules that ensure Azure infrastructure
@@ -6813,7 +6867,7 @@ model NetworkPolicyProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
-  systemRules?: NetworkPolicyRule[];
+  systemRules?: AgentGuardrailsRule[];
 
   /**
    * The provisioning state of the policy resource.
@@ -6823,19 +6877,19 @@ model NetworkPolicyProperties {
 }
 
 /**
- * A paginated list of Network Policy resources.
+ * A paginated list of Agent Guardrails resources.
  */
 @added(Versions.v2026_05_15_preview)
-model NetworkPolicyListResult {
+model AgentGuardrailsListResult {
   /**
-   * The link to the next page of Network Policy objects.
+   * The link to the next page of Agent Guardrails objects.
    */
   @nextLink
   nextLink?: string;
 
   /**
-   * The list of Network Policy resources.
+   * The list of Agent Guardrails resources.
    */
   @pageItems
-  value?: NetworkPolicyResource[];
+  value?: AgentGuardrailsResource[];
 }
