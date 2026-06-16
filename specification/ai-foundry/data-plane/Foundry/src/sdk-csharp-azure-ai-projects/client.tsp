@@ -1,4 +1,5 @@
 import "../common/service.tsp";
+import "../sdk-common/error.default.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -70,14 +71,12 @@ namespace Azure.AI.Projects;
 @@clientName(Index, "AIProjectIndex", "csharp");
 @@clientName(CosmosDBIndex, "AIProjectCosmosDBIndex", "csharp");
 @@clientName(BaseCredentials, "AIProjectConnectionBaseCredential", "csharp");
-@@clientName(
-  ApiKeyCredentials,
+@@clientName(ApiKeyCredentials,
   "AIProjectConnectionApiKeyCredential",
   "csharp"
 );
 @@clientName(CustomCredential, "AIProjectConnectionCustomCredential", "csharp");
-@@clientName(
-  EntraIDCredentials,
+@@clientName(EntraIDCredentials,
   "AIProjectConnectionEntraIdCredential",
   "csharp"
 );
@@ -98,8 +97,7 @@ namespace Azure.AI.Projects;
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Connections.get, "getConnection", "csharp");
-@@clientName(
-  Connections.getWithCredentials,
+@@clientName(Connections.getWithCredentials,
   "getConnectionWithCredentials",
   "csharp"
 );
@@ -119,8 +117,7 @@ namespace Azure.AI.Projects;
 @@access(Connections.getWithCredentials, Access.internal);
 
 // The fix for ambiguous import of OperationState
-@@clientName(
-  Azure.Core.Foundations.OperationState,
+@@clientName(Azure.Core.Foundations.OperationState,
   "operationStatus",
   "csharp"
 );
@@ -129,8 +126,7 @@ namespace Azure.AI.Projects;
 
 @@clientName(AttackStrategy.ROT13, "Rot13", "csharp");
 
-@@alternateType(
-  DayOfWeek,
+@@alternateType(DayOfWeek,
   {
     identity: "System.DayOfWeek",
   },
@@ -140,8 +136,7 @@ namespace Azure.AI.Projects;
 @@access(OpenAI.DetailEnum, Access.internal);
 @@clientName(OpenAI.DetailEnum, "InternalImageDetailLevel");
 @@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
-@@clientName(
-  OpenAI.InputImageContentParamAutoParam,
+@@clientName(OpenAI.InputImageContentParamAutoParam,
   "InternalInputImageContentParamAutoParam"
 );
 // --------------------------------------------------------------------------------
@@ -167,13 +162,11 @@ namespace Azure.AI.Projects;
 
 @@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
 
-@@clientName(
-  MemoryStoreDefaultOptions.chat_summary_enabled,
+@@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
   "IsChatSummaryEnabled",
   "csharp"
 );
-@@clientName(
-  MemoryStoreDefaultOptions.user_profile_enabled,
+@@clientName(MemoryStoreDefaultOptions.user_profile_enabled,
   "IsUserProfileEnabled",
   "csharp"
 );

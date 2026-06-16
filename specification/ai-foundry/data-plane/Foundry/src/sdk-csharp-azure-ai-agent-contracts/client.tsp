@@ -1,4 +1,15 @@
-import "./main.tsp";
+import "../sdk-common/error.default.tsp";
+import "../common/servicepatterns.tsp";
+import "../common/models.tsp";
+import "../common/service.tsp";
+import "../agents/routes.tsp";
+import "../agents-containers/routes.tsp";
+import "../agents-invocations_ws/routes.tsp";
+import "../memory-stores/routes.tsp";
+import "../skills/routes.tsp";
+import "../openai-conversations/routes.tsp";
+import "../openai-responses/routes.tsp";
+import "../toolboxes/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -251,6 +262,7 @@ namespace Azure.AI.Projects {
   @@access(UpdateAgentRequest, Access.public);
   @@usage(UpdateAgentRequest, Usage.input);
 
-  @@access(OpenAI.OutputItemCustomToolCallOutput, Access.public);
-  @@usage(OpenAI.OutputItemCustomToolCallOutput, Usage.input | Usage.output);
+  @@access(OpenAI.ItemCustomToolCallOutput, Access.public);
+  @@usage(OpenAI.ItemCustomToolCallOutput, Usage.input | Usage.output);
+  @@clientName(OpenAI.ItemCustomToolCallOutput, "OutputItemCustomToolCallOutput");
 }

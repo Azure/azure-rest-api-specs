@@ -1,5 +1,5 @@
 import "./models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "../common/models.tsp";
 
 using TypeSpec.Http;
