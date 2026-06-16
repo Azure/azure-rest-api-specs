@@ -814,11 +814,12 @@ model MetricSettings {
    */
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
+@@clientName(MetricSettings.enabled, "IsEnabled", "csharp");
 
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "java,python"
+  "csharp,java,python"
 );
 
 /**
@@ -845,11 +846,12 @@ model LogSettings {
    */
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
+@@clientName(LogSettings.enabled, "IsEnabled", "csharp");
 
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   LogSettings,
-  "java,python"
+  "csharp,java,python"
 );
 
 @@clientLocation(
