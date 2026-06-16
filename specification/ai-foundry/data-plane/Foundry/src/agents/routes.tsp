@@ -410,6 +410,39 @@ interface Agents {
     DownloadAgentCodeResponse
   >;
 
+  // ── Agent Enable/Disable Operations ─────────────────────
+
+  /**
+   * Enables the specified agent, allowing it to accept new sessions and process requests.
+   * This operation is idempotent — enabling an already-enabled agent returns success with no side effects.
+   */
+  @summary("Enable an agent")
+  @post
+  @route("/agents/{agent_name}:enable")
+  enableAgent is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent to enable. */
+      @path agent_name: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
+   * Disables the specified agent, preventing it from accepting new sessions or processing requests.
+   * Existing active sessions are allowed to drain gracefully but no new sessions can be created.
+   * This operation is idempotent — disabling an already-disabled agent returns success with no side effects.
+   */
+  @summary("Disable an agent")
+  @post
+  @route("/agents/{agent_name}/disable")
+  disableAgent is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent to disable. */
+      @path agent_name: string;
+    },
+    NoContentResponse
+  >;
+
   // ── Session Lifecycle Operations ────────────────────────
 
   /**
