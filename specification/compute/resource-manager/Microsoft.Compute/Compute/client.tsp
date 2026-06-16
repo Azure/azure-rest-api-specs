@@ -983,14 +983,17 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 
 // Mark non-pageable list operations as pageable for backward compatibility.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   VirtualMachineExtensions.list,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   VirtualMachineScaleSetVMExtensions.list,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   VirtualMachineImagesOperationGroup.listByEdgeZone,
   "csharp"
@@ -1922,6 +1925,7 @@ union PassName {
 // the C# emitter generates the extensible-enum struct used in v1.13.1 baseline.
 // ════════════════════════════════════════════════════════════════════════════
 
+/** The unit for Compute usage values. */
 union ComputeUsageUnit {
   string,
 
@@ -2253,6 +2257,7 @@ union ComputeUsageUnit {
 @@alternateType(ShareInfoElement.vmUri, url, "csharp");
 
 // Mark non-pageable list operations as pageable for backward compatibility.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   DiskAccesses.getPrivateLinkResources,
   "csharp"

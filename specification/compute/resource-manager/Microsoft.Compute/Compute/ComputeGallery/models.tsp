@@ -2741,8 +2741,8 @@ model LatestGalleryImageVersion {
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
  */
-@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to keep parentName out of the payload while preserving C# resource-key shape."
+@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ProxyResourceCommunity<Properties extends {}>
   extends PirCommunityGalleryResource {
@@ -2764,8 +2764,8 @@ model ProxyResourceCommunity<Properties extends {}>
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
  */
-@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to keep parentName out of the payload while preserving C# resource-key shape."
+@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ProxyResourceShared<Properties extends {}>
   extends PirSharedGalleryResource {
