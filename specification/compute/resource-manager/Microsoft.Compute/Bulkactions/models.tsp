@@ -296,11 +296,11 @@ model BulkVMConfiguration {
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
-  baseProfile?: BulkVMConfiguration;
+  baseProfile?: Record<unknown>;
 
   @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
   @identifiers(#[])
-  resourceOverrides?: BulkVMConfiguration[];
+  resourceOverrides?: Record<unknown>[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
