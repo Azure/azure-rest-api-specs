@@ -5,12 +5,13 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using Microsoft.Authorization;
 
 /**
  * To manage and control access to your resources, you can define customized policies and assign them at a scope.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For client"
-namespace Microsoft.Authorization {
+namespace Customization {
   alias PolicyAssignmentIdParameter = {
     /**
      * The ID of the policy assignment to get. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.
@@ -86,6 +87,23 @@ namespace Microsoft.Authorization {
     ...PolicyAssignmentIdParameter,
     ...Azure.Core.Foundations.ApiVersionParameter,
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
+
+  @@clientLocation(getById, Microsoft.Authorization, "java,csharp,go,python");
+  @@clientLocation(
+    createById,
+    Microsoft.Authorization,
+    "java,csharp,go,python"
+  );
+  @@clientLocation(
+    updateById,
+    Microsoft.Authorization,
+    "java,csharp,go,python"
+  );
+  @@clientLocation(
+    deleteById,
+    Microsoft.Authorization,
+    "java,csharp,go,python"
+  );
 }
 @@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
 
