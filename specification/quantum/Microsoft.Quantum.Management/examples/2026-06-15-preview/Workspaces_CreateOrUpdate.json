@@ -5,7 +5,7 @@
     "workspaceName": "quantumworkspace1",
     "resourceGroupName": "quantumResourcegroup",
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
-    "api-version": "2025-12-15-preview",
+    "api-version": "2026-06-15-preview",
     "resource": {
       "location": "West US",
       "properties": {
@@ -28,7 +28,14 @@
             "quotas": {
               "standardMinutesLifetime": 500,
               "highMinutesLifetime": 50
-            }
+            },
+            "targetQuotas": [
+              {
+                "targetId": "suiteProvider.target1",
+                "standardMinutesLifetime": 300,
+                "highMinutesLifetime": 30
+              }
+            ]
           }
         ],
         "storageAccount": "/subscriptions/1C4B2828-7D49-494F-933D-061373BE28C2/resourceGroups/quantumResourcegroup/providers/Microsoft.Storage/storageAccounts/testStorageAccount"
@@ -77,7 +84,14 @@
               "quotas": {
                 "standardMinutesLifetime": 500,
                 "highMinutesLifetime": 50
-              }
+              },
+              "targetQuotas": [
+                {
+                  "targetId": "suiteProvider.target1",
+                  "standardMinutesLifetime": 300,
+                  "highMinutesLifetime": 30
+                }
+              ]
             }
           ],
           "provisioningState": "Succeeded",
@@ -139,7 +153,14 @@
               "quotas": {
                 "standardMinutesLifetime": 500,
                 "highMinutesLifetime": 50
-              }
+              },
+              "targetQuotas": [
+                {
+                  "targetId": "suiteProvider.target1",
+                  "standardMinutesLifetime": 300,
+                  "highMinutesLifetime": 30
+                }
+              ]
             }
           ],
           "provisioningState": "ProviderLaunching",
