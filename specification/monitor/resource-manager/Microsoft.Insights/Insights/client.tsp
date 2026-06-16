@@ -198,7 +198,7 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(
   ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettingsResource,
-  "DiagnosticSetting",
+  "ServiceDiagnosticSetting",
   "csharp"
 );
 @@alternateType(
