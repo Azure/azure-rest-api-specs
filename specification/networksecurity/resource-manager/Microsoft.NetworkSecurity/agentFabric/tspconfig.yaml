@@ -9,12 +9,9 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{emitter-output-dir}/{version-status}/{version}/agentFabric.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.NetworkSecurity"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.NetworkSecurity"
-    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-networksecurity"
     namespace: "azure.mgmt.networksecurity"
