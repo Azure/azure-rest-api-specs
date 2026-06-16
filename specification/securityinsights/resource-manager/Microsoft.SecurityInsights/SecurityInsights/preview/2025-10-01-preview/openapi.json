@@ -14119,24 +14119,19 @@
     },
     "AutomationRulesList": {
       "type": "object",
-      "description": "Paged collection of AutomationRule items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AutomationRule items on this page",
+          "description": "List of automation rules.",
           "items": {
             "$ref": "#/definitions/AutomationRule"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Availability": {
       "type": "object",
@@ -16249,20 +16244,16 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataConnectorDefinition items on this page",
+          "description": "List of data connector definitions.",
           "items": {
             "$ref": "#/definitions/DataConnectorDefinition"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DataConnectorDefinitionKind": {
       "type": "string",
@@ -21042,20 +21033,16 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The IncidentTask items on this page",
+          "description": "List of incident tasks.",
           "items": {
             "$ref": "#/definitions/IncidentTask"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "IncidentTaskProperties": {
       "type": "object",
@@ -26629,20 +26616,39 @@
             "$ref": "#/definitions/SentinelEntityMapping"
           }
         }
-      },
-      "required": [
-        "query",
-        "queryFrequency",
-        "queryPeriod",
-        "severity",
-        "triggerOperator",
-        "triggerThreshold"
-      ]
+      }
     },
     "ScheduledAlertRuleProperties": {
       "type": "object",
       "description": "Scheduled alert rule base property bag.",
       "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query that creates alerts for this rule."
+        },
+        "queryFrequency": {
+          "type": "string",
+          "format": "duration",
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
+        },
+        "queryPeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "triggerOperator": {
+          "$ref": "#/definitions/TriggerOperator",
+          "description": "The operation against the threshold that triggers alert rule."
+        },
+        "triggerThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold triggers this alert rule."
+        },
         "alertRuleTemplateName": {
           "type": "string",
           "description": "The Name of the alert rule template used to create this rule."
@@ -26705,6 +26711,12 @@
         }
       },
       "required": [
+        "query",
+        "queryFrequency",
+        "queryPeriod",
+        "severity",
+        "triggerOperator",
+        "triggerThreshold",
         "displayName",
         "enabled",
         "suppressionDuration",

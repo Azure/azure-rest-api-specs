@@ -4042,7 +4042,19 @@ model ClientInfo {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AutomationRulesList is Azure.Core.Page<AutomationRule>;
+model AutomationRulesList {
+  /**
+   * List of automation rules.
+   */
+  @pageItems
+  value?: AutomationRule[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes the request body for triggering a playbook on an entity.
@@ -4963,8 +4975,19 @@ model TemplateAdditionalProperties {
 /**
  * Encapsulate the data connector definition object
  */
-model DataConnectorDefinitionArmCollectionWrapper
-  is Azure.Core.Page<DataConnectorDefinition>;
+model DataConnectorDefinitionArmCollectionWrapper {
+  /**
+   * List of data connector definitions.
+   */
+  @pageItems
+  value?: DataConnectorDefinition[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * List all the data connectors.
@@ -6737,7 +6760,19 @@ model IncidentEntitiesResultsMetadata {
 /**
  * List of incident tasks
  */
-model IncidentTaskList is Azure.Core.Page<IncidentTask>;
+model IncidentTaskList {
+  /**
+   * List of incident tasks.
+   */
+  @pageItems
+  value?: IncidentTask[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes the properties of an incident task
@@ -9721,6 +9756,36 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
+   * The query that creates alerts for this rule.
+   */
+  query: string;
+
+  /**
+   * The frequency (in ISO 8601 duration format) for this alert rule to run.
+   */
+  queryFrequency: duration;
+
+  /**
+   * The period (in ISO 8601 duration format) that this alert rule looks at.
+   */
+  queryPeriod: duration;
+
+  /**
+   * The severity for alerts created by this alert rule.
+   */
+  severity: AlertSeverity;
+
+  /**
+   * The operation against the threshold that triggers alert rule.
+   */
+  triggerOperator: TriggerOperator;
+
+  /**
+   * The threshold triggers this alert rule.
+   */
+  triggerThreshold: int32;
+
+  /**
    * The Name of the alert rule template used to create this rule.
    */
   alertRuleTemplateName?: string;
@@ -9846,32 +9911,32 @@ model ScheduledAlertRuleCommonProperties {
   /**
    * The query that creates alerts for this rule.
    */
-  query: string;
+  query?: string;
 
   /**
    * The frequency (in ISO 8601 duration format) for this alert rule to run.
    */
-  queryFrequency: duration;
+  queryFrequency?: duration;
 
   /**
    * The period (in ISO 8601 duration format) that this alert rule looks at.
    */
-  queryPeriod: duration;
+  queryPeriod?: duration;
 
   /**
    * The severity for alerts created by this alert rule.
    */
-  severity: AlertSeverity;
+  severity?: AlertSeverity;
 
   /**
    * The operation against the threshold that triggers alert rule.
    */
-  triggerOperator: TriggerOperator;
+  triggerOperator?: TriggerOperator;
 
   /**
    * The threshold triggers this alert rule.
    */
-  triggerThreshold: int32;
+  triggerThreshold?: int32;
 
   /**
    * The event grouping settings.
