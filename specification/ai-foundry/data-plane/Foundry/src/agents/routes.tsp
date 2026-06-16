@@ -434,7 +434,7 @@ interface Agents {
    */
   @summary("Disable an agent")
   @post
-  @route("/agents/{agent_name}/disable")
+  @route("/agents/{agent_name}:disable")
   disableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to disable. */
