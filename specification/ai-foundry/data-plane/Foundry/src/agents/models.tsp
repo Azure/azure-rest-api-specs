@@ -308,7 +308,7 @@ union AgentEndpointProtocol {
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
 
-  @doc("Realtime, service-terminated WebSocket protocol for prompt voice agents. The live speech-to-speech session is bridged to the managed Voice Live backend; the realtime session/audio/event wire schema is owned by Voice Live and not redefined here.")
+  @doc("Realtime, service-terminated WebSocket protocol for voice-first prompt agents. The live speech-to-speech session is bridged to the managed Voice Live backend; the realtime session/audio/event wire schema is owned by Voice Live and not redefined here.")
   voice: "voice",
 }
 
@@ -400,7 +400,7 @@ model PromptAgentDefinitionTextOptions {
 }
 
 @doc("""
-  The prompt voice agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,
+  The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,
   tools, optional avatar) drives a managed speech-to-speech experience. The live realtime session is bridged to
   the managed Voice Live backend and reached as the `voice` protocol on the agent endpoint
   (`/agents/{agent_name}/endpoint/protocols/voice`); the realtime session/audio/event wire schema is owned by
@@ -434,7 +434,7 @@ model PromptVoiceAgentDefinition extends AgentDefinition {
   avatar?: VoiceAvatarConfig;
 
   @doc("""
-    The tools the agent may use. A prompt voice agent supports exactly four tool kinds (see `VoiceAgentTool`):
+    The tools the agent may use. A voice-first prompt agent supports exactly four tool kinds (see `VoiceAgentTool`):
     native `function` (executed by the client), `mcp`, `system` (Voice Live built-in control, e.g. end-call),
     and `toolbox`. Unlike prompt/hosted agents, server-side tools (e.g. `web_search`, `azure_ai_search`,
     `openapi`) are not declared directly on a voice agent; they are packaged in a toolbox and executed by Voice
@@ -447,7 +447,7 @@ model PromptVoiceAgentDefinition extends AgentDefinition {
 }
 
 @doc("""
-  A tool usable by a prompt voice agent. Exactly four kinds are supported: native `function` (executed by the
+  A tool usable by a voice-first prompt agent. Exactly four kinds are supported: native `function` (executed by the
   client) and `mcp` reuse the OpenAI Realtime tool shapes; `system` and `toolbox` are Foundry voice extensions.
   The generic agent tool set (server-side tools such as `web_search` or `azure_ai_search`) is intentionally not
   allowed here — package those in a toolbox instead.
@@ -491,7 +491,7 @@ model VoiceToolboxTool {
 }
 
 @doc("""
-  The audio stack configuration for a prompt voice agent, following the OpenAI Realtime session schema (which
+  The audio stack configuration for a voice-first prompt agent, following the OpenAI Realtime session schema (which
   Voice Live implements and extends). Authored as control-plane defaults; overridable per session at connect time.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
@@ -503,7 +503,7 @@ model VoiceAudioConfig {
   output?: VoiceAudioOutputConfig;
 }
 
-@doc("Input (microphone) audio configuration for a prompt voice agent.")
+@doc("Input (microphone) audio configuration for a voice-first prompt agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAudioInputConfig {
   @doc("The input audio format.")
@@ -519,7 +519,7 @@ model VoiceAudioInputConfig {
   transcription?: VoiceInputTranscription;
 }
 
-@doc("Output (agent speech) audio configuration for a prompt voice agent.")
+@doc("Output (agent speech) audio configuration for a voice-first prompt agent.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAudioOutputConfig {
   @doc("The output audio format.")
@@ -683,7 +683,7 @@ union AzureVoiceType {
 }
 
 @doc("""
-  Avatar configuration for a prompt voice agent. A Voice Live extension (not part of the OpenAI Realtime schema).
+  Avatar configuration for a voice-first prompt agent. A Voice Live extension (not part of the OpenAI Realtime schema).
   Authored as a control-plane default; overridable per session.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)

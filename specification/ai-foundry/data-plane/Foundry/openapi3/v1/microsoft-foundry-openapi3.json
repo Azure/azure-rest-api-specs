@@ -52398,7 +52398,7 @@
             "items": {
               "$ref": "#/components/schemas/VoiceAgentTool"
             },
-            "description": "The tools the agent may use. A prompt voice agent supports exactly four tool kinds (see `VoiceAgentTool`):\nnative `function` (executed by the client), `mcp`, `system` (Voice Live built-in control, e.g. end-call),\nand `toolbox`. Unlike prompt/hosted agents, server-side tools (e.g. `web_search`, `azure_ai_search`,\n`openapi`) are not declared directly on a voice agent; they are packaged in a toolbox and executed by Voice\nLive via the toolbox MCP endpoint."
+            "description": "The tools the agent may use. A voice-first prompt agent supports exactly four tool kinds (see `VoiceAgentTool`):\nnative `function` (executed by the client), `mcp`, `system` (Voice Live built-in control, e.g. end-call),\nand `toolbox`. Unlike prompt/hosted agents, server-side tools (e.g. `web_search`, `azure_ai_search`,\n`openapi`) are not declared directly on a voice agent; they are packaged in a toolbox and executed by Voice\nLive via the toolbox MCP endpoint."
           },
           "structured_inputs": {
             "type": "object",
@@ -52413,7 +52413,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The prompt voice agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,\ntools, optional avatar) drives a managed speech-to-speech experience. The live realtime session is bridged to\nthe managed Voice Live backend and reached as the `voice` protocol on the agent endpoint\n(`/agents/{agent_name}/endpoint/protocols/voice`); the realtime session/audio/event wire schema is owned by\nVoice Live and is not redefined in this spec. Like prompt agents, every create/update produces a new\nimmutable version.",
+        "description": "The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,\ntools, optional avatar) drives a managed speech-to-speech experience. The live realtime session is bridged to\nthe managed Voice Live backend and reached as the `voice` protocol on the agent endpoint\n(`/agents/{agent_name}/endpoint/protocols/voice`); the realtime session/audio/event wire schema is owned by\nVoice Live and is not redefined in this spec. Like prompt agents, every create/update produces a new\nimmutable version.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
@@ -55807,7 +55807,7 @@
             "$ref": "#/components/schemas/VoiceToolboxTool"
           }
         ],
-        "description": "A tool usable by a prompt voice agent. Exactly four kinds are supported: native `function` (executed by the\nclient) and `mcp` reuse the OpenAI Realtime tool shapes; `system` and `toolbox` are Foundry voice extensions.\nThe generic agent tool set (server-side tools such as `web_search` or `azure_ai_search`) is intentionally not\nallowed here — package those in a toolbox instead.",
+        "description": "A tool usable by a voice-first prompt agent. Exactly four kinds are supported: native `function` (executed by the\nclient) and `mcp` reuse the OpenAI Realtime tool shapes; `system` and `toolbox` are Foundry voice extensions.\nThe generic agent tool set (server-side tools such as `web_search` or `azure_ai_search`) is intentionally not\nallowed here — package those in a toolbox instead.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
@@ -55834,7 +55834,7 @@
             "description": "Output (agent speech) audio configuration."
           }
         },
-        "description": "The audio stack configuration for a prompt voice agent, following the OpenAI Realtime session schema (which\nVoice Live implements and extends). Authored as control-plane defaults; overridable per session at connect time.",
+        "description": "The audio stack configuration for a voice-first prompt agent, following the OpenAI Realtime session schema (which\nVoice Live implements and extends). Authored as control-plane defaults; overridable per session at connect time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
@@ -55931,7 +55931,7 @@
             "description": "Optional asynchronous input-audio transcription configuration."
           }
         },
-        "description": "Input (microphone) audio configuration for a prompt voice agent.",
+        "description": "Input (microphone) audio configuration for a voice-first prompt agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
@@ -55969,7 +55969,7 @@
             "default": 1
           }
         },
-        "description": "Output (agent speech) audio configuration for a prompt voice agent.",
+        "description": "Output (agent speech) audio configuration for a voice-first prompt agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
@@ -56013,7 +56013,7 @@
             "description": "The transport used to deliver the avatar video stream."
           }
         },
-        "description": "Avatar configuration for a prompt voice agent. A Voice Live extension (not part of the OpenAI Realtime schema).\nAuthored as a control-plane default; overridable per session.",
+        "description": "Avatar configuration for a voice-first prompt agent. A Voice Live extension (not part of the OpenAI Realtime schema).\nAuthored as a control-plane default; overridable per session.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
