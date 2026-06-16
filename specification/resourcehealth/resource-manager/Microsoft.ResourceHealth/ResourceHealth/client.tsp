@@ -168,7 +168,7 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(
   ChildResourcesOperationGroup.list,
-  "GetAvailabilityStatusOfChildResources",
+  "GetAvailabilityStatusOfChildResourceData",
   "csharp"
 );
 @@clientName(
@@ -196,19 +196,19 @@ using Microsoft.ResourceHealth;
   "GetAvailabilityStatusesBySubscription",
   "csharp"
 );
- @@clientName(
-   TenantEventOperationGroup.listByTenantIdAndEventId,
-   "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
-   "csharp"
- );
- @@clientName(
+@@clientName(
+  TenantEventOperationGroup.listByTenantIdAndEventId,
+  "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
+  "csharp"
+);
+@@clientName(
   RecommendedAction.actionUrlText,
-  "ActionUriComment",
+  "ActionUriText",
   "csharp"
 );
 
- @@clientName(
+@@clientName(
   RecommendedAction.`_ActionUrl.Comment`,
-  "ActionUriText",
+  "ActionUriComment",
   "csharp"
 );
