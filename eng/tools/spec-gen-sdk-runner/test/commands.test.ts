@@ -335,7 +335,7 @@ describe("generateSdkForSpecPr", () => {
     });
     const pypiValidationSpy = vi
       .spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI")
-      .mockResolvedValue(true);
+      .mockResolvedValue({ succeeded: true, errors: [] });
     vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -396,7 +396,15 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
-    vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI").mockResolvedValue(false);
+    const appendErrorsToVsoLogSpy = vi
+      .spyOn(commandHelpers, "appendErrorsToVsoLog")
+      .mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+    vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI").mockResolvedValue({
+      succeeded: false,
+      errors: ["Python package validation failed"],
+    });
     vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -405,6 +413,11 @@ describe("generateSdkForSpecPr", () => {
 
     expect(statusCode).toBe(1);
     expect(executionResult).toBe("failed");
+    expect(appendErrorsToVsoLogSpy).toHaveBeenCalledWith(
+      "path/to/log",
+      "Python package namespace validation",
+      ["Python package validation failed"],
+    );
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "failed",

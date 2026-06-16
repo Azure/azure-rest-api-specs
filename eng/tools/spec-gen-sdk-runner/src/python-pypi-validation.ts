@@ -1,3 +1,4 @@
+import { inspect } from "node:util";
 import { LogLevel, logMessage } from "./log.ts";
 import { type ExecutionReportPackage } from "./types.ts";
 
@@ -8,6 +9,11 @@ export interface PyPIPackageValidationResult {
   packageName: string;
   packageUrl: string;
   reason?: string;
+}
+
+export interface PythonPackagesPyPIValidationResult {
+  succeeded: boolean;
+  errors: string[];
 }
 
 type Fetch = typeof fetch;
@@ -44,19 +50,20 @@ export async function checkPackageOnPyPI(
       status: "checkFailed",
       packageName,
       packageUrl,
-      reason: error instanceof Error ? error.message : String(error),
+      reason: inspect(error),
     };
   }
 }
 
 export async function validatePythonPackagesOnPyPI(
   packages: ExecutionReportPackage[],
-): Promise<boolean> {
+): Promise<PythonPackagesPyPIValidationResult> {
+  const errors: string[] = [];
+
   if (packages.length === 0) {
-    return true;
+    return { succeeded: true, errors };
   }
 
-  let allPackagesRegistered = true;
   for (const pkg of packages) {
     if (!pkg.packageName) {
       continue;
@@ -76,19 +83,16 @@ export async function validatePythonPackagesOnPyPI(
       continue;
     }
 
-    allPackagesRegistered = false;
     if (result.status === "notRegistered") {
-      logMessage(
+      errors.push(
         `Python package '${pkg.packageName}' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.`,
-        LogLevel.Error,
       );
     } else {
-      logMessage(
+      errors.push(
         `Unable to verify whether Python package '${pkg.packageName}' is registered on PyPI.org. Treating this as a validation failure. Details: ${result.reason ?? "Unknown error"}`,
-        LogLevel.Error,
       );
     }
   }
 
-  return allPackagesRegistered;
+  return { succeeded: errors.length === 0, errors };
 }
