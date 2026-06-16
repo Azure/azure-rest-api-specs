@@ -1415,3 +1415,242 @@ union SqlNameAvailabilityResourceType {
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+
+// --- Property type alternates (string -> ResourceIdentifier / AzureLocation) ---
+@@alternateType(
+  DatabaseProperties.failoverGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseProperties.maintenanceConfigurationId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseProperties.defaultSecondaryLocation,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DatabaseUpdateProperties.failoverGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseUpdateProperties.maintenanceConfigurationId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseUpdateProperties.defaultSecondaryLocation,
+  azureLocation,
+  "csharp"
+);
+
+// --- Enum value renames to match v1.4.0 contract ---
+@@clientName(CatalogCollationType.DATABASE_DEFAULT, "DatabaseDefault", "csharp");
+@@clientName(
+  CatalogCollationType.SQL_Latin1_General_CP1_CI_AS,
+  "SqlLatin1GeneralCp1CiAs",
+  "csharp"
+);
+
+@@clientName(DiffBackupIntervalInHours.`12`, "Twelve", "csharp");
+@@clientName(DiffBackupIntervalInHours.`24`, "TwentyFour", "csharp");
+
+// =====================================================================
+// Restore parameterless ctor + setters for output-only models
+// (v1.4.0 ApiCompat mitigations)
+//
+// Marking these models as `Usage.input` makes the C# generator emit them
+// as roundtrippable (Input | Output), which restores the public
+// parameterless constructor and writable property setters that the
+// v1.4.0 contract exposed.
+// =====================================================================
+@@usage(DatabaseOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(DatabaseUsage, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  DatabaseVulnerabilityAssessmentScansExport,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(ElasticPoolOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  ImportExportExtensionsOperationResult,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  ImportExportOperationResult,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  LongTermRetentionBackupOperationResult,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  UpdateVirtualClusterDnsServersOperation,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  RefreshExternalGovernanceStatusOperationResult,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(SecurityEvent, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ServerOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(InstancePoolOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  RefreshExternalGovernanceStatusOperationResultMI,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(NSPConfigAccessRule, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  NSPConfigAccessRuleProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(NSPConfigAssociation, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(NSPConfigPerimeter, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(NSPConfigProfile, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  NSPConfigNetworkSecurityPerimeterRule,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  NetworkSecurityPerimeterConfiguration,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(NSPProvisioningIssue, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  NSPProvisioningIssueProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(PrivateLinkResource, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(RestorePoint, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ServerDnsAlias, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(JobExecution, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(JobVersion, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ServerUsage, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(SynapseLinkWorkspace, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  SynapseLinkWorkspaceInfoProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(TimeZone, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  DatabaseSqlVulnerabilityAssessmentBaselineSet,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  DatabaseSqlVulnerabilityAssessmentRuleBaseline,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlVulnerabilityAssessmentScanRecord,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SqlVulnerabilityAssessmentScanResults,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(SubscriptionUsage, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(SyncAgentLinkedDatabase, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  VulnerabilityAssessmentScanRecord,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+
+// Standalone setter regressions: input models / input contents whose
+// containing model already has a ctor in v1.4.0 but lost individual
+// setters because codegen no longer sees them as inputs.
+@@usage(DatabaseExtensions, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(TdeCertificate, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselineInput,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+
+@@clientName(AvailabilityZoneType.`1`, "One", "csharp");
+@@clientName(AvailabilityZoneType.`2`, "Two", "csharp");
+@@clientName(AvailabilityZoneType.`3`, "Three", "csharp");
+
+@@clientName(ManagedDatabaseStatus.DbCopying, "DBCopying", "csharp");
+@@clientName(ManagedDatabaseStatus.DbMoving, "DBMoving", "csharp");
+
+@@clientName(
+  ManagedInstanceDatabaseFormat.SQLServer2022,
+  "SqlServer2022",
+  "csharp"
+);
+@@clientName(
+  ManagedInstanceDatabaseFormat.SQLServer2025,
+  "SqlServer2025",
+  "csharp"
+);
+
+@@clientName(PerformanceLevelUnit.DTU, "Dtu", "csharp");
+
+@@clientName(ReplicationState.PENDING, "Pending", "csharp");
+@@clientName(ReplicationState.SEEDING, "Seeding", "csharp");
+@@clientName(ReplicationState.CATCH_UP, "CatchUp", "csharp");
+@@clientName(ReplicationState.SUSPENDED, "Suspended", "csharp");
+
+@@clientName(ReplicationLinkType.GEO, "Geo", "csharp");
+@@clientName(ReplicationLinkType.NAMED, "Named", "csharp");
+@@clientName(ReplicationLinkType.STANDBY, "Standby", "csharp");
+
+@@clientName(ColumnDataType.hierarchyid, "HierarchyId", "csharp");
+
+@@clientName(ReplicaConnectedState.CONNECTED, "Connected", "csharp");
+@@clientName(ReplicaConnectedState.DISCONNECTED, "Disconnected", "csharp");
+
+@@clientName(ReplicaSynchronizationHealth.HEALTHY, "Healthy", "csharp");
+@@clientName(
+  ReplicaSynchronizationHealth.PARTIALLY_HEALTHY,
+  "PartiallyHealthy",
+  "csharp"
+);
+
+@@clientName(StorageCapabilityStorageAccountType.GRS, "Grs", "csharp");
+@@clientName(StorageCapabilityStorageAccountType.LRS, "Lrs", "csharp");
+@@clientName(StorageCapabilityStorageAccountType.ZRS, "Zrs", "csharp");
+@@clientName(StorageCapabilityStorageAccountType.GZRS, "Gzrs", "csharp");
+
+// --- Property casing fixes (IP/IPv6 capitalization, etc.) ---
+@@clientName(
+  ServerFirewallRuleProperties.startIpAddress,
+  "StartIPAddress",
+  "csharp"
+);
+@@clientName(
+  ServerFirewallRuleProperties.endIpAddress,
+  "EndIPAddress",
+  "csharp"
+);
+@@clientName(SecurityEventProperties.clientIp, "ClientIP", "csharp");
+@@clientName(
+  ManagedInstanceDtcSecuritySettings.snaLu6point2TransactionsEnabled,
+  "SnaLu6Point2TransactionsEnabled",
+  "csharp"
+);
